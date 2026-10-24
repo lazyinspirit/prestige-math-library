@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-hh-rank-one-cyclotomic-quotient-monic-basis.md

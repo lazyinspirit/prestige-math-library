@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-five-term-exact-sequence-of-a-first-quadrant-cohomological-spectral-sequence.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-overlapping-proper-modules-of-a-connected-anticonnected-graph.md

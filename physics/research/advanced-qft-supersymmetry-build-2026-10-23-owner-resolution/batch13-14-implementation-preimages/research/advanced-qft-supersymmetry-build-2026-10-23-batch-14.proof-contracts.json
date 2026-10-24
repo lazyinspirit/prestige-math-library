@@ -1,0 +1,614 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "14",
+  "level": 1,
+  "scope": [
+    "def-aqft-background-gauging-data",
+    "thm-aqft-finite-group-gauging",
+    "ex-aqft-finite-groupoid-point-normalization",
+    "ex-aqft-finite-z2-cocycle-circle",
+    "ex-aqft-finite-c2-gluing-identity"
+  ],
+  "contracts": {
+    "def-aqft-background-gauging-data": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-two-group-background",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite group with identity $e$, let $A$ be a finite abelian group written additively, and let $\\rho:G\\to\\operatorname{Aut}(A)$ be a left action, so $\\rho_{gh}=\\rho_g\\rho_h$ and $\\rho_e=\\operatorname{id}_A$. A group $2$-cochain is a function $c:G^2\\to A$; it is normalized when it vanishes if either input is $e$. Its coboundary is\n\n$$\n(\\delta_\\rho c)(g,h,k)=\\rho_g c(h,k)-c(gh,k)+c(g,hk)-c(g,h).\n$$\n\nA normalized group $3$-cocycle is a function $\\beta:G^3\\to A$ that vanishes whenever any argument is $e$ and satisfies\n\n$$\n\\rho_g\\beta(h,k,l)-\\beta(gh,k,l)+\\beta(g,hk,l)-\\beta(g,h,kl)+\\beta(g,h,k)=0\n$$\n\nfor all $g,h,k,l\\in G$. Two normalized $3$-cocycles represent the same class when their difference is $\\delta_\\rho c$ for a normalized $2$-cochain $c$; this is an equivalence relation by additivity of $\\delta_\\rho$. The class $[\\beta]$ is the Postnikov class in this skeletal model.\n\nThe corresponding skeletal categorical $2$-group has objects $g\\in G$ and, for each $g$, one automorphism labelled by each $u\\in A$; there are no morphisms between distinct objects. Composition of automorphisms adds their labels, tensor product is\n\n$$\n(g,u)\\otimes(h,v)=(gh,u+\\rho_gv),\n$$\n\nand the associator from $(gh)k$ to $g(hk)$ has label $\\beta(g,h,k)$. The two pentagon path labels are $\\beta(gh,k,l)+\\beta(g,h,kl)$ and $\\rho_g\\beta(h,k,l)+\\beta(g,hk,l)+\\beta(g,h,k)$; equality of these labels is exactly the displayed $3$-cocycle equation.\n\nA finite ordered simplicial complex $K$ is a finite vertex set with a total order and a collection of nonempty finite vertex subsets, called simplices, closed under taking nonempty subsets. Write each simplex in increasing order. A $q$-cochain with values in a local coefficient system assigns an element to each ordered $q$-simplex at its first vertex. A flat $G$-valued edge cochain is a family $a_{ij}\\in G$ for each edge $i<j$ such that $a_{ij}a_{jk}=a_{ik}$ on every triangle. It defines the local coefficient system with fiber $A$ at each vertex and transport $\\rho_{a_{ij}}$ from vertex $j$ to vertex $i$.\n\nFor each integer $q\\geq0$ and local-coefficient $q$-cochain $c$, define the twisted coboundary on each ordered $(q+1)$-simplex by\n\n$$\n(\\delta_a c)_{i_0\\ldots i_{q+1}}=\\rho_{a_{i_0i_1}}c_{i_1\\ldots i_{q+1}}+\\sum_{r=1}^{q+1}(-1)^r c_{i_0\\ldots\\widehat{i_r}\\ldots i_{q+1}}.\n$$\n\nIn particular, for an $A$-valued $2$-cochain $B$,\n\n$$\n(\\delta_aB)_{ijkl}=\\rho_{a_{ij}}B_{jkl}-B_{ikl}+B_{ijl}-B_{ijk},\\qquad (a^*\\beta)_{ijkl}=\\beta(a_{ij},a_{jk},a_{kl}).\n$$\n\nA finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.\n\nA $1$-gauge transformation consists of vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$ at vertex $i$. Define\n\n$$\na^g_{ij}=g_i a_{ij}g_j^{-1},\n$$\n\n$$\n\\zeta^g_{ijk}=-\\beta(g_i,a_{ij},a_{jk})+\\beta(a^g_{ij},g_j,a_{jk})-\\beta(a^g_{ij},a^g_{jk},g_k),\n$$\n\n$$\nB^{g,\\lambda}_{ijk}=\\rho_{g_i}B_{ijk}+\\zeta^g_{ijk}+(\\delta_{a^g}\\lambda)_{ijk},\\qquad (\\delta_{a^g}\\lambda)_{ijk}=\\rho_{a^g_{ij}}\\lambda_{jk}-\\lambda_{ik}+\\lambda_{ij}.\n$$\n\nChanging the chosen representative to $\\beta'=\\beta+\\delta_\\rho c$ for a normalized $2$-cochain $c$ and simultaneously replacing $B$ by $B+a^*c$ changes the cochain presentation but preserves the background equation: on every tetrahedron, flatness gives\n\n$$\n(\\delta_a(a^*c))_{ijkl}=\\rho_{a_{ij}}c(a_{jk},a_{kl})-c(a_{ik},a_{kl})+c(a_{ij},a_{jl})-c(a_{ij},a_{jk})=(\\delta_\\rho c)(a_{ij},a_{jk},a_{kl}).\n$$\n\nThis finite mathematical model makes no assertion that a physical theory realizes the symmetry or has an anomaly.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-aqft-two-group-background-consistency",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a finite ordered simplicial complex; let $G$ be a finite group, $A$ a finite abelian group written additively, $\\rho:G\\to\\operatorname{Aut}(A)$ a left action, and $\\beta:G^3\\to A$ a normalized group $3$-cocycle with the convention that its associator is directed from $(gh)k$ to $g(hk)$. Let $a_{ij}\\in G$ be flat on every ordered triangle, let $B_{ijk}\\in A$ be an $A$-valued $2$-cochain at the first vertex, and assume on every ordered tetrahedron that\n\n$$\n\\rho_{a_{ij}}B_{jkl}-B_{ikl}+B_{ijl}-B_{ijk}=\\beta(a_{ij},a_{jk},a_{kl}).\n$$\n\nFor arbitrary vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$, put $a'_{ij}=g_i a_{ij}g_j^{-1}$ and\n\n$$\n\\zeta_{ijk}=-\\beta(g_i,a_{ij},a_{jk})+\\beta(a'_{ij},g_j,a_{jk})-\\beta(a'_{ij},a'_{jk},g_k).\n$$\n\n$$\nB'_{ijk}=\\rho_{g_i}B_{ijk}+\\zeta_{ijk}+\\rho_{a'_{ij}}\\lambda_{jk}-\\lambda_{ik}+\\lambda_{ij}.\n$$\n\nThen $a'$ is flat and $(a',B')$ satisfies the same twisted tetrahedron equation. If $(g,\\lambda)$ is followed by $(h,\\mu)$, with $a''_{ij}=h_i a'_{ij}h_j^{-1}$, their composite is $(hg,\\nu)$ where\n\n$$\n\\nu_{ij}=\\beta(h_i,g_i,a_{ij})+\\rho_{h_i}\\lambda_{ij}-\\beta(h_i,a'_{ij},g_j)+\\mu_{ij}+\\beta(a''_{ij},h_j,g_j).\n$$\n\nEach transformation is invertible: for a fixed source background, put $h_i=g_i^{-1}$ and\n\n$$\n\\mu_{ij}=-\\beta(h_i,g_i,a_{ij})-\\rho_{h_i}\\lambda_{ij}+\\beta(h_i,a'_{ij},g_j)-\\beta(a_{ij},h_j,g_j);\n$$\n\nthen its composite has $\\nu_{ij}=0$. Treating a gauge arrow as its induced map on background cochains, sequential maps compose associatively, and the displayed formula gives a representative for each composite. This is a mathematical consistency result and does not assert a physical anomaly theorem.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-finite-groupoid-integration",
+          "source_section": "Definition",
+          "quote": "A **finite groupoid** is a small category in which every morphism is invertible, with finitely many isomorphism classes and a finite automorphism group at every object. Write $\\pi_0(\\mathcal C)$ for its set of isomorphism classes. Its **groupoid cardinality** is\n\n$$|\\mathcal C|:=\\sum_{[c]\\in\\pi_0(\\mathcal C)}\\frac{1}{|\\operatorname{Aut}_{\\mathcal C}(c)|}.$$\n\nFor an isomorphism-invariant function $f:\\pi_0(\\mathcal C)\\to\\mathbb C$, define\n\n$$\\int_{c\\in\\mathcal C} f(c):=\\sum_{[c]\\in\\pi_0(\\mathcal C)}\\frac{f(c)}{|\\operatorname{Aut}_{\\mathcal C}(c)|}.$$\n\nFor finite groupoids $\\mathcal C,\\mathcal D$, a functor $p:\\mathcal C\\to\\mathcal D$, and an object $d$ of $\\mathcal D$, its **homotopy fiber** $\\mathcal C_d$ has objects $(c,\\alpha)$ with $\\alpha:p(c)\\overset{\\cong}{\\longrightarrow}d$ and morphisms $u:(c,\\alpha)\\to(c',\\alpha')$ satisfying $\\alpha'\\circ p(u)=\\alpha$. Define pullback and pushforward of invariant functions by\n\n$$(p^*g)([c])=g([p(c)]),\\qquad (p_!f)([d])=\\int_{(c,\\alpha)\\in\\mathcal C_d} f([c]).$$\n\nA span $\\mathcal X\\xleftarrow{a}\\mathcal E\\xrightarrow{b}\\mathcal Y$ of finite groupoids therefore induces the linear map $b_!a^*$ on invariant functions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "conditional-two-groupoid-closure",
+          "step": "1.1",
+          "claim": "Under the explicitly conditional page-13 consistency assertion, candidate gauge maps preserve backgrounds and their induced maps have identities, inverses, and associative composition.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "finite-candidate-object-and-arrow-sets",
+          "step": "1.2",
+          "claim": "Finite cochain assignments and finite gauge labels give finite candidate object and morphism sets and therefore finite automorphism groups.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weight-descends-to-classes",
+          "step": "1.3",
+          "claim": "The degree-zero cocycle condition makes the phase constant on isomorphism classes.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "normalized-sum-is-finite",
+          "step": "2.1",
+          "claim": "The finite groupoid integral gives the normalized automorphism-weighted sum independently of representative.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: For the empty field complex with terminal groupoid and unit weight, the unique class contributes 1 and there are no cochains."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For constant unit phase W=1, the Definition reduces to ordinary finite groupoid cardinality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For a terminal groupoid with one object and trivial automorphism group, the normalized sum equals the object weight."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nontrivial stabilizers remain in the denominator; the one-object groupoid BG is computed in the point example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite item has no analytic endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Every sum is finite over the given isomorphism-class set; no choice principle is invoked to define the groupoid or weight."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This is a data definition and conditional finite-groupoid construction; its concrete point and C2 cases are checked in the assigned B examples. The two-group specialization remains conditional."
+    },
+    "thm-aqft-finite-group-gauging": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-background-gauging-data",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a finite ordered simplicial complex. A **finite background field groupoid** $\\mathcal F(K)$ is a category whose objects are declared background fields and whose morphisms are the declared gauge equivalences, such that every morphism is invertible, there are finitely many isomorphism classes, and every automorphism group is finite. Distinct automorphisms are retained as distinct morphisms whenever the selected field model declares them distinct; their multiplicities determine the gauge-volume factor. Write $\\pi_0(\\mathcal F(K))$ for the isomorphism classes.\n\nA **cocycle/action weight** on $\\mathcal F(K)$ is a function $W_K:\\operatorname{Ob}(\\mathcal F(K))\\to U(1)$ such that $W_K(y)=W_K(x)$ for every morphism $x\\to y$; this invariance is the degree-zero cocycle condition used here. Its normalized **gauging sum** is\n\n$$ Z_K(W_K):=\\sum_{[x]\\in\\pi_0(\\mathcal F(K))} \\frac{W_K(x)}{|\\operatorname{Aut}_{\\mathcal F(K)}(x)|}. $$\n\nThe quotient notation in this sum means isomorphism classes, not a set quotient with automorphisms discarded. The sum is the integral of $W_K$ against finite groupoid cardinality.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-finite-groupoid-integration",
+          "source_section": "Definition",
+          "quote": "A **finite groupoid** is a small category in which every morphism is invertible, with finitely many isomorphism classes and a finite automorphism group at every object. Write $\\pi_0(\\mathcal C)$ for its set of isomorphism classes. Its **groupoid cardinality** is\n\n$$|\\mathcal C|:=\\sum_{[c]\\in\\pi_0(\\mathcal C)}\\frac{1}{|\\operatorname{Aut}_{\\mathcal C}(c)|}.$$\n\nFor an isomorphism-invariant function $f:\\pi_0(\\mathcal C)\\to\\mathbb C$, define\n\n$$\\int_{c\\in\\mathcal C} f(c):=\\sum_{[c]\\in\\pi_0(\\mathcal C)}\\frac{f(c)}{|\\operatorname{Aut}_{\\mathcal C}(c)|}.$$\n\nFor finite groupoids $\\mathcal C,\\mathcal D$, a functor $p:\\mathcal C\\to\\mathcal D$, and an object $d$ of $\\mathcal D$, its **homotopy fiber** $\\mathcal C_d$ has objects $(c,\\alpha)$ with $\\alpha:p(c)\\overset{\\cong}{\\longrightarrow}d$ and morphisms $u:(c,\\alpha)\\to(c',\\alpha')$ satisfying $\\alpha'\\circ p(u)=\\alpha$. Define pullback and pushforward of invariant functions by\n\n$$(p^*g)([c])=g([p(c)]),\\qquad (p_!f)([d])=\\int_{(c,\\alpha)\\in\\mathcal C_d} f([c]).$$\n\nA span $\\mathcal X\\xleftarrow{a}\\mathcal E\\xrightarrow{b}\\mathcal Y$ of finite groupoids therefore induces the linear map $b_!a^*$ on invariant functions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-finite-homotopy-pullback",
+          "source_section": "Definition",
+          "quote": "Let $p:\\mathcal C\\to\\mathcal D$ and $q:\\mathcal E\\to\\mathcal D$ be functors of finite groupoids. The **homotopy pullback groupoid** $\\mathcal C\\times^h_{\\mathcal D}\\mathcal E$ has objects $(c,e,\\alpha)$, where $c\\in\\mathcal C$, $e\\in\\mathcal E$, and $\\alpha:p(c)\\overset{\\cong}{\\longrightarrow}q(e)$ is an isomorphism in $\\mathcal D$. A morphism $(u,v):(c,e,\\alpha)\\to(c',e',\\alpha')$ consists of isomorphisms $u:c\\to c'$ and $v:e\\to e'$ satisfying\n\n$$q(v)\\circ\\alpha=\\alpha'\\circ p(u).$$\n\nComposition is componentwise. The projections to $\\mathcal C$ and $\\mathcal E$ send $(c,e,\\alpha)$ to $c$ and $e$, respectively.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gauge-invariance-and-finiteness",
+          "step": "1.1",
+          "claim": "Invariant weights descend to isomorphism classes and finite groupoid sums are finite.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "equivalence-preserves-weighted-sum",
+          "step": "1.2",
+          "claim": "The comparison equivalence preserves isomorphism classes, automorphism groups, and the factorized weight.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "homotopy-pullback-orbits",
+          "step": "1.3",
+          "claim": "The automorphism-product action on boundary isomorphisms has orbits equal to homotopy-pullback isomorphism classes and stabilizers equal to their automorphism groups.",
+          "inputs": [
+            "given",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "homotopy-pullback-cardinality",
+          "step": "2.1",
+          "claim": "Orbit-stabilizer yields the isomorphism-cardinality expression for the weighted sum on the homotopy pullback.",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "homotopy-fiber-integral",
+          "step": "1.4",
+          "claim": "Each homotopy-fiber integral is the source-class sum weighted by boundary isomorphism count divided by source automorphism order.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "boundary-isomorphism-count",
+          "step": "3.1",
+          "claim": "The boundary-class sum divided by boundary automorphism order equals the number of isomorphisms between the two restricted objects.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-gluing-and-gauge-invariance",
+          "step": "4.1",
+          "claim": "The equivalence, pullback cardinality, and boundary identity prove the declared weighted gluing law and gauge invariance.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: For terminal interface groupoid the homotopy pullback is a product and the formula is the finite product-sum identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Unit weights reduce to unweighted homotopy-cardinality gluing; the C2 identity-span check uses unit weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With one boundary isomorphism class, the boundary automorphism denominator remains; the B gluing example computes it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The C2 homotopy-pullback example has nontrivial boundary and pullback automorphism groups of order two."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite item has no analytic endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All indexing and Hom sets are finite. Finite representative choices are used only in finite sums; no arbitrary choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "C2 identity-span gluing",
+          "result": "checked",
+          "evidence": "Enumerating the two boundary isomorphisms and compatible arrow pairs gives one homotopy-pullback class with automorphism order 2. Both identity homotopy fibers have cardinality 1, and both sides equal 1/2."
+        }
+      ],
+      "finite_checks_disposition": "The C2 enumeration checks the automorphism denominator in one finite instance only; the proof establishes the formula for all finite groupoids satisfying the stated hypotheses."
+    },
+    "ex-aqft-finite-groupoid-point-normalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-background-gauging-data",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a finite ordered simplicial complex. A **finite background field groupoid** $\\mathcal F(K)$ is a category whose objects are declared background fields and whose morphisms are the declared gauge equivalences, such that every morphism is invertible, there are finitely many isomorphism classes, and every automorphism group is finite. Distinct automorphisms are retained as distinct morphisms whenever the selected field model declares them distinct; their multiplicities determine the gauge-volume factor. Write $\\pi_0(\\mathcal F(K))$ for the isomorphism classes.\n\nA **cocycle/action weight** on $\\mathcal F(K)$ is a function $W_K:\\operatorname{Ob}(\\mathcal F(K))\\to U(1)$ such that $W_K(y)=W_K(x)$ for every morphism $x\\to y$; this invariance is the degree-zero cocycle condition used here. Its normalized **gauging sum** is\n\n$$ Z_K(W_K):=\\sum_{[x]\\in\\pi_0(\\mathcal F(K))} \\frac{W_K(x)}{|\\operatorname{Aut}_{\\mathcal F(K)}(x)|}. $$\n\nThe quotient notation in this sum means isomorphism classes, not a set quotient with automorphisms discarded. The sum is the integral of $W_K$ against finite groupoid cardinality.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "point-automorphism-group",
+          "step": "1.1",
+          "claim": "The one-object groupoid BG has automorphism group C2 and one isomorphism class.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "point-normalized-sum",
+          "step": "2.1",
+          "claim": "Substitution in the normalized sum gives 1/2.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes the nonempty one-object groupoid BG."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The weight is the unit phase, so the example is unweighted groupoid cardinality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: There is one isomorphism class and its weight is divided by its automorphism order."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The automorphism group has order two, producing the stated normalization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite item has no analytic endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: There is one isomorphism class, so no choice of representatives is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-object C2 groupoid",
+          "result": "checked",
+          "evidence": "The object has two automorphisms and constant weight 1; the exact sum is 1/2."
+        }
+      ],
+      "finite_checks_disposition": "This exact one-object finite groupoid calculation illustrates the automorphism denominator and makes no physical gauge-model claim."
+    },
+    "ex-aqft-finite-z2-cocycle-circle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-background-gauging-data",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a finite ordered simplicial complex. A **finite background field groupoid** $\\mathcal F(K)$ is a category whose objects are declared background fields and whose morphisms are the declared gauge equivalences, such that every morphism is invertible, there are finitely many isomorphism classes, and every automorphism group is finite. Distinct automorphisms are retained as distinct morphisms whenever the selected field model declares them distinct; their multiplicities determine the gauge-volume factor. Write $\\pi_0(\\mathcal F(K))$ for the isomorphism classes.\n\nA **cocycle/action weight** on $\\mathcal F(K)$ is a function $W_K:\\operatorname{Ob}(\\mathcal F(K))\\to U(1)$ such that $W_K(y)=W_K(x)$ for every morphism $x\\to y$; this invariance is the degree-zero cocycle condition used here. Its normalized **gauging sum** is\n\n$$ Z_K(W_K):=\\sum_{[x]\\in\\pi_0(\\mathcal F(K))} \\frac{W_K(x)}{|\\operatorname{Aut}_{\\mathcal F(K)}(x)|}. $$\n\nThe quotient notation in this sum means isomorphism classes, not a set quotient with automorphisms discarded. The sum is the integral of $W_K$ against finite groupoid cardinality.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "conjugation-classes-and-stabilizers",
+          "step": "1.1",
+          "claim": "Conjugation by C2 fixes both objects, leaving two classes with automorphism group C2.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "character-is-invariant-cocycle",
+          "step": "1.2",
+          "claim": "The specified character is a normalized group 1-cocycle and is invariant on each conjugation arrow.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "twisted-circle-sum",
+          "step": "2.1",
+          "claim": "The two automorphism-weighted phase contributions cancel exactly.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes the two-element group and its nonempty conjugation action groupoid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The normalized sum is zero because two nonzero phase contributions cancel."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The groupoid has two objects, so the one-class case is not this example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Each object has automorphism group C2 and both reciprocal factors are retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite item has no analytic endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The two object classes are explicit and the complete finite sum is evaluated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exhaustive C2 character sum",
+          "result": "checked",
+          "evidence": "The two elements have weights 1 and -1 and automorphism order 2, giving 1/2 + (-1)/2 = 0."
+        }
+      ],
+      "finite_checks_disposition": "The exhaustive two-element calculation verifies only this example, not a general theorem about Dijkgraaf-Witten actions."
+    },
+    "ex-aqft-finite-c2-gluing-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-background-gauging-data",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a finite ordered simplicial complex. A **finite background field groupoid** $\\mathcal F(K)$ is a category whose objects are declared background fields and whose morphisms are the declared gauge equivalences, such that every morphism is invertible, there are finitely many isomorphism classes, and every automorphism group is finite. Distinct automorphisms are retained as distinct morphisms whenever the selected field model declares them distinct; their multiplicities determine the gauge-volume factor. Write $\\pi_0(\\mathcal F(K))$ for the isomorphism classes.\n\nA **cocycle/action weight** on $\\mathcal F(K)$ is a function $W_K:\\operatorname{Ob}(\\mathcal F(K))\\to U(1)$ such that $W_K(y)=W_K(x)$ for every morphism $x\\to y$; this invariance is the degree-zero cocycle condition used here. Its normalized **gauging sum** is\n\n$$ Z_K(W_K):=\\sum_{[x]\\in\\pi_0(\\mathcal F(K))} \\frac{W_K(x)}{|\\operatorname{Aut}_{\\mathcal F(K)}(x)|}. $$\n\nThe quotient notation in this sum means isomorphism classes, not a set quotient with automorphisms discarded. The sum is the integral of $W_K$ against finite groupoid cardinality.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-aqft-finite-group-gauging",
+          "source_section": "Statement",
+          "quote": "Let $K=K_1\\cup_\\Sigma K_2$ be a finite ordered simplicial complex written as a union of two finite subcomplexes with common subcomplex $\\Sigma$. Let $\\mathcal F$, $\\mathcal F_1$, $\\mathcal F_2$, and $\\mathcal S$ be finite background field groupoids for $K$, $K_1$, $K_2$, and $\\Sigma$, with restriction functors $r_i:\\mathcal F_i\\to\\mathcal S$. The homotopy pullback $\\mathcal H=\\mathcal F_2\\times^h_{\\mathcal S}\\mathcal F_1$ has objects $(x_2,x_1,\\alpha)$ with $\\alpha:r_2(x_2)\\overset{\\cong}{\\longrightarrow}r_1(x_1)$ and morphisms $(u_2,u_1)$ satisfying $r_1(u_1)\\circ\\alpha=\\alpha'\\circ r_2(u_2)$.\n\nAssume that restriction induces an equivalence $J:\\mathcal F\\to\\mathcal H$. Let $W,W_1,W_2$ be $U(1)$-valued cocycle/action weights on these groupoids, and assume that under $J$ the weight factors as $W(x_2,x_1,\\alpha)=W_2(x_2)W_1(x_1)$. For each object $s$ of $\\mathcal S$, define the homotopy fiber $(\\mathcal F_i)_s$ to have objects $(x_i,\\eta_i:r_i(x_i)\\overset{\\cong}{\\longrightarrow}s)$ and morphisms $u_i$ satisfying $\\eta'_i\\circ r_i(u_i)=\\eta_i$, and put\n\n$$\nZ_i(s):=\\sum_{[(x_i,\\eta_i)]\\in\\pi_0((\\mathcal F_i)_s)}\n\\frac{W_i(x_i)}{|\\operatorname{Aut}_{(\\mathcal F_i)_s}(x_i,\\eta_i)|}.\n$$\n\nThen the normalized gauging sums are finite, are invariant under replacement of a field by a gauge-isomorphic field, and satisfy\n\n$$\nZ_K(W)=\n\\sum_{[s]\\in\\pi_0(\\mathcal S)}\n\\frac{Z_2(s)Z_1(s)}{|\\operatorname{Aut}_{\\mathcal S}(s)|}.\n$$\n\nThis is a finite groupoid theorem. A finite cocycle action is covered only when its evaluated weights obey the stated arrow-invariance and gluing-factorization hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-finite-homotopy-pullback",
+          "source_section": "Definition",
+          "quote": "Let $p:\\mathcal C\\to\\mathcal D$ and $q:\\mathcal E\\to\\mathcal D$ be functors of finite groupoids. The **homotopy pullback groupoid** $\\mathcal C\\times^h_{\\mathcal D}\\mathcal E$ has objects $(c,e,\\alpha)$, where $c\\in\\mathcal C$, $e\\in\\mathcal E$, and $\\alpha:p(c)\\overset{\\cong}{\\longrightarrow}q(e)$ is an isomorphism in $\\mathcal D$. A morphism $(u,v):(c,e,\\alpha)\\to(c',e',\\alpha')$ consists of isomorphisms $u:c\\to c'$ and $v:e\\to e'$ satisfying\n\n$$q(v)\\circ\\alpha=\\alpha'\\circ p(u).$$\n\nComposition is componentwise. The projections to $\\mathcal C$ and $\\mathcal E$ send $(c,e,\\alpha)$ to $c$ and $e$, respectively.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "c2-pullback-homsets",
+          "step": "1.1",
+          "claim": "The homotopy pullback has two objects and exactly two compatible arrows between every ordered pair.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c2-pullback-and-fiber-cardinalities",
+          "step": "2.1",
+          "claim": "The pullback has one class with automorphism order two, while each identity homotopy fiber is contractible.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c2-gluing-formula",
+          "step": "3.1",
+          "claim": "The gluing formula gives (1 times 1)/2, matching the direct pullback cardinality.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example uses the nonempty interface groupoid BC2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: All action weights are the unit phase."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The pullback has one isomorphism class and a nontrivial automorphism denominator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The pullback and boundary automorphism groups have order two."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite item has no analytic endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The pullback has two explicitly enumerated objects and finite arrow sets; no choice principle is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exhaustive C2 homotopy-pullback gluing",
+          "result": "checked",
+          "evidence": "For each of 4 ordered object pairs there are 2 compatible arrows. The pullback is connected with automorphism order 2; both sides equal 1/2."
+        }
+      ],
+      "finite_checks_disposition": "The finite C2 calculation checks this automorphism factor only; the general gluing identity is proved in the theorem."
+    }
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-arcsine-of-sine-is-not-the-identity.md

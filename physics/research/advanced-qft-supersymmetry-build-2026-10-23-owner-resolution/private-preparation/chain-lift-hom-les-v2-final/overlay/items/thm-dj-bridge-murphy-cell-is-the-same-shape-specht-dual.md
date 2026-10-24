@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-dj-bridge-murphy-cell-is-the-same-shape-specht-dual.md

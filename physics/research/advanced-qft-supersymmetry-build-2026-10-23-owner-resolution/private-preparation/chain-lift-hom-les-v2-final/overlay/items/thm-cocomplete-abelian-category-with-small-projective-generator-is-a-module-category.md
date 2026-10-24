@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cocomplete-abelian-category-with-small-projective-generator-is-a-module-category.md

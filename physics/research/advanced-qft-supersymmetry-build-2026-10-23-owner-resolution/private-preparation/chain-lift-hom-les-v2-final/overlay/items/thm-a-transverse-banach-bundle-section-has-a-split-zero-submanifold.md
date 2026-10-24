@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold.md

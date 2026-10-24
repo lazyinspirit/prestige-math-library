@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-trace-of-commutators-of-square-matrices-is-zero.md

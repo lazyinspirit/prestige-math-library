@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-smc-time-bound-fails-with-varying-proposals.md

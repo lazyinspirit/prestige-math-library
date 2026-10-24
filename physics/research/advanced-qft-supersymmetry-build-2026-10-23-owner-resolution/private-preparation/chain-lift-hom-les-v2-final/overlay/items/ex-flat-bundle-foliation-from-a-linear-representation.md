@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-flat-bundle-foliation-from-a-linear-representation.md

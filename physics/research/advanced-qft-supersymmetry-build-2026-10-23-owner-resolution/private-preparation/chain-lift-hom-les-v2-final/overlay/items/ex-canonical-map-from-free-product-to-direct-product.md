@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-canonical-map-from-free-product-to-direct-product.md

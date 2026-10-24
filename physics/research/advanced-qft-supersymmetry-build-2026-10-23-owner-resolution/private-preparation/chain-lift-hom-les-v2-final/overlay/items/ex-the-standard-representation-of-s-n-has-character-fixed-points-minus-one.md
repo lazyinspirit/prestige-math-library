@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-standard-representation-of-s-n-has-character-fixed-points-minus-one.md

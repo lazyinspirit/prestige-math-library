@@ -1,0 +1,49 @@
+---
+id: def-multivariate-normal-sample-model-and-statistics
+kind: definition
+title: The iid multivariate-normal sample and covariance conventions
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 1
+deps:
+  - def-scientific-statistical-model-contract
+  - def-statistical-experiment
+  - def-parametric-statistical-model
+  - def-multivariate-normal-law
+  - lem-characteristic-function-of-a-multivariate-normal-law
+  - def-axiom-of-choice
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - def-probability-measure
+  - def-finite-sigma-finite-and-semifinite-measures
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - def-statistic-and-estimator
+  - cor-continuous-functions-are-borel-measurable
+  - lem-ac-supplies-sequential-choices-for-probability-constructions
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  precheck: n/a
+sources:
+  references:
+    - title: "Arak Mathai, Serge Provost, and Hans Haubold, Multivariate Statistical Analysis in the Real and Complex Domains, Chapter 3 §3.5, PDF pp. 55–62"
+      url: "https://link.springer.com/content/pdf/10.1007/978-3-030-95864-0_3.pdf"
+    - title: "Soumendu Sundar Mukherjee, Multivariate Analysis 2021, Lecture 2, PDF pp. 2–3"
+      url: "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-2.pdf"
+    - title: "Soumendu Sundar Mukherjee, Multivariate Analysis 2021, Lecture 3, PDF pp. 1–4"
+      url: "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-3.pdf"
+    - title: "Peter D. Hoff, Multivariate Statistical Analysis, Duke STA 832 lecture notes, relevant sections in Chapters 4 and 7"
+      url: "https://www2.stat.duke.edu/~pdh10/Teaching/832/Materials/notes.pdf"
+
+---
+
+## Definition
+
+Assume AC. Fix integers $n\ge2$ and $p\ge1$. Let $\mathcal S_{++}^p$ be the set of real symmetric $p\times p$ matrices $\Sigma$ such that $v^T\Sigma v>0$ for every nonzero $v\in\mathbb R^p$. The iid multivariate-normal sampling experiment has data space $\mathcal X=(\mathbb R^p)^n$ with sigma-algebra $\mathcal B(\mathbb R^p)^{\otimes n}$, parameter set $\Theta=\mathbb R^p\times\mathcal S_{++}^p$, and sampling law $P_{\mu,\Sigma}=N_p(\mu,\Sigma)^{\otimes n}$. The finite product is a probability measure by [[def-probability-measure]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. The coordinate projection $X_i$ is the complete vector observation for sampling unit $i$; its $p$ coordinates need not be independent.
+
+For $x=(x_1,\ldots,x_n)\in\mathcal X$, define
+$$\bar x=\frac1n\sum_{i=1}^n x_i,\qquad R(x)=\sum_{i=1}^n(x_i-\bar x)(x_i-\bar x)^T,\qquad S(x)=\frac{R(x)}{n-1},\qquad M(x)=\frac{R(x)}n.$$
+The functions $x\mapsto\bar x$, $S(x)$, and $M(x)$ are continuous, hence Borel measurable under AC and [[lem-ac-supplies-sequential-choices-for-probability-constructions]]; they are statistics in the experiment by [[def-statistic-and-estimator]]. Here $S$ uses the $n-1$ covariance denominator, while $M$ is the $n$-denominator covariance candidate whose maximum-likelihood property is proved separately below.
+
+This item instantiates the mathematical portion of the scientific model contract ([[def-scientific-statistical-model-contract]]) as follows. One sampling and analysis unit is one complete observed vector $X_i$; index $i$ identifies the sampling unit and coordinate $a$ identifies a component within that vector. For fixed parameter label $\theta=(\mu,\Sigma)$, $\mu$ and $\Sigma$ are fixed, every $X_i$ is random, every component of each $X_i$ is observed, and there are no latent quantities, predictors, treatments, or randomization. The target population for this reference experiment is the abstract law $N_p(\mu,\Sigma)$ of a vector-valued sampling unit, and the target parameter is $\theta$ itself; no separate scientific estimand or physical setting is asserted. The observation map records the complete vector tuple unchanged, and inference uses the joint product law, with no conditioning convention beyond that law. No topological support or empirical adequacy claim is needed; this is a mathematical reference model, not an assertion that observed scientific data follow it.

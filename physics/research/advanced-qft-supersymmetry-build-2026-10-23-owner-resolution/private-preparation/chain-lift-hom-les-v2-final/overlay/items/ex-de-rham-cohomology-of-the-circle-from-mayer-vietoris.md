@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-de-rham-cohomology-of-the-circle-from-mayer-vietoris.md

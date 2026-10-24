@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-semistandard-weight-dimensions-detect-virtual-weyl-classes.md

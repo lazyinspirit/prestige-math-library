@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity.md

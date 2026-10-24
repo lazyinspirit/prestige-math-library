@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-mild-heat-solution-need-not-be-classical-at-initial-time.md

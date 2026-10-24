@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-obstacle-reaction-is-supported-on-the-contact-set-under-measure-regularity.md

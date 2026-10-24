@@ -1,0 +1,12 @@
+import pathlib,json,shutil,re
+run='advanced-qft-supersymmetry-build-2026-10-23';root=pathlib.Path.cwd();s=json.loads((root/'.physics-autopilot'/run/'state.json').read_text());assert s['paused']and s['stages']['1-append-apply-2']['gatesPassedAt']and not any(not d.get('endedAt')for d in s['dispatches'].values());owner=root/'research'/f'{run}-owner-resolution';proposal=owner/'gauge-singer-restoration';archive=owner/'singer-root-inventory-before';assert not archive.exists();archive.mkdir();item='thm-qftx-singer-global-gauge-section-obstruction';mp=root/'research'/f'{run}-batch-3.pages.json';old=json.loads(mp.read_text());new=json.loads((proposal/'batch-3.pages.proposed.json').read_text());oi={i['id']for p in old for i in p['items']};ni={i['id']for p in new for i in p['items']};assert len(oi)==4 and ni-oi=={item}and oi<=ni;shutil.copyfile(mp,archive/mp.name)
+for p in old:
+ if p['kind']=='A':
+  q=next(q for q in new if q['id']==p['id']);p['items'].append(next(i for i in q['items']if i['id']==item));p['requires']=list(dict.fromkeys(p['requires']+q['requires']));ap=p
+mp.write_text(json.dumps(old,indent=2,ensure_ascii=False)+'\n');cp=root/'research'/f'{run}-batch-3.proof-contracts.json';c=json.loads(cp.read_text());q=json.loads((proposal/'batch-3.proof-contracts.proposed.json').read_text());shutil.copyfile(cp,archive/cp.name);assert item not in c['contracts'];c['contracts'][item]=q['contracts'][item];c['scope']=[i['id']for p in old for i in p['items']];cp.write_text(json.dumps(c,indent=2,ensure_ascii=False)+'\n');cross=root/'research'/f'{run}-batch-3.cross-batch-dependencies.json';shutil.copyfile(cross,archive/cross.name);rows=json.loads(cross.read_text());keys={(x['kind'],x['consumer'],x['supplier'])for x in rows}
+for x in json.loads((proposal/'batch-3.cross-batch-dependencies.proposed.json').read_text()):
+ if(x['kind'],x['consumer'],x['supplier'])not in keys:rows.append(x)
+cross.write_text(json.dumps(rows,indent=2,ensure_ascii=False)+'\n');p=root/'library'/ap['category']/(ap['id']+'.md');shutil.copyfile(p,archive/p.name);text=p.read_text()
+for key,values in [('items',[i['id']for i in ap['items']]),('requires',ap['requires'])]:
+ m=re.search(r'^'+key+r':\n(?:(?:  )?- [^\n]*\n)*',text,re.M);assert m;text=text[:m.start()]+key+':\n'+''.join('  - '+i+'\n'for i in values)+text[m.end():]
+p.write_text(text);assert not(root/'items'/(item+'.md')).exists();print('Restored missing Singer inventory/contracts/context only; native continuation still owes actual carrier/proof/readiness. Original four rows/contracts preserved.')

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cech-dolbeault-comparison-for-line-bundles-on-compact-surfaces.md

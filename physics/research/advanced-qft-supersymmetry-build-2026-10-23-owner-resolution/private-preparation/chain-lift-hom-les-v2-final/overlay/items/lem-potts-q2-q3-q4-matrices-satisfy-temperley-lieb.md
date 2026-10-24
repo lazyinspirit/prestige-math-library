@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-potts-q2-q3-q4-matrices-satisfy-temperley-lieb.md

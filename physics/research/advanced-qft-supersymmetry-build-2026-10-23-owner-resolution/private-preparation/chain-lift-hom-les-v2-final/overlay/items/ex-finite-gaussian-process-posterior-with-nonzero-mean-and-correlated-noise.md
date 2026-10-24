@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-finite-gaussian-process-posterior-with-nonzero-mean-and-correlated-noise.md

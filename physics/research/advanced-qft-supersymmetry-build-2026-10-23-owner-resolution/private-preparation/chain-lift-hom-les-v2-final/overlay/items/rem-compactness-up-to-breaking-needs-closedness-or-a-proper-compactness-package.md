@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-compactness-up-to-breaking-needs-closedness-or-a-proper-compactness-package.md

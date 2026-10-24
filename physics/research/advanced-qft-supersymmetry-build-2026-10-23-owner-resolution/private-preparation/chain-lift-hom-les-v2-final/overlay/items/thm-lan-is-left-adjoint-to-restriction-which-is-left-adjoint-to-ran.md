@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-lan-is-left-adjoint-to-restriction-which-is-left-adjoint-to-ran.md

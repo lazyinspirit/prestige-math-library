@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-collapse-of-uct-or-kunneth-still-leaves-the-recorded-extension-problem.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-q-schur-central-hecke-jm-scalars-give-residue-separation.md

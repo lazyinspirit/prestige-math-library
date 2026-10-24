@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-underlying-bar-contraction-is-not-equivariant.md

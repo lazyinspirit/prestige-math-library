@@ -1,0 +1,292 @@
+[
+  {
+    "order": 980,
+    "id": "aqft-eft-foundations",
+    "kind": "A",
+    "category": "advanced-qft-and-supersymmetry",
+    "library": "physics",
+    "title": "EFT Data, Scales, Wilsonian Action and Finite Matching",
+    "companion": "aqft-eft-foundations-examples",
+    "requires": [
+      "qftx-nonabelian-yang-mills-model",
+      "qft-c01",
+      "qftx-heavy-field-eft",
+      "countability-and-uncountability",
+      "qftx-gauge-geometry",
+      "relations-functions-and-quotients",
+      "central-limit-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-aqft-model-and-scale-data",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Finite-regulator EFT model and scale data",
+        "reference": "items/def-aqft-model-and-scale-data.md",
+        "design_state": "Step 1 authored draft; planned item contract; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-countable-choice",
+          "def-qft-framework-units",
+          "def-qftx-nonabelian-gauge-data"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-qft-framework-units": "formulation-prerequisite",
+          "def-qftx-nonabelian-gauge-data": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use natural units c=ℏ=1, with physical dimensions assigned using the QFT unit convention of the selected model. A finite-regulator effective-field-theory model-data record consists of a finite undirected graph Γ=(X,EΓ) with nonempty vertex set X, the graph distance dΓ, retained real coordinates ℓ∈ℝ^X, integrated real coordinates χ∈ℝ^X, a Borel ultraviolet action SUV(ℓ,χ)∈ℝ, and a specified Borel probability measure νH on ℝ^X for the integrated coordinates. The full ultraviolet data are these objects before any integration. This definition does not assert that the integral of exp(−SUV) exists; finiteness and positivity are checked when the Wilsonian action is defined.\n\nFor the positive heavy-scalar Gaussian submodel, include a real symmetric matrix A on ℝ^X satisfying uᵀAu≥0 for every u and Axy=0 when dΓ(x,y)>1. Its entries have mass-squared units and its operator norm satisfies √‖A‖≤Λ. Choose M>0 and put K=M²I+A. The heavy coordinate χ has mass-inverse units, so χᵀKχ is dimensionless. A source J(ℓ)∈ℝ^X has mass units, so J(ℓ)ᵀχ is dimensionless. When the source is restricted to external energy E, require J(ℓ)=PEJ(ℓ), where PE is the orthogonal spectral projection of A onto eigenvalues in [0,E²].\n\nThe scale data are a positive Wilsonian matching scale $\\mu_W$, a heavy mass $M>0$, an external energy bound $E\\ge0$, and a regulator cutoff $\\Lambda>0$, with $\\sqrt{\\|A\\|}\\le\\Lambda$ in the Gaussian submodel. The Wilsonian scale $\\mu_W$ records where the retained low-coordinate action is specified; $M$ is the heavy quadratic mass; $E$ bounds the admitted source spectrum; and $\\Lambda$ bounds the finite regulator. These are separately named parameters, and this definition imposes no relation among their numerical values. A small-remainder theorem may require an additional hierarchy such as $E<M$.\n\nLight and heavy name the roles in the declared split: ℓ is retained at μW and χ is integrated in the finite measure νH. They do not assert that every retained field is massless or that every integrated field is heavy in an unrestricted continuum theory. If the model includes non-Abelian gauge data, record the actual global group, Lie algebra, principal bundle, representations, and admitted bundle sectors as one supplied gauge-data object. That object selects no connection, action, or quantum measure by itself. The Gaussian submodel below keeps any such gauge data as fixed context and makes no gauge-field integration claim.\n\nThis is a finite-dimensional regulator description. It makes no assertion that a general interacting functional measure exists, that a cutoff can be removed, or that any selected model describes nature.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David B. Kaplan, Five lectures on effective field theory",
+              "url": "https://arxiv.org/pdf/nucl-th/0510023",
+              "locator": "§§1.1–1.2, printed pp. 3–7, low-energy degrees of freedom, local operators, and scale counting."
+            },
+            {
+              "title": "C. P. Burgess, Introduction to Effective Field Theory",
+              "url": "https://arxiv.org/pdf/hep-th/0701053",
+              "locator": "§1 and §§2.2.1–2.2.5, printed pp. 2–27, scale separation and the finite two-scalar Wilson-action example."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite-regulator model data and scale labels only; it constructs no continuum theory, measurement, or physical realization."
+      },
+      {
+        "id": "def-aqft-wilsonian-action",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Finite-regulator Wilsonian action",
+        "reference": "items/def-aqft-wilsonian-action.md",
+        "design_state": "Step 1 authored draft; planned item contract; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-aqft-model-and-scale-data"
+        ],
+        "dependency_roles": {
+          "def-aqft-model-and-scale-data": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take a finite-regulator model datum with retained coordinates $\\ell$, integrated coordinates $h$, a normalized Borel probability measure $\\nu_H$ on the finite-dimensional $h$-space, and a real Borel ultraviolet action $S_{\\rm UV}(\\ell,h)$. For each retained configuration $\\ell$ define\n\n$$\nZ_H(\\ell):=\\int e^{-S_{\\rm UV}(\\ell,h)}\\,d\\nu_H(h).\n$$\n\nOn the domain of $\\ell$ for which $0<Z_H(\\ell)<\\infty$, the finite-regulator Wilsonian action at scale $\\mu_W$ is\n\n$$\nS_W(\\ell;\\mu_W):=-\\log Z_H(\\ell).\n$$\n\nThus “integrating out” the high sector means this specified finite integral over $h$ while $\\ell$ is held fixed. The measure, action, regulator, and low/high split are inputs; the definition does not assert that every interacting model has a finite or well-defined integral. Replacing $\\nu_H$ by a positive constant multiple changes $S_W$ only by an additive constant independent of $\\ell$, which is fixed by the chosen normalization convention.\n\nA one-particle-irreducible effective action, when it exists, is the Legendre transform of a connected source-generating functional for the retained fields. It is a different construction from the high-coordinate integral above. No 1PI functional is needed or asserted here.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Burgess, Introduction to Effective Field Theory",
+              "url": "https://arxiv.org/pdf/hep-th/0701053",
+              "locator": "§§2.2.1–2.2.5, printed pp. 20–27, Wilson action from a specified high/low mode split and model-specific matching."
+            },
+            {
+              "title": "David B. Kaplan, Five lectures on effective field theory",
+              "url": "https://arxiv.org/pdf/nucl-th/0510023",
+              "locator": "§2.2, printed pp. 20–21, low-energy contact interactions and matching coefficients."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite-dimensional high-coordinate integration at a declared Wilsonian scale; no infinite-dimensional functional integral or continuum limit is asserted."
+      },
+      {
+        "id": "def-aqft-derivative-expansion-and-truncation",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Finite-regulator derivative expansion and truncation",
+        "reference": "items/def-aqft-derivative-expansion-and-truncation.md",
+        "design_state": "Step 1 authored draft; planned item contract; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-aqft-model-and-scale-data",
+          "def-aqft-wilsonian-action"
+        ],
+        "dependency_roles": {
+          "def-aqft-model-and-scale-data": "formulation-prerequisite",
+          "def-aqft-wilsonian-action": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "In the finite graph model, a matrix $B$ on $\\mathbb R^X$ has range at most $r$ when $B_{xy}=0$ whenever $d_\\Gamma(x,y)>r$. The positive heavy-sector matrix $A$ from the model data has range at most one. A derivative expansion of its inverse kernel is the formal operator series\n\n$$\n(M^2I+A)^{-1}\\sim M^{-2}\\sum_{r=0}^{\\infty}(-A/M^2)^r.\n$$\n\nIts order-$N$ truncation, for an integer $N\\ge0$, is the finite operator\n\n$$\nS_N:=M^{-2}\\sum_{r=0}^{N}(-A/M^2)^r.\n$$\n\nIt has range at most $N$ in this regulator. For a source $J$ supported in the spectral interval $[0,E^2]$ of $A$, the dimensionless power-counting parameter is $E/M$. This definition is an organized finite-order approximation; it does not assert convergence for unrestricted sources, a generic error bound, or a continuum local-operator expansion. The positive Gaussian theorem supplies a remainder bound only under its exact hypotheses.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David B. Kaplan, Five lectures on effective field theory",
+              "url": "https://arxiv.org/pdf/nucl-th/0510023",
+              "locator": "§§1.1–1.2, printed pp. 3–7, local-operator expansion and scaling dimensions."
+            },
+            {
+              "title": "C. P. Burgess, Introduction to Effective Field Theory",
+              "url": "https://arxiv.org/pdf/hep-th/0701053",
+              "locator": "§2.2.4, printed pp. 24–25, the model-specific tree-level expansion in inverse powers of M."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A finite-range derivative-counting convention for the positive Gaussian heavy-sector kernel; it asserts no generic continuum remainder or convergence.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-aqft-finite-gaussian-shell-composition",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Successive finite Gaussian shells compose",
+        "reference": "items/prop-aqft-finite-gaussian-shell-composition.md",
+        "design_state": "Step 1 authored draft; local A-page mathematical supplier required for the finite shell composition; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-qftx-finite-gaussian-shell-transform",
+          "prop-qftx-finite-gaussian-shell-semigroup"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-qftx-finite-gaussian-shell-transform": "mathematical-premise",
+          "prop-qftx-finite-gaussian-shell-semigroup": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Assume the Axiom of Choice. Let $d\\ge1$, let $C_1,C_2$ be real symmetric positive-semidefinite $d\\times d$ covariance matrices, and let $f:\\mathbb R^d\\to[0,\\infty]$ be Borel. For a covariance matrix $C$, let $\\gamma_C$ denote the centered Gaussian probability with covariance $C$, including when $C$ is singular, and define\n\n$$\nT_Cf(x):=\\int_{\\mathbb R^d}f(x+z)\\,d\\gamma_C(z).\n$$\n\nFor a finite nonnegative Borel potential $V$, $0<T_C(e^{-V})(x)\\le1$; define the finite nonnegative potential $V_C(x):=-\\log T_C(e^{-V})(x)$. Then\n\n$$\nT_{C_2}(T_{C_1}f)(x)=T_{C_1+C_2}f(x)\\qquad(x\\in\\mathbb R^d)\n$$\n\nas an equality in $[0,\\infty]$, and\n\n$$\ne^{-(V_{C_1})_{C_2}(x)}=e^{-V_{C_1+C_2}(x)}.\n$$\n\nThe Gaussian measures are normalized probabilities, so no determinant or vacuum constant appears. This is a finite-regulator composition identity; it asserts no derivative equation along a covariance path and no continuum limit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nima Moshayedi, Quantum Field Theory and Functional Integrals",
+              "url": "https://arxiv.org/pdf/1902.08652",
+              "locator": "§11.2, printed pp. 44–47, finite-dimensional Gaussian covariance and exponential moments; shell composition itself is proved from the exact local supplier."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Pure finite-dimensional Gaussian probability identity; no physical model realization or continuum limit is asserted.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "texp-aqft-finite-heavy-scalar-matching",
+        "kind": "thought-experiment",
+        "domain": "physics",
+        "title": "Finite heavy-scalar Gaussian matching",
+        "reference": "items/texp-aqft-finite-heavy-scalar-matching.md",
+        "design_state": "Step 1 authored draft; planned item contract; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "def-aqft-model-and-scale-data",
+          "def-aqft-wilsonian-action",
+          "def-aqft-derivative-expansion-and-truncation",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "def-qftx-heavy-gaussian-data",
+          "lem-qftx-finite-heavy-gaussian-square",
+          "thm-qftx-heavy-derivative-bound"
+        ],
+        "dependency_roles": {
+          "def-aqft-model-and-scale-data": "formulation-prerequisite",
+          "def-aqft-wilsonian-action": "formulation-prerequisite",
+          "def-aqft-derivative-expansion-and-truncation": "formulation-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions": "mathematical-premise",
+          "def-qftx-heavy-gaussian-data": "mathematical-premise",
+          "lem-qftx-finite-heavy-gaussian-square": "mathematical-premise",
+          "thm-qftx-heavy-derivative-bound": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice and the finite-regulator model data in the definitions below. Let $d\\ge1$, let $A$ be a real symmetric positive-semidefinite $d\\times d$ matrix, let $M>0$, and put $K=M^2I+A$. Use natural units with $\\chi$ in mass-inverse units, $A$ and $K$ in mass-squared units, and a source $J\\in\\mathbb R^d$ in mass units. Let $E\\ge0$, let $P_E$ be the spectral projection of the complexification of $A$ onto $[0,E^2]$, and assume $J=P_EJ$. In the finite Gaussian sector, let $\\gamma_{K^{-1}}=N_d(0,K^{-1})$ and define\n\n$$ Z_H(J):=\\int_{\\mathbb R^d}e^{J^T\\chi}\\,d\\gamma_{K^{-1}}(\\chi) $$\n\n$$ \\Delta S_W(J):=-\\log Z_H(J) $$\n\nFor each integer $N\\ge0$, put\n\n$$\nS_NJ:=M^{-2}\\sum_{r=0}^{N}(-A/M^2)^rJ.\n$$\n\nThen both finite Gaussian integrals are finite and\n\n$$ Z_H(J)=\\exp\\!\\left(\\tfrac12J^TK^{-1}J\\right) $$\n\n$$ \\Delta S_W(J)=-\\tfrac12J^TK^{-1}J $$\n\nThe inverse-kernel and action remainders satisfy\n\n$$\n\\|K^{-1}J-S_NJ\\|\\le M^{-2}(E^2/M^2)^{N+1}\\|J\\|,\n$$\n\n$$ \\left|\\Delta S_W(J)+\\tfrac12J^TS_NJ\\right| \\le \\frac{\\|J\\|^2}{2M^2}(E^2/M^2)^{N+1} $$\n\nThese are exact conditional statements for a finite positive quadratic heavy sector. The remainder is small in the stated band when $E<M$; no claim is made for unrestricted sources, arbitrary interactions, a continuum measure, or a differentiated Wilsonian flow.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David B. Kaplan, Five lectures on effective field theory",
+              "url": "https://arxiv.org/pdf/nucl-th/0510023",
+              "locator": "§2.2, printed pp. 20–21, low-energy contact matching and coefficient determination."
+            },
+            {
+              "title": "C. P. Burgess, Introduction to Effective Field Theory",
+              "url": "https://arxiv.org/pdf/hep-th/0701053",
+              "locator": "§§2.2.1–2.2.5, printed pp. 20–27, Wilson-action definition and model-specific heavy-scalar matching."
+            },
+            {
+              "title": "Nima Moshayedi, Quantum Field Theory and Functional Integrals",
+              "url": "https://arxiv.org/pdf/1902.08652",
+              "locator": "§11.2, printed pp. 44–47, finite-dimensional Gaussian covariance and exponential moment."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact deduction for a finite positive quadratic heavy-scalar regulator and spectrally band-limited sources; no interacting continuum theory or empirical result is asserted.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 980,
+    "id": "aqft-eft-foundations-examples",
+    "kind": "B",
+    "category": "advanced-qft-and-supersymmetry",
+    "library": "physics",
+    "title": "EFT Data, Scales, Wilsonian Action and Finite Matching — Examples",
+    "companion": "aqft-eft-foundations",
+    "requires": [
+      "aqft-eft-foundations",
+      "relations-functions-and-quotients",
+      "central-limit-theorems",
+      "qftx-heavy-field-eft"
+    ],
+    "items": [
+      {
+        "id": "ex-aqft-gaussian-shell-matching",
+        "kind": "example",
+        "domain": "physics",
+        "title": "One-dimensional finite Gaussian matching and shell composition",
+        "reference": "items/ex-aqft-gaussian-shell-matching.md",
+        "design_state": "Step 1 authored draft; planned B-page worked example; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "def-aqft-model-and-scale-data",
+          "def-aqft-wilsonian-action",
+          "def-aqft-derivative-expansion-and-truncation",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-qftx-finite-gaussian-shell-transform",
+          "prop-aqft-finite-gaussian-shell-composition",
+          "texp-aqft-finite-heavy-scalar-matching"
+        ],
+        "dependency_roles": {
+          "def-aqft-model-and-scale-data": "formulation-prerequisite",
+          "def-aqft-wilsonian-action": "formulation-prerequisite",
+          "def-aqft-derivative-expansion-and-truncation": "formulation-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-multivariate-normal-law": "mathematical-premise",
+          "def-qftx-finite-gaussian-shell-transform": "mathematical-premise",
+          "prop-aqft-finite-gaussian-shell-composition": "mathematical-premise",
+          "texp-aqft-finite-heavy-scalar-matching": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume AC. Use one positive mass unit $m_0$ and a one-site finite regulator with $M=2m_0$, $A=(m_0^2)$, $E=m_0$, $\\mu_W=\\tfrac32m_0$, $\\Lambda=3m_0$, source $J=(m_0)$, and truncation order $N=0$. Then $K=M^2I+A=(5m_0^2)$. Let $\\gamma_{K^{-1}}=N_1(0,K^{-1})$ be the centered normalized Gaussian with covariance $K^{-1}$. For $Z_H(J)=\\int e^{J^T\\chi}\\,d\\gamma_{K^{-1}}(\\chi)$ and the action increment $\\Delta S_W=-\\log Z_H(J)$, the exact increment is $-1/10$, the order-zero approximation is $-1/8$, the vector remainder is $1/(20m_0)$, and the action remainder is $1/40\\le1/32$.\n\nFor a separate dimensionless shell coordinate, let $\\gamma_C=N_1(0,C)$ be the centered normalized Gaussian of variance $C$, define $T_Cf(x)=\\int f(x+z)\\,d\\gamma_C(z)$, and take $f(x)=x^2$, $C_1=1$, and $C_2=3$. The successive normalized shell value at zero and the combined-shell value are both $4$.\n\nThis is a model-specific finite calculation. It reports no observation and asserts no continuum limit or general interacting matching rule.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "library": "physics",
+        "physical_scope": "A one-coordinate finite Gaussian regulator example and a separate normalized shell calculation; no empirical claim, continuum limit, or generic matching theorem.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

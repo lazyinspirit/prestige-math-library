@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-contour-integral-of-the-cauchy-kernel-is-a-logarithm-increment.md

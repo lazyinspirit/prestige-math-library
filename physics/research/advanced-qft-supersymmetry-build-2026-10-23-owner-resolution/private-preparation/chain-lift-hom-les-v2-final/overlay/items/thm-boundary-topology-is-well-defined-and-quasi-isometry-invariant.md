@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-boundary-topology-is-well-defined-and-quasi-isometry-invariant.md

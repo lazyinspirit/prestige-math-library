@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-every-smooth-manifold-admits-a-positive-smooth-density.md

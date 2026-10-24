@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-augmentation-ideal-has-no-complement-when-char-k-divides-group-order.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes.md

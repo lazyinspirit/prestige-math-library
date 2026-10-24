@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-banach-gaussian-covariance-operator-and-rkhs.md

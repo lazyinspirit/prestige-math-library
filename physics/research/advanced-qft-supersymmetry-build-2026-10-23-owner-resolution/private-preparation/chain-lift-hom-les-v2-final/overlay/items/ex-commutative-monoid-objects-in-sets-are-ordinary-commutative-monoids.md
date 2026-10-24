@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-commutative-monoid-objects-in-sets-are-ordinary-commutative-monoids.md

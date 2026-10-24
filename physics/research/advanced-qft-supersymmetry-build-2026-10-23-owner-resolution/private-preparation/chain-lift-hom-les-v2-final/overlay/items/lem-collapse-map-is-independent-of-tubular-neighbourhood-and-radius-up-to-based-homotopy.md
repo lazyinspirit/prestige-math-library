@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-collapse-map-is-independent-of-tubular-neighbourhood-and-radius-up-to-based-homotopy.md

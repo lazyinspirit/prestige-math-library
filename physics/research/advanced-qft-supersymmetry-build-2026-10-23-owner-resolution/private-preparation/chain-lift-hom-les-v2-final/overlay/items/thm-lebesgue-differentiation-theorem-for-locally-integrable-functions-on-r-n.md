@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n.md

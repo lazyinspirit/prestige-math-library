@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-con-zfc-implies-a-transitive-model-of-zfc.md

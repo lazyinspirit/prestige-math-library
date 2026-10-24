@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-manifold-conventions-and-the-role-of-second-countability.md

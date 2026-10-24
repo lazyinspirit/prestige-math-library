@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem.md

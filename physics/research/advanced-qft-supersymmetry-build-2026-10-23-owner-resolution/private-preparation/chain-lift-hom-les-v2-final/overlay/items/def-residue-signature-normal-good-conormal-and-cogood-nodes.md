@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-residue-signature-normal-good-conormal-and-cogood-nodes.md

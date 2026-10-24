@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-final-state-and-empty-stack-acceptance-are-literally-identical.md

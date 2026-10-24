@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-time-dependent-vector-fields-have-local-smooth-evolution-operators.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes.md

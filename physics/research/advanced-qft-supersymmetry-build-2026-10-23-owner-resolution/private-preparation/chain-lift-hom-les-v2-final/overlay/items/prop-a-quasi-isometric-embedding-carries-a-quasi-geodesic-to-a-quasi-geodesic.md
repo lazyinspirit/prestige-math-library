@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-quasi-isometric-embedding-carries-a-quasi-geodesic-to-a-quasi-geodesic.md

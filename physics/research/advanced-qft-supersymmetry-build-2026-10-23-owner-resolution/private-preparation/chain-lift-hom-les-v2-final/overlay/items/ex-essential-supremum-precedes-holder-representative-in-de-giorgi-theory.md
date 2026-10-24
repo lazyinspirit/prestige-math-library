@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-essential-supremum-precedes-holder-representative-in-de-giorgi-theory.md

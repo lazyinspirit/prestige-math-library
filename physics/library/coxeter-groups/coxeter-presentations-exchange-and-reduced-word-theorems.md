@@ -1,0 +1,17 @@
+---
+page: coxeter-presentations-exchange-and-reduced-word-theorems
+title: "Coxeter Presentations, Exchange, and Reduced Word Theorems"
+status: published
+items: [def-hh-coxeter-matrix-word-group-and-length, def-hh-geometric-coxeter-representation-and-roots, lem-hh-dihedral-root-recurrence-and-root-sign, thm-hh-coxeter-exchange-deletion-and-faithfulness, thm-hh-matsumoto-reduced-word-theorem, thm-hh-parabolic-minimal-representatives-and-length-additivity]
+examples: []
+---
+
+The Hecke branch begins again with generators, words and length; it does not assume the exchange or reduced-word theorem. A presentation alone gives a group, while its reflection geometry is what supplies the word control needed to define T_w independently of a reduced expression.
+
+The page contains six published items, in dependency order. [[def-hh-coxeter-matrix-word-group-and-length]] fixes the conventions: a finite Coxeter matrix, the presented group via the free group on S and the normal closure of the relators, its universal property, reduced words and the length $\ell$, and the standard parabolic subgroups $W_J$ — with the explicit convention that no finiteness, faithfulness or completeness is asserted there. [[def-hh-geometric-coxeter-representation-and-roots]] fixes one common characteristic-zero splitting field, one primitive $2m$-th root per finite edge and the constants $c_{st}$, and defines the involutions $\sigma_s$ on the simple-root basis together with the root set as their orbit; no positivity, integrality or faithfulness is claimed.
+
+The word control is built in [[lem-hh-dihedral-root-recurrence-and-root-sign]]: the rank-two block $\sigma_s\sigma_t$ has trace $c^2-2$ and determinant $1$, its order is exactly $m$ (including $m=2$ and $m=\infty$), the assignment $s\mapsto\sigma_s$ descends to a representation $W\to\mathrm{GL}_K(E)$ with distinct generators and exact dihedral orders, the signed right action on $\{\pm1\}\times T$ is well defined, prefix reflections delete two letters, the sign-change set $\Phi(w)$ of a reduced word is expression-independent with $\#\Phi(w)=\ell(w)$, and alternating dihedral words are reduced in the ambient group. [[thm-hh-coxeter-exchange-deletion-and-faithfulness]] then supplies the sign character and the parity laws $\ell(sw)=\ell(w)\pm1$, exchange on both sides, Tits two-letter deletion and faithfulness of the signed action. [[thm-hh-matsumoto-reduced-word-theorem]] proves braid connectivity of the reduced expressions of an element, the equivalence between reduced and M-reduced words, and the singleton claim $S\cap\langle s,t\rangle=\{s,t\}$. Finally [[thm-hh-parabolic-minimal-representatives-and-length-additivity]] proves the support description $W_J=\{w\in W:S(w)\subseteq J\}$, the intrinsic parabolic presentation with $\ell_J=\ell$ and $W_J\cap S=J$, the unique minimal coset representatives with the descent characterisation and length additivity, and the type-A identification $\ell=\operatorname{inv}$.
+
+## Reading and applications
+
+Prerequisite pages: [[tensor-coherence-and-algebraic-descent]], [[symmetric-groups-and-the-sign-homomorphism]], [[splitting-fields]], [[finite-fields-and-cyclotomic-extensions]], [[group-homomorphisms-and-the-isomorphism-theorems]]. The companion [[coxeter-presentations-exchange-and-reduced-word-theorems-examples]] develops the calculations and failures needed to test these constructions. All six items are published, and the two definitions record their later-derived features as justifiers rather than as part of their assertions.

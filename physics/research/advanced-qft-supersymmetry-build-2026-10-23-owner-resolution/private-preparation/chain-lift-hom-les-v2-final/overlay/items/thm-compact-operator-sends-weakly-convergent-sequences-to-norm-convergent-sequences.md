@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences.md

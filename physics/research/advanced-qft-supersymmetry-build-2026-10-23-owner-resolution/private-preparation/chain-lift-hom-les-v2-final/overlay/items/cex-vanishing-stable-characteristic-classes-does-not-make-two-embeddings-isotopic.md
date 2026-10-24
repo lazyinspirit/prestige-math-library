@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-vanishing-stable-characteristic-classes-does-not-make-two-embeddings-isotopic.md

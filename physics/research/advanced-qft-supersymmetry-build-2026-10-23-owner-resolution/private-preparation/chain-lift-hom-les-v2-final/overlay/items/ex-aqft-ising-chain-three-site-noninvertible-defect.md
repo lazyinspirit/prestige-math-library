@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-aqft-ising-chain-three-site-noninvertible-defect.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-group-ring-handle-matrix-and-its-torsion-class.md

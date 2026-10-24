@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-dirac-laws-converge-weakly-exactly-when-their-points-converge.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p.md

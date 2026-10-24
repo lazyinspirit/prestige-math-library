@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-smooth-partition-on-real-space-subordinate-to-two-half-spaces.md

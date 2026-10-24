@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-total-derivative-conventions-and-linear-map-seam.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-orthonormal-eigenbasis-for-a-compact-self-adjoint-operator.md

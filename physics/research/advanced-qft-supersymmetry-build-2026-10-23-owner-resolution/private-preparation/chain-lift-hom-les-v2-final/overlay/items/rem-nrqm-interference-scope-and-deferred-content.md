@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-nrqm-interference-scope-and-deferred-content.md

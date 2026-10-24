@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-time-discontinuous-forcing-can-block-classical-regularity-at-its-jump.md

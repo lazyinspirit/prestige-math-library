@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-countable-choice-sequence-and-product-formulations-are-equivalent.md

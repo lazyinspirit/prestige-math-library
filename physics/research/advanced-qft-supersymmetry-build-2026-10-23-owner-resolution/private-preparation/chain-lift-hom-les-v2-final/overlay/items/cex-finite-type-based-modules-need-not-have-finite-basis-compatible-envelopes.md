@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-finite-type-based-modules-need-not-have-finite-basis-compatible-envelopes.md

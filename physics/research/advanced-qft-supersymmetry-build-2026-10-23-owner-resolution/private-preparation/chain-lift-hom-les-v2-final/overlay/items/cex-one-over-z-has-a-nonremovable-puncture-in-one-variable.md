@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-one-over-z-has-a-nonremovable-puncture-in-one-variable.md

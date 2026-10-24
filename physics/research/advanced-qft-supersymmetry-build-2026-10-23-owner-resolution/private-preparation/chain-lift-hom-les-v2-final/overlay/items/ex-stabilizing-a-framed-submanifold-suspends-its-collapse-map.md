@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-stabilizing-a-framed-submanifold-suspends-its-collapse-map.md

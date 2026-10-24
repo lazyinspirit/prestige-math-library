@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-non-negative-square-root-as-a-polynomial-in-a-matrix.md

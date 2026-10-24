@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint.md

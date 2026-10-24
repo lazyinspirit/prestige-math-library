@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-serre-edge-maps-are-induced-by-projection-and-fiber-inclusion.md

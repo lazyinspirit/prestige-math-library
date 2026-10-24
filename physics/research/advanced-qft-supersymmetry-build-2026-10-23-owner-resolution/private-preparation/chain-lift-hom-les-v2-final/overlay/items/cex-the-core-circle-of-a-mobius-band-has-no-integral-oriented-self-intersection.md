@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-core-circle-of-a-mobius-band-has-no-integral-oriented-self-intersection.md

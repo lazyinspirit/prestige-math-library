@@ -1,0 +1,33 @@
+---
+page: fourier-multipliers-and-sobolev-characterisations-examples
+title: "Fourier Multipliers and Sobolev Characterisations — Examples"
+status: published
+items: []
+examples: [ex-heat-and-poisson-semigroups-as-fourier-multipliers,
+           ex-translation-and-differentiation-multiplier-symbols,
+           ex-negative-sobolev-order-containing-a-dirac-mass]
+---
+
+These examples exercise the multiplier and Sobolev
+conventions of the companion page, all in the negative-sign $2\pi$
+normalization with complex scalars and Countable Choice as declared on the
+individual items.
+
+The heat semigroup multiplies the Fourier transform by $e^{-4\pi^2t|\xi|^2}$
+and the Poisson semigroup by $e^{-2\pi t|\xi|}$; both are bounded $L^2$
+multiplier extensions with norm one, compose as semigroups, and solve their
+distributional evolution equations for $t>0$. Translation has the unimodular
+symbol $e^{-2\pi ia\cdot\xi}$ and so extends to an $L^2$ isometry, whereas the
+distributional derivative $\partial_j$ has the unbounded symbol
+$2\pi i\xi_j$; explicit frequency-localized bumps show that no bounded $L^2$
+extension exists, which is the sharp contrast between bounded and unbounded
+multiplier symbols.
+
+The final example evaluates the weighted Fourier criterion at a Dirac mass:
+since $\mathcal F\delta_0=1$, the membership $\delta_0\in H^s(\mathbb R^n)$
+is equivalent to the finiteness of $\int_{\mathbb R^n}\langle\xi\rangle^{2s}
+\,d\xi$, which polar coordinates reduce to a real $p$-series block
+comparison. The outcome is the strict criterion
+$\delta_0\in H^s\Longleftrightarrow s<-n/2$, with the borderline
+$s=-n/2$ failing through the logarithmic divergence of
+$\int_1^R r^{-1}\,dr$.

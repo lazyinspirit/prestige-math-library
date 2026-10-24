@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-integrability-can-be-checked-on-simple-root-sl2-subalgebras.md

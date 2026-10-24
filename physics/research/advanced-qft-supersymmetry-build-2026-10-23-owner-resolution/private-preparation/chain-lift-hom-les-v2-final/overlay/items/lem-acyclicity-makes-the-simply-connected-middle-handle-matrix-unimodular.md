@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-acyclicity-makes-the-simply-connected-middle-handle-matrix-unimodular.md

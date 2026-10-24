@@ -1,0 +1,149 @@
+diff --git a/tools/physics-support/original-presentation-maintenance.mjs b/tools/physics-support/original-presentation-maintenance.mjs
+index 927e5dfc97..287c4aa15f 100644
+--- a/tools/physics-support/original-presentation-maintenance.mjs
++++ b/tools/physics-support/original-presentation-maintenance.mjs
+@@ -221,6 +221,13 @@ function proofParts(text) {
+ }
+ function definitionDisplayOption(value) {
+   if (value === undefined) return null;
++  if(value?.version===2){
++    if(!value||typeof value!=='object'||Array.isArray(value)||!equal(Object.keys(value).sort(),['insertions','version'])
++        ||!Array.isArray(value.insertions)||!value.insertions.length||value.insertions.some(p=>!p||typeof p!=='object'||Array.isArray(p)
++          ||!equal(Object.keys(p).sort(),['edge','math'])||!Number.isSafeInteger(p.math)||p.math<0||!['before','after'].includes(p.edge))
++        ||new Set(value.insertions.map(p=>p.math+':'+p.edge)).size!==value.insertions.length)fail('invalid definition math-edge insertion selector');
++    return {version:2,insertions:value.insertions.map(p=>({math:p.math,edge:p.edge}))};
++  }
+   if (!value || typeof value !== 'object' || Array.isArray(value)
+       || !equal(Object.keys(value).sort(), ['display', 'version']) || value.version !== 1
+       || !Number.isSafeInteger(value.display) || value.display < 0) fail('invalid definition display layout option');
+@@ -247,6 +254,55 @@ function rejectStyleIndirection(texts, context) {
+     }
+   }
+ }
++function definitionEdgeSpaces(before,after,option,deltas) {
++  const a=sections(before),b=sections(after),x=a.values.get('Definition'),y=b.values.get('Definition');
++  definitionSuffixUnchanged(x,y);rejectStyleIndirection([x,y],'definition');
++  const headers={before:canonicalHeadings(before),after:canonicalHeadings(after)},oldAst=stepAst(before,true),newAst=stepAst(after,true),
++    start=headers.before.find(h=>h.name==='Definition')?.start,newStart=headers.after.find(h=>h.name==='Definition')?.start;
++  if(!Number.isSafeInteger(start)||!Number.isSafeInteger(newStart))fail('definition edge insertion actual header');
++  const range=(body,ast)=>ast.ranges.map(r=>({type:ast.rows.find(n=>n.start===r.start&&n.end===r.end&&['inlineMath','math','inlineCode','code'].includes(n.node.type))?.node.type??'canonical-wiki',raw:body.slice(r.start,r.end)}));
++  if(!equal(range(before,oldAst),range(after,newAst))||!equal(links(before).map(r=>({target:r.target,raw:r.raw})),links(after).map(r=>({target:r.target,raw:r.raw}))))fail('definition edge insertion protected math/code/reference changed');
++  const allMath=(body,ast)=>ast.rows.filter(r=>['inlineMath','math'].includes(r.node.type)).map(r=>({type:r.node.type,raw:body.slice(r.start,r.end),start:r.start,end:r.end}));
++  const oldMath=allMath(before,oldAst),newMath=allMath(after,newAst);
++  if(!equal(oldMath.map(({type,raw})=>({type,raw})),newMath.map(({type,raw})=>({type,raw}))))fail('definition edge insertion math raw/type changed');
++  const doubleDollar=raw=>/^\$\$(?!\$)/.test(raw)&&/(?<!\$)\$\$$/.test(raw);
++  const selected=(body,ast,begin,length)=>ast.rows.filter(r=>['inlineMath','math'].includes(r.node.type)&&r.start>=begin&&r.end<=begin+length&&doubleDollar(body.slice(r.start,r.end)));
++  const oldNodes=selected(before,oldAst,start,x.length),newNodes=selected(after,newAst,newStart,y.length);
++  if(oldNodes.length!==newNodes.length)fail('definition edge insertion math index changed');
++  const mathRole=(body,ast,r)=>{
++    if(!r||!doubleDollar(body.slice(r.start,r.end))||r.parent?.type!=='paragraph'||ast.rows.find(p=>p.node===r.parent)?.parent?.type!=='root'
++        ||!ast.ranges.some(p=>p.start===r.start&&p.end===r.end))fail('definition edge math is not actual root-paragraph math');
++    return {type:r.node.type,start:r.start,end:r.end,paragraph:{start:r.parent.position.start.offset,end:r.parent.position.end.offset}};
++  };
++  const textRole=(body,ast,low,high,parent)=>{
++    const r=ast.rows.find(r=>r.node.type==='text'&&r.start<=low&&r.end>=high);
++    if(!r||r.parent!==parent||ast.ranges.some(p=>low<p.end&&high>p.start))fail('definition edge neighbor is not same-paragraph plaintext');
++    return {type:'text',start:low,end:high,raw:body.slice(low,high),paragraph:{start:parent.position.start.offset,end:parent.position.end.offset}};
++  };
++  const patches=option.insertions.map(p=>{
++    const r=oldNodes[p.math],role=mathRole(before,oldAst,r),point=p.edge==='before'?r.start:r.end,
++      word=p.edge==='before'?/[A-Za-z0-9]+$/.exec(before.slice(0,point)):/^[A-Za-z0-9]+/.exec(before.slice(point));
++    if(!word)fail('definition math edge is not empty against a plaintext letter/digit');
++    const low=p.edge==='before'?point-word[0].length:point,high=low+word[0].length;
++    return {...p,point,math_before:role,neighbor_before:textRole(before,oldAst,low,high,r.parent),word:word[0]};
++  });
++  if(patches.some((p,i)=>i&&p.point<=patches[i-1].point))fail('definition edge insertions must be source-ordered and unique');
++  let expected=before;
++  for(const p of [...patches].reverse())expected=expected.slice(0,p.point)+' '+expected.slice(p.point);
++  if(expected!==after)fail('definition edge insertion whole-body literal reconstruction');
++  for(let i=0;i<patches.length;i++){
++    const p=patches[i],r=newNodes[p.math],m=mathRole(after,newAst,r),point=p.point+i,
++      low=p.edge==='before'?point-p.word.length:point+1,high=low+p.word.length;
++    if(after[point]!==' '||(p.edge==='before'?r.start!==point+1:r.end!==point))fail('definition edge inserted space ownership');
++    const adjacent=textRole(after,newAst,low,high,r.parent),space=textRole(after,newAst,point,point+1,r.parent);
++    if(adjacent.raw!==p.word)fail('definition edge adjacent word changed');
++    deltas.push({id:`Definition:math:${p.math}:${p.edge}:space`,kind:'definition-math-edge-space',section:'Definition',math:p.math,edge:p.edge,
++      before:'',after:' ',offset_before:p.point,offset_after:point,raw_math:before.slice(oldNodes[p.math].start,oldNodes[p.math].end),
++      definition_before_sha256:sha(x),definition_after_sha256:sha(y),body_before_sha256:sha(before),body_after_sha256:sha(after),
++      markdown_roles:{offset_unit:'UTF-16',canonical_sections:headers,math_before:p.math_before,math_after:m,neighbor_before:p.neighbor_before,neighbor_after:adjacent,inserted_space:space},
++      ordered_math_before:oldMath,ordered_math_after:newMath});
++  }
++}
+ function definitionDisplayLayout(before, after, option, deltas) {
+   definitionSuffixUnchanged(before, after);
+   rejectStyleIndirection([before, after], 'definition');
+@@ -779,7 +835,8 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+   for (const name of a.names) {
+     const x = a.values.get(name), y = b.values.get(name);
+     if (name === primary) {
+-      if (displayLayout) definitionDisplayLayout(x, y, displayLayout, deltas);
++      if (displayLayout?.version===2) definitionEdgeSpaces(before.body,after.body,displayLayout,deltas);
++      else if (displayLayout) definitionDisplayLayout(x, y, displayLayout, deltas);
+       else interfaceChange(x, y, name, deltas);
+     }
+     else if (name === 'Facts & Assumptions') factsChange(x, y, deltas);
+@@ -806,12 +863,13 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+   const factLabels = has(factDeltas, 'reference-label'), factQuotes = has(factDeltas, 'stray-blockquote-deletion');
+   const review_classification = {
+     interface_section: primary,
+-    statements: displayLayout ? 'display-layout-only' : statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
++    statements: displayLayout?.version===2 ? 'math-edge-spaces-only' : displayLayout ? 'display-layout-only' : statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
+     facts: factLabels ? factQuotes ? 'reference-labels-and-quotation-only' : 'reference-labels-only' : factQuotes ? 'quotation-only' : 'identical',
+     proof: supportLayout ? 'support-relocation-layout-only' : paragraphLayout ? 'paragraph-join-layout-and-exact-technique-label' : terminalHeading ? 'terminal-heading-layout-only' : steps.length || technique ? 'equivalent-presentation' : 'unchanged',
+   };
+   if (consolidation && !equal([...consolidation.steps].sort(), deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unused proof support consolidation request');
+   if (relocation && !equal(relocation.steps, deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unused proof reference relocation request');
++  if(displayLayout?.version===2&&(deltas.length!==displayLayout.insertions.length||deltas.some(d=>d.kind!=='definition-math-edge-space')))fail('definition edge insertion has unrelated deltas');
+   const layoutContext=(supportLayout||paragraphLayout)?strictLayoutContext(before.body,after.body,supportLayout??paragraphLayout,Boolean(paragraphLayout),deltas,prior.deps):null;
+   return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas,
+     ...(consolidation ? { proof_support_consolidation: consolidation } : {}), ...(relocation ? { proof_reference_relocation: relocation } : {}),
+@@ -841,9 +899,10 @@ export function validateOriginalPresentationReviews(entry, changes, { receipt, s
+   if (!equal(relocation, changes.proof_reference_relocation ?? null)
+       || !equal(relocation?.steps ?? [], changes.deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unbound proof reference relocation option');
+   if (!equal(displayLayout, changes.definition_display_layout ?? null)
+-      || (displayLayout ? changes.kind !== 'definition' || changes.deltas.filter(d => d.kind === 'definition-display-layout').length !== 1
+-        || changes.deltas.find(d => d.kind === 'definition-display-layout')?.display !== displayLayout.display
+-        : changes.deltas.some(d => d.kind === 'definition-display-layout'))) fail('unbound definition display layout option');
++      || (displayLayout ? changes.kind !== 'definition' || (displayLayout.version===2
++        ? !equal(displayLayout.insertions,changes.deltas.map(d=>({math:d.math,edge:d.edge})))||changes.deltas.some(d=>d.kind!=='definition-math-edge-space')
++        : changes.deltas.filter(d => d.kind === 'definition-display-layout').length !== 1||changes.deltas.find(d => d.kind === 'definition-display-layout')?.display !== displayLayout.display)
++        : changes.deltas.some(d => ['definition-display-layout','definition-math-edge-space'].includes(d.kind)))) fail('unbound definition display layout option');
+   if (!equal(terminalHeading, changes.terminal_remarks_heading ?? null)
+       || (terminalHeading ? changes.deltas.filter(d => d.kind === 'terminal-remarks-heading').length !== 1
+         || changes.deltas.find(d => d.kind === 'terminal-remarks-heading')?.label !== terminalHeading.step
+diff --git a/tools/physics-support/original-rendering-maintenance.test.mjs b/tools/physics-support/original-rendering-maintenance.test.mjs
+index 9e60cd9544..9bb50b989c 100644
+--- a/tools/physics-support/original-rendering-maintenance.test.mjs
++++ b/tools/physics-support/original-rendering-maintenance.test.mjs
+@@ -25,6 +25,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+     for (const target of counterexampleFixture.targets) save(source,'items/'+target+'.md','---\nid: '+target+'\nkind: '+(target.startsWith('def-')?'definition':'lemma')+'\nstatus: published\ndeps: []\ntitle: Synthetic unchanged published target\n---\n## '+(target.startsWith('def-')?'Definition':'Statement')+'\nSynthetic unchanged pin, not a real target review.\n');
+   }
+   if (definition) before = before.replace('## Statement', '## Definition').replace(/\n## Facts & Assumptions[\s\S]*$/, '\n');
++  if (mode === 'definition-edge') before = before.replace('For the given object, $A=A$.', ()=>'For the object define\n\n$$x>0$$for every vector, factorisation$$A=LL^*,$$');
+   if (mode === 'definition-display') before = before.replace('For the given object, $A=A$.', ()=>'For the object define\n$$A=A.$$\nThe zero convention is fixed.');
+   if (mode === 'fact-label' || mode === 'reference-relocation' || mode === 'support-layout-labels') {
+     before = before.replace('deps: []', 'deps: [lem-title-target]').replace('[L1] Equality is reflexive. [given]', '[L1] Equality is reflexive. [given]\n\n[F2] The evaluation kernel is maximal ([[lem-title-target]]).');
+@@ -44,6 +45,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   importMathematics(root, source);
+   const repairPath = `research/source-repair/receipts/${id}.json`;
+   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
++  if (mode === 'definition-edge') after = after.replace('$$x>0$$for', ()=>'$$x>0$$ for').replace('factorisation$$', ()=>'factorisation $$');
+   if (mode === 'definition-display') after = after.replace('\n$$A=A.$$\n', ()=>'\n\n$$\nA=A.\n$$\n\n');
+   if (mode === 'counterexample-spelling') after = after.slice(0, after.length - counterexampleFixture.before_body.length) + counterexampleFixture.after_body;
+   if (mode === 'technique') after = after.replace('**Proof technique:** direct on $A$.', '**Proof technique:** direct on A.');
+@@ -92,7 +94,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   const hashFile = path => sha(readFileSync(resolve(root, path)));
+   const consolidation = mode.startsWith('support-consolidation') ? { version: 1, steps: mode === 'support-consolidation-both' ? ['1.1', '1.2'] : ['1.2'] } : undefined;
+   const relocation = mode === 'reference-relocation' ? { version: 1, steps: [{ label: '1.1', target: 'lem-title-target' }] } : undefined;
+-  const displayLayout = mode === 'definition-display' ? {version:1,display:0} : undefined;
++  const displayLayout = mode === 'definition-edge' ? {version:2,insertions:[{math:0,edge:'after'},{math:1,edge:'before'}]} : mode === 'definition-display' ? {version:1,display:0} : undefined;
+   const terminalHeading = mode === 'terminal-remarks' ? {version:1,step:'1.1'} : undefined;
+   const supportLayout=mode.startsWith('support-layout')?{version:1,steps:['1.1']}:undefined,paragraphLayout=mode==='paragraph-layout'?{version:1,steps:['1.1'],technique:{before:'**Proof technique:** Fubini followed by $L^2$ approximation.',after:'**Proof technique:** Fubini followed by square-integrable approximation.'}}:undefined;
+   const spelling = mode === 'counterexample-spelling' ? counterexampleFixture.option : undefined;
+@@ -400,3 +402,6 @@ test('exact counterexample case retains authenticated source/pins and actual abs
+ for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('counterexample exact case rejects false/partial/null supplied flags '+JSON.stringify(flags),t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/counterexample spelling native\/purity/);});
+ test('counterexample exact case never expands default or legacy kind support',t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);delete f.entry.counterexample_math_spelling;f.seal();assert.throws(()=>f.verify(),/unsupported item kind/);const g=fixture(t);g.entry.counterexample_math_spelling=counterexampleFixture.option;g.seal();assert.throws(()=>g.verify(),/counterexample spelling requires V2/);});
+ test('counterexample unchanged published refs and runtime require actual authority input bindings',t=>{const f=fixture(t,{mode:'counterexample-spelling',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);delete f.review.inputs['items/'+counterexampleFixture.targets[0]+'.md'];f.save(f.root,originalRenderingMaintenancePath(f.root,f.run),f.review);assert.throws(()=>f.verify(),/unbound input/);});
++
++test('definition edge v2 preserves existing native nonproof rules, pins and exact per-delta review',t=>{const f=fixture(t,{mode:'definition-edge',definition:true,presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);assert.equal(f.entry.changes.deltas.length,2);fixtureDiagramFlags(f,{});assert.ok(f.verify()>0);f.entry.presentation_reviews[0].delta_sha256='0'.repeat(64);f.seal();assert.throws(()=>f.verify(),/unreviewed V2 delta/);});
++test('definition edge v2 still requires genuine current native finalization and explicit selector',t=>{const f=fixture(t,{mode:'definition-edge',definition:true,presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);delete f.entry.definition_display_layout;f.seal();assert.throws(()=>f.verify(),/scientific Definition/);const g=fixture(t,{mode:'definition-edge',definition:true,presentationVersion:2,authored:true});g.repair.content_sha256='0'.repeat(64);g.save(g.source,g.repairPath,g.repair);g.entry.repair_receipt.sha256=g.hashFile(g.entry.repair_receipt.path);g.seal();assert.throws(()=>g.verify(),/authentication|mathematics import changed/);});

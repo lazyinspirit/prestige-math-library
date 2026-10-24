@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-surface-area-and-scalar-surface-integral-of-a-patch.md

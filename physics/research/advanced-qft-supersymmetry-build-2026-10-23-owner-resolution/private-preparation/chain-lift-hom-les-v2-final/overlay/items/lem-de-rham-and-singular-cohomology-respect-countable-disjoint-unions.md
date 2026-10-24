@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-de-rham-and-singular-cohomology-respect-countable-disjoint-unions.md

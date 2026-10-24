@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton.md

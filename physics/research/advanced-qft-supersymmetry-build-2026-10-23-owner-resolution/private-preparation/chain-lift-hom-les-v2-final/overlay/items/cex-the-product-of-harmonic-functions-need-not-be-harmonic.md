@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-product-of-harmonic-functions-need-not-be-harmonic.md

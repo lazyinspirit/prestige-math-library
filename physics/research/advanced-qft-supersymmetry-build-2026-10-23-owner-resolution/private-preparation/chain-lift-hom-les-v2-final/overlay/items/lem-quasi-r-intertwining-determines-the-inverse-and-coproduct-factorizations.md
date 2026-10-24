@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-quasi-r-intertwining-determines-the-inverse-and-coproduct-factorizations.md

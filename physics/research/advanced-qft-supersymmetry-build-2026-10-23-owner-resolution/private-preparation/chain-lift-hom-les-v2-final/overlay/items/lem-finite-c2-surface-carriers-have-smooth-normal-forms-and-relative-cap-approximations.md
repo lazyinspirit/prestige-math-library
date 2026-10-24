@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations.md

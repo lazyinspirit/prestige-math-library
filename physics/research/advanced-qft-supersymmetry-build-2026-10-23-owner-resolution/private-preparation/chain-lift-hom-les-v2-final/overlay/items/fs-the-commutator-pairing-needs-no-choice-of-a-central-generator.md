@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-commutator-pairing-needs-no-choice-of-a-central-generator.md

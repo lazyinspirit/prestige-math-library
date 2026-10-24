@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-ab5-is-equivalent-to-exactness-of-filtered-colimits.md

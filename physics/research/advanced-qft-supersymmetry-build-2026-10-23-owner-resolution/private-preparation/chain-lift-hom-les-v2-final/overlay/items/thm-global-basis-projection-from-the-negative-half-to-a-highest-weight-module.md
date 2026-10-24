@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-global-basis-projection-from-the-negative-half-to-a-highest-weight-module.md

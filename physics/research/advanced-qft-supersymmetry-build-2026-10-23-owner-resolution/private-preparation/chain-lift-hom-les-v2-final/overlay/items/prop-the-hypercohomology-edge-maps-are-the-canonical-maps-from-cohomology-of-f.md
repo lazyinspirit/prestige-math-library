@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-hypercohomology-edge-maps-are-the-canonical-maps-from-cohomology-of-f.md

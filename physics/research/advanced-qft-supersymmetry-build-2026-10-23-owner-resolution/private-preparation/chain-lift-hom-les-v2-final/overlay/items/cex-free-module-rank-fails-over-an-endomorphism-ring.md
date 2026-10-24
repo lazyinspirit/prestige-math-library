@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-free-module-rank-fails-over-an-endomorphism-ring.md

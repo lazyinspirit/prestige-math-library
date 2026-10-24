@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-rank-suborbits-and-subdegrees-of-a-transitive-action.md

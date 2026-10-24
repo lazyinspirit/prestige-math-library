@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality.md

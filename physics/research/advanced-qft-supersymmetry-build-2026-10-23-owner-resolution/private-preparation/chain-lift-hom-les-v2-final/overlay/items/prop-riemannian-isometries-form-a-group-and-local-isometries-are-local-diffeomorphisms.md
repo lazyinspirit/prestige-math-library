@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-riemannian-isometries-form-a-group-and-local-isometries-are-local-diffeomorphisms.md

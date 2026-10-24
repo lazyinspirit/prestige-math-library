@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-based-loop-spaces-of-cw-complexes-have-cw-homotopy-type.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-puncturing-connected-open-subset-of-rn-preserves-path-connectedness.md

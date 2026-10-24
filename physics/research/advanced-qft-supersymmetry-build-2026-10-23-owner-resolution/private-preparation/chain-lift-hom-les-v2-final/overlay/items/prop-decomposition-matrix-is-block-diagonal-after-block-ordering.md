@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-decomposition-matrix-is-block-diagonal-after-block-ordering.md

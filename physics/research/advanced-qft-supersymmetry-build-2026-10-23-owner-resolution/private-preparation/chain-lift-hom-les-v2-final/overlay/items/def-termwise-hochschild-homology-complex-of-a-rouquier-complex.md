@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-termwise-hochschild-homology-complex-of-a-rouquier-complex.md

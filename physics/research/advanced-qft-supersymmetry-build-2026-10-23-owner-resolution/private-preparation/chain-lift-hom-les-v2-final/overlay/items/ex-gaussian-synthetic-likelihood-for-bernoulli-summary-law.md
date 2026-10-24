@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law.md

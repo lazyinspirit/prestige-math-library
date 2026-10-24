@@ -1,0 +1,40 @@
+// Independent private mechanical/evidence probes; no source/native acceptance.
+import{readFileSync,writeFileSync}from'node:fs';import{createHash}from'node:crypto';
+import{originalPresentationChanges as extract,validateOriginalPresentationReviews as validate}from'/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/tools/physics-support/original-presentation-maintenance.mjs';
+const O='research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/',obs=JSON.parse(readFileSync(O+'terminal-remarks-heading-audit-v1/actual-body-observation.json')),before=readFileSync(obs.before.path),after=readFileSync(obs.after.path),option={version:1,step:'7.1'},rows=[],sha=x=>createHash('sha256').update(x).digest('hex'),old='∎ ## Remarks\n\n',next='∎\n\n## Remarks\n\n';
+const run=(a=before,b=after,o=option)=>extract(a,b,undefined,undefined,undefined,o),edit=(x,a,b)=>{const s=x.toString();if(!s.includes(a))throw Error('Absent fixture anchor '+a);return Buffer.from(s.replace(a,()=>b));};
+function test(name,expected,fn){try{fn();rows.push({name,expected,passed:expected==='accept'});}catch(e){rows.push({name,expected,passed:expected==='reject'&&!e.message.startsWith('Absent fixture anchor'),message:e.message});}}
+test('exact real CW boundary','accept',()=>{const c=run();if(c.deltas.length!==1||c.deltas[0].kind!=='terminal-remarks-heading'||c.steps.length||c.remarks!==null||c.review_classification.proof!=='terminal-heading-layout-only')throw Error('Incorrect boundary-only classification');if(!c.proof_support_parser_runtime?.inputs)throw Error('Missing runtime');});
+test('no implicit terminal heading','reject',()=>extract(before,after));
+for(const[name,o]of[['null',null],['empty',{}],['array',[]],['wrong version',{version:2,step:'7.1'}],['wrong step',{version:1,step:'6.1'}],['nonexistent step',{version:1,step:'9.9'}],['numeric step',{version:1,step:7.1}],['zero step',{version:1,step:'7.0'}],['extra key',{...option,allow:true}]])test(name,'reject',()=>run(before,after,o));
+for(const[name,a,b]of[['proof prose','proving the statement.','proving a stronger statement.'],['Remarks support','supplied here by [F6]','supplied here by [F5]'],['Statement quantifier','Every finite-dimensional','Some finite-dimensional'],['QED macro','∎\n\n## Remarks','\\qed\n\n## Remarks'],['QED deletion','∎\n\n## Remarks','\n\n## Remarks'],['one new LF','∎\n\n## Remarks','∎\n## Remarks'],['three new LF','∎\n\n## Remarks','∎\n\n\n## Remarks'],['heading depth','## Remarks\n\n','### Remarks\n\n'],['heading case','## Remarks\n\n','## remarks\n\n'],['trailing byte','requires an uncountable selection.','requires an uncountable selection. '],['dependency','  - def-axiom-of-choice','  - def-new-choice']])test(name,'reject',()=>run(before,edit(after,a,b)));
+const minimal='---\nid: lem-terminal-fixture\nkind: lemma\ntitle: Fixed terminal fixture\nstatus: published\ndeps: []\n---\n## Statement\n\nA fixed conclusion.\n\n## Facts & Assumptions\n\n[F1] A fixed premise.\n\n[F6] Another fixed premise.\n\n## Proof\n\n**Proof technique:** direct.\n\n1.1 First conclusion. [F1]\n\n7.1 Final conclusion. [F1] ∎ ## Remarks\n\nAn existing note [F6].\n',changed=s=>Buffer.from(s.replace(old,next));
+for(const[name,a]of[
+ ['named step hidden in multiline inlineCode',minimal.replace('7.1 Final conclusion.','`\n7.1 Final conclusion.`')],
+ ['named step hidden in multiline inlineMath',minimal.replace('7.1 Final conclusion.','$\n7.1 Final conclusion.$')],
+ ['QED detached paragraph',minimal.replace('[F1] ∎','\n\n[F1] ∎')],
+ ['fenced proof/marker',minimal.replace('7.1 Final conclusion.','```text\n7.1 Final conclusion.')+'\n```\n'],
+ ['HTML hidden marker',minimal.replace('7.1 Final conclusion.','<div>\n7.1 Final conclusion.')+'\n</div>\n'],
+ ['display-math hidden marker',minimal.replace('7.1 Final conclusion.','$$\n7.1 Final conclusion.')+'\n$$\n'],
+ ['duplicate glued marker',minimal+'\n'+old+'Another note.\n'],
+ ['another QED',minimal.replace('1.1 First conclusion.','1.1 First conclusion ∎.')],
+ ['numbered remark after marker',minimal+'\n8.1 An extra numbered remark. [F1]\n'],
+ ['reference definition context',minimal+'\n[external]: https://example.invalid\n'],
+])test(name,'reject',()=>run(Buffer.from(a),changed(a)));
+test('unused request','reject',()=>run(before,before));
+test('definition kind not eligible','reject',()=>run(edit(before,'kind: lemma','kind: definition'),edit(after,'kind: lemma','kind: definition')));
+const changes=run(),reason='Private exact boundary evidence fixture only, not supplier science acceptance, main repair authentication, publication, source adoption or native authorization.',evidence={path:'research/synthetic-terminal-review.json',sha256:sha('fixture')};
+function reviewed(){const entry={presentation_version:2,terminal_remarks_heading:structuredClone(option),pinned_sha256:sha(before),original_sha256:sha(after),changes:structuredClone(changes),scientific_review:{...changes.review_classification,hypotheses:'identical',new_premises:false,new_results:false,reason,reading_limits:reason},presentation_reviews:changes.deltas.map(d=>({delta_id:d.id,delta_sha256:sha(JSON.stringify(d)),reason,reading_limits:reason,evidence:[evidence]}))};return{entry,ctx:{bind:(p,h)=>{const b=readFileSync(p);if(sha(b)!==h)throw Error('unbound runtime');return b;},localEvidence:e=>{if(JSON.stringify(e)!==JSON.stringify(evidence))throw Error('unbound evidence');return Buffer.from('fixture');}}};}
+test('exact review binding','accept',()=>{const r=reviewed();validate(r.entry,r.entry.changes,r.ctx)});
+for(const[name,mutate]of[['entry option absent',r=>delete r.entry.terminal_remarks_heading],['entry step wrong',r=>r.entry.terminal_remarks_heading.step='6.1'],['review absent',r=>r.entry.presentation_reviews=[]],['delta hash stale',r=>r.entry.presentation_reviews[0].delta_sha256='0'.repeat(64)],['evidence absent',r=>r.entry.presentation_reviews[0].evidence=[]],['evidence hash unbound',r=>r.entry.presentation_reviews[0].evidence=[{...evidence,sha256:'0'.repeat(64)}]],['false proof classification',r=>r.entry.scientific_review.proof='unchanged'],['runtime absent',r=>delete r.entry.changes.proof_support_parser_runtime],['runtime stale',r=>r.entry.changes.proof_support_parser_runtime.inputs[Object.keys(r.entry.changes.proof_support_parser_runtime.inputs)[0]]='0'.repeat(64)],['runtime unbound',r=>r.ctx.bind=()=>{throw Error('unbound runtime')}],['source hash stale',r=>r.entry.original_sha256='0'.repeat(64)]])test(name,'reject',()=>{const r=reviewed();mutate(r);validate(r.entry,r.entry.changes,r.ctx)});
+
+const hiddenProof=JSON.parse(readFileSync(O+'private-preparation/terminal-remarks-heading-v1/root-hidden-proof-heading-probe.json'));
+test('exact Root accepted hidden Proof-heading counterexample rejects','reject',()=>run(Buffer.from(hiddenProof.before),Buffer.from(hiddenProof.after)));
+for(const header of ['## Statement','## Facts & Assumptions','## Proof'])test('canonical '+header+' hidden in actual multiline inlineCode','reject',()=>{
+ const a=minimal.replace(header,'`hidden\n'+header+'\nclosed`');run(Buffer.from(a),changed(a));
+});
+for(const[name,header]of[['unchanged extra header','## Context'],['duplicate raw Proof','## Proof']])test(name+' hidden before actual Proof','reject',()=>{
+ const a=minimal.replace('## Proof','`hidden\n'+header+'\nclosed`\n\n## Proof');run(Buffer.from(a),changed(a));
+});
+
+const failed=rows.filter(r=>!r.passed);writeFileSync(O+'terminal-remarks-heading-audit-v2/probe-results.json',JSON.stringify({kind:'Independent terminal heading mechanical/evidence probes; no source/native acceptance',source_guards:obs,rows,failed:failed.length},null,2)+'\n');console.log(JSON.stringify({probes:rows.length,failed:failed.length,failures:failed}));if(failed.length)process.exitCode=1;

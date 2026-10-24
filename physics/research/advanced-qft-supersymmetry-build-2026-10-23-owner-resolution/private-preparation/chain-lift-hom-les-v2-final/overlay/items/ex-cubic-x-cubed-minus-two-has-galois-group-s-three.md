@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cubic-x-cubed-minus-two-has-galois-group-s-three.md

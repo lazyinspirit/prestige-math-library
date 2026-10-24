@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-an-odd-permutation-reverses-oriented-simplex-sign.md

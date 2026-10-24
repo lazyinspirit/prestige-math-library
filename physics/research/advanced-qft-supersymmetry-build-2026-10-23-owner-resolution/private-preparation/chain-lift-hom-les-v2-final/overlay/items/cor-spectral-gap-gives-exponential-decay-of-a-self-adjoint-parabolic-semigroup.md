@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-spectral-gap-gives-exponential-decay-of-a-self-adjoint-parabolic-semigroup.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-left-to-right-exact-equivalence-need-not-preserve-the-identity.md

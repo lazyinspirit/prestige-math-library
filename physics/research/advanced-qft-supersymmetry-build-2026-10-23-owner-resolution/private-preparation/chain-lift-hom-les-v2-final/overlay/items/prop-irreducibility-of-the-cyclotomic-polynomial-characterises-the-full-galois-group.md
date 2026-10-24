@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-irreducibility-of-the-cyclotomic-polynomial-characterises-the-full-galois-group.md

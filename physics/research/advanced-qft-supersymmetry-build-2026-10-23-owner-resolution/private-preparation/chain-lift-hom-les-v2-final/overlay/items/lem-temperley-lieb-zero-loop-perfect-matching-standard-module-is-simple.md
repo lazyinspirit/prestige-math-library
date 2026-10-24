@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-temperley-lieb-zero-loop-perfect-matching-standard-module-is-simple.md

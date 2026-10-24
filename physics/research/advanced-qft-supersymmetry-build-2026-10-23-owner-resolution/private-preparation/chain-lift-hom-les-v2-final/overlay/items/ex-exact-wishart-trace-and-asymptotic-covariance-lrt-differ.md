@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-exact-wishart-trace-and-asymptotic-covariance-lrt-differ.md

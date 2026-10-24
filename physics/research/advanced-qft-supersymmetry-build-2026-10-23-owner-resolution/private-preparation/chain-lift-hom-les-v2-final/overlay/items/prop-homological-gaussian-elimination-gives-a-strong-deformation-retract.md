@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-homological-gaussian-elimination-gives-a-strong-deformation-retract.md

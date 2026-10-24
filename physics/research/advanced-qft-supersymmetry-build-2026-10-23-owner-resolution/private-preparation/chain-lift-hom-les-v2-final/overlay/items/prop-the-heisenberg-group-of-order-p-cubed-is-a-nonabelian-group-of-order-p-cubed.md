@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-heisenberg-group-of-order-p-cubed-is-a-nonabelian-group-of-order-p-cubed.md

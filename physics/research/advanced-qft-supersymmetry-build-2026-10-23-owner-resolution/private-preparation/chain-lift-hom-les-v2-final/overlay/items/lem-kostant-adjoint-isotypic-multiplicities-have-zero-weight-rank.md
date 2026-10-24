@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-kostant-adjoint-isotypic-multiplicities-have-zero-weight-rank.md

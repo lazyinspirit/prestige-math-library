@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-radial-geodesics-from-one-point-reach-every-point-under-global-exp-domain.md

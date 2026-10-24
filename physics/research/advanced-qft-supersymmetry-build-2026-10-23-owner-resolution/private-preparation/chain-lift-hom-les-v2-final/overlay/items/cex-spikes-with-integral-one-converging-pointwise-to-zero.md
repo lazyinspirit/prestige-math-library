@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-spikes-with-integral-one-converging-pointwise-to-zero.md

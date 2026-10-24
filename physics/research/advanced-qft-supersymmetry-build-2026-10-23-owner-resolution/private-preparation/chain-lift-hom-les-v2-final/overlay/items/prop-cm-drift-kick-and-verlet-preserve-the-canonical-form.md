@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-cm-drift-kick-and-verlet-preserve-the-canonical-form.md

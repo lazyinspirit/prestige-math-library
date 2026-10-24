@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-one-dimensional-form-attains-the-lax-milgram-one-over-alpha-bound.md

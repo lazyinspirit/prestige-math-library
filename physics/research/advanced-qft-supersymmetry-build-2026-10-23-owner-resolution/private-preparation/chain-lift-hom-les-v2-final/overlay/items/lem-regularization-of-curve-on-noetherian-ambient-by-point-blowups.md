@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-regularization-of-curve-on-noetherian-ambient-by-point-blowups.md

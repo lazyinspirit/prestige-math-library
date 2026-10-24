@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-all-relevant-characteristic-numbers-vanish-on-null-cobordant-manifolds.md

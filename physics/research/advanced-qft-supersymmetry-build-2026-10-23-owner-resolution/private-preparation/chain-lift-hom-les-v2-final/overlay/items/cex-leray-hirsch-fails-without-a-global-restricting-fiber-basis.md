@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-leray-hirsch-fails-without-a-global-restricting-fiber-basis.md

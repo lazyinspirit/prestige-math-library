@@ -1,0 +1,11 @@
+# Independent audit preparation; no final verdict
+
+The first lexical Round 2 boundary is not cleared. Its actual ordinary Markdown link-title counterexample is preserved in `markdown-title-preview.json`; the accepted cluster was a link title, not prose. The earlier HTML-attribute defect and the absent-diagram-fields mismatch are Root-confirmed in the private V2 dossier. Neither counterexample authorizes source adoption.
+
+The replacement design uses the installed statement renderer Markdown parser, with changed-step AST node allowlist and source offsets. Removed and terminal support clusters must be actual text ranges; the old double-dollar expression must be an exact standalone math range and the new expression an exact inlineMath range. All other protected code, wiki and math bytes remain exact. Whole-source reference definitions are rejected to avoid step-local role ambiguity.
+
+The runtime descriptor follows the installed declared dependency graph of unified, remark-parse, remark-gfm and remark-math and binds implementation/JSON/native files, application package/lock files and the Node executable. This is a conservative installed-file closure, not an executed-import trace or a proof against hostile in-process monkey-patching. Initial load, every use and every parse are checked against the initial descriptor; a cached parser must never be restamped after disk drift. The descriptor is independently cloned and its inputs must be consumed by the main authenticated binder and native recursive evidence snapshot.
+
+The absent-diagram-fields exception is bounded to a nonempty collection of strict support-consolidation deltas, an explicit true mathematical-meaning judgment, both keys absent, and no source Remarks or recognized graphical/code contexts. Partial, null or contradictory keys remain errors; ordinary and mixed V2 proof deltas retain the existing requirements.
+
+Actual source scientific correctness and direct/indirect mathematics consumer review remain Index/Root duties. This audit examines extraction and evidence boundaries; it neither authenticates a main repair nor accepts a supplier or consumer. Final tests and a final hash-bound report will be written only after RG final freeze.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits.md

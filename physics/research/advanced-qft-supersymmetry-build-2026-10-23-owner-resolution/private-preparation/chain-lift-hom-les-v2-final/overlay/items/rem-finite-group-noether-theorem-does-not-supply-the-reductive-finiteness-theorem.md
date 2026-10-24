@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-finite-group-noether-theorem-does-not-supply-the-reductive-finiteness-theorem.md

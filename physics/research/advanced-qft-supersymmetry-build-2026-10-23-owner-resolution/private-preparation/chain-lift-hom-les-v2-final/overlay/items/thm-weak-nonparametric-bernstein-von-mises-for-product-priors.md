@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-weak-nonparametric-bernstein-von-mises-for-product-priors.md

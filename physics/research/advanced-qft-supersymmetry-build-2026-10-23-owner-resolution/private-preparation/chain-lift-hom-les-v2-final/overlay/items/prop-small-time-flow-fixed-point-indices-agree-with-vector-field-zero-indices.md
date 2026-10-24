@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-small-time-flow-fixed-point-indices-agree-with-vector-field-zero-indices.md

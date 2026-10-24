@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-sr-past-directed-timelike-parametrization-is-not-a-worldline.md

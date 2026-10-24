@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice.md

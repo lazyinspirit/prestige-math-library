@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-weyl-vector-is-the-sum-of-fundamental-weights.md

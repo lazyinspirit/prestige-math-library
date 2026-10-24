@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-objects-of-finite-length-form-an-abelian-subcategory.md

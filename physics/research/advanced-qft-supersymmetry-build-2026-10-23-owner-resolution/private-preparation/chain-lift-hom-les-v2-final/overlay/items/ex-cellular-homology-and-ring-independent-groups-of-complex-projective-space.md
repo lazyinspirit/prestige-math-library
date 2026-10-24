@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cellular-homology-and-ring-independent-groups-of-complex-projective-space.md

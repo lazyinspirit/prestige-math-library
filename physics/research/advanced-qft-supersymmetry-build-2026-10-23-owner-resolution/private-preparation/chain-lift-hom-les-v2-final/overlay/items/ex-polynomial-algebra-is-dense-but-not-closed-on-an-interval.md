@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-polynomial-algebra-is-dense-but-not-closed-on-an-interval.md

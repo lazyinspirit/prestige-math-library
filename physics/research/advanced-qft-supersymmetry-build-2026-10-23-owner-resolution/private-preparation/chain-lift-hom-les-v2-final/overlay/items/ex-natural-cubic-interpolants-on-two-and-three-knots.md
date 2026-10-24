@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-natural-cubic-interpolants-on-two-and-three-knots.md

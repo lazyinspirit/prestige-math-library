@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-an-ordered-eigenvector-branch-need-not-be-differentiable-through-a-crossing.md

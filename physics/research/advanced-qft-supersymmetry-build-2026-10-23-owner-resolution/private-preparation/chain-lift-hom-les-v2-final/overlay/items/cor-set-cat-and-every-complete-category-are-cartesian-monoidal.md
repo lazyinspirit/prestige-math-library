@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-set-cat-and-every-complete-category-are-cartesian-monoidal.md

@@ -1,0 +1,60 @@
+{
+  "id": "thm-lies-theorem",
+  "agent": "/root/lie_017",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original tile 01 visibly prints dollar delimiters and the commands DIM and MATHFRAK in the uppercase proof-technique banner, while ordinary proof formulas render as math. Tile 02 was also independently inspected and contains the remaining proof.",
+      "action": "Replaced only the technique label with equivalent prose: induction on the dimension of the Lie algebra.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 49 replaces math inside a renderer plain-text technique field with equivalent prose. No mathematical statement, proof step, hypothesis, dependency, source, or metadata was changed.",
+  "source_lines_after": {
+    "49": "**Proof technique:** induction on the dimension of the Lie algebra."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "publication_status_preserved": true,
+  "metadata_byte_identical": true,
+  "before_raw_sha256": "0784676b54e56dfb47b9f2bf455861d081481a77b3867ba5ddacc9fa314d36ee",
+  "after_raw_sha256": "1b1b3cbca1bfdcff58aeade403da4aff0d2c6723723e975f553dcdd1915979d1",
+  "original_visual_inspection": [
+    "research/math-library-rendering-audit-2026-10-23/lie-theory/screenshots/thm-lies-theorem--01.png",
+    "research/math-library-rendering-audit-2026-10-23/lie-theory/screenshots/thm-lies-theorem--02.png"
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-lies-theorem.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 7 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-lies-theorem.md --json",
+      "exit_code": 0,
+      "result": "1 checked, 0 failed; induction pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-lies-theorem.md --json",
+      "exit_code": 0,
+      "result": "1 checked, no errors or warnings"
+    }
+  ],
+  "native_visual_inspection": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/lie-017/manifest.json",
+    "manifest_sha256": "40db93b8d4038c1c7e25e8e169f293c7354aeb9926d34dd9061081ed9a01c305",
+    "source_sha256": "1b1b3cbca1bfdcff58aeade403da4aff0d2c6723723e975f553dcdd1915979d1",
+    "inspected_original_resolution_tiles": [
+      "screenshots/thm-lies-theorem--01.png",
+      "screenshots/thm-lies-theorem--02.png"
+    ],
+    "result": "Fresh native local preview displays the technique as readable uppercase prose without dollar delimiters or TeX commands. Statement, Facts and all seven proof rows remain visually rendered.",
+    "limitations": "Local ItemBody preview, not production route coverage; reference map reports 13 unrelated parsing diagnostics."
+  },
+  "renderer_limitation": "Proof technique banners insert plain React text and apply CSS uppercase rather than parsing inline math; this item uses a prose workaround."
+}

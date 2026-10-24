@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rouquier-normalized-comparison-isomorphisms-are-transitive.md

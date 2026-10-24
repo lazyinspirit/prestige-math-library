@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-recurrence-of-the-two-dimensional-simple-symmetric-random-walk.md

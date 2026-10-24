@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-square-map-is-well-defined-and-refines-the-commutator-pairing.md

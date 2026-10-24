@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-type-a-finite-hecke-algebra-is-noncanonically-isomorphic-to-csn.md

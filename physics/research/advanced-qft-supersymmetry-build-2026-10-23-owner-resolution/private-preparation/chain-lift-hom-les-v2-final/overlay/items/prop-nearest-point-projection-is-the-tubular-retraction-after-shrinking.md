@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-nearest-point-projection-is-the-tubular-retraction-after-shrinking.md

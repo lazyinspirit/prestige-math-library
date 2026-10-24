@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-full-group-c-star-seminorm-is-finite-and-separates-the-required-quotient.md

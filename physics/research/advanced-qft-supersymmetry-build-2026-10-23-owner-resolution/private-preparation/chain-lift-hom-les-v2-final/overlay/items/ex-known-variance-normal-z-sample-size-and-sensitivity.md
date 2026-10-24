@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-known-variance-normal-z-sample-size-and-sensitivity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-canonical-morphism-from-a-finite-coproduct-to-a-finite-product.md

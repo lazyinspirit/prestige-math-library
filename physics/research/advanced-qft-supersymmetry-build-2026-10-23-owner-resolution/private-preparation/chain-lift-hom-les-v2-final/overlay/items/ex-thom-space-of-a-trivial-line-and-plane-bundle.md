@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-thom-space-of-a-trivial-line-and-plane-bundle.md

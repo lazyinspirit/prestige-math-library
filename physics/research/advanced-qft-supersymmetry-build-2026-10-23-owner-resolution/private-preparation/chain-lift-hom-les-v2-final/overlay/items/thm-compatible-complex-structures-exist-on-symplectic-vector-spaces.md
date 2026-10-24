@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-compatible-complex-structures-exist-on-symplectic-vector-spaces.md

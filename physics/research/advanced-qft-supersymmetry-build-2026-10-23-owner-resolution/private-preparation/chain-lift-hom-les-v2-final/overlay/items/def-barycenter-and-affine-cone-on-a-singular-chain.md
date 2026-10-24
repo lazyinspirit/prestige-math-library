@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-barycenter-and-affine-cone-on-a-singular-chain.md

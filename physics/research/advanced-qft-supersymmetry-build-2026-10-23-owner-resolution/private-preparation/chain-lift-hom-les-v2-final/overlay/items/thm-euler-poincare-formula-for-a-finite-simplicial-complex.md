@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-euler-poincare-formula-for-a-finite-simplicial-complex.md

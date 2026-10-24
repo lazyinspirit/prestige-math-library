@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-tangent-zero-count-and-inward-boundary-sum-without-general-thom-existence.md

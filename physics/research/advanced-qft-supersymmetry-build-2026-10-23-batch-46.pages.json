@@ -1,0 +1,376 @@
+[
+  {
+    "order": 1002,
+    "id": "aqft-eft-experimental-inference",
+    "kind": "A",
+    "category": "advanced-qft-and-supersymmetry",
+    "library": "physics",
+    "title": "EFT Measurements, Global Fits and Search Likelihoods",
+    "companion": "aqft-eft-experimental-inference-examples",
+    "requires": [
+      "aqft-eft-matching-running",
+      "aqft-smeft-heft",
+      "aqft-eft-amplitudes",
+      "qftx-susy-breaking-and-phenomenology",
+      "cm-math-evidence",
+      "limsup-and-subsequential-limits",
+      "sigma-algebras-and-borel-sets",
+      "measures-and-their-basic-properties"
+    ],
+    "items": [
+      {
+        "id": "def-aqft-profile-likelihood-ratio",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Profile likelihood ratios with nuisance parameters",
+        "reference": "items/def-aqft-profile-likelihood-ratio.md",
+        "design_state": "Step 1 authored draft; current readiness is recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-cm-likelihood-function",
+          "def-extended-reals",
+          "lem-extended-reals-complete"
+        ],
+        "dependency_roles": {
+          "def-cm-likelihood-function": "mathematical-premise",
+          "def-extended-reals": "mathematical-premise",
+          "lem-extended-reals-complete": "mathematical-premise"
+        },
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $(S,\\mathcal S)$ be a measurable data space, let $\\nu$ be a measure on it, and let $\\Psi$ and $H$ be nonempty parameter sets. For each $(\\psi,\\eta)\\in\\Psi\\times H$, let $p_{\\psi,\\eta}:S\\to[0,+\\infty]$ be a specified measurable density with $\\int_S p_{\\psi,\\eta}\\,d\\nu=1$. A specified pointwise version of each density is part of the model because an observed-data likelihood can depend on the representative chosen within an almost-everywhere equivalence class. The coordinate $\\psi$ is the parameter of interest; $\\eta$ is a nuisance coordinate, meaning that it is retained in the probability model but is not the parameter whose value is tested or reported. The common dominating measure $\\nu$ and the full density family are part of the model.\n\nFor observed data $s\\in S$, define the likelihood $L_s(\\psi,\\eta)=p_{\\psi,\\eta}(s)$. Take both suprema below in the extended real line and suppose the global supremum\n$$M_s:=\\sup_{(\\psi',\\eta')\\in\\Psi\\times H}L_s(\\psi',\\eta')$$\nsatisfies $0<M_s<+\\infty$. For each $\\psi\\in\\Psi$, define the profile likelihood $M_s(\\psi)=\\sup_{\\eta\\in H}L_s(\\psi,\\eta)$ and the profile likelihood ratio\n$$\\lambda_s(\\psi):=\\frac{M_s(\\psi)}{M_s}\\in[0,1].$$\nThe associated likelihood-ratio statistic is\n$$q_s(\\psi):=\\begin{cases}-2\\log\\lambda_s(\\psi),&\\lambda_s(\\psi)>0,\\\\ +\\infty,&\\lambda_s(\\psi)=0,\\end{cases}$$\nwhere $\\log$ is the real natural logarithm on $(0,\\infty)$. These definitions use suprema and do not require a maximizing parameter value to exist. The distribution of $q_s$, a p-value calibration, and the coverage of a confidence set require additional model and sampling assumptions; none follows from this definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Glen Cowan, Kyle Cranmer, Eilam Gross, and Ofer Vitells, “Asymptotic formulae for likelihood-based tests of new physics”",
+              "url": "https://arxiv.org/pdf/1007.1727v3",
+              "locator": "Section 2, equations (7)–(8), with the conditional and unconditional nuisance-parameter fits distinguished."
+            },
+            {
+              "title": "Larry Wasserman, All of Statistics: A Concise Course in Statistical Inference",
+              "url": "https://sites.santafe.edu/~aaronc/shared/Wasserman_AllOfStatistics_BOOK.pdf",
+              "locator": "Chapter 10, §10.6, Definition 10.21 and Theorem 10.22, likelihood-ratio testing with constrained parameter sets."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Pure statistical-mathematical definition; it makes no physical or empirical claim.",
+        "proof_strategy": "not-applicable",
+        "axiom_base": "ZF"
+      },
+      {
+        "id": "def-aqft-calibrated-pvalue",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Upper-tail p-values under an explicit null calibration",
+        "reference": "items/def-aqft-calibrated-pvalue.md",
+        "design_state": "Step 1 authored draft; current readiness is recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-cm-statistical-test-and-size",
+          "def-probability-measure"
+        ],
+        "dependency_roles": {
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-cm-statistical-test-and-size": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise"
+        },
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $(S,\\mathcal S,\\{\\mathbb P_\\theta\\}_{\\theta\\in\\Theta})$ be a statistical model, let $\\Theta_0\\subseteq\\Theta$ be a nonempty null set, and let $T:S\\to\\mathbb R$ be a statistic whose upper-tail sets are measurable. Fix an explicit calibration probability measure $Q_0$ on $(\\mathbb R,\\mathcal B(\\mathbb R))$ for the statistic under the null procedure. For a simple null $\\Theta_0=\\{\\theta_0\\}$, the exact calibration is $Q_0=\\mathbb P_{\\theta_0}\\circ T^{-1}$. For a composite null or an asymptotic analysis, $Q_0$ is supplied by the specified calibration procedure, whose nuisance-parameter treatment and approximation assumptions are part of the data.\n\nFor an observed datum $s\\in S$, with the convention that larger $T$ values are more extreme, the upper-tail p-value is\n$$p_0(s):=Q_0\\bigl(\\{t\\in\\mathbb R:t\\ge T(s)\\}\\bigr).$$\nIt is a probability under the stated null calibration for a test statistic at least as extreme as the observed one. It is not a probability assigned to the null hypothesis conditional on the data; no probability distribution on $\\Theta$ is supplied by this definition. The definition alone establishes neither type-I error control nor super-uniformity; any such validity claim requires a separate argument for the specified sampling model and calibration. A lower-tail or two-sided procedure must specify its own measurable extremeness set instead of using the displayed upper-tail convention.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Larry Wasserman, All of Statistics: A Concise Course in Statistical Inference",
+              "url": "https://sites.santafe.edu/~aaronc/shared/Wasserman_AllOfStatistics_BOOK.pdf",
+              "locator": "Chapter 10, §§10.2 and 10.12, the nested-test and null-tail definitions and the warning that a p-value is not the probability the null is true."
+            },
+            {
+              "title": "Glen Cowan, Kyle Cranmer, Eilam Gross, and Ofer Vitells, “Asymptotic formulae for likelihood-based tests of new physics”",
+              "url": "https://arxiv.org/pdf/1007.1727v3",
+              "locator": "Section 2.1, equations (8)–(9), and Section 2.3, equation (13), p-values from the stated statistic distribution under the tested hypothesis."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Pure statistical-mathematical definition; it makes no physical or empirical claim.",
+        "proof_strategy": "not-applicable",
+        "axiom_base": "ZF"
+      },
+      {
+        "id": "def-aqft-cls-exclusion-ratio",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "CLs ratio for source-specified signal exclusions",
+        "reference": "items/def-aqft-cls-exclusion-ratio.md",
+        "design_state": "Step 1 authored draft; current readiness is recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-aqft-calibrated-pvalue"
+        ],
+        "dependency_roles": {
+          "def-aqft-calibrated-pvalue": "mathematical-premise"
+        },
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $(S,\\mathcal S)$ be a data space with two supplied probability laws $\\mathbb P_b$ and $\\mathbb P_{s+b}$ for the background-only and signal-plus-background hypotheses. Fix a statistic $T:S\\to\\mathbb R$ for which larger values are more incompatible with the signal-plus-background hypothesis and for which every upper-tail set is measurable. For observed datum $x\\in S$, set $R_x:=\\{y\\in S:T(y)\\ge T(x)\\}$ and define\n$$\\mathrm{CL}_b(x):=\\mathbb P_b(R_x),\\qquad \\mathrm{CL}_{s+b}(x):=\\mathbb P_{s+b}(R_x).$$\nWhen $\\mathrm{CL}_b(x)>0$, the modified-frequentist exclusion ratio is\n$$\\mathrm{CL}_s(x):=\\frac{\\mathrm{CL}_{s+b}(x)}{\\mathrm{CL}_b(x)}.$$\nA reported exclusion rule at threshold $\\alpha\\in(0,1)$ excludes a specified signal-plus-background hypothesis when its supplied analysis has $\\mathrm{CL}_s(x)<\\alpha$. The likelihood ratio, test statistic, nuisance treatment, and sampling laws are part of the specified analysis. The ratio is not itself a probability or a frequentist coverage level; in the cited method it is a conservative, frequentist-motivated approximation used to present exclusion results. It does not give the probability that a signal model is true or false.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. L. Read, “Presentation of search results: the CLs technique,” Journal of Physics G 28 (2002), 2693–2704",
+              "url": "https://indico.cern.ch/event/398949/attachments/799330/1095613/The_CLs_Technique.pdf",
+              "locator": "Section 2, especially §§2.1–2.2, the definitions and interpretation limits of CLb, CLs+b, and CLs."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Pure statistical-mathematical definition of a source-specified exclusion statistic; it makes no physical or empirical claim.",
+        "proof_strategy": "not-applicable",
+        "axiom_base": "ZF"
+      }
+    ]
+  },
+  {
+    "order": 1002,
+    "id": "aqft-eft-experimental-inference-examples",
+    "kind": "B",
+    "category": "advanced-qft-and-supersymmetry",
+    "library": "physics",
+    "title": "EFT Measurements, Global Fits and Search Likelihoods — Examples",
+    "companion": "aqft-eft-experimental-inference",
+    "requires": [
+      "aqft-eft-experimental-inference",
+      "cm-math-evidence",
+      "aqft-smeft-heft",
+      "sr-energy-momentum"
+    ],
+    "items": [
+      {
+        "id": "exp-aqft-atlas-global-smeft-fit-2026",
+        "kind": "experiment",
+        "domain": "physics",
+        "title": "ATLAS global dimension-six SMEFT fit",
+        "reference": "items/exp-aqft-atlas-global-smeft-fit-2026.md",
+        "design_state": "Step 1 authored draft; current readiness is recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "def-cm-measurement-model",
+          "def-cm-likelihood-function",
+          "def-cm-statistical-test-and-size",
+          "def-cm-confidence-set-and-coverage",
+          "def-aqft-profile-likelihood-ratio",
+          "def-aqft-calibrated-pvalue",
+          "post-aqft-smeft-model",
+          "def-aqft-warsaw-basis-contract"
+        ],
+        "dependency_roles": {
+          "def-cm-measurement-model": "operational-prerequisite",
+          "def-cm-likelihood-function": "formulation-prerequisite",
+          "def-cm-statistical-test-and-size": "formulation-prerequisite",
+          "def-cm-confidence-set-and-coverage": "formulation-prerequisite",
+          "def-aqft-profile-likelihood-ratio": "formulation-prerequisite",
+          "def-aqft-calibrated-pvalue": "formulation-prerequisite",
+          "post-aqft-smeft-model": "formulation-prerequisite",
+          "def-aqft-warsaw-basis-contract": "formulation-prerequisite"
+        },
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "The collaboration reports no statistically significant overall deviation from the Standard Model and quotes a $99\\%$ compatibility $p$-value for its specified goodness-of-fit test. It also identifies an electroweak-precision coefficient direction, denoted $c^{[19]}_{HVV,Vff}$ in the article, as pulled by the known tension between the measured $A_{\\rm FB}^{b,c}$ asymmetries and the Standard Model prediction. The overall fit statement therefore does not mean that every coefficient is individually within two standard deviations. A $p$-value is a tail probability under the stated null calibration, not the probability that the Standard Model is true.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "ATLAS Collaboration, “Effective field theory interpretation of ATLAS measurements involving the Higgs boson, electroweak bosons and the top quark”",
+              "url": "https://arxiv.org/pdf/2604.21670v2",
+              "locator": "Sections 2.5–2.7 (inputs and event overlaps), 3.1–3.2 (48-coefficient dimension-six parameterization and truncation), 4 (likelihood and nuisance treatment), and 5.3–5.4 (results and electroweak-pull qualification)."
+            },
+            {
+              "title": "Larry Wasserman, All of Statistics: A Concise Course in Statistical Inference",
+              "url": "https://sites.santafe.edu/~aaronc/shared/Wasserman_AllOfStatistics_BOOK.pdf",
+              "locator": "Chapter 10 §10.2, the null-tail p-value definition and distinction from the probability of a null hypothesis."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Source-reported ATLAS Run 2 and LEP/SLD input measurements combined in the collaboration's 48-direction dimension-six SMEFT analysis. This record does not reprocess events, reconstruct component likelihoods, or audit every detector calibration.",
+        "empirical_premises": []
+      },
+      {
+        "id": "exp-aqft-cms-global-smeft-fit-2026",
+        "kind": "experiment",
+        "domain": "physics",
+        "title": "CMS global dimension-six SMEFT fit",
+        "reference": "items/exp-aqft-cms-global-smeft-fit-2026.md",
+        "design_state": "Step 1 authored draft; current readiness is recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "def-cm-measurement-model",
+          "def-cm-likelihood-function",
+          "def-cm-statistical-test-and-size",
+          "def-cm-confidence-set-and-coverage",
+          "def-aqft-profile-likelihood-ratio",
+          "def-aqft-calibrated-pvalue",
+          "post-aqft-smeft-model",
+          "def-aqft-warsaw-basis-contract"
+        ],
+        "dependency_roles": {
+          "def-cm-measurement-model": "operational-prerequisite",
+          "def-cm-likelihood-function": "formulation-prerequisite",
+          "def-cm-statistical-test-and-size": "formulation-prerequisite",
+          "def-cm-confidence-set-and-coverage": "formulation-prerequisite",
+          "def-aqft-profile-likelihood-ratio": "formulation-prerequisite",
+          "def-aqft-calibrated-pvalue": "formulation-prerequisite",
+          "post-aqft-smeft-model": "formulation-prerequisite",
+          "def-aqft-warsaw-basis-contract": "formulation-prerequisite"
+        },
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "For its 43-direction fit, CMS reports a Standard Model compatibility $p$-value of $2.5\\%$. The reported value rises to $27\\%$ when the inclusive-jet input is removed. The paper identifies inclusive-jet data as the main source of the tension and notes sensitivity to parton-distribution-function choices. This is a fit-specific departure from the collaboration's null calibration, not evidence that new physics or a particular operator has been observed and not the probability that the Standard Model is false.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "CMS Collaboration, “Combined effective field theory interpretation of Higgs boson, electroweak vector boson, top quark, and multi-jet measurements”",
+              "url": "https://arxiv.org/pdf/2504.02958v2",
+              "locator": "Sections 1–3 (input measurements and parameterization), likelihood and systematic-correlation sections, results and compatibility tests, and appendix pseudoexperiment coverage study."
+            },
+            {
+              "title": "Larry Wasserman, All of Statistics: A Concise Course in Statistical Inference",
+              "url": "https://sites.santafe.edu/~aaronc/shared/Wasserman_AllOfStatistics_BOOK.pdf",
+              "locator": "Chapter 10 §10.2, the null-tail p-value definition and distinction from the probability of a null hypothesis."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Source-reported CMS global dimension-six SMEFT fit combining seven CMS measurement sets and electroweak precision inputs. This item does not reanalyse the component datasets or claim that the fit tension is evidence for new physics.",
+        "empirical_premises": []
+      },
+      {
+        "id": "exp-aqft-cms-multiboson-smeft-2026",
+        "kind": "experiment",
+        "domain": "physics",
+        "title": "CMS multiboson dimension-six SMEFT combination",
+        "reference": "items/exp-aqft-cms-multiboson-smeft-2026.md",
+        "design_state": "Step 1 authored draft; current readiness is recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "def-cm-measurement-model",
+          "def-cm-likelihood-function",
+          "def-cm-statistical-test-and-size",
+          "def-aqft-profile-likelihood-ratio",
+          "post-aqft-smeft-model",
+          "def-aqft-warsaw-basis-contract",
+          "def-sr-total-four-momentum-and-invariant-mass"
+        ],
+        "dependency_roles": {
+          "def-cm-measurement-model": "operational-prerequisite",
+          "def-cm-likelihood-function": "formulation-prerequisite",
+          "def-cm-statistical-test-and-size": "formulation-prerequisite",
+          "def-aqft-profile-likelihood-ratio": "formulation-prerequisite",
+          "post-aqft-smeft-model": "formulation-prerequisite",
+          "def-aqft-warsaw-basis-contract": "formulation-prerequisite",
+          "def-sr-total-four-momentum-and-invariant-mass": "mathematical-premise"
+        },
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "The PAS reports no significant deviation from the Standard Model and says every fitted coefficient is compatible with zero within one standard deviation. The following are its Table 4 single-coefficient **linear-plus-quadratic** intervals, with all other coefficients fixed to zero. They are conditional intervals for the tabulated coefficient combinations in $\\mathrm{TeV}^{-2}$, not simultaneous six-parameter bounds. In the dimensionless-coefficient convention of the supplied Warsaw contract, these units correspond to coefficient divided by the EFT scale squared; no particular new-physics scale is inferred. “Expected” denotes the source's SM-only expectation; “observed” uses its data. Column labels retain the PAS's rounded confidence-level labels and the threshold convention stated above.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "CMS Collaboration, CMS PAS SMP-25-002, Constraints on Effective Field Theory operators from multiboson production measurements at sqrt(s) = 13 TeV (30 July 2026)",
+              "url": "https://inspirehep.net/files/e9aa001bdef81c4b728fdafbdc261122",
+              "locator": "Complete 32-page PAS; §§1–9, Tables 1–5, Appendix A–F text/captions. Table4 on printed p.13/PDF p.15 and Wilks thresholds on printed p.8/PDF p.10 visually verified; original input-analysis/calibration papers and numerical plot digitization excluded."
+            },
+            {
+              "title": "M. Cacciari, G. P. Salam and G. Soyez, The anti-kt jet clustering algorithm",
+              "url": "https://arxiv.org/pdf/0802.1189",
+              "locator": "§1, equations (1a)–(1b), printed pp. 2–3: generalized sequential recombination distances, inclusive steps, and p=-1. Only the cover and algorithm-definition section were read; no later jet-property proof is invoked."
+            },
+            {
+              "title": "M. Cacciari, G. P. Salam and G. Soyez, FastJet user manual (version 3.0.1)",
+              "url": "https://arxiv.org/pdf/1111.6097",
+              "locator": "§2 printed pp. 5–6: rapidity and recombination context; §3.2 printed pp. 12–13 and opening of §3.4 printed p. 15: E-scheme four-vector sum/default. Only these definition passages were read, not a CMS configuration or calibration audit."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Source-reported preliminary CMS PAS SMP-25-002 detector-level 13 TeV Run-2 combination of ten measurements and six CP-even bosonic dimension-six coefficients, including its reported selections, controls, nuisance model and conditional intervals. Wilks calibration, source-internal reference/bin-edge ambiguities and absent raw likelihood/calibration data remain explicit; no independent experimental validation is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "exp-aqft-atlas-tau-squark-gluino-search-2025",
+        "kind": "experiment",
+        "domain": "physics",
+        "title": "ATLAS tau, jets, and missing-momentum squark and gluino search",
+        "reference": "items/exp-aqft-atlas-tau-squark-gluino-search-2025.md",
+        "design_state": "Step 1 authored draft; current readiness is recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-measurement-model",
+          "def-cm-likelihood-function",
+          "def-cm-statistical-test-and-size",
+          "def-cm-confidence-set-and-coverage",
+          "def-aqft-profile-likelihood-ratio",
+          "def-aqft-calibrated-pvalue",
+          "def-aqft-cls-exclusion-ratio"
+        ],
+        "dependency_roles": {
+          "def-cm-measurement-model": "operational-prerequisite",
+          "def-cm-likelihood-function": "formulation-prerequisite",
+          "def-cm-statistical-test-and-size": "formulation-prerequisite",
+          "def-cm-confidence-set-and-coverage": "formulation-prerequisite",
+          "def-aqft-profile-likelihood-ratio": "formulation-prerequisite",
+          "def-aqft-calibrated-pvalue": "formulation-prerequisite",
+          "def-aqft-cls-exclusion-ratio": "formulation-prerequisite"
+        },
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "The collaboration reports no statistically significant overall deviation from the background-only expectation. Its most compatible machine-learning benchmark, labelled GG(1300,1200), has a local $p$-value $0.00058$, quoted as $3.2$ standard deviations; this is a local value at the tested benchmark, not an overall search significance. The observed $95\\%$ $CL_s$ contours reach gluino masses up to $2.25\\ {\\rm TeV}$ in the machine-learning analysis and $2.3\\ {\\rm TeV}$ in the cut-and-count analysis, and squark masses up to $1.35\\ {\\rm TeV}$ and $1.7\\ {\\rm TeV}$, respectively, in the corresponding source-defined mass planes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "ATLAS Collaboration, “Search for squarks and gluinos in pp collisions at √s = 13 TeV and 13.6 TeV in events with τ-leptons, jets and missing transverse momentum using the ATLAS detector”",
+              "url": "https://arxiv.org/html/2507.00296v2",
+              "locator": "Sections 2–4 (simplified models, data, reconstruction, trigger and selections), 7–8 (backgrounds, statistical model and nuisance correlations), and 9 (local fit, CLs contours, and conclusions)."
+            },
+            {
+              "title": "Larry Wasserman, All of Statistics: A Concise Course in Statistical Inference",
+              "url": "https://sites.santafe.edu/~aaronc/shared/Wasserman_AllOfStatistics_BOOK.pdf",
+              "locator": "Chapter 10 §10.2, the null-tail p-value definition and distinction from the probability of a null hypothesis."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "ATLAS search for R-parity-conserving simplified squark and gluino models in tau, jets, and missing-transverse-momentum final states. The reported contours and local compatibility value apply only to the source's stated spectra, branching fractions, and analysis.",
+        "empirical_premises": []
+      }
+    ]
+  }
+]

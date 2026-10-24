@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-kleisli-and-eilenberg-moore-categories-are-equivalent-for-an-idempotent-monad.md

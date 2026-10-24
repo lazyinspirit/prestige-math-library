@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-minus-log-boundary-distance-is-plurisubharmonic-on-a-half-space.md

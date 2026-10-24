@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-c1-foliated-atlas-preserves-plaque-equivalence-and-transverse-orientation.md

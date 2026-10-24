@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-filtered-chain-map-induces-a-morphism-of-spectral-sequences.md

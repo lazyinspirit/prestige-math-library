@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-additive-categories-are-closed-under-passage-to-the-opposite.md

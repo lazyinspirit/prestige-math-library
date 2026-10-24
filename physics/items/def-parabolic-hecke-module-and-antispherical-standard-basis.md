@@ -1,0 +1,115 @@
+---
+id: def-parabolic-hecke-module-and-antispherical-standard-basis
+kind: definition
+title: "The parabolic Hecke module and the antispherical standard basis"
+status: published
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 0
+deps: [def-normalized-type-a-hecke-algebra-and-its-bar-involution,
+       thm-standard-basis-of-the-generic-type-a-hecke-algebra,
+       def-generic-type-a-hecke-algebra, def-symmetric-group,
+       def-weyl-group-and-length-for-finite-gl-n,
+       def-cg-parabolic-quotient-and-two-sided-minima,
+       thm-hh-parabolic-minimal-representatives-and-length-additivity,
+       thm-cg-parabolic-intersections-and-coset-factorization,
+       thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]
+justified_by: [lem-the-parabolic-hecke-modules-have-standard-bases-actions-and-compatible-bars]
+aliases: []
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  precheck: n/a
+sources:
+  references:
+    - title: "Nicolas Libedinsky and Geordie Williamson, The anti-spherical category (author-hosted complete PDF of the article)"
+      url: "https://nicolaslibedinsky.com/wp-content/uploads/2022/01/Antispherical.pdf"
+      locator: "Section 2.4-2.6 (printed pp. 6-8): the parabolic subgroups, the two characters L(-v) and L(v^{-1}), the induced modules N and M, their standard bases over the minimal coset representatives ^IW, the right action formulas (2.5)-(2.6) and the bar compatibility (2.7); complete sections read."
+    - title: "Volodymyr Mazorchuk and Catharina Stroppel, Translation and shuffling of projectively presentable modules and a categorification of a parabolic Hecke module, Trans. Amer. Math. Soc. 357 (2005) 2939-2973 (author-hosted published version)"
+      url: "http://www.math.uni-bonn.de/people/stroppel/Shuffling.pdf"
+      locator: "Section 7.2 (printed pp. 2964-2965): the parabolic Hecke module Z[v,v^-1] (x)_{Hp} H with Hp acting by v^-1, its standard basis over the distinguished minimal-length representatives and Lemma 7.5; complete passage read."
+    - title: "Anders Bjoerner and Francesco Brenti, Combinatorics of Coxeter Groups, Graduate Texts in Mathematics 231, Springer 2005 (author-hosted complete 370-page PDF)"
+      url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+      locator: "Chapter 1 (printed pp. 1-30) and Section 5.1 (printed pp. 134-135): Coxeter systems, parabolic subgroups, coset representatives and the Hecke algebra conventions; complete passages read."
+---
+
+## Definition
+
+Work with the normalized type-$A$ Hecke algebra $H_v(n)$ over
+$A=\mathbb Z[v^{\pm1}]$ of
+[[def-normalized-type-a-hecke-algebra-and-its-bar-involution]]: generators
+$H_s$ with $H_s^2=1+(v^{-1}-v)H_s$, standard basis $\{H_w:w\in S_n\}$, bar
+involution $\overline{H_s}=H_s^{-1}=H_s-(v^{-1}-v)$ and Kazhdan--Lusztig basis
+$\{\underline H_w\}$ of
+[[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]], so that
+$\underline H_s=H_s+v$. The underlying Coxeter data are those of
+[[def-symmetric-group]], [[def-weyl-group-and-length-for-finite-gl-n]] and
+[[def-generic-type-a-hecke-algebra]].
+
+Fix $J\subseteq S=\{s_1,\dots,s_{n-1}\}$, let $W_J=\langle s:s\in J\rangle\subseteq S_n$
+be the standard parabolic subgroup and let
+$\Phi_J=\Phi\cap\operatorname{span}_{\mathbb R}\{\alpha_s:s\in J\}$ be its
+standard type-$A$ root subsystem, all in the conventions of
+[[def-cg-parabolic-quotient-and-two-sided-minima]].
+
+**The two characters.** Let $H_J\subseteq H_v(n)$ be the subalgebra generated
+by $\{H_s:s\in J\}$. For $s\in J$ the quadratic relation makes $v^{-1}$ and
+$-v$ the two roots of $x^2-(v^{-1}-v)x-1=0$, so there are well-defined algebra
+homomorphisms $\varphi_+,\varphi_-:H_J\to A$ with
+
+$$\varphi_+(H_s)=v^{-1},\qquad \varphi_-(H_s)=-v\qquad(s\in J).$$
+
+Viewing $A$ through $\varphi_+$ (resp. $\varphi_-$) as a right $H_J$-module
+gives the **spherical parabolic module** $M^J:=A\otimes_{H_J}H_v(n)$ and the
+**antispherical parabolic module** $N^J:=A\otimes_{H_J}H_v(n)$, right
+$H_v(n)$-modules under right multiplication on the second factor.
+
+**Coset representatives.** Throughout, $\Phi^+$ is the positive system of
+$\Phi$ and $\Phi_J^+=\Phi_J\cap\Phi^+$, and
+
+$${}^JW:=\{w\in S_n:\ell(sw)>\ell(w)\ \text{for all }s\in J\},\qquad W^J:=\{w\in S_n:\ell(ws)>\ell(w)\ \text{for all }s\in J\}$$
+
+are the left-minimal and right-minimal representatives of the cosets
+$W_Jw$ and $wW_J$, respectively. By
+[[thm-hh-parabolic-minimal-representatives-and-length-additivity]] and
+[[thm-cg-parabolic-intersections-and-coset-factorization]] every $w\in S_n$
+factors uniquely as $w=l y$ with $l\in W_J$, $y\in{}^JW$ and
+$\ell(w)=\ell(l)+\ell(y)$, and inversion interchanges ${}^JW$ and $W^J$.
+
+**Standard bases.** For $x\in{}^JW$ define
+$$m_x:=1\otimes H_x\in M^J,\qquad n_x:=1\otimes H_x\in N^J.$$
+The families $\{m_x:x\in{}^JW\}$ and $\{n_x:x\in{}^JW\}$ are the
+**spherical standard basis** and **antispherical standard basis**, respectively.
+Their basis property is proved in
+[[lem-the-parabolic-hecke-modules-have-standard-bases-actions-and-compatible-bars]]
+(1), by the free left $H_J$-module decomposition
+$H_v(n)=\bigoplus_{x\in{}^JW}H_JH_x$ and tensoring with the character modules.
+
+## Remarks
+
+- **Well-definedness of $\varphi_\pm$.** Assign every generator $H_s$ of
+  the full presented algebra $H_v(n)$ the same scalar $v^{-1}$, respectively
+  $-v$. Direct expansion verifies the quadratic relation; both sides of
+  each braid or commutation relation have the same scalar value. Thus the
+  assignments define algebra maps $H_v(n)\to A$. Restricting these maps to
+  $H_J$ gives $\varphi_\pm$, without assuming a presentation for the
+  embedded subalgebra.
+- **Module structure.** For a right $H_J$-module $B$, the tensor product
+  $B\otimes_{H_J}H_v(n)$ is a right $H_v(n)$-module by right multiplication on
+  the second factor; the two modules $M^J$ and $N^J$ differ only in the
+  $H_J$-action on $A$, which is trivial ($v^{-1}$) for $M^J$ and sign
+  ($-v$) for $N^J$. The standard basis vectors are defined above; their basis property,
+  right actions and compatible bars are proved in
+  [[lem-the-parabolic-hecke-modules-have-standard-bases-actions-and-compatible-bars]].
+- **Normalization.** Spherical is $\varphi_+(H_s)=v^{-1}$ (the trivial
+  character at the parameter of the anti-spherical reference) and
+  antispherical is $\varphi_-(H_s)=-v$ (the sign character). The two are not
+  exchanged by any unit, and the small parabolic $S_3/S_2$ exhibits different
+  canonical coefficients; this is why both modules are recorded. The
+  singular-block multiplicities of this page are read in the spherical
+  normalization.
+- **Root subsystem.** $\Phi_J$ is a closed subsystem of the type-$A$ root
+  system and $\Phi_J^+=\Phi_J\cap\Phi^+$ is its positive system
+  ([[def-cg-parabolic-quotient-and-two-sided-minima]],
+  [[thm-cg-parabolic-intersections-and-coset-factorization]] (2)).

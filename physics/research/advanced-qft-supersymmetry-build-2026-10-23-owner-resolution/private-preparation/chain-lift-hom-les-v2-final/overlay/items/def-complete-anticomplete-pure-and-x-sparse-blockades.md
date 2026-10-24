@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-complete-anticomplete-pure-and-x-sparse-blockades.md

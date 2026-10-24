@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-nonsymmetric-lax-milgram-is-not-a-scalar-minimisation-principle.md

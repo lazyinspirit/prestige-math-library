@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-global-lipschitz-scalar-ornstein-uhlenbeck-well-posedness.md

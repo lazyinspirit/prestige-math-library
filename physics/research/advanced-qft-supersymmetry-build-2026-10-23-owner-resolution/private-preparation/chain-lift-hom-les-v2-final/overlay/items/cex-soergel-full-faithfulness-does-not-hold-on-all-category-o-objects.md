@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-soergel-full-faithfulness-does-not-hold-on-all-category-o-objects.md

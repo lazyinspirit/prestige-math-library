@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-kurosh-says-every-subgroup-of-a-free-product-is-free.md

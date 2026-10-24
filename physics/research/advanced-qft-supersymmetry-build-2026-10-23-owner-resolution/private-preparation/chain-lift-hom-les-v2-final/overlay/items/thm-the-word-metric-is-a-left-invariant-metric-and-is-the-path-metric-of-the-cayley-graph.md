@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph.md

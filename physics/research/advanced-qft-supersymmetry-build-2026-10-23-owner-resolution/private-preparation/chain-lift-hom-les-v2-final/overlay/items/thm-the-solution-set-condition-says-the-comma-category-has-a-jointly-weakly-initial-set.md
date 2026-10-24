@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-solution-set-condition-says-the-comma-category-has-a-jointly-weakly-initial-set.md

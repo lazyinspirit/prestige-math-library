@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization.md

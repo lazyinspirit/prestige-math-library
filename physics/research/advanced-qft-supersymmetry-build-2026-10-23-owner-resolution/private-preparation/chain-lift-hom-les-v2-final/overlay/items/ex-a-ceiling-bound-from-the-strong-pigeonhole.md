@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-ceiling-bound-from-the-strong-pigeonhole.md

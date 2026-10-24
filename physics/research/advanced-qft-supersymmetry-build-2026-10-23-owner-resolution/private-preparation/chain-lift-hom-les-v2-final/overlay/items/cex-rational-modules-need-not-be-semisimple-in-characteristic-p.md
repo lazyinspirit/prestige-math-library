@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-rational-modules-need-not-be-semisimple-in-characteristic-p.md

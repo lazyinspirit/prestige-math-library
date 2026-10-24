@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-jantzen-layer-dimensions-equal-the-gram-determinant-valuation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-nonabelian-supersolvable-group-has-a-noncentral-normal-abelian-subgroup.md

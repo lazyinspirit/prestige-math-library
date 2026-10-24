@@ -1,0 +1,648 @@
+{
+  "version": 1,
+  "scope": [
+    "def-framed-u-n-instanton-moduli-and-adhm-data",
+    "lem-qftx-stable-adhm-partition-fixed-points-and-tangent-character",
+    "thm-adhm-fixed-point-instanton-count",
+    "ex-adhm-u1-one-box-fixed-point",
+    "ex-adhm-u2-one-instanton-fixed-points"
+  ],
+  "contracts": {
+    "def-framed-u-n-instanton-moduli-and-adhm-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes the nonempty one-point compactification S4 and does not define an empty base case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "definition: k=0 gives V=C^0 and the empty ADHM maps; the Uhlenbeck strata include the zero-charge flat sector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "definition: the ADHM data permit N=1, while the classical non-Abelian connection moduli is explicitly scoped to N>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "definition: for k=0 the data space is a point and the stability span is the zero vector space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "definition: zeta=0 is separately named and zeta>0 labels the resolved positive-FI chamber."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "definition: all vector spaces are fixed finite-dimensional spaces; full AC is stated only for the Chern-class definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states ADHM data, quotient relations, and compactification distinctions; it asserts no equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states ADHM data, quotient relations, and compactification distinctions; it asserts no equivalence theorem."
+        }
+      ]
+    },
+    "thm-adhm-fixed-point-instanton-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-adhm-linear-data-stability-and-regularity",
+          "source_section": "Definition",
+          "quote": "Fix integers $N\\ge1$ and $k\\ge0$ and standard Hermitian spaces $V=\\mathbb C^k$, $W=\\mathbb C^N$. A framed ADHM linear datum is $x=(B_1,B_2,I,J)$ with $B_i\\in\\operatorname{End}_{\\mathbb C}(V)$, $I:W\\to V$ and $J:V\\to W$. Define the complex and real polynomial expressions\n\n$$\\mu_{\\mathbb C}(x)=[B_1,B_2]+IJ,\\qquad \\mu_{\\mathbb R}(x)=[B_1,B_1^\\dagger]+[B_2,B_2^\\dagger]+II^\\dagger-J^\\dagger J.$$\n\nThe datum is stable if the vectors $B_{i_1}\\cdots B_{i_m}I(w)$, with $m\\ge0$, $i_j\\in\\{1,2\\}$ and $w\\in W$, span $V$. It is costable if there is no nonzero subspace of $V$ invariant under both $B_i$ and contained in $\\ker J$. It is regular if it is stable and costable. The group $GL(V)$ acts by $g\\cdot x=(gB_1g^{-1},gB_2g^{-1},gI,Jg^{-1})$. Its unitary subgroup is $U(V)$.\n\nWrite $X^s=\\{x:\\mu_{\\mathbb C}(x)=0,\\ x\\text{ stable}\\}$, $X^{\\mathrm{reg}}=\\{x\\in X^s:x\\text{ costable}\\}$ and, for real $\\zeta\\ge0$, $X_\\zeta^U=\\{x\\in X^s:\\mu_{\\mathbb R}(x)=\\zeta I_V\\}$. Denote the corresponding orbit sets by $X^s/GL(V)$, $X^{\\mathrm{reg}}/GL(V)$ and $X_\\zeta^U/U(V)$, with quotient topologies when discussing their analytic spaces. A word frame consists of $k$ columns obtained by fixed words in $B_1,B_2$ applied to fixed standard basis vectors of $W$.\n\nFor $T_{\\mathbb C}=(\\mathbb C^*)^2\\times(\\mathbb C^*)^N$, write $t_1,t_2,e_1,\\ldots,e_N$ for the coordinate characters and put $h=\\operatorname{diag}(e_1^{-1},\\ldots,e_N^{-1})$. Its action is $(t_1,t_2,h)\\cdot x=(t_1B_1,t_2B_2,Ih^{-1},t_1t_2hJ)$. The compact torus is its subgroup on which all characters have modulus one. The framing representation thus has character $\\sum_\\alpha e_\\alpha^{-1}$ and its dual has character $\\sum_\\alpha e_\\alpha$.\n\nThese are finite-dimensional matrix definitions. They do not assert a real/complex quotient correspondence, a sheaf or ASD identification, or a noncompact pushforward. In particular, positive-FI stability and zero-FI regularity are distinct conditions; neither an endpoint identification nor an ordinary ASD interpretation follows from this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-atiyah-bott-berline-vergne-integration-formula",
+          "source_section": "Statement",
+          "quote": "Work in $\\mathrm{ZF}+\\mathrm{AC}$. Let $T$ be a compact torus acting smoothly on a compact oriented smooth $n$-manifold $M$ without boundary; use the standard Hausdorff, second-countable manifold convention, and assume the action preserves the orientation. Write $F=M^T=\\coprod_{j=1}^{s}F_j$ for its fixed locus, with $s<\\infty$, and $i_j:F_j\\hookrightarrow M$ for each connected component. Give each normal bundle $\\nu_j$ a $T$-equivariant orientation and orient $F_j$ by $o(TM|_{F_j})=o(TF_j)\\wedge o(\\nu_j)$. Use real Borel equivariant cohomology, $\\mathcal R=H^*(BT;\\mathbb R)$, the multiplicative set $S$ generated by nonzero character classes, and the degree-shifting fiber-integration convention of the preceding definition. For every homogeneous $\\alpha\\in H_T^k(M;\\mathbb R)$,\n\n$$\\int_M\\alpha=\\sum_j\\int_{F_j}\\frac{i_j^*\\alpha}{e_T(\\nu_j)}\\quad\\text{in }S^{-1}H^{k-n}(BT;\\mathbb R).$$\n\nIf the fixed locus is nonempty and consists of isolated points, necessarily $n=2m$. Use the ambient orientation on each normal space $\\nu_p=T_pM$ and the positive orientation on each point $p$. Choose a $T$-invariant complex structure on each $T_pM$ and let $\\chi_{p,1},\\ldots,\\chi_{p,m}$ be its nonzero character weights. Let $\\epsilon_p=+1$ when its complex orientation agrees with the orientation of $M$ at $p$ and $-1$ otherwise. Then the same formula specializes to\n\n$$\\int_M\\alpha=\\sum_{p\\in M^T}\\frac{\\epsilon_p\\,i_p^*\\alpha}{\\prod_{a=1}^{m}u_{\\chi_{p,a}}}\\quad\\text{in }S^{-1}\\mathcal R.$$\n\nIf the fixed locus is empty, the fixed-component formula is the empty sum $0$ for every $n$; no parity condition or integer $m$ is needed in that case.\n\nThis is a finite-dimensional formula for compact manifolds; it does not assert a formula for arbitrary noncompact instanton spaces or infinite-dimensional field spaces.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qftx-stable-adhm-partition-fixed-points-and-tangent-character",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Fix integers $N\\geq1$ and $k\\geq0$ and a positive real stability parameter $\\zeta$. Let $V=\\mathbb C^k$ and $W=\\mathbb C^N$ have their standard Hermitian structures. Define $\\mathcal M^\\zeta_{k,N}$ to be the geometric quotient by $GL(V)$ of data $(B_1,B_2,I,J)$ with $B_i\\in\\operatorname{End}(V)$, $I\\in\\operatorname{Hom}(W,V)$, $J\\in\\operatorname{Hom}(V,W)$, $[B_1,B_2]+IJ=0$, and $\\operatorname{span}\\{B_{i_1}\\cdots B_{i_m}I(w):m\\geq0,\\ w\\in W\\}=V$. The positive parameter $\\zeta$ specifies the positive-FI stability chamber. Let $T=(S^1)^2\\times(S^1)^N$, with rotation characters $t_1,t_2$ and dual framing characters $e_1,\\ldots,e_N$. Thus $W$ has character $\\mathbf W=\\sum_\\alpha e_\\alpha^{-1}$ and $W^\\vee$ has character $\\mathbf W^\\vee=\\sum_\\alpha e_\\alpha$. Its action is $(t_1,t_2,h)\\cdot(B_1,B_2,I,J)=(t_1B_1,t_2B_2,Ih^{-1},t_1t_2hJ)$, where $h$ acts on $W$ with weights $e_\\alpha^{-1}$. Work over the rational function field $K=\\mathbb Q(\\epsilon_1,\\epsilon_2,a_1,\\ldots,a_N)$ in algebraically independent variables. For $\\chi=t_1^{m_1}t_2^{m_2}\\prod_\\alpha e_\\alpha^{n_\\alpha}$ set $u_\\chi=m_1\\epsilon_1+m_2\\epsilon_2+\\sum_\\alpha n_\\alpha a_\\alpha$.\n\nFor a partition $Y$, a Young diagram means a finite downward-closed subset of $\\mathbb Z_{\\geq0}^2$; write $|Y|$ for its number of boxes. For an $N$-tuple $\\vec Y=(Y_1,\\ldots,Y_N)$ set $|\\vec Y|=\\sum_\\alpha|Y_\\alpha|$, $\\mathbf W=\\sum_\\alpha e_\\alpha^{-1}$, $\\mathbf W^\\vee=\\sum_\\alpha e_\\alpha$, and\n$$\\mathbf V_{\\vec Y}=\\sum_{\\alpha=1}^N e_\\alpha\\sum_{(i,j)\\in Y_\\alpha}t_1^it_2^j.$$\nThen $\\mathcal M^\\zeta_{k,N}$ is smooth of complex dimension $2kN$, and its $T$-fixed points are isolated and in bijection with the $N$-tuples of partitions of total size $k$. At the fixed point $\\vec Y$, the tangent character is\n$$\\operatorname{ch}_T(T_{\\vec Y}\\mathcal M^\\zeta_{k,N})=\\mathbf V_{\\vec Y}^{\\vee}\\mathbf V_{\\vec Y}(t_1+t_2-1-t_1t_2)+\\mathbf V_{\\vec Y}^{\\vee}\\mathbf W^\\vee+t_1t_2\\mathbf W\\mathbf V_{\\vec Y}.$$\nLet $E_{\\vec Y}$ be the product of $u_\\chi$ over the tangent weights counted with multiplicity; the fixed points are isolated, so none of these weights is zero. Define the fixed-point series by\n$$Z^{\\mathrm{fp}}_N(q)=\\sum_{k\\geq0}q^k\\sum_{|\\vec Y|=k}E_{\\vec Y}^{-1}\\in K\\langle\\!\\langle q\\rangle\\!\\rangle.$$\nEach coefficient is a finite sum, and the series is formal; no analytic convergence is asserted.\n\nThe quotient is a separated smooth finite-type complex algebraic variety with a finite invariant affine word-slice atlas for the algebraic complex torus $T_{\\mathbb C}=(\\mathbb C^*)^{N+2}$. This result concerns the stable matrix quotient and a formal series. It asserts no sheaf/ASD dictionary or integration identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-atiyah-bott-berline-vergne-integration-formula",
+          "source_section": "Statement",
+          "quote": "Work in $\\mathrm{ZF}+\\mathrm{AC}$. Let $T$ be a compact torus acting smoothly on a compact oriented smooth $n$-manifold $M$ without boundary; use the standard Hausdorff, second-countable manifold convention, and assume the action preserves the orientation. Write $F=M^T=\\coprod_{j=1}^{s}F_j$ for its fixed locus, with $s<\\infty$, and $i_j:F_j\\hookrightarrow M$ for each connected component. Give each normal bundle $\\nu_j$ a $T$-equivariant orientation and orient $F_j$ by $o(TM|_{F_j})=o(TF_j)\\wedge o(\\nu_j)$. Use real Borel equivariant cohomology, $\\mathcal R=H^*(BT;\\mathbb R)$, the multiplicative set $S$ generated by nonzero character classes, and the degree-shifting fiber-integration convention of the preceding definition. For every homogeneous $\\alpha\\in H_T^k(M;\\mathbb R)$,\n\n$$\\int_M\\alpha=\\sum_j\\int_{F_j}\\frac{i_j^*\\alpha}{e_T(\\nu_j)}\\quad\\text{in }S^{-1}H^{k-n}(BT;\\mathbb R).$$\n\nIf the fixed locus is nonempty and consists of isolated points, necessarily $n=2m$. Use the ambient orientation on each normal space $\\nu_p=T_pM$ and the positive orientation on each point $p$. Choose a $T$-invariant complex structure on each $T_pM$ and let $\\chi_{p,1},\\ldots,\\chi_{p,m}$ be its nonzero character weights. Let $\\epsilon_p=+1$ when its complex orientation agrees with the orientation of $M$ at $p$ and $-1$ otherwise. Then the same formula specializes to\n\n$$\\int_M\\alpha=\\sum_{p\\in M^T}\\frac{\\epsilon_p\\,i_p^*\\alpha}{\\prod_{a=1}^{m}u_{\\chi_{p,a}}}\\quad\\text{in }S^{-1}\\mathcal R.$$\n\nIf the fixed locus is empty, the fixed-component formula is the empty sum $0$ for every $n$; no parity condition or integer $m$ is needed in that case.\n\nThis is a finite-dimensional formula for compact manifolds; it does not assert a formula for arbitrary noncompact instanton spaces or infinite-dimensional field spaces.",
+          "uses": [
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-framed-u-n-instanton-moduli-and-adhm-data",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $N\\geq 2$ and let $S^4=\\mathbb R^4\\cup\\{\\infty\\}$ be the one-point compactification, oriented so the coordinates $x^1,x^2,x^3,x^4$ on $\\mathbb R^4$ have $dx^1\\wedge dx^2\\wedge dx^3\\wedge dx^4>0$. Give $S^4$ a smooth round metric in the conformal class of the Euclidean metric on $\\mathbb R^4$. A framed $U(N)$ connection is a smooth unitary connection $A$ on a Hermitian rank-$N$ vector bundle $E\\to S^4$, together with a chosen unitary frame $\\Phi:E_\\infty\\to\\mathbb C^N$ of its fiber at $\\infty$. Gauge transformations are smooth unitary bundle automorphisms that equal the identity in this frame at $\\infty$. The curvature is $F_A$, and the Hodge operator is defined by $\\alpha\\wedge *_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,d\\mathrm{vol}_g$ on two-forms. Set $F_A^+=(F_A+*_gF_A)/2$ and $F_A^-=(F_A-*_gF_A)/2$; the anti-self-dual condition is $F_A^+=0$, and the self-dual condition is $F_A^-=0$.\n\nLet $\\mathfrak u(N)$ be the anti-Hermitian matrices and put $B_N(X,Y)=-\\operatorname{tr}_N(XY)$. In the trace convention of the library, the charge of $A$ is $q_N(A)=(8\\pi^2)^{-1}\\int_{S^4}B_N(F_A\\wedge F_A)$, and the positive anti-self-dual instanton number is $k(A)=-q_N(A)$. For $k\\in\\mathbb Z_{\\geq0}$, the framed anti-self-dual charge-$k$ moduli set $\\mathcal I^{\\mathrm{ASD}}_{k,N}$ consists of framed pairs $(E,A)$ with $F_A^+=0$ and $k(A)=k$, modulo the stated based gauge transformations. The integer-charge condition is part of the selected bundle sector; no analytic existence or uniqueness assertion is included in this definition. The trace and Hodge conventions agree with the supplied compact-four-manifold definition of $q_B$; its special $SU(2)$ integrality clause is not used to assert $U(N)$ integrality.\n\nFor $k\\geq0$, take Hermitian spaces $V=\\mathbb C^k$ and $W=\\mathbb C^N$. The ADHM data are\n$$B_1,B_2\\in\\operatorname{End}_{\\mathbb C}(V),\\qquad I\\in\\operatorname{Hom}_{\\mathbb C}(W,V),\\qquad J\\in\\operatorname{Hom}_{\\mathbb C}(V,W).$$\nTheir data space is $\\mathcal R_{k,N}=\\operatorname{End}_{\\mathbb C}(V)^2\\oplus\\operatorname{Hom}_{\\mathbb C}(W,V)\\oplus\\operatorname{Hom}_{\\mathbb C}(V,W)$, and their complex and real moment-map expressions are\n$$\\mu_{\\mathbb C}=[B_1,B_2]+IJ\\in\\operatorname{End}_{\\mathbb C}(V),\\qquad \\mu_{\\mathbb R}=[B_1,B_1^\\dagger]+[B_2,B_2^\\dagger]+II^\\dagger-J^\\dagger J\\in\\operatorname{End}_{\\mathbb C}(V).$$\nHere $[X,Y]=XY-YX$, and $\\dagger$ is the Hermitian adjoint. The two displayed formulas define maps $\\mu_{\\mathbb C}:\\mathcal R_{k,N}\\to\\operatorname{End}_{\\mathbb C}(V)$ and $\\mu_{\\mathbb R}:\\mathcal R_{k,N}\\to\\operatorname{Herm}(V)$, where $\\mathcal R_{k,N}$ is the stated product of four Hom spaces and $\\operatorname{Herm}(V)$ is the real vector space of Hermitian endomorphisms. They are the complex and real ADHM moment-map expressions, with these formulas fixing their normalization. A datum is stable when\n$$\\operatorname{span}_{\\mathbb C}\\{B_{i_1}\\cdots B_{i_m}I(w):m\\geq0,\\ i_j\\in\\{1,2\\},\\ w\\in W\\}=V,$$\nwhere the word of length zero is the identity. Equivalently, no proper $B_1,B_2$-invariant subspace of $V$ contains $\\operatorname{im}I$. The group $GL(V)$ consists of invertible complex-linear endomorphisms, and $U(V)$ is its subgroup preserving the chosen Hermitian inner product. The group $GL(V)$ acts by $g\\cdot(B_1,B_2,I,J)=(gB_1g^{-1},gB_2g^{-1},gI,Jg^{-1})$. For $\\zeta>0$, the stable complex ADHM quotient $\\mathcal M^{\\mathrm{GIT},\\zeta}_{k,N}$ is the geometric quotient of $\\{\\mu_{\\mathbb C}=0,\\ \\text{stable}\\}$ by $GL(V)$ in the positive stability chamber; $\\zeta$ labels that chamber and is not an additional coordinate on the complex equation set.\n\nFor a real parameter $\\zeta\\geq0$, the real moment-map presentation is the quotient of $\\{\\mu_{\\mathbb C}=0,\\ \\mu_{\\mathbb R}=\\zeta\\,\\mathrm{id}_V,\\ \\text{stable}\\}$ by $U(V)$. At $\\zeta>0$ this is called the resolved or positive-FI ADHM quotient; at $\\zeta=0$ its affine completion includes the small-instanton locus. The equations and quotient are definitions; this item does not assert that the real moment-map quotient is isomorphic to the stable complex quotient or to an instanton moduli space.\n\nWrite $\\mathbb{CP}^2$ for the complex projective plane, $\\ell_\\infty=\\{[0:z_1:z_2]\\}$ for its line at infinity, and $\\mathcal O_{\\ell_\\infty}$ for the sheaf of holomorphic functions on that line. The affine chart $\\mathbb{CP}^2\\setminus\\ell_\\infty$ is $\\mathbb C^2$; projective compactification adds the whole line $\\ell_\\infty$, unlike the one-point compactification $S^4$. Let $\\mathcal O(1)$ be the hyperplane line bundle and $\\mathcal O(m)=\\mathcal O(1)^{\\otimes m}$ for $m\\geq0$. A coherent sheaf is a sheaf of $\\mathcal O_{\\mathbb{CP}^2}$-modules that is locally finitely presented; it is torsion-free when no nonzero local section is annihilated by a nonzero local function. Its rank is the dimension of its generic fiber over the function field. Define its Hilbert polynomial by $P_E(m)=\\sum_{i=0}^2(-1)^i\\dim_{\\mathbb C}H^i(\\mathbb{CP}^2,E\\otimes\\mathcal O(m))$ for all sufficiently large integers $m$. The framed Gieseker moduli space $\\mathcal G_{k,N}$ is the moduli of pairs $(E,\\Phi)$ with $E$ a rank-$N$ torsion-free coherent sheaf, $P_E(m)=N\\binom{m+2}{2}-k$, and $\\Phi:E|_{\\ell_\\infty}\\cong\\mathcal O_{\\ell_\\infty}^{\\oplus N}$. Its locally-free locus is distinguished from the boundary of non-locally-free sheaves. The Uhlenbeck set-theoretic compactification is the disjoint union of strata $\\mathcal I^{\\mathrm{ASD}}_{k-\\ell,N}\\times\\operatorname{Sym}^{\\ell}(\\mathbb R^4)$ for $0\\leq\\ell\\leq k$, where $\\operatorname{Sym}^{\\ell}(\\mathbb R^4)=(\\mathbb R^4)^\\ell/S_\\ell$ records ideal point defects. The Gieseker space and the Uhlenbeck space are distinct: the former retains torsion-free sheaf data at the small-instanton boundary, while the latter records only ideal points. No compactness of either full space is asserted here.\n\nWrite $z_1=x^1+ix^2$ and $z_2=x^3+ix^4$. The compact torus $T=(S^1)^2\\times T_G$, with $T_G\\subset U(W)$ the diagonal framing torus, acts on ADHM data by\n$$(t_1,t_2,h)\\cdot(B_1,B_2,I,J)=(t_1B_1,t_2B_2,Ih^{-1},t_1t_2hJ).$$\nThis convention makes $\\mu_{\\mathbb C}$ transform with character $t_1t_2$ and leaves $\\mu_{\\mathbb R}$ invariant. Let $e_\\alpha$ denote the character of the dual of the $\\alpha$th framing line, so the framing representation has character $\\mathbf W=\\sum_{\\alpha=1}^N e_\\alpha^{-1}$ and its dual has character $\\mathbf W^\\vee=\\sum_{\\alpha=1}^N e_\\alpha$. For the rotation characters write $t_1,t_2$, and write $\\epsilon_i=c_1^T(t_i)$ and $a_\\alpha=c_1^T(e_\\alpha)$ for their additive equivariant weights.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-qftx-adhm-linear-data-stability-and-regularity",
+          "source_section": "Definition",
+          "quote": "Fix integers $N\\ge1$ and $k\\ge0$ and standard Hermitian spaces $V=\\mathbb C^k$, $W=\\mathbb C^N$. A framed ADHM linear datum is $x=(B_1,B_2,I,J)$ with $B_i\\in\\operatorname{End}_{\\mathbb C}(V)$, $I:W\\to V$ and $J:V\\to W$. Define the complex and real polynomial expressions\n\n$$\\mu_{\\mathbb C}(x)=[B_1,B_2]+IJ,\\qquad \\mu_{\\mathbb R}(x)=[B_1,B_1^\\dagger]+[B_2,B_2^\\dagger]+II^\\dagger-J^\\dagger J.$$\n\nThe datum is stable if the vectors $B_{i_1}\\cdots B_{i_m}I(w)$, with $m\\ge0$, $i_j\\in\\{1,2\\}$ and $w\\in W$, span $V$. It is costable if there is no nonzero subspace of $V$ invariant under both $B_i$ and contained in $\\ker J$. It is regular if it is stable and costable. The group $GL(V)$ acts by $g\\cdot x=(gB_1g^{-1},gB_2g^{-1},gI,Jg^{-1})$. Its unitary subgroup is $U(V)$.\n\nWrite $X^s=\\{x:\\mu_{\\mathbb C}(x)=0,\\ x\\text{ stable}\\}$, $X^{\\mathrm{reg}}=\\{x\\in X^s:x\\text{ costable}\\}$ and, for real $\\zeta\\ge0$, $X_\\zeta^U=\\{x\\in X^s:\\mu_{\\mathbb R}(x)=\\zeta I_V\\}$. Denote the corresponding orbit sets by $X^s/GL(V)$, $X^{\\mathrm{reg}}/GL(V)$ and $X_\\zeta^U/U(V)$, with quotient topologies when discussing their analytic spaces. A word frame consists of $k$ columns obtained by fixed words in $B_1,B_2$ applied to fixed standard basis vectors of $W$.\n\nFor $T_{\\mathbb C}=(\\mathbb C^*)^2\\times(\\mathbb C^*)^N$, write $t_1,t_2,e_1,\\ldots,e_N$ for the coordinate characters and put $h=\\operatorname{diag}(e_1^{-1},\\ldots,e_N^{-1})$. Its action is $(t_1,t_2,h)\\cdot x=(t_1B_1,t_2B_2,Ih^{-1},t_1t_2hJ)$. The compact torus is its subgroup on which all characters have modulus one. The framing representation thus has character $\\sum_\\alpha e_\\alpha^{-1}$ and its dual has character $\\sum_\\alpha e_\\alpha$.\n\nThese are finite-dimensional matrix definitions. They do not assert a real/complex quotient correspondence, a sheaf or ASD identification, or a noncompact pushforward. In particular, positive-FI stability and zero-FI regularity are distinct conditions; neither an endpoint identification nor an ordinary ASD interpretation follows from this definition.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-1-1",
+          "step": "1.1",
+          "claim": "Apply [F5] to the exact raw equation, stability and dual-framing action in the Statement. Its definition of the stable matrix quotient agrees with the present quotient, and its proof supplies smoothness, the finite invariant affine atlas, partition fixed points, tangent character, nonzero tangent weights, and the formal series with constant coefficient one. Its formal variable $u_\\chi$ agrees with the first Chern class of a character under the displayed coefficient convention. Thus all stable-quotient and formal-series assertions follow without using the separate dictionary or pushforward inputs.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "proof-2-1",
+          "step": "2.1",
+          "claim": "If assumptions [A1] and [A4] are supplied, the equivariant isomorphism transfers the fixed-point bijection and tangent characters to the Gieseker space. The local definition supplies no ADHM/monad proof of this comparison, as recorded in [L2].",
+          "inputs": [
+            "given",
+            "A1",
+            "A4",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "proof-2-2",
+          "step": "2.2",
+          "claim": "If [A2] is supplied, it identifies the zero-FI regular quotient with the ordinary framed anti-self-dual moduli, but this alone does not put the positive-FI fixed points in that open locus; the correspondence remains an explicit assumption because of [L2].",
+          "inputs": [
+            "given",
+            "A2",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "proof-2-3",
+          "step": "2.3",
+          "claim": "If [A3] is supplied, substituting the classification and tangent character of step 1.1 into its noncompact localization identity gives the stated pushforward value. The compact ABBV interface [F2] cannot be applied directly to $\\mathcal M^\\zeta_{k,N}$; only its compact scope is available by [L1].",
+          "inputs": [
+            "given",
+            "A3",
+            "F2",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "proof-2-4",
+          "step": "2.4",
+          "claim": "For each fixed $k$, there are finitely many partitions of $k$, hence finitely many $N$-tuples of total size $k$; every summand $E_{\\vec Y}^{-1}$ is in $K$ by step 1.1. Therefore the coefficient is a finite sum and the sequence of coefficients defines the formal power series $Z_N^{\\mathrm{fp}}(q)\\in K\\langle\\!\\langle q\\rangle\\!\\rangle$. At $k=0$, $V=0$, the empty tuple is the unique fixed point, the Euler product is empty and equals $1$, so the constant coefficient is $1$.",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "proof-3-1",
+          "step": "3.1",
+          "claim": "For $k>0$, use the tuple $Y_1=\\{(i,0):0\\leq i<k\\}$ and $Y_\\alpha=\\varnothing$ for $\\alpha>1$; step 1.1 constructs a stable datum. Replacing $B_1$ by $B_1+c\\,\\mathrm{id}_V$ preserves the complex equation and stability while changing $\\operatorname{tr}(B_1)$ by $kc$ for every $c\\in\\mathbb C$. Trace is invariant under conjugation, so the descended trace function on the geometric quotient has image $\\mathbb C$, which is not compact. Thus the quotient is noncompact. The completed Borel carrier matches the compact real-Borel interface in [L1]. The ADHM/monad comparisons [L2] and a valid noncompact pushforward remain the separate conditional inputs stated above.",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: For k=0 the quotient is a point and the empty tangent product is1; no missing positive-dimensional empty fixed-locus inference is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: The k=0 matrix/partition sector is explicitly checked in the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: The raw ADHM supplier permits N=1; no ordinary N>=2 ASD assertion is supplied by the core."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Zero-dimensional matrices and empty products are explicitly accounted for."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Positive-FI stable data and zero-FI regular ASD remain distinct; the full theorem retains its separate dictionary assumptions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Full AC is explicitly inherited through exact suppliers; matrix/partition selections are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Partition recovery and converse construction are both proved in the core supplier used in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Constructed partition data are stable and recover the diagrams in the core supplier used in step 1.1."
+        }
+      ]
+    },
+    "ex-adhm-u1-one-box-fixed-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-framed-u-n-instanton-moduli-and-adhm-data",
+          "source_section": "Definition",
+          "quote": "For $\\zeta>0$, the stable complex ADHM quotient",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-adhm-fixed-point-instanton-count",
+          "source_section": "Statement",
+          "quote": "and its $T$-fixed points are isolated and in bijection with the $N$-tuples of partitions of total size $k$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "one-dimensional-data-admissible",
+          "step": "1.1",
+          "claim": "The scalar datum satisfies the complex equation and stability; GL(1) removes the nonzero scalar I coordinate.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-box-character-and-euler",
+          "step": "2.1",
+          "claim": "The sole one-box partition has V=e1; substitution gives tangent character t1+t2 and Euler class epsilon1 epsilon2.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "degree-one-contribution",
+          "step": "3.1",
+          "claim": "The degree-one coefficient sums the reciprocal Euler class over the single fixed point.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes k=1 and makes no assertion for an empty fixed-point inventory."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero instanton number k=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1-3.1 compute the unique N=1, k=1 partition and its contribution."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example has V=W=C and no zero-dimensional vector-space case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes the positive-FI chamber and makes no endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses one fixed scalar datum and no indexed family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a one-way explicit computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a one-way explicit computation, not an equivalence."
+        }
+      ]
+    },
+    "ex-adhm-u2-one-instanton-fixed-points": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-framed-u-n-instanton-moduli-and-adhm-data",
+          "source_section": "Definition",
+          "quote": "The group $GL(V)$ acts by",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-adhm-fixed-point-instanton-count",
+          "source_section": "Statement",
+          "quote": "the tangent character is",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "two-color-partition-list",
+          "step": "1.1",
+          "claim": "One box distributed between two diagrams gives exactly the two displayed colorings.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-color-character-and-euler",
+          "step": "2.1",
+          "claim": "Substituting V=e1 and W=e1^{-1}+e2^{-1} into the character gives the first weights and Euler product.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-color-and-summed-coefficient",
+          "step": "3.1",
+          "claim": "Interchanging colors gives the second Euler product, and the degree-one coefficient is the sum of their reciprocals.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes k=1 and makes no assertion for an empty fixed-point inventory."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero instanton number k=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1-3.1 enumerate both N=2, k=1 colorings and their contributions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses V=C and W=C^2, not a zero-dimensional data space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes the positive-FI chamber and makes no endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 lists a finite set of two colorings and uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a finite list but states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a finite list but states no equivalence."
+        }
+      ]
+    },
+    "lem-qftx-stable-adhm-partition-fixed-points-and-tangent-character": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-adhm-linear-data-stability-and-regularity",
+          "source_section": "Definition",
+          "quote": "Fix integers $N\\ge1$ and $k\\ge0$ and standard Hermitian spaces $V=\\mathbb C^k$, $W=\\mathbb C^N$. A framed ADHM linear datum is $x=(B_1,B_2,I,J)$ with $B_i\\in\\operatorname{End}_{\\mathbb C}(V)$, $I:W\\to V$ and $J:V\\to W$. Define the complex and real polynomial expressions\n\n$$\\mu_{\\mathbb C}(x)=[B_1,B_2]+IJ,\\qquad \\mu_{\\mathbb R}(x)=[B_1,B_1^\\dagger]+[B_2,B_2^\\dagger]+II^\\dagger-J^\\dagger J.$$\n\nThe datum is stable if the vectors $B_{i_1}\\cdots B_{i_m}I(w)$, with $m\\ge0$, $i_j\\in\\{1,2\\}$ and $w\\in W$, span $V$. It is costable if there is no nonzero subspace of $V$ invariant under both $B_i$ and contained in $\\ker J$. It is regular if it is stable and costable. The group $GL(V)$ acts by $g\\cdot x=(gB_1g^{-1},gB_2g^{-1},gI,Jg^{-1})$. Its unitary subgroup is $U(V)$.\n\nWrite $X^s=\\{x:\\mu_{\\mathbb C}(x)=0,\\ x\\text{ stable}\\}$, $X^{\\mathrm{reg}}=\\{x\\in X^s:x\\text{ costable}\\}$ and, for real $\\zeta\\ge0$, $X_\\zeta^U=\\{x\\in X^s:\\mu_{\\mathbb R}(x)=\\zeta I_V\\}$. Denote the corresponding orbit sets by $X^s/GL(V)$, $X^{\\mathrm{reg}}/GL(V)$ and $X_\\zeta^U/U(V)$, with quotient topologies when discussing their analytic spaces. A word frame consists of $k$ columns obtained by fixed words in $B_1,B_2$ applied to fixed standard basis vectors of $W$.\n\nFor $T_{\\mathbb C}=(\\mathbb C^*)^2\\times(\\mathbb C^*)^N$, write $t_1,t_2,e_1,\\ldots,e_N$ for the coordinate characters and put $h=\\operatorname{diag}(e_1^{-1},\\ldots,e_N^{-1})$. Its action is $(t_1,t_2,h)\\cdot x=(t_1B_1,t_2B_2,Ih^{-1},t_1t_2hJ)$. The compact torus is its subgroup on which all characters have modulus one. The framing representation thus has character $\\sum_\\alpha e_\\alpha^{-1}$ and its dual has character $\\sum_\\alpha e_\\alpha$.\n\nThese are finite-dimensional matrix definitions. They do not assert a real/complex quotient correspondence, a sheaf or ASD identification, or a noncompact pushforward. In particular, positive-FI stability and zero-FI regularity are distinct conditions; neither an endpoint identification nor an ordinary ASD interpretation follows from this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-adhm-stable-quotient-and-torus-lift",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix $N\\ge1$, $k\\ge0$, $V=\\mathbb C^k$ and $W=\\mathbb C^N$ with their standard bases. Let $X$ be the stable locus in the complex ADHM equation $[B_1,B_2]+IJ=0$, where $B_i\\in\\operatorname{End}(V)$, $I:W\\to V$, $J:V\\to W$, and stability means that the vectors $B_{i_1}\\cdots B_{i_m}I(w)$ span $V$. The action $g\\cdot(B_1,B_2,I,J)=(gB_1g^{-1},gB_2g^{-1},gI,Jg^{-1})$ of $GL(V)$ on $X$ is free and proper. Its orbit quotient with quotient topology is a Hausdorff second-countable complex manifold of complex dimension $2kN$, with tangent space $\\ker d_1/\\operatorname{im}d_0$ for the infinitesimal ADHM deformation maps.\n\nFor $k>0$, a word frame $C(x)$ is a matrix whose columns are $k$ fixed words in $B_1,B_2$ applied to fixed standard framing basis vectors. The opens $U_C=\\{x:\\det C(x)\\ne0\\}$ cover $X$; words of length at most $k-1$ suffice. Each slice $S_C=\\{x\\in U_C:C(x)=I_V\\}$ gives quotient coordinates, with $GL(V)\\times S_C\\to U_C$ a biholomorphism. Slice changes are holomorphic, in fact given by matrix inversion and polynomial operations on their domains. The quotient is also a separated smooth finite-type complex algebraic variety with a finite $T$-invariant affine atlas of these slices, and the map from $X$ is a geometric quotient in the regular-function sense.\n\nLet $T=(S^1)^2\\times(S^1)^N$ act by $(t_1,t_2,h)\\cdot(B_1,B_2,I,J)=(t_1B_1,t_2B_2,Ih^{-1},t_1t_2hJ)$, with $h$ acting on the $\\alpha$th standard framing vector by $e_\\alpha^{-1}$. This descends to a smooth holomorphic action. At any fixed quotient point represented by $x$, there is a unique $g(t)\\in GL(V)$ with $t\\cdot x=g(t)\\cdot x$. If column $\\ell$ of $C(x)$ uses framing color $\\alpha_\\ell$ and contains $a_\\ell,b_\\ell$ letters $B_1,B_2$, then\n\n$$g(t)=C(x)\\operatorname{diag}(e_{\\alpha_\\ell}t_1^{a_\\ell}t_2^{b_\\ell})C(x)^{-1}.$$\n\nThus the lift is a smooth character representation, without assuming Zariski density or a GIT linearization theorem. For $k=0$ the quotient is a point and these matrices and tangent spaces have their empty-dimensional interpretations. No correspondence with a real moment-map quotient, sheaf moduli or ASD connections is asserted.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-multiplicative-type-groups-are-linearly-reductive",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and let $G$ be a finite-type group scheme of multiplicative type over $k$ ([[def-group-of-multiplicative-type-and-torus]]). Then every rational representation of $G$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]) is a direct sum of simple representations, and the simple representations are classified by the $\\Gamma_k$-orbits of the character group $X^*(G)$: $G$ is linearly reductive.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice where the geometric suppliers of the named items use it. Let $G$ be a linearly reductive affine group variety over $k$ acting on a smooth variety $X$. Then the fixed-point subscheme $X^G$ is smooth (Milne, Ch. 13); if $S\\subseteq G(k)$ is Zariski-dense then $X^S=X^G$ and both are smooth (13.5-13.7); if $k$ is algebraically closed and $g\\in G(k)$ is semisimple, then the closure of the subgroup generated by $g$ is linearly reductive and $X^g=X^{G_0}$ is smooth (13.8). In particular, if a linearly reductive group $H$ acts on a smooth algebraic group $G$, then the fixed subgroup $G^H$ is smooth; when $H\\subseteq G$ acts by conjugation this is $C_G(H)$ (13.9), and for a subgroup $H\\subseteq G$ of multiplicative type the centralizer $C_G(H)$ and normalizer $N_G(H)$ are smooth, with no smoothness assumption on $H$. If $H$ is smooth, its geometric points are schematically dense, and these are also the unique smooth closed subgroup schemes whose geometric points are the centralizer and normalizer of $H(k^{\\mathrm a})$ (13.10-13.11). The pointwise identification is not asserted for nonsmooth $H$: for $H=\\mu_p$ embedded by $t\\mapsto\\operatorname{diag}(t,1)$ in $\\mathrm{GL}_2$ in characteristic $p$, $H(k^{\\mathrm a})=1$ but $C_G(H)$ is the diagonal torus.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-zariski-tangent-space-jacobian-kernel",
+          "source_section": "Statement",
+          "quote": "Let $k$ be any field, let $n\\geq0$ be finite, let $I$ be an ideal of\n$k[t_1,\\ldots,t_n]$, and put\n$$X=\\operatorname{Spec}(k[t_1,\\ldots,t_n]/I).$$\nLet $a=(a_1,\\ldots,a_n)\\in X(k)$, and let\n$f_1,\\ldots,f_r$ be any finite generating list of the actual ideal $I$.\nThen the coordinate-velocity map gives a canonical $k$-linear isomorphism\n$$T_aX\\cong\\ker\\!\\left(J_{(f_1,\\ldots,f_r)}(a):k^n\\longrightarrow k^r\\right).$$\nThe kernel is independent of the chosen finite generating list of $I$. No\nreducedness, perfectness, or characteristic hypothesis is needed. Finiteness of\nthe list is available for every finite $n$ by the finite-variable polynomial\nNoetherian result cited below.",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-1-1",
+          "step": "1.1",
+          "claim": "The infinitesimal $GL(V)$ action and the derivative of the complex ADHM equation form the complex $$C^0=\\operatorname{End}(V)\\xrightarrow{d_0}C^1=\\operatorname{End}(V)t_1\\oplus\\operatorname{End}(V)t_2\\oplus\\operatorname{Hom}(W,V)\\oplus\\operatorname{Hom}(V,W)t_1t_2\\xrightarrow{d_1}C^2=\\operatorname{End}(V)t_1t_2,$$ where $d_0(\\xi)=([\\xi,B_1],[\\xi,B_2],\\xi I,-J\\xi)$ and $d_1(\\dot B_1,\\dot B_2,\\dot I,\\dot J)=[\\dot B_1,B_2]+[B_1,\\dot B_2]+\\dot I J+I\\dot J$. Expanding gives $d_1d_0(\\xi)=[\\xi,[B_1,B_2]+IJ]=0$, so this is a complex.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "proof-2-1",
+          "step": "2.1",
+          "claim": "If $d_0(\\xi)=0$, then $\\xi$ commutes with both $B_i$ and $\\xi I=0$. Therefore $\\xi B_{i_1}\\cdots B_{i_m}I(w)=B_{i_1}\\cdots B_{i_m}\\xi I(w)=0$ for every word and $w$. Stability says those vectors span $V$, hence $\\xi=0$ and $d_0$ is injective.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "proof-3-1",
+          "step": "3.1",
+          "claim": "To show $d_1$ is onto, use the nondegenerate trace pairing on $\\operatorname{End}(V)$. If $\\Theta$ annihilates its image, variation of $\\dot J$ gives $\\Theta I=0$, and variations of $\\dot B_1,\\dot B_2$ give $[\\Theta,B_1]=[\\Theta,B_2]=0$. The same word calculation as in step 2.1 then gives $\\Theta=0$. Thus the annihilator of $\\operatorname{im}d_1$ is zero, so $d_1$ is surjective.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "proof-4-1",
+          "step": "4.1",
+          "claim": "Apply [F3] to the displayed equation and stability condition. Its proof uses the declared holomorphic implicit-function supplier, proves properness by word-frame bounds on both the gauge transformation and its inverse, and constructs holomorphic quotient charts. Thus the quotient here is a Hausdorff second-countable complex manifold, with tangent $\\ker d_1/\\operatorname{im}d_0$ and complex dimension $2kN$. For $k=0$ the quotient is a point. This is the stable complex quotient; no real moment-map or sheaf/ASD identification is inferred.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "proof-5-1",
+          "step": "5.1",
+          "claim": "At a $T$-fixed quotient point represented by $x$, [F3] gives the unique gauge lift $g(t)=C(x)\\operatorname{diag}(e_{\\alpha_\\ell}t_1^{a_\\ell}t_2^{b_\\ell})C(x)^{-1}$ from a standard-framing word basis. This is a smooth representation of the compact torus itself. The fixed-orbit equations give $g(t)I(w_\\alpha)=e_\\alpha I(w_\\alpha)$ and $g(t)B_i=t_iB_i g(t)$, so all weights generated by stability have the form $e_\\alpha t_1^it_2^j$ with $i,j\\ge0$. Under $t_1t_2hJ=Jg(t)^{-1}$, a nonzero component from a $V$-weight $\\chi$ to the $\\beta$th framing line requires $\\chi=e_\\beta t_1^{-1}t_2^{-1}$. Distinct integer characters on the compact torus cannot satisfy this equality with any generated weight, so $J=0$. The moment equation then gives $[B_1,B_2]=0$. No Zariski-density or algebraic lifting assertion is used.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "proof-6-1",
+          "step": "6.1",
+          "claim": "For each framing line, the commuting pair $B_1,B_2$ makes its cyclic span a quotient of $\\mathbb C[x,y]$, with $x,y$ acting by $B_1,B_2$. The torus weights $e_\\alpha t_1^i t_2^j$ are distinct between colors and between monomials, so the kernel is a monomial ideal. Its standard monomials form a finite downward-closed subset of $\\mathbb Z_{\\geq0}^2$, hence a Young diagram $Y_\\alpha$. Stability says the cyclic spans together exhaust $V$, so $\\sum_\\alpha|Y_\\alpha|=\\dim V=k$. Conversely, for any such tuple, take one basis vector per box, let each $B_i$ move a box one unit in direction $i$ and send it to zero when the next box is absent, let $I$ send the $\\alpha$th framing vector to the origin box of $Y_\\alpha$ when nonempty, and set $J=0$. Downward closure makes the shifts commute, the moment equation holds, and every box is generated from its origin. These data are stable and recover the given diagrams. The construction and recovery are inverse on gauge orbits, proving the fixed-point bijection.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "proof-6-2",
+          "step": "6.2",
+          "claim": "Bring each torus-transformed representative back to the fixed representative by the inverse unique gauge lift from step 5.1. The variations then transform as $t_i\\operatorname{End}(V)$ for $\\dot B_i$, as $V^\\vee\\mathbf W^\\vee$ for $\\dot I$, and as $t_1t_2\\mathbf W\\mathbf V$ for $\\dot J$; the complex-equation target transforms as $t_1t_2\\operatorname{End}(V)$. Thus the torus representations in the complex of step 1.1 are $C^0=\\mathbf V_{\\vec Y}^{\\vee}\\mathbf V_{\\vec Y}$, $C^1=(t_1+t_2)\\mathbf V_{\\vec Y}^{\\vee}\\mathbf V_{\\vec Y}+\\mathbf V_{\\vec Y}^{\\vee}\\mathbf W^\\vee+t_1t_2\\mathbf W\\mathbf V_{\\vec Y}$, and $C^2=t_1t_2\\mathbf V_{\\vec Y}^{\\vee}\\mathbf V_{\\vec Y}$. Exactness at $C^0$ and $C^2$ follows from steps 2.1 and 3.1, so the tangent character is $[C^1]-[C^0]-[C^2]$, which is precisely the expression in the Statement.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "proof-7-1",
+          "step": "7.1",
+          "claim": "The label set in step 6.1 is finite: for $k>0$ every box of a size-at-most-$k$ downward-closed diagram has both coordinates less than $k$, so the possible tuples lie in a finite collection of subsets; $k=0$ has only the empty tuple. Hence the fixed locus is a finite set in the Hausdorff quotient from [F3], and each point is isolated. By [F3] the quotient has a finite invariant affine atlas with algebraic action of $T_{\\mathbb C}=(\\mathbb C^*)^{N+2}$. In each slice its coordinate functions are eigenfunctions. A point fixed by the compact torus has every nonzero-weight coordinate equal to zero, since each nontrivial integer character is nontrivial on that compact torus; conversely these equations make the point fixed by $T_{\\mathbb C}$. Thus the two fixed loci have the same point set. The fixed subscheme is smooth by [F4], because $T_{\\mathbb C}$ is diagonalizable and hence linearly reductive. Its fixed ideal in these affine coordinates is generated by the nonzero-weight coordinates. Linearizing that ideal, using the tangent-kernel description in [F4], identifies its tangent with the invariant tangent subspace. A smooth fixed scheme with a finite point set has dimension zero at every point, so that subspace is zero. Therefore every complex tangent weight is a nonzero character. Its associated $u_\\chi$ is a nonzero integer linear polynomial in the algebraically independent variables and is invertible in $K$. The tangent has complex dimension $2kN$, so the Euler product has exactly $2kN$ factors counted with multiplicity.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 4.1",
+            "step 6.1",
+            "step 6.2"
+          ]
+        },
+        {
+          "id": "proof-8-1",
+          "step": "8.1",
+          "claim": "For each fixed $k$, there are finitely many partitions of $k$, hence finitely many $N$-tuples of total size $k$; every summand $E_{\\vec Y}^{-1}$ is in $K$ by step 7.1. Therefore the coefficient is a finite sum and the sequence of coefficients defines the formal power series $Z_N^{\\mathrm{fp}}(q)\\in K\\langle\\!\\langle q\\rangle\\!\\rangle$. At $k=0$, $V=0$, the empty tuple is the unique fixed point, the Euler product is empty and equals $1$, so the constant coefficient is $1$.",
+          "inputs": [
+            "given",
+            "step 6.1",
+            "step 7.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: For k=0 the quotient is a point and the empty tangent product is1; no missing positive-dimensional empty fixed-locus inference is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: The k=0 matrix/partition sector is explicitly checked in the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: The raw ADHM supplier permits N=1; no ordinary N>=2 ASD assertion is supplied by the core."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Zero-dimensional matrices and empty products are explicitly accounted for."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Positive-FI stable data and zero-FI regular ASD remain distinct; the full theorem retains its separate dictionary assumptions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Full AC is explicitly inherited through exact suppliers; matrix/partition selections are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Partition recovery and converse construction are both proved in core step6.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement; step 1.1: Constructed partition data are stable and recover the diagrams in core step6.1."
+        }
+      ]
+    }
+  }
+}

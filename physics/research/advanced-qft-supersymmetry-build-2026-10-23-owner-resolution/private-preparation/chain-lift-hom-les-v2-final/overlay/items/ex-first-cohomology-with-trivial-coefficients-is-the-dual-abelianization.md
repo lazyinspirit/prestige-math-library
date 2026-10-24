@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-first-cohomology-with-trivial-coefficients-is-the-dual-abelianization.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-dimensional-separation-of-a-compact-convex-set-and-a-point.md

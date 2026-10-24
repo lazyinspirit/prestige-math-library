@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement.md

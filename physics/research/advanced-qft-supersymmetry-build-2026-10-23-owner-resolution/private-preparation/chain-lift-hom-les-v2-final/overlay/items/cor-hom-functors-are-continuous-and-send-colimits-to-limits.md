@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-hom-functors-are-continuous-and-send-colimits-to-limits.md

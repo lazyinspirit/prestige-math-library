@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-tor-zero-is-the-tensor-product-in-either-construction.md

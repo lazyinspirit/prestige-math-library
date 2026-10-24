@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-iid-posterior-contraction-by-entropy-and-prior-mass.md

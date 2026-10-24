@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-zp-is-a-torsion-group-because-all-its-coordinate-groups-are-finite.md

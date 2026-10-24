@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-nonzero-one-form-has-a-nonzero-square-under-the-wedge-product.md

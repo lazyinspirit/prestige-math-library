@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-surgery-on-s-p-times-s-q-produces-a-sphere-in-the-standard-framing.md

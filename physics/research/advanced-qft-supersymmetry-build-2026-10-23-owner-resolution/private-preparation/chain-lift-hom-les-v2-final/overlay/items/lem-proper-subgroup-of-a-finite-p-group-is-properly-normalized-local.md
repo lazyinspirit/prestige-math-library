@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-proper-subgroup-of-a-finite-p-group-is-properly-normalized-local.md

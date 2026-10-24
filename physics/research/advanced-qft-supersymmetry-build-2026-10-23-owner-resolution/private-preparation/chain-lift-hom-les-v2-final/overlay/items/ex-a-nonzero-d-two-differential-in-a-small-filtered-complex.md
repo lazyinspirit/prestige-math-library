@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-nonzero-d-two-differential-in-a-small-filtered-complex.md

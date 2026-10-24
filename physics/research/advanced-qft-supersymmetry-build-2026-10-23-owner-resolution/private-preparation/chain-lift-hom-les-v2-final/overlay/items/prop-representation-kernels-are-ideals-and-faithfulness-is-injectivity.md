@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-representation-kernels-are-ideals-and-faithfulness-is-injectivity.md

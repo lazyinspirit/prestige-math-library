@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-power-function-realises-the-duality-norm-on-unit-interval.md

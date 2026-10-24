@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-recovering-nilpotent-blocks-from-ranks-of-powers.md

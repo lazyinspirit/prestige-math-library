@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-qc-logspace-predicates-in-linear-counting-hierarchy.md

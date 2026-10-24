@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-sample-acvf-properties-and-summable-covariance-mean-consistency.md

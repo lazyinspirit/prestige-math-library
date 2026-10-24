@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-canonical-maps-into-a-central-product-are-injective-with-commuting-images.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-nrqm-controlled-dynamics-long-time-rwa-limitation.md

@@ -1,0 +1,1708 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qftx-super-poincare-algebra-4d",
+    "lem-qftx-super-poincare-graded-jacobi",
+    "def-qftx-unitary-super-poincare-representation",
+    "thm-qftx-supermultiplet-mass-degeneracy",
+    "thm-qftx-n-extended-central-charge-bounds",
+    "def-qftx-superspace-grassmann-algebra",
+    "lem-qftx-grassmann-coefficient-calculus",
+    "def-qftx-n1-chiral-superfield",
+    "lem-qftx-n1-chiral-superspace-identities",
+    "lem-qftx-supercharge-positive-energy-pairing",
+    "def-qftx-graded-trace-class-index-data",
+    "thm-qftx-witten-index-beta-independence",
+    "ex-qftx-n1-supercharge-oscillator",
+    "ex-qftx-n2-shortened-rest-fiber",
+    "ex-qftx-berezin-coefficient-extraction",
+    "ex-qftx-finite-witten-index-cancellation"
+  ],
+  "contracts": {
+    "def-qftx-super-poincare-algebra-4d": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The flavor range is 1 through N with N>=1 and the spinor spaces have dimension two; an empty flavor algebra is outside these data, although the central summand may be zero at N=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The complete bracket table sets central, translation-translation and translation-odd brackets to zero; the alternating forms have zero diagonal. These are defining zero cases."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For the minimal N=1 algebra, Z^{11}=0 by antisymmetry; the mixed odd bracket still has coefficient -2 and becomes 2M I at rest."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At N=1, Lambda^2 C^1=0, so C_N and all scalar central brackets vanish; the Definition explicitly retains the translation and odd sectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The allowed integer range begins at N=1; the final paragraph explicitly states that the antisymmetric scalar central-charge matrix then vanishes. There is no upper endpoint for N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The spinor/flavor bases, Pauli matrices and generator involution are specified explicitly for each finite N; no representatives from an unspecified family of nonempty sets are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The bracket table and star convention specify one algebraic construction; no necessary-and-sufficient characterization of a different algebra is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Jacobi and real-form properties are deferred to the named lemma; this Definition claims no converse reconstruction from those properties."
+        }
+      ]
+    },
+    "lem-qftx-super-poincare-graded-jacobi": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-super-poincare-algebra-4d",
+          "source_section": "Definition",
+          "quote": "All other brackets vanish: $V$ and $C_N$ are abelian, $C_N$ is central, and $V$ brackets trivially with the odd space. The two antisymmetric factors in each equal-chirality odd bracket make that bracket symmetric in the combined spinor-flavor labels. The Lie-superalgebra and real-form properties are established by the local Jacobi result.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The matrix commutators are antisymmetric and the odd-odd brackets are symmetric under interchange of the full generator labels: for the same-chirality bracket, $\\epsilon_{\\beta\\alpha}Z^{JI}=(-\\epsilon_{\\alpha\\beta})(-Z^{IJ})=\\epsilon_{\\alpha\\beta}Z^{IJ}$, and the dotted case is identical. The mixed bracket is symmetric by its Kronecker delta and the graded-skew rule. Each listed bracket has parity equal to the sum of its input parities, so the bracket is degree-preserving and graded-skew.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "For matrices $X,Y,Z$, both $X(YZ-ZY)-(YZ-ZY)X$ and $(XY-YX)Z-Z(XY-YX)+Y(XZ-ZX)-(XZ-ZX)Y$ expand to $XYZ-XZY-YZX+ZYX$, so the commutator on $\\mathfrak l$ satisfies Jacobi. Write $\\rho_V(A,B)=A\\otimes I+I\\otimes B$. Operators acting on different tensor factors commute, hence $[\\rho_V(A,B),\\rho_V(A',B')]=[A,A']\\otimes I+I\\otimes[B,B']=\\rho_V([(A,B),(A',B')])$. The two fundamental odd actions are representations by the same matrix-commutator identity, and the actions on $C_N$ and by $V$ are zero. Thus $\\mathfrak l$ acts by representations on the abelian space $V\\oplus C_N$ and on $\\mathfrak g_{\\bar1}$; expanding the even Jacobi identity leaves precisely these representation identities, while brackets internal to $V\\oplus C_N$ vanish.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "For two even inputs and one odd input, the Jacobi expression is $[\\rho(L),\\rho(L')]q-\\rho([L,L'])q$, which is zero by the fundamental-action identities in [F1]; if either even input lies in $V\\oplus C_N$, its odd action is zero and the same expression vanishes. This checks all orderings of the two-even/one-odd case by graded skew-symmetry.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "For one even input $L=(A,B)$ and two odd inputs, Jacobi is equivariance of their odd bracket. On a mixed pair, the two fundamental actions on $Q$ and $\\bar Q$ give exactly $A\\otimes I+I\\otimes B$ on $T$, so the mixed bracket is equivariant. On an equal-chirality pair, writing $A=\\begin{pmatrix}a&b\\\\c&-a\\end{pmatrix}$ gives $A^{\\mathsf T}\\epsilon+\\epsilon A=0$ by direct multiplication; the identical calculation for $B$ preserves the dotted alternating form. The flavor tensors $Z^{IJ}$ and $\\bar Z_{IJ}$ are Lorentz scalars, so both central brackets are equivariant. Even inputs from $V\\oplus C_N$ act trivially on each side.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.3",
+          "claim": "The given star squares to the identity on each generator. On the matrix-commutator bracket, entrywise conjugation preserves matrix multiplication and the minus signs in $(A,B)^*$ reverse the bracket; on the fundamental and tensor actions, star exchanges the two spinor factors and the corresponding minus sign gives $[x,y]^*=-[x^*,y^*]$. On odd-odd brackets, star exchanges $Q$ with $\\bar Q$, transposes the bispinor indices of $T$, and exchanges $Z$ with $\\bar Z$; the real alternating-form coefficients and antisymmetric flavor labels give $[x,y]^*=[x^*,y^*]$, as required for two odd inputs. Zero brackets remain zero. For homogeneous even-even, even-odd and odd-odd inputs, substituting these identities into $\\tau=-*$, $i*$ and $-*$ respectively gives $\\tau([x,y])=[\\tau x,\\tau y]$; conjugate-linearity gives $\\tau^2=I$. Therefore the fixed space is closed under the bracket. Every $x$ decomposes as $x_+ + i x_-$ with $x_+=(x+\\tau x)/2$ and $x_-=(x-\\tau x)/(2i)$ fixed by $\\tau$, so this fixed real algebra complexifies to the displayed graded algebra.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "For three odd inputs, each inner bracket lies in $V\\oplus C_N$. Both summands act trivially on the odd space, so each of the three terms in the odd-odd-odd super-Jacobi identity is zero. The four parity patterns checked in the preceding cases exhaust homogeneous triples, and multilinearity gives the identity for arbitrary triples.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "The Pauli matrices satisfy $\\sigma_i\\sigma_j+\\sigma_j\\sigma_i=2\\delta_{ij}I_2$ and $\\operatorname{tr}(\\sigma_i)=0$. For $\\mu=\\nu=0$ the sigma identity is $2I_2=-2\\eta^{00}I_2$; for one temporal and one spatial index the two terms cancel; for spatial $i,j$ their sum is $-(\\sigma_i\\sigma_j+\\sigma_j\\sigma_i)=-2\\delta_{ij}I_2$. Also $(p_0I_2+p_i\\sigma_i)^2=(p_0^2+|\\vec p|^2)I_2+2p_0p_i\\sigma_i$ and direct $2\\times2$ determinant expansion gives $\\det(p_0I_2+p_i\\sigma_i)=p_0^2-|\\vec p|^2=-\\eta^{\\mu\\nu}p_\\mu p_\\nu$. With $P_0=-M$ and $P_i=0$, the mixed bracket is therefore $-2\\sigma^0P_0=2MI_2$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Given data require N>=1, two-dimensional S and dotted S, and the resulting nonempty generator sectors. The zero central summand at N=1 is handled by zero brackets, not an empty-domain theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: Each odd-odd-odd inner bracket acts trivially."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: The N≥1 flavor convention is explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: All homogeneous parity patterns are exhausted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proof treats every N>=1; at N=1 equal-chirality central terms are zero and the equivariance and three-odd checks in steps 2.2 and 3.1 still vanish. No upper N endpoint is imposed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–4.1 expand the supplied finite matrices and generators directly. The real decomposition x=(x+tau x)/2+i(x-tau x)/(2i) in step 2.3 is explicit, without a choice of representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion verifies graded Jacobi, the involution and sigma identities for the supplied bracket table; it is not an implication from an independently defined equivalent condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse saying every real Lie superalgebra or every sigma system arises from this bracket table is stated or used in the proof."
+        }
+      ]
+    },
+    "def-qftx-unitary-super-poincare-representation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: For the supplied PVM, the empty Borel set has E(empty)=0; each reducing-projection equality then reads Q0=0 on D(Q). The total Hilbert space itself is required nonzero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The invariant subspace {0} is explicitly allowed in the irreducibility test; zero momentum in the closed cone is also allowed. The representation space H must still be nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: The grading satisfies Gamma^2=I and E(C_+^*)=I, while N=1 inherits zero scalar central charge from the algebra. The unit spectral projection is part of the data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition allows reducible representations and spectral support on the cone boundary; irreducibility is a separate condition and is not inferred from the domain commutators."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The spectral support uses the closed future cone p^0>=|p|, including its null boundary and origin. No strict massive inequality is imposed in this representation definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The opening assumption is Countable Choice for the imported unbounded PVM integral/self-adjointness suppliers. The joint PVM and common domain are supplied; no joint measure is selected from formal commutators."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Under the final definition of irreducibility, an irreducible datum has no invariant closed graded subspace other than {0} and H, with invariance including every specified charge-domain condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Conversely, a datum whose only subspaces satisfying that full U/charge/adjoint invariance definition are {0} and H is called irreducible; ordinary common-core commutators alone do not meet the definition."
+        }
+      ]
+    },
+    "thm-qftx-supermultiplet-mass-degeneracy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-unitary-super-poincare-representation",
+          "source_section": "Definition",
+          "quote": "The domain $\\mathcal D$ is invariant under those generators and under $U(\\mathcal P)$. The even group acts on the charge domains exactly: for every $g\\in\\mathrm{SL}(2,\\mathbb C)$, conjugation by $U(g,0)$ sends each closed charge to the corresponding fundamental or dotted spinor transform as an equality of operators, including equality of domains. The central generators transform as Lorentz scalars, commute with translations, and commute on $\\mathcal D$ with all supercharges; these relations also include their domain invariance.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-projection-valued-measure",
+          "source_section": "Definition",
+          "quote": "**Well-definedness: the regularity clause.** For an orthogonal projection value\nthe pairing $E_x(B)=\\langle E(B)x,x\\rangle$ is a nonnegative real number and\n$E_x(X)=\\langle x,x\\rangle=\\|x\\|^2<+\\infty$, so every $E_x$ is a finite\nnonnegative set function and the regularity requirement is a meaningful\ncondition on it; that each $E_x$ is genuinely a countably additive measure of\ntotal mass $\\|x\\|^2$, and that the polarized pairings $E_{x,y}$ are finite\ncomplex measures, is proved as\n[[lem-scalar-and-complex-measures-from-a-pvm]] before either is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-scalar-and-complex-measures-from-a-pvm",
+          "source_section": "Statement",
+          "quote": "1. $E_x$ is a positive measure on $(X,\\Sigma)$ with $E_x(X)=\\|x\\|^2$ and\n   $0\\le E_x(B)\\le\\|x\\|^2$ for every $B$;\n2. $E_{x,y}$ is a finite complex measure on $(X,\\Sigma)$, the map\n   $(x,y)\\mapsto E_{x,y}$ is linear in $x$ and conjugate-linear in $y$, and\n   $E_{y,x}=\\overline{E_{x,y}}$, meaning $E_{y,x}(B)=\\overline{E_{x,y}(B)}$ for\n   every $B$;\n3. $|E_{x,y}|(X)\\le\\|x\\|\\,\\|y\\|$, so $|E_{x,y}(B)|\\le\\|x\\|\\,\\|y\\|$ for every\n   $B$, and the polarization identity\n   $$E_{x,y}=\\frac14\\sum_{k=0}^{3}i^kE_{x+i^ky}$$\n   holds as an identity of complex measures, where $i^k$ are the fourth roots\n   of unity $1,i,-1,-i$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The function $s(p)=-\\eta^{\\mu\\nu}p_\\mu p_\\nu=(p^0)^2-|\\vec p|^2$ is continuous and nonnegative on the closed future cone in [F1]. For each Borel $A\\subseteq[0,\\infty)$, $\\{p\\in\\mathcal C_+^*:s(p)\\in A\\}$ is Borel in the full covector space because $\\mathcal C_+^*$ is closed and $s$ is continuous there. Inverse images preserve disjoint unions, and the preimage of $[0,\\infty)$ is $\\mathcal C_+^*$, whose projection is $I$ by [F1]; therefore the pushforward $F(A):=E(\\{p\\in\\mathcal C_+^*:s(p)\\in A\\})$ is a normalized PVM on $[0,\\infty)$ by strong countable additivity of $E$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "For each Borel $A$, $F(A)$ is the projection $E(\\{p\\in\\mathcal C_+^*:s(p)\\in A\\})$. The charge-domain reduction in [F1] therefore gives $F(A)D(Q)\\subseteq D(Q)$ and $QF(A)\\psi=F(A)Q\\psi$ for every $\\psi\\in D(Q)$; the same argument applies to $Q^*$. This proves the spectral-subspace assertion.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Since $s(\\Lambda_g^\\vee p)=s(p)$, Lorentz covariance of $E$ implies $U(g,0)F(A)U(g,0)^*=F(A)$. Translation unitaries are bounded Borel functions of $E$, so they commute with every $F(A)$; $\\Gamma$ commutes with $E$ by [F1]. Hence $\\operatorname{ran}F(A)$ is closed and graded, invariant under the integrated even group, and invariant under every charge and adjoint with dense restricted domains: density follows by applying the bounded projection $F(A)$ to a dense operator domain. Irreducibility as defined in [F1] forces $F(A)=0$ or $F(A)=I$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Choose any nonzero vector and normalize it to a unit vector $\\psi\\in\\mathcal H$; set $\\mu(A)=\\langle F(A)\\psi,\\psi\\rangle$. By [F3] this is a countably additive probability measure, and by step 2.2 every value is $0$ or $1$. The set $R=\\{r\\ge0:\\mu([0,r])=1\\}$ is nonempty: otherwise the countable union $[0,\\infty)=\\bigcup_{n\\ge1}[0,n]$ would have measure zero. Put $m^2=\\inf R$, which is a finite nonnegative real.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 2.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "For every $\\varepsilon>0$, the infimum property gives $r\\in R$ with $r<m^2+\\varepsilon$, so $\\mu([0,m^2+\\varepsilon])=1$. If $m^2>\\varepsilon$, then $m^2-\\varepsilon<m^2$ is not in $R$, and the zero-or-one property gives $\\mu([0,m^2-\\varepsilon])=0$. Thus for all sufficiently large $n$, the nested intervals $I_n=(\\max(0,m^2-1/n),m^2+1/n]$ have measure one; when $m^2=0$, use $I_n=[0,1/n]$. Countable additivity of the finite measure gives continuity from above, hence $\\mu(\\{m^2\\})=\\lim_n\\mu(I_n)=1$. Therefore $F(\\{m^2\\})\\ne0$, and step 2.2 forces $F(\\{m^2\\})=I$. If $A$ contains $m^2$, monotonicity gives $F(A)=I$; if not, then $\\mu(A)=0$ because $A$ is disjoint from $\\{m^2\\}$, so the zero-or-one property gives $F(A)=0$. This rule also proves uniqueness: any second value with projection $I$ would have to equal $m^2$, since the singleton projections for distinct values are orthogonal.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "By [F4], $m^2$ has a unique nonnegative square root $m$. Step 2.1 shows that each charge maps vectors in a fixed mass-squared subspace into that same subspace; step 4.1 shows there is only one such spectral value in the irreducible representation. The argument uses the pushforward PVM rather than a normalizable sharp-momentum vector, and it includes $m=0$ without introducing a rest frame.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "d-6.1",
+          "claim": "If an additional unitary group $V(g)$ preserves $D(Q)$ and satisfies $V(g)Q\\psi=QV(g)\\psi$ there, then for every $\\psi\\in D(Q)$ one has $V(g)(Q\\psi)=Q(V(g)\\psi)$; this is exactly the intertwining relation. Without that additional commutation hypothesis no gauge representation equality follows.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1: A Borel set missing m² has zero projection, including the empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 5.1: The massless endpoint m=0 is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1: Every mass projection is zero or identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1: Irreducibility excludes a proper invariant mass projection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 5.1: No rest frame is introduced at zero mass."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 5.1: A nonzero Hilbert vector is normalized."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 4.1: A set containing m² has projection I."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 4.1: A set excluding m² has projection zero."
+        }
+      ]
+    },
+    "thm-qftx-n-extended-central-charge-bounds": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-super-poincare-algebra-4d",
+          "source_section": "Definition",
+          "quote": "Identify the Hermitian bispinor momentum matrix by $T_{\\alpha\\dot\\beta}=\\sigma^\\mu_{\\alpha\\dot\\beta}P_\\mu$, where $P_\\mu=\\eta_{\\mu\\nu}P^\\nu$. This fixes the mixed relation as $\\{Q^I_\\alpha,\\bar Q_{\\dot\\beta J}\\}=-2\\sigma^\\mu_{\\alpha\\dot\\beta}P_\\mu\\delta^I{}_J$. In a massive rest fiber $P^\\mu=(M,0,0,0)$, so $P_0=-M$ and the mixed anticommutator is $2M\\delta_{\\alpha\\dot\\beta}\\delta^I{}_J$. Here $N$ counts left Weyl spinors; the scalar central-charge matrix is antisymmetric and therefore vanishes for $N=1$. Tensorial or topological extensions are outside this scalar-central-charge algebra. The convention uses natural units $\\hbar=c=1$; translation and central-charge generators have mass dimension one and supercharges have mass dimension one-half.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-unitary-super-poincare-representation",
+          "source_section": "Definition",
+          "quote": "For each $I,\\alpha$, the supercharge $Q^I_\\alpha$ is a closed densely defined operator on $\\mathcal H$ and $\\bar Q_{\\dot\\alpha I}=(Q^I_\\alpha)^*$ is its actual Hilbert adjoint, with exactly the adjoint domain. The central generators $Z^{IJ}$ and $\\bar Z_{IJ}$ are represented by closed densely defined operators with $\\bar Z_{IJ}=(Z^{IJ})^*$ as an actual Hilbert adjoint. On a common dense graded linear domain $\\mathcal D$, contained in the domains of every generator product in the bracket table, the operator supercommutator is the displayed algebra bracket. In particular,",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "At rest $P_0=-M I$ and $P_j=0$, so [F1] gives $\\{Q^I_1,(Q^J_1)^*\\}=2M\\delta_{IJ}I$ and $\\{Q^I_2,(Q^J_2)^*\\}=2M\\delta_{IJ}I$. Put $q_I=Q^I_1$ and $r_I=(Q^I_2)^*$; then $\\{q_I,r_J^*\\}=2z^{IJ}I$ and $\\{r_J,q_I^*\\}=2\\bar z_{IJ}I$, with all these products defined on $\\mathcal D$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "For $u,v\\in\\mathbb C^N$, define on $\\mathcal D$ the charge combination $B_{u,v}=\\sum_I\\bar u_Iq_I+\\sum_I\\bar v_Ir_I$ and the combination of its summand adjoints $B^\\sharp_{u,v}=\\sum_Iu_Iq_I^*+\\sum_Iv_Ir_I^*$. Expanding the algebraic anticommutator on $\\mathcal D$ gives $B_{u,v}B^\\sharp_{u,v}+B^\\sharp_{u,v}B_{u,v}=\\left(2M(\\|u\\|_2^2+\\|v\\|_2^2)+4\\operatorname{Re}(u^*Zv)\\right)I$. The diagonal blocks use the two mixed rest anticommutators in step 1.1, and the off-diagonal terms are $2u^*Zv$ and its complex conjugate. For every $\\psi\\in\\mathcal D$, expanding the quadratic form term by term and using the adjoint identity for each individual charge gives $\\langle(B_{u,v}B^\\sharp_{u,v}+B^\\sharp_{u,v}B_{u,v})\\psi,\\psi\\rangle=\\|B_{u,v}\\psi\\|^2+\\|B^\\sharp_{u,v}\\psi\\|^2\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Fix a unit vector $v\\in\\mathbb C^N$. If $Zv\\ne0$, choose $u=-Zv/\\|Zv\\|_2$, so $\\|u\\|_2=1$ and $u^*Zv=-\\|Zv\\|_2$. Applying step 2.1 to any nonzero $\\psi\\in\\mathcal D$ yields $0\\le4(M-\\|Zv\\|_2)\\|\\psi\\|^2$, hence $M\\ge\\|Zv\\|_2$. If $Zv=0$, the same inequality follows from $M>0$. Taking the supremum over all unit $v$ proves $M\\ge\\|Z\\|_{\\mathrm{op}}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "When $N=2$, $Z=\\begin{pmatrix}0&z\\\\-z&0\\end{pmatrix}$, so direct multiplication gives $Z^*Z=|z|^2I_2$ and therefore $\\|Zv\\|_2=|z|\\|v\\|_2$ for every $v$; thus $\\|Z\\|_{\\mathrm{op}}=|z|$. With $q=Q^1_1$ and $r=Q^2_2$, expanding $A=q-e^{i\\phi}r^*$ and $A^\\sharp=q^*-e^{-i\\phi}r$ gives $AA^\\sharp+A^\\sharp A=\\{q,q^*\\}+\\{r^*,r\\}-e^{-i\\phi}\\{q,r\\}-e^{i\\phi}\\{r^*,q^*\\}=2M+2M-2e^{-i\\phi}z-2e^{i\\phi}\\bar z=4(M-|z|)I$ on $\\mathcal D$. This proves the stated N=2 identity with the declared phase convention.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "If $M=|z|$, step 4.1 gives $AA^\\sharp+A^\\sharp A=0$ on $\\mathcal D$. For every $\\psi\\in\\mathcal D$, the actual-adjoint identity for the individual charge summands in [F2] gives $0=\\langle(AA^\\sharp+A^\\sharp A)\\psi,\\psi\\rangle=\\|A\\psi\\|^2+\\|A^\\sharp\\psi\\|^2$. Each squared norm is nonnegative, so both vanish. If $\\mathcal K$ is finite-dimensional, $A^\\sharp=A^*$ and this is the ordinary operator-adjoint conclusion; in general it is the stated dense-domain conclusion. The result is confined to the fixed rest fiber and asserts no state existence or stability.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=2 makes the flavor sums and unit sphere nonempty, and K is explicitly nonzero with dense D. Step 3.1 therefore can use a nonzero domain vector; no empty rest fiber is included.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/native_boundary_repair/boundary_group3",
+            "reason": "Actual Statement fixes N>=2, so each flavor sum runs over at least two entries and the unit sphere in C^N is nonempty. It also requires a nonzero K and dense D, which supplies a nonzero domain vector in step 3.1. The aggregate-syntax detector therefore does not exhibit an admitted empty indexed family or empty fiber. The precise not_applicable disposition is retained."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: The cases Zv=0 and z=0 are treated."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1: The N=2 specialization is computed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1: Saturation forces both combinations to vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 5.1: The equality M=|z| endpoint is treated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1: Unit vectors and a nonzero common-domain vector are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves M>=||Z|| and the implication from N=2 saturation to annihilation by A and A-sharp; it does not formulate these as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A converse from a null vector or null charge combination to saturation is not claimed. In particular the proof never substitutes existence of one annihilated vector for the stated domain-wide conclusion."
+        }
+      ]
+    },
+    "def-qftx-superspace-grassmann-algebra": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The subset indexing includes e_empty=1; nu(empty,S)=nu(S,empty)=0 and both derivatives vanish on a tensor 1. Empty monomials are retained as constants."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Absent-generator derivatives and overlapping-generator products are defined to be zero. The four-variable integral of the constant 1 is zero because it has no top coefficient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: The one-generator rule is explicitly integral dxi_i 1=0 and integral dxi_i xi_i=1, and e_empty is the multiplicative unit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Repeated generator factors have S intersect T nonempty and are assigned product zero; in particular xi_i^2=0. This nilpotent case is built into the signed basis product."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The four ordered odd generators form a fixed finite algebra, not a variable interval or limiting parameter. The displayed spacetime and engineering dimensions impose no endpoint theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sixteen basis vectors are indexed explicitly by subsets of {1,2,3,4}; derivative signs and coefficient-extraction order are prescribed rather than chosen from arbitrary nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition prescribes signed products, derivatives and ordered integrals; it states no equivalence between two alternative criteria for a Grassmann algebra."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The uniqueness of a coefficient expansion is part of the specified basis calculus, not a converse claiming every coefficient functional determines this algebra."
+        }
+      ]
+    },
+    "lem-qftx-grassmann-coefficient-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-superspace-grassmann-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A=\\mathcal A_{\\bar0}\\oplus\\mathcal A_{\\bar1}$ be a finite-dimensional $\\mathbb Z_2$-graded complex algebra whose homogeneous elements satisfy $ab=(-1)^{|a||b|}ba$, equipped with a conjugate-linear parity-preserving involutive anti-automorphism $a\\mapsto a^*$ extending complex conjugation on $\\mathbb C$. For the ordered index set $J=\\{1,2,3,4\\}$, let $\\Lambda_4$ be the complex vector space with specified basis $(e_S)_{S\\subseteq J}$, including $e_\\varnothing=1$. Define\n$$ \\nu(S,T)=|\\{(s,t)\\in S\\times T:s>t\\}|,\\qquad e_Se_T=\\begin{cases}0,&S\\cap T\\ne\\varnothing,\\\\(-1)^{\\nu(S,T)}e_{S\\cup T},&S\\cap T=\\varnothing.\\end{cases} $$\nPut $\\xi_1=\\theta^1=e_{\\{1\\}}$, $\\xi_2=\\theta^2=e_{\\{2\\}}$, $\\xi_3=\\bar\\theta^{\\dot1}=e_{\\{3\\}}$, and $\\xi_4=\\bar\\theta^{\\dot2}=e_{\\{4\\}}$. Then each $\\xi_i$ is odd, $\\xi_i^2=0$, and $\\xi_i\\xi_j=-\\xi_j\\xi_i$ for $i\\ne j$. Give $\\Lambda_4$ the grading $|e_S|=|S|\\bmod2$. The superspace coefficient vector space is $\\mathcal A\\otimes_\\mathbb C\\Lambda_4$ with total parity and graded-tensor multiplication\n$$ (a\\otimes e_S)(b\\otimes e_T)=(-1)^{|S||b|}(ab)\\otimes(e_Se_T) $$\nfor homogeneous $a,b$. On the basis, the left derivative removes $i$ with sign $(-1)^{|\\{s\\in S:s<i\\}|}$ and the right derivative removes $i$ with sign $(-1)^{|\\{s\\in S:s>i\\}|}$ when $i\\in S$, and both give zero when $i\\notin S$. On a coefficient-left homogeneous tensor $a\\otimes e_S$, define $\\partial^L_{\\xi_i}(a\\otimes e_S)=(-1)^{|a|}a\\otimes\\partial^L_{\\xi_i}e_S$ and $\\partial^R_{\\xi_i}(a\\otimes e_S)=a\\otimes\\partial^R_{\\xi_i}e_S$; in particular both vanish on $a\\otimes1$. The algebra axioms and derivative rules below are verified in the local well-definedness result. Complex conjugation on this coefficient algebra extends the given operation on $\\mathcal A$ by $i^*=-i$, $(\\theta^\\alpha)^*=\\bar\\theta^{\\dot\\alpha}$, $(\\bar\\theta^{\\dot\\alpha})^*=\\theta^\\alpha$, and $(uv)^*=v^*u^*$. In the coefficient-left tensor notation this means $(a\\otimes e_S)^*=(-1)^{|a||S|}a^*\\otimes e_S^*$, where $e_S^*$ is obtained by reversing the ordered generator word for $e_S$ and applying the stated generator conjugation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-superspace-grassmann-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A=\\mathcal A_{\\bar0}\\oplus\\mathcal A_{\\bar1}$ be a finite-dimensional $\\mathbb Z_2$-graded complex algebra whose homogeneous elements satisfy $ab=(-1)^{|a||b|}ba$, equipped with a conjugate-linear parity-preserving involutive anti-automorphism $a\\mapsto a^*$ extending complex conjugation on $\\mathbb C$. For the ordered index set $J=\\{1,2,3,4\\}$, let $\\Lambda_4$ be the complex vector space with specified basis $(e_S)_{S\\subseteq J}$, including $e_\\varnothing=1$. Define\n$$ \\nu(S,T)=|\\{(s,t)\\in S\\times T:s>t\\}|,\\qquad e_Se_T=\\begin{cases}0,&S\\cap T\\ne\\varnothing,\\\\(-1)^{\\nu(S,T)}e_{S\\cup T},&S\\cap T=\\varnothing.\\end{cases} $$\nPut $\\xi_1=\\theta^1=e_{\\{1\\}}$, $\\xi_2=\\theta^2=e_{\\{2\\}}$, $\\xi_3=\\bar\\theta^{\\dot1}=e_{\\{3\\}}$, and $\\xi_4=\\bar\\theta^{\\dot2}=e_{\\{4\\}}$. Then each $\\xi_i$ is odd, $\\xi_i^2=0$, and $\\xi_i\\xi_j=-\\xi_j\\xi_i$ for $i\\ne j$. Give $\\Lambda_4$ the grading $|e_S|=|S|\\bmod2$. The superspace coefficient vector space is $\\mathcal A\\otimes_\\mathbb C\\Lambda_4$ with total parity and graded-tensor multiplication\n$$ (a\\otimes e_S)(b\\otimes e_T)=(-1)^{|S||b|}(ab)\\otimes(e_Se_T) $$\nfor homogeneous $a,b$. On the basis, the left derivative removes $i$ with sign $(-1)^{|\\{s\\in S:s<i\\}|}$ and the right derivative removes $i$ with sign $(-1)^{|\\{s\\in S:s>i\\}|}$ when $i\\in S$, and both give zero when $i\\notin S$. On a coefficient-left homogeneous tensor $a\\otimes e_S$, define $\\partial^L_{\\xi_i}(a\\otimes e_S)=(-1)^{|a|}a\\otimes\\partial^L_{\\xi_i}e_S$ and $\\partial^R_{\\xi_i}(a\\otimes e_S)=a\\otimes\\partial^R_{\\xi_i}e_S$; in particular both vanish on $a\\otimes1$. The algebra axioms and derivative rules below are verified in the local well-definedness result. Complex conjugation on this coefficient algebra extends the given operation on $\\mathcal A$ by $i^*=-i$, $(\\theta^\\alpha)^*=\\bar\\theta^{\\dot\\alpha}$, $(\\bar\\theta^{\\dot\\alpha})^*=\\theta^\\alpha$, and $(uv)^*=v^*u^*$. In the coefficient-left tensor notation this means $(a\\otimes e_S)^*=(-1)^{|a||S|}a^*\\otimes e_S^*$, where $e_S^*$ is obtained by reversing the ordered generator word for $e_S$ and applying the stated generator conjugation.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-superspace-grassmann-algebra",
+          "source_section": "Definition",
+          "quote": "For each $i\\in J$, the left derivative $\\partial^L_{\\xi_i}$ is the unique odd derivation of the graded tensor algebra that vanishes on $\\mathcal A$ and has $\\partial^L_{\\xi_i}\\xi_j=\\delta_{ij}$; on homogeneous $u,v$ it obeys\n$$ \\partial^L_{\\xi_i}(uv)=(\\partial^L_{\\xi_i}u)v+(-1)^{|u|}u(\\partial^L_{\\xi_i}v). $$\nThe right derivative $\\partial^R_{\\xi_i}$ is the unique right odd derivation vanishing on $\\mathcal A$ with $\\partial^R_{\\xi_i}\\xi_j=\\delta_{ij}$ and\n$$ \\partial^R_{\\xi_i}(uv)=(-1)^{|v|}(\\partial^R_{\\xi_i}u)v+u(\\partial^R_{\\xi_i}v). $$\nFor one generator, write a polynomial uniquely with that generator on the left as $f=f_0+\\xi_i f_1$, with $f_0,f_1$ independent of $\\xi_i$, and define its Berezin integral by the complex-linear coefficient-extraction rule $\\int d\\xi_i\\,f=f_1$. Thus $\\int d\\xi_i\\,1=0$ and $\\int d\\xi_i\\,\\xi_i=1$. Fix the ordered measures\n$$ \\int d^2\\theta:=\\int d\\theta^2\\,d\\theta^1,\\qquad \\int d^2\\bar\\theta:=\\int d\\bar\\theta^{\\dot2}\\,d\\bar\\theta^{\\dot1},\\qquad \\int d^4\\theta:=\\int d\\bar\\theta^{\\dot2}\\,d\\bar\\theta^{\\dot1}\\,d\\theta^2\\,d\\theta^1. $$\nWith this order, $\\int d^4\\theta$ extracts the coefficient of $\\theta^1\\theta^2\\bar\\theta^{\\dot1}\\bar\\theta^{\\dot2}$. For superspace coordinates $x=(x^0,x^1,x^2,x^3)\\in\\mathbb R^{1,3}$ in natural units $\\hbar=c=1$, assign mass dimensions $[x^\\mu]=-1$, $[\\theta^\\alpha]=[\\bar\\theta^{\\dot\\alpha}]=-\\tfrac12$, $[d\\theta^\\alpha]=[d\\bar\\theta^{\\dot\\alpha}]=\\tfrac12$, and hence $[d^2\\theta]=[d^2\\bar\\theta]=1$ and $[d^4\\theta]=2$. These are formal engineering dimensions; no physical model or empirical unit convention is asserted.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-superspace-grassmann-algebra",
+          "source_section": "Definition",
+          "quote": "For each $i\\in J$, the left derivative $\\partial^L_{\\xi_i}$ is the unique odd derivation of the graded tensor algebra that vanishes on $\\mathcal A$ and has $\\partial^L_{\\xi_i}\\xi_j=\\delta_{ij}$; on homogeneous $u,v$ it obeys\n$$ \\partial^L_{\\xi_i}(uv)=(\\partial^L_{\\xi_i}u)v+(-1)^{|u|}u(\\partial^L_{\\xi_i}v). $$\nThe right derivative $\\partial^R_{\\xi_i}$ is the unique right odd derivation vanishing on $\\mathcal A$ with $\\partial^R_{\\xi_i}\\xi_j=\\delta_{ij}$ and\n$$ \\partial^R_{\\xi_i}(uv)=(-1)^{|v|}(\\partial^R_{\\xi_i}u)v+u(\\partial^R_{\\xi_i}v). $$\nFor one generator, write a polynomial uniquely with that generator on the left as $f=f_0+\\xi_i f_1$, with $f_0,f_1$ independent of $\\xi_i$, and define its Berezin integral by the complex-linear coefficient-extraction rule $\\int d\\xi_i\\,f=f_1$. Thus $\\int d\\xi_i\\,1=0$ and $\\int d\\xi_i\\,\\xi_i=1$. Fix the ordered measures\n$$ \\int d^2\\theta:=\\int d\\theta^2\\,d\\theta^1,\\qquad \\int d^2\\bar\\theta:=\\int d\\bar\\theta^{\\dot2}\\,d\\bar\\theta^{\\dot1},\\qquad \\int d^4\\theta:=\\int d\\bar\\theta^{\\dot2}\\,d\\bar\\theta^{\\dot1}\\,d\\theta^2\\,d\\theta^1. $$\nWith this order, $\\int d^4\\theta$ extracts the coefficient of $\\theta^1\\theta^2\\bar\\theta^{\\dot1}\\bar\\theta^{\\dot2}$. For superspace coordinates $x=(x^0,x^1,x^2,x^3)\\in\\mathbb R^{1,3}$ in natural units $\\hbar=c=1$, assign mass dimensions $[x^\\mu]=-1$, $[\\theta^\\alpha]=[\\bar\\theta^{\\dot\\alpha}]=-\\tfrac12$, $[d\\theta^\\alpha]=[d\\bar\\theta^{\\dot\\alpha}]=\\tfrac12$, and hence $[d^2\\theta]=[d^2\\bar\\theta]=1$ and $[d^4\\theta]=2$. These are formal engineering dimensions; no physical model or empirical unit convention is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The element $e_\\varnothing$ is a two-sided identity because $\\nu(\\varnothing,S)=\\nu(S,\\varnothing)=0$. For $S,T,U\\subseteq\\{1,2,3,4\\}$, if any two sets overlap, both parenthesizations $(e_Se_T)e_U$ and $e_S(e_Te_U)$ vanish: if the first pair overlaps one side vanishes immediately and the other retains that common generator, and the same argument applies to the other pairs. If $S,T,U$ are pairwise disjoint, the left sign exponent is $\\nu(S,T)+\\nu(S\\cup T,U)=\\nu(S,T)+\\nu(S,U)+\\nu(T,U)$, while the right exponent is $\\nu(T,U)+\\nu(S,T\\cup U)=\\nu(T,U)+\\nu(S,T)+\\nu(S,U)$. The signs agree, proving associativity on basis elements and hence by trilinearity on all elements.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "If $S\\cap T\\ne\\varnothing$, both products vanish. If the sets are disjoint, every ordered pair in $S\\times T$ has exactly one of $s>t$ or $t>s$, so $\\nu(S,T)+\\nu(T,S)=|S||T|$. Thus $e_Se_T=(-1)^{|S||T|}e_Te_S$. This proves supercommutativity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Put $a=|\\{s\\in S:s<i\\}|$, $c=|\\{s\\in S:s>i\\}|$, $b=|\\{t\\in T:t<i\\}|$, and $d=|\\{t\\in T:t>i\\}|$. If $S$ and $T$ are disjoint and $i\\in S$, then $\\nu(S,T)=\\nu(S\\setminus\\{i\\},T)+b$; the left-hand derivative exponent is $a+b+\\nu(S,T)$, equal modulo two to the right-hand side exponent $a+\\nu(S\\setminus\\{i\\},T)$. If $i\\in T$, then $\\nu(S,T)=\\nu(S,T\\setminus\\{i\\})+c$; the left-hand exponent $a+b+\\nu(S,T)$ equals the right-hand exponent $|S|+b+\\nu(S,T\\setminus\\{i\\})$, since $i\\notin S$ and $|S|=a+c$. For the right derivative, if $i\\in S$ the identity $\\nu(S,T)=\\nu(S\\setminus\\{i\\},T)+b$ makes the left exponent $c+d+\\nu(S,T)$ equal to the right exponent $|T|+c+\\nu(S\\setminus\\{i\\},T)$; if $i\\in T$, the identity $\\nu(S,T)=\\nu(S,T\\setminus\\{i\\})+c$ makes both exponents $d+\\nu(S,T\\setminus\\{i\\})$ modulo two. If $S\\cap T$ contains a common element other than $i$, all Leibniz terms vanish because an overlap remains. If $S\\cap T=\\{i\\}$, both terms can be nonzero, but their exponents differ by one: for the left rule they are $a+\\nu(S\\setminus\\{i\\},T)$ and $|S|+b+\\nu(S,T\\setminus\\{i\\})$; for the right rule they are $|T|+c+\\nu(S\\setminus\\{i\\},T)$ and $d+\\nu(S,T\\setminus\\{i\\})$. Thus they cancel in both rules, matching the derivative of $e_Se_T=0$. For homogeneous coefficient-left tensors $a\\otimes e_S$ and $b\\otimes e_T$, the left derivative of their product has the common sign $(-1)^{|S||b|+|a|+|b|}$ multiplying the exterior left Leibniz expansion; the first tensor Leibniz term has sign $(-1)^{|a|+(|S|-1)|b|}$, which is equal, and the second has the additional $(-1)^{|S|}$ required by the exterior rule. For the right derivative, the first tensor Leibniz term has sign $(-1)^{|b|+|T|+(|S|-1)|b|}=(-1)^{|S||b|+|T|}$, while the second carries $(-1)^{|S||b|}$; these are exactly the two exterior right-rule terms. Thus the stated coefficient-left derivative extensions satisfy the graded-tensor left and right Leibniz identities.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "For homogeneous tensors $a\\otimes e_S$, $b\\otimes e_T$ and $c\\otimes e_U$, the sign in $((a\\otimes e_S)(b\\otimes e_T))(c\\otimes e_U)$ is $|S||b|+(|S|+|T|)|c|$, while the sign in $(a\\otimes e_S)((b\\otimes e_T)(c\\otimes e_U))$ is $|T||c|+|S|(|b|+|c|)$. These exponents agree modulo two; associativity of $\\mathcal A$ and step 1.1 then gives associativity of the graded tensor product. Combining its sign $|S||b|$ with supercommutativity of both factors gives the total sign $(-1)^{(|a|+|S|)(|b|+|T|)}$ when the tensors are exchanged, so the tensor product is supercommutative.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.2",
+          "claim": "The vectors $e_S$ are a specified basis, so each coefficient polynomial has a unique finite expansion. For a fixed $i$, grouping terms with and without $i$ and moving $\\xi_i$ to the left by the signed product rule gives a unique expression $f=f_0+\\xi_i f_1$ with $f_0,f_1$ independent of $\\xi_i$; hence the linear coefficient extraction in [F3] is well-defined. Applying the four ordered coefficient maps successively to $e_S$ returns $1$ exactly when $S=\\{1,2,3,4\\}$ and $0$ otherwise. By linearity, the full measure extracts precisely the stated top coefficient.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "Reversing a word in the four generators and exchanging each undotted generator with its dotted conjugate preserves the square-zero and anticommutation relations. The coefficient operation preserves parity and reverses products by [F4]. For homogeneous $a\\in\\mathcal A$ and $e_S$, moving $e_S^*$ back to the right of $a^*$ contributes $(-1)^{|a||S|}$, so the induced tensor formula is $(a\\otimes e_S)^*=(-1)^{|a||S|}a^*\\otimes e_S^*$, as stated in [F1]. This formula respects the graded-tensor relation: applying it to $(1\\otimes e_S)(a\\otimes1)=(-1)^{|a||S|}(a\\otimes e_S)$ gives the same identity after reversing the factors. Applying the operation twice restores every coefficient and every generator, so it descends to an involutive anti-automorphism.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: The empty subset supplies the identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.2: Nontop basis monomials have zero integral."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.2: The top basis monomial has integral one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2: Overlap cases, including one shared generator, are checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This lemma concerns a fixed four-generator algebra, with no varying interval, convergence parameter or boundary limit; top and constant degrees are finite basis cases in steps 1.1 and 3.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof groups terms in a given finite basis and writes their signs explicitly. Its unique f0+xi_i f1 decomposition in step 3.2 does not select bases or representatives from an unspecified family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.2: Both derivative Leibniz rules are checked."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.2: The same basis calculation establishes the reverse implication."
+        }
+      ]
+    },
+    "def-qftx-n1-chiral-superfield": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The k=0 term of the finite Taylor substitution is explicitly f(x), with empty product equal to one; the four Grassmann variables and spacetime R^{1,3} themselves are fixed, not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: For Phi=0 both barred covariant derivatives vanish and every component coefficient is zero; no normalization or nonzero-field requirement excludes it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A single nonzero scalar component A with psi_1=psi_2=F=0 gives Phi=A(y); the prescribed finite substitution and ordered expansion still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Setting any or all components A, psi_1, psi_2, F to zero is allowed; the zero smooth even superfield obeys both linear chirality equations and has the zero component tuple."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The nilpotent Taylor sum explicitly runs from k=0 to k=2. Degree greater than four vanishes in Lambda_4, so higher shift powers add no missing Taylor terms."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The smooth component functions are uniquely determined coefficients in a specified ordered Grassmann basis. Their definition requires no arbitrary selection from nonempty fibers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: By the defining criterion, a chiral superfield is an even smooth element whose two barred covariant derivatives vanish; the following local identity lemma proves its unique y,theta expansion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Conversely, an even smooth field satisfying those two equations is called chiral by this Definition; the finite Taylor substitution fixes the meaning of y and avoids any analytic continuation assumption."
+        }
+      ]
+    },
+    "lem-qftx-n1-chiral-superspace-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-n1-chiral-superfield",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A=\\mathcal A_{\\bar0}\\oplus\\mathcal A_{\\bar1}$ be the finite-dimensional supercommutative complex coefficient algebra, and let $\\Lambda_4$ have ordered generators $\\theta^1,\\theta^2,\\bar\\theta^{\\dot1},\\bar\\theta^{\\dot2}$ and the product, parity, derivatives and conjugation specified in the four-dimensional superspace Grassmann algebra. Let $\\mathscr S=C^\\infty(\\mathbb R^{1,3},\\mathcal A\\otimes\\Lambda_4)$ be the space of smooth coefficient functions; $\\partial_\\mu$ differentiates the real coordinate $x^\\mu$ and acts trivially on the finite Grassmann basis. Use the mostly-plus metric and the matrices $\\sigma^\\mu_{\\alpha\\dot\\alpha}$ specified by the four-dimensional super-Poincare algebra. A **chiral superfield** is an even element $\\Phi\\in\\mathscr S$ satisfying the two equations",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-grassmann-coefficient-calculus",
+          "source_section": "Statement",
+          "quote": "For the basis-indexed vector space and product $e_Se_T=0$ when $S\\cap T\\ne\\varnothing$ and $e_Se_T=(-1)^{\\nu(S,T)}e_{S\\cup T}$ otherwise, with $\\nu(S,T)=|\\{(s,t)\\in S\\times T:s>t\\}|$, multiplication is associative, unital and supercommutative. The graded tensor product with a supercommutative coefficient algebra is also associative and supercommutative. The basis formulas for left and right odd differentiation extend to derivations with the stated Leibniz rules. The ordered four-variable Berezin integral is a well-defined linear functional extracting the coefficient of $\\theta^1\\theta^2\\bar\\theta^{\\dot1}\\bar\\theta^{\\dot2}$, and the stated conjugation is an involutive anti-automorphism.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-super-poincare-algebra-4d",
+          "source_section": "Definition",
+          "quote": "Identify the Hermitian bispinor momentum matrix by $T_{\\alpha\\dot\\beta}=\\sigma^\\mu_{\\alpha\\dot\\beta}P_\\mu$, where $P_\\mu=\\eta_{\\mu\\nu}P^\\nu$. This fixes the mixed relation as $\\{Q^I_\\alpha,\\bar Q_{\\dot\\beta J}\\}=-2\\sigma^\\mu_{\\alpha\\dot\\beta}P_\\mu\\delta^I{}_J$. In a massive rest fiber $P^\\mu=(M,0,0,0)$, so $P_0=-M$ and the mixed anticommutator is $2M\\delta_{\\alpha\\dot\\beta}\\delta^I{}_J$. Here $N$ counts left Weyl spinors; the scalar central-charge matrix is antisymmetric and therefore vanishes for $N=1$. Tensorial or topological extensions are outside this scalar-central-charge algebra. The convention uses natural units $\\hbar=c=1$; translation and central-charge generators have mass dimension one and supercharges have mass dimension one-half.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The left derivatives with respect to distinct odd generators anticommute by [F2]; each $\\partial_\\mu$ commutes with them and with every other $\\partial_\\nu$ because the coefficient functions are smooth. Expanding the displayed formulas for $D$ and $\\bar D$, the only nonzero mixed terms in $\\{D_\\alpha,\\bar D_{\\dot\\beta}\\}$ are $\\{\\partial^L_{\\theta^\\alpha},-i\\theta^\\gamma\\sigma^\\mu_{\\gamma\\dot\\beta}\\partial_\\mu\\}=-i\\sigma^\\mu_{\\alpha\\dot\\beta}\\partial_\\mu$ and $\\{i\\sigma^\\mu_{\\alpha\\dot\\gamma}\\bar\\theta^{\\dot\\gamma}\\partial_\\mu,-\\partial^L_{\\bar\\theta^{\\dot\\beta}}\\}=-i\\sigma^\\mu_{\\alpha\\dot\\beta}\\partial_\\mu$. Their sum is the stated mixed anticommutator. In each same-type anticommutator, the derivative-only terms vanish by [F2], the terms with one coordinate and one derivative cancel or are zero because the differentiated coordinate is of the other type, and the products of two identical-type odd coordinates vanish after symmetrization. Thus both same-type anticommutators are zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "With $y=x+i\\theta\\sigma\\bar\\theta$, the left derivative gives $\\partial^L_{\\bar\\theta^{\\dot\\alpha}}y^\\mu=-i\\theta^\\beta\\sigma^\\mu_{\\beta\\dot\\alpha}$: the minus sign comes from differentiating the rightmost odd factor past the left odd $\\theta^\\beta$. The finite Taylor definition and ordinary algebra therefore give, on functions expressed in $(y,\\theta,\\bar\\theta)$, $\\partial^L_{\\bar\\theta^{\\dot\\alpha}}|_x=\\partial^L_{\\bar\\theta^{\\dot\\alpha}}|_y-i\\theta^\\beta\\sigma^\\mu_{\\beta\\dot\\alpha}\\partial_{y^\\mu}$ and $\\partial_{x^\\mu}=\\partial_{y^\\mu}$. Substitution into $\\bar D$ cancels the two $\\theta\\sigma\\partial_y$ terms, leaving $\\bar D_{\\dot\\alpha}=-\\partial^L_{\\bar\\theta^{\\dot\\alpha}}|_y$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Direct expansion of $Q_\\alpha$ against $\\bar D_{\\dot\\beta}$ gives two opposite terms: $\\{\\partial^L_{\\theta^\\alpha},-i\\theta^\\gamma\\sigma^\\mu_{\\gamma\\dot\\beta}\\partial_\\mu\\}=-i\\sigma^\\mu_{\\alpha\\dot\\beta}\\partial_\\mu$ and $\\{-i\\sigma^\\mu_{\\alpha\\dot\\gamma}\\bar\\theta^{\\dot\\gamma}\\partial_\\mu,-\\partial^L_{\\bar\\theta^{\\dot\\beta}}\\}=+i\\sigma^\\mu_{\\alpha\\dot\\beta}\\partial_\\mu$, so $\\{Q_\\alpha,\\bar D_{\\dot\\beta}\\}=0$. All other terms vanish by the same independent-generator and odd-square identities. The two barred operators $\\bar Q_{\\dot\\alpha}$ and $\\bar D_{\\dot\\beta}$ also anticommute: their barred derivative parts anticommute, their $\\theta\\partial_x$ parts anticommute, and each barred derivative anticommutes with each $\\theta$ factor because it differentiates a different generator. Therefore $\\bar D_{\\dot\\beta}(\\delta_{\\epsilon,\\bar\\epsilon}\\Phi)=0$ whenever $\\bar D_{\\dot\\beta}\\Phi=0$, accounting for the odd parameter crossing the odd derivative.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Expand a function in the unique ordered basis of $\\Lambda_4$ with coefficients in $C^\\infty(\\mathbb R^{1,3},\\mathcal A)$. In $(y,\\theta,\\bar\\theta)$ coordinates, $\\bar D_{\\dot\\alpha}\\Phi=0$ for both dotted indices means both left derivatives in the barred generators vanish. For a fixed generator, distinct basis monomials containing it map under its derivative to distinct basis monomials not containing it, with coefficients $+1$ or $-1$; hence its derivative has zero kernel exactly on the span of monomials not containing it. Applying this to both barred generators shows $\\Phi$ is independent of $\\bar\\theta$. The remaining ordered basis is $1,\\theta^1,\\theta^2,\\theta^1\\theta^2$, so its coefficients are unique and give the four displayed component functions and parities.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "The transformed field is smooth because it is a finite linear combination of spacetime derivatives of smooth coefficient functions, and it is chiral by step 2.2. Applying the unique basis expansion in step 3.1 to this transformed field yields one and only one tuple of four smooth components. This is the component transformation defined in the chiral-superfield definition; no field equation or quantum operator-domain assertion is involved.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: The constant monomial is included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: The zero field obeys the chiral equations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: Four ordered basis monomials give four components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1: The nilpotent shift is a finite Taylor expansion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the finite nilpotent Taylor substitution through quadratic shift order; no infinite Taylor remainder or spacetime-boundary limit is needed in the change to y coordinates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 3.1 identifies the kernel by the injective signed removal of each barred generator in a fixed basis. Step 4.1 then takes the uniquely determined component tuple, without an arbitrary representative choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1: Independence of barred variables implies chirality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 4.1: The derivative equations reduce to barred-coordinate independence."
+        }
+      ]
+    },
+    "lem-qftx-supercharge-positive-energy-pairing": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-unbounded-linear-operator-domain-and-graph",
+          "source_section": "Definition",
+          "quote": "A **(possibly unbounded) linear operator on $H$** is a linear map\n$T:D(T)\\to H$ ([[def-linear-map]]) whose **domain** $D(T)\\subseteq H$ is a linear\nsubspace ([[def-linear-subspace]]). The domain is part of the data: $T=S$ means\n$D(T)=D(S)$ and $Tx=Sx$ for all $x\\in D(T)$. One writes $T\\subseteq S$, and\ncalls $S$ an **extension** of $T$, when $D(T)\\subseteq D(S)$ and $Sx=Tx$ for\nevery $x\\in D(T)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "source_section": "Definition",
+          "quote": "([[def-densely-defined-closed-and-closable-operator]], [[def-dense-top]]).",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "source_section": "Definition",
+          "quote": "- $T$ is **symmetric** when $T\\subseteq T^*$, that is, $D(T)\\subseteq D(T^*)$ and\n  $Tx=T^*x$ for all $x\\in D(T)$; equivalently\n  $\\langle Tx,y\\rangle=\\langle x,Ty\\rangle$ for all $x,y\\in D(T)$.\n- $T$ is **self-adjoint** when $T=T^*$, that is, the domains and the values\n  agree.\n- $T$ is **essentially self-adjoint** when its closure $\\overline T$ is\n  self-adjoint; by [[thm-closable-iff-adjoint-domain-is-dense]] this presupposes\n  that $T$ is closable.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "If $\\psi\\in E_\\lambda$, then $\\psi\\in D(Q)$, $Q\\psi\\in D(Q)$ and $Q^2\\psi=\\lambda\\psi$ by [F3]. Thus $Q\\psi\\in D(Q)$ and $Q(Q\\psi)=\\lambda\\psi\\in D(Q)$, so a second application of [F3] gives $Q\\psi\\in D(H)$. Moreover $H(Q\\psi)=Q(Q^2\\psi)=Q(\\lambda\\psi)=\\lambda Q\\psi$. Therefore $Q$ maps $E_\\lambda$ into itself.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The domain of $H$ is invariant under $\\Gamma$: if $\\psi\\in D(H)$, then $\\Gamma\\psi\\in D(Q)$ by hypothesis and $Q\\Gamma\\psi=-\\Gamma Q\\psi\\in D(Q)$ because $Q\\psi\\in D(Q)$ and $D(Q)$ is $\\Gamma$-invariant. Applying the anticommutation relation twice gives $H\\Gamma\\psi=\\Gamma H\\psi$. Hence $\\Gamma E_\\lambda=E_\\lambda$, and $Q\\Gamma=-\\Gamma Q$ shows that $Q$ maps $E_\\lambda^+$ to $E_\\lambda^-$ and $E_\\lambda^-$ to $E_\\lambda^+$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "For $\\psi,\\varphi\\in E_\\lambda$, both vectors lie in $D(Q)$ and $Q\\psi\\in D(Q)$, by [F2], the adjoint is taken in the complete Hilbert space; self-adjointness in [F5] and the identity in [F4] give $\\langle Q\\psi,Q\\varphi\\rangle=\\langle Q^2\\psi,\\varphi\\rangle=\\lambda\\langle\\psi,\\varphi\\rangle$. By [F6], and since $\\sqrt\\lambda$ is nonzero in the complex field by [F7], division by $\\sqrt\\lambda$ therefore makes $Q$ an isometry on $E_\\lambda$. Also $(Q/\\sqrt\\lambda)^2\\psi=Q^2\\psi/\\lambda=\\psi$ there. Together with the parity exchange in step 2.1, this proves that the restriction $U_\\lambda:E_\\lambda^+\\to E_\\lambda^-$ is an isometry with inverse the restriction from $E_\\lambda^-$ to $E_\\lambda^+$; it is consequently unitary and the finite dimensions agree.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "If $\\psi\\in\\ker H$, then $\\psi\\in D(Q^2)$, so $Q\\psi\\in D(Q)$. By [F2], [F5] and the adjoint identity [F4], $\\|Q\\psi\\|^2=\\langle Q\\psi,Q\\psi\\rangle=\\langle Q^2\\psi,\\psi\\rangle=0$. Positive definiteness in [F1] forces $Q\\psi=0$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma treats a selected positive eigenvalue; it has no full-spectrum boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1: The self-adjoint supercharge annihilates the zero-energy kernel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: A selected positive eigenspace has equal finite parity dimensions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: The same argument applies to every finite positive block."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma treats a selected positive eigenvalue; it has no full-spectrum boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly assumed for the imported adjoint/self-adjoint definitions in A1. The maps U_lambda and its inverse are the explicit restrictions Q/sqrt(lambda), so the argument introduces no separate choice of eigenbasis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement derives a unitary parity-exchanging map on a selected positive eigenspace and vanishing of Q on ker H; it does not claim an iff characterization of the operator hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Equal parity dimensions alone are not asserted to imply the dense-domain self-adjointness or anticommutation hypotheses; the proof only proceeds from those hypotheses."
+        }
+      ]
+    },
+    "def-qftx-graded-trace-class-index-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Sigma is only a countable subset of (0,infinity), so Sigma=empty is allowed. Then the orthogonal sum contains only the finite zero-energy spaces and the heat sums reduce to their finite signed dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: With H=0 on a finite-dimensional graded space, every supplied heat eigenvalue is 1 and the signed sum is the even-minus-odd dimension. A zero parity space contributes an empty sum of zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A one-dimensional even zero-energy space with Q=0, empty Sigma and T_beta=I satisfies the listed operator and trace-class conditions, and its supplied-basis sum is W=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Either parity kernel may have dimension zero and either positive parity block may be zero. The data impose finite-dimensional blocks and absolute trace summability, without requiring a positive-energy block to occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The heat family is required only for beta>0; beta=0 and an infinite-beta limiting operator are not part of the datum. Zero energy is included separately as the finite kernel."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is stated for the imported Hilbert, adjoint and trace definitions. Compatible orthonormal bases are supplied as data; the Definition does not claim to construct them by an unstated selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The text lists the inputs and summability requirements for one index data class and defines W(beta); it states no equivalence between separate analytic criteria."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The equality of W(beta) with the signed kernel dimension is deferred to a separate theorem, and is not used here as a converse criterion for trace-class data."
+        }
+      ]
+    },
+    "thm-qftx-witten-index-beta-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-supercharge-positive-energy-pairing",
+          "source_section": "Statement",
+          "quote": "is a unitary isomorphism, with inverse $(Q/\\sqrt{\\lambda})|_{E_\\lambda^-}$. In particular $\\dim E_\\lambda^+=\\dim E_\\lambda^-$. Also $Q\\psi=0$ for every zero-energy vector $\\psi\\in\\ker H$. No discrete spectrum or finite-multiplicity assumption is made about energies other than the selected $\\lambda$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-graded-trace-class-index-data",
+          "source_section": "Definition",
+          "quote": "For each real $\\beta>0$, a bounded diagonal operator $T_\\beta$ is supplied as part of the data, with $T_\\beta e=e^{-\\beta\\lambda}e$ on $E_\\lambda^+\\cup E_\\lambda^-$ and $T_\\beta e=e$ on $E_0^+\\cup E_0^-$. Require $T_\\beta$ to be trace class for every $\\beta>0$; it is denoted $e^{-\\beta H}$. Its graded heat supertrace, called the **Witten index at parameter $\\beta$** in this data class, is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "By [F1], $Q/\\sqrt\\lambda$ is a linear bijection between the finite-dimensional positive-energy parity eigenspaces, so $m_\\lambda^+:=\\dim\\mathcal H_\\lambda^+=\\dim\\mathcal H_\\lambda^-=:m_\\lambda^-$ for every $\\lambda\\in\\Sigma$. On any supplied orthonormal basis of $\\mathcal H_\\lambda^\\pm$, [F2] gives $\\langle T_\\beta e,e\\rangle=e^{-\\beta\\lambda}$ for each basis vector. Therefore the positive-energy contribution to the signed basis sum at this fixed $\\lambda$ is $e^{-\\beta\\lambda}(m_\\lambda^+-m_\\lambda^-)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "By [F2], the full diagonal family is absolutely summable. For the partition into its energy blocks, the absolute value of each block sum is at most the sum of the absolute values in that block; hence the family of block sums is also absolutely summable. To see that its sum equals the original sum, fix $\\varepsilon>0$ and choose a finite set of basis vectors whose omitted absolute tail is below $\\varepsilon$. Only finitely many energy blocks meet that finite set, and the omitted absolute tail bounds the difference between the full sum and the sum of those complete block sums. Letting $\\varepsilon$ decrease to zero proves that grouping by energy preserves the sum. Step 1.1 cancels every positive-energy block; each zero-energy even basis vector contributes $1$ and each zero-energy odd basis vector contributes $-1$. The remaining finite sum is $m_0^+-m_0^-$, independent of $\\beta$. The proof uses no trace cyclicity and no positive-energy eigenvector outside the given discrete decomposition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: With no positive spectrum only zero modes contribute."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: The zero-energy superdimension remains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: One positive block cancels."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: Each finite positive block has equal parity multiplicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem assumes β>0 and has no β=0 endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The supplier datum carries Countable Choice and supplied compatible bases. In step 2.1 a finite set with omitted absolute tail below epsilon exists by absolute summability; only that one finite witness is used, not a simultaneous selection over all epsilon."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a beta-independent supertrace from the full pure-point paired trace-class hypotheses. It does not express an equivalence with beta independence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A constant signed trace is not asserted to recover an odd self-adjoint supercharge, pure-point spectrum or trace-class heat family; no such converse appears in steps 1.1–2.1."
+        }
+      ]
+    },
+    "ex-qftx-n1-supercharge-oscillator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-super-poincare-algebra-4d",
+          "source_section": "Definition",
+          "quote": "Identify the Hermitian bispinor momentum matrix by $T_{\\alpha\\dot\\beta}=\\sigma^\\mu_{\\alpha\\dot\\beta}P_\\mu$, where $P_\\mu=\\eta_{\\mu\\nu}P^\\nu$. This fixes the mixed relation as $\\{Q^I_\\alpha,\\bar Q_{\\dot\\beta J}\\}=-2\\sigma^\\mu_{\\alpha\\dot\\beta}P_\\mu\\delta^I{}_J$. In a massive rest fiber $P^\\mu=(M,0,0,0)$, so $P_0=-M$ and the mixed anticommutator is $2M\\delta_{\\alpha\\dot\\beta}\\delta^I{}_J$. Here $N$ counts left Weyl spinors; the scalar central-charge matrix is antisymmetric and therefore vanishes for $N=1$. Tensorial or topological extensions are outside this scalar-central-charge algebra. The convention uses natural units $\\hbar=c=1$; translation and central-charge generators have mass dimension one and supercharges have mass dimension one-half.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The occupation formulas give $a_1^*|0,0\\rangle=|1,0\\rangle$, $a_1^*|0,1\\rangle=|1,1\\rangle$, $a_2^*|0,0\\rangle=|0,1\\rangle$, and $a_2^*|1,0\\rangle=-|1,1\\rangle$, with creation zero when its mode is occupied. Thus $a_1$ removes the first occupied mode without sign and $a_2$ removes the second with the sign $(-1)^{n_1}$. If $i=j$, applying $a_i a_i^*+a_i^*a_i$ to a basis vector gives that vector: when mode $i$ is empty only the first term returns it, and when occupied only the second does. If $i\\ne j$, the two orders remove and insert distinct modes with opposite signs from the displayed $(-1)^{n_1}$ rule, so they cancel. Therefore $\\{a_i,a_j^*\\}=\\delta_{ij}I$. Two annihilations or two creations also anticommute, since exchanging their order changes the same occupation sign and repeated creation or annihilation is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "Scaling the CAR by $\\sqrt{2M}$ gives $\\{Q_\\alpha,\\bar Q_{\\dot\\beta}\\}=2M\\delta_{\\alpha\\beta}I$. By [F1], the rest right-hand side is $-2\\sigma^0_{\\alpha\\dot\\beta}P_0=2M\\delta_{\\alpha\\beta}I$. The vanishing same-chirality anticommutators follow from the two-annihilation and two-creation relations in step 1.1, and all central charges were set to zero. Thus every stated rest anticommutator holds.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Each annihilation or creation changes $n_1+n_2$ by one, so every $Q_\\alpha$ and $\\bar Q_{\\dot\\alpha}$ reverses parity. The four occupation vectors have parities $+,-,-,+$, giving two states in each sector. The common domain is all of finite-dimensional $\\mathcal H$, so all products and adjoints used above are defined.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Fock occupation state |0,0> is included. In step 1.1 annihilation of an empty mode is zero and creation followed by annihilation returns that state, verifying the CAR on the empty occupation sector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: The vacuum and zero spatial momentum are explicit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: One-occupation basis states are odd."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: There are two states of each parity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each occupation n_i takes precisely 0 or 1. Step 1.1 checks the empty and occupied alternatives separately, including creation zero on an occupied mode; M is strictly positive with M=0 excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The four occupation vectors, matrices and Hilbert adjoints are explicit on the full finite-dimensional space. The verification makes no selection from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies the stated CAR realization and parity count for its displayed matrices, without an iff classifying every N=1 representation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Two even and two odd vectors are not claimed to force these oscillator formulas or a full spacetime representation; the Example explicitly limits itself to one rest fiber."
+        }
+      ]
+    },
+    "ex-qftx-n2-shortened-rest-fiber": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-super-poincare-algebra-4d",
+          "source_section": "Definition",
+          "quote": "Identify the Hermitian bispinor momentum matrix by $T_{\\alpha\\dot\\beta}=\\sigma^\\mu_{\\alpha\\dot\\beta}P_\\mu$, where $P_\\mu=\\eta_{\\mu\\nu}P^\\nu$. This fixes the mixed relation as $\\{Q^I_\\alpha,\\bar Q_{\\dot\\beta J}\\}=-2\\sigma^\\mu_{\\alpha\\dot\\beta}P_\\mu\\delta^I{}_J$. In a massive rest fiber $P^\\mu=(M,0,0,0)$, so $P_0=-M$ and the mixed anticommutator is $2M\\delta_{\\alpha\\dot\\beta}\\delta^I{}_J$. Here $N$ counts left Weyl spinors; the scalar central-charge matrix is antisymmetric and therefore vanishes for $N=1$. Tensorial or topological extensions are outside this scalar-central-charge algebra. The convention uses natural units $\\hbar=c=1$; translation and central-charge generators have mass dimension one and supercharges have mass dimension one-half.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-n-extended-central-charge-bounds",
+          "source_section": "Statement",
+          "quote": "The algebraic anticommutator $AA^\\sharp+A^\\sharp A$ equals $4(M-|z|)I$ on $\\mathcal D$. Here $A^\\sharp$ is the displayed combination of the individual actual adjoints; it is not asserted to be the adjoint of an unbounded sum on its maximal domain. If $\\mathcal K$ is finite-dimensional, all charge domains equal $\\mathcal K$ and $A^\\sharp=A^*$, so the formula is the ordinary operator anticommutator. At saturation $M=|z|$, for every $\\psi\\in\\mathcal D$ one has $A\\psi=A^\\sharp\\psi=0$. This is a representation-theoretic fiber statement: it does not assert that the fixed-momentum fiber is a normalizable subspace of the full Hilbert space, or that a state with specified charge exists or is stable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The displayed occupation rules and their adjoints give the two-mode CAR on each of the four basis vectors: for equal mode labels, creation followed by annihilation and annihilation followed by creation are the projections onto occupied and empty states, whose sum is the identity; for distinct labels, the two orders of changing the different occupations have opposite signs from the factor $(-1)^{n_1}$. Repeated creation or annihilation is zero. Therefore $\\{a_i,a_j^*\\}=\\delta_{ij}I$ and $\\{a_i,a_j\\}=\\{a_i^*,a_j^*\\}=0$. The same-mode mixed charges in the rest relation now give $2M I$, while every mismatched label is either a distinct-mode anticommutator or a repeated annihilator/creator and is zero. This verifies the mixed relation in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "For the same-flavor pairs, two annihilators or two creators anticommute by step 1.1, so their central bracket is zero. The two nonzero distinct-flavor brackets are $\\{Q^1_1,Q^2_2\\}=2M e^{i\\phi}\\{a_1,a_1^*\\}=2zI$ and $\\{Q^1_2,Q^2_1\\}=-2M e^{i\\phi}\\{a_2,a_2^*\\}=-2zI$. Every other distinct-flavor pair is either a distinct-mode anticommutator or a square of one creation/annihilation operator, and so has zero anticommutator. These are exactly $2\\epsilon_{\\alpha\\beta}Z^{IJ}$ with $\\epsilon_{12}=1$ and antisymmetric $Z$; taking Hilbert adjoints gives the conjugate barred relations.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Since $(Q^2_2)^*=e^{-i\\phi}\\sqrt{2M}a_1$ and $(Q^2_1)^*=-e^{-i\\phi}\\sqrt{2M}a_2$, direct substitution gives $Q^1_1-e^{i\\phi}(Q^2_2)^*=0$ and $Q^1_2+e^{i\\phi}(Q^2_1)^*=0$. Also $|z|=M$, so the bound in [F2] is saturated and its stated annihilation conclusion agrees with these explicit zero operators. The Hilbert space has two even and two odd basis vectors, and all domains equal the full finite-dimensional space.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The supplied two-mode Fock space contains the empty occupation vector |0,0>. Step 1.1 includes empty-mode annihilation and occupied-mode creation cases in its verification of all mixed CAR."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: The two saturated charge combinations vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: The two-mode CAR is checked."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: The central brackets have opposite spinor signs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: The positive-mass saturation is evaluated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The operators are explicit multiples of the specified two-mode creation and annihilation matrices on four given vectors. No arbitrary basis or state selection is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 construct one saturated N=2 fiber with two displayed zero charge combinations; the Example makes no iff claim classifying shortened fibers."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Saturation of an arbitrary N=2 rest fiber is not claimed to imply this particular four-dimensional oscillator realization or its chosen basis."
+        }
+      ]
+    },
+    "ex-qftx-berezin-coefficient-extraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-superspace-grassmann-algebra",
+          "source_section": "Definition",
+          "quote": "For each $i\\in J$, the left derivative $\\partial^L_{\\xi_i}$ is the unique odd derivation of the graded tensor algebra that vanishes on $\\mathcal A$ and has $\\partial^L_{\\xi_i}\\xi_j=\\delta_{ij}$; on homogeneous $u,v$ it obeys\n$$ \\partial^L_{\\xi_i}(uv)=(\\partial^L_{\\xi_i}u)v+(-1)^{|u|}u(\\partial^L_{\\xi_i}v). $$\nThe right derivative $\\partial^R_{\\xi_i}$ is the unique right odd derivation vanishing on $\\mathcal A$ with $\\partial^R_{\\xi_i}\\xi_j=\\delta_{ij}$ and\n$$ \\partial^R_{\\xi_i}(uv)=(-1)^{|v|}(\\partial^R_{\\xi_i}u)v+u(\\partial^R_{\\xi_i}v). $$\nFor one generator, write a polynomial uniquely with that generator on the left as $f=f_0+\\xi_i f_1$, with $f_0,f_1$ independent of $\\xi_i$, and define its Berezin integral by the complex-linear coefficient-extraction rule $\\int d\\xi_i\\,f=f_1$. Thus $\\int d\\xi_i\\,1=0$ and $\\int d\\xi_i\\,\\xi_i=1$. Fix the ordered measures\n$$ \\int d^2\\theta:=\\int d\\theta^2\\,d\\theta^1,\\qquad \\int d^2\\bar\\theta:=\\int d\\bar\\theta^{\\dot2}\\,d\\bar\\theta^{\\dot1},\\qquad \\int d^4\\theta:=\\int d\\bar\\theta^{\\dot2}\\,d\\bar\\theta^{\\dot1}\\,d\\theta^2\\,d\\theta^1. $$\nWith this order, $\\int d^4\\theta$ extracts the coefficient of $\\theta^1\\theta^2\\bar\\theta^{\\dot1}\\bar\\theta^{\\dot2}$. For superspace coordinates $x=(x^0,x^1,x^2,x^3)\\in\\mathbb R^{1,3}$ in natural units $\\hbar=c=1$, assign mass dimensions $[x^\\mu]=-1$, $[\\theta^\\alpha]=[\\bar\\theta^{\\dot\\alpha}]=-\\tfrac12$, $[d\\theta^\\alpha]=[d\\bar\\theta^{\\dot\\alpha}]=\\tfrac12$, and hence $[d^2\\theta]=[d^2\\bar\\theta]=1$ and $[d^4\\theta]=2$. These are formal engineering dimensions; no physical model or empirical unit convention is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-grassmann-coefficient-calculus",
+          "source_section": "Statement",
+          "quote": "For the basis-indexed vector space and product $e_Se_T=0$ when $S\\cap T\\ne\\varnothing$ and $e_Se_T=(-1)^{\\nu(S,T)}e_{S\\cup T}$ otherwise, with $\\nu(S,T)=|\\{(s,t)\\in S\\times T:s>t\\}|$, multiplication is associative, unital and supercommutative. The graded tensor product with a supercommutative coefficient algebra is also associative and supercommutative. The basis formulas for left and right odd differentiation extend to derivations with the stated Leibniz rules. The ordered four-variable Berezin integral is a well-defined linear functional extracting the coefficient of $\\theta^1\\theta^2\\bar\\theta^{\\dot1}\\bar\\theta^{\\dot2}$, and the stated conjugation is an involutive anti-automorphism.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "In the first monomial, moving $\\theta^2$ left past $\\bar\\theta^{\\dot1}$ makes one transposition and contributes a minus sign. Thus $\\theta^1\\bar\\theta^{\\dot1}\\theta^2\\bar\\theta^{\\dot2}=-\\theta^1\\theta^2\\bar\\theta^{\\dot1}\\bar\\theta^{\\dot2}$, so the ordered top coefficient of $f$ is $-c+d$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "By [F2], the ordered measure returns exactly that top coefficient; hence $\\int d^4\\theta\\,f=d-c$. The result depends on the stated measure order and generator convention.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: The displayed f has no empty-monomial component. The coefficient-extraction functional sends the empty monomial 1 to zero, so adding no degree-zero term is consistent with the d-c evaluation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: The formula includes c=d=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: One transposition contributes a minus sign."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: Two orderings of a top monomial are compared."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameters c,d range over C without an interval or excluded endpoint; the measure has fixed four-variable order and the result is a finite polynomial identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 perform one prescribed generator transposition and then read the unique top coefficient. No selection of states, bases or nonempty-set representatives enters."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is the explicit evaluation integral f=d-c for the written polynomial, not an equivalence of conditions on c and d."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An integral value alone is not asserted to recover the two coefficients or their order; the proof derives the value from the fixed ordered monomials."
+        }
+      ]
+    },
+    "ex-qftx-finite-witten-index-cancellation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-graded-trace-class-index-data",
+          "source_section": "Definition",
+          "quote": "For each real $\\beta>0$, a bounded diagonal operator $T_\\beta$ is supplied as part of the data, with $T_\\beta e=e^{-\\beta\\lambda}e$ on $E_\\lambda^+\\cup E_\\lambda^-$ and $T_\\beta e=e$ on $E_0^+\\cup E_0^-$. Require $T_\\beta$ to be trace class for every $\\beta>0$; it is denoted $e^{-\\beta H}$. Its graded heat supertrace, called the **Witten index at parameter $\\beta$** in this data class, is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-witten-index-beta-independence",
+          "source_section": "Statement",
+          "quote": "For every pure-point graded trace-class index datum with positive-energy blocks paired by the unitary maps $U_\\lambda=Q/\\sqrt\\lambda$ proved from its supercharge data, the absolutely convergent supertrace satisfies",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-class-operator",
+          "source_section": "Definition",
+          "quote": "**Immediate consequences.** Since $0\\le s_n(T)\\le s_1(T)=\\|T\\|$\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]), the terms\nare nonnegative and $\\|T\\|_1\\ge\\|T\\|\\ge0$ whenever $T$ is trace class; the zero\noperator is trace class with $\\|0\\|_1=0$. When $T$ has finite rank $r$ the\nsequence is zero-padded, the series is the finite sum\n$\\sum_{n=1}^r s_n(T)=\\sum_{\\lambda>0}\\lambda\\dim_{\\mathbb F} E_\\lambda(|T|)$ over the finitely\nmany positive eigenvalues of $|T|$ counted with multiplicity ([[def-dimension]]),\nand every finite-rank operator is compact\n([[lem-finite-rank-operators-are-compact]]) and therefore trace class; in particular every\noperator with finite-dimensional range and every rank-one operator is trace\nclass. If $T$ has infinite rank then $s_n(T)>0$ for every $n$ and the series\n$\\sum_{n\\ge1}s_n(T)$ converges in the summable case. By the necessary\ncondition for convergence of a scalar series ([[lem-nth-term-test]]), a\ntrace-class operator with infinite rank has $s_n(T)\\to0$, hence\nis a norm limit of finite-rank operators\n([[thm-singular-value-decomposition-for-compact-operators]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The map $Q$ is a self-adjoint matrix on the displayed orthonormal basis: its only nonzero block in the ordered pair $(|b\\rangle,|f\\rangle)$ is $\\sqrt\\omega\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, a real symmetric matrix, and it is zero on the orthogonal zero-energy subspace. This block exchanges parity, and its square is $\\omega I$; thus $H$ is $0$ on the three zero states and $\\omega I$ on the positive pair. The heat operator has finite rank, so it is trace class by [F4]; thus the data satisfy the finite pure-point hypotheses.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The three zero modes contribute $2-1=1$ to the supertrace. The positive pair contributes $e^{-\\beta\\omega}-e^{-\\beta\\omega}=0$, so direct evaluation gives $W(\\beta)=1$. By [F2], this also equals $m_0^+-m_0^-=2-1$. This calculation is finite dimensional and makes no continuum or regularization claim.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes five basis vectors, three zero modes and one positive pair at omega>0. An empty Hilbert space or empty positive-pair family is not a varying case of this fixed datum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: Three zero modes contribute 2−1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: One positive pair cancels."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: The positive eigenspace has one basis vector of each parity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The assertion holds at every beta>0 by the exact finite cancellation in step 2.1. Beta=0 and beta tending to infinity are not asserted as part of the heat-family domain, and omega=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: A1 explicitly retains Countable Choice for the trace-class supplier. The five compatible basis vectors and the single positive pair are already supplied, so no additional eigenbasis selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This five-state example computes W(beta)=1 from an explicit Q block and zero-mode count; it claims no iff characterization of systems with index one."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A system with W=1 need not have these five states or this omega block, and the Example does not assert that converse."
+        }
+      ]
+    }
+  }
+}

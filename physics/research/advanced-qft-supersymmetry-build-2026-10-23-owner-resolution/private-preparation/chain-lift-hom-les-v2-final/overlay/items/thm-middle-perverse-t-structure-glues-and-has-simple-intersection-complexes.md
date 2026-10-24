@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes.md

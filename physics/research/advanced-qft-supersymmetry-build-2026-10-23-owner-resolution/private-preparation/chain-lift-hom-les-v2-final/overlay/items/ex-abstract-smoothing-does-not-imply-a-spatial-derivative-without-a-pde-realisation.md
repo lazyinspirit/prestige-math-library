@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-abstract-smoothing-does-not-imply-a-spatial-derivative-without-a-pde-realisation.md

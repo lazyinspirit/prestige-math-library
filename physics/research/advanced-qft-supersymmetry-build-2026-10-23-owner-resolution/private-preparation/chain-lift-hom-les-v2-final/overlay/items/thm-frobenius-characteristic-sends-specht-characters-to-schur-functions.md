@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-frobenius-characteristic-sends-specht-characters-to-schur-functions.md

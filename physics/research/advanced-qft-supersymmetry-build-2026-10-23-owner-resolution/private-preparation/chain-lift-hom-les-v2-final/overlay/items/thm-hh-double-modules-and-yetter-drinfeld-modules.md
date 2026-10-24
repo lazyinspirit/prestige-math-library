@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hh-double-modules-and-yetter-drinfeld-modules.md

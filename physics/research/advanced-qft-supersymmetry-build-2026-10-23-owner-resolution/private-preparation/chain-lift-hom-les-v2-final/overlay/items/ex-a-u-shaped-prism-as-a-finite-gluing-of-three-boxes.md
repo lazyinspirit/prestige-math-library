@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-u-shaped-prism-as-a-finite-gluing-of-three-boxes.md

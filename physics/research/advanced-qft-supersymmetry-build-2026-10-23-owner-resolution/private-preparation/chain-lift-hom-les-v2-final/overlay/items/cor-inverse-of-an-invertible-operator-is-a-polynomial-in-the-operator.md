@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator.md

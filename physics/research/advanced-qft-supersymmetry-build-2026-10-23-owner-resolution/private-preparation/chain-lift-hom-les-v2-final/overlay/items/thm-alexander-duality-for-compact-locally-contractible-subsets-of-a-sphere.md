@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere.md

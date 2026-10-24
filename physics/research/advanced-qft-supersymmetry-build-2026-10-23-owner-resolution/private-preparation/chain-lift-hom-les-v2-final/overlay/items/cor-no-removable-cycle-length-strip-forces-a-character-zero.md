@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-no-removable-cycle-length-strip-forces-a-character-zero.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-bott-vanishing-for-real-pontryagin-monomials-of-a-codimension-q-foliation.md

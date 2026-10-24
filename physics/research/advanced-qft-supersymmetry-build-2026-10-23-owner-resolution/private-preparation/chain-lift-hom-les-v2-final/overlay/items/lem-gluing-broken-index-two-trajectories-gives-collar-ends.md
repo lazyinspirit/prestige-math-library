@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-gluing-broken-index-two-trajectories-gives-collar-ends.md

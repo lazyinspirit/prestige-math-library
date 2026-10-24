@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-qa-finite-cyclic-discrete-logarithm-correctness-success-cost.md

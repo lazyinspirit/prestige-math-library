@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-chebyshev-degree-leading-coefficients-and-extreme-values.md

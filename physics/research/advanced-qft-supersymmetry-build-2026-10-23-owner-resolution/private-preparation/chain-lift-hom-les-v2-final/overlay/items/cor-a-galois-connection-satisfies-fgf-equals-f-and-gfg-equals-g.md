@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-galois-connection-satisfies-fgf-equals-f-and-gfg-equals-g.md

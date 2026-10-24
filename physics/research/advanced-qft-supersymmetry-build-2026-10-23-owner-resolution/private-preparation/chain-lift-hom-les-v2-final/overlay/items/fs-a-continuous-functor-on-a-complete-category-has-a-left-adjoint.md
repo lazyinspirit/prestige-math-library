@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-continuous-functor-on-a-complete-category-has-a-left-adjoint.md

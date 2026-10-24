@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-radical-minimal-complexes-and-perverse-filtrations-in-the-soergel-category.md

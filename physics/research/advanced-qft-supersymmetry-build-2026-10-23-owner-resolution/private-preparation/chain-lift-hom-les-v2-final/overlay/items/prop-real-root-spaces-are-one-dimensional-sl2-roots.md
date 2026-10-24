@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-real-root-spaces-are-one-dimensional-sl2-roots.md

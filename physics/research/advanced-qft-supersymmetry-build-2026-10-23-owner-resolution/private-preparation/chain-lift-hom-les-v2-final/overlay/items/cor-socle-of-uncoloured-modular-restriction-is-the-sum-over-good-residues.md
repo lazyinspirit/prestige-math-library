@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-socle-of-uncoloured-modular-restriction-is-the-sum-over-good-residues.md

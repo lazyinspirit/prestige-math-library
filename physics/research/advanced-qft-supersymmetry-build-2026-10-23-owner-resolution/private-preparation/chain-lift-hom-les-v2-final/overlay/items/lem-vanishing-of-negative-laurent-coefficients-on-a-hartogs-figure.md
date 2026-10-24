@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-vanishing-of-negative-laurent-coefficients-on-a-hartogs-figure.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-smooth-function-defined-near-a-closed-set-extends-globally-without-a-cutoff.md

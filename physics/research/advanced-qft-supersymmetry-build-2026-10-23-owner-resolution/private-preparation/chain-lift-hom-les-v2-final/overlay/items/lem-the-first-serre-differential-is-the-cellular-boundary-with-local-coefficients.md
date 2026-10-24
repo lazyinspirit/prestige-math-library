@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients.md

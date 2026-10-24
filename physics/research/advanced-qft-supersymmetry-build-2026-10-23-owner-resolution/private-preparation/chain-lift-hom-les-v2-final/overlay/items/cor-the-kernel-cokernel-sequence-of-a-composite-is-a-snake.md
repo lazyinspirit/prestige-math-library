@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-kernel-cokernel-sequence-of-a-composite-is-a-snake.md

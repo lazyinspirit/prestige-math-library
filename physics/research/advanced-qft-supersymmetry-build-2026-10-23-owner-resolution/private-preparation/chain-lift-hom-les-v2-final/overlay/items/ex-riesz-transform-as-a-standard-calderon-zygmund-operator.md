@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-riesz-transform-as-a-standard-calderon-zygmund-operator.md

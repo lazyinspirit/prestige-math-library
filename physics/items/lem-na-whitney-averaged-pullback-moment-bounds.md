@@ -1,0 +1,94 @@
+---
+id: lem-na-whitney-averaged-pullback-moment-bounds
+kind: lemma
+title: Averaged pullback Whitney moments and uniform near identity
+status: published
+origin: pipeline
+pipeline_run: numerical-analysis-remaining-71-2026-10-17
+dependency_level: 4
+deps:
+  [
+    lem-na-graded-whitney-mesh-size-and-boundary-shifts,
+    lem-na-whitney-moments-commute-with-grad-curl-div,
+    def-na-zero-tangential-hcurl,
+    def-countable-choice,
+    thm-local-coordinate-formula-for-the-exterior-derivative,
+    thm-the-exterior-derivative-commutes-with-pullback,
+    def-integral-of-a-form-over-a-smooth-singular-simplex,
+    lem-stokes-theorem-for-the-standard-simplex,
+    lem-smooth-bump-between-concentric-euclidean-balls,
+    lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set,
+    lem-l-two-with-the-integral-pairing-is-a-hilbert-space,
+    lem-distributional-derivatives-commute-with-convolution-against-test-functions,
+    thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign,
+    cor-c-one-change-of-variables-for-l-one-functions,
+    thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces,
+    thm-dominated-convergence,
+    cor-cauchy-schwarz-inequality-for-l-two,
+    thm-local-smooth-approximation-in-wkp,
+    lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space
+  ]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element
+        exterior calculus: from Hodge theory to numerical stability"
+      url: https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+---
+
+## Statement
+
+Assume Countable Choice ([[def-countable-choice]]). Use the preceding mesh-size and boundary-shift lemma. All differential-form notation here is the following finite coefficient notation. A degree-$k$ form in $\mathbb R^3$ is $u=\sum_{I}u_I\,dx^{i_1}\wedge\cdots\wedge dx^{i_k}$, where the sum is over increasing $k$-tuples $I=(i_1,\ldots,i_k)$, the wedge is alternating, and $\|u\|_2^2=\sum_I\|u_I\|_2^2$. The empty wedge is one. Put $du=\sum_I\sum_{j=1}^3(\partial_j u_I)dx^j\wedge dx^I$, with derivatives interpreted distributionally through integration by parts against compactly supported scalar tests; repeated differentials are zero. The graph space $H\Lambda^k$ consists of the coefficient vectors with $u,du\in L^2$, with norm squared $\|u\|_2^2+\|du\|_2^2$; in top degree $d=0$. These formulas agree with the proved smooth coordinate exterior derivative. Identify vector fields with forms by $\sum_{i=1}^3u_i dx_i$ in degree one, $v_1dx_2\wedge dx_3+v_2dx_3\wedge dx_1+v_3dx_1\wedge dx_2$ in degree two, and $q\,dx_1\wedge dx_2\wedge dx_3$ in degree three. Thus expansion of the finite formula for $d$ gives grad, curl, and div with exactly these signs; the degree-two coefficients in increasing order are $(v_3,-v_2,v_1)$, so their Euclidean norm equals that of $v$. For a smooth map $G$ from an open subset of $\mathbb R^q$ to $\mathbb R^3$, define its pullback by the finite tangent-Jacobian-minor formula
+$$G^*u=\sum_{J}\left(\sum_I u_I(G)\det\bigl(\partial_{j_b}G^{i_a}\bigr)_{a,b=1}^k\right)\,dt^{j_1}\wedge\cdots\wedge dt^{j_k}.$$
+Here $J$ ranges over increasing $k$-tuples in $1,\ldots,q$; in degree zero this is composition. If $a:T_k\to\sigma$ is the oriented affine simplex parametrization, define $\int_\sigma G^*u$ as the integral over $T_k$ of the coefficient of $(G\circ a)^*u$ on its positive top wedge. Orientation reversal changes its sign; in degree zero it is evaluation. For averaged moments of merely $L^2$ coefficients, the joint parameter integral is the definition and the estimates below prove it exists and is representative-independent. No unbounded trace of an $L^2$ form on a fixed lower-dimensional surface is being defined. This is the existing smooth simplex-integration convention, extended only through the displayed integrable averages. Write $E_h^k$ for the four full Whitney spaces and $E_{h,0}^k$ for the subspaces with all boundary $k$-simplex moments zero; $E_{h,0}^3=E_h^3$. Let $H_0\Lambda^k$ be the graph closure of compactly supported smooth $k$-forms; in degrees zero and one these are $H_0^1$ and the defined $H_0(\operatorname{curl})$.
+
+Fix nonnegative $\rho\in C_c^\infty(B_1)$ with integral one. For each oriented mesh $k$-simplex $\sigma$, define
+$$m_{\sigma}^{+,k}(u)=\int_{B_1}\rho(y)\int_\sigma(F_{\epsilon,y}^{+})^*u\,dy,\qquad m_{\sigma}^{-,k}(u)=\int_{B_1}\rho(y)\int_\sigma(F_{\epsilon,y}^{-})^*\widetilde u\,dy,$$
+where $\widetilde u$ is zero extension and a degree-zero simplex integral is evaluation. Whitney reconstruction from these moments defines $Q_h^{+,k}:L^2\Lambda^k\to E_h^k$ and $Q_h^{-,k}:L^2\Lambda^k\to E_{h,0}^k$. For $0<\epsilon\le\epsilon_0$,
+$$\|Q_h^{\pm,k}u\|_2\le C\epsilon^{-3/2}\|u\|_2,\qquad \|(Q_h^{\pm,k}-I)v_h\|_2\le C\epsilon\|v_h\|_2,$$
+where the second bound uses respectively $v_h\in E_h^k$ or $v_h\in E_{h,0}^k$. Constants are independent of $h,\epsilon$. For $k=0,1,2$, $dQ_h^{+,k}=Q_h^{+,k+1}d$ on $H\Lambda^k$ and $dQ_h^{-,k}=Q_h^{-,k+1}d$ on $H_0\Lambda^k$. In degree three, both exterior derivatives are zero. The relative Whitney spaces equal $E_h^k\cap H_0\Lambda^k$.
+
+## Facts & Assumptions
+
+
+**Given:** Countable Choice; the preceding geometry, the stated Whitney spaces, their unisolvent moments and differential/moment identities.
+
+[F1] The shift maps have bounded tangential derivatives on every mesh simplex and a uniformly controlled displacement and patch overlap. ([[lem-na-graded-whitney-mesh-size-and-boundary-shifts]])
+
+[F2] Whitney reconstruction is unisolvent and its moments identify $d$ with the oriented coboundary. ([[lem-na-whitney-moments-commute-with-grad-curl-div]])
+
+[F3] The smooth coordinate formula, pullback commutation and oriented simplex integration are given by [[thm-local-coordinate-formula-for-the-exterior-derivative]], [[thm-the-exterior-derivative-commutes-with-pullback]], [[def-integral-of-a-form-over-a-smooth-singular-simplex]], and [[lem-stokes-theorem-for-the-standard-simplex]]. Stokes on a prism follows by its finite affine triangulation and cancellation of common faces; this uses no manifold-with-corners theorem.
+
+[F4] Under Countable Choice, compactly supported smooth functions are $L^2$ dense on every open set, and finite products of $L^2$ coefficient spaces are complete ([[lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set]], [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]). Cauchy–Schwarz is [[cor-cauchy-schwarz-inequality-for-l-two]].
+
+[F5] Distributional differentiation commutes with test-function convolution ([[lem-distributional-derivatives-commute-with-convolution-against-test-functions]]). This applies to the finite signed sums defining $d$, without requiring each separate first derivative to be $L^2$. Smoothness of coefficient mollification is [[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]]; convergence of each $L^2$ coefficient and of each $L^2$ coefficient of $du$ on compact interior subsets is the $k=0,p=2$ case of [[thm-local-smooth-approximation-in-wkp]]. The fixed nonnegative smooth unit-mass kernel can be obtained by normalizing the bump in [[lem-smooth-bump-between-concentric-euclidean-balls]].
+
+[F6] The integral passages use [[cor-c-one-change-of-variables-for-l-one-functions]], [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], and [[thm-dominated-convergence]]. On each open cell the variable-$g_h$ shift is smooth and has invertible Jacobian; the local smooth inverses exist by [[lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space]], and injectivity makes the open cell images disjoint, so the $C^1$ change-of-variables formula can be summed over cells. A Lipschitz image of a finite planar mesh face is three-dimensional null: cover that face by $O(\delta^{-2})$ squares of diameter $O(\delta)$; their images fit in balls of volume $O(\delta^3)$, with total outer volume $O(\delta)\to0$. Thus this use needs no unproved general Lipschitz area formula.
+
+**Choice use.** Countable Choice is inherited from the actual published $L^2$ density/completeness, coefficient smoothing, and Lebesgue change-of-variables interfaces [F4]–[F6]. One fixes representatives for at most countably many approximation coefficients when taking sequences. The mesh, coefficient, orientation and boundary-cover choices are all finite. No arbitrary-index choice or regular-decomposition supplier is used.
+
+## Proof
+
+
+1.1 On a shape-regular cell, change variables to a fixed reference tetrahedron using the affine differential-form pullback. To verify the scaling, let $A_K$ be the linear part of its affine reference map. Its columns are edge vectors, so $\|A_K\|\le\sqrt3h_K$. Shape regularity gives $\rho_K\ge h_K/\sigma$, and the inscribed ball yields $|\det A_K|=6|K|\ge8\pi(h_K/\sigma)^3$. If $s_1\ge s_2\ge s_3$ are its singular values, then $s_1,s_2\le\sqrt3h_K$ and $s_1s_2s_3=|\det A_K|$, so $s_3\ge c_\sigma h_K$. Thus $s_{\min}(A_K)$ and $\|A_K\|$ are both comparable to $h_K$. Reference finite-dimensional norm equivalence now gives $\|v_h\|_{L^2(K)}^2\simeq\sum_{\sigma\subset K,\,\dim\sigma=k}h_K^{3-2k}\left|\int_\sigma v_h\right|^2,\qquad \|v_h\|_{L^\infty(K)}+h_K\|dv_h\|_{L^\infty(K)}\le C h_K^{-3/2}\|v_h\|_{L^2(K)}.$ Norm equivalence follows directly because the moment map is an injective linear map on the finite reference space [F2]; the maximum and minimum of its norm on the Euclidean unit sphere are finite and strictly positive. The inverse estimate follows the same way for polynomial coefficients and their first derivatives. These arguments apply to degrees zero through three, taking $d=0$ in top degree. [F2, given, algebra]
+
+1.2 We first justify all boundary and weak-differential operations used below. Using the smooth field $b$ from [F1], replace $g_h$ temporarily by the constant one and let $S_t^+$ be the average pullback by $x\mapsto x+t(b(x)+ry)$. Its image on $\overline\Omega$ has interior clearance $ct$. In coordinates the pullback coefficients are the minors displayed above, with $D_xF=I+tDb(x)$. The change of variables $z=x+t(b(x)+ry)$ writes this operator as integration against a smooth kernel in $x,z$, including the smooth pullback coefficients; hence it maps $L^2$ forms to forms smooth on a neighborhood of $\overline\Omega$. More explicitly, with $\psi_t(x)=x+tb(x)$ it is the pullback $\psi_t^*(\check\rho_{tr}*\widetilde u)$, where $\check\rho(y)=\rho(-y)$ and $\widetilde u$ is zero extension of the coefficient vector: the pullback minors are independent of $y$. Smoothness thus follows directly from the coefficient convolution theorem [F5] and finite smooth composition, rather than from an unstated parameter differentiation theorem. Pullback commutes with weak $d$: locally mollify on the interior image, apply the smooth pullback identity [F3] there, and pass in $L^2$ using [F5] for the finite exterior-derivative sums and the change of variables [F6]. Averaging preserves this identity. The same change of variables bounds $S_t^+$ on $L^2$ uniformly for small $t$. On restrictions of globally smooth forms it tends to the identity, and these restrictions are $L^2$ dense by [F4] (a compactly supported smooth form on the open domain extends smoothly by zero). A three-term approximation then proves $S_t^+u\to u$ in $L^2$ for every $u$; applied to $du$ it proves graph convergence for $u\in H\Lambda^k$. The graph differential is closed in the complete finite-product $L^2$ space [F4]: if $u_j\to u$ and $du_j\to f$ in $L^2$, pass each coefficient weak test identity to the limit by Cauchy–Schwarz to obtain $du=f$. In particular smooth-neighborhood forms are graph dense. [F1, F3, F4, F5, F6, construct, algebra]
+
+2.1 Fix $x\in\sigma\subset K$. The map $y\mapsto F_{\epsilon,y}^{\pm}(x)$ is translation and scalar dilation with Jacobian $(\epsilon r g_h(x))^3$. The coefficients of its pullback on the tangent space of $\sigma$ are bounded by [F1]. Cauchy–Schwarz [F4] in $y$, $g_h\simeq h_K$, and [F1] therefore give $\int_{B_1}\rho(y)|((F_{\epsilon,y}^{\pm})^*u)_x|\,dy\le C\epsilon^{-3/2}h_K^{-3/2}\|u\|_{L^2(\omega_K)}.$ For the minus sign use the zero extension; its sampled $L^2$ norm is bounded by the same patch norm. Integrating over $\sigma$, whose $k$-volume is at most $C h_K^k$, bounds each moment by $C\epsilon^{-3/2}h_K^{k-3/2}\|u\|_{L^2(\omega_K)}$. This also proves independence of representatives and absolute integrability. Reconstruction and step 1.1 give the first claimed bound after summing the bounded-overlap patches. At boundary simplices the outward images lie strictly outside $\overline\Omega$, so every minus moment there vanishes. [F1, F4, F6, step 1.1, algebra]
+
+2.2 For a piecewise Whitney form with all boundary tangential moments zero, zero extension has distributional $d$ equal to its piecewise $d$, extended by zero. Indeed integrate cellwise against a compact test form: the interior-face terms cancel by matching tangential traces [F2], and boundary terms vanish because zero boundary moments give zero entire tangential polynomial trace. Use $S_t^-$, defined as in step 1.2 with $-b$, on that zero extension. It is smooth and zero on a collar of the boundary, since every outward sample from sufficiently near the boundary lies outside $\overline\Omega$. It converges in the graph norm by the same pullback and density argument. Therefore the relative Whitney form belongs to the graph closure of $C_c^\infty(\Omega)$, as asserted. For a general member of that closure, zero extension commutes with $d$ by passage from compactly supported approximants. Conversely, if a Whitney form belongs to this closure, its zero extension has no boundary surface contribution to $d$. Cellwise integration by parts identifies that contribution with its polynomial tangential trace on the relative interior of each boundary face. Such a surface distribution cannot be an $L^2$ function unless its coefficient is zero: testing with a fixed smooth tangential function times a normal cutoff of width $\delta$ leaves a fixed surface pairing while its $L^2$ volume pairing tends to zero. Thus the tangential polynomial trace vanishes on every boundary face. Its boundary subsimplex moments vanish as well. This proves the stated equality of spaces; top degree has no boundary moments or trace condition. [F1, F2, step 1.2, construct]
+
+3.1 For $k=0,1,2$ and smooth forms, Stokes and pullback commutation [F3] on $\sigma$ give $m_\sigma^{\pm,k+1}(du)=\sum_{\tau\subset\partial\sigma}\operatorname{sgn}(\tau,\sigma)m_\tau^{\pm,k}(u)$. The restriction of $g_h$ to a simplex is affine and common to all incident cells; thus its tangential derivative and the shift on every face agree, even though ambient derivatives jump across mesh faces. Stokes is valid for this smooth restriction. Reconstruction [F2] proves commutation for smooth full inputs and compactly supported relative inputs in degrees zero through two. Use step 1.2 for full graph density and the defining closure for relative graph density. The $L^2$ bounds in step 2.1 and closedness of distributional $d$ pass these identities to precisely those graph domains. In degree three, $d$ vanishes on both the input and reconstructed form, so the terminal identity is zero. [F1, F2, F3, F4, step 2.1, step 1.2, step 2.2, algebra]
+
+3.2 To obtain a bound tending to zero with $\epsilon$, use the prism homotopy $H_y(s,x)=x+s\epsilon g_h(x)(\pm b(x)+ry)$ on $[0,1]\times\sigma$. Its $s$-derivative has size at most $C\epsilon h_K$ and its derivatives along $\sigma$ have size at most $C$. Stokes [F3] on the finitely triangulated prism, equivalently the fundamental theorem of calculus for the displayed pullback-minor coefficients, gives $\int_\sigma(F_{\epsilon,y}^{\pm})^*v_h-\int_\sigma v_h=\int_{[0,1]\times\sigma}H_y^*(dv_h)+\int_{[0,1]\times\partial\sigma}H_y^*v_h,$ with the standard oriented prism signs; only absolute values will be used. In the relative case take the zero extension from step 2.2. To justify this identity for the piecewise polynomial form, approximate full forms by $S_t^+v_h$ and relative zero extensions by whole-space convolutions. Their coefficients and exterior derivatives are bounded on the pertinent patches by the piecewise bounds of step 1.1, uniformly as $t\downarrow0$. On the original simplex their tangential traces converge to the common Whitney tangential trace: for an interior point of a mesh simplex, all sufficiently near cells contain that simplex and have that same trace; the pullback's tangent directions tend to the original ones. On the shifted simplex convergence holds for almost every $y$ and almost every $x$, because for fixed $x$ the map $y\mapsto F_{\epsilon,y}^{\pm}(x)$ has nonzero volume Jacobian; change of variables and Fubini [F6] therefore give exactly this null-set passage. The same argument works inside the prism for every $s>0$. Dominated convergence [F6], first in simplex parameters and $y$ and then in $s$, passes the averaged identity and its estimates to $v_h$. At $s=0$ the trace argument just given supplies the original moment. [F1, F2, F3, F5, F6, step 1.1, step 1.2, step 2.2, construct]
+
+4.1 The first prism integral is bounded by $C\epsilon h_K^{k+1}\|dv_h\|_{L^\infty(\omega_K)}$ and the second by $C\epsilon h_K^k\|v_h\|_{L^\infty(\omega_K)}$. For $k=0$ the second term is absent; for $k=3$ the first is zero. Every cell in the patch has diameter comparable to $h_K$. Step 1.1 therefore bounds their sum by $C\epsilon h_K^{k-3/2}\|v_h\|_{L^2(\omega_K)}$. Average in $y$, reconstruct using step 1.1, and sum the bounded-overlap patches. This gives $\|(Q_h^{\pm,k}-I)v_h\|_2\le C\epsilon\|v_h\|_2$ uniformly in every degree. [F1, step 1.1, step 3.2, algebra] ∎

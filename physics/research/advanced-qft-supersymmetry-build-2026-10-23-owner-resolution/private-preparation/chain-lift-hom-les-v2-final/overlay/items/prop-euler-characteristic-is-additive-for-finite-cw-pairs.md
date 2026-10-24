@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-euler-characteristic-is-additive-for-finite-cw-pairs.md

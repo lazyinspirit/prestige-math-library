@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-ext-via-an-injective-resolution-of-the-second-variable.md

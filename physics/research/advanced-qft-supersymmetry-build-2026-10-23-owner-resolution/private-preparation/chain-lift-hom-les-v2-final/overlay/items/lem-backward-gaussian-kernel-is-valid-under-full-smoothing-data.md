@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data.md

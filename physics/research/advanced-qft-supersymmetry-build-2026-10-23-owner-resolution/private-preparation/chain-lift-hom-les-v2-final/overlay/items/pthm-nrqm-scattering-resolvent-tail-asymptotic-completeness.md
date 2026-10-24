@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness.md

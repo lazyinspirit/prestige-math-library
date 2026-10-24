@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-factorisation-of-the-cyclotomic-polynomial-over-a-finite-field.md

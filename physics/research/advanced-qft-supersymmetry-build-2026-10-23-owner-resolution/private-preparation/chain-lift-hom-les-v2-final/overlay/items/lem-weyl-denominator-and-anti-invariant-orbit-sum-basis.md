@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-weyl-denominator-and-anti-invariant-orbit-sum-basis.md

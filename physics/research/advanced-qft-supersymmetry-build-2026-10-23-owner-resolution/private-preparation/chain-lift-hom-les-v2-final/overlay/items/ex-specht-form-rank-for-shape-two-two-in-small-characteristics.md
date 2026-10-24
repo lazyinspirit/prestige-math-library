@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-specht-form-rank-for-shape-two-two-in-small-characteristics.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-compact-support-c-c-and-c-zero-on-an-lch-space.md

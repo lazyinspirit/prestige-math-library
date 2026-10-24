@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-uniform-laws-on-expanding-finite-grids-converge-to-uniform-zero-one.md

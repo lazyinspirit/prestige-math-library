@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-natural-transformation-composed-with-a-dinatural-transformation-is-dinatural.md

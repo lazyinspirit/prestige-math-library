@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-de-giorgi-local-boundedness-with-scale-correct-forcing-term.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-left-six-vertex-prime-h-graph-is-prime-and-leaf-deletes-to-the-bull.md

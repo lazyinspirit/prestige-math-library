@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-compact-kahler-hodge-decomposition-via-elliptic-harmonic-forms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-complete-homogeneous-symmetric-polynomials-freely-generate.md

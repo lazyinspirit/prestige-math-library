@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-geodesic-curvature-is-the-ordinary-curvature-of-a-space-curve.md

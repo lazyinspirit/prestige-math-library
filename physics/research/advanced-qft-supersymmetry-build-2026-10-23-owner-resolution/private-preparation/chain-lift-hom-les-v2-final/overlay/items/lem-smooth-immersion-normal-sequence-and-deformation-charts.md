@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-smooth-immersion-normal-sequence-and-deformation-charts.md

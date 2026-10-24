@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-motion-of-a-completely-integrable-hamiltonian-is-linear-on-invariant-tori.md

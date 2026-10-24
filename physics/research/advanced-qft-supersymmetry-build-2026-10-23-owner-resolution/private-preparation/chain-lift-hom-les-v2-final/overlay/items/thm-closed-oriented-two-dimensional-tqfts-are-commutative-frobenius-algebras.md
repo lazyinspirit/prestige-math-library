@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-closed-oriented-two-dimensional-tqfts-are-commutative-frobenius-algebras.md

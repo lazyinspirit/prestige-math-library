@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-k-four-has-sixteen-spanning-trees-by-kirchhoff.md

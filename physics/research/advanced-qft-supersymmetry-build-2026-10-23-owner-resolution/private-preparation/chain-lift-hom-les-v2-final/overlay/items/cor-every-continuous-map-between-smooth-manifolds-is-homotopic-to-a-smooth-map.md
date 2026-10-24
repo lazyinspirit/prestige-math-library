@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map.md

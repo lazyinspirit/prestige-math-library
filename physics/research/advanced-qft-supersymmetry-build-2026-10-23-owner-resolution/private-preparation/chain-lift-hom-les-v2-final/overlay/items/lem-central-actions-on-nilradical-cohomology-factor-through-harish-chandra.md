@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-central-actions-on-nilradical-cohomology-factor-through-harish-chandra.md

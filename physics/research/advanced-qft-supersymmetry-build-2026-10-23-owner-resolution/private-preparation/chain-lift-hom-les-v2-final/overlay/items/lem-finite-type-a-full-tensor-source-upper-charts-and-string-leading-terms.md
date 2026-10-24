@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-type-a-full-tensor-source-upper-charts-and-string-leading-terms.md

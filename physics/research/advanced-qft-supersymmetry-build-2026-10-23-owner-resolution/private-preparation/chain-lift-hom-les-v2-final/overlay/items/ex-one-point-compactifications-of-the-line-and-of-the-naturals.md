@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-one-point-compactifications-of-the-line-and-of-the-naturals.md

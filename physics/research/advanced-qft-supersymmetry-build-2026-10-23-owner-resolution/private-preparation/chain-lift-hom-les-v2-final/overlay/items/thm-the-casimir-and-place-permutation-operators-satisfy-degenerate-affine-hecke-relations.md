@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations.md

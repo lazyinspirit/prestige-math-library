@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-nonzero-dominant-section-is-determined-on-the-big-cell.md

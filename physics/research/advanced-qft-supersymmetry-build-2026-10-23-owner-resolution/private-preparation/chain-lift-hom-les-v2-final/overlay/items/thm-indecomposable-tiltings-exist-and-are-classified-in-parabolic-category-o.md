@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-indecomposable-tiltings-exist-and-are-classified-in-parabolic-category-o.md

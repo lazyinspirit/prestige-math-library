@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding.md

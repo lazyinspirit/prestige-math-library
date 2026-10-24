@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-smooth-projective-locally-free-duality-is-the-ag-lie-special-case.md

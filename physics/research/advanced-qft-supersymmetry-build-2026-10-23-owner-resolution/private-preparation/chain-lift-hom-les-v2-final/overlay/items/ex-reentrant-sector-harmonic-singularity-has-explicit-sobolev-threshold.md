@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-reentrant-sector-harmonic-singularity-has-explicit-sobolev-threshold.md

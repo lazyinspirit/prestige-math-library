@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-crystal-identification-does-not-elementarily-identify-cellular-simple-labels.md

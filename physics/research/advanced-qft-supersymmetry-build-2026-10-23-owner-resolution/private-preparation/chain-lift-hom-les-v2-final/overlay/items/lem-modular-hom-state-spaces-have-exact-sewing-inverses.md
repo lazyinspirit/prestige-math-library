@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-modular-hom-state-spaces-have-exact-sewing-inverses.md

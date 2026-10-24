@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-probability-convergent-sequence-with-a-prescribed-fast-as-subsequence.md

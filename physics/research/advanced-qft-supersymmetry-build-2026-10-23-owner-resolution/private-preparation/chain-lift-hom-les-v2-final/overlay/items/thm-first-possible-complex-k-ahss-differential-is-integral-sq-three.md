@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-first-possible-complex-k-ahss-differential-is-integral-sq-three.md

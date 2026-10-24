@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-additive-singular-cohomology-cross-product-is-well-defined.md

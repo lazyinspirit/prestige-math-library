@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-each-vector-in-a-compact-representation-has-countable-isotypic-support.md

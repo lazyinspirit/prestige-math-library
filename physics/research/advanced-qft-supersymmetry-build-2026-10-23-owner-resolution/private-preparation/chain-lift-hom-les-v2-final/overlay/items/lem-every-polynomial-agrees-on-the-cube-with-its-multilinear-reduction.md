@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction.md

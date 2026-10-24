@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-reiter-functions-can-be-cut-down-to-folner-sets.md

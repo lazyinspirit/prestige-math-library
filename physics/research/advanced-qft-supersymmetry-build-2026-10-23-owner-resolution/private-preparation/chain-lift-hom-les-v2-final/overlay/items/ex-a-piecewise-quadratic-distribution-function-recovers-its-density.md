@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-piecewise-quadratic-distribution-function-recovers-its-density.md

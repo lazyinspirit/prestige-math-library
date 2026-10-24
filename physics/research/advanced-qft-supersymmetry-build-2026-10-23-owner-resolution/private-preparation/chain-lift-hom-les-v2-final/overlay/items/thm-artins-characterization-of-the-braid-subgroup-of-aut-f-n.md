@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-artins-characterization-of-the-braid-subgroup-of-aut-f-n.md

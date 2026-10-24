@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-nonuniform-fisher-bound-on-the-seven-lines-of-the-fano-plane.md

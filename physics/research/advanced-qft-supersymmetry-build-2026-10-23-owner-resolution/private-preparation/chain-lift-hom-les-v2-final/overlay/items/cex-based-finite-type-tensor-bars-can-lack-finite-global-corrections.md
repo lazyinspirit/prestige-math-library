@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-based-finite-type-tensor-bars-can-lack-finite-global-corrections.md

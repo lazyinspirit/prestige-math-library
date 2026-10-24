@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-homogeneous-and-inhomogeneous-group-cochains-are-isomorphic-complexes.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-finite-dimensional-sl2-quotient-of-a-verma-module.md

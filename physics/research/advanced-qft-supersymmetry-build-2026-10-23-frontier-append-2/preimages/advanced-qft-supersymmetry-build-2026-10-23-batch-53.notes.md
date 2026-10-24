@@ -1,0 +1,92 @@
+# Batch 53 authoring notes — Witten and Superconformal Indices
+
+## Owner focused consumer follow-up — 2026-10-23
+
+Both native45/53 completion receipts were observed successful before these
+source writes, and exact sources/contracts/native rows were archived in
+`owner-resolution/susy-eft-indices-before/`. No native row, plan or publication
+stamp was changed. Earlier readiness observations below are historical; root
+must rebind current source-dependent inputs.
+
+The unweighted finite-kernel physical Witten definition/theorem are unchanged:
+self-adjoint odd Q and K=Q² were already explicit, so no generic charge-domain
+hold was invented. The weighted SC index now supplies a simultaneous
+gap/charge/parity eigenbasis, maximal diagonal domains, and reducing-domain
+joint projections. Total positive-gap multiplicities and the protected kernel
+may be infinite. Admissible positive fugacity weights and trace class force
+each joint block finite; the existing pairing lemma then applies blockwise.
+The free-chiral example keeps its infinite protected Fock towers and proves
+their absolute convergence, while extra positive-gap convergence remains an
+independent supplied model condition. Massive rest-fiber central-charge BPS
+saturation is not identified with S3 superconformal shortening.
+
+## Historical native authoring notes
+
+Run: `advanced-qft-supersymmetry-build-2026-10-23`  
+Pair: `qftx-bps-indices` / `qftx-bps-indices-examples`  
+Batch dependency level: 6; declared page suppliers are batches 29 and 47.
+
+## Plan/design comparison
+
+The design section at `research/plan-advanced-qft-and-supersymmetry-track.md`, § “Witten and Superconformal Indices” (page order 1009) matches the active `research/plan-spec.json` on A/B IDs, category, library, titles, and required pages. The plan rows currently have empty item arrays; these are the authored-build placeholders. The design requires the three proposed A-page items `def-qftx-physical-bps-index`, `pthm-qftx-physical-index-beta-independence`, and `def-qftx-superconformal-index`. There is no plan-spec page-interface conflict. The complete `scaffold/prose-scaffold.md` confirms that a physical BPS-index dictionary requires model-specific data and that S3/superconformal indices remain conditional until their trace or regulated functional-integral inputs are established. No continuum or universal index claim is made here. The exact proposed inventories are in `research/advanced-qft-supersymmetry-2026-10-23/scaffold/proposed-inventory.json`.
+
+The proposed mathematical inputs are `def-qftx-graded-trace-class-index-data` and `thm-qftx-witten-index-beta-independence`. The authored physical data definition also uses the exact BPS and background definitions; the superconformal definition adds its background and trace-class prerequisites. The planned `pthm-qftx-physical-index-beta-independence` remains the unweighted finite-kernel Witten result and retains its proposed supplier route. The mathematical theorem's finite zero-eigenspace hypothesis does not cover the standard infinite protected sector of an S3 index. To preserve that scope, a separate local theorem `pthm-qftx-superconformal-index-beta-independence` proves the weighted extension from exact positive-energy pairing, commuting fugacity charges, and trace-class convergence; its kernel may be infinite. It does not identify every BPS state with a zero-mode or infer continuum convergence.
+
+## Supplier inspection and readiness
+
+- Batches 29 and 47 are the assigned page-level suppliers. The current statements and relevant arguments inspected were `def-qftx-bps-state-and-saturation`, `pthm-qftx-n2-bps-saturation-kernel-equivalence`, `thm-qftx-n-extended-central-charge-bounds`, and `def-qftx-susy-background-data`. Their current Step-1 records, checked with `loadStep1Record` and `step1Decision`, are `ready`. The massive-fiber convention remains $\eta=\mathrm{diag}(-1,1,1,1)$, $\epsilon_{12}=1$, $\hbar=c=1$; the BPS definition asserts algebraic saturation only, not state existence or stability. The background definition fixes Euclidean spin/R/gauge and model-specific spinor data; it does not assert arbitrary-background existence or a functional measure.
+- The complete current local mathematical carriers inspected are `items/def-qftx-graded-trace-class-index-data.md`, `items/lem-qftx-supercharge-positive-energy-pairing.md`, and `items/thm-qftx-witten-index-beta-independence.md`. The last has a complete absolute-convergence regrouping proof and uses no trace cyclicity; its input is pure-point data with finite zero and positive eigenspaces and trace-class heat operators. The current `loadStep1Record`/`step1Decision` results for the definition and theorem are `ready`. Their draft status and pending precheck are not treated as missing proof or independent acceptance.
+- The mathematical import receipt `research/math-imports.json` contains the pins for the imported Hilbert, choice, operator, trace-class, exponential, and background-geometry dependencies inspected through those exact supplier interfaces. Imported mathematical carriers and root originals remain read-only.
+- No current prerequisite gap was found. No supplier is escalated.
+
+## Source reading
+
+- David Tong, *Supersymmetric Quantum Mechanics*, full 112-page lecture-note PDF, `https://www.damtp.cam.ac.uk/user/tong/susy/susyqm.pdf`; inspected §§1.2.1–1.2.2, especially the complete Witten-index argument and its discrete-spectrum, $\beta=0$, and continuous-spectrum qualifications in §1.2.2, printed pp. 13–15.
+- Kinney, Maldacena, Minwalla, and Raju, *An Index for 4 Dimensional Super Conformal Theories*, full 60-page PDF, `https://arxiv.org/pdf/hep-th/0510251`; inspected §3, equations (3.1)–(3.4), printed pp. 13–14, including the chosen supercharge, positive anticommutator, commuting subalgebra, and cancellation.
+- Rastelli and Razamat, *The supersymmetric index in four dimensions*, full 43-page PDF, `https://arxiv.org/pdf/1608.02965`; inspected §2.1, equations (2.1)–(2.5), printed pp. 3–4, and the chiral-letter and plethystic-exponential derivation in §2.3, printed pp. 5–7. This source distinguishes a convergent trace from its formal power-series presentations.
+
+The local mathematical suppliers carry complete proofs; the physical sources corroborate definitions and conventions only. The older Martin/Gates citations on the mathematical supplier carriers were not imported as proof: targeted PDF hits were inspected, but no complete relevant heat-supertrace argument was read or relied on. The authored page uses Tong and two direct superconformal-index treatments instead. There were no retrieval failures or recovery retries. `research/advanced-qft-supersymmetry-build-2026-10-23-batch-53.coverage.json` records the actual searches and source dispositions; `...-batch-53-source-coverage.json` records the per-item reading limits and fetch stamps.
+
+`source-fetch-check --coverage research/advanced-qft-supersymmetry-build-2026-10-23-batch-53-source-coverage.json --stamp` passed 3/3 PDFs on 2026-10-23: Tong, 112 pages, 6,089,578 bytes, SHA-256 prefix `299131c4b7deb291`; Kinney et al., 60 pages, 546,913 bytes, prefix `0b0630ed94e65eec`; Rastelli–Razamat, 43 pages, 819,174 bytes, prefix `e00e9e0b445288d4`. No source is dropped or escalated. These stamps verify retrieval only, not the mathematical arguments.
+
+## Item 1 completed: `def-qftx-physical-bps-index`
+
+Current carrier: `items/def-qftx-physical-bps-index.md`. It defines a pure-point, trace-class, $\mathbb Z_2$-graded physical Hilbert-space Witten index, its exact zero-gap sector, natural-unit convention, and the additional model-specific condition needed before calling it a BPS index. Dependencies are `def-countable-choice`, `def-trace-class-operator`, `def-trace-of-a-trace-class-operator`, `def-qftx-graded-trace-class-index-data`, `def-qftx-bps-state-and-saturation`, and `def-qftx-susy-background-data`. Its item level is 5, from the in-run BPS-state supplier at level 4. Source evidence uses Tong §§1.2.1–1.2.2 and Kinney et al. §3. Step-1 readiness is `ready`; scoped content, dependency, contract, source, render, and placement checks pass.
+
+The complete conditional definition is placed on the assigned A page and has a current closed Step-1 readiness record.
+
+## Item 2 completed: `def-qftx-superconformal-index`
+
+Current carrier: `items/def-qftx-superconformal-index.md`. It fixes the unit-radius $S^3$ radial Hilbert-space input, the right-handed 4D $\mathcal N=1$ convention $\Delta=E-2J_2-\tfrac32R$, the two commuting charges $J_+=J_1+J_2+R/2$ and $J_-=J_2-J_1+R/2$, the positive-real fugacity domain, the trace-class test, and the exact protected sector $\ker Q\cap\ker Q^\dagger$. It explicitly treats this as supplied physical representation data and excludes unproved formal traces. Its dependencies are `def-countable-choice`, `def-trace-class-operator`, `def-trace-of-a-trace-class-operator`, and `def-qftx-susy-background-data`; item level 2. Source locators are Kinney et al., §3, equations (3.1)–(3.4), and Rastelli–Razamat, §2.1, equations (2.1)–(2.5). Step-1 readiness is `ready`; its exact suppliers, source support, assigned placement, and manifest record are current.
+
+## Item 3 completed: `pthm-qftx-physical-index-beta-independence`
+
+Current carrier: `items/pthm-qftx-physical-index-beta-independence.md`. It applies the exact mathematical theorem to the unweighted physical Witten datum with finite zero eigenspaces and trace-class heat operators. Its dependencies retain the proposed `def-qftx-physical-bps-index` and `thm-qftx-witten-index-beta-independence` inputs, plus explicit `AC_omega`. Item level 6. Source locators are Tong §1.2.2 and Kinney et al. §3.1. Step-1 readiness is `ready`; the scoped proof format, strict contract, source, placement, and dependency checks pass.
+
+## Item 4 completed: `pthm-qftx-superconformal-index-beta-independence`
+
+Current carrier: `items/pthm-qftx-superconformal-index-beta-independence.md`. This additional local theorem proves positive-eigenspace cancellation for the weighted SC index by an exact intertwining argument and absolute-convergence regrouping. It matches the current N=1 charge conventions, allows an infinite protected kernel only under the trace-class fugacity condition, and does not use the narrower unweighted mathematical theorem outside its hypotheses. Dependencies are `def-qftx-superconformal-index`, `lem-qftx-supercharge-positive-energy-pairing`, and `def-countable-choice`; item level 3. Sources: Kinney et al. §3 and Rastelli–Razamat §2.1. Step-1 readiness is `ready`; strict contract, canonical proof format, proof layout, source, placement, and dependency checks pass.
+
+This result supplies the weighted cancellation theorem needed by the infinite protected-letter example; its exact hypotheses and trace convergence remain explicit.
+
+## Item 5 completed: `ex-qftx-witten-index-finite-superpartner-pair`
+
+Current carrier: `items/ex-qftx-witten-index-finite-superpartner-pair.md`. This is an explicit three-state finite-dimensional graded Hilbert model: one even zero mode and one positive-energy even/odd pair. The carrier defines the matrix supercharge and grading and directly computes $W_E(\beta)=1$ for all $\beta>0$. Dependencies are `def-countable-choice` and `def-qftx-physical-bps-index`; item level 6. Source context is Tong §1.2.2; the finite calculation is local. Step-1 readiness is `ready`; its strict contract, proof layout, source, placement, and dependency checks pass.
+
+## Item 6 completed: `ex-qftx-superconformal-index-free-chiral`
+
+Current carrier: `items/ex-qftx-superconformal-index-free-chiral.md`. It states the uncharged free N=1 protected scalar/fermion letter data, two exact derivative charge shifts, Fock construction, and admissible $0<p,q<1$ domain. Its verification derives the single-letter rational function, the boson/fermion product, and absolute convergence, then applies the weighted beta-independence theorem only under its exact trace-class hypotheses. Dependencies are `def-countable-choice`, `def-qftx-superconformal-index`, and `pthm-qftx-superconformal-index-beta-independence`; item level 4. Source locators are Rastelli–Razamat §2.3, Table 1 and equations (2.9)–(2.13), and Kinney et al. §3. Step-1 readiness is `ready`; its strict contract, canonical proof format, proof layout, source, placement, and dependency checks pass.
+
+## Final scoped verification and run-wide blockers
+
+- The A and B page carriers are YAML-frontmatter only. A-page inventory (four items), B-page example inventory (two examples), page metadata, all six carrier statement/metadata mirrors, and all six uninterrupted statement sections match; both page bodies are empty.
+- The assigned dependency closure contains 16 items on five pages with zero level errors. Assigned levels are: physical index definition 5; superconformal definition 2; physical beta-independence theorem 6; weighted superconformal beta-independence theorem 3; finite Witten example 6; free-chiral example 4. The six current Step-1 records were inspected with `loadStep1Record` and `step1Decision`; all are closed, `ready`, and non-owner records.
+- `content-policy.mjs` passes for six assigned items with zero errors or warnings. Focused `depcheck.mjs` passes over the 1,505-item/352-page prerequisite closure with zero errors or warnings. `rendercheck.mjs` passes for six items and both pages. `precheck.mts` passes all four proof-bearing items; definitions are nonproof carriers. `proof-layout.mjs` passes six items, 14 proof steps, zero defects. Strict `proof-contract.mjs` passes all six items with zero errors or warnings. `source-fetch-check.mjs` confirms 3/3 source stamps and zero drops. The assigned statement-link/page-body check and the eight-row cross-batch dependency check (each row matches the consumer's exact `requires`/`deps` edge to a supplier outside batch 53) report zero defects.
+- Full-run item dependency checking remains blocked by unfinished or malformed other-batch inventories: empty scaffold pages `qftx-s3-partition-functions`, `qftx-s3-partition-functions-examples`, `qftx-spectral-networks`, `qftx-spectral-networks-examples`, `qftx-irreducible-connection-topology`, `qftx-irreducible-connection-topology-examples`, `qftx-gauge-group-sphere-homotopy`, `qftx-gauge-group-sphere-homotopy-examples`, `qftx-adhm-zero-fi-asd-correspondence`, and `qftx-adhm-zero-fi-asd-correspondence-examples`; six entries on `qftx-adhm-linear-data-and-framed-monads` have no IDs. Exact stale labels reported were `lem-aqft-local-counterterm-shift-is-relative-coboundary` (declared 0, computed 3), `def-aqft-thooft-anomaly` (0, 3), `def-aqft-anomaly-matching-data` (1, 4), `pthm-aqft-selected-chiral-spectrum-anomaly-cancellation` (2, 5), `ex-aqft-single-chiral-fundamental-polynomial` (2, 5), `ex-aqft-mixed-background-counterterm-shift` (2, 5), `ex-aqft-vectorlike-conjugate-chiral-pair` (3, 6), `def-aqft-global-anomaly-holonomy` (1, 4), `def-aqft-anomaly-inflow-relative-theory` (2, 5), `pthm-aqft-global-anomaly-test` (3, 6), `ex-aqft-anomaly-inflow-example` (4, 7), `pthm-aqft-symmetry-preserving-rg-anomaly-match` (4, 5), `op-aqft-fusion-two-category-anomaly-classification` (1, 6), `ex-aqft-local-anomaly-counterterm-transport` (5, 6), and `ex-aqft-explicit-breaking-endpoint` (5, 6). No batch-53 item is named by these errors.
+- Full-run batch dependency checking returns `Duplicate item undefined` from another in-flight manifest's incomplete/string inventory. Full-run proof-contract coverage stops at the empty inventory for `qftx-s3-partition-functions`. The current page suppliers for this batch remain batches 29 and 47 (page level 6); the lower-level direct item edge to batch 1 does not change that level. These owner-maintained global snapshots were not edited.
+- No source retrieval failed, so there were no recovery retries, source drops, or unresolved-source arguments requiring `source_resolution`; actual search and source dispositions remain in the batch coverage files, with retrieval stamps in `...-batch-53-source-coverage.json`. No mathematical prerequisite gap remains. Independent review/acceptance is outside Step 1 and remains for the owner workflow.
+- `fwdcheck` was not run because its CLI rewrites whole-corpus `research/forward-refs.md`, outside this batch's write scope. No page-layout preparation was run; the native engine sets `page_layout: compact-v1` at its designated stage. The scoped checks above are complete; next action is owner review at the subsequent workflow gate.
+
+## Owner canonical-normalization follow-up — 2026-10-24
+
+The current source/interface and exact consumer disposition are in `research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/canonical-normalization-repair.md` and its evidence JSON. This dated addendum supersedes earlier live-readiness observations and the earlier raw/physical measure identification, without deleting that history. Current physical brackets are D=-I_D/4, F=I_F/2 with psi_raw=sqrt2psi and F_raw=2F; scalar fields, physical couplings and potentials are preserved.50/51 use the independent stable-ADHM core and genuine localized BM tangent-twist insertion, with source continuation m=i m_E and the unconstructed S4-regulator caveat retained.79 selected source items and26 actual pages passed focused preparation checks; this is not native acceptance. Root retains native holds until independent source/dependency binding and recertification.

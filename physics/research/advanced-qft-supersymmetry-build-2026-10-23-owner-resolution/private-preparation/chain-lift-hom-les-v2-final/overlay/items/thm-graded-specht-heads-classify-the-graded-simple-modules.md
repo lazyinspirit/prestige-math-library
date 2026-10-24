@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-graded-specht-heads-classify-the-graded-simple-modules.md

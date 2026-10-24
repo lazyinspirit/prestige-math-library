@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-smooth-vector-field-on-euclidean-space-is-complete.md

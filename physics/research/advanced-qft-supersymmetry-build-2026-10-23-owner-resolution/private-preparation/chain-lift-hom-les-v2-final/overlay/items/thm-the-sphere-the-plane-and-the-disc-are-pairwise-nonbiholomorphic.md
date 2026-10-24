@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-sphere-the-plane-and-the-disc-are-pairwise-nonbiholomorphic.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-sard-theorem-holds-for-every-c1-map-between-arbitrary-dimensions.md

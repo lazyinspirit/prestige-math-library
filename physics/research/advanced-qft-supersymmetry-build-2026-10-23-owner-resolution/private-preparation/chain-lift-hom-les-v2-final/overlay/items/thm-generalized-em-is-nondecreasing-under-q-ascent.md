@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-generalized-em-is-nondecreasing-under-q-ascent.md

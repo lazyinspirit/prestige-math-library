@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups.md

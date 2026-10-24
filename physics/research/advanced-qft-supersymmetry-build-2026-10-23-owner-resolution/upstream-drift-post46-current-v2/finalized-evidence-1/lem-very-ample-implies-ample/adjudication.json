@@ -1,0 +1,71 @@
+{
+  "id": "lem-very-ample-implies-ample",
+  "agent": "/root/rendering_repair_coordinator/scm_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 03 shows literal \\qed; source places that command outside math. It also prevents the native renderer recognizing the final justification list.",
+      "action": "Replace only the terminal literal command with renderer-supported \u220e.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 shows literal $L$ in the uppercase technique banner. This banner renders plain text rather than math. The actual local statement and proof consistently identify L as the invertible sheaf.",
+      "action": "Use the same letter L without dollar delimiters in the technique banner.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Changed only powers of $L$ to powers of L in the plain-text technique banner and terminal \\qed to \u220e.",
+  "source_lines_after": [
+    71,
+    85
+  ],
+  "mathematical_meaning_preserved": true,
+  "preservation_checks": {
+    "frontmatter_byte_identical": true,
+    "status": "published, byte-identical",
+    "exact_replacements_only": true,
+    "line_bundle_powers_hypotheses_quantifiers_maps_claims_proof": "Preserved verbatim except the display-only technique-banner delimiters and terminal proof marker."
+  },
+  "before_raw_sha256": "3eff6b71916bddb219567f4364f82fe5d65630204a056b4cd74172dfefe8d37b",
+  "after_raw_sha256": "c31bf0c3e6dd4dcc5ac340535759d9ef018f5de66bd08fe1b1ac49cd328d2276",
+  "guard": "Original before SHA verified immediately before first edit.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-very-ample-implies-ample.md",
+      "result": "Final pass: 1 items, 7 steps, 0 defects. An intermediate hollow-square marker failed final-step tag recognition; replaced with supported \u220e before final checks."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-very-ample-implies-ample.md --json",
+      "result": "pass; 1 checked, 0 failed"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-very-ample-implies-ample.md --json",
+      "result": "1 checked; no errors or warnings"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-very-ample-implies-ample --out research/math-library-rendering-repairs-2026-10-23/previews/scm-011-native-after",
+      "result": "Native local preview generated 1 item, 3 tiles; 16 reference-map diagnostics from corpus title-map loading, without changing any suppliers."
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles_viewed_standalone_original_resolution": [
+      "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/lem-very-ample-implies-ample--01.png",
+      "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/lem-very-ample-implies-ample--02.png",
+      "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/lem-very-ample-implies-ample--03.png"
+    ],
+    "after_tiles_viewed_standalone_original_resolution": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/scm-011-native-after/screenshots/lem-very-ample-implies-ample--02.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/scm-011-native-after/screenshots/lem-very-ample-implies-ample--03.png"
+    ],
+    "result": "Fresh tile 02 shows powers of L with no exposed dollars; fresh tile 03 shows the supported proof-end marker and valid blue justification chips, no literal \\qed."
+  },
+  "remaining_issues": []
+}

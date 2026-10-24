@@ -1,0 +1,94 @@
+{
+  "id": "thm-embedding-dimension-at-least-local-dimension",
+  "agent": "/root/rendering_repair_coordinator/ag_090",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly prints literal A_p in F6, while the adjacent isomorphism correctly renders the localization subscript. The current supplier title still contains plain A_p, so this is unresolved inherited mathematical markup rather than a capture artifact.",
+      "action": "Added an explicit local wikilink label with $A_{\\mathfrak p}$, preserving the exact supplier target and the original title wording.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only the F6 wikilink display label was replaced by an explicit mathematically delimited label. No supplier file, mathematical claim, proof text, dependency, source, status or verification metadata changed.",
+  "source_lines_after": [
+    {
+      "line": 68,
+      "text": "[F6] [[thm-stalk-structure-sheaf-prime-localization|The stalk of the affine structure sheaf at a prime is $A_{\\mathfrak p}$]]: there is a canonical isomorphism $\\mathcal O_{\\operatorname{Spec}A,\\mathfrak p}\\cong A_{\\mathfrak p}$."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "guard": {
+    "before_raw_sha256": "45af99ae4ad09e42dd6a5447ad0bbc78b1167aa3b9bfe6c4c128ec84cef3c2d3",
+    "matched_immediately_before_edit": true,
+    "after_raw_sha256": "b60c3d3c58d5649dbaef95194c8c77d5e3410264edd7d0081d425105a88fa192",
+    "frontmatter_byte_identical": true
+  },
+  "original_visual_inspection": {
+    "directory": "research/math-library-rendering-audit-2026-10-23/algebraic-geometry/screenshots",
+    "standalone_original_resolution_tiles": [
+      "thm-embedding-dimension-at-least-local-dimension--01.png",
+      "thm-embedding-dimension-at-least-local-dimension--02.png",
+      "thm-embedding-dimension-at-least-local-dimension--03.png"
+    ],
+    "frozen_before_read_fully": true,
+    "current_source_read_fully": true
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-embedding-dimension-at-least-local-dimension.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-embedding-dimension-at-least-local-dimension.md",
+            "item_id": "thm-embedding-dimension-at-least-local-dimension",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-embedding-dimension-at-least-local-dimension.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-embedding-dimension-at-least-local-dimension.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    }
+  ],
+  "final_visual_inspection": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/ag090-final",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/ag090-final/manifest.json",
+    "manifest_sha256": "746749ddd710452694055d23e5627bb3b5f5b50b685a806a58745ce224c69101",
+    "source_sha256": "b60c3d3c58d5649dbaef95194c8c77d5e3410264edd7d0081d425105a88fa192",
+    "reference_map_sha256": "75f0fda98be306498640a847683f5dcee69f2c0c1c9a0c6c745e37f1edcbca0d",
+    "standalone_original_resolution_tiles": [
+      "thm-embedding-dimension-at-least-local-dimension--01.png",
+      "thm-embedding-dimension-at-least-local-dimension--02.png",
+      "thm-embedding-dimension-at-least-local-dimension--03.png"
+    ],
+    "outcome": "F6 now displays the localization with an actual subscript; all three complete-body tiles inspected with no additional confirmed visible LaTeX defect.",
+    "limitations": [
+      "Native local ItemBody preview only; not production HTTP route coverage.",
+      "Preview reference map reported 16 unrelated parse diagnostics; the assigned supplier resolves and the explicit repaired label visibly renders."
+    ]
+  }
+}

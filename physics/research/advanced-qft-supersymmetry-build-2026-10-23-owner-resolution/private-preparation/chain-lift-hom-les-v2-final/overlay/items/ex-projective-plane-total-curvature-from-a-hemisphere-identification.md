@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-projective-plane-total-curvature-from-a-hemisphere-identification.md

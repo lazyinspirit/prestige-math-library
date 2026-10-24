@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-closed-form-is-flow-invariant-when-its-contraction-is-exactly-zero.md

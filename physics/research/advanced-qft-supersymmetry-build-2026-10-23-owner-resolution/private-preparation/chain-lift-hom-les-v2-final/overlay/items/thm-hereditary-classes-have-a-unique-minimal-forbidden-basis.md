@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hereditary-classes-have-a-unique-minimal-forbidden-basis.md

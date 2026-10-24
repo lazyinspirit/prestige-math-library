@@ -1,0 +1,13 @@
+# Private pending-ten consumer transition
+
+This preparation rebinds the ten pending original-source proposals through Root's actual combined25 application receipt only. No source version is adopted and no production authority or native state is written. The earlier private56 and partial-six histories remain untouched.
+
+The current traversal retains exactly 811 supplier/owned-consumer pairs and every old witness edge. None of these ten suppliers is used directly by an owned endpoint. Twelve endpoint sources and twelve declarations changed; every changed old/current hash is linked to the exact37-file Root receipt/preimages. Unchanged guards are retained. Rebased decisions remain ROOT_DECISION_REQUIRED.
+
+All twelve changed-source deltas were inspected. Six batch8 endpoints differ only by legacy math delimiters. The positive-dimensional and rotation examples additionally collapse display-line whitespace; all character signs, localized coefficient modules and compactness/AC boundaries are unchanged. The two monad examples collapse multiline displays without changing entries, maps, curvature signs, framing or charge. SMEFT replaces the unsupported psmallmatrix environment with pmatrix, preserving each entry and all field/substitution clauses.
+
+Chain-lift is explicitly a proof repair, not merely presentation: it declares the actual long-exact-sequence supplier, identifies holomorphic Hom sheaves by frames, uses local splitting and finite coefficient sums, and proves existence/uniqueness from the two H0/H1 bijections. The H0/H1 of K* tensor O(-1) follow from O(-1) H0/H1 and O(-2) H1/H2; the extension across the middle term uses the unprimed sequence and O(-1) H0/H1. This retains the previously asserted conclusion and the actual canonical tensor/duality use. Its diagram is relocated to Remarks while its chain equations remain in the proof. Root's separate proof/scientific decision remains the authority for that repair.
+
+The twelve declaration transitions retain their exact before/after fields in rebinding.json: eleven Statement mirrors change only the reviewed display bytes; chain-lift adds the exact LES dependency and role. No original direct-use paragraph changed in the local transaction; prior complete pin/successor/delta and 55 direct imported-use readings remain the separate evidence. This is not a fresh proof audit of all transitive endpoints, screenshot review, or external-paper reading.
+
+Embedding dimension still lacks genuine finalization. A combined63 proposal must wait for that receipt, Root's validated rebound53 base, and a fresh broad current-original inventory. Further original or local drift must stop preparation rather than silently refresh guards.

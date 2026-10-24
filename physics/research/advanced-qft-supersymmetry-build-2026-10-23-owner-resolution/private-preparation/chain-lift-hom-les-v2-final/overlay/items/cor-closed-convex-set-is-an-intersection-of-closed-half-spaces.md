@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-closed-convex-set-is-an-intersection-of-closed-half-spaces.md

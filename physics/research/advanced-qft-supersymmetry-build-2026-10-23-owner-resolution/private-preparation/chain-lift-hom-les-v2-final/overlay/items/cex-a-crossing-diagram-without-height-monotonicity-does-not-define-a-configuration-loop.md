@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-crossing-diagram-without-height-monotonicity-does-not-define-a-configuration-loop.md

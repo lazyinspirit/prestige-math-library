@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/pthm-aqft-selected-chiral-spectrum-anomaly-cancellation.md

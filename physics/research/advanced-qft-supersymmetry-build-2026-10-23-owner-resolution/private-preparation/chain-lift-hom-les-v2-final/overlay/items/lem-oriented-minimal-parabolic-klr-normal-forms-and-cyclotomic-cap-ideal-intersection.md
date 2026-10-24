@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-oriented-minimal-parabolic-klr-normal-forms-and-cyclotomic-cap-ideal-intersection.md

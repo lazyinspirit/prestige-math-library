@@ -1,0 +1,62 @@
+---
+id: lem-conditional-subgaussian-exponential-process
+kind: lemma
+title: Conditional sub-Gaussian increments generate exponential test supermartingales
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 1
+deps:
+  - def-conditional-subgaussian-increments
+  - def-nonnegative-test-supermartingale
+  - def-martingale-submartingale-and-supermartingale
+  - def-conditional-expectation-as-an-ae-class
+  - thm-taking-out-what-is-known
+  - thm-monotone-convergence-for-the-integral
+  - def-axiom-of-choice
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform Chernoff bounds via nonnegative supermartingales, Probability Surveys 17 (2020), §§2.1–2.2
+      url: https://arxiv.org/pdf/1808.03204
+    - title: Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform, nonparametric, nonasymptotic confidence sequences, §2
+      url: https://arxiv.org/pdf/1810.08240
+---
+
+## Statement
+
+Assume AC and let $(\Omega,\mathcal F,(\mathcal F_t)_{t\in\mathbb N_0},P)$, $(X_t)_{t\ge1}$, $\mu\in\mathbb R$, and $\sigma^2>0$ satisfy
+[[def-conditional-subgaussian-increments]]. For each fixed $\lambda\in\mathbb R$, set
+$$S_0(\mu):=0,\qquad S_t(\mu):=\sum_{i=1}^t(X_i-\mu),\qquad L_t^\lambda(\mu):=\exp\!\left(\lambda S_t(\mu)-\frac{\lambda^2t\sigma^2}{2}\right).$$
+Then $(L_t^\lambda(\mu))_{t\ge0}$ is a nonnegative test supermartingale for the singleton null family $\{P\}$, with $L_0^\lambda(\mu)=1$.
+
+## Facts & Assumptions
+
+**Given:** Assume AC, the conditional sub-Gaussian model, and a fixed real $\lambda$.
+
+[F1] [[def-conditional-subgaussian-increments]]: for each $t\ge1$ and fixed $\lambda$, $e^{\lambda(X_t-\mu)}$ is integrable and its conditional expectation given $\mathcal F_{t-1}$ is at most $e^{\lambda^2\sigma^2/2}$ almost surely.
+
+[F2] [[thm-taking-out-what-is-known]]: a bounded measurable factor can be taken out of a conditional expectation; the identity also holds for finite measurable factors when both products are integrable.
+
+[F3] [[thm-monotone-convergence-for-the-integral]]: an increasing sequence of nonnegative measurable functions has integrals increasing to the integral of its pointwise limit.
+
+[F4] [[def-martingale-submartingale-and-supermartingale]]: an adapted integrable process is a supermartingale when $\mathbb E[L_t\mid\mathcal F_{t-1}]\le L_{t-1}$ almost surely at every adjacent pair.
+
+[F5] [[def-nonnegative-test-supermartingale]]: under AC, an adapted, integrable, almost surely nonnegative supermartingale with initial expectation at most one is a nonnegative test supermartingale.
+
+[A1] [[def-axiom-of-choice]]: AC supplies the conditional-expectation convention used in the supermartingale and test-supermartingale definitions.
+
+## Proof
+
+1.1 Fix $t\ge1$, put $Y_t:=\exp\!\left(\lambda(X_t-\mu)-\lambda^2\sigma^2/2\right)$ and $Q_t:=\mathbb E[Y_t\mid\mathcal F_{t-1}]$. By [F1], $Y_t$ is integrable and $0\le Q_t\le1$. Starting from $L_0^\lambda(\mu)=1$, suppose $L_{t-1}^\lambda(\mu)$ is integrable and let $Z_n:=L_{t-1}^\lambda(\mu)\wedge n$. The bounded-factor clause of [F2] gives $\mathbb E[Z_nY_t]=\mathbb E[Z_nQ_t]\le\mathbb E Z_n\le\mathbb E L_{t-1}^\lambda(\mu)$. Since $Z_nY_t\uparrow L_t^\lambda(\mu)$, [F3] shows $L_t^\lambda(\mu)$ is integrable and $\mathbb E L_t^\lambda(\mu)\le\mathbb E L_{t-1}^\lambda(\mu)$. Thus induction establishes integrability at every time. [given, F1, F2, F3, construct]
+
+2.1 The process is adapted and nonnegative by its definition. Since $L_{t-1}^\lambda(\mu)Y_t=L_t^\lambda(\mu)$ and both products are integrable by step 1.1, the unbounded-factor clause of [F2] gives $\mathbb E[L_t^\lambda(\mu)\mid\mathcal F_{t-1}]=L_{t-1}^\lambda(\mu)Q_t\le L_{t-1}^\lambda(\mu)$. Also $\mathbb E L_0^\lambda(\mu)=1$. Therefore [F4] and [F5] give the asserted test-supermartingale property. [F2, F4, F5, A1, step 1.1] ∎

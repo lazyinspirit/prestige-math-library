@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-closed-smooth-manifold-has-the-homotopy-type-of-a-finite-cw-complex.md

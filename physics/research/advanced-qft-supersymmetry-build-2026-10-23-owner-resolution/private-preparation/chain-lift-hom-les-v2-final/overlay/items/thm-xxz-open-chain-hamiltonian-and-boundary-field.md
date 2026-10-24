@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-xxz-open-chain-hamiltonian-and-boundary-field.md

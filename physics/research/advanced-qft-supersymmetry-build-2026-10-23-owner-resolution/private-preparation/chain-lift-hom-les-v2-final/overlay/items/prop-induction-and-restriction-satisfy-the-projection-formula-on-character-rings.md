@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings.md

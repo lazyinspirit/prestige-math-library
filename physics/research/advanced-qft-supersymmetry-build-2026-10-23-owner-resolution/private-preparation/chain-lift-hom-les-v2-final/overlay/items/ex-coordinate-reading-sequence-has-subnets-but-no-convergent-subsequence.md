@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-coordinate-reading-sequence-has-subnets-but-no-convergent-subsequence.md

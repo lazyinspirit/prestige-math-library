@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term.md

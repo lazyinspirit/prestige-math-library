@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-identity-of-a-finite-dimensional-algebra-decomposes-into-primitive-central-idempotents.md

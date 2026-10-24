@@ -1,0 +1,99 @@
+{
+  "id": "thm-relative-proj-base-change",
+  "agent": "/root/rendering_repair_coordinator/scm_017",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution screenshot --02 visibly prints literal \\qed after the final tag group; row 6.1 therefore also fails to receive blue justification chips. Source line 84 contains the unparsed command outside math.",
+      "action": "Replace only the terminal \\qed with schema-supported Unicode \u220e.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original-resolution screenshot --01 independently shows literal dollar delimiters and TeX in the proof-technique banner. The renderer uses plain text with uppercase CSS for that banner.",
+      "action": "Express B and its tensor scalar extension and the affine cover of S\u2032 in equivalent plain prose, retaining the same proof description.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced final literal \\qed with \u220e and removed exposed TeX from the plain-text proof-technique banner using equivalent prose. No mathematical expressions in the statement or numbered proof steps changed.",
+  "source_lines_after": [
+    68,
+    84
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "1d0bc47a189164e4eae4c4f4a97a65c1e660d67ea59e3853e204204ec70af141",
+  "current_raw_sha256": "2d13b9feebdae46e238182232df693efe5f2b1d881fb525addb0dd5cbc54960f",
+  "raw_guard": "Confirmed 1d0bc47a189164e4eae4c4f4a97a65c1e660d67ea59e3853e204204ec70af141 immediately before the single source edit.",
+  "publication_status_preserved": {
+    "before": "status: published",
+    "after": "status: published",
+    "entire_frontmatter_byte_identical": true
+  },
+  "original_evidence_viewed": [
+    "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/thm-relative-proj-base-change--02.png",
+    "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/thm-relative-proj-base-change--01.png"
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-relative-proj-base-change.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-relative-proj-base-change.md",
+            "item_id": "thm-relative-proj-base-change",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-relative-proj-base-change.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-relative-proj-base-change.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    }
+  ],
+  "native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-relative-proj-base-change --out research/math-library-rendering-repairs-2026-10-23/previews/scm017-final-native",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/scm017-final-native/manifest.json",
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/scm017-final-native/screenshots/thm-relative-proj-base-change.json",
+    "standalone_original_resolution_tiles_viewed": [
+      1,
+      2
+    ],
+    "visual_result": "Banner reads without raw delimiters or commands. Final row 6.1 has all four blue chips and a right-aligned QED square; no visible residual raw qed.",
+    "katex_count": 122,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "limitations": "Local native ItemBody preview; no production HTTP route or navigation/dependency widgets."
+  },
+  "preview_initial_attempt": {
+    "command": "node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-relative-proj-base-change --out research/math-library-rendering-repairs-2026-10-23/previews/scm017-final",
+    "exit_code": 1,
+    "reason": "Missing @/ alias resolution for MathMarkdown; retried successfully with existing native tsconfig via TSX_TSCONFIG_PATH. No app edits."
+  },
+  "pre_existing_formatting_failures": []
+}

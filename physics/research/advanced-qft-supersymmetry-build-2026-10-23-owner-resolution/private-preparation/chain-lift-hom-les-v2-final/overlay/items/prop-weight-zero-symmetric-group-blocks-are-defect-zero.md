@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-weight-zero-symmetric-group-blocks-are-defect-zero.md

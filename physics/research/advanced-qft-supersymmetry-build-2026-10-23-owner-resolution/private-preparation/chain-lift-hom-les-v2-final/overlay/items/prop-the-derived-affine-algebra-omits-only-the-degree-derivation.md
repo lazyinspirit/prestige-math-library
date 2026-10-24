@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-derived-affine-algebra-omits-only-the-degree-derivation.md

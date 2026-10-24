@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cg-unit-circle-at-the-strict-perimeter-boundary-is-cat-one.md

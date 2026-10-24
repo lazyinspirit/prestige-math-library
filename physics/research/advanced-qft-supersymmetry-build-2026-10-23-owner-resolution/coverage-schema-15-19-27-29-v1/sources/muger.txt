@@ -1,0 +1,3437 @@
+arXiv:0804.3587v3  [math.CT]  18 Jun 2010
+Tensor categories: A selective guided tour
+Michael M¨uger
+Institute for Mathematics, Astrophysics and Particle Physics
+Radboud University Nijmegen
+The Netherlands
+November 26, 2024
+Abstract
+These are the, somewhat polished and updated, lecture notes for a three hour course on tensor
+categories, given at the CIRM, Marseille, in April 2008. The coverage in these notes is relatively
+non-technical, focusing on the essential ideas. They are meant to be accessible for beginners, but
+it is hoped that also some of the experts will ﬁnd something interesting in them.
+Once the basic deﬁnitions are given, the focus is mainly on categories that are linear over a ﬁeld
+k and have ﬁnite dimensional hom-spaces. Connections with quantum groups and low dimensional
+topology are pointed out, but these notes have no pretension to cover the latter subjects to any
+depth. Essentially, these notes should be considered as annotations to the extensive bibliography.
+We also recommend the recent review [43], which covers less ground in a deeper way.
+1
+Tensor categories
+These informal notes are an outgrowth of the three hours of lectures that I gave at the Centre
+International de Rencontres Mathematiques, Marseille, in April 2008. The original version of text
+was projected to the screen and therefore kept maximally concise. For this publication, I have
+corrected the language where needed, but no serious attempt has been made to make these notes
+conform with the highest standards of exposition. I still believe that publishing them in this form
+has a purpose, even if only providing some pointers to the literature.
+1.1
+Strict tensor categories
+We begin with strict tensor categories, despite their limited immediate applicability.
+• We assume that the reader has a working knowledge of categories, functors and natural trans-
+formations. Cf. the standard reference [180]. Instead of s ∈Hom(X, Y ) we will occasionally
+write s : X →Y .
+• We are interested in “categories with multiplication”. (This was the title of a paper [24] by
+B´enabou 1963, cf. also Mac Lane [178] from the same year). This term was soon replaced by
+‘monoidal categories’ or ‘tensor categories’. (We use these synonymously.) It is mysterious
+to this author why the explicit formalization of tensor categories took twenty years to arrive
+after that of categories, in particular since monoidal categories appear in protean form, e.g.,
+in Tannaka’s work [255].
+• A strict tensor category (strict monoidal category) is a triple (C, ⊗, 1), where C is a cate-
+gory, 1 a distinguished object and ⊗: C × C →C is a functor, satisfying
+(X ⊗Y ) ⊗Z = X ⊗(Y ⊗Z)
+and
+X ⊗1 = X = 1 ⊗X ∀X, Y, Z.
+1
+
+
+If (C, ⊗, 1), (C′, ⊗′, 1′) are strict tensor categories, a strict tensor functor C →C′ is a functor
+F : C →C′ such that
+F(X ⊗Y ) = F(X) ⊗′ F(Y ),
+F(1) = 1′.
+If F, F ′ : C →C′ are strict tensor functors, a natural transformation α : F →F ′ is monoidal
+if and only if α1 = id1′ and
+αX⊗Y = αX ⊗αY
+∀X, Y ∈C.
+(Both sides live in Hom(F(X ⊗Y ), F ′(X ⊗Y )) = Hom(F(X) ⊗′ F(Y ), F ′(X) ⊗′ F ′(Y )).)
+• WARNING: The coherence theorems, to be discussed in a bit more detail in Subsection 1.2,
+will imply that, in a sense, strict tensor categories are suﬃcient for all purposes. However,
+even when dealing with strict tensor categories, one needs non-strict tensor functors!
+• Basic examples:
+– Let C be any category and let End C be the category of functors C →C and their natural
+transformations.
+Then End C is a strict ⊗-category, with composition of functors as
+tensor product. It is also denoted as the ‘center’ Z0(C). (The subscript is needed since
+various other centers will be encountered.)
+– To every group G, we associate the discrete tensor category C(G):
+Obj C(G) = G,
+Hom(g, h) =
+
+{idg}
+g = h
+∅
+g ̸= h ,
+g ⊗h = gh.
+– The symmetric category S:
+Obj S = Z+,
+Hom(n, m) =
+
+Sn
+n = m
+∅
+n ̸= m ,
+n ⊗m = n + m
+with tensor product of morphisms given by the obvious map Sn × Sm →Sn+m.
+Remark: 1. S is the free symmetric tensor category on one monoidal generator.
+2. S is equivalent to the category of ﬁnite sets and bijective maps.
+2. This construction works with any family (Gi) of groups with an associative composition
+Gi × Gj →Gi+j.
+– Let A be a unital associative algebra with unit over some ﬁeld. We deﬁne End A to have
+as objects the unital algebra homomorphisms ρ : A →A. The morphisms are deﬁned by
+Hom(ρ, σ) = {x ∈A | xρ(y) = σ(y)x ∀y ∈A}
+with s ◦t = st and s ⊗t = sρ(t) = ρ′(t)s for s ∈Hom(ρ, ρ′), t ∈Hom(σ, σ′). This con-
+struction has important applications in in subfactor theory [169] and (algebraic) quantum
+ﬁeld theory [68, 90]. Yamagami [284] proved that every countably generated C∗-tensor
+category with conjugates (cf. below) embeds fully into End A for some von Neumann-
+algebra A = A(C). (See the ﬁnal section for a conjecture concerning an algebra that
+should work for all such categories.)
+– The Temperley-Lieb categories T L(τ). (Cf. e.g. [107].) Let k be a ﬁeld and τ ∈k∗.
+We deﬁne
+Obj T L(τ) = Z+,
+n ⊗m = n + m,
+as for the free symmetric category S. But now
+Hom(n, m) = spank{Isotopy classes of (n, m)-TL diagrams}.
+Here, an (n, m)-diagram is a planar diagram where n points on a line and m points
+on a parallel line are connected by lines without crossings. The following example of a
+(7,5)-TL diagram will explain this suﬃciently:
+2
+
+
+The tensor product of morphisms is given by horizontal juxtaposition, whereas compo-
+sition of morphisms is deﬁned by vertical juxtaposition, followed by removal all newly
+formed closed circles and multiplication by a factor τ for each circle. (This makes sense
+since the category is k-linear.)
+Remark: 1. The Temperley-Lieb algebras TL(n, τ) = EndT L(τ)(n) ﬁrst appeared in the
+theory of exactly soluble lattice models of statistical mechanics. They, as well as T L(τ)
+are closely related to the Jones polynomial [127] and the quantum group SLq(2). Cf.
+[262, Chapter XII].
+2. The Temperley-Lieb algebras, as well as the categories T L(τ) can be deﬁned purely
+algebraically in terms of generators and relations.
+– In dealing with (strict) tensor categories, it is often convenient to adopt a graphical
+notation for morphisms:
+s : X →Y
+⇔
+Y
+✎
+✍
+☞
+✌
+s
+X
+If s : X →Y, t : Y →Z, u : Z →W then we write
+t ◦s : X →Z
+⇔
+Z
+✎
+✍
+☞
+✌
+t
+✎
+✍
+☞
+✌
+s
+X
+s ⊗u : X ⊗Z →Y ⊗W
+⇔
+Y
+W
+✎
+✍
+☞
+✌
+s
+✎
+✍
+☞
+✌
+u
+X
+Z
+The usefulness of this notation becomes apparent when there are morphisms with ‘diﬀerent
+numbers of in- and outputs’: Let, e.g., a : X →S ⊗T, b : 1 →U ⊗Z, c : S →1, d : T ⊗U →
+V, e : Z ⊗Y →W and consider the composite morphism
+c ⊗d ⊗e ◦a ⊗b ⊗idY : X ⊗Y →V ⊗W.
+(1.1)
+This formula is almost unintelligible.
+(In order to economize on brackets, we follow the
+majority of authors and declare ⊗to bind stronger than ◦, i.e. a ◦b ⊗c ≡a ◦(b ⊗c).
+Notice that inserting brackets in (1.1) does nothing to render the formula noticeably more
+intelligible.) It is not even clear whether it represents a morphism in the category. This is
+3
+
+
+immediately obvious from the diagram:
+V
+W
+c
+d
+e
+S
+T
+U
+Z
+✁
+✁
+✁
+a
+b
+X
+Y
+Often, there is more than one way to translate a diagram into a formula, e.g.
+Z
+Z′
+✎
+✍
+☞
+✌
+t
+✎
+✍
+☞
+✌
+t′
+✎
+✍
+☞
+✌
+t
+✎
+✍
+☞
+✌
+t′
+X
+X′
+can be read as t ⊗t′ ◦s ⊗s′ or as (t ◦s) ⊗(t′ ⊗s′). But by the interchange law (which is
+just the functoriality of ⊗), these two morphisms coincide. For proofs of consistency of the
+formalism, cf. [129, 94] or [137].
+1.2
+Non-strict tensor categories
+• For almost all situations where tensor categories arise, strict tensor categories are not general
+enough, the main reasons being:
+– Requiring equality of objects as in (X ⊗Y ) ⊗Z = X ⊗(Y ⊗Z) is highly unnatural from
+a categorical point of view.
+– Many would-be tensor categories are not strict; in particular this is the case for Vectk,
+as well as for representation categories of groups (irrespective of the class of groups and
+representations under consideration).
+• The obvious minimal modiﬁcation, namely to require only existence of isomorphisms (X ⊗
+Y ) ⊗Z ∼= X ⊗(Y ⊗Z) for all X, Y, Z and 1 ⊗X ∼= X ∼= X ⊗1 for all X, turns out to be too
+weak to be useful.
+• The correct deﬁnition of not-necessarily-strict tensor categories was given in [24]: It is a
+sextuplet (C, ⊗, 1, α, λ, ρ), where C is a category, ⊗: C × C →C a functor, 1 an object, and
+α : ⊗◦(⊗×id) →⊗◦(id×⊗), λ : 1⊗−→id, ρ : −⊗1 →id are natural isomorphisms (i.e., for
+all X, Y, Z we have isomorphisms αX,Y,Z : (X ⊗Y )⊗Z →X ⊗(Y ⊗Z) and λX : 1⊗X →X,
+ρX : X ⊗1 →X) such that all morphisms between the same pair of objects that can be built
+from α, λ, ρ coincide. (Examples of what this means are given by the commutativity of the
+following two diagrams.)
+• There are two versions of the coherence theorem for tensor categories:
+Version I (Mac Lane [178, 180]): All morphisms built from α, λ, ρ are unique provided α
+satisﬁes the pentagon identity, i.e. commutativity of
+((X ⊗Y ) ⊗Z) ⊗T αX,Y,Z ⊗idT✲(X ⊗(Y ⊗Z)) ⊗T αX,Y ⊗Z,T✲X ⊗((Y ⊗Z) ⊗T )
+(X ⊗Y ) ⊗(Z ⊗T )
+αX⊗Y,Z,T
+❄
+αX,Y,Z⊗T
+✲X ⊗(Y ⊗(Z ⊗T ))
+idX ⊗αY,Z,T
+❄
+4
+
+
+and λ, ρ satisfy the unit identity
+(X ⊗1) ⊗Y αX,1,Y✲X ⊗(1 ⊗Y )
+X ⊗Y
+ρX ⊗idY
+❄
+≡≡≡≡≡≡≡≡≡≡≡X ⊗Y
+idX ⊗λY
+❄
+For modern expositions of the coherence theorem see [180, 137]. (Notice that the original
+deﬁnition of non-strict tensor categories given in [178] was modiﬁed in slightly [146, 147].)
+• Examples of non-strict tensor categories:
+– Let C be a category with products and terminal object T . Deﬁne X ⊗Y = X Q Y
+(for each pair X, Y choose a product, non-uniquely) and 1 = T . Then (C, ⊗, 1) is non-
+strict tensor category. (Existence of associator and unit isomorphisms follows from the
+universal properties of product and terminal object). An analogous construction works
+with coproduct and initial object.
+– Vectk with αU,V,W deﬁned on simple tensors by (u ⊗v) ⊗w 7→u ⊗(v ⊗w). Note: This
+trivially satisﬁes the pentagon identity, but the other choice (u ⊗v) ⊗w 7→−u ⊗(v ⊗w)
+does not!
+– Let G be a group, A an abelian group (written multiplicatively) and ω ∈Z3(G, A), i.e.
+ω(h, k, l)ω(g, hk, l)ω(g, h, k) = ω(gh, k, l)ω(g, h, kl)
+∀g, h, k, l ∈G.
+Deﬁne C(G, ω) by
+Obj C = G,
+Hom(g, h) =
+ A
+g = h
+∅
+g ̸= h ,
+g ⊗h = gh.
+with associator α = ω, cf. [245]. If k is a ﬁeld, A = k∗, one has a k-linear version where
+Hom(g, h) =
+
+k
+g = h
+{0}
+g ̸= h . I denote this by Ck(G, ω), but also VectG
+ω appears in the
+literature.
+The importance of this example lies in its showing relations between categories and
+cohomology, which are reinforced by ‘higher category theory’, cf. e.g. [14]. But also the
+concrete example is relevant for the classiﬁcation of fusion categories, at least the large
+class of ‘group theoretical categories’. (Cf. Ostrik et al. [223, 84].) See Section 3.
+– A categorical group is a tensor category that is a groupoid (all morphisms are invertible)
+and where every object has a tensor-inverse, i.e. for every X there is an object X such
+that X ⊗X ∼= 1. The categories C(G, ω) are just the skeletal categorical groups.
+• Now we can give the general deﬁnition of a tensor functor (between non-strict tensor categories
+or non-strict tensor functors between strict tensor categories): A tensor functor between
+tensor categories (C, ⊗, 1, α, λ, ρ), (C′, ⊗′, 1′, α′, λ′, ρ′) consists of a functor F : C →C′, an
+isomorphism eF : F(1) →1′ and a family of natural isomorphisms dF
+X,Y : F(X) ⊗F(Y ) →
+F(X ⊗Y ) satisfying commutativity of
+(F(X) ⊗′ F(Y )) ⊗′ F(Z) dX,Y ⊗id
+✲F(X ⊗Y ) ⊗′ F(Z) dX⊗Y,Z✲F((X ⊗Y ) ⊗Z)
+F(X) ⊗′ (F(Y ) ⊗′ F(Z))
+α′
+F (X),F (Y ),F (Z)
+❄
+id ⊗dY,Z
+✲F(X) ⊗′ F(Y ⊗Z) dX,Y ⊗Z
+✲F(X ⊗(Y ⊗Z))
+F(αX,Y,Z)
+❄
+5
+
+
+(notice that this is a 2-cocycle condition, in particular when α ≡id) and
+F(X) ⊗F(1) id ⊗eF
+✲F(X) ⊗1′
+F(X ⊗1)
+dF
+X,1
+❄
+F(ρX)
+✲F(X)
+ρ′
+F (X)
+❄
+(and similar for λX)
+Remark: Occasionally, functors as deﬁned above are called strong tensor functors in order
+to distinguish them from the lax variant, where the dF
+X,Y and eF are not required to be
+isomorphisms. (In this case it also makes sense to consider dF , eF with source and target
+exchanged.)
+• Let (C, ⊗, 1, α, λ, ρ), (C′, ⊗′, 1′, α′, λ′, ρ′) be tensor categories and (F, d, e), (F ′, d′, e′) : C →C′
+tensor functors. Then a natural transformation α : F →F ′ is monoidal if
+F(X) ⊗′ F(Y ) dX,Y✲F(X ⊗Y )
+F ′(X) ⊗′ F ′(Y )
+αX ⊗αY
+❄
+d′
+X,Y✲F ′(X ⊗Y )
+αX⊗Y
+❄
+For strict tensor functors, we have d ≡id ≡d′, and we obtain the earlier condition.
+• A tensor functor F : (C, ⊗, 1, α, λ, ρ) →(C′, ⊗′, 1′, α′, λ′, ρ′) is called an equivalence if there
+exist a tensor functor G : C′ →C and natural monoidal isomorphisms α : G ◦F →idC and
+β : F ◦G →idC′. For the existence of such a G it is necessary and suﬃcient that F be full,
+faithful and essentially surjective (and of course monoidal), cf. [238]. (We follow the practice
+of not worrying too much about size issues and assuming a suﬃciently strong version of the
+axiom of choice for classes. On this matter, cf. the diﬀerent discussions of foundational issues
+given in the two editions of [180].)
+• Given a group G and ω, ω′ ∈Z3(G, A), the identity functor is part of a monoidal equivalence
+C(G, ω) →C(G, ω′) if and only if [ω] = [ω′] in H3(G, A). Cf. e.g. [54, Chapter 2]. Since
+categorical groups form a 2-category CG, they are best classiﬁed by providing a 2-equivalence
+between CG and a 2-category H3 deﬁned in terms of cohomology groups H3(G, A). The details
+are too involved to give here; cf. [128]. (Unfortunately, the theory of categorical groups is
+marred by the fact that important works [245, 128] were never formally published. For a
+comprehensive recent treatment cf. [12].)
+• Version II of the Coherence theorem (equivalent to Version I): Every tensor category is
+monoidally equivalent to a strict one. [180, 137]. As mentioned earlier, this allows us to
+pretend that all tensor categories are strict. (But we cannot restrict ourselves to strict tensor
+functors!)
+• One may ask what the strictiﬁcation of C(G, ω) looks like. The answer is somewhat compli-
+cated, cf. [128]: It involves the free group on the set underlying G. (This shows that sometimes
+it is actually more convenient to work with non-strict categories!)
+• As shown in [241], many non-strict tensor categories can be turned into equivalent strict ones
+by changing only the tensor functor ⊗, but leaving the underlying category unchanged.
+• We recall the “Eckmann-Hilton argument”: If a set has two monoid structures ⋆1, ⋆2 satisfying
+(a ⋆2 b) ⋆1 (c ⋆2 d) = (a ⋆1 c) ⋆2 (b ⋆1 d) with the same unit, the two products coincide and are
+commutative. If C is a tensor category and we consider End 1 with ⋆1 = ◦, ⋆2 = ⊗we ﬁnd that
+6
+
+
+End 1 is commutative, cf. [148]. In the Ab- (k-linear) case, deﬁned in Subsection 1.6, End 1 is
+a commutative unital ring (k-algebra). (Another classical application of the Eckmann-Hilton
+argument is the abelianness of the higher homotopy groups πn(X), n ≥2 and of π1(M) for a
+topological monoid M.)
+1.3
+Generalization: 2-categories and bicategories
+• Tensor categories have a very natural and useful generalization. We begin with ‘2-categories’,
+which generalize strict tensor categories: A 2-category E consists of a set (class) of objects and,
+for every X, Y ∈Obj E, a category HOM(X, Y ). The objects (morphisms) in HOM(X, Y )
+are called 1-morphisms (2-morphisms) of E. For the detailed axioms we refer to the references
+given below. In particular, we have functors ◦: HOM(A, B) × HOM(B, C) →HOM(A, C),
+and ◦is associative (on the nose).
+• The prototypical example of a 2-category is the 2-category CAT . Its objects are the small
+categories, its 1-morphisms are functors and the 2-morphisms are natural transformations.
+• We notice that if E is a 2-category and X ∈Obj E, then END(X) = HOM(X, X) is a strict
+tensor category. This leads to the non-strict version of 2-categories called bicategories: We
+replace the associativity of the composition ◦of 1-morphisms by the existence of invertible
+2-morphisms (X ◦Y ) ◦Z →X ◦(Y ◦Z) satisfying axioms generalizing those of a tensor
+category. Now, if E is a bicategory and X ∈Obj E, then END(X) = HOM(X, X) is a (non-
+strict) tensor category. Bicategories are a very important generalization of tensor categories,
+and we’ll meet them again. Also the relation between bicategories and tensor categories is
+prototypical for ‘higher category theory’.
+References: [150] for 2-categories and [26] for bicategories, as well as the very recent review
+by Lack [162].
+1.4
+Categoriﬁcation of monoids
+Tensor categories (or monoidal categories) can be considered as the categoriﬁcation of the
+notion of a monoid. This has interesting consequences:
+• Monoids in monoidal categories: Let (C, ⊗, 1) be a strict ⊗-category. A monoid in C (B´enabou
+[25]) is a triple (A, m, η) with A ∈C, m : A ⊗A →A, η : 1 →A satisfying
+m ◦m ⊗idA = m ◦idA ⊗m,
+m ◦η ⊗idA = idA = m ◦idA ⊗η.
+(In the non-strict case, insert an associator at the obvious place.) A monoid in Ab (Vectk) is
+a ring (k-algebra). Therefore, in the recent literature monoids are often called ‘algebras’.
+Monoids in monoidal categories are a prototypical example of the ‘microcosm principle’ of
+Baez and Dolan [11] aﬃrming that “certain algebraic structures can be deﬁned in any category
+equipped with a categoriﬁed version of the same structure”.
+• If C is any category, monoids in the tensor category End C are known as ‘monads’. As such
+they are older than tensor categories! Cf. [180].
+• If (A, m, η) is a monoid in the strict tensor category C, a left A-module is a pair (X, µ), where
+X ∈C and µ : A ⊗X →X satisﬁes
+µ ◦m ⊗idX = µ ◦idA ⊗µ,
+µ ◦η ⊗idX = idX.
+Together with the obvious notion of A-module morphism
+HomA−Mod((X, µ), (X′, µ′)) = {s ∈HomC(X, X′) | s ◦µ = µ′ ◦idA ⊗s},
+A-modules form a category. Right A-modules and A −A bimodules are deﬁned analogously.
+The free A-module of rank 1 is just (A, m).
+7
+
+
+• If C is abelian, then A −ModC is abelian under weak assumptions, cf. [6]. (The latter are
+satisﬁed when A has duals, as e.g. when it is a strongly separable Frobenius algebra [98]. All
+this could also be deduced from [76].)
+• Every monoid (A, m, η) in C gives rise to a monoid ΓA = Hom(1, A) in the category SET of
+sets. We call it the elements of A. (ΓA is related to the endomorphisms of the unit object
+in the tensor categories of A −A-bimodules and A-modules (in the braided case), when the
+latter exist.)
+• Let C be abelian and (A, m, η) an algebra in C. An ideal in A is an A-module (X, µ) together
+with a monic morphism (X, µ) ֒→(A, m). Much as in ordinary algebra, one can deﬁne a
+quotient algebra A/I. Furthermore, every ideal is contained in a maximal ideal, and an ideal
+I ⊂A in a commutative monoid is maximal if and only if the ring ΓA/I is a ﬁeld. (For the
+last claim, cf. [197].)
+• Coalgebras and their comodules are deﬁned analogously. In a tensor category equipped
+with a symmetry or braiding c (cf. below), it makes sense to say that an (co)algebra is
+(co)commutative. For an algebra (A, m, η) this means that m ◦cA,A = m.
+• (B) Just as monoids can act on sets, tensor categories can act on categories:
+Let C be a tensor category. A left C-module category is a pair (M, F) where M is a
+category and F : C →End M is a tensor functor. (Here, End M is as in our ﬁrst example
+of a tensor category.) This is equivalent to having a functor F ′ : C × M →M and natural
+isomorphisms βX,Y,A : F ′(X ⊗Y, A) →F(X, F(Y, A)) satisfying a pentagon-type coherence
+law, unit constraints, etc. Now one can deﬁne indecomposable module categories, etc. (Ostrik
+[222])
+• There is a close connection between module categories and categories of modules:
+If (A, m, η) is an algebra in C, then there is an natural right C-module structure on the category
+A −ModC of left A-modules:
+F ′ : A −ModC × C,
+(M, µ) × X 7→(M ⊗X, µ ⊗idX).
+(In the case where (M, µ) is the free rank-one module (A, m), this gives the free A-modules
+F ′((A, m), X) = (A ⊗X, m ⊗idX).) For a fusion category (cf. below), one can show that
+every semisimple indecomposable left C-module category arises in this way from an algebra
+in C, cf. [222].
+1.5
+Duality in tensor categories I
+• If G is a group and π a representation on a ﬁnite dimensional vector space V , we deﬁne the
+‘dual’ or ‘conjugate’ representation π on the dual vector space V ∗by ⟨π(g)φ, x⟩= ⟨φ, π(g)x⟩.
+Denoting by π0 the trivial representation, one ﬁnds HomRep G(π ⊗π, π0) ∼= HomRep G(π, π),
+implying π ⊗π ≻π0. If π is irreducible, then so is π and the multiplicity of π0 in π ⊗π is one
+by Schur’s lemma.
+Since the above discussion is quite speciﬁc to the group situation, it clearly needs to be
+generalized.
+• Let (C, ⊗, 1) be a strict tensor category and X, Y ∈C. We say that Y is a left dual of X if
+there are morphisms e : Y ⊗X →1 and d : 1 →X ⊗Y satisfying
+idX ⊗e ◦d ⊗idX = idX,
+e ⊗idY ◦idY ⊗d = idY ,
+or, representing e : Y ⊗X →1 and d : 1 →X ⊗Y by ☛✟
+and ✡✠
+, respectively,
+X
+☛✟
+e
+Y
+d ✡✠
+X
+=
+X
+X
+Y
+e ☛✟
+X
+✡✠
+d
+Y
+=
+Y
+Y
+8
+
+
+(e stands for ‘evaluation’ and d for ‘dual’.). In this situation, X is called a right dual of Y .
+Example: C = Vectﬁn
+k , X ∈C. Let Y = X∗, the dual vector space. Then e : Y ⊗X →1 is the
+usual pairing. With the canonical isomorphism f : X∗⊗X
+∼
+=
+−→End X, we have d = f −1(idX).
+We state some facts:
+1. Whether an object X admits a left or right dual is not for us to choose. It is a property
+of the tensor category.
+2. If Y, Y ′ are left (or right) duals of X then Y ∼= Y ′.
+3. If ∨A, ∨B are left duals of A, B, respectively, then ∨B ⊗∨A is a left dual for A ⊗B, and
+similarly for right duals.
+4. If X has a left dual Y and a right dual Z, we may or may not have Y ∼= Z ! (Again,
+that is a property of X.)
+While duals, if they exist, are unique up to isomorphisms, it is often convenient to make
+choices. One therefore deﬁnes a left duality of a strict tensor category (C, ⊗, 1) to be a
+map that assigns to each object X a left dual ∨X and morphisms eX : ∨X ⊗X →1 and
+dX : 1 →X ⊗∨X satisfying the above identities.
+Given a left duality and a morphism, s : X →Y we deﬁne
+∨s = eY ⊗id∨X ◦id∨Y ⊗s ⊗id∨X ◦id∨Y ⊗dX =
+∨X
+eY ☛✟
+✎
+✍
+☞
+✌
+s
+✡✠
+dX
+∨Y
+Then (X 7→∨X, s 7→∨s) is a contravariant functor. (We cannot recover the e’s and d’s from
+the functor!) It can be equipped with a natural (anti-)monoidal isomorphism ∨(A ⊗B) →
+∨B ⊗∨A, ∨1 →1. Often, the duality functor comes with a given anti-monoidal structure, e.g.
+in the case of pivotal categories, cf. Section 3.
+• A chosen right duality X 7→(X∨, e′
+X : X ⊗X∨→1, d′
+X : 1 →X∨⊗X) also give rise to a
+contravariant anti-monoidal functor X 7→X∨.
+• Categories equipped with a left (right) duality are called left (right) rigid (or autonomous).
+Categories with left and right duality are called rigid (or autonomous).
+• Examples: Vectﬁn
+k , Rep G are rigid.
+• Notice that ∨∨X ∼= X holds if and only if ∨X ∼= X∨, for which there is no general reason.
+• If every object X ∈C admits a left dual ∨X and a right dual X∨, and both are isomorphic,
+we say that C has two-sided duals and write X. We will only consider such categories, but
+we will need stronger axioms.
+• Let C be a ∗-category (cf. below) with left duality. If (∨X, eX, dX) is a left dual of X ∈C then
+(X∨= ∨X, d∗
+X, e∗
+X) is a right dual. Thus duals in ∗-categories are automatically two-sided.
+For this reason, duals in ∗-category are often axiomatized in a symmetric fashion by saying
+that a conjugate, cf. [70, 172], of an object X is a triple (X, r, r), where r : 1 →X ⊗X, r :
+1 →X ⊗X satisfy
+idX ⊗r∗◦r ⊗idX = idX,
+idX ⊗r∗◦r ⊗idX = idX.
+It is clear that then (X, r∗, r) is a left dual and (X, r∗, r) a right dual.
+• Unfortunately, there is an almost Babylonian inﬂation of slightly diﬀerent notions concern-
+ing duals, in particular when braidings are involved: A category can be rigid, autonomous,
+sovereign, pivotal, spherical, ribbon, tortile, balanced, closed, category with conjugates, etc.
+To make things worse, these terms are not always used in the same way!
+9
+
+
+• Before we continue the discussion of duality in tensor categories, we will discuss symmetries.
+For symmetric tensor categories, the discussion of duality is somewhat simpler than in the
+general case. Proceeding like this seems justiﬁed since symmetric (tensor) categories already
+appeared in the second paper ([178] 1963) on tensor categories.
+1.6
+Additive, linear and ∗-structure
+• The discussion so far is quite general, but often one encounters categories with more structure.
+• We begin with ‘Ab-categories’ (=categories ‘enriched over abelian groups’): For such a cate-
+gory, each Hom(X, Y ) is an abelian group, and ◦is bi-additive, cf. [180, Section I.8]. Example:
+The category Ab of abelian groups. In ⊗-categories, also ⊗must be bi-additive on the mor-
+phisms. Functors of Ab-tensor categories required to be additive on hom-sets.
+• If X, Y, Z are objects in an Ab-category, Z is called a direct sum of X and y if there are
+morphisms X
+u→Z
+u′
+→X, Y
+v→Z
+v′
+→Y satisfying u◦u′ +v ◦v′ = idZ, u′ ◦u = idX, v′ ◦v = idY .
+An additive category is an Ab-category having direct sums for all pairs of objects and a zero
+object.
+• An abelian category is an additive category where every morphism has a kernel and a
+cokernel and every monic (epic) is a kernel (cokernel). We do not have the space to go further
+into this and must refer to the literature, e.g. [180].
+• A category is said to have splitting idempotents (or is ‘Karoubian’) if p = p◦p ∈End X implies
+the existence of an object Y and of morphisms u : Y →X, u′ : X →Y such that u′ ◦u = idY
+and u ◦u′ = p. An additive category with splitting idempotents is called pseudo-abelian.
+Every abelian category is pseudo-abelian.
+• In an abelian category with duals, the functors −⊗X and X ⊗−are automatically exact,
+cf. [64, Proposition 1.16]. But without rigidity this is far from true.
+• A semisimple category is an abelian category where every short exact sequence splits.
+An alternative, and more pedestrian, way to deﬁne semisimple categories is as pseudo-abelian
+categories admitting a family of simple objects Xi, i ∈I such that every X ∈C is a ﬁnite
+direct sum of Xi’s.
+Standard examples: The category Rep G of ﬁnite dimensional representations of a compact
+group G, the category H −Mod of ﬁnite dimensional left modules for a ﬁnite dimensional
+semisimple Hopf algebra H.
+• In k-linear categories, each Hom(X, Y ) is k-vector space (often required ﬁnite dimensional),
+and ◦(and ⊗in the monoidal case) is bilinear. Functors must be k-linear. Example: Vectk.
+• Pseudo-abelian categories that are k-linear with ﬁnite-dimensional hom-sets are called Krull-
+Schmidt categories. (This is slightly weaker than semisimplicity.)
+• A fusion category is a semisimple k-linear category with ﬁnite dimensional hom-sets, ﬁnitely
+many isomorphism classes of simple objects and End 1 = k. We also require that C has 2-sided
+duals.
+• A ﬁnite tensor category (Etingof, Ostrik [85]) is a k-linear tensor category with End 1 =
+k that is equivalent (as a category) to the category of modules over a ﬁnite dimensional
+k-algebra. (There is a more intrinsic characterization.) Notice that semisimplicity is not
+assumed.
+• Dropping the condition End 1 = kidk, one arrives at a multi-fusion category (Etingof,
+Nikshych, Ostrik [84]).
+• Despite the recent work on generalizations, most of these lectures will be concerned with
+semisimple k-linear categories satisfying End 1 = k id1, including inﬁnite ones! (But see the
+remarks at the end of this section.)
+10
+
+
+• If C is a semisimple tensor category, one can choose representers {Xi, i ∈I} of the simple
+isomorphism classes and deﬁne N k
+i,j ∈Z+ by
+Xi ⊗Xj ∼=
+M
+k∈I
+N k
+i,jXk.
+There is a distinguished element 0 ∈I such that X0 ∼= I, thus N k
+i,0 = N k
+0,i = δi,k.
+By
+associativity of ⊗(up to isomorphism)
+X
+n
+N n
+i,jN l
+n,k =
+X
+m
+N l
+i,mN m
+j,k
+∀i, j, k, l ∈I.
+If C has two-sided duals, there is an involution i 7→ı such that Xi ∼= Xı. One has N 0
+i,j = δi,.
+The quadruple (I, {N k
+i,j}, 0, i 7→ı) is called the fusion ring or fusion hypergroup of C.
+• The above does not work when C is not semisimple. But: In any abelian tensor category,
+one can consider the Grothendieck ring R(C), the free abelian group generated by the
+isomorphism classes [X] of objects in C, with a relation [X] + [Z] = [Y ] for every short exact
+sequence 0 →X →Y →Z →0 and [X] · [Y ] = [X ⊗Y ].
+In the semisimple case, the Grothendieck ring has {[Xi], i ∈I} as Z-basis and [Xi] · [Xj] =
+P
+k N k
+i,j[Xk]. Obviously, an isomorphism of hypergroups gives rise to a ring isomorphism
+of Grothendieck rings, but the converse is not obvious. While the author is not aware of
+counterexamples, in order to rule out this annoying eventuality, some authors work with
+isomorphisms of the Grothendieck semiring or the ordered Grothendieck ring, cf e.g. [112].
+Back to hypergroups:
+• The hypergroup contains important information about a tensor category, but it misses that
+encoded in the associativity constraint. In fact, the hypergroup of Rep G for a ﬁnite group
+G contains exactly the same information as the character table of G, and it is well known
+that there are non-isomorphic ﬁnite groups with isomorphic character tables. (The simplest
+example is given by the dihedral group D8 = Z4 ⋊Z2 and the quaternion group Q, cf.
+any elementary textbook, e.g. [123].) Since D8 and Q have the same number of irreducible
+representations, the categories Rep D8 and Rep Q are equivalent (as categories). They are
+not equivalent as symmetric tensor categories, since this would imply D8 ∼= Q by the duality
+theorems of Doplicher and Roberts [70] or Deligne [58] (which we will discuss in Section 3). In
+fact, D8 and Q are already inequivalent as tensor categories (i.e. they are not isocategorical
+in the sense discussed below). Cf. [254], where fusion categories with the fusion hypergroup
+of D8 are classiﬁed (among other things).
+• On the positive side: (1) If a ﬁnite group G has the same fusion hypergroup (or character
+table) as a ﬁnite simple group G′, then G ∼= G′, cf. [51]. (The proof uses the classiﬁcation
+of ﬁnite simple groups.) (2) Compact groups that are abelian or connected are determined
+by their fusion rings (by Pontrjagin duality, respectively by a result of McMullen [188] and
+Handelman [112].
+The latter is ﬁrst proven for simple compact Lie groups and then one
+deduces the general result via the structure theorem for connected compact groups.)
+• If all objects in a semisimple category C are invertible, the fusion hypergroup becomes a group.
+Such fusion categories are called pointed and are just the linear versions of the categorical
+groups encountered earlier. This situation is very special, but:
+• To each hypergroup {I, N, 0, i 7→ı} one can associate a group G(I) as follows: Let ∼be the
+smallest equivalence relation on I such that
+i ∼j
+whenever
+∃m, n ∈I : i ≺mn ≻j (i.e. N i
+n,m ̸= 0 ̸= N j
+n,m).
+Now let G(I) = I/∼and deﬁne
+[i] · [j] = [k] for any k ≺ij,
+[i]−1 = [ı],
+e = [0].
+11
+
+
+Then G(I) is a group, and it has the universal property that every map p : I →K, K a
+group, satisfying p(k) = p(i)p(j) when k ≺ij factors through the map I →G(I), i 7→[i].
+In analogy to the abelianization of a non-abelian group, G(I) should perhaps be called the
+groupiﬁcation of the hypergroup I. But it was called the universal grading group by
+Gelaki/Nikshych [102], to which this is due in the above generality, since every group-grading
+on the objects of a fusion category having fusion hypergroup I factors through the map
+I →G(I).
+• In the symmetric case (where I and G(I) are abelian, but everything else as above) this
+groupiﬁcation is due to Baumg¨artel/Lled´o [21], who spoke of the ‘chain group’. They stated
+the conjecture that if K is a compact group, then the (discrete) universal grading group
+G(Rep K) of Rep K is the Pontrjagin dual of the (compact) center Z(K). Thus: The center
+of a compact group K can be recovered from the fusion ring of K, even if K itself in general
+cannot! This conjecture was proven in [195], but the whole circle of ideas is already implicit
+in [188].
+Example: The representations of K = SU(2) are labelled by Z+ with
+i ⊗j = |i −j| ⊕· · · ⊕i + j −2 ⊕i + j.
+From this one easily sees that there are two ∼-equivalence classes, consisting of the even and
+odd integers. This is compatible with Z(SU(2)) = Z/2Z. Cf. [21].
+• There is another application of G(C):
+If C is k-linear semisimple then group of natural
+monoidal isomorphisms of idC is given by Aut⊗(idC) ∼= Hom(G(C), k∗).
+• Given a fusion category C (where we have two-sided duals X), Gelaki/Nikshych [102] deﬁne
+the full subcategory Cad ⊂C to be the generated by the objects X ⊗X where X runs through
+the simple objects. Notice that Cad is just the full subcategory of objects of universal grading
+zero.
+Example: If G is a compact group then (Rep G)ad = Rep(G/Z(G)).
+A fusion category C is called nilpotent [102] when its upper central series
+C ⊃Cad ⊃(Cad)ad ⊃· · ·
+leads to the trivial category after ﬁnitely many steps.
+Example: If G is a ﬁnite group then Rep G is nilpotent if and only if G is nilpotent.
+• We call a square n × n-matrix A indecomposable if there is no proper subset S ⊂{1, . . . , n}
+such that A maps the coordinate subspace span{es | s ∈S} into itself. Let A be an inde-
+composable square matrix A with non-negative entries and eigenvalues λi. Then the theorem
+of Perron and Frobenius states that there is a unique non-negative eigenvalue λ, the Perron-
+Frobenius eigenvalue, such that λ = maxi |λi|.
+Furthermore, the associated eigenspace is
+one-dimensional and contains a vector with all components non-negative. Now, given a ﬁnite
+hypergroup (I, {N k
+i,j}, 0, i 7→ı) and i ∈I, deﬁne Ni ∈Mat(|I| × |I|) by (Ni)jk = N k
+i,j. Due to
+the existence of duals, this matrix is indecomposable. Now the Perron-Frobenius dimen-
+sion dF P (i) of i ∈I is deﬁned as the Perron-Frobenius eigenvalue of Ni. Cf. e.g. [96, Section
+3.2]. Then:
+dF P (i)dF P (j) =
+X
+k
+N k
+i,jdF P (k).
+Also the hypergroup I has a Perron-Frobenius dimension: FP −dim(I) = P
+i dF P (i)2. This
+also deﬁnes the PF-dimension of a fusion category, cf. [84]
+• Ocneanu rigidity: Up to equivalence there are only ﬁnitely many fusion categories with given
+fusion hypergroup. The general statement was announced by Blanchard/A. Wassermann, and
+a proof is given in [84], using the deformation cohomology theory of Davydov [53] and Yetter
+[290].
+12
+
+
+• Ocneanu rigidity was preceded and motivated by several related results on Hopf algebras:
+Stefan [249] proved that the number of isomorphism classes of semisimple and co-semisimple
+Hopf algebras of given ﬁnite dimension is ﬁnite. For Hopf ∗-algebras, Blanchard [30] even
+proved a bound on the number of iso-classes in terms of the dimension. There also is an
+upper bound on the number of iso-classes of semisimple Hopf algebras with given number of
+irreducible representations, cf. Etingof’s appendix to [224].
+• There is an enormous literature on hypergroups. Much of this concerns harmonic analysis
+on the latter and is not too relevant to tensor categories. But the notion of amenability
+of hypergroups does have such applications, cf. e.g. [119]. For a review of some aspects of
+hypergroups, in particular the discrete ones relevant here, cf. [278].
+• A considerable fraction of the literature on tensor categories is devoted to categories that are
+k-linear over a ﬁeld k with ﬁnite dimensional Hom-spaces. Clearly this a rather restrictive
+condition. It is therefore very remarkable that k-linearity can actually be deduced under
+suitable assumptions, cf. [161].
+• ∗-categories: A ‘∗-operation’ on a C-linear category C is a contravariant functor ∗: C →C
+which acts trivially on the objects, is antilinear, involutive (s∗∗= s) and monoidal (s ⊗t)∗=
+s∗⊗t∗(when C is monoidal). A ∗-operation is called positive if s∗◦s = 0 implies s = 0.
+Categories with (positive) ∗-operation are also called hermitian (unitary). We will use ‘∗-
+category’ as a synonym for ‘unitary category’.) Example: The category of Hilbert spaces
+HILB with bounded linear maps and ∗given by the adjoint.
+• It is easy to prove that a ﬁnite dimensional C-algebra with positive ∗-operation is semisimple.
+Therefore, a unitary category with ﬁnite dimensional hom-sets has semisimple endomorphism
+algebras. If it has direct sums and splitting idempotents then it is semisimple.
+• Banach-, C∗- and von Neumann categories: A Banach category [135] is a C-linear additive
+category, where each Hom(X, Y ) is a Banach space, and the norms satisfy
+∥s ◦t∥≤∥s∥∥t∥,
+∥s∗◦s∥= ∥s∥2.
+(They were introduced by Karoubi with a view to applications in K-theory, cf. [135].) A
+Banach ∗-category is a Banach category with a positive ∗-operation.
+A C∗-category is a
+Banach ∗-category satisfying ∥s∗◦s∥= ∥s∥for any morphism s (not only endomorphisms). In
+a C∗-category, each End(X) is a C∗-algebra. Just as an additive category is a ‘ring with several
+objects’, a C∗-category is a “C∗-algebra with several objects”. Von Neumann categories are
+deﬁned similarly, cf. [105]. They turned out to have applications to L2-cohomology (cf. Farber
+[88]), representation theory of quantum groups (Woronowicz [280]), subfactors [172], etc.
+Remark: A ∗-category with ﬁnite dimensional hom-spaces and End 1 = C automatically is a
+C∗-category in a unique way. (Cf. [190].)
+• If C is a C∗-tensor category, End 1 is a commutative C∗-algebra, thus ∼= C(S) for some
+compact Hausdorﬀspace S. Under certain technical conditions, the spaces Hom(X, Y ) can
+be considered as vector bundles over S, or at least as (semi)continuous ﬁelds of vector spaces.
+(Work by Zito [291] and Vasselli [271].) In the case where End 1 is ﬁnite dimensional, this
+boils down to a direct sum decomposition of C = ⊕iCi, where each Ci is a tensor category with
+EndCi(1Ci) = C. (In this connection, cf. Baez’ comments a Doplicher-Roberts type theorem
+for ﬁnite groupoids [9].)
+2
+Symmetric tensor categories
+• Many of the obvious examples of tensor categories encountered in Section 1, like the categories
+SET , Vectk, representation categories of groups and Cartesian categories (tensor product ⊗
+given by the categorical product), have an additional piece of structure, to which this section
+is dedicated.
+13
+
+
+• A symmetry on a tensor category (C, ⊗, 1, α, ρ, λ) is a natural isomorphism c : ⊗→⊗◦σ,
+where σ : C × C →C × C is the ﬂip automorphism of C × C, such that c2 = id. (I.e., for any
+two objects X, Y there is an isomorphism cX,Y : X ⊗Y →Y ⊗X, natural w.r.t. X, Y such
+that cY,X ◦cX,Y = idX⊗Y .), where “all properly built diagrams commute”, i.e. the category
+is coherent. A symmetric tensor category (STC) is a tensor category equipped with a
+symmetry.
+We represent the symmetry graphically by
+cX,Y =
+Y
+X
+❅
+❅
+❅
+X
+Y
+• As for tensor categories, there are two versions of the Coherence Theorem. Version I (Mac
+Lane [178]): Let (C, ⊗, 1, α, ρ, λ) be a tensor category. Then a natural isomorphism c : ⊗→
+⊗◦σ satisfying c2 = id is a symmetry if and only if
+(X ⊗Y ) ⊗Z cX,Y ⊗idZ
+✲(Y ⊗X) ⊗Z αY,X,Z✲Y ⊗(X ⊗Z) idY ⊗cX,Z
+✲Y ⊗(Z ⊗X)
+X ⊗(Y ⊗Z)
+αX,Y,Z
+❄
+cX,Y ⊗Z
+✲(Y ⊗Z) ⊗X
+αY,Z,X
+✻
+commutes. (In the strict case, this reduces to cX,Y ⊗Z = idY ⊗cX,Z ◦cX,Y ⊗idZ.)
+A symmetric tensor functor is a tensor functor F such that F(cX,Y ) = c′
+F (X),F (Y ). Notice
+that a natural transformation between symmetric tensor functors is just a monoidal natural
+transformation, i.e. there is no new condition.
+• Now we can state version II of the Coherence theorem: Every symmetric tensor category is
+equivalent (by a symmetric tensor functor) to a strict one.
+• Examples of symmetric tensor categories:
+– The category S deﬁned earlier, when cn,m : n + m →n + m is taken to be the element of
+Sn+m deﬁned by (1, . . . , n + m) 7→(n + 1, . . . , n + m, 1, . . . n). It is the free symmetric
+monoidal category generated by one object.
+– Non-strict symmetric categorical groups were classiﬁed by Sinh [245]. We postpone our
+discussion to Section 4, where we will also consider the braided case.
+– Vectk, representation categories of groups: We have the canonical symmetry cX,Y :
+X ⊗Y →Y ⊗X, x ⊗y 7→y ⊗x.
+– The tensor categories obtained using products or coproducts are symmetric.
+• Let C be a strict STC, X ∈C and n ∈N. Then there is a unique homomorphism
+ΠX
+n : Sn →Aut X⊗n
+such that
+σi 7→idX⊗(i−1) ⊗cX,X ⊗idX⊗(n−i−1).
+Proof: This is immediate by the deﬁnition of STCs and the presentation
+Sn = {σ1, . . . , σn−1 | σiσi+1σi = σi+1σiσi+1, σiσj = σjσi when |i −j| > 1, σ2
+i = 1}
+of the symmetric groups.
+These homomorphisms in fact combine to a symmetric tensor functor F : S →C such that
+F(n) = X⊗n. (This is why S is called the free symmetric tensor category on one generator.)
+14
+
+
+• In the ⊗-category C = Vectﬁn
+k , Hom(V, W) is itself an object of C, giving rise to an internal
+hom-functor: Cop × C →C, X × Y 7→[X, Y ] = Hom(X, Y ) satisfying some axioms. In the
+older literature, a symmetric tensor category with such an internal-hom functor is called a
+closed category. There are coherence theorems for closed categories. [149, 148].
+Since in Vectﬁn
+k
+we have Hom(V, W) ∼= V ∗⊗W, it is suﬃcient – and more transparent – to
+axiomatize duals V 7→V ∗, as is customary in the more recent literature. We won’t mention
+‘closed’ categories again. (Which doesn’t mean that they have no uses!)
+• We have seen that, even if a tensor category has left and right duals ∨X, X∨for every object,
+they don’t need to be isomorphic. But if C is symmetric and X 7→(∨X, eX, dX) is a left
+duality, then deﬁning
+X∨= ∨X,
+e′
+X = eX ◦cX,∨X,
+d′
+X = cX,∨X ◦dX,
+one easily checks that X 7→(X∨, e′
+X, d′
+X) deﬁnes a right duality. We can thus take ∨X = X∨
+and denote this more symmetrically by X.
+• Let C be symmetric with given left duals and with right duals as just deﬁned, and let X ∈C.
+Deﬁne the (left) trace TrX : End X →End 1 by
+TrX(s) = eX ◦idX ⊗s ◦d′
+X =
+✛✘
+eX
+X
+✎
+✍
+☞
+✌
+s
+✚✙
+d′
+X
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=
+✛✘
+eX
+X
+✎
+✍
+☞
+✌
+s
+❅
+❅
+❅
+✚✙
+dX
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Without much eﬀort, one can prove the trace property TrX(ab) = TrX(ba) and multiplicativity
+under ⊗: TrX⊗Y (a ⊗b) = TrX(a)TrY (b). Finally, TrX equals the right trace deﬁned using
+e′
+X, dX. For more on traces in tensor categories cf. e.g. [134, 185].
+• Using the above, we deﬁne the categorical dimension of an object X by d(X) = TrX(idX) ∈
+End 1. If End 1 = kid1, we can use this identiﬁcation to obtain d(X) ∈k.
+With this dimension and the usual symmetry and duality on Vectﬁn
+k , one veriﬁes d(V ) =
+dimk V · 1k.
+However, in the category SVectk of super vector spaces (which coincides with the represen-
+tation category RepkZ2, but has the symmetry modiﬁed by the Koszul rule) it gives the
+super-dimension, which can be negative, while one might prefer the total dimension. Such
+situations can be taken care of (without changing the symmetry) by introducing twists.
+• If (C, ⊗, 1) is strict symmetric, we deﬁne a twist to be natural family {ΘX ∈End X, X ∈C}
+of isomorphisms satisfying
+ΘX⊗Y = ΘX ⊗ΘY ,
+Θ1 = id1
+(2.1)
+i.e., Θ is a monoidal natural isomorphism of the functor idC. If C has a left duality, we also
+require
+∨(ΘX) = Θ∨X.
+The second condition implies Θ2
+X = id. Notice that ΘX = idX ∀X is a legal choice. This will
+not remain true in braided tensor categories!
+Example: If G is a compact group and C = Rep G, then the twists Θ satisfying only (2.1) are
+in bijection with Z(G). The second condition reduces this to central elements of order two.
+(Cf. e.g. [197].)
+15
+
+
+• Given a strict symmetric tensor category with left duality and a twist, we can deﬁne a right
+duality by X∨= ∨X, writing X = ∨X = X∨, but now
+e′
+X = eX ◦cX,X ◦ΘX ⊗idX,
+d′
+X = idX ⊗ΘX ◦cX,X ◦dX,
+(2.2)
+still deﬁning a right duality and the maps T rX : End X →End 1 still are traces.
+• Conversely, the twist can be recovered from X 7→(X, eX, dX, e′
+X, d′
+X) by
+ΘX = (TrX ⊗id)(cX,X) =
+X
+eX ☛✟
+X
+❆
+❆
+❆
+✁
+✁
+✁
+d′
+X ✡✠
+X
+Thus: Given a symmetric tensor category with ﬁxed left duality, every twist gives rise to a
+right duality, and every right duality that is ‘compatible’ with the left duality gives a twist.
+(The trivial twist Θ ≡id corresponds to the original deﬁnition of right duality. The latter does
+not work in proper braided categories!) This compatibility makes sense even for categories
+without symmetry (or braiding) and will be discussed later (❀pivotal categories).
+• The symmetric categories with Θ ≡id are now called even.
+• The category SVectk of super vector spaces with Θ deﬁned in terms of the Z2-grading now
+satisﬁes dim(V ) ≥0 for all V .
+• The standard examples for STCs are Vectk, SVectk, Rep G and the representation categories
+of supergroups. In fact, rigid STCs are not far from being representation categories of (su-
+per)groups. However, they not always are, cf. [103] for examples of non-Tannakian symmetric
+categories.)
+• A category C is called concrete if its objects are sets and HomC(X, Y ) ⊂HomSets(X, Y ).
+A k-linear category is called concrete if the objects are ﬁn.dim. vector spaces over k and
+HomC(X, Y ) ⊂HomVectk(X, Y ). However, a better way of thinking of a concrete category is
+as a (abstract) category C equipped with a ﬁber functor, i.e. a faithful functor E : C →Sets,
+respectively E : C →Vectk. The latter is required to be monoidal when C is monoidal.
+• Example: G a group. Then C := RepkG should be considered as an abstract k-linear ⊗-
+category together with a faithful ⊗-functor E : C →Vectk.
+• The point of this that a category C may have inequivalent ﬁber functors!!
+• But: If k is algebraically closed of characteristic zero, C is rigid symmetric k-linear with
+End 1 = k and F, F ′ are symmetric ﬁber functors then F ∼= F ′ (as ⊗-functors). (Saavedra
+Rivano [238, 64]).
+• The ﬁrst non-trivial application of (symmetric) tensor categories probably were the recon-
+struction theorems of Tannaka [255] (1939!) and Saavedra Rivano [238, 64].
+Let k be algebraically closed. Let C be rigid symmetric k-linear with End 1 = k and E :
+C →Vectk faithful tensor functor. (Tannaka did this for k = C, C a ∗-category and E ∗-
+preserving.) Let G = Aut⊗E be the group of natural monoidal [unitary] automorphisms of
+E. Deﬁne a functor F : C →Rep G [unitary representations] by
+F(X) = (E(X), πX),
+πX(g) = gX
+(g ∈G).
+Then G is pro-algebraic [compact] and F is an equivalence of symmetric tensor [∗-]categories.
+Proof: The idea is the following (Grothendieck, Saavedra Rivano [238], cf. Bichon [27]): Let
+E1, E2 : C →Vectk be ﬁber functors. Deﬁne a unital k-algebra A0(E1, E2) by
+A0(E1, E2) =
+M
+X∈C
+HomVect(E2(X), E1(X)),
+16
+
+
+spanned by elements [X, s], X ∈C, s ∈Hom(E2(X), E1(X)), with [X, s] · [Y, t] = [X ⊗Y, u],
+where u is the composite
+E2(X ⊗Y )
+(d2
+X,Y )−1
+✲E2(X) ⊗E2(Y ) s ⊗t
+✲E1(X) ⊗E1(Y )
+d1
+X,Y✲E1(X ⊗Y ).
+This is a unital associative algebra, and A(E1, E2) is deﬁned as the quotient by the ideal
+generated by the elements [X, a ◦E2(s)] −[Y, E1(s) ◦a], where s ∈HomC(X, Y ), a ∈
+HomVect(E2(Y ), E1(X)).
+• Remark: Let E1, E2 : C →Vectk be ﬁber functors as above. Then the map
+X × Y
+7→HomVectk(E2(X), E1(Y ))
+extends to a functor F : Cop × C →Vectk. Now the algebra A(E1, E2) is just the coend
+R X F(X, X) of F, a universal object. Coends are a categorical, non-linear version of traces,
+but we refrain from going into them since it takes some time to appreciate the concept. (Cf.
+[180].)
+• Now one proves [27, 197]:
+– If E1, E2 are symmetric tensor functors then A(E1, E2) is commutative.
+– If C is ∗-category and E1, E2 are *-preserving then A(E1, E2) is a ∗-algebra and has a
+C∗-completion.
+– If C is ﬁnitely generated (i.e. there exists a monoidal generator Z ∈C such that every
+X ∈C is direct summand of some Z⊗N) then A(E1, E2) is ﬁnitely generated.
+– There is a bijection between natural monoidal (unitary) isomorphisms α : E1 →E2 and
+(∗-)characters on A(E1, E2).
+Thus: If E1, E2 are symmetric and either C is ﬁnitely generated or a ∗-category, the algebra
+A(E1, E2) admits characters (by the Nullstellensatz or by Gelfand’s theory), thus E1 ∼= E2.
+One also ﬁnds that G = Aut⊗E ∼= (∗-)Char(A(E, E)) and A(E) = Fun(G) (representative
+respectively continuous functions). This is used to prove that F : C →Rep G is an equivalence.
+• Remarks: 1. While it has become customary to speak of Tannakian categories, the work of
+Kre˘ın, cf. [158], [118, Section 30], should also be mentioned since it can be considered as a pre-
+cursor of the later generalizations to non-symmetric categories, in particular in Woronowicz’s
+approach.
+2. The uniqueness of the symmetric ﬁber functor E implies that G is unique up to isomor-
+phism.
+3. For the above construction, we need to have a ﬁber functor. Around 1989, Doplicher and
+Roberts [70], and independently Deligne [58] construct such a functor under weak assumptions
+on C. See below.
+4. The uniqueness proof fails if either of E1, E2 is not symmetric (or C is not symmetric).
+Given a group G, there is a tautological ﬁber functor E. The fact that there may be (non-
+symmetric) ﬁber functors that are not naturally isomorphic to E reﬂects the fact that there
+can be groups G′ such that Rep G ≃Rep G′ as tensor categories, but not as symmetric tensor
+categories! This phenomenon was independently discovered by Etingof/Gelaki [80], who called
+such G, G′ isocategorical and produced examples of isocategorical but non-isomorphic ﬁnite
+groups, by Davydov [55] and by Izumi and Kosaki [122]. The treatment in [80] relies on
+the fact that if G, G′ are isocategorical then CG′ ∼= CJ for some Drinfeld twist J. A more
+categorical approach, allowing also an extension to compact groups, will be given in [202]. A
+group G is called categorically rigid if every G′ isocategorical to G is actually isomorphic to
+G. (Compact groups that are abelian or connected are categorically rigid in a strong sense
+since they are determined already by their fusion hypergroups.)
+17
+
+
+• Consider the free rigid symmetric tensor ∗-category C with End 1 = C generated by one object
+X of dimension d. If d ∈N then C is equivalent to Rep U(d) or Rep O(d) or Rep Sp(d), depend-
+ing on whether X is non-selfdual or orthogonal or symplectic. The proof [9] is straightforward
+once one has the Doplicher-Roberts theorem.
+• The free rigid symmetric categories just mentioned can be constructed in a topological way, in
+a fashion very similar to the construction of the Temperley-Lieb categories TL(τ). The main
+diﬀerence is that one allows the lines in the pictures deﬁning the morphisms to cross. (But
+they still live in a plane.) Now one quotients out the negligible morphisms and completes
+w.r.t. direct sums and splitting idempotents. (In the non-self dual case, the objects are words
+over the alphabet {+, −} and the lines in the morphisms are directed.) All this is noted in
+passing by Deligne in a paper [59] dedicated to the exceptional groups! Notice that when
+d ̸∈N, these categories are examples of rigid symmetric categories that are not Tannakian.
+• The above results already establish strong connections between tensor categories and repre-
+sentation theory, but there is much more to say.
+3
+Back to general tensor categories
+• In a general tensor category, left and right duals need not coincide. This can already be seen
+for the left module category H −Mod of a Hopf algebra H. This category has left and right
+duals, related to S and S−1. (S must be invertible, but can be aperiodic!) They coincide
+when S2(x) = uxu−1 with u ∈H.
+• We only consider tensor categories that have isomorphic left and right duals, i.e. two-sided
+duals, which we denote X.
+• If C is k-linear with End 1 = k id and End X = k id (X is simple/irreducible), one can
+canonically deﬁne the squared dimensions d2(X) ∈k by
+d2(X) = (eX ◦d′
+X) · (e′
+X ◦dX) ∈End 1.
+(Since X is simple, the morphisms d, d′, e, e′ are unique up to scalars, and well-deﬁnedness of
+d2 follows from the equations involving (d, e), (d′, e′) bilinearly.) Cf. [191].
+• If C is a fusion category, we deﬁne its dimension by dim C = P
+i d2(Xi).
+• If H is a ﬁnite dimensional semisimple and co-semisimple Hopf algebra then dim H−Mod =
+dimk H. (A ﬁnite dimensional Hopf algebra is co-semisimple if and only if the dual Hopf
+algebra bH is semisimple.)
+• Even if C is semisimple, it is not clear whether one can choose roots d(X) of the above numbers
+d2(X) in such a way that d is additive and multiplicative!
+• In pivotal categories this can be done. A strict pivotal category [93, 94] is a strict left rigid
+category with a monoidal structure on the functor X 7→∨X and a monoidal equivalence of
+the functors idC and X 7→∨∨X. As a consequence, one can deﬁne a right duality satisfying
+X∨= ∨X.
+• In a strict pivotal categories we can deﬁne left and right traces for every endomorphism:
+TrL
+X(s) =
+✛✘
+eX
+X
+✎
+✍
+☞
+✌
+s
+✚✙
+d′
+X
+TrR
+X(s) =
+✛✘
+e′
+X
+✎
+✍
+☞
+✌
+s
+X
+✚✙
+dX
+(3.1)
+Notice: In general TrL
+X(s) ̸= TrR
+X(s).
+18
+
+
+• We now deﬁne dimensions by d(X) = TrL
+X(idX) ∈End 1. One then automatically has d(X) =
+TrR
+X(idX), which can diﬀer from d(X). But for simple X we have d(X)d(X) = d2(X) with
+d2(X) as above.
+• In a pivotal category, we can use the trace to deﬁne pairings Hom(X, Y ) × Hom(Y, X) →
+End 1 by (s, t) 7→TrL
+X(t ◦s). In the semisimple k-linear case with End 1, these pairings are
+non-degenerate for all X, Y . Cf. e.g. [104]. In general, a morphism s : X →Y is called
+negligible if Tr(t ◦s) = 0 for all t : Y →X. We call an Ab-category non-degenerate if
+only the zero morphisms are negligible. The negligible morphisms form a monoidal ideal,
+i.e. composing or tensoring a negligible morphism with any morphism yields a negligible
+morphism. It follows that one can quotient out the negligible morphisms in a straightforward
+way, obtaining a non-degenerate category. A non-degenerate abelian category is semisimple
+[61], but a counterexample given there shows that non-degeneracy plus pseudo-abelianness
+do not imply semisimplicity!
+• A spherical category [20] is a pivotal category where the left and right traces coincide.
+Equivalently, it is a strict autonomous category (i.e. a tensor category equipped with a left
+and a right duality) for which the resulting functors X 7→X∨and X 7→∨X coincide.
+Sphericity implies d(X) = d(X), and if C is semisimple, the converse implication holds.
+• The Temperley-Lieb categories T L(τ) are spherical.
+• A ﬁnite dimensional Hopf algebra that is involutive, i.e. satisﬁes S2 = id, gives rise to a
+spherical category. (It is known that every semisimple and co-semisimple Hopf algebra is
+involutive.) More generally, ‘spherical Hopf algebras’, deﬁned as satisfying S2(x) = wxw−1,
+where w ∈H is invertible with ∆(w) = w ⊗w and Tr(θw) = Tr(θw−1) for any ﬁnitely
+generated projective left H-module V , give rise to spherical categories [20].
+• In a ∗-category with conjugates, traces of endomorphisms, in particular dimensions of objects,
+can be deﬁned uniquely without choosing a spherical structure, cf. [70, 172]. The dimension
+satisﬁes d(X) ≥1 for every non-zero X, and d(X) = 1 holds if and only if X is invertible.
+Furthermore, one has [172] a ∗-categorical version of the quantization of the Jones index [126]:
+d(X) ∈
+n
+2 cos π
+n, n = 3, 4, . . .
+o
+∪[2, ∞).
+On the other hand, every tensor ∗-category can be equipped [286] with an (essentially) unique
+spherical structure such the traces and dimension deﬁned using the latter coincide with those
+of [172].
+• In a C-linear fusion category (no ∗-operation required!) one has d2(X) > 0 for all X, cf. [84].
+The following is a very useful application: If A ⊂B is a full inclusion of C-linear fusion
+category then dim A ≤dim B, and equality holds if and only if A ≃B.
+• In a unitary category, dim C = FP −dim C. Categories with the latter property are called
+pseudo-unitary in [84], where it is shown that every pseudo-unitary category admits a
+unique spherical structure such that FP −d(X) = d(X) for all X.
+• There are Tannaka-style theorem for not necessarily symmetric categories (Ulbrich [268],
+Yetter [288], Schauenburg [239]): Let C be a k-linear pivotal category with End 1 = kid1
+and let E : C →Vectk a ﬁber functor.
+Then the algebra A(E) deﬁned as above admits
+a coproduct and an antipode, thus the structure of a Hopf algebra H, and an equivalence
+F : C →Comod H such that E = K ◦F, where K : Comod H →Vectk is the forgetful functor.
+(If C and E are symmetric, this H is a commutative Hopf algebra of functions on the group
+obtained earlier G.) Woronowicz proved a similar result [280] for ∗-categories, obtaining a
+compact quantum group (as deﬁned by him [279, 281]).
+Commutative compact quantum
+groups are just algebras C(G) for a compact group, thus one recovers Tannaka’s theorem. Cf.
+[131] for an excellent introduction to the area of Tannaka-Krein reconstruction.
+19
+
+
+• Given a ﬁber functor, can one ﬁnd an algebraic structure whose representations (rather than
+corepresentations) are equivalent to C? The answer is positive, provided one uses a slight
+generalization of Hopf algebras, to wit A. van Daele’s ‘Algebraic Quantum Groups’ [269, 270]
+(or ‘Multiplier Hopf algebras with Haar functional’). They are not necessarily unital algebras
+equipped with a coproduct ∆that takes values in the multiplier algebra M(A ⊗A) and with
+a left-invariant Haar-functional µ ∈A∗. A nice feature of algebraic quantum groups is that
+they admit a nice version of Pontryagin duality (which is not the case for inﬁnite dimensional
+ordinary Hopf algebras).
+In [200] the following was shown: If C is a semisimple spherical (∗-)category and E a (∗-
+)ﬁber functor then there is a discrete multiplier Hopf (∗-)algebra (A, ∆) and an equivalence
+F : C →Rep(A, ∆) such that K ◦F = E, where K : Rep(A, ∆) →Vect is the forgetful
+functor. (This (A, ∆) is the Pontrjagin dual of the A(E) above.) This theory exploits the
+semisimplicity from the very beginning, which makes it quite transparent: One deﬁnes
+A =
+M
+i∈I
+End E(Xi)
+and
+M(A) =
+Y
+i∈I
+End E(Xi) ∼= Nat E,
+where the summation is over the equivalence classes of simple objects in C. Now the tensor
+structures of C and E give rise to a coproduct ∆: A →M(A ⊗A) in a very direct way.
+Notice: This reconstruction is related to the preceding one as follows. Since H −comod ≃C is
+semisimple, the Hopf algebra H has a left-invariant integral µ, thus (H, µ) is a compact alge-
+braic quantum group, and the discrete algebraic quantum group (A, ∆) is just the Pontrjagin
+dual of the latter.
+• In this situation, there is a bijection between braidings on C and R-matrices (in M(A⊗A)), cf.
+[200]. But: The braiding on C plays no essential rˆole in the reconstruction. (Since [200] works
+with the category of ﬁnite dimensional representations, which in general does not contain
+the left regular representation, this is more work than e.g. in [137] and requires the use of
+semisimplicity.)
+• Summing up: Linear [braided] tensor categories admitting a ﬁber functor are (co)representa-
+tion categories of [(co)quasi-triangular] discrete (compact) quantum groups.
+Notice that here ‘Quantum groups’ refers to Hopf algebras and suitable generalizations thereof,
+but not necessarily to q-deformations of some structure arising from groups!
+• WARNING: The non-uniqueness of ﬁber functors means that there can be non-isomorphic
+quantum groups whose (co)representation categories are equivalent to the given C!
+The study of this phenomenon leads to Hopf-Galois theory and is connected (in the ∗-case)
+to the study of ergodic actions of quantum groups on C∗-algebras. (Cf. e.g. Bichon, de Rijdt,
+Vaes [28]).
+• Despite this non-uniqueness, one may ask whether one can intrinsically characterize the tensor
+categories admitting a ﬁber functor, thus being related to quantum groups. (Existence of a
+ﬁber functor is an extrinsic criterion.) The few known results to this questions are of two types.
+On the one hand there are some recognition theorems for certain classes of representation
+categories of quantized enveloping algebras, which will be discussed somewhat later. On the
+other hand, there are results based on the regular representation, to which we turn now.
+However, it is only in the symmetric case that this leads to really satisfactory results.
+• The left regular representation πl of a compact group G (living on L2(G)) has the following
+well known properties:
+πl ∼=
+M
+π∈b
+G
+d(π) · π,
+(Peter-Weyl theorem)
+πl ⊗π ∼= d(π) · πl
+∀π ∈Rep G.
+(absorbing property).
+20
+
+
+• The second property generalizes to any algebraic quantum group’ (A, ∆), cf. [201]:
+1. Let Γ = πl be the left regular representation. If (A, ∆) is discrete, then Γ carries a monoid
+structure (Γ, m, η) with dim Hom(1, Γ) = 1, which we call the regular monoid. (Algebras in
+k-linear tensor categories satisfying dim Hom(1, Γ) = 1 have been called ‘simple’ or ‘haploid’.)
+If (A, ∆) is compact, Γ has a comonoid structure. (And in the ﬁnite (=compact + discrete)
+case, the algebra and coalgebra structures combine to a Frobenius algebra, cf. [191], discussed
+below.)
+2. If (A, ∆) is a discrete algebraic quantum group, one has a monoid version of the absorbing
+property: For every X ∈Rep(A, ∆) one has an isomorphism
+(Γ ⊗X, m ⊗idX) ∼= n(X) · (Γ, m)
+(3.2)
+of (Γ, m, η)-modules in Rep(A, ∆). (Here n(X) ∈N is the dimension of the vector space of
+the representation X, which in general diﬀers from the categorical dimension.)
+• The following theorem from [201] is motivated by Deligne’s [58]: Let C be a k-linear category
+and (Γ, m, η) a monoid in C (more generally, in the associated category Ind C of inductive
+limits) satisfying dim Hom(1, Γ) = 1 and (3.2) for some function n : Obj C →N. Then
+E(X) = HomVectk(1, Γ ⊗X)
+deﬁnes a faithful ⊗-functor E : C →Vectk, i.e. a ﬁber functor. (One has dim E(X) = n(X) ∀X
+and Γ ∼= ⊕in(Xi)Xi.) If C is symmetric and (Γ, m, η) commutative (i.e. m ◦cΓ,Γ = m), then
+E is symmetric.
+Remark: Deligne considered this only in the symmetric case, but did not make the requirement
+dim Hom(1, Γ) = 1. This leads to a tensor functor E : C →A −Mod, where A = Hom(1, Γ)
+is the commutative k-algebra of ‘elements of Γ’ encountered earlier.
+• This gives rise to the following implications:
+There is a discrete AQG (A, ∆)
+such that C ≃Rep(A, ∆)
+C admits an absorbing monoid
+There is a ﬁber functor
+E : C →H
+✒
+❅
+❅
+❅
+❅❅
+❘
+✛
+Remarks: 1. This can be considered as an intrinsic characterization of quantum group cate-
+gories. (Or rather semi-intrinsic, since the regular monoid lives in the Ind-category of C rather
+than C itself.)
+2. The case of ﬁnite ∗-categories had been treated in [170], using subfactor theory and a
+functional analysis.
+3. This result is quite unsatisfactory, but I doubt that a better result can be obtained without
+restriction to special classes of categories or adopting a wide generalization of the notion of
+quantum groups. Examples for both will be given below.
+4. For a diﬀerent approach, also in terms of the regular representation, cf. [69].
+21
+
+
+• Notice that having an absorbing monoid in C (or rather Ind(C)) means having an N-valued
+dimension function n on the hypergroup I(C) and an associative product on the object Γ =
+⊕i∈IniXi. The latter is a cohomological condition.
+If C is ﬁnite, one can show using Perron-Frobenius theory that there is only one dimension
+function, namely the intrinsic one i 7→d(Xi). Thus a ﬁnite category with non-integer intrinsic
+dimensions cannot be Tannakian (in the above sense).
+• We now turn to a very beautiful result of Deligne [58] (simpliﬁed considerably by Bichon [27]):
+Let C be a semisimple k-linear rigid even symmetric category satisfying End 1 = k, where k
+is algebraically closed of characteristic zero. Then there is an absorbing commutative monoid
+as above. (Thus we have a symmetric ﬁber functor, implying C ≃Rep G.)
+Sketch: The homomorphisms ΠX
+n : Sn →Aut X⊗n allow to deﬁne the idempotents
+P±(X, n) = 1
+n!
+X
+σ∈Sn
+sgn(σ) ΠX
+n (σ) ∈End(X⊗n)
+and their images Sn(X), An(X), which are direct summands of X⊗n. Making crucial use of
+the evenness assumption on C, one proves
+d(An(X)) = d(X)(d(X) −1) · · · (d(X) −n + 1)
+n!
+∀n ∈N.
+In a ∗-category, this must be non-negative ∀n, implying d(X) ∈N, cf. [70]. Using this – or
+assuming it as in [58] – one has d(Ad(X)(X)) = 1, and Ad(X)(X) is called the determinant
+of X. On the other hand, one can deﬁne a commutative monoid structure on
+S(X) =
+∞
+M
+n=0
+Sn(X),
+obtaining the symmetric algebra (S(X), m, η) of X. Let Z be a ⊗-generator Z of C sat-
+isfying det Z = 1. Then the ‘interaction’ between symmetrization (symmetric algebra) and
+antisymmetrization (determinants) allows to construct a maximal ideal I in the commutative
+algebra S(Z) such that the quotient algebra A = S(Z)/I has all desired properties: it is
+commutative, absorbing and satisﬁes dim Hom(1, A) = 1. QED.
+Remarks: 1. The absorbing monoid A constructed in [58, 27] did not satisfy dim Hom(1, A) =
+1. Therefore the construction considered above does not give a ﬁber functor to VectC, but
+to ΓA −Mod, and one needs to quotient by a maximal ideal in ΓA. Showing that one can
+achieve dim Hom(1, A) = 1 was perhaps the main innovation of [197]. This has the advantage
+that (A, m, η) actually is (isomorphic to) the regular monoid of the group G = Nat⊗E. As a
+consequence, the latter group can be obtained simply as the automorphism group
+Aut(Γ, m, η) ≡{g ∈Aut Γ | g ◦m = m ◦g ⊗g, g ◦η = η}
+of the monoid – without even mentioning ﬁber functors!
+2. Combining Tannaka’s theorem with those on ﬁber functors from monoids and with the
+above, one has the following beautiful
+Theorem [70, 58]: Let k be algebraically closed of characteristic zero and C a semisimple k-
+linear rigid even symmetric category with End 1 = k. Assume that all objects have dimension
+in N. Then there is a pro-algebraic group Ga, unique up to isomorphism, such that C ≃Rep Ga
+(ﬁnite dimensional rational representations). If C is a ∗-category then semisimplicity and
+the dimension condition are redundant, and there is a unique compact group Gc such that
+C ≃Rep Gc (continuous unitary ﬁnite-dimensional representations). In this case, Ga is the
+complexiﬁcation of Gc.
+22
+
+
+3. If C is symmetric but not even, its symmetry can be ‘bosonized’ into an even one, cf. [70].
+Then one applies the above result and obtains a group G. The Z2-grading on C given by the
+twist gives rise to an element k ∈Z(G) satisfying k2 = e. Thus C ≃Rep(G, k) as symmetric
+category. Cf. also [60].
+• The above result has several applications in pure mathematics: It plays a big rˆole in the
+theory of motives [5, 166] and in diﬀerential Galois theory and the related Riemann Hilbert
+problem, cf. [230]. It is used for the classiﬁcation of triangular Hopf algebras in terms of
+Drinfeld twists of group algebras (Etingof/Gelaki, cf. [100] and references therein) and for the
+modularization of braided tensor categories [39, 190], cf. below.
+The work of Doplicher and Roberts [70] was motivated by applications to quantum ﬁeld theory
+in ≥2 + 1 dimensions [68, 71], where it leads to a Galois theory of quantum ﬁelds, cf. also
+[111].
+• Thus, at least in characteristic zero (in the absence of a ∗-operation one needs to impose
+integrality of all dimensions) rigid symmetric categories with End 1 = kid1 are reasonably
+well understood in terms of compact or pro-aﬃne groups.
+What about relaxing the last
+condition? The category of a representations (on continuous ﬁelds of Hilbert spaces) of a
+compact groupoid G is a symmetric C∗-tensor category. Since a lot of information is lost in
+passing from G to Rep G, there is no hope of reconstructing G up to isomorphism, but one
+may hope to ﬁnd a compact group bundle giving rise to the given category and proving that
+it is Morita equivalent to G. However, there seem to be topological obstructions to this being
+always the case, cf. [272].
+• In this context, we mention related work by Brugui`eres/Maltsiniotis [184, 40, 37] on Tannaka
+theory for quasi quantum groupoids in a purely algebraic setting.
+• We now turn to the characterization of certain special classes of tensor categories:
+• Combining Doplicher-Roberts reconstruction with the mentioned result of McMullen and
+Handelman one obtains a simple prototype: If C is an even symmetric tensor ∗-category with
+conjugates and End 1 = C whose fusion hypergroup is isomorphic to that of a connected
+compact Lie group G, then C ≃Rep G.
+• Kazhdan/Wenzl [145]: Let C be a semisimple C-linear spherical ⊗-category with End 1 = C,
+whose fusion hypergroup is isomorphic to that of sl(N). Then there is a q ∈C∗such that
+C is equivalent (as a tensor category) to the representation category of the Drinfeld/Jimbo
+quantum group SLq(N) (or one of ﬁnitely many twisted versions of it). Here q is either 1 or
+not a root of unity and unique up to q →q−1. (For another approach to a characterization
+of the SLq(N)-categories, excluding the root of unity case, cf. [228].)
+Furthermore: If C is a semisimple C-linear rigid ⊗-category with End 1 = C, whose fusion
+hypergroup is isomorphic to that of the (ﬁnite!) representation category of SLq(N), where
+q is a primitive root of unity of order ℓ> N, then C is equivalent to Rep SLq(N) (or one of
+ﬁnitely many twisted versions).
+We will say (a bit) more on quantum groups later. The reason that we mention the Kazh-
+dan/Wenzl result already here is that it does not require C to come with a braiding. Un-
+fortunately, the proof is not independent of quantum group theory, nor does it provide a
+construction of the categories.
+Beginning of proof: The assumption on the fusion rules implies that C has a multiplicative
+generator Z. Consider the full monoidal subcategory C0 with objects {Z⊗n, n ∈Z+}. Now C
+is equivalent to the idempotent completion (‘Karoubiﬁcation’) of C0. (Aside: Tensor categories
+with objects N+ and ⊗= + for objects appear quite often: The symmetric category S, the
+braid category B, PROPs [179].) A semisimple k-linear category with objects Z+ is called a
+monoidal algebra, and is equivalent to having a family A = {An,m} of vector spaces together
+with semisimple algebra structures on An = An,n and bilinear operations ◦: An,m × Am,p →
+An,p and ⊗: An,m × Ap,q →An+p,m+q satisfying obvious axioms. A monoidal algebra is
+23
+
+
+diagonal if An,m = 0 for n ̸= m and of type N if dim A(0, n) = dim A(n, 0) = 1 and
+An,m = 0 unless n ≡m(mod N). If A is of type N, there are exactly N monoidal algebras
+with the same diagonal. The possible diagonals arising from type N monoidal algebras can
+be classiﬁed, using Hecke algebras Hn(q) (deﬁned later).
+• There is an analogous result (Tuba/Wenzl [259]) for categories with the other classical (BCD)
+fusion rings, but that does require the categories to come with a braiding.
+• For fusion categories, there are a number of classiﬁcation results in the case of low rank
+(number of simple objects) (Ostrik: fusion categories of rank 2 [224], braided fusion categories
+of rank 3 [225]) or special dimensions, like p or pq (Etingof/Gelaki/Ostrik [82]). Furthermore,
+one can classify near group categories, i.e. fusion categories with all simple objects but
+one invertible (Tambara/Yamagami [254], Siehler [244]).
+• In another direction one may try to represent more tensor categories as module categories by
+generalizing the notion of Hopf algebras. We have already encountered a very modest (but
+useful) generalization, to wit Van Daele’s multiplier Hopf algebras. (But the main rationale
+for the latter was to repair the breakdown of Pontrjagin duality for inﬁnite dimensional Hopf
+algebras, which works so nicely for ﬁnite dimensional Hopf algebras.)
+• Drinfeld’s quasi-Hopf algebras [73] go in a diﬀerent direction: One considers an associative
+unital algebra H with a unital algebra homomorphism ∆: H →H ⊗H, where coassociativity
+holds only up to conjugation with an invertible element φ ∈H ⊗H ⊗H:
+id ⊗∆◦∆(x) = φ(∆⊗id ◦∆(x))φ−1,
+where (∆, φ) must satisfy some identity in order for Rep H with the tensor product deﬁned in
+terms of ∆to be (non-strict) monoidal. Unfortunately, duals of quasi-Hopf algebras are not
+quasi-Hopf algebras. They are useful nevertheless, even for the proof of results concerning
+ordinary Hopf algebras, like the Kohno-Drinfeld theorem for Uq(g), cf. [73, 74] and [137].
+Examples: Given a ﬁnite group G and ω ∈Z3(G, k∗), there is a ﬁnite dimensional quasi Hopf
+algebra Dω(G), the twisted quantum double of Dijkgraaf/Pasquier/Roche [66]. (We will later
+deﬁne its representation category in a purely categorical way.) Recently, Naidu/Nikshych
+[205] have given necessary and suﬃcient conditions on pairs (G, [ω]), (G′, [ω]′) for Dω(G) −
+Mod, Dω′(G′) −Mod to be equivalent as braided tensor categories.
+But the question for
+which pairs (G, [ω]) Dω(G) −Mod is Tannakian (i.e. admits a ﬁber functor and therefore is
+equivalent to the representation category of an ordinary Hopf algebra) seems to be still open.
+• There have been various attempts at proving generalized Tannaka reconstruction theorems in
+terms of quasi-Hopf algebras [182] and “weak quasi-Hopf algebras”. (Cf. e.g. [176, 113].) As
+it turned out, it is suﬃcient to consider ‘weak’, but ‘non-quasi’ Hopf algebras:
+• Preceded by Hayashi’s ‘face algebras’ [115], which largely went unnoticed, B¨ohm and Szlach´anyi
+[35] and then Nikshych, Vainerman, L. Kadison introduced weak Hopf algebras, which may
+be considered as ﬁnite-dimensional quantum groupoids: They are associative unital algebras
+A with coassociative algebra homomorphism ∆: A →A ⊗A, but the axioms ∆(1) = 1 ⊗1
+and ε(1) = 1 are weakened.
+Weak Hopf algebras are closely related to Hopf algebroids and have various desirable prop-
+erties: Their duals are weak Hopf algebras, and Pontrjagin duality holds. The categorical
+dimensions of their representations can be non-integer. And they are general enough to ‘ex-
+plain’ ﬁnite-index depth-two inclusions of von Neumann factors, cf. [215].
+• Furthermore, Ostrik [222] proved that every fusion category is the module category of a
+semisimple weak Hopf algebra. (Again, there was related earlier work by Hayashi [116] in the
+context of his face algebras [115].)
+Proof idea: An R-ﬁber functor on a fusion category C is a faithful tensor functor C →
+Bimod R, where R is a ﬁnite direct sum of matrix algebras. Szlach´anyi [252]: An R-ﬁber
+24
+
+
+functor on C gives rise to an equivalence C ≃A −Mod for a weak Hopf algebra (with base
+R). (Cf. also [110].) How to construct an R-ﬁber functor?
+Since C is semisimple, we can choose an algebra R such that C ≃R −Mod (as abelian
+categories). Since C is a module category over itself, we have a C-module structure on R−Mod.
+Now use that, for C and R as above, there is a bijection between R-ﬁber functors and C-module
+category structures on R −Mod (i.e. tensor functors C →End(R −Mod).
+Remarks: 1. R is highly non-unique: The only requirement was that the number of simple di-
+rect summands equals the number of simple objects of C. (Thus there is a unique commutative
+such R, but even for that, there is no uniqueness of R-ﬁber functors.)
+2. The above proof uses semisimplicity. (A non-semisimple generalization was announced by
+Brugui`eres and Virezilier in 2008.)
+• Let C be fusion category and A a weak Hopf algebra such that C ≃A −Mod. Since there is
+a dual weak Hopf algebra bA, it is natural to ask how bC = bA −Mod is related to C. (One may
+call such a category dual to C, but must keep in mind that there is one for every weak Hopf
+algebra A such that C ≃A −Mod.)
+• Answer: bA −Mod is (weakly monoidally) Morita equivalent to C. This notion (M¨uger [191])
+was inspired by subfactor theory, in particular ideas of Ocneanu, cf. [216, 217]. For this we
+need the following:
+• A Frobenius algebra in a strict tensor category is a quintuple (A, m, η, ∆, ε), where (A, m, η)
+is an algebra, (A, ∆, ε) is a coalgebra and the Frobenius identity
+m ⊗idA ◦idA ⊗∆= ∆◦m = idA ⊗m ◦∆⊗idA
+holds. Diagrammatically:
+☛✟
+✡✠=
+✡✠
+☛✟=
+☛✟
+✡✠.
+A Frobenius algebra in a k-linear category is called strongly separable if
+ε ◦η = α id1,
+m ◦∆= β idΓ,
+αβ ∈k∗.
+The roots of this deﬁnition go quite far back. F. Quinn [231] discussed them under the name
+‘ambialgebras’, and L. Abrams [1] proved that Frobenius algebras in Vectﬁn
+k
+are the usual
+Frobenius algebras, i.e. k-algebras V equipped with a φ ∈V ∗such that (x, y) 7→φ(xy) is
+non-degenerate. Frobenius algebras play a central rˆole for topological quantum ﬁeld theories
+in 1 + 1 dimensions, cf. e.e. [156].
+• Frobenius algebras arise from two-sided duals in tensor categories: Let X ∈C with two-sided
+dual X, and deﬁne Γ = X ⊗X. Then Γ carries a Frobenius algebra structure, cf. [191]:
+m =
+X
+X
+✛✘
+eX
+X X
+X X
+∆=
+X X
+X X
+✚✙
+d′
+X
+X
+X
+η =
+X
+X
+✚✙
+dX
+ε =
+✛✘
+e′
+X
+X
+X
+Verifying the Frobenius identities and strong separability is a trivial exercise.
+In view of
+End(V ) ∼= V ⊗V ∗in the category of ﬁnite dimensional vector spaces, the above Frobenius
+algebra is called an ‘endomorphism (Frobenius) algebra’.
+• This leads to the question whether every (strongly separable) Frobenius algebra in a ⊗-
+category arise in this way. The answer is, not quite, but: If Γ is a strongly separable Frobenius
+algebra in a k-linear spherical tensor category A then there exist
+– a spherical k-linear 2-category E with two objects {A, B},
+25
+
+
+– a 1-morphism X ∈HomE(B, A) with 2-sided dual X ∈HomE(A, B), and therefore a
+Frobenius algebra X ◦X in the ⊗-category EndE(A),
+– a monoidal equivalence EndE(A)
+≃
+→A mapping the the Frobenius algebra X ◦X to Γ.
+Thus every Frobenius algebra in A arises from a 1-morphism in a bicategory E containing A
+as a corner. In this situation, the tensor category B = EndE(B) is called weakly monoidally
+Morita equivalent to A and the bicategory E is called a Morita context.
+• The original proof in [191] was tedious. Assuming mild technical conditions on A and strong
+separability of Γ, the bicategory E can simply be obtained as follows:
+HomE(A, A)
+=
+A,
+HomE(A, B)
+=
+Γ −ModA,
+HomE(B, A)
+=
+ModA −Γ,
+HomE(B, B)
+=
+Γ −ModA −Γ,
+with the composition of 1-morphisms given by the usual tensor products of (left and right)
+Γ-modules. Cf. [285]. (A discussion free of any technical assumptions on A was recently given
+in [163].)
+• Weak monoidal Morita equivalence of tensor categories also admits an interpretation in terms
+of module categories: If A, B are objects in a bicategory E as above, the category HomE(A, B)
+is a left module category over the tensor category EndE(B) and a right module category over
+A = EndE(A). In fact, the whole structure can be formulated in terms of module categories,
+thereby getting rid of the Frobenius algebras, cf. [85, 84]: Writing M = HomE(A, B), the
+dual category B = EndE(B) can be obtained as the tensor category HOMA(M, M), denoted
+A∗
+M in [85], of right A-module functors from M to itself.
+Since the two pictures are essentially equivalent, the choice is a matter of taste. The picture
+with Frobenius algebras and the bicategory E is closer to subfactor theory. What speaks in
+favor of the module category picture is the fact that non-isomorphic algebras in A can have
+equivalent module categories, thus give rise to the same A-module category. (But not in the
+case of commutative algebras!)
+• Morita equivalence of tensor categories indeed is an equivalence relation, denoted ≈.
+(In
+particular, B contains a strongly separable Frobenius algebra bΓ such that bΓ−ModB −bΓ ≃A.)
+• As mentioned earlier, the left regular representation of a ﬁnite dimensional Hopf algebra H
+gives rise to a Frobenius algebra Γ in H −Mod. Γ is strongly separable if and only if H
+is semisimple and cosemisimple. In this case, one ﬁnds for the ensuing Morita equivalent
+category:
+B = Γ −ModH−Mod −Γ ≃
+bH −Mod.
+(This is a situation encountered earlier in subfactor theory.) Actually, in this case the Morita
+context E had been deﬁned independently by Tambara [253].
+The same works for weak Hopf algebras, thus for any semisimple and co-semisimple weak
+Hopf algebra we have A −Mod ≈bA −Mod, provided the weak Hopf algebra is Frobenius, i.e.
+has a non-degenerate integral. (It is unknown whether every weak Hopf algebra is Frobenius.)
+• The above concept of Morita equivalence has important applications: If C1, C2 are Morita
+equivalent (spherical) fusion categories then
+1. dim C1 = dim C2.
+2. C1 and C2 give rise to the same triangulation TQFT in 2+1 dimensions (as deﬁned
+by Barrett/Westbury [19] and S. Gelfand/Kazhdan [104], generalizing the Turaev/Viro
+TQFT [265, 262] to non-braided categories. Cf. also Ocneanu [218].)
+This ﬁts nicely with the known fact (Kuperberg [159], Barrett/Westbury [18]) that, the
+spherical categories H −Mod and bH −Mod (for a semisimple and co-semisimple Hopf
+algebra H) give rise to the same triangulation TQFT.
+26
+
+
+3. The braided centers Z1(C1), Z1(C2) (to be discussed in the next section) are equivalent
+as braided tensor categories. This is quite immediate by a result of Schauenburg [240].
+• We emphasize that (just like Vectk) a fusion category can contain many (strongly separable)
+Frobenius algebras, thus it can be Morita equivalent to many other tensor categories. In view
+of this, studying (Frobenius) algebras in fusion categories is an important and interesting
+subject. (Even more so in the braided case.)
+• Example: Commutative algebras in a representation category Rep G (for G ﬁnite) are the
+same as commutative algebras carrying a G-action by algebra automorphisms. The condition
+dim Hom(1, Γ) = 1 means that the G-action is ergodic. Such algebras correspond to closed
+subgroups H ⊂G via ΓH = C(G/H). Cf. [155].
+• Algebras in and module categories over the category Ck(G, ω) deﬁned in Section 1 were studied
+in [223].
+• A group theoretical category is a fusion category that is weakly Morita equivalent (or
+‘dual’) to a pointed fusion category, i.e. one of the form Ck(G, ω) (with G ﬁnite and [ω] ∈
+H3(G, T)). (The original deﬁnition [222] was in terms of quadruples (G, H, ω, ψ) with H ⊂G
+ﬁnite groups, ω ∈Z3(G, C∗) and ψ ∈C2(H, C∗) such that dψ = ω|H, but the two notions are
+equivalent by Ostrik’s analysis of module categories of Ck(G, ω) [222].) For more on group
+theoretical categories cf. [203, 101].
+• The above considerations are closely related to subfactor theory (at ﬁnite Jones index): A
+factor is a von Neumann algebra with center C1. For an inclusion N ⊂M of factors, there
+is a notion of index [M : N] ∈[1, +∞] (not necessarily integer!!), cf. [126, 169]. One has
+[M : N] < ∞if and only if the canonical N-M-bimodule X has a dual 1-morphism X in
+the bicategory of von Neumann algebras, bimodules and their intertwiners. Motivated by
+Ocneanu’s bimodule picture of subfactors [216, 217] one observes that the bicategory with the
+objects {N, M} and bimodules generated by X, X is a Morita context. On the other hand,
+a single factor M gives rise to a certain tensor ∗-category C (consisting of M −M-bimodules
+or the endomorphisms End M) such that, by Longo’s work [170], the Frobenius algebras (“Q-
+systems” [170]) in C are (roughly) in bijection with the subfactors N ⊂M with [M : N] < ∞.
+(Cf. also the introduction of [191].)
+4
+Braided tensor categories
+• The symmetric groups have the well known presentation
+Sn = {σ1, . . . , σn−1 | σiσi+1σi = σi+1σiσi+1, σiσj = σjσi when |i −j| > 1, σ2
+i = 1}.
+Dropping the last relation, one obtains the Braid groups:
+Bn = {σ1, . . . , σn−1 | σiσi+1σi = σi+1σiσi+1, σiσj = σjσi when |i −j| > 1}.
+They were introduced by Artin in 1928, but had appeared implicitly in much earlier work by
+Hurwitz, cf. [141]. They have a natural geometric interpretation:
+σ1 =
+•
+•
+•
+•
+•
+•
+•
+•
+· · ·
+✂
+✂
+✂
+✂
+✂✂
+❇
+❇
+❇
+❇
+,
+σ2 =
+•
+•
+•
+•
+•
+•
+•
+•
+· · ·
+✂
+✂
+✂
+✂
+✂✂
+❇
+❇
+❇
+❇
+,
+σn−1 =
+•
+•
+•
+•
+•
+· · ·
+•
+•
+•
+✂
+✂
+✂
+✂
+✂✂
+❇
+❇
+❇
+❇
+Note: Bn is inﬁnite for all n ≥2, B2 ∼= Z. The representation theory of Bn, n ≥3 is diﬃcult.
+It is known that all Bn are linear, i.e. they have faithful ﬁnite dimensional representations
+Bn ֒→GL(m, C) for suitable m = m(n). Cf. Kassel/Turaev [141].
+27
+
+
+• Analogously, one can drop the condition cY,X ◦cX,Y = id on a symmetric tensor category.
+This leads to the concept of a braiding, due to Joyal and Street [128, 132], i.e. a family
+of natural isomorphisms cX,Y : X ⊗Y →Y ⊗X satisfying two hexagon identities but not
+necessarily the condition c2 = id. Notice that without the latter condition, one needs to
+require two hexagon identities, the second being obtained from the ﬁrst one by the replacement
+cX,Y ❀c−1
+Y,X (which does nothing when c2 = id). (The latter is the non-strict generalization
+of cX⊗Y,Z = cX,Z ⊗idY ◦idX ⊗cY,Z.) A braided tensor category (BTC) now is a tensor
+category equipped with a braiding.
+• In analogy to the symmetric case, given a BTC C and X ∈N, n ∈Z+, one has a homomor-
+phism ΠX
+n : Bn →Aut(X⊗n).
+• The most obvious example of a BTC that is not symmetric is provided by the braid category
+B. In analogy to the symmetric category S, it is deﬁned by Obj B = Z+, End(n) = Bn,
+n ⊗m = n + m, while on the morphisms ⊗is deﬁned by juxtaposition of braid diagrams.
+The deﬁnition of the braiding cn,m ∈End(n + m) = Bn+m is illustrated by the example
+(n, m) = (3, 2):
+cn,m =
+❅
+❅
+❅
+❅
+❅
+❅
+❅
+❅
+❅
+❅
+❅
+• If C is a strict BTC and X ∈C, there is a unique braided tensor functor F : B →C such that
+F(1) = X and F(c2,2) = cX,X. Thus B is the free braided tensor category generated by
+one object.
+• Centralizer and center Z2:
+If C is a BTC, we say that two objects X, Y commute if cY,X ◦cX,Y = idX⊗Y . If D ⊂C
+is subcategory (or just subset of Obj C), we deﬁne the centralizer C ∩D′ ⊂C as the full
+subcategory deﬁned by
+Obj (C ∩D′) = {X ∈C | cY,X ◦cX,Y = idX⊗Y
+∀Y ∈D}.
+Now, the center Z2(C) is
+Z2(C) = C ∩C′.
+Notice that C ∩D′ is monoidal and Z2(C) is symmetric! In fact, a BTC C is symmetric if and
+only if C = Z2(C). Apart from ‘central’, the objects of Z2(C) have been called ‘degenerate’
+[232] or ‘transparent’ [39].
+• We thus see that STC are maximally commutative BTCs. Does it make sense to speak of
+maximally non-commutative BTCs? B is an example since Obj Z2(B) = {0}. Braided fusion
+categories with ‘trivial’ center will turn out to be just Turaev’s modular categories, cf. Section
+5.
+• Since the deﬁnition of BTCs is quite natural if one knows the braid groups, one may wonder
+why they appeared more than 20 years after symmetric categories. Most likely, this was a
+consequence of a lack of really interesting examples. When they ﬁnally appeared in [128], this
+was mainly motivated by developments internal to category theory (and homotopy theory). It
+is a remarkable historical accident that this happened at the same time as (and independently
+from) the development of quantum groups, which dramatically gained in popularity in the
+wake of Drinfeld’s talk [72].
+28
+
+
+• In 1971 it was shown [68] that certain representation theoretic considerations for quantum
+ﬁeld theories in spacetimes of dimension ≥2 + 1 lead to symmetric categories. Adapting this
+theory to 1+1 dimensions inevitably leads to braided categories, as was ﬁnally shown in 1989,
+cf. [90]. That this was not done right after the appearance of [68] must be considered as a
+missed opportunity.
+• As promised, we will brieﬂy look at braided categorical groups. Consider C(G) for G abelian.
+As shown in [132] – and in much more detail in the preprints [128] – the braided categorical
+groups C with π0(C) ∼= G (isomorphism classes of objects) and π1(C) ∼= A (End 1) are classi-
+ﬁed by the group H3
+ab(G, A), where Hn
+ab(G, A) refers to the Eilenberg-Mac Lane cohomology
+theory for abelian groups, cf. [177]. (Whereas H3(G, A) can be deﬁned in terms of topo-
+logical cohomology theory as H3(K(G, 1), A) of the Eilenberg-Mac Lane space K(G, 1), one
+has H3
+ab(G, A) := H4(K(G, 2), A). This group also has a description in terms of quadratic
+functions q : G →A. The subgroup of H3
+ab(G, A) corresponding to symmetric braidings is
+isomorphic to H5(K(G, 3), A), cf. [46].)
+• Duality: Contrary to the symmetric case, in the presence of a (non-symmetric) braiding,
+having a left duality is not suﬃcient for a nice theory: If we deﬁne a right duality in terms
+of a left duality and the braiding, the left and right traces will fail to have all the properties
+they do have in the symmetric case. Therefore, some additional concepts are needed:
+• A twist for a braided category with left duality is a natural family {ΘX ∈End X, X ∈C}
+of isomorphisms (i.e. a natural isomorphism of the functor idC) satisfying
+ΘX⊗Y = ΘX ⊗ΘY ◦cY,X ◦cX,Y ,
+Θ1 = id1,
+∨(ΘX) = Θ∨X.
+Notice: If cY,X ◦cX,Y ̸≡id then the natural isomorphism Θ is not monoidal and Θ = id is
+not a legal twist!
+• A ribbon category is a strict braided tensor category equipped with a left duality and a
+twist.
+• Let C be a ribbon category with left duality X 7→(∨X, eX, dX) and twist Θ. We deﬁne a right
+duality X 7→(X∨, e′
+X, d′
+X) by X∨= ∨X and (2.2). Now one can show, cf. e.g. [137], that the
+maps End X →End 1 deﬁned as in (3.1) coincide and that Tr(s) := TrL(s) = TrR(s) has
+the trace property and behaves well under tensor products, as previously in the symmetric
+case. Writing X = ∨X = X∨, one ﬁnds that C is a spherical category in the sense of [20].
+Conversely, if C is spherical and braided, then deﬁning
+ΘX = (TrX ⊗idX)(cX,X),
+{ΘX, X ∈C} satisﬁes the axioms of a twist and thus forms a ribbon structure together with
+the left duality. (Cf. Yetter [289], based on ideas of Deligne, and Barrett/Westbury [20].)
+(Personally, I prefer to consider the twist as a derived structure, thus talking about spherical
+categories with a braiding, rather than about ribbon categories. In some situations, e.g. when
+the center Z1(C) is involved, this is advantageous. This also is the approach of the Rome
+school [71, 172].)
+• So far, our only example of a non-symmetric braided category is the free braided category B,
+which is not rigid. In the remainder of this section, we will consider three main ‘routes’ to
+braided categories: (A) the topological route, (B) the “non-perturbative approach” via quan-
+tum doubles and categorical centers, and (C) the “perturbative approach” via deformation
+(or ‘quantization’) of symmetric categories.
+• We brieﬂy mention one construction of an interesting braided category that doesn’t seem to ﬁt
+nicely into one of our routes: While the usual representation category of a group is symmetric,
+the category of representations of the general linear group GLn(Fq) over a ﬁnite ﬁeld with
+the external tensor product of representations turns out to be braided and non-symmetric, cf.
+[133].
+29
+
+
+4.1
+Route A: Free braided categories (tangles) and their quotients
+• Combining the ideas behind the Temperley-Lieb categories TL(τ) (which have duals) and the
+braid category B (which is braided but has no duals), one arrives at the categories of tangles
+(Turaev [260], Yetter [287]. See also [262, 137].) One must distinguish between categories
+of unoriented tangles having Obj U −T AN = Z+ with tensor product (of objects) given
+by addition and oriented tangles, based on Obj O −T AN = {+, −}∗(i.e. ﬁnite words in
+±, 1 = ∅) with concatenation as tensor product. In either case, the morphisms are given as
+sets of pictures as in Figure 1, or else by linear combinations of such pictures with coeﬃcients
+in a commutative ring or ﬁeld. All this is just as in the discussion of the free symmetric
+categories at the end of Section 2. The only diﬀerence is that one must distinguish between
+over- and undercrossings of the lines; for technical reasons it is more convenient to do this in
+terms of pictures embedded in 3-space.
+Figure 1: An unoriented 3-5 tangle
+There also is a category O −T AN of oriented tangles, where the objects are ﬁnite words in
+±, 1 = ∅and the lines in the morphisms are directed, in a way that is compatible with the
+signs of the objects. It is clear that the morphisms in End(1) in U −T AN (O −T AN) are
+just the unoriented (oriented) links.
+While the deﬁnition is intuitively natural, the details are tedious and we refer to the textbooks
+[262, 137, 290]. In particular, we omit discussing ribbon tangles.
+• The tangle categories are pivotal, in fact spherical, thus ribbon categories. O −T AN is the
+free ribbon category generated by one element, cf. [243].
+• Let C be a ribbon category. Then one can deﬁne a category C −T AN of C-labeled oriented
+tangles and a ribbon tensor functor FC : C −T AN →C. (This is the rigorous rationale behind
+the diagrammatic calculus for braided tensor categories!)
+Let C be a ribbon category and X a self-dual object. Given an unoriented tangle, we can
+label every edge by X. This gives a composite map
+{links}
+∼
+=
+−→HomU−T AN (0, 0) −→HomC−T AN (0, 0)
+FC
+−→EndC1.
+In particular, if C is k-linear with End 1 = kid, we obtain a map from { links } to k, which is
+easily seen to be a knot invariant. If C = Uq(sl(2)) −Mod and X is the fundamental object,
+one essentially obtains the Jones polynomial. Cf. [260, 234]. (The other objects of C give
+rise to the colored Jones polynomials, which are much studied in the context of the volume
+conjecture for hyperbolic knots.)
+• So far, all our examples of braided categories have come from topology. In a sense, they are
+quite trivial, since they are just the universal braided (ribbon) categories freely generated
+by one object. Furthermore, we are primarily interested in linear categories. Of course, we
+can apply the k-linearization functor CAT →k-lin.-CAT . But the categories we obtain have
+inﬁnite dimensional hom-sets and are not more interesting than the original ones. (This should
+be contrasted to the symmetric case, where this construction produces the representation
+categories of the classical groups, cf. Section 2.)
+30
+
+
+• Thus in order to obtain interesting k-linear ribbon categories from the tangle categories, we
+must reduce the inﬁnite dimensional hom-spaces to ﬁnite dimensional ones.
+We consider the following analogous situation in the context of associative algebras: The braid
+group Bn (n > 1) is inﬁnite, thus the group algebra CBn is inﬁnite dimensional. But this
+algebra has ﬁnite dimensional quotients, e.g. the Hecke algebra Hn(q), the unital C-algebra
+generated by σ1, . . . , σn−1, modulo the relations
+σiσi+1σi = σi+1σiσi+1,
+σiσj = σjσi when |i −j| > 1,
+σ2
+i = (q −1)σi + q1.
+This algebra is ﬁnite dimensional for any q, and for q = 1 we have Hn(q) ∼= CSn. In fact,
+Hn(q) is isomorphic to CSn, thus semisimple, whenever q is not a root of unity, but this
+isomorphism is highly non-trivial. Cf. e.g. [164].
+The idea now is to do a similar thing on the level of categories, or to ‘categorify’ the Hecke
+algebras or other quotients of CBn like the Birman/Murakami/Wenzl- (BMW-)-algebras [29].
+• We have seen that ribbon categories give rise to knot invariants. One can go the other way and
+construct k-linear ribbon categories from link invariants. This approach was initiated in [262,
+Chapter XII], where a topological construction of the representation category of Uq(sl(2)) was
+given. A more general approach was studied in [267]. A k-valued link invariant G is said to
+admit functorial extension to tangles if there exists a tensor functor F : U −T AN →
+k −Mod whose restriction to EndU−T AN (0) ∼= {links} equals G.
+For any X ∈U −T AN, f ∈End(X), let Lf be the link obtained by closing f on the right,
+and deﬁne TrG(f) = G(Lf). If C is the k-linearization of U −T AN, it is shown in [267], under
+weak assumptions on G, that the idempotent and direct sum completion of the quotient of C
+by the ideal of negligible morphisms is a semisimple ribbon category with ﬁnite dimensional
+hom-sets. Cf. [267].
+Example:
+Applying the above procedure G = Vt, the Jones polynomial, one obtains a
+Temperley-Lieb category T Lτ, which in turn is equivalent to a category Uq(sl(2)) −Mod.
+Cf. [262, Chapter XII]. Applying it to the Kauﬀman polynomial [142], one obtains the quan-
+tized BTCs of types BCD, cf. [267]. The general theory in [267] is quite nice, but it should be
+noted that the assumption of functorial extendability to tangles is rather strong: It implies
+that the resulting semisimple category admits a ﬁber functor and therefore is the represen-
+tation category of a discrete quantum group. Furthermore, the application of the general
+formalism of [267] to the Kauﬀman polynomial used input from (q-deformed) quantum group
+theory for the proof of functorial extension to tangles and of modularity. This drawback was
+repaired by Beliakova/Blanchet, cf. [22, 23].
+Blanchet [31] gave a similar construction with HOMFLY polynomial [92], obtaining the type
+A categories. (The HOMFLY polynomial is an invariant for oriented links, thus one must
+work with oriented tangles.)
+Remark: The ribbon categories of BCD type arising from the Kauﬀman polynomial give rise
+to topological quantum ﬁeld theories. The latter can even be constructed directly from the
+Kauﬀman bracket, bypassing the categories, cf. [32].
+This construction actually preceded
+those mentioned above.
+• The preceding constructions reinforce the close connection between braided categories and
+knot invariants. It is important to realize that this reasoning is not circular, since the poly-
+nomials of Jones, HOMFLY, Kauﬀman can (nowadays) be constructed in rather elementary
+ways, independently of categories and quantum groups, cf. e.g. [167]. Since the knot polyno-
+mials are deﬁned in terms of skein relations, we speak of the skein construction of the quantum
+categories, which arguably is the simplest known so far.
+• In the case q = 1, the skein constructions of the ABCD categories reduce to the construction of
+the categories arising from classical groups mentioned in Section 2. (This happens since q = 1
+corresponds to parameters in the knot polynomials for which they fail to distinguish over-
+31
+
+
+from under-crossings. Then one can replace the tangle categories by symmetric categories of
+non-embedded cobordisms (oriented or not) as in [59].)
+• Concerning the exceptional Lie algebras and their quantum categories, inspired by work of
+Cvitanovic, cf. [52] for a book-length treatment, and by Vogel [273], Deligne conjectured [59]
+that there is a one parameter family of symmetric tensor categories Ct specializing to Rep G
+for the exceptional Lie groups at certain values of t. This is still unproven, but see [48, 63, 62]
+for work resulting from this conjecture. (For the En-categories, including the q-deformed
+ones, cf. [277].)
+• In a similar vein, Deligne deﬁned [61] a one parameter family of rigid symmetric tensor
+categories Ct such that Ct ≃Rep St for t ∈N. These categories were studied further in [49].
+(Recall that Sn is considered as the GLn(F1) where F1 is the ‘ﬁeld with one element’, cf.
+[248].)
+• More generally, one can deﬁne linear categories by generators and relations, cf. e.g. [160].
+4.2
+Route B: Doubles and centers
+We begin with a brief look at Hopf algebras.
+• Quasi-triangular Hopf algebras (Drinfeld, 1986 [72]): If H is a Hopf algebra and R an
+invertible element of (possibly a completion of) H ⊗H, satisfying
+R∆(·)R−1 = σ ◦∆(·),
+σ(x ⊗y) = y ⊗x,
+(∆⊗id)(R) = R13R23,
+(id ⊗∆)(R) = R13R12.
+(ε ⊗id)(R) = (id ⊗ε)(R) = 1.
+If (V, π), (V ′, π′) ∈H −Mod, the deﬁnition c(V,π),(V ′,π′) = ΣV,V ′(π ⊗π′)(R) produces a
+braiding for H −Mod.
+• But this has only shifted the problem: How to get quasi-triangular Hopf algebras? To this
+purpose, Drinfeld [72] gave the quantum double construction H ❀D(H), which associates a
+quasi-triangular Hopf algebra D(H) to a Hopf algebra H. Cf. also [137].
+• Soon after, an analogous categorical construction was given by Drinfeld (unpublished), Joyal/Street
+[130] and Majid [181]): The (braided) center Z1(C), deﬁned as follows.
+Let C be a strict tensor category and let X ∈C. A half braiding eX for X is a family {eX(Y ) ∈
+HomC(X ⊗Y, Y ⊗X), Y ∈C} of isomorphisms, natural w.r.t. Y , satisfying eX(1) = idX and
+eX(Y ⊗Z) = idY ⊗eX(Z) ◦eX(Y ) ⊗idZ
+∀Y, Z ∈C.
+Now, the center Z1(C) of C has as objects pairs (X, eX), where X ∈C and eX is a half
+braiding for X. The morphisms are given by
+HomZ1(C)((X, eX), (Y, eY )) = {t ∈HomC(X, Y ) | idX ⊗t ◦eX(Z) = eY (Z) ◦t⊗idX
+∀Z ∈C}.
+The tensor product of objects is given by (X, eX) ⊗(Y, eY ) = (X ⊗Y, eX⊗Y ), where
+eX⊗Y (Z) = eX(Z) ⊗idY ◦idX ⊗eY (Z).
+The tensor unit is (1, e1) where e1(X) = idX.
+The composition and tensor product of
+morphisms are inherited from C. Finally, the braiding is given by
+c((X, eX), (Y, eY )) = eX(Y ).
+(The author ﬁnds this deﬁnition is much more transparent than that of D(H) even though a
+priori little is known about Z1(C).)
+32
+
+
+• Just as the centralizer C ∩D′ generalizes Z2(C) = C ∩C′, there is a version of Z1 relative to a
+subcategory D ⊂C, cf. [181].
+• Z1(C) is categorical version (generalization) of Hopf algebra quantum double in the following
+sense: If H is a ﬁnite dimensional Hopf algebra, there is an equivalence
+Z1(H −Mod) ≃D(H) −Mod
+(4.1)
+of braided tensor categories, cf. e.g. [137].
+(If H is inﬁnite dimensional, one still has an
+equivalence between Z1(H −Mod) and the category of Yetter-Drinfeld modules over H.)
+• If C is a category and D := Z0(C) = End(C) is its tensor category of endofunctors, then Z1(D)
+is trivial. (This may be considered as the categoriﬁcation of the fact that the center (in the
+usual sense) of the endomorphism monoid End(S) of a set S is trivial, i.e. equal to {idS}.)
+But in general, the braided center of a tensor category is a non-trivial braided category that is
+not symmetric. Unfortunately, this doesn’t seem to have been studied thoroughly. Presently,
+strong results on Z1(C) exist only in the case where C is a fusion category.
+• There are abstract categorical considerations, quite unrelated to topology and quantum
+groups, that provide rationales for studying BTCs:
+(A): A second, compatible, multiplication functor on a tensor category gives rise to a braid-
+ing, and conversely, cf. [132]. (This is a higher dimensional version of the Eckmann-Hilton
+argument mentioned earlier.)
+(B): Recall that tensor categories are bicategories with one object.
+Now, braided tensor
+categories turn out to be monoidal bicategories with one object, which in turn are weak 3-
+categories with one object and one 1-morphism. Thus braided (and symmetric) categories
+really are a manifestation of the existence of n-categories for n > 1!
+• Baez-Dolan [10] conjectured the following ‘periodic table’ of ‘k-tuply monoidal n-categories’:
+n = 0
+n = 1
+n = 2
+n = 3
+n = 4
+k = 0
+sets
+categories
+2-categories
+3-categories
+. . .
+k = 1
+monoids
+monoidal
+monoidal
+monoidal
+. . .
+categories
+2-categories
+3-categories
+k = 2
+commutative
+braided
+braided
+braided
+. . .
+monoids
+monoidal
+monoidal
+monoidal
+categories
+2-categories
+3-categories
+k = 3
+symmetric
+‘sylleptic’
+”
+monoidal
+monoidal
+?
+. . .
+categories
+2-categories
+k = 4
+symmetric
+”
+”
+monoidal
+?
+. . .
+2-categories
+k = 5
+symmetric
+”
+”
+”
+monoidal
+. . .
+3-categories
+k = 6
+”
+”
+”
+”
+. . .
+In particular, one expects to ﬁnd ‘center constructions’ from each structure in the table to
+the one underneath it. For the column n = 1 these are the centers Z0, Z1, Z2 discussed above.
+For n = 0 they are given by the endomorphism monoid of a set and the ordinary center of
+a monoid. The column n = 2 is also relatively well understood, cf. Crans [50]. There is an
+accepted notion of a non-strict 3-category (i.e. n = 3, k = 0) (Gordon/Power/Street [108]),
+but there are many competing deﬁnitions of weak higher categories. We refrain from moving
+any further into this subject. See e.g. [13].
+33
+
+
+• With this heuristic preparation, one can give a high-brow interpretation of Z1(C), cf. [132, 250]:
+Let C be tensor category and ΣC the corresponding bicategory with one object. Then the cat-
+egory End(ΣC) of endofunctors of ΣC is a monoidal bicategory (with natural transformations
+as 1-morphisms and ‘modiﬁcations’ as 2-morphisms). Now, D = EndEnd(ΣC)(1) is a tensor
+category with two compatible ⊗-structures (categorifying End 1 in a tensor category), thus
+braided, and it is equivalent to Z1(C).
+• For further abstract considerations on the center Z1, consider the work of Street [250, 251]
+and of Brugui`eres and Virelizier [41, 42].
+• If C is braided there is a braided embedding ι1 : C ֒→Z1(C), given by X 7→(X, eX), where
+eX(Y ) = c(X, Y ). Deﬁning eC to be the tensor category C with ‘opposite’ braiding ecX,Y = c−1
+Y,X,
+there is an analogous embedding eι : C ֒→Z1(C). In fact, one ﬁnds that the images of ι, ι′ are
+each others’ centralizers:
+Z1(C) ∩ι(C)′ = eι( eC),
+Z1(C) ∩eι( eC)′ = ι(C).
+Cf. [192]. On the one hand, this is an instance of the double commutant principle, and on
+the other hand, this establishes one connection
+ι(C) ∩eι( eC) = ι(Z2(C)) = eι(Z2( eC)),
+between Z1 and Z2 which suggests that “Z1(C) ≃C × eC” when Z2(C) is “trivial”. We will
+return to both points in the next section.
+4.3
+Route C: Deformation of groups or symmetric categories
+• As for Route B, there is a more traditional approach via deformation of Hopf algebras and a
+somewhat more recent one focusing directly on deformation of tensor categories.
+• (C1): The earlier approach to braided categories relies on deformation of Hopf algebras re-
+lated to groups. For lack of space we will limit ourselves to providing just enough information
+as needed for the discussion of the more categorical approach. For more, we refer to the text-
+books, in particular [137, 47, 124, 173]. In any case, one chooses a simple (usually compact)
+Lie group G and considers either the enveloping algebra U(g) of its Lie algebra g in terms
+of Serre’s generators and relations [242], or one departs from the algebra Fun(G) of regular
+functions on G, which can also be described in terms of ﬁnitely many relations, cf. e.g. [279].
+In a nutshell, one inserts factors of a ‘deformation parameter’ q into the presentation of U(g)
+or Fun(G) in such a way that for q ̸= 1 one still obtains a (non-trivial) Hopf algebra. Quantum
+group theory began with the discovery that this is possible at all.
+• Obviously, this ‘deﬁnition’ is a farcical caricature.
+But there is some truth in it: In the
+mathematical literature on quantum groups, cf. e.g. [137, 47, 124, 173], it is all but impossible
+to ﬁnd a comment on the origin of the presentation of the quantum group under study and of
+the underlying motivation. While the initiators of quantum group theory from the Leningrad
+school (Faddeev, Kulish, Semenov-Tian-Shansky, Sklyanin, Reshetikhin, Drinfeld and others)
+were very well aware of these origins, this knowledge has now almost faded into obscurity.
+(This certainly has to do with the fact that the applications to theoretical physics for which
+quantum groups were invented in the ﬁrst place are still exclusively pursued by physicists,
+cf. e.g. [106].) One point of this section will be that – quite independently of the original
+physical motivation – the categorical approach to quantum deformation is mathematically
+better motivated.
+• In what follows, we will concentrate on the enveloping algebra approach. The usual Drinfeld-
+Jimbo presentation of the quantized enveloping algebra is as follows, Consider the algebra
+Uq(g) generated by elements Ei, Fi, Ki, K−1
+i
+, 1 ≤i ≤r, satisfying the relations
+KiK−1
+i
+= K−1
+i
+Ki = 1,
+KiKj = KjKi,
+KiEjK−1
+i
+= qaij
+i
+Ej,
+KiFjK−1
+i
+= q−aij
+i
+Fj,
+34
+
+
+EiFj −FjEi = δij
+Ki −K−1
+i
+qi −q−1
+i
+,
+1−aij
+X
+k=0
+(−1)k
+1 −aij
+k
+
+qi
+Ek
+i EjE1−aij−k
+i
+= 0,
+1−aij
+X
+k=0
+(−1)k
+1 −aij
+k
+
+qi
+F k
+i FjF 1−aij−k
+i
+= 0,
+where
+
+m
+k
+
+qi
+=
+[m]qi!
+[k]qi![m −k]qi!, [m]qi! = [m]qi[m−1]qi . . . [1]qi, [n]qi = qn
+i −q−n
+i
+qi −q−1
+i
+and qi = qdi.
+This is a Hopf algebra with coproduct ∆and counit ε deﬁned by
+∆(Ki) = Ki ⊗Ki,
+∆(Ei) = Ei ⊗1 + Ki ⊗Ei,
+∆(Fi) = Fi ⊗K−1
+i
++ 1 ⊗Fi,
+ε(Ei) = ε(Fi) = 0,
+ε(Ki) = 1.
+One should distinguish between Drinfeld’s [72] formal approach, where one constructs a Hopf
+algebra H over the ring C[[h]] of formal power series in such a way that H/hH is isomorphic
+to the enveloping algebra U(g), and the non-formal deformation of Jimbo [125], who obtains
+an honest quasi-triangular Hopf algebra Uq(g) (over C) for any value q ∈C of a deformation
+parameter. (In this approach, the properties of the resulting Hopf algebra depend heavily on
+whether q is a root of unity or not. In the formal approach, this distinction obviously does not
+arise.) The relation between both approaches becomes clear by inserting q = eh in Jimbo’s
+deﬁnition and considering the result as a Hopf algebra over C[[h]].
+• (C2): As mentioned, one can obtain non-symmetric braided categories directly by ‘deforming’
+symmetric categories. This approach was initiated by Cartier [45] and worked out in more
+detail in [137, Appendix] and [140].
+(These works were all motivated by applications to
+Vassiliev link invariants, which we cannot discuss here.)
+Let S be a strict symmetric Ab-category. Now an inﬁnitesimal braiding on S is a natural
+family of endomorphisms tX,Y : X ⊗Y →X ⊗Y satisfying
+cX,Y ◦tX,Y = tY,X ◦cX,Y
+∀X, Y,
+tX,Y ⊗Z = tX,Y ⊗idZ + c−1
+X,Y ⊗idZ ◦idY ⊗tX,Z ◦cX,Y ⊗idZ
+∀X, Y, Z.
+Strict symmetric Ab-categories equipped with an inﬁnitesimal braiding were called inﬁnites-
+imal symmetric. (We would prefer to call them symmetric categories equipped with an
+inﬁnitesimal braiding.)
+• Example: If H is a Hopf algebra, there is a bijection between inﬁnitesimal braidings t on
+S = H −Mod and elements t ∈Prim(H) ⊗Prim(H) (where Prim(H) = {x ∈H | ∆(x) =
+x ⊗1 + 1 ⊗x}) satisfying t21 = t and [t, ∆(H)] = 0, given by tX,Y = (πX ⊗πY )(t).
+• Now we can deﬁne the formal deformation of a symmetric category associated to an in-
+ﬁnitesimal braiding: Let S be a strict C-linear symmetric category with ﬁnite dimensional
+hom-sets and let t be an inﬁnitesimal braiding for S. We write S[[h]] for the C[[h]]-linear
+category obtained by extension of scalars. (I.e. Obj S[[h]] = Obj S and HomS[[h]](X, Y ) =
+HomS(X, Y ) ⊗C C[[h]].) Also the functor ⊗: S × S →S lifts to S[[h]]. For objects X, Y, Z,
+deﬁne
+αX,Y,Z = ΘKZ(h tX,Y ⊗idZ, h idX ⊗tY,Z),
+ecX,Y = cX,Y ◦ehtX,Y /2.
+Here ΘKZ is a Drinfeld associator [73], i.e. a formal power series
+ΘKZ(A, B) =
+X
+w∈{A,B}∗
+cw w
+in two non-commuting variables A, B, where cw ∈C, satisfying certain identities.
+(Cf.
+[137, Chapter XIX, (8.27)-(8.29)].)
+Then (S[[h]], ⊗, 1, α) is a (non-strict) tensor category
+with associativity constraint α, trivial unit constraints and ec a braiding. If S is rigid, then
+(S[[h]], ⊗, 1, α, ec) admits a ribbon structure.
+35
+
+
+• Application: Let g be a simple Lie algebra/C. Let S = g −Mod and deﬁne {tX,Y } be as in
+the example, corresponding to t = (P
+i xi ⊗xi + xi ⊗xi)/2, where xi, xi are dual bases of g
+w.r.t. the Killing form. Then [t, ∆(·)] = 0 and one can prove
+(S[[h]], ⊗, 1, α, ec) ≃Uh(g) −Mod
+(4.2)
+as C[[h]]-linear ribbon categories. (The proof is a corollary of the proof of the Kohno-Drinfeld
+theorem [73, 74], cf. also [137].)
+Remark: 1.
+Obviously, we have cheated: The main diﬃculty resides in the deﬁnition of
+ΘKZ! Giving the latter and proving its properties requires ca. 10-15 pages of rather technical
+material (but no Lie theory).
+Le and Murakami explicitly wrote down an associator; cf.
+e.g. [137, Remark XIX.8.3]. Drinfeld also gave a non-constructive proof of existence of an
+associator deﬁned over Q, cf. [74].
+2. The above is relevant for a more conceptual approach to the theory of ﬁnite-type knot
+invariants (Vassiliev invariants), cf. [45, 140].
+3. A disadvantage of the above is that we obtain only a formal deformation of S. If g is a simple
+Lie algebra and S = g −Mod, we know by (4.2), that we obtain the C[[h]]-category Uh(g) −
+Mod. On the other hand, thanks to the work of Jimbo [125] and others [173, 124] we know
+that there is a non-formal version Uq(g) of the quantum group with C-linear representation
+category. One would therefore hope that the C-linear categories Uq(g)−Mod can be obtained
+directly as deformations of the module categories U(g)−Mod. Indeed, for numerical q ∈C\Q,
+with some more analytical eﬀort one can make sense of αq = ΘKZ(h tX,Y ⊗idZ, h idX ⊗tY,Z)
+as an element of End(X ⊗Y ⊗Z) and deﬁne a non-formal, C-linear category C(g, q) and prove
+an equivalence
+C(g, q) = (S, ⊗, 1, αq, ecq) ≃Uq(g) −Mod
+of C-linear ribbon categories. This was done by Kazhdan and Lusztig [144], but see also the
+nice recent exposition by Neshveyev/Tuset [209].
+• Fact: If q ∈C∗is generic, i.e. not a root of unity, then C(g, q) := Uq(g) −Mod is a semisimple
+braided ribbon category whose fusion hypergroup is isomorphic to that of U(g), thus of the
+category of g-modules, cf. [124, 173]. But it is not symmetric for q ̸= 1, thus certainly not
+equivalent to the latter.
+In fact, Uq(g) −Mod and U(g) −Mod are already inequivalent
+as ⊗-categories. (Recall that associativity constraints α can be considered as generalized
+3-cocycles, and the αq for diﬀerent q are not cohomologous.)
+• We have brieﬂy discussed the Cartier/Kassel/Turaev formal deformation quantization of sym-
+metric categories equipped with an inﬁnitesimal braiding. There is a cohomology theory for
+Ab- tensor categories and tensor functors that classiﬁes deformations due to Davydov [53]
+and Yetter [290].
+Deﬁnition: Let F : C →C′ a tensor functor. Deﬁne Tn : Cn →C by X1 × · · · × Xn 7→
+X1 ⊗· · · ⊗Xn. (T0(∅) = 1, T1 = id.) Let Cn
+F (C) = End(Tn ◦F ⊗n). (C0
+F (C) = End 1′.) For a
+fusion category, this is ﬁnite dimensional. Deﬁne d : Cn
+F (C) →Cn+1
+F
+(C) by
+df = id ⊗f2,...,n+1 −f12,··· ,n+1 + f1,23,...,n+1 −· · · + (−1)nf1,...,n(n+1) + (−1)n+1f1,...,n ⊗id,
+where, e.g., f12,3,...,n+1 is deﬁned in terms of f using the isomorphism dF
+X1,X2 : F(X1) ⊗
+F(X2) →F(X1 ⊗F2) coming with the tensor functor F.
+One has d2 = 0, thus (Ci, d) is a complex. Now Hi
+F (C) is the cohomology of this complex,
+and Hi(C) = Hi
+F (C) for F = idC.
+In low dimensions one ﬁnds that H1
+F classiﬁes derivations of the tensor functor F, H2
+F clas-
+siﬁes deformations of the tensor structure {dF
+X,Y } of F. H3(C) classiﬁes deformations of the
+associativity constraint α of C.
+Examples: 1. If C is fusion then Hi(C) = 0 ∀i > 0. This implies Ocneanu rigidity, cf. [84].
+36
+
+
+2. If g is a reductive algebraic group with Lie algebra g and C = Rep G (algebraic represen-
+tations). Then Hi(C) ∼= (Λig)G ∀i. If g is simple then H1(C) = H2(C) = 0, but H3(C) is
+one-dimensional, corresponding to a one-parameter family of deformations C. According to
+[84] “it is easy to guess that this deformation comes from an actual deformation, namely the
+deformation of O(G) to the quantum group Oq(G)”. It is not clear to this author whether
+this suggestion should be considered as proven. If so, together with the one-dimensionality of
+H3(g −Mod) it provides a very satisfactory ‘explanation’ for the existence of the quantized
+categories C(g, q) ≃Uq(g) −Mod.
+• In analogy to the result of Kazhdan and Wenzl mentioned in Section 3, Tuba and Wenzl [259]
+proved that a semisimple ribbon category with the fusion hypergroup isomorphic to that of
+a simple classical Lie algebra g of BCD type (i.e. orthogonal or symplectic) is equivalent
+to the category C(g, q), with q = 1 or not a root of unity, or one of ﬁnitely many twisted
+versions thereof. Notice that in contrast to the Kazhdan/Wenzl result [145], this result needs
+the category to be braided!
+(Again, this is a characterization, not a construction of the
+categories.)
+• Finkelberg [89] proved a braided equivalence between C(g, q), q = eiπ/mκ, where m = 1
+for ADE, m = 2 for BCD and m = 3 for G2, and the ribbon category ˜Oκ of integrable
+representations of the aﬃne Lie algebra ˆg of central charge c = κ −ˇh, where ˇh is the dual
+Coxeter number of g.
+The category ˜Oκ plays an important rˆole in conformal ﬁeld theory, either in terms of ver-
+tex operator algebras or via the representation theory of loop groups (Wassermann [275],
+Toledano-Laredo [256]). This is the main reason for the relevance of quantum groups to CFT.
+• Finally, we brieﬂy discuss the connection between routes (B) and (C) to BTCs: In order
+to ﬁnd an R-matrix for the Hopf algebra Uq(g) one traditionally uses the quantum double,
+appealing to an isomorphism Uq(g) ∼= D(Bq(g))/I, where Bg(g) is the q-deformation of a
+Borel subalgebra of g and I an ideal in D(Bq(g)). Now RUq(g) = (φ ⊗φ)(RD(Bq(g))), where φ
+is the quotient map. Since a surjective Hopf algebra homomorphism H1 →H2 corresponds
+to a full monoidal inclusion H2 −Mod ֒→H1 −Mod, and recalling the connection (4.1)
+between Drinfeld’s double construction and the braided center Z1, we conclude that the BTC
+Uq(g)−Mod is a full monoidal subcategory of Z1(Bq(g)−Mod) (with the inherited braiding).
+Therefore, also in the deformation approach, the braiding can be understood as ultimately
+arising from the Z1 center construction.
+• Question: It is natural to ask whether a similar observation also holds for q a root of unity,
+i.e., whether the modular categories C(g, q), for q a root of unity, can be understood as full
+⊗-subcategories of Z1(D), where D is a fusion category corresponding to the deformed Borel
+subalgebra Bq(g). Very recently, Etingof and Gelaki [81] gave an aﬃrmative answer in some
+cases.
+Remark: In the next section, we will discuss a criterion that allows to recognize the quantum
+doubles Z1(C) of fusion categories.
+5
+Modular categories
+• Turaev [261, 262]: A modular category is a fusion category that is ribbon (alternatively,
+spherical and braided) such that the matrix S = (Si,j)
+Si,j = TrX⊗Y (cY,X ◦cX,Y ),
+i, j ∈I(C),
+where I(C) is the set of simple objects modulo isomorphism, is invertible.
+• A fusion category that is ribbon is modular if and only if dim C ̸= 0 and the center Z2(C)
+is trivial. (In the sense of consisting only of the objects 1 ⊕· · · ⊕1.) (This was proven by
+Rehren [232] for ∗-categories and by Beliakova/Blanchet [23] in general. Cf. also [39] and [2].)
+37
+
+
+Thus: Modular categories are braided fusion categories with trivial center, i.e. the maximally
+non-symmetric ones. (This deﬁnition seems more conceptual than the original one in terms
+of invertibility of S.)
+• Why are these categories called ‘modular’? Let S as above and T = diag(ωi), where ΘXi =
+ωiidXi, i ∈I. Then
+S2 = α C,
+(ST )3 = β C,
+(αβ ̸= 0)
+where Ci,j = δi,, thus S, T give rise to a projective representation of the modular group
+SL(2, Z) (which has a presentation {s, t | (st)3 = s2 = c, c2 = e}). Cf. [232, 262].
+• At ﬁrst sight, this is somewhat mysterious. Notice: SL(2, Z) is the mapping class group of
+the 2-torus S1 × S1. Now, by work of Reshetikhin/Turaev [235, 262], providing a rigorous
+version of ideas of Witten, every modular category gives rise to a topological quantum ﬁeld
+theory in 2 + 1 dimensions. Every such TQFT in turn gives rise to projective representation
+of the mapping class groups of all closed surfaces, and for the torus one obtains just the above
+representation of SL(2, Z). Cf. [262, 15]. We don’t have the time to say more about TQFTs.
+• Turaev’s motivation came from conformal ﬁeld theory (CFT). (Cf. e.g. Moore-Seiberg [189]).
+In fact, there is a (rigorous) deﬁnition of rational chiral CFTs (using von Neumann alge-
+bras) and their representations, for which one can prove that the latter are unitary modular
+(Kawahigashi, Longo, M¨uger [143]). Most of the examples considered in the (heuristic) physics
+literature ﬁt into this scheme. (E.g. the loop group models: [275, 282] and the minimal Vira-
+soro models with c < 1 [168].)
+In the context of vertex operator algebras, similar results were proven by Huang [121].
+• It is natural to ask whether there are less complicated ways to produce modular categories?
+The answer is positive; we will reconsider our three routes to braided categories.
+• Route A: Recall that the classical categories can be obtained from the linearized tangle cat-
+egories (type A: oriented tangles, types BCD: unoriented tangles), dividing by ideals deﬁned
+in terms of the knot polynomials of HOMFLY and Kauﬀman. At roots of unity, this leads to
+modular categories, cf. [267, 31, 23].
+• Route C1: H. Andersen et al. [4], Turaev/Wenzl [266] (and others): Let g be a simple Lie
+algebra and q a primitive root of unity. Then Uq(g) −Mod gives rise to a modular category
+C(g, q). (Using tilting modules, dividing by negligible morphisms, etc.)
+• Let q be primitive root of unity of order ℓ. Then C(g, q) has a positive ∗-operation (i.e. is
+unitary) if ℓis even (Kirillov Jr. [152], Wenzl [276]) and is not unitarizable for odd ℓ(Rowell
+[236]).
+• Characterization theorem: A braided fusion category with the fusion hypergroup of C(g, q),
+where g is a simple Lie algebra of BCD type and q a root of unity, is equivalent to C(g, q) or
+one of ﬁnitely many twisted versions. (Tuba/Wenzl [259])
+• Before we reconsider Route B, we assume that we already have a braided fusion category, or
+pre-modular category.
+As we have seen, failure of modularity is due to non-trivial center Z2(C). Idea: Given a braided
+(but not symmetric) category with even center Z2(C), kill the latter, using the Deligne /
+Doplicher-Roberts theorem: Z2(C) ≃Rep G. The latter contains a commutative (Frobenius)
+algebra Γ corresponding to the regular representation of G.
+Now Γ −ModC is modular.
+(Brugui`eres [39], M¨uger [190]). This construction can be interpreted as Galois closure in a
+Galois theory for BTCs, cf. [190].
+• Route B to braided categories: Quantum doubles: If G is a ﬁnite group then D(G)−Mod and
+Dω(G) −Mod are modular (Bantay [16], Altschuler/ Coste [3]). If H is a ﬁnite-dimensional
+semisimple and cosemisimple Hopf algebra then D(H) −Mod is modular (Etingof/Gelaki
+[79]). If A is a ﬁnite-dimensional weak Hopf algebra then D(A) −Mod modular (Nikshych/
+Turaev/ Vainerman [214]).
+38
+
+
+• The center Z1 of a left/right rigid, pivotal, spherical category has the same properties. In
+particular, the center of a spherical category is spherical and braided, thus a ribbon category.
+(Under weaker assumptions, this is not true, and existence of a twist for the center, if desired,
+must be enforced by a categorical version of the ribbonization of a Hopf algebra, cf. [139].)
+• The braided center Z1: If C is spherical fusion category and dim C ̸= 0 then Z1(C) is modular
+and dim Z1(C) = (dim C)2. (M¨uger [192].)
+Comments on the proof: Semisimplicity not diﬃcult. Next, one ﬁnds a Frobenius algebra Γ
+in D = C ⊠Cop such that the dual category Γ −ModD −Γ is equivalent to Z1(C), implying
+dim Z2(C) = (dim C)2. Here Γ = ⊕iXi ⊠Xop
+i , which is again a coend and can exist also in
+non-semisimple categories.
+• This contains all the earlier modularity results on D(G) −Mod and D(H) −Mod, but also
+for Dω(G) −Mod since:
+Dω(G) −Mod ≃Z1(Ck(G, ω)).
+(Using work by Hausser/Nill [114] or Panaite [226] on quantum double of quasi Hopf-algebras.)
+• Modularity of Z1(C) also follows by combination of Ostrik’s result that every fusion category
+arises from a weak Hopf algebra A, combined with modularity of D(A)−Mod [214], provided
+one proves D(A)−Mod ≃Z1(A−Mod), generalizing the known result for Hopf algebras. But
+the purely categorical proof avoiding weak Hopf algebras seems preferable, not least since it
+probably extends to ﬁnite non-semisimple categories.
+• In the Morita context having C ⊠Cop and Z1(C) as its corners, the two oﬀ-diagonal categories
+are equivalent to C and Cop, and their structures as C ⊠Cop-module categories are the obvious
+ones. Therefore, the center can also be understood as (using the notation of EO):
+Z1(C) ≃(C ⊠Cop)∗
+C.
+A (somewhat sketchy) proof of this equivalence can be found in [223, Prop. 2.5].
+• We give another example for a purely categorical result that can be proven using weak Hopf
+algebras: Radford’s formula for S4 has a generalization to weak Hopf algebras [213], and this
+can be used to prove that in every fusion category, there exists an isomorphism of tensor
+functors id →∗∗∗∗, cf. [83]. (Notice that in every pivotal category we have id ∼= ∗∗, thus
+here it is important that we understand ‘fusion’ just to mean existence of two-sided duals.
+But in [84] it is conjectured that every fusion category admits a pivotal structure.)
+• If C is already modular then there is a braided equivalence Z1(C) ≃C ⊠Cop, cf. [192]. Thus,
+every modular category M is full subcategory of Z1(C) for some fusion category.
+(This
+probably is not very useful for the classiﬁcation of modular categories, since there are ‘more
+fusion categories than modular categories’: Recall from Section 3 that C1 ≈C2 ⇒Z1(C1) ≃
+Z1(C2). (For converse, see below.)
+• There is a “Double commutant theorem” for modular categories (M¨uger [193], inspired by
+Ocneanu [219]): Let M a modular category and a C ⊂M a replete full tensor subcategory.
+Then:
+1. (M ∩(M ∩C′)′) = C.
+2. dim C · dim(M ∩C′) = dim M,
+3. If, in addition C is modular, then also D = M ∩C′ is modular and M ≃C ⊠D. (Thus
+every full inclusion of modular categories arises from a direct product.)
+These results indicate that ‘modular categories are better behaved than ﬁnite groups’.
+• Corollary: If M is modular and S ⊂M symmetric then S ⊂M ∩S′. Thus
+(dim S)2 ≤dim S · dim(M ∩S′) = dim M,
+implying dim S ≤
+√
+dim M.
+Notice that the bound is satisﬁed by Rep G ⊂D(ω)(G) −
+Mod. In fact, existence of a symmetric subcategory attaining the bound characterizes the
+representation categories of twisted doubles, cf. below.
+39
+
+
+• On the other hand, consider C ⊂M with M modular. We have M ∩C′ ⊃Z2(C), implying
+dim M ≥dim C · dim Z2(C). This provides a lower bound on the dimension of a modular
+category containing a given pre-modular subcategory as a full tensor subcategory. In [193] it
+was conjectured that this bound can always be attained.
+• It is natural to ask how primality of D(G) −Mod is related to simplicity of G. It turns out
+that the two properties are independent. On the one hand, there are non-simple ﬁnite groups
+for which D(G) −Mod is prime. (This is a corollary of the classiﬁcation of the full fusion
+subcategories of D(G) −Mod given in [206].) On the other hand, for G = Z/pZ one ﬁnds
+that D(G) −Mod is prime if and only if p = 2. For p an odd prime, D(G) −Mod has two
+prime factors, both of which are modular categories with p invertible objects, cf. [193]. But
+for every ﬁnite simple non-abelian G, one ﬁnds that D(G) −Mod is prime. In fact, it has
+only one replete full tensor subcategory at all, namely Rep G. Thus all these categories are
+mutually inequivalent: The classiﬁcation of prime modular categories contains that of ﬁnite
+simple groups.
+• If C is symmetric and (Γ, m, η) a commutative algebra in C, then Γ−ModC is again symmetric
+and
+dim Γ −ModC = dim C
+d(Γ) .
+(5.1)
+Now, if C is only braided, Γ−ModC is a fusion category satisfying (5.1), but in general it fails
+to be braided! (Unless Γ ∈Z2(C), as was the case in the context of modularization.)
+• Example: Given a BTC C ⊃S ≃Rep G, let Γ be the regular monoid in S as considered in
+Section 3. Then C⋊S := Γ−ModC is fusion category, but it is braided only if S ⊂Z2(C), as in
+the discussion of modularization. In general, one obtains a braided crossed G-category as
+deﬁned by Turaev [263, 264] (cf. also Carrasco and Moreno [44]), i.e. a tensor category with
+G-grading ∂on the objects, a G-action γ such that ∂(γg(X)) = g∂Xg−1 and a ‘braiding’
+cX,Y : X ⊗Y
+∼
+=
+−→γ∂X(Y ) ⊗X. The degree zero part is Γ −ModC∩S′ ≃Γ −Mod0
+C (cf.
+below). (Kirillov Jr. [153, 154], M¨uger [194]). This construction has an interesting connection
+to conformal orbifold models ([196, 199]).
+• Even if Γ ̸∈Z2(C), there is a full tensor subcategory Γ −Mod0
+C ⊂Γ −ModC that is braided.
+Calling a module (X, µ) ∈Γ −ModC dyslectic if
+µ ◦cX,Γ = µ ◦c−1
+Γ,X,
+one ﬁnds that the full subcategory Γ −Mod0
+C of dyslectic modules is not only monoidal, but
+also inherits the braiding from C, cf. Pareigis [227]. This was rediscovered by Kirillov and
+Ostrik [155] who in addition proved that if C is modular then Γ −Mod0
+C is modular and the
+following identity, similar to (5.1) but diﬀerent, holds:
+dim Γ −Mod0
+C = dim C
+d(Γ)2 .
+Remark: Analogous results were previously obtained by B¨ockenhauer, Evans and Kawahiga-
+shi [34] in an operator algebraic context. While the transposition of their work to tensor
+∗-categories is immediate, removing the ∗-assumption requires some work.
+• The above implies (for ∗-categories, but also in general over C by [84]) that d(Γ) ≤
+√
+dim C for
+commutative Frobenius algebras in modular categories. (The above bound on the dimension
+of full symmetric categories follows from this, since the regular monoid in S is a commutative
+Frobenius algebra Γ with d(Γ) = dim S.)
+• All these facts have applications to chiral conformal ﬁeld theories in the operator algebraic
+framework, reviewed in more detail in [198]:
+40
+
+
+Longo/Rehren [171]: Finite local extensions of a CFT A are classiﬁed by the ‘local Q-systems’
+(≈commutative Frobenius algebras) in Rep A, which is a ∗-BTC.
+B¨ockenhauer/Evans [33], [198]: If B ⊃A is the ﬁnite local extension corresponding to the
+commutative Frobenius algebra Γ ∈Rep A, then Rep B ≃Γ −Mod0
+Rep A.
+Analogous results for vertex operator algebras were formulated by Kirillov and Ostrik [155].
+Remark: It is perhaps not completely absurd to compare these results to local class ﬁeld
+theory, where ﬁnite Galois extensions of a local ﬁeld k are shown to be in bijection to ﬁnite
+index subgroups of k∗.
+• Drinfeld, Gelaki, Nikshych and Ostrik [75], and independently Kitaev and the author, ob-
+served that every commutative Frobenius algebra Γ in a modular category M gives rise to a
+braided equivalence
+Z1(Γ −ModM) ≃M ⊠
+^
+Γ −Mod0
+M.
+(5.2)
+Taking Γ = 1, one recovers the fact Z1(M) ≃M⊠f
+M. The latter raises the question whether
+one can ﬁnd a smaller fusion category C such that M ⊂Z1(C). The answer given by (5.2)
+is that the bigger a commutative algebra one can ﬁnd in M, the smaller one can take C to
+be. In particular, if Γ −Mod0
+M is trivial (which is equivalent to d(Γ)2 = dim M over C) then
+M ≃Z1(Γ−ModM) is not just contained in a center of a fusion category but is such a center.
+In fact, this criterion identiﬁes the modular categories of the form Z1(C) since, conversely, cf.
+[57], one ﬁnds that the center Z1(C) of a fusion category contains a commutative Frobenius
+algebra Γ of the maximal dimension d(Γ) =
+p
+dim Z1(C) = dim C such that
+Γ −Mod0
+Z1(C) trivial,
+Γ −ModZ1(C) ≃C.
+• As an application one obtains that if M is modular and S ⊂M symmetric and even such
+that dim S =
+√
+dim M then M ≃Dω(G) −Mod, where S ≃Rep G and ω ∈Z3(G, T).
+This has an application in CFT: If A is a chiral CFT with trivial representation category
+Rep A (i.e. A is ‘holomorphic’) acted upon by ﬁnite group G. Then Rep AG ≃Dω(G) −Mod.
+(Together with the results of [143], this proves the folk conjecture, having its roots in [67, 66],
+that the representation category of a ‘holomorphic chiral orbifold CFT’ is given by a category
+Dω(G) −Mod.)
+• As shown in [191], a weak monoidal Morita equivalence C1 ≈C1 of fusion categories implies
+Z1(C1) ≃Z1(C2). (This is an immediate corollary of the deﬁnition of ≈, combined with [240].)
+The converse is true for group theoretical categories (Naidu/Nikshych [205]), and a general
+proof is announced by Nikshych.
+• By deﬁnition, a group theoretical category C is weakly Morita equivalent (dual) to Ck(G, ω)
+for a ﬁnite group G and [ω] ∈H3(G, T). Thus Z1(C) ≃Z1(Ck(G, ω)) ≃Dω(G) −Mod. The
+converse is also true.
+Therefore, with M modular and C fusion we have:
+contains
+M
+Z1(C)
+maximal comm. FA Γ
+M ≃Z1(C)
+always true
+maximal STC S
+M ≃Dω(G) −Mod
+C is group theoretical
+• What can we say about non-commutative (Frobenius) algebras in modular categories? We
+ﬁrst look at the symmetric case. Let thus C be a rigid symmetric k-linear tensor category and
+41
+
+
+Γ a strongly separable Frobenius algebra in C. Deﬁne p ∈End Γ by
+p = (TrΓ ⊗idΓ)(∆◦m ◦cΓ,Γ) =
+Γ
+☛✟
+✡✠
+☛✟
+❆
+❆
+❆
+✁
+✁
+✁
+✡✠
+Γ
+=
+Γ
+✁
+✁
+✁❆
+❆
+❆
+❆
+❆
+❆
+✁
+✁
+✁
+✡✠
+Γ
+(5.3)
+(The fourfold vertex in the right diagram represents the morphism m(2) = m◦m⊗id.) Then p
+is idempotent (up to a scalar) and its kernel is an ideal. Thus the image of p is a commutative
+Frobenius subalgebra of Γ. The latter is called the center of Γ since it is the ordinary center
+in the case C = Vectﬁn
+k .
+• Application to TQFT: Every ﬁnite dimensional semisimple k-algebra A gives rise to a TQFT
+in 1 + 1 dimensions via triangulation (Fukuma/Hosono/Kawai [99]). By the classiﬁcation of
+TQFTs in 1 + 1 dimensions [65, 1, 156], this TQFT corresponds to a commutative Frobenius
+algebra B (in Vectﬁn
+k ), with A = V (S1) and the product arising from the pants cobordism.
+The latter is given by the vector space associated with the circle and the multiplication is
+given by the pants cobordism. One ﬁnds B = Z(A), and B arises exactly as the image of
+A under the above projection p. (This works since every semisimple algebra is a Frobenius
+algebra.)
+• If C is braided, but not symmetric, we must choose between cΓ,Γ and c−1
+Γ,Γ in the deﬁnition (5.3)
+of the idempotent p. This implies that a non-commutative Frobenius algebra will typically
+have two diﬀerent centers, called the left and right centers Γl, Γr.
+Remarkably, one then
+obtains an equivalence
+E : Γl −Mod0
+C
+≃
+−→Γr −Mod0
+C
+of modular categories, cf. B¨ockenhauer, Evans, Kawahigashi [34], Ostrik [222] and Fr¨ohlich,
+Fuchs, Runkel, Schweigert [98, 95]. Conversely, if C is modular, every triple (Γl, Γr, E) as
+above arises from a non-commutative algebra in C, [157]. (The latter is unique only up to
+Morita equivalence.)
+• This is relevant for the classiﬁcation of CFTs in two dimensions: The latter are constructed
+from a pair (Al, Ar) of chiral CFTs and some algebraic datum (‘modular invariant’) specifying
+how the two chiral CFTs are glued together. In the left-right symmetric case, where the two
+chiral theories coincide Al = Ar = A, the above result indicates that Frobenius algebras in
+C = Rep A are the structure to use. This is substantiated by a construction, using TQFTs, of
+a ‘topological from a modular category C and a Frobenius algebra Γ ∈C, cf. Fuchs, Runkel,
+Schweigert, cf. [97] and sequels.
+• The Frobenius algebras in / module categories of SUq(2) −Mod can be classiﬁed in terms of
+ADE graphs. (Quantum MacKay correspondence.) Cf. B¨ockenhauer, Evans [33], Kirillov Jr.
+and Ostrik [155], Etingof/Ostrik [86].
+• These results should be extended to other Lie groups. If SU(2) already leads to the ADE
+graphs (“ubiquitous” according to [117]), the other classical groups should give rise to very
+interesting algebraic-combinatorial structures, cf. e.g. [220, 221].
+• More generally, when the two chiral theories Al, Ar, and therefore the associated modular
+categories Cl, Cr diﬀer, it is better to work with triples (Γl, Γr, E), where Γl/r ∈Cl/r are
+commutative algebras and E : Γl −Mod0
+Cl →Γr −Mod0
+Cr is a braided equivalence. (By the
+above, in the left-right symmetric case Cl = Cr = C, this is equivalent to the study of non-
+commutative Frobenius algebras Γ ∈C.) Now one ﬁnds [198] a bijection between such triples
+42
+
+
+and commutative algebras Γ ∈Cl ⊠eCr of the maximal dimension d(Γ) = √dim Cl · dim Cr.
+(This is a categorical version of Rehren’s approach [233] to the classiﬁcation of modular
+invariants. It is based on studying local extensions A ⊃Al⊠f
+Ar, corresponding to commutative
+algebras Γ ∈Cl ⊠eCr.)
+• There also is a concept of a center of an algebra A in a not-necessarily braided tensor category
+C, to wit the full center deﬁned in [56] by a universal property. While the full center is a
+commutative algebra in the braided center Z1(C) of C, as apposed to in C like the above
+notions of center, there are connections between these constructions.
+• We close this section giving three more reasons why modular categories are interesting:
+1. They have many connections with number theory:
+– Rehren [232], Turaev [262]:
+X
+i
+d2
+i = |
+X
+i
+d2
+i ωi|2.
+In the pointed case (all simple objects have dimension one) this reduces to | P
+i ωi| =
+±
+p
+|I|. For suitable C, this reproduces Gauss’ evaluation of Gauss sums. (Gauss actually
+also determined the sign of his sums.)
+– The elements of T matrix are roots of unity, and the elements of S are cyclotomic integers
+[36, 78].
+– For related integrality properties in Y=TQFSs, cf. Masbaum, Roberts, Wenzl [186, 187]
+and Brugui`eres [38]).
+– The congruence subgroup property: Let N = ord T (< ∞). Then
+ker(π : SL(2, Z) →GL(|I|, C)) ⊃Γ(N) ≡ker(SL(2, Z) →SL(2, Z/NZ)).
+For the modular categories arising from rational CFTs, this had been known in many
+cases and widely believed to be true in general. Considerable progress was made by
+Bantay [17], whose arguments were made rigorous by Xu [283] using algebraic quantum
+ﬁeld theory. Bantay’s work inspired a proof [247] by Sommerh¨auser and Zhu for modu-
+lar Hopf algebras, using the higher Frobenius-Schur indicators deﬁned by Kashina and
+Sommerh¨auser [136]. Finally, Ng and Schauenburg proved the congruence property for
+all modular categories along similar lines, cf. [212], beginning with a categorical version
+of the higher Frobenius-Schur indicators [211].
+2. A modular category M gives rise to a surgery TQFT in 2 + 1 dimensions (Reshetikhin,
+Turaev [235, 262]).
+In particular, this works for M = Z1(C) when C is spherical fusion
+categories C with dim C ̸= 0. Since such a category C also deﬁnes a TQFT via triangulation
+[19, 104], it is natural to expect an isomorphism RTM = BWGKC of TQFTs. (When C is
+itself modular, this is indeed true by Z1(C) ≃C ⊠eC and Turaev’s work in [262].) Recently,
+a general proof of this result was announced by Turaev and Virelizier, based on the work
+of Brugui`eres and Virelizier [41, 42], partially joint with S. Lack. (Notice in any case that
+the surgery construction provides more TQFTs than the triangulation approach, since not all
+modular categories are centers.)
+3. We close with the hypothetical application of modular categories to topological quantum
+computing [274]. There are actually two diﬀerent approaches to topological quantum com-
+puting: The one initiated by M. Freedman, using TQFTs in 2 + 1 dimension and the one due
+to A. Kitaev using d = 2 quantum spin systems. However, in both proposals, the modular
+representation categories are central. Cf. also Z. Wang, E. Rowell et al. [120, 237].
+6
+Some open problems
+1. Characterize the hypergroups arising from a fusion category. (Probably hopeless.) Or at least
+those corresponding to (connected) compact groups.
+43
+
+
+2. Find an algebraic structure whose representation categories give all semisimple pivotal cat-
+egories, generalizing Ostrik’s result [222]. Perhaps this will be something like the quantum
+groupoids deﬁned by Lesieur and Enock [165]?
+3. Classify all prime modular categories. (The next challenge after the classiﬁcation of ﬁnite
+simple groups...)
+4. Give a direct construction of the fusion categories associated with the two Haagerup subfactors
+[109, 7, 8].
+5. Prove that every braided fusion category C/C embeds fully into a modular category M with
+dim M = dim C ·dim Z2(C). (This is the optimum allowed by the double commutant theorem,
+cf. [193].)
+6. Find the most general context in which an analytic (i.e. non-formal) version of the Cartier/
+Kassel/ Turaev [45, 140] formal deformation quantization of a symmetric tensor category S
+with inﬁnitesimal braiding can be given. (I.e. give an abstract version of the Kazhdan/Lusztig
+construction of Drinfeld’s category [144] that does not suppose S = Rep G.)
+7. Generalize the proof of modularity of Z1(C) for semisimple fusion categories to not necessarily
+semisimple ﬁnite categories (in the sense of [85]), using Lyubashenko’s deﬁnition [175] of
+modularity.
+8. Likewise for the triangulation TQFT [265, 19, 104]. Generalize the relation to surgery TQFT
+to the non-semisimple case. (For the non-semisimple version of the RT-TQFT in [151].)
+9. Hard non-commutative analysis: Every countable C∗-tensor category with conjugates and
+End 1 = C embeds fully into the C∗-tensor category of bimodules over L(F∞) and, for any
+inﬁnite factor M, into End(L(F∞)⊗M). Here F∞is the free group with countably many
+generators and L(F∞) the type II1 factor associated to its left regular representation. (This
+would extend and conceptualize the results of Popa/Shlyakhtenko [229] on the universality of
+the factor L(F∞) in subfactor theory.)
+10. Give satisfactory categorical interpretations for various generalizations of quasi-triangular
+Hopf algebras, e.g. dynamical quantum groups [77] and Toledano-Laredo’s quasi-Coxeter al-
+gebras [257]. Soibelman’s ‘meromorphic tensor categories’ and the ‘categories with cylinder
+braiding’ of tom Dieck and H¨aring-Oldenburg [258] might be relevant – and in any case they
+deserve further study.
+Acknowledgement: I thank B. Enriques and C. Kassel, the organizers of the Rencontre “Groupes
+quantiques dynamiques et cat´egories de fusion” that took place at CIRM, Marseille, from April
+14-18, 2008, for the invitation to give the lectures that gave rise to these notes. (No proceedings
+were published for this meeting.) I am also grateful to N. Andruskiewitsch, F. Fantino, G. A.
+Garc´ıa and M. Mombelli for the invitation to the “Colloquium on Hopf algebras, quantum groups
+and tensor categories”, C´ordoba, Argentina, August 31st to September 4th, 2009, as well as for
+their willingness to publish these notes.
+Disclaimer: While the following bibliography is quite extensive, it should be clear that it has no
+pretense whatsoever at completeness. Therefore the absence of this or that reference should not be
+construed as a judgment of its relevance. The choice of references was guided by the principal thrust
+of these lectures, namely linear categories. This means that the subjects of quantum groups and
+low dimensional topology, but also general categorical algebra are touched upon only tangentially.
+44
+
+
+References
+[1] L. Abrams: Two-dimensional topological quantum ﬁeld theories and Frobenius algebras, J.
+Knot Th. Ramif. 5, 569-587 (1996).
+[2] D. Altschuler, A. Brugui`eres: Handle slide for a sovereign category. Preprint, 2001.
+[3] D. Altschuler, A. Coste: Invariants of 3-manifolds from ﬁnite groups. In: Proc. XXth Int.
+Conf. Diﬀ. Geom. Meth. in Theor. Phys., New York, 1991, pp. 219–233, World Scientiﬁc,
+1992. Quasi-quantum groups, knots, three-manifolds, and topological ﬁeld theory. Comm.
+Math. Phys. 150, 83-107 (1992).
+[4] H. H. Andersen; P. Polo; K. X. Wen: Representations of quantum algebras. Invent. Math.
+104, 1-59 (1991). H. H. Andersen: Tensor products of quantized tilting modules. Comm.
+Math. Phys. 149, 149-159 (1992).
+[5] Y. Andr´e: Une introduction aux motifs (motifs purs, motifs mixtes, p´eriodes). Soc. Math.
+France, 2004.
+[6] A. Ardizzoni: The category of modules over a monoidal category: Abelian or not? Ann.
+Univ. Ferrara - Sez. VII - Sc. Mat., Vol. L, 167-185 (2004).
+[7] M. Asaeda, U. Haagerup: Exotic subfactors of ﬁnite depth with Jones indices (5 +
+√
+13)/2
+and (5 +
+√
+17)/2. Comm. Math. Phys. 202, 1-63 (1999).
+[8] M. Asaeda, S. Yasuda: On Haagerup’s list of potential principal graphs of subfactors. Comm.
+Math. Phys. 286, 1141-1157 (2009).
+[9] J. C. Baez: Higher-dimensional algebra. II. 2-Hilbert spaces. Adv. Math. 127, 125-189 (1997).
+[10] J. C. Baez, J. Dolan: Categoriﬁcation. In: E. Getzler, M. Kapranov (eds.): Higher Category
+Theory. Contemp. Math. 230, 1-36 (1998).
+[11] J. C. Baez; J. Dolan:
+Higher-dimensional algebra. III. n-categories and the algebra of
+opetopes. Adv. Math. 135, 145-206 (1998).
+[12] J. C. Baez; A. D. Lauda: Higher-dimensional algebra V’: 2-groups. Theor. Appl. Categs. 12,
+423-491 (2004).
+[13] J. C. Baez; J. P. May (eds.): Towards higher categories. Springer Verlag, 2010.
+[14] J.
+C.
+Baez;
+M.
+Shulman:
+Lectures
+on
+n-categories
+and
+cohomology.
+In
+[13].
+(arXiv:math/0608420)
+[15] B. Bakalov, A. Kirillov Jr.: Lectures on tensor categories and modular functors. American
+Mathematical Society, 2001.
+[16] P. Bantay: Orbifolds and Hopf algebras. Phys. Lett. B245, 477-479 (1990). Orbifolds, Hopf
+algebras, and the Moonshine. Lett. Math. Phys. 22, 187-194 (1991).
+[17] P. Bantay: The kernel of the modular representation and the Galois action in RCFT. Comm.
+Math. Phys. 233, 423-438 (2003).
+[18] J. W. Barrett, B. W. Westbury: The equality of 3-manifold invariants. Math. Proc. Cambr.
+Phil. Soc. 118, 503-510 (1995).
+[19] J. W. Barrett, B. W. Westbury: Invariants of piecewise-linear 3-manifolds. Trans. Amer.
+Math. Soc. 348, 3997-4022 (1996).
+[20] J. W. Barrett, B. W. Westbury: Spherical categories. Adv. Math. 143, 357-375 (1999).
+[21] H. Baumg¨artel, F. Lled´o: Duality of compact groups and Hilbert C*-systems for C*-algebras
+with a nontrivial center. Int. J. Math. 15, 759-812 (2004).
+[22] A. Beliakova, C. Blanchet: Skein construction of idempotents in Birman-Murakami-Wenzl
+algebras. Math. Ann. 321, 347-373 (2001).
+45
+
+
+[23] A. Beliakova, C. Blanchet: Modular categories of types B, C and D. Comment. Math. Helv.
+76, 467-500 (2001).
+[24] J. Benabou: Cat´egories avec multiplication. C. R. Acad. Sci. Paris 256, 1887-1890 (1963).
+[25] J. Benabou: Alg`ebre ´el´ementaire dans les cat´egories avec multiplication. C. R. Acad. Sci.
+Paris 258, 771-774 (1964).
+[26] J. Benabou: Introduction to bicategories. In: Reports of the Midwest Category Seminar.
+Lecture Notes in Mathematics 47, pp. 1–77. Springer Verlag, 1967.
+[27] J. Bichon: Trivialisations dans les cat´egories tannakiennes. Cah. Topol. Geom. Diﬀ. Cat´eg.
+39, 243–270 (1998).
+[28] J. Bichon, A. De Rijdt, S. Vaes: Ergodic coactions with large multiplicity and monoidal
+equivalences of quantum groups. Comm. Math. Phys. 262, 703-728 (2006).
+[29] J. S. Birman, H. Wenzl: Braids, link polynomials and a new algebra. Trans. Amer. Math.
+Soc. 313, 249-273 (1989).
+[30] E. Blanchard: On ﬁniteness of the number of N-dimensional Hopf C∗-algebras. In: A. Gheon-
+dea, R. N. Gologan and D. Timotin (eds.): Operator theoretical methods. (Timi¸soara, 1998),
+39–46, Theta Found., Bucharest, 2000.
+[31] C. Blanchet: Hecke algebras, modular categories and 3-manifolds quantum invariants. Topol-
+ogy 39, 193-223 (2000).
+[32] C. Blanchet, N. Habegger, G. Masbaum, P. Vogel: Three-manifold invariants derived from the
+Kauﬀman bracket. Topology 31, 685-699 (1992). Topological quantum ﬁeld theories derived
+from the Kauﬀman bracket. Topology 34, 883-927 (1995).
+[33] J. B¨ockenhauer, D. E. Evans: Modular invariants, graphs and α-induction for nets of sub-
+factors I-III. Comm. Math. Phys. 197, 361-386 (1998), 200, 57-103 (1999), 205, 183-228
+(1999).
+[34] J. B¨ockenhauer, D. E. Evans, Y. Kawahigashi: On α-induction, chiral generators and mod-
+ular invariants for subfactors. Comm. Math. Phys. 208, 429-487 (1999). Chiral structure of
+modular invariants for subfactors. Comm. Math. Phys. 210, 733-784 (2000).
+[35] G. B¨ohm, K. Szlach´anyi: A coassociative C∗-quantum group with nonintegral dimensions.
+Lett. Math. Phys. 38, 437-456 (1996).
+[36] J. de Boer, J. Goeree: Markov traces and II1 factors in conformal ﬁeld theory. Comm. Math.
+Phys. 139, 267-304 (1991).
+[37] A. Brugui`eres: Th´eorie tannakienne non commutative. Comm. Alg. 22, 5817–5860 (1994).
+Dualit´e tannakienne pour les quasi-groupo¨ıdes quantiques. Comm. Alg. 25, 737–767 (1997).
+[38] A. Brugui`eres, Alain: Tresses et structure enti`ere sur la cat´egorie des rep´esentations de SLN
+quantique. Comm. Algebra 28, 1989–2028 (2000),
+[39] A. Brugui`eres: Cat´egories pr´emodulaires, modularisations et invariants de vari´et´es de dimen-
+sion 3. Math. Ann. 316, 215-236 (2000).
+[40] A. Brugui`eres, G. Maltsiniotis: Quasi-groupo¨ıdes quantiques. C. R. Acad. Sci. Paris S´er. I
+Math. 319, 933–936 (1994)
+[41] A. Brugui`eres, A. Virelizier: Categorical centers and Reshetikhin-Turaev invariants. Acta
+Math. Vietnam. 33, 255-277 (2008).
+[42] A. Brugui`eres, A. Virelizier: Quantum double of Hopf monads and categorical centers. To
+appear in Trans. AMS. (Preprint: The double of a Hopf monad. arXiv:0812.2443.)
+[43] D. Calaque, P. Etingof: Lectures on tensor categories. In: B. Enriquez (ed.): Quantum groups.
+IRMA Lectures in Mathematics and Theoretical Physics, 12. European Mathematical Society,
+2008.
+46
+
+
+[44] P. Carrasco, J. M. Moreno: Categorical G-crossed modules and 2-fold extensions. J. Pure
+Appl. Alg. 163, 235-257 (2001).
+[45] P. Cartier: Construction combinatoire des invariants de Vassiliev-Kontsevich des nœuds. C.
+R. Acad. Sci. Paris S´er. I Math. 316, 1205-1210 (1993).
+[46] A. M. Cegarra, E. Khmaladze: Homotopy classiﬁcation of graded Picard categories. Adv.
+Math. 213, 644-686 (2007).
+[47] V. Chari, A. Pressley: A guide to quantum groups. Cambridge University Press, 1995.
+[48] A. M. Cohen, R. de Man: Computational evidence for Deligne’s conjecture regarding excep-
+tional Lie groups. C. R. Acad. Sci., Paris, S´er. I 322, 427-432 (1996). On a tensor category
+for the exceptional Lie groups. In: P. Dr¨axler et al. (eds.): Computational methods for rep-
+resentations of groups and algebras. Progr. Math. 173, Birkh¨auser Verlag, 1999.
+[49] J. Comes, V. Ostrik: On blocks of Deligne’s category Rep(St). arXiv:0910.5695.
+[50] S. E. Crans: Generalized centers of braided and sylleptic monoidal 2-categories. Adv. Math.
+136, 183-223 (1998).
+[51] G. Y. Chen: A new characterization of ﬁnite simple groups. Chinese Sci. Bull. 40, 446-450
+(1995).
+[52] P. Cvitanovi´c: Group theory. Birdtracks, Lie’s, and exceptional groups. Princeton University
+Press, 2008.
+[53] A. A. Davydov: Twisting of monoidal structures. q-alg/9703001.
+[54] A. A. Davydov: Monoidal categories. J. Math. Sci. (New York) 88, 457-519 (1998)
+[55] A. A. Davydov: Galois algebras and monoidal functors between categories of representations
+of ﬁnite groups. J. Alg. 244, 273-301 (2001).
+[56] A. A. Davydov: Centre of an algebra. To appear in Adv. Math. (arXiv:0908.1250)
+[57] A. A. Davydov, M. M¨uger, D. Nikshych, V. Ostrik: In preparation
+[58] P. Deligne: Cat´egories tannakiennes. In: P. Cartier et al. (eds.): Grothendieck Festschrift,
+vol. II, pp. 111–195. Birkh¨auser Verlag, 1991.
+[59] P. Deligne: La s´erie exceptionnelle de groupes de Lie. C. R. Acad. Sci., Paris, S´er. I 322,
+321-326 (1996),
+[60] P. Deligne: Cat´egories tensorielles. Moscow Math. J. 2, 227-248 (2002).
+[61] P. Deligne: La cat´egorie des repr´esentations du groupe sym´etrique St, lorsque t n’est pas un
+entier naturel. In: Algebraic groups and homogeneous spaces, 209–273, Tata Inst. Fund. Res.
+Stud. Math., Tata Inst. Fund. Res., Mumbai, 2007
+[62] P. Deligne, B. H. Gross: On the exceptional series, and its descendants. C. R. Math. Acad.
+Sci. Paris 335, 877-881 (2002).
+[63] P. Deligne, R. de Man: La s´erie exceptionelle de groupes de Lie. II. C. R. Acad. Sci., Paris,
+S´er. I 323, 577-582 (1996).
+[64] P. Deligne, J. S. Milne: Tannakian categories. Lecture notes in mathematics 900, 101–228.
+Springer Verlag, 1982.
+[65] R. Dijkgraaf: A Geometrical Approach to Two Dimensional Conformal Field Theory, Ph.D.
+thesis (Utrecht, 1989).
+[66] R. Dijkgraaf, V. Pasquier, P. Roche: Quasi Hopf algebras, group cohomology and orbifold
+models. Nucl. Phys. B (Proc. Suppl.)18B, 60-72 (1990).
+[67] R. Dijkgraaf, C. Vafa, E. Verlinde, H. Verlinde: The operator algebra of orbifold models.
+Comm. Math. Phys. 123, 485-527 (1989).
+47
+
+
+[68] S. Doplicher, R. Haag, J. E. Roberts: Local observables and particle statistics I & II. Comm.
+Math. Phys. 23, 199-230 (1971), 35, 49-85 (1974).
+[69] S. Doplicher, C. Pinzari and J. E. Roberts, An algebraic duality theory for multiplicative
+unitaries. Int. J. Math. 12, 415–459 (2001). C. Pinzari and J. E. Roberts, Regular objects,
+multiplicative unitaries and conjugation. Int. J. Math. 13 (2002) 625-665.
+[70] S. Doplicher, J. E. Roberts: A new duality theory for compact groups. Invent. Math. 98,
+157–218 (1989).
+[71] S. Doplicher, J. E. Roberts: Why there is a ﬁeld algebra with a compact gauge group de-
+scribing the superselection structure in particle physics. Comm. Math. Phys. 131, 51-107
+(1990).
+[72] V. G. Drinfeld: Quantum groups. In: Proc. Int. Congr. Math, Berkeley 1986.
+[73] V. G. Drinfeld: Quasi-Hopf algebras. Leningrad Math. J. 1, 1419-1457 (1990).
+[74] V. G. Drinfeld: On quasitriangular quasi-Hopf algebras and on a group that is closely con-
+nected with Gal(Q/Q). Leningrad Math. J. 2, 829-860 (1991).
+[75] V. Drinfeld, S. Gelaki, D. Nikshych, V. Ostrik: Group-theoretical properties of nilpotent
+modular categories. math.QA/0704.1095.
+[76] S. Eilenberg, J. C. Moore: Adjoint functors and triples. Ill. J. Math. 9, 381-398 (1965).
+[77] P. Etingof; A. Varchenko: Solutions of the quantum dynamical Yang-Baxter equation and
+dynamical quantum groups. Comm. Math. Phys. 196 591-640 (1998).
+[78] P. Etingof: On Vafa’s theorem for tensor categories. Math. Res. Lett. 9, 651-657 (2002).
+[79] P. Etingof, S. Gelaki: Some properties of ﬁnite-dimensional semisimple Hopf algebras. Math.
+Res. Lett. 5, 191-197 (1998).
+[80] P. Etingof, S. Gelaki: Isocategorical groups. Int. Math. Res. Not. 2001:2, 59–76.
+[81] P. Etingof, S. Gelaki: The small quantum group as a quantum double. J. Alg. 322, 2580-2585
+(2009).
+[82] P. Etingof, S. Gelaki, V. Ostrik: Classiﬁcation of fusion categories of dimension pq. Int. Math.
+Res. Not. 2004:57, 3041–3056
+[83] P. Etingof, D. Nikshych, V. Ostrik: An analogue of Radford’s S4 formula for ﬁnite tensor
+categories. Int. Math. Res. Not. 2004:54, 2915–2933.
+[84] P. Etingof, D. Nikshych, V. Ostrik: On fusion categories. Ann. Math. 162, 581-642 (2005).
+[85] P. Etingof, V. Ostrik: Finite tensor categories. Mosc. Math. J. 4, 627-654, 782–783 (2004).
+[86] P. Etingof, V. Ostrik: Module categories over representations of SLq(2) and graphs. Math.
+Res. Lett. 11, 103-114 (2004).
+[87] D. E. Evans, Y. Kawahigashi: Quantum symmetries on operator algebras. Oxford University
+Press, 1998.
+[88] M. Farber: Von Neumann categories and extended L2-cohomology. K-Theory 15, 347-405
+(1998).
+[89] M. Finkelberg: An equivalence of fusion categories. Geom. Funct. Anal. 6, 249-267 (1996).
+[90] K. Fredenhagen, K.-H. Rehren, B. Schroer: Superselection sectors with braid group statistics
+and exchange algebras I. General theory. Comm. Math. Phys. 125, 201-226 (1989).
+[91] M. H. Freedman, A. Kitaev, M. J. Larsen, Z. Wang: Topological quantum computation.
+Mathematical challenges of the 21st century. Bull. Amer. Math. Soc. 40, 31-38 (2003).
+[92] P. Freyd, D. Yetter, J. Hoste, W. B. R. Lickorish, K. Millett, A. Ocneanu: A new polynomial
+invariant of knots and links. Bull. Amer. Math. Soc. 12, 239-246 (1985).
+48
+
+
+[93] P. Freyd, D. Yetter: Braided compact closed categories with applications to low-dimensional
+topology. Adv. Math. 77, 156-182 (1989).
+[94] P. Freyd, D. Yetter: Coherence theorems via knot theory. J. Pure Appl. Alg. 78, 49-76 (1992).
+[95] J. Fr¨ohlich, J. Fuchs, I. Runkel, C. Schweigert: Correspondences of ribbon categories. Adv.
+Math. 199, 192-329 (2006).
+[96] J. Fr¨ohlich, T. Kerler: Quantum groups, quantum categories and quantum ﬁeld theory. (Lec-
+ture Notes in Mathematics vol. 1542.) Springer Verlag, 1993.
+[97] J. Fuchs, I. Runkel, C. Schweigert: TFT construction of RCFT correlators. I. Partition
+functions. Nucl. Phys. B646, 353-497 (2002).
+[98] J. Fuchs, C. Schweigert: Category theory for conformal boundary conditions. Fields Inst.
+Commun. 39, 25-71 (2003).
+[99] M. Fukuma, S. Hosono, H. Kawai: Lattice topological ﬁeld theory in two dimensions. Comm.
+Math. Phys. 161, 157-175 (1994).
+[100] S. Gelaki: Semisimple triangular Hopf algebras and Tannakian categories. In: M. D. Fried,
+Y. Ihara (eds.): Arithmetic fundamental groups and noncommutative algebra. Proc. Sympos.
+Pure Math. 70, 497-515 (2002)
+[101] S. Gelaki, D. Naidu: Some properties of group-theoretical categories. J. Alg. 322, 2631-2641
+(2009).
+[102] S. Gelaki, D. Nikshych: Nilpotent fusion categories. Adv. Math. 217, 1053-1071 (2008).
+[103] S. Gelfand, D. Kazhdan: Examples of tensor categories. Invent. Math. 109, 595-617 (1992).
+[104] S. Gelfand, D. Kazhdan: Invariants of three-dimensional manifolds. Geom. Funct. Anal. 6,
+268-300 (1996).
+[105] P. Ghez, R. Lima, J. E. Roberts: W ∗-categories. Pac. J. Math. 120, 79-109 (1985).
+[106] C. Gomez, M. Ruiz-Altaba, G. Sierra: Quantum groups in two-dimensional physics. Cam-
+bridge University Press, 1996.
+[107] F. Goodman, H. Wenzl: Ideals in Temperley-Lieb category. Appendix to: M. H. Freedman:
+A magnetic model with a possible Chern-Simons phase. Comm. Math. Phys. 234, 129–183
+(2003)
+[108] R. Gordon, A. J. Power, R. Street: Coherence for tricategories. Mem. Amer. Math. Soc. 117
+(1995).
+[109] U. Haagerup: Principal graphs of subfactors in the index range 4 < [M : N] < 3 +
+√
+2. In:
+H. Araki, Y. Kawahigashi, H. Kosaki (eds.): Subfactors. (Kyuzeso, 1993), 1–38, World Sci.
+Publ., River Edge, NJ, 1994.
+[110] Phung Ho Hai: Tannaka-Krein duality for Hopf algebroids. Israel J. Math. 167, 193-225
+(2008).
+[111] H. Halvorson: Algebraic Quantum Field Theory. In: J. Butterﬁeld and J. Earman (eds.):
+Handbook of the Philosophy of Physics. Elsevier, 2006.
+[112] D. Handelman: Representation rings as invariants for compact groups and limit ratio theo-
+rems for them. Int. J. Math. 4, 59-88 (1993).
+[113] R. H¨aring-Oldenburg: Reconstruction of weak quasi Hopf algebras. J. Alg. 194, 14-35 (1997).
+[114] F. Hausser, Frank; F. Nill: Doubles of quasi-quantum groups. Comm. Math. Phys. 199,
+547-589 (1999).
+[115] T. Hayashi: Face algebras. I. A generalization of quantum group theory. J. Math. Soc. Japan
+50, 293–315 (1998).
+[116] T. Hayashi:
+A
+canonical Tannaka
+duality for
+ﬁnite
+semisimple tensor
+categories.
+arXiv:math.QA/9904073.
+49
+
+
+[117] M. Hazewinkel, W. Hesselink, D. Siersma, F. D. Veldkamp: The ubiquity of Coxeter-Dynkin
+diagrams (an introduction to the A−D−E problem). Nieuw Arch. Wisk. 25, 257-307 (1977).
+[118] E. Hewitt, K. A. Ross: Abstract harmonic analysis, Vol. II. Springer Verlag, 1970.
+[119] F. Hiai, M. Izumi: Amenability and strong amenability for fusion algebras with applications
+to subfactor theory. Int. J. Math. 9, 669-722 (1998).
+[120] Seung-moon Hong, E. Rowell, Z. Wang: On exotic modular tensor categories. Commun.
+Contemp. Math. 10, Suppl. 1, 1049-1074 (2008).
+[121] Y.-Z. Huang: Vertex operator algebras, the Verlinde conjecture, and modular tensor cate-
+gories. Proc. Natl. Acad. Sci. USA 102, 5352-5356 (2005).
+[122] M. Izumi; H. Kosaki, Hideki: On a subfactor analogue of the second cohomology. Rev. Math.
+Phys. 14, 733-757 (2002).
+[123] G. James, M. Liebeck: Representations and characters of groups. Cambridge University Press,
+1993, 2001.
+[124] J. C. Jantzen: Lectures on quantum groups. American Mathematical Society, 1996.
+[125] M. Jimbo: A q-diﬀerence analogue of U(g) and the Yang-Baxter equation. Lett. Math. Phys.
+10, 63-69 (1985). A q-analogue of U(gl(N +1)), Hecke algebra and the Yang-Baxter equation.
+Lett. Math. Phys. 11, 247-245 (1986).
+[126] V. F. R. Jones: Index for subfactors. Invent. Math. 72, 1-25 (1983).
+[127] V. F. R. Jones: A polynomial invariant for knots via von Neumann algebras. Bull. Amer.
+Math. Soc. 12, 103-111 (1985).
+[128] A. Joyal, R. Street: Braided monoidal categories. Macquarie Mathematics Reports Nos.
+850067, Dec. 1985 (http://www.math.mq.edu.au/∼street/BMC850067.pdf) and 860081,
+Nov. 1986 (http://www.maths.mq.edu.au/∼street/JS1.pdf).
+[129] A. Joyal, R. Street: The geometry of tensor calculus. I. Adv. Math. 88, 55-112 (1991).
+[130] A. Joyal, R. Street: Tortile Yang-Baxter operators in tensor categories. J. Pure Appl. Alg.
+71, 43-51 (1991).
+[131] A. Joyal, R. Street: An introduction to Tannaka duality and quantum groups. In: Proceedings
+of the conference on category theory, Como 1990. Lecture notes in mathematics 1488, 413–
+492 (1991).
+[132] A. Joyal, R. Street: Braided tensor categories. Adv. Math. 102, 20-78 (1993).
+[133] A. Joyal, R. Street: The category of representations of the general linear groups over a ﬁnite
+ﬁeld. J. Alg. 176, 908–946 (1995)
+[134] A. Joyal, R. Street, D. Verity: Traced monoidal categories. Math. Proc. Cambridge Philos.
+Soc. 119, 447–468 (1996).
+[135] M. Karoubi: K-theory. An introduction. Springer Verlag, 1978.
+[136] Y. Kashina, Y. Sommerh¨auser, Y. Zhu: On higher Frobenius-Schur indicators. Mem. Amer.
+Math. Soc. 181 (2006), no. 855.
+[137] C. Kassel: Quantum groups. Springer Verlag, 1995.
+[138] C. Kassel, M. Rosso and V. Turaev: Quantum groups and knot invariants. SMF, 1997.
+[139] C. Kassel, V. G. Turaev: Double construction for monoidal categories. Acta Math. 175, 1-48
+(1995).
+[140] C. Kassel, V. G. Turaev: Chord diagram invariants of tangles and graphs. Duke Math. J. 92,
+497-552 (1998).
+[141] C. Kassel, V. G. Turaev: Braid groups. Springer Verlag, 2008.
+50
+
+
+[142] L. H. Kauﬀman: An invariant of regular isotopy. Trans. Amer. Math. Soc. 318, 417-471
+(1990).
+[143] Y. Kawahigashi, R. Longo, M. M¨uger: Multi-interval subfactors and modularity of represen-
+tations in conformal ﬁeld theory. Comm. Math. Phys. 219, 631-669 (2001).
+[144] D. Kazhdan, G. Lusztig: Tensor structures arising from aﬃne Lie algebras I-IV. J. Amer.
+Math. Soc. 6, 905-947, 949-1011 (1993); 7, 335–381, 383–453. (1994).
+[145] D. Kazhdan and H. Wenzl, Reconstructing tensor categories. Adv. Sov. Math. 16 (1993)
+111–136.
+[146] G. M. Kelly: On Mac Lane’s conditions for coherence of natural associativities, commutativ-
+ities, etc. J. Algebra 1, 397–402 (1964).
+[147] G. M. Kelly: Tensor products in categories. J. Algebra 2, 15–37 (1965).
+[148] G. M. Kelly, M. L. Laplaza: Coherence for compact closed categories. J. Pure Appl. Algebra
+19, 193–213 (1980).
+[149] G. M. Kelly, S. Mac Lane: Coherence in closed categories. J. Pure Appl. Algebra 1, 97–140
+(1971) and erratum on p. 219.
+[150] G. M. Kelly, R. Street: Review of the elements of 2-categories. Lecture Notes in Mathematics
+420, pp. 75-103. Springer Verlag, 1974.
+[151] T. Kerler, V. V. Lyubashenko: Non-semisimple topological quantum ﬁeld theories for 3-
+manifolds with corners. Springer Verlag, 2001.
+[152] A. A. Kirillov Jr. On an inner product in modular tensor categories. J. Amer. Math. Soc.
+9, 1135-1169 (1996). On inner product in modular tensor categories. II. Inner product on
+conformal blocks and aﬃne inner product identities. Adv. Theor. Math. Phys. 2, 155-180
+(1998).
+[153] A. Kirillov Jr.: Modular categories and orbifold models I & II. Comm. Math. Phys. 229,
+309-335 (2002) & math.QA/0110221.
+[154] A. Kirillov Jr.: On G-equivariant modular categories. math.QA/0401119.
+[155] A. Kirillov Jr., V. Ostrik: On q-analog of McKay correspondence and ADE classiﬁcation of
+sl(2) conformal ﬁeld theories. Adv. Math. 171, 183-227 (2002).
+[156] J. Kock: Frobenius algebras and 2D topological quantum ﬁeld theories. Cambridge University
+Press, 2004.
+[157] L. Kong, I. Runkel: Morita classes of algebras in modular tensor categories. Adv. Math.
+219, 1548-1576 (2008). Cardy algebras and sewing constraints. I. Comm. Math. Phys. 292,
+871-912 (2009).
+[158] M. Kre˘ın: A principle of duality for bicompact groups and quadratic block algebras. Doklady
+Akad. Nauk SSSR (N.S.) 69, 725-728 (1949).
+[159] G. Kuperberg: Involutory Hopf algebras and 3-manifold invariants. Intern. J. Math. 2, 41-66
+(1991).
+[160] G. Kuperberg: Spiders for rank 2 Lie algebras. Comm. Math. Phys. 180, 109-151 (1996).
+[161] G. Kuperberg: Finite, connected, semisimple, rigid tensor categories are linear. Math. Res.
+Lett. 10, 411-421 (2003).
+[162] S. Lack: A 2-categories companion. In [13]. (math/0702535)
+[163] A. D. Lauda: Frobenius algebras and ambidextrous adjunctions. Theory Appl. Categ. 16,
+84-122 (2006).
+[164] G. I. Lehrer: A survey of Hecke algebras and the Artin braid groups. In: J. S. Birman, A.
+Libgober (eds.): Braids, Contemp. Math. 78, 365-385 (1988).
+51
+
+
+[165] F. Lesieur: Measured quantum groupoids. M´em. Soc. Math. Fr. (N.S.) 109 (2007). M. Enock:
+Measured quantum groupoids in action. M´em. Soc. Math. Fr. (N.S.) 114 (2008).
+[166] M. Levine: Mixed motives. American Mathematical Society, 1998.
+[167] W. B. R. Lickorish: An introduction to knot theory. Springer Verlag, 1997.
+[168] T. Loke: Operator algebras and conformal ﬁeld theory of the discrete series representations
+of Diﬀ(S1), PhD thesis Cambridge (UK), 1994.
+[169] R. Longo: Index of subfactors and statistics of quantum ﬁelds I & II. Comm. Math. Phys.
+126, 217-247 (1989) & 130, 285-309 (1990).
+[170] R. Longo: A duality for Hopf algebras and for subfactors I. Comm. Math. Phys. 159, 133-150
+(1994).
+[171] R. Longo, K.-H. Rehren: Nets of subfactors. Rev. Math. Phys. 7, 567-597 (1995).
+[172] R. Longo, J. E. Roberts: A theory of dimension. K-Theory 11, 103-159 (1997).
+[173] G. Lusztig: Introduction to Quantum Groups. Birkh¨auser Verlag, 1993.
+[174] V. V. Lyubashenko: Tangles and Hopf algebras in braided categories. J. Pure Appl. Alg. 98,
+245-278 (1995).
+[175] V. V. Lyubashenko: Modular transformations for tensor categories. J. Pure Appl. Alg. 98,
+279-327 (1995).
+[176] G. Mack, V. Schomerus: Quasi Hopf quantum symmetry in quantum theory. Nucl. Phys.
+B370, 185-230 (1992).
+[177] S. Mac Lane: Cohomology theory of abelian groups. Proceedings of the ICM 1950, vol. II, p.
+8-14.
+[178] S. Mac Lane: Natural associativity and commutativity. Rice Univ. Studies 49, 28-46 (1963).
+[179] S. Mac Lane: Categorical algebra. Bull. Amer. Math. Soc. 71, 40-106 (1965).
+[180] S. Mac Lane: Categories for the working mathematician. 2nd ed. Springer Verlag, 1998.
+[181] S. Majid: Representations, duals and quantum doubles of monoidal categories. Rend. Circ.
+Mat. Palermo Suppl. 26, 197-206 (1991).
+[182] S. Majid: Reconstruction theorems and rational conformal ﬁeld theories. Internat. J. Modern
+Phys. A 6, 4359–4374 (1991).
+[183] S. Majid: Foundations of quantum group theory. Cambridge University Press, 1995.
+[184] G. Maltsiniotis: Groupo¨ıdes quantiques. C. R. Acad. Sci. Paris S´er. I Math. 314, 249–252
+(1992).
+[185] G. Maltsiniotis:
+Traces dans les cat´egories mono¨ıdales, dualit´e et cat´egories mono¨ıdales
+ﬁbr¨ees. Cah. Topol. G´eom. Diﬀ. Cat´eg. 36, 195–288 (1995).
+[186] G. Masbaum, J. D. Roberts: A simple proof of integrality of quantum invariants at prime
+roots of unity. Math. Proc. Cambr. Philos. Soc. 121, 443-454 (1997).
+[187] G. Masbaum, H. Wenzl: Integral modular categories and integrality of quantum invariants
+at roots of unity of prime order. J. Reine Angew. Math. 505, 209–235 (1998).
+[188] J. R. McMullen: On the dual object of a compact connected group. Math. Z. 185, 539-552
+(1984).
+[189] G. Moore, N. Seiberg: Classical and quantum conformal ﬁeld theory. Comm. Math. Phys.
+123, 177-254 (1989).
+[190] M. M¨uger: Galois theory for braided tensor categories and the modular closure. Adv. Math.
+150, 151-201 (2000).
+[191] M. M¨uger: From subfactors to categories and topology I. Frobenius algebras in and Morita
+equivalence of tensor categories. J. Pure Appl. Alg. 180, 81-157 (2003).
+52
+
+
+[192] M. M¨uger: From subfactors to categories and topology II. The quantum double of tensor
+categories and subfactors. J. Pure Appl. Alg. 180, 159-219 (2003).
+[193] M. M¨uger, On the structure of modular categories. Proc. Lond. Math. Soc. 87, 291-308
+(2003).
+[194] M. M¨uger: Galois extensions of braided tensor categories and braided crossed G-categories.
+J. Alg. 277, 256-281 (2004).
+[195] M. M¨uger: On the center of a compact group. Intern. Math. Res. Not. 2004:51, 2751-2756
+(2004).
+[196] M. M¨uger: Conformal orbifold theories and braided crossed G-categories. Comm. Math. Phys.
+260, 727-762 (2005).
+[197] M. M¨uger: Abstract duality for symmetric tensor ∗-categories. Appendix to [111], p. 865-922.
+[198] M. M¨uger: On Superselection theory of quantum ﬁelds in low dimensions. Invited lecture at
+the XVIth International Congress on Mathematical Physics. Prague, August 3-8, 2009. To
+appear in the proceedings. (arXiv:0909.2537.)
+[199] M. M¨uger: On the structure of braided crossed G-categories. Appendix to V. Turaev: Ho-
+motopy TQFTs. European Mathematical Society, to appear 2010.
+[200] M. M¨uger, J. E. Roberts, L. Tuset: Representations of algebraic quantum groups and recon-
+struction theorems for tensor categories. Alg. Repres. Theor. 7, 517-573 (2004).
+[201] M. M¨uger, L. Tuset: Monoids, embedding functors and quantum groups. Int. J. Math. 19,
+1-31 (2008).
+[202] M. M¨uger: Isocategorical compact groups. In preparation.
+[203] D. Naidu: Categorical Morita equivalence for group-theoretical categories. Comm. Alg. 35,
+3544-3565 (2007).
+[204] D. Naidu: Crossed pointed categories and their equivariantizations. Preprint, 2009. Available
+from http://www.math.tamu.edu/∼dnaidu/publications.html.
+[205] D. Naidu, D. Nikshych: Lagrangian subcategories and braided tensor equivalences of twisted
+quantum doubles of ﬁnite groups. Comm. Math. Phys. 279, 845-872 (2008).
+[206] D. Naidu, D. Nikshych, S. Witherspoon: Fusion subcategories of representation categories of
+twisted quantum doubles of ﬁnite groups. Int. Math. Res. Not. 22, 4183-4219(2009).
+[207] S. Natale: Frobenius-Schur indicators for a class of fusion categories. Pac. J. Math. 221,
+353-377 (2005).
+[208] S. Natale: On the exponent of tensor categories coming from ﬁnite groups. Israel J. Math.
+162, 253-273 (2007).
+[209] S. Neshveyev, L. Tuset: Notes on the Kazhdan-Lusztig theorem on equivalence of the Drinfeld
+category and the category of Uq(g)-modules. arXiv:0711.4302.
+[210] S.-H. Ng, P. Schauenburg: Frobenius-Schur indicators and exponents of spherical categories.
+Adv. Math. 211, 34–71 (2007).
+[211] S.-H. Ng, P. Schauenburg: Higher Frobenius-Schur Indicators for Pivotal Categories. Con-
+temp. Math. 441, 63-90 (2007).
+[212] S.-H. Ng, P. Schauenburg: Congruence subgroups and generalized Frobenius-Schur indicators.
+arXiv:0806.2493.
+[213] D. Nikshych: On the structure of weak Hopf algebras. Adv. Math. 170, 257-286 (2002).
+[214] D. Nikshych, V. Turaev, L. Vainerman: Invariants of Knots and 3-manifolds from Quantum
+Groupoids. Topol. Appl. 127, 91-123 (2003).
+53
+
+
+[215] D. Nikshych, L. Vainerman: A characterization of depth 2 subfactors of II1 factors. J. Funct.
+Anal. 171, 278-307 (2000). A Galois correspondence for II1 factors and quantum groupoids.
+J. Funct. Anal. 178, 113-142 (2000).
+[216] A. Ocneanu: Quantized groups, string algebras and Galois theory for algebras. In: Operator
+algebras and applications, Vol. 2, pp. 119-172, Cambridge Univ. Press, 1988.
+[217] A. Ocneanu (notes by Y. Kawahigashi): Quantum symmetry, diﬀerential geometry of ﬁnite
+graphs and classiﬁcation of subfactors. Lectures given at Tokyo Univ. 1990.
+[218] A. Ocneanu: An invariant coupling between 3-manifolds and subfactors, with connections to
+topological and conformal quantum ﬁeld theory. Unpublished manuscript. Ca. 1991.
+[219] A. Ocneanu: Chirality for operator algebras. In: H. Araki, Y. Kawahigashi and H. Kosaki
+(eds.): Subfactors. pp 39-63. World Scientiﬁc Publ., 1994.
+[220] A. Ocneanu:
+Operator algebras,
+topology and subgroups of quantum symmetry—
+construction of subgroups of quantum groups. In: Taniguchi Conference on Mathematics
+Nara 1998, 235–263, Adv. Stud. Pure Math., 31, Math. Soc. Japan, Tokyo, 2001.
+[221] A. Ocneanu: The classiﬁcation of subgroups of quantum SU(N). In: Quantum symmetries in
+theoretical physics and mathematics (Bariloche, 2000), 133–159, Contemp. Math. 294, 2002.
+[222] V. Ostrik: Module categories, weak Hopf algebras and modular invariants. Transf. Groups 8,
+177-206 (2003).
+[223] V. Ostrik: Module categories over the Drinfeld double of a ﬁnite group. Int. Math. Res. Not.
+2003:27, 1507–1520
+[224] V. Ostrik: Fusion categories of rank 2. Math. Res. Lett. 10, 177-183 (2003).
+[225] V. Ostrik: Pre-modular categories of rank 3. Moscow Math. J. 8, 111-118 (2008).
+[226] F. Panaite, F. Van Oystaeyen: Quasi-Hopf algebras and the centre of a tensor category. In:
+S. Caenepeel et al. (eds.): Hopf algebras and quantum groups. Lect. Notes Pure Appl. Math.
+209, 221-235 (2000).
+[227] B. Pareigis: On braiding and dyslexia. J. Algebra 171, 413-425 (1995).
+[228] C. Pinzari: The representation category of the Woronowicz quantum group SU(d) as a
+braided tensor C∗-category. Int. J. Math. 18, 113-136 (2007).
+[229] S. Popa, D. Shlyakhtenko: Universal properties of L(F∞) in subfactor theory. Acta Math.
+191, 225-257 (2003).
+[230] M. van der Put, M. F. Singer: Galois theory of linear diﬀerential equations. Springer Verlag,
+2003.
+[231] F. Quinn: Lectures on axiomatic topological quantum ﬁeld theory. In: D. S. Freed and K. K.
+Uhlenbeck (eds.): Geometry and quantum ﬁeld theory. IAS/Park City Mathematics Series,
+1. American Mathematical Society, 1995.
+[232] K.-H. Rehren: Braid group statistics and their superselection rules. In: D. Kastler (ed.): The
+algebraic theory of superselection sectors. Introduction and recent results. World Scientiﬁc,
+1990.
+[233] K.-H. Rehren: Locality and modular invariance in 2D conformal QFT. Fields Inst. Commun.
+20, 297-319 (2001).
+[234] N. Yu. Reshetikhin, V. G. Turaev: Ribbon graphs and their invariants derived from quantum
+groups. Comm. Math. Phys. 127, 1–26 (1990).
+[235] N. Yu. Reshetikhin, V. G. Turaev: Invariants of 3-manifolds via link polynomials and quan-
+tum groups. Invent. Math. 103, 547-598 (1991).
+[236] E. Rowell: On a family of non-unitarizable ribbon categories. Math. Z. 250, 745-774 (2005).
+54
+
+
+[237] E. Rowell, R. Stong, Z. Wang: On classiﬁcation of modular tensor categories. Comm. Math.
+Phys. 292, 343-389 (2009).
+[238] N. Saaveda Rivano: Cat´egories Tannakiennes. Springer Verlag, 1972.
+[239] P. Schauenburg: Tannaka duality for arbitrary Hopf algebras. Algebra Berichte, 66. Verlag
+Reinhard Fischer, Munich, 1992.
+[240] P. Schauenburg: The monoidal center construction and bimodules. J. Pure Appl. Alg. 158,
+325-346 (2001).
+[241] P. Schauenburg: Turning monoidal categories into strict ones. New York J. Math. 7, 257-265
+(2001).
+[242] J.-P. Serre: Complex Semisimple Lie Algebras. Springer, 1987.
+[243] M. C. Shum: Tortile tensor categories. J. Pure Appl. Alg. 93, 57-110 (1994).
+[244] J. Siehler: Near-group categories. Algebr. Geom. Topol. 3, 719-775 (2003).
+[245] Sinh Hong Xuan: Gr-Cat´egories. PhD thesis Universit´Paris VII, 1975.
+[246] Y. Soibelman: Meromorphic tensor categories, quantum aﬃne and chiral algebras I. Contemp.
+Math. 248, 437-451 (1998).
+[247] Y. Sommerh¨auser, Y. Zhu: Hopf algebras and congruence subgroups. arXiv:0710.0705
+[248] C. Soul´e: Les vari´et´es sur le corps `a un ´el´ement. Mosc. Math. J. 4, 217-244 (2004).
+[249] D. S¸tefan: The set of types of n-dimensional semisimple and cosemisimple Hopf algebras is
+ﬁnite. J. Alg. 193, 571-580 (1997).
+[250] R. Street: The quantum double and related constructions. J. Pure Appl. Alg. 132, 195-206
+(1998).
+[251] R. Street: The monoidal centre as a limit. Theory Appl. Categ. 13, 184-190 (2004).
+[252] K. Szlach´anyi: Finite quantum groupoids and inclusions of ﬁnite type. In: R. Longo (ed.):
+Mathematical Physics in Mathematics and Physics: Quantum and Operator Algebraic As-
+pects. Fields Inst. Commun. 20, 297-319 (2001).
+[253] D. Tambara: A duality for modules over monoidal categories of representations of semisimple
+Hopf algebras. J. Algebra 241, 515-547 (2001).
+[254] D. Tambara, S. Yamagami: Tensor categories with fusion rules of self-duality for ﬁnite abelian
+groups. J. Alg. 209, 692-707 (1998).
+[255] T. Tannaka: ¨Uber den Dualit¨atssatz der nichtkommutativen topologischen Gruppen. Tˆohoku
+Math. Journ. 45, 1–12 (1939).
+[256] V. Toledano Laredo: Positive energy representations of the loop groups of non-simply con-
+nected Lie groups. Comm. Math. Phys. 207, 307-339 (1999).
+[257] V. Toledano Laredo: Quasi-Coxeter algebras, Dynkin diagram cohomology, and quantum
+Weyl groups. Int. Math. Res. Pap. IMRP 2008, Art. ID rpn009, 167 pp.
+[258] T. tom Dieck: Categories of rooted cylinder ribbons and their representations. J. Reine
+Angew. Math. 494, 35-63 (1998). T. tom Dieck, Tammo; R. H¨aring-Oldenburg: Quantum
+groups and cylinder braiding. Forum Math. 10, 619-639 (1998).
+[259] I. Tuba, H. Wenzl: Hans On braided tensor categories of type BCD. J. Reine Angew. Math.
+581, 31-69 (2005).
+[260] V. G. Turaev: Operator invariants of tangles, and R-matrices. Math. USSR-Izv. 35, 411–444
+(1990).
+[261] V. G. Turaev: Modular categories and 3-manifold invariants. Int. J. Mod. Phys. B6, 1807-
+1824 (1992).
+[262] V. G. Turaev: Quantum invariants of knots and 3-manifolds. Walter de Gruyter, 1994.
+55
+
+
+[263] V. G. Turaev:
+Homotopy ﬁeld theory in dimension 3 and crossed group-categories.
+math.GT/0005291.
+[264] V. G. Turaev: Homotopy TQFTs. Birkh¨auser Verlag, 2010.
+[265] V. G. Turaev, O. Viro: State sum invariants of 3-manifolds and quantum 6j-symbols. Topol-
+ogy 31, 865-902 (1992).
+[266] V. G. Turaev, H. Wenzl: Quantum invariants of 3-manifolds associated with classical simple
+Lie algebras. Intern. Journ. Math. 4, 323-358 (1993).
+[267] V. G. Turaev, H. Wenzl: Semisimple and modular categories from link invariants. Math.
+Ann. 309, 411-461 (1997).
+[268] K.-H. Ulbrich: On Hopf algebras and rigid monoidal categories. Israel J. Math. 72, 252–256
+(1990)
+[269] A. Van Daele: Multiplier Hopf algebras. Trans. Amer. Math. Soc. 342, 917-932 (1994).
+[270] A. Van Daele: An algebraic framework for group duality. Adv. Math. 140, 323-366 (1998).
+[271] E. Vasselli: Bundles of C∗-categories. J. Funct. Anal. 247, 351-377 (2007).
+[272] E. Vasselli: Group bundle duality, invariants for certain C∗-algebras, and twisted equivariant
+K-theory. In: D. Burghelea, R. Melrose, A. S. Mishchenko, E. V. Troitsky (eds.): C∗-Algebras
+and elliptic theory II, pp. 281-295, Birkh¨auser Verlag, 2008.
+[273] P. Vogel: Algebraic structure on modules of diagrams. Preprint 1997.
+[274] Z. Wang: Topological quantum computation. American Mathematical Society, 2010.
+[275] A. Wassermann: Operator algebras and conformal ﬁeld theory III. Fusion of positive energy
+representations of SU(N) using bounded operators. Invent. Math. 133, 467–538 (1998).
+[276] H. Wenzl: C∗-Tensor categories from quantum groups. J. Amer. Math. Soc. 11, 261-282
+(1998).
+[277] H. Wenzl: On tensor categories of Lie type EN, N ̸= 9. Adv. Math. 177, 66-104 (2003).
+[278] N. J. Wildberger: Finite commutative hypergroups and applications from group theory to
+conformal ﬁeld theory. Contemp. Math. 183, 413-434 (1995). (Proceedings volume of the
+conference Applications of hypergroups and related measure algebras, Seattle, 1993.
+[279] S. L. Woronowicz: Compact matrix pseudogroups. Comm. Math. Phys. 111, 613-665 (1987).
+[280] S. L. Woronowicz, Tannaka-Krein duality for compact matrix pseudogroups. Twisted SU(N)
+groups. Invent. Math. 93 (1988) 35–76.
+[281] S. L. Woronowicz: Compact quantum groups. In: A. Connes, K. Gawedzki, J. Zinn-Justin
+(eds.): Sym´etries quantiques. North-Holland, Amsterdam, 1998.
+[282] F. Xu: New braided endomorphisms from conformal inclusions. Comm. Math. Phys. 192,
+349-403 (1998).
+[283] F. Xu: Some computations in the cyclic permutations of completely rational nets. Comm.
+Math. Phys. 267, 757-782 (2006).
+[284] S. Yamagami: C∗-tensor categories and free product bimodules. J. Funct. Anal. 197, 323-346
+(2003).
+[285] S. Yamagami: Frobenius algebras in tensor categories and bimodule extensions. In:
+G.
+Janelidze, B. Pareigis, W. Tholen (eds.): Galois theory, Hopf algebras, and semiabelian cat-
+egories. Fields Inst. Commun. 43, 551-570 (2004).
+[286] S. Yamagami: Frobenius duality in C∗-tensor categories. J. Oper. Th. 52, 3-20 (2004).
+[287] D. N. Yetter: Markov algebras. In: J. S. Birman, A. Libgober (eds.): Braids. Contemp. Math.
+78, 705-730 (1988).
+56
+
+
+[288] D. N. Yetter: Quantum groups and representations of monoidal categories. Math. Proc.
+Cambridge Philos. Soc. 108, 261-290 (1990).
+[289] D. N. Yetter: Framed tangles and a theorem of Deligne on braided deformations of tannakian
+categories. Contemp. Math. 134, 325-350 (1992).
+[290] D. N. Yetter: Functorial knot theory. Categories of tangles, coherence, categorical deforma-
+tions, and topological invariants. World Scientiﬁc, 2001.
+[291] P. Zito: 2-C∗-categories with non-simple units. Adv. Math. 210, 122-164 (2007).
+57

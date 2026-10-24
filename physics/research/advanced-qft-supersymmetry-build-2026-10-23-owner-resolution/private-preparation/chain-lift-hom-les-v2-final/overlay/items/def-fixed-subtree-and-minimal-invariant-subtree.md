@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-fixed-subtree-and-minimal-invariant-subtree.md

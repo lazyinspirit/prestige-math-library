@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-binomial-coefficient-with-top-below-a-prime-is-nonzero-modulo-that-prime.md

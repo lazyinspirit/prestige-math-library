@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-schauder-scaling-on-a-quadratic-poisson-solution.md

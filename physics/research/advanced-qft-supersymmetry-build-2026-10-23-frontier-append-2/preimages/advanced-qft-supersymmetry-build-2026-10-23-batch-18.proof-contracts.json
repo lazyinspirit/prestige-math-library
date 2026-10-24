@@ -1,0 +1,781 @@
+{
+  "version": 1,
+  "scope": [
+    "def-aqft-scattering-amplitude-input",
+    "lem-aqft-crossing-even-forward-amplitude",
+    "thm-aqft-gapped-scalar-forward-positivity",
+    "def-aqft-truncated-amplitude-bootstrap-problem",
+    "prop-aqft-finite-truncated-bootstrap-constraints",
+    "ex-aqft-scalar-positivity-bound",
+    "prop-aqft-quartic-contact-jet-matching"
+  ],
+  "contracts": {
+    "def-aqft-scattering-amplitude-input": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "definition: the finite pole list may be empty, giving P=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "definition: the nonnegative density may vanish identically and then the required weighted integral is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The data package has no distinguished parameter whose value one is a boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis m>0 excludes a zero-mass or zero-gap degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "definition: the threshold endpoints are excluded from the open analytic domain and the specified endpoint caps vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "definition: the pole list is a fixed finite list and may be empty; no selection from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines amplitude data and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines amplitude data and asserts no equivalence."
+        }
+      ]
+    },
+    "lem-aqft-crossing-even-forward-amplitude": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-scattering-amplitude-input",
+          "source_section": "Definition",
+          "quote": "Use natural units $c=\\hbar=1$ and metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. An external scalar datum consists of a spin-zero species assigned a mass $m>0$ and elastic two-particle threshold $s=4m^2$. This is a mathematical input package; it does not construct a one-particle scattering state or a scattering matrix. For real on-shell momenta $p_1,p_2$ incoming and $p_3,p_4$ outgoing, with $p_j^2=-m^2$ and $p_1+p_2=p_3+p_4$, define\n\n$$s=-(p_1+p_2)^2,\\qquad t=-(p_1-p_3)^2,\\qquad u=-(p_1-p_4)^2.$$\n\nThen $s+t+u=4m^2$. The forward slice is the complex-valued function $A(s)=\\mathcal A(s,0,4m^2-s)$ obtained by analytically continuing the identical-scalar $2\\to2$ amplitude to $t=0$. The crossing action on this slice is $s\\mapsto4m^2-s$, which exchanges $s$ and $u$. Assume $A(s)=A(4m^2-s)$ wherever both sides are defined.\n\nFor context, when a full $t$-dependent amplitude is supplied, use the partial-wave normalization\n\n$$\\mathcal A(s,t,u)=16\\pi\\sqrt{\\frac{s}{s-4m^2}}\\sum_{\\ell=0}^{\\infty}(2\\ell+1)P_\\ell\\!\\left(1+\\frac{2t}{s-4m^2}\\right)a_\\ell(s),\\qquad P_\\ell(1)=1,$$\n\nwhere $\\ell$ is a nonnegative integer and $P_\\ell$ is the Legendre polynomial. The forward result below uses only the optical-theorem sign $\\operatorname{Im}A(s+i0)\\ge0$ for $s>4m^2$; a full partial-wave realization is not inferred from this definition. In the displayed normalization, this sign follows when the forward partial-wave sum converges and the supplied partial waves obey $\\operatorname{Im}a_\\ell(s)\\ge|a_\\ell(s)|^2\\ge0$.\n\nPut $\\nu_0=2m^2$ and $v=s-2m^2$, so $u-2m^2=-v$. Choose finitely many real numbers $p_j\\in(0,4m^2)\\setminus\\{2m^2\\}$ and real residues $r_j$, and set\n\n$$P(s)=\\sum_j\\left(\\frac{r_j}{s-p_j}+\\frac{r_j}{4m^2-p_j-s}\\right).$$\n\nEach summand pair is the real simple-pole principal part at $s=p_j$ and its $s\\leftrightarrow u$ crossing partner; hence $P(4m^2-s)=P(s)$. These poles lie off the two-particle cuts. Define the pole-subtracted forward function $B(v)=A(2m^2+v)-P(2m^2+v)$. Assume $B$ is holomorphic on\n\n$$\\Omega_{\\nu_0}=\\mathbb C\\setminus\\bigl((-\\infty,-\\nu_0]\\cup[\\nu_0,\\infty)\\bigr),$$\n\nreal analytic there, meaning $B(\\overline v)=\\overline{B(v)}$, and has finite upper and lower boundary values on both cuts except at their endpoints. Here the two-particle gap is the open interval $(-\\nu_0,\\nu_0)$ in the $v$ variable; no massless pole or cut reaches the forward point $t=0$.\n\nRequire additionally that $B$ extends continuously from each open half-plane onto every compact segment of either real cut bank avoiding $\\pm\\nu_0$. This is an extra admissibility assumption on the supplied data, not a consequence of finite pointwise boundary values or a claim about every quantum field theory. \n\nAssume the exact high-energy condition $B(w)=o(|w|^2)$ uniformly as $|w|\\to\\infty$ in the closed upper half-plane, including upper cut-bank limits. In particular this holds on the large upper semicircles after any fixed bounded horizontal translation. For $\\nu\\ge\\nu_0$, define the absorptive density $\\rho(\\nu)=\\operatorname{Im}B(\\nu+i0)$. Require $\\rho$ to be nonnegative and Riemann integrable on every compact subinterval of $[\\nu_0,\\infty)$, and require $\\int_{\\nu_0}^{\\infty}\\rho(\\nu)\\nu^{-3}\\,d\\nu$ to converge as a finite improper Riemann integral. For every real $v$ with $|v|<\\nu_0$, require the integrals along both sides of the two cuts of $[B(x)-B(0)]/[x^2(x-v)]$, with boundary values taken from the upper and lower half-planes, to exist as finite improper Riemann limits. Require also that the small endpoint arcs at $\\pm\\nu_0$ for this integrand vanish in the contour limit. Since $P$ is real off its poles, $\\rho(\\nu)=\\operatorname{Im}A(2m^2+\\nu+i0)$ for $\\nu>\\nu_0$ on the right cut.\n\nThe normalized forward Taylor coefficients are $c_n=B^{(2n)}(0)/(2n)!$ for integers $n\\ge1$. They have units $(\\text{mass})^{-4n}$; $\\nu_0$ has units $(\\text{mass})^2$. No sign is assigned here to a generic off-shell Lagrangian coefficient.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "substitute-crossed-forward-variable",
+          "step": "1.1",
+          "claim": "Substitute s=2m^2+v and use the crossing equalities for A and P to obtain B(v)=B(-v).",
+          "inputs": [
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "differentiate-evenness-at-origin",
+          "step": "2.1",
+          "claim": "Differentiate the evenness identity at the origin and divide by the nonzero scalar 2.",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: the argument permits an empty pole sum P=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: the derivative at the subtraction point is exactly zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinguished parameter with value one occurs in the crossing identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes m>0 and does not take a zero-gap limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: the identity is asserted wherever both crossed values are defined, including the subtraction point under its neighborhood hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: one arbitrary admissible v is handled by direct substitution, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way implication."
+        }
+      ]
+    },
+    "thm-aqft-gapped-scalar-forward-positivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-scattering-amplitude-input",
+          "source_section": "Definition",
+          "quote": "Use natural units $c=\\hbar=1$ and metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. An external scalar datum consists of a spin-zero species assigned a mass $m>0$ and elastic two-particle threshold $s=4m^2$. This is a mathematical input package; it does not construct a one-particle scattering state or a scattering matrix. For real on-shell momenta $p_1,p_2$ incoming and $p_3,p_4$ outgoing, with $p_j^2=-m^2$ and $p_1+p_2=p_3+p_4$, define\n\n$$s=-(p_1+p_2)^2,\\qquad t=-(p_1-p_3)^2,\\qquad u=-(p_1-p_4)^2.$$\n\nThen $s+t+u=4m^2$. The forward slice is the complex-valued function $A(s)=\\mathcal A(s,0,4m^2-s)$ obtained by analytically continuing the identical-scalar $2\\to2$ amplitude to $t=0$. The crossing action on this slice is $s\\mapsto4m^2-s$, which exchanges $s$ and $u$. Assume $A(s)=A(4m^2-s)$ wherever both sides are defined.\n\nFor context, when a full $t$-dependent amplitude is supplied, use the partial-wave normalization\n\n$$\\mathcal A(s,t,u)=16\\pi\\sqrt{\\frac{s}{s-4m^2}}\\sum_{\\ell=0}^{\\infty}(2\\ell+1)P_\\ell\\!\\left(1+\\frac{2t}{s-4m^2}\\right)a_\\ell(s),\\qquad P_\\ell(1)=1,$$\n\nwhere $\\ell$ is a nonnegative integer and $P_\\ell$ is the Legendre polynomial. The forward result below uses only the optical-theorem sign $\\operatorname{Im}A(s+i0)\\ge0$ for $s>4m^2$; a full partial-wave realization is not inferred from this definition. In the displayed normalization, this sign follows when the forward partial-wave sum converges and the supplied partial waves obey $\\operatorname{Im}a_\\ell(s)\\ge|a_\\ell(s)|^2\\ge0$.\n\nPut $\\nu_0=2m^2$ and $v=s-2m^2$, so $u-2m^2=-v$. Choose finitely many real numbers $p_j\\in(0,4m^2)\\setminus\\{2m^2\\}$ and real residues $r_j$, and set\n\n$$P(s)=\\sum_j\\left(\\frac{r_j}{s-p_j}+\\frac{r_j}{4m^2-p_j-s}\\right).$$\n\nEach summand pair is the real simple-pole principal part at $s=p_j$ and its $s\\leftrightarrow u$ crossing partner; hence $P(4m^2-s)=P(s)$. These poles lie off the two-particle cuts. Define the pole-subtracted forward function $B(v)=A(2m^2+v)-P(2m^2+v)$. Assume $B$ is holomorphic on\n\n$$\\Omega_{\\nu_0}=\\mathbb C\\setminus\\bigl((-\\infty,-\\nu_0]\\cup[\\nu_0,\\infty)\\bigr),$$\n\nreal analytic there, meaning $B(\\overline v)=\\overline{B(v)}$, and has finite upper and lower boundary values on both cuts except at their endpoints. Here the two-particle gap is the open interval $(-\\nu_0,\\nu_0)$ in the $v$ variable; no massless pole or cut reaches the forward point $t=0$.\n\nRequire additionally that $B$ extends continuously from each open half-plane onto every compact segment of either real cut bank avoiding $\\pm\\nu_0$. This is an extra admissibility assumption on the supplied data, not a consequence of finite pointwise boundary values or a claim about every quantum field theory. \n\nAssume the exact high-energy condition $B(w)=o(|w|^2)$ uniformly as $|w|\\to\\infty$ in the closed upper half-plane, including upper cut-bank limits. In particular this holds on the large upper semicircles after any fixed bounded horizontal translation. For $\\nu\\ge\\nu_0$, define the absorptive density $\\rho(\\nu)=\\operatorname{Im}B(\\nu+i0)$. Require $\\rho$ to be nonnegative and Riemann integrable on every compact subinterval of $[\\nu_0,\\infty)$, and require $\\int_{\\nu_0}^{\\infty}\\rho(\\nu)\\nu^{-3}\\,d\\nu$ to converge as a finite improper Riemann integral. For every real $v$ with $|v|<\\nu_0$, require the integrals along both sides of the two cuts of $[B(x)-B(0)]/[x^2(x-v)]$, with boundary values taken from the upper and lower half-planes, to exist as finite improper Riemann limits. Require also that the small endpoint arcs at $\\pm\\nu_0$ for this integrand vanish in the contour limit. Since $P$ is real off its poles, $\\rho(\\nu)=\\operatorname{Im}A(2m^2+\\nu+i0)$ for $\\nu>\\nu_0$ on the right cut.\n\nThe normalized forward Taylor coefficients are $c_n=B^{(2n)}(0)/(2n)!$ for integers $n\\ge1$. They have units $(\\text{mass})^{-4n}$; $\\nu_0$ has units $(\\text{mass})^2$. No sign is assigned here to a generic off-shell Lagrangian coefficient.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-aqft-crossing-even-forward-amplitude",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, let $A(s)$ be the forward slice of identical-scalar amplitude data satisfying $A(s)=A(4m^2-s)$, and let $P(s)$ be a finite sum of isolated simple real pole principal parts in $0<s<4m^2$ and their $s\\leftrightarrow u$ crossing partners, satisfying $P(s)=P(4m^2-s)$. Put $B(v)=A(2m^2+v)-P(2m^2+v)$ wherever these expressions are defined. Then $B(-v)=B(v)$. If $B$ is complex differentiable in a neighbourhood of $v=0$, then $B'(0)=0$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-integral-formula-circle",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $R>0$, and let $f$ be holomorphic on the disc\n\n$$D(a,R)=\\{\\zeta\\in\\mathbb C:|\\zeta-a|<R\\}.$$\n\nIf $0<r<R$, $|z-a|<r$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$, then\n\n$$f(z)=\\frac{1}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{\\zeta-z}\\,d\\zeta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cauchy-difference-quotient-exceptional-extension",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $f:U\\to\\mathbb C$ be holomorphic, and fix $z\\in U$. Define\n\n$$g(\\zeta)=\\begin{cases}\\dfrac{f(\\zeta)-f(z)}{\\zeta-z},&\\zeta\\ne z,\\\\[6pt]f'(z),&\\zeta=z.\\end{cases}$$\n\nThen $g$ is continuous on $U$ and holomorphic on $U\\setminus\\{z\\}$. No holomorphy at the filled point $z$ is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped, let $p\\in U$, and let $f:U\\to\\mathbb C$ be continuous and holomorphic on $U\\setminus\\{p\\}$. Then $f$ has a primitive on $U$, and for every closed rectifiable contour $\\gamma$ in $U$,\n\n$$\\int_\\gamma f(z)\\,dz=0.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-star-shaped-open-subset-of-rn",
+          "source_section": "Definition",
+          "quote": "A nonempty open set $U\\subseteq\\mathbb R^n$ is **star-shaped with respect to** $a\\in U$ when\n\n$$a+t(x-a)\\in U\\qquad\\text{for every }x\\in U\\text{ and }0\\le t\\le1.$$\n\nThe point $a$ is a **star centre**. Every convex open set of [[def-convex-subset-of-euclidean-space]] is star-shaped with respect to each of its points. The nonemptiness and the chosen centre are part of the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-improper-integral-at-infinity",
+          "source_section": "Statement",
+          "quote": "Let $f$ be Riemann integrable on every compact interval $[a,R]$ with $R>a$. The improper integral over the right-unbounded interval is\n$$\\int_a^\\infty f(x)\\,dx:=\\lim_{R\\to\\infty}\\int_a^R f(x)\\,dx,$$\nprovided this limit exists as a finite real number. In that case the improper integral **converges**; otherwise it diverges. In particular, a limit of $+\\infty$ or $-\\infty$ is divergence, not convergence to an extended-real value.\n\nIf $f$ is Riemann integrable on every $[R,b]$ with $R<b$, define\n$$\\int_{-\\infty}^b f(x)\\,dx:=\\lim_{R\\to-\\infty}\\int_R^b f(x)\\,dx$$\nunder the same finite-limit convention. All finite integrals use the oriented convention.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-improper-integrals",
+          "source_section": "Statement",
+          "quote": "If the improper integrals of $f$ and $g$ converge over the same one-ended interval and $r,s\\in\\mathbb R$, then\n$$\\int(rf+sg)=r\\int f+s\\int g.$$\nThe same formula holds for mixed improper integrals when every singular-end piece of both integrals converges separately.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n(The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\nFALSE: a nonnegative Riemann integrable function on $[a,b]$ with $\\int_a^b f = 0$ is identically zero on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is A continuous $f \\ge 0$ on $[a,b]$ with $\\int_a^b f = 0$ is identically $0$\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$, $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-comparison-test-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Suppose $0\\le f\\le g$ eventually toward a singular end. If the improper integral of $g$ converges there, then the integral of $f$ converges. If instead $|f|\\le g$ eventually and $\\int g$ converges, then $\\int f$ converges absolutely and hence converges.\n\nThe same assertions hold separately at $+\\infty$, at $-\\infty$, and at either finite singular endpoint.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "analytic-even-taylor-factor",
+          "step": "1.1",
+          "claim": "Use Cauchy’s formula and evenness to construct the holomorphic quotient H at the origin.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "shifted-half-plane-contour",
+          "step": "1.2",
+          "claim": "Construct the upper contour with fixed threshold semicircle detours before the shifted boundary limit.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "contour-kernel-cancellation",
+          "step": "2.1",
+          "claim": "Apply the exceptional-point Cauchy theorem; threshold detours preserve the zero integral of 1/(z-v).",
+          "inputs": [
+            "step 1.2",
+            "F5"
+          ]
+        },
+        {
+          "id": "boundary-principal-value",
+          "step": "3.1",
+          "claim": "Use continuous-bank uniform convergence on the fixed compact detoured contour with explicit error bounds; take imaginary parts before shrinking threshold arcs so gap integrals vanish; use existing cut convergence and outer/small-circle sup bounds.",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "crossing-combine-two-cuts",
+          "step": "4.1",
+          "claim": "Use evenness and real analyticity to convert the left-cut imaginary part and combine both cuts into the twice-subtracted representation.",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F2",
+            "F7",
+            "F10"
+          ]
+        },
+        {
+          "id": "moment-coefficient-identification",
+          "step": "5.1",
+          "claim": "Expand the positive kernel with a uniform geometric remainder and identify each coefficient with the Taylor coefficient of B.",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "nonnegative-moment-conclusion",
+          "step": "6.1",
+          "claim": "Use finite-interval nonnegativity and comparison with the finite base moment to pass to a nonnegative improper moment.",
+          "inputs": [
+            "F1",
+            "F9",
+            "F10",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The formula is stated only for integers n>=1 and asserts no empty-index coefficient."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 6.1: if rho vanishes, every moment and coefficient in the conclusion is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1: n=1 is the first coefficient and its integral is finite under the base weighted-integral hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "m>0 is required, so the zero-mass limit is outside the theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 4.1 and 5.1: the threshold caps vanish, the density is locally integrable at threshold, and the infinite tail is comparison-bounded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1: an arbitrary n and each fixed gap point are treated directly; the contour parameters are fixed real numbers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a forward implication from the data assumptions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem makes no converse claim."
+        }
+      ]
+    },
+    "def-aqft-truncated-amplitude-bootstrap-problem": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "definition: N>=1 forces b_0 and b_1 to be present, and the r=0 constraints occur; no empty truncation is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "definition: the zero coefficient vector satisfies each homogeneous quadratic inequality with equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "definition: at N=1 only r=0 occurs in all three constraint families."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "definition: r=0 is included and each associated quadratic form is one-dimensional."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "definition: every displayed index bound keeps all b-indexes between 0 and N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "definition: each constraint quantifies over every finite real vector a."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The feasible set is defined by inequalities and no equivalence is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The feasible set is defined by inequalities and no equivalence is stated."
+        }
+      ]
+    },
+    "prop-aqft-finite-truncated-bootstrap-constraints": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-scattering-amplitude-input",
+          "source_section": "Definition",
+          "quote": "Use natural units $c=\\hbar=1$ and metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. An external scalar datum consists of a spin-zero species assigned a mass $m>0$ and elastic two-particle threshold $s=4m^2$. This is a mathematical input package; it does not construct a one-particle scattering state or a scattering matrix. For real on-shell momenta $p_1,p_2$ incoming and $p_3,p_4$ outgoing, with $p_j^2=-m^2$ and $p_1+p_2=p_3+p_4$, define\n\n$$s=-(p_1+p_2)^2,\\qquad t=-(p_1-p_3)^2,\\qquad u=-(p_1-p_4)^2.$$\n\nThen $s+t+u=4m^2$. The forward slice is the complex-valued function $A(s)=\\mathcal A(s,0,4m^2-s)$ obtained by analytically continuing the identical-scalar $2\\to2$ amplitude to $t=0$. The crossing action on this slice is $s\\mapsto4m^2-s$, which exchanges $s$ and $u$. Assume $A(s)=A(4m^2-s)$ wherever both sides are defined.\n\nFor context, when a full $t$-dependent amplitude is supplied, use the partial-wave normalization\n\n$$\\mathcal A(s,t,u)=16\\pi\\sqrt{\\frac{s}{s-4m^2}}\\sum_{\\ell=0}^{\\infty}(2\\ell+1)P_\\ell\\!\\left(1+\\frac{2t}{s-4m^2}\\right)a_\\ell(s),\\qquad P_\\ell(1)=1,$$\n\nwhere $\\ell$ is a nonnegative integer and $P_\\ell$ is the Legendre polynomial. The forward result below uses only the optical-theorem sign $\\operatorname{Im}A(s+i0)\\ge0$ for $s>4m^2$; a full partial-wave realization is not inferred from this definition. In the displayed normalization, this sign follows when the forward partial-wave sum converges and the supplied partial waves obey $\\operatorname{Im}a_\\ell(s)\\ge|a_\\ell(s)|^2\\ge0$.\n\nPut $\\nu_0=2m^2$ and $v=s-2m^2$, so $u-2m^2=-v$. Choose finitely many real numbers $p_j\\in(0,4m^2)\\setminus\\{2m^2\\}$ and real residues $r_j$, and set\n\n$$P(s)=\\sum_j\\left(\\frac{r_j}{s-p_j}+\\frac{r_j}{4m^2-p_j-s}\\right).$$\n\nEach summand pair is the real simple-pole principal part at $s=p_j$ and its $s\\leftrightarrow u$ crossing partner; hence $P(4m^2-s)=P(s)$. These poles lie off the two-particle cuts. Define the pole-subtracted forward function $B(v)=A(2m^2+v)-P(2m^2+v)$. Assume $B$ is holomorphic on\n\n$$\\Omega_{\\nu_0}=\\mathbb C\\setminus\\bigl((-\\infty,-\\nu_0]\\cup[\\nu_0,\\infty)\\bigr),$$\n\nreal analytic there, meaning $B(\\overline v)=\\overline{B(v)}$, and has finite upper and lower boundary values on both cuts except at their endpoints. Here the two-particle gap is the open interval $(-\\nu_0,\\nu_0)$ in the $v$ variable; no massless pole or cut reaches the forward point $t=0$.\n\nRequire additionally that $B$ extends continuously from each open half-plane onto every compact segment of either real cut bank avoiding $\\pm\\nu_0$. This is an extra admissibility assumption on the supplied data, not a consequence of finite pointwise boundary values or a claim about every quantum field theory. \n\nAssume the exact high-energy condition $B(w)=o(|w|^2)$ uniformly as $|w|\\to\\infty$ in the closed upper half-plane, including upper cut-bank limits. In particular this holds on the large upper semicircles after any fixed bounded horizontal translation. For $\\nu\\ge\\nu_0$, define the absorptive density $\\rho(\\nu)=\\operatorname{Im}B(\\nu+i0)$. Require $\\rho$ to be nonnegative and Riemann integrable on every compact subinterval of $[\\nu_0,\\infty)$, and require $\\int_{\\nu_0}^{\\infty}\\rho(\\nu)\\nu^{-3}\\,d\\nu$ to converge as a finite improper Riemann integral. For every real $v$ with $|v|<\\nu_0$, require the integrals along both sides of the two cuts of $[B(x)-B(0)]/[x^2(x-v)]$, with boundary values taken from the upper and lower half-planes, to exist as finite improper Riemann limits. Require also that the small endpoint arcs at $\\pm\\nu_0$ for this integrand vanish in the contour limit. Since $P$ is real off its poles, $\\rho(\\nu)=\\operatorname{Im}A(2m^2+\\nu+i0)$ for $\\nu>\\nu_0$ on the right cut.\n\nThe normalized forward Taylor coefficients are $c_n=B^{(2n)}(0)/(2n)!$ for integers $n\\ge1$. They have units $(\\text{mass})^{-4n}$; $\\nu_0$ has units $(\\text{mass})^2$. No sign is assigned here to a generic off-shell Lagrangian coefficient.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-aqft-truncated-amplitude-bootstrap-problem",
+          "source_section": "Definition",
+          "quote": "Let $B(v)$ and the positive gap scale $\\nu_0$ be the pole-subtracted forward-amplitude data with $B$ even and holomorphic near $v=0$. Fix an integer truncation order $N\\ge1$. For $n\\ge1$ define the Taylor coefficient $c_n=B^{(2n)}(0)/(2n)!$ and the dimensionless forward on-shell coefficient $b_k=\\nu_0^{2k+2}c_{k+1}$ for $0\\le k\\le N$. Since $v$ and $\\nu_0$ have units $(\\text{mass})^2$, $c_n$ has units $(\\text{mass})^{-4n}$ and $b_k$ is dimensionless. Here “Wilson coefficient” refers only to this normalized on-shell amplitude coordinate; it does not identify a generic coefficient of an off-shell Lagrangian operator basis.\n\nFor each integer $r\\ge0$ with $2r\\le N$, form the quadratic constraint\n\n$$\\sum_{i,j=0}^{r}a_i a_j b_{i+j}\\ge0\\qquad\\text{for every }(a_0,\\ldots,a_r)\\in\\mathbb R^{r+1}.$$\n\nFor each integer $r\\ge0$ with $2r+1\\le N$, form the two additional quadratic constraints\n\n$$\\sum_{i,j=0}^{r}a_i a_j b_{i+j+1}\\ge0,\\qquad \\sum_{i,j=0}^{r}a_i a_j\\bigl(b_{i+j}-b_{i+j+1}\\bigr)\\ge0\\qquad\\text{for every }(a_0,\\ldots,a_r)\\in\\mathbb R^{r+1}.$$\n\nThe **finite order-$N$ forward-amplitude bootstrap feasible set** $\\mathcal K_N$ is the subset of $\\mathbb R^{N+1}$ consisting of vectors $(b_0,\\ldots,b_N)$ that satisfy every applicable constraint above. The finite truncated bootstrap problem is to determine whether a supplied coefficient vector belongs to $\\mathcal K_N$. Passing this finite test is a necessary condition supplied by forward positivity; it is not defined to be sufficient for the existence of a full amplitude-data package as defined above.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-aqft-gapped-scalar-forward-positivity",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $\\nu_0=2m^2$, and let $A(s)$, its real crossing-symmetric subtraction $P(s)$ of the specified isolated real subthreshold simple poles and their crossing partners, and $B(v)=A(2m^2+v)-P(2m^2+v)$ satisfy the gapped identical-scalar amplitude conditions defined above. In particular, all such variable poles are removed; $B$ is holomorphic on $\\mathbb C\\setminus(( -\\infty,-\\nu_0]\\cup[\\nu_0,\\infty))$, real analytic, and crossing even; $B$ extends continuously from each half-plane onto every compact cut-bank segment away from the thresholds; $B(v)=o(|v|^2)$ uniformly on the closing arcs; and no massless pole or cut reaches $t=0$. Its forward absorptive density is $\\rho(\\nu)=\\operatorname{Im}B(\\nu+i0)$ for $\\nu>\\nu_0$, extended by the harmless convention $\\rho(\\nu_0)=0$ without asserting a threshold limit; it is nonnegative, locally Riemann integrable with the cut-boundary limits specified above, and has finite $\\int_{\\nu_0}^{\\infty}\\rho(\\nu)\\nu^{-3}\\,d\\nu$. Then for every integer $n\\ge1$,\n\n$$\\frac{B^{(2n)}(0)}{(2n)!}=\\frac{2}{\\pi}\\int_{\\nu_0}^{\\infty}\\frac{\\rho(\\nu)}{\\nu^{2n+1}}\\,d\\nu\\ge0.$$\n\nIn particular, the first nonconstant even Taylor coefficient $B''(0)/2!$ is nonnegative. Equality is allowed; no strict bound or sign for an arbitrary off-shell operator coefficient is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-improper-integral-at-infinity",
+          "source_section": "Statement",
+          "quote": "Let $f$ be Riemann integrable on every compact interval $[a,R]$ with $R>a$. The improper integral over the right-unbounded interval is\n$$\\int_a^\\infty f(x)\\,dx:=\\lim_{R\\to\\infty}\\int_a^R f(x)\\,dx,$$\nprovided this limit exists as a finite real number. In that case the improper integral **converges**; otherwise it diverges. In particular, a limit of $+\\infty$ or $-\\infty$ is divergence, not convergence to an extended-real value.\n\nIf $f$ is Riemann integrable on every $[R,b]$ with $R<b$, define\n$$\\int_{-\\infty}^b f(x)\\,dx:=\\lim_{R\\to-\\infty}\\int_R^b f(x)\\,dx$$\nunder the same finite-limit convention. All finite integrals use the oriented convention.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-improper-integrals",
+          "source_section": "Statement",
+          "quote": "If the improper integrals of $f$ and $g$ converge over the same one-ended interval and $r,s\\in\\mathbb R$, then\n$$\\int(rf+sg)=r\\int f+s\\int g.$$\nThe same formula holds for mixed improper integrals when every singular-end piece of both integrals converges separately.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n(The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\nFALSE: a nonnegative Riemann integrable function on $[a,b]$ with $\\int_a^b f = 0$ is identically zero on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is A continuous $f \\ge 0$ on $[a,b]$ with $\\int_a^b f = 0$ is identically $0$\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$, $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-comparison-test-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Suppose $0\\le f\\le g$ eventually toward a singular end. If the improper integral of $g$ converges there, then the integral of $f$ converges. If instead $|f|\\le g$ eventually and $\\int g$ converges, then $\\int f$ converges absolutely and hence converges.\n\nThe same assertions hold separately at $+\\infty$, at $-\\infty$, and at either finite singular endpoint.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-spectral-moment-coordinate",
+          "step": "1.1",
+          "claim": "Change variables to x=nu0^2/nu^2 and write each normalized coefficient as a finite moment of the nonnegative integrable weight.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "hankel-square-integral",
+          "step": "2.1",
+          "claim": "Identify the Hankel quadratic form with the integral of w p(x)^2 and establish convergence and sign.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "interval-localizer-square-integrals",
+          "step": "2.2",
+          "claim": "Identify both localizer forms with nonnegative integrals and justify their convergence at threshold and infinity.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "all-finite-constraints",
+          "step": "3.1",
+          "claim": "Cover the N=1 and r=0 boundaries and conclude membership in the defined finite feasible set without asserting sufficiency.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: N=1 is the minimal allowed truncation and all three r=0 families are checked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1: when rho is zero, w and all b_k vanish and every quadratic integral is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: the smallest allowed truncation N=1 has exactly the r=0 forms in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1: r=0 gives the base one-dimensional quadratic forms and is included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.2: x=1 at threshold makes 1-x vanish, while x tends to zero at infinity and the weight remains integrable."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1: an arbitrary real vector is handled by a finite polynomial p, with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition proves a necessary one-way constraint."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition explicitly does not assert sufficiency."
+        }
+      ]
+    },
+    "ex-aqft-scalar-positivity-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-truncated-amplitude-bootstrap-problem",
+          "source_section": "Definition",
+          "quote": "Let $B(v)$ and the positive gap scale $\\nu_0$ be the pole-subtracted forward-amplitude data with $B$ even and holomorphic near $v=0$. Fix an integer truncation order $N\\ge1$. For $n\\ge1$ define the Taylor coefficient $c_n=B^{(2n)}(0)/(2n)!$ and the dimensionless forward on-shell coefficient $b_k=\\nu_0^{2k+2}c_{k+1}$ for $0\\le k\\le N$. Since $v$ and $\\nu_0$ have units $(\\text{mass})^2$, $c_n$ has units $(\\text{mass})^{-4n}$ and $b_k$ is dimensionless. Here “Wilson coefficient” refers only to this normalized on-shell amplitude coordinate; it does not identify a generic coefficient of an off-shell Lagrangian operator basis.\n\nFor each integer $r\\ge0$ with $2r\\le N$, form the quadratic constraint\n\n$$\\sum_{i,j=0}^{r}a_i a_j b_{i+j}\\ge0\\qquad\\text{for every }(a_0,\\ldots,a_r)\\in\\mathbb R^{r+1}.$$\n\nFor each integer $r\\ge0$ with $2r+1\\le N$, form the two additional quadratic constraints\n\n$$\\sum_{i,j=0}^{r}a_i a_j b_{i+j+1}\\ge0,\\qquad \\sum_{i,j=0}^{r}a_i a_j\\bigl(b_{i+j}-b_{i+j+1}\\bigr)\\ge0\\qquad\\text{for every }(a_0,\\ldots,a_r)\\in\\mathbb R^{r+1}.$$\n\nThe **finite order-$N$ forward-amplitude bootstrap feasible set** $\\mathcal K_N$ is the subset of $\\mathbb R^{N+1}$ consisting of vectors $(b_0,\\ldots,b_N)$ that satisfy every applicable constraint above. The finite truncated bootstrap problem is to determine whether a supplied coefficient vector belongs to $\\mathcal K_N$. Passing this finite test is a necessary condition supplied by forward positivity; it is not defined to be sufficient for the existence of a full amplitude-data package as defined above.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-aqft-finite-truncated-bootstrap-constraints",
+          "source_section": "Statement",
+          "quote": "For any gapped identical-scalar forward-amplitude data satisfying all the defined analytic, continuous-bank, endpoint and growth conditions, with $m>0$, gap $\\nu_0=2m^2$, an even pole-subtracted function $B$ and nonnegative density $\\rho(\\nu)=\\operatorname{Im}B(\\nu+i0)$ for $\\nu>\\nu_0$, extended by $\\rho(\\nu_0)=0$, with finite $\\int_{\\nu_0}^{\\infty}\\rho(\\nu)\\nu^{-3}\\,d\\nu$, let $c_n=B^{(2n)}(0)/(2n)!$ and $b_k=\\nu_0^{2k+2}c_{k+1}$. For every integer $N\\ge1$, the vector $(b_0,\\ldots,b_N)$ belongs to the finite feasible set $\\mathcal K_N$ defined by the following quadratic inequalities: for each integer $r\\ge0$ with $2r\\le N$ and every $(a_0,\\ldots,a_r)\\in\\mathbb R^{r+1}$,\n\n$$\\sum_{i,j=0}^{r}a_i a_j b_{i+j}\\ge0,$$\n\nand for each integer $r\\ge0$ with $2r+1\\le N$ and every such vector,\n\n$$\\sum_{i,j=0}^{r}a_i a_j b_{i+j+1}\\ge0,\\qquad \\sum_{i,j=0}^{r}a_i a_j(b_{i+j}-b_{i+j+1})\\ge0.$$\n\nThese are necessary finite positivity tests on normalized forward on-shell amplitude coordinates. Membership in $\\mathcal K_N$ is not asserted to be sufficient for a full amplitude or a physical quantum field theory.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-order-two-passing-vector",
+          "step": "1.1",
+          "claim": "Prove the strict order-two passing region lies in K2 by completing the square and check the concrete passing vector.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "witness-order-two-failure",
+          "step": "1.2",
+          "claim": "Use a vector depending on b to exclude the strict negative-determinant region from K2 and evaluate it for the concrete failing vector.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "interpret-necessary-test",
+          "step": "2.1",
+          "claim": "Apply the proposition to exclude the failing candidate from any admissible amplitude data while retaining the no-converse caveat.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty truncation N=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "definition: the zero vector would give zero in every homogeneous quadratic constraint, although it is not one of the displayed candidates."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes N=2 and treats no N=1 candidate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: the order-one Hankel matrix has strictly positive determinant 1/12, and step 1.2 supplies an explicit negative witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The candidate vectors are finite algebraic coordinates and do not specify a spectral measure at x=0 or x=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: the real vector (-1/2,1) is explicitly chosen for the failed quadratic form."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies membership and nonmembership in a defined set, not an equivalence with amplitude existence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example explicitly leaves full-amplitude realization unasserted."
+        }
+      ]
+    },
+    "prop-aqft-quartic-contact-jet-matching": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-local-operator-and-dimension",
+          "source_section": "Definition",
+          "quote": "Use natural units $c=\\hbar=1$ on four-dimensional Minkowski space $M=\\mathbb R^{1,3}$ with coordinates $x^0=ct,x^1,x^2,x^3$ and metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. Fix a complex affine algebraic group $G$ with no nontrivial closed normal unipotent subgroup, where unipotent means that every nonzero finite-dimensional rational module has a nonzero fixed vector; this is the reductive hypothesis. Fix a finite set $I$ of field species. For each $i\\in I$, fix a finite-dimensional complex $\\mathbb Z/2$-graded vector space $\\Phi_i=\\Phi_i^{\\bar 0}\\oplus\\Phi_i^{\\bar 1}$, a field parity, and an algebraic representation $\\rho_i:G\\to\\operatorname{GL}(\\Phi_i)$. Include the declared spacetime-index action in $G$ or in its specified finite-dimensional representation data. A field configuration assigns smooth component functions on $M$ to the even generators and formal odd Grassmann generators with smooth coefficient functions to the odd generators.\n\nFix a derivative cutoff $r\\geq0$, a maximum polynomial field degree $q\\geq0$, and a rational engineering weight $\\Delta_i$ for each field species. A derivative $\\partial_\\mu$ has engineering weight one, and an $s$-jet generator is a component of $\\partial_{\\mu_1}\\cdots\\partial_{\\mu_s}\\phi_i(x)$ for $0\\leq s\\leq r$. If covariant derivatives are used, their finite jet generators and $G$-action are included explicitly in the same data. Let $J_r$ be the resulting finite-dimensional $\\mathbb Z/2$-graded vector space with its specified algebraic representation $\\rho_r:G\\to\\operatorname{GL}(J_r)$. Its polynomial algebra is the supercommutative algebra $P_r=\\operatorname{Sym}(J_{r,\\bar 0}^{*})\\otimes\\Lambda(J_{r,\\bar 1}^{*})$: even generators commute and odd generators anticommute. For a fixed weight $D\\in\\mathbb Q$, let $P_{r,q,D}$ be the complex span of monomials of total engineering weight $D$ and total polynomial degree at most $q$.\n\nA local operator in this finite-order data is an element of $P_{r,q,D}$ evaluated at $x$ on the $r$-jet of the fields. A scalar operator invariant under the declared symmetries is an element of $V_{r,q,D}=P_{r,q,D}^{G}$. Engineering dimension means this assigned mass weight; it is not a statement about an observed quantity. In four dimensions a term with operator $\\mathcal O_D$ has the convention $C\\mathcal O_D/\\Lambda^{D-4}$, where $\\Lambda$ has mass dimension one and $C$ is dimensionless. Reality conditions, when required for a real action, are additional conjugation data on $V_{r,q,D}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-operator-basis-quotient",
+          "source_section": "Definition",
+          "quote": "Fix a finite jet order $r$, maximum polynomial field degree $q$, engineering weight $D$, finite field-species list, coefficient field $\\mathbb C$, and complex reductive affine algebraic group $G$ with the finite-dimensional rational action specified on the jet generators, including the declared spacetime-index symmetries. Let $W_D$ be the finite-dimensional space of all local polynomials of weight $D$ and degree at most $q$, before imposing $G$-invariance, and let $V_D=W_D^G$ be its invariant scalar subspace. An admitted raw relation space is a specified $G$-stable linear subspace $\\widetilde R_D\\leq W_D$, given by explicit linear identities among the chosen polynomials. Its invariant part is $R_D=\\widetilde R_D\\cap V_D$. Any action, boundary, or observable interpretation of the selected identities is extra mathematical data and must be stated with the result that verifies it.\n\nThe finite-order invariant operator-basis quotient is\n\n$$\n\\mathcal Q_D:=V_D/R_D.\n$$\n\nTwo invariant operators represent the same class exactly when their difference lies in $R_D$. An operator basis is any finite list of representatives in $V_D$ of a vector-space basis of $\\mathcal Q_D$. The quotient records precisely the declared relation space; it does not assert that every relation relevant to an arbitrary EFT, observable, or infinite operator tower has been included.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-aqft-truncated-amplitude-bootstrap-problem",
+          "source_section": "Definition",
+          "quote": "Let $B(v)$ and the positive gap scale $\\nu_0$ be the pole-subtracted forward-amplitude data with $B$ even and holomorphic near $v=0$. Fix an integer truncation order $N\\ge1$. For $n\\ge1$ define the Taylor coefficient $c_n=B^{(2n)}(0)/(2n)!$ and the dimensionless forward on-shell coefficient $b_k=\\nu_0^{2k+2}c_{k+1}$ for $0\\le k\\le N$. Since $v$ and $\\nu_0$ have units $(\\text{mass})^2$, $c_n$ has units $(\\text{mass})^{-4n}$ and $b_k$ is dimensionless. Here “Wilson coefficient” refers only to this normalized on-shell amplitude coordinate; it does not identify a generic coefficient of an off-shell Lagrangian operator basis.\n\nFor each integer $r\\ge0$ with $2r\\le N$, form the quadratic constraint\n\n$$\\sum_{i,j=0}^{r}a_i a_j b_{i+j}\\ge0\\qquad\\text{for every }(a_0,\\ldots,a_r)\\in\\mathbb R^{r+1}.$$\n\nFor each integer $r\\ge0$ with $2r+1\\le N$, form the two additional quadratic constraints\n\n$$\\sum_{i,j=0}^{r}a_i a_j b_{i+j+1}\\ge0,\\qquad \\sum_{i,j=0}^{r}a_i a_j\\bigl(b_{i+j}-b_{i+j+1}\\bigr)\\ge0\\qquad\\text{for every }(a_0,\\ldots,a_r)\\in\\mathbb R^{r+1}.$$\n\nThe **finite order-$N$ forward-amplitude bootstrap feasible set** $\\mathcal K_N$ is the subset of $\\mathbb R^{N+1}$ consisting of vectors $(b_0,\\ldots,b_N)$ that satisfy every applicable constraint above. The finite truncated bootstrap problem is to determine whether a supplied coefficient vector belongs to $\\mathcal K_N$. Passing this finite test is a necessary condition supplied by forward positivity; it is not defined to be sufficient for the existence of a full amplitude-data package as defined above.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "contact-1-1",
+          "step": "1.1",
+          "claim": "Finite polarization and on-shell contraction define a presentation-independent polynomial; actual forward real momenta verify identities.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "contact-1-2",
+          "step": "1.2",
+          "claim": "Divergence insertions have total-momentum factors and free EOM insertions have on-shell factors, so the certified relations vanish.",
+          "inputs": [
+            "A1"
+          ]
+        },
+        {
+          "id": "contact-2-1",
+          "step": "2.1",
+          "claim": "Permutation symmetry gives evenness; even derivative number gives reality.",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "contact-2-2",
+          "step": "2.2",
+          "claim": "Annihilation of the actual intersection of relations gives descent to its exact quotient image.",
+          "inputs": [
+            "F2",
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "contact-3-1",
+          "step": "3.1",
+          "claim": "Eight assignments for each pairing yield tO8=8m^4+4v^2 and the correctly normalized vector.",
+          "inputs": [
+            "F3",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The declared relation span can be empty; step 2.2 still defines descent."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero operator maps to the zero polynomial by step 1.1; higher O8 coordinates vanish by 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Exactly one contact insertion is treated, with all four polarizations computed in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "m and Lambda are strictly positive; no zero-gap limit is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The map is polynomial and has no analytic cut-boundary limit; full-amplitude endpoint assumptions belong to the dispersion theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: all maps are explicit finite polynomial substitutions; no choices from infinite families occur."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or completeness of the declared relation span is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from vanishing contact jet to operator redundancy is asserted."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-determinant-is-the-unique-normalized-alternating-multilinear-function.md

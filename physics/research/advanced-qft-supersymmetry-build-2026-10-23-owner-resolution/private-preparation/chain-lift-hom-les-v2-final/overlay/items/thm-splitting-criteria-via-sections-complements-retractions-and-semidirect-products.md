@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products.md

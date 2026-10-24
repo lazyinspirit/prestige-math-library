@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-an-sl3-weight-with-cohomology-in-degree-one.md

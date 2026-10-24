@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-kernels-cokernels-images-and-coimages-computed-in-abelian-groups.md

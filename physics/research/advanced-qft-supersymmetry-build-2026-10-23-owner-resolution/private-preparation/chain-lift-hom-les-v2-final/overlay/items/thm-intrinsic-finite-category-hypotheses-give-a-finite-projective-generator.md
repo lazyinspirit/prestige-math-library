@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-intrinsic-finite-category-hypotheses-give-a-finite-projective-generator.md

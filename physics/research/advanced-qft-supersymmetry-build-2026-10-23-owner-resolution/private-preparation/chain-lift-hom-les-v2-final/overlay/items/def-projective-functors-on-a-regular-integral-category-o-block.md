@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-projective-functors-on-a-regular-integral-category-o-block.md

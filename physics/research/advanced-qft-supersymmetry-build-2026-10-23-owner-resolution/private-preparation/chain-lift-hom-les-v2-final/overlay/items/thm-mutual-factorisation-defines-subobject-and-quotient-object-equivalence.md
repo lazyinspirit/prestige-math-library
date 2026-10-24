@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence.md

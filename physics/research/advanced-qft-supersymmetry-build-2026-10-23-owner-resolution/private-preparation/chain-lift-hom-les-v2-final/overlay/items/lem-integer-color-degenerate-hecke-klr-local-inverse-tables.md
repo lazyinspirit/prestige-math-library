@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-integer-color-degenerate-hecke-klr-local-inverse-tables.md

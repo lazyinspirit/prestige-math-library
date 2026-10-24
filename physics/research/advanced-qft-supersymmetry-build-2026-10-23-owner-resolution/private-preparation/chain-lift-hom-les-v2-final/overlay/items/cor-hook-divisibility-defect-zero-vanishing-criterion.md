@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-hook-divisibility-defect-zero-vanishing-criterion.md

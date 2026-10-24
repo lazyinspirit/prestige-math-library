@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-chart-localization-for-compactly-supported-forms-on-manifolds-with-boundary.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-two-connected-lie-groups-with-the-same-dynkin-diagram-are-isomorphic.md

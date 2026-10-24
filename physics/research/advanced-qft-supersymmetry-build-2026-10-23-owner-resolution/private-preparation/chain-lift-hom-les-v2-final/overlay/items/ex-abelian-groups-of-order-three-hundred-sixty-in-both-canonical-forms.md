@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-abelian-groups-of-order-three-hundred-sixty-in-both-canonical-forms.md

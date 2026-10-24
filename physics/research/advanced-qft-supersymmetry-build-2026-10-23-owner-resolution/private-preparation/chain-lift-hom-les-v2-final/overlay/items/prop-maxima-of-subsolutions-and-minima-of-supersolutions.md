@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-maxima-of-subsolutions-and-minima-of-supersolutions.md

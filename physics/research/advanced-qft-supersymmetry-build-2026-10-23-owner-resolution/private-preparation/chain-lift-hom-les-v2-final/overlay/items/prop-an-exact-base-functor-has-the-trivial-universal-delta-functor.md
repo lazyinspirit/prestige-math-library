@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-an-exact-base-functor-has-the-trivial-universal-delta-functor.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/pthm-nrqm-composites-local-readout-laws-and-reduced-preparations.md

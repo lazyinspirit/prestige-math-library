@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-if-alpha-and-beta-are-roots-then-alpha-plus-beta-is-always-a-root.md

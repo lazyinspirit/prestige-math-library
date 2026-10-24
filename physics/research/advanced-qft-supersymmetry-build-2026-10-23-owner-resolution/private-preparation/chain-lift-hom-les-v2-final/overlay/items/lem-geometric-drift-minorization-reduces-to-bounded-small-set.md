@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-geometric-drift-minorization-reduces-to-bounded-small-set.md

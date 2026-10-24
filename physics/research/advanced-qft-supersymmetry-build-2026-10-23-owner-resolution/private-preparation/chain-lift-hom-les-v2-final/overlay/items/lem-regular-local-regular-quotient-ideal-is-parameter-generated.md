@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-regular-local-regular-quotient-ideal-is-parameter-generated.md

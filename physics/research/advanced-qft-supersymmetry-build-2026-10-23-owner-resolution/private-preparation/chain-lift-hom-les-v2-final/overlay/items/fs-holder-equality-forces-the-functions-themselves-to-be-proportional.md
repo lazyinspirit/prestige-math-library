@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-holder-equality-forces-the-functions-themselves-to-be-proportional.md

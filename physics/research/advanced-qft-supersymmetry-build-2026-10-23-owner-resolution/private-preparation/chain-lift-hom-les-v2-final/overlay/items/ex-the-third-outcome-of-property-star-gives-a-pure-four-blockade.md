@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-third-outcome-of-property-star-gives-a-pure-four-blockade.md

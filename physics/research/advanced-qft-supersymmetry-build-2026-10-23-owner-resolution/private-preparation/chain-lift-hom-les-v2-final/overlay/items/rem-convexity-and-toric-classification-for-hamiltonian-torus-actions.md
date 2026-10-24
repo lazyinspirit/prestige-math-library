@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-convexity-and-toric-classification-for-hamiltonian-torus-actions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-trigonalizable-extensions-split-over-algebraically-closed-fields.md

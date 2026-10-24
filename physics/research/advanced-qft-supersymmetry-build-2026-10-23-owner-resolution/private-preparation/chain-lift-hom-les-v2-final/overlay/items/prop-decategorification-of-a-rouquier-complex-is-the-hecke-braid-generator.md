@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-decategorification-of-a-rouquier-complex-is-the-hecke-braid-generator.md

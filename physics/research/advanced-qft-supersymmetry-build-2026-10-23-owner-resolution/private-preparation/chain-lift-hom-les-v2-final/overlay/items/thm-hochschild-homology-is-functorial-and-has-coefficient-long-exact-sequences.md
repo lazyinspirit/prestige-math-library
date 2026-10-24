@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hochschild-homology-is-functorial-and-has-coefficient-long-exact-sequences.md

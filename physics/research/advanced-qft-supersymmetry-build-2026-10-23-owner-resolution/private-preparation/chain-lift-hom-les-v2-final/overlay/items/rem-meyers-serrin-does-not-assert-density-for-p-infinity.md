@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-meyers-serrin-does-not-assert-density-for-p-infinity.md

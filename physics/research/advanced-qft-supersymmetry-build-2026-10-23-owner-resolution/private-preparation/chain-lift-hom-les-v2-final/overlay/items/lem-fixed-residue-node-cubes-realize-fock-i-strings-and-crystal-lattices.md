@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fixed-residue-node-cubes-realize-fock-i-strings-and-crystal-lattices.md

@@ -1,0 +1,132 @@
+---
+id: lem-qftx-gaga-algebraic-analytic-local-completions
+kind: lemma
+title: Common completions of algebraic and holomorphic local rings and their finite-type quotients
+status: draft
+origin: pipeline
+dependency_level: 0
+domain: mathematics
+library: mathematics
+category: quantum-field-theory-mathematics
+axiom_base: "ZF + AC, as required by the finite-quotient completion supplier."
+proof_strategy: direct
+deps:
+  - def-axiom-of-choice
+  - def-multiplicative-subset-and-localisation
+  - def-holomorphic-germ-ring-and-its-maximal-ideal
+  - prop-units-in-the-holomorphic-germ-ring
+  - thm-holomorphic-germs-at-a-point-form-a-local-ring
+  - thm-holomorphic-germ-ring-is-noetherian
+  - thm-power-series-expansion-in-several-complex-variables
+  - cor-uniqueness-of-multivariable-power-series-coefficients
+  - thm-recursion
+  - thm-hilbert-basis-theorem
+  - thm-noetherian-ring-quotients-and-localisations
+  - cor-completion-commutes-with-finite-quotients-and-submodules
+dependency_roles:
+  def-axiom-of-choice: mathematical-premise
+  def-multiplicative-subset-and-localisation: mathematical-premise
+  def-holomorphic-germ-ring-and-its-maximal-ideal: mathematical-premise
+  prop-units-in-the-holomorphic-germ-ring: mathematical-premise
+  thm-holomorphic-germs-at-a-point-form-a-local-ring: mathematical-premise
+  thm-holomorphic-germ-ring-is-noetherian: mathematical-premise
+  thm-power-series-expansion-in-several-complex-variables: mathematical-premise
+  cor-uniqueness-of-multivariable-power-series-coefficients: mathematical-premise
+  thm-recursion: mathematical-premise
+  thm-hilbert-basis-theorem: mathematical-premise
+  thm-noetherian-ring-quotients-and-localisations: mathematical-premise
+  cor-completion-commutes-with-finite-quotients-and-submodules: mathematical-premise
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Jean-Pierre Serre, Géométrie algébrique et géométrie analytique, §2, no. 6 and Annex §§22–24"
+      url: "https://www.college-de-france.fr/media/jean-pierre-serre/UPL1698785858825941763_Serre_GAGA.pdf"
+    - title: "Johannes Anschütz, Lecture Notes on Étale Cohomology, §§3.24–3.26"
+      url: "https://janschuetz.perso.math.cnrs.fr/skripte/lecture_notes_etale_cohomology.pdf"
+    - title: "Kiran S. Kedlaya, MIT OpenCourseWare 18.726, Lecture 22: GAGA"
+      url: "https://ocw.mit.edu/courses/18-726-algebraic-geometry-spring-2009/1329d3923b9f2d55ec7a9ec8e9cb63e9_MIT18_726s09_lec22_gaga.pdf"
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Assume the Axiom of Choice. Fix an integer $n\ge1$, put
+$P=\mathbb C[w_1,\ldots,w_n]$, and let $\mathfrak m=(w_1,\ldots,w_n)$.
+Let $A_0=P_{\mathfrak m}$ be the localization at the polynomials nonzero at
+the origin, let $H=\mathbb C\{w_1,\ldots,w_n\}$ be the ring of holomorphic
+function germs at the origin, and let $T=\mathbb C\llbracket w_1,\ldots,w_n\rrbracket$ be the
+formal power-series ring. For any finitely generated ideal $I\subseteq
+\mathfrak m$, set $A_I=A_0/IA_0$ and $H_I=H/IH$. For a local ring $R$ with
+maximal ideal $\mathfrak m_R$, define its completion by
+$\widehat R=\varprojlim_{k\ge1}R/\mathfrak m_R^k$.
+
+The polynomial-to-germ map induces a local homomorphism $A_I\to H_I$. The
+four rings $A_0,H,A_I,H_I$ are Noetherian local rings, and the induced map on
+completions identifies both $\widehat{A_I}$ and $\widehat{H_I}$ canonically
+with $T/IT$. In particular, the comparison uses the same extended defining
+ideal $I$ and does not replace it by its radical, so nilpotent classes are
+retained.
+
+## Statement references
+
+[Serre, local algebraic-to-holomorphic comparison and flat-pair appendix](https://www.college-de-france.fr/media/jean-pierre-serre/UPL1698785858825941763_Serre_GAGA.pdf)
+
+[Anschütz, analytification of locally finite-type schemes](https://janschuetz.perso.math.cnrs.fr/skripte/lecture_notes_etale_cohomology.pdf)
+
+[MIT OpenCourseWare, Lecture 22: GAGA](https://ocw.mit.edu/courses/18-726-algebraic-geometry-spring-2009/1329d3923b9f2d55ec7a9ec8e9cb63e9_MIT18_726s09_lec22_gaga.pdf)
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice, $n\ge1$, the polynomial ring $P$, the maximal ideal $\mathfrak m$, the local ring $A_0$, the holomorphic-germ ring $H$, the formal power-series ring $T$, and a finitely generated ideal $I\subseteq\mathfrak m$.
+
+[A1] The Axiom of Choice states that every family of nonempty sets has a choice function ([[def-axiom-of-choice]]). The completion-quotient result used below is stated under this assumption.
+
+[F1] A localization $S^{-1}R$ consists of fractions $r/s$ with $s\in S$; here $S=P\setminus\mathfrak m$, so every denominator has nonzero constant term ([[def-multiplicative-subset-and-localisation]]).
+
+[F2] $H$ is the ring of holomorphic germs at the origin in $\mathbb C^n$, and $\mathfrak n=\{[f]:f(0)=0\}$ is its distinguished ideal ([[def-holomorphic-germ-ring-and-its-maximal-ideal]]).
+
+[F3] In one complex variable, a holomorphic germ is a unit exactly when its value at the base point is nonzero; its nonunits form the unique maximal ideal ([[thm-holomorphic-germs-at-a-point-form-a-local-ring]]).
+
+[F4] For every $n\ge1$, a germ in $H$ is a unit exactly when its value at the origin is nonzero, so $H$ is local with maximal ideal $\mathfrak n$ ([[prop-units-in-the-holomorphic-germ-ring]]).
+
+[F5] $H$ is a Noetherian commutative ring ([[thm-holomorphic-germ-ring-is-noetherian]]).
+
+[F6] A holomorphic function near the origin has an absolutely convergent power-series expansion on every sufficiently small polydisc, with its coefficients given by the polydisc Cauchy integrals ([[thm-power-series-expansion-in-several-complex-variables]]).
+
+[F7] Such a convergent multivariable power-series representation is unique; equal germs have equal Taylor coefficients ([[cor-uniqueness-of-multivariable-power-series-coefficients]]).
+
+[F8] A polynomial ring over a Noetherian ring is Noetherian; under DC, quotients and localizations of Noetherian rings are Noetherian ([[thm-hilbert-basis-theorem]], [[thm-noetherian-ring-quotients-and-localisations]]).
+
+[F9] If $R$ is Noetherian and $J$ is an ideal, completion identifies the completion of $R/J$ with $\widehat R/J\widehat R$ ([[cor-completion-commutes-with-finite-quotients-and-submodules]]).
+
+[F10] Given a set, an initial element, and a self-map, recursion on $\mathbb N$ supplies the unique sequence following that map ([[thm-recursion]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 AC implies DC. For a nonempty set $Y$ with a serial relation $R$, the successor sets $\{z\in Y:yRz\}$ are nonempty; [A1] chooses one successor for each such set. This defines a self-map $s:Y\to Y$ with $yRs(y)$, and [F10] recursively generates a sequence from any specified starting point. [A1, F10, construct]
+
+1.2 By [F8], $P$ is Noetherian and, using the DC established in step 1.1, its localization $A_0$ is Noetherian. The ring $A_0$ is local: fractions with numerator outside $\mathfrak m$ are units, while the residue map $p/q\mapsto p(0)/q(0)$ is a surjective homomorphism to $\mathbb C$ with kernel $\mathfrak m A_0$. The ring $H$ is Noetherian by [F5] and local by [F3] when $n=1$ and by [F4] for every $n$. Since $I\subseteq\mathfrak m$ and every element of $I$ vanishes at the origin, $IA_0$ and $IH$ lie in the respective maximal ideals. Their quotients are therefore Noetherian local rings, with maximal ideals the images of those ambient maximal ideals. [given, F1, F3, F4, F5, F8, step 1.1]
+
+1.3 For each $k\ge1$, every $s\in P\setminus\mathfrak m$ has the form $s=c(1+h)$ with $c=s(0)\ne0$ and $h\in\mathfrak m$. Modulo $\mathfrak m^k$, $h^k=0$, so $c^{-1}\sum_{j=0}^{k-1}(-h)^j$ is an inverse for $s$. Thus localization changes no $k$-jet and $A_0/\mathfrak m^kA_0\cong P/\mathfrak m^k$. A compatible sequence of these truncated polynomials is exactly one formal power series, so $\widehat{A_0}\cong T$. [given, F1, algebra]
+
+1.4 Every germ in $\mathfrak n$ has a power series with no constant term by [F6]. Assign each nonconstant monomial to the first coordinate with positive exponent; grouping the terms by that coordinate writes the germ as $\sum_{i=1}^n w_i g_i$, where each $g_i$ converges on a smaller polydisc by absolute convergence. Hence $\mathfrak n=(w_1,\ldots,w_n)$. [F2, F6, construct]
+
+1.5 For $k\ge1$, truncate the unique Taylor series from [F6] to total degree less than $k$. This gives a surjection $H\to P/\mathfrak m^k$. For each multi-index $\alpha$ of degree at least $k$, assign the first monomial divisor $w^\beta$ in a fixed ordering among the finitely many divisors of total degree $k$; grouping the absolutely convergent subseries by the finitely many possible $\beta$ writes the tail as $\sum_{|\beta|=k}w^\beta g_\beta$. Thus the kernel is contained in $\mathfrak n^k$. Conversely, step 1.4 makes $\mathfrak n^k$ generated by the degree-$k$ coordinate monomials, and each such monomial times any germ has no Taylor terms of degree below $k$; uniqueness [F7] shows every element of $\mathfrak n^k$ lies in the kernel. Therefore $H/\mathfrak n^k\cong P/\mathfrak m^k$. [given, F6, F7, step 1.4]
+
+1.6 Taking inverse limits in steps 1.3 and 1.5 identifies $\widehat{A_0}$ and $\widehat H$ with $T$. Each polynomial variable maps to the same formal variable under both completion maps, so the induced map $\widehat{A_0}\to\widehat H$ is the identity of $T$. [step 1.3, step 1.5, algebra]
+
+2.1 Under the assumed AC, apply [F9] to the finitely generated ideals $IA_0\subseteq A_0$ and $IH\subseteq H$; these rings are Noetherian by step 1.2. Their images in $T$ are both generated by the same finite polynomial generators of $I$, because the maps in step 1.6 send each $w_i$ to the same formal variable. Thus $\widehat{A_I}\cong T/IT\cong\widehat{H_I}$, and the induced map on completions is the identity under these identifications. The quotient is by $I$ itself, not by its radical. [given, A1, F9, step 1.2, step 1.6, algebra] ∎
+
+## Remarks
+
+The square below records the canonical ambient local-ring map and its completion. The vertical arrows are the maximal-ideal completion maps. The bottom arrow is the identity on formal variables; quotienting every corner by the same extended ideal $IT$ gives the square for $A_I\to H_I$.
+
+```tikzcd
+A_0 \arrow[r] \arrow[d] & H \arrow[d] \\
+T \arrow[r, "\mathrm{id}"] & T
+```

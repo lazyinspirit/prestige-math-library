@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-a-two-khovanov-seidel-algebra-and-its-projectives.md

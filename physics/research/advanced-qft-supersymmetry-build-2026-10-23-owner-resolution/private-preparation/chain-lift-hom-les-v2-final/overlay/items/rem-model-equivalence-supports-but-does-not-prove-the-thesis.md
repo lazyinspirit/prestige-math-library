@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-model-equivalence-supports-but-does-not-prove-the-thesis.md

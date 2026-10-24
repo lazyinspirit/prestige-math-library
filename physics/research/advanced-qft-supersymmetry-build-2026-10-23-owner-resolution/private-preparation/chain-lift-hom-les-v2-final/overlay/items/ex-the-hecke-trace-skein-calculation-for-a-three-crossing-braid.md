@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-hecke-trace-skein-calculation-for-a-three-crossing-braid.md

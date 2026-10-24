@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-in-a-rigid-category-every-morphism-of-monoidal-functors-is-an-isomorphism.md

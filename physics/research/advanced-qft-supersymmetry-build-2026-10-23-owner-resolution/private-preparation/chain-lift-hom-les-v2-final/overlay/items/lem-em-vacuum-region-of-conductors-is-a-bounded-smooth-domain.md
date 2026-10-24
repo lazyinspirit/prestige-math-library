@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-em-vacuum-region-of-conductors-is-a-bounded-smooth-domain.md

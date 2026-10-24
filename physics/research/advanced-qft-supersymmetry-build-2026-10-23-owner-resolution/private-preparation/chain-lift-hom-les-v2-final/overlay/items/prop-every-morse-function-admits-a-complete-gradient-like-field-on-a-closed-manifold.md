@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-every-morse-function-admits-a-complete-gradient-like-field-on-a-closed-manifold.md

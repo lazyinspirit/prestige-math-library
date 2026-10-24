@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-abelianisation-is-left-adjoint-to-the-inclusion-of-abelian-groups.md

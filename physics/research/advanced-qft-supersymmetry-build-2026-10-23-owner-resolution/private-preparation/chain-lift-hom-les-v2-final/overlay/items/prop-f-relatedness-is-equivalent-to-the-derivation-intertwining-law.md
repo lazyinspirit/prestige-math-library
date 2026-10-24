@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-f-relatedness-is-equivalent-to-the-derivation-intertwining-law.md

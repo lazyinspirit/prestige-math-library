@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-full-and-reduced-group-c-star-algebras-of-a-finite-group.md

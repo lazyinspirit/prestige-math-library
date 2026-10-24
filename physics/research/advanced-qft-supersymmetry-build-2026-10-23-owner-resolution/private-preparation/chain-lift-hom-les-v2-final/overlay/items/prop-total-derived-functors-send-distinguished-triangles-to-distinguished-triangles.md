@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-total-derived-functors-send-distinguished-triangles-to-distinguished-triangles.md

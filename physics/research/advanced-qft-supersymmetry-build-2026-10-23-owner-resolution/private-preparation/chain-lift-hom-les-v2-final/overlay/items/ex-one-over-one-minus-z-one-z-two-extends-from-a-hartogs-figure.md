@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-one-over-one-minus-z-one-z-two-extends-from-a-hartogs-figure.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-sr-closed-one-form-primitive-on-simply-connected-open-sets.md

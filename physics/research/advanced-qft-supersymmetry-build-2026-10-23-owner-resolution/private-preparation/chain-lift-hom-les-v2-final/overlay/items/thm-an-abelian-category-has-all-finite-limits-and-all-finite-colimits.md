@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-an-abelian-category-has-all-finite-limits-and-all-finite-colimits.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-sign-is-the-unique-nontrivial-homomorphism-to-signs.md

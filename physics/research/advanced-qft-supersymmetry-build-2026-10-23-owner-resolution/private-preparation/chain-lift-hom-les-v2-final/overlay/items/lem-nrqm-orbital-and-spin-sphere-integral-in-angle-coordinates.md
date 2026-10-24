@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates.md

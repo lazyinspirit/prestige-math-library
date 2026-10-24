@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-differential-of-the-moment-map-and-orbit-orthogonal-identity.md

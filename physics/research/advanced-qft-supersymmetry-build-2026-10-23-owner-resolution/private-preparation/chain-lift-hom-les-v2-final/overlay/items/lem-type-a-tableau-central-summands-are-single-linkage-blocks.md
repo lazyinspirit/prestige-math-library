@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-type-a-tableau-central-summands-are-single-linkage-blocks.md

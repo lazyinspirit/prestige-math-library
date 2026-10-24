@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-geometric-simplices-intersect-in-the-realization-of-their-common-face.md

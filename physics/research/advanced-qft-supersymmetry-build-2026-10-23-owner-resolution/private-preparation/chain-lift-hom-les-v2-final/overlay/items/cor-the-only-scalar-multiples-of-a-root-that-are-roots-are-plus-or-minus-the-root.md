@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root.md

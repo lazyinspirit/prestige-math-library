@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-finite-group-with-an-irreducible-complex-character-of-degree-greater-than-one-is-nonabelian.md

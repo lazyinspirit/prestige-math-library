@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-modular-partition-its-quotient-and-its-parts-determine-the-graph.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-evaluation-map-from-cohomology-to-hom-of-homology.md

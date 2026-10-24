@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-unique-cube-root-of-two-modulo-twenty-nine.md

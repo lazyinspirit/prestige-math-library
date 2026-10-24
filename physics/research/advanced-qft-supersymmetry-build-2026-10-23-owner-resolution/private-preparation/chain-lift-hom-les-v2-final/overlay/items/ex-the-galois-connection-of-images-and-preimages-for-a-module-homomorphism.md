@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-galois-connection-of-images-and-preimages-for-a-module-homomorphism.md

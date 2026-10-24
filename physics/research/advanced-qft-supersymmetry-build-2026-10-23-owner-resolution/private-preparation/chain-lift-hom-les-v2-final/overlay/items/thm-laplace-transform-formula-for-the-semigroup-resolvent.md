@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-laplace-transform-formula-for-the-semigroup-resolvent.md

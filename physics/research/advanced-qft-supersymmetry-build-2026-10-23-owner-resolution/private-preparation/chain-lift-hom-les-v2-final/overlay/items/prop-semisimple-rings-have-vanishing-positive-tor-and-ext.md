@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-semisimple-rings-have-vanishing-positive-tor-and-ext.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cm-projective-curve-canonical-positive-twist-vanishing-generation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-lie-derivative-of-a-vector-field-equals-the-lie-bracket.md

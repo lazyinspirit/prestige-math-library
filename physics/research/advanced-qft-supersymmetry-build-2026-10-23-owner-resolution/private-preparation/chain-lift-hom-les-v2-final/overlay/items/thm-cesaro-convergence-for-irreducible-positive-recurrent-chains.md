@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cesaro-convergence-for-irreducible-positive-recurrent-chains.md

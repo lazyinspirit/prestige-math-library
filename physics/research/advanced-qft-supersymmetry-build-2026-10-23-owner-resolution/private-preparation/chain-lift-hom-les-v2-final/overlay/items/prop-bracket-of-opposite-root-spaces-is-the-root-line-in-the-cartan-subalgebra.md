@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra.md

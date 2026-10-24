@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-suspension-holonomy-is-the-germ-of-the-monodromy-action.md

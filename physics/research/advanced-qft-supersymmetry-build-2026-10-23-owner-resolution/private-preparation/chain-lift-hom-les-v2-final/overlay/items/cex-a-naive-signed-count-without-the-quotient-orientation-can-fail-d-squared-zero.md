@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-naive-signed-count-without-the-quotient-orientation-can-fail-d-squared-zero.md

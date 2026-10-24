@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-linearity-and-additivity-of-integration-over-disjoint-oriented-components.md

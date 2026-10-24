@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cg-greedy-sorting-word-and-rank-two-alignment.md

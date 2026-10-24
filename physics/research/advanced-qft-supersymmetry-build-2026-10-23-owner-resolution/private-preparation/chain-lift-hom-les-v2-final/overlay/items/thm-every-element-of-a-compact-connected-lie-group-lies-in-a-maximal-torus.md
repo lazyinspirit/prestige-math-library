@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus.md

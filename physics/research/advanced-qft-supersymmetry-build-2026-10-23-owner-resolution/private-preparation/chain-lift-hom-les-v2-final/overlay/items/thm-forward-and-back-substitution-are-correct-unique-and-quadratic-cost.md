@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost.md

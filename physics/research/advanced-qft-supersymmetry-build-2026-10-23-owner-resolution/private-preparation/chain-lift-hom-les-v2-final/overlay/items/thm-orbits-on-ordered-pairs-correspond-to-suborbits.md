@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-orbits-on-ordered-pairs-correspond-to-suborbits.md

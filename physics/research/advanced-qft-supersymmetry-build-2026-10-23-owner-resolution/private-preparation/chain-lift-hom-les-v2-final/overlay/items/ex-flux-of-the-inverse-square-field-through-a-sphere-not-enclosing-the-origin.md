@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-flux-of-the-inverse-square-field-through-a-sphere-not-enclosing-the-origin.md

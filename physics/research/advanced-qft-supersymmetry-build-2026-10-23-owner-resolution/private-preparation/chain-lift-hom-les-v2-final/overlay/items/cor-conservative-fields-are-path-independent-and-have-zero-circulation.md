@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-conservative-fields-are-path-independent-and-have-zero-circulation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-p-power-torsion-dimensions-recover-elementary-divisors.md

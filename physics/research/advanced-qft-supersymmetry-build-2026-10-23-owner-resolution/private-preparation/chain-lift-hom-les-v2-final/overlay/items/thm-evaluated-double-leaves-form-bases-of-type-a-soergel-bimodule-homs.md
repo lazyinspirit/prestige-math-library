@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-evaluated-double-leaves-form-bases-of-type-a-soergel-bimodule-homs.md

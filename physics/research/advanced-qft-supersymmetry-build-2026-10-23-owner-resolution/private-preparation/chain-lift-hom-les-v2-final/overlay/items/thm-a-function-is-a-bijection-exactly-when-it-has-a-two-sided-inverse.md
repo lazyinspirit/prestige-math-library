@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-function-is-a-bijection-exactly-when-it-has-a-two-sided-inverse.md

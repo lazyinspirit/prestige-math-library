@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-cone-construction-commutes-with-shift-up-to-the-canonical-sign-isomorphism.md

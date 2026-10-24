@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-k-finite-and-smooth-vectors-for-sl2-r.md

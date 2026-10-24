@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-linear-isoperimetric-bound-for-finite-c-prime-one-sixth-presentations.md

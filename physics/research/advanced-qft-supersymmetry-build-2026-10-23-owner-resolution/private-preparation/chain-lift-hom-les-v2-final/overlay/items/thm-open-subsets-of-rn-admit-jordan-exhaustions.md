@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-open-subsets-of-rn-admit-jordan-exhaustions.md

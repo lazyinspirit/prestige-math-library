@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-change-of-base-extends-to-functors-and-natural-transformations-and-is-a-two-functor.md

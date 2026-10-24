@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-ula-uniform-exponential-moments-and-invariant-laws.md

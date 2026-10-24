@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-reduction-of-an-ordinary-irreducible-remains-irreducible.md

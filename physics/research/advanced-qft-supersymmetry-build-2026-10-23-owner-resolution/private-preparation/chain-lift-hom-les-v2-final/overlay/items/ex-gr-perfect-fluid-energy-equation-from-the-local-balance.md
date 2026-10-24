@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-gr-perfect-fluid-energy-equation-from-the-local-balance.md

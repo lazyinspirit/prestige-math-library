@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-cylinder-has-zero-gaussian-curvature-but-nonzero-second-fundamental-form.md

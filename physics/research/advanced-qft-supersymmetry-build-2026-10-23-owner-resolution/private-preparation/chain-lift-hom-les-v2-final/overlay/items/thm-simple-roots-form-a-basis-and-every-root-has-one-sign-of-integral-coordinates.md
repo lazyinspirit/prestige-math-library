@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates.md

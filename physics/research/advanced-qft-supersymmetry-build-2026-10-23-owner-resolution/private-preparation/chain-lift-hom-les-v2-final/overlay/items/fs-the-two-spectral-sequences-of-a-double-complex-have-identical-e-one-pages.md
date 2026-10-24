@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-two-spectral-sequences-of-a-double-complex-have-identical-e-one-pages.md

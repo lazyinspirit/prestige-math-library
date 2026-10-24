@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-maps-between-oriented-spheres-are-homotopic-iff-their-degrees-agree.md

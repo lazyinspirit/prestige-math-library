@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-two-colouring-forces-an-infinite-monochromatic-progression.md

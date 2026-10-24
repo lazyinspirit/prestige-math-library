@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-coproduct-property-of-tensor-products-of-commutative-algebras.md

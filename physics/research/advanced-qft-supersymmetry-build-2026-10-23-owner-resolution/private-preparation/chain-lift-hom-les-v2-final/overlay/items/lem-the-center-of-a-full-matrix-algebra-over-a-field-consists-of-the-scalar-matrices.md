@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-center-of-a-full-matrix-algebra-over-a-field-consists-of-the-scalar-matrices.md

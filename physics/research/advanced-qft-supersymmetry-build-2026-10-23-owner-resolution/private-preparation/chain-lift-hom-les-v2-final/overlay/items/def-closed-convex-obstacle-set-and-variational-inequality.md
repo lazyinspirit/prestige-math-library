@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-closed-convex-obstacle-set-and-variational-inequality.md

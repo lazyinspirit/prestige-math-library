@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-pullback-of-a-riemannian-metric-by-every-smooth-map-is-a-riemannian-metric.md

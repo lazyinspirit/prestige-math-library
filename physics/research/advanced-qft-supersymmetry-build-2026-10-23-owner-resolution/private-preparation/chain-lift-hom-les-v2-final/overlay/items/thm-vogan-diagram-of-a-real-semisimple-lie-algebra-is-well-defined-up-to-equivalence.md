@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence.md

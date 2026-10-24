@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology.md

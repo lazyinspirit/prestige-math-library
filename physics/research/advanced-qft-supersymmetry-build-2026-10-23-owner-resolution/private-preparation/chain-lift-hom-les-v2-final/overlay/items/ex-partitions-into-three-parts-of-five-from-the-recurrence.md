@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-partitions-into-three-parts-of-five-from-the-recurrence.md

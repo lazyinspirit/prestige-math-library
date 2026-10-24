@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information.md

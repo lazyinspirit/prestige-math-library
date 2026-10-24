@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity.md

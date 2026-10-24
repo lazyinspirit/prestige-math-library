@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-quotient-ring-multiplication-well-defined-iff-ideal.md

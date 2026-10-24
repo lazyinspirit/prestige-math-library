@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-nrqm-orbital-and-spin-example-orbital-core-commutators.md

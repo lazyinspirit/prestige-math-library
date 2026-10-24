@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-reduced-type-a-polynomial-ring-for-hhh.md

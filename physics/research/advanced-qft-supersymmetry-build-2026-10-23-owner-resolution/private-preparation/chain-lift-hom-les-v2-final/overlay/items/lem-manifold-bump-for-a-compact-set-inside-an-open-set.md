@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-manifold-bump-for-a-compact-set-inside-an-open-set.md

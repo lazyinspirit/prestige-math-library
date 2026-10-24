@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-resolvent-norm-blows-up-when-a-real-parameter-approaches-an-eigenvalue.md

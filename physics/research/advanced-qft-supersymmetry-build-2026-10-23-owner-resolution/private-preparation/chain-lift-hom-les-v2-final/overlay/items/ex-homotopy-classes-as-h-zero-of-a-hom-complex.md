@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-homotopy-classes-as-h-zero-of-a-hom-complex.md

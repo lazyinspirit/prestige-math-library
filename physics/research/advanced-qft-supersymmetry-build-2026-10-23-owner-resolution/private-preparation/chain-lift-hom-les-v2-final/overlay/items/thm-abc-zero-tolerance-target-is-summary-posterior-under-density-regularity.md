@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity.md

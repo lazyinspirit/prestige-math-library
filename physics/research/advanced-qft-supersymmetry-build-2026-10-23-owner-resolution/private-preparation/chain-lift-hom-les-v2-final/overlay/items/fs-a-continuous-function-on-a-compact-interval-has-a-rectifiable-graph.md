@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-continuous-function-on-a-compact-interval-has-a-rectifiable-graph.md

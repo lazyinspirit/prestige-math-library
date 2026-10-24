@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-framing-identifies-the-thom-target-with-a-sphere-smash-product.md

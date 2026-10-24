@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p.md

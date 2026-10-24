@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-split-coequalizer-is-a-coequalizer-and-is-absolute.md

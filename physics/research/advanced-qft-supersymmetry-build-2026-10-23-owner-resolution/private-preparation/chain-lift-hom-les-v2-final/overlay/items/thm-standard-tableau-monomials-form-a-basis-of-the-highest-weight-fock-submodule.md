@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-standard-tableau-monomials-form-a-basis-of-the-highest-weight-fock-submodule.md

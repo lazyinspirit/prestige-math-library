@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-injective-dimension-at-most-n-iff-higher-ext-vanishes.md

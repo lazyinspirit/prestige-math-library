@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hodge-riemann-bilinear-relations-for-smooth-projective-varieties.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-quadratic-extension-in-characteristic-not-two-is-generated-by-a-square-root.md

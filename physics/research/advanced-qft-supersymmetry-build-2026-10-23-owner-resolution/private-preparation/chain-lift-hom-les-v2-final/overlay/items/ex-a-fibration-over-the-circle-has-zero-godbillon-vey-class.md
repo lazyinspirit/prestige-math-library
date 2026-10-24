@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-fibration-over-the-circle-has-zero-godbillon-vey-class.md

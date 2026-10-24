@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rho-minus-w-rho-is-a-sum-of-positive-roots.md

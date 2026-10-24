@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-qa-36-adiabatic-path-to-circuit-simulation.md

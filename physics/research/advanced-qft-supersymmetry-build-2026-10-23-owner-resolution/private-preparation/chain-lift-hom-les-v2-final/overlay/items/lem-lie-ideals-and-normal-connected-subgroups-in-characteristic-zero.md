@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-lie-ideals-and-normal-connected-subgroups-in-characteristic-zero.md

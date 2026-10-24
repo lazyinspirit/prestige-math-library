@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-qftx-n4-adjoint-cubic-gauge-invariance.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-terminal-h-five-overlap-quotient-pattern-is-h-five-and-co-e-free.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized.md

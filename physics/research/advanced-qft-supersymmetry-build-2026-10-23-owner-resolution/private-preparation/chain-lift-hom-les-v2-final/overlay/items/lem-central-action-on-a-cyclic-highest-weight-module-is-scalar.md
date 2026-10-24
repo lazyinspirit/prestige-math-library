@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-central-action-on-a-cyclic-highest-weight-module-is-scalar.md

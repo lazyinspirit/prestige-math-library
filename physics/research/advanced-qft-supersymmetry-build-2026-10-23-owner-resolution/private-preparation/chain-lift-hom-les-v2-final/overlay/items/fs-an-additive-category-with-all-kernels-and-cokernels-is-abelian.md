@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-an-additive-category-with-all-kernels-and-cokernels-is-abelian.md

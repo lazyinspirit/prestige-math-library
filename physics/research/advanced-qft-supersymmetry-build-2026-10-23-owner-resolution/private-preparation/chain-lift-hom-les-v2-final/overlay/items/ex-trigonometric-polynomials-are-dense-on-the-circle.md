@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-trigonometric-polynomials-are-dense-on-the-circle.md

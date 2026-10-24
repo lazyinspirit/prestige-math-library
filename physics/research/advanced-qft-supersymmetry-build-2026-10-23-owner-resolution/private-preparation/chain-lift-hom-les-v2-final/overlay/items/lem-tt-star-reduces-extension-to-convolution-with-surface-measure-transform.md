@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-tt-star-reduces-extension-to-convolution-with-surface-measure-transform.md

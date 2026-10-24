@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-hyperbolic-group-means-a-group-with-a-hyperbolic-plane-subgroup.md

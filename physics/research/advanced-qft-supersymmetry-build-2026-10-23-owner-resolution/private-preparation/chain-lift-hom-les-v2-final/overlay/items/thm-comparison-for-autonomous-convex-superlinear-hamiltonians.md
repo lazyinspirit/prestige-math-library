@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-comparison-for-autonomous-convex-superlinear-hamiltonians.md

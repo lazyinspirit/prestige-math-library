@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-normal-bundle-of-the-zero-locus-of-a-transverse-section.md

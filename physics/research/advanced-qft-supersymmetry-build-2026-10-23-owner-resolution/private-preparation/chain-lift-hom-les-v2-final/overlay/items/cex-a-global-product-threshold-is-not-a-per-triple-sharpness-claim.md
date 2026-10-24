@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-global-product-threshold-is-not-a-per-triple-sharpness-claim.md

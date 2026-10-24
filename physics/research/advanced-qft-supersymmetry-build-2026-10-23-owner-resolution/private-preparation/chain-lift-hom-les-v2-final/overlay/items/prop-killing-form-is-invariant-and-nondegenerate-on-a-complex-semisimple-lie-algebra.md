@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-specialization-of-etale-pi1-under-geometric-hypotheses.md

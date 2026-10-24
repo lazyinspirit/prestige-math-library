@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hh-canonical-hecke-trace-is-symmetric-and-perfect.md

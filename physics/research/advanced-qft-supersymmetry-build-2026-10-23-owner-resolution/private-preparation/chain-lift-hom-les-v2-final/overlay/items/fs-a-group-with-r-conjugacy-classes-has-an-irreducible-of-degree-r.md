@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-group-with-r-conjugacy-classes-has-an-irreducible-of-degree-r.md

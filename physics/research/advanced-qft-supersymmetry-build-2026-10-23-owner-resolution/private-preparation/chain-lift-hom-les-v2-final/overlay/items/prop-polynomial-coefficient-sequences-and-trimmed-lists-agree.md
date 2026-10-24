@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-polynomial-coefficient-sequences-and-trimmed-lists-agree.md

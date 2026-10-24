@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-householder-qr-is-backward-stable-in-the-standard-floating-point-model.md

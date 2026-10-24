@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complex-integration-by-parts-on-intervals-and-decaying-lines.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent.md

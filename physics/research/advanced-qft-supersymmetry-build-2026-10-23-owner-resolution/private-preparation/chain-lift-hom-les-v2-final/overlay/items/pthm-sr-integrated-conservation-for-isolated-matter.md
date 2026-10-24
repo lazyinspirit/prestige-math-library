@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/pthm-sr-integrated-conservation-for-isolated-matter.md

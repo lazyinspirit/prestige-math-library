@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-hopf-lax-is-a-contraction-in-the-supremum-norm.md

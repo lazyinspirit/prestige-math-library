@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-polynomial-quantum-schur-first-level-weyl-filtration-and-hecke-corner.md

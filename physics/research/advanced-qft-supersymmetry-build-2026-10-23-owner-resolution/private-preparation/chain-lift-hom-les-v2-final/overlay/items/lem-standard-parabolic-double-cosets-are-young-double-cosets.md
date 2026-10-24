@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-standard-parabolic-double-cosets-are-young-double-cosets.md

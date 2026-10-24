@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-collapse-of-an-embedded-manifold-classifies-through-the-universal-thom-prespectrum.md

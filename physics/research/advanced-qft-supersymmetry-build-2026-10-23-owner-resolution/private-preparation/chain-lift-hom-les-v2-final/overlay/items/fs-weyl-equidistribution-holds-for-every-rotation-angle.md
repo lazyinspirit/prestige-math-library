@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-weyl-equidistribution-holds-for-every-rotation-angle.md

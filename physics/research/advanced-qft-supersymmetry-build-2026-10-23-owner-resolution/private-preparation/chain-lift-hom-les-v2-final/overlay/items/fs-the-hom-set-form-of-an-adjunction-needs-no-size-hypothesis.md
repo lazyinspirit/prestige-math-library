@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-hom-set-form-of-an-adjunction-needs-no-size-hypothesis.md

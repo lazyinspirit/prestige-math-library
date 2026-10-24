@@ -1,0 +1,37 @@
+---
+id: def-null-sequence
+kind: definition
+title: "Null sequence"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-rationals, lem-rat-triangle]
+aliases: []
+verification:
+  precheck: n/a
+  audited: 2026-07-24
+sources:
+  scraped: []
+  references:
+    - title: "T. Tao, Analysis I, 3rd ed., §5.2"
+      url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Real number (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Real_number"
+pipeline_run: null
+---
+
+## Definition
+
+A sequence $(a_n)_{n \ge 1}$ of rational numbers is a **null sequence** if for
+every rational $\varepsilon > 0$ there exists $N \in \mathbb{N}$ such that
+
+$$|a_n| < \varepsilon \qquad \text{for all } n \ge N.$$
+
+## Remarks
+
+- Equivalently: $(a_n)$ converges to $0$ (with rational tolerances).
+- In the construction of $\mathbb{R}$, two Cauchy sequences will be declared
+  equivalent exactly when their difference is a null sequence; the null
+  sequences are the "zero" of the construction.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-finitely-generated-semisimple-modules-are-finite-direct-sums-of-simple-modules.md

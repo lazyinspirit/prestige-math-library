@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-weighted-endpoints-are-not-obtained-by-setting-p-equal-one.md

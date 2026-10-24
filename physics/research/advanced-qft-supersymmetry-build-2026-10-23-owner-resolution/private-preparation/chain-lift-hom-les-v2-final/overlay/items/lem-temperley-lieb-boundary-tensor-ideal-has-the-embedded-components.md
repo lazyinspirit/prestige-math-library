@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-temperley-lieb-boundary-tensor-ideal-has-the-embedded-components.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group.md

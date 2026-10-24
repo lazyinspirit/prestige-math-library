@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-picard-group-of-a-point-blowup-of-the-projective-plane.md

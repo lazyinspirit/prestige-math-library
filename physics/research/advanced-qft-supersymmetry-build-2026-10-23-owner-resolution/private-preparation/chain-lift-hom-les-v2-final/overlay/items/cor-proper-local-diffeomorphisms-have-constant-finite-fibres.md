@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-proper-local-diffeomorphisms-have-constant-finite-fibres.md

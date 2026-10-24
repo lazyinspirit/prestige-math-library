@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-three-dimensional-variational-analysis-is-gaussian-map-update.md

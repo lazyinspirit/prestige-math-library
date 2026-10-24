@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-module-finite-domain-extension-lifts-finite-prime-chains.md

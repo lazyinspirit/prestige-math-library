@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-empty-set-is-the-product-of-the-large-family-of-all-sets.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-tensor-products-of-nonzero-cyclic-groups-are-always-nonzero.md

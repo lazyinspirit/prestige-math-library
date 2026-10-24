@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-w-one-p-is-not-an-algebra-below-the-continuity-threshold.md

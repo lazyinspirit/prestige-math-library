@@ -1,0 +1,94 @@
+{
+  "id": "lem-composition-operator-norm-inequality",
+  "agent": "/root/rendering_repair_coordinator/fa_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "fa_001",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile visibly shows literal \\le and \\, in the heading; frozen/current title has no math delimiters. The same literal supplier title is visible in the two supplied consumer tiles with wikilinks. The canonical-map tile contains only an ordinary ID mention, not a rendered title.",
+      "action": "Wrapped the existing norm inequality in inline math delimiters without changing notation.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Original assigned-item tile visibly prints \\(\\mathcal B(X,Y)\\) and \\(\\mathcal B(X)\\) in L2. The current supplier title retains those unsupported delimiters.",
+      "action": "Added an explicit local wikilink label with equivalent $...$ delimiters; supplier untouched.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added math delimiters to the existing title formula and a correctly delimited local label for the bounded-operator-spaces supplier.",
+  "source_lines_after": [
+    {
+      "line": 4,
+      "text": "title: \"Composition satisfies $\\\\|ST\\\\|\\\\le\\\\|S\\\\|\\\\,\\\\|T\\\\|$\""
+    },
+    {
+      "line": 41,
+      "text": "[L2] Bounded linear operators compose to a linear map, and $\\mathcal B(X,Y)$ denotes the bounded ones ([[def-space-of-bounded-linear-operators|The spaces $\\mathcal B(X,Y)$ and $\\mathcal B(X)$ of bounded linear operators]])."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "protected_metadata_byte_identical_except_authorized_title": true,
+  "status_before": "published",
+  "status_after": "published",
+  "before_raw_sha256": "3dd002fd30785c8f230e1ce8548c89a4ecde397cbe1a3762615ed8b4047b6663",
+  "preedit_guard_matched": true,
+  "source_sha256": "f5dd1a70a5cec792aaa527f2d0bffbbdba09b638c7050c9d7ff0cc3d88c9d737",
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-composition-operator-norm-inequality.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-composition-operator-norm-inequality.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-composition-operator-norm-inequality.md",
+            "item_id": "lem-composition-operator-norm-inequality",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-composition-operator-norm-inequality.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_resolution_standalone_images_viewed": [
+      "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/lem-composition-operator-norm-inequality--01.png",
+      "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/lem-canonical-map-is-natural--01.png",
+      "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/thm-hilbert-schmidt-operators-form-a-two-sided-ideal--01.png",
+      "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/thm-measurable-essentially-bounded-operator-fields-act-decomposably--02.png"
+    ],
+    "final_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/fa_001-final/manifest.json",
+    "final_preview_manifest_sha256": "6dc3323cd17384ddec3cbf0a480a7ba1516705c71c0e6f1b90404a2349065396",
+    "final_preview_source_sha256": "f5dd1a70a5cec792aaa527f2d0bffbbdba09b638c7050c9d7ff0cc3d88c9d737",
+    "final_standalone_original_resolution_image": "research/math-library-rendering-repairs-2026-10-23/previews/fa_001-final/screenshots/lem-composition-operator-norm-inequality--01.png",
+    "result": "Heading inequality and L2 supplier-space label render as mathematics with no raw commands. Full assigned-item tile independently viewed.",
+    "limitations": "Local title/ItemBody preview; no production route or downstream fresh preview claimed. Reference map has 16 unrelated parsing diagnostics, recorded by the preview manifest."
+  }
+}

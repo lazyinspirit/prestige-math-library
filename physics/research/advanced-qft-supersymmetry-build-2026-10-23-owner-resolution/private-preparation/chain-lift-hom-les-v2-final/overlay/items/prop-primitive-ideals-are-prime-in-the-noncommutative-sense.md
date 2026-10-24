@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-primitive-ideals-are-prime-in-the-noncommutative-sense.md

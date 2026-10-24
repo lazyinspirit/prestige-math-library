@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-smooth-dependence-of-ode-solutions-on-parameters.md

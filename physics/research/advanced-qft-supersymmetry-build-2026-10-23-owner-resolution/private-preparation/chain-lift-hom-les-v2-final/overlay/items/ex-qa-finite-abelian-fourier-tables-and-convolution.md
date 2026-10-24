@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-qa-finite-abelian-fourier-tables-and-convolution.md

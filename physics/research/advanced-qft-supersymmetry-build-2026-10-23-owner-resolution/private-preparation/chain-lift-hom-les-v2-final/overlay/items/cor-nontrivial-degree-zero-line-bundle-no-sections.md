@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-nontrivial-degree-zero-line-bundle-no-sections.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-coprime-plane-forms-form-a-homogeneous-regular-sequence.md

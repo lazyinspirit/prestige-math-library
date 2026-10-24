@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-p-basis-of-an-exponent-one-purely-inseparable-extension.md

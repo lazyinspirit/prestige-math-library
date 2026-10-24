@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cover-small-chains-for-the-two-arc-cover-of-a-circle.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-right-total-derived-functor-on-the-bounded-below-derived-category.md

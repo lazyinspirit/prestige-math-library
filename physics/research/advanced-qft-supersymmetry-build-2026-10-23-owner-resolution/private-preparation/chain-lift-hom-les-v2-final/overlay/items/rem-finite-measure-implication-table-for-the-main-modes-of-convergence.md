@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-finite-measure-implication-table-for-the-main-modes-of-convergence.md

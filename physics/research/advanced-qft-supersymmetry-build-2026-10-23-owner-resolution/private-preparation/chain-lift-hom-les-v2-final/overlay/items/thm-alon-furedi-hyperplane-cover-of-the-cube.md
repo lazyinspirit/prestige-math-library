@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-alon-furedi-hyperplane-cover-of-the-cube.md

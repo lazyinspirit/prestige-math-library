@@ -1,0 +1,467 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "3",
+  "level": 1,
+  "scope": [
+    "def-qftx-gauge-slice-and-faddeev-popov-operator",
+    "thm-qftx-local-faddeev-popov-slice-jacobian",
+    "ex-qftx-translation-gauge-slice-jacobian",
+    "ex-qftx-so2-gauge-slice-multiplicity"
+  ],
+  "contracts": {
+    "def-qftx-gauge-slice-and-faddeev-popov-operator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires an admissible point s in a slice S and positive regulator dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement check: The dimensions satisfy 1 <= k <= n, so a zero-dimensional gauge group is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement check: The finite-dimensional formulas apply when k=1 and n=1 as well as in higher dimensions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition assigns Delta_FP=0 when M_x is singular; transversality is separately defined by invertibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "It introduces finite-dimensional data and a pointwise density ratio, with no limit parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement check: The datum fixes all manifolds, groups, actions, slices and densities; AC_omega is inherited and no further choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff claim appears in the Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff claim appears in the Definition."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "A mathematical definition is checked through its explicit domains, action laws, and density-ratio convention; no discrete finite check applies."
+    },
+    "thm-qftx-local-faddeev-popov-slice-jacobian": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "Choose an embedded smooth submanifold $S\\subset X$ of codimension $k$, a smooth positive density $\\mu_S$, and an open neighborhood $U\\subset X$ of a point $s\\in S$. Embedded means that near each point of $S$, a smooth chart on $X$ identifies $S$ with $\\mathbb R^{n-k}\\times\\{0\\}$. A **gauge condition** on $U$ is a smooth map $\\chi:U\\to\\mathbb R^k$ such that $U\\cap S=\\chi^{-1}(0)$ and, for every $s'\\in U\\cap S$, $d\\chi_{s'}$ is surjective with kernel $T_{s'}S$. For every $x\\in U$, the **infinitesimal orbit map** is $R_x:=d(\\alpha_x)_e:\\mathfrak k\\to T_xX$, where $\\alpha_x(g)=x\\cdot g$; call its kernel the infinitesimal stabilizer at $x$. The **Faddeev–Popov operator** at $x$ is the ordinary linear map $M_x:=d\\chi_x\\circ R_x:\\mathfrak k\\to\\mathbb R^k$. At a slice point $s'\\in U\\cap S$, call the condition **transverse** when $M_{s'}$ is an isomorphism. Choose a positive density $\\nu$ on $\\mathfrak k$ equal to $(\\mu_K)_e$, and the standard positive density $\\lambda$ on $\\mathbb R^k$. For every $x\\in U$, the finite-dimensional Faddeev–Popov Jacobian $\\Delta_{\\mathrm{FP}}(x)$ is the nonnegative density ratio defined by $M_x^*\\lambda=\\Delta_{\\mathrm{FP}}(x)\\nu$; in chosen bases it is $|\\det M_x|$, and it is zero when $M_x$ is singular.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-change-of-variables-for-compactly-supported-functions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\\mathbb R^n\\to\\mathbb R$ be compactly supported Riemann integrable and suppose $\\operatorname{supp}f\\subseteq g(U)$. Define\n$$h(x)=\\begin{cases}f(g(x))|\\det Dg(x)|,&x\\in U,\\\\0,&x\\notin U.\\end{cases}$$\nThen $h$ is compactly supported Riemann integrable and\n$$\\int_{\\mathbb R^n}f(y)\\,dy=\\int_{\\mathbb R^n}h(x)\\,dx.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "adapted-slice-coordinates",
+          "step": "1.1",
+          "claim": "Use the submanifold chart and invertibility of the normal derivative of chi to form adapted target coordinates.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-orbit-slice-diffeomorphism",
+          "step": "2.1",
+          "claim": "Compute the block differential of Psi; its diagonal blocks are M_s0 and the identity, so the inverse function theorem gives the local chart.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "density-normalized-jacobian",
+          "step": "3.1",
+          "claim": "Divide the block determinant by the source density and apply change of variables on the local diffeomorphism chart.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-transverse-intersection-count",
+          "step": "4.1",
+          "claim": "Use the left-invariant frame to identify the orbit derivative with M, apply local change of variables on each cutoff branch, and bound the remainder and approximate-identity error.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement check: The local chart hypothesis supplies s0 and 1 <= k <= n; for the multiplicity clause r=0 is allowed and gives an empty sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If M is singular, the density ratio is zero by the Definition and the transverse hypotheses fail; Step 4.1 requires invertible derivatives at each root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement check: The block determinant and multiplicity argument include k=1 and a single transverse zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement check: Singular roots and non-isolated stabilizer zeros are excluded by the explicit invertibility assumptions; this boundary is not counted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the epsilon down-to-zero limit by continuity and the unit-mass approximate identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement check: The proof selects finitely many inverse neighborhoods and cutoffs for the finite root set; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff claim appears in the Statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff claim appears in the Statement."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The finite-dimensional analytic identities are proved in Steps 2.1–4.1; no separate discrete finite check is registered."
+    },
+    "ex-qftx-translation-gauge-slice-jacobian": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "A **finite-dimensional regulated gauge-slice datum** consists of integers $1\\le k\\le n$; a finite-dimensional Lie group $K$ of dimension $k$, with Lie algebra $\\mathfrak k:=T_eK$ and bracket transported from left-invariant vector fields; a chosen smooth positive left-invariant density $\\mu_K$, meaning $(L_h^K)^*\\mu_K=\\mu_K$ for $L_h^K(g)=hg$; a finite-dimensional smooth manifold $X$ of dimension $n$ with a chosen smooth positive density $\\mu_X$; and a smooth right action $\\alpha:X\\times K\\to X$, written $x\\cdot g$, with $x\\cdot e=x$ and $(x\\cdot g)\\cdot h=x\\cdot(gh)$. A smooth positive density on an $m$-manifold has coordinate form $\\rho(x)|dx^1\\cdots dx^m|$ with smooth $\\rho>0$, and transforms by the absolute coordinate Jacobian. The group $K$ and its action on $X$ are separate regulator data. They are not identified with the full gauge group or the full space of connections unless a particular finite model explicitly constructs such an action and verifies that it preserves $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "Choose an embedded smooth submanifold $S\\subset X$ of codimension $k$, a smooth positive density $\\mu_S$, and an open neighborhood $U\\subset X$ of a point $s\\in S$. Embedded means that near each point of $S$, a smooth chart on $X$ identifies $S$ with $\\mathbb R^{n-k}\\times\\{0\\}$. A **gauge condition** on $U$ is a smooth map $\\chi:U\\to\\mathbb R^k$ such that $U\\cap S=\\chi^{-1}(0)$ and, for every $s'\\in U\\cap S$, $d\\chi_{s'}$ is surjective with kernel $T_{s'}S$. For every $x\\in U$, the **infinitesimal orbit map** is $R_x:=d(\\alpha_x)_e:\\mathfrak k\\to T_xX$, where $\\alpha_x(g)=x\\cdot g$; call its kernel the infinitesimal stabilizer at $x$. The **Faddeev–Popov operator** at $x$ is the ordinary linear map $M_x:=d\\chi_x\\circ R_x:\\mathfrak k\\to\\mathbb R^k$. At a slice point $s'\\in U\\cap S$, call the condition **transverse** when $M_{s'}$ is an isomorphism. Choose a positive density $\\nu$ on $\\mathfrak k$ equal to $(\\mu_K)_e$, and the standard positive density $\\lambda$ on $\\mathbb R^k$. For every $x\\in U$, the finite-dimensional Faddeev–Popov Jacobian $\\Delta_{\\mathrm{FP}}(x)$ is the nonnegative density ratio defined by $M_x^*\\lambda=\\Delta_{\\mathrm{FP}}(x)\\nu$; in chosen bases it is $|\\det M_x|$, and it is zero when $M_x$ is singular.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-local-faddeev-popov-slice-jacobian",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $(X,K,\\alpha,S,\\chi,\\mu_X,\\mu_K,\\mu_S)$ be finite-dimensional regulated gauge-slice data as defined above, with $\\dim X=n$, $\\dim K=k$, $1\\le k\\le n$, and $s_0\\in S\\cap U$. Thus $K$ acts smoothly on the right, $S$ is an embedded codimension-$k$ submanifold, $\\chi:U\\to\\mathbb R^k$ is a smooth defining submersion with $\\ker d\\chi_s=T_sS$, and the Faddeev–Popov operator is $M_s=d\\chi_s\\circ R_s$. Suppose $M_{s_0}$ is an isomorphism. For $\\Psi(g,s)=s\\cdot g$, there are neighborhoods $V$ of the identity in $K$, $W$ of $s_0$ in $S$, and $O$ of $s_0$ in $X$ such that $\\Psi:V\\times W\\to O$ is a $C^1$ diffeomorphism. Consequently, each orbit has exactly one representative in $W$ among the representatives reached using $V$.\n\nFix group coordinates $\\xi$ near the identity, slice coordinates $z$ near $s_0$, and adapted target coordinates $(y,z)=(\\chi,z)$ near $s_0$. Write the densities there as $\\mu_K=\\rho_K(\\xi)|d\\xi|$, $\\mu_S=\\rho_S(z)|dz|$, and $\\mu_X=\\rho_X(y,z)|dy\\,dz|$. The positive Jacobian $J_\\Psi$ defined by $\\Psi^*\\mu_X=J_\\Psi(\\mu_K\\otimes\\mu_S)$ satisfies\n\n$$\nJ_\\Psi(e,s_0)=\\frac{\\rho_X(0,z_0)}{\\rho_S(z_0)}\\,\\Delta_{\\mathrm{FP}}(s_0),\n$$\n\nwhere $\\Delta_{\\mathrm{FP}}$ uses the density $(\\mu_K)_e$ and the standard density on $\\mathbb R^k$. Thus, when the target and slice densities are normalized so that $\\rho_X(0,z_0)=\\rho_S(z_0)$, the ordinary finite-dimensional orbit-to-slice Jacobian is exactly $\\Delta_{\\mathrm{FP}}(s_0)$. For every compactly supported Riemann-integrable function $f:O\\to\\mathbb R$, the local change-of-variables identity is\n$$\n\\int_O f\\,d\\mu_X=\\int_{V\\times W}(f\\circ\\Psi)J_\\Psi\\,d\\mu_K\\,d\\mu_S.\n$$\n\nFor the exact multiplicity statement, fix $x\\in X$ and a relatively compact open set $\\Gamma\\subset K$ such that $x\\cdot\\overline{\\Gamma}\\subset U$. Let $F_x(g)=\\chi(x\\cdot g)$. Let $r\\ge 0$ be finite, and suppose $F_x$ has exactly $r$ zeros $g_1,\\ldots,g_r$ in the support of a smooth function $\\varphi$ compactly supported in $\\Gamma$, each $M_{x\\cdot g_i}$ is invertible, and the slice points $s_i=x\\cdot g_i$ are distinct. Choose a nonnegative $\\eta\\in C_c^\\infty(\\mathbb R^k)$, supported in a ball $B_C(0)$ of finite radius $C>0$, with integral $1$, and set $\\eta_\\epsilon(y)=\\epsilon^{-k}\\eta(y/\\epsilon)$. Then\n\n$$\n\\lim_{\\epsilon\\downarrow0}\\int_\\Gamma \\varphi(g)\\,\\eta_\\epsilon(F_x(g))\\,\\Delta_{\\mathrm{FP}}(x\\cdot g)\\,d\\mu_K(g)=\\sum_{i=1}^r\\varphi(g_i).\n$$\n\nIn particular, if $\\varphi=1$ near the zeros, this finite-regulator expression counts the $r$ distinct transverse intersections exactly. The theorem asserts only a local chart and this finite-dimensional multiplicity formula; it gives no global gauge section, functional determinant, or continuum path-integral measure.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "translation-action-and-slice",
+          "step": "1.1",
+          "claim": "Check the right action and the defining-submersion condition for the coordinate slice.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unit-infinitesimal-jacobian",
+          "step": "1.2",
+          "claim": "Compute the orbit derivative, FP operator, density ratio, and local orbit-to-slice Jacobian.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-orbit-intersection",
+          "step": "2.1",
+          "claim": "Solve the affine gauge condition and verify its unique transverse root.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "approximate-identity-limit",
+          "step": "3.1",
+          "claim": "Change variables to the gauge coordinate and use continuity and unit mass to obtain the test-function value.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes nonempty Euclidean regulator and translation group data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At a=0 the unique transverse root is t=0; Step 2.1 includes this zero-coordinate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies exactly one group parameter and one slice intersection."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 gives M_s=1 at every slice point, so no degeneracy occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the epsilon down-to-zero limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement check: All spaces, densities, and the test function are fixed explicitly; no choice principle is used in the calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff assertion is made."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The examples have complete analytic calculations; no discrete finite check applies."
+    },
+    "ex-qftx-so2-gauge-slice-multiplicity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "A **finite-dimensional regulated gauge-slice datum** consists of integers $1\\le k\\le n$; a finite-dimensional Lie group $K$ of dimension $k$, with Lie algebra $\\mathfrak k:=T_eK$ and bracket transported from left-invariant vector fields; a chosen smooth positive left-invariant density $\\mu_K$, meaning $(L_h^K)^*\\mu_K=\\mu_K$ for $L_h^K(g)=hg$; a finite-dimensional smooth manifold $X$ of dimension $n$ with a chosen smooth positive density $\\mu_X$; and a smooth right action $\\alpha:X\\times K\\to X$, written $x\\cdot g$, with $x\\cdot e=x$ and $(x\\cdot g)\\cdot h=x\\cdot(gh)$. A smooth positive density on an $m$-manifold has coordinate form $\\rho(x)|dx^1\\cdots dx^m|$ with smooth $\\rho>0$, and transforms by the absolute coordinate Jacobian. The group $K$ and its action on $X$ are separate regulator data. They are not identified with the full gauge group or the full space of connections unless a particular finite model explicitly constructs such an action and verifies that it preserves $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "Choose an embedded smooth submanifold $S\\subset X$ of codimension $k$, a smooth positive density $\\mu_S$, and an open neighborhood $U\\subset X$ of a point $s\\in S$. Embedded means that near each point of $S$, a smooth chart on $X$ identifies $S$ with $\\mathbb R^{n-k}\\times\\{0\\}$. A **gauge condition** on $U$ is a smooth map $\\chi:U\\to\\mathbb R^k$ such that $U\\cap S=\\chi^{-1}(0)$ and, for every $s'\\in U\\cap S$, $d\\chi_{s'}$ is surjective with kernel $T_{s'}S$. For every $x\\in U$, the **infinitesimal orbit map** is $R_x:=d(\\alpha_x)_e:\\mathfrak k\\to T_xX$, where $\\alpha_x(g)=x\\cdot g$; call its kernel the infinitesimal stabilizer at $x$. The **Faddeev–Popov operator** at $x$ is the ordinary linear map $M_x:=d\\chi_x\\circ R_x:\\mathfrak k\\to\\mathbb R^k$. At a slice point $s'\\in U\\cap S$, call the condition **transverse** when $M_{s'}$ is an isomorphism. Choose a positive density $\\nu$ on $\\mathfrak k$ equal to $(\\mu_K)_e$, and the standard positive density $\\lambda$ on $\\mathbb R^k$. For every $x\\in U$, the finite-dimensional Faddeev–Popov Jacobian $\\Delta_{\\mathrm{FP}}(x)$ is the nonnegative density ratio defined by $M_x^*\\lambda=\\Delta_{\\mathrm{FP}}(x)\\nu$; in chosen bases it is $|\\det M_x|$, and it is zero when $M_x$ is singular.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-local-faddeev-popov-slice-jacobian",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $(X,K,\\alpha,S,\\chi,\\mu_X,\\mu_K,\\mu_S)$ be finite-dimensional regulated gauge-slice data as defined above, with $\\dim X=n$, $\\dim K=k$, $1\\le k\\le n$, and $s_0\\in S\\cap U$. Thus $K$ acts smoothly on the right, $S$ is an embedded codimension-$k$ submanifold, $\\chi:U\\to\\mathbb R^k$ is a smooth defining submersion with $\\ker d\\chi_s=T_sS$, and the Faddeev–Popov operator is $M_s=d\\chi_s\\circ R_s$. Suppose $M_{s_0}$ is an isomorphism. For $\\Psi(g,s)=s\\cdot g$, there are neighborhoods $V$ of the identity in $K$, $W$ of $s_0$ in $S$, and $O$ of $s_0$ in $X$ such that $\\Psi:V\\times W\\to O$ is a $C^1$ diffeomorphism. Consequently, each orbit has exactly one representative in $W$ among the representatives reached using $V$.\n\nFix group coordinates $\\xi$ near the identity, slice coordinates $z$ near $s_0$, and adapted target coordinates $(y,z)=(\\chi,z)$ near $s_0$. Write the densities there as $\\mu_K=\\rho_K(\\xi)|d\\xi|$, $\\mu_S=\\rho_S(z)|dz|$, and $\\mu_X=\\rho_X(y,z)|dy\\,dz|$. The positive Jacobian $J_\\Psi$ defined by $\\Psi^*\\mu_X=J_\\Psi(\\mu_K\\otimes\\mu_S)$ satisfies\n\n$$\nJ_\\Psi(e,s_0)=\\frac{\\rho_X(0,z_0)}{\\rho_S(z_0)}\\,\\Delta_{\\mathrm{FP}}(s_0),\n$$\n\nwhere $\\Delta_{\\mathrm{FP}}$ uses the density $(\\mu_K)_e$ and the standard density on $\\mathbb R^k$. Thus, when the target and slice densities are normalized so that $\\rho_X(0,z_0)=\\rho_S(z_0)$, the ordinary finite-dimensional orbit-to-slice Jacobian is exactly $\\Delta_{\\mathrm{FP}}(s_0)$. For every compactly supported Riemann-integrable function $f:O\\to\\mathbb R$, the local change-of-variables identity is\n$$\n\\int_O f\\,d\\mu_X=\\int_{V\\times W}(f\\circ\\Psi)J_\\Psi\\,d\\mu_K\\,d\\mu_S.\n$$\n\nFor the exact multiplicity statement, fix $x\\in X$ and a relatively compact open set $\\Gamma\\subset K$ such that $x\\cdot\\overline{\\Gamma}\\subset U$. Let $F_x(g)=\\chi(x\\cdot g)$. Let $r\\ge 0$ be finite, and suppose $F_x$ has exactly $r$ zeros $g_1,\\ldots,g_r$ in the support of a smooth function $\\varphi$ compactly supported in $\\Gamma$, each $M_{x\\cdot g_i}$ is invertible, and the slice points $s_i=x\\cdot g_i$ are distinct. Choose a nonnegative $\\eta\\in C_c^\\infty(\\mathbb R^k)$, supported in a ball $B_C(0)$ of finite radius $C>0$, with integral $1$, and set $\\eta_\\epsilon(y)=\\epsilon^{-k}\\eta(y/\\epsilon)$. Then\n\n$$\n\\lim_{\\epsilon\\downarrow0}\\int_\\Gamma \\varphi(g)\\,\\eta_\\epsilon(F_x(g))\\,\\Delta_{\\mathrm{FP}}(x\\cdot g)\\,d\\mu_K(g)=\\sum_{i=1}^r\\varphi(g_i).\n$$\n\nIn particular, if $\\varphi=1$ near the zeros, this finite-regulator expression counts the $r$ distinct transverse intersections exactly. The theorem asserts only a local chart and this finite-dimensional multiplicity formula; it gives no global gauge section, functional determinant, or continuum path-integral measure.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rotation-action-and-slice",
+          "step": "1.1",
+          "claim": "Verify the right rotation action and that chi defines the horizontal axis slice.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "circle-orbit-jacobian",
+          "step": "1.2",
+          "claim": "Differentiate the action and compute the absolute determinant and local chart Jacobian.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-transverse-roots",
+          "step": "2.1",
+          "claim": "Find both zeros on the circle, their distinct slice points, and the nonzero derivatives.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-branch-mollifier-count",
+          "step": "3.1",
+          "claim": "On each inverse branch the FP factor cancels the derivative, yielding one unit mass per zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "origin-stabilizer-boundary",
+          "step": "4.1",
+          "claim": "At the origin the orbit map and FP operator vanish and all group elements are zeros, so the transverse finite-root theorem does not apply.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes X=R^2 and K=SO(2), both nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the zero FP operator and non-isolated zero set at the origin."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes the two global intersections; each root separately has a local inverse branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 records the stabilizer degeneracy and Step 2.1 proves transversality for r>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 evaluates the epsilon down-to-zero limit on the two branches."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement check: The two zeros and all regulator data are explicit; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff assertion is made."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The examples have complete analytic calculations; no discrete finite check applies."
+    }
+  }
+}

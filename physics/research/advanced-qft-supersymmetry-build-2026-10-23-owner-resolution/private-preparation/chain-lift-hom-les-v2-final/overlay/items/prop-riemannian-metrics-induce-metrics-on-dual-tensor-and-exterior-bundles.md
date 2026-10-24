@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-riemannian-metrics-induce-metrics-on-dual-tensor-and-exterior-bundles.md

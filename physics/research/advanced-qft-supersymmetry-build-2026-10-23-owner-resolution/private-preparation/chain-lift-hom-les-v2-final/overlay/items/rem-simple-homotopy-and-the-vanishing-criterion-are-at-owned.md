@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-simple-homotopy-and-the-vanishing-criterion-are-at-owned.md

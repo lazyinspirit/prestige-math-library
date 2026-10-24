@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-morse-smale-transversality-is-equivalent-to-surjectivity-of-the-linearized-flow-operator.md

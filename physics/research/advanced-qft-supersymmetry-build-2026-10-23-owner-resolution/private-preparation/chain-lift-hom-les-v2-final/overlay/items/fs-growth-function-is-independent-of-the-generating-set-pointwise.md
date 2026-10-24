@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-growth-function-is-independent-of-the-generating-set-pointwise.md

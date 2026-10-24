@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-fine-euclidean-approximation-lands-in-a-prescribed-tubular-neighbourhood.md

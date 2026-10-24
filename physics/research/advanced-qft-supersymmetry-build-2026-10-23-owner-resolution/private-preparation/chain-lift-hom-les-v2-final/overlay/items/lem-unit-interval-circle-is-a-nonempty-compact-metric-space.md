@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-unit-interval-circle-is-a-nonempty-compact-metric-space.md

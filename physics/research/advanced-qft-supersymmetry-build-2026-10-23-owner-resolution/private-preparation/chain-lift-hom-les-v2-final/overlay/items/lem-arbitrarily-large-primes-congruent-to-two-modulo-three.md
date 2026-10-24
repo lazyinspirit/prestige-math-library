@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-arbitrarily-large-primes-congruent-to-two-modulo-three.md

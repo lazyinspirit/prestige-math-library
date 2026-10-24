@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-truncated-l-one-metric-metrises-convergence-in-measure-on-finite-measure-spaces.md

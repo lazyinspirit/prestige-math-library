@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra.md

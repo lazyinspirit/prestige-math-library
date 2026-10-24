@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-free-cocompletion-theorem-holds-for-a-large-source-category.md

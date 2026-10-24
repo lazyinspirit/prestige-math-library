@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-restriction-corestriction-composite-is-multiplication-by-the-index.md

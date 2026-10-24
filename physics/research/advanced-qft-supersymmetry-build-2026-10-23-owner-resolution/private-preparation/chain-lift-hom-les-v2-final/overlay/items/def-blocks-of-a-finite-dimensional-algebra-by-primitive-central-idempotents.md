@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents.md

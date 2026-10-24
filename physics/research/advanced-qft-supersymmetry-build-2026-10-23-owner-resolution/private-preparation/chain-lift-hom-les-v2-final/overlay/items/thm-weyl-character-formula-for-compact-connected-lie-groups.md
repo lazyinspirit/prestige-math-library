@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-weyl-character-formula-for-compact-connected-lie-groups.md

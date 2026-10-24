@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-constant-dimensional-family-of-tangent-subspaces-is-a-smooth-distribution.md

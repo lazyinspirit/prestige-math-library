@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-hecke-specht-theory-specializes-to-group-specht-theory-at-q-one.md

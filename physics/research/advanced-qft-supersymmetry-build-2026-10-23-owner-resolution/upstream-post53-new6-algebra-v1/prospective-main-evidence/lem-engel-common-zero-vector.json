@@ -1,0 +1,82 @@
+{
+  "id": "lem-engel-common-zero-vector",
+  "agent": "/root/lie_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution audit tile --01 visibly prints dollar signs and TeX commands in the uppercase technique banner; the frozen/current original source contains the exact corresponding inline TeX. This renderer inserts technique text without math parsing.",
+      "action": "Replaced the banner expression with the equivalent prose \"the dimension of the Lie algebra\".",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Changed only the proof-technique paragraph to \"induction on the dimension of the Lie algebra\"; this avoids raw TeX in a plain React text banner.",
+  "source_lines_after": {
+    "46": "**Proof technique:** induction on the dimension of the Lie algebra."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "publication_status_preserved": {
+    "before": "published",
+    "after": "published",
+    "frontmatter_byte_identical": true
+  },
+  "before_raw_sha256": "c0480f97a14f7c23499943bfc4fca58e435b31cbefff0d1b6ef2ccdcdfe9b436",
+  "after_raw_sha256": "1d08cb1c23a15e52852f1d2789057d5662d87924ee34dcbee8308c1159cfa293",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-engel-common-zero-vector.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-engel-common-zero-vector.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-engel-common-zero-vector.md",
+            "item_id": "lem-engel-common-zero-vector",
+            "status": "pass",
+            "strategy": "induction"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-engel-common-zero-vector.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_inspection": {
+    "original": "research/math-library-rendering-audit-2026-10-23/lie-theory/screenshots/lem-engel-common-zero-vector--01.png",
+    "original_resolution": true,
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/lie007-native",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/lie007-native/manifest.json",
+    "manifest_sha256": "0583d63ae8d2162ddf0fecc9d080ec52b93da6701b8dca3c75a11c7d4d51c3b1",
+    "source_sha256": "1d08cb1c23a15e52852f1d2789057d5662d87924ee34dcbee8308c1159cfa293",
+    "reference_map_sha256": "afc6e0bf66b63743564f7b3cb09458e72ab801711cd80ad4209ad45eff0d6c69",
+    "tiles_inspected": [
+      "lem-engel-common-zero-vector--01.png",
+      "lem-engel-common-zero-vector--02.png"
+    ],
+    "result": "Native current tile --01 visibly shows the complete readable uppercase technique phrase without TeX or dollars. Tile --02 shows the proof conclusion. Current tile --01 displayed intermittent absent portions of unrelated text while retaining surrounding frames and other text; no source changes were inferred from that capture/view artifact. Original audit tile independently shows that surrounding text.",
+    "preview_exit_code": 0,
+    "preview_limitations": "Local native ItemBody preview only; reference map reported 13 unrelated parse diagnostics; no production-route or metadata footer coverage."
+  },
+  "renderer_limitation": "Proof-technique banners use plain text with CSS uppercase and do not parse inline math; equivalent prose is the local workaround."
+}

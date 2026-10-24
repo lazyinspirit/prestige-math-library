@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-normal-bundle-of-the-sphere-in-euclidean-space-is-trivial.md

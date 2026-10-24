@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor.md

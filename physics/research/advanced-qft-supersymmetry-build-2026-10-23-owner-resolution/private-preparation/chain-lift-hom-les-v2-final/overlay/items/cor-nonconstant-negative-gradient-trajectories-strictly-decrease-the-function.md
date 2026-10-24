@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-nonconstant-negative-gradient-trajectories-strictly-decrease-the-function.md

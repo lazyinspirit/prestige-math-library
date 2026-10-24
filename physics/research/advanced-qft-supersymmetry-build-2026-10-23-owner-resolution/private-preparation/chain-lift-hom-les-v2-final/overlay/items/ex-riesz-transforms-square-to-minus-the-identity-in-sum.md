@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-riesz-transforms-square-to-minus-the-identity-in-sum.md

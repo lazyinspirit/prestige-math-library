@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero.md

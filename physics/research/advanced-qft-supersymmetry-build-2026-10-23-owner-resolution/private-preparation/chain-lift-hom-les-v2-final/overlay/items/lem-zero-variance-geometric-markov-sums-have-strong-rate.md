@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-zero-variance-geometric-markov-sums-have-strong-rate.md

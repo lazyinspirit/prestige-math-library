@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-primitive-one-forms-on-a-hermitian-two-plane.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-decomposition-map-is-independent-of-the-stable-lattice.md

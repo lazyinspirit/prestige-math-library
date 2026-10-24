@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-tensor-functor-is-just-a-strong-monoidal-functor.md

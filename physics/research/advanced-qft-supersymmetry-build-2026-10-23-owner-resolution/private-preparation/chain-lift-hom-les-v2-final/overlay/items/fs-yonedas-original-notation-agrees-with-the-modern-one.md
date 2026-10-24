@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-yonedas-original-notation-agrees-with-the-modern-one.md

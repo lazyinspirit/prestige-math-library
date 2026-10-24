@@ -1,0 +1,76 @@
+# Batch 12 Step 1 authoring record
+
+Run: advanced-qft-supersymmetry-build-2026-10-23  
+Pair: qftx-adhm-moduli / qftx-adhm-moduli-examples  
+Category and library: quantum-field-theory-mathematics / mathematics
+
+## Inventory, plan comparison, and dependency levels
+
+The run dependency-level record assigns batch 12 page level 3 and requires batches 5 and 9. The canonical design at research/plan-advanced-qft-and-supersymmetry-track.md lines 163–169 and the plan-spec.json rows agree on the A/B IDs, title, order 968, classification, and page prerequisites qftx-abbv-integration and qftx-instanton-topology-mathematics. The plan and initial batch manifest have empty item arrays as construction placeholders; the assigned future contracts in research/advanced-qft-supersymmetry-2026-10-23/scaffold/proposed-inventory.json provide the two required A items.
+
+The beta task also lists the-lebesgue-integral-and-the-convergence-theorems as a required earlier page. This conflicts with both the complete design section and the active plan-spec.json row, whose exact requires list has only the two pages above. The canonical plan controls; I retained the two declared page requirements and recorded the task-only Lebesgue page as a planning conflict. The ADHM definitions specify the trace integral directly, and no additional page edge was added.
+
+Item inventory and levels, using actual item dependencies rather than substituting the batch page level:
+
+| Item | deps | dependency_level |
+|---|---|---:|
+| def-framed-u-n-instanton-moduli-and-adhm-data | def-qftx-instanton-number-and-asd-sector plus the published AC definition | 3 |
+| thm-adhm-fixed-point-instanton-count | the preceding local definition, thm-atiyah-bott-berline-vergne-integration-formula, and AC | 7 |
+| ex-adhm-u1-one-box-fixed-point | local definition and fixed-point theorem | 8 |
+| ex-adhm-u2-one-instanton-fixed-points | local definition and fixed-point theorem | 8 |
+
+The levels use the inspected supplier item levels: the instanton convention item is level 2 and the ABBV theorem is level 6. The Borel-localization item is a missing transitive supplier of ABBV, not a direct dependency of this theorem, so it does not enter this batch's item-level calculation. The positive-FI theorem is level 7 because its highest direct item supplier is ABBV at level 6. The two B examples are level 8.
+
+## Authored claims and conventions
+
+- def-framed-u-n-instanton-moduli-and-adhm-data defines the framed finite-action ASD charge convention, the complex and real ADHM moment maps, cyclic stability, the stable complex quotient and the real FI-level quotient separately, the positive-FI chamber, the framing/rotation torus action, and the distinct Uhlenbeck and Gieseker spaces. The Gieseker charge is specified by its Hilbert polynomial. Its ADHM-to-ASD and ADHM-to-Gieseker identifications are not stated as definitions or treated as proved.
+- thm-adhm-fixed-point-instanton-count proves smoothness of the stable complex quotient, the fixed-point bijection with N-tuples of partitions, and the tangent character from the explicit ADHM deformation complex. It defines the formal fixed-point series coefficientwise in the localized character field. The ADHM/monad comparison and any noncompact integration formula remain explicit conditional inputs; the theorem asserts no continuum path-integral identity.
+- ex-adhm-u1-one-box-fixed-point computes the one-box tangent weights and Euler factor.
+- ex-adhm-u2-one-instanton-fixed-points computes both one-box colors for U(2), their tangent characters and Euler factors, and includes a labeled TikZ depiction. The calculations do not rely on the diagram.
+- Both pages are frontmatter-only with empty Markdown bodies, as required.
+
+## Supplier inspection and current readiness
+
+The actual batch-5 carrier items/def-qftx-instanton-number-and-asd-sector.md and its complete definition/proof were inspected. Its relevant interface fixes q_B=(8π²)⁻¹∫B(F∧F), B=-tr in the defining SU(2) convention, and the Hodge/self-duality sign. I use only the supplied trace/Hodge conventions and do not extend its SU(2)-only integrality clause to general U(N). Current loadStep1Record plus step1Decision now reports this supplier's current record as ready, with its full listed transitive closure bound into the record. The assigned definition consequently has its required charge interface available; its separate ADHM quotient descriptions remain definitions and do not assert unproved correspondences.
+
+The current batch-9 carrier items/thm-atiyah-bott-berline-vergne-integration-formula.md was inspected with its actual statement, proof, and direct suppliers. Its Statement is for compact oriented smooth T-manifolds. Its proof cites thm-borel-localization-for-compact-torus-actions, and a current batch-8 carrier is now present. I read its complete statement and proof and compared the interface: it assumes a compact, finite-dimensional, Hausdorff, second-countable smooth T-manifold without boundary and real or rational Borel cohomology using a product Milnor model; the ABBV use is compact real Borel, so the statement supplies the planned compact interface. It makes no noncompact or compact-support assertion. However, the Borel item itself has no current Step-1 readiness record, its Fact [F2] expressly leaves the real character-localization interface conditional because def-qftx-character-localization has no current record, and its direct in-run prerequisite records are absent. ABBV and all four of its direct in-run prerequisite items likewise lack current Step-1 records. These are actual missing readiness inputs, not draft-status or independent-approval objections. I therefore retain the ABBV use as conditional and do not apply compact ABBV directly to the resolved noncompact ADHM quotient.
+
+The actual def-abbv-equivariant-integration-conventions.md and def-torus-equivariant-cohomology-cartan-model.md carriers were inspected. The ABBV convention defines real Borel cohomology, real character classes, localization, and fiber integration, and explicitly assumes no identification with Cartan, Chow, or quotient-stack models. The Cartan-model definition separately gives a real Borel model and a real Cartan complex and makes no general comparison. The ABBV theorem itself uses the real Borel convention, so no Borel/Cartan comparison is needed here. The ABBV convention and theorem still lack current Step-1 readiness records; the torus Cartan-model item now has a current ready record.
+
+## Sources and harvested results
+
+1. Hiraku Nakajima and Kota Yoshioka, Lectures on Instanton Counting, full 60-page PDF: https://arxiv.org/pdf/math/0311058, §3.1, PDF pp. 17–19. It supports the framed-sheaf fixed locus by N-tuples of partitions, the tangent-character formula, and the Uhlenbeck/Gieseker distinction. The fixed-locus and tangent headings are inline in thm-adhm-fixed-point-instanton-count; the source’s ASD identification is out-of-scope because this section cites Donaldson rather than proving the ADHM correspondence.
+2. Nikita A. Nekrasov, Seiberg–Witten Prepotential From Instanton Counting, full 31-page PDF: https://arxiv.org/pdf/hep-th/0206161, §§3.1–3.5, PDF pp. 12–18. ADHM equations and FI/noncompactness conventions are inline in the definition; the tangent deformation complex and partition labels are inline in the theorem. Nekrasov’s contour residue prescription is not used.
+
+source-fetch-check --stamp completed successfully for both full-text URLs: 631,410 bytes / 60 pages / SHA-256 prefix 16492009b5b74879 for Nakajima–Yoshioka, and 294,006 bytes / 31 pages / SHA-256 prefix 9530c40215baa02d for Nekrasov. The source headings, supported item IDs, exact locators, reading extents, limitations, and dispositions are recorded in research/advanced-qft-supersymmetry-build-2026-10-23-batch-12.coverage.json.
+
+One optional search lead for Nakajima’s 1999 book failed retrieval: the third-party PDF URL returned 404, and the AMS DOI page was inaccessible in the browser tool. Search alternatives were made; the already inspected, full Nakajima–Yoshioka lecture notes and the full Nekrasov paper supply the two treatments required for this page. The unavailable book is not cited or represented as read and is not an item dependency.
+
+## Open owner obligations
+
+1. Resolve the current Step-1 readiness chain for compact Borel localization. The carrier thm-borel-localization-for-compact-torus-actions now exists and its statement matches the ABBV compact real-Borel interface, but its own current record and the in-run records for def-qftx-character-localization, lem-qftx-compact-torus-fixed-locus-normal-weights, lem-qftx-compact-torus-equivariant-slice-neighborhoods, lem-qftx-module-localization-preserves-exactness, lem-qftx-nonfixed-locus-cohomology-is-torsion-after-localization, lem-qftx-fixed-normal-euler-class-is-unit-after-character-localization, lem-qftx-borel-base-is-paracompact-of-cw-type, and lem-qftx-singular-cohomology-homotopy-invariance are missing. The ABBV carrier and its direct in-run prerequisites def-abbv-equivariant-integration-conventions, thm-borel-localization-for-compact-torus-actions, lem-abbv-equivariant-thom-gysin-identities, and lem-abbv-fixed-component-euler-invertibility also lack current records. These exact missing records keep the ABBV dependency conditional.
+2. Prove the positive-FI ADHM/monad identification for the stated U(N), framing, charge, orientation, and stability conventions, and separately prove the zero-FI regular ADHM/ASD identification if the ordinary instanton clause is to be discharged. Proposed placement: proof-bearing mathematics suppliers on qftx-adhm-moduli before thm-adhm-fixed-point-instanton-count, or owner-approved earlier A/B pairs. The cited sources state or invoke these comparisons but the inspected sections do not provide complete local proofs.
+3. Supply a rigorous noncompact equivariant pushforward/localization result for the resolved ADHM space, with an exact proper-support, compactification, or Borel–Moore interface and boundary qualifications. Proposed placement: an earlier A-page mathematical supplier before thm-adhm-fixed-point-instanton-count. The compact ABBV theorem does not provide it.
+4. Reconcile an upstream batch-8 manifest/item mismatch without changing this batch: research/advanced-qft-supersymmetry-build-2026-10-23-batch-8.pages.json lines 529 and 545 list ex-euler-class-of-zero-and-trivial-positive-rank-bundles as a mathematical premise of lem-qftx-nonfixed-locus-cohomology-is-torsion-after-localization, while items/lem-qftx-nonfixed-locus-cohomology-is-torsion-after-localization.md lines 12–28 omit that dependency and its proof facts do not cite it. The current focused depcheck passes, but the declared manifest interface and item carrier disagree; this is outside batch 12 ownership.
+
+The current cross-batch dependency file has two verified and two open direct edges: the batch-5 page and instanton-charge item are verified against the current ready supplier interface; the batch-9 ABBV page and theorem remain open because the current readiness chain is incomplete. The present Borel carrier is a transitive ABBV input, not a direct edge owned by this batch. The assigned definition is ready; the theorem and both examples remain escalated for their exact unresolved prerequisites.
+
+## Final scoped checks and readiness records
+
+- `loadStep1Record` plus `step1Decision` confirms the assigned definition record is `ready` and current. The theorem and both examples have escalation records; none was overwritten. The charge supplier record is ready. ABBV, its current Borel supplier, and the listed in-run prerequisite records remain missing.
+- After those escalations were recorded, theorem proof steps 4.1 and 9.1 were strengthened with an explicit cyclic-frame quotient slice and a descended-trace noncompactness argument. The escalated rows were deliberately not overwritten. Their snapshot hashes predate this proof-only edit (the two example hashes bind the theorem transitively); the decisions remain escalated, and an owner must refresh them when resolving the listed upstream blockers.
+- Scoped item dependency levels match the full in-run graph: definition 3, fixed-point theorem 7, and both examples 8; the inspected in-run suppliers are level 2 (instanton charge) and level 6 (ABBV). The run-wide dependency-level command still reports 54 errors, all empty item inventories in other batches; it reports no other level errors. The assigned closure check itself passes.
+- `precheck`: 3 proof-bearing items checked, 0 failures; the definition is not proof-bearing. `proof-layout`: 4 items, 19 steps, 0 defects. Strict proof contracts: all 4 items checked, 0 errors, 0 warnings.
+- `content-policy`: 4 scoped items, 0 errors/warnings. `rendercheck`: 6 assigned item/page files, pass. Scoped statement-first inspection: 4 items, 0 defects. The run-wide statement-first command stops on an unrelated empty inventory at batch 27 page `aqft-smeft-heft`.
+- Focused `depcheck`: 2,470 dependency-closure items checked, 0 errors/warnings. The batch-8 manifest mismatch above remains recorded for its owner.
+- Source fetch verification: 2/2 selected full-text sources fetch-verified, 0 drops. Coverage checklist: 1 A page, 8 harvested results, 0 errors, 1 low-yield warning. The warning is expected from the recorded dispositions: seven results are genuinely absorbed inline into the authored definition/theorem and one source result is out of scope; none was misclassified as a separate item.
+- Manifest/cross-batch integrity: 2 pages, 4 items, 4 direct cross-batch edges; two verified and two open. Both page bodies are empty and the A/B inventory agrees with the item manifest. No direct Borel row is present because that prerequisite is transitive through ABBV.
+
+The next owner actions are the readiness-chain repairs and proof-bearing ADHM/noncompact suppliers listed above, plus reconciliation of the batch-8 manifest mismatch. Alpha should review the inline source-result dispositions flagged by the low-yield warning.
+
+
+## Owner Borel/index readiness reconciliation — 2026-10-23
+
+The earlier absent-carrier/readiness observations are historical. All sixteen completed batch-8 native readiness decisions are now hash-current ready, and their exact product-Milnor, coefficient, character-localization and Thom-base interfaces match the uses reviewed here. See `research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/borel-index-readiness-reconciliation.md` and its archived inputs, current decision observations, exact ordered dependency arrays and unapplied readiness proposals. Native records were not written by this reviewer.
+
+The repaired ABBV empty-locus boundary does not change the ADHM classification, tangent character, formal series, or conditional correspondence/pushforward clauses. Only stale compact Borel-readiness notes and the corresponding contract narrative/cross-edge evidence were cleaned up. The positive-FI/Gieseker comparison, zero-FI/ASD comparison, and noncompact pushforward remain their stated separate conditional inputs; no acceptance or scope waiver is asserted. Both one-instanton examples, including the two-color TikZ diagram, were checked and remain byte-unchanged.

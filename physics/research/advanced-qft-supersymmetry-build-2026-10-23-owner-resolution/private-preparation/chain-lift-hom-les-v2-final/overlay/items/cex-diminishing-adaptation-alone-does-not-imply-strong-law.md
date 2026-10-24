@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-diminishing-adaptation-alone-does-not-imply-strong-law.md

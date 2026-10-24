@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-nonzero-unitary-representation-of-a-compact-group-has-a-finite-dimensional-subrepresentation.md

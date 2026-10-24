@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-figure-eight-and-round-circle-are-not-regularly-homotopic-as-oriented-immersions.md

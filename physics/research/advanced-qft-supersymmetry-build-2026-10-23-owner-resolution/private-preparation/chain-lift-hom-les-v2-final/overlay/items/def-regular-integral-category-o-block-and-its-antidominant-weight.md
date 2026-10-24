@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-regular-integral-category-o-block-and-its-antidominant-weight.md

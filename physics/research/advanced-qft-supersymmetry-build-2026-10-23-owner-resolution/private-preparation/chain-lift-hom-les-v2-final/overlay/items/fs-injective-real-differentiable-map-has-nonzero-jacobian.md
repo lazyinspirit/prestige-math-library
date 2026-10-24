@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-injective-real-differentiable-map-has-nonzero-jacobian.md

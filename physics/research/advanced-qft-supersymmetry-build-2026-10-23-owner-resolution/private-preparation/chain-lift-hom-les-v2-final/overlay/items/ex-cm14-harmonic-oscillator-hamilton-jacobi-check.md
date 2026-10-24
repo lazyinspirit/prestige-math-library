@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cm14-harmonic-oscillator-hamilton-jacobi-check.md

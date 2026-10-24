@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-point-and-r-are-homotopy-equivalent-not-homeomorphic.md

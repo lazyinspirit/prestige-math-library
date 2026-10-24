@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases.md

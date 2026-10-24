@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-subspace-stable-under-one-generator-but-not-a-subrepresentation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-stone-cech-is-left-adjoint-to-the-inclusion-of-compact-hausdorff-spaces.md

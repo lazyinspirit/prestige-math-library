@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-characteristic-and-minimal-polynomials-determine-similarity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-lower-and-upper-global-bases-in-a-small-highest-weight-module.md

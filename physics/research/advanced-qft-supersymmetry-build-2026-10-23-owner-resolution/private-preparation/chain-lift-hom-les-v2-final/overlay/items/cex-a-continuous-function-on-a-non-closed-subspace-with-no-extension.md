@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-continuous-function-on-a-non-closed-subspace-with-no-extension.md

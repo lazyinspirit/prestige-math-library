@@ -1,0 +1,14 @@
+---
+page: qftx-coupled-penrose-vanishing-on-the-round-four-sphere
+title: Coupled Penrose vanishing on the round four-sphere
+status: draft
+items:
+  - def-qftx-coupled-penrose-incidence-geometry
+  - lem-qftx-coupled-penrose-positive-orientation-asd
+  - lem-qftx-coupled-penrose-round-sphere-curvature
+  - lem-qftx-coupled-penrose-fibre-dolbeault
+  - lem-qftx-coupled-penrose-injective-edge
+  - lem-qftx-coupled-penrose-operator-coefficient
+  - thm-qftx-coupled-penrose-vanishing
+examples: []
+---

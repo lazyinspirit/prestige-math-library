@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-smc-residual-fixed-horizon-clt-away-from-integer-weights.md

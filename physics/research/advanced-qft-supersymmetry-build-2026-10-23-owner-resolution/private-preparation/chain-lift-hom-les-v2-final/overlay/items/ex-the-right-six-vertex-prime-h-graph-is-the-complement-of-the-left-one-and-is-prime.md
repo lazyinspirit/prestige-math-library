@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-right-six-vertex-prime-h-graph-is-the-complement-of-the-left-one-and-is-prime.md

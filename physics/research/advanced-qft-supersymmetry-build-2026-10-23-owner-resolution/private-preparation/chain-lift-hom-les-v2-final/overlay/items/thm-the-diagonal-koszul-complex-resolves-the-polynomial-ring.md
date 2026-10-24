@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-diagonal-koszul-complex-resolves-the-polynomial-ring.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition.md

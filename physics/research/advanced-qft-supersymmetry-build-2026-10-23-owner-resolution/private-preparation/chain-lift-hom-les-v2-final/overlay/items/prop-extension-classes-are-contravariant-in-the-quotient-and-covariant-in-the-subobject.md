@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-extension-classes-are-contravariant-in-the-quotient-and-covariant-in-the-subobject.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-closed-real-function-algebras-are-function-spaces-on-their-quotients.md

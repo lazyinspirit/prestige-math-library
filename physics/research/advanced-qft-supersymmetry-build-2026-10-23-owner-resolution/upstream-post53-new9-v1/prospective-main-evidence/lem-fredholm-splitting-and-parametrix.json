@@ -1,0 +1,140 @@
+{
+  "id": "lem-fredholm-splitting-and-parametrix",
+  "agent": "/root/rendering_repair_coordinator/dfa_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Standalone original tiles show the two direct sums and partial inverse only in separated formulas/proof steps. A paired-arrow split-coordinate illustration materially clarifies why the partial inverse is not an inverse on all of X or Y, and distinguishes the two defect coordinates. This is a warranted explanatory addition under the expanded diagram scope, not a gap in the rigorous proof.",
+      "action": "Added a final Remarks TikZ illustration of T and S between the full decomposed spaces, with ST and TS coordinate identities and explanatory defect formulas.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Original standalone tile 02 visibly prints the quotient-space supplier label with literal q:X\\to X/M. The current supplier title still uses unsupported \\( ... \\) delimiters, so this is not already resolved upstream.",
+      "action": "Added an explicit local label to the existing quotient-space wikilink in A3, using supported dollar-delimited math and preserving its wording and target.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a split-coordinate parametrix illustration in final Remarks and repaired the inherited quotient-space reference label in A3.",
+  "source_lines_after": {
+    "reference_label": [
+      54
+    ],
+    "remarks": [
+      81,
+      102
+    ],
+    "tikz": [
+      87,
+      96
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "X=N⊕X1 with N=ker T; Y=ran T⊕Y0.",
+      "justification": "Statement and proof steps 1.1–1.2 give the direct sums and bounded coordinate projections. The complemented-subspace definition identifies their unique coordinates."
+    },
+    {
+      "maps": "The upper arrow is T:X→Y; the lower arrow is S:Y→X. T1:X1→ran T is bijective and U:ran T→X1 is its bounded inverse.",
+      "justification": "Proof steps 2.1 and 3.1 establish T1 and U. Step 4.1 establishes S=U composed with projection onto ran T, with inclusion of X1 in X implicit as in the existing statement."
+    },
+    {
+      "relations": "T(n+x1)=T1 x1+0 in ran T⊕Y0; S(y1+y0)=0+U y1 in N⊕X1.",
+      "justification": "T vanishes on N=ker T by definition. The formula for S is the original Statement and proof step 4.1. These formulas justify the arrow directions and decomposition labels."
+    },
+    {
+      "relations": "ST(n+x1)=x1 and TS(y1+y0)=y1.",
+      "justification": "UT1 is the identity on X1 and T1U is the identity on ran T, as verified in proof steps 4.2–4.3. The displayed products are projections, not identities on the full spaces."
+    },
+    {
+      "relations": "(ST−IX)(n+x1)=−n and (TS−IY)(y1+y0)=−y0; their ranges are N and Y0.",
+      "justification": "Subtracting the decomposed inputs from the preceding coordinate formulas gives the negative omitted coordinates; all n and y0 occur by taking the other coordinate zero. These are precisely steps 4.2–4.3. N is finite dimensional by the Fredholm definition; Y0 is finite dimensional by step 2.2."
+    },
+    {
+      "proof_independence": "The complete original proof remains byte-identical; the new Remarks only illustrate identities already established in it."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-fredholm-splitting-and-parametrix.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-fredholm-splitting-and-parametrix.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-fredholm-splitting-and-parametrix.md",
+            "item_id": "lem-fredholm-splitting-and-parametrix",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-fredholm-splitting-and-parametrix.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dfa-003 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-fredholm-splitting-and-parametrix --out research/math-library-rendering-repairs-2026-10-23/previews/dfa-003-native",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dfa-003-native/manifest.json",
+    "manifest_sha256": "ffc842f1300e0589783609ad8affbec3c044bd70473d18d95cd83b4ff99b009f",
+    "source_sha256": "f7f8c4148f8d124d2f3edb924a9c279f21c6091a13f728a2c950d0ba20f64476",
+    "reference_map_sha256": "de0ceea983237b81f83ede345e2e49b650ffd5e93478d209871f1416ea7c821c",
+    "inspected_tiles": [
+      "01",
+      "02",
+      "03"
+    ],
+    "view_detail": "original; each original and fresh tile viewed standalone",
+    "result": "Fresh tile 03 shows a compiled native diagram with both arrowheads, correct directions, readable labels, and no clipping/overlap. Fresh tile 02 shows the local quotient-map label rendered as math. All three fresh tiles independently inspected.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "reference_map_diagnostics": 16
+  },
+  "evidence_path_resolution": {
+    "declared_root": "research/math-library-rendering-audit-2026-10-23/functional-analysis/diagram-supplement",
+    "actual_root": "research/math-library-rendering-audit-2026-10-23/functional-analysis",
+    "reason": "The three screenshot paths do not exist under the declared diagram-supplement evidence root. Authentic files were located only in the corresponding category screenshots directory; each SHA256 exactly matches the queue row.",
+    "original_tile_sha256": [
+      "a7bb1ff0272b199fb265cb578e6330ab60ce9a2a558527dc93f27f32cc30d90b",
+      "9470d3ee67531612b3f35ba55a97a60fbd46b7deb0b7e2729e360f8f42645f27",
+      "1662ca511eae562842b3b78c5fe4ed6698cc0707c3c47bb725000abe2f656a53"
+    ]
+  },
+  "before_raw_sha256": "edf7db1cbc2e81aa025963ef8a6c4ce321fa54b2d3f19f8a8f6211f67c19b11d",
+  "after_raw_sha256": "f7f8c4148f8d124d2f3edb924a9c279f21c6091a13f728a2c950d0ba20f64476",
+  "frontmatter_byte_identical": true,
+  "publication_status_preserved": true,
+  "remaining_issues": []
+}

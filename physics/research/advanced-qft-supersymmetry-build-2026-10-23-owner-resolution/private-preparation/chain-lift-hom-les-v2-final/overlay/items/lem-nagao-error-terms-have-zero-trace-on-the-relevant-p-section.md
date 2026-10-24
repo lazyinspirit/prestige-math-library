@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-nagao-error-terms-have-zero-trace-on-the-relevant-p-section.md

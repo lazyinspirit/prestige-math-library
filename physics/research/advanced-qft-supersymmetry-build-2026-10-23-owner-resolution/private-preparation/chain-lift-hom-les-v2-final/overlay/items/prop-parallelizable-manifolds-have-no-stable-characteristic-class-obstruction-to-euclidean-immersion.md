@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-parallelizable-manifolds-have-no-stable-characteristic-class-obstruction-to-euclidean-immersion.md

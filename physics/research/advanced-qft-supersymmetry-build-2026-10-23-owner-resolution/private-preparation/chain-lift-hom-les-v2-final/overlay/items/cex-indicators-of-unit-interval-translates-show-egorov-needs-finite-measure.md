@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-indicators-of-unit-interval-translates-show-egorov-needs-finite-measure.md

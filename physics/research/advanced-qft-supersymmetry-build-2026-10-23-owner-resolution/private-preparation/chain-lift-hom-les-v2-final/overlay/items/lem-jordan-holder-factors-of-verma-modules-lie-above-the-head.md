@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-jordan-holder-factors-of-verma-modules-lie-above-the-head.md

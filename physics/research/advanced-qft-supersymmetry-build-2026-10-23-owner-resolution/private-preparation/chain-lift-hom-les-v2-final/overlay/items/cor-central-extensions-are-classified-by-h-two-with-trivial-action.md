@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-central-extensions-are-classified-by-h-two-with-trivial-action.md

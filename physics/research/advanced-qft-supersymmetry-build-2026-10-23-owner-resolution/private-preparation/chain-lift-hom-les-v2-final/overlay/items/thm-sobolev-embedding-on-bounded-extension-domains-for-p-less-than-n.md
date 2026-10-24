@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n.md

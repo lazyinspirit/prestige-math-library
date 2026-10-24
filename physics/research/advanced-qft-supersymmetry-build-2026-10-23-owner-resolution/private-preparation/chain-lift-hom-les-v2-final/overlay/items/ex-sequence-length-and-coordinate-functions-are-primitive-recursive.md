@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-sequence-length-and-coordinate-functions-are-primitive-recursive.md

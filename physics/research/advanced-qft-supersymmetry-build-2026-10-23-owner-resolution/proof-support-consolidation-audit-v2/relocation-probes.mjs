@@ -1,0 +1,31 @@
+// Private synthetic extraction probes, not source/main authentication.
+import{readFileSync,writeFileSync}from'node:fs';import{createHash}from'node:crypto';
+import{originalPresentationChanges as extract,validateOriginalPresentationReviews as validate}from'/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/tools/physics-support/original-presentation-maintenance.mjs';
+const O='research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/',f=JSON.parse(readFileSync(O+'upstream-post53-new9-v1/collar-step1.1-exact.json')),before=readFileSync(f.before.path),after=readFileSync(f.after.path),option={version:1,steps:[{label:'1.1',target:'thm-euclidean-inverse-function-theorem'}]},rows=[],sha=x=>createHash('sha256').update(x).digest('hex');
+const run=(a=before,b=after,o=option)=>extract(a,b,undefined,o),edit=(b,a,c)=>{const s=b.toString();if(!s.includes(a))throw Error('Missing probe anchor '+a);return Buffer.from(s.replace(a,()=>c));};
+function probe(name,expected,fn){try{fn();rows.push({name,expected,passed:expected==='accept'});}catch(e){rows.push({name,expected,passed:expected==='reject'&&!e.message.startsWith('Missing probe anchor'),error:e.message});}}
+probe('exact observed collar relocation', 'accept',()=>{const c=run(),d=c.deltas.filter(d=>d.kind==='proof-reference-relocation');if(d.length!==1||d[0].label!=='1.1'||d[0].target!==option.steps[0].target)throw Error('Missing typed exact relocation');if(!c.proof_support_parser_runtime?.inputs)throw Error('Missing parser binding');});
+probe('no implicit relocation optin','reject',()=>extract(before,after));
+for(const[name,o]of[['null',null],['unknown key',{...option,accept:true}],['wrong version',{...option,version:2}],['empty steps',{version:1,steps:[]}],['duplicate step',{version:1,steps:[option.steps[0],option.steps[0]]}],['unknown step',{version:1,steps:[{...option.steps[0],label:'8.8'}]}],['wrong target',{version:1,steps:[{...option.steps[0],target:'thm-different-target'}]}],['step unknown key',{version:1,steps:[{...option.steps[0],title:'x'}]}]])probe(name,'reject',()=>run(before,after,o));
+const target=option.steps[0].target,label='Euclidean inverse function theorem',wiki='[['+target+'|'+label+']]';
+for(const[name,a,b]of[['changed citation label',wiki,'[['+target+'|Inverse theorem]]'],['changed phrase claim','gives a local diffeomorphism','gives a global diffeomorphism'],['changed math index','$X_p$','$X_q$'],['lost terminal fact','[F1, F2]\n\n1.2','[F1]\n\n1.2'],['changed terminal order','[F1, F2]\n\n1.2','[F2, F1]\n\n1.2'],['added terminal fact','[F1, F2]\n\n1.2','[F1, F2, F3]\n\n1.2']])probe(name,'reject',()=>run(before,edit(after,a,b)));
+for(const[name,wrap]of[['inline-code',x=>'`'+x+'`'],['double inline-code',x=>'``'+x+'``'],['inline-math',x=>'$'+x+'$'],['ordinary Markdown link title',x=>'[name](https://example.invalid "'+x+'")'],['HTML',x=>'<span>'+x+'</span>']])probe('nonplaintext old phrase '+name,'reject',()=>run(edit(before,'The '+label,'The '+wrap(label)),edit(after,'The '+wiki,'The '+wrap(wiki))));
+probe('duplicate old phrase','reject',()=>run(edit(before,'The '+label,'The '+label+' '+label),edit(after,'The '+wiki,'The '+label+' '+wiki)));
+probe('unused option identical body','reject',()=>run(before,before));
+
+const changes=run(),reason='Private synthetic exact review-binding fixture for protocol audit only. This fixture is not scientific supplier acceptance, source authentication, or native permission.',evidence={path:'research/synthetic-relocation-review.json',sha256:sha('fixture')};
+function reviewed(){const entry={presentation_version:2,proof_reference_relocation:structuredClone(option),pinned_sha256:sha(before),original_sha256:sha(after),changes:structuredClone(changes),scientific_review:{...changes.review_classification,hypotheses:'identical',new_premises:false,new_results:false,reason,reading_limits:reason},presentation_reviews:changes.deltas.map(d=>({delta_id:d.id,delta_sha256:sha(JSON.stringify(d)),reason,reading_limits:reason,evidence:[evidence],...(d.target?{pinned_target:{path:f.pinned_target.path,sha256:f.pinned_target.sha256}}:{})}))};const ctx={receipt:{files:[{path:f.pinned_target.path,sha256:f.pinned_target.sha256}]},scope:{importedItems:new Set([target]),paths:new Set([f.pinned_target.path])},bind:(path,hash)=>{const b=readFileSync(path);if(sha(b)!==hash)throw Error('unbound live file');return b},localEvidence:e=>{if(JSON.stringify(e)!==JSON.stringify(evidence))throw Error('unbound synthetic evidence');return Buffer.from('fixture')}};return{entry,ctx};}
+probe('synthetic relocation target and per-delta bindings','accept',()=>{const r=reviewed();validate(r.entry,r.entry.changes,r.ctx)});
+for(const[name,mutate]of[
+ ['missing relocation entry optin',r=>delete r.entry.proof_reference_relocation],
+ ['missing published pin',r=>r.ctx.receipt.files=[]],
+ ['unimported target',r=>r.ctx.scope.importedItems.clear()],
+ ['missing per-delta target review',r=>delete r.entry.presentation_reviews.find(x=>x.pinned_target).pinned_target],
+ ['stale per-delta target hash',r=>r.entry.presentation_reviews.find(x=>x.pinned_target).pinned_target.sha256='0'.repeat(64)],
+ ['stale relocation delta review',r=>r.entry.presentation_reviews.find(x=>x.pinned_target).delta_sha256='0'.repeat(64)],
+ ['unbound target live file',r=>{const old=r.ctx.bind;r.ctx.bind=(p,h)=>{if(p===f.pinned_target.path)throw Error('unbound target');return old(p,h)}}],
+ ['nonpublished target',r=>{const old=r.ctx.bind;r.ctx.bind=(p,h)=>{const b=old(p,h);return p===f.pinned_target.path?Buffer.from(b.toString().replace('status: published','status: draft')):b}}],
+ ['missing relocation runtime',r=>delete r.entry.changes.proof_support_parser_runtime],
+])probe(name,'reject',()=>{const r=reviewed();mutate(r);validate(r.entry,r.entry.changes,r.ctx)});
+
+const failed=rows.filter(r=>!r.passed);writeFileSync(O+'proof-support-consolidation-audit-v2/relocation-results.json',JSON.stringify({kind:'Private synthetic exact relocation probes; no scientific authentication/adoption',source_guards:{before:{path:f.before.path,sha256:sha(before)},after:{path:f.after.path,sha256:sha(after)}},rows,failed:failed.length},null,2)+'\n');console.log(JSON.stringify({probes:rows.length,failed:failed.length,failures:failed}));if(failed.length)process.exitCode=1;

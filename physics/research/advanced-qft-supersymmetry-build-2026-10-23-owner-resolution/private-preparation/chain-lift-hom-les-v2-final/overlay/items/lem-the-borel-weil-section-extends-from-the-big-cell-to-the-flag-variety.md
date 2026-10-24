@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-borel-weil-section-extends-from-the-big-cell-to-the-flag-variety.md

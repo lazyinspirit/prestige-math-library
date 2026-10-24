@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-pspace-equals-npspace-and-is-closed-under-complement.md

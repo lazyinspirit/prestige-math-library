@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution.md

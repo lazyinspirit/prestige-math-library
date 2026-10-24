@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-poisson-supremum-estimate-from-a-quadratic-barrier.md

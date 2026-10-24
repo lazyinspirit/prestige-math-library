@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-zero-total-derivative-on-a-convex-open-set-is-constant.md

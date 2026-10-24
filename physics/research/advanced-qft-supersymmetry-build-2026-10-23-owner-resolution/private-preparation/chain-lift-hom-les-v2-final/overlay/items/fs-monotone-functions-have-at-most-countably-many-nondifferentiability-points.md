@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-monotone-functions-have-at-most-countably-many-nondifferentiability-points.md

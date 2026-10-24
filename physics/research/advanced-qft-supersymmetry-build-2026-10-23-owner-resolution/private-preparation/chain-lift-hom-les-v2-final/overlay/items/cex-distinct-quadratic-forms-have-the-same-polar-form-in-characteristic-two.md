@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-distinct-quadratic-forms-have-the-same-polar-form-in-characteristic-two.md

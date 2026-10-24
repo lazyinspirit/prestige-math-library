@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-banach-valued-cauchy-theorem-on-star-shaped-domains.md

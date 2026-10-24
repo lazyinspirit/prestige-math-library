@@ -1,0 +1,474 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "38",
+  "level": 5,
+  "scope": [
+    "def-aqft-two-group-symmetry-realization",
+    "pthm-aqft-two-group-background-coupling",
+    "ex-aqft-two-group-split-background-coupling",
+    "ex-aqft-two-group-nonzero-postnikov-unit-response"
+  ],
+  "contracts": {
+    "def-aqft-two-group-symmetry-realization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition explicitly uses n=0 insertions: the empty product gives Z_x. It does not require Phi_x nonempty; for Phi_x=empty the finite sum is 0, and a supplied gauge bijection transports emptiness to the target background."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition allows trivial A or beta=0; the corresponding labels/equations reduce to the stated degenerate case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-vertex complex cannot triangulate the required closed manifold with d>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition boundary: For beta=0 the twisted background equation becomes delta_a B=0; the input still specifies all arrows and model data."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "M is closed and K is a finite triangulation; background cochains have simplex vertices rather than a scale interval. The permitted support isotopies and local counterterms add no analytic endpoint or continuum-limit assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: In the anomaly paragraph, absence in the selected scheme is defined exactly when an allowed counterterm makes every phase 1; thus absence entails the existence of that single permitted L trivializing all arrow phases, not merely vanishing of one correlator."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: If a permitted L makes e^{iL_y} chi_f(x) e^{-iL_x}=1 for every arrow, the reweighted phase system is the trivial representative and its residual anomaly class is absent by the stated counterterm convention. The Postnikov class alone is not that phase system."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All groups, cochains, field-value sets and transformations are explicitly model-specified; the definition invokes no choice principle."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The item is a data definition. Its concrete finite equations are checked in both dependent examples."
+    },
+    "pthm-aqft-two-group-background-coupling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-two-group-symmetry-realization",
+          "source_section": "Definition",
+          "quote": "A **finite 2-group background coupling** in the selected model assigns to each finite 2-group background its configuration space, local observable algebra, action, measure, and partition function $Z_x=C_x()$, and assigns to every $1$-gauge arrow $f:x\\to y$ a specified bijection $T_f:\\Phi_x\\to\\Phi_y$ and observable-algebra isomorphism $\\alpha_f:\\mathcal O_x\\to\\mathcal O_y$. Every $2$-arrow is assigned its specified intertwiner, and all assignments must obey the identity, composition, associator, and unit coherence laws of the background gauge $2$-groupoid. The action and measure are model inputs; the finite 2-group data alone do not choose them or determine their transformation phase.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-two-group-background",
+          "source_section": "Definition",
+          "quote": "A finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-aqft-two-group-background-consistency",
+          "source_section": "Statement",
+          "quote": "Then $a'$ is flat and $(a',B')$ satisfies the same twisted tetrahedron equation. If $(g,\\lambda)$ is followed by $(h,\\mu)$, with $a''_{ij}=h_i a'_{ij}h_j^{-1}$, their composite is $(hg,\\nu)$ where",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-aqft-finite-background-two-groupoid",
+          "source_section": "Definition",
+          "quote": "The **background gauge 2-groupoid** $\\mathcal B(K)$ has these backgrounds as objects. A $1$-arrow $f:x\\to y$ is a raw pair $(g,\\lambda)$ of vertex $G$-labels and edge $A$-labels with target $y=(b,C)$ given by",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-aqft-finite-background-two-groupoid-coherence",
+          "source_section": "Statement",
+          "quote": "For every finite ordered simplicial complex and finite data $(G,A,\\rho,\\beta)$ in the background gauge $2$-groupoid definition, its displayed operations define a finite $2$-groupoid, including the relative version for every subcomplex and fixed boundary field. Its raw $1$-arrows are not identified by their effects on background objects. For $x=(a,B)$,",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-target-reindex",
+          "step": "1.1",
+          "claim": "Reindex the finite target correlator sum by the model-specified bijection T_f.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "phase-factor",
+          "step": "2.1",
+          "claim": "Substitute the model weight phase and covariant observable transport, factor the phase out, and specialize the empty tuple to the partition function.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "counterterm-variation",
+          "step": "3.1",
+          "claim": "Compare source and target sums after counterterm reweighting, obtain e^(iL_y) chi_f e^(-iL_x), and keep beta distinct from the model phase.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement boundary: If a finite configuration set is empty, a bijection maps it to an empty set and both sums are zero, so the identity remains true."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: If Z_x=0, no division by Z is used; the unnormalized finite-sum identity remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: For the identity arrow, coherence supplies chi=1 and the configuration/observable maps are identities."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The same reindexing applies when beta=0; no step requires nonzero Postnikov data."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Proof 1.1–2.1 reindexes a finite configuration sum on a closed triangulated manifold; Proof 3.1 reweights it by local counterterms. No parameter tends to a scale endpoint or a continuum limit in either operation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and Proof 3.1 use the declared anomaly convention: if the residual anomaly is absent, its phase system admits a permitted counterterm representative with every phase 1. This uses model-specified coherent phases, not a phase inferred from a possibly zero partition sum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Conversely, a permitted L with all transformed phases e^{iL_y} chi_f(x) e^{-iL_x}=1 makes the residual class trivial by F1. Proof 3.1 computes this transformation from the adopted weight law; it claims no universal anomaly classification."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: Reindexing uses the given bijection between finite sets and does not require choosing representatives."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof is a general exact finite-sum reindexing. The dependent Z2 examples record their finite calculations; no separate program enumeration is needed."
+    },
+    "ex-aqft-two-group-split-background-coupling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-two-group-background",
+          "source_section": "Definition",
+          "quote": "A finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-aqft-two-group-background-consistency",
+          "source_section": "Statement",
+          "quote": "For arbitrary vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$, put $a'_{ij}=g_i a_{ij}g_j^{-1}$ and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-aqft-two-group-symmetry-realization",
+          "source_section": "Definition",
+          "quote": "A **finite 2-group background coupling** in the selected model assigns to each finite 2-group background its configuration space, local observable algebra, action, measure, and partition function $Z_x=C_x()$, and assigns to every $1$-gauge arrow $f:x\\to y$ a specified bijection $T_f:\\Phi_x\\to\\Phi_y$ and observable-algebra isomorphism $\\alpha_f:\\mathcal O_x\\to\\mathcal O_y$. Every $2$-arrow is assigned its specified intertwiner, and all assignments must obey the identity, composition, associator, and unit coherence laws of the background gauge $2$-groupoid. The action and measure are model inputs; the finite 2-group data alone do not choose them or determine their transformation phase.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-aqft-two-group-background-coupling",
+          "source_section": "Statement",
+          "quote": "where the empty product gives the partition function $Z_x=C_x()$. Suppose every $1$-gauge arrow $f:x\\to y$ has a model-specified bijection $T_f:\\Phi_x\\to\\Phi_y$, the observable transport satisfies $o_{j,y}(T_f\\phi)=o_{j,x}(\\phi)$, and the adopted action-and-measure law is",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "initial-zero-background",
+          "step": "1.1",
+          "claim": "Verify flatness and the zero twisted tetrahedron equation on every simplex.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-form-shift",
+          "step": "2.1",
+          "claim": "Compute delta lambda on all faces of the closed triangulation and verify delta squared lambda is zero on every tetrahedron.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unit-response",
+          "step": "3.1",
+          "claim": "Use the one-configuration unit-weight response and the finite coupling theorem to identify phase one.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes K as the nonempty boundary triangulation of a 4-simplex."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example boundary: The initial a, B and beta are all zero, so every initial background equation is 0=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The fixed triangulation has five vertices and the fixed coefficient groups have two elements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example boundary: beta=0 is the split/direct-product boundary case; the one-form shift remains an ordinary cocycle shift."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The base K=boundary Delta^4 is a fixed closed S3 triangulation. The label 01 is a particular edge, and Verification 2.1 checks its three incident faces; there is no open interval or limiting endpoint in the example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification proves the explicit split cochain transformation remains admissible and the chosen singleton response has phase 1. It makes no if-and-only-if claim relating split Postnikov data to anomaly absence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The unit phase follows from the separately supplied weight-1 singleton model in A1. The Example does not infer beta=0 or an effective dynamical symmetry from that unit phase; Remarks explicitly limit it to a response assignment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example boundary: All vertex and edge labels are specified explicitly; no representatives are chosen."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Z2 split background shift on boundary of 4-simplex",
+          "result": "B-prime is 1 on faces 012, 013, and 014 and 0 on all other faces; delta-squared lambda is 0 on every tetrahedron; phase=1.",
+          "evidence": "The listed faces are exactly those containing edge 01. Expanding the tetrahedron coboundary of delta lambda cancels every edge parameter twice."
+        }
+      ],
+      "finite_checks_disposition": "Manual finite arithmetic is fully included in Verification; no executable test or measurement is claimed."
+    },
+    "ex-aqft-two-group-nonzero-postnikov-unit-response": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-two-group-background",
+          "source_section": "Definition",
+          "quote": "A normalized group $3$-cocycle is a function $\\beta:G^3\\to A$ that vanishes whenever any argument is $e$ and satisfies",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-aqft-two-group-background-consistency",
+          "source_section": "Statement",
+          "quote": "For arbitrary vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$, put $a'_{ij}=g_i a_{ij}g_j^{-1}$ and",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-aqft-finite-background-two-groupoid",
+          "source_section": "Definition",
+          "quote": "The **background gauge 2-groupoid** $\\mathcal B(K)$ has these backgrounds as objects. A $1$-arrow $f:x\\to y$ is a raw pair $(g,\\lambda)$ of vertex $G$-labels and edge $A$-labels with target $y=(b,C)$ given by",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-aqft-two-group-symmetry-realization",
+          "source_section": "Definition",
+          "quote": "A **finite 2-group background coupling** in the selected model assigns to each finite 2-group background its configuration space, local observable algebra, action, measure, and partition function $Z_x=C_x()$, and assigns to every $1$-gauge arrow $f:x\\to y$ a specified bijection $T_f:\\Phi_x\\to\\Phi_y$ and observable-algebra isomorphism $\\alpha_f:\\mathcal O_x\\to\\mathcal O_y$. Every $2$-arrow is assigned its specified intertwiner, and all assignments must obey the identity, composition, associator, and unit coherence laws of the background gauge $2$-groupoid. The action and measure are model inputs; the finite 2-group data alone do not choose them or determine their transformation phase.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-aqft-two-group-background-coupling",
+          "source_section": "Statement",
+          "quote": "where the empty product gives the partition function $Z_x=C_x()$. Suppose every $1$-gauge arrow $f:x\\to y$ has a model-specified bijection $T_f:\\Phi_x\\to\\Phi_y$, the observable transport satisfies $o_{j,y}(T_f\\phi)=o_{j,x}(\\phi)$, and the adopted action-and-measure law is",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "normalized-noncoboundary-cocycle",
+          "step": "1.1",
+          "claim": "Expand the four-variable coboundary for beta=ghk over Z2 and use the normalized two-cochain value at (1,1) to rule out beta as a coboundary.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "global-s3-background",
+          "step": "2.1",
+          "claim": "Use a vertex potential and a specified one-cochain correction to verify delta B=a-star beta on every tetrahedron of the closed triangulation, then read off the 0123 face values.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gauge-transform-on-0123",
+          "step": "3.1",
+          "claim": "Compute the transformed 0123 edge and face labels and verify the tetrahedron equation directly.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unit-response-phase",
+          "step": "4.1",
+          "claim": "Apply the unique unit-weight model input and finite coupling theorem to obtain phase one despite the nonzero Postnikov class.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes K as the nonempty closed boundary triangulation of a 4-simplex."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example boundary: beta vanishes whenever an input is the identity, as required for normalization."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The fixed triangulation has five vertices and the fixed coefficient groups have two elements."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The selected beta is nonzero and non-coboundary; the beta=0 case is covered by the split example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "K=boundary Delta^4 is closed, and tetrahedron 0123 is a selected simplex in it. Verification 2.1–3.1 computes cochain values on these fixed simplices without a parameter endpoint or limiting passage."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example shows the specified nonzero beta class can coexist with unit response phase. It asserts no equivalence identifying nonzero Postnikov class with a particular anomaly value."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 4.1 uses the independent unit-weight input A1 to compute phase 1; it does not deduce vanishing of beta from that phase. Verification 1.1 separately proves beta is not a coboundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example boundary: The vertex potential, edge correction, background and gauge labels are all explicitly given."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Z2 nonzero Postnikov class and closed S3 background",
+          "result": "delta beta=0; beta is not a normalized coboundary; the initial and transformed equations hold on tetrahedron 0123; the selected response phase is 1.",
+          "evidence": "The cocycle expansion cancels monomials in pairs. Every normalized c has delta c(1,1,1)=0 while beta(1,1,1)=1. For every tetrahedron, delta(q cup a cup a)=a cup a cup a and delta-squared c=0; the 0123 gauge transform has beta(0,1,1)=0 and B-prime=0."
+        }
+      ],
+      "finite_checks_disposition": "Manual finite cochain calculations are fully included in Verification; no executable test or measurement is claimed."
+    }
+  }
+}

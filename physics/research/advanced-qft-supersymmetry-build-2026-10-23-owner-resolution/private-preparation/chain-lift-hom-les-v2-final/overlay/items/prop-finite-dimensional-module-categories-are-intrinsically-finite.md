@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-finite-dimensional-module-categories-are-intrinsically-finite.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-first-four-band-comparison-is-a-compensated-band-stabilization.md

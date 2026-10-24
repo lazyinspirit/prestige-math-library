@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-enflo-quantitative-trace-obstruction-to-the-approximation-property.md

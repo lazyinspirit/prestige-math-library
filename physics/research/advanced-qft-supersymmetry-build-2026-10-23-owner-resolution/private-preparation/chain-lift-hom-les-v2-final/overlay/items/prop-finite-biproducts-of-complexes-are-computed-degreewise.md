@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-finite-biproducts-of-complexes-are-computed-degreewise.md

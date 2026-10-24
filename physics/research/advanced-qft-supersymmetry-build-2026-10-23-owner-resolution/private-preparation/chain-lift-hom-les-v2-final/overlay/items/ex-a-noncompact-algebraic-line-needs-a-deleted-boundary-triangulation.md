@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-noncompact-algebraic-line-needs-a-deleted-boundary-triangulation.md

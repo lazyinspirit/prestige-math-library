@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-canonical-liouville-vector-field-on-a-cotangent-bundle-is-radial-in-momenta.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-hh-yang-baxter-alone-does-not-give-quasitriangularity.md

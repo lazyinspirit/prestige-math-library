@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity.md

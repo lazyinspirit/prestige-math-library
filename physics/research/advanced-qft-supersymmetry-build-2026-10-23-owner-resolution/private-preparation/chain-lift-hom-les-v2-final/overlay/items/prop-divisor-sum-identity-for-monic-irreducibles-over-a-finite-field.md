@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-divisor-sum-identity-for-monic-irreducibles-over-a-finite-field.md

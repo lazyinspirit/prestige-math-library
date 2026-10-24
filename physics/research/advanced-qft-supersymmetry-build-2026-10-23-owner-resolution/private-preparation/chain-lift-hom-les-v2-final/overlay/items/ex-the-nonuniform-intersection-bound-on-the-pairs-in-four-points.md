@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-nonuniform-intersection-bound-on-the-pairs-in-four-points.md

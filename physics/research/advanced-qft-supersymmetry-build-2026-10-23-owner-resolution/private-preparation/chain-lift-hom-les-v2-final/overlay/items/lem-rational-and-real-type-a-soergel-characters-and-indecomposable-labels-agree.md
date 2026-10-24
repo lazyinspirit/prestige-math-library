@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rational-and-real-type-a-soergel-characters-and-indecomposable-labels-agree.md

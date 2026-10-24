@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-klr-induction-and-restriction-are-biadjoint-and-preserve-projectives.md

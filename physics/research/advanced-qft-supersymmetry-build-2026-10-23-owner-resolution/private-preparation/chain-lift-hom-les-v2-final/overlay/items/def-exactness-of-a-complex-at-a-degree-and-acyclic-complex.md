@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-exactness-of-a-complex-at-a-degree-and-acyclic-complex.md

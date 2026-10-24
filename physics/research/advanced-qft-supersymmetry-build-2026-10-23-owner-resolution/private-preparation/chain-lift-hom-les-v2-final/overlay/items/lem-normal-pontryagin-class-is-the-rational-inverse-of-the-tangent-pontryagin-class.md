@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-normal-pontryagin-class-is-the-rational-inverse-of-the-tangent-pontryagin-class.md

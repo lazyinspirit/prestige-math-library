@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-yamada-vogel-reducing-moves-lower-bad-seifert-circle-complexity.md

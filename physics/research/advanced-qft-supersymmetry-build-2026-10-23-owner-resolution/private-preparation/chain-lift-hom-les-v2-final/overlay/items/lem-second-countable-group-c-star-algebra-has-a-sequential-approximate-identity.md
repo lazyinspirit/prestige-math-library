@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-second-countable-group-c-star-algebra-has-a-sequential-approximate-identity.md

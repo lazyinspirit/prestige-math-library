@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-two-l-two-functions-can-have-convolution-outside-l-two.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-em-mean-zero-coercivity-on-a-c-one-domain.md

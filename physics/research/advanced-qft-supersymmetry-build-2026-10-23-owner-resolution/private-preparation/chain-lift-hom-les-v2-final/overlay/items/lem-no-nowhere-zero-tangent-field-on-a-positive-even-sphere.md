@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-no-nowhere-zero-tangent-field-on-a-positive-even-sphere.md

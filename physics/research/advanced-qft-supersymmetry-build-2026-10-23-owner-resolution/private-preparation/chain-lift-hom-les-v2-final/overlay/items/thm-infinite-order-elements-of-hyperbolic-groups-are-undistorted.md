@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted.md

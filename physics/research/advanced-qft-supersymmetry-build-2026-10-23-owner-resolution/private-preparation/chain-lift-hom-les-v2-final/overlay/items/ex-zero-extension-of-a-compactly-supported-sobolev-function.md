@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-zero-extension-of-a-compactly-supported-sobolev-function.md

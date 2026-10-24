@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-categorical-trace-of-a-linear-endomorphism-is-its-matrix-trace.md

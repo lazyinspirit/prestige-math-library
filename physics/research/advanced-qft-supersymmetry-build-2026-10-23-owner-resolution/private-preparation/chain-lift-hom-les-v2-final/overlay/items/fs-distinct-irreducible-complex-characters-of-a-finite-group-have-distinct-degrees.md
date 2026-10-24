@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-distinct-irreducible-complex-characters-of-a-finite-group-have-distinct-degrees.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-nrqm-framework-quadratic-shear-is-not-galilean.md

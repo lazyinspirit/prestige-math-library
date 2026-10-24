@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-strict-separation-of-a-point-from-a-closed-convex-set.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-vector-field-zero-index-is-a-zero-section-intersection-number.md

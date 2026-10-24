@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-nonzero-degree-map-to-a-connected-manifold-is-surjective.md

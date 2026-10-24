@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-degree-of-a-coordinate-reflection-on-a-sphere.md

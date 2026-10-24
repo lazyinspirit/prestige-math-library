@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-collapse-pullback-of-the-thom-class-is-the-poincare-dual.md

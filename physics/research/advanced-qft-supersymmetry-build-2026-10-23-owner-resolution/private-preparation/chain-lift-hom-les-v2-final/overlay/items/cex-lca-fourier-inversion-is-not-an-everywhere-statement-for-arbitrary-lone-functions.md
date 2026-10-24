@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-lca-fourier-inversion-is-not-an-everywhere-statement-for-arbitrary-lone-functions.md

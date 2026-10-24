@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-casimir-element-of-a-rational-representation-is-an-endomorphism-of-g-modules.md

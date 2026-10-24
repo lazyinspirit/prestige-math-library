@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-product-prior-posterior-second-moment-in-negative-sobolev-space.md

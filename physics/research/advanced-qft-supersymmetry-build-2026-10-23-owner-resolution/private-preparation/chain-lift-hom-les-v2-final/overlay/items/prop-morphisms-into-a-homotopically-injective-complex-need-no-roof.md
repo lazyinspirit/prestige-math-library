@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-morphisms-into-a-homotopically-injective-complex-need-no-roof.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-subalgebras-quotients-and-finite-products-of-nilpotent-lie-algebras.md

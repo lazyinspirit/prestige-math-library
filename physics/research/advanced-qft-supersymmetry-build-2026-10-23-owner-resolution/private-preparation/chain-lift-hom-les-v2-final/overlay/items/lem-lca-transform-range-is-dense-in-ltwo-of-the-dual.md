@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-lca-transform-range-is-dense-in-ltwo-of-the-dual.md

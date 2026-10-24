@@ -1,0 +1,41 @@
+--- chain-lift-format-v1.md
++++ chain-lift-scientific-v2.md
+@@ -13,10 +13,12 @@
+   - def-axiom-of-choice
+   - def-complex-manifolds-and-holomorphic-vector-bundles
+   - lem-qftx-positive-real-monad-analytic-twist-cohomology
++  - thm-long-exact-sequence-sheaf-cohomology
+ dependency_roles:
+   def-axiom-of-choice: mathematical-premise
+   def-complex-manifolds-and-holomorphic-vector-bundles: mathematical-premise
+   lem-qftx-positive-real-monad-analytic-twist-cohomology: mathematical-premise
++  thm-long-exact-sequence-sheaf-cohomology: mathematical-premise
+ axiom_base: "ZF + full AC inherited through the analytic scalar-cohomology input; the finite matrix duality is choice-free."
+ proof_strategy: direct
+ provenance:
+@@ -66,6 +68,8 @@
+ 
+ [F2] The conditional analytic twist result gives $H^0(\mathbb P^3,\mathcal O)=\mathbb C$, $H^q(\mathbb P^3,\mathcal O(-1))=0$ for all $q\ge0$, and $H^q(\mathbb P^3,\mathcal O(-2))=0$ for $q=0,1,2$. [[lem-qftx-positive-real-monad-analytic-twist-cohomology]]
+ 
++[F3] Under AC, a short exact sequence of abelian sheaves gives the natural long exact sequence of the same supplied sheaf cohomology, independently of the injective resolutions used. [[thm-long-exact-sequence-sheaf-cohomology]]
++
+ ## Proof
+ 
+ **Given:** Two monads $M=(U,S,U',\alpha,\beta)$ and $M'=(U_1,S_1,U_1',\alpha',\beta')$ as in the Statement and a holomorphic map $f:F\to F'$.
+@@ -74,14 +78,9 @@
+ $$0\to K\to S\otimes\mathcal O\to U'\otimes\mathcal O(1)\to0,\qquad 0\to U\otimes\mathcal O(-1)\to K\to F\to0$$
+ and the corresponding primed sequences. [given, F1, construct]
+ 
+-1.2 Pull back $0\to U_1\otimes\mathcal O(-1)\to K'\to F'\to0$ along $K\to F\xrightarrow f F'$. Its extension obstruction and ambiguity are respectively
+-$H^1(K^*\otimes U_1\otimes\mathcal O(-1))$ and $H^0(K^*\otimes U_1\otimes\mathcal O(-1))$. Dualizing the first sequence of step 1.1 and tensoring by $U_1\otimes\mathcal O(-1)$ gives
+-$$
+-0\to (U')^*\otimes U_1\otimes\mathcal O(-2)\to S^*\otimes U_1\otimes\mathcal O(-1)\to K^*\otimes U_1\otimes\mathcal O(-1)\to0.
+-$$
+-The long exact sequence and [F2] make both groups zero, so the lift $\phi:K\to K'$ exists and is unique. [A1, F2, step 1.1, algebra]
++1.2 For holomorphic vector bundles $E,T$, define $\mathcal{H}om(E,T)$ on an open set to consist of holomorphic fiberwise complex-linear bundle maps. In the frames of [F1] these are holomorphic matrices, transforming by the target transition matrix on the left and the inverse source transition matrix on the right; this identifies $\mathcal{H}om(E,T)=E^*\otimes T$. Split local frames show that $\mathcal{H}om$ preserves each locally split short exact bundle sequence, covariantly in its second variable and contravariantly in its first. Degree-zero sheaf cohomology is global sections by the kernel at the start of an injective resolution, so $H^0(\mathcal{H}om(E,T))=\operatorname{Hom}_{\mathrm{hol}}(E,T)$. Finite constant coefficient factors give finite direct sums, whose cohomology is the corresponding finite sum: finite sums of injective sheaves remain injective since $\operatorname{Hom}(-,\bigoplus_j I_j)=\bigoplus_j\operatorname{Hom}(-,I_j)$ for finitely many $j$; taking a finite direct sum of injective resolutions and applying the additive global-sections functor proves the assertion, with independence from the supplied replacement by [F3]. Put $T=U_1\otimes\mathcal O(-1)$ and $\mathcal A=\mathcal{H}om(K,T)=K^*\otimes U_1\otimes\mathcal O(-1)$. Dualizing the unprimed first sequence in step 1.1 and tensoring by $T$ gives $$0\to (U')^*\otimes U_1\otimes\mathcal O(-2)\to S^*\otimes U_1\otimes\mathcal O(-1)\to K^*\otimes U_1\otimes\mathcal O(-1)\to0.$$ By [F2] and the finite-sum observation, the middle sheaf has zero $H^0,H^1$ and the left sheaf has zero $H^1,H^2$. The long exact sequence [F3] therefore gives $H^0(\mathcal A)=H^1(\mathcal A)=0$. Apply $\mathcal{H}om(K,-)$ to the locally split primed second sequence of step 1.1 to obtain $0\to\mathcal A\to\mathcal{H}om(K,K')\to\mathcal{H}om(K,F')\to0$. Its long exact sequence [F3] has segment $0\to H^0(\mathcal A)\to\operatorname{Hom}_{\mathrm{hol}}(K,K')\to\operatorname{Hom}_{\mathrm{hol}}(K,F')\to H^1(\mathcal A)$. Both outer groups vanish, so the indicated map is bijective. Consequently the specified composite $K\to F\xrightarrow f F'$ has a unique holomorphic lift $\phi:K\to K'$. [A1, F1, F2, F3, step 1.1, construct, algebra]
+ 
+-1.3 Extend $\phi$ across $K\hookrightarrow S\otimes\mathcal O$ using $0\to K'\to S_1\otimes\mathcal O\to U_1'\otimes\mathcal O(1)\to0$. The obstruction and ambiguity are $H^1((U')^*\otimes S_1\otimes\mathcal O(-1))$ and $H^0((U')^*\otimes S_1\otimes\mathcal O(-1))$, both zero by [F2]. Hence there is a unique middle map $g:S\otimes\mathcal O\to S_1\otimes\mathcal O$ extending $\phi$. [F2, step 1.1, algebra]
++1.3 Set $T=S_1\otimes\mathcal O$ and compose $\phi:K\to K'$ with the primed inclusion $K'\hookrightarrow T$. To extend this map across the unprimed inclusion $K\hookrightarrow S\otimes\mathcal O$, apply $\mathcal{H}om(-,T)$ to the unprimed first sequence of step 1.1. Its local splitting and the frame calculation in step 1.2 give $0\to\mathcal B\to\mathcal{H}om(S\otimes\mathcal O,T)\to\mathcal{H}om(K,T)\to0$, where $\mathcal B=\mathcal{H}om(U'\otimes\mathcal O(1),T)=(U')^*\otimes S_1\otimes\mathcal O(-1)$. The finite-coefficient vanishings [F2] give $H^0(\mathcal B)=H^1(\mathcal B)=0$. The long exact sequence [F3] therefore makes the restriction map $\operatorname{Hom}_{\mathrm{hol}}(S\otimes\mathcal O,T)\to\operatorname{Hom}_{\mathrm{hol}}(K,T)$ bijective. It follows that there is a unique holomorphic middle map $g:S\otimes\mathcal O\to S_1\otimes\mathcal O$ whose restriction to $K$ is the inclusion composed with $\phi$. [A1, F2, F3, step 1.1, step 1.2, algebra]
+ 
+ 1.4 The restriction $g\alpha$ lands in $\operatorname{im}\alpha'$ because its class in $F'$ is $f$ applied to the zero class of $\alpha$. Since $\alpha'$ is injective, this defines a unique map $p:U\otimes\mathcal O(-1)\to U_1\otimes\mathcal O(-1)$. Since $\beta'g$ vanishes on $K$, it factors uniquely through $(S\otimes\mathcal O)/K\cong U'\otimes\mathcal O(1)$, defining the third chain map. The chain equations hold by construction. Every matrix entry of these maps is a global holomorphic section of $\mathcal O$, hence is constant by [F2]. Any other lift agrees on $K$ by step 1.2 and on $S$ by step 1.3; injectivity of $\alpha'$ and surjectivity of $\beta$ then force equality of both end maps. [F2, step 1.2, step 1.3, algebra]
+ 

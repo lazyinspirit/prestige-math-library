@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-minimal-free-resolution-differentials-land-in-maximal-ideal.md

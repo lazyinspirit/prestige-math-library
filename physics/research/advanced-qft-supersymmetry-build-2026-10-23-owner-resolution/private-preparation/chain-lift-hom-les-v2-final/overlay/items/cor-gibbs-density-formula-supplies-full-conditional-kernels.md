@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-gibbs-density-formula-supplies-full-conditional-kernels.md

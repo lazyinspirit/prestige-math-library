@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-homotopy-between-proper-maps-is-automatically-a-proper-homotopy.md

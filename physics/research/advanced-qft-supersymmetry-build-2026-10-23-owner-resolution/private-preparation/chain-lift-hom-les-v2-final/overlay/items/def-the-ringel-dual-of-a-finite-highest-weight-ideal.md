@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-the-ringel-dual-of-a-finite-highest-weight-ideal.md

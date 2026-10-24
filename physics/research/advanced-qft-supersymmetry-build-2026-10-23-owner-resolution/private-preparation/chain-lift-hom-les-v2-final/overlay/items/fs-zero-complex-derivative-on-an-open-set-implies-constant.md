@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-zero-complex-derivative-on-an-open-set-implies-constant.md

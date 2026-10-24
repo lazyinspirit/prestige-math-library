@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-bounded-below-complex-of-injectives-is-homotopically-injective.md

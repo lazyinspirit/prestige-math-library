@@ -1,0 +1,5 @@
+Five scoped mechanical repairs complete. Precheck: 5 checked, 0 failing; proof-layout: 5 items, 27 steps, 0 defects; exact strict contracts: batch 3 (one item) and batch 7 (four items) pass. Genuine baseline precheck returned five REPAIR records, treated as failure.
+
+All public prefixes and complete proof paragraphs are preserved byte-for-byte modulo the recorded numbering/reference/tag changes; display expressions retained. The principal-connection local form construction and free-circle invariant-form calculation move before independent later derivations, with the prerequisite order and final comparison preserved. Torus classifying-space algebra→given changes only normative phase categorization; complete derivations and fact support remain.
+
+Only the five items and their owning contract objects changed. Contract diff, actual checks, genuine before bytes, proposed item forms and patches are adjacent. No science acceptance, engine transition, recertification or aggregate-contract claim.

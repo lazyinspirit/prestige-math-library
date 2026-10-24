@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras.md

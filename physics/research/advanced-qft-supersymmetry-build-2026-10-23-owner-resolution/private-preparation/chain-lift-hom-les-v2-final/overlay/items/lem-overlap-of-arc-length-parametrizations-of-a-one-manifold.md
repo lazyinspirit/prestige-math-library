@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-overlap-of-arc-length-parametrizations-of-a-one-manifold.md

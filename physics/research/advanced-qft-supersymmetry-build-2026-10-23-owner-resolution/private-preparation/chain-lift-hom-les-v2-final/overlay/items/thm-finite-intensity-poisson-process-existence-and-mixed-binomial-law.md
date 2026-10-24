@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law.md

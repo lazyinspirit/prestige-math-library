@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation.md

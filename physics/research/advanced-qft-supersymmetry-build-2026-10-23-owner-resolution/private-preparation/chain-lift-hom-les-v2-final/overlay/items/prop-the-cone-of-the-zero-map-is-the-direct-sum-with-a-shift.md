@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift.md

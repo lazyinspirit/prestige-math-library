@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-lie-derivative-is-c-infinity-linear-in-the-vector-field.md

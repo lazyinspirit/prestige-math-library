@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-harris-geometric-ergodicity-has-integrable-rate-envelope.md

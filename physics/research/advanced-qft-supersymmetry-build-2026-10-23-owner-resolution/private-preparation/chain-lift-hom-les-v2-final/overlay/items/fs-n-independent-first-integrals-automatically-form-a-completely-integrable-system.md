@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-n-independent-first-integrals-automatically-form-a-completely-integrable-system.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-height-of-a-prime-bounded-by-minimal-number-of-generators.md

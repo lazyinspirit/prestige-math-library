@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-closed-uncomplemented-subspace-is-not-a-split-banach-submanifold.md

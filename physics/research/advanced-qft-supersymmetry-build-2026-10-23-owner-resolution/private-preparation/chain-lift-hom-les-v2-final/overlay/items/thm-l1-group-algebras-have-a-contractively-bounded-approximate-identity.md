@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-l1-group-algebras-have-a-contractively-bounded-approximate-identity.md

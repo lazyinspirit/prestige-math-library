@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor.md

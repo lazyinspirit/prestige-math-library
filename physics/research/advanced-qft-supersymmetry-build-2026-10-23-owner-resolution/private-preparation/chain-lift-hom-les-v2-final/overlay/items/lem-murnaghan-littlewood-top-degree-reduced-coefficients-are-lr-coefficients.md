@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-murnaghan-littlewood-top-degree-reduced-coefficients-are-lr-coefficients.md

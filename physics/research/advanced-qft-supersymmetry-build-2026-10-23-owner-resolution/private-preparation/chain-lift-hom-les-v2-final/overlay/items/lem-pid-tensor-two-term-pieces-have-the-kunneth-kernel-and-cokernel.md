@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel.md

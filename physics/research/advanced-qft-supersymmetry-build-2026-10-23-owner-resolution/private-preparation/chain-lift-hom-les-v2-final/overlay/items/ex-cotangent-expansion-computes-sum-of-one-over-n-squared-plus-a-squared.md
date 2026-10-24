@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cotangent-expansion-computes-sum-of-one-over-n-squared-plus-a-squared.md

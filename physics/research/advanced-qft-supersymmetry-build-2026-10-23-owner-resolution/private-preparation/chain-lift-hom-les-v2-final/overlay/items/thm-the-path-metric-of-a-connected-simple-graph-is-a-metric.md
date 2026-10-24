@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-path-metric-of-a-connected-simple-graph-is-a-metric.md

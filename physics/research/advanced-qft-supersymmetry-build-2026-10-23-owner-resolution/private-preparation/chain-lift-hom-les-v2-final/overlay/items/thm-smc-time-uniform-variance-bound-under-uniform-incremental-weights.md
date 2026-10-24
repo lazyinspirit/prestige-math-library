@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights.md

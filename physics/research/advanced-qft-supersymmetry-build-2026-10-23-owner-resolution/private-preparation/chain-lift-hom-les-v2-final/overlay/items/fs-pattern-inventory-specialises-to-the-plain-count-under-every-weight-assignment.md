@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-pattern-inventory-specialises-to-the-plain-count-under-every-weight-assignment.md

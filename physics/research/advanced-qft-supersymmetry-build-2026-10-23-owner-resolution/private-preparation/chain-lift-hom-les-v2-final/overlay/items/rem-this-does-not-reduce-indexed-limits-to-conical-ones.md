@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-this-does-not-reduce-indexed-limits-to-conical-ones.md

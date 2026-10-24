@@ -1,0 +1,56 @@
+---
+id: thm-bonferroni-familywise-error-control
+kind: theorem
+title: Strong familywise error control by Bonferroni
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 1
+deps:
+  - def-null-valid-p-value-and-fwer-fdr
+  - thm-p-value-superuniformity
+  - lem-probability-measure-basic-identities
+justified_by: []
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+proof_strategy: direct
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: "Jelle J. Goeman and Aldo Solari, The Sequential Rejection Principle of Familywise Error Control, Section 3, Eqs. (11)–(13)"
+      url: "https://arxiv.org/pdf/1211.3313"
+    - title: "William Fithian, STAT 210A Lecture 26: Multiple Testing, PDF pp. 2–4"
+      url: "https://www.stat.berkeley.edu/~wfithian/courses/stat210a/lectures/lecture26-F21.pdf"
+---
+
+## Statement
+
+Let $H_{01},\ldots,H_{0m}$ be a fixed finite family with $m\ge1$ in a statistical experiment, and let $p_i$ be a valid p-value for $H_{0i}$ as in [[def-null-valid-p-value-and-fwer-fdr]]. For $\alpha\in[0,1]$, reject $H_{0i}$ exactly when $p_i(X)\le\alpha/m$. Then, for every $\theta$ in the parameter space,
+$$P_\theta\{\text{at least one true null is rejected}\}=P_\theta(V_\theta\ge1)\le\alpha.$$
+The bound holds for every true-null configuration, including the global null and configurations with false nulls, and for arbitrary dependence among the p-values. This is strong FWER control; it is not an FDR guarantee.
+
+## Facts & Assumptions
+
+**Given:** A fixed family of $m\ge1$ null hypotheses, p-values valid under their respective nulls, and $\alpha\in[0,1]$.
+
+[F1] [[def-null-valid-p-value-and-fwer-fdr]]: $I_0(\theta)=\{i:\theta\in H_{0i}\}$, and FWER is $P_\theta(V_\theta\ge1)$, where $V_\theta$ counts rejected true nulls.
+
+[F2] [[thm-p-value-superuniformity]]: for a nonempty null and a p-value valid for it, every threshold $u\in[0,1]$ satisfies $P_\theta(p_i(X)\le u)\le u$ for each parameter in that null.
+
+[F3] [[lem-probability-measure-basic-identities]]: for a finite family of measurable events, the probability of their union is at most the sum of their probabilities, including the empty family.
+
+## Proof
+
+**Proof technique:** direct.
+
+**Given:** A fixed family of valid p-values, $m\ge1$, and $0\le\alpha\le1$.
+
+1.1 Set $u=\alpha/m\in[0,1]$. For each $i\in I_0(\theta)$, $\theta\in H_{0i}$, so $H_{0i}$ is nonempty; the event $A_i:=\{x:p_i(x)\le u\}$ is measurable because $p_i$ is a statistic. By validity and [F2], $P_\theta(A_i)\le u=\alpha/m$. [given, F1, F2]
+
+2.1 The event of at least one false rejection is exactly $\{V_\theta\ge1\}=\bigcup_{i\in I_0(\theta)}A_i$. By [F3] and step 1.1, $P_\theta(V_\theta\ge1)\le\sum_{i\in I_0(\theta)}P_\theta(A_i)\le |I_0(\theta)|\,\alpha/m\le\alpha$. If $I_0(\theta)=\varnothing$, the union and sum are empty and the FWER is $0$. Since this argument holds for every $\theta$ and nowhere uses a joint dependence condition, it proves the strong, arbitrary-dependence claim. [given, F1, F3, step 1.1, algebra] ∎

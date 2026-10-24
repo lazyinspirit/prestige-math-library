@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-morse-smale-metrics-are-residual-for-a-fixed-morse-function.md

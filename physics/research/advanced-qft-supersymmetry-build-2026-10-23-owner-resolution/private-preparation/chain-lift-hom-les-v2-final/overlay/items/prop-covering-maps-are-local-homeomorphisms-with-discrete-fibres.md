@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-covering-maps-are-local-homeomorphisms-with-discrete-fibres.md

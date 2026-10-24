@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-psi-of-one-over-x-has-no-limit-at-zero.md

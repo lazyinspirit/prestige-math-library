@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-smoothness-at-the-boundary-is-independent-of-charts-and-extensions.md

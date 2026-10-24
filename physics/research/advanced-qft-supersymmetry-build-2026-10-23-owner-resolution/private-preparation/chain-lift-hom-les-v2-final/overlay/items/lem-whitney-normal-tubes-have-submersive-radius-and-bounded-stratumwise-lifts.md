@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-whitney-normal-tubes-have-submersive-radius-and-bounded-stratumwise-lifts.md

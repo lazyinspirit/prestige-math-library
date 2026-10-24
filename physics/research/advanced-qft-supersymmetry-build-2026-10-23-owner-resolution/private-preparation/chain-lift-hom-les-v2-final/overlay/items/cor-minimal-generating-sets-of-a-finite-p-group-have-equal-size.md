@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-minimal-generating-sets-of-a-finite-p-group-have-equal-size.md

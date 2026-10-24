@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-quotient-map-etale-when-quotient-is-algebraic-space.md

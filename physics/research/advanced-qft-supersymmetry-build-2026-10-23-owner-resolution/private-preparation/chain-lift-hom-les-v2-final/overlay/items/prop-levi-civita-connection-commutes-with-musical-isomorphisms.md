@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-levi-civita-connection-commutes-with-musical-isomorphisms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-pathwise-derivative-not-continuous-in-tangent-norm.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-all-cartan-subalgebras-of-a-real-semisimple-lie-algebra-are-conjugate.md

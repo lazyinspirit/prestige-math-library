@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "scope": [
+    "def-aqft-eft-scattering-channel",
+    "pthm-aqft-forward-positivity-wilson-coefficient",
+    "ex-aqft-eft-positivity-application"
+  ],
+  "contracts": {
+    "def-aqft-eft-scattering-channel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-scattering-amplitude-input",
+          "source_section": "Definition",
+          "quote": "An external scalar datum consists of a spin-zero species assigned a mass $m>0$ and elastic two-particle threshold $s=4m^2$. This is a mathematical input package; it does not construct a one-particle scattering state or a scattering matrix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-local-operator-and-dimension",
+          "source_section": "Definition",
+          "quote": "A local operator in this finite-order data is an element of $P_{r,q,D}$ evaluated at $x$ on the $r$-jet of the fields. A scalar operator invariant under the declared symmetries is an element of $V_{r,q,D}=P_{r,q,D}^{G}$. Engineering dimension means this assigned mass weight; it is not a statement about an observed quantity. In four dimensions a term with operator $\\mathcal O_D$ has the convention $C\\mathcal O_D/\\Lambda^{D-4}$, where $\\Lambda$ has mass dimension one and $C$ is dimensionless.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "match-scalar-gap",
+          "step": "1.1",
+          "claim": "Identify the shared positive scalar mass and translate the two-particle threshold to the positive forward-variable cut endpoint.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "check-local-operator-dimension",
+          "step": "1.2",
+          "claim": "Check the field, derivative, polynomial-degree, invariant-scalar, and Lagrangian dimensions for the chosen finite-jet operator.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "check-crossing-subtraction",
+          "step": "2.1",
+          "claim": "Verify termwise that the paired pole subtraction is crossing even, so subtracting it preserves the supplied forward crossing relation.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the specified finite pole list may be empty, in which case the displayed sum is P=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the hypotheses use weak nonnegativity and do not exclude rho=0 or Delta_match=0; strict positivity is not asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The data package has no distinguished parameter whose value one is a boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The input requires m>0 and a positive EFT cutoff Lambda>2m."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the analytic domain excludes the two threshold points and vanishing endpoint arcs are an explicit hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite pole list is fixed and may be empty; the subtraction is defined directly for that list without a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines a channel data package and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines a channel data package and asserts no equivalence."
+        }
+      ]
+    },
+    "pthm-aqft-forward-positivity-wilson-coefficient": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-aqft-eft-scattering-channel",
+          "source_section": "Definition",
+          "quote": "Define the first nonconstant even forward coefficient by $c_1=B''(0)/2!$, of mass dimension $-4$. Exact matching at $\\mu_*$ is a supplied datum of the form $$c_1=\\frac{4C_8(\\mu_*)}{\\Lambda^4}+\\Delta_{\\mathrm{match}},$$ where $\\Delta_{\\mathrm{match}}\\in\\mathbb R$ has mass dimension $-4$ and contains every other contribution to this exact $v^2$ coefficient, including other operators, loops, and matching or truncation effects.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-aqft-eft-scattering-channel",
+          "source_section": "Definition",
+          "quote": "The real operator $\\mathcal O_8=(\\partial_\\mu\\phi\\,\\partial^\\mu\\phi)^2$ is then a local scalar of engineering dimension eight. Its coefficient in a chosen local representative is written $$\\mathcal L_{\\mathrm{EFT}}=-\\frac12\\partial_\\mu\\phi\\,\\partial^\\mu\\phi-\\frac12m^2\\phi^2+\\frac{C_8(\\mu_*)}{\\Lambda^4}\\mathcal O_8+\\cdots,$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-aqft-gapped-scalar-forward-positivity",
+          "source_section": "Statement",
+          "quote": "Then for every integer $n\\ge1$, $$\\frac{B^{(2n)}(0)}{(2n)!}=\\frac{2}{\\pi}\\int_{\\nu_0}^{\\infty}\\frac{\\rho(\\nu)}{\\nu^{2n+1}}\\,d\\nu\\ge0.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-aqft-eft-scattering-channel",
+          "source_section": "Definition",
+          "quote": "Also require $B$ to extend continuously from each open half-plane onto every compact segment of either real cut bank avoiding $\\pm\\nu_0$. This is an extra admissibility assumption on the supplied data, not a consequence of finite pointwise boundary values or a claim about every quantum field theory.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-aqft-quartic-contact-jet-matching",
+          "source_section": "Statement",
+          "quote": "Fix $m>0$, $\\Lambda>0$, integers $r\\ge1$, $D\\ge4$ and $N\\ge1$, and the metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. Use the finite-jet operator quotient $\\mathcal Q_D=V_D/R_D$ for one commuting scalar $\\phi$ of weight one, field-degree cutoff four, derivative cutoff $r$, and complex orthogonal spacetime-index action preserving $\\eta$. Let $U_D\\subset V_D$ be the subspace of degree-exactly-four scalar polynomials whose indices are contracted using $\\eta$ only, and let $Q_D^{(4)}$ be its image in $\\mathcal Q_D$. Thus $Q_D^{(4)}=U_D/(U_D\\cap R_D)$; operators outside this image are not assigned a contact map.\n\nRequire the following certificate for the actual declared relations: every $H\\in U_D\\cap R_D$ is a finite sum of identically zero jet polynomials, total divergences $\\partial_\\mu J^\\mu$ with $J$ quartic, and $F(\\Box-m^2)\\phi$ with $F$ cubic, where $\\Box=\\eta^{\\mu\\nu}\\partial_\\mu\\partial_\\nu$. The summands may use a larger finite jet space and different engineering weights; their polynomial sum must equal $H$ before any on-shell substitution. This is an additional restriction on the selected $R_D$, not a claim about an arbitrary relation subspace or its completeness.\n\nFor $O\\in U_D$ introduce commuting indeterminates $z_1,\\ldots,z_4$ and complex four-vectors $k_1,\\ldots,k_4$. Its polarized Fourier vertex is\n\n$$T_O(k_1,k_2,k_3,k_4)=[z_1z_2z_3z_4]\\,O\\!\\left(\\partial_{\\mu_1}\\cdots\\partial_{\\mu_a}\\phi\\mapsto\\sum_{j=1}^4 z_j i^a k_{j,\\mu_1}\\cdots k_{j,\\mu_a}\\right).$$\n\nThe coefficient convention contains no $1/4!$. Impose $\\sum_jk_j=0$, $k_j^2=-m^2$, and set $s=-(k_1+k_2)^2$, $t=-(k_1+k_3)^2$, $u=-(k_1+k_4)^2$. Replace contracted products by $k_j^2=-m^2$, $k_1\\cdot k_2=k_3\\cdot k_4=m^2-s/2$, $k_1\\cdot k_3=k_2\\cdot k_4=m^2-t/2$, and $k_1\\cdot k_4=k_2\\cdot k_3=m^2-u/2$. Put $t=0$, $s=2m^2+v$, $u=2m^2-v$, obtaining a polynomial $t_O(v)$. Define $\\nu_0=2m^2$ and the linear contact-jet map\n\n$$M_{D,N}([O])_k=\\nu_0^{2k+2}\\Lambda^{4-D}[v^{2k+2}]t_O(v),\\qquad 0\\le k\\le N.$$\n\nThen this map $Q_D^{(4)}\\to\\mathbb C^{N+1}$ is well-defined, $t_O$ is even, and it takes real operator classes to real vectors. For $D=8$, $O_8=(\\partial_\\mu\\phi\\,\\partial^\\mu\\phi)^2$ satisfies\n\n$$t_{O_8}(v)=8m^4+4v^2,\\qquad M_{8,N}([C_8O_8])=(4\\nu_0^2C_8/\\Lambda^4,0,\\ldots,0).$$\n\nIn particular the coefficient $[v^2]\\Lambda^{-4}t_{C_8O_8}=4C_8/\\Lambda^4$ is invariant under the certified relations. The target has precisely the normalized coordinate convention of the finite forward-amplitude problem. This algebraic map describes one quartic contact insertion about the free massive scalar quadratic action. It does not equate the contact polynomial to an exact full amplitude, discard loop or other-operator contributions, or infer positivity of a perturbative term from positivity of a full amplitude.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "apply-forward-moment",
+          "step": "1.1",
+          "claim": "Match every exact channel hypothesis to the gapped-scalar supplier and specialize its moment formula to n=1.",
+          "inputs": [
+            "given",
+            "A1",
+            "A3",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-local-contact-coefficient",
+          "step": "1.2",
+          "claim": "Apply the explicit quartic contact map with zero relation space and identify its polarized single-insertion normalization with the stated S convention; retain all other contributions in Delta_match.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "combine-exact-match-and-moment",
+          "step": "2.1",
+          "claim": "Insert the exact matching identity into c1>=0 and multiply by the positive factor Lambda^4/4.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-remainder-specialization",
+          "step": "3.1",
+          "claim": "Set the explicitly assumed Delta_match to zero and retain the weak nonnegative conclusion.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem uses only the first positive moment and states no empty-index case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the moment conclusion is weak; under Delta_match=0, step 3.1 permits C8=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses exactly n=1, whose integral is finite under the stated rho/nu^3 hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require m>0 and Lambda>2m."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: vanishing threshold endpoint arcs and boundary-bank integrability are explicit inputs used when applying the theorem in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the pole list is fixed and finite; step 1.1 uses the exact specified subtraction and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a one-way necessary inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Passing the bound is explicitly not sufficient for amplitude existence."
+        }
+      ]
+    },
+    "ex-aqft-eft-positivity-application": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-aqft-eft-scattering-channel",
+          "source_section": "Definition",
+          "quote": "Define the first nonconstant even forward coefficient by $c_1=B''(0)/2!$, of mass dimension $-4$. Exact matching at $\\mu_*$ is a supplied datum of the form $$c_1=\\frac{4C_8(\\mu_*)}{\\Lambda^4}+\\Delta_{\\mathrm{match}},$$ where $\\Delta_{\\mathrm{match}}\\in\\mathbb R$ has mass dimension $-4$ and contains every other contribution to this exact $v^2$ coefficient, including other operators, loops, and matching or truncation effects.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-aqft-forward-positivity-wilson-coefficient",
+          "source_section": "Statement",
+          "quote": "If the exact retained-order matching condition additionally gives $\\Delta_{\\mathrm{match}}=0$, then $C_8(\\mu_*)\\ge0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "passing-positive-candidate",
+          "step": "1.1",
+          "claim": "Substitute C8=1/2 and Lambda=4m into the exact map to compute a positive c1.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reject-negative-candidate",
+          "step": "1.2",
+          "claim": "Substitute C8=-1/2 under the same inputs and contradict the necessary theorem bound.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "state-necessary-region-and-limit",
+          "step": "2.1",
+          "claim": "Record the weak boundary C8=0 and distinguish passing the necessary bound from amplitude realization.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example compares two specified coefficient candidates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes C8=0 on the weak-inequality boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinguished parameter with value one is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and steps 1.1 and 1.2 use the fixed common assumptions m>0, Lambda=4m>2m, and Delta_match=0, so neither candidate approaches a zero-gap limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example evaluates finite algebraic coefficient values and does not take a cut endpoint limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: both specified candidate values are explicitly substituted in steps 1.1 and 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example checks a necessary inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No amplitude existence or sufficient condition is asserted."
+        }
+      ]
+    }
+  }
+}

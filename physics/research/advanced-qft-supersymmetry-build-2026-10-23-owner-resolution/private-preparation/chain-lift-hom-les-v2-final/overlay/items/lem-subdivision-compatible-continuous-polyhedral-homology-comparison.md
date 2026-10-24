@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-subdivision-compatible-continuous-polyhedral-homology-comparison.md

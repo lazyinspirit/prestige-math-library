@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-yoneda-splicing-is-well-defined-on-equivalence-classes.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-pid-kunneth-short-exact-sequence-is-the-two-column-collapse.md

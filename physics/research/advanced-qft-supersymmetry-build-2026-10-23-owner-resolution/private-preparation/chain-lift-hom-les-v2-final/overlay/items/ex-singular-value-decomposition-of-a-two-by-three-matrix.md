@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-singular-value-decomposition-of-a-two-by-three-matrix.md

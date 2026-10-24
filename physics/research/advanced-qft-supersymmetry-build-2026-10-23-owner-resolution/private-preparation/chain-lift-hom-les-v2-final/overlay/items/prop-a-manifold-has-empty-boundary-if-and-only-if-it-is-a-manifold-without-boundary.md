@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-manifold-has-empty-boundary-if-and-only-if-it-is-a-manifold-without-boundary.md

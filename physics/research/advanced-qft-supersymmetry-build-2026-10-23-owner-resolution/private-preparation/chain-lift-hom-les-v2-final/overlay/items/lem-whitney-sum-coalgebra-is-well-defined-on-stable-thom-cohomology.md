@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-whitney-sum-coalgebra-is-well-defined-on-stable-thom-cohomology.md

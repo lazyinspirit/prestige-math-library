@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-normal-coordinates-make-the-metric-euclidean-throughout-the-chart.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-opposite-symmetrizable-kac-moody-borels-are-root-degreewise-dual-lie-bialgebras.md

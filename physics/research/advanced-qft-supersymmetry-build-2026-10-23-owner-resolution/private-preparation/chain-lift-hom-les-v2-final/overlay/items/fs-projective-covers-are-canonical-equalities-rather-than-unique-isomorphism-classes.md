@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-projective-covers-are-canonical-equalities-rather-than-unique-isomorphism-classes.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-s-three-has-three-irreducible-complex-characters-of-degrees-one-one-and-two.md

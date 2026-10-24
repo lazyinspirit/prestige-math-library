@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cell-attachment-below-the-first-nonzero-homotopy-degree-preserves-the-required-connectivity.md

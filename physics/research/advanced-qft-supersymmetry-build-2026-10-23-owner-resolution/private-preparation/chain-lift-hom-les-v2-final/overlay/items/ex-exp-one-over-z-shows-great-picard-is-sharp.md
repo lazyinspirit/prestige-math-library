@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-exp-one-over-z-shows-great-picard-is-sharp.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-adding-an-endomorphism-valued-one-form-to-a-connection-gives-a-connection.md

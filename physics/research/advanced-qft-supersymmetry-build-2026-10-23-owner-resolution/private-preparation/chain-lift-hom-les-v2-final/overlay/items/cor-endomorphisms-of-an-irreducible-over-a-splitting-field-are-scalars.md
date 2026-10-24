@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-endomorphisms-of-an-irreducible-over-a-splitting-field-are-scalars.md

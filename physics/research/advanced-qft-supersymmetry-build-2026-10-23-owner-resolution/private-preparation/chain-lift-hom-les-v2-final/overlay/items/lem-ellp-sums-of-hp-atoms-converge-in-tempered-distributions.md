@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-ellp-sums-of-hp-atoms-converge-in-tempered-distributions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-target-is-a-strong-deformation-retract-of-the-mapping-cylinder.md

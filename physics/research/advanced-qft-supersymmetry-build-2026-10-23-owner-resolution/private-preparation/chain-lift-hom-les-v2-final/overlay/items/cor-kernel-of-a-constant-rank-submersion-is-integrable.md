@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-kernel-of-a-constant-rank-submersion-is-integrable.md

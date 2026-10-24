@@ -1,0 +1,5 @@
+# Private actual full-frontier SSR layout preparation
+
+Actual `scanProofFiles(files, physicsRoot)` completed 2026-10-23T22:12:11.359Z–2026-10-23T22:12:18.883Z: 442 items, 1467 numbered source steps, 0 layout diagnostics. Exact69 current manifests/138 pages determined scope, with every owned dependency checked to precede its consumer. Complete per-item SSR row diagnostics and all442source/69manifest hashes plus actual renderer/checker dependency hashes are in `authored-layout-preparation-v1.json` (SHA256 `98e9c7d8d6bb90189992cb13a4200500f0196ee3f4970e2c8e0b0acfdb9ce604`). Source, manifest and renderer/checker inputs were rechecked unchanged after the scan; no races.
+
+Script: `scan-authored-layout-preparation-v1.mts`. Only private research preparation evidence was written. This is an actual nonempty renderer scan, not a native gate/receipt, scientific acceptance or metadata resolution. Other owners' later source changes invalidate corresponding current-input currency and require fresh final owner preparation. No policy/render gate commands or100-gate battery were executed. No production source/state/receipt was written. Scanner process exited0 and is drained.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-adjunction-induces-a-monad-on-the-domain-of-its-left-adjoint.md

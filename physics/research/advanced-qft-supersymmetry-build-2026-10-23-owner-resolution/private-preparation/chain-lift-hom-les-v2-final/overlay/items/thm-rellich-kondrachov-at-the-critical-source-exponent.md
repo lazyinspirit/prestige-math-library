@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-rellich-kondrachov-at-the-critical-source-exponent.md

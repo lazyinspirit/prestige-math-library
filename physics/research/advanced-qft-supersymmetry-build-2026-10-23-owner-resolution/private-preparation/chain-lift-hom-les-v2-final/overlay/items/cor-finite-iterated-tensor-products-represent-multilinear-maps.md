@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-finite-iterated-tensor-products-represent-multilinear-maps.md

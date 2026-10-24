@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-flow-of-a-vector-field-tangent-to-a-closed-embedded-submanifold-preserves-it.md

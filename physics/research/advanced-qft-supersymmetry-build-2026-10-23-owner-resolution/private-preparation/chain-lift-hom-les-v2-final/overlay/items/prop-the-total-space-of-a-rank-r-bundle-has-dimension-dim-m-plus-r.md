@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-total-space-of-a-rank-r-bundle-has-dimension-dim-m-plus-r.md

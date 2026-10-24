@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-hh-dual-trace-basis-in-type-a2-hecke-algebra.md

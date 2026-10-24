@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-integrable-hardy-functions-have-vanishing-moments-in-the-atomic-range.md

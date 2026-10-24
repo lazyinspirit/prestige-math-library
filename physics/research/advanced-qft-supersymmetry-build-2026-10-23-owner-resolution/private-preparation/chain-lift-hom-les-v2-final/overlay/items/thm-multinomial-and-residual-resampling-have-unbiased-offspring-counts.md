@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts.md

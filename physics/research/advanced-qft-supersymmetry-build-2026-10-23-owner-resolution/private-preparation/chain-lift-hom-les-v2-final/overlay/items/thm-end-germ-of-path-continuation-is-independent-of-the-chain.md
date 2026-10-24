@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-end-germ-of-path-continuation-is-independent-of-the-chain.md

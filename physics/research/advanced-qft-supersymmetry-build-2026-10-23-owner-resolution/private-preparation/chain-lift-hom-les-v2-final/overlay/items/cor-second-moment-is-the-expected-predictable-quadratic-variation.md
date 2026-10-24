@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-second-moment-is-the-expected-predictable-quadratic-variation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fi-coinvariant-functors-detect-vanishing-in-bounded-weight.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-normal-relative-property-t-controls-distance-to-invariant-vectors.md

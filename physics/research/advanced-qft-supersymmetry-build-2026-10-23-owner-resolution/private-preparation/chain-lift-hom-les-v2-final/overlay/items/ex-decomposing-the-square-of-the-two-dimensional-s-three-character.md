@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-decomposing-the-square-of-the-two-dimensional-s-three-character.md

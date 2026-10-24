@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-sigma-finite-duality-for-bounded-functionals-on-l-p.md

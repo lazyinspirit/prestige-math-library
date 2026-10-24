@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-every-unoriented-and-oriented-bordism-class-is-realized-by-an-embedded-collapse.md

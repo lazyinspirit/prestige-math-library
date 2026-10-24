@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-primitive-pi-cap-block-embeds-and-gives-the-global-reeb-model.md

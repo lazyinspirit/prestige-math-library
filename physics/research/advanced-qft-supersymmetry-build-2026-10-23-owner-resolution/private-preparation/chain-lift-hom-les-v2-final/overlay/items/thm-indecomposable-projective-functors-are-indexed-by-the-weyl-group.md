@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-indecomposable-projective-functors-are-indexed-by-the-weyl-group.md

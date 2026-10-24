@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-drinfeld-hopf-pairing-is-nondegenerate-in-each-root-degree.md

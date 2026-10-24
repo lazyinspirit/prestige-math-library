@@ -1,0 +1,53 @@
+---
+id: lem-gaussian-mixture-boundary-crossing-equivalence
+kind: lemma
+title: The Gaussian-mixture threshold is the stated square-root boundary
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 1
+deps:
+  - def-gaussian-mixture-confidence-sequence-boundary
+  - def-natural-logarithm
+  - thm-natural-logarithm-laws
+  - thm-of-square-roots
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform, nonparametric, nonasymptotic confidence sequences, Proposition 5
+      url: https://arxiv.org/pdf/1810.08240
+    - title: "Aaditya Ramdas, Martingales 1: Concentration Inequalities — Conjugate Mixtures, 36-771 lecture notes, Carnegie Mellon University, Fall 2018, Proposition 1"
+      url: https://stat.cmu.edu/~aramdas/martingales18/L18-conjugate.pdf
+---
+
+## Statement
+
+Let $\alpha\in(0,1)$, $\rho>0$, $v\ge0$, and $s\in\mathbb R$. Define
+$$M(v,s):=\sqrt{\frac{\rho}{v+\rho}}\exp\!\left(\frac{s^2}{2(v+\rho)}\right).$$
+For $u_\alpha$ from [[def-gaussian-mixture-confidence-sequence-boundary]],
+$$M(v,s)\ge\frac1\alpha\quad\Longleftrightarrow\quad |s|\ge u_\alpha(v).$$
+
+## Facts & Assumptions
+
+**Given:** $\alpha\in(0,1)$, $\rho>0$, $v\ge0$, and $s\in\mathbb R$.
+
+[F1] [[def-gaussian-mixture-confidence-sequence-boundary]]: $u_\alpha(v)=\sqrt{(v+\rho)\log((v+\rho)/(\alpha^2\rho))}$.
+
+[F2] [[thm-natural-logarithm-laws]]: the natural logarithm is strictly increasing on $(0,\infty)$ and satisfies $\log(xy)=\log x+\log y$ for positive $x,y$.
+
+[F3] [[thm-of-square-roots]]: every nonnegative real has a unique nonnegative square root.
+
+## Proof
+
+1.1 Since $M(v,s)>0$, applying the strictly increasing logarithm [F2] shows $M(v,s)\ge1/\alpha$ iff $s^2/[2(v+\rho)]-\frac12\log((v+\rho)/\rho)\ge\log(1/\alpha)$. Multiplying by $2(v+\rho)>0$ and combining logarithms gives $s^2\ge(v+\rho)\log((v+\rho)/(\alpha^2\rho))$. [given, F2, algebra]
+
+2.1 The ratio $(v+\rho)/(\alpha^2\rho)$ exceeds $1$, so its logarithm is positive and [F3] supplies the nonnegative root in [F1]. Thus the last inequality in step 1.1 is exactly $|s|\ge u_\alpha(v)$. [F1, F3, step 1.1] ∎

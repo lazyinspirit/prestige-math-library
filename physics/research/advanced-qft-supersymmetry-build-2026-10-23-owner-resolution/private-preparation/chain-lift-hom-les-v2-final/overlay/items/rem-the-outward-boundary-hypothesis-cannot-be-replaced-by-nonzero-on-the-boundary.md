@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-outward-boundary-hypothesis-cannot-be-replaced-by-nonzero-on-the-boundary.md

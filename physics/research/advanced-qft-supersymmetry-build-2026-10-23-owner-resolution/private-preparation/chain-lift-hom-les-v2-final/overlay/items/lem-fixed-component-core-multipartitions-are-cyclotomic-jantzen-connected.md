@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fixed-component-core-multipartitions-are-cyclotomic-jantzen-connected.md

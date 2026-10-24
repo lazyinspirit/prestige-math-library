@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-smoothing-a-continuous-circle-valued-map-through-an-annular-retraction.md

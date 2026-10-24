@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-deck-transformations-are-determined-by-one-point-and-act-freely.md

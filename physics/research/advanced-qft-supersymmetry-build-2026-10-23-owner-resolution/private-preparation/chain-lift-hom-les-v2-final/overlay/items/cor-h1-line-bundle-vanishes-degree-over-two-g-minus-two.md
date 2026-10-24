@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-h1-line-bundle-vanishes-degree-over-two-g-minus-two.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-homotopy-groups-of-a-cw-complex-depend-on-finite-skeleta-in-each-representative.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-smooth-nonanalytic-transport-data-give-a-smooth-nonanalytic-solution.md

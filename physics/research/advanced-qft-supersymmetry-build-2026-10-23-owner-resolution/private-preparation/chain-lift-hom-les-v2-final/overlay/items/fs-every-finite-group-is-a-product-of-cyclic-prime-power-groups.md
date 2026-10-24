@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-finite-group-is-a-product-of-cyclic-prime-power-groups.md

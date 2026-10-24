@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point.md

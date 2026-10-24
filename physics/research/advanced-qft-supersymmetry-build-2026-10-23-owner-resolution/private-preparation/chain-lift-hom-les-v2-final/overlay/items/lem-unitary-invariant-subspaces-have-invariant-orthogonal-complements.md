@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-unitary-invariant-subspaces-have-invariant-orthogonal-complements.md

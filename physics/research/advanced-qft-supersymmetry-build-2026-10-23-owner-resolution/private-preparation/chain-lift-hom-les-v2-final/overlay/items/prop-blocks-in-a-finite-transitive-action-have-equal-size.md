@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-blocks-in-a-finite-transitive-action-have-equal-size.md

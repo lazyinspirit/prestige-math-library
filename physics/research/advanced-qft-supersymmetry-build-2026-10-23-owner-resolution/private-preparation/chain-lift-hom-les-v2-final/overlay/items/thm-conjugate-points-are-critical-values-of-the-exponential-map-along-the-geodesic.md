@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-conjugate-points-are-critical-values-of-the-exponential-map-along-the-geodesic.md

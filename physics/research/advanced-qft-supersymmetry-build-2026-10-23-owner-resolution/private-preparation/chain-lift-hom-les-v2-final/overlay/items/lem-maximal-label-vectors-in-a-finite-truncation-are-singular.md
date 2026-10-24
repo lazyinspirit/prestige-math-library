@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-maximal-label-vectors-in-a-finite-truncation-are-singular.md

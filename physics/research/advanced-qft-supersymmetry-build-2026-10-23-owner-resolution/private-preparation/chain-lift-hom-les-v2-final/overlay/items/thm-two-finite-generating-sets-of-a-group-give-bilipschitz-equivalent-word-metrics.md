@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics.md

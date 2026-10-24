@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-handle-boundary-coefficients-are-attaching-belt-intersection-numbers.md

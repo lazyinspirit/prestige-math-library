@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-simple-root-string-in-an-integrable-kac-moody-module.md

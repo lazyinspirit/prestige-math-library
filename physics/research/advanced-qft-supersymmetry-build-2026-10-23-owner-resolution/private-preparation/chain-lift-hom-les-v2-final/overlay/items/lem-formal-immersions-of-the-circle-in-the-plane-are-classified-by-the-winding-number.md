@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number.md

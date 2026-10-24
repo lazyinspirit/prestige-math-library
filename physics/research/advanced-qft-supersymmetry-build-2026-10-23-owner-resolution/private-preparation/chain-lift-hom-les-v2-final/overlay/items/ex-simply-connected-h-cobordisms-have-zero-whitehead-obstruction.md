@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-simply-connected-h-cobordisms-have-zero-whitehead-obstruction.md

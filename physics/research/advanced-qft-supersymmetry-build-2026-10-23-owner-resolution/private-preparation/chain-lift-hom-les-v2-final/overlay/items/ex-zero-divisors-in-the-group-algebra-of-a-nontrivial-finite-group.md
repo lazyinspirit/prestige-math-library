@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-zero-divisors-in-the-group-algebra-of-a-nontrivial-finite-group.md

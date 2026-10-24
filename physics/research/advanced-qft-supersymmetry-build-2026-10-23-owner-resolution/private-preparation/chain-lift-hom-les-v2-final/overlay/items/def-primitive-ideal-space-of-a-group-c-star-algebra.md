@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-primitive-ideal-space-of-a-group-c-star-algebra.md

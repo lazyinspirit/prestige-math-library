@@ -1,0 +1,112 @@
+# Batch 10 — Step 1 authoring evidence
+
+Run: `advanced-qft-supersymmetry-build-2026-10-23`
+
+Batch: 10 (beta, `quantum-field-theory-mathematics`)
+
+Updated: 2026-10-23
+
+## Plan, owner direction, and inventory
+
+The assigned design section in `research/plan-advanced-qft-and-supersymmetry-track.md` and the current `research/plan-spec.json` agree with the batch-10 manifest on A/B IDs (`qftx-equivariant-index`, `qftx-equivariant-index-examples`), order 966, title, category, mathematics classification, companion relation, and the required A-page predecessor `qftx-borel-localization`. There is no design/plan interface conflict. The empty item arrays in the active plan and original batch manifest are planning placeholders; the assigned inventory is taken from the two planned contracts in `research/advanced-qft-supersymmetry-2026-10-23/scaffold/proposed-inventory.json`.
+
+The binding owner direction authorizes this run, requires the mathematical source/placement work and substantial B-page examples, and leaves published originals, imports, shared plans, engine state, and verdicts untouched. The four assigned/locally required item IDs for this pair are:
+
+- `def-equivariant-elliptic-complex-index` — planned definition; no in-run item suppliers, level 0.
+- `lem-equivariant-relative-tangent-groupoid-heat-trace-limit` — new local analytic intermediate statement; depends on the exact action/index convention in the definition, level 1. Its local rescaled heat-kernel extension and off-fixed-set estimates remain an owner escalation.
+- `thm-equivariant-index-character-formula` — depends on the definition and heat-trace intermediate, level 2. Its argument is complete conditional on that intermediate; the intermediate's local analytic input is unresolved.
+- `ex-equivariant-index-on-a-zero-manifold` and `ex-equivariant-index-on-a-two-sphere` — B-page examples, each depends on the local index definition (and the sphere example also uses the pinned countable-choice, sphere-cohomology and Stokes suppliers), level 1.
+
+The run dependency inventory gives batch 10 level 2 because it requires batch 8. I inspected the current batch-8 manifest and current A/B page carriers: `qftx-borel-localization` and its companion still have empty item inventories, and there is no carrier for `thm-borel-localization-for-compact-torus-actions`. Before treating that prerequisite as an escalation, I checked `loadStep1Record` and `step1Decision` in the current run; the planned theorem has no current run readiness record. The exact planned supplier is the compact smooth torus-action localization theorem with rational or real coefficients, localization by nonzero torus characters, smooth fixed locus, equivariant normal Euler classes invertible in the localized ring, and a fixed-locus restriction isomorphism. This is a genuine absent page carrier. It remains an open page edge; it is not silently used as an item-level proof premise.
+
+## Source resolution and mathematical boundary
+
+The selected active treatments are recorded in `research/advanced-qft-supersymmetry-build-2026-10-23-batch-10.coverage.json` and passed `source-fetch-check --stamp`:
+
+- Zelin Yi, “A Groupoid Proof of the Lefschetz Fixed Point Formula,” [arXiv:2003.00955 PDF](https://arxiv.org/pdf/2003.00955), full 11-page paper. Inspected §1 and Theorem 1.1 plus §§2–5: first-order elliptic complexes, simple fixed points, relative tangent groupoid, heat-kernel rescaling, constant-symbol heat kernel, Fourier normalization, and the Jacobian denominator. This directly supports the isolated simple-fixed-point formula.
+
+- Berline, Getzler, and Vergne, *Heat Kernels and Dirac Operators*, Chapter 2 §§2.4–2.7 and Chapter 6, [full text](https://djvu.online/file/ruwkno3rtNaI5). Inspected Chapter 2, printed pp. 77–100, for the heat-kernel parametrix, Gaussian remainder estimates, and smooth parameter dependence. In Chapter 6 §6.2, printed pp. 187–190, the isolated Atiyah–Bott formula and Lemma 6.4's local heat-kernel concentration argument are for complexes with Dirac-type Hodge operator. §§6.3–6.4 and §6.7, printed pp. 191–197 and 203–205, give the equivariant Dirac fixed-component formula and its local proof. The local analytic argument is narrower than the authored general first-order elliptic-complex statement, so it corroborates that subcase and the heat-kernel route without closing [A1] in full generality.
+
+- J. L. Heitsch, *The Lefschetz Principle, Fixed Point Theory, and Index Theory*, [complete 13-page lecture notes](https://homepages.math.uic.edu/~heitsch/HeitschBC.pdf). Inspected §3, PDF pp. 8–9: Theorem 3.1 states the general elliptic-complex fixed-point formula, and its proof derives the cohomological heat-trace identity and localizes the heat kernel near the fixed set. The notes leave the final local calculation abbreviated, so this source corroborates the theorem statement and heat route but does not discharge the batch's rescaled-kernel proof gap. Its complete PDF is now fetch-stamped in coverage.
+
+The MathNet endpoint for Atiyah–Bott's 1966 notes timed out on the initial fetch and all five recovery retries. The Edinburgh mirror of their 1967 Annals proof returned `ECONNREFUSED` on the initial fetch and all five recovery retries. Both complete attempt histories and post-failure searches are preserved with `source_resolution` in the coverage file; both URLs are dropped from the active selection. The accessible Yi paper supplies the isolated elliptic-complex proof; Heitsch's full lecture notes give an independent statement/heat-trace treatment but abbreviate the final local calculation; and the BGV textbook supplies a separate equivariant Dirac treatment. The three-page Getzler summary was inspected as context but was not selected as a full proof source. No source history is deleted and no failed fetch is described as a fetch stamp.
+
+The root original `thm-geometric-clifford-module-dirac-index-formula` and its stated Fredholm/Dirac definitions were read in full. Its formula is the ordinary, identity-element index; it does not prove the equivariant character formula at nonidentity group elements. Its local source page says the local index proof remains a draft for independent review, while the item has only a precheck stamp. The current run has no Step-1 readiness record for that outside item. I do not use it as the fixed-point formula's supplier, and missing independent approval alone is not treated as a mathematical gap.
+
+The local pinned `items/thm-de-rham-cohomology-of-spheres.md` matches its immutable import hash `5acf1103611a30c03111f9d3e37e6b84a534bffa08865d80fc56aae004ad8313`; its complete statement/proof was inspected. It assumes countable choice, so the S² example carries that exact assumption. The pinned `items/thm-general-stokes-theorem.md` was also inspected for the integral argument.
+
+## Claim and proof disposition
+
+The index definition fixes the representation-ring convention and requires finite-dimensional equivariant cohomology. The authored theorem uses the precise first-order elliptic-complex, simple-fixed-point regime: the numerator is the degree-zero equivariant Chern character of the virtual fiber, and the denominator is the absolute normal Jacobian. The proof uses the compact-group action on the Hodge complex and the source-described relative tangent-groupoid heat-trace limit. The local heat-kernel family/parametrix step is not yet a local item proof for the full general elliptic-complex class. Yi proves the groupoid construction; BGV proves its isolated-point analogue for the Dirac-type subcase and supplies a heat-kernel parametrix; Heitsch gives the general formula and heat-trace localization route but abbreviates its final local calculation. The exact missing interface is recorded in the analytic intermediate item and its contract; the theorem is conditional and not claimed proved or ready.
+
+The B companion has direct worked cases. The point example checks the zero-dimensional determinant boundary. The S² de Rham example independently computes the cohomological character and both isolated-pole contributions, using only the pinned sphere cohomology and Stokes results. Neither example supplies another page's theorem.
+
+The local item levels are recomputed after final manifest edits. The page-level edge `qftx-equivariant-index -> qftx-borel-localization` remains `open` in `research/advanced-qft-supersymmetry-build-2026-10-23-batch-10.cross-batch-dependencies.json`, with evidence scoped to the actual missing batch-8 carrier. The B-to-A page edge is internal to this batch and is not a cross-batch row.
+
+## Owner escalations
+
+1. **Local heat-kernel supplier gap.** The exact unresolved [A1] interface in `lem-equivariant-relative-tangent-groupoid-heat-trace-limit` is the rescaled local kernel limit at each simple fixed point, an integrable majorant uniform as `t` decreases, and vanishing trace contribution outside disjoint fixed-point neighborhoods. These hypotheses are sufficient for the fully conditional tangent-fiber/Fourier/Jacobian argument and are consumed by `thm-equivariant-index-character-formula`; they are not proved by the current draft. Yi, §§2–5, supplies the relative tangent-groupoid route. BGV, Chapter 2 §§2.4–2.7 and Chapter 6 §6.2 Lemma 6.4, proves the analogous heat-kernel concentration for Dirac-type complexes and develops the parametrix, but the authored theorem's general first-order elliptic-complex class is broader. Heitsch, §3, states the general formula but abbreviates its last local computation. Proposed local supplier: a new `lem-equivariant-rescaled-heat-kernel-extension` on `qftx-equivariant-index`, after the index/action definition and before the current heat-trace lemma. It must prove the rescaled-kernel asymptotics, uniform domination and off-fixed-set decay for the stated general elliptic-complex Hodge Laplacian, or explicitly identify any additional hypotheses actually needed. Current contract/lemma and theorem remain conditional and Step 1 readiness is escalated; no proof is inferred from source authority.
+
+2. **Required earlier-page carrier missing.** `qftx-equivariant-index` requires batch-8 page `qftx-borel-localization`. The exact planned supplier is `thm-borel-localization-for-compact-torus-actions`: for a compact smooth `T`-manifold with rational or real coefficients, define localization by nonzero torus characters and prove that restriction to `M^T` is an isomorphism after localization, with precise compactness/finite-type hypotheses; the proof requires the fixed-set submanifold, invariant tubular neighborhood, equivariant Thom/Gysin map, invertible normal weights, and finite orbit-type/slice coverage of the complement, with any noncompact properness/compact-support version stated separately. The current batch-8 manifest has empty item inventories and no current page or item carrier. `loadStep1Record`/`step1Decision` for the planned theorem returned no current-run readiness row; that missing row is not the gap—the absent carrier is. The affected page is this A page and the B page transitively through its companion edge; the isolated-fixed-point item proof does not silently cite Borel localization as an item premise. The page edge is `open` in the cross-batch dependency array and requires owner/batch-8 resolution.
+
+### Completed-item checkpoint — `def-equivariant-elliptic-complex-index`
+
+The definition fixes a compact torus action, finite-rank bundle complex, principal-symbol exactness convention, commuting bundle linearizations, finite-dimensional cohomology condition, representation ring `R(T)`, alternating virtual representation, and character trace. It separates transversally elliptic operators and states their distribution-valued index boundary. The action convention is `U_t s(x)=rho_t(s(t^{-1}x))`.
+
+- Carrier: `items/def-equivariant-elliptic-complex-index.md`.
+- Dependencies: none; `dependency_level: 0`; mathematical domain/library only.
+- Sources: Zelin Yi, §1–2, https://arxiv.org/pdf/2003.00955; Berline–Getzler–Vergne, *Heat Kernels and Dirac Operators*, ch. 6 §6.1, https://djvu.online/file/ruwkno3rtNaI5; Heitsch, §3, https://homepages.math.uic.edu/~heitsch/HeitschBC.pdf. Exact locators and dispositions are in the batch coverage JSON; all three active full texts are fetch-stamped.
+- Decision: literature-derived statement, `proof: not-applicable`; no mathematical supplier is used as a premise. No choice axiom is introduced.
+- Validation: final precheck, proof-layout, proof-contract, content-policy, renderer, coverage and scoped dependency-cycle checks pass; see the command record below. The definition has no proof phase, so it is not among precheck's four proof-bearing items.
+- Readiness: `escalated` for the missing A-page Borel-localization predecessor; the definition itself has no item-level supplier.
+- Readiness record: `research/advanced-qft-supersymmetry-build-2026-10-23-step1-def-equivariant-elliptic-complex-index.json` is `escalated` for the missing page prerequisite.
+
+### Completed-item checkpoint — `lem-equivariant-relative-tangent-groupoid-heat-trace-limit`
+
+The lemma states the small-time equivariant heat-supertrace limit for a compact torus acting isometrically on a compact first-order elliptic complex with simple fixed points, finite-dimensional cohomology, explicit Hodge heat assumptions, and the absolute tangent Jacobian denominator. Its conditional proof computes the rescaled principal operator, the tangent-fiber integral and the determinant. The precise unresolved input [A1] is the rescaled kernel's pointwise tangent-kernel limit with an integrable majorant, plus vanishing of the trace integral off disjoint fixed-point neighborhoods. The source proves this through the relative tangent groupoid, but this batch has no local proof carrier for those analytic estimates.
+
+- Carrier: `items/lem-equivariant-relative-tangent-groupoid-heat-trace-limit.md`.
+- Dependencies: `def-equivariant-elliptic-complex-index` (section-action convention), `dependency_level: 1`.
+- Sources: Zelin Yi, §§2–5, https://arxiv.org/pdf/2003.00955; full 11-page source, source-fetch stamp preserved in coverage (PDF pp. 2–8 for groupoid rescaling, pp. 8–10 for the fixed-point trace/Jacobian). BGV, Chapter 2 §§2.4–2.7 and Chapter 6 §6.2 Lemma 6.4, https://djvu.online/file/ruwkno3rtNaI5, proves local concentration for the Dirac-type subcase and develops the parametrix. Heitsch, §3 proof of Theorem 3.1, https://homepages.math.uic.edu/~heitsch/HeitschBC.pdf, independently supplies the heat-trace/fixed-set route but abbreviates the final local computation. Neither latter source closes [A1] in the full stated generality.
+- Decision: draft lemma with explicit conditional [A1]; Step 1 must be `escalated` until a local proof of the extension, domination, and off-fixed-set decay exists. This is an established theorem-authoring obligation, not an open problem.
+- Validation: final precheck, proof-layout, proof-contract, content-policy, renderer, coverage and scoped dependency-cycle checks pass; run-wide dependency metadata has the external blockers recorded below.
+- Readiness record: `research/advanced-qft-supersymmetry-build-2026-10-23-step1-lem-equivariant-relative-tangent-groupoid-heat-trace-limit.json` is `escalated` for [A1] and the missing page prerequisite.
+
+### Completed-item checkpoint — `thm-equivariant-index-character-formula`
+
+The theorem gives the representation-ring character identity for a compact torus acting isometrically on a compact manifold and a bounded first-order elliptic complex, only at elements with simple fixed points. It states the finite-dimensional Hodge heat data and uses the fiber supertrace over the absolute real tangent Jacobian. Step 1.1 proves the equivariant McKean–Singer identity by pairing every positive eigenspace under `d+d*`; step 2.1 takes the limit using the exact conditional lemma interface. The deduction is complete conditional on the lemma, whose [A1] heat-kernel estimates remain unproved locally.
+
+- Carrier: `items/thm-equivariant-index-character-formula.md`.
+- Dependencies: `def-equivariant-elliptic-complex-index` and `lem-equivariant-relative-tangent-groupoid-heat-trace-limit`; `dependency_level: 2`.
+- Sources: Zelin Yi, Theorem 1.1 and §§1–5, https://arxiv.org/pdf/2003.00955 (isolated fixed-point elliptic-complex proof); Berline–Getzler–Vergne, Chapter 2 §§2.4–2.7 and Chapter 6 §6.2 (Dirac-type isolated-point case), plus §§6.3–6.4 and §6.7 (Dirac fixed-component branch), https://djvu.online/file/ruwkno3rtNaI5; Heitsch, Theorem 3.1 and §3, https://homepages.math.uic.edu/~heitsch/HeitschBC.pdf (general statement/heat-trace route with the final local calculation abbreviated). All three full texts are fetch-stamped in coverage.
+- Decision: draft conditional theorem; Step 1 must be `escalated` for the unresolved lemma proof. The required Borel-localization A-page edge is separately open.
+- Validation: final precheck, proof-layout, proof-contract, content-policy, renderer, coverage and scoped dependency-cycle checks pass; the item remains conditional on the escalated heat-trace input, and the A-page prerequisite edge remains open.
+- Readiness record: `research/advanced-qft-supersymmetry-build-2026-10-23-step1-thm-equivariant-index-character-formula.json` is `escalated` for the conditional lemma and missing page prerequisite.
+
+### Completed-item checkpoints — B-page examples
+
+`ex-equivariant-index-on-a-zero-manifold` directly checks a nontrivial virtual character on a two-point compact smooth zero-manifold: vacuous symbol exactness, alternating cohomology representation, two empty tangent determinants, and equality of both characters `2z-z^2`. It depends on the local index definition at level 1. Its argument uses no analytic fixed-point theorem.
+
+`ex-equivariant-index-on-a-two-sphere` computes the de Rham index character of the axial rotation on `S^2` for each nonidentity element: countable choice is explicit because the sphere-cohomology and Stokes suppliers require it; normalized invariant area has integral one and nonzero cohomology class; both pole supertraces equal `2-2cos(theta)`, as do their tangent denominators. It depends on the local index definition, `def-countable-choice`, the pinned `thm-de-rham-cohomology-of-spheres`, and pinned `thm-general-stokes-theorem`; in-run level 1.
+
+- Carriers: `items/ex-equivariant-index-on-a-zero-manifold.md` and `items/ex-equivariant-index-on-a-two-sphere.md`.
+- Sources/supplier locators: the definition's equivariant cohomology character is the local `def-equivariant-elliptic-complex-index`; the sphere cohomology supplier statement is `items/thm-de-rham-cohomology-of-spheres.md` (Lee, Theorem 17.21, pp. 450–451, as recorded on the supplier); Stokes is the local pinned `items/thm-general-stokes-theorem.md`, statement with empty-boundary convention. Active A-page literature URLs and complete locators remain in the coverage JSON.
+- Decision: both examples have direct verification arguments with exact supplier citations. Final proof-contract, precheck, layout/render, coverage and finite-check worksheets pass.
+- Readiness records for both examples are `escalated` for the transitive missing page prerequisite; their direct mathematical proofs and contracts are complete.
+
+## Validation and readiness
+
+Final scoped commands and results:
+
+- `node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts <five item paths>` — pass; 4 proof-bearing items checked, 0 failing. The definition has no proof phase and is not applicable.
+- `node tools/physics-support/proof-layout.mjs <five item paths>` — pass; 5 items, 10 numbered steps, 0 defects. The canonical phase numbering returned by precheck was adopted before the final run.
+- `node tools/physics-support/proof-contract.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-10.proof-contracts.json --strict` — pass; 5/5 contracts, 0 errors, 0 warnings.
+- `node tools/physics-support/content-policy.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-10.pages.json` — pass; 5 scoped items, 0 errors, 0 warnings.
+- `node tools/physics-support/rendercheck.mjs <five item paths and two page paths>` — pass; 7 files, KaTeX and YAML passed.
+- `node tools/physics-support/depcheck.mjs --items-file /tmp/advanced-qft-batch-10-item-scope.json` — pass; selected five-item checks and prerequisite-cycle checks across 1,152 items/164 pages passed. Its printed page graph cannot see the absent `qftx-borel-localization` carrier; that separate page edge remains open.
+- `node tools/physics-support/coverage-checklist.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-10.coverage.json` — pass; 1 page, 13 harvested results, 0 errors/warnings. The two dropped source records pass `sourceResolutionErrors`; `source-fetch-check --stamp` reports 3/5 fetch-verified, 5/5 resolved (two documented drops), and 0 newly stamped.
+- Scoped recomputation of the batch-10 item graph — pass with no errors: definition 0; local heat-trace lemma 1; character theorem 2; each example 1. All five manifest statements and dependency fields match their current carriers. The current derived batch row is `batch 10, dependency_level 2, requires [8]`.
+
+Two run-wide checks remain outside this batch's write boundary. `item-dependency-levels.mjs check --run advanced-qft-supersymmetry-build-2026-10-23` exits 1 on other batches' empty scaffold inventories, including batch-8 `qftx-borel-localization`, and stale levels on `lem-qftx-compact-manifold-cohomology-positive-ideal-nilpotent`, `lem-qftx-borel-base-is-paracompact-of-cw-type`, `thm-adhm-fixed-point-instanton-count`, `ex-adhm-u1-one-box-fixed-point`, and `ex-adhm-u2-one-instanton-fixed-points`; no batch-10 item has a level error. `batch-dependency-levels.mjs check` reports the persisted run-wide scheduling snapshot stale after this manifest was populated. The current graph was recomputed read-only and confirms batch 10 remains level 2 requiring batch 8; run-wide scheduler metadata remains with its owner/autopilot boundary.
+
+Final Step-1 records are `escalated` for all five items: the definition and examples are complete but inherit the open page-level Borel prerequisite; the heat-trace lemma additionally has the exact unresolved [A1] analytic input; the theorem consumes that conditional lemma and inherits both blockers. No item is marked ready, no `--owner` override is used, and independent review or acceptance is not claimed.

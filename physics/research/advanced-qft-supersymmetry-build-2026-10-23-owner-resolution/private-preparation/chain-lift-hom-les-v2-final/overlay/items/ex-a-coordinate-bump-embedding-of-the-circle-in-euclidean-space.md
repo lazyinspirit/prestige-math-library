@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-coordinate-bump-embedding-of-the-circle-in-euclidean-space.md

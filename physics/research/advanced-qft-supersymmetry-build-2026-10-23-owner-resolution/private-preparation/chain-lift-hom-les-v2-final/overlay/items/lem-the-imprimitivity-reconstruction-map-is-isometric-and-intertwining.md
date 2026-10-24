@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-imprimitivity-reconstruction-map-is-isometric-and-intertwining.md

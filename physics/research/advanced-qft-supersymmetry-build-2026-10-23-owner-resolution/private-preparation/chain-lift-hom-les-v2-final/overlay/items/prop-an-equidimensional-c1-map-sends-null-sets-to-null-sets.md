@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets.md

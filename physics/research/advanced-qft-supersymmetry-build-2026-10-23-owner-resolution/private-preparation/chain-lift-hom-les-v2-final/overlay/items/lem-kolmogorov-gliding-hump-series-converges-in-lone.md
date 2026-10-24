@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-kolmogorov-gliding-hump-series-converges-in-lone.md

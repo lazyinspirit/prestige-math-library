@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-topological-invariant-mean-yields-norm-approximately-invariant-densities.md

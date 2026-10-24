@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf.md
