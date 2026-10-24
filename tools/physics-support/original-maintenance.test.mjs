@@ -129,3 +129,75 @@ test('physics-content and run-commit use the same guarded original acceptance an
     { encoding: 'utf8', env: { ...process.env, PHYSICS_REPO: f.root } });
   assert.notEqual(commit.status, 0); assert.match(commit.stderr, /demo-proof-layout\.json/); assert.doesNotMatch(commit.stderr, /mathematics import changed/);
 });
+
+function changedOriginalPaths(error) {
+  return [...error.message.matchAll(/^mathematics import changed: ([^;]+); reconcile and re-import before a new run$/gm)]
+    .map(match => match[1]);
+}
+function changeOriginal(f, path, suffix = '\nAn independently changed current original.\n') {
+  const file = join(f.source, path);
+  writeFileSync(file, readFileSync(file, 'utf8') + suffix);
+}
+test('scoped original drift reports every reached mismatch in path order and excludes unrelated originals', t => {
+  const f = fixture(t);
+  changeOriginal(f, f.deep);
+  changeOriginal(f, 'library/math/supplier.md');
+  changeOriginal(f, 'items/def-unrelated.md');
+  changeOriginal(f, 'library/math/unrelated.md');
+  // Deliberately reverse receipt order: diagnostics must not depend on it.
+  const receiptPath = join(f.root, 'research/math-imports.json');
+  const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+  receipt.files.reverse(); writeFileSync(receiptPath, JSON.stringify(receipt));
+  const expected = [f.deep, f.main, 'library/math/supplier.md'].sort();
+  assert.throws(() => f.verify(), error => {
+    assert.deepEqual(changedOriginalPaths(error), expected);
+    assert.equal(error.message.split('\n').length, expected.length);
+    assert.doesNotMatch(error.message, /unrelated/);
+    return true;
+  });
+});
+test('an exactly accepted current original is omitted while other reached drift is aggregated', t => {
+  const f = fixture(t); f.seal();
+  const receipt = JSON.parse(readFileSync(join(f.root, 'research/math-imports.json'), 'utf8'));
+  assert.equal(f.verify(), receipt.files.length);
+  changeOriginal(f, f.deep);
+  changeOriginal(f, 'library/math/supplier.md');
+  assert.throws(() => f.verify(), error => {
+    assert.deepEqual(changedOriginalPaths(error), [f.deep, 'library/math/supplier.md']);
+    assert.ok(!error.message.includes(f.main));
+    return true;
+  });
+});
+test('local immutable pin failures remain immediate despite multiple current original changes', t => {
+  const f = fixture(t); changeOriginal(f, f.deep);
+  const local = join(f.root, f.deep);
+  chmodSync(local, 0o644); writeFileSync(local, readFileSync(local, 'utf8') + '\nLocal snapshot tampering.\n');
+  assert.throws(() => f.verify(), error => {
+    assert.deepEqual(changedOriginalPaths(error), [f.deep]);
+    assert.equal(error.message.split('\n').length, 1);
+    return true;
+  });
+});
+test('publication and source classification guards are not hidden by deferred original drift', t => {
+  for (const [before, after, expected] of [
+    ['status: published', 'status: draft', /mathematics source publication withdrawn: items\/def-deep.md/],
+    ['kind: definition', 'kind: postulate', /physical item in mathematics source:/],
+    ['kind: definition', 'kind: definition\ndomain: physics', /physical item in mathematics source:/],
+    ['id: def-deep', 'id: def-renamed', /mathematics source prerequisite identity def-deep is unknown/],
+  ]) {
+    const f = fixture(t), path = join(f.source, f.deep);
+    writeFileSync(path, readFileSync(path, 'utf8').replace(before, after));
+    assert.throws(() => f.verify(), error => {
+      assert.match(error.message, expected);
+      assert.deepEqual(changedOriginalPaths(error), []);
+      return true;
+    });
+  }
+});
+test('standalone import CLI retains failing exit status and reports all selected raw original mismatches', t => {
+  const f = fixture(t); changeOriginal(f, f.deep); changeOriginal(f, 'items/def-unrelated.md');
+  const cli = spawnSync(process.execPath, [fileURLToPath(new URL('./physics-imports.mjs', import.meta.url)), '--verify', '--root', f.root], { encoding: 'utf8' });
+  assert.equal(cli.status, 1);
+  assert.equal(cli.stdout, '');
+  assert.deepEqual(changedOriginalPaths({message:cli.stderr.trimEnd()}), [f.deep, f.main, 'items/def-unrelated.md'].sort());
+});

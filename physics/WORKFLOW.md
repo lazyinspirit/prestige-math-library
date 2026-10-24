@@ -1290,6 +1290,16 @@ item inventory or imports new source bytes.
 
 ## Reviewed original mathematics maintenance
 
+Current-original raw hash drift is reported together for all mismatched paths
+in the existing selected original-source loop, in sorted path order. Exact
+already accepted successor hashes remain excluded. This is diagnostic only:
+local snapshot pin changes still fail immediately, and source identity, home,
+classification, metadata, missing-source and publication guards retain their
+hard failures. A hard failure may stop the loop before all drift is observed;
+the aggregate is complete only when that loop reaches its end. Scope selection,
+category handling, acceptance rules, successful return counts and failing exit
+status are unchanged; no unrelated originals are added to the selection.
+
 An authored run may encounter a relevant published mathematics original whose
 bytes changed after the immutable local import was pinned. Root may review a
 strictly mechanical successor without replacing either source or pin, using

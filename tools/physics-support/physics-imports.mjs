@@ -104,6 +104,7 @@ export function verifyMathematicsImports(root, { run = null, planning = false, f
   for (const item of originals) if ((!frontierOnly || scope.importedItems.has(item.id))
     && (PHYSICS_KINDS.has(item.kind) || item.domain === 'physics'))
     throw Error(`physical item in mathematics source: ${item.file}`);
+  const changedOriginals = [];
   for (const file of receipt.files) if (scope === null || scope.paths.has(file.path)) {
     if (file.path.endsWith('/_category.md')) {
       const pinned = parseFrontmatter(splitFrontmatter(readFileSync(join(root,file.path),'utf8')).fm);
@@ -124,12 +125,16 @@ export function verifyMathematicsImports(root, { run = null, planning = false, f
     let originalBytes = readFileSync(original);
     const currentOriginalHash = hash(originalBytes);
     if (currentOriginalHash !== file.sha256 && acceptedOriginals.get(file.path) !== currentOriginalHash)
-      throw Error(`mathematics import changed: ${file.path}; reconcile and re-import before a new run`);
+      changedOriginals.push(file.path);
     if (file.path.startsWith('items/')) {
       const item = readItem(original);
       if (item.status !== 'published') throw Error(`mathematics source publication withdrawn: ${file.path}`);
     }
   }
+  // Only raw current-original drift is deferred. Any structural/classification
+  // or publication guard above still throws immediately instead of being masked.
+  if (changedOriginals.length) throw Error(changedOriginals.sort().map(path =>
+    `mathematics import changed: ${path}; reconcile and re-import before a new run`).join('\n'));
   return localFiles.length;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(physicsRealpath(resolve(process.argv[1]))).href) {
