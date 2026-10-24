@@ -1,0 +1,1248 @@
+{
+  "version": 1,
+  "scope": [
+    "def-standard-product-torus-as-a-compact-lie-group",
+    "lem-torus-classifying-space-cohomology",
+    "def-torus-equivariant-cohomology-cartan-model",
+    "ex-qftx-equivariant-cohomology-of-a-point",
+    "ex-qftx-equivariant-cohomology-of-a-free-circle-action"
+  ],
+  "contracts": {
+    "def-standard-product-torus-as-a-compact-lie-group": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Lebesgue measure on $\\mathbb R^n$ is written\n$\\lambda_n$ ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]), and\n$\\mathbb Z\\subseteq\\mathbb R$ is the copy of the integers\n([[def-integers]]).\n\n**The torus.** Let $q:\\mathbb R\\to\\mathbb T:=\\mathbb R/\\mathbb Z$ be the\ncanonical projection of the quotient of the additive group $\\mathbb R$ by its\nsubgroup $\\mathbb Z$, carrying the quotient topology\n([[def-quotient-topology]], [[def-topological-space]]); we write\n$[t]:=q(t)=t+\\mathbb Z$. Thus $[s]=[t]$ exactly when $s-t\\in\\mathbb Z$. The map\n$q$ is continuous ([[def-continuous-map-top]]), and $\\mathbb T$ is a compact\nHausdorff space homeomorphic to the Euclidean unit circle.\n\n**Fundamental domain.** Every class has exactly one representative in $[0,1)$:\nfor $t\\in\\mathbb R$ the integer part $n=\\lfloor t\\rfloor$ satisfies\n$n\\le t<n+1$, so $t-n\\in[0,1)$ represents $[t]$ ([[lem-integer-part]]); and if\n$s,t\\in[0,1)$ satisfy $s-t\\in\\mathbb Z$, then $|s-t|<1$ forces $s=t$.\nConsequently the map $[0,1)\\to\\mathbb T$, $t\\mapsto[t]$, is a bijection.\n\n**Topological checks.** The closed interval $[0,1]$ is compact by [[thm-heine-borel-r]] and maps onto $\\mathbb T$, so the quotient is compact by [[thm-compactness-under-continuous-maps]]. The map $t\\mapsto(\\cos 2\\pi t,\\sin 2\\pi t)$ is continuous by [[thm-sine-and-cosine-derivatives]] and [[cor-differentiable-implies-continuous]], and is constant on quotient fibres by [[thm-sine-cosine-zero-sets-and-fundamental-period]]. It induces a continuous map $\\varphi:\\mathbb T\\to S^1$ by [[thm-quotient-universal-property]]. The bijection of $[0,2\\pi)$ with the circle in [[thm-sine-and-cosine-parametrize-the-unit-circle]], together with the unique representatives in $[0,1)$, makes $\\varphi$ bijective. The Euclidean circle is Hausdorff by [[thm-metric-hausdorff-separation]], so the compact-to-Hausdorff clause of [[thm-compactness-under-continuous-maps]] makes $\\varphi$ a homeomorphism. In particular $\\mathbb T$ is Hausdorff.\n\nThe map $q$ is open: for an open $U\\subseteq\\mathbb R$, its saturation $q^{-1}[q[U]]=\\bigcup_{k\\in\\mathbb Z}(U+k)$ is open. The images under $q$ of rational-endpoint open intervals form a countable base: if $q(t)\\in V$ with $V$ open, choose such an interval containing $t$ and contained in $q^{-1}[V]$. Its image is an open neighbourhood contained in $V$.\n\n**The measure.** For a Borel set $E\\in\\mathcal B(\\mathbb T)$\n([[def-borel-sigma-algebra]]) the preimage $q^{-1}[E]$ is a Borel subset of\n$\\mathbb R$, because $q$ is continuous\n([[thm-continuous-preimages-of-borel-sets-are-borel]]), hence Lebesgue\nmeasurable ([[thm-borel-sets-are-lebesgue-measurable]]). Define\n\n$$m_{\\mathbb T}(E):=\\lambda_1\\bigl(q^{-1}[E]\\cap[0,1)\\bigr) ,$$\n\nthe value at $q^{-1}[E]$ of the same-ambient restriction of $\\lambda_1$ to $[0,1)$\n([[def-restriction-of-a-measure]]).\n\nThis is a measure on $\\mathcal B(\\mathbb T)$ by [[prop-restriction-is-a-measure]]:\nthe assignment $E\\mapsto\\lambda_1(q^{-1}[E]\\cap[0,1))$ is the composition of the\nrestriction measure with the inverse image along $q$, and inverse images preserve\nthe empty set, complements and countable unions, while countable additivity is\nthat of $\\lambda_1$. It is a **probability measure**:\n$m_{\\mathbb T}(\\mathbb T)=\\lambda_1([0,1))=1$\n([[thm-lebesgue-measure-of-a-box-of-every-kind]]). Thus\n$(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T})$ is a probability measure space\n([[def-measure-space]], [[def-measure]]).\n\n**The integral.** For a Borel measurable $F:\\mathbb T\\to[0,+\\infty]$, define\n\n$$\\int_{\\mathbb T}F\\,dm_{\\mathbb T}:=\\int_{[0,1)}F\\circ q\\,d\\lambda_1 .$$\n\nThe defining integral is meaningful because $F\\circ q$ is Borel\n([[thm-composition-with-borel-functions-preserves-measurability]],\n[[thm-continuous-preimages-of-borel-sets-are-borel]]). The assignment agrees with\n$E\\mapsto m_{\\mathbb T}(E)$ on indicators, and it is additive and homogeneous on\nfinite nonnegative simple functions; for a sequence $0\\le F_0\\le F_1\\le\\cdots$\nwith $F_n\\uparrow F$ pointwise the identity passes to the limit because\n$F_n\\circ q\\uparrow F\\circ q$ and monotone convergence holds for $\\lambda_1$\n([[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]],\n[[thm-monotone-convergence-for-the-integral]]). For real or complex integrable\n$F$ the integral is defined by decomposition into nonnegative parts or into real\nand imaginary parts, and it is linear\n([[def-integrable-real-and-complex-functions-and-their-integrals]],\n[[thm-linearity-of-the-lebesgue-integral-on-l-one]]). In particular\n$\\int_{\\mathbb T}1\\,dm_{\\mathbb T}=1$, and the same formula holds with $[0,1)$\nreplaced by any half-open interval $[a,a+1)$ or $(a,a+1]$, by the periodicity of\n$q^{-1}[E]$ and the translation invariance of $\\lambda_1$\n([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]).\n\n**Translation invariance.** For $y\\in\\mathbb R$ the map\n$\\tau_y:\\mathbb T\\to\\mathbb T$, $\\tau_y([t]):=[t+y]$, is well defined (if\n$s-t\\in\\mathbb Z$ then $(s+y)-(t+y)\\in\\mathbb Z$) and continuous, because it is\ninduced by the continuous map $t\\mapsto q(t+y)$ from $\\mathbb R$ to $\\mathbb T$. This composite is constant on the fibres of $q$, since $q(t)=q(s)$ implies $q(t+y)=q(s+y)$ ([[thm-quotient-universal-property]]). It preserves\n$m_{\\mathbb T}$: write $y=n+r$ with $n=\\lfloor y\\rfloor$ and $r\\in[0,1)$, put\n$A:=q^{-1}[E]$ and use that $A-n=A$ and that\n$A\\cap[0,1)=\\bigl(A\\cap[0,r)\\bigr)\\cup\\bigl(A\\cap[r,1)\\bigr)$ while\n$A\\cap[r,r+1)=\\bigl(A\\cap[r,1)\\bigr)\\cup\\bigl((A\\cap[0,r))+1\\bigr)$, so that\n\n$$m_{\\mathbb T}(\\tau_y^{-1}E)=\\lambda_1\\bigl((A-y)\\cap[0,1)\\bigr)=\\lambda_1\\bigl(A\\cap[r,r+1)\\bigr)=\\lambda_1\\bigl(A\\cap[0,1)\\bigr)=m_{\\mathbb T}(E),$$\n\nthe middle equality by translation invariance of $\\lambda_1$. Hence\n$(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T},\\tau_y)$ is a measure-preserving\nsystem for every $y$, and the published integral-invariance theorem gives\n$\\int_{\\mathbb T}F\\circ\\tau_y\\,dm_{\\mathbb T}=\\int_{\\mathbb T}F\\,dm_{\\mathbb T}$\nfor every measurable $F\\ge0$ and every integrable $F$\n([[def-measure-preserving-transformation-and-system]],\n[[thm-integrals-are-invariant-under-measure-preserving-maps]]). This is the\n**normalized Haar integral** of $\\mathbb T$; abstract Haar theory is not\ninvoked.\n\n**The finite torus.** For a natural $n\\ge1$ put\n$\\mathbb T^n:=\\mathbb R^n/\\mathbb Z^n$ with the quotient topology of the\ncanonical projection $q_n$, and define\n\n$$m_{\\mathbb T^n}(E):=\\lambda_n\\bigl(q_n^{-1}[E]\\cap[0,1)^n\\bigr),\\qquad \\int_{\\mathbb T^n}F\\,dm_{\\mathbb T^n}:=\\int_{[0,1)^n}F\\circ q_n\\,d\\lambda_n .$$\n\nCoordinatewise integer parts give unique representatives in $[0,1)^n$, and the continuous quotient map sends the compact cube $[0,1]^n$ onto $\\mathbb T^n$. Compactness of the cube follows from [[thm-heine-borel-r]] and [[thm-finite-products-of-compact-spaces]], and compactness of its image follows from [[thm-compactness-under-continuous-maps]]. Preimages of Borel sets are Borel; disjoint preimages and countable additivity make the displayed set function a measure, and the box formula gives total mass one. The integral identity follows from indicators, increasing simple approximation and decomposition exactly as in one dimension. For translation invariance, discard the integer parts of the translation vector, split each coordinate of $[0,1)^n$ at its fractional part, and translate the resulting $2^n$ disjoint half-open boxes by integer vectors to partition the translated cube. The periodic preimage set is unchanged by these integer vectors; finite additivity and Lebesgue translation invariance give the same measure. Applying the indicator identity, simple approximation and decomposition gives the integral formula on any translated cube. The coordinate projections induce a continuous bijection\n$\\Phi:\\mathbb T^n\\to(\\mathbb R/\\mathbb Z)^n$ by the universal property. Its\ndomain is compact by the preceding check, while its codomain is a finite\nproduct of Hausdorff spaces and hence Hausdorff ([[lem-products-preserve-t0-t1-and-hausdorff]]); the continuous-bijection\ntheorem therefore makes $\\Phi$ a homeomorphism. Thus $\\mathbb T^n$ carries the\nfinite product topology ([[def-product-topology]],\n[[thm-finite-products-of-compact-spaces]],\n[[thm-compactness-under-continuous-maps]]), and its characters\n$x\\mapsto\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, are defined on this compact\nHausdorff space: replacing representatives by integer vectors leaves the exponential unchanged by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and the trigonometric period. Finite products of the countable base above form a countable rectangular base. Hence every product-open set is a countable union of Borel rectangles. Conversely coordinate projections are continuous, so Borel rectangles are Borel in the product. Thus the product Borel sigma-algebra equals the Borel sigma-algebra of $\\mathbb T^n$. On a product $A_0\\times\\cdots\\times A_{n-1}$ of Borel subsets\nof the factors, the defining fundamental-domain formula and repeated application of [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]] give\n$m_{\\mathbb T^n}(A_0\\times\\cdots\\times A_{n-1})=\\prod_jm_{\\mathbb T}(A_j)$, so\n$m_{\\mathbb T^n}$ agrees on every measurable rectangle with the product measure\n$m_{\\mathbb T}\\times\\cdots\\times m_{\\mathbb T}$\n([[def-product-measure-on-sigma-finite-spaces]]); both are probability measures,\nand uniqueness of the product measure on sigma-finite spaces identifies them\non the entire Borel sigma-algebra\n([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\nFubini's theorem then computes iterated integrals of $L^1$ functions on\n$\\mathbb T^n$\n([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-real-line-mod-integers-is-compact-and-path-connected",
+          "source_section": "Statement",
+          "quote": "$\\mathbb R/\\mathbb Z$ is compact and path-connected.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-products-of-compact-spaces",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ ([[def-natural-numbers]]) and every family\n$(X_k)_{k < n}$ of compact topological spaces ([[def-compact-space]],\n[[def-topological-space]]), the product\n\n$$\\prod_{k < n} X_k$$\n\nwith the product topology ([[def-product-topology]]) is compact. In particular a\nbinary product $X \\times Y$ of compact spaces is compact, and the empty product,\na one-point space, is compact.\n\n**No choice principle is used beyond [[lem-finite-choice]]**, which is a theorem\nof ZF. That is what separates the finite case from the arbitrary one, where the\nAxiom of Choice is genuinely spent.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-product-of-connected-spaces",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a set, let $(X_i, \\mathcal{T}_i)$ be a connected topological space\n([[def-connected-space]]) for each $i \\in I$, and give\n$P := \\prod_{i \\in I} X_i$ the product topology ([[def-product-topology]]). Then\n$P$ is connected.\n\n**The choice cost, stated exactly.** The proof needs one point $a \\in P$ and\nnothing else, and it obtains it as follows.\n\n- If $P = \\varnothing$ then $P$ is connected outright, no separation of the empty\n  space existing, and no choice principle is involved.\n- If $P \\ne \\varnothing$ a point $a \\in P$ is fixed. Selecting one element of one\n  nonempty set is not a choice principle.\n\nSo the theorem **as displayed is a theorem of ZF**. What costs something is the\ncompanion assertion that $P$ is nonempty when every $X_i$ is: for $I$ a natural\nnumber that is [[lem-finite-choice]], a theorem of ZF, and for an arbitrary $I$\nit **is** the Axiom of Choice ([[def-axiom-of-choice]], [[def-choice-function]]),\nas [[def-product-topology]] records. A reader who wants \"the product of nonempty\nconnected spaces is a nonempty connected space\" for infinite $I$ is therefore\nusing $\\mathrm{AC}$, and that is where the cost sits \u2014 not in the connectedness\nargument.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-torus-and-maximal-torus-in-a-compact-lie-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a compact Lie group with identity $e$ ([[def-lie-group]]).\n\n- A **torus** is a compact connected abelian Lie group. The basic example is\n  the circle group $S^1=\\mathbb R/\\mathbb Z$; the product of $r$ copies of\n  $S^1$ is a torus of dimension $r$.\n- A **subgroup** of $G$ is a subgroup in the algebraic sense; by a Lie\n  subgroup we mean a subgroup that is an immersed, embedded or closed Lie\n  subgroup in the sense of\n  [[def-immersed-embedded-and-closed-lie-subgroup]]. A torus *of* $G$ is a\n  subgroup $T\\le G$ that is a torus in the above sense and is a closed\n  (equivalently, embedded) Lie subgroup of $G$.\n- A **maximal torus** of $G$ is a torus $T\\le G$ that is maximal under\n  inclusion among torus subgroups of $G$: no torus subgroup of $G$ properly\n  contains $T$. Maximality is with respect to inclusion of subgroups, not with\n  respect to dimension or Lie algebra alone.\n\nSince $G$ is a finite-dimensional real Lie group, a closed subgroup of $G$ is\nan embedded Lie subgroup (this is Cartan's closed subgroup theorem, used later\non this page); in particular every maximal torus is a compact connected abelian\nembedded Lie subgroup, and its Lie algebra is a subspace of\n$\\operatorname{Lie}G$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "source_section": "Statement",
+          "quote": "Let $(M,\\mathcal S)$ and $(N,\\mathcal T)$ be smooth manifolds of dimensions $m$\nand $n$. Then $M\\times N$ with the product topology is a topological\n$(m+n)$-manifold. If $\\mathcal A$ and $\\mathcal B$ are smooth atlases with\n$[\\mathcal A]=\\mathcal S$ and $[\\mathcal B]=\\mathcal T$, then the set of product\ncharts\n\n$$\\mathcal A\\times\\mathcal B:=\\bigl\\{\\,\\bigl(V\\times W,\\ \\varphi\\times\\psi\\bigr):(V,\\varphi)\\in\\mathcal A,\\ (W,\\psi)\\in\\mathcal B\\,\\bigr\\}$$\n\nis a smooth atlas on $M\\times N$, and the maximal atlas it generates is\nindependent of the presenting atlases: it depends only on $\\mathcal S$ and\n$\\mathcal T$. This maximal atlas is the **product smooth structure** of\n$M\\times N$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-a-map-into-a-product-is-smooth-iff-its-components-are-smooth",
+          "source_section": "Statement",
+          "quote": "Let $P$, $M$, and $N$ be smooth manifolds, let $F:P\\to M\\times N$ be a map, and\nwrite\n\n$$f:=\\pi_M\\circ F,\\qquad g:=\\pi_N\\circ F,$$\n\nwhere $\\pi_M$ and $\\pi_N$ are the product projections. Then $F$ is smooth if and\nonly if both component maps $f:P\\to M$ and $g:P\\to N$ are smooth.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-lie-group",
+          "source_section": "Definition",
+          "quote": "A **finite-dimensional real Lie group** is a group $G$, in the sense of\n[[def-group]], together with the structure of a finite-dimensional real smooth\nmanifold such that the maps\n\n$$m:G\\times G\\longrightarrow G,\\qquad m(g,h)=gh,$$\n\nand\n\n$$\\operatorname{inv}:G\\longrightarrow G,\\qquad \\operatorname{inv}(g)=g^{-1},$$\n\nare smooth in the sense of\n[[def-smooth-map-between-manifolds-with-boundary]]. Its identity element is\ndenoted by $e$ (or occasionally $1$).\n\nUnless an item explicitly says otherwise, every Lie group on this page is real,\nfinite-dimensional, and has no manifold boundary. Dimension zero is allowed;\nfor example, any countable discrete group with its discrete zero-dimensional\nsmooth structure is a Lie group. A Lie group cannot be empty because a group\ncontains its identity. The definition applies unchanged in dimension one,\nuses no metric or nondegeneracy hypothesis, and makes no choice from a family\nof sets.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-smooth-manifold",
+          "source_section": "Definition",
+          "quote": "A **smooth $n$-manifold** is a pair $(M,\\mathcal S)$ in which $M$ is a\ntopological $n$-manifold\n([[def-topological-manifold-without-boundary]]) and $\\mathcal S$ is a **smooth\nstructure** on $M$: a maximal smooth atlas\n([[thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas]]).\nBecause\n[[thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas]] sends\nevery smooth atlas to the unique maximal atlas containing it, a smooth manifold\nis equivalently specified by a topological manifold $M$ together with any one\nsmooth atlas $\\mathcal A$, the structure being the generated $[\\mathcal A]$. A\nchart $(U,\\varphi)\\in\\mathcal S$ is called a **smooth chart** (or a **chart of\nthe smooth structure**); its domain is a **coordinate domain** and its\ncoordinate functions are **smooth coordinates** on $U$. When the structure is\nclear from context, the manifold itself is written $M$ in place of\n$(M,\\mathcal S)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-smooth-map-between-manifolds-with-boundary",
+          "source_section": "Definition",
+          "quote": "A continuous map $f:M\\to N$ is smooth if, for every pair of boundary charts around $p$ and $f(p)$, the coordinate representative $\\psi\\circ f\\circ\\varphi^{-1}$ is smooth on a relatively open subset of a half-space in the local-extension sense.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-relative-cw-inclusions-are-cofibrations",
+          "source_section": "Statement",
+          "quote": "If $(X,A)$ is a relative CW complex, then $A\\hookrightarrow X$ has the homotopy extension property; in particular it is a cofibration.\n\nExplicitly, for every topological space $Y$, continuous $g:X\\to Y$, and continuous $H:A\\times I\\to Y$ satisfying $H(a,0)=g(a)$, there is a continuous $\\widetilde H:X\\times I\\to Y$ restricting to $H$ on $A\\times I$ and to $g$ at time zero. Here $I=[0,1]$ and products have their ordinary product topologies. There is no finiteness or dimension bound on the CW complex, no separation hypothesis on $Y$, and no choice assumption. The CW structure, including its characteristic maps, is supplied as data.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-compactly-generated-based-space-and-well-pointed-object",
+          "source_section": "Definition",
+          "quote": "On this page a **based space** is a compactly generated weak Hausdorff space\n$X$ equipped with a chosen point $*_X\\in X$. Products are the compactly\ngenerated products from the published CGWH convention, and every quotient is\nkified after taking the ordinary quotient.\n\nA based space $X$ is **well-pointed** when the inclusion\n\n$$ \\{*_X\\}\\hookrightarrow X $$\n\nis an unbased cofibration, in the sense of the published homotopy-extension\nproperty. Thus well-pointedness is an additional hypothesis: it is not being\nasserted for every based CGWH space. The structure spaces of every sequential\nprespectrum on this page are required to be well-pointed. No choice principle\nis used in these conventions.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-one-parameter-subgroup-of-a-lie-group",
+          "source_section": "Definition",
+          "quote": "The standard coordinate on $\\mathbb R$ makes addition\n$(s,t)\\mapsto s+t$ and inversion $t\\mapsto-t$ smooth, so\n$(\\mathbb R,+)$ is a one-dimensional Lie group in the sense of\n[[def-lie-group]]. A **one-parameter subgroup** of a Lie group $G$ is a\nLie-group homomorphism\n\n$$\\gamma:(\\mathbb R,+)\\longrightarrow G$$\n\nin the sense of\n[[def-lie-group-homomorphism-isomorphism-and-automorphism]]. Thus $\\gamma$ is\nsmooth, is defined for every real parameter, and satisfies\n\n$$\\gamma(s+t)=\\gamma(s)\\gamma(t),\\qquad \\gamma(0)=e,\\qquad \\gamma(-t)=\\gamma(t)^{-1}.$$\n\nThe last two identities are consequences of the group-homomorphism law, not\nextra data. A smooth curve defined only on an interval around $0$ is therefore\nnot yet a one-parameter subgroup, even if it satisfies the product law\nwhenever all displayed parameters remain in that interval. The term also\ndoes not assert that the image is embedded or closed.\n\nBoth the domain and every Lie-group codomain are nonempty and boundaryless.\nFor a zero-dimensional codomain the definition still permits, for example,\nthe constant homomorphism; for a one-dimensional codomain it is unchanged.\nNo metric, nondegeneracy, or finite endpoint occurs, and all maps and group\noperations are supplied explicitly, so no choice axiom is used. This is a\ndefinition, not a biconditional characterization.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-exponential-map-of-a-lie-group",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, let $G$ be a finite-dimensional real Lie group\nwith identity $e$, and write $\\mathfrak g=T_eG$. For each\n$X\\in\\mathfrak g$, the existence-and-uniqueness theorem\n[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]]\nsupplies a unique one-parameter subgroup\n$\\gamma_X:\\mathbb R\\to G$ with $\\gamma_X'(0)=X$. The **exponential map of\n$G$** is the well-defined total map\n\n$$\\exp_G:\\mathfrak g\\longrightarrow G,\\qquad \\exp_G(X):=\\gamma_X(1).$$\n\nHere $\\mathrm{AC}_\\omega$ is the axiom of\n[[def-countable-choice|countable choice]].\nThe same theorem identifies $\\gamma_X$ with the integral curve through $e$\nof the left-invariant field $X^L$; the left translate\n$t\\mapsto g\\gamma_X(t)$ is therefore the corresponding integral curve through\n$g$. The countable-choice assumption is used exactly through that supplied\nsmooth invariant-field and completeness result, and evaluation at the single\ntime $1$ adds no choice.\n\nA Lie group is nonempty and boundaryless. If $\\dim G=0$, then\n$\\mathfrak g=0$ and $\\exp_G(0)=e$; the definition is unchanged in dimension\none. No metric or nondegeneracy condition occurs, and $1$ is not an endpoint\nof the global parameter domain $\\mathbb R$. This item defines a map and asserts\nno biconditional characterization.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-compactness-agrees-with-metric-compactness",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $\\mathcal{T}_d$ be\nits metric topology ([[def-metric-topology]]), so that $(X, \\mathcal{T}_d)$ is a\ntopological space ([[def-topological-space]]) and is metrizable\n([[def-metrizable-space]]). Then:\n\n1. $(X,d)$ is a compact metric space ([[def-metric-compactness]]) **if and only\n   if** $(X, \\mathcal{T}_d)$ is a compact topological space\n   ([[def-compact-space]]).\n2. For every $A \\subseteq X$: $A$ is a compact subset of the metric space\n   $(X,d)$ if and only if $A$ is a compact subset of the topological space\n   $(X, \\mathcal{T}_d)$, the two readings of \"compact subset\" being the metric\n   subspace $(A, d_A)$ ([[def-isometry-and-metric-embedding]]) and the topological\n   subspace $(A, (\\mathcal{T}_d)_A)$ ([[def-subspace-topology-top]]).\n\n**Nothing here is a coincidence and nothing is transported.** The open-cover\ncondition of [[def-metric-compactness]] quantifies over families of subsets open\nin $(X,d)$, and by [[def-metric-topology]] those are exactly the members of\n$\\mathcal{T}_d$; so the two conditions are not merely equivalent, they are the\nsame condition written twice. No choice principle is used.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-closed-subspace-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]), with\nsubspaces as in [[def-subspace-topology-top]] and compactness as in\n[[def-compact-space]]. Then:\n\n1. **Closed in compact is compact.** If $(X, \\mathcal{T})$ is compact and\n   $F \\subseteq X$ is closed in $X$, then $F$ is a compact subset of $X$.\n2. **Finite unions.** If $n \\in \\mathbb{N}$ and $K_0, \\dots, K_n$ are compact\n   subsets of $X$, then $K_0 \\cup \\dots \\cup K_n$ is a compact subset of $X$. The\n   union of the empty list is $\\varnothing$, which is a compact subset of every\n   space.\n\nClaim 1 needs $X$ to be compact and claim 2 does not; no hypothesis of any kind\nis placed on $X$ in claim 2. **No choice principle is used**: claim 1 selects\nnothing, taking a least index where a selection would be natural, and claim 2\nmakes finitely many selections through [[lem-finite-choice]], a theorem of ZF.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), and let $\\mathbb{R}$ carry its usual topology, the\nmetric topology of $d_{\\mathbb{R}}(s,t) = |s-t|$\n([[lem-real-line-is-a-metric-space]], [[def-metric-topology]],\n[[def-metrizable-space]]). Then:\n\n1. **Continuous images.** If $f : X \\to Y$ is continuous\n   ([[def-continuous-map-top]]) and $(X, \\mathcal{T}_X)$ is compact\n   ([[def-compact-space]]), then $f[X]$ is a compact subset of $Y$. More\n   generally, if $K \\subseteq X$ is a compact subset of $X$ then $f[K]$ is a\n   compact subset of $Y$.\n2. **Extreme values.** If $(X, \\mathcal{T}_X)$ is compact and nonempty and\n   $g : X \\to \\mathbb{R}$ is continuous, then $g[X]$ has a maximum and a minimum\n   ([[def-max-min]]): there are $x_{\\max}, x_{\\min} \\in X$ with\n   $$g(x_{\\min}) \\;\\le\\; g(x) \\;\\le\\; g(x_{\\max}) \\qquad \\text{for every } x \\in X .$$\n3. **Compact to Hausdorff.** If $(X, \\mathcal{T}_X)$ is compact, $(Y,\n   \\mathcal{T}_Y)$ is Hausdorff ([[def-hausdorff-space]]) and $f : X \\to Y$ is a\n   continuous bijection, then $f$ is a homeomorphism\n   ([[def-homeomorphism-and-open-maps]]).\n\nNonemptiness in claim 2 is a hypothesis and not an oversight: for\n$X = \\varnothing$ the image is empty and has neither a maximum nor a minimum. **No\nchoice principle is used**: the one selection made below is over a finite index\nset, where [[lem-finite-choice]] is a theorem of ZF.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a Hausdorff topological space\n([[def-hausdorff-space]], [[def-topological-space]]), with compact subsets as in\n[[def-compact-space]]. Then:\n\n1. **A point and a disjoint compact set are separated.** If $K \\subseteq X$ is\n   compact and $x \\in X \\setminus K$, there are $U, V \\in \\mathcal{T}$ with\n   $$x \\in U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n2. **Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact\n   and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with\n   $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n3. **Compact implies closed.** Every compact subset of $X$ is closed in $X$.\n4. **In a compact Hausdorff space the two classes coincide.** If in addition\n   $(X, \\mathcal{T})$ is compact, then a subset of $X$ is compact if and only if\n   it is closed.\n\n**The proof is written choice-free, and that is not a stylistic preference.** The\ntextbook argument says \"for each $y \\in K$ choose disjoint open $U_y, V_y$\",\nwhich is a selection over an arbitrary index set and therefore an appeal to the\nfull Axiom of Choice. What is done below instead is to take the family of **all**\nopen $V$ that admit some open $U \\ni x$ disjoint from them \u2014 a family cut out by\na formula, with nothing selected \u2014 extract a finite subcover from it, and only\nthen make finitely many selections, which [[lem-finite-choice]] supplies as a\ntheorem of ZF.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-open-or-closed-surjection-is-quotient",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be topological spaces and let $q : X \\to Y$ be continuous\n([[def-continuous-map-top]]). Each of the following three conditions makes $q$ a\nquotient map ([[def-quotient-topology]]).\n\n1. $q$ is a surjection and an **open map**\n   ([[def-homeomorphism-and-open-maps]]).\n2. $q$ is a surjection and a **closed map**.\n3. $q$ admits a **continuous section**: a continuous $s : Y \\to X$ with\n   $q \\circ s = \\mathrm{id}_Y$. (Surjectivity of $q$ is then automatic and need\n   not be assumed.)\n\nNeither clause 1 nor clause 2 is necessary: a quotient map need be neither open\nnor closed. A witness that is a quotient map by clause 3 while failing clauses 1\nand 2 is worked on the companion page, and is named in the remarks below.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], for any sequence $(A_n)$ of nonempty sets the family\n$\\mathcal F=\\{A_n:n\\in\\mathbb N\\}$ has a choice function $g$. The composite\n$n\\mapsto g(A_n)$ is an indexed selector, even if some sets $A_n$ repeat.\nThus [F1] holds and supplies the countable-choice premise in the quotient\ncircle definition [F2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For one factor, [F2] makes each quotient interval $q(I)$ open because\n$q$ is open, and $q|_I$ is injective because $I$ has length less than $1$.\nIts inverse chart is continuous: $q|_I$ is a continuous open bijection onto\n$q(I)$. These charts cover the circle. If two charts overlap, local lifts\ndiffer by an integer; this integer is locally constant, so each transition\nmap is locally a translation and hence smooth. The charts therefore define a\nsmooth one-manifold without boundary compatible with the quotient topology.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Addition and inversion on one factor are smooth in these charts. Near any\npair of points, choose local real lifts $x,y$ and an output chart around their\nsum; after shrinking the input intervals, the coordinate expression for\naddition is $x+y$ plus one fixed integer. Near any point, choose local lifts\nfor it and its inverse; the coordinate expression for inversion is $-x$ plus\none fixed integer. Both expressions are smooth. With the group law already\ngiven by [F2], this is a Lie group by [F6]. Its underlying circle is compact,\nHausdorff and connected by [F2] and [F3], and it is abelian by the quotient\naddition law.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Iterate the binary product smooth-structure construction in [F5] over the\nfinite number $r$ of factors. Multiplication and inversion are componentwise\nproducts of the smooth one-factor maps in step 2.1; iterating the binary\ncomponent criterion in [F5] makes both operations smooth. The finite product\nis compact by [F3], connected by [F3], and abelian coordinatewise. It is\ntherefore a compact connected abelian Lie group, hence a torus by [F4], of\ndimension $r$. The coordinate curves\n$\\gamma_i(s)=(0,\\ldots,[s],\\ldots,0)$ are smooth group homomorphisms by the\nquotient charts and coordinate group law, so [F9] applies. Their derivatives\nat zero form the coordinate basis of $T_0T$, and\n$\\gamma_i(s+1)=\\gamma_i(s)$, so each has period one. For any $t\\in\\mathbb R$,\n$s\\mapsto\\gamma_i(ts)$ is a smooth group homomorphism with initial derivative\n$t e_i$; uniqueness in [F9] makes it $\\gamma_{t e_i}$. Therefore\n$\\exp_T(t e_i)=\\gamma_{t e_i}(1)=\\gamma_i(t)$, as needed for the stated\nnormalization. For $r=0$, the empty product is the one-point Lie group and\nthese assertions hold with empty basis.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The circle has a finite CW structure with one vertex $[0]$ and one open\n$1$-cell, the image of $(0,1)$; its characteristic interval has both\nendpoints attached to that vertex. For $T$, index product cells by subsets\n$J\\subseteq\\{1,\\ldots,r\\}$: coordinates in $J$ lie in the open $1$-cell and\nall other coordinates equal $[0]$. Each cell is an open cube of dimension\n$|J|$, its closure meets only cells indexed by subsets of $J$, and its\ncharacteristic cube is the product of the factor characteristic intervals;\nidentify each closed cube with a closed disk of the same dimension. The map\n$q^r:[0,1]^r\\to T$ is a continuous surjection because every coordinate class\nhas a representative in $[0,1]$ by [F2]. If $x\\ne y$ in $T$, some coordinate\n$k$ has $x_k\\ne y_k$; choose disjoint open neighborhoods of $x_k$ and $y_k$\nin the Hausdorff circle from [F2]. Their inverse images under the $k$th\ncoordinate projection are disjoint open neighborhoods of $x$ and $y$ in the\nproduct topology, so $T$ is Hausdorff. The cube $[0,1]^r$ is compact by\n[F10] and the finite-product theorem in [F3], including the one-point empty\nproduct when $r=0$. If $K$ is closed in that cube, [F11] makes $K$ compact;\ncontinuity of $q^r$ and [F12] make $q^r(K)$ compact; and the just-proved\nHausdorff property of $T$ and [F13] make $q^r(K)$ closed in $T$. Thus $q^r$\nis closed as well as continuous and surjective, so [F14] makes it a quotient\nmap. It is the\ncharacteristic map for the top cell. Every lower-cell characteristic cube is\nobtained by precomposing $q^r$ with the continuous coordinate insertion that\nfixes omitted coordinates at $0$, so the quotient topology of $q^r$ already\nmakes every characteristic map continuous; conversely $q^r$ is itself one of\nthose maps. Hence this quotient topology is exactly the weak topology\ndetermined by the finitely many characteristic cubes. This gives a finite CW\nstructure with the identity as a $0$-cell. The singleton\nidentity is a subcomplex, so [F7] gives the homotopy extension property for\nits inclusion.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "step 1.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The compact Hausdorff space $T$ is compactly generated: its identity map\nfrom the compact Hausdorff space $T$ tests every open subset in the\ncompactly-generated topology. For every compact Hausdorff space $C$ and continuous\nmap $f:C\\to T$, [F12] makes $f(C)$ compact, and [F13] makes $f(C)$ closed\nin the Hausdorff space $T$ established in step 4.1. This is precisely weak\nHausdorffness. Together with the cofibration from step 4.1,\n[F8] shows that the based group is well-pointed.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F8",
+            "F12",
+            "F13",
+            "step 4.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition and step 3.1 specify the empty product as the one-point Lie group with empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 verify r=0 as the one-point group and its single identity cell."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 construct the one-circle charts and smooth group operations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the empty-product degeneration; step 4.1 reduces it to the identity cell."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 explain that quotient-interval endpoints are identified, with no manifold boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 derives indexed countable choice from AC, including repeated sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item gives a definition with a verification proof, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item gives a definition with a verification proof, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Read all six proof steps and the 22 actual supplier Definition/Statement interfaces. AC implies countable choice by composing the family selector with its indexing map. Quotient intervals of length below one give smooth translation transitions; local addition/inversion and finite products give the Lie group. Coordinate curves prove period-one exponential normalization by uniqueness. The characteristic cube is a closed quotient onto the compact Hausdorff torus and its faces give the finite CW weak topology, so the identity subcomplex is a cofibration. Compact Hausdorff implies CGWH by the displayed compact-image argument. Checked r=0, identity, repeated choice sets, and no boundary chart assumption. Reader/refuter report no finding; no defect identified. This is interface review, not a new audit of imported proofs."
+      }
+    },
+    "lem-torus-classifying-space-cohomology": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-milnor-infinite-join-model-of-eg",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a topological group. All products, quotient spaces, and actions\nbelow use the stated ordinary topologies.\n\nFor $N\\geq0$, let $J_N^{\\mathrm q}=G^{*(N+1)}$ denote the ordinary quotient of $\\Delta^N\\times G^{N+1}$ in which\n\n$$ (t_0,\\ldots,t_N;g_0,\\ldots,g_N)\\sim(t_0,\\ldots,t_N;g'_0,\\ldots,g'_N) $$\n\nexactly when $g_i=g'_i$ for every $i$ with $t_i>0$. We write its points as finite formal sums $\\sum_{i=0}^N t_i g_i$. Appending a zero coordinate gives the usual inclusions of these finite quotient joins.\n\nAs a **set**, Milnor's infinite join is the increasing union\n\n$$ EG=G*G*\\cdots=\\bigcup_{N\\geq0}J_N^{\\mathrm q}. $$\n\nEvery point therefore has an expression\n\n$$ x=\\sum_{i\\geq0}t_i g_i,\\qquad t_i\\geq0,\\quad \\sum_i t_i=1, $$\n\nwith only finitely many $t_i$ nonzero; a label $g_i$ is ignored when $t_i=0$. We choose one of two **ordinary topologies** on this set, according to $G$:\n\n- If $G$ is compact Hausdorff, $EG$ has the ordinary weak direct-limit topology of the compact finite quotient joins $J_N^{\\mathrm q}$: a set is open exactly when its intersection with every $J_N^{\\mathrm q}$ is open. These are compact Hausdorff stages with closed inclusions. This branch makes the circle and two-point-group models the standard weak CW unions of their finite joins.\n- Otherwise, $EG$ has Milnor's ordinary coordinate-label **strong topology**: the coarsest topology for which every barycentric function $t_i:EG\\to[0,1]$ and every partial label function $g_i:\\{t_i>0\\}\\to G$ is continuous. A map from any ordinary topological space into this strong join is continuous exactly when all its weights and all its labels on their positive-weight loci are continuous. This is not the weak direct-limit topology; the subspace topology on a finite-stage set need not equal the quotient topology of $J_N^{\\mathrm q}$.\n\nIn both branches the weights $t_i$ and partial labels $g_i$ are continuous; in the weak branch this follows by checking their restrictions to the finite quotient stages. For compact Hausdorff $G$, each finite strong join and finite quotient join agree because the latter is compact and the former Hausdorff. Neither branch is additionally kified. The noncompact strong branch is an explicit ordinary-Top exception to the standing CGWH convention; all bundle charts and homotopies use ordinary products, as required by the library's ordinary bundle definition. We do not silently replace an ordinary product by a k-product.\n\nThe diagonal right action is\n\n$$ \\left(\\sum_i t_i g_i\\right)h=\\sum_i t_i(g_i h). $$\n\nDefine $BG=EG/G$ with the ordinary orbit-quotient topology, and let $p:EG\\to BG$ be the orbit map. Each $t_i$ is invariant and hence descends to a continuous function, again denoted $t_i$, on $BG$. We use the identity-labelled vertex in coordinate $1$ as $e_0\\in EG$ and its orbit as $b_0\\in BG$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-milnor-join-model-is-a-contractible-free-g-space",
+          "source_section": "Statement",
+          "quote": "For a well-pointed topological group $G$ of CW type, the diagonal action on Milnor's $EG$ is free, $EG$ is contractible, and\n\n$$ p:EG\\longrightarrow BG $$\n\nis a numerable principal $G$-bundle. The numeration satisfies the library's support-subordinate convention, not merely cozero containment.\n\nThe embeddings\n\n$$e\\left(\\sum_i t_i g_i\\right)=\\sum_i t_i g_i\\text{ in slot }2i,\\qquad o\\left(\\sum_i t_i g_i\\right)=\\sum_i t_i g_i\\text{ in slot }2i+1$$\n\nare $G$-equivariantly homotopic to the identity. If $a,b:T\\to EG$ are\ncontinuous equivariant maps, then\n$(1-t)e(a(-))+t\\,o(b(-))$ is a continuous equivariant homotopy.\n\nFor $G=S^1$ or $G=\\mathbb Z/2$, the selected compact-group topology identifies $BG$ with the standard weak CW colimit of the finite projective quotients $\\mathbb{CP}^N$ or $\\mathbb{RP}^N$, respectively.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cohomology-ring-of-infinite-complex-projective-space",
+          "source_section": "Statement",
+          "quote": "Assume AC. Identify $\\mathbb{CP}^\\infty=\\operatorname{Gr}_1(\\mathbb C^\\infty)$,\nthe space of complex lines in $\\mathbb C^\\infty$, and let\n$u=e(\\gamma_{\\mathbb R})\\in H^2(\\mathbb{CP}^\\infty;\\mathbb Z)$ be the class of\nthe tautological complex line. Then\n$$H^{2k}(\\mathbb{CP}^\\infty;\\mathbb Z)=\\mathbb Z\\cdot u^k,\\qquad H^{2k+1}(\\mathbb{CP}^\\infty;\\mathbb Z)=0\\qquad(k\\geq0),$$\nso $H^*(\\mathbb{CP}^\\infty;\\mathbb Z)=\\mathbb Z[u]$ is a polynomial ring; and\n$H_k(\\mathbb{CP}^\\infty;\\mathbb Z)$ is free of rank one for even $k$ and zero\nfor odd $k$, in particular finitely generated in every degree.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every space $X$, abelian group $G$ and $n\\ge0$ there is a natural short exact sequence\n$$0\\longrightarrow\\operatorname{Ext}^1_{\\mathbb Z}(H_{n-1}(X;\\mathbb Z),G)\\xrightarrow{\\iota}H^n(X;G)\\xrightarrow{\\beta}\\operatorname{Hom}_{\\mathbb Z}(H_n(X;\\mathbb Z),G)\\longrightarrow0.$$\nThe same assertion holds with $(X,A)$ in every homology and cohomology term for any subspace $A\\subseteq X$. Here $H_{-1}=0$ and Ext is computed from projective resolutions of the first variable, with the comparison identifications proved in the local extension lemma. The map $\\beta$ is evaluation. Naturality is contravariant in continuous maps of spaces or pairs and covariant in coefficient homomorphisms.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-universal-coefficient-theorem-for-homology-over-a-pid",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID, $C$ a chain complex of free\nright $R$-modules, and $G$ a left $R$-module. Then naturally in $C,G$,\n$0\\to H_n(C)\\otimes_RG\\to H_n(C\\otimes_RG)\\to\\operatorname{Tor}^R_1(H_{n-1}(C),G)\\to0$\nis exact.",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative unital ring. Give the graded tensor product the multiplication\n$$(a\\otimes b)(a'\\otimes b')=(-1)^{|b||a'|}(a\\smile a')\\otimes(b\\smile b').$$\nFor arbitrary spaces $X,Y$, external product $a\\times b=\\operatorname{pr}_X^*a\\smile\\operatorname{pr}_Y^*b$ gives a unital graded-ring homomorphism to $H^*(X\\times Y;R)$. This multiplicativity requires no AC.\n\nAssume in addition AC, that $R$ is a PID, and that either every $H_q(Y;R)$ or every $H_p(X;R)$ is finite free over $R$. Then this homomorphism is an isomorphism.\n\nFor CW pairs $(X,A),(Y,B)$ with supplied characteristic maps, relative external product is likewise a graded-ring homomorphism\n$$H^*(X,A;R)\\mathbin{\\widehat\\otimes}_R H^*(Y,B;R)\\longrightarrow H^*(X\\times Y,(A\\times Y)\\cup(X\\times B);R),$$\nwhere the hat denotes the displayed graded multiplication on the ordinary graded direct-sum tensor product, not a completion. Relative rings need not have units. This relative multiplicativity is choice-free for every commutative unital $R$. Under AC and the PID hypothesis it is an isomorphism if either every $H_q(Y,B;R)$ or every $H_p(X,A;R)$ is finite free. Neither additive assertion requires bounded dimension or finite-rank singular chain groups. Products have their ordinary product topologies; AC enters only in additive bijectivity.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-standard-product-torus-as-a-compact-lie-group",
+          "source_section": "Definition",
+          "quote": "Assume the full Axiom of Choice. For $r\\geq0$, let\n$T=(\\mathbb R/\\mathbb Z)^r$ with the quotient topology and coordinatewise\naddition. On each circle factor, for every open interval $I\\subset\\mathbb R$\nof length less than $1$, use the chart\n$q(I)\\to I$ given by the unique lift through the quotient map\n$q:\\mathbb R\\to\\mathbb R/\\mathbb Z$; give $T$ the product smooth structure.\nWrite $\\mathfrak t=T_0T$. For $1\\leq i\\leq r$, let $e_i$ be the tangent vector\nat $0$ to the one-parameter subgroup\n$s\\mapsto(0,\\ldots,[s],\\ldots,0)$ in the $i$th coordinate. These vectors form\nthe period-one basis of $\\mathfrak t$, and $e_i^*$ denotes its dual basis.\nThe standard Lie exponential is normalized by\n$\\exp_T(s e_i)=(0,\\ldots,[s],\\ldots,0)$ for every $s\\in\\mathbb R$.\nFor $r=0$, use the one-point group and the empty basis. This convention makes\n$T$ a compact connected abelian Lie group, hence a torus in the sense of the\nstandard compact-Lie-group definition; its identity inclusion is a cofibration,\nso this based group is well-pointed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb T:=\\{z\\in\\mathbb C:|z|=1\\}$ carry the subspace topology of\n$\\mathbb C$ ([[def-subspace-topology-top]],\n[[def-complex-metric-convergence-and-continuity]]) and the multiplication of\n$\\mathbb C$, and let $\\varepsilon:\\mathbb R/\\mathbb Z\\to\\mathbb T$,\n$\\varepsilon([t]):=\\exp(2\\pi i t)$, for the published one-dimensional torus\n$\\mathbb R/\\mathbb Z$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]).\nThen $\\mathbb T$ is a compact metrizable topological abelian group\n([[def-topological-group]]), $\\varepsilon$ is an isomorphism of topological\ngroups, and\n$$|zw-z|=|w-1|,\\qquad |z^{-1}-w^{-1}|=|z-w|$$\nfor all $z,w\\in\\mathbb T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-singular-cup-product-on-cochains",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a space, let $R$ be a commutative unital ring, and use the positive coboundary $\\delta\\varphi=\\varphi\\partial$ of [[def-singular-cochain-complex-with-coefficients]]. For $p,q\\ge0$ and cochains $\\varphi\\in C^p(X;R)$, $\\psi\\in C^q(X;R)$, their **cup product** is\n$$(\\varphi\\smile\\psi)(\\sigma)=\\varphi(\\sigma[0,\\ldots,p])\\,\\psi(\\sigma[p,\\ldots,p+q])\\qquad(\\sigma:\\Delta^{p+q}\\to X).$$\nExtend from simplex generators $R$-linearly. The product is $R$-bilinear in the cochains by distributivity and commutativity in $R$. Zero or negative-degree inputs give zero.\n\nWith $J(\\varphi,\\psi)$ the tensor functional of [[def-additive-singular-cohomology-cross-product]] and $A=\\operatorname{AW}$ from [[def-alexander-whitney-diagonal-approximation]], this is exactly $J(\\varphi,\\psi)A\\Delta_\\#$. Indeed only the cut of bidegree $(p,q)$ survives. Equivalently, define the AW external **cochain** by $J(\\varphi,\\psi)A$ and pull it back along the diagonal. There is no extra cochain sign.\n\nThe earlier additive **cohomology** cross product was expressed through a specified shuffle inverse $T$. The comparison with it is an equality of classes: [[thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses]] constructs $K$ with $A-T=dK+Kd$. For cocycles, [[lem-additive-singular-cohomology-cross-product-is-well-defined]] gives $Jd=0$, hence\n$$J(A-T)\\Delta_\\#=JKd\\Delta_\\#=\\delta(JK\\Delta_\\#).$$\nHere postcomposition with the diagonal commutes with boundary, as proved in the diagonal definition. Thus the AW cup class equals diagonal pullback of the earlier external product; equality of the two chosen external cochains is not required. At total degree zero the displayed primitive is zero and the identity is literal. The same tensor-functional identity gives $\\delta(JA\\Delta_\\#)=0$ for cocycles, so the compared classes exist.\n\nFor degree-zero cochains the formula on a vertex is ordinary multiplication of their values. A constant cochain of value $1$ multiplies any cochain on either side without changing it, including on disconnected spaces. On empty $X$ or over $R=0$ all cochains and products are zero. Face restrictions make sense for every singular simplex, including degenerate ones. A bare abelian coefficient group has no specified multiplication to insert in this formula. No AC or selection of representatives is used in this definition or comparison.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F6] and the group isomorphism [F7], the Milnor theorem's well-pointed CW-type hypothesis holds for the circle model used in each factor. The product of the $r$ free contractible circle models is free for the coordinatewise product action: if a tuple is fixed by $t=(t_1,\\ldots,t_r)$, freeness in each coordinate gives $t_i=1$ for every $i$. It is contractible because a finite product of contractions is a contraction. The quotient map $E_{S^1}\\to E_{S^1}/S^1$ is open, since the saturation of an open set is a union of its group translates. Its finite product is an open surjection whose fibers are exactly the $T$-orbits, hence is a quotient map and induces $BT\\cong(BS^1)^r\\cong(\\mathbb{CP}^{\\infty})^r$ by [F1]. The assertion is immediate for the empty product $r=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $n$, [F2] makes $H_{n-1}(\\mathbb{CP}^{\\infty};\\mathbb Z)$ free. In [F3] with $G=\\mathbb R$, its Ext term is therefore zero, so evaluation identifies $H^n(\\mathbb{CP}^{\\infty};\\mathbb R)$ with $\\operatorname{Hom}(H_n(\\mathbb{CP}^{\\infty};\\mathbb Z),\\mathbb R)$. The same sequence with $G=\\mathbb Z$ identifies the integral class $u^k$ with a generator of the corresponding Hom group; naturality under $\\mathbb Z\\to\\mathbb R$ sends it to a nonzero generator. To check multiplication is preserved, put $X=\\mathbb{CP}^{\\infty}$, take $\\varphi\\in C^p(X;\\mathbb Z)$ and $\\psi\\in C^q(X;\\mathbb Z)$, and write $j\\varphi$ for postcomposition with coefficient inclusion $j:\\mathbb Z\\to\\mathbb R$. On each singular $(p+q)$-simplex $\\sigma$, the front/back formula [F8] gives\n$$(j\\varphi\\smile\\,j\\psi)(\\sigma)=j(\\varphi(\\sigma[0,\\ldots,p]))\\,j(\\psi(\\sigma[p,\\ldots,p+q]))=j((\\varphi\\smile\\psi)(\\sigma)),$$\nbecause $j$ preserves multiplication. Thus the cohomology coefficient map is a ring map and the image of $u^k$ is $u_{\\mathbb R}^k$. Therefore $H^*(\\mathbb{CP}^{\\infty};\\mathbb R)=\\mathbb R[u_{\\mathbb R}]$, with $|u_{\\mathbb R}|=2$, and all odd groups vanish.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Apply [F4] to the integral singular chain complex of $\\mathbb{CP}^{\\infty}$ with $G=\\mathbb R$. Each chain group is free over $\\mathbb Z$; by [F2], every $H_{n-1}(\\mathbb{CP}^{\\infty};\\mathbb Z)$ is free, so the Tor term vanishes. Hence $H_n(\\mathbb{CP}^{\\infty};\\mathbb R)$ is $\\mathbb R$ for even $n$ and zero for odd $n$, finite-free in each degree.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $r\\geq1$, apply [F5] to $(\\mathbb{CP}^{\\infty})^{r-1}\\times\\mathbb{CP}^{\\infty}$, using the finite-free homology of the last factor established in step 1.3. Repeating this finite number of times identifies the product cohomology ring with the graded tensor product of $r$ copies of $\\mathbb R[u_{\\mathbb R}]$. Since each generator has even degree, the graded tensor-product signs are all positive; the result is $\\mathbb R[u_1,\\ldots,u_r]$. For $r=1$ this is step 1.2.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The symmetric algebra on the dual basis $e_1^*,\\ldots,e_r^*$ is the polynomial algebra on those generators. Assigning each generator degree two and sending $e_i^*$ to the factor class $u_i$ from step 2.1 defines a bijective graded-algebra homomorphism. This is the stated identification, with the chosen product presentation fixing its normalization.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $r=0$, $ET$ and $BT$ are the one-point space and $\\mathfrak t=0$, so both rings are $\\mathbb R$ in degree zero. AC is used only through [F2]\u2013[F5]; no additional arbitrary choice is made in the finite product, the naturality maps, or the generator identification.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 verifies r=0: both spaces and rings are the one-point product and R."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 checks the zero-rank case; step 1.2 gives the degree-zero coefficient class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers r=1 directly by step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 checks the empty product, and step 1.1 covers the finite quotient product."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns cohomology of a classifying space and has no endpoint variables; r=0 is checked in step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states AC; steps 1.2, 1.3 and 2.1 identify exactly where it is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a graded-ring isomorphism but states no iff equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a graded-ring isomorphism but states no iff equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Read all six proof steps and exact Milnor, circle-isomorphism, projective-space, cochain cup, cohomological UCT, homological UCT and ring Kunneth statements in current suppliers. Compact well-pointed CW circle meets the Milnor hypothesis; finite product of open orbit maps identifies the ordinary product quotient. AC is stated for CP-infinity, UCT and Kunneth. Free integral homology kills Ext and Tor; natural evaluation sends the integral Euler generator to a real generator and the explicit front/back formula preserves products. R is a PID; last-factor real homology is finite free in each degree, sufficient for each finite Kunneth iteration. All generators are even, so tensor signs disappear. Rank zero yields a point and R. No general Borel-Cartan comparison assumed. Reader/refuter have no findings. No defect identified; imported proofs not re-audited."
+      }
+    },
+    "def-torus-equivariant-cohomology-cartan-model": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-torus-classifying-space-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $r\\geq0$, let\n$T=(\\mathbb R/\\mathbb Z)^r$, and fix its displayed product decomposition. For\neach factor use the standard quotient Lie-group smooth structure and\nperiod-one tangent basis. Identify $\\mathbb R/\\mathbb Z$ with the\nmultiplicative unit circle by $\\epsilon([t])=e^{2\\pi i t}$ and transfer its\nright action to Milnor's countable-join model $E_{S^1}$; put\n$ET=(E_{S^1})^r$ with the coordinatewise right $T$-action and set $BT=ET/T$.\nLet $e_i\\in\\mathfrak t$ be the period-one tangent vector in the $i$th circle\nfactor and $e_i^*$ its dual. Let $u=e(\\gamma_{\\mathbb R})$ be the integral\ndegree-two generator of $H^*(\\mathbb{CP}^{\\infty};\\mathbb Z)$ defined by the\ncomplex orientation of the real rank-two bundle underlying the tautological\ncomplex line, and let $u_{\\mathbb R}$ be its image under change of coefficients\n$\\mathbb Z\\to\\mathbb R$. Under the product quotient identification\n$BT\\cong(\\mathbb{CP}^{\\infty})^r$, write $u_i$ for the pullback of\n$u_{\\mathbb R}$ from the $i$th factor. Then\n$$H^*(BT;\\mathbb R)\\cong\\mathbb R[u_1,\\ldots,u_r],\\qquad |u_i|=2,$$\nand the chosen identification $e_i^*\\mapsto u_i$ is a graded-algebra\nisomorphism from $\\operatorname{Sym}_{\\mathbb R}(\\mathfrak t^*)$, with its\nlinear generators assigned degree two. For $r=0$, both rings are $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-left-action-of-a-lie-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a Lie group and $M$ a smooth manifold. A **smooth left action** of\n$G$ on $M$ is a jointly smooth map\n\n$$a:G\\times M\\longrightarrow M,\\qquad (g,x)\\longmapsto g\\mathbin{\\cdot}x,$$\n\nsuch that, for all $g,h\\in G$ and $x\\in M$,\n\n$$e\\mathbin{\\cdot}x=x,\\qquad (gh)\\mathbin{\\cdot}x=g\\mathbin{\\cdot}(h\\mathbin{\\cdot}x).$$\n\nFor each $g$, the map $a_g(x)=g\\cdot x$ is then a diffeomorphism with inverse\n$a_{g^{-1}}$. Joint smoothness is part of the definition; separate\nsmoothness of individual orbit maps is not substituted for it.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fundamental-vector-field-of-a-left-action",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $G$ act smoothly on the left of a smooth\nmanifold $M$, let $\\mathfrak g=T_eG$, and let $X\\in\\mathfrak g$. The\n**fundamental vector field** associated with $X$ is\n\n$$X_M(x):=\\left.\\frac{d}{dt}\\right|_{t=0}\\exp_G(-tX)\\mathbin{\\cdot}x\\in T_xM.$$\n\nThe minus sign is part of the standing convention. With it, the assignment\n$X\\mapsto X_M$ is a Lie-algebra homomorphism for a left action; without it,\nthe usual left-action infinitesimal generator is an antihomomorphism. The\nfollowing theorem proves the bracket claim rather than building it into this\ndefinition.\n\nThe exponential map is smooth by\n[[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]],\nso $(t,x)\\mapsto\\exp_G(-tX)\\cdot x$ is smooth. In local coordinates,\ndifferentiating this smooth map in the $t$-variable at $0$ gives coefficients\nthat depend smoothly on $x$. Thus $x\\mapsto X_M(x)$ is a smooth tangent-bundle\nsection in the sense of\n[[def-smooth-vector-field-as-a-tangent-bundle-section]].\n\nHere $\\mathrm{AC}_\\omega$ is [[def-countable-choice|countable choice]] and is\nused through both the supplied exponential-map construction and the canonical\nsmooth tangent-bundle structure underlying the smooth-section interface. For\n$X=0$ the field is zero. The definition applies to disconnected $G$ and $M$,\nand makes no effectiveness, freeness, or properness assumption on the action.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-smooth-differential-k-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $k\\ge 0$. A **smooth differential $k$-form**\non $M$ is a smooth section of $\\bigwedge^kT^*M\\to M$. The space of such forms\nis denoted $\\Omega^k(M)$, and $\\Omega^0(M)=C^\\infty(M)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "source_section": "Definition",
+          "quote": "For $\\omega\\in\\Omega^k(M)$, define the candidate $d\\omega$ on smooth vector fields by $$d\\omega(X_0,\\ldots,X_k)=\\sum_i(-1)^iX_i\\omega(X_0,\\widehat X_i,\\ldots,X_k)+\\sum_{i<j}(-1)^{i+j}\\omega([X_i,X_j],X_0,\\widehat X_i,\\widehat X_j,\\ldots,X_k).$$ The next lemma proves that this candidate is a form.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-singular-cohomology-with-coefficients",
+          "source_section": "Definition",
+          "quote": "For a space $X$ and an abelian group $G$, a degree-$n$ **singular cocycle** is a cochain in $Z^n(X;G)=\\ker\\delta^n$ and a degree-$n$ **singular coboundary** belongs to $B^n(X;G)=\\operatorname{im}\\delta^{n-1}$, for the positive coboundary convention of [[def-singular-cochain-complex-with-coefficients]]. The square-zero lemma [[lem-the-singular-coboundary-squares-to-zero]] implies $B^n\\subseteq Z^n$: if $\\varphi=\\delta^{n-1}\\psi$, then $\\delta^n\\varphi=0$.\n\nThe **singular cohomology group with coefficients in $G$** is\n$$H^n(X;G)=Z^n(X;G)/B^n(X;G)\\quad(n\\ge0),\\qquad H^n(X;G)=0\\quad(n<0).$$\nThis is the abelian quotient with addition $[\\varphi]+[\\psi]=[\\varphi+\\psi]$: changing either representative by a coboundary changes the sum by a coboundary. Thus two cocycles represent the same class exactly when their difference is $\\delta^{n-1}\\eta$ for some degree-$(n-1)$ cochain $\\eta$. In degree zero, $B^0=0$ because $C^{-1}=0$; hence $H^0=\\ker\\delta^0$. The zero convention in negative degrees agrees with the same kernel/image construction on the zero cochain groups.\n\nIf coefficients are a module over a commutative ring, the same groups and maps are modules and linear maps, and this is their module quotient. Empty $X$ or zero coefficients give zero cohomology in every degree. The notation does not define cohomology as the dual of homology; such identifications require their own theorems. No choice of cocycle representatives and no AC is part of this definition.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-singular-cup-product-on-cochains",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a space, let $R$ be a commutative unital ring, and use the positive coboundary $\\delta\\varphi=\\varphi\\partial$ of [[def-singular-cochain-complex-with-coefficients]]. For $p,q\\ge0$ and cochains $\\varphi\\in C^p(X;R)$, $\\psi\\in C^q(X;R)$, their **cup product** is\n$$(\\varphi\\smile\\psi)(\\sigma)=\\varphi(\\sigma[0,\\ldots,p])\\,\\psi(\\sigma[p,\\ldots,p+q])\\qquad(\\sigma:\\Delta^{p+q}\\to X).$$\nExtend from simplex generators $R$-linearly. The product is $R$-bilinear in the cochains by distributivity and commutativity in $R$. Zero or negative-degree inputs give zero.\n\nWith $J(\\varphi,\\psi)$ the tensor functional of [[def-additive-singular-cohomology-cross-product]] and $A=\\operatorname{AW}$ from [[def-alexander-whitney-diagonal-approximation]], this is exactly $J(\\varphi,\\psi)A\\Delta_\\#$. Indeed only the cut of bidegree $(p,q)$ survives. Equivalently, define the AW external **cochain** by $J(\\varphi,\\psi)A$ and pull it back along the diagonal. There is no extra cochain sign.\n\nThe earlier additive **cohomology** cross product was expressed through a specified shuffle inverse $T$. The comparison with it is an equality of classes: [[thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses]] constructs $K$ with $A-T=dK+Kd$. For cocycles, [[lem-additive-singular-cohomology-cross-product-is-well-defined]] gives $Jd=0$, hence\n$$J(A-T)\\Delta_\\#=JKd\\Delta_\\#=\\delta(JK\\Delta_\\#).$$\nHere postcomposition with the diagonal commutes with boundary, as proved in the diagonal definition. Thus the AW cup class equals diagonal pullback of the earlier external product; equality of the two chosen external cochains is not required. At total degree zero the displayed primitive is zero and the identity is literal. The same tensor-functional identity gives $\\delta(JA\\Delta_\\#)=0$ for cocycles, so the compared classes exist.\n\nFor degree-zero cochains the formula on a vertex is ordinary multiplication of their values. A constant cochain of value $1$ multiplies any cochain on either side without changing it, including on disconnected spaces. On empty $X$ or over $R=0$ all cochains and products are zero. Face restrictions make sense for every singular simplex, including degenerate ones. A bare abelian coefficient group has no specified multiplication to insert in this formula. No AC or selection of representatives is used in this definition or comparison.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-cup-product-is-natural-unital-and-associative",
+          "source_section": "Statement",
+          "quote": "For continuous $f:X\\to Y$ and a commutative unital ring $R$, pullback on singular cohomology satisfies\n$$f^*(a\\smile b)=f^*a\\smile f^*b,\\qquad f^*(1)=1.$$\nCup product is associative already on cochains. Consequently $f^*:H^*(Y;R)\\to H^*(X;R)$ is a unital graded-ring homomorphism. Homotopic maps give the same homomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-the-exterior-derivative-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every differential form $\\omega$, $d(d\\omega)=0$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-interior-product-of-a-form-by-a-vector-field",
+          "source_section": "Definition",
+          "quote": "Let $X:M\\to TM$ be a smooth section of the tangent bundle, that is, a smooth\nvector field on $M$, and let $\\omega\\in\\Omega^k(M)$. The **interior product**\n$\\iota_X\\omega\\in\\Omega^{k-1}(M)$ is defined pointwise by\n\n$$ (\\iota_X\\omega)_p:=\\iota_{X_p}\\omega_p. $$\n\nFor $k=0$, adopt the formal convention $\\Omega^{-1}(M):=\\{0\\}$ and set\n$\\iota_X\\omega:=0$.\n\nThis pointwise field is smooth. Indeed, in local coordinates write\n$X=\\sum_jX^j\\partial_j$ and expand $\\omega$ in the smooth frame $dx^I$ as in\n[[prop-local-coordinate-expression-for-a-differential-form]]. The coefficients\nof $\\iota_X\\omega$ are signed finite sums of products $X^j\\omega_I$, and are\ntherefore smooth.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-lie-derivative-of-a-differential-form",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a smooth vector field on $M$.  For $\\omega\\in\\Omega^k(M)$,\n$\\mathcal L_X\\omega$ is the Lie derivative of $\\omega$ regarded as an\nalternating covariant tensor.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-lie-derivative-of-a-tensor-field",
+          "source_section": "Definition",
+          "quote": "If $X$ has local flow $\\Phi_t$ and $T$ is a smooth tensor field of type $(r,s)$, its Lie derivative is $$\\mathcal L_XT=\\left.\\frac d{dt}\\right|_{t=0}\\Phi_t^*T,$$ on every local flow domain where this derivative is defined. Here the pullback by the local diffeomorphism $\\Phi_t$ acts by $d\\Phi_{-t}$ on each contravariant slot and by $d\\Phi_t$ on each covariant slot.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-the-exterior-derivative-is-a-graded-derivation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold. The exterior derivative is an\n$\\mathbb R$-linear map $d:\\Omega^*(M)\\to\\Omega^*(M)$ of degree one.\nFor homogeneous smooth forms $\\alpha\\in\\Omega^p(M)$ and\n$\\beta\\in\\Omega^q(M)$, $$d(\\alpha\\wedge\\beta)=d\\alpha\\wedge\\beta+(-1)^{\\deg\\alpha}\\alpha\\wedge d\\beta.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "prop-interior-product-is-a-graded-antiderivation",
+          "source_section": "Statement",
+          "quote": "If $\\alpha\\in\\operatorname{Alt}^k(V)$, $\\beta\\in\\operatorname{Alt}^\\ell(V)$,\nand $v\\in V$, then\n\n$$ \\iota_v(\\alpha\\wedge\\beta)=\\iota_v\\alpha\\wedge\\beta+(-1)^k\\alpha\\wedge\\iota_v\\beta. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-the-exterior-derivative-commutes-with-pullback",
+          "source_section": "Statement",
+          "quote": "For every smooth map $F:M\\to N$ and every form $\\omega$ on $N$, $$d(F^*\\omega)=F^*(d\\omega).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-cartans-magic-formula",
+          "source_section": "Statement",
+          "quote": "For every vector field $X$ and differential form $\\omega$, $$\\mathcal L_X\\omega=d(\\iota_X\\omega)+\\iota_X(d\\omega).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-symmetric-algebra-of-a-vector-space",
+          "source_section": "Definition",
+          "quote": "For a vector space $V$, let $J$ be the two-sided ideal of $T(V)$ generated by\n\n$$v\\otimes w-w\\otimes v\\qquad(v,w\\in V).$$\n\nThe **symmetric algebra** of $V$ is the commutative graded algebra\n\n$$S(V)=T(V)/J.$$\n\nThe quotient is commutative because its degree-one generators commute, and\nall elements are sums of products of those generators. Since the relators are\nhomogeneous of degree two, $J$ is homogeneous. In degree $n$, the relation\nspace is generated by adjacent-transposition differences: an arbitrary\npermutation difference is a telescoping sum along adjacent transpositions,\nand each adjacent difference is a degree-$n$ multiple of a generator of $J$.\nThus the degree-$n$ piece is the quotient of $V^{\\otimes n}$ by the span of\n$t-\\sigma(t)$ for $t\\in V^{\\otimes n}$ and $\\sigma\\in S_n$. The degree-zero\nunit is the image of $1\\in k$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-wedge-product-of-differential-forms",
+          "source_section": "Definition",
+          "quote": "Let $\\alpha\\in\\Omega^k(M)$ and $\\beta\\in\\Omega^\\ell(M)$. Their **wedge product**\nis the differential form defined pointwise by\n\n$$ (\\alpha\\wedge\\beta)_p:=\\alpha_p\\wedge\\beta_p\\in\\operatorname{Alt}^{k+\\ell}(T_pM). $$\n\nThe next proposition verifies that this pointwise field is smooth.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "prop-differential-forms-form-a-graded-commutative-algebra",
+          "source_section": "Statement",
+          "quote": "The graded vector space\n\n$$ \\Omega^*(M):=\\bigoplus_{k\\ge 0}\\Omega^k(M) $$\n\nwith the wedge product is an associative graded-commutative algebra.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-standard-product-torus-as-a-compact-lie-group",
+          "source_section": "Definition",
+          "quote": "Assume the full Axiom of Choice. For $r\\geq0$, let\n$T=(\\mathbb R/\\mathbb Z)^r$ with the quotient topology and coordinatewise\naddition. On each circle factor, for every open interval $I\\subset\\mathbb R$\nof length less than $1$, use the chart\n$q(I)\\to I$ given by the unique lift through the quotient map\n$q:\\mathbb R\\to\\mathbb R/\\mathbb Z$; give $T$ the product smooth structure.\nWrite $\\mathfrak t=T_0T$. For $1\\leq i\\leq r$, let $e_i$ be the tangent vector\nat $0$ to the one-parameter subgroup\n$s\\mapsto(0,\\ldots,[s],\\ldots,0)$ in the $i$th coordinate. These vectors form\nthe period-one basis of $\\mathfrak t$, and $e_i^*$ denotes its dual basis.\nThe standard Lie exponential is normalized by\n$\\exp_T(s e_i)=(0,\\ldots,[s],\\ldots,0)$ for every $s\\in\\mathbb R$.\nFor $r=0$, use the one-point group and the empty basis. This convention makes\n$T$ a compact connected abelian Lie group, hence a torus in the sense of the\nstandard compact-Lie-group definition; its identity inclusion is a cofibration,\nso this based group is well-pointed.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-singular-cochain-complex-with-coefficients",
+          "source_section": "Definition",
+          "quote": "Let $X$ be any topological space and $G$ an abelian group. Its **singular cochains with coefficients in $G$** are\n$$C^n(X;G)=\\operatorname{Hom}_{\\mathbb Z}(C_n(X;\\mathbb Z),G)\\quad(n\\ge0),\\qquad C^n(X;G)=0\\quad(n<0),$$\nwhere the chains are those of [[def-singular-chain-complex-and-singular-homology]]. Addition and negatives of homomorphisms are pointwise. The **coboundary** is\n$$\\delta^n:C^n(X;G)\\to C^{n+1}(X;G),\\qquad \\delta^n\\varphi=\\varphi\\circ\\partial_{n+1}$$\nfor $n\\ge0$, and is zero for $n<0$. Composition with the homomorphism [[def-singular-boundary-operator|$\\partial_{n+1}$]] is additive, so this is a homomorphism. The sign convention is positive: there is no extra degree sign on this composite. On a singular $(n+1)$-simplex it says\n$$\\delta^n\\varphi(\\sigma)=\\sum_{i=0}^{n+1}(-1)^i\\varphi(\\sigma\\circ\\delta_i),$$\nwhere $\\delta_i$ denotes the affine face map, distinct from the superscripted coboundary. In particular $\\delta^0\\varphi$ on an oriented path is its endpoint value minus its initial value.\n\nBy [[def-singular-simplex-and-singular-chain-group-with-coefficients]], the integer chains are finite sums on the specified simplex set $S_n(X)$. Thus a cochain is equivalently an arbitrary function $S_n(X)\\to G$: the extension sends $\\sum_\\sigma a_\\sigma\\sigma$ to $\\sum_\\sigma a_\\sigma\\varphi(\\sigma)$. The sum is finite and the formal coefficients are unique. The cochain need not have finite support.\n\nFor a commutative unital ring $R$ and an $R$-module $G$, there is a canonical identification\n$$C^n(X;G)\\cong\\operatorname{Hom}_R(C_n(X;R),G).$$\nIndeed the given chain convention is $C_n(X;R)=C_n(X;\\mathbb Z)\\otimes_{\\mathbb Z}R$. A homomorphism $\\varphi$ on integer chains defines an $R$-linear map by $c\\otimes r\\mapsto r\\varphi(c)$; the defining additive and integer-balanced tensor relations are preserved. Conversely evaluate an $R$-linear map on $c\\otimes1$. These operations are inverse since $c\\otimes r=r(c\\otimes1)$, and they intertwine the two coboundaries because the coefficient boundary is $\\partial\\otimes1$. The construction also covers the zero ring with its unital zero module.\n\nThe resulting graded group and coboundary are called the **singular cochain complex**. The square-zero identity follows by precomposition with $\\partial^2=0$ in the chain complex and is spelled out in the next lemma. If $X$ is empty there are no singular simplices, so every cochain group is zero; if $G=0$ the same is true. The extension and tensor formulas are uniquely specified and require no AC.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The right diagonal action is a group action by homeomorphisms, so its orbit quotient $ET\\times_T M$ is a topological space. By [F5]\u2013[F7] its real singular cohomology has the stated cup-product ring structure; at $M=\\{\\ast\\}$ the quotient is $BT$, whose coefficient ring is identified by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Pullback by each $a_{t^{-1}}$ preserves wedge products: evaluating on tangent vectors shows that pulling back the pointwise alternating product gives the product of the pullbacks. Thus the diagonal $T$-action is by algebra automorphisms and its fixed subspace is closed under the multiplication defined by the algebraic tensor-product rule and [F15]\u2013[F16]. Since each polynomial generator has degree two, $d$ raises form degree by one, and contraction lowers form degree by one, both summands in $d_T$ raise total degree by one. By [F11] and [F12], each summand is a degree-one derivation because each $u_i$ has even degree. Under a change of basis of $\\mathfrak t$, the polynomial basis and vector-field basis transform contragrediently; linearity in [F3] then makes $\\sum_i u_i\\otimes X_{e_i}$ basis-independent, so $d_T$ is unchanged.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "F11",
+            "F12",
+            "F15",
+            "F16",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $(A_n)_{n\\in\\mathbb N}$ be any sequence of nonempty sets and let $\\mathcal F=\\{A_n:n\\in\\mathbb N\\}$. By [A1], choose a function $g$ on $\\mathcal F$ with $g(S)\\in S$ for every $S\\in\\mathcal F$. Then $c(n):=g(A_n)$ is a function on $\\mathbb N$, including when different indices have equal sets, and $c(n)\\in A_n$ for every $n$. This is exactly the indexed selector in [F17], so the countable-choice hypothesis of [F3] is satisfied.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F3",
+            "F17",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Pullback naturality [F13] shows that $d$ preserves the $T$-fixed forms. For $t\\in T$, the left action law and commutativity give $a_t\\circ a_{\\exp(-s e_i)}=a_{\\exp(-s e_i)}\\circ a_t$; differentiating at $s=0$ shows $(a_t)_*X_{e_i}=X_{e_i}$. By the pointwise definition [F9], contraction by each $X_{e_i}$ preserves invariant forms, while $u_i$ is fixed by the stipulated trivial action on the polynomial factor. Both terms therefore preserve the diagonal $T$-fixed subspace, so $d_T:C_T(M)\\to C_T(M)$ is well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F9",
+            "F13",
+            "F18",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On polynomial-valued forms, expand the square as\n$$d_T^2=d^2-\\sum_i u_i(d\\iota_{X_{e_i}}+\\iota_{X_{e_i}}d)+\\sum_{i,j}u_iu_j\\iota_{X_{e_i}}\\iota_{X_{e_j}}.$$\nThe first term is zero by [F8]. The last sum is zero because $u_i u_j=u_j u_i$ while insertions into alternating forms anticommute by [F9]. The middle sum is $-\\sum_i u_i\\mathcal L_{X_{e_i}}$ by [F14]. Hence $d_T^2\\alpha=-\\sum_i u_i\\mathcal L_{X_{e_i}}\\alpha$ for every $\\alpha\\in C_T(M)$.",
+          "step": "2.2",
+          "inputs": [
+            "F8",
+            "F9",
+            "F14",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $\\phi_s=a_{\\exp(-s e_i)}$. The local torus definition [F18] identifies $\\exp(-s e_i)$ with the coordinate one-parameter subgroup, so the group law gives $\\phi_{s+h}=\\phi_s\\circ\\phi_h$. Differentiating at $h=0$ gives $\\frac{d}{ds}\\phi_s(p)=(d\\phi_s)_pX_{e_i}(p)=X_{e_i}(\\phi_s(p))$ by step 2.1. Thus $\\phi_s$ is the flow of $X_{e_i}$. For an invariant form $\\alpha$, $\\phi_s^*\\alpha=\\alpha$ for every $s$; differentiating at zero and using [F10] gives $\\mathcal L_{X_{e_i}}\\alpha=0$. Substitution in step 2.2 proves $d_T^2\\alpha=0$ on $C_T(M)$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F10",
+            "F18",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $r=0$, the sum in $d_T$ is empty and $d_T=d$, whose square is zero by [F8]. If the action is trivial, every $X_{e_i}=0$ and again $d_T=d$ on invariant forms. If $M=\\varnothing$, both the form complex and the Borel construction are empty, and [F19] makes its singular cohomology zero. No compactness of $M$, symplectic form, or Hamiltonian hypothesis was used.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F8",
+            "F19",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 checks M empty and explains the zero form complex and Borel space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 checks r=0, when the sum is empty and d_T=d."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition specializes to a rank-one torus with its period-one basis and one contraction term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 treats the empty manifold and trivial action."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition assumes a smooth manifold without boundary and introduces no boundary data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 constructs the indexed selector required by the fundamental-field premise from AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition explicitly makes no general Borel\u2013Cartan isomorphism assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition explicitly makes no general Borel\u2013Cartan isomorphism assertion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Read all seven proof steps and all exact supplier interfaces, including negative-exponential fundamental fields, pullback-flow Lie derivatives, Cartan formula, contraction and exterior derivations. The right action (e,p)t=(et,t^{-1}p) respects multiplication and makes pi well-defined. Reviewed the TikZ square: each object and arrow matches its displayed map; both composites send (e,p) to [e]. Trivial polynomial action permits coefficientwise invariant forms (finite algebraic tensors). Abelian torus flows preserve the fields and contractions. The contraction double sum cancels, leaving -sum u_i L_X_i; invariance and the explicit flow give zero. Degree 2 for polynomial generators gives total differential degree 1. Basis-independence follows dual transformation and linearity, which also follows by differentiating the action at the identity. AC supplies AC_omega. Checked rank zero, trivial action, empty M and noncompact M. No general comparison theorem is asserted or used. Reader/refuter report no finding; no defect or missing diagram identified."
+      }
+    },
+    "ex-qftx-equivariant-cohomology-of-a-point": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-torus-equivariant-cohomology-cartan-model",
+          "source_section": "Definition",
+          "quote": "Let $T=(\\mathbb R/\\mathbb Z)^r$ be a compact torus with its standard product Lie-group smooth structure and period-one basis, and let $M$ be a smooth manifold without boundary, not assumed compact, with a smooth left action $a:T\\times M\\to M$. Work over $\\mathbb R$ and use the chosen product Milnor model $ET=(E_{S^1})^r$ and $BT=ET/T$ from the preceding coefficient lemma. Give $ET\\times M$ the right diagonal action $(e,p)\\cdot t=(e\\cdot t,t^{-1}\\cdot p)$ and define\n$$ET\\times_T M:=(ET\\times M)/T.$$\nThe **Borel equivariant cohomology** is the graded ring\n$$H_T^*(M;\\mathbb R):=H_{\\mathrm{sing}}^*(ET\\times_T M;\\mathbb R).$$\nFor $M=\\{\\ast\\}$ this gives $H_T^*(\\ast;\\mathbb R)=H^*(BT;\\mathbb R)$; the selected degree-two normalization in $\\operatorname{Sym}_{\\mathbb R}(\\mathfrak t^*)$ is the isomorphism established in the preceding coefficient lemma.\n\nThe quotient map $q:ET\\times M\\to ET\\times_T M$ and projection\n$\\pi([e,p])=[e]$ give the associated-space square\n$$\\begin{array}{ccc}ET\\times M&\\xrightarrow{q}&ET\\times_T M\\\\\\downarrow\\operatorname{pr}_1&&\\downarrow\\pi\\\\ET&\\xrightarrow{q_T}&BT\\end{array}$$\nIts TikZ source is\n```latex\n\\begin{tikzcd}\nET\\times M \\arrow[r,\"q\"] \\arrow[d,\"\\operatorname{pr}_1\"'] & ET\\times_T M \\arrow[d,\"\\pi\"]\\\\\nET \\arrow[r,\"q_T\"'] & BT\n\\end{tikzcd}\n```\nwhere $q_T:ET\\to BT$ is the orbit quotient. The projection $\\pi$ is\nwell-defined because $[e\\cdot t]=[e]$ for every $t\\in T$. The square\ncommutes because both composites send $(e,p)$ to $[e]$.\n\nLet $\\mathfrak t=T_eT$, with basis $e_1,\\ldots,e_r$ and dual basis $u_1,\\ldots,u_r$. Regard $\\operatorname{Sym}_{\\mathbb R}(\\mathfrak t^*)$ as a polynomial algebra by assigning each linear generator degree two. Use the trivial $T$-action on this polynomial factor, and the induced left action $t\\cdot\\alpha=(a_{t^{-1}})^*\\alpha$ on forms. It is a left action because pullback reverses composition: $a_{t^{-1}}^*a_{s^{-1}}^*=(a_{s^{-1}}\\circ a_{t^{-1}})^*=a_{(ts)^{-1}}^*$. The **Cartan complex** is the graded-commutative algebra\n$$C_T(M):=\\bigl(\\operatorname{Sym}_{\\mathbb R}(\\mathfrak t^*)\\otimes_{\\mathbb R}\\Omega^*(M)\\bigr)^T,$$\nwith multiplication $(P\\otimes\\alpha)(Q\\otimes\\beta)=PQ\\otimes(\\alpha\\wedge\\beta)$, where $\\wedge$ is the differential-form wedge product and all tensor products are algebraic. The superscript denotes the fixed subspace for the diagonal action, and a polynomial of degree $j$ tensored with a $k$-form has total degree $2j+k$. For $\\xi\\in\\mathfrak t$, use the library fundamental vector field\n$$X_\\xi(p)=\\left.\\frac{d}{ds}\\right|_{s=0}\\exp_T(-s\\xi)\\cdot p.$$\nOn polynomial-valued forms define the degree-one Cartan operator\n$$d_T(P\\otimes\\alpha)=P\\otimes d\\alpha-\\sum_{i=1}^r(u_iP)\\otimes\\iota_{X_{e_i}}\\alpha,$$\nextended linearly. The tensor $\\sum_i u_i\\otimes X_{e_i}$ is basis-independent. The **Cartan equivariant cohomology** in this item means $H^*(C_T(M),d_T)$; the proof below establishes $d_T^2=0$ on $C_T(M)$.\n\nThis definition does not assert a general isomorphism between the Borel and Cartan cohomology rings. It defines neither equivariant Chow groups nor equivariant quotient-stack Borel\u2013Moore homology, and no rational-coefficient comparison is being used in the real Cartan complex.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-torus-classifying-space-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $r\\geq0$, let\n$T=(\\mathbb R/\\mathbb Z)^r$, and fix its displayed product decomposition. For\neach factor use the standard quotient Lie-group smooth structure and\nperiod-one tangent basis. Identify $\\mathbb R/\\mathbb Z$ with the\nmultiplicative unit circle by $\\epsilon([t])=e^{2\\pi i t}$ and transfer its\nright action to Milnor's countable-join model $E_{S^1}$; put\n$ET=(E_{S^1})^r$ with the coordinatewise right $T$-action and set $BT=ET/T$.\nLet $e_i\\in\\mathfrak t$ be the period-one tangent vector in the $i$th circle\nfactor and $e_i^*$ its dual. Let $u=e(\\gamma_{\\mathbb R})$ be the integral\ndegree-two generator of $H^*(\\mathbb{CP}^{\\infty};\\mathbb Z)$ defined by the\ncomplex orientation of the real rank-two bundle underlying the tautological\ncomplex line, and let $u_{\\mathbb R}$ be its image under change of coefficients\n$\\mathbb Z\\to\\mathbb R$. Under the product quotient identification\n$BT\\cong(\\mathbb{CP}^{\\infty})^r$, write $u_i$ for the pullback of\n$u_{\\mathbb R}$ from the $i$th factor. Then\n$$H^*(BT;\\mathbb R)\\cong\\mathbb R[u_1,\\ldots,u_r],\\qquad |u_i|=2,$$\nand the chosen identification $e_i^*\\mapsto u_i$ is a graded-algebra\nisomorphism from $\\operatorname{Sym}_{\\mathbb R}(\\mathfrak t^*)$, with its\nlinear generators assigned degree two. For $r=0$, both rings are $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-smooth-differential-k-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $k\\ge 0$. A **smooth differential $k$-form**\non $M$ is a smooth section of $\\bigwedge^kT^*M\\to M$. The space of such forms\nis denoted $\\Omega^k(M)$, and $\\Omega^0(M)=C^\\infty(M)$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since the action on the point is trivial, $ET\\times_T\\{\\ast\\}=ET/T=BT$ by the Borel definition [F1]. Its singular cohomology ring is $\\mathbb R[u]$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The tangent and cotangent spaces of a point are zero. Every real-valued function on the singleton is constant, so [F3] gives $\\Omega^0(\\{\\ast\\})=\\mathbb R$; for $k>0$, the $k$th exterior power of its zero cotangent space is zero, hence $\\Omega^k(\\{\\ast\\})=0$. Every fundamental field is zero and the exterior derivative of a constant function is zero. Thus the Cartan complex is $\\mathbb R[u]$ with zero differential, whose cohomology ring is $\\mathbb R[u]$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both presentations use the degree-two generator fixed in [F2], so the displayed rings agree under that normalization. The example asserts no comparison for other $T$-manifolds.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty one-point manifold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the zero differential on constants."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example fixes rank-one T; steps 1.1 and 2.1 use its selected generator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The trivial action on the point is the degenerate action case, computed in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The one-point manifold has no boundary or endpoint data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records the AC premise and step 1.1 uses it through the supplied coefficient ring."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts two ring calculations, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts two ring calculations, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Read all three proof steps and all four current supplier interfaces after completing torus, coefficient lemma and Cartan reviews. The singleton quotient is exactly BT. On the zero-dimensional singleton Omega^0=R, positive forms vanish, all fundamental fields and d vanish, so the invariant complex is R[u] with zero differential. The rank-one coefficient lemma supplies the Borel ring with the identical chosen degree-two generator; no canonical comparison for arbitrary manifolds is claimed. AC retained from suppliers; zero tangent/cotangent and every positive form degree checked. Reader/refuter have no findings. No defect identified."
+      }
+    },
+    "ex-qftx-equivariant-cohomology-of-a-free-circle-action": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-torus-equivariant-cohomology-cartan-model",
+          "source_section": "Definition",
+          "quote": "Let $T=(\\mathbb R/\\mathbb Z)^r$ be a compact torus with its standard product Lie-group smooth structure and period-one basis, and let $M$ be a smooth manifold without boundary, not assumed compact, with a smooth left action $a:T\\times M\\to M$. Work over $\\mathbb R$ and use the chosen product Milnor model $ET=(E_{S^1})^r$ and $BT=ET/T$ from the preceding coefficient lemma. Give $ET\\times M$ the right diagonal action $(e,p)\\cdot t=(e\\cdot t,t^{-1}\\cdot p)$ and define\n$$ET\\times_T M:=(ET\\times M)/T.$$\nThe **Borel equivariant cohomology** is the graded ring\n$$H_T^*(M;\\mathbb R):=H_{\\mathrm{sing}}^*(ET\\times_T M;\\mathbb R).$$\nFor $M=\\{\\ast\\}$ this gives $H_T^*(\\ast;\\mathbb R)=H^*(BT;\\mathbb R)$; the selected degree-two normalization in $\\operatorname{Sym}_{\\mathbb R}(\\mathfrak t^*)$ is the isomorphism established in the preceding coefficient lemma.\n\nThe quotient map $q:ET\\times M\\to ET\\times_T M$ and projection\n$\\pi([e,p])=[e]$ give the associated-space square\n$$\\begin{array}{ccc}ET\\times M&\\xrightarrow{q}&ET\\times_T M\\\\\\downarrow\\operatorname{pr}_1&&\\downarrow\\pi\\\\ET&\\xrightarrow{q_T}&BT\\end{array}$$\nIts TikZ source is\n```latex\n\\begin{tikzcd}\nET\\times M \\arrow[r,\"q\"] \\arrow[d,\"\\operatorname{pr}_1\"'] & ET\\times_T M \\arrow[d,\"\\pi\"]\\\\\nET \\arrow[r,\"q_T\"'] & BT\n\\end{tikzcd}\n```\nwhere $q_T:ET\\to BT$ is the orbit quotient. The projection $\\pi$ is\nwell-defined because $[e\\cdot t]=[e]$ for every $t\\in T$. The square\ncommutes because both composites send $(e,p)$ to $[e]$.\n\nLet $\\mathfrak t=T_eT$, with basis $e_1,\\ldots,e_r$ and dual basis $u_1,\\ldots,u_r$. Regard $\\operatorname{Sym}_{\\mathbb R}(\\mathfrak t^*)$ as a polynomial algebra by assigning each linear generator degree two. Use the trivial $T$-action on this polynomial factor, and the induced left action $t\\cdot\\alpha=(a_{t^{-1}})^*\\alpha$ on forms. It is a left action because pullback reverses composition: $a_{t^{-1}}^*a_{s^{-1}}^*=(a_{s^{-1}}\\circ a_{t^{-1}})^*=a_{(ts)^{-1}}^*$. The **Cartan complex** is the graded-commutative algebra\n$$C_T(M):=\\bigl(\\operatorname{Sym}_{\\mathbb R}(\\mathfrak t^*)\\otimes_{\\mathbb R}\\Omega^*(M)\\bigr)^T,$$\nwith multiplication $(P\\otimes\\alpha)(Q\\otimes\\beta)=PQ\\otimes(\\alpha\\wedge\\beta)$, where $\\wedge$ is the differential-form wedge product and all tensor products are algebraic. The superscript denotes the fixed subspace for the diagonal action, and a polynomial of degree $j$ tensored with a $k$-form has total degree $2j+k$. For $\\xi\\in\\mathfrak t$, use the library fundamental vector field\n$$X_\\xi(p)=\\left.\\frac{d}{ds}\\right|_{s=0}\\exp_T(-s\\xi)\\cdot p.$$\nOn polynomial-valued forms define the degree-one Cartan operator\n$$d_T(P\\otimes\\alpha)=P\\otimes d\\alpha-\\sum_{i=1}^r(u_iP)\\otimes\\iota_{X_{e_i}}\\alpha,$$\nextended linearly. The tensor $\\sum_i u_i\\otimes X_{e_i}$ is basis-independent. The **Cartan equivariant cohomology** in this item means $H^*(C_T(M),d_T)$; the proof below establishes $d_T^2=0$ on $C_T(M)$.\n\nThis definition does not assert a general isomorphism between the Borel and Cartan cohomology rings. It defines neither equivariant Chow groups nor equivariant quotient-stack Borel\u2013Moore homology, and no rational-coefficient comparison is being used in the real Cartan complex.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-milnor-join-model-is-a-contractible-free-g-space",
+          "source_section": "Statement",
+          "quote": "For a well-pointed topological group $G$ of CW type, the diagonal action on Milnor's $EG$ is free, $EG$ is contractible, and\n\n$$ p:EG\\longrightarrow BG $$\n\nis a numerable principal $G$-bundle. The numeration satisfies the library's support-subordinate convention, not merely cozero containment.\n\nThe embeddings\n\n$$e\\left(\\sum_i t_i g_i\\right)=\\sum_i t_i g_i\\text{ in slot }2i,\\qquad o\\left(\\sum_i t_i g_i\\right)=\\sum_i t_i g_i\\text{ in slot }2i+1$$\n\nare $G$-equivariantly homotopic to the identity. If $a,b:T\\to EG$ are\ncontinuous equivariant maps, then\n$(1-t)e(a(-))+t\\,o(b(-))$ is a continuous equivariant homotopy.\n\nFor $G=S^1$ or $G=\\mathbb Z/2$, the selected compact-group topology identifies $BG$ with the standard weak CW colimit of the finite projective quotients $\\mathbb{CP}^N$ or $\\mathbb{RP}^N$, respectively.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-singular-cohomology-is-homotopy-invariant",
+          "source_section": "Statement",
+          "quote": "Homotopic continuous maps $f,g:X\\to Y$ induce the same pullback on $H^k_{\\mathrm{sing}}(-;\\mathbb R)$ in every integer degree. Consequently a homotopy equivalence induces an isomorphism of real singular cohomology.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-singular-cochain-complex-with-coefficients",
+          "source_section": "Definition",
+          "quote": "Let $X$ be any topological space and $G$ an abelian group. Its **singular cochains with coefficients in $G$** are\n$$C^n(X;G)=\\operatorname{Hom}_{\\mathbb Z}(C_n(X;\\mathbb Z),G)\\quad(n\\ge0),\\qquad C^n(X;G)=0\\quad(n<0),$$\nwhere the chains are those of [[def-singular-chain-complex-and-singular-homology]]. Addition and negatives of homomorphisms are pointwise. The **coboundary** is\n$$\\delta^n:C^n(X;G)\\to C^{n+1}(X;G),\\qquad \\delta^n\\varphi=\\varphi\\circ\\partial_{n+1}$$\nfor $n\\ge0$, and is zero for $n<0$. Composition with the homomorphism [[def-singular-boundary-operator|$\\partial_{n+1}$]] is additive, so this is a homomorphism. The sign convention is positive: there is no extra degree sign on this composite. On a singular $(n+1)$-simplex it says\n$$\\delta^n\\varphi(\\sigma)=\\sum_{i=0}^{n+1}(-1)^i\\varphi(\\sigma\\circ\\delta_i),$$\nwhere $\\delta_i$ denotes the affine face map, distinct from the superscripted coboundary. In particular $\\delta^0\\varphi$ on an oriented path is its endpoint value minus its initial value.\n\nBy [[def-singular-simplex-and-singular-chain-group-with-coefficients]], the integer chains are finite sums on the specified simplex set $S_n(X)$. Thus a cochain is equivalently an arbitrary function $S_n(X)\\to G$: the extension sends $\\sum_\\sigma a_\\sigma\\sigma$ to $\\sum_\\sigma a_\\sigma\\varphi(\\sigma)$. The sum is finite and the formal coefficients are unique. The cochain need not have finite support.\n\nFor a commutative unital ring $R$ and an $R$-module $G$, there is a canonical identification\n$$C^n(X;G)\\cong\\operatorname{Hom}_R(C_n(X;R),G).$$\nIndeed the given chain convention is $C_n(X;R)=C_n(X;\\mathbb Z)\\otimes_{\\mathbb Z}R$. A homomorphism $\\varphi$ on integer chains defines an $R$-linear map by $c\\otimes r\\mapsto r\\varphi(c)$; the defining additive and integer-balanced tensor relations are preserved. Conversely evaluate an $R$-linear map on $c\\otimes1$. These operations are inverse since $c\\otimes r=r(c\\otimes1)$, and they intertwine the two coboundaries because the coefficient boundary is $\\partial\\otimes1$. The construction also covers the zero ring with its unital zero module.\n\nThe resulting graded group and coboundary are called the **singular cochain complex**. The square-zero identity follows by precomposition with $\\partial^2=0$ in the chain complex and is spelled out in the next lemma. If $X$ is empty there are no singular simplices, so every cochain group is zero; if $G=0$ the same is true. The extension and tensor formulas are uniquely specified and require no AC.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-singular-cohomology-with-coefficients",
+          "source_section": "Definition",
+          "quote": "For a space $X$ and an abelian group $G$, a degree-$n$ **singular cocycle** is a cochain in $Z^n(X;G)=\\ker\\delta^n$ and a degree-$n$ **singular coboundary** belongs to $B^n(X;G)=\\operatorname{im}\\delta^{n-1}$, for the positive coboundary convention of [[def-singular-cochain-complex-with-coefficients]]. The square-zero lemma [[lem-the-singular-coboundary-squares-to-zero]] implies $B^n\\subseteq Z^n$: if $\\varphi=\\delta^{n-1}\\psi$, then $\\delta^n\\varphi=0$.\n\nThe **singular cohomology group with coefficients in $G$** is\n$$H^n(X;G)=Z^n(X;G)/B^n(X;G)\\quad(n\\ge0),\\qquad H^n(X;G)=0\\quad(n<0).$$\nThis is the abelian quotient with addition $[\\varphi]+[\\psi]=[\\varphi+\\psi]$: changing either representative by a coboundary changes the sum by a coboundary. Thus two cocycles represent the same class exactly when their difference is $\\delta^{n-1}\\eta$ for some degree-$(n-1)$ cochain $\\eta$. In degree zero, $B^0=0$ because $C^{-1}=0$; hence $H^0=\\ker\\delta^0$. The zero convention in negative degrees agrees with the same kernel/image construction on the zero cochain groups.\n\nIf coefficients are a module over a commutative ring, the same groups and maps are modules and linear maps, and this is their module quotient. Empty $X$ or zero coefficients give zero cohomology in every degree. The notation does not define cohomology as the dual of homology; such identifications require their own theorems. No choice of cocycle representatives and no AC is part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fundamental-vector-field-of-a-left-action",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $G$ act smoothly on the left of a smooth\nmanifold $M$, let $\\mathfrak g=T_eG$, and let $X\\in\\mathfrak g$. The\n**fundamental vector field** associated with $X$ is\n\n$$X_M(x):=\\left.\\frac{d}{dt}\\right|_{t=0}\\exp_G(-tX)\\mathbin{\\cdot}x\\in T_xM.$$\n\nThe minus sign is part of the standing convention. With it, the assignment\n$X\\mapsto X_M$ is a Lie-algebra homomorphism for a left action; without it,\nthe usual left-action infinitesimal generator is an antihomomorphism. The\nfollowing theorem proves the bracket claim rather than building it into this\ndefinition.\n\nThe exponential map is smooth by\n[[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]],\nso $(t,x)\\mapsto\\exp_G(-tX)\\cdot x$ is smooth. In local coordinates,\ndifferentiating this smooth map in the $t$-variable at $0$ gives coefficients\nthat depend smoothly on $x$. Thus $x\\mapsto X_M(x)$ is a smooth tangent-bundle\nsection in the sense of\n[[def-smooth-vector-field-as-a-tangent-bundle-section]].\n\nHere $\\mathrm{AC}_\\omega$ is [[def-countable-choice|countable choice]] and is\nused through both the supplied exponential-map construction and the canonical\nsmooth tangent-bundle structure underlying the smooth-section interface. For\n$X=0$ the field is zero. The definition applies to disconnected $G$ and $M$,\nand makes no effectiveness, freeness, or properness assumption on the action.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-smooth-differential-k-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $k\\ge 0$. A **smooth differential $k$-form**\non $M$ is a smooth section of $\\bigwedge^kT^*M\\to M$. The space of such forms\nis denoted $\\Omega^k(M)$, and $\\Omega^0(M)=C^\\infty(M)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-standard-product-torus-as-a-compact-lie-group",
+          "source_section": "Definition",
+          "quote": "Assume the full Axiom of Choice. For $r\\geq0$, let\n$T=(\\mathbb R/\\mathbb Z)^r$ with the quotient topology and coordinatewise\naddition. On each circle factor, for every open interval $I\\subset\\mathbb R$\nof length less than $1$, use the chart\n$q(I)\\to I$ given by the unique lift through the quotient map\n$q:\\mathbb R\\to\\mathbb R/\\mathbb Z$; give $T$ the product smooth structure.\nWrite $\\mathfrak t=T_0T$. For $1\\leq i\\leq r$, let $e_i$ be the tangent vector\nat $0$ to the one-parameter subgroup\n$s\\mapsto(0,\\ldots,[s],\\ldots,0)$ in the $i$th coordinate. These vectors form\nthe period-one basis of $\\mathfrak t$, and $e_i^*$ denotes its dual basis.\nThe standard Lie exponential is normalized by\n$\\exp_T(s e_i)=(0,\\ldots,[s],\\ldots,0)$ for every $s\\in\\mathbb R$.\nFor $r=0$, use the one-point group and the empty basis. This convention makes\n$T$ a compact connected abelian Lie group, hence a torus in the sense of the\nstandard compact-Lie-group definition; its identity inclusion is a cofibration,\nso this based group is well-pointed.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\Phi([v,x])=v\\cdot x$ from $ET\\times_TT$ to $ET$, where $v\\cdot x$ is the right Milnor action. It is well-defined because $\\Phi([v\\cdot h,x-h])=(v\\cdot h)\\cdot(x-h)=v\\cdot x$. Its inverse is $v\\mapsto[v,0]$: $\\Phi([v,0])=v$, and the quotient relation gives $[v,x]=[v\\cdot x,0]$. Both maps are continuous by the quotient topology and continuity of the group action, so this is a homeomorphism. By [F2], $ET$ is contractible; [F3] identifies its real singular cohomology with that of a point.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Integer translations preserve $dx$, so $-dx$ descends through the standard quotient charts to a global smooth one-form $\\eta$ on the circle. The circle translations act transitively, so an invariant smooth function is constant. Every smooth one-form is $f(x)dx$ for a smooth periodic function $f$; invariance under all translations forces $f$ constant. Since higher forms vanish on a one-dimensional manifold, the invariant form algebra is spanned by $1$ and $\\eta=-dx$. By [F7], the negative-exponential flow is $[x]\\mapsto[x-s]$, hence $X_e=-\\partial_x$ and $\\iota_{X_e}\\eta=1$; also $d\\eta=0$. Substitution in [F1] gives $d_TP(u)=0$ and $d_T(P(u)\\eta)=-uP(u)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A point has one singular simplex in each dimension. If $\\sigma_n$ is its unique $n$-simplex, then $\\partial\\sigma_0=0$; for $n\\geq1$, $\\partial\\sigma_n=(\\sum_{j=0}^n(-1)^j)\\sigma_{n-1}$, whose coefficient is $1$ for even $n$ and $0$ for odd $n$. Thus $C^n(\\{\\ast\\};\\mathbb R)=\\mathbb R$, and its coboundary $\\delta^n$ is identity for odd $n$ and zero for even $n$. The cohomology quotient in [F4] is therefore $\\mathbb R$ in degree zero and zero in every positive degree. Together with step 1.1 this proves the stated Borel cohomology.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiplication by $u$ is injective on $\\mathbb R[u]$, so the differential from the odd summand $\\mathbb R[u]\\eta$ has zero kernel and image $u\\mathbb R[u]$ in the even summand. Therefore Cartan cohomology is the quotient $\\mathbb R[u]/u\\mathbb R[u]\\cong\\mathbb R$ in degree zero and is zero in positive degrees, matching step 2.1. The constant polynomial $1$ survives, while every positive power $u^k$ is the boundary $-d_T(u^{k-1}\\eta)$; no odd class survives.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes T=M=R/Z, which is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 compute the degree-zero R class and vanishing positive cohomology."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is the rank-one circle; step 1.2 computes its Cartan complex explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the free transitive action through the explicit Borel homeomorphism."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the quotient circle, where interval endpoints are identified; there is no boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states AC, the premise used by the Borel and Cartan definitions in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two explicit computations but asserts no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example compares two explicit computations but asserts no iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Read every current proof step and all nine supplier interfaces (homotopy-invariance proof also inspected). The explicit Borel maps [v,x] -> vx and v -> [v,0] are continuous inverse maps respecting (vh,x-h). Translation-invariant functions and one-forms are constant multiples of 1 and -dx; the period-one negative flow gives X=-partial_x and contraction 1, hence d_T(P eta)=-uP. Polynomial multiplication by u is injective, with image uR[u], yielding only the constant even class. Checked n=0 separately, n=1 and n=2 boundary parities, and every higher parity; positive cochain convention yields delta identity only in odd degree. Reverse only the inserted degree-zero boundary clause in current bytes reproduces exactly pre item hash bf4cf97e..., and current bytes match post 57a96ab5.... Accepted reader proof-only repair with confidence 1; no interface or consumer change. Reader/refuter report no further findings."
+      }
+    }
+  }
+}

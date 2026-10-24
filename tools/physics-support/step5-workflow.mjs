@@ -26,6 +26,8 @@ const CERTIFICATION_TRANSITION_URL=new URL('./step5-certification-transition.mjs
 const {certificationEvidenceTransition}=await import(CERTIFICATION_TRANSITION_URL.href+'?v='+CERTIFICATION_TRANSITION_STAT.mtimeMs+':'+CERTIFICATION_TRANSITION_STAT.size);
 const HISTORICAL_MANIFEST_URL=new URL('./step5-historical-manifest.mjs',import.meta.url),HISTORICAL_MANIFEST_STAT=statSync(HISTORICAL_MANIFEST_URL);
 const {historicalManifestEvidence,validateCurrentHistoricalManifestGate}=await import(HISTORICAL_MANIFEST_URL.href+'?v='+HISTORICAL_MANIFEST_STAT.mtimeMs+':'+HISTORICAL_MANIFEST_STAT.size);
+const INITIAL_METADATA_URL=new URL('./step5-initial-metadata-transition.mjs',import.meta.url),INITIAL_METADATA_STAT=statSync(INITIAL_METADATA_URL);
+const {initialMetadataTransition}=await import(INITIAL_METADATA_URL.href+'?v='+INITIAL_METADATA_STAT.mtimeMs+':'+INITIAL_METADATA_STAT.size);
 // The live controller may have loaded an earlier helper during owner review.
 const INHERITED_REPAIR_URL=new URL('./step5-inherited-repair.mjs',import.meta.url);
 const INHERITED_REPAIR_STAT=statSync(INHERITED_REPAIR_URL);
@@ -1492,7 +1494,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const source=phase==='impact-initial'?'initial':'repeat';
   const prior=readCertification(root,run);
   const sourceResult=phase==='gate'?null:read(join(dir,`${source}-${round}-collected.json`));
-  const sourceHistory=verifyHistoricalEvidence(root,run,sourceResult?.evidence);
+  const initialMetadata=initialMetadataTransition(root,run,phase,round,sourceResult,result,{reviewContexts:reviewContextHashes});
+  const sourceHistory=verifyHistoricalEvidence(root,run,initialMetadata.evidence);
   const transition=certificationEvidenceTransition(root,run,phase,round,prior,sourceResult,result);
   verifyEvidence({...prior?.evidence,...transition.evidence});
   const manifestTransitions=[...sourceHistory.transitions,...resultHistory.transitions,...transition.transitions.filter(row=>row.kind==='historical-page-manifest')];
@@ -1530,8 +1533,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const creations=[...creationById.values()].sort((a,b)=>a.id.localeCompare(b.id));
   for(const row of creations){creationRegistration(root,run,row);requireValue(current[row.id],`created item missing at certification: ${row.id}`);}
   const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,creations,evidence,changed,
-    ...(transition.transitions.length||sourceHistory.transitions.length||resultHistory.transitions.length||prior?.evidence_transitions?.length
-      ?{evidence_transitions:[...(prior?.evidence_transitions??[]),...sourceHistory.transitions,...resultHistory.transitions,...transition.transitions]}:{}),
+    ...(transition.transitions.length||sourceHistory.transitions.length||resultHistory.transitions.length||initialMetadata.transitions.length||prior?.evidence_transitions?.length
+      ?{evidence_transitions:[...(prior?.evidence_transitions??[]),...sourceHistory.transitions,...resultHistory.transitions,...initialMetadata.transitions,...transition.transitions]}:{}),
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));

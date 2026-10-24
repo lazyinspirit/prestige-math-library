@@ -1196,6 +1196,54 @@ and native report basis, and uses the current contract hash. It never edits or
 reseals the old certificate, closure, report or supporting evidence, and does
 not claim that missing historical contract bytes have been recovered.
 
+Initial certification has a separate exact metadata transition when the
+immutable `initial-1-collected.json` predates genuine completed native initial
+impact repairs. It applies only at `5.3-certify`, initial impact round one,
+before any certificate exists. Root may advertise
+`research/RUN-step5-v2/owner-initial-metadata-request.json` containing
+`{version: 1, run, request: {path, sha256}}`. The request names immutable
+`owner-initial-metadata-ID.json` in that workflow directory. It contains
+`version: 1`, `run`, `reviewer: "/root"`, `phase: "impact-initial"`, `round: 1`,
+raw references `source_collection`, `impact_progress`, `impact_closed`,
+`predecessor_gate`, and a nonempty `artifacts` array. References use relative
+run-local paths and SHA256; the predecessor names the actual consumed
+`.physics-autopilot/RUN/owner-gate-history/ATTEMPT.json`.
+
+Each artifact declares `kind` (`owning-proof-contract` or
+`owning-page-manifest`), canonical `research/RUN-batch-N.proof-contracts.json`
+or `research/RUN-batch-N.pages.json` `path`, `batch`, authenticated raw `before`
+archive, exact live `after_sha256`, and `changes`. Every change contains one
+scalar `json_pointer`, its frozen owning `subject`, and exact native `pack`,
+`task`, `report`, `dispatch` references in `native`. The complete parsed scalar
+diff must equal these unique pointers, including every leaf of a newly added
+object. Historical archive bytes must equal the original collection's exact
+binding; Git can supply a missing preimage only when its actual bytes reproduce
+that hash. Neither a hash assertion nor a reconstructed approximation suffices.
+
+Supported contract fields are exact citation quotes, derivation claim mirrors,
+and the native `owner_repair` dispatch/kind/evidence/false-independent-acceptance
+record under the assigned subject. Every contract subject requires a direct
+structured successful strict scoped native validator row, followed by an actual
+current strict scoped contract check during intake with unchanged raw bytes.
+Supported page fields are source-reference title mirrors under the assigned
+subject row; the complete current source mapping must equal the item's actual
+frontmatter, and the assigned native source repair must have changed its guard.
+Both artifact types require authentic closed impact progress, native assigned
+Sol 6.1 high authority, current item guards and review contexts, drained writers,
+and the consumed complete `5.2-impact` battery with passing full-frontier Root
+formatting/metadata checks and current item/manifest bytes. This authenticates
+the actual predecessor; it does not claim that its snapshot bound contract raw
+hashes. No new predecessor battery or engine stage is introduced by this
+bookkeeping transition.
+
+Only the new certificate receives current hashes, raw archives, immutable
+request/native/closure/gate evidence, and typed `initial-native-metadata`
+transitions. Original reports, supporting evidence, collections, receipts,
+sources and existing certificates remain immutable. Unlisted scalar changes,
+other metadata fields, source/proof substitutions, unsupported artifacts and
+unrelated stale evidence fail closed. Ordinary evidence verification and the
+normal certification-stage gates remain strict.
+
 A collected initial page correction can bind an owning pages manifest before a
 later native impact owner repairs one consumer's public statement and its exact
 manifest mirror. The old parent, page receipt and native report stay immutable.
