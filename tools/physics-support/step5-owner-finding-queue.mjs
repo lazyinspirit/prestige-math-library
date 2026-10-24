@@ -9,6 +9,7 @@ import { statementHash } from './step5-statement.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { MODELS } from './models.mjs';
+import { historicalInitialMetadataReferences } from './step5-initial-metadata-transition.mjs';
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -101,8 +102,9 @@ function consumedEarlierQueue(root, run, phase, round, dir, pointer, requestPath
     'historical queue certificate is not intact');
   const parent = read(parentPath), progress = read(progressPath), pack = read(packPath), child = read(childPath);
   const sealed = (path, expected) => {
-    need(sha(expected) && certificate.evidence?.[path] === expected, 'historical queue evidence lacks certificate binding: ' + path);
-    bound({ path: relative(root, path), sha256: expected });
+    need(sha(expected), 'historical queue evidence lacks certificate binding: ' + path);
+    if (certificate.evidence?.[path] === expected) bound({ path: relative(root, path), sha256: expected });
+    else for (const ref of historicalInitialMetadataReferences(root, run, certificate, path, expected, parentPath)) bound(ref);
   };
   sealed(parentPath, hash(readFileSync(parentPath)));
   need(parent.version === 2 && parent.run === run && parent.phase === priorPhase && parent.round === priorRound

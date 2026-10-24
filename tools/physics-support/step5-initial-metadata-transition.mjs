@@ -216,3 +216,62 @@ export function initialMetadataTransition(root, run, phase, round, source, close
   check(pointer.version === 1 && pointer.run === run, 'invalid Root advertisement');
   return verifyInitialMetadataRequest(root, run, source, closed, pointer.request, options);
 }
+
+// A consumed queue retains its original metadata guard. Replay authenticates
+// that guard against the archive already sealed by the original certificate;
+// it does not rerun old reviews against sources legitimately repaired later.
+export function historicalInitialMetadataReferences(root, run, certificate, path, expected, parentPath) {
+  root = resolve(root); path = resolve(root, path);
+  const dir = join(root, 'research', run + '-step5-v2');
+  const { sha256: seal, ...payload } = certificate;
+  check(certificate.version === 2 && certificate.run === run && certificate.phase === 'impact-initial' && certificate.round === 1
+    && sha(seal) && digest(payload) === seal && sha(expected), 'invalid historical initial certificate');
+  const rows = (certificate.evidence_transitions ?? []).filter(row => row.kind === 'initial-native-metadata' && row.path === path && row.before_sha256 === expected);
+  check(rows.length === 1, 'missing unique sealed historical metadata transition: ' + path);
+  const transition = rows[0];
+  const match = basename(path).match(new RegExp('^' + run.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '-batch-([1-9][0-9]*)\\.(proof-contracts|pages)\\.json$'));
+  check(match && dirname(path) === join(root, 'research') && sha(transition.after_sha256)
+    && transition.after_sha256 !== expected && certificate.evidence?.[path] === transition.after_sha256
+    && existsSync(path) && realpathSync(path) === path && fileHash(path) === transition.after_sha256, 'historical current metadata binding differs');
+  const sealedRef = (ref, gate = false) => {
+    check(record(ref) && typeof ref.path === 'string' && sha(ref.sha256), 'invalid sealed historical reference');
+    const absolute = resolve(root, ref.path), rel = relative(root, absolute);
+    check(!isAbsolute(rel) && !rel.startsWith('..') && existsSync(absolute) && realpathSync(absolute) === absolute
+      && (gate ? dirname(absolute) === join(root, '.physics-autopilot', run, 'owner-gate-history') && basename(absolute).endsWith('.json')
+        : rel.startsWith('research/' + run + '-')) && certificate.evidence?.[absolute] === ref.sha256 && fileHash(absolute) === ref.sha256,
+    'historical reference is not intact and certificate-bound: ' + ref.path);
+    return absolute;
+  };
+  check(transition.archive?.sha256 === expected, 'historical archive is not the original guard');
+  const archivePath = sealedRef(transition.archive), requestPath = sealedRef(transition.binding), request = read(requestPath);
+  check(dirname(requestPath) === dir && /^owner-initial-metadata-[A-Za-z0-9._-]+\.json$/.test(basename(requestPath))
+    && basename(requestPath) !== 'owner-initial-metadata-request.json' && request.version === 1 && request.run === run
+    && request.reviewer === '/root' && request.phase === 'impact-initial' && request.round === 1, 'invalid sealed historical Root request');
+  check(parentPath === join(dir, 'initial-1-collected.json') && sealedRef(request.source_collection) === parentPath
+    && sealedRef(request.impact_progress) === join(dir, 'impact-initial-1-progress.json')
+    && sealedRef(request.impact_closed) === join(dir, 'impact-initial-1-closed.json'), 'historical transition belongs to another parent or wave');
+  sealedRef(request.predecessor_gate, true);
+  const artifacts = (request.artifacts ?? []).filter(row => resolve(root, row.path) === path);
+  check(artifacts.length === 1, 'historical request lacks one exact artifact');
+  const artifact = artifacts[0], kind = match[2] === 'proof-contracts' ? 'owning-proof-contract' : 'owning-page-manifest';
+  check(artifact.kind === kind && artifact.batch === match[1] && artifact.path === relative(root, path)
+    && artifact.after_sha256 === transition.after_sha256 && artifact.before?.sha256 === expected
+    && sealedRef(artifact.before) === archivePath && Array.isArray(artifact.changes) && artifact.changes.length > 0
+    && Array.isArray(transition.json_pointers) && new Set(transition.json_pointers).size === transition.json_pointers.length
+    && equal([...transition.json_pointers].sort(), artifact.changes.map(row => row.json_pointer).sort())
+    && equal(metadataScalarDifferences(read(archivePath), read(path)), [...transition.json_pointers].sort()), 'historical artifact or exact scalar set differs');
+  const native = new Map();
+  for (const change of artifact.changes) {
+    check(typeof change.subject === 'string' && record(change.native), 'historical change lacks native authority');
+    for (const name of ['pack', 'task', 'report', 'dispatch']) sealedRef(change.native[name]);
+    const report = resolve(root, change.native.report.path), row = native.get(report) ?? { path: report, sha256: change.native.report.sha256, subjects: [] };
+    row.subjects = [...new Set([...row.subjects, change.subject])].sort(); native.set(report, row);
+  }
+  const ordered = rows => [...rows].sort((a, b) => a.path.localeCompare(b.path));
+  check(Array.isArray(transition.native_reports) && equal(ordered([...native.values()]), ordered(transition.native_reports)), 'historical native report basis differs');
+  return [
+    { path: relative(root, path), sha256: transition.after_sha256 },
+    { path: relative(root, archivePath), sha256: expected },
+    { path: relative(root, requestPath), sha256: transition.binding.sha256 },
+  ];
+}

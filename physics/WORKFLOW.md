@@ -1244,6 +1244,21 @@ other metadata fields, source/proof substitutions, unsupported artifacts and
 unrelated stale evidence fail closed. Ordinary evidence verification and the
 normal certification-stage gates remain strict.
 
+A consumed earlier owner-finding queue retains its original metadata hashes in
+its parent, progress and child receipts. If an original initial-impact
+certificate sealed an `initial-native-metadata` transition, historical queue
+replay may resolve that exact old canonical metadata guard to its already
+certificate-bound raw archive. The unique transition must match the supported
+canonical artifact, original/current hashes, immutable Root request, exact
+scalar diff and native report basis; its source parent, impact progress,
+closure, predecessor gate and native references must remain raw-hash-bound by
+that certificate. Current canonical metadata must still equal the sealed after
+hash. Replay uses the ordinary strict binder for the archive, request and current
+metadata; it neither edits old receipts nor rechecks historical proofs against
+later source revisions. All direct evidence bindings retain their existing
+strict checks. This route does not chain later metadata transitions or accept
+other stale evidence.
+
 A collected initial page correction can bind an owning pages manifest before a
 later native impact owner repairs one consumer's public statement and its exact
 manifest mirror. The old parent, page receipt and native report stay immutable.
