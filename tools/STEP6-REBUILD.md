@@ -49,6 +49,12 @@ tooling selection. This changes neither commit ownership nor any gate.
 Metadata/render preparation is reused only for the exact unchanged inputs and
 repair round. Changed inputs or repairs require fresh preparation and the full
 battery. Quiet engine ticks neither launch renderers nor rehash the library.
+Both engines also execute the scoped [rendering-quality checks](RENDERING-QUALITY.md)
+in this actual preparation: source/context lint, application AST/KaTeX checks,
+production TikZ compilation, SVG/layout smoke checks and their regression pack.
+The final `rendering-quality` gate verifies the resulting nonempty current
+receipt. It reuses unchanged source/renderer/toolchain caches and the existing
+proof-render pass; it adds no corpus scan or substantive review acceptance.
 The terminal helper requires the genuine immediately preceding native gate pass,
 its complete event sequence, current prepared inputs and drained writers. A
 failed preparation, gate or transaction remains a visible blocker. Outside OPEN

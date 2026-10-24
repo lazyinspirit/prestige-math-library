@@ -9,6 +9,7 @@ import { atomicJSON, checkMetadataAndRender, digest, gateInventory, preparedPath
   sourceState, stateDirectory, registerStateDirectory, statFingerprint, validatePrepared } from './step6-prepared.mjs';
 import { commitStep6 } from './step6-commit.mjs';
 import { makeSummaryResponse, renderSummaryReport, step6Telemetry } from './step6-summary.mjs';
+import { writeRenderingQuality } from './rendering-quality.mjs';
 
 const TOOL_ROOT = dirname(fileURLToPath(import.meta.url));
 const VALIDATED_STAGE = '6-final-validation-v3';
@@ -108,6 +109,7 @@ export async function prepareFinal(root, run, { physics = false } = {}) {
     '--auditor-certifications', `research/${run}-step7-auditor-certifications.json`, '--apply', '--report', `research/${run}-judge-stamps.json`], { physics, commands, env: judgeEnv });
   const actual = await checkMetadataAndRender(root, run, { physics });
   atomicJSON(join(root, 'research', `${run}-proof-layout.json`), actual.layoutReceipt);
+  writeRenderingQuality(root, run, actual.renderingQuality);
   invoke(root, 'publication-ready.mjs', ['--run', run, '--write'], { physics, commands });
   invoke(root, 'step6-report.mjs', ['evidence', '--run', run], { physics, commands });
   invoke(root, 'step6-report.mjs', ['snapshot', '--run', run], { physics, commands });
@@ -116,6 +118,8 @@ export async function prepareFinal(root, run, { physics = false } = {}) {
     startedAt: actual.startedAt, reviewedAt: actual.reviewedAt, completedAt: new Date().toISOString(),
     mathematical_review: false, gate_pass_created: false,
     metadata: actual.metadata, formatting: actual.formatting, source,
+    renderingQuality: { fingerprint: actual.renderingQuality.fingerprint, errors: actual.renderingQuality.errors.length,
+      warnings: actual.renderingQuality.warnings.length, files: actual.renderingQuality.files.length },
     repairRound: s.stages?.[VALIDATED_STAGE]?.fixRounds ?? 0, commands };
   atomicJSON(preparedPath(root, run, physics), cert);
   return cert;

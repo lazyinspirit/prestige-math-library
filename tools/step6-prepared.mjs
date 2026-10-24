@@ -7,6 +7,7 @@ import { scopedTree } from './step6-report-scope.mjs';
 import { scopedReadinessTree } from './step6-scoped-tree.mjs';
 import { ownedStep6Paths } from './step6-owned-inputs.mjs';
 import { runScope } from './step6-lib.mjs';
+import { prepareRenderingQuality, renderingQualityRuntimeState, renderingQualityPath } from './rendering-quality.mjs';
 
 export const digest = value => createHash('sha256').update(value).digest('hex');
 export const readJSON = file => JSON.parse(readFileSync(file, 'utf8'));
@@ -48,8 +49,11 @@ export function sourceState(root, run, { physics = false, includeDerived = true 
   // exclusion explicit so a later selector change cannot create a self-seal.
   for (const suffix of ['step6-report.response.json', 'step6-report.md', 'step6-report-integrity.json'])
     delete tree[`research/${run}-${suffix}`];
+  const rendering = renderingQualityRuntimeState(root, run);
+  Object.assign(tree, rendering.tree);
   return { tree, sha256: digest(JSON.stringify(tree)),
-    physicalPaths: [...new Set([...native.protected_tree_paths, ...Object.keys(tree).filter(path => !path.includes('#'))])].sort() };
+    physicalPaths: [...new Set([...native.protected_tree_paths, ...rendering.physicalPaths,
+      ...Object.keys(tree).filter(path => !path.includes('#') && !path.startsWith('@rendering-quality'))])].sort() };
 }
 export function gateInventory(gates) {
   return gates.map(gate => ({ id: gate.id, argv: typeof gate.argv === 'function' ? gate.argv() : [...gate.argv],
@@ -63,9 +67,14 @@ export function validatePrepared(root, run, { physics = false, gates, stages } =
     || cert.physics !== physics || cert.mathematical_review !== false || cert.gate_pass_created !== false
     || !Array.isArray(cert.metadata) || !cert.metadata.length || !Array.isArray(cert.formatting)
     || cert.formatting.length !== cert.metadata.length || cert.formatting.some(row => row.errors?.length)
+    || !cert.renderingQuality?.fingerprint || cert.renderingQuality.errors !== 0
     || !Number.isFinite(Date.parse(cert.startedAt)) || !Number.isFinite(Date.parse(cert.completedAt))
     || Date.parse(cert.completedAt) < Date.parse(cert.startedAt) || Date.parse(cert.completedAt) > Date.now())
     throw Error('Missing or invalid actual Step-6 preparation');
+  const rendering = readJSON(renderingQualityPath(root, run));
+  if (rendering.fingerprint !== cert.renderingQuality.fingerprint || rendering.errors?.length
+    || !rendering.files?.length || rendering.run !== run || rendering.physics !== physics)
+    throw Error('Missing or invalid prepared rendering-quality result');
   if (sourceState(root, run, { physics }).sha256 !== cert.source.sha256)
     throw Error('Step-6 prepared source or derived evidence changed');
   if (gates && (stages?.length !== 1 || stages[0] !== '6-final-validation-v3'
@@ -107,6 +116,12 @@ export async function checkMetadataAndRender(root, run, { physics = false } = {}
     throw Error('Renderer did not return the complete ordered final frontier');
   const problems = formatting.flatMap(row => row.errors.map(error => `${row.file}: ${error.message ?? JSON.stringify(error)}`));
   if (problems.length) throw Error(problems.join('\n'));
+  // Reuse the actual ordered proof rendering above. These additional passes
+  // inspect parser contexts and compile diagram blocks; they do not SSR the
+  // frontier again or discover unrelated corpus subjects.
+  const renderingQuality = await prepareRenderingQuality(root, run, { physics });
+  if (renderingQuality.errors.length)
+    throw Error(renderingQuality.errors.map(error => `${error.file}:${error.line ?? 1} [${error.code}] ${error.message ?? error.msg}`).join('\n'));
   const after = sourceState(root, run, { physics, includeDerived: false });
   if (after.sha256 !== before.sha256) {
     const changed = [...new Set([...Object.keys(before.tree), ...Object.keys(after.tree)])]
@@ -132,7 +147,7 @@ export async function checkMetadataAndRender(root, run, { physics = false } = {}
   // Materialize exactly the original native layout schema from the ONE actual
   // scan above. This records formatting evidence, never mathematical judgment.
   const layoutReceipt = { version: 1, run, ...layoutInputs, steps, gates, items };
-  return { startedAt, reviewedAt: new Date().toISOString(), metadata, formatting, layoutReceipt };
+  return { startedAt, reviewedAt: new Date().toISOString(), metadata, formatting, layoutReceipt, renderingQuality };
 }
 
 // A quiet scheduling tick stats only the previously selected carriers and their

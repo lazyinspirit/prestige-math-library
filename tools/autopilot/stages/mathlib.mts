@@ -1141,6 +1141,9 @@ function step6PathwayOwed(ctx: any): string[] {
 }
 function step6FinalGates(ctx: any) {
   const all = [
+    gate('rendering-quality', ['node', 'tools/rendering-quality.mjs', '--run', ctx.run, '--verify'], {
+      needs: [`research/${ctx.run}-rendering-quality.json`],
+      liveness: { pattern: /rendering-quality: (\d+) file\(s\)/.source, min: 1, unit: 'rendered source files' } }),
     closureGate(ctx, { selectiveStep5: true }), ledgerGate(ctx, { terminal: true }),
     gate('pathway-closure', ['node', 'tools/pathway-closure.mjs', 'check', '--run', ctx.run]),
     ...[gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,

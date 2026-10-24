@@ -2,6 +2,7 @@
 import { existsSync, readFileSync, readdirSync, lstatSync, realpathSync } from 'node:fs';
 import { join, resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
+import { resolveHistoricalRunPath, runRepositoryRelocationPath } from './run-repository-relocation.mjs';
 import { importedPlanPage } from './imported-plan-pages.mjs';
 import { markdownFiles } from './physics-content.mjs';
 export const appendHash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -96,7 +97,8 @@ export function appendReview(root, run, number, { requireNative = false } = {}) 
           ||!Number.isFinite(Date.parse(dispatch.startedAt))||!Number.isFinite(Date.parse(dispatch.endedAt))
           ||Date.parse(dispatch.startedAt)>Date.parse(result.started_at)||Date.parse(dispatch.endedAt)<Date.parse(result.ended_at))fail('matching completed native Alpha dispatch required');
         const prompt=`research/${run}-dispatch/alpha-drift-review-append-${number}.attempt-${result.attempt}.prompt.md`;
-        if(typeof result.prompt!=='string'||resolve(root,result.prompt)!==resolve(root,prompt)||!readFileSync(appendPath(root,prompt),'utf8').trim())fail('actual native supplemental prompt required');
+        if(typeof result.prompt!=='string'||resolveHistoricalRunPath(root,run,result.prompt,{expectedPath:prompt,sourceArtifact:path})!==resolve(root,prompt)||!readFileSync(appendPath(root,prompt),'utf8').trim())fail('actual native supplemental prompt required');
+        const relocationInputs=resolve(root,result.prompt)===resolve(root,prompt)?[]:[relative(root,runRepositoryRelocationPath(root,run))];
         const attempt = path.replace('.result.json', `.attempt-${result.attempt}.result.json`);
         if (appendHash(readFileSync(appendPath(root, attempt))) !== appendHash(readFileSync(appendPath(root, path))))
             fail('native attempt/current result differ');
@@ -129,7 +131,7 @@ export function appendReview(root, run, number, { requireNative = false } = {}) 
             }
             ownerInputs.push(ownerPath);
         }
-        return { entry, text, native, attempt, prompt, ownerInputs, resolved };
+        return { entry, text, native, attempt, prompt, ownerInputs, resolved, relocationInputs };
     }
     return { entry, text };
 }
@@ -262,7 +264,7 @@ export function appendDriftView(root, run) {
         const clarified = clarifiedAppendView(root, run, entry, review, appliedPath);
         text += `\n\n<!-- separately attributed native supplemental review ${entry.number} -->\n${clarified.text}`;
         inputs.push(...clarified.inputs);
-        inputs.push(appliedPath, entry.report, review.native.path, review.attempt, review.prompt, `research/${run}-frontier-appends.json`, `${entry.archive}/prepared.json`, `${entry.archive}/committed.json`, ...entry.fixedInputs.map(r => r.path), ...review.ownerInputs, ...Object.values(entry.baseResolution?.inputPaths ?? {}).map(r => r.path));
+        inputs.push(appliedPath, entry.report, review.native.path, review.attempt, review.prompt, ...review.relocationInputs, `research/${run}-frontier-appends.json`, `${entry.archive}/prepared.json`, `${entry.archive}/committed.json`, ...entry.fixedInputs.map(r => r.path), ...review.ownerInputs, ...Object.values(entry.baseResolution?.inputPaths ?? {}).map(r => r.path));
     }
     return { text, inputs: [...new Set(inputs)], resolved };
 }

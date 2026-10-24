@@ -20,12 +20,13 @@
 import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { join, relative, resolve, isAbsolute } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { itemHashGuard, shortHash } from '../../physics-support/item-hash.mjs';
 import { isPublishedItem } from '../../physics-support/published-repair-policy.mjs';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
+import { resolveHistoricalRunPath } from '../../physics-support/run-repository-relocation.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
@@ -1077,6 +1078,9 @@ function step6PathwayOwed(ctx: any): string[] {
 }
 function step6FinalGates(ctx: any) {
   const all = [
+    gate('rendering-quality', ['node', 'tools/physics-support/rendering-quality.mjs', '--run', ctx.run, '--verify'], {
+      needs: [`research/${ctx.run}-rendering-quality.json`],
+      liveness: { pattern: /rendering-quality: (\d+) file\(s\)/.source, min: 1, unit: 'rendered source files' } }),
     closureGate(ctx), ledgerGate(ctx, { terminal: true }),
     gate('pathway-closure', ['node', 'tools/physics-support/pathway-closure.mjs', 'check', '--run', ctx.run]),
     ...[gate('judge-stamps', ['env', `JUDGE_LINEUP=${originalJudgeLineup(ctx)}`, 'node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
@@ -1201,7 +1205,7 @@ export const stages = [
         || original.ok !== true || original.written_by === 'autopilot'
         || original.covers?.length !== 1 || original.covers[0] !== unit || !original.prompt)
         throw Error('Continuation requires the genuine original successful native author result and prompt');
-      const originalPrompt = readFileSync(isAbsolute(original.prompt) ? original.prompt : R(ctx, original.prompt), 'utf8');
+      const originalPrompt = readFileSync(resolveHistoricalRunPath(ctx.repo, ctx.run, original.prompt, { sourceArtifact: relative(ctx.repo, originalPath) }), 'utf8');
       if (!originalPrompt.trim()) throw Error('Continuation requires a nonempty genuine original native prompt');
       const direction = `research/${ctx.run}-owner-authoring-direction.md`;
       const ownerDirection = readFileSync(R(ctx, direction), 'utf8');

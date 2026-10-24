@@ -1152,7 +1152,12 @@ unscoped verification continues to parse every original in full.
 Item/page validators select current run manifests. Outside suppliers stay
 prerequisite context; do not validate or repair unrelated content. Closeout verifies the engine's exact owned content commit inside its transaction.
 Fresh Step 6 uses metadata/render checks -> focused repair -> all final gates
-(repeat after repairs) -> concise report -> commit. All distinct old mechanical
+(repeat after repairs) -> concise report -> commit. Actual preparation includes
+the shared scoped [rendering-quality checks](../tools/RENDERING-QUALITY.md):
+source/context lint, application AST/KaTeX validation, production TikZ compilation
+and SVG/layout smoke checks, with small real-render regression packs. The final
+`rendering-quality` gate verifies an exact current nonempty receipt; unchanged
+source/renderer/toolchain caches avoid a second compile. All distinct old mechanical
 conditions and repair mechanisms remain. The report immediately follows the
 genuine gate pass; there is no post-commit content battery. New v3 stage identities
 require guarded cutover rather than adoption of old coverage. Earlier owner-gate

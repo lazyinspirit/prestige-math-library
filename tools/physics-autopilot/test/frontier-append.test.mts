@@ -722,3 +722,21 @@ test('numeric annotation clarification rejects wrong reported numbers, duplicate
         assert.throws(() => appendDriftView(f.repo, 'demo'), /clarification|annotation/, mode);
     }
 });
+
+test('relocated native append prompts need exact Root-bound frozen result and prompt, without rewriting results', t => {
+    const f = fixture(t), e = appendFrontier(f.options); f.review(e);
+    const result = 'research/demo-dispatch/alpha-drift-review-append-1.result.json';
+    const attempt = result.replace('.result.json', '.attempt-1.result.json');
+    const prompt = 'research/demo-dispatch/alpha-drift-review-append-1.attempt-1.prompt.md';
+    const oldRoot = f.repo + '-removed'; f.native(e, { prompt: join(oldRoot, prompt) });
+    const frozen = f.read(result);
+    assert.throws(() => applyAppendReview(f.repo, 'demo', 1, { invoke: f.invoke }), /relocation/);
+    const artifacts = Object.fromEntries([result, attempt, prompt].map(file => [file, driftHash(f.read(file))]));
+    f.save('research/demo-repository-relocation.json', { version: 1, kind: 'root-authorized-run-repository-relocation', run: 'demo', reviewer: '/root', old_root: oldRoot, new_root: f.repo,
+        reason: 'Root relocated exact frozen native files only; this fixture grants no scientific acceptance, gate or added coverage.', artifacts });
+    applyAppendReview(f.repo, 'demo', 1, { invoke: f.invoke });
+    assert.deepEqual(f.read(result), frozen); assert.deepEqual(f.read(attempt), frozen);
+    assert.ok(appendDriftView(f.repo, 'demo').inputs.includes('research/demo-repository-relocation.json'));
+    f.save(prompt, 'Unreviewed changed historical assignment');
+    assert.throws(() => appendDriftView(f.repo, 'demo'), /changed historical artifact/);
+});
