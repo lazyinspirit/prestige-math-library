@@ -322,6 +322,25 @@ test('new canonical identities cannot steal existing aliases or off-plan page ho
   }
 });
 
+test('null page inventories are empty ownership lists without hiding page identity collisions',t=>{
+  for(const value of ['', ' null', ' ~'])for(const collision of [false,true]) {
+    const f=fixture(t),page=collision?'new-one-a':'unrelated-null-page';
+    f.put(`library/foreign/${page}.md`,`---\npage: ${page}\nstatus: published\nitems:${value}\nexamples:${value}\n---\n`);
+    if(collision)assert.throws(()=>f.prepare(),/new page identity collides with another carrier/);
+    else assert.doesNotThrow(()=>f.prepare(),'unrelated published null inventories do not block registration');
+    assert.equal(existsSync(join(f.stateDir,'step2-prerequisites.lock')),false);
+  }
+});
+
+test('non-null malformed page inventories and null sequence members remain blocking',t=>{
+  for(const field of ['items','examples'])for(const value of [' {}',' "null"',' false',' 0',' lem-untyped',' [null]']) {
+    const f=fixture(t);
+    f.put('library/foreign/malformed-inventory.md',`---\npage: malformed-inventory\nstatus: published\n${field}:${value}\n---\n`);
+    assert.throws(()=>f.prepare(),/unreadable page (?:inventory|member)/);
+    assert.equal(existsSync(join(f.stateDir,'step2-prerequisites.lock')),false);
+  }
+});
+
 test('foreign manifest claims cannot be adopted as new unowned draft source',t=>{
   const f=fixture(t),id='lem-new-one';
   f.put(`items/${id}.md`,`---\nid: ${id}\nkind: lemma\nstatus: draft\ndomain: mathematics\ndeps: []\n---\n`);

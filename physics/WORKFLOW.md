@@ -430,8 +430,11 @@ Every already existing new-pair item/page carrier also requires exactly one
 ownership grant (at least 40 characters); `sha256` binds the actual current draft
 bytes. This grants subsequent scoped native authorship, not proof acceptance.
 Missing carriers need no entry. The lightweight actual identity/alias/page-home
-index rejects collisions even outside the canonical plan. Any foreign run's
-manifest claim remains blocking, including for a draft with an adoption entry.
+index rejects collisions even outside the canonical plan.
+Empty/null page inventory fields contribute no members; the page's identity
+remains indexed, and malformed non-null inventory shapes remain blocking.
+Any foreign run's manifest claim remains blocking, including for a draft with
+an adoption entry.
 Nonempty foreign `pipeline_run` markers also block adoption even when their
 manifest no longer exists; this route supplies no orphaned foreign-owner release.
 The relevant ownership projection is rechecked before install and interrupted

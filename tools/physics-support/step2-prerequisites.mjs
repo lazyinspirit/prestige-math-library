@@ -151,6 +151,7 @@ function ownershipProjection(root,run,subjects,pages) {
         assert(yaml().isScalar(pair.value)&&typeof pair.value.value==='string',`unreadable page identity ${path}`);claims.add(pair.value.value);
       }
       if(['items','examples'].includes(key)) {
+        if(pair.value==null||yaml().isScalar(pair.value)&&pair.value.value===null)continue;
         assert(yaml().isSeq(pair.value),`unreadable page inventory ${path}`);
         for(const value of pair.value.items){assert(yaml().isScalar(value)&&typeof value.value==='string',`unreadable page member ${path}`);members.push(value.value);}
       }
