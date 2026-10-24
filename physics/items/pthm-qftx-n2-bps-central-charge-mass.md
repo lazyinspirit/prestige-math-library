@@ -59,10 +59,10 @@ Then
 
 $$M\ge\sqrt2\,|n_ea(u)+n_ma_D(u)|.$$
 
-If equality holds, choose $\varphi\in\mathbb R$ with
-$e^{-i\varphi}z=|z|$ and define
-$A=Q^1_1-e^{i\varphi}(Q^2_2)^*$ and
-$A^\sharp=(Q^1_1)^*-e^{-i\varphi}Q^2_2$ on $\mathcal D$. Both
+If equality holds, then $|z|=M>0$; set $\omega=z/|z|$, so
+$|\omega|=1$ and $\overline{\omega} z=|z|$, and define
+$A=Q^1_1-\omega(Q^2_2)^*$ and
+$A^\sharp=(Q^1_1)^*-\overline{\omega}Q^2_2$ on $\mathcal D$. Both
 $A\psi$ and $A^\sharp\psi$ vanish for every $\psi\in\mathcal D$.
 Equality defines algebraic BPS saturation only; the statement asserts no
 state exists for any chosen charge label and no BPS state is stable.
@@ -104,7 +104,7 @@ $M\ge\|Z\|_{\mathrm{op}}=|z|
 =\sqrt2\,|n_ea(u)+n_ma_D(u)|$. [A1, F1, step 1.1, algebra]
 
 3.1 If equality holds, then $M=|z|$. The N=2 saturation conclusion in [F1],
-with $e^{-i\varphi}z=|z|$, gives $A\psi=A^\sharp\psi=0$ for every
+with $\omega=z/|z|$ and $\overline{\omega}z=|z|$, gives $A\psi=A^\sharp\psi=0$ for every
 $\psi\in\mathcal D$. The conclusion remains confined to this represented
 rest fiber: neither [F1] nor the period pairing asserts that the selected
 charge label occurs as a stable state. [F1, F2, step 2.1] ∎

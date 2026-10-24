@@ -17,7 +17,7 @@ dependency_roles:
   def-countable-choice: mathematical-premise
   def-qftx-superconformal-index: formulation-prerequisite
   pthm-qftx-superconformal-index-beta-independence: physical-result
-dependency_level: 4
+dependency_level: 5
 axiom_base: "ZF + AC_omega"
 proof_strategy: direct
 provenance:
@@ -25,13 +25,24 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Leonardo Rastelli and Shlomo S. Razamat, The supersymmetric index in four dimensions"
+    - title: "Leonardo Rastelli and Shlomo S. Razamat, The supersymmetric index in
+        four dimensions"
       url: "https://arxiv.org/pdf/1608.02965"
-      locator: "Full 43-page review; §2.3, Table 1 and equations (2.9)–(2.13), printed pp. 5–7: the chiral-letter weights, derivative towers, equation-of-motion qualification, and Fock-space plethystic exponential. The present example states its letter and convergence data explicitly and derives the product."
-    - title: "Justin Kinney, Juan Maldacena, Shiraz Minwalla, and Suvrat Raju, An Index for 4 Dimensional Super Conformal Theories"
+      locator: "Full 43-page review; §2.3, Table 1 and equations (2.9)–(2.13), printed
+        pp. 5–7: the chiral-letter weights, derivative towers,
+        equation-of-motion qualification, and Fock-space plethystic exponential.
+        The present example states its letter and convergence data explicitly
+        and derives the product."
+    - title: "Justin Kinney, Juan Maldacena, Shiraz Minwalla, and Suvrat Raju, An
+        Index for 4 Dimensional Super Conformal Theories"
       url: "https://arxiv.org/pdf/hep-th/0510251"
-      locator: "Full 60-page paper; §3, equations (3.1)–(3.4), printed pp. 13–15, for the right/left protected supercharge trace and cancellation framework."
-physical_scope: "A conditional free, ungauged four-dimensional N=1 protected-letter/Fock trace on unit S3 with the explicit charge and convergence data stated here. It is not a continuum construction, gauge-projected index, empirical observation, or universal formula for interacting theories."
+      locator: "Full 60-page paper; §3, equations (3.1)–(3.4), printed pp. 13–15, for
+        the right/left protected supercharge trace and cancellation framework."
+physical_scope: "A conditional free, ungauged four-dimensional N=1
+  protected-letter/Fock trace on unit S3 with the explicit charge and
+  convergence data stated here. It is not a continuum construction,
+  gauge-projected index, empirical observation, or universal formula for
+  interacting theories."
 verification:
   precheck: pending
 ---

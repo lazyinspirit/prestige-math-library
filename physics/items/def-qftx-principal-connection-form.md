@@ -95,7 +95,7 @@ Then $\omega$ is a smooth $\mathfrak g$-valued 1-form satisfying $\omega(Z_P)=Z$
 
 [F3] $\mathfrak g=T_eG$ with the bracket transported from left-invariant smooth vector fields is a finite-dimensional real Lie algebra. [[thm-the-tangent-space-at-the-identity-is-a-lie-algebra]]
 
-[F4] $\exp_G(tZ)$ is the one-parameter subgroup whose initial tangent is $Z$. [[def-exponential-map-of-a-lie-group]], [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]]
+[F4] For each $W\in\mathfrak g$, the exponential map is defined by $\exp_G(W)=\gamma_W(1)$, where $\gamma_W:\mathbb R\to G$ is the unique one-parameter subgroup with $\gamma_W'(0)=W$. [[def-exponential-map-of-a-lie-group]], [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]]
 
 [F5] $\operatorname{Ad}_g=d(C_g)_e$, where $C_g(h)=ghg^{-1}$, and $\operatorname{Ad}$ is a smooth group representation. [[def-conjugation-and-the-adjoint-representation-of-a-lie-group]], [[prop-adjoint-is-a-smooth-lie-group-representation]]
 
@@ -103,7 +103,7 @@ Then $\omega$ is a smooth $\mathfrak g$-valued 1-form satisfying $\omega(Z_P)=Z$
 
 ## Proof
 
-1.1 Write $p=s(x)a$ in an equivariant principal chart, with $s$ its local section and $a\in G$. Then $\phi_p(h)=p h=s(x)(a h)$; freeness and transitivity give bijectivity on the fibre, and this coordinate formula gives a smooth inverse. Hence $\phi_p:G\to P_x$, $h\mapsto p h$, is a diffeomorphism, so its differential at $e$ is a linear isomorphism $T_eG\to T_pP_x=V_pP$. The curve $t\mapsto p\exp_G(tZ)$ is $\phi_p\circ\exp_G(tZ)$, so its derivative is exactly $d(\phi_p)_eZ$; hence $\zeta_p$ is the stated isomorphism. [A1, F1, F3, F4, F6]
+1.1 Write $p=s(x)a$ in an equivariant principal chart, with $s$ its local section and $a\in G$. Then $\phi_p(h)=p h=s(x)(a h)$; freeness and transitivity give bijectivity on the fibre, and this coordinate formula gives a smooth inverse. Hence $\phi_p:G\to P_x$, $h\mapsto p h$, is a diffeomorphism, so its differential at $e$ is a linear isomorphism $T_eG\to T_pP_x=V_pP$. For each $t\in\mathbb R$, the curve $c_t(s):=\gamma_Z(ts)$ is a one-parameter subgroup with initial tangent $tZ$; uniqueness in [F4] gives $c_t=\gamma_{tZ}$. Thus $\exp_G(tZ)=\gamma_{tZ}(1)=\gamma_Z(t)$. The curve $t\mapsto p\exp_G(tZ)$ is therefore $\phi_p\circ\gamma_Z$, whose derivative at zero is $d(\phi_p)_eZ$; hence $\zeta_p$ is the stated isomorphism. [A1, F1, F3, F4, F6]
 
 2.1 In the same chart, $\zeta_p$ is the derivative of the smooth action map and its inverse is the derivative of the inverse fibre coordinate, so the family $\zeta$ and its inverse are smooth bundle maps. The complement $TP=VP\oplus H$ gives a smooth bundle projection $v$, so $\omega=\zeta^{-1}\circ v$ is a smooth fibrewise-linear 1-form. On a vertical vector $Z_P(p)=\zeta_p(Z)$, the projection is the vector itself; therefore $\omega(Z_P)=Z$. Also $v_pX=0$ exactly when $X\in H_p$, so $\ker\omega=H$. [A1, F1, F2, F3, step 1.1]
 

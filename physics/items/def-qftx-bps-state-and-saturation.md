@@ -43,7 +43,7 @@ Assume the Axiom of Countable Choice and use natural units $\hbar=c=1$. Let $N\g
 
 For $v\in\mathbb C^N$, set $\|v\|_2^2=\sum_I|v_I|^2$ and define $\|Z\|_{\mathrm{op}}=\sup_{\|v\|_2=1}\|Zv\|_2$. The unitary massive-fiber bound is $M\ge\|Z\|_{\mathrm{op}}$. A **BPS-saturated state** in this item is a nonzero vector $\psi\in\mathcal D$ in a specified massive rest fiber for which $M=\|Z\|_{\mathrm{op}}$. This term records algebraic saturation only; it does not assert that any specified charge is represented by a state, or that a saturating state exists, is stable, or occurs in a physical spectrum.
 
-For $N=2$, write $z=z^{12}$, so $Z=\begin{pmatrix}0&z\\-z&0\end{pmatrix}$ and $\|Z\|_{\mathrm{op}}=|z|$. Choose $\phi$ such that $e^{-i\phi}z=|z|$ and define $A=Q^1_1-e^{i\phi}(Q^2_2)^*$ and $A^\sharp=(Q^1_1)^*-e^{-i\phi}Q^2_2$ on $\mathcal D$. In this $N=2$ case, a nonzero domain vector saturates the bound if and only if both displayed combinations annihilate it. For unbounded charges, $A^\sharp$ denotes the displayed sum of individual adjoints and is not assumed to be the maximal-domain adjoint of $A$.
+For $N=2$, write $z=z^{12}$, so $Z=\begin{pmatrix}0&z\\-z&0\end{pmatrix}$ and $\|Z\|_{\mathrm{op}}=|z|$. If $z\ne0$, set $\omega=z/|z|$; if $z=0$, set $\omega=1$. The central-charge theorem gives $|\omega|=1$ and $\overline{\omega} z=|z|$. Define $A=Q^1_1-\omega(Q^2_2)^*$ and $A^\sharp=(Q^1_1)^*-\overline{\omega}Q^2_2$ on $\mathcal D$. In this $N=2$ case, a nonzero domain vector saturates the bound if and only if both displayed combinations annihilate it. For unbounded charges, $A^\sharp$ denotes the displayed sum of individual adjoints and is not assumed to be the maximal-domain adjoint of $A$.
 
 ## Definition references
 

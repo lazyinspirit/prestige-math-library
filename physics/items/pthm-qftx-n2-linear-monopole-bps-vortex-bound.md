@@ -123,6 +123,10 @@ If nonzero anywhere, the embedded profile is not stationary for that nonlinear m
 
 ## Proof
 
+**Given:** The full Axiom of Choice, the constant-metric linear truncation,
+the local field normalization and flux boundary data in the Statement, and
+the supplier claims and hypotheses [F1]–[F11].
+
 1.1 The inverse change of variables is $M=(q+p)/\sqrt2$ and $e^{i\beta}\overline{\widetilde M}=(q-p)/\sqrt2$. It preserves the sum of charged kinetic norms and gives $|M|^2+|\widetilde M|^2=s$. Set $z=e^{-i\beta}M\widetilde M$. The charged part of the potential in [F1] at linear $u$ is $2g^2|z-v^2|^2+g^2(|M|^2-|\widetilde M|^2)^2/2=g^2s^2/2+2g^2v^4-4g^2v^2\operatorname{Re}z$. Since $2\operatorname{Re}z=|q|^2-|p|^2$ and $\xi=2v^2$, this is $g^2(s-\xi)^2/2+2g^2\xi|p|^2$. The remaining scalar potential is $2|a|^2s$ and its gradient term is $g^{-2}|\partial_i a|^2$. [given, F1, algebra]
 
 2.1 For either charged field $f=q,p$, expand $|(D_1+iD_2)f|^2=|Df|^2-B|f|^2+i\{\partial_1(\bar fD_2f)-\partial_2(\bar fD_1f)\}$. Expanding $[B-g^2(\xi-s)]^2/(2g^2)$ gives $B^2/(2g^2)+g^2(\xi-s)^2/2+Bs-\xi B$. Step 1.1 shows all the required nonnegative densities are integrable. If $G(R)=\int_{|x|=R}(|Dq|^2+|Dp|^2)ds$, then [F9] and finite energy give $\int G(R)dR<\infty$. Hence there are increasing radii $R_j\to\infty$ with $R_jG(R_j)\to0$, since an eventual positive lower bound on $RG(R)$ would force logarithmic divergence. Uniform vacuum amplitudes and [F8] bound the boundary-current integral by $C\sqrt{R_jG(R_j)}\to0$. Integrating the two algebraic identities on those disks, using [F11], limiting flux $2\pi n$ and [F10] gives the stated whole-plane identity. For negative n, conjugation reverses flux and changes $D_1+iD_2$ to $D_1-iD_2$ without changing energy. [A1, F1, F2, F8, F9, F10, F11, step 1.1, algebra]

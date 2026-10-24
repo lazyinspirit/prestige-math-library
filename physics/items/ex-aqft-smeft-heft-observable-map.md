@@ -15,14 +15,12 @@ deps:
   - def-aqft-warsaw-basis-contract
   - def-aqft-chiral-power-counting
   - post-aqft-smeft-model
-  - def-axiom-of-choice
 dependency_roles:
   pthm-aqft-smeft-as-restricted-heft-branch: physical-result
   def-aqft-warsaw-basis-contract: formulation-prerequisite
   def-aqft-chiral-power-counting: formulation-prerequisite
   post-aqft-smeft-model: physical-assumption
-  def-axiom-of-choice: mathematical-premise
-axiom_base: "ZF + AC, inherited through the exact selected reductive/Reynolds mathematical premise chain for the finite invariant-operator contract; this finite calculation uses no choice principle."
+axiom_base: "ZF + AC_omega, inherited through the selected field-data suppliers; this finite calculation uses no additional choice principle."
 physical_scope: "A conditional tree-level calculation for the selected SMEFT coefficient point with only Q_HBox nonzero at dimension six. It derives a local scalar kinetic coefficient and charged-vector coupling in the nonzero-doublet patch; it is not a measurement, general HEFT result, continuum statement, or numerical uncertainty estimate."
 provenance:
   statement: ai-altered
@@ -45,7 +43,7 @@ verification:
 
 Use the selected mostly-plus, four-dimensional electroweak model with $v>0$, dimensionless gauge coupling $g>0$, and coefficient scale $\Lambda_{\mathrm{op}}>0$. Choose a real dimensionless coefficient $C_{H\Box}$, set all other dimension-six coefficients to zero, and retain
 $$Q_{H\Box}=(H^\dagger H)\Box(H^\dagger H),\qquad \Box=\eta^{\mu\nu}\partial_\mu\partial_\nu,$$
-with Lagrangian contribution $C_{H\Box}Q_{H\Box}/\Lambda_{\mathrm{op}}^2$. On the nonzero-doublet patch use the local unitary-gauge field configuration $U=I$ and $H=(0,(v+h)/\sqrt2)^T$. Impose compact support or boundary conditions that make the surface term in the action vanish.
+with Lagrangian contribution $C_{H\Box}Q_{H\Box}/\Lambda_{\mathrm{op}}^2$. On the nonzero-doublet patch choose the local gauge transformation $g_L(x)=U(x)^{-1}$ and $z(x)=1$, which sets $U=I$ and gives $H=(0,(v+h)/\sqrt2)^T$. Impose compact support or boundary conditions that make the surface term in the action vanish.
 
 The quadratic scalar coefficient after integration by parts is
 $$K(h)=1+\frac{2C_{H\Box}(v+h)^2}{\Lambda_{\mathrm{op}}^2}.$$
@@ -53,7 +51,7 @@ If
 $$K(0)=1+\frac{2C_{H\Box}v^2}{\Lambda_{\mathrm{op}}^2}>0,$$
 then $K$ is positive on some open interval about $h=0$. In that interval define the locally canonical radial coordinate $\widehat h(h)=\int_0^h\sqrt{K(s)}\,ds$. Define $W_\mu^\pm=(W_\mu^1\mp iW_\mu^2)/\sqrt2$ and define $m_W^2(h)$ as the coefficient in the vector mass term $-m_W^2(h)W_\mu^+W^{-\mu}$. The charged-vector mass parameter and its dimensionless linear coupling in this coordinate are
 $$m_W^2(h)=\frac{g^2(v+h)^2}{4},\qquad \kappa_W:=\left.\frac{v}{2m_W^2(0)}\frac{dm_W^2}{d\widehat h}\right|_{h=0}=\frac{1}{\sqrt{1+2C_{H\Box}v^2/\Lambda_{\mathrm{op}}^2}}.$$
-These are conditional tree-level coefficient predictions of this selected local action. Interpret $h=0$ as a vacuum only when the supplied total scalar potential has the local minimum required by the SMEFT model; otherwise these are coefficients at the reference configuration. No measured value, coefficient fit, loop correction, discarded-order bound, or general HEFT relation is asserted.
+These are conditional tree-level coefficient predictions of this selected local action. Interpret $h=0$ as a vacuum only when the full retained scalar potential $V_{\mathrm{ret}}(s)$, with $s=H^\dagger H$, has a local minimum at $s=v^2/2$ in the selected EFT field range. At this coefficient point every other dimension-six coefficient, including $C_H$, is zero and $Q_{H\Box}$ vanishes on constant fields, so $V_{\mathrm{ret}}=V_4$ here. This is an optional condition on the supplied potential parameters; otherwise these are coefficients at the reference configuration. No measured value, coefficient fit, loop correction, discarded-order bound, or general HEFT relation is asserted.
 
 ## Example references
 
@@ -64,8 +62,6 @@ These are conditional tree-level coefficient predictions of this selected local 
 [[pthm-aqft-smeft-as-restricted-heft-branch|Nonzero-doublet radial and Goldstone field map]]
 
 [[def-aqft-chiral-power-counting|Separate HEFT chiral and loop ordering]]
-
-[[def-axiom-of-choice|Full Axiom of Choice inherited by the selected invariant chain]]
 
 [Grzadkowski et al., full dimension-six operator article](https://arxiv.org/pdf/1008.4884)
 
@@ -85,7 +81,7 @@ These are conditional tree-level coefficient predictions of this selected local 
 
 [F4] [[def-aqft-chiral-power-counting]]: canonical dimension and HEFT chiral/loop ordering are distinct formal countings, neither of which supplies a numerical remainder estimate.
 
-[F5] [[post-aqft-smeft-model]]: if $v$ is interpreted as a vacuum radius, the supplied scalar-potential coefficients are assumed to make $H^\dagger H=v^2/2$ a local minimum; the model does not derive this parameter condition.
+[F5] [[post-aqft-smeft-model]]: a vacuum-radius interpretation requires a local minimum of the full retained potential $V_{\mathrm{ret}}=V_4-\mathcal L_{\mathrm{add}}^{(0)}$ at $s=v^2/2$ in the selected EFT field range, with the sign fixed by $\mathcal L=-V_{\mathrm{ret}}$ on constant scalar fields. At this example's coefficient point $C_H=0$ and the only retained dimension-six addition $Q_{H\Box}$ vanishes on such fields, so the condition is on $V_4$ here. The model does not derive this parameter condition or global stability.
 
 [A1] Only the displayed dimension-six coefficient is nonzero; all coefficient values are selected model parameters, not measurements.
 
@@ -93,15 +89,13 @@ These are conditional tree-level coefficient predictions of this selected local 
 
 [A3] $K(0)>0$; continuity of the displayed polynomial then gives an open interval around zero on which $K(h)>0$.
 
-[A4] [[def-axiom-of-choice]]: the full Axiom of Choice is inherited from the exact selected reductive/Reynolds premise chain; it is not used in this finite calculation.
-
 ## Proof
 
-**Proof technique:** Evaluate the selected operator in radial gauge, integrate by parts, and normalize the scalar coordinate locally at the vacuum.
+**Proof technique:** Evaluate the selected operator at $U=I$, integrate by parts, and normalize the scalar coordinate locally at the reference point.
 
-**Given:** [F1]–[F4] and [A1]–[A4].
+**Given:** [F1]–[F5] and [A1]–[A3].
 
-1.1 In the stated unitary-gauge configuration, $H^\dagger H=(v+h)^2/2$. Its d'Alembertian is $\Box(H^\dagger H)=\partial_\mu((v+h)\partial^\mu h)$. Therefore the selected operator is the product $(v+h)^2\partial_\mu h\partial^\mu h/2+(v+h)^3\Box h/2$ before integration by parts; equivalently, writing $s=H^\dagger H$, it is $s\Box s$. [given, F2, F3, algebra]
+1.1 In the stated $U=I$ configuration, $H^\dagger H=(v+h)^2/2$. Its d'Alembertian is $\Box(H^\dagger H)=\partial_\mu((v+h)\partial^\mu h)$. Therefore the selected operator is the product $(v+h)^2\partial_\mu h\partial^\mu h/2+(v+h)^3\Box h/2$ before integration by parts; equivalently, writing $s=H^\dagger H$, it is $s\Box s$. [given, F2, F3, algebra]
 
 2.1 Integrating $s\Box s$ over spacetime and applying the divergence theorem to $\partial_\mu(s\partial^\mu s)$ gives $\int s\Box s=-\int\partial_\mu s\partial^\mu s$, since the boundary integral vanishes by [A2]. Here $\partial_\mu s=(v+h)\partial_\mu h$, so the action contribution is $-C_{H\Box}\int (v+h)^2\partial_\mu h\partial^\mu h/\Lambda_{\mathrm{op}}^2$. The sign uses the stated $\Box$ and mostly-plus contraction. [given, A2, step 1.1, algebra]
 
@@ -111,4 +105,4 @@ These are conditional tree-level coefficient predictions of this selected local 
 
 4.1 On an interval with $K>0$, $\widehat h'(h)=\sqrt{K(h)}>0$ and $\widehat h(0)=0$. For $h_1<h_2$, $\widehat h(h_2)-\widehat h(h_1)=\int_{h_1}^{h_2}\sqrt{K(s)}\,ds>0$, so $\widehat h$ is strictly increasing and maps a neighborhood of zero onto an interval with a continuous inverse. At every $h_0$ in this interval, the inverse difference quotient tends to $1/\widehat h'(h_0)$; hence its derivative is $1/\sqrt{K(\widehat h^{-1}(y))}$. This derivative is continuous, and induction in that identity makes the inverse smooth because $K$ and the square root are smooth where $K>0$. Also $\widehat h(h)/h\to\sqrt{K(0)}$ as $h\to0$. Hence the difference quotient in the new coordinate is
 $$\lim_{h\to0}\frac{m_W^2(h)-m_W^2(0)}{\widehat h(h)-\widehat h(0)}=\frac{(dm_W^2/dh)|_0}{\widehat h'(0)}=\frac{g^2v/2}{\sqrt{K(0)}}.$$
-Since $2m_W^2(0)/v=g^2v/2$, the defined coupling is $\kappa_W=1/\sqrt{K(0)}$, which yields the displayed expression. If this reference point is called a vacuum, the supplied potential must satisfy [F5]; otherwise the result is only a local expansion coefficient. It supplies no empirical measurement or numerical bound on discarded orders. [given, F4, F5, A1, A3, A4, step 3.1, step 2.2, algebra] ∎
+Since $2m_W^2(0)/v=g^2v/2$, the defined coupling is $\kappa_W=1/\sqrt{K(0)}$, which yields the displayed expression. If this reference point is called a vacuum, the full retained potential must satisfy the optional local-minimum condition [F5]; at this coefficient point it is $V_4$, since [A1] sets $C_H=0$ and $Q_{H\Box}$ vanishes on constant fields. Otherwise the result is only a local expansion coefficient. The kinetic normalization does not prove potential stationarity, local stability, or global stability. It supplies no empirical measurement or numerical bound on discarded orders. [given, F4, F5, A1, A3, step 3.1, step 2.2, algebra] ∎

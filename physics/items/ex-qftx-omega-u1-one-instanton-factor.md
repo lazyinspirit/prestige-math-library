@@ -8,7 +8,7 @@ dependency_level: 7
 domain: physics
 library: physics
 category: advanced-qft-and-supersymmetry
-axiom_base: "ZF + the choice strength inherited from the normalized equivariant Borel–Moore suppliers; this finite example uses no choice."
+axiom_base: "ZF + the choice strength inherited from the normalized equivariant Borel–Moore and topological Chern/Euler suppliers; this finite example uses no choice."
 physical_scope: "A finite formal mass-inserted coefficient on the explicit rank-one, charge-one stable ADHM quotient. It is not a specialization of the adopted U(2) S4 model and makes no continuum path-integral claim."
 deps:
   - lem-qftx-u1-one-instanton-adhm-space
@@ -29,7 +29,7 @@ verification:
 
 ## Example
 
-For the explicit $k=N=1$ stable scalar ADHM quotient and generic rotation weights with $\epsilon_1\epsilon_2\ne0$, extend the rotation torus by a flavor circle with additive mass $\widetilde m$. The unique fixed point has tangent weights $\epsilon_1,\epsilon_2$, so the charge-one contribution of the top-Chern-class insertion for the inverse flavor line is
+For the explicit $k=N=1$ stable scalar ADHM quotient and generic rotation weights with $\epsilon_1\epsilon_2\ne0$, extend the rotation torus by a flavor circle. The rotation weights $\epsilon_1,\epsilon_2$ and additive flavor mass $\widetilde m$ each have mass dimension one. Let $q$ be a dimensionless formal variable marking instanton charge. The unique fixed point has tangent weights $\epsilon_1,\epsilon_2$, so the charge-one contribution of the top-Chern-class insertion for the inverse flavor line is
 $$q I_{1,1}^{\mathrm{adj}}(\widetilde m)=q\frac{(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)}{\epsilon_1\epsilon_2}.$$
 The diagram shows the unique one-box partition, with the first coordinate horizontal for $B_1$ and the second vertical for $B_2$. This is a finite formal rank-one calculation only; the adopted S4 postulate in this batch is specifically $U(2)$.
 
@@ -38,8 +38,8 @@ The diagram shows the unique one-box partition, with the first coordinate horizo
   \draw[step=1,gray] (0,0) grid (1,1);
   \draw[fill=blue!20] (0,0) rectangle (1,1);
   \node at (0.5,0.5) {$Y_1=\square$};
-  \draw[->] (0,0) -- (1.6,0) node[right] {$i\;(B_1)$};
-  \draw[->] (0,0) -- (0,1.6) node[above] {$j\;(B_2)$};
+  \draw[->] (0,0) -- (1.6,0) node[right] {$n_1\;(B_1)$};
+  \draw[->] (0,0) -- (0,1.6) node[above] {$n_2\;(B_2)$};
 \end{tikzpicture}
 ~~~
 
@@ -51,7 +51,7 @@ The diagram shows the unique one-box partition, with the first coordinate horizo
 
 **Given:** The explicit scalar quotient with $k=N=1$, rotation weights $\epsilon_1,\epsilon_2$, and formal flavor weight $\widetilde m$.
 
-[F1] [[lem-qftx-u1-one-instanton-adhm-space]]: the quotient is $\mathbb C^2$, has one fixed point with tangent weights $\epsilon_1,\epsilon_2$, and its mass-inserted charge-one coefficient is the displayed rational function.
+[F1] The current draft [[lem-qftx-u1-one-instanton-adhm-space]] has a complete authored local proof: its stable-locus map satisfies the classical geometric quotient conditions, the quotient is $\mathbb C^2$ with one fixed point and tangent weights $\epsilon_1,\epsilon_2$, and the Borel-descended top Chern insertion has the stated mass-shifted weight product and charge-one coefficient.
 
 ## Verification
 

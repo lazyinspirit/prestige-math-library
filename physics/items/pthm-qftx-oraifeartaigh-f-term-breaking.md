@@ -56,7 +56,7 @@ where $k,m\in\mathbb C\setminus\{0\}$, $y\in\mathbb C$ is arbitrary, and $[\phi_
 
 $$V(\phi_1,\phi_2,\phi_3)=\left|-k+\frac y2\phi_3^2\right|^2+|m\phi_3|^2+|m\phi_2+y\phi_1\phi_3|^2.$$
 
-Here “tree-level” means this classical potential before quantum-loop corrections. At a field value, F-term supersymmetry is unbroken exactly when all eliminated auxiliary fields $F^i=-\overline{\partial_iW}$ vanish; otherwise it is F-term broken.
+These pointwise field values and eliminated auxiliary values belong to the ordinary complex bosonic sector of the model postulate, obtained by setting fermions and all positive coefficient-algebra degrees to zero; no order on nilpotent formal coefficients is used. Here “tree-level” means this classical potential before quantum-loop corrections. At a field value, F-term supersymmetry is unbroken exactly when all eliminated auxiliary fields $F^i=-\overline{\partial_iW}$ vanish; otherwise it is F-term broken.
 
 Put $a=|k|>0$, $b=|m|^2>0$, and $c=|y|$. If $b\ge ac$, including $y=0$, the global minimum is $V_{\min}=a^2=|k|^2$, and all minimizing field values are $\phi_3=\phi_2=0$ with arbitrary $\phi_1\in\mathbb C$. If $0<b<ac$, then $c>0$ and
 
@@ -94,7 +94,7 @@ The ordered-real-field fact $2>0$ used to distinguish the two square roots: [[th
 
 **Given:** The canonical three-field model and its classical pointwise zero-derivative potential in the Statement; all field values range over $\mathbb C^3$, and $k,m\ne0$.
 
-[A1] [[post-qftx-n1-wess-zumino-model]]: the adopted rigid N=1 model has a holomorphic superpotential, a canonical Kähler special case, engineering dimensions $[\phi_i]=M$, $[W]=M^3$, smooth compactly supported spacetime component fields, and the displayed algebraic auxiliary Lagrangian. The corrected physical action brackets are fixed multiples of the raw ordered measures, with physical auxiliary components satisfying F_raw=2F. This gives the displayed positive auxiliary component interface; this proof then applies that interface without any quantum measure inference. Native owner readiness remains separately controlled.
+[A1] [[post-qftx-n1-wess-zumino-model]]: the adopted rigid N=1 model has a holomorphic superpotential, a canonical Kähler special case, engineering dimensions $[\phi_i]=M$, $[W]=M^3$, smooth compactly supported spacetime component fields, and the displayed algebraic auxiliary Lagrangian. Its explicit component conversion gives the complex bosonic auxiliary Lagrangian with $F_{\mathrm{raw}}=2F$, physical D bracket $-I_D/4$, and physical F bracket $I_F/2$. Its full formal even auxiliary coefficient is unrestricted before taking this ordinary complex sector. This proof uses the resulting complex scalar potential, without ordering nilpotent coefficients or inferring a quantum measure.
 
 [F1] [[pthm-qftx-n1-f-term-potential]]: for the canonical Kähler metric, $V_F=\sum_i|W_i|^2$, and the algebraic auxiliary fields satisfy $F^i=-\overline{W_i}$.
 

@@ -33,7 +33,13 @@ verification:
 
 ## Example
 
-Let $\mathcal I$ be the complex finite semisimple fusion category with simple objects $\mathbf 1,\psi,\sigma$, fusion rules $\psi\otimes\psi\cong\mathbf 1$, $\psi\otimes\sigma\cong\sigma\otimes\psi\cong\sigma$, and $\sigma\otimes\sigma\cong\mathbf 1\oplus\psi$. Encode the intermediate labels by $\epsilon(\mathbf 1)=0$ and $\epsilon(\psi)=1$. Its coherent Ising associator has non-identity coefficients $[F^{\sigma\sigma\sigma}_{\sigma}]_{ab}=2^{-1/2}(-1)^{\epsilon(a)\epsilon(b)}$ for $a,b\in\{\mathbf 1,\psi\}$, $[F^{\psi\sigma\psi}_{\sigma}]_{\sigma\sigma}=-1$, and $[F^{\sigma\psi\sigma}_{\psi}]_{\sigma\sigma}=-1$; every other allowed associator coefficient is $1$. The simple object $\sigma$ has no right tensor inverse and is therefore a simple non-invertible object. This is an abstract algebraic example and makes no physical-realization claim.
+A zero object is an object that is both initial and terminal. A monomorphism $u:Y\to X$ is a morphism such that, for every object $Z$ and morphisms $f,g:Z\to Y$, $u\circ f=u\circ g$ implies $f=g$. A subobject of $X$ is an isomorphism class of monomorphisms into $X$, and $X$ is simple if it is nonzero and has no subobjects other than the zero subobject and $X$ itself. Let $\mathcal I$ have as objects finite direct sums of the labels $\mathbf 1,\psi,\sigma$. Its bilinear tensor product on labels is
+
+$$
+\mathbf 1\otimes a=a\otimes\mathbf 1=a,\qquad \psi\otimes\psi=\mathbf 1,\qquad \psi\otimes\sigma=\sigma\otimes\psi=\sigma,\qquad \sigma\otimes\sigma=\mathbf 1\oplus\psi.
+$$
+
+Morphisms are block-diagonal across the three labels, with an arbitrary finite complex matrix on each equal-label block and zero on unequal-label blocks; composition is blockwise matrix multiplication. Each label is simple by the stated criterion. The tensor product is bilinear, the unit is $\mathbf 1$, and the unitors are strict. Choose one basis vector in each allowed one-dimensional fusion space. An object $X$ is tensor-invertible if some object $E$ satisfies both $X\otimes E\cong\mathbf 1$ and $E\otimes X\cong\mathbf 1$; otherwise it is non-invertible. A right tensor inverse of $\sigma$ means an object $E$ with $\sigma\otimes E\cong\mathbf 1$. Encode intermediate labels by $\epsilon(\mathbf 1)=0$ and $\epsilon(\psi)=1$. The associator $\alpha_{a,b,c}:(a\otimes b)\otimes c\to a\otimes(b\otimes c)$ has coefficients $[F^{\sigma\sigma\sigma}_{\sigma}]_{ab}=2^{-1/2}(-1)^{\epsilon(a)\epsilon(b)}$ for $a,b\in\{\mathbf 1,\psi\}$, $[F^{\psi\sigma\psi}_{\sigma}]_{\sigma\sigma}=-1$, and $[F^{\sigma\psi\sigma}_{\psi}]_{\sigma\sigma}=-1$; every other coefficient is $1$ when all required fusion channels are allowed and $0$ otherwise. Since $\sigma$ has no right tensor inverse, it has no two-sided tensor inverse and is non-invertible. This is an abstract algebraic example and makes no physical-realization claim.
 
 ## Example references
 

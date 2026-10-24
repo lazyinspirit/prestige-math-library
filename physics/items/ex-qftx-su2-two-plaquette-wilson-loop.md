@@ -37,7 +37,7 @@ proof_strategy: direct
 
 ## Example
 
-Assume $\mathrm{AC}_\omega$. Take a free-boundary $SU(2)$ square lattice containing a rectangle two plaquettes wide and one plaquette high, with $0<\beta\leq1$ and the defining normalized Wilson loop. Its enclosed area is $A=2$ plaquettes, so the exact finite-lattice expectation is $\langle W(C)\rangle_\beta=\lambda(\beta)^2=\beta^2/16+O(\beta^4)$ as $\beta\downarrow0$, where $\lambda(\beta)$ is the one-plaquette coefficient from the finite SU(2) Wilson measure.
+Assume $\mathrm{AC}_\omega$. Take a free-boundary $SU(2)$ square lattice containing a rectangle two plaquettes wide and one plaquette high, and let $C$ follow its oriented face boundary counterclockwise from the lower-left corner. For $0<\beta\leq1$ and the defining normalized Wilson loop, its enclosed area is $A=2$ plaquettes, so the exact finite-lattice expectation is $\langle W(C)\rangle_\beta=\lambda(\beta)^2=\beta^2/16+O(\beta^4)$ as $\beta\downarrow0$, where $\lambda(\beta)$ is the one-plaquette coefficient from the finite $SU(2)$ Wilson measure.
 
 ## Example references
 

@@ -32,17 +32,20 @@ provenance:
 physical_scope: Source-reported CMS global dimension-six SMEFT fit combining seven CMS measurement sets and electroweak precision inputs. This item does not reanalyse the component datasets or claim that the fit tension is evidence for new physics.
 empirical_result:
   observation: >-
-    CMS reports a 2.5% compatibility p-value for its 43-direction fit, rising
-    to 27% when the inclusive-jet input is removed. The collaboration
-    attributes the main tension to inclusive-jet data and notes PDF sensitivity.
-    These are conditional fit-calibration results, not probabilities that the
-    Standard Model is true or false.
+    CMS reports a 2.5% Standard Model compatibility p-value for its
+    43-direction fit, rising to 27% when the inclusive-jet input is removed.
+    The collaboration attributes the main tension to inclusive-jet data and
+    notes PDF sensitivity. The global test statistic and null calibration for
+    these values are not reconstructed here; they are not inferred from the
+    coefficient-interval calibration.
   uncertainty: >-
     The fit uses available experimental likelihoods and simplified likelihoods
     for other inputs, with nuisance correlations according to source
     availability. The source reports pseudoexperiment coverage studies with
     some slight under- or over-coverage; raw events and full component
-    likelihoods are not independently reconstructed here.
+    likelihoods are not independently reconstructed here. Those studies
+    concern coefficient-interval coverage and do not reconstruct the null
+    calibration of the separate Standard Model compatibility p-values.
   conditions: >-
     Seven CMS measurement sets at 13 TeV with 36.3 or 138 fb^-1, supplemented
     by electroweak precision observables; 64 individual dimension-six
@@ -75,7 +78,7 @@ The CMS collaboration combines seven CMS measurement sets with proton-proton col
 
 ## Procedure
 
-The analysis uses the experimental likelihood where an input measurement supplies one and a simplified likelihood for other inputs. Nuisance parameters represent modeled experimental and theory uncertainties; their correlations are included according to the available input information. The fit profiles nuisance parameters, meaning it maximizes over them at each fixed Wilson-coefficient value. CMS reports constraints from linear-only dimension-six predictions as its main results and presents linear-plus-quadratic results separately. Its compatibility test uses the collaboration's stated likelihood-ratio statistic and calibration; the resulting $p$-value is conditional on these choices.
+The analysis uses the experimental likelihood where an input measurement supplies one and a simplified likelihood for other inputs. Nuisance parameters represent modeled experimental and theory uncertainties; their correlations are included according to the available input information. The fit profiles nuisance parameters, meaning it maximizes over them at each fixed Wilson-coefficient value. CMS reports constraints from linear-only dimension-six predictions as its main results and presents linear-plus-quadratic results separately. For coefficient intervals, the paper states a profile-likelihood-ratio statistic and an asymptotic interval procedure, with pseudoexperiment coverage studies for selected fits. The results section separately reports the 2.5% and 27% Standard Model compatibility p-values for the 43-direction fit and the fit without inclusive-jet input, respectively, but does not identify a global test statistic or its null calibration there. This record does not reconstruct that calibration or infer it from the coefficient-interval procedure.
 
 ## Procedure references
 
@@ -89,7 +92,7 @@ The analysis uses the experimental likelihood where an input measurement supplie
 
 ## Observations
 
-For its 43-direction fit, CMS reports a Standard Model compatibility $p$-value of $2.5\%$. The reported value rises to $27\%$ when the inclusive-jet input is removed. The paper identifies inclusive-jet data as the main source of the tension and notes sensitivity to parton-distribution-function choices. This is a fit-specific departure from the collaboration's null calibration, not evidence that new physics or a particular operator has been observed and not the probability that the Standard Model is false.
+For its 43-direction fit, CMS reports a Standard Model compatibility $p$-value of $2.5\%$. The reported value rises to $27\%$ when the inclusive-jet input is removed. The paper identifies inclusive-jet data as the main source of the tension and notes sensitivity to parton-distribution-function choices. The global test statistic and its null calibration are not reconstructed here, and the values are not assigned the coefficient-interval calibration. This is a fit-specific source-reported statistical result, not evidence that new physics or a particular operator has been observed and not the probability that the Standard Model is false.
 
 ## Observations references
 

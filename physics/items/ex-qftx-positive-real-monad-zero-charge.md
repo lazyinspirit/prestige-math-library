@@ -64,10 +64,14 @@ one map to or from it; stability and costability hold vacuously and
 $U(0)$ is the trivial group.
 [[def-qftx-adhm-linear-data-stability-and-regularity]]
 
-[F2] The finite monad resolution has
-$\operatorname{ch}(F)=N-kH^2$, $c_2(F)=kH^2$, and
-$\chi(F)=N-2k$; the topological charge statement is conditional on a
-pullback bundle.
+[F2] The finite monad resolution has algebraic
+$\operatorname{ch}(F)=N-kH_{\rm alg}^2$, topological
+$c_2^{\rm top}(F)=kH_{\rm top}^2$, and $\chi(F)=N-2k$. The charge supplier
+defines the twistor projection by
+$\pi([v])=\operatorname{span}_{\mathbb C}(v,\jmath v)$, with fibers the real
+incidence lines, and proves $\pi^*u=H_{\rm top}^2$ in the positive orientation;
+its conclusion $c_2(E)=ku$ is conditional on the topological pullback
+$F\cong\pi^*E$.
 [[lem-qftx-positive-real-monad-charge-normalization]]
 
 ## Proof

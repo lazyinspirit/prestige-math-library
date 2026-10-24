@@ -39,11 +39,11 @@ verification:
 
 ## Example
 
-Let $M>0$, $\phi\in\mathbb R$, and $z=M e^{i\phi}$. On $\mathcal H=\Lambda^*\mathbb C^2$ with the orthonormal occupation basis and fermionic operators $a_1,a_2$ defined by $a_1|n_1,n_2\rangle=n_1|0,n_2\rangle$, $a_2|n_1,n_2\rangle=(-1)^{n_1}n_2|n_1,0\rangle$, set $P^0=MI$, $P^j=0$, $Z^{12}=z$, $Z^{21}=-z$, and
+Let $M>0$ and $z\in\mathbb C$ satisfy $|z|=M$, and set $\omega=z/|z|$. On $\mathcal H=\Lambda^*\mathbb C^2$ with the orthonormal occupation basis and fermionic operators $a_1,a_2$ defined by $a_1|n_1,n_2\rangle=n_1|0,n_2\rangle$, $a_2|n_1,n_2\rangle=(-1)^{n_1}n_2|n_1,0\rangle$, set $P^0=MI$, $P^j=0$, $Z^{12}=z$, $Z^{21}=-z$, and
 
-$$Q^1_1=\sqrt{2M}a_1,\quad Q^1_2=\sqrt{2M}a_2,\quad Q^2_2=e^{i\phi}\sqrt{2M}a_1^*,\quad Q^2_1=-e^{i\phi}\sqrt{2M}a_2^*,$$
+$$Q^1_1=\sqrt{2M}a_1,\quad Q^1_2=\sqrt{2M}a_2,\quad Q^2_2=\omega\sqrt{2M}a_1^*,\quad Q^2_1=-\omega\sqrt{2M}a_2^*,$$
 
-with every barred charge the actual Hilbert adjoint and parity $(-1)^{n_1+n_2}$. These operators give a four-dimensional positive rest fiber with $M=|z|$. The two combinations $Q^1_1-e^{i\phi}(Q^2_2)^*$ and $Q^1_2+e^{i\phi}(Q^2_1)^*$ vanish identically. Use natural units $\hbar=c=1$, so $M$ and $z$ have mass dimension one and each displayed supercharge has mass dimension one-half. This is a finite-dimensional algebra representation, not a claim about a normalizable sharp-momentum subspace in a full spacetime representation.
+with every barred charge the actual Hilbert adjoint and parity $(-1)^{n_1+n_2}$. These operators give a four-dimensional positive rest fiber with $M=|z|$. The two combinations $Q^1_1-\omega(Q^2_2)^*$ and $Q^1_2+\omega(Q^2_1)^*$ vanish identically. Use natural units $\hbar=c=1$, so $M$ and $z$ have mass dimension one and each displayed supercharge has mass dimension one-half. This is a finite-dimensional algebra representation, not a claim about a normalizable sharp-momentum subspace in a full spacetime representation.
 
 ## Example references
 
@@ -63,11 +63,11 @@ Real and complex inner-product spaces and their induced length: [[def-real-and-c
 
 ## Facts & Assumptions
 
-**Given:** $M>0$, $z=Me^{i\phi}$, the finite two-mode Fock space, its CAR operators, and the N=2 mostly-plus rest algebra.
+**Given:** $M>0$, $z\in\mathbb C$ with $|z|=M$, $\omega=z/|z|$, the finite two-mode Fock space, its CAR operators, and the N=2 mostly-plus rest algebra.
 
 [F1] [[def-qftx-super-poincare-algebra-4d]]: at rest, $\{Q^I_\alpha,(Q^J_\beta)^*\}=2M\delta_{\alpha\beta}\delta^{IJ}I$, $\{Q^I_\alpha,Q^J_\beta\}=2\epsilon_{\alpha\beta}Z^{IJ}$, and $\epsilon_{12}=1$.
 
-[F2] [[thm-qftx-n-extended-central-charge-bounds]]: for $N=2$ and $z=|z|e^{i\phi}$, the algebraic anticommutator of $Q^1_1-e^{i\phi}(Q^2_2)^*$ with its specified adjoint combination is $4(M-|z|)I$; at equality both combinations annihilate every vector in the common domain.
+[F2] [[thm-qftx-n-extended-central-charge-bounds]]: for $N=2$, the normalized scalar $\omega=z/|z|$ when $z\ne0$ satisfies $\omega\bar\omega=1$ and $\bar\omega z=|z|$; the corresponding algebraic anticommutator is $4(M-|z|)I$, and at equality both combinations annihilate every vector in the common domain.
 
 [F4] [[thm-of-square-roots]]: $2M>0$ has a positive square root.
 
@@ -78,6 +78,6 @@ Real and complex inner-product spaces and their induced length: [[def-real-and-c
 
 1.1 The displayed occupation rules and their adjoints give the two-mode CAR on each of the four basis vectors: for equal mode labels, creation followed by annihilation and annihilation followed by creation are the projections onto occupied and empty states, whose sum is the identity; for distinct labels, the two orders of changing the different occupations have opposite signs from the factor $(-1)^{n_1}$. Repeated creation or annihilation is zero. Therefore $\{a_i,a_j^*\}=\delta_{ij}I$ and $\{a_i,a_j\}=\{a_i^*,a_j^*\}=0$. The same-mode mixed charges in the rest relation now give $2M I$, while every mismatched label is either a distinct-mode anticommutator or a repeated annihilator/creator and is zero. This verifies the mixed relation in [F1]. [given, F1, F4, algebra]
 
-2.1 For the same-flavor pairs, two annihilators or two creators anticommute by step 1.1, so their central bracket is zero. The two nonzero distinct-flavor brackets are $\{Q^1_1,Q^2_2\}=2M e^{i\phi}\{a_1,a_1^*\}=2zI$ and $\{Q^1_2,Q^2_1\}=-2M e^{i\phi}\{a_2,a_2^*\}=-2zI$. Every other distinct-flavor pair is either a distinct-mode anticommutator or a square of one creation/annihilation operator, and so has zero anticommutator. These are exactly $2\epsilon_{\alpha\beta}Z^{IJ}$ with $\epsilon_{12}=1$ and antisymmetric $Z$; taking Hilbert adjoints gives the conjugate barred relations. [F1, step 1.1, algebra]
+2.1 Since $|z|=M>0$, the definition $\omega=z/|z|$ gives $z=M\omega$ and the central-charge theorem [F2] gives $\omega\bar\omega=1$. For the same-flavor pairs, two annihilators or two creators anticommute by step 1.1, so their central bracket is zero. The two nonzero distinct-flavor brackets are $\{Q^1_1,Q^2_2\}=2M\omega\{a_1,a_1^*\}=2zI$ and $\{Q^1_2,Q^2_1\}=-2M\omega\{a_2,a_2^*\}=-2zI$. Every other distinct-flavor pair is either a distinct-mode anticommutator or a square of one creation/annihilation operator, and so has zero anticommutator. These are exactly $2\epsilon_{\alpha\beta}Z^{IJ}$ with $\epsilon_{12}=1$ and antisymmetric $Z$; taking Hilbert adjoints gives the conjugate barred relations. [F1, F2, step 1.1, algebra]
 
-3.1 Since $(Q^2_2)^*=e^{-i\phi}\sqrt{2M}a_1$ and $(Q^2_1)^*=-e^{-i\phi}\sqrt{2M}a_2$, direct substitution gives $Q^1_1-e^{i\phi}(Q^2_2)^*=0$ and $Q^1_2+e^{i\phi}(Q^2_1)^*=0$. Also $|z|=M$, so the bound in [F2] is saturated and its stated annihilation conclusion agrees with these explicit zero operators. The Hilbert space has two even and two odd basis vectors, and all domains equal the full finite-dimensional space. [F2, step 1.1, step 2.1, algebra] ∎
+3.1 Since $(Q^2_2)^*=\bar\omega\sqrt{2M}a_1$ and $(Q^2_1)^*=-\bar\omega\sqrt{2M}a_2$, direct substitution and $\omega\bar\omega=1$ give $Q^1_1-\omega(Q^2_2)^*=0$ and $Q^1_2+\omega(Q^2_1)^*=0$. The bound in [F2] is saturated because $|z|=M$, and its annihilation conclusion agrees with these explicit zero operators. The Hilbert space has two even and two odd basis vectors, and all domains equal the full finite-dimensional space. [F2, step 1.1, step 2.1, algebra] ∎

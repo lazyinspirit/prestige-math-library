@@ -33,13 +33,13 @@ verification:
 
 ## Example
 
-Let $\mathcal H_3=\ell^2(\mathbb Z_2^3)$ with orthonormal basis $|h_1,h_2,h_3\rangle$, and define $Z_j|\mathbf h\rangle=(-1)^{h_j}|\mathbf h\rangle$ and $X_j|\mathbf h\rangle=|\mathbf h+\mathbf e_j\rangle$. Use periodic indices and the finite Hamiltonian $H_3=-J\sum_{j=1}^3(Z_jZ_{j+1}+X_j)$, where $J>0$ has energy units and $\hbar=1$. Euclidean propagation through $s\ge0$ is $e^{-sH_3}$. Define $D_3$ from this ring to its half-shifted dual by
+Let $\mathcal H_3=\ell^2(\mathbb Z_2^3)$ with orthonormal basis $|h_1,h_2,h_3\rangle$, and define $Z_j|\mathbf h\rangle=(-1)^{h_j}|\mathbf h\rangle$ and $X_j|\mathbf h\rangle=|\mathbf h+\mathbf e_j\rangle$. Use periodic indices and the finite Hamiltonian $H_3=-J\sum_{j=1}^3(Z_jZ_{j+1}+X_j)$, where $J>0$ has energy units and $\hbar=1$. Euclidean propagation through $s\ge0$ is $e^{-sH_3}$. Define $K_3$ from this ring to its half-shifted dual by
 
 $$
-\langle\widehat{\mathbf h}|D_3|\mathbf h\rangle=2^{-3/2}(-1)^{\sum_{j=1}^{3}\widehat h_{j-1/2}(h_{j-1}+h_j)},\qquad h_0=h_3,
+\langle\widehat{\mathbf h}|K_3|\mathbf h\rangle=2^{-3/2}(-1)^{\sum_{j=1}^{3}\widehat h_{j-1/2}(h_{j-1}+h_j)},\qquad h_0=h_3,
 $$
 
-and identify dual sites with original sites by the half-shift. Let $P_3=X_1X_2X_3$ and $v=|000\rangle-|111\rangle$. The defect inserted on a Euclidean time slice is topological under the declared slides within gaps of fixed insertions, satisfies $D_3^2=I+P_3$, and annihilates $v$ after two fusions. Therefore this exact finite-model defect is non-invertible. No continuum or empirical claim is made.
+and use the supplier's reflection identification $R_3|\widehat{\mathbf h}\rangle=|\mathbf r\rangle$, $r_j=\widehat h_{1/2-j}$, to set $D_3=R_3K_3$. Its complete admissible defect-bearing correlators are exactly the finite decorated tensor contractions, ordinary insertions and external boundary tensors of the supplier at $L=3$; allowed slides keep the rest of that complete input fixed. Let $P_3=X_1X_2X_3$ and $v=|000\rangle-|111\rangle$. The defect inserted on a Euclidean time slice is topological under the declared slides within gaps of fixed insertions, satisfies $D_3^2=I+P_3$, and annihilates $v$ after two fusions. Therefore this exact finite-model defect is non-invertible. No continuum or empirical claim is made.
 
 ## Example references
 
@@ -49,7 +49,7 @@ and identify dual sites with original sites by the half-shift. Let $P_3=X_1X_2X_
 
 ## Facts & Assumptions
 
-**Given:** Adopt the three-site Hilbert space, Hamiltonian, half-shifted duality kernel, Euclidean transfer model and global spin flip in the Example. The defect line is inserted only in a gap that contains no other insertion.
+**Given:** Adopt the three-site Hilbert space, Hamiltonian, original-to-dual kernel and reflection identification, Euclidean transfer model and global spin flip in the Example. The defect line is inserted only in a gap that contains no other insertion.
 
 [F1] [[pthm-aqft-noninvertible-defect-realization]]: for every finite periodic length $L\ge2$ in the stated model, $D_L$ is topological under the declared slides and $D_L^2=I+P_L$.
 

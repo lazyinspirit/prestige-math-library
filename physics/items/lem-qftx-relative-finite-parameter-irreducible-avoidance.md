@@ -7,7 +7,7 @@ origin: pipeline
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics
-dependency_level: 6
+dependency_level: 4
 deps:
   - def-qftx-smooth-sobolev-gauge-configuration
   - lem-qftx-irreducible-finite-holonomy-witness
@@ -38,15 +38,24 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "I. M. Singer, Some Remarks on the Gribov Ambiguity, Communications in Mathematical Physics 60 (1978), 7–12"
-      url: "https://projecteuclid.org/journals/communications-in-mathematical-physics/volume-60/issue-1/Some-remarks-on-the-Gribov-ambiguity/cmp/1103904019.pdf"
-      locator: "Theorem 2, p. 9, weak homotopy type; the infinite-codimension outline is not used as a complete proof."
+    - title: "I. M. Singer, Some Remarks on the Gribov Ambiguity, Communications in
+        Mathematical Physics 60 (1978), 7–12"
+      url: "https://projecteuclid.org/journals/communications-in-mathematical-physics\
+        /volume-60/issue-1/Some-remarks-on-the-Gribov-ambiguity/cmp/1103904019.\
+        pdf"
+      locator: "Theorem 2, p. 9, weak homotopy type; the infinite-codimension outline
+        is not used as a complete proof."
     - title: "Steven Sivek, Lectures on Instantons and Contact Structures"
       url: "https://wwwf.imperial.ac.uk/~ssivek/papers/regensburg-notes.pdf"
-      locator: "§1, pp. 2–3, Sobolev gauge actions and irreducible loci; no weak-contractibility proof is claimed from these notes."
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
-      url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
-      locator: "§5.13.2–§5.13.3, PDF pp. 114–116, Sobolev gauge action and holonomy-stabilizer convention; no finite-parameter avoidance proof is claimed from these notes."
+      locator: "§1, pp. 2–3, Sobolev gauge actions and irreducible loci; no
+        weak-contractibility proof is claimed from these notes."
+    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture
+        notes)"
+      url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.p\
+        df"
+      locator: "§5.13.2–§5.13.3, PDF pp. 114–116, Sobolev gauge action and
+        holonomy-stabilizer convention; no finite-parameter avoidance proof is
+        claimed from these notes."
 verification:
   precheck: pending
 ---
@@ -62,11 +71,11 @@ Assume ZF together with the Axiom of Choice. Let $M$ be $S^3$ or $S^4$ with its 
 
 [F1] The batch-56 configuration definition identifies $\mathcal A_\infty$ with $A_0+\Omega^1(M;\operatorname{ad}P)$, uses the finite-atlas $C^\infty$ section topology, and defines irreducibility by the based holonomy action on $\mathbb C^N$. Its complete definition was inspected and its current Step 1 record is ready; the proof uses exactly that interface ([[def-qftx-smooth-sobolev-gauge-configuration]]).
 
-[F2] The finite-holonomy lemma states that $\mathcal A_\infty^*$ is open and supplies finite based loops witnessing each irreducible connection. Its complete authored proof and exact batch-56 inputs were inspected; the configuration and stabilizer suppliers now have current ready Step 1 records ([[lem-qftx-irreducible-finite-holonomy-witness]]).
+[F2] Under the bundle, connection, and base-frame hypotheses of [F1], the finite-holonomy lemma states that $\mathcal A_\infty^*$ is open and that each irreducible connection has a finite tuple of based loops whose holonomies have no common nonzero proper invariant complex subspace. These are the openness and witness properties used below ([[lem-qftx-irreducible-finite-holonomy-witness]]).
 
 [F3] The incidence manifold of $r$ holonomies preserving a $k$-plane has codimension $2r k(N-k)$ in $SU(N)^r\times\operatorname{Gr}_{\mathbb C}(k,N)$; the dimension deficit after including the plane variable is $2(r-1)k(N-k)$ ([[lem-qftx-holonomy-incidence-codimension]]).
 
-[F4] A jointly smooth matrix ODE solution depends smoothly on its finite-dimensional initial-state and parameter data on a common compact time interval ([[thm-smooth-dependence-of-ode-solutions-on-parameters]]).
+[F4] The supplier treats a real Euclidean state $x(t)\in\mathbb R^n$ and real parameter $\lambda\in\mathbb R^m$ in an equation $x'=F(t,x,\lambda)$ with jointly smooth $F$ on an open domain; near each base datum, solutions exist on a common compact time interval and depend smoothly on their initial state and parameters ([[thm-smooth-dependence-of-ode-solutions-on-parameters]]). On each smooth loop segment, identify $M_N(\mathbb C)$ with $\mathbb R^{2N^2}$ by real and imaginary entries. If $B(s,t)\in\mathfrak{su}(N)$ is the connection coefficient for the family $g(s)$ in a smooth trivialization along that segment, then $X\mapsto-B(s,t)X$ is represented by a real $2N^2\times2N^2$ matrix smooth in $(s,t)$. The parallel-transport equation is therefore a real Euclidean ODE with real parameter $s$; the supplier gives its smooth real parameter dependence on each common compact segment. The same realification applies to the finite-dimensional perturbation parameters $w$ in step 6.1.
 
 [F5] For a smooth map $\mathcal F:X\times S\to Y$ transverse to an embedded submanifold $Z\subseteq Y$, the parameters whose slices $\mathcal F_s$ fail to be transverse to $Z$ form a null subset of $S$; this theorem assumes countable choice ([[thm-parametric-transversality]]).
 
@@ -90,9 +99,9 @@ Assume ZF together with the Axiom of Choice. Let $M$ be $S^3$ or $S^4$ with its 
 
 4.1 Choose $r\ge2$ so that $2(r-1)(N-1)>q$, where $q$ is the ambient parameter dimension in step 1.1. In $M\setminus\{m\}\cong\mathbb R^d$ choose $r$ disjoint closed coordinate balls. Their exterior is path connected for $d=3$ or $4$: a polygonal path can be detoured along the connected boundary spheres of the finitely many balls, and a ray outside a large ball reaches $m$. For each ball join its boundary to $m$ through that exterior, enter the ball, run once around a small embedded circle, and return along the entering path. These are based piecewise-smooth loops $\ell_i$. Choose a closed arc on each small circle away from the entering point; it has a tube inside that ball meeting its own loop only on that arc and meeting no other loop. Thus each loop has a private control tube. The entering and returning stems are outside every private tube. [given, step 3.1, construct]
 
-5.1 Let $U_i(s,t)$ be parallel transport for $g(s)$ from the chosen base frame to a point at parameter $t$ of $\ell_i$. It is smooth in $s\in W$ and in $t$ on each segment by [F4], applied on finitely many common intervals along the compact loop. In tube coordinates $(t,z)$ around its private arc, choose a bump $\rho_i(t)$ of integral one supported away from the arc ends, a transverse bump $c(z)$ with $c(0)=1$, and a real basis $X_a$ of $\mathfrak{su}(N)$. In a fixed smooth frame on the tube define the adjoint-valued form $b_{i,a}(s)=\rho_i(t)c(z)U_i(s,t)X_aU_i(s,t)^{-1}\,dt$, extending its coefficients constantly in the transverse coordinates before multiplying by $c$ and extending by zero outside the tube. It is a genuine smooth bundle-valued one-form depending smoothly on the ambient parameter. Along the loop its contraction is exactly the displayed transported Lie-algebra element. [F1, F4, step 4.1, construct]
+5.1 Parametrize each loop as $\ell_i:[0,1]\to M$ and subdivide it into finitely many smooth segments, each lying in a smooth bundle trivialization. Let $U_i(s,t)$ denote transport from the chosen base frame to the point $\ell_i(t)$. On a segment its matrix equation is $U'=-B_i(s,t)U$; by the realification in [F4], left multiplication by $-B_i(s,t)$ is a real $2N^2\times2N^2$ coefficient matrix smooth in the parameter $s\in W$ and segment variable $t$. Applying [F4] on each common compact segment, with the incoming transport as initial data, proves smooth real parameter dependence there; finite composition with the smooth bundle transition matrices preserves smoothness across segment endpoints. In tube coordinates $(t,z)$ around the private arc, choose a bump $\rho_i(t)$ of integral one supported away from the arc ends, a transverse bump $c(z)$ with $c(0)=1$, and a real basis $X_a$ of $\mathfrak{su}(N)$. In a fixed smooth frame on the tube define the adjoint-valued form $b_{i,a}(s)=\rho_i(t)c(z)U_i(s,t)X_aU_i(s,t)^{-1}\,dt$, extending its coefficients constantly in the transverse coordinates before multiplying by $c$ and extending by zero outside the tube. It is a genuine smooth bundle-valued one-form depending smoothly on the ambient parameter. Along the loop its contraction is exactly the displayed transported Lie-algebra element. [F1, F4, step 4.1, construct]
 
-6.1 For transport $U'=-B(t)U$ and a perturbation $b(t)$, differentiate the ODE to obtain $(U^{-1}\delta U)'=-U^{-1}bU$ and hence $U(1)^{-1}\delta U(1)=-\int U(t)^{-1}b(t)U(t)\,dt$. The control form in step 5.1 makes this last integral $-X_a$ for loop $i$. The other loop holonomies do not vary, since their images miss its tube. Therefore, for $D=r(N^2-1)$ parameters $w=(w_{i,a})$, the derivative at $w=0$ of $\Psi(s,w)=(\operatorname{Hol}_{\ell_i}(g(s)+\sum_{j,a}w_{j,a}b_{j,a}(s)))_{i=1}^r$ is an isomorphism in the $w$ variable onto $T SU(N)^r$, for every $s\in W$. Smooth ODE dependence and compactness of $T$ give a number $a>0$ on which this derivative remains an isomorphism uniformly for $s\in T$ and $|w|<a$. [F4, step 4.1, step 5.1, construct, algebra]
+6.1 The realified equation in [F4] applies to the $w$-dependent coefficient $B_i(s,t)+\sum_{j,a}w_{j,a}b_{j,a}(s,t)$ on each loop segment, so $\Psi$ is a smooth real map and its parameter derivative exists. For the full transport $U:[0,1]\to SU(N)$ satisfying $U'=-B(t)U$ on each segment and a perturbation $b(t)$, differentiate the real matrix ODE segmentwise to obtain $(U^{-1}\delta U)'=-U^{-1}bU$ and integrate across the finitely many segments to get $U(1)^{-1}\delta U(1)=-\int_0^1 U(t)^{-1}b(t)U(t)\,dt$. The control form in step 5.1 makes this last integral $-X_a$ for loop $i$. The other loop holonomies do not vary, since their images miss its tube. Therefore, for $D=r(N^2-1)$ real parameters $w=(w_{i,a})$, the derivative at $w=0$ of $\Psi(s,w)=(\operatorname{Hol}_{\ell_i}(g(s)+\sum_{j,a}w_{j,a}b_{j,a}(s)))_{i=1}^r$ is an isomorphism in the $w$ variable onto $T SU(N)^r$, for every $s\in W$. Smooth ODE dependence and compactness of $T$ give a number $a>0$ on which this derivative remains an isomorphism uniformly for $s\in T$ and $|w|<a$. [F4, step 4.1, step 5.1, construct, algebra]
 
 7.1 Choose a ball $B\subset\mathbb R^D$ about zero of radius less than $a$ and put $\Phi(s,v)=\Psi(s,\chi(s)v)$ for $s\in W$. Where $\chi(s)>0$, its parameter derivative is $\chi(s)D_w\Psi(s,\chi(s)v)$, still invertible by step 6.1. For each $1\le k<N$, the map $\mathcal F_k:((W_+\times\operatorname{Gr}_{\mathbb C}(k,N))\times B)\to SU(N)^r\times\operatorname{Gr}_{\mathbb C}(k,N)$, $((s,Q),v)\mapsto(\Phi(s,v),Q)$, with $W_+=\{s\in W:\chi(s)>0\}$, is a submersion and thus transverse to $I_{k,r}$ of [F3]. Notice that the smooth source is the ambient open set $W_+$, not an individual simplex or a nonsmooth polyhedron. [F3, F4, step 3.1, step 6.1, construct]
 

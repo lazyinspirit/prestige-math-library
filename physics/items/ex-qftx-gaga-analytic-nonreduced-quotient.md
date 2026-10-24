@@ -12,13 +12,11 @@ axiom_base: "ZF + AC, inherited from the faithful-flatness theorem."
 proof_strategy: direct
 deps:
   - def-axiom-of-choice
-  - def-multivariable-power-series
-  - cor-uniqueness-of-multivariable-power-series-coefficients
+  - lem-qftx-gaga-algebraic-analytic-local-completions
   - thm-qftx-gaga-analytic-local-ring-flatness
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
-  def-multivariable-power-series: mathematical-premise
-  cor-uniqueness-of-multivariable-power-series-coefficients: mathematical-premise
+  lem-qftx-gaga-algebraic-analytic-local-completions: mathematical-premise
   thm-qftx-gaga-analytic-local-ring-flatness: mathematical-premise
 generation:
   role: example
@@ -40,11 +38,18 @@ verification:
 ## Example
 
 Assume the Axiom of Choice. Let $X=\operatorname{Spec}(\mathbb C[x,y]/(x^2))$
-and let $p$ be the closed $\mathbb C$-point at the origin. Its algebraic local
-ring is $A=(\mathbb C[x,y]/(x^2))_{(x,y)}$, and its analytic local ring is
+and let $p$ be the closed $\mathbb C$-point at the origin. Write
+$T=\mathbb C^{\mathbb N^2}$ for the ring of coefficient arrays
+$(a_{i,j})_{i,j\ge0}$, with pointwise addition and finite Cauchy multiplication
+$(ab)_{i,j}=\sum_{r=0}^i\sum_{s=0}^j a_{r,s}b_{i-r,j-s}$; this formal ring is
+denoted $\mathbb C\llbracket x,y\rrbracket$, with $x$ and $y$ the arrays
+supported at $(1,0)$ and $(0,1)$, respectively, and its unit is supported at
+$(0,0)$ with coefficient $1$. No convergence condition is imposed. Its
+algebraic local ring is
+$A=(\mathbb C[x,y]/(x^2))_{(x,y)}$, and its analytic local ring is
 $B=\mathbb C\{x,y\}/(x^2)$. The canonical map $A\to B$ is faithfully flat
-with common maximal-ideal completion $\mathbb C\llbracket x,y\rrbracket/(x^2)$, and the class
-of $x$ is a nonzero element whose square is zero in both rings.
+with common maximal-ideal completion $T/(x^2T)$, and the class of $x$ is a
+nonzero element whose square is zero in both rings.
 
 ## Example references
 
@@ -62,7 +67,7 @@ of $x$ is a nonzero element whose square is zero in both rings.
 
 [F1] The local algebraic-to-analytic map for a finite-type complex scheme at a closed $\mathbb C$-point is faithfully flat and identifies the maximal-ideal completions by extending the same finite defining ideal ([[thm-qftx-gaga-analytic-local-ring-flatness]]).
 
-[F2] In $\mathbb C\llbracket x,y\rrbracket$, coefficients of each monomial are uniquely determined; multiplication by $x^2$ produces only monomials with $x$-degree at least $2$ ([[def-multivariable-power-series]], [[cor-uniqueness-of-multivariable-power-series-coefficients]]).
+[F2] The formal ring $T=\mathbb C\llbracket x,y\rrbracket$ is the coefficient-array ring defined in [[lem-qftx-gaga-algebraic-analytic-local-completions]]: its elements are arrays $(a_{i,j})_{(i,j)\in\mathbb N^2}$ and multiplication is finite Cauchy convolution. The monomial $x$ has its only nonzero coefficient, $1$, at $(1,0)$. For every $f\in T$, the coefficient of $x^1y^0$ in $x^2f$ is zero, since no decomposition $(1,0)=(2,0)+(i,j)$ with $(i,j)\in\mathbb N^2$ exists. This is a formal coefficient calculation, with no convergence hypothesis.
 
 ## Verification
 

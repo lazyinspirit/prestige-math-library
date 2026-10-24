@@ -34,7 +34,7 @@ verification:
 
 ## Statement
 
-Use the rigid N=1 Kähler sigma-model action with scalar coordinates $z=(z^1,\ldots,z^n)\in U\subseteq\mathbb C^n$, smooth real Kähler potential $K$, positive-definite Hermitian metric $g_{i\bar j}=\partial_i\partial_{\bar j}K$, holomorphic superpotential $W$, and complex algebraic auxiliary fields $F^i$. In the bosonic sector with fermions and spacetime derivatives set to zero, write $W_i=\partial_iW(z)$ and $\bar W_{\bar j}=\partial_{\bar j}\overline{W(z)}$. The auxiliary Lagrangian is
+Use the rigid N=1 Kähler sigma-model action with scalar coordinates $z=(z^1,\ldots,z^n)\in U\subseteq\mathbb C^n$, smooth real Kähler potential $K$, positive-definite Hermitian metric $g_{i\bar j}=\partial_i\partial_{\bar j}K$, holomorphic superpotential $W$, and complex algebraic auxiliary fields $F^i$. Use the ordinary complex bosonic sector of that postulate: all positive-degree coefficient-algebra components and fermions are set to zero, and the full formal even auxiliary coefficient is restricted to the complex field $F^i$. This restriction is for the potential calculation and does not assert supersymmetry closure on the restricted slice. With spacetime derivatives set to zero, write $W_i=\partial_iW(z)$ and $\bar W_{\bar j}=\partial_{\bar j}\overline{W(z)}$. The auxiliary Lagrangian is
 
 $$\mathcal L_F=g_{i\bar j}F^i\bar F^{\bar j}+F^iW_i+\bar F^{\bar j}\bar W_{\bar j}.$$
 
@@ -56,7 +56,7 @@ For the canonical Kähler potential $K=\sum_i\bar z^{\bar i}z^i$, this becomes $
 
 **Given:** A point $z\in U$ in the Kähler coordinate patch of the adopted model and its bosonic zero-derivative auxiliary fields.
 
-[A1] [[post-qftx-n1-wess-zumino-model]]: $g_{i\bar j}(z,\bar z)$ is positive-definite Hermitian and the zero-fermion auxiliary Lagrangian is $g_{i\bar j}F^i\bar F^{\bar j}+F^iW_i+\bar F^{\bar j}\bar W_{\bar j}$, with no derivatives of $F$.
+[A1] [[post-qftx-n1-wess-zumino-model]]: in its ordinary complex bosonic sector, $g_{i\bar j}(z,\bar z)$ is positive-definite Hermitian and the zero-derivative auxiliary Lagrangian, obtained with $F_{\mathrm{raw}}=2F$, $[U]_D=-I_D(U)/4$ and $[Y]_F=I_F(Y)/2$, is $g_{i\bar j}F^i\bar F^{\bar j}+F^iW_i+\bar F^{\bar j}\bar W_{\bar j}$, with no derivatives of $F$.
 
 ## Proof
 **Given:** [A1], with $W_i$ and $\bar W_{\bar j}$ evaluated at the same scalar value $z$.
@@ -67,4 +67,4 @@ For the canonical Kähler potential $K=\sum_i\bar z^{\bar i}z^i$, this becomes $
 
 2.1 Positive definiteness makes $g$ invertible. Multiply the equation in step 1.1 by $g^{k\bar j}$ and use $g^{k\bar j}g_{i\bar j}=\delta_i^k$ to obtain $F^k=-g^{k\bar j}\bar W_{\bar j}$. [A1, step 1.1, algebra]
 
-3.1 Substitute the solution from step 2.1: the square in step 1.2 vanishes, so the on-shell auxiliary Lagrangian is $-g^{i\bar j}W_i\bar W_{\bar j}$. The inverse of a positive-definite Hermitian matrix is positive definite, so this contraction is nonnegative; for $g_{i\bar j}=\delta_{i\bar j}$ it is $\sum_i|W_i|^2$. This is the classical scalar potential in the stated F-term sector. [A1, step 2.1, step 1.2, algebra] ∎
+3.1 Substitute the solution from step 2.1: the square in step 1.2 vanishes, so the on-shell auxiliary Lagrangian is $-g^{i\bar j}W_i\bar W_{\bar j}$. To verify the sign directly, set $v^i=g^{i\bar j}\bar W_{\bar j}$. Hermitian symmetry and the inverse identities give $g^{i\bar j}W_i\bar W_{\bar j}=g_{i\bar j}v^i\bar v^{\bar j}$, which is positive when $v\ne0$ and zero when $v=0$. Thus the contraction is nonnegative; for $g_{i\bar j}=\delta_{i\bar j}$ it is $\sum_i|W_i|^2$. This is the classical scalar potential in the stated complex F-term sector; no order or positivity statement is made for general nilpotent coefficient-algebra values. [A1, step 2.1, step 1.2, algebra] ∎

@@ -37,7 +37,7 @@ verification:
 
 ## Example
 
-Take one chiral field with canonical Kähler potential $K(\bar\phi,\phi)=\bar\phi\phi$ and holomorphic superpotential $W(\phi)=\tfrac12m\phi^2+\tfrac16y\phi^3$, where $m\in\mathbb C$ has mass dimension one and $y\in\mathbb C$ is dimensionless. For a smooth compactly supported scalar component $\phi:M\to\mathbb C$, the auxiliary equation and F-term potential are
+Take one chiral field with canonical Kähler potential $K(\bar\phi,\phi)=\bar\phi\phi$ and holomorphic superpotential $W(\phi)=\tfrac12m\phi^2+\tfrac16y\phi^3$, where $m\in\mathbb C$ has mass dimension one and $y\in\mathbb C$ is dimensionless. In the ordinary complex bosonic sector of the model postulate, take the auxiliary field to be complex-valued; the formal even coefficient space is retained before this restriction. For a smooth compactly supported scalar component $\phi:M\to\mathbb C$, the auxiliary equation and F-term potential are
 
 $$F=-\overline{m\phi+\tfrac12y\phi^2},\qquad V_F=\left|m\phi+\tfrac12y\phi^2\right|^2.$$
 

@@ -7,12 +7,16 @@ origin: pipeline
 domain: mathematics
 library: mathematics
 axiom_strength: "ZF + AC"
-dependency_level: 7
+dependency_level: 8
 deps:
   - def-axiom-of-choice
   - def-abbv-equivariant-integration-conventions
   - thm-atiyah-bott-berline-vergne-integration-formula
+  - lem-abbv-borel-fiber-integration-construction
+  - prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual
 dependency_roles:
+  prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual: mathematical-premise
+  lem-abbv-borel-fiber-integration-construction: mathematical-premise
   def-axiom-of-choice: mathematical-premise
   def-abbv-equivariant-integration-conventions: mathematical-premise
   thm-atiyah-bott-berline-vergne-integration-formula: mathematical-premise
@@ -25,13 +29,16 @@ provenance:
 sources:
   scraped: []
   references:
-    - title: "Michael F. Atiyah and Raoul Bott, The Moment Map and Equivariant Cohomology"
-      url: "https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf"
+    - title: "Michael F. Atiyah and Raoul Bott, The Moment Map and Equivariant
+        Cohomology"
+      url: "https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbo\
+        tt_moment.pdf"
     - title: "Matvei Libine, Lecture Notes on Equivariant Cohomology"
       url: "https://arxiv.org/pdf/0709.3615"
     - title: "Kentaro Hori et al., Mirror Symmetry"
       url: "https://www.claymath.org/library/monographs/cmim-1.pdf"
-      locator: "Chapter 4, §4.3, printed pp. 62–64 (PDF pp. 82–84), fixed-point denominator context; the stated O(1) calculation is derived locally."
+      locator: "Chapter 4, §4.3, printed pp. 62–64 (PDF pp. 82–84), fixed-point
+        denominator context; the stated O(1) calculation is derived locally."
 verification:
   precheck: pending
 ---
@@ -56,9 +63,11 @@ which agrees with $\int_{\mathbb{CP}^1}x=1$.
 
 [A1] Assume AC, carried through the real coefficient-ring convention for Borel equivariant cohomology. [[def-axiom-of-choice]]
 
-[F1] [[def-abbv-equivariant-integration-conventions]]: a character of weight $m$ has equivariant Euler class $m u$ in real Borel cohomology; equivariant integration uses the complex orientation.
+[F1] [[def-abbv-equivariant-integration-conventions]]: a character of weight $m$ has equivariant Euler class $m u$ in real Borel cohomology; equivariant integration uses the complex orientation. Its restriction to a point of $BT$ is ordinary oriented integration by [[lem-abbv-borel-fiber-integration-construction]].
 
 [F2] [[thm-atiyah-bott-berline-vergne-integration-formula]]: for an isolated fixed point with tangent weight $\chi$, its contribution is $\epsilon_p\,\alpha|_p/u_\chi$ in the localized real coefficient ring, where $\epsilon_p$ compares the complex tangent orientation with the ambient orientation.
+
+[F3] The Euler number of an oriented rank-$n$ bundle over a closed oriented $n$-manifold is the signed count of zeros of a transverse section. We use the integral class then its image in real cohomology; Thom normalization and fundamental-class evaluation commute with this coefficient change. [[prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual]]
 
 ## Verification
 
@@ -68,4 +77,4 @@ which agrees with $\int_{\mathbb{CP}^1}x=1$.
 
 2.1 Substituting these restrictions and tangent Euler classes in [F2] gives $\int_M x=0/u+(-u)/(-u)=1$. [given, A1, F2, step 1.1, step 1.2]
 
-3.1 The linear functional $\ell(z_0,z_1)=z_0$ defines a section of $\mathcal O(1)$ that vanishes only at $p_\infty$. In the local coordinate $v=z_0/z_1$ and the dual tautological frame there, its coefficient is $v$, so its unique zero is transverse with positive local degree $+1$. Pulling the normalized Thom class back by a transverse section counts its isolated zeros with these local degrees: excision reduces the pairing to the degree of the section on the boundary of a small disk around each zero. Hence the ordinary Euler number is $1$. Restricting the Borel pushforward to the basepoint of connected $BT$ gives this ordinary Euler number, and $H^0(BT;\mathbb R)=\mathbb R$; therefore $\int_{\mathbb{CP}^1}x=1$, independently confirming the localized sum. [given, A1, F1, step 1.2] ∎
+3.1 The linear functional $\ell(z_0,z_1)=z_0$ defines a section of $\mathcal O(1)$ that vanishes only at $p_\infty$. In the local coordinate $v=z_0/z_1$ and the dual tautological frame there, its coefficient is $v$, so its unique zero is transverse with positive local degree $+1$. By [F3], the normalized Euler pairing counts this transverse zero with its positive local degree. Hence the ordinary Euler number is $1$. Restricting the Borel pushforward to the basepoint of connected $BT$ gives this ordinary Euler number, and $H^0(BT;\mathbb R)=\mathbb R$; therefore $\int_{\mathbb{CP}^1}x=1$, independently confirming the localized sum. [given, A1, F1, F3, step 1.2] ∎

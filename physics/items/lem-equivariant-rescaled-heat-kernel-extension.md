@@ -39,7 +39,7 @@ verification:
 
 ## Statement
 
-Assume countable choice. Let $M$ be a compact smooth Riemannian manifold without boundary, $n=\dim M>0$, and $E$ a finite-rank Hermitian bundle. Let $P$ be a smooth second-order differential operator with positive-frequency principal symbol $p(x,\xi)$, a Hermitian matrix satisfying $p(x,\xi)\ge c|\xi|^2I$ for some $c>0$. Assume its nonnegative selfadjoint realization has a complete orthonormal basis of smooth eigensections and a smooth heat kernel $K_t(y,z):E_z\to E_y$ relative to Riemannian volume. No scalar-principal-symbol hypothesis is imposed. In normal coordinates and smooth unitary frames based at $x$, set
+Assume countable choice. Let $M$ be a compact smooth Riemannian manifold without boundary, $n=\dim M>0$, and $E$ a finite-rank Hermitian bundle. Let $P:C^\infty(M,E)\to C^\infty(M,E)$ be a smooth second-order differential operator. In local coordinates and a bundle frame, write $P=\sum_{|\alpha|\le2}a_\alpha(x)\partial_x^\alpha$ and define its positive-frequency principal symbol by $p(x,\xi)=\sum_{|\alpha|=2}a_\alpha(x)(i\xi)^\alpha$ (equivalently, the coefficient of $\lambda^2$ in $e^{-i\lambda f}P(e^{i\lambda f}v)$ at $df_x=\xi$). Suppose $p(x,\xi)$ is a Hermitian matrix satisfying $p(x,\xi)\ge c|\xi|^2I$ for some $c>0$. Assume its nonnegative selfadjoint realization has a complete orthonormal basis of smooth eigensections and a smooth heat kernel $K_t(y,z):E_z\to E_y$ relative to Riemannian volume. No scalar-principal-symbol hypothesis is imposed. In normal coordinates and smooth unitary frames based at $x$, set
 
 $$k_x(w)=(2\pi)^{-n}\int_{\mathbb R^n}e^{iw\cdot\xi}e^{-p(x,\xi)}\,d\xi.$$
 

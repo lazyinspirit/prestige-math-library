@@ -31,7 +31,7 @@ verification:
 
 ## Statement
 
-Fix $m>0$, $\Lambda>0$, integers $r\ge1$, $D\ge4$ and $N\ge1$, and the metric $\eta=\operatorname{diag}(-1,1,1,1)$. Use the finite-jet operator quotient $\mathcal Q_D=V_D/R_D$ for one commuting scalar $\phi$ of weight one, field-degree cutoff four, derivative cutoff $r$, and complex orthogonal spacetime-index action preserving $\eta$. Let $U_D\subset V_D$ be the subspace of degree-exactly-four scalar polynomials whose indices are contracted using $\eta$ only, and let $Q_D^{(4)}$ be its image in $\mathcal Q_D$. Thus $Q_D^{(4)}=U_D/(U_D\cap R_D)$; operators outside this image are not assigned a contact map.
+Fix $m>0$, $\Lambda>0$, integers $r\ge1$, $D\ge4$ and $N\ge1$, and the metric $\eta=\operatorname{diag}(-1,1,1,1)$. Use the finite-jet operator quotient $\mathcal Q_D=V_D/R_D$ for one commuting scalar $\phi$ of weight one, field-degree cutoff four, derivative cutoff $r$, and complex orthogonal spacetime-index action preserving $\eta$. Let $U_D\subset V_D$ be the subspace of degree-exactly-four scalar polynomials whose indices are contracted using $\eta$ only, and let $Q_D^{(4)}$ be its image in $\mathcal Q_D$. Thus $Q_D^{(4)}=U_D/(U_D\cap R_D)$; operators outside this image are not assigned a contact map. Fix the monomial basis in the commuting jet generators used to write these polynomials. Let $U_{D,\mathbb R}\subset U_D$ consist of the polynomials whose coefficients in that basis are real, and define $Q_{D,\mathbb R}^{(4)}$ to be the image of $U_{D,\mathbb R}$ in $Q_D^{(4)}$. This is the chosen real subspace of classes admitting a coefficientwise-real representative; no conjugation structure on the full complex quotient is presumed.
 
 Require the following certificate for the actual declared relations: every $H\in U_D\cap R_D$ is a finite sum of identically zero jet polynomials, total divergences $\partial_\mu J^\mu$ with $J$ quartic, and $F(\Box-m^2)\phi$ with $F$ cubic, where $\Box=\eta^{\mu\nu}\partial_\mu\partial_\nu$. The summands may use a larger finite jet space and different engineering weights; their polynomial sum must equal $H$ before any on-shell substitution. This is an additional restriction on the selected $R_D$, not a claim about an arbitrary relation subspace or its completeness.
 
@@ -43,11 +43,11 @@ The coefficient convention contains no $1/4!$. Impose $\sum_jk_j=0$, $k_j^2=-m^2
 
 $$M_{D,N}([O])_k=\nu_0^{2k+2}\Lambda^{4-D}[v^{2k+2}]t_O(v),\qquad 0\le k\le N.$$
 
-Then this map $Q_D^{(4)}\to\mathbb C^{N+1}$ is well-defined, $t_O$ is even, and it takes real operator classes to real vectors. For $D=8$, $O_8=(\partial_\mu\phi\,\partial^\mu\phi)^2$ satisfies
+Then this map $Q_D^{(4)}\to\mathbb C^{N+1}$ is well-defined and $t_O$ is even. Its restriction to $Q_{D,\mathbb R}^{(4)}$ takes values in $\mathbb R^{N+1}$. For $D=8$, $O_8=(\partial_\mu\phi\,\partial^\mu\phi)^2$ satisfies, for every $C_8\in\mathbb R$,
 
 $$t_{O_8}(v)=8m^4+4v^2,\qquad M_{8,N}([C_8O_8])=(4\nu_0^2C_8/\Lambda^4,0,\ldots,0).$$
 
-In particular the coefficient $[v^2]\Lambda^{-4}t_{C_8O_8}=4C_8/\Lambda^4$ is invariant under the certified relations. The target has precisely the normalized coordinate convention of the finite forward-amplitude problem. This algebraic map describes one quartic contact insertion about the free massive scalar quadratic action. It does not equate the contact polynomial to an exact full amplitude, discard loop or other-operator contributions, or infer positivity of a perturbative term from positivity of a full amplitude.
+In particular the coefficient $[v^2]\Lambda^{-4}t_{C_8O_8}=4C_8/\Lambda^4$ is invariant under the certified relations. On $Q_{D,\mathbb R}^{(4)}$, the real target coordinates use precisely the normalized convention of the finite forward-amplitude bootstrap problem. This algebraic map describes one quartic contact insertion about the free massive scalar quadratic action. It does not equate the contact polynomial to an exact full amplitude, discard loop or other-operator contributions, or infer positivity of a perturbative term from positivity of a full amplitude.
 
 ## Statement references
 

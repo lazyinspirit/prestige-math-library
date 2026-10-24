@@ -29,24 +29,30 @@ dependency_roles:
 provenance:
   statement: literature-derived
   proof: not-applicable
-physical_scope: Source-reported ATLAS Run 2 and LEP/SLD input measurements combined in the collaboration's 48-direction dimension-six SMEFT analysis. This record does not reprocess events, reconstruct component likelihoods, or audit every detector calibration.
+physical_scope: Source-reported ATLAS Run 2 and LEP/SLD input measurements combined in the collaboration's dimension-six SMEFT analysis. The 99% compatibility value recorded here belongs specifically to the linear fit without di-Higgs measurements. This record does not reprocess events, reconstruct component likelihoods, or audit every detector calibration.
 empirical_result:
   observation: >-
     The collaboration reports no statistically significant overall deviation
-    from the Standard Model in its global fit and quotes a 99% compatibility
-    p-value for its specified test. It separately reports an electroweak
-    direction pulled by the known A_FB^b and A_FB^c discrepancies. The quoted
-    value is conditional on the collaboration's fit and calibration.
+    from the Standard Model. Its 99% compatibility p-value is for the linear
+    fit without di-Higgs measurements: 47 fit-basis coefficients are shown,
+    with the other 39 directions fixed to their Standard Model value of zero.
+    It separately reports an electroweak direction pulled by the known A_FB^b
+    and A_FB^c discrepancies. The global test statistic and its null
+    calibration are not reconstructed here.
   uncertainty: >-
     Input statistical, experimental-systematic, and theory uncertainties and
     their reported correlations enter the fit. The source's event-overlap
     treatment and input-specific uncertainty models are retained; raw events
-    and component likelihoods are not independently reanalysed here.
+    and component likelihoods are not independently reanalysed here. The
+    one-dimensional Wilks calibration described for coefficient intervals is
+    not assigned to the separate global compatibility p-value.
   conditions: >-
     ATLAS Run 2 proton-proton inputs at 13 TeV with input-specific integrated
     luminosities spanning about 36 to 140 fb^-1, together with LEP, SLD, and
-    ATLAS electroweak precision inputs; a source-defined 48-direction
-    dimension-six SMEFT parameterization and profile-likelihood analysis.
+    ATLAS electroweak precision inputs. The overall source analysis reports 48
+    parameters; the 99% compatibility result is for the linear fit without
+    di-Higgs inputs, with 47 fit-basis coefficients and 39 other directions
+    fixed to their Standard Model value of zero.
   source_url: https://arxiv.org/pdf/2604.21670v2
 sources:
   references:
@@ -76,7 +82,7 @@ The fit uses the Standard Model effective field theory (SMEFT): the Standard Mod
 
 ## Procedure
 
-The collaboration constructs a joint likelihood from the input analyses, using Poisson terms for event-count inputs and Gaussian terms for measurement inputs where specified. It checks overlaps among event-based inputs using event identifiers, bootstrap studies, and selections; identified overlaps are removed or handled as stated in the article. Experimental and theoretical nuisance parameters encode systematic and theory uncertainties and are profiled subject to the source's constraints and correlation scheme. Profiling means maximizing the likelihood over nuisance parameters at each fixed coefficient value; the resulting profile-likelihood ratio compares that constrained maximum with the unrestricted maximum. The collaboration uses its stated one-dimensional likelihood-ratio calibration after checking the applicability of the asymptotic approximation. These are the reported analysis choices, not a reconstruction of the component likelihoods.
+The collaboration constructs a joint likelihood from the input analyses, using Poisson terms for event-count inputs and Gaussian terms for measurement inputs where specified. It checks overlaps among event-based inputs using event identifiers, bootstrap studies, and selections; identified overlaps are removed or handled as stated in the article. Experimental and theoretical nuisance parameters encode systematic and theory uncertainties and are profiled subject to the source's constraints and correlation scheme. Profiling means maximizing the likelihood over nuisance parameters at each fixed coefficient value; the resulting profile-likelihood ratio compares that constrained maximum with the unrestricted maximum. For coefficient intervals, §4.2 uses the one-dimensional profile-likelihood statistic with the Wilks chi-square calibration and discusses checks on its applicability. The separate 99% compatibility p-value is reported in §5.3.1 for the linear fit without di-Higgs measurements, but that result section does not identify a global test statistic or its null calibration; this item does not reconstruct either or infer them from the coefficient-interval calibration. These are source-reported analysis choices, not a reconstruction of the component likelihoods.
 
 ## Procedure references
 
@@ -90,7 +96,7 @@ The collaboration constructs a joint likelihood from the input analyses, using P
 
 ## Observations
 
-The collaboration reports no statistically significant overall deviation from the Standard Model and quotes a $99\%$ compatibility $p$-value for its specified goodness-of-fit test. It also identifies an electroweak-precision coefficient direction, denoted $c^{[19]}_{HVV,Vff}$ in the article, as pulled by the known tension between the measured $A_{\rm FB}^{b,c}$ asymmetries and the Standard Model prediction. The overall fit statement therefore does not mean that every coefficient is individually within two standard deviations. A $p$-value is a tail probability under the stated null calibration, not the probability that the Standard Model is true.
+The collaboration reports no statistically significant overall deviation from the Standard Model. Its $99\%$ compatibility $p$-value is reported in §5.3.1 for the linear fit without di-Higgs measurements: 47 fit-basis coefficients are shown and the other 39 directions are fixed to their Standard Model value of zero. The result is not assigned the one-dimensional Wilks calibration used for coefficient intervals; the global test statistic and null calibration are not reconstructed here. The article also identifies an electroweak-precision coefficient direction, denoted $c^{[19]}_{HVV,Vff}$, as pulled by the known tension between the measured $A_{\rm FB}^{b,c}$ asymmetries and the Standard Model prediction. The overall fit statement therefore does not mean that every coefficient is individually within two standard deviations. A $p$-value is a tail probability under its stated null calibration, not the probability that the Standard Model is true.
 
 ## Observations references
 

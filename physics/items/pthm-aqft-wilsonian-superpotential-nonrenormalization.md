@@ -40,7 +40,7 @@ verification:
 
 ## Statement
 
-Let the rigid four-dimensional $\mathcal N=1$ Wilsonian effective-action data and finite operator basis be as in the action definition, with formal cutoff $0<\lambda<\Lambda_0$. Let $F_\lambda(\Phi,W)$ denote the derivative-free, holomorphic chiral integrand of the Wilsonian action, and define its superpotential part by $W_\lambda(\Phi)=F_\lambda(\Phi,0)$. Fix a finite ordered basis of retained light-field superpotential operators and a scale-independent linear coordinate projection $P_{\mathrm{hol}}$ onto that basis. Use the same unrescaled chiral fields, quotient relations, and operator coordinates at every scale. Assume the selected formal perturbative cutoff prescription has the local nondynamical-spurion extension and local derivative expansion specified in the action data; its perturbative vertices are one-particle-irreducible; its rigid supersymmetry and BRST/gauge Ward identities hold coefficientwise for every local insertion and their counterterms; and it has no local gauge anomaly.
+Let the rigid four-dimensional $\mathcal N=1$ Wilsonian effective-action data and finite operator basis be as in the action definition, with formal cutoff $0<\lambda<\Lambda_0$. Let $F_\lambda(\Phi,W)$ denote the derivative-free, holomorphic chiral integrand of the Wilsonian action, and define its superpotential part by $W_\lambda(\Phi)=F_\lambda(\Phi,0)$. Fix a finite ordered basis of retained light-field superpotential operators and a scale-independent linear coordinate projection $P_{\mathrm{hol}}$ onto that basis. Use the same unrescaled chiral fields, quotient relations, and operator coordinates at every scale. Assume the selected formal perturbative cutoff prescription has the local nondynamical-spurion extension and local derivative expansion specified in the action data; its local counterterms obey chirality as an identity in the coefficientwise formal background-jet algebra before constant-background evaluation, with independent first anti-chiral jets of each unconstrained real coefficient spurion; its perturbative vertices are one-particle-irreducible; its rigid supersymmetry and BRST/gauge Ward identities hold coefficientwise for every local insertion and their counterterms; and it has no local gauge anomaly.
 
 Assume full Axiom of Choice for the selected finite operator-equivalence data. Then, coefficientwise at every perturbative order,
 
@@ -64,13 +64,13 @@ Thus every retained holomorphic superpotential coefficient in the fixed unrescal
 
 [F1] [[def-aqft-susy-wilsonian-action]]: the Wilsonian action has a derivative-free holomorphic chiral integrand $F_\lambda(\Phi,W)$ and a separate real D-term; its finite operator quotient, ordered basis, cutoff, and field coordinates are supplied data.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under the stated rigid N=1 and BRST/gauge Ward identities, local spurion extension, local derivative expansion, one-particle-irreducible vertex prescription, and anomaly-free hypotheses, the full Wilsonian chiral integrand is coefficientwise unchanged in formal perturbation theory except that the holomorphic gauge coupling can receive a one-loop correction; D-terms are not protected.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under the stated rigid N=1 and BRST/gauge Ward identities, local coefficientwise spurion extension with independent unconstrained real background jets and chirality before constant-background evaluation, local derivative expansion, one-particle-irreducible vertex prescription, and anomaly-free hypotheses, the full Wilsonian chiral integrand is coefficientwise unchanged in formal perturbation theory except that the holomorphic gauge coupling can receive a one-loop correction; D-terms are not protected.
 
 [A1] [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. Full AC is inherited only because the selected invariant-quotient/on-shell-equivalence input uses it; the restriction to $W=0$ and fixed-basis coordinate projection below do not use a choice function.
 
 [A2] The finite relation quotient, ordered basis, coordinate projection, and unrescaled light fields are independent of $\lambda$; no scale-dependent change of field coordinates is performed.
 
-[A3] The selected regulator and counterterms satisfy all symmetry-preservation, spurion, locality, one-particle-irreducibility, and no-local-gauge-anomaly hypotheses of [F2] at each formal perturbative order.
+[A3] The selected regulator and counterterms satisfy all symmetry-preservation, coefficientwise formal background-jet, locality, one-particle-irreducibility, and no-local-gauge-anomaly hypotheses of [F2] at each formal perturbative order. The real coefficient spurions are unconstrained and their first anti-chiral jets are independent before constant-background evaluation. No positivity, convergence, or real-analytic extension of the formal coupling series is required.
 
 ## Proof
 

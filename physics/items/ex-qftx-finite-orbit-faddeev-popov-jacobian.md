@@ -51,19 +51,19 @@ The Faddeev–Popov operator is the linear map $M_{s_r}:=d\chi_{s_r}\circ R_{s_r
 
 ## Remarks
 
-The sketch rescales the radius to $1.1$ drawing units; it represents the orbit circle $x^2+y^2=r^2$ and the horizontal axis as the global gauge condition. The marked positive crossing is the local slice point; the opposite crossing is a second global representative. The proof uses the displayed action and derivative, not the drawing.
+The sketch rescales the radius to $1.1$ drawing units; it represents the orbit circle $x^2+y^2=r^2$ and the horizontal axis as the global gauge condition. The dashed short segment schematically highlights $S_r=U_r\cap\{y=0\}$ near $s_r$; it is not intended to fix the unspecified size or shape of $U_r$. The marked positive crossing is the local slice point; the opposite crossing is a second global representative. The proof uses the displayed action and derivative, not the drawing.
 
 ```tikz
 \begin{tikzpicture}[scale=1.1]
   \draw[->] (-1.6,0) -- (1.7,0) node[right] {$x$};
   \draw[->] (0,-1.4) -- (0,1.5) node[above] {$y$};
   \draw[thick] (0,0) circle (1.1);
-  \draw[dashed,thick] (0,0) -- (1.1,0);
+  \draw[dashed,very thick] (0.78,0) -- (1.42,0);
   \fill (1.1,0) circle (2pt) node[below right] {$(r,0)$};
   \fill (-1.1,0) circle (2pt) node[below left] {$(-r,0)$};
   \draw[->] (0.82,0.72) arc[start angle=41.3,end angle=138.7,radius=1.1];
   \node at (0.35,0.35) {$K\cdot s_r$};
-  \node at (0.68,-0.25) {local};
+  \node at (1.05,-0.30) {$S_r$ (local)};
 \end{tikzpicture}
 ```
 

@@ -23,7 +23,7 @@ sources:
   references:
     - title: "Justin Kinney, Juan Maldacena, Shiraz Minwalla, and Suvrat Raju, An Index for 4 Dimensional Super Conformal Theories"
       url: "https://arxiv.org/pdf/hep-th/0510251v1"
-      locator: "§3.1, printed pp. 12–13, for the positive-supercharge index trace and cancellation of paired states."
+      locator: "§3, equations (3.1)–(3.3), printed pp. 12–13, for the positive-supercharge index trace and cancellation of paired states."
     - title: "David Tong, Supersymmetric Field Theory"
       url: "https://www.damtp.cam.ac.uk/user/tong/susy/susy.pdf"
       locator: "§§2.2–2.3 and 6.4.2, printed pp. 23–35 and 193–194, for the unitary supercharge representation and index context."
@@ -41,7 +41,7 @@ for every $\beta>0$, equal to the trace on $\ker\delta$. This is a finite model 
 
 ## Example references
 
-[Kinney, Maldacena, Minwalla, and Raju, §3.1](https://arxiv.org/pdf/hep-th/0510251v1)
+[Kinney, Maldacena, Minwalla, and Raju, §3, equations (3.1)–(3.3), printed pp. 12–13](https://arxiv.org/pdf/hep-th/0510251v1)
 
 [David Tong, *Supersymmetric Field Theory*, §§2.2–2.3 and 6.4.2](https://www.damtp.cam.ac.uk/user/tong/susy/susy.pdf)
 

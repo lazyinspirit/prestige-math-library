@@ -15,7 +15,8 @@ deps:
   - def-scheme
   - def-locally-finite-type-and-finite-type-morphism
   - def-finite-type-and-module-finite-algebras
-  - thm-hilbert-basis-theorem
+  - thm-complex-numbers-form-a-field
+  - cor-finite-variable-polynomial-ring-noetherian
   - thm-noetherian-ring-ideal-characterisations
   - lem-qftx-gaga-algebraic-analytic-local-completions
   - def-flat-and-faithfully-flat-modules-and-ring-maps
@@ -33,7 +34,8 @@ dependency_roles:
   def-scheme: mathematical-premise
   def-locally-finite-type-and-finite-type-morphism: mathematical-premise
   def-finite-type-and-module-finite-algebras: mathematical-premise
-  thm-hilbert-basis-theorem: mathematical-premise
+  thm-complex-numbers-form-a-field: mathematical-premise
+  cor-finite-variable-polynomial-ring-noetherian: mathematical-premise
   thm-noetherian-ring-ideal-characterisations: mathematical-premise
   lem-qftx-gaga-algebraic-analytic-local-completions: mathematical-premise
   def-flat-and-faithfully-flat-modules-and-ring-maps: mathematical-premise
@@ -103,7 +105,7 @@ direct-image comparison is asserted.
 
 [F1] A scheme is locally an affine scheme; finite type over $\mathbb C$ means each point has an affine neighborhood whose coordinate algebra is a finitely generated $\mathbb C$-algebra, hence a quotient of a polynomial ring ([[def-scheme]], [[def-locally-finite-type-and-finite-type-morphism]], [[def-finite-type-and-module-finite-algebras]]).
 
-[F2] The polynomial ring over $\mathbb C$ is Noetherian ([[thm-hilbert-basis-theorem]]).
+[F2] The complex numbers form a field, so their only ideals are $0$ and $\mathbb C$; the finite-variable corollary says that a polynomial ring in finitely many variables over a Noetherian ring is Noetherian ([[thm-complex-numbers-form-a-field]], [[cor-finite-variable-polynomial-ring-noetherian]]).
 
 [F3] Under dependent choice, a commutative ring is Noetherian exactly when all its ideals are finitely generated, so the chart's defining ideal is finitely generated ([[thm-noetherian-ring-ideal-characterisations]]).
 
@@ -129,7 +131,7 @@ direct-image comparison is asserted.
 
 1.1 AC implies DC: for a nonempty set $Y$ and a serial relation $R\subseteq Y\times Y$, the family of successor sets $\{\{z\in Y:yRz\}:y\in Y\}$ consists of nonempty sets. [A1] gives a choice function on this family; composing it with the successor-set map gives a self-map $s:Y\to Y$ with $yRs(y)$. For any prescribed $y_0$, [F10] gives the sequence $y_{k+1}=s(y_k)$. For any $A$-module $N$, let $F_0$ be free on its underlying set and let $\epsilon_0:F_0\twoheadrightarrow N$ send each standard basis vector to the element it names, using [F11]. A free module on any set is projective: given a surjection $E\twoheadrightarrow Q$ and a map from the free module to $Q$, [A1] chooses a preimage in $E$ for the image of each basis vector, and [F11] extends that assignment to a lift. Put $K_0=\ker\epsilon_0$; recursively, for each $j\ge0$, take $F_{j+1}$ free on the set $K_j$, let $\epsilon_{j+1}:F_{j+1}\twoheadrightarrow K_j$ send each basis vector to the element it names, and set $K_{j+1}=\ker\epsilon_{j+1}$. The differential $F_{j+1}\to F_j$ is $\epsilon_{j+1}$ followed by the inclusion $K_j\hookrightarrow F_j$. The sequence is exact by the definitions of the kernels, each $F_j$ is projective by the lifting argument, and [F10] supplies the recursion. Thus every $A$-module has the projective-resolution data required by [F8] and [F9], and AC supplies their DC hypothesis. [A1, F8, F9, F10, F11, construct]
 
-2.1 By [F1], around $x$ the scheme has a finite-type affine chart; [F2] and [F3], whose dependent-choice hypothesis is supplied by step 1.1, make its polynomial defining ideal $I$ finitely generated. Translate the coordinates to put $x$ at the origin, adding a dummy coordinate with relation $w_1=0$ if the chart has no polynomial coordinates. Apply [F4] to obtain the local map $A\to B$ and its common completion $T=\mathbb C\llbracket w_1,\ldots,w_n\rrbracket/I\mathbb C\llbracket w_1,\ldots,w_n\rrbracket$. [given, F1, F2, F3, step 1.1, F4]
+2.1 By [F1], around $x$ the scheme has a finite-type affine chart. [F2] makes $\mathbb C$ a field, so its only ideals are $0$ and $\mathbb C$ and each is finitely generated; DC from step 1.1 and the ideal characterization in [F3] therefore make $\mathbb C$ Noetherian. The finite-variable corollary in [F2] now makes its chart polynomial ring Noetherian, and [F3] makes the chart's defining ideal $I$ finitely generated. Translate the coordinates to put $x$ at the origin, adding a dummy coordinate with relation $w_1=0$ if the chart has no polynomial coordinates. Apply [F4] to obtain the local map $A\to B$ and its common completion $T=\mathbb C\llbracket w_1,\ldots,w_n\rrbracket/I\mathbb C\llbracket w_1,\ldots,w_n\rrbracket$. [given, F1, F2, F3, step 1.1, F4]
 
 3.1 By [F5] under [A1], the completion maps $A\to T$ and $B\to T$ are faithfully flat. For a nonzero $a\in A$, the ideal $(a)$ is a nonzero $A$-module. Faithfulness means $(a)\otimes_A T\ne0$: otherwise the nonexact sequence $0\to(a)\to0$ would become exact after tensoring. Flatness makes the multiplication map $(a)\otimes_A T\to A\otimes_A T=T$ injective. If $a$ mapped to zero in $T$, this map would be zero, a contradiction. Hence $A\to T$ is injective. If an element of $A$ maps to zero in $B$, its image in $T$ is zero as well, so injectivity of $A\to T$ makes it zero. Therefore $A\to B$ is injective. [A1, F5, F6, step 2.1, algebra]
 

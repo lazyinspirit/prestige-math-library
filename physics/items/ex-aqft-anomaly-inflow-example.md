@@ -31,10 +31,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 physical_scope: >-
-  This worked example uses one specified Euclidean SU(2) Weyl-doublet determinant
-  family, the explicitly proved round index-one geometry, the central order-two test, and its
-  mod-two-index bulk response. The finite BC2 calculation is a normalization
-  check, not a continuum discretization or a general anomaly classification.
+  This worked example uses one specified Euclidean SU(2) Weyl-doublet inverse-
+  determinant-line model, the explicitly proved round index-one geometry, the
+  central order-two test, and its mod-two-index bulk response. It does not
+  identify this line with a fermionic Pfaffian line. The finite BC2 calculation
+  is a normalization check, not a continuum discretization or a general anomaly
+  classification.
 sources:
   references:
     - title: "Juven Wang, Xiao-Gang Wen, and Edward Witten, A New SU(2) Anomaly"
@@ -49,7 +51,7 @@ verification:
 
 ## Example
 
-Assume full AC and take the explicit unit round spin $S^4$ background with $E=S^+$ and its positive-spin Levi-Civita connection, one massless left-handed Weyl doublet of a nondynamical $SU(2)$ global symmetry, and the order-two central transformation $z=-I$ specified in the global-anomaly test. The local Hodge calculation gives complex chiral index $1$ and Chern number $-1$; pair the boundary determinant/Pfaffian line with the five-dimensional bulk whose test-loop phase is $(-1)^{\operatorname{ind}_2D_5}$. The boundary line has character $\chi(1)=1$, $\chi(z)=-1$; the mapping-torus mod-two index is $1$, so the bulk character is $\chi^{-1}=\chi$ and the combined character is trivial. The local index-density anomaly polynomial is zero. For the finite normalization check take a single-vertex complex $K$ and the ordinary field groupoid $\mathcal F(K)=BC_2$, with one object and automorphism group $C_2$. The combined unit weight is arrow-invariant and its normalized groupoid sum is $1/2$. Without the bulk, the odd boundary character is not a scalar invariant weight and no such finite gauging sum is defined. For two identical copies the boundary character itself is trivial and the same normalized groupoid sum applies. This example tests only the stated loop and does not establish that even copies have no other anomalies.
+Assume full AC and take the explicit unit round spin $S^4$ background with $E=S^+$ and its positive-spin Levi-Civita connection, one massless left-handed Weyl doublet of a nondynamical $SU(2)$ global symmetry, and the order-two central transformation $z=-I$ from the global-anomaly test. Use the inverse determinant line $\mathcal L_A=(\det_{\mathbb C}\ker D_A^+)^*\otimes\det_{\mathbb C}\operatorname{coker}D_A^+$; this example makes no identification with the Pfaffian line used in a pseudoreal fermion path-integral presentation. The local Hodge calculation gives complex chiral index $1$ and Chern number $-1$. Pair this boundary line with the assigned bulk line, which is its dual, adopting $(-1)^{\operatorname{ind}_2D_5}$ as the closed phase and as the bulk-line holonomy on the mapping torus with product orientation and periodic total spinors. The boundary line has character $\chi(1)=1$, $\chi(z)=-1$; the mapping-torus mod-two index is $1$, so the bulk character is $\chi^{-1}=\chi$ and the combined character is trivial. With $F_A$ anti-Hermitian, use $\operatorname{ch}(E)=\operatorname{tr}_{\mathbf 2}\exp(-F_A/(2\pi i))$, $p_1(TM)=-(8\pi^2)^{-1}\operatorname{tr}_{\mathbb R}(\mathcal R^{TM}\wedge\mathcal R^{TM})$, and $\widehat A_4=-p_1(TM)/24$; the adopted index-density polynomial $I_6=[\widehat A(TM)\operatorname{ch}(E)]_6$ is zero. This algebraic characteristic-polynomial calculation alone does not assert vanishing of an infinitesimal BRST variation. For the finite normalization check take a single-vertex complex $K$ and the ordinary field groupoid $\mathcal F(K)=BC_2$, with one object and automorphism group $C_2$. The combined unit weight is arrow-invariant and its normalized groupoid sum is $1/2$. Without the bulk, the odd boundary character is not a scalar invariant weight and no such finite gauging sum is defined. For two identical copies the boundary character itself is trivial and the same normalized groupoid sum applies. This example tests only the stated loop and does not establish that even copies have no other anomalies.
 
 ## Example references
 
@@ -65,7 +67,7 @@ Assume full AC and take the explicit unit round spin $S^4$ background with $E=S^
 
 ## Facts & Assumptions
 
-**Given:** The explicit round index-one SU(2) determinant/Pfaffian model with full AC, the order-two line character, the mod-two-index bulk response, and the finite single-vertex groupoid specified in the Example.
+**Given:** The explicit round index-one SU(2) inverse-determinant-line model with full AC, the order-two line character, the adopted bulk-line holonomy, and the finite single-vertex groupoid specified in the Example.
 
 [F1] [[pthm-aqft-global-anomaly-test]] computes boundary and adopted bulk phases for the same model and loop, including the actually proved round-sphere index-one instance.
 
@@ -75,9 +77,9 @@ Assume full AC and take the explicit unit round spin $S^4$ background with $E=S^
 
 [F4] [[def-qftx-finite-groupoid-integration]] defines the normalized sum over isomorphism classes with reciprocal automorphism weights for an invariant function on a finite groupoid.
 
-[F5] [[lem-qftx-round-s4-spin-twist-index-one]] proves the actual round positive-spin twist has kernel dimension one, cokernel zero and Chern number $-1$.
+[F5] [[lem-qftx-round-s4-spin-twist-index-one]] is a draft local mathematical lemma with a complete authored proof under full AC; it proves the actual round positive-spin twist has kernel dimension one, cokernel zero and Chern number $-1$.
 
-[F6] [[lem-qftx-periodic-su2-product-kernel-and-center-line-sign]] proves its real periodic-product kernel has dimension one and its central inverse-determinant action is $-1$.
+[F6] [[lem-qftx-periodic-su2-product-kernel-and-center-line-sign]] is a draft local mathematical lemma with a complete authored proof under full AC; it proves the periodic-product $J$-fixed real kernel has dimension one and the central inverse-determinant action is $-1$.
 
 [A2] [[def-axiom-of-choice]] is retained through these mathematical suppliers.
 

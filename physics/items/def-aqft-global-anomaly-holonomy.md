@@ -36,9 +36,9 @@ verification:
 
 ## Definition
 
-Fix an even integer $d\ge2$, a compact smooth oriented Riemannian $d$-manifold $M$ without boundary with a specified spin structure, a smooth principal right $G$-bundle $P\to M$ with connection $A$, and a unitary finite-dimensional complex representation $R:G\to U(V_R)$. Let $E_R=P\times_R V_R$ be the associated Hermitian bundle. Let $S^+$ and $S^-$ be the associated bundles of the two half-spin representations of $\operatorname{Spin}(d)$. The chiral Dirac operator is the first-order operator
+Fix an even integer $d\ge2$ and a compact smooth oriented Riemannian $d$-manifold $M$ without boundary. Let $F^+_{\mathrm{SO}}(M)$ be its principal right $\mathrm{SO}(d)$-bundle of positively oriented orthonormal frames. A specified spin structure is a principal right $\operatorname{Spin}(d)$-bundle $Q\to M$ with a smooth equivariant double-cover map $\lambda:Q\to F^+_{\mathrm{SO}}(M)$ covering the standard double covering $\rho:\operatorname{Spin}(d)\to\mathrm{SO}(d)$. The Levi-Civita connection lifts to a connection on $Q$. Let $\Delta^\pm$ be the two complex half-spin representations of $\operatorname{Spin}(d)$, with representation maps $\rho_\pm$, and define $S^\pm=Q\times_{\rho_\pm}\Delta^\pm$. Let $P\to M$ be a smooth principal right $G$-bundle with connection $A$, let $R:G\to U(V_R)$ be a unitary finite-dimensional complex representation, and set $E_R=P\times_R V_R$ with its associated Hermitian metric and induced connection. Let $c:TM\to\operatorname{End}_{\mathbb C}(S^+\oplus S^-)$ be the skew-Hermitian Clifford action, with $c(v)c(w)+c(w)c(v)=-2g(v,w)$ for $v,w\in T_xM$, and let $\nabla$ be the tensor-product connection induced by the lifted Levi-Civita connection and $A$. The chiral Dirac operator is the extension to the stated Sobolev spaces of the first-order expression in any positively oriented local orthonormal frame $(e_i)$; this expression is independent of that frame.
 
-$$D^+_{A,R}:H^1(M;S^+\otimes E_R)\longrightarrow L^2(M;S^-\otimes E_R),$$
+$$D^+_{A,R}:H^1(M;S^+\otimes E_R)\longrightarrow L^2(M;S^-\otimes E_R),\qquad D^+_{A,R}\psi=\sum_{i=1}^{d} c(e_i)\nabla_{e_i}\psi\quad(\psi\in C^\infty(M;S^+\otimes E_R)),$$
 
 where $H^1$ and $L^2$ are the first Sobolev and square-integrable completions for the fixed Riemannian metric. Assume the operator is Fredholm. Its inverse determinant line is
 

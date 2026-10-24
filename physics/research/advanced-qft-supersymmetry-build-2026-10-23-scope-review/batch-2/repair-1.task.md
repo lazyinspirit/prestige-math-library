@@ -1,0 +1,15 @@
+# Batch 2: repair 1
+
+Run: advanced-qft-supersymmetry-build-2026-10-23
+Batch: 2
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qftx-gauge-geometry, qftx-gauge-geometry-examples
+Items: def-qftx-nonabelian-gauge-data, def-qftx-principal-connection-form, def-qftx-lie-algebra-valued-form-bracket, lem-qftx-principal-curvature-cartan-bianchi, def-qftx-associated-covariant-derivative, ex-qftx-su2-flat-pure-gauge-connection, ex-qftx-su2-noncommuting-curvature
+Consolidated findings: [{"id":"def-qftx-nonabelian-gauge-data","type":"local","reason":"The Definition says local trivializations exist over each open U⊂M but does not specify a trivializing open cover. Clarify that an open cover {Uα} has equivariant diffeomorphisms π⁻¹(Uα)≅Uα×G, matching the supplied smooth-principal-bundle definition."},{"id":"def-qftx-principal-connection-form","type":"prerequisite","reason":"Proof 1.1 uses d/dt exp_G(tZ)|₀=Z to identify the orbit differential. The listed exponential definition and one-parameter-subgroup theorem do not state the scaling identity exp_G(tZ)=γ_Z(t). Derive this from uniqueness of γ_Z or supply the exact prerequisite."},{"id":"def-qftx-associated-covariant-derivative","type":"prerequisite","reason":"Proof 3.1 and Fact F8 use exp_G(tZ) as the one-parameter curve with initial tangent Z when differentiating the inverse transition. Derive exp_G(tZ)=γ_Z(t) from the listed uniqueness result or supply the exact prerequisite."}]
+Authorized source files: ["items/def-qftx-nonabelian-gauge-data.md","items/def-qftx-principal-connection-form.md","items/def-qftx-lie-algebra-valued-form-bracket.md","items/lem-qftx-principal-curvature-cartan-bianchi.md","items/def-qftx-associated-covariant-derivative.md","items/ex-qftx-su2-flat-pure-gauge-connection.md","items/ex-qftx-su2-noncommuting-curvature.md","library/quantum-field-theory-mathematics/qftx-gauge-geometry.md","library/quantum-field-theory-mathematics/qftx-gauge-geometry-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

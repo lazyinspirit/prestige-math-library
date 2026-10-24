@@ -151,14 +151,25 @@ $H_{\rm top}=c_1^{\rm top}(\mathcal O_{\mathbb P^3}(1))$. The hyperplane cycle
 map identifies these classes in their respective theories. Then
 $\operatorname{ch}(F)=N-kH_{\rm alg}^2$ and
 $c_2^{\rm alg}(F)=kH_{\rm alg}^2$. Its topological line class is the same
-$H_{\rm top}$ and $c_2^{\rm top}(F)=kH_{\rm top}^2$. Identify
-$\mathbb P^3$ with the twistor space of $S^4=\mathbb H\mathbb P^1$ through
-the quaternionic structure whose invariant lines are the $\ell_z$ and
-$\ell_\infty$, and let $\pi:\mathbb P^3\to S^4$ be its projection. Give each
-fiber its complex orientation, orient $S^4$ so that the positive incidence
-chart followed by the fiber orientation is the complex orientation of
-$\mathbb P^3$, and let $u\in H^4(S^4;\mathbb Z)$ be the positive point class.
-For this positive twistor orientation, $\pi^*u=H_{\rm top}^2$; consequently, if the underlying
+$H_{\rm top}$ and $c_2^{\rm top}(F)=kH_{\rm top}^2$. Define
+$\jmath:\mathbb C^4\to\mathbb C^4$ by
+$\jmath(\lambda_1,\lambda_2,\mu_1,\mu_2)=(-\bar\lambda_2,\bar\lambda_1,-\bar\mu_2,\bar\mu_1)$,
+so $\jmath^2=-1$. Identify $S^4=\mathbb H\mathbb P^1$ with the set of
+$\jmath$-invariant complex two-planes in $\mathbb C^4$, and define the twistor
+quotient map $\pi:\mathbb P(\mathbb C^4)\to S^4$ by
+$\pi([v])=\operatorname{span}_{\mathbb C}(v,\jmath v)$. This is independent
+of the representative of $[v]$ since $\jmath(cv)=\bar c\,\jmath v$, and
+$v,\jmath v$ are linearly independent for $v\ne0$ because $\jmath^2=-1$.
+Its fiber over a plane $L$ is $\mathbb P(L)\cong\mathbb P^1(\mathbb C)$; in
+the finite stereographic chart these fibers are the displayed $\ell_z$, and
+the remaining fiber is $\ell_\infty$. Write $z_1=x^0+ix^1$ and
+$z_2=x^2+ix^3$, orient the finite base chart by
+$dx^0\wedge dx^1\wedge dx^2\wedge dx^3$, and orient each fiber by its
+complex orientation. These orientations induce the complex orientation of
+$\mathbb P^3$ in base-then-fiber order; swapping these factors has sign
+$(-1)^{4\cdot2}=+1$, so this also agrees with fiber-then-base order. Let
+$u\in H^4(S^4;\mathbb Z)$ be the positive point class. For this positive
+twistor orientation, $\pi^*u=H_{\rm top}^2$; consequently, if the underlying
 topological bundle is $\pi^*E$ for a bundle $E\to S^4$ with $c_1(E)=0$, then
 $c_2(E)=ku$.
 
@@ -254,9 +265,14 @@ $\epsilon\mapsto r\epsilon$ for real $r$.
 [[def-qftx-positive-real-monad-first-order-families]]
 
 [F7] The finite algebraic resolution gives
-$\operatorname{ch}(F)=N-kH^2$, $c_1(F)=0$, $c_2(F)=kH^2$,
-$\chi(F)=N-2k$; its line cycle class is the topological hyperplane class, and
-the positive incidence fiber calculation gives $\pi^*u=H^2$.
+$\operatorname{ch}^{\rm alg}(F)=N-kH_{\rm alg}^2$,
+$c_1^{\rm alg}(F)=0$, $c_2^{\rm alg}(F)=kH_{\rm alg}^2$, and
+$\chi(F)=N-2k$; the topological second Chern class is
+$c_2^{\rm top}(F)=kH_{\rm top}^2$. The quaternionic quotient map is
+$\pi([v])=\operatorname{span}_{\mathbb C}(v,\jmath v)$, with fibers
+$\ell_z$ and $\ell_\infty$ and the positive orientation in the Statement; the
+transverse Thom pullback gives $\pi^*u=H_{\rm top}^2$. The conclusion
+$c_2(E)=ku$ requires the stated topological pullback hypothesis.
 [[lem-qftx-positive-real-monad-charge-normalization]]
 
 [F8] At zero real moment level, regular complex orbits correspond to unique
@@ -269,7 +285,7 @@ zero-level ADHM quotient.
 $0\to\mathcal O_{\mathbb P^r}(m-1)\to\mathcal O_{\mathbb P^r}(m)\to i_*\mathcal O_{\mathbb P^{r-1}}(m)\to0$.
 [[lem-qftx-positive-real-monad-hyperplane-twist-sequences]]
 
-[F11] For any commutative coefficient ring $A$, the algebraic twisting-sheaf theorem gives $H^0(\mathbb P^3_A,\mathcal O)=A$, acyclicity of $\mathcal O(-1)$ and $\mathcal O(-2)$, and homogeneous-polynomial global sections in nonnegative degree. In its Laurent-monomial calculation the modules and maps commute with coefficient homomorphisms. This is used for the algebraic $\operatorname{Proj}A$ family objects, not as an analytic GAGA assertion.
+[F11] For any commutative coefficient ring $A$ with identity and $n>0$, the algebraic twisting-sheaf theorem states $H^0(\mathbb P^n_A,\mathcal O(d))=0$ for $d<0$; in particular $H^0(\mathbb P^1_A,\mathcal O(-1))=0$. For $n=3$ it also gives $H^0(\mathbb P^3_A,\mathcal O)=A$, acyclicity of $\mathcal O(-1)$ and $\mathcal O(-2)$, and homogeneous-polynomial global sections in nonnegative degree. In its Laurent-monomial calculation the modules and maps commute with coefficient homomorphisms. A fixed real line $\ell$ is the projectivization of a complex two-plane, so $\ell_A=\ell\times_{\mathbb C}\operatorname{Spec}A\cong\mathbb P^1_A$; restriction of the homogeneous degree $-1$ twisting sheaf from $\mathbb P^3_A$ is $\mathcal O_{\ell_A}(-1)$. These are algebraic statements about the $\operatorname{Proj}A$ family objects, not an analytic GAGA assertion.
 [[thm-cohomology-projective-space-twisting-sheaves]]
 
 ## Proof
@@ -283,7 +299,7 @@ cohomology is used.
 
 2.1 By [F2], the global constant subspace $L$ is positive and $S=L\oplus M$ orthogonally, and the reduced monad on $M$ preserves the full framing. Apply [F3] to that reduced monad; it proves $H|_M$ positive. Since $H|_L$ is positive and the sum is orthogonal, $H$ is positive definite on all of $S$. In particular the argument also covers $k=0$, where $M=0$. [F2, F3, step 1.1]
 
-2.2 By hypothesis the coefficient-image module $M_A$ is a direct summand. The coefficient identities give $M_A^\perp=L_A$; for a direct summand in a finite free module with a perfect pairing, the restriction map to its dual is split-surjective, so taking orthogonal complements twice returns that summand. Hence $M_A=L_A^\perp$ and $S_A=L_A\oplus M_A$. The line-section base change and the vanishing $H^0(\ell_A,\mathcal O(-1))=0$ make restriction of $L_A$ injective; the reduced line positivity makes $H_A|_{L_0}$ positive. The internal-positivity proof applies to the reduction on $M_0$, so its reduced form is positive too. On infinity the family framing identifies the remaining orthogonal complement isometrically with $W_A$. [F1, F2, F3, F6, F9, step 1.2, algebra]
+2.2 By hypothesis the coefficient-image module $M_A$ is a direct summand. The coefficient identities give $M_A^\perp=L_A$; for a direct summand in a finite free module with a perfect pairing, the restriction map to its dual is split-surjective, so taking orthogonal complements twice returns that summand. Hence $M_A=L_A^\perp$ and $S_A=L_A\oplus M_A$. For each reduced real line $\ell$, its $\jmath$-invariant two-plane gives $\ell\cong\mathbb P^1_{\mathbb C}$ and $\ell_A\cong\mathbb P^1_A$. The restricted kernel/image sequence has kernel term $U_A\otimes_A\mathcal O_{\ell_A}(-1)$; by [F11], $H^0(\ell_A,\mathcal O_{\ell_A}(-1))=0$. Thus global sections of $K_A|_{\ell_A}$ inject into those of $F_A|_{\ell_A}$. A constant vector $l\in L_A\subseteq S_A$ gives a section of $K_A|_{\ell_A}$, and if its image in $H^0(\ell_A,F_A|_{\ell_A})$ vanishes then that section, and hence $l$, vanishes. The line-section base-change hypothesis identifies the reduced section space, so the reduced line positivity gives positivity on $L_0$. The internal-positivity proof applies to the reduction on $M_0$, so its reduced form is positive too. On infinity the family framing identifies the remaining orthogonal complement isometrically with $W_A$. [F1, F2, F3, F6, F9, F11, step 1.2, algebra]
 
 3.1 Write the four coefficient maps of $\alpha$ as $P=\alpha_{\lambda_1}$, $Q=\alpha_{\lambda_2}$, $R=\alpha_{\mu_1}$, and $T=\alpha_{\mu_2}$. From the first-slot convention and $j^2=-1$, the corresponding coefficients of $\beta$ are $Q^\dagger H,-P^\dagger H,T^\dagger H,-R^\dagger H$ in that order. The $\mu_1^2,\mu_2^2,\mu_1\mu_2$ coefficients of $\beta\alpha=0$ give $T^\dagger HR=R^\dagger HT=0$ and $R^\dagger HR=T^\dagger HT$. The maps $R,T$ are injective by exactness at the two coordinate points of $\ell_\infty$. Positivity of $H$ therefore makes their common Gram matrix $G$ positive definite. Replacing the paired end bases by $G^{-1/2}$ normalizes both maps to isometries with orthogonal images. Choosing an orthonormal basis of $S$ then identifies $R=-\iota_1$, $T=-\iota_2$ and $S=(V\oplus V)\oplus W_0$, with $W_0$ their orthogonal complement. [given, step 2.1, algebra]
 

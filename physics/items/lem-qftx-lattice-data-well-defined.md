@@ -13,10 +13,42 @@ deps:
   - def-countable-choice
   - def-qftx-nonabelian-lattice-gauge-data
   - def-differential-of-a-smooth-map
+  - def-lie-group
+  - def-topological-manifold-without-boundary
+  - def-borel-sigma-algebra
+  - lem-borel-product-of-second-countable-spaces
+  - def-measure
+  - def-measure-space
+  - def-probability-measure
+  - def-left-right-and-bi-invariant-borel-measure-on-a-lie-group
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - def-product-measure-on-sigma-finite-spaces
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - def-tdmath-measure-integral
+  - def-measure-with-density
+  - def-integrable-real-and-complex-functions-and-their-integrals
+  - def-complex-l-two-inner-product
+  - thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-qftx-nonabelian-lattice-gauge-data: mathematical-premise
   def-differential-of-a-smooth-map: mathematical-premise
+  def-lie-group: mathematical-premise
+  def-topological-manifold-without-boundary: mathematical-premise
+  def-borel-sigma-algebra: mathematical-premise
+  lem-borel-product-of-second-countable-spaces: mathematical-premise
+  def-measure: mathematical-premise
+  def-measure-space: mathematical-premise
+  def-probability-measure: mathematical-premise
+  def-left-right-and-bi-invariant-borel-measure-on-a-lie-group: mathematical-premise
+  def-product-sigma-algebra-and-finite-product-sigma-algebras: mathematical-premise
+  def-product-measure-on-sigma-finite-spaces: mathematical-premise
+  thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
+  def-tdmath-measure-integral: mathematical-premise
+  def-measure-with-density: mathematical-premise
+  def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
+  def-complex-l-two-inner-product: mathematical-premise
+  thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -41,6 +73,34 @@ Assume $\mathrm{AC}_\omega$. For every finite oriented lattice two-complex with 
 
 [[def-qftx-nonabelian-lattice-gauge-data|Finite oriented lattice variables, gauge action, Haar product, action, and Gauss generators]]
 
+[[def-lie-group|Smooth multiplication and inversion on a Lie group]]
+
+[[def-topological-manifold-without-boundary|Hausdorff and second-countable group topology]]
+
+[[def-borel-sigma-algebra|Borel sets on the compact group]]
+
+[[lem-borel-product-of-second-countable-spaces|Borel measurability on finite products of the Lie group]]
+
+[[def-probability-measure|Normalized probability measure]]
+
+[[def-left-right-and-bi-invariant-borel-measure-on-a-lie-group|Bi-invariance of the link measure]]
+
+[[def-product-sigma-algebra-and-finite-product-sigma-algebras|Finite product sigma-algebra]]
+
+[[def-product-measure-on-sigma-finite-spaces|Product measure]]
+
+[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique|Product measure existence, rectangle formula, and uniqueness]]
+
+[[def-tdmath-measure-integral|Measure integral and integrability]]
+
+[[def-measure-with-density|Probability density construction]]
+
+[[def-integrable-real-and-complex-functions-and-their-integrals|Integrability of real and complex functions]]
+
+[[def-complex-l-two-inner-product|Complex $L^2$ inner product and norm]]
+
+[[thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz|Well-definedness of the $L^2$ norm and inner product]]
+
 [Meyer, §1.2.4, printed pp. 13–14, on the invariant link measure and finite lattice expectation](https://ndl.ethernet.edu.et/bitstream/123456789/73862/1/82.pdf.pdf)
 
 [Lohmayer, §4.1, printed pp. 59–60, on gauge invariance and factorization of the pure-gauge measure](https://epub.uni-regensburg.de/16031/1/EigenvalueDistributionsOfWilsonLoops.pdf)
@@ -57,14 +117,22 @@ Assume $\mathrm{AC}_\omega$. For every finite oriented lattice two-complex with 
 
 [F3] [[def-differential-of-a-smooth-map]]: the differential of a smooth map at a point sends tangent vectors at that point to tangent vectors at its image.
 
+[F4] A finite product of sigma-finite measure spaces carries the unique product measure on the product sigma-algebra, with the rectangle formula; a finite product of probability measures is again a probability measure. [[def-product-sigma-algebra-and-finite-product-sigma-algebras]] [[def-product-measure-on-sigma-finite-spaces]] [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]
+
+[F5] A nonnegative measurable density defines a measure by integration, and a normalized finite density defines a probability measure. [[def-measure-with-density]] [[def-probability-measure]] [[def-tdmath-measure-integral]]
+
+[F6] The complex $L^2$ class uses $\|[f]\|_2=(\int |f|^2\,d\mathbb P_\Lambda)^{1/2}$ and the pairing $\langle[f],[g]\rangle=\int f\overline g\,d\mathbb P_\Lambda$; the cited result establishes representative-independence and norm properties. [[def-complex-l-two-inner-product]] [[thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz]]
+
+[F7] The Lie group is second-countable, so its finite-product Borel sigma-algebra equals the product sigma-algebra; continuous face-holonomy, gauge-action, and density maps are measurable for these structures. [[def-lie-group]] [[def-topological-manifold-without-boundary]] [[lem-borel-product-of-second-countable-spaces]]
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 For $h,k\in G^{\mathcal V}$, applying $k$ after $h$ sends an edge $e$ to $k_{s(e)}h_{s(e)}U_eh_{t(e)}^{-1}k_{t(e)}^{-1}=(kh)_{s(e)}U_e(kh)_{t(e)}^{-1}$; the identity tuple acts identically. Hence the formulas define a group action. Each coordinate is a composition of smooth multiplication and inversion maps, so the action map is smooth. By [F3], its differential sends the specified tangent vector at the identity of $G^{\mathcal V}$ to a tangent vector at $U$; applying $df_U$ therefore defines the stated directional derivative on every smooth $f$. The inherited axiom base is the stated $\mathrm{AC}_\omega$ [A1]. [given, A1, F1, F3, algebra]
 
-2.1 Around a face word based at $v_0$, the intermediate factors $h_{v_i}^{-1}h_{v_i}$ cancel, leaving $U_p(h\cdot U)=h_{v_0}U_p(U)h_{v_0}^{-1}$. Thus each $\Phi_p(U_p)$ and the total action are unchanged. On each edge, $U_e\mapsto h_{s(e)}U_eh_{t(e)}^{-1}$ is a left and right translation, so bi-invariance preserves that edge's Haar measure and hence their finite product. [given, F1, F2, step 1.1, algebra]
+2.1 Around a face word based at $v_0$, the intermediate factors $h_{v_i}^{-1}h_{v_i}$ cancel, leaving $U_p(h\cdot U)=h_{v_0}U_p(U)h_{v_0}^{-1}$. Thus each $\Phi_p(U_p)$ and the total action are unchanged. For a fixed $h$, the inverse image of a measurable rectangle $\prod_e A_e$ under the link action is the rectangle $\prod_e(h_{s(e)}^{-1}A_eh_{t(e)})$; bi-invariance preserves each factor measure. The product-measure rectangle formula and uniqueness therefore show that the finite link product measure is gauge invariant on the full product sigma-algebra. [given, F1, F2, F4, step 1.1, algebra]
 
-3.1 For each face $p$ and each $g\in G$, continuity of $\Phi_p$ gives an open neighborhood on which $|\Phi_p|\leq |\Phi_p(g)|+1$. Compactness of $G$ gives a finite subcover, so each $\Phi_p$ is bounded; summing over the finite face set gives $|S_\Lambda(U)|\leq M$ for some finite $M$. Thus $e^{-M}\leq e^{-S_\Lambda(U)}\leq e^M$, and integration against the product probability gives $e^{-M}\leq Z_\Lambda\leq e^M$. Hence the normalized Boltzmann measure $d\mathbb P_\Lambda=Z_\Lambda^{-1}e^{-S_\Lambda}d\mu_G^{\mathcal E^+}$ exists and is invariant under the group action by step 2.1. [given, F2, step 2.1, algebra]
+3.1 For each face $p$ and each $g\in G$, continuity of $\Phi_p$ gives an open neighborhood on which $|\Phi_p|\leq |\Phi_p(g)|+1$. Compactness of $G$ gives a finite subcover, so each $\Phi_p$ is bounded; summing over the finite face set gives $|S_\Lambda(U)|\leq M$ for some finite $M$. By [F7], the action, $S_\Lambda$, and its density are measurable; hence $e^{-M}\leq e^{-S_\Lambda(U)}\leq e^M$. Since the product link measure is a probability, $e^{-M}\leq Z_\Lambda\leq e^M$; in particular $0<Z_\Lambda<\infty$. The nonnegative density $Z_\Lambda^{-1}e^{-S_\Lambda}$ therefore defines the normalized probability measure $\mathbb P_\Lambda$. Its invariance follows from the invariance of the product measure and of $S_\Lambda$ in step 2.1. [given, F2, F4, F5, F7, step 2.1, algebra]
 
-4.1 For each $h\in G^{\mathcal V}$, define $T_hf(U)=f(h^{-1}\cdot U)$ on $L^2(\mathbb P_\Lambda)$. The measure invariance in step 3.1 makes $T_h$ unitary. The invariant sector is exactly $\bigcap_{h\in G^{\mathcal V}}\ker(T_h-I)$; each kernel is closed because $T_h-I$ is a bounded operator, and an arbitrary intersection of closed sets is closed. [step 3.1, algebra] ∎
+4.1 For each $h\in G^{\mathcal V}$, define $T_h[f]:=[U\mapsto f(h^{-1}\cdot U)]$ on complex $L^2(\mathbb P_\Lambda)$, with norm $\|[f]\|_2=(\int|f|^2\,d\mathbb P_\Lambda)^{1/2}$. Step 3.1 makes this well-defined and preserves the norm: invariance gives equality of integrals first for nonnegative simple functions and then, by the defining supremum for the nonnegative integral, for $|f|^2$. Thus each $T_h$ is a linear isometry. The invariant sector is exactly $\bigcap_{h\in G^{\mathcal V}}\ker(T_h-I)$; each $T_h-I$ is continuous by the norm triangle inequality, so its kernel is closed, and an arbitrary intersection of closed sets is closed. [F4, F6, step 3.1, algebra] ∎

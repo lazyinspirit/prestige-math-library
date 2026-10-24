@@ -5,7 +5,7 @@ title: "Singer obstruction to a global continuous gauge representative"
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
-dependency_level: 8
+dependency_level: 7
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics
@@ -36,7 +36,10 @@ sources:
   references:
     - title: "I. M. Singer, Some Remarks on the Gribov Ambiguity"
       url: https://doi.org/10.1007/BF01609471
-      locator: "Historical attribution only. The full text is not used as a proof source; the complete local argument and exact hypotheses are supplied by the listed mathematical dependencies. Earlier retrieval attempts and their limitations remain recorded in batch-3.coverage.json."
+      locator: "Historical attribution only. The full text is not used as a proof
+        source; the complete local argument and exact hypotheses are supplied by
+        the listed mathematical dependencies. Earlier retrieval attempts and
+        their limitations remain recorded in batch-3.coverage.json."
 verification:
   precheck: pending
 ---

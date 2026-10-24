@@ -40,7 +40,21 @@ $$
 (F,G):=\sum_A\left(\frac{\partial_r F}{\partial\Phi^A}\frac{\partial_lG}{\partial\Phi_A^*}-\frac{\partial_rF}{\partial\Phi_A^*}\frac{\partial_lG}{\partial\Phi^A}\right),
 $$
 
-with an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. This convention has odd parity, ghost number $+1$, the shifted graded-skew identity, the shifted Jacobi identity, and the graded Leibniz identity. A regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.
+with an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. Write $|F|\in\mathbb Z_2$ for the parity and $\operatorname{gh}(F)\in\mathbb Z$ for the ghost number of a homogeneous functional $F$. The bracket has parity and ghost number
+
+$$|(F,G)|=|F|+|G|+1\pmod 2,\qquad \operatorname{gh}((F,G))=\operatorname{gh}(F)+\operatorname{gh}(G)+1.$$
+
+For homogeneous $F,G,H$, its shifted graded-skew identity and Jacobi identity are
+
+$$ (F,G)=-(-1)^{(|F|+1)(|G|+1)}(G,F), $$
+
+$$ ((F,G),H)+(-1)^{(|F|+1)(|G|+|H|)}((G,H),F)+(-1)^{(|H|+1)(|F|+|G|)}((H,F),G)=0. $$
+
+The bracket is a graded biderivation, with the exact Leibniz identities
+
+$$ (F,GH)=(F,G)H+(-1)^{|G||H|}(F,H)G,\qquad (FG,H)=F(G,H)+(-1)^{|F||G|}G(F,H). $$
+
+A regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.
 
 Let a local gauge parameter be a smooth map $\lambda:U\to\mathfrak g$, and define its infinitesimal action on the fields by $\delta_\lambda A_\mu=\partial_\mu\lambda+[A_\mu,\lambda]$ and $\delta_\lambda\psi=-\rho(\lambda)\psi$. Write these variations as $\delta_\lambda\Phi^i=R^i_\alpha[\Phi]\lambda^\alpha$, where $R$ is the resulting linear differential operator in $\lambda$. Assume this declared gauge action is irreducible: if $\delta_\lambda\Phi^i\equiv0$ for every field configuration, then $\lambda\equiv0$. Assume also that its Lie-algebra action closes off shell, meaning its commutator closes without using equations of motion, and that no additional gauge symmetry is included. Let $S_0[A,\psi]$ be a specified local classical action invariant under these transformations. Write $s_0$ for the BRST operator on the minimal fields given by $s_0A_\mu=\partial_\mu c+[A_\mu,c]$, $s_0c=-\tfrac12[c,c]$, and $s_0\psi=-\rho(c)\psi$. The minimal BV functional candidate is
 

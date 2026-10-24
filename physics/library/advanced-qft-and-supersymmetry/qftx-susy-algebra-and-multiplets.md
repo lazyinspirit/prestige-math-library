@@ -9,7 +9,6 @@ items:
 examples: []
 requires:
   - aqft-susy-math-foundations
-  - qftx-nonabelian-yang-mills-model
   - countability-and-uncountability
 page_layout: compact-v1
 ---

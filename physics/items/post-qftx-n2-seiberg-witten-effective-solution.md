@@ -26,7 +26,7 @@ sources:
   references:
   - title: N. Seiberg and E. Witten, Electric-Magnetic Duality, Monopole Condensation, and Confinement in N=2 Supersymmetric Yang-Mills Theory
     url: https://arxiv.org/pdf/hep-th/9407087v1
-    locator: '§§5.2–5.6 and §6, printed pp. 22–39, especially equations (5.7)–(5.21), (6.1), (6.6), and (6.19): singularity proposal, local monopole action, curve, differential, and period data.'
+    locator: '§4.7, §§5.1–5.6 and §6, printed pp. 22–39, especially the nonzero linear period behavior near the monopole point and equations (5.7)–(5.21), (6.1), (6.6), and (6.19): local-coordinate assumption, singularity proposal, local monopole action, curve, differential, and period data.'
   - title: Adel Bilal, Duality in N=2 SUSY SU(2) Yang-Mills Theory
     url: https://arxiv.org/pdf/hep-th/9601007v1
     locator: '§§5.3 and 6.1–6.2, printed pp. 20–29: strong-coupling monopole/dyon singularities and the curve/period solution; the notes identify the construction as a review of the Seiberg–Witten proposal.'
@@ -86,6 +86,19 @@ monopole with $a_D=0$, while the $w=-1$ point has a light dyon with
 $a-a_D=0$ in the chosen frame. These are source-proposed physical inputs
 tested by their monodromies; they are not deduced here from a constructed
 continuum theory.
+
+In this source convention the monopole point is $u_m:=\Lambda^2$. In the
+chosen local monopole frame, adopt the source identification of the dual
+scalar $A_D$ with the period branch $a_D(u)$. This branch satisfies
+$a_D(u_m)=0$ and has nonzero derivative $a_D'(u_m)=c_0\ne0$, as expressed
+by its source-given linear vanishing near $u_m$; the source also treats $u$
+as a local coordinate in this patch. Adopt the local holomorphic inverse
+$u(A_D)$, defined by $a_D(u(A_D))=A_D$, with $u(0)=u_m$ and
+$c:=u'(0)=c_0^{-1}\ne0$. These are source-proposed local model inputs,
+not deductions from a constructed continuum theory or assertions of global
+single-valuedness. The local monopole superpotential uses this inverse in
+$\mu u(A_D)$.
+
 In the local monopole patch, adopt the dual $U(1)_D$ field content and superpotential described in the preceding effective-model definition. The source two-derivative vector metric is positive and generally field dependent, determined by the local dual coupling; a regulated matching scale is part of any effective action with the light monopole retained. That definition explicitly freezes this metric at $b=g_D^{-2}>0$ for the subsequent classical calculations. Metric freezing, and the further replacement of $u(A_D)$ by its linear Taylor term where explicitly requested, are additional approximations, not exact identities of the full period solution. No bound on their discarded corrections is adopted here. A small N=1-breaking mass parameter $\mu$ of
 mass dimension one adds the local superpotential term $\mu u(A_D)$ to
 $\sqrt2 A_D M\widetilde M$. The local description applies only near this
@@ -100,7 +113,7 @@ matter contents, or N=2 theories.
 
 ## Postulate references
 
-[Seiberg and Witten, §§5.2–5.6 and §6](https://arxiv.org/pdf/hep-th/9407087v1).
+[Seiberg and Witten, §4.7, §§5.1–5.6 and §6](https://arxiv.org/pdf/hep-th/9407087v1).
 
 [Bilal, §§5.3 and 6.1–6.2](https://arxiv.org/pdf/hep-th/9601007v1).
 

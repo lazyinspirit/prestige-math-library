@@ -34,7 +34,7 @@ sources:
   references:
     - title: "J. H. Rawnsley, On the Atiyah-Hitchin-Drinfeld-Manin vanishing theorem for cohomology groups of instanton bundles"
       url: "https://gdz.sub.uni-goettingen.de/download/pdf/PPN235181684_0241/LOG_0014.pdf"
-      locator: "§3, printed pp. 48–56: unique fibrewise correction, its local formulas, and the explicit D*D+2 identity."
+      locator: "§2, printed pp. 48–50, and §3, printed pp. 50–56: fibrewise correction setup, local formulas, and the explicit D*D+2 identity."
     - title: "R. O. Wells, The Conformally Invariant Laplacian and the Instanton Vanishing Theorem"
       url: "https://dokumen.pub/seminar-on-differential-geometry-am-102-volume-102-9781400881918.html"
       locator: "§§3–4, printed pp. 488–498: conformal operator and compact Bochner argument."
@@ -58,7 +58,7 @@ The scalar term is $R/6$ for the specified unit round metric, where $R=12$.
 
 [[lem-qftx-coupled-penrose-round-sphere-curvature]]
 
-[Rawnsley, §3, pp. 48–56](https://gdz.sub.uni-goettingen.de/download/pdf/PPN235181684_0241/LOG_0014.pdf)
+[Rawnsley, §2, pp. 48–50; §3, pp. 50–56](https://gdz.sub.uni-goettingen.de/download/pdf/PPN235181684_0241/LOG_0014.pdf)
 
 [Wells, §§3–4, pp. 488–498](https://dokumen.pub/seminar-on-differential-geometry-am-102-volume-102-9781400881918.html)
 
@@ -105,3 +105,7 @@ $$\bar\partial_F\psi(s)=\tau(\nabla_A^*\nabla_A+2)s,\qquad \tau=\frac{c\Omega^3}
 The factor $\tau$ is nonzero on the local chart. The zeroth-order coefficient is derived by $\Delta\Omega=-2\Omega^3$; it is not inferred from uniqueness. In particular a constant scalar with flat connection gives residual $2c/a^3$, agreeing with the displayed $+2$. By [F6] this is $R/6$. [F1, F6, step 4.1, algebra]
 
 6.1 The local expression equals the intrinsically constructed differential by step 3.1. The same construction and calculation apply in any stereographic chart with the unit round metric. Thus it patches smoothly across the base overlap and infinity; a chartwise solution satisfies the invariant operator equation globally. For the class image $s$, the residual vanishes by step 1.1, and the nonzero frame in step 5.1 gives $(\nabla_A^*\nabla_A+2)s=0$. Gauge changes preserve the fibre normalization and transport the unique mixed correction, while $D_\mu$ and the final operator conjugate by the same unitary frame change. On the dual, $F_{A^\vee}=-F_A^{\mathsf T}$ remains ASD; the identical construction applies. More generally a connection-preserving smooth bundle map commutes with the componentwise vertical projection and inverse, and transports the unique mixed correction; thus the edge and residual construction are natural for such maps, including direct sums. Nothing used irreducibility, absence of parallel sections or nonzero curvature. [F2, F3, F4, step 1.1, step 3.1, step 5.1, algebra] ∎
+
+## Remarks
+
+Rawnsley’s Proposition 5 on printed p. 49 constructs the unique horizontal correction, and Proposition 6 on that page states $D''\psi(s)=\pi^*[(D^*D+2)s]\otimes\tau$. Section 3 gives the correction formula in Eq. (14), printed p. 55, and derives the adjoint/operator identity on pp. 55–56. The statement $R=12$ and conversion to $R/6$ appear on p. 49. These passages concern the coupled connection. The frames, fibre normalization, orientation and coefficient used in the proof above are fixed by its local suppliers and explicit calculation; no termwise identification of its chart splitting with Rawnsley’s metric splitting is assumed.

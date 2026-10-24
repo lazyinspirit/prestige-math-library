@@ -18,7 +18,7 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-physical_scope: "A conditional result for one group-like symmetry in a unitary selected model whose codimension-greater-than-one defects admit the stated local exchange isotopies; simple bounded charged operators are considered only when their crossing action is scalar."
+physical_scope: "The group-Abelianity conclusion uses only total group-like fusion, effectiveness, and the stated local exchange isotopies; the separate character conclusion assumes a unitary Hilbert-space crossing action and a nonzero bounded simple operator with continuous scalar action."
 sources:
   references:
     - title: "Davide Gaiotto, Anton Kapustin, Nathan Seiberg, and Brian Willett, Generalized Global Symmetries"
@@ -33,9 +33,9 @@ verification:
 
 ## Statement
 
-Let $d\ge2$, $1\le p<d$, and let $\mathcal T$ have a group-like $p$-form global symmetry $G$ as defined above. Assume the selected model has a unitary Hilbert-space realization and, for every $g,h\in G$, admits two parallel copies of their codimension-$(p+1)$ symmetry supports inside a contractible neighborhood with a disk spanned by two independent normal directions, together with an isotopy exchanging their order without intersecting any other insertion or changing boundary data. Then $G$ is Abelian.
+Let $d\ge2$, $1\le p<d$, and let $\mathcal T$ have a group-like $p$-form global symmetry $G$ as defined above. Suppose that for every $g,h\in G$ and every allowed configuration of remaining insertions and fixed data, the model admits two parallel copies of their codimension-$(p+1)$ symmetry supports inside a contractible neighborhood with a disk spanned by two independent normal directions, and an admissible isotopy exchanging their order without intersecting any other insertion or changing boundary or model data. Then $G$ is Abelian.
 
-Let $O(C)$ be a nonzero genuine $p$-dimensional operator bounded in the operator norm of the selected Hilbert-space representation. Call it **simple for this result** when each topological local junction endomorphism on $O$ produced by passing a symmetry defect across it is a scalar multiple of $O$. Assume the induced action on the one-dimensional space spanned by $O$ is continuous and unitary. There is a continuous character $\chi_O:G\to U(1)$ such that passing $U_g$ across $O$ multiplies it by $\chi_O(g)$. Thus the charge of $O$ belongs to the Pontryagin dual $\widehat G=\operatorname{Hom}_{\mathrm{cts}}(G,U(1))$. This theorem makes no claim for $p=0$ or for operators with nonscalar crossing endomorphisms.
+For the separate character conclusion, assume additionally that the crossing action has a unitary Hilbert-space realization: there are a complex Hilbert space $\mathcal H$ and a group homomorphism $V:G\to U(\mathcal H)$, with $V_e=I$ and $V_{gh}=V_gV_h$, such that crossing $U_g$ acts on bounded linear operators by $O\mapsto V_gOV_g^{-1}$. Let $O\in B(\mathcal H)$ be a nonzero genuine $p$-dimensional operator, where $B(\mathcal H)$ is the space of bounded linear operators with norm $\|O\|:=\sup_{\|\psi\|=1}\|O\psi\|<\infty$. Call $O$ **simple for this result** if crossing each $U_g$ sends it to a scalar multiple $\chi_O(g)O$, and assume the map $g\mapsto\chi_O(g)\in\mathbb C$ is continuous. Then $\chi_O:G\to U(1)$ is a continuous character, so the charge of $O$ belongs to the Pontryagin dual $\widehat G=\operatorname{Hom}_{\mathrm{cts}}(G,U(1))$. Neither conclusion is asserted for $p=0$; the character conclusion also makes no claim for nonscalar crossing actions.
 
 ## Statement references
 
@@ -45,31 +45,31 @@ Let $O(C)$ be a nonzero genuine $p$-dimensional operator bounded in the operator
 
 ## Facts & Assumptions
 
-**Given:** The selected model $\mathcal T$, an integer $p$ with $1\le p<d$, its group-like symmetry $G$, and the exchange and operator hypotheses in the Statement.
+**Given:** The selected model $\mathcal T$, integers $d\ge2$ and $1\le p<d$, its group-like symmetry $G$, and the local exchange isotopies. For the character conclusion also assume the specified unitary representation, bounded nonzero genuine operator, scalar crossing action, and continuity condition.
 
-[A1] The model acts unitarily by conjugation on the bounded nonzero operator $O$; the line $\mathbb C O$ is invariant and the induced action there is continuous. Simplicity means each crossing junction endomorphism lies in $\mathbb C O$.
+[A1] For each $g,h\in G$ and every allowed configuration of remaining insertions and fixed data, two parallel copies of the corresponding codimension-$(p+1)$ symmetry defects admit an isotopy exchanging their order inside a contractible neighborhood while avoiding other insertions and preserving boundary and model data.
 
-[A2] For each $g,h\in G$, the two parallel symmetry defects admit an isotopy exchanging their order, while remaining disjoint from every other insertion and preserving all fixed boundary and model data.
+[A2] For the character conclusion, $V:G\to U(\mathcal H)$ is a unitary representation implementing crossing by conjugation on $B(\mathcal H)$, and $O\in B(\mathcal H)$ is nonzero, genuine, and simple in the Statement's sense.
 
-[F1] [[def-aqft-p-form-global-symmetry]]: $U_g$ are invertible topological symmetry defects, their same-support fusion is $U_g\star U_h=U_{gh}$, the group is effective modulo identical actions in all declared correlators, and $\widehat G$ is the group of continuous $U(1)$ characters.
+[A3] The induced scalar map $\chi_O:G\to\mathbb C$ is continuous.
+
+[F1] [[def-aqft-p-form-global-symmetry]]: fusion is defined for every ordered pair with $U_g\star U_h=U_{gh}$ and transparent identity and inverses; crossing automorphisms obey $\rho_{gh}=\rho_g\circ\rho_h$ in the stated order convention; topologicality preserves declared correlators, and effectiveness identifies elements with identical admitted actions; $\widehat G$ is the group of continuous $U(1)$ characters.
 
 ## Proof
 
-1.1 The group-like fusion law gives $U_g\star U_h=U_{gh}$ and $U_h\star U_g=U_{hg}$ on a common support. [F1, given]
+1.1 Total group-like fusion gives $U_g\star U_h=U_{gh}$ and $U_h\star U_g=U_{hg}$ on a common support for arbitrary $g,h\in G$. [F1, given]
 
-1.2 Passing $U_g$ across $O$ produces a topological local junction endomorphism of $O$. Simplicity in [A1] makes this $\chi_O(g)O$ for a scalar $\chi_O(g)$; invertibility of $U_g$ and $O\ne0$ imply $\chi_O(g)\ne0$. [A1, F1]
+1.2 Fusion-action compatibility in [F1] gives $\chi_O(gh)O=\rho_{gh}(O)=\rho_g(\rho_h(O))=\chi_O(h)\chi_O(g)O$. Since the scalar values commute and $O\ne0$, $\chi_O(gh)=\chi_O(g)\chi_O(h)$. The identity action gives $\chi_O(e)=1$. [A2, F1, given, algebra]
 
-2.1 By [A2], the two supports can be exchanged by an admissible isotopy. Topologicality in [F1] therefore makes the two fused insertions equal in every allowed correlator with all other insertions fixed. Effectiveness in [F1] identifies their group labels, so $gh=hg$ for arbitrary $g,h\in G$. [A2, F1, step 1.1]
+2.1 By [A1], the two supports can be exchanged while each admitted observable or background datum is held fixed. Topologicality in [F1] therefore makes the crossing automorphisms and correlator actions of the two fused insertions identical on all such data. Effectiveness in [F1] identifies their group labels, so $gh=hg$ for arbitrary $g,h\in G$. This argument uses no Hilbert-space or operator hypothesis. [A1, F1, step 1.1]
 
-2.2 Passing the fused interface $U_g\star U_h$ across $O$ is the same as passing $U_h$ and then $U_g$. The scalar action and the fusion law therefore give $\chi_O(gh)O=\chi_O(g)\chi_O(h)O$. Since $O\ne0$, $\chi_O(gh)=\chi_O(g)\chi_O(h)$. The identity defect $U_e=\mathbf 1_{\mathcal T}$ from [F1] acts trivially, so $\chi_O(e)O=O$ and $\chi_O(e)=1$. [F1, step 1.2, algebra]
+2.2 Unitary conjugation preserves the operator norm, so $\|O\|=\|V_gOV_g^{-1}\|=\|\chi_O(g)O\|=|\chi_O(g)|\|O\|$. Because $O\ne0$, its norm is positive and $|\chi_O(g)|=1$. By [A3], the resulting homomorphism is continuous; hence $\chi_O:G\to U(1)$ is continuous. [A2, A3, step 1.2, algebra]
 
-2.3 Unitary conjugation preserves the operator norm, so $\|O\|=\|\chi_O(g)O\|=|\chi_O(g)|\|O\|$. As $\|O\|>0$, $|\chi_O(g)|=1$; continuity follows from [A1]. Thus $\chi_O$ is a continuous homomorphism from $G$ to $U(1)$. [A1, step 1.2, algebra]
-
-3.1 By the definition of $\widehat G$ in [F1], $\chi_O\in\widehat G$. The proof uses local exchangeability for the single group $G$ and does not imply that different higher-form symmetry groups commute jointly. [F1, step 2.2, step 2.3] ∎
+3.1 By the definition of $\widehat G$ in [F1], $\chi_O\in\widehat G$. The proof establishes Abelianity for this single group under the specified local exchange hypothesis and does not imply that distinct higher-form symmetry groups commute jointly. [F1, step 1.2, step 2.2] ∎
 
 ## Remarks
 
-The diagram records the exchange isotopy and the same-support fusion maps. Its top arrow is equality of correlators under [A2]; the proof above, not the diagram, uses effectiveness to infer equality of group labels.
+The diagram records the exchange isotopy and the same-support fusion maps. Its top arrow is equality of correlators under [A1]; the proof above, not the diagram, uses effectiveness to infer equality of group labels.
 
 ```tikzcd
 U_g(\Sigma)\star U_h(\Sigma) \arrow[r, "\text{exchange isotopy}"] \arrow[d, "\text{fusion}"'] & U_h(\Sigma)\star U_g(\Sigma) \arrow[d, "\text{fusion}"] \\

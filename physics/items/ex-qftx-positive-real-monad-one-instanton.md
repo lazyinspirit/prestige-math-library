@@ -50,10 +50,17 @@ $$D_z= \begin{pmatrix} z_2&-z_1&\rho&0\\ -\bar z_1&-\bar z_2&0&\rho \end{pmatrix
 Then $D_zD_z^\dagger=f_z I_2$. The orthogonal projection
 $P_z=I_4-D_z^\dagger f_z^{-1}D_z$ has image $\ker D_z$, a rank-two Hermitian
 bundle over $\mathbb R^4$. Its projection connection is $\nabla=P\,d$.
-With $z_1=x^0+ix^1$, $z_2=x^2+ix^3$, and positive orientation
-$dx^0\wedge dx^1\wedge dx^2\wedge dx^3$, its curvature satisfies
-$F^+=\tfrac12(F+*F)=0$. The monad is trivial and positive on every real
-line, and its infinity framing is the identity framing by $W$.
+Set $z_1=x^0+ix^1$, $z_2=x^2+ix^3$, equip $\mathbb R^4$ with the Euclidean
+metric $g=\sum_{\mu=0}^{3}(dx^\mu)^2$, and orient it by
+$\operatorname{vol}_g=dx^0\wedge dx^1\wedge dx^2\wedge dx^3$. The Hodge star
+$*_g$ on real two-forms is the unique linear map satisfying
+$\eta\wedge *_g\xi=\langle\eta,\xi\rangle_g\operatorname{vol}_g$ for all
+real two-forms $\eta,\xi$; extend it complex-linearly and coefficientwise to
+$\operatorname{End}(\mathbb C^4)$-valued two-forms. If $F_\nabla$ is the
+curvature of $\nabla$, define its self-dual part by
+$F_\nabla^+=\tfrac12(F_\nabla+*_gF_\nabla)$. For this metric and orientation,
+the curvature satisfies $F_\nabla^+=0$. The monad is trivial and positive on
+every real line, and its infinity framing is the identity framing by $W$.
 
 ## Example references
 
@@ -91,8 +98,11 @@ $\beta\alpha=\lambda_1^2\mu_{\mathbb C}
 full homogeneous rank and the associated linear bundle monad.
 [[lem-qftx-positive-real-monad-rank-stability-criterion]]
 
-[F3] The finite monad resolution gives
-$c_2(F)=kH^2$; the charge on $S^4$ is conditional on the stated pullback.
+[F3] The finite monad resolution gives $c_2^{\rm top}(F)=kH_{\rm top}^2$. The
+charge supplier defines the twistor projection by
+$\pi([v])=\operatorname{span}_{\mathbb C}(v,\jmath v)$ with fibers the real
+incidence lines and proves $\pi^*u=H_{\rm top}^2$ in the positive orientation;
+the charge on $S^4$ is conditional on the topological pullback.
 [[lem-qftx-positive-real-monad-charge-normalization]]
 
 [F4] The curvature of a connection is its square; in a local frame it is
@@ -160,12 +170,12 @@ $$\begin{pmatrix} -2i\theta_1&2(\theta_2-i\theta_3)\\ -2(\theta_2+i\theta_3)&2i\
 where
 $$\theta_1=dx^0\wedge dx^1-dx^2\wedge dx^3,\quad \theta_2=dx^0\wedge dx^2+dx^1\wedge dx^3,\quad \theta_3=dx^0\wedge dx^3-dx^1\wedge dx^2.$$
 For the stated positive orientation, direct use of the Hodge-star definition
-gives $*\theta_i=-\theta_i$ for each $i$. Every coefficient of
+gives $*_g\theta_i=-\theta_i$ for each $i$. Every coefficient of
 $dD^\dagger\wedge dD$ is therefore anti-self-dual. The scalar $f_z^{-1}$
 and the degree-zero matrix factors $P_z$ in step 3.1 only take linear
-combinations of these coefficient forms, so $*F_\nabla=-F_\nabla$ and
-$F^+=0$. No sign convention from a differently oriented stereographic chart
-is used.
+combinations of these coefficient forms, so $*_gF_\nabla=-F_\nabla$ and
+$F_\nabla^+=0$. No sign convention from a differently oriented stereographic
+chart is used.
 [step 3.1, algebra]
 
 5.1 The residual $U(1)$ action sends

@@ -63,13 +63,13 @@ where $\bar E_{\mathbf2}=\bar P\times_{\mathbf2}\mathbb C^2$ and the final equal
 
 Let $\mathcal A_\nu(\Sigma)$ denote the disjoint union, over the bundle sectors in $\Sigma$, of their admissible smooth connections whose compactified charge is $\nu$. In the flat-space branch, admissible connections are required to have the specified smooth extension and finite Euclidean action.
 
-A classical Euclidean saddle is a smooth admissible connection whose first variation of $S_E$ vanishes for every smooth compactly supported connection variation preserving the boundary data. An instanton (respectively anti-instanton) saddle is a nonzero-charge saddle satisfying the positive (respectively negative) self-duality equation. A source observable is a gauge-invariant function $O$ on the admissible connection data; gauge transformations are smooth principal-bundle automorphisms over $\operatorname{id}_M$.
+A classical Euclidean saddle is a smooth admissible connection whose first variation of $S_E$ vanishes for every smooth compactly supported connection variation preserving the boundary data. An instanton (respectively anti-instanton) saddle is a nonzero-charge saddle satisfying the positive (respectively negative) self-duality equation. Let $\mathcal A(\Sigma):=\bigsqcup_{\nu\in\mathbb Z}\mathcal A_\nu(\Sigma)$ be the tagged disjoint union of the admissible connection spaces over the model-specified bundle sectors. A source observable is a complex-valued function $O:\mathcal A(\Sigma)\to\mathbb C$ that is constant on connection data related by a smooth diffeomorphism $\Phi:P\to P$ satisfying $\pi\circ\Phi=\pi$ and $\Phi(pg)=\Phi(p)g$ for all $p\in P$ and $g\in SU(2)$. No continuity, measurability, or other regularity of $O$ is assumed. Gauge transformations are these smooth principal-bundle automorphisms.
 
 The notation
 
 $$Z_{\mathrm{formal}}(\theta;O)=\sum_{\nu}e^{i\theta\nu}\int_{\mathcal A_{\nu}(\Sigma)}\mathcal D A\;O[A]e^{-S_E[A]}$$
 
-denotes only a formal continuum sector expression over connections, with gauge redundancy left untreated. Here $\theta$ is dimensionless and has period $2\pi$ when $\nu$ is integral. The expression defines no functional measure, gauge fixing or orbit-volume prescription, determinant, convergent integral, Hilbert-space sector, or continuum quantum field theory, and selects no finite regulator or limit.
+denotes only a formal continuum sector expression over connections, with gauge redundancy left untreated. Here $\theta$ is dimensionless and has period $2\pi$ when $\nu$ is integral. No continuity, measurability, or other regularity of the formal expression is asserted. The notation defines no functional measure, gauge fixing or orbit-volume prescription, determinant, convergent integral, Hilbert-space sector, or continuum quantum field theory, and selects no finite regulator or limit.
 
 ## Definition references
 

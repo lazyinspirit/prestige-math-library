@@ -24,7 +24,11 @@ sources:
 
 ## Definition
 
-Fix integers $N\ge1$ and $k\ge0$ and standard Hermitian spaces $V=\mathbb C^k$, $W=\mathbb C^N$. A framed ADHM linear datum is $x=(B_1,B_2,I,J)$ with $B_i\in\operatorname{End}_{\mathbb C}(V)$, $I:W\to V$ and $J:V\to W$. Define the complex and real polynomial expressions
+Fix integers $N\ge1$ and $k\ge0$ and equip $V=\mathbb C^k$ and $W=\mathbb C^N$ with the standard Hermitian inner products $\langle u,v\rangle=\sum_j\overline{u_j}v_j$, which are conjugate-linear in the first variable. For a linear map $T:E\to F$ between these spaces, its Hermitian adjoint $T^\dagger:F\to E$ is characterized by $\langle Tu,v\rangle_F=\langle u,T^\dagger v\rangle_E$; in the standard bases its matrix is the conjugate transpose. For $A,B\in\operatorname{End}_{\mathbb C}(V)$, define their commutator by $[A,B]:=AB-BA$. Let
+
+$$\mathscr D_{k,N}=\operatorname{End}_{\mathbb C}(V)^2\times\operatorname{Hom}_{\mathbb C}(W,V)\times\operatorname{Hom}_{\mathbb C}(V,W),\qquad \operatorname{Herm}(V)=\{H\in\operatorname{End}_{\mathbb C}(V):H^\dagger=H\}.$$
+
+Here $\operatorname{Herm}(V)$ is regarded as a real vector space. A framed ADHM linear datum is $x=(B_1,B_2,I,J)\in\mathscr D_{k,N}$. The complex and real moment maps are the maps $\mu_{\mathbb C}:\mathscr D_{k,N}\to\operatorname{End}_{\mathbb C}(V)$ and $\mu_{\mathbb R}:\mathscr D_{k,N}\to\operatorname{Herm}(V)$ defined by
 
 $$\mu_{\mathbb C}(x)=[B_1,B_2]+IJ,\qquad \mu_{\mathbb R}(x)=[B_1,B_1^\dagger]+[B_2,B_2^\dagger]+II^\dagger-J^\dagger J.$$
 

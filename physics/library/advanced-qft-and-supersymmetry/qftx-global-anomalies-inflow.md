@@ -14,5 +14,6 @@ requires:
   - qftx-instanton-topology-mathematics
   - qftx-finite-group-bf
   - relations-functions-and-quotients
+  - compact-operators-and-riesz-schauder-theory
 page_layout: compact-v1
 ---

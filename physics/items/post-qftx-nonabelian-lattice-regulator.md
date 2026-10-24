@@ -54,6 +54,8 @@ For each positive spatial direction $i\in\{1,2,3\}$, assign a link matrix $U_{x,
 
 $$U_{x,i,t}\mapsto \Omega_{x,t}U_{x,i,t}\Omega_{x+\hat i,t}^{-1},\qquad \eta_{x,t}\mapsto\Omega_{x,t}\eta_{x,t}\Omega_{x,t+1}^{-1}.$$
 
+Let $E_\Lambda^+$ be the finite set of these positively oriented spatial and temporal links, let $\mathcal C_\Lambda:=SU(2)^{E_\Lambda^+}$ be the full link-configuration space with its finite-product topology, and equip it with the product Borel sigma-algebra $\mathcal B_\Lambda:=\bigotimes_{\ell\in E_\Lambda^+}\mathcal B(SU(2))$.
+
 For $i<j$, define the spatial plaquette product
 
 $$U_{x,ij,t}=U_{x,i,t}U_{x+\hat i,j,t}U_{x+\hat j,i,t}^{-1}U_{x,j,t}^{-1},$$
@@ -70,11 +72,13 @@ and for adjacent slices $u',u$ and temporal links $\eta=(\eta_x)$, set
 
 $$S_t(u',u;\eta)=\beta\sum_{x,\ i}\left(1-\tfrac12\operatorname{ReTr}_2(\eta_xU'_{x,i}\eta_{x+\hat i}^{-1}U_{x,i}^{-1})\right).$$
 
-The adopted Wilson action is $S_\Lambda=\sum_{t=0}^{N_t-1}\big(S_s(u_t)+S_t(u_{t+1},u_t;\eta_t)\big)$, with $u_{N_t}=u_0$. The compact Hausdorff group $SU(2)$ has the unique normalized left Haar probability measure $dU$, which is also right invariant under the assumed Axiom of Choice. On each positively oriented link use this measure; $d\mu_\Lambda$ is its finite product over the link set. The exact finite-volume partition function and observable expectation for every bounded gauge-invariant function $O$ are
+The adopted Wilson action is $S_\Lambda=\sum_{t=0}^{N_t-1}\big(S_s(u_t)+S_t(u_{t+1},u_t;\eta_t)\big)$, with $u_{N_t}=u_0$. The compact Hausdorff group $SU(2)$ has the unique normalized left Haar probability measure $dU$, which is also right invariant under the assumed Axiom of Choice. On each positively oriented link use this measure; $d\mu_\Lambda$ is its finite product over the link set. For a bounded $\mathcal B_\Lambda$-measurable function $O:\mathcal C_\Lambda\to\mathbb C$, call $O$ gauge-invariant when $O(\Omega\cdot U)=O(U)$ for every vertex transformation $\Omega:\Lambda\to SU(2)$ and every $U\in\mathcal C_\Lambda$, where $\Omega\cdot U$ is the link configuration whose coordinates are the transformed links displayed above. The exact finite-volume partition function and the expectation of each such observable are
 
 $$Z_\Lambda=\int e^{-S_\Lambda}\,d\mu_\Lambda,\qquad \langle O\rangle_\Lambda=Z_\Lambda^{-1}\int Oe^{-S_\Lambda}\,d\mu_\Lambda.$$
 
-For the transfer convention, let $\mathcal H_{\rm kin}=L^2(SU(2)^{E_s},d\mu_s)$, where $E_s$ is the finite set of positive spatial links in one slice and $d\mu_s$ is product normalized Haar probability. Define $\mathcal H_{\rm phys}=\{\psi\in\mathcal H_{\rm kin}:\mathcal U(h)\psi=\psi\text{ for every }h\in SU(2)^{V_s}\}$, where $V_s$ is the finite vertex set of the slice and $\mathcal U(h)\psi(u)=\psi(h^{-1}\!\cdot u)$ in $L^2$. The finite-lattice well-definedness result establishes that this fixed subspace is closed. It is the group-invariant finite-slice Gauss sector. Define
+If $O$ represents a physical observable with assigned units, $\langle O\rangle_\Lambda$ has those same units; this postulate assigns no unit to the generic mathematical function $O$.
+
+For the transfer convention, let $V_s=(\mathbb Z/N_s\mathbb Z)^3$ be the finite vertex set of one slice and $E_s=V_s\times\{1,2,3\}$ its positive spatial-link set. Define $d\mu_s:=\bigotimes_{(x,i)\in E_s}dU$ on $SU(2)^{E_s}$, where each factor is the normalized Haar Borel probability; let $\mathcal H_{\rm kin}=L^2(SU(2)^{E_s},d\mu_s;\mathbb C)$ be the complex $L^2$ space. Define $\mathcal H_{\rm phys}=\{\psi\in\mathcal H_{\rm kin}:\mathcal U(h)\psi=\psi\text{ for every }h\in SU(2)^{V_s}\}$, where $\mathcal U(h)\psi(u)=\psi(h^{-1}\!\cdot u)$ in $L^2$. The finite-lattice well-definedness result establishes that this fixed subspace is closed. It is the group-invariant finite-slice Gauss sector. For one transfer step let $\eta=(\eta_x)_{x\in V_s}\in SU(2)^{V_s}$ denote its temporal-link tuple, and define $d\mu_V:=\bigotimes_{x\in V_s}dU$ on those coordinates, with each factor the normalized Haar Borel probability $dU$. Thus $d\mu_V$ is the finite product probability over all temporal links in one time step. Define
 
 $$K(u',u)=e^{-\frac12S_s(u')-\frac12S_s(u)}\int_{SU(2)^{V_s}}e^{-S_t(u',u;\eta)}\,d\mu_V(\eta),\qquad (T\psi)(u')=\int K(u',u)\psi(u)\,d\mu_s(u).$$
 

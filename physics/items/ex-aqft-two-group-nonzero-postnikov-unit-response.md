@@ -50,7 +50,7 @@ Let $K=\partial\Delta^4$ be the ordered boundary complex of a $4$-simplex with v
 
 **Given:** $K=\partial\Delta^4$ with its ordered simplices, $G=A=\mathbb Z_2$ with trivial action, $\beta(g,h,k)=ghk$, vertex potential $q=(0,1,0,1,0)$, the stated edge cochain $c$, the resulting face cochain $B$, the gauge parameters, and the finite unit-response model.
 
-[A1] Adopted finite model data: every allowed background has one configuration with measure $1$ and action $0$, and every gauge arrow fixes it; hence the model weight is $1$ on every background.
+[A1] Adopted finite model data: every allowed background has one configuration with measure $1$ and action $0$, and every gauge arrow has the unique configuration bijection between singleton fibers; hence the model weight is $1$ on every background. Each $2$-arrow intertwiner and each composition or unit comparison is the unique identity map on its singleton target fiber and constant observable algebra.
 
 [F1] [[def-aqft-two-group-background]]: a normalized group $3$-cocycle is identified modulo coboundaries of normalized $2$-cochains; the background equation on this tetrahedron is $B_{123}-B_{023}+B_{013}-B_{012}=\beta(a_{01},a_{12},a_{23})$ for the trivial action.
 

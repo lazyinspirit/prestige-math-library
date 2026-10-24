@@ -24,5 +24,6 @@ requires:
   - the-de-rham-complex-homotopy-and-mayer-vietoris
   - integration-of-forms-and-the-general-stokes-theorem
   - compact-laplace-type-operators-and-hodge-representatives
+  - compact-operators-and-riesz-schauder-theory
 page_layout: compact-v1
 ---

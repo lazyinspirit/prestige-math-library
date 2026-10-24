@@ -16,6 +16,7 @@ deps:
   - def-qftx-n2-coulomb-branch-data
   - post-qftx-n2-seiberg-witten-effective-solution
   - def-qftx-bps-state-and-saturation
+  - def-qftx-unitary-super-poincare-representation
   - def-trace-class-operator
   - def-trace-of-a-trace-class-operator
 dependency_roles:
@@ -23,6 +24,7 @@ dependency_roles:
   def-qftx-n2-coulomb-branch-data: formulation-prerequisite
   post-qftx-n2-seiberg-witten-effective-solution: physical-assumption
   def-qftx-bps-state-and-saturation: formulation-prerequisite
+  def-qftx-unitary-super-poincare-representation: formulation-prerequisite
   def-trace-class-operator: mathematical-premise
   def-trace-of-a-trace-class-operator: mathematical-premise
 proof_strategy: not-applicable
@@ -58,7 +60,11 @@ $$\langle(n_e,n_m),(n'_e,n'_m)\rangle_{\mathrm{DSZ}}=2(n_m n'_e-n_e n'_m).$$
 
 In particular the source-designated monopole label $\gamma_m=(0,1)$ and dyon label $\gamma_d=(1,-1)$ satisfy $\langle\gamma_m,\gamma_d\rangle_{\mathrm{DSZ}}=2$, the convention matched by a two-arrow Kronecker quiver with both arrows directed from the dyon vertex to the monopole vertex. The lattice records formal charge labels only: it does not assert that every label is an allowed line operator or a realized particle.
 
-For each $u\in U$, the selected model supplies a stable support $\Gamma^{\mathrm{st}}_u\subseteq\Gamma_{\mathrm{SW}}\setminus\{0\}$. For each $\gamma\in\Gamma^{\mathrm{st}}_u$, supply a one-particle massive rest-fiber Hilbert sector $\mathcal H^1_{u,\gamma}$ carrying the selected unitary four-dimensional rigid $\mathcal N=2$ super-Poincaré representation at rest momentum $P^\mu=(M_{u,\gamma},0,0,0)$ in metric $\eta=\operatorname{diag}(-1,1,1,1)$, with conserved charge $\gamma$, positive scalar rest mass $M_{u,\gamma}$, and scalar central-charge block $Z^{12}=z_u(\gamma)$, $Z^{21}=-z_u(\gamma)$. Supply a nonzero closed Hilbert subspace $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}\subseteq\mathcal H^1_{u,\gamma}$ invariant under the chosen massive little-group rotations and identified as the selected BPS sector. Its vectors lie in the common supercharge domain, and every nonzero vector is BPS-saturated in the exact sense of the earlier BPS-state definition: $M_{u,\gamma}=|z_u(\gamma)|$, and the two N=2 annihilating supercharge combinations in that definition vanish on them. Stability is supplied model data: this sector is discrete and separated by a positive spectral gap from the multiparticle continuum at the same conserved charge. The sector and gap are inputs, not conclusions here. On this sector let $J_3$ be the self-adjoint generator of rotations about a fixed spatial axis in the restricted unitary representation of the massive little group, normalized so that $2J_3$ has integer spectrum. Require its spectral calculus to define a bounded trace-class operator $B_{u,\gamma}=(-1)^{2J_3}(2J_3)^2$, and supply a Hilbert basis $E_{u,\gamma}$ of $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$.
+For each $u\in U$, the selected model supplies a stable support $\Gamma^{\mathrm{st}}_u\subseteq\Gamma_{\mathrm{SW}}\setminus\{0\}$. For each $\gamma\in\Gamma^{\mathrm{st}}_u$, supply a one-particle massive rest-fiber Hilbert sector $\mathcal H^1_{u,\gamma}$ carrying the selected unitary four-dimensional rigid $\mathcal N=2$ super-Poincaré representation at rest momentum $P^\mu=(M_{u,\gamma},0,0,0)$ in metric $\eta=\operatorname{diag}(-1,1,1,1)$, with conserved charge $\gamma$, positive scalar rest mass $M_{u,\gamma}$, and scalar central-charge block $Z^{12}=z_u(\gamma)$, $Z^{21}=-z_u(\gamma)$. The supplied spin-cover representation has group $\mathrm{SL}(2,\mathbb C)$ and Lorentz action $g\mapsto\Lambda_g$ characterized by $\Phi(\Lambda_gx)=g\Phi(x)g^\dagger$, with $\Phi(x)=-\sigma^\mu x_\mu$, as in the unitary super-Poincaré representation definition. Define the rest-momentum stabilizer
+$$G_{P_{u,\gamma}}:=\{g\in\mathrm{SL}(2,\mathbb C):\Lambda_gP_{u,\gamma}=P_{u,\gamma}\}=\mathrm{SU}(2).$$
+Indeed, the supplied map sends $P_{u,\gamma}$ to $M_{u,\gamma}I_2$, so its stabilizer consists exactly of determinant-one unitary matrices. The supplied rest fiber is invariant under this subgroup; define its little-group action by $\pi_{u,\gamma}(g):=U_{u,\gamma}(g,0)|_{\mathcal H^1_{u,\gamma}}$, which is strongly continuous as a restriction of the supplied representation. Choose the spin axis $3$ and the one-parameter rotation subgroup
+$$r_3(\theta)=\begin{pmatrix}e^{-i\theta/2}&0\\0&e^{i\theta/2}\end{pmatrix},\qquad \theta\in\mathbb R/(4\pi\mathbb Z).$$
+Supply a nonzero closed Hilbert subspace $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}\subseteq\mathcal H^1_{u,\gamma}$ invariant under this restricted $\mathrm{SU}(2)$ action and identified as the selected BPS sector. Its vectors lie in the common supercharge domain, and every nonzero vector is BPS-saturated in the exact sense of the earlier BPS-state definition: $M_{u,\gamma}=|z_u(\gamma)|$, and the two $\mathcal N=2$ annihilating supercharge combinations in that definition vanish on them. Stability is supplied model data: this sector is discrete and separated by a positive spectral gap from the multiparticle continuum at the same conserved charge. The sector and gap are inputs, not conclusions here. On $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$, supply a self-adjoint operator $J_3$ with $2J_3$-integer spectrum such that the restricted action of $r_3(\theta)$ is $e^{-i\theta J_3}$ for every $\theta\in\mathbb R$. Require its spectral calculus to define a bounded trace-class operator $B_{u,\gamma}=(-1)^{2J_3}(2J_3)^2$, and supply a Hilbert basis $E_{u,\gamma}$ of $\mathcal H^{1,\mathrm{BPS}}_{u,\gamma}$.
 
 Define the four-dimensional $\mathcal N=2$ second-helicity supertrace, also called the $B_2$ index here, by
 
@@ -75,6 +81,8 @@ Pure N=2 SU(2) Coulomb-branch and period data: [[def-qftx-n2-coulomb-branch-data
 Source-proposed pure SU(2) Seiberg–Witten effective data and scalar central-charge normalization: [[post-qftx-n2-seiberg-witten-effective-solution]].
 
 Massive-fiber BPS saturation: [[def-qftx-bps-state-and-saturation]].
+
+Spin-cover Lorentz action and its $\mathrm{SL}(2,\mathbb C)$ representation: [[def-qftx-unitary-super-poincare-representation]].
 
 Trace-class operators: [[def-trace-class-operator]].
 

@@ -23,7 +23,7 @@ sources:
   references:
     - title: Aneesh V. Manohar, Introduction to Effective Field Theories (2018 Les Houches full lecture notes)
       url: https://arxiv.org/pdf/1804.05863
-      locator: Chapter 2, §2 Renormalization, equations (6)–(11) and scale-dependence discussion; Chapter 4, §10 RG Improved Perturbation Theory, equations (49)–(52).
+      locator: Chapter 3, §3.2 “Renormalization,” equations (3.6)–(3.11) and scale-dependence discussion; Chapter 5, §5.10 “RG Improved Perturbation Theory,” equations (5.49)–(5.52).
     - title: C. P. Burgess, Introduction to Effective Field Theory (full review)
       url: https://arxiv.org/pdf/hep-th/0701053
       locator: §§2.2.1–2.2.2 on the Wilson scale and renormalization; §4.1.3, equations (73)–(79), for physical and MS scheme conventions and running.

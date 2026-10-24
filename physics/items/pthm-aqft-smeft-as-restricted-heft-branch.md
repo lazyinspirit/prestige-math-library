@@ -16,7 +16,6 @@ deps:
   - def-aqft-chiral-power-counting
   - def-qftx-associated-covariant-derivative
   - lem-qftx-principal-curvature-cartan-bianchi
-  - def-axiom-of-choice
 dependency_roles:
   post-aqft-smeft-model: physical-assumption
   def-aqft-warsaw-basis-contract: formulation-prerequisite
@@ -24,8 +23,7 @@ dependency_roles:
   def-aqft-chiral-power-counting: formulation-prerequisite
   def-qftx-associated-covariant-derivative: mathematical-premise
   lem-qftx-principal-curvature-cartan-bianchi: mathematical-premise
-  def-axiom-of-choice: mathematical-premise
-axiom_base: "ZF + AC, inherited through the exact selected reductive/Reynolds mathematical premise chain for the finite invariant-operator contract; the pointwise field substitution itself uses no choice principle."
+axiom_base: "ZF + AC_omega, inherited through the selected gauge and field-data suppliers; the finite field substitution uses no additional choice principle."
 proof_strategy: direct
 physical_scope: "A conditional field-space and finite-polynomial coefficient map from the selected dimension-six linear Higgs model to a restricted nonlinear HEFT branch on the nonzero-doublet patch. It proves no equality of full operator quotients, no converse, no universal HEFT parametrization, no UV completion, and no empirical realization."
 provenance:
@@ -71,8 +69,6 @@ The canonical-dimension cutoff and the separately defined HEFT chiral/loop gradi
 
 [[lem-qftx-principal-curvature-cartan-bianchi|Curvature convention for the gauge fields]]
 
-[[def-axiom-of-choice|Full Axiom of Choice inherited by the selected invariant chain]]
-
 [Grzadkowski et al., full dimension-six operator article](https://arxiv.org/pdf/1008.4884)
 
 [Buchalla, Catà and Krause, full electroweak chiral EFT paper](https://arxiv.org/pdf/1307.5017)
@@ -93,13 +89,11 @@ The canonical-dimension cutoff and the separately defined HEFT chiral/loop gradi
 
 [F5] [[def-qftx-associated-covariant-derivative]] and [[lem-qftx-principal-curvature-cartan-bianchi]]: associated fields use the supplied right-principal connection and representation covariant derivative, and gauge curvature is $F_A=dA+\tfrac12[A\wedge A]$; in the electroweak doublet representation this gives the local $D_\mu H$ and the compatible $D_\mu U$ used above.
 
-[A1] [[def-axiom-of-choice]]: the exact selected reductive/Reynolds premise chain for the finite invariant-operator contract carries the full Axiom of Choice. It is retained as an inherited foundation for the coefficient contract; the pointwise substitution calculation below makes no choice.
-
 ## Proof
 
 **Proof technique:** Construct the inverse on the nonzero-doublet patch, check gauge equivariance, and substitute finite polynomial representatives term by term.
 
-**Given:** [F1]–[F5] and [A1].
+**Given:** [F1]–[F5].
 
 1.1 For $H=(a,b)^T\ne0$, let $\rho=(H^\dagger H)^{1/2}>0$. Direct multiplication gives $\Sigma=(i\sigma^2H^*,H)=\begin{pmatrix}b^*&a\\-a^*&b\end{pmatrix}$, so $\Sigma^\dagger\Sigma=(|a|^2+|b|^2)I=\rho^2I$ and $\det\Sigma=|a|^2+|b|^2=\rho^2$. Therefore $U=\Sigma/\rho$ is unitary with determinant one, hence lies in $SU(2)$, and $h=\sqrt2\rho-v>-v$ lies in $J$. The map $\Phi$ is smooth by scalar and matrix multiplication. Also $H^\dagger H$ is smooth and positive on $\mathbb C^2\setminus\{0\}$, $s\mapsto\sqrt{s}$ is smooth on $(0,\infty)$, and division by $\rho>0$ is smooth, so the displayed inverse is smooth. Conversely, direct multiplication for an $SU(2)$ matrix gives $i\sigma^2U^*=Ui\sigma^2$ and $i\sigma^2e_2=e_1$, so $\Sigma(\Phi(h,U))=(v+h)U/\sqrt2$ and $\rho(\Phi(h,U))=(v+h)/\sqrt2$. These identities show that the two formulas compose to the identity in both directions. Thus $\Phi$ is a smooth diffeomorphism onto precisely the nonzero-doublet patch. [given, F1, F2, algebra]
 
@@ -113,4 +107,4 @@ The conjugate formula follows by complex conjugation. Repeated covariant derivat
 
 3.1 A degree-at-most-six polynomial has seventh derivative identically zero, whereas $(d/dx)^7e^x=e^x\ne0$ on every open interval. Thus $e^x$ cannot be one of the branch coefficient functions on any open interval. This exhibits a smooth HEFT coefficient choice outside this finite polynomial class and proves that the substitution does not parametrize general HEFT functions. [given, step 2.2, algebra]
 
-4.1 The finite starting list is selected by canonical dimension in [F3], whereas [F4] defines a separate chiral/loop grading and allows arbitrary smooth radial functions. No step identifies those gradings or their operator lists. The construction used only the nonzero-doublet diffeomorphism and finite substitutions; it supplies neither a value at $H=0$ nor an inverse map from arbitrary HEFT data, a compact-to-algebraic invariant-space equality, or a UV-completion theorem. [given, F3, F4, A1, step 1.1, step 2.2, algebra] ∎
+4.1 The finite starting list is selected by canonical dimension in [F3], whereas [F4] defines a separate chiral/loop grading and allows arbitrary smooth radial functions. No step identifies those gradings or their operator lists. The construction used only the nonzero-doublet diffeomorphism and finite substitutions; it supplies neither a value at $H=0$ nor an inverse map from arbitrary HEFT data, a compact-to-algebraic invariant-space equality, or a UV-completion theorem. [given, F3, F4, step 1.1, step 2.2, algebra] ∎

@@ -77,8 +77,15 @@ D map, kinetic normalization, and cutoff regime in the Example.
 1.1 Differentiating $W_\mu=\sqrt2 A_D M\widetilde M+\mu u(A_D)$ gives
 $F_{A_D}=\sqrt2 M\widetilde M+\mu u'(A_D)$,
 $F_M=\sqrt2 A_D\widetilde M$, and
-$F_{\widetilde M}=\sqrt2 A_DM$. At $A_D=0$, the first equation is
-$\sqrt2M\widetilde M+\mu c=0$, while the other two vanish. [A1, F1, F2, given, algebra]
+$F_{\widetilde M}=\sqrt2 A_DM$. The neutral kinetic term in [F1] is
+$g_D^{-2}|\partial A_D|^2$, so set $A_{\mathrm{can}}=A_D/g_D$.
+By the chain rule its canonical auxiliary field is
+$F_{A_{\mathrm{can}}}=\partial W_\mu/\partial A_{\mathrm{can}}
+=g_D\,\partial W_\mu/\partial A_D=g_DF_{A_D}$. Since $g_D>0$, the
+canonical and connection-normalized neutral F equations have the same zero
+set, so [F2] applies to this local model. At $A_D=0$, the first equation
+is $\sqrt2M\widetilde M+\mu c=0$, while the other two vanish.
+[A1, F1, F2, given, algebra]
 
 2.1 Set $v=(|\mu c|/\sqrt2)^{1/2}>0$ and
 $\widetilde M=-\mu c/(\sqrt2v)$, with $M=v$. Then

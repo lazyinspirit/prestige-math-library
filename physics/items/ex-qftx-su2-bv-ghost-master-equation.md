@@ -4,7 +4,7 @@ kind: example
 title: The SU(2) Ghost Sector Solves the Classical Master Equation
 status: draft
 origin: session
-dependency_level: 4
+dependency_level: 5
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics

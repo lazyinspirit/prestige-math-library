@@ -48,7 +48,7 @@ Assume the axiom of countable choice $\mathrm{AC}_\omega$. Let $M$ be a finite-d
 
 First choose a finite-dimensional real Lie group $G$ that is compact in its manifold topology (every open cover has a finite subcover) and noncommutative (there are $g,h\in G$ with $gh\ne hg$). The actual group $G$, including its global form, is part of the datum. Its Lie algebra is $\mathfrak g=\operatorname{Lie}(G)=T_eG$ with the bracket transported from left-invariant smooth vector fields.
 
-Choose a smooth right principal $G$-bundle $\pi:P\to M$: the projection and right action are smooth, the action is free and transitive on each fibre, and there are local trivializations $\pi^{-1}(U)\cong U\times G$ that are equivariant diffeomorphisms over each open $U\subseteq M$.
+Choose a smooth right principal $G$-bundle $\pi:P\to M$: the projection and right action are smooth, and the action is free and transitive on each fibre. There is an open cover $\{U_\alpha\}_{\alpha\in A}$ of $M$ with a family of equivariant diffeomorphisms $\phi_\alpha:\pi^{-1}(U_\alpha)\to U_\alpha\times G$ for $\alpha\in A$, each over $U_\alpha$. Explicitly, $\operatorname{pr}_1\circ\phi_\alpha=\pi$, and if $\phi_\alpha(p)=(x,g)$ then $\phi_\alpha(ph)=(x,gh)$ for every $h\in G$.
 
 Choose a specified set $I$ of representation labels and, for each $a\in I$, a finite-dimensional complex vector space $V_a$, a positive-definite Hermitian form $h_a$, and a smooth group homomorphism $\rho_a:G\to U(V_a,h_a)$. Here $U(V_a,h_a)$ is the group of complex-linear isometries of $h_a$, and a representation is the corresponding finite-dimensional group action. Its associated vector bundle is the quotient $E_a=P\times_{\rho_a}V_a$ with relation $[pg,v]=[p,\rho_a(g)v]$.
 

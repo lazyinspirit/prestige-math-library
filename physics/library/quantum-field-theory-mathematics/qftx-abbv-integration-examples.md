@@ -10,5 +10,6 @@ examples:
 requires:
   - qftx-abbv-integration
   - relations-functions-and-quotients
+  - intersection-pairings-self-intersection-and-euler-classes
 page_layout: compact-v1
 ---

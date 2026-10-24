@@ -47,11 +47,11 @@ Take one chiral superfield $\Phi$ with mass dimension one and tree superpotentia
 
 ## Facts & Assumptions
 
-**Given:** The formal N=1 Wilsonian action datum, the theorem hypotheses, including its local background-spurion extension, the stated one-field superpotential, and a positive full quadratic kinetic coefficient $Z(\lambda)$.
+**Given:** The formal N=1 Wilsonian action datum and theorem hypotheses, including the coefficientwise local background-spurion extension with independent unconstrained real spurion jets and chirality before constant-background evaluation; the stated one-field superpotential; and a positive full quadratic kinetic coefficient $Z(\lambda)$.
 
-[F1] [[def-qftx-wilsonian-n1-action-data]]: the chiral superfield has a holomorphic F-term integrand and a real quadratic kinetic term whose coefficient can be represented in the Wilsonian D-term data.
+[F1] [[def-qftx-wilsonian-n1-action-data]]: the chiral superfield has a holomorphic F-term integrand and a real quadratic kinetic term in the Wilsonian D-term data; real-spurion selection is interpreted in its coefficientwise formal background-jet algebra before evaluating constant backgrounds.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: in the holomorphic field variable, the perturbative Wilsonian F-term integrand is unchanged coefficientwise.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, the holomorphic field-variable Wilsonian F-term integrand is unchanged coefficientwise.
 
 [A1] The single-field model has no gauge interactions; it is the trivial-gauge-group specialization of the stated action data.
 

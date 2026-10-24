@@ -14,11 +14,31 @@ deps:
   - def-qftx-nonabelian-lattice-gauge-data
   - ex-unitary-and-special-unitary-lie-groups
   - thm-heine-borel-rn
+  - def-borel-sigma-algebra
+  - def-measure
+  - def-measure-space
+  - def-probability-measure
+  - def-polar-surface-measure-on-the-unit-sphere
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - def-product-measure-on-sigma-finite-spaces
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - def-tdmath-measure-integral
+  - def-measure-with-density
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-qftx-nonabelian-lattice-gauge-data: mathematical-premise
   ex-unitary-and-special-unitary-lie-groups: mathematical-premise
   thm-heine-borel-rn: mathematical-premise
+  def-borel-sigma-algebra: mathematical-premise
+  def-measure: mathematical-premise
+  def-measure-space: mathematical-premise
+  def-probability-measure: mathematical-premise
+  def-polar-surface-measure-on-the-unit-sphere: mathematical-premise
+  def-product-sigma-algebra-and-finite-product-sigma-algebras: mathematical-premise
+  def-product-measure-on-sigma-finite-spaces: mathematical-premise
+  thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
+  def-tdmath-measure-integral: mathematical-premise
+  def-measure-with-density: mathematical-premise
 justified_by:
   - lem-qftx-su2-one-plaquette-average
 provenance:
@@ -67,6 +87,22 @@ This defines only a finite-lattice mathematical measure; it does not define an i
 [[thm-heine-borel-rn|Closed and bounded subsets of finite-dimensional real Euclidean space are compact]]
 
 [[def-qftx-nonabelian-lattice-gauge-data|Finite lattice link variables and the Wilson plaquette setup]]
+
+[[def-borel-sigma-algebra|Borel sigma-algebra for the matrix group]]
+
+[[def-polar-surface-measure-on-the-unit-sphere|Euclidean round surface measure on the unit sphere]]
+
+[[def-probability-measure|Normalized probability measure]]
+
+[[def-product-sigma-algebra-and-finite-product-sigma-algebras|Finite product sigma-algebra]]
+
+[[def-product-measure-on-sigma-finite-spaces|Finite link product measure]]
+
+[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique|Finite product measure existence and rectangle formula]]
+
+[[def-tdmath-measure-integral|One-plaquette integral]]
+
+[[def-measure-with-density|One-plaquette probability from its density]]
 
 [Meyer, §§1.2.3–1.2.4 and §1.4.1.1, printed pp. 11–14 and 22–24](https://ndl.ethernet.edu.et/bitstream/123456789/73862/1/82.pdf.pdf)
 

@@ -33,15 +33,15 @@ verification:
 
 ## Definition
 
-Use the complex field $\mathbb C$ with conjugation $z\mapsto\overline z$. Fix an integer $N\ge1$. Let $S=\mathbb C^2$ and let $\dot S=\overline S$ be its conjugate vector space, with dotted basis labels. In the chosen bases put $\epsilon_{12}=\epsilon_{\dot1\dot2}=1$ and $\epsilon_{21}=\epsilon_{\dot2\dot1}=-1$, with zero diagonal. Write $\mathfrak{sl}(S)$ and $\mathfrak{sl}(\dot S)$ for the traceless complex $2\times2$ matrices. The complex even space is
+Use the complex field $\mathbb C$ with conjugation $z\mapsto\overline z$. Fix an integer $N\ge1$. Let $S=\mathbb C^2$ have standard basis $s_1,s_2$. For a complex vector space $W$, its conjugate vector space $\overline W$ consists of symbols $\overline w$ for $w\in W$, with addition $\overline w+\overline v=\overline{w+v}$ and scalar action $\lambda\overline w=\overline{\overline\lambda w}$. Set $\dot S=\overline S$ with dotted basis $\dot s_{\dot1}=\overline{s_1}$ and $\dot s_{\dot2}=\overline{s_2}$. Let $F=\mathbb C^N$ have standard basis $f_1,\ldots,f_N$, and let $F^*$ be its complex-linear dual with dual basis $f^1,\ldots,f^N$ and scalar action $(\lambda\ell)(v)=\lambda\ell(v)$. All tensor products are over $\mathbb C$, with scalar action $\lambda(v\otimes w)=(\lambda v)\otimes w=v\otimes(\lambda w)$ and product bases formed from the displayed bases. Define $\Lambda^2F=(F\otimes_{\mathbb C}F)/\operatorname{span}_{\mathbb C}\{v\otimes v:v\in F\}$; its basis is $f_I\wedge f_J$ for $1\le I<J\le N$, with quotient scalar action. Its conjugate $\overline{\Lambda^2F}$ has basis $\overline{f_I\wedge f_J}$ and the conjugate scalar action just defined. For $N=1$ these exterior-square spaces are zero. In the displayed bases, $\mathfrak{sl}(S)=\{A\in\operatorname{End}_{\mathbb C}(S):\operatorname{tr}A=0\}$ and $\mathfrak{sl}(\dot S)=\{B\in\operatorname{End}_{\mathbb C}(\dot S):\operatorname{tr}B=0\}$. Put $\epsilon_{12}=\epsilon_{\dot1\dot2}=1$ and $\epsilon_{21}=\epsilon_{\dot2\dot1}=-1$, with zero diagonal. The complex even space is
 
-$$\mathfrak g_{\bar0}=\bigl(\mathfrak{sl}(S)\oplus\mathfrak{sl}(\dot S)\bigr)\oplus V\oplus C_N,\qquad V=S\otimes\dot S,\qquad C_N=\Lambda^2\mathbb C^N\oplus\overline{\Lambda^2\mathbb C^N}.$$
+$$\mathfrak g_{\bar0}=\bigl(\mathfrak{sl}(S)\oplus\mathfrak{sl}(\dot S)\bigr)\oplus V\oplus C_N,\qquad V=S\otimes\dot S,\qquad C_N=\Lambda^2F\oplus\overline{\Lambda^2F}.$$
 
-Write $T_{\alpha\dot\beta}$ for the basis of $V$. The central space $C_N$ has generators $Z^{IJ}$ and $\bar Z_{IJ}$ for $1\le I<J\le N$, extended by antisymmetry in the flavor indices and with zero diagonal. The complex odd space is
+Write $T_{\alpha\dot\beta}=s_\alpha\otimes\dot s_{\dot\beta}$ for the basis of $V$. The listed central generators form a basis of $C_N$: $Z^{IJ}$ corresponds to $f_I\wedge f_J$ and $\bar Z_{IJ}$ to $\overline{f_I\wedge f_J}$ for $1\le I<J\le N$; extend them by antisymmetry in the flavor indices and set their diagonal entries to zero. The complex odd space is
 
-$$\mathfrak g_{\bar1}=(S\otimes\mathbb C^N)\oplus(\dot S\otimes(\mathbb C^N)^*),$$
+$$\mathfrak g_{\bar1}=(S\otimes F)\oplus(\dot S\otimes F^*),$$
 
-with basis $Q^I_\alpha$ and $\bar Q_{\dot\alpha I}$. A homogeneous vector has parity $|x|\in\{0,1\}$. The bracket is complex-bilinear, preserves parity, and obeys $[x,y]=-(-1)^{|x||y|}[y,x]$. Its complete nonzero table, apart from the graded-skew consequences, is
+with basis $Q^I_\alpha=s_\alpha\otimes f_I$ and $\bar Q_{\dot\alpha I}=\dot s_{\dot\alpha}\otimes f^I$. A homogeneous vector has parity $|x|\in\{0,1\}$. The bracket is complex-bilinear, preserves parity, and obeys $[x,y]=-(-1)^{|x||y|}[y,x]$. Its complete nonzero table, apart from the graded-skew consequences, is
 
 $$[ (A,B),(A',B') ]=([A,A'],[B,B']),\qquad [(A,B),T]= (A\otimes I+I\otimes B)T,$$
 

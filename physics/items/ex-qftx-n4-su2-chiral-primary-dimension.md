@@ -37,7 +37,7 @@ verification:
 
 ## Example
 
-Use the selected N=4 SU(2) field data and natural units $c=\hbar=1$. Let $Z$ be the complex scalar component of the first canonical adjoint chiral superfield; its engineering mass dimension is one and its selected N=1 $U(1)_R$ charge is $2/3$. Suppose a unitary quantum SCFT realization has a local operator algebra containing the nonzero scalar superconformal primary represented by the renormalized composite $\mathcal O=\operatorname{Tr}_2(Z^2)$, and suppose this state lies in the chiral branch. Then $\mathcal O$ has $R$ charge $4/3$ and scaling dimension exactly $2$. This is conditional shortening data for this specified operator state; it does not assert that the classical action constructs a continuum SCFT or that every scalar observable is protected.
+Use the selected N=4 SU(2) field data and natural units $c=\hbar=1$. Let $Z$ be the complex scalar component of the first canonical adjoint chiral superfield; its engineering mass dimension is one and its selected N=1 $U(1)_R$ charge is $2/3$. Suppose a unitary quantum SCFT realization has a local operator algebra containing the nonzero scalar superconformal primary represented by the renormalized composite $\mathcal O=\operatorname{Tr}_2(Z^2)$, and suppose the selected chiral-branch supercharge $Q$ from the SCFT data satisfies $Q|\mathcal O\rangle=0$. Then $\mathcal O$ has $R$ charge $4/3$ and scaling dimension exactly $2$. This is conditional shortening data for this specified operator state; it does not assert that the classical action constructs a continuum SCFT or that every scalar observable is protected.
 
 ## Example references
 
@@ -47,18 +47,18 @@ Use the selected N=4 SU(2) field data and natural units $c=\hbar=1$. Let $Z$ be 
 
 ## Facts & Assumptions
 
-**Given:** The selected classical N=4 SU(2) field data, a unitary SCFT representation containing the named operator as a nonzero scalar chiral primary, and the local scalar-primary unitarity theorem.
+**Given:** The selected classical N=4 SU(2) field data, a unitary SCFT representation containing the named operator as a nonzero scalar superconformal primary annihilated by the selected positive-branch supercharge, and the local scalar-primary unitarity theorem.
 
 [F1] [[post-qftx-n4-super-yang-mills-model]]: the chosen global group is SU(2), the chiral superfields are adjoint-valued, and the canonical fields are obtained from the connection-normalized fields by division by $g$.
 
 [F2] [[def-qftx-scft-protected-data]]: the selected N=1 $U(1)_R$ assigns charge $2/3$ to each adjoint chiral superfield.
 
-[F3] [[pthm-qftx-scft-chiral-primary-unitarity-bound]]: a scalar chiral primary of nonnegative $R$ charge $r$ in the assumed unitary representation has scaling dimension $d=3r/2$.
+[F3] [[pthm-qftx-scft-chiral-primary-unitarity-bound]]: if a scalar superconformal primary has $r\ge0$ and is annihilated by the selected chiral-branch supercharge $Q$, then its scaling dimension is $d=3r/2$.
 
-[A1] In the assumed quantum realization, $\mathcal O=\operatorname{Tr}_2(Z^2)$ is a nonzero scalar superconformal primary in the chiral branch. This is a hypothesis of the example, not a consequence of the classical postulate.
+[A1] In the assumed quantum realization, $\mathcal O=\operatorname{Tr}_2(Z^2)$ is a nonzero scalar superconformal primary and $Q|\mathcal O\rangle=0$ for the selected chiral-branch supercharge. This is a hypothesis of the example, not a consequence of the classical postulate.
 
 ## Verification
 
 1.1 For a gauge transformation $U\in SU(2)$, $(UZU^{-1})^2=UZ^2U^{-1}$. For finite matrices, $\operatorname{Tr}_2(AB)=\sum_{i,j}A_{ij}B_{ji}=\sum_{i,j}B_{ji}A_{ij}=\operatorname{Tr}_2(BA)$, so $\operatorname{Tr}_2(UZ^2U^{-1})=\operatorname{Tr}_2(Z^2U^{-1}U)=\operatorname{Tr}_2(Z^2)$. Under an $R$ rotation by $\alpha$, $Z\mapsto e^{2i\alpha/3}Z$, hence $Z^2\mapsto e^{4i\alpha/3}Z^2$ and the linear trace has charge $4/3$. [given, F1, F2, A1, algebra]
 
-2.1 Apply [F3] to the nonzero scalar chiral primary in [A1]. Its scaling dimension is $d_{\mathcal O}=\frac32\cdot\frac43=2$. This is a conditional representation-theoretic deduction; the engineering dimension of the classical composite is not being used as a substitute for the scaling-dimension proof. [given, F3, A1, step 1.1, algebra] ∎
+2.1 By step 1.1, the state has $r_{\mathcal O}=4/3>0$. The positive-branch hypothesis in [F3] therefore applies to the nonzero primary in [A1], giving $d_{\mathcal O}=\frac32\cdot\frac43=2$. This is a conditional representation-theoretic deduction; the engineering dimension of the classical composite is not being used as a substitute for the scaling-dimension proof. [given, F3, A1, step 1.1, algebra] ∎

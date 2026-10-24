@@ -8,6 +8,5 @@ items:
 examples: []
 requires:
   - qftx-qexact-field-theory-localization
-  - qftx-anomaly-matching-and-frontier
 page_layout: compact-v1
 ---

@@ -7,12 +7,16 @@ origin: pipeline
 domain: mathematics
 library: mathematics
 axiom_strength: "ZF + AC"
-dependency_level: 7
+dependency_level: 8
 deps:
   - def-axiom-of-choice
   - def-abbv-equivariant-integration-conventions
   - thm-atiyah-bott-berline-vergne-integration-formula
+  - lem-abbv-borel-fiber-integration-construction
+  - prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual
 dependency_roles:
+  prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual: mathematical-premise
+  lem-abbv-borel-fiber-integration-construction: mathematical-premise
   def-axiom-of-choice: mathematical-premise
   def-abbv-equivariant-integration-conventions: mathematical-premise
   thm-atiyah-bott-berline-vergne-integration-formula: mathematical-premise
@@ -25,13 +29,16 @@ provenance:
 sources:
   scraped: []
   references:
-    - title: "Michael F. Atiyah and Raoul Bott, The Moment Map and Equivariant Cohomology"
-      url: "https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf"
+    - title: "Michael F. Atiyah and Raoul Bott, The Moment Map and Equivariant
+        Cohomology"
+      url: "https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbo\
+        tt_moment.pdf"
     - title: "Matvei Libine, Lecture Notes on Equivariant Cohomology"
       url: "https://arxiv.org/pdf/0709.3615"
     - title: "Kentaro Hori et al., Mirror Symmetry"
       url: "https://www.claymath.org/library/monographs/cmim-1.pdf"
-      locator: "Chapter 4, §4.3, printed pp. 62–64 (PDF pp. 82–84), fixed-component formula context; the product example is derived locally."
+      locator: "Chapter 4, §4.3, printed pp. 62–64 (PDF pp. 82–84), fixed-component
+        formula context; the product example is derived locally."
 verification:
   precheck: pending
 ---
@@ -52,9 +59,11 @@ Work in $\mathrm{ZF}+\mathrm{AC}$. Let $T=S^1=\mathbb R/\mathbb Z$ act on comple
 
 [A1] Assume AC, carried through the real Borel coefficient-ring convention. [[def-axiom-of-choice]]
 
-[F1] [[def-abbv-equivariant-integration-conventions]]: equivariant integration is real Borel fiber integration, a character of weight $m$ has Euler class $m u$, and the product orientation fixes the component-integration signs.
+[F1] [[def-abbv-equivariant-integration-conventions]]: equivariant integration is real Borel fiber integration, a character of weight $m$ has Euler class $m u$, and the product orientation fixes the component-integration signs. The trivial-action tensor formula and iterated product integration are proved by [[lem-abbv-borel-fiber-integration-construction]].
 
 [F2] [[thm-atiyah-bott-berline-vergne-integration-formula]]: each fixed-component contribution is the integral of the restricted real Borel class divided by the equivariant normal Euler class.
+
+[F3] For an oriented bundle of rank equal to the dimension of the closed oriented base, the Euler pairing is the signed transverse zero count. Its integral version passes to real coefficients by Thom normalization and fundamental-class evaluation. [[prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual]]
 
 ## Verification
 
@@ -64,4 +73,4 @@ Work in $\mathrm{ZF}+\mathrm{AC}$. Let $T=S^1=\mathbb R/\mathbb Z$ act on comple
 
 3.1 The dual tautological fiber at $p_0$ has weight $0$ and at $p_\infty$ has weight $-1$, so the first-factor class restricts to $0$ and $-u$. Thus the contribution from $F_0$ is $0/u=0$; on $F_\infty$, the restricted class is $(-u)\eta$ and the normal Euler class is $-u$, leaving $\eta$, whose integral is $1$. The fixed-component sum is therefore $1$. [given, A1, F1, F2, step 1.1, step 2.1]
 
-4.1 Product fiber integration factors over the two compact oriented factors. On the first $\mathbb{CP}^1$, the section of $\mathcal O(1)$ induced by $\ell(z_0,z_1)=z_0$ has one positive transverse zero at $p_\infty$, so its Euler integral is $1$ by the normalized Thom-class zero count; the second-factor integral of $\eta$ is $1$ by definition. Hence $\int_M\alpha=1\cdot1=1$, agreeing with step 3.1. [given, A1, F1, step 3.1] ∎
+4.1 Product fiber integration factors over the two compact oriented factors. On the first $\mathbb{CP}^1$, the section of $\mathcal O(1)$ induced by $\ell(z_0,z_1)=z_0$ has one positive transverse zero at $p_\infty$, so its Euler integral is $1$ by [F3]; the second-factor integral of $\eta$ is $1$ by definition. Hence $\int_M\alpha=1\cdot1=1$, agreeing with step 3.1. [given, A1, F1, F3, step 3.1] ∎

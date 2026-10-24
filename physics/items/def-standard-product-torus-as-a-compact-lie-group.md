@@ -26,6 +26,12 @@ deps:
   - prop-a-map-into-a-product-is-smooth-iff-its-components-are-smooth
   - prop-relative-cw-inclusions-are-cofibrations
   - def-compactly-generated-based-space-and-well-pointed-object
+  - thm-heine-borel-rn
+  - thm-compactness-agrees-with-metric-compactness
+  - thm-closed-subspace-of-a-compact-space-is-compact
+  - thm-compactness-under-continuous-maps
+  - thm-compact-subset-of-a-hausdorff-space-is-closed
+  - lem-open-or-closed-surjection-is-quotient
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-countable-choice: mathematical-premise
@@ -43,6 +49,12 @@ dependency_roles:
   prop-a-map-into-a-product-is-smooth-iff-its-components-are-smooth: mathematical-premise
   prop-relative-cw-inclusions-are-cofibrations: mathematical-premise
   def-compactly-generated-based-space-and-well-pointed-object: mathematical-premise
+  thm-heine-borel-rn: mathematical-premise
+  thm-compactness-agrees-with-metric-compactness: mathematical-premise
+  thm-closed-subspace-of-a-compact-space-is-compact: mathematical-premise
+  thm-compactness-under-continuous-maps: mathematical-premise
+  thm-compact-subset-of-a-hausdorff-space-is-closed: mathematical-premise
+  lem-open-or-closed-surjection-is-quotient: mathematical-premise
 justified_by: []
 axiom_strength: "ZF + AC"
 proof_strategy: direct
@@ -122,6 +134,16 @@ so this based group is well-pointed.
 
 [F9] Under $\mathrm{AC}_\omega$, every $X\in\mathfrak t$ determines a unique one-parameter subgroup $\gamma_X$ with $\gamma_X'(0)=X$, and $\exp_T(X)=\gamma_X(1)$. [[def-one-parameter-subgroup-of-a-lie-group]] [[def-exponential-map-of-a-lie-group]]
 
+[F10] The interval $[0,1]$ is compact in its usual metric by the real-line clause of [[thm-heine-borel-rn]], and hence in its usual topology by [[thm-compactness-agrees-with-metric-compactness]], claims 1–2.
+
+[F11] A closed subspace of a compact space is compact. [[thm-closed-subspace-of-a-compact-space-is-compact]], claim 1.
+
+[F12] A continuous map sends every compact subset of its domain to a compact subset of its target. [[thm-compactness-under-continuous-maps]], claim 1.
+
+[F13] Every compact subset of a Hausdorff space is closed. [[thm-compact-subset-of-a-hausdorff-space-is-closed]], claim 3.
+
+[F14] A continuous closed surjection is a quotient map. [[lem-open-or-closed-surjection-is-quotient]], clause 2.
+
 ## Proof
 
 1.1 By [A1], for any sequence $(A_n)$ of nonempty sets the family
@@ -175,9 +197,17 @@ $|J|$, its closure meets only cells indexed by subsets of $J$, and its
 characteristic cube is the product of the factor characteristic intervals;
 identify each closed cube with a closed disk of the same dimension. The map
 $q^r:[0,1]^r\to T$ is a continuous surjection because every coordinate class
-has a representative in $[0,1]$ by [F2]. If $K$ is closed in the cube,
-then $K$ is compact, $q^r(K)$ is compact, and $q^r(K)$ is closed because $T$
-is Hausdorff by [F2] and [F3]. Thus $q^r$ is a quotient map. It is the
+has a representative in $[0,1]$ by [F2]. If $x\ne y$ in $T$, some coordinate
+$k$ has $x_k\ne y_k$; choose disjoint open neighborhoods of $x_k$ and $y_k$
+in the Hausdorff circle from [F2]. Their inverse images under the $k$th
+coordinate projection are disjoint open neighborhoods of $x$ and $y$ in the
+product topology, so $T$ is Hausdorff. The cube $[0,1]^r$ is compact by
+[F10] and the finite-product theorem in [F3], including the one-point empty
+product when $r=0$. If $K$ is closed in that cube, [F11] makes $K$ compact;
+continuity of $q^r$ and [F12] make $q^r(K)$ compact; and the just-proved
+Hausdorff property of $T$ and [F13] make $q^r(K)$ closed in $T$. Thus $q^r$
+is closed as well as continuous and surjective, so [F14] makes it a quotient
+map. It is the
 characteristic map for the top cell. Every lower-cell characteristic cube is
 obtained by precomposing $q^r$ with the continuous coordinate insertion that
 fixes omitted coordinates at $0$, so the quotient topology of $q^r$ already
@@ -186,11 +216,12 @@ those maps. Hence this quotient topology is exactly the weak topology
 determined by the finitely many characteristic cubes. This gives a finite CW
 structure with the identity as a $0$-cell. The singleton
 identity is a subcomplex, so [F7] gives the homotopy extension property for
-its inclusion. [F2, F3, F7, step 3.1, construct]
+its inclusion. [F2, F3, F7, F10, F11, F12, F13, F14, step 1.1, step 3.1, construct]
 
 5.1 The compact Hausdorff space $T$ is compactly generated: its identity map
 from the compact Hausdorff space $T$ tests every open subset in the
-compactly-generated topology. It is weak Hausdorff because every continuous
-image of a compact Hausdorff space is compact and compact subsets of the
-Hausdorff space $T$ are closed. Together with the cofibration from step 4.1,
-[F8] shows that the based group is well-pointed. [F3, F8, step 4.1, construct] ∎
+compactly-generated topology. For every compact Hausdorff space $C$ and continuous
+map $f:C\to T$, [F12] makes $f(C)$ compact, and [F13] makes $f(C)$ closed
+in the Hausdorff space $T$ established in step 4.1. This is precisely weak
+Hausdorffness. Together with the cofibration from step 4.1,
+[F8] shows that the based group is well-pointed. [F3, F8, F12, F13, step 4.1, construct] ∎

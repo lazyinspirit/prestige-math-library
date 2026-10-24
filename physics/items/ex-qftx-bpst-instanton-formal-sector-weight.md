@@ -12,12 +12,14 @@ physical_scope: Conditional classical SU(2) Euclidean Yang–Mills example on co
 deps:
 - def-qftx-euclidean-yang-mills-sector
 - def-qftx-instanton-number-and-asd-sector
+- def-axiom-of-choice
 - thm-qftx-yang-mills-selfdual-action-bound
 - prop-qftx-su2-bpst-explicit-connection-on-s4
 - thm-general-stokes-theorem
 dependency_roles:
   def-qftx-euclidean-yang-mills-sector: formulation-prerequisite
   def-qftx-instanton-number-and-asd-sector: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
   thm-qftx-yang-mills-selfdual-action-bound: mathematical-premise
   thm-general-stokes-theorem: mathematical-premise
   prop-qftx-su2-bpst-explicit-connection-on-s4: mathematical-premise
@@ -42,11 +44,11 @@ verification:
 
 ## Example
 
-Let $S^4=\{z\in\mathbb R^5:|z|=1\}$ have its unit round metric. Let $p_\infty$ be the point omitted by the north stereographic chart, let $p_0$ have north-chart coordinate $x=0$, and orient $S^4$ so $dx^1\wedge dx^2\wedge dx^3\wedge dx^4>0$. In the north chart put $r^2=\sum_{\mu=1}^4(x^\mu)^2$; the metric is $4(1+r^2)^{-2}\sum_\mu(dx^\mu)^2$. In the south chart put $y=x/r^2$; the metric is $4(1+|y|^2)^{-2}\sum_\mu(dy^\mu)^2$. Define $SU(2)=\{U\in M_2(\mathbb C):U^*U=I_2,\det U=1\}$. Use the Pauli matrices $\sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix}$, $\sigma_2=\begin{pmatrix}0&-i\\i&0\end{pmatrix}$, $\sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ and anti-Hermitian generators $T_a=-i\sigma_a/2$ with $\operatorname{tr}_{\mathbf2}(T_aT_b)=-\tfrac12\delta_{ab}$. Let $\epsilon_{ijk}$ be totally antisymmetric with $\epsilon_{123}=1$, set $\eta_{aij}=\epsilon_{aij}$, $\eta_{ai4}=\delta_{ai}$, $\bar\eta_{aij}=-\epsilon_{aij}$, and $\bar\eta_{ai4}=\delta_{ai}$ for $i,j\in\{1,2,3\}$, and extend both arrays antisymmetrically in their last two indices. For any $\rho>0$, put $u(x)=(x^4I_2-i x^j\sigma_j)/r$ on the overlap, and glue two trivial right $SU(2)$ bundles with local sections satisfying $s_S=s_Nu^{-1}$. The local connection potentials are
+Assume full AC, meaning that every family of nonempty sets has a choice function; in particular, countable choice holds. Let $S^4=\{z\in\mathbb R^5:|z|=1\}$ have its unit round metric. Let $p_\infty$ be the point omitted by the north stereographic chart, let $p_0$ have north-chart coordinate $x=0$, and orient $S^4$ so $dx^1\wedge dx^2\wedge dx^3\wedge dx^4>0$. In the north chart put $r^2=\sum_{\mu=1}^4(x^\mu)^2$; the metric is $4(1+r^2)^{-2}\sum_\mu(dx^\mu)^2$. In the south chart put $y=x/r^2$; the metric is $4(1+|y|^2)^{-2}\sum_\mu(dy^\mu)^2$. Define $SU(2)=\{U\in M_2(\mathbb C):U^*U=I_2,\det U=1\}$, with Lie algebra $\mathfrak{su}(2)=\{X\in M_2(\mathbb C):X^*=-X,\operatorname{tr}_{\mathbf2}X=0\}$ and commutator bracket; for $U\in SU(2)$ set $\operatorname{Ad}_U X:=UXU^{-1}$. Use the Pauli matrices $\sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix}$, $\sigma_2=\begin{pmatrix}0&-i\\i&0\end{pmatrix}$, $\sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ and anti-Hermitian generators $T_a=-i\sigma_a/2$ with $\operatorname{tr}_{\mathbf2}(T_aT_b)=-\tfrac12\delta_{ab}$. Let $\epsilon_{ijk}$ be totally antisymmetric with $\epsilon_{123}=1$, set $\eta_{aij}=\epsilon_{aij}$, $\eta_{ai4}=\delta_{ai}$, $\bar\eta_{aij}=-\epsilon_{aij}$, and $\bar\eta_{ai4}=\delta_{ai}$ for $i,j\in\{1,2,3\}$, and extend both arrays antisymmetrically in their last two indices. For any $\rho>0$, put $u(x)=(x^4I_2-i x^j\sigma_j)/r$ on the overlap, and glue two trivial right $SU(2)$ bundles with local sections satisfying $s_S=s_Nu^{-1}$. The local connection potentials are
 
 $$A_N=\frac{2\eta_{a\mu\nu}x^\nu}{r^2+\rho^2}T_a\,dx^\mu,\qquad A_S=-\frac{2\rho^2\bar\eta_{a\mu\nu}y^\nu}{1+\rho^2|y|^2}T_a\,dy^\mu.$$
 
-On the overlap the potentials obey $A_S=\operatorname{Ad}_uA_N+u\,d(u^{-1})$, with the right-action section convention above. Use the conditional Euclidean action $S_E=(2g_{\mathrm{YM}}^2)^{-1}\int_{S^4}\kappa(F\wedge *F)$ with $\kappa(X,Y)=-2\operatorname{tr}_{\mathbf2}(XY)$, and the compactified charge $\nu=-(8\pi^2)^{-1}\int_{S^4}\operatorname{tr}_{\mathbf2}(F\wedge F)$, for fixed $g_{\mathrm{YM}}>0$. For this specified smooth two-chart connection, the charge is $\nu=1$, the curvature is self-dual, and $S_E=8\pi^2/g_{\mathrm{YM}}^2$; it is a classical instanton saddle. If the formal sector expression includes the dimensionless theta coupling $\theta$, the corresponding formal single-saddle factor is $e^{-8\pi^2/g_{\mathrm{YM}}^2+i\theta}$. This factor is not an evaluated continuum path integral.
+On the overlap the potentials obey $A_S=\operatorname{Ad}_uA_N+u\,d(u^{-1})$, with the right-action section convention above. Their curvature representatives are $F_N=dA_N+\tfrac12[A_N\wedge A_N]$ and $F_S=dA_S+\tfrac12[A_S\wedge A_S]$, using the alternating wedge–Lie bracket normalized by $\tfrac12[A\wedge A](Y,Z)=[A(Y),A(Z)]$; the transition makes them representatives of one global adjoint-bundle-valued curvature $F$. For smooth $\mathfrak{su}(2)$-valued forms $\alpha=\sum_aT_a\alpha^a$ and $\beta=\sum_bT_b\beta^b$ with real coefficient forms, use $\kappa(\alpha\wedge\beta)=\sum_{a,b}\kappa(T_a,T_b)\alpha^a\wedge\beta^b$, where $\kappa(X,Y)=-2\operatorname{tr}_{\mathbf2}(XY)$. The conditional Euclidean action is $S_E=(2g_{\mathrm{YM}}^2)^{-1}\int_{S^4}\kappa(F\wedge *F)$, and the compactified charge $\nu=-(8\pi^2)^{-1}\int_{S^4}\operatorname{tr}_{\mathbf2}(F\wedge F)$, for fixed $g_{\mathrm{YM}}>0$. For this specified smooth two-chart connection, the charge is $\nu=1$, the curvature is self-dual, and $S_E=8\pi^2/g_{\mathrm{YM}}^2$. A classical saddle means a smooth admissible connection whose first variation of $S_E$ vanishes for every smooth compactly supported adjoint-bundle-valued one-form variation preserving the supplied data. This connection is a classical saddle, and its nonzero charge and self-duality make it an instanton saddle. If the formal sector expression includes the dimensionless theta coupling $\theta$, the corresponding formal single-saddle factor is $e^{-8\pi^2/g_{\mathrm{YM}}^2+i\theta}$. This factor is not an evaluated continuum path integral.
 
 ## Example references
 
@@ -58,9 +60,11 @@ On the overlap the potentials obey $A_S=\operatorname{Ad}_uA_N+u\,d(u^{-1})$, wi
 
 ## Facts & Assumptions
 
-**Given:** The conditional Euclidean SU(2) model and compactified charge convention of the assigned Definition; $g_{\mathrm{YM}}>0$; the oriented round $S^4$ charts, Pauli matrices, symbols, scale $\rho>0$, two-chart gluing, and local potentials in the Example.
+**Given:** Full AC; the conditional Euclidean SU(2) model and compactified charge convention of the assigned Definition; $g_{\mathrm{YM}}>0$; the oriented round $S^4$ charts, Pauli matrices, symbols, scale $\rho>0$, two-chart gluing, and local potentials in the Example.
 
-[A1] The Definition assumes $\mathrm{AC}_\omega$ for its smooth gauge data and connections, fixes the Euclidean action as $S_E=(2g_{\mathrm{YM}}^2)^{-1}\int\kappa(F\wedge *F)$ with positive invariant $\kappa=-2\operatorname{tr}_{\mathbf2}=2B_{\mathrm{top}}$, and defines a saddle by vanishing first variation under smooth compactly supported connection variations. [[def-qftx-euclidean-yang-mills-sector]]
+[A1] Full AC means that every family of nonempty sets has a choice function; it implies the $\mathrm{AC}_\omega$ model hypothesis and the full-choice hypotheses of the charge, action-bound, and BPST suppliers. [[def-axiom-of-choice]], [[def-qftx-instanton-number-and-asd-sector]], [[thm-qftx-yang-mills-selfdual-action-bound]], [[prop-qftx-su2-bpst-explicit-connection-on-s4]]
+
+[A2] The Definition assumes $\mathrm{AC}_\omega$ for its smooth gauge data and connections, fixes the Euclidean action as $S_E=(2g_{\mathrm{YM}}^2)^{-1}\int\kappa(F\wedge *F)$ with positive invariant $\kappa=-2\operatorname{tr}_{\mathbf2}=2B_{\mathrm{top}}$, and defines a saddle by vanishing first variation under smooth compactly supported connection variations. [[def-qftx-euclidean-yang-mills-sector]]
 
 [F1] The explicitly specified two-chart BPST connection obeys $A_S=\operatorname{Ad}_uA_N+u\,d(u^{-1})$, so its potentials define a smooth global connection on the glued bundle; it has $F=*F$, $q_B=1$ in the stated orientation and trace normalization, and $S_B(g)=g^{-2}\int_{S^4}B_{\mathrm{top}}(F\wedge *F)=8\pi^2/g^2<\infty$. [[prop-qftx-su2-bpst-explicit-connection-on-s4]]
 

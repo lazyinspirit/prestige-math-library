@@ -8,16 +8,30 @@ dependency_level: 6
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics
-axiom_base: "ZF + the choice strength inherited from the normalized equivariant Borel–Moore suppliers; the finite scalar quotient calculation itself uses no choice."
+axiom_base: "ZF + the choice strength inherited from the normalized equivariant Borel–Moore and topological Chern/Euler suppliers; the finite scalar quotient calculation itself uses no choice."
 physical_scope: "A finite-dimensional rank-one, charge-one stable ADHM quotient and its mass-twisted localized Borel–Moore coefficient. It makes no continuum gauge-theory claim."
 deps:
   - def-qftx-localized-equivariant-borel-moore-data
   - def-qftx-proper-fixed-locus-localized-pushforward
   - thm-qftx-proper-fixed-locus-noncompact-localization
+  - def-categorical-and-geometric-quotients-of-classical-varieties
+  - def-equivariant-map-and-equivariant-vector-bundle
+  - def-chern-classes-from-the-projective-bundle-relation
+  - def-euler-class-by-zero-section-pullback-of-the-thom-class
+  - thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle
+  - thm-naturality-orientation-sign-and-whitney-product-for-euler-classes
+  - lem-qftx-rational-torus-classifying-space-cohomology
 dependency_roles:
   def-qftx-localized-equivariant-borel-moore-data: mathematical-premise
   def-qftx-proper-fixed-locus-localized-pushforward: mathematical-premise
   thm-qftx-proper-fixed-locus-noncompact-localization: mathematical-premise
+  def-categorical-and-geometric-quotients-of-classical-varieties: mathematical-premise
+  def-equivariant-map-and-equivariant-vector-bundle: mathematical-premise
+  def-chern-classes-from-the-projective-bundle-relation: mathematical-premise
+  def-euler-class-by-zero-section-pullback-of-the-thom-class: mathematical-premise
+  thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle: mathematical-premise
+  thm-naturality-orientation-sign-and-whitney-product-for-euler-classes: mathematical-premise
+  lem-qftx-rational-torus-classifying-space-cohomology: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -33,30 +47,54 @@ verification:
 
 ## Statement
 
-Let $V=W=\mathbb C$, let $k=N=1$, and consider scalar ADHM data $(b_1,b_2,i,j)\in\mathbb C^4$ satisfying $ij=0$ and the stability condition $i\ne0$. Let $GL(V)=\mathbb C^\times$ act by $(b_1,b_2,i,j)\mapsto(b_1,b_2,\lambda i,\lambda^{-1}j)$, and let $T=(\mathbb C^\times)^2\times\mathbb C^\times_h$ act by $(t_1,t_2,h)\cdot(b_1,b_2,i,j)=(t_1b_1,t_2b_2,h^{-1}i,t_1t_2h j)$. Write $X$ for the geometric quotient of the stable locus. Extend $T$ by a flavor torus $\mathbb C_m^\times$ acting trivially on $X$, with additive character $\widetilde m$. The quotient is isomorphic to $\mathbb C^2$ with coordinates $b_1,b_2$, the fixed locus is the origin, and the tangent weights there are $\epsilon_1=c_1(t_1)$ and $\epsilon_2=c_1(t_2)$. If the localized Borel–Moore pushforward of the complex-oriented fundamental class with insertion $c_2^{T_m}(TX\otimes L_{-1})$ is defined, where $L_{-1}$ is the inverse flavor line of weight $-\widetilde m$, then the charge-one coefficient is
+Let $V=W=\mathbb C$, let $k=N=1$, and let $\mathcal S$ be the scalar ADHM data $(b_1,b_2,i,j)\in\mathbb C^4$ satisfying $ij=0$ and stability $i\ne0$. Let $GL(V)=\mathbb C^\times$ act by $(b_1,b_2,i,j)\mapsto(b_1,b_2,\lambda i,\lambda^{-1}j)$. The geometric quotient here means a surjective invariant morphism $\pi:\mathcal S\to X$ whose fibres are the $GL(V)$-orbits, for which $U\subseteq X$ is open exactly when $\pi^{-1}(U)$ is open, and for which $\mathcal O_X(U)\cong\mathcal O_{\mathcal S}(\pi^{-1}(U))^{GL(V)}$ for every open $U$. Let $T=(\mathbb C^\times)^2\times\mathbb C^\times_h$ act by $(t_1,t_2,h)\cdot(b_1,b_2,i,j)=(t_1b_1,t_2b_2,h^{-1}i,t_1t_2h j)$, and extend it by a flavor torus $\mathbb C_m^\times$ acting trivially on $X$. The quotient is isomorphic to $\mathbb C^2$ with coordinates $b_1,b_2$; its fixed locus under $T_m$ is the origin and its tangent characters there are $t_1,t_2$, with additive weights $\epsilon_1=c_1(t_1)$ and $\epsilon_2=c_1(t_2)$.
+
+Let $K_m=(S^1)^2\times S_h^1\times S_m^1$ and use the product right Milnor model $E K_m$. Write $X_{K_m}=E K_m\times_{K_m}X$ with the diagonal quotient relation, and define $H_{T_m}^*(X;\mathbb Q)=H^*(X_{K_m};\mathbb Q)$. The derivative action makes $TX$ a rank-two equivariant complex vector bundle; its Borel descent, tensored with the inverse-flavor line $L_{-1}=E K_m\times_{K_m}\mathbb C_{\chi_m^{-1}}$, is a rank-two complex bundle over $X_{K_m}$. Let $\widetilde m=c_1(E K_m\times_{K_m}\mathbb C_{\chi_m})$. Here $c_i^{T_m}$ means the ordinary Chern class of this descended bundle, rationalized; for a numerable rank-$n$ bundle on a connected CW model, $c_i$ is defined by the unique projective-bundle relation $x_E^n-c_1(E)x_E^{n-1}+\cdots+(-1)^nc_n(E)=0$, where $x_E$ is the first Chern class of the tautological line on the projective bundle of fiber lines. The Borel base in this example is the total space of the rank-two bundle associated to the linear $T_m$-action on $\mathbb C^2$ over $B K_m=(\mathbb{CP}^{\infty})^4$; it deformation retracts to its zero section, and the descended bundle is numerable. At the origin the top Chern class restricts to $(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)$, since top Chern equals the Euler class of the complex-oriented real bundle and the Euler class multiplies over the two character lines. Let $S_{T_m}$ be generated by first Chern classes of nontrivial integral characters, and use the character-localized proper-fixed-locus trace $p_*^{\mathrm{loc}}=p_{F*}\circ(i_*)^{-1}$ when the localized fixed-inclusion map $i_*$ is invertible; here $F=\{0\}$ is proper. The complex-oriented normalized Borel–Moore fundamental class $[X]_{K_m}$ has degree $4$. If the localized pushforward of $c_2^{T_m}(TX\otimes L_{-1})\cap[X]_{K_m}$ is defined, then the charge-one coefficient is
 $$I_{1,1}^{\mathrm{adj}}(\widetilde m)=\frac{(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)}{\epsilon_1\epsilon_2}.$$
 At charge zero the quotient is a point with rank-zero insertion and coefficient $1$.
 
 ## Statement references
 
+[[def-categorical-and-geometric-quotients-of-classical-varieties|Classical geometric quotient conditions]]
+
 [[def-qftx-localized-equivariant-borel-moore-data|Normalized equivariant Borel–Moore conventions]]
 
 [[thm-qftx-proper-fixed-locus-noncompact-localization|Proper-fixed-locus localization formula]]
+
+[[def-equivariant-map-and-equivariant-vector-bundle|Equivariant tangent bundle]]
+
+[[def-chern-classes-from-the-projective-bundle-relation|Topological Chern class construction]]
+
+[[def-euler-class-by-zero-section-pullback-of-the-thom-class|Euler class by the Thom construction]]
+
+[[thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle|Top Chern class equals the real Euler class]]
+
+[[thm-naturality-orientation-sign-and-whitney-product-for-euler-classes|Euler class naturality and direct-sum product]]
+
+[[lem-qftx-rational-torus-classifying-space-cohomology|Rational torus classifying ring and character weights]]
 
 ## Facts & Assumptions
 
 **Given:** The scalar ADHM equation $ij=0$, stability $i\ne0$, the stated gauge and torus actions, and the stipulated localized Borel–Moore pushforward.
 
-[F1] [[thm-qftx-proper-fixed-locus-noncompact-localization]]: for a smooth separated finite-type variety with a finite invariant affine cover and proper fixed locus, the localized pushforward of a homogeneous class capped with the complex-oriented fundamental class is the fixed-locus sum of its restriction divided by the normal Euler class.
+[F1] Current draft [[thm-qftx-proper-fixed-locus-noncompact-localization]] has an authored conditional proof: for a smooth separated finite-type variety with a finite invariant affine cover and proper fixed locus, the localized pushforward of a homogeneous class capped with the complex-oriented fundamental class is the fixed-locus sum of its restriction divided by the normal Euler class.
 
-[F2] [[def-qftx-localized-equivariant-borel-moore-data]]: the normalized fundamental class of a smooth complex dimension-$d$ variety has Borel–Moore degree $2d$, and equivariant cohomology classes act by cap product.
+[F2] Current draft [[def-qftx-localized-equivariant-borel-moore-data]] defines the normalized fundamental class of a smooth complex dimension-$d$ variety in Borel–Moore degree $2d$ and the cap action of equivariant cohomology classes.
+
+[F3] A geometric quotient has orbit fibres, the quotient topology, and regular functions downstairs exactly the invariant regular functions upstairs on each open set. [[def-categorical-and-geometric-quotients-of-classical-varieties]]
+
+[F4] The published [[def-equivariant-map-and-equivariant-vector-bundle]] defines the smooth fibrewise-linear torus action on $TX$. The current draft [[def-qftx-localized-equivariant-borel-moore-data]] supplies the product right Milnor Borel model and character lines.
+
+[F5] For numerable complex bundles over connected CW models, Chern classes are defined by the projective-bundle relation; the top Chern class is the Euler class of the complex-oriented real bundle, and this Euler class is natural and multiplicative over ordered direct sums. [[def-chern-classes-from-the-projective-bundle-relation]] [[thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle]] [[def-euler-class-by-zero-section-pullback-of-the-thom-class]] [[thm-naturality-orientation-sign-and-whitney-product-for-euler-classes]]
+
+[F6] The current draft [[lem-qftx-rational-torus-classifying-space-cohomology]] proves for $K_m=(S^1)^4$ that $H^*(BK_m;\mathbb Q)$ is polynomial in the degree-two character classes and that a character line's first Chern class is its integer weight combination.
 
 ## Proof
 
-1.1 Since $i\ne0$ and $ij=0$ for scalars, $j=0$. Every stable gauge orbit has the unique representative $(b_1,b_2,1,0)$, obtained by choosing $\lambda=i^{-1}$; thus the geometric quotient is $\mathbb C^2$ with coordinates $b_1,b_2$. [given, algebra]
+1.1 Since $i\ne0$ and $ij=0$ for scalars, $j=0$, so $\mathcal S\cong\mathbb C^2\times\mathbb C^\times$. The map $\pi(b_1,b_2,i,0)=(b_1,b_2)$ is surjective and its fibres are exactly the $GL(V)$-orbits. It induces the quotient topology: continuity gives one implication for open subsets, and the section $s(b_1,b_2)=(b_1,b_2,1,0)$ gives the converse because $U=s^{-1}(\pi^{-1}(U))$. For every affine open $U\subset\mathbb C^2$, $\mathcal O(U\times\mathbb C^\times)=\mathcal O(U)[z,z^{-1}]$ and the scaling action has invariant subring exactly $\mathcal O(U)$; these local identifications glue for every open $U$. Thus $\pi$ satisfies all three conditions in [F3] and is the stated geometric quotient. [given, F3, algebra]
 
 2.1 On the representative with $i=1$, the torus sends $i$ to $h^{-1}$, and the gauge transformation $\lambda=h$ restores $i=1$ without changing $b_1,b_2$. Hence the quotient action is $(b_1,b_2)\mapsto(t_1b_1,t_2b_2)$. Its fixed locus is the origin and the tangent weights there are $\epsilon_1,\epsilon_2$. [given, step 1.1, algebra]
 
-3.1 The variety $\mathbb C^2$ is smooth, separated, finite type, and covered by one invariant affine open set; its fixed locus is the proper point from step 2.1. The restriction of $c_2^{T_m}(TX\otimes L_{-1})$ at that point is $(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)$, while the normal Euler class is $\epsilon_1\epsilon_2$. [given, F1, step 2.1, algebra]
+3.1 The variety $X\cong\mathbb C^2$ is smooth, separated, finite type, and covered by one invariant affine open set; its fixed locus is the proper point from step 2.1. Its Borel space is the total space of the associated rank-two vector bundle over $BK_m$, so fibrewise scalar contraction retracts it onto $BK_m$; the Milnor associated bundle is numerable. Thus the Chern suppliers in [F5] apply. At the fixed point the tangent characters are $t_1,t_2$; after tensoring by the inverse flavor line their first Chern classes are $\epsilon_1-\widetilde m$ and $\epsilon_2-\widetilde m$ by [F6]. The top Chern/Euler identity and ordered-sum product in [F5] give restriction $(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)$, while the normal Euler class is $\epsilon_1\epsilon_2$. [given, F1, F4, F5, F6, step 2.1, algebra]
 
 4.1 Apply [F1] to this insertion. The fixed-locus formula divides the restriction in step 3.1 by its normal Euler class, yielding the stated coefficient in the rational character-localized ring. At charge zero, $V=0$ gives a point, the tangent bundle has rank zero, and its top Chern insertion is $1$, so its proper pushforward is $1$. [F1, F2, step 3.1, algebra] ∎

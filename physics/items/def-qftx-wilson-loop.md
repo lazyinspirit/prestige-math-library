@@ -13,10 +13,22 @@ deps:
   - def-countable-choice
   - def-finite-dimensional-representation-of-a-group-over-a-field
   - def-qftx-nonabelian-lattice-gauge-data
+  - def-borel-sigma-algebra
+  - def-probability-measure
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - def-product-measure-on-sigma-finite-spaces
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - def-tdmath-measure-integral
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-finite-dimensional-representation-of-a-group-over-a-field: mathematical-premise
   def-qftx-nonabelian-lattice-gauge-data: mathematical-premise
+  def-borel-sigma-algebra: mathematical-premise
+  def-probability-measure: mathematical-premise
+  def-product-sigma-algebra-and-finite-product-sigma-algebras: mathematical-premise
+  def-product-measure-on-sigma-finite-spaces: mathematical-premise
+  thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
+  def-tdmath-measure-integral: mathematical-premise
 justified_by:
   - lem-qftx-wilson-loop-gauge-invariance
 provenance:
@@ -49,6 +61,18 @@ The loop is dimensionless. Changing the base vertex by a cyclic rebase conjugate
 [[def-qftx-nonabelian-lattice-gauge-data|Finite oriented lattice, link variables, and vertex gauge action]]
 
 [[def-finite-dimensional-representation-of-a-group-over-a-field|Finite-dimensional group representation]]
+
+[[def-borel-sigma-algebra|Borel sigma-algebra used for the link measure]]
+
+[[def-probability-measure|Finite product Haar probability]]
+
+[[def-product-sigma-algebra-and-finite-product-sigma-algebras|Finite product sigma-algebra]]
+
+[[def-product-measure-on-sigma-finite-spaces|Product measure]]
+
+[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique|Finite product measure existence and rectangle formula]]
+
+[[def-tdmath-measure-integral|Finite-lattice expectation as a measure integral]]
 
 [Meyer, §§1.2.3–1.2.4, printed pp. 11–14, on link variables, plaquette products, and traced closed loops](https://ndl.ethernet.edu.et/bitstream/123456789/73862/1/82.pdf.pdf)
 

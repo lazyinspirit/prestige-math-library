@@ -12,6 +12,7 @@ deps:
   - def-cm-measurement-model
   - def-cm-likelihood-function
   - def-cm-statistical-test-and-size
+  - def-cm-confidence-set-and-coverage
   - def-aqft-profile-likelihood-ratio
   - post-aqft-smeft-model
   - def-aqft-warsaw-basis-contract
@@ -20,6 +21,7 @@ dependency_roles:
   def-cm-measurement-model: operational-prerequisite
   def-cm-likelihood-function: formulation-prerequisite
   def-cm-statistical-test-and-size: formulation-prerequisite
+  def-cm-confidence-set-and-coverage: formulation-prerequisite
   def-aqft-profile-likelihood-ratio: formulation-prerequisite
   post-aqft-smeft-model: formulation-prerequisite
   def-aqft-warsaw-basis-contract: formulation-prerequisite
@@ -184,6 +186,8 @@ Section 7 says approximately 30% of the 562 nuisances are shared between at leas
 The PDF does not publish the full machine-readable likelihood, all nuisance constraint families, numerical correlation matrix or calibration constants. Its original analysis/calibration references were not independently read in this recovery. Two internal source ambiguities are retained: Table 2 cites an 8 TeV VBF-$W$ paper in reference [18] despite the combination's stated 13 TeV Run-2 dataset; Table 3 prints 1250 GeV as the diboson final bin edge whereas Appendix A gives infinity. No choice between those implementations is invented here. Section 5's 95.4% convention versus rounded 95% result labels is also explicit.
 
 ## Uncertainty references
+
+[[def-cm-confidence-set-and-coverage|Confidence sets and their coverage property]]
 
 [CMS PAS SMP-25-002, §§5–7, Table 3, Appendix A and reference [18]; printed pp. 8–11, 17 and 21–22](https://inspirehep.net/files/e9aa001bdef81c4b728fdafbdc261122)
 

@@ -68,7 +68,7 @@ If an allowed local background counterterm $L_x$ reweights the model by $e^{iL_x
 
 [A1] Adopted model law: for each background $x$ the configuration set $\Phi_x$ is finite; for each $1$-arrow $f:x\to y$, $T_f$ is a bijection, the observables satisfy $o_{j,y}(T_f\phi)=o_{j,x}(\phi)$, and $W_y(T_f\phi)=\chi_f(x)W_x(\phi)$ with $\chi_f(x)$ independent of $\phi$. These are inputs from the selected model, not deductions from $\beta$.
 
-[F1] [[def-aqft-two-group-symmetry-realization]]: the finite-regulator model assigns configuration spaces, local observables, action, measure and partition weight to each background; its observable transport is coherent on the finite background gauge $2$-groupoid, and a residual anomaly phase is defined modulo the model's declared local counterterms.
+[F1] [[def-aqft-two-group-symmetry-realization]]: each gauge $1$-arrow is assigned a configuration bijection and observable-algebra isomorphism transporting weights by a configuration-independent nonzero scalar; [A1] specifies the coherent phase-valued case; each $2$-arrow $\eta:f\Rightarrow f'$ is assigned a target-fiber pair $(J_\eta,j_\eta)$ with $T_{f'}=J_\eta\circ T_f$, $\alpha_{f'}=j_\eta\circ\alpha_f$, and weight preservation. The comparison $2$-morphisms and unit maps obey the stated pseudofunctor coherence equations. The residual phase is defined modulo the selected model's declared local counterterms.
 
 [F2] [[def-aqft-two-group-background]]: $G$ is finite, $A$ finite abelian, $\rho$ is a left action, $\beta$ is a normalized $3$-cocycle with associator directed from $(gh)k$ to $g(hk)$, and backgrounds satisfy $\delta_aB=a^*\beta$ with the stated local-coefficient signs.
 

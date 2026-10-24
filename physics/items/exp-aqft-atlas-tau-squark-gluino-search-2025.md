@@ -30,12 +30,14 @@ provenance:
 physical_scope: ATLAS search for R-parity-conserving simplified squark and gluino models in tau, jets, and missing-transverse-momentum final states. The reported contours and local compatibility value apply only to the source's stated spectra, branching fractions, and analysis.
 empirical_result:
   observation: >-
-    The paper reports no significant overall deviation, a local p-value of
-    0.00058 (3.2 standard deviations) at its GG(1300,1200) benchmark, and
-    observed 95% CLs exclusion contours reaching up to 2.25 TeV for gluinos
-    in the machine-learning analysis and 2.3 TeV in the cut-and-count
-    analysis, with squark reaches of 1.35 TeV and 1.7 TeV respectively.
-    These values are model- and strategy-specific.
+    The paper reports no significant overall deviation and a local p-value of
+    0.00058 (3.2 standard deviations) at its GG(1300,1200) benchmark. Its
+    observed 95% CLs machine-learning contours reach gluino masses up to
+    2.25 TeV and lightest-neutralino masses up to 1.35 TeV for gluino models;
+    for squark models the machine-learning lightest-neutralino reach is
+    0.85 TeV. The cut-and-count contours reach gluino masses up to 2.3 TeV
+    and squark masses up to 1.7 TeV for models with a 0.1 TeV
+    lightest-neutralino. These values are model- and strategy-specific.
   uncertainty: >-
     The analysis profiles source-correlated experimental and background
     nuisance parameters in a binned likelihood, validates its asymptotic
@@ -93,7 +95,7 @@ For each strategy the collaboration fits selected binned data with a likelihood 
 
 ## Observations
 
-The collaboration reports no statistically significant overall deviation from the background-only expectation. Its most compatible machine-learning benchmark, labelled GG(1300,1200), has a local $p$-value $0.00058$, quoted as $3.2$ standard deviations; this is a local value at the tested benchmark, not an overall search significance. The observed $95\%$ $CL_s$ contours reach gluino masses up to $2.25\ {\rm TeV}$ in the machine-learning analysis and $2.3\ {\rm TeV}$ in the cut-and-count analysis, and squark masses up to $1.35\ {\rm TeV}$ and $1.7\ {\rm TeV}$, respectively, in the corresponding source-defined mass planes.
+The collaboration reports no statistically significant overall deviation from the background-only expectation. Its most compatible machine-learning benchmark, labelled GG(1300,1200), has a local $p$-value $0.00058$, quoted as $3.2$ standard deviations; this is a local value at the tested benchmark, not an overall search significance. The observed $95\%$ $CL_s$ machine-learning contours reach gluino masses up to $2.25\ {\rm TeV}$ and lightest-neutralino masses up to $1.35\ {\rm TeV}$ for gluino models; for squark models, the machine-learning lightest-neutralino reach is $0.85\ {\rm TeV}$. The cut-and-count contours reach gluino masses up to $2.3\ {\rm TeV}$ and squark masses up to $1.7\ {\rm TeV}$ for models with a $0.1\ {\rm TeV}$ lightest-neutralino.
 
 ## Observations references
 

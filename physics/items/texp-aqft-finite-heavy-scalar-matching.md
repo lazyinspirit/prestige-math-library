@@ -97,7 +97,7 @@ These are exact conditional statements for a finite positive quadratic heavy sec
 
 [A2] [[lem-ac-supplies-sequential-choices-for-probability-constructions]]: AC supplies countable choice, as required by the positive spectral-calculus supplier.
 
-[F1] [[def-aqft-model-and-scale-data]]: the regulator is finite-dimensional; $A$ is real symmetric positive semidefinite; $M$, $E$, $\mu_W$, and $\Lambda$ are separately named scales with no numerical relation imposed by the model-data definition; the source is supported in the spectral band $[0,E^2]$.
+[F1] [[def-aqft-model-and-scale-data]]: the regulator has a finite nonempty vertex set $X$, retained coordinates $\ell\in\mathbb R^X$, integrated coordinates $\chi\in\mathbb R^X$, and a real Borel ultraviolet action with a specified Borel probability measure for $\chi$. In its positive Gaussian submodel, $A$ is real symmetric positive semidefinite and has range at most one on the regulator graph, $\sqrt{\|A\|}\le\Lambda$, $K=M^2I+A$, and a source $J(\ell)$ has mass units and is supported in the spectral band $[0,E^2]$. The positive scales $\mu_W,M,\Lambda$ and the bound $E\ge0$ are separately named and have no imposed numerical relations.
 
 [F2] [[def-aqft-wilsonian-action]]: at fixed retained coordinates, the Wilsonian action is the negative logarithm of the finite high-coordinate integral under the specified normalized measure.
 
@@ -109,6 +109,8 @@ These are exact conditional statements for a finite positive quadratic heavy sec
 
 [F6] [[thm-qftx-heavy-derivative-bound]]: for $J=P_EJ$, the truncation above obeys the stated vector and action remainder bounds; the useful small-parameter regime is $E<M$.
 
+[A3] For the Wilsonian interpretation, take $X=\{1,\ldots,d\}$ with the complete graph, choose $\Lambda>0$ with $\sqrt{\|A\|}\le\Lambda$ and any $\mu_W>0$, and fix the retained configuration $\ell_*=0\in\mathbb R^X$. Use the constant Borel source map $J(\ell')\equiv J$ for all $\ell'\in\mathbb R^X$, identify the integrated coordinate $h$ of the Wilsonian-action definition with $\chi$, and set the normalized Borel Gaussian probability $\nu_H=\gamma_{K^{-1}}$ and $S_{\rm UV}(\ell',\chi)=-J(\ell')^T\chi$. The complete graph makes the given matrix range at most one, and the constant-source action is real-valued and Borel; since $J=P_EJ$, this source map obeys the stated band restriction. In particular, $J=J(\ell_*)$.
+
 ## Proof
 
 **Proof technique:** finite Gaussian source shift followed by the exact positive-spectral remainder theorem.
@@ -117,6 +119,10 @@ These are exact conditional statements for a finite positive quadratic heavy sec
 
 1.1 For every nonzero $x\in\mathbb R^d$, $x^TKx=M^2\|x\|^2+x^TAx>0$, so $K$ is symmetric positive definite and the finite Gaussian supplier applies. On the complexification, real symmetry makes $A$ self-adjoint; for $x,y\in\mathbb R^d$, the cross terms in $\langle x+iy,A(x+iy)\rangle$ cancel because $x^TAy=y^TAx$, leaving $x^TAx+y^TAy\ge0$. Thus the positive-operator hypotheses of [F4] also hold. [given, F1, F4, algebra]
 
-2.1 By [F5], $Z_H(J)=\exp(\tfrac12J^TK^{-1}J)$; the normalized reference measure makes $Z_H(0)=1$, so no determinant factor remains in this ratio. By the definition of the Wilsonian action in [F2], taking $-\log$ gives $\Delta S_W(J)=-\tfrac12J^TK^{-1}J$. [A1, F2, F5, given, step 1.1, algebra]
+2.1 In the model specialization [A3], $e^{-S_{\rm UV}(\ell_*,\chi)}=e^{J(\ell_*)^T\chi}=e^{J^T\chi}$ and $d\nu_H(\chi)=d\gamma_{K^{-1}}(\chi)$. Therefore the Wilsonian integral in [F2] is exactly
+$$
+Z_H(\ell_*)=\int_{\mathbb R^d}e^{-S_{\rm UV}(\ell_*,\chi)}\,d\nu_H(\chi)=\int_{\mathbb R^d}e^{J^T\chi}\,d\gamma_{K^{-1}}(\chi)=Z_H(J).
+$$
+By [F5] and step 1.1 this value is finite and strictly positive, so $\ell_*$ lies in the domain of the Wilsonian-action definition. Hence $S_W(\ell_*;\mu_W)=-\log Z_H(\ell_*)=-\log Z_H(J)=\Delta S_W(J)$. At zero source the normalized Gaussian integral is $1$, so this is also the source-induced action increment with zero baseline; no determinant factor remains. [A1, A3, F2, F5, given, step 1.1, algebra]
 
 3.1 By [F4] and step 2.1, the heavy Gaussian effective-action contribution equals $\Delta S_W(J)$. Apply [F6] to the band-limited source $J=P_EJ$ and the positive operator verified in step 1.1; its vector and action inequalities are the two displayed remainder bounds. When the additional condition $E<M$ holds, the factor $E^2/M^2$ is less than one and the bound decreases geometrically with $N$. This conclusion is conditional and remains within the finite Gaussian sector. [A1, A2, F3, F4, F6, given, step 1.1, step 2.1] ∎

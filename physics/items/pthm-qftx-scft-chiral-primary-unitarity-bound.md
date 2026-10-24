@@ -26,7 +26,7 @@ sources:
       locator: "§6.4.2, printed pp. 193–194, for the N=1 superconformal algebra and scalar chiral-primary dimension relation."
     - title: "Justin Kinney, Juan Maldacena, Shiraz Minwalla, and Suvrat Raju, An Index for 4 Dimensional Super Conformal Theories"
       url: "https://arxiv.org/pdf/hep-th/0510251v1"
-      locator: "§3.1, equations (3.1)–(3.3), printed pp. 12–13, for the selected positive supercharge anticommutator in radial quantization."
+      locator: "§3, equations (3.1)–(3.3), printed pp. 12–13, for the selected positive supercharge anticommutator in radial quantization."
 verification:
   precheck: pending
 ---
@@ -43,7 +43,7 @@ If $r_{\mathcal O}\geq0$, equality holds exactly when the selected chiral-branch
 
 [David Tong, *Supersymmetric Field Theory*, §6.4.2](https://www.damtp.cam.ac.uk/user/tong/susy/susy.pdf)
 
-[Kinney, Maldacena, Minwalla, and Raju, *An Index for 4 Dimensional Super Conformal Theories*, §3.1](https://arxiv.org/pdf/hep-th/0510251v1)
+[Kinney, Maldacena, Minwalla, and Raju, *An Index for 4 Dimensional Super Conformal Theories*, §3](https://arxiv.org/pdf/hep-th/0510251v1)
 
 ## Facts & Assumptions
 

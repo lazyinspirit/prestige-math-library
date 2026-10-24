@@ -50,7 +50,7 @@ Let $K=\partial\Delta^4$ be the ordered boundary complex of a $4$-simplex with v
 
 **Given:** $K=\partial\Delta^4$ with its ordered simplices, $G=A=\mathbb Z_2$ with additive notation and trivial action, $\beta=0$, zero initial edge and face cochains, the stated gauge parameters, and the selected unit-response model.
 
-[A1] Adopted finite model data: for every background in this example there is one configuration with measure $1$ and action $0$, so its weight is $1$; every gauge arrow maps that configuration to itself and all observable insertions are the identity.
+[A1] Adopted finite model data: every background in this example has one configuration with measure $1$ and action $0$, so its weight is $1$. Each $1$-arrow has the unique configuration bijection and observable-algebra isomorphism between its singleton fibers; each $2$-arrow intertwiner and each composition or unit comparison is the unique identity map on that singleton target fiber and its constant observable algebra. All observable insertions are the identity.
 
 [F1] [[def-aqft-two-group-background]]: a background has flat edge labels and satisfies $\delta_aB=a^*\beta$; for trivial $\rho$, $\delta_aB_{0123}=B_{123}-B_{023}+B_{013}-B_{012}$.
 

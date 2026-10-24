@@ -37,11 +37,19 @@ $$s=-(p_1+p_2)^2,\qquad t=-(p_1-p_3)^2,\qquad u=-(p_1-p_4)^2.$$
 
 Then $s+t+u=4m^2$. The forward slice is the complex-valued function $A(s)=\mathcal A(s,0,4m^2-s)$ obtained by analytically continuing the identical-scalar $2\to2$ amplitude to $t=0$. The crossing action on this slice is $s\mapsto4m^2-s$, which exchanges $s$ and $u$. Assume $A(s)=A(4m^2-s)$ wherever both sides are defined.
 
-For context, when a full $t$-dependent amplitude is supplied, use the partial-wave normalization
+For context, define the physical elastic kinematic region
 
-$$\mathcal A(s,t,u)=16\pi\sqrt{\frac{s}{s-4m^2}}\sum_{\ell=0}^{\infty}(2\ell+1)P_\ell\!\left(1+\frac{2t}{s-4m^2}\right)a_\ell(s),\qquad P_\ell(1)=1,$$
+$$\mathscr P_m=\{(s,t,u)\in\mathbb R^3:s>4m^2,\;-(s-4m^2)\le t\le0,\;u=4m^2-s-t\}.$$
 
-where $\ell$ is a nonnegative integer and $P_\ell$ is the Legendre polynomial. The forward result below uses only the optical-theorem sign $\operatorname{Im}A(s+i0)\ge0$ for $s>4m^2$; a full partial-wave realization is not inferred from this definition. In the displayed normalization, this sign follows when the forward partial-wave sum converges and the supplied partial waves obey $\operatorname{Im}a_\ell(s)\ge|a_\ell(s)|^2\ge0$.
+When supplied, the full physical amplitude is a map $\mathcal A_{\mathrm{phys}}:\mathscr P_m\to\mathbb C$; its analytic continuation used in the forward data above is a separate supplied part of the input, with upper boundary value $A(s+i0)=\mathcal A_{\mathrm{phys}}(s,0,4m^2-s)$ for $s>4m^2$. For $(s,t,u)\in\mathscr P_m$, put $x=1+2t/(s-4m^2)\in[-1,1]$. For each integer $\ell\ge0$, define the normalized Legendre polynomial $P_\ell:\mathbb C\to\mathbb C$ by
+
+$$P_\ell(x)=\frac{1}{2^\ell\ell!}\frac{d^\ell}{dx^\ell}(x^2-1)^\ell,$$
+
+and let $a_\ell:(4m^2,\infty)\to\mathbb C$ be the complex partial-wave coefficient function in this channel. When a full partial-wave expansion is asserted on the physical angular interval, require the partial sums of the right-hand side below to converge uniformly in $x\in[-1,1]$ for each fixed $s>4m^2$ to the supplied physical amplitude. Use the normalization
+
+$$\mathcal A_{\mathrm{phys}}(s,t,u)=16\pi\sqrt{\frac{s}{s-4m^2}}\sum_{\ell=0}^{\infty}(2\ell+1)P_\ell\!\left(1+\frac{2t}{s-4m^2}\right)a_\ell(s),\qquad P_\ell(1)=1.$$
+
+For the forward sign alone, convergence of the series at $x=1$ suffices. The downstream forward-positivity result uses the optical-theorem sign $\operatorname{Im}A(s+i0)\ge0$ for $s>4m^2$ as input; a full partial-wave realization is not inferred from this definition. In the displayed normalization, the sign follows if the forward series converges and the supplied partial waves obey $\operatorname{Im}a_\ell(s)\ge|a_\ell(s)|^2\ge0$ for every $s>4m^2$ and every $\ell$.
 
 Put $\nu_0=2m^2$ and $v=s-2m^2$, so $u-2m^2=-v$. Choose finitely many real numbers $p_j\in(0,4m^2)\setminus\{2m^2\}$ and real residues $r_j$, and set
 

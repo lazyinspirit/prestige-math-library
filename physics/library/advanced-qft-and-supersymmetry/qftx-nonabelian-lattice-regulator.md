@@ -17,5 +17,7 @@ requires:
   - haar-measure-existence-and-uniqueness
   - square-integrable-kernels-and-hilbert-schmidt-compactness
   - product-measures-and-the-fubini-tonelli-theorems
+  - orthonormal-bases-parseval-and-fourier-series
+  - complex-lp-spaces-and-test-function-conventions
 page_layout: compact-v1
 ---

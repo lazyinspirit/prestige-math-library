@@ -44,7 +44,15 @@ sources:
 
 ## Definition
 
-Use natural units $c=\hbar=1$ on four-dimensional Minkowski space $M=\mathbb R^{1,3}$ with metric $\eta=\operatorname{diag}(-1,1,1,1)$. Let $\phi\in C^\infty(M,\mathbb R)$ be a real, Grassmann-even (commuting) scalar field of engineering dimension one, with a stable one-particle state of pole mass $m>0$; here stable means an isolated real mass pole with zero decay width. Stability and the existence of this state are physical input data; no construction of a state is asserted. An effective field theory (EFT) here is the selected local low-energy representative organized in powers of its cutoff; its exact amplitude is separate supplied model data. For the finite-jet local-operator convention, use the complexification for the finite-jet algebra and impose the usual reality condition on $\phi$. Take one field species, maximum jet order $r=1$, polynomial degree at most $q=4$, weight $D=8$, trivial internal group, and the standard Lorentz tensor action with contractions formed using $\eta$. The real operator $\mathcal O_8=(\partial_\mu\phi\,\partial^\mu\phi)^2$ is then a local scalar of engineering dimension eight. Its coefficient in a chosen local representative is written
+Use natural units $c=\hbar=1$ on four-dimensional Minkowski space $M=\mathbb R^{1,3}$ with metric $\eta=\operatorname{diag}(-1,1,1,1)$. Let $\phi\in C^\infty(M,\mathbb R)$ be a real, Grassmann-even (commuting) scalar field of engineering dimension one, with a stable one-particle state of pole mass $m>0$; here stable means an isolated real mass pole with zero decay width. Stability and the existence of this state are physical input data; no construction of a state is asserted. An effective field theory (EFT) here is the selected local low-energy representative organized in powers of its cutoff; its exact amplitude is separate supplied model data. For the finite-jet local-operator convention, use the complexification for the finite-jet algebra and impose the usual reality condition on $\phi$. Take one field species, maximum jet order $r=1$, polynomial degree at most $q=4$, weight $D=8$, and trivial internal group. Specify the spacetime-index action as follows. Let
+
+$$L_{\mathbb R}=\{\Lambda\in\operatorname{GL}_4(\mathbb R):\Lambda^{T}\eta\Lambda=\eta\},\qquad L_{\mathbb C}=\{\Lambda\in\operatorname{GL}_4(\mathbb C):\Lambda^{T}\eta\Lambda=\eta\}.$$
+
+The real Lorentz group $L_{\mathbb R}$ acts on coordinates by $x'^{\mu}=\Lambda^{\mu}{}_{\nu}x^{\nu}$ and on the scalar field by $(\Lambda\cdot\phi)(x)=\phi(\Lambda^{-1}x)$, so its field-value representation is trivial. For $0\le s\le r$, its induced action on derivative components is
+
+$$\partial_{\mu_1}\cdots\partial_{\mu_s}(\Lambda\cdot\phi)(x)=(\Lambda^{-1})^{\nu_1}{}_{\mu_1}\cdots(\Lambda^{-1})^{\nu_s}{}_{\mu_s}(\partial_{\nu_1}\cdots\partial_{\nu_s}\phi)(\Lambda^{-1}x),$$
+
+with the empty product for $s=0$ giving the scalar field itself. Use the complexification of these tensor representations, with $L_{\mathbb C}$, on the finite-jet polynomial algebra in the supplier's invariant construction; this specifies its spacetime-index representation data. Since $\Lambda^{T}\eta\Lambda=\eta$, the induced covector action satisfies $\eta^{\mu\nu}(\Lambda^{-1})^{\alpha}{}_{\mu}(\Lambda^{-1})^{\beta}{}_{\nu}=\eta^{\alpha\beta}$. Thus $\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi$ and its square are invariant, and the real operator $\mathcal O_8=(\partial_\mu\phi\,\partial^\mu\phi)^2$ is a local Lorentz scalar of engineering dimension eight. Its coefficient in a chosen local representative is written
 
 $$\mathcal L_{\mathrm{EFT}}=-\frac12\partial_\mu\phi\,\partial^\mu\phi-\frac12m^2\phi^2+\frac{C_8(\mu_*)}{\Lambda^4}\mathcal O_8+\cdots,$$
 
@@ -54,11 +62,19 @@ The amplitude data consist of an identical-scalar $2\to2$ amplitude $\mathcal A(
 
 $$s=-(p_1+p_2)^2,\qquad t=-(p_1-p_3)^2,\qquad u=-(p_1-p_4)^2,\qquad s+t+u=4m^2.$$
 
-The forward slice is $A(s)=\mathcal A(s,0,4m^2-s)$ and assume $A(s)=A(4m^2-s)$ wherever both sides are defined. When the full $t$-dependent amplitude is supplied, use the partial-wave normalization
+The forward slice is $A(s)=\mathcal A(s,0,4m^2-s)$ and assume $A(s)=A(4m^2-s)$ wherever both sides are defined. Use the amplitude-input definition's physical region
 
-$$\mathcal A(s,t,u)=16\pi\sqrt{\frac{s}{s-4m^2}}\sum_{\ell=0}^{\infty}(2\ell+1)P_\ell\!\left(1+\frac{2t}{s-4m^2}\right)a_\ell(s),\qquad P_\ell(1)=1.$$
+$$\mathscr P_m=\{(s,t,u)\in\mathbb R^3:s>4m^2,\;-(s-4m^2)\le t\le0,\;u=4m^2-s-t\}.$$
 
-Here $\ell=0,1,2,\ldots$, $P_\ell$ is the Legendre polynomial, and $a_\ell(s)$ is the partial-wave coefficient. The formula is a normalization convention when a full amplitude is supplied; it does not assert convergence or unitarity by itself.
+When supplied, the full physical amplitude is a map $\mathcal A_{\mathrm{phys}}:\mathscr P_m\to\mathbb C$; the analytic continuation defining $A$ is separately supplied, with $A(s+i0)=\mathcal A_{\mathrm{phys}}(s,0,4m^2-s)$ for $s>4m^2$. For each integer $\ell\ge0$, the coefficient function is $a_\ell:(4m^2,\infty)\to\mathbb C$, and the normalized Legendre polynomial $P_\ell:\mathbb C\to\mathbb C$ is
+
+$$P_\ell(x)=\frac{1}{2^\ell\ell!}\frac{d^\ell}{dx^\ell}(x^2-1)^\ell.$$
+
+When a full partial-wave expansion is asserted, require its partial sums to converge uniformly in $x=1+2t/(s-4m^2)\in[-1,1]$ for each fixed $s>4m^2$ to the supplied physical amplitude, with normalization
+
+$$\mathcal A_{\mathrm{phys}}(s,t,u)=16\pi\sqrt{\frac{s}{s-4m^2}}\sum_{\ell=0}^{\infty}(2\ell+1)P_\ell\!\left(1+\frac{2t}{s-4m^2}\right)a_\ell(s),\qquad P_\ell(1)=1.$$
+
+For an inference of the forward sign from partial waves, convergence at $x=1$ suffices together with $\operatorname{Im}a_\ell(s)\ge|a_\ell(s)|^2\ge0$ for every $\ell$ and $s>4m^2$: each finite forward sum has nonnegative imaginary part and so does its limit. These are additional conditions on supplied partial-wave data; the normalization alone does not establish them or construct a unitary scattering matrix.
 
 The $S$-matrix convention is $S=1+i(2\pi)^4\delta^4(p_{\mathrm{out}}-p_{\mathrm{in}})\mathcal A+\cdots$. The channel adopts the forward optical-theorem input $\operatorname{Im}A(s+i0)\ge0$ for $s>4m^2$ in this normalization. This sign is an assumption on the supplied amplitude data, not a deduction from the EFT truncation.
 

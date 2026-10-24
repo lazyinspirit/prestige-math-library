@@ -58,7 +58,7 @@ fiberwise injectivity of $\alpha$ and surjectivity of $\beta$ on $\mathbb P^3$ i
 
 [F1] Stable means that the vectors $B_{i_1}\cdots B_{i_m}I(w)$ span $V$; costable means that no nonzero subspace invariant under both $B_i$ is contained in $\ker J$. The raw moments use $\mu_{\mathbb C}=[B_1,B_2]+IJ$ and $\mu_{\mathbb R}=[B_1,B_1^\dagger]+[B_2,B_2^\dagger]+II^\dagger-J^\dagger J$. [[def-qftx-adhm-linear-data-stability-and-regularity]]
 
-[F2] Every endomorphism of a nonzero finite-dimensional complex vector space has an eigenvector; a commuting pair has a common eigenvector by restricting the second map to an eigenspace of the first. [[thm-the-complex-numbers-are-algebraically-closed]]
+[F2] If $E$ is a nonzero finite-dimensional complex vector space and $T:E\to E$, then $\det(T-tI)$ is a nonconstant polynomial; the algebraic-closure theorem gives a root $\lambda$, so $T-\lambda I$ is singular and has a nonzero kernel vector. If $T_1,T_2$ commute, the eigenspace of $T_1$ for any eigenvalue is nonzero and invariant under $T_2$; applying the same argument to the restriction of $T_2$ to that eigenspace gives a common eigenvector. [[thm-the-complex-numbers-are-algebraically-closed]]
 
 ## Proof
 

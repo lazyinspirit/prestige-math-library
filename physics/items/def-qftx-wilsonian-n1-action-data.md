@@ -11,6 +11,11 @@ library: physics
 category: advanced-qft-and-supersymmetry
 page: qftx-susy-ward-and-nonrenormalization
 deps:
+  - def-countable-choice
+  - ex-unitary-and-special-unitary-lie-groups
+  - thm-cartans-closed-subgroup-theorem
+  - thm-the-tangent-space-at-the-identity-is-a-lie-algebra
+  - thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism
   - def-qftx-physical-superspace-normalization
   - def-qftx-n1-vector-superfield
   - def-qftx-n1-chiral-superfield
@@ -18,25 +23,37 @@ deps:
   - def-qftx-nonabelian-brst-complex
   - lem-qftx-nonabelian-brst-nilpotence
 dependency_roles:
+  def-countable-choice: mathematical-premise
+  ex-unitary-and-special-unitary-lie-groups: mathematical-premise
+  thm-cartans-closed-subgroup-theorem: mathematical-premise
+  thm-the-tangent-space-at-the-identity-is-a-lie-algebra: mathematical-premise
+  thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism: mathematical-premise
   def-qftx-physical-superspace-normalization: formulation-prerequisite
   def-qftx-n1-vector-superfield: formulation-prerequisite
   def-qftx-n1-chiral-superfield: mathematical-premise
   def-qftx-superspace-grassmann-algebra: mathematical-premise
   def-qftx-nonabelian-brst-complex: mathematical-premise
   lem-qftx-nonabelian-brst-nilpotence: mathematical-premise
-physical_scope: "Formal local perturbative Wilsonian action data for rigid four-dimensional N=1 gauge theories at a nonzero Wilsonian scale, in the topologically trivial sector. No regulator existence theorem, continuum construction, nonperturbative result, or empirical claim is asserted."
+physical_scope: "Formal local perturbative Wilsonian action data for rigid
+  four-dimensional N=1 gauge theories at a nonzero Wilsonian scale, in the
+  topologically trivial sector. No regulator existence theorem, continuum
+  construction, nonperturbative result, or empirical claim is asserted."
 proof_strategy: definition
 provenance:
   statement: ai-altered
   proof: not-applicable
 sources:
   references:
-    - title: "Steven Weinberg, Non-Renormalization Theorems in Non-Renormalizable Theories"
+    - title: "Steven Weinberg, Non-Renormalization Theorems in Non-Renormalizable
+        Theories"
       url: "https://arxiv.org/pdf/hep-th/9803099v1"
-      locator: "The action and Wilsonian cutoff data in equations (1)–(3), pp. 2–3; the holomorphic F and real D integrands and their field arguments."
+      locator: "The action and Wilsonian cutoff data in equations (1)–(3), pp. 2–3;
+        the holomorphic F and real D integrands and their field arguments."
     - title: "Stephen P. Martin, A Supersymmetry Primer, version 7"
       url: "https://arxiv.org/pdf/hep-ph/9709356v7"
-      locator: "§§4.7 and 4.10, printed pp. 41 and 48–49: chiral superspace actions, general holomorphic superpotential, Kähler potential, and holomorphic gauge-kinetic function."
+      locator: "§§4.7 and 4.10, printed pp. 41 and 48–49: chiral superspace actions,
+        general holomorphic superpotential, Kähler potential, and holomorphic
+        gauge-kinetic function."
 verification:
   precheck: n/a
 ---
@@ -45,9 +62,9 @@ verification:
 
 Use the physical action brackets $[U]_D=-I_D(U)/4$ and $[Y]_F=I_F(Y)/2$ from Physical superspace action brackets and canonical chiral components, with raw mathematical coefficient integrals $I_D,I_F$ unchanged. Physical chiral components obey $\psi_{\mathrm{raw}}=\sqrt2\psi$ and $F_{\mathrm{raw}}=2F$. All physical action and coupling formulas below use these brackets and physical component names; adding Hermitian conjugation applies only to the F action and occurs once.
 
-Use the flat four-dimensional N=1 superspace conventions in natural units $c=\hbar=1$, with $M=\mathbb R^{1,3}$, metric $\eta=\operatorname{diag}(-1,1,1,1)$, and the ordered Grassmann generators, Berezin measures, chiral constraint, and covariant derivatives fixed by the earlier superspace definitions. Fix the global gauge group as a compact closed matrix subgroup $G\subset U(N)$; this chosen subgroup, rather than only its Lie algebra, is part of the data. Let $\mathfrak g$ be its finite-dimensional real Lie algebra, let $\mathcal H_i$ be finite-dimensional Hermitian spaces, and let $\rho_i:G\to U(\mathcal H_i)$ be smooth unitary representations for a finite family of chiral superfields $\Phi_i$. Work on the trivial bundle $M\times G$ and expand in the topologically trivial sector. Let $A_\mu$ be the connection component of the vector prepotential in a local trivialization. For the odd ghost $c$, use the non-Abelian BRST transformations $sA_\mu=\partial_\mu c+[A_\mu,c]$, $sc=-\tfrac12[c,c]$, and $s\Phi_i=-\rho_{i*}(c)\Phi_i$ on component fields and jets.
+Use the flat four-dimensional N=1 superspace conventions in natural units $c=\hbar=1$, with $M=\mathbb R^{1,3}$, metric $\eta=\operatorname{diag}(-1,1,1,1)$, and the ordered Grassmann generators, Berezin measures, chiral constraint, and covariant derivatives fixed by the earlier superspace definitions. Fix the global gauge group as a compact closed matrix subgroup $G\subset U(N)$; this chosen subgroup, rather than only its Lie algebra, is part of the data. Give $U(N)$ its usual finite-dimensional real matrix Lie-group structure and give $G$ its unique inherited smooth embedded Lie-group structure as a closed subgroup. The group and tangent facts here use only the stated countable-choice premise $\mathrm{AC}_\omega$ from the mathematical suppliers. Put $\mathfrak g=\operatorname{Lie}(G)=T_I G\subseteq\mathfrak u(N)$, where $\mathfrak u(N)=\{X\in M_N(\mathbb C):X^\dagger=-X\}$, with bracket $[X,Y]_{\mathfrak g}=XY-YX$. This is the inherited tangent bracket: the left-invariant matrix field generated by $X$ is $u\mapsto uX$, and its bracket with the field generated by $Y$ has value $XY-YX$ at $I$. These statements cover compact closed matrix subgroups including Abelian groups such as $U(1)$; no non-Abelian global-group hypothesis is imposed. Let $\mathcal H_i$ be finite-dimensional Hermitian spaces, and let $\rho_i:G\to U(\mathcal H_i)$ be smooth unitary representations for a finite family of chiral superfields $\Phi_i$. Define their differentials by $\rho_{i*}=d(\rho_i)_I:T_I G\to T_IU(\mathcal H_i)$; equivalently, for $X\in\mathfrak g$ and any smooth curve $\gamma$ in $G$ with $\gamma(0)=I$ and $\gamma'(0)=X$, $\rho_{i*}(X)=\left.\frac{d}{dt}\right|_{t=0}\rho_i(\gamma(t))$. Thus $\rho_{i*}$ takes values in $\mathfrak u(\mathcal H_i)$ and preserves Lie brackets. Write $\mathfrak g_{\mathbb C}=\mathfrak g\otimes_{\mathbb R}\mathbb C$ and let $\rho_{i*}^{\mathbb C}:\mathfrak g_{\mathbb C}\to\operatorname{End}_{\mathbb C}(\mathcal H_i)$ be the complex-linear extension; all represented Lie-algebra parameters below use this map. Work on the trivial bundle $M\times G$ and expand in the topologically trivial sector. Let $A_\mu$ be the connection component of the vector prepotential in a local trivialization. For the odd ghost $c$, use the non-Abelian BRST transformations $sA_\mu=\partial_\mu c+[A_\mu,c]$, $sc=-\tfrac12[c,c]$, and $s\Phi_i=-\rho_{i*}(c)\Phi_i$ on component fields and jets.
 
-A vector prepotential $V$ is a dimensionless even Hermitian matrix-valued superfield in the chosen faithful representation of $G$. Representation maps below mean the complex-linear extension of the Lie-algebra differential, rather than evaluation of a group representation on a Lie-algebra element. Write $V_i$ for this represented prepotential. Let $\Lambda$ be an even chiral complexified Lie-algebra parameter, write $h_i=e^{-\Lambda_i}$, and define the Hermitian matter kernel $\mathscr H_i=e^{-V_i}$. The supergauge laws are $\Phi_i\mapsto h_i\Phi_i$ and $\mathscr H_i\mapsto(h_i^\dagger)^{-1}\mathscr H_i h_i^{-1}$. Define the curvature using this SAME matter kernel:
+A vector prepotential $V$ is a dimensionless even Hermitian matrix-valued superfield with values in $i\mathfrak g$ in the chosen faithful representation. Set $V_i=\rho_{i*}^{\mathbb C}(V)$. Let $\Lambda$ be an even chiral $\mathfrak g_{\mathbb C}$-valued parameter, set $\Lambda_i=\rho_{i*}^{\mathbb C}(\Lambda)$ and $h_i=e^{-\Lambda_i}$, and define the Hermitian matter kernel $\mathscr H_i=e^{-V_i}$. The representation maps are differentials of the group representations, complex-linearly extended; a group representation is not evaluated on a Lie-algebra element. The supergauge laws are $\Phi_i\mapsto h_i\Phi_i$ and $\mathscr H_i\mapsto(h_i^\dagger)^{-1}\mathscr H_i h_i^{-1}$. Define the curvature using this SAME matter kernel:
 
 $$W_\alpha=-\tfrac14\bar D^{\dot\beta}\bar D_{\dot\beta}(\mathscr H^{-1}D_\alpha\mathscr H)=-\tfrac14\bar D^{\dot\beta}\bar D_{\dot\beta}(e^{V}D_\alpha e^{-V}).$$
 
@@ -71,7 +88,7 @@ Here $[\Phi_i]=1$, $[W_\alpha]=3/2$, $[g]=0$, $[\tau]=0$, the F-term integrand h
 
 A regulated formal expectation $\langle\mathcal O\rangle_\lambda$ is the normalized coefficientwise functional assigned by a specified cutoff prescription; the notation asserts no convergence or physical continuum measure. A local insertion $\mathcal O$ is a polynomial or formal local function of the fields and finitely many spacetime derivatives, multiplied by a compactly supported test function. For an insertion $\mathcal O$ and the rigid supersymmetry variation generated by the N=1 supercharges, its Ward identity is the change-of-variables equation $\langle\delta_{\epsilon,\bar\epsilon}\mathcal O\rangle_\lambda=\langle\mathcal O\,\delta_{\epsilon,\bar\epsilon}S_\lambda\rangle_\lambda$. The BRST Ward identity is $\langle s\mathcal O\rangle_\lambda=0$ when $sS_\lambda=0$. A local gauge anomaly is a nonzero local insertion in the latter identity. A regulator preserves these Ward identities when the equations hold coefficientwise at every perturbative order without an anomaly insertion; this definition does not assert that such a regulator exists for every field representation.
 
-The spurion argument additionally uses the local background extension of this formal prescription: independent F coefficients and $\tau$ are nondynamical chiral superfields, and independent real D coefficients are unconstrained real superfields. The prescribed regulated counterterms obey the same superspace and gauge Ward identities for these backgrounds and have a local derivative expansion in them. The derivative-free chiral sector is evaluated at constant scalar backgrounds after that extension; background-superderivative terms belong to the real D sector after chiral projection. This is the usual spurion-compatible regulator hypothesis, not a consequence of classical BRST nilpotence or a regulator-existence theorem. Its counterterms depend on the original background coefficients, so a redundant parametrization of those coefficients introduces no independent physical coupling. No rescaling of an integrated matter or vector field is assumed in this extension.
+The local background extension of this formal prescription promotes independent F coefficients and $\tau$ to nondynamical chiral superfields, and independent real D coefficients to unconstrained real superfields. The prescribed regulated counterterms obey the same superspace and gauge Ward identities for these backgrounds and have a local derivative expansion in them. The derivative-free chiral sector is evaluated at constant scalar backgrounds after that extension; terms containing background superderivatives are assigned to the real D sector after chiral projection. The extension is interpreted coefficientwise in the formal local background-jet algebra before setting the backgrounds constant. At a fixed perturbative order and for any fixed monomial coefficient, let $P_1,\ldots,P_k$ be the finite set of independent real coefficient spurions involved, and write $u_j=P_j-p_j^{(0)}$ for their formal deviations from the selected constant expansion values. A derivative-free coefficient is a formal power series in $u_1,\ldots,u_k$ over the characteristic-zero algebra of the remaining chiral fields and chiral coefficient spurions. The unconstrained real backgrounds have independent first anti-chiral jets $\bar D_{\dot\alpha}P_j$; these are free odd generators over that derivative-free coefficient algebra (with their conjugate jets fixed by reality). Formal partial derivatives act monomial by monomial, and $\bar D$ acts by the graded chain rule. Thus chirality is an identity in this jet algebra, rather than an equation imposed only after constant-background evaluation. No convergence, positive scalar body, logarithm, or analytic continuation in the real coefficients is required. This local background-extension and regulator-compatibility assumption is not a consequence of classical BRST nilpotence or a regulator-existence theorem.
 
 The component background fields are smooth on $M$, and admissible variations and insertions are compactly supported or satisfy decay conditions that make the stated total-derivative boundary terms vanish. Loop momenta are regulated separately by the Wilsonian high-mode prescription.
 
@@ -94,4 +111,14 @@ For a U(1) factor, normalize its gauge parameter as $e^{i\alpha}$ with period $2
 [[lem-qftx-nonabelian-brst-nilpotence|BRST nilpotence lemma]]
 
 [[def-qftx-physical-superspace-normalization]]
+
+[[def-countable-choice|Countable choice used by the Lie-group suppliers]]
+
+[[ex-unitary-and-special-unitary-lie-groups|Unitary matrix groups and their tangent Lie algebras]]
+
+[[thm-cartans-closed-subgroup-theorem|Inherited Lie-group structure on closed subgroups]]
+
+[[thm-the-tangent-space-at-the-identity-is-a-lie-algebra|Tangent Lie algebra at the identity]]
+
+[[thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism|Differentials preserve Lie brackets]]
 

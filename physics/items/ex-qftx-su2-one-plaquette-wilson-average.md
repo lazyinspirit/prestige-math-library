@@ -15,12 +15,26 @@ deps:
   - def-qftx-su2-wilson-plaquette-measure
   - lem-qftx-planar-plaquette-factorization
   - lem-qftx-su2-one-plaquette-average
+  - lem-qftx-wilson-loop-gauge-invariance
+  - def-probability-measure
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - def-product-measure-on-sigma-finite-spaces
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - def-tdmath-measure-integral
+  - def-measure-with-density
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-qftx-wilson-loop: mathematical-premise
   def-qftx-su2-wilson-plaquette-measure: mathematical-premise
   lem-qftx-planar-plaquette-factorization: mathematical-premise
   lem-qftx-su2-one-plaquette-average: mathematical-premise
+  lem-qftx-wilson-loop-gauge-invariance: mathematical-premise
+  def-probability-measure: mathematical-premise
+  def-product-sigma-algebra-and-finite-product-sigma-algebras: mathematical-premise
+  def-product-measure-on-sigma-finite-spaces: mathematical-premise
+  thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
+  def-tdmath-measure-integral: mathematical-premise
+  def-measure-with-density: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -41,7 +55,7 @@ proof_strategy: direct
 
 ## Example
 
-Assume $\mathrm{AC}_\omega$. For one square face with free boundary in the finite $SU(2)$ Wilson model at $0<\beta\leq1$, the normalized plaquette holonomy has law $d\nu_\beta(U)=z_\beta^{-1}e^{\beta\tau(U)}d\mu_2(U)$, where $\tau(U)=\tfrac12\operatorname{Tr}_2U$ and $z_\beta=\int e^{\beta\tau}d\mu_2$. The Wilson action partition factor is $Z_\square=e^{-\beta}z_\beta$, and the normalized fundamental Wilson loop around the square has expectation $\langle W(\partial\square)\rangle_\beta=\lambda(\beta)$, where $\lambda(\beta)=\int\tau e^{\beta\tau}d\mu_2/z_\beta=\beta/4+O(\beta^3)$ as $\beta\downarrow0$.
+Assume $\mathrm{AC}_\omega$. For one square face with free boundary in the finite $SU(2)$ Wilson model at $0<\beta\leq1$, take the loop to follow the positively oriented face boundary counterclockwise from its lower-left corner. The normalized plaquette holonomy has law $d\nu_\beta(U)=z_\beta^{-1}e^{\beta\tau(U)}d\mu_2(U)$, where $\tau(U)=\tfrac12\operatorname{Tr}_2U$ and $z_\beta=\int e^{\beta\tau}d\mu_2$. The Wilson action partition factor is $Z_\square=e^{-\beta}z_\beta$, and the normalized fundamental Wilson loop around that oriented face has expectation $\langle W(\partial\square)\rangle_\beta=\lambda(\beta)$, where $\lambda(\beta)=\int\tau e^{\beta\tau}d\mu_2/z_\beta=\beta/4+O(\beta^3)$ as $\beta\downarrow0$.
 
 ## Example references
 
@@ -50,6 +64,20 @@ Assume $\mathrm{AC}_\omega$. For one square face with free boundary in the finit
 [[lem-qftx-planar-plaquette-factorization|Finite one-face plaquette law]]
 
 [[lem-qftx-su2-one-plaquette-average|Exact one-plaquette expectation and small-coupling expansion]]
+
+[[lem-qftx-wilson-loop-gauge-invariance|Gauge invariance of the original loop observable under tree gauge fixing]]
+
+[[def-probability-measure|Normalized plaquette probability]]
+
+[[def-product-sigma-algebra-and-finite-product-sigma-algebras|Finite product sigma-algebra]]
+
+[[def-product-measure-on-sigma-finite-spaces|Product link measure]]
+
+[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique|Finite product probability and rectangle formula]]
+
+[[def-tdmath-measure-integral|Partition factor and loop expectation as integrals]]
+
+[[def-measure-with-density|Plaquette law defined by its density]]
 
 [Meyer, §1.4.1.1, printed pp. 22–24, on leading Wilson-loop integration in the strong-coupling regime](https://ndl.ethernet.edu.et/bitstream/123456789/73862/1/82.pdf.pdf)
 
@@ -69,10 +97,12 @@ Assume $\mathrm{AC}_\omega$. For one square face with free boundary in the finit
 
 [F4] [[lem-qftx-su2-one-plaquette-average]]: $\int\tau\,d\nu_\beta=\lambda(\beta)$ and $\lambda(\beta)=\beta/4+O(\beta^3)$.
 
+[F5] [[lem-qftx-wilson-loop-gauge-invariance]]: the loop trace in the original link variables equals its value in the tree-gauge representative, while [[lem-qftx-planar-plaquette-factorization]] supplies the law of the representative's plaquette variable.
+
 ## Verification
 
-1.1 On one face the action weight is $e^{-\beta}e^{\beta\tau(U_p)}$. The one-face instance of [F3] gives the normalized plaquette law $\nu_\beta$, so the partition factor is $e^{-\beta}z_\beta$. The only inherited choice premise is [A1]. [given, A1, F1, F3, algebra]
+1.1 On one face the action weight is $e^{-\beta}e^{\beta\tau(U_p)}$. Let $U^{\mathrm{tree}}$ be the tree-gauge representative of the original link configuration. By [F5] the original loop observable is pointwise unchanged by this gauge fixing, and [F3] gives the normalized law $\nu_\beta$ of the representative's plaquette variable. Hence the partition factor is $e^{-\beta}z_\beta$. The only inherited choice premise is [A1]. [given, A1, F1, F3, F5, algebra]
 
-2.1 The boundary Wilson observable is $W(\partial\square)=\tau(U_p)$ by [F2], and integrating it against the law in [F3] gives $\int\tau\,d\nu_\beta=\lambda(\beta)$ by [F4]. [F2, F3, F4, step 1.1, algebra]
+2.1 In the chosen orientation the loop word is exactly the positively oriented face word, so its ordered holonomy is $U_p$ and its Wilson observable is $W(\partial\square)=\tau(U_p)$ by [F2]. The equality with the original loop observable follows pointwise from [F5]; integrating against the representative plaquette law in [F3] gives $\int\tau\,d\nu_\beta=\lambda(\beta)$ by [F4]. [F2, F3, F4, F5, step 1.1, algebra]
 
 3.1 Substituting the expansion from [F4] yields $\langle W(\partial\square)\rangle_\beta=\beta/4+O(\beta^3)$ as $\beta\downarrow0$. This is a finite-regulator model expectation. [F4, step 2.1, algebra] ∎

@@ -28,13 +28,13 @@ sources:
 
 ## Definition
 
-Let $T$ be a compact torus and $M$ a compact smooth manifold without boundary. A smooth left $T$-action is a jointly smooth map $a:T\times M\to M$ with $a(e,x)=x$ and $a(st,x)=a(s,a(t,x))$. Let $E^0,\ldots,E^N$ be finite-rank complex vector bundles on $M$. For each $j<N$, let $d_j:C^\infty(M,E^j)\to C^\infty(M,E^{j+1})$ be a linear differential operator of finite order, and put $d_{-1}=d_N=0$. The sequence is a complex when $d_{j+1}d_j=0$ for every $j$. It is **elliptic** when, for every $x\in M$ and every nonzero real cotangent vector $\xi\in T_x^*M$, the sequence of principal-symbol maps
+Let $T=(\mathbb R/\mathbb Z)^r$, where $r\ge0$ is an integer, be a compact torus and $M$ a compact smooth manifold without boundary. A smooth left $T$-action is a jointly smooth map $a:T\times M\to M$ with $a(e,x)=x$ and $a(st,x)=a(s,a(t,x))$. Let $E^0,\ldots,E^N$ be finite-rank complex vector bundles on $M$. For each $j<N$, let $d_j:C^\infty(M,E^j)\to C^\infty(M,E^{j+1})$ be a linear differential operator of finite order $m_j$, and put $d_{-1}=d_N=0$. In local coordinates and bundle frames, if $d_j=\sum_{|\alpha|\le m_j}a_{j,\alpha}(x)\partial_x^\alpha$, use the positive-frequency principal symbol $\sigma(d_j)(x,\xi)=\sum_{|\alpha|=m_j}a_{j,\alpha}(x)(i\xi)^\alpha$. The sequence is a complex when $d_{j+1}d_j=0$ for every $j$. It is **elliptic** when, for every $x\in M$ and every nonzero real cotangent vector $\xi\in T_x^*M$, the sequence of principal-symbol maps
 
 $$0\longrightarrow E_x^0\xrightarrow{\sigma(d_0)(x,\xi)}E_x^1\xrightarrow{\sigma(d_1)(x,\xi)}\cdots\xrightarrow{\sigma(d_{N-1})(x,\xi)}E_x^N\longrightarrow0$$
 
-is exact. Suppose each bundle has a smooth $T$-linearization $\rho_t^j:E_x^j\to E_{t\cdot x}^j$, satisfying the group-action law, and the induced section maps
+is exact. Suppose each bundle has a $T$-linearization: a jointly smooth map $T\times E^j\to E^j$ whose restrictions $\rho_t^j(x):E_x^j\to E_{t\cdot x}^j$ are complex-linear isomorphisms, with $\rho_e^j(x)=I_{E_x^j}$ and $\rho_{st}^j(x)=\rho_s^j(t\cdot x)\circ\rho_t^j(x)$. The induced section maps
 
-$$ (U_t^j s)(x):=\rho_t^j\bigl(s(t^{-1}\cdot x)\bigr) $$
+$$ (U_t^j s)(x):=\rho_t^j(t^{-1}\cdot x)\bigl(s(t^{-1}\cdot x)\bigr) $$
 
 commute with $d_j$. Require the cohomology spaces $H^j(E^\bullet):=\ker d_j/\operatorname{im}d_{j-1}$ to be finite-dimensional. The representation ring $R(T)$ is the Grothendieck ring of finite-dimensional continuous complex representations of $T$. Define
 

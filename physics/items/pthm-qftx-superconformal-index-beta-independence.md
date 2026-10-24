@@ -17,7 +17,7 @@ dependency_roles:
   def-countable-choice: mathematical-premise
   def-qftx-superconformal-index: formulation-prerequisite
   lem-qftx-supercharge-positive-energy-pairing: mathematical-premise
-dependency_level: 3
+dependency_level: 4
 axiom_base: "ZF + AC_omega"
 proof_strategy: direct
 provenance:
@@ -25,13 +25,25 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Justin Kinney, Juan Maldacena, Shiraz Minwalla, and Suvrat Raju, An Index for 4 Dimensional Super Conformal Theories"
+    - title: "Justin Kinney, Juan Maldacena, Shiraz Minwalla, and Suvrat Raju, An
+        Index for 4 Dimensional Super Conformal Theories"
       url: "https://arxiv.org/pdf/hep-th/0510251"
-      locator: "Full 60-page paper; §3, equations (3.1)–(3.4), printed pp. 13–15: the exact positive anticommutator, commuting charge insertion, and cancellation of positive-gap states. The weighted trace-class argument is proved locally here."
-    - title: "Leonardo Rastelli and Shlomo S. Razamat, The supersymmetric index in four dimensions"
+      locator: "Full 60-page paper; §3, equations (3.1)–(3.4), printed pp. 13–15: the
+        exact positive anticommutator, commuting charge insertion, and
+        cancellation of positive-gap states. The weighted trace-class argument
+        is proved locally here."
+    - title: "Leonardo Rastelli and Shlomo S. Razamat, The supersymmetric index in
+        four dimensions"
       url: "https://arxiv.org/pdf/1608.02965"
-      locator: "Full 43-page review; §2.1, equations (2.1)–(2.5), printed pp. 3–4: the S3 trace, fugacity charges, and infinite protected-sector convergence qualification."
-physical_scope: "Conditional result for the specified unit-radius four-dimensional N=1 charge data with a supplied pure-point joint gap/charge basis, reducing supercharge domains, and trace-class weighted heat operators; total gap eigenspaces and the protected kernel may be infinite-dimensional. It asserts no continuum measure, general SCFT existence, or formal-series regularization theorem."
+      locator: "Full 43-page review; §2.1, equations (2.1)–(2.5), printed pp. 3–4: the
+        S3 trace, fugacity charges, and infinite protected-sector convergence
+        qualification."
+physical_scope: "Conditional result for the specified unit-radius
+  four-dimensional N=1 charge data with a supplied pure-point joint gap/charge
+  basis, reducing supercharge domains, and trace-class weighted heat operators;
+  total gap eigenspaces and the protected kernel may be infinite-dimensional. It
+  asserts no continuum measure, general SCFT existence, or formal-series
+  regularization theorem."
 empirical_premises: []
 verification:
   precheck: pending

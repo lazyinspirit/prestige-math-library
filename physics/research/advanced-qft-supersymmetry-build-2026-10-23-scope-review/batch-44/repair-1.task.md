@@ -1,0 +1,15 @@
+# Batch 44: repair 1
+
+Run: advanced-qft-supersymmetry-build-2026-10-23
+Batch: 44
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: aqft-eft-anomalies, aqft-eft-anomalies-examples
+Items: def-aqft-heavy-chiral-u1-threshold-data, pthm-aqft-heavy-chiral-threshold-wess-zumino-match, ex-aqft-heavy-fermion-anomaly-threshold
+Consolidated findings: [{"id":"def-aqft-heavy-chiral-u1-threshold-data","type":"local","reason":"The Definition sets the Yukawa mass M_H>0, then defines Γ_H for that massive pair while calling the M_0=0 loop the physical loop in its Pauli–Villars prescription. Bilal’s M_0=0 loop is the massless chiral-triangle calculation; Preskill separately derives the mass-independent variation for the heavy threshold. Clarify that distinction and have theorem proof step 1.2 explicitly transfer the triangle coefficient to the massive pair using the field-redefinition premise. [Bilal, §5.2.3](https://arxiv.org/pdf/0802.0634); [Preskill, §6.4](https://preskill.caltech.edu/pubs/preskill-1991-effective.pdf)."},{"id":"pthm-aqft-heavy-chiral-threshold-wess-zumino-match","type":"local","reason":"E is called a bound on external momentum components, but the items do not specify a momentum set or how it constrains their smooth compactly supported backgrounds. If it means Fourier support, the nonzero compactly supported background in the Example cannot have bounded Fourier support; if it means external legs of a perturbative amplitude, those legs are not defined. Define the low-energy condition for a specified amplitude, or separate that interpretation from the exact local anomaly identity and adjust the Example accordingly."}]
+Authorized source files: ["items/def-aqft-heavy-chiral-u1-threshold-data.md","items/pthm-aqft-heavy-chiral-threshold-wess-zumino-match.md","items/ex-aqft-heavy-fermion-anomaly-threshold.md","library/advanced-qft-and-supersymmetry/aqft-eft-anomalies.md","library/advanced-qft-and-supersymmetry/aqft-eft-anomalies-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

@@ -7,7 +7,7 @@ origin: pipeline
 domain: mathematics
 library: mathematics
 category: quantum-field-theory-mathematics
-dependency_level: 8
+dependency_level: 6
 deps:
   - def-axiom-of-choice
   - def-qftx-smooth-sobolev-gauge-configuration
@@ -24,15 +24,23 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "I. M. Singer, Some Remarks on the Gribov Ambiguity, Communications in Mathematical Physics 60 (1978), 7–12"
-      url: "https://projecteuclid.org/journals/communications-in-mathematical-physics/volume-60/issue-1/Some-remarks-on-the-gribov-ambiguity/cmp/1103904019.pdf"
-      locator: "Theorem 2, p. 9: weak homotopy type; the affine cone and relative repair are verified locally."
+    - title: "I. M. Singer, Some Remarks on the Gribov Ambiguity, Communications in
+        Mathematical Physics 60 (1978), 7–12"
+      url: "https://projecteuclid.org/journals/communications-in-mathematical-physics\
+        /volume-60/issue-1/Some-remarks-on-the-gribov-ambiguity/cmp/1103904019.\
+        pdf"
+      locator: "Theorem 2, p. 9: weak homotopy type; the affine cone and relative
+        repair are verified locally."
     - title: "Steven Sivek, Lectures on Instantons and Contact Structures"
       url: "https://wwwf.imperial.ac.uk/~ssivek/papers/regensburg-notes.pdf"
-      locator: "§1, pp. 2–3: gauge action and irreducible connections; the example's cone construction is verified locally."
-    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture notes)"
-      url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf"
-      locator: "§5.13.3, PDF pp. 115–116, holonomy-stabilizer and irreducibility conventions; the cone and relative repair are verified locally."
+      locator: "§1, pp. 2–3: gauge action and irreducible connections; the example's
+        cone construction is verified locally."
+    - title: "Dominic Walpuski, Differential Geometry III: Gauge Theory (full lecture
+        notes)"
+      url: "https://walpuski.com/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.p\
+        df"
+      locator: "§5.13.3, PDF pp. 115–116, holonomy-stabilizer and irreducibility
+        conventions; the cone and relative repair are verified locally."
 verification:
   precheck: pending
 ---

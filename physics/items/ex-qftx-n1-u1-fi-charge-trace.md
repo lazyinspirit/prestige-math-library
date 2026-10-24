@@ -42,11 +42,11 @@ Take one unbroken compact U(1) gauge factor with two left-chiral superfields of 
 
 ## Facts & Assumptions
 
-**Given:** The N=1 Wilsonian action datum, an unbroken U(1) factor, its two left-chiral representations, and the formal perturbative regulator hypotheses including the local background-spurion extension.
+**Given:** The N=1 Wilsonian action datum, an unbroken U(1) factor, its two left-chiral representations, and the formal perturbative regulator hypotheses including its local background-spurion extension with independent unconstrained real spurion jets and chirality before constant-background evaluation.
 
-[F1] [[def-qftx-wilsonian-n1-action-data]]: for a U(1) factor, $V_1$ is a real Abelian prepotential and a constant coefficient $\xi$ defines the Fayet–Iliopoulos D-term.
+[F1] [[def-qftx-wilsonian-n1-action-data]]: for a U(1) factor, $V_1$ is a real Abelian prepotential and a constant coefficient $\xi$ defines the Fayet–Iliopoulos D-term; its group is the compact matrix group $U(1)$ with Lie algebra $i\mathbb R$ and the stated period-$2\pi$ charge normalization.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: the perturbative FI correction is one-loop only, is proportional to the sum of all left-chiral U(1) charges, and vanishes when this sum is zero.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, the perturbative FI correction is one-loop only, is proportional to the sum of all left-chiral U(1) charges, and vanishes when this sum is zero.
 
 [A1] The two multiplets have charges $q_+=1$ and $q_-=-1$, each with multiplicity one.
 

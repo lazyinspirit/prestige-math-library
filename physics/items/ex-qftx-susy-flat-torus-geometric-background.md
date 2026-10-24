@@ -13,7 +13,7 @@ deps:
   - def-qftx-susy-background-data
 dependency_roles:
   def-qftx-susy-background-data: formulation-prerequisite
-dependency_level: 2
+dependency_level: 3
 proof_strategy: direct
 provenance:
   statement: ai-generated
@@ -22,7 +22,9 @@ generation:
   role: example
 sources:
   references: []
-physical_scope: "A local Euclidean geometric spin/R background example only; no multiplet, gauge-fixed field theory, functional measure, or localization prediction is asserted."
+physical_scope: "A local Euclidean geometric spin/R background example only; no
+  multiplet, gauge-fixed field theory, functional measure, or localization
+  prediction is asserted."
 verification:
   precheck: pending
 ---

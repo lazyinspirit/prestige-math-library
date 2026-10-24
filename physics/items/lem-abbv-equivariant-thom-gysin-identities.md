@@ -7,14 +7,18 @@ origin: pipeline
 domain: mathematics
 library: mathematics
 axiom_strength: "ZF + AC"
-dependency_level: 4
+dependency_level: 6
 deps:
   - def-axiom-of-choice
   - def-abbv-equivariant-integration-conventions
   - lem-qftx-borel-base-is-paracompact-of-cw-type
   - thm-milnor-join-model-is-a-contractible-free-g-space
   - thm-thom-isomorphism-for-oriented-vector-bundles
+  - lem-abbv-borel-fiber-integration-construction
+  - thm-naturality-and-uniqueness-of-thom-classes
 dependency_roles:
+  thm-naturality-and-uniqueness-of-thom-classes: mathematical-premise
+  lem-abbv-borel-fiber-integration-construction: mathematical-premise
   def-axiom-of-choice: mathematical-premise
   def-abbv-equivariant-integration-conventions: mathematical-premise
   lem-qftx-borel-base-is-paracompact-of-cw-type: mathematical-premise
@@ -27,13 +31,16 @@ provenance:
 sources:
   scraped: []
   references:
-    - title: "Michael F. Atiyah and Raoul Bott, The Moment Map and Equivariant Cohomology"
-      url: "https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf"
+    - title: "Michael F. Atiyah and Raoul Bott, The Moment Map and Equivariant
+        Cohomology"
+      url: "https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbo\
+        tt_moment.pdf"
     - title: "Matvei Libine, Lecture Notes on Equivariant Cohomology"
       url: "https://arxiv.org/pdf/0709.3615"
     - title: "Kentaro Hori et al., Mirror Symmetry"
       url: "https://www.claymath.org/library/monographs/cmim-1.pdf"
-      locator: "Chapter 4, §4.3, printed pp. 62–63 (PDF pp. 82–83), including the Thom-class and equation (4.2) discussion."
+      locator: "Chapter 4, §4.3, printed pp. 62–63 (PDF pp. 82–83), including the
+        Thom-class and equation (4.2) discussion."
 verification:
   precheck: pending
 ---
@@ -62,11 +69,15 @@ If $N'$ is a different fixed component disjoint from $N$, then $i_{N'}^*i_{N*}^T
 
 [F1] [[def-abbv-equivariant-integration-conventions]]: $H_T^*(X;\mathbb R)=H^*(ET\times_T X;\mathbb R)$, equivariant integration is the degree-shifting pushforward of the Borel fibration, and the Euler class is the zero-section pullback of a Thom class normalized to integrate to $1$ on each oriented fiber.
 
-[F2] [[lem-qftx-borel-base-is-paracompact-of-cw-type]]: for the selected product Milnor model and compact smooth $N$, $BT\times N$ is paracompact Hausdorff and has CW type. Its current batch-8 readiness record and actual dependency closure are hash-current and ready; the compact smooth base hypotheses match this use.
+[F2] [[lem-qftx-borel-base-is-paracompact-of-cw-type]]: for the selected product Milnor model and compact smooth $N$, $BT\times N$ is paracompact Hausdorff and has CW type. The compact smooth base hypotheses match this use.
 
 [F3] [[thm-milnor-join-model-is-a-contractible-free-g-space]]: each selected circle Milnor bundle is numerable; a finite product of its trivializing covers and subordinate numerations gives a numerable principal $T$-bundle, and pullback preserves numerability.
 
 [F4] [[thm-thom-isomorphism-for-oriented-vector-bundles]]: under AC, an oriented numerable rank-$c$ vector bundle over a paracompact Hausdorff base of CW type has a fiber-normalized Thom class, and cup product with it is an isomorphism in every degree.
+
+[F5] [[lem-abbv-borel-fiber-integration-construction]] constructs the finite-stage and stable Borel pushforwards, proves their coefficient-ring linearity, and proves $\int_M i_*^T\beta=\int_N\beta$ for the right-Thom cup convention and the ordered tangent-then-normal orientation. Its trace assertion only assumes the Borel Thom class, not this lemma.
+
+[F6] [[thm-naturality-and-uniqueness-of-thom-classes]] gives uniqueness of a fiber-normalized Thom class. In real coefficients its negative is the normalized class for the reversed orientation, since its fiber generator is negated.
 
 ## Proof
 
@@ -74,12 +85,12 @@ If $N'$ is a different fixed component disjoint from $N$, then $i_{N'}^*i_{N*}^T
 
 2.1 The Borel principal bundle $ET\times N\to BT\times N$ is the pullback of the selected product Milnor bundle. If $r=0$, this is the trivial principal bundle over a point; otherwise, for each circle factor, [F3] supplies a numerable trivializing cover and subordinate partition. Products of these finitely many covers and partition functions are locally finite and subordinate to product principal-$T$ charts. Pulling the numeration back to $BT\times N$ shows that the associated Borel normal bundle $ET\times_T\nu$ is numerable. It is oriented by the given $T$-invariant orientation. By [F2] its base is paracompact Hausdorff of CW type, so [F4] gives the normalized Thom class $\tau_\nu$ and the cup-product isomorphism in every degree. [given, A2, F2, F3, F4, step 1.1, construct]
 
-3.1 Use the tubular-neighborhood identification and excision to transfer $\tau_\nu$ to $H_T^c(M,M\setminus N;\mathbb R)$. For each $\beta\in H_T^*(N;\mathbb R)$, define $i_*^T(\beta)$ as the image of the cup product of this relative Thom class with the pullback of $\beta$ under the relative-to-absolute map $H_T^*(M,M\setminus N;\mathbb R)\to H_T^*(M;\mathbb R)$. This canonical composite is the Gysin map and is defined for every $\beta$ by the Thom isomorphism. [given, F1, step 1.1, step 2.1, construct]
+3.1 Use the tubular-neighborhood identification and excision to transfer $\tau_\nu$ to $H_T^c(M,M\setminus N;\mathbb R)$. For each $\beta\in H_T^*(N;\mathbb R)$, define $i_*^T(\beta)$ as the image of $q^*\beta\smile\tau_\nu$, with the pulled-back $\beta$ on the left and the Thom class on the right, where $q$ is the tube projection under the relative-to-absolute map $H_T^*(M,M\setminus N;\mathbb R)\to H_T^*(M;\mathbb R)$. This canonical composite is the Gysin map and is defined for every $\beta$ by the Thom isomorphism. [given, F1, step 1.1, step 2.1, construct]
 
-4.1 Pull the relative class in step 3.1 back along the zero section. By the definition of $e_T(\nu)$ in [F1], the pulled-back Thom class is $e_T(\nu)$, and pullback respects cup products. Hence $i^*i_*^T(\beta)=e_T(\nu)\smile\beta$. [given, A1, F1, step 3.1, algebra]
+4.1 Pull the relative class in step 3.1 back along the zero section. By the definition of $e_T(\nu)$ in [F1], the pulled-back Thom class is $e_T(\nu)$, and pullback respects cup products. This gives $i^*i_*^T(\beta)=\beta\smile e_T(\nu)$. If $c$ is even, graded commutativity equals the stated $e_T(\nu)\smile\beta$. If $c$ is odd, fiberwise multiplication by $-1$ fixes the zero section and reverses the normal orientation. Its pullback of the normalized Thom class is $-\tau_\nu$ by [F6], hence $e_T(\nu)=-e_T(\nu)$, and $e_T(\nu)=0$ over $\mathbb R$. Thus both orders again agree. This retains the case of arbitrary submanifolds of $M^T$, whose codimension need not be even. [given, A1, F1, F6, step 3.1, algebra]
 
 4.2 The Gysin class in step 3.1 is represented in a tubular neighborhood of $N$. Choose such neighborhoods disjoint for disjoint compact fixed components $N,N'$. The representative restricts to zero on $N'$, so $i_{N'}^*i_{N*}^T(\beta)=0$. [given, step 1.1, step 3.1]
 
-4.3 In the tubular-neighborhood representative from step 3.1, integrate first along each oriented normal disk fiber. The Thom class integrates to $1$ by its fiber normalization, so this fiber integration returns $\beta$ on $N$; the orientation convention in the Statement makes the resulting base orientation the one used by $\int_N$. [given, A1, F1, step 3.1, algebra]
+4.3 Step 2.1 supplies the Borel Thom class, and step 3.1 uses precisely the right-Thom product of [F5]. Its trace theorem therefore applies: at every finite stage the relative Thom class has an interior-supported real representative integrating to $1$ along each oriented normal disk; normal integration followed by integration over $N$ agrees with integration over $M$ in the tangent-then-normal orientation. The stable Borel maps detect this equality at sufficiently large finite stages. Hence $\int_M i_*^T(\beta)=\int_N\beta$. [given, A1, F5, step 2.1, step 3.1]
 
-5.1 Equivariant integration over $M$ factors in the tubular neighborhood into integration over the normal fibers followed by integration over $N$. Step 4.3 therefore gives $\int_M i_*^T(\beta)=\int_N\beta$. These identities establish every stated Gysin property. [given, A1, step 4.1, step 4.3] ∎
+5.1 The self-intersection identity in step 4.1, the disjoint-support identity in step 4.2, and the trace identity in step 4.3 establish every stated property. All maps are $\mathcal R$-linear: the Thom product commutes with coefficients pulled back from $BT$, which have even degree, and [F5] supplies linearity of integration. [given, F5, step 4.1, step 4.2, step 4.3] ∎

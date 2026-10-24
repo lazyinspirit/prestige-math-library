@@ -1,0 +1,8 @@
+import fs from 'node:fs';import {spawnSync} from 'node:child_process';
+import {scanProofFiles} from '../../../../tools/physics-support/proof-layout.mjs';
+const root=process.cwd(),run='advanced-qft-supersymmetry-build-2026-10-23',dir=`research/${run}-owner-resolution/step2-root-metadata-v1`;
+const p=JSON.parse(fs.readFileSync(`${dir}/prospective-prerequisite-declarations.json`)),pages=[...Array.from({length:69},(_,i)=>JSON.parse(fs.readFileSync(`research/${run}-batch-${i+1}.pages.json`))).flat(),...p.pairs.flatMap(x=>x.pages)],ids=[...new Set([...pages.flatMap(p=>p.items.map(i=>i.id)),...p.addition.items.map(i=>i.id)])];if(ids.length!==453)throw Error('Selection mismatch');
+const fd=fs.openSync(`${dir}/prospective-source-precheck.json`,'w');let r;try{r=spawnSync(process.execPath,['../tools/tsx-run.mjs','../tools/physics-support/precheck.mts','--json',...ids.map(id=>`items/${id}.md`)],{stdio:['ignore',fd,'pipe'],encoding:'utf8'});}finally{fs.closeSync(fd);}
+const report=JSON.parse(fs.readFileSync(`${dir}/prospective-source-precheck.json`));console.log(JSON.stringify({exit:r.status,precheck:report.summary,failures:report.results.filter(x=>['fail','repair'].includes(x.status)).map(({proposed_proof,...r})=>r)}));
+const items=scanProofFiles(ids.map(id=>`${root}/items/${id}.md`),root),errors=items.flatMap(r=>r.errors.map(e=>({file:r.file,...e}))),steps=items.reduce((n,r)=>n+r.rows.reduce((n,r)=>n+r.sourceSteps,0),0);
+fs.writeFileSync(`${dir}/prospective-source-layout.json`,JSON.stringify({kind:'current explicit source layout diagnostic, not native acceptance or gate',items:ids.length,steps,errors},null,2)+'\n');console.log(JSON.stringify({layout_items:ids.length,steps,errors}));

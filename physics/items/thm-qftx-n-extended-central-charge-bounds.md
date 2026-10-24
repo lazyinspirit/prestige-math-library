@@ -41,9 +41,9 @@ Assume Countable Choice. Let $N\ge2$. A fixed massive rest representation fiber 
 
 $$\|Z\|_{\mathrm{op}}=\sup_{\|v\|_2=1}\|Zv\|_2.$$
 
-Then $M\ge\|Z\|_{\mathrm{op}}$. For $N=2$, write $z=z^{12}$, so $Z=\begin{pmatrix}0&z\\-z&0\end{pmatrix}$ and $\|Z\|_{\mathrm{op}}=|z|$. If $z=e^{i\phi}|z|$ (with any $\phi$ when $z=0$), define on $\mathcal D$
+Then $M\ge\|Z\|_{\mathrm{op}}$. For $N=2$, write $z=z^{12}$, so $Z=\begin{pmatrix}0&z\\-z&0\end{pmatrix}$ and $\|Z\|_{\mathrm{op}}=|z|$. If $z\ne0$, set $\omega=z/|z|$; if $z=0$, set $\omega=1$. Then $|\omega|=1$ and $\overline\omega z=|z|$, as verified in the proof below. Define on $\mathcal D$
 
-$$A:=Q^1_1-e^{i\phi}(Q^2_2)^*,\qquad A^\sharp:=(Q^1_1)^*-e^{-i\phi}Q^2_2.$$
+$$A:=Q^1_1-\omega(Q^2_2)^*,\qquad A^\sharp:=(Q^1_1)^*-\overline\omega Q^2_2.$$
 
 The algebraic anticommutator $AA^\sharp+A^\sharp A$ equals $4(M-|z|)I$ on $\mathcal D$. Here $A^\sharp$ is the displayed combination of the individual actual adjoints; it is not asserted to be the adjoint of an unbounded sum on its maximal domain. If $\mathcal K$ is finite-dimensional, all charge domains equal $\mathcal K$ and $A^\sharp=A^*$, so the formula is the ordinary operator anticommutator. At saturation $M=|z|$, for every $\psi\in\mathcal D$ one has $A\psi=A^\sharp\psi=0$. This is a representation-theoretic fiber statement: it does not assert that the fixed-momentum fiber is a normalizable subspace of the full Hilbert space, or that a state with specified charge exists or is stable.
 
@@ -84,7 +84,7 @@ The Axiom of Countable Choice ($\mathrm{AC}_\omega$): [[def-countable-choice]].
 
 3.1 Fix a unit vector $v\in\mathbb C^N$. If $Zv\ne0$, choose $u=-Zv/\|Zv\|_2$, so $\|u\|_2=1$ and $u^*Zv=-\|Zv\|_2$. Applying step 2.1 to any nonzero $\psi\in\mathcal D$ yields $0\le4(M-\|Zv\|_2)\|\psi\|^2$, hence $M\ge\|Zv\|_2$. If $Zv=0$, the same inequality follows from $M>0$. Taking the supremum over all unit $v$ proves $M\ge\|Z\|_{\mathrm{op}}$. [given, step 2.1, algebra, choose]
 
-4.1 When $N=2$, $Z=\begin{pmatrix}0&z\\-z&0\end{pmatrix}$, so direct multiplication gives $Z^*Z=|z|^2I_2$ and therefore $\|Zv\|_2=|z|\|v\|_2$ for every $v$; thus $\|Z\|_{\mathrm{op}}=|z|$. With $q=Q^1_1$ and $r=Q^2_2$, expanding $A=q-e^{i\phi}r^*$ and $A^\sharp=q^*-e^{-i\phi}r$ gives $AA^\sharp+A^\sharp A=\{q,q^*\}+\{r^*,r\}-e^{-i\phi}\{q,r\}-e^{i\phi}\{r^*,q^*\}=2M+2M-2e^{-i\phi}z-2e^{i\phi}\bar z=4(M-|z|)I$ on $\mathcal D$. This proves the stated N=2 identity with the declared phase convention. [F1, F3, step 1.1, step 3.1, algebra]
+4.1 When $N=2$, $Z=\begin{pmatrix}0&z\\-z&0\end{pmatrix}$, so direct multiplication gives $Z^*Z=|z|^2I_2$ and therefore $\|Zv\|_2=|z|\|v\|_2$ for every $v$; thus $\|Z\|_{\mathrm{op}}=|z|$. If $z\ne0$, the modulus definition gives $z\bar z=|z|^2$ and $|z|>0$, so $\omega=z/|z|$ satisfies $\omega\bar\omega=1$ and $\bar\omega z=|z|$; if $z=0$, $\omega=1$ has the same properties. With $q=Q^1_1$ and $r=Q^2_2$, expanding $A=q-\omega r^*$ and $A^\sharp=q^*-\bar\omega r$ gives $AA^\sharp+A^\sharp A=\{q,q^*\}+|\omega|^2\{r^*,r\}-\bar\omega\{q,r\}-\omega\{r^*,q^*\}=2M+2M-2\bar\omega z-2\omega\bar z=4(M-|z|)I$ on $\mathcal D$. This proves the stated N=2 identity without assuming a polar-form theorem. [F1, F3, step 1.1, step 3.1, algebra]
 
 5.1 If $M=|z|$, step 4.1 gives $AA^\sharp+A^\sharp A=0$ on $\mathcal D$. For every $\psi\in\mathcal D$, the actual-adjoint identity for the individual charge summands in [F2] gives $0=\langle(AA^\sharp+A^\sharp A)\psi,\psi\rangle=\|A\psi\|^2+\|A^\sharp\psi\|^2$. Each squared norm is nonnegative, so both vanish. If $\mathcal K$ is finite-dimensional, $A^\sharp=A^*$ and this is the ordinary operator-adjoint conclusion; in general it is the stated dense-domain conclusion. The result is confined to the fixed rest fiber and asserts no state existence or stability. [F2, step 4.1] ∎
 ## Remarks

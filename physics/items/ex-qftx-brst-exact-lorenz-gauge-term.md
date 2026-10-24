@@ -41,7 +41,7 @@ verification:
 
 ## Example
 
-Let $U\subseteq\mathbb R^{1,3}$ be a nonempty open region with compact support or boundary conditions that remove total-derivative terms. Work in the adopted pure $SU(2)$ model, with Lie algebra $\mathfrak{su}(2)$ and normalized positive $\operatorname{Ad}$-invariant form $\kappa(X,Y)=-2\operatorname{Tr}_2(XY)$, extended bilinearly to the graded coefficient algebra. In the finite-jet algebra take $A_\mu$ to be an even $\mathfrak{su}(2)$-valued field of ghost number $0$ and dimension $1$, $c$ an odd $\mathfrak{su}(2)$-valued field of ghost number $1$ and dimension $0$, $\bar c$ an odd $\mathfrak{su}(2)$-valued field of ghost number $-1$ and dimension $2$, and $b$ an even $\mathfrak{su}(2)$-valued field of ghost number $0$ and dimension $2$. Let $\xi>0$ be dimensionless. Use the Lie-algebra bracket and odd left BRST derivation
+Let $U\subseteq\mathbb R^{1,3}$ be a nonempty open region with compact support or boundary conditions that remove total-derivative terms. Use $\eta_{\mu\nu}=\operatorname{diag}(-1,1,1,1)$ and $\partial^\mu:=\eta^{\mu\nu}\partial_\nu$. Work in the adopted pure $SU(2)$ model, with Lie algebra $\mathfrak{su}(2)$ and normalized positive $\operatorname{Ad}$-invariant form $\kappa(X,Y)=-2\operatorname{Tr}_2(XY)$, extended bilinearly to the graded coefficient algebra. In the finite-jet algebra take $A_\mu$ to be an even $\mathfrak{su}(2)$-valued field of ghost number $0$ and dimension $1$, $c$ an odd $\mathfrak{su}(2)$-valued field of ghost number $1$ and dimension $0$, $\bar c$ an odd $\mathfrak{su}(2)$-valued field of ghost number $-1$ and dimension $2$, and $b$ an even $\mathfrak{su}(2)$-valued field of ghost number $0$ and dimension $2$. Let $\xi>0$ be dimensionless. Use the Lie-algebra bracket and odd left BRST derivation
 
 $$sA_\mu=\partial_\mu c+[A_\mu,c],\qquad sc=-\tfrac12[c,c],\qquad s\bar c=b,\qquad sb=0,$$
 
@@ -71,7 +71,7 @@ is a local, even, ghost-number-zero functional of density dimension $4$, and it 
 
 [F3] The nonminimal pair has $s\bar c=b$ and $sb=0$ in the selected BV convention. [[def-qftx-bv-antibracket-master-action]]
 
-[F4] The local cohomology quotient identifies $s$-exact ghost-number-zero four-forms with the zero class, modulo the declared horizontal exact terms. [[def-qftx-local-brst-cohomology]]
+[F4] The formal-data definition specifies the full BV/nonminimal finite-jet horizontal complex and its relative quotient; its restriction to $A,c,\bar c,b$ gives the nonminimal field subcomplex used here, with $s\bar c=b$, $sb=0$, and $s d_H+d_Hs=0$. [[def-qftx-formal-perturbative-yang-mills-data]]
 
 [F5] The adopted formal datum assigns these gauge-fixed pure-SU(2) fields their stated dimensions and selects the Lorenz gauge with $\xi>0$. [[def-qftx-formal-perturbative-yang-mills-data]]
 

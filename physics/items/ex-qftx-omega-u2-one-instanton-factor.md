@@ -8,7 +8,7 @@ dependency_level: 7
 domain: physics
 library: physics
 category: advanced-qft-and-supersymmetry
-axiom_base: "ZF + full AC inherited from the fixed-point theorem supplier; the two-partition and rational simplification calculations use only finite algebra."
+axiom_base: "ZF + full AC inherited from the fixed-point theorem and mass-inserted series suppliers; the two-partition and rational simplification calculations use only finite algebra."
 physical_scope: "The finite, formal charge-one coefficient for the conditional regulated U(2) N=2* ADHM series; no contour evaluation or continuum path-integral claim."
 deps:
   - def-qftx-instanton-equivariant-partition-series
@@ -33,7 +33,7 @@ verification:
 
 ## Example
 
-Take $N=2$ and charge $k=1$ in the mass-inserted formal ADHM series. Let $s=\epsilon_1+\epsilon_2$, $d=a_2-a_1$, and $\widetilde m=i m_E+s/2$ in the source's Euclidean mass convention. Exactly one box lies in either color, so the fixed-point tuples are $(\square,\varnothing)$ and $(\varnothing,\square)$. Their tangent characters and Euler classes are
+Take $N=2$ and charge $k=1$ in the mass-inserted formal ADHM series. Use its dimensionless formal charge variable $q$; the equivariant weights $\epsilon_i,a_\alpha,\widetilde m$ have mass dimension one. Let $s=\epsilon_1+\epsilon_2$, $d=a_2-a_1$, and $\widetilde m=i m_E+s/2$ in the source's Euclidean mass convention. Exactly one box lies in either color, so the fixed-point tuples are $(\square,\varnothing)$ and $(\varnothing,\square)$. Their tangent characters and Euler classes are
 $$\operatorname{ch}_T(T_{(\square,\varnothing)}X)=t_1+t_2+\frac{e_2}{e_1}+t_1t_2\frac{e_1}{e_2}$$
 $$E_1=\epsilon_1\epsilon_2d(s-d),\qquad N_1=(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)(d-\widetilde m)(s-d-\widetilde m)$$
 $$\operatorname{ch}_T(T_{(\varnothing,\square)}X)=t_1+t_2+\frac{e_1}{e_2}+t_1t_2\frac{e_2}{e_1}$$
@@ -50,7 +50,7 @@ The diagram places the single box in each of the two possible framing colors. Th
   \draw[fill=blue!20] (0,0) rectangle (1,1);
   \node[below] at (0.5,0) {$Y_1=\square$};
   \node[below] at (2.1,0) {$Y_2=\varnothing$};
-  \node at (3.2,0.5) {$\longleftrightarrow$};
+  \node at (3.2,0.5) {$\text{or}$};
   \draw[step=1,gray] (4,0) grid (5,1);
   \draw[fill=orange!20] (4,0) rectangle (5,1);
   \node[below] at (4.5,0) {$Y_2=\square$};
@@ -74,11 +74,11 @@ The diagram places the single box in each of the two possible framing colors. Th
 
 **Given:** $N=2$, $k=1$, the ADHM character convention, generic rotation, framing and flavor weights, and the conditional localized mass-inserted series.
 
-[F1] [[pthm-qftx-omega-background-fixed-point-expansion]]: for each partition tuple the fixed-point contribution is the product of tangent weights shifted by $-\widetilde m$, divided by the tangent Euler product; the fixed points are the partition tuples of total size $k$.
+[F1] The current draft [[pthm-qftx-omega-background-fixed-point-expansion]] has an authored conditional proof: for each partition tuple the fixed-point contribution is the product of tangent weights shifted by $-\widetilde m$, divided by the tangent Euler product; the fixed points are the partition tuples of total size $k$.
 
-[F2] [[def-qftx-instanton-equivariant-partition-series]]: the mass-inserted coefficient is the proper-fixed-locus localized pushforward of the inverse-flavor-line top Chern class capped with the fundamental class.
+[F2] Current draft [[def-qftx-instanton-equivariant-partition-series]]: the coefficient is the proper-fixed-locus localized pushforward of the rational Borel top Chern class of the tangent bundle tensored with the inverse flavor line, capped with the complex-oriented fundamental class; its restriction at a fixed point of tangent weights $w_\chi$ is $\prod_\chi(w_\chi-\widetilde m)$.
 
-[F3] [[post-qftx-s4-n2-localization-model]]: the adopted model is N=2* U(2) with real Euclidean mass $m_E$ and equal pole rotations $\epsilon_1=\epsilon_2=r^{-1}$; its noncommutative S4 regulator remains a source assumption.
+[F3] Current draft [[post-qftx-s4-n2-localization-model]] adopts N=2* U(2) with real Euclidean mass $m_E$ and equal pole rotations $\epsilon_1=\epsilon_2=r^{-1}$; its noncommutative S4 regulator remains a source assumption, not a proven existence claim.
 
 [A1] Assume the theorem's finite-proper-fixed-locus pushforward conditions and the source-reported mass-insertion interpretation hold for the displayed generic-parameter calculation. The source model's regulator remains assumed, and the formula is not an evaluation of the continued Coulomb contour.
 

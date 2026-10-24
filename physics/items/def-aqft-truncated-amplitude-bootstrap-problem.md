@@ -33,7 +33,7 @@ sources:
 
 ## Definition
 
-Let $B(v)$ and the positive gap scale $\nu_0$ be the pole-subtracted forward-amplitude data with $B$ even and holomorphic near $v=0$. Fix an integer truncation order $N\ge1$. For $n\ge1$ define the Taylor coefficient $c_n=B^{(2n)}(0)/(2n)!$ and the dimensionless forward on-shell coefficient $b_k=\nu_0^{2k+2}c_{k+1}$ for $0\le k\le N$. Since $v$ and $\nu_0$ have units $(\text{mass})^2$, $c_n$ has units $(\text{mass})^{-4n}$ and $b_k$ is dimensionless. Here “Wilson coefficient” refers only to this normalized on-shell amplitude coordinate; it does not identify a generic coefficient of an off-shell Lagrangian operator basis.
+Let $B(v)$ and $\nu_0=2m^2>0$ be the pole-subtracted forward-amplitude data of the amplitude-input definition. In addition to being even and holomorphic near $v=0$, retain its real-analyticity condition $B(\overline v)=\overline{B(v)}$. If $B(v)=\sum_{j\ge0}\beta_jv^j$ near $0$, uniqueness of the Taylor expansion gives $\beta_j=\overline{\beta_j}$ from this condition and $\beta_{2n+1}=0$ from evenness. Hence the even Taylor coefficients are real. Fix an integer truncation order $N\ge1$. For $n\ge1$ define the Taylor coefficient $c_n=B^{(2n)}(0)/(2n)!$ and the dimensionless forward on-shell coefficient $b_k=\nu_0^{2k+2}c_{k+1}\in\mathbb R$ for $0\le k\le N$. Since $v$ and $\nu_0$ have units $(\text{mass})^2$, $c_n$ has units $(\text{mass})^{-4n}$ and $b_k$ is dimensionless. Here “Wilson coefficient” refers only to this normalized on-shell amplitude coordinate; it does not identify a generic coefficient of an off-shell Lagrangian operator basis.
 
 For each integer $r\ge0$ with $2r\le N$, form the quadratic constraint
 

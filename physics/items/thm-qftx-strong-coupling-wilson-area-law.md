@@ -16,6 +16,16 @@ deps:
   - def-qftx-su2-wilson-plaquette-measure
   - lem-qftx-planar-plaquette-factorization
   - lem-qftx-su2-one-plaquette-average
+  - lem-qftx-wilson-loop-gauge-invariance
+  - def-borel-sigma-algebra
+  - def-probability-measure
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - def-product-measure-on-sigma-finite-spaces
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - def-tdmath-measure-integral
+  - def-measure-with-density
+  - def-integrable-real-and-complex-functions-and-their-integrals
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-qftx-nonabelian-lattice-gauge-data: mathematical-premise
@@ -23,6 +33,16 @@ dependency_roles:
   def-qftx-su2-wilson-plaquette-measure: mathematical-premise
   lem-qftx-planar-plaquette-factorization: mathematical-premise
   lem-qftx-su2-one-plaquette-average: mathematical-premise
+  lem-qftx-wilson-loop-gauge-invariance: mathematical-premise
+  def-borel-sigma-algebra: mathematical-premise
+  def-probability-measure: mathematical-premise
+  def-product-sigma-algebra-and-finite-product-sigma-algebras: mathematical-premise
+  def-product-measure-on-sigma-finite-spaces: mathematical-premise
+  thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
+  def-tdmath-measure-integral: mathematical-premise
+  def-measure-with-density: mathematical-premise
+  def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
+  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -67,6 +87,20 @@ The parameter $\beta$ and the lattice string tension $\sigma_{\rm lat}$ are dime
 
 [[lem-qftx-su2-one-plaquette-average|One-plaquette matrix average and strong-coupling coefficient]]
 
+[[lem-qftx-wilson-loop-gauge-invariance|Gauge invariance of the original loop observable under tree gauge fixing]]
+
+[[def-probability-measure|Normalized link and plaquette probabilities]]
+
+[[def-product-sigma-algebra-and-finite-product-sigma-algebras|Finite product sigma-algebra]]
+
+[[def-product-measure-on-sigma-finite-spaces|Finite link product measure]]
+
+[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique|Finite product measure existence and rectangle formula]]
+
+[[def-tdmath-measure-integral|Finite-volume expectation integral]]
+
+[[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for bounded matrix-entry products]]
+
 [Meyer, §1.4.1.1, printed pp. 22–24; the cited 4D leading-order argument is contextual, and the finite 2D identity is proved here](https://ndl.ethernet.edu.et/bitstream/123456789/73862/1/82.pdf.pdf)
 
 [Lohmayer, §§4.1–4.2.2, printed pp. 59–64; the exact 2D factorization mechanism is rederived for the stated finite free-boundary lattice](https://epub.uni-regensburg.de/16031/1/EigenvalueDistributionsOfWilsonLoops.pdf)
@@ -87,12 +121,18 @@ The parameter $\beta$ and the lattice string tension $\sigma_{\rm lat}$ are dime
 
 [F5] [[lem-qftx-su2-one-plaquette-average]]: $\mathbb E_{\nu_\beta}[U]=\lambda(\beta)I_2$ and $0<\lambda(\beta)<1$.
 
+[F6] [[lem-qftx-wilson-loop-gauge-invariance]]: the normalized trace of the original closed-loop holonomy is unchanged by every vertex gauge transformation, including the configuration-dependent transformation to the tree-gauge representative.
+
+[F7] The finite link and plaquette measures are product probabilities on their finite product sigma-algebras; the product formula supplies their rectangle values. [[def-probability-measure]] [[def-product-sigma-algebra-and-finite-product-sigma-algebras]] [[def-product-measure-on-sigma-finite-spaces]] [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]
+
+[F8] An integrand bounded by $1$ on the finite product probability space is in $L^1$, and Fubini applies to its product-coordinate sections. [[def-tdmath-measure-integral]] [[def-integrable-real-and-complex-functions-and-their-integrals]] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]
+
 ## Proof
 
-1.1 The Wilson action weight is $e^{-\beta N_p}\prod_p e^{\beta\tau(U_p)}$, where $N_p=MN$; the constant $e^{-\beta N_p}$ cancels in normalized expectations. By the coordinates in [F3], $\tau(U)=x_0\in\mathbb R$; since $U^{-1}=U^*$, $\tau(U^{-1})=\overline{\tau(U)}=\tau(U)$, and cyclicity of trace makes $\tau$ conjugation-invariant. Therefore $w_p(U)=e^{\beta\tau(U)}$ is positive, continuous, conjugation-invariant and inversion-invariant, so it meets [F4]'s hypotheses. Thus in the chosen tree gauge the plaquette variables are independent and each has law $\nu_\beta$. The inherited axiom base is $\mathrm{AC}_\omega$ [A1]. [given, A1, F1, F3, F4, algebra]
+1.1 The Wilson action weight is $e^{-\beta N_p}\prod_p e^{\beta\tau(U_p)}$, where $N_p=MN$; the constant $e^{-\beta N_p}$ cancels in normalized expectations. By the coordinates in [F3], $\tau(U)=x_0\in\mathbb R$; since $U^{-1}=U^*$, $\tau(U^{-1})=\overline{\tau(U)}=\tau(U)$, and cyclicity of trace makes $\tau$ conjugation-invariant. Therefore $w_p(U)=e^{\beta\tau(U)}$ is positive, continuous, conjugation-invariant and inversion-invariant, so it meets [F4]'s hypotheses. Thus [F4] gives the plaquette law $\nu_\beta$ after the tree-gauge change of variables. The inherited axiom base is $\mathrm{AC}_\omega$ [A1]. [given, A1, F1, F3, F4, algebra]
 
-2.1 Choose the tree gauge in [F4] with its vertical tree column equal to the left side $x=a$ of $C_{a,b;c,d}$. All horizontal links and the left-side vertical links are then the identity. For each row $j$, $P_{i,j}=V_{i+1,j}V_{i,j}^{-1}$ and $V_{a,j}=I_2$, so the recursion $V_{i+1,j}=P_{i,j}V_{i,j}$ yields $V_{b,j}=P_{b-1,j}\cdots P_{a,j}$. The counterclockwise boundary from $(a,c)$ therefore has ordered holonomy $U_C=(P_{b-1,c}\cdots P_{a,c})(P_{b-1,c+1}\cdots P_{a,c+1})\cdots(P_{b-1,d-1}\cdots P_{a,d-1})$, a product of exactly $A=(b-a)(d-c)$ plaquette matrices. [given, F1, F2, F4, step 1.1, algebra]
+2.1 Let $U^{\mathrm{tree}}$ be the unique tree-gauge representative of the original link configuration supplied by [F4]. By [F6], $W(C;U^{\mathrm{tree}})=W(C;U)$ pointwise, so evaluating the original expectation after this configuration-dependent gauge fixing preserves the loop observable; [F4] supplies the corresponding law of its plaquette variables. Choose the vertical tree column equal to the left side $x=a$ of $C_{a,b;c,d}$. All horizontal links and the left-side vertical links are then the identity. For each row $j$, $P_{i,j}=V_{i+1,j}V_{i,j}^{-1}$ and $V_{a,j}=I_2$, so the recursion $V_{i+1,j}=P_{i,j}V_{i,j}$ yields $V_{b,j}=P_{b-1,j}\cdots P_{a,j}$. The counterclockwise boundary from $(a,c)$ therefore has ordered holonomy $U_C=(P_{b-1,c}\cdots P_{a,c})(P_{b-1,c+1}\cdots P_{a,c+1})\cdots(P_{b-1,d-1}\cdots P_{a,d-1})$, a product of exactly $A=(b-a)(d-c)$ plaquette matrices. [given, F1, F2, F4, F6, step 1.1, algebra]
 
-3.1 By [F4] the plaquette variables in this ordered product are independent; Fubini applied entry by entry to the finite product of bounded matrix entries replaces each factor by its expectation without changing the order. By [F5] each expectation is $\lambda I_2$, so the expected loop holonomy is $(\lambda I_2)^A=\lambda^A I_2$. [F4, F5, step 2.1, algebra]
+3.1 By [F4] the plaquette variables in this ordered product have the product probability law $\nu_\beta^{\otimes A}$. Each defining-representation matrix entry has modulus at most $1$, so every entry of the finite matrix-product integrand is bounded and belongs to $L^1$ by [F8]. Fubini applied entry by entry therefore replaces each independent factor by its matrix expectation without changing its order. By [F5] each expectation is $\lambda I_2$, so the expected loop holonomy is $(\lambda I_2)^A=\lambda^A I_2$. [F4, F5, F8, step 2.1, algebra]
 
 4.1 Taking half the trace gives $\langle W(C)\rangle_\beta=\lambda^A$. Since $0<\lambda<1$ by [F5], $\sigma_{\rm lat}=-\log\lambda$ is positive and $\lambda^A=e^{-\sigma_{\rm lat}A}$ for every positive integer area $A$. The conclusion is the stated finite-lattice model deduction only. [F2, F5, step 3.1, algebra] ∎

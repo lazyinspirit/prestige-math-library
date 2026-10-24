@@ -13,13 +13,11 @@ deps:
   - post-aqft-smeft-model
   - def-aqft-operator-basis-physical-data
   - def-aqft-operator-basis-quotient
-  - def-axiom-of-choice
 dependency_roles:
   post-aqft-smeft-model: physical-assumption
   def-aqft-operator-basis-physical-data: formulation-prerequisite
   def-aqft-operator-basis-quotient: formulation-prerequisite
-  def-axiom-of-choice: mathematical-premise
-axiom_base: "ZF + AC, inherited from the exact reductive/Reynolds mathematical supplier chain used by the finite invariant-operator contract."
+axiom_base: "ZF + AC_omega, inherited from the selected field-data suppliers; this finite coefficient list and quotient use no full Axiom of Choice."
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -47,7 +45,7 @@ For $Q_i^{(6)}$ use the dimensionless Wilson coefficient convention
 $$\mathcal L_{\mathrm{dim}\,6}=\frac{1}{\Lambda_{\mathrm{op}}^2}\sum_i C_i Q_i^{(6)},\qquad \Lambda_{\mathrm{op}}>0,$$
 with the coefficient tensors chosen so the density is real after the required Hermitian conjugates are added. The retained operator contract has derivative-jet order at most two, maximum field degree six, canonical dimension at most six, and loop order zero. Compactly supported field variations make total divergences vanish in action-level uses.
 
-The source's complete-basis assertion is adopted as a literature-defined coefficient list, not proved by this item. The separate finite invariant-operator quotient supplies only its declared complex-algebraic selection. In this contract that quotient is explicitly formal: no equality between its algebraic invariant space and the full physical compact-gauge invariant space, and no local proof of the EOM/IBP/Fierz classification, is claimed. The mathematical chain used to formulate that finite quotient retains its exact full Axiom of Choice premise.
+The source's complete-basis assertion is adopted as a literature-defined coefficient list, not proved by this item. The separate finite invariant-operator quotient supplies only its declared complex-algebraic selection. In this contract that quotient is explicitly formal: no equality between its algebraic invariant space and the full physical compact-gauge invariant space, and no local proof of the EOM/IBP/Fierz classification, is claimed. The finite-cutoff quotient does not add a full Axiom of Choice assumption to the field-data suppliers' stated $\mathrm{AC}_\omega$ base.
 
 ## Definition references
 
@@ -56,8 +54,6 @@ The source's complete-basis assertion is adopted as a literature-defined coeffic
 [[def-aqft-operator-basis-physical-data|Finite-jet physical operator and coefficient contract]]
 
 [[def-aqft-operator-basis-quotient|Finite-order invariant polynomial quotient]]
-
-[[def-axiom-of-choice|Full Axiom of Choice inherited by the reductive/Reynolds chain]]
 
 [Grzadkowski et al., full dimension-six classification](https://arxiv.org/pdf/1008.4884)
 

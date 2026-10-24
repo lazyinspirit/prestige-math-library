@@ -13,10 +13,40 @@ deps:
   - def-countable-choice
   - def-qftx-nonabelian-gauge-data
   - def-differential-of-a-smooth-map
+  - def-lie-group
+  - def-topological-manifold-without-boundary
+  - def-borel-sigma-algebra
+  - lem-borel-product-of-second-countable-spaces
+  - def-measure
+  - def-measure-space
+  - def-probability-measure
+  - def-left-right-and-bi-invariant-borel-measure-on-a-lie-group
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - def-product-measure-on-sigma-finite-spaces
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - def-tdmath-measure-integral
+  - def-measure-with-density
+  - def-complex-l-two-inner-product
+  - thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-qftx-nonabelian-gauge-data: mathematical-premise
   def-differential-of-a-smooth-map: mathematical-premise
+  def-lie-group: mathematical-premise
+  def-topological-manifold-without-boundary: mathematical-premise
+  def-borel-sigma-algebra: mathematical-premise
+  lem-borel-product-of-second-countable-spaces: mathematical-premise
+  def-measure: mathematical-premise
+  def-measure-space: mathematical-premise
+  def-probability-measure: mathematical-premise
+  def-left-right-and-bi-invariant-borel-measure-on-a-lie-group: mathematical-premise
+  def-product-sigma-algebra-and-finite-product-sigma-algebras: mathematical-premise
+  def-product-measure-on-sigma-finite-spaces: mathematical-premise
+  thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
+  def-tdmath-measure-integral: mathematical-premise
+  def-measure-with-density: mathematical-premise
+  def-complex-l-two-inner-product: mathematical-premise
+  thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz: mathematical-premise
 justified_by:
   - lem-qftx-lattice-data-well-defined
 provenance:
@@ -67,6 +97,30 @@ The full Gauss sector uses invariance under every vertex gauge transformation; t
 [[def-countable-choice|Countable-choice assumption carried by the supplied Lie algebra construction]]
 
 [[def-differential-of-a-smooth-map|Differential as the tangent map of the smooth gauge action]]
+
+[[def-lie-group|Finite-dimensional real Lie group structure]]
+
+[[def-topological-manifold-without-boundary|Hausdorff and second-countable manifold topology]]
+
+[[def-borel-sigma-algebra|Borel sigma-algebra on the compact group]]
+
+[[lem-borel-product-of-second-countable-spaces|Borel sigma-algebra on finite products of the second-countable Lie group]]
+
+[[def-left-right-and-bi-invariant-borel-measure-on-a-lie-group|Normalized bi-invariant Borel probability measure]]
+
+[[def-product-sigma-algebra-and-finite-product-sigma-algebras|Finite product sigma-algebra]]
+
+[[def-product-measure-on-sigma-finite-spaces|Product measure on sigma-finite measure spaces]]
+
+[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique|Existence, rectangle formula, and uniqueness of the finite product measure]]
+
+[[def-tdmath-measure-integral|Measure integral and integrability conventions]]
+
+[[def-measure-with-density|Measure defined by a nonnegative density]]
+
+[[def-complex-l-two-inner-product|Complex $L^2$ pairing and norm convention]]
+
+[[thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz|Well-definedness and norm properties of complex $L^2$]]
 
 [Meyer, §§1.2.3–1.2.4 and §1.4.1.1, printed pp. 11–14 and 22–24](https://ndl.ethernet.edu.et/bitstream/123456789/73862/1/82.pdf.pdf)
 

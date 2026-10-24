@@ -44,7 +44,13 @@ generation:
 
 ## Example
 
-Take $N=k=1$. For every $\zeta>0$, the positive real-FI ADHM quotient is $\mathbb C^2$, with arbitrary scalar coordinates $B_1,B_2$, $J=0$, and $|I|=\sqrt{\zeta}$. The stable zero-real-FI locus is empty. The positive-FI monad is therefore a rank-one framed torsion-free sheaf that is not locally free. On the round oriented $S^4$, let $f$ be the real curvature two-form of a smooth $U(1)$ connection, define anti-self-dual (ASD) by $f=-*f$, and define charge by $q=-(8\pi^2)^{-1}\int_{S^4}f\wedge f$. The ordinary smooth charge-one $U(1)$ ASD space is empty, so the positive-FI space cannot equal it.
+Take $N=k=1$. For every $\zeta>0$, the positive real-FI ADHM quotient is $\mathbb C^2$, with arbitrary scalar coordinates $B_1,B_2$, $J=0$, and $|I|=\sqrt{\zeta}$. The stable zero-real-FI locus is empty. The positive-FI monad is therefore a rank-one framed torsion-free sheaf that is not locally free.
+
+Define the round oriented four-sphere to be $S^4=\{x\in\mathbb R^5:\lVert x\rVert=1\}$ with its round metric and boundary orientation as the boundary of the unit ball. A smooth $U(1)$ bundle means a smooth principal $U(1)$-bundle $P\to S^4$, and a smooth connection $\nabla$ on it is a smooth $U(1)$-equivariant horizontal distribution complementary to the vertical tangent spaces. Identify the Lie algebra $\mathfrak u(1)=i\mathbb R$ with $\mathbb R$ by $ir\mapsto r$, and let $f\in\Omega^2(S^4;\mathbb R)$ be the real curvature form corresponding to the curvature of $\nabla$ under this identification. Let $*$ be the Hodge star for the specified metric and orientation; the connection is anti-self-dual (ASD) when $f=-*f$. Define its charge by
+
+$$q(P,\nabla):=-\frac{1}{8\pi^2}\int_{S^4}f\wedge f.$$
+
+The **unframed smooth charge-one $U(1)$ ASD space** is the set of all pairs $(P,\nabla)$ with $P$ any smooth principal $U(1)$-bundle on $S^4$, $\nabla$ a smooth ASD connection, and $q(P,\nabla)=1$, modulo smooth principal-bundle isomorphisms over $S^4$ carrying one connection to the other. No trivialization at a basepoint or at infinity is fixed. This space is empty, so the positive-FI quotient $\mathbb C^2$ cannot equal it.
 
 ## Example references
 

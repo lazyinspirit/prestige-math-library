@@ -62,7 +62,7 @@ In particular, the conclusion is finite-dimensional and applies only at finite p
 
 **Given:** $M,\mu,\mathcal A,I_\Gamma,Q,S,O,V,J$ satisfying the Statement, with $Q$-invariant integration on each $O V e^{-S-tQV}$, the stated $Q^2V$ condition, and the compact-parameter integrable majorants.
 
-[F1] [[def-finite-dimensional-q-exact-localization-data]]: $\mathcal A=\Omega^\bullet(M;\mathbb C)$, $I_\Gamma(F)=\int_M F_{[n]}$, $Q$ is an odd derivation with the graded Leibniz rule, and $Q$-invariance means $I_\Gamma(QF)=0$ for the admissible integrands, with boundary flux excluded.
+[F1] [[def-finite-dimensional-q-exact-localization-data]]: $\Gamma=M$, $\mathcal A=\Omega^\bullet(M;\mathbb C)$, $I_\Gamma(F)=\int_M F_{[n]}$, and $Q$ is an odd derivation with the graded Leibniz rule. For a complex coefficient depending on real $t$, $\partial_t f_t(x)$ is the limit in $\mathbb C$ of $(f_{t+h}(x)-f_t(x))/h$ as real $h\to0$. $Q$-invariance is the integrated identity $I_\Gamma(QF)=0$ on the specified admissible class; zero divergence together with zero boundary flux is a sufficient condition for obtaining that identity by graded integration by parts, and the two conditions are distinct.
 
 [F2] [[thm-differentiation-under-the-integral-sign]]: for a measurable family $f(x,t)$ whose sections are integrable, whose parameter derivative exists almost everywhere and is measurable, and whose derivative has one $L^1$ majorant uniform on an open parameter interval, the integral $F(t)=\int f(x,t)\,d\mu(x)$ is differentiable and $F'(t)=\int \partial_t f(x,t)\,d\mu(x)$.
 
@@ -78,6 +78,6 @@ In particular, the conclusion is finite-dimensional and applies only at finite p
 
 2.1 Fix $t_0\in J$ and choose $a<t_0<b$ with $[a,b]\subset J$. The majorant $g_{[a,b]}$ makes every $f_t$ integrable on $(a,b)$ and bounds its measurable parameter derivative there by one $L^1(M,\mu)$ function. Applying [F2] on $(a,b)$, and using step 1.1, gives $Z'(t_0)=-I_\Gamma(O(QV)E_{t_0})$. [given, F2, step 1.1]
 
-3.1 Substituting step 1.2 into the derivative formula of step 2.1 yields $Z'(t_0)=-I_\Gamma(Q(OV E_{t_0}))=0$, because the cycle and measure have zero $Q$-boundary contribution. Since $t_0$ was arbitrary, $Z'$ vanishes throughout $J$. [given, F1, step 2.1, step 1.2]
+3.1 Substituting step 1.2 into the derivative formula of step 2.1 yields $Z'(t_0)=-I_\Gamma(Q(OV E_{t_0}))=0$ by the exact integrated $Q$-invariance identity assumed in the Statement for $F=OV E_{t_0}$. Since $t_0$ was arbitrary, $Z'$ vanishes throughout $J$. [given, F1, step 2.1, step 1.2]
 
 4.1 Write $Z=u+iv$ with real functions $u,v$. Step 3.1 implies that both real difference quotients have limit zero at every $t\in J$. By [F3], for each $t$ and all sufficiently small nonzero $h$, $|u(t+h)-u(t)|<|h|$ and $|v(t+h)-v(t)|<|h|$; hence $u$ and $v$ are continuous at every $t$. Applying [F4] to each component shows that both are constant on $J$. Therefore $Z$ is constant on $J$. [F3, F4, step 3.1] ∎

@@ -14,6 +14,8 @@ deps:
 - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
 - thm-monotone-convergence-for-the-integral
 - cor-cauchy-schwarz-inequality-for-l-two
+- thm-polar-coordinates-formula-for-lebesgue-measure
+- def-polar-surface-measure-on-the-unit-sphere
 dependency_roles:
   def-qftx-critical-abelian-higgs-divisor-data: mathematical-premise
   thm-qftx-taubes-arbitrary-divisor-plane-vortex: mathematical-premise
@@ -22,6 +24,8 @@ dependency_roles:
   thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
   thm-monotone-convergence-for-the-integral: mathematical-premise
   cor-cauchy-schwarz-inequality-for-l-two: mathematical-premise
+  thm-polar-coordinates-formula-for-lebesgue-measure: mathematical-premise
+  def-polar-surface-measure-on-the-unit-sphere: mathematical-premise
 dependency_level: 3
 axiom_base: ZF + full Axiom of Choice; the proof uses it for a countable sequence of radii after the finite-energy coarea argument. No physical premise.
 proof_strategy: direct
@@ -71,6 +75,8 @@ for $n\le0$, replace $D_{A,1}+iD_{A,2}$ by $D_{A,1}-iD_{A,2}$ and $B-e^2(\xi-|q|
 
 [F6] For square-integrable scalar functions on a circle with arc-length measure, $\int|fg|\le\|f\|_2\|g\|_2$. [[cor-cauchy-schwarz-inequality-for-l-two]]
 
+[F7] Under the full-AC base [A1], [[thm-polar-coordinates-formula-for-lebesgue-measure]] gives $dx=r\,dr\,d\sigma(\omega)$ in dimension two, with $\sigma$ from [[def-polar-surface-measure-on-the-unit-sphere]]. For $\gamma(\theta)=(\cos\theta,\sin\theta)$, a unit-radius sector over an angular interval $I\subset[0,2\pi)$ has area $|I|/2$, so $\sigma(\gamma(I))=|I|$ by the definition; interval sums and uniform continuity identify integration of continuous circle functions against $\sigma$ with integration against $d\theta$. The radius-$r$ parametrization has speed $r$, hence its Euclidean arc-length measure is $ds=r\,d\theta=r\,d\sigma$. Apply the polar formula to nonnegative energy densities; Fubini [F4] then gives measurable radial sections and their integrals.
+
 ## Proof
 
 **Given:** The objects and hypotheses in the Statement.
@@ -81,13 +87,13 @@ Also, direct expansion gives
 $$\frac{B^2}{2e^2}+\frac{e^2}{2}(\xi-|q|^2)^2=\frac{(B-e^2(\xi-|q|^2))^2}{2e^2}+B(\xi-|q|^2).$$
 Adding these identities yields the positive-winding disk identity with boundary term $\int_{D_R}(\partial_1j_2-\partial_2j_1)$. Repeating the expansion with $D_{A,1}-iD_{A,2}$ and $B+e^2(\xi-|q|^2)$ gives the negative-winding identity with the opposite signs. [F1, algebra]
 
-1.2 For almost every $r$ larger than the nonzero-field radius, let $Q(r)=\int_{\partial D_r}(|q|^2-\xi)^2ds$ and $K(r)=\int_{\partial D_r}|D_{A,\tau}q|^2ds$, where $D_{A,\tau}$ is the covariant derivative in the unit tangent direction. The potential and kinetic terms of the finite energy, with polar coordinates and [F4], imply $Q,K\in L^1([R_0,\infty))$. For each integer $m\ge1$, the set $S_m=\{r\ge R_0:Q(r)>1/m\}$ has finite measure. Its complement has divergent $\int dr/r$, since removing a finite-measure set from a half-line cannot make the logarithmic integral finite. If $rK(r)\ge1/m$ for every sufficiently large $r\notin S_m$, then $\int K(r)dr\ge m^{-1}\int_{[R,\infty)\setminus S_m}dr/r=\infty$, contradiction. Thus there is an unbounded set of radii with $Q(r)\le1/m$ and $rK(r)<1/m$. By [A1] select an increasing sequence $r_m\to\infty$ from these sets. Along it, [F6] gives $\int_{\partial D_{r_m}}|q|^2ds\le2\pi\xi r_m+\sqrt{2\pi r_mQ(r_m)}=O(r_m)$, and
+1.2 Enlarge the exterior radius in [F1] if necessary so $R_0\ge1$. For $r>R_0$, let $Q(r)=\int_{\partial D_r}(|q|^2-\xi)^2ds$ and $K(r)=\int_{\partial D_r}|D_{A,\tau}q|^2ds$, where $D_{A,\tau}$ is the covariant derivative in the unit tangent direction and $ds=r\,d\theta=r\,d\sigma$ by [F7]. The polar formula [F7] and Fubini [F4] identify $\int_{R_0}^\infty Q(r)\,dr$ with $\int_{|x|>R_0}(|q|^2-\xi)^2dx$ and $\int_{R_0}^\infty K(r)\,dr$ with the integral of $|D_{A,\tau}q|^2$ there, which is bounded by the finite kinetic energy. In particular $Q,K\in L^1([R_0,\infty))$ and are measurable. For each integer $m\ge1$, the set $S_m=\{r\ge R_0:Q(r)>1/m\}$ has finite measure. Its complement has divergent $\int dr/r$, since removing a finite-measure set from a half-line cannot make the logarithmic integral finite. If $rK(r)\ge1/m$ for every sufficiently large $r\notin S_m$, then $\int K(r)dr\ge m^{-1}\int_{[R,\infty)\setminus S_m}dr/r=\infty$, contradiction. Thus there is an unbounded set of radii with $Q(r)\le1/m$ and $rK(r)<1/m$. By [A1] select an increasing sequence $r_m\to\infty$ from these sets. Along it, [F6, F7] give $\int_{\partial D_{r_m}}|q|^2ds\le2\pi\xi r_m+\sqrt{2\pi r_mQ(r_m)}=O(r_m)$, and
 $$\left|\int_{\partial D_{r_m}}j\right|\le\left(\int_{\partial D_{r_m}}|q|^2ds\right)^{1/2}K(r_m)^{1/2}\longrightarrow0.$$
-[A1, F1, F4, F6, algebra]
+[A1, F1, F4, F6, F7, algebra]
 
-2.1 For sufficiently large $r$, $|q|\ge\sqrt\xi/2$. On $\partial D_r$, $j=|q|^2(d(n\theta+\phi)-A)$, so $\int_{\partial D_r}A=2\pi n-\int_{\partial D_r}j/|q|^2$ because $\phi$ is single-valued and periodic. Along the sequence from step 1.2,
-$$\left|\int_{\partial D_{r_m}}\frac{j}{|q|^2}\right|\le\frac{2}{\sqrt\xi}(2\pi r_mK(r_m))^{1/2}\longrightarrow0.$$
-By [F3], $\int_{D_{r_m}}B\to2\pi n$. [F1, F3, F6, step 1.2, algebra]
+2.1 Uniform convergence $|q|\to\sqrt\xi$ gives $|q|^2\ge\xi/2$ for sufficiently large $r$. On $\partial D_r$, $j=|q|^2(d(n\theta+\phi)-A)$, so $\int_{\partial D_r}A=2\pi n-\int_{\partial D_r}j/|q|^2$ because $\phi$ is single-valued and periodic. Also $|j_\tau|=|\operatorname{Im}(\overline qD_{A,\tau}q)|\le|q||D_{A,\tau}q|$, hence $|j_\tau|/|q|^2\le\sqrt{2/\xi}|D_{A,\tau}q|$. Along the sequence from step 1.2, Cauchy--Schwarz and [F7] give
+$$\left|\int_{\partial D_{r_m}}\frac{j}{|q|^2}\right|\le\sqrt{\frac{2}{\xi}}(2\pi r_mK(r_m))^{1/2}\longrightarrow0.$$
+By [F3], $\int_{D_{r_m}}B\to2\pi n$. [F1, F3, F6, F7, step 1.2, algebra]
 
 3.1 Integrate the positive-winding disk identity from step 1.1 over $D_{r_m}$ and use [F3] on the current term. The two square integrals are nonnegative, while the boundary-current integral tends to zero by step 1.2 and the flux integral tends to $2\pi n$ by step 2.1. By [F5], the integrals of the nonnegative energy and square densities over the increasing disks converge to their plane integrals, so taking the limit gives the positive-sign exact identity and hence $E(A,q)\ge2\pi\xi n$ for $n\ge0$. For $n\le0$, apply the positive-sign identity from step 1.1 to $(\overline q,-A)$, whose winding is $-n\ge0$; its energy is unchanged and its curvature changes sign. The resulting identity is exactly the negative-sign identity for $(A,q)$ and gives $E(A,q)\ge-2\pi\xi n$. Thus the bound is $E(A,q)\ge2\pi\xi|n|$, and both identities hold when $n=0$ as well. [F3, F5, step 1.1, step 1.2, step 2.1, algebra]
 

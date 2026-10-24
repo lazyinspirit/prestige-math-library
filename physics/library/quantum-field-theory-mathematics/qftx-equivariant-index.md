@@ -10,6 +10,7 @@ items:
   - thm-equivariant-index-character-formula
 examples: []
 requires:
+  - qftx-equivariant-symbol-index
   - qftx-borel-localization
   - countability-and-uncountability
   - schwartz-space-and-the-plancherel-theorem

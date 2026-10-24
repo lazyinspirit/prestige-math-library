@@ -12,11 +12,13 @@ dependency_level: 6
 deps:
   - def-axiom-of-choice
   - def-complex-manifolds-and-holomorphic-vector-bundles
+  - thm-qftx-gaga-analytic-projective-dolbeault-scalar-cohomology
   - lem-qftx-positive-real-monad-analytic-twist-cohomology
   - lem-qftx-positive-real-monad-flat-splitting
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-complex-manifolds-and-holomorphic-vector-bundles: mathematical-premise
+  thm-qftx-gaga-analytic-projective-dolbeault-scalar-cohomology: mathematical-premise
   lem-qftx-positive-real-monad-analytic-twist-cohomology: mathematical-premise
   lem-qftx-positive-real-monad-flat-splitting: mathematical-premise
 axiom_base: "ZF + full AC inherited through the analytic scalar-cohomology input; the finite Hermitian matrix calculation is choice-free."
@@ -58,13 +60,15 @@ Let $M$ be the coefficient-image subspace of a linear monad on $\mathbb P^3(\mat
 
 [F3] The bundle and Hermitian conventions are locally trivial holomorphic bundles with first-slot-linear Hermitian pairings. [[def-complex-manifolds-and-holomorphic-vector-bundles]]
 
+[F4] Under full AC, the analytic scalar projective-cohomology theorem gives $H^0(\mathbb P^1,\mathcal O)=\mathbb C$; hence every global holomorphic section of the trivial bundle $\mathcal O_{\mathbb P^1}^{\oplus N}$ is a constant vector. [[thm-qftx-gaga-analytic-projective-dolbeault-scalar-cohomology]]
+
 ## Proof
 
 **Given:** Let $S=M$, and choose coordinates identifying the end space $U'$ with $U^*$ by the lifted pairing. All transposes below are complex-linear duals, while daggers are Hermitian adjoints.
 
 1.1 Define $S_d=S\oplus S^*$ and $R=U\oplus U^*$. On $S_d$ put $$\omega((s,\phi),(t,\psi))=\phi^Tt-\psi^Ts,\qquad J(s,\phi)=(H^{-1}\bar\phi,-H^T\bar s).$$ Then $\omega$ is a nondegenerate complex-bilinear alternating form, $J$ is antilinear, $J^2=-1$, and $\omega(Jx,Jy)=\overline{\omega(x,y)}$ by direct substitution and $H^\dagger=H$. Consequently $\omega(Jx,y)=-\overline{\omega(x,Jy)}$ and $h_d(Jx,Jy)=h_d(y,x)$. Thus $h_d(x,y)=\omega(x,Jy)$ is a nondegenerate first-slot-linear Hermitian form with matrix $\operatorname{diag}(H,H^{-T})$. [A1, F3, algebra]
 
-1.2 Fix $z\ne0$ and write $A_z=\alpha(z)$, $B_z=\alpha(jz)$. On the real line spanned by $z,jz$, its linear coordinate $(a,b)$ gives $\alpha(a,b)=aA_z+bB_z$ and $\beta(a,b)=aB_z^\dagger H-bA_z^\dagger H$. Expanding $\beta(a,b)\alpha(a,b)=0$ in $a,b$ gives $A_z^\dagger HB_z=B_z^\dagger HA_z=0$ and $A_z^\dagger HA_z=B_z^\dagger HB_z=:G_z$. The matrix $G_z$ is invertible: if $G_zv=0$ for $v\ne0$, injectivity of $A_z$ gives $A_zv\ne0$, while $\beta(a,b)A_zv=0$ for every $(a,b)$. Its class is a global section of the trivial bundle $F_M|_\ell$ vanishing at $(1,0)$, hence is identically zero; exactness on $\ell$ would then put the constant $A_zv$ in the image of $H^0(U\otimes\mathcal O_\ell(-1))=0$, a contradiction by [F2]. [F1, F2, algebra]
+1.2 Fix $z\ne0$ and write $A_z=\alpha(z)$, $B_z=\alpha(jz)$. On the real line spanned by $z,jz$, its linear coordinate $(a,b)$ gives $\alpha(a,b)=aA_z+bB_z$ and $\beta(a,b)=aB_z^\dagger H-bA_z^\dagger H$. Expanding $\beta(a,b)\alpha(a,b)=0$ in $a,b$ gives $A_z^\dagger HB_z=B_z^\dagger HA_z=0$ and $A_z^\dagger HA_z=B_z^\dagger HB_z=:G_z$. The matrix $G_z$ is invertible: if $G_zv=0$ for $v\ne0$, injectivity of $A_z$ gives $A_zv\ne0$, while $\beta(a,b)A_zv=0$ for every $(a,b)$. Its class is a global section of the holomorphically trivial bundle $F_M|_\ell$ vanishing at $(1,0)$. In a trivialization its components lie in $H^0(\mathbb P^1,\mathcal O)=\mathbb C$ by [F4], so the section is identically zero. Exactness of the restricted monad then puts the constant $A_zv$ in the image of $H^0(U\otimes\mathcal O_\ell(-1))=0$, a contradiction by [F2]. [F1, F2, F4, algebra]
 
 2.1 Define $a_d(z)=\operatorname{diag}(\alpha(z),\beta(z)^T):R\to S_d$ and the complex-linear map $\Phi:R\otimes\mathbb C^4\to S_d$ by $\Phi(r\otimes z)=a_d(z)r$. Let $c(u,\phi)=(\bar\phi,\bar u)$, the antilinear involution of $R$. The two identities for $\beta$ give $J a_d(z)=a_d(jz)c$. Also $\operatorname{im}a_d(z)$ is $\omega$-isotropic, since its pairing is the transpose of $\beta(z)\alpha(z)=0$. Consequently $\mathscr H=\Phi^*h_d$ satisfies $\mathscr H((c\otimes j)x,(c\otimes j)y)=\mathscr H(y,x)$ and $R\otimes z\perp_{\mathscr H}R\otimes jz$. [given, step 1.1, algebra]
 
