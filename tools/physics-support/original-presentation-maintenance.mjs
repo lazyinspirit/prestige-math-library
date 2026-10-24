@@ -178,13 +178,14 @@ function factAt(text, offset) {
   const token = matches.at(-1)?.[1];
   return token?.startsWith('[') ? token.slice(1, -1) : token ? 'Given' : null;
 }
-function interfaceChange(before, after, section, deltas) {
-  const a = trim(before), b = trim(after);
-  if (section === 'Definition') {
+function definitionSuffixUnchanged(a, b) {
     const well = text => text.match(/^(?:#{3,6}\s+|\*\*)(?:Well[- ](?:definedness|formedness)|Proof)\b[^\r\n]*/im);
     const x = well(a), y = well(b);
     if (Boolean(x) !== Boolean(y) || x && a.slice(x.index) !== b.slice(y.index)) fail('definition well-definedness changed');
-  }
+}
+function interfaceChange(before, after, section, deltas) {
+  const a = trim(before), b = trim(after);
+  if (section === 'Definition') definitionSuffixUnchanged(a, b);
   const refs = labels(a, b, section, deltas);
   if (refs.before !== refs.after) fail(`scientific ${section} text change`);
   if (tail(before) !== tail(after)) deltas.push({ id: `${section}:separator`, kind: 'separator-whitespace', section, before: tail(before), after: tail(after) });
@@ -217,6 +218,65 @@ function proofParts(text) {
   const heads = [...text.matchAll(/^(\d+\.\d+) /gm)];
   if (!heads.length || new Set(heads.map(h => h[1])).size !== heads.length) fail('invalid numbered proof');
   return { intro: text.slice(0, heads[0].index), steps: heads.map((h, i) => ({ label: h[1], text: text.slice(h.index, heads[i + 1]?.index ?? text.length) })) };
+}
+function definitionDisplayOption(value) {
+  if (value === undefined) return null;
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+      || !equal(Object.keys(value).sort(), ['display', 'version']) || value.version !== 1
+      || !Number.isSafeInteger(value.display) || value.display < 0) fail('invalid definition display layout option');
+  return { version: 1, display: value.display };
+}
+function definitionDisplayLayout(before, after, option, deltas) {
+  definitionSuffixUnchanged(before, after);
+  // Display style may select different mathematical tokens even with identical
+  // TeX bytes. Reject ambient definitions/indirection as well as direct choices:
+  // an unchanged earlier formula could otherwise define an alias for the span.
+  const unsafe = new Set(['mathchoice', 'mathpalette', 'else', 'fi', 'or', 'unless',
+    'def', 'gdef', 'edef', 'xdef', 'let', 'futurelet', 'csname', 'endcsname',
+    'expandafter', 'noexpand', 'unexpanded', 'expanded', 'detokenize', 'scantokens',
+    'string', 'meaning', 'the', 'toks', 'afterassignment', 'aftergroup', 'global',
+    'long', 'outer', 'protected', 'catcode', 'mathcode', 'delcode', 'lccode', 'uccode',
+    'sfcode', 'chardef', 'mathchardef', 'countdef', 'dimendef', 'skipdef', 'muskipdef',
+    'toksdef', 'everymath', 'everydisplay', 'input', 'include', 'write', 'read', 'openout', 'openin', 'verb',
+    'endlinechar', 'newlinechar', 'obeylines', 'obeyspaces', 'active', 'begingroup', 'endgroup']);
+  for (const text of [before, after]) {
+    if (text.includes('^^')) fail('unsafe definition style/indirection TeX');
+    for (const m of text.matchAll(/\\([A-Za-z@]+)/g)) {
+      const name = m[1].toLowerCase();
+      if (unsafe.has(name) || name.includes('@') || /^(?:if|new|renew|provide|declare)/.test(name))
+        fail('unsafe definition style/indirection TeX');
+    }
+  }
+  const candidates = [...before.matchAll(/(?<=\n)\$\$([^\r\n$]+)\$\$(?=\n)/g)]
+    .map(m => Object.assign(['\n' + m[0] + '\n', m[1]], { index: m.index - 1 }));
+  const selected = candidates[option.display];
+  if (!selected) fail('unknown/unused definition display layout selection');
+  const payload = selected[1];
+  if (!payload.trim() || /%|\^\^|\\(?:verb|catcode|def|gdef|edef|xdef|let|futurelet|csname|endcsname|input|include|write|read|openout|openin|scantokens|everymath|everydisplay|begingroup|endgroup|global|newcommand|renewcommand|providecommand|endlinechar|newlinechar|obeylines|obeyspaces|active)\b/.test(payload)) fail('unsafe definition display TeX');
+  const start = selected.index + 1, end = start + selected[0].length - 2;
+  const replacement = '\n\n$$\n' + payload + '\n$$\n\n';
+  if (before.slice(0, selected.index) + replacement + before.slice(selected.index + selected[0].length) !== after) fail('definition display layout changed other bytes');
+  const findMath = (text, start, end, old) => {
+    const found = [];
+    const walk = (node, ancestors = []) => {
+      if (node.position?.start.offset === start && node.position?.end.offset === end
+          && (old ? ['math', 'inlineMath'].includes(node.type) : node.type === 'math')
+          && ancestors.every(p => ['root', 'paragraph'].includes(p.type))) found.push({ node, ancestors });
+      for (const child of node.children ?? []) walk(child, [...ancestors, node]);
+    };
+    walk(markdownTree(text));
+    if (found.length !== 1) fail('definition display is not actual root/paragraph math');
+    const { node, ancestors } = found[0];
+    if (!old && (ancestors.length !== 1 || ancestors[0].type !== 'root')) fail('new definition display is not standalone math');
+    return { type: node.type, start, end, ancestors: ancestors.map(p => p.type) };
+  };
+  const afterStart = selected.index + 2, afterEnd = afterStart + payload.length + 6;
+  for (const [text, low, high] of [[before, start, end], [after, afterStart, afterEnd]])
+    if (links(text).some(r => low < r.end && high > r.start)) fail('definition display overlaps canonical wiki span');
+  const roles = { offset_unit: 'UTF-16', before: findMath(before, start, end, true), after: findMath(after, afterStart, afterEnd, false) };
+  deltas.push({ id: 'Definition:display:' + option.display, kind: 'definition-display-layout', section: 'Definition',
+    display: option.display, before: selected[0], after: replacement, payload_sha256: sha(payload),
+    definition_before_sha256: sha(before), definition_after_sha256: sha(after), markdown_roles: roles });
 }
 function consolidationOption(value) {
   if (value === undefined) return null;
@@ -383,11 +443,12 @@ function proofChange(before, after, deltas, consolidation, relocation, deps) {
   }
   return { technique, steps };
 }
-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation) {
-  const consolidation = consolidationOption(proofSupportConsolidation);
+export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay) {
+  const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay);
   const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation);
   if (relocation?.steps.some(s => consolidation?.steps.includes(s.label))) fail('overlapping strict proof requests');
   const before = parse(beforeBytes), after = parse(afterBytes), prior = structuredClone(before.data), current = structuredClone(after.data);
+  if (displayLayout && prior.kind !== 'definition') fail('definition display layout requires definition kind');
   if (!(resultKinds.has(prior.kind) || prior.kind === 'definition')) fail('unsupported item kind');
   const verification = { before: prior.verification ?? null, after: current.verification ?? null };
   delete prior.verification; delete current.verification;
@@ -400,14 +461,17 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
   }
   if (!equal(prior, current)) fail('scientific metadata/interface change');
   const a = sections(before.body), b = sections(after.body), primary = prior.kind === 'definition' ? 'Definition' : 'Statement';
-  if (strictProof) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
+  if (strictProof || displayLayout) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
   if (!a.values.has(primary) || a.prefix !== b.prefix) fail('primary section/prefix change');
   const appended = !a.values.has('Remarks') && b.names.at(-1) === 'Remarks' && equal(a.names, b.names.slice(0, -1));
   if (!equal(a.names, b.names) && !appended) fail('new/deleted/reordered scientific section');
   let technique = null, steps = [], remarks = null; const preserved_sections = [];
   for (const name of a.names) {
     const x = a.values.get(name), y = b.values.get(name);
-    if (name === primary) interfaceChange(x, y, name, deltas);
+    if (name === primary) {
+      if (displayLayout) definitionDisplayLayout(x, y, displayLayout, deltas);
+      else interfaceChange(x, y, name, deltas);
+    }
     else if (name === 'Facts & Assumptions') factsChange(x, y, deltas);
     else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation, relocation, prior.deps));
     else {
@@ -432,7 +496,7 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
   const factLabels = has(factDeltas, 'reference-label'), factQuotes = has(factDeltas, 'stray-blockquote-deletion');
   const review_classification = {
     interface_section: primary,
-    statements: statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
+    statements: displayLayout ? 'display-layout-only' : statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
     facts: factLabels ? factQuotes ? 'reference-labels-and-quotation-only' : 'reference-labels-only' : factQuotes ? 'quotation-only' : 'identical',
     proof: steps.length || technique ? 'equivalent-presentation' : 'unchanged',
   };
@@ -440,21 +504,26 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
   if (relocation && !equal(relocation.steps, deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unused proof reference relocation request');
   return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas,
     ...(consolidation ? { proof_support_consolidation: consolidation } : {}), ...(relocation ? { proof_reference_relocation: relocation } : {}),
-    ...(strictProof ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
+    ...(displayLayout ? { definition_display_layout: displayLayout } : {}),
+    ...(strictProof || displayLayout ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
 }
 /** Main integration supplies authenticated local binders. No free-text claim
  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
 export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
   const consolidation = consolidationOption(entry.proof_support_consolidation);
-  const relocation = relocationOption(entry.proof_reference_relocation);
+  const relocation = relocationOption(entry.proof_reference_relocation), displayLayout = definitionDisplayOption(entry.definition_display_layout);
   if (!equal(consolidation, changes.proof_support_consolidation ?? null)
       || !equal([...(consolidation?.steps ?? [])].sort(), changes.deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unbound proof support consolidation option');
   if (!equal(relocation, changes.proof_reference_relocation ?? null)
       || !equal(relocation?.steps ?? [], changes.deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unbound proof reference relocation option');
+  if (!equal(displayLayout, changes.definition_display_layout ?? null)
+      || (displayLayout ? changes.kind !== 'definition' || changes.deltas.filter(d => d.kind === 'definition-display-layout').length !== 1
+        || changes.deltas.find(d => d.kind === 'definition-display-layout')?.display !== displayLayout.display
+        : changes.deltas.some(d => d.kind === 'definition-display-layout'))) fail('unbound definition display layout option');
   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
-  if (consolidation || relocation) {
+  if (consolidation || relocation || displayLayout) {
     const runtime = parserDescriptor();
     if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
     for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);

@@ -194,3 +194,41 @@ repair policy validates the real non-applicable JSON and its check timing.
 The native adjudication's independent-of-diagram qualification and all existing
 consumer guards still apply. V2 supplies no source stamp and cannot turn
 unreviewed placeholders into authority.
+
+## Exact opt-in Definition display boundaries
+
+V2 alone may declare `definition_display_layout: {version: 1, display: 0}`.
+It is the independent fifth argument of `originalPresentationChanges`, after
+support consolidation and reference relocation. `display` is a zero-based
+index of raw single-line `$$P$$` spans occupying their own line in the old
+Definition section; missing, unused or malformed selections fail. Only
+`kind: definition` and its `## Definition` section qualify. This is not a
+Statement formatting rule.
+
+The entire new Definition must equal the literal one-span transformation
+`\n$$P$$\n` to `\n\n$$\nP\n$$\n\n`. Payload bytes (including punctuation),
+all surrounding prose, links and trailing bytes remain exact. Existing
+well-definedness/Proof suffix bytes remain exact. Identical TeX bytes alone do not preserve meaning across inline/display style:
+`\mathchoice{A}{B}{C}{D}` actually renders B inline and A in display mode.
+The entire old/new Definition is conservatively scanned for mathchoice,
+mathpalette, conditional controls, macro definitions/indirection, internal @
+controls, token/register hooks and character rewrites, including unchanged
+ambient formulas which could define aliases. Commands beginning if/new/renew/
+provide/declare are conservatively excluded; this also excludes some harmless
+commands rather than guessing equivalence. Selected-payload comments and
+verbatim/catcode/input primitives remain rejected. No rendering equality
+heuristic authorizes a source version. Actual old math AST ancestry must consist only
+of root/paragraph nodes, and the new span must be a standalone root math
+node. Canonical wiki spans and hidden Markdown contexts cannot supply math.
+Whole-body reference definitions reject. The existing lazy parser and its
+403-input live-bound runtime descriptor are reused without changing default
+or legacy extraction.
+
+The typed delta is `definition-display-layout`, id `Definition:display:N`,
+with exact before/after boundary strings, payload and whole-section hashes,
+and truthful old/new AST types and UTF-16 spans. Review classification
+`statements: display-layout-only` is required, together with ordinary exact
+source hashes, authentic finalized native repair, individual per-delta Root
+scientific review/evidence, consumer review and runtime input bindings.
+This option grants no diagram-flag exception or source permission and does
+not normalize whitespace anywhere else.

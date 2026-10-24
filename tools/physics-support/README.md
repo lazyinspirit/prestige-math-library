@@ -194,3 +194,17 @@ does not infer a fresh visual audit from it. Pending, visual-only, arbitrary or
 unconfirmed findings fail. Exact native receipt/adjudication hashes, publication
 lineage, ownership, checks, deltas, Root scientific reviews and current consumer
 bindings remain required. This changes no legacy presentation extraction rule.
+
+V2 original presentation maintenance also has an independent exact
+`definition_display_layout: {version:1, display:0}` opt-in (fifth extractor
+argument). It permits only the selected single-line double-dollar Definition
+span to gain the exact multiline display boundaries, preserving the full
+TeX payload and all other section bytes. Whole-Definition style-dependent
+choices, conditionals and macro-definition/indirection controls reject,
+including unchanged ambient formulas; identical payload alone is insufficient.
+Actual Markdown roles, unchanged
+well-definedness suffix, parser-runtime inputs and ordinary authenticated
+Root per-delta/source/consumer reviews remain mandatory. See
+[original-presentation-maintenance.md](original-presentation-maintenance.md)
+for the selector, typed delta and limits; no generic Statement normalization
+or diagram-flag exception is introduced.

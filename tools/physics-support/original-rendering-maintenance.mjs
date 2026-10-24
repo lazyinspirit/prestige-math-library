@@ -180,6 +180,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     if (entry.presentation_version !== undefined && entry.presentation_version !== 1 && !presentationV2) fail('unsupported presentation version');
     if (!presentationV2 && entry.proof_support_consolidation !== undefined) fail('proof support consolidation requires V2');
     if (!presentationV2 && entry.proof_reference_relocation !== undefined) fail('proof reference relocation requires V2');
+    if (!presentationV2 && entry.definition_display_layout !== undefined) fail('definition display layout requires V2');
     const pin = receipt.files.find(p => p.path === entry.path);
     if (!pin || !/^items\/[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(entry.path) || accepted.has(entry.path)
         || !scope.paths.has(entry.path) || entry.pinned_sha256 !== pin.sha256) fail('entry scope/pin');
@@ -213,7 +214,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     if (ledger.split(begin).length !== 2 || ledger.split(end).length !== 2) fail('ledger marker uniqueness');
     const block = ledger.split(begin)[1].split(end)[0];
     if (sha(block) !== native.ledger_sha256 || !localEvidence(entry.ledger_evidence).equals(Buffer.from(block))) fail('ledger extraction');
-    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation) : originalRenderingChanges(beforeBytes, afterBytes);
+    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout) : originalRenderingChanges(beforeBytes, afterBytes);
     const nonProofDefinition = presentationV2 && before.data.kind === 'definition'
       && !/^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before.body)
       && /^proof-layout: 1 items, 0 steps, 0 defects(?:\s|$)/m.test(check.output ?? '');

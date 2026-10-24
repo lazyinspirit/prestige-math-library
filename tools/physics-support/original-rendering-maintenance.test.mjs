@@ -20,6 +20,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const save = (base, path, value) => { mkdirSync(resolve(base, path, '..'), { recursive: true }); writeFileSync(resolve(base, path), typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n'); };
   let before = `---\nid: ${id}\nkind: ${definition ? 'definition' : 'theorem'}\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
   if (definition) before = before.replace('## Statement', '## Definition').replace(/\n## Facts & Assumptions[\s\S]*$/, '\n');
+  if (mode === 'definition-display') before = before.replace('For the given object, $A=A$.', ()=>'For the object define\n$$A=A.$$\nThe zero convention is fixed.');
   if (mode === 'fact-label' || mode === 'reference-relocation') {
     before = before.replace('deps: []', 'deps: [lem-title-target]').replace('[L1] Equality is reflexive. [given]', '[L1] Equality is reflexive. [given]\n\n[F2] The evaluation kernel is maximal ([[lem-title-target]]).');
     before += '\n## Sources\n\nExact unchanged source section.\n';
@@ -35,6 +36,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   importMathematics(root, source);
   const repairPath = `research/source-repair/receipts/${id}.json`;
   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
+  if (mode === 'definition-display') after = after.replace('\n$$A=A.$$\n', ()=>'\n\n$$\nA=A.\n$$\n\n');
   if (mode === 'technique') after = after.replace('**Proof technique:** direct on $A$.', '**Proof technique:** direct on A.');
   if (mode === 'title') after = after.replace('title: A theorem on R^n', () => "title: 'A theorem on $\\mathbb R^n$'");
   if (mode === 'step') after = after.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The identity map on the given object has equal domain and codomain; reflexivity gives $A=A$. [L1]');
@@ -77,7 +79,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const hashFile = path => sha(readFileSync(resolve(root, path)));
   const consolidation = mode.startsWith('support-consolidation') ? { version: 1, steps: mode === 'support-consolidation-both' ? ['1.1', '1.2'] : ['1.2'] } : undefined;
   const relocation = mode === 'reference-relocation' ? { version: 1, steps: [{ label: '1.1', target: 'lem-title-target' }] } : undefined;
-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+  const displayLayout = mode === 'definition-display' ? {version:1,display:0} : undefined;
+  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
@@ -100,6 +103,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
     entry.presentation_version = 2;
     if (consolidation) entry.proof_support_consolidation = consolidation;
     if (relocation) entry.proof_reference_relocation = relocation;
+    if (displayLayout) entry.definition_display_layout = displayLayout;
     Object.assign(entry.scientific_review, changes.review_classification);
     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
@@ -354,3 +358,8 @@ test('reference relocation never obtains the support-only absent-diagram-keys ex
 test('legacy entries reject reference relocation options',t=>{
  const f=fixture(t);f.entry.proof_reference_relocation={version:1,steps:[{label:'1.1',target:'lem-title-target'}]};f.seal();assert.throws(()=>f.verify(),/relocation requires V2/);
 });
+
+test('authenticated V2 definition display layout retains exact option, review, runtime and source guards',t=>{
+ const f=fixture(t,{mode:'definition-display',definition:true,presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);assert.equal(f.entry.changes.deltas[0].kind,'definition-display-layout');delete f.entry.definition_display_layout;f.seal();assert.throws(()=>f.verify(),/scientific Definition/);
+});
+test('legacy entries cannot use the definition display selector',t=>{const f=fixture(t);f.entry.definition_display_layout={version:1,display:0};f.seal();assert.throws(()=>f.verify(),/definition display layout requires V2/);});
