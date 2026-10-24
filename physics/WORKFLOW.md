@@ -1828,3 +1828,29 @@ This creates no acceptance or metadata waiver: native repair/final-review and
 fresh Root preparation/full gates still apply. Owner currency binds stable
 history/assignment/result inputs and derived lineage, never the whole changing
 driver state/events files. See the native physics README lifecycle section.
+
+### Original public-claim findings after a same-batch reader proof repair
+
+Root may retain an exact original finding through
+`research/RUN-step3-partial-reader-repair-BATCH.json` (version 1,
+`kind: "same-batch-proof-only-partial-reader-repair"`, `authorized_by: "/root"`,
+`mathematical_acceptance: false`, `edit_permission: false`, substantive `reason`).
+It binds `{path, sha256}` evidence in `native_receipt`, `native_attempt`,
+`native_prompt`, `native_last_message`, `original_findings`, `reader_report`,
+`review`, `pre_snapshot`, `post_snapshot`, `manifest`, `before_contracts`, and
+`after_contracts`. The contract archives are complete documents with `contracts`;
+`manifest` is a raw batch-manifest archive. Every reference belongs in the
+`inputs` path-to-raw-SHA256 map. Each `findings` entry supplies `finding_index`,
+the exact `original_finding`, and raw `before_source`/`after_source` references.
+
+Admission requires a genuine successful immutable native reader attempt and
+final message, unique same-batch own-run draft mathematics, source/contract/manifest
+archives reproducing native pre/post fingerprints, and source changes confined
+to the existing Proof section. All other source bytes, including frontmatter
+and public claim, remain identical. Current carriers must equal native post at
+split. Later collect/check authenticate that immutable history and exact route
+hash while allowing ordinary adjudicated repairs. The original unbound finding
+is preserved, its post carrier remains the repair comparison basis, and the item
+requires a full current refuter read. Separate touched and reader obligations,
+ledger closure, ordinary source ownership and all gates remain mandatory.
+The receipt grants routing only and never certifies scientific acceptance.

@@ -26,6 +26,7 @@ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
 import { publishedPageDependencies, publishedPageCarrier } from './step3-published-pages.mjs';
 import { ownerReviewedFindingAlias, sameFindingLocation } from './step3-owner-finding-alias.mjs';
+import { partialReaderRepairs, validatePartialReaderBindings } from './step3-partial-reader-repair.mjs';
 import { downstreamHandoffs } from './step3-downstream-handoff.mjs';
 import { observedCurrentHistory } from './step3-observed-current-history.mjs';
 import { sharedCausalRepair } from './step3-shared-causal-repair.mjs';
@@ -722,7 +723,7 @@ function reportOnlyFinding(finding, refuter = false) {
     producer_batch: _producer, dependency_path: _path,
     producer_carrier_at_split: _current, producer_pre_snapshot: _historical, producer_post_snapshot: _observedPost,
     observation_basis: _basis, historical_current_observation: _history, owner_page_repair: _ownerPageRepair,
-    carrier_kind: _kind, page_dependency: _pageDependency, downstream_handoff: _handoff, downstream_carrier_at_split: _downstreamCarrier, ...row } = finding;
+    partial_reader_repair: _partialReaderRepair, carrier_kind: _kind, page_dependency: _pageDependency, downstream_handoff: _handoff, downstream_carrier_at_split: _downstreamCarrier, ...row } = finding;
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   }
@@ -928,6 +929,7 @@ if (command === 'split') {
   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
     batch, readerAllowed, readerError, 'reader');
   const live = liveFingerprints(batch);
+  const partial = partialReaderRepairs(ROOT, run, batch, readerReport, manifestItems(), { atSplit: true });
   for (const [index, finding] of readerFindings.entries()) {
     const handoff = downstream.get(index + 1);
     if (handoff) {
@@ -944,7 +946,9 @@ if (command === 'split') {
       && (!finding.consumer_id || !(published.get(finding.id) ?? publishedPages.get(finding.id)?.consumers)?.has(finding.consumer_id))) {
       readerError(`${finding.obligation} must name an assigned consumer that reaches published dependency ${finding.id}`);
     }
-    if (derived.touched.includes(finding.id) || derived.pagesTouched.includes(finding.id)) {
+    const partialRepair = partial.get(index + 1);
+    if (partialRepair) finding.partial_reader_repair = partialRepair;
+    if ((derived.touched.includes(finding.id) || derived.pagesTouched.includes(finding.id)) && !partialRepair) {
       readerError(`${finding.obligation} names changed carrier ${finding.id}; repaired work belongs in the touched route, not the open-findings artifact`);
     }
     if (expectedType === 'in-run-dependency') { bindInRunFinding(finding, batch, inRun, readerError); continue; }
@@ -969,7 +973,7 @@ if (command === 'split') {
   if (readerErrors.length) fail(`step3-scope: batch ${batch} reader findings invalid: ${readerErrors.join('; ')}`, 1);
   const refuterPages = [...derived.pageManifestPost].sort();
   const refuterScope = [...new Set([...derived.untouched, ...highRisk, ...refuterPages,
-    ...readerFindings.filter(row => (row.subject_type === 'in-run-dependency' || row.downstream_handoff)).map(row => row.id)])].sort();
+    ...readerFindings.filter(row => (row.subject_type === 'in-run-dependency' || row.downstream_handoff || row.partial_reader_repair)).map(row => row.id)])].sort();
   const group = groups().byBatch[batch];
   if (!group) fail(`step3-scope: batch ${batch} has no Alpha group`);
   const scope = {
@@ -987,6 +991,7 @@ if (command === 'split') {
     reader_report_sha256: sha256(readerText),
     refuter_report_sha256: null,
   };
+  validatePartialReaderBindings(scope, partial);
   writeFileSync(scopePath(batch), `${JSON.stringify(scope, null, 2)}\n`);
   console.log(`step3-scope: batch ${batch} — ${ids.length} current item(s), ${derived.touched.length} touched, ${derived.untouched.length} untouched, ${derived.added.length} added, ${derived.removed.length} removed, ${derived.pagesTouched.length} page(s) touched, ${highRisk.length} high-risk`);
   process.exit(0);
@@ -1019,6 +1024,8 @@ if (command === 'collect') {
 
   const openedSet = new Set(opened);
   const live = liveFingerprints(batch);
+  const partial = partialReaderRepairs(ROOT, run, batch, readJson(readerFindingsPath(batch), 'original reader findings'), manifestItems());
+  validatePartialReaderBindings(scope, partial);
   const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? []);
   for (const finding of scope.reader_findings ?? []) if (finding.subject_type === 'in-run-dependency') {
     validateInRunFinding(finding, batch, inRun, error);
@@ -1160,6 +1167,10 @@ if (command === 'check') {
     const pre = readJson(hashPath(batch, 'pre'), `batch ${batch} pre-reader hash`);
     const post = readJson(hashPath(batch, 'post'), `batch ${batch} post-reader hash`);
     const derived = expectedSplit(pre, post);
+    try {
+      validatePartialReaderBindings(scope, partialReaderRepairs(ROOT, run, batch,
+        readJson(readerFindingsPath(batch), 'original reader findings'), manifests));
+    } catch (cause) { error('partial-reader-authority', cause.message); }
     for (const message of hashSnapshotErrors(pre, batch, 'pre')) error('hash-invalid', `batch ${batch} pre ${message}`);
     for (const message of hashSnapshotErrors(post, batch, 'post')) error('hash-invalid', `batch ${batch} post ${message}`);
     if (scope.version !== 2) error('scope-identity', `batch ${batch} has unsupported scope version ${scope.version}`);
@@ -1267,7 +1278,7 @@ if (command === 'check') {
         } catch (cause) { error('refuter-invalid', `batch ${batch} report is invalid JSON (${cause.message})`); }
       }
       const expectedRefuterScope = [...new Set([...(scope.untouched ?? []), ...(scope.high_risk ?? []), ...derived.pageManifestPost,
-        ...(scope.reader_findings ?? []).filter(row => (row.subject_type === 'in-run-dependency' || row.downstream_handoff)).map(row => row.id)])];
+        ...(scope.reader_findings ?? []).filter(row => (row.subject_type === 'in-run-dependency' || row.downstream_handoff || row.partial_reader_repair)).map(row => row.id)])];
       if (!sameSet(scope.refuter_scope ?? [], expectedRefuterScope)) error('refuter-scope', `batch ${batch} refuter scope is stale`);
       if (!sameSet(scope.opened ?? [], scope.refuter_scope ?? [])) error('refuter-coverage', `batch ${batch} did not open every routed refuter item`);
       if ((scope.not_opened ?? []).length) error('refuter-incomplete', `batch ${batch} retains unopened items`);
