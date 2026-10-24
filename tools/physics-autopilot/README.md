@@ -293,7 +293,8 @@ frontmatter `requires` sequence. Existing entries and their relative order must
 be preserved; entries remain unique. The complete body and every other source
 byte outside that YAML field remain exact, including inventory and order. Each
 added target must have a real unambiguous published mathematical or current-run
-mathematical home in the current plan, and its actual item inventory must contain
+mathematical home in the current plan (or an exact authenticated immutable
+import resolved by the native imported-plan-page API), and its actual item inventory must contain
 a dependency used by a source item on the repaired page. Local published math
 homes are valid context without being immutable import snapshots; no supplier
 source is modified by this permission.

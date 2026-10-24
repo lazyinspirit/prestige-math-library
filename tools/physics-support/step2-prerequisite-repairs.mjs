@@ -14,6 +14,7 @@ import {checkBatchDependencyLevels} from './batch-dependency-levels.mjs';
 import {frontmatterList} from './frontmatter-list.mjs';
 import {checkedAuthoredMetadata,authoredMetadataPath} from './step2-authored-metadata.mjs';
 import {yaml} from './pathway-lib.mjs';
+import {importedPlanPage} from './imported-plan-pages.mjs';
 
 const assert=(ok,message)=>{if(!ok)throw Error(`Prerequisite repair: ${message}`);};
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -115,7 +116,8 @@ function reviewedPages(root,run,req,auth){
     for(const target of after.requires.filter(id=>!before.requires.includes(id))){
       const candidates=homes.filter(home=>home.id===target);assert(candidates.length===1,'added page context home missing/ambiguous');
       const home=candidates[0],meta=parseFrontmatter(splitFrontmatter(home.source).fm),current=pages.find(row=>row.id===target);
-      assert(planned.some(page=>page.id===target)&&(meta.library??'mathematics')==='mathematics'&&(meta.status==='published'||current&&current.library==='mathematics'&&home.path===`library/${current.category}/${current.id}.md`),'added page context must be planned published mathematics or current registered mathematics carrier');
+      const declared=planned.some(page=>page.id===target)||importedPlanPage(root,target,json(root,'research/math-imports.json'),[home.path.slice('library/'.length)]);
+      assert(declared&&(meta.library??'mathematics')==='mathematics'&&(meta.status==='published'||current&&current.library==='mathematics'&&home.path===`library/${current.category}/${current.id}.md`),'added page context must be planned published mathematics, authenticated import, or current registered mathematics carrier');
       const suppliers=home.items.filter(id=>used.has(id));assert(suppliers.length,'added page context is not an actual item dependency home');context[home.path]=digest(root,home.path);
       for(const id of suppliers)context[`items/${id}.md`]=digest(root,`items/${id}.md`);
     }

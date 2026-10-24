@@ -74,7 +74,7 @@ function fixture(t) {
   return { root, stateDir, statePath, put, read, json, bind, requestPath, request, prepare, calls, originals, evidence, escalation };
 }
 
-function repairFixture(t,{pageSetup=false}={}){
+function repairFixture(t,{pageSetup=false,importedContext=null}={}){
   const f=fixture(t),commit=()=>{
     for(const args of [['add','.'],['commit','-qm','Exact fixture repair preimages']]){
       const result=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(result.status,0,result.stderr);
@@ -90,6 +90,14 @@ function repairFixture(t,{pageSetup=false}={}){
     f.put('items/lem-original-one.md',f.read('items/lem-original-one.md').replace('deps: []','deps: [lem-original-two]'));
     f.put('library/test/original-one-a.md','---\npage: original-one-a\nstatus: draft\nrequires: [original-two-b]\nitems: [lem-original-one]\nexamples: []\n---\n\nExact untouched page body.\n');
     f.put('library/test/original-two-a.md','---\npage: original-two-a\nstatus: published\nlibrary: mathematics\nrequires: []\nitems: [lem-original-two]\nexamples: []\n---\n\nPublished supplier context.\n');
+  }
+  if(importedContext){
+    const {status='published',library='mathematics',alteredPin=false}=importedContext,path='library/math/pinned-context.md';
+    f.put(path,`---\npage: pinned-context\nstatus: ${status}\nlibrary: ${library}\nrequires: []\nitems: [lem-pinned-context]\nexamples: []\n---\n\nImmutable imported supplier context.\n`);
+    f.put('items/lem-pinned-context.md','---\nid: lem-pinned-context\nkind: lemma\nstatus: published\ndomain: mathematics\nlibrary: mathematics\ndeps: []\n---\n## Statement\n\nPublished fixture supplier.\n');
+    f.put('research/math-imports.json',{version:1,files:[{path,sha256:alteredPin?'a'.repeat(64):f.bind(path).sha256},f.bind('items/lem-pinned-context.md')]});
+    f.originals[0][0].items[0].deps.push('lem-pinned-context');
+    f.put('items/lem-original-one.md',f.read('items/lem-original-one.md').replace('deps: [lem-original-two]','deps: [lem-original-two, lem-pinned-context]'));
   }
   f.put('research/plan-spec.json',{pages:f.originals.flat()});
   f.originals.forEach((pages,i)=>f.put(`research/${run}-batch-${i+1}.pages.json`,pages));
@@ -287,11 +295,11 @@ test('new-author metadata rejects unfinished/failed native authors, old source e
   }
 });
 
-function pageRepairFixture(t){
-  const f=repairFixture(t,{pageSetup:true}),page='original-one-a',pageSource=`library/test/${page}.md`,manifest=`research/${run}-batch-1.pages.json`,requires=['original-two-b','original-two-a'];
+function pageRepairFixture(t,{importedContext=null}={}){
+  const f=repairFixture(t,{pageSetup:true,importedContext}),page='original-one-a',pageSource=`library/test/${page}.md`,manifest=`research/${run}-batch-1.pages.json`,target=importedContext?'pinned-context':'original-two-a',requires=['original-two-b',target];
   const auth=f.json(f.authorization);auth.pages=[page];auth.metadata_changes=[{path:manifest,pointer:'/0/requires'},{path:'research/plan-spec.json',pointer:'/pages/0/requires'}].map(row=>({...row,before_sha256:repairValueDigest(['original-two-b']),after_sha256:repairValueDigest(requires)}));f.put(f.authorization,auth);
   const change=()=>{
-    f.after();const before=f.bind(pageSource).sha256;f.put(pageSource,f.read(pageSource).replace('requires: [original-two-b]','requires: [original-two-b, original-two-a]'));
+    f.after();const before=f.bind(pageSource).sha256;f.put(pageSource,f.read(pageSource).replace('requires: [original-two-b]',`requires: [original-two-b, ${target}]`));
     const pages=f.json(manifest),plan=f.json('research/plan-spec.json');pages[0].requires=requires;plan.pages[0].requires=requires;f.put(manifest,pages);f.put('research/plan-spec.json',plan);writeBatchDependencyLevels(f.root,run);
     const req=f.json(f.completion);req.page_reviews=[{id:page,before_sha256:before,after_sha256:f.bind(pageSource).sha256,scoped_use_justification:'Root checked the actual item dependency supplier home and confirms this adds only necessary prerequisite reading context.',focused_checks:'Root checked unchanged body, complete item inventories and ordering, and all non-requires frontmatter bytes.'}];f.put(f.completion,req);
   };
@@ -304,6 +312,16 @@ test('guarded page requires additions preserve original bytes/history and requir
   assert.equal(done.sources[f.pageSource],f.bind(f.pageSource).sha256);assert(done.page_context['library/test/original-two-a.md']);assert.equal(f.read(`research/${run}-step2-prerequisites.json`),registry);
   checkedRepairOverlay(f.root,run,f.entry);assert(repairReviewInputs(f.root,run,1).includes('library/test/original-two-a.md'));
   f.put('library/test/original-two-a.md',f.read('library/test/original-two-a.md')+'\nChanged context.\n');assert.throws(()=>checkedRepairOverlay(f.root,run,f.entry),/context review map/);
+});
+
+test('page context admits authenticated published imports absent from plan and rejects invalid pins/classification',t=>{
+  const f=pageRepairFixture(t,{importedContext:{}});assert(!f.json('research/plan-spec.json').pages.some(page=>page.id==='pinned-context'));
+  f.authorize();f.change();const result=f.complete();assert(result.page_context['library/math/pinned-context.md']);checkedRepairOverlay(f.root,run,f.entry);
+  for(const importedContext of [{alteredPin:true},{library:'physics'},{status:'draft'}]){
+    const negative=pageRepairFixture(t,{importedContext});negative.authorize();negative.change();
+    assert.throws(negative.complete,/immutable pin|classification mismatch/);
+    assert.equal(existsSync(join(negative.root,repairPaths(run,1).completion)),false);
+  }
 });
 
 test('page context admission rejects requires deletion, body/inventory edits, foreign ownership and unlisted pages',t=>{
