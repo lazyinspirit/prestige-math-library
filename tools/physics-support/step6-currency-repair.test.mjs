@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { makeStep6CurrencyCandidate, beginStep6CurrencyRepair, finishStep6CurrencyRepair, verifyStep6CurrencyAuthority,
-  verifyStep6HistoricalMetadata, step6CurrencyInputPaths, step6CurrencyPending, currencyContexts, verifyStep6CurrencyForStamps, compactCurrencyAuthorReport, makeStep6ScientificCurrencyCandidate, step6ScientificEscalationHistory } from './step6-currency-repair.mjs';
+  verifyStep6HistoricalMetadata, step6CurrencyInputPaths, step6CurrencyPending, currencyContexts, verifyStep6CurrencyForStamps, compactCurrencyAuthorReport, makeStep6ScientificCurrencyCandidate, makeStep6GateMechanicalCurrencyCandidate, step6ScientificEscalationHistory } from './step6-currency-repair.mjs';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
 import { freezeFrontier } from './step5-rounds.mjs';
 import { verifyCertification } from './step5-workflow.mjs';
@@ -57,6 +57,7 @@ function fixture(t, { nativeBaseline = false, realContexts = false } = {}) {
   const applyStamps = selection => {
     const stamp = 'verification:\n  judge:\n    model: "gpt-6-luna"\n    verdict: pass\n    date: 2026-10-25\n';
     for (const id of selection) { const path = join(root, 'items', id + '.md'), text = readFileSync(path, 'utf8');
+      if(text.includes('\nverification:\n  judge:\n'))continue;
       writeFileSync(path, text.includes('\nsources:\n') ? text.replace('\nsources:\n', '\n' + stamp + 'sources:\n') : text.replace('\n---\n## Definition', '\n' + stamp + '---\n## Definition')); }
   };
   if (nativeBaseline) applyStamps([ids[4]]);
@@ -264,6 +265,46 @@ test('round-2 context drift cannot inherit an old false-positive acceptance',t=>
     appendFileSync(f.ledgerPath,JSON.stringify({id,model:'gpt-6-luna',keep:false,reason:'A genuinely new current rejection',...args.contexts[id]})+'\n');
     appendFileSync(f.attemptsPath,JSON.stringify({id,model:'gpt-6-luna',context_sha256:args.contexts[id].context_sha256,outcome:'response',status:0,has_content:true,raw_bytes:100})+'\n');return{status:0};}}),/rejected/);
   assert.equal(JSON.parse(readFileSync(f.authorityPath)).failures.some(row=>row.id===f.ids[3]),true);
+});
+
+function mechanicalFixture(t,options){
+  const f=scientificFixture(t,options),scientific=f.build();f.advertiseScientific(scientific);
+  const respond=keep=>({ids,contexts})=>{for(const id of ids){if(id===f.ids[3])continue;appendFileSync(f.ledgerPath,JSON.stringify({id,model:'gpt-6-luna',keep:keep(id),reason:'Actual fixture provider response',...contexts[id]})+'\n');
+    appendFileSync(f.attemptsPath,JSON.stringify({id,model:'gpt-6-luna',context_sha256:contexts[id].context_sha256,outcome:'response',status:0,has_content:true,raw_bytes:100})+'\n');}return{status:0};};
+  f.begin({sweep:respond(()=>true)});f.applyStamps(scientific.scope.targets.filter(id=>id!==f.ids[3]));f.finish();const complete=readFileSync(f.authorityPath);
+  const path='items/'+f.ids[0]+'.md',absolute=join(f.root,path),before=readFileSync(absolute,'utf8'),after=before.replace('status: draft','status: "draft"');writeFileSync(absolute,after);
+  const proposalPath=relative(f.root,join(f.supervision,'step6-final-gate-format-provenance-proposal.json')),applicationPath=relative(f.root,join(f.supervision,'step6-final-gate-format-provenance-root-application.json')),attempt='actual-fixture-final-battery';
+  const events=[{type:'owner-gate-authorized',ok:true,attempt},{type:'gates',message:'6-final-validation-v3: running 29 gate(s)'},{type:'gate',id:'precheck',code:1,ok:false,output:'Actual formatting failure'},{type:'gate-advisory',id:'level-coverage',code:1,ok:false,output:'Actual YAML representation failure'}],eventPath=`.physics-autopilot/${f.run}/events.jsonl`;
+  writeFileSync(join(f.root,eventPath),events.map(JSON.stringify).join('\n')+'\n');
+  const proposal={run:f.run,attempt,proposals:[{path,before:'status: draft',after:'status: "draft"'}],metadata_guards:{},metadata_proposals:[],native_failure_events:events.slice(2).map((row,i)=>({path:eventPath,line:i+3,line_sha256:raw(JSON.stringify(row)+'\n')}))};f.save(join(f.root,proposalPath),proposal);
+  const application={run:f.run,attempt,reviewer:'/root',proposal_path:proposalPath,proposal_sha256:raw(readFileSync(join(f.root,proposalPath))),public_interfaces_unchanged:true,scientific_acceptance_created:false,native_pass_created:false,
+    source_changes:[{path,before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),before_judge_sha256:itemHashJudge(before),after_judge_sha256:itemHashJudge(after),interface_changed:false,report_path:proposalPath,report_pointer:'/proposals/0'}],metadata_changes:[],consumer_decisions:[]};f.save(join(f.root,applicationPath),application);
+  const defectId='demo-actual-mechanical-fixed';appendFileSync(join(f.root,'research/defect-ledger.jsonl'),JSON.stringify({defect_id:defectId,run:f.run,subject:f.ids[0],disposition:'fixed',class:'breaking-runtime',subclass:'other',subclass_note:'Actual representation failure.',severity:'nonfatal',location:'frontmatter',caught_at_stage:'owner',caught_by_role:'orchestrator',at:new Date().toISOString()})+'\n');
+  const inputs={proposalPath,applicationPath,fixedDefectIds:[defectId],contextBuilder:f.contextBuilder},build=()=>makeStep6GateMechanicalCurrencyCandidate(f.root,f.run,inputs);
+  return{...f,scientific,complete,proposal,application,inputs,build,respond,eventPath};
+}
+
+test('gate-mechanical repair preserves complete science and carries only genuinely current native judgments',t=>{
+  const f=mechanicalFixture(t,{realContexts:true}),d=f.build();assert.equal(d.decisions.length,0);assert.ok(d.provider_targets.includes(f.ids[0]));assert.ok(d.carried_judgments.some(row=>row.id===f.ids[3]));f.advertiseScientific(d);
+  let called;const judged=f.begin({sweep:args=>{called=args.ids;return f.respond(()=>true)(args);}});assert.deepEqual(called,d.provider_targets);assert.equal(judged.version,3);assert.deepEqual(readFileSync(join(f.root,d.predecessor.path)),f.complete);
+  f.applyStamps(d.scope.targets.filter(id=>id!==f.ids[3]));f.finish();assert.equal(f.verify().status,'complete');
+  rmSync(join(f.root,'.physics-autopilot'),{recursive:true});assert.equal(f.verify().status,'complete');verifyStep6HistoricalMetadata(f.root,f.run,f.certificate);
+});
+
+for(const[name,mutate]of[
+  ['changed gate event',f=>appendFileSync(join(f.root,f.eventPath),'{}\n')||writeFileSync(join(f.root,f.eventPath),'{}\n')],
+  ['missing actual mechanical defect',f=>f.inputs.fixedDefectIds=[]],
+  ['unlisted source mutation',f=>appendFileSync(f.pagePath,'Unlicensed source change.\n')],
+])test('mechanical continuation rejects '+name,t=>{const f=mechanicalFixture(t);mutate(f);assert.throws(f.build);});
+
+test('fresh mechanical rejection blocks and remains repairable through genuine bounded scientific continuation',t=>{
+  const f=mechanicalFixture(t),d=f.build();f.advertiseScientific(d);assert.throws(()=>f.begin({sweep:f.respond(id=>id!==f.ids[0])}),/rejected/);
+  const before=readFileSync(join(f.root,'items',f.ids[0]+'.md'),'utf8'),after=before+'\n## Remark\nAn additional genuine scientific hypothesis is now explicit.\n';writeFileSync(join(f.root,'items',f.ids[0]+'.md'),after);
+  const report=relative(f.root,join(f.supervision,'mechanical-scientific-resolution.json'));f.save(join(f.root,report),{findings:[{id:f.ids[0],review:'Actual fresh independent issue repaired.'}],consumers:[{id:f.ids[1],review:'Affected supplier context checked.'}]});
+  const prior=step6ScientificEscalationHistory(f.root,f.run).filter(row=>row.id===f.ids[0]),decision={...f.scientific.decisions[0],escalation_id:'demo-after-mechanical-new-issue',repair_cycle:1,report_path:report,report_pointer:'/findings/0',
+    prior_same_item:prior.map(row=>({authorization_sha256:row.authorization_sha256,rejected_tuple:row.rejected_tuple,relation:'distinct_issue',reason:'Actual distinct newly raised issue.',report_path:report,report_pointer:'/findings/0'})),ledger_row:{...f.scientific.decisions[0].ledger_row,defect_id:'demo-science-after-mechanical',correction:'Actual new issue repaired.'}};
+  const reconciliation={run:f.run,reviewer:'/root',source_changes:[{path:'items/'+f.ids[0]+'.md',before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),before_judge_sha256:itemHashJudge(before),after_judge_sha256:itemHashJudge(after),interface_changed:false,report_path:report,report_pointer:'/findings/0'}],metadata_changes:d.reconciliation.metadata_changes,consumer_decisions:[]};
+  const next=makeStep6ScientificCurrencyCandidate(f.root,f.run,{reports:[report],decisions:[decision],reconciliation,contextBuilder:f.contextBuilder});f.advertiseScientific(next);f.begin({sweep:f.respond(()=>true)});f.applyStamps(next.scope.targets.filter(id=>id!==f.ids[3]));f.finish();assert.equal(f.verify().status,'complete');
 });
 
 test('already observed native stamp-only Guard edge is accepted only for an unchanged ordinary keep bound by failed-render inputs', t => {

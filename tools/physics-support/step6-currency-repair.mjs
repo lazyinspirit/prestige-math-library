@@ -207,20 +207,24 @@ function validateDocument(root, run, cert, authorization, { live = false } = {})
 }
 
 const isScientific=d=>d?.kind==='physics-step6-scientific-rejection-resolution';
-const scientificRound=d=>isScientific(d)?d.scientific_round??1:0;
+const isMechanical=d=>d?.kind==='physics-step6-final-gate-mechanical-current-judgments';
+const isContinuation=d=>isScientific(d)||isMechanical(d);
+const scientificRound=d=>isMechanical(d)?d.currency_episode:isScientific(d)?d.scientific_round??1:0;
+const nativeType=d=>isMechanical(d)?{version:3,kind:'native-physics-step6-final-gate-mechanical-current-judgments'}:
+  isScientific(d)?{version:2,kind:'native-physics-step6-scientific-current-judgments'}:{version:1,kind:'native-physics-step6-current-judgments'};
 const withoutAt=({at,...row})=>row;
 const tuple=row=>Object.fromEntries(['id','model','item_sha256','context_sha256'].map(key=>[key,row[key]]));
 function authorityHistory(root,run,document){
   const history=[],seen=new Set();let d=document;
   for(;;){const round=scientificRound(d);check(Number.isSafeInteger(round)&&round>=1,'invalid scientific episode ordinal');
-    const binding=d.predecessor;check(sha(binding?.raw_sha256)&&binding.path===`research/${run}-step6-currency-blocked-${binding.raw_sha256.slice(0,16)}.json`,'noncanonical blocked predecessor archive');
+    const mechanical=isMechanical(d),binding=d.predecessor;check(sha(binding?.raw_sha256)&&binding.path===`research/${run}-step6-currency-${mechanical?'complete':'blocked'}-${binding.raw_sha256.slice(0,16)}.json`,'noncanonical predecessor archive');
     const archive=join(root,binding.path);check(history.length===0||existsSync(archive),'missing immutable historical authority archive');
     const path=existsSync(archive)?regular(root,binding.path):join(root,authorityRel(run));
     check(!seen.has(binding.raw_sha256)&&fileHash(path)===binding.raw_sha256,'blocked native predecessor bytes changed or ancestry repeated');seen.add(binding.raw_sha256);
     const value=read(path);sealed(value);const original=value.authorization.document;
-    check(value.sha256===binding.payload_sha256&&value.version===(round>1?2:1)
-      &&value.kind===(round>1?'native-physics-step6-scientific-current-judgments':'native-physics-step6-current-judgments')
-      &&value.run===run&&value.status==='blocked'&&value.failures.length>0,'not the actual blocked predecessor judgments');
+    const originalType=nativeType(original);
+    check(value.sha256===binding.payload_sha256&&value.version===originalType.version&&value.kind===originalType.kind
+      &&value.run===run&&(mechanical?value.status==='complete'&&value.failures.length===0:value.status==='blocked'&&value.failures.length>0),'not the actual required predecessor judgments');
     check((round>1?scientificRound(original)===round-1:original.kind==='physics-step6-render-repair-current-judgments')
       &&value.authorization.raw_sha256===raw(JSON.stringify(original,null,2)+'\n')&&equal(original.certificate,document.certificate)
       &&original.preimage_commit===document.preimage_commit,'predecessor authorization lineage changed');
@@ -232,9 +236,10 @@ function predecessor(root,run,d){
   const history=authorityHistory(root,run,d);
   for(const[index,value]of history.entries()){
   const original=value.authorization.document;
-  if(index>0){verifyScientificDispositions(root,run,original,history[index-1],history.slice(0,index));
+  if(index>0){if(isMechanical(original))validateMechanicalEvidence(root,run,original,history[index-1],{historical:true});
+    else verifyScientificDispositions(root,run,original,history[index-1],history.slice(0,index));
     const successor=history[index+1]?.authorization.document??d;
-    verifyScientificDecisionSuffix(root,original,value.authorization.raw_sha256,{complete:true,ends:[successor.adjudications_baseline,successor.defects_baseline]});}
+    verifyScientificDecisionSuffix(root,original,value.authorization.raw_sha256,{complete:true,ends:[successor.adjudications_baseline,isMechanical(successor)?successor.mechanical.defects_before:successor.defects_baseline]});}
   check(value.ledger_prefixes.length===2&&equal(sorted(value.ledger_prefixes.map(row=>row.path)),sorted([original.ledger_baseline.path,original.attempts_baseline.path])),'predecessor native ledger set changed');
   for(const binding of value.ledger_prefixes)bindPrefix(root,binding);
   for(const judgment of value.judgments){verifyProviderBinding(root,judgment.verdict);verifyProviderBinding(root,judgment.attempt);
@@ -362,6 +367,47 @@ function verifyScientificDispositions(root,run,d,old,lineage=null){
   check(equal(d.inherited_adjudications??[],round>1?inheritedAdjudications(old):[]),'inherited adjudications differ from actual predecessor accepted rows');
   verifyEscalationProvenance(d,lineage);
 }
+const mechanicalEvent=row=>Object.fromEntries(Object.entries(row).map(([key,value])=>[key,key==='output'?{kind:'native-output-reference',bytes:Buffer.byteLength(value),sha256:raw(value)}:value]));
+function nativeEventBinding(root,ref){
+  check(Number.isSafeInteger(ref.line)&&ref.line>0,'invalid mechanical gate event line');
+  const line=readFileSync(regular(root,ref.path),'utf8').split('\n')[ref.line-1];check(line&&raw(line+'\n')===ref.line_sha256,'actual mechanical gate event changed');
+  return{path:ref.path,line:ref.line,line_sha256:ref.line_sha256,event:mechanicalEvent(JSON.parse(line))};
+}
+function validateMechanicalEvidence(root,run,d,old,{live=false,historical=false}={}){
+  const m=d.mechanical,proposal=d.authors.find(row=>row.path===m.proposal_path),application=d.authors.find(row=>row.path===m.application_path),p=proposal?.payload,a=application?.payload;
+  check(d.decisions.length===0&&d.authors.length===2&&d.authors.every(row=>digest(row.payload)===row.payload_sha256)
+    &&p?.run===run&&a?.run===run&&a.reviewer==='/root'&&a.attempt===p.attempt&&a.proposal_path===proposal.path&&a.proposal_sha256===proposal.raw_sha256
+    &&a.public_interfaces_unchanged===true&&a.scientific_acceptance_created===false&&a.native_pass_created===false,'invalid actual mechanical proposal/application');
+  check(equal(d.reconciliation.source_changes,a.source_changes)&&d.reconciliation.source_changes.every(row=>row.interface_changed===false)
+    &&equal(sorted([...new Set(p.proposals.map(row=>row.path))]),sorted(a.source_changes.map(row=>row.path)))
+    &&equal(d.inherited_adjudications,inheritedAdjudications(old)),'mechanical source scope or inherited coverage differs');
+  const currentMetadata=new Map(d.historical_metadata.map(row=>[row.path,row])),priorMetadata=new Map(old.authorization.document.historical_metadata.map(row=>[row.path,row]));
+  check(equal(sorted([...currentMetadata.keys()]),sorted([...new Set([...priorMetadata.keys(),...a.metadata_changes.map(row=>row.path)])])),'unlisted mechanical metadata scope');
+  for(const row of currentMetadata.values()){const change=a.metadata_changes.find(change=>change.path===row.path);
+    check(change?change.before_raw_sha256===p.metadata_guards[row.path]&&change.after_raw_sha256===row.after_sha256
+      &&(!priorMetadata.has(row.path)||priorMetadata.get(row.path).after_sha256===change.before_raw_sha256)
+      :row.after_sha256===priorMetadata.get(row.path)?.after_sha256,'unlisted mechanical metadata bytes changed');
+    if(change){const operations=p.metadata_proposals.filter(op=>op.path===row.path),current=historical?null:read(regular(root,row.path));
+      check(equal(sorted(change.changed_pointers),sorted(operations.map(op=>op.pointer))),'mechanical metadata leaf scope differs');
+      if(!historical)for(const op of operations){const value=at(current,op.pointer);check(op.after?.kind==='source-fragment-reference'?typeof value==='string'&&raw(value)===op.after.sha256&&Buffer.byteLength(value)===op.after.bytes:equal(value,op.after),'mechanical metadata literal differs');}}}
+  check(m.authorization.event.type==='owner-gate-authorized'&&m.authorization.event.ok===true&&m.authorization.event.attempt===p.attempt
+    &&m.gate_start.event.type==='gates'&&m.gate_start.event.message.startsWith(d.stage+': running ')
+    &&m.authorization.line<m.gate_start.line&&m.failures.length===2&&equal(sorted(m.failures.map(ref=>ref.event.id)),['level-coverage','precheck'])
+    &&m.failures.every(ref=>ref.path===`.physics-autopilot/${run}/events.jsonl`&&ref.line>m.gate_start.line&&ref.event.code!==0&&ref.event.ok===false),'not the actual failed final gate attempt');
+  bindPrefix(root,m.defects_before);const defects=jsonl(root,d.defects_baseline.path).rows;
+  check(m.fixed_defects.length===a.source_changes.length&&m.fixed_defects.length===d.defects_baseline.rows-m.defects_before.rows
+    &&equal(sorted(m.fixed_defects.map(ref=>ref.row.subject)),sorted(a.source_changes.map(row=>row.path.slice(6,-3)))),'mechanical fixed defect inventory differs');
+  for(const[index,binding]of m.fixed_defects.entries()){verifyProviderBinding(root,binding);check(binding.path===d.defects_baseline.path&&binding.line===m.defects_before.rows+index
+      &&binding.row.run===run&&binding.row.disposition==='fixed'&&!binding.row.adjudication_ref,'not an actual separate mechanical defect record');}
+  check(equal(defects.slice(m.defects_before.rows,d.defects_baseline.rows).map(row=>row.raw_sha256),m.fixed_defects.map(row=>row.raw_sha256)),'mechanical defect suffix changed');
+  const carried=d.carried_judgments,ids=carried.map(row=>row.id);check(new Set(ids).size===ids.length
+    &&equal(sorted([...ids,...d.provider_targets]),sorted(d.scope.targets))&&new Set([...ids,...d.provider_targets]).size===d.scope.targets.length,'mechanical provider/carry partition differs');
+  for(const row of carried){const previous=old.judgments.find(previous=>previous.id===row.id),input=d.current_inputs[row.id],original=old.authorization.document.target_inputs[row.id];
+    check(equal(row,previous)&&equal(d.target_inputs[row.id],original)&&input.item_sha256===row.verdict.row.item_sha256
+      &&input.other_prompt_inputs_sha256===original.other_prompt_inputs_sha256&&input.context_sha256===row.after_stamp_context_sha256,'not genuinely retained completed coverage');
+    if(!historical)currentStampDelta(readFileSync(join(root,'items',row.id+'.md'),'utf8'),row);}
+  if(live)for(const ref of [m.authorization,m.gate_start,...m.failures])check(equal(nativeEventBinding(root,ref),ref),'native final failure event projection changed');
+}
 function validateScientificDocument(root,run,cert,authorization,{live=false}={}){
   const d=authorization.document;
   check(d.version===1&&d.run===run&&d.reviewer==='/root'&&d.stage==='6-final-validation-v3'&&d.lineup==='luna'&&d.effort==='max'
@@ -370,7 +416,7 @@ function validateScientificDocument(root,run,cert,authorization,{live=false}={})
   check(d.frontier_sha256===f.sha256&&equal(d.ledger_baseline,prior.ledger_baseline)&&equal(d.attempts_baseline,prior.attempts_baseline),'scientific frontier/native baseline changed');
   for(const binding of [d.ledger_baseline,d.attempts_baseline,d.adjudications_baseline,d.defects_baseline])bindPrefix(root,binding);
   check(d.adjudications_baseline.path===`research/${run}-judge-adjudications.jsonl`&&d.defects_baseline.path==='research/defect-ledger.jsonl','noncanonical scientific ledgers');
-  verifyScientificDispositions(root,run,d,old,lineage);
+  if(isMechanical(d))validateMechanicalEvidence(root,run,d,old,{live});else verifyScientificDispositions(root,run,d,old,lineage);
   const taxonomy=defectRowsCommand(root,run,d.decisions.filter(row=>row.outcome!=='false_positive').map(row=>({...scientificDefect(d,authorization.raw_sha256,row),at:'2026-10-25T00:00:00Z'})),'validate');
   check(taxonomy.status===0,'scientific Root defect taxonomy rejected: '+taxonomy.stderr);
   const reconciliation=d.reconciliation,changes=new Map(reconciliation.source_changes.map(row=>[row.path,row])),changed=new Set();
@@ -410,7 +456,7 @@ function validateScientificDocument(root,run,cert,authorization,{live=false}={})
     for(const row of d.authors){const original=read(regular(root,row.path));check(fileHash(join(root,row.path))===row.raw_sha256&&digest(original)===row.original_payload_sha256&&equal(compactCurrencyAuthorReport(original),row.payload),'actual scientific report changed');}}
   return{document:d,changed,frontier:f,predecessor:old};
 }
-function validateAnyDocument(root,run,cert,authorization,options){return isScientific(authorization.document)?validateScientificDocument(root,run,cert,authorization,options):validateDocument(root,run,cert,authorization,options);}
+function validateAnyDocument(root,run,cert,authorization,options){return isContinuation(authorization.document)?validateScientificDocument(root,run,cert,authorization,options):validateDocument(root,run,cert,authorization,options);}
 
 // Only an explicit Step-6 consumer opts into this historical raw-byte check.
 // Its caller still receives every original item/context hash unchanged.
@@ -429,14 +475,14 @@ function verifyProviderBinding(root, binding) {
   check(entry && entry.raw_sha256 === binding.raw_sha256 && equal(entry.row, binding.row) && digest(entry.row) === binding.row_sha256, 'actual provider row changed');
 }
 function verifyCurrentAuthority(root, run, cert, authority, contexts, { allowJudged = false } = {}) {
-  const science=isScientific(authority.authorization?.document);
-  check(authority.version===(science?2:1)&&authority.kind === (science?'native-physics-step6-scientific-current-judgments':'native-physics-step6-current-judgments') && authority.run === run
+  const science=isContinuation(authority.authorization?.document),type=nativeType(authority.authorization?.document);
+  check(authority.version===type.version&&authority.kind===type.kind && authority.run === run
     && (authority.status === 'complete' || allowJudged && authority.status === 'judged'), 'fresh native current judgments incomplete');
   const validated=validateAnyDocument(root, run, cert, authority.authorization);
   const d = authority.authorization.document;
   if(science)verifyScientificDecisionSuffix(root,d,authority.authorization.raw_sha256,{complete:true});
   const expectedCommand=['node','tools/physics-support/judge-sweep.mjs','--run',run,'--ledger',`research/${run}-judge.jsonl`,'--cost',`research/${run}-judge-cost.jsonl`,
-    '--items',d.scope.targets.join(','),'--lineup','luna','--effort','max','--strict-context','--context-cache',`.physics-autopilot/${run}/supervision/step6-currency-context-cache.json`];
+    '--items',(d.provider_targets??d.scope.targets).join(','),'--lineup','luna','--effort','max','--strict-context','--context-cache',`.physics-autopilot/${run}/supervision/step6-currency-context-cache.json`];
   check(equal(authority.actual_command,expectedCommand),'native current judgment command changed');
   check(equal(authority.scope, d.scope)&&equal(science?scientificScope(root,run,cert,contexts,validated):currentScope(root,run,cert,contexts,validated.changed),d.scope)
     &&authority.judgments.length===d.scope.targets.length&&new Set(authority.judgments.map(row=>row.id)).size===authority.judgments.length
@@ -465,7 +511,7 @@ function verifyCurrentAuthority(root, run, cert, authority, contexts, { allowJud
     if(adjudicated){check(judgment.adjudication,'missing actual scientific adjudication binding');verifyProviderBinding(root,judgment.adjudication);
       check(equal(scientificAdjudication(d,authority.authorization.raw_sha256,adjudicated),withoutAt(judgment.adjudication.row)),'scientific adjudication row differs from actual decision');}
     const source = readFileSync(join(root, 'items', id + '.md'), 'utf8');
-    if (authority.status === 'complete') {
+    if (authority.status === 'complete'||isMechanical(d)&&d.carried_judgments.some(row=>row.id===id)) {
       const after = currentStampDelta(source, judgment);
       check(equal(after, judgment.after_stamp) && now.context_sha256 === judgment.after_stamp_context_sha256, 'native stamp-only replay changed: ' + id);
     } else check(now.context_sha256 === original.context_sha256 && fileHash(join(root, 'items', id + '.md')) === judgment.before_stamp.raw_sha256, 'judged inputs changed before stamping');
@@ -494,19 +540,19 @@ export function beginStep6CurrencyRepair(root, run, { contextBuilder = currencyC
   const contexts = contextBuilder(root, validated.frontier.ids), path = join(root, authorityRel(run));
   if (existsSync(path)) {
     const existing = readAuthority(root, run);
-    if(isScientific(d)&&existing.authorization.raw_sha256!==authorization.raw_sha256)archiveScientificPredecessor(root,run,d);
+    if(isContinuation(d)&&existing.authorization.raw_sha256!==authorization.raw_sha256)archiveScientificPredecessor(root,run,d);
     else{check(existing.authorization.raw_sha256 === authorization.raw_sha256, 'existing scientific authority belongs to another request');
       if (['complete', 'judged'].includes(existing.status)) { verifyCurrentAuthority(root, run, cert, existing, contexts, { allowJudged: true }); return existing; }}
   }
-  check(equal(isScientific(d)?scientificScope(root,run,cert,contexts,validated):currentScope(root, run, cert, contexts, validated.changed),d.scope), 'current repair target scope changed');
-  for (const id of d.scope.targets) check(equal(contexts[id], d.target_inputs[id]), 'authorized current prompt changed before provider work: ' + id);
+  check(equal(isContinuation(d)?scientificScope(root,run,cert,contexts,validated):currentScope(root, run, cert, contexts, validated.changed),d.scope), 'current repair target scope changed');
+  for (const id of d.scope.targets) check(equal(contexts[id], d.current_inputs?.[id]??d.target_inputs[id]), 'authorized current prompt changed before provider work: ' + id);
   const before = Object.fromEntries(d.scope.targets.map(id => [id, stampObservation(readFileSync(join(root, 'items', id + '.md'), 'utf8'))]));
   if(isScientific(d))appendScientificDecisions(root,run,authorization);
   const argv = ['tools/physics-support/judge-sweep.mjs', '--run', run, '--ledger', `research/${run}-judge.jsonl`, '--cost', `research/${run}-judge-cost.jsonl`,
-    '--items', d.scope.targets.join(','), '--lineup', 'luna', '--effort', 'max', '--strict-context', '--context-cache', `.physics-autopilot/${run}/supervision/step6-currency-context-cache.json`];
+    '--items', (d.provider_targets??d.scope.targets).join(','), '--lineup', 'luna', '--effort', 'max', '--strict-context', '--context-cache', `.physics-autopilot/${run}/supervision/step6-currency-context-cache.json`];
   check(d.scope.targets.length > 0, 'empty provider target selection');
   const startedAt = new Date().toISOString();
-  const result = sweep ? sweep({ root, run, argv, contexts, ids: d.scope.targets })
+  const result = sweep ? sweep({ root, run, argv, contexts, ids: d.provider_targets??d.scope.targets })
     : spawnSync(process.execPath, argv, { cwd: root, stdio: 'inherit', timeout: 43200000, env: { ...process.env, PHYSICS_REPO: root } });
   check(!result.error && result.status === 0, 'actual Luna sweep failed/outage; completed append-only rows remain resumable');
   const after = contextBuilder(root, validated.frontier.ids);
@@ -514,18 +560,19 @@ export function beginStep6CurrencyRepair(root, run, { contextBuilder = currencyC
   const ledgerPath = `research/${run}-judge.jsonl`, attemptsPath = `research/${run}-judge-attempts.jsonl`;
   const ledger = jsonl(root, ledgerPath), attempts = jsonl(root, attemptsPath), judgments = [], failures = [];
   for (const id of d.scope.targets) {
+    const carried=d.carried_judgments?.find(row=>row.id===id);if(carried){judgments.push({...carried});continue;}
     const original = contexts[id], entry = ledger.rows.filter(entry => entry.index >= d.ledger_baseline.rows && entry.row.id === id && entry.row.model === MODELS.luna.id
       && entry.row.item_sha256 === original.item_sha256 && entry.row.context_sha256 === original.context_sha256).at(-1);
     const attempt = attempts.rows.filter(entry => entry.index>=d.attempts_baseline.rows&&entry.row.id === id && entry.row.model === MODELS.luna.id && entry.row.context_sha256 === original.context_sha256
       && entry.row.outcome === 'response' && entry.row.status === 0&&entry.row.has_content===true&&entry.row.raw_bytes>0).at(-1);
-    const accepted=entry?.row.keep===false&&isScientific(d)?acceptedScientificDecision(d,id,entry.row):null;
+    const accepted=entry?.row.keep===false&&isContinuation(d)?acceptedScientificDecision(d,id,entry.row):null;
     if ((!entry||entry.row.keep!==true&&!accepted)||!attempt) { failures.push({ id, verdict: entry?.row ?? null, reason: !entry ? 'missing-current-verdict' : entry.row.keep !== true ? 'fresh-rejection-or-null' : 'missing-provider-response' }); continue; }
     const judgment={id,verdict:providerBinding(root,ledgerPath,entry),attempt:providerBinding(root,attemptsPath,attempt),before_stamp:before[id]};
     if(accepted){const path=`research/${run}-judge-adjudications.jsonl`,row=jsonl(root,path).rows.filter(entry=>equal(withoutAt(entry.row),scientificAdjudication(d,authorization.raw_sha256,accepted))).at(-1);
       check(row,'native scientific decision was not appended');judgment.adjudication=providerBinding(root,path,row);}
     judgments.push(judgment);
   }
-  const payload = { version:isScientific(d)?2:1,kind:isScientific(d)?'native-physics-step6-scientific-current-judgments':'native-physics-step6-current-judgments',run,status:failures.length?'blocked':'judged',
+  const payload = { ...nativeType(d),run,status:failures.length?'blocked':'judged',
     authorization, scope: d.scope, actual_command: ['node', ...argv], startedAt, judgedAt: new Date().toISOString(),
     ledger_prefixes: [prefix(root, ledgerPath), prefix(root, attemptsPath)], judgments, failures };
   storeAuthority(root, run, payload);
@@ -570,10 +617,10 @@ export function step6CurrencyInputPaths(root, run, {live=false}={}) {
   // Durable authority embeds the exact request/reports. Live advertisements are
   // additionally sealed while preparation is active, but are not future proof.
   if (live&&existsSync(join(root, pointerRel(run)))) { selected.push(pointerRel(run)); const r = requestDocument(root, run); selected.push(r.path); }
-  const request=requestDocument(root,run);if(isScientific(request?.document)){
+  const request=requestDocument(root,run);if(isContinuation(request?.document)){
     const lineage=authorityHistory(root,run,request.document);
     for(const document of [request.document,...lineage.map(value=>value.authorization.document)])
-      if(isScientific(document)&&existsSync(join(root,document.predecessor.path)))selected.push(document.predecessor.path);
+      if(isContinuation(document)&&existsSync(join(root,document.predecessor.path)))selected.push(document.predecessor.path);
   }
   return selected.filter(path => existsSync(join(root, path)));
 }
@@ -609,7 +656,7 @@ export function makeStep6CurrencyCandidate(root, run, { preimageCommit, renderin
 export function makeStep6ScientificCurrencyCandidate(root,run,{reports,decisions,reconciliation,contextBuilder=currencyContexts}={}){
   root=resolve(root);const prior=readAuthority(root,run),old=prior.authorization.document;
   const round=scientificRound(old)+1;
-  check(prior.status==='blocked'&&Number.isSafeInteger(round)&&(prior.version===1&&round===1||prior.version===2&&round>=2),'scientific continuation needs actual ordered blocked native authority');
+  check(prior.status==='blocked'&&Number.isSafeInteger(round)&&(prior.version===1&&round===1||(prior.version===2||prior.version===3&&isMechanical(old))&&round>=2),'scientific continuation needs actual ordered blocked native authority');
   const cert=read(regular(root,old.certificate.path)),f=frontier(root,run),contexts=contextBuilder(root,f.ids),lineage=lineageForValue(root,run,prior);
   const authors=reports.map(path=>{const original=read(regular(root,path)),payload=compactCurrencyAuthorReport(original);
     return{path,raw_sha256:fileHash(join(root,path)),original_payload_sha256:digest(original),payload_sha256:digest(payload),payload};});
@@ -629,4 +676,33 @@ export function makeStep6ScientificCurrencyCandidate(root,run,{reports,decisions
   document.target_inputs=Object.fromEntries(document.scope.targets.map(id=>[id,contexts[id]]));
   const authorization={document,path:'',raw_sha256:raw(JSON.stringify(document,null,2)+'\n')};
   validateScientificDocument(root,run,cert,authorization,{live:true});return document;
+}
+
+export function makeStep6GateMechanicalCurrencyCandidate(root,run,{proposalPath,applicationPath,fixedDefectIds,contextBuilder=currencyContexts}={}){
+  root=resolve(root);const prior=readAuthority(root,run),old=prior.authorization.document;
+  check(prior.version===2&&prior.status==='complete'&&isScientific(old)&&prior.failures.length===0,'mechanical continuation needs the completed scientific authority');
+  const proposal=read(regular(root,proposalPath)),application=read(regular(root,applicationPath)),f=frontier(root,run),cert=read(regular(root,old.certificate.path)),contexts=contextBuilder(root,f.ids);
+  const authors=[proposalPath,applicationPath].map(path=>{const original=read(regular(root,path)),payload=compactCurrencyAuthorReport(original);return{path,raw_sha256:fileHash(join(root,path)),original_payload_sha256:digest(original),payload_sha256:digest(payload),payload};});
+  const eventPath=`.physics-autopilot/${run}/events.jsonl`,eventLines=readFileSync(regular(root,eventPath),'utf8').split('\n'),events=eventLines.filter(Boolean).map(JSON.parse),refs=proposal.native_failure_events;
+  const first=Math.min(...refs.map(ref=>ref.line))-1,authorizationIndex=events.slice(0,first).findLastIndex(row=>row.type==='owner-gate-authorized'),gateIndex=events.slice(authorizationIndex+1,first).findIndex(row=>row.type==='gates')+authorizationIndex+1;
+  check(authorizationIndex>=0&&gateIndex>authorizationIndex,'missing genuine final gate authorization');
+  const bindEvent=index=>nativeEventBinding(root,{path:eventPath,line:index+1,line_sha256:raw(eventLines[index]+'\n')});
+  const defectsPath='research/defect-ledger.jsonl',defects=jsonl(root,defectsPath);check(Array.isArray(fixedDefectIds)&&new Set(fixedDefectIds).size===fixedDefectIds.length&&fixedDefectIds.length===application.source_changes.length,'missing exact fixed mechanical defect IDs');
+  const fixed=defects.rows.slice(-fixedDefectIds.length);check(equal(sorted(fixed.map(row=>row.row.defect_id)),sorted(fixedDefectIds)),'mechanical defects are not the exact native ledger tail');
+  const beforeBytes=Buffer.from(defects.bytes.toString('utf8').split('\n').slice(0,defects.rows.length-fixed.length).join('\n')+(defects.rows.length>fixed.length?'\n':''));
+  const metadataPaths=[...new Set([...old.historical_metadata.map(row=>row.path),...application.metadata_changes.map(row=>row.path)])];
+  const reconciliation={run,reviewer:'/root',source_changes:application.source_changes,metadata_changes:metadataPaths.map(path=>({path,changed_pointers:application.metadata_changes.find(row=>row.path===path)?.changed_pointers??[]})),consumer_decisions:application.consumer_decisions??[]};
+  const changed=new Set(application.source_changes.map(row=>row.path.slice(6,-3))),scope=scientificScope(root,run,cert,contexts,{changed,predecessor:prior});
+  const carried=prior.judgments.filter(row=>{if(!scope.targets.includes(row.id))return false;const now=contexts[row.id],input=old.target_inputs[row.id];
+    if(now.item_sha256!==row.verdict.row.item_sha256||now.context_sha256!==row.after_stamp_context_sha256||now.other_prompt_inputs_sha256!==input.other_prompt_inputs_sha256)return false;
+    try{currentStampDelta(readFileSync(join(root,'items',row.id+'.md'),'utf8'),row);return true;}catch{return false;}});
+  const providerTargets=scope.targets.filter(id=>!carried.some(row=>row.id===id));check(providerTargets.length>0,'no genuinely stale mechanical judgment targets');
+  const document={version:1,kind:'physics-step6-final-gate-mechanical-current-judgments',currency_episode:scientificRound(old)+1,run,reviewer:'/root',stage:'6-final-validation-v3',lineup:'luna',effort:'max',preimage_commit:old.preimage_commit,certificate:old.certificate,frontier_sha256:f.sha256,
+    predecessor:{path:`research/${run}-step6-currency-complete-${fileHash(join(root,authorityRel(run))).slice(0,16)}.json`,raw_sha256:fileHash(join(root,authorityRel(run))),payload_sha256:prior.sha256},authors,decisions:[],inherited_adjudications:inheritedAdjudications(prior),
+    mechanical:{proposal_path:proposalPath,application_path:applicationPath,authorization:bindEvent(authorizationIndex),gate_start:bindEvent(gateIndex),failures:refs.map(ref=>nativeEventBinding(root,ref)),
+      defects_before:{path:defectsPath,bytes:beforeBytes.length,rows:defects.rows.length-fixed.length,sha256:raw(beforeBytes)},fixed_defects:fixed.map(row=>providerBinding(root,defectsPath,row))},
+    reconciliation,historical_metadata:metadataPaths.map(path=>{const before=gitBytes(root,old.preimage_commit,path),after=readFileSync(regular(root,path));return{path,before_sha256:raw(before),after_sha256:raw(after),changed_pointers:metadataScalarDifferences(JSON.parse(before),JSON.parse(after))};}),
+    ledger_baseline:old.ledger_baseline,attempts_baseline:old.attempts_baseline,adjudications_baseline:prefix(root,`research/${run}-judge-adjudications.jsonl`),defects_baseline:prefix(root,defectsPath),scope,
+    carried_judgments:carried,provider_targets:providerTargets,current_inputs:Object.fromEntries(scope.targets.map(id=>[id,contexts[id]])),target_inputs:Object.fromEntries(scope.targets.map(id=>[id,carried.some(row=>row.id===id)?old.target_inputs[id]:contexts[id]]))};
+  validateScientificDocument(root,run,cert,{document,path:'',raw_sha256:raw(JSON.stringify(document,null,2)+'\n')},{live:true});return document;
 }

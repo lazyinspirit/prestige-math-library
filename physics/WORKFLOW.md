@@ -1508,6 +1508,18 @@ adjudication bindings for exact unchanged provider tuples. Current responses are
 reused, changed contexts receive fresh judgments, and every new rejection still
 blocks for actual owner resolution. No continuation starts automatically.
 
+After completed scientific coverage, an actual failed final precheck or provenance
+gate may require mechanical source/contract repairs. Root can advertise a separate
+`physics-step6-final-gate-mechanical-current-judgments` request bound to the actual
+authorized battery events, exact guarded proposal/application, and native fixed
+mechanical defect rows. The native preparation unit archives the COMPLETE authority
+unchanged; this route creates no scientific rejection or adjudication. Unlisted
+sources, pages and metadata remain guarded. Genuine completed judgments carry only
+when current item/other-prompt inputs and authenticated post-stamp context match;
+all stale subjects receive actual current Luna/max judgments. A fresh rejection
+blocks and remains eligible for the ordinary per-escalation scientific repair
+route. Native stamp checks, fresh preparation and the full final battery remain.
+
 ## Pre-gate recertification
 
 An owner finding-alias receipt may also bind an exact location-only variant
