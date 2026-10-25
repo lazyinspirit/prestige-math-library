@@ -40,8 +40,7 @@ export function verifyPackagingHistory(state: any, prepared: any, events: any[],
   if (prepared.version !== 1 || prepared.run !== run || prepared.physics !== true
     || prepared.kind !== 'actual-step6-format-metadata-preparation' || prepared.validationStage !== VALIDATION
     || prepared.mathematical_review !== false || prepared.gate_pass_created !== false
-    || prepared.gates?.length !== 29 || new Set(prepared.gates.map((g: any) => g.id)).size !== 29
-    || prepared.gates.some((g: any) => g.required !== true)
+    || prepared.gates?.length !== 29 || prepared.gates.some((g: any) => g.required !== true)
     || prepared.gateInventorySha256 !== hash(JSON.stringify(prepared.gates))
     || prepared.source?.sha256 !== hash(JSON.stringify(prepared.source?.tree))) fail('invalid original preparation seal/inventory');
   let start = -1;

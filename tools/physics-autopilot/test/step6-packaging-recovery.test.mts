@@ -37,6 +37,23 @@ test('authenticates all 29 actual results and the precise failed pre-ref sequenc
   const f = history(), before = JSON.stringify(f), result = verifyPackagingHistory(f.state, f.prepared, f.events, 'demo');
   assert.equal(result.failed_attempts.length, 1); assert.equal(JSON.stringify(f), before);
 });
+test('ordered 29-entry native inventory retains repeated proof-layout gate IDs', () => {
+  const f = history();
+  // Native write/verify checks legitimately share IDs, while argv and order remain sealed.
+  for (const [i, id, mode] of [[7, 'proof-step-separation', '--write'], [8, 'proof-blue-tags', '--write'],
+    [24, 'proof-step-separation', '--verify'], [25, 'proof-blue-tags', '--verify']] as const) {
+    f.prepared.gates[i] = { id, argv: ['proof-layout', mode], required: true };
+    f.events[i + 1].id = id;
+  }
+  f.prepared.gateInventorySha256 = hash(JSON.stringify(f.prepared.gates));
+  assert.equal(new Set(f.prepared.gates.map(g => g.id)).size, 27);
+  assert.equal(verifyPackagingHistory(f.state, f.prepared, f.events, 'demo').failed_attempts.length, 1);
+  const swapped = structuredClone(f.events);
+  [swapped[8], swapped[9]] = [swapped[9], swapped[8]];
+  assert.throws(() => verifyPackagingHistory(f.state, f.prepared, swapped, 'demo'), /battery incomplete/);
+  f.prepared.gates[24].argv = ['proof-layout', '--write'];
+  assert.throws(() => verifyPackagingHistory(f.state, f.prepared, f.events, 'demo'), /seal\/inventory/);
+});
 for (const [name, mutate] of [
   ['missing gate', (f: any) => f.events.splice(3, 1)],
   ['false gate', (f: any) => { f.events[3].ok = false; }],
