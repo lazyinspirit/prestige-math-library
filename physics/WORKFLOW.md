@@ -1523,6 +1523,10 @@ That immediate scientific continuation retains the mechanical parent's genuine
 post-stamp coverage using the same exact carry checks and original provider
 contexts. Its sweep omits carried subjects and still reuses any exact-current
 responses among the remaining targets; a repair never refreshes an old verdict.
+Pending physics currency schedules the existing native final-preparation tool
+through the executor before handoff continues. It never runs judgment/stamping
+inline without that tracked dispatch. Failed native attempts hold until native
+retry re-arms them; pause, writer/adoption guards and the full gate barrier remain.
 
 ## Pre-gate recertification
 

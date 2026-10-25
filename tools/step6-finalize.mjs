@@ -138,9 +138,23 @@ export async function prepareFinal(root, run, { physics = false } = {}) {
 export async function prepareFinalIfChanged({ ctx, executor, stage, physics = false }) {
   if (ctx.doctor || stage.id !== VALIDATED_STAGE || executor.state.paused
     || executor.inflight.size || executor.liveDispatchLabels().length
+    || physics && executor.hasAdoptedWork?.(stage)
     || !executor.stageStatus(stage, ctx).unitsDone || executor.state.data.stages[stage.id]?.gatesPassedAt) return;
   const root = ctx.repo, run = ctx.run, key = `${root}\0${run}\0${physics}`;
   registerStateDirectory(root, run, { physics, stateDir: ctx.config?.stateDir ?? ctx.stateDir });
+  if (physics && (await import('./physics-support/step6-currency-repair.mjs')).step6CurrencyPending(root, run)) {
+    const dispatch = executor.state.data.dispatches?.[`${stage.id}:step6-prepare-final-v3`];
+    if (dispatch?.startedAt && !dispatch.endedAt)
+      throw Error('Pending physics currency requires the active native preparation to drain');
+    if (dispatch?.lastExitOk === false && dispatch.attempts !== 0)
+      throw Error('Native final preparation failed; resolve its failure and use native retry before restarting');
+    const plans = await stage.plan(ctx, ['all']);
+    if (!Array.isArray(plans) || plans.length !== 1 || plans[0].role !== 'tool'
+      || plans[0].label !== 'step6-prepare-final-v3' || JSON.stringify(plans[0].covers) !== '["all"]')
+      throw Error('Pending physics currency requires the exact native final preparation plan');
+    if (!executor.start(stage, plans[0])) throw Error('Native final preparation dispatch was refused');
+    return;
+  }
   const path = preparedPath(root, run, physics);
   let cert = readJSON(path);
   const round = executor.state.data.stages[stage.id]?.fixRounds ?? 0;
