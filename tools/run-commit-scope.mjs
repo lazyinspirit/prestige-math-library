@@ -504,6 +504,16 @@ function nativeProtectedPathClosure(root, run, inventory, seeds) {
       const record = JSON.parse(document);
       const finalReceipt = /^research\/([a-zA-Z0-9][a-zA-Z0-9_-]*)-dispatch\/tool-step6-finalize-v3\.result\.json$/.exec(path);
       if (finalReceipt) {
+        if (record?.transaction_pending === true) {
+          if (record.run !== run || record.run !== finalReceipt[1] || record.role !== 'tool'
+            || record.label !== 'step6-finalize-v3' || record.ok !== false
+            || !Array.isArray(record.covers) || record.covers.length !== 1 || record.covers[0] !== 'all'
+            || typeof record.before_head !== 'string' || !/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(record.before_head))
+            throw Error('closeout: invalid native pending final receipt: ' + path);
+          // The current transaction has not created coverage or an inventory.
+          // Every provisional field remains an ordinary structured reference.
+          visit(record); continue;
+        }
         if (record?.run !== finalReceipt[1] || record.role !== 'tool' || record.label !== 'step6-finalize-v3'
           || record.written_by !== 'step6-finalize' || record.ok !== true || record.closeout_scope?.version !== 2
           || !Array.isArray(record.closeout_scope.owned_paths) || !record.closeout_scope.owned_paths.every(value => typeof value === 'string'))

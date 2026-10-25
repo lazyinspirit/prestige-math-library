@@ -2083,3 +2083,42 @@ is preserved, its post carrier remains the repair comparison basis, and the item
 requires a full current refuter read. Separate touched and reader obligations,
 ledger closure, ordinary source ownership and all gates remain mandatory.
 The receipt grants routing only and never certifies scientific acceptance.
+
+### Native v3 packaging recovery after a pre-ref receipt refusal
+
+`recover-step6-packaging` is a narrow physics compact-v3 transition for the
+exact `invalid native final-receipt inventory` failure of the native finalizer.
+It requires a paused run, a stopped controller and drained dispatches, the
+original completed 29-gate battery and preparation seal, an absent final receipt
+and index lock, and an owner-authorized committed packaging-only successor.
+It refuses a landed content commit, scientific/context drift, an unrelated
+finalizer error, uncommitted tooling, or a changed gate inventory. It does not
+infer or manufacture a pending-receipt observation.
+
+Place the authorization inside the run's ignored state directory. It contains
+`version: 1`, `kind: physics-v3-packaging-recovery`, `run`,
+`authorized_by: owner`, a substantive `authorization`, the explicitly observed
+`passed_head`, the new committed `tooling_head`, exact `failed_attempts`
+(`dispatch` and `failure` event objects), and `packaging_changes`. Each change
+names a Git-root-relative `path`, its original prepared `before_seal` (null
+only for a new file), and committed `after_seal`, both SHA256 of `file\0` plus
+the exact bytes. The fixed allowlist comprises the pending-receipt helper,
+its test/documentation, and the physics recovery helper/CLI/test/WORKFLOW.
+The Git path `physics/WORKFLOW.md` maps to prepared key `WORKFLOW.md`.
+Every existing old blob must match both the explicitly observed passed HEAD
+and the genuine preparation seal; the publication baseline is a separate ref.
+
+```sh
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts recover-step6-packaging --run RUN --state-dir .physics-autopilot/RUN --authorization .physics-autopilot/RUN/supervision/packaging-authorization.json --inspect
+```
+
+Copy the returned `guards` into that authorization, then issue the same command
+without `--inspect`. Inspection is read-only. Application acquires the native
+controller lock, rechecks all guards, archives genuine state/events/preparation
+and retired coverage as immutable `.snapshot`/`.record` evidence, and clears
+only final-validation/finalization coverage and their active preparation files.
+Earlier stages, scientific sources, judgments and original event history are
+preserved. The run remains paused at `6-final-validation-v3`; native start/resume
+must perform fresh metadata/render preparation and all 29 gates before another
+report/commit attempt. Archived passes never supply current coverage. Recovery
+itself runs no models or gates, commits nothing, and neither publishes nor pushes.

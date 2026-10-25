@@ -41,6 +41,7 @@ import { writeBatchDependencyLevels } from '../../physics-support/batch-dependen
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
 import { reopenStep3 } from '../src/step3-reopen.mts';
+import { inspectStep6PackagingRecovery, recoverStep6Packaging } from '../src/step6-packaging-recovery.mts';
 import type { Config } from '../src/types.mts';
 import { readStatementPolicy, isFreshStatementRun, writeStatementPolicy } from '../../statement-first-policy.mjs';
 
@@ -242,6 +243,17 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
+  case 'recover-step6-packaging': {
+    const run = opt('run') ?? die('--run is required');
+    const authorization = opt('authorization') ?? die('--authorization is required');
+    const config = loadConfig();
+    const options = { repo, run, stateDir: opt('state-dir') ? stateDir : join(repo, '.physics-autopilot', run),
+      dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`), authorizationPath: resolve(repo, authorization) };
+    try {
+      console.log(JSON.stringify(has('inspect') ? inspectStep6PackagingRecovery(options).guards : recoverStep6Packaging(options), null, 2));
+    } catch (error: any) { console.error(String(error?.message ?? error)); process.exitCode = 1; }
+    break;
+  }
   case 'init': {
     const { importMathematics } = await import('../../physics-support/physics-imports.mjs');
     const receipt = importMathematics(repo, resolve(opt('math-repo', join(HERE, '../../..'))));

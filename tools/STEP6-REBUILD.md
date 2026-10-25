@@ -403,6 +403,14 @@ before treating only that field as metadata. Every other field still traverses
 strictly. A genuine input reference to the same raw capture or operational link
 remains authoritative and receives no inventory exemption.
 
+During the current run's isolated v3 commit, the same final path temporarily
+contains the native provisional shape: matching run/role/label, `covers: [all]`,
+`ok: false`, `transaction_pending: true`, and a valid `before_head` object ID.
+It receives ordinary complete structured traversal, without any inventory
+exemption or success authority. The transaction's second preflight must accept
+that false pending carrier; only the fully checked transaction materializes the
+separate successful receipt. Foreign or malformed pending receipts still fail.
+
 Proof-layout receipt scope uses the mathematical item grammar from SCHEMA.md:
 known lowercase kind prefixes and case-sensitive ASCII alphanumeric segments.
 Existing mixed-case IDs remain exact filenames and manifest identities; no

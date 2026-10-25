@@ -8,7 +8,7 @@ import { preflightCloseoutScope, operationalContextState, captureOutsidePreserva
   assertOutsidePreservationSame } from './run-commit-scope.mjs';
 import { sha256 } from './step6-lib.mjs';
 import { ownedStep6Paths } from './step6-owned-inputs.mjs';
-import { preflightStep6 } from './step6-commit.mjs';
+import { preflightStep6, commitStep6 } from './step6-commit.mjs';
 
 const run = 'fixture';
 function fixture(t, { legacy = false } = {}) {
@@ -295,6 +295,65 @@ test('a final-receipt lookalike has no typed inventory exemption', t => {
   const f = fixture(t), g = finalReceiptInventory(f), copy = g.path.replace('.result.json', '.result-copy.json');
   f.json(copy, g.record); f.json('research/fixture-step6-evidence.json', { input_sha256: { [copy]: 'hash' } });
   assert.throws(f.scope, SyntaxError);
+});
+
+function pendingFinalReceipt(f) {
+  const path = 'research/fixture-dispatch/tool-step6-finalize-v3.result.json';
+  const record = { role: 'tool', label: 'step6-finalize-v3', run, covers: ['all'], ok: false,
+    transaction_pending: true, before_head: f.git(['rev-parse', 'HEAD']).trim() };
+  const save = () => f.json(path, record); save(); return { path, record, save };
+}
+
+test('current native provisional receipt stays false and traverses without a success inventory', t => {
+  const f = fixture(t), g = pendingFinalReceipt(f), before = readFileSync(join(f.root, g.path));
+  assert.ok(f.scope().paths.includes(g.path)); assert.equal(JSON.parse(before).ok, false);
+  assert.deepEqual(readFileSync(join(f.root, g.path)), before);
+});
+
+for (const field of ['run', 'role', 'label', 'covers', 'ok', 'before_head']) {
+  test('malformed provisional final receipt remains rejected: ' + field, t => {
+    const f = fixture(t), g = pendingFinalReceipt(f);
+    g.record[field] = field === 'covers' ? ['all', 'foreign'] : field === 'ok' ? true : 'invalid';
+    g.save(); assert.throws(f.scope, /invalid native pending final receipt/);
+  });
+}
+
+test('foreign provisional final receipt cannot use current transaction handling', t => {
+  const f = fixture(t), g = pendingFinalReceipt(f), path = 'research/foreign-dispatch/tool-step6-finalize-v3.result.json';
+  f.json(path, { ...g.record, run: 'foreign' });
+  f.json('research/fixture-step6-evidence.json', { actual: { path } });
+  assert.throws(f.scope, /invalid native pending final receipt/);
+});
+
+for (const reference of ['input-map', 'nested', 'inventory-lookalike', 'operational-link']) {
+  test('provisional final receipt preserves strict ' + reference + ' references', t => {
+    const f = fixture(t), g = pendingFinalReceipt(f), raw = 'research/fixture-history/provisional-raw.json';
+    f.put(raw, 'actual raw output, never a structured source');
+    if (reference === 'input-map') g.record.input_sha256 = { [raw]: 'hash' };
+    if (reference === 'nested') g.record.actual = { path: raw };
+    if (reference === 'inventory-lookalike') g.record.closeout_scope = { owned_paths: [raw] };
+    if (reference === 'operational-link') g.record.actual = { path: f.link };
+    g.save(); assert.throws(f.scope, reference === 'operational-link' ? /symlink in owned path|authoritative input/ : SyntaxError);
+  });
+}
+
+test('actual commit transaction re-preflights its pending receipt before creating successful native coverage', t => {
+  const f = fixture(t);
+  // Packaging fixture only: these do not assert scientific/native gate passes.
+  for (const suffix of ['proof-layout.json', 'step6-evidence.json', 'step6-report.response.json', 'pathway-closure.json', 'judge-closure.json'])
+    f.json('research/fixture-' + suffix, {});
+  f.json('research/fixture-publication-readiness.json', { schema: 2, run, protected_tree_scope: 'frontier-prerequisite-context-v1', protected_tree_paths: [], protected_tree_projections: [] });
+  f.json('research/fixture-step6-report-integrity.json', { version: 2, run, scope: 'frontier-prerequisite-report-v2', protected_tree: {}, selectors: { owned_paths: [], projections: [] } });
+  f.put('research/fixture-step6-report.md', '# Exact packaging fixture\n');
+  const receipt = join(f.root, 'research/fixture-dispatch/tool-step6-finalize-v3.result.json'); let assertions = 0;
+  const result = commitStep6(f.root, run, { assertValidated() {
+    assertions++; const pending = JSON.parse(readFileSync(receipt, 'utf8'));
+    assert.equal(pending.ok, false); assert.equal(pending.transaction_pending, true);
+    assert.equal(pending.closeout_scope, undefined); assert.equal(pending.written_by, undefined);
+  } });
+  assert.equal(assertions, 1); assert.equal(f.git(['rev-parse', 'HEAD']).trim(), result.commit);
+  const completed = JSON.parse(readFileSync(receipt, 'utf8'));
+  assert.equal(completed.ok, true); assert.equal(completed.closeout_scope.version, 2); assert.equal(completed.transaction_pending, undefined);
 });
 
 test('foreign pre-scoped readiness remains unchanged structured context without acquiring ownership', t => {
