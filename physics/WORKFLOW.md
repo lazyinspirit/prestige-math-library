@@ -1489,16 +1489,24 @@ reports, native provider responses, adjudications and defect ownership, retainin
 verification after ignored supervision state is removed. Fresh metadata/render
 preparation and the ordinary full final battery remain required.
 
-The actual rejection-resolution route permits at most two scientific repair
-rounds. A second request names the blocked first scientific authority as its
-immutable predecessor, uses separate actual owner reports and covers exactly
-that sweep's new failed tuples. First-round source after-guards become the next
-baseline; the original certificate and both blocked authority archives remain
-bound. Historical adjudication and defect segments are authenticated to their
-captured append-only boundaries. Previously accepted rejections are inherited
-only through their genuine native adjudication bindings for exact unchanged
-provider tuples. Current responses are reused, changed contexts receive fresh
-judgments, and a further rejection blocks without an automatic third round.
+The two-cycle limit applies to each escalation, not to the build's number of
+scientific judgment episodes. A newly advertised continuation names the actual
+blocked predecessor, separate owner reports, and exactly its failed tuples.
+Each new disposition supplies an escalation ID, repair cycle 1 or 2, and an
+evidenced comparison against every historical decision for the same item. A
+distinct issue starts cycle 1 with a new ID only when all comparisons classify
+the prior issues as distinct. A follow-up retains the prior issue ID and advances
+cycle 1 to cycle 2; a third cycle for that issue blocks. Existing immutable
+decisions receive stable derived legacy IDs without rewriting their bytes.
+
+The archive chain must be complete, hash-bound and strictly ordered back to the
+original rendering authority. Source after-guards are folded forward through all
+episodes; historical adjudication and defect segments are authenticated to their
+captured boundaries without requiring historical sources to remain current.
+Previously accepted rejections are inherited only through genuine native
+adjudication bindings for exact unchanged provider tuples. Current responses are
+reused, changed contexts receive fresh judgments, and every new rejection still
+blocks for actual owner resolution. No continuation starts automatically.
 
 ## Pre-gate recertification
 

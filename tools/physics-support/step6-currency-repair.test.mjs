@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { makeStep6CurrencyCandidate, beginStep6CurrencyRepair, finishStep6CurrencyRepair, verifyStep6CurrencyAuthority,
-  verifyStep6HistoricalMetadata, step6CurrencyInputPaths, step6CurrencyPending, currencyContexts, verifyStep6CurrencyForStamps, compactCurrencyAuthorReport, makeStep6ScientificCurrencyCandidate } from './step6-currency-repair.mjs';
+  verifyStep6HistoricalMetadata, step6CurrencyInputPaths, step6CurrencyPending, currencyContexts, verifyStep6CurrencyForStamps, compactCurrencyAuthorReport, makeStep6ScientificCurrencyCandidate, step6ScientificEscalationHistory } from './step6-currency-repair.mjs';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
 import { freezeFrontier } from './step5-rounds.mjs';
 import { verifyCertification } from './step5-workflow.mjs';
@@ -196,17 +196,64 @@ test('second scientific round preserves both blocked authorities and inherits on
 });
 
 for(const[name,mutate]of[
-  ['third scientific round',d=>d.scientific_round=3],
+  ['noncontiguous scientific episode',d=>d.scientific_round=4],
   ['dropped inherited adjudication',d=>d.inherited_adjudications=[]],
   ['forged inherited context',d=>d.inherited_adjudications[0].rejected_tuple.context_sha256='0'.repeat(64)],
   ['forged old decision boundary',d=>d.adjudications_baseline.rows--],
   ['old pre-render source guard',d=>d.reconciliation.source_changes[0].before_guard='0'.repeat(64)],
 ])test('second scientific round rejects '+name,t=>{const f=secondScientificFixture(t),d=f.build();mutate(d);f.advertiseScientific(d);assert.throws(f.begin);});
 
-test('a new round-2 rejection blocks and cannot start a third scientific round',t=>{
-  const f=secondScientificFixture(t),d=f.build();f.advertiseScientific(d);assert.throws(()=>f.begin({sweep:f.respond(()=>false)}),/rejected/);
-  assert.throws(f.build,/limited to two/);
+test('a new round-2 rejection blocks and needs explicit per-issue provenance to continue',t=>{
+  const f=secondScientificFixture(t),d=f.build();f.advertiseScientific(d);assert.throws(()=>f.begin({sweep:f.respond(id=>id!==f.ids[0])}),/rejected/);
+  assert.throws(f.build,/missing explicit per-escalation repair bound/);
 });
+
+function laterScientificFixture(t,options){
+  const f=secondScientificFixture(t,options),second=f.build();f.advertiseScientific(second);
+  assert.throws(()=>f.begin({sweep:f.respond(id=>id!==f.ids[0])}),/rejected/);
+  const blockedSecond=readFileSync(f.authorityPath),path='items/'+f.ids[0]+'.md',absolute=join(f.root,path),before=readFileSync(absolute,'utf8');
+  writeFileSync(absolute,before.replace('specified nonempty finite carrier','specified nonempty finite carrier with a selected basepoint'));
+  const after=readFileSync(absolute,'utf8'),metadata=JSON.parse(readFileSync(f.metadataPath));metadata[0].items[0].statement=after.split('## Definition\n')[1].trim();f.save(f.metadataPath,metadata);
+  const report=relative(f.root,join(f.supervision,'science-episode3.json'));f.save(join(f.root,report),{run:f.run,findings:[{id:f.ids[0],review:'New independent basepoint issue, distinct from finite and nonempty carrier conditions.'}],consumers:[{id:f.ids[1],review:'Rechecked actual changed supplier.'}]});
+  const history=step6ScientificEscalationHistory(f.root,f.run),sameItem=history.filter(row=>row.id===f.ids[0]);
+  const decision={...f.inputs.decisions[0],escalation_id:'demo-new-basepoint-issue',repair_cycle:1,
+    prior_same_item:sameItem.map(old=>({authorization_sha256:old.authorization_sha256,rejected_tuple:old.rejected_tuple,relation:'distinct_issue',reason:'Basepoint selection is distinct from the earlier finite and nonempty carrier conditions.',report_path:report,report_pointer:'/findings/0'})),
+    reason:'Actual independent basepoint issue repaired.',report_path:report,report_pointer:'/findings/0',ledger_row:{...f.inputs.decisions[0].ledger_row,defect_id:'demo-basepoint-episode3',correction:'Supplied selected basepoint.'}};
+  const inputs={reports:[report],decisions:[decision],reconciliation:{run:f.run,reviewer:'/root',source_changes:[{path,before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),before_judge_sha256:itemHashJudge(before),after_judge_sha256:itemHashJudge(after),interface_changed:true,report_path:report,report_pointer:'/findings/0'}],
+    metadata_changes:f.inputs.reconciliation.metadata_changes,consumer_decisions:f.inputs.reconciliation.consumer_decisions.map(row=>({...row,report_path:report,report_pointer:'/consumers/0'}))}};
+  return{...f,second,blockedSecond,history,sameItem,inputs,build:()=>makeStep6ScientificCurrencyCandidate(f.root,f.run,{...inputs,contextBuilder:f.contextBuilder})};
+}
+
+test('distinct new escalation continues past two episodes with full immutable history and real current judgments',t=>{
+  const f=laterScientificFixture(t,{realContexts:true}),d=f.build();assert.equal(d.scientific_round,3);assert.equal(f.sameItem.length,2);
+  assert.ok(f.sameItem.every(row=>row.escalation_id.startsWith('legacy-step6-')&&row.repair_cycle===1));
+  f.advertiseScientific(d);const judged=f.begin({sweep:f.respond(()=>true)});assert.equal(judged.status,'judged');
+  assert.deepEqual(readFileSync(join(f.root,d.predecessor.path)),f.blockedSecond);assert.deepEqual(readFileSync(join(f.root,f.second.predecessor.path)),f.blockedFirst);
+  f.applyStamps(d.scope.targets.filter(id=>id!==f.ids[3]));f.finish();assert.equal(f.verify().status,'complete');
+  const history=step6ScientificEscalationHistory(f.root,f.run),newIssue=history.find(row=>row.escalation_id==='demo-new-basepoint-issue');assert.equal(newIssue.repair_cycle,1);
+  assert.ok(step6CurrencyInputPaths(f.root,f.run).includes(f.first.predecessor.path));
+  rmSync(join(f.root,'.physics-autopilot'),{recursive:true});assert.equal(f.verify().status,'complete');verifyStep6HistoricalMetadata(f.root,f.run,f.certificate);
+});
+
+test('same escalation permits cycle 2 but rejects a third repair cycle without resetting identity',t=>{
+  const f=laterScientificFixture(t),issue=f.sameItem.at(-1);f.inputs.decisions[0].escalation_id=issue.escalation_id;f.inputs.decisions[0].repair_cycle=2;
+  f.inputs.decisions[0].prior_same_item.at(-1).relation='same_issue';
+  const d=f.build();f.advertiseScientific(d);assert.throws(()=>f.begin({sweep:f.respond(id=>id!==f.ids[0])}),/rejected/);
+  const history=step6ScientificEscalationHistory(f.root,f.run).filter(row=>row.id===f.ids[0]);
+  f.inputs.decisions[0].prior_same_item=history.map(old=>({authorization_sha256:old.authorization_sha256,rejected_tuple:old.rejected_tuple,
+    relation:old.escalation_id===issue.escalation_id?'same_issue':'distinct_issue',reason:'Actual explicit issue comparison.',report_path:f.inputs.reports[0],report_pointer:'/findings/0'}));
+  assert.throws(f.build,/limited to two review-repair cycles/);
+});
+
+for(const[name,mutate]of[
+  ['missing prior same-item comparison',f=>f.inputs.decisions[0].prior_same_item.pop()],
+  ['duplicate prior comparison',f=>f.inputs.decisions[0].prior_same_item[1]=f.inputs.decisions[0].prior_same_item[0]],
+  ['new-ID reset of the same issue',f=>f.inputs.decisions[0].prior_same_item[0].relation='same_issue'],
+  ['reused legacy ID as a new issue',f=>f.inputs.decisions[0].escalation_id=f.sameItem[0].escalation_id],
+  ['cycle jump for an unrecognized issue',f=>f.inputs.decisions[0].repair_cycle=2],
+  ['comparison without actual report evidence',f=>f.inputs.decisions[0].prior_same_item[0].report_pointer='/absent'],
+  ['missing old authority archive',f=>rmSync(join(f.root,f.first.predecessor.path))],
+])test('per-escalation continuation rejects '+name,t=>{const f=laterScientificFixture(t);mutate(f);assert.throws(f.build);});
 
 test('round-2 context drift cannot inherit an old false-positive acceptance',t=>{
   const f=secondScientificFixture(t),path='items/'+f.ids[3]+'.md',absolute=join(f.root,path),before=readFileSync(absolute,'utf8');
