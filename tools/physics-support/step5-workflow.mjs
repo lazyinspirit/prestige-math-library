@@ -28,6 +28,7 @@ const HISTORICAL_MANIFEST_URL=new URL('./step5-historical-manifest.mjs',import.m
 const {historicalManifestEvidence,validateCurrentHistoricalManifestGate}=await import(HISTORICAL_MANIFEST_URL.href+'?v='+HISTORICAL_MANIFEST_STAT.mtimeMs+':'+HISTORICAL_MANIFEST_STAT.size);
 const INITIAL_METADATA_URL=new URL('./step5-initial-metadata-transition.mjs',import.meta.url),INITIAL_METADATA_STAT=statSync(INITIAL_METADATA_URL);
 const {initialMetadataTransition}=await import(INITIAL_METADATA_URL.href+'?v='+INITIAL_METADATA_STAT.mtimeMs+':'+INITIAL_METADATA_STAT.size);
+import { verifyStep6HistoricalMetadata } from './step6-currency-repair.mjs';
 // The live controller may have loaded an earlier helper during owner review.
 const INHERITED_REPAIR_URL=new URL('./step5-inherited-repair.mjs',import.meta.url);
 const INHERITED_REPAIR_STAT=statSync(INHERITED_REPAIR_URL);
@@ -1473,7 +1474,10 @@ function readCertification(root,run,{allowMissing=true}={}) {
 
 export function verifyCertification(root,run,options={}) {
   const row=readCertification(root,run,options);
-  if(row)verifyHistoricalEvidence(root,run,row.evidence);
+  if(row){
+    if(options.step6HistoricalMetadata===true)verifyStep6HistoricalMetadata(root,run,row);
+    else verifyHistoricalEvidence(root,run,row.evidence);
+  }
   return row;
 }
 

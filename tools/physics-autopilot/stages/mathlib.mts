@@ -37,6 +37,7 @@ import {authoredMetadataReviewInputs} from '../../physics-support/step2-authored
 import {prerequisiteLifecycleBinding} from '../../physics-support/step2-prerequisite-lifecycle.mjs';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
 import { originalJudgeLineup } from '../../physics-support/original-judge-lineup.mjs';
+import { step6CurrencyPending } from '../../physics-support/step6-currency-repair.mjs';
 import { prepareFinalIfChanged } from '../../physics-support/step6-finalize.mjs';
 import { assertFreshStep6State } from '../../step6-prepared.mjs';
 
@@ -1566,7 +1567,8 @@ export const stages = [
     pattern: resultPattern('tool', 'step6-prepare-final-v3'), concurrency: 1,
     artifacts: (ctx) => [`research/${ctx.run}-publication-readiness.json`, `research/${ctx.run}-step6-evidence.json`,
       `research/${ctx.run}-step6-report-integrity.json`],
-    plan: (ctx) => [{ role: 'tool', label: 'step6-prepare-final-v3', job: 'bookkeeping-mechanical', covers: ['all'],
+    plan: (ctx) => [{ role: 'tool', label: 'step6-prepare-final-v3', job: step6CurrencyPending(ctx.repo,ctx.run)?'judgement':'bookkeeping-mechanical', covers: ['all'],
+      ...(step6CurrencyPending(ctx.repo,ctx.run)?{timeout:43200}:{}),
       argv: ['node', step6Helper, 'prepare-final', '--run', ctx.run] }],
     // The helper owns a memo on actual selected-source fingerprint and repair
     // round. No repeated renderer/recertification work occurs on quiet ticks.

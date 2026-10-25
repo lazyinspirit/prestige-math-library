@@ -2,11 +2,14 @@
 import { basename } from 'node:path';
 import { verifyCertification } from './step5-workflow.mjs';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
+import { hasStep6CurrencyRepair, verifyStep6CurrencyForStamps } from './step6-currency-repair.mjs';
 
 export function loadStep5ClosureCertification(root, run, ledgerPath = '') {
   const inferred = run || (/^(.+)-judge\.jsonl$/.exec(basename(ledgerPath))?.[1]);
   if (!inferred) return null;
-  const certificate = verifyCertification(root, inferred);
+  const step6 = hasStep6CurrencyRepair(root, inferred);
+  const certificate = verifyCertification(root, inferred, {step6HistoricalMetadata:step6});
+  if(step6&&certificate)verifyStep6CurrencyForStamps(root,inferred,certificate);
   // Initial certification is the input to the first mandatory judge round.
   return certificate && ['impact-repeat', 'gate'].includes(certificate.phase)
     ? certificate : null;

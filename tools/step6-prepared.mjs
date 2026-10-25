@@ -8,6 +8,7 @@ import { scopedReadinessTree } from './step6-scoped-tree.mjs';
 import { ownedStep6Paths } from './step6-owned-inputs.mjs';
 import { runScope } from './step6-lib.mjs';
 import { prepareRenderingQuality, renderingQualityRuntimeState, renderingQualityPath } from './rendering-quality.mjs';
+import { step6CurrencyInputPaths } from './physics-support/step6-currency-repair.mjs';
 
 export const digest = value => createHash('sha256').update(value).digest('hex');
 export const readJSON = file => JSON.parse(readFileSync(file, 'utf8'));
@@ -51,9 +52,11 @@ export function sourceState(root, run, { physics = false, includeDerived = true 
     delete tree[`research/${run}-${suffix}`];
   const rendering = renderingQualityRuntimeState(root, run);
   Object.assign(tree, rendering.tree);
+  const currencyInputs=physics?step6CurrencyInputPaths(root,run,{live:true}):[];
+  for(const path of currencyInputs)tree[path]=digest(readFileSync(join(root,path)));
   return { tree, sha256: digest(JSON.stringify(tree)),
     physicalPaths: [...new Set([...native.protected_tree_paths, ...rendering.physicalPaths,
-      ...Object.keys(tree).filter(path => !path.includes('#') && !path.startsWith('@rendering-quality'))])].sort() };
+      ...currencyInputs,...Object.keys(tree).filter(path => !path.includes('#') && !path.startsWith('@rendering-quality'))])].sort() };
 }
 export function gateInventory(gates) {
   return gates.map(gate => ({ id: gate.id, argv: typeof gate.argv === 'function' ? gate.argv() : [...gate.argv],

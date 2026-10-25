@@ -102,12 +102,22 @@ export async function prepareFinal(root, run, { physics = false } = {}) {
     (await import(prefix + 'original-judge-lineup.mjs')).originalJudgeLineup({ repo: root, run }) } : {};
   const { runPages } = await import(prefix + 'item-dependency-levels.mjs');
   const pages = runPages(root, run), batches = [...new Set(pages.map(page => String(page.batch)))];
+  const currency = physics ? await import('./physics-support/step6-currency-repair.mjs') : null;
+  const judged = currency?.beginStep6CurrencyRepair(root,run);
   invoke(root, 'defect-ledger.mjs', ['render'], { physics, commands });
   invoke(root, 'apply-judge-stamps.mjs', ['--ledger', `research/${run}-judge.jsonl`, '--exclude-published',
     ...(!physics ? ['--step5-run', run] : []), '--manifests', batches.map(batch => `research/${run}-batch-${batch}.pages.json`).join(','),
     '--terminal-resolutions', `research/${run}-step5-terminal-resolutions.jsonl`, '--run', run,
-    '--auditor-certifications', `research/${run}-step7-auditor-certifications.json`, '--apply', '--report', `research/${run}-judge-stamps.json`], { physics, commands, env: judgeEnv });
-  const actual = await checkMetadataAndRender(root, run, { physics });
+    '--auditor-certifications', `research/${run}-step7-auditor-certifications.json`, '--apply', '--report', `research/${run}-judge-stamps.json`], {
+      physics, commands, env: {...judgeEnv,...(judged?.status==='judged'?{PRESTIGE_STEP6_CURRENCY_STAMP:judged.sha256}:{})} });
+  currency?.finishStep6CurrencyRepair(root,run);
+  let actual;
+  try{actual=await checkMetadataAndRender(root,run,{physics});}
+  catch(error){
+    if(judged&&/Invalid original (?:maintenance|rendering successor): (?:changed|unbound) input .*items\//.test(String(error?.message)))
+      throw Error(`Root raw-consumer authority rebind required after native stamping; genuine judgments remain in research/${run}-step6-currency-authority.json. ${error.message}`);
+    throw error;
+  }
   atomicJSON(join(root, 'research', `${run}-proof-layout.json`), actual.layoutReceipt);
   writeRenderingQuality(root, run, actual.renderingQuality);
   invoke(root, 'publication-ready.mjs', ['--run', run, '--write'], { physics, commands });

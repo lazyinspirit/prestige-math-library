@@ -1418,6 +1418,54 @@ protocols remain current-hash-bound under CLAUDE.md. See
 [the implementation](../tools/STEP6-REBUILD.md) and
 [mechanical check map](../tools/STEP6-MECHANICAL-CHECKS.md).
 
+An actual physics Step-6 rendering failure may require source repairs that
+invalidate existing judge currencies. Root can explicitly authorize current
+judgments through `.physics-autopilot/RUN/step6-currency-request.json`, with
+`{version: 1, run, request: {path, sha256}}` naming an immutable
+`supervision/step6-currency-authorization-ID.json`. The authorization embeds the
+five actual repair-author reports and Root's exact source/metadata reconciliation,
+binds the genuine failed rendering cache, preserved gate certificate and Git
+preimage commit, and names the exact target/current/unchanged scope partition.
+It grants no semantic-equivalence acceptance. Unlisted item or selected page
+changes, dependency/identity changes and unrelated stale evidence fail closed.
+The only historical metadata exception is the actual batch-48 fluctuation
+definition's statement mirror: its Git bytes must reproduce the old certificate
+hash, its complete scalar diff must be exactly the authorized mirror, and the
+current mirror must equal the actual repaired source. Original certificates,
+reports, decisions and provider context hashes are never rewritten.
+
+The existing `step6-prepare-final-v3` native unit becomes `judgement` work with
+the existing long judge timeout while this request is pending. Before stamping,
+it obtains actual Luna/max strict-context judgments only for stale central
+currencies and changed ordinary keeps. Current central coverage and unchanged
+ordinary item-byte coverage retain their existing predicates. Missing, null or
+rejecting fresh results block preparation for genuine owner resolution; neither
+the author reports nor the renderer can accept them. Retry reuses actual current
+append-only verdicts and provider-response records.
+
+Native execution writes durable
+`research/RUN-step6-currency-authority.json`, retaining the complete Root
+authorization/report payload, original certificate/Git metadata bindings, exact
+scope, actual provider rows and response records, immutable ledger-prefix seals,
+and native command identity. Public stamp/coverage consumers require its
+completed current authority. Old central hashes remain unchanged; stale central
+rows fall through to the actual fresh Luna verdicts. Preparation, readiness and
+report source selection seal this authority and its implementation. Future
+verification does not depend on ignored supervision/cache files.
+
+Only small own-judge mapping fragments and hashes are retained across native
+stamping, never full sources or prompts. Exact reconstruction of the before raw
+source, unchanged Guard/Judge hashes and actual other-prompt-input hashes prove
+the native stamp-only delta without changing the real provider context. Seven
+already observed ordinary stamp baseline edges additionally require unchanged
+Git `stripJudgeStamp` bytes, actual current Luna keep coverage, the expected native
+mapping and exact failed-render-cache raw binding; this never refreshes a central
+Guard. A later raw mathematics-import consumer authority may consequently need
+an explicit truthful Root rebind. Such a hold preserves the genuine judgments;
+it does not create new scientific acceptance or require duplicate provider calls
+when the actual judged item and remaining prompt inputs are unchanged. Normal
+metadata/render preparation and the complete final battery still follow.
+
 ## Pre-gate recertification
 
 An owner finding-alias receipt may also bind an exact location-only variant
