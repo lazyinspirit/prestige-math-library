@@ -631,6 +631,15 @@ verdict, subject and other decision field stays exact. Current native external
 context checks remain mandatory. Original closure and historical evidence are
 never resealed. Valid append-only taxonomy successors retain their original
 Step-3 ledger predecessors in the authenticated historical projection.
+The exact existing canonical ledger digest/count is checked first. If later
+taxonomy successors were appended, verification retains the original receipt's
+row count as the filtered JSONL append-prefix boundary, then canonically sorts
+that prefix and requires its exact original digest/count. Every omitted tail
+row must pass full taxonomy-only lineage and substantive-field checks; those
+checks run over all run rows before projection. Taxonomy successors already
+frozen remain included. No original or substantive row may be dropped, and
+inherited timestamps grant no projection authority. Ledger rows, frozen reports
+and closure receipts are never rewritten by verification.
 Step-3 readers and refuters use GPT-6 Luna/max; batch adjudicators use GPT-6.1
 Sol/medium. Step-4 read-only batch readers use GPT-6.1 Sol/medium, and the
 per-item judge sweep uses GPT-6 Luna/max.
