@@ -164,6 +164,61 @@ test('scientific continuation never accepts a new rejection on a repaired contex
   assert.equal(JSON.parse(readFileSync(f.authorityPath)).status,'blocked');
 });
 
+function secondScientificFixture(t,options){
+  const f=scientificFixture(t,options),first=f.build();f.advertiseScientific(first);
+  const respond=(keep)=>({ids,contexts})=>{for(const id of ids){if(id===f.ids[3])continue;
+    appendFileSync(f.ledgerPath,JSON.stringify({id,model:'gpt-6-luna',keep:keep(id),reason:'Actual second fixture response',...contexts[id]})+'\n');
+    appendFileSync(f.attemptsPath,JSON.stringify({id,model:'gpt-6-luna',context_sha256:contexts[id].context_sha256,outcome:'response',status:0,has_content:true,raw_bytes:100})+'\n');}return{status:0};};
+  assert.throws(()=>f.begin({sweep:respond(id=>id!==f.ids[0])}),/rejected/);
+  const blockedFirst=readFileSync(f.authorityPath),path='items/'+f.ids[0]+'.md',sourcePath=join(f.root,path),before=readFileSync(sourcePath,'utf8');
+  writeFileSync(sourcePath,before.replace('specified finite carrier','specified nonempty finite carrier'));
+  const after=readFileSync(sourcePath,'utf8'),metadata=JSON.parse(readFileSync(f.metadataPath));metadata[0].items[0].statement=after.split('## Definition\n')[1].trim();f.save(f.metadataPath,metadata);
+  const report=relative(f.root,join(f.supervision,'science-r2.json'));f.save(join(f.root,report),{run:f.run,findings:[{id:f.ids[0],review:'Actual fresh defect repaired.'}],consumers:[{id:f.ids[1],review:'Rechecked changed supplier.'}]});
+  const inputs={reports:[report],decisions:[{...f.inputs.decisions[0],report_path:report,report_pointer:'/findings/0',reason:'Nonempty carrier now supplied.',ledger_row:{...f.inputs.decisions[0].ledger_row,defect_id:'demo-science-fatal-r2',correction:'Specified nonempty finite carrier.'}}],
+    reconciliation:{run:f.run,reviewer:'/root',source_changes:[{path,before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),before_judge_sha256:itemHashJudge(before),after_judge_sha256:itemHashJudge(after),interface_changed:true,report_path:report,report_pointer:'/findings/0'}],
+      metadata_changes:f.inputs.reconciliation.metadata_changes,consumer_decisions:f.inputs.reconciliation.consumer_decisions.map(row=>({...row,report_path:report,report_pointer:'/consumers/0'}))}};
+  const build=()=>makeStep6ScientificCurrencyCandidate(f.root,f.run,{...inputs,contextBuilder:f.contextBuilder});
+  return{...f,inputs,build,first,blockedFirst,respond};
+}
+
+test('second scientific round preserves both blocked authorities and inherits only genuine exact adjudications',t=>{
+  const f=secondScientificFixture(t,{realContexts:true}),d=f.build();assert.equal(d.scientific_round,2);assert.equal(d.authors.length,1);
+  assert.equal(d.decisions.length,1);assert.equal(d.inherited_adjudications.length,1);f.advertiseScientific(d);
+  const judged=f.begin({sweep:f.respond(()=>true)});assert.equal(judged.status,'judged');
+  assert.deepEqual(readFileSync(join(f.root,d.predecessor.path)),f.blockedFirst);assert.deepEqual(readFileSync(join(f.root,f.first.predecessor.path)),f.blocked);
+  const inherited=judged.judgments.find(row=>row.id===f.ids[3]);assert.equal(inherited.verdict.row.keep,false);
+  assert.deepEqual(inherited.adjudication,d.inherited_adjudications[0].binding);
+  f.applyStamps(d.scope.targets.filter(id=>id!==f.ids[3]));f.finish();assert.equal(f.verify().status,'complete');
+  const adjudications=readFileSync(join(f.root,'research',f.run+'-judge-adjudications.jsonl'),'utf8').trim().split('\n').map(JSON.parse);
+  assert.equal(adjudications.length,3);assert.equal(adjudications.filter(row=>row.outcome==='false_positive').length,1);
+  const selected=step6CurrencyInputPaths(f.root,f.run);assert.ok(selected.includes(d.predecessor.path));assert.ok(selected.includes(f.first.predecessor.path));
+  rmSync(join(f.root,'.physics-autopilot'),{recursive:true});assert.equal(f.verify().status,'complete');verifyStep6HistoricalMetadata(f.root,f.run,f.certificate);
+});
+
+for(const[name,mutate]of[
+  ['third scientific round',d=>d.scientific_round=3],
+  ['dropped inherited adjudication',d=>d.inherited_adjudications=[]],
+  ['forged inherited context',d=>d.inherited_adjudications[0].rejected_tuple.context_sha256='0'.repeat(64)],
+  ['forged old decision boundary',d=>d.adjudications_baseline.rows--],
+  ['old pre-render source guard',d=>d.reconciliation.source_changes[0].before_guard='0'.repeat(64)],
+])test('second scientific round rejects '+name,t=>{const f=secondScientificFixture(t),d=f.build();mutate(d);f.advertiseScientific(d);assert.throws(f.begin);});
+
+test('a new round-2 rejection blocks and cannot start a third scientific round',t=>{
+  const f=secondScientificFixture(t),d=f.build();f.advertiseScientific(d);assert.throws(()=>f.begin({sweep:f.respond(()=>false)}),/rejected/);
+  assert.throws(f.build,/limited to two/);
+});
+
+test('round-2 context drift cannot inherit an old false-positive acceptance',t=>{
+  const f=secondScientificFixture(t),path='items/'+f.ids[3]+'.md',absolute=join(f.root,path),before=readFileSync(absolute,'utf8');
+  writeFileSync(absolute,before+'A newly specified condition.\n');const after=readFileSync(absolute,'utf8');
+  f.inputs.reconciliation.source_changes.push({path,before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),before_judge_sha256:itemHashJudge(before),after_judge_sha256:itemHashJudge(after),interface_changed:true,
+    report_path:f.inputs.reports[0],report_pointer:'/findings/0'});
+  f.advertiseScientific(f.build());assert.throws(()=>f.begin({sweep:args=>{f.respond(()=>true)(args);const id=f.ids[3];
+    appendFileSync(f.ledgerPath,JSON.stringify({id,model:'gpt-6-luna',keep:false,reason:'A genuinely new current rejection',...args.contexts[id]})+'\n');
+    appendFileSync(f.attemptsPath,JSON.stringify({id,model:'gpt-6-luna',context_sha256:args.contexts[id].context_sha256,outcome:'response',status:0,has_content:true,raw_bytes:100})+'\n');return{status:0};}}),/rejected/);
+  assert.equal(JSON.parse(readFileSync(f.authorityPath)).failures.some(row=>row.id===f.ids[3]),true);
+});
+
 test('already observed native stamp-only Guard edge is accepted only for an unchanged ordinary keep bound by failed-render inputs', t => {
   const f = fixture(t, { nativeBaseline: true }); assert.equal(f.request.unlisted_native_stamps.length, 1);
   assert.notEqual(itemHashGuard(f.beforeTexts[f.ids[4]]), itemHashGuard(readFileSync(join(f.root, 'items', f.ids[4] + '.md'), 'utf8')));

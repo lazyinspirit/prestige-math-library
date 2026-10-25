@@ -1489,6 +1489,17 @@ reports, native provider responses, adjudications and defect ownership, retainin
 verification after ignored supervision state is removed. Fresh metadata/render
 preparation and the ordinary full final battery remain required.
 
+The actual rejection-resolution route permits at most two scientific repair
+rounds. A second request names the blocked first scientific authority as its
+immutable predecessor, uses separate actual owner reports and covers exactly
+that sweep's new failed tuples. First-round source after-guards become the next
+baseline; the original certificate and both blocked authority archives remain
+bound. Historical adjudication and defect segments are authenticated to their
+captured append-only boundaries. Previously accepted rejections are inherited
+only through their genuine native adjudication bindings for exact unchanged
+provider tuples. Current responses are reused, changed contexts receive fresh
+judgments, and a further rejection blocks without an automatic third round.
+
 ## Pre-gate recertification
 
 An owner finding-alias receipt may also bind an exact location-only variant
