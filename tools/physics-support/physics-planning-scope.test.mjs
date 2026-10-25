@@ -64,6 +64,23 @@ test('required alias-resolved transitive suppliers and their original pins remai
   assert.match(output(drift), /mathematics import changed: items\/def-deep.md/);
 });
 
+test('unrelated unfinished original page prose is excluded while placement identity stays strict', t => {
+  const f = fixture(t);
+  const page = join(f.source, 'library/math/unfinished.md');
+  writeFileSync(page, '---\npage: unfinished\ntitle: Arithmetic: unfinished title\nstatus: draft\nitems: [def-unrelated]\n---\n');
+  const selected = f.run();
+  assert.equal(selected.status, 0, output(selected));
+  writeFileSync(page, '---\npage: unfinished\ntitle: In progress\nstatus: draft\nitems: [def-unrelated]\n');
+  const partial = f.run();
+  assert.equal(partial.status, 0, output(partial));
+  // A new home for a reached supplier remains a relevant source change.
+  writeFileSync(page, '---\npage: unfinished\ntitle: Arithmetic: unfinished title\nstatus: draft\nitems: [def-supplier]\n---\n');
+  assert.match(output(f.run()), /mathematics source home changed: def-supplier/);
+  // Unreadable or duplicate inventory fields cannot conceal a supplier home.
+  writeFileSync(page, '---\npage: unfinished\ntitle: Arithmetic: unfinished title\nitems: [def-unrelated]\nitems: [def-supplier]\n---\n');
+  assert.notEqual(f.run().status, 0);
+});
+
 test('selected domain, authored dependency and category metadata faults still fail', t => {
   const f = fixture(t);
   delete f.pages[0].items[0].domain;

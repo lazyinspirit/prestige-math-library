@@ -1402,6 +1402,13 @@ reference targets are still parsed in full, and relevant original/page/category
 checks and immutable snapshot pins retain their ordinary strict checks. Bare
 unscoped verification continues to parse every original in full.
 
+Scoped source-page home comparison similarly indexes only `page`, `items` and
+`examples`. Unrelated unfinished descriptive YAML does not block that index;
+an explicit YAML header awaiting its closing delimiter can supply its exact
+identity and inventory. Duplicate or unreadable placement fields still fail
+closed, and every reached page retains the ordinary complete-carrier pin and
+source-home checks. This grants no acceptance to an unfinished page.
+
 Item/page validators select current run manifests. Outside suppliers stay
 prerequisite context; do not validate or repair unrelated content. Closeout verifies the engine's exact owned content commit inside its transaction.
 Fresh Step 6 uses metadata/render checks -> focused repair -> all final gates

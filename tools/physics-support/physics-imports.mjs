@@ -11,7 +11,7 @@ import { parseFrontmatter } from './content-policy-lib.mjs';
 import { splitFrontmatter } from './facts-block.mjs';
 import { originalMaintenance } from './original-maintenance.mjs';
 import { originalRenderingMaintenance } from './original-rendering-maintenance.mjs';
-import { readOriginalItemIdentity } from './original-item-index.mjs';
+import { readOriginalItemIdentity, readOriginalPageInventory } from './original-item-index.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 // A source folder rename does not move the immutable local snapshot.
 export function originalImportPath(receipt, file) {
@@ -87,7 +87,7 @@ export function verifyMathematicsImports(root, { run = null, planning = false, f
   const scoped = run !== null || proposedPages !== null;
   const originals = markdownFiles(join(receipt.source_root, 'items')).map(scoped ? readOriginalItemIdentity : readItem);
   const sourcePages = run || proposedPages !== null ? markdownFiles(join(receipt.source_root, 'library'))
-    .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readItem(file), path: relative(receipt.source_root, file) })) : [];
+    .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readOriginalPageInventory(file), path: relative(receipt.source_root, file) })) : [];
   const scope = run || proposedPages !== null ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages }, proposedPages }) : null;
   const acceptedOriginals = originalMaintenance(root, run, { receipt, scope, planning });
   for (const [path, hash] of originalRenderingMaintenance(root, planning ? maintenanceRun : run,
