@@ -508,6 +508,18 @@ function nativeProtectedPathClosure(root, run, inventory, seeds) {
       const generated = /^research\/([a-zA-Z0-9][a-zA-Z0-9_-]*)-(publication-readiness|step6-report-integrity)\.json$/.exec(path);
       if (!generated) { visit(record); continue; }
       const readiness = generated[2] === 'publication-readiness';
+      // Foreign pre-scoped schema-2 receipts sealed only an aggregate tree
+      // count/digest. They have no inventory fields to exempt from discovery:
+      // traverse their complete structured record, including every real input.
+      const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+      const legacyReadiness = readiness && generated[1] !== run && record?.run === generated[1] && record.schema === 2
+        && !['protected_tree_scope', 'protected_tree_paths', 'protected_tree_projections', 'protected_tree_rows'].some(key => Object.hasOwn(record, key))
+        && Number.isSafeInteger(record.protected_tree_files) && record.protected_tree_files >= 0
+        && hash(record.protected_tree_sha256) && hash(record.content_sha256)
+        && typeof record.published_baseline_commit === 'string' && /^[a-f0-9]{40,64}$/.test(record.published_baseline_commit)
+        && record.input_sha256 && typeof record.input_sha256 === 'object' && !Array.isArray(record.input_sha256)
+        && Object.values(record.input_sha256).every(hash);
+      if (legacyReadiness) { visit(record); continue; }
       if (record?.run !== generated[1]
         || (readiness ? record.schema !== 2 || record.protected_tree_scope !== 'frontier-prerequisite-context-v1'
           : record.version !== 2 || record.scope !== 'frontier-prerequisite-report-v2'))

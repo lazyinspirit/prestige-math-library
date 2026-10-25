@@ -244,6 +244,52 @@ for (const kind of ['readiness', 'report']) {
   });
 }
 
+function historicalReadiness(f, historicalRun = 'historical-run') {
+  const path = `research/${historicalRun}-publication-readiness.json`, input = 'research/historical-run-input.json';
+  f.json(input, { actual: 'preserved historical structured context' });
+  const record = { schema: 2, run: historicalRun, verdict: 'publishable-pending-owner-approval', workflow_owned_blockers: [],
+    content_sha256: sha256('historical source'), input_sha256: { [input]: sha256(readFileSync(join(f.root, input))) },
+    published_baseline_commit: 'a'.repeat(40), protected_tree_files: 142201, protected_tree_sha256: sha256('historical complete tree'),
+    owner_actions_remaining: ['owner review'], generated_at: '2026-10-15T02:03:36.961Z' };
+  f.json('research/fixture-step6-evidence.json', { input_sha256: { [path]: sha256(JSON.stringify(record)) } });
+  const save = () => f.json(path, record); save(); return { path, input, record, save };
+}
+
+test('foreign pre-scoped readiness remains unchanged structured context without acquiring ownership', t => {
+  const f = fixture(t), g = historicalReadiness(f), before = readFileSync(join(f.root, g.path)), scope = f.scope();
+  assert.ok(!scope.paths.includes(g.path)); assert.ok(!scope.paths.includes(g.input));
+  assert.deepEqual(readFileSync(join(f.root, g.path)), before);
+});
+
+for (const reference of ['input-map', 'nested', 'operational-link']) {
+  test('foreign legacy readiness preserves strict ' + reference + ' references', t => {
+    const f = fixture(t), g = historicalReadiness(f);
+    if (reference === 'input-map') f.put(g.input, 'actual input is not structured JSON');
+    if (reference === 'nested') g.record.actual = { artifact: { path: g.input } };
+    if (reference === 'nested') f.put(g.input, 'actual nested input is not structured JSON');
+    if (reference === 'operational-link') g.record.input_sha256 = { [f.link]: sha256('sealed link text') };
+    g.save(); assert.throws(f.scope, reference === 'operational-link' ? /symlink in owned path|authoritative input/ : SyntaxError);
+  });
+}
+
+test('current-run readiness cannot use historical aggregate-only compatibility', t => {
+  const f = fixture(t); historicalReadiness(f, run); assert.throws(f.scope, /invalid generated seal inventory/);
+});
+
+for (const field of ['protected_tree_scope', 'protected_tree_paths', 'protected_tree_projections', 'protected_tree_rows']) {
+  test('partial foreign scoped readiness cannot use legacy compatibility: ' + field, t => {
+    const f = fixture(t), g = historicalReadiness(f); g.record[field] = field === 'protected_tree_scope' ? 'frontier-prerequisite-context-v1' : [];
+    g.save(); assert.throws(f.scope, /invalid|malformed generated seal inventory/);
+  });
+}
+
+for (const field of ['run', 'schema', 'protected_tree_sha256', 'input_sha256']) {
+  test('malformed foreign legacy readiness stays rejected: ' + field, t => {
+    const f = fixture(t), g = historicalReadiness(f); g.record[field] = field === 'schema' ? 99 : field === 'input_sha256' ? [] : 'malformed';
+    g.save(); assert.throws(f.scope, /invalid generated seal inventory/);
+  });
+}
+
 test('report source selectors stay strict beyond generated ownership/projection inventories', t => {
   const f = fixture(t), g = generatedReceipt(f, 'report');
   g.record.selectors.pages.push({ file: f.link + '/page.md' }); g.save();

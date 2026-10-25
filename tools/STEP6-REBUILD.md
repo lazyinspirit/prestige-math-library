@@ -388,6 +388,14 @@ still traverse strictly, even when the same path also occurs in an inventory.
 Malformed receipts or genuine JSON sources still fail; no parse-error fallback
 or operational symlink source acceptance is introduced.
 
+Foreign historical schema-2 readiness receipts may instead contain only an
+aggregate protected-tree count/digest, without the later scoped inventory
+fields. Exact matching foreign-run receipts with valid aggregate/input hashes
+receive ordinary complete structured traversal, including all real input and
+nested references. They acquire no current readiness or commit authority.
+Current-run receipts and malformed or partial scoped receipts retain the strict
+current schema/scope checks; historical evidence bytes are never rewritten.
+
 Proof-layout receipt scope uses the mathematical item grammar from SCHEMA.md:
 known lowercase kind prefixes and case-sensitive ASCII alphanumeric segments.
 Existing mixed-case IDs remain exact filenames and manifest identities; no
