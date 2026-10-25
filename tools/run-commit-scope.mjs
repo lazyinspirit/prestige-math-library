@@ -502,6 +502,18 @@ function nativeProtectedPathClosure(root, run, inventory, seeds) {
     const documents = path.endsWith('.jsonl') ? text.split('\n').filter(line => line.trim()) : [text];
     for (const document of documents) {
       const record = JSON.parse(document);
+      const finalReceipt = /^research\/([a-zA-Z0-9][a-zA-Z0-9_-]*)-dispatch\/tool-step6-finalize-v3\.result\.json$/.exec(path);
+      if (finalReceipt) {
+        if (record?.run !== finalReceipt[1] || record.role !== 'tool' || record.label !== 'step6-finalize-v3'
+          || record.written_by !== 'step6-finalize' || record.ok !== true || record.closeout_scope?.version !== 2
+          || !Array.isArray(record.closeout_scope.owned_paths) || !record.closeout_scope.owned_paths.every(value => typeof value === 'string'))
+          throw Error('closeout: invalid native final-receipt inventory: ' + path);
+        for (const [key, value] of Object.entries(record)) {
+          if (key !== 'closeout_scope') { add(key); visit(value); continue; }
+          for (const [field, child] of Object.entries(value)) if (field !== 'owned_paths') { add(field); visit(child); }
+        }
+        continue;
+      }
       // These generated receipts inventory raw-byte/link-text seals. Inventory
       // membership is not authority to parse a carrier or accept it as source.
       // Keep the receipt itself protected, and follow every genuine input ref.

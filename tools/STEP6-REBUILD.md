@@ -396,6 +396,13 @@ nested references. They acquire no current readiness or commit authority.
 Current-run receipts and malformed or partial scoped receipts retain the strict
 current schema/scope checks; historical evidence bytes are never rewritten.
 
+Exact native `RUN-dispatch/tool-step6-finalize-v3.result.json` receipts also
+carry a commit inventory in `closeout_scope.owned_paths`. Matching run and native
+producer identity, success, scope version and string-array inventory are required
+before treating only that field as metadata. Every other field still traverses
+strictly. A genuine input reference to the same raw capture or operational link
+remains authoritative and receives no inventory exemption.
+
 Proof-layout receipt scope uses the mathematical item grammar from SCHEMA.md:
 known lowercase kind prefixes and case-sensitive ASCII alphanumeric segments.
 Existing mixed-case IDs remain exact filenames and manifest identities; no

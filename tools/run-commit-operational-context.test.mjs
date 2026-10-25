@@ -255,6 +255,48 @@ function historicalReadiness(f, historicalRun = 'historical-run') {
   const save = () => f.json(path, record); save(); return { path, input, record, save };
 }
 
+function finalReceiptInventory(f) {
+  const path = 'research/foreign-run-dispatch/tool-step6-finalize-v3.result.json', capture = 'research/foreign-run-history/raw-cli.json';
+  f.put(capture, 'statement-first: 305 item(s) checked; 0 defect(s)\n');
+  const record = { run: 'foreign-run', role: 'tool', label: 'step6-finalize-v3', written_by: 'step6-finalize', ok: true,
+    closeout_scope: { version: 2, owned_paths: [capture, f.link] } };
+  f.json('research/fixture-step6-evidence.json', { input_sha256: { [path]: 'sealed final receipt' } });
+  const save = () => f.json(path, record); save(); return { path, capture, record, save };
+}
+
+test('genuine native final-receipt owned paths stay raw inventory without source discovery', t => {
+  const f = fixture(t), g = finalReceiptInventory(f), original = readFileSync(join(f.root, g.capture)), scope = f.scope();
+  assert.ok(!scope.paths.includes(g.capture)); assert.ok(!scope.paths.includes(f.link));
+  assert.deepEqual(readFileSync(join(f.root, g.capture)), original);
+});
+
+for (const field of ['run', 'role', 'label', 'written_by', 'ok', 'version', 'owned_paths']) {
+  test('malformed native final receipt cannot suppress source discovery: ' + field, t => {
+    const f = fixture(t), g = finalReceiptInventory(f);
+    if (field === 'version') g.record.closeout_scope.version = 1;
+    else if (field === 'owned_paths') g.record.closeout_scope.owned_paths = [{ path: f.link }];
+    else g.record[field] = field === 'ok' ? false : 'wrong';
+    g.save(); assert.throws(f.scope, /invalid native final-receipt inventory/);
+  });
+}
+
+for (const reference of ['input-map', 'nested', 'closeout-field', 'operational-link']) {
+  test('final receipt inventory preserves genuine ' + reference + ' references', t => {
+    const f = fixture(t), g = finalReceiptInventory(f);
+    if (reference === 'input-map') g.record.input_sha256 = { [g.capture]: 'hash' };
+    if (reference === 'nested') g.record.actual = { artifact: { path: g.capture } };
+    if (reference === 'closeout-field') g.record.closeout_scope.actual = { path: g.capture };
+    if (reference === 'operational-link') g.record.input_sha256 = { [f.link]: 'hash' };
+    g.save(); assert.throws(f.scope, reference === 'operational-link' ? /symlink in owned path|authoritative input/ : SyntaxError);
+  });
+}
+
+test('a final-receipt lookalike has no typed inventory exemption', t => {
+  const f = fixture(t), g = finalReceiptInventory(f), copy = g.path.replace('.result.json', '.result-copy.json');
+  f.json(copy, g.record); f.json('research/fixture-step6-evidence.json', { input_sha256: { [copy]: 'hash' } });
+  assert.throws(f.scope, SyntaxError);
+});
+
 test('foreign pre-scoped readiness remains unchanged structured context without acquiring ownership', t => {
   const f = fixture(t), g = historicalReadiness(f), before = readFileSync(join(f.root, g.path)), scope = f.scope();
   assert.ok(!scope.paths.includes(g.path)); assert.ok(!scope.paths.includes(g.input));
