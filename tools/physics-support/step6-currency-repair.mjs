@@ -1,14 +1,15 @@
 // Exact current judgments after owner-authorized Step-6 rendering repairs.
 // Historical metadata authentication never refreshes a scientific item hash.
-import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, realpathSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, appendFileSync, mkdirSync, renameSync, realpathSync, readdirSync, mkdtempSync, rmSync } from 'node:fs';
 import { join, resolve, relative, dirname, basename, isAbsolute } from 'node:path';
+import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { isDeepStrictEqual as equal } from 'node:util';
 import { itemHashGuard, itemHashJudge, stripJudgeStamp } from './item-hash.mjs';
 import { parseFrontmatter } from './content-policy-lib.mjs';
 import { splitFrontmatter, sectionText } from './facts-block.mjs';
-import { validateFrontier } from './step5-rounds.mjs';
+import { validateFrontier, readLibraryItems } from './step5-rounds.mjs';
 import { originalJudgeLineup } from './original-judge-lineup.mjs';
 import { MODELS } from './models.mjs';
 import { tsxLoader } from './paths.mjs';
@@ -36,7 +37,7 @@ export function compactCurrencyAuthorReport(value,key=''){
     return value.map(row=>compactCurrencyAuthorReport(row,key));
   }
   if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([field,row])=>[field,compactCurrencyAuthorReport(row,field)]));
-  if(typeof value==='string'&&['before','after','source','tex','code','value','html','svg','prompt','transcript'].includes(key)&&value.length>80)
+  if(typeof value==='string'&&((['before','after','source','tex','code','value','html','svg','prompt','transcript'].includes(key)&&value.length>80)||/^---\r?\n/.test(value)))
     return{kind:'source-fragment-reference',bytes:Buffer.byteLength(value),sha256:raw(value)};
   return value;
 }
@@ -205,13 +206,156 @@ function validateDocument(root, run, cert, authorization, { live = false } = {})
   return { document: d, changed, frontier: f };
 }
 
+const isScientific=d=>d?.kind==='physics-step6-scientific-rejection-resolution';
+const withoutAt=({at,...row})=>row;
+const tuple=row=>Object.fromEntries(['id','model','item_sha256','context_sha256'].map(key=>[key,row[key]]));
+function predecessor(root,run,d){
+  const canonical=join(root,authorityRel(run)),archive=join(root,d.predecessor.path);
+  check(d.predecessor.path===`research/${run}-step6-currency-blocked-${d.predecessor.raw_sha256.slice(0,16)}.json`,'noncanonical blocked predecessor archive');
+  const path=existsSync(archive)?regular(root,d.predecessor.path):canonical;
+  check(fileHash(path)===d.predecessor.raw_sha256,'blocked native predecessor bytes changed');
+  const value=read(path);sealed(value);
+  check(value.sha256===d.predecessor.payload_sha256&&value.version===1&&value.kind==='native-physics-step6-current-judgments'
+    &&value.run===run&&value.status==='blocked'&&value.failures.length>0,'not the actual blocked rendering judgments');
+  const original=value.authorization.document;
+  check(original.kind==='physics-step6-render-repair-current-judgments'&&value.authorization.raw_sha256===raw(JSON.stringify(original,null,2)+'\n')
+    &&equal(original.certificate,d.certificate)&&original.preimage_commit===d.preimage_commit,'predecessor authorization lineage changed');
+  check(value.ledger_prefixes.length===2&&equal(sorted(value.ledger_prefixes.map(row=>row.path)),sorted([original.ledger_baseline.path,original.attempts_baseline.path])),'predecessor native ledger set changed');
+  for(const binding of value.ledger_prefixes)bindPrefix(root,binding);
+  for(const judgment of value.judgments){verifyProviderBinding(root,judgment.verdict);verifyProviderBinding(root,judgment.attempt);
+    check(judgment.verdict.row.keep===true&&equal(tuple(judgment.verdict.row),{id:judgment.id,model:MODELS.luna.id,item_sha256:original.target_inputs[judgment.id].item_sha256,context_sha256:original.target_inputs[judgment.id].context_sha256}),'predecessor keep differs');}
+  const ledger=jsonl(root,original.ledger_baseline.path).rows;
+  for(const failure of value.failures){const row=failure.verdict;
+    check(row?.keep===false&&row.model===MODELS.luna.id&&row.id===failure.id&&equal(tuple(row),{id:failure.id,model:MODELS.luna.id,item_sha256:original.target_inputs[failure.id].item_sha256,context_sha256:original.target_inputs[failure.id].context_sha256})
+      &&ledger.some(entry=>entry.index>=original.ledger_baseline.rows&&entry.index<value.ledger_prefixes.find(p=>p.path===original.ledger_baseline.path).rows&&equal(entry.row,row)),'predecessor rejection lacks actual native row');}
+  check(new Set([...value.judgments.map(row=>row.id),...value.failures.map(row=>row.id)]).size===original.scope.targets.length
+    &&value.judgments.length+value.failures.length===original.scope.targets.length,'predecessor target partition changed');
+  return value;
+}
+function archiveScientificPredecessor(root,run,d){const old=predecessor(root,run,d),path=join(root,d.predecessor.path);
+  if(!existsSync(path))writeFileSync(path,readFileSync(join(root,authorityRel(run))),{flag:'wx'});return old;}
+function reportLocator(d,row){const report=d.authors.find(report=>report.path===row.report_path);
+  check(report&&typeof row.report_pointer==='string'&&row.report_pointer.startsWith('/')&&at(report.payload,row.report_pointer)!==undefined,'missing exact owner report locator: '+(row.id??row.path));}
+function scientificScope(root,run,cert,contexts,validated){
+  const old=validated.predecessor.authorization.document,changed=new Set([...validated.changed,...old.scope.targets]);
+  return currentScope(root,run,cert,contexts,changed);
+}
+function acceptedScientificDecision(d,id,verdict){return d.decisions.find(row=>row.id===id&&['false_positive','confirmed_nonfatal'].includes(row.outcome)&&equal(row.rejected_tuple,tuple(verdict)))??null;}
+function scientificAdjudication(d,authorizationSha,decision){return{...decision.rejected_tuple,item_sha256:decision.rejected_guard_sha256,rejected_provider_tuple:decision.rejected_tuple,run:d.run,outcome:decision.outcome,
+  ...(decision.outcome==='confirmed_fatal'?{defect_type:decision.defect_type}:{}),reason:decision.reason,uncertain:false,familiar:decision.familiar,
+  source_urls:decision.source_urls,reviewer:'/root',step6_resolution_authorization_sha256:authorizationSha,
+  report_path:decision.report_path,report_pointer:decision.report_pointer};}
+function scientificDefect(d,authorizationSha,decision){return{...decision.ledger_row,run:d.run,subject:decision.id,caught_at_stage:'owner',caught_by_role:'orchestrator',
+  adjudication_ref:[{...decision.rejected_tuple,item_sha256:decision.rejected_guard_sha256,file:`research/${d.run}-judge-adjudications.jsonl`}],step6_resolution_authorization_sha256:authorizationSha,
+  evidence:[{path:authorityRel(d.run),authorization_sha256:authorizationSha,report_path:decision.report_path,report_pointer:decision.report_pointer}],};}
+function defectRowsCommand(root,run,rows,mode){
+  const temporary=mkdtempSync(join(tmpdir(),'physics-step6-defects-')),path=join(temporary,mode==='append'?'rows.json':'rows.jsonl');
+  try{writeFileSync(path,mode==='append'?JSON.stringify(rows):rows.map(JSON.stringify).join('\n')+'\n');
+    return spawnSync(process.execPath,[new URL('./defect-ledger.mjs',import.meta.url).pathname,mode,...(mode==='append'?['--file',path,'--no-render']:['--run',run,'--ledger',path])],
+      {cwd:root,encoding:'utf8',env:{...process.env,PHYSICS_REPO:root}});
+  }finally{rmSync(temporary,{recursive:true,force:true});}
+}
+function appendScientificDecisions(root,run,authorization){const d=authorization.document;
+  for(const [path,rows] of [[`research/${run}-judge-adjudications.jsonl`,d.decisions.map(row=>scientificAdjudication(d,authorization.raw_sha256,row))],
+    ['research/defect-ledger.jsonl',d.decisions.filter(row=>row.outcome!=='false_positive').map(row=>scientificDefect(d,authorization.raw_sha256,row))]]){
+    const existing=jsonl(root,path).rows.map(entry=>entry.row);
+    const pending=rows.filter(row=>!existing.some(entry=>equal(withoutAt(entry),row))).map(row=>({...row,at:new Date().toISOString()}));
+    if(path==='research/defect-ledger.jsonl'&&pending.length){const result=defectRowsCommand(root,run,pending,'append');check(result.status===0,'native defect append rejected: '+result.stderr);}
+    else for(const row of pending)appendFileSync(join(root,path),JSON.stringify(row)+'\n');
+  }
+}
+function verifyScientificDecisionSuffix(root,d,authorizationSha,{complete=false}={}){
+  for(const [baseline,expected]of [[d.adjudications_baseline,d.decisions.map(row=>scientificAdjudication(d,authorizationSha,row))],
+    [d.defects_baseline,d.decisions.filter(row=>row.outcome!=='false_positive').map(row=>scientificDefect(d,authorizationSha,row))]]){
+    const suffix=jsonl(root,baseline.path).rows.slice(baseline.rows).map(entry=>withoutAt(entry.row));
+    check(suffix.every(row=>expected.some(wanted=>equal(row,wanted)))&&new Set(suffix.map(digest)).size===suffix.length
+      &&(!complete||suffix.length===expected.length),'unlicensed or missing native scientific decision suffix');
+  }
+}
+function currentStampDelta(source,judgment){
+  if(judgment.verdict.row.keep!==false)return verifyNativeStampDelta(source,judgment.before_stamp,{model:MODELS.luna.id});
+  const before=judgment.before_stamp,after=stampObservation(source);
+  if(after.raw_sha256===before.raw_sha256)return verifyNativeStampDelta(source,before,{model:MODELS.luna.id});
+  check(after.fragment.text===''&&after.item_sha256===before.item_sha256&&after.guard_sha256===before.guard_sha256
+    &&raw(before.fragment.text)===before.fragment.sha256,'rejected source changed beyond native stale-pass removal');
+  const reconstructed=source.slice(0,before.fragment.offset)+before.fragment.text+source.slice(before.fragment.offset);
+  check(raw(reconstructed)===before.raw_sha256,'rejected before mapping cannot be reconstructed');verifyNativePassStamp(reconstructed,{model:MODELS.luna.id});return after;
+}
+function metadataOwned(path,pointer,before,after,f,run){
+  const batch=path.match(new RegExp(`^research/${run}-batch-(\\d+)\\.(pages|proof-contracts)\\.json$`));
+  if(batch){check(f.batches.some(row=>String(row.id)===batch[1]),'foreign batch metadata');return;}
+  if(path===`research/${run}-batch-dependency-levels.json`)return;
+  check(path==='research/plan-spec.json','unsupported scientific historical metadata path: '+path);
+  const parts=pointer.split('/').slice(1);let owned=false;
+  for(let i=parts.length;i>=1;i--){const a=at(before,'/'+parts.slice(0,i).join('/')),b=at(after,'/'+parts.slice(0,i).join('/'));
+    if(a?.id&&b?.id){owned=a.id===b.id&&(f.ids.includes(a.id)||f.page_ids?.includes(a.id));break;}}
+  check(owned,'foreign shared-plan scalar transition: '+pointer);
+}
+function validateScientificDocument(root,run,cert,authorization,{live=false}={}){
+  const d=authorization.document;
+  check(d.version===1&&d.run===run&&d.reviewer==='/root'&&d.stage==='6-final-validation-v3'&&d.lineup==='luna'&&d.effort==='max'
+    &&originalJudgeLineup({repo:root,run})==='luna'&&authorization.raw_sha256===raw(JSON.stringify(d,null,2)+'\n'),'invalid scientific Root authority');
+  intactCertificate(root,run,cert,d);const old=predecessor(root,run,d),prior=old.authorization.document,f=frontier(root,run);
+  check(d.frontier_sha256===f.sha256&&equal(d.ledger_baseline,prior.ledger_baseline)&&equal(d.attempts_baseline,prior.attempts_baseline),'scientific frontier/native baseline changed');
+  for(const binding of [d.ledger_baseline,d.attempts_baseline,d.adjudications_baseline,d.defects_baseline])bindPrefix(root,binding);
+  check(d.adjudications_baseline.path===`research/${run}-judge-adjudications.jsonl`&&d.defects_baseline.path==='research/defect-ledger.jsonl','noncanonical scientific ledgers');
+  check(d.authors.length===7&&new Set(d.authors.map(row=>row.path)).size===7&&d.authors.every(row=>row.payload_sha256===digest(row.payload)),'scientific owner report set changed');
+  check(d.decisions.length===old.failures.length&&new Set(d.decisions.map(row=>row.id)).size===d.decisions.length
+    &&equal(sorted(d.decisions.map(row=>row.id)),sorted(old.failures.map(row=>row.id))),'scientific dispositions are not exact actual failures');
+  for(const row of d.decisions){check(['confirmed_fatal','confirmed_nonfatal','false_positive'].includes(row.outcome)&&row.uncertain===false&&typeof row.familiar==='boolean'
+      &&typeof row.reason==='string'&&row.reason.length>0&&Array.isArray(row.source_urls)&&equal(row.rejected_tuple,tuple(old.failures.find(f=>f.id===row.id).verdict)),'scientific rejection tuple or outcome changed');reportLocator(d,row);
+    const path=`items/${row.id}.md`,originalGuard=prior.reconciliation.payload.scope.find(source=>source.path===path)?.after_guard??itemHashGuard(gitBytes(root,d.preimage_commit,path).toString('utf8'));
+    check(row.rejected_guard_sha256===originalGuard,'rejected adjudication Guard differs from actual source baseline');
+    if(row.outcome!=='false_positive')check(row.ledger_row?.disposition==='fixed'&&row.ledger_row.severity===(row.outcome==='confirmed_fatal'?'fatal':'nonfatal')&&row.ledger_row.correction&&row.ledger_row.defect_id
+      &&Object.keys(row.ledger_row).every(key=>['defect_id','class','subclass','severity','location','disposition','correction','subclass_note'].includes(key)),'confirmed defect lacks truthful fixed taxonomy');}
+  const taxonomy=defectRowsCommand(root,run,d.decisions.filter(row=>row.outcome!=='false_positive').map(row=>({...scientificDefect(d,authorization.raw_sha256,row),at:'2026-10-25T00:00:00Z'})),'validate');
+  check(taxonomy.status===0,'scientific Root defect taxonomy rejected: '+taxonomy.stderr);
+  const reconciliation=d.reconciliation,changes=new Map(reconciliation.source_changes.map(row=>[row.path,row])),changed=new Set();
+  check(reconciliation.run===run&&reconciliation.reviewer==='/root'&&changes.size===reconciliation.source_changes.length,'scientific reconciliation identity changed');
+  const pages=new Set(),pageIds=new Set();for(const batch of f.batches)for(const page of read(join(root,'research',`${run}-batch-${batch.id}.pages.json`))){pages.add(`library/${page.category}/${page.id}.md`);pageIds.add(page.id);}
+  for(const path of [...f.ids.map(id=>`items/${id}.md`),...pages]){
+    const git=gitBytes(root,d.preimage_commit,path).toString('utf8'),text=readFileSync(regular(root,path),'utf8'),original=prior.reconciliation.payload.scope.find(row=>row.path===path),row=changes.get(path),native=prior.unlisted_native_stamps?.find(row=>path===`items/${row.id}.md`);
+    const beforeGuard=original?.after_guard??(native?row?.before_guard:itemHashGuard(git)),beforeJudge=prior.source_judge_sha256[path]??itemHashJudge(git);
+    if(row){check(row.before_guard===beforeGuard&&row.before_judge_sha256===beforeJudge&&row.after_guard===itemHashGuard(text)&&row.after_judge_sha256===itemHashJudge(text)
+        &&typeof row.interface_changed==='boolean','scientific source transition changed: '+path);reportLocator(d,row);
+      if(native)check(row.before_raw_sha256===native.cache_raw_sha256,'native baseline before-raw missing');
+      const identity=source=>{const fm=parseFrontmatter(splitFrontmatter(source).fm);return Object.fromEntries(['id','kind','status','domain'].map(key=>[key,fm[key]]));};
+      check(equal(identity(git),identity(text)),'scientific source changed frozen identity');if(path.startsWith('items/'))changed.add(path.slice(6,-3));
+    }else if(native){check(raw(text)===native.cache_raw_sha256&&stripJudgeStamp(text)===stripJudgeStamp(git),'unlisted native baseline changed');}
+    else check(itemHashGuard(text)===beforeGuard&&itemHashJudge(text)===beforeJudge,'unlisted scientific source/page changed: '+path);
+  }
+  check([...changes.keys()].every(path=>path.startsWith('items/')?f.ids.includes(path.slice(6,-3)):pages.has(path)),'scientific repair escaped frozen sources');
+  const items=readLibraryItems(root),roots=reconciliation.source_changes.filter(row=>row.interface_changed&&row.path.startsWith('items/')).map(row=>row.path.slice(6,-3));
+  const affected=new Set(),queue=[...roots];while(queue.length){const supplier=queue.shift();for(const item of items)if(item.deps.includes(supplier)&&!affected.has(item.id)){affected.add(item.id);queue.push(item.id);}}
+  const consumers=new Map(reconciliation.consumer_decisions.map(row=>[row.id,row]));check(consumers.size===reconciliation.consumer_decisions.length,'duplicate scientific consumer');
+  for(const id of affected)if(f.ids.includes(id)&&!changed.has(id))check(consumers.has(id),'missing actual affected consumer review: '+id);
+  for(const row of consumers.values()){check(f.ids.includes(row.id)&&row.uncertain===false&&['repaired','unaffected'].includes(row.disposition)&&row.reason
+      &&row.post_guard===itemHashGuard(readFileSync(join(root,'items',row.id+'.md'),'utf8'))&&row.post_judge_sha256===itemHashJudge(readFileSync(join(root,'items',row.id+'.md'),'utf8')),'scientific consumer guard changed');reportLocator(d,row);}
+  const metadata=new Map(d.historical_metadata.map(row=>[row.path,row]));check(metadata.size===d.historical_metadata.length,'duplicate scientific metadata');
+  for(const row of metadata.values()){const before=gitBytes(root,d.preimage_commit,row.path),current=readFileSync(regular(root,row.path));
+    const a=JSON.parse(before),b=JSON.parse(current),diff=metadataScalarDifferences(a,b);
+    check(raw(before)===row.before_sha256&&raw(current)===row.after_sha256&&equal(diff,row.changed_pointers),'scientific metadata transition changed: '+row.path);
+    for(const pointer of diff)metadataOwned(row.path,pointer,a,b,{...f,page_ids:[...pageIds]},run);}
+  for(const [path,expected]of Object.entries(cert.evidence)){const rel=relative(root,path),transition=metadata.get(rel);
+    if(transition)check(expected===transition.before_sha256,'old certificate metadata does not match immutable Git preimage');
+    else if(rel===d.adjudications_baseline.path)check(d.adjudications_baseline.sha256===expected,'old certificate adjudication prefix changed');
+    else check(fileHash(regular(root,path))===expected,'unlicensed historical evidence changed: '+path);}
+  verifyScientificDecisionSuffix(root,d,authorization.raw_sha256);
+  if(live){const state=read(join(root,'.physics-autopilot',run,'state.json'));check(state.run===run&&state.stage===d.stage&&!state.finishedAt&&!state.stages?.[d.stage]?.gatesPassedAt
+      &&Object.values(state.dispatches??{}).every(row=>!row.startedAt||row.endedAt||row.role==='tool'&&row.label==='step6-prepare-final-v3'&&row.stage===d.stage)
+      &&!existsSync(join(root,'.physics-autopilot','step5-shared-write.lock')),'scientific native writer/stage guard failed');
+    for(const row of d.authors){const original=read(regular(root,row.path));check(fileHash(join(root,row.path))===row.raw_sha256&&digest(original)===row.original_payload_sha256&&equal(compactCurrencyAuthorReport(original),row.payload),'actual scientific report changed');}}
+  return{document:d,changed,frontier:f,predecessor:old};
+}
+function validateAnyDocument(root,run,cert,authorization,options){return isScientific(authorization.document)?validateScientificDocument(root,run,cert,authorization,options):validateDocument(root,run,cert,authorization,options);}
+
 // Only an explicit Step-6 consumer opts into this historical raw-byte check.
 // Its caller still receives every original item/context hash unchanged.
 export function verifyStep6HistoricalMetadata(root, run, certificate) {
   const authorization = requestDocument(root, run); check(authorization, 'missing explicit Root request');
   const path=join(root,authorityRel(run));
   const completed=existsSync(path)&&readAuthority(root,run).status==='complete';
-  validateDocument(resolve(root),run,certificate,authorization,{live:!completed});
+  validateAnyDocument(resolve(root),run,certificate,authorization,{live:!completed});
 }
 
 function readAuthority(root, run) { const value = read(join(root, authorityRel(run))); sealed(value); return value; }
@@ -222,14 +366,16 @@ function verifyProviderBinding(root, binding) {
   check(entry && entry.raw_sha256 === binding.raw_sha256 && equal(entry.row, binding.row) && digest(entry.row) === binding.row_sha256, 'actual provider row changed');
 }
 function verifyCurrentAuthority(root, run, cert, authority, contexts, { allowJudged = false } = {}) {
-  check(authority.version===1&&authority.kind === 'native-physics-step6-current-judgments' && authority.run === run
+  const science=isScientific(authority.authorization?.document);
+  check(authority.version===(science?2:1)&&authority.kind === (science?'native-physics-step6-scientific-current-judgments':'native-physics-step6-current-judgments') && authority.run === run
     && (authority.status === 'complete' || allowJudged && authority.status === 'judged'), 'fresh native current judgments incomplete');
-  const validated=validateDocument(root, run, cert, authority.authorization);
+  const validated=validateAnyDocument(root, run, cert, authority.authorization);
   const d = authority.authorization.document;
+  if(science)verifyScientificDecisionSuffix(root,d,authority.authorization.raw_sha256,{complete:true});
   const expectedCommand=['node','tools/physics-support/judge-sweep.mjs','--run',run,'--ledger',`research/${run}-judge.jsonl`,'--cost',`research/${run}-judge-cost.jsonl`,
     '--items',d.scope.targets.join(','),'--lineup','luna','--effort','max','--strict-context','--context-cache',`.physics-autopilot/${run}/supervision/step6-currency-context-cache.json`];
   check(equal(authority.actual_command,expectedCommand),'native current judgment command changed');
-  check(equal(authority.scope, d.scope)&&equal(currentScope(root,run,cert,contexts,validated.changed),d.scope)
+  check(equal(authority.scope, d.scope)&&equal(science?scientificScope(root,run,cert,contexts,validated):currentScope(root,run,cert,contexts,validated.changed),d.scope)
     &&authority.judgments.length===d.scope.targets.length&&new Set(authority.judgments.map(row=>row.id)).size===authority.judgments.length
     &&equal(sorted(authority.judgments.map(row=>row.id)),sorted(d.scope.targets)), 'native target scope differs');
   const baselines=[d.ledger_baseline,d.attempts_baseline];
@@ -245,16 +391,19 @@ function verifyCurrentAuthority(root, run, cert, authority, contexts, { allowJud
     check(d.scope.targets.includes(id) && now?.item_sha256 === original.item_sha256
       && now.other_prompt_inputs_sha256 === original.other_prompt_inputs_sha256, 'actual judged source/supplier prompt inputs changed: ' + id);
     for (const binding of [judgment.verdict, judgment.attempt]) verifyProviderBinding(root, binding);
-    check(verdict.id === id && verdict.model === MODELS.luna.id && verdict.keep === true && verdict.item_sha256 === original.item_sha256
+    const adjudicated=science&&verdict.keep===false?acceptedScientificDecision(d,id,verdict):null;
+    check(verdict.id === id && verdict.model === MODELS.luna.id && (verdict.keep===true||adjudicated) && verdict.item_sha256 === original.item_sha256
       && verdict.context_sha256 === original.context_sha256 && judgment.verdict.line >= d.ledger_baseline.rows
       &&judgment.verdict.path===`research/${run}-judge.jsonl`&&judgment.attempt.path===`research/${run}-judge-attempts.jsonl`
       &&Number.isSafeInteger(judgment.verdict.line)&&Number.isSafeInteger(judgment.attempt.line)&&judgment.attempt.line>=d.attempts_baseline.rows
       && judgment.attempt.row.id === id && judgment.attempt.row.model === MODELS.luna.id && judgment.attempt.row.context_sha256 === verdict.context_sha256
       && judgment.attempt.row.outcome === 'response' && judgment.attempt.row.status === 0&&judgment.attempt.row.has_content===true&&judgment.attempt.row.raw_bytes>0, 'not a genuine current accepted Luna judgment: ' + id);
     check(equal(latestCurrent(currentLedger,id,now),verdict),'a newer current Luna verdict supersedes accepted native coverage: '+id);
+    if(adjudicated){check(judgment.adjudication,'missing actual scientific adjudication binding');verifyProviderBinding(root,judgment.adjudication);
+      check(equal(scientificAdjudication(d,authority.authorization.raw_sha256,adjudicated),withoutAt(judgment.adjudication.row)),'scientific adjudication row differs from actual decision');}
     const source = readFileSync(join(root, 'items', id + '.md'), 'utf8');
     if (authority.status === 'complete') {
-      const after = verifyNativeStampDelta(source, judgment.before_stamp, { model: MODELS.luna.id });
+      const after = currentStampDelta(source, judgment);
       check(equal(after, judgment.after_stamp) && now.context_sha256 === judgment.after_stamp_context_sha256, 'native stamp-only replay changed: ' + id);
     } else check(now.context_sha256 === original.context_sha256 && fileHash(join(root, 'items', id + '.md')) === judgment.before_stamp.raw_sha256, 'judged inputs changed before stamping');
   }
@@ -278,16 +427,18 @@ export function verifyStep6CurrencyAuthority(root, run, certificate, { contextBu
 export function beginStep6CurrencyRepair(root, run, { contextBuilder = currencyContexts, sweep = null } = {}) {
   const authorization = requestDocument(root, run); if (!authorization) return null;
   const d = authorization.document, cert = read(regular(root, d.certificate.path));
-  const validated = validateDocument(root, run, cert, authorization, { live: true });
+  const validated = validateAnyDocument(root, run, cert, authorization, { live: true });
   const contexts = contextBuilder(root, validated.frontier.ids), path = join(root, authorityRel(run));
   if (existsSync(path)) {
     const existing = readAuthority(root, run);
-    check(existing.authorization.raw_sha256 === authorization.raw_sha256, 'existing scientific authority belongs to another request');
-    if (['complete', 'judged'].includes(existing.status)) { verifyCurrentAuthority(root, run, cert, existing, contexts, { allowJudged: true }); return existing; }
+    if(isScientific(d)&&existing.authorization.raw_sha256!==authorization.raw_sha256)archiveScientificPredecessor(root,run,d);
+    else{check(existing.authorization.raw_sha256 === authorization.raw_sha256, 'existing scientific authority belongs to another request');
+      if (['complete', 'judged'].includes(existing.status)) { verifyCurrentAuthority(root, run, cert, existing, contexts, { allowJudged: true }); return existing; }}
   }
-  check(equal(currentScope(root, run, cert, contexts, validated.changed), d.scope), 'current repair target scope changed');
+  check(equal(isScientific(d)?scientificScope(root,run,cert,contexts,validated):currentScope(root, run, cert, contexts, validated.changed),d.scope), 'current repair target scope changed');
   for (const id of d.scope.targets) check(equal(contexts[id], d.target_inputs[id]), 'authorized current prompt changed before provider work: ' + id);
   const before = Object.fromEntries(d.scope.targets.map(id => [id, stampObservation(readFileSync(join(root, 'items', id + '.md'), 'utf8'))]));
+  if(isScientific(d))appendScientificDecisions(root,run,authorization);
   const argv = ['tools/physics-support/judge-sweep.mjs', '--run', run, '--ledger', `research/${run}-judge.jsonl`, '--cost', `research/${run}-judge-cost.jsonl`,
     '--items', d.scope.targets.join(','), '--lineup', 'luna', '--effort', 'max', '--strict-context', '--context-cache', `.physics-autopilot/${run}/supervision/step6-currency-context-cache.json`];
   check(d.scope.targets.length > 0, 'empty provider target selection');
@@ -304,10 +455,14 @@ export function beginStep6CurrencyRepair(root, run, { contextBuilder = currencyC
       && entry.row.item_sha256 === original.item_sha256 && entry.row.context_sha256 === original.context_sha256).at(-1);
     const attempt = attempts.rows.filter(entry => entry.index>=d.attempts_baseline.rows&&entry.row.id === id && entry.row.model === MODELS.luna.id && entry.row.context_sha256 === original.context_sha256
       && entry.row.outcome === 'response' && entry.row.status === 0&&entry.row.has_content===true&&entry.row.raw_bytes>0).at(-1);
-    if (entry?.row.keep !== true || !attempt) { failures.push({ id, verdict: entry?.row ?? null, reason: !entry ? 'missing-current-verdict' : entry.row.keep !== true ? 'fresh-rejection-or-null' : 'missing-provider-response' }); continue; }
-    judgments.push({ id, verdict: providerBinding(root, ledgerPath, entry), attempt: providerBinding(root, attemptsPath, attempt), before_stamp: before[id] });
+    const accepted=entry?.row.keep===false&&isScientific(d)?acceptedScientificDecision(d,id,entry.row):null;
+    if ((!entry||entry.row.keep!==true&&!accepted)||!attempt) { failures.push({ id, verdict: entry?.row ?? null, reason: !entry ? 'missing-current-verdict' : entry.row.keep !== true ? 'fresh-rejection-or-null' : 'missing-provider-response' }); continue; }
+    const judgment={id,verdict:providerBinding(root,ledgerPath,entry),attempt:providerBinding(root,attemptsPath,attempt),before_stamp:before[id]};
+    if(accepted){const path=`research/${run}-judge-adjudications.jsonl`,row=jsonl(root,path).rows.filter(entry=>equal(withoutAt(entry.row),scientificAdjudication(d,authorization.raw_sha256,accepted))).at(-1);
+      check(row,'native scientific decision was not appended');judgment.adjudication=providerBinding(root,path,row);}
+    judgments.push(judgment);
   }
-  const payload = { version: 1, kind: 'native-physics-step6-current-judgments', run, status: failures.length ? 'blocked' : 'judged',
+  const payload = { version:isScientific(d)?2:1,kind:isScientific(d)?'native-physics-step6-scientific-current-judgments':'native-physics-step6-current-judgments',run,status:failures.length?'blocked':'judged',
     authorization, scope: d.scope, actual_command: ['node', ...argv], startedAt, judgedAt: new Date().toISOString(),
     ledger_prefixes: [prefix(root, ledgerPath), prefix(root, attemptsPath)], judgments, failures };
   storeAuthority(root, run, payload);
@@ -323,7 +478,7 @@ export function finishStep6CurrencyRepair(root, run, { contextBuilder = currency
   for (const row of authority.judgments) {
     const now = contexts[row.id], expected = d.target_inputs[row.id];
     check(now.item_sha256 === expected.item_sha256 && now.other_prompt_inputs_sha256 === expected.other_prompt_inputs_sha256, 'actual other prompt inputs changed during stamping');
-    row.after_stamp = verifyNativeStampDelta(readFileSync(join(root, 'items', row.id + '.md'), 'utf8'), row.before_stamp, { model: MODELS.luna.id });
+    row.after_stamp = currentStampDelta(readFileSync(join(root, 'items', row.id + '.md'), 'utf8'), row);
     row.after_stamp_context_sha256 = now.context_sha256;
   }
   const { sha256, ...payload } = authority;
@@ -352,6 +507,7 @@ export function step6CurrencyInputPaths(root, run, {live=false}={}) {
   // Durable authority embeds the exact request/reports. Live advertisements are
   // additionally sealed while preparation is active, but are not future proof.
   if (live&&existsSync(join(root, pointerRel(run)))) { selected.push(pointerRel(run)); const r = requestDocument(root, run); selected.push(r.path); }
+  const request=requestDocument(root,run);if(isScientific(request?.document)&&existsSync(join(root,request.document.predecessor.path)))selected.push(request.document.predecessor.path);
   return selected.filter(path => existsSync(join(root, path)));
 }
 
@@ -381,4 +537,27 @@ export function makeStep6CurrencyCandidate(root, run, { preimageCommit, renderin
     ledger_baseline:prefix(root,`research/${run}-judge.jsonl`),attempts_baseline:prefix(root,`research/${run}-judge-attempts.jsonl`) };
   const authorization = { document, path: '', raw_sha256: raw(JSON.stringify(document, null, 2) + '\n') };
   validateDocument(root, run, cert, authorization, { live: true }); return document;
+}
+
+export function makeStep6ScientificCurrencyCandidate(root,run,{reports,decisions,reconciliation,contextBuilder=currencyContexts}={}){
+  root=resolve(root);const prior=readAuthority(root,run),old=prior.authorization.document;
+  check(prior.version===1&&prior.status==='blocked','scientific continuation needs actual original blocked authority');
+  const cert=read(regular(root,old.certificate.path)),f=frontier(root,run),contexts=contextBuilder(root,f.ids);
+  const authors=reports.map(path=>{const original=read(regular(root,path)),payload=compactCurrencyAuthorReport(original);
+    return{path,raw_sha256:fileHash(join(root,path)),original_payload_sha256:digest(original),payload_sha256:digest(payload),payload};});
+  const document={version:1,kind:'physics-step6-scientific-rejection-resolution',run,reviewer:'/root',stage:'6-final-validation-v3',lineup:'luna',effort:'max',
+    preimage_commit:old.preimage_commit,certificate:old.certificate,frontier_sha256:f.sha256,
+    predecessor:{path:`research/${run}-step6-currency-blocked-${fileHash(join(root,authorityRel(run))).slice(0,16)}.json`,raw_sha256:fileHash(join(root,authorityRel(run))),payload_sha256:prior.sha256},
+    authors,decisions:decisions.map(row=>{const failure=prior.failures.find(f=>f.id===row.id);check(failure,'decision is not an actual native failure');
+      const path=`items/${row.id}.md`,guard=old.reconciliation.payload.scope.find(source=>source.path===path)?.after_guard??itemHashGuard(gitBytes(root,old.preimage_commit,path).toString('utf8'));
+      return{...row,rejected_tuple:tuple(failure.verdict),rejected_guard_sha256:guard};}),
+    reconciliation,historical_metadata:reconciliation.metadata_changes.map(row=>{const before=gitBytes(root,old.preimage_commit,row.path),after=readFileSync(regular(root,row.path));
+      return{path:row.path,before_sha256:raw(before),after_sha256:raw(after),changed_pointers:metadataScalarDifferences(JSON.parse(before),JSON.parse(after))};}),
+    ledger_baseline:old.ledger_baseline,attempts_baseline:old.attempts_baseline,
+    adjudications_baseline:prefix(root,`research/${run}-judge-adjudications.jsonl`),defects_baseline:prefix(root,'research/defect-ledger.jsonl')};
+  const changed=new Set(reconciliation.source_changes.filter(row=>row.path.startsWith('items/')).map(row=>row.path.slice(6,-3)));
+  document.scope=scientificScope(root,run,cert,contexts,{changed,predecessor:prior});
+  document.target_inputs=Object.fromEntries(document.scope.targets.map(id=>[id,contexts[id]]));
+  const authorization={document,path:'',raw_sha256:raw(JSON.stringify(document,null,2)+'\n')};
+  validateScientificDocument(root,run,cert,authorization,{live:true});return document;
 }

@@ -1466,6 +1466,29 @@ it does not create new scientific acceptance or require duplicate provider calls
 when the actual judged item and remaining prompt inputs are unchanged. Normal
 metadata/render preparation and the complete final battery still follow.
 
+If that actual sweep rejects, Root may authorize a bounded
+`physics-step6-scientific-rejection-resolution` request in the same native
+preparation unit. It binds the immutable blocked authority, every actual rejected
+provider tuple, the seven scientific owner reports and exact Root dispositions,
+explicit repaired sources, complete affected-consumer checks, and owned cumulative
+metadata differences against the original Git preimage. Shared-plan differences
+must belong to frozen items or selected pages. Every other source and page remains
+guarded. This is a scientific repair authorization, separate from the original
+rendering request; the original certificate and actual verdict rows remain intact.
+
+Native preparation archives the blocked authority byte for byte, appends genuine
+Guard-form adjudications and fixed defect records through the existing ledger
+validator, and invokes the frozen Luna/max strict-context sweep. Existing exact
+current responses are reused. An unchanged false-positive or nonfatal rejection
+closes only its exact original item/context tuple through the existing adjudication
+policy. Repaired sources and affected stale contexts require actual current
+judgments; new rejections, nulls, missing responses or owner evidence block again.
+No rejected item receives a pass stamp; only exact native stale-pass removal is
+permitted. The completed durable authority binds the predecessor archive, compact
+reports, native provider responses, adjudications and defect ownership, retaining
+verification after ignored supervision state is removed. Fresh metadata/render
+preparation and the ordinary full final battery remain required.
+
 ## Pre-gate recertification
 
 An owner finding-alias receipt may also bind an exact location-only variant

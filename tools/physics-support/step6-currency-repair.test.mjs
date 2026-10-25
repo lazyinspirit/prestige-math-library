@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { makeStep6CurrencyCandidate, beginStep6CurrencyRepair, finishStep6CurrencyRepair, verifyStep6CurrencyAuthority,
-  verifyStep6HistoricalMetadata, step6CurrencyInputPaths, step6CurrencyPending, currencyContexts, verifyStep6CurrencyForStamps, compactCurrencyAuthorReport } from './step6-currency-repair.mjs';
+  verifyStep6HistoricalMetadata, step6CurrencyInputPaths, step6CurrencyPending, currencyContexts, verifyStep6CurrencyForStamps, compactCurrencyAuthorReport, makeStep6ScientificCurrencyCandidate } from './step6-currency-repair.mjs';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
 import { freezeFrontier } from './step5-rounds.mjs';
 import { verifyCertification } from './step5-workflow.mjs';
@@ -23,7 +23,7 @@ function fixture(t, { nativeBaseline = false, realContexts = false } = {}) {
   const dir = join(root, 'research', run + '-step5-v2'), state = join(root, '.physics-autopilot', run), supervision = join(state, 'supervision');
   for (const path of [dir, supervision, join(root, 'items'), join(root, 'library', 'test')]) mkdirSync(path, { recursive: true });
   const ids = ['def-qftx-supersymmetry-fluctuation-complex', 'thm-context', 'thm-central-current', 'thm-ordinary-change', 'thm-ordinary-keep'];
-  const source = (id, text = 'A supplied datum with raw N=1.') => `---\nid: ${id}\nkind: definition\nstatus: draft\ndeps: []\nsources:\n  references: []\n---\n## Definition\n${text}\n`;
+  const source = (id, text = 'A supplied datum with raw N=1.') => `---\nid: ${id}\nkind: definition\nstatus: draft\ndeps: [${id==='thm-context'?ids[0]:''}]\nsources:\n  references: []\n---\n## Definition\n${text}\n`;
   for (const id of ids) writeFileSync(join(root, 'items', id + '.md'), source(id));
   if(realContexts){
     symlinkSync(join(import.meta.dirname,'..'),join(root,'tools'),'dir');
@@ -44,10 +44,11 @@ function fixture(t, { nativeBaseline = false, realContexts = false } = {}) {
   const verdicts = ids.map(id => ({ id, model: 'gpt-6-luna', keep: true, reason: 'Historical fixture verdict.', item_sha256: initial[id].item_sha256, context_sha256: initial[id].context_sha256, at: '2026-10-01T00:00:00Z' }));
   const ledgerPath = join(root, 'research', run + '-judge.jsonl'), attemptsPath = join(root, 'research', run + '-judge-attempts.jsonl');
   writeFileSync(ledgerPath, verdicts.map(row => JSON.stringify(row)).join('\n') + '\n'); writeFileSync(attemptsPath, '');
+  writeFileSync(join(root,'research',run+'-judge-adjudications.jsonl'),'');writeFileSync(join(root,'research','defect-ledger.jsonl'),'');
   save(join(dir, 'step4-verdicts.json'), verdicts);
   save(join(dir, 'initial-1.json'), { version: 2, run, phase: 'initial', round: 1, judge_model: 'gpt-6-luna', input_evidence: { [join(dir, 'step4-verdicts.json')]: raw(readFileSync(join(dir, 'step4-verdicts.json'))) } });
   const payload = { version: 2, run, phase: 'gate', round: 1, items: ids.slice(0, 3).map(id => ({ id, ...initial[id], guard_sha256: itemHashGuard(beforeTexts[id]) })), creations: [],
-    evidence: { [metadataPath]: raw(readFileSync(metadataPath)) } };
+    evidence: { [metadataPath]: raw(readFileSync(metadataPath)),[join(root,'research',run+'-judge-adjudications.jsonl')]:raw('') } };
   const certificate = { ...payload, sha256: digest(payload) }; save(join(dir, 'certification-gate-1.json'), certificate); save(join(dir, 'certification.json'), certificate);
   git(['add', 'physics']); git(['-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.org', 'commit', '-qm', 'immutable fixture preimage']);
   const preimageCommit = git(['rev-parse', 'HEAD']);
@@ -109,6 +110,58 @@ test('native current judgments retain exact old coverage and survive stamps, ret
   rmSync(join(f.root, '.physics-autopilot'), { recursive: true });
   assert.equal(f.verify().status, 'complete');
   verifyStep6HistoricalMetadata(f.root, f.run, f.certificate);
+});
+
+function scientificFixture(t,options){
+  const f=fixture(t,options),append=(path,row)=>appendFileSync(path,JSON.stringify({...row,at:new Date().toISOString()})+'\n');
+  assert.throws(()=>f.begin({sweep:({ids,contexts})=>{for(const id of ids){append(f.ledgerPath,{id,model:'gpt-6-luna',keep:id===f.ids[1],reason:'Actual fixture rejection',...contexts[id]});
+    append(f.attemptsPath,{id,model:'gpt-6-luna',context_sha256:contexts[id].context_sha256,outcome:'response',status:0,has_content:true,raw_bytes:100});}return{status:0};}}),/rejected/);
+  const blocked=readFileSync(f.authorityPath),sourcePath='items/'+f.ids[0]+'.md',path=join(f.root,sourcePath),before=readFileSync(path,'utf8');
+  writeFileSync(path,before.replace('raw $N=1$.','raw $N=1$ with a specified finite carrier.'));
+  const after=readFileSync(path,'utf8'),metadata=JSON.parse(readFileSync(f.metadataPath));metadata[0].items[0].statement=after.split('## Definition\n')[1].trim();f.save(f.metadataPath,metadata);
+  const reports=Array.from({length:7},(_,i)=>{const path=relative(f.root,join(f.supervision,'science-'+i+'.json'));f.save(join(f.root,path),{run:f.run,findings:[{id:f.ids[0],review:'Confirmed and repaired.'},{id:f.ids[3],review:'False positive, exact source unchanged.'}],consumers:[{id:f.ids[1],review:'Checked affected context.'}]});return path;});
+  const now=f.contextBuilder(f.root,f.ids),inputs={reports,decisions:[
+    {id:f.ids[0],outcome:'confirmed_fatal',defect_type:'logic',reason:'Missing carrier repaired.',uncertain:false,familiar:true,source_urls:[],report_path:reports[0],report_pointer:'/findings/0',ledger_row:{defect_id:'demo-science-fatal',class:'accuracy',subclass:'missing-hypothesis',severity:'fatal',location:'definition',disposition:'fixed',correction:'Specified finite carrier.'}},
+    {id:f.ids[3],outcome:'false_positive',reason:'Exact current definition already includes the required premise.',uncertain:false,familiar:true,source_urls:[],report_path:reports[1],report_pointer:'/findings/1'}],
+    reconciliation:{run:f.run,reviewer:'/root',source_changes:[{path:sourcePath,before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),before_judge_sha256:itemHashJudge(before),after_judge_sha256:itemHashJudge(after),interface_changed:true,report_path:reports[0],report_pointer:'/findings/0'}],
+      metadata_changes:[{path:relative(f.root,f.metadataPath),changed_pointers:[]}],consumer_decisions:[{id:f.ids[1],suppliers:[f.ids[0]],disposition:'unaffected',post_guard:itemHashGuard(readFileSync(join(f.root,'items',f.ids[1]+'.md'),'utf8')),post_judge_sha256:now[f.ids[1]].item_sha256,reason:'Actual focused consumer check.',report_path:reports[0],report_pointer:'/consumers/0',uncertain:false}]}};
+  const build=()=>makeStep6ScientificCurrencyCandidate(f.root,f.run,{...inputs,contextBuilder:f.contextBuilder});
+  const advertise=document=>{f.save(f.requestPath,document);f.save(f.pointerPath,{version:1,run:f.run,request:{path:relative(f.root,f.requestPath),sha256:raw(readFileSync(f.requestPath))}});};
+  return{...f,inputs,build,advertiseScientific:advertise,blocked};
+}
+
+test('scientific continuation preserves blocked history, accepts exact actual false-positive adjudication and judges repaired contexts',t=>{
+  const f=scientificFixture(t,{realContexts:true}),d=f.build();f.advertiseScientific(d);
+  const sweep=({ids,contexts})=>{for(const id of ids){if(id===f.ids[3])continue;
+    appendFileSync(f.ledgerPath,JSON.stringify({id,model:'gpt-6-luna',keep:true,reason:'Real test provider response',...contexts[id]})+'\n');
+    appendFileSync(f.attemptsPath,JSON.stringify({id,model:'gpt-6-luna',context_sha256:contexts[id].context_sha256,outcome:'response',status:0,has_content:true,raw_bytes:100})+'\n');}return{status:0};};
+  const judged=f.begin({sweep});assert.equal(judged.status,'judged');assert.equal(judged.version,2);
+  assert.deepEqual(readFileSync(join(f.root,d.predecessor.path)),f.blocked);
+  const fp=judged.judgments.find(row=>row.id===f.ids[3]);assert.equal(fp.verdict.row.keep,false);assert.equal(fp.adjudication.row.outcome,'false_positive');
+  f.applyStamps(d.scope.targets.filter(id=>id!==f.ids[3]));f.finish();assert.equal(f.verify().status,'complete');
+  for(const args of [ ['defect-ledger.mjs','validate','--run',f.run],
+    ['defect-ledger.mjs','render'],
+    ['defect-ledger.mjs','check','--run',f.run,'--adjudications',`research/${f.run}-judge-adjudications.jsonl`,'--frontier',relative(f.root,join(f.dir,'frontier.json'))],
+    ['level-coverage.mjs','--judge-only','--verify-current-context','--run',f.run,'--judge-ledger',`research/${f.run}-judge.jsonl`,'--judge-adjudications',`research/${f.run}-judge-adjudications.jsonl`,relative(f.root,f.metadataPath)] ]){
+    const [script,...argv]=args,result=spawnSync(process.execPath,[join(import.meta.dirname,script),...argv],{cwd:f.root,encoding:'utf8',env:{...process.env,PHYSICS_REPO:f.root,JUDGE_LINEUP:'luna'}});
+    assert.equal(result.status,0,result.stdout+'\n'+result.stderr);
+  }
+  rmSync(join(f.root,'.physics-autopilot'),{recursive:true});assert.equal(f.verify().status,'complete');verifyStep6HistoricalMetadata(f.root,f.run,f.certificate);
+});
+
+for(const[name,mutate]of[
+  ['missing actual failure disposition',f=>f.inputs.decisions.pop()],
+  ['duplicate actual failure disposition',f=>f.inputs.decisions[1]=f.inputs.decisions[0]],
+  ['unbound report locator',f=>f.inputs.decisions[0].report_pointer='/missing'],
+  ['missing affected consumer',f=>f.inputs.reconciliation.consumer_decisions=[]],
+  ['unlisted page change',f=>appendFileSync(f.pagePath,'Unauthorized page prose.\n')],
+  ['false pre-science guard',f=>f.inputs.reconciliation.source_changes[0].before_guard='0'.repeat(64)],
+])test('scientific continuation rejects '+name,t=>{const f=scientificFixture(t);mutate(f);assert.throws(f.build);});
+
+test('scientific continuation never accepts a new rejection on a repaired context',t=>{
+  const f=scientificFixture(t);f.advertiseScientific(f.build());assert.throws(()=>f.begin({sweep:({ids,contexts})=>{for(const id of ids){if(id===f.ids[3])continue;
+    appendFileSync(f.ledgerPath,JSON.stringify({id,model:'gpt-6-luna',keep:false,...contexts[id]})+'\n');}return{status:0};}}),/rejected/);
+  assert.equal(JSON.parse(readFileSync(f.authorityPath)).status,'blocked');
 });
 
 test('already observed native stamp-only Guard edge is accepted only for an unchanged ordinary keep bound by failed-render inputs', t => {
