@@ -6,7 +6,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { realpathSync } from 'node:fs';
 import { acquireControllerLock } from './controller-lock.mts';
 import { activeNativeWriters } from '../../autopilot/src/workflow-prefix-migration.mts';
-import { sourceState, registerStateDirectory, statFingerprint } from '../../step6-prepared.mjs';
+import { sourceState, registerStateDirectory } from '../../step6-prepared.mjs';
 import { runScope } from '../../step6-lib.mjs';
 
 const hash = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
@@ -27,6 +27,27 @@ function git(repo: string, ...args: string[]) {
 }
 const textGit = (repo: string, ...args: string[]) => git(repo, ...args).toString().trim();
 const date = (value: any) => { const n = Date.parse(value); if (!Number.isFinite(n)) fail('invalid native chronology'); return n; };
+
+/** Recovery writes operational siblings of selected currency inputs. Ignore only
+ * those two directory rows, never the selected input files or canonical dirs. */
+export function packagingSourceStatFingerprint(root: string, paths: string[], stateDir: string) {
+  const selected = new Set(paths.map(path => resolve(root, path)));
+  for (const path of [...selected]) selected.add(dirname(path));
+  for (const name of ['research', 'items', 'library', 'tools', 'briefs']) selected.add(join(root, name));
+  const operationalDirs = new Set([resolve(stateDir), resolve(stateDir, 'supervision')]);
+  const rows: any[] = [];
+  for (const path of [...selected].sort()) {
+    try {
+      const stat = lstatSync(path, { bigint: true });
+      if (operationalDirs.has(path) && stat.isDirectory()) continue;
+      rows.push([path, String(stat.dev), String(stat.ino), String(stat.mode), String(stat.size), String(stat.mtimeNs), String(stat.ctimeNs)]);
+    } catch (error: any) {
+      if (!['ENOENT', 'ENOTDIR'].includes(error.code)) throw error;
+      rows.push([path, null]);
+    }
+  }
+  return hash(JSON.stringify(rows));
+}
 
 /** Pure checks also used by operational fixtures; production always supplies disk/native facts. */
 export function verifyPackagingHistory(state: any, prepared: any, events: any[], run: string) {
@@ -164,14 +185,14 @@ export function inspectStep6PackagingRecovery(o: PackagingOptions, locked = fals
   const commits = verifyCommittedPackaging(root, auth);
   registerStateDirectory(o.repo, o.run, { physics: true, stateDir: o.stateDir });
   const physical = [...prepared.source.physicalPaths, ...auth.packaging_changes.map((row: any) => relative(o.repo, join(root, row.path)))];
-  const beforeStat = statFingerprint(o.repo, physical);
+  const beforeStat = packagingSourceStatFingerprint(o.repo, physical, o.stateDir);
   const current = sourceState(o.repo, o.run, { physics: true });
-  if (statFingerprint(o.repo, physical) !== beforeStat) fail('source changed during recovery inspection');
+  if (packagingSourceStatFingerprint(o.repo, physical, o.stateDir) !== beforeStat) fail('source changed during recovery inspection');
   const changed = verifyPackagingSource(prepared.source.tree, current.tree, auth.packaging_changes);
   const retire = [join(o.stateDir, 'step6-prepared.json'), join(o.stateDir, 'step6-mechanical-preparation.json'),
     join(o.dispatchDir, 'tool-step6-prepare-final-v3.result.json')].filter(existsSync);
   const guards = { state_sha256: hash(stateBytes), events_sha256: hash(events), preparation_sha256: hash(preparedBytes),
-    current_source_sha256: current.sha256, source_stat_fingerprint: statFingerprint(o.repo, current.physicalPaths),
+    current_source_sha256: current.sha256, source_stat_fingerprint: packagingSourceStatFingerprint(o.repo, current.physicalPaths, o.stateDir),
     git_head: textGit(root, 'rev-parse', 'HEAD'), git_index_sha256: hash(bytes(textGit(root, 'rev-parse', '--path-format=absolute', '--git-path', 'index'))),
     authorization_basis_sha256: hash(JSON.stringify({ ...auth, guards: null })), history, commits, changed,
     frontier: { items: scope.items.length, pages: scope.pages.length },
@@ -200,7 +221,7 @@ export function recoverStep6Packaging(o: PackagingOptions) {
     save('receipt.record', receiptBytes); after.step6PackagingRecovery = { archive: relative(o.repo, archive), receipt_sha256: hash(receiptBytes) };
     const next = encode(after); save('state.after.snapshot', next);
     // Recheck the inspected physical tree and all mutable bases immediately before swapping state.
-    if (statFingerprint(o.repo, live.current.physicalPaths) !== live.guards.source_stat_fingerprint
+    if (packagingSourceStatFingerprint(o.repo, live.current.physicalPaths, o.stateDir) !== live.guards.source_stat_fingerprint
       || hash(bytes(join(o.stateDir, 'state.json'))) !== live.guards.state_sha256
       || hash(bytes(join(o.stateDir, 'events.jsonl'))) !== live.guards.events_sha256
       || textGit(live.root, 'rev-parse', 'HEAD') !== live.guards.git_head

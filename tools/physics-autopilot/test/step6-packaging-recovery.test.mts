@@ -5,9 +5,31 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { packagingRecoveryState, verifyCommittedPackaging, verifyPackagingHistory, verifyPackagingSource } from '../src/step6-packaging-recovery.mts';
+import { packagingRecoveryState, packagingSourceStatFingerprint, verifyCommittedPackaging, verifyPackagingHistory, verifyPackagingSource } from '../src/step6-packaging-recovery.mts';
+import { acquireControllerLock } from '../src/controller-lock.mts';
 const hash = (s: string) => createHash('sha256').update(s).digest('hex');
 const seal = (s: string) => hash('file\0' + s);
+test('local recovery fingerprint survives lock/archive/diagnostic writes but guards authority files and canonical dirs', t => {
+  const root = mkdtempSync(join(tmpdir(), 'packaging-stat-')); t.after(() => rmSync(root, { recursive: true, force: true }));
+  const stateDir = join(root, '.physics-autopilot', 'demo'), supervision = join(stateDir, 'supervision');
+  mkdirSync(supervision, { recursive: true }); mkdirSync(join(root, 'research'));
+  const request = join(stateDir, 'step6-currency-request.json'), authority = join(supervision, 'currency-authority.json');
+  writeFileSync(request, 'selected request'); writeFileSync(authority, 'selected authority');
+  const paths = [request, authority], fingerprint = () => packagingSourceStatFingerprint(root, paths, stateDir), before = fingerprint();
+  const release = acquireControllerLock(stateDir, 'demo');
+  try {
+    assert.equal(fingerprint(), before, 'controller lock creation changes no selected input');
+    const archive = join(stateDir, 'packaging-recovery-fixture'); mkdirSync(archive);
+    writeFileSync(join(archive, 'state.snapshot'), 'operational archive');
+    writeFileSync(join(supervision, 'inspection.json'), 'operational diagnostic');
+    assert.equal(fingerprint(), before, 'archive and diagnostic siblings are not source changes');
+  } finally { release(); }
+  assert.equal(fingerprint(), before, 'controller lock removal changes no selected input');
+  writeFileSync(request, 'changed selected request');
+  const changedRequest = fingerprint(); assert.notEqual(changedRequest, before, 'selected state-backed file remains guarded');
+  writeFileSync(join(root, 'research', 'new-canonical-input.json'), 'canonical input');
+  assert.notEqual(fingerprint(), changedRequest, 'canonical research directory remains guarded');
+});
 // Operational fixtures only: synthetic history never supplies production coverage.
 function history() {
   const at = (n: number) => new Date(Date.UTC(2026, 0, 1, 0, 0, n)).toISOString();
