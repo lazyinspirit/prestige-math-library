@@ -1,7 +1,7 @@
 ---
 page: qftx-two-group-symmetry-backgrounds-examples
 title: 2-Group Symmetry Backgrounds in Physical Models — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: ex-aqft-fusion-z2-twisted-associator
 kind: example
 title: "A Z2 fusion datum with a nontrivial associator scalar"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: ex-qftx-finite-witten-index-cancellation
 kind: example
 title: Finite positive-energy pair cancels from a nonzero Witten index
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

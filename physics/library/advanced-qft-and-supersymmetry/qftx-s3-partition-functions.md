@@ -1,7 +1,7 @@
 ---
 page: qftx-s3-partition-functions
 title: Three-Dimensional S3 Localization Examples
-status: draft
+status: "published"
 library: physics
 items:
   - post-qftx-s3-cs-matter-localization-model

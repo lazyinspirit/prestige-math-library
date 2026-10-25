@@ -1,7 +1,7 @@
 ---
 page: qftx-anomaly-matching-and-frontier
 title: "Anomaly Matching and Categorical Classification Frontier"
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-exact-background-rg-flow

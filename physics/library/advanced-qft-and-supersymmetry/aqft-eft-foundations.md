@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-foundations
 title: EFT Data, Scales, Wilsonian Action and Finite Matching
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-model-and-scale-data

@@ -2,7 +2,7 @@
 id: ex-qftx-clay-finite-one-plaquette-regulator
 kind: example
 title: A finite one-plaquette SU(2) regulator
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

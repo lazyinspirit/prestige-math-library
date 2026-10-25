@@ -2,7 +2,7 @@
 id: lem-qftx-coupled-penrose-operator-coefficient
 kind: lemma
 title: Round coupled Penrose correction gives the R-over-six operator
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

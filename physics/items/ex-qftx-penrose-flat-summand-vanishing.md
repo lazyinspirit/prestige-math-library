@@ -2,7 +2,7 @@
 id: ex-qftx-penrose-flat-summand-vanishing
 kind: example
 title: Flat summands in coupled Penrose vanishing
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

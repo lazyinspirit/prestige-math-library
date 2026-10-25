@@ -2,7 +2,7 @@
 id: def-qftx-critical-abelian-higgs-divisor-data
 kind: definition
 title: Critical Abelian Higgs fields, winding and divisor data
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

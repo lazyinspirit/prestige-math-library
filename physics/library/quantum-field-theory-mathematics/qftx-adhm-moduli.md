@@ -1,7 +1,7 @@
 ---
 page: qftx-adhm-moduli
 title: Framed ADHM Data and Equivariant Instanton Count
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-framed-u-n-instanton-moduli-and-adhm-data

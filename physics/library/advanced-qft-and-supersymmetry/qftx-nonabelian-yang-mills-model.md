@@ -1,7 +1,7 @@
 ---
 page: qftx-nonabelian-yang-mills-model
 title: Classical Non-Abelian Yang–Mills Model
-status: draft
+status: "published"
 library: physics
 items:
   - lem-qftx-su2-compact-nonabelian-invariant-form

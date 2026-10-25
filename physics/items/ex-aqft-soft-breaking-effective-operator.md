@@ -2,7 +2,7 @@
 id: ex-aqft-soft-breaking-effective-operator
 kind: example
 title: Heavy-Chiral Threshold and a Spurion Soft Trilinear
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

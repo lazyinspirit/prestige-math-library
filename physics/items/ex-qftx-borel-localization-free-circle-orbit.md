@@ -2,7 +2,7 @@
 id: ex-qftx-borel-localization-free-circle-orbit
 kind: example
 title: A free circle orbit has zero localized Borel cohomology
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: pthm-aqft-global-anomaly-test
 kind: physics-theorem
 title: A global SU(2) determinant-line phase and its mod-two inflow cancellation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

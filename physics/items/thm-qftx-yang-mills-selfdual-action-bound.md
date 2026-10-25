@@ -2,7 +2,7 @@
 id: thm-qftx-yang-mills-selfdual-action-bound
 kind: theorem
 title: Euclidean Yang–Mills self-dual action bound
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: mathematics

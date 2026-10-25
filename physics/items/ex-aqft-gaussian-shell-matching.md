@@ -4,7 +4,7 @@ kind: example
 domain: physics
 library: physics
 title: One-dimensional finite Gaussian matching and shell composition
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 5
 deps:

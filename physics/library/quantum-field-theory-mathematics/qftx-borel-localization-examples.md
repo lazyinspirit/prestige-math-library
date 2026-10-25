@@ -1,7 +1,7 @@
 ---
 page: qftx-borel-localization-examples
 title: Borel Localization for Compact Torus Actions — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

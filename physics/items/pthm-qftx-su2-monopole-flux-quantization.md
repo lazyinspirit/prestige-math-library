@@ -2,7 +2,7 @@
 id: pthm-qftx-su2-monopole-flux-quantization
 kind: physics-theorem
 title: Flux quantization in the specified SU(2) adjoint-Higgs sector
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

@@ -2,7 +2,7 @@
 id: ex-qftx-n4-adjoint-hyper-decomposition
 kind: example
 title: $N=4$ action as a massless adjoint-hypermultiplet specialization
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 8

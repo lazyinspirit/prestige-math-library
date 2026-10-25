@@ -1,7 +1,7 @@
 ---
 page: qftx-coupled-penrose-vanishing-on-the-round-four-sphere
 title: Coupled Penrose vanishing on the round four-sphere
-status: draft
+status: "published"
 library: mathematics
 companion: qftx-coupled-penrose-vanishing-on-the-round-four-sphere-examples
 requires:

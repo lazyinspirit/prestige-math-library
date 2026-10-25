@@ -1,7 +1,7 @@
 ---
 page: qftx-thooft-anomalies-examples
 title: Perturbative ’t Hooft Anomalies and Counterterms — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

@@ -1,7 +1,7 @@
 ---
 page: qftx-equivariant-symbol-index-examples
 title: Equivariant Compact Symbols and Fixed-Inclusion Localization — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

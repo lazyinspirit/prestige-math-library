@@ -2,7 +2,7 @@
 id: thm-qftx-singer-global-gauge-section-obstruction
 kind: theorem
 title: "Singer obstruction to a global continuous gauge representative"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

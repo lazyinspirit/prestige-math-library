@@ -2,7 +2,7 @@
 id: pthm-qftx-n2star-u2-regulated-ward-identity
 kind: physics-theorem
 title: Finite-regulator Ward identity for the $N=2^*$ U(2) sphere model
-status: draft
+status: "published"
 origin: session
 domain: physics
 library: physics

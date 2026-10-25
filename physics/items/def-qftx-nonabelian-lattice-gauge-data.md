@@ -2,7 +2,7 @@
 id: def-qftx-nonabelian-lattice-gauge-data
 kind: definition
 title: Finite non-Abelian lattice gauge data
-status: draft
+status: "published"
 origin: session
 dependency_level: 1
 domain: mathematics

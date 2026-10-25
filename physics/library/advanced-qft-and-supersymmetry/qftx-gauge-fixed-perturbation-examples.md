@@ -1,7 +1,7 @@
 ---
 page: qftx-gauge-fixed-perturbation-examples
 title: Gauge Fixing and Formal Perturbative Yang–Mills — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

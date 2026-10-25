@@ -2,7 +2,7 @@
 id: ex-qftx-su2-noncommuting-curvature
 kind: example
 title: Constant noncommuting potentials with nonzero curvature
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

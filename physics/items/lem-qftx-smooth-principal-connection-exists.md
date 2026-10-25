@@ -2,7 +2,7 @@
 id: lem-qftx-smooth-principal-connection-exists
 kind: lemma
 title: Existence of a smooth principal connection on a compact SU(N) bundle
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

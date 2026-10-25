@@ -2,7 +2,7 @@
 id: lem-qftx-pi5-special-unitary-nonzero
 kind: lemma
 title: "Nonvanishing of the fifth special-unitary homotopy group"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

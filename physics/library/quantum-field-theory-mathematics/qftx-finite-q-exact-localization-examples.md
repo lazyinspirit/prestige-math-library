@@ -1,7 +1,7 @@
 ---
 page: qftx-finite-q-exact-localization-examples
 title: "Finite-Dimensional Q-Exact Deformation Theorem — Examples"
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

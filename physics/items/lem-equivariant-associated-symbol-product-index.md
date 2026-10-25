@@ -2,7 +2,7 @@
 id: lem-equivariant-associated-symbol-product-index
 kind: lemma
 title: "Positive-order associated-bundle product and its equivariant index"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

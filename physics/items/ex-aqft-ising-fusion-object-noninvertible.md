@@ -2,7 +2,7 @@
 id: ex-aqft-ising-fusion-object-noninvertible
 kind: example
 title: "The Ising fusion object is simple and non-invertible"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

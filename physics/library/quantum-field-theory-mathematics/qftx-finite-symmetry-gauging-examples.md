@@ -1,7 +1,7 @@
 ---
 page: qftx-finite-symmetry-gauging-examples
 title: Finite Groupoid Gauging and Gluing — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

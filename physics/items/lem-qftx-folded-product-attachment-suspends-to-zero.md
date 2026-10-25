@@ -2,7 +2,7 @@
 id: lem-qftx-folded-product-attachment-suspends-to-zero
 kind: lemma
 title: "Folded product attachment has Hopf invariant two and null suspension"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 2

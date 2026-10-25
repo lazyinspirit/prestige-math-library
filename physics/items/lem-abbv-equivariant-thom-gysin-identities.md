@@ -2,7 +2,7 @@
 id: lem-abbv-equivariant-thom-gysin-identities
 kind: lemma
 title: "Equivariant Thom-Gysin Identities for Fixed Submanifolds"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

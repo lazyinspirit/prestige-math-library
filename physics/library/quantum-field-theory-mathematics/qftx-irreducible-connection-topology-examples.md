@@ -1,7 +1,7 @@
 ---
 page: qftx-irreducible-connection-topology-examples
 title: "Topology of Irreducible Connection Spaces — Examples"
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

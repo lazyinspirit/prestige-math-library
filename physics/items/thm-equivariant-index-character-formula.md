@@ -2,7 +2,7 @@
 id: thm-equivariant-index-character-formula
 kind: theorem
 title: "Equivariant elliptic-complex index character and fixed-component formula"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

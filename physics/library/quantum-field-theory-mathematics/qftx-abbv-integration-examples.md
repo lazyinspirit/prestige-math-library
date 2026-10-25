@@ -1,7 +1,7 @@
 ---
 page: qftx-abbv-integration-examples
 title: "Atiyah–Bott–Berline–Vergne Integration Formula — Examples"
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

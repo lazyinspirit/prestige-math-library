@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-experimental-inference-examples
 title: EFT Measurements, Global Fits and Search Likelihoods — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

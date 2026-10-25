@@ -2,7 +2,7 @@
 id: def-qftx-coupled-penrose-incidence-geometry
 kind: definition
 title: Positive incidence geometry for the coupled Penrose transform
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

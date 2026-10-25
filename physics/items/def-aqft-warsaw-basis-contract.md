@@ -2,7 +2,7 @@
 id: def-aqft-warsaw-basis-contract
 kind: definition
 title: Finite dimension-six Warsaw coefficient contract
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

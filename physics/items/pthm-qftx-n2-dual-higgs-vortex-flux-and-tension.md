@@ -2,7 +2,7 @@
 id: pthm-qftx-n2-dual-higgs-vortex-flux-and-tension
 kind: physics-theorem
 title: Flux quantization and positive tension for an admitted dual vortex
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 9

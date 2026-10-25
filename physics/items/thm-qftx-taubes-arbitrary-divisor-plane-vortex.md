@@ -2,7 +2,7 @@
 id: thm-qftx-taubes-arbitrary-divisor-plane-vortex
 kind: theorem
 title: Planar critical vortices for arbitrary finite divisors
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

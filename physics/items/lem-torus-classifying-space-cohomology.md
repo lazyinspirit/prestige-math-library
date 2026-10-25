@@ -2,7 +2,7 @@
 id: lem-torus-classifying-space-cohomology
 kind: lemma
 title: "Real cohomology of the chosen torus classifying space"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-qftx-compact-torus-equivariant-slice-neighborhoods
 kind: lemma
 title: Equivariant tubular and slice neighborhoods for compact torus actions
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

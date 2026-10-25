@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-coherent-section-restriction-compact
 kind: lemma
 title: Restriction of coherent sections to a relatively compact open set is compact
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

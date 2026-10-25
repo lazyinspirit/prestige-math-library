@@ -1,7 +1,7 @@
 ---
 page: aqft-susy-effective-theories-examples
 title: Supersymmetric EFT Operators and Thresholds — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

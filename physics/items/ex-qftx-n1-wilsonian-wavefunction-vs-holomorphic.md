@@ -2,7 +2,7 @@
 id: ex-qftx-n1-wilsonian-wavefunction-vs-holomorphic
 kind: example
 title: Holomorphic and Canonically Normalized Wess–Zumino Couplings
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

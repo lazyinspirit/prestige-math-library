@@ -2,7 +2,7 @@
 id: thm-aqft-gapped-scalar-forward-positivity
 kind: theorem
 title: Forward positivity for a gapped identical scalar
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

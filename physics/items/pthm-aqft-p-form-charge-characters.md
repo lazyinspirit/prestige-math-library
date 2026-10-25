@@ -2,7 +2,7 @@
 id: pthm-aqft-p-form-charge-characters
 kind: physics-theorem
 title: "Exchangeability makes p-form symmetry groups Abelian and simple charges characters"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

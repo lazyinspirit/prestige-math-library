@@ -1,7 +1,7 @@
 ---
 page: qftx-global-anomalies-inflow
 title: Global Anomalies, Relative Theories and Inflow
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-global-anomaly-holonomy

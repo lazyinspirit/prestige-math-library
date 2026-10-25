@@ -2,7 +2,7 @@
 id: lem-qftx-special-unitary-column-fibration
 kind: lemma
 title: "Special-unitary column fibration"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

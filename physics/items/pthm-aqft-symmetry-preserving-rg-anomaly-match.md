@@ -2,7 +2,7 @@
 id: pthm-aqft-symmetry-preserving-rg-anomaly-match
 kind: physics-theorem
 title: "Symmetry-preserving RG anomaly matching"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

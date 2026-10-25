@@ -1,7 +1,7 @@
 ---
 page: qftx-gauge-geometry
 title: Non-Abelian Principal-Connection Forms and Curvature
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-qftx-nonabelian-gauge-data

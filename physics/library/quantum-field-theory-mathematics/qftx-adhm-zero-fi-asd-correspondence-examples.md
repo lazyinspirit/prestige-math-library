@@ -1,7 +1,7 @@
 ---
 page: qftx-adhm-zero-fi-asd-correspondence-examples
 title: Zero-FI Regular ADHM Data and Framed ASD Connections — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

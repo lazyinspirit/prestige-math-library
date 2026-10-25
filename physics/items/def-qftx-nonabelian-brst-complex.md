@@ -2,7 +2,7 @@
 id: def-qftx-nonabelian-brst-complex
 kind: definition
 title: Finite-Jet Non-Abelian BRST Complex
-status: draft
+status: "published"
 origin: session
 dependency_level: 0
 domain: mathematics

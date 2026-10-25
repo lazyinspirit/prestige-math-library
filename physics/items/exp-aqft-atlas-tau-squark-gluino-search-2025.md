@@ -2,7 +2,7 @@
 id: exp-aqft-atlas-tau-squark-gluino-search-2025
 kind: experiment
 title: ATLAS tau, jets, and missing-momentum squark and gluino search
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

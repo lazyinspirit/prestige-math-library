@@ -2,7 +2,7 @@
 id: lem-qftx-bv-canonical-action-generates-brst-differential
 kind: lemma
 title: Canonical Antibracket Generates the Declared BRST Field Variations
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: mathematics

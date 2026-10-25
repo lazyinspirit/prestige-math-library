@@ -2,7 +2,7 @@
 id: lem-qftx-compact-manifold-cohomology-positive-ideal-nilpotent
 kind: lemma
 title: Positive-degree cohomology of a compact manifold is nilpotent
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

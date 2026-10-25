@@ -1,7 +1,7 @@
 ---
 page: qftx-instanton-topology-mathematics
 title: Instanton Charge, Self-Dual Bound, and BPST Example
-status: draft
+status: "published"
 library: mathematics
 items:
   - lem-qftx-hodge-star-decomposition-four-dimensions

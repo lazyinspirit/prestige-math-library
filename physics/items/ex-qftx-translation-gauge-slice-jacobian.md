@@ -2,7 +2,7 @@
 id: ex-qftx-translation-gauge-slice-jacobian
 kind: example
 title: Translation action with a unit Faddeev–Popov Jacobian
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: mathematics

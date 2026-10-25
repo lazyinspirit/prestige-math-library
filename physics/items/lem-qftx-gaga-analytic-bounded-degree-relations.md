@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-analytic-bounded-degree-relations
 kind: lemma
 title: "Local relations among Weierstrass polynomials reduce to bounded degree"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

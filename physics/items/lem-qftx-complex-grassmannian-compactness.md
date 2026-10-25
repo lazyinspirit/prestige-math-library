@@ -2,7 +2,7 @@
 id: lem-qftx-complex-grassmannian-compactness
 kind: lemma
 title: Compactness of the finite complex Grassmannian
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

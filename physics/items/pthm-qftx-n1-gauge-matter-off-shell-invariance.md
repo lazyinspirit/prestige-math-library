@@ -2,7 +2,7 @@
 id: pthm-qftx-n1-gauge-matter-off-shell-invariance
 kind: physics-theorem
 title: Off-shell supersymmetry of the rigid $N=1$ gauge-matter superspace action
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

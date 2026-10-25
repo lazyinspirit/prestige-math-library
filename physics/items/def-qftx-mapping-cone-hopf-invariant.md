@@ -2,7 +2,7 @@
 id: def-qftx-mapping-cone-hopf-invariant
 kind: definition
 title: Integral mapping-cone Hopf invariant for maps S3 to S2
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

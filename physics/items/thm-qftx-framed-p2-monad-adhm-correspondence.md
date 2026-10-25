@@ -2,7 +2,7 @@
 id: thm-qftx-framed-p2-monad-adhm-correspondence
 kind: theorem
 title: Framed P² monads and stable ADHM data
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

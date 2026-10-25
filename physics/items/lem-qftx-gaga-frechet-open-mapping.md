@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-frechet-open-mapping
 kind: lemma
 title: Open mapping theorem for Fréchet spaces
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

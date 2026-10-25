@@ -1,7 +1,7 @@
 ---
 page: qftx-positive-real-linear-monad-normal-forms
 title: Positive real linear monad normal forms
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-qftx-positive-real-monad-first-order-families

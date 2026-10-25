@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-cstar-laurent-decomposition
 kind: lemma
 title: Laurent decomposition of holomorphic functions on the punctured plane
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

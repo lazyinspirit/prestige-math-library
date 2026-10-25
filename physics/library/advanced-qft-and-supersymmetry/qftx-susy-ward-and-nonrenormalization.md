@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-ward-and-nonrenormalization
 title: Supersymmetry Ward Identities and Wilsonian Nonrenormalization
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-wilsonian-n1-action-data

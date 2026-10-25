@@ -2,7 +2,7 @@
 id: lem-qftx-su2-compact-nonabelian-invariant-form
 kind: lemma
 title: Compactness and normalized invariant form for SU(2)
-status: draft
+status: "published"
 origin: session
 dependency_level: 0
 domain: mathematics

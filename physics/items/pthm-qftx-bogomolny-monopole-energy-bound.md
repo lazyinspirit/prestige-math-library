@@ -2,7 +2,7 @@
 id: pthm-qftx-bogomolny-monopole-energy-bound
 kind: physics-theorem
 title: Classical SU(2) monopole energy bound and Bogomolny equations
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

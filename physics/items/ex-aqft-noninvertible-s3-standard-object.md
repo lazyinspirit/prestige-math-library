@@ -2,7 +2,7 @@
 id: ex-aqft-noninvertible-s3-standard-object
 kind: example
 title: "A simple non-invertible object in Rep_C(S3)"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

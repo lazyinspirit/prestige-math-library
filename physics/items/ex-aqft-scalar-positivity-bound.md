@@ -2,7 +2,7 @@
 id: ex-aqft-scalar-positivity-bound
 kind: example
 title: Allowed and excluded order-two forward coefficients
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

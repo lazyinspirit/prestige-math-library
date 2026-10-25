@@ -2,7 +2,7 @@
 id: lem-qftx-hodge-star-decomposition-four-dimensions
 kind: lemma
 title: Hodge decomposition of two-forms in four dimensions
-status: draft
+status: "published"
 origin: session
 domain: mathematics
 library: mathematics

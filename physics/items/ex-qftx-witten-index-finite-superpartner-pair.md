@@ -2,7 +2,7 @@
 id: ex-qftx-witten-index-finite-superpartner-pair
 kind: example
 title: A finite supersymmetric pair with Witten index one
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

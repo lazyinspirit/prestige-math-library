@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-frechet-complex-compact-finiteness
 kind: lemma
 title: Compact maps surjective on cohomology give finite Hausdorff target cohomology
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

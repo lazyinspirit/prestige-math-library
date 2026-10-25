@@ -1,7 +1,7 @@
 ---
 page: qftx-physical-hall-bps-wall-crossing
 title: Hall Wall Crossing and Physical BPS Dictionary
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-physical-bps-charge-data

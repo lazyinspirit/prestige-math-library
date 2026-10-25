@@ -2,7 +2,7 @@
 id: ex-qftx-n4-su2-chiral-primary-dimension
 kind: example
 title: Conditional Dimension of the SU(2) Quadratic Chiral Primary
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: ex-aqft-explicit-breaking-endpoint
 kind: example
 title: "A fixed source breaks the matching symmetry"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

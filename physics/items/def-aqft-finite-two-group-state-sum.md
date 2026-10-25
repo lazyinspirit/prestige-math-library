@@ -2,7 +2,7 @@
 id: def-aqft-finite-two-group-state-sum
 kind: definition
 title: Finite two-group lattice spin state-sum model
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

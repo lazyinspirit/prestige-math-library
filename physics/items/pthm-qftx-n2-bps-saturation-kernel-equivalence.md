@@ -2,7 +2,7 @@
 id: pthm-qftx-n2-bps-saturation-kernel-equivalence
 kind: physics-theorem
 title: $N=2$ central-charge saturation is equivalent to annihilation by the null supercharge pair
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

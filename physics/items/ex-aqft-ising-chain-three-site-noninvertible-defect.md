@@ -2,7 +2,7 @@
 id: ex-aqft-ising-chain-three-site-noninvertible-defect
 kind: example
 title: "A non-invertible defect on a three-site Ising ring"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

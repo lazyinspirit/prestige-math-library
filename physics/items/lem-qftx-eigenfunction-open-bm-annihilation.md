@@ -2,7 +2,7 @@
 id: lem-qftx-eigenfunction-open-bm-annihilation
 kind: lemma
 title: Nonzero eigenfunctions annihilate equivariant BM on their nonvanishing loci
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 2

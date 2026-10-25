@@ -2,7 +2,7 @@
 id: lem-qftx-grassmann-coefficient-calculus
 kind: lemma
 title: Associativity and coefficient calculus for the finite superspace Grassmann algebra
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

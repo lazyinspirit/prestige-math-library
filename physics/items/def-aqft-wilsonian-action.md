@@ -4,7 +4,7 @@ kind: definition
 domain: physics
 library: physics
 title: Finite-regulator Wilsonian action
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 2
 deps:

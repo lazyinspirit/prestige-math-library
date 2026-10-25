@@ -2,7 +2,7 @@
 id: ex-qftx-borel-localization-positive-dimensional-fixed-components
 kind: example
 title: Rotation on one factor of a product with positive-dimensional fixed components
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

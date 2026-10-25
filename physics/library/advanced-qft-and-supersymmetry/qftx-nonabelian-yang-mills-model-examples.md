@@ -1,7 +1,7 @@
 ---
 page: qftx-nonabelian-yang-mills-model-examples
 title: Classical Non-Abelian Yang–Mills Model — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

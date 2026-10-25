@@ -2,7 +2,7 @@
 id: ex-qftx-positive-fi-boundary-is-not-asd
 kind: example
 title: A positive-FI point with a non-locally-free framed sheaf
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

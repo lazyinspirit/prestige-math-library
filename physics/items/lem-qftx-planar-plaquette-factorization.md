@@ -2,7 +2,7 @@
 id: lem-qftx-planar-plaquette-factorization
 kind: lemma
 title: Independent plaquette variables on a finite planar rectangle
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

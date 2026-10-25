@@ -2,7 +2,7 @@
 id: post-qftx-n4-super-yang-mills-model
 kind: postulate
 title: Four-dimensional $N=4$ SU(2) super-Yang-Mills model
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

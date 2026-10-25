@@ -2,7 +2,7 @@
 id: lem-qftx-su2-wilson-transfer-well-defined
 kind: lemma
 title: Finite SU(2) Wilson integrals and transfer-sector well-definedness
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 axiom_base: "ZF + full AC; full AC supplies AC_omega to the finite lattice and

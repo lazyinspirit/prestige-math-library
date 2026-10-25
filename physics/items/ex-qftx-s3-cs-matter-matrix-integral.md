@@ -2,7 +2,7 @@
 id: ex-qftx-s3-cs-matter-matrix-integral
 kind: example
 title: ABJM S3 partition function as a Cartan matrix integral
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

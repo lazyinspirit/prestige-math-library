@@ -2,7 +2,7 @@
 id: ex-aqft-noninvertible-z2-sum
 kind: example
 title: "A non-invertible direct sum in Vec_Z2"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

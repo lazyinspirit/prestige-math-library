@@ -2,7 +2,7 @@
 id: def-qftx-unitary-super-poincare-representation
 kind: definition
 title: Positive unitary super-Poincare representation with spectral-domain covariance
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

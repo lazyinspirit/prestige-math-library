@@ -1,7 +1,7 @@
 ---
 page: qftx-p-form-symmetries
 title: Higher-Form Symmetries and Charge Operators
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-p-form-global-symmetry

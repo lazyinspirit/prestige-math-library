@@ -2,7 +2,7 @@
 id: def-standard-product-torus-as-a-compact-lie-group
 kind: definition
 title: "The standard product torus as a compact Lie group"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

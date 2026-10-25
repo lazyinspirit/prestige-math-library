@@ -2,7 +2,7 @@
 id: ex-aqft-finite-c2-gluing-identity
 kind: example
 title: The homotopy-pullback gluing factor for the two-element group
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

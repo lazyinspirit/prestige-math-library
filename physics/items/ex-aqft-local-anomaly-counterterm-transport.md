@@ -2,7 +2,7 @@
 id: ex-aqft-local-anomaly-counterterm-transport
 kind: example
 title: "A mixed-background counterterm shift along RG"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

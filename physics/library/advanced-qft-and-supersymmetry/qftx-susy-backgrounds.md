@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-backgrounds
 title: Rigid Supersymmetric Backgrounds and Localization Data
-status: draft
+status: "published"
 library: physics
 items:
   - thm-qftx-complex-associated-bundle-realification

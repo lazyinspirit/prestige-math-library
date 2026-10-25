@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-untwisted-obstruction
 kind: example
 title: Failure of global generation for $\mathcal O(-1)$ and top cohomology of $\mathcal O(-r-1)$
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

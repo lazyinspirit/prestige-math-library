@@ -2,7 +2,7 @@
 id: pthm-qftx-omega-background-fixed-point-expansion
 kind: physics-theorem
 title: "Ω-Background Fixed-Point Expansion"
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 6
 domain: physics

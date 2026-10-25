@@ -2,7 +2,7 @@
 id: lem-qftx-coupled-penrose-round-sphere-curvature
 kind: lemma
 title: Scalar curvature of the unit round four-sphere
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

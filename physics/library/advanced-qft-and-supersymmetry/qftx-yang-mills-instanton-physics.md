@@ -1,7 +1,7 @@
 ---
 page: qftx-yang-mills-instanton-physics
 title: Yang–Mills Topological Sectors and Instanton Interpretation
-status: draft
+status: "published"
 library: physics
 items:
   - post-qftx-euclidean-yang-mills-model

@@ -2,7 +2,7 @@
 id: lem-qftx-parametric-gauge-smoothing
 kind: lemma
 title: "Parametric smoothing of gauge sections"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

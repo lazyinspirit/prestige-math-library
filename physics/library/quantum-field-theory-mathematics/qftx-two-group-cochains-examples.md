@@ -1,7 +1,7 @@
 ---
 page: qftx-two-group-cochains-examples
 title: Finite 2-Group Background Cochains and Consistency — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

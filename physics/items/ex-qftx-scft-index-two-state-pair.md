@@ -2,7 +2,7 @@
 id: ex-qftx-scft-index-two-state-pair
 kind: example
 title: A Finite Boson–Fermion Pair in a Superconformal-Index Trace
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 9

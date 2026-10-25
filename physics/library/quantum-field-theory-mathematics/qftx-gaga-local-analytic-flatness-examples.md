@@ -1,7 +1,7 @@
 ---
 page: qftx-gaga-local-analytic-flatness-examples
 title: Faithful flatness of finite-type algebraic-to-analytic local rings — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-backgrounds-examples
 title: Rigid Supersymmetric Backgrounds and Localization Data — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

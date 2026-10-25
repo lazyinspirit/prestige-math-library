@@ -2,7 +2,7 @@
 id: lem-equivariant-symbol-chern-character-pushforward
 kind: lemma
 title: "Trace-weighted compact symbol character and the cotangent pushforward"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: ex-qftx-n1-su2-fundamental-matter-covariant-derivative
 kind: example
 title: Fundamental SU(2) chiral matter and its covariant derivative
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

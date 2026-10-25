@@ -4,7 +4,7 @@ kind: thought-experiment
 domain: physics
 library: physics
 title: Finite heavy-scalar Gaussian matching
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 4
 deps:

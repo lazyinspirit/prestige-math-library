@@ -1,7 +1,7 @@
 ---
 page: qftx-bps-solitons-monopoles-examples
 title: BPS Solitons and the Classical Monopole Bound — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

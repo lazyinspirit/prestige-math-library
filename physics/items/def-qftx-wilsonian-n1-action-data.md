@@ -2,7 +2,7 @@
 id: def-qftx-wilsonian-n1-action-data
 kind: definition
 title: Local $N=1$ Wilsonian Superspace Action Data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

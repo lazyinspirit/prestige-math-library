@@ -2,7 +2,7 @@
 id: lem-qftx-bounded-power-series-holomorphy-and-coefficient-uniqueness
 kind: lemma
 title: Bounded multivariable power series are holomorphic with unique derivative coefficients
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

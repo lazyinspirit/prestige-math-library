@@ -2,7 +2,7 @@
 id: def-qftx-graded-trace-class-index-data
 kind: definition
 title: Pure-point graded trace-class index data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

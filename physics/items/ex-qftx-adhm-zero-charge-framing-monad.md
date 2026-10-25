@@ -2,7 +2,7 @@
 id: ex-qftx-adhm-zero-charge-framing-monad
 kind: example
 title: "The zero-charge framed monad"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

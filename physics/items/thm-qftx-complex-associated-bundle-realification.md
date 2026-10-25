@@ -2,7 +2,7 @@
 id: thm-qftx-complex-associated-bundle-realification
 kind: theorem
 title: Complex structure on an associated bundle by realification
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

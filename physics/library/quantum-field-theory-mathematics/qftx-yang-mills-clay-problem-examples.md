@@ -1,7 +1,7 @@
 ---
 page: qftx-yang-mills-clay-problem-examples
 title: Clay Four-Dimensional Yang–Mills Existence and Mass Gap — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: lem-qftx-n2-hypermultiplet-gauge-invariant-couplings
 kind: lemma
 title: Gauge invariance of hypermultiplet mass and adjoint couplings
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

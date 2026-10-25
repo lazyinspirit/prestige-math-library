@@ -2,7 +2,7 @@
 id: def-aqft-eft-scattering-channel
 kind: definition
 title: Gapped scalar EFT forward channel and matched coefficient data
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

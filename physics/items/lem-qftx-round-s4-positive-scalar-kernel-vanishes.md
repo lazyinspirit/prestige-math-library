@@ -2,7 +2,7 @@
 id: lem-qftx-round-s4-positive-scalar-kernel-vanishes
 kind: lemma
 title: Positive scalar term eliminates the coupled Laplace kernel on round S4
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

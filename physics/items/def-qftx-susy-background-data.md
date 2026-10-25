@@ -2,7 +2,7 @@
 id: def-qftx-susy-background-data
 kind: definition
 title: Rigid supersymmetric background and localization data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

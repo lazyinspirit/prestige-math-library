@@ -2,7 +2,7 @@
 id: ex-qftx-n4-su2-noncommuting-scalar-potential
 kind: example
 title: Positive $N=4$ scalar potential for two noncommuting SU(2) fields
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-qftx-suspended-hopf-composite-adem-obstruction
 kind: lemma
 title: "Nonvanishing of consecutive suspended Hopf composites by Adem relation"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: prop-aqft-quartic-contact-jet-matching
 kind: proposition
 title: Quartic scalar contact jets descend through verified operator relations
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

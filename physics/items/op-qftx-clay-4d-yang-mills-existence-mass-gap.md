@@ -2,7 +2,7 @@
 id: op-qftx-clay-4d-yang-mills-existence-mass-gap
 kind: open-problem
 title: Four-dimensional Yang–Mills existence and mass gap
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

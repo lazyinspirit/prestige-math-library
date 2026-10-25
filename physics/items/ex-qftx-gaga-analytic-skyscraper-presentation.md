@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-skyscraper-presentation
 kind: example
 title: "A coherent point quotient and its first syzygies"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

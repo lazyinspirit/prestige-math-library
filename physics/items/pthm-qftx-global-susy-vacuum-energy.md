@@ -2,7 +2,7 @@
 id: pthm-qftx-global-susy-vacuum-energy
 kind: physics-theorem
 title: Vacuum energy and global supersymmetry invariance
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

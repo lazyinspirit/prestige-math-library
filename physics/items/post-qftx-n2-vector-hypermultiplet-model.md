@@ -2,7 +2,7 @@
 id: post-qftx-n2-vector-hypermultiplet-model
 kind: postulate
 title: Four-dimensional $N=2$ SU(2) vector and hypermultiplet model
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

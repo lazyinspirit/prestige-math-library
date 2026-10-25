@@ -1,7 +1,7 @@
 ---
 page: qftx-equivariant-index
 title: Equivariant Elliptic Index and Character Formula
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-equivariant-elliptic-complex-index

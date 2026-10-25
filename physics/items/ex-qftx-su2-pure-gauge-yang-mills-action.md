@@ -2,7 +2,7 @@
 id: ex-qftx-su2-pure-gauge-yang-mills-action
 kind: example
 title: A nonzero pure-gauge potential with zero Yang–Mills density
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: physics

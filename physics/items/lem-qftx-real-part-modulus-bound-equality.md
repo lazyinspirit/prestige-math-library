@@ -2,7 +2,7 @@
 id: lem-qftx-real-part-modulus-bound-equality
 kind: lemma
 title: Ordered-field component bound with its equality case
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

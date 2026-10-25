@@ -1,7 +1,7 @@
 ---
 page: qftx-eft-rg-data
 title: Wilson Coefficients and Finite-Dimensional RG Systems
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-aqft-scheme-and-wilson-coefficients

@@ -2,7 +2,7 @@
 id: ex-aqft-single-chiral-fundamental-polynomial
 kind: example
 title: A single chiral fundamental has a nonzero local polynomial
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

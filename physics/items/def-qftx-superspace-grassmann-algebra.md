@@ -2,7 +2,7 @@
 id: def-qftx-superspace-grassmann-algebra
 kind: definition
 title: Four-dimensional $N=1$ superspace Grassmann algebra and Berezin integration
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

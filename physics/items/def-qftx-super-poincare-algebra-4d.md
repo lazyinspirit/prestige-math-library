@@ -2,7 +2,7 @@
 id: def-qftx-super-poincare-algebra-4d
 kind: definition
 title: Four-dimensional real extended super-Poincare algebra
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

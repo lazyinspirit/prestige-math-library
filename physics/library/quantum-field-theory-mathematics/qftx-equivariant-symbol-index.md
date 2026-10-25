@@ -1,7 +1,7 @@
 ---
 page: qftx-equivariant-symbol-index
 title: Equivariant Compact Symbols and Fixed-Inclusion Localization
-status: draft
+status: "published"
 library: mathematics
 items:
 - def-equivariant-compact-symbol-k-theory

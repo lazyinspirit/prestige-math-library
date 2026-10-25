@@ -2,7 +2,7 @@
 id: lem-qftx-nonfixed-locus-cohomology-is-torsion-after-localization
 kind: lemma
 title: Equivariant cohomology of the nonfixed locus vanishes after character localization
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

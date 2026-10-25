@@ -2,7 +2,7 @@
 id: pthm-aqft-selected-chiral-spectrum-anomaly-cancellation
 kind: physics-theorem
 title: Local anomaly cancellation for a conjugate chiral pair
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: ex-qftx-berezin-coefficient-extraction
 kind: example
 title: Ordered Berezin integral detects a sign in a permuted top monomial
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

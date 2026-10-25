@@ -1,7 +1,7 @@
 ---
 page: qftx-finite-symmetry-gauging-physics
 title: Finite Symmetry Gauging as a Specified Model
-status: draft
+status: "published"
 library: physics
 order: 996
 items:

@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-equal-completions
 kind: example
 title: Unequal local rings with equal completions
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 3
 domain: mathematics

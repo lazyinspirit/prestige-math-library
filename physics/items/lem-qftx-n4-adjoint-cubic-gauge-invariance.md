@@ -2,7 +2,7 @@
 id: lem-qftx-n4-adjoint-cubic-gauge-invariance
 kind: lemma
 title: Gauge invariance of the adjoint cubic superpotential
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

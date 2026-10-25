@@ -2,7 +2,7 @@
 id: lem-qftx-proper-closed-subgroup-has-annihilating-character
 kind: lemma
 title: A proper closed subgroup of a torus has a nonzero annihilating character
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

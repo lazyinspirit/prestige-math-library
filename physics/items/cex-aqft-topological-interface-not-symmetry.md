@@ -2,7 +2,7 @@
 id: cex-aqft-topological-interface-not-symmetry
 kind: counterexample
 title: "A topological interface between different models is not an internal symmetry"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

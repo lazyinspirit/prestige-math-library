@@ -2,7 +2,7 @@
 id: pthm-qftx-n2-monopole-condensation-after-n1-perturbation
 kind: physics-theorem
 title: Conditional monopole Higgs vacuum after a small $N=1$ perturbation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 12

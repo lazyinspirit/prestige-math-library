@@ -2,7 +2,7 @@
 id: lem-qftx-coupled-penrose-positive-orientation-asd
 kind: lemma
 title: Incidence alpha planes detect positive-orientation anti-self-duality
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

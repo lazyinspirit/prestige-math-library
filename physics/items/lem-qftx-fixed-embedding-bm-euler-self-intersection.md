@@ -2,7 +2,7 @@
 id: lem-qftx-fixed-embedding-bm-euler-self-intersection
 kind: lemma
 title: Fixed-embedding BM self-intersection and Euler units
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 2

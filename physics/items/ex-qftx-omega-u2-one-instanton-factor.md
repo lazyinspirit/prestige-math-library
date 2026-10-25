@@ -2,7 +2,7 @@
 id: ex-qftx-omega-u2-one-instanton-factor
 kind: example
 title: 'The $U(2)$ $\mathcal N=2^*$ One-Instanton Factor'
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 7
 domain: physics

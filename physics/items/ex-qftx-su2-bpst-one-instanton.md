@@ -2,7 +2,7 @@
 id: ex-qftx-su2-bpst-one-instanton
 kind: example
 title: Charge-one BPST instanton on the round four-sphere
-status: draft
+status: "published"
 origin: session
 dependency_level: 5
 domain: mathematics

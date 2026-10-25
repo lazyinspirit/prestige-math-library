@@ -2,7 +2,7 @@
 id: ex-qftx-n2-quadratic-prepotential
 kind: example
 title: Constant gauge-coupling matrix from the quadratic $N=2$ prepotential
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-nonreduced-quotient
 kind: example
 title: Faithful flatness retaining a nilpotent class
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 3
 domain: mathematics

@@ -2,7 +2,7 @@
 id: def-qftx-lie-algebra-valued-form-bracket
 kind: definition
 title: Graded bracket of Lie-algebra-valued differential forms
-status: draft
+status: "published"
 origin: session
 dependency_level: 0
 domain: mathematics

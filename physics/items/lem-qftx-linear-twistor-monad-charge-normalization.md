@@ -2,7 +2,7 @@
 id: lem-qftx-linear-twistor-monad-charge-normalization
 kind: lemma
 title: Chern character and charge of the normalized twistor monad
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

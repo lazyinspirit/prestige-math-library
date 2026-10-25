@@ -2,7 +2,7 @@
 id: thm-qftx-local-faddeev-popov-slice-jacobian
 kind: theorem
 title: Local Faddeev–Popov slice Jacobian and orbit-intersection count
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: mathematics

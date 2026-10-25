@@ -2,7 +2,7 @@
 id: pthm-qftx-nonabelian-yang-mills-euler-lagrange
 kind: physics-theorem
 title: Source-free Euler–Lagrange equation for the classical SU(2) Yang–Mills action
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: physics

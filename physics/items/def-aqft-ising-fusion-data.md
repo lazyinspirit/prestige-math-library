@@ -2,7 +2,7 @@
 id: def-aqft-ising-fusion-data
 kind: definition
 title: "Skeletal Ising fusion-data package"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

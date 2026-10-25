@@ -2,7 +2,7 @@
 id: lem-qftx-covariant-laplacian-sobolev-splitting
 kind: lemma
 title: Rough-coefficient covariant Green inverse and Coulomb splitting
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 5
 domain: mathematics

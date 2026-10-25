@@ -2,7 +2,7 @@
 id: ex-qftx-so2-gauge-slice-multiplicity
 kind: example
 title: SO(2) orbit with two slice intersections and a stabilizer at the origin
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: mathematics

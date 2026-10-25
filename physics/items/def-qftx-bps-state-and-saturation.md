@@ -2,7 +2,7 @@
 id: def-qftx-bps-state-and-saturation
 kind: definition
 title: BPS state and central-charge saturation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

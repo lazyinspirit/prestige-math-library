@@ -2,7 +2,7 @@
 id: def-qftx-euclidean-yang-mills-sector
 kind: definition
 title: Euclidean Yang–Mills sectors and instanton interpretation
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: physics

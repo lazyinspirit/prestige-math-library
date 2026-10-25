@@ -2,7 +2,7 @@
 id: lem-qftx-coupled-penrose-fibre-dolbeault
 kind: lemma
 title: Dolbeault groups of the negative twistor-fibre twists
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

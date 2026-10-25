@@ -2,7 +2,7 @@
 id: def-qftx-nonabelian-gauge-data
 kind: definition
 title: Non-Abelian gauge data and bundle sectors
-status: draft
+status: "published"
 origin: session
 dependency_level: 0
 domain: mathematics

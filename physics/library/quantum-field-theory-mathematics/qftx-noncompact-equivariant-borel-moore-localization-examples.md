@@ -1,7 +1,7 @@
 ---
 page: qftx-noncompact-equivariant-borel-moore-localization-examples
 title: Noncompact Torus Localization in Equivariant Borel–Moore Homology — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

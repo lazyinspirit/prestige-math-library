@@ -2,7 +2,7 @@
 id: ex-qftx-su2-flat-pure-gauge-connection
 kind: example
 title: A nonzero pure-gauge potential with zero curvature
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

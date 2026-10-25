@@ -2,7 +2,7 @@
 id: "def-aqft-finite-background-two-groupoid"
 kind: "definition"
 title: "Finite background gauge 2-groupoid"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "mathematics"
 library: "mathematics"

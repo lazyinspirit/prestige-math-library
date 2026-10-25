@@ -1,7 +1,7 @@
 ---
 page: qftx-bps-solitons-monopoles
 title: BPS Solitons and the Classical Monopole Bound
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-adjoint-higgs-monopole-sector

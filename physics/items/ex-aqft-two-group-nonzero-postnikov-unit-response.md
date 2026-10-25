@@ -2,7 +2,7 @@
 id: ex-aqft-two-group-nonzero-postnikov-unit-response
 kind: example
 title: Nonzero Postnikov class with unit background response
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

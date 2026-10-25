@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-matching-running
 title: Threshold Matching and Coupled RG Evolution
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-threshold-matching-map

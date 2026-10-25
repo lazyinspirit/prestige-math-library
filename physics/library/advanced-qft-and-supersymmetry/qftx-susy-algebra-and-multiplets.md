@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-algebra-and-multiplets
 title: Physical BPS Sectors and Multiplet Interpretation
-status: draft
+status: "published"
 library: physics
 items:
   - pthm-qftx-n2-bps-saturation-kernel-equivalence

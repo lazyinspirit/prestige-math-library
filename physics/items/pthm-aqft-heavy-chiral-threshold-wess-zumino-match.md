@@ -2,7 +2,7 @@
 id: pthm-aqft-heavy-chiral-threshold-wess-zumino-match
 kind: physics-theorem
 title: Heavy-chiral threshold Wess–Zumino anomaly match
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: ex-qftx-n2-short-rest-fiber-algebra
 kind: example
 title: Finite $N=2$ rest-fiber algebra at central-charge saturation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

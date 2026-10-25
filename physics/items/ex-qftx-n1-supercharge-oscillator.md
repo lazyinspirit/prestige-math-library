@@ -2,7 +2,7 @@
 id: ex-qftx-n1-supercharge-oscillator
 kind: example
 title: Two-mode fermionic oscillator for the $N=1$ rest algebra
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

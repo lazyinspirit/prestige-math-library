@@ -2,7 +2,7 @@
 id: def-aqft-threshold-matching-map
 kind: definition
 title: Finite-order EFT threshold matching map
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

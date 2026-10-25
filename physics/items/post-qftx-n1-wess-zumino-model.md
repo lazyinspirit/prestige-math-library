@@ -2,7 +2,7 @@
 id: post-qftx-n1-wess-zumino-model
 kind: postulate
 title: Rigid four-dimensional $N=1$ Wess–Zumino sigma-model action
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

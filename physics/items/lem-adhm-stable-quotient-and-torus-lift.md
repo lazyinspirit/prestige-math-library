@@ -2,7 +2,7 @@
 id: lem-adhm-stable-quotient-and-torus-lift
 kind: lemma
 title: "Stable ADHM quotient charts, properness and torus lifts"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

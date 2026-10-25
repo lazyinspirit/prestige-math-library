@@ -2,7 +2,7 @@
 id: def-qftx-zero-fi-regular-adhm-and-twistor-data
 kind: definition
 title: Zero-FI regular ADHM and framed twistor data
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: ex-qftx-susy-round-s4-localization-data
 kind: example
 title: The round S4 supercharge square and its finite geometric Cartan data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

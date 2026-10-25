@@ -1,7 +1,7 @@
 ---
 page: qftx-adhm-linear-data-and-framed-monads
 title: ADHM Linear Data, Positive-FI Quotients and Framed Monads
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-qftx-adhm-linear-data-stability-and-regularity

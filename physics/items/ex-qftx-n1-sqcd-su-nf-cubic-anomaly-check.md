@@ -2,7 +2,7 @@
 id: ex-qftx-n1-sqcd-su-nf-cubic-anomaly-check
 kind: example
 title: SU(Nf) cubic-anomaly check for proposed SQCD dual data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

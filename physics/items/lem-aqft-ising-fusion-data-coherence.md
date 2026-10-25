@@ -2,7 +2,7 @@
 id: lem-aqft-ising-fusion-data-coherence
 kind: lemma
 title: "Coherence of the Ising fusion data"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

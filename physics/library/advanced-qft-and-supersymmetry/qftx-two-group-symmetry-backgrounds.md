@@ -1,7 +1,7 @@
 ---
 page: qftx-two-group-symmetry-backgrounds
 title: 2-Group Symmetry Backgrounds in Physical Models
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-two-group-symmetry-realization

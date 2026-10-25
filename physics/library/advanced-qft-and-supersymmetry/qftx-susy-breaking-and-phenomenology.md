@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-breaking-and-phenomenology
 title: Supersymmetry Breaking and Collider Inference
-status: draft
+status: "published"
 library: physics
 items:
   - lem-qftx-real-part-modulus-bound-equality

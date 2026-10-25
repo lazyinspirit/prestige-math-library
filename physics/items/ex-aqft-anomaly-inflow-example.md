@@ -2,7 +2,7 @@
 id: ex-aqft-anomaly-inflow-example
 kind: example
 title: One-instanton SU(2) sign cancelled by a mod-two-index bulk
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

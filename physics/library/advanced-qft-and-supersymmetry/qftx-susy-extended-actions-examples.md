@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-extended-actions-examples
 title: $N=2$ and $N=4$ Gauge Actions — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

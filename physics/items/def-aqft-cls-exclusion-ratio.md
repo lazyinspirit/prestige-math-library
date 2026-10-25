@@ -2,7 +2,7 @@
 id: def-aqft-cls-exclusion-ratio
 kind: definition
 title: CLs ratio for source-specified signal exclusions
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

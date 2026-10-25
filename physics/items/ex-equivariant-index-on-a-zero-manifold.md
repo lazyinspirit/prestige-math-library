@@ -2,7 +2,7 @@
 id: ex-equivariant-index-on-a-zero-manifold
 kind: example
 title: "A nontrivial virtual character on a two-point manifold"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

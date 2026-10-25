@@ -2,7 +2,7 @@
 id: lem-qftx-coupled-penrose-injective-edge
 kind: lemma
 title: Injective fibre-harmonic edge for coupled Penrose cohomology
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: ex-qftx-n2-hypermultiplet-gauge-invariants
 kind: example
 title: Gauge-invariant bilinears in one SU(2) hypermultiplet
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

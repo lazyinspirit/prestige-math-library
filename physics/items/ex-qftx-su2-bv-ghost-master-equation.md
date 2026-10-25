@@ -2,7 +2,7 @@
 id: ex-qftx-su2-bv-ghost-master-equation
 kind: example
 title: The SU(2) Ghost Sector Solves the Classical Master Equation
-status: draft
+status: "published"
 origin: session
 dependency_level: 5
 domain: mathematics

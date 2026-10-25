@@ -2,7 +2,7 @@
 id: def-aqft-anomaly-inflow-relative-theory
 kind: definition
 title: Relative boundary theory and invertible anomaly inflow
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

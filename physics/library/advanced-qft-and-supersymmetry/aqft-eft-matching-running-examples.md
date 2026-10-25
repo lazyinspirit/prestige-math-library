@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-matching-running-examples
 title: Threshold Matching and Coupled RG Evolution — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

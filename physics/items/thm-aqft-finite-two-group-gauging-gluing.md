@@ -2,7 +2,7 @@
 id: "thm-aqft-finite-two-group-gauging-gluing"
 kind: "theorem"
 title: "Finite 2-group homotopy gauging and cochain gluing"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "mathematics"
 library: "mathematics"

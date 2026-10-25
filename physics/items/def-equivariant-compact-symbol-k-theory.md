@@ -2,7 +2,7 @@
 id: def-equivariant-compact-symbol-k-theory
 kind: definition
 title: "Equivariant compact-support symbol classes and the normal Koszul class"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

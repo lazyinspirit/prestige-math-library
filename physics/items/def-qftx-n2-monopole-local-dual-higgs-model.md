@@ -2,7 +2,7 @@
 id: def-qftx-n2-monopole-local-dual-higgs-model
 kind: definition
 title: Local dual U(1) monopole-Higgs effective data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

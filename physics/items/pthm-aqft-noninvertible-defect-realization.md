@@ -2,7 +2,7 @@
 id: pthm-aqft-noninvertible-defect-realization
 kind: physics-theorem
 title: "Finite-lattice realization of the Ising non-invertible defect"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

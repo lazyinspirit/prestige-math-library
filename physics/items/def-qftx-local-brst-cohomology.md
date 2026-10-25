@@ -2,7 +2,7 @@
 id: def-qftx-local-brst-cohomology
 kind: definition
 title: Local BRST Cohomology Modulo Total Derivatives
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

@@ -2,7 +2,7 @@
 id: lem-qftx-compact-torus-fixed-locus-normal-weights
 kind: lemma
 title: Fixed loci and normal weights of compact torus actions
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

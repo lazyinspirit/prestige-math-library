@@ -2,7 +2,7 @@
 id: thm-qftx-zero-fi-regular-adhm-asd-correspondence
 kind: theorem
 title: Conditional zero-FI regular ADHM and framed ASD correspondence
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: pthm-qftx-physical-index-beta-independence
 kind: physics-theorem
 title: Beta independence of the physical Witten index
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

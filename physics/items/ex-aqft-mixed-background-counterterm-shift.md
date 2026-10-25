@@ -2,7 +2,7 @@
 id: ex-aqft-mixed-background-counterterm-shift
 kind: example
 title: A mixed-background counterterm shifts the local representative
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

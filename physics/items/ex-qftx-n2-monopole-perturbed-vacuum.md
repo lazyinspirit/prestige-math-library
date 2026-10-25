@@ -2,7 +2,7 @@
 id: ex-qftx-n2-monopole-perturbed-vacuum
 kind: example
 title: Symbolic monopole vacuum in the local dual U(1) model
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 8

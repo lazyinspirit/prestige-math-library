@@ -2,7 +2,7 @@
 id: ex-qftx-n4-su2-line-operator-duality
 kind: example
 title: SU(2) and SO(3) Line-Spectrum Choices in the $N=4$ Duality Family
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 9

@@ -1,7 +1,7 @@
 ---
 page: qftx-equivariant-cohomology
 title: Borel and Cartan Equivariant Cohomology
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-standard-product-torus-as-a-compact-lie-group

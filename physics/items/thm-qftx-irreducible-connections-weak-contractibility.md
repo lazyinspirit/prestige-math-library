@@ -2,7 +2,7 @@
 id: thm-qftx-irreducible-connections-weak-contractibility
 kind: theorem
 title: Weak contractibility of the irreducible connection locus
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

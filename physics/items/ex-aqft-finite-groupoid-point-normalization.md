@@ -2,7 +2,7 @@
 id: ex-aqft-finite-groupoid-point-normalization
 kind: example
 title: The normalized sum on a one-object finite groupoid
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

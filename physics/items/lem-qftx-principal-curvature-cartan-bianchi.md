@@ -2,7 +2,7 @@
 id: lem-qftx-principal-curvature-cartan-bianchi
 kind: lemma
 title: Principal curvature, Cartan structure equation, and Bianchi identity
-status: draft
+status: "published"
 origin: session
 dependency_level: 1
 domain: mathematics

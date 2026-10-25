@@ -2,7 +2,7 @@
 id: thm-qftx-coupled-penrose-vanishing
 kind: theorem
 title: Coupled Penrose vanishing on the round four-sphere
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

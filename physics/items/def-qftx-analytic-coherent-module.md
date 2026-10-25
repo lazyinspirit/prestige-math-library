@@ -2,7 +2,7 @@
 id: def-qftx-analytic-coherent-module
 kind: definition
 title: "Coherent module sheaves on complex manifolds"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

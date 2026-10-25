@@ -2,7 +2,7 @@
 id: ex-aqft-finite-two-group-point-normalization
 kind: example
 title: Point normalization in the finite symmetry model
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

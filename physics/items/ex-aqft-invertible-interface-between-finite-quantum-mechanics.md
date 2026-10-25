@@ -2,7 +2,7 @@
 id: ex-aqft-invertible-interface-between-finite-quantum-mechanics
 kind: example
 title: "An invertible interface between two finite quantum-mechanical models"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

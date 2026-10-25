@@ -2,7 +2,7 @@
 id: ex-qftx-borel-localization-rotation-on-projective-line
 kind: example
 title: Circle rotation on the complex projective line
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

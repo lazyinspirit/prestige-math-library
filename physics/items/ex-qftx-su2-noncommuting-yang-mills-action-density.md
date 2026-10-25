@@ -2,7 +2,7 @@
 id: ex-qftx-su2-noncommuting-yang-mills-action-density
 kind: example
 title: A noncommuting SU(2) configuration with nonzero Yang–Mills density
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: physics

@@ -2,7 +2,7 @@
 id: ex-qftx-euclidean-trivial-vacuum-sector
 kind: example
 title: The trivial Euclidean vacuum lies in the zero-charge sector
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: physics

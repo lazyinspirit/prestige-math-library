@@ -2,7 +2,7 @@
 id: ex-qftx-zero-fi-flat-framed-sector
 kind: example
 title: The zero-charge regular datum and framed flat ASD sector
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

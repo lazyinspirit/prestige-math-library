@@ -2,7 +2,7 @@
 id: post-aqft-finite-gauging-model
 kind: postulate
 title: Adopted finite two-group gauging model
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

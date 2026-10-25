@@ -2,7 +2,7 @@
 id: pthm-aqft-finite-gauging-gluing
 kind: physics-theorem
 title: Gauge invariance and gluing in the finite symmetry model
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

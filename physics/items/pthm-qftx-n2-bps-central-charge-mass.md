@@ -2,7 +2,7 @@
 id: pthm-qftx-n2-bps-central-charge-mass
 kind: physics-theorem
 title: $N=2$ SU(2) central-charge mass bound from Seiberg–Witten periods
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 9

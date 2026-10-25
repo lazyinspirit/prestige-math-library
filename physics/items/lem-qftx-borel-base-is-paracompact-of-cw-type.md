@@ -2,7 +2,7 @@
 id: lem-qftx-borel-base-is-paracompact-of-cw-type
 kind: lemma
 title: The fixed-locus Borel base is paracompact and of CW type
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

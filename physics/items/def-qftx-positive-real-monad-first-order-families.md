@@ -2,7 +2,7 @@
 id: def-qftx-positive-real-monad-first-order-families
 kind: definition
 title: First-order families of positive real linear monads
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

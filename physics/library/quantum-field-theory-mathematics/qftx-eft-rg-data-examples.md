@@ -1,7 +1,7 @@
 ---
 page: qftx-eft-rg-data-examples
 title: Wilson Coefficients and Finite-Dimensional RG Systems — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

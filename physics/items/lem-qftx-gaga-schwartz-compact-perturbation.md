@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-schwartz-compact-perturbation
 kind: lemma
 title: Schwartz compact-perturbation theorem for Fréchet spaces
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

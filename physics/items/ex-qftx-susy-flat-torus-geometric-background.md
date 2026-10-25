@@ -2,7 +2,7 @@
 id: ex-qftx-susy-flat-torus-geometric-background
 kind: example
 title: A flat four-torus supplies a geometric Killing-spinor input
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

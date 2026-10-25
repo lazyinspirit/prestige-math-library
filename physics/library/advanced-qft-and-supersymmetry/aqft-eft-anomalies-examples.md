@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-anomalies-examples
 title: Heavy-Chiral Threshold and Anomaly EFT — Examples
-status: draft
+status: "published"
 library: physics
 category: advanced-qft-and-supersymmetry
 kind: B

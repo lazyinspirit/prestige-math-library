@@ -2,7 +2,7 @@
 id: def-aqft-two-group-background
 kind: definition
 title: Finite 2-group background cochains
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

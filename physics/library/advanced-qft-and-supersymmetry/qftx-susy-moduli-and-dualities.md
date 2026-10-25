@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-moduli-and-dualities
 title: Supersymmetric Moduli, Seiberg–Witten Data and Duality Questions
-status: draft
+status: "published"
 library: physics
 items:
   - post-qftx-n2-pure-su2-ultraviolet-model

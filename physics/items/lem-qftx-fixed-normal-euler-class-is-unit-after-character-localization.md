@@ -2,7 +2,7 @@
 id: lem-qftx-fixed-normal-euler-class-is-unit-after-character-localization
 kind: lemma
 title: The fixed normal equivariant Euler class is a localized unit
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

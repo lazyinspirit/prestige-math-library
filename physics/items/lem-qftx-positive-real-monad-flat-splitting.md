@@ -2,7 +2,7 @@
 id: lem-qftx-positive-real-monad-flat-splitting
 kind: lemma
 title: Constant flat summands of positive real monads
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

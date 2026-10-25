@@ -1,7 +1,7 @@
 ---
 page: qftx-nonabelian-lattice-regulator-examples
 title: Compact Non-Abelian Finite-Lattice Regulator — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

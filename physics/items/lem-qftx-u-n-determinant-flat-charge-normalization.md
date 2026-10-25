@@ -2,7 +2,7 @@
 id: lem-qftx-u-n-determinant-flat-charge-normalization
 kind: lemma
 title: Determinant flatness and charge normalization for framed U(N) ASD data
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

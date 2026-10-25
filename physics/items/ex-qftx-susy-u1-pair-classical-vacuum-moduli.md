@@ -2,7 +2,7 @@
 id: ex-qftx-susy-u1-pair-classical-vacuum-moduli
 kind: example
 title: One-flavor U(1) classical F/D-flat vacuum quotient
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

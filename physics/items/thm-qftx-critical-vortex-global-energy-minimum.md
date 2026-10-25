@@ -2,7 +2,7 @@
 id: thm-qftx-critical-vortex-global-energy-minimum
 kind: theorem
 title: Global energy minima for critical Abelian Higgs vortices
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

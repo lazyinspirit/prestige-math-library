@@ -1,7 +1,7 @@
 ---
 page: qftx-equivariant-pseudodifferential-calculus
 title: Equivariant Symbol Calculus and Analytic Index Foundations
-status: draft
+status: "published"
 library: mathematics
 items:
   - lem-equivariant-finite-chart-symbol-calculus

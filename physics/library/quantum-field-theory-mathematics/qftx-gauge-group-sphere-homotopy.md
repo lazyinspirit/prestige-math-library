@@ -1,7 +1,7 @@
 ---
 page: qftx-gauge-group-sphere-homotopy
 title: Sphere Gauge Groups and Section Obstructions
-status: draft
+status: "published"
 library: mathematics
 items:
   - lem-qftx-parametric-vector-bundle-section-smoothing

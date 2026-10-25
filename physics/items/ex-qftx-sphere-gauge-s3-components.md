@@ -2,7 +2,7 @@
 id: ex-qftx-sphere-gauge-s3-components
 kind: example
 title: "Integer components of the based S3 gauge group"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

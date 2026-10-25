@@ -1,7 +1,7 @@
 ---
 page: qftx-positive-real-linear-monad-normal-forms-examples
 title: Positive real linear monad normal forms — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

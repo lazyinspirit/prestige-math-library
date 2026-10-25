@@ -2,7 +2,7 @@
 id: ex-qftx-su2-brst-nilpotence
 kind: example
 title: Component Check of the SU(2) BRST Differential
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

@@ -2,7 +2,7 @@
 id: lem-qftx-low-unitary-homotopy-inputs
 kind: lemma
 title: "Low special-unitary homotopy inputs"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

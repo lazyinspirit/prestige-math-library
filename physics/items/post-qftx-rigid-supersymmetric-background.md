@@ -2,7 +2,7 @@
 id: post-qftx-rigid-supersymmetric-background
 kind: postulate
 title: Adopted rigid $N=4$ Yang–Mills localization background on the round four-sphere
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

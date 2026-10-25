@@ -1,7 +1,7 @@
 ---
 page: qftx-defect-fusion-mathematics
 title: "Fusion Data for Non-Invertible Defects"
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-aqft-noninvertible-defect-fusion

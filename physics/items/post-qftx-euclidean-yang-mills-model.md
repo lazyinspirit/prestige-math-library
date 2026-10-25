@@ -2,7 +2,7 @@
 id: post-qftx-euclidean-yang-mills-model
 kind: postulate
 title: Independent classical Euclidean SU(2) Yang–Mills model
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: physics

@@ -2,7 +2,7 @@
 id: def-qftx-instanton-equivariant-partition-series
 kind: definition
 title: "Regulated ADHM $N=2^{*}$ Instanton Series"
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 5
 domain: physics

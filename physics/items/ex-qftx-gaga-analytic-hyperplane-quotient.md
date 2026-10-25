@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-hyperplane-quotient
 kind: example
 title: "A hyperplane-supported coherent quotient on a polydisc"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

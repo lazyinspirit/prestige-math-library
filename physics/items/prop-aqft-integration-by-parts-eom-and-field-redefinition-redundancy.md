@@ -2,7 +2,7 @@
 id: prop-aqft-integration-by-parts-eom-and-field-redefinition-redundancy
 kind: proposition
 title: Fixed-order integration-by-parts and leading-equation field-redefinition relations
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

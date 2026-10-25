@@ -2,7 +2,7 @@
 id: thm-adhm-fixed-point-instanton-count
 kind: theorem
 title: "ADHM Fixed Points and the Equivariant Instanton Count"
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 14
 domain: mathematics

@@ -2,7 +2,7 @@
 id: ex-qftx-positive-real-monad-one-instanton
 kind: example
 title: An exact raw one-instanton block
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

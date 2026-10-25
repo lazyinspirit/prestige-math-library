@@ -2,7 +2,7 @@
 id: lem-qftx-gauge-stabilizer-and-properness
 kind: lemma
 title: Gauge stabilizers and properness of the Sobolev action
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 4
 domain: mathematics

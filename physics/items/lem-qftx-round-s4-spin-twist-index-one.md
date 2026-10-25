@@ -2,7 +2,7 @@
 id: "lem-qftx-round-s4-spin-twist-index-one"
 kind: "lemma"
 title: "An explicit round-S4 spin twist has charge one and chiral index one"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "mathematics"
 library: "mathematics"

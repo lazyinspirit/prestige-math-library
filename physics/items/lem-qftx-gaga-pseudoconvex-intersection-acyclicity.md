@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-pseudoconvex-intersection-acyclicity
 kind: lemma
 title: Coherent sheaves are acyclic on pseudoconvex intersections with local resolutions
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

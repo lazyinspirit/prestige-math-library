@@ -1,7 +1,7 @@
 ---
 page: qftx-thooft-anomalies
 title: Perturbative ’t Hooft Anomalies and Counterterms
-status: draft
+status: "published"
 library: physics
 items:
 - def-aqft-cubic-anomaly-polynomial

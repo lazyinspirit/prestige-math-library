@@ -2,7 +2,7 @@
 id: pthm-qftx-n1-f-term-potential
 kind: physics-theorem
 title: Kähler-metric F-term scalar potential in the rigid $N=1$ model
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

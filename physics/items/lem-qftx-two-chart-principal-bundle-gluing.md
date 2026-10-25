@@ -2,7 +2,7 @@
 id: lem-qftx-two-chart-principal-bundle-gluing
 kind: lemma
 title: Smooth principal bundle from two-chart gluing data
-status: draft
+status: "published"
 origin: session
 domain: mathematics
 library: mathematics

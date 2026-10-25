@@ -2,7 +2,7 @@
 id: op-aqft-fusion-two-category-anomaly-classification
 kind: open-problem
 title: "Anomaly matching structures for fusion 2-categories"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

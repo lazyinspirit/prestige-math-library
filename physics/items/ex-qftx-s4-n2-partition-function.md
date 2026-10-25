@@ -2,7 +2,7 @@
 id: ex-qftx-s4-n2-partition-function
 kind: example
 title: 'The $U(2)$ $\mathcal N=2^*$ Round-$S^4$ Matrix Integral and Its One-Instanton Term'
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

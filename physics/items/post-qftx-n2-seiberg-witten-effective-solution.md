@@ -2,7 +2,7 @@
 id: post-qftx-n2-seiberg-witten-effective-solution
 kind: postulate
 title: Source-proposed pure SU(2) $N=2$ Seiberg–Witten low-energy data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 8

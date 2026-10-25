@@ -2,7 +2,7 @@
 id: def-qftx-smooth-sobolev-gauge-configuration
 kind: definition
 title: Smooth and Sobolev configuration and reduced gauge spaces
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 2
 domain: mathematics

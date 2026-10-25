@@ -1,7 +1,7 @@
 ---
 page: qftx-abelian-higgs-vortex-existence-mathematics-examples
 title: Critical Abelian Higgs Vortices — Examples
-status: draft
+status: "published"
 library: mathematics
 requires:
   - qftx-abelian-higgs-vortex-existence-mathematics

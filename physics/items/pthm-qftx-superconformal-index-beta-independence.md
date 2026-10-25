@@ -2,7 +2,7 @@
 id: pthm-qftx-superconformal-index-beta-independence
 kind: physics-theorem
 title: Beta independence of the trace-class superconformal index
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

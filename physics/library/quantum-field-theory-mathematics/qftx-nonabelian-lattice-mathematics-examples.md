@@ -1,7 +1,7 @@
 ---
 page: qftx-nonabelian-lattice-mathematics-examples
 title: Finite Compact Non-Abelian Lattice Data and Wilson Holonomy — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

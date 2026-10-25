@@ -1,7 +1,7 @@
 ---
 page: qftx-noncompact-equivariant-borel-moore-localization
 title: Noncompact Torus Localization in Equivariant Borel–Moore Homology
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-qftx-localized-equivariant-borel-moore-data

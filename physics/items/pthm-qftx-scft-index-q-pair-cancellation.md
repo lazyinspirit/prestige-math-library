@@ -2,7 +2,7 @@
 id: pthm-qftx-scft-index-q-pair-cancellation
 kind: physics-theorem
 title: Positive-Supercharge Pair Cancellation in the Superconformal Index
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: pthm-aqft-wilsonian-superpotential-nonrenormalization
 kind: physics-theorem
 title: Wilsonian Superpotential Nonrenormalization in a Finite Supersymmetric EFT Basis
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

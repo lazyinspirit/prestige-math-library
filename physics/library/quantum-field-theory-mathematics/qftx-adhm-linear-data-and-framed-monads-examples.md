@@ -1,7 +1,7 @@
 ---
 page: qftx-adhm-linear-data-and-framed-monads-examples
 title: ADHM Linear Data, Positive-FI Quotients and Framed Monads — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

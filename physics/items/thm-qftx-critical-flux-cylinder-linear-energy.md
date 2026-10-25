@@ -2,7 +2,7 @@
 id: thm-qftx-critical-flux-cylinder-linear-energy
 kind: theorem
 title: Fixed-flux cylinders and uniform end-collar energy
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

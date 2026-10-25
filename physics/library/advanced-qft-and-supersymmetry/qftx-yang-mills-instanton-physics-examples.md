@@ -1,7 +1,7 @@
 ---
 page: qftx-yang-mills-instanton-physics-examples
 title: Yang–Mills Topological Sectors and Instanton Interpretation — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

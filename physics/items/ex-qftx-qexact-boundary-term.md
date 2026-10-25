@@ -2,7 +2,7 @@
 id: ex-qftx-qexact-boundary-term
 kind: example
 title: A Q-exact deformation with a nonzero boundary term
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

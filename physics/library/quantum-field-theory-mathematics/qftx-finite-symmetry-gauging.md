@@ -1,7 +1,7 @@
 ---
 page: qftx-finite-symmetry-gauging
 title: Finite Groupoid Gauging and Gluing
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-aqft-background-gauging-data

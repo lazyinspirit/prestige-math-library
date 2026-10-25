@@ -2,7 +2,7 @@
 id: def-qftx-superconformal-index
 kind: definition
 title: Four-dimensional $N=1$ superconformal index
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

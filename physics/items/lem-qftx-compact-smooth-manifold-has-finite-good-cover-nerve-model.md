@@ -2,7 +2,7 @@
 id: lem-qftx-compact-smooth-manifold-has-finite-good-cover-nerve-model
 kind: lemma
 title: A compact smooth manifold has a finite good-cover nerve model
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

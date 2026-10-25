@@ -2,7 +2,7 @@
 id: ex-qftx-physical-bps-kronecker-hall-sector
 kind: example
 title: Monopole–dyon two-arrow Hall sector
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 11

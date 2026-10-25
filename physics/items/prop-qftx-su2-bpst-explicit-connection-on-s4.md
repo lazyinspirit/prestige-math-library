@@ -2,7 +2,7 @@
 id: prop-qftx-su2-bpst-explicit-connection-on-s4
 kind: proposition
 title: Explicit charge-one BPST connection on the round four-sphere
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: mathematics

@@ -2,7 +2,7 @@
 id: lem-qftx-rational-torus-classifying-space-cohomology
 kind: lemma
 title: Rational coefficient ring and characters of a product torus classifying space
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

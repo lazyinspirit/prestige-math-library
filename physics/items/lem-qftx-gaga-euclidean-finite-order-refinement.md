@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-euclidean-finite-order-refinement
 kind: lemma
 title: "Locally finite refinements of Euclidean open covers have order at most the dimension plus one"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

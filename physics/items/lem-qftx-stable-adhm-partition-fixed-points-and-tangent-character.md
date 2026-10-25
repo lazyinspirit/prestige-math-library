@@ -2,7 +2,7 @@
 id: lem-qftx-stable-adhm-partition-fixed-points-and-tangent-character
 kind: lemma
 title: Stable ADHM partition fixed points and tangent character
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

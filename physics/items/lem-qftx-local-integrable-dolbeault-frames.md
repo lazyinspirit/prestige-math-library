@@ -2,7 +2,7 @@
 id: lem-qftx-local-integrable-dolbeault-frames
 kind: lemma
 title: Local holomorphic frames for an integrable smooth Dolbeault operator
-status: draft
+status: "published"
 origin: session
 dependency_level: 0
 domain: mathematics

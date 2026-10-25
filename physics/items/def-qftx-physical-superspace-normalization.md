@@ -2,7 +2,7 @@
 id: def-qftx-physical-superspace-normalization
 kind: definition
 title: Physical superspace action brackets and canonical chiral components
-status: draft
+status: "published"
 origin: session
 domain: physics
 library: physics

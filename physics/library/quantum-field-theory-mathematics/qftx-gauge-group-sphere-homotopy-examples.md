@@ -1,7 +1,7 @@
 ---
 page: qftx-gauge-group-sphere-homotopy-examples
 title: Sphere Gauge Groups and Section Obstructions — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

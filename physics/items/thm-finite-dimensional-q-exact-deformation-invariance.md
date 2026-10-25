@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-q-exact-deformation-invariance
 kind: theorem
 title: "Finite-Dimensional Q-Exact Deformation Invariance"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

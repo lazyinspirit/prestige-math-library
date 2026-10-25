@@ -2,7 +2,7 @@
 id: def-qftx-gaga-frechet-space
 kind: definition
 title: Fréchet spaces used in analytic coherent cohomology
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

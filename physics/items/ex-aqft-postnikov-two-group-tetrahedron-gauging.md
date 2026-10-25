@@ -2,7 +2,7 @@
 id: "ex-aqft-postnikov-two-group-tetrahedron-gauging"
 kind: "example"
 title: "Nonzero Postnikov data retain higher gauge volume on a tetrahedron"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "mathematics"
 library: "mathematics"

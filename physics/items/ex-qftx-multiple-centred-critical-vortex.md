@@ -2,7 +2,7 @@
 id: ex-qftx-multiple-centred-critical-vortex
 kind: example
 title: A double vortex and a separate third vortex
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: def-qftx-character-localization
 kind: definition
 title: Character localization in Borel equivariant cohomology
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

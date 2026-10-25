@@ -2,7 +2,7 @@
 id: thm-qftx-finite-affine-atlas-bm-concentration
 kind: theorem
 title: BM concentration from a finite invariant affine atlas
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

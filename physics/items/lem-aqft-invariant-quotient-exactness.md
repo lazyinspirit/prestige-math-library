@@ -2,7 +2,7 @@
 id: lem-aqft-invariant-quotient-exactness
 kind: lemma
 title: Exactness of invariant vectors for a finite-dimensional quotient
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

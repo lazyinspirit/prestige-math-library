@@ -2,7 +2,7 @@
 id: def-qftx-donaldson-adhm-matrix-convention
 kind: definition
 title: Donaldson's ADHM matrix equations in the source convention
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

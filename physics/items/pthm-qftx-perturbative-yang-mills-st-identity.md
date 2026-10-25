@@ -2,7 +2,7 @@
 id: pthm-qftx-perturbative-yang-mills-st-identity
 kind: physics-theorem
 title: Conditional Slavnov–Taylor Identity and Counterterm Classification
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 5
 domain: physics

@@ -2,7 +2,7 @@
 id: def-qftx-adhm-linear-data-stability-and-regularity
 kind: definition
 title: "ADHM linear data, stability, costability and FI levels"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

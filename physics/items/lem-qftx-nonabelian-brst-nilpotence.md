@@ -2,7 +2,7 @@
 id: lem-qftx-nonabelian-brst-nilpotence
 kind: lemma
 title: Nilpotence of the Finite-Jet Non-Abelian BRST Differential
-status: draft
+status: "published"
 origin: session
 dependency_level: 1
 domain: mathematics

@@ -1,7 +1,7 @@
 ---
 page: qftx-gauge-slice-mathematics-examples
 title: Local Gauge Slices and Faddeev–Popov Jacobians — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

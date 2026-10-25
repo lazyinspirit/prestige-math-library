@@ -2,7 +2,7 @@
 id: def-qftx-gaga-coherent-section-topology
 kind: definition
 title: Presentation and Čech quotient topologies for coherent analytic sections
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

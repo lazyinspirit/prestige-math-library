@@ -1,7 +1,7 @@
 ---
 page: qftx-qexact-field-theory-localization
 title: Field-Theory Q-Exact Localization Derivation
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-supersymmetry-fluctuation-complex

@@ -2,7 +2,7 @@
 id: pthm-qftx-n2-linear-monopole-bps-vortex-bound
 kind: physics-theorem
 title: 'Critical monopole truncation: BPS bound, minimizing tubes and nonlinear obstruction'
-status: draft
+status: "published"
 origin: session
 domain: physics
 library: physics

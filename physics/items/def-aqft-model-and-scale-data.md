@@ -4,7 +4,7 @@ kind: definition
 domain: physics
 library: physics
 title: Finite-regulator EFT model and scale data
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 1
 deps:

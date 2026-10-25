@@ -2,7 +2,7 @@
 id: thm-qftx-sobolev-smooth-irreducible-gauge-bundle
 kind: theorem
 title: Sobolev and smooth irreducible gauge-orbit principal bundles
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 6
 domain: mathematics

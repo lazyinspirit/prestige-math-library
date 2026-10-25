@@ -2,7 +2,7 @@
 id: ex-aqft-heavy-fermion-anomaly-threshold
 kind: example
 title: Compactly supported background with a nonzero heavy-fermion anomaly variation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 8

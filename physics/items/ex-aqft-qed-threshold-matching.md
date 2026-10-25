@@ -2,7 +2,7 @@
 id: ex-aqft-qed-threshold-matching
 kind: example
 title: One-loop electron-muon QED threshold matching and running
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

@@ -1,7 +1,7 @@
 ---
 page: qftx-gauge-fixed-perturbation
 title: Gauge Fixing and Formal Perturbative Yang–Mills
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-formal-perturbative-yang-mills-data

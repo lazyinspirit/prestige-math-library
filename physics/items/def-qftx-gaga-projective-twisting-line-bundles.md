@@ -2,7 +2,7 @@
 id: def-qftx-gaga-projective-twisting-line-bundles
 kind: definition
 title: Projective twisting line bundles by coordinate transitions
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

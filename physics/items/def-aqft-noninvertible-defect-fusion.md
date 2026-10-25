@@ -2,7 +2,7 @@
 id: def-aqft-noninvertible-defect-fusion
 kind: definition
 title: "Finite semisimple fusion data for non-invertible defects"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

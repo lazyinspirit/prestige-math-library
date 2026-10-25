@@ -2,7 +2,7 @@
 id: exp-aqft-cms-boosted-susy-search-2025
 kind: experiment
 title: CMS search for supersymmetry with boosted hadronic and leptonic objects
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

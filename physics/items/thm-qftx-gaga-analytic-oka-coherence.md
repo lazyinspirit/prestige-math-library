@@ -2,7 +2,7 @@
 id: thm-qftx-gaga-analytic-oka-coherence
 kind: theorem
 title: "Oka coherence and local coherent free resolutions"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

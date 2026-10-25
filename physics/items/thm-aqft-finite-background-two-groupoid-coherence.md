@@ -2,7 +2,7 @@
 id: "thm-aqft-finite-background-two-groupoid-coherence"
 kind: "theorem"
 title: "Coherence and stabilizers of finite background gauge 2-groupoids"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "mathematics"
 library: "mathematics"

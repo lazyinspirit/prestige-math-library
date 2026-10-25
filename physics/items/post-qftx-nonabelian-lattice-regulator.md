@@ -2,7 +2,7 @@
 id: post-qftx-nonabelian-lattice-regulator
 kind: postulate
 title: Compact Non-Abelian Finite-Lattice Regulator
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: physics

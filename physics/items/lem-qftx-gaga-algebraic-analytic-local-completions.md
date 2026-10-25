@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-algebraic-analytic-local-completions
 kind: lemma
 title: Common completions of algebraic and holomorphic local rings and their finite-type quotients
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 1
 domain: mathematics

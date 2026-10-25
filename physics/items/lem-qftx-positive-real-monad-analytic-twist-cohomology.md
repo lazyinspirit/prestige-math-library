@@ -2,7 +2,7 @@
 id: lem-qftx-positive-real-monad-analytic-twist-cohomology
 kind: lemma
 title: Analytic negative-twist vanishings for the positive real monad
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

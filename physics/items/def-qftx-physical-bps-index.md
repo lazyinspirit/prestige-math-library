@@ -2,7 +2,7 @@
 id: def-qftx-physical-bps-index
 kind: definition
 title: Physical Witten index and selected BPS sector
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

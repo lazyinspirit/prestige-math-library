@@ -2,7 +2,7 @@
 id: ex-aqft-scalar-eom-operator-reduction
 kind: example
 title: Scalar derivative operator reduction at fixed EFT order
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-qftx-spectral-network-data
 kind: definition
 title: Spectral-network, framed BPS, and defect data in a specified class-S model
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

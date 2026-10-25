@@ -1,7 +1,7 @@
 ---
 page: qftx-abelian-higgs-vortex-existence-mathematics
 title: "Critical Abelian Higgs Vortices: Existence, Minima and Flux Cylinders"
-status: draft
+status: "published"
 library: mathematics
 requires:
   - ascoli-arzela

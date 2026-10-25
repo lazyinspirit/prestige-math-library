@@ -2,7 +2,7 @@
 id: def-aqft-cubic-anomaly-polynomial
 kind: definition
 title: Degree-six cubic trace polynomial for a chiral representation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

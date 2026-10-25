@@ -2,7 +2,7 @@
 id: thm-qftx-strong-coupling-wilson-area-law
 kind: theorem
 title: Exact finite-lattice SU(2) Wilson area law in two dimensions
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: mathematics

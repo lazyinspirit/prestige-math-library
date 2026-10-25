@@ -1,7 +1,7 @@
 ---
 page: qftx-noninvertible-symmetries
 title: "Non-Invertible Symmetry Operators and Fusion"
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-ising-fusion-data

@@ -2,7 +2,7 @@
 id: def-qftx-n2-nonlinear-magnetostatic-flux-cylinder
 kind: definition
 title: Nonlinear local dual-Higgs magnetostatic flux cylinders
-status: draft
+status: "published"
 origin: session
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-qftx-n-extended-central-charge-bounds
 kind: theorem
 title: Positive central-charge bounds on a massive rest representation fiber
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

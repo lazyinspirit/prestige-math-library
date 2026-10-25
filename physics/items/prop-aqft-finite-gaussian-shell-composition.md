@@ -4,7 +4,7 @@ kind: proposition
 domain: mathematics
 library: physics
 title: Successive finite Gaussian shells compose
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 0
 deps:

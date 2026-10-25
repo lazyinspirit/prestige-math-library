@@ -2,7 +2,7 @@
 id: def-aqft-scattering-amplitude-input
 kind: definition
 title: Gapped identical-scalar forward-amplitude data
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

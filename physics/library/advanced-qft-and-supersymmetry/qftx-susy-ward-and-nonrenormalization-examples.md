@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-ward-and-nonrenormalization-examples
 title: Supersymmetry Ward Identities and Wilsonian Nonrenormalization — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

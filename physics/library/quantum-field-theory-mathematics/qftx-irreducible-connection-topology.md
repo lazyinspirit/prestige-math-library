@@ -1,7 +1,7 @@
 ---
 page: qftx-irreducible-connection-topology
 title: "Topology of Irreducible Connection Spaces"
-status: draft
+status: "published"
 library: mathematics
 items:
   - lem-qftx-complex-grassmannian-compactness

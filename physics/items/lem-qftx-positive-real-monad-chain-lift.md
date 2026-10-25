@@ -2,7 +2,7 @@
 id: lem-qftx-positive-real-monad-chain-lift
 kind: lemma
 title: Unique chain lifting and sigma-Hermitian monad duality
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: pthm-aqft-forward-positivity-wilson-coefficient
 kind: physics-theorem
 title: Forward positivity for a matched scalar EFT coefficient
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

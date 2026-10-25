@@ -2,7 +2,7 @@
 id: ex-abbv-projective-line-standard-circle-action
 kind: example
 title: "ABBV on the Projective Line with the Standard Circle Action"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -1,7 +1,7 @@
 ---
 page: qftx-defects-and-topological-operators
 title: "Topological Defects and Interfaces"
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-topological-defect

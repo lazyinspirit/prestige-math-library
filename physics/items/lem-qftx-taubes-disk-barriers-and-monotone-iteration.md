@@ -2,7 +2,7 @@
 id: lem-qftx-taubes-disk-barriers-and-monotone-iteration
 kind: lemma
 title: Taubes disk barriers and monotone Dirichlet iteration
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

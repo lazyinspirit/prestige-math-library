@@ -2,7 +2,7 @@
 id: lem-qftx-raw-adhm-real-twistor-block
 kind: lemma
 title: Exact raw ADHM block, real monad and stereographic ASD projection
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: mathematics

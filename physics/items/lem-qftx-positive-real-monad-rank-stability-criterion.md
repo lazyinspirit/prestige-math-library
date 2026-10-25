@@ -2,7 +2,7 @@
 id: lem-qftx-positive-real-monad-rank-stability-criterion
 kind: lemma
 title: Raw monad full rank and ADHM regularity
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -1,7 +1,7 @@
 ---
 page: qftx-bps-indices-examples
 title: Witten and Superconformal Indices — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

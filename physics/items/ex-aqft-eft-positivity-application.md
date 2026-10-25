@@ -2,7 +2,7 @@
 id: ex-aqft-eft-positivity-application
 kind: example
 title: Allowed and excluded coefficients in one gapped scalar channel
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

@@ -1,7 +1,7 @@
 ---
 page: qftx-borel-localization
 title: Borel Localization for Compact Torus Actions
-status: draft
+status: "published"
 library: mathematics
 items:
   - lem-qftx-compact-torus-fixed-locus-normal-weights

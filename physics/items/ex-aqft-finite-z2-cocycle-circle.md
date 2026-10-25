@@ -2,7 +2,7 @@
 id: ex-aqft-finite-z2-cocycle-circle
 kind: example
 title: A nontrivial cocycle weight on the finite two-element gauge groupoid
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

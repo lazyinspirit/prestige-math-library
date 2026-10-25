@@ -2,7 +2,7 @@
 id: pthm-aqft-smeft-as-restricted-heft-branch
 kind: physics-theorem
 title: The selected SMEFT model is a restricted HEFT branch
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

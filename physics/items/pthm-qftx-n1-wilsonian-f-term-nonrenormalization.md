@@ -2,7 +2,7 @@
 id: pthm-qftx-n1-wilsonian-f-term-nonrenormalization
 kind: physics-theorem
 title: $N=1$ Wilsonian F-Term Nonrenormalization
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

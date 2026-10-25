@@ -2,7 +2,7 @@
 id: lem-equivariant-compact-bott-index-normalization
 kind: lemma
 title: Orthogonal-equivariant compact normalization of the doubled-real Bott symbol
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

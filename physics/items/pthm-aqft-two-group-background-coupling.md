@@ -2,7 +2,7 @@
 id: pthm-aqft-two-group-background-coupling
 kind: physics-theorem
 title: Finite 2-group background coupling variation
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

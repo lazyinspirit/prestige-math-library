@@ -1,7 +1,7 @@
 ---
 page: qftx-nonabelian-brst-bv-mathematics-examples
 title: Non-Abelian BRST Cohomology and Classical BV Data — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

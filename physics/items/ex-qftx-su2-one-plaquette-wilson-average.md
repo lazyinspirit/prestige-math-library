@@ -2,7 +2,7 @@
 id: ex-qftx-su2-one-plaquette-wilson-average
 kind: example
 title: One-plaquette SU(2) Wilson average
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: mathematics

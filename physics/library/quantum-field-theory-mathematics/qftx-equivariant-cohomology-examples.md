@@ -1,7 +1,7 @@
 ---
 page: qftx-equivariant-cohomology-examples
 title: Borel and Cartan Equivariant Cohomology — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: ex-qftx-clay-two-global-forms-same-algebra
 kind: example
 title: Two global forms with the same simple Lie algebra
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-anomalies
 title: Heavy-Chiral Threshold and Anomaly EFT
-status: draft
+status: "published"
 library: physics
 category: advanced-qft-and-supersymmetry
 kind: A

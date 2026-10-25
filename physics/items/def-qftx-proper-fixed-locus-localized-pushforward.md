@@ -2,7 +2,7 @@
 id: def-qftx-proper-fixed-locus-localized-pushforward
 kind: definition
 title: Intrinsic localized pushforward for a proper fixed locus
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

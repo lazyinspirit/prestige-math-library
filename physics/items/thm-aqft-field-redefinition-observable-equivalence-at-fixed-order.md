@@ -2,7 +2,7 @@
 id: thm-aqft-field-redefinition-observable-equivalence-at-fixed-order
 kind: theorem
 title: Fixed-order on-shell amplitude equivalence under local field redefinition
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 2

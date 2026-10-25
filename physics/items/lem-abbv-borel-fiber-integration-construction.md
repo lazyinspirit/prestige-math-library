@@ -2,7 +2,7 @@
 id: lem-abbv-borel-fiber-integration-construction
 kind: lemma
 title: "Construction and Thom Compatibility of Borel Fiber Integration"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

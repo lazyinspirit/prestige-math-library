@@ -2,7 +2,7 @@
 id: lem-qftx-sphere-gauge-evaluation-fibration
 kind: lemma
 title: "Evaluation and finite-center fibrations of sphere gauge groups"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

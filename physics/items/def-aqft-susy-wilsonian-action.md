@@ -2,7 +2,7 @@
 id: def-aqft-susy-wilsonian-action
 kind: definition
 title: Supersymmetric Wilsonian EFT action and threshold data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

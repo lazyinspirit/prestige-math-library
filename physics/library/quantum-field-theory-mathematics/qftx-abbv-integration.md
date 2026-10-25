@@ -1,7 +1,7 @@
 ---
 page: qftx-abbv-integration
 title: "Atiyah–Bott–Berline–Vergne Integration Formula"
-status: draft
+status: "published"
 library: mathematics
 items:
   - lem-abbv-borel-fiber-integration-construction

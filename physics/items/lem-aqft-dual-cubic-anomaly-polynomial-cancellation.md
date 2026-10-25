@@ -2,7 +2,7 @@
 id: lem-aqft-dual-cubic-anomaly-polynomial-cancellation
 kind: lemma
 title: A conjugate representation reverses the cubic anomaly polynomial
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

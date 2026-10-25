@@ -2,7 +2,7 @@
 id: def-aqft-background-gauging-data
 kind: definition
 title: Finite background groupoid and cocycle-weighted gauging data
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

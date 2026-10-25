@@ -1,7 +1,7 @@
 ---
 page: qftx-eft-dispersion-and-bootstrap
 title: Gapped-Scalar Dispersion Positivity and Finite Bootstrap
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-aqft-scattering-amplitude-input

@@ -2,7 +2,7 @@
 id: ex-qftx-t3-finite-web-index
 kind: example
 title: A T3 finite web with nonzero geometric period
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 2

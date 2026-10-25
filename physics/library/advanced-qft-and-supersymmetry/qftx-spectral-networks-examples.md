@@ -1,7 +1,7 @@
 ---
 page: qftx-spectral-networks-examples
 title: Spectral Networks, Framed BPS Data and Defect Indices — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

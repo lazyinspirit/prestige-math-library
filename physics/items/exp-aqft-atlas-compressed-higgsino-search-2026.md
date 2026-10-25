@@ -2,7 +2,7 @@
 id: exp-aqft-atlas-compressed-higgsino-search-2026
 kind: experiment
 title: ATLAS search for compressed higgsinos with low-momentum tracks
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

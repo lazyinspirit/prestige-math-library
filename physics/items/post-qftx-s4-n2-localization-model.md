@@ -2,7 +2,7 @@
 id: post-qftx-s4-n2-localization-model
 kind: postulate
 title: Adopted $N=2^*$ U(2) Model on the Round Four-Sphere
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

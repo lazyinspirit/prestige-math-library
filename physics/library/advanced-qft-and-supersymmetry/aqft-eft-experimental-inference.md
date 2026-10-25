@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-experimental-inference
 title: EFT Measurements, Global Fits and Search Likelihoods
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-profile-likelihood-ratio

@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-projective-structure
 kind: example
 title: Scalar structure-sheaf cohomology of $\mathbb P^2$
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: lem-qftx-positive-real-monad-internal-positivity
 kind: lemma
 title: Positivity of the internal Hermitian form
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

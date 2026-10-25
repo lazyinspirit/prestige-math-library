@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-projective-cover-laurent-cohomology
 kind: lemma
 title: Laurent–Čech cohomology of the projective coordinate cover
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: def-qftx-n1-vector-superfield
 kind: definition
 title: Four-dimensional $N=1$ non-Abelian vector superfield in connection normalization
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

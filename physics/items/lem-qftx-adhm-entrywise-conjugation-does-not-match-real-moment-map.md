@@ -2,7 +2,7 @@
 id: lem-qftx-adhm-entrywise-conjugation-does-not-match-real-moment-map
 kind: lemma
 title: Entrywise conjugation does not match the raw ADHM real moment map
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

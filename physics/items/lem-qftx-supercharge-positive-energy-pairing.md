@@ -2,7 +2,7 @@
 id: lem-qftx-supercharge-positive-energy-pairing
 kind: lemma
 title: Positive-energy eigenspaces pair under an odd self-adjoint supercharge
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

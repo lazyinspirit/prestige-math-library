@@ -2,7 +2,7 @@
 id: def-aqft-heavy-chiral-u1-threshold-data
 kind: definition
 title: Heavy chiral U(1)_V threshold model data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

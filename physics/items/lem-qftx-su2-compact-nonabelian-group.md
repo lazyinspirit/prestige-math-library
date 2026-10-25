@@ -2,7 +2,7 @@
 id: lem-qftx-su2-compact-nonabelian-group
 kind: lemma
 title: Compact non-Abelian Lie-group structure of SU(2)
-status: draft
+status: "published"
 origin: session
 dependency_level: 0
 axiom_base: "ZF + AC_omega through the published special-unitary Lie-group construction; the compactness and matrix arguments add no choice."

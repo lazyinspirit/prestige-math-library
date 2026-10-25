@@ -2,7 +2,7 @@
 id: ex-qftx-relative-affine-disk-filling
 kind: example
 title: Affine filling and the exact reducible-locus repair step
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

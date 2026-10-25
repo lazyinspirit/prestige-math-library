@@ -2,7 +2,7 @@
 id: pthm-qftx-nonabelian-yang-mills-classical-gauge-invariance
 kind: physics-theorem
 title: Gauge invariance of the classical pure SU(2) Yang–Mills action
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: physics

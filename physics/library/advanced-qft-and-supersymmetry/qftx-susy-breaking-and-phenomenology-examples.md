@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-breaking-and-phenomenology-examples
 title: Supersymmetry Breaking and Collider Inference — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-algebra-and-multiplets-examples
 title: Physical BPS Sectors and Multiplet Interpretation — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

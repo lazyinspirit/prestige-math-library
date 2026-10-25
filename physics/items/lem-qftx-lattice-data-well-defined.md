@@ -2,7 +2,7 @@
 id: lem-qftx-lattice-data-well-defined
 kind: lemma
 title: Finite lattice gauge data define an invariant probability
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

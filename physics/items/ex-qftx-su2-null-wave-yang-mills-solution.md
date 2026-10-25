@@ -2,7 +2,7 @@
 id: ex-qftx-su2-null-wave-yang-mills-solution
 kind: example
 title: A nonzero null plane-wave solution of the pure SU(2) model
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: physics

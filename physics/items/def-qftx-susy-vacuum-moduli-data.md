@@ -2,7 +2,7 @@
 id: def-qftx-susy-vacuum-moduli-data
 kind: definition
 title: Classical and quantum supersymmetric vacuum-moduli data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

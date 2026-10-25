@@ -2,7 +2,7 @@
 id: def-aqft-scheme-and-wilson-coefficients
 kind: definition
 title: Finite renormalization schemes and Wilson coefficient vectors
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

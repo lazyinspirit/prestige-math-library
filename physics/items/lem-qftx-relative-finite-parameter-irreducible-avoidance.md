@@ -2,7 +2,7 @@
 id: lem-qftx-relative-finite-parameter-irreducible-avoidance
 kind: lemma
 title: Relative finite-parameter avoidance of reducible connections
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

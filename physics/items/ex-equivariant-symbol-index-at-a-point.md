@@ -2,7 +2,7 @@
 id: ex-equivariant-symbol-index-at-a-point
 kind: example
 title: "A compact symbol at a point retains the full torus character"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

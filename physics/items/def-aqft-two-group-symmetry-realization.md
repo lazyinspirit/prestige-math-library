@@ -2,7 +2,7 @@
 id: def-aqft-two-group-symmetry-realization
 kind: definition
 title: Finite 2-group symmetry realization and background coupling
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-atiyah-bott-berline-vergne-integration-formula
 kind: theorem
 title: "Atiyah–Bott–Berline–Vergne Integration Formula"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

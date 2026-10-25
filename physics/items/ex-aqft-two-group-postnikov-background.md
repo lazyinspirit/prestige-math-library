@@ -2,7 +2,7 @@
 id: ex-aqft-two-group-postnikov-background
 kind: example
 title: A nonzero finite Postnikov cocycle background
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

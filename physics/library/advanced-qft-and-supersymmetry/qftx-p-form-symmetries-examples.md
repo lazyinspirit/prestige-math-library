@@ -1,7 +1,7 @@
 ---
 page: qftx-p-form-symmetries-examples
 title: Higher-Form Symmetries and Charge Operators — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

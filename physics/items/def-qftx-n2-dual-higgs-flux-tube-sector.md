@@ -2,7 +2,7 @@
 id: def-qftx-n2-dual-higgs-flux-tube-sector
 kind: definition
 title: Finite-energy dual-Higgs flux-tube sector
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: exp-aqft-cms-global-smeft-fit-2026
 kind: experiment
 title: CMS global dimension-six SMEFT fit
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

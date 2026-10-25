@@ -2,7 +2,7 @@
 id: thm-qftx-projective-gaga-for-monad-data
 kind: theorem
 title: "Projective GAGA for framed coherent and monad data"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

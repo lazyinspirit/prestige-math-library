@@ -2,7 +2,7 @@
 id: lem-qftx-gauge-sobolev-calculus
 kind: lemma
 title: Sobolev gauge calculus and smooth gauge action
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 3
 domain: mathematics

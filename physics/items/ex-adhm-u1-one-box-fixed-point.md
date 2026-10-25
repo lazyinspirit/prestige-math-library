@@ -2,7 +2,7 @@
 id: ex-adhm-u1-one-box-fixed-point
 kind: example
 title: "The One-Box Fixed Point for U(1)"
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 15
 axiom_base: "ZF + full AC through the fixed-point theorem supplier; this example uses only finite calculations."

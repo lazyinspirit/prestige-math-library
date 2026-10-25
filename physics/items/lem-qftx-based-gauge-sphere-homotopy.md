@@ -2,7 +2,7 @@
 id: lem-qftx-based-gauge-sphere-homotopy
 kind: lemma
 title: "Based gauge-group homotopy via hemisphere clutching"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

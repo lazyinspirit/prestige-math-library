@@ -2,7 +2,7 @@
 id: ex-qftx-su2-bps-monopole
 kind: example
 title: Unit-charge SU(2) Prasad–Sommerfield monopole profile
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

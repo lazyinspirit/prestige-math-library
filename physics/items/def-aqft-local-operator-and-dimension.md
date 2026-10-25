@@ -2,7 +2,7 @@
 id: def-aqft-local-operator-and-dimension
 kind: definition
 title: Finite-jet local operators and engineering dimension
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

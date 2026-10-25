@@ -2,7 +2,7 @@
 id: ex-qftx-finite-orbit-faddeev-popov-jacobian
 kind: example
 title: A Finite Orbit with Two Gauge-Condition Intersections
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 3
 domain: physics

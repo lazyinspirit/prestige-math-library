@@ -2,7 +2,7 @@
 id: ex-qftx-n1-wess-zumino-cubic-f-potential
 kind: example
 title: Cubic one-field Wess–Zumino F-term potential
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: pthm-qftx-physical-bps-wall-crossing
 kind: physics-theorem
 title: Conditional physical BPS wall crossing from an exact Hall bridge
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 10

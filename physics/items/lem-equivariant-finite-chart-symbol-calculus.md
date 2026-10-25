@@ -2,7 +2,7 @@
 id: lem-equivariant-finite-chart-symbol-calculus
 kind: lemma
 title: "Finite-chart symbol calculus and equivariant Fredholm realizations"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

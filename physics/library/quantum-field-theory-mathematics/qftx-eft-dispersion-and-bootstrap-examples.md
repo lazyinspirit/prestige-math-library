@@ -1,7 +1,7 @@
 ---
 page: qftx-eft-dispersion-and-bootstrap-examples
 title: Gapped-Scalar Dispersion Positivity and Finite Bootstrap — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

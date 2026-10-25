@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-finite-not-vanishing
 kind: example
 title: Compact coherent cohomology can be finite and nonzero
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

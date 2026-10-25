@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-baire-category-complete-metric-spaces
 kind: lemma
 title: Baire category theorem for complete metric spaces
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

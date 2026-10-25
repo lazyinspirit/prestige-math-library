@@ -2,7 +2,7 @@
 id: ex-qftx-n1-u1-fi-charge-trace
 kind: example
 title: U(1) Fayet–Iliopoulos Cancellation by Charge Trace
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 7

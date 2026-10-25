@@ -1,7 +1,7 @@
 ---
 page: qftx-two-group-cochains
 title: Finite 2-Group Background Cochains and Consistency
-status: draft
+status: "published"
 library: mathematics
 items:
 - def-aqft-two-group-background

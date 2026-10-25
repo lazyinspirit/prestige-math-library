@@ -2,7 +2,7 @@
 id: lem-equivariant-controlled-symbol-realization
 kind: lemma
 title: "Controlled equivariant symbol realization, homotopy and excision"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

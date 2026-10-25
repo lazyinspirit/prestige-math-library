@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-point-sheaf-acyclicity
 kind: example
 title: "A point-supported coherent quotient on a polydisc"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

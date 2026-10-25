@@ -1,7 +1,7 @@
 ---
 page: qftx-sobolev-gauge-orbit-geometry
 title: Sobolev and Smooth Gauge-Orbit Geometry
-status: draft
+status: "published"
 library: mathematics
 companion: qftx-sobolev-gauge-orbit-geometry-examples
 requires:

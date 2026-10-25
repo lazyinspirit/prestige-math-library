@@ -2,7 +2,7 @@
 id: post-qftx-n1-gauge-matter-model
 kind: postulate
 title: Rigid $N=1$ SU(2) gauge-matter superspace action
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

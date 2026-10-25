@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-amplitudes-examples
 title: EFT Amplitude Interface and Positivity Application — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

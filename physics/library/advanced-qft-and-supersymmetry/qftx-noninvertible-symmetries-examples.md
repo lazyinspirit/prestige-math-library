@@ -1,7 +1,7 @@
 ---
 page: qftx-noninvertible-symmetries-examples
 title: "Non-Invertible Symmetry Operators and Fusion — Examples"
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

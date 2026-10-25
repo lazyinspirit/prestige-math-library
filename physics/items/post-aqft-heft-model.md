@@ -2,7 +2,7 @@
 id: post-aqft-heft-model
 kind: postulate
 title: Nonlinear electroweak Goldstone and scalar-singlet EFT data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

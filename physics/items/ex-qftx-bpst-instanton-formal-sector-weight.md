@@ -2,7 +2,7 @@
 id: ex-qftx-bpst-instanton-formal-sector-weight
 kind: example
 title: A charge-one BPST saddle and its formal sector weight
-status: draft
+status: "published"
 origin: session
 dependency_level: 5
 domain: physics

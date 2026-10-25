@@ -1,7 +1,7 @@
 ---
 page: qftx-defects-and-topological-operators-examples
 title: "Topological Defects and Interfaces — Examples"
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

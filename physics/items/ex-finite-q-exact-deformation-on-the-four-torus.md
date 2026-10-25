@@ -2,7 +2,7 @@
 id: ex-finite-q-exact-deformation-on-the-four-torus
 kind: example
 title: "A nonzero Q-exact deformation on the four-torus"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

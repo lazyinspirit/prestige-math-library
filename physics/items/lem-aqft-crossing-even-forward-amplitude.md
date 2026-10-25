@@ -2,7 +2,7 @@
 id: lem-aqft-crossing-even-forward-amplitude
 kind: lemma
 title: Crossing evenness at the scalar subtraction point
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: lem-qftx-coherent-analytic-module-calculus
 kind: lemma
 title: "Kernels, cokernels, and finite extensions of coherent module sheaves"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

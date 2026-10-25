@@ -2,7 +2,7 @@
 id: thm-qftx-witten-index-beta-independence
 kind: theorem
 title: Beta independence of the pure-point supersymmetric heat supertrace
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

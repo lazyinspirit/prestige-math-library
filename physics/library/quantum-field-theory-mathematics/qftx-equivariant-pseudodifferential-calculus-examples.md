@@ -1,7 +1,7 @@
 ---
 page: qftx-equivariant-pseudodifferential-calculus-examples
 title: Equivariant Symbol Calculus and Analytic Index Foundations — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

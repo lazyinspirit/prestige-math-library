@@ -1,7 +1,7 @@
 ---
 page: aqft-susy-effective-theories
 title: Supersymmetric EFT Operators and Thresholds
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-susy-wilsonian-action

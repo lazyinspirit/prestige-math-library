@@ -2,7 +2,7 @@
 id: ex-aqft-smeft-heft-observable-map
 kind: example
 title: Tree-level scalar normalization and the charged-vector coupling
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 8

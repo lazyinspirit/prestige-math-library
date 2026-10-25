@@ -2,7 +2,7 @@
 id: lem-qftx-bv-master-equation-brst-nilpotence
 kind: lemma
 title: Classical Master Equation and Nilpotence of the BV Differential
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: mathematics

@@ -1,7 +1,7 @@
 ---
 page: qftx-eft-operator-quotients
 title: Finite-Order EFT Operator Spaces and Redundancies
-status: draft
+status: "published"
 category: quantum-field-theory-mathematics
 library: mathematics
 kind: A

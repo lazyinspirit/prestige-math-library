@@ -2,7 +2,7 @@
 id: thm-aqft-two-group-background-consistency
 kind: theorem
 title: Finite 2-group background gauge consistency
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

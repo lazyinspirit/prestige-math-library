@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-relation-kernel
 kind: example
 title: "A holomorphic relation kernel on a bidisc"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

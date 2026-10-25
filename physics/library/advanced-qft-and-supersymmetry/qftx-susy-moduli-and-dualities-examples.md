@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-moduli-and-dualities-examples
 title: Supersymmetric Moduli, Seiberg–Witten Data and Duality Questions — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

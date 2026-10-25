@@ -2,7 +2,7 @@
 id: thm-qftx-gaga-metric-cech-derived-comparison
 kind: theorem
 title: "Refinement-limit Čech cohomology computes derived sheaf cohomology on metric spaces"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

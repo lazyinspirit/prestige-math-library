@@ -2,7 +2,7 @@
 id: lem-qftx-wilson-loop-gauge-invariance
 kind: lemma
 title: Wilson loop is invariant under vertex gauge transformations
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: mathematics

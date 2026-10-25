@@ -2,7 +2,7 @@
 id: lem-equivariant-rescaled-heat-kernel-extension
 kind: lemma
 title: "Rescaled heat kernels for positive matrix principal symbols"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

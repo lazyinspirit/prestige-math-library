@@ -2,7 +2,7 @@
 id: def-abbv-equivariant-integration-conventions
 kind: definition
 title: "Borel Equivariant Integration Conventions for the ABBV Formula"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

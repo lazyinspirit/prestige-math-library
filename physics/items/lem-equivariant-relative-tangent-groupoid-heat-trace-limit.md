@@ -2,7 +2,7 @@
 id: lem-equivariant-relative-tangent-groupoid-heat-trace-limit
 kind: lemma
 title: "Relative tangent-groupoid heat-trace limit at simple fixed points"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

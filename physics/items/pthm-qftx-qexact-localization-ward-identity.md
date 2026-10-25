@@ -2,7 +2,7 @@
 id: pthm-qftx-qexact-localization-ward-identity
 kind: physics-theorem
 title: Finite-Regulator Q-Exact Localization Ward Identity
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

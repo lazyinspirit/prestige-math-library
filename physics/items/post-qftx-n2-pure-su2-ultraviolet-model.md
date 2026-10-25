@@ -2,7 +2,7 @@
 id: post-qftx-n2-pure-su2-ultraviolet-model
 kind: postulate
 title: Independent pure $N=2$ SU(2) ultraviolet vector-multiplet datum
-status: draft
+status: "published"
 origin: session
 domain: physics
 library: physics

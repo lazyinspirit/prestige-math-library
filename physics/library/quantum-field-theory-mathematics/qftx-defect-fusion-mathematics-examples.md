@@ -1,7 +1,7 @@
 ---
 page: qftx-defect-fusion-mathematics-examples
 title: "Fusion Data for Non-Invertible Defects — Examples"
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

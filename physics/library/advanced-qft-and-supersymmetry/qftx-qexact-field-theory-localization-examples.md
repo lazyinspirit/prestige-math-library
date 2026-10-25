@@ -1,7 +1,7 @@
 ---
 page: qftx-qexact-field-theory-localization-examples
 title: Field-Theory Q-Exact Localization Derivation — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

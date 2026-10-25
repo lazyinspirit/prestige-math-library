@@ -2,7 +2,7 @@
 id: def-qftx-adjoint-higgs-monopole-sector
 kind: definition
 title: Static SU(2) adjoint-Higgs Prasad–Sommerfield monopole sector
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

@@ -1,7 +1,7 @@
 ---
 page: qftx-instanton-topology-mathematics-examples
 title: Instanton Charge, Self-Dual Bound, and BPST Example — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

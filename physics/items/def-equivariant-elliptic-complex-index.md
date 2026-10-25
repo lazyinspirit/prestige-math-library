@@ -2,7 +2,7 @@
 id: def-equivariant-elliptic-complex-index
 kind: definition
 title: "Equivariant elliptic-complex index and character"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

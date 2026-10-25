@@ -2,7 +2,7 @@
 id: def-qftx-scft-protected-data
 kind: definition
 title: Four-Dimensional SCFT and Protected Observable Data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 8

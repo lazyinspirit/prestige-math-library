@@ -1,7 +1,7 @@
 ---
 page: qftx-adhm-zero-fi-asd-correspondence
 title: Zero-FI Regular ADHM Data and Framed ASD Connections
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-qftx-donaldson-adhm-matrix-convention

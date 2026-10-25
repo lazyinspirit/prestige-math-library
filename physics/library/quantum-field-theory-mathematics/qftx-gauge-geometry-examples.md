@@ -1,7 +1,7 @@
 ---
 page: qftx-gauge-geometry-examples
 title: Non-Abelian Principal-Connection Forms and Curvature — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

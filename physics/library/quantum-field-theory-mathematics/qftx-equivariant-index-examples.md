@@ -1,7 +1,7 @@
 ---
 page: qftx-equivariant-index-examples
 title: Equivariant Elliptic Index and Character Formula — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-operators
 title: Physical EFT Operator Contracts and Power Counting
-status: draft
+status: "published"
 library: physics
 category: advanced-qft-and-supersymmetry
 kind: A

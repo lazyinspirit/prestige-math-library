@@ -1,7 +1,7 @@
 ---
 page: qftx-gaga-local-coherent-acyclicity
 title: "Local coherent acyclicity on sufficiently small polydiscs"
-status: draft
+status: "published"
 library: mathematics
 page_layout: compact-v1
 requires:

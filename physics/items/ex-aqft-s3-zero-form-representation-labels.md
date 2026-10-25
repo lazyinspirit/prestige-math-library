@@ -2,7 +2,7 @@
 id: ex-aqft-s3-zero-form-representation-labels
 kind: example
 title: "A non-Abelian zero-form symmetry and its representation labels"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

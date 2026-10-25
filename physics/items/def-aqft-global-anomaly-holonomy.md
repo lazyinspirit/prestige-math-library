@@ -2,7 +2,7 @@
 id: def-aqft-global-anomaly-holonomy
 kind: definition
 title: Determinant-line holonomy for a global anomaly test
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

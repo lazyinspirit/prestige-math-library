@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-coherent-section-topology-well-defined
 kind: lemma
 title: Coherent-section quotient topologies are Fréchet and presentation-independent
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

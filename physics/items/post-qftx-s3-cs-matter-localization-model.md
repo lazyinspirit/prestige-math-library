@@ -2,7 +2,7 @@
 id: post-qftx-s3-cs-matter-localization-model
 kind: postulate
 title: Adopted ABJM localization model on the round three-sphere
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

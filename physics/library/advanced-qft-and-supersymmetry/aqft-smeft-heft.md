@@ -1,7 +1,7 @@
 ---
 page: aqft-smeft-heft
 title: SMEFT and HEFT Symmetry Realizations
-status: draft
+status: "published"
 library: physics
 category: advanced-qft-and-supersymmetry
 kind: A

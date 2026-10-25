@@ -2,7 +2,7 @@
 id: ex-aqft-two-group-split-background-coupling
 kind: example
 title: A split 2-group background with a 1-form gauge shift
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

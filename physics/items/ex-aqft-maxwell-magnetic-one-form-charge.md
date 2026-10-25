@@ -2,7 +2,7 @@
 id: ex-aqft-maxwell-magnetic-one-form-charge
 kind: example
 title: "Magnetic one-form charge of an external U(1) line"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

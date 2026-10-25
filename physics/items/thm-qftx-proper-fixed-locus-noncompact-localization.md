@@ -2,7 +2,7 @@
 id: thm-qftx-proper-fixed-locus-noncompact-localization
 kind: theorem
 title: Noncompact localization with a proper fixed locus
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

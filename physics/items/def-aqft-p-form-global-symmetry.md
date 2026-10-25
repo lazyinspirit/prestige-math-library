@@ -2,7 +2,7 @@
 id: def-aqft-p-form-global-symmetry
 kind: definition
 title: "Group-like p-form global symmetry and backgrounds"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

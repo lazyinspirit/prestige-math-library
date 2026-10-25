@@ -1,7 +1,7 @@
 ---
 page: aqft-smeft-heft-examples
 title: SMEFT and HEFT Symmetry Realizations — Examples
-status: draft
+status: "published"
 library: physics
 category: advanced-qft-and-supersymmetry
 kind: B

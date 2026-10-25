@@ -2,7 +2,7 @@
 id: ex-qftx-n2-shortened-rest-fiber
 kind: example
 title: Explicit $N=2$ shortened rest fiber at central-charge saturation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

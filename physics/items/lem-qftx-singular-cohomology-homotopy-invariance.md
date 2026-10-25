@@ -2,7 +2,7 @@
 id: lem-qftx-singular-cohomology-homotopy-invariance
 kind: lemma
 title: Homotopy invariance of singular cohomology with field coefficients
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

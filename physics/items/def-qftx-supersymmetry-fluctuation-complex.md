@@ -2,7 +2,7 @@
 id: def-qftx-supersymmetry-fluctuation-complex
 kind: definition
 title: Gauge-fixed supersymmetry fluctuation data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

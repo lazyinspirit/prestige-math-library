@@ -2,7 +2,7 @@
 id: lem-abbv-fixed-component-euler-invertibility
 kind: lemma
 title: "Fixed-Component Normal Euler Classes Become Invertible"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

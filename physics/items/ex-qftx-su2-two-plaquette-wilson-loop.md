@@ -2,7 +2,7 @@
 id: ex-qftx-su2-two-plaquette-wilson-loop
 kind: example
 title: Two-plaquette SU(2) rectangle
-status: draft
+status: "published"
 origin: session
 dependency_level: 5
 domain: mathematics

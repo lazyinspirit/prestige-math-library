@@ -2,7 +2,7 @@
 id: lem-qftx-irreducible-finite-holonomy-witness
 kind: lemma
 title: Finite holonomy witnesses for irreducibility
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

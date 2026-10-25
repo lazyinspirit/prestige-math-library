@@ -1,7 +1,7 @@
 ---
 page: qftx-adhm-moduli-examples
 title: Framed ADHM Data and Equivariant Instanton Count — Examples
-status: draft
+status: "published"
 library: mathematics
 items: []
 examples:

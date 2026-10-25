@@ -1,7 +1,7 @@
 ---
 page: qftx-finite-q-exact-localization
 title: "Finite-Dimensional Q-Exact Deformation Theorem"
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-finite-dimensional-q-exact-localization-data

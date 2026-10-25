@@ -2,7 +2,7 @@
 id: ex-qftx-penrose-global-injectivity-boundary
 kind: example
 title: Local transforms versus global injectivity
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

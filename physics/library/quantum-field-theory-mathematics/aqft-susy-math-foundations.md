@@ -1,7 +1,7 @@
 ---
 page: aqft-susy-math-foundations
 title: "Super-Poincare Algebra and Positive Hilbert Representations"
-status: draft
+status: "published"
 library: mathematics
 companion: aqft-susy-math-foundations-examples
 requires:

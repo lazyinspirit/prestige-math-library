@@ -2,7 +2,7 @@
 id: def-qftx-suspension-pinch-map
 kind: definition
 title: Reduced suspension pinch map
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

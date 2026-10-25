@@ -2,7 +2,7 @@
 id: pthm-aqft-matching-and-running-scale-independence
 kind: physics-theorem
 title: Scale independence of compatible EFT matching and running
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

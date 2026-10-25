@@ -2,7 +2,7 @@
 id: thm-qftx-adhm-real-complex-quotient-correspondence
 kind: theorem
 title: "Real and complex ADHM quotients at positive and regular zero FI"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

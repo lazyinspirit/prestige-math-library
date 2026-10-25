@@ -2,7 +2,7 @@
 id: ex-aqft-operator-basis-reduction
 kind: example
 title: A dimension-six scalar operator reduced by integration by parts and the leading equation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

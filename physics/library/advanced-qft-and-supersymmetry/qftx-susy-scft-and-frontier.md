@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-scft-and-frontier
 title: Four-Dimensional SCFT Data and Duality Frontier
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-scft-protected-data

@@ -2,7 +2,7 @@
 id: lem-qftx-hopf-generator-and-cone
 kind: lemma
 title: "Hopf generator and mapping-cone coefficient"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-extended-actions
 title: $N=2$ and $N=4$ Gauge Actions
-status: draft
+status: "published"
 library: physics
 items:
   - lem-qftx-n2-hypermultiplet-gauge-invariant-couplings

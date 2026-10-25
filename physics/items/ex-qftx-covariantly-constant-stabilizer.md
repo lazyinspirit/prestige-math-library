@@ -2,7 +2,7 @@
 id: ex-qftx-covariantly-constant-stabilizer
 kind: example
 title: Central stabilizer and based stabilizer comparison
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

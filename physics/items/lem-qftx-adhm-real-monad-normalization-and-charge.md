@@ -2,7 +2,7 @@
 id: lem-qftx-adhm-real-monad-normalization-and-charge
 kind: lemma
 title: Real monad normalization, regularity, framing and charge
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

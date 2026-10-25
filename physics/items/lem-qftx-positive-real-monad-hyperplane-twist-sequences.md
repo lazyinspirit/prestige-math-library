@@ -2,7 +2,7 @@
 id: lem-qftx-positive-real-monad-hyperplane-twist-sequences
 kind: lemma
 title: Exact holomorphic hyperplane sequences for negative twists
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: post-aqft-smeft-model
 kind: postulate
 title: Linearly realized Standard Model EFT field and scale data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

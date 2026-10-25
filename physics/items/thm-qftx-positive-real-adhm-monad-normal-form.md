@@ -2,7 +2,7 @@
 id: thm-qftx-positive-real-adhm-monad-normal-form
 kind: theorem
 title: Positive real linear monad normal forms
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

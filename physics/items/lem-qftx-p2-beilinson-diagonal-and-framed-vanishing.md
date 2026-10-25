@@ -2,7 +2,7 @@
 id: lem-qftx-p2-beilinson-diagonal-and-framed-vanishing
 kind: lemma
 title: "The projective-plane Beilinson monad for a framed torsion-free sheaf"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

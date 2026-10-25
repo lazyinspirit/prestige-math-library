@@ -2,7 +2,7 @@
 id: thm-aqft-finite-group-gauging
 kind: theorem
 title: Finite cocycle-weighted groupoid gauging and gluing
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

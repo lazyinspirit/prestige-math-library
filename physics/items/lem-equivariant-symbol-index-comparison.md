@@ -3,7 +3,7 @@ id: lem-equivariant-symbol-index-comparison
 kind: lemma
 title: "Analytic symbol index, normal embedding compatibility and ordinary
   pushforward"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

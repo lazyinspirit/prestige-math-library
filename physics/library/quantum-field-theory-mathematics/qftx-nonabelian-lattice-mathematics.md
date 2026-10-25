@@ -1,7 +1,7 @@
 ---
 page: qftx-nonabelian-lattice-mathematics
 title: Finite Compact Non-Abelian Lattice Data and Wilson Holonomy
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-qftx-nonabelian-lattice-gauge-data

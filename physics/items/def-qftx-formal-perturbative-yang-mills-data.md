@@ -2,7 +2,7 @@
 id: def-qftx-formal-perturbative-yang-mills-data
 kind: definition
 title: Formal Perturbative Yang–Mills Renormalization Data
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 4
 domain: physics

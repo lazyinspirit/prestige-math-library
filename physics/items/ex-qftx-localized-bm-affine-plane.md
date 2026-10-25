@@ -2,7 +2,7 @@
 id: ex-qftx-localized-bm-affine-plane
 kind: example
 title: Affine-plane localization from BM classes
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

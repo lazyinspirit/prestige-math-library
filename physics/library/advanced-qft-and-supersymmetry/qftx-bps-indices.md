@@ -1,7 +1,7 @@
 ---
 page: qftx-bps-indices
 title: Witten and Superconformal Indices
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-physical-bps-index

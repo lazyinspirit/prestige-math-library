@@ -1,7 +1,7 @@
 ---
 page: qftx-susy-scft-and-frontier-examples
 title: Four-Dimensional SCFT Data and Duality Frontier — Examples
-status: draft
+status: "published"
 library: physics
 items:
   - ex-qftx-n4-su2-line-operator-duality

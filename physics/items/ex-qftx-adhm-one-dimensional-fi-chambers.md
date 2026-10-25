@@ -2,7 +2,7 @@
 id: ex-qftx-adhm-one-dimensional-fi-chambers
 kind: example
 title: "The positive-FI and zero-FI rank-one chambers"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: lem-qftx-su2-one-plaquette-average
 kind: lemma
 title: SU(2) one-plaquette matrix average at strong coupling
-status: draft
+status: "published"
 origin: session
 dependency_level: 3
 domain: mathematics

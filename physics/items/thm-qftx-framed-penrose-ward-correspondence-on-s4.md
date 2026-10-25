@@ -2,7 +2,7 @@
 id: thm-qftx-framed-penrose-ward-correspondence-on-s4
 kind: theorem
 title: Conditional framed Penrose–Ward correspondence on the round four-sphere
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

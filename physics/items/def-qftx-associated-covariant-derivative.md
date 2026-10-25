@@ -2,7 +2,7 @@
 id: def-qftx-associated-covariant-derivative
 kind: definition
 title: Covariant derivative on an associated representation bundle
-status: draft
+status: "published"
 origin: session
 dependency_level: 1
 domain: mathematics

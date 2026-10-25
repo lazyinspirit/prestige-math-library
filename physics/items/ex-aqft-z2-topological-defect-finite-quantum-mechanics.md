@@ -2,7 +2,7 @@
 id: ex-aqft-z2-topological-defect-finite-quantum-mechanics
 kind: example
 title: "A nontrivial Z2 topological defect in finite quantum mechanics"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

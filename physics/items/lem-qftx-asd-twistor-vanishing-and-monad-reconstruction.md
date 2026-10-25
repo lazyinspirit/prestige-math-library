@@ -2,7 +2,7 @@
 id: lem-qftx-asd-twistor-vanishing-and-monad-reconstruction
 kind: lemma
 title: Conditional twistor vanishing and normalized monad reconstruction
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

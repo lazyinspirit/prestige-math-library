@@ -2,7 +2,7 @@
 id: ex-qftx-su2-wilson-lattice-transfer-sector
 kind: example
 title: A finite SU(2) Wilson lattice and its gauge-invariant transfer sector
-status: draft
+status: "published"
 origin: session
 dependency_level: 4
 domain: physics

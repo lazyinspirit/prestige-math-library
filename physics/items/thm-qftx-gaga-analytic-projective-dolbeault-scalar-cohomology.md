@@ -2,7 +2,7 @@
 id: thm-qftx-gaga-analytic-projective-dolbeault-scalar-cohomology
 kind: theorem
 title: Projective Dolbeault comparison and scalar structure-sheaf cohomology
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

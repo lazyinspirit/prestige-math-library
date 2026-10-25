@@ -2,7 +2,7 @@
 id: lem-qftx-asd-penrose-kernel-vanishing
 kind: lemma
 title: Conditional Penrose vanishing from positive scalar curvature
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -1,7 +1,7 @@
 ---
 page: qftx-nonabelian-brst-bv-mathematics
 title: Non-Abelian BRST Cohomology and Classical BV Data
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-qftx-nonabelian-brst-complex

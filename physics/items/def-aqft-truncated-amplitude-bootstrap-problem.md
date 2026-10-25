@@ -2,7 +2,7 @@
 id: def-aqft-truncated-amplitude-bootstrap-problem
 kind: definition
 title: Finite truncated forward-amplitude bootstrap data
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

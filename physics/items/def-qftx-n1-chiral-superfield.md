@@ -2,7 +2,7 @@
 id: def-qftx-n1-chiral-superfield
 kind: definition
 title: Four-dimensional $N=1$ chiral superfield on flat superspace
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

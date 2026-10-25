@@ -1,7 +1,7 @@
 ---
 page: qftx-gaga-analytic-coherence-examples
 title: "Oka coherence and local coherent free resolutions — Examples"
-status: draft
+status: "published"
 library: mathematics
 requires:
   - qftx-gaga-analytic-coherence

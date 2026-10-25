@@ -2,7 +2,7 @@
 id: def-qftx-gauge-slice-and-faddeev-popov-operator
 kind: definition
 title: Finite-dimensional gauge slices and Faddeev–Popov operators
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

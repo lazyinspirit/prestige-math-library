@@ -2,7 +2,7 @@
 id: def-finite-dimensional-q-exact-localization-data
 kind: definition
 title: "Finite-Dimensional Q-Exact Localization Data"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

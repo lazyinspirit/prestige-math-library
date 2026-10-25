@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-amplitudes
 title: EFT Amplitude Interface and Positivity Application
-status: draft
+status: "published"
 library: physics
 items:
   - def-aqft-eft-scattering-channel

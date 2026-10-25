@@ -2,7 +2,7 @@
 id: "ex-aqft-split-two-group-interval-gluing"
 kind: "example"
 title: "Split two-group interval gluing with a nontrivial action"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "mathematics"
 library: "mathematics"

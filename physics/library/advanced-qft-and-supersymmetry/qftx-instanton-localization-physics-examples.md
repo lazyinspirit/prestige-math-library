@@ -1,7 +1,7 @@
 ---
 page: qftx-instanton-localization-physics-examples
 title: Instanton Counting and Ω-Background — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

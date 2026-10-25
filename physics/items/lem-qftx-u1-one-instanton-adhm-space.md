@@ -2,7 +2,7 @@
 id: lem-qftx-u1-one-instanton-adhm-space
 kind: lemma
 title: "Explicit Rank-One One-Instanton ADHM Quotient"
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 6
 domain: mathematics

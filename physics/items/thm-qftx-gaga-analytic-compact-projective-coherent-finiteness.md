@@ -2,7 +2,7 @@
 id: thm-qftx-gaga-analytic-compact-projective-coherent-finiteness
 kind: theorem
 title: Finite-dimensional coherent cohomology on compact projective space
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

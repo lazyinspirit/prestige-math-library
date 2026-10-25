@@ -2,7 +2,7 @@
 id: ex-aqft-vectorlike-conjugate-chiral-pair
 kind: example
 title: A conjugate SU(3)×U(1) chiral pair with zero local polynomial
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

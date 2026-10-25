@@ -1,7 +1,7 @@
 ---
 page: qftx-gaga-analytic-coherence
 title: "Oka coherence and local coherent free resolutions"
-status: draft
+status: "published"
 library: mathematics
 requires:
   - relations-functions-and-quotients

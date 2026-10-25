@@ -2,7 +2,7 @@
 id: thm-aqft-truncated-coupled-rge-wellposedness
 kind: theorem
 title: Local well-posedness of a supplied truncated coupled RG system
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

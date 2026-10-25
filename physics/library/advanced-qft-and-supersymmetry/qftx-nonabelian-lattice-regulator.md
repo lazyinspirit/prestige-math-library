@@ -1,7 +1,7 @@
 ---
 page: qftx-nonabelian-lattice-regulator
 title: Compact Non-Abelian Finite-Lattice Regulator
-status: draft
+status: "published"
 library: physics
 items:
   - lem-qftx-su2-compact-nonabelian-group

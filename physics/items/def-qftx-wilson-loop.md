@@ -2,7 +2,7 @@
 id: def-qftx-wilson-loop
 kind: definition
 title: Wilson loop on a finite lattice
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

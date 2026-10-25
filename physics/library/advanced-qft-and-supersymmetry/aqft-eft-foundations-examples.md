@@ -1,7 +1,7 @@
 ---
 page: aqft-eft-foundations-examples
 title: EFT Data, Scales, Wilsonian Action and Finite Matching — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

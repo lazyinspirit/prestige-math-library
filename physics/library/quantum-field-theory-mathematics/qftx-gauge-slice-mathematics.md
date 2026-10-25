@@ -1,7 +1,7 @@
 ---
 page: qftx-gauge-slice-mathematics
 title: Local Gauge Slices and Faddeev–Popov Jacobians
-status: draft
+status: "published"
 library: mathematics
 items:
   - def-qftx-gauge-slice-and-faddeev-popov-operator

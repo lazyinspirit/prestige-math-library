@@ -1,7 +1,7 @@
 ---
 page: qftx-gaga-projective-scalar-dolbeault
 title: Projective Dolbeault comparison and scalar structure-sheaf cohomology
-status: draft
+status: "published"
 library: mathematics
 companion: qftx-gaga-projective-scalar-dolbeault-examples
 requires:

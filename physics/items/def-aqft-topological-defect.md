@@ -2,7 +2,7 @@
 id: def-aqft-topological-defect
 kind: definition
 title: "Topological defect insertion in a specified model"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

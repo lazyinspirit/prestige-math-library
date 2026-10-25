@@ -1,7 +1,7 @@
 ---
 page: qftx-instanton-localization-physics
 title: Instanton Counting and Ω-Background
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-instanton-equivariant-partition-series

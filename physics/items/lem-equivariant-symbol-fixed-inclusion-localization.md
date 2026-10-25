@@ -2,7 +2,7 @@
 id: lem-equivariant-symbol-fixed-inclusion-localization
 kind: lemma
 title: Fixed-inclusion localization for equivariant compact symbol classes
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

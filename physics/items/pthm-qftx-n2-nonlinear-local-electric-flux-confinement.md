@@ -2,7 +2,7 @@
 id: pthm-qftx-n2-nonlinear-local-electric-flux-confinement
 kind: physics-theorem
 title: Nonlinear local electric-flux confinement from planar energy infima
-status: draft
+status: "published"
 origin: session
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: ex-adhm-u2-one-instanton-fixed-points
 kind: example
 title: "The Two U(2) Fixed Points at Charge One"
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 15
 axiom_base: "ZF + full AC through the fixed-point theorem supplier; this example uses only finite calculations."

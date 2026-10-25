@@ -2,7 +2,7 @@
 id: ex-qftx-localized-bm-proper-fixed-component
 kind: example
 title: A noncompact variety with a proper fixed component
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

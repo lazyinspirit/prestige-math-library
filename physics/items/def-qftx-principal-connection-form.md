@@ -2,7 +2,7 @@
 id: def-qftx-principal-connection-form
 kind: definition
 title: Principal connection 1-form from a horizontal distribution
-status: draft
+status: "published"
 origin: session
 dependency_level: 0
 domain: mathematics

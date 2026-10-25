@@ -2,7 +2,7 @@
 id: def-aqft-operator-basis-physical-data
 kind: definition
 title: Physical EFT operator data and power-counting contract
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 3

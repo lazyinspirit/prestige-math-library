@@ -2,7 +2,7 @@
 id: def-aqft-calibrated-pvalue
 kind: definition
 title: Upper-tail p-values under an explicit null calibration
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

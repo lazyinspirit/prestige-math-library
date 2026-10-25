@@ -2,7 +2,7 @@
 id: def-aqft-topological-interface
 kind: definition
 title: "Topological interface between specified models"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

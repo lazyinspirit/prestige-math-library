@@ -2,7 +2,7 @@
 id: def-qftx-n2-coulomb-branch-data
 kind: definition
 title: Pure $N=2$ SU(2) Coulomb-branch and period data
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

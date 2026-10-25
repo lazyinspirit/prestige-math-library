@@ -2,7 +2,7 @@
 id: pthm-qftx-oraifeartaigh-f-term-breaking
 kind: physics-theorem
 title: Exact tree-level minimum in the three-field O’Raifeartaigh model
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 6

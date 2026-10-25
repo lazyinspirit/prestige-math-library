@@ -2,7 +2,7 @@
 id: ex-qftx-nonproper-fixed-locus-excluded
 kind: example
 title: Why a nonproper fixed locus needs another theory
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 5

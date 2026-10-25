@@ -2,7 +2,7 @@
 id: def-framed-u-n-instanton-moduli-and-adhm-data
 kind: definition
 title: "Framed U(N) Instanton Moduli and ADHM Data"
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 3
 domain: mathematics

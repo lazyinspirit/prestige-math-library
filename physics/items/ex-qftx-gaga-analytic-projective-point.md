@@ -2,7 +2,7 @@
 id: ex-qftx-gaga-analytic-projective-point
 kind: example
 title: Finite-support coherent sheaves have finite-dimensional global sections
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

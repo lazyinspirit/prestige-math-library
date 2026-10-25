@@ -4,7 +4,7 @@ kind: definition
 domain: physics
 library: physics
 title: Finite-regulator derivative expansion and truncation
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 3
 deps:

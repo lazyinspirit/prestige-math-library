@@ -1,7 +1,7 @@
 ---
 page: qftx-s4-partition-functions
 title: Four-Dimensional S4 Localization Examples
-status: draft
+status: "published"
 library: physics
 items:
   - post-qftx-s4-n2-localization-model

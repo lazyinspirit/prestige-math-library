@@ -2,7 +2,7 @@
 id: lem-qftx-section-retract-obstruction
 kind: lemma
 title: "A section forces the structure group to retract from a principal bundle"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 0

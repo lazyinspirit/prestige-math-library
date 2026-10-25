@@ -2,7 +2,7 @@
 id: def-qftx-instanton-number-and-asd-sector
 kind: definition
 title: Trace-normalized instanton number and self-dual sectors
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

@@ -2,7 +2,7 @@
 id: ex-aqft-finite-two-group-interval-gluing
 kind: example
 title: Interval sewing with the finite gauge-volume factor
-status: draft
+status: "published"
 origin: pipeline
 domain: physics
 library: physics

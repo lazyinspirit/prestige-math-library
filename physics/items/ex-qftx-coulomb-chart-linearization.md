@@ -2,7 +2,7 @@
 id: ex-qftx-coulomb-chart-linearization
 kind: example
 title: Coulomb chart linearization and derivative loss
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: ex-qftx-positive-real-monad-zero-charge
 kind: example
 title: Zero-charge positive real monad
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: post-qftx-nonabelian-yang-mills-model
 kind: postulate
 title: Classical pure SU(2) Yang–Mills model
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: physics

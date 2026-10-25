@@ -2,7 +2,7 @@
 id: ex-equivariant-fourier-hardy-symbol-index
 kind: example
 title: Fourier–Hardy index and the sign of the cotangent plane symbol
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

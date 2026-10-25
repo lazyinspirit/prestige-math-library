@@ -2,7 +2,7 @@
 id: ex-aqft-two-group-twisted-local-coefficient-background
 kind: example
 title: A finite twisted-local-coefficient background and gauge shift
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

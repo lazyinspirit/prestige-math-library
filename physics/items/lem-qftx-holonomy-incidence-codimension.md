@@ -2,7 +2,7 @@
 id: lem-qftx-holonomy-incidence-codimension
 kind: lemma
 title: Dimension of the finite holonomy incidence manifold
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

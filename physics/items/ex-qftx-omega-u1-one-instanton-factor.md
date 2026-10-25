@@ -2,7 +2,7 @@
 id: ex-qftx-omega-u1-one-instanton-factor
 kind: example
 title: "The Rank-One One-Instanton Mass Insertion"
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 7
 domain: physics

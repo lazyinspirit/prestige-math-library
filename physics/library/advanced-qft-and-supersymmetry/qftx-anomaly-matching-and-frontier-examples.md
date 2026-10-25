@@ -1,7 +1,7 @@
 ---
 page: qftx-anomaly-matching-and-frontier-examples
 title: "Anomaly Matching and Categorical Classification Frontier — Examples"
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

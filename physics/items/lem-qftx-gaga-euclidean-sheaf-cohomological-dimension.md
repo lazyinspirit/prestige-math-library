@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-euclidean-sheaf-cohomological-dimension
 kind: lemma
 title: "Ordinary sheaf cohomology on Euclidean open sets vanishes above real dimension"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

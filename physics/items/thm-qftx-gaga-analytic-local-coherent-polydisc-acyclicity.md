@@ -2,7 +2,7 @@
 id: thm-qftx-gaga-analytic-local-coherent-polydisc-acyclicity
 kind: theorem
 title: "Local coherent acyclicity on sufficiently small polydiscs"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

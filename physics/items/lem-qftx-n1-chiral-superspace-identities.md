@@ -2,7 +2,7 @@
 id: lem-qftx-n1-chiral-superspace-identities
 kind: lemma
 title: Chiral-coordinate solution and supersymmetry covariance
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

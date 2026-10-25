@@ -2,7 +2,7 @@
 id: def-qftx-su2-wilson-plaquette-measure
 kind: definition
 title: Finite SU(2) Wilson plaquette measure
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

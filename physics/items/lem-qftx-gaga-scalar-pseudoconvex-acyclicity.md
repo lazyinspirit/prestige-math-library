@@ -2,7 +2,7 @@
 id: lem-qftx-gaga-scalar-pseudoconvex-acyclicity
 kind: lemma
 title: Scalar holomorphic sheaf acyclicity on pseudoconvex domains
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

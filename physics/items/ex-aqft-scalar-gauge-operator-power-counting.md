@@ -2,7 +2,7 @@
 id: ex-aqft-scalar-gauge-operator-power-counting
 kind: example
 title: A finite-order SU(2) scalar operator contract
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

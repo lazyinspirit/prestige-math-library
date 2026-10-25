@@ -2,7 +2,7 @@
 id: ex-abbv-positive-dimensional-fixed-components
 kind: example
 title: "ABBV with Positive-Dimensional Fixed Components"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

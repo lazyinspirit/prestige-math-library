@@ -2,7 +2,7 @@
 id: def-qftx-bv-antibracket-master-action
 kind: definition
 title: Classical BV Antibracket and Yang–Mills Master-Action Data
-status: draft
+status: "published"
 origin: session
 dependency_level: 2
 domain: mathematics

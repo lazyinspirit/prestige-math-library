@@ -2,7 +2,7 @@
 id: def-aqft-anomaly-matching-data
 kind: definition
 title: Flat-space chiral anomaly-matching data and regulator convention
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 dependency_level: 4

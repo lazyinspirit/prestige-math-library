@@ -3,7 +3,7 @@ id: "lem-qftx-periodic-su2-product-kernel-and-center-line-sign"
 kind: "lemma"
 title: "Periodic real product kernel and central action on the inverse
   determinant line"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "mathematics"
 library: "mathematics"

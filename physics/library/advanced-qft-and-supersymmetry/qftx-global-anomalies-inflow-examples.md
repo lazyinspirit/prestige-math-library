@@ -1,7 +1,7 @@
 ---
 page: qftx-global-anomalies-inflow-examples
 title: Global Anomalies, Relative Theories and Inflow — Examples
-status: draft
+status: "published"
 library: physics
 items: []
 examples:

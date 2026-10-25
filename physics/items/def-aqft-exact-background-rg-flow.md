@@ -2,7 +2,7 @@
 id: def-aqft-exact-background-rg-flow
 kind: definition
 title: "Exact background-coupled RG comparison"
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

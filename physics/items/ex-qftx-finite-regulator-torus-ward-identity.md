@@ -2,7 +2,7 @@
 id: ex-qftx-finite-regulator-torus-ward-identity
 kind: example
 title: A finite Q-exact torus integral with constant value
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

@@ -2,7 +2,7 @@
 id: pthm-aqft-supersymmetric-threshold-matching
 kind: physics-theorem
 title: Leading Wilsonian Superpotential Match at a Supersymmetric Chiral Threshold
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: physics

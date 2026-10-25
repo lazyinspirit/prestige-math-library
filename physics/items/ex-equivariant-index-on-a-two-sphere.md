@@ -2,7 +2,7 @@
 id: ex-equivariant-index-on-a-two-sphere
 kind: example
 title: "The de Rham index character of a rotating two-sphere"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

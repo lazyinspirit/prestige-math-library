@@ -1,7 +1,7 @@
 ---
 page: qftx-spectral-networks
 title: Spectral Networks, Framed BPS Data and Defect Indices
-status: draft
+status: "published"
 library: physics
 items:
   - def-qftx-spectral-network-data

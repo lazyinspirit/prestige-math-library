@@ -2,7 +2,7 @@
 id: lem-qftx-twistor-line-section-direct-image
 kind: lemma
 title: Smooth framed bundle of sections over real twistor lines
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

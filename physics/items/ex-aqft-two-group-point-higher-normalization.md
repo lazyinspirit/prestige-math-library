@@ -2,7 +2,7 @@
 id: "ex-aqft-two-group-point-higher-normalization"
 kind: "example"
 title: "A point retains the second gauge stabilizer"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "mathematics"
 library: "mathematics"

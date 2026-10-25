@@ -2,7 +2,7 @@
 id: lem-qftx-analytic-coherent-matrix-kernels
 kind: lemma
 title: "Finite free map kernels over a coherent structure sheaf are locally finite type"
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

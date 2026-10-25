@@ -1,7 +1,7 @@
 ---
 page: qftx-gaga-compact-coherent-finiteness
 title: Finite-dimensional coherent cohomology on compact projective space
-status: draft
+status: "published"
 library: mathematics
 companion: qftx-gaga-compact-coherent-finiteness-examples
 requires:

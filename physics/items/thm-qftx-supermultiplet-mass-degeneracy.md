@@ -2,7 +2,7 @@
 id: thm-qftx-supermultiplet-mass-degeneracy
 kind: theorem
 title: Mass is constant on an irreducible positive super-Poincare representation
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

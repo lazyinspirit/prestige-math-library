@@ -2,7 +2,7 @@
 id: lem-qftx-super-poincare-graded-jacobi
 kind: lemma
 title: Graded Jacobi and real-form verification for the extended super-Poincare algebra
-status: draft
+status: "published"
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
 domain: mathematics

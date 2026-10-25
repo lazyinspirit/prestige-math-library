@@ -2,7 +2,7 @@
 id: lem-qftx-rank-one-regular-adhm-and-ordinary-asd-boundary
 kind: lemma
 title: Rank-one regular zero-FI ADHM and ordinary ASD boundary
-status: draft
+status: "published"
 origin: session
 domain: mathematics
 library: mathematics

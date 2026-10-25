@@ -2,7 +2,7 @@
 id: ex-aqft-coupled-rge-linear-mixing
 kind: example
 title: A two-component truncated RG flow with linear mixing
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics

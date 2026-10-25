@@ -2,7 +2,7 @@
 id: ex-qftx-brst-exact-lorenz-gauge-term
 kind: example
 title: A BRST-Exact Lorenz-Gauge Functional
-status: draft
+status: "published"
 origin: pipeline
 dependency_level: 5
 domain: physics

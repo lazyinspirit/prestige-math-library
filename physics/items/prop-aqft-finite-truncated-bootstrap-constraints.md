@@ -2,7 +2,7 @@
 id: prop-aqft-finite-truncated-bootstrap-constraints
 kind: proposition
 title: Finite truncated forward-positivity constraints
-status: draft
+status: "published"
 origin: pipeline
 domain: mathematics
 library: mathematics
