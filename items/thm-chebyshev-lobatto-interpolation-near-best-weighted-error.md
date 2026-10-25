@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 axiom_use: "No choice axiom is used; the estimate follows from a finite measure bound."
+verification:
   judge:
     model: "gpt-6-luna"
     verdict: pass

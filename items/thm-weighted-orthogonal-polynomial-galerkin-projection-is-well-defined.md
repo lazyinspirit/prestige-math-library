@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: "No choice axiom is used; only finite orthogonal expansions and a positive inner product are used."
+verification:
   judge:
     model: "gpt-6-luna"
     verdict: pass

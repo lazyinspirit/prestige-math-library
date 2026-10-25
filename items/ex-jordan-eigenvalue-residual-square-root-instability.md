@@ -16,6 +16,7 @@ provenance:
 generation:
   role: example
 proof_strategy: direct
+verification:
   judge:
     model: "gpt-6-luna"
     verdict: pass

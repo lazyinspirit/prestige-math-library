@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
   judge:
     model: "gpt-6-luna"
     verdict: pass

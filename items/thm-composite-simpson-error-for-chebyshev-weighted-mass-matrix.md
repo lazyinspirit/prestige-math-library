@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 axiom_use: "No choice axiom is used; this is a finite trigonometric derivative bound and a quadrature estimate."
+verification:
   judge:
     model: "gpt-6-luna"
     verdict: pass
