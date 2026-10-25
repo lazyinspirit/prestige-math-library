@@ -41,6 +41,10 @@ sources:
         (4.2)–(4.4) and the fixed-component pushforward derivation."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

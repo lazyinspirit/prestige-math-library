@@ -23,6 +23,10 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 physical_scope: >-
   Conditional sign constraint on the matched on-shell coefficient combination
   of one four-dimensional gapped identical-real-scalar channel satisfying the

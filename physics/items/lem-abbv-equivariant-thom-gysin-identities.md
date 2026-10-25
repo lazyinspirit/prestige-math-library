@@ -43,6 +43,10 @@ sources:
         Thom-class and equation (4.2) discussion."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

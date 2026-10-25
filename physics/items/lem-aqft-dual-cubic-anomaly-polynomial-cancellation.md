@@ -28,6 +28,10 @@ sources:
       locator: "§§2.2–2.3, printed pp. 30–36: linear descent from an invariant polynomial, additivity, and the sign reversal for conjugate representation indices."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

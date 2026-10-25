@@ -47,6 +47,10 @@ sources:
       locator: "Chapter 5 §5.4 and Chapter 6 §6.1, printed pp. 92–95 and 100–101: trivial-bundle connection forms and curvature."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

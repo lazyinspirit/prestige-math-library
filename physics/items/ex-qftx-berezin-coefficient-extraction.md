@@ -29,6 +29,10 @@ sources:
       locator: "§3.7, printed pp. 97–99, coefficient-extraction integration and generator order."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -45,7 +49,7 @@ Then $\int d^4\theta\,f=d-c$.
 
 [Gates et al., §3.7](https://arxiv.org/pdf/hep-th/0108200).
 
-Four-dimensional N=1 superspace Grassmann algebra and Berezin integration: [[def-qftx-superspace-grassmann-algebra]].
+Four-dimensional $N=1$ superspace Grassmann algebra and Berezin integration: [[def-qftx-superspace-grassmann-algebra]].
 
 Associativity and coefficient calculus for the finite superspace Grassmann algebra: [[lem-qftx-grassmann-coefficient-calculus]].
 

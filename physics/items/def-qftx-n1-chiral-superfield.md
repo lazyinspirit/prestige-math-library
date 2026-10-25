@@ -1,7 +1,7 @@
 ---
 id: def-qftx-n1-chiral-superfield
 kind: definition
-title: Four-dimensional N=1 chiral superfield on flat superspace
+title: Four-dimensional $N=1$ chiral superfield on flat superspace
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -36,6 +36,10 @@ sources:
       locator: "§3.4, printed pp. 83–85, covariant derivatives; §§3.5–3.6, printed pp. 89–96, chiral constraints and component expansions."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition
@@ -66,7 +70,7 @@ For a chiral $\Phi$, the component transformation is the unique tuple $(\delta A
 
 [Gates et al., §§3.4 and 3.6](https://arxiv.org/pdf/hep-th/0108200).
 
-Four-dimensional N=1 superspace Grassmann algebra and Berezin integration: [[def-qftx-superspace-grassmann-algebra]].
+Four-dimensional $N=1$ superspace Grassmann algebra and Berezin integration: [[def-qftx-superspace-grassmann-algebra]].
 
 Associativity and coefficient calculus for the finite superspace Grassmann algebra: [[lem-qftx-grassmann-coefficient-calculus]].
 

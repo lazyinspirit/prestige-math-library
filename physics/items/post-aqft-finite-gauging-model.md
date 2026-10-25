@@ -15,6 +15,11 @@ physical_scope: The adopted finite three-dimensional vertex-spin regulator with 
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: Gregory W. Moore and Vivek Saxena, TASI Lectures on Topological Field Theories and Differential Cohomology, §23.3

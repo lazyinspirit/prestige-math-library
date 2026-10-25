@@ -29,6 +29,10 @@ sources:
       locator: "§2.1, PDF pp. 5–8: labeled regions, source/target maps on domain walls, isotopy classes of defect bordisms, and functorial correlators in oriented 2D TQFT."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

@@ -62,6 +62,10 @@ sources:
       locator: "§§3.5.2–3.5.5 and §4.1, printed pp. 44–51 and 59–61, for finite lattice variables, Wilson loops and two-dimensional plaquette factorization; the finite data are specified locally."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

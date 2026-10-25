@@ -1,7 +1,7 @@
 ---
 id: post-qftx-n2-seiberg-witten-effective-solution
 kind: postulate
-title: Source-proposed pure SU(2) N=2 Seiberg–Witten low-energy data
+title: Source-proposed pure SU(2) $N=2$ Seiberg–Witten low-energy data
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -32,14 +32,17 @@ sources:
     locator: '§§5.3 and 6.1–6.2, printed pp. 20–29: strong-coupling monopole/dyon singularities and the curve/period solution; the notes identify the construction as a review of the Seiberg–Witten proposal.'
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Postulate
 
 Adopt the source-proposed low-energy solution data for pure four-dimensional
 rigid $\mathcal N=2$ Yang--Mills with global gauge group $SU(2)$, one
-adjoint vector multiplet, rank one, no matter hypermultiplets, and the coupling, units, connection-normalized scalar, and prepotential convention of the independent pure ultraviolet vector-multiplet datum. Use natural units
-$c=\hbar=1$, metric $\eta=\operatorname{diag}(-1,1,1,1)$, and a positive
+adjoint vector multiplet, rank one, no matter hypermultiplets, and the coupling, units, connection-normalized scalar, and prepotential convention of the independent pure ultraviolet vector-multiplet datum. Use natural units in which the speed of light and reduced Planck constant are one, with metric $\eta=\operatorname{diag}(-1,1,1,1)$, and a positive
 dynamical scale $\Lambda$ of mass dimension one. The gauge-invariant
 coordinate $u$ has mass dimension two; set $w=u/\Lambda^2$.
 
@@ -99,17 +102,17 @@ not deductions from a constructed continuum theory or assertions of global
 single-valuedness. The local monopole superpotential uses this inverse in
 $\mu u(A_D)$.
 
-In the local monopole patch, adopt the dual $U(1)_D$ field content and superpotential described in the preceding effective-model definition. The source two-derivative vector metric is positive and generally field dependent, determined by the local dual coupling; a regulated matching scale is part of any effective action with the light monopole retained. That definition explicitly freezes this metric at $b=g_D^{-2}>0$ for the subsequent classical calculations. Metric freezing, and the further replacement of $u(A_D)$ by its linear Taylor term where explicitly requested, are additional approximations, not exact identities of the full period solution. No bound on their discarded corrections is adopted here. A small N=1-breaking mass parameter $\mu$ of
+In the local monopole patch, adopt the dual $U(1)_D$ field content and superpotential described in the preceding effective-model definition. The source two-derivative vector metric is positive and generally field dependent, determined by the local dual coupling; a regulated matching scale is part of any effective action with the light monopole retained. That definition explicitly freezes this metric at $b=g_D^{-2}>0$ for the subsequent classical calculations. Metric freezing, and the further replacement of $u(A_D)$ by its linear Taylor term where explicitly requested, are additional approximations, not exact identities of the full period solution. No bound on their discarded corrections is adopted here. A small $N=1$-breaking mass parameter $\mu$ of
 mass dimension one adds the local superpotential term $\mu u(A_D)$ to
 $\sqrt2 A_D M\widetilde M$. The local description applies only near this
-singularity, below its effective cutoff, and does not simultaneously describe
+singularity, with the supplied cutoff $\Lambda_{\mathrm{EFT}}$, margin $\varepsilon$, background domain $\mathcal U_{\mathrm{EFT}}$ and excitation bound of that definition; small $\mu$ means $v<\varepsilon\Lambda_{\mathrm{EFT}}$. These are adopted applicability inputs, not a bound on discarded corrections. This local description does not simultaneously describe
 the mutually nonlocal dyon at the other singularity.
 
 Here **exact low-energy solution** means the adopted two-derivative
 Wilsonian data of this source-defined model on its regular patches. It does
 not mean a proof of a nonperturbative UV path integral, a global
 single-valued prepotential, or an identity for arbitrary gauge groups,
-matter contents, or N=2 theories.
+matter contents, or $N=2$ theories.
 
 ## Postulate references
 
@@ -117,7 +120,7 @@ matter contents, or N=2 theories.
 
 [Bilal, §§5.3 and 6.1–6.2](https://arxiv.org/pdf/hep-th/9601007v1).
 
-Pure N=2 SU(2) Coulomb-branch and period data: [[def-qftx-n2-coulomb-branch-data]].
+Pure $N=2$ SU(2) Coulomb-branch and period data: [[def-qftx-n2-coulomb-branch-data]].
 
 Local dual U(1) monopole-Higgs effective data: [[def-qftx-n2-monopole-local-dual-higgs-model]].
 

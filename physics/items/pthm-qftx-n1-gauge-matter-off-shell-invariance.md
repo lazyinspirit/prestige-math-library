@@ -1,7 +1,7 @@
 ---
 id: pthm-qftx-n1-gauge-matter-off-shell-invariance
 kind: physics-theorem
-title: Off-shell supersymmetry of the rigid N=1 gauge-matter superspace action
+title: Off-shell supersymmetry of the rigid $N=1$ gauge-matter superspace action
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -38,11 +38,15 @@ sources:
       locator: "§§4.3, 5.1–5.2, printed pp. 21–31: total-derivative invariance, chiral field strengths, and the N=1 gauge-matter superspace action."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
 
-For the adopted rigid N=1 SU(2) gauge-matter superspace action, use the full real vector prepotential $V$ and the chiral matter superfields $\Phi^a$ without fixing Wess–Zumino gauge. Use the full formal coefficient fields and the explicit order-reversing involution inherited from the gauge-matter postulate, with even scalar/auxiliary and odd fermion coefficients. Assume coefficientwise smooth compactly supported vector and matter component fluctuations on spacetime in the local trivializing regions used for the variation. The complex bosonic slice used for a scalar-potential calculation is not imposed during this off-shell variation. Under the global supertranslation $\delta=(\epsilon^\alpha Q_\alpha+\bar\epsilon^{\dot\alpha}\bar Q_{\dot\alpha})$ with constant Grassmann-odd parameters, the variation of every full-superspace D-term is a sum of odd-coordinate derivatives and a spacetime divergence. The same is true of the chiral F-terms built from the gauge-invariant holomorphic superpotential and the chiral vector field strength. Compact support removes the spacetime boundary contributions, so the complete action is invariant. This is a conditional classical invariance statement for the full superspace fields; it does not assert that Wess–Zumino gauge is preserved by an uncompensated supersymmetry transformation.
+For the adopted rigid $N=1$ SU(2) gauge-matter superspace action, use the full real vector prepotential $V$ and the chiral matter superfields $\Phi^a$ without fixing Wess–Zumino gauge. Use the full formal coefficient fields and the explicit order-reversing involution inherited from the gauge-matter postulate, with even scalar/auxiliary and odd fermion coefficients. Assume coefficientwise smooth compactly supported vector and matter component fluctuations on spacetime in the local trivializing regions used for the variation. The complex bosonic slice used for a scalar-potential calculation is not imposed during this off-shell variation. Under the global supertranslation $\delta=(\epsilon^\alpha Q_\alpha+\bar\epsilon^{\dot\alpha}\bar Q_{\dot\alpha})$ with constant Grassmann-odd parameters, the variation of every full-superspace D-term is a sum of odd-coordinate derivatives and a spacetime divergence. The same is true of the chiral F-terms built from the gauge-invariant holomorphic superpotential and the chiral vector field strength. Compact support removes the spacetime boundary contributions, so the complete action is invariant. This is a conditional classical invariance statement for the full superspace fields; it does not assert that Wess–Zumino gauge is preserved by an uncompensated supersymmetry transformation.
 
 ## Statement references
 

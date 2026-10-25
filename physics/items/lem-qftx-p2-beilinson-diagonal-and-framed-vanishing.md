@@ -61,6 +61,10 @@ sources:
       locator: "Theorems 1–3 and proofs, §§12–17, for the conditional algebraic/analytic comparison used in the family clause."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

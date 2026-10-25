@@ -33,6 +33,10 @@ sources:
       locator: "§3.1, printed pp. 17–19: framed torsion-free sheaves and the distinction between the locally-free locus and the full sheaf moduli."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

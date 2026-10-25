@@ -34,6 +34,11 @@ provenance:
   proof: ai-generated
 generation:
   role: example
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

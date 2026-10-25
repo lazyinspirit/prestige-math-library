@@ -38,6 +38,10 @@ sources:
       locator: "§2.6.5: compactly supported Yang–Mills variation and the covariant field equation."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

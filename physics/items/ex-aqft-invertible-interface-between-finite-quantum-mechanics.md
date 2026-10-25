@@ -28,6 +28,10 @@ sources:
       locator: "§2.1, PDF pp. 5–8: source and target region labels for a defect wall and model-defined correlators; the finite-dimensional matrix example is verified locally."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

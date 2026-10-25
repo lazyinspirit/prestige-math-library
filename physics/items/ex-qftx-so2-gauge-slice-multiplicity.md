@@ -28,6 +28,10 @@ sources:
       locator: "§§8.1–8.1.1, PDF pp. 154–161: the SO(2) orbit model, multiple intersections, and the vanishing Faddeev–Popov derivative at a stabilizer."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

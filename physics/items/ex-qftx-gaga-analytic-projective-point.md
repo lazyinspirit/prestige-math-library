@@ -41,6 +41,10 @@ sources:
       locator: "Section 20.12, Definition 20.12.1 and Lemma 20.12.3: flasque sheaves and their acyclicity."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 page: qftx-gaga-compact-coherent-finiteness-examples
 category: quantum-field-theory-mathematics
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23

@@ -49,6 +49,10 @@ sources:
       locator: "§2.1.2, printed pp. 30–31: local non-Abelian gauge transformations and conjugation of the field strength."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

@@ -24,6 +24,10 @@ sources:
       locator: "§5, printed p. 8: the coupled conformally invariant Laplace equation with positive scalar curvature on the round S4."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

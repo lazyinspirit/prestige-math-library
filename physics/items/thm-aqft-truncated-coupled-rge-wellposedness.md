@@ -36,6 +36,10 @@ sources:
       locator: §1.5, Theorem 1.5.4 and Lemma 1.5.5, PDF pp. 12–15; local contraction, first-exit uniqueness, and uniqueness on the common interval.
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

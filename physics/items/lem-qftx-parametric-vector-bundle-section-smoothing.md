@@ -41,6 +41,10 @@ sources:
       locator: "Chapter 7, pp. 49–56; bundle and homotopy framework."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Statement
 

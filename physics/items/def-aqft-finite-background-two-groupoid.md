@@ -10,8 +10,15 @@ dependency_level: 2
 deps: ["def-aqft-two-group-background", "thm-aqft-two-group-background-consistency"]
 dependency_roles: {"def-aqft-two-group-background": "mathematical-premise", "thm-aqft-two-group-background-consistency": "mathematical-premise"}
 proof_strategy: "definition"
-provenance: {"statement": "ai-altered", "proof": "not-applicable"}
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 sources: {"references": [{"title": "Baez and Lauda, Higher-Dimensional Algebra V: 2-Groups", "url": "https://arxiv.org/pdf/math/0307200", "locator": "§8.3 pp.55–63; associator cocycle p.59 and monoidal coherence pp.60–61; explicit finite cochain 2-groupoid constructed locally."}, {"title": "Benini, Cordova and Hsin, On 2-Group Global Symmetries and Their Anomalies", "url": "https://arxiv.org/pdf/1803.09336", "locator": "§2.3, printed pp.18–20 / PDF19–21; background and gauge equations only, explicit coherence reconstructed locally."}]}
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

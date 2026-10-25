@@ -49,6 +49,10 @@ sources:
       locator: "Topic 7: Laurent series and annular cohomology calculation background."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 page: qftx-gaga-compact-coherent-finiteness-examples
 category: quantum-field-theory-mathematics
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -78,7 +82,7 @@ Thus finite-dimensionality of compact coherent cohomology does not imply vanishi
 
 [F3] A domain is Hartogs pseudoconvex when $-\log\delta_\Omega$ is plurisubharmonic, where $\delta_\Omega$ is the equal-radius polydisc boundary function; the whole-space convention makes $\mathbb C$ Hartogs pseudoconvex. On such domains the scalar holomorphic structure sheaf has zero positive-degree sheaf cohomology ([[def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity]], [[def-polydisc-boundary-radius]], [[lem-qftx-gaga-scalar-pseudoconvex-acyclicity]]).
 
-[F4] A $C^2$ function on a domain is plurisubharmonic when its Levi form is nonnegative ([[def-levi-form-and-strict-plurisubharmonicity]], [[thm-c-two-levi-criterion-for-plurisubharmonicity]]).
+[F4] A $C^2$ function on a domain is plurisubharmonic when its Levi form is nonnegative ([[def-levi-form-and-strict-plurisubharmonicity]], [[thm-c-two-levi-criterion-for-plurisubharmonicity|The $C^2$ Levi criterion for plurisubharmonicity]]).
 
 [F5] The ordered two-set cover computes derived cohomology by its Čech complex when the sheaf is acyclic on the two sets and their overlap ([[thm-leray-acyclic-cover-theorem]], [[thm-cech-to-sheaf-cohomology-comparison]]).
 

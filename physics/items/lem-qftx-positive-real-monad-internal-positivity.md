@@ -36,6 +36,10 @@ sources:
       locator: "Section 4, Propositions 5–6, printed pp. 333–334: bilinear self-dual monads and uniqueness under their explicit Hom vanishings; no positive sigma-Hermitian conclusion is imported."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

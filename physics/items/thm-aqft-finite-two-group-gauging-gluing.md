@@ -10,8 +10,15 @@ dependency_level: 5
 deps: ["def-aqft-background-gauging-data", "def-aqft-finite-background-two-groupoid", "thm-aqft-finite-background-two-groupoid-coherence"]
 dependency_roles: {"def-aqft-background-gauging-data": "mathematical-premise", "def-aqft-finite-background-two-groupoid": "mathematical-premise", "thm-aqft-finite-background-two-groupoid-coherence": "mathematical-premise"}
 proof_strategy: "direct"
-provenance: {"statement": "ai-altered", "proof": "ai-generated"}
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 sources: {"references": [{"title": "Moore and Saxena, TASI Lectures on Topological Field Theories and Differential Cohomology", "url": "https://arxiv.org/pdf/2510.07408", "locator": "§23.3 PDF97–100 / printed96–99, especially (23.34)–(23.38); alternating homotopy-group measure, not an explicit proof of the local cochain gluing formula."}, {"title": "Baez and Lauda, Higher-Dimensional Algebra V: 2-Groups", "url": "https://arxiv.org/pdf/math/0307200", "locator": "§8.3 pp.55–63; associator cocycle p.59 and monoidal coherence pp.60–61; explicit finite cochain 2-groupoid constructed locally."}, {"title": "Benini, Cordova and Hsin, On 2-Group Global Symmetries and Their Anomalies", "url": "https://arxiv.org/pdf/1803.09336", "locator": "§2.3, printed pp.18–20 / PDF19–21; background and gauge equations only, explicit coherence reconstructed locally."}]}
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

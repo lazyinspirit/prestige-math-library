@@ -27,6 +27,10 @@ sources:
       locator: "§1.1, Definitions 1.3–1.4 and the basic modulus relations, PDF pp. 3–4: |Re z|≤|z|. The local proof supplies the exact equality case."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

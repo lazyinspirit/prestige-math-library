@@ -32,6 +32,10 @@ sources:
       locator: "§1.1.5 and §2.1: global group data, principal bundles, and the distinction between the structure group and bundle gauge group."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

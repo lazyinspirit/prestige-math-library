@@ -44,6 +44,10 @@ sources:
       locator: "§§4.7.2 and 5.2.7–5.2.8, printed pp. 92–94 and 120–124: formal BRST Slavnov–Taylor identities, symmetry-breaking regulators, dimensional regularization, and pole subtraction."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

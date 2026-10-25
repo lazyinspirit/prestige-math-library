@@ -27,6 +27,10 @@ sources:
       locator: "Simple and finite presemisimple 2-categories, §1.2.2, PDF pp. 13–14; separable monads and idempotent completeness, §§1.3.1–1.3.6, PDF pp. 21–23; finite semisimple 2-categories, §§1.4.1–1.4.2, PDF pp. 26–27; Gray-monoid coherence, object duals, and fusion 2-categories, §§2.1.1–2.1.6, PDF pp. 35–37."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Conventions

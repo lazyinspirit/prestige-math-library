@@ -62,6 +62,10 @@ sources:
       locator: "§4.1, printed pp. 59–61, for gauge-invariant two-dimensional finite-lattice integration and plaquette factorization; the finite probability and Gauss-sector proof is local."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 proof_strategy: direct
 ---
 

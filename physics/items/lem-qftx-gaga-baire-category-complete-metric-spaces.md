@@ -27,6 +27,10 @@ sources:
       locator: "Exposé 17, pp. 1–3 and 8–10: Fréchet-space finiteness proof and Schwartz theorem use the Baire-category framework."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 page: qftx-gaga-compact-coherent-finiteness
 category: quantum-field-theory-mathematics
 ---

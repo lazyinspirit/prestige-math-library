@@ -51,6 +51,10 @@ sources:
       locator: "§§3.1–3.5, PDF pp. 12–18, equations (3.1)–(3.19): ADHM equations, FI resolution, deformation complex, tangent weights, and partition labels. The contour residues in §3.6 are outside the local proof."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

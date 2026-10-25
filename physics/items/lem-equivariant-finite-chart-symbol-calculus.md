@@ -36,6 +36,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Atiyah and Singer, The index of elliptic operators I, sections 5–6"
@@ -78,7 +83,7 @@ If a compact Lie group $G$ acts smoothly on $X,E,F$, write $\rho_g(y):E_y\to E_{
 
 [A1] Full AC is adopted for the countable symbol summations and choices of local data. [[def-axiom-of-choice]]
 
-[F1] Fourier inversion, differentiation and Plancherel hold; rescaling the suppliers' $2\pi$ convention gives the convention above. Absolutely integrable expressions permit Fubini. [[thm-fourier-inversion-on-schwartz-space]], [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]], [[thm-plancherel]], [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]
+[F1] Fourier inversion, differentiation and Plancherel hold; rescaling the suppliers' $2\pi$ convention gives the convention above. Absolutely integrable expressions permit Fubini. [[thm-fourier-inversion-on-schwartz-space]], [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]], [[thm-plancherel]], [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]]
 
 [F2] Smooth partitions of unity exist. On bounded smooth coordinate balls $H^1\hookrightarrow L^2$ is compact. [[thm-smooth-partitions-of-unity-exist-on-manifolds]], [[thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain]]
 

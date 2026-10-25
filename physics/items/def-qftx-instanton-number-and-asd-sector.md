@@ -65,6 +65,10 @@ sources:
       locator: "Appendix C, printed pp. 308–309: curvature-polynomial representatives of integral Chern classes; the source's connection/curvature sign convention is recorded separately."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

@@ -30,6 +30,10 @@ sources:
       locator: "§§3–4, printed pp. 4–7: quaternionic real lines and Ward conventions."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition
@@ -67,6 +71,6 @@ They annihilate the displayed holomorphic coordinates and, together with $\parti
 The arrows record only the inclusion of a fibre and the restriction of its projection; they fix the domain and codomain of the twistor fibration used above.
 
 ```tikzcd
-L_x \arrow[r,hook] \arrow[d,"\\pi|_{L_x}"'] & Z \arrow[d,"\\pi"] \\
+L_x \arrow[r,hook] \arrow[d,"\pi|_{L_x}"'] & Z \arrow[d,"\pi"] \\
 \{x\} \arrow[r,hook] & S^4
 ```

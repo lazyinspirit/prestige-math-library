@@ -46,6 +46,10 @@ physical_scope: "A conditional free, ungauged four-dimensional N=1
   interacting theories."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

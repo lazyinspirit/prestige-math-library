@@ -35,6 +35,10 @@ sources:
       locator: "§4.4, PDF pp. 31–36: abelian slice operator and elliptic inverse; the SU(N) formula is checked directly here."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

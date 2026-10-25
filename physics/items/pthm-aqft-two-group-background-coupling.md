@@ -24,6 +24,11 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 physical_scope: Conditional finite change-of-variables result for Euclidean lattice models with finite 2-group background data on a closed oriented triangulated spacetime. It assigns no phase to an unspecified theory and proves no continuum limit.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Francesco Benini, Clay Córdova, and Po-Shen Hsin, On 2-Group Global Symmetries and Their Anomalies"

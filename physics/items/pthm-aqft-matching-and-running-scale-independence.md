@@ -34,6 +34,10 @@ sources:
       locator: §§2.2.1–2.2.2 on cancellation of intermediate-scale dependence and §4.1.4 on matching at charged-particle thresholds.
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

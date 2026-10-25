@@ -47,6 +47,10 @@ sources:
       locator: "Lecture 11, §§11.1–11.2, printed pp.154–158/PDF pp.162–166; fermion anomaly lines and relative invertible theories."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

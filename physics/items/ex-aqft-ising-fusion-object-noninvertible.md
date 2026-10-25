@@ -29,6 +29,10 @@ sources:
       locator: "PDF pp. 119–121 (book pagination approximately 103–105): Ising fusion rules, the simple duality object, and its fusion channels."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

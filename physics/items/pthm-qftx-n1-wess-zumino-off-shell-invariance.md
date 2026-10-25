@@ -1,7 +1,7 @@
 ---
 id: pthm-qftx-n1-wess-zumino-off-shell-invariance
 kind: physics-theorem
-title: Off-shell N=1 supersymmetry of the Wess–Zumino sigma-model action
+title: Off-shell $N=1$ supersymmetry of the Wess–Zumino sigma-model action
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -36,11 +36,15 @@ sources:
       locator: "§4.3, printed pp. 21–22, equations (4.26)–(4.28), and §7.1, printed pp. 43–46: superspace total-derivative invariance and the Kähler sigma-model action."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
 
-Use the rigid N=1 Wess–Zumino sigma-model postulate on $M=\mathbb R^{1,3}$ with $\eta=\operatorname{diag}(-1,1,1,1)$, Kähler coordinate patch $U\subseteq\mathbb C^n$, smooth positive metric $g_{i\bar j}=\partial_i\partial_{\bar j}K$, holomorphic superpotential $W$, and full formal components $a^i,\mathcal F^i:M\to\mathcal G_{\bar0}$ and $\psi^i_\alpha:M\to\mathcal G_{\bar1}$ with coefficientwise compact support on $M$, using the involution and parameter conventions of the postulate. The scalar body lies in $U$. Under the global supersymmetry variation $\delta\Phi^i=(\epsilon^\alpha Q_\alpha+\bar\epsilon^{\dot\alpha}\bar Q_{\dot\alpha})\Phi^i$ with constant Grassmann-odd parameters and the fixed chiral-superfield supercharges, the variation of the adopted superspace Lagrangian is a spacetime divergence; consequently $\delta S_{\mathrm{WZ}}=0$. The supercharges satisfy $\{Q_\alpha,Q_\beta\}=0$, $\{\bar Q_{\dot\alpha},\bar Q_{\dot\beta}\}=0$, and $\{Q_\alpha,\bar Q_{\dot\beta}\}=2i\sigma^\mu_{\alpha\dot\beta}\partial_\mu$. Their induced transformations on the scalar, Weyl-fermion, and auxiliary components close on translations without using equations of motion, with the auxiliary fields retained.
+Use the rigid $N=1$ Wess–Zumino sigma-model postulate on $M=\mathbb R^{1,3}$ with $\eta=\operatorname{diag}(-1,1,1,1)$, Kähler coordinate patch $U\subseteq\mathbb C^n$, smooth positive metric $g_{i\bar j}=\partial_i\partial_{\bar j}K$, holomorphic superpotential $W$, and full formal components $a^i,\mathcal F^i:M\to\mathcal G_{\bar0}$ and $\psi^i_\alpha:M\to\mathcal G_{\bar1}$ with coefficientwise compact support on $M$, using the involution and parameter conventions of the postulate. The scalar body lies in $U$. For external parameters in the finite exterior algebra $\mathcal E$ of the chiral-superfield convention, embed the component algebra into $\mathcal G_\epsilon=\mathcal G\widehat\otimes\mathcal E$ by $a\mapsto a\otimes1$ and interpret variations in that graded scalar extension, with total parity and the induced order-reversing involution. All formulas and the finite Taylor action extend coefficientwise to this algebra. Under the global supersymmetry variation $\delta\Phi^i=(\epsilon^\alpha Q_\alpha+\bar\epsilon^{\dot\alpha}\bar Q_{\dot\alpha})\Phi^i$ with constant Grassmann-odd parameters and the fixed chiral-superfield supercharges, the variation of the adopted superspace Lagrangian is a spacetime divergence; consequently $\delta S_{\mathrm{WZ}}=0$. The supercharges satisfy $\{Q_\alpha,Q_\beta\}=0$, $\{\bar Q_{\dot\alpha},\bar Q_{\dot\beta}\}=0$, and $\{Q_\alpha,\bar Q_{\dot\beta}\}=2i\sigma^\mu_{\alpha\dot\beta}\partial_\mu$. Their induced transformations on the scalar, Weyl-fermion, and auxiliary components close on translations without using equations of motion, with the auxiliary fields retained.
 
 ## Statement references
 
@@ -81,4 +85,4 @@ Use the rigid N=1 Wess–Zumino sigma-model postulate on $M=\mathbb R^{1,3}$ wit
 
 3.1 The first term in step 1.2 integrates to zero under $d^2\theta$ by the same coefficient-extraction calculation as step 2.1. The second is the spacetime divergence $\partial_\mu(2i\bar\epsilon^{\dot\alpha}\theta^\beta\sigma^\mu_{\beta\dot\alpha}X)$; compact support removes its boundary term. For the finite Taylor extension in the postulate, holomorphicity $\partial_{\bar i}W=0$ and the odd derivation rule give the chain identity $\bar D_{\dot\alpha}W(\Phi)=\sum_i W_i(\Phi)\bar D_{\dot\alpha}\Phi^i=0$, because each $\Phi^i$ is chiral; hence $W(\Phi)$ is chiral. Complex conjugation gives the corresponding antichirality of its conjugate. The fixed physical factor $1/2$ and its conjugate preserve this zero variation, so the F-term action is invariant. [A1, F1, F2, F3, step 1.2, algebra]
 
-4.1 By [F2], the transformations preserve the chiral constraint, so the transformed field has the unique component expansion in [F1]. Coefficient extraction is linear; therefore the operator identities in step 1.3 induce the same translation algebra on every full formal component, including the independent even auxiliary coefficient $\mathcal F^i$. Products of odd parameters and odd component maps remain in $\mathcal G_{\bar0}$, and derivatives preserve coefficientwise compact support; thus this argument does not restrict the auxiliary coefficient to $\mathbb C$ or assert closure on the bosonic slice. No Euler–Lagrange equation was used, proving off-shell closure. [F1, F2, step 1.3] ∎
+4.1 Work in $\mathcal G_\epsilon$ for one variation, and adjoin a second independent exterior parameter copy for commutators of two variations. The operators extend by the graded derivative rule and annihilate the coefficient algebra, exactly as in [F1]. By [F2], the transformations preserve the chiral constraint, so the transformed field has the unique component expansion in [F1]. Coefficient extraction is linear; therefore the operator identities in step 1.3 induce the same translation algebra on every full formal component, including the independent even auxiliary coefficient $\mathcal F^i$. Products of odd parameters and odd component maps lie in the total even subspace $(\mathcal G_\epsilon)_{\bar0}$, while fermionic variations lie in its total odd subspace, and derivatives preserve coefficientwise compact support; thus this argument does not restrict the auxiliary coefficient to $\mathbb C$ or assert closure on the bosonic slice. No Euler–Lagrange equation was used, proving off-shell closure. [F1, F2, step 1.3] ∎

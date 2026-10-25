@@ -23,6 +23,10 @@ sources:
       locator: "§2.3, the finite-group-graded vector-space tensor product, printed pp. 27–28; §4.1, fusion-category examples, printed pp. 65–66."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

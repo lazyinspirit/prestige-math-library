@@ -48,6 +48,10 @@ sources:
       locator: "§2.1.1, printed pp. 28–29: the natural-unit action and the source-free classical equation."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

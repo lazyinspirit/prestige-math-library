@@ -35,6 +35,10 @@ sources:
       locator: Arch.Math.9(1958),102–109; bibliographic attribution only, full text not retrieved. The local proof is reconstructed from the exact listed local Cauchy suppliers.
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

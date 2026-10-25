@@ -31,11 +31,15 @@ sources:
     locator: '§5.3, printed pp. 20–21: the weakly coupled local dual description near one massless-monopole singularity.'
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition
 
-Use natural units $c=\hbar=1$, metric
+Use natural units in which the speed of light and reduced Planck constant are one, with metric
 $\eta=\operatorname{diag}(-1,1,1,1)$, and the local duality frame near one
 monopole singularity of the selected pure $SU(2)$, four-dimensional rigid
 $\mathcal N=2$ model. Let $A_D$ be the complex scalar coordinate in the
@@ -71,12 +75,23 @@ $[A_D]=[M]=[\widetilde M]=[\mu]=\mathrm{mass}$,
 $[u]=\mathrm{mass}^2$, $[W_\mu]=\mathrm{mass}^3$,
 $[F_{A_D}]=[F_M]=[F_{\widetilde M}]=[D]=[\widetilde F_{\mu\nu}]=\mathrm{mass}^2$,
 $[\widetilde A_\mu]=\mathrm{mass}$,
-$[c]=\mathrm{mass}$, and $[g_D]=1$. The allowed regime is restricted to
-field values within this patch and energies below its stated effective
-cutoff; “small $\mu$” means that the induced scale
-$(|\mu c|/\sqrt2)^{1/2}$ lies well below that cutoff.
+$[c]=\mathrm{mass}$, and $[g_D]=1$.
 
-For a controlled leading linear-superpotential truncation, explicitly replace $u(A_D)$ by $u_m+cA_D$ in this constant-metric model. Then the perturbation is an $F$-type FI deformation of the local $\mathcal N=2$ abelian theory, related to a D-type FI deformation by rotation of its auxiliary triplet. This extra truncation admits the critical BPS square completion. The generic holomorphic $u(A_D)$ model above is softly broken to $\mathcal N=1$ and is not asserted to have exact BPS vortices; the full physical solution and a globally valid metric are separate inputs. Neither a small $\mu$ nor a holomorphic superpotential theorem alone controls all non-holomorphic metric or higher-derivative corrections.
+Supply a positive effective cutoff $\Lambda_{\mathrm{EFT}}$ of mass dimension one and a dimensionless control margin $0<\varepsilon<1$. This is independently chosen applicability data, not an identification with the dynamical scale $\Lambda$ of the Coulomb-branch model. Define the small-perturbation regime by
+
+$$v:=\left(\frac{|\mu c|}{\sqrt2}\right)^{1/2}<\varepsilon\Lambda_{\mathrm{EFT}},\qquad 0<|\mu|<\frac{\sqrt2\varepsilon^2\Lambda_{\mathrm{EFT}}^2}{|c|}.$$
+
+The two inequalities are equivalent because $c\ne0$; $\mu\ne0$ remains required. Write $a=A_D$ and supply a gauge-invariant open background-validity domain $\mathcal U_{\mathrm{EFT}}\subset\{(a,M,\widetilde M)\in\mathbb C^3:|a|<r\}$ containing the vacuum orbit $a=0$, $|M|=|\widetilde M|=v$, $M\widetilde M=-\mu c/\sqrt2$. The supplied regime may impose additional mass, coupling or background-field restrictions; no universal choice of this domain is inferred from the cutoff inequality.
+
+To specify an application energy range, use the standard coordinate basis of Minkowski space $\mathbb R^{1,3}$ with the displayed metric. Supply a nonempty set $\mathcal K_{\mathrm{app}}\subset\mathbb R^4$ of excitation four-momentum components $p=(p^0,p^1,p^2,p^3)$ in that basis, and require the finite bound
+
+$$E_{\mathrm{app}}:=\sup_{p\in\mathcal K_{\mathrm{app}}}\max_{0\le\nu\le3}|p^\nu|\le\varepsilon\Lambda_{\mathrm{EFT}}.$$
+
+Here $p^0$ is the excitation energy and $p^1,p^2,p^3$ are its spatial momentum components; all have mass dimension one. An application without specified excitations may take $\mathcal K_{\mathrm{app}}=\{0\}$. Physical use of this adopted low-energy regime requires background values in $\mathcal U_{\mathrm{EFT}}$ and the supplied excitation bound. This does not impose a hard Fourier-support condition on static vortex profiles. The domain, cutoff and margin are supplied model-validity inputs, not a proof of microscopic accuracy or a bound on omitted terms. In particular, small $\mu$ alone establishes no such error bound.
+
+The displayed functional remains a specified classical two-derivative model for all smooth fields with $|A_D|<r$, including fields outside this physical applicability regime; no physical accuracy outside that regime is claimed. Additional hard restrictions on a variational class must be stated separately and checked against any trial profiles or interpolations.
+
+For a specified leading linear-superpotential truncation, explicitly replace $u(A_D)$ by $u_m+cA_D$ in this constant-metric model. Then the perturbation is an $F$-type FI deformation of the local $\mathcal N=2$ abelian theory, related to a D-type FI deformation by rotation of its auxiliary triplet. This extra truncation admits the critical BPS square completion. The generic holomorphic $u(A_D)$ model above is softly broken to $\mathcal N=1$ and is not asserted to have exact BPS vortices; the full physical solution and a globally valid metric are separate inputs. Neither a small $\mu$ nor a holomorphic superpotential theorem alone controls all non-holomorphic metric or higher-derivative corrections.
 
 This is a one-singularity effective data package. It includes neither a
 simultaneously local electric description of mutually nonlocal dyons nor a
@@ -90,6 +105,6 @@ separate hypothesis.
 
 [Bilal, §5.3](https://arxiv.org/pdf/hep-th/9601007v1).
 
-Pure N=2 SU(2) Coulomb-branch conventions: [[def-qftx-n2-coulomb-branch-data]].
+Pure $N=2$ SU(2) Coulomb-branch conventions: [[def-qftx-n2-coulomb-branch-data]].
 
 Independent pure ultraviolet vector-multiplet datum: [[post-qftx-n2-pure-su2-ultraviolet-model]].

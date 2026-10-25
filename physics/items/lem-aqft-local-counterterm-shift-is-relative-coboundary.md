@@ -28,6 +28,10 @@ sources:
       locator: "§2.4, printed pp. 36–38: a local Bardeen–Zumino counterterm changes the consistent/covariant representative while preserving the underlying local anomaly data."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

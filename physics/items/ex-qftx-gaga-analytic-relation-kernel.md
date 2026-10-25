@@ -41,6 +41,10 @@ sources:
       url: "https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf"
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

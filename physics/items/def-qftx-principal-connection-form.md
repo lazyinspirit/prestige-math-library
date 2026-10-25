@@ -47,6 +47,10 @@ sources:
       locator: "Chapter 5, §5.4, printed pp. 92–94: connection 1-form axioms, reconstruction of the horizontal distribution, and variable gauge transitions."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

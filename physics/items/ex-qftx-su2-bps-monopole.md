@@ -38,6 +38,10 @@ sources:
       locator: "§2.1, ansatz (2.1) and equations (2.3)–(2.6); §2.2, equations (2.7)–(2.9): radial reduction of the Bogomolny equation and H(u)=u coth(u)-1, K(u)=u/sinh(u). Harvey's magnetic-field sign differs and is translated explicitly."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

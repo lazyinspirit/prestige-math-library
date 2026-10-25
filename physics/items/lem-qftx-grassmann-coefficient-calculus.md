@@ -26,6 +26,10 @@ sources:
       locator: "§3.7, printed pp. 97–99, Berezin coefficient extraction; the local proof verifies the selected left/right convention."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -38,7 +42,7 @@ For the basis-indexed vector space and product $e_Se_T=0$ when $S\cap T\ne\varno
 
 [Gates et al., §3.7](https://arxiv.org/pdf/hep-th/0108200).
 
-Four-dimensional N=1 superspace Grassmann algebra and Berezin integration: [[def-qftx-superspace-grassmann-algebra]].
+Four-dimensional $N=1$ superspace Grassmann algebra and Berezin integration: [[def-qftx-superspace-grassmann-algebra]].
 
 ## Facts & Assumptions
 

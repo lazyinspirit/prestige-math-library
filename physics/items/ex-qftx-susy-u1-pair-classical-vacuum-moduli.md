@@ -28,6 +28,10 @@ sources:
       locator: "§4.3.1, printed pp. 112–116: zero-FI one-flavor U(1) SQED D-term condition, gauge quotient, and gauge-invariant meson coordinate."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -56,7 +60,7 @@ Classical F/D-flat quotient and quantum-moduli boundary: [[def-qftx-susy-vacuum-
 
 **Given:** The U(1) action, canonical field data, $W=0$, and zero Fayet--Iliopoulos parameter in the Example.
 
-[A1] Adopt the finite-dimensional canonical rigid N=1 U(1) classical model stated in the Example; $q$ and $\widetilde q$ have mass dimension one and $g$ is dimensionless.
+[A1] Adopt the finite-dimensional canonical rigid $N=1$ U(1) classical model stated in the Example; $q$ and $\widetilde q$ have mass dimension one and $g$ is dimensionless.
 
 [F1] [[def-qftx-susy-vacuum-moduli-data]]: classical vacua are the simultaneous zeros of the F and D maps, modulo the compact gauge group.
 

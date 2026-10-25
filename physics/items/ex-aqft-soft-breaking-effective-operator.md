@@ -44,6 +44,10 @@ sources:
       locator: "Chapter 5, §§5.5–5.7, for the finite-order low-energy expansion after a heavy threshold."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -64,7 +68,7 @@ where $\Lambda_{\mathrm{op}}>0$ is an operator-suppression scale distinct from $
 
 ## Example references
 
-[[def-aqft-susy-wilsonian-action|Rigid N=1 Wilsonian action, field content, and scale conventions]]
+[[def-aqft-susy-wilsonian-action|Rigid $N=1$ Wilsonian action, field content, and scale conventions]]
 
 [[pthm-aqft-supersymmetric-threshold-matching|Leading heavy-chiral Wilsonian superpotential match]]
 
@@ -80,7 +84,7 @@ where $\Lambda_{\mathrm{op}}>0$ is an operator-suppression scale distinct from $
 
 **Given:** Full AC; the fixed high-energy superpotential and matching regime in the Example; the tree-level threshold prescription; and the fixed chiral spurion background and operator truncation.
 
-[F1] [[def-aqft-susy-wilsonian-action]]: light and heavy chiral multiplets are smooth classical N=1 superfields with fixed engineering dimensions; the Wilsonian F-term is distinct from real D-term data, and operator-suppression and threshold scales are separate.
+[F1] [[def-aqft-susy-wilsonian-action]]: light and heavy chiral multiplets are smooth classical $N=1$ superfields with fixed engineering dimensions; the Wilsonian F-term is distinct from real D-term data, and operator-suppression and threshold scales are separate.
 
 [F2] [[pthm-aqft-supersymmetric-threshold-matching]]: for $W_+=W_L+\tfrac12MX^2+XJ(\Phi)$ with the stated leading derivative-free tree prescription, and with a retained projection fixing $W_L$ and $J^2/(2M)$ and compatible action-to-scheme holomorphic coordinates, the matched holomorphic coefficient is $W_L-J^2/(2M)$.
 

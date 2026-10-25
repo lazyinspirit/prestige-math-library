@@ -20,6 +20,11 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 axiom_use: No choice principle is used; all groupoids, morphism sets, and sums are finite.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Gregory W. Moore and Vivek Saxena, TASI Lectures on Topological Field Theories and Differential Cohomology"
@@ -85,12 +90,12 @@ This is a finite groupoid theorem. A finite cocycle action is covered only when 
 
 The comparison functor $J$ sends a global background to its two restrictions and their boundary isomorphism. The displayed square is homotopy cartesian by the equivalence hypothesis in the Statement. The proof above uses the explicit homotopy-pullback objects and their automorphism groups, not the drawing.
 
-~~~tikzcd
-\mathcal F \arrow[r,"\mathrm{res}_2"] \arrow[d,"\mathrm{res}_1"'] &
-\mathcal F_2 \arrow[d,"r_2"] \\
-\mathcal F_1 \arrow[r,"r_1"'] &
+```tikzcd
+\mathcal F \arrow[r,"{\mathrm{res}_2}"] \arrow[d,"{\mathrm{res}_1}"'] &
+\mathcal F_2 \arrow[d,"{r_2}"] \\
+\mathcal F_1 \arrow[r,"{r_1}"'] &
 \mathcal S
-~~~
+```
 
 ## Remarks
 

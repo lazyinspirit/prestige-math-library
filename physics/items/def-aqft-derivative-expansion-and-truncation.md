@@ -10,16 +10,23 @@ dependency_level: 3
 deps:
   - def-aqft-model-and-scale-data
   - def-aqft-wilsonian-action
+  - thm-qftx-heavy-derivative-bound
 justified_by: []
 forward_refs: []
 dependency_roles:
   def-aqft-model-and-scale-data: formulation-prerequisite
   def-aqft-wilsonian-action: formulation-prerequisite
+  thm-qftx-heavy-derivative-bound: mathematical-premise
 physical_scope: A finite-range derivative-counting convention for the positive Gaussian heavy-sector kernel; it asserts no generic continuum remainder or convergence.
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: David B. Kaplan, Five lectures on effective field theory
@@ -44,13 +51,15 @@ $$
 S_N:=M^{-2}\sum_{r=0}^{N}(-A/M^2)^r.
 $$
 
-It has range at most $N$ in this regulator. For a source $J$ supported in the spectral interval $[0,E^2]$ of $A$, the dimensionless power-counting parameter is $E/M$. This definition is an organized finite-order approximation; it does not assert convergence for unrestricted sources, a generic error bound, or a continuum local-operator expansion. The positive Gaussian theorem supplies a remainder bound only under its exact hypotheses.
+It has range at most $N$ in this regulator. For a source $J$ supported in the spectral interval $[0,E^2]$ of $A$, the dimensionless power-counting parameter is $E/M$. This definition is an organized finite-order approximation; it does not assert convergence for unrestricted sources, a generic error bound, or a continuum local-operator expansion. Under the Axiom of Choice and the positive heavy-mode Gaussian matching-data hypotheses, the low-momentum matching remainder theorem gives, for $J=P_EJ$ and $K=M^2I+A$, the conditional bound $\|K^{-1}J-S_NJ\|\le M^{-2}(E^2/M^2)^{N+1}\|J\|$. In this finite real symmetric positive-semidefinite setting the theorem applies on the complexification with its coordinate Hermitian inner product and restricts to real sources. This bound is useful when $E<M$; it asserts no generic interacting-action remainder.
 
 ## Definition references
 
 [[def-aqft-model-and-scale-data]]
 
 [[def-aqft-wilsonian-action]]
+
+[[thm-qftx-heavy-derivative-bound|Low-momentum matching has a controlled remainder]]
 
 ## Facts & Assumptions
 

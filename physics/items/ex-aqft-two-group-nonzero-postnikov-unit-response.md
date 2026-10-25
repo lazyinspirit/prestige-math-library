@@ -26,6 +26,11 @@ provenance:
 generation:
   role: example
 physical_scope: One explicit finite background on a closed triangulated 3-sphere and its unit-weight response for a finite 2-group cochain model; no continuum QFT or empirical claim is asserted.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Francesco Benini, Clay Córdova, and Po-Shen Hsin, On 2-Group Global Symmetries and Their Anomalies"

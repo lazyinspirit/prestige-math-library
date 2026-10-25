@@ -36,6 +36,10 @@ sources:
       locator: "§3, printed pp. 488–494: global Penrose transform framework."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

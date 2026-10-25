@@ -30,6 +30,10 @@ sources:
       url: "https://arxiv.org/pdf/1811.09413"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Definition
 

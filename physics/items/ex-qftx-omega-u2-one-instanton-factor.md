@@ -1,7 +1,7 @@
 ---
 id: ex-qftx-omega-u2-one-instanton-factor
 kind: example
-title: "The U(2) N=2* One-Instanton Factor"
+title: 'The $U(2)$ $\mathcal N=2^*$ One-Instanton Factor'
 status: draft
 origin: pipeline
 dependency_level: 7
@@ -29,6 +29,10 @@ sources:
       locator: "§5, equations (5.11)–(5.12): shifted tangent weights and the U(2) charge-one N=2* coefficient."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -40,25 +44,25 @@ $$\operatorname{ch}_T(T_{(\varnothing,\square)}X)=t_1+t_2+\frac{e_1}{e_2}+t_1t_2
 $$E_2=-\epsilon_1\epsilon_2d(s+d),\qquad N_2=(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)(-d-\widetilde m)(s+d-\widetilde m).$$
 For generic weights satisfying $\epsilon_1\epsilon_2d(s-d)(s+d)\ne0$, the coefficient of $q$ is
 $$\frac{N_1}{E_1}+\frac{N_2}{E_2}=\frac{2(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)(\widetilde m^2-\widetilde m s+s^2-d^2)}{\epsilon_1\epsilon_2(s^2-d^2)}.$$
-For the adopted $S^4_r$ model, set $\epsilon_1=\epsilon_2=r^{-1}$ and $\widetilde m=i m_E+r^{-1}$. At $m_E=0$ the displayed one-instanton coefficient vanishes because its first two numerator factors are zero; this is only the degree-one check of the N=4 massless limit.
+For the adopted $S^4_r$ model, set $\epsilon_1=\epsilon_2=r^{-1}$ and $\widetilde m=i m_E+r^{-1}$. At $m_E=0$ the displayed one-instanton coefficient vanishes because its first two numerator factors are zero; this is only the degree-one check of the $\mathcal N=4$ massless limit.
 
 The diagram places the single box in each of the two possible framing colors. The first coordinate is horizontal and the second vertical.
 
-~~~tikz
-\begin{tikzpicture}[x=0.8cm,y=0.8cm]
-  \draw[step=1,gray] (0,0) grid (1,1);
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=1.1cm]
+  \draw[step=1.1cm,gray] (0,0) grid (1,1);
   \draw[fill=blue!20] (0,0) rectangle (1,1);
-  \node[below] at (0.5,0) {$Y_1=\square$};
-  \node[below] at (2.1,0) {$Y_2=\varnothing$};
-  \node at (3.2,0.5) {$\text{or}$};
-  \draw[step=1,gray] (4,0) grid (5,1);
+  \node[below] at (0.5,0) {$|Y_1|=1$};
+  \node[below] at (2.1,0) {$Y_2=\emptyset$};
+  \node at (3.2,0.5) {$\mathrm{or}$};
+  \draw[step=1.1cm,gray] (4,0) grid (5,1);
   \draw[fill=orange!20] (4,0) rectangle (5,1);
-  \node[below] at (4.5,0) {$Y_2=\square$};
-  \node[below] at (6.1,0) {$Y_1=\varnothing$};
+  \node[below] at (4.5,0) {$|Y_2|=1$};
+  \node[below] at (6.1,0) {$Y_1=\emptyset$};
   \node[above] at (0.5,1.2) {color 1};
   \node[above] at (4.5,1.2) {color 2};
 \end{tikzpicture}
-~~~
+```
 
 ## Example references
 
@@ -78,7 +82,7 @@ The diagram places the single box in each of the two possible framing colors. Th
 
 [F2] Current draft [[def-qftx-instanton-equivariant-partition-series]]: the coefficient is the proper-fixed-locus localized pushforward of the rational Borel top Chern class of the tangent bundle tensored with the inverse flavor line, capped with the complex-oriented fundamental class; its restriction at a fixed point of tangent weights $w_\chi$ is $\prod_\chi(w_\chi-\widetilde m)$.
 
-[F3] Current draft [[post-qftx-s4-n2-localization-model]] adopts N=2* U(2) with real Euclidean mass $m_E$ and equal pole rotations $\epsilon_1=\epsilon_2=r^{-1}$; its noncommutative S4 regulator remains a source assumption, not a proven existence claim.
+[F3] Current draft [[post-qftx-s4-n2-localization-model]] adopts $\mathcal N=2^*$ $U(2)$ with real Euclidean mass $m_E$ and equal pole rotations $\epsilon_1=\epsilon_2=r^{-1}$; its noncommutative S4 regulator remains a source assumption, not a proven existence claim.
 
 [A1] Assume the theorem's finite-proper-fixed-locus pushforward conditions and the source-reported mass-insertion interpretation hold for the displayed generic-parameter calculation. The source model's regulator remains assumed, and the formula is not an evaluation of the continued Coulomb contour.
 

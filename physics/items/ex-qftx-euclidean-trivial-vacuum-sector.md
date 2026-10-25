@@ -32,6 +32,10 @@ sources:
       locator: §1.1, printed p. 8, identifies the k=0 vacuum A_mu=0.
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 generation:
   role: example
 ---
@@ -42,7 +46,7 @@ Assume full AC, meaning that every family of nonempty sets has a choice function
 
 ## Example references
 
-[Tong, §1.1, the k=0 vacuum](https://www.damtp.cam.ac.uk/user/tong/tasi/instanton.pdf)
+[Tong, §1.1, the $k=0$ vacuum](https://www.damtp.cam.ac.uk/user/tong/tasi/instanton.pdf)
 
 [[def-qftx-euclidean-yang-mills-sector|Euclidean action, charge, and saddle definitions]]
 

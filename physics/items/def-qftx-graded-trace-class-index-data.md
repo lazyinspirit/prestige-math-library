@@ -54,6 +54,10 @@ sources:
       locator: "§1.2.2, printed p. 14, definition of the Witten index and positive-energy boson/fermion cancellation under the supersymmetric quantum-mechanics assumptions stated there."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

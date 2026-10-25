@@ -27,6 +27,10 @@ sources:
       locator: "§2.1, PDF pp. 5–8: oriented defect bordisms, region and defect labels, isotopy classes, and the functorial correlator assignment in the explicitly two-dimensional TQFT setting."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

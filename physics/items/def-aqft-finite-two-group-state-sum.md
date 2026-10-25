@@ -18,6 +18,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: Gregory W. Moore and Vivek Saxena, TASI Lectures on Topological Field Theories and Differential Cohomology, §23.3

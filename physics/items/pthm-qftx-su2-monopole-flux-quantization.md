@@ -36,6 +36,10 @@ sources:
       locator: "§1.4, equations (1.30), (1.38)–(1.40): asymptotic Higgs winding, flux quantization, the fundamental SU(2) doublet charge, and the relation between transition loops and Higgs winding. The local patch proof here does not import Harvey's cited homotopy-sequence result."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

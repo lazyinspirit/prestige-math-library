@@ -36,11 +36,15 @@ sources:
       locator: "§§4.7 and 4.10, printed pp. 41 and 49–50, for holomorphic superpotential versus real Kähler data; §6.5, printed pp. 66–67, for wave-function anomalous dimensions and canonical-coupling running."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
 
-Let the rigid four-dimensional $\mathcal N=1$ Wilsonian effective-action data and finite operator basis be as in the action definition, with formal cutoff $0<\lambda<\Lambda_0$. Let $F_\lambda(\Phi,W)$ denote the derivative-free, holomorphic chiral integrand of the Wilsonian action, and define its superpotential part by $W_\lambda(\Phi)=F_\lambda(\Phi,0)$. Fix a finite ordered basis of retained light-field superpotential operators and a scale-independent linear coordinate projection $P_{\mathrm{hol}}$ onto that basis. Use the same unrescaled chiral fields, quotient relations, and operator coordinates at every scale. At constant coefficient backgrounds put $c_0=F_{\Lambda_0}(0,0)$ and fix $F_\lambda(0,0)=c_0$ at every scale. Numerical constants have zero rigid F-action, so this fixes a density representative rather than imposing a Ward-identity consequence. Bare constant FI terms, if present, are kept fixed and are excluded from promotion to unconstrained real coefficient backgrounds. Assume the selected formal perturbative cutoff prescription has the local nondynamical-spurion extension and local derivative expansion specified in the action data; its local counterterms obey chirality as an identity in the coefficientwise formal background-jet algebra before constant-background evaluation, with independent first anti-chiral jets of each unconstrained real coefficient spurion; its perturbative vertices are one-particle-irreducible; its rigid supersymmetry and BRST/gauge Ward identities hold coefficientwise for every local insertion and their counterterms; and it has no local gauge anomaly.
+Let the rigid four-dimensional $\mathcal N=1$ Wilsonian effective-action data and finite operator basis be as in the action definition, with formal cutoff $0<\lambda<\Lambda_0$. Let $F_\lambda(\Phi,W)$ denote the derivative-free, holomorphic chiral integrand of the Wilsonian action, and define its superpotential part by $W_\lambda(\Phi)=F_\lambda(\Phi,0)$. Fix a finite ordered basis of retained light-field superpotential operators and a scale-independent linear coordinate projection $P_{\mathrm{hol}}$ onto that basis. Use the same unrescaled chiral fields, quotient relations, and operator coordinates at every scale. At constant coefficient backgrounds put $c_0=F_{\Lambda_0}(0,0)$ and fix $F_\lambda(0,0)=c_0$ at every scale. Numerical constants have zero rigid F-action, so this fixes a density representative rather than imposing a Ward-identity consequence. Bare constant FI terms, if present, are kept fixed and are excluded from promotion to unconstrained real coefficient backgrounds. For a gauge sector, select the general F-term theorem's linear Lorenz BRST component graph completion, with its nonminimal doublet, homogeneous gauge/ghost kernels, fixed infrared inverses and zero-mode prescription, and fixed component/source coordinates; in an ungauged model the gauge/ghost sector is absent. Its regulator must satisfy that completion's spurion and Ward compatibility conditions, with the explicitly induced Wess–Zumino component variation, the fixed physical coefficient extraction, and the full gauge-fixed action on the change-of-variables Ward identity's right-hand side; gauge-fixing and ghost variations are retained. Assume the selected formal perturbative cutoff prescription has the local nondynamical-spurion extension and local derivative expansion specified in the action data; its local counterterms obey chirality as an identity in the coefficientwise formal background-jet algebra before constant-background evaluation, with independent first anti-chiral jets of each unconstrained real coefficient spurion; its perturbative vertices are one-particle-irreducible; its rigid supersymmetry and BRST/gauge Ward identities hold coefficientwise for every local insertion and their counterterms; and it has no local gauge anomaly.
 
 Adopt full Axiom of Choice as a sufficient ambient assumption for the selected action data; the regulated equivalence supplier requires no additional full-Choice premise. Then, coefficientwise at every perturbative order,
 
@@ -50,9 +54,9 @@ Thus every retained holomorphic superpotential coefficient in the fixed unrescal
 
 ## Statement references
 
-[[def-aqft-susy-wilsonian-action|Finite N=1 Wilsonian action and fixed EFT coefficient basis]]
+[[def-aqft-susy-wilsonian-action|Finite $N=1$ Wilsonian action and fixed EFT coefficient basis]]
 
-[[pthm-qftx-n1-wilsonian-f-term-nonrenormalization|General formal perturbative N=1 Wilsonian F-term theorem]]
+[[pthm-qftx-n1-wilsonian-f-term-nonrenormalization|General formal perturbative $N=1$ Wilsonian F-term theorem]]
 
 [Weinberg, equations (1)–(12)](https://arxiv.org/pdf/hep-th/9803099v1)
 
@@ -60,17 +64,17 @@ Thus every retained holomorphic superpotential coefficient in the fixed unrescal
 
 ## Facts & Assumptions
 
-**Given:** Full AC; the fixed finite rigid N=1 Wilsonian EFT basis; a nonzero formal cutoff; and the local spurion, derivative-expansion, symmetry-preserving Ward-identity, locality, and anomaly-free hypotheses in the Statement.
+**Given:** Full AC; the fixed finite rigid $N=1$ Wilsonian EFT basis; a nonzero formal cutoff; and the local spurion, derivative-expansion, symmetry-preserving Ward-identity, locality, and anomaly-free hypotheses in the Statement.
 
 [F1] [[def-aqft-susy-wilsonian-action]]: the Wilsonian action has a derivative-free holomorphic chiral integrand $F_\lambda(\Phi,W)$ and a separate real D-term; its finite operator quotient, ordered basis, cutoff, and field coordinates are supplied data.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its stated local spurion, formal background-jet, rigid N=1 and BRST/gauge Ward-identity, derivative-expansion, one-particle-irreducible vertex and anomaly-free hypotheses, collect all matter-independent quadratic gauge terms into $P_{\mathrm{kin}}$ and write $F_{\mathrm{rem}}$ for the remaining derivative-free holomorphic integrand. With its ultraviolet numerical-constant representative fixed, $F_{\mathrm{rem},\lambda}=F_{\mathrm{rem},\Lambda_0}$ coefficientwise; the collected gauge-kinetic coefficients may receive one-loop but no higher-loop corrections. The real D-term is not protected.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its specified linear Lorenz BRST component graph completion and its stated local spurion, formal background-jet, rigid $N=1$ and BRST/gauge Ward-identity, derivative-expansion, one-particle-irreducible vertex and anomaly-free hypotheses, collect all matter-independent quadratic gauge terms into $P_{\mathrm{kin}}$ and write $F_{\mathrm{rem}}$ for the remaining derivative-free holomorphic integrand. With its ultraviolet numerical-constant representative fixed, $F_{\mathrm{rem},\lambda}=F_{\mathrm{rem},\Lambda_0}$ coefficientwise; the collected gauge-kinetic coefficients may receive one-loop but no higher-loop corrections. The real D-term is not protected.
 
 [A1] [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. Full AC is adopted as a sufficient ambient assumption for the selected action data; the regulated equivalence theorem requires no additional full-Choice premise; the restriction to $W=0$ and fixed-basis coordinate projection below do not use a choice function.
 
 [A2] The finite relation quotient, ordered basis, coordinate projection, and unrescaled light fields are independent of $\lambda$; no scale-dependent change of field coordinates is performed.
 
-[A3] The selected regulator and counterterms satisfy all symmetry-preservation, coefficientwise formal background-jet, locality, one-particle-irreducibility, and no-local-gauge-anomaly hypotheses of [F2] at each formal perturbative order. The real coefficient spurions are unconstrained and their first anti-chiral jets are independent before constant-background evaluation. The constant representative is fixed as in the Statement, and any bare constant FI coefficient is held fixed rather than promoted. No FI correction conclusion is used, so the supplier's additional common-kernel hypothesis for that branch is unnecessary here. No positivity, convergence, or real-analytic extension of the formal coupling series is required.
+[A3] The selected graph prescription is the supplier's specified component gauge completion when a gauge sector is present, and the regulator and counterterms satisfy all symmetry-preservation, coefficientwise formal background-jet, locality, one-particle-irreducibility, and no-local-gauge-anomaly hypotheses of [F2] at each formal perturbative order. The real coefficient spurions are unconstrained and their first anti-chiral jets are independent before constant-background evaluation. The constant representative is fixed as in the Statement, and any bare constant FI coefficient is held fixed rather than promoted. No FI correction conclusion is used, so the supplier's additional common-kernel hypothesis for that branch is unnecessary here. No positivity, convergence, or real-analytic extension of the formal coupling series is required.
 
 ## Proof
 

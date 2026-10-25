@@ -33,6 +33,10 @@ sources:
       locator: "The finite-dimensional representation category Rep(G) is a fusion category when the field has characteristic zero; the particular S3 matrices and decomposition are verified locally here."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

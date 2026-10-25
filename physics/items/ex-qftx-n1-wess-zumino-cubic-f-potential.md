@@ -33,6 +33,10 @@ sources:
       locator: "§4.3, printed pp. 21–22: the one-field Wess–Zumino action and auxiliary scalar potential."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

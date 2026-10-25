@@ -36,6 +36,10 @@ sources:
     locator: '§§1.1–1.1.1, printed pp. 6–9: Euclidean SU(N) action, finite-action boundary data, winding sectors, action bound, and the Bianchi implication.'
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Postulate

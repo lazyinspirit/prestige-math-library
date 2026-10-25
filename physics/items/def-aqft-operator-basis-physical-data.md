@@ -55,6 +55,10 @@ sources:
       locator: "§4.4, equations (4.365)–(4.368): Weyl representations of the Lorentz double cover; source Clifford signs are not adopted."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

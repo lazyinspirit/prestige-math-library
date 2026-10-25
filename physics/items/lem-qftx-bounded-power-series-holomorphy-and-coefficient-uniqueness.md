@@ -57,6 +57,10 @@ sources:
       url: https://www.jirka.org/scv/scv.pdf
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

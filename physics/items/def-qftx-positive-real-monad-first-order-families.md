@@ -23,6 +23,11 @@ axiom_base: "ZF + full AC inherited from the twisting-sheaf construction; the fa
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "N. Brantner, Infinity-Categories and Deformation Theory, Lecture 1"

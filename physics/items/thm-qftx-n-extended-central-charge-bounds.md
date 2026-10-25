@@ -33,6 +33,10 @@ sources:
       locator: "§1, printed pp. 5–6, N=1 algebra and multiplet context; no N=2 central-charge bound is imported from this section."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -84,7 +88,7 @@ The Axiom of Countable Choice ($\mathrm{AC}_\omega$): [[def-countable-choice]].
 
 3.1 Fix a unit vector $v\in\mathbb C^N$. If $Zv\ne0$, choose $u=-Zv/\|Zv\|_2$, so $\|u\|_2=1$ and $u^*Zv=-\|Zv\|_2$. Applying step 2.1 to any nonzero $\psi\in\mathcal D$ yields $0\le4(M-\|Zv\|_2)\|\psi\|^2$, hence $M\ge\|Zv\|_2$. If $Zv=0$, the same inequality follows from $M>0$. Taking the supremum over all unit $v$ proves $M\ge\|Z\|_{\mathrm{op}}$. [given, step 2.1, algebra, choose]
 
-4.1 When $N=2$, $Z=\begin{pmatrix}0&z\\-z&0\end{pmatrix}$, so direct multiplication gives $Z^*Z=|z|^2I_2$ and therefore $\|Zv\|_2=|z|\|v\|_2$ for every $v$; thus $\|Z\|_{\mathrm{op}}=|z|$. If $z\ne0$, the modulus definition gives $z\bar z=|z|^2$ and $|z|>0$, so $\omega=z/|z|$ satisfies $\omega\bar\omega=1$ and $\bar\omega z=|z|$; if $z=0$, $\omega=1$ has the same properties. With $q=Q^1_1$ and $r=Q^2_2$, expanding $A=q-\omega r^*$ and $A^\sharp=q^*-\bar\omega r$ gives $AA^\sharp+A^\sharp A=\{q,q^*\}+|\omega|^2\{r^*,r\}-\bar\omega\{q,r\}-\omega\{r^*,q^*\}=2M+2M-2\bar\omega z-2\omega\bar z=4(M-|z|)I$ on $\mathcal D$. This proves the stated N=2 identity without assuming a polar-form theorem. [F1, F3, step 1.1, step 3.1, algebra]
+4.1 When $N=2$, $Z=\begin{pmatrix}0&z\\-z&0\end{pmatrix}$, so direct multiplication gives $Z^*Z=|z|^2I_2$ and therefore $\|Zv\|_2=|z|\|v\|_2$ for every $v$; thus $\|Z\|_{\mathrm{op}}=|z|$. If $z\ne0$, the modulus definition gives $z\bar z=|z|^2$ and $|z|>0$, so $\omega=z/|z|$ satisfies $\omega\bar\omega=1$ and $\bar\omega z=|z|$; if $z=0$, $\omega=1$ has the same properties. With $q=Q^1_1$ and $r=Q^2_2$, expanding $A=q-\omega r^*$ and $A^\sharp=q^*-\bar\omega r$ gives $AA^\sharp+A^\sharp A=\{q,q^*\}+|\omega|^2\{r^*,r\}-\bar\omega\{q,r\}-\omega\{r^*,q^*\}=2M+2M-2\bar\omega z-2\omega\bar z=4(M-|z|)I$ on $\mathcal D$. This proves the stated $N=2$ identity without assuming a polar-form theorem. [F1, F3, step 1.1, step 3.1, algebra]
 
 5.1 If $M=|z|$, step 4.1 gives $AA^\sharp+A^\sharp A=0$ on $\mathcal D$. For every $\psi\in\mathcal D$, the actual-adjoint identity for the individual charge summands in [F2] gives $0=\langle(AA^\sharp+A^\sharp A)\psi,\psi\rangle=\|A\psi\|^2+\|A^\sharp\psi\|^2$. Each squared norm is nonnegative, so both vanish. If $\mathcal K$ is finite-dimensional, $A^\sharp=A^*$ and this is the ordinary operator-adjoint conclusion; in general it is the stated dense-domain conclusion. The result is confined to the fixed rest fiber and asserts no state existence or stability. [F2, step 4.1] ∎
 ## Remarks

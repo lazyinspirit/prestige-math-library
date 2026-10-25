@@ -27,6 +27,10 @@ sources:
     locator: 'Lecture 1, §§1.1–1.1.2, printed pp. 6–10, equations (1.1)–(1.11): action and charge conventions, Bianchi consequence, and the charge-one SU(2) connection with ''t Hooft symbols.'
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

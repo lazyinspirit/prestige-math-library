@@ -25,6 +25,10 @@ sources:
       locator: "§5, equation (5.11): the general U(N) adjoint-hypermultiplet factor, its shifted tangent numerator, with the equivariant mass shifted by half the sum of the two rotation weights."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -33,15 +37,15 @@ For the explicit $k=N=1$ stable scalar ADHM quotient and generic rotation weight
 $$q I_{1,1}^{\mathrm{adj}}(\widetilde m)=q\frac{(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)}{\epsilon_1\epsilon_2}.$$
 The diagram shows the unique one-box partition, with the first coordinate horizontal for $B_1$ and the second vertical for $B_2$. This is a finite formal rank-one calculation only; the adopted S4 postulate in this batch is specifically $U(2)$.
 
-~~~tikz
-\begin{tikzpicture}[x=0.9cm,y=0.9cm]
-  \draw[step=1,gray] (0,0) grid (1,1);
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=1.1cm]
+  \draw[step=1.1cm,gray] (0,0) grid (1,1);
   \draw[fill=blue!20] (0,0) rectangle (1,1);
-  \node at (0.5,0.5) {$Y_1=\square$};
+  \node[above right] at (1.1,0.7) {$Y_1=\{(0,0)\}$};
   \draw[->] (0,0) -- (1.6,0) node[right] {$n_1\;(B_1)$};
   \draw[->] (0,0) -- (0,1.6) node[above] {$n_2\;(B_2)$};
 \end{tikzpicture}
-~~~
+```
 
 ## Example references
 

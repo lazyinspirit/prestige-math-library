@@ -32,6 +32,10 @@ sources:
       locator: "§§4.1–4.2, printed pp. 59–63, for exact rectangular Wilson-loop area dependence; the SU(2) coefficient and finite free-boundary calculation are supplied locally."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 proof_strategy: direct
 ---
 

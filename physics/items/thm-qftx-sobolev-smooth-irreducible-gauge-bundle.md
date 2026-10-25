@@ -47,6 +47,10 @@ sources:
       locator: "§4.4, PDF pp. 31–36: properness, the local slice lemma, and quotient charts for the abelian gauge action; local proof here handles SU(N) and smooth C-infinity topology."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -120,6 +124,6 @@ is a locally trivial topological principal $\bar{\mathcal G}_\infty$-bundle with
 The square records the local principal-bundle trivialization. The top map sends $(A+a,[u])$ to $(A+a)^u$, the left map is projection to the slice, the right map is the orbit projection, and the bottom map sends a slice point to its orbit. The proof above establishes that the square commutes and that the top map is an equivariant homeomorphism (a diffeomorphism in the Sobolev Banach setting); the argument does not rely on the diagram.
 
 ```tikzcd
-S_{A,\varepsilon}\times\bar{\mathcal G}_{k+1} \arrow[r,"\Phi_A"] \arrow[d,"\operatorname{pr}_1"'] & \pi_k^{-1}(V_A) \arrow[d,"\pi_k"] \\
-S_{A,\varepsilon} \arrow[r,"\varphi_A"'] & V_A
+S_{A,\varepsilon}\times\bar{\mathcal G}_{k+1} \arrow[r,"{\Phi_A}"] \arrow[d,"{\mathrm{pr}_1}"'] & \pi_k^{-1}(V_A) \arrow[d,"{\pi_k}"] \\
+S_{A,\varepsilon} \arrow[r,"{\varphi_A}"'] & V_A
 ```

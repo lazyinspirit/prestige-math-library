@@ -27,6 +27,10 @@ sources:
       locator: Section 2, equations (2.2)–(2.8), PDF pp. 7–9; Appendix B, PDF pp. 33–34, distinguishes one from multiple EOM insertions. The finite polynomial contact construction is proved locally.
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

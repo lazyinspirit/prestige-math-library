@@ -32,6 +32,10 @@ sources:
       locator: "§§4.1–4.3, PDF pp. 17–22, equations (4.6) and (4.19)–(4.21): lattice junction weights and Ising F-moves."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

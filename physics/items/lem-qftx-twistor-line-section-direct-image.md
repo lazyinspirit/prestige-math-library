@@ -52,6 +52,10 @@ sources:
       locator: "Projective GAGA, Theorems 1–3 and proofs in §§12–17, printed pp. 19–27; local algebraic–analytic comparison and flat-pair result in §2, no. 6, and the Appendix."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

@@ -42,6 +42,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
   - title: Clifford H. Taubes, Arbitrary N-vortex solutions to the first order Ginzburg-Landau equations, Communications in Mathematical Physics 72 (1980), 277–292
@@ -87,7 +92,7 @@ and flux $\int_{\mathbb R^2}B\,dx_1dx_2=2\pi N$. For every $0<\alpha<\sqrt\kappa
 
 [F4] [[thm-interior-schauder-estimate-for-uniformly-elliptic-equations]]: a bounded classical solution of a uniformly elliptic equation with $C^{0,\alpha}$ right-hand side and coefficients is $C^{2,\alpha}$ on a smaller ball with the stated estimate.
 
-[F5] [[thm-higher-order-sobolev-embedding]] and [[thm-extension-theorem-for-bounded-smooth-domains]]: on each bounded disk, $W^{2,p}$ for $p>2$ supplies $C^{1,\beta}$ representatives for $0<\beta<1-2/p$.
+[F5] [[thm-higher-order-sobolev-embedding]] and [[thm-extension-theorem-for-bounded-smooth-domains|Bounded $C^k$ domains admit integer-order Sobolev extension]]: on each bounded disk, $W^{2,p}$ for $p>2$ supplies $C^{1,\beta}$ representatives for $0<\beta<1-2/p$.
 
 [F6] Under full AC, every pointwise bounded equicontinuous sequence of maps from a nonempty compact metric space into a finite-dimensional real Euclidean space has a uniformly convergent subsequence. [[cor-real-and-euclidean-vector-valued-ascoli-arzela]]
 
@@ -95,11 +100,11 @@ and flux $\int_{\mathbb R^2}B\,dx_1dx_2=2\pi N$. For every $0<\alpha<\sqrt\kappa
 
 [F8] [[thm-strong-maximum-principle-for-classical-subharmonic-functions]]: a classical subharmonic function on a connected domain that attains an interior maximum is constant.
 
-[F9] Under the full-AC base [A1], [[thm-polar-coordinates-formula-for-lebesgue-measure]] applies in dimension two and gives $dx=r\,dr\,d\sigma(\omega)$, where $\sigma$ is the measure defined by [[def-polar-surface-measure-on-the-unit-sphere]]. For $\gamma(\theta)=(\cos\theta,\sin\theta)$, the cone over an angular interval $I\subset[0,2\pi)$ is a unit-radius sector of area $|I|/2$, so the definition gives $\sigma(\gamma(I))=|I|$. Thus $\sigma$ and $d\theta$ give the same integral for continuous functions on $S^1$: their interval sums agree, and uniform continuity makes the upper-minus-lower sums tend to zero. Since $\gamma_r(\theta)=r\gamma(\theta)$ has speed $r$, Euclidean arc length on $\partial D_r$ is $ds=r\,d\theta=r\,d\sigma$.
+[F9] Under the full-AC base [A1], [[thm-polar-coordinates-formula-for-lebesgue-measure|Polar coordinates decompose Lebesgue measure into $r^{n-1}\,dr\,d\sigma$]] applies in dimension two and gives $dx=r\,dr\,d\sigma(\omega)$, where $\sigma$ is the measure defined by [[def-polar-surface-measure-on-the-unit-sphere]]. For $\gamma(\theta)=(\cos\theta,\sin\theta)$, the cone over an angular interval $I\subset[0,2\pi)$ is a unit-radius sector of area $|I|/2$, so the definition gives $\sigma(\gamma(I))=|I|$. Thus $\sigma$ and $d\theta$ give the same integral for continuous functions on $S^1$: their interval sums agree, and uniform continuity makes the upper-minus-lower sums tend to zero. Since $\gamma_r(\theta)=r\gamma(\theta)$ has speed $r$, Euclidean arc length on $\partial D_r$ is $ds=r\,d\theta=r\,d\sigma$.
 
 [F10] The logarithmic center condition defines the continuous extension $e^h(z_j)=0$, so $1-e^h$ is a nonnegative Borel function by the Statement. [[thm-monotone-convergence-for-the-integral]] identifies the limit of its disk integrals with its plane integral: for integer $k\to\infty$, $\mathbf 1_{D_k}(1-e^h)\uparrow1-e^h$.
 
-[F11] On sigma-finite measure spaces, an absolutely integrable function on the product has integrable sections almost everywhere, and its integral equals either iterated integral. [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]
+[F11] On sigma-finite measure spaces, an absolutely integrable function on the product has integrable sections almost everywhere, and its integral equals either iterated integral. [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]]
 
 ## Proof
 

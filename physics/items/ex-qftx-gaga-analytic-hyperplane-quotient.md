@@ -55,6 +55,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Jean-Pierre Demailly, Complex Analytic and Differential Geometry"
@@ -87,7 +92,7 @@ no small-neighborhood restriction or general coherent Stein vanishing is assumed
 
 ## Example references
 
-[Demailly, Chapter IX §4.A, Proposition 4.1, pp. 419–420 (strongly q-complete vanishing, including q=1; the scalar step is also established by the Dolbeault argument here)](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
+[Demailly, Chapter IX §4.A, Proposition 4.1, pp. 419–420 (strongly q-complete vanishing, including $q=1$; the scalar step is also established by the Dolbeault argument here)](https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf)
 
 [Wehler, §5.2, Proposition 5.9, p. 171](https://www.math.lmu.de/~wehler/20190530_Stein_Manifolds_script.pdf)
 

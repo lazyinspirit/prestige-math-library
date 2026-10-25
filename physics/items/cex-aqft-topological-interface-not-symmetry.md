@@ -28,6 +28,10 @@ sources:
       locator: "§2.1, PDF pp. 5–8: interface data has a source region and target region, which need not be the same theory; the finite counterexample is proved locally."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement refuted

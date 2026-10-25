@@ -37,6 +37,10 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: 'Allan Adams, Nima Arkani-Hamed, Sergei Dubovsky, Alberto Nicolis, and Riccardo Rattazzi, Causality, Analyticity and an IR Obstruction to UV Completion'
@@ -122,7 +126,7 @@ The diagram is a schematic of the real $z$-plane contour $\Gamma_{R,\eta,\epsilo
 
 ```tikz
 \begin{tikzpicture}[x=1cm,y=0.65cm,>=stealth]
-  \draw[->] (-4.4,0) -- (4.5,0) node[right] {$\operatorname{Re}z$};
+  \draw[->] (-4.4,0) -- (4.5,0) node[right] {$\mathrm{Re}z$};
   \draw[very thick] (-4.0,0) -- (-2.0,0);
   \draw[very thick] (2.0,0) -- (4.0,0);
   \node[below] at (-2.0,0) {$-\nu_0$};

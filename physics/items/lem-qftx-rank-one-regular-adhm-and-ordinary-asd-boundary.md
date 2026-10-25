@@ -50,6 +50,10 @@ sources:
       locator: Framed ordinary ASD and ADHM setting; the proof uses the exact local rank-two suppliers, not a new reading or a source-coordinate substitution.
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

@@ -13,6 +13,11 @@ proof_strategy: definition
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Francesco Benini, Clay Córdova, and Po-Shen Hsin, On 2-Group Global Symmetries and Their Anomalies, §2.3"

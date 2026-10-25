@@ -23,6 +23,10 @@ sources:
   references: []
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -65,7 +69,7 @@ The sketch rescales the radius to $1.1$ drawing units; it represents the orbit c
   \fill (-1.1,0) circle (2pt) node[below left] {$(-r,0)$};
   \draw[->] (0.82,0.72) arc[start angle=41.3,end angle=138.7,radius=1.1];
   \node at (0.35,0.35) {$\mathcal O_r$};
-  \node at (1.05,-0.30) {$S_r$ (local)};
+  \node at (1.05,-1.5) {$S_r$ (local)};
 \end{tikzpicture}
 ```
 

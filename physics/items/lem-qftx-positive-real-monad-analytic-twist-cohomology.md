@@ -29,6 +29,10 @@ sources:
       locator: "Theorems 1–3, §§12–17, printed pp. 19–27: analytic/algebraic comparison context. The proof below does not assume GAGA; it derives the negative twists conditionally from the exact planned scalar input and analytic hyperplane sequences."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

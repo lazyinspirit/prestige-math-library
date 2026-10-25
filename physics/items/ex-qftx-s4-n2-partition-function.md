@@ -1,7 +1,7 @@
 ---
 id: ex-qftx-s4-n2-partition-function
 kind: example
-title: The U(2) N=2* Round-S4 Matrix Integral and Its One-Instanton Term
+title: 'The $U(2)$ $\mathcal N=2^*$ Round-$S^4$ Matrix Integral and Its One-Instanton Term'
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -38,6 +38,10 @@ sources:
       locator: "Lecture 1, §1.2, equations (24)–(35), PDF pp. 4–6; the notes state Q-invariance and off-shell requirements but do not prove the continuum measure identity."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Example
 
@@ -75,7 +79,7 @@ In the source convention define
 
 $$E_{\alpha\beta}(s)=-h_{Y_\beta}(s)\epsilon_1+(v_{Y_\alpha}(s)+1)\epsilon_2+a_\beta^{\mathrm P}-a_\alpha^{\mathrm P}.$$
 
-The source's formal N=2* instanton factor is
+The source's formal $\mathcal N=2^*$ instanton factor is
 
 $$Z_{\mathrm{inst}}^{\mathcal N=2^*}(a_1^{\mathrm P},a_2^{\mathrm P},\widetilde m;\epsilon_1,\epsilon_2,q)= \sum_{\vec Y}q^{|\vec Y|} \prod_{\alpha,\beta=1}^{2}\prod_{s\in Y_\alpha} \frac{(E_{\alpha\beta}(s)-\widetilde m) (\epsilon_1+\epsilon_2-E_{\alpha\beta}(s)-\widetilde m)} {E_{\alpha\beta}(s)(\epsilon_1+\epsilon_2-E_{\alpha\beta}(s))}.$$
 
@@ -95,18 +99,18 @@ This is a source-reported structural prescription with a locally derived mathema
 
 Each square below is one box $(0,0)$ in the color named beneath it; an empty color has no box. The two cases exhaust total size one and the algebraic verification does not rely on the diagram. 
 
-~~~tikz
-\begin{tikzpicture}[x=0.8cm,y=0.8cm]
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=1.1cm]
   \draw[fill=blue!15] (0,0) rectangle (1,1);
-  \draw (0,0) grid (1,1);
+  \draw[step=1.1cm] (0,0) grid (1,1);
   \node[below] at (0.5,0) {$Y_1=\Box$};
-  \node[below] at (2,0) {$Y_2=\varnothing$};
+  \node[below] at (2,0) {$Y_2=\emptyset$};
   \draw[fill=orange!20] (4,0) rectangle (5,1);
-  \draw (4,0) grid (5,1);
+  \draw[step=1.1cm] (4,0) grid (5,1);
   \node[below] at (4.5,0) {$Y_2=\Box$};
-  \node[below] at (6,0) {$Y_1=\varnothing$};
+  \node[below] at (6,0) {$Y_1=\emptyset$};
 \end{tikzpicture}
-~~~
+```
 
 ## Example references
 
@@ -114,7 +118,7 @@ Each square below is one box $(0,0)$ in the color named beneath it; an empty col
 
 [Peelaers, Lecture 1 §1.2 and Lecture 2](https://indico.math.cnrs.fr/event/3026/attachments/2163/2457/Peelaers-LectureNotes.pdf)
 
-[[post-qftx-s4-n2-localization-model|Adopted N=2* U(2) S4 model]]
+[[post-qftx-s4-n2-localization-model|Adopted $\mathcal N=2^*$ $U(2)$ $S^4$ model]]
 
 [[pthm-qftx-n2star-u2-regulated-ward-identity|Model-matched finite-regulator Ward identity]]
 
@@ -136,7 +140,7 @@ Each square below is one box $(0,0)$ in the color named beneath it; an empty col
 
 [F3] [[def-axiom-of-choice]]: full AC means every family of nonempty sets indexed by an arbitrary set has a choice function. It is carried here only because the actual ADHM core Statement assumes it; the one-box algebra uses finite sets.
 
-[A1] [[pthm-qftx-n2star-u2-regulated-ward-identity]]: for THIS N=2* U(2) model, a supplied fixed finite-dimensional regulator with exact preservation of the source-ordered $R^Q_{AB}=2\epsilon\widetilde\Gamma_{AB}\widetilde\epsilon$ convention and the total square $Q^2=\delta_{\mathrm{gauge}}(a_0)+\omega$, where $\omega$ is the declared combined lifted spacetime/R/flavor operator with its auxiliary/ghost actions, Q-closure, Q-square condition, anomaly-free measure/cycle identity, zero Q-exact boundary integral, one common null set outside which the regulated coefficient $t\mapsto f_t(x)$ is differentiable throughout $J$, measurable derivatives for each $t$, and compact-parameter $L^1$ majorants gives finite-parameter constancy. Existence of that regulator remains model input; this result provides neither the large-parameter saddle nor the pole matching.
+[A1] [[pthm-qftx-n2star-u2-regulated-ward-identity]]: for THIS $\mathcal N=2^*$ $U(2)$ model, a supplied fixed finite-dimensional regulator with exact preservation of the source-ordered $R^Q_{AB}=2\epsilon\widetilde\Gamma_{AB}\widetilde\epsilon$ convention and the total square $Q^2=\delta_{\mathrm{gauge}}(a_0)+\omega$, where $\omega$ is the declared combined lifted spacetime/R/flavor operator with its auxiliary/ghost actions, Q-closure, Q-square condition, anomaly-free measure/cycle identity, zero Q-exact boundary integral, one common null set outside which the regulated coefficient $t\mapsto f_t(x)$ is differentiable throughout $J$, measurable derivatives for each $t$, and compact-parameter $L^1$ majorants gives finite-parameter constancy. Existence of that regulator remains model input; this result provides neither the large-parameter saddle nor the pole matching.
 
 [A2] A local derivation of the adopted physical source prescription would additionally require a justified $t\to\infty$ saddle limit for the regulator in [A1], identifying its sector contribution with the mathematical localized pushforward in [F4]. That pushforward and its Euler formula are supplied mathematically here; its identification with a field-space saddle measure is not. Finite-parameter Ward constancy and the ADHM core do not supply this physical limit.
 
@@ -149,12 +153,12 @@ Each square below is one box $(0,0)$ in the color named beneath it; an empty col
 
 2.1 For the first one-box tuple, the contributing weights in the displayed Nekrasov factor are $E_{11}=\epsilon_2$ and $E_{12}=a_2^{\mathrm P}-a_1^{\mathrm P}+\epsilon_1+\epsilon_2$. Thus its hypermultiplet numerator is $(\epsilon_1-\widetilde m)(\epsilon_2-\widetilde m)(a_2^{\mathrm P}-a_1^{\mathrm P}+\epsilon_1+\epsilon_2-\widetilde m)(a_1^{\mathrm P}-a_2^{\mathrm P}-\widetilde m)$, and its vector denominator is $E_1^{\mathrm A}$ from step 1.1. For the second color the two Coulomb weights interchange and the denominator is $E_2^{\mathrm A}$. Adding these two fixed-point contributions gives exactly $C_1$ in the Example. This is the finite fixed-point evaluation of the mathematical tangent-twist insertion. [given, F2, step 1.1, algebra]
 
-2.2 The exponent in the Lie-algebra integral is dimensionless because $[r]=\mathrm{mass}^{-1}$, $[\mathsf a]=[a_E]=\mathrm{mass}$, and $g_{\mathrm{YM}}$ is dimensionless. The one-loop product uses only ratios of mass-squared terms; each N=2* instanton numerator and denominator has the same mass degree, and $q$ is dimensionless. The measure is $d\mu_0$ from the stated trace pairing, the unscaled group volume is $\operatorname{vol}_0$, and the separate coupling-rescaled gauge-fixing volume is $g_{\mathrm{YM}}^4\operatorname{vol}_0$. Thus the displayed finite integral has mass dimension four under this literal Lebesgue convention; it does not claim an absolute continuum path-integral normalization. [given, F1, step 1.1, algebra]
+2.2 The exponent in the Lie-algebra integral is dimensionless because $[r]=\mathrm{mass}^{-1}$, $[\mathsf a]=[a_E]=\mathrm{mass}$, and $g_{\mathrm{YM}}$ is dimensionless. The one-loop product uses only ratios of mass-squared terms; each $\mathcal N=2^*$ instanton numerator and denominator has the same mass degree, and $q$ is dimensionless. The measure is $d\mu_0$ from the stated trace pairing, the unscaled group volume is $\operatorname{vol}_0$, and the separate coupling-rescaled gauge-fixing volume is $g_{\mathrm{YM}}^4\operatorname{vol}_0$. Thus the displayed finite integral has mass dimension four under this literal Lebesgue convention; it does not claim an absolute continuum path-integral normalization. [given, F1, step 1.1, algebra]
 
 3.1 Let $X_k$ be the stable $U(2)$ ADHM quotient in [F2], of complex dimension $4k$. Write its algebraic torus as $T_{\mathbb C}=(\mathbb C^\times)^2_{\mathrm{rot}}\times(\mathbb C^\times)^2_{\mathrm{fr}}$, acting by the complexification of the ADHM supplier's rotation and dual-framing action, and let $K=(S^1)^2_{\mathrm{rot}}\times(S^1)^2_{\mathrm{fr}}$ be its maximal compact subgroup. The Borel equivariant cohomology for $T_{\mathbb C}$ is $H^*_{K}(X_k;\mathbb Q)$. Add the algebraic flavor torus $\mathbb C^\times_f$ acting trivially on every point of $X_k$; then $T_{\mathbb C,m}=T_{\mathbb C}\times\mathbb C^\times_f$ acts algebraically and has maximal compact $K_m=K\times S^1_f$, which defines $H^*_{T_{\mathbb C,m}}(X_k;\mathbb Q)=H^*_{K_m}(X_k;\mathbb Q)$. Let $\eta$ be the coordinate character of $\mathbb C^\times_f$, let $u_f=c_1(L_\eta)$ be its independent degree-two class, and let $L_{\eta^{-1}}$ be the associated line of class $-u_f$. Since the flavor factor acts trivially on the base, $X_k^{T_{\mathbb C,m}}=X_k^{T_{\mathbb C}}$, and every $T_{\mathbb C}$-invariant affine open in the finite cover of [F2] remains invariant under $T_{\mathbb C,m}$. Thus the fixed locus remains the same finite reduced, hence proper, scheme. The global insertion is $\alpha_{u_f}=e_{T_{\mathbb C,m}}(TX_k\otimes L_{\eta^{-1}})$, capped with the complex-oriented fundamental class $[X_k]$. Every hypothesis of [F4] therefore holds for the algebraic torus $T_{\mathbb C,m}$ and its maximal compact $K_m$. A point with tangent weights $w_j$ contributes $\prod_j(w_j-u_f)/\prod_jw_j$ to $p_*^{\mathrm{loc}}(\alpha_{u_f}\cap[X_k])$. For $k=1$ these are the four weights at each of the two points in steps 1.1–2.1, giving the mass-twisted coefficient with $\mu=u_f$. The resulting expression has only tangent weights in its denominators, so it can be specialized after the rational sum by $u_f\mapsto\widetilde m$. For $k=0$, $X_0$ is a point, both Euler products are empty and the coefficient is $1$. Thus the mathematical noncompact localized-pushforward coefficient is proved. Identifying this insertion with the physical hypermultiplet sector is the sourced pole prescription [A3], not a consequence of equivariant cohomology. [given, F2, F4, A3, step 1.1, step 2.1, algebra]
 
 3.2 At $m_E=0$, one has $\widetilde m=(\epsilon_1+\epsilon_2)/2$; for the round-sphere specialization $\epsilon_1=\epsilon_2$, the charge-one numerator vanishes. This agrees with the source's $\mathcal N=4$ limit and does not assert a separate result for a non-round $\Omega$ background. [given, F1, step 2.1, algebra]
 
-4.1 Under [A1]–[A3], the source's Nekrasov pole factor is matched with the fixed-point sum after its tangent-bundle insertion. First add the generic fixed-point terms, then specialize the independent flavor weight $u_f$ to $\widetilde m$, then set $\epsilon_1=\epsilon_2=r^{-1}$, $\widetilde m=i m_E+r^{-1}$, and $a_\alpha^{\mathrm P}=i a_\alpha^E$; this is Pestun's round-sphere N=2* convention. The south-pole anti-instanton uses $\bar q$ and the conjugate continued parameters. On the physical real slice this is the product represented by $|Z_{\mathrm{inst}}|^2$. Without these assumptions, the mathematical ADHM coefficient in step 3.1 remains established locally; the full $S^4$ expression itself remains source-reported. [given, A1, A2, A3, F1, step 3.1]
+4.1 Under [A1]–[A3], the source's Nekrasov pole factor is matched with the fixed-point sum after its tangent-bundle insertion. First add the generic fixed-point terms, then specialize the independent flavor weight $u_f$ to $\widetilde m$, then set $\epsilon_1=\epsilon_2=r^{-1}$, $\widetilde m=i m_E+r^{-1}$, and $a_\alpha^{\mathrm P}=i a_\alpha^E$; this is Pestun's round-sphere $\mathcal N=2^*$ convention. The south-pole anti-instanton uses $\bar q$ and the conjugate continued parameters. On the physical real slice this is the product represented by $|Z_{\mathrm{inst}}|^2$. Without these assumptions, the mathematical ADHM coefficient in step 3.1 remains established locally; the full $S^4$ expression itself remains source-reported. [given, A1, A2, A3, F1, step 3.1]
 
 5.1 The local model-matched Ward theorem in [A1] supplies finite-parameter constancy under its exact finite-regulator conditions. The physical saddle-to-pushforward identification [A2] and pole/regulator matching [A3] remain explicit source-qualified inputs. The mathematical pushforward itself is established in step 3.1. Consequently the full sphere expression remains source-reported and conditional, not a locally constructed continuum partition function. [given, A1, A2, A3, step 3.1, step 4.1] ∎

@@ -28,6 +28,10 @@ sources:
       locator: "§§4.6 and 8.1: BRST cohomology and its local-functional interpretation, with stated gauge-theory assumptions."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

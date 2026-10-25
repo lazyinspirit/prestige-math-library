@@ -25,6 +25,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: Dan Edidin and William Graham, Localization in equivariant intersection theory and the Bott residue formula
@@ -78,10 +83,10 @@ where $p_{a}:F_a\to\mathrm{pt}$ is proper, $e_T(\nu_a)$ is the zero-section Eule
 
 For a proper equivariant map $f:X\to Y$ as in step 2.1, $f^T:F_X\to F_Y$ is its restriction to the fixed loci, and the fixed-locus square is
 
-~~~tikzcd
-F_X \arrow[r, "i_X"] \arrow[d, "f^T"'] & X \arrow[d, "f"] \\
-F_Y \arrow[r, "i_Y"'] & Y
-~~~
+```tikzcd
+F_X \arrow[r, "{i_X}"] \arrow[d, "{f^T}"'] & X \arrow[d, "{f}"] \\
+F_Y \arrow[r, "{i_Y}"'] & Y
+```
 
 The horizontal maps are closed inclusions and the vertical maps are the restrictions of $f$; step 2.1 proves the induced pushforward identity independently of the diagram.
 

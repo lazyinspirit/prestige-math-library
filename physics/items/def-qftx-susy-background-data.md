@@ -64,6 +64,10 @@ physical_scope: "Euclidean four-dimensional rigid-supersymmetry and localization
   regulator-removal limit, or continuum localization theorem."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

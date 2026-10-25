@@ -16,6 +16,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Zelin Yi, A Groupoid Proof of the Lefschetz fixed point formula"

@@ -38,6 +38,10 @@ sources:
       locator: "§§6.10–6.12, printed pp. 125–126: the real-line complement and sign argument used in splitting the constant summand."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

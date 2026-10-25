@@ -51,6 +51,10 @@ sources:
       locator: "§§4.2–4.4, PDF pp. 25–36: Sobolev configuration, gauge action, properness interface, and local slice setup; abelian scope is recorded in the coverage disposition."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

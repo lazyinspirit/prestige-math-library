@@ -73,6 +73,10 @@ sources:
       locator: "Exposé 17, pp. 1–11: complete compact-complex finiteness argument, Fréchet quotient topology, compact restriction, Leray comparison, and Schwartz perturbation."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 page: qftx-gaga-compact-coherent-finiteness
 category: quantum-field-theory-mathematics
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23

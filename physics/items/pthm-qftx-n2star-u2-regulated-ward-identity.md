@@ -1,7 +1,7 @@
 ---
 id: pthm-qftx-n2star-u2-regulated-ward-identity
 kind: physics-theorem
-title: Finite-regulator Ward identity for the N=2* U(2) sphere model
+title: Finite-regulator Ward identity for the $N=2^*$ U(2) sphere model
 status: draft
 origin: session
 domain: physics
@@ -33,6 +33,10 @@ sources:
         claimed construction of the source's S4 regulator.
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -47,7 +51,7 @@ and $Z_\rho$ is constant on $J$. This is conditional on the stated finite regula
 
 ## Facts & Assumptions
 
-**Given:** The selected N=2* U(2) sphere model, one common null set for differentiability throughout the parameter interval, measurable zero-extended derivatives at each parameter, compact-parameter $L^1$ majorants, and the other exact finite-regulator hypotheses in the Statement.
+**Given:** The selected $N=2^*$ U(2) sphere model, one common null set for differentiability throughout the parameter interval, measurable zero-extended derivatives at each parameter, compact-parameter $L^1$ majorants, and the other exact finite-regulator hypotheses in the Statement.
 
 [A1] [[post-qftx-s4-n2-localization-model]]: the adopted model has global group U(2), one adjoint hypermultiplet of mass $m_E$, and the specified curved background, contour, mass-dependent flavor transformation and formal regulator assumption; it constructs no measure.
 
@@ -55,6 +59,6 @@ and $Z_\rho$ is constant on $J$. This is conditional on the stated finite regula
 
 ## Proof
 
-1.1 Assumption [A1] selects the physical theory and its mass-dependent transformation; the separately supplied regulator in the Statement must realize that transformation and its complete lifted/gauge/R/flavor square. The gauge-covariant source Lie derivative is decomposed in [A1] as the fixed geometric lift plus the gauge action of $\kappa_v$, and the cohomological parameter is $\phi=-\kappa_v$; thus no gauge term is counted twice. Its $R^Q$ uses the source bilinear order and its auxiliary and ghost actions are those explicitly adopted in [A1]. This is not a substitution of the massless N=4 SU(2) model. Its graded form algebra, cycle and integral have exactly the mathematical type in [F1]. [given, A1, F1]
+1.1 Assumption [A1] selects the physical theory and its mass-dependent transformation; the separately supplied regulator in the Statement must realize that transformation and its complete lifted/gauge/R/flavor square. The gauge-covariant source Lie derivative is decomposed in [A1] as the fixed geometric lift plus the gauge action of $\kappa_v$, and the cohomological parameter is $\phi=-\kappa_v$; thus no gauge term is counted twice. Its $R^Q$ uses the source bilinear order and its auxiliary and ghost actions are those explicitly adopted in [A1]. This is not a substitution of the massless $N=4$ SU(2) model. Its graded form algebra, cycle and integral have exactly the mathematical type in [F1]. [given, A1, F1]
 
 2.1 Each remaining hypothesis of [F1] is explicitly assumed in the Statement: Q annihilates action and insertion, its square satisfies the stated deformation condition, the Q-exact integral vanishes without anomalous or boundary term, and the derivative and integrand have the compact-parameter integrable majorant. Apply [F1] to obtain the derivative formula and constancy on $J$. The theorem's finite-parameter limit is preserved; no missing saddle, pushforward, pole or continuum conclusion is deduced. [given, F1, step 1.1] ∎

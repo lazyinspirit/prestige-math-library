@@ -47,6 +47,10 @@ sources:
       locator: "§4.4, PDF pp. 31–36: slice operator and elliptic regularity interface; the manuscript is abelian and the rough SU(N) perturbation is proved here."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -114,5 +118,5 @@ and the bounded projection onto $\operatorname{im}d_A$ is $\Pi_A=d_AG_Ad_A^*$. I
 The three arrows below have the Sobolev domains and codomains written above them. Their composite is the bounded projection $\Pi_A=d_AG_Ad_A^*$ proved in step 6.1; the proof of its image and kernel is the operator argument in the proof, not the diagram.
 
 ```tikzcd
-H^k(\Omega^1(\operatorname{ad}P)) \arrow[r,"d_A^*"] & H^{k-1}(\operatorname{ad}P) \arrow[r,"G_A"] & H^{k+1}(\operatorname{ad}P) \arrow[r,"d_A"] & H^k(\Omega^1(\operatorname{ad}P))
+H^k(\Omega^1(\mathrm{ad}P)) \arrow[r,"{d_A^*}"] & H^{k-1}(\mathrm{ad}P) \arrow[r,"{G_A}"] & H^{k+1}(\mathrm{ad}P) \arrow[r,"{d_A}"] & H^k(\Omega^1(\mathrm{ad}P))
 ```

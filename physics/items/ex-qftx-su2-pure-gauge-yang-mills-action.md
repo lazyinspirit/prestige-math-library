@@ -36,6 +36,10 @@ sources:
       locator: "§2.1.2, printed pp. 30–31: local gauge transformation of the connection and adjoint covariance of curvature."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

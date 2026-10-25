@@ -11,6 +11,11 @@ page: qftx-yang-mills-clay-problem-examples
 dependency_level: 0
 deps: []
 dependency_roles: {}
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Arthur Jaffe and Edward Witten, Quantum Yang-Mills Theory, §§4–6"

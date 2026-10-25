@@ -43,6 +43,10 @@ sources:
       locator: "§4.1.4, printed pp. 44–47: threshold matching of selected light-particle amplitudes with fixed mass and scheme data."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -61,11 +65,11 @@ The Wilsonian scale $\mu_W$, renormalization scale $\mu$, $M$, $E_{\mathrm{ext}}
 
 ## Statement references
 
-[[def-aqft-susy-wilsonian-action|Finite N=1 Wilsonian action and threshold data]]
+[[def-aqft-susy-wilsonian-action|Finite $N=1$ Wilsonian action and threshold data]]
 
 [[def-aqft-threshold-matching-map|Finite-order matching coordinates and amplitude conditions]]
 
-[[def-qftx-n1-chiral-superfield|Smooth N=1 chiral superfields and covariant derivatives]]
+[[def-qftx-n1-chiral-superfield|Smooth $N=1$ chiral superfields and covariant derivatives]]
 
 [[def-qftx-superspace-grassmann-algebra|Ordered Berezin measures and coefficient-extraction integration]]
 
@@ -79,9 +83,9 @@ The Wilsonian scale $\mu_W$, renormalization scale $\mu$, $M$, $E_{\mathrm{ext}}
 
 ## Facts & Assumptions
 
-**Given:** Full AC; the local rigid N=1 action and finite Wilson-coefficient data; a positive heavy mass $M$; the stated leading derivative-free tree-level matching prescription; and the retained holomorphic representatives and coordinate identifications.
+**Given:** Full AC; the local rigid $N=1$ action and finite Wilson-coefficient data; a positive heavy mass $M$; the stated leading derivative-free tree-level matching prescription; and the retained holomorphic representatives and coordinate identifications.
 
-[F1] [[def-aqft-susy-wilsonian-action]]: the high- and low-energy actions use smooth classical N=1 chiral fields and a derivative-free holomorphic F-term, with real D-term data kept separate; all Wilsonian, renormalization, threshold, external-energy, regulator, and operator-suppression scales are supplied independently.
+[F1] [[def-aqft-susy-wilsonian-action]]: the high- and low-energy actions use smooth classical $N=1$ chiral fields and a derivative-free holomorphic F-term, with real D-term data kept separate; all Wilsonian, renormalization, threshold, external-energy, regulator, and operator-suppression scales are supplied independently.
 
 [F2] [[def-qftx-n1-chiral-superfield]]: a chiral superfield is a smooth finite-Grassmann-valued field obeying $\bar D_{\dot\alpha}X=0$; the superspace derivatives and natural-unit dimensions are fixed.
 

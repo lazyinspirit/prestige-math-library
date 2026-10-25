@@ -28,6 +28,10 @@ sources:
       locator: "§§8.1–8.1.1, PDF pp. 154–161: finite-dimensional slice Jacobians and the boundary between regulator calculations and continuum gauge fixing."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

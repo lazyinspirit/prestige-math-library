@@ -39,6 +39,10 @@ sources:
       locator: "§2.2.2 Example 2.3, PDF pp. 19–21, and §4.1 Example 4.1, PDF pp. 60–61: U(1) characters, magnetic line flux, and background normalization."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

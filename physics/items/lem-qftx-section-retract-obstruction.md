@@ -32,6 +32,10 @@ sources:
       locator: "§4.2, printed pp. 379–381; bundle and homotopy context."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Terminology
 
@@ -48,7 +52,7 @@ $$\begin{array}{ccc}H&\xrightarrow{i}&E\\\Big\downarrow{\scriptstyle\operatornam
 with TikZ source
 ```tikz
 \begin{tikzcd}
-H \arrow[r,"i"] \arrow[dr,"\operatorname{id}_H"'] & E \arrow[d,"r"]\\
+H \arrow[r,"{i}"] \arrow[dr,"{\mathrm{id}_H}"'] & E \arrow[d,"{r}"]\\
 & H
 \end{tikzcd}
 ```

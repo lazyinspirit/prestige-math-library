@@ -1,7 +1,7 @@
 ---
 id: def-qftx-n1-vector-superfield
 kind: definition
-title: Four-dimensional N=1 non-Abelian vector superfield in connection normalization
+title: Four-dimensional $N=1$ non-Abelian vector superfield in connection normalization
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -40,15 +40,19 @@ sources:
       locator: "§§4.4 and 5.1, printed pp. 23–29: real vector superfields, Wess–Zumino gauge, the non-Abelian field strength, and coupling rescaling."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition
 
 Use the physical action brackets $[U]_D=-I_D(U)/4$ and $[Y]_F=I_F(Y)/2$ from Physical superspace action brackets and canonical chiral components, with raw mathematical coefficient integrals $I_D,I_F$ unchanged. Physical chiral components obey $\psi_{\mathrm{raw}}=\sqrt2\psi$ and $F_{\mathrm{raw}}=2F$. All physical action and coupling formulas below use these brackets and physical component names; adding Hermitian conjugation applies only to the F action and occurs once.
 
-Use the selected smooth right-principal $SU(2)$ bundle $P\to M$ and its connection $A$ from the non-Abelian Yang–Mills model, with $M=\mathbb R^{1,3}$, $\eta=\operatorname{diag}(-1,1,1,1)$, $\kappa(X,Y)=-2\operatorname{Tr}_2(XY)$, and positive dimensionless coupling $g_{\mathrm{YM}}$. For each matter representation, let $V_R$ be a finite-dimensional complex Hermitian space and $R:SU(2)\to U(V_R)$ a smooth unitary representation; write $\rho_{R*}$ for its Lie-algebra differential. In the fundamental representation set $T_a=-i\sigma_a/2\in\mathfrak{su}(2)$ and $t_a=iT_a=\sigma_a/2$, so $\operatorname{Tr}_2(t_at_b)=\tfrac12\delta_{ab}$. In representation $R$, set $t_{a,R}=i\rho_{R*}(T_a)$. In a local trivialization write $V=V^at_a$ and $V_R=V^at_{a,R}$, and set $A_\mu=-i g_{\mathrm{YM}}B_\mu$ when $B_\mu=B_\mu^at_a$ is its vector component. Thus the matter covariant derivative is $D_\mu=\partial_\mu+\rho_{R*}(A_\mu)=\partial_\mu-i g_{\mathrm{YM}}B_\mu^at_{a,R}$.
+Use the selected smooth right-principal $SU(2)$ bundle $P\to M$ and its connection $A$ from the non-Abelian Yang–Mills model, with $M=\mathbb R^{1,3}$, $\eta=\operatorname{diag}(-1,1,1,1)$, $\kappa(X,Y)=-2\operatorname{Tr}_2(XY)$, and positive dimensionless coupling $g_{\mathrm{YM}}$. For each matter representation, let $\mathcal H_R$ be a finite-dimensional complex Hermitian space and $R:SU(2)\to U(\mathcal H_R)$ a smooth unitary representation; write $\rho_{R*}$ for its Lie-algebra differential. In the fundamental representation set $T_a=-i\sigma_a/2\in\mathfrak{su}(2)$ and $t_a=iT_a=\sigma_a/2$, so $\operatorname{Tr}_2(t_at_b)=\tfrac12\delta_{ab}$. In representation $R$, set $t_{a,R}=i\rho_{R*}(T_a)$. In a local trivialization write $V=V^at_a$ and let $V_R=V^at_{a,R}$ be its represented matrix superfield in $\operatorname{End}_{\mathbb C}(\mathcal H_R)$, and set $A_\mu=-i g_{\mathrm{YM}}B_\mu$ when $B_\mu=B_\mu^at_a$ is its vector component. Thus the matter covariant derivative is $D_\mu=\partial_\mu+\rho_{R*}(A_\mu)=\partial_\mu-i g_{\mathrm{YM}}B_\mu^at_{a,R}$.
 
-A **vector superfield prepotential** is a dimensionless smooth even real matrix-valued superfield $V$ in the finite Grassmann-valued superspace of the N=1 chiral-superfield convention. Under a global rigid supersymmetry variation it transforms as $\delta V=(\epsilon^\alpha Q_\alpha+\bar\epsilon^{\dot\alpha}\bar Q_{\dot\alpha})V$, with the supercharges defined in the chiral-superfield convention. Its local gauge transformations are $\Phi_R\mapsto e^{i\Lambda_R}\Phi_R$ and $e^{2g_{\mathrm{YM}}V_R}\mapsto e^{i\Lambda_R^\dagger}e^{2g_{\mathrm{YM}}V_R}e^{-i\Lambda_R}$, where $\Phi_R$ is chiral, $V_R=V^at_{a,R}$, and $\Lambda_R=\Lambda^at_{a,R}$ is a dimensionless chiral gauge-parameter superfield in the represented complexified Lie algebra $\mathfrak{su}(2)_{\mathbb C}=\mathfrak{su}(2)\otimes_{\mathbb R}\mathbb C$. The associated represented matrix curvature is defined by
+A **vector superfield prepotential** is a dimensionless smooth even real matrix-valued superfield $V$ in the finite Grassmann-valued superspace of the $N=1$ chiral-superfield convention. Under a global rigid supersymmetry variation it transforms as $\delta V=(\epsilon^\alpha Q_\alpha+\bar\epsilon^{\dot\alpha}\bar Q_{\dot\alpha})V$, with the supercharges defined in the chiral-superfield convention. Its local gauge transformations are $\Phi_R\mapsto e^{i\Lambda_R}\Phi_R$ and $e^{2g_{\mathrm{YM}}V_R}\mapsto e^{i\Lambda_R^\dagger}e^{2g_{\mathrm{YM}}V_R}e^{-i\Lambda_R}$, where $\Phi_R$ is chiral, $V_R=V^at_{a,R}$, and $\Lambda_R=\Lambda^at_{a,R}$ is a dimensionless chiral gauge-parameter superfield in the represented complexified Lie algebra $\mathfrak{su}(2)_{\mathbb C}=\mathfrak{su}(2)\otimes_{\mathbb R}\mathbb C$. The associated represented matrix curvature is defined by
 
 $$\mathscr C_{\alpha,R}=-\tfrac14\bar D^{\dot\beta}\bar D_{\dot\beta}\!\left(e^{-2g_{\mathrm{YM}}V_R}D_\alpha e^{2g_{\mathrm{YM}}V_R}\right),$$
 

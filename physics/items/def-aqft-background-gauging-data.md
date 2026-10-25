@@ -23,6 +23,11 @@ provenance:
   proof: ai-generated
 axiom_use: No choice principle is used; all field, arrow, and automorphism sets are
   finite.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
   - title: Moore and Saxena, TASI Lectures on Topological Field Theories and Differential

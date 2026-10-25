@@ -39,6 +39,10 @@ sources:
       locator: "§1.2.2, printed p. 14, Witten-index definition and positive-energy boson/fermion cancellation under the assumptions stated there."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

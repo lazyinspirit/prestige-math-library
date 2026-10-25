@@ -33,6 +33,10 @@ sources:
       locator: "Lecture 1, §1.1.1, printed pp. 8–9, equations (1.6)–(1.8): square completion, equality signs, and the Bianchi implication."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

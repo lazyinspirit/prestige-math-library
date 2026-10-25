@@ -1,7 +1,7 @@
 ---
 id: ex-qftx-n2-quadratic-prepotential
 kind: example
-title: Constant gauge-coupling matrix from the quadratic N=2 prepotential
+title: Constant gauge-coupling matrix from the quadratic $N=2$ prepotential
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -23,6 +23,10 @@ generation:
   role: example
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -35,7 +39,7 @@ For the adopted microscopic prepotential $\mathcal F_{\mathrm{UV}}(\Phi)=\frac{i
 
 ## Facts & Assumptions
 
-**Given:** The quadratic ultraviolet prepotential and positive dimensionless coupling in the N=2 model.
+**Given:** The quadratic ultraviolet prepotential and positive dimensionless coupling in the $N=2$ model.
 
 [A1] [[post-qftx-n2-vector-hypermultiplet-model]]: $g>0$, $\kappa(T_a,T_b)=\delta_{ab}$, and $\mathcal F_{\mathrm{UV}}(\Phi)=\frac{i}{2g^2}\kappa_{\mathbb C}(\Phi,\Phi)$.
 

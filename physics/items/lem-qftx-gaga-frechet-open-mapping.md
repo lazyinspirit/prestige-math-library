@@ -31,6 +31,10 @@ sources:
       locator: "Exposé 17, pp. 8–10: complete Fréchet section spaces and the compact-complex finiteness proof."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 page: qftx-gaga-compact-coherent-finiteness
 category: quantum-field-theory-mathematics
 ---

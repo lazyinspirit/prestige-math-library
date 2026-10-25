@@ -35,6 +35,10 @@ sources:
       url: "https://homepages.math.uic.edu/~heitsch/HeitschBC.pdf"
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

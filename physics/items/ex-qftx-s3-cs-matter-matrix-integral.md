@@ -29,6 +29,10 @@ sources:
 physical_scope: "Source-reported formal localization formula for the zero-mass, zero-FI ABJM model with gauge group U(N)×U(N) on the round Euclidean S3; no general N=2 result, continuum measure construction, or empirical claim is asserted."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

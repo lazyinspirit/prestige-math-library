@@ -26,6 +26,10 @@ sources:
       locator: "§§2.1–2.2, printed pp. 25–34: invariant-polynomial normalization, Chern–Simons transgression, and Stora–Zumino descent."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

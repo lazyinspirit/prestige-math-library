@@ -61,6 +61,10 @@ sources:
       locator: "§§2–5 (razor variables, detector, data, and reconstruction); §§6–8 (selections, backgrounds, and systematic uncertainties); §§9–10 and Figs. 7–8 (likelihood and model limits); §11 summary."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Setup

@@ -26,6 +26,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
   - title: 'David Tong, TASI Lectures on Solitons, Lecture 3: Vortices'
@@ -72,7 +77,7 @@ The gauge transformations used to put an end trace in canonical exterior gauge h
 
 [F3] [[thm-qftx-critical-vortex-global-energy-minimum]]: every smooth finite-energy transverse boundary-sector pair of winding $n$ has energy at least $T_n=2\pi\xi|n|$, and the pair in [F2] attains this bound.
 
-[F4] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]: an integrable nonnegative density on $\mathbb R^2\times[0,L]$ has measurable slice integrals whose integral equals the total integral.
+[F4] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]]: an integrable nonnegative density on $\mathbb R^2\times[0,L]$ has measurable slice integrals whose integral equals the total integral.
 
 [F5] [[thm-general-stokes-theorem]]: the integral of $d\mathcal A$ over a smooth oriented disk or side cylinder equals the oriented boundary integral of $\mathcal A$.
 

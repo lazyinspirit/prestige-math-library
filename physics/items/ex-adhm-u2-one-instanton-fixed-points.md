@@ -26,6 +26,10 @@ sources:
   references: []
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 proof_strategy: direct
 ---
 
@@ -42,18 +46,18 @@ $$E_1=\epsilon_1\epsilon_2(a_2-a_1)(\epsilon_1+\epsilon_2+a_1-a_2),\qquad E_2=\e
 The theorem defines $Z^{\mathrm{fp}}_2(q)=\sum_{k\geq0}q^k\sum_{|\vec Y|=k}E_{\vec Y}^{-1}$ using these tangent Euler products. At total size one, its coefficient is $E_1^{-1}+E_2^{-1}$.
 
 The diagram places the one box in either framing color. Each square is a one-dimensional weight space of $V$, and the $Y_\alpha$ labels identify the framing color.
-~~~tikz
-\begin{tikzpicture}[x=0.75cm,y=0.75cm]
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=1.1cm]
   \draw[fill=blue!15] (0,0) rectangle (1,1);
-  \draw (0,0) grid (1,1);
+  \draw[step=1.1cm] (0,0) grid (1,1);
   \node[below] at (0.5,0) {$Y_1$};
-  \node[below] at (2,0) {$Y_2=\varnothing$};
+  \node[below] at (2,0) {$Y_2=\emptyset$};
   \draw[fill=orange!20] (4,0) rectangle (5,1);
-  \draw (4,0) grid (5,1);
+  \draw[step=1.1cm] (4,0) grid (5,1);
   \node[below] at (4.5,0) {$Y_2$};
-  \node[below] at (6,0) {$Y_1=\varnothing$};
+  \node[below] at (6,0) {$Y_1=\emptyset$};
 \end{tikzpicture}
-~~~
+```
 
 ## Example references
 
@@ -62,7 +66,7 @@ The diagram places the one box in either framing color. Each square is a one-dim
 ## Facts & Assumptions
 **Given:** Full AC, $N=2$, $k=1$, $V=\mathbb C$, $W=\mathbb C^2$, $\zeta>0$, the displayed action and algebraically independent formal torus weights.
 
-[A1] [[def-axiom-of-choice]]: full AC is required by the theorem supplier’s stable-quotient and fixed-scheme arguments that yield the fixed-point and tangent results; this example’s finite character calculation uses no additional choices.
+[A1] [[def-axiom-of-choice]]: full AC is assumed and used in the theorem supplier’s stable-quotient and fixed-scheme arguments that yield the fixed-point and tangent results; no logical necessity or optimality of this axiom is asserted; this example’s finite character calculation uses no additional choices.
 
 [F1] [[def-qftx-adhm-linear-data-stability-and-regularity]]: for $N=2$, the raw ADHM maps, equation, word stability, and dual-framing torus action have the conventions displayed in the Example.
 

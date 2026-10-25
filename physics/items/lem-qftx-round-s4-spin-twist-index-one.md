@@ -33,7 +33,14 @@ proof_strategy: "direct"
 axiom_use: "Full AC is inherited through the pinned compact elliptic/Hodge Green
   and Chern–Weil supplier interfaces; no Atiyah–Singer theorem or physical
   premise is used."
-provenance: { "statement": "ai-altered", "proof": "ai-generated" }
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   {
     "references":

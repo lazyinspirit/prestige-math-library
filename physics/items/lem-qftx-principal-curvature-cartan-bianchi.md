@@ -69,6 +69,10 @@ sources:
       locator: "Chapter 5 §5.4, printed pp. 92–95, and Chapter 6 §6.1, printed pp. 100–101: connection forms, local transition law, curvature type, and local Cartan formula."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -135,6 +139,8 @@ where $D_{A_i}\eta:=d\eta+[A_i\wedge\eta]$. The transition equations concern cha
 The following diagram records the local gauge-covariance identity. Both horizontal spaces are forms on the same overlap $U_i\cap U_j$; the top arrow changes local section by $g_{ij}$, each vertical arrow forms the Cartan curvature, and the bottom arrow applies the adjoint action. Steps 1.3 and 2.2 prove commutativity; the proof does not rely on the diagram.
 
 ```tikzcd
-\Omega^1(U_{ij},\mathfrak g) \arrow[r,"A\mapsto \operatorname{Ad}_{g_{ij}^{-1}}A+\theta_L(g_{ij})"] \arrow[d,"A\mapsto dA+\tfrac12[A\wedge A]"'] & \Omega^1(U_{ij},\mathfrak g) \arrow[d,"A\mapsto dA+\tfrac12[A\wedge A]"] \\
-\Omega^2(U_{ij},\mathfrak g) \arrow[r,"\operatorname{Ad}_{g_{ij}^{-1}}"'] & \Omega^2(U_{ij},\mathfrak g)
+\begin{tikzcd}[column sep=14em, row sep=6em]
+\Omega^1(U_{ij},\mathfrak g) \arrow[r,"{A\mapsto \mathrm{Ad}_{g_{ij}^{-1}}A+\theta_L(g_{ij})}"] \arrow[d,"{A\mapsto dA+\frac{1}{2}[A\wedge A]}"'] & \Omega^1(U_{ij},\mathfrak g) \arrow[d,"{A\mapsto dA+\frac{1}{2}[A\wedge A]}"] \\
+\Omega^2(U_{ij},\mathfrak g) \arrow[r,"{\mathrm{Ad}_{g_{ij}^{-1}}}"'] & \Omega^2(U_{ij},\mathfrak g)
+\end{tikzcd}
 ```

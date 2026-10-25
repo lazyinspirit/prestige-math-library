@@ -1,7 +1,7 @@
 ---
 id: pthm-qftx-n1-f-term-potential
 kind: physics-theorem
-title: Kähler-metric F-term scalar potential in the rigid N=1 model
+title: Kähler-metric F-term scalar potential in the rigid $N=1$ model
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -30,11 +30,15 @@ sources:
       locator: "§7.1, printed pp. 43–46, equations (7.1)–(7.25): the general Kähler metric, auxiliary-field equation, and inverse-metric scalar potential."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
 
-Use the rigid N=1 Kähler sigma-model action with scalar coordinates $z=(z^1,\ldots,z^n)\in U\subseteq\mathbb C^n$, smooth real Kähler potential $K$, positive-definite Hermitian metric $g_{i\bar j}=\partial_i\partial_{\bar j}K$, holomorphic superpotential $W$, and complex algebraic auxiliary fields $F^i$. Use the ordinary complex bosonic sector of that postulate: all positive-degree coefficient-algebra components and fermions are set to zero, and the full formal even auxiliary coefficient is restricted to the complex field $F^i$. This restriction is for the potential calculation and does not assert supersymmetry closure on the restricted slice. With spacetime derivatives set to zero, write $W_i=\partial_iW(z)$ and $\bar W_{\bar j}=\partial_{\bar j}\overline{W(z)}$. The auxiliary Lagrangian is
+Use the rigid $N=1$ Kähler sigma-model action with scalar coordinates $z=(z^1,\ldots,z^n)\in U\subseteq\mathbb C^n$, smooth real Kähler potential $K$, positive-definite Hermitian metric $g_{i\bar j}=\partial_i\partial_{\bar j}K$, holomorphic superpotential $W$, and complex algebraic auxiliary fields $F^i$. Use the ordinary complex bosonic sector of that postulate: all positive-degree coefficient-algebra components and fermions are set to zero, and the full formal even auxiliary coefficient is restricted to the complex field $F^i$. This restriction is for the potential calculation and does not assert supersymmetry closure on the restricted slice. With spacetime derivatives set to zero, write $W_i=\partial_iW(z)$ and $\bar W_{\bar j}=\partial_{\bar j}\overline{W(z)}$. The auxiliary Lagrangian is
 
 $$\mathcal L_F=g_{i\bar j}F^i\bar F^{\bar j}+F^iW_i+\bar F^{\bar j}\bar W_{\bar j}.$$
 

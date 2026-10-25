@@ -58,6 +58,10 @@ sources:
       locator: "§3.1, printed pp. 17–19: framed sheaves and the locally-free ASD locus; it does not prove the CP3 twistor monad."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

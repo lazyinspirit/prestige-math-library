@@ -49,6 +49,10 @@ sources:
       locator: "Chapter 6 §6.1, printed pp. 100–101: local curvature formula and bracket convention; the finite matrix/operator calculations are proved locally."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

@@ -1,7 +1,7 @@
 ---
 id: post-qftx-n2-pure-su2-ultraviolet-model
 kind: postulate
-title: Independent pure N=2 SU(2) ultraviolet vector-multiplet datum
+title: Independent pure $N=2$ SU(2) ultraviolet vector-multiplet datum
 status: draft
 origin: session
 domain: physics
@@ -39,7 +39,7 @@ verification:
 
 ## Postulate
 
-Adopt independently a rigid four-dimensional $\mathcal N=2$ pure Yang–Mills model on oriented and time-oriented $M=\mathbb R^{1,3}$, $\eta=\operatorname{diag}(-1,1,1,1)$, with increasing $x^0$ time orientation and natural units $c=\hbar=1$. The global group is $SU(2)$, with one supplied smooth right principal bundle $P\to M$ and smooth equivariant local trivializations. The connection and its curvature are $A$ and $F_A=dA+\tfrac12[A\wedge A]$, in the right-action convention of the Yang–Mills model supplier. Use anti-Hermitian $T_a=-i\sigma_a/2$ and $\kappa(X,Y)=-2\operatorname{tr}_{\mathbf2}(XY)$; let $\kappa_{\mathbb C}$ be its complex-bilinear extension and $\kappa_H(\bar X,Y)=\kappa_{\mathbb C}(\bar X,Y)$. Fix $g>0$ dimensionless and theta angle zero. A bundle sector means its smooth equivariant isomorphism class over $M$; only the supplied sector is used.
+Adopt independently a rigid four-dimensional $\mathcal N=2$ pure Yang–Mills model on oriented and time-oriented $M=\mathbb R^{1,3}$, $\eta=\operatorname{diag}(-1,1,1,1)$, with increasing $x^0$ time orientation and natural units $c=\hbar=1$. The global group is $SU(2)$, with one supplied smooth right principal bundle $P\to M$ and smooth equivariant local trivializations. The connection and its curvature are $A$ and $F_A=dA+\tfrac12[A\wedge A]$, in the right-action convention of the Yang–Mills model supplier. Use anti-Hermitian $T_a=-i\sigma_a/2$ and $\kappa(X,Y)=-2\operatorname{tr}_{\mathbf2}(XY)$; let $\kappa_{\mathbb C}$ be its complex-bilinear extension and $\kappa_H(\bar X,Y)=\kappa_{\mathbb C}(\bar X,Y)$. Write $g=g_{\mathrm{YM}}>0$ for the supplied vector/connection normalization, so $A_\mu=-igB_\mu$ for its canonical Hermitian vector component $B_\mu$. Every microscopic prepotential exponential, curvature/component dictionary and $1/g^2$ action coefficient below uses this same fixed dimensionless coupling. Fix theta angle zero. A bundle sector means its smooth equivariant isomorphism class over $M$; only the supplied sector is used.
 
 The microscopic matter-hypermultiplet index set is empty. The vector multiplet comprises the connection, one complex adjoint scalar $\phi$, and two adjoint left-Weyl fermions. In $\mathcal N=1$ packaging it is a real adjoint vector superfield $V$ and an adjoint chiral superfield $\Phi$, not a matter hypermultiplet. Use the supplied superspace derivatives, chirality, ordered Berezin measures and vector-supergauge convention, including
 

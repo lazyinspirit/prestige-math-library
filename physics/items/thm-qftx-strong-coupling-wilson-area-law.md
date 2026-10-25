@@ -56,6 +56,10 @@ sources:
       locator: "§§4.1–4.2.2, printed pp. 59–64, for two-dimensional plaquette factorization and exact rectangular Wilson-loop area dependence; the finite free-boundary SU(2) statement is rederived locally."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 proof_strategy: direct
 ---
 
@@ -131,7 +135,7 @@ The parameter $\beta$ and the lattice string tension $\sigma_{\rm lat}$ are dime
 
 [F7] The finite link and plaquette measures are product probabilities on their finite product sigma-algebras; the product formula supplies their rectangle values. [[def-probability-measure]] [[def-product-sigma-algebra-and-finite-product-sigma-algebras]] [[def-product-measure-on-sigma-finite-spaces]] [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]
 
-[F8] An integrand bounded by $1$ on the finite product probability space is in $L^1$, and Fubini applies to its product-coordinate sections. [[def-tdmath-measure-integral]] [[def-integrable-real-and-complex-functions-and-their-integrals]] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]
+[F8] An integrand bounded by $1$ on the finite product probability space is in $L^1$, and Fubini applies to its product-coordinate sections. [[def-tdmath-measure-integral]] [[def-integrable-real-and-complex-functions-and-their-integrals]] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]]
 
 ## Proof
 

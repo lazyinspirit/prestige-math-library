@@ -31,6 +31,10 @@ sources:
     locator: '§4.6.2, printed pp. 106–108: the Meissner-effect flux-tube interpretation; the discussion uses a different N=2 SQCD model and explicitly says the bulk nontrivial solution is not known analytically.'
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition
@@ -45,7 +49,8 @@ $D_i\widetilde M=(\partial_i+i\widetilde A_i)\widetilde M$.
 
 A **finite-energy dual vortex profile of winding $n$** is a smooth static
 configuration $(A_D,M,\widetilde M,\widetilde A_1,\widetilde A_2)$ on
-$\mathbb R^2$ for which the transverse energy
+$\mathbb R^2$ with $|A_D(x)|<r$ at every point, where $|A_D|<r$ is the
+preceding model's open holomorphic patch, for which the transverse energy
 
 $$\sigma=\int_{\mathbb R^2}\left(\frac{\widetilde F_{12}^2}{2g_D^2}+g_D^{-2}|\partial_i A_D|^2+|D_iM|^2+|D_i\widetilde M|^2+V_\mu-V_{\mathrm{vac}}\right)\,d^2x$$
 
@@ -62,6 +67,8 @@ limiting flux exists. The profile is a translation-invariant
 tube along $x^3$; its tension is the transverse integral $\sigma$. This
 Definition includes no assertion that such a configuration exists or is a
 stationary solution of the field equations.
+
+The patch restriction makes $u(A_D)$ and $V_\mu$ defined throughout the profile. For physical use, retain the preceding model's supplied $\Lambda_{\mathrm{EFT}}>0$, $0<\varepsilon<1$, background domain $\mathcal U_{\mathrm{EFT}}$, and application excitation bound $E_{\mathrm{app}}\le\varepsilon\Lambda_{\mathrm{EFT}}$, with $v<\varepsilon\Lambda_{\mathrm{EFT}}$. Background values must lie in that supplied domain. Finite transverse energy alone establishes none of these applicability qualifications or a microscopic error bound. These inputs impose no hard Fourier-support requirement on this classical profile class. A separately imposed hard cutoff on the variational class must specify its constraints and check the admissibility of any profiles or interpolation paths used in a consuming result.
 
 In the adopted electric/magnetic frame, the **original electric flux** of
 this sector means the dual magnetic flux
@@ -80,4 +87,4 @@ $[\sigma]=\mathrm{mass}^2$.
 
 Dual U(1) monopole-Higgs effective data: [[def-qftx-n2-monopole-local-dual-higgs-model]].
 
-Pure N=2 SU(2) electric/magnetic frame: [[def-qftx-n2-coulomb-branch-data]].
+Pure $N=2$ SU(2) electric/magnetic frame: [[def-qftx-n2-coulomb-branch-data]].

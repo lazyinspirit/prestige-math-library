@@ -38,6 +38,10 @@ sources:
       locator: "§3.2, printed pp. 14–15, nonlinear scalar and Goldstone coordinates; the kinetic and coupling calculation below is derived directly."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Example
 
@@ -91,7 +95,7 @@ These are conditional tree-level coefficient predictions of this selected local 
 
 ## Verification
 
-**Proof technique:** Evaluate the selected operator at $U=I$, integrate by parts, and normalize the scalar coordinate locally at the reference point.
+**Proof technique:** Evaluate the selected operator at the identity U = I, integrate by parts, and normalize the scalar coordinate locally at the reference point.
 
 **Given:** [F1]–[F5] and [A1]–[A3].
 

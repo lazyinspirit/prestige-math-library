@@ -31,6 +31,10 @@ sources:
       locator: "§§2.1–2.4, printed pp. 25–38: the local BRST descent, representation-dependent polynomial, and counterterm changes between consistent and covariant representatives."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

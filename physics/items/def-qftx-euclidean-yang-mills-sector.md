@@ -43,6 +43,10 @@ sources:
     locator: '§§1–2, printed pp. 3–9: finite-action Euclidean definition, SU(N) trace and curvature conventions, R^4 compactification, winding number, and self-dual action bound.'
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

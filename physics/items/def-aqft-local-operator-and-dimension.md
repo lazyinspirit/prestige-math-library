@@ -25,6 +25,10 @@ sources:
       url: "https://arxiv.org/pdf/hep-ph/0512222"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Definition
 

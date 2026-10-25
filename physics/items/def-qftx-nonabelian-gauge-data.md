@@ -42,6 +42,10 @@ sources:
       locator: "Chapter 1, §1.4 and §1.6, printed pp. 8–15: smooth principal bundles and associated representation bundles."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

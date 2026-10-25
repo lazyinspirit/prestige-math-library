@@ -29,6 +29,10 @@ sources:
       locator: "§§2.2–2.3 and 6.4.2, printed pp. 23–35 and 193–194, for the unitary superalgebra representation and index context."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

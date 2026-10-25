@@ -30,6 +30,10 @@ sources:
     locator: §§3.1–3.2, printedpp70–73, critical energy and Bogomolny comparison; generic nonlinear potential estimates and cylinder asymptotics derived locally.
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

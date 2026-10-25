@@ -37,6 +37,10 @@ sources:
       locator: "§5.2, printed pp. 30–31, equations (5.19)–(5.25): representation-valued chiral fields and covariant derivatives."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

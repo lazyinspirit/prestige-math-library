@@ -28,11 +28,15 @@ sources:
       locator: §§4.4, 4.7 and 4.9; the explicit conversion from the local ordered coefficient-extraction algebra is reconstructed here and is not an identification of raw source measures by notation alone.
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition
 
-Use the smooth finite Grassmann-valued chiral fields, conjugate-linear anti-automorphism, left derivatives and ordered coefficient-extraction integrals of Four-dimensional N=1 superspace Grassmann algebra and Berezin integration and Four-dimensional N=1 chiral superfield on flat superspace. Write $I_D(U)$ for the coefficient of $\theta^1\theta^2\bar\theta^{\dot1}\bar\theta^{\dot2}$ and $I_F(Y)$ for the coefficient of $\theta^1\theta^2$ in a chiral field. These raw mathematical integrals are unchanged. Define the physical action brackets by
+Use the smooth finite Grassmann-valued chiral fields, conjugate-linear anti-automorphism, left derivatives and ordered coefficient-extraction integrals of Four-dimensional $N=1$ superspace Grassmann algebra and Berezin integration and Four-dimensional $N=1$ chiral superfield on flat superspace. Write $I_D(U)$ for the coefficient of $\theta^1\theta^2\bar\theta^{\dot1}\bar\theta^{\dot2}$ and $I_F(Y)$ for the coefficient of $\theta^1\theta^2$ in a chiral field. These raw mathematical integrals are unchanged. Define the physical action brackets by
 
 $$[U]_D:=-\frac14 I_D(U),\qquad [Y]_F:=\frac12 I_F(Y).$$
 

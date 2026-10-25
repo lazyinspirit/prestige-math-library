@@ -1,7 +1,7 @@
 ---
 id: post-qftx-n1-wess-zumino-model
 kind: postulate
-title: Rigid four-dimensional N=1 Wess–Zumino sigma-model action
+title: Rigid four-dimensional $N=1$ Wess–Zumino sigma-model action
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -34,6 +34,10 @@ sources:
       locator: "§4.3 and §7.1, printed pp. 21–22 and 43–46, especially equations (7.4)–(7.9): superspace total-derivative invariance, the finite nilpotent Taylor expansions, and Kähler sigma-model actions."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Postulate

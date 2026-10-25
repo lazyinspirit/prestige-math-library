@@ -43,6 +43,10 @@ sources:
       locator: Section 4, the fixed-locus inverse and Euler-class localization formula.
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

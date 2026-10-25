@@ -26,6 +26,10 @@ sources:
       locator: "§6, printed pp. 10–11, equations (8)–(9): source convention compared with the raw moment-map convention."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

@@ -44,11 +44,15 @@ sources:
       locator: "§6.3.1, printed pp. 38–39: the general O’Raifeartaigh mechanism from incompatible F-term equations."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
 
-In the classical rigid N=1 Wess–Zumino model with three chiral scalar coordinates $(\phi_1,\phi_2,\phi_3)\in\mathbb C^3$, canonical Kähler metric, no gauge D-term, and natural units $\hbar=c=1$, adopt the holomorphic superpotential
+In the classical rigid $N=1$ Wess–Zumino model with three chiral scalar coordinates $(\phi_1,\phi_2,\phi_3)\in\mathbb C^3$, canonical Kähler metric, no gauge D-term, and natural units $\hbar=c=1$, adopt the holomorphic superpotential
 
 $$W(\Phi_1,\Phi_2,\Phi_3)=-k\Phi_1+m\Phi_2\Phi_3+\frac y2\Phi_1\Phi_3^2,$$
 
@@ -76,7 +80,7 @@ and $\phi_2=-y\phi_1\phi_3/m$. In both regimes every minimizing field value has 
 
 [Adel Bilal, *Introduction to Supersymmetry*, §6.3.1](https://arxiv.org/pdf/hep-th/0101055).
 
-Adopted rigid N=1 Wess–Zumino sigma-model action and field-domain convention: [[post-qftx-n1-wess-zumino-model]].
+Adopted rigid $N=1$ Wess–Zumino sigma-model action and field-domain convention: [[post-qftx-n1-wess-zumino-model]].
 
 Canonical F-term potential and auxiliary-field equation: [[pthm-qftx-n1-f-term-potential]].
 
@@ -96,7 +100,7 @@ The ordered-real-field fact $2>0$ used to distinguish the two square roots: [[th
 
 **Given:** The canonical three-field model and its classical pointwise zero-derivative potential in the Statement; all field values range over $\mathbb C^3$, and $k,m\ne0$.
 
-[A1] [[post-qftx-n1-wess-zumino-model]]: the adopted rigid N=1 model has a holomorphic superpotential, a canonical Kähler special case, engineering dimensions $[\phi_i]=M$, $[W]=M^3$, smooth compactly supported spacetime component fields, and the displayed algebraic auxiliary Lagrangian. Its explicit component conversion gives the complex bosonic auxiliary Lagrangian with $F_{\mathrm{raw}}=2F$, physical D bracket $-I_D/4$, and physical F bracket $I_F/2$. Its full formal even auxiliary coefficient is unrestricted before taking this ordinary complex sector. This proof uses the resulting complex scalar potential, without ordering nilpotent coefficients or inferring a quantum measure.
+[A1] [[post-qftx-n1-wess-zumino-model]]: the adopted rigid $N=1$ model has a holomorphic superpotential, a canonical Kähler special case, engineering dimensions $[\phi_i]=M$, $[W]=M^3$, smooth compactly supported spacetime component fields, and the displayed algebraic auxiliary Lagrangian. Its explicit component conversion gives the complex bosonic auxiliary Lagrangian with $F_{\mathrm{raw}}=2F$, physical D bracket $-I_D/4$, and physical F bracket $I_F/2$. Its full formal even auxiliary coefficient is unrestricted before taking this ordinary complex sector. This proof uses the resulting complex scalar potential, without ordering nilpotent coefficients or inferring a quantum measure.
 
 [F1] [[pthm-qftx-n1-f-term-potential]]: for the canonical Kähler metric, $V_F=\sum_i|W_i|^2$, and the algebraic auxiliary fields satisfy $F^i=-\overline{W_i}$.
 

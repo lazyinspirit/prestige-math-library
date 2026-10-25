@@ -17,6 +17,11 @@ physical_scope: Finite-dimensional high-coordinate integration at a declared Wil
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: C. P. Burgess, Introduction to Effective Field Theory

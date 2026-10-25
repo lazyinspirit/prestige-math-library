@@ -28,6 +28,10 @@ sources:
       locator: "§§4.1–4.3, PDF pp. 17–22, especially equations (4.6), (4.14)–(4.15), and (4.19)–(4.21): explicit junction tensors and Ising F-symbols."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

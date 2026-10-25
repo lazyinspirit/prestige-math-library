@@ -1,7 +1,7 @@
 ---
 id: pthm-qftx-n2-bps-saturation-kernel-equivalence
 kind: physics-theorem
-title: N=2 central-charge saturation is equivalent to annihilation by the null supercharge pair
+title: $N=2$ central-charge saturation is equivalent to annihilation by the null supercharge pair
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -33,11 +33,15 @@ sources:
       locator: "§2.4.2, printed pp. 40–41 (PDF pp. 31–32): the massive N=2 oscillator combinations, their anticommutators, the BPS inequality, and saturation."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
 
-Assume the Axiom of Countable Choice. Use the four-dimensional rigid N=2 super-Poincare convention with metric $\eta=\operatorname{diag}(-1,1,1,1)$, $\epsilon_{12}=1$, and natural units $\hbar=c=1$. Let $\mathcal K\ne\{0\}$ be a positive Hilbert rest-fiber representation with $P^\mu=(M,0,0,0)$, $M>0$, scalar central charges $Z^{12}=zI$ and $Z^{21}=-zI$, and a common dense invariant domain $\mathcal D$ on which the supercharges, their actual Hilbert adjoints, and every product below are defined. Thus $P_0=-M$, each supercharge has mass dimension one-half, and $M,z$ have mass dimension one. If $z\ne0$, set $\omega=z/|z|$; if $z=0$, set $\omega=1$. Then $|\omega|=1$ and $\overline{\omega} z=|z|$ by the central-charge theorem. On $\mathcal D$ put
+Assume the Axiom of Countable Choice. Use the four-dimensional rigid $N=2$ super-Poincare convention with metric $\eta=\operatorname{diag}(-1,1,1,1)$, $\epsilon_{12}=1$, and natural units $\hbar=c=1$. Let $\mathcal K\ne\{0\}$ be a positive Hilbert rest-fiber representation with $P^\mu=(M,0,0,0)$, $M>0$, scalar central charges $Z^{12}=zI$ and $Z^{21}=-zI$, and a common dense invariant domain $\mathcal D$ on which the supercharges, their actual Hilbert adjoints, and every product below are defined. Thus $P_0=-M$, each supercharge has mass dimension one-half, and $M,z$ have mass dimension one. If $z\ne0$, set $\omega=z/|z|$; if $z=0$, set $\omega=1$. Then $|\omega|=1$ and $\overline{\omega} z=|z|$ by the central-charge theorem. On $\mathcal D$ put
 
 $$q=Q^1_1,\qquad r=Q^2_2,\qquad A=q-\omega r^*,\qquad A^\sharp=q^*-\overline{\omega}r.$$
 

@@ -39,6 +39,10 @@ sources:
       locator: "Complete 16-page paper retrieved. §§I–V, printed pp. 458–472; especially §IV.B–C, pp. 466–468, for Sobolev local gauge sections and §V, pp. 468–471, for the inverse-function argument and its free-action hypotheses."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

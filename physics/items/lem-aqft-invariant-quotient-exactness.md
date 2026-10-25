@@ -29,6 +29,10 @@ sources:
       url: "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf"
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Statement
 

@@ -47,6 +47,10 @@ sources:
     locator: 'Lecture 1, §§1.1–1.1.2, printed pp. 6–10, equations (1.1)–(1.11): action and charge conventions, Bianchi consequence, and the charge-one SU(2) connection with ''t Hooft symbols.'
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -127,6 +131,8 @@ Let $*_{g_X}$ be the Hodge star characterized on two-forms by $\alpha\wedge *_{g
 ## Remarks
 The square records the change of local connection form across the overlap and its induced curvature change. Step 2.1 verifies the top arrow, and step 3.1 verifies the curvature calculation; the proof does not rely on the diagram.
 ```tikzcd
-\Omega^1(U_N\cap U_S,\mathfrak{su}(2)) \arrow[r,"A\mapsto\operatorname{Ad}_uA+u\,d(u^{-1})"] \arrow[d,"A\mapsto dA+\tfrac12[A\wedge A]"'] & \Omega^1(U_N\cap U_S,\mathfrak{su}(2)) \arrow[d,"A\mapsto dA+\tfrac12[A\wedge A]"] \\
-\Omega^2(U_N\cap U_S,\mathfrak{su}(2)) \arrow[r,"F\mapsto\operatorname{Ad}_uF"'] & \Omega^2(U_N\cap U_S,\mathfrak{su}(2))
+\begin{tikzcd}[column sep=14em, row sep=6em]
+\Omega^1(U_N\cap U_S,\mathfrak{su}(2)) \arrow[r,"{A\mapsto\mathrm{Ad}_uA+u\,d(u^{-1})}"] \arrow[d,"{A\mapsto dA+\frac{1}{2}[A\wedge A]}"'] & \Omega^1(U_N\cap U_S,\mathfrak{su}(2)) \arrow[d,"{A\mapsto dA+\frac{1}{2}[A\wedge A]}"] \\
+\Omega^2(U_N\cap U_S,\mathfrak{su}(2)) \arrow[r,"{F\mapsto\mathrm{Ad}_uF}"'] & \Omega^2(U_N\cap U_S,\mathfrak{su}(2))
+\end{tikzcd}
 ```

@@ -29,6 +29,10 @@ sources:
       locator: "Exposé 17, pp. 8–10: finite local presentations, compact-convergence quotient topologies and Čech cochains."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 page: qftx-gaga-compact-coherent-finiteness
 category: quantum-field-theory-mathematics
 ---

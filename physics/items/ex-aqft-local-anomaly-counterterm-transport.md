@@ -35,6 +35,10 @@ sources:
       locator: "§3.5 for background coupling and the counterterm-sensitive anomaly representative."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

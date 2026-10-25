@@ -26,6 +26,10 @@ sources:
       locator: "§§3.2 and 5.2: the closed irreducible Yang–Mills gauge algebra, structure-constant Jacobi identity, and ghost transformation."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

@@ -61,6 +61,10 @@ sources:
       locator: "§§3.1–3.3: ADHM equations, FI levels and framing torus conventions."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

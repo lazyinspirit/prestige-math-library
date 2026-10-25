@@ -20,6 +20,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "M. F. Atiyah and I. M. Singer, The Index of Elliptic Operators: I, §9,

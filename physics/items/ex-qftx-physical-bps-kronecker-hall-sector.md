@@ -44,6 +44,10 @@ sources:
       locator: "Introduction equation (1.1) and Section 2.2 equations (2.16)–(2.18): the physical second-helicity index and the distinction between that index and a formal Hall coefficient absent a comparison."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -54,8 +58,8 @@ Use the pure-SU(2) physical charge datum with monopole label $\gamma_m=(0,1)$ an
 \begin{tikzpicture}[>=stealth,baseline=(current bounding box.center)]
 \node (m) at (0,0) {m};
 \node (d) at (2,0) {d};
-\draw[->] (d) to[bend left=18] node[above] {a} (m);
-\draw[->] (d) to[bend right=18] node[below] {b} (m);
+\draw[->] (d) to[bend left=18] node[below] {a} (m);
+\draw[->] (d) to[bend right=18] node[above] {b} (m);
 \end{tikzpicture}
 ```
 

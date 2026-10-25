@@ -15,6 +15,11 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Graeme Segal, Equivariant K-theory, Publications Mathématiques de l'IHÉS

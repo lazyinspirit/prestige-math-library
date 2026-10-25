@@ -37,6 +37,10 @@ sources:
       locator: "§5.4, Definition 5.4.1, Remark 5.4.5 and Proposition 5.4.6, printed pp. 91–94 (PDF pp. 95–98): local product connection forms and partition-of-unity existence. The compact SU(N) specialization and explicit choice assumptions are proved locally."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Statement
 

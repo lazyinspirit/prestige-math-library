@@ -37,6 +37,10 @@ sources:
       url: "https://arxiv.org/pdf/2003.00955"
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -69,7 +73,7 @@ In dimension zero the corresponding assertion is the finite-dimensional limit $K
 
 [F2] Smooth subordinate partitions of unity exist; compactness reduces the chosen chart cover to a finite one. [[thm-smooth-partitions-of-unity-exist-on-manifolds]]
 
-[F3] Absolutely integrable kernels permit Fubini and dominated convergence. [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], [[thm-dominated-convergence]]
+[F3] Absolutely integrable kernels permit Fubini and dominated convergence. [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]], [[thm-dominated-convergence]]
 
 ## Proof
 

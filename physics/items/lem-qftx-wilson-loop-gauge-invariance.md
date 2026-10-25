@@ -30,6 +30,10 @@ sources:
       locator: "§3.5.5, printed pp. 48–51, for traced closed lattice holonomy and gauge invariance."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 proof_strategy: direct
 ---
 

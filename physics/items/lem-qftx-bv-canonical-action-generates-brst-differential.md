@@ -26,6 +26,10 @@ sources:
       locator: "§§3.1–3.2 and 4.2: graded coordinates, odd cotangent variables, and the degree-one odd Poisson bracket used for the finite-dimensional algebraic calculation."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

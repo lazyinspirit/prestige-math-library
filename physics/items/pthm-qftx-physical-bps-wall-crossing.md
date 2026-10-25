@@ -39,6 +39,10 @@ sources:
       locator: "Section 4 equations (4.3)–(4.9) and Section 6 equations (6.19)–(6.28): source normalization of the charge-period central charge and alignment walls."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

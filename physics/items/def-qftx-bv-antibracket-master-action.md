@@ -28,6 +28,10 @@ sources:
       locator: "§§3.1–3.2 and 4.1–4.4, PDF pp. 11–26: graded coordinates, the odd cotangent bundle, the degree-one odd Poisson/Gerstenhaber bracket, and its finite-dimensional domain."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

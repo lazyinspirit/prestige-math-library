@@ -31,6 +31,10 @@ sources:
     locator: '§5.3, printed pp. 20–21: weakly coupled dual monopole description at one singularity.'
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -38,7 +42,7 @@ verification:
 In the local dual $U(1)_D$ model, let $u(A_D)$ be holomorphic near
 $A_D=0$, let $c=u'(0)\ne0$, and choose a neighborhood small enough that
 $u'(A_D)\ne0$ throughout. Choose a nonzero small perturbation
-$\mu$ for which $(|\mu c|/\sqrt2)^{1/2}$ is below the effective cutoff.
+$\mu$ for which $(|\mu c|/\sqrt2)^{1/2}<\varepsilon\Lambda_{\mathrm{EFT}}$, using the supplied cutoff, margin, background-validity domain and application excitation bound of the local model. These are physical applicability inputs, not a microscopic error estimate.
 The supersymmetric vacuum equations have the gauge orbit represented by
 
 $$A_D=0,\qquad M=v>0,\qquad \widetilde M=-\frac{\mu c}{\sqrt2v},\qquad v=\left(\frac{|\mu c|}{\sqrt2}\right)^{1/2}.$$
@@ -68,7 +72,7 @@ D map, kinetic normalization, and cutoff regime in the Example.
 
 [F2] [[def-qftx-susy-vacuum-moduli-data]] supplies the convention of taking compact-group orbits of simultaneous F/D zeros. Its global polynomial-superpotential model is not assumed to include this local holomorphic model; the latter's potential and vacuum equations are supplied directly by [F1].
 
-[A1] Assume $\mu\ne0$, $c=u'(0)\ne0$, $u'(A_D)\ne0$ throughout the selected neighborhood, and the induced scale is below the effective cutoff.
+[A1] Assume $\mu\ne0$, $c=u'(0)\ne0$, $u'(A_D)\ne0$ throughout the selected neighborhood, and the induced scale obeys $v<\varepsilon\Lambda_{\mathrm{EFT}}$ with the supplied local-model applicability inputs.
 
 ## Verification
 

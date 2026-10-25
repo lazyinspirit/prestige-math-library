@@ -10,9 +10,16 @@ dependency_level: 6
 deps: ["thm-aqft-finite-two-group-gauging-gluing"]
 dependency_roles: {"thm-aqft-finite-two-group-gauging-gluing": "mathematical-premise"}
 proof_strategy: "direct"
-provenance: {"statement": "ai-generated", "proof": "ai-generated"}
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 sources: {"references": []}
 generation: {"role": "example"}
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

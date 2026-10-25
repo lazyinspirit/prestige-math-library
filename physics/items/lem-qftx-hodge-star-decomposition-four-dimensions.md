@@ -21,6 +21,10 @@ sources:
       locator: "Lecture 1, §1.1.1, equations (1.6)–(1.8), printed pp. 8–9: the four-dimensional self-dual and anti-self-dual decomposition used in square completion."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

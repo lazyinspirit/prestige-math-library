@@ -39,6 +39,10 @@ sources:
       locator: "§4.L, printed pp. 487–490; suspension and Steenrod context."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Statement
 

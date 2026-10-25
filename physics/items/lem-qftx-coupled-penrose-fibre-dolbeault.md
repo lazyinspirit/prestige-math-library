@@ -31,6 +31,10 @@ sources:
       locator: "§§1–3, printed pp. 43–54: the fibre O(-2) harmonic generator and the O(-1) correction equation."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

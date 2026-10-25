@@ -25,6 +25,10 @@ sources:
       locator: "Lecture 1, §1.1.2, equations (1.9)–(1.11), printed pp. 9–10: the two-gauge-patch charge-one SU(2) instanton construction."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

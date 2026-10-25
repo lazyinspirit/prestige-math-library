@@ -27,6 +27,10 @@ sources:
       locator: "§6.5.1, printed pp. 198–200: electric/magnetic field representations and the SU(Nf)L^3 anomaly calculation; the discussion calls the checks evidence, not a proof of duality."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

@@ -1,6 +1,6 @@
 ---
 page: qftx-susy-n1-superspace-and-actions
-title: N=1 Superspace and Wess–Zumino/Gauge-Matter Actions
+title: $N=1$ Superspace and Wess–Zumino/Gauge-Matter Actions
 status: draft
 library: physics
 items:

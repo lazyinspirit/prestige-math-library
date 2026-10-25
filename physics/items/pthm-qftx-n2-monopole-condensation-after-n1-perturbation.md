@@ -1,7 +1,7 @@
 ---
 id: pthm-qftx-n2-monopole-condensation-after-n1-perturbation
 kind: physics-theorem
-title: Conditional monopole Higgs vacuum after a small N=1 perturbation
+title: Conditional monopole Higgs vacuum after a small $N=1$ perturbation
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -52,17 +52,21 @@ sources:
     locator: '§4.6.2, printed pp. 106–108: the Meissner flux-tube interpretation in a different N=2 SQCD model and its explicit bulk-solution limitation.'
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 axiom_base: ZF + AC_omega for the algebraic vacuum and mass calculation; full AC for the generic nonlinear static-energy branch through its named integration/product-measure suppliers.
 ---
 
 ## Statement
 
-Use natural units $c=\hbar=1$, metric
+Use natural units in which the speed of light and reduced Planck constant are one, with metric
 $\eta=\operatorname{diag}(-1,1,1,1)$, and the local monopole patch of the
-selected pure-SU(2) N=2 source-proposed low-energy model. Let $u(A_D)$,
+selected pure-SU(2) $N=2$ source-proposed low-energy model. Let $u(A_D)$,
 $c=u'(0)\ne0$, $M$, $\widetilde M$, $g_D$, and $\mu$ be the data in the
 local dual-Higgs definition, with $\mu\ne0$ and
-$(|\mu c|/\sqrt2)^{1/2}$ well below the effective cutoff. Restrict to a
+$(|\mu c|/\sqrt2)^{1/2}<\varepsilon\Lambda_{\mathrm{EFT}}$ for the supplied cutoff and margin of that definition. Physical applicability also retains its supplied background domain and excitation bound, without an inferred microscopic error estimate. Restrict to a
 neighborhood of $A_D=0$ on which $u'(A_D)\ne0$. The supersymmetric vacuum
 equations in this patch have exactly one $U(1)_D$ gauge orbit, represented
 by
@@ -81,16 +85,27 @@ $$\lim_{L\to\infty}\frac{I_n(L)}{L}=\tau_n>0.$$
 
 This proves asymptotically linear confinement of the specified original electric flux in that classical local effective model without assuming a noncritical stationary vortex or any attained minimum. It makes no generic $O(1)$ remainder claim.
 
-For the stronger exact-remainder conclusion, make the following additional explicit
-effective-model assumption: for a fixed nonzero original electric test-charge
-sector and every sufficiently large separation $L$, the minimum-energy
-configuration in that sector is a straight, translation-invariant dual
-vortex of nonzero winding as defined here, and its endcap energy is bounded
-uniformly in $L$. If that flux-tube sector exists, its original electric
-flux is quantized and its tension is positive; the corresponding potential
-has $V(L)=\sigma L+O(1)$, where $O(1)$ denotes a term bounded uniformly as
-$L\to\infty$. This is linear confinement only in the stated local effective
-model and under the stated vortex/minimization assumption. The theorem does not assert that a generic nonlinear model has an attained vortex minimum. In the separately specified constant-metric linear truncation $u=u_m+cA_D$, assume full AC and take the actual canonical fixed-flux cylinder class defined above. The critical vortex supplier now proves existence and an absolute transverse energy minimum for **every** nonzero winding and every effective divisor of degree $|n|$, with arbitrary centres and multiplicities. Actual fixed-width full-model collars exist for any fixed smooth canonical end traces in the stated closed valid neutral disk. Hence its full static-energy infimum is $4\pi v^2|n|L+O(1)$, with an exact translation-invariant minimum for matching minimizing traces. This exact critical conclusion no longer assumes a supplied solution or endcap bound; it does not transfer BPS saturation or an $O(1)$ remainder to generic nonlinear u.
+For a separate conditional straight-tube interpretation, fix a nonzero original electric test-charge sector and, for each separation $L\ge L_0>0$, a nonempty supplied class $\mathcal B_L$ of admissible configurations with the same prescribed external-charge and endpoint data. Supply its finite classical energy map $\mathcal E_L:\mathcal B_L\to\mathbb R$ and put $V(L)=\inf_{Q\in\mathcal B_L}\mathcal E_L(Q)$. Assume that for every $L\ge L_0$ this infimum is attained by a straight tube with an admitted transverse vortex profile $P_L$ of nonzero winding, with
+
+$$V(L)=L\sigma(P_L)+e_L,\qquad |e_L|\le C_0,$$
+
+where $\sigma(P)$ is the transverse energy of the flux-tube definition and $C_0$ is independent of $L$. This is an explicit tube/minimization and endcap assumption, not an existence conclusion. Each such profile has quantized original electric flux and $\sigma(P_L)>0$. The profile may vary with $L$: these assumptions give $V(L)=\sigma_L L+O(1)$ with $\sigma_L=\sigma(P_L)>0$, and alone give neither a constant limiting slope nor a positive lower bound uniform in $L$.
+
+A positive constant slope with an $O(1)$ remainder follows under the following additional, length-reusable comparison hypothesis. Let $\mathcal S$ be a nonempty family of admitted transverse profiles in one fixed nonzero-winding sector, containing the transverse profile of such a minimizing tube for every $L\ge L_0$. Define
+
+$$\tau_{\mathcal S}=\inf_{P\in\mathcal S}\sigma(P),\qquad 0<\tau_{\mathcal S}<\infty.$$
+
+Assume there is a sequence $P_k\in\mathcal S$ with $\sigma(P_k)\to\tau_{\mathcal S}$ and a constant $C_1<\infty$ such that for every $k$ and every $L\ge L_0$ an actual competitor $Q_{k,L}\in\mathcal B_L$ satisfies
+
+$$\mathcal E_L(Q_{k,L})\le L\sigma(P_k)+C_1.$$
+
+The endpoint data defining $\mathcal B_L$ are the same for these competitors and the assumed minimizers; only the separation changes. The constants $C_0,C_1,L_0$ are independent of $k$ and $L$. These are explicit uniform endcap/comparison assumptions, not claims that arbitrary external charges admit such competitors. Then
+
+$$\tau_{\mathcal S}L-C_0\le V(L)\le\tau_{\mathcal S}L+C_1,$$
+
+so $V(L)=\tau_{\mathcal S}L+O(1)$, without requiring that any profile attain $\tau_{\mathcal S}$ or that the minimizing profiles be independent of $L$. If $\mathcal S$ lies in the preceding precise nonlinear planar class, its positive lower bound, under full AC, already gives $\tau_{\mathcal S}>0$; the uniform competitor bound remains an additional assumption. A single fixed minimizing transverse profile with uniformly reusable endcaps is a sufficient special case. None of these conditional assumptions asserts that a generic nonlinear model has an attained vortex minimum.
+
+In the separately specified constant-metric linear truncation $u=u_m+cA_D$, assume full AC and take the actual canonical fixed-flux cylinder class defined above. The critical vortex supplier now proves existence and an absolute transverse energy minimum for **every** nonzero winding and every effective divisor of degree $|n|$, with arbitrary centres and multiplicities. Actual fixed-width full-model collars exist for any fixed smooth canonical end traces in the stated closed valid neutral disk. Hence its full static-energy infimum is $4\pi v^2|n|L+O(1)$, with an exact translation-invariant minimum for matching minimizing traces. This exact critical conclusion no longer assumes a supplied solution or endcap bound; it does not transfer BPS saturation or an $O(1)$ remainder to generic nonlinear u.
 
 ## Statement references
 
@@ -102,13 +117,13 @@ model and under the stated vortex/minimization assumption. The theorem does not 
 
 ## Facts & Assumptions
 
-**Given:** The pure-SU(2) N=2 source-proposed solution, its one-monopole
+**Given:** The pure-SU(2) $N=2$ source-proposed solution, its one-monopole
 dual patch, the connection-normalized constant-metric local dual-Higgs data, the small perturbation
 regime and the distinct generic, exact-critical and explicitly additional exact-remainder boundary hypotheses in the Statement.
 
 [A1] [[post-qftx-n2-pure-su2-ultraviolet-model]]: the independently adopted pure ultraviolet SU(2) model has one vector multiplet, connection-normalized adjoint scalar, no microscopic matter hypermultiplets, and no chiral superpotential. The local charged monopole hypermultiplet is emergent infrared data.
 
-[A2] [[post-qftx-n2-seiberg-witten-effective-solution]]: the pure-SU(2) source-proposed solution uses a local $U(1)_D$ frame near $a_D=0$ with a charge-one monopole hypermultiplet and the small N=1 perturbation $\mu u(A_D)$.
+[A2] [[post-qftx-n2-seiberg-witten-effective-solution]]: the pure-SU(2) source-proposed solution uses a local $U(1)_D$ frame near $a_D=0$ with a charge-one monopole hypermultiplet and the small $N=1$ perturbation $\mu u(A_D)$.
 
 [F1] [[def-qftx-n2-monopole-local-dual-higgs-model]]: $W_\mu=\sqrt2 A_D M\widetilde M+\mu u(A_D)$, $D=g_D(|M|^2-|\widetilde M|^2)$, the scalar potential is $g_D^2|\partial_{A_D}W|^2+|\partial_MW|^2+|\partial_{\widetilde M}W|^2+D^2/2$ with positive weights, and the dual charges are $+1,-1$.
 
@@ -168,14 +183,7 @@ normalization $-m_D^2\widetilde A_{c,\mu}\widetilde A_c^{\mu}/2$
 gives $m_D^2=2g_D^2(|M|^2+|\widetilde M|^2)=4g_D^2v^2>0$.
 [F1, step 3.1, step 4.1, algebra]
 
-6.1 Under the additional vortex/minimization hypothesis in the Statement,
-[F4] gives nonzero quantized original electric flux and a tension
-$\sigma>0$. The interior of a translation-invariant tube of length $L$
-contains the same transverse profile at each longitudinal coordinate, so
-its bulk energy is $\sigma L$. The uniformly bounded endcap contribution
-therefore gives $V(L)=\sigma L+O(1)$, which is linear confinement in this
-effective model. This last conclusion is conditional: no preceding step establishes existence or minimization of the required profile. Original electric probes correspond to dual magnetic flux; the condensed original magnetic charges are dual electric charges and are screened in the linear response about the dual Higgs vacuum described by [F5]. This conclusion concerns classical effective energy, not a quantum Wilson-loop area law.
-[F3, F4, F5, given, step 5.2, algebra]
+6.1 Under the additional straight-tube/minimization assumption, take an attained minimizing tube at each fixed $L\ge L_0$. By [F4] its transverse profile has quantized original electric flux and strictly positive tension $\sigma_L=\sigma(P_L)$. Translation invariance in the tube gives bulk energy $L\sigma_L$; the assumed $|e_L|\le C_0$ therefore proves precisely $V(L)=\sigma_L L+O(1)$, with no inferred constancy or uniform positive lower bound for $\sigma_L$. Under the additional comparison hypotheses, $P_L\in\mathcal S$ gives $V(L)\ge L\tau_{\mathcal S}-C_0$. For every fixed $L\ge L_0$ and every $k$, the actual competitor $Q_{k,L}\in\mathcal B_L$ gives $V(L)\le\mathcal E_L(Q_{k,L})\le L\sigma(P_k)+C_1$. Letting $k\to\infty$ at that fixed $L$ proves $V(L)\le L\tau_{\mathcal S}+C_1$. The constants are uniform, so together these inequalities prove $V(L)=\tau_{\mathcal S}L+O(1)$ with the assumed positive slope, even if its infimum is not attained. If all profiles in $\mathcal S$ are in the precise nonlinear class, [F6] under [A3] supplies a uniform positive tension lower bound and nonemptiness makes their infimum finite; it does not supply the extra uniform comparison competitors. No profile-selection or convergence-rate assertion about $P_L$ is used. Original electric probes correspond to dual magnetic flux; the condensed original magnetic charges are dual electric charges and are screened in the linear response about the dual Higgs vacuum described by [F5]. These are conditional classical effective-energy statements, not a quantum Wilson-loop area law. [A3, F3, F4, F5, F6, given, step 5.2, algebra]
 
 6.2 In the explicitly linear truncation, assume [A3] and apply [F5] with $\xi=2v^2$ to each chosen effective divisor of degree $|n|$. It supplies an actual smooth stationary full-model minimum of tension $T_n=2\pi\xi|n|=4\pi v^2|n|$, and actual finite collars from every fixed canonical full-model end trace in the stated valid neutral disk. Thus $T_nL\le I_L\le T_n(L-2\ell)+C_0+C_1$, proving $I_L=T_nL+O(1)$; matching minimizing traces attain $T_nL$ exactly. No solution or endcap existence is assumed for this critical boundary problem. The nonlinear obstruction in [F5] prevents extending its exact BPS assertion to generic u. [A3, F5, given, step 5.2, algebra]
 

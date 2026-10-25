@@ -33,6 +33,10 @@ sources:
       locator: "§2.1, PDF pp. 5–11: zero-form defect fusion and the representation carried by local operators."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

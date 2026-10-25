@@ -56,6 +56,10 @@ sources:
       locator: "Abstract; §§2–3 (analysis strategy and detector); §§4–8 (data, reconstruction, selections, background estimates, and uncertainties); §9 and Fig. 15 (statistical interpretation and observed limits); §10 (conclusion)."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Setup

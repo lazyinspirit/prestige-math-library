@@ -31,6 +31,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Ian Agol, Complex Analysis and Riemann Surfaces, course notes"

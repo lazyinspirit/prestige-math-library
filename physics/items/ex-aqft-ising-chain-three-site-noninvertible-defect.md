@@ -29,6 +29,10 @@ sources:
       locator: "Critical-Ising defect discussion, PDF pp. 2–5, for the independent fusion-category interpretation; this example makes no continuum claim."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

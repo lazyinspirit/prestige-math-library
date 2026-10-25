@@ -32,6 +32,10 @@ sources:
       locator: "§I, PDF pp. 2–3: differential characters as homomorphisms on smooth singular cycles whose boundary values are given by a closed form modulo the period subgroup."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

@@ -28,6 +28,10 @@ sources:
       locator: "§5, printed pp. 27–29: holomorphic vector bundles, line bundles and their transition-function cocycles."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

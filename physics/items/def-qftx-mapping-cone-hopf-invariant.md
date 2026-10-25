@@ -40,6 +40,10 @@ sources:
       locator: "Chapter 7, pp. 49–56; cofiber and cellular cohomology framework."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Definition
 

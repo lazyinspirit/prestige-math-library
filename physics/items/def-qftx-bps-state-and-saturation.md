@@ -35,6 +35,10 @@ sources:
       locator: "§2.4.2, printed pp. 40–41 (PDF pp. 31–32): the N=2 central-charge inequality and the null supercharge combination at saturation."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

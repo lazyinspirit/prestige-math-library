@@ -41,6 +41,10 @@ sources:
       locator: "§2.1, PDF pp. 5–8: model-defined defect bordisms, junctions, isotopy classes and correlator functor; oriented 2D setting only."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

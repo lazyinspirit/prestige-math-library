@@ -45,6 +45,10 @@ sources:
       locator: "§2.1.1, printed pp. 28–29: the natural-unit non-Abelian quadratic action and its coupling normalization."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Postulate

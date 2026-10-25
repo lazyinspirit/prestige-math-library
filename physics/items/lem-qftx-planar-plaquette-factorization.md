@@ -62,6 +62,10 @@ sources:
       locator: "§4.1, printed pp. 59–61, for gauge fixing and factorization of the two-dimensional pure-gauge partition function; its infinite-lattice gauge choice is replaced by an explicit finite tree gauge."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 proof_strategy: direct
 ---
 
@@ -123,7 +127,7 @@ This is a finite planar lattice statement with no periodic identifications or co
 
 [F5] The integral is the Lebesgue integral on the stated measure space; a complex function is in $L^1$ when its absolute value has finite integral. A bounded measurable function on a probability space is in $L^1$ because $\int|f|\leq\|f\|_\infty$. [[def-tdmath-measure-integral]] [[def-integrable-real-and-complex-functions-and-their-integrals]]
 
-[F6] Tonelli applies to nonnegative measurable functions on sigma-finite products, and Fubini applies to $L^1$ functions on sigma-finite products. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]
+[F6] Tonelli applies to nonnegative measurable functions on sigma-finite products, and Fubini applies to $L^1$ functions on sigma-finite products. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]]
 
 ## Proof
 

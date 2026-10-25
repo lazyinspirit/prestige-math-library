@@ -42,6 +42,10 @@ sources:
       locator: "§1.4, equations (1.20)–(1.40); §2.1, equations (2.1)–(2.6); and §2.2, equations (2.7)–(2.9). These give SU(2) Yang–Mills–Higgs data, the zero-potential limit, the fundamental-doublet charge unit, the Bianchi surface term, square completion, and Prasad–Sommerfield radial functions. Harvey uses B_i=-epsilon_ijk F_jk/2 and e inside D; neither convention is silently adopted here."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

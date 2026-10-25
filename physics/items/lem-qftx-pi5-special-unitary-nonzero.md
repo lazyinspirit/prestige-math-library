@@ -43,6 +43,10 @@ sources:
       locator: "§4.2, printed pp. 379–381; sphere fibrations."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Statement
 

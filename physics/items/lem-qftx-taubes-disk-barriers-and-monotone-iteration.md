@@ -46,6 +46,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
   - title: 'David Tong, TASI Lectures on Solitons, Lecture 3: Vortices'
@@ -94,7 +99,7 @@ It converges pointwise and in $H^1(D_R)$ to a solution $v_R\in C^{2,\alpha}(\ove
 
 [F5] [[thm-weak-global-w-two-p-dirichlet-regularity-for-the-laplacian]]: on a bounded $C^{2,\alpha}$ domain in dimension $n\ge2$, if $p>n$ and $u\in H^1_0$ weakly solves $-\Delta u=f\in L^p$, then $u\in W^{2,p}\cap W^{1,p}_0$ and obeys the stated global estimate; AC and Countable Choice are hypotheses.
 
-[F6] The disk is a bounded $W^{2,p}$-extension domain by [[thm-extension-theorem-for-bounded-smooth-domains]], and [[thm-higher-order-sobolev-embedding]] gives $C^{1,\beta}$ representatives for $p>2$ and $0<\beta<1-2/p$.
+[F6] The disk is a bounded $W^{2,p}$-extension domain by [[thm-extension-theorem-for-bounded-smooth-domains|Bounded $C^k$ domains admit integer-order Sobolev extension]], and [[thm-higher-order-sobolev-embedding]] gives $C^{1,\beta}$ representatives for $p>2$ and $0<\beta<1-2/p$.
 
 [F7] [[thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian]]: on a bounded $C^{2,\alpha}$ disk, a weak zero-Dirichlet solution of $-\Delta v=f$ with $f\in C^{0,\alpha}$ has a unique representative in $C^{2,\alpha}$.
 

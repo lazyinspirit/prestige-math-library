@@ -55,6 +55,10 @@ sources:
       locator: "§2.1, Theorems 2.2–2.5, PDF pp. 6–10: Godement’s ordinary cohomological-dimension bound for open subsets of Euclidean manifolds."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 page: qftx-gaga-compact-coherent-finiteness
 category: quantum-field-theory-mathematics
 ---
@@ -85,7 +89,7 @@ Assume full AC and the local Oka interface stated below. Let $r\ge1$, let $M$ be
 
 [F5] A short exact sequence of sheaves gives the long exact sequence of derived sheaf cohomology ([[thm-long-exact-sequence-sheaf-cohomology]]).
 
-[F6] The coordinate polydisc $D=\{|z_j-a_j|<R_j\}_{j=1}^r$ has the smooth strictly plurisubharmonic exhaustion $\rho_D(z)=-\sum_{j=1}^r\log(R_j^2-|z_j-a_j|^2)$; its Levi matrix is diagonal with entries $R_j^2/(R_j^2-|z_j-a_j|^2)^2>0$. Finite maxima preserve plurisubharmonicity, and holomorphic coordinate changes preserve it ([[def-plurisubharmonic-function]], [[def-levi-form-and-strict-plurisubharmonicity]], [[thm-c-two-levi-criterion-for-plurisubharmonicity]], [[thm-stability-operations-for-plurisubharmonic-functions]], [[thm-holomorphic-pullback-of-plurisubharmonic-functions]]).
+[F6] The coordinate polydisc $D=\{|z_j-a_j|<R_j\}_{j=1}^r$ has the smooth strictly plurisubharmonic exhaustion $\rho_D(z)=-\sum_{j=1}^r\log(R_j^2-|z_j-a_j|^2)$; its Levi matrix is diagonal with entries $R_j^2/(R_j^2-|z_j-a_j|^2)^2>0$. Finite maxima preserve plurisubharmonicity, and holomorphic coordinate changes preserve it ([[def-plurisubharmonic-function]], [[def-levi-form-and-strict-plurisubharmonicity]], [[thm-c-two-levi-criterion-for-plurisubharmonicity|The $C^2$ Levi criterion for plurisubharmonicity]], [[thm-stability-operations-for-plurisubharmonic-functions]], [[thm-holomorphic-pullback-of-plurisubharmonic-functions]]).
 
 ## Proof
 

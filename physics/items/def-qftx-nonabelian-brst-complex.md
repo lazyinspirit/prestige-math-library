@@ -24,6 +24,10 @@ sources:
       locator: "§§3.2 and 5.2: non-Abelian Yang–Mills gauge generators, ghost conventions, and the classical Yang–Mills BV field content."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

@@ -31,6 +31,10 @@ sources:
       locator: "§4.6.2, printed pp. 106–108: the flux-tube interpretation and explicit limitation on known bulk vortex solutions in the different SQCD model discussed there."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

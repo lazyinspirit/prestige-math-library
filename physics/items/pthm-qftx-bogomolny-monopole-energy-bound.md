@@ -38,6 +38,10 @@ sources:
       locator: "§2.1, equations (2.3)–(2.6), printed p. 19 (PDF p. 20): Bianchi integration by parts, positive-charge square completion, and the sign-reversed bound. Harvey uses B_i=-epsilon_ijk F_jk/2 and e inside D; this item proves the identity in its own stated convention."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

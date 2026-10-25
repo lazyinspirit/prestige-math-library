@@ -68,6 +68,10 @@ sources:
       locator: "§3.1, printed pp. 17–19: framed torsion-free sheaves, locally-free locus and cited framed SU(N) ASD interpretation."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -128,9 +132,9 @@ For any positive stability level $\zeta>0$, the positive-FI quotient is the quot
 
 [A3] The current GAGA carrier asserts exact coherent analytification on $\mathbb P^2$ and $\mathbb P^3$, plus family comparison only when the higher direct images are locally free and the base-change maps are already isomorphisms. Its exact analytic inputs are the new coherence, local-flatness, compact-finiteness and scalar-projective-cohomology suppliers; its internal hyperplane and Serre-pencil proof derives all-twist comparison, positive-twist vanishing and generation. [[thm-qftx-projective-gaga-for-monad-data]]
 
-[A4] Under full AC and its exact absolute GAGA hypothesis, the ordinary framed Ward theorem proves the local integrable-Dolbeault frames, universal-line degree-zero base change/evaluation, unique incidence connection and compatibility of the pairing-induced positive metric. Its comparison input is absolute projective GAGA, not independently chosen parallel metrics or assumed base-change surjectivity. [[thm-qftx-framed-penrose-ward-correspondence-on-s4]]
+[A4] Under full AC and its exact absolute GAGA hypothesis, the ordinary framed Ward theorem uses the separately proved local integrable-Dolbeault frame lemma and proves universal-line degree-zero base change/evaluation, the unique incidence connection and compatibility of the pairing-induced positive metric. Its comparison input is absolute projective GAGA, not independently chosen parallel metrics or assumed base-change surjectivity. [[thm-qftx-framed-penrose-ward-correspondence-on-s4]]
 
-[A5] The intrinsic positive-real $\mathbb CP^3$ monad normal-form existence, inverse matrix extraction, $U(k)$ uniqueness, exact rotation factors and first-order naturality are supplied by the exact intrinsic theorem used in [[lem-qftx-adhm-real-monad-normalization-and-charge]]. The entrywise-conjugation candidate is disproved in [[lem-qftx-adhm-entrywise-conjugation-does-not-match-real-moment-map]]. The exact first-order range additionally requires free H0(F_A) with reduction base change, a direct-summand coefficient-image module with reduction base change, and triviality and section base change on each fixed real twistor line; positivity is required only on the reduction. These hypotheses are imposed and are not inferred for arbitrary ASD deformations or flat-summand rank jumps. Only this range and involution-preserving epsilon-to-r-epsilon maps are used.
+[A5] The intrinsic positive-real $\mathbb CP^3$ monad normal-form existence, inverse matrix extraction, $U(k)$ uniqueness, exact rotation factors and first-order naturality are supplied by the exact intrinsic theorem used in [[lem-qftx-adhm-real-monad-normalization-and-charge]]. The entrywise-conjugation candidate is disproved in [[lem-qftx-adhm-entrywise-conjugation-does-not-match-real-moment-map]]. The exact first-order range additionally requires free $H^0(F_A)$ with reduction base change, a direct-summand coefficient-image module with reduction base change, and triviality and section base change on each fixed real twistor line; positivity is required only on the reduction. These hypotheses are imposed and are not inferred for arbitrary ASD deformations or flat-summand rank jumps. Only this range and involution-preserving epsilon-to-r-epsilon maps are used.
 
 [A6] The intrinsic positive-real monad theorem gives the converse from regular zero-moment data to the globally locally split monad with positive real-line pairing and infinity frame, and classifies normalized framed chain isomorphisms by $U(k)$. The chain-lift lemma lifts cohomology morphisms uniquely under the scalar negative-twist vanishings. The normal-form theorem's first-order clause gives the analogous normalized classification by $U(k,D)$ only in the exact range stated here. Neither supplier asserts a first-order Ward equivalence; that bridge is proved below. [[thm-qftx-positive-real-adhm-monad-normal-form]], [[lem-qftx-positive-real-monad-chain-lift]]
 

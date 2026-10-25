@@ -36,6 +36,10 @@ sources:
       locator: "§0, printed pp. 1–2, Weyl and Dirac spinor notation; §2 and Table 1, printed pp. 5–8, assumptions behind SMEFT and SM field representations; §§3.1–3.4, printed pp. 7–14, canonical-dimension power counting and dimension-six operators. The local mostly-plus Clifford signs are fixed explicitly in this item."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Postulate
 

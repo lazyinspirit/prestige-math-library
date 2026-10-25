@@ -48,6 +48,10 @@ sources:
       locator: "§4.7.2, printed pp. 92–94, and §§5.2.7–5.2.8, printed pp. 120–124: the formal BRST derivation of Slavnov–Taylor identities and the role of local restoring counterterms after regularization."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

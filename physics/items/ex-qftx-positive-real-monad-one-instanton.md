@@ -35,6 +35,10 @@ sources:
       locator: "Section 3.1, printed pp. 17–19: framed ADHM conventions and locally-free locus; the sign convention is explicitly fixed below."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

@@ -1,7 +1,7 @@
 ---
 id: def-qftx-n1-kahler-target-data
 kind: definition
-title: Kähler coordinate-patch data for a rigid N=1 chiral model
+title: Kähler coordinate-patch data for a rigid $N=1$ chiral model
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -28,6 +28,10 @@ sources:
       locator: "§7.1, printed pp. 43–46: Kähler potentials, the Hermitian metric, and the chiral sigma-model action."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

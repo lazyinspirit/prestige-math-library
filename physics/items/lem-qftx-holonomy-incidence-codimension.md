@@ -31,6 +31,10 @@ sources:
       locator: "§5.13.2–§5.13.3, PDF pp. 114–116, Sobolev connection/gauge setup and holonomy-stabilizer convention; the incidence dimension calculation is proved locally."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Statement
 

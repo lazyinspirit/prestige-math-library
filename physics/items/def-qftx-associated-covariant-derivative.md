@@ -49,6 +49,10 @@ sources:
       locator: "Chapter 1 §1.6 and Chapter 5 §5.4, printed pp. 13–16 and 92–98: associated-section coordinates and principal-connection transition forms."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition
@@ -133,6 +137,8 @@ where $(\rho_*(A_i)\psi_i)(X)=\rho_*(A_i(X))\psi_i$ for $X\in TU_i$. These expre
 For clarity, the square below describes how the local covariant-derivative formula is transported between two local sections. The top arrow changes the section and its field components together; the lower arrow is the associated vector-bundle coordinate change. Step 3.1 proves the square commutes, and the proof does not rely on the diagram.
 
 ```tikzcd
+\begin{tikzcd}[column sep=huge,row sep=large]
 \{\psi_i\in C^\infty(U_{ij},V)\} \arrow[r,"\psi_i\mapsto\rho(g_{ij}^{-1})\psi_i"] \arrow[d,"\psi\mapsto d\psi+\rho_*(A_i)\psi"'] & \{\psi_j\in C^\infty(U_{ij},V)\} \arrow[d,"\psi\mapsto d\psi+\rho_*(A_j)\psi"] \\
 \Omega^1(U_{ij},V) \arrow[r,"\alpha\mapsto\rho(g_{ij}^{-1})\alpha"'] & \Omega^1(U_{ij},V)
+\end{tikzcd}
 ```

@@ -32,6 +32,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
   - title: 'David Tong, TASI Lectures on Solitons, Lecture 3: Vortices'
@@ -68,14 +73,14 @@ for $n\le0$, replace $D_{A,1}+iD_{A,2}$ by $D_{A,1}-iD_{A,2}$ and $B-e^2(\xi-|q|
 
 [F3] [[thm-general-stokes-theorem]]: on the oriented disk with outward-normal-first boundary orientation, the integral of $dA$ equals the boundary integral of $A$, and the integral of $dj$ equals the boundary integral of the one-form $j$.
 
-[F4] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]: integrable nonnegative energy densities on the polar-coordinate product can be integrated by radial slices; the section integrals are measurable and their total integral equals the plane integral.
+[F4] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]]: integrable nonnegative energy densities on the polar-coordinate product can be integrated by radial slices; the section integrals are measurable and their total integral equals the plane integral.
 
 [F5] [[thm-monotone-convergence-for-the-integral]]: the integrals of an increasing sequence of nonnegative measurable functions converge to the integral of their pointwise limit.
 
 
 [F6] For square-integrable scalar functions on a circle with arc-length measure, $\int|fg|\le\|f\|_2\|g\|_2$. [[cor-cauchy-schwarz-inequality-for-l-two]]
 
-[F7] Under the full-AC base [A1], [[thm-polar-coordinates-formula-for-lebesgue-measure]] gives $dx=r\,dr\,d\sigma(\omega)$ in dimension two, with $\sigma$ from [[def-polar-surface-measure-on-the-unit-sphere]]. For $\gamma(\theta)=(\cos\theta,\sin\theta)$, a unit-radius sector over an angular interval $I\subset[0,2\pi)$ has area $|I|/2$, so $\sigma(\gamma(I))=|I|$ by the definition; interval sums and uniform continuity identify integration of continuous circle functions against $\sigma$ with integration against $d\theta$. The radius-$r$ parametrization has speed $r$, hence its Euclidean arc-length measure is $ds=r\,d\theta=r\,d\sigma$. Apply the polar formula to nonnegative energy densities; Fubini [F4] then gives measurable radial sections and their integrals.
+[F7] Under the full-AC base [A1], [[thm-polar-coordinates-formula-for-lebesgue-measure|Polar coordinates decompose Lebesgue measure into $r^{n-1}\,dr\,d\sigma$]] gives $dx=r\,dr\,d\sigma(\omega)$ in dimension two, with $\sigma$ from [[def-polar-surface-measure-on-the-unit-sphere]]. For $\gamma(\theta)=(\cos\theta,\sin\theta)$, a unit-radius sector over an angular interval $I\subset[0,2\pi)$ has area $|I|/2$, so $\sigma(\gamma(I))=|I|$ by the definition; interval sums and uniform continuity identify integration of continuous circle functions against $\sigma$ with integration against $d\theta$. The radius-$r$ parametrization has speed $r$, hence its Euclidean arc-length measure is $ds=r\,d\theta=r\,d\sigma$. Apply the polar formula to nonnegative energy densities; Fubini [F4] then gives measurable radial sections and their integrals.
 
 ## Proof
 

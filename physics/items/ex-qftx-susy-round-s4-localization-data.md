@@ -37,6 +37,10 @@ sources:
 physical_scope: "Conditional illustration of the source's N=4 localization supercharge on the round Euclidean S4 and the separate finite-dimensional circle action on its base; it asserts no continuum field-space measure or localization theorem."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
@@ -46,7 +50,7 @@ Take the adopted massless $\mathcal N=4$ model on the round $S^4_r$ with its spe
 
 [Adopted rigid S4 background postulate] [[post-qftx-rigid-supersymmetric-background]]
 
-[Flat-space N=4 model interface] [[post-qftx-n4-super-yang-mills-model]]
+[Flat-space $N=4$ model interface] [[post-qftx-n4-super-yang-mills-model]]
 
 [Pestun, §§2 and 4.1–4.3, Appendix C](https://arxiv.org/pdf/0712.2824)
 
@@ -68,7 +72,7 @@ Take the adopted massless $\mathcal N=4$ model on the round $S^4_r$ with its spe
 
 [A6] [[post-qftx-n4-super-yang-mills-model]]: its on-shell component content is one gauge connection, six real adjoint scalars, and four adjoint Weyl fermions, equivalently one vector and three adjoint chiral multiplets; its extended invariance is adopted as a physical postulate, not proved.
 
-[A7] [[post-qftx-n4-super-yang-mills-model]]: in its N=1 decomposition, the carrier specifies one adjoint vector prepotential and three adjoint chiral superfields $\Phi_1,\Phi_2,\Phi_3$, with the scalar fields connection-normalized before the stated canonical rescaling.
+[A7] [[post-qftx-n4-super-yang-mills-model]]: in its $N=1$ decomposition, the carrier specifies one adjoint vector prepotential and three adjoint chiral superfields $\Phi_1,\Phi_2,\Phi_3$, with the scalar fields connection-normalized before the stated canonical rescaling.
 
 [F1] [[def-qftx-susy-background-data]]: off-shell closure means that $Q^2$ is an explicitly stated combination of lifted isometries and internal transformations on every field; this is separate from existence of a measure or a continuum localization theorem.
 
@@ -76,7 +80,7 @@ Take the adopted massless $\mathcal N=4$ model on the round $S^4_r$ with its spe
 
 ## Verification
 
-1.1 The actual N=4 supplier interface in [A5], [A6], and [A7] matches this example's stated flat-space input: the global group, invariant trace form, dimensionless coupling, scalar normalization, and vector/chiral component content agree. This check does not prove the supplier's adopted N=4 invariance or identify its flat Minkowski action with the separate curved S4 action. [A5, A6, A7, given, algebra]
+1.1 The actual $N=4$ supplier interface in [A5], [A6], and [A7] matches this example's stated flat-space input: the global group, invariant trace form, dimensionless coupling, scalar normalization, and vector/chiral component content agree. This check does not prove the supplier's adopted $N=4$ invariance or identify its flat Minkowski action with the separate curved S4 action. [A5, A6, A7, given, algebra]
 
 1.2 For an adjoint-valued tensor field $X$, expand $(s+\delta)^2X=s^2X+\{s,\delta\}X+\delta^2X$. By [A1], $s^2X=sX'=\delta_{\mathrm{gauge}}(\phi)X+\delta_{U(1)}(\omega)X$. By [A3], the gauge term cancels with its negative in $\{s,\delta\}X$, leaving $\delta_{\mathrm{gauge}}(a_0)X+\delta_{U(1)}(\omega)X$. [A1, A3, given, algebra]
 

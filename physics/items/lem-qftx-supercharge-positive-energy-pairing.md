@@ -45,6 +45,10 @@ sources:
       locator: "§8.4, supertrace and index context; the positive-energy eigenspace map is proved locally from the stated domains."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

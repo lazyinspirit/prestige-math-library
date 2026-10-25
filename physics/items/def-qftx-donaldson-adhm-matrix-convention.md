@@ -21,6 +21,10 @@ sources:
       locator: "§6, printed pp. 10–11, equations (8)–(9): the complex and real matrix equations and the map dimensions."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

@@ -28,6 +28,10 @@ sources:
       locator: "§3, printed pp. 493–494: scalar-curvature normalization for the round four-sphere."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

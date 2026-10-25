@@ -27,6 +27,10 @@ sources:
 physical_scope: "Adopted source-specific ABJM model in its three-dimensional N=2 description on the round Euclidean S3; no generic N=2 theory, rigorous continuum measure, regulator-removal theorem, or empirical claim is asserted."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Postulate

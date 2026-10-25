@@ -44,6 +44,10 @@ sources:
       locator: "§4.2, printed pp. 379–381; fibration and homotopy-sequence context."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 ## Statement
 
@@ -54,7 +58,7 @@ $$\begin{array}{ccc}\mathcal G_m(P)\times U&\xrightarrow{\Phi_s}&ev_m^{-1}(U)\\\
 where $\Phi_s(v,g)=v\,s(g)$; the square commutes because $ev_m(v)=e$ and $ev_m(s(g))=g$. The corresponding TikZ source is:
 ```tikz
 \begin{tikzcd}
-\mathcal G_m(P)\times U \arrow[r,"\Phi_s"] \arrow[d,"\operatorname{pr}_2"'] & ev_m^{-1}(U) \arrow[d,"ev_m"]\\
+\mathcal G_m(P)\times U \arrow[r,"{\Phi_s}"] \arrow[d,"{\mathrm{pr}_2}"'] & ev_m^{-1}(U) \arrow[d,"{ev_m}"]\\
 U \arrow[r,hook] & SU(N)
 \end{tikzcd}
 ```

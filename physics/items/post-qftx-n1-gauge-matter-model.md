@@ -1,7 +1,7 @@
 ---
 id: post-qftx-n1-gauge-matter-model
 kind: postulate
-title: Rigid N=1 SU(2) gauge-matter superspace action
+title: Rigid $N=1$ SU(2) gauge-matter superspace action
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -41,6 +41,10 @@ sources:
       locator: "§§4.4 and 5.1–5.2, printed pp. 23–31: vector superfields, non-Abelian field strengths, representation-valued chiral matter, gauge coupling rescaling, and component interactions."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Postulate

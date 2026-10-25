@@ -33,11 +33,15 @@ sources:
       locator: "Equations (3)–(12), pp. 3–7, perturbative Wilsonian holomorphic F-term conclusion."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
 
-Take one chiral superfield $\Phi$ with mass dimension one and tree superpotential $W_0(\Phi)=\tfrac12m\Phi^2+\tfrac{y}{3!}\Phi^3$, where $m$ has mass dimension one and $y$ is dimensionless. Use a formal perturbative Wilsonian prescription satisfying the N=1 theorem at a nonzero scale $\lambda$, and suppose the full real quadratic kinetic coefficient at that scale is a positive function $Z(\lambda)$. Then the holomorphic coefficients $m$ and $y$ in the unrescaled field $\Phi$ receive no perturbative Wilsonian corrections, while the canonically normalized field $\Phi_c=Z(\lambda)^{1/2}\Phi$ has coefficients $m_c(\lambda)=m/Z(\lambda)$ and $y_c(\lambda)=y/Z(\lambda)^{3/2}$. Thus the canonically normalized parameters can run if $Z(\lambda)$ varies, even though the holomorphic Wilsonian coefficients do not.
+Take one chiral superfield $\Phi$ with mass dimension one and tree superpotential $W_0(\Phi)=\tfrac12m\Phi^2+\tfrac{y}{3!}\Phi^3$, where $m$ has mass dimension one and $y$ is dimensionless. Use a formal perturbative Wilsonian prescription satisfying the $N=1$ theorem at a nonzero scale $\lambda$, and suppose the full real quadratic kinetic coefficient at that scale is a positive function $Z(\lambda)$. Then the holomorphic coefficients $m$ and $y$ in the unrescaled field $\Phi$ receive no perturbative Wilsonian corrections, while the canonically normalized field $\Phi_c=Z(\lambda)^{1/2}\Phi$ has coefficients $m_c(\lambda)=m/Z(\lambda)$ and $y_c(\lambda)=y/Z(\lambda)^{3/2}$. Thus the canonically normalized parameters can run if $Z(\lambda)$ varies, even though the holomorphic Wilsonian coefficients do not.
 
 ## Example references
 
@@ -47,11 +51,11 @@ Take one chiral superfield $\Phi$ with mass dimension one and tree superpotentia
 
 ## Facts & Assumptions
 
-**Given:** The formal N=1 Wilsonian action datum and theorem hypotheses, including the coefficientwise local background-spurion extension with independent unconstrained real spurion jets and chirality before constant-background evaluation; the stated one-field superpotential; and a positive full quadratic kinetic coefficient $Z(\lambda)$.
+**Given:** The formal $N=1$ Wilsonian action datum and theorem hypotheses, including the coefficientwise local background-spurion extension with independent unconstrained real spurion jets and chirality before constant-background evaluation; the stated one-field superpotential; and a positive full quadratic kinetic coefficient $Z(\lambda)$.
 
 [F1] [[def-qftx-wilsonian-n1-action-data]]: the chiral superfield has a holomorphic F-term integrand and a real quadratic kinetic term in the Wilsonian D-term data; real-spurion selection is interpreted in its coefficientwise formal background-jet algebra before evaluating constant backgrounds.
 
-[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, every positive-field-degree coefficient of the remaining holomorphic integrand is unchanged after collecting matter-independent quadratic gauge-kinetic terms. Equality of its numerical constant additionally uses the supplier's fixed-representative convention; it is not needed for the coefficients $m,y$. In this ungauged Wess–Zumino example the ultraviolet remainder is $W_0$.
+[F2] [[pthm-qftx-n1-wilsonian-f-term-nonrenormalization]]: the prescribed gauge/ghost completion is empty in this ungauged model; under its formal cutoff, symmetry, anomaly-free, formal local background-spurion hypotheses, every positive-field-degree coefficient of the remaining holomorphic integrand is unchanged after collecting matter-independent quadratic gauge-kinetic terms. Equality of its numerical constant additionally uses the supplier's fixed-representative convention; it is not needed for the coefficients $m,y$. In this ungauged Wess–Zumino example the ultraviolet remainder is $W_0$.
 
 [A1] The single-field model has no gauge interactions; it is the trivial-gauge-group specialization of the stated action data.
 

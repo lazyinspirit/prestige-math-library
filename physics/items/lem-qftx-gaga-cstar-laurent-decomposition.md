@@ -35,6 +35,10 @@ sources:
       locator: "Topic 7 §7.7, Theorem 7.19 and proof, PDF pp. 10–13: coefficient integrals and convergence of the analytic and principal parts."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 page: qftx-gaga-compact-coherent-finiteness
 category: quantum-field-theory-mathematics
 ---

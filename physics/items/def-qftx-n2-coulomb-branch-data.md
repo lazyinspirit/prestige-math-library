@@ -1,7 +1,7 @@
 ---
 id: def-qftx-n2-coulomb-branch-data
 kind: definition
-title: Pure N=2 SU(2) Coulomb-branch and period data
+title: Pure $N=2$ SU(2) Coulomb-branch and period data
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -34,6 +34,10 @@ sources:
     locator: '§4.4.1, printed pp. 125–128: the N=2 vector-plus-adjoint-chiral decomposition and its coupling convention.'
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

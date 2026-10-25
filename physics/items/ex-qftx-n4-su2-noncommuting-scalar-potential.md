@@ -1,7 +1,7 @@
 ---
 id: ex-qftx-n4-su2-noncommuting-scalar-potential
 kind: example
-title: Positive N=4 scalar potential for two noncommuting SU(2) fields
+title: Positive $N=4$ scalar potential for two noncommuting SU(2) fields
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -25,13 +25,17 @@ generation:
   role: example
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
 
 For real $a,b\in\mathbb R$ with units $\mathrm m^{-1}$, take canonical adjoint scalar values $X^1_{\mathrm{can}}=aT_1$, $X^2_{\mathrm{can}}=bT_2$, and $X^I_{\mathrm{can}}=0$ for $I=3,4,5,6$, where $T_a=-i\sigma_a/2$ and
 $$\sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad \sigma_2=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\qquad \sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.$$
-If $a,b\ne0$, the adopted N=4 scalar potential is $g^2a^2b^2/2>0$; if either coefficient is zero, it is zero.
+If $a,b\ne0$, the adopted $N=4$ scalar potential is $g^2a^2b^2/2>0$; if either coefficient is zero, it is zero.
 
 ## Example references
 
@@ -41,7 +45,7 @@ If $a,b\ne0$, the adopted N=4 scalar potential is $g^2a^2b^2/2>0$; if either coe
 
 ## Facts & Assumptions
 
-**Given:** The N=4 canonical scalar potential, the SU(2) basis, and its normalized Lie bracket and invariant form.
+**Given:** The $N=4$ canonical scalar potential, the SU(2) basis, and its normalized Lie bracket and invariant form.
 
 [A1] [[post-qftx-n4-super-yang-mills-model]]: $V=\frac{g^2}{2}\sum_{I<J}\kappa([X^I_{\mathrm{can}},X^J_{\mathrm{can}}],[X^I_{\mathrm{can}},X^J_{\mathrm{can}}])$.
 

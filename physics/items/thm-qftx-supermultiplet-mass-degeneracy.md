@@ -37,6 +37,10 @@ sources:
       locator: "§3.3, printed pp. 69–73, Poincare mass as a Casimir in particle representations; the local proof avoids a sharp-momentum vector."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

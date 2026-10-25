@@ -47,6 +47,10 @@ physical_scope: "Conditional result for the specified unit-radius
 empirical_premises: []
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

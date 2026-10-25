@@ -52,6 +52,10 @@ sources:
       locator: "§§4.1 and 4.2.2, printed pp. 59–64, for reduction to the one-plaquette matrix expectation; the explicit SU(2) integral is evaluated locally."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 proof_strategy: direct
 ---
 
@@ -101,7 +105,7 @@ Assume $\mathrm{AC}_\omega$. For one square face with free boundary in the finit
 
 [F5] [[lem-qftx-wilson-loop-gauge-invariance]]: the loop trace in the original link variables equals its value in the tree-gauge representative, while [[lem-qftx-planar-plaquette-factorization]] supplies the law of the representative's plaquette variable.
 
-[F6] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]: an $L^1$ function on a product of sigma-finite measure spaces has equal product and iterated integrals. In particular this applies successively to bounded measurable functions on a finite product of probability spaces, since their absolute integrals are finite.
+[F6] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]]: an $L^1$ function on a product of sigma-finite measure spaces has equal product and iterated integrals. In particular this applies successively to bounded measurable functions on a finite product of probability spaces, since their absolute integrals are finite.
 
 ## Verification
 

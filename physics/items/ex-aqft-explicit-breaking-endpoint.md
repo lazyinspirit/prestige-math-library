@@ -31,6 +31,10 @@ sources:
       locator: "§3.5, printed pp. 176–178, for anomaly matching conditional on the symmetry surviving in the infrared."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

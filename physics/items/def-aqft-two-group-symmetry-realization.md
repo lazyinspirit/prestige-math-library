@@ -26,6 +26,11 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 physical_scope: Finite-regulator Euclidean models on closed oriented triangulated d-manifolds with finite discrete 2-group backgrounds. This is a model-data interface; it asserts no QFT realization, anomaly absence, continuum limit, or empirical result.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 sources:
   references:
     - title: "Christopher J. Schommer-Pries, Tori Detect Invertibility of Topological Field Theories"

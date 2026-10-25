@@ -35,6 +35,10 @@ sources:
       locator: "Chapter 6 §6.1, printed pp. 100–101: bracket convention, Cartan curvature formula, and curvature equivariance."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

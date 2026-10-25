@@ -43,6 +43,10 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

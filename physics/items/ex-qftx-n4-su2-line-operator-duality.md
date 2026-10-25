@@ -1,7 +1,7 @@
 ---
 id: ex-qftx-n4-su2-line-operator-duality
 kind: example
-title: SU(2) and SO(3) Line-Spectrum Choices in the N=4 Duality Family
+title: SU(2) and SO(3) Line-Spectrum Choices in the $N=4$ Duality Family
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -29,6 +29,10 @@ sources:
       locator: "§2.2, printed pp. 11–12: the simply-laced tau transformation and global-form qualification."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

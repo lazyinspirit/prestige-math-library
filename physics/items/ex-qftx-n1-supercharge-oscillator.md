@@ -1,7 +1,7 @@
 ---
 id: ex-qftx-n1-supercharge-oscillator
 kind: example
-title: Two-mode fermionic oscillator for the N=1 rest algebra
+title: Two-mode fermionic oscillator for the $N=1$ rest algebra
 status: draft
 origin: pipeline
 pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
@@ -33,11 +33,15 @@ sources:
       locator: "§§3.2–3.3, superalgebra and positive particle-representation context; no full Poincare representation is asserted by this fiber example."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example
 
-Let $M>0$ and let $\mathcal H=\Lambda^*\mathbb C^2$ have orthonormal occupation basis $|n_1,n_2\rangle$ for $n_1,n_2\in\{0,1\}$. Define fermionic annihilation operators by $a_1|n_1,n_2\rangle=n_1|0,n_2\rangle$ and $a_2|n_1,n_2\rangle=(-1)^{n_1}n_2|n_1,0\rangle$, and let $a_\alpha^*$ be their Hilbert adjoints. Set $P^0=MI$, $P^j=0$, all central charges to zero, and $Q_\alpha=\sqrt{2M}a_\alpha$, $\bar Q_{\dot\alpha}=Q_\alpha^*$ with dotted index corresponding to the same $\alpha$. Give $\mathcal H$ the parity $(-1)^{n_1+n_2}$. This finite-dimensional rest fiber is a positive representation of the N=1 supercharge anticommutators in the stated mostly-plus convention; it has two even and two odd states. Use natural units $\hbar=c=1$, so $M$ has mass dimension one and each displayed supercharge has mass dimension one-half. It is only a rest-algebra fiber and asserts no full spacetime representation.
+Let $M>0$ and let $\mathcal H=\Lambda^*\mathbb C^2$ have orthonormal occupation basis $|n_1,n_2\rangle$ for $n_1,n_2\in\{0,1\}$. Define fermionic annihilation operators by $a_1|n_1,n_2\rangle=n_1|0,n_2\rangle$ and $a_2|n_1,n_2\rangle=(-1)^{n_1}n_2|n_1,0\rangle$, and let $a_\alpha^*$ be their Hilbert adjoints. Set $P^0=MI$, $P^j=0$, all central charges to zero, and $Q_\alpha=\sqrt{2M}a_\alpha$, $\bar Q_{\dot\alpha}=Q_\alpha^*$ with dotted index corresponding to the same $\alpha$. Give $\mathcal H$ the parity $(-1)^{n_1+n_2}$. This finite-dimensional rest fiber is a positive representation of the $N=1$ supercharge anticommutators in the stated mostly-plus convention; it has two even and two odd states. Use natural units $\hbar=c=1$, so $M$ has mass dimension one and each displayed supercharge has mass dimension one-half. It is only a rest-algebra fiber and asserts no full spacetime representation.
 
 ## Example references
 
@@ -55,9 +59,9 @@ Real and complex inner-product spaces and their induced length: [[def-real-and-c
 
 ## Facts & Assumptions
 
-**Given:** $M>0$, the four-dimensional complex Hilbert space with the stated orthonormal basis, its fermionic operators, and the N=1 algebra convention.
+**Given:** $M>0$, the four-dimensional complex Hilbert space with the stated orthonormal basis, its fermionic operators, and the $N=1$ algebra convention.
 
-[F1] [[def-qftx-super-poincare-algebra-4d]]: at rest, $P_0=-M$, $P_j=0$, and $\{Q_\alpha,\bar Q_{\dot\beta}\}=-2\sigma^\mu_{\alpha\dot\beta}P_\mu$ with $\sigma^0=I_2$; the N=1 central-charge-free same-chirality anticommutators vanish.
+[F1] [[def-qftx-super-poincare-algebra-4d]]: at rest, $P_0=-M$, $P_j=0$, and $\{Q_\alpha,\bar Q_{\dot\beta}\}=-2\sigma^\mu_{\alpha\dot\beta}P_\mu$ with $\sigma^0=I_2$; the $N=1$ central-charge-free same-chirality anticommutators vanish.
 
 [F2] [[thm-of-square-roots]]: $2M>0$ has a positive square root.
 

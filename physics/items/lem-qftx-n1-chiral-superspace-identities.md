@@ -33,6 +33,10 @@ sources:
       locator: "§3.4, printed pp. 83–85, derivative algebra; §§3.5–3.6, printed pp. 89–96, chiral-coordinate representation and components."
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
@@ -45,9 +49,9 @@ For the smooth finite Grassmann-valued superspace and left-derivative convention
 
 [Gates et al., §§3.4 and 3.6](https://arxiv.org/pdf/hep-th/0108200).
 
-Four-dimensional N=1 chiral superfield on flat superspace: [[def-qftx-n1-chiral-superfield]].
+Four-dimensional $N=1$ chiral superfield on flat superspace: [[def-qftx-n1-chiral-superfield]].
 
-Four-dimensional N=1 superspace Grassmann algebra and Berezin integration: [[def-qftx-superspace-grassmann-algebra]].
+Four-dimensional $N=1$ superspace Grassmann algebra and Berezin integration: [[def-qftx-superspace-grassmann-algebra]].
 
 ## Facts & Assumptions
 

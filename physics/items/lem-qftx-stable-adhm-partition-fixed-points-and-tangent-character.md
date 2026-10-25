@@ -38,6 +38,10 @@ sources:
       locator: Sections 3.1–3.5, PDF pp.12–18; ADHM deformation complex and formal fixed-point series.
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement

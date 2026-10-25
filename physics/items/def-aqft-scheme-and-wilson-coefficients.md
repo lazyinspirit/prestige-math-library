@@ -29,6 +29,10 @@ sources:
       locator: §§2.2.1–2.2.2 on the Wilson scale and renormalization; §4.1.3, equations (73)–(79), for physical and MS scheme conventions and running.
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Definition

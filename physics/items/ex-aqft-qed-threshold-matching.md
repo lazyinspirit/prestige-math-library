@@ -32,6 +32,10 @@ sources:
       locator: Chapter 7, §§7.1–7.2, equations (7.1)–(7.8), the one-loop fermion contribution to QED running and low-energy decoupling.
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Example

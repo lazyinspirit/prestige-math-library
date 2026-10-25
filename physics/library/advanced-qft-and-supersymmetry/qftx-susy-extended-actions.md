@@ -1,6 +1,6 @@
 ---
 page: qftx-susy-extended-actions
-title: N=2 and N=4 Gauge Actions
+title: $N=2$ and $N=4$ Gauge Actions
 status: draft
 library: physics
 items:

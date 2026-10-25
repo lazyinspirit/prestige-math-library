@@ -50,6 +50,10 @@ sources:
       locator: "§3.1, printed p. 17: framing implies c1=0 and the locally-free instanton sector; local proof establishes the stronger flat determinant connection under ASD."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-25
 ---
 
 ## Statement
