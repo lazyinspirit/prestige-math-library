@@ -1527,6 +1527,9 @@ Pending physics currency schedules the existing native final-preparation tool
 through the executor before handoff continues. It never runs judgment/stamping
 inline without that tracked dispatch. Failed native attempts hold until native
 retry re-arms them; pause, writer/adoption guards and the full gate barrier remain.
+The native stamper inserts a first verification mapping before an existing
+`sources:` key in either block or flow YAML, preserving that source line and both
+existing item hashes. Strict stamp-delta verification remains unchanged.
 
 ## Pre-gate recertification
 
