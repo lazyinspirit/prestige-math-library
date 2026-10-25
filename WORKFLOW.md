@@ -950,7 +950,7 @@ adjudication, repair guards, certification, required rejudgment, judge stamps or
 defect closure. This applies to ordinary math builds as well as category audits;
 outside-context maintenance does not silently enlarge the frozen frontier.
 
-Mathematics run inventory supports up to 130 A/B pairs, with exactly one pair per
+Mathematics run inventory supports up to 150 A/B pairs, with exactly one pair per
 batch and at most three batches per group. Groups use lowercase spreadsheet
 labels (`a` through `z`, then `aa`, `ab`, and so on). Inventory capacity does not
 increase active workers: the default global concurrency limit is 20, and stage,

@@ -4,6 +4,7 @@ import { join, resolve, relative,basename } from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
+import { MAX_RUN_PAIRS } from '../physics-autopilot/src/capacity.mjs';
 import { loadStep3 } from './frontier-snapshot.mjs';
 import { step1Decision } from './step1-decisions.mjs';
 import { computeBatchDependencyLevels } from './batch-dependency-levels.mjs';
@@ -245,7 +246,7 @@ export function preparePrerequisiteRegistration(root, run, requestPath, { invoke
   }
   const names = namesFor(root, run), manifests = names.map(name => json(join(root, 'research', name)));
   assert(names.length && names.every((name, i) => name.endsWith(`-batch-${i + 1}.pages.json`)) && manifests.every(pages => pages.length === 2), 'contiguous one-pair manifests required');
-  assert(names.length + request.pairs.length <= 130, 'pair capacity exceeded');
+  assert(names.length + request.pairs.length <= MAX_RUN_PAIRS, 'pair capacity exceeded');
   const planPath = 'research/plan-spec.json', spec = json(local(root, planPath));
   const prefix = git(root, ['rev-parse', '--show-prefix']);
   const prior = {};

@@ -1369,7 +1369,7 @@ Step-6 evidence also retains outside OPEN findings explicitly and reproduces
 their actual dispositions in the exhaustive fatal table. Current manifest
 subjects remain owned even if they were added after the frozen frontier.
 
-Physics run inventory supports up to 130 A/B pairs, one pair per batch and
+Physics run inventory supports up to 150 A/B pairs, one pair per batch and
 at most three batches per group. The global worker limit remains 30.
 
 ## Run controls and cutover
