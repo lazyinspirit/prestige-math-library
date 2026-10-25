@@ -268,7 +268,10 @@ test('round-2 context drift cannot inherit an old false-positive acceptance',t=>
 });
 
 function mechanicalFixture(t,options){
-  const f=scientificFixture(t,options),scientific=f.build();f.advertiseScientific(scientific);
+  const f=scientificFixture(t,options);
+  if(options?.extraCarry){const path='items/'+f.ids[4]+'.md',before=readFileSync(join(f.root,path),'utf8'),after=before.replace('raw N=1.','raw $N=1$.');writeFileSync(join(f.root,path),after);
+    f.inputs.reconciliation.source_changes.push({path,before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),before_judge_sha256:itemHashJudge(before),after_judge_sha256:itemHashJudge(after),interface_changed:false,report_path:f.inputs.reports[0],report_pointer:'/findings/0'});}
+  const scientific=f.build();f.advertiseScientific(scientific);
   const respond=keep=>({ids,contexts})=>{for(const id of ids){if(id===f.ids[3])continue;appendFileSync(f.ledgerPath,JSON.stringify({id,model:'gpt-6-luna',keep:keep(id),reason:'Actual fixture provider response',...contexts[id]})+'\n');
     appendFileSync(f.attemptsPath,JSON.stringify({id,model:'gpt-6-luna',context_sha256:contexts[id].context_sha256,outcome:'response',status:0,has_content:true,raw_bytes:100})+'\n');}return{status:0};};
   f.begin({sweep:respond(()=>true)});f.applyStamps(scientific.scope.targets.filter(id=>id!==f.ids[3]));f.finish();const complete=readFileSync(f.authorityPath);
@@ -298,13 +301,19 @@ for(const[name,mutate]of[
 ])test('mechanical continuation rejects '+name,t=>{const f=mechanicalFixture(t);mutate(f);assert.throws(f.build);});
 
 test('fresh mechanical rejection blocks and remains repairable through genuine bounded scientific continuation',t=>{
-  const f=mechanicalFixture(t),d=f.build();f.advertiseScientific(d);assert.throws(()=>f.begin({sweep:f.respond(id=>id!==f.ids[0])}),/rejected/);
+  const f=mechanicalFixture(t,{realContexts:true,extraCarry:true}),d=f.build();f.advertiseScientific(d);assert.throws(()=>f.begin({sweep:f.respond(id=>id!==f.ids[0])}),/rejected/);
   const before=readFileSync(join(f.root,'items',f.ids[0]+'.md'),'utf8'),after=before+'\n## Remark\nAn additional genuine scientific hypothesis is now explicit.\n';writeFileSync(join(f.root,'items',f.ids[0]+'.md'),after);
   const report=relative(f.root,join(f.supervision,'mechanical-scientific-resolution.json'));f.save(join(f.root,report),{findings:[{id:f.ids[0],review:'Actual fresh independent issue repaired.'}],consumers:[{id:f.ids[1],review:'Affected supplier context checked.'}]});
   const prior=step6ScientificEscalationHistory(f.root,f.run).filter(row=>row.id===f.ids[0]),decision={...f.scientific.decisions[0],escalation_id:'demo-after-mechanical-new-issue',repair_cycle:1,report_path:report,report_pointer:'/findings/0',
     prior_same_item:prior.map(row=>({authorization_sha256:row.authorization_sha256,rejected_tuple:row.rejected_tuple,relation:'distinct_issue',reason:'Actual distinct newly raised issue.',report_path:report,report_pointer:'/findings/0'})),ledger_row:{...f.scientific.decisions[0].ledger_row,defect_id:'demo-science-after-mechanical',correction:'Actual new issue repaired.'}};
   const reconciliation={run:f.run,reviewer:'/root',source_changes:[{path:'items/'+f.ids[0]+'.md',before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),before_judge_sha256:itemHashJudge(before),after_judge_sha256:itemHashJudge(after),interface_changed:false,report_path:report,report_pointer:'/findings/0'}],metadata_changes:d.reconciliation.metadata_changes,consumer_decisions:[]};
-  const next=makeStep6ScientificCurrencyCandidate(f.root,f.run,{reports:[report],decisions:[decision],reconciliation,contextBuilder:f.contextBuilder});f.advertiseScientific(next);f.begin({sweep:f.respond(()=>true)});f.applyStamps(next.scope.targets.filter(id=>id!==f.ids[3]));f.finish();assert.equal(f.verify().status,'complete');
+  const next=makeStep6ScientificCurrencyCandidate(f.root,f.run,{reports:[report],decisions:[decision],reconciliation,contextBuilder:f.contextBuilder});
+  const carried=next.carried_judgments.find(row=>row.id===f.ids[4]);assert.ok(carried);assert.notEqual(carried.verdict.row.context_sha256,next.current_inputs[f.ids[4]].context_sha256);
+  assert.deepEqual(next.target_inputs[f.ids[4]],d.target_inputs[f.ids[4]]);assert.ok(!next.provider_targets.includes(f.ids[4]));
+  f.advertiseScientific(next);let outgoing=[];f.begin({sweep:args=>{assert.deepEqual(args.ids,next.provider_targets);const ledger=readFileSync(f.ledgerPath,'utf8').trim().split('\n').map(JSON.parse);
+    outgoing=args.ids.filter(id=>!ledger.some(row=>row.id===id&&row.model==='gpt-6-luna'&&typeof row.keep==='boolean'&&row.item_sha256===args.contexts[id].item_sha256&&row.context_sha256===args.contexts[id].context_sha256));
+    return f.respond(()=>true)({...args,ids:outgoing});}});assert.ok(outgoing.includes(f.ids[0]));assert.ok(!outgoing.includes(f.ids[4]));
+  f.applyStamps(next.scope.targets.filter(id=>id!==f.ids[3]));f.finish();assert.equal(f.verify().status,'complete');
 });
 
 test('already observed native stamp-only Guard edge is accepted only for an unchanged ordinary keep bound by failed-render inputs', t => {

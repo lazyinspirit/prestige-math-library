@@ -237,7 +237,7 @@ function predecessor(root,run,d){
   for(const[index,value]of history.entries()){
   const original=value.authorization.document;
   if(index>0){if(isMechanical(original))validateMechanicalEvidence(root,run,original,history[index-1],{historical:true});
-    else verifyScientificDispositions(root,run,original,history[index-1],history.slice(0,index));
+    else verifyScientificDispositions(root,run,original,history[index-1],history.slice(0,index),{historical:true});
     const successor=history[index+1]?.authorization.document??d;
     verifyScientificDecisionSuffix(root,original,value.authorization.raw_sha256,{complete:true,ends:[successor.adjudications_baseline,isMechanical(successor)?successor.mechanical.defects_before:successor.defects_baseline]});}
   check(value.ledger_prefixes.length===2&&equal(sorted(value.ledger_prefixes.map(row=>row.path)),sorted([original.ledger_baseline.path,original.attempts_baseline.path])),'predecessor native ledger set changed');
@@ -351,7 +351,7 @@ function verifyEscalationProvenance(d,lineage){
   }
   check(new Set(d.decisions.map(row=>row.escalation_id).filter(Boolean)).size===d.decisions.filter(row=>row.escalation_id).length,'one request repeats an escalation identity');
 }
-function verifyScientificDispositions(root,run,d,old,lineage=null){
+function verifyScientificDispositions(root,run,d,old,lineage=null,{historical=false}={}){
   const round=scientificRound(d);lineage??=lineageForValue(root,run,old);
   check(d.version===1&&d.run===run&&d.reviewer==='/root'&&d.stage==='6-final-validation-v3'&&d.lineup==='luna'&&d.effort==='max'
     &&Number.isSafeInteger(round)&&round>=1,'invalid historical scientific Root authority');
@@ -366,6 +366,9 @@ function verifyScientificDispositions(root,run,d,old,lineage=null){
       &&Object.keys(row.ledger_row).every(key=>['defect_id','class','subclass','severity','location','disposition','correction','subclass_note'].includes(key)),'confirmed defect lacks truthful fixed taxonomy');}
   check(equal(d.inherited_adjudications??[],round>1?inheritedAdjudications(old):[]),'inherited adjudications differ from actual predecessor accepted rows');
   verifyEscalationProvenance(d,lineage);
+  if(d.carried_judgments!==undefined||d.provider_targets!==undefined||d.current_inputs!==undefined){
+    check(old.version===3&&isMechanical(old.authorization.document)&&old.status==='blocked','scientific carry requires the actual blocked mechanical parent');
+    validateCarriedJudgments(root,d,old,{historical});}
 }
 const mechanicalEvent=row=>Object.fromEntries(Object.entries(row).map(([key,value])=>[key,key==='output'?{kind:'native-output-reference',bytes:Buffer.byteLength(value),sha256:raw(value)}:value]));
 function nativeEventBinding(root,ref){
@@ -400,14 +403,22 @@ function validateMechanicalEvidence(root,run,d,old,{live=false,historical=false}
   for(const[index,binding]of m.fixed_defects.entries()){verifyProviderBinding(root,binding);check(binding.path===d.defects_baseline.path&&binding.line===m.defects_before.rows+index
       &&binding.row.run===run&&binding.row.disposition==='fixed'&&!binding.row.adjudication_ref,'not an actual separate mechanical defect record');}
   check(equal(defects.slice(m.defects_before.rows,d.defects_baseline.rows).map(row=>row.raw_sha256),m.fixed_defects.map(row=>row.raw_sha256)),'mechanical defect suffix changed');
+  validateCarriedJudgments(root,d,old,{historical});
+  if(live)for(const ref of [m.authorization,m.gate_start,...m.failures])check(equal(nativeEventBinding(root,ref),ref),'native final failure event projection changed');
+}
+function validateCarriedJudgments(root,d,old,{historical=false}={}){
   const carried=d.carried_judgments,ids=carried.map(row=>row.id);check(new Set(ids).size===ids.length
     &&equal(sorted([...ids,...d.provider_targets]),sorted(d.scope.targets))&&new Set([...ids,...d.provider_targets]).size===d.scope.targets.length,'mechanical provider/carry partition differs');
   for(const row of carried){const previous=old.judgments.find(previous=>previous.id===row.id),input=d.current_inputs[row.id],original=old.authorization.document.target_inputs[row.id];
     check(equal(row,previous)&&equal(d.target_inputs[row.id],original)&&input.item_sha256===row.verdict.row.item_sha256
       &&input.other_prompt_inputs_sha256===original.other_prompt_inputs_sha256&&input.context_sha256===row.after_stamp_context_sha256,'not genuinely retained completed coverage');
     if(!historical)currentStampDelta(readFileSync(join(root,'items',row.id+'.md'),'utf8'),row);}
-  if(live)for(const ref of [m.authorization,m.gate_start,...m.failures])check(equal(nativeEventBinding(root,ref),ref),'native final failure event projection changed');
 }
+function completedCurrentJudgments(root,prior,scope,contexts){return prior.judgments.filter(row=>{
+  if(!scope.targets.includes(row.id)||!row.after_stamp||!row.after_stamp_context_sha256)return false;
+  const now=contexts[row.id],input=prior.authorization.document.target_inputs[row.id];
+  if(now.item_sha256!==row.verdict.row.item_sha256||now.context_sha256!==row.after_stamp_context_sha256||now.other_prompt_inputs_sha256!==input.other_prompt_inputs_sha256)return false;
+  try{currentStampDelta(readFileSync(join(root,'items',row.id+'.md'),'utf8'),row);return true;}catch{return false;}});}
 function validateScientificDocument(root,run,cert,authorization,{live=false}={}){
   const d=authorization.document;
   check(d.version===1&&d.run===run&&d.reviewer==='/root'&&d.stage==='6-final-validation-v3'&&d.lineup==='luna'&&d.effort==='max'
@@ -511,7 +522,7 @@ function verifyCurrentAuthority(root, run, cert, authority, contexts, { allowJud
     if(adjudicated){check(judgment.adjudication,'missing actual scientific adjudication binding');verifyProviderBinding(root,judgment.adjudication);
       check(equal(scientificAdjudication(d,authority.authorization.raw_sha256,adjudicated),withoutAt(judgment.adjudication.row)),'scientific adjudication row differs from actual decision');}
     const source = readFileSync(join(root, 'items', id + '.md'), 'utf8');
-    if (authority.status === 'complete'||isMechanical(d)&&d.carried_judgments.some(row=>row.id===id)) {
+    if (authority.status === 'complete'||d.carried_judgments?.some(row=>row.id===id)) {
       const after = currentStampDelta(source, judgment);
       check(equal(after, judgment.after_stamp) && now.context_sha256 === judgment.after_stamp_context_sha256, 'native stamp-only replay changed: ' + id);
     } else check(now.context_sha256 === original.context_sha256 && fileHash(join(root, 'items', id + '.md')) === judgment.before_stamp.raw_sha256, 'judged inputs changed before stamping');
@@ -674,6 +685,12 @@ export function makeStep6ScientificCurrencyCandidate(root,run,{reports,decisions
   const changed=new Set(reconciliation.source_changes.filter(row=>row.path.startsWith('items/')).map(row=>row.path.slice(6,-3)));
   document.scope=scientificScope(root,run,cert,contexts,{changed,predecessor:prior});
   document.target_inputs=Object.fromEntries(document.scope.targets.map(id=>[id,contexts[id]]));
+  if(prior.version===3&&isMechanical(old)){
+    document.carried_judgments=completedCurrentJudgments(root,prior,document.scope,contexts);
+    const carried=new Set(document.carried_judgments.map(row=>row.id));document.provider_targets=document.scope.targets.filter(id=>!carried.has(id));
+    document.current_inputs={...document.target_inputs};
+    for(const id of carried)document.target_inputs[id]=old.target_inputs[id];
+  }
   const authorization={document,path:'',raw_sha256:raw(JSON.stringify(document,null,2)+'\n')};
   validateScientificDocument(root,run,cert,authorization,{live:true});return document;
 }
@@ -693,9 +710,7 @@ export function makeStep6GateMechanicalCurrencyCandidate(root,run,{proposalPath,
   const metadataPaths=[...new Set([...old.historical_metadata.map(row=>row.path),...application.metadata_changes.map(row=>row.path)])];
   const reconciliation={run,reviewer:'/root',source_changes:application.source_changes,metadata_changes:metadataPaths.map(path=>({path,changed_pointers:application.metadata_changes.find(row=>row.path===path)?.changed_pointers??[]})),consumer_decisions:application.consumer_decisions??[]};
   const changed=new Set(application.source_changes.map(row=>row.path.slice(6,-3))),scope=scientificScope(root,run,cert,contexts,{changed,predecessor:prior});
-  const carried=prior.judgments.filter(row=>{if(!scope.targets.includes(row.id))return false;const now=contexts[row.id],input=old.target_inputs[row.id];
-    if(now.item_sha256!==row.verdict.row.item_sha256||now.context_sha256!==row.after_stamp_context_sha256||now.other_prompt_inputs_sha256!==input.other_prompt_inputs_sha256)return false;
-    try{currentStampDelta(readFileSync(join(root,'items',row.id+'.md'),'utf8'),row);return true;}catch{return false;}});
+  const carried=completedCurrentJudgments(root,prior,scope,contexts);
   const providerTargets=scope.targets.filter(id=>!carried.some(row=>row.id===id));check(providerTargets.length>0,'no genuinely stale mechanical judgment targets');
   const document={version:1,kind:'physics-step6-final-gate-mechanical-current-judgments',currency_episode:scientificRound(old)+1,run,reviewer:'/root',stage:'6-final-validation-v3',lineup:'luna',effort:'max',preimage_commit:old.preimage_commit,certificate:old.certificate,frontier_sha256:f.sha256,
     predecessor:{path:`research/${run}-step6-currency-complete-${fileHash(join(root,authorityRel(run))).slice(0,16)}.json`,raw_sha256:fileHash(join(root,authorityRel(run))),payload_sha256:prior.sha256},authors,decisions:[],inherited_adjudications:inheritedAdjudications(prior),

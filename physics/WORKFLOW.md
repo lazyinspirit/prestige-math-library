@@ -1519,6 +1519,10 @@ when current item/other-prompt inputs and authenticated post-stamp context match
 all stale subjects receive actual current Luna/max judgments. A fresh rejection
 blocks and remains eligible for the ordinary per-escalation scientific repair
 route. Native stamp checks, fresh preparation and the full final battery remain.
+That immediate scientific continuation retains the mechanical parent's genuine
+post-stamp coverage using the same exact carry checks and original provider
+contexts. Its sweep omits carried subjects and still reuses any exact-current
+responses among the remaining targets; a repair never refreshes an old verdict.
 
 ## Pre-gate recertification
 
