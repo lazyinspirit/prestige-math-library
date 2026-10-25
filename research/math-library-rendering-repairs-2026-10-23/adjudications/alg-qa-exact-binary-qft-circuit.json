@@ -1,0 +1,133 @@
+{
+  "id": "alg-qa-exact-binary-qft-circuit",
+  "agent": "/root/dqa_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dqa_005",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic original standalone screenshot has only a gate-list definition. A three-wire circuit materially clarifies the unusual ascending-control chronology within descending-target blocks, the top-to-bottom big-endian wire order, and the final reversal. This is a warranted explanatory addition, not a claim that the complete definition or proof was deficient.",
+      "action": "Append a native fenced TikZ n=3 circuit and precise gate/endpoint convention in a separate Remarks section.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an n=3 exact-QFT circuit in Remarks: H(q2), CP3(q0→q2), CP2(q1→q2), H(q1), CP2(q0→q1), H(q0), SWAP(q0,q2); explicit P_s target-box convention and pre/post-swap factor order. Original carrier retained as an exact byte prefix.",
+  "source_lines_after": {
+    "remarks": [
+      38,
+      82
+    ],
+    "diagram": [
+      42,
+      80
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Register and map types",
+      "evidence": "Definition input and def-qc-ordered-bitstring-encoding: three ordered wires q2,q1,q0 represent x=4x2+2x1+x0. Every depicted gate embeds a unitary into (C^2) tensor 3; no ancillas or measurements appear. Input/output wire positions are the same ordered register."
+    },
+    {
+      "check": "Gate semantics and phase sign",
+      "evidence": "def-qa-qft-gate-cost-model defines H=2^(-1/2)[[1,1],[1,-1]] and CP_s=diag(1,1,1,exp(2πi/2^s)). A filled control on q_i connected to target P_s=diag(1,exp(2πi/2^s)) on q_j realizes exactly that positive-sign CP_s in control-first order."
+    },
+    {
+      "check": "All chronological operations and indices",
+      "evidence": "Definition step 1 with n=3: j=2 gives H(q2), then i=0 gives s=3 and control q0, then i=1 gives s=2 and control q1. j=1 gives H(q1), then i=0 gives s=2 and control q0. j=0 gives H(q0), with no controls. Figure columns x=0.9,2.1,3.3,4.5,5.7,6.9 match precisely; exactly three H boxes and three controlled phases are drawn."
+    },
+    {
+      "check": "Final SWAP and noninteracting crossings",
+      "evidence": "Definition step 2 for n=3 has only j=0, hence SWAP(q0,q2) at final column x=8.1. Exactly two crosses terminate this connector; no dot or target occurs where it passes q1. Similarly CP3 passes q1 without a dot. Caption explicitly says q1 is unchanged by the final SWAP."
+    },
+    {
+      "check": "Tensor-factor relation",
+      "evidence": "lem-qa-binary-qft-product-factorization statement and proof step 3.1 give R2 tensor R1 tensor R0 before reversal, then R0 tensor R1 tensor R2. These are the only asserted pre/post-swap state relations in the new prose; they use the existing lemma already in deps."
+    },
+    {
+      "check": "Degenerate case and proof independence",
+      "evidence": "The figure is explicitly restricted to n=3; original n=0 identity clause remains unchanged and is reiterated. No argument is moved into the figure. The independent correctness theorem thm-qa-exact-binary-qft-circuit-correct retains its complete proof, including steps 1.1–3.1."
+    },
+    {
+      "check": "Independent numerical cross-check",
+      "evidence": "A local Python complex-amplitude calculation applied the exact depicted seven operations to all eight basis inputs and compared every entry with exp(2πi*x*y/8)/sqrt(8); maximum error 1.3947004136484323e-15. This is supplementary finite-case evidence, not a replacement for the existing general proof."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qa-exact-binary-qft-circuit.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-exact-binary-qft-circuit.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-qa-exact-binary-qft-circuit.md",
+            "item_id": "alg-qa-exact-binary-qft-circuit",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qa-exact-binary-qft-circuit.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqa005 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-qa-exact-binary-qft-circuit --out research/math-library-rendering-repairs-2026-10-23/previews/dqa005-native-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 13
+      },
+      "native_visual_inspection": "Independently inspected standalone original-resolution final PNG. All three wire labels, three H boxes, P3 and two P2 boxes, three filled controls, two SWAP crosses and connecting segments are visible with adequate contrast on black. No label/edge overlaps or diagram clipping. Body capture above the Remarks/diagram is partly blank in fresh PNG despite unchanged original source and populated HTML; no complete-body screenshot certification is claimed."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "368597a408bc26332ec01b8f5b1a53199a9e12a73b835de9800b25e1eed1ca5a",
+    "current_raw_sha256": "1b2d6f412d394dcea2c25d1a7afebc8b05a01f186a85629e588925182cf5e6de",
+    "frontmatter_byte_identical": true,
+    "original_carrier_unchanged_prefix": true,
+    "original_screenshot_declared_path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement/screenshots/alg-qa-exact-binary-qft-circuit--01.png",
+    "original_screenshot_resolved_path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/alg-qa-exact-binary-qft-circuit--01.png",
+    "original_screenshot_sha256": "8eaedb4d2ccfb3a7d5b2ae094a87f7d94ba0fe8e41a5fe21bd3f794aec5bafb5",
+    "original_path_discrepancy": "Declared diagram-supplement screenshot path does not exist. Authentic tile located within the same quantum-algorithms category; its actual SHA256 exactly equals the intake hash. Viewed standalone at original resolution.",
+    "native_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqa005-native-final/manifest.json",
+    "native_preview_manifest_sha256": "1836b5cc402b81bda7afb3f99b47c84335081d0a3ef320a728f4340c543958b7",
+    "native_preview_source_binding": {
+      "id": "alg-qa-exact-binary-qft-circuit",
+      "status": "published",
+      "source": "items/alg-qa-exact-binary-qft-circuit.md",
+      "source_sha256": "1b2d6f412d394dcea2c25d1a7afebc8b05a01f186a85629e588925182cf5e6de",
+      "snapshot": "snapshots/alg-qa-exact-binary-qft-circuit.md",
+      "html": "html/alg-qa-exact-binary-qft-circuit.html",
+      "html_sha256": "b6a8535cd88ce3fecbc656740af36d9c8d806264c52fa630463bed62ae7ab1bc",
+      "reference_map_sha256": "662087dc00eb593b50327aa83a8a65b301e429a83e30bb2d191d17602fdf6a40"
+    },
+    "native_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dqa005-native-final/screenshots/alg-qa-exact-binary-qft-circuit--01.png",
+    "native_screenshot_sha256": "b1b38a7e5f8f009a076e1946fc34e78ca639ff5bdd2e995d6f74b45acb9415f2"
+  },
+  "remaining_issues": [
+    "Fresh native preview shows partial blank text regions outside the diagram despite intact HTML/source. The figure itself is fully visible and checked; preview is local ItemBody coverage, not a production-route audit. Reference-map inventory reports 13 unrelated parse diagnostics."
+  ]
+}

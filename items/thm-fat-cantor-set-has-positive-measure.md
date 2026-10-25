@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-fat-cantor-set-has-positive-measure.json
+  precheck: pass
 id: thm-fat-cantor-set-has-positive-measure
 kind: theorem
 title: "The Smith-Volterra-Cantor set is compact, perfect and nowhere dense, and does not have measure zero"
@@ -14,13 +17,6 @@ aliases: []
 landmark: true
 short: "fat Cantor set: nowhere dense, not null"
 proof_strategy: contradiction
-verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -114,3 +110,37 @@ of every interval cover of $S$.
 - **Where the construction differs from the Cantor set, and where it does not.** Steps 1.2, 1.3, 1.4, 2.2 and 3.1 use only that the pieces shrink to $0$ in length, double in number and stay separated, which the middle-thirds construction also satisfies; so $S$ and $C$ are indistinguishable at that level. The difference is entirely in step 2.1: the removed length at stage $n$ is $4^{-1}2^{-n}$ here and $2^{n}3^{-n-1}$ there, and only the first is summable to less than $1$. The removed lengths are added up in [[ex-fat-cantor-measure-computed]], where they total exactly $2^{-1}$.
 
 - **Compactness is not what is used against nullity.** The proof of claim 4 never extracts a finite subcover: it combines the given countable cover of $S$ with the countably many removed pieces and appeals to [[lem-nondegenerate-interval-is-not-null]], whose own proof is where the compactness of $[0,1]$ is spent. Passing through [[thm-compact-null-is-content-zero]] would work too and would be longer.
+
+
+**First stages of the construction.** The rows below share the same horizontal scale; solid segments, including their endpoints, are retained. The first deletion is $(3/8,5/8)$, of length $1/4$; the next deletions are $(5/32,7/32)$ and $(25/32,27/32)$, each of length $1/16$. Thus the gaps shrink faster than the number of pieces grows, as quantified in step 2.1. The figure illustrates the finite approximations, not the limiting set $S$; the proof above is independent of it.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[left] at (-0.3,0) {$S_0$};
+\node[left] at (-0.3,-1.2) {$S_1$};
+\node[left] at (-0.3,-2.4) {$S_2$};
+\draw[line width=2pt] (0,0) -- (8,0);
+\draw[line width=2pt] (0,-1.2) -- (3,-1.2);
+\draw[line width=2pt] (5,-1.2) -- (8,-1.2);
+\draw[line width=2pt] (0,-2.4) -- (1.25,-2.4);
+\draw[line width=2pt] (1.75,-2.4) -- (3,-2.4);
+\draw[line width=2pt] (5,-2.4) -- (6.25,-2.4);
+\draw[line width=2pt] (6.75,-2.4) -- (8,-2.4);
+\foreach \y in {0,-1.2,-2.4} {
+  \draw (0,\y-0.1) -- (0,\y+0.1);
+  \draw (8,\y-0.1) -- (8,\y+0.1);
+}
+\foreach \x in {3,5} {
+  \draw (\x,-1.3) -- (\x,-1.1);
+  \draw (\x,-2.5) -- (\x,-2.3);
+}
+\foreach \x in {1.25,1.75,6.25,6.75} {
+  \draw (\x,-2.5) -- (\x,-2.3);
+}
+\node[above] at (0,0.1) {$0$};
+\node[above] at (8,0.1) {$1$};
+\node[above] at (3,-1.05) {$3/8$};
+\node[above] at (5,-1.05) {$5/8$};
+\node[below] at (4,-2.8) {$S_2\subseteq S_1\subseteq S_0$};
+\end{tikzpicture}
+```

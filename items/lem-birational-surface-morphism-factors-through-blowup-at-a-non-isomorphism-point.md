@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point.json
+  precheck: pass
 id: lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point
 kind: lemma
 title: A birational morphism of regular surfaces factors through the blowup of a point where its inverse is undefined
@@ -45,12 +48,7 @@ sources:
     url: https://stacks.math.columbia.edu/tag/0C5H
   - title: Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)
     url: https://www.math.ens.psl.eu/~debarre/M2.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -104,3 +102,12 @@ $b\circ g=f$. Equivalently, the ideal $f^{-1}\mathfrak m_y\cdot\mathcal O_X$ is 
 
 - The roof and conormal argument works over every residue field; no rational point of the exceptional curve is chosen.
 - Uniqueness of g follows because two lifts agree on the common generic open, which is dense and reduced.
+
+The factorization in the statement is illustrated below. Here $b$ is the blowup at the given closed point $y$, and its exceptional fibre is $E'=b^{-1}(y)$. Step 5.1 establishes invertibility of the pulled-back centre ideal, so the blowup universal property gives the unique lift $g$ making the triangle commute.
+
+```tikzcd
+X \arrow[r, "g"] \arrow[dr, "f"'] & \mathrm{Bl}_y Y \arrow[d, "b"] \\
+& Y
+```
+
+The diagram illustrates the conclusion; the proof above is independent of it.

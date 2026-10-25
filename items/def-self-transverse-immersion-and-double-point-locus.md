@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-self-transverse-immersion-and-double-point-locus.json
+  precheck: n/a
 id: def-self-transverse-immersion-and-double-point-locus
 kind: definition
 title: Self-transverse immersions and the double point locus
@@ -46,3 +49,23 @@ $$f\times f:M\times M\setminus\Delta_M\to X\times X$$
 is transverse to $\Delta_X$ ([[def-a-smooth-map-transverse-to-an-embedded-submanifold]]). Equivalently, for every distinct $x,y$ with common image $r$, one has $df_x(T_xM)+df_y(T_yM)=T_rX$. This is pairwise transversality and does not assert absence of triple points. Each selected preimage gives a local embedded sheet by [[cor-every-immersion-is-locally-an-embedding]]; for a self-transverse immersion in ambient dimension $2m$, a selected coincident pair has complementary tangent planes, and its two local sheet disks are supplied by [[lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks]]. This statement about a selected pair does not say that these are all sheets over $r$.
 
 If $f$ is self-transverse and $M$ and $X^{2m}$ are oriented, every ordered coincident branch pair has the sign $\varepsilon(x,y)\in\{\pm1\}$ of [[def-local-oriented-intersection-sign]], computed with the $x$ branch first. Swapping the two oriented $m$-blocks multiplies this sign by $(-1)^{m^2}=(-1)^m$. Consequently for even $m$ it defines an ordering-independent sign on each element of $D(f)$; for odd $m$ an ordering is needed. At a multiple collision image, different branch pairs need not have the same sign, so no single sign is assigned to that image. None of these definitions asserts finiteness, compactness, orientability, absence of triples or any choice principle.
+
+## Remarks
+
+If $f^{-1}(r)=\{x_1,x_2,x_3\}$ with distinct $x_i$, the common-image map sends the three branch pairs over $r$ to the same collision image:
+
+```tikz
+\begin{tikzpicture}
+\node at (0,2) {$D(f)$};
+\node at (4,2) {$\Sigma(f)$};
+\node (a) at (0,1) {$\{x_1,x_2\}$};
+\node (b) at (0,0) {$\{x_1,x_3\}$};
+\node (c) at (0,-1) {$\{x_2,x_3\}$};
+\node (r) at (4,0) {$r$};
+\draw[->] (a) -- (r);
+\draw[->] (b) -- (r);
+\draw[->] (c) -- (r);
+\end{tikzpicture}
+```
+
+Only the elements over $r$ are shown. This is a set-level schematic of the definition, not a picture of tangent planes or a test for self-transversality. Each arrow sends $\{x_i,x_j\}$ to $f(x_i)=f(x_j)=r$; no sign is attached to the image point. With exactly two preimages there is only one branch pair over $r$. The definitions above are independent of this illustration.

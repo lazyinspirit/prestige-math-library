@@ -20,17 +20,24 @@
 import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { join, relative, resolve, isAbsolute } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { itemHashGuard, shortHash } from '../../physics-support/item-hash.mjs';
 import { isPublishedItem } from '../../physics-support/published-repair-policy.mjs';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
+import { resolveHistoricalRunPath } from '../../physics-support/run-repository-relocation.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
+import { appendStages } from '../src/frontier-append.mts';
+import { originalConstructionBatches, step2PrerequisiteStages } from '../src/step2-prerequisites.mts';
+import {repairReviewInputs,repairGraphFingerprint} from '../../physics-support/step2-prerequisite-repairs.mjs';
+import {authoredMetadataReviewInputs} from '../../physics-support/step2-authored-metadata.mjs';
+import {prerequisiteLifecycleBinding} from '../../physics-support/step2-prerequisite-lifecycle.mjs';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
 import { originalJudgeLineup } from '../../physics-support/original-judge-lineup.mjs';
+import { step6CurrencyPending } from '../../physics-support/step6-currency-repair.mjs';
 import { prepareFinalIfChanged } from '../../physics-support/step6-finalize.mjs';
 import { assertFreshStep6State } from '../../step6-prepared.mjs';
 
@@ -81,15 +88,15 @@ export function batches(ctx: any): string[] {
  * priority uses the last valid full graph. Current dependencies and complete
  * readiness are checked strictly by the drained Step-1 join and gates. */
 export function authoringBatches(ctx: any): string[] {
-  if (ctx.doctor) return batches(ctx);
-  return readSchedulingBatchDependencyLevels(ctx.repo, ctx.run).batches.map(row => row.batch);
+  if (ctx.doctor) return originalConstructionBatches(ctx,batches(ctx));
+  return originalConstructionBatches(ctx,readSchedulingBatchDependencyLevels(ctx.repo, ctx.run).batches.map(row => row.batch));
 }
 
 /** Required local scaffold output, independent of cross-pair supplier readiness.
  * A finished author must leave nonempty inventories and explicit readiness
  * records. Escalated or stale readiness remains visible to the complete gate
  * battery; it does not reserve an authoring slot or prevent another pair start. */
-function scaffoldArtifacts(ctx: any, unit: string): string[] {
+export function scaffoldArtifacts(ctx: any, unit: string): string[] {
   const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
   const out = [manifest, `research/${ctx.run}-batch-${unit}.coverage.json`];
   let complete = true;
@@ -1076,6 +1083,9 @@ function step6PathwayOwed(ctx: any): string[] {
 }
 function step6FinalGates(ctx: any) {
   const all = [
+    gate('rendering-quality', ['node', 'tools/physics-support/rendering-quality.mjs', '--run', ctx.run, '--verify'], {
+      needs: [`research/${ctx.run}-rendering-quality.json`],
+      liveness: { pattern: /rendering-quality: (\d+) file\(s\)/.source, min: 1, unit: 'rendered source files' } }),
     closureGate(ctx), ledgerGate(ctx, { terminal: true }),
     gate('pathway-closure', ['node', 'tools/physics-support/pathway-closure.mjs', 'check', '--run', ctx.run]),
     ...[gate('judge-stamps', ['env', `JUDGE_LINEUP=${originalJudgeLineup(ctx)}`, 'node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
@@ -1200,7 +1210,7 @@ export const stages = [
         || original.ok !== true || original.written_by === 'autopilot'
         || original.covers?.length !== 1 || original.covers[0] !== unit || !original.prompt)
         throw Error('Continuation requires the genuine original successful native author result and prompt');
-      const originalPrompt = readFileSync(isAbsolute(original.prompt) ? original.prompt : R(ctx, original.prompt), 'utf8');
+      const originalPrompt = readFileSync(resolveHistoricalRunPath(ctx.repo, ctx.run, original.prompt, { sourceArtifact: relative(ctx.repo, originalPath) }), 'utf8');
       if (!originalPrompt.trim()) throw Error('Continuation requires a nonempty genuine original native prompt');
       const direction = `research/${ctx.run}-owner-authoring-direction.md`;
       const ownerDirection = readFileSync(R(ctx, direction), 'utf8');
@@ -1325,11 +1335,11 @@ export const stages = [
       const eligible = pending.filter(u => engineRepairEligible(ctx,u));
       return batchPlans(ctx, eligible,slots);
     },
-    gates: (ctx: any) => [scopeGate(ctx),
-      gate('batch-scope-review', ['node', 'tools/physics-support/batch-scope-review.mjs', 'check', '--run', ctx.run]),
+    gates: (ctx: any) => {const lifecycle=prerequisiteLifecycleBinding(ctx.repo,ctx.run);return [scopeGate(ctx),
+      gate('batch-scope-review', ['node', 'tools/physics-support/batch-scope-review.mjs', 'check', '--run', ctx.run,...(lifecycle?['--prerequisite-lifecycle-sha256',lifecycle.fingerprint]:[])],lifecycle?{ownerReviewInputs:lifecycle.inputs}:{}),
       gate('item-dependency-levels', ['node', 'tools/physics-support/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       ...coverageGates(ctx, {requireDestination:true}), manifestDepsGate(ctx), extGate(ctx), fetchGate(ctx),
-      ...repoWide(ctx).filter(g => g.id !== 'splice-verify'), policyItemGate(ctx), ...contractGates(ctx)],
+      ...repoWide(ctx).filter(g => g.id !== 'splice-verify'), policyItemGate(ctx), ...contractGates(ctx)];},
     onHold: holdStep1,
   },
 
@@ -1557,7 +1567,8 @@ export const stages = [
     pattern: resultPattern('tool', 'step6-prepare-final-v3'), concurrency: 1,
     artifacts: (ctx) => [`research/${ctx.run}-publication-readiness.json`, `research/${ctx.run}-step6-evidence.json`,
       `research/${ctx.run}-step6-report-integrity.json`],
-    plan: (ctx) => [{ role: 'tool', label: 'step6-prepare-final-v3', job: 'bookkeeping-mechanical', covers: ['all'],
+    plan: (ctx) => [{ role: 'tool', label: 'step6-prepare-final-v3', job: step6CurrencyPending(ctx.repo,ctx.run)?'judgement':'bookkeeping-mechanical', covers: ['all'],
+      ...(step6CurrencyPending(ctx.repo,ctx.run)?{timeout:43200}:{}),
       argv: ['node', step6Helper, 'prepare-final', '--run', ctx.run] }],
     // The helper owns a memo on actual selected-source fingerprint and repair
     // round. No repeated renderer/recertification work occurs on quiet ticks.
@@ -1641,9 +1652,45 @@ for (const stage of stages) {
 }
 
 export const workflowRevision = 'physics-six-step-v1-construction-scope';
+/** Genuine supplemental construction. Current full-frontier mechanical duties
+ * remain intact; only new authoring-readiness subjects and source URLs are local.
+ * No original drift report is retroactively extended or claimed as new review. */
+export function supplementalConstructionGates(ctx:any,entry:any) {
+  const repairGraph=repairGraphFingerprint(ctx.repo,ctx.run,entry.number);
+  const coverage=entry.batches.map((batch:string)=>`research/${ctx.run}-batch-${batch}.coverage.json`);
+  const liveness=`research/${ctx.run}-prerequisite-${entry.number}-url-liveness.json`;
+  return [
+    gate('supplemental-construction', ['node','tools/physics-support/step2-prerequisites.mjs','check','--run',ctx.run,'--generation',String(entry.number),...(repairGraph?['--repair-graph-sha256',repairGraph]:[])], {
+      liveness:{pattern:'step2-prerequisites: (\\d+) items constructed',min:1,unit:'supplemental items'},
+      ownerReviewInputs:[`research/${ctx.run}-step2-prerequisites.json`,entry.request.path,
+        ...repairReviewInputs(ctx.repo,ctx.run,entry.number),'tools/physics-support/step2-prerequisite-repairs.mjs',
+        ...authoredMetadataReviewInputs(ctx.repo,ctx.run,entry.number),'tools/physics-support/step2-authored-metadata.mjs',
+        'tools/physics-autopilot/src/step2-prerequisites.mts','tools/physics-support/step2-prerequisites.mjs',
+        ...Object.keys(entry.protected_native??{}),...Object.keys(entry.inputs).filter((path:string)=>!/-scope-review\/batch-\d+\/state\.json$/.test(path))],
+    }),
+    gate('physics-content',['node','tools/physics-support/physics-check.mjs','--run',ctx.run]),
+    batchLevelsGate(ctx),
+    gate('item-dependency-levels',['node','tools/physics-support/item-dependency-levels.mjs','check','--run',ctx.run]),
+    scopeGate(ctx), ...coverageGates(ctx,{requireDestination:true}), ...policyGates(ctx), planGate(ctx), extGate(ctx), policyItemGate(ctx),
+    ...contractGates(ctx), ...repoWide(ctx).filter((g:any)=>g.id!=='splice-verify'),
+    gate('supplemental-url-liveness',['node','tools/physics-support/url-sweep.mjs','--coverage',...coverage,'--out',liveness,'--recover','--fail-on-dead'],{
+      liveness:{pattern:'(\\d+) citation decision\\(s\\)',min:1,unit:'citation decisions'},
+    }),
+    gate('supplemental-source-backing',['node','tools/physics-support/source-backing.mjs','--coverage',coverage.join(','),'--liveness',liveness,
+      '--reharvest-plan',`research/${ctx.run}-prerequisite-${entry.number}-reharvest-plan.json`],{
+      liveness:{pattern:'(\\d+) authored result\\(s\\)',min:1,unit:'authored results'},
+    }),
+    gate('supplemental-source-fetch',['node','tools/physics-support/source-fetch-check.mjs','--coverage',coverage.join(',')],{
+      liveness:{pattern:'(\\d+)/\\d+ source\\(s\\) resolved',min:1,unit:'sources resolved'},
+    }),
+  ];
+}
 export const stagesForRun = (ctx: any) => {
   assertFreshStep6State(ctx, { physics: true });
   // No prose obligation means no author stage; the final pathway gate remains.
-  return stages.filter(stage => stage.id !== '6-pathway-author-v3' || step6PathwayOwed(ctx).length > 0);
+  return step2PrerequisiteStages(appendStages(stages.filter(stage => stage.id !== '6-pathway-author-v3' || step6PathwayOwed(ctx).length > 0), ctx),ctx,{
+    artifacts:(context:any,unit:string)=>[...scaffoldArtifacts(context,unit),...authorArtifacts(context,unit)],
+    gates:supplementalConstructionGates,
+  });
 };
 export default { stages, stagesForRun, batches, alphaGroups, workflowRevision };

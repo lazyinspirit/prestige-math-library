@@ -1,0 +1,72 @@
+{
+  "id": "ex-residue-evaluates-cos-over-one-plus-x-squared",
+  "agent": "/root/rendering_repair_coordinator/cxa_035",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original standalone original-resolution tile visibly prints x^2 and pi in the title while the body correctly typesets the same integrand and evaluation; the frozen and current source originally had no math delimiters in the title. This is an exposed mathematical expression, beyond optional prose typography.",
+      "action": "Wrapped the integrand and value in inline math and used \\cos and \\pi; preserved the slash notation and all mathematical content.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title-only inline math repair for cos x / (1 + x^2) and pi / e.",
+  "source_lines_after": {
+    "4": "title: 'The integral of $\\cos x / (1 + x^2)$ over the real line is $\\pi / e$'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-residue-evaluates-cos-over-one-plus-x-squared.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-residue-evaluates-cos-over-one-plus-x-squared.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-residue-evaluates-cos-over-one-plus-x-squared.md",
+            "item_id": "ex-residue-evaluates-cos-over-one-plus-x-squared",
+            "status": "pass",
+            "strategy": "computation"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-residue-evaluates-cos-over-one-plus-x-squared.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/ex-residue-evaluates-cos-over-one-plus-x-squared--01.png",
+    "original_viewed_original_resolution": true,
+    "final": "research/math-library-rendering-repairs-2026-10-23/previews/cxa035-final/screenshots/ex-residue-evaluates-cos-over-one-plus-x-squared--01.png",
+    "final_sha256": "4dfc7b32f6e004049a29ddbca19218fb8e432e69054402dd9ae68135cdc549b9",
+    "final_viewed_original_resolution": true,
+    "result": "Title now typesets cosine, superscript 2, and pi correctly. Full body visible and no additional confirmed LaTeX defects.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa035-final/manifest.json",
+    "manifest_sha256": "1d64f600e5bdc161acc2c5404aed4fcded7eaa5535b6d1470eba24ec128ae35a",
+    "source_sha256": "4764f0b9f3ab87c3016559ab40a5d82d436ad57c6f2e933f79871357ead5e3eb",
+    "limitations": "Local native ItemBody/title preview; not production route coverage. Reference map reports 17 unrelated parse diagnostics."
+  },
+  "publication_status_preserved": true,
+  "body_byte_identical": true
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cech-vanishing-on-a-cofinal-basis-implies-acyclicity.md

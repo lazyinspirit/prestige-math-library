@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-locally-uniform-harmonic-convergence-is-c-infinity-local.md

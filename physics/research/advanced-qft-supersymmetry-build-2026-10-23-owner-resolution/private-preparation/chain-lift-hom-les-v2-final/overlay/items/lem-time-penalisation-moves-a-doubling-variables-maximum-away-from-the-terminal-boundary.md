@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-time-penalisation-moves-a-doubling-variables-maximum-away-from-the-terminal-boundary.md

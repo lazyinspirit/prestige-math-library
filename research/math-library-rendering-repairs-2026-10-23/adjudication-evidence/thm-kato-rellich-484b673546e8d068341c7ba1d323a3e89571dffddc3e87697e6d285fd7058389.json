@@ -1,0 +1,119 @@
+{
+  "id": "thm-kato-rellich",
+  "agent": "/root/rendering_repair_coordinator/fa_019",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tiles 01 and 02 visibly print >=, <=, ASCII gamma/lambda/mu, underscores, inverse exponents and Btilde in mathematical formulas. Frozen/current source agrees and omits delimiters around precisely those expressions, alongside already correctly typeset formulas. These are formula-display defects rather than merely prose abbreviations.",
+      "action": "Delimited and typeset the existing formulas throughout Facts and Proof, using equivalent Greek symbols, inequalities, subscripts, closure bars, tildes, set inclusions and convergence arrows. No hypotheses, estimates, operators, proof steps or justification tags changed.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Original tile 01 additionally displays I-C, D(g(T)) intersect D((fg)(T)), and f(v)=v as plain formula text in A3/A4; original tile 03 displays the literal inverse exponent in the source-note resolvent convention (z-A)^{-1}. These match un-delimited source expressions.",
+      "action": "Typeset those same formulas and adjacent mathematical symbols without changing the underlying assertions or references.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added missing inline mathematical delimiters and translated existing ASCII formula notation to equivalent LaTeX in Facts, Given, six proof steps and source-note resolvent convention.",
+  "source_lines_after": {
+    "36": "[A1] Relative boundedness supplies finite $a,b\\ge0$ with $a<1$ and $\\|Bx\\|\\le a\\|Ax\\|+b\\|x\\|$ on $D(A)$. The graph norm is $(\\|x\\|^2+\\|Ax\\|^2)^{1/2}$; graph closure defines the operator closure. [[def-relative-boundedness-with-respect-to-an-operator]] [[def-unbounded-linear-operator-domain-and-graph]] [[def-densely-defined-closed-and-closable-operator]]",
+    "38": "[A2] Symmetry is the identity $\\langle Tx,y\\rangle=\\langle x,Ty\\rangle$ on the domain; self-adjoint operators are closed and densely defined. A densely defined symmetric $S$ is self-adjoint if both ranges of $S\\pm i\\mu$ equal $H$ for some $\\mu>0$. Nonreal points are resolvent points of a self-adjoint operator. The convention is $R_T(z)=(z-T)^{-1}$. [[def-symmetric-self-adjoint-and-essentially-self-adjoint]] [[thm-self-adjointness-range-criterion]] [[thm-self-adjoint-resolvent-estimate]] [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]",
+    "40": "[A3] If a bounded operator $C$ has norm less than one, $I-C$ has a bounded inverse given by the Neumann series. [[lem-neumann-series]]",
+    "42": "[A4] On a nonzero $H$, a self-adjoint $T$ has a regular PVM $E$, domain $\\{x:\\int v^2dE_x<\\infty\\}$, and $\\|T x\\|^2=\\int v^2dE_x$, $\\langle Tx,x\\rangle=\\int v\\,dE_x$. Bounded integrals satisfy the norm bound and quadratic identity. Projections multiply by intersection; strong countable additivity holds. The Borel calculus has the product rule with domain $D(g(T))\\cap D((fg)(T))$, and the spectrum of $T$ is the set of $v$ for which every neighborhood has nonzero projection (apply its essential-range assertion to $f(v)=v$). [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]] [[lem-unbounded-pvm-integral-is-well-defined-and-closed]] [[thm-bounded-borel-pvm-integral]] [[def-projection-valued-measure]] [[thm-unbounded-borel-functional-calculus]]",
+    "50": "**Given:** the operators and admissible pair $(a,b)$ in the statement, with $0\\le a<1$ and $b\\ge0$.",
+    "52": "1.1 If $H=\\{0\\}$, all domains and graphs are zero and all conclusions hold directly. Otherwise use [A4]. For $z=\\pm i\\mu$, $\\mu>0$, put $r_z(v)=(z-v)^{-1}$. The bounds $|r_z(v)|\\le1/\\mu$ and $|v r_z(v)|\\le1$ show that $r_z(A)$ maps $H$ into $D(A)$, that $\\|r_z(A)\\|\\le1/\\mu$, and that $\\|A r_z(A)\\|\\le1$. The product rule gives $(z-A)r_z(A)=I$ on $H$ and $r_z(A)(z-A)=I$ on $D(A)$, so this is $R_A(z)$. Thus $\\|BR_A(z)\\|\\le a+b/\\mu<1$ when, for example, $\\mu=1+2b/(1-a)$. [A1, A2, A4, given]",
+    "54": "1.2 For any nonzero-space self-adjoint $T$ and real $c$, the spectral-measure equivalence $T\\ge c$ if and only if $E(( -\\infty,c))=0$ follows directly. If $T\\ge c$ and $J_n=[-(n+1),c-1/(n+1)]$ has a nonzero projection, a nonzero $x$ in its range belongs to $D(T)$, has $E_x$ carried by $J_n$, and satisfies $\\langle Tx,x\\rangle\\le(c-1/(n+1))\\|x\\|^2$, a contradiction. These increasing sets exhaust $(-\\infty,c)$, so countable additivity gives zero projection. Conversely zero projection below $c$ gives $\\langle Tx,x\\rangle=\\int v\\,dE_x\\ge c\\|x\\|^2$ for every $x$ in $D(T)$. Also if every real $t<c$ is a resolvent point, the essential-range characterization in [A4] supplies a zero-projection open neighborhood of each $t$. The rational intervals contained in such neighborhoods form a countable cover of $(-\\infty,c)$; their union has zero projection by countable subadditivity of each $E_x$. Therefore again $T\\ge c$. This does not require a finite spectral infimum or any resolvent-distance formula. [A4]",
+    "56": "2.1 Put $S=A+B$ on exactly $D(A)$. For $z=\\pm i\\mu$ the identity $z-S=(I-BR_A(z))(z-A)$ holds on $D(A)$, since $R_A(z)(z-A)x=x$ there. The first factor is boundedly invertible by [A3], and $z-A$ is bijective $D(A)$ to $H$. Hence both nonreal shifts of $S$ are onto. $S$ is symmetric by summing the two symmetry identities and densely defined because $D(A)$ is dense. The range criterion makes $S$ self-adjoint. No second-resolvent identity with a previously closed $S$ is assumed. [A1, A2, A3, step 1.1]",
+    "58": "3.1 Suppose $A\\ge\\gamma$ and let $\\lambda+\\gamma=d>0$. By step 1.2 $E_A$ is carried by $[\\gamma,\\infty)$. Define $r(v)=(-\\lambda-v)^{-1}$ on that half-line and zero outside. For $v\\ge\\gamma$, $|r(v)|\\le1/d$ and $|v r(v)|\\le\\max(1,|\\gamma|/d)$: for $v\\ge0$ the ratio $v/(v+\\lambda)$ is monotone with its maximum at an endpoint or its limiting value $1$; for $\\gamma\\le v<0$, $(-v)/(v+\\lambda)$ decreases with $v$ since $\\lambda>0$ in that case. The spectral product rule shows $r(A)=R_A(-\\lambda)$, exactly as in step 1.1, and hence $\\|BR_A(-\\lambda)\\|\\le a\\max(1,|\\gamma|/d)+b/d$. Put $C=\\max\\{a|\\gamma|+b,b/(1-a)\\}$. For every $d>C$ this last bound is strictly below one: if $d\\ge|\\gamma|$ it equals $a+b/d<1$ (also when $b=0$); if $d<|\\gamma|$ it equals $(a|\\gamma|+b)/d<1$. The factorization of step 2.1 therefore proves that every real number $t<\\gamma-C$ is in $\\rho(S)$, with bounded inverse $R_A(t)(I-BR_A(t))^{-1}$. Apply step 1.2 to the already self-adjoint $S$ to obtain $S\\ge\\gamma-C$, the stated bound including its endpoint. [A1, A3, A4, step 1.1, step 2.1, step 1.2]",
+    "60": "4.1 If $A$ is essentially self-adjoint, put $T=\\overline A$. For each $x$ in $D(T)$ choose $x_n$ in $D(A)$ with $x_n\\to x$ and $Ax_n\\to Tx$, using [A5]. The inequality in [A1] applied to $x_n-x_m$ makes $Bx_n$ Cauchy. Define $\\widetilde Bx$ as its limit. Two such approximations give the same limit by the same inequality applied to their difference. Approximating $x$ and $y$ and their linear combinations proves linearity, $\\|\\widetilde Bx\\|\\le a\\|Tx\\|+b\\|x\\|$, and symmetry by passing to the limit in $\\langle Bx_n,y_n\\rangle=\\langle x_n,By_n\\rangle$. It extends $B$ restricted to $D(A)$; no extension of $B$'s possibly larger domain is claimed. Step 2.1 makes $T+\\widetilde B$ self-adjoint. The inclusion $A+B\\subseteq T+\\widetilde B$ and closedness give $\\overline{A+B}\\subseteq T+\\widetilde B$. Conversely the same approximating sequences satisfy $(A+B)x_n\\to(T+\\widetilde B)x$, giving the reverse graph inclusion. This proves essential self-adjointness and the exact closure formula. If $A\\ge\\gamma$ in this case, taking limits of its quadratic inequality gives $T\\ge\\gamma$; step 3.1 then gives the bound for the closure and its restriction $A+B$. [A1, A2, A5, step 2.1, step 3.1]",
+    "62": "5.1 The choice use is exactly [A5]. The cases $B=0$ or $a=b=0$ are admitted by the same estimates and return the original lower bound. Dimension one requires no change. The strict hypothesis $a<1$ is used in the positive choice of $\\mu$ and in $b/(1-a)$; no conclusion at $a=1$ is asserted. The endpoint $\\gamma-C$ is included by the zero-projection argument, without asserting that the spectrum is nonempty on the zero space. [A1, A5, step 1.1, step 3.1, step 4.1] ∎",
+    "68": "Teschl, Section 6.1, Lemma 6.3 and Theorem 6.4, printed pp.158–159 (PDF pp.169–170), supply the imaginary and real resolvent perturbation method. Signs here are computed for the library convention $(z-A)^{-1}$. The numerical bound is derived above directly from equation (6.3); the proof does not rely on a spectral-distance claim or endpoint continuity of a concave function."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "publication_status_preserved": true,
+  "protected_frontmatter_byte_identical": true,
+  "before_raw_sha256": "ed54442e3f16bad5057efb45e9f408a0e3274095429daaa725ca3f7f14a743d5",
+  "after_raw_sha256": "81ee68ea376cb589ccc9fac336ee9308b2032b98d11a29b07c60d9464fb5e1ae",
+  "inspection": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/thm-kato-rellich--01.png",
+      "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/thm-kato-rellich--02.png",
+      "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/thm-kato-rellich--03.png"
+    ],
+    "original_resolution_standalone": true,
+    "native_preview_tiles": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/fa_019-native/screenshots/thm-kato-rellich--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/fa_019-native/screenshots/thm-kato-rellich--02.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/fa_019-native/screenshots/thm-kato-rellich--03.png"
+    ],
+    "native_visual_result": "All three fresh standalone original-resolution tiles inspected. Correctly rendered inequalities, Greek letters, resolvents, closures, tildes, interval endpoints, inclusions and convergence arrows; no raw formula syntax remains in changed regions.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/fa_019-native/manifest.json",
+    "source_sha256": "81ee68ea376cb589ccc9fac336ee9308b2032b98d11a29b07c60d9464fb5e1ae",
+    "html_sha256": "83878e4937935af2c74471abb3d39429f038a2591f69de07c529f70b83d913df",
+    "reference_map_sha256": "dfb301d6f67d94d4752d318eb33a5e398023455b828b84567c8e8cff7ec9e933",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-kato-rellich.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-kato-rellich.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-kato-rellich.md",
+            "item_id": "thm-kato-rellich",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-kato-rellich.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-fa_019 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-kato-rellich --out research/math-library-rendering-repairs-2026-10-23/previews/fa_019-native",
+      "exit_code": 0,
+      "output": {
+        "output_directory": "research/math-library-rendering-repairs-2026-10-23/previews/fa_019-native",
+        "items": 1,
+        "tiles": 3,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "check_notes": [
+    "Initial preview invocation targeted an already-created empty output directory previews/fa_019 and correctly refused overwrite (exit 1); successful rerun used fresh fa_019-native directory. No item change occurred between checks and successful preview.",
+    "No pre-existing proof-format failures observed. Native preview reports 16 unrelated reference-map parse diagnostics; actual linked titles in this carrier rendered."
+  ]
+}

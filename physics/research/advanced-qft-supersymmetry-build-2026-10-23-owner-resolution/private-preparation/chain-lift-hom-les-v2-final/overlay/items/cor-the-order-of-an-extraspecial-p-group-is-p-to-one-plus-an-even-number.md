@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number.md

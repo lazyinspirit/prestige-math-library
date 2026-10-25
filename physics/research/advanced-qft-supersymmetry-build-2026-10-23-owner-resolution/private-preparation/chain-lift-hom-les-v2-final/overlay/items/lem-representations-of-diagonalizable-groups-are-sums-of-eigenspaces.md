@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces.md

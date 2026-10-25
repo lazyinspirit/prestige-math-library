@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cusp-resolution-and-delta-drop.json
+  precheck: pass
 id: ex-cusp-resolution-and-delta-drop
 kind: example
 title: "A cusp: one blowup, the normalization and the delta drop"
@@ -9,22 +12,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-27.md"
-      - "research/frontier-38-owner-30-alpha-batch-27-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-27-post-5a.json"
-    content_sha256: "49f61b7dedd45c87f05501cddd436bfe9fb99e0ecdec338bf4c6f723218b1245"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "The Stacks Project, tag 0BI7 (Lemma 54.15.3)"
@@ -85,7 +72,7 @@ $\delta_k(C')=\delta_k(C)-r\binom{m}{2}$, where $C'$ is the strict transform
 
 [F5] The polynomial ring $k[t]$ is a unique factorization domain, hence normal,
 so $\mathbf A^1_k$ is a normal curve
-([[thm-polynomial-ring-over-a-field-is-a-ufd]]).
+([[thm-polynomial-ring-over-a-field-is-a-ufd|Polynomial rings over fields are unique factorization domains]]).
 
 ## Verification
 
@@ -102,3 +89,56 @@ so $\mathbf A^1_k$ is a normal curve
 3.2 The projective cubic $\bar Z=V(Y^2Z-X^3)$ is regular away from its cusp. On the affine chart $Z=1$ outside the origin, $x$ is invertible and $t=y/x$ identifies the curve with $\operatorname{Spec}k[t,t^{-1}]$. The only point at infinity is $[0:1:0]$; on the chart $Y=1$ its equation is $v-u^3=0$, whose coordinate ring is $k[u]$. Thus the defect is supported only at the cusp and is the module $k[t]/k[t^2,t^3]$, with basis the class of $t$. By [F3], its global section space has dimension one, so $\delta_k(\bar Z)=1$. The projective strict transform after the first blowup is regular at the cusp by step 1.2 and is unchanged elsewhere. Its map to $\bar Z$ is the intrinsic point blowup ([[thm-blowup-closed-immersion-transform-universal]]), hence finite by [[lem-point-blowup-of-integral-curve-is-finite]]; it is birational and normal, so it is the normalization of $\bar Z$ and has defect zero. Formula [F4] applies on $\mathbb P^2_k$, a regular proper surface with ample $\mathcal O(1)$, at the $k$-rational cusp with residue degree $r=1$ and multiplicity $m=2$. It gives $\delta_k(\bar Z')=1-1\binom{2}{2}=0$, agreeing with the direct calculation. [F3, F4, step 1.2, step 2.1, algebra]
 
 4.1 Collecting: one point blowup makes the strict transform the regular normalization of the cusp and drops the multiplicity at the point over the origin from $2$ to $1$; three point blowups make the total-transform support SNC. The example therefore realizes the regularization theorem after one step and the embedded SNC conclusion after finitely many, with the defect drop $\delta_k=1\to0$ confirming the formula $r\,m(m-1)/2=1$. [F1, step 1.2, step 3.1, step 3.2] ∎
+
+## Remarks
+
+Under the same assumptions (AC and a field $k$ of characteristic different from
+$2$ and $3$), the following is an incidence schematic, not a picture of the
+$k$-points. The first panel uses the chart $y=xt$; the second uses $x=tu$.
+Write $E_1$ for the first exceptional curve, $E_2$ for the second and $E_3$
+for the third, with primes denoting subsequent strict transforms. The three
+panels lie on $S_1$, $S_2$ and $S_3$, respectively; moving right means blowing
+up the marked point, rather than a morphism in that direction.
+
+```tikz
+\begin{tikzpicture}[line width=0.8pt, every node/.style={font=\small}]
+\begin{scope}
+\node at (1,2.3) {First blowup: $S_1$};
+\draw (0,-1.1)--(0,1.1) node[above] {$E_1:x=0$};
+\draw plot[domain=-1:1,samples=50] ({\x*\x},{\x});
+\node[right] at (1.05,0.9) {$Z_1:x=t^2$};
+\fill (0,0) circle (1.6pt) node[left] {$q$};
+\node[align=center] at (1,-1.75) {One double contact\\{}$k[t]/(t^2)$; not SNC};
+\end{scope}
+\begin{scope}[xshift=5cm]
+\node at (0,2.3) {Second blowup: $S_2$};
+\draw (-1.2,0)--(1.2,0) node[right] {$E_1':u=0$};
+\draw (0,-1.1)--(0,1.1) node[above] {$E_2:t=0$};
+\draw (-0.9,-0.9)--(0.9,0.9) node[right] {$Z_2:t=u$};
+\fill (0,0) circle (1.6pt);
+\node[align=center] at (0,-1.75) {Three distinct directions\\Triple point; not SNC};
+\end{scope}
+\begin{scope}[xshift=10cm]
+\node at (0,2.3) {Third blowup: $S_3$};
+\draw (-1.5,0)--(1.5,0) node[right] {$E_3$};
+\draw (-1,-0.7)--(-1,0.8) node[above] {$E_1''$};
+\draw (0,-0.7)--(0,0.8) node[above] {$Z_3$};
+\draw (1,-0.7)--(1,0.8) node[above] {$E_2'$};
+\fill (-1,0) circle (1.6pt);
+\fill (0,0) circle (1.6pt);
+\fill (1,0) circle (1.6pt);
+\node[align=center] at (0,-1.75) {Three distinct transverse contacts\\Total-transform support SNC};
+\end{scope}
+\end{tikzpicture}
+```
+
+The double contact is a single point of length two, not two distinct points
+(step 1.2). The second chart of the first blowup, $x=ys$, has strict-transform
+equation $1-ys^3=0$; it lies in the overlap and contributes no extra point over
+the cusp. On $S_2$, the three equations $u=0$, $t=0$ and $t-u=0$ give the
+three tangent directions separated by the third blowup (steps 2.2 and 3.1).
+Thus regularity of $Z_1$ does not yet give SNC support. For the projective
+completion only, the first blowup gives
+$\delta_k(\bar Z)=1\longrightarrow\delta_k(\bar Z')=0$, with
+$r\binom{m}{2}=1\binom{2}{2}=1$ (step 3.2). The verification above is
+independent of this schematic.

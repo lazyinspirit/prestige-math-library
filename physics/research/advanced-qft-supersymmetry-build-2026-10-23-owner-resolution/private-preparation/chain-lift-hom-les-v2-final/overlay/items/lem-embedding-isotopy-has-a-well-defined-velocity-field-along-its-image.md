@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image.md

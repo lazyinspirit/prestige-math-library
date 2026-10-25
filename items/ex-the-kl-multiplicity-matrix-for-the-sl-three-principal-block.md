@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-kl-multiplicity-matrix-for-the-sl-three-principal-block.json
+  precheck: pass
 id: ex-the-kl-multiplicity-matrix-for-the-sl-three-principal-block
 kind: example
-title: "The Kazhdan–Lusztig multiplicity matrix for the sl_3 principal block"
+title: 'The Kazhdan–Lusztig multiplicity matrix for the $\mathfrak{sl}_3$ principal block'
 status: published
 origin: pipeline
 provenance:
@@ -13,12 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 17
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   scraped: []
   references:

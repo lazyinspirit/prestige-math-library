@@ -1,0 +1,130 @@
+{
+  "id": "alg-qa-modular-multiplication-circuit",
+  "group": "dqa_006",
+  "agent": "/root/dqa_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone screenshots show a detailed Boolean DAG and a prose-only compute/swap/inverse-function cleanup. A four-state register-flow picture materially clarifies which register holds the old input after the swap and why applying the inverse-function XOR oracle clears it. This is an explanatory diagram addition under the expanded editorial scope, rather than a failed existing diagram.",
+      "action": "Append a Remarks section with the four basis states in fixed (c,z,t,W) order and downward arrows for the complete O_fa block, bitwise SWAP, and O_fainverse cleanup; explain work return and identity cases.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a mathematically checked register-state TikZ flow in a final Remarks section. Original title, complete Definition and instructions, all metadata, dependencies, sources and published status are untouched.",
+  "source_lines_after": {
+    "remarks": [
+      64,
+      80
+    ],
+    "tikz": [
+      68,
+      78
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and domains",
+      "details": "For fixed N,n,a and supplied inverse, f_a and f_ainverse are total functions {0,1}^{n+1} -> {0,1}^n, including invalid data encodings. Each compiled oracle preserves its (c,current data) input, XORs an n-bit value into t, and returns its work to zero. The displayed basis states have register lengths 1,n,n,w. This follows from Definition input/function clauses, final compilation paragraph, def-qc-coherent-function-oracle, and alg-qc-reversible-embedding steps 1-4."
+    },
+    {
+      "check": "First arrow",
+      "details": "With t=0^n, O_fa sends (c,z,0^n,0^w) to (c,z,z\u2032,0^w), z\u2032=f_a(c,z), by the clean-target XOR convention. The work is zero at both block boundaries, not asserted to stay zero inside the block."
+    },
+    {
+      "check": "Swap and ordering",
+      "details": "The second arrow swaps only the n-bit data and target registers, yielding (c,z\u2032,z,0^w). Per corresponding bit pair, target XOR data, data XOR target, target XOR data yields (u,v)->(u,u XOR v)->(v,u XOR v)->(v,u). Corresponding pairs preserve each register\u2019s most-significant-first port order; time is explicitly downward. This is the algorithm\u2019s final compilation paragraph and correctness proof step 4.1."
+    },
+    {
+      "check": "Cleanup and identity branches",
+      "details": "For c=1,z<N, z\u2032=az mod N lies below N and f_ainverse(c,z\u2032)=a^{-1}az mod N=z. For c=0 or z>=N, both total functions return z, so again f_ainverse(c,z\u2032)=z. Thus the final oracle XORs z into the target holding old z and produces 0^n, preserving c,z\u2032 and restoring work. These are the precise piecewise definition and correctness proof steps 3.1 and 5.1; O_fainverse is labeled as the oracle of the inverse function, not as the inverse of O_fa."
+    },
+    {
+      "check": "Proof independence and spot checks",
+      "details": "The existing algorithm and separate correctness proof were preserved in full and do not use the new figure. Supplemental finite state check passed 137572 basis inputs: all N=2..64, all units a, both controls, all n-bit encodings; checked range, inverse-function cleanup, identity branches and the three-CNOT swap. This finite check supplements the algebraic explanation and is not a full circuit-DAG audit."
+    }
+  ],
+  "original_evidence": {
+    "declared_evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "path_discrepancy": "Declared screenshots absent below diagram-supplement. Located authentic same-category screenshots one directory higher and matched both recorded SHA256 values.",
+    "standalone_original_resolution_views": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/alg-qa-modular-multiplication-circuit--01.png",
+        "sha256": "478afb4f6086a9ea3d9a2835c321d2d67ff107b5a845286dda112616a2b3d101"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/alg-qa-modular-multiplication-circuit--02.png",
+        "sha256": "3486e37736c31cb1035eec1043e3cc965b6177cf7bbd4173b91e294f8515478f"
+      }
+    ]
+  },
+  "write_guard": {
+    "before_raw_sha256": "8c522ef5a23194716ac8256efa26a6c6530f485d9ecfc4adab7ccbda907d6670",
+    "guard_passed_immediately_before_edit": true,
+    "current_raw_sha256": "dacafc9fd6f9cc95f83f708eabb55cf45ce974c74b6695f2dabb5c2fb974ab5a",
+    "original_source_exact_prefix": true,
+    "entire_frontmatter_byte_identical": true,
+    "status": "published"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qa-modular-multiplication-circuit.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-modular-multiplication-circuit.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-qa-modular-multiplication-circuit.md",
+            "item_id": "alg-qa-modular-multiplication-circuit",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qa-modular-multiplication-circuit.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqa-006 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-qa-modular-multiplication-circuit --out research/math-library-rendering-repairs-2026-10-23/previews/dqa-006",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqa-006/manifest.json",
+    "manifest_sha256": "48c882bdaeaffdb97a7e58c2b4277dd94e439179a2d8be61653a40291a13fc81",
+    "source_sha256": "dacafc9fd6f9cc95f83f708eabb55cf45ce974c74b6695f2dabb5c2fb974ab5a",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dqa-006/screenshots/alg-qa-modular-multiplication-circuit.json",
+    "capture_receipt_sha256": "77df6ab42502caa6a6ba95d7bfc54b0669484cfd6df9928c1a069d386b11005f",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "tikz_count": 1,
+    "standalone_original_resolution_views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dqa-006/screenshots/alg-qa-modular-multiplication-circuit--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dqa-006/screenshots/alg-qa-modular-multiplication-circuit--02.png"
+    ],
+    "observations": "Actual native dark-background output displays four ordered basis-state nodes and all three downward arrows with correct labels. White labels/arrows contrast clearly, state labels and arrow labels are separate, and all figure content fits the page with no clipping or overlap. Both fresh tiles inspected individually at original resolution.",
+    "limitations": "Local ItemBody native renderer preview; no production route or full-page metadata coverage. Current reference map has 13 unrelated parse diagnostics, recorded in preview manifest; scoped source and rendered references are present."
+  },
+  "remaining_issues": [],
+  "completed_at": "2026-10-24T03:50:18.995735+00:00"
+}

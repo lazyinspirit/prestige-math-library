@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-generic-klr-induction-and-restriction-mixed-relations.json
+  precheck: pass
 id: lem-generic-klr-induction-and-restriction-mixed-relations
 kind: lemma
 title: "Generic KLR induction and restriction: mixed relations and the opposite-end exact sequence"
@@ -18,8 +21,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Seok-Jin Kang and Masaki Kashiwara, Categorification of Highest Weight Modules via Khovanov-Lauda-Rouquier Algebras, arXiv:1102.4677v4"
@@ -110,3 +111,17 @@ restriction is exact, and tensor--Hom evaluation gives $F_i\dashv E_i$
 4.1 Opposite-end colored kernels and degrees. With $\delta,\gamma$ as in step 3.1 and $\delta\in Q_+$, the kernel of $E_i\bar F_j$ is $e(\gamma,i)R(\beta+\alpha_j)e(j,\beta)$, with right $R(\beta)$ action through $\xi_n$. Cutting $U$ identifies its overlap submodule with $R(\gamma)e(j,\delta)\otimes_{R(\delta)}e(\delta,i)R(\beta)$, the kernel of $\bar F_jE_i$, by the plain multiplication map; this map adds no crossing and has degree zero. The quotient transfer word $w$ takes bottom $(j,\nu)$ to top $(\nu,j)$, so this quotient corner vanishes for $i\ne j$ and gives the unshifted opposite-end isomorphism in (a). For $i=j$ and $\nu$ of weight $\beta$, $w e(i,\nu)$ has degree $-\sum_a b_{i\nu_a}=-(\alpha_i\mid\beta)$. Thus the quotient corner is $q^{-(\alpha_i\mid\beta)}R(\beta)\otimes_kk[t_i]$, with the label $i$ fixed and $\deg t_i=2d_i$. The right section in step 3.2 respects these color projectors and this degree shift, so the colored sequence is split as right $R(\beta)$-modules. Tensoring with any graded $M$ retains its injective first map and exact quotient and gives precisely (c), functorially, with the stated shift. If $\delta\notin Q_+$ the overlap corner is zero; at $\beta=0$ this agrees with step 1.2. [step 3.1, step 2.2, step 3.2, F3, algebra]
 
 5.1 Conclusion. Steps 1.2 and 3.1 establish the same-end mixed isomorphisms, and step 4.1 establishes the opposite-end isomorphism and exact sequence for every weight. All maps are the explicit homogeneous PBW corner maps above; the opposite-end sequence is right-split before tensoring, and the uncolored expression retains its transferred-color labels and uses $n\ge1$. The dots, crossing signs and shifts are those of the fixed native grading, with the source normalization $\kappa=-\tau$ affecting only unit PBW coefficients. No quotient flatness, uniform shift for all labelled cosets, or negative-height algebra is assumed. [step 1.2, step 3.1, step 4.1] ∎
+
+
+## Remarks
+
+**Naturality of the opposite-end sequence.** For a graded $R(\beta)$-module $M$, write $A(M)=\bar F_iE_iM$, $B(M)=E_i\bar F_iM$ and $Q(M)=q^{-(\alpha_i\mid\beta)}M\otimes_k k[t_i]$. Here $\iota_M$ is the overlap inclusion induced by multiplication in step 2.2, and $\pi_M$ is the transfer-coset quotient of steps 3.2 and 4.1. For every degree-zero $R(\beta)$-linear map $f:M\to N$, the exact rows and their naturality take the form
+
+```tikzcd
+\begin{tikzcd}[column sep=large,row sep=large,scale=1.5,transform shape]
+0 \arrow[r] & A(M) \arrow[r,"\iota_M"] \arrow[d,"A(f)"'] & B(M) \arrow[r,"\pi_M"] \arrow[d,"B(f)"] & Q(M) \arrow[r] \arrow[d,"Q(f)"] & 0 \\
+0 \arrow[r] & A(N) \arrow[r,"\iota_N"] & B(N) \arrow[r,"\pi_N"] & Q(N) \arrow[r] & 0
+\end{tikzcd}
+```
+
+The two squares commute: $B(f)\iota_M=\iota_NA(f)$ and $Q(f)\pi_M=\pi_NB(f)$, with $Q(f)=q^{-(\alpha_i\mid\beta)}(f\otimes\mathrm{id}_{k[t_i]})$. The first map has degree zero, and the shift in $Q$ makes the quotient map degree zero, as checked in step 4.1. The right-module splitting before tensoring in step 3.2 ensures exactness for every $M$; the diagram asserts no splitting of these rows as left $R(\beta)$-modules. This illustration summarizes the functorial maps; the proof above is independent of the figure.

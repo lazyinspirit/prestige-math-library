@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-rank-two-type-a-soergel-bimodule-decompositions.md

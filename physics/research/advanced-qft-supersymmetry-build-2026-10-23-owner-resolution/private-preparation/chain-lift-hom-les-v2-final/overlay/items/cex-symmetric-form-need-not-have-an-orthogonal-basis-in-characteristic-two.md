@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-symmetric-form-need-not-have-an-orthogonal-basis-in-characteristic-two.md

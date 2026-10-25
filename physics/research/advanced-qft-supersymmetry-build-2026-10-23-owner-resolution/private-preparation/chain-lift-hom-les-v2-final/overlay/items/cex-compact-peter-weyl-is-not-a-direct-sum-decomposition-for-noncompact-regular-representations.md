@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-compact-peter-weyl-is-not-a-direct-sum-decomposition-for-noncompact-regular-representations.md

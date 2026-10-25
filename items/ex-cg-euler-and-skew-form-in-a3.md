@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-euler-and-skew-form-in-a3.json
+  precheck: pass
 id: ex-cg-euler-and-skew-form-in-a3
 kind: example
 title: "The Euler and skew forms of c = s1s2s3 in A3, and the orientation of its rank-two subsystems"
@@ -30,13 +33,7 @@ sources:
     - title: "N. Reading and D. E. Speyer, Sortable elements in infinite Coxeter groups, arXiv:0803.2722v3 (2010); Trans. Amer. Math. Soc. 363 (2011) 699-761"
       url: "https://arxiv.org/pdf/0803.2722"
       locator: "Section 3, Example 3.6, printed p. 19 (the sign of omega_c on type-A roots from the order of adjacent simple generators)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Statement
@@ -143,7 +140,7 @@ or a final segment ([[lem-cg-finite-rank-two-inversion-set-recognition]] (1)).
 
 ## Proof
 
-**Proof technique:** compute the Coxeter form entries, apply the triangular Euler-form definition to each word, and evaluate $\omega$ on the two root lists using bilinearity.
+**Proof technique:** compute the Coxeter form entries, apply the triangular Euler-form definition to each word, and evaluate the skew form on the two root lists using bilinearity.
 
 1.1 Finite-type setup. By [F1], $W$ is isomorphic to $S_4$ and hence finite; by [F3] it is of finite type. Each displayed word uses every simple generator once by [F4], so [F5] says that $c$ and $c'$ are reduced Coxeter words, as required to define their Euler forms. [F1, F3, F4, F5]
 
@@ -160,3 +157,41 @@ or a final segment ([[lem-cg-finite-rank-two-inversion-set-recognition]] (1)).
 4.1 Segment restrictions in each rank-two plane. For $P=P_{i,i+1}$, write $W_P=\langle t_\alpha:\alpha\in\Phi\cap P\rangle$ as in [F15]. Its extreme positive roots are $e_{s_i},e_{s_{i+1}}$ by step 2.1. By [F8], their reflections are $s_i,s_{i+1}$; [F9] puts every generator of $W_P$ in $W'$, while [F10] gives $W'=\langle t_{e_{s_i}},t_{e_{s_{i+1}}}\rangle\subseteq W_P$. Thus $W_P=W'=W_{i,i+1}$. By [F2], this subgroup has the two-generator Coxeter presentation with exponent $3$. Its relations $a^2=b^2=(ab)^3=1$ reduce every word to one of $1,a,b,ab,ba,aba$ for $a=s_i,b=s_{i+1}$; the inversion sets below show these six elements are distinct. On $(x,y,z)=(e_{s_i},e_{s_i}+e_{s_{i+1}},e_{s_{i+1}})$, [F7], [F11], and [F12] give $a(x,y,z)=(-x,z,y)$ and $b(x,y,z)=(y,x,-z)$. The restrictions $N(w)\cap\{x,y,z\}$ for $w=1,a,b,ab,ba,aba$, respectively, are $\emptyset,\{x\},\{z\},\{y,z\},\{x,y\},\{x,y,z\}$ by these actions and [F16]. They are exactly the empty, initial, and final segments in the rank-two criterion [F15]. The sign computation in step 3.1 gives the positive orientation. [F2, F3, F7, F8, F9, F10, F11, F12, F15, F16, step 1.1, step 1.2, step 2.1, step 3.1]
 
 5.1 Conclusion. Steps 1.2-4.1 and 1.3 verify (i)-(iv) by exact matrix and root calculations. The computation is finite and makes no choice from an infinite family, so AC is not used. [F1, step 1.1, step 1.2, step 1.3, step 2.1, step 2.2, step 3.1, step 4.1] ∎
+
+## Remarks
+
+The arrows in the chain below mean that $\omega_c$ is positive on the ordered
+pair of simple roots; they are not reflection maps. There is no edge between
+$s_1$ and $s_3$, since their skew value is zero. In each lower panel the roots
+have unit length for $B$ and occur counterclockwise in the order shown in
+(iii); every increasing pair has skew value $1$. The rays use the actual
+$120$-degree angle between adjacent simple roots, since $B(e_{s_i},e_{s_{i+1}})=-1/2$.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.05]
+\node (s1) at (0,4) {$s_1$};
+\node (s2) at (2.5,4) {$s_2$};
+\node (s3) at (5,4) {$s_3$};
+\draw[->] (s1) -- node[above] {$\omega_c=+1$} (s2);
+\draw[->] (s2) -- node[above] {$\omega_c=+1$} (s3);
+\node at (2.5,3.3) {$c=s_1s_2s_3$};
+\begin{scope}[shift={(0,0)}]
+\node at (0.5,2.8) {$P_{12}$};
+\draw[->] (0,0) -- (2,0) node[right] {$e_{s_1}$};
+\draw[->] (0,0) -- (1,1.732) node[above right] {$e_{s_1}+e_{s_2}$};
+\draw[->] (0,0) -- (-1,1.732) node[above left] {$e_{s_2}$};
+\fill (0,0) circle (1.3pt);
+\end{scope}
+\begin{scope}[shift={(5,0)}]
+\node at (0.5,2.8) {$P_{23}$};
+\draw[->] (0,0) -- (2,0) node[right] {$e_{s_2}$};
+\draw[->] (0,0) -- (1,1.732) node[above right] {$e_{s_2}+e_{s_3}$};
+\draw[->] (0,0) -- (-1,1.732) node[above left] {$e_{s_3}$};
+\fill (0,0) circle (1.3pt);
+\end{scope}
+\end{tikzpicture}
+```
+
+For $c'=s_1s_3s_2$, only the second chain arrow reverses, as calculated in
+(iv). The matrices and root calculations in the proof establish these signs
+and orders independently of this illustration.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-covariant-derivatives-commute-up-to-curvature-in-a-two-parameter-variation.md

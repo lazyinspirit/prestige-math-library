@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-harmonic-hardy-representation-p-greater-one.json
+  precheck: pass
 id: thm-harmonic-hardy-representation-p-greater-one
 kind: theorem
-title: "h^p is the Poisson image of Lp for 1<p<=infinity"
+title: '$h^p$ is the Poisson image of $L^p$ for $1<p\le\infty$'
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -10,9 +13,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   references:
     - title: "Axler, Bourdon and Ramey, Harmonic Function Theory, second edition, Chapter 6"

@@ -1,0 +1,299 @@
+diff --git a/tools/physics-support/README.md b/tools/physics-support/README.md
+index 3c1aef1e5f..46d2036cbb 100644
+--- a/tools/physics-support/README.md
++++ b/tools/physics-support/README.md
+@@ -194,3 +194,17 @@ does not infer a fresh visual audit from it. Pending, visual-only, arbitrary or
+ unconfirmed findings fail. Exact native receipt/adjudication hashes, publication
+ lineage, ownership, checks, deltas, Root scientific reviews and current consumer
+ bindings remain required. This changes no legacy presentation extraction rule.
++
++V2 original presentation maintenance also has an independent exact
++`definition_display_layout: {version:1, display:0}` opt-in (fifth extractor
++argument). It permits only the selected single-line double-dollar Definition
++span to gain the exact multiline display boundaries, preserving the full
++TeX payload and all other section bytes. Whole-Definition style-dependent
++choices, conditionals and macro-definition/indirection controls reject,
++including unchanged ambient formulas; identical payload alone is insufficient.
++Actual Markdown roles, unchanged
++well-definedness suffix, parser-runtime inputs and ordinary authenticated
++Root per-delta/source/consumer reviews remain mandatory. See
++[original-presentation-maintenance.md](original-presentation-maintenance.md)
++for the selector, typed delta and limits; no generic Statement normalization
++or diagram-flag exception is introduced.
+diff --git a/tools/physics-support/original-presentation-maintenance.md b/tools/physics-support/original-presentation-maintenance.md
+index fdf5b08597..8a6b8814d8 100644
+--- a/tools/physics-support/original-presentation-maintenance.md
++++ b/tools/physics-support/original-presentation-maintenance.md
+@@ -194,3 +194,41 @@ repair policy validates the real non-applicable JSON and its check timing.
+ The native adjudication's independent-of-diagram qualification and all existing
+ consumer guards still apply. V2 supplies no source stamp and cannot turn
+ unreviewed placeholders into authority.
++
++## Exact opt-in Definition display boundaries
++
++V2 alone may declare `definition_display_layout: {version: 1, display: 0}`.
++It is the independent fifth argument of `originalPresentationChanges`, after
++support consolidation and reference relocation. `display` is a zero-based
++index of raw single-line `$$P$$` spans occupying their own line in the old
++Definition section; missing, unused or malformed selections fail. Only
++`kind: definition` and its `## Definition` section qualify. This is not a
++Statement formatting rule.
++
++The entire new Definition must equal the literal one-span transformation
++`\n$$P$$\n` to `\n\n$$\nP\n$$\n\n`. Payload bytes (including punctuation),
++all surrounding prose, links and trailing bytes remain exact. Existing
++well-definedness/Proof suffix bytes remain exact. Identical TeX bytes alone do not preserve meaning across inline/display style:
++`\mathchoice{A}{B}{C}{D}` actually renders B inline and A in display mode.
++The entire old/new Definition is conservatively scanned for mathchoice,
++mathpalette, conditional controls, macro definitions/indirection, internal @
++controls, token/register hooks and character rewrites, including unchanged
++ambient formulas which could define aliases. Commands beginning if/new/renew/
++provide/declare are conservatively excluded; this also excludes some harmless
++commands rather than guessing equivalence. Selected-payload comments and
++verbatim/catcode/input primitives remain rejected. No rendering equality
++heuristic authorizes a source version. Actual old math AST ancestry must consist only
++of root/paragraph nodes, and the new span must be a standalone root math
++node. Canonical wiki spans and hidden Markdown contexts cannot supply math.
++Whole-body reference definitions reject. The existing lazy parser and its
++403-input live-bound runtime descriptor are reused without changing default
++or legacy extraction.
++
++The typed delta is `definition-display-layout`, id `Definition:display:N`,
++with exact before/after boundary strings, payload and whole-section hashes,
++and truthful old/new AST types and UTF-16 spans. Review classification
++`statements: display-layout-only` is required, together with ordinary exact
++source hashes, authentic finalized native repair, individual per-delta Root
++scientific review/evidence, consumer review and runtime input bindings.
++This option grants no diagram-flag exception or source permission and does
++not normalize whitespace anywhere else.
+diff --git a/tools/physics-support/original-presentation-maintenance.mjs b/tools/physics-support/original-presentation-maintenance.mjs
+index 1a81fb79da..523f6396c0 100644
+--- a/tools/physics-support/original-presentation-maintenance.mjs
++++ b/tools/physics-support/original-presentation-maintenance.mjs
+@@ -178,13 +178,14 @@ function factAt(text, offset) {
+   const token = matches.at(-1)?.[1];
+   return token?.startsWith('[') ? token.slice(1, -1) : token ? 'Given' : null;
+ }
+-function interfaceChange(before, after, section, deltas) {
+-  const a = trim(before), b = trim(after);
+-  if (section === 'Definition') {
++function definitionSuffixUnchanged(a, b) {
+     const well = text => text.match(/^(?:#{3,6}\s+|\*\*)(?:Well[- ](?:definedness|formedness)|Proof)\b[^\r\n]*/im);
+     const x = well(a), y = well(b);
+     if (Boolean(x) !== Boolean(y) || x && a.slice(x.index) !== b.slice(y.index)) fail('definition well-definedness changed');
+-  }
++}
++function interfaceChange(before, after, section, deltas) {
++  const a = trim(before), b = trim(after);
++  if (section === 'Definition') definitionSuffixUnchanged(a, b);
+   const refs = labels(a, b, section, deltas);
+   if (refs.before !== refs.after) fail(`scientific ${section} text change`);
+   if (tail(before) !== tail(after)) deltas.push({ id: `${section}:separator`, kind: 'separator-whitespace', section, before: tail(before), after: tail(after) });
+@@ -218,6 +219,65 @@ function proofParts(text) {
+   if (!heads.length || new Set(heads.map(h => h[1])).size !== heads.length) fail('invalid numbered proof');
+   return { intro: text.slice(0, heads[0].index), steps: heads.map((h, i) => ({ label: h[1], text: text.slice(h.index, heads[i + 1]?.index ?? text.length) })) };
+ }
++function definitionDisplayOption(value) {
++  if (value === undefined) return null;
++  if (!value || typeof value !== 'object' || Array.isArray(value)
++      || !equal(Object.keys(value).sort(), ['display', 'version']) || value.version !== 1
++      || !Number.isSafeInteger(value.display) || value.display < 0) fail('invalid definition display layout option');
++  return { version: 1, display: value.display };
++}
++function definitionDisplayLayout(before, after, option, deltas) {
++  definitionSuffixUnchanged(before, after);
++  // Display style may select different mathematical tokens even with identical
++  // TeX bytes. Reject ambient definitions/indirection as well as direct choices:
++  // an unchanged earlier formula could otherwise define an alias for the span.
++  const unsafe = new Set(['mathchoice', 'mathpalette', 'else', 'fi', 'or', 'unless',
++    'def', 'gdef', 'edef', 'xdef', 'let', 'futurelet', 'csname', 'endcsname',
++    'expandafter', 'noexpand', 'unexpanded', 'expanded', 'detokenize', 'scantokens',
++    'string', 'meaning', 'the', 'toks', 'afterassignment', 'aftergroup', 'global',
++    'long', 'outer', 'protected', 'catcode', 'mathcode', 'delcode', 'lccode', 'uccode',
++    'sfcode', 'chardef', 'mathchardef', 'countdef', 'dimendef', 'skipdef', 'muskipdef',
++    'toksdef', 'everymath', 'everydisplay', 'input', 'include', 'write', 'read', 'openout', 'openin', 'verb',
++    'endlinechar', 'newlinechar', 'obeylines', 'obeyspaces', 'active', 'begingroup', 'endgroup']);
++  for (const text of [before, after]) {
++    if (text.includes('^^')) fail('unsafe definition style/indirection TeX');
++    for (const m of text.matchAll(/\\([A-Za-z@]+)/g)) {
++      const name = m[1].toLowerCase();
++      if (unsafe.has(name) || name.includes('@') || /^(?:if|new|renew|provide|declare)/.test(name))
++        fail('unsafe definition style/indirection TeX');
++    }
++  }
++  const candidates = [...before.matchAll(/(?<=\n)\$\$([^\r\n$]+)\$\$(?=\n)/g)]
++    .map(m => Object.assign(['\n' + m[0] + '\n', m[1]], { index: m.index - 1 }));
++  const selected = candidates[option.display];
++  if (!selected) fail('unknown/unused definition display layout selection');
++  const payload = selected[1];
++  if (!payload.trim() || /%|\^\^|\\(?:verb|catcode|def|gdef|edef|xdef|let|futurelet|csname|endcsname|input|include|write|read|openout|openin|scantokens|everymath|everydisplay|begingroup|endgroup|global|newcommand|renewcommand|providecommand|endlinechar|newlinechar|obeylines|obeyspaces|active)\b/.test(payload)) fail('unsafe definition display TeX');
++  const start = selected.index + 1, end = start + selected[0].length - 2;
++  const replacement = '\n\n$$\n' + payload + '\n$$\n\n';
++  if (before.slice(0, selected.index) + replacement + before.slice(selected.index + selected[0].length) !== after) fail('definition display layout changed other bytes');
++  const findMath = (text, start, end, old) => {
++    const found = [];
++    const walk = (node, ancestors = []) => {
++      if (node.position?.start.offset === start && node.position?.end.offset === end
++          && (old ? ['math', 'inlineMath'].includes(node.type) : node.type === 'math')
++          && ancestors.every(p => ['root', 'paragraph'].includes(p.type))) found.push({ node, ancestors });
++      for (const child of node.children ?? []) walk(child, [...ancestors, node]);
++    };
++    walk(markdownTree(text));
++    if (found.length !== 1) fail('definition display is not actual root/paragraph math');
++    const { node, ancestors } = found[0];
++    if (!old && (ancestors.length !== 1 || ancestors[0].type !== 'root')) fail('new definition display is not standalone math');
++    return { type: node.type, start, end, ancestors: ancestors.map(p => p.type) };
++  };
++  const afterStart = selected.index + 2, afterEnd = afterStart + payload.length + 6;
++  for (const [text, low, high] of [[before, start, end], [after, afterStart, afterEnd]])
++    if (links(text).some(r => low < r.end && high > r.start)) fail('definition display overlaps canonical wiki span');
++  const roles = { offset_unit: 'UTF-16', before: findMath(before, start, end, true), after: findMath(after, afterStart, afterEnd, false) };
++  deltas.push({ id: 'Definition:display:' + option.display, kind: 'definition-display-layout', section: 'Definition',
++    display: option.display, before: selected[0], after: replacement, payload_sha256: sha(payload),
++    definition_before_sha256: sha(before), definition_after_sha256: sha(after), markdown_roles: roles });
++}
+ function consolidationOption(value) {
+   if (value === undefined) return null;
+   if (!value || typeof value !== 'object' || Array.isArray(value)
+@@ -383,11 +443,12 @@ function proofChange(before, after, deltas, consolidation, relocation, deps) {
+   }
+   return { technique, steps };
+ }
+-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation) {
+-  const consolidation = consolidationOption(proofSupportConsolidation);
++export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay) {
++  const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay);
+   const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation);
+   if (relocation?.steps.some(s => consolidation?.steps.includes(s.label))) fail('overlapping strict proof requests');
+   const before = parse(beforeBytes), after = parse(afterBytes), prior = structuredClone(before.data), current = structuredClone(after.data);
++  if (displayLayout && prior.kind !== 'definition') fail('definition display layout requires definition kind');
+   if (!(resultKinds.has(prior.kind) || prior.kind === 'definition')) fail('unsupported item kind');
+   const verification = { before: prior.verification ?? null, after: current.verification ?? null };
+   delete prior.verification; delete current.verification;
+@@ -400,14 +461,17 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+   }
+   if (!equal(prior, current)) fail('scientific metadata/interface change');
+   const a = sections(before.body), b = sections(after.body), primary = prior.kind === 'definition' ? 'Definition' : 'Statement';
+-  if (strictProof) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
++  if (strictProof || displayLayout) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
+   if (!a.values.has(primary) || a.prefix !== b.prefix) fail('primary section/prefix change');
+   const appended = !a.values.has('Remarks') && b.names.at(-1) === 'Remarks' && equal(a.names, b.names.slice(0, -1));
+   if (!equal(a.names, b.names) && !appended) fail('new/deleted/reordered scientific section');
+   let technique = null, steps = [], remarks = null; const preserved_sections = [];
+   for (const name of a.names) {
+     const x = a.values.get(name), y = b.values.get(name);
+-    if (name === primary) interfaceChange(x, y, name, deltas);
++    if (name === primary) {
++      if (displayLayout) definitionDisplayLayout(x, y, displayLayout, deltas);
++      else interfaceChange(x, y, name, deltas);
++    }
+     else if (name === 'Facts & Assumptions') factsChange(x, y, deltas);
+     else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation, relocation, prior.deps));
+     else {
+@@ -432,7 +496,7 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+   const factLabels = has(factDeltas, 'reference-label'), factQuotes = has(factDeltas, 'stray-blockquote-deletion');
+   const review_classification = {
+     interface_section: primary,
+-    statements: statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
++    statements: displayLayout ? 'display-layout-only' : statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
+     facts: factLabels ? factQuotes ? 'reference-labels-and-quotation-only' : 'reference-labels-only' : factQuotes ? 'quotation-only' : 'identical',
+     proof: steps.length || technique ? 'equivalent-presentation' : 'unchanged',
+   };
+@@ -440,21 +504,26 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+   if (relocation && !equal(relocation.steps, deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unused proof reference relocation request');
+   return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas,
+     ...(consolidation ? { proof_support_consolidation: consolidation } : {}), ...(relocation ? { proof_reference_relocation: relocation } : {}),
+-    ...(strictProof ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
++    ...(displayLayout ? { definition_display_layout: displayLayout } : {}),
++    ...(strictProof || displayLayout ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
+ }
+ /** Main integration supplies authenticated local binders. No free-text claim
+  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
+ export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
+   const consolidation = consolidationOption(entry.proof_support_consolidation);
+-  const relocation = relocationOption(entry.proof_reference_relocation);
++  const relocation = relocationOption(entry.proof_reference_relocation), displayLayout = definitionDisplayOption(entry.definition_display_layout);
+   if (!equal(consolidation, changes.proof_support_consolidation ?? null)
+       || !equal([...(consolidation?.steps ?? [])].sort(), changes.deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unbound proof support consolidation option');
+   if (!equal(relocation, changes.proof_reference_relocation ?? null)
+       || !equal(relocation?.steps ?? [], changes.deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unbound proof reference relocation option');
++  if (!equal(displayLayout, changes.definition_display_layout ?? null)
++      || (displayLayout ? changes.kind !== 'definition' || changes.deltas.filter(d => d.kind === 'definition-display-layout').length !== 1
++        || changes.deltas.find(d => d.kind === 'definition-display-layout')?.display !== displayLayout.display
++        : changes.deltas.some(d => d.kind === 'definition-display-layout'))) fail('unbound definition display layout option');
+   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
+       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
+       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
+-  if (consolidation || relocation) {
++  if (consolidation || relocation || displayLayout) {
+     const runtime = parserDescriptor();
+     if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
+     for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);
+diff --git a/tools/physics-support/original-rendering-maintenance.mjs b/tools/physics-support/original-rendering-maintenance.mjs
+index 0fb965bda9..a3b69bee8f 100644
+--- a/tools/physics-support/original-rendering-maintenance.mjs
++++ b/tools/physics-support/original-rendering-maintenance.mjs
+@@ -180,6 +180,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
+     if (entry.presentation_version !== undefined && entry.presentation_version !== 1 && !presentationV2) fail('unsupported presentation version');
+     if (!presentationV2 && entry.proof_support_consolidation !== undefined) fail('proof support consolidation requires V2');
+     if (!presentationV2 && entry.proof_reference_relocation !== undefined) fail('proof reference relocation requires V2');
++    if (!presentationV2 && entry.definition_display_layout !== undefined) fail('definition display layout requires V2');
+     const pin = receipt.files.find(p => p.path === entry.path);
+     if (!pin || !/^items\/[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(entry.path) || accepted.has(entry.path)
+         || !scope.paths.has(entry.path) || entry.pinned_sha256 !== pin.sha256) fail('entry scope/pin');
+@@ -213,7 +214,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
+     if (ledger.split(begin).length !== 2 || ledger.split(end).length !== 2) fail('ledger marker uniqueness');
+     const block = ledger.split(begin)[1].split(end)[0];
+     if (sha(block) !== native.ledger_sha256 || !localEvidence(entry.ledger_evidence).equals(Buffer.from(block))) fail('ledger extraction');
+-    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation) : originalRenderingChanges(beforeBytes, afterBytes);
++    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout) : originalRenderingChanges(beforeBytes, afterBytes);
+     const nonProofDefinition = presentationV2 && before.data.kind === 'definition'
+       && !/^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before.body)
+       && /^proof-layout: 1 items, 0 steps, 0 defects(?:\s|$)/m.test(check.output ?? '');
+diff --git a/tools/physics-support/original-rendering-maintenance.test.mjs b/tools/physics-support/original-rendering-maintenance.test.mjs
+index e88bacd2d1..cb81295e27 100644
+--- a/tools/physics-support/original-rendering-maintenance.test.mjs
++++ b/tools/physics-support/original-rendering-maintenance.test.mjs
+@@ -20,6 +20,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   const save = (base, path, value) => { mkdirSync(resolve(base, path, '..'), { recursive: true }); writeFileSync(resolve(base, path), typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n'); };
+   let before = `---\nid: ${id}\nkind: ${definition ? 'definition' : 'theorem'}\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
+   if (definition) before = before.replace('## Statement', '## Definition').replace(/\n## Facts & Assumptions[\s\S]*$/, '\n');
++  if (mode === 'definition-display') before = before.replace('For the given object, $A=A$.', ()=>'For the object define\n$$A=A.$$\nThe zero convention is fixed.');
+   if (mode === 'fact-label' || mode === 'reference-relocation') {
+     before = before.replace('deps: []', 'deps: [lem-title-target]').replace('[L1] Equality is reflexive. [given]', '[L1] Equality is reflexive. [given]\n\n[F2] The evaluation kernel is maximal ([[lem-title-target]]).');
+     before += '\n## Sources\n\nExact unchanged source section.\n';
+@@ -35,6 +36,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   importMathematics(root, source);
+   const repairPath = `research/source-repair/receipts/${id}.json`;
+   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
++  if (mode === 'definition-display') after = after.replace('\n$$A=A.$$\n', ()=>'\n\n$$\nA=A.\n$$\n\n');
+   if (mode === 'technique') after = after.replace('**Proof technique:** direct on $A$.', '**Proof technique:** direct on A.');
+   if (mode === 'title') after = after.replace('title: A theorem on R^n', () => "title: 'A theorem on $\\mathbb R^n$'");
+   if (mode === 'step') after = after.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The identity map on the given object has equal domain and codomain; reflexivity gives $A=A$. [L1]');
+@@ -77,7 +79,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   const hashFile = path => sha(readFileSync(resolve(root, path)));
+   const consolidation = mode.startsWith('support-consolidation') ? { version: 1, steps: mode === 'support-consolidation-both' ? ['1.1', '1.2'] : ['1.2'] } : undefined;
+   const relocation = mode === 'reference-relocation' ? { version: 1, steps: [{ label: '1.1', target: 'lem-title-target' }] } : undefined;
+-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
++  const displayLayout = mode === 'definition-display' ? {version:1,display:0} : undefined;
++  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
+     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
+   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
+@@ -100,6 +103,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+     entry.presentation_version = 2;
+     if (consolidation) entry.proof_support_consolidation = consolidation;
+     if (relocation) entry.proof_reference_relocation = relocation;
++    if (displayLayout) entry.definition_display_layout = displayLayout;
+     Object.assign(entry.scientific_review, changes.review_classification);
+     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
+       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
+@@ -354,3 +358,8 @@ test('reference relocation never obtains the support-only absent-diagram-keys ex
+ test('legacy entries reject reference relocation options',t=>{
+  const f=fixture(t);f.entry.proof_reference_relocation={version:1,steps:[{label:'1.1',target:'lem-title-target'}]};f.seal();assert.throws(()=>f.verify(),/relocation requires V2/);
+ });
++
++test('authenticated V2 definition display layout retains exact option, review, runtime and source guards',t=>{
++ const f=fixture(t,{mode:'definition-display',definition:true,presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);assert.equal(f.entry.changes.deltas[0].kind,'definition-display-layout');delete f.entry.definition_display_layout;f.seal();assert.throws(()=>f.verify(),/scientific Definition/);
++});
++test('legacy entries cannot use the definition display selector',t=>{const f=fixture(t);f.entry.definition_display_layout={version:1,display:0};f.seal();assert.throws(()=>f.verify(),/definition display layout requires V2/);});

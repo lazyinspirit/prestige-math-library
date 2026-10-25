@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-canonical-map-to-a-quotient-bundle-is-a-smooth-bundle-map.md

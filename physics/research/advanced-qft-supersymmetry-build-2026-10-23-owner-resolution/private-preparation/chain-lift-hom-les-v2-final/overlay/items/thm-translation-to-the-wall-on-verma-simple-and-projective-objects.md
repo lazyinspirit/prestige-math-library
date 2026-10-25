@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-translation-to-the-wall-on-verma-simple-and-projective-objects.md

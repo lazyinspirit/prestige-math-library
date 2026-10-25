@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/pthm-qftx-n1-gauge-matter-off-shell-invariance.md

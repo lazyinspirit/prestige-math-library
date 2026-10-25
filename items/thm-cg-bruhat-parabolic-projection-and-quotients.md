@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cg-bruhat-parabolic-projection-and-quotients.json
+  precheck: pass
 id: thm-cg-bruhat-parabolic-projection-and-quotients
 kind: theorem
-title: "The minimal-coset projection onto W^I is order-preserving, and Bruhat order on the parabolic quotient W^I"
+title: "The minimal-coset projection onto $W^I$ is order-preserving, and Bruhat order on the parabolic quotient $W^I$"
 status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
@@ -13,12 +16,6 @@ provenance:
 proof_strategy: direct
 aliases: []
 landmark: false
-verification:
-  audited: "2026-10-08"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "Anders Bjorner and Francesco Brenti, Combinatorics of Coxeter Groups (Graduate Texts in Mathematics 231, Springer 2005; author-hosted complete PDF)"

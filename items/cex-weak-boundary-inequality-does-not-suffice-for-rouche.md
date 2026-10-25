@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-weak-boundary-inequality-does-not-suffice-for-rouche.json
+  precheck: pass
 id: cex-weak-boundary-inequality-does-not-suffice-for-rouche
 kind: counterexample
-title: "The weak inequality |f-g| <= |g| does not suffice in Rouche"
+title: 'The weak inequality $|f-g| \le |g|$ does not suffice in Rouche'
 status: published
 origin: session
 provenance:
@@ -15,9 +18,6 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:

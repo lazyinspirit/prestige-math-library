@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-prime-power-specializations-of-the-integral-quantum-half-have-a-nondegenerate-green-form.md

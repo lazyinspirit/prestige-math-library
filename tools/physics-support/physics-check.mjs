@@ -12,6 +12,10 @@ try {
     throw Error('--step6-scope requires an authored --run frontier');
   let plan = args.includes('--plan') ? JSON.parse(readFileSync(resolve(root, value('--plan')), 'utf8')) : null;
   let proposedPages = null;
+  const maintenanceRun = args.includes('--maintenance-run') ? value('--maintenance-run') : null;
+  if (args.filter(arg => arg === '--maintenance-run').length > 1 || maintenanceRun !== null
+      && (!/^[a-zA-Z0-9_-]+$/.test(maintenanceRun ?? '') || !args.includes('--pages-file') || !plan))
+    throw Error('--maintenance-run requires one explicit run with --plan and --pages-file');
   if (args.includes('--pages-file')) {
     if (!plan || args.includes('--run')) throw Error('--pages-file requires --plan without --run');
     const ids = JSON.parse(readFileSync(resolve(root, value('--pages-file')), 'utf8'));
@@ -26,7 +30,7 @@ try {
       return page;
     });
   }
-  verifyMathematicsImports(root, proposedPages ? { planning: true, proposedPages } : args.includes('--run') ? { run: value('--run'), planning: args.includes('--plan'), frontierOnly: args.includes('--step6-scope') } : {});
+  verifyMathematicsImports(root, proposedPages ? { planning: true, proposedPages, maintenanceRun, maintenanceSelector: maintenanceRun ? value('--pages-file') : null } : args.includes('--run') ? { run: value('--run'), planning: args.includes('--plan'), frontierOnly: args.includes('--step6-scope') } : {});
   const scope = proposedPages ? { pages: new Set(proposedPages.map(page => page.id)), items: new Set(proposedPages.flatMap(page => page.items.map(item => item.id))) }
     : args.includes('--run') ? frontierGateScope({ repo: root, run: value('--run') }, { requireItemFiles: !args.includes('--plan'), allowEmptyItems: args.includes('--plan') }) : null;
   if (scope && plan && !proposedPages) {

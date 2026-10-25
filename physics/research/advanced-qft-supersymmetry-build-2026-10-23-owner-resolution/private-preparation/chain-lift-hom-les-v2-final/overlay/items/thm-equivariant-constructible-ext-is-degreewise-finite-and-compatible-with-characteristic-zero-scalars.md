@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-equivariant-constructible-ext-is-degreewise-finite-and-compatible-with-characteristic-zero-scalars.md

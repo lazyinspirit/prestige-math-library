@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-mackey-double-coset-formula-for-restricting-an-induced-character.md

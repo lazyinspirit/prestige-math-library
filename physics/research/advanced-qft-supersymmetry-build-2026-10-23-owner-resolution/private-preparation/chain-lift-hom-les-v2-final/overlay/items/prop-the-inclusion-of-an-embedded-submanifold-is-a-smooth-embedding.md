@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding.md

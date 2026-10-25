@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-linucb-regret.json
+  precheck: pass
 id: thm-linucb-regret
 kind: theorem
 title: LinUCB has a log-determinant high-probability pseudo-regret bound
@@ -6,8 +9,6 @@ status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5
-verification:
-  precheck: pass
 deps: [alg-linucb,
        def-axiom-of-choice,
        def-countable-choice,
@@ -103,3 +104,31 @@ $$\widehat R_n\le\sqrt{8n\beta_n\log\!\left(\frac{\det V_n}{\det V_0}\right)}\le
 
 8.1 Apply the sum bound in [F4] to step 7.1 to obtain $\widehat R_n\le\sqrt{8n\beta_n\log(\det V_n/\det V_0)}$. Then [F5] gives the second displayed bound. These inequalities hold on $E$, whose probability is at least $1-\delta$ by [F3]. [F3, F4, F5, step 7.1] ∎
 
+
+## Remarks
+
+At a fixed round, write $V=V_{t-1}$ and $\widehat\theta=\widehat\theta_{t-1}$. The enlarged confidence ellipsoid $\mathcal E_t=\{\theta:\|\theta-\widehat\theta\|_V\le\sqrt{\beta_t}\}$ contains $C_t$, hence contains $\theta^*$ on the confidence event. For a nonzero available feature $a$, its supporting point in direction $a$ is
+
+$$\theta_t^+(a)=\widehat\theta+\frac{\sqrt{\beta_t}\,V^{-1}a}{\sqrt{a^{\mathsf T}V^{-1}a}},\qquad \langle\theta_t^+(a),a\rangle=U_t(a).$$
+
+Indeed, its displacement has $V$-norm $\sqrt{\beta_t}$, and the Cauchy–Schwarz bound in step 3.1 is attained there. The figure shows a two-dimensional example with $\widehat\theta=0$, $V=\mathrm{diag}(1,4)$, $\beta_t=4$, $a=(1,0)$, and $\theta^*=(3/5,3/10)$. The dashed line is the supporting level set $\langle\theta,a\rangle=U_t(a)$; the solid arrow from the center reaches the supporting point, whereas $\theta^*$ lies inside the ellipsoid.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[thick] (0,0) ellipse (2 and 1);
+\draw[dashed] (2,-1.35) -- (2,1.35);
+\draw[->,thick] (0,0) -- (2,0);
+\fill (0,0) circle (1.8pt);
+\node[below left] at (0,0) {$\widehat\theta$};
+\fill (0.6,0.3) circle (1.8pt);
+\node[above] at (0.6,0.3) {$\theta^*$};
+\fill (2,0) circle (1.8pt);
+\node[right] at (2.08,0) {$\theta_t^+(a)$};
+\node[above] at (0,1.08) {$\mathcal E_t$};
+\node[right] at (2.15,1.12) {$\langle\theta,a\rangle=U_t(a)$};
+\draw[->,thick] (-0.5,-1.65) -- (0.5,-1.65);
+\node[below] at (0,-1.65) {$a$};
+\end{tikzpicture}
+```
+
+This is a single-round picture. Maximizing $U_t$ over available features gives the optimism comparison in step 4.1; the width in the selected direction then bounds $r_t$ in step 5.1. The cumulative estimate instead uses $\sum_t\min\{1,u_t\}\le2\log(\det V_n/\det V_0)$ in steps 7.1–8.1. The proof above is independent of the illustration.

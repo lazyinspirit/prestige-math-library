@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-trivial-c1-holonomy-gives-a-saturated-product-neighbourhood.md

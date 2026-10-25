@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-local-holder-regularity-implies-fourier-convergence-at-a-point.md

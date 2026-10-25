@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-qftx-compact-smooth-manifold-has-finite-good-cover-nerve-model.md

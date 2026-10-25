@@ -1,0 +1,533 @@
+diff --git a/tools/physics-support/README.md b/tools/physics-support/README.md
+index d252b6f537..bea97dec63 100644
+--- a/tools/physics-support/README.md
++++ b/tools/physics-support/README.md
+@@ -220,3 +220,16 @@ authenticated finalized main repair remain required. It creates no generic
+ proof rewrite or diagram waiver; supplied partial/null/contradictory native
+ flags reject and graphics retain their ordinary requirements. See the
+ presentation maintenance guide for the full schema and restrictions.
++
++Two further independent V2 format selectors cover exact proof paragraph
++layout: seventh `proof_support_relocation_layout` moves one unchanged
++pre-display support cluster to complete step end and joins exact 2LF math
++boundaries to ASCII spaces; eighth `proof_paragraph_join_layout` retains
++clusters and joins 2LF to one LF, with only the exact documented Fourier
++technique label pair. Literal reconstruction, full-body AST ownership,
++protected bytes/types, whole-Proof style guards and runtime inputs are
++mandatory. Compound native eligibility is limited to those deltas plus
++reviewed predeclared Fact labels (support mode) or the exact technique pair
++(paragraph mode); no title/Remarks/other deltas/graphics even with valid
++flags. Existing flag routes stay unchanged. See the presentation guide for
++exact schemas and per-delta scientific/authentication requirements.
+diff --git a/tools/physics-support/original-presentation-maintenance.md b/tools/physics-support/original-presentation-maintenance.md
+index 20c2819a67..7863df0dac 100644
+--- a/tools/physics-support/original-presentation-maintenance.md
++++ b/tools/physics-support/original-presentation-maintenance.md
+@@ -273,3 +273,68 @@ valid; partial, null or contradictory supplied flags reject. Existing Remarks
+ alone is not a graphics exclusion, because its entire bytes are preserved.
+ Actual figures/fences/images/HTML/TikZ retain the original native flags.
+ Default/legacy extraction is unchanged; legacy entries reject the selector.
++
++## Explicit support relocation and paragraph joins
++
++Two independent V2 format selectors share only an exact reconstruction
++primitive. They cannot combine with each other or earlier selectors.
++
++* Seventh argument / `proof_support_relocation_layout`:
++  `{version:1, steps:['2.1','4.1','5.1','6.1']}`. Each named old step has no
++  terminal cluster/endmarker, one unique complete plaintext support cluster
++  immediately before its first sole-paragraph raw `$$` formula, and the new
++  complete step ends with that identical raw cluster. Its owned preceding
++  ASCII space moves with it. Tags/order/routines such as choose/construct
++  remain exact; adjacent/duplicate clusters reject. Exact old two-LF
++  boundaries on both sides of every sole-paragraph `$$` span become exactly
++  one ASCII space. All other prose/support/payload/delimiter bytes remain
++  exact. The typed per-step delta is `proof-support-relocation-layout`.
++* Eighth argument / `proof_paragraph_join_layout`:
++  `{version:1, steps:['1.1','1.2','2.1'], technique:{before:'**Proof technique:** Fubini followed by $L^2$ approximation.', after:'**Proof technique:** Fubini followed by square-integrable approximation.'}}`.
++  This exact full constant pair is the only technique mapping admitted.
++  Named steps retain every support cluster and marker in place; only exact
++  two-LF boundaries around sole-paragraph raw `$$` formulas become one LF.
++  Typed steps are `proof-paragraph-join-layout`, plus the exact reviewed
++  `proof-technique` delta. This does not admit arbitrary technique prose.
++
++Entire after-step bytes must equal the sorted literal splice reconstruction;
++no global whitespace collapse, prose token normalization, punctuation moves,
++math payload/delimiter changes or single-dollar boundary joins occur. Actual
++AST protected math/code/wiki bytes AND types match in order. Named labels,
++complete clusters, terminals and math require real roles; old math is an
++actual sole-math paragraph and new math is actually embedded in the named
++paragraph. For the actual Hilbert case, node type remains inlineMath before
++and after: no node-type or rendered-style change is inferred from paragraph
++joins.
++
++Fragment checks are additionally bound to the ENTIRE body AST with absolute
++UTF-16 offsets: the actual named label starts its root paragraph, clusters
++are actual plaintext, no protected span crosses the owned step bounds, and
++all actual full-body protected ranges/types/hashes equal fragment ranges.
++All canonical headers are real ordered root H2s. Reference definitions,
++whole-Proof style choices/conditional/macro indirection controls, actual
++HTML/image/fenced-code nodes and explicit includegraphics/TikZ commands
++reject. The style guard is conservative, not renderer-driven equivalence.
++Math such as `$x<d$` is not misidentified as HTML by a raw less-than heuristic.
++Existing older flag routes retain their previous behavior.
++
++Support relocation permits only its typed deltas plus ordinary Facts
++reference-label deltas to predeclared published pinned targets with exact
++Root label review. Paragraph joining permits only its typed deltas plus
++that one exact technique pair. Neither route permits title, Remarks,
++generic proof rewrites, other deltas or graphics, EVEN with a valid native
++flag pair. Both actual native diagram keys may be absent only with
++mathematical_meaning_preserved true; the original true/false pair also
++works, while partial/null/contradictory supplied keys reject. These are
++bounded format routes, not generic substantiveSteps flag exemptions.
++
++Scientific proof classifications are respectively
++`support-relocation-layout-only` and
++`paragraph-join-layout-and-exact-technique-label`. Every delta still needs
++exact source hashes, Root reason/reading limits/evidence, actual consumer
++bindings and finalized native main repair authentication. Selectors and
++`proof_layout_context` (body/Proof hashes, canonical and absolute step roles,
++no-graphics checks) are exact consumed changes. The existing live-bound
++403-input parser/runtime descriptor is mandatory. No source adoption,
++proof acceptance, import replacement or coverage follows from extraction.
++Default/legacy JSON remains unchanged and legacy selectors reject.
+diff --git a/tools/physics-support/original-presentation-maintenance.mjs b/tools/physics-support/original-presentation-maintenance.mjs
+index cb8c76f7b1..652fab9617 100644
+--- a/tools/physics-support/original-presentation-maintenance.mjs
++++ b/tools/physics-support/original-presentation-maintenance.mjs
+@@ -101,17 +101,17 @@ function rejectReferenceDefinitions(body) {
+   };
+   walk(markdownTree(body));
+ }
+-function stepAst(text) {
++function stepAst(text, wholeBody = false) {
+   const rows = [], allowed = new Set(['root', 'paragraph', 'text', 'inlineMath', 'math', 'inlineCode']);
+   const walk = (node, parent = null) => {
+-    if (!allowed.has(node.type)) fail('unsupported support consolidation Markdown node ' + node.type);
++    if (!wholeBody && !allowed.has(node.type)) fail('unsupported support consolidation Markdown node ' + node.type);
+     const start = node.position?.start.offset, end = node.position?.end.offset;
+     if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start < 0 || end < start || end > text.length) fail('invalid Markdown source offsets');
+     rows.push({ node, parent, start, end });
+     for (const child of node.children ?? []) walk(child, node);
+   };
+   walk(markdownTree(text));
+-  const literals = rows.filter(r => ['inlineCode', 'inlineMath', 'math'].includes(r.node.type));
++  const literals = rows.filter(r => ['inlineCode', 'inlineMath', 'math', ...(wholeBody ? ['code'] : [])].includes(r.node.type));
+   const wikis = []; let cursor = 0;
+   while (true) {
+     const start = text.indexOf('[[', cursor); if (start < 0) break;
+@@ -226,8 +226,7 @@ function definitionDisplayOption(value) {
+       || !Number.isSafeInteger(value.display) || value.display < 0) fail('invalid definition display layout option');
+   return { version: 1, display: value.display };
+ }
+-function definitionDisplayLayout(before, after, option, deltas) {
+-  definitionSuffixUnchanged(before, after);
++function rejectStyleIndirection(texts, context) {
+   // Display style may select different mathematical tokens even with identical
+   // TeX bytes. Reject ambient definitions/indirection as well as direct choices:
+   // an unchanged earlier formula could otherwise define an alias for the span.
+@@ -239,14 +238,18 @@ function definitionDisplayLayout(before, after, option, deltas) {
+     'sfcode', 'chardef', 'mathchardef', 'countdef', 'dimendef', 'skipdef', 'muskipdef',
+     'toksdef', 'everymath', 'everydisplay', 'input', 'include', 'write', 'read', 'openout', 'openin', 'verb',
+     'endlinechar', 'newlinechar', 'obeylines', 'obeyspaces', 'active', 'begingroup', 'endgroup']);
+-  for (const text of [before, after]) {
+-    if (text.includes('^^')) fail('unsafe definition style/indirection TeX');
++  for (const text of texts) {
++    if (text.includes('^^')) fail('unsafe ' + context + ' style/indirection TeX');
+     for (const m of text.matchAll(/\\([A-Za-z@]+)/g)) {
+       const name = m[1].toLowerCase();
+       if (unsafe.has(name) || name.includes('@') || /^(?:if|new|renew|provide|declare)/.test(name))
+-        fail('unsafe definition style/indirection TeX');
++        fail('unsafe ' + context + ' style/indirection TeX');
+     }
+   }
++}
++function definitionDisplayLayout(before, after, option, deltas) {
++  definitionSuffixUnchanged(before, after);
++  rejectStyleIndirection([before, after], 'definition');
+   const candidates = [...before.matchAll(/(?<=\n)\$\$([^\r\n$]+)\$\$(?=\n)/g)]
+     .map(m => Object.assign(['\n' + m[0] + '\n', m[1]], { index: m.index - 1 }));
+   const selected = candidates[option.display];
+@@ -400,7 +403,156 @@ function supportConsolidation(before, after) {
+       old_display: { type: displayNode.node.type, role: standalone ? 'standalone-double-dollar' : 'display-math', start: displayStart, end: displayEnd },
+       new_inline: { type: 'inlineMath', start: inlineNode.start, end: inlineNode.end } } };
+ }
+-function proofChange(before, after, deltas, consolidation, relocation, deps) {
++const fourierTechniquePair = {
++  before: '**Proof technique:** Fubini followed by $L^2$ approximation.',
++  after: '**Proof technique:** Fubini followed by square-integrable approximation.',
++};
++function supportLayoutOption(value) {
++  if (value === undefined) return null;
++  if (!value || typeof value !== 'object' || Array.isArray(value)
++      || !equal(Object.keys(value).sort(), ['steps', 'version']) || value.version !== 1
++      || !Array.isArray(value.steps) || !value.steps.length
++      || value.steps.some(s => typeof s !== 'string' || !/^[1-9]\d*\.[1-9]\d*$/.test(s))
++      || new Set(value.steps).size !== value.steps.length) fail('invalid support relocation layout option');
++  return { version: 1, steps: [...value.steps] };
++}
++function paragraphLayoutOption(value) {
++  if (value === undefined) return null;
++  if (!value || typeof value !== 'object' || Array.isArray(value)
++      || !equal(Object.keys(value).sort(), ['steps', 'technique', 'version'])
++      || !equal(value.technique, fourierTechniquePair)) fail('invalid exact paragraph layout technique option');
++  const base = supportLayoutOption({ version: value.version, steps: value.steps });
++  return { ...base, technique: { ...fourierTechniquePair } };
++}
++function layoutSupportTags(raw) {
++  const tags = raw.slice(1, -1).split(',').map(t => t.trim());
++  if (!tags.length || tags.some(t => !/^(?:[FAL][1-9]\d*|step [1-9]\d*\.[1-9]\d*|given|choose|construct)$/.test(t))
++      || new Set(tags).size !== tags.length) fail('invalid layout support cluster');
++  return tags;
++}
++function layoutStep(before, after, label, mode) {
++  const oldAst = stepAst(before), nextAst = stepAst(after), separator = mode === 'support-relocation' ? ' ' : '\n';
++  const labelRole = ast => {
++    const role = plaintextRole(ast, 0, label.length + 1), paragraph = ast.rows.find(r => r.node.type === 'paragraph' && r.start === 0);
++    if (!paragraph || paragraph.end < role.end) fail('layout named step is not an actual paragraph start');
++    return { ...role, paragraph: { start: paragraph.start, end: paragraph.end } };
++  };
++  const beforeLabel = labelRole(oldAst), afterLabel = labelRole(nextAst);
++  const literals = (text, ast) => ast.ranges.map(r => ({ raw: text.slice(r.start, r.end),
++    type: ast.rows.find(n => n.start === r.start && n.end === r.end && ['math','inlineMath','inlineCode'].includes(n.node.type))?.node.type ?? 'canonical-wiki',
++    start: r.start, end: r.end }));
++  const oldLiterals = literals(before, oldAst), newLiterals = literals(after, nextAst);
++  if (!equal(oldLiterals.map(({raw,type})=>({raw,type})), newLiterals.map(({raw,type})=>({raw,type})))) fail('layout changed protected literal bytes/types');
++  const displays = oldAst.rows.filter(r => ['math', 'inlineMath'].includes(r.node.type) && before.slice(r.start,r.end).startsWith('$$'));
++  if (!displays.length) fail('layout lacks actual double-dollar math');
++  const patches = [], joins = [], mathRoles = [];
++  for (const r of displays) {
++    const raw = before.slice(r.start,r.end), standalone = r.node.type === 'math' && r.parent?.type === 'root'
++      || r.parent?.type === 'paragraph' && r.parent.children.length === 1
++        && r.parent.position.start.offset === r.start && r.parent.position.end.offset === r.end;
++    if (!standalone || !/^\$\$[^\r\n$]+\$\$$/.test(raw)
++        || !oldAst.ranges.some(p=>p.start===r.start&&p.end===r.end)) fail('layout old math is not a literal sole-paragraph double-dollar span');
++    const a = /[ \t\r\n]+$/.exec(before.slice(0,r.start)), b = /^[ \t\r\n]+/.exec(before.slice(r.end));
++    if (a?.[0] !== '\n\n' || b?.[0] !== '\n\n') fail('layout requires exact old two-LF math boundaries');
++    for (const [start,end] of [[r.start-2,r.start],[r.end,r.end+2]]) {
++      patches.push({start,end,text:separator}); joins.push({start,end,before:'\n\n',after:separator});
++    }
++    mathRoles.push({before:{type:r.node.type,start:r.start,end:r.end,paragraph_role:'sole-math-paragraph'},raw_sha256:sha(raw)});
++  }
++  const first = displays[0], prefix = before.slice(0,first.start), pre = /(\[[^\[\]\r\n]+\])\n\n$/.exec(prefix);
++  if (!pre) fail('layout needs a complete plaintext pre-first-display support cluster');
++  const cluster = pre[1], clusterStart = pre.index, tags = layoutSupportTags(cluster), oldClusterRole = plaintextRole(oldAst,clusterStart,clusterStart+cluster.length);
++  if(oldClusterRole.end>beforeLabel.paragraph.end) fail('layout pre-display cluster is not in named-step opening paragraph');
++  let moved = null;
++  if (mode === 'support-relocation') {
++    if (/\[[^\]\r\n]+\][ \t\r\n]*$/.test(before) || before.includes('∎') || before.includes('\\qed')) fail('support layout requires no old terminal cluster or endmarker');
++    if (before.indexOf(cluster) !== before.lastIndexOf(cluster) || before[clusterStart-1] !== ' '
++        || /[\s\]]/.test(before[clusterStart-2] ?? '')) fail('ambiguous or adjacent support layout cluster');
++    patches.push({start:clusterStart-1,end:clusterStart+cluster.length,text:''});
++    moved = {raw:cluster,tags,owned_before:' '+cluster,before:oldClusterRole,endmarker:''};
++  }
++  patches.sort((a,b)=>a.start-b.start);
++  if (patches.some((p,i)=>i && p.start<patches[i-1].end)) fail('overlapping layout boundary patches');
++  let expected=before;
++  for (const p of [...patches].reverse()) expected=expected.slice(0,p.start)+p.text+expected.slice(p.end);
++  if (moved) expected=trim(expected)+' '+cluster+tail(expected);
++  if (expected !== after) fail('layout changed prose, support, payload or unapproved whitespace');
++  const newDisplays = nextAst.rows.filter(r=>['math','inlineMath'].includes(r.node.type)&&after.slice(r.start,r.end).startsWith('$$'));
++  if (newDisplays.length !== displays.length) fail('layout math spans changed');
++  for(let i=0;i<newDisplays.length;i++) {
++    const r=newDisplays[i];
++    if(after.slice(r.start,r.end)!==before.slice(displays[i].start,displays[i].end)) fail('layout math literal changed');
++    if(r.parent?.type!=='paragraph'||r.parent.position.start.offset!==0||r.parent.children.length<2) fail('layout new math is not embedded in actual named-step paragraph');
++    mathRoles[i].after={type:r.node.type,start:r.start,end:r.end,paragraph_role:'embedded-math',paragraph:{start:r.parent.position.start.offset,end:r.parent.position.end.offset}};
++  }
++  const terminal = (text,ast) => {
++    const m=/\[([^\]\r\n]+)\]([ \t]*∎)?[ \t\r\n]*$/.exec(text);
++    if(!m) fail('layout terminal support is absent');
++    layoutSupportTags('['+m[1]+']');
++    return {raw:'['+m[1]+']',endmarker:m[2]??'',role:plaintextRole(ast,m.index,m.index+m[1].length+2)};
++  };
++  const nextTerminal=terminal(after,nextAst);
++  if (moved) {
++    if(nextTerminal.raw!==cluster || nextTerminal.endmarker) fail('support layout terminal cluster changed');
++    const p=nextAst.rows.find(r=>r.node.type==='paragraph'&&r.start===0);
++    if(!p || nextTerminal.role.end>p.end) fail('support layout terminal is not in complete named-step paragraph');
++    moved.after=nextTerminal.role;
++  } else {
++    const oldTerminal=terminal(before,oldAst);
++    if(oldTerminal.raw!==nextTerminal.raw || oldTerminal.endmarker!==nextTerminal.endmarker) fail('paragraph layout changed terminal support');
++    const preNew=/(\[[^\[\]\r\n]+\])\n$/.exec(after.slice(0,newDisplays[0].start));
++    if(!preNew||preNew[1]!==cluster) fail('paragraph layout pre-display support changed');
++    moved={raw:cluster,tags,unchanged_before:oldClusterRole,unchanged_after:plaintextRole(nextAst,preNew.index,preNew.index+cluster.length),terminal_before:oldTerminal,terminal_after:nextTerminal};
++  }
++  return {version:1,mode,separator,patches,joins,support:moved,protected_literals:oldLiterals.map(({raw,type})=>({type,sha256:sha(raw)})),
++    protected_ranges:{before:oldLiterals.map(({raw,...r})=>({...r,sha256:sha(raw)})),after:newLiterals.map(({raw,...r})=>({...r,sha256:sha(raw)}))},
++    markdown_roles:{offset_unit:'UTF-16',named_step_before:beforeLabel,named_step_after:afterLabel,math:mathRoles}};
++}
++function strictLayoutContext(before,after,request,paragraphMode,deltas,deps) {
++  const a=sections(before),b=sections(after);
++  if(a.values.has('Remarks')||b.values.has('Remarks')) fail('strict layout cannot include Remarks');
++  const headers={before:canonicalHeadings(before),after:canonicalHeadings(after)};
++  rejectStyleIndirection([a.values.get('Proof')??'',b.values.get('Proof')??''],'proof');
++  for(const body of [before,after]) {
++    const walk=node=>{if(['html','image','imageReference','code'].includes(node.type)) fail('strict layout graphics/code context');for(const c of node.children??[])walk(c);};
++    walk(markdownTree(body));
++    if(/\\(?:includegraphics|tikz)\b|\\begin\s*\{\s*(?:tikzcd|tikzpicture)\s*\}/.test(body)) fail('strict layout TeX graphics context');
++  }
++  const kind=paragraphMode?'proof-paragraph-join-layout':'proof-support-relocation-layout';
++  if(!equal(request.steps,deltas.filter(d=>d.kind===kind).map(d=>d.label))) fail('unused/unknown strict layout step selector');
++  if(deltas.some(d=>d.kind!==kind && !(paragraphMode ? d.kind==='proof-technique' && d.before===fourierTechniquePair.before && d.after===fourierTechniquePair.after
++      : d.kind==='reference-label' && d.section==='Facts & Assumptions' && Array.isArray(deps)&&deps.includes(d.target)))) fail('strict layout has unrelated deltas');
++  if(paragraphMode && deltas.filter(d=>d.kind==='proof-technique').length!==1) fail('strict paragraph layout requires exact technique delta');
++  const contextual=[];
++  for(const [side,body,section]of [['before',before,a],['after',after,b]]) {
++    const ast=stepAst(body,true),proof=section.values.get('Proof'),proofStart=headers[side].find(h=>h.name==='Proof')?.start;
++    if(!Number.isSafeInteger(proofStart)) fail('layout has no actual Proof ownership');
++    const marks=[...proof.matchAll(/^(\d+\.\d+) /gm)];
++    const textRole=(start,end)=>{
++      const node=ast.rows.find(r=>r.node.type==='text'&&r.start<=start&&r.end>=end),paragraph=node?.parent;
++      if(!node||paragraph?.type!=='paragraph'||ast.rows.find(r=>r.node===paragraph)?.parent?.type!=='root'
++          ||ast.ranges.some(r=>start<r.end&&end>r.start)) fail('layout full-body range is not actual root-paragraph plaintext');
++      return {type:'text',start,end,paragraph:{start:paragraph.position.start.offset,end:paragraph.position.end.offset}};
++    };
++    for(const label of request.steps) {
++      const matches=marks.map((m,i)=>({m,i})).filter(r=>r.m[1]===label);
++      if(matches.length!==1) fail('layout full-body step ownership is ambiguous');
++      const {m,i}=matches[0],start=proofStart+m.index,end=proofStart+(marks[i+1]?.index??proof.length),delta=deltas.find(d=>d.kind===kind&&d.label===label);
++      if(body.slice(start,end)!==delta[side]) fail('layout full-body step bytes do not match');
++      const named=textRole(start,start+label.length+1);
++      if(named.paragraph.start!==start) fail('layout full-body named step is not a paragraph start');
++      if(ast.ranges.some(r=>r.start<end&&r.end>start&&(r.start<start||r.end>end))) fail('layout protected context crosses named-step boundary');
++      const actual=ast.ranges.filter(r=>r.start>=start&&r.end<=end).map(r=>({type:ast.rows.find(n=>n.start===r.start&&n.end===r.end&&['math','inlineMath','inlineCode','code'].includes(n.node.type))?.node.type??'canonical-wiki',start:r.start-start,end:r.end-start,sha256:sha(body.slice(r.start,r.end))}));
++      if(!equal(actual,delta.layout.protected_ranges[side])) fail('layout full-body protected ranges/types differ from fragment');
++      const support=delta.layout.support,relative=side==='before'?[support.before??support.unchanged_before,support.terminal_before?.role]:[support.after??support.unchanged_after,support.terminal_after?.role];
++      const supports=relative.filter(Boolean).map(r=>textRole(start+r.start,start+r.end));
++      if(supports[0].paragraph.start!==start) fail('layout full-body opening support is outside named paragraph');
++      contextual.push({side,label,start,end,named_step:named,support:supports,protected_ranges:actual.map(r=>({...r,start:r.start+start,end:r.end+start}))});
++    }
++  }
++  return {version:1,canonical_sections:headers,steps:contextual,proof_before_sha256:sha(a.values.get('Proof')),proof_after_sha256:sha(b.values.get('Proof')),graphics_free:true};
++}
++function proofChange(before, after, deltas, consolidation, relocation, deps, supportLayout, paragraphLayout) {
+   const a = proofParts(before), b = proofParts(after);
+   if (!equal(a.steps.map(s => s.label), b.steps.map(s => s.label))) fail('proof step sequence change');
+   let technique = null;
+@@ -413,6 +565,11 @@ function proofChange(before, after, deltas, consolidation, relocation, deps) {
+   const steps = [];
+   for (let i = 0; i < a.steps.length; i++) if (a.steps[i].text !== b.steps[i].text) {
+     const x = a.steps[i], y = b.steps[i], support = text => /\[([^\]\n]+)\](?:[ \t]*∎)?[ \t\r\n]*$/.exec(text)?.[1];
++    if (supportLayout?.steps.includes(x.label) || paragraphLayout?.steps.includes(x.label)) {
++      const paragraphMode=Boolean(paragraphLayout), layout=layoutStep(x.text,y.text,x.label,paragraphMode?'paragraph-join':'support-relocation');
++      const delta={id:`Proof:step:${x.label}`,kind:paragraphMode?'proof-paragraph-join-layout':'proof-support-relocation-layout',section:'Proof',label:x.label,before:x.text,after:y.text,layout};
++      steps.push({label:x.label,before:x.text,after:y.text,kind:delta.kind});deltas.push(delta);continue;
++    }
+     const requested = relocation?.steps.find(s => s.label === x.label);
+     if (requested) {
+       const relocated = referenceRelocation(x.text, y.text, requested, deps);
+@@ -443,6 +600,18 @@ function proofChange(before, after, deltas, consolidation, relocation, deps) {
+   }
+   return { technique, steps };
+ }
++function canonicalHeadings(text) {
++    const raw = [...text.matchAll(/^## ([^\r\n]+)\r?$/gm)],
++      actual = markdownTree(text).children.filter(node => node.type === 'heading' && node.depth === 2);
++    if (raw.length !== actual.length) fail('terminal Remarks canonical section headings are not actual root H2');
++    return raw.map((m, i) => {
++      const node = actual[i], end = m.index + m[0].replace(/\r$/, '').length;
++      if (node.position?.start.offset !== m.index || node.position?.end.offset !== end
++          || node.children?.length !== 1 || node.children[0].type !== 'text' || node.children[0].value !== m[1])
++        fail('terminal Remarks canonical section headings are not actual root H2');
++      return { name: m[1], type: 'heading', depth: 2, start: m.index, end };
++    });
++}
+ function terminalRemarksOption(value) {
+   if (value === undefined) return null;
+   if (!value || typeof value !== 'object' || Array.isArray(value)
+@@ -476,18 +645,6 @@ function terminalRemarksBody(before, after, option, deltas) {
+     return { type, start: low, end: high, ...(type === 'heading' ? { depth: 2 } : {}),
+       ...(paragraph ? { paragraph: { start: paragraph.position.start.offset, end: paragraph.position.end.offset } } : {}) };
+   };
+-  const canonicalHeadings = text => {
+-    const raw = [...text.matchAll(/^## ([^\r\n]+)\r?$/gm)],
+-      actual = markdownTree(text).children.filter(node => node.type === 'heading' && node.depth === 2);
+-    if (raw.length !== actual.length) fail('terminal Remarks canonical section headings are not actual root H2');
+-    return raw.map((m, i) => {
+-      const node = actual[i], end = m.index + m[0].replace(/\r$/, '').length;
+-      if (node.position?.start.offset !== m.index || node.position?.end.offset !== end
+-          || node.children?.length !== 1 || node.children[0].type !== 'text' || node.children[0].value !== m[1])
+-        fail('terminal Remarks canonical section headings are not actual root H2');
+-      return { name: m[1], type: 'heading', depth: 2, start: m.index, end };
+-    });
+-  };
+   const sectionRoles = { before: canonicalHeadings(before), after: canonicalHeadings(after) };
+   const stepStart = proofStart + steps.at(-1).index, stepEnd = stepStart + option.step.length + 1;
+   if (sectionRoles.before.find(h => h.name === 'Proof')?.start >= stepStart
+@@ -505,11 +662,14 @@ function terminalRemarksBody(before, after, option, deltas) {
+     remarks_bytes_sha256: sha(before.slice(start + old.length)), markdown_roles: roles });
+   return after;
+ }
+-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading) {
++export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading, proofSupportRelocationLayout, proofParagraphJoinLayout) {
+   const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay), terminalHeading = terminalRemarksOption(terminalRemarksHeading);
+-  const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation);
++  const supportLayout=supportLayoutOption(proofSupportRelocationLayout), paragraphLayout=paragraphLayoutOption(proofParagraphJoinLayout);
++  if ((supportLayout||paragraphLayout) && (supportLayout&&paragraphLayout || consolidation||displayLayout||terminalHeading||proofReferenceRelocation!==undefined)) fail('strict layout selectors cannot combine with other modes');
++  const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation || supportLayout || paragraphLayout);
+   if (relocation?.steps.some(s => consolidation?.steps.includes(s.label))) fail('overlapping strict proof requests');
+   const before = parse(beforeBytes), after = parse(afterBytes), prior = structuredClone(before.data), current = structuredClone(after.data);
++  if ((supportLayout||paragraphLayout) && !resultKinds.has(prior.kind)) fail('strict layout requires a proved result');
+   if (terminalHeading && !resultKinds.has(prior.kind)) fail('terminal Remarks heading requires a proved result');
+   if (displayLayout && prior.kind !== 'definition') fail('definition display layout requires definition kind');
+   if (!(resultKinds.has(prior.kind) || prior.kind === 'definition')) fail('unsupported item kind');
+@@ -537,7 +697,7 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+       else interfaceChange(x, y, name, deltas);
+     }
+     else if (name === 'Facts & Assumptions') factsChange(x, y, deltas);
+-    else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation, relocation, prior.deps));
++    else if (name === 'Proof' && resultKinds.has(prior.kind)) ({ technique, steps } = proofChange(x, y, deltas, consolidation, relocation, prior.deps, supportLayout, paragraphLayout));
+     else {
+       if (x !== y) {
+         const extra = y?.startsWith(x) ? y.slice(x.length) : null;
+@@ -562,20 +722,31 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+     interface_section: primary,
+     statements: displayLayout ? 'display-layout-only' : statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
+     facts: factLabels ? factQuotes ? 'reference-labels-and-quotation-only' : 'reference-labels-only' : factQuotes ? 'quotation-only' : 'identical',
+-    proof: terminalHeading ? 'terminal-heading-layout-only' : steps.length || technique ? 'equivalent-presentation' : 'unchanged',
++    proof: supportLayout ? 'support-relocation-layout-only' : paragraphLayout ? 'paragraph-join-layout-and-exact-technique-label' : terminalHeading ? 'terminal-heading-layout-only' : steps.length || technique ? 'equivalent-presentation' : 'unchanged',
+   };
+   if (consolidation && !equal([...consolidation.steps].sort(), deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unused proof support consolidation request');
+   if (relocation && !equal(relocation.steps, deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unused proof reference relocation request');
++  const layoutContext=(supportLayout||paragraphLayout)?strictLayoutContext(before.body,after.body,supportLayout??paragraphLayout,Boolean(paragraphLayout),deltas,prior.deps):null;
+   return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas,
+     ...(consolidation ? { proof_support_consolidation: consolidation } : {}), ...(relocation ? { proof_reference_relocation: relocation } : {}),
+     ...(displayLayout ? { definition_display_layout: displayLayout } : {}),
+     ...(terminalHeading ? { terminal_remarks_heading: terminalHeading } : {}),
++    ...(supportLayout?{proof_support_relocation_layout:supportLayout}:{}), ...(paragraphLayout?{proof_paragraph_join_layout:paragraphLayout}:{}),
++    ...(layoutContext?{proof_layout_context:layoutContext}:{}),
+     ...(strictProof || displayLayout || terminalHeading ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
+ }
+ /** Main integration supplies authenticated local binders. No free-text claim
+  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
+ export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
+   const consolidation = consolidationOption(entry.proof_support_consolidation), terminalHeading = terminalRemarksOption(entry.terminal_remarks_heading);
++  const supportLayout=supportLayoutOption(entry.proof_support_relocation_layout), paragraphLayout=paragraphLayoutOption(entry.proof_paragraph_join_layout);
++  if(!equal(supportLayout,changes.proof_support_relocation_layout??null)||!equal(paragraphLayout,changes.proof_paragraph_join_layout??null)) fail('unbound strict layout selector');
++  if(Boolean(supportLayout||paragraphLayout)!==Boolean(changes.proof_layout_context)) fail('unbound strict layout context');
++  if(supportLayout||paragraphLayout) {
++    const requested=supportLayout??paragraphLayout,kind=supportLayout?'proof-support-relocation-layout':'proof-paragraph-join-layout';
++    if(!equal(requested.steps,changes.deltas.filter(d=>d.kind===kind).map(d=>d.label))
++      ||changes.proof_layout_context?.version!==1||changes.proof_layout_context?.graphics_free!==true) fail('unbound strict layout steps/context');
++  }
+   const relocation = relocationOption(entry.proof_reference_relocation), displayLayout = definitionDisplayOption(entry.definition_display_layout);
+   if (!equal(consolidation, changes.proof_support_consolidation ?? null)
+       || !equal([...(consolidation?.steps ?? [])].sort(), changes.deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unbound proof support consolidation option');
+@@ -592,7 +763,7 @@ export function validateOriginalPresentationReviews(entry, changes, { receipt, s
+   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
+       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
+       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
+-  if (consolidation || relocation || displayLayout || terminalHeading) {
++  if (consolidation || relocation || displayLayout || terminalHeading || supportLayout || paragraphLayout) {
+     const runtime = parserDescriptor();
+     if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
+     for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);
+diff --git a/tools/physics-support/original-rendering-maintenance.mjs b/tools/physics-support/original-rendering-maintenance.mjs
+index 296691707f..4af767d236 100644
+--- a/tools/physics-support/original-rendering-maintenance.mjs
++++ b/tools/physics-support/original-rendering-maintenance.mjs
+@@ -182,6 +182,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
+     if (!presentationV2 && entry.proof_reference_relocation !== undefined) fail('proof reference relocation requires V2');
+     if (!presentationV2 && entry.definition_display_layout !== undefined) fail('definition display layout requires V2');
+     if (!presentationV2 && entry.terminal_remarks_heading !== undefined) fail('terminal Remarks heading requires V2');
++    if (!presentationV2 && (entry.proof_support_relocation_layout !== undefined || entry.proof_paragraph_join_layout !== undefined)) fail('strict proof layout requires V2');
+     const pin = receipt.files.find(p => p.path === entry.path);
+     if (!pin || !/^items\/[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(entry.path) || accepted.has(entry.path)
+         || !scope.paths.has(entry.path) || entry.pinned_sha256 !== pin.sha256) fail('entry scope/pin');
+@@ -215,7 +216,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
+     if (ledger.split(begin).length !== 2 || ledger.split(end).length !== 2) fail('ledger marker uniqueness');
+     const block = ledger.split(begin)[1].split(end)[0];
+     if (sha(block) !== native.ledger_sha256 || !localEvidence(entry.ledger_evidence).equals(Buffer.from(block))) fail('ledger extraction');
+-    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout, entry.terminal_remarks_heading) : originalRenderingChanges(beforeBytes, afterBytes);
++    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout, entry.terminal_remarks_heading, entry.proof_support_relocation_layout, entry.proof_paragraph_join_layout) : originalRenderingChanges(beforeBytes, afterBytes);
+     const nonProofDefinition = presentationV2 && before.data.kind === 'definition'
+       && !/^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before.body)
+       && /^proof-layout: 1 items, 0 steps, 0 defects(?:\s|$)/m.test(check.output ?? '');
+@@ -271,6 +272,19 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
+       if (!unchangedDiagramRule && !(pureBoundary && !graphics && noDiagramKeys
+           && adjudication.mathematical_meaning_preserved === true)) fail('terminal Remarks native diagram flags');
+     }
++    // These opt-in format routes prove exact reconstruction. The only
++    // compound extras are published/predeclared Fact labels or the one exact
++    // Fourier technique label. They never authorize generic proof rewrites.
++    if (presentationV2 && (changes.proof_support_relocation_layout || changes.proof_paragraph_join_layout)) {
++      const paragraph=changes.proof_paragraph_join_layout, request=paragraph??changes.proof_support_relocation_layout,
++        kind=paragraph?'proof-paragraph-join-layout':'proof-support-relocation-layout';
++      const pure=equal(request.steps,changes.steps.map(s=>s.label))&&changes.steps.every(s=>s.kind===kind)
++        &&!changes.title&&!changes.remarks&&(!changes.technique||paragraph&&equal(changes.technique,paragraph.technique))
++        &&changes.deltas.every(d=>d.kind===kind || (paragraph?d.kind==='proof-technique'&&equal({before:d.before,after:d.after},paragraph.technique)
++          :d.kind==='reference-label'&&d.section==='Facts & Assumptions'&&before.data.deps?.includes(d.target)));
++      if(!pure||changes.proof_layout_context?.graphics_free!==true
++          ||!unchangedDiagramRule&&!(noDiagramKeys&&adjudication.mathematical_meaning_preserved===true)) fail('strict proof layout native/purity guards');
++    }
+     if ((changes.remarks || substantiveSteps.length) && !unchangedDiagramRule
+       && !(strictSupportOnly && noDiagramKeys && adjudication.mathematical_meaning_preserved === true)) fail('diagram independence');
+     if (!Array.isArray(entry.evidence) || !entry.evidence.length) fail('missing Root evidence');
+diff --git a/tools/physics-support/original-rendering-maintenance.test.mjs b/tools/physics-support/original-rendering-maintenance.test.mjs
+index b503576a58..84bfdc463a 100644
+--- a/tools/physics-support/original-rendering-maintenance.test.mjs
++++ b/tools/physics-support/original-rendering-maintenance.test.mjs
+@@ -21,7 +21,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   let before = `---\nid: ${id}\nkind: ${definition ? 'definition' : 'theorem'}\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
+   if (definition) before = before.replace('## Statement', '## Definition').replace(/\n## Facts & Assumptions[\s\S]*$/, '\n');
+   if (mode === 'definition-display') before = before.replace('For the given object, $A=A$.', ()=>'For the object define\n$$A=A.$$\nThe zero convention is fixed.');
+-  if (mode === 'fact-label' || mode === 'reference-relocation') {
++  if (mode === 'fact-label' || mode === 'reference-relocation' || mode === 'support-layout-labels') {
+     before = before.replace('deps: []', 'deps: [lem-title-target]').replace('[L1] Equality is reflexive. [given]', '[L1] Equality is reflexive. [given]\n\n[F2] The evaluation kernel is maximal ([[lem-title-target]]).');
+     before += '\n## Sources\n\nExact unchanged source section.\n';
+     save(source, 'items/lem-title-target.md', '---\nid: lem-title-target\nkind: lemma\nstatus: published\ndeps: []\ntitle: "Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)"\n---\n\n## Statement\nExact fixed evaluation-kernel supplier.\n');
+@@ -31,9 +31,11 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   if (mode === 'reference-relocation') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The Evaluation theorem gives $A=A$. [L1, [[lem-title-target]]]');
+   if (mode === 'support-consolidation-both') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', () => '1.1 Reflexivity gives [L1]\n\n$$ A=A. $$\n\n[L1]\n');
+   if (mode.startsWith('support-consolidation')) before += '\n1.2 By [L1], [L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]\n';
++  if (mode.startsWith('support-layout')) before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', ()=>'1.1 The identity follows [L1, construct]\n\n$$A=A.$$\n\nThe conclusion holds.\n');
++  if (mode === 'paragraph-layout') before = before.replace('**Proof technique:** direct on $A$.', '**Proof technique:** Fubini followed by $L^2$ approximation.').replace('1.1 Reflexivity gives $A=A$. [L1]\n', ()=>'1.1 The identity follows. [L1]\n\n$$A=A.$$\n\nThe conclusion holds. [L1] ∎\n');
+   before += sourceExtra;
+   save(source, `items/${id}.md`, before);
+-  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${['fact-label', 'reference-relocation'].includes(mode) ? ', lem-title-target' : ''}]\n---\n`);
++  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${['fact-label', 'reference-relocation', 'support-layout-labels'].includes(mode) ? ', lem-title-target' : ''}]\n---\n`);
+   importMathematics(root, source);
+   const repairPath = `research/source-repair/receipts/${id}.json`;
+   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
+@@ -50,6 +52,9 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   if (mode.startsWith('support-consolidation')) after = after.replace('[L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]', '$A=A$, so equality holds. [L1, step 1.1]');
+   if (mode === 'support-consolidation-both') after = after.replace('[L1]\n\n$$ A=A. $$\n\n[L1]', '$A=A$. [L1]');
+   if (mode === 'support-consolidation-mixed') after = after.replace('1.1 Reflexivity gives', '1.1 The same reflexivity gives');
++  if (mode.startsWith('support-layout')) after = after.replace(' [L1, construct]\n\n$$A=A.$$\n\nThe conclusion holds.', ()=>' $$A=A.$$ The conclusion holds. [L1, construct]');
++  if (mode === 'support-layout-labels') after = after.replace('[[lem-title-target]]', '[[lem-title-target|Exact reviewed display label]]');
++  if (mode === 'paragraph-layout') after = after.replace('**Proof technique:** Fubini followed by $L^2$ approximation.', '**Proof technique:** Fubini followed by square-integrable approximation.').replace('\n\n$$A=A.$$\n\n', ()=>'\n$$A=A.$$\n');
+   save(source, `items/${id}.md`, after);
+   const content = itemHashGuard(after), claim = { version: 1, run: 'source-repair', group: 'g', id, pre_sha256: itemHashGuard(before), claimed_at: '2026-10-23T00:00:00Z' };
+   const claimLine = JSON.stringify(claim) + '\n', block = `\n${id}: exact fixture repair ${content}.\n`, marker = 'rendering:' + id;
+@@ -83,7 +88,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   const relocation = mode === 'reference-relocation' ? { version: 1, steps: [{ label: '1.1', target: 'lem-title-target' }] } : undefined;
+   const displayLayout = mode === 'definition-display' ? {version:1,display:0} : undefined;
+   const terminalHeading = mode === 'terminal-remarks' ? {version:1,step:'1.1'} : undefined;
+-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
++  const supportLayout=mode.startsWith('support-layout')?{version:1,steps:['1.1']}:undefined,paragraphLayout=mode==='paragraph-layout'?{version:1,steps:['1.1'],technique:{before:'**Proof technique:** Fubini followed by $L^2$ approximation.',after:'**Proof technique:** Fubini followed by square-integrable approximation.'}}:undefined;
++  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading, supportLayout, paragraphLayout) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
+     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
+   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
+@@ -108,6 +114,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+     if (relocation) entry.proof_reference_relocation = relocation;
+     if (displayLayout) entry.definition_display_layout = displayLayout;
+     if (terminalHeading) entry.terminal_remarks_heading = terminalHeading;
++    if (supportLayout) entry.proof_support_relocation_layout=supportLayout;
++    if (paragraphLayout) entry.proof_paragraph_join_layout=paragraphLayout;
+     Object.assign(entry.scientific_review, changes.review_classification);
+     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
+       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
+@@ -372,3 +380,9 @@ test('exact authenticated terminal Remarks boundary preserves old native absent
+ for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('terminal Remarks boundary rejects supplied false/partial/null flags '+JSON.stringify(flags),t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/native diagram flags/);});
+ for(const extra of ['```text\nunchanged graphic context\n```','![image](figure.svg)','<span>unchanged HTML</span>',String.raw`\includegraphics{figure}`])test('terminal Remarks absent flags require graphics-free source '+extra,t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true,sourceExtra:'\n'+extra+'\n'});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.throws(()=>f.verify(),/native diagram flags/);});
+ test('legacy entries cannot declare terminal Remarks boundary',t=>{const f=fixture(t);f.entry.terminal_remarks_heading={version:1,step:'1.1'};f.seal();assert.throws(()=>f.verify(),/requires V2/);});
++
++for(const mode of ['support-layout','support-layout-labels','paragraph-layout'])test('strict authenticated format route accepts only true absent or original valid native pair '+mode,t=>{const f=fixture(t,{mode,presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.ok(f.verify()>0);f.entry.presentation_reviews[0].delta_sha256='0'.repeat(64);f.seal();assert.throws(()=>f.verify(),/unreviewed V2 delta/);});
++for(const mode of ['support-layout-labels','paragraph-layout'])for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('strict compound rejects partial/null/contradictory flags '+mode+JSON.stringify(flags),t=>{const f=fixture(t,{mode,presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/strict proof layout native\/purity/);});
++test('strict support plus Fact labels retain exact published pin review and live runtime bindings',t=>{const f=fixture(t,{mode:'support-layout-labels',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);const label=f.entry.presentation_reviews.find(r=>r.pinned_target);delete label.pinned_target;f.seal();assert.throws(()=>f.verify(),/unbound V2 reference target/);});
++test('strict routes do not admit graphics or Remarks even with original valid native flags',t=>{for(const mode of ['support-layout','paragraph-layout'])for(const sourceExtra of ['\n## Remarks\n\nUnchanged qualification.\n','\n## Background\n\n```text\nunchanged\n```\n','\n## Background\n\n![image](figure.svg)\n','\n## Background\n\n<span>unchanged HTML</span>\n'])assert.throws(()=>fixture(t,{mode,presentationVersion:2,authored:true,sourceExtra}),/Remarks|graphics/);});
++test('legacy cannot declare either strict format selector',t=>{for(const field of ['proof_support_relocation_layout','proof_paragraph_join_layout']){const f=fixture(t);f.entry[field]={version:1,steps:['1.1']};f.seal();assert.throws(()=>f.verify(),/strict proof layout requires V2/);}});

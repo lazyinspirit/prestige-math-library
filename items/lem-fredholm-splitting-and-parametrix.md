@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-fredholm-splitting-and-parametrix.json
+  precheck: pass
 id: lem-fredholm-splitting-and-parametrix
 kind: lemma
 title: Fredholm splitting and parametrix
@@ -10,12 +13,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.186, equations (6.65)–(6.67)"
@@ -51,7 +48,7 @@ most $\dim Y_0$.
 
 [A2] A closed linear subspace of a Banach space is a Banach space ([[lem-closed-subspace-of-a-banach-space-is-banach]], [[def-banach-space]]), and by the bounded inverse theorem, under DC, a bounded bijection between Banach spaces has a bounded inverse ([[thm-bounded-inverse-theorem]]); $\mathrm{AC}$ supplies DC ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]], [[def-dependent-choice]]).
 
-[A3] If $q:Z\to Z/W$ is the quotient map and a linear bijection $Z_0\to Z/W$ is given, then choosing preimages of a finite basis is a finite selection ([[lem-finite-choice]], [[def-linear-basis]], [[def-quotient-vector-space-coset-notation]], [[def-linear-map]]): a linearly independent spanning list pulls back to a linearly independent spanning list, because a linear bijection preserves the vanishing of finite linear combinations in both directions.
+[A3] If $q:Z\to Z/W$ is the quotient map and a linear bijection $Z_0\to Z/W$ is given, then choosing preimages of a finite basis is a finite selection ([[lem-finite-choice]], [[def-linear-basis]], [[def-quotient-vector-space-coset-notation|The quotient vector space $X/M$, its cosets, and the quotient map $q:X\to X/M$]], [[def-linear-map]]): a linearly independent spanning list pulls back to a linearly independent spanning list, because a linear bijection preserves the vanishing of finite linear combinations in both directions.
 
 ## Proof
 
@@ -76,3 +73,27 @@ most $\dim Y_0$.
 4.3 For $y=y_1+y_0$ one has $TSy=T(Uy_1)=y_1$, so $TS$ is the bounded projection $P$ onto $\operatorname{ran}T$ along $Y_0$ and $TS-I_Y$ has range $Y_0$, of dimension $\dim Y_0$. [step 1.2, step 3.1, step 2.2]
 
 5.1 The decompositions, the boundedness of $U$ and $S$ and the two finite-rank defects are exactly the assertions, with $\dim Y_0=\dim\operatorname{coker}T$ from [step 2.2]. [step 4.1, step 4.2, step 2.2, step 4.3] ∎
+
+
+## Remarks
+
+The split coordinates make the partial inverse visible. Write $N=\ker T$ and
+$T_1=T|_{X_1}$. The arrows below are the operators on the full direct sums:
+$T(n+x_1)=T_1x_1+0$ and $S(y_1+y_0)=0+Uy_1$, with $U=T_1^{-1}$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}]
+\node (X) at (0,0) {$X=N\oplus X_1$};
+\node (Y) at (7,0) {$Y=\mathrm{ran}\,T\oplus Y_0$};
+\draw[->] (X) to[bend left=22] node[above] {$T$} (Y);
+\draw[->] (Y) to[bend left=22] node[below] {$S$} (X);
+\node at (0,-1.8) {$ST(n+x_1)=x_1$};
+\node at (7,-1.8) {$TS(y_1+y_0)=y_1$};
+\end{tikzpicture}
+```
+
+Thus $ST$ retains the $X_1$ coordinate, whereas $TS$ retains the
+$\operatorname{ran}T$ coordinate. The omitted coordinates give
+$(ST-I_X)(n+x_1)=-n$ and $(TS-I_Y)(y_1+y_0)=-y_0$, so their ranges are
+$N$ and $Y_0$, respectively. These identities are established in proof steps
+4.2–4.3; the proof is independent of the illustration.

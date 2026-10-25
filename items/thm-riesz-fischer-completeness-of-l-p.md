@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-riesz-fischer-completeness-of-l-p.json
+  precheck: pass
 id: thm-riesz-fischer-completeness-of-l-p
 kind: theorem
 title: "Riesz-Fischer completeness of $L^p$ for $1 \\le p \\le \\infty$"
@@ -10,8 +13,6 @@ provenance:
   proof: ai-altered
 deps: [thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-minkowski-inequality-for-integrals, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, def-complete-metric-space, def-convergence-almost-everywhere-relative-to-a-measure, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-finite-and-countable-subadditivity-of-measures, prop-essential-supremum-is-attained-as-the-least-essential-bound, def-axiom-of-choice]
 proof_strategy: "For 1 <= p < infinity, choose a rapidly Cauchy subsequence by least indices, sum the successive differences with monotone convergence and Minkowski, and recover the limit by dominated convergence. For p = infinity, union the exceptional null sets and take the pointwise limit outside them."
-verification:
-  repair: research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step4-supervision/root-three-published-repairs/thm-riesz-fischer-completeness-of-l-p.repair.json
 sources:
   scraped: []
   references:
@@ -60,7 +61,7 @@ admits measurable representatives converging almost everywhere relative to $\mu$
 
 ## Proof
 
-**Proof technique:** For $1 \le p < infinity$, choose a rapidly Cauchy subsequence by least indices, sum the successive differences with monotone convergence and Minkowski, and recover the limit by dominated convergence. For $p = infinity$, union the exceptional null sets and take the pointwise limit outside them.
+**Proof technique:** For 1 ≤ p < ∞, choose a rapidly Cauchy subsequence by least indices, sum the successive differences with monotone convergence and Minkowski, and recover the limit by dominated convergence. For p = ∞, union the exceptional null sets and take the pointwise limit outside them.
 
 1.1 Assume $1\le p<\infty$ and let $(u_n)$ be Cauchy in $L^p(\mu)$. Choose by least indices a strictly increasing sequence $(n_k)$ such that [L2, L3, L4, L5, given, choose] $$\|u_{n_{k+1}}-u_{n_k}\|_p<2^{-k}\qquad(k\ge0).$$ Use countable choice (the countable instance of AC) to choose measurable representatives $f_k$ of $u_{n_k}$, and put $h_k:=|f_{k+1}-f_k|$. Then each $h_k$ is measurable, belongs to $\mathcal L^p(\mu)$, and satisfies $$\|h_k\|_p<2^{-k}.$$ If $g_m:=\sum_{k<m} h_k$, then $$\|g_m\|_p\le\sum_{k<m}\|h_k\|_p\le\sum_{k=0}^\infty 2^{-k}<\infty,$$ so each $g_m$ lies in $\mathcal L^p(\mu)$. Monotone convergence then gives a measurable pointwise limit $g:=\sum_{k=0}^\infty h_k$ with $g\in\mathcal L^p(\mu)$. [given, L2, L3, L4, L5, choose]
 

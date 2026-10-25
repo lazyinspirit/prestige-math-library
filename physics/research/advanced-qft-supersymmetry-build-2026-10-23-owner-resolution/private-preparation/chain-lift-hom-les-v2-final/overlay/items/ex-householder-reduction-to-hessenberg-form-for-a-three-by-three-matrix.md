@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-householder-reduction-to-hessenberg-form-for-a-three-by-three-matrix.md

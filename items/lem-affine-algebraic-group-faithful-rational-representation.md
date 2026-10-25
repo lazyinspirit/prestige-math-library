@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-affine-algebraic-group-faithful-rational-representation.json
+  precheck: pass
 id: lem-affine-algebraic-group-faithful-rational-representation
 kind: lemma
 title: A finite-type affine algebraic group has a faithful rational representation
@@ -18,9 +21,7 @@ sources:
       url: https://www.jmilne.org/math/Books/iAG2022.pdf
       locator: "§4(c) Proposition 4.7, Corollary 4.8, §4(d) Theorem 4.9 and Corollary 4.10; printed pp. 86-87"
 proof_strategy: coefficient space of the regular comodule
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -68,7 +69,7 @@ algebra generators are made.
 
 ## Proof
 
-**Proof technique:** put each element of $A$ inside a finite-dimensional subspace of the regular comodule $(A,\Delta)$, then read the matrix coefficients of a large such subspace off the counit.
+**Proof technique:** put each element of A inside a finite-dimensional subspace of the regular comodule (A, Δ), then read the matrix coefficients of a large such subspace off the counit.
 
 1.1 Let $a\in A$ and let $\Delta(a)=\sum_{i=1}^{n}u_i\otimes v_i$ be a finite expression in which $u_1,\dots,u_n$ are linearly independent; such an expression exists because $\Delta(a)$ is a finite sum, and deleting redundant terms (replacing $v_i$ by $v_i+c_iv_n$ when $u_n=\sum_{i<n}c_iu_i$) keeps the sum equal to $\Delta(a)$. Put $V_a=\operatorname{span}(v_1,\dots,v_n)$, a finite-dimensional subspace of $A$ with $a\in V_a$, since $a=(\varepsilon\otimes\operatorname{id})\Delta(a)=\sum_i\varepsilon(u_i)v_i$. [given]
 

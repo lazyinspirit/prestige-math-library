@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-ergodic-time-series-sample-mean-converges-a-s-and-l1.md

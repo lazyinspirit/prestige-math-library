@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-external-evaluation-detects-tensor-square-operations.json
+  precheck: pass
 id: lem-external-evaluation-detects-tensor-square-operations
 kind: lemma
 title: "External evaluation detects tensor-square operations"
@@ -23,17 +26,12 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "§4.L, printed pp. 490–491 and 496–501: Steenrod-square action and Adem algebra."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
 
-Assume AC. For every d,e≥0, let X_d=(RP^L)^(d+1), X_e=(RP^L)^(e+1), with L≥max(d,e)+1 and P_d=∏x_i, P_e=∏y_j. The map A^d⊗A^e→H*(X_d;F₂)⊗H*(X_e;F₂), a⊗b↦a(P_d)⊗b(P_e), is injective; under Künneth, external products jointly detect every homogeneous tensor of square operations.
+Assume AC. For every $d,e\ge0$, let $X_d=(\mathbb{RP}^L)^{d+1}$, $X_e=(\mathbb{RP}^L)^{e+1}$, with $L\ge\max(d,e)+1$ and $P_d=\prod x_i$, $P_e=\prod y_j$. The map $A^d\otimes A^e\to H^*(X_d;\mathbb F_2)\otimes H^*(X_e;\mathbb F_2)$, $a\otimes b\mapsto a(P_d)\otimes b(P_e)$, is injective; under Künneth, external products jointly detect every homogeneous tensor of square operations.
 
 ## Facts & Assumptions
 
@@ -49,6 +47,6 @@ Assume AC. For every d,e≥0, let X_d=(RP^L)^(d+1), X_e=(RP^L)^(e+1), with L≥m
 
 **Proof technique:** direct.
 
-1.1 Let A^d be the degree-d part of the square algebra. By the admissible-basis theorem, its basis consists of Sq^I with |I|=d. Set X_d=(RP^L)^{d+1}, P_d=x₁⋯x_{d+1}, with L≥d+1. Every admissible I of degree d has e(I)≤d<d+1. The leading-monomial lemma therefore applies and gives distinct largest monomials for the classes Sq^I(P_d). Those classes are linearly independent: in a nonzero finite linear combination, the largest of the distinct leading monomials cannot cancel. Thus evaluation j_d:A^d→H*(X_d;F₂), a↦a(P_d), is injective. For d=0, X_0=RP^L and P_0=x₁; the identity operation sends x₁ to the nonzero class x₁. [given, F1]
+1.1 Let $A^d$ be the degree-$d$ part of the square algebra. By the admissible-basis theorem, its basis consists of $\mathrm{Sq}^I$ with $|I|=d$. Set $X_d=(\mathbb{RP}^L)^{d+1}$, $P_d=x_1\cdots x_{d+1}$, with $L\ge d+1$. Every admissible $I$ of degree $d$ has $e(I)\le d<d+1$. The leading-monomial lemma therefore applies and gives distinct largest monomials for the classes $\mathrm{Sq}^I(P_d)$. Those classes are linearly independent: in a nonzero finite linear combination, the largest of the distinct leading monomials cannot cancel. Thus evaluation $j_d:A^d\to H^*(X_d;\mathbb F_2)$, $a\mapsto a(P_d)$, is injective. For $d=0$, $X_0=\mathbb{RP}^L$ and $P_0=x_1$; the identity operation sends $x_1$ to the nonzero class $x_1$. [given, F1]
 
-2.1 The map $j_d\otimes j_e$ is injective for an explicit linear-algebra reason. Extend bases of im(j_d) and im(j_e) to bases of the two target vector spaces. Projection to im(j_d), followed by j_d⁻¹, gives a left inverse r_d of j_d; similarly obtain r_e. Then r_d⊗r_e is a left inverse of j_d⊗j_e by the tensor universal property, so j_d⊗j_e is injective. The cohomological Künneth theorem identifies the target with the corresponding external-product subspace in H*(X_d×X_e;F₂). Distinct bidegrees remain distinct under this Künneth decomposition. Since every tensor is a finite sum of homogeneous bidegrees, an element of A⊗A acting as zero on every external product of classes must be zero. This proves tensor faithfulness. [step 1.1, F2, F3] ∎
+2.1 The map $j_d\otimes j_e$ is injective for an explicit linear-algebra reason. Extend bases of $\operatorname{im}(j_d)$ and $\operatorname{im}(j_e)$ to bases of the two target vector spaces. Projection to $\operatorname{im}(j_d)$, followed by $j_d^{-1}$, gives a left inverse $r_d$ of $j_d$; similarly obtain $r_e$. Then $r_d\otimes r_e$ is a left inverse of $j_d\otimes j_e$ by the tensor universal property, so $j_d\otimes j_e$ is injective. The cohomological Künneth theorem identifies the target with the corresponding external-product subspace in $H^*(X_d\times X_e;\mathbb F_2)$. Distinct bidegrees remain distinct under this Künneth decomposition. Since every tensor is a finite sum of homogeneous bidegrees, an element of $A\otimes A$ acting as zero on every external product of classes must be zero. This proves tensor faithfulness. [step 1.1, F2, F3] ∎

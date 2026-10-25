@@ -1,0 +1,96 @@
+---
+id: lem-nonfundamental-least-weight-essential-disks-have-a-pure-boundary-obstruction
+kind: lemma
+title: A nonfundamental least-weight essential disk has a pure boundary obstruction
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams
+  - lem-regular-normal-sum-diagrams-have-reduced-connected-pairs
+  - lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-spherical-summand
+  - lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-projective-plane-summand
+  - lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes
+  - lem-normal-exchange-disk-patches-have-positive-edge-weight
+  - lem-essential-pl-disks-admit-normal-replacements
+  - lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement
+  - thm-polygonal-jordan-curve
+  - thm-simple-polygon-admits-a-triangulation
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+dependency_level: 6
+sources:
+  references:
+    - title: "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375"
+      url: https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf
+      locator: Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement.
+  attribution_boundary: Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.
+  reading_limits: URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+---
+
+## Statement
+
+Let $F$ be a least-edge-weight essential normal disk in a compact PL three-manifold with a finite simplicial triangulation $T$. If its normal vector has a nontrivial admissible decomposition, construct the original-triangulation regular diagram and a reduced connected pair $P,H$ using the original-triangulation regular-sum construction and the reduced-connected-pair lemma. Retain their face braids and switch neighborhoods.
+
+After interchanging the two summands if necessary, $P$ is a disk with null-homotopic boundary in $\partial M$, and $H$ is an annulus or a Mobius band. Their intersection consists of $k\ge2$ properly embedded arcs and no circles. Every intersection arc separates $P$ and does not separate $H$. Cutting all the arcs leaves $k+1$ disk patches in $P$ and $k$ disk patches in $H$.
+
+There are at least two patches $E$ of $P$ with exactly one cut-arc side and one original-boundary side. Each has positive edge weight. Choose such a patch of smallest weight. Boundary compression of $H$ along $E$ produces an embedded proper PL disk $D_E$ satisfying
+
+$$w(D_E)=w(H)+2w(E)\le w(H)+w(P)=w(F).$$
+
+If $\partial D_E$ is not null-homotopic in $\partial M$, then every inequality displayed above is an equality, and normal replacement of $D_E$ can retain an essential disk only at weight $w(F)$. The lemma makes no assertion that this boundary is essential. No irreducibility, orientability or exclusion of projective planes is assumed.
+
+## Statement references
+
+[[lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams]]
+
+[[lem-regular-normal-sum-diagrams-have-reduced-connected-pairs]]
+
+[[lem-normal-exchange-disk-patches-have-positive-edge-weight]] — positive weight of a disk patch with one original-boundary arc.
+
+[[lem-essential-pl-disks-admit-normal-replacements]] — nonincreasing normalization of an essential PL disk.
+
+## Facts & Assumptions
+
+**Given:** The least-weight essential normal disk, its nontrivial vector decomposition, and the constructed reduced pair.
+
+[F1] The two reduced summands are connected embedded normal surfaces with positive weights adding to $w(F)$. Their regular full resolution is a disk with essential boundary, and every nonempty partial regular resolution has connected normalization. No remaining intersection curve or proper arc separates both summands. The retained local double arcs join distinct tetrahedral faces and therefore distinct sides of each normal disk. ([[lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams]], [[lem-regular-normal-sum-diagrams-have-reduced-connected-pairs]])
+
+[F2] A connected finite PL surface with positive Euler characteristic is a disk, sphere or projective plane. A connected boundary surface with Euler characteristic zero is an annulus or a Mobius band; with Euler characteristic one it is a disk. A disjoint properly embedded arc family in a disk cuts it into disks. ([[lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes]], [[thm-polygonal-jordan-curve]], [[thm-simple-polygon-admits-a-triangulation]])
+
+[F3] Neither reduced summand here is a sphere or projective plane. These exclusions use the retained original diagram and least edge weight, without ambient restrictions. ([[lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-spherical-summand]], [[lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-projective-plane-summand]])
+
+[F4] A boundary disk patch satisfying the trace condition in [F1] has positive weight. Normal replacement of an essential proper PL disk gives an essential normal disk with no larger edge weight. ([[lem-normal-exchange-disk-patches-have-positive-edge-weight]], [[lem-essential-pl-disks-admit-normal-replacements]])
+
+[F5] If a resolution of the retained diagram includes an irregular switch and has a parametrizing component whose image is an embedded essential proper disk, there is an essential normal disk of weight strictly below $w(P)+w(H)$. ([[lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement]])
+
+## Proof
+
+1.1 Euler characteristic is additive in this regular sum: cutting along a proper double arc increases the total Euler characteristic by two, and attaching its two switching rectangles decreases it by two. Cutting and switching a circle changes it by zero. These assertions also follow by subdividing the finite strips into rectangles and counting their attaching intervals. Thus $1=\chi(F)=\chi(P)+\chi(H)$. Some summand has positive Euler characteristic; name it $P$. By [F2] and [F3] it is a disk, so $\chi(H)=0$. If $P$ had essential boundary, it would itself be an essential normal disk of strictly smaller weight than $F$, by [F1]. Therefore $\partial P$ is null-homotopic in $\partial M$. [given, F1, F2, F3, construct, algebra]
+
+2.1 The remaining intersection is nonempty, since otherwise the full resolution would be the disjoint union of the two nonempty summands. It must contain a proper arc. Indeed, if it consisted only of circles, switching those circles would leave the boundary of $P$ as a boundary component of the full resolution. That resolution has the single essential boundary circle of $F$, contrary to step 1.1. In particular $H$ has boundary. By its Euler characteristic and [F2], it is an annulus or a Mobius band. [F1, F2, step 1.1, contradiction]
+
+3.1 There are no intersection circles. To see this, a circle in the disk $P$ has a consistently chosen transverse side in $P$ and separates $P$. The regular pairing in a cross-section pairs its two $P$ rays with the two $H$ rays. Following the circle preserves that pairing. If only the $H$ rays reversed, the two possible pairings would be interchanged; hence the $H$ rays do not reverse. The circle is therefore two-sided in $H$. Every two-sided circle separates an annulus or Mobius band: otherwise removal of an annular neighborhood would leave a connected Euler-zero boundary surface with respectively four or three boundary circles, contrary to [F2]. A remaining circle would consequently separate both summands, contradicting [F1]. [F1, F2, step 2.1, construct, contradiction]
+
+4.1 Write $k\ge1$ for the number of remaining proper arcs. Every such arc separates the disk $P$, by [F2], and therefore does not separate $H$, by [F1]. Cut $H$ along one arc. The result is connected, has boundary, and has Euler characteristic $\chi(H)+1=1$, so is a disk by [F2]. Each of the other $k-1$ arcs remains a proper arc in the cut surface, with distinct endpoints away from the first cut. Repeated disk cutting gives $k$ disks. Applying the same cutting argument directly to $P$ gives $k+1$ disks. [F1, F2, step 2.1, step 3.1, construct, algebra]
+
+5.1 The adjacency graph of the $P$ patches has one vertex per patch and one edge per cut arc. It is connected because regluing the arcs reconstructs the connected disk $P$. Each successive disk cut separates one patch into two, so adds one vertex and one edge without introducing a graph cycle. Thus the graph is a tree with $k+1\ge2$ vertices. A finite tree with at least two vertices has at least two leaves: extend any simple edge path maximally in both directions; either endpoint has no other incident edge, since such an edge would either extend the path or make a cycle. A leaf patch has one cut-arc side. Its remaining boundary is one original-boundary arc, because the patch is a disk and has no other cut sides. Each leaf has positive edge weight by [F1] and [F4]. [F1, F2, F4, step 4.1, construct]
+
+5.2 In fact $k$ cannot equal one. If $\alpha$ were the only arc, cutting $P$ along it would give two disks $E_1,E_2$, and cutting $H$ along it would give one disk $Q$, by step 4.1. Either switch attaches one $E_i$ along each of the two cut sides of $Q$. It therefore gives a disk; as this resolves the only double curve, its image is embedded. Let $p,q$ be the endpoints of $\alpha$ and orient the two complementary arcs of $\partial P$ as paths $u,v$ from $p$ to $q$. The loop $uv^{-1}$ is $\partial P$ up to orientation, so step 1.1 makes $u$ and $v$ homotopic with endpoints fixed in $\partial M$. In either resolution, its boundary is obtained from the boundary of $Q$ by replacing one cut-side copy of $\alpha$ by $u$ and the other by $v$, with the directions of traversal determined by that boundary. The other resolution interchanges these assignments. Replace $u$ by $v$ using their endpoint-fixed homotopy in each occurrence; both resulting loops then traverse the same original-boundary pieces of $Q$ and the same paths on its cut sides, in the same order. The boundaries of the two disk resolutions are consequently freely homotopic, up to reversal of the chosen whole-loop orientation. The regular one is the essential boundary of $F$, so the irregular one is also essential. Apply [F5] to this irregular resolution, contradicting the least weight of $F$. Hence $k\ge2$. [given, F1, F5, step 1.1, step 4.1, construct, contradiction]
+
+6.1 Distinct patches partition the original intersections of $P$ with $T^{(1)}$: the cuts miss those intersections. If $E$ is a smallest-weight leaf, the existence of two leaves gives $2w(E)\le w(P)$. The disk $E$ meets $H$ precisely in its cut-arc side $\alpha$; its other boundary side is in $\partial M$. Boundary compression of $H$ along $E$ is embedded and proper. Explicitly, cut $H$ along $\alpha$ and attach one slightly displaced copy of $E$ to each cut side, joining them in the original transverse switch charts near $\alpha$ and its endpoints. The interior of $E$ misses $H$, so the two copies may be chosen mutually disjoint and disjoint from the cut surface. A disk has a product transverse neighborhood along this construction: trivialize on a finite triangulation and extend the local interval direction successively from a vertex across the triangles, with no reversal around a loop since every disk loop contracts. On the original-boundary side use the half-space charts of $M$; the two displaced boundary arcs then remain in $\partial M$. Since $H$ cut along $\alpha$ is a disk by step 4.1, attaching the two disks along their cut-side intervals leaves a disk. This is $D_E$. [F1, step 4.1, step 5.1, construct, algebra]
+
+7.1 Choose the displacement sufficiently small to preserve every transverse edge intersection of the copied patches and to create no new ones. This is possible with finitely many intersection charts and disjoint compact complements. All joining strips lie in switch neighborhoods missing $T^{(1)}$ by [F1]. The intersections of $H$ and of the two copies of $E$ are then distinct, so $$w(D_E)=w(H)+2w(E)\le w(H)+w(P)=w(F).$$ If this disk has essential boundary, [F4] gives an essential normal disk of no larger weight. Minimality of $F$ forces both its weight and the weight of that retained normal disk to equal $w(F)$. Thus no strict inequality or subsequent weight loss is possible in the essential case. [given, F1, F4, step 6.1, algebra]
+
+8.1 Steps 1.1–5.2 give all the asserted restrictions on the reduced pair and its patches; steps 6.1–7.1 give the disk construction and the conditional equality. For two or more arcs the argument has made no assertion that the boundary-compressed disk is essential. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, step 6.1, step 7.1, step 5.2] ∎

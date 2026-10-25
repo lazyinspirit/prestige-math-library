@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ell-p-includes-into-ell-r-for-p-less-r.json
+  precheck: pass
 id: thm-ell-p-includes-into-ell-r-for-p-less-r
 kind: theorem
 title: "$\\ell^p$ includes into $\\ell^r$ for $p < r$"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-altered
 deps: [rem-ell-p-is-l-p-of-counting-measure, def-counting-measure, prop-counting-measure-is-a-measure, def-real-power, thm-real-power-laws, thm-exponential-is-strictly-increasing]
 proof_strategy: "For counting measure, only finitely many terms can exceed 1 when a sequence lies in ell^p. Split the series at that finite set and compare |a_n|^r to |a_n|^p on the tail where |a_n| <= 1."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -42,7 +42,7 @@ $$\|a\|_\infty\le\|a\|_p.$$
 
 ## Proof
 
-**Proof technique:** For counting measure, only finitely many terms can exceed $1$ when a sequence lies in $\ell^p$. Split the series at that finite set and compare $|a_n|^r$ to $|a_n|^p$ on the tail where $|a_n|\le1$.
+**Proof technique:** For counting measure, summability of the p-th powers leaves only finitely many terms of absolute value greater than one. Split off those terms and compare the r-th and p-th powers of each absolute value on the remaining tail.
 
 1.1 If $r=\infty$, then for each $n$, [L1] $$|a_n|^p\le\sum_{k=0}^\infty |a_k|^p=\|a\|_p^p,$$ so taking $p$-th roots gives $|a_n|\le\|a\|_p$. Hence $\|a\|_\infty\le\|a\|_p$. [L1]
 

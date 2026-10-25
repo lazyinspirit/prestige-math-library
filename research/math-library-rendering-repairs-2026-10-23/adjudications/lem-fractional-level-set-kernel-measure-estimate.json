@@ -1,0 +1,100 @@
+{
+  "id": "lem-fractional-level-set-kernel-measure-estimate",
+  "agent": "/root/rendering_repair_supervisor2/pde_029",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The authentic original standalone 1200×1400 tile displays dollar delimiters and uppercased TeX literally in the technique banner, while the same radius and set notation is typeset in the surrounding Facts and numbered proof. The banner is rendered as plain React text under CSS uppercase.",
+      "action": "Replaced only the technique banner with equivalent symbol-free prose describing the equal-measure ball, inside/outside split, kernel comparison and polar-coordinate evaluation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Rewrite the proof-technique banner as prose so its plain-text renderer no longer exposes inline TeX.",
+  "source_lines_after": [
+    {
+      "line": 53,
+      "text": "**Proof technique:** Choose a ball centered at the given point with the same measure as the given set, split the set’s complement into its parts inside and outside the ball, compare the kernel with its value at the ball’s radius to obtain the integral outside the whole ball, and evaluate that radial integral in polar coordinates."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "mathematical_checks": [
+    "Compared the frozen and current complete source: the sole changed line is the expository technique banner; the Statement, Given, Facts and all three numbered proof steps are byte-identical.",
+    "The replacement describes the existing argument: step 1.1 fixes a centered ball of measure equal to the set; step 2.1 compares kernel values across its radius to obtain the exterior-ball lower bound; step 3.1 evaluates that integral in polar coordinates. No hypotheses, inequality, constant or proof inference was changed. This is a focused rendering review, not a new whole-item proof audit."
+  ],
+  "metadata_preserved": true,
+  "publication_status_preserved": "status: published (frontmatter byte-identical)",
+  "before_raw_sha256": "189b848a4a3f40a3a161c7086c505bfe848381a41cd392b7f4db43c0cfe1ae75",
+  "after_raw_sha256": "bd1d9ca399bbef70d66f139433efc6a5204738e04aec4462c5ae64fcef857b28",
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/pde/screenshots/lem-fractional-level-set-kernel-measure-estimate--01.png",
+    "inspection": "Standalone original-resolution view"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-fractional-level-set-kernel-measure-estimate.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-fractional-level-set-kernel-measure-estimate.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-fractional-level-set-kernel-measure-estimate.md",
+            "item_id": "lem-fractional-level-set-kernel-measure-estimate",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-fractional-level-set-kernel-measure-estimate.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/pde-029-independent",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/pde-029-independent/manifest.json",
+    "manifest_sha256": "e6d2e26d524ea78da4af4402e4e748101f0c829d1d50fc224e1fc02bc9885c00",
+    "source_sha256": "bd1d9ca399bbef70d66f139433efc6a5204738e04aec4462c5ae64fcef857b28",
+    "reference_map_sha256": "aaf17b32a4e6da387e4ceed7a51d61b6286210334181bda28185a505188c7bdf",
+    "inspected_standalone_original_resolution_tiles": [
+      {
+        "path": "research/math-library-rendering-repairs-2026-10-23/previews/pde-029-independent/screenshots/lem-fractional-level-set-kernel-measure-estimate--01.png",
+        "sha256": "a1ad225d1fcd7e0c2f46dc429ea25c907488b12242050ff241677971f7556ea1"
+      },
+      {
+        "path": "research/math-library-rendering-repairs-2026-10-23/previews/pde-029-independent/screenshots/lem-fractional-level-set-kernel-measure-estimate--02.png",
+        "sha256": "0136c189dd34bf0cde6834de746a46c8b5aee5a1840d45a0e8b58fe80cd9cb24"
+      }
+    ],
+    "visual_result": "Both current tiles inspected independently at original resolution. The banner is readable plain prose with no exposed dollar signs or TeX; surrounding mathematical content remains typeset. The first tile was re-viewed standalone to resolve a transient viewer display artifact.",
+    "katex_count": 73,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "limitations": [
+      "Local native ItemBody/title preview only; no live website or production route inspected.",
+      "Reference map records 13 parse diagnostics in unrelated current carriers; no scope expansion or repairs made."
+    ]
+  },
+  "remaining_issues": [
+    "Application renderer still treats proof-technique banners as plain React text; this item uses prose as the authorized local workaround."
+  ]
+}

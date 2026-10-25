@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-chebyshev-lobatto-interpolation-near-best-weighted-error.json
+  precheck: pass
 id: thm-chebyshev-lobatto-interpolation-near-best-weighted-error
 kind: theorem
 title: "Chebyshev–Lobatto interpolation inherits a weighted near-best bound"
@@ -14,11 +17,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 axiom_use: "No choice axiom is used; the estimate follows from a finite measure bound."
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Jie Shen and Tao Tang, Spectral and High-Order Methods with Applications, §1.8"

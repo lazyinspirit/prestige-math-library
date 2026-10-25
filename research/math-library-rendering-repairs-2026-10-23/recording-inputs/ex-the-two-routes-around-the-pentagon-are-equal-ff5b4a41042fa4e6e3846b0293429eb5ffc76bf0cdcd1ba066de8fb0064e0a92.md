@@ -1,0 +1,63 @@
+---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-two-routes-around-the-pentagon-are-equal.json
+  precheck: pass
+id: ex-the-two-routes-around-the-pentagon-are-equal
+kind: example
+title: "The two routes around the pentagon are equal"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [thm-mac-lane-coherence-in-the-canonical-map-form]
+proof_strategy: direct
+sources:
+  scraped: []
+  references:
+    - title: "S. Mac Lane, Natural Associativity and Commutativity, equation (3.5)"
+      url: "https://www.mscs.dal.ca/~selinger/papers/papers/graphical-bib/public/MacLane-natural-associativity-and-commutativity-1963.pdf"
+pipeline_run: null
+---
+
+## Example
+
+For objects $A,B,C,D$ in a monoidal category, the pentagon compares two
+canonical composites from $((A\otimes B)\otimes C)\otimes D$ to
+$A\otimes(B\otimes(C\otimes D))$.
+
+## Facts & Assumptions
+
+**Given:** Four objects $A,B,C,D$ in a monoidal category.
+
+[L1] Between any two parenthesisations of the same ordered tensor word, there is a unique canonical natural isomorphism ([[thm-mac-lane-coherence-in-the-canonical-map-form]]).
+
+## Verification
+
+**Proof technique:** direct.
+
+1.1 One route around the pentagon is the composite $((A\otimes B)\otimes C)\otimes D \xrightarrow{\alpha_{A\otimes B,C,D}} (A\otimes B)\otimes(C\otimes D) \xrightarrow{\alpha_{A,B,C\otimes D}} A\otimes(B\otimes(C\otimes D))$. [given]
+
+1.2 The other route is the composite $((A\otimes B)\otimes C)\otimes D \xrightarrow{\alpha_{A,B,C}\otimes1_D} (A\otimes(B\otimes C))\otimes D \xrightarrow{\alpha_{A,B\otimes C,D}} A\otimes((B\otimes C)\otimes D) \xrightarrow{1_A\otimes\alpha_{B,C,D}} A\otimes(B\otimes(C\otimes D))$. [given]
+
+2.1 Both composites are canonical morphisms with the same source and target, so [L1] makes them equal. [L1, step 1.1, step 1.2] ∎
+
+
+## Remarks
+
+The pentagon below displays the two routes of steps 1.1 and 1.2. Each vertex is an object of the given monoidal category; $1_A$ and $1_D$ denote identity morphisms. All parentheses are retained, so no strictness assumption is used. Its commutativity is the equality proved in step 2.1.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (s) at (-4,1.8) {$((A\otimes B)\otimes C)\otimes D$};
+\node (m) at (0,4) {$(A\otimes B)\otimes(C\otimes D)$};
+\node (t) at (4,1.8) {$A\otimes(B\otimes(C\otimes D))$};
+\node (u) at (-3,-1.5) {$(A\otimes(B\otimes C))\otimes D$};
+\node (v) at (3,-1.5) {$A\otimes((B\otimes C)\otimes D)$};
+\draw[->] (s) -- node[above left] {$\alpha_{A\otimes B,C,D}$} (m);
+\draw[->] (m) -- node[above right] {$\alpha_{A,B,C\otimes D}$} (t);
+\draw[->] (s) -- node[left] {$\alpha_{A,B,C}\otimes1_D$} (u);
+\draw[->] (u) -- node[below] {$\alpha_{A,B\otimes C,D}$} (v);
+\draw[->] (v) -- node[right] {$1_A\otimes\alpha_{B,C,D}$} (t);
+\end{tikzpicture}
+```

@@ -1,0 +1,58 @@
+---
+id: thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring
+kind: theorem
+title: "A Noetherian polynomial ring has dimension one larger"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: literature-derived
+deps: [def-axiom-of-choice, lem-polynomial-ring-dimension-lower-chain, lem-polynomial-ring-dimension-upper-bound]
+justified_by: []
+aliases: []
+landmark: true
+proof_strategy: direct
+sources:
+  scraped: []
+  references:
+    - title: "Allen B. Altman and Steven L. Kleiman, A Term of Commutative Algebra, 13th ed., §21"
+      url: "https://web.mit.edu/18.705/www/13Ed.pdf"
+    - title: "J. S. Milne, A Primer of Commutative Algebra, v4.03, §§18, 21"
+      url: "https://www.jmilne.org/math/xnotes/CA.pdf"
+    - title: "Melvin Hochster, Dimension theory and systems of parameters"
+      url: "https://sites.lsa.umich.edu/hochster/wp-content/uploads/sites/1337/2026/04/Dim.pdf"
+pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
+---
+
+
+## Statement
+
+Assume the Axiom of Choice. Let $R$ be a Noetherian commutative ring of finite Krull dimension. Then
+$$ \dim R[x]=\dim R+1. $$
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]) and a Noetherian commutative ring $R$ of finite dimension.
+
+[L1] Every prime chain in $R$ extends to a prime chain in $R[x]$ that is longer by one step ([[lem-polynomial-ring-dimension-lower-chain]]).
+
+[L2] Under Choice, every prime chain in $R[x]$ has length at most $\dim R+1$ ([[lem-polynomial-ring-dimension-upper-bound]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Fact [L1] gives $\dim R[x]\ge \dim R+1$. [L1, given]
+
+1.2 Fact [L2] gives $\dim R[x]\le \dim R+1$. [L2, given]
+
+2.1 Therefore $\dim R[x]=\dim R+1$. [step 1.1, step 1.2] ∎

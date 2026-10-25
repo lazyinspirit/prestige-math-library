@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace.md

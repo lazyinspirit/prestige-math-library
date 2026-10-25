@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-knot-kt-14-boundary-case.json
+  precheck: pass
 id: cex-knot-kt-14-boundary-case
 kind: counterexample
 title: "Equal surgery manifolds need not have isotopic diagrams"
@@ -19,17 +22,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Nikolai Saveliev, Lectures on the Topology of 3-Manifolds"
@@ -82,12 +74,12 @@ The false claim is that if two integral framed-link surgery diagrams in $S^3$ ha
 
 The left panel is the empty diagram and the right panel is a split unknot labelled $+1$. The labels are integer framings; the circles are schematic projections of the standard unknot and contain no crossing information.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[>=stealth]
-  \node at (0,0) {$\varnothing$};
+  \node at (0,0) {$\emptyset$};
   \draw[->,thick] (0.7,0) -- (2.0,0);
   \node at (1.35,0.35) {stabilize};
   \draw[thick] (2.7,0) circle (0.48);
   \node at (3.55,0) {$+1$};
 \end{tikzpicture}
-~~~
+```

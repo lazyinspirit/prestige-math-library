@@ -1,6 +1,7 @@
 ---
 verification:
-  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for thm-separation-of-regular-curve-components-by-point-blowups and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-27; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"c15cd3b7aabc3909a36d9d011951f7898d3eea61138e7191635ce7a60f83f0dc","evidence":["research/frontier-38-owner-30-reader-27.md","research/frontier-38-owner-30-reader-findings-27.json","research/frontier-38-owner-30-dispatch/reader-reader-27.result.json","research/frontier-38-owner-30-step5-hash-27-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/thm-separation-of-regular-curve-components-by-point-blowups.md","historical_raw_sha256":"00b3570b4e7754f6f80e261a0b8fb6181b939d983987c3ac9ee4067f7d0d16b6","transformations":["publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:31:05.459Z"}}
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-separation-of-regular-curve-components-by-point-blowups.json
+  precheck: pass
 id: thm-separation-of-regular-curve-components-by-point-blowups
 kind: theorem
 title: Separation of finitely many curve components by point blowups
@@ -82,3 +83,49 @@ non-regular or maximum-multiplicity centers at each of the finitely many stages
 3.2 (Phase $n=1$: separating the components) Assume the maximum of all pairwise multiplicities is $1$ and let $p_1,\dots,p_s$ be the finitely many points lying in at least two of the curves. Blow up these points one after another. For each pair $(i,j)$ meeting at a point $p_t$ with $m_{p_t}(Y_i\cap Y_j)=1$, the final clause of [F3] shows that $Y_i'$ and $Y_j'$ are disjoint over $p_t$; after the finitely many blowups of this phase, every pair of strict transforms meets over none of the points $p_t$. Since intersections can only occur at the $p_t$ (the strict transforms agree with the original curves away from the blown-up points), the final strict transforms $Y_i'$ are pairwise disjoint, and they remain regular curves by [F2]. [F2, F3, step 2.1]
 
 4.1 Combining steps 1.1, 3.1 and 3.2: first make all components regular, then lower the maximum pairwise multiplicity by finitely many point blowups until either no intersection remains or the maximum is $1$; in the latter case separate the remaining multiplicity-$1$ contacts by finitely many further point blowups. The composite is a finite sequence of blowups of $X$ at closed points whose final strict transforms are pairwise disjoint regular curves, which is the assertion. [F5, step 1.1, step 3.1, step 3.2] ∎
+
+
+## Remarks
+
+The following schematic diagram separates the two stages of the construction.
+Write $X_0=X$, let $X_a$ be the ambient scheme after step 1.1, and let $X_m$
+be the final ambient scheme. For a fixed index $i$, $Y_i^{(a)}$ and
+$Y_i^{(m)}$ denote the corresponding strict transforms. The horizontal maps
+are composites of point blowups and their restrictions; the vertical maps are
+closed immersions. Both squares commute. Either stage may be empty.
+
+```tikz
+\begin{tikzpicture}[x=1.25cm,y=1.15cm, every node/.style={font=\Large}]
+\node (ym) at (0,1.5) {$Y_i^{(m)}$};
+\node (ya) at (4.2,1.5) {$Y_i^{(a)}$};
+\node (y0) at (8.4,1.5) {$Y_i$};
+\node (xm) at (0,0) {$X_m$};
+\node (xa) at (4.2,0) {$X_a$};
+\node (x0) at (8.4,0) {$X_0$};
+\draw[->] (ym) -- node[above] {$\cong$} (ya);
+\draw[->] (ya) -- (y0);
+\draw[->] (ym) -- (xm);
+\draw[->] (ya) -- (xa);
+\draw[->] (y0) -- (x0);
+\draw[->] (xm) -- node[above] {$\rho$} (xa);
+\draw[->] (xa) -- node[above] {$\sigma$} (x0);
+\node[align=center] at (0,-1.05) {regular, pairwise disjoint\\ $Y_i^{(m)}\cap Y_j^{(m)}=\emptyset\quad(i\ne j)$};
+\node[align=center] at (4.2,-1.05) {all components\\regular};
+\node[align=center] at (8.4,-1.05) {finite\\normalizations};
+\node at (2.1,-2.15) {separation};
+\node at (6.3,-2.15) {regularization};
+\end{tikzpicture}
+```
+
+Here $\sigma$ is the regularization stage and $\rho$ is the separation stage.
+Along $\rho$, already regular curves remain isomorphic to themselves by [F2].
+At each chosen contact center $p$ in the current ambient scheme, [F3] gives
+$m_q(Y_i'\cap Y_j')<m_p(Y_i\cap Y_j)$ if the two transforms still meet at
+$q$ over $p$; when $m_p(Y_i\cap Y_j)=1$ they no longer meet over $p$.
+Step 3.1 applies this locally at every center attaining the current maximum,
+so that a completed phase lowers that maximum or eliminates all contacts.
+The multiplicities are local module lengths, not counts of geometric points;
+no base field or rationality of the centers is assumed. The conclusion concerns
+only the named curve transforms: they may meet exceptional subschemes, and
+no simple normal crossings conclusion for a total transform is asserted.
+The rigorous proof above is independent of this schematic diagram.

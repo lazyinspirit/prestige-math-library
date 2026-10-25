@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-unit-logarithms-lie-in-the-product-formula-hyperplane.md

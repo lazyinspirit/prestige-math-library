@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-exponential-map-is-surjective-on-every-connected-lie-group.md

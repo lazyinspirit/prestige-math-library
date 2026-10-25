@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads.md

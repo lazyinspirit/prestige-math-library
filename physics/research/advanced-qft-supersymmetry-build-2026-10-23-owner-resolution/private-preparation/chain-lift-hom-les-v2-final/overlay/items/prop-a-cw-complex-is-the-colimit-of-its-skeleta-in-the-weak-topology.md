@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-cw-complex-is-the-colimit-of-its-skeleta-in-the-weak-topology.md

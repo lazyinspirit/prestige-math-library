@@ -1,0 +1,89 @@
+{
+  "id": "lem-lifted-flip-potential-decreases",
+  "agent": "/root/rendering_repair_coordinator/dnla_017",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The item has no picture, while its proof uses two distinct but linked constructions: the four-triangle diagonal overlay and a negative height gap along BD. A paired schematic materially clarifies why all four integral contributions share one sign; a complete independent proof does not remove this explanatory need.",
+      "action": "Added a two-panel TikZ schematic and its definitions in final Remarks.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended final Remarks only: explicit closed quadrilateral with both diagonals, and schematic formal-height comparison along BD with downward delta arrow. Existing title, full frontmatter, Statement, Facts and Proof remain byte-identical.",
+  "source_lines_after": [
+    65,
+    67,
+    69,
+    107,
+    110
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Left panel: A=(0,0), B=(3,0), C=(3,2.4), D=(0,2.4), O=(1.5,1.2).",
+      "check": "Boundary ABCD is strictly convex and counterclockwise. AC and BD intersect at their interior midpoint O, so the drawn four subtriangles are AOB, BOC, COD, DOA. The explicit D--A segment closes the boundary.",
+      "local_justification": "Statement and A1 require counterclockwise strict convexity and an interior diagonal intersection; proof 1.1 uses precisely this four-triangle overlay. The square is a schematic base configuration, not a claim about prescribed unweighted heights."
+    },
+    {
+      "data": "Right panel: affine plane ell through lifted A,B,C restricted to BD; common formal heights h_B,h_D; values g_AC(O),g_BD(O).",
+      "check": "Both affine height traces start at h_B. The ell trace ends at ell(D), strictly above h_D. The interior O has ell(O)=g_AC(O) because O is on AC, and the lower trace at O is g_BD(O). The arrow goes from g_AC(O) down to g_BD(O), representing delta=g_BD(O)-g_AC(O)<0.",
+      "local_justification": "Proof 2.1 establishes these equalities and strict order using 0<t<1 and A1. Def-lexicographic-lift-tie-break orders the common formal heights; the caption explicitly treats drawn vertical positions as order comparisons rather than evaluating epsilon."
+    },
+    {
+      "data": "Integral comparison under the diagram.",
+      "check": "The difference is zero at the two boundary vertices of each overlay triangle and delta at O. Summing area times delta/3 yields area(ABCD)*delta/3<0.",
+      "local_justification": "Exactly proof 1.1 and 3.1; no new lemma or dependence on the picture is introduced."
+    }
+  ],
+  "before_raw_sha256": "54d79623afb5237f15da5746c9cde4a86b26640949dbb76c58bdbcb4dc40b048",
+  "after_raw_sha256": "0304ef113db65cf2b1f77e78b5effb213634b94a03fdf087077cd7c84eec5cbc",
+  "guard": "Immediately before edit, asserted raw SHA256 54d79623afb5237f15da5746c9cde4a86b26640949dbb76c58bdbcb4dc40b048. Passed. Final prefix and exact frontmatter equality checked.",
+  "original_evidence": {
+    "path_discrepancy": "Declared diagram-supplement/screenshots paths were absent. Located authentic files in the same category screenshots directory, with both recorded SHA256 values matching.",
+    "resolved_directory": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots",
+    "standalone_original_views": [
+      "lem-lifted-flip-potential-decreases--01.png",
+      "lem-lifted-flip-potential-decreases--02.png"
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-lifted-flip-potential-decreases.md",
+      "result": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-lifted-flip-potential-decreases.md --json",
+      "result": "1 checked, 0 failed; pass, direct strategy"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-lifted-flip-potential-decreases.md --json",
+      "result": "1 checked; no errors or warnings"
+    },
+    {
+      "command": "Native repair-preview.mts with explicit --ids and repo-local TMPDIR/output",
+      "result": "Exit 0; 2 tiles; 51 KaTeX instances, 1 TikZ figure; no KaTeX errors or diagram failures."
+    },
+    {
+      "command": "Standalone original-resolution view_image of both fresh preview PNGs, plus compiled SVG path inspection",
+      "result": "Both panels and labels visible without clipping/overlap; dark background contrasts with white text/boundary/arrow, blue dashed and orange solid traces. Actual SVG boundary has four segments and returns to start, and both diagonals meet at O; overlay graph has 5 vertices and 8 split edges, boundary degree 3 and O degree 4. All points denote included sample points; no open endpoint convention applies. SVG has no polygon fills obscuring edges."
+    }
+  ],
+  "preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnla017/manifest.json",
+    "source_sha256": "0304ef113db65cf2b1f77e78b5effb213634b94a03fdf087077cd7c84eec5cbc",
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dnla017/screenshots/lem-lifted-flip-potential-decreases.json",
+    "compiled_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dnla017/pi-tikz-cache/db8f70a3fced6aa804d8b49a597083ff.svg"
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Native local ItemBody preview, not production route coverage. Current reference map reported 16 unrelated parse diagnostics; assigned item and all displayed references rendered."
+  ],
+  "blocker": null
+}

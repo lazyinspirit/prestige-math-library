@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-affine-dirichlet-trace-class-is-nonempty-convex-and-weakly-closed.json
+  precheck: pass
 id: lem-affine-dirichlet-trace-class-is-nonempty-convex-and-weakly-closed
 kind: lemma
 title: "The affine Dirichlet trace class is nonempty, convex and weakly closed"
@@ -19,8 +22,7 @@ sources:
     - title: "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)"
       url: "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf"
       locator: "Chapter 2 Section 3, admissible classes and trace data, printed pp. 41-43"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -43,7 +45,7 @@ is nonempty, convex, norm closed in $W^{1,p}(\Omega)$ and weakly closed; moreove
 
 ## Proof
 
-**Proof technique:** direct, by writing $K_g$ as a translate of the kernel of the trace and applying the closed-convex weak-closure lemma.
+**Proof technique:** direct, by writing the affine trace class as a translate of the kernel of the trace and applying the closed-convex weak-closure lemma.
 
 1.1 Nonemptiness. Since $g$ lies in the range of $T$ there is $u\in W^{1,p}(\Omega)$ with $Tu=g$, so $K_g\ne\varnothing$; alternatively [F2] gives $Rg\in K_g$ because $TRg=g$. [F1, F2, given]
 

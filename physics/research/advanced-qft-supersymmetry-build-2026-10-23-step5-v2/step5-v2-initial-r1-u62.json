@@ -1,0 +1,180 @@
+{
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "62",
+  "input_sha256": "79ce228292c28cf4dc516ab9bc72619009c0b56046675966598cb75a0933c758",
+  "decisions": [
+    {
+      "id": "thm-qftx-critical-flux-cylinder-linear-energy",
+      "model": "gpt-6-luna",
+      "context_sha256": "36e5962f3ed559f20bc0c5227e6af32bdddfce726a4de6f33f5900dc8877bf3d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Conjugation leaves h unchanged and sends the positive representative N dtheta - (*dh)/2 to -N dtheta + (*dh)/2. F2 and step 1.3 incorrectly retained the minus sign for n<0. This is a nonfatal sign error: the collar proof uses only exponential decay and finite energy, both supplied for the genuine conjugate minimizer. Repaired both restatements with epsilon=1 for n>=0 and -1 otherwise, including the signed single-valued phase cleanup; the complete Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/tong/tasi/vortex.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-qftx-multiple-centred-critical-vortex",
+      "model": "gpt-6-luna",
+      "context_sha256": "3a165380e5239f31545617ee9c73df7dfdb2b1bcd0545a802c1e401e387a0036",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The Example and F4 omit the cylinder supplier's finite-energy end hypothesis. At n=0, smooth A=0 and q=rho(r)=sqrt(xi)+1/log(r) outside a disk satisfy the stated vacuum and canonical-gauge conditions, but the potential integral dominates a positive multiple of integral r/(log r)^2 dr, which diverges. No cylinder whose every slice, including its ends, has finite energy has this trace. Thus the asserted finite upper bound does not follow and is false for the stated end class. Restored the supplier's full end hypotheses in the Example, F4 and step 3.1; arbitrary winding/divisors and both bounds remain.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/tong/tasi/vortex.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qftx-critical-flux-cylinder-linear-energy",
+      "disposition": "repaired",
+      "post_sha256": "8d659b198ef07404167a129d3917b1375e6499a413b18f88c64e67b6314464db",
+      "review_context_sha256": "171734ac8bfec7f6526e4efb5edbe6ef09e4a812813045a8562a5ac05e37d6ae",
+      "reason": "Checked the current reconstruction and planar-minimum suppliers, all cylinder proof steps, and the owning contract/page. Signed global phase cleanup now produces A*=n dtheta-epsilon (*dh)/2, with the vacuum treated explicitly. Finite potential and kinetic energy give L2 profile differences; the bounded Higgs difference controls the blend cross term, and fixed-width collars give the uniform upper bound including L=2ell. Fubini slicing gives the lower bound. No Statement change or diagram; contract derivation 1.3 synchronized under the shared lock.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/tong/tasi/vortex.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-qftx-multiple-centred-critical-vortex",
+      "disposition": "repaired",
+      "post_sha256": "8eafcb053d3ce04d93b87e7d4f57f5511725b4b20d7556d8e72ee1b5e0151114",
+      "review_context_sha256": "c04a6b442c68e1fe9159c649e94719064e23278fe6bd83ecbecb6e6dcf46d611",
+      "reason": "Verified degree 3, the two logarithmic subtractions, smooth reconstruction, flux 6pi and energy 6pi xi against the current plane and minimum suppliers. The repaired cylinder clause explicitly defines its energies/class by the exact earlier theorem and supplies finite transverse energy, signed flux, canonical gauge and angular limit. F4 and step 3.1 now invoke the actual hypotheses. The owning manifest statement and contract derivation 3.1 were synchronized under the shared lock. Both item statements remain uninterrupted by links; there are no diagrams.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/tong/tasi/vortex.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "id": "thm-qftx-critical-flux-cylinder-linear-energy",
+      "ledger": "canonical-defect-ledger",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "Corrected the sign of *dh in F2 and step 1.3 for conjugate vortices; theorem Statement and collar estimate retained."
+    },
+    {
+      "id": "ex-qftx-multiple-centred-critical-vortex",
+      "ledger": "canonical-defect-ledger",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "Restored finite-energy end traces and exact fixed-flux/canonical/angular hypotheses in the Example, F4 and proof step 3.1; the former broader end class included inadmissible infinite-energy traces."
+    }
+  ],
+  "supporting_evidence": {
+    "research/advanced-qft-supersymmetry-build-2026-10-23-batch-62-step5-context.json": "b9c096a295cb635dcade12e17fc96305ad686fbfc8f8c3032094ee13da12f60a"
+  },
+  "repair_notes": {
+    "completed_items": [
+      "thm-qftx-critical-flux-cylinder-linear-energy",
+      "ex-qftx-multiple-centred-critical-vortex"
+    ],
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-62.proof-contracts.json --strict --items thm-qftx-critical-flux-cylinder-linear-energy",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/thm-qftx-critical-flux-cylinder-linear-energy.md",
+        "exit_code": 0,
+        "output": "1 checked, 0 failing \u2014 all clean"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/thm-qftx-critical-flux-cylinder-linear-energy.md --json",
+        "exit_code": 0,
+        "output": {
+          "errors": [],
+          "warnings": [],
+          "checked": 1
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-62.proof-contracts.json --strict --items thm-qftx-critical-flux-cylinder-linear-energy,ex-qftx-multiple-centred-critical-vortex",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 2/2 item(s) checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-qftx-multiple-centred-critical-vortex.md",
+        "exit_code": 0,
+        "output": "1 checked, 0 failing \u2014 all clean"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-qftx-multiple-centred-critical-vortex.md --json",
+        "exit_code": 0,
+        "output": {
+          "errors": [],
+          "warnings": [],
+          "checked": 1
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/thm-qftx-critical-flux-cylinder-linear-energy.md items/ex-qftx-multiple-centred-critical-vortex.md",
+        "exit_code": 0,
+        "output": "proof-layout: 2 items, 12 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-u62-items.json --json",
+        "exit_code": 0,
+        "output": {
+          "scope": "focused-items",
+          "item_checks": [
+            "ex-qftx-multiple-centred-critical-vortex",
+            "thm-qftx-critical-flux-cylinder-linear-energy"
+          ],
+          "errors": 0,
+          "warnings": 0,
+          "dependency_closure_items": 1936,
+          "prerequisite_item_cycle_checks": 1936,
+          "prerequisite_page_cycle_checks": 261
+        }
+      },
+      {
+        "command": "git diff --check -- items/thm-qftx-critical-flux-cylinder-linear-energy.md items/ex-qftx-multiple-centred-critical-vortex.md research/advanced-qft-supersymmetry-build-2026-10-23-batch-62.proof-contracts.json research/advanced-qft-supersymmetry-build-2026-10-23-batch-62.pages.json",
+        "exit_code": 0,
+        "output": ""
+      }
+    ],
+    "source_reading": "Consulted Tong, vortex.pdf, section 3.2 (printed pp. 72\u201373), for signed Bogomolny context only; its coefficients differ from the local convention. No cylinder bound is imported. The signed reconstruction, finite-energy conditions and collar argument were checked directly against current local suppliers. No Taubes or Chen\u2013Yang full-text reading is claimed.",
+    "unresolved_obligations": [],
+    "interface_comparison": {
+      "thm-qftx-critical-flux-cylinder-linear-energy": "The complete Statement is byte-identical to the pre-edit carrier; only F2 and proof step 1.3 changed. No propagation event.",
+      "ex-qftx-multiple-centred-critical-vortex": "The complete Example changed only in the cylinder end-data paragraph; the worked degree-three claim, arbitrary-divisor scope, bounds and matching-end equality remain. The references section adds the exact existing cylinder supplier. An item/library search found no item dependency or reference consumer and no alias. Its sole home-page use is its unchanged examples inventory."
+    },
+    "page_uses": [
+      {
+        "path": "library/quantum-field-theory-mathematics/qftx-abelian-higgs-vortex-existence-mathematics-examples.md",
+        "affected_use": "The examples inventory lists ex-qftx-multiple-centred-critical-vortex; the page contains only YAML and no mathematical claim about its end-data class.",
+        "disposition": "unaffected",
+        "reason": "The item ID, page placement and prerequisites remain valid; compact-v1 and empty page body are preserved."
+      }
+    ],
+    "published_ledger_updates": [],
+    "published_findings": [],
+    "metadata_updates": [
+      "Only the assigned cylinder derivation 1.3 and example derivation 3.1 changed in the owning contract; original independent risk-review records were retained.",
+      "Only the assigned example statement mirror changed in batch-62.pages.json. Shared writes reread current files under the step5 shared write lock, and original ASCII JSON encoding was preserved."
+    ],
+    "operational_notes": [
+      "A direct node invocation of precheck.mts failed because this runtime requires the supplied TS launcher; both actual focused checks subsequently passed through tools/tsx-run.mjs. A probe for the nonexistent plural proof-contracts.mjs was replaced by the actual singular proof-contract.mjs.",
+      "The first guarded example metadata update rejected redundant backslash escaping before either write; retrying with literal section text succeeded. No mathematical uncertainty remains.",
+      "No judge, acceptance stamp, certification, shared ledger update, published repair or new item was produced. These are adjudicator repairs and review records, not independent approval of the repairs."
+    ]
+  }
+}

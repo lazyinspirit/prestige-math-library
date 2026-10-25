@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-zero-extension-from-w-one-p-zero.json
+  precheck: pass
 id: lem-zero-extension-from-w-one-p-zero
 kind: lemma
-title: Zero extension of W_0^{1,p} has no boundary derivative
+title: Zero extension of $W_0^{1,p}$ has no boundary derivative
 status: published
 origin: pipeline
 deps: [def-wkp-zero-as-a-sobolev-closure, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-classical-derivatives-are-weak-derivatives, thm-holder-inequality-for-integrals, lem-weak-derivative-is-independent-of-lp-representatives, lem-weak-derivatives-are-unique-almost-everywhere, def-integral-over-a-measurable-set, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
@@ -10,9 +13,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:

@@ -231,6 +231,16 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   const placeheld = new Set<string>();
   const listed = runTasks('--list');
   const promptFiles = String(listed.stdout ?? '').split('\n').map((s) => s.trim()).filter(Boolean);
+  // Supplemental Alpha tasks are runtime generation artifacts, absent from static task templates.
+  for (const stage of mod.stages.filter((s: any) => /^1-append-drift-\d+$/.test(s.id))) {
+    for (const plan of stage.plan?.(ctx, planUnits.get(stage) ?? []) ?? []) {
+      const tasks = Array.isArray(plan.task) ? plan.task : [plan.task];
+      for (const file of [plan.brief, ...tasks].filter(Boolean)) {
+        if (!promptFiles.includes(file)) promptFiles.push(file);
+        if (!existsSync(join(repo, file))) problems.push(`${stage.id}: no brief/task exists — ${file}`);
+      }
+    }
+  }
   for (const c of promptFiles) {
     const f = join(repo, c);
     if (!existsSync(f)) continue;

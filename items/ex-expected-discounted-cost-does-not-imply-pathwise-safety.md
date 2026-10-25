@@ -1,9 +1,7 @@
 ---
 verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-expected-discounted-cost-does-not-imply-pathwise-safety.json
+  precheck: pass
 id: ex-expected-discounted-cost-does-not-imply-pathwise-safety
 kind: example
 title: "A small expected cost can coexist with frequent finite-horizon violations"
@@ -53,3 +51,22 @@ Consider a one-state CMDP with actions `safe` and `risky`, deterministic self-tr
 2.1 Since $1/9<1/8=b$, the policy is feasible under the expected discounted-cost constraint. [F2, step 1.1, algebra]
 
 3.1 The probability that all seven independent action draws are `safe` is $(9/10)^7=4{,}782{,}969/10{,}000{,}000$. Hence the probability of at least one cost is $1-(9/10)^7=5{,}217{,}031/10{,}000{,}000>1/2$, as claimed. [given, algebra] ∎
+
+
+## Remarks
+
+The diagram tracks cost history, not additional CMDP states: the physical state is always $s$. Let $N_t$ mean no risky action in the first $t$ decisions, and let $H_t$ mean at least one risky action in those decisions. For $0\le t<7$, the arrows give the one-decision update rule for the history flag under the independent action draws; an arrow of probability zero is omitted.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (n) at (0,2) {$N_t$};
+\node (h) at (0,0) {$H_t$};
+\node (nn) at (5,2) {$N_{t+1}$};
+\node (hh) at (5,0) {$H_{t+1}$};
+\draw[->] (n) -- node[above] {$9/10\quad(\mathrm{safe})$} (nn);
+\draw[->] (n) -- node[above,sloped] {$1/10\quad(\mathrm{risky})$} (hh);
+\draw[->] (h) -- node[below] {$1\quad(\mathrm{either\ action})$} (hh);
+\end{tikzpicture}
+```
+
+Initially $\Pr(N_0)=1$ and $\Pr(H_0)=0$. Iterating the displayed split seven times gives $\Pr(N_7)=(9/10)^7$ and $\Pr(H_7)=1-(9/10)^7>1/2$, as in step 3.1. The expected discounted-cost calculation in steps 1.1–2.1 instead weights each one-step expected cost by $\gamma^t$; it remains $1/9<1/8$. The verification above is independent of this illustration.

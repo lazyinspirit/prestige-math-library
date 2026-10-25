@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-centered-difference-dirichlet-bvp.json
+  precheck: n/a
 id: alg-centered-difference-dirichlet-bvp
 kind: algorithm
 title: Centered finite differences for the zero-Dirichlet boundary-value problem
@@ -18,12 +21,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
     - title: "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 6: General Linear Second Order Equation, Spring 2009"
       url: "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
-verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
+
 ---
 
 ## Definition
@@ -49,3 +47,38 @@ Check the equations exactly. If any equation fails, return `linear-solve-failure
 ## Remarks
 
 This is an exact-arithmetic definition and makes no finite-precision accuracy claim. A numerical implementation that returns an approximate vector must report its residual separately; the assigned error theorem includes that residual as an independent term.
+
+The upper sketch separates the prescribed boundary values from the interior unknowns (shown schematically for $N\ge2$). The lower sketch shows the three coefficients in the centered equation at $x_j$, for $1\le j\le N$; adjacent nodes are separated by $h$. For $N=1$ the single interior node has both boundary nodes as neighbors.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw (0,0) -- (9,0);
+\fill (0,0) circle (2pt);
+\fill (2,0) circle (2pt);
+\fill (7,0) circle (2pt);
+\fill (9,0) circle (2pt);
+\node[above] at (0,0) {$U_0=0$};
+\node[above] at (2,0) {$U_1$};
+\node[above] at (4.5,0) {$\cdots$};
+\node[above] at (7,0) {$U_N$};
+\node[above] at (9,0) {$U_{N+1}=0$};
+\node[below] at (0,0) {$x_0=0$};
+\node[below] at (2,0) {$x_1=h$};
+\node[below] at (7,0) {$x_N=Nh$};
+\node[below] at (9,0) {$x_{N+1}=1$};
+\draw (2,-2) -- (7,-2);
+\fill (2,-2) circle (2pt);
+\fill (4.5,-2) circle (2pt);
+\fill (7,-2) circle (2pt);
+\node[above] at (2,-2) {$-1/h^2$};
+\node[above] at (4.5,-2) {$2/h^2$};
+\node[above] at (7,-2) {$-1/h^2$};
+\node[below] at (2,-2) {$U_{j-1}$};
+\node[below] at (4.5,-2) {$U_j$};
+\node[below] at (7,-2) {$U_{j+1}$};
+\node[below] at (3.25,-2.65) {$h$};
+\node[below] at (5.75,-2.65) {$h$};
+\draw[<->] (2,-2.65) -- (4.5,-2.65);
+\draw[<->] (4.5,-2.65) -- (7,-2.65);
+\end{tikzpicture}
+```

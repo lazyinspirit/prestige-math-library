@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-uniqueness-of-the-scalar-laplace-transform-in-the-exponential-growth-class.json
+  precheck: pass
 id: thm-uniqueness-of-the-scalar-laplace-transform-in-the-exponential-growth-class
 kind: theorem
 title: "Uniqueness of the scalar Laplace transform in the exponential-growth class"
@@ -34,12 +37,7 @@ sources:
     - title: "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)"
       url: "https://www.math.toronto.edu/almut/Brezis.pdf"
       locator: "Chapter 7 Section 7.2, Laplace-transform manipulation in the proof of Theorem 7.4, printed pp. 186-188"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -60,7 +58,7 @@ Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure inte
 
 ## Proof
 
-**Proof technique:** direct, reducing to real $f$, converting the Laplace moments into moments of a continuous function on $[0,1]$, and applying polynomial density.
+**Proof technique:** direct, reducing to real f, converting the Laplace moments into moments of a continuous function on [0,1], and applying polynomial density.
 
 1.1 It suffices to prove the theorem for real-valued $f$: if $f$ is complex-valued, then $\operatorname{Re}f$ and $\operatorname{Im}f$ are continuous, satisfy the same bound $|\operatorname{Re}f|,|\operatorname{Im}f|\le Ce^{\sigma t}$, and by [F3] have $\int_0^\infty e^{-\lambda t}\operatorname{Re}f(t)\,dt=\operatorname{Re}0=0$ and likewise for $\operatorname{Im}f$ for every real $\lambda>\sigma$. [F3, algebra]
 

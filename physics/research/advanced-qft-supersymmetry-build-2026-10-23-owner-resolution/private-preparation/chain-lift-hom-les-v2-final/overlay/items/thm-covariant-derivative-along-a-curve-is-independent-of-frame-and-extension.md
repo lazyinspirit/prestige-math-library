@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-covariant-derivative-along-a-curve-is-independent-of-frame-and-extension.md

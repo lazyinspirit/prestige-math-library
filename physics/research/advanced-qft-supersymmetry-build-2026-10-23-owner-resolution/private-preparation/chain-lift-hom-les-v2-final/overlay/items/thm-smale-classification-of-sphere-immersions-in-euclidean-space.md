@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-smale-classification-of-sphere-immersions-in-euclidean-space.md

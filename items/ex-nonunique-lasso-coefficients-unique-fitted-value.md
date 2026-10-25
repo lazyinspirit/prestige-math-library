@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-nonunique-lasso-coefficients-unique-fitted-value.json
+  precheck: pass
 id: ex-nonunique-lasso-coefficients-unique-fitted-value
 kind: example
 title: "Nonunique Lasso coefficients with a unique fitted value"
@@ -16,12 +19,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Stephen J. Wright, Coordinate Descent Algorithms, §2"
@@ -59,3 +56,22 @@ so the coefficients are not unique while the fitted value is always $X\theta=3/4
 ## Remarks
 
 Finite check assertion: for the one-row design with columns 1 and 1 and coefficient direction `[1,-1]`, the fitted direction is zero, so moving along this null direction preserves the fitted value while the Gram matrix is rank deficient.
+
+The closed segment below is the entire minimizing coefficient set from step 2.1. Under $X:\mathbb R^2\to\mathbb R$, $X\theta=\theta_1+\theta_2$, every point of this segment has the same image. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\draw[->] (0,0) -- (3.6,0) node[right] {$\theta_1$};
+\draw[->] (0,0) -- (0,3.6) node[above] {$\theta_2$};
+\node[below left] at (0,0) {$0$};
+\draw[very thick] (0,3) -- (3,0);
+\fill (0,3) circle (2pt);
+\fill (3,0) circle (2pt);
+\node[left] at (0,3) {$3/4$};
+\node[below] at (3,0) {$3/4$};
+\node[above right] at (1.45,1.55) {$\theta_1+\theta_2=3/4$};
+\draw[->,thick] (3.4,1.45) -- (5.3,1.45) node[midway,above] {$X=[1\;1]$};
+\fill (5.65,1.45) circle (2pt);
+\node[right] at (5.65,1.45) {$3/4\in\mathbb R$};
+\end{tikzpicture}
+```

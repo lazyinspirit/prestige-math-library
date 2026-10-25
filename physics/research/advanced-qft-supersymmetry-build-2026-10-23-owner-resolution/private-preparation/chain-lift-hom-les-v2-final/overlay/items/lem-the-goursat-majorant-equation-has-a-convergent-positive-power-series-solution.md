@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-goursat-majorant-equation-has-a-convergent-positive-power-series-solution.md

@@ -1,15 +1,48 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 19dccd0aabcd by `tools/physics-support/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ f9387a45ee89 by `tools/physics-support/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 4699 |
-| now mechanically prevented | 21 |
+| defects caught before publication | 5155 |
+| now mechanically prevented | 32 |
 | escaped to publication | 0 |
-| still open | 133 |
+| still open | 150 |
+
+## advanced-qft-supersymmetry-build-2026-10-23 — 456 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate | owner |
+|---|---|---|---|
+| ill-formed | 106 |  | 2 |
+| undefined-notation | 70 | 5 | 5 |
+| missing-hypothesis | 27 | 11 | 9 |
+| citation-inaccurate | 41 | 1 | 2 |
+| ill-typed-construction | 21 | 6 | 4 |
+| citation-inflated | 14 | 4 | 1 |
+| invalid-inference | 9 | 6 | 3 |
+| false-or-overstrong-statement | 11 | 2 | 4 |
+| other | 1 |  | 12 |
+| false-claim | 11 |  |  |
+| unlicensed-inference | 9 |  | 1 |
+| citation-missing | 8 |  | 2 |
+| unsupported-inference | 7 |  |  |
+| missing-map | 3 | 1 | 2 |
+| citation-misattributed | 5 |  |  |
+| reader-repair | 5 |  |  |
+| missing-choice-scope |  | 2 | 2 |
+| false-computation | 3 |  |  |
+| ill-typed-claim | 1 |  | 1 |
+| citation-corrupted | 2 |  |  |
+| overstrong-title-or-statement | 2 |  |  |
+| contract-mismatch | 2 |  |  |
+| false-or-overstrong-title | 1 |  | 1 |
+| frontmatter-schema |  |  | 2 |
+| arithmetic-error |  | 2 |  |
+| citation-truncated |  |  | 2 |
+| false-boundary-disposition | 1 |  |  |
+| scope-loss | 1 |  |  |
 
 ## fluid-dynamics-all-47-2026-10-23 — 432 row(s)
 
@@ -400,3 +433,20 @@
 - `fluid-dynamics-all-47-2026-10-23-owner-precollection-periodic-canonical-extraction` fluid-dynamics-all-47-2026-10-23 · missing-choice-scope · thm-fd-smooth-periodic-incompressible-ivp
 - `fluid-dynamics-all-47-2026-10-23-owner-precollection-euler-fixed-time-stress` fluid-dynamics-all-47-2026-10-23 · ill-typed-claim · def-fd-incompressible-euler-system
 - `fluid-dynamics-all-47-2026-10-23-owner-precollection-torus-branch-viscosity` fluid-dynamics-all-47-2026-10-23 · missing-hypothesis · ex-fd-x08-application
+- `advanced-qft-supersymmetry-build-2026-10-23-batch-23-clay-quantitative-equivalence` advanced-qft-supersymmetry-build-2026-10-23 · overstrong-title-or-statement · op-qftx-clay-4d-yang-mills-existence-mass-gap
+- `advanced-qft-supersymmetry-build-2026-10-23-batch-5-sector-set-class` advanced-qft-supersymmetry-build-2026-10-23 · ill-formed · def-qftx-nonabelian-gauge-data
+- `advanced-qft-supersymmetry-build-2026-10-23-batch-5-downstream-chart-data` advanced-qft-supersymmetry-build-2026-10-23 · ill-formed · ex-qftx-bpst-instanton-formal-sector-weight
+- `advanced-qft-supersymmetry-build-2026-10-23-batch-5-downstream-su2-compatibility` advanced-qft-supersymmetry-build-2026-10-23 · missing-hypothesis · pthm-aqft-global-anomaly-test
+- `advanced-qft-supersymmetry-build-2026-10-23-batch-21-post-qftx-euclidean-yang-mills-model-sector-set` advanced-qft-supersymmetry-build-2026-10-23 · ill-formed · post-qftx-euclidean-yang-mills-model
+- `advanced-qft-supersymmetry-build-2026-10-23-batch-21-def-qftx-euclidean-yang-mills-sector-sector-set` advanced-qft-supersymmetry-build-2026-10-23 · ill-formed · def-qftx-euclidean-yang-mills-sector
+- `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-41-downstream-chirality-1` advanced-qft-supersymmetry-build-2026-10-23 · citation-inaccurate · def-aqft-heavy-chiral-u1-threshold-data
+- `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-41-downstream-chirality-2` advanced-qft-supersymmetry-build-2026-10-23 · false-claim · pthm-aqft-heavy-chiral-threshold-wess-zumino-match
+- `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-41-downstream-chirality-3` advanced-qft-supersymmetry-build-2026-10-23 · false-claim · ex-aqft-heavy-fermion-anomaly-threshold
+- `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-43-endpoint-linearity` advanced-qft-supersymmetry-build-2026-10-23 · ill-formed · op-aqft-fusion-two-category-anomaly-classification
+- `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-42-positive-form` advanced-qft-supersymmetry-build-2026-10-23 · missing-hypothesis · def-aqft-p-form-global-symmetry
+- `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-42-counterterm-quotient` advanced-qft-supersymmetry-build-2026-10-23 · ill-formed · def-aqft-thooft-anomaly
+- `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-42-rg-consumer-interface` advanced-qft-supersymmetry-build-2026-10-23 · missing-hypothesis · pthm-aqft-symmetry-preserving-rg-anomaly-match
+- `advanced-qft-supersymmetry-build-2026-10-23-3a-batch-64-published-derivative-bound` advanced-qft-supersymmetry-build-2026-10-23 · false-claim · thm-power-series-define-holomorphic-functions-in-several-variables
+- `advanced-qft-supersymmetry-build-2026-10-23-batch-60-downstream-a2-quotation` advanced-qft-supersymmetry-build-2026-10-23 · citation-inaccurate · thm-adhm-fixed-point-instanton-count
+- `advanced-qft-supersymmetry-build-2026-10-23-owner-step5-gate-qexact-level-v1` advanced-qft-supersymmetry-build-2026-10-23 · frontmatter-schema · pthm-qftx-qexact-localization-ward-identity
+- `advanced-qft-supersymmetry-build-2026-10-23-owner-step5-gate-superpoincare-remarks-v1` advanced-qft-supersymmetry-build-2026-10-23 · ill-formed · def-qftx-super-poincare-algebra-4d

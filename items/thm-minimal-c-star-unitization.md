@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-minimal-c-star-unitization.json
+  precheck: pass
 id: thm-minimal-c-star-unitization
 kind: theorem
 title: Minimal C star unitization
@@ -11,12 +14,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Proposition 2.1.15 and Definition 2.1.18, printed pp. 11–13"
@@ -54,7 +51,7 @@ Then:
 
 [L2] $A^+ = A \oplus \mathbb C$ with product $(a,\lambda)(b,\mu) = (ab+\lambda b+\mu a, \lambda\mu)$ and involution $(a,\lambda)^* = (a^*,\overline\lambda)$, and $\mathbf 1 = (0,1)$ is the identity ([[def-algebraic-unitization-of-a-star-algebra]]).
 
-[L3] The bounded operators on a Banach space form a Banach space under the operator norm ([[thm-bounded-operator-space-is-banach]]). Composition is submultiplicative: $\|STb\|\le\|S\|\|T\|\|b\|$ for each $b$, and taking the unit-ball supremum gives $\|ST\|\le\|S\|\|T\|$. The required normalization for a nonzero unital Banach algebra is $\|1\|=1$ ([[def-unital-banach-algebra]]).
+[L3] The bounded operators on a Banach space form a Banach space under the operator norm ([[thm-bounded-operator-space-is-banach|Completeness of the bounded-operator space]]). Composition is submultiplicative: $\|STb\|\le\|S\|\|T\|\|b\|$ for each $b$, and taking the unit-ball supremum gives $\|ST\|\le\|S\|\|T\|$. The required normalization for a nonzero unital Banach algebra is $\|1\|=1$ ([[def-unital-banach-algebra]]).
 
 [L4] Under AC, in a unital C\*-algebra, $r(y) = \|y\|$ for every normal $y$; the spectrum of an element of a unital algebra is determined by the algebra structure, since invertibility is an algebraic condition ([[lem-c-star-spectral-radius-equals-norm-for-normal-elements]], [[def-spectrum-and-resolvent-set-in-a-banach-algebra]], [[def-spectral-radius]]).
 
@@ -68,7 +65,7 @@ Then:
 
 1.1 For $a \in A$ one has $\|L_a\| = \|a\|$: the inequality $\|L_ab\| \le \|a\|\,\|b\|$ gives $\|L_a\| \le \|a\|$, while $\|L_aa^*\| = \|aa^*\| = \|a\|^2$ gives $\|L_a\| \ge \|a\|^2/\|a^*\| = \|a\|$ when $a \ne 0$, and the case $a = 0$ is trivial; in particular $L$ is an injective linear isometry, so $L(A)$ is a closed subspace of $\mathcal B(A)$: a point in its closure admits approximants $L_{a_n}$ at distance less than $1/(n+1)$ by AC, the isometry makes $(a_n)$ Cauchy, and completeness gives a limit in $A$ with that operator image. [L1, L3, A1, algebra]
 
-1.2 The map $\varphi : A^+ \to \mathcal B(A)$, $\varphi(a,\lambda) := L_a + \lambda I$, is complex-linear and multiplicative with $\varphi((a,\lambda)(b,\mu)) = \varphi(a,\lambda)\varphi(b,\mu)$ for all $(a,\lambda),(b,\mu) \in A^+$, and $\varphi(0,1) = I$, where the multiplicativity is the computation $\varphi(a,\lambda)\varphi(b,\mu)(c) = a(bc+\mu c)+\lambda(bc+\mu c) = (ab+\lambda b + \mu a)c + \lambda\mu c = \varphi((a,\lambda)(b,\mu))(c)$ [L2, algebra].
+1.2 The map $\varphi : A^+ \to \mathcal B(A)$, $\varphi(a,\lambda) := L_a + \lambda I$, is complex-linear and multiplicative with $\varphi((a,\lambda)(b,\mu)) = \varphi(a,\lambda)\varphi(b,\mu)$ for all $(a,\lambda),(b,\mu) \in A^+$, and $\varphi(0,1) = I$, where the multiplicativity is the computation $\varphi(a,\lambda)\varphi(b,\mu)(c) = a(bc+\mu c)+\lambda(bc+\mu c) = (ab+\lambda b + \mu a)c + \lambda\mu c = \varphi((a,\lambda)(b,\mu))(c)$. [L2, algebra]
 
 2.1 The map $\varphi$ of [step 1.2] is injective when $A$ is genuinely nonunital: if $L_a + \lambda I = 0$ with $\lambda \ne 0$ then $ab = -\lambda b$ for all $b$, so $e := -a/\lambda$ satisfies $eb = b$ for all $b$, that is, $e$ is a left identity. Taking adjoints in $eb = b$ gives $b^*e^* = b^*$ for every $b$, and every element of $A$ is of the form $b^*$, so $e^*$ is a right identity. Applying the left identity to $b = e^*$ gives $ee^* = e^*$, and applying the right identity to $b = e$ gives $ee^* = e$; hence $e = e^*$ is a two-sided identity of $A$, a contradiction, and if $\lambda = 0$ then $L_a = 0$ forces $a = 0$ by [step 1.1]. [step 1.1, step 1.2, L1, L2, algebra]
 

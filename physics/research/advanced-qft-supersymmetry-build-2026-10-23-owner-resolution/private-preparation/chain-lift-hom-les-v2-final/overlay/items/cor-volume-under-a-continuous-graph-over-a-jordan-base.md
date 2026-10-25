@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-volume-under-a-continuous-graph-over-a-jordan-base.md

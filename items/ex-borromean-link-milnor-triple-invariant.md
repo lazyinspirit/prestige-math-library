@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-borromean-link-milnor-triple-invariant.json
+  precheck: pass
 id: ex-borromean-link-milnor-triple-invariant
 kind: example
 title: The Borromean string link has nonzero triple Milnor invariant
@@ -36,13 +39,7 @@ sources:
     - title: Eric W. Weisstein, Braid Word, Wolfram MathWorld
       url: https://mathworld.wolfram.com/BraidWord.html
       locator: The table at lines 21–24 lists sigma_1 inverse sigma_2 repeated three times as a Borromean braid word; used only to identify the matching closure
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Example
@@ -66,7 +63,7 @@ so $\mu_{\tau_B}(1,2,3)=1$. Every pairwise linking number of the closed braid
 is zero, and its based closed-link residue candidate is
 $\bar\mu^b_{\widehat{\tau}_B}(1,2,3)=1$.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[scale=0.85,>=stealth]
   % Six adjacent half-twists, read from bottom to top in the stated product convention.
   % sigma_2
@@ -103,7 +100,7 @@ $\bar\mu^b_{\widehat{\tau}_B}(1,2,3)=1$.
   \node at (0,-0.3) {$1$};\node at (1,-0.3) {$2$};\node at (2,-0.3) {$3$};
   \node at (1,-0.75) {bottom-to-top braid; close matching labels outside};
 \end{tikzpicture}
-~~~
+```
 
 The dashed branch is the under-strand and each arrow points from bottom to top.
 The labels at the top and bottom agree because the braid is pure. The diagram

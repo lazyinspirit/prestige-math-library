@@ -1,18 +1,7 @@
 ---
 verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
-    delegated_by: owner
-    evidence:
-      - research/frontier-38-owner-30-reader-5.md
-      - research/frontier-38-owner-30-dispatch/reader-reader-5.result.json
-      - research/frontier-38-owner-30-step5-hash-5-post-5a.json
-      - research/frontier-38-owner-30-alpha-batch-5-5a-decisions.json
-      - research/frontier-38-owner-30-step7-v2/step7-v2-impact-initial-r1-u3.json
-      - research/frontier-38-owner-30-dispatch/alpha-repair-step7-v2-impact-initial-r1-u3.result.json
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-riesz-transform-as-a-standard-calderon-zygmund-operator.json
+  precheck: pass
 id: ex-riesz-transform-as-a-standard-calderon-zygmund-operator
 kind: example
 title: "The Riesz kernel is a standard Calderón–Zygmund kernel"
@@ -54,7 +43,7 @@ Calderón–Zygmund operator in the sense of this page.
 
 [F3] $R_j$ is the $L^2$ Fourier multiplier with symbol $m_j(\xi)=-i\xi_j/|\xi|$ for $\xi\ne0$, $\|R_jf\|_2\le\|f\|_2$, and Plancherel's theorem identifies the pairing $\langle R_jf,g\rangle$ with $\int m_j\widehat f\,\overline{\widehat g}$ for the first-variable-linear pairing ([[def-riesz-transforms-on-euclidean-space]], [[cor-riesz-transforms-are-ltwo-bounded]], [[thm-plancherel]], [[def-hilbert-space-adjoint]]).
 
-[F4] A Calderón–Zygmund kernel is a measurable $k$ on $\mathbb R^n\setminus\{0\}$, locally integrable there, with finite annular constant and finite Hörmander constant; a pointwise bound $|k|\le c|\cdot|^{-n}$ implies the annular condition with $A_1=c|S^{n-1}|\log2$; a Calderón–Zygmund operator is an $L^2$-bounded linear operator satisfying the off-support kernel representation for compactly supported $L^2$ inputs ([[def-calderon-zygmund-kernel-and-principal-value-operator]], [[def-standard-holder-calderon-zygmund-kernel]], [[thm-polar-coordinates-formula-for-lebesgue-measure]]). Polar coordinates give $\int_{|x|\ge a}|x|^{-n-1}dx=|S^{n-1}|/a$ for $a>0$.
+[F4] A Calderón–Zygmund kernel is a measurable $k$ on $\mathbb R^n\setminus\{0\}$, locally integrable there, with finite annular constant and finite Hörmander constant; a pointwise bound $|k|\le c|\cdot|^{-n}$ implies the annular condition with $A_1=c|S^{n-1}|\log2$; a Calderón–Zygmund operator is an $L^2$-bounded linear operator satisfying the off-support kernel representation for compactly supported $L^2$ inputs ([[def-calderon-zygmund-kernel-and-principal-value-operator]], [[def-standard-holder-calderon-zygmund-kernel]], [[thm-polar-coordinates-formula-for-lebesgue-measure|Polar coordinates decompose Lebesgue measure into $r^{n-1}\,dr\,d\sigma$]]). Polar coordinates give $\int_{|x|\ge a}|x|^{-n-1}dx=|S^{n-1}|/a$ for $a>0$.
 
 [F5] Fubini interchanges absolutely integrable complex double integrals, and locally integrable functions with equal distribution pairings agree almost everywhere. ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], [[thm-locally-integrable-functions-embed-in-distributions]])
 

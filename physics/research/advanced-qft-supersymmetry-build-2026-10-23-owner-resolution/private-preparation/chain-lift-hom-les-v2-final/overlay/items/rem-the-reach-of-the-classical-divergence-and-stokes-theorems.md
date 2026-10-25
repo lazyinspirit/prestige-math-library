@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-reach-of-the-classical-divergence-and-stokes-theorems.md

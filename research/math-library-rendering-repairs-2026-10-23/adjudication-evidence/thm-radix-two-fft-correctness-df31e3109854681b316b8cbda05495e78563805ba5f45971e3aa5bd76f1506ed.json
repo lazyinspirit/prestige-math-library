@@ -1,0 +1,44 @@
+{
+  "id": "thm-radix-two-fft-correctness",
+  "agent": "/root/rendering_repair_coordinator/fourier_078",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution screenshot visibly prints the dollar delimiters in the technique banner while the same variable renders correctly in the proof below. Frozen and current source agree on valid inline math syntax; this is the documented plain-text banner renderer limitation.",
+      "action": "Replaced “induction on $m$” with equivalent plain prose “induction on the recursion level” in the banner only.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Proof technique banner now uses equivalent prose without math delimiters; no mathematical claim, hypothesis, argument, dependency, source, status or metadata was changed.",
+  "source_lines_after": [
+    {
+      "line": 66,
+      "text": "**Proof technique:** induction on the recursion level."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Underlying renderer limitation remains: proof-technique text is inserted as plain text and uppercased; this item uses a local prose workaround."
+  ],
+  "checks": {
+    "before_raw_sha256_guard": "passed immediately before edit",
+    "exact_diff": "Verified current bytes equal frozen before bytes with the single banner replacement only.",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-radix-two-fft-correctness.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    }
+  },
+  "inspection": {
+    "screenshots": [
+      "research/fourier-analysis-latex-visual-audit-2026-10-23/screenshots/thm-radix-two-fft-correctness--02.png"
+    ],
+    "detail": "original",
+    "local_only": true
+  }
+}

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-upper-unitriangular-central-series.json
+  precheck: pass
 id: lem-upper-unitriangular-central-series
 kind: lemma
-title: The central series of U_n with additive quotients
+title: The central series of $U_n$ with additive quotients
 dependency_level: 2
 deps:
   - def-subgroup-commutator-and-lower-central-series
@@ -14,11 +17,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)
@@ -27,7 +25,7 @@ sources:
 ---
 ## Statement
 
-Let $k$ be a field and $n\ge1$, and let $U_n\subseteq T_n\subseteq\mathrm{GL}_n$ be the upper unitriangular and upper triangular group schemes of [[def-upper-unitriangular-group-scheme]], with $T_n=D_n\ltimes U_n$.
+Let $k$ be a field and $n\ge1$, and let $U_n\subseteq T_n\subseteq\mathrm{GL}_n$ be the upper unitriangular and upper triangular group schemes of [[def-upper-unitriangular-group-scheme|The upper unitriangular group scheme $U_n$ and its coordinate ring]], with $T_n=D_n\ltimes U_n$.
 
 Order the pairs $(i,j)$ with $1\le i<j\le n$ by increasing $j-i$ (and arbitrarily, say by increasing $i$, within a fixed difference), and let $m=n(n-1)/2$. For $0\le r\le m$ let $U_n^{(r)}$ be the closed subgroup scheme of $U_n$ of matrices whose entries $x_{ij}$ vanish on the first $r$ pairs of the ordering; thus $U_n^{(0)}=U_n$ and $U_n^{(m)}=1$, and the $U_n^{(r)}$ are closed subgroup schemes of $U_n$ stable under conjugation by $T_n$.
 
@@ -38,7 +36,7 @@ is a central series of closed subgroup schemes of $U_n$ stable under $T_n$: $[U_
 ## Facts & Assumptions
 **Given:** A field $k$, an integer $n\ge1$, the group schemes $U_n\subseteq T_n\subseteq\mathrm{GL}_n$, and the ordering of pairs $(i,j)$, $i<j$, described in the statement.
 
-[F1] For every commutative unital $k$-algebra $R$, $U_n(R)$ is the group of upper unitriangular matrices in $\mathrm{GL}_n(R)$ and $T_n(R)$ the group of invertible upper triangular matrices, with $T_n=D_n\ltimes U_n$. ([[def-upper-unitriangular-group-scheme]], [[def-triangular-and-diagonal-matrices-over-a-commutative-ring]])
+[F1] For every commutative unital $k$-algebra $R$, $U_n(R)$ is the group of upper unitriangular matrices in $\mathrm{GL}_n(R)$ and $T_n(R)$ the group of invertible upper triangular matrices, with $T_n=D_n\ltimes U_n$. ([[def-upper-unitriangular-group-scheme|The upper unitriangular group scheme $U_n$ and its coordinate ring]], [[def-triangular-and-diagonal-matrices-over-a-commutative-ring]])
 
 [F2] Matrix multiplication is associative, the identity matrix is a unit, and the $(i,j)$-entry of a product $XY$ is $\sum_l x_{il}y_{lj}$; entrywise these identities hold over every commutative ring. ([[thm-ring-matrix-arithmetic-laws]])
 

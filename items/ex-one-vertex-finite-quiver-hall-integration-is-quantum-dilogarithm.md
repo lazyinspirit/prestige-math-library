@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-one-vertex-finite-quiver-hall-integration-is-quantum-dilogarithm.json
+  precheck: pass
 id: ex-one-vertex-finite-quiver-hall-integration-is-quantum-dilogarithm
 kind: example
 title: "One vertex with no arrows gives the quantum dilogarithm"
@@ -24,19 +27,18 @@ sources:
       url: "https://arxiv.org/pdf/1611.03696"
     - title: "Olivier Schiffmann, Lectures on Hall Algebras, Example 3.14"
       url: "https://arxiv.org/pdf/math/0611617"
-verification:
-  precheck: pass
+
 ---
 
 ## Example
 
 Let $Q$ consist of one vertex and no arrows:
 
-~~~tikz
+```tikz
 \begin{tikzpicture}
   \node[circle,draw,inner sep=2pt,label=below:{1}] at (0,0) {};
 \end{tikzpicture}
-~~~
+```
 
 The single vertex is labelled $1$ and there are no edges. Thus
 $\mathcal A_Q$ is the category of finite-dimensional $\mathbb F_q$-vector

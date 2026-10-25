@@ -1,0 +1,100 @@
+---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-three-sat-reduces-to-directed-hamiltonian-cycle.json
+  precheck: pass
+id: thm-three-sat-reduces-to-directed-hamiltonian-cycle
+kind: theorem
+title: "3SAT polynomial-time many-one reduces to directed Hamiltonian cycle"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-reduction-gadget-and-interface-invariant, def-directed-hamiltonian-path-and-cycle-problems, def-polynomial-time-many-one-reduction, def-multigraph-loop-and-digraph]
+proof_strategy: direct
+sources:
+  scraped: []
+  references:
+    - title: "MIT 6.045J / 18.400J, Lecture 16: More NP-completeness"
+      url: "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/567d75f927ca3c11a819baee9ab260ac_MIT6_045JS11_lec16.pdf"
+    - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
+      url: "https://theory.cs.princeton.edu/complexity/book.pdf"
+
+---
+
+## Statement
+
+There is a polynomial-time many-one reduction from $3$-SAT to directed
+Hamiltonian cycle.
+
+More explicitly, for every $3$-CNF formula $\varphi$ one can construct in
+polynomial time a directed graph $D_\varphi$ with distinguished vertices
+$s_\varphi,t_\varphi$ such that
+
+1. $\varphi$ is satisfiable if and only if $D_\varphi$ has a directed
+   Hamiltonian path from $s_\varphi$ to $t_\varphi$; and
+2. after adjoining one fresh vertex $z_\varphi$ and the two arcs
+   $z_\varphi\to s_\varphi$ and $t_\varphi\to z_\varphi$, the resulting digraph
+   $D'_\varphi$ has a directed Hamiltonian cycle if and only if $\varphi$ is
+   satisfiable.
+
+## Facts & Assumptions
+
+**Given:** A $3$-CNF formula $ \varphi=C_1\land\cdots\land C_m. $
+
+Each clause is a disjunction of exactly three literal occurrences, where a literal is a Boolean variable or its negation; repeated occurrences are allowed. The formula is satisfiable when a truth assignment makes every clause true. The empty conjunction is true. The language $3$-SAT consists of the well-formed satisfiable encodings under explicit variable-name and clause-list coding; malformed strings are excluded.
+
+[L1] A polynomial-time many-one reduction is a total polynomial-time function preserving membership in both directions, by [[def-polynomial-time-many-one-reduction]].
+
+[L2] A gadget reduction must prove the construction bound and both directions of the witness translation, by [[def-reduction-gadget-and-interface-invariant]].
+
+[F1] Directed Hamiltonian paths and cycles are the decision problems from [[def-directed-hamiltonian-path-and-cycle-problems]].
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 If $m=0$, then $\varphi$ is the empty conjunction and is satisfiable. Let $D_\varphi$ be the one-vertex digraph and name its unique vertex both $s_\varphi$ and $t_\varphi$; it has the required one-vertex Hamiltonian path. Adjoining $z_\varphi$ and the two opposite arcs between $z_\varphi$ and $s_\varphi=t_\varphi$ gives a directed Hamiltonian cycle. This is the required constant-size output in the empty case. Assume henceforth that $m\ge1$, so at least one variable occurs. Enumerate the variables of $\varphi$ as $x_1,\ldots,x_n$ and the clauses as $C_1,\ldots,C_m$. For each variable $x_i$, create vertices $$ p_i,\ q_i,\ s_{i,0},\ldots,s_{i,m},\ \ell_{i,1},r_{i,1},\ldots,\ell_{i,m},r_{i,m}. $$ The **crossbar** of the gadget $X_i$ is the bidirected path $$ s_{i,0}\leftrightarrow \ell_{i,1}\leftrightarrow r_{i,1}\leftrightarrow s_{i,1} \leftrightarrow\cdots\leftrightarrow s_{i,m-1}\leftrightarrow \ell_{i,m} \leftrightarrow r_{i,m}\leftrightarrow s_{i,m}, $$ and we also add the four boundary arcs $$ p_i\to s_{i,0},\quad p_i\to s_{i,m},\quad s_{i,0}\to q_i,\quad s_{i,m}\to q_i. $$ Thus every Hamiltonian path from $p_i$ to $q_i$ inside $X_i$ must enter the crossbar at one end, traverse every crossbar vertex exactly once, and exit from the opposite end; equivalently it is either the left-to-right route through all clause pairs or the right-to-left route through all clause pairs. Identify $q_i$ with $p_{i+1}$ for $1\le i<n$, and write $s_\varphi:=p_1$, $t_\varphi:=q_n$. For each clause $C_j$, add one clause vertex $c_j$. If the literal $x_i$ occurs in $C_j$, add the two arcs $$ \ell_{i,j}\to c_j,\qquad c_j\to r_{i,j}; $$ if the literal $\neg x_i$ occurs in $C_j$, add $$ r_{i,j}\to c_j,\qquad c_j\to \ell_{i,j}. $$ If both literals occur, add both pairs of arcs. This completely specifies the digraph $D_\varphi$, which has $O(nm)$ vertices and arcs and is computable in polynomial time. [L2, F1, given, cases, construct]
+
+2.1 Suppose that $\varphi$ is satisfiable. In each gadget $X_i$, choose the left-to-right crossbar route if $x_i=true$ and the right-to-left route if $x_i=false$. Concatenating these routes through the identified vertices $q_i=p_{i+1}$ already yields a directed path from $s_\varphi$ to $t_\varphi$ visiting every gadget vertex exactly once. Now fix a clause $C_j$, and choose one literal of $C_j$ that is true under the satisfying assignment. If it is a positive occurrence of $x_i$, replace the local edge $\ell_{i,j}\to r_{i,j}$ on the left-to-right route by the detour $\ell_{i,j}\to c_j\to r_{i,j}$. If it is a negative occurrence of $x_i$, replace the local edge $r_{i,j}\to \ell_{i,j}$ on the right-to-left route by $r_{i,j}\to c_j\to \ell_{i,j}$. Doing this once for each clause visits every clause vertex exactly once and does not revisit any gadget vertex, because each detour leaves and re-enters the same clause pair. Hence $D_\varphi$ has a directed Hamiltonian path from $s_\varphi$ to $t_\varphi$. [L2, step 1.1, construct]
+
+2.2 Suppose conversely that $D_\varphi$ has a directed Hamiltonian path from $s_\varphi$ to $t_\varphi$. Consider the first departure from traversal of successive crossbars in one direction, with optional same-pair clause detours. Until such a departure, the preceding crossbar vertices have been visited and the succeeding ones have not. One possible departure would exit directly to $q_i$ from the same end that was just entered from $p_i$. This leaves the opposite end unvisited; its only later possible entry is from its crossbar neighbor, after which its exits to that neighbor and to the already visited $q_i$ are blocked. This is impossible. Every other possible departure is an arc to a clause vertex $c_j$: all other available unvisited successors continue the crossbar or its prescribed gadget connector. If the departure is from the first endpoint of its pair and does not return to the second endpoint, that second endpoint remains unvisited. Its only neighbors are its visited mate, the clause vertex just visited, and its next crossbar neighbor. It can later be entered only from the last of these, after which every exit goes to a visited vertex, although it is not $t_\varphi$. If instead the departure is from the second endpoint after its mate has already been visited, its next crossbar separator remains unvisited. An interior separator has only its two crossbar neighbors; entering it later from the other neighbor again leaves no unvisited exit. For a separator at the far end, its only possible incoming arcs are from the departed endpoint and $p_i$, both already visited with their successors fixed, so it cannot be entered later at all. These arguments are unchanged on reversing left and right and also cover clauses containing both signs of a variable. Consequently no first departure exists. Thus every clause visit is a same-pair detour, the gadgets are traversed in order, and each entire crossbar is traversed monotonically. Set $x_i=true$ exactly for a left-to-right traversal. The detour through every clause vertex has the orientation of a literal made true by this assignment, so every clause is satisfied. [L2, F1, step 1.1, cases]
+
+3.1 Now add one fresh vertex $z_\varphi$ and the two arcs $z_\varphi\to s_\varphi$ and $t_\varphi\to z_\varphi$. If $D_\varphi$ has a Hamiltonian path from $s_\varphi$ to $t_\varphi$, then adjoining $z_\varphi$ closes that path to a directed Hamiltonian cycle in $D'_\varphi$. Conversely, any directed Hamiltonian cycle in $D'_\varphi$ must pass through the fresh vertex $z_\varphi$, whose only outgoing arc is to $s_\varphi$ and whose only incoming arc is from $t_\varphi$. Deleting $z_\varphi$ from the cycle therefore yields a directed Hamiltonian path from $s_\varphi$ to $t_\varphi$ in $D_\varphi$. [F1, step 2.1, step 2.2, construct]
+
+4.1 Step 1.1 handles the empty formula and gives a polynomial-time construction for every well-formed $3$-CNF formula. For $m\ge1$, steps 2.1 and 2.2 prove the iff for directed Hamiltonian path, and step 3.1 converts that iff to directed Hamiltonian cycle. Extend the map to every input string by checking $3$-CNF syntax in polynomial time and sending any malformed string to the fixed one-vertex loopless digraph, which has no directed Hamiltonian cycle. By [L1] and [L2], the resulting total function is a polynomial-time many-one reduction from $3$-SAT to directed Hamiltonian cycle. [L1, L2, step 1.1, step 2.1, step 2.2, step 3.1, cases-exhaustive] ∎
+
+## Remarks
+
+For $m\ge1$, the two panels show the clause-$j$ segment of $X_i$ in step 1.1. Each double arrow denotes two opposite directed arcs. The upper panel shows the extra arcs when $x_i$ occurs in $C_j$; the lower panel shows those when $\neg x_i$ occurs. If both signs occur, both pairs of detour arcs are present, using the same vertex $c_j$. Other occurrences can also be incident to $c_j$; these are local segments, not entire gadgets.
+
+```tikz
+\begin{tikzpicture}[x=1.2cm,y=1cm,>=stealth]
+\node (a) at (0,0) {$s_{i,j-1}$};
+\node (b) at (2,0) {$\ell_{i,j}$};
+\node (c) at (4,0) {$r_{i,j}$};
+\node (d) at (6,0) {$s_{i,j}$};
+\node (e) at (3,1.2) {$c_j$};
+\draw[<->] (a) -- (b);
+\draw[<->] (b) -- (c);
+\draw[<->] (c) -- (d);
+\draw[->] (b) -- (e);
+\draw[->] (e) -- (c);
+\node at (3,2) {$x_i\in C_j$};
+\node at (3,-0.7) {left to right: $x_i=\mathrm{true}$};
+\node (f) at (0,-3.7) {$s_{i,j-1}$};
+\node (g) at (2,-3.7) {$\ell_{i,j}$};
+\node (h) at (4,-3.7) {$r_{i,j}$};
+\node (k) at (6,-3.7) {$s_{i,j}$};
+\node (l) at (3,-2.5) {$c_j$};
+\draw[<->] (f) -- (g);
+\draw[<->] (g) -- (h);
+\draw[<->] (h) -- (k);
+\draw[->] (h) -- (l);
+\draw[->] (l) -- (g);
+\node at (3,-1.7) {$\neg x_i\in C_j$};
+\node at (3,-4.4) {right to left: $x_i=\mathrm{false}$};
+\end{tikzpicture}
+```
+
+The labels $x_i\in C_j$ and $\neg x_i\in C_j$ mean literal occurrence in the clause. The crossbar continues through all clause indices: its boundary arcs are $p_i\to s_{i,0}$, $p_i\to s_{i,m}$, $s_{i,0}\to q_i$, and $s_{i,m}\to q_i$, with $q_i=p_{i+1}$ between gadgets. Step 2.1 replaces the selected pair edge by the matching two-arc detour. The proof, including the exclusion of other Hamiltonian traversals in step 2.2 and the cycle closure in step 3.1, is independent of the illustration.

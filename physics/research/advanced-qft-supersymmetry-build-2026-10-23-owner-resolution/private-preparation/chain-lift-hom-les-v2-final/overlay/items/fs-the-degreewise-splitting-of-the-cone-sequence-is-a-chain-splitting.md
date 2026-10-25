@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-degreewise-splitting-of-the-cone-sequence-is-a-chain-splitting.md

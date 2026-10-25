@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-finite-horizon-pomdp-piecewise-linear-convex-value.json
+  precheck: pass
 id: thm-finite-horizon-pomdp-piecewise-linear-convex-value
 kind: theorem
 title: "Finite-horizon POMDP values are piecewise-linear and convex"
@@ -26,11 +29,6 @@ proof_strategy: induction
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08"
@@ -114,3 +112,28 @@ where $V_h$ is the optimal expected $h$-step discounted reward. Thus $V_h$ is th
 ## Remarks
 
 The tree-count recurrence bounds the exhaustive candidate search, not the number of distinct vectors after duplicate removal. Exact witness pruning is value-preserving, but this theorem gives no guarantee that it leaves a small set. The finite-horizon assumption is essential to the finite policy-tree construction; no infinite-horizon piecewise-linear representation is asserted.
+
+For a concrete one-step illustration, take two states and three actions with reward vectors $\alpha_1=(1,0)$, $\alpha_2=(0,1)$, and $\alpha_3=(1/5,1/5)$. These are exactly $\Gamma_1$ for these rewards: the horizon-zero continuation is zero, so transitions and observations do not affect the one-step vectors. Write $b=(1-p,p)$, $0\le p\le1$. The dashed lines are the three candidate values; the thick line is $V_1(b)=\max\{1-p,p,1/5\}$. The first two vectors have witness intervals $[0,1/2]$ and $[1/2,1]$, respectively, sharing the tie at $p=1/2$. The third vector has no witness and can be removed. Filled endpoints indicate that both endpoint beliefs are included.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (-0.25,0) -- (6.7,0) node[right] {$p$};
+\draw[->] (0,-0.15) -- (0,3.7) node[above] {value};
+\draw[dashed] (0,0) -- (6,3);
+\draw[dashed] (0,3) -- (6,0);
+\draw[dashed] (0,0.6) -- (6,0.6);
+\draw[very thick] (0,3) -- (3,1.5) -- (6,3);
+\draw[dotted] (3,0) -- (3,1.5);
+\fill (0,3) circle (2pt);
+\fill (3,1.5) circle (2pt);
+\fill (6,3) circle (2pt);
+\node[below left] at (0,0) {$0$};
+\node[below] at (3,0) {$1/2$};
+\node[below] at (6,0) {$1$};
+\node[left] at (0,3) {$1$};
+\node[above] at (3,3.1) {$V_1(b)$};
+\node[above left] at (1.7,0.85) {$p$};
+\node[above right] at (4.3,0.85) {$1-p$};
+\node[right] at (6,0.6) {$1/5$};
+\end{tikzpicture}
+```

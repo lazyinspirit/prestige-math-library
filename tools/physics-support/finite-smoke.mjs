@@ -15,6 +15,7 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { penroseChecks } from './finite-smoke-penrose.mjs';
 
 const REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
 const argv = process.argv.slice(2);
@@ -87,6 +88,7 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  ...penroseChecks,
   'fd-newtonian-stress-admissibility': () => {
     // Restrict the authored residual to K=0, g=0, T=1. Evaluate tau:D
     // entry by entry, without using the proof's deviatoric decomposition.

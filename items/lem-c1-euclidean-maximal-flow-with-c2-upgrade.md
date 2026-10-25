@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-c1-euclidean-maximal-flow-with-c2-upgrade.json
+  precheck: pass
 id: lem-c1-euclidean-maximal-flow-with-c2-upgrade
 kind: lemma
 title: "C\u00b9 Euclidean maximal flows, variational dependence and the finite C\u00b2 upgrade"
@@ -13,8 +16,6 @@ aliases: []
 landmark: false
 proof_strategy: direct
 dependency_level: 1
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -25,13 +26,13 @@ sources:
 
 ## Statement
 
-Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain
-D⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹
-diffeomorphisms with inverse Φ_{−t}; $\partial_t\Phi=Y(\Phi)$ and $D_p\Phi$ is the
-unique solution V of $V′=DY(\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y
-is C², Φ and those flow boxes are C²; the second state variation W satisfies
-$W′=DY(\Phi)W+D²Y(\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are
-C² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal
+Let $U\subset\mathbb R^n$ be open and $Y:U\to\mathbb R^n$ be $C^1$. There is a unique maximal flow $\Phi$ on an open domain
+$D\subset\mathbb R\times U$ containing $\{0\}\times U$, and $\Phi$ is jointly $C^1$. Its time slices are local $C^1$
+diffeomorphisms with inverse $\Phi_{-t}$; $\partial_t\Phi=Y(\Phi)$ and $D_p\Phi$ is the
+unique solution $V$ of $V′=DY(\Phi)V$, $V(0)=I$. Each regular point has a $C^1$ flow box. If $Y$
+is $C^2$, $\Phi$ and those flow boxes are $C^2$; the second state variation $W$ satisfies
+$W′=DY(\Phi)W+D^2Y(\Phi)[Ve_i,Ve_j]$, $W(0)=0$. Individual trajectories of a $C^1$ field are
+$C^2$ in time. A trajectory remaining in a compact $K\subset\subset U$ cannot have a finite maximal
 endpoint. These Euclidean conclusions use no full AC or DC.
 
 ## Facts & Assumptions

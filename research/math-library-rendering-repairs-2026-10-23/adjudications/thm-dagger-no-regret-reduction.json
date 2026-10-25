@@ -1,0 +1,145 @@
+{
+  "id": "thm-dagger-no-regret-reduction",
+  "agent": "/root/rendering_repair_coordinator/dorl_026",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original three standalone tiles and frozen/current source show the full analytic reduction without an illustration. A converging inference diagram materially clarifies that FTL controls mixed-rollout loss, while the task-cost lemma requires learner own-occupancy loss; the mixing correction bridges them before selecting one policy. This is a warranted explanatory addition under the expanded diagram scope, not a claim that the original proof was incomplete.",
+      "action": "Appended final Remarks defining S_i, R_N, M_N and B_N, and a five-box TikZ inference diagram.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a proof-independent diagram summarizing FTL and expert mixing bounds, own-occupancy average, finite-policy selection, and task-cost conversion. Original title, body prefix including complete proof, and all frontmatter remain byte-identical.",
+  "source_lines_after": [
+    107,
+    109,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123
+  ],
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "data": "For i=1,...,N, theta_i belongs to K; ell:S x K -> [0,1]; d_pi_i and d_hatpi_i are normalized state probability vectors. L_i(theta_i) and S_i are real bounded expectations under different occupancies.",
+      "justification": "Local def-imitation-learning-and-expert-surrogate-loss Definition and theorem [F1], [F2], [A1]. Diagram arrows are deductions, explicitly not policy-space maps."
+    },
+    {
+      "relation": "N^{-1} sum_i L_i(theta_i) <= epsilon_N + R_N/N and sum_i min(1,T beta_i) <= M_N.",
+      "justification": "The top boxes reproduce theorem steps 1.1 and 1.2 exactly with R_N=1+(4G^2/mu)H_{N-1} and M_N=k_alpha(q_T+2); these abbreviations retain the harmonic and geometric-mixing errors."
+    },
+    {
+      "relation": "Both top boxes feed N^{-1} sum_i S_i <= B_N.",
+      "justification": "Theorem [F4] and local lem-dagger-mixture-occupancy apply to g(s)=ell(s,theta_i) in [0,1], giving S_i <= L_i(theta_i)+min(1,T beta_i). Average, then insert both top bounds (steps 2.1 and 3.1) to obtain B_N=epsilon_N+(R_N+M_N)/N."
+    },
+    {
+      "relation": "There exists i in {1,...,N} with S_i <= B_N, with hatpi=hatpi_i.",
+      "justification": "N is positive and finite. Some S_i is at most their arithmetic average; otherwise summing strict inequalities contradicts the average. This is exactly step 3.1, and makes no claim that the last iterate is selected."
+    },
+    {
+      "relation": "J(hatpi) <= J(pi*) + uT B_N.",
+      "justification": "Theorem [A4], [F5] and local lem-dagger-task-cost-from-expert-surrogate give J(hatpi_i)-J(pi*) <= uT S_i. Since u>=0 and T>=1, substituting S_i<=B_N preserves direction (step 4.1), including u=0."
+    },
+    {
+      "data": "Graph has five boxes and four inference arrows: ftl -> avg, mix -> avg, avg -> pick, pick -> cost. Indegrees are 0,0,2,1,1; outdegrees 1,1,1,1,0.",
+      "justification": "All four actual rendered arrow shafts and downward arrowheads were inspected in standalone original-resolution native tile 03. This is an acyclic inference graph; no closing edge, open/closed point, crossing, or commutativity assertion is intended. The original rigorous proof remains intact and independent."
+    }
+  ],
+  "evidence": {
+    "before_raw_sha256": "8d057337cfcd6772eaa47013ffb5d9c9ec4ef37f53e28eeeb16c5a8f3297c0bb",
+    "current_raw_sha256": "a19d5cebe698e2ad0eec4fd9176369d0380532811eafe9e86f2c0aa92d4772d5",
+    "guard": "Raw before SHA verified immediately in the same script before append; archived before bytes equalled current bytes.",
+    "protected_metadata": "Complete original file preserved byte-for-byte as prefix; only final Remarks appended. In particular status: published is unchanged.",
+    "original_screenshot_path_discrepancy": "Recorded evidence_dir includes /diagram-supplement, but its screenshots are absent. Authentic same-category screenshots were located one directory above; all three SHA256 values exactly equal intake hashes.",
+    "original_views": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-dagger-no-regret-reduction--01.png",
+        "sha256": "ff38e779116c1ea1596dad14bc9916044197918f2fd1064a4742463c9d0a0d44",
+        "view": "standalone original-resolution"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-dagger-no-regret-reduction--02.png",
+        "sha256": "6968928212c7a1a5928c1f7abf58aae5d05fc0d237539df4dd22ae736221c5b5",
+        "view": "standalone original-resolution"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/thm-dagger-no-regret-reduction--03.png",
+        "sha256": "beb46990820de1e4353081baac6b6674c3af460d6f4f200999cea9b072af8d4b",
+        "view": "standalone original-resolution"
+      }
+    ],
+    "native_preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl026 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-dagger-no-regret-reduction --out research/math-library-rendering-repairs-2026-10-23/previews/dorl026-native",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl026-native/manifest.json",
+      "manifest_sha256": "3388732c71ccbda5816a344ac8a6d485fe273b47d6e12226e409a903c5570860",
+      "source_sha256": "a19d5cebe698e2ad0eec4fd9176369d0380532811eafe9e86f2c0aa92d4772d5",
+      "html_sha256": "ff1ad820c7c437dbbe13f275e39ffd42bfae88dc704580fdf4434f20690eed7e",
+      "reference_map_sha256": "aab9b2dcee7e24c069fa99763c6eaf39b3262fb93fef2d3360e56254b95f75f2",
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": [],
+      "inspected_tiles": [
+        "research/math-library-rendering-repairs-2026-10-23/previews/dorl026-native/screenshots/thm-dagger-no-regret-reduction--01.png",
+        "research/math-library-rendering-repairs-2026-10-23/previews/dorl026-native/screenshots/thm-dagger-no-regret-reduction--02.png",
+        "research/math-library-rendering-repairs-2026-10-23/previews/dorl026-native/screenshots/thm-dagger-no-regret-reduction--03.png"
+      ],
+      "visual_result": "All fresh tiles viewed standalone at original resolution. Diagram text, outlined black-interior boxes and four arrows have visible white contrast on black; no clipping, overlap or pale fills. No endpoint point/ring semantics. Five boxes/four edges are visible. Native SVG is runtime-dorl026/pi-tikz-cache/4ee86f3535351f8ab29c031c085c3943.svg."
+    }
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-dagger-no-regret-reduction.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-dagger-no-regret-reduction.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-dagger-no-regret-reduction.md",
+            "item_id": "thm-dagger-no-regret-reduction",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-dagger-no-regret-reduction.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview, not production-route coverage. Preview reference map records 16 unrelated parse diagnostics; scoped item and every displayed local supplier title rendered. No HTTP/live website visited."
+  ]
+}

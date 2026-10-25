@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-lower-rank-artin-letters-conjugate-x-letters-within-the-free-kernel.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-it-operational-rate-distortion-function.json
+  precheck: n/a
 id: def-it-operational-rate-distortion-function
 kind: definition
 title: "Fixed-length operational rate-distortion functions"
@@ -14,12 +17,6 @@ axiom_use: "No choice axiom is used in the definition."
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Robert M. Gray, Source Coding Theory, first edition"
@@ -39,3 +36,24 @@ For each $D\ge0$, define the expected-distortion operational rate $R_{\mathrm{op
 $$\text{for every }\varepsilon>0,\qquad \mathbb P\!\left(d_n(X^n,\widehat X^n)>D+\varepsilon\right)\longrightarrow0.$$
 
 The infimum of an empty set of admissible code sequences is $+\infty$. The expected and positive-slack excess criteria are separate definitions. An exact-threshold condition $\mathbb P(d_n>D)\to0$ is not part of either definition.
+
+
+## Remarks
+
+The diagram shows the deterministic code interface and the two arguments of the block-distortion comparison. The lower arrows supply arguments to $d_n$; they are not additional coding maps. The message alphabet has $M_n$ elements, giving rate $n^{-1}\log_2 M_n$ bits per source symbol.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\path[use as bounding box] (-1,-2.7) rectangle (10,0.7);
+\node (source) at (0,0) {$X^n\in\mathcal X^n$};
+\node (message) at (4.5,0) {$f_n(X^n)\in[M_n]$};
+\node (reconstruction) at (9,0) {$\widehat X^n\in\widehat{\mathcal X}^{\,n}$};
+\draw[->] (source) -- node[above] {$f_n$} (message);
+\draw[->] (message) -- node[above] {$g_n$} (reconstruction);
+\node (distortion) at (4.5,-2) {$d_n(X^n,\widehat X^n)=\frac1n\sum_{t=1}^{n}d(X_t,\widehat X_t)$};
+\draw[->] (source.south) -- (0,-2) -- (distortion.west);
+\draw[->] (reconstruction.south) -- (9,-2) -- (distortion.east);
+\end{tikzpicture}
+```
+
+For a sequence of such codes, the expected-distortion criterion bounds $\limsup_n\mathbb E d_n(X^n,\widehat X^n)$ by $D$. Separately, the positive-slack excess criterion requires $\mathbb P(d_n(X^n,\widehat X^n)>D+\varepsilon)\to0$ for every $\varepsilon>0$. The picture asserts neither an equivalence between these criteria nor a shape for either operational rate-distortion function.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-continuous-singular-simplex-and-real-singular-chain-group.md

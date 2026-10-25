@@ -1,0 +1,105 @@
+{
+  "id": "alg-dagger",
+  "agent": "/root/rendering_repair_coordinator/dorl_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The four-step interactive algorithm has a concrete feedback loop whose two uses of the expert are easily conflated: selecting an executed action and labeling all visited states. The original standalone tile contains only prose. A six-stage flow materially clarifies the rollout/label/update separation without altering the algorithm. This is a warranted explanatory addition under the expanded diagram scope, not a failed existing formula.",
+      "action": "Added a final Remarks explanation and TikZ loop.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Append a six-node DAgger rollout, aggregation and cumulative-loss FTL loop; retain the entire original carrier as an unchanged byte prefix.",
+  "source_lines_after": {
+    "remarks": [
+      63,
+      65
+    ],
+    "diagram": [
+      67,
+      82
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Learner parameter theta_i in K; stationary learner pi_theta_i and deterministic expert pi*:S -> A(s).",
+      "check": "The learner-to-mixture arrow uses exactly hat pi_i=pi_theta_i. The convex per-decision mixture beta_i pi*+(1-beta_i)hat pi_i is a valid action distribution for beta_i in [0,1], as specified in Definition step 1 and the local imitation-learning definition. The Remarks preserve independent action-selection coins."
+    },
+    {
+      "data": "m trajectories indexed j=1,...,m, each with state times t=0,...,T-1.",
+      "check": "The mixture-to-rollout arrow executes the selected action; rollout-to-data queries pi*(S_ijt) on every visited state, independently of whether that action was executed. Definition steps 1-2 explicitly distinguish execution from labeling; no arrow sends the saved label back as an automatic rollout action."
+    },
+    {
+      "data": "D_i=D_{i-1} multiset-union {(S_ijt,pi*(S_ijt))}_{j,t}.",
+      "check": "This is precisely Definition step 2, with multiplicity retained explicitly in the adjacent prose and uplus notation. S_ijt belongs to S and pi*(S_ijt) belongs to A(S_ijt), so each recorded pair has the required state/action type."
+    },
+    {
+      "data": "Cumulative empirical objective theta -> sum_{r=1}^i Lhat_r(theta), theta in K.",
+      "check": "Definition step 3 defines Lhat_r as the average of ell(S_rjt,theta) over mT samples. The aggregated labeled blocks retain the states and expert labels of all rounds; the same mT per round means they supply this cumulative objective. The figure does not substitute the population idealization."
+    },
+    {
+      "data": "Supplied deterministic FTL selector and next-round return arrow.",
+      "check": "Definition step 4 requires attained minimizers and sets theta_{i+1} to that selector\u2019s choice in argmin over K of the cumulative empirical objective. The return arrow advances the learner index only when another training round exists, explicitly stated in Remarks; no extra N+1 rollout is asserted."
+    },
+    {
+      "data": "Six directed stages with explicit final update-to-learner segment.",
+      "check": "Native standalone output visibly has all six boxes and six arrows, including the upward closing update-to-current-learner edge. Each box has one incoming and one outgoing flow edge. These arrows describe data/control flow, not equalities or a commutative categorical diagram. No open/closed endpoints or crossings are asserted."
+    }
+  ],
+  "checks": {
+    "before_sha_guard": {
+      "expected": "674c1829607e4f3d452b123dafa17e8f9e59c8157cc677ec8b93bf19497bf756",
+      "matched": true
+    },
+    "original_prefix_unchanged": true,
+    "protected_metadata_and_status": "Original frontmatter and entire original body remain byte-identical; status remains published.",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-dagger.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-dagger.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0
+      },
+      "status": "not-applicable"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/alg-dagger.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "native_preview": {
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl002-final/manifest.json",
+      "source_sha256": "42ab2f58d74b14f3a1aba8e425b2f6163a4bf0597d20e7216034ae5469275da1",
+      "html_sha256": "71b3023d344893206eb3be9f3d85658d5179677b9837cacc5bf7b2fffbddf814",
+      "reference_map_sha256": "fa75dab0ac7b5392e19c70aa64e51eab4c66d3280b4176b8cabb50cffcbb119b",
+      "standalone_diagram": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl002/diagram-final.png",
+      "inspection": "Inspected original-resolution original tile, fresh native first tile, and final standalone SVG screenshot. Native compilation succeeded; six boxes and arrows are visible, with no overlaps or clipping. Labels/strokes are light on the black native background; boxes have no pale fills. The SVG uses none/currentColor paint attributes. No endpoint rings apply.",
+      "scope": "Local native ItemBody SSR preview with network blocked; not production route coverage."
+    }
+  },
+  "evidence_path_resolution": {
+    "declared_missing": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/alg-dagger--01.png",
+    "resolved_authentic": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-dagger--01.png",
+    "sha256": "c2f91dfd2974e41050ff53c2072e7c4a65e66e9d27733311ee105d98789228e4",
+    "recorded_hash_matches": true
+  },
+  "remaining_issues": []
+}

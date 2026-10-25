@@ -1,0 +1,14 @@
+# Batch 58: review 1
+
+Run: advanced-qft-supersymmetry-build-2026-10-23
+Batch: 58
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qftx-gauge-group-sphere-homotopy, qftx-gauge-group-sphere-homotopy-examples
+Items: lem-qftx-parametric-vector-bundle-section-smoothing, def-qftx-mapping-cone-hopf-invariant, def-qftx-suspension-pinch-map, lem-qftx-hopf-generator-and-cone, lem-qftx-folded-product-attachment-suspends-to-zero, lem-qftx-suspended-hopf-composite-adem-obstruction, lem-qftx-special-unitary-column-fibration, lem-qftx-low-unitary-homotopy-inputs, lem-qftx-pi5-special-unitary-nonzero, lem-qftx-parametric-gauge-smoothing, lem-qftx-sphere-gauge-evaluation-fibration, lem-qftx-based-gauge-sphere-homotopy, thm-qftx-reduced-gauge-group-sphere-nontriviality, lem-qftx-section-retract-obstruction, ex-qftx-sphere-gauge-s3-components
+Consolidated findings: [{"id":"lem-qftx-low-unitary-homotopy-inputs","type":"prerequisite","reason":"Step 2.1 applies the unreduced two-cone Freudenthal map to the reduced-suspension class η₃ without supplying a comparison. Use the published lem-freudenthal-identifies-the-eventual-suspension-system-for-spheres at n=2, k=1, or prove the based quotient comparison locally. The unchanged claim is used by lem-qftx-pi5-special-unitary-nonzero, thm-qftx-reduced-gauge-group-sphere-nontriviality, and ex-qftx-sphere-gauge-s3-components."},{"id":"lem-qftx-folded-product-attachment-suspends-to-zero","type":"local","reason":"Step 3.1 uses additivity of the reduced suspension map on π₃ to infer 2[Σh]=0 from [β]=2[h], but neither supplies that homomorphism property nor proves it. State the pinch compatibility or give a short local proof; the statement and Hopf-invariant calculation need not change."}]
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

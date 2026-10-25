@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-lyapunov-interpolation-inequality-for-l-p-norms.json
+  precheck: pass
 id: thm-lyapunov-interpolation-inequality-for-l-p-norms
 kind: theorem
 title: "Lyapunov interpolation inequality for $L^p$ norms"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-holder-inequality-for-integrals, def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space]
 proof_strategy: "If 1/p = theta/p_0 + (1 - theta)/p_1, rewrite |f|^p as |f|^(theta p)|f|^((1 - theta)p) and apply Holder with conjugate exponents p_0/(theta p) and p_1/((1 - theta)p)."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -44,7 +44,7 @@ $$\|f\|_p\le\|f\|_{p_0}^{\theta}\|f\|_{p_1}^{1-\theta}.$$
 
 ## Proof
 
-**Proof technique:** If $1/p = \theta/p_0 + (1 - \theta)/p_1$, rewrite $|f|^p$ as the product $|f|^{\theta p}|f|^{(1-\theta)p}$ and apply Holder with conjugate exponents $p_0/(\theta p)$ and $p_1/((1-\theta)p)$.
+**Proof technique:** Split the interpolated power of the absolute value into two factors and apply Holder's inequality with the conjugate exponents determined by the interpolation relation.
 
 1.1 Put [L1, L2, L3, given, algebra] $$a:=\frac{p_0}{\theta p},\qquad b:=\frac{p_1}{(1-\theta)p}.$$ Then $$\frac1a+\frac1b=\frac{\theta p}{p_0}+\frac{(1-\theta)p}{p_1}=1,$$ so [L2] makes $a$ and $b$ conjugate exponents. Also $$\left(|f|^{\theta p}\right)^a=|f|^{p_0},\qquad \left(|f|^{(1-\theta)p}\right)^b=|f|^{p_1}.$$ Applying [L1] to the factors $|f|^{\theta p}$ and $|f|^{(1-\theta)p}$ therefore yields $$\int |f|^p\,d\mu\le\left(\int |f|^{p_0}\,d\mu\right)^{\theta p/p_0}\left(\int |f|^{p_1}\,d\mu\right)^{(1-\theta)p/p_1}=\|f\|_{p_0}^{\theta p}\|f\|_{p_1}^{(1-\theta)p}.$$ [L1, L2, L3, given, algebra]
 

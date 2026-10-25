@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-unique-factorisation-of-ideals-in-dedekind-domains.md

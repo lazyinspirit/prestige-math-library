@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-parabolic-mackey-formula-for-finite-gl-n.json
+  precheck: pass
 id: thm-parabolic-mackey-formula-for-finite-gl-n
 kind: theorem
-title: Parabolic Mackey formula for finite GL_n
+title: Parabolic Mackey formula for finite $\operatorname{GL}_n$
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -19,9 +22,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf"
     - title: "Jay Taylor, Finite Reductive Groups - Harish-Chandra section, printed pp. 41-43"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement

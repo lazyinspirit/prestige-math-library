@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-tietze-equivalent-presentation-can-change-solvability-of-the-word-problem.md

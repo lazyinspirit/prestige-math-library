@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-distance-function-lattice-is-dense-on-a-compact-metric-space.md

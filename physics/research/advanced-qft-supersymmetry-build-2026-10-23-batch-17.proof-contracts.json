@@ -1,0 +1,333 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "17",
+  "level": 2,
+  "scope": [
+    "def-aqft-scheme-and-wilson-coefficients",
+    "thm-aqft-truncated-coupled-rge-wellposedness",
+    "ex-aqft-coupled-rge-linear-mixing"
+  ],
+  "contracts": {
+    "def-aqft-scheme-and-wilson-coefficients": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The definition assumes a supplied quotient basis with N >= 1; it does not define coordinates for the zero-dimensional case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition, trajectory equation: A supplied zero beta vector field is allowed; every trajectory satisfying its equation is constant on its interval."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition, realification formula: N=1 is included and the realification maps one complex coordinate isometrically to two real coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The quotient, relation space, ordered basis, scale interval, coordinate maps, and beta field are inputs; the definition asserts no existence or physical completeness theorem for them."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition, logarithmic-scale interval: J is an open interval in positive scales and its logarithmic image I is open; no endpoint regularity or global-flow conclusion is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: A basis is supplied as part of the datum. The definition makes no simultaneous selection from a family of quotient spaces and carries no Axiom-of-Choice hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition supplies the quotient, coordinate maps and beta field independently and explicitly says the coordinate maps need not solve the supplied RG equation. It asserts no equivalence between scheme data and trajectories."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Writing a supplied complex-linear flow as C'=Gamma(t)C is a convention for its realification, not a converse reconstruction of a QFT scheme or beta function from a curve; the Definition disclaims that identification."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This is a definition of supplied mathematical data and conventions; it makes no finite calculation or quotient-existence claim.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Independently read the current Definition and both batch-16 supplier Definitions before the level-4 consumer. The fixed-weight quotient V_D/R_D and finite ordered representative basis are supplied; N>=1 excludes the zero-dimensional quotient without asserting its impossibility. The coefficient expression has weight d-(d-4)=4; rho_N is bijective and preserves the displayed Euclidean norm. J is positive and contains mu_0, hence its logarithmic image is open and contains zero. Scheme coordinate maps, beta and their compatibility are separate inputs; no regularity of R_mu, computed beta, physical completeness, matching or truncation-error claim is inferred. A zero beta field is allowed, N=1 works, endpoint/global existence is not asserted, and no simultaneous basis selection or AC is used. Manohar sections 3.2 and 5.10 and Burgess section 4.1.3 were opened for convention context only; they do not prove an arbitrary quotient or supplied flow. Reader and refuter raise no defect against this definition. No diagrams occur or are required."
+      }
+    },
+    "thm-aqft-truncated-coupled-rge-wellposedness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-scheme-and-wilson-coefficients",
+          "source_section": "Definition",
+          "quote": "Work in four spacetime dimensions and natural units $c=\\hbar=1$. Fix an\nengineering weight $d\\in\\mathbb Q$ and take as input a finite-dimensional\ncomplex quotient $V=\\mathcal Q_d$ of local operators at that fixed weight, with\nan ordered basis of representatives $O_1,\\ldots,O_N$ and $N=\\dim_{\\mathbb C}V\\ge1$.\nThe quotient and its declared relations are supplied data; this definition does\nnot assert that every relation relevant to an EFT, observable, or infinite\noperator tower has been included. Each $O_i$ has the same engineering weight\n$d$. For a fixed cutoff $\\Lambda>0$ of mass dimension one, a coefficient vector\n$C=(C_1,\\ldots,C_N)\\in\\mathbb C^N$ determines the formal coefficient\nexpression in $V$\n$$\\sum_{i=1}^N\\frac{C_i O_i}{\\Lambda^{d-4}}.$$\nEach $C_i$ is dimensionless, and each summand has mass dimension four. This is\na formal expression in the supplied quotient, not a constructed action. No\nHermiticity or reality condition is imposed; a real-action condition is\nadditional conjugation data.\n\nA finite scheme record consists of a nonempty set $B$ of input labels, an open\ninterval $J\\subset(0,\\infty)$ of renormalization scales, and supplied\ncoefficient-coordinate maps\n$$\\mathcal R_\\mu:B\\longrightarrow\\mathbb C^N\\qquad(\\mu\\in J).$$\nThe maps encode the chosen subtraction and normalization convention and are\nnot constructed here. For $b\\in B$, the scale-dependent Wilson coefficient\nvector is $C_{\\mathcal R}(\\mu;b):=\\mathcal R_\\mu(b)$. The scale $\\mu$ and\ncutoff $\\Lambda$ are distinct inputs. Choose a reference scale $\\mu_0\\in J$\nand set\n$$t:=\\log(\\mu/\\mu_0),\\qquad I:=\\{\\log(\\mu/\\mu_0):\\mu\\in J\\};$$\nthen $t$ is dimensionless and $I$ is an open interval containing $0$.\n\nUse the Euclidean norm $\\|C\\|_2^2=\\sum_{i=1}^N|C_i|^2$ on $\\mathbb C^N$.\nDefine the realification $\\rho_N:\\mathbb C^N\\to\\mathbb R^{2N}$ by\n$$\\rho_N(C_1,\\ldots,C_N)=(\\operatorname{Re}C_1,\\operatorname{Im}C_1,\\ldots,\\operatorname{Re}C_N,\\operatorname{Im}C_N).$$\nWith the Euclidean norm on $\\mathbb R^{2N}$, $\\rho_N$ is a real-linear\nisometry. A supplied finite-dimensional truncated RG datum for this scheme\nis an open set $\\Omega\\subset I\\times\\mathbb R^{2N}$ and a supplied\ncontinuous map $\\beta:\\Omega\\to\\mathbb R^{2N}$. A truncated RG trajectory is\na continuously differentiable curve $C:I'\\to\\mathbb C^N$, on an interval\n$I'\\subset I$ for which $(t,\\rho_N(C(t)))\\in\\Omega$, satisfying\n$$\\frac{d}{dt}\\rho_N(C(t))=\\beta(t,\\rho_N(C(t))).$$\nThe components of $\\beta$ are the beta functions under this logarithmic-scale\nconvention. If the supplied flow is complex-linear, with a supplied matrix\nfunction $\\Gamma:I'\\to\\mathbb C^{N\\times N}$, its equation can be written\n$C'=\\Gamma(t)C$, where the real-coordinate vector field is\n$\\beta(t,\\rho_N(C))=\\rho_N(\\Gamma(t)C)$. In this column-vector convention,\n$\\Gamma$ is called the anomalous-dimension matrix. A scheme record does not\nassert that its coefficient-coordinate maps solve a supplied RG equation; that\nrelation, the entries of $\\beta$, and any matching map are separate inputs.\nThis definition calculates no QFT beta function and supplies no bound on\nomitted perturbative or higher-dimension terms.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ with $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, and let $F:D\\to\\mathbb R^n$. The map $F$ is **locally Lipschitz in the state variable, locally uniformly in time**, if every compact time-state cylinder $C\\subseteq D$ has a finite $L\\ge0$ such that\n\n$$\\|F(t,x)-F(t,y)\\|_2\\le L\\|x-y\\|_2$$\n\nwhenever $(t,x),(t,y)\\in C$ have the same time coordinate.\n\nOn every compact time-state cylinder the state-variable inequality holds with one finite constant $L$. More generally, let $p\\ge1$, let $\\Lambda\\subseteq\\mathbb R^p$, let $D_\\Lambda\\subseteq\\mathbb R\\times\\mathbb R^n\\times\\Lambda$ be open in its relative Euclidean topology, and let $F:D_\\Lambda\\to\\mathbb R^n$. The parameter family is **locally Lipschitz in the state variable, locally uniform in time and parameters** when every compact time-state-parameter cylinder $C\\subseteq D_\\Lambda$ has one finite $L\\ge0$ such that\n\n$$\\|F(t,x,\\lambda)-F(t,y,\\lambda)\\|_2\\le L\\|x-y\\|_2$$\n\nwhenever $(t,x,\\lambda),(t,y,\\lambda)\\in C$ have the same time and parameter coordinates.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\Omega$ is open and $(t_0,x_0)\\in\\Omega$, choose $r,h_0>0$ so the compact cylinder $K=[t_0-h_0,t_0+h_0]\\times\\overline B(x_0,2r)$ lies in $\\Omega$. Continuity of $\\beta$ on $K$ gives a finite bound $M$, and [F3] gives a single state-Lipschitz constant $L$ there. Choose $0<h\\le h_0$ with $h(M+1)\\le r$ and $h(L+1)<1$; then $hM\\le r$ and $Lh<1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $y\\in B(x_0,r)$, the cylinder $[t_0-h,t_0+h]\\times\\overline B(y,r)$ lies in $K$. Its vector-field and Lipschitz bounds are at most $M$ and $L$. Applying [F4] with these bounds and the inequalities from step 1.1 gives a unique solution $x_y$ on this same interval, with graph in that cylinder. The common-interval uniqueness clause of [F4] gives agreement on every larger common interval containing $t_0$. The same reasoning applies to every $z\\in B(x_0,r)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Take $y,z\\in B(x_0,r)$ and put $a=\\|y-z\\|_2$ and $u(t)=\\|x_y(t)-x_z(t)\\|_2$. By [F2] and [F5], $x_y(t)-x_z(t)=y-z+\\int_{t_0}^{t}g(s)\\,ds$, where $g(s):=\\beta(s,x_y(s))-\\beta(s,x_z(s))$ is continuous on the closed interval between $t_0$ and $t$. For continuous $g:[a_0,b_0]\\to\\mathbb R^{2N}$ with $a_0\\le b_0$, define its vector integral componentwise by $\\int_{a_0}^{b_0}g=(\\int_{a_0}^{b_0}g_1,\\ldots,\\int_{a_0}^{b_0}g_{2N})$, with each coordinate integral the Riemann integral. If $v=\\int_{a_0}^{b_0}g\\ne0$, set $e=v/\\|v\\|_2$; using the Euclidean inner product $\\langle p,q\\rangle=\\sum_{j=1}^{2N}p_jq_j$ and linearity of the scalar Riemann integral gives $\\|v\\|_2=\\int_{a_0}^{b_0}\\langle e,g(s)\\rangle\\,ds$. Since $\\|e\\|_2=1$ and $0\\le\\|g(s)-\\langle e,g(s)\\rangle e\\|_2^2=\\|g(s)\\|_2^2-\\langle e,g(s)\\rangle^2$, we have $\\langle e,g(s)\\rangle\\le\\|g(s)\\|_2$, so $\\|v\\|_2\\le\\int_{a_0}^{b_0}\\|g(s)\\|_2\\,ds$; the same inequality is immediate if $v=0$. Reversing orientation changes the vector integral only by a sign. Since both graphs lie in $K$, [F3] gives $\\|g(s)\\|_2\\le L u(s)$ for each $s$ between $t$ and $t_0$; the triangle inequality and the preceding estimate, applied on $[\\min(t,t_0),\\max(t,t_0)]$, yield\n$$u(t)\\le a+L\\int_{\\min(t,t_0)}^{\\max(t,t_0)}u(s)\\,ds.$$\nMoreover, each curve remains within radius $r$ of its own initial value; because $y,z\\in B(x_0,r)$, this gives $u(t)\\le4r$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $t\\ne t_0$, set $d=|t-t_0|$, $\\varepsilon=\\operatorname{sgn}(t-t_0)$, and $v(q)=u(t_0+\\varepsilon q)$ for $0\\le q\\le d$. Step 3.1 gives $v(q)\\le a+L\\int_0^qv(s)\\,ds$ and $v\\le U:=4r$. Repeated substitution, by induction on $m\\ge1$, yields\n$$v(d)\\le a\\sum_{j=0}^{m-1}\\frac{(Ld)^j}{j!}+U\\frac{(Ld)^m}{m!}.$$\nFor $m=1$, use $v\\le U$ in the integral remainder. The induction step integrates each power $s^j$ and uses $\\int_0^d s^j\\,ds=d^{j+1}/(j+1)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For fixed $Ld$, the remainder $(Ld)^m/m!$ tends to zero since the ratio of successive terms is $Ld/(m+1)\\to0$, and the partial sums converge to $e^{Ld}$. Letting $m\\to\\infty$ in step 4.1 gives $u(t)\\le a e^{L|t-t_0|}$. At $t=t_0$ the same estimate is equality. This is the required continuous-dependence bound.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: The coefficient dimension is N >= 1, and the argument is for a nonempty open time-state domain around the given point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 4.1 and 5.1: The choice h(M+1) <= r and h(L+1) < 1 remains valid when M=0 or L=0; the factorial remainder and estimate also remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1\u20135.1: Every argument is dimension-independent for finite N >= 1 and includes N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20135.1: The proof requires no invertibility, nonzero eigenvalue, diagonalization, or nonzero beta value."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1\u20132.1: The compact cylinder is chosen inside the open domain and the claim is only on its short closed subinterval; no behavior at the boundary or at infinite scale is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof selects one compact cylinder and constants for the fixed initial point and uses a finite-dimensional local theorem; it does not select a family of bases or invoke full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way local well-posedness assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way local well-posedness assertion, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The claim is for an arbitrary continuous locally Lipschitz vector field; no finite numerical check replaces the compact-cylinder and integral-inequality proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Independently checked current F1-F5 suppliers and all five proof steps, reader:17:1 and refuter:17:1, after completing the level-3 definition review. F3 now explicitly defines products [a,b] x closed B(c,R), a<=b and R>0, and makes the locally uniform hypothesis precise under that convention. Published supplier imprecision is nonfatal-recorded, not falsely certified or edited. Openness supplies K around the given point, continuity supplies finite M>=0, and h(M+1)<=r and h(L+1)<1 work at M=0 or L=0. Every nearby-centered radius-r cylinder is inside K; the quantitative Picard hypotheses and one-sided endpoint solution convention match. Volterra is used on nondegenerate compact intervals on either side of t0; at t0 equality is separate. The vector norm estimate follows from the explicit projection-square identity without assuming an extra inequality. Iteration is uniform in 0<=q<=d, the factorial remainder tends to zero, and the exponential estimate includes y=z, L=0 and t=t0. Common-interval uniqueness is the supplier clause; realification gives C1 complex curves. No AC, physical premise, global existence, matching or omitted-term accuracy claim is made. Teschl section 2.2 equations (2.10)-(2.20), Theorem 2.2 and proof, and Viossat-Tonon section 1.5 local proof and common-interval Lemma 1.5.9 were read. External source typographical weaknesses are not copied into the local closed-cylinder argument. No diagrams are present or needed. The example consumer has its own global sqrt(6) Lipschitz bound and is unaffected by this proof-only clarification."
+      }
+    },
+    "ex-aqft-coupled-rge-linear-mixing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-scheme-and-wilson-coefficients",
+          "source_section": "Definition",
+          "quote": "Work in four spacetime dimensions and natural units $c=\\hbar=1$. Fix an\nengineering weight $d\\in\\mathbb Q$ and take as input a finite-dimensional\ncomplex quotient $V=\\mathcal Q_d$ of local operators at that fixed weight, with\nan ordered basis of representatives $O_1,\\ldots,O_N$ and $N=\\dim_{\\mathbb C}V\\ge1$.\nThe quotient and its declared relations are supplied data; this definition does\nnot assert that every relation relevant to an EFT, observable, or infinite\noperator tower has been included. Each $O_i$ has the same engineering weight\n$d$. For a fixed cutoff $\\Lambda>0$ of mass dimension one, a coefficient vector\n$C=(C_1,\\ldots,C_N)\\in\\mathbb C^N$ determines the formal coefficient\nexpression in $V$\n$$\\sum_{i=1}^N\\frac{C_i O_i}{\\Lambda^{d-4}}.$$\nEach $C_i$ is dimensionless, and each summand has mass dimension four. This is\na formal expression in the supplied quotient, not a constructed action. No\nHermiticity or reality condition is imposed; a real-action condition is\nadditional conjugation data.\n\nA finite scheme record consists of a nonempty set $B$ of input labels, an open\ninterval $J\\subset(0,\\infty)$ of renormalization scales, and supplied\ncoefficient-coordinate maps\n$$\\mathcal R_\\mu:B\\longrightarrow\\mathbb C^N\\qquad(\\mu\\in J).$$\nThe maps encode the chosen subtraction and normalization convention and are\nnot constructed here. For $b\\in B$, the scale-dependent Wilson coefficient\nvector is $C_{\\mathcal R}(\\mu;b):=\\mathcal R_\\mu(b)$. The scale $\\mu$ and\ncutoff $\\Lambda$ are distinct inputs. Choose a reference scale $\\mu_0\\in J$\nand set\n$$t:=\\log(\\mu/\\mu_0),\\qquad I:=\\{\\log(\\mu/\\mu_0):\\mu\\in J\\};$$\nthen $t$ is dimensionless and $I$ is an open interval containing $0$.\n\nUse the Euclidean norm $\\|C\\|_2^2=\\sum_{i=1}^N|C_i|^2$ on $\\mathbb C^N$.\nDefine the realification $\\rho_N:\\mathbb C^N\\to\\mathbb R^{2N}$ by\n$$\\rho_N(C_1,\\ldots,C_N)=(\\operatorname{Re}C_1,\\operatorname{Im}C_1,\\ldots,\\operatorname{Re}C_N,\\operatorname{Im}C_N).$$\nWith the Euclidean norm on $\\mathbb R^{2N}$, $\\rho_N$ is a real-linear\nisometry. A supplied finite-dimensional truncated RG datum for this scheme\nis an open set $\\Omega\\subset I\\times\\mathbb R^{2N}$ and a supplied\ncontinuous map $\\beta:\\Omega\\to\\mathbb R^{2N}$. A truncated RG trajectory is\na continuously differentiable curve $C:I'\\to\\mathbb C^N$, on an interval\n$I'\\subset I$ for which $(t,\\rho_N(C(t)))\\in\\Omega$, satisfying\n$$\\frac{d}{dt}\\rho_N(C(t))=\\beta(t,\\rho_N(C(t))).$$\nThe components of $\\beta$ are the beta functions under this logarithmic-scale\nconvention. If the supplied flow is complex-linear, with a supplied matrix\nfunction $\\Gamma:I'\\to\\mathbb C^{N\\times N}$, its equation can be written\n$C'=\\Gamma(t)C$, where the real-coordinate vector field is\n$\\beta(t,\\rho_N(C))=\\rho_N(\\Gamma(t)C)$. In this column-vector convention,\n$\\Gamma$ is called the anomalous-dimension matrix. A scheme record does not\nassert that its coefficient-coordinate maps solve a supplied RG equation; that\nrelation, the entries of $\\beta$, and any matching map are separate inputs.\nThis definition calculates no QFT beta function and supplies no bound on\nomitted perturbative or higher-dimension terms.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-aqft-truncated-coupled-rge-wellposedness",
+          "source_section": "Statement",
+          "quote": "Let a scheme datum have complex coefficient dimension $N\\ge1$ and open\nlogarithmic-scale interval $I$. Let its open RG domain be\n$\\Omega\\subset I\\times\\mathbb R^{2N}$ and its supplied vector field be\n$\\beta:\\Omega\\to\\mathbb R^{2N}$, continuous and locally Lipschitz in the\ncoefficient coordinates, locally uniformly in logarithmic scale. For every\n$(t_0,x_0)\\in\\Omega$, there are $r,h>0$ and a finite constant $L\\ge0$ such\nthat, for every $y,z\\in B(x_0,r)$, the initial value problems\n$$x_y'(t)=\\beta(t,x_y(t)),\\qquad x_y(t_0)=y,$$\nand\n$$x_z'(t)=\\beta(t,x_z(t)),\\qquad x_z(t_0)=z,$$\nhave unique solutions on $[t_0-h,t_0+h]\\subset I$, with their graphs in\n$\\Omega$, and\n$$\\|x_y(t)-x_z(t)\\|_2\\le e^{L|t-t_0|}\\|y-z\\|_2\\qquad (t\\in[t_0-h,t_0+h]).$$\nAny two solutions through the same initial data agree on every common interval\ncontaining $t_0$. Here local well-posedness means local existence, uniqueness,\nand this uniform continuous dependence on initial coefficient data. Under\n$C=\\rho_N^{-1}(x)$, realified solutions give complex coefficient trajectories.\nThe theorem asserts no global solution, no bound on omitted terms, and no\ncalculation of a QFT beta function.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $t=0$, the displayed vector has components $2-1=1$ and $e^0=1$, so it satisfies the stated initial condition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating gives $C_1'(t)=-2e^{-t}+2e^{-2t}$ and $C_2'(t)=-2e^{-2t}$. The first component of $AC$ is $-C_1+C_2=-2e^{-t}+2e^{-2t}$, and the second is $-2C_2=-2e^{-2t}$. Thus the displayed curve solves $C'=AC$ for every real $t$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $\\Delta=C-D\\in\\mathbb C^2$, the triangle inequality and $(a-b)^2\\ge0$ for $a,b\\ge0$ give $|{-}\\Delta_1+\\Delta_2|^2\\le(|\\Delta_1|+|\\Delta_2|)^2\\le2(|\\Delta_1|^2+|\\Delta_2|^2)$. Also $|{-}2\\Delta_2|^2=4|\\Delta_2|^2$. Adding these bounds gives $\\|A\\Delta\\|_2^2\\le2|\\Delta_1|^2+6|\\Delta_2|^2\\le6\\|\\Delta\\|_2^2$. By the isometry $\\rho_2$, the real vector field is globally Lipschitz with constant $\\sqrt6$ and is continuous. Theorem [F2] gives uniqueness on every common interval. The displayed solution exists on all $\\mathbb R$, so it is the unique global solution of this supplied system.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: The example fixes a two-dimensional coefficient space and makes no empty-system claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The supplied matrix is nonzero; the example does not infer that every RG system has nonzero flow."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This worked example is specifically two-dimensional; the general theorem includes N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20133.1: The direct substitution uses no diagonalization or eigenbasis assumption and the matrix need not be interpreted through its spectrum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 2.1: The chosen scale interval is (0,infinity), so logarithmic time ranges over all real numbers and the displayed solution is defined on the whole interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The finite quotient and its ordered basis are supplied data; the example makes no family-wide choice and invokes no AC premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification differentiates the particular displayed curve with initial vector (1,1) and proves uniqueness for the supplied matrix A; no biconditional criterion for arbitrary beta fields or schemes is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The globally Lipschitz estimate in Verification 3.1 is a sufficient uniqueness argument for this A. The Example does not infer that estimate or the matrix from uniqueness of a trajectory."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-component initial condition and ODE substitution",
+          "status": "checked",
+          "evidence": "Proof steps 1.1\u20132.1 evaluate both components at t=0 and verify C1\u2032=-C1+C2 and C2\u2032=-2C2 exactly for every real t."
+        }
+      ],
+      "finite_checks_disposition": "The only finite calculation is the exact two-component symbolic substitution shown in the verification; no floating-point or physical coefficient claim is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-17 author",
+        "notes": "The matrix is expressly supplied, not derived from a QFT. The example uses only the conditional fixed-weight complex quotient input and claims no perturbative accuracy or omitted-term bound."
+      }
+    }
+  }
+}

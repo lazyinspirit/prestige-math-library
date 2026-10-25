@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-chomsky-hierarchy.json
+  precheck: n/a
 id: def-chomsky-hierarchy
 kind: definition
 title: "The regular, context-free, decidable, and recognizable language-class ladder"
@@ -8,13 +11,6 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-regular-language-by-dfa-recognition, def-language-generated-by-a-cfg, def-language-recognized-and-decided]
-verification:
-  audited: 2026-09-12
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -48,3 +44,22 @@ Here:
 
 - The hierarchy concerns classes of languages, not classes of machine
   descriptions.
+
+The following diagram summarizes this page-specific comparison for the fixed
+alphabet $\Sigma$. Each node is a class of languages over $\Sigma$; the arrows
+record the non-strict containments in the Definition.
+
+```tikz
+\begin{tikzpicture}[every node/.style={font=\small}]
+\node (r) at (0,0) {Regular};
+\node (c) at (3,0) {Context-free};
+\node (d) at (6,0) {Decidable};
+\node (e) at (9,0) {Recognizable};
+\draw[->] (r) -- node[above] {$\subseteq$} (c);
+\draw[->] (c) -- node[above] {$\subseteq$} (d);
+\draw[->] (d) -- node[above] {$\subseteq$} (e);
+\end{tikzpicture}
+```
+
+The diagram asserts no strictness and does not insert the context-sensitive
+class of the classical Chomsky hierarchy.

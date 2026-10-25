@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-integer-cyclic-presentation-descends-the-simple-head-generator-line.md

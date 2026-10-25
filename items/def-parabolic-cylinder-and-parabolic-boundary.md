@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-parabolic-cylinder-and-parabolic-boundary.json
+  precheck: n/a
 id: def-parabolic-cylinder-and-parabolic-boundary
 kind: definition
 title: Parabolic cylinder and parabolic boundary
@@ -16,11 +19,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)"
@@ -89,3 +87,32 @@ is a closed subset of $\overline Q$
   which initial and lateral data are prescribed. A later counterexample on the
   companion page shows that this asymmetry is forced by the sign of the heat
   operator and cannot be removed.
+
+
+For the special case $n=1$ and $\Omega=(a,b)$, the solid blue bottom and sides
+below form $\partial_pQ$. The dashed orange top between its endpoints is
+$\Omega\times\{T\}$: it belongs to $Q$ and to the topological boundary of $Q$,
+but not to $\partial_pQ$. Both top corner points belong to the lateral boundary
+and hence to $\partial_pQ$. This illustration does not impose an interval
+shape on the general spatial domain.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (-0.7,-0.6) -- (6.1,-0.6) node[right] {$x$};
+\draw[->] (-0.7,-0.6) -- (-0.7,3.9) node[above] {$t$};
+\draw[blue!60!cyan,very thick] (0,3) -- (0,0) -- (4.8,0) -- (4.8,3);
+\draw[orange,thick,dashed] (0,3) -- (4.8,3);
+\fill[blue!60!cyan] (0,0) circle (2pt);
+\fill[blue!60!cyan] (4.8,0) circle (2pt);
+\fill[blue!60!cyan] (0,3) circle (2pt);
+\fill[blue!60!cyan] (4.8,3) circle (2pt);
+\node at (2.4,1.5) {$Q=(a,b)\times(0,T]$};
+\node[above] at (2.4,3.25) {$\Omega\times\{T\}:\ \mathrm{excluded\ from}\ \partial_pQ$};
+\node[below] at (2.4,-0.05) {$[a,b]\times\{0\}$};
+\node[left] at (-0.75,0) {$0$};
+\node[left] at (-0.75,3) {$T$};
+\node[below] at (0,-0.65) {$a$};
+\node[below] at (4.8,-0.65) {$b$};
+\node[right,align=left] at (5.0,1.5) {$\partial\Omega\times[0,T]$};
+\end{tikzpicture}
+```

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/alg-qc-exact-single-qubit-clifford-t-synthesis.md

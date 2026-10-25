@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-finite-dimensional-algebra-projective-classes-form-a-split-k-zero-basis.md

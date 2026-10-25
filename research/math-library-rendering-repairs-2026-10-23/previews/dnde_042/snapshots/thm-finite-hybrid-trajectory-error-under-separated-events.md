@@ -1,0 +1,108 @@
+---
+id: thm-finite-hybrid-trajectory-error-under-separated-events
+kind: theorem
+title: "Finite separated transverse events give an event-aligned hybrid trajectory error bound"
+status: published
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 10
+deps:
+  - def-hybrid-mode-guard-reset-system
+  - def-validated-residual-tube-certificate
+  - thm-validated-residual-tube-certificate-sound
+  - def-certified-hybrid-event-enclosure
+  - lem-ode-flow-lipschitz-on-a-tube
+  - lem-transverse-hybrid-event-time-error
+  - prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation
+  - thm-norm-inequality-for-the-vector-valued-integral
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Ernst Hairer, course notes, Chapter III: Équations Différentielles Ordinaires"
+      url: "https://www.unige.ch/~hairer/poly/chap3.pdf"
+    - title: "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, §2.4"
+      url: "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+---
+
+## Statement
+
+Consider exact and reported hybrid trajectories with the same initial data and a common finite sequence of transitions at exact event times $\tau_1<\cdots<\tau_N$ and reported times $\widehat\tau_1<\cdots<\widehat\tau_N$. Assume the events are separated by $\delta>0$, are transverse with margins $\nu_j>0$, and the reported event times are upper endpoints of certified root boxes, so $\tau_j\le\widehat\tau_j$. After each event, both trajectories are compared at the reported event time, when both are in the outgoing mode. Let $E_j$ bound their state discrepancy at this aligned mode-segment start, with $E_0=0$.
+
+For mode segment $j$, let $U_j$ be the accumulated piecewise dense reconstruction from the reported start, with a certified local error bound $\eta_j^{\rm loc}$ relative to the exact mode solution from that same start. Let $L_j$ be a state-Lipschitz bound, $H_j$ the segment duration, and $L_{g,j},\varepsilon_j$ the guard state-Lipschitz and reported guard-residual bounds. Let $D_j$ be a certified total error bound between $U_j$ and the exact reference incoming-mode continuation on the prefix. It may be supplied directly; a sufficient ledger calculation is
+$$D_j:=\eta_j^{\rm loc}+e^{L_jH_j}E_j,$$
+when the two exact mode solutions share the aligned start time, their initial discrepancy is at most $E_j$, and both remain in a common convex tube on which the field is $L_j$-Lipschitz. Then $D_j$ bounds the reference error on the incoming-mode prefix and
+$$\Delta_{j+1}:=\frac{L_{g,j}D_j+\varepsilon_j}{\nu_{j+1}}$$
+bounds $\widehat\tau_{j+1}-\tau_{j+1}$. Assume $\Delta_{j+1}<\delta/3$ for each event; the event separation then ensures no later exact event occurs before the reported reset time. At each event assume the reset has state and time Lipschitz constants $L_{R,j+1},L_{R,t,j+1}$ on a domain containing both compared reset inputs and the coordinate segments joining them, the incoming field is bounded by $M^-_j$ over the event-time bracket, and both outgoing solutions remain through their alignment time in a common tube where the outgoing field is bounded by $M^+_{j+1}$ and is $L^+_{j+1}$-Lipschitz in state. If the reported reset value is approximate, let $\varepsilon_{R,j+1}\ge0$ be a certified bound on its evaluation error, with $\varepsilon_{R,j+1}=0$ for exact evaluation. Then
+$$E_{j+1}:=L_{R,j+1}D_j+(L_{R,j+1}M^-_j+L_{R,t,j+1}+M^+_{j+1})\Delta_{j+1}+\varepsilon_{R,j+1}$$
+bounds the state discrepancy at the next aligned mode-segment start. The terminal segment has its supplied total bound $D_N$; when the sufficient common-tube ledger calculation applies, one may take $D_N=\eta_N^{\rm loc}+e^{L_NH_N}E_N$. These finite recurrences bound state errors on matched smooth-mode segments and reset states at aligned times; they make no same-clock state claim between an exact jump and its later reported jump.
+
+## Facts & Assumptions
+
+**Given:** The common finite event sequence separated by $\delta$, aligned initial state, valid local and total error bounds, Lipschitz and field bounds on the required tubes, reported upper event-box endpoints with lag bounds $\Delta_j<\delta/3$, event residual/transversality data, and certified reported reset-evaluation error bounds.
+
+[F1] [[def-hybrid-mode-guard-reset-system]]: each trajectory follows its current smooth mode until an enabled guard event, applies the reset, and changes mode.
+
+[F2] [[thm-validated-residual-tube-certificate-sound]]: in the finite-rational provider branch, a certified local residual-tube certificate gives an exact mode solution whose distance from the stored dense reconstruction is bounded by its panel radius; a provider's stated finite uniform upper bound on those radii supplies $\eta_j^{\rm loc}$. Other providers may supply the same justified local error bound directly under [[def-certified-hybrid-event-enclosure]].
+
+[F3] [[def-certified-hybrid-event-enclosure]]: an admissible provider supplies valid local and total reference error bounds, exact-guard and derivative enclosures, and the mode, guard, and reset data; the total bound may be computed from the local bound and aligned-start error by the displayed flow estimate or supplied directly.
+
+[F4] [[lem-ode-flow-lipschitz-on-a-tube]]: same-mode solutions starting at a common time with state error $e$ differ over duration $H$ by at most $e^{LH}e$.
+
+[F5] [[lem-transverse-hybrid-event-time-error]]: dense state error $D_j$ and guard residual $\varepsilon_j$ give event-time error at most $(L_{g,j}D_j+\varepsilon_j)/\nu_{j+1}$.
+
+[F6] [[prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation]]: on a nondegenerate interval, a mode solution increment is the integral of its vector field.
+
+[F7] [[thm-norm-inequality-for-the-vector-valued-integral]]: on an increasingly oriented interval, the norm of a vector integral is at most the integral of its norm.
+
+## Proof
+
+1.1 At the aligned start of segment $j$, the two exact mode solutions have state discrepancy at most $E_j$ and the same initial time. When the total bound is formed by the sufficient ledger calculation, apply [F4] through duration $H_j$ to bound their discrepancy by $e^{L_jH_j}E_j$, then add the local reconstruction error $\eta_j^{\rm loc}$ from [F2] by the triangle inequality. If the provider supplies $D_j$ directly, [F3] states that this is already a valid total bound. In either case $D_j$ bounds the incoming reference error used below. [given, F2, F3, F4, algebra]
+
+2.1 On the certified event bracket, use [F5] with dense-state error $D_j$, guard residual $\varepsilon_j$, and transverse margin $\nu_{j+1}$. This gives $\widehat\tau_{j+1}-\tau_{j+1}\le\Delta_{j+1}$; the left side is nonnegative because the reported time is the root-box upper endpoint. [given, F3, F5, step 1.1]
+
+3.1 Put $\tau=\tau_{j+1}$, $\widehat\tau=\widehat\tau_{j+1}$, and $\ell=\widehat\tau-\tau$. By step 2.1, $0\le\ell\le\Delta_{j+1}<\delta/3$, so no next exact event occurs before $\widehat\tau$. For $\ell>0$, [F6] and [F7] give $\|y^-(\widehat\tau)-y^-(\tau)\|_2\le M^-_j\ell$ and $\|y^+(\widehat\tau)-R(\tau,y^-(\tau))\|_2\le M^+_{j+1}\ell$ by integrating along the incoming continuation and the exact outgoing solution; for $\ell=0$ both displacements vanish. The total reference error from step 1.1 gives $\|U_j(\widehat\tau)-y^-(\tau)\|_2\le D_j+M^-_j\ell$. Apply the reset's state and time Lipschitz bounds along the assumed coordinate segments to get $\|R(\widehat\tau,U_j(\widehat\tau))-R(\tau,y^-(\tau))\|_2\le L_{R,j+1}D_j+(L_{R,j+1}M^-_j+L_{R,t,j+1})\ell$. Add the exact outgoing displacement and the reported reset-evaluation error $\varepsilon_{R,j+1}$ by the triangle inequality, then use $\ell\le\Delta_{j+1}$ to obtain the stated $E_{j+1}$. Only field bounds along the integrated paths are needed for alignment. [given, F1, F3, F6, F7, step 1.1, step 2.1, algebra]
+
+4.1 Since $N$ is finite, steps 1.1–3.1 give finite nonnegative bounds successively through all event segments. The terminal application of step 1.1 gives $D_N$. Write $\ell_j:=\widehat\tau_j-\tau_j$, so $0\le\ell_j\le\Delta_j$ by step 2.1. The given bound $\Delta_j<\delta/3$ places each reported event before the next exact event. Also $\widehat\tau_{j+1}-\widehat\tau_j=(\tau_{j+1}-\tau_j)+\ell_{j+1}-\ell_j\ge\delta-\Delta_j>2\delta/3$, so the reported event order is unchanged. [given, step 1.1, step 2.1, step 3.1, algebra, induction] ∎
+
+## Remarks
+
+For a single transition, put $\tau=\tau_{j+1}$ and $\widehat\tau=\widehat\tau_{j+1}$. The schematic shows a positive lag; equal event times collapse the bracket. Heights and slopes are illustrative, not numerical state coordinates. Blue is the exact hybrid trajectory, orange is the reported reconstruction and reset, and the dashed blue curve is the incoming-mode continuation $y^-$ used only for reference comparison.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (0,0) -- (11,0) node[right] {$t$};
+\draw[dotted] (1,0) -- (1,4.5);
+\draw[dotted] (5,0) -- (5,4.5);
+\draw[dotted] (7,0) -- (7,4.5);
+\node[below] at (1,0) {$\widehat\tau_j$};
+\node[below] at (5,0) {$\tau$};
+\node[below] at (7,0) {$\widehat\tau$};
+\draw[blue!45!white,thick] (1,3) -- (5,3.2);
+\draw[blue!45!white,thick,->] (5,3.2) -- (5,1);
+\draw[blue!45!white,thick] (5,1) -- (10,1.5);
+\draw[blue!45!white,thick,dashed] (5,3.2) -- (7,3.3);
+\draw[orange!75!white,thick] (1,3.7) -- (7,4);
+\draw[orange!75!white,thick,->] (7,4) -- (7,1.9);
+\draw[orange!75!white,thick] (7,1.9) -- (10,2.2);
+\draw[<->] (1,3.05) -- node[left] {$\le E_j$} (1,3.65);
+\draw[<->] (6.7,3.34) -- node[left] {$\le D_j$} (6.7,3.94);
+\draw[<->] (7.3,1.28) -- node[right] {$\le E_{j+1}$} (7.3,1.88);
+\node[blue!45!white,left] at (4.85,2.1) {$R(\tau,\cdot)$};
+\node[orange!75!white,right] at (7.15,2.95) {reported reset};
+\node[blue!45!white,right] at (7.2,3.4) {$y^-$};
+\node[orange!75!white] at (3,4.1) {$U_j$ (mode $j$)};
+\node[blue!45!white,right] at (10,1.5) {exact};
+\node[orange!75!white,right] at (10,2.2) {reported};
+\draw[<->] (5,4.7) -- node[above] {$0\le\widehat\tau-\tau\le\Delta_{j+1}$} (7,4.7);
+\node at (8.8,0.55) {outgoing mode $j+1$};
+\end{tikzpicture}
+```
+
+The $D_j$ comparison at $\widehat\tau$ is with $y^-(\widehat\tau)$, not with the already-reset exact state. At $\widehat\tau$, the $E_{j+1}$ comparison instead uses the exact outgoing state and the reported post-reset state, including any certified reset-evaluation error. The interval $(\tau,\widehat\tau)$ carries no asserted same-clock hybrid-state bound. These are precisely the comparisons in proof steps 1.1–3.1; the proof does not depend on the figure.

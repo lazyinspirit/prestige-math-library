@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-s5-character-table-by-fixed-tabloid-reconstruction.md

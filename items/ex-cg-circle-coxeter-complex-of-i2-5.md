@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-circle-coxeter-complex-of-i2-5.json
+  precheck: pass
 id: ex-cg-circle-coxeter-complex-of-i2-5
 kind: example
 title: "The Coxeter complex of $I_2(5)$: the circle triangulated by the ten chambers"
@@ -20,9 +23,7 @@ sources:
     - title: "Jean Michel, Lectures on Coxeter groups (Beijing lecture notes, April-May 2014, author-hosted PDF)"
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Section 5, Proposition 5.4(i) (the order of s_H s_H' equals pi divided by the angle of the walls, printed p. 7) and Proposition 5.8 (printed p. 9)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Example
@@ -121,3 +122,31 @@ $w_0=(st)^2s$, and $\rho(w_0)e_s=-e_t$, $\rho(w_0)e_t=-e_s$; the permutation of
 - **The two vertices of the fundamental arc.** The arc $C\cap S^1$ is cut out by the two walls $H_{e_t}$ and $H_{e_s}$ through its endpoints $u_s$ and $u_t$, in agreement with the general vertex description $C\cap S^{1}\cap\bigcap_{t\ne s}H_{e_t}=\{v_s/\lVert v_s\rVert_B\}$ of [[thm-cg-finite-chamber-tiling-and-coset-face-identification]] (2).
 
 - **Lengths versus angles.** Clause (iii) computes the principal angles subtended by the ten arcs; it does not use, and does not assert, any identification of a path length on $S^1$ with that angle, which belongs to the metric theory of spherical complexes on the in-run page `spherical-simplex-metrics-angular-links-and-cones`.
+
+
+The picture uses $B$-orthonormal coordinates, with $u_s$ at angle $0$ and $u_t$ at angle $\pi/5$. The five diameters represent the five root lines; the ten circle arcs represent the chambers (equivalently, the ten edges of $\Sigma$). Filled vertices have type $\{t\}$, representing cosets $wW_{\{t\}}$, and open vertices have type $\{s\}$, representing cosets $wW_{\{s\}}$. The highlighted arc is $C\cap S^1$; its neighbours are $tC\cap S^1$ across $u_s$ and $sC\cap S^1$ across $u_t$. Thus each vertex meets two arcs, with the two types alternating around the circle. This illustrates clauses (ii)–(iv); the verification above is independent of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+  \foreach \a in {0,36,72,108,144} {
+    \draw[gray,thin] (\a:2.3) -- (\a+180:2.3);
+  }
+  \draw[thick] (0,0) circle (2.3);
+  \draw[very thick] (0:2.3) arc (0:36:2.3);
+  \draw (0:0.65) arc (0:36:0.65);
+  \node at (18:1.05) {$\pi/5$};
+  \foreach \a in {0,72,144,216,288} {
+    \fill (\a:2.3) circle (0.055);
+  }
+  \foreach \a in {36,108,180,252,324} {
+    \filldraw[fill=white] (\a:2.3) circle (0.065);
+  }
+  \node[below right] at (0:2.3) {$u_s$};
+  \node[above right] at (36:2.3) {$u_t$};
+  \node at (18:3.35) {$C\cap S^1$};
+  \node at (54:2.95) {$sC\cap S^1$};
+  \node at (342:3.05) {$tC\cap S^1$};
+  \node[below left] at (0,0) {$0$};
+  \node at (0,-2.85) {$S^1:\quad 10\ \mathrm{vertices},\quad 10\ \mathrm{chambers}$};
+\end{tikzpicture}
+```

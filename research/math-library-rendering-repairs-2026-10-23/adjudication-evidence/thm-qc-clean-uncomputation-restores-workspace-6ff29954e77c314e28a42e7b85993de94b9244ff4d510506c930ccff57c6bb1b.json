@@ -1,0 +1,135 @@
+{
+  "id": "thm-qc-clean-uncomputation-restores-workspace",
+  "agent": "/root/rendering_repair_supervisor2/dqc_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Both authentic original standalone tiles show no diagram. A concrete compute-copy-uncompute circuit materially clarifies that C and its inverse act only on XW and that Y changes only at the intervening bitwise CNOT. This is an explanatory omission under the expanded diagram scope, not a defect in the complete algebraic proof.",
+      "action": "Added two-row grouped-register TikZ circuit and explanatory text in final Remarks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a Remarks circuit with chronological C, bitwise CNOT from the designated g subregister to Y, and C inverse on XW. Original source is an exact byte prefix of current source; all prior claims, hypotheses, proof and frontmatter including published status remain unchanged.",
+  "source_lines_after": [
+    92,
+    115
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Upper row is the grouped register XW; lower row is the disjoint m-bit Y. Input/output basis labels are |x,0_W> and |y>, with final |x,0_W> and |y XOR g(x)>.",
+      "check": "Regrouping rows is explicitly described, so the figure does not silently change the statement ordering X,Y,W. The control subregister has m bits by the Statement and matches the m-bit target."
+    },
+    {
+      "maps": "C and C^{-1}: H_X tensor H_W -> H_X tensor H_W, tensored with identity on H_Y. Middle gate: bitwise CNOT on the designated m-bit W subregister and Y, identity on X and remaining W.",
+      "check": "The C and inverse boxes occur only on the upper wire, while the middle box intersects both rows. This matches the Statement, F3 control-target order, F5 chronology and F6 inverse reversal."
+    },
+    {
+      "relations": "C|x,0_W> = |x,g(x),r(x)>; middle gate maps |x,g(x),r(x)>|y> to |x,g(x),r(x)>|y XOR g(x)>; inverse restores |x,0_W>.",
+      "check": "These are exactly proof steps 1.1 and 2.1. The forward and inverse boxes bracket the copy gate in left-to-right time. Copy acts on basis bits, not arbitrary-state cloning, as the adjacent text explicitly states."
+    },
+    {
+      "coherence": "Basis labels specify the action on the clean-input subspace, not product-state factorization at arbitrary intermediate superpositions.",
+      "check": "Step 3.1 supplies linear extension and the reference-register identity through F2; the rigorous proof is unchanged and independent of the figure."
+    }
+  ],
+  "before_raw_sha256": "76d9a7db3ac9e3ff919cb041c44582a7bd394b8ede63b7769d55e1b9d6fc1dea",
+  "after_raw_sha256": "d1ad261e0a567421d98be0d5be98a5a84eb147557c5f41618f20d00dd80c5abb",
+  "guard": "Checked queue before_raw_sha256 immediately before the initial source write; matched 76d9a7db3ac9e3ff919cb041c44582a7bd394b8ede63b7769d55e1b9d6fc1dea.",
+  "evidence_path_resolution": "Queue evidence_dir diagram-supplement/screenshots does not exist. Located authentic screenshots only in the same quantum-computing category root; SHA256 values exactly match both queue-recorded hashes.",
+  "original_images": [
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/quantum-computing/screenshots/thm-qc-clean-uncomputation-restores-workspace--01.png",
+      "sha256": "9cfea0664f115c07cc6092d6f7dcae0a0392963c463cc9f586cec887103ddda5",
+      "view": "standalone original resolution"
+    },
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/quantum-computing/screenshots/thm-qc-clean-uncomputation-restores-workspace--02.png",
+      "sha256": "058b9d760ff0af74fb6f2486dc007befe8e8ca3fe6f38c6b79394dd237875746",
+      "view": "standalone original resolution"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-qc-clean-uncomputation-restores-workspace.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qc-clean-uncomputation-restores-workspace.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-qc-clean-uncomputation-restores-workspace.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "iteration_notes": "Initial rendercheck caught an escaped-dollar interaction after a TikZ line break; a separating space fixed it. Native review led to explicit copy-box boundaries and sufficient label width. All final checks and the final preview bind current bytes.",
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqc-011 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-qc-clean-uncomputation-restores-workspace --out research/math-library-rendering-repairs-2026-10-23/previews/dqc-011-verified",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqc-011-verified/manifest.json",
+    "manifest_sha256": "1dbcaa2cd339908411352f2512be10b4b79c5e145e094b6d1763d8224e6ff754",
+    "source_sha256": "d1ad261e0a567421d98be0d5be98a5a84eb147557c5f41618f20d00dd80c5abb",
+    "capture": {
+      "capture_revision": 2,
+      "id": "thm-qc-clean-uncomputation-restores-workspace",
+      "height": 2324,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/thm-qc-clean-uncomputation-restores-workspace--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "3a0c7e23ce771fdffa32b05e2c540b79a267fe843ded1cddf0a27f1e30d935b1",
+          "encoding": "lossless PNG, compressionLevel 9"
+        },
+        {
+          "path": "screenshots/thm-qc-clean-uncomputation-restores-workspace--02.png",
+          "y": 1300,
+          "width": 1200,
+          "height": 1024,
+          "sha256": "d402dd9326aedb9e1693a2741a0eeea2ae6c6d56fe0c95b250e4f38b19f3fb87",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 59,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T04:08:45.719Z"
+    },
+    "view": "Viewed both final PNGs standalone at original resolution, particularly the complete circuit in tile 02. Labels, grey strokes and gate boundaries are distinguishable on black; copy label fits its box; no clipping or wire/label overlap in the circuit.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "remaining_issues": []
+}

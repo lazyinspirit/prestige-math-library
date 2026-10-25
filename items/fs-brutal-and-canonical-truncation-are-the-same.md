@@ -1,13 +1,11 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-brutal-and-canonical-truncation-are-the-same.json
+  precheck: pass
 id: "fs-brutal-and-canonical-truncation-are-the-same"
+title: "Brutal and canonical truncation are the same"
 kind: "false-statement"
 deps: ["def-brutal-truncation-of-a-complex", "def-canonical-truncation-of-a-complex"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"

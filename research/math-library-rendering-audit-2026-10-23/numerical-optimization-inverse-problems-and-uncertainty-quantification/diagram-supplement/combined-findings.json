@@ -1,0 +1,768 @@
+[
+  {
+    "id": "alg-dogleg-trust-region-step",
+    "section": "Item body",
+    "lines": [
+      37,
+      38,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "algorithm geometry diagram",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "In a two-dimensional trust-region cross-section, show the origin, gradient direction, Cauchy point p_C on the boundary, Newton point p_N outside the ball, the segment p_C to p_N, its boundary intersection p_D, and the comparison of m(p_D) with m(p_C). Label the two early return branches.",
+    "mathematical_check": "In a two-dimensional trust-region cross-section, show the origin, gradient direction, Cauchy point p_C on the boundary, Newton point p_N outside the ball, the segment p_C to p_N, its boundary intersection p_D, and the comparison of m(p_D) with m(p_C). Label the two early return branches.",
+    "screenshots": [
+      "screenshots/alg-dogleg-trust-region-step--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-dogleg-trust-region-step--01.png": "d243ddc52022aab1ee0fb1b2c8edfd01ebdf716ac277e8b15a3b3d7d60081a4b"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "trust-region-and-cubic-regularization-methods"
+    ],
+    "source_lines": {
+      "37": "compute the Cauchy step $p_C$ by [[alg-trust-region-cauchy-step]] and the",
+      "38": "Newton-model step $p_N$ by solving $Bp_N=-g$.",
+      "40": "1. If $\\|p_N\\|_2\\le\\Delta$, return $p_N$.",
+      "41": "2. If $\\|p_C\\|_2=\\Delta$, return $p_C$.",
+      "42": "3. Otherwise put $d:=p_N-p_C$, $a:=\\|d\\|_2^2$,",
+      "43": "   $b:=2\\langle p_C,d\\rangle$, and $c:=\\|p_C\\|_2^2-\\Delta^2<0$. Compute",
+      "44": "   $$t:=\\frac{-b+\\sqrt{b^2-4ac}}{2a}.$$",
+      "45": "   Set $p_D:=p_C+td$, the boundary intersection on the segment from the",
+      "46": "   Cauchy step to the Newton-model step.",
+      "47": "4. Compare the two model values. Return $p_D$ if $m(p_D)\\le m(p_C)$ and",
+      "48": "   return $p_C$ otherwise."
+    },
+    "source_snapshot": "snapshots/alg-dogleg-trust-region-step.md",
+    "source_sha256": "0ee91d3d08a363c7f0a7e34686a3a636df582db674239b96d8b5cb7569827b0e",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "uncertain editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-factorable-mccormick-box-relaxation",
+    "section": "Item body",
+    "lines": [
+      30,
+      32
+    ],
+    "symptom": "The algorithm traverses factorable expression DAGs and explicitly lifts a product node w=uv using four McCormick inequalities, with certified operand bounds and a convex outer enclosure. A bounded two-dimensional slice makes the graph and relaxation planes more immediate, while the procedure is fully specified in prose.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional bilinear McCormick envelope diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The algorithm traverses factorable expression DAGs and explicitly lifts a product node w=uv using four McCormick inequalities, with certified operand bounds and a convex outer enclosure. A bounded two-dimensional slice makes the graph and relaxation planes more immediate, while the procedure is fully specified in prose.",
+    "concrete_diagram_content": "Choose a concrete finite rectangle [l_x,u_x]×[l_y,u_y]. In 3D draw the bilinear graph w=xy over the rectangle and the four affine McCormick planes from def-mccormick-bilinear-box-envelope.md lines 30–33; show the vertical interval between the maximum lower plane and minimum upper plane as the relaxed fiber. Label this as a lifted convex hull/outer relaxation, not as the exact graph except at corners.",
+    "mathematical_check": "Choose a concrete finite rectangle [l_x,u_x]×[l_y,u_y]. In 3D draw the bilinear graph w=xy over the rectangle and the four affine McCormick planes from def-mccormick-bilinear-box-envelope.md lines 30–33; show the vertical interval between the maximum lower plane and minimum upper plane as the relaxed fiber. Label this as a lifted convex hull/outer relaxation, not as the exact graph except at corners.",
+    "screenshots": [
+      "screenshots/alg-factorable-mccormick-box-relaxation--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-factorable-mccormick-box-relaxation--01.png": "b4c1ddfaa08d308301aad99de32d0183c2f61539f92798eac6a862e59a3422e8"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "global-optimization-and-certified-branch-and-bound"
+    ],
+    "source_lines": {
+      "30": "Input a bounded factorable optimization problem on a box $B$, its objective DAG $F$, a finite list of inequality-constraint DAGs $G_i$ representing $g_i(x)\\le0$, a finite rule table, a precision $p\\ge2$, and a dyadic interval format with fixed exponent bounds. For each non-product nonlinear node, the table must supply certified convex and concave graph bounds $\\psi^-\\le w\\le\\psi^+$ on its certified operand domain, with proof that they contain the exact graph and that the imposed epigraph/hypograph inequalities form a convex relation. The table must also supply a convex underestimator $\\phi_B$ for the objective DAG's final value, verified to satisfy $\\phi_B(\\iota_B(x))\\le f(x)$ for every exact input $x\\in B$. All domain hypotheses and interval/coefficient enclosures must be certified. For each interval call, pass the same declared precision and format to [[alg-interval-dag-box-enclosure-and-bound]]. Traverse the union of the objective and constraint DAGs in topological order, using a lifted variable for each node. For an affine node, add its exact affine relation. For a product node $w=uv$, add the four McCormick inequalities from [[def-mccormick-bilinear-box-envelope]] using certified operand bounds; [[lem-mccormick-envelope-equals-graph-convex-hull]] proves this relation is a convex outer enclosure of the product graph. For every other nonlinear node, add its certified convex and concave graph bounds; if its domain hypotheses, interval bounds, graph containment, or convexity cannot be verified, return unsupported-relaxation or inconclusive. For each constraint DAG, require its final lifted value to be at most zero.",
+      "32": "Return the resulting convex feasible region $R_B$ and the certified objective underestimator $\\phi_B$ only when every lifted relation is convex, every original feasible point has its exact node values in the lifted region, and all coefficient enclosures preserve the declared inequalities. These checks make the construction a relaxation of both the objective and all listed constraints in the sense of [[def-factorable-box-convex-relaxation-interface]]. Optionally pass this relaxation to a finite convex-bound routine. A dual-feasible pair and a verified lower bound on its Lagrangian dual value produce a dual-certificate record; if no such record is available, return bound-unavailable. The procedure asserts no solver convergence or polynomial running-time bound."
+    },
+    "source_snapshot": "snapshots/alg-factorable-mccormick-box-relaxation.md",
+    "source_sha256": "e39201b93c27caabf3a5ab8b1291ed71c9742f1343387c0d2202608735c0c66c",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain-optional",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "alg-finite-image-string-method",
+    "section": "Item body",
+    "lines": [
+      26,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial algorithm/path schematic candidate",
+    "exact_source_claim": "Interior images move by projected force, then redistribute to equal cumulative arc-length fractions along the updated polygon, while endpoints remain fixed.",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw a collision-free region U with fixed endpoints a,b, an initial polygon of images, projected-force update arrows for interior images, and the updated polygon with targets at jS/M and redistributed images; label the finite stopping status as a report rather than a continuum certificate.",
+    "mathematical_check": "Draw a collision-free region U with fixed endpoints a,b, an initial polygon of images, projected-force update arrows for interior images, and the updated polygon with targets at jS/M and redistributed images; label the finite stopping status as a report rather than a continuum certificate.",
+    "screenshots": [
+      "screenshots/alg-finite-image-string-method--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/alg-finite-image-string-method--01.png": "5584b4b997cf1314f502934e72623ab97810b56ef92cee192166f3c7f5bf9c7d"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "minimum-energy-paths-string-neb-and-saddle-certificates"
+    ],
+    "source_lines": {
+      "26": "Let $U,V,a,b$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an integer $M\\ge2$, images $R_0=a,R_1,\\ldots,R_{M-1},R_M=b$ in $U$, a step size $\\eta>0$, force and spacing tolerances $\\tau_F,\\tau_s\\ge0$, and a finite update budget $N\\in\\mathbb N_0$. **Output:** the last image chain and one of `tolerances-met`, `geometry-failure`, `nonfinite-evaluation`, or `budget-exhausted`. A stop status is an algorithmic report, not a continuum-error certificate.",
+      "30": "1. For each interior $i=1,\\ldots,M-1$, form the centered chord $c_i=R_{i+1}-R_{i-1}$. If $c_i=0$, return `geometry-failure`. Otherwise put $t_i=c_i/\\|c_i\\|_2$ and $F_i^\\perp=-(I-t_it_i^T)\\nabla V(R_i)$. If any force is nonfinite, return `nonfinite-evaluation`.",
+      "31": "2. For the current chain set $\\ell_i=\\|R_i-R_{i-1}\\|_2$ for $1\\le i\\le M$, $\\bar\\ell=M^{-1}\\sum_{i=1}^M\\ell_i$, $r_F=\\max_{1\\le i<M}\\|F_i^\\perp\\|_2$, and $r_s=\\max_{1\\le i\\le M}|\\ell_i-\\bar\\ell|$. If $r_F\\le\\tau_F$ and $r_s\\le\\tau_s$, return `tolerances-met`.",
+      "32": "3. If $k=N$, return `budget-exhausted`. Otherwise set $Y_0=a$, $Y_M=b$, and $Y_i=R_i+\\eta F_i^\\perp$ for interior images. Reject any nonfinite $Y_i$ with `nonfinite-evaluation`; if any $Y_i\\notin U$, return `geometry-failure`.",
+      "33": "4. Compute cumulative lengths $s_0=0$, $s_j=\\sum_{i=1}^j\\|Y_i-Y_{i-1}\\|_2$, and total length $S=s_M$. If $S=0$ or the computed cumulative lengths are not strictly increasing, return `geometry-failure`. For $j=1,\\ldots,M-1$, place the new image at the unique point of the piecewise-linear polygon $Y_0,\\ldots,Y_M$ whose cumulative length is $jS/M$; if that target is a vertex, use that vertex, and otherwise use linear interpolation on its unique containing segment. If any redistributed image lies outside $U$, return `geometry-failure`. Set $R_0^{k+1}=a,R_M^{k+1}=b$ and use the checked redistributed points as the new interior images.",
+      "34": "",
+      "35": "This is the specified projected-force string variant. No convergence from arbitrary initial images, no automatic endpoint minimization, and no error estimate follow from the procedure alone."
+    },
+    "source_snapshot": "snapshots/alg-finite-image-string-method.md",
+    "source_sha256": "a239c1e0b0f61134563b5f24360c5fe0c108bbe92aa8da8ddf2f9e8a3709bc76",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain editorial candidate; no rendering defect",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "def-mccormick-bilinear-box-envelope",
+    "section": "Item body",
+    "lines": [
+      30,
+      31,
+      32,
+      33
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "geometric definition diagram",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Show the surface w=xy above a rectangular (x,y) box together with the two lower and two upper affine McCormick planes from the four inequalities; distinguish the product graph from the bounding polytope.",
+    "mathematical_check": "Show the surface w=xy above a rectangular (x,y) box together with the two lower and two upper affine McCormick planes from the four inequalities; distinguish the product graph from the bounding polytope.",
+    "screenshots": [
+      "screenshots/def-mccormick-bilinear-box-envelope--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/def-mccormick-bilinear-box-envelope--01.png": "162cafd9b1368e3d335e59ace8ab2b82a53e72a0121966a8d56c237c441b16c5"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "global-optimization-and-certified-branch-and-bound"
+    ],
+    "source_lines": {
+      "30": "Let $x\\in[l_x,u_x]$ and $y\\in[l_y,u_y]$, where all four endpoints are finite and ordered, and let $w$ be an additional real variable representing the product $xy$. The **McCormick polytope** for this box is the set of $(x,y,w)$ satisfying the box bounds and",
+      "31": "$$ w\\ge l_xy+l_yx-l_xl_y,\\qquad w\\ge u_xy+u_yx-u_xu_y $$",
+      "32": "$$ w\\le u_xy+l_yx-u_xl_y,\\qquad w\\le l_xy+u_yx-l_xu_y $$",
+      "33": "The term **McCormick envelope** will mean this polytope. Its exact relation to the convex hull of the product graph is established by the local bilinear-hull result."
+    },
+    "source_snapshot": "snapshots/def-mccormick-bilinear-box-envelope.md",
+    "source_sha256": "0f1b26d3b6e3cc28fa3721e63d1aa9ee7871bcecd9ad8f8af9fbe5509ec59b74",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "uncertain editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-corner-and-cusp-break-the-string-tangent-hypotheses",
+    "section": "Item body",
+    "lines": [
+      25,
+      39,
+      41
+    ],
+    "symptom": "The source introduces two explicit planar paths to demonstrate geometric hypotheses used by a string method. A paired sketch can make the corner tangent mismatch and cusp chord degeneracy immediately visible.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional-two-panel-path-and-centered-chord-diagram",
+    "exact_source_claim": "The corner path has distinct one-sided tangents and a centered chord in neither tangent direction, while the cusp path has coincident samples at ±h, zero centered chord, and zero derivative at 0.",
+    "selection_reason": "The source introduces two explicit planar paths to demonstrate geometric hypotheses used by a string method. A paired sketch can make the corner tangent mismatch and cusp chord degeneracy immediately visible.",
+    "concrete_diagram_content": "Panel 1: draw R_c(s)=(s,0) for s≤0 and R_c(s)=(0,s) for s≥0, mark the origin, one-sided tangent arrows (1,0) and (0,1), sample points R_c(−h), R_c(h), and the centered chord (h,h). Panel 2: draw R_u(s)=(s²,0), mark the coincident samples R_u(−h)=R_u(h)=(h²,0), the zero centered chord, and R_u'(0)=0. Keep arrows and labels consistent with the exact coordinate formulas.",
+    "mathematical_check": "Panel 1: draw R_c(s)=(s,0) for s≤0 and R_c(s)=(0,s) for s≥0, mark the origin, one-sided tangent arrows (1,0) and (0,1), sample points R_c(−h), R_c(h), and the centered chord (h,h). Panel 2: draw R_u(s)=(s²,0), mark the coincident samples R_u(−h)=R_u(h)=(h²,0), the zero centered chord, and R_u'(0)=0. Keep arrows and labels consistent with the exact coordinate formulas.",
+    "screenshots": [
+      "screenshots/ex-corner-and-cusp-break-the-string-tangent-hypotheses--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-corner-and-cusp-break-the-string-tangent-hypotheses--01.png": "b7e8e7890325ca40544977eee4793c29e880d42776b46bac087720973c797e00"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "minimum-energy-paths-string-neb-and-saddle-certificates-examples"
+    ],
+    "source_lines": {
+      "25": "Two elementary paths show why regularity and nondegenerate centered chords are explicit hypotheses. The corner path is $R_c(s)=(s,0)$ for $s\\le0$ and $R_c(s)=(0,s)$ for $s\\ge0$. The cusp path is $R_u(s)=(s^2,0)$. For equal samples at $-h$ and $h$, the centered chord is $R(h)-R(-h)$.",
+      "39": "1.1 For the corner, the one-sided derivatives at $0$ are $R_c'(0^-)=(1,0)$ and $R_c'(0^+)=(0,1)$. They are distinct, so there is no single tangent at the corner. The centered chord is $R_c(h)-R_c(-h)=(h,h)$, whose unit direction is $(1,1)/\\sqrt2$; it agrees with neither one-sided tangent. [given, algebra]",
+      "41": "1.2 For the cusp, $R_u(h)=R_u(-h)=(h^2,0)$, so its centered chord is exactly zero. Also $R_u'(0)=(0,0)$, so the path is not regular there. [given, algebra]"
+    },
+    "source_snapshot": "snapshots/ex-corner-and-cusp-break-the-string-tangent-hypotheses.md",
+    "source_sha256": "8112dbb7f6d85897782cb0ce30966cc8bb42555a39a05434e33606520c6ee522",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "06"
+    ],
+    "candidate_certainty": "uncertain-editorial-candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-curved-double-well-has-a-circular-minimum-energy-path",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "The exact geometry, endpoint minima, saddle location, excluded collision point, and normal coordinate are explicit but only described in formulas and prose; a sketch could connect the chart and path claim.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Optional TikZ potential/path sketch",
+    "exact_source_claim": "The chart X(s,n)=(1+n)(cos s,sin s) maps the open rectangle to an annular sector; the regular minimum-energy path is the unit circular arc X(s,0), s∈[−π/6,π/6], joining the two global minima, with X(0,0) an index-one saddle.",
+    "selection_reason": "The exact geometry, endpoint minima, saddle location, excluded collision point, and normal coordinate are explicit but only described in formulas and prose; a sketch could connect the chart and path claim.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-curved-double-well-has-a-circular-minimum-energy-path--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-curved-double-well-has-a-circular-minimum-energy-path--01.png": "34ad611224cc44ea4f2b42526c2c8e9f87340ead71d5f3abdbf4dad9cd4124a2"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "minimum-energy-paths-string-neb-and-saddle-certificates-examples"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/ex-curved-double-well-has-a-circular-minimum-energy-path.md",
+    "source_sha256": "1427410d0356ea23033ca52370057cc75e54abb018d5c57bbbdc46e337dbc42e",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "uncertain editorial candidate; source lines define all relations, but prose is complete and no proof depends on a diagram.",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-indefinite-trust-region-boundary-minimizer",
+    "section": "Item body",
+    "lines": [
+      28,
+      31,
+      53,
+      55
+    ],
+    "symptom": "This worked example contrasts a unique global minimizer and the Cauchy step as distinct boundary points for one explicit indefinite quadratic, and computes their different predicted reductions. A small 2D figure could show this geometric comparison at a glance.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional trust-region geometry diagram",
+    "exact_source_claim": "",
+    "selection_reason": "This worked example contrasts a unique global minimizer and the Cauchy step as distinct boundary points for one explicit indefinite quadratic, and computes their different predicted reductions. A small 2D figure could show this geometric comparison at a glance.",
+    "concrete_diagram_content": "Draw the unit disk for B=diag(-1,1), g=(-1,-3)/√2; mark p*=(1,1)/√2 and p_C=(1,3)/√10 on its boundary. Label the predicted reductions as 2 and √5−2/5 respectively. If contours are added, derive them from m(p)−f(x)=gᵀp+½pᵀBp and ensure their orientation matches the indefinite Hessian.",
+    "mathematical_check": "Draw the unit disk for B=diag(-1,1), g=(-1,-3)/√2; mark p*=(1,1)/√2 and p_C=(1,3)/√10 on its boundary. Label the predicted reductions as 2 and √5−2/5 respectively. If contours are added, derive them from m(p)−f(x)=gᵀp+½pᵀBp and ensure their orientation matches the indefinite Hessian.",
+    "screenshots": [
+      "screenshots/ex-indefinite-trust-region-boundary-minimizer--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-indefinite-trust-region-boundary-minimizer--01.png": "5921fbf822b73ef57dae07fc76306fd3b426f57b2164473811843c0063d1fcc8"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "trust-region-and-cubic-regularization-methods-examples"
+    ],
+    "source_lines": {
+      "28": "Take $n=2$, $\\Delta=1$, $B=\\operatorname{diag}(-1,1)$, and",
+      "31": "different feasible boundary point with a strictly smaller predicted decrease.",
+      "53": "1.1 Set $p_*=(1,1)/\\sqrt2$. Then $\\|p_*\\|_2=1$, $(B+2I)p_*=(1,3)/\\sqrt2=-g$, and $B+2I=\\operatorname{diag}(1,3)$ is positive definite. With $\\lambda=2$, complementarity holds at the boundary, so [F2] gives a global minimizer. For any other feasible $z\\ne p_*$, expansion gives $$m(z)-m(p_*)=\\tfrac12(z-p_*)^T(B+2I)(z-p_*)+(1-\\|z\\|_2^2)>0,$$ because the first term is strictly positive and the second nonnegative; hence the minimizer is unique. [given, F1, F2, algebra]",
+      "55": "2.1 The global minimizer has $g^Tp_*=-2$ and $p_*^TBp_*=0$, so its predicted reduction is $2$. For the Cauchy step, $\\|g\\|_2^2=5$ and $g^TBg=4$, hence [F3] gives $p_C=(1,3)/\\sqrt{10}$ and $\\|p_C\\|_2=1$. Its model value is $m(p_C)=f(x)-\\sqrt5+2/5$, so its predicted reduction is $\\sqrt5-2/5<2$; the strict inequality follows from $\\sqrt5<12/5$. [given, F1, F3, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-indefinite-trust-region-boundary-minimizer.md",
+    "source_sha256": "6505740785849969b5063458dba005012e4a51af99276b9ac54edca43dd82e3c",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain-optional",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-local-identifiability-does-not-imply-global-identifiability",
+    "section": "Item body",
+    "lines": [
+      34,
+      44,
+      45,
+      46,
+      47,
+      48
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial function-graph diagram candidate",
+    "exact_source_claim": "For F(theta)=theta^2 on R, theta0=1 is locally identifiable while the full parameter map is not globally identifiable; F'(1)=2 and F(1)=F(-1).",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Plot y=theta^2; mark a small interval around theta=1 on which the curve is one-to-one, and show the equal observations at theta=1 and theta=-1. Keep the local neighborhood and global collision visually distinct.",
+    "mathematical_check": "Plot y=theta^2; mark a small interval around theta=1 on which the curve is one-to-one, and show the equal observations at theta=1 and theta=-1. Keep the local neighborhood and global collision visually distinct.",
+    "screenshots": [
+      "screenshots/ex-local-identifiability-does-not-imply-global-identifiability--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-local-identifiability-does-not-imply-global-identifiability--01.png": "7b9f956569ca23db88cee258880936b1e25787d7e11b99c9241e098376501977"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "numerical-identifiability-and-optimal-experiment-design-examples"
+    ],
+    "source_lines": {
+      "34": "Let $\\Theta=\\mathbb R$ and $F(\\theta)=\\theta^2$. The parameter $\\theta_0=1$ is locally identifiable, but the full parameter map is not globally identifiable on $\\Theta$.",
+      "44": "## Verification",
+      "45": "",
+      "46": "1.1 The map is C1 and $F'(1)=2\\ne0$, so its one-dimensional Jacobian has full column rank. By [F2], $F$ is injective on some open neighborhood of $1$, proving local identifiability. [given, F2, algebra]",
+      "47": "",
+      "48": "2.1 The distinct parameters $1$ and $-1$ both lie in $\\Theta$ and satisfy $F(1)=1=F(-1)$. Hence $F$ is not injective on all of $\\Theta$, so it is not globally identifiable by [F1]. [given, F1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-local-identifiability-does-not-imply-global-identifiability.md",
+    "source_sha256": "9af33eca7e12f4dc6e95b28a1b50d3c2713c10af0473ffe1a7c5620214aa4aca",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "08"
+    ],
+    "candidate_certainty": "uncertain editorial candidate; no rendering defect",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-nonunique-lasso-coefficients-unique-fitted-value",
+    "section": "Item body",
+    "lines": [
+      35,
+      36,
+      37
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "solution-set / null-direction diagram",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "In the nonnegative (theta_1,theta_2) plane, mark the minimizer segment theta_1+theta_2=3/4 and show that every point maps under X=[1 1] to the same fitted scalar 3/4; optionally label the null direction (1,-1).",
+    "mathematical_check": "In the nonnegative (theta_1,theta_2) plane, mark the minimizer segment theta_1+theta_2=3/4 and show that every point maps under X=[1 1] to the same fitted scalar 3/4; optionally label the null direction (1,-1).",
+    "screenshots": [
+      "screenshots/ex-nonunique-lasso-coefficients-unique-fitted-value--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-nonunique-lasso-coefficients-unique-fitted-value--01.png": "2a034bdd296b43e028bbb81baa493589f65e1ecd2ab0746047eb5f05f11be5d6"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "coordinate-and-block-descent-methods-examples"
+    ],
+    "source_lines": {
+      "35": "Take one observation, two identical columns $X=[1\\;1]$, response $y=1$, and Lasso penalty $\\tau=1/4$ in [[def-lasso-estimator]]. The minimizing coefficient set is exactly",
+      "36": "$$\\{(\\theta_1,\\theta_2):\\theta_1,\\theta_2\\ge0,\\ \\theta_1+\\theta_2=3/4\\},$$",
+      "37": "so the coefficients are not unique while the fitted value is always $X\\theta=3/4$."
+    },
+    "source_snapshot": "snapshots/ex-nonunique-lasso-coefficients-unique-fitted-value.md",
+    "source_sha256": "0a821a1b6a0302ef416a8b96bbb23671417090162d102f4c23ce1514e06f68dd",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "05"
+    ],
+    "candidate_certainty": "uncertain editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-repeated-eigenspace-on-grassmann",
+    "section": "Item body",
+    "lines": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      52
+    ],
+    "symptom": "The example states that every rank-one line in span(e_1,e_2) minimizes the Rayleigh quotient and explicitly parameterizes the family over 0≤θ<π.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "potential TikZ Grassmann minimizer-family schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The example states that every rank-one line in span(e_1,e_2) minimizes the Rayleigh quotient and explicitly parameterizes the family over 0≤θ<π.",
+    "concrete_diagram_content": "Show the e_1e_2 plane as the zero-eigenspace of diag(0,0,2), with lines [cos θ e_1+sin θ e_2] for 0≤θ<π as distinct points/representatives of a continuous family in Gr(1,3); show e_3 as the positive eigen-direction. Identify antipodal unit vectors as the same line so the parameter interval is half-open and endpoints are not duplicated.",
+    "mathematical_check": "Show the e_1e_2 plane as the zero-eigenspace of diag(0,0,2), with lines [cos θ e_1+sin θ e_2] for 0≤θ<π as distinct points/representatives of a continuous family in Gr(1,3); show e_3 as the positive eigen-direction. Identify antipodal unit vectors as the same line so the parameter interval is half-open and endpoints are not duplicated.",
+    "screenshots": [
+      "screenshots/ex-repeated-eigenspace-on-grassmann--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-repeated-eigenspace-on-grassmann--01.png": "6c206bdc8802d1fe3e1d20cc2220ccdfda760d352b1c91f844b3006ff4883893"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "riemannian-optimization-on-stiefel-and-grassmann-manifolds-examples"
+    ],
+    "source_lines": {
+      "32": "Let $A=\\operatorname{diag}(0,0,2)$ and minimize the rank-one trace objective",
+      "33": "$f([x])=x^{\\mathsf T}Ax$ on $\\operatorname{Gr}(1,3)$. Every line in",
+      "34": "$\\operatorname{span}(e_1,e_2)$ is a global minimizer. The repeated bottom",
+      "35": "eigenvalue therefore produces a continuum of minimizers represented by one",
+      "36": "Grassmann critical set.",
+      "52": "2.1 The vectors $x=(\\cos\\theta)e_1+(\\sin\\theta)e_2$ for $0\\le\\theta<\\pi$ are unit and give distinct lines: two such vectors span the same line only when their angles differ by a multiple of $\\pi$, which cannot occur for distinct parameters in this half-open interval. Thus they parametrize continuum many distinct lines. At each such $x$, $Ax=0$, so the ambient gradient $2Ax$ and its horizontal projection vanish. The family is a continuum of Grassmann critical minimizers. [F1, F2, given, step 1.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-repeated-eigenspace-on-grassmann.md",
+    "source_sha256": "3058b7749d6e27ae076d182a9c28049d861cf5c6dd064d90e8f320237caf780e",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "optional editorial candidate; source directly supports the family and its quotient identification, but no omission defect is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-self-consistent-projector-two-cycle-with-gap",
+    "section": "Item body",
+    "lines": [
+      24,
+      32,
+      50,
+      54
+    ],
+    "symptom": "The example’s central claim is the exact two-cycle P0↔P1 with gap 1 at both iterates; a compact state-transition diagram could make the counterexample immediate.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "discrete projector-map state transition",
+    "exact_source_claim": "",
+    "selection_reason": "The example’s central claim is the exact two-cycle P0↔P1 with gap 1 at both iterates; a compact state-transition diagram could make the counterexample immediate.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-self-consistent-projector-two-cycle-with-gap--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-self-consistent-projector-two-cycle-with-gap--01.png": "c19924dc4168537bb121953cab44365966d45f1e0a46c247f2d98c87460e2e0c"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "self-consistent-projector-iterations-and-certified-mixing-examples"
+    ],
+    "source_lines": {
+      "24": "Take $n=2$, $r=1$, overlap $S=I_2$, Cholesky factor $L=I_2$, $h=0$, and",
+      "32": "iterates.",
+      "50": "1.1 For Hermitian $X,Y$, the diagonal entries are real and $\\langle G(X),Y\\rangle_F=X_{11}Y_{11}+X_{22}Y_{22}=\\langle X,G(Y)\\rangle_F.$ Thus $G$ is real-linear, Hermitian-valued, and self-adjoint for the Frobenius inner product, so the stated data satisfy [F1]. Each $P_i$ is Hermitian, idempotent, and has trace $1$, hence lies in $\\mathcal P_1$. [given, F1, algebra]",
+      "54": "2.1 By [F3], starting at $P_0$ yields $P_0,P_1,P_0,P_1,\\ldots$. Since $\\|P_0-P_1\\|_F=\\sqrt2>0$, this sequence does not converge. Thus a positive uniform gap at the iterates alone does not imply convergence. [step 1.2, F3, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-self-consistent-projector-two-cycle-with-gap.md",
+    "source_sha256": "9f5724c75c78c00032a9eefd6ca59783d149a7baa96fdadb2ca1ebc8098e0721",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain editorial candidate; no omission or mathematical defect is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-trust-region-newton-cauchy-truncated-cg",
+    "section": "Item body",
+    "lines": [
+      30,
+      35
+    ],
+    "symptom": "The worked example directly compares an unrestricted Newton step outside the unit ball with feasible Cauchy/truncated-CG boundary steps and states their predicted reductions; a sketch can expose feasibility and direction relationships at a glance.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "two-dimensional trust-region geometry comparison",
+    "exact_source_claim": "",
+    "selection_reason": "The worked example directly compares an unrestricted Newton step outside the unit ball with feasible Cauchy/truncated-CG boundary steps and states their predicted reductions; a sketch can expose feasibility and direction relationships at a glance.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/ex-trust-region-newton-cauchy-truncated-cg--01.png",
+      "screenshots/ex-trust-region-newton-cauchy-truncated-cg--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-trust-region-newton-cauchy-truncated-cg--01.png": "c364c5d1a4cbda08bd3b8e41561b28177fe57f4a24ae9cd5a2ab9765d10e6b9f",
+      "screenshots/ex-trust-region-newton-cauchy-truncated-cg--02.png": "361a498e4cc1490a6b578073864a5a95bf0c7546f93c3b44cc6abe60eecb13a3"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "trust-region-and-cubic-regularization-methods-examples"
+    ],
+    "source_lines": {
+      "30": "Let $f(z)=g^Tz+\\tfrac12z^TBz$ on $\\mathbb R^2$, where",
+      "35": "steps coincide and have smaller predicted reduction."
+    },
+    "source_snapshot": "snapshots/ex-trust-region-newton-cauchy-truncated-cg.md",
+    "source_sha256": "9b975a609e4c9eaa797c7805cfdf776a62126c7278a87b667854a77a299acddf",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain editorial candidate; no omission or mathematical defect is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-two-pixel-total-variation-proximal-map",
+    "section": "Item body",
+    "lines": [
+      36,
+      38,
+      56,
+      58
+    ],
+    "symptom": "The example changes coordinates from two pixels to mean and half-difference, then states that the proximal map preserves the mean while soft-thresholding the half-difference. A simple graph can clarify the threshold action without adding mathematical claims.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional soft-thresholding / mean-preservation diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The example changes coordinates from two pixels to mean and half-difference, then states that the proximal map preserves the mean while soft-thresholding the half-difference. A simple graph can clarify the threshold action without adding mathematical claims.",
+    "concrete_diagram_content": "Plot d↦S_{tλ}(d)=sign(d)max(|d|−tλ,0), with threshold points ±tλ and zero plateau. Optionally pair it with v1,v2→(m,d)→(m−S_{tλ}(d),m+S_{tλ}(d)) to show that the mean coordinate stays fixed and only the difference shrinks.",
+    "mathematical_check": "Plot d↦S_{tλ}(d)=sign(d)max(|d|−tλ,0), with threshold points ±tλ and zero plateau. Optionally pair it with v1,v2→(m,d)→(m−S_{tλ}(d),m+S_{tλ}(d)) to show that the mean coordinate stays fixed and only the difference shrinks.",
+    "screenshots": [
+      "screenshots/ex-two-pixel-total-variation-proximal-map--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-two-pixel-total-variation-proximal-map--01.png": "36e2673b56e6ed9c1979b6a2e9263d67fc53aaffa1eb388c368efc22651014c4"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "proximal-gradient-and-accelerated-composite-optimization-examples"
+    ],
+    "source_lines": {
+      "36": "For $\\lambda,t>0$, let $g(u_1,u_2)=\\lambda|u_2-u_1|$. For input $v=(v_1,v_2)$, define its mean $m=(v_1+v_2)/2$ and half-difference $d=(v_2-v_1)/2$. Then",
+      "38": "Thus the proximal map preserves the mean and soft-thresholds the half-difference by $t\\lambda$.",
+      "56": "1.1 The function $g$ is finite everywhere, hence proper. Its epigraph is the intersection of the two closed halfspaces $\\lambda(u_2-u_1)\\le s$ and $-\\lambda(u_2-u_1)\\le s$, so it is closed. The triangle inequality for absolute value gives convexity under [F5]. Write a candidate $u$ uniquely as $u=(a-b,a+b)$, so $a$ is its mean and $b$ its half-difference. Direct expansion gives $\\|u-v\\|_2^2=2(a-m)^2+2(b-d)^2$ and $g(u)=2\\lambda|b|$. Hence the objective is $$\\frac{(a-m)^2}{t}+\\frac{(b-d)^2}{t}+2\\lambda|b|.$$ The first term is uniquely minimized at $a=m$; the remaining terms depend only on $b$. [F1, F4, F5, given, algebra]",
+      "58": "2.1 The $b$-dependent objective is $2\\lambda|b|+(b-d)^2/t$, which under the scalar/one-coordinate identification is the proximal objective for the proper, closed, convex function $2\\lambda|\\cdot|$ with parameter $t/2$. By [F2], its unique minimizer is $S_{(t/2)(2\\lambda)}(d)=S_{t\\lambda}(d)$. This and $a=m$ give the displayed vector. The objective is strictly convex because of its positive quadratic term, consistent with uniqueness in [F3]. [F2, F3, step 1.1, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-two-pixel-total-variation-proximal-map.md",
+    "source_sha256": "cdf1a039fa659011a52e11a65f2623330dfe4f78b21888f12670b02eee525d86",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain-optional",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "ex-zero-discrete-neb-residual-does-not-fix-a-continuum-path",
+    "section": "Item body",
+    "lines": [
+      30,
+      32,
+      34,
+      52,
+      54,
+      56
+    ],
+    "symptom": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "editorial comparison diagram candidate; uncertain",
+    "exact_source_claim": "",
+    "selection_reason": "A concrete construction appears in the source; decide independently whether a diagram materially clarifies it.",
+    "concrete_diagram_content": "Draw endpoints A=(0,0), B=(1,0) and the two M=2 chains through R=(1/2,0) and R=(1/2,1), with equal adjacent lengths and zero projected force indicated for each; optionally overlay the continuum family R_c(t)=(t,c sin(pi t)). Clarify that both discrete residuals vanish while the interior images differ, and that the second midpoint has distance 1 from the prescribed R_0 reference. This is a visual aid only; the source proof carries the claim.",
+    "mathematical_check": "Draw endpoints A=(0,0), B=(1,0) and the two M=2 chains through R=(1/2,0) and R=(1/2,1), with equal adjacent lengths and zero projected force indicated for each; optionally overlay the continuum family R_c(t)=(t,c sin(pi t)). Clarify that both discrete residuals vanish while the interior images differ, and that the second midpoint has distance 1 from the prescribed R_0 reference. This is a visual aid only; the source proof carries the claim.",
+    "screenshots": [
+      "screenshots/ex-zero-discrete-neb-residual-does-not-fix-a-continuum-path--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/ex-zero-discrete-neb-residual-does-not-fix-a-continuum-path--01.png": "06b9bcb793265af22ce402c00c46d1180271ba5bda681fdfa609c2b7f74bea6a"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "minimum-energy-paths-string-neb-and-saddle-certificates-examples"
+    ],
+    "source_lines": {
+      "30": "Prescribe $C_{\\rm bad}=\\varnothing$, and let $U=\\mathbb R^2$ and $V\\equiv0$. Every regular path from $A=(0,0)$ to $B=(1,0)$ satisfies the MEP equation, so there are infinitely many distinct continuum MEPs. For a finite string with $M=2$, both chains",
+      "32": "$$R_1^{(0)}=(1/2,0),\\qquad R_1^{(1)}=(1/2,1)$$",
+      "34": "have equal adjacent segment lengths and zero projected force. The improved-tangent NEB ordinary force also vanishes for both. Thus their discrete residuals are exactly zero, although their interior images differ.",
+      "52": "1.1 For each $c\\in\\mathbb R$, $R_c(t)=(t,c\\sin(\\pi t))$ on $[0,1]$ is regular because its first coordinate derivative is $1$, and it has endpoints $A,B$. Since $\\nabla V=0$, every normal gradient component is zero, so [F1] makes every $R_c$ an MEP. Distinct $c$ give distinct paths. [F1, given, algebra]",
+      "54": "1.2 For $M=2$, each listed interior point is equidistant from $A$ and $B$: the two distances are $1/2$ when $R_1=(1/2,0)$ and both $\\sqrt{5}/2$ when $R_1=(1/2,1)$. Thus the adjacent lengths agree. Since the gradient is zero, the string projected force is zero by [F2], and the ordinary NEB spring term is also zero by [F3]. Both chains therefore have exactly zero force and spacing residuals. [F2, F3, given, algebra]",
+      "56": "2.1 The two chains differ in their interior image, and the continuum family in step 1.1 is nonunique. In this example the string residual map has no locally invertible Jacobian that can isolate a path: its force components vanish identically and its spacing equation alone cannot determine the two coordinates of the interior image. Thus the inverse/stability premise [F4] is absent. Independently of that missing premise, the two distinct MEPs and two zero-residual chains explicitly prove nonuniqueness. Each chain's midpoint lies on its corresponding exact MEP $R_c$, so this is not an assertion of inaccuracy relative to every MEP. Relative to the prescribed reference $R_0([0,1])$, however, the second chain's midpoint has Euclidean distance $1$ while its residual is zero. Therefore residual alone cannot select a unique continuum MEP or bound distance to that reference by an error bound that vanishes with the residual. [F4, step 1.1, step 1.2, algebra] ∎"
+    },
+    "source_snapshot": "snapshots/ex-zero-discrete-neb-residual-does-not-fix-a-continuum-path.md",
+    "source_sha256": "8cbdad821a19ab30ccbe2574a9abc6a73e7d083f8d6f99429b67393bfeff58ca",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "01"
+    ],
+    "candidate_certainty": "uncertain/editorial candidate",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "lem-centered-chord-and-unequal-step-tangent-error",
+    "section": "Item body",
+    "lines": [
+      29,
+      31,
+      35,
+      37,
+      41
+    ],
+    "symptom": "The statement compares a centered chord and an unequal two-step stencil with the unit tangent of a smooth curve and gives second-order error bounds. A local curve sketch can orient the sample points and distinguish the symmetric and unequal stencils.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "optional curve-stencil tangent approximation diagram",
+    "exact_source_claim": "",
+    "selection_reason": "The statement compares a centered chord and an unequal two-step stencil with the unit tangent of a smooth curve and gives second-order error bounds. A local curve sketch can orient the sample points and distinguish the symmetric and unequal stencils.",
+    "concrete_diagram_content": "Draw a unit-speed curve R(s) with tangent R′(s), centered sample points R(s−h), R(s+h), and their chord direction d_h; beside it show unequal sample offsets h_− and h_+ with the weighted stencil d_{h_−,h_+}. Mark that normalized directions are within 4δ_h or 4δ_{h_−,h_+} of R′(s); avoid implying the one-sided branch has a second-order bound.",
+    "mathematical_check": "Draw a unit-speed curve R(s) with tangent R′(s), centered sample points R(s−h), R(s+h), and their chord direction d_h; beside it show unequal sample offsets h_− and h_+ with the weighted stencil d_{h_−,h_+}. Mark that normalized directions are within 4δ_h or 4δ_{h_−,h_+} of R′(s); avoid implying the one-sided branch has a second-order bound.",
+    "screenshots": [
+      "screenshots/lem-centered-chord-and-unequal-step-tangent-error--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/lem-centered-chord-and-unequal-step-tangent-error--01.png": "1c0430cc3dade5d3df0743c82c34e3b80c861c880f5d59e360f1506382bb4ef3"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "minimum-energy-paths-string-neb-and-saddle-certificates"
+    ],
+    "source_lines": {
+      "29": "Let $R:J\\to\\mathbb R^d$ be a unit-speed $C^3$ curve on an open interval $J$ containing $[0,1]$. Let $J_0\\subseteq J$ be an interval on which $\\max_j\\sup_{u\\in J_0}|R_j'''(u)|\\le M_3/\\sqrt d$. For the centered estimate, take $s$ and $h>0$ with $[s-h,s+h]\\subseteq J_0$ and define",
+      "31": "$$d_h:=\\frac{R(s+h)-R(s-h)}{2h},\\qquad \\widehat t_h:=\\frac{d_h}{\\|d_h\\|_2}.$$",
+      "35": "$$\\|d_h-R'(s)\\|_2\\le\\delta_h,\\qquad \\|\\widehat t_h-R'(s)\\|_2\\le4\\delta_h.$$",
+      "37": "For the unequal-step estimate, take positive $h_-,h_+$ with $[s-h_-,s+h_+]\\subseteq J_0$ and define",
+      "41": "If $\\delta_{h_-,h_+}:=M_3h_-h_+/6\\le1/2$, then it is nonzero and its unit normalization differs from $R'(s)$ by at most $4\\delta_{h_-,h_+}$. In particular, equal steps give an $O(h^2)$ unit-tangent error; quasiuniform unequal steps give an $O(h_-h_+)$ error. No second-order claim is made for a one-sided tangent branch."
+    },
+    "source_snapshot": "snapshots/lem-centered-chord-and-unequal-step-tangent-error.md",
+    "source_sha256": "4803f3881f9f14665260e2b04cdcb0035d87c1de41f6ea1af990725a69fbefbf",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "09"
+    ],
+    "candidate_certainty": "uncertain-optional",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "lem-mccormick-envelope-equals-graph-convex-hull",
+    "section": "Item body",
+    "lines": [
+      30,
+      46,
+      52
+    ],
+    "symptom": "The item identifies a three-dimensional graph and its convex hull via four McCormick planes; an optional view can connect the inequalities to the geometric envelope.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "bilinear surface and convex-envelope schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The item identifies a three-dimensional graph and its convex hull via four McCormick planes; an optional view can connect the inequalities to the geometric envelope.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/lem-mccormick-envelope-equals-graph-convex-hull--01.png",
+      "screenshots/lem-mccormick-envelope-equals-graph-convex-hull--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/lem-mccormick-envelope-equals-graph-convex-hull--01.png": "e51c00b80a51aabdb34111e8ea539a281c653c3ae86ec7cf5056274529214239",
+      "screenshots/lem-mccormick-envelope-equals-graph-convex-hull--02.png": "fa646007aaec7df68c40b7cea9b353e824b82cebf103d25e11ac26ec200e47fe"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "global-optimization-and-certified-branch-and-bound"
+    ],
+    "source_lines": {
+      "30": "For every finite box $[l_x,u_x]\\times[l_y,u_y]$, the McCormick polytope from [[def-mccormick-bilinear-box-envelope]] is exactly the convex hull in $\\mathbb R^3$ of the graph $\\{(x,y,xy):x\\in[l_x,u_x],y\\in[l_y,u_y]\\}$.",
+      "46": "1.2 If both widths are positive, put $s=u_x-l_x>0$, $t=u_y-l_y>0$, $X=(x-l_x)/s$, $Y=(y-l_y)/t$, and $W=(w-l_xy-l_yx+l_xl_y)/(st)$. The inequalities become $0\\le X,Y\\le1$, $W\\ge0$, $W\\ge X+Y-1$, $W\\le X$, and $W\\le Y$. [F1, algebra]",
+      "52": "2.3 In the nondegenerate case of step 1.2, set $\\lambda_{11}=W$, $\\lambda_{10}=X-W$, $\\lambda_{01}=Y-W$, and $\\lambda_{00}=1-X-Y+W$. Step 1.2 makes each coefficient nonnegative; their sum is $1$, and $(X,Y,W)=\\lambda_{00}(0,0,0)+\\lambda_{10}(1,0,0)+\\lambda_{01}(0,1,0)+\\lambda_{11}(1,1,1)$. Each vertex lies on $W=XY$, so every normalized polytope point is a convex combination of graph points. [step 1.2, algebra, construct]"
+    },
+    "source_snapshot": "snapshots/lem-mccormick-envelope-equals-graph-convex-hull.md",
+    "source_sha256": "3d7ebc89e73d53832d010c846d4a1b2489b87c29451732900d3abade59bb594a",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "03"
+    ],
+    "candidate_certainty": "uncertain editorial candidate; no omission or mathematical defect is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "lem-rank-r-projector-grassmann-chart-and-tangent",
+    "section": "Item body",
+    "lines": [
+      33,
+      38,
+      39,
+      40,
+      41,
+      42
+    ],
+    "symptom": "The Statement explicitly defines nearby subspaces as graphs V_X over U and gives both the projector formula and the off-diagonal block form of every tangent direction at P_0.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "potential TikZ projector Grassmann chart and tangent schematic",
+    "exact_source_claim": "",
+    "selection_reason": "The Statement explicitly defines nearby subspaces as graphs V_X over U and gives both the projector formula and the off-diagonal block form of every tangent direction at P_0.",
+    "concrete_diagram_content": "Show the orthogonal splitting C^n=U⊕U^⊥, the reference subspace U, a nearby graph V_X={u+Xu}, and the projection π_U|_V identifying graph coordinates X. Beside it, show a tangent block matrix with zero diagonal blocks and B,B* off diagonal. Keep the schematic dimension agnostic and complex adjoints explicit; do not suggest the drawing proves chart openness or the projector formula.",
+    "mathematical_check": "Show the orthogonal splitting C^n=U⊕U^⊥, the reference subspace U, a nearby graph V_X={u+Xu}, and the projection π_U|_V identifying graph coordinates X. Beside it, show a tangent block matrix with zero diagonal blocks and B,B* off diagonal. Keep the schematic dimension agnostic and complex adjoints explicit; do not suggest the drawing proves chart openness or the projector formula.",
+    "screenshots": [
+      "screenshots/lem-rank-r-projector-grassmann-chart-and-tangent--01.png",
+      "screenshots/lem-rank-r-projector-grassmann-chart-and-tangent--02.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/lem-rank-r-projector-grassmann-chart-and-tangent--01.png": "93dfcfc484b74c0cf951732efff666ef239db1d61e11342c0c197ba466047892",
+      "screenshots/lem-rank-r-projector-grassmann-chart-and-tangent--02.png": "72d973dd561ead218e7cae651bce2842e557a80cd98a3751450afbdc2ae482de"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "finite-basis-projector-energies-and-variational-electronic-structure"
+    ],
+    "source_lines": {
+      "33": "Fix $P_0\\in\\mathcal P_r$, put $U=\\operatorname{range}P_0$ (range as in",
+      "38": "graph $V_X=\\{u+Xu:u\\in U\\}$ of a linear map $X:U\\to U^\\perp$. Its projector is",
+      "39": "$$P(X)=J_X(I_U+X^*X)^{-1}J_X^*,\\qquad J_Xu=u+Xu.$$",
+      "40": "These graph coordinates form an open neighborhood of $P_0$ in the projector",
+      "41": "Grassmannian. In the block decomposition at $P_0$, its tangent space is",
+      "42": "$$T_{P_0}\\mathcal P_r=\\left\\{\\begin{pmatrix}0&B^*\\\\B&0\\end{pmatrix}:B:U\\to U^\\perp\\right\\}.$$"
+    },
+    "source_snapshot": "snapshots/lem-rank-r-projector-grassmann-chart-and-tangent.md",
+    "source_sha256": "c6c4aa254bd521a3a7082b2fd27d3efbe8601a04c403001fe003db52d44adc55",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "10"
+    ],
+    "candidate_certainty": "optional editorial candidate; the chart and tangent maps are explicit in source, and no omission defect is confirmed",
+    "additional_candidate_observations": []
+  },
+  {
+    "id": "thm-dimer-mode-error-contracts-local-saddle-translation",
+    "section": "Item body",
+    "lines": [],
+    "symptom": "The statement relates a negative eigendirection, its perturbed dimer direction, a local Hessian gap, translation reflection, and an invariant error ball; these geometric roles are not visually represented in prose.",
+    "classification": "uncertain",
+    "defect_type": "missing-tikz-diagram",
+    "diagram_kind": "Optional TikZ local saddle-mode and translation sketch",
+    "exact_source_claim": "Under a validated index-one Hessian gap and accepted dimer direction, translation error contracts inside a radius-r ball by ||x_{k+1}−x_*||≤κ||x_k−x_*||+ση, with a geometric error bound and noise floor.",
+    "selection_reason": "The statement relates a negative eigendirection, its perturbed dimer direction, a local Hessian gap, translation reflection, and an invariant error ball; these geometric roles are not visually represented in prose.",
+    "concrete_diagram_content": "",
+    "mathematical_check": "",
+    "screenshots": [
+      "screenshots/thm-dimer-mode-error-contracts-local-saddle-translation--01.png"
+    ],
+    "screenshot_sha256": {
+      "screenshots/thm-dimer-mode-error-contracts-local-saddle-translation--01.png": "2e18c8dc7e0903fdc348eadc88f2a028608438c6045976ee002943b12ccc2728"
+    },
+    "suggested_repair": "Independent adjudication should determine whether a diagram is warranted and verify all states, transitions, edge directions, labels, and relation conventions against the frozen source.",
+    "pages": [
+      "minimum-energy-paths-string-neb-and-saddle-certificates"
+    ],
+    "source_lines": {},
+    "source_snapshot": "snapshots/thm-dimer-mode-error-contracts-local-saddle-translation.md",
+    "source_sha256": "7ae5fe778008d6e92fa47b26da934da5a61b570ccaad0109b13764b508fa3434",
+    "evidence_dir": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/diagram-supplement",
+    "reviewer_lanes": [
+      "04"
+    ],
+    "candidate_certainty": "uncertain editorial candidate; source gives the relations, but any two-dimensional drawing is schematic for d>2 and must not imply global convergence.",
+    "additional_candidate_observations": []
+  }
+]

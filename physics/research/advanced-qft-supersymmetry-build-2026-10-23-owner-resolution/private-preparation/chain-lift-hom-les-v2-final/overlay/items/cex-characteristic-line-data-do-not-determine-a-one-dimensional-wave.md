@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-characteristic-line-data-do-not-determine-a-one-dimensional-wave.md

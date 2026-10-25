@@ -1,0 +1,100 @@
+{
+  "id": "lem-seifert-matrix-skew-part-is-surface-intersection",
+  "agent": "/root/rendering_repair_coordinator/knot_043",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 04 displays the red failure block and no panels. The repaired native local ItemBody preview compiles one TikZ figure with zero diagram failures after replacing math-mode text captions with plain TikZ node text.",
+      "action": "Replaced the two caption uses of \\text with plain node text; restored visible tangent geometry by removing the opaque pale fill found to hide it in the first successful dark-mode preview.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "questionable-tikz-mathematics",
+      "verdict": "confirmed",
+      "reason": "The original v segment from (0,-0.6) to (0.45,0.65) misses the marked origin (it intersects y=0 at x=0.216), whereas u passes through the marked origin. This makes the marked crossing inconsistent. The normal-side ordering itself agrees with the definition; no convention reversal is needed.",
+      "action": "Moved v endpoints to (-0.24,-0.6) and (0.26,0.65), which place its actual transverse crossing with u at the origin. Added inherited-orientation arrows to all three local curve levels and clarified the normal coordinate arrow in the caption.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repaired both-panel TikZ compilation, corrected the marked tangent crossing, retained positive-normal side and orientation conventions, and ensured tangent arrows are visible in the actual dark-mode renderer.",
+  "source_lines_after": [
+    110,
+    113,
+    116,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    128
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": true,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Left panel: oriented tangent directions u,v in a local chart of F; positive normal n points out of the page.",
+      "relation": "Both strands contain (0,0). Their direction vectors are (2.4,0) and (0.5,1.25), whose determinant is +3.",
+      "justification": "The local definition of the surface intersection sign in the Statement and F3/F4 makes this the positive transverse crossing. Normal first gives (n,u,v), so its ambient sign is the same, as calculated in proof step 2.1. No over/under link crossing is represented."
+    },
+    {
+      "objects": "Right panel: F at height 0, a_i^+ at +0.58, a_i^- at -0.58, n upward.",
+      "relation": "The positive push is on the n-positive side; both push-offs point right like a_i. The red arrow is a coordinate direction, not a link strand.",
+      "justification": "The exact supplier def-knot-seifert-pairing-and-matrix defines a_i^+ by positive normal bicollar translation; translation preserves the curve orientation. For the strip orientation (n,u), its boundary is a_i^+ minus a_i^- as used in step 2.1. The minus here is a boundary-chain coefficient, not a reversal of the inherited push-off orientation."
+    },
+    {
+      "objects": "Matrix and strip comparison underlying the panels.",
+      "relation": "V_ij - V_ji = a_i dot_F a_j, hence V - V^T = J_F, with no sign change.",
+      "justification": "Step 2.1 uses the strip oriented by (n,u), adjoining v, to identify strip/curve intersection with surface crossing sign. Step 3.1 translates the pair (b_i^-,b_j) to (b_i,b_j^+) and uses linking symmetry to identify the subtracted term with V^0_ji. Step 4.1 transports the identity by integral basis change. The rigorous proof text is byte-identical and independent of the figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-seifert-matrix-skew-part-is-surface-intersection.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-seifert-matrix-skew-part-is-surface-intersection.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-seifert-matrix-skew-part-is-surface-intersection.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-seifert-matrix-skew-part-is-surface-intersection --out research/math-library-rendering-repairs-2026-10-23/preview-knot-043-independent-20261024-v2",
+      "exit_code": 0,
+      "output": "1 item, 4 tiles, 32 unrelated reference-map diagnostics; capture receipt: 1 TikZ, 176 KaTeX nodes, zero diagram failures and zero KaTeX errors. Final standalone tile 04 viewed at original resolution; both tangent arrows visible, panels compile, no red failure block."
+    }
+  ],
+  "preview": "research/math-library-rendering-repairs-2026-10-23/preview-knot-043-independent-20261024-v2/screenshots/lem-seifert-matrix-skew-part-is-surface-intersection--04.png",
+  "before_raw_sha256": "16f9108d492a858aa8fb1b930e3343a7a116d4d7c4d87ff58d400571b70a8927",
+  "after_raw_sha256": "bddf51996a2df34cd352791408efd344588bc053e1110f53e36de271096cc67a",
+  "scope_verification": "Frontmatter including exact publication status unchanged byte-for-byte; entire source before Remarks unchanged byte-for-byte. No definition, Statement, proof, dependency or source changes.",
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody/SSR native TikZ preview only; no HTTP or production route visit. Reference map reports 32 unrelated parse diagnostics; these are outside assigned scope."
+  ],
+  "recorded_at": "2026-10-23T18:47:41.248900+00:00"
+}

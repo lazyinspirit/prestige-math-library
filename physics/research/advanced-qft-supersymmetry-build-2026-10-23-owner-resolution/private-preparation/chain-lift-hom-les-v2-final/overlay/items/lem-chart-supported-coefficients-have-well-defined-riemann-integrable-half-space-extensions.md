@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions.md

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations.json
+  precheck: pass
 id: thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations
 kind: theorem
-title: "Corner computations: the U_i satisfy the Temperley-Lieb relations"
+title: "Corner computations: the $U_i$ satisfy the Temperley-Lieb relations"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -18,9 +21,7 @@ sources:
   references:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2b, printed pp. 11-12"
       url: "https://arxiv.org/pdf/math/0006056"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement

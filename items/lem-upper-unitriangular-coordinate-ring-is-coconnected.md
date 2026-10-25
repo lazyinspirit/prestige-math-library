@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-upper-unitriangular-coordinate-ring-is-coconnected.json
+  precheck: pass
 id: lem-upper-unitriangular-coordinate-ring-is-coconnected
 kind: lemma
-title: "Coconnected Hopf algebras: the coordinate ring of U_n and passage to quotients"
+title: "Coconnected Hopf algebras: the coordinate ring of $U_n$ and passage to quotients"
 dependency_level: 5
 deps:
   - def-axiom-of-choice
@@ -16,11 +19,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)

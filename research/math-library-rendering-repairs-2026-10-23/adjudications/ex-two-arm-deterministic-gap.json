@@ -1,0 +1,138 @@
+{
+  "id": "ex-two-arm-deterministic-gap",
+  "group": "dorl_023",
+  "agent": "/root/rendering_repair_coordinator/dorl_023",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A two-stage schedule materially clarifies that all m suboptimal pulls occur in exploration, whereas the longer commitment phase incurs zero regret. This is useful explanatory content even though the complete verification already establishes the formula. Original standalone screenshots show no existing figure and no other visible math defects.",
+      "action": "Added a two-stage TikZ schedule in final Remarks, with exact round ranges, selected arms, commitment J=1, and phase/total regret.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory ETC exploration/commitment schedule; original title, frontmatter, statement, references, Facts and Verification are byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      62,
+      64
+    ],
+    "tikz": [
+      66,
+      73
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "The two boxes are temporal phases, not categories or morphisms. A_t is the chosen arm at integer round t; J is the committed arm.",
+      "justification": "alg-explore-then-commit Definition input/output and steps 1, 3, 4 define these variables; the assigned Example has k=2, integer m>=1 and n>=2m+1."
+    },
+    {
+      "relation": "During exploration, A_(2r-1)=1 and A_(2r)=2 for 1<=r<=m, spanning precisely rounds 1 through 2m.",
+      "justification": "Substitute k=2 into algorithm Definition step 1: A_t=1+((t-1) mod 2). There are m odd and m even exploration rounds, consistent with local F3 and Verification 2.1. This indexing also holds for m=1."
+    },
+    {
+      "relation": "The single directed arrow runs from exploration to commitment and is labelled J=1; in commitment A_t=1 for 2m<t<=n.",
+      "justification": "Local Verification 1.1 and 2.1 give deterministic empirical means 1 and 1-Delta, with Delta>0; the unique maximizing arm is 1 under algorithm step 3. Algorithm step 4 then assigns J throughout remaining n-2m rounds. The assumption n>=2m+1 makes this phase nonempty."
+    },
+    {
+      "relation": "Exploration regret is m Delta, commitment regret is 0, and total regret is m Delta+0=m Delta.",
+      "justification": "Verification 1.1 establishes gaps (0,Delta); Verification 2.1 counts exactly m arm-2 exploration pulls and only arm-1 commitment pulls. The rewards are deterministic, so these counts yield both realized reward regret and its expectation. No probabilistic error event or additional upper-bound equality is asserted."
+    },
+    {
+      "relation": "The original rigorous verification is independent of the illustration.",
+      "justification": "All original source bytes precede the new Remarks unchanged; Verification steps 1.1-3.1 contain no diagram references or premises."
+    }
+  ],
+  "guard": {
+    "before_raw_sha256": "6e3ae6b629a9d09775ac17101c241a60ad5de60a1eec576171acaec3bac24c0a",
+    "guard_checked_immediately_before_edit": true,
+    "after_raw_sha256": "793b3cd7a094d108c856175b8fd0195ab5e76af4a34e056ce575d09c02840ec5",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published; unchanged byte-for-byte"
+  },
+  "original_visual_evidence": {
+    "declared_directory_discrepancy": "Finding declares diagram-supplement/screenshots, which does not exist. Authentic images were resolved only within the same category, one directory above diagram-supplement, and verified against recorded hashes.",
+    "standalone_original_resolution_viewed": true,
+    "screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/ex-two-arm-deterministic-gap--01.png",
+        "sha256": "348557fc7d8173fdab00f8130792e7f3f36435e060c45744eafddcea4e408da8"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/ex-two-arm-deterministic-gap--02.png",
+        "sha256": "15045f69168783bab83b856f2bdb0ed0aa85d94c19341fee30f1c2a86ceb37ed"
+      }
+    ]
+  },
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-two-arm-deterministic-gap.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-two-arm-deterministic-gap.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-two-arm-deterministic-gap.md",
+            "item_id": "ex-two-arm-deterministic-gap",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-two-arm-deterministic-gap.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "local_visual_checks": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl-023 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-two-arm-deterministic-gap --out research/math-library-rendering-repairs-2026-10-23/previews/dorl-023",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-023/manifest.json",
+    "manifest_sha256": "25bc07df19119127ac0ecd40ca16dd57a6c3b462623141aadc2214c42a6c25a1",
+    "source_sha256": "793b3cd7a094d108c856175b8fd0195ab5e76af4a34e056ce575d09c02840ec5",
+    "html_sha256": "77b6ba037c935e8bb9d8b87e793714874fec1603e7494f5bab419b30df87e883",
+    "reference_map_sha256": "a1b3a5b1177b3eca993a0b0ec7a93a6d01a7d7601859b5fa29c91b5349afc2e6",
+    "standalone_original_resolution_tiles_viewed": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dorl-023/screenshots/ex-two-arm-deterministic-gap--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dorl-023/screenshots/ex-two-arm-deterministic-gap--02.png"
+    ],
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl-023/pi-tikz-cache/1d7118b04e8623f0d0dc5d1f78f9b2b7.svg",
+    "observations": [
+      "Native SVG compiled; all formulas and prose labels visibly render, no raw TeX, clipping or overlap.",
+      "Dark-background native screenshot shows readable light labels and strokes; SVG uses currentColor with fill=none on the two box outlines and arrow paths; no pale filled regions.",
+      "Two phase boxes and one left-to-right arrow are present. Both SVG box paths contain Z closure and are visibly closed. This schedule has no cycle graph, so no last-to-first graph edge is asserted.",
+      "There are no open/closed point endpoint markers or plotted domain endpoints; inequalities in the labels specify integer round boundaries.",
+      "Preview has 16 unrelated reference-map parse diagnostics; requested source binding matches and both scoped render/check outputs pass."
+    ],
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "remaining_issues": []
+}

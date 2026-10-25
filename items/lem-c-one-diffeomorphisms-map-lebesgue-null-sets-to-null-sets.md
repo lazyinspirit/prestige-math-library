@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets.json
+  precheck: pass
 id: lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets
 kind: lemma
-title: "A C^1 diffeomorphism maps Lebesgue null sets to Lebesgue null sets"
+title: "A $C^1$ diffeomorphism maps Lebesgue null sets to Lebesgue null sets"
 status: published
 origin: session
 provenance:
@@ -9,14 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-c-one-map-and-local-inverse, thm-lipschitz-images-of-null-sets-in-rn-are-null, thm-lebesgue-null-agrees-with-elementary-nullity-in-rn, thm-finite-and-countable-subadditivity-of-measures, def-countable-choice, thm-rationals-countable]
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 2.47"

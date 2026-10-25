@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-c-two-free-product-c-three-is-infinite.json
+  precheck: pass
 id: ex-c-two-free-product-c-three-is-infinite
 kind: example
-title: "C_2 free-product C_3 has presentation with only the two factor relations and is infinite"
+title: "$C_2$ free-product $C_3$ has presentation with only the two factor relations and is infinite"
 status: published
 origin: session
 provenance:
@@ -14,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-11
 sources:
   scraped: []
   references: []

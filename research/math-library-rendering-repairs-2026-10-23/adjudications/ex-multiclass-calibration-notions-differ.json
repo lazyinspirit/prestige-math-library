@@ -1,0 +1,92 @@
+{
+  "id": "ex-multiclass-calibration-notions-differ",
+  "agent": "/root/rendering_repair_coordinator/slcm_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "display-math-paragraph-interleaving",
+      "verdict": "confirmed",
+      "reason": "Viewed the sole flagged original tile standalone at original resolution. All three array tables share a single Markdown paragraph with the model introductions: Model B follows beside Model A and Model C beside Model B. The frozen and current original source lack paragraph boundaries on both sides of each display. This is visible table/prose interleaving, rather than optional table styling.",
+      "action": "Inserted a blank line before and after each of the three unchanged one-line display formulas.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Each model table now occupies a separate display paragraph; the next model introduction and final conclusions start below the preceding table.",
+  "source_lines_after": {
+    "29": "Model A display, unchanged array data.",
+    "31": "In Model B take",
+    "33": "Model B display, unchanged array data.",
+    "35": "In Model C take",
+    "37": "Model C display, unchanged array data.",
+    "39": "Unchanged tie-breaking rule and calibration conclusions."
+  },
+  "mathematical_meaning_preserved": true,
+  "preservation_evidence": "Immediately before edit the raw SHA256 matched 697438be9bb26af5f13d473f2486892563c80153e3c0f0957344dc4024d2b052. Exact post-edit comparison with frozen before shows identical ordered nonblank lines and identical full frontmatter, including status: published. Only six blank lines were added; all table entries, definitions, claims, proof, dependencies and sources remain byte-identical.",
+  "after_raw_sha256": "2193b83298d6b8aca79e59a5dd2e60e29b8772522c09f702614869431e2fdd9b",
+  "diagram_math_checks": [
+    {
+      "data": "There is no TikZ/tikzcd diagram in this carrier; the repaired displays are tables of forecast vectors g_i and conditional label distributions p_i on three equiprobable atoms.",
+      "check": "Compared every table token against the frozen source: all nine g_i and all nine p_i triples and their row indices are unchanged. Read the local calibration definition to check the table interface: each triple is a probability vector on labels 1,2,3."
+    },
+    {
+      "data": "Concrete calibration relations encoded by the table rows.",
+      "check": "Model A has top correctness probabilities .4,.4,.4 and each coordinate-.3 group averages .3; Model B top correctness (.7+.5+.3)/3=.5 while its sole G_1=.5 row has frequency .7; Model C smallest-index predictions are 1,1,2, with top accuracy (.8+.2+.8)/3=.6 differing from .5 while each nonzero coordinate group averages .5. These match unchanged Verification steps 1.2, 1.3 and 2.1 and def-probability-calibration."
+    }
+  ],
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-multiclass-calibration-notions-differ.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-multiclass-calibration-notions-differ.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-multiclass-calibration-notions-differ.md",
+            "item_id": "ex-multiclass-calibration-notions-differ",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-multiclass-calibration-notions-differ.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/statistical-learning-and-classical-models/screenshots/ex-multiclass-calibration-notions-differ--01.png",
+    "original_finding_indices_viewed": [
+      0
+    ],
+    "fresh_after": "research/math-library-rendering-repairs-2026-10-23/slcm_002-native-final",
+    "command": "TMPDIR=<repo>/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=<sibling-app>/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-multiclass-calibration-notions-differ --out research/math-library-rendering-repairs-2026-10-23/slcm_002-native-final",
+    "exit_code": 0,
+    "views": "Viewed both fresh native ItemBody screenshot tiles separately at original resolution. The first shows each of the three complete arrays on its own row and model introductions below prior tables. The second confirms the unchanged final Verification steps remain legible.",
+    "katex_count": 39,
+    "katex_errors": [],
+    "tikz_count": 0,
+    "diagram_failures": [],
+    "limitations": "Local native ItemBody/title SSR and file:// capture only, with external network blocked. Reference-title map reports 16 unrelated parse diagnostics. Two earlier preview attempts failed because the TSX app alias configuration was absent; the final explicit app tsconfig run succeeded. No TikZ compile is applicable."
+  },
+  "remaining_issues": []
+}

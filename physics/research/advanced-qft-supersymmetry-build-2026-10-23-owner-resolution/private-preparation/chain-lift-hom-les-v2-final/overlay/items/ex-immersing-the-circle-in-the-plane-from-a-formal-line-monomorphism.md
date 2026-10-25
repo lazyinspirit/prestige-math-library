@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-immersing-the-circle-in-the-plane-from-a-formal-line-monomorphism.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-riemann-integrable-function-is-almost-everywhere-equal-to-a-borel-function.md

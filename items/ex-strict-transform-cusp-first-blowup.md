@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-strict-transform-cusp-first-blowup.json
+  precheck: pass
 id: ex-strict-transform-cusp-first-blowup
 kind: example
-title: "First blowup of the cusp y^2=x^3"
+title: "First blowup of the cusp $y^2=x^3$"
 status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
@@ -27,14 +30,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
       locator: "Chapter 8 Examples 8.66-8.67 (nodal and cuspidal cubics), pp. 195-197"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "completed-independent-mathematical-review"
-    date: 2026-10-03
-    scope: "Complete item claim and mathematical body read in delegated Step 5a reader; evidence: research/frontier-38-owner-30-reader-2.md; immutable carrier: research/frontier-38-owner-30-step5-hash-2-post.json; exact saved draft bytes in git d90f26208 match that carrier after exclusion of the later judge stamp. Current content matches the saved carrier except publication status and verification metadata. Source and supplier coverage is limited to the report."
-    delegated_by: "owner via tools/autopilot frontier-38-owner-30 reader-2 dispatch"
-  precheck: pass
+
 ---
 
 ## Example

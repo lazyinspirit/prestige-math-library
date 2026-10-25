@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-closed-monoidal-category-has-its-tensor-cocontinuous-in-each-variable.md

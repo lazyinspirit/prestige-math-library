@@ -1,0 +1,15 @@
+# Batch 15: repair 1
+
+Run: advanced-qft-supersymmetry-build-2026-10-23
+Batch: 15
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qftx-defect-fusion-mathematics, qftx-defect-fusion-mathematics-examples
+Items: def-aqft-noninvertible-defect-fusion, ex-aqft-noninvertible-s3-standard-object, ex-aqft-noninvertible-z2-sum, ex-aqft-fusion-z2-twisted-associator
+Consolidated findings: [{"id":"def-aqft-noninvertible-defect-fusion","type":"local","reason":"The 2-category definition uses fully faithful subobjects without defining subobjects; separable adjunctions lack explicit unit/counit types, triangle identities, and the counit-section equation; multiplicity spaces have no specified domains. Define these data locally."},{"id":"ex-aqft-noninvertible-s3-standard-object","type":"local","reason":"The duality check gives evaluation W*⊗W→C and coevaluation C→W⊗W*, only one orientation, while the fusion definition requires both left and right duals. Also supply the finite-dimensional induction from Maschke’s complement theorem to complete reducibility, or state an exact qualified source premise."},{"id":"ex-aqft-noninvertible-z2-sum","type":"local","reason":"Verification names the usual evaluation and coevaluation without specifying their maps or both dual orientations. Give the map types and both snake checks required for rigidity."},{"id":"ex-aqft-fusion-z2-twisted-associator","type":"local","reason":"The Example formulation uses normalized 3-cocycle before stating its equation and normalization; these appear only in Verification. State them before use and specify the full-component associator and dual map types."}]
+Authorized source files: ["items/def-aqft-noninvertible-defect-fusion.md","items/ex-aqft-noninvertible-s3-standard-object.md","items/ex-aqft-noninvertible-z2-sum.md","items/ex-aqft-fusion-z2-twisted-associator.md","library/quantum-field-theory-mathematics/qftx-defect-fusion-mathematics.md","library/quantum-field-theory-mathematics/qftx-defect-fusion-mathematics-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

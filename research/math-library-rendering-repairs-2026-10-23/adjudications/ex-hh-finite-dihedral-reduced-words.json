@@ -1,0 +1,68 @@
+{
+  "id": "ex-hh-finite-dihedral-reduced-words",
+  "agent": "/root/rendering_repair_coordinator/cox_023",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Both authentic standalone original-resolution tiles visibly show literal $ST$ in the technique banner, while surrounding body mathematics renders correctly. The banner uses plain React text with CSS uppercase rather than the math renderer.",
+      "action": "Replaced only banner $st$ with equivalent Unicode mathematical italic 𝑠𝑡. Fresh native local preview tile 01 displays the intended lowercase product without dollar delimiters.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "One body-line substitution in the Proof technique banner; protected frontmatter and all statements, hypotheses, proofs, dependencies and sources remain byte-identical.",
+  "source_lines_after": {
+    "62": "**Proof technique:** direct computation with the normal forms of the dihedral group, using the exact order of 𝑠𝑡 and the ambient reducedness of alternating words."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Underlying renderer limitation remains: technique banners do not parse TeX. This item uses a local Unicode workaround."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-hh-finite-dihedral-reduced-words.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-hh-finite-dihedral-reduced-words.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-hh-finite-dihedral-reduced-words.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles_inspected": [
+      "research/math-library-rendering-audit-2026-10-23/coxeter-groups/screenshots/ex-hh-finite-dihedral-reduced-words--01.png",
+      "research/math-library-rendering-audit-2026-10-23/coxeter-groups/screenshots/ex-hh-finite-dihedral-reduced-words--02.png"
+    ],
+    "detail": "original, standalone views",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cox-023/manifest.json",
+    "preview_tile_inspected": "research/math-library-rendering-repairs-2026-10-23/previews/cox-023/screenshots/ex-hh-finite-dihedral-reduced-words--01.png",
+    "source_sha256": "c87a9b2a1cab51e8f7ba3b9a14920042208b3f63408df77144fc4504842be3d0",
+    "scope": "Actual native local ItemBody preview; not production route. Manifest records renderer, CSS, reference map and capture bindings."
+  },
+  "before_raw_sha256": "0f57855b8bd9922e980360146c7b6bc1d0a9b28ed4adb298f8fd3496a0de37a1",
+  "metadata_preserved": true,
+  "status_preserved": "published"
+}

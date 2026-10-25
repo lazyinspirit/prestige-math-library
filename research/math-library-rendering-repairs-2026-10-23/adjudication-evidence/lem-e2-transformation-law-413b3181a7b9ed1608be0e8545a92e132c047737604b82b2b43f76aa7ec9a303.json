@@ -1,0 +1,78 @@
+{
+  "id": "lem-e2-transformation-law",
+  "agent": "/root/rendering_repair_coordinator/cxa_042",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution tile visibly shows the literal E_2 in the title, unlike the subscripted E\u2082 used in the statement. Source title lacks inline math delimiters.",
+      "action": "Wrapped only E_2 in supported inline math delimiters in the title.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile also shows literal E_k and E_2 in the Given supplier label. The current primary supplier title already supplies $E_k$ and $E_2$, and the fresh standalone native preview typesets both subscripts correctly.",
+      "action": "Retained the original consumer wikilink: existing upstream supplier-title repair resolves the captured historical label defect. No supplier edits.",
+      "status": "resolved-upstream"
+    }
+  ],
+  "changed": true,
+  "correction": "Added inline math delimiters around E_2 in the title only.",
+  "source_lines_after": {
+    "4": "title: \"The transformation law of the weight-two Eisenstein series $E_2$\""
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "979a77fbb01416cd04e4b23c973247deb95b011da9a8f597fbe774f63d21e5dc",
+  "after_raw_sha256": "3ea1408b0a947c38a8ad862a85d4e8c443264ce12a8c20f6ee7ff1e9b54065c3",
+  "scope_preservation": "Exact byte comparison confirms the only source edit is title delimiter insertion; all body bytes, publication status, protected metadata, dependencies and sources are unchanged.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-e2-transformation-law.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-e2-transformation-law.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-e2-transformation-law.md",
+            "item_id": "lem-e2-transformation-law",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-e2-transformation-law.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/lem-e2-transformation-law--01.png",
+    "final_tile": "research/math-library-rendering-repairs-2026-10-23/previews/cxa-042-final/screenshots/lem-e2-transformation-law--01.png",
+    "inspection": "Both viewed individually at original resolution. Final title renders E with a subscript 2; current supplier label renders E_k and E_2 correctly.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa-042-final/manifest.json",
+    "source_sha256": "3ea1408b0a947c38a8ad862a85d4e8c443264ce12a8c20f6ee7ff1e9b54065c3",
+    "reference_map_sha256": "1b7f49ecff061426dffcf20304278934f0fca45bccf44cace62d638aec0e8672",
+    "limitations": "Local native ItemBody/title capture; 17 unrelated parse diagnostics in reference map, not full production route coverage."
+  }
+}

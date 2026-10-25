@@ -1,0 +1,1215 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": 65,
+  "level": "advanced-qft-supersymmetry-build-2026-10-23",
+  "scope": [
+    "thm-qftx-gaga-metric-cech-derived-comparison",
+    "lem-qftx-gaga-euclidean-finite-order-refinement",
+    "lem-qftx-gaga-euclidean-sheaf-cohomological-dimension",
+    "thm-qftx-gaga-analytic-local-coherent-polydisc-acyclicity",
+    "ex-qftx-gaga-analytic-point-sheaf-acyclicity",
+    "ex-qftx-gaga-analytic-hyperplane-quotient"
+  ],
+  "contracts": {
+    "thm-qftx-gaga-metric-cech-derived-comparison": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property), Ordered field) constructed in this\nlibrary (The real numbers) and carrying its order (Order on the reals).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\nWhich metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as Nonnegativity of a metric is a consequence of the other axioms, not an axiom proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n(Maximum and minimum of a set, Every nonempty finite set of reals has a maximum and a minimum). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-stone-metric-spaces-are-paracompact",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Every metric space is paracompact.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-paracompact-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **paracompact** when every open cover $\\mathcal U$\nof $X$ has an open refinement $\\mathcal V$ which covers $X$ and is locally\nfinite. In symbols, for every open cover $\\mathcal U$ there is a locally finite\nopen cover $\\mathcal V$ such that every $V\\in\\mathcal V$ lies in some\n$U\\in\\mathcal U$.\n\nNo separation axiom is included in this definition. Some sources reserve the\nword *paracompact* for the conjunction of this covering property with\nHausdorffness. Here the covering property is named by itself, and any use of\nHausdorffness is stated explicitly.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-paracompact-hausdorff-cover-shrinking",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $X$ is paracompact and Hausdorff and\n$\\mathcal U$ is an open cover, there are a set $S$, a map $s\\mapsto U_s$ from\n$S$ into $\\mathcal U$, and locally finite open covers $\\{V_s\\}_{s\\in S}$ and\n$\\{W_s\\}_{s\\in S}$ with\n$$\\overline{V_s}\\subseteq W_s\\subseteq\\overline{W_s}\\subseteq U_s\\quad(s\\in S).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cech-cochain-complex-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, let $\\mathcal F$ be a sheaf of abelian groups\non $X$ ([[def-sheaf-on-topological-space]]), and let\n$\\mathcal U=(U_i)_{i\\in I}$ be a cover of $X$ by open subsets, indexed by a set\n$I$ that is equipped with a linear order $<$.\n\nFor an integer $p\\ge0$ define the **group of ordered $p$-cochains of\n$\\mathcal U$ with values in $\\mathcal F$** by\n$$C^p(\\mathcal U,\\mathcal F):=\\prod_{i_0<\\cdots<i_p} \\mathcal F\\bigl(U_{i_0}\\cap\\cdots\\cap U_{i_p}\\bigr),$$\nthe product of the section groups over all increasing $(p+1)$-tuples\n$i_0<\\cdots<i_p$ in $I$; write an element as $s=(s_{i_0\\cdots i_p})$. For\n$p<0$ put $C^p(\\mathcal U,\\mathcal F):=0$. When $I$ has no increasing\n$(p+1)$-tuple the product is empty and $C^p(\\mathcal U,\\mathcal F)=0$; when an\nintersection $U_{i_0}\\cap\\cdots\\cap U_{i_p}$ is empty, the corresponding\nfactor is the one-element group $\\mathcal F(\\varnothing)=0$\n([[lem-sheaf-section-over-empty-set-terminal]]).\n\nThe **Čech differential** $\\delta^p:C^p(\\mathcal U,\\mathcal F)\\to\nC^{p+1}(\\mathcal U,\\mathcal F)$ is defined on an increasing $(p+2)$-tuple\n$i_0<\\cdots<i_{p+1}$ by\n$$(\\delta^p s)_{i_0\\cdots i_{p+1}} =\\sum_{j=0}^{p+1}(-1)^j\\, s_{i_0\\cdots\\widehat{i_j}\\cdots i_{p+1}} \\Big|_{U_{i_0}\\cap\\cdots\\cap U_{i_{p+1}}},$$\nwhere $\\widehat{i_j}$ means that the index $i_j$ is omitted and the restriction\nis taken from $U_{i_0}\\cap\\cdots\\widehat{U_{i_j}}\\cdots\\cap U_{i_{p+1}}$ to the\nfull intersection ([[def-section-restriction-and-global-section]]). For $p<0$\nset $\\delta^p:=0$. The maps $\\delta^p$ are group homomorphisms, componentwise\nsums of restrictions, so the data $(C^p(\\mathcal U,\\mathcal F),\\delta^p)_{p\\in\n\\mathbb Z}$ form a cochain complex of abelian groups; that $\\delta^{p+1}\\circ\n\\delta^p=0$ is proved in [[lem-cech-differential-squares-zero]]. The pair\n$(\\mathcal F,\\mathcal U)$ being fixed, the construction is functorial in\n$\\mathcal F$: a morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves\ninduces componentwise maps $C^p(\\mathcal U,\\varphi)$ commuting with the\ndifferentials.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cech-cohomology-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, $\\mathcal F$ a sheaf of abelian groups on $X$,\nand $\\mathcal U=(U_i)_{i\\in I}$ an open cover indexed by a linearly ordered set,\nwith ordered Čech cochain complex $\\bigl(C^\\bullet(\\mathcal U,\\mathcal F),\n\\delta^\\bullet\\bigr)$ ([[def-cech-cochain-complex-open-cover]],\n[[lem-cech-differential-squares-zero]]). The **Čech cohomology of the fixed\ncover $\\mathcal U$ with values in $\\mathcal F$** is\n$$\\check H^p(\\mathcal U,\\mathcal F) :=\\ker\\bigl(\\delta^p:C^p(\\mathcal U,\\mathcal F)\\to C^{p+1}(\\mathcal U,\\mathcal F)\\bigr) \\Big/\\operatorname{im}\\bigl(\\delta^{p-1}:C^{p-1}(\\mathcal U,\\mathcal F)\\to C^p(\\mathcal U,\\mathcal F)\\bigr),$$\nthe $p$-th cohomology group of the cochain complex\n$\\bigl(C^\\bullet(\\mathcal U,\\mathcal F),\\delta^\\bullet\\bigr)$ in the sense of\n[[def-cohomology-object-of-a-cochain-complex]]. Since $C^{-1}(\\mathcal U,\n\\mathcal F)=0$ and $\\delta^{-1}=0$, one has $\\check H^0(\\mathcal U,\\mathcal F)\n=\\ker(\\delta^0)$, and for $p<0$ the group $\\check H^p(\\mathcal U,\\mathcal F)$\nis $0$ because $C^p=0$, so both the kernel in degree $p$ and the image in degree $p$ are zero. A cochain in\n$\\ker(\\delta^p)$ is called a **Čech $p$-cocycle** and a cochain in\n$\\operatorname{im}(\\delta^{p-1})$ a **Čech $p$-coboundary**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-global-cech-cohomology-directed-limit",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a topological\nspace and let $\\mathcal F$ be a sheaf of abelian groups on $X$. The topology\n$\\mathcal T_X$ is a set of open subsets. Fix a well-order of $\\mathcal T_X$\nusing the Axiom of Choice, and let $\\operatorname{Cov}(X)$ consist of all\nsubsets $\\mathcal U\\subseteq\\mathcal T_X$ whose union is $X$, each indexed by\nits distinct members in the inherited well-order. This is a set of ordered\ncovers. An arbitrary indexed open cover is represented by its distinct-member\ncover: under Choice, one may choose an index for each distinct member, so the\ntwo cover presentations refine one another and yield canonically isomorphic\nČech cohomology under refinement independence. For\n$\\mathcal U\\in\\operatorname{Cov}(X)$ write $\\check H^p(\\mathcal U,\\mathcal F)$\nfor its fixed-cover Čech cohomology\n([[def-cech-cohomology-open-cover]]).\n\nSay that $\\mathcal U\\preceq\\mathcal V$, or that $\\mathcal V$ **refines**\n$\\mathcal U$, when there is a refinement function from $\\mathcal V$ to\n$\\mathcal U$, that is, a map $c$ from the index set of $\\mathcal V$ to the index\nset of $\\mathcal U$ with $V\\subseteq c(V)$ for every $V\\in\\mathcal V$\n([[def-refinement-open-cover]]). This relation is a preorder: it is reflexive\nthrough the identity map, and it is transitive because a composite of refinement\nfunctions is a refinement function. It is **directed**: for covers\n$\\mathcal U,\\mathcal V\\in\\operatorname{Cov}(X)$ the set of distinct intersections\n$\\mathcal W=\\{U\\cap V:U\\in\\mathcal U,\\ V\\in\\mathcal V\\}$ is another member of\n$\\operatorname{Cov}(X)$, indexed by the same inherited well-order, and covers\n$X$. For each $W\\in\\mathcal W$, choose the least $U\\in\\mathcal U$ and the\nleast $V\\in\\mathcal V$ with $W=U\\cap V$; the resulting maps refine\n$\\mathcal W$ to both covers. Repeating this construction stays within the same\nset $\\operatorname{Cov}(X)$.\n\nThe Axiom of Choice is used to fix transition data: for every pair\n$\\mathcal U\\preceq\\mathcal V$ choose one refinement function\n$c_{\\mathcal V\\mathcal U}$ from $\\mathcal V$ to $\\mathcal U$. By\n[[thm-refinement-map-independent-on-cohomology]] any two refinement functions\nfrom $\\mathcal V$ to $\\mathcal U$ induce the same homomorphism\n$\\check H^p(\\mathcal U,\\mathcal F)\\to\\check H^p(\\mathcal V,\\mathcal F)$ in every\ndegree, so the chosen data give well-defined maps\n$$\\check H^p(\\mathcal U,\\mathcal F)\\longrightarrow\\check H^p(\\mathcal V,\\mathcal F)\\qquad(\\mathcal U\\preceq\\mathcal V),$$\nand these maps are compatible with composition and with identities: the composite\nof the chosen refinement functions along $\\mathcal U\\preceq\\mathcal V\\preceq\\mathcal W$\nis again a refinement function from $\\mathcal W$ to $\\mathcal U$ and hence\ninduces the composite of the two induced maps, while the identity is a refinement\nfunction of a cover to itself and induces the identity. Thus\n$\\mathcal U\\mapsto\\check H^p(\\mathcal U,\\mathcal F)$ is a functor from the\ndirected preorder $\\operatorname{Cov}(X)$ to the category of abelian groups.\n\nThe **Čech cohomology of $X$ with values in $\\mathcal F$** is the filtered colimit\n$$\\check H^p(X,\\mathcal F):=\\varinjlim_{\\mathcal U\\in\\operatorname{Cov}(X)}\\check H^p(\\mathcal U,\\mathcal F),$$\ntaken in the category of abelian groups, of that functor ([[def-filtered-category-and-filtered-colimit]]). A class of\n$\\check H^p(X,\\mathcal F)$ is represented by a pair $(\\mathcal U,\\alpha)$ with\n$\\mathcal U\\in\\operatorname{Cov}(X)$ and\n$\\alpha\\in\\check H^p(\\mathcal U,\\mathcal F)$, and two such pairs represent the\nsame class exactly when the two classes agree after refinement to a common cover.\nA morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves induces the\nmaps $\\check H^p(\\mathcal U,\\varphi)$ on fixed covers, which commute with the\nrefinement maps because the cochain maps of\n[[def-refinement-open-cover]] are defined componentwise from the values of the\ncochains; these maps pass to the filtered colimit and give\n$$\\check H^p(X,\\varphi):\\check H^p(X,\\mathcal F)\\longrightarrow\\check H^p(X,\\mathcal G),$$\nso that $\\check H^p(X,-)$ is a functor on the abelian sheaves on $X$ with\n$\\check H^p(X,\\mathcal F)=0$ for $p<0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-kernel-cokernel-image-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of abelian\ngroups on a topological space $X$.\n\nThe **kernel sheaf** is the subsheaf\n$$\n\\ker(\\varphi)\\subseteq \\mathcal F\n$$\ndefined objectwise by\n$$\n\\ker(\\varphi)(U):=\\ker\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr).\n$$\n\nThe **cokernel presheaf** is\n$$\nU\\longmapsto \\operatorname{coker}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **cokernel sheaf** $\\operatorname{coker}(\\varphi)$ is its\nsheafification.\n\nThe **image presheaf** is\n$$\nU\\longmapsto \\operatorname{im}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **image sheaf** $\\operatorname{im}(\\varphi)$ is its sheafification.\n\nFor sheaves of modules on a ringed space, the same formulas are taken in the\ncorresponding module categories on each open set.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-abelian-sheaves-have-enough-injectives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, and let $X$ be a topological space. Then\n$\\mathrm{Ab}(X)$ has enough injectives, every abelian sheaf on $X$ admits an\ninjective resolution ([[def-injective-resolution-in-an-abelian-category]]), and\nthe embeddings below supply one injective resolution datum\n([[def-supplied-injective-resolution-datum]]) on the whole category\n$\\mathrm{Ab}(X)$: for every abelian sheaf $\\mathcal F$ the datum assigns one\nspecific injective resolution\n$$0\\to\\mathcal F\\to I^0(\\mathcal F)\\to I^1(\\mathcal F)\\to\\cdots,$$\nbuilt functorially from $\\mathcal F$ with no further selection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Fix a topological space $X$, let\n$$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$\nbe the additive left exact global-sections functor\n([[def-global-sections-functor-sheaves]]), and let $I$ be the supplied\nfunctorial injective resolution datum on $\\mathrm{Ab}(X)$ of\n[[thm-abelian-sheaves-have-enough-injectives]]: it assigns to every abelian\nsheaf $\\mathcal F$ one specific injective resolution\n$0\\to\\mathcal F\\to I^\\bullet(\\mathcal F)$\n([[def-right-derived-object-relative-to-injective-resolution-data]]).\n\nFor every $q\\ge0$ and every abelian sheaf $\\mathcal F$ on $X$ define the\n**$q$-th sheaf cohomology group of $\\mathcal F$** to be the right derived\nobject of $\\Gamma(X,-)$ relative to $I$:\n$$H^q(X,\\mathcal F):=R_I^q\\Gamma(X,\\mathcal F)=H^q\\bigl(\\Gamma(X,I^\\bullet(\\mathcal F)_{\\mathrm{del}})\\bigr),$$\nthe cohomology object of the complex\n$\\Gamma(X,I^0(\\mathcal F))\\to\\Gamma(X,I^1(\\mathcal F))\\to\\cdots$ of abelian\ngroups obtained from the deleted resolution\n([[def-deleted-resolution]], [[def-cohomology-object-of-a-cochain-complex]]).\nWe also set $H^q(X,\\mathcal F):=0$ for $q<0$.\n\nBecause $I$ is a fixed supplied datum, the group $H^q(X,\\mathcal F)$ is a\nspecific group for each pair $(X,\\mathcal F)$, and for a morphism\n$\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves we write\n$H^q(X,\\varphi):=R_I^q\\Gamma(X,\\varphi)$ for the induced map; it is the map on\ncohomology induced by $\\Gamma(X,-)$ applied to the cochain maps supplied with\nthe datum, and it is additive in $\\varphi$.\n\nIf $J$ is another supplied injective resolution datum on $\\mathrm{Ab}(X)$ then\n$R_I^q\\Gamma(X,-)$ and $R_J^q\\Gamma(X,-)$ are naturally isomorphic, so the\n$H^q(X,\\mathcal F)$ computed from $J$ agree with the ones above up to a\ncanonical natural isomorphism; the Axiom of Dependent Choice needed for that\ncomparison follows from AC\n([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]],\n[[thm-choice-implies-dependent-implies-countable-choice]]). The notation\n$H^q(X,\\mathcal F)$ therefore does not depend on the datum used, up to this\ncanonical isomorphism, and we call $q$ the **cohomological degree**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-injective-sheaves-flasque",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space and let $\\mathcal I$ be an injective object of\n$\\mathrm{Ab}(X)$ ([[def-injective-object]],\n[[thm-abelian-sheaves-form-abelian-category]]). Then $\\mathcal I$ is flasque\n([[def-flasque-sheaf]]): for all open subsets $U\\subseteq V\\subseteq X$ the\nrestriction map $\\mathcal I(V)\\to\\mathcal I(U)$ is surjective.\n\nNo choice principle beyond the given data is used: the injective object\n$\\mathcal I$ is part of the hypothesis.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-flasque-sheaves-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, let $X$ be a topological space and let\n$\\mathcal F$ be a flasque sheaf of abelian groups on $X$\n([[def-flasque-sheaf]]). Then for every open subspace $U\\subseteq X$ and every\ninteger $q>0$,\n$$H^q(U,\\mathcal F|_U)=0,$$\nwhere $H^q(U,-)$ denotes sheaf cohomology on the space $U$\n([[def-sheaf-cohomology-derived-global-sections]]) computed with the global\nsections functor of $U$, and $\\mathcal F|_U$ is the restriction of $\\mathcal F$\nto $U$. Equivalently, every restriction $\\mathcal F|_U$ is $\\Gamma$-acyclic\n([[def-acyclic-sheaf-global-sections]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-leray-acyclic-cover-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a\ntopological space, let $\\mathcal F$ be a sheaf of abelian groups on $X$ and let\n$\\mathcal U=(U_i)_{i\\in I}$ be an open cover of $X$ indexed by a linearly\nordered set which is $\\mathcal F$-acyclic, that is, every nonempty finite\nintersection of members of $\\mathcal U$ satisfies\n$H^q(W,\\mathcal F|_W)=0$ for all $q>0$\n([[def-acyclic-cover-for-sheaf]]). Then the canonical Čech-to-sheaf comparison\nmap\n$$\\varphi^p_{\\mathcal U}:\\check H^p(\\mathcal U,\\mathcal F)\\longrightarrow H^p(X,\\mathcal F)$$\nof [[thm-cech-to-sheaf-cohomology-comparison]] is an isomorphism for every\n$p\\ge0$; it is natural in $\\mathcal F$, compatible with refinement, and in\ndegree zero it is the identity of $\\Gamma(X,\\mathcal F)$ under the canonical\nidentifications of $\\check H^0(\\mathcal U,\\mathcal F)$ and\n$H^0(X,\\mathcal F)$ with the global sections\n([[thm-cech-to-sheaf-cohomology-comparison]],\n[[def-cech-cohomology-open-cover]],\n[[def-sheaf-cohomology-derived-global-sections]]).",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-cech-h0-global-sections",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space, $\\mathcal F$ a sheaf of abelian groups on $X$,\nand $\\mathcal U=(U_i)_{i\\in I}$ an open cover of $X$ indexed by a linearly\nordered set, with fixed-cover Čech cohomology $\\check H^\\bullet(\\mathcal U,\n\\mathcal F)$ ([[def-cech-cohomology-open-cover]]). Then restriction of global\nsections,\n$$\\Gamma(X,\\mathcal F)\\longrightarrow\\check H^0(\\mathcal U,\\mathcal F),\\qquad s\\longmapsto\\bigl(s|_{U_i}\\bigr)_{i\\in I},$$\nis an isomorphism, and it is natural in $\\mathcal F$: for a morphism\n$\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves the square\n$$\\begin{matrix}\\Gamma(X,\\mathcal F)&\\longrightarrow&\\check H^0(\\mathcal U,\\mathcal F)\\\\ \\downarrow\\scriptstyle{\\Gamma(X,\\varphi)}&&\\downarrow\\scriptstyle{\\check H^0(\\mathcal U,\\varphi)}\\\\ \\Gamma(X,\\mathcal G)&\\longrightarrow&\\check H^0(\\mathcal U,\\mathcal G)\\end{matrix}$$\ncommutes.",
+          "uses": [
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-zero-sheaf-cohomology-global-sections",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, let $X$ be a topological space, and let\n$H^q(X,-)$ be sheaf cohomology computed from the supplied functorial injective\nresolution datum $I$ on $\\mathrm{Ab}(X)$\n([[def-sheaf-cohomology-derived-global-sections]]). Then for every abelian sheaf\n$\\mathcal F$ on $X$ there is a canonical isomorphism\n$$H^0(X,\\mathcal F)\\xrightarrow{\\ \\sim\\ }\\Gamma(X,\\mathcal F),$$\nnatural in $\\mathcal F$; it identifies $H^0(X,\\mathcal F)$ with the kernel of\n$\\Gamma(X,I^0(\\mathcal F))\\to\\Gamma(X,I^1(\\mathcal F))$.",
+          "uses": [
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-cohomological-delta-functor",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories. A\n**cohomological delta functor** from $\\mathcal A$ to $\\mathcal B$ is a family\nof additive functors\n$$T^n:\\mathcal A\\to\\mathcal B,\\qquad n\\geq 0,$$\ntogether with, for every short exact sequence\n$$0\\to A\\to B\\to C\\to0,$$\na family of morphisms\n$$\\partial^n:T^n(C)\\to T^{n+1}(A),\\qquad n\\geq 0,$$\nsuch that:\n\n1. the sequence\n   $$0\\to T^0(A)\\to T^0(B)\\to T^0(C)\\xrightarrow{\\partial^0}T^1(A)\\to T^1(B)\\to T^1(C)\\xrightarrow{\\partial^1}T^2(A)\\to\\cdots$$\n   is exact, and\n2. for every morphism between short exact sequences, the connecting squares\n   $$\\begin{matrix} T^n(C)&\\xrightarrow{\\partial^n}&T^{n+1}(A)\\\\ \\downarrow&&\\downarrow\\\\ T^n(C')&\\xrightarrow{\\partial'^n}&T^{n+1}(A') \\end{matrix}$$\n   commute.\n\nIn particular, $T^0$ is left exact because it begins such a long exact\nsequence.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice.\n\nLet $\\mathcal A$ and $\\mathcal B$ be abelian categories, let $I$ be supplied\ninjective resolution data on all objects of $\\mathcal A$, and let\n$F:\\mathcal A\\to\\mathcal B$ be an additive left exact functor. Then the additive functors\n$$R_I^nF:\\mathcal A\\to\\mathcal B,\\qquad n\\geq 0,$$\nadmit connecting maps that make them into a cohomological delta functor on\n$\\mathcal A$, and $R_I^0F$ is naturally isomorphic to $F$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-derived-functors-are-universal-delta-functors",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice.\n\nLet $\\mathcal A$ and $\\mathcal B$ be abelian categories, let $P$ be supplied\nprojective resolution data on all objects of $\\mathcal A$, let $I$ be supplied\ninjective resolution data on all objects of $\\mathcal A$, and let\n$F:\\mathcal A\\to\\mathcal B$ be additive.\n\nIf $F$ is right exact and the source category has enough projectives, then the\nleft derived delta functor $(L_n^PF)$ is universal.\n\nIf $F$ is left exact and the source category has enough injectives, then the\nright derived delta functor $(R_I^nF)$ is universal.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-effaceable-cohomological-delta-functor-in-positive-degrees",
+          "source_section": "Definition",
+          "quote": "Let $T=(T^n,\\partial)$ be a cohomological delta functor on an abelian category\n$\\mathcal A$. We say that $T$ is **effaceable in positive degrees by\ninjectives** when for every $n>0$ and every object $A$ of $\\mathcal A$, there\nexists a monomorphism\n$$u:A\\rightarrowtail I$$\nwith $I$ injective such that the induced map\n$$T^n(u):T^n(A)\\to T^n(I)$$\nis zero.\n\nAgain, the definition only asks for existence object by object and degree by\ndegree.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-effaceable-cohomological-delta-functors-are-universal",
+          "source_section": "Statement",
+          "quote": "Let $T=(T^n,\\partial_T)$ be a cohomological delta functor on an abelian\ncategory. If $T$ is effaceable in positive degrees by injectives, then $T$ is\nuniversal.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a fixed degree-zero functor.\n\nIf $S$ and $T$ are universal homological delta functors equipped with chosen\nnatural isomorphisms\n$$\\sigma:S_0\\xrightarrow{\\sim}F,\\qquad \\tau:T_0\\xrightarrow{\\sim}F,$$\nthen there is a unique isomorphism of homological delta functors\n$$S\\xrightarrow{\\sim}T$$\nwhose degree-zero part is $\\tau^{-1}\\sigma:S_0\\xrightarrow{\\sim}T_0$.\n\nIf $S$ and $T$ are universal cohomological delta functors equipped with chosen\nnatural isomorphisms\n$$\\sigma:S^0\\xrightarrow{\\sim}F,\\qquad \\tau:T^0\\xrightarrow{\\sim}F,$$\nthen there is a unique isomorphism of cohomological delta functors\n$$S\\xrightarrow{\\sim}T$$\nwhose degree-zero part is $\\tau^{-1}\\sigma:S^0\\xrightarrow{\\sim}T^0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-long-exact-sequence-in-cohomology",
+          "source_section": "Statement",
+          "quote": "Let\n$$0\\to A^\\bullet\\to B^\\bullet\\to C^\\bullet\\to0$$\nbe a short exact sequence of cochain complexes in an abelian category. Then\nthere is a natural exact sequence\n$$\\cdots\\to H^n(A)\\to H^n(B)\\to H^n(C)\\xrightarrow{\\partial^n}H^{n+1}(A)\\to H^{n+1}(B)\\to H^{n+1}(C)\\to\\cdots.$$",
+          "uses": []
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ be a short exact sequence of abelian sheaves and let $c$ be a Čech $p$-cochain of $\\mathcal C$ on an open cover $\\mathcal U$. By [F1], refine $\\mathcal U$ to a locally finite cover and then use [F2] to choose locally finite covers $\\{V_i\\}$ and $\\{W_i\\}$ with $\\overline{V_i}\\subset W_i\\subset\\overline{W_i}\\subset U_i$. For each point $x$, local surjectivity from [F3] lifts each section $c_{i_0\\ldots i_p}$ on a neighborhood of $x$ whenever $x\\in U_{i_0}\\cap\\cdots\\cap U_{i_p}$. Local finiteness leaves only finitely many $U_i$ containing $x$, finitely many such tuples, and a preliminary neighborhood $O_x$ meeting only finitely many $W_i$. For each tuple containing $x$, choose a neighborhood on which its section lifts. For the finite set of $W_i$ meeting $O_x$, shrink a neighborhood $N_x$ of $x$ inside all these lift neighborhoods, inside $U_i$ whenever $x\\in U_i$, and inside $W_i$ whenever $x\\in W_i$; if $x\\notin U_i$, also shrink to avoid $\\overline{W_i}$, which is closed and does not contain $x$ because $\\overline{W_i}\\subset U_i$. Then $N_x\\subset U_i$ whenever $N_x\\cap W_i\\ne\\varnothing$, and every component indexed by a tuple containing $x$ has a lift on $N_x$. Choose $\\rho(x)$ with $x\\in W_{\\rho(x)}$. Then $N_x\\subset W_{\\rho(x)}\\subset U_{\\rho(x)}$, so $\\{N_x\\}$ refines $\\mathcal U$. If $N_{x_0}\\cap\\cdots\\cap N_{x_p}\\ne\\varnothing$, then $N_{x_0}$ meets every $W_{\\rho(x_j)}$; the construction puts $N_{x_0}$ inside every $U_{\\rho(x_j)}$, so $x_0$ belongs to the original intersection indexed by $\\rho(x_0),\\ldots,\\rho(x_p)$. Its cochain component therefore has a lift on $N_{x_0}$ and hence on the full new intersection. Repeated source indices give a zero component of the alternating Čech refinement cochain, which also lifts. Thus every Čech cochain becomes liftable after refinement.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Construct connecting maps on cocycles rather than taking a colimit of cochain complexes. Write $d$ for the Čech differential and $u:\\mathcal A\\to\\mathcal B$ and $v:\\mathcal B\\to\\mathcal C$. If $c\\in C^p(\\mathcal U,\\mathcal C)$ is closed, step 1.1 supplies on a refinement a lift $b$ of its pullback. Since $v(db)=dc=0$, [F5] gives a unique $a\\in C^{p+1}(\\mathcal V,\\mathcal A)$ with $u(a)=db$. Injectivity of $u$ and $d^2=0$ give $da=0$. Define $\\partial[c]$ to be the refinement-limit class of $a$. Two lifts on the same cover differ by an $\\mathcal A$-cochain, so their resulting $a$ differ by a coboundary. If $c$ is replaced by $c+dt$, lift $t$ after another refinement by step 1.1 and replace $b$ by $b+d\\widetilde t$; the resulting $a$ is unchanged. For $p=0$ there are no negative-degree coboundaries.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Independence of refinement choices requires the cochain homotopy behind [F4]. Extend ordered cochains alternatingly to all tuples, setting repeated-index components to zero. For refinement maps $r,s$ from a cover $\\mathcal V$ to $\\mathcal U$, put, for a degree-$p$ cochain with $p\\ge1$,\n$$ (Hc)_{j_0\\ldots j_{p-1}}=\\sum_{k=0}^{p-1}(-1)^k c_{r(j_0),\\ldots,r(j_k),s(j_k),\\ldots,s(j_{p-1})}|_{V_{j_0}\\cap\\cdots\\cap V_{j_{p-1}}}, $$\nand set $H=0$ on degree zero. All restrictions are defined because $V_j\\subset U_{r(j)}\\cap U_{s(j)}$. Expansion of the alternating differential cancels the terms omitting an index before or after the change from $r$ to $s$ in pairs; the two endpoint terms remain, giving $s^*-r^*=dH+Hd$. This identity also holds in degree zero, where $Hdc$ is the difference of the two restrictions of $c$. To compare two constructions in step 1.2, pull their lifts to a common refinement. Their images in $\\mathcal C$ differ by $(s^*-r^*)c=dHc$. After lifting $Hc$ on a further refinement, the difference of the two $\\mathcal B$-lifts minus the differential of that lift lies in $\\mathcal A$; its differential is the difference of the two connecting cocycles. Thus both constructions define the same limit cohomology class. Common refinements also prove additivity, and lifting the images of chosen cochains proves naturality for morphisms of short exact sequences. No strictly functorial system of cochain maps on the preorder of covers is assumed.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "The resulting sequence of limit cohomology groups is exact. At $\\check H^p(\\mathcal B)$, if a closed $b$ maps to a coboundary $dt$ after refinement, lift $t$ by step 1.1 and replace $b$ by $b-d\\widetilde t$; this is a closed $\\mathcal A$-cochain representing a preimage. In degree zero a zero image already lies in $\\mathcal A$ by [F5]. At $\\check H^p(\\mathcal C)$, if the connecting cocycle $a$ of step 1.2 becomes $de$, replace its lift $b$ by $b-u(e)$; it is now closed and maps to $c$. Conversely a closed lift has zero connecting class. At $\\check H^{p+1}(\\mathcal A)$, if a closed $a$ maps to a coboundary $db$ after refinement, then $v(b)$ is closed and its connecting class is $[a]$ by construction. Conversely every connecting cocycle maps to $db$. Compositions of consecutive maps vanish by the same formulas; injectivity at degree-zero global sections follows from [F5]. Equality to zero in a limit is witnessed on a common refinement by [F4], so these arguments cover every element of every kernel. Together with [F9] and the naturality in step 1.3, this makes $\\check H^\\bullet(X,-)$ a cohomological delta functor extending $\\Gamma(X,-)$.",
+          "step": "1.4",
+          "inputs": [
+            "F4",
+            "F5",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mathcal I$ be injective. By [F7] it and all its restrictions are acyclic, so every open cover is $\\mathcal I$-acyclic. By [F8], $\\check H^q(\\mathcal U,\\mathcal I)\\cong H^q(X,\\mathcal I)=0$ for every cover and every $q>0$. Hence $\\check H^q(X,\\mathcal I)=0$ for $q>0$. Since every sheaf embeds in such an $\\mathcal I$ by [F6], the Čech delta functor of step 1.4 is effaceable in positive degrees.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F10], $H^\\bullet(X,-)$ is universal, and by [F11] so is $\\check H^\\bullet(X,-)$. Their degree-zero identifications with $\\Gamma(X,-)$ agree by [F9], so [F11] gives a unique natural isomorphism $\\check H^q(X,\\mathcal F)\\cong H^q(X,\\mathcal F)$ in every degree. The canonical fixed-cover Čech-to-derived maps are compatible with refinement by [F8]; their connecting-map compatibility is the same lift-and-differentiate construction $u(a)=db$ in step 1.2, computed in a resolution. They therefore induce a morphism of delta functors with this degree-zero identity, so universality identifies their limit with this unique isomorphism. This is the asserted canonical comparison. Full AC supplies DC for [F10] and the choices in step 1.1; no compact-support cohomology is used.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 2.1",
+            "F8",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The metric space is the domain; the theorem does not require it to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 and step 2.2 identify both degree-zero groups with global sections."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The comparison statement and steps 1.1–2.2 include degree q=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof allows empty cover intersections as zero cochain factors and handles repeated indices in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Full AC is stated and used for locally finite refinements and the neighborhood choices in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a natural isomorphism, not an if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a natural isomorphism, not an if-and-only-if criterion."
+        }
+      ]
+    },
+    "lem-qftx-gaga-euclidean-finite-order-refinement": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property), Ordered field) constructed in this\nlibrary (The real numbers) and carrying its order (Order on the reals).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\nWhich metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as Nonnegativity of a metric is a consequence of the other axioms, not an axiom proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n(Maximum and minimum of a set, Every nonempty finite set of reals has a maximum and a minimum). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x\\in\\Omega$ define\n$$\n\\delta(x):=\\sup_{U\\in\\mathcal U}\\min\\{1,\\operatorname{dist}(x,\\mathbb R^m\\setminus U)\\},\\qquad\n\\varepsilon(x):=\\min\\{1,\\operatorname{dist}(x,\\mathbb R^m\\setminus\\Omega),\\delta(x)\\}.\n$$\nThe conventions $\\operatorname{dist}(x,\\varnothing)=+\\infty$ and $\\min\\{1,+\\infty\\}=1$ cover the case $U=\\mathbb R^m$ or $\\Omega=\\mathbb R^m$. Since $\\mathcal U$ covers $\\Omega$ and each $U$ is open, $\\delta(x)>0$. For any nonempty closed set $E$, the triangle inequality gives $\\operatorname{dist}(x,E)\\le|x-y|+\\operatorname{dist}(y,E)$ by taking the infimum over $E$, and interchanging $x,y$ gives the reverse bound; capping at $1$ preserves this $1$-Lipschitz estimate. The supremum of a family of $1$-Lipschitz functions is $1$-Lipschitz because $f_U(x)\\le f_U(y)+|x-y|$ for every $U$, hence $\\sup_Uf_U(x)\\le\\sup_Uf_U(y)+|x-y|$, and likewise after interchanging $x,y$. The minimum of two $1$-Lipschitz functions satisfies the same estimate, so $\\varepsilon$ is $1$-Lipschitz. For each $x$, the definition of the supremum supplies $U_x\\in\\mathcal U$ with $\\min\\{1,\\operatorname{dist}(x,\\mathbb R^m\\setminus U_x)\\}>\\delta(x)/2$, hence $B(x,\\delta(x)/2)\\subset U_x$. Also $\\varepsilon(x)\\le\\operatorname{dist}(x,\\mathbb R^m\\setminus\\Omega)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\mathcal Q$ be the family of all closed dyadic cubes $Q\\subset\\Omega$ satisfying\n$$\\operatorname{diam}(Q)<\\frac1{16}\\inf_{y\\in Q}\\varepsilon(y).$$\nEvery point of $\\Omega$ belongs to such a cube at sufficiently fine dyadic scale, because $\\varepsilon$ is continuous and positive there. Each qualifying cube has diameter $<1/16$, so along the nested dyadic ancestors of any such cube only finitely many can qualify; choose a maximal qualifying ancestor. The maximal cubes cover $\\Omega$ and have pairwise disjoint interiors, since two dyadic cubes with intersecting interiors are nested and a contained qualifying cube cannot be maximal.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The maximal cubes are locally finite. Fix $x\\in\\Omega$, put $a=\\varepsilon(x)>0$, and choose $r=a/8$. If a maximal cube $Q$ meets $B(x,r)$ and has side length $s<a/(512\\sqrt m)$, its dyadic parent $P$ has diameter $2\\sqrt m\\,s<a/256$. Every $y\\in P$ then satisfies $|y-x|<a/8+a/256<a/4$, so $P\\subset\\Omega$ and the Lipschitz bound gives $\\varepsilon(y)>3a/4$ on $P$. Thus $\\operatorname{diam}(P)<a/256<(3a/4)/16\\le\\inf_P\\varepsilon/16$, so $P$ also qualifies, contradicting maximality of $Q$. Hence each maximal cube meeting $B(x,r)$ has side at least $a/(512\\sqrt m)$. All such cubes lie in the bounded set $B(x,r+1/16)$ and their centers are separated by at least this lower bound in the maximum norm, because their interiors are disjoint axis-parallel dyadic cubes. A bounded Euclidean box contains only finitely many points with a fixed positive separation, so only finitely many such cubes meet $B(x,r)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "We construct a compatible triangulation, allowing subdivision of faces; maximal cubes of different sizes need not initially meet along whole faces. First note that touching maximal cubes have side lengths differing by at most a factor of two. Indeed, let $z\\in Q\\cap R$, let their sides be $S\\ge s$, and let $P$ be the dyadic parent of $R$. The qualification of $Q$ gives $\\varepsilon(z)>16\\sqrt m S$. Since every point of $P$ is at distance at most $2\\sqrt m s$ from $z$, the Lipschitz and boundary-distance bounds put $P$ inside $\\Omega$ and give $\\inf_P\\varepsilon\\ge\\varepsilon(z)-2\\sqrt m s$. Maximality of $R$ makes its parent fail the diameter inequality, whence $2\\sqrt m s\\ge(\\varepsilon(z)-2\\sqrt m s)/16>\\sqrt m S-\\sqrt m s/8$, so $S<17s/8$. The dyadic ratio is therefore at most two. Subdivide common cube boundaries into their dyadic face pieces: on a face, record the faces of all cubes touching it, and split along their boundary pieces; on its proper subfaces use the same recorded intersections. These are finite rectangular subdivisions locally, since only finitely many cubes touch any compact cube by step 2.1. Compatibility can be seen one coordinate at a time: two collinear dyadic intervals are nested or have disjoint interiors, so every overlap is the smaller interval; in a face, the products of the resulting intervals give its pieces, and restriction to a shared boundary gives exactly the same intersections from either incident cube. Whenever a face is already covered by smaller coplanar faces, use those pieces, rather than retaining the larger face as a cell. Boundary pieces may further subdivide a larger cell's proper faces; that cell itself is retained with this subdivided boundary. Thus the pieces form a locally finite cubical cell decomposition whose closed cells are convex cubes or rectangles and whose intersections are unions of common boundary pieces. Triangulate its boundary pieces inductively by dimension, choosing the center of each positive-dimensional cell and coning it to its already triangulated boundary. In dimension one this simply joins successive boundary points; at every higher dimension convexity makes the cones cover the cell, and distinct cones meet only along their common triangulated boundary cones. Use a single center and boundary triangulation for each shared cell. Finally cone each maximal cube from its center to its triangulated boundary. This gives a locally finite triangulation of $\\Omega$ of dimension at most $m$, with every simplex contained in a maximal cube. No infinite hyperplane is extended across unrelated cubes and no finite compact subcomplex is substituted for $\\Omega$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each vertex $v$ of this triangulation, let $\\operatorname{st}(v)$ be the union of the relative interiors of simplices containing $v$. In the geometric realization it is the set where the barycentric coordinate of $v$ is positive, hence it is open. Every point lies in the star of each vertex of its unique minimal simplex, so these stars cover $\\Omega$. If a point lies in the stars of $v_0,\\ldots,v_k$, all these vertices have positive coordinates in the same minimal simplex. Its dimension is at most $m$, so $k+1\\le m+1$. A neighborhood meeting only finitely many simplices meets stars of only their finitely many vertices; hence the star cover is locally finite and has order at most $m+1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $y\\in\\operatorname{st}(v)$, then $y$ and $v$ lie in a simplex contained in a maximal cube $Q$ containing $v$. By step 1.2,\n$$|y-v|\\le\\operatorname{diam}(Q)<\\varepsilon(v)/16\\le\\delta(v)/16<\\delta(v)/2.$$\nStep 1.1 supplies $U_v\\in\\mathcal U$ with $B(v,\\delta(v)/2)\\subset U_v$, so $\\operatorname{st}(v)\\subset U_v$. Choosing one such $U_v$ for each vertex defines a refinement map $\\rho$; AC [A1] supplies these simultaneous choices. The star cover is therefore a locally finite open refinement of $\\mathcal U$ with the required order.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty Euclidean open set and an open cover of it."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The dimension parameter is constrained by m≥1, and dyadic cubes have positive side length."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction applies in dimension m=1; step 3.1 gives order at most two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats an empty complement by the extended-distance convention when Ω or a cover member is all of R^m."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit and step 3.2 selects one containing cover member for every vertex."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an existence statement, not a biconditional."
+        }
+      ]
+    },
+    "lem-qftx-gaga-euclidean-sheaf-cohomological-dimension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Fix a topological space $X$, let\n$$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$\nbe the additive left exact global-sections functor\n([[def-global-sections-functor-sheaves]]), and let $I$ be the supplied\nfunctorial injective resolution datum on $\\mathrm{Ab}(X)$ of\n[[thm-abelian-sheaves-have-enough-injectives]]: it assigns to every abelian\nsheaf $\\mathcal F$ one specific injective resolution\n$0\\to\\mathcal F\\to I^\\bullet(\\mathcal F)$\n([[def-right-derived-object-relative-to-injective-resolution-data]]).\n\nFor every $q\\ge0$ and every abelian sheaf $\\mathcal F$ on $X$ define the\n**$q$-th sheaf cohomology group of $\\mathcal F$** to be the right derived\nobject of $\\Gamma(X,-)$ relative to $I$:\n$$H^q(X,\\mathcal F):=R_I^q\\Gamma(X,\\mathcal F)=H^q\\bigl(\\Gamma(X,I^\\bullet(\\mathcal F)_{\\mathrm{del}})\\bigr),$$\nthe cohomology object of the complex\n$\\Gamma(X,I^0(\\mathcal F))\\to\\Gamma(X,I^1(\\mathcal F))\\to\\cdots$ of abelian\ngroups obtained from the deleted resolution\n([[def-deleted-resolution]], [[def-cohomology-object-of-a-cochain-complex]]).\nWe also set $H^q(X,\\mathcal F):=0$ for $q<0$.\n\nBecause $I$ is a fixed supplied datum, the group $H^q(X,\\mathcal F)$ is a\nspecific group for each pair $(X,\\mathcal F)$, and for a morphism\n$\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves we write\n$H^q(X,\\varphi):=R_I^q\\Gamma(X,\\varphi)$ for the induced map; it is the map on\ncohomology induced by $\\Gamma(X,-)$ applied to the cochain maps supplied with\nthe datum, and it is additive in $\\varphi$.\n\nIf $J$ is another supplied injective resolution datum on $\\mathrm{Ab}(X)$ then\n$R_I^q\\Gamma(X,-)$ and $R_J^q\\Gamma(X,-)$ are naturally isomorphic, so the\n$H^q(X,\\mathcal F)$ computed from $J$ agree with the ones above up to a\ncanonical natural isomorphism; the Axiom of Dependent Choice needed for that\ncomparison follows from AC\n([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]],\n[[thm-choice-implies-dependent-implies-countable-choice]]). The notation\n$H^q(X,\\mathcal F)$ therefore does not depend on the datum used, up to this\ncanonical isomorphism, and we call $q$ the **cohomological degree**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cech-cochain-complex-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, let $\\mathcal F$ be a sheaf of abelian groups\non $X$ ([[def-sheaf-on-topological-space]]), and let\n$\\mathcal U=(U_i)_{i\\in I}$ be a cover of $X$ by open subsets, indexed by a set\n$I$ that is equipped with a linear order $<$.\n\nFor an integer $p\\ge0$ define the **group of ordered $p$-cochains of\n$\\mathcal U$ with values in $\\mathcal F$** by\n$$C^p(\\mathcal U,\\mathcal F):=\\prod_{i_0<\\cdots<i_p} \\mathcal F\\bigl(U_{i_0}\\cap\\cdots\\cap U_{i_p}\\bigr),$$\nthe product of the section groups over all increasing $(p+1)$-tuples\n$i_0<\\cdots<i_p$ in $I$; write an element as $s=(s_{i_0\\cdots i_p})$. For\n$p<0$ put $C^p(\\mathcal U,\\mathcal F):=0$. When $I$ has no increasing\n$(p+1)$-tuple the product is empty and $C^p(\\mathcal U,\\mathcal F)=0$; when an\nintersection $U_{i_0}\\cap\\cdots\\cap U_{i_p}$ is empty, the corresponding\nfactor is the one-element group $\\mathcal F(\\varnothing)=0$\n([[lem-sheaf-section-over-empty-set-terminal]]).\n\nThe **Čech differential** $\\delta^p:C^p(\\mathcal U,\\mathcal F)\\to\nC^{p+1}(\\mathcal U,\\mathcal F)$ is defined on an increasing $(p+2)$-tuple\n$i_0<\\cdots<i_{p+1}$ by\n$$(\\delta^p s)_{i_0\\cdots i_{p+1}} =\\sum_{j=0}^{p+1}(-1)^j\\, s_{i_0\\cdots\\widehat{i_j}\\cdots i_{p+1}} \\Big|_{U_{i_0}\\cap\\cdots\\cap U_{i_{p+1}}},$$\nwhere $\\widehat{i_j}$ means that the index $i_j$ is omitted and the restriction\nis taken from $U_{i_0}\\cap\\cdots\\widehat{U_{i_j}}\\cdots\\cap U_{i_{p+1}}$ to the\nfull intersection ([[def-section-restriction-and-global-section]]). For $p<0$\nset $\\delta^p:=0$. The maps $\\delta^p$ are group homomorphisms, componentwise\nsums of restrictions, so the data $(C^p(\\mathcal U,\\mathcal F),\\delta^p)_{p\\in\n\\mathbb Z}$ form a cochain complex of abelian groups; that $\\delta^{p+1}\\circ\n\\delta^p=0$ is proved in [[lem-cech-differential-squares-zero]]. The pair\n$(\\mathcal F,\\mathcal U)$ being fixed, the construction is functorial in\n$\\mathcal F$: a morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves\ninduces componentwise maps $C^p(\\mathcal U,\\varphi)$ commuting with the\ndifferentials.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cech-cohomology-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, $\\mathcal F$ a sheaf of abelian groups on $X$,\nand $\\mathcal U=(U_i)_{i\\in I}$ an open cover indexed by a linearly ordered set,\nwith ordered Čech cochain complex $\\bigl(C^\\bullet(\\mathcal U,\\mathcal F),\n\\delta^\\bullet\\bigr)$ ([[def-cech-cochain-complex-open-cover]],\n[[lem-cech-differential-squares-zero]]). The **Čech cohomology of the fixed\ncover $\\mathcal U$ with values in $\\mathcal F$** is\n$$\\check H^p(\\mathcal U,\\mathcal F) :=\\ker\\bigl(\\delta^p:C^p(\\mathcal U,\\mathcal F)\\to C^{p+1}(\\mathcal U,\\mathcal F)\\bigr) \\Big/\\operatorname{im}\\bigl(\\delta^{p-1}:C^{p-1}(\\mathcal U,\\mathcal F)\\to C^p(\\mathcal U,\\mathcal F)\\bigr),$$\nthe $p$-th cohomology group of the cochain complex\n$\\bigl(C^\\bullet(\\mathcal U,\\mathcal F),\\delta^\\bullet\\bigr)$ in the sense of\n[[def-cohomology-object-of-a-cochain-complex]]. Since $C^{-1}(\\mathcal U,\n\\mathcal F)=0$ and $\\delta^{-1}=0$, one has $\\check H^0(\\mathcal U,\\mathcal F)\n=\\ker(\\delta^0)$, and for $p<0$ the group $\\check H^p(\\mathcal U,\\mathcal F)$\nis $0$ because $C^p=0$, so both the kernel in degree $p$ and the image in degree $p$ are zero. A cochain in\n$\\ker(\\delta^p)$ is called a **Čech $p$-cocycle** and a cochain in\n$\\operatorname{im}(\\delta^{p-1})$ a **Čech $p$-coboundary**.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-global-cech-cohomology-directed-limit",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a topological\nspace and let $\\mathcal F$ be a sheaf of abelian groups on $X$. The topology\n$\\mathcal T_X$ is a set of open subsets. Fix a well-order of $\\mathcal T_X$\nusing the Axiom of Choice, and let $\\operatorname{Cov}(X)$ consist of all\nsubsets $\\mathcal U\\subseteq\\mathcal T_X$ whose union is $X$, each indexed by\nits distinct members in the inherited well-order. This is a set of ordered\ncovers. An arbitrary indexed open cover is represented by its distinct-member\ncover: under Choice, one may choose an index for each distinct member, so the\ntwo cover presentations refine one another and yield canonically isomorphic\nČech cohomology under refinement independence. For\n$\\mathcal U\\in\\operatorname{Cov}(X)$ write $\\check H^p(\\mathcal U,\\mathcal F)$\nfor its fixed-cover Čech cohomology\n([[def-cech-cohomology-open-cover]]).\n\nSay that $\\mathcal U\\preceq\\mathcal V$, or that $\\mathcal V$ **refines**\n$\\mathcal U$, when there is a refinement function from $\\mathcal V$ to\n$\\mathcal U$, that is, a map $c$ from the index set of $\\mathcal V$ to the index\nset of $\\mathcal U$ with $V\\subseteq c(V)$ for every $V\\in\\mathcal V$\n([[def-refinement-open-cover]]). This relation is a preorder: it is reflexive\nthrough the identity map, and it is transitive because a composite of refinement\nfunctions is a refinement function. It is **directed**: for covers\n$\\mathcal U,\\mathcal V\\in\\operatorname{Cov}(X)$ the set of distinct intersections\n$\\mathcal W=\\{U\\cap V:U\\in\\mathcal U,\\ V\\in\\mathcal V\\}$ is another member of\n$\\operatorname{Cov}(X)$, indexed by the same inherited well-order, and covers\n$X$. For each $W\\in\\mathcal W$, choose the least $U\\in\\mathcal U$ and the\nleast $V\\in\\mathcal V$ with $W=U\\cap V$; the resulting maps refine\n$\\mathcal W$ to both covers. Repeating this construction stays within the same\nset $\\operatorname{Cov}(X)$.\n\nThe Axiom of Choice is used to fix transition data: for every pair\n$\\mathcal U\\preceq\\mathcal V$ choose one refinement function\n$c_{\\mathcal V\\mathcal U}$ from $\\mathcal V$ to $\\mathcal U$. By\n[[thm-refinement-map-independent-on-cohomology]] any two refinement functions\nfrom $\\mathcal V$ to $\\mathcal U$ induce the same homomorphism\n$\\check H^p(\\mathcal U,\\mathcal F)\\to\\check H^p(\\mathcal V,\\mathcal F)$ in every\ndegree, so the chosen data give well-defined maps\n$$\\check H^p(\\mathcal U,\\mathcal F)\\longrightarrow\\check H^p(\\mathcal V,\\mathcal F)\\qquad(\\mathcal U\\preceq\\mathcal V),$$\nand these maps are compatible with composition and with identities: the composite\nof the chosen refinement functions along $\\mathcal U\\preceq\\mathcal V\\preceq\\mathcal W$\nis again a refinement function from $\\mathcal W$ to $\\mathcal U$ and hence\ninduces the composite of the two induced maps, while the identity is a refinement\nfunction of a cover to itself and induces the identity. Thus\n$\\mathcal U\\mapsto\\check H^p(\\mathcal U,\\mathcal F)$ is a functor from the\ndirected preorder $\\operatorname{Cov}(X)$ to the category of abelian groups.\n\nThe **Čech cohomology of $X$ with values in $\\mathcal F$** is the filtered colimit\n$$\\check H^p(X,\\mathcal F):=\\varinjlim_{\\mathcal U\\in\\operatorname{Cov}(X)}\\check H^p(\\mathcal U,\\mathcal F),$$\ntaken in the category of abelian groups, of that functor ([[def-filtered-category-and-filtered-colimit]]). A class of\n$\\check H^p(X,\\mathcal F)$ is represented by a pair $(\\mathcal U,\\alpha)$ with\n$\\mathcal U\\in\\operatorname{Cov}(X)$ and\n$\\alpha\\in\\check H^p(\\mathcal U,\\mathcal F)$, and two such pairs represent the\nsame class exactly when the two classes agree after refinement to a common cover.\nA morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves induces the\nmaps $\\check H^p(\\mathcal U,\\varphi)$ on fixed covers, which commute with the\nrefinement maps because the cochain maps of\n[[def-refinement-open-cover]] are defined componentwise from the values of the\ncochains; these maps pass to the filtered colimit and give\n$$\\check H^p(X,\\varphi):\\check H^p(X,\\mathcal F)\\longrightarrow\\check H^p(X,\\mathcal G),$$\nso that $\\check H^p(X,-)$ is a functor on the abelian sheaves on $X$ with\n$\\check H^p(X,\\mathcal F)=0$ for $p<0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-gaga-euclidean-finite-order-refinement",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $m\\ge1$ and let $\\Omega$ be a nonempty open subset of\n$\\mathbb R^m$ with its Euclidean metric. For every open cover $\\mathcal U$ of\n$\\Omega$, there is a locally finite open cover $\\mathcal V$ and a refinement\nmap $\\rho:\\mathcal V\\to\\mathcal U$ with $V\\subseteq\\rho(V)$ for every\n$V\\in\\mathcal V$, such that each point of $\\Omega$ lies in at most $m+1$\nmembers of $\\mathcal V$. Here locally finite means that every point has an\nopen neighborhood meeting only finitely many members, and the order bound\nmeans the stated pointwise multiplicity bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qftx-gaga-metric-cech-derived-comparison",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. Let $(X,d)$ be a metric space and let\n$\\mathcal F$ be a sheaf of abelian groups on its metric topology. Define\n$\\check H^q(X,\\mathcal F)$ as the filtered colimit of the fixed-cover ordered\nČech cohomology groups over all open covers, and define $H^q(X,\\mathcal F)$ as\nthe right derived functors of global sections from an injective resolution.\nThen the canonical comparison\n$$\\check H^q(X,\\mathcal F)\\longrightarrow H^q(X,\\mathcal F)$$\nis a natural isomorphism for every integer $q\\ge0$, compatible with the\nidentity identification of both degree-zero groups with $\\Gamma(X,\\mathcal F)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal U$ be any open cover of $\\Omega$. By [F4] it has a refinement $\\mathcal V$ in which every point lies in at most $m+1$ members. For $q>m$, an increasing $(q+1)$-tuple has at least $m+2$ distinct members, so its intersection is empty; therefore every factor of $C^q(\\mathcal V,\\mathcal G)$ is the zero group by [F2], and $\\check H^q(\\mathcal V,\\mathcal G)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since every cover has such a refinement, the colimit over all covers in [F3] is zero in degree $q>m$: every representative becomes zero after refinement.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The comparison isomorphism [F5] identifies this zero colimit with $H^q(\\Omega,\\mathcal G)$, proving the ordinary sheaf cohomology bound. No compact-support comparison is invoked.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonempty Euclidean open domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only q>m, so degree zero is not claimed to vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 the order-two refinement makes every Čech cochain degree q≥2 zero, as in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict threshold q>m is used in step 1.1, including the first degree above m."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit and the refinement in step 1.1 is supplied by the finite-order refinement lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts vanishing, not an if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts vanishing, not an if-and-only-if criterion."
+        }
+      ]
+    },
+    "thm-qftx-gaga-analytic-local-coherent-polydisc-acyclicity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-gaga-analytic-oka-coherence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a finite-dimensional complex manifold and let $\\mathcal O_M$ be its sheaf of holomorphic functions. For every open $U\\subseteq M$ and every finite tuple $f_1,\\ldots,f_q\\in\\mathcal O_M(U)$, the relation sheaf\n$$\n\\ker\\!\\left(\\mathcal O_U^{\\oplus q}\\longrightarrow\\mathcal O_U,\\quad(a_1,\\ldots,a_q)\\longmapsto\\sum_{j=1}^q a_jf_j\\right)\n$$\nis locally of finite type: every point has a neighborhood on which one finite family of relation sections generates the relation stalk at every point. Consequently $\\mathcal O_M$ is coherent. Coherent $\\mathcal O_M$-module sheaves are closed under kernels, cokernels, and finite extensions. For every coherent $\\mathcal O_M$-module $\\mathcal F$, point $x\\in M$, and finite integer $\\ell\\ge0$, there are a chart neighborhood $W$ of $x$ and finite ranks $p_0,\\ldots,p_\\ell$ for which\n$$\n\\mathcal O_W^{\\oplus p_\\ell}\\longrightarrow\\cdots\\longrightarrow\\mathcal O_W^{\\oplus p_0}\\longrightarrow\\mathcal F|_W\\longrightarrow0\n$$\nis exact at $\\mathcal F|_W$ and at every free term except the leftmost one. No exactness at the leftmost free term and no global analytic free resolution are asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dolbeault-lemma-polydisc",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$, let $P=\\prod_{j=1}^n D_j$ and\n$P'=\\prod_{j=1}^n D'_j$ be finite open coordinate polydiscs such that each\nclosed coordinate disc $\\overline{D'_j}$ is a compact subset of $D_j$. Let\n$0\\le p\\le n$ and $1\\le q\\le n$, and let $\\eta\\in\\Omega^{p,q}(P)$ be a\nsmooth form with $\\bar\\partial\\eta=0$. Then there is a smooth\n$\\psi\\in\\Omega^{p,q-1}(P')$ such that\n$$\\bar\\partial\\psi=\\eta|_{P'}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-smooth-function-module-sheaves-are-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a smooth manifold\n([[def-smooth-manifold]]), let\n$\\mathcal A=\\mathcal C_M^\\infty$ be its sheaf of real-valued smooth functions,\nand let $\\mathcal F$ be a sheaf of $\\mathcal A$-modules. Then for every open\n$U\\subseteq M$ and every $q>0$,\n$$H^q(U,\\mathcal F|_U)=0.$$\nThe Axiom of Choice supplies injective resolutions for module sheaves and for\nabelian-sheaf cohomology. Its consequences $\\mathrm{AC}_\\omega$ and DC supply,\nrespectively, the partitions of unity and the acyclic-resolution comparison\nused below; no stronger choice principle is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice.\n\nLet $I$ be a supplied injective resolution datum on a class $\\mathcal D$, let\n$F:\\mathcal A\\to\\mathcal B$ be an additive left exact functor, and let\n$$0\\to A\\to J^0\\to J^1\\to J^2\\to\\cdots$$\nbe an $F$-acyclic resolution of $A$ relative to $I$. Assume moreover that\n$A\\in\\mathcal D$ and that, for $Z^0:=A$ and\n$$0\\to Z^q\\to J^q\\to Z^{q+1}\\to0\\qquad(q\\ge0),$$\neach $Z^q$ lies in $\\mathcal D$. Then for every $n\\ge 0$ there is a canonical\nisomorphism\n$$R_I^nF(A)\\xrightarrow{\\ \\sim\\ }H^n(F(J^\\bullet_{\\mathrm{del}})).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dolbeault-cohomology-polydisc-vanishes-positive-q",
+          "source_section": "Statement",
+          "quote": "Assume the full axiom of choice. Let $n\\ge1$ and let\n$P=\\prod_{j=1}^n D_j\\subseteq\\mathbb C^n$, where each $D_j$ is a nonempty\nopen disc of finite positive radius or is $\\mathbb C$. For integers\n$0\\le p\\le n$ and $1\\le q\\le n$, every smooth\n$\\eta\\in\\Omega^{p,q}(P)$ with $\\bar\\partial\\eta=0$ is $\\bar\\partial$-exact:\nthere is a smooth $\\omega\\in\\Omega^{p,q-1}(P)$ such that\n$\\bar\\partial\\omega=\\eta$. Consequently,\n$H_{\\bar\\partial}^{p,q}(P)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-abelian-sheaves-have-enough-injectives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, and let $X$ be a topological space. Then\n$\\mathrm{Ab}(X)$ has enough injectives, every abelian sheaf on $X$ admits an\ninjective resolution ([[def-injective-resolution-in-an-abelian-category]]), and\nthe embeddings below supply one injective resolution datum\n([[def-supplied-injective-resolution-datum]]) on the whole category\n$\\mathrm{Ab}(X)$: for every abelian sheaf $\\mathcal F$ the datum assigns one\nspecific injective resolution\n$$0\\to\\mathcal F\\to I^0(\\mathcal F)\\to I^1(\\mathcal F)\\to\\cdots,$$\nbuilt functorially from $\\mathcal F$ with no further selection.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Fix a topological space $X$, let\n$$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$\nbe the additive left exact global-sections functor\n([[def-global-sections-functor-sheaves]]), and let $I$ be the supplied\nfunctorial injective resolution datum on $\\mathrm{Ab}(X)$ of\n[[thm-abelian-sheaves-have-enough-injectives]]: it assigns to every abelian\nsheaf $\\mathcal F$ one specific injective resolution\n$0\\to\\mathcal F\\to I^\\bullet(\\mathcal F)$\n([[def-right-derived-object-relative-to-injective-resolution-data]]).\n\nFor every $q\\ge0$ and every abelian sheaf $\\mathcal F$ on $X$ define the\n**$q$-th sheaf cohomology group of $\\mathcal F$** to be the right derived\nobject of $\\Gamma(X,-)$ relative to $I$:\n$$H^q(X,\\mathcal F):=R_I^q\\Gamma(X,\\mathcal F)=H^q\\bigl(\\Gamma(X,I^\\bullet(\\mathcal F)_{\\mathrm{del}})\\bigr),$$\nthe cohomology object of the complex\n$\\Gamma(X,I^0(\\mathcal F))\\to\\Gamma(X,I^1(\\mathcal F))\\to\\cdots$ of abelian\ngroups obtained from the deleted resolution\n([[def-deleted-resolution]], [[def-cohomology-object-of-a-cochain-complex]]).\nWe also set $H^q(X,\\mathcal F):=0$ for $q<0$.\n\nBecause $I$ is a fixed supplied datum, the group $H^q(X,\\mathcal F)$ is a\nspecific group for each pair $(X,\\mathcal F)$, and for a morphism\n$\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves we write\n$H^q(X,\\varphi):=R_I^q\\Gamma(X,\\varphi)$ for the induced map; it is the map on\ncohomology induced by $\\Gamma(X,-)$ applied to the cochain maps supplied with\nthe datum, and it is additive in $\\varphi$.\n\nIf $J$ is another supplied injective resolution datum on $\\mathrm{Ab}(X)$ then\n$R_I^q\\Gamma(X,-)$ and $R_J^q\\Gamma(X,-)$ are naturally isomorphic, so the\n$H^q(X,\\mathcal F)$ computed from $J$ agree with the ones above up to a\ncanonical natural isomorphism; the Axiom of Dependent Choice needed for that\ncomparison follows from AC\n([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]],\n[[thm-choice-implies-dependent-implies-countable-choice]]). The notation\n$H^q(X,\\mathcal F)$ therefore does not depend on the datum used, up to this\ncanonical isomorphism, and we call $q$ the **cohomological degree**.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-long-exact-sequence-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let\n$$0\\to\\mathcal F'\\to\\mathcal F\\to\\mathcal F''\\to0$$\nbe a short exact sequence of abelian sheaves on a topological space $X$, and let\n$H^q(X,-)$ be sheaf cohomology computed from the supplied functorial injective\nresolution datum $I$ on $\\mathrm{Ab}(X)$\n([[def-sheaf-cohomology-derived-global-sections]]). Then there is a natural long\nexact sequence\n$$\\cdots\\to H^q(X,\\mathcal F')\\to H^q(X,\\mathcal F)\\to H^q(X,\\mathcal F'')\\xrightarrow{\\partial^q}H^{q+1}(X,\\mathcal F')\\to H^{q+1}(X,\\mathcal F)\\to\\cdots,$$\nnatural in the short exact sequence and independent of the choice of injective\nresolutions used to assemble it.\n\nThe derived categories and right derived functor here are taken under the\nstanding smallness or supplied cofinal-denominator hypothesis of\n[[def-derived-category-of-an-abelian-category]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qftx-gaga-euclidean-sheaf-cohomological-dimension",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $m\\ge1$, let $\\Omega\\subseteq\\mathbb R^m$ be a nonempty\nopen subset with its Euclidean metric, and let $\\mathcal G$ be any sheaf of\nabelian groups on $\\Omega$. Then ordinary derived-functor sheaf cohomology\nsatisfies\n$$H^q(\\Omega,\\mathcal G)=0\\qquad\\text{for every integer }q>m.$$\nThis is an ordinary cohomology bound for arbitrary sheaves; it is not a\ncompact-support cohomology assertion.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $N=0$, the chart neighborhood is the one-point space. Coherence makes the stalk a finitely generated $\\mathbb C$-vector space, hence finite dimensional; choose a basis to identify $\\mathcal F$ with a finite-rank free module on that point. Global sections on a point are the identity functor on abelian groups, so they are exact and have zero higher derived functors by [F7]. The Dolbeault complex consists only of degree-zero sections, and the isomorphism $\\mathcal O^{p_0}\\to\\mathcal F$ preceded by the zero free module gives a partial free presentation with $\\ell=1>2N=0$, exact at the required terms.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $N\\ge1$. Apply [F2] with $\\ell=2N+1$ and choose a coordinate polydisc $W$ about $x$ inside its chart neighborhood and $U$. Restrict the partial resolution to $W$. Write $K_0=\\mathcal F|_W$ and, successively, let $K_{j+1}$ be the kernel of the induced surjection $\\mathcal O_W^{p_j}\\twoheadrightarrow K_j$ for $0\\le j<\\ell$. Exactness of the partial resolution gives these surjections; [F2] makes every $K_{j+1}$ coherent. Thus each sequence\n$$0\\longrightarrow K_{j+1}\\longrightarrow\\mathcal O_W^{p_j}\n\\longrightarrow K_j\\longrightarrow0$$\nis short exact. The last kernel is the image of the leftmost map; no injectivity at that leftmost free term is needed.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $D\\subseteq W$ be a nonempty coordinate polydisc. By [F3], the smooth Dolbeault sequence on $D$ is an exact resolution of $\\mathcal O_D$. Its terms are modules over the sheaf of smooth functions, so [F4] makes them acyclic; [F5] therefore identifies $H^q(D,\\mathcal O_D)$ with the cohomology of the displayed global Dolbeault complex. By [F6] that global complex has zero cohomology in degrees $1\\le q\\le N$, and it is zero in degrees $q>N$. Hence $H^q(D,\\mathcal O_D)=0$ for every $q>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For each finite rank $p_j$, the restriction $\\mathcal O_D^{p_j}$ is acyclic: step 2.1 gives acyclicity of each copy of $\\mathcal O_D$, and [F7] gives additivity for the finite direct sum. Restricting the short exact sequences of step 1.2 to $D$ preserves exactness by [F8].",
+          "step": "2.2",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $q>0$. In the long exact sequence of each restricted short exact sequence, the groups $H^q(D,\\mathcal O_D^{p_j})$ and $H^{q+1}(D,\\mathcal O_D^{p_j})$ vanish by step 2.2. Exactness from [F9] therefore makes the connecting homomorphism\n$$H^q(D,K_j|_D)\\xrightarrow{\\ \\cong\\ }H^{q+1}(D,K_{j+1}|_D)$$\nan isomorphism. Composing for $j=0,\\ldots,\\ell-1$ yields\n$$H^q(D,\\mathcal F|_D)\\cong H^{q+\\ell}(D,K_\\ell|_D).$$",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Since $D$ is open in $\\mathbb R^{2N}$ and $q+\\ell\\ge1+(2N+1)>2N$, [F10] makes the right-hand group in step 3.1 zero. Hence $H^q(D,\\mathcal F|_D)=0$. The same $W$ works for every such $D$ and every $q>0$, because the partial resolution is fixed on $W$ and the scalar and dimension bounds apply to every open subpolydisc.",
+          "step": "3.2",
+          "inputs": [
+            "F10",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies only over nonempty coordinate polydiscs D."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 retains the degree-zero Dolbeault term; vanishing is only asserted for q>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.2 use ell=3>2 when N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The N=0 point case and its length-one free presentation are handled separately in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The domain is a polydisc and no interval or boundary-value condition occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Full AC is explicit; for N≥1 the supplier is invoked with ell=2N+1 in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem contains no biconditional."
+        }
+      ]
+    },
+    "ex-qftx-gaga-analytic-point-sheaf-acyclicity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-gaga-analytic-oka-coherence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a finite-dimensional complex manifold and let $\\mathcal O_M$ be its sheaf of holomorphic functions. For every open $U\\subseteq M$ and every finite tuple $f_1,\\ldots,f_q\\in\\mathcal O_M(U)$, the relation sheaf\n$$\n\\ker\\!\\left(\\mathcal O_U^{\\oplus q}\\longrightarrow\\mathcal O_U,\\quad(a_1,\\ldots,a_q)\\longmapsto\\sum_{j=1}^q a_jf_j\\right)\n$$\nis locally of finite type: every point has a neighborhood on which one finite family of relation sections generates the relation stalk at every point. Consequently $\\mathcal O_M$ is coherent. Coherent $\\mathcal O_M$-module sheaves are closed under kernels, cokernels, and finite extensions. For every coherent $\\mathcal O_M$-module $\\mathcal F$, point $x\\in M$, and finite integer $\\ell\\ge0$, there are a chart neighborhood $W$ of $x$ and finite ranks $p_0,\\ldots,p_\\ell$ for which\n$$\n\\mathcal O_W^{\\oplus p_\\ell}\\longrightarrow\\cdots\\longrightarrow\\mathcal O_W^{\\oplus p_0}\\longrightarrow\\mathcal F|_W\\longrightarrow0\n$$\nis exact at $\\mathcal F|_W$ and at every free term except the leftmost one. No exactness at the leftmost free term and no global analytic free resolution are asserted.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-power-series-expansion-in-several-complex-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$ and a polyradius $\\rho$, let\n$f:\\Delta_\\rho(a)\\to\\mathbb C$ be continuous and separately holomorphic, let $r$\nbe a polyradius with $r_k<\\rho_k$ for every $k<m$, and let\n$C_k(t)=a_k+r_k\\exp(it)$ on $[0,2\\pi]$. For each multi-index $\\alpha$ set\n\n$$c_\\alpha:=\\frac1{(2\\pi i)^m}\\int_{C_0}\\!\\cdots\\!\\int_{C_{m-1}} f(\\zeta)\\prod_{k<m}(\\zeta_k-a_k)^{-\\alpha_k-1}\\,d\\zeta_{m-1}\\cdots d\\zeta_0 ,$$\n\nan iterated integral as in the polydisc Cauchy formula. Then, with\n$M=\\sup_{\\Gamma_r(a)}|f|$,\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k},$$\n\nand for every real $\\theta$ with $0<\\theta<1$ the series\n$\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n$\\overline\\Delta_{\\theta r}(a)$ with\n\n$$f(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha\\qquad(z\\in\\overline\\Delta_{\\theta r}(a)).$$\n\nSince every $z\\in\\Delta_r(a)$ lies in $\\overline\\Delta_{\\theta r}(a)$ for some\n$\\theta<1$, the expansion holds throughout $\\Delta_r(a)$.\n\n**The coefficients are asserted here only as those iterated integrals.** That\n$c_\\alpha$ equals $\\partial^\\alpha f(a)/\\alpha!$ needs termwise differentiation\nand is not claimed by this statement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-skyscraper-sheaf-abelian-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, let $x\\in X$, and let $A$ be an abelian group.\nThe **skyscraper sheaf at $x$ with value $A$** is the sheaf\n$$\ni_{x,*}A\n$$\ndefined on an open set $V \\subseteq X$ by\n$$(i_{x,*}A)(V)= \\begin{cases} A,& x\\in V,\\\\ 0,& x\\notin V. \\end{cases}$$\nIf $V' \\subseteq V$ and both opens contain $x$, the restriction map is the\nidentity on $A$. If $x\\notin V'$, the restriction map to $0$ is the unique zero\nhomomorphism.\n\nThus a skyscraper sheaf has the value $A$ precisely on opens that meet the\nchosen point.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sheaf-morphism-isomorphism-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on a\ntopological space $X$. Then $\\varphi$ is an isomorphism if and only if, for\nevery $x\\in X$, the induced map on stalks\n$$\\varphi_x:\\mathcal F_x\\longrightarrow\\mathcal G_x$$\nis a bijection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qftx-gaga-analytic-local-coherent-polydisc-acyclicity",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. Let $N\\ge0$, let $U$ be an open neighborhood\nof $x\\in\\mathbb C^N$, and let $\\mathcal F$ be a coherent analytic\n$\\mathcal O_U$-module. A coordinate polydisc centered at $x$ means a set\n$$W=\\{z\\in\\mathbb C^N:|z_j-x_j|<r_j\\ (1\\le j\\le N)\\},\\qquad r_j>0,$$\ncontained in $U$. There is such a $W$ for which the following hold.\n\nFor every nonempty coordinate polydisc $D\\subseteq W$ and every integer\n$q>0$, ordinary derived-functor sheaf cohomology satisfies\n$$H^q(D,\\mathcal F|_D)=0.$$\nOn each such $D$, scalar sheaf cohomology of $\\mathcal O_D$ is computed by the\nglobal smooth Dolbeault complex. Here $\\mathcal A_D^{0,q}$ is the sheaf of\nsmooth complex-valued differential forms of type $(0,q)$ and $\\bar\\partial$ is\nthe Dolbeault differential:\n$$\\Gamma(D,\\mathcal A_D^{0,0})\\xrightarrow{\\bar\\partial}\\cdots\n\\xrightarrow{\\bar\\partial}\\Gamma(D,\\mathcal A_D^{0,N}),$$\nand in particular $H^q(D,\\mathcal O_D)=0$ for $q>0$. The polydisc $W$ may be\nchosen inside a neighborhood on which there is a partial finite-rank free resolution\n$$\\mathcal O_W^{p_\\ell}\\longrightarrow\\cdots\\longrightarrow\n\\mathcal O_W^{p_0}\\longrightarrow\\mathcal F|_W\\longrightarrow0$$\nthat is exact at $\\mathcal F|_W$ and at every free term except possibly the\nleftmost one, with $\\ell=2N+1>2N$. No exactness at the leftmost term and no\nglobal free resolution are asserted.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $D\\subseteq W$, restriction of $\\mathcal Q_U$ is the cokernel of the finite free map $\\mathcal O_D^{\\oplus N}\\to\\mathcal O_D$ given by $(a_1,\\ldots,a_N)\\mapsto\\sum_j a_jz_j$. Coherence of $\\mathcal O_D$ and closure under cokernels in [F2] make $\\mathcal Q$ coherent. Define evaluation $\\mathcal O_D\\to i_*\\mathbb C$ by $f\\mapsto f(0)$ on opens containing $0$ and by the unique zero section on opens disjoint from $0$. Each $z_j$ maps to zero, so the morphism factors through $\\mathcal Q$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the stalk at $0$, evaluation $\\mathcal O_{D,0}\\to\\mathbb C$ is surjective. Its kernel consists exactly of germs with zero constant coefficient. By [F3], write such a germ as $f(z)=\\sum_{\\alpha\\ne0}c_\\alpha z^\\alpha$ on a smaller polydisc. Assign each multi-index to its least $j$ with $\\alpha_j>0$ and set $g_j(z)=\\sum_{\\alpha:\\,j=\\min\\{k:\\alpha_k>0\\}}c_\\alpha z^{\\alpha-e_j}$. These subseries converge on every still smaller polydisc, and termwise regrouping gives $f=\\sum_{j=1}^N z_jg_j$. Thus the kernel is precisely $(z_1,\\ldots,z_N)\\mathcal O_{D,0}$, and the quotient stalk maps isomorphically to $\\mathbb C$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $y\\in D$ and $y\\ne0$, choose $j$ with $y_j\\ne0$. The germ of $z_j$ is a unit at $y$, so the quotient stalk $\\mathcal Q_y$ is zero; [F4] says the target stalk is also zero. At $0$, step 1.2 gives an isomorphism on stalks. Hence [F5] makes the induced morphism $\\mathcal Q\\to i_*\\mathbb C$ an isomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F4], $\\Gamma(D,i_*\\mathbb C)=\\mathbb C$, so step 2.1 gives $\\Gamma(D,\\mathcal Q)\\cong\\mathbb C$. By step 1.1, $\\mathcal Q=\\mathcal Q_U|_D$; apply [F6] with the $W$ chosen for $\\mathcal Q_U$ to obtain $H^q(D,\\mathcal Q)=0$ for every $q>0$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a nonempty polydisc containing the origin."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 computes H^0(D,Q) as C."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1 the same coordinate-ideal and stalk argument in steps 1.2–2.1 applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The dimension restriction N≥1 excludes the zero-dimensional case; off-origin stalks and the origin stalk are separated in steps 1.2–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and the supplied local theorem are part of the statement; step 2.2 applies the theorem on D."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts an isomorphism and cohomology values, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts an isomorphism and cohomology values, not a biconditional."
+        }
+      ]
+    },
+    "ex-qftx-gaga-analytic-hyperplane-quotient": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-gaga-analytic-oka-coherence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a finite-dimensional complex manifold and let $\\mathcal O_M$ be its sheaf of holomorphic functions. For every open $U\\subseteq M$ and every finite tuple $f_1,\\ldots,f_q\\in\\mathcal O_M(U)$, the relation sheaf\n$$\n\\ker\\!\\left(\\mathcal O_U^{\\oplus q}\\longrightarrow\\mathcal O_U,\\quad(a_1,\\ldots,a_q)\\longmapsto\\sum_{j=1}^q a_jf_j\\right)\n$$\nis locally of finite type: every point has a neighborhood on which one finite family of relation sections generates the relation stalk at every point. Consequently $\\mathcal O_M$ is coherent. Coherent $\\mathcal O_M$-module sheaves are closed under kernels, cokernels, and finite extensions. For every coherent $\\mathcal O_M$-module $\\mathcal F$, point $x\\in M$, and finite integer $\\ell\\ge0$, there are a chart neighborhood $W$ of $x$ and finite ranks $p_0,\\ldots,p_\\ell$ for which\n$$\n\\mathcal O_W^{\\oplus p_\\ell}\\longrightarrow\\cdots\\longrightarrow\\mathcal O_W^{\\oplus p_0}\\longrightarrow\\mathcal F|_W\\longrightarrow0\n$$\nis exact at $\\mathcal F|_W$ and at every free term except the leftmost one. No exactness at the leftmost free term and no global analytic free resolution are asserted.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal F$ be a presheaf on $X$.\nThe **direct image presheaf**\n$$f_*\\mathcal F$$\non $Y$ is defined on an open set $V \\subseteq Y$ by\n$$\n(f_*\\mathcal F)(V):=\\mathcal F(f^{-1}(V)).\n$$\nIf $V' \\subseteq V$, the restriction map\n$$\n(f_*\\mathcal F)(V)\\longrightarrow(f_*\\mathcal F)(V')\n$$\nis the restriction map of $\\mathcal F$ for the inclusion\n$f^{-1}(V') \\subseteq f^{-1}(V)$.\n\nThus direct image is just precomposition of the presheaf with the inverse-image\nmap on open sets.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-direct-image-is-sheaf",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map.\n\n1. If $\\mathcal F$ is a sheaf on $X$, then $f_*\\mathcal F$ is a sheaf on $Y$.\n2. If $\\mathcal F$ is a sheaf of groups, rings, or modules on $X$, then\n   $f_*\\mathcal F$ is a sheaf of the same kind on $Y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sheaf-morphism-isomorphism-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on a\ntopological space $X$. Then $\\varphi$ is an isomorphism if and only if, for\nevery $x\\in X$, the induced map on stalks\n$$\\varphi_x:\\mathcal F_x\\longrightarrow\\mathcal G_x$$\nis a bijection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-power-series-expansion-in-several-complex-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$ and a polyradius $\\rho$, let\n$f:\\Delta_\\rho(a)\\to\\mathbb C$ be continuous and separately holomorphic, let $r$\nbe a polyradius with $r_k<\\rho_k$ for every $k<m$, and let\n$C_k(t)=a_k+r_k\\exp(it)$ on $[0,2\\pi]$. For each multi-index $\\alpha$ set\n\n$$c_\\alpha:=\\frac1{(2\\pi i)^m}\\int_{C_0}\\!\\cdots\\!\\int_{C_{m-1}} f(\\zeta)\\prod_{k<m}(\\zeta_k-a_k)^{-\\alpha_k-1}\\,d\\zeta_{m-1}\\cdots d\\zeta_0 ,$$\n\nan iterated integral as in the polydisc Cauchy formula. Then, with\n$M=\\sup_{\\Gamma_r(a)}|f|$,\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k},$$\n\nand for every real $\\theta$ with $0<\\theta<1$ the series\n$\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n$\\overline\\Delta_{\\theta r}(a)$ with\n\n$$f(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha\\qquad(z\\in\\overline\\Delta_{\\theta r}(a)).$$\n\nSince every $z\\in\\Delta_r(a)$ lies in $\\overline\\Delta_{\\theta r}(a)$ for some\n$\\theta<1$, the expansion holds throughout $\\Delta_r(a)$.\n\n**The coefficients are asserted here only as those iterated integrals.** That\n$c_\\alpha$ equals $\\partial^\\alpha f(a)/\\alpha!$ needs termwise differentiation\nand is not claimed by this statement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qftx-gaga-analytic-local-coherent-polydisc-acyclicity",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. Let $N\\ge0$, let $U$ be an open neighborhood\nof $x\\in\\mathbb C^N$, and let $\\mathcal F$ be a coherent analytic\n$\\mathcal O_U$-module. A coordinate polydisc centered at $x$ means a set\n$$W=\\{z\\in\\mathbb C^N:|z_j-x_j|<r_j\\ (1\\le j\\le N)\\},\\qquad r_j>0,$$\ncontained in $U$. There is such a $W$ for which the following hold.\n\nFor every nonempty coordinate polydisc $D\\subseteq W$ and every integer\n$q>0$, ordinary derived-functor sheaf cohomology satisfies\n$$H^q(D,\\mathcal F|_D)=0.$$\nOn each such $D$, scalar sheaf cohomology of $\\mathcal O_D$ is computed by the\nglobal smooth Dolbeault complex. Here $\\mathcal A_D^{0,q}$ is the sheaf of\nsmooth complex-valued differential forms of type $(0,q)$ and $\\bar\\partial$ is\nthe Dolbeault differential:\n$$\\Gamma(D,\\mathcal A_D^{0,0})\\xrightarrow{\\bar\\partial}\\cdots\n\\xrightarrow{\\bar\\partial}\\Gamma(D,\\mathcal A_D^{0,N}),$$\nand in particular $H^q(D,\\mathcal O_D)=0$ for $q>0$. The polydisc $W$ may be\nchosen inside a neighborhood on which there is a partial finite-rank free resolution\n$$\\mathcal O_W^{p_\\ell}\\longrightarrow\\cdots\\longrightarrow\n\\mathcal O_W^{p_0}\\longrightarrow\\mathcal F|_W\\longrightarrow0$$\nthat is exact at $\\mathcal F|_W$ and at every free term except possibly the\nleftmost one, with $\\ell=2N+1>2N$. No exactness at the leftmost term and no\nglobal free resolution are asserted.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $D\\subseteq W$, multiplication by $z_1$ gives a morphism $\\mathcal O_D\\to\\mathcal O_D$. Restriction of holomorphic functions to $H_D$ is a morphism $\\mathcal O_D\\to i_*\\mathcal O_{H_D}$ by [F3]–[F4], and it kills the image of multiplication by $z_1$. It therefore induces a morphism $\\bar r:\\mathcal Q\\to i_*\\mathcal O_{H_D}$. The quotient is coherent by [F1] and closure under cokernels in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At a point $a=(0,a')\\in H_D$, a germ $h$ holomorphic on $H_D$ extends to $\\widetilde h(z_1,z')=h(z')$, so $\\bar r_a$ is surjective by [F3]. If $f$ is a holomorphic germ at $a$ whose restriction to $z_1=0$ vanishes, write its convergent expansion on a smaller product polydisc as $f(z_1,a'+\\zeta')=\\sum_{k,\\alpha'}c_{k,\\alpha'}z_1^k(\\zeta')^{\\alpha'}$. Since the restriction is the zero germ, [F6] implies $c_{0,\\alpha'}=0$ for every $\\alpha'$. The series $g(z_1,a'+\\zeta')=\\sum_{k\\ge1,\\alpha'}c_{k,\\alpha'}z_1^{k-1}(\\zeta')^{\\alpha'}$ still converges on every smaller product polydisc, because shifting each positive $z_1$ exponent down by one preserves the positive radius of convergence. Thus $g$ is holomorphic and $f=z_1g$. The kernel of restriction on this stalk is exactly $(z_1)$, so $\\bar r_a$ is an isomorphism.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $a\\in D\\setminus H_D$, then $z_1(a)\\ne0$, so the germ of $z_1$ is a unit and $\\mathcal Q_a=0$. The stalk $(i_*\\mathcal O_{H_D})_a$ is zero by [F3]. Together with step 1.2 this proves that $\\bar r$ is an isomorphism on every stalk; [F5] gives the sheaf isomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By the direct-image section formula [F3], $\\Gamma(D,i_*\\mathcal O_{H_D})=\\mathcal O(H_D)$, so step 2.1 identifies this with $\\Gamma(D,\\mathcal Q)$. The quotient is coherent by step 1.1 and [F2]; using $\\mathcal Q=\\mathcal Q_U|_D$ and the $W$ chosen for $\\mathcal Q_U$, [F7] gives $H^q(D,\\mathcal Q)=0$ for all $q>0$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a nonempty coordinate polydisc centered at the origin."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 identifies H^0(D,Q) with O(H_D)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1 the hyperplane is the point z_1=0, and the stalk restriction proof in step 1.2 remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For N=1 the hyperplane has dimension zero; steps 1.2–2.1 explicitly cover stalks on and off it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and the supplied local theorem are explicit; step 2.2 applies it to D."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts an isomorphism and cohomology values, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts an isomorphism and cohomology values, not a biconditional."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-area-and-l2-derivative-bounds-for-quasiconformal-maps.md

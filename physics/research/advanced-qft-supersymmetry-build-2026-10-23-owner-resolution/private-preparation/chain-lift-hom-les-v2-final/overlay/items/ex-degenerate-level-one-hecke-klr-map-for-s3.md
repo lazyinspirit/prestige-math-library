@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-degenerate-level-one-hecke-klr-map-for-s3.md

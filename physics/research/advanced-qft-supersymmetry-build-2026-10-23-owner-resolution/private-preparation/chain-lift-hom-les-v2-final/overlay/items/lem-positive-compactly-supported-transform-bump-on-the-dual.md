@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-positive-compactly-supported-transform-bump-on-the-dual.md

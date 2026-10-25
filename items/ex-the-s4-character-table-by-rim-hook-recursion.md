@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-s4-character-table-by-rim-hook-recursion.json
+  precheck: pass
 id: ex-the-s4-character-table-by-rim-hook-recursion
 kind: example
-title: "The S_4 character table by rim-hook recursion"
+title: "The $S_4$ character table by rim-hook recursion"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -23,11 +26,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978 (complete author-hosted scan, 161 pp.)"
@@ -87,6 +85,6 @@ and every row has norm $1$.
 
 ## Remarks
 
-- **The $4$-cycle column is the hook column.** On the class $(4)$ only the hooks $(4),(3,1),(2,1,1),(1^4)$ can be nonzero and their values are $1,-1,1,-1$, while $\chi^{(2,2)}(4)=0$; this is the S_4 instance of the full-cycle lemma [[lem-character-value-on-a-full-cycle-is-supported-on-hooks]].
+- **The $4$-cycle column is the hook column.** On the class $(4)$ only the hooks $(4),(3,1),(2,1,1),(1^4)$ can be nonzero and their values are $1,-1,1,-1$, while $\chi^{(2,2)}(4)=0$; this is the $S_4$ instance of the full-cycle lemma [[lem-character-value-on-a-full-cycle-is-supported-on-hooks]].
 
 - **Cross-check.** The same array is obtained by the fixed-tabloid algorithm of [[thm-triangular-fixed-tabloid-reconstruction-of-the-character-table]], whose worked $S_4$ instance in the source recorded above produces the identical entries; the two routes use disjoint inputs, the recursion using hooks and the fixed-tabloid route using the Gram equation.

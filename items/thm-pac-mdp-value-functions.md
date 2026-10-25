@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-pac-mdp-value-functions.json
+  precheck: pass
 id: thm-pac-mdp-value-functions
 kind: theorem
 title: "Well-defined discounted values and optimal Bellman fixed points"
@@ -31,8 +34,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis"
@@ -116,3 +117,20 @@ The integral splits by linearity; the second term is the expectation of the fini
 3.3 For any behavior, its omitted tail after $n$ rewards is at most $\gamma^n/(1-\gamma)$ by [F4]. Therefore its infinite-horizon value is at most $v_n(s)+\gamma^n/(1-\gamma)$. Letting $n\to\infty$ and using step 2.3 proves that every behavior value is at most $v^*(s)$. [step 2.1, step 2.3, F4, F5, algebra]
 
 4.1 For each $s$, let $B_s$ be the nonempty finite set of actions attaining the maximum in $T^*v^*(s)$. By [F9] and the finiteness of $S$, choose one member of each $B_s$ without AC; these choices define a deterministic stationary policy $\pi^*$. It satisfies $T_{\pi^*}v^*=T^*v^*=v^*$, so step 3.1 and uniqueness imply $V^{\pi^*}=v^*$. Together with step 3.3 this proves $v^*=V^*$ and attainment. After forcing a first action $a$ and then following $\pi^*$, the expected return is $r(s,a)+\gamma\sum_{s'}P(s'\mid s,a)V^*(s')$. Any other continuation after that first action is bounded by $V^*(s')$ at each next state by step 3.3, so this is the maximal value with first action fixed to $a$, namely $Q^*(s,a)$. Its maximum over $a$ is $V^*(s)$, and it is nonnegative by [F1]. AC is used only for the path law in step 1.1. [step 1.1, step 2.3, step 3.1, step 3.3, F1, F6, F9, algebra] ∎
+
+## Remarks
+
+For a fixed state $s$, the Bellman backup first averages next-state values separately for every admissible action, then maximizes the resulting action values. Write $q_V(s,a)=r(s,a)+\gamma\sum_{s'\in S}P(s'\mid s,a)V(s')$ for the action backup of an arbitrary real vector $V:S\to\mathbb R$.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,rounded corners,inner sep=8pt] (input) at (0,3.6) {$V:S\to\mathbb R$};
+\node[draw,rounded corners,inner sep=10pt] (backup) at (0,1.8) {$\bigl(q_V(s,a)\bigr)_{a\in A(s)},\qquad q_V(s,a)=r(s,a)+\gamma\sum_{s'\in S}P(s'\mid s,a)V(s')$};
+\node[draw,rounded corners,inner sep=8pt] (output) at (0,0) {$T^*V(s)=\max_{a\in A(s)}q_V(s,a)$};
+\draw[->] (input) -- node[right] {average for each action} (backup);
+\draw[->] (backup) -- node[right] {maximize over actions} (output);
+\end{tikzpicture}
+```
+
+At the fixed point $V=V^*$, these action backups are $Q^*(s,a)$ and the output is $V^*(s)$. Choosing any maximizing action at each state gives the deterministic stationary greedy policy from step 4.1. The averaging uses the transition marginal of the joint reward/next-state law; it does not assume independence of those coordinates. The proof above is independent of this illustration.
+

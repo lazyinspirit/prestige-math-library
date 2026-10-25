@@ -1,0 +1,95 @@
+{
+  "id": "def-lstm-cell",
+  "agent": "/root/rendering_repair_coordinator/dnn_008",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tile shows correct gate equations but no diagram. A concrete cell-state flow materially clarifies that the forget gate acts on the carried cell state while the output gate acts after tanh; the two different product paths are useful to see alongside the equations.",
+      "action": "Added a final Remarks section with the coordinatewise cell-state and hidden-output computation graph; gate generation and parameter sharing are explained by reference to the unchanged defining equations.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory TikZ computation graph without altering the existing definition, equations, references or frontmatter.",
+  "source_lines_after": {
+    "remarks_prose": [
+      40,
+      42
+    ],
+    "tikz": [
+      44,
+      70
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_domains": "The state, gate and candidate vectors c_(t-1), c_t, h_t, f_t, i_t, o_t and g_t all belong to R^(d_h), by Definition lines 28\u201334. Each product node is R^(d_h) x R^(d_h) -> R^(d_h); addition has the same domain/codomain and tanh is applied coordinatewise R^(d_h) -> R^(d_h)."
+    },
+    {
+      "relation": "The left product takes c_(t-1) and f_t; the lower product takes i_t and g_t; both feed the sum whose output is c_t.",
+      "justification": "Exactly c_t=f_t odot c_(t-1)+i_t odot g_t in unchanged Definition line 32. All six relevant arrows point toward the operations or their result."
+    },
+    {
+      "relation": "The c_t node feeds tanh, whose output and o_t feed the right product yielding h_t.",
+      "justification": "Exactly h_t=o_t odot tanh(c_t) in unchanged Definition line 32. The graph includes no peephole or projection edge."
+    },
+    {
+      "relation": "Gate and candidate generation is omitted from the graph and explicitly specified in the adjacent prose as depending on x_t,h_(t-1) and time-shared matrices/biases.",
+      "justification": "Unchanged Definition lines 28,30,32,34 specify all four affine maps, their sigma/tanh nonlinearities and shared parameters. The graph asserts no additional parameter dependency."
+    },
+    {
+      "proof_independence": "This is a proof-free definition; the equations remain the full rigorous definition and do not depend on the figure."
+    }
+  ],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/def-lstm-cell.md",
+      "output": "proof-layout: 1 items, 0 steps, 0 defects",
+      "exit_code": 0
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-lstm-cell.md --json",
+      "output": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0,
+        "status": "not-applicable"
+      },
+      "exit_code": 0
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/def-lstm-cell.md --json",
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      },
+      "exit_code": 0
+    },
+    "preservation": "Original body through Definition references and entire frontmatter are byte-identical; status remains published."
+  },
+  "evidence": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots path is absent. Located authentic original within the same category screenshots directory and verified recorded SHA256.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-lstm-cell--01.png",
+    "original_screenshot_sha256": "216d212858d559d287d832b520a0f22072f094db2e2c16af9af4b16b75c84c4c",
+    "original_view": "Standalone original-resolution view inspected.",
+    "before_raw_sha256": "028dc8de489425a297edbaaa8da7af8a2a3595e2661bd70a6ee80608be9ea3b5",
+    "guard": "Current source matched before_raw_sha256 immediately before edit.",
+    "current_source_sha256": "15f24647f22f8e444ddc69b8fb3ab60895d22f2d3d5d0111b33b08efef47a94d",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-008-def-lstm-cell/manifest.json",
+    "preview_manifest_sha256": "050e8f4903c65c0b3c191e10ba72084deef716a45a288da99cca64b443a2271f",
+    "preview_source_sha256": "15f24647f22f8e444ddc69b8fb3ab60895d22f2d3d5d0111b33b08efef47a94d",
+    "preview_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-008-def-lstm-cell/screenshots/def-lstm-cell--01.png",
+    "preview_screenshot_sha256": "5648c079f3cc8df9091223c439f08d132ad2f719e1e36bedb535576312211527",
+    "native_visual_check": "Canonical local preview completed successfully (1 item, 1 tile). Standalone original-resolution current PNG inspected: all 12 nodes and 11 directed edges visible, including both product inputs, sum inputs, tanh and hidden output; labels, strokes and arrowheads contrast on dark background without overlap or clipping. TikZ compiled to the actual native rendered image.",
+    "preview_limitations": "ItemBody local preview rather than full production route; 16 unrelated reference-map parse diagnostics recorded in manifest."
+  },
+  "remaining_issues": []
+}

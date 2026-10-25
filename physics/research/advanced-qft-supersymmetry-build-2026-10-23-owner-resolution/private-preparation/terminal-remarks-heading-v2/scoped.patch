@@ -1,0 +1,287 @@
+diff --git a/tools/physics-support/README.md b/tools/physics-support/README.md
+index 46d2036cbb..d252b6f537 100644
+--- a/tools/physics-support/README.md
++++ b/tools/physics-support/README.md
+@@ -208,3 +208,15 @@ Root per-delta/source/consumer reviews remain mandatory. See
+ [original-presentation-maintenance.md](original-presentation-maintenance.md)
+ for the selector, typed delta and limits; no generic Statement normalization
+ or diagram-flag exception is introduced.
++
++V2 also has an exact sixth-argument `terminal_remarks_heading: {version:1,
++step:'7.1'}` selector for separating a unique final proof QED from an inline
++`## Remarks` by the exact two-LF boundary. Entire proof/Remarks/body bytes
++otherwise remain identical and actual plaintext/H2 Markdown roles are bound.
++All canonical section headers must be real root H2 nodes in matching order,
++including a real Proof heading before the named final step.
++The typed boundary-only delta, parser-runtime inputs, exact Root review and
++authenticated finalized main repair remain required. It creates no generic
++proof rewrite or diagram waiver; supplied partial/null/contradictory native
++flags reject and graphics retain their ordinary requirements. See the
++presentation maintenance guide for the full schema and restrictions.
+diff --git a/tools/physics-support/original-presentation-maintenance.md b/tools/physics-support/original-presentation-maintenance.md
+index 8a6b8814d8..20c2819a67 100644
+--- a/tools/physics-support/original-presentation-maintenance.md
++++ b/tools/physics-support/original-presentation-maintenance.md
+@@ -232,3 +232,44 @@ source hashes, authentic finalized native repair, individual per-delta Root
+ scientific review/evidence, consumer review and runtime input bindings.
+ This option grants no diagram-flag exception or source permission and does
+ not normalize whitespace anywhere else.
++
++## Exact terminal Remarks heading boundary
++
++V2 may independently declare `terminal_remarks_heading: {version:1, step:'7.1'}`,
++the sixth extractor argument after the three other optional selectors. It
++applies only to a proved result's unique final numbered step. The entire
++new body must be the single literal replacement `∎ ## Remarks\n\n` with
++`∎\n\n## Remarks\n\n`. All proof, support, Remarks prose (including Fact
++references), section order and remaining bytes are identical. Multiple or
++nonterminal markers, wrong/unused selectors, reference-definition contexts
++and any other body change reject.
++
++Actual synchronous Markdown AST roles must show the old QED/inline heading
++as plaintext in a root paragraph, the unchanged new QED as plaintext, and
++the new exact `## Remarks` as a real root H2. Every raw canonical section header in both bodies must match the same
++ordered actual root H2 sequence, with a real Proof heading preceding the
++named step; headings hidden in code/HTML/link titles cannot establish proof
++ownership. Exact header types, spans and names are recorded. The named step label must
++itself be actual plaintext at the start of the same paragraph as its QED
++in both bodies; raw numbered text inside code or a different paragraph
++cannot borrow a valid plaintext terminator. Math, code, HTML, ordinary link
++titles and canonical wiki contexts cannot supply the boundary. The existing
++403-input lazy parser descriptor and live authority bindings are mandatory.
++
++The single typed delta `terminal-remarks-heading` records the step, exact
++old/new boundary bytes, whole-body and suffix hashes, preserved Remarks hash
++and truthful AST source spans. Its proof classification is
++`terminal-heading-layout-only`; Statement/Facts remain identical. Root's
++exact per-delta reason, reading limits, evidence, actual consumer review and
++genuine finalized native repair remain required.
++
++This is a whitespace heading-boundary repair, analogous to the existing
++terminal source-heading format path, not a substantive proof rewrite or
++new derived Remarks. It does not enter substantiveSteps or the support-only
++flag exception. For this exact one-delta format-only path, both native
++independence keys may be absent only on graphics-free source with true
++mathematical_meaning_preserved. Existing valid true/false flag pairs remain
++valid; partial, null or contradictory supplied flags reject. Existing Remarks
++alone is not a graphics exclusion, because its entire bytes are preserved.
++Actual figures/fences/images/HTML/TikZ retain the original native flags.
++Default/legacy extraction is unchanged; legacy entries reject the selector.
+diff --git a/tools/physics-support/original-presentation-maintenance.mjs b/tools/physics-support/original-presentation-maintenance.mjs
+index 523f6396c0..cb8c76f7b1 100644
+--- a/tools/physics-support/original-presentation-maintenance.mjs
++++ b/tools/physics-support/original-presentation-maintenance.mjs
+@@ -443,11 +443,74 @@ function proofChange(before, after, deltas, consolidation, relocation, deps) {
+   }
+   return { technique, steps };
+ }
+-export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay) {
+-  const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay);
++function terminalRemarksOption(value) {
++  if (value === undefined) return null;
++  if (!value || typeof value !== 'object' || Array.isArray(value)
++      || !equal(Object.keys(value).sort(), ['step', 'version']) || value.version !== 1
++      || typeof value.step !== 'string' || !/^[1-9]\d*\.[1-9]\d*$/.test(value.step)) fail('invalid terminal Remarks heading option');
++  return { version: 1, step: value.step };
++}
++function terminalRemarksBody(before, after, option, deltas) {
++  const old = '∎ ## Remarks\n\n', next = '∎\n\n## Remarks\n\n', start = before.indexOf(old);
++  if (start < 0 || start !== before.lastIndexOf(old) || [...before.matchAll(/∎/g)].length !== 1
++      || before.slice(0, start) + next + before.slice(start + old.length) !== after) fail('terminal Remarks whole-body literal change');
++  const a = sections(before), b = sections(after);
++  if (a.names.at(-1) !== 'Proof' || b.names.at(-1) !== 'Remarks' || a.values.has('Remarks')
++      || !equal(a.names, b.names.slice(0, -1))) fail('terminal Remarks section sequence');
++  const proofStart = before.indexOf(a.values.get('Proof')), steps = [...before.slice(proofStart).matchAll(/^(\d+\.\d+) /gm)];
++  if (!steps.length || new Set(steps.map(m => m[1])).size !== steps.length || steps.at(-1)[1] !== option.step
++      || proofStart + steps.at(-1).index >= start || /[\r\n]/.test(before.slice(proofStart + steps.at(-1).index, start))
++      || !/\[[^\]\r\n]+\][ \t]+$/.test(before.slice(0, start))) fail('terminal Remarks is not the named final numbered step');
++  const role = (text, low, high, type, content) => {
++    const rows = [];
++    const walk = (node, ancestors = []) => {
++      if (node.type === type && node.position?.start.offset <= low && node.position?.end.offset >= high
++          && ancestors.every(p => ['root', 'paragraph'].includes(p.type))
++          && (type !== 'heading' || node.depth === 2 && node.position.start.offset === low && node.position.end.offset === high
++            && node.children?.length === 1 && node.children[0].type === 'text' && node.children[0].value === content)) rows.push({ node, ancestors });
++      for (const child of node.children ?? []) walk(child, [...ancestors, node]);
++    };
++    walk(markdownTree(text));
++    if (rows.length !== 1 || links(text).some(r => low < r.end && high > r.start)) fail('terminal Remarks hidden Markdown role');
++    const paragraph = rows[0].ancestors.find(p => p.type === 'paragraph');
++    return { type, start: low, end: high, ...(type === 'heading' ? { depth: 2 } : {}),
++      ...(paragraph ? { paragraph: { start: paragraph.position.start.offset, end: paragraph.position.end.offset } } : {}) };
++  };
++  const canonicalHeadings = text => {
++    const raw = [...text.matchAll(/^## ([^\r\n]+)\r?$/gm)],
++      actual = markdownTree(text).children.filter(node => node.type === 'heading' && node.depth === 2);
++    if (raw.length !== actual.length) fail('terminal Remarks canonical section headings are not actual root H2');
++    return raw.map((m, i) => {
++      const node = actual[i], end = m.index + m[0].replace(/\r$/, '').length;
++      if (node.position?.start.offset !== m.index || node.position?.end.offset !== end
++          || node.children?.length !== 1 || node.children[0].type !== 'text' || node.children[0].value !== m[1])
++        fail('terminal Remarks canonical section headings are not actual root H2');
++      return { name: m[1], type: 'heading', depth: 2, start: m.index, end };
++    });
++  };
++  const sectionRoles = { before: canonicalHeadings(before), after: canonicalHeadings(after) };
++  const stepStart = proofStart + steps.at(-1).index, stepEnd = stepStart + option.step.length + 1;
++  if (sectionRoles.before.find(h => h.name === 'Proof')?.start >= stepStart
++      || sectionRoles.after.find(h => h.name === 'Proof')?.start >= stepStart) fail('terminal Remarks actual Proof heading must precede named step');
++  const roles = { offset_unit: 'UTF-16', canonical_sections: sectionRoles, before_step: role(before, stepStart, stepEnd, 'text'),
++    after_step: role(after, stepStart, stepEnd, 'text'), before: role(before, start, start + '∎ ## Remarks'.length, 'text'),
++    after_qed: role(after, start, start + 1, 'text'), after_heading: role(after, start + 3, start + 13, 'heading', 'Remarks') };
++  if (!roles.before_step.paragraph || roles.before_step.paragraph.start !== stepStart
++      || !equal(roles.before_step.paragraph, roles.before.paragraph)
++      || roles.after_step.paragraph?.start !== stepStart || !equal(roles.after_step.paragraph, roles.after_qed.paragraph))
++    fail('terminal Remarks named step and QED are not one actual proof paragraph');
++  deltas.push({ id: 'Proof:terminal-remarks-heading:' + option.step, kind: 'terminal-remarks-heading', section: 'Proof', label: option.step,
++    before: old, after: next, body_before_sha256: sha(before), body_after_sha256: sha(after),
++    suffix_before_sha256: sha(before.slice(start)), suffix_after_sha256: sha(after.slice(start)),
++    remarks_bytes_sha256: sha(before.slice(start + old.length)), markdown_roles: roles });
++  return after;
++}
++export function originalPresentationChanges(beforeBytes, afterBytes, proofSupportConsolidation, proofReferenceRelocation, definitionDisplay, terminalRemarksHeading) {
++  const consolidation = consolidationOption(proofSupportConsolidation), displayLayout = definitionDisplayOption(definitionDisplay), terminalHeading = terminalRemarksOption(terminalRemarksHeading);
+   const relocation = relocationOption(proofReferenceRelocation), strictProof = Boolean(consolidation || relocation);
+   if (relocation?.steps.some(s => consolidation?.steps.includes(s.label))) fail('overlapping strict proof requests');
+   const before = parse(beforeBytes), after = parse(afterBytes), prior = structuredClone(before.data), current = structuredClone(after.data);
++  if (terminalHeading && !resultKinds.has(prior.kind)) fail('terminal Remarks heading requires a proved result');
+   if (displayLayout && prior.kind !== 'definition') fail('definition display layout requires definition kind');
+   if (!(resultKinds.has(prior.kind) || prior.kind === 'definition')) fail('unsupported item kind');
+   const verification = { before: prior.verification ?? null, after: current.verification ?? null };
+@@ -460,8 +523,9 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+     delete prior.title; delete current.title;
+   }
+   if (!equal(prior, current)) fail('scientific metadata/interface change');
+-  const a = sections(before.body), b = sections(after.body), primary = prior.kind === 'definition' ? 'Definition' : 'Statement';
+-  if (strictProof || displayLayout) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
++  const comparedBefore = terminalHeading ? terminalRemarksBody(before.body, after.body, terminalHeading, deltas) : before.body;
++  const a = sections(comparedBefore), b = sections(after.body), primary = prior.kind === 'definition' ? 'Definition' : 'Statement';
++  if (strictProof || displayLayout || terminalHeading) { rejectReferenceDefinitions(before.body); rejectReferenceDefinitions(after.body); }
+   if (!a.values.has(primary) || a.prefix !== b.prefix) fail('primary section/prefix change');
+   const appended = !a.values.has('Remarks') && b.names.at(-1) === 'Remarks' && equal(a.names, b.names.slice(0, -1));
+   if (!equal(a.names, b.names) && !appended) fail('new/deleted/reordered scientific section');
+@@ -498,19 +562,20 @@ export function originalPresentationChanges(beforeBytes, afterBytes, proofSuppor
+     interface_section: primary,
+     statements: displayLayout ? 'display-layout-only' : statementLabels ? statementSpacing ? 'reference-labels-and-separator-only' : 'reference-labels-only' : statementSpacing ? 'separator-only' : 'identical',
+     facts: factLabels ? factQuotes ? 'reference-labels-and-quotation-only' : 'reference-labels-only' : factQuotes ? 'quotation-only' : 'identical',
+-    proof: steps.length || technique ? 'equivalent-presentation' : 'unchanged',
++    proof: terminalHeading ? 'terminal-heading-layout-only' : steps.length || technique ? 'equivalent-presentation' : 'unchanged',
+   };
+   if (consolidation && !equal([...consolidation.steps].sort(), deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unused proof support consolidation request');
+   if (relocation && !equal(relocation.steps, deltas.filter(d => d.kind === 'proof-reference-relocation').map(d => ({ label: d.label, target: d.target })))) fail('unused proof reference relocation request');
+   return { version: 2, kind: prior.kind, id: prior.id, source_hashes: { before: sha(beforeBytes), after: sha(afterBytes) }, verification, title, technique, steps, remarks, preserved_sections, review_classification, deltas,
+     ...(consolidation ? { proof_support_consolidation: consolidation } : {}), ...(relocation ? { proof_reference_relocation: relocation } : {}),
+     ...(displayLayout ? { definition_display_layout: displayLayout } : {}),
+-    ...(strictProof || displayLayout ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
++    ...(terminalHeading ? { terminal_remarks_heading: terminalHeading } : {}),
++    ...(strictProof || displayLayout || terminalHeading ? { proof_support_parser_runtime: parserDescriptor() } : {}) };
+ }
+ /** Main integration supplies authenticated local binders. No free-text claim
+  * substitutes for the exact source, per-delta hash, pinned target or evidence. */
+ export function validateOriginalPresentationReviews(entry, changes, { receipt, scope, bind, localEvidence } = {}) {
+-  const consolidation = consolidationOption(entry.proof_support_consolidation);
++  const consolidation = consolidationOption(entry.proof_support_consolidation), terminalHeading = terminalRemarksOption(entry.terminal_remarks_heading);
+   const relocation = relocationOption(entry.proof_reference_relocation), displayLayout = definitionDisplayOption(entry.definition_display_layout);
+   if (!equal(consolidation, changes.proof_support_consolidation ?? null)
+       || !equal([...(consolidation?.steps ?? [])].sort(), changes.deltas.filter(d => d.kind === 'proof-support-consolidation').map(d => d.label).sort())) fail('unbound proof support consolidation option');
+@@ -520,10 +585,14 @@ export function validateOriginalPresentationReviews(entry, changes, { receipt, s
+       || (displayLayout ? changes.kind !== 'definition' || changes.deltas.filter(d => d.kind === 'definition-display-layout').length !== 1
+         || changes.deltas.find(d => d.kind === 'definition-display-layout')?.display !== displayLayout.display
+         : changes.deltas.some(d => d.kind === 'definition-display-layout'))) fail('unbound definition display layout option');
++  if (!equal(terminalHeading, changes.terminal_remarks_heading ?? null)
++      || (terminalHeading ? changes.deltas.filter(d => d.kind === 'terminal-remarks-heading').length !== 1
++        || changes.deltas.find(d => d.kind === 'terminal-remarks-heading')?.label !== terminalHeading.step
++        : changes.deltas.some(d => d.kind === 'terminal-remarks-heading'))) fail('unbound terminal Remarks heading option');
+   if (entry.presentation_version !== 2 || changes.version !== 2 || !equal(entry.changes, changes)
+       || entry.pinned_sha256 !== changes.source_hashes.before || entry.original_sha256 !== changes.source_hashes.after
+       || typeof bind !== 'function' || typeof localEvidence !== 'function') fail('unbound V2 sources/deltas');
+-  if (consolidation || relocation || displayLayout) {
++  if (consolidation || relocation || displayLayout || terminalHeading) {
+     const runtime = parserDescriptor();
+     if (!equal(changes.proof_support_parser_runtime, runtime)) fail('missing/stale parser runtime binding');
+     for (const [path, hash] of Object.entries(runtime.inputs)) bind(path, hash);
+diff --git a/tools/physics-support/original-rendering-maintenance.mjs b/tools/physics-support/original-rendering-maintenance.mjs
+index a3b69bee8f..296691707f 100644
+--- a/tools/physics-support/original-rendering-maintenance.mjs
++++ b/tools/physics-support/original-rendering-maintenance.mjs
+@@ -181,6 +181,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
+     if (!presentationV2 && entry.proof_support_consolidation !== undefined) fail('proof support consolidation requires V2');
+     if (!presentationV2 && entry.proof_reference_relocation !== undefined) fail('proof reference relocation requires V2');
+     if (!presentationV2 && entry.definition_display_layout !== undefined) fail('definition display layout requires V2');
++    if (!presentationV2 && entry.terminal_remarks_heading !== undefined) fail('terminal Remarks heading requires V2');
+     const pin = receipt.files.find(p => p.path === entry.path);
+     if (!pin || !/^items\/[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(entry.path) || accepted.has(entry.path)
+         || !scope.paths.has(entry.path) || entry.pinned_sha256 !== pin.sha256) fail('entry scope/pin');
+@@ -214,7 +215,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
+     if (ledger.split(begin).length !== 2 || ledger.split(end).length !== 2) fail('ledger marker uniqueness');
+     const block = ledger.split(begin)[1].split(end)[0];
+     if (sha(block) !== native.ledger_sha256 || !localEvidence(entry.ledger_evidence).equals(Buffer.from(block))) fail('ledger extraction');
+-    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout) : originalRenderingChanges(beforeBytes, afterBytes);
++    const changes = presentationV2 ? originalPresentationChanges(beforeBytes, afterBytes, entry.proof_support_consolidation, entry.proof_reference_relocation, entry.definition_display_layout, entry.terminal_remarks_heading) : originalRenderingChanges(beforeBytes, afterBytes);
+     const nonProofDefinition = presentationV2 && before.data.kind === 'definition'
+       && !/^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before.body)
+       && /^proof-layout: 1 items, 0 steps, 0 defects(?:\s|$)/m.test(check.output ?? '');
+@@ -260,6 +261,16 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
+     const noDiagramKeys = !Object.hasOwn(adjudication, 'proof_independent')
+       && !Object.hasOwn(adjudication, 'diagram_mathematics_corrected');
+     const unchangedDiagramRule = adjudication.proof_independent === true && adjudication.diagram_mathematics_corrected === false;
++    // Exact boundary-only maintenance preserves existing Remarks rather than
++    // adding exposition or rewriting a scientific proof step. It is not a
++    // substantiveSteps exception: supplied native diagram flags remain honest.
++    if (presentationV2 && changes.terminal_remarks_heading) {
++      const graphics = /```|~~~|!\[|<\/?[A-Za-z!]|<\?|\\includegraphics\b|\\tikz\b|\\begin\{(?:tikzcd|tikzpicture)\}/.test(bodies);
++      const pureBoundary = changes.deltas.length === 1 && changes.deltas[0].kind === 'terminal-remarks-heading'
++        && !changes.title && !changes.technique && !changes.steps.length && !changes.remarks;
++      if (!unchangedDiagramRule && !(pureBoundary && !graphics && noDiagramKeys
++          && adjudication.mathematical_meaning_preserved === true)) fail('terminal Remarks native diagram flags');
++    }
+     if ((changes.remarks || substantiveSteps.length) && !unchangedDiagramRule
+       && !(strictSupportOnly && noDiagramKeys && adjudication.mathematical_meaning_preserved === true)) fail('diagram independence');
+     if (!Array.isArray(entry.evidence) || !entry.evidence.length) fail('missing Root evidence');
+diff --git a/tools/physics-support/original-rendering-maintenance.test.mjs b/tools/physics-support/original-rendering-maintenance.test.mjs
+index cb81295e27..b503576a58 100644
+--- a/tools/physics-support/original-rendering-maintenance.test.mjs
++++ b/tools/physics-support/original-rendering-maintenance.test.mjs
+@@ -26,6 +26,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+     before += '\n## Sources\n\nExact unchanged source section.\n';
+     save(source, 'items/lem-title-target.md', '---\nid: lem-title-target\nkind: lemma\nstatus: published\ndeps: []\ntitle: "Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)"\n---\n\n## Statement\nExact fixed evaluation-kernel supplier.\n');
+   }
++  if (mode === 'terminal-remarks') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', '1.1 Reflexivity gives $A=A$. [L1] ∎ ## Remarks\n\nExact unchanged Remarks cite [L1].\n');
+   if (mode === 'terminal-heading') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', '1.1 Reflexivity gives $A=A$. [L1] $\\square$ ## Source qualification\n\nExact unchanged source qualification.\n');
+   if (mode === 'reference-relocation') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The Evaluation theorem gives $A=A$. [L1, [[lem-title-target]]]');
+   if (mode === 'support-consolidation-both') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', () => '1.1 Reflexivity gives [L1]\n\n$$ A=A. $$\n\n[L1]\n');
+@@ -43,6 +44,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   if (mode === 'remarks' || mode === 'remarks-tikz' || mode === 'step') after += '\n## Remarks\n\nThe following square displays the identity maps used in the unchanged argument.\n\n```tikzcd\nA \\arrow[r] \\arrow[d] & A \\arrow[d] \\\\\nA \\arrow[r] & A\n```\n';
+   if (mode === 'remarks-tikz') after = after.replace(/```tikzcd[\s\S]*?```/, '```tikz\n\\begin{tikzpicture}\n\\node (A) {A};\n\\end{tikzpicture}\n```');
+   if (mode === 'fact-label') after = after.replace('[[lem-title-target]]', `[[lem-title-target|${factLabel}]]`);
++  if (mode === 'terminal-remarks') after = after.replace('∎ ## Remarks\n\n', '∎\n\n## Remarks\n\n');
+   if (mode === 'terminal-heading') after = after.replace('$\\square$ ## Source qualification\n', '∎\n\n## Source qualification\n');
+   if (mode === 'reference-relocation') after = after.replace('The Evaluation theorem gives', 'The [[lem-title-target|Evaluation theorem]] gives').replace('[L1, [[lem-title-target]]]', '[L1]');
+   if (mode.startsWith('support-consolidation')) after = after.replace('[L1, step 1.1]\n\n$$ A=A, $$\n\nso equality holds. [L1]', '$A=A$, so equality holds. [L1, step 1.1]');
+@@ -80,7 +82,8 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+   const consolidation = mode.startsWith('support-consolidation') ? { version: 1, steps: mode === 'support-consolidation-both' ? ['1.1', '1.2'] : ['1.2'] } : undefined;
+   const relocation = mode === 'reference-relocation' ? { version: 1, steps: [{ label: '1.1', target: 'lem-title-target' }] } : undefined;
+   const displayLayout = mode === 'definition-display' ? {version:1,display:0} : undefined;
+-  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
++  const terminalHeading = mode === 'terminal-remarks' ? {version:1,step:'1.1'} : undefined;
++  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after), consolidation, relocation, displayLayout, terminalHeading) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
+     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
+   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
+@@ -104,6 +107,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion
+     if (consolidation) entry.proof_support_consolidation = consolidation;
+     if (relocation) entry.proof_reference_relocation = relocation;
+     if (displayLayout) entry.definition_display_layout = displayLayout;
++    if (terminalHeading) entry.terminal_remarks_heading = terminalHeading;
+     Object.assign(entry.scientific_review, changes.review_classification);
+     entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
+       reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
+@@ -363,3 +367,8 @@ test('authenticated V2 definition display layout retains exact option, review, r
+  const f=fixture(t,{mode:'definition-display',definition:true,presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);assert.equal(f.entry.changes.deltas[0].kind,'definition-display-layout');delete f.entry.definition_display_layout;f.seal();assert.throws(()=>f.verify(),/scientific Definition/);
+ });
+ test('legacy entries cannot use the definition display selector',t=>{const f=fixture(t);f.entry.definition_display_layout={version:1,display:0};f.seal();assert.throws(()=>f.verify(),/definition display layout requires V2/);});
++
++test('exact authenticated terminal Remarks boundary preserves old native absent keys and all repair/review guards',t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.ok(f.verify()>0);delete f.entry.terminal_remarks_heading;f.seal();assert.throws(()=>f.verify(),/support|Remarks/);});
++for(const flags of [{proof_independent:true},{diagram_mathematics_corrected:false},{proof_independent:false,diagram_mathematics_corrected:false},{proof_independent:true,diagram_mathematics_corrected:true},{proof_independent:null,diagram_mathematics_corrected:null}])test('terminal Remarks boundary rejects supplied false/partial/null flags '+JSON.stringify(flags),t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true});fixtureDiagramFlags(f,flags);assert.throws(()=>f.verify(),/native diagram flags/);});
++for(const extra of ['```text\nunchanged graphic context\n```','![image](figure.svg)','<span>unchanged HTML</span>',String.raw`\includegraphics{figure}`])test('terminal Remarks absent flags require graphics-free source '+extra,t=>{const f=fixture(t,{mode:'terminal-remarks',presentationVersion:2,authored:true,sourceExtra:'\n'+extra+'\n'});f.seal();assert.ok(f.verify()>0);fixtureDiagramFlags(f,{});assert.throws(()=>f.verify(),/native diagram flags/);});
++test('legacy entries cannot declare terminal Remarks boundary',t=>{const f=fixture(t);f.entry.terminal_remarks_heading={version:1,step:'1.1'};f.seal();assert.throws(()=>f.verify(),/requires V2/);});

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize.json
+  precheck: pass
 id: lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize
 kind: lemma
 title: "Nilpotent-orbit tensor covariants extend and polarize"
@@ -28,8 +31,7 @@ sources:
     - title: "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)"
       url: "https://arxiv.org/pdf/math/0605217"
       locator: "Section 2.2-2.3, printed pp. 8-9: the centralizer of the degenerate affine Hecke action in the stable range and its use in the double centralizer statements; the covariant form proved here is the all-Jordan-type converse needed by Theorem 2.4."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -84,7 +86,7 @@ first-fundamental-theorem for the full matrix algebra.
 
 3.1 Extension to $X$. By steps 1.2 and 2.1 the map $F\colon O\to\operatorname{End}(V^{\otimes d})$ is a regular equivariant map on the dense orbit; by step 1.2 it extends uniquely to a regular map $F\colon X\to\operatorname{End}(V^{\otimes d})$. Since $\mathbb C[X]=\mathbb C[\operatorname{End}(V)]/I(X)$ and $X$ is an affine closed subset of the affine space $\operatorname{End}(V)$, the coordinate functions of $F$ are restrictions of polynomial functions on $\operatorname{End}(V)$; fixing representatives gives a polynomial map $\Phi\colon\operatorname{End}(V)\to\operatorname{End}(V^{\otimes d})$ extending $F$. [F2, step 1.2, step 2.1, algebra]
 
-4.1 Equivariance of the polynomial lift. The extension $F$ on $X$ is equivariant: for every $g$, the two regular maps expressing equivariance agree on the dense orbit by step 1.3 and therefore on $X$. Let $E_K$ be the finite-dimensional rational module of polynomial maps $operatorname{End}(V)	ooperatorname{End}(V^{otimes d})$ of degree at most $K$, for $KgedegPhi$, with action $(gcdotPsi)(Y)=g^{otimes d}Psi(g^{-1}Yg)(g^{-1})^{otimes d}$. Let $I_Ksubset E_K$ consist of maps vanishing on $X$. Then $I_K$ is stable and the class of the lift from step 3.1 in $E_K/I_K$ is invariant. Scalar matrices act trivially on $E_K$: they conjugate neither the input nor the output. For $Nge2$, Weyl's theorem [F3] applied to the semisimple Lie algebra $mathfrak{sl}(V)$ gives an $mathfrak{sl}(V)$-stable complement to $I_K$. This complement is stable under $mathrm{SL}(V)$, since elementary matrices $exp(tE_{ij})$ generate that group and their rational representation acts by exponentiating the differential; together with scalar matrices they generate $mathrm{GL}(V)$ over $mathbb C$. For $N=1$ the whole group acts trivially, so any vector-space complement suffices. The quotient map restricted to this complement is thus a $mathrm{GL}(V)$-isomorphism and lifts the invariant class to an invariant $Phi'in E_K$. It agrees with $F$ on $X$ and satisfies $Phi'(e)=B$, proving (1). [F3, step 1.3, step 3.1, algebra]
+4.1 Equivariance of the polynomial lift. The extension $F$ on $X$ is equivariant: for every $g$, the two regular maps expressing equivariance agree on the dense orbit by step 1.3 and therefore on $X$. Let $E_K$ be the finite-dimensional rational module of polynomial maps $\operatorname{End}(V)\to\operatorname{End}(V^{\otimes d})$ of degree at most $K$, for $K\ge\deg\Phi$, with action $(g\cdot\Psi)(Y)=g^{\otimes d}\Psi(g^{-1}Yg)(g^{-1})^{\otimes d}$. Let $I_K\subset E_K$ consist of maps vanishing on $X$. Then $I_K$ is stable and the class of the lift from step 3.1 in $E_K/I_K$ is invariant. Scalar matrices act trivially on $E_K$: they conjugate neither the input nor the output. For $N\ge2$, Weyl's theorem [F3] applied to the semisimple Lie algebra $\mathfrak{sl}(V)$ gives an $\mathfrak{sl}(V)$-stable complement to $I_K$. This complement is stable under $\mathrm{SL}(V)$, since elementary matrices $\exp(tE_{ij})$ generate that group and their rational representation acts by exponentiating the differential; together with scalar matrices they generate $\mathrm{GL}(V)$ over $\mathbb C$. For $N=1$ the whole group acts trivially, so any vector-space complement suffices. The quotient map restricted to this complement is thus a $\mathrm{GL}(V)$-isomorphism and lifts the invariant class to an invariant $\Phi'\in E_K$. It agrees with $F$ on $X$ and satisfies $\Phi'(e)=B$, proving (1). [F3, step 1.3, step 3.1, algebra]
 
 5.1 Polarization. Write $\Phi=\sum_k\Phi_k$ for its homogeneous components of degree $k$; each $\Phi_k$ is equivariant. Fix $k$ and assume for the structure argument that $\Phi$ is homogeneous of degree $k$. Polarize the $k$ matrix variables $X_1,\dots,X_k$ of $\Phi$ and pair the output in $\operatorname{End}(V^{\otimes d})$ with $d$ independent matrices $Y_1,\dots,Y_d$ using the nondegenerate trace pairing on each tensor factor; this produces a multilinear $\mathrm{GL}(V)$-invariant $P(X_1,\dots,X_k;Y_1,\dots,Y_d)\in\mathbb C$ in $(k+d)$ matrix arguments. [F4, step 4.1, algebra]
 

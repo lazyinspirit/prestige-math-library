@@ -1,0 +1,72 @@
+{
+  "id": "ex-alternating-harmonic-series-sums-to-log-two",
+  "agent": "/root/rendering_repair_coordinator/ra_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "generated-markdown-link-leak",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the sole flagged original PNG standalone at original resolution: L1 visibly exposes [The power series ...](/library/item/thm-log-one-plus-x-power-series). Frozen and current source contain a valid bare wikilink. The current supplier title still contains the interval (-1,1], and a fresh pre-edit native ItemBody preview reproduces the literal generated Markdown in HTML, so this has not resolved upstream. An explicit descriptive label avoids the generated-label bracket ambiguity without changing the target or Fact.",
+      "action": "Changed only [[thm-log-one-plus-x-power-series]] to [[thm-log-one-plus-x-power-series|logarithm power-series endpoint formula]] in L1.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "L1 now renders its unchanged theorem target as a clickable descriptive reference instead of exposing generated Markdown syntax.",
+  "source_lines_after": {
+    "37": "[L1] At $x=1$, $\\log(1+x)=\\sum_{n\\ge1}(-1)^{n+1}x^n/n$ converges to $\\log2$ ([[thm-log-one-plus-x-power-series|logarithm power-series endpoint formula]])."
+  },
+  "mathematical_meaning_preserved": true,
+  "preservation_evidence": "Immediate pre-edit raw SHA256 matched the queue guard c6ab9b093fa5a8e7740e1874bb36c9ea13898da087098cdd64c498f540a5e59f. After checks, exact byte comparison against frozen before confirmed the sole difference is the reference display label; entire mathematical Fact, Example, Verification, dependencies, sources and frontmatter remain byte-identical. status: published remains byte-identical.",
+  "after_raw_sha256": "f3b3e1c44eebfd6309b0b2ea8bad00495e9b2b029037203a139c77fc82b3012c",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-alternating-harmonic-series-sums-to-log-two.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-alternating-harmonic-series-sums-to-log-two.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-alternating-harmonic-series-sums-to-log-two.md",
+            "item_id": "ex-alternating-harmonic-series-sums-to-log-two",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-alternating-harmonic-series-sums-to-log-two.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/real-analysis/screenshots/ex-alternating-harmonic-series-sums-to-log-two--01.png",
+    "fresh_before": "research/math-library-rendering-repairs-2026-10-23/ra_002-current-before",
+    "fresh_after": "research/math-library-rendering-repairs-2026-10-23/ra_002-after",
+    "changed_region": "research/math-library-rendering-repairs-2026-10-23/ra_002-after/changed-region.png",
+    "views": "Viewed original flagged PNG and fresh after tile standalone at original resolution; also viewed a lossless native-pixel crop of the changed Facts region at original resolution. It clearly displays the blue underlined label and no raw generated Markdown. The entire L1 formula remains legible.",
+    "html_check": "Fresh after HTML contains an anchor to /library/item/thm-log-one-plus-x-power-series with text logarithm power-series endpoint formula.",
+    "katex_errors": [],
+    "katex_count": 7,
+    "diagram_failures": [],
+    "limitations": "Local native ItemBody/title preview only; no HTTP/site visit. Reference map recorded 16 unrelated parse diagnostics. Renderer styles put the anchor on its own line, leaving surrounding parentheses on adjacent lines; this is layout typography, not leaked markup."
+  },
+  "remaining_issues": []
+}

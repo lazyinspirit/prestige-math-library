@@ -1,0 +1,57 @@
+{
+  "id": "lem-smoothness-stable-under-product-classical",
+  "agent": "/root/rendering_repair_coordinator/ag_079",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other:unparsed-markdown-heading-in-proof",
+      "verdict": "confirmed",
+      "reason": "Independently viewed all three flagged PNGs standalone at original resolution. Tile 03 visibly prints '## Source qualification' immediately after the final proof's QED, matching the frozen/current source's embedded heading marker on line 129. This is unintended literal Markdown, rather than mathematical notation or optional typography.",
+      "action": "Ended the final proof paragraph at QED and placed the unchanged source-qualification prose in a supported Remarks section with a bold Source qualification label.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Separated the embedded source-qualification heading from proof step 3.1 using ## Remarks and **Source qualification.**; all source-qualification prose and all mathematical text remain unchanged.",
+  "source_lines_after": [
+    129,
+    131,
+    133,
+    135,
+    149
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-smoothness-stable-under-product-classical.md --json",
+      "exit_code": 0,
+      "output": "{\n  \"summary\": {\n    \"files\": 1,\n    \"checked\": 1,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/lem-smoothness-stable-under-product-classical.md\",\n      \"item_id\": \"lem-smoothness-stable-under-product-classical\",\n      \"status\": \"pass\",\n      \"strategy\": \"direct\"\n    }\n  ]\n}\n"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-smoothness-stable-under-product-classical.md --json",
+      "exit_code": 0,
+      "output": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 1\n}\n"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-smoothness-stable-under-product-classical.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects\n"
+    }
+  ],
+  "pre_edit_guard": {
+    "expected_before_raw_sha256": "d488b0275bcdcb7f451bb00b864a35275e39e91676f2f60cef71f2be22680aba",
+    "matched_immediately_before_edit": true
+  },
+  "status_preserved": "published; frontmatter byte-identical",
+  "inspection": {
+    "tiles_viewed_standalone_original": [
+      "screenshots/lem-smoothness-stable-under-product-classical--01.png",
+      "screenshots/lem-smoothness-stable-under-product-classical--02.png",
+      "screenshots/lem-smoothness-stable-under-product-classical--03.png"
+    ],
+    "frozen_and_current_source_read": true
+  },
+  "check_limitations": "No fresh browser screenshot was generated; focused KaTeX/YAML rendercheck and actual local SSR proof-layout both passed. No TikZ source exists or changed."
+}

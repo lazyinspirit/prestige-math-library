@@ -1,0 +1,79 @@
+---
+id: ex-srswor-inclusion-probabilities-and-negative-covariance
+kind: example
+title: "SRSWOR inclusion probabilities, pairwise nonpositive indicator covariance, and the sample mean"
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 5
+deps:
+  - def-finite-population-and-sampling-design
+  - thm-horvitz-thompson-total-is-design-unbiased
+  - def-variance-and-covariance
+  - thm-linearity-of-expectation
+  - lem-indicator-expectation-and-products
+  - def-indicator-random-variable
+  - def-expectation-on-a-finite-probability-space
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+---
+
+## Example
+
+Let $N\ge2$, $1\le n\le N$, $U=\{1,\ldots,N\}$, and let $y_i$ be fixed
+real values. Let $\mathcal S_d$ consist of all $n$-element subsets of $U$,
+with each such sample assigned probability $1/M$, where
+$M=|\mathcal S_d|$. This is simple random sampling without replacement
+(SRSWOR). For distinct $i,j\in U$,
+$$\pi_i=\frac nN,\qquad \pi_{ij}=\frac{n(n-1)}{N(N-1)},\qquad \operatorname{Cov}_d(I_i,I_j)=-\frac{n(N-n)}{N^2(N-1)}.$$
+The Horvitz–Thompson mean reduces to the ordinary sample mean
+$n^{-1}\sum_{i\in s}y_i$.
+
+## Facts & Assumptions
+
+**Given:** $N\ge2$, $1\le n\le N$, a fixed finite population $(U,y)$, and
+the uniform design on all $n$-element subsets of $U$.
+
+[F1] [[def-finite-population-and-sampling-design]]: For a sampling design,
+$\pi_i=P_d(i\in S)$, $\pi_{ij}=P_d(i,j\in S)$, and the values $y_i$ are
+held fixed under the design law.
+
+[F2] [[thm-horvitz-thompson-total-is-design-unbiased]]: If every $\pi_i>0$,
+the total and mean estimators with weights $1/\pi_i$ are design-unbiased.
+
+[F3] [[def-variance-and-covariance]]: On one finite probability space,
+$\operatorname{Cov}(X,Y)=E[(X-EX)(Y-EY)]$.
+
+[F4] [[thm-linearity-of-expectation]]: Expectation is linear for finite
+families of random variables on one finite probability space.
+
+[F5] [[lem-indicator-expectation-and-products]]: Indicator expectations equal
+event probabilities, and products of indicators equal indicators of event
+intersections.
+
+[F6] [[def-indicator-random-variable]]: An event indicator is $1$ on the event
+and $0$ outside it.
+
+[F7] [[def-expectation-on-a-finite-probability-space]]: Expectation is the
+finite weighted sum over sample outcomes.
+
+## Verification
+
+1.1 Let $a$ be the number of $n$-subsets containing a fixed unit. A permutation of $U$ taking one unit to another gives a bijection of the sample family, so every unit occurs in exactly $a$ samples. Counting pairs $(s,i)$ with $i\in s$ in two ways gives $Na=nM$, hence $a/M=n/N$ and $\pi_i=n/N$. [given, F1, construct, algebra]
+
+1.2 Let $b$ be the number of samples containing a fixed ordered pair of distinct units. Permutations of $U$ give the same $b$ for every such pair. Counting triples $(s,i,j)$ with $i\ne j$ and $i,j\in s$ gives $N(N-1)b=n(n-1)M$, so $b/M=n(n-1)/(N(N-1))$ and $\pi_{ij}=n(n-1)/(N(N-1))$. This also gives $\pi_{ij}=0$ when $n=1$. [given, F1, construct, algebra]
+
+2.1 Put $A_i=\{s:i\in s\}$. By [F5] and [F6], $E_d[I_i]=P_d(A_i)=\pi_i$ and $E_d[I_iI_j]=P_d(A_i\cap A_j)=\pi_{ij}$. Expanding the covariance in [F3] with linearity [F4] therefore gives $\operatorname{Cov}_d(I_i,I_j)=\pi_{ij}-\pi_i\pi_j=\frac{n(n-1)}{N(N-1)}-\frac{n^2}{N^2}=-\frac{n(N-n)}{N^2(N-1)}$. [F3, F4, F5, F6, F7, step 1.1, step 1.2, algebra]
+
+3.1 Since $\pi_i=n/N>0$, the estimator in [F2] has $\widehat{\bar y}_{HT}(s,y|_s)=\frac1N\sum_{i\in s}\frac{y_i}{n/N}=\frac1n\sum_{i\in s}y_i$. Its expectation is $\bar y_U$ by [F2]. [given, F1, F2, step 1.1, algebra] ∎

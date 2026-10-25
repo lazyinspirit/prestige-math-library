@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-cayley-graph-of-a-free-abelian-group-of-finite-rank.md

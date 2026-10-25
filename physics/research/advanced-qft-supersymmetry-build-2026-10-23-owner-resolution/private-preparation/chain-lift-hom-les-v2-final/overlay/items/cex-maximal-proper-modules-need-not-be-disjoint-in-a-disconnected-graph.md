@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-maximal-proper-modules-need-not-be-disjoint-in-a-disconnected-graph.md

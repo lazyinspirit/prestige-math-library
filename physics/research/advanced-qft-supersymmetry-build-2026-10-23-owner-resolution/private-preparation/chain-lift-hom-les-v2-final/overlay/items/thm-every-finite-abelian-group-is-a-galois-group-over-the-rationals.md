@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-finite-abelian-group-is-a-galois-group-over-the-rationals.md

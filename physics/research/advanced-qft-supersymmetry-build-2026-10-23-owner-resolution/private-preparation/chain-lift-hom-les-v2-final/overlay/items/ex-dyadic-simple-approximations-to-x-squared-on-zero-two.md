@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-dyadic-simple-approximations-to-x-squared-on-zero-two.md

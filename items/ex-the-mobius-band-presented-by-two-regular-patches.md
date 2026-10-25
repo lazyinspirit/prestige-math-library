@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-mobius-band-presented-by-two-regular-patches.json
+  precheck: pass
 id: ex-the-mobius-band-presented-by-two-regular-patches
 kind: example
 title: "The Mobius band presented by two regular patches, with normal comparison on the interiors of the overlap components"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -80,3 +80,36 @@ and let $\Psi_1,\Psi_2$ be the restrictions of $\Psi$ to $R_1$ and $R_2$. These 
 ## Remarks
 
 - The point of the example is local to this presentation. It does not claim that no other presentation of the Möbius band could behave differently; the next false statement is the finite check on this one.
+
+
+The parameter-domain schematic below uses the same horizontal $t$ scale in both rows; the rows are displaced vertically only to separate $R_1$ and $R_2$. Each rectangle has $-1/2\le s\le1/2$, with $s$ increasing upwards. The shaded strips mark the closed overlap preimages; the normal comparisons apply only to their interiors. The two strips labelled $K_1$ have identical parameters, hence $N_{\Psi_1}=N_{\Psi_2}$ there (step 4.1). The other pair is identified by $h(t,s)=(t+2\pi,-s)$, so $N_{\Psi_1}(\Psi_1(t,s))=-N_{\Psi_2}(\Psi_2(h(t,s)))$ on $K_2^\circ$ (step 4.2). This is a schematic of parameters, not an embedding of the band; the verification above is independent of it.
+
+```tikz
+\begin{tikzpicture}[x=1.25cm,y=1cm]
+\fill[blue!45!black] (0,2) rectangle (1,3);
+\fill[orange!55!black] (3,2) rectangle (4,3);
+\fill[orange!55!black] (3,0) rectangle (4,1);
+\fill[blue!45!black] (6,0) rectangle (7,1);
+\draw[thick] (0,2) rectangle (4,3);
+\draw[thick] (3,0) rectangle (7,1);
+\draw[dashed] (1,2) -- (1,3);
+\draw[dashed] (3,2) -- (3,3);
+\draw[dashed] (4,0) -- (4,1);
+\draw[dashed] (6,0) -- (6,1);
+\draw[dashed] (7,0) -- (7,1);
+\node[left] at (0,2.5) {$R_1$};
+\node[left] at (3,0.5) {$R_2$};
+\node[above] at (0.5,3) {$K_2$};
+\node[above] at (3.5,3) {$K_1$};
+\node[above] at (3.5,1) {$K_1$};
+\node[above] at (6.5,1) {$h(K_2)$};
+\node[below] at (0,2) {$-\pi/6$};
+\node[below] at (4,2) {$7\pi/6$};
+\node[below] at (3,0) {$5\pi/6$};
+\node[below] at (7,0) {$13\pi/6$};
+\draw[->] (0,-0.9) -- (7,-0.9) node[right] {$t$};
+\node[below] at (3.5,-1.1) {$K_1:\ N_1=N_2\qquad K_2\leftrightarrow h(K_2):\ N_1=-N_2$};
+\end{tikzpicture}
+```
+
+Here $N_i$ abbreviates the induced normal $N_{\Psi_i}$ at the corresponding common image point. The horizontal scale places $t=-\pi/6$ at the left edge of $R_1$ and increases by $\pi/3$ per diagram unit; thus the right edge of $K_2$ is $\pi/6$, and the left edge of $h(K_2)$ is $11\pi/6$.

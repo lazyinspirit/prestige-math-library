@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-elementary-predictable-brownian-integrand.json
+  precheck: n/a
 id: def-elementary-predictable-brownian-integrand
 kind: definition
 title: "Elementary predictable Brownian integrands"
@@ -12,9 +15,7 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2.2"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
-verification:
-  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-elementary-predictable-brownian-integrand.json
-  audited: 2026-09-22
+
 ---
 
 ## Definition
@@ -98,3 +99,48 @@ as dependencies of this item.
 
 [[def-progressively-measurable-and-predictable-process]]
 
+
+## Remarks
+
+For a fixed $\omega$, the picture illustrates a representation with three
+intervals. The heights $\xi_k(\omega)$ are schematic; no ordering or positivity
+of the coefficients is assumed. An open circle excludes the left endpoint
+of a step, and a filled circle includes its right endpoint. The separate
+filled point at the origin records $H_0(\omega)=0$.
+
+```tikz
+\begin{tikzpicture}[x=1.3cm,y=1.3cm]
+\draw[->] (-0.8,0) -- (8.5,0) node[right] {$s$};
+\draw[->] (-0.6,-0.3) -- (-0.6,3.6) node[above] {$H_s(\omega)$};
+\draw[densely dotted] (2.5,0) -- (2.5,2.71);
+\draw[densely dotted] (5,0) -- (5,1.81);
+\draw[densely dotted] (5,1.99) -- (5,2.8);
+\draw[densely dotted] (7.5,0) -- (7.5,1.9);
+\draw[thick] (0.09,1.1) -- (2.5,1.1);
+\draw[thick] (2.59,2.8) -- (5,2.8);
+\draw[thick] (5.09,1.9) -- (7.5,1.9);
+\draw[thick] (0,1.1) circle (0.09);
+\draw[thick] (2.5,2.8) circle (0.09);
+\draw[thick] (5,1.9) circle (0.09);
+\fill (0,0) circle (0.065);
+\fill (2.5,1.1) circle (0.065);
+\fill (5,2.8) circle (0.065);
+\fill (7.5,1.9) circle (0.065);
+\node[above] at (1.25,1.1) {$\xi_0(\omega)$};
+\node[above] at (3.75,2.8) {$\xi_1(\omega)$};
+\node[above] at (6.25,1.9) {$\xi_2(\omega)$};
+\node[below] at (0,-0.08) {$0=t_0$};
+\node[below] at (2.5,-0.08) {$t_1$};
+\node[below] at (5,-0.08) {$t_2$};
+\node[below] at (7.5,-0.08) {$t_3=T$};
+\end{tikzpicture}
+```
+
+Here each $\xi_k$ is bounded and $\mathcal F_{t_k}$-measurable: the coefficient
+on $(t_k,t_{k+1}]$ uses information available at its left endpoint. At an
+interior partition time $t_k$ the displayed representative takes the preceding
+step's value $\xi_{k-1}(\omega)$. The mesh is the largest horizontal interval
+length $\max_{0\le k<3}(t_{k+1}-t_k)$, independent of the depicted heights.
+The process is still identified up to $\mathrm dt\otimes P$-almost-everywhere
+equality as in the definition; the picture does not change that convention
+or replace the predictability argument.

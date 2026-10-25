@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-abc-zero-tolerance-limit-fails-without-integrable-envelope.md

@@ -9,6 +9,7 @@ import { atomicJSON, checkMetadataAndRender, digest, gateInventory, preparedPath
   sourceState, stateDirectory, registerStateDirectory, statFingerprint, validatePrepared } from './step6-prepared.mjs';
 import { commitStep6 } from './step6-commit.mjs';
 import { makeSummaryResponse, renderSummaryReport, step6Telemetry } from './step6-summary.mjs';
+import { writeRenderingQuality } from './rendering-quality.mjs';
 
 const TOOL_ROOT = dirname(fileURLToPath(import.meta.url));
 const VALIDATED_STAGE = '6-final-validation-v3';
@@ -101,13 +102,24 @@ export async function prepareFinal(root, run, { physics = false } = {}) {
     (await import(prefix + 'original-judge-lineup.mjs')).originalJudgeLineup({ repo: root, run }) } : {};
   const { runPages } = await import(prefix + 'item-dependency-levels.mjs');
   const pages = runPages(root, run), batches = [...new Set(pages.map(page => String(page.batch)))];
+  const currency = physics ? await import('./physics-support/step6-currency-repair.mjs') : null;
+  const judged = currency?.beginStep6CurrencyRepair(root,run);
   invoke(root, 'defect-ledger.mjs', ['render'], { physics, commands });
   invoke(root, 'apply-judge-stamps.mjs', ['--ledger', `research/${run}-judge.jsonl`, '--exclude-published',
     ...(!physics ? ['--step5-run', run] : []), '--manifests', batches.map(batch => `research/${run}-batch-${batch}.pages.json`).join(','),
     '--terminal-resolutions', `research/${run}-step5-terminal-resolutions.jsonl`, '--run', run,
-    '--auditor-certifications', `research/${run}-step7-auditor-certifications.json`, '--apply', '--report', `research/${run}-judge-stamps.json`], { physics, commands, env: judgeEnv });
-  const actual = await checkMetadataAndRender(root, run, { physics });
+    '--auditor-certifications', `research/${run}-step7-auditor-certifications.json`, '--apply', '--report', `research/${run}-judge-stamps.json`], {
+      physics, commands, env: {...judgeEnv,...(judged?.status==='judged'?{PRESTIGE_STEP6_CURRENCY_STAMP:judged.sha256}:{})} });
+  currency?.finishStep6CurrencyRepair(root,run);
+  let actual;
+  try{actual=await checkMetadataAndRender(root,run,{physics});}
+  catch(error){
+    if(judged&&/Invalid original (?:maintenance|rendering successor): (?:changed|unbound) input .*items\//.test(String(error?.message)))
+      throw Error(`Root raw-consumer authority rebind required after native stamping; genuine judgments remain in research/${run}-step6-currency-authority.json. ${error.message}`);
+    throw error;
+  }
   atomicJSON(join(root, 'research', `${run}-proof-layout.json`), actual.layoutReceipt);
+  writeRenderingQuality(root, run, actual.renderingQuality);
   invoke(root, 'publication-ready.mjs', ['--run', run, '--write'], { physics, commands });
   invoke(root, 'step6-report.mjs', ['evidence', '--run', run], { physics, commands });
   invoke(root, 'step6-report.mjs', ['snapshot', '--run', run], { physics, commands });
@@ -116,6 +128,8 @@ export async function prepareFinal(root, run, { physics = false } = {}) {
     startedAt: actual.startedAt, reviewedAt: actual.reviewedAt, completedAt: new Date().toISOString(),
     mathematical_review: false, gate_pass_created: false,
     metadata: actual.metadata, formatting: actual.formatting, source,
+    renderingQuality: { fingerprint: actual.renderingQuality.fingerprint, errors: actual.renderingQuality.errors.length,
+      warnings: actual.renderingQuality.warnings.length, files: actual.renderingQuality.files.length },
     repairRound: s.stages?.[VALIDATED_STAGE]?.fixRounds ?? 0, commands };
   atomicJSON(preparedPath(root, run, physics), cert);
   return cert;
@@ -124,9 +138,23 @@ export async function prepareFinal(root, run, { physics = false } = {}) {
 export async function prepareFinalIfChanged({ ctx, executor, stage, physics = false }) {
   if (ctx.doctor || stage.id !== VALIDATED_STAGE || executor.state.paused
     || executor.inflight.size || executor.liveDispatchLabels().length
+    || physics && executor.hasAdoptedWork?.(stage)
     || !executor.stageStatus(stage, ctx).unitsDone || executor.state.data.stages[stage.id]?.gatesPassedAt) return;
   const root = ctx.repo, run = ctx.run, key = `${root}\0${run}\0${physics}`;
   registerStateDirectory(root, run, { physics, stateDir: ctx.config?.stateDir ?? ctx.stateDir });
+  if (physics && (await import('./physics-support/step6-currency-repair.mjs')).step6CurrencyPending(root, run)) {
+    const dispatch = executor.state.data.dispatches?.[`${stage.id}:step6-prepare-final-v3`];
+    if (dispatch?.startedAt && !dispatch.endedAt)
+      throw Error('Pending physics currency requires the active native preparation to drain');
+    if (dispatch?.lastExitOk === false && dispatch.attempts !== 0)
+      throw Error('Native final preparation failed; resolve its failure and use native retry before restarting');
+    const plans = await stage.plan(ctx, ['all']);
+    if (!Array.isArray(plans) || plans.length !== 1 || plans[0].role !== 'tool'
+      || plans[0].label !== 'step6-prepare-final-v3' || JSON.stringify(plans[0].covers) !== '["all"]')
+      throw Error('Pending physics currency requires the exact native final preparation plan');
+    if (!executor.start(stage, plans[0])) throw Error('Native final preparation dispatch was refused');
+    return;
+  }
   const path = preparedPath(root, run, physics);
   let cert = readJSON(path);
   const round = executor.state.data.stages[stage.id]?.fixRounds ?? 0;

@@ -1,0 +1,128 @@
+{
+  "id": "def-scaled-dot-product-attention",
+  "agent": "/root/rendering_repair_coordinator/dnn_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic standalone original tile contains no diagram. The independently checked definition has two side inputs (mask and values) at distinct stages and five relevant matrix shapes; a dataflow picture materially clarifies the distinction between masking scores and multiplying normalized weights by values. A final Remarks illustration is warranted under the expanded editorial diagram scope.",
+      "action": "Added a seven-node, six-arrow TikZ dataflow with all matrix shapes and adjacent prose recording allowed/disallowed mask values, the nonempty-row condition, and the unmasked specialization.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a final Remarks section and illustrative attention pipeline; original definition and references retained byte-for-byte. All frontmatter, including status: published, retained byte-for-byte.",
+  "source_lines_after": {
+    "remarks": [
+      44,
+      46
+    ],
+    "tikz": [
+      48,
+      64
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Q is n_q by d_k and K is n_k by d_k, with positive dimensions as in Definition line 29.",
+      "relations": "The top input feeds S=QK^T/sqrt(d_k): K^T is d_k by n_k, so the product and its positive scalar rescaling are n_q by n_k.",
+      "justification": "Definition lines 29 and 32."
+    },
+    {
+      "objects": "S and the mask M have n_q by n_k entries.",
+      "relations": "The S and M arrows both enter S+M, before the arrow to row softmax. Mask entries are 0 for allowed pairs and negative infinity for disallowed pairs; each row retains an allowed key, so at least one exponential is positive and the row denominator is nonzero. M=0 recovers unmasked attention.",
+      "justification": "Definition line 35; positive finite original scores follow from line 29."
+    },
+    {
+      "objects": "A is the n_q by n_k row-softmax matrix; V is n_k by d_v.",
+      "relations": "The arrows from A and V enter O=AV, of shape n_q by d_v. This is the same multiplication and order as the attention formula.",
+      "justification": "Definition lines 29, 32 and 35."
+    },
+    {
+      "objects": "Seven operation/input nodes with six directed dataflow arrows.",
+      "relations": "Arrows indicate computational inputs, not linear maps or a commutative-square assertion. Four central arrows go downward Q,K -> S -> S+M -> A -> O; M -> S+M and V -> O are horizontal side inputs. No crossing, cycle, or extra mathematical relation is asserted.",
+      "justification": "Direct expansion of Definition lines 29\u201335; standalone final native PNG confirms each of these six arrowheads and seven boxes."
+    },
+    {
+      "objects": "Underlying definition and mathematical interface.",
+      "relations": "The figure restates the existing formula and mask convention; the full original definition is independent of the picture. There is no proof section in this definition item, and no argument is replaced by the figure.",
+      "justification": "Exact original carrier is a byte prefix of the current source; frontmatter and original Definition/references are unchanged."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-scaled-dot-product-attention.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-scaled-dot-product-attention.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-scaled-dot-product-attention.md",
+            "item_id": "def-scaled-dot-product-attention",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-scaled-dot-product-attention.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnn011 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-scaled-dot-product-attention --out research/math-library-rendering-repairs-2026-10-23/previews/dnn011-attention-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      },
+      "visual_inspection": "Viewed final standalone PNG at original resolution. All seven boxes, six connecting arrows, dimensions and formulas are visible, with dark-background contrast and no overlaps/clipping or TikZ error. Native compiled figure is present in preview HTML."
+    }
+  ],
+  "check_history": "The first TikZ version compiled visually but triggered rendercheck dollar-span parsing around node line breaks. Replaced the multi-dollar labels by single math-array labels and repeated all final checks and native visual capture. No pre-existing formatting failure found.",
+  "evidence": {
+    "before_raw_sha256": "8629a8511d84d1d680b6d1e454dff05db0aad0c721e73c29cbb851e5a6e837ca",
+    "current_raw_sha256": "0b7a6ae58acdd83f36ecb966c4076da8a4df3545a5763f9969160eac40dbfc52",
+    "screenshot_path_discrepancy": "Declared evidence_dir/screenshots path does not exist. Located authentic PNG in the same category screenshots directory and verified exact recorded SHA256 before original-resolution standalone inspection.",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-scaled-dot-product-attention--01.png",
+    "original_screenshot_sha256": "c926e5e8b41ab7bae8b9e6282dabc48b5e0f8c7e72f9d825ffcdcbf1b10424e6",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn011-attention-final/manifest.json",
+    "preview_manifest_sha256": "946f081b4680bcdff4747d9027e0a908caa84cfb86e61d0cfe7080f653ea8cb8",
+    "preview_source_binding": {
+      "id": "def-scaled-dot-product-attention",
+      "status": "published",
+      "source": "items/def-scaled-dot-product-attention.md",
+      "source_sha256": "0b7a6ae58acdd83f36ecb966c4076da8a4df3545a5763f9969160eac40dbfc52",
+      "snapshot": "snapshots/def-scaled-dot-product-attention.md",
+      "html": "html/def-scaled-dot-product-attention.html",
+      "html_sha256": "9ab41f1b67095f06236fb2430244d4311f116f5c2c8a9e0723c5065181c1e8a2",
+      "reference_map_sha256": "4488674793540d5522cf3cd82d456a9fef923aeb0a48847630f60fd76463b268"
+    },
+    "final_screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dnn011-attention-final/screenshots/def-scaled-dot-product-attention--01.png",
+    "final_screenshot_sha256": "64072dd27fb2be29818c8779b419051c57a6e3f05b33590a063fb59ffc122d37"
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody preview only, not production route coverage. Reference-map preview reports 16 unrelated parse diagnostics; assigned source renders successfully."
+  ]
+}

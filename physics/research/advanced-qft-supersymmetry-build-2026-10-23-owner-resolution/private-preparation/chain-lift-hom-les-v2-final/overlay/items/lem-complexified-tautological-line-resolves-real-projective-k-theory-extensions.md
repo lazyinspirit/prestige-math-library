@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complexified-tautological-line-resolves-real-projective-k-theory-extensions.md

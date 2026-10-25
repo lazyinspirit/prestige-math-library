@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-kunneth-over-a-pid-is-always-a-tensor-product-isomorphism.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-full-dual-of-infinite-group-algebra-has-no-algebraic-coproduct.md

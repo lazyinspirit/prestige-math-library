@@ -1,0 +1,92 @@
+{
+  "id": "ex-hp-reentrant-corner-h-versus-hp",
+  "agent": "/root/rendering_repair_coordinator/npde_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-diagram-low-contrast-fill",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile shows near-white gray!12 fill obscuring the light corner/mode labels, boundary outline and angular arc. The final standalone original-resolution diagram crop visibly restores their contrast using a dark fill.",
+      "action": "Changed only the polygon fill from gray!12 to black!90.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Darkened the L-shaped domain fill; retained all coordinates, scale, labels, boundary edges, arc orientation, claims and proof.",
+  "source_lines_after": [
+    74
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "L-shaped domain and origin corner",
+      "check": "The six vertices (-1,-1),(0,-1),(0,0),(1,0),(1,1),(-1,1), with the explicit-coordinate cycle, trace the boundary of the closure of the Example union of rectangles. The removed lower-right quadrant leaves an interior angle of 3π/2 at the origin. Original and final renders show all six boundary edges."
+    },
+    {
+      "objects": "Dirichlet boundary Γ_D and angular convention",
+      "check": "The thick blue path joins (0,-1) to (0,0) to (1,0), exactly the two edges ending at the origin. Its positive-x edge is θ=0 and negative-y edge θ=3π/2. Substitution into sin(2θ/3) gives sin(0)=sin(π)=0, matching the Example and Verification 5.1; outer edges are not highlighted."
+    },
+    {
+      "objects": "Sector orientation and mode label",
+      "check": "The arc starts at (0.42,0) and runs counterclockwise from 0° to 270°, passing through the occupied upper and lower-left portions and ending at (0,-0.42). Its positive radius lies in the stated polar sector except endpoints. The u(r,θ) label lies inside the upper-left domain. Color alone changed; every relation and orientation is preserved."
+    }
+  ],
+  "proof_independent": true,
+  "remaining_issues": [],
+  "checks": {
+    "before_raw_sha256": "8bde950e8b1dccaa59aca06857b068772cd525bceac7221f2455d41a4aa6ce8d",
+    "current_raw_sha256": "c40e10e66ca4aded45ecd9501e086721b31155cd0aa2bb9d84a07d5999c72553",
+    "write_scope": "Exact raw comparison confirms the sole change is gray!12 to black!90; full frontmatter including status: published is byte-identical.",
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-hp-reentrant-corner-h-versus-hp.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-hp-reentrant-corner-h-versus-hp.md",
+            "item_id": "ex-hp-reentrant-corner-h-versus-hp",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-hp-reentrant-corner-h-versus-hp.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-hp-reentrant-corner-h-versus-hp.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    "preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-hp-reentrant-corner-h-versus-hp --out research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024/manifest.json",
+      "katex_errors": [],
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "original_resolution_views": [
+        "research/math-library-rendering-repairs-2026-10-23/../math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/screenshots/ex-hp-reentrant-corner-h-versus-hp--01.png",
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024/screenshots/ex-hp-reentrant-corner-h-versus-hp--01.png",
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024/screenshots/ex-hp-reentrant-corner-h-versus-hp--02.png",
+        "research/math-library-rendering-repairs-2026-10-23/npde-002-preview-final-20261024/diagram-original-crop.png"
+      ],
+      "limitations": "Local native ItemBody/TikZ SSR preview using existing web renderer and CSS, with HTTP blocked; not production-route or metadata-footer coverage. Sixteen unrelated title-map parse diagnostics are reported by the helper."
+    }
+  }
+}

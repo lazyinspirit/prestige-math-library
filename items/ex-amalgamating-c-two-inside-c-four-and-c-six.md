@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-amalgamating-c-two-inside-c-four-and-c-six.json
+  precheck: pass
 id: ex-amalgamating-c-two-inside-c-four-and-c-six
 kind: example
-title: "Amalgamating C_2 inside C_4 and C_6 gives the presentation with a^2=b^3"
+title: "Amalgamating $C_2$ inside $C_4$ and $C_6$ gives the presentation with $a^2=b^3$"
 status: published
 origin: session
 provenance:
@@ -14,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-11
 sources:
   scraped: []
   references: []

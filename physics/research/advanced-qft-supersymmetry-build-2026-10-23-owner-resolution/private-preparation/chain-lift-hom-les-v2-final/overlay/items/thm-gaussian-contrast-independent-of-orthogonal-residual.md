@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-gaussian-contrast-independent-of-orthogonal-residual.md

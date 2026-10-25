@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-singular-gaussian-process-prior-and-predictive-covariances.md

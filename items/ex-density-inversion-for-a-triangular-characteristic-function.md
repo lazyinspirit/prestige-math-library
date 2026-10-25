@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-density-inversion-for-a-triangular-characteristic-function.json
+  precheck: pass
 id: "ex-density-inversion-for-a-triangular-characteristic-function"
 kind: "example"
 title: "Density inversion for a triangular characteristic function"
@@ -6,12 +9,6 @@ deps: ["def-characteristic-function-of-a-real-random-variable", "cor-density-inv
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-11
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"
@@ -64,3 +61,36 @@ This value makes f continuous at zero.
 2.1 Apply density inversion to that probability with characteristic function q. It supplies the continuous density $H(y)=(2\pi)^{-1}\int e^{-isy}q(s)\,ds$. This equals h everywhere: if the two continuous densities differed at y, continuity would give a small interval where their difference had one strict sign, contradicting that both densities integrate to the same interval mass. In particular $1=h(0)=H(0)=(2\pi)^{-1}\int q$. Therefore $f=q/(2\pi)$ is nonnegative and integrates to one, so defines a probability. It has exactly the displayed formula and the continuous value $1/(2\pi)$ at zero. [step 1.1, F2, F3]
 
 3.1 Density integration and the identity in step 2.1 now give $$\varphi_f(t)=\frac1{2\pi}\int e^{itx}q(x)\,dx=H(-t)=h(-t)=(1-|t|)_+.$$ This includes t=0 and both endpoints t=±1, where the value is zero; outside the closed interval it is zero as well. The density value at x=0 was fixed by continuity, not division by zero. AC is inherited from the compact bridge and density inversion. The argument applied inversion only to the known law h before establishing that the triangle is a characteristic function. [step 2.1, F1, F6, F9] ∎
+
+
+## Remarks
+
+The paired graphs distinguish the compactly supported characteristic function from its density, which has nonnegative oscillatory lobes extending beyond the displayed window. The Fourier convention is $\tau(t)=\int_{\mathbb R}e^{itx}f(x)\,dx$ and $f(x)=(2\pi)^{-1}\int_{\mathbb R}e^{-itx}\tau(t)\,dt$. The density graph uses the continuous value at zero; its other zeros are $x=2\pi k$ for nonzero integers $k$. The verification above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth,font=\small]
+\begin{scope}[x=1.2cm,y=2.4cm]
+\draw[->] (-1.8,0) -- (1.9,0) node[right] {$t$};
+\draw[->] (0,-0.08) -- (0,1.25) node[above] {$\tau(t)$};
+\draw[very thick,blue] (-1.7,0) -- (-1,0) -- (0,1) -- (1,0) -- (1.7,0);
+\fill[blue] (-1,0) circle (1.5pt) (0,1) circle (1.5pt) (1,0) circle (1.5pt);
+\node[below] at (-1,0) {$-1$};
+\node[below right] at (0,0) {$0$};
+\node[below] at (1,0) {$1$};
+\node[left] at (0,1) {$1$};
+\end{scope}
+\begin{scope}[shift={(6.2cm,0)},x=1.1cm,y=2.4cm]
+\draw[->] (-2.7,0) -- (2.8,0) node[right] {$x$};
+\draw[->] (0,-0.08) -- (0,1.25) node[above] {$f(x)$};
+\draw[very thick,blue] plot[domain=-2.5:-0.001,samples=220] (\x,{(sin(180*\x)/(pi*\x))^2});
+\draw[very thick,blue] plot[domain=0.001:2.5,samples=220] (\x,{(sin(180*\x)/(pi*\x))^2});
+\fill[blue] (0,1) circle (1.5pt);
+\node[left] at (0,1) {$\frac{1}{2\pi}$};
+\node[below right] at (0,0) {$0$};
+\node[below] at (-2,0) {$-4\pi$};
+\node[below] at (-1,0) {$-2\pi$};
+\node[below] at (1,0) {$2\pi$};
+\node[below] at (2,0) {$4\pi$};
+\end{scope}
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-complexification-preserves-kernels-images-rank-nullity-and-short-exact-sequences.json
+  precheck: pass
 id: thm-complexification-preserves-kernels-images-rank-nullity-and-short-exact-sequences
 kind: theorem
 title: "Complexification preserves kernels, images, finite rank, nullity, and short exact sequences"
@@ -11,9 +14,6 @@ deps: [def-complexification-of-a-real-linear-map, thm-tensor-and-direct-sum-mode
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-29
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -76,3 +76,14 @@ is a short exact sequence of complex vector spaces.
 4.1 By [L5], exactness of the complexified sequence is: $0=\ker i_{\mathbb C}$ at $U_{\mathbb C}$, $\operatorname{im}i_{\mathbb C}=\ker p_{\mathbb C}$ at $V_{\mathbb C}$, and $\operatorname{im}p_{\mathbb C}=W_{\mathbb C}$ at $W_{\mathbb C}$; these are step 3.3, step 3.2 and step 3.3 respectively, with the containment of step 1.4 absorbed into the equality. [step 1.4, step 3.2, step 3.3, L5]
 
 5.1 Steps 2.1 and 2.2 prove the kernel and image formulas, step 3.1 the rank and nullity preservation, and step 4.1 the short-exact-sequence clause. [step 3.1, step 4.1] ∎
+
+## Remarks
+
+For the short exact sequence in the statement, the canonical real-linear embeddings $\iota_X:X\to X_{\mathbb C}$, $x\mapsto 1\otimes x$ (equivalently $x\mapsto x+i0$), fit into the following commutative diagram. Here the lower row is viewed as a sequence of underlying real vector spaces when comparing the rows; its horizontal maps are also complex-linear.
+
+```tikzcd
+0 \arrow[r] \arrow[d, equal] & U \arrow[r, "i"] \arrow[d, hook, "\iota_U"'] & V \arrow[r, "p"] \arrow[d, hook, "\iota_V"'] & W \arrow[r] \arrow[d, hook, "\iota_W"'] & 0 \arrow[d, equal] \\
+0 \arrow[r] & U_{\mathbb C} \arrow[r, "i_{\mathbb C}"'] & V_{\mathbb C} \arrow[r, "p_{\mathbb C}"'] & W_{\mathbb C} \arrow[r] & 0
+```
+
+The two middle squares express $i_{\mathbb C}\circ\iota_U=\iota_V\circ i$ and $p_{\mathbb C}\circ\iota_V=\iota_W\circ p$, directly from the componentwise formula in step 1.1. The end squares commute because their horizontal maps are zero. Both rows are exact: the upper row is the hypothesis, and steps 3.2–4.1 establish injectivity of $i_{\mathbb C}$, $\operatorname{im}i_{\mathbb C}=\ker p_{\mathbb C}$, and surjectivity of $p_{\mathbb C}$. No finite-dimensionality assumption is needed for this clause. The proof above is independent of the illustration.

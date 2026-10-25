@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-continuous-functionals-of-the-scaled-posterior-converge.md

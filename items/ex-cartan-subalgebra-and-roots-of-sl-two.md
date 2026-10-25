@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cartan-subalgebra-and-roots-of-sl-two.json
+  precheck: pass
 id: ex-cartan-subalgebra-and-roots-of-sl-two
 kind: example
-title: Cartan subalgebra and roots of sl_2
+title: Cartan subalgebra and roots of $\mathfrak{sl}_2$
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -16,14 +19,13 @@ sources:
       locator: "Lecture 19, Example 19.9 and Example 19.14"
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example
 
 In $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ of
-[[def-special-linear-lie-algebra-sl-two]], with $[h,e]=2e$,
+[[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]], with $[h,e]=2e$,
 $[h,f]=-2f$, $[e,f]=h$, the line $\mathfrak h=\mathbb Ch$ is a Cartan
 subalgebra; the roots are $\pm\alpha$, where $\alpha\in\mathfrak h^*$ is
 determined by $\alpha(h)=2$, with root spaces $\mathfrak g_\alpha=\mathbb Ce$
@@ -39,7 +41,7 @@ $h_\alpha=2H_\alpha/\alpha(H_\alpha)$.
 
 ## Facts & Assumptions
 
-**Given:** The Lie algebra $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ with the brackets of [[def-special-linear-lie-algebra-sl-two]], its one-dimensional subalgebra $\mathfrak h=\mathbb Ch$, the functional $\alpha\in\mathfrak h^*$ determined by $\alpha(h)=2$, and the Killing form of [[def-killing-form-of-a-finite-dimensional-lie-algebra]].
+**Given:** The Lie algebra $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ with the brackets of [[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]], its one-dimensional subalgebra $\mathfrak h=\mathbb Ch$, the functional $\alpha\in\mathfrak h^*$ determined by $\alpha(h)=2$, and the Killing form of [[def-killing-form-of-a-finite-dimensional-lie-algebra]].
 
 [L1] A finite-dimensional Lie algebra over a characteristic-zero field is semisimple if and only if its Killing form is nondegenerate ([[thm-cartans-semisimplicity-criterion]]).
 

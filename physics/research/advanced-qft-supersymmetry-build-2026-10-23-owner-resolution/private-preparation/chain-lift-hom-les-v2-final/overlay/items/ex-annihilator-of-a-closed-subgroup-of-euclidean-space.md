@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-annihilator-of-a-closed-subgroup-of-euclidean-space.md

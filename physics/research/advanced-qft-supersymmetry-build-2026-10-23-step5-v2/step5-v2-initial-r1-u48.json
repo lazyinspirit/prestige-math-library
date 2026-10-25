@@ -1,0 +1,159 @@
+{
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "phase": "initial",
+  "round": 1,
+  "unit": "48",
+  "input_sha256": "79ce228292c28cf4dc516ab9bc72619009c0b56046675966598cb75a0933c758",
+  "decisions": [
+    {
+      "id": "def-qftx-supersymmetry-fluctuation-complex",
+      "model": "gpt-6-luna",
+      "context_sha256": "82a8d9f16a8a29c2d2ca6cd1dc4046eca7e036686eb6577255c6faefe80ea5d7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "An arbitrary subset of smooth sections need not have a tangent space or differentiable Q, so the original dQ and dH were undefined. The repair supplies a local graded smooth chart, coefficient regularity and constraint tangency; its first-order Taylor transformation satisfies D squared = dH because Q has no constant term at the fixed configuration.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/hep-th/9511112",
+        "https://arxiv.org/pdf/0712.2824"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-qftx-supersymmetry-fluctuation-complex",
+      "disposition": "repaired",
+      "post_sha256": "20ca878454c81f3fb058d7b6c17da230da56fe4b9bc08a7d17595b6b953a6a98",
+      "review_context_sha256": "86c612b20faee907f7b7dee631b0637bada635d48ef218e87e1623b5017b6b19",
+      "reason": "Checked the complete current definition and all three direct suppliers. The specified smooth chart and formal odd coefficients define first-order fluctuations; taking linear terms of Q squared gives D squared = dH, and D preserves its square kernel. Closed Sobolev compositions now require a common domain. Added the missing concrete S4 formulation supplier; finite-regulator data and physical qualifications are retained. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/hep-th/9511112",
+        "https://arxiv.org/pdf/0712.2824"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-qftx-qexact-localization-ward-identity"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "def-qftx-supersymmetry-fluctuation-complex",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "finding": "The original configuration subset and transformation had no differentiable local structure, leaving the fluctuation derivative undefined.",
+      "resolution": "Supplied local graded charts, smooth coefficient maps, compatible constraints and the formal first-order construction, including its square on a common smooth domain."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "def-qftx-supersymmetry-fluctuation-complex",
+      "severity": "nonfatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "finding": "The concrete spinors, lifted symmetry, ghost transformation and completed gauge fixing were used without their actual model supplier.",
+      "resolution": "Added post-qftx-rigid-supersymmetric-background as a formulation prerequisite and identified its content before the round-sphere conventions."
+    }
+  ],
+  "repair_notes": {
+    "claim_and_conventions": "The datum is conditional local fluctuation data with parity modulo two, Q=s+delta, and H=Q squared; it claims neither regulator nor smooth constrained-chart existence. At Q(Phi*)=0 its formal first-order transformation D squares to dH on the common smooth fluctuation domain and squares to zero on ker(dH).",
+    "source_reading": [
+      {
+        "url": "https://arxiv.org/pdf/hep-th/9511112",
+        "locator": "Section 2 coordinate/form-algebra discussion and Appendix, printed p.15, supermanifold and vector-field definitions; finite-dimensional context only."
+      },
+      {
+        "url": "https://arxiv.org/pdf/0712.2824",
+        "locator": "Section 4.3, equations (4.10)-(4.13), combined Q and its square. The current local postulate, not a new source theorem, supplies the sectorwise extension."
+      }
+    ],
+    "dependencies": [
+      "def-qftx-susy-background-data",
+      "def-finite-dimensional-q-exact-localization-data",
+      "post-qftx-rigid-supersymmetric-background"
+    ],
+    "consumer_uses": [
+      {
+        "id": "pthm-qftx-qexact-localization-ward-identity",
+        "path": "items/pthm-qftx-qexact-localization-ward-identity.md",
+        "affected_use": "Facts F2 and proof step 1.2 use only the extra finite-dimensional regulator: manifold, graded form algebra, integral and induced odd derivation, not the continuum linearization.",
+        "disposition": "mathematical_use_unaffected",
+        "minimality": "The finite-regulator paragraph is byte-identical and the theorem separately assumes every required regulator identity. No claim or proof repair is necessary. Its numeric dependency_level must change from 9 to 10 following the new level-9 supplier; refer that unassigned metadata carrier to the frontier owner."
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/advanced-qft-and-supersymmetry/qftx-qexact-field-theory-localization.md",
+        "affected_use": "Frontmatter inventory places the fluctuation definition before the Ward theorem and already requires both supplier pages.",
+        "disposition": "unaffected",
+        "reason": "Both added model and generic background live on the already required qftx-susy-backgrounds page; the body is empty with compact-v1 preserved."
+      }
+    ],
+    "diagrams": "No TikZ/tikzcd diagrams occur in the assigned definition; the local algebraic construction does not require an additional diagram.",
+    "outside_consumer_findings": [],
+    "published_ledger_updates": [],
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-qftx-supersymmetry-fluctuation-complex.md",
+        "exit_code": 0,
+        "result": "0 proof items checked, 0 failing; the assigned definition has no proof-bearing section."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/def-qftx-supersymmetry-fluctuation-complex.md library/advanced-qft-and-supersymmetry/qftx-qexact-field-theory-localization.md --json",
+        "exit_code": 0,
+        "result": "2 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-48.proof-contracts.json --strict --items def-qftx-supersymmetry-fluctuation-complex --json",
+        "exit_code": 0,
+        "result": "The explicit assigned contract checked successfully; no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-v2-initial-r1-u48-items.json --json",
+        "exit_code": 0,
+        "result": "1 focused item, its owning page and 2140 prerequisite items/412 prerequisite pages checked for the selected dependency context; no errors or warnings. The temporary JSON selection contains only the assigned definition."
+      },
+      {
+        "command": "node --input-type=module - (inspectStatement for the assigned definition only)",
+        "exit_code": 0,
+        "result": "Native inspectStatement returned an empty error array for the assigned Definition and its following references."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/def-qftx-supersymmetry-fluctuation-complex.md",
+        "exit_code": 0,
+        "result": "1 item, 0 numbered proof steps, 0 defects; run after the final item edit."
+      },
+      {
+        "command": "git diff --check -- items/def-qftx-supersymmetry-fluctuation-complex.md research/advanced-qft-supersymmetry-build-2026-10-23-batch-48.pages.json research/advanced-qft-supersymmetry-build-2026-10-23-batch-48.proof-contracts.json research/plan-spec.json",
+        "exit_code": 0,
+        "result": "No whitespace errors in the examined current differences."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "remaining_work": [],
+    "metadata_repairs": [
+      {
+        "path": "research/advanced-qft-supersymmetry-build-2026-10-23-batch-48.pages.json",
+        "scope": "Only the assigned item row: Definition mirror, deps, dependency_roles and dependency_level."
+      },
+      {
+        "path": "research/advanced-qft-supersymmetry-build-2026-10-23-batch-48.proof-contracts.json",
+        "scope": "Only the assigned risk_review notes, retaining and distinguishing historical reading claims."
+      },
+      {
+        "path": "research/plan-spec.json",
+        "scope": "Only the assigned item row: Definition mirror, deps, dependency_roles and dependency_level."
+      }
+    ],
+    "shared_write_protocol": "Both short metadata patches acquired the shared run lock, reread current owning JSON before editing, checked the exact assigned row after writing, and released the lock successfully. Inline scoped node scripts avoided an additional persistent workspace file.",
+    "next_action": "Controller collection and ordinary frontier consumer review; reconcile the Ward consumer dependency_level as reported. No additional mathematics or assigned-item repair remains."
+  },
+  "supporting_evidence": {
+    "research/advanced-qft-supersymmetry-build-2026-10-23-batch-48-step5-context.json": "5e204e3494f8de03a768ee5a9cf94ab7414b91cd153b243cb57d3d31ef7a4e3c"
+  }
+}

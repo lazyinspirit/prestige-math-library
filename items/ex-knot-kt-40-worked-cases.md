@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-40-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-40-worked-cases
 kind: example
 title: "A birth followed by a merging saddle"
@@ -14,17 +17,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Mikhail Khovanov, A categorification of the Jones polynomial, §7"
@@ -49,13 +41,13 @@ and this composite is the identity on $\mathcal A$.
 The diagram records the two successive surface events; it is only a description of the movie, while the verification below is algebraic.
 
 ```tikz
-\begin{tikzcd}
-\mathcal A
-\arrow[r, "{\operatorname{id}\otimes\eta}"]
-& \mathcal A\otimes\mathcal A
-\arrow[r, "m"]
-& \mathcal A
-\end{tikzcd}
+\begin{tikzpicture}[>=stealth]
+\node (a) at (0,0) {$\mathcal A$};
+\node (b) at (4,0) {$\mathcal A\otimes\mathcal A$};
+\node (c) at (7,0) {$\mathcal A$};
+\draw[->] (a) -- node[above] {$\mathrm{id}_{\mathcal A}\otimes\eta$} (b);
+\draw[->] (b) -- node[above] {$m$} (c);
+\end{tikzpicture}
 ```
 
 ## Example references

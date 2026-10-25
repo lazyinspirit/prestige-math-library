@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-coherence-of-seifert-circles-and-the-height-of-a-diagram.md

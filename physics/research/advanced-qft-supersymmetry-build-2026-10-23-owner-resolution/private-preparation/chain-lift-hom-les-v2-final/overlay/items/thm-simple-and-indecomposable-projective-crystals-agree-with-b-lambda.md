@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-simple-and-indecomposable-projective-crystals-agree-with-b-lambda.md

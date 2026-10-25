@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-alphabet-past-information-convergence.json
+  precheck: pass
 id: lem-finite-alphabet-past-information-convergence
 kind: lemma
 title: "Convergence and integrable envelope for finite-past information"
@@ -29,7 +32,7 @@ sources:
 ---
 ## Statement
 
-Proves p_k(a) converges almost surely for each symbol, g_k converges on realized paths, and sup_k g_k is integrable with an explicit exponential tail bound.
+Proves $p_k(a)$ converges almost surely for each symbol, $g_k$ converges on realized paths, and $\sup_k g_k$ is integrable with an explicit exponential tail bound.
 
 ## Facts & Assumptions
 

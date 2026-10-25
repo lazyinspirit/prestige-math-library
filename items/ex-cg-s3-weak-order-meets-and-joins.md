@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-s3-weak-order-meets-and-joins.json
+  precheck: pass
 id: ex-cg-s3-weak-order-meets-and-joins
 kind: example
 title: "All meets and joins of the right weak order of $A_2$ ($S_3$), with the left order and the inversion sets compared"
@@ -26,13 +29,6 @@ proof_strategy: "explicit hexagon computation with all lower and upper bound set
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "Anders Bjorner and Francesco Brenti, Combinatorics of Coxeter Groups (Graduate Texts in Mathematics 231, Springer 2005; author-hosted complete PDF)"
@@ -154,3 +150,28 @@ pairs.
 4.2 Joins: intersections of up-sets from step 3.1 are $\{w_0\}$ for the four cross pairs $(s,t),(s,ts),(st,t),(st,ts)$ and for every pair containing $w_0$; on a chain, the intersection is the up-set of the larger element. By [A1] their least elements are the least common upper bounds, so every cross-pair join and every join involving $w_0$ is $w_0$, and joins along a chain are its larger element. Each listed value is an upper bound and lies below every common upper bound, the universal property in [F22]. For the empty join every element is an upper bound, and the minimum $1$ gives $\bigvee\varnothing=1$, in agreement with [F10]. [A1, F10, F22, step 3.1, given, algebra]
 
 5.1 The criterion on all $36$ pairs: write $\gamma=\alpha_s+\alpha_t$. The six sets of step 2.3 are $\varnothing$, $\{\alpha_s\}$, $\{\alpha_t\}$, $\{\alpha_s,\gamma\}$, $\{\alpha_t,\gamma\}$, and $\{\alpha_s,\alpha_t,\gamma\}$. Their inclusion relations consist of the six reflexive pairs; the five strict inclusions from $\varnothing$ to every nonempty set; the four inclusions from each singleton to its containing intermediate set and to the full set; and the two inclusions from the intermediate sets to the full set, for $17$ relations total. The remaining $19$ ordered pairs do not satisfy the directed inclusion $N(u^{-1})\subseteq N(v^{-1})$. Comparing these $17$ inclusions and $19$ failures with the corresponding right-order relations and failures from step 3.1 proves, in both directions, $u\le_R v\iff N(u^{-1})\subseteq N(v^{-1})$ on all $36$ pairs by [F8]. No Choice is used. [F8, step 2.3, step 3.1, given, algebra] ∎
+
+## Remarks
+
+The directed Hasse diagram below displays the right weak order computed in
+steps 2.1 and 3.1. Each upward arrow is a cover, so the two branches have no
+comparisons between their interior elements. Their cross-branch meets are $1$
+and joins are $w_0$, as proved in steps 4.1 and 4.2. The proof above is
+independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.6cm,y=1.1cm,>=stealth]
+\node (one) at (0,0) {$1$};
+\node (s) at (-1,1) {$s$};
+\node (t) at (1,1) {$t$};
+\node (st) at (-1,2) {$st$};
+\node (ts) at (1,2) {$ts$};
+\node (top) at (0,3) {$w_0$};
+\draw[->] (one) -- (s);
+\draw[->] (one) -- (t);
+\draw[->] (s) -- (st);
+\draw[->] (t) -- (ts);
+\draw[->] (st) -- (top);
+\draw[->] (ts) -- (top);
+\end{tikzpicture}
+```

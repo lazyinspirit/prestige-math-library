@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-h3-and-h4-gram-determinants-and-principal-minors.json
+  precheck: pass
 id: ex-cg-h3-and-h4-gram-determinants-and-principal-minors
 kind: example
 title: "Gram determinants and principal minors of the non-crystallographic types $H_3$ and $H_4$"
@@ -19,9 +22,7 @@ sources:
     - title: "Jean Michel, Lectures on Coxeter groups (Beijing lecture notes, April-May 2014)"
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Computation of det C(H3) = 3 - sqrt5 and det C(H4) = (7-3sqrt5)/2 from det C(I2(5)) = (5-sqrt5)/2, printed p. 14 (PDF page 14). Michel's C here is the scaled Cartan matrix, so these are det(2C) in this item's cosine-matrix convention."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Example
@@ -79,3 +80,62 @@ $1-(\frac14+\frac14+\cos^2(\pi/5))<0$; none of these diagrams is of finite type
 2.3 (The excluded neighbours.) The unconditional recurrence of 1.2 [step 1.2] for the path with labels $3,5,3$ gives $d_4=d_3-\cos^2(\pi/3)d_2=\frac{3-\sqrt5}8-\frac14\cdot\frac34=\frac{3-2\sqrt5}{16}<0$ because $2\sqrt5>3$, i.e. $\sqrt5>3/2$, follows from $\sqrt5>2$ [F2]; for the path with labels $3,3,5,3$ it gives $d_5=d_4-\cos^2(\pi/3)d_3=\frac{7-3\sqrt5}{32}-\frac14\cdot\frac12=\frac{3-3\sqrt5}{32}<0$ because $\sqrt5>1$ [F2]; a negative leading minor excludes positive definiteness by [F3]. For the star with centre $c$ and neighbours $a,b,d$, edges $ca,cb$ labelled $3$ and $cd$ labelled $5$, the vector $u=e_c+\frac12(e_a+e_b)+\cos(\pi/5)e_d\ne0$ has non-negative coordinates and satisfies $B(u,u)=1+\frac14+\frac14+\cos^2(\pi/5)+2\bigl(-\frac14-\frac14-\cos^2(\pi/5)\bigr)=1-(\frac14+\frac14+\cos^2(\pi/5))=\frac{1-\sqrt5}8<0$ because $\cos^2(\pi/5)=(3+\sqrt5)/8$ [F2]; by [F3] this star is not positive definite either. [F1, F2, F3, step 1.1, step 1.2, algebra]
 
 3.1 (Conclusion.) The leading principal minors of $2C$ computed in 2.1 and 2.2 [step 2.1, step 2.2] are all positive, so $B$ is positive definite for $H_3$ and for $H_4$ by Sylvester's criterion [F3]; by the finiteness criterion [F3] the Coxeter groups of types $H_3$ and $H_4$ are finite, agreeing with their appearance in the classification [F5]. The three diagrams of 2.3 [step 2.3] either have a negative leading principal minor or a nonzero non-negative vector with non-positive value, so none of them is positive definite and none of their Coxeter groups is finite [F3], which is (iii). [F3, F5, step 2.1, step 2.2, step 2.3, algebra] ∎
+
+## Remarks
+
+The comparison below records the labelled graphs used in the calculations.
+Every edge label is shown, including $3$; vertices on each path are ordered
+from left to right, as in the leading principal minors above. The last row uses
+the star's vertex names from Verification 2.3. Labels are Coxeter exponents
+$m(s,t)$: the corresponding off-diagonal entry of $C$ is
+$-\cos(\pi/m(s,t))$, and non-adjacent vertices give entry $0$.
+The placement of the vertices is schematic. The verification above is
+independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.25cm,y=1cm]
+\tikzset{vertex/.style={circle,fill,inner sep=1.8pt}}
+\node[anchor=east] at (-0.6,0) {$H_3$};
+\node[vertex,label=below:$s_1$] (h30) at (0,0) {};
+\node[vertex,label=below:$s_2$] (h31) at (1,0) {};
+\node[vertex,label=below:$s_3$] (h32) at (2,0) {};
+\draw (h30)--node[above] {$3$} (h31);
+\draw (h31)--node[above] {$5$} (h32);
+\node[anchor=west] at (4.5,0) {$\mathrm{finite}$};
+\node[anchor=east] at (-0.6,-1.3) {$H_4$};
+\node[vertex,label=below:$s_1$] (h40) at (0,-1.3) {};
+\node[vertex,label=below:$s_2$] (h41) at (1,-1.3) {};
+\node[vertex,label=below:$s_3$] (h42) at (2,-1.3) {};
+\node[vertex,label=below:$s_4$] (h43) at (3,-1.3) {};
+\draw (h40)--node[above] {$3$} (h41);
+\draw (h41)--node[above] {$3$} (h42);
+\draw (h42)--node[above] {$5$} (h43);
+\node[anchor=west] at (4.5,-1.3) {$\mathrm{finite}$};
+\node[vertex] (p0) at (0,-2.6) {};
+\node[vertex] (p1) at (1,-2.6) {};
+\node[vertex] (p2) at (2,-2.6) {};
+\node[vertex] (p3) at (3,-2.6) {};
+\draw (p0)--node[above] {$3$} (p1);
+\draw (p1)--node[above] {$5$} (p2);
+\draw (p2)--node[above] {$3$} (p3);
+\node[anchor=west] at (4.5,-2.6) {$\mathrm{not\ finite}$};
+\node[vertex] (q0) at (0,-3.7) {};
+\node[vertex] (q1) at (1,-3.7) {};
+\node[vertex] (q2) at (2,-3.7) {};
+\node[vertex] (q3) at (3,-3.7) {};
+\node[vertex] (q4) at (4,-3.7) {};
+\draw (q0)--node[above] {$3$} (q1);
+\draw (q1)--node[above] {$3$} (q2);
+\draw (q2)--node[above] {$5$} (q3);
+\draw (q3)--node[above] {$3$} (q4);
+\node[anchor=west] at (4.5,-3.7) {$\mathrm{not\ finite}$};
+\node[vertex,label=above:$a$] (a) at (0,-4.8) {};
+\node[vertex,label=below:$b$] (b) at (0,-6.2) {};
+\node[vertex,label=above:$c$] (c) at (1,-5.5) {};
+\node[vertex,label=below:$d$] (d) at (2.4,-5.5) {};
+\draw (a)--node[above] {$3$} (c);
+\draw (b)--node[below] {$3$} (c);
+\draw (c)--node[above] {$5$} (d);
+\node[anchor=west] at (4.5,-5.5) {$\mathrm{not\ finite}$};
+\end{tikzpicture}
+```

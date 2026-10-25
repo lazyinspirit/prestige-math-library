@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-harmonic-conjugate-of-x-squared-minus-y-squared.json
+  precheck: pass
 id: ex-a-harmonic-conjugate-of-x-squared-minus-y-squared
 kind: example
-title: "2xy is a harmonic conjugate of x^2-y^2"
+title: "$2xy$ is a harmonic conjugate of $x^2-y^2$"
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [def-harmonic-conjugate, thm-complex-polynomials-and-rational-functions-ar
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:

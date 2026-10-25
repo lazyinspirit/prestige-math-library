@@ -1,0 +1,28 @@
+from pathlib import Path
+p=Path('items/lem-qftx-asd-penrose-kernel-vanishing.md');s=p.read_text().replace('R/8','R/6')
+n='thm-qftx-coupled-penrose-vanishing'
+s=s.replace('deps:\n','deps:\n  - '+n+'\n',1).replace('dependency_roles:\n','dependency_roles:\n  '+n+': mathematical-premise\n',1)
+s=s.replace('## Proof',r'''[A1] The exact new coupled-vanishing interface says: for any smooth finite-rank Hermitian bundle with a smooth unitary ASD connection on the fixed positively oriented round sphere, and a holomorphic bundle smoothly identified with its twistor pullback whose Dolbeault operator is the vertical ordinary derivative and the connection-horizontal alpha-plane operator, both $H^1(F(-2))$ and $H^1(F^\vee(-2))$ vanish. It includes reducible and flat summands and assumes no GAGA or inverse ADHM normal form. [[thm-qftx-coupled-penrose-vanishing]]
+
+[L1] The elementary deduction from the two injective maps in the Statement is proved in steps 1.1–2.1. Unconditional use for all Ward bundles requires the exact new supplier [A1], as checked in step 3.1. Until that supplier is actually authored and independently checked, this unconditional application remains a prerequisite hold. Its name alone is not a proof of the geometric transform. The coefficient of the coupled conformal scalar operator is $R/6$; the generic positive-kernel lemma is unchanged.
+
+## Proof''',1)
+s=s.replace('## Proof\n\n1.1','## Proof\n\n**Given:** The Statement hypotheses; for the additional Ward-bundle application in step 3.1, the exact supplier Statement [A1].\n\n1.1')
+s=s.replace('[given, F1, F2, step 1.1, algebra] ∎','[given, F1, F2, step 1.1, algebra]')
+s+=r'''
+
+3.1 For the Ward bundle of [F1], the underlying smooth bundle is the twistor pullback and its holomorphic operator is the ordinary vertical derivative and the $A$-horizontal alpha-plane operator by the forward Ward construction. The sphere, incidence and orientation are exactly those of [A1]. Thus [A1], once supplied, applies directly and gives both stated vanishings, with no additional injective-map assumption and no irreducibility hypothesis. The dual connection is still unitary and ASD, since its curvature is $-F_A^t$ and Hodge star commutes with transpose. The dual holomorphic operator is the induced one, so the dual clause matches as well. This identifies the exact supplier-to-consumer application; it does not certify the missing supplier proof. [A1, F1, F2, algebra] ∎
+'''
+s=s.replace('    - title: "Simon K. Donaldson', '    - title: "J. H. Rawnsley, On the Atiyah-Hitchin-Drinfeld-Manin Vanishing Theorem for Cohomology Groups of Instanton Bundles"\n      url: https://gdz.sub.uni-goettingen.de/download/pdf/PPN235181684_0241/LOG_0014.pdf\n      locator: "Math. Ann.241(1979),43–56; complete article scan previously retrieved and visually read; exact operator calculation55–56 gives D*D+R/6. The new local supplier must reconstruct the proof and convention translation."\n    - title: "Simon K. Donaldson',1)
+p.write_text(s)
+p=Path('items/lem-qftx-asd-twistor-vanishing-and-monad-reconstruction.md');s=p.read_text().replace('R/8','R/6')
+s=s.replace('the transform itself is not proved there.','the elementary map-to-vanishing deduction is proved there. Its step 3.1 also checks the exact new coupled-vanishing interface for the Ward operator and its dual. That unconditional application remains conditional on the new supplier being authored and checked; a source citation is not substituted for its proof.')
+p.write_text(s)
+p=Path('items/lem-qftx-adhm-real-monad-normalization-and-charge.md');s=p.read_text();n='thm-qftx-positive-real-adhm-monad-normal-form'
+s=s.replace('deps:\n','deps:\n  - '+n+'\n',1).replace('dependency_roles:\n','dependency_roles:\n  '+n+': mathematical-premise\n',1)
+a=s.index('[A1]');b=s.index('\n\n[F1]',a)
+s=s[:a]+r'''[A1] The exact intrinsic normal-form supplier takes a linear bundle monad on the fixed $\mathbb P^3$, with dimensions $k,2k+N,k$, $N\ge2$, locally free middle bundle trivial on every real line, its positive nondegenerate holomorphic $\sigma$-Hermitian pairing and unitary framing at infinity. It asserts the precise raw polynomial $\alpha,\beta$ form, zero moment maps, stable-and-costable regularity, inverse extraction and exactly the simultaneous $U(k)$ residual action. It retains compact rotation/framing chain factors and naturality on the stated first-order locally-free/base-change range, including $k=0$ and flat summands. These are the needed existence, positivity, uniqueness and family conclusions, not an equivalence with a historical displayed block. Until the actual supplier has been authored and independently checked, they remain an explicit prerequisite hold. [[thm-qftx-positive-real-adhm-monad-normal-form]]'''+s[b:]
+s=s.replace('1.2 Assuming [A1], extract the raw tuple from that normal form.', '1.2 The reconstructed monad in [F1] is linear with locally free middle bundle, trivial on every real line, and has the positive Hermitian Ward pairing and unitary framing fixed in the definition. Its dimensions are those required by [A1]. Thus, assuming the exact supplier [A1], extract the raw tuple from its intrinsic normal form.')
+s=s.replace('normalized monad changes precisely with', 'normalized monad changes, with the framing held fixed, precisely with')
+s=s.replace('No source-coordinate conjugation or nonexistent universal equivalence is invoked.', 'The compact-rotation and framing chain maps are exactly those in [F5] and [A1]; first-order naturality is used only in [A1]’s locally-free/base-change range. No arbitrary analytic-family algebraization is inferred. No source-coordinate conjugation or nonexistent universal equivalence is invoked.')
+p.write_text(s)

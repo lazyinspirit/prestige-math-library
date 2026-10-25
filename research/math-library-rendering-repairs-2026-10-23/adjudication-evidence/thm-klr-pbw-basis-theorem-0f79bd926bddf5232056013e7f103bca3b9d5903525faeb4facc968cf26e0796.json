@@ -1,0 +1,95 @@
+{
+  "id": "thm-klr-pbw-basis-theorem",
+  "agent": "/root/rendering_repair_coordinator/dhecke_019",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tiles show an entirely algebraic normal-form argument. The specific dot-slide identities and braid correction materially benefit from a wire illustration: the position of a dot above/below a crossing explains rightward algebra ordering, and the braid correction has zero crossings despite both leading terms having three. This is a warranted explanatory addition under the expanded diagram scope, not a defect in the existing proof.",
+      "action": "Added two signed equal-colour dot-slide rows and a general-Q equal-outer-colour braid-correction panel in final Remarks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended explanatory KLR dot-slide and braid-rewrite TikZ illustrations, with exact conventions and correction polynomial; preserved every original byte, including statement, proof and frontmatter.",
+  "source_lines_after": {
+    "remarks": [
+      61,
+      127
+    ],
+    "dot_slide": [
+      65,
+      102
+    ],
+    "braid": [
+      104,
+      127
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Two adjacent positions a,a+1 of a word nu with nu_a=nu_{a+1}=i; other strands are suppressed identities.",
+      "relations": "First row: x_a tau_a e(nu)=tau_a x_{a+1} e(nu)+e(nu). Second row: x_{a+1} tau_a e(nu)=tau_a x_a e(nu)-e(nu).",
+      "justification": "Exactly proof step 1.1, obtained by rearranging the supplier definition relation (6). Dots at top left/top right represent the left dot factors; transported dots at bottom right/bottom left are right factors. Each correction removes one crossing and one dot. Equal-colour crossings preserve boundary word nu."
+    },
+    {
+      "objects": "Positions a,a+1,a+2 with colours (i,j,i); crossing words act bottom to top by the diagram dictionary.",
+      "relations": "The first braid has crossings a+1,a,a+1 read upward; the second a,a+1,a. Both reverse three positions, hence both send (i,j,i) to (i,j,i). Each has exactly three pairwise crossings; the correction has three straight strands with polynomial C_ij at the bottom.",
+      "justification": "Supplier relation (7) gives first braid minus second braid = C_ij e(nu), with C_ij=(Q_ij(x_a,x_{a+1})-Q_ij(x_{a+2},x_{a+1}))/(x_{a+2}-x_a). The plus sign on the drawn correction agrees with that numerator and local normalization. The supplier establishes divisibility, so the box denotes a polynomial, not an inverse. If outer colours differ correction is zero; if i=j then Q_ii=0. This illustrates exactly the three-fewer-crossings term of proof step 2.1."
+    },
+    {
+      "objects": "All local diagrams are word-component elements in e(nu)R_n(Q)e(nu) under the equal-colour or equal-outer-colour hypotheses.",
+      "relations": "Rightmost product factors appear at the bottom; no over/under data or additional orientation signs are asserted.",
+      "justification": "The dependency def-klr-grading-and-diagrammatic-composition explicitly fixes bottom-to-top composition and no over/under choice. The entire rigorous proof remains byte-identical and independent of the added pictures."
+    }
+  ],
+  "checks": {
+    "pre_edit_raw_sha256": "75c4e782680fa360149caf17bdb5320ce9adfb792d07ced5bd0b344900f9df05",
+    "current_raw_sha256": "51ba7b5324bd44bef3e312ac459592aebcd4a0c9ec92cf3cb7a43cff685f281b",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published, byte-identical",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-klr-pbw-basis-theorem.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-klr-pbw-basis-theorem.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-klr-pbw-basis-theorem.md --json",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "native_preview": {
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dhecke019-native/manifest.json",
+      "manifest_sha256": "7368944e7a4a26eb4a7ac6320599500f14cdaed93d5a44e510fd7223d8c26557",
+      "source_sha256": "51ba7b5324bd44bef3e312ac459592aebcd4a0c9ec92cf3cb7a43cff685f281b",
+      "html_sha256": "2ee6a715e5f2bc5b013808cd344fd06e5eb654afc19239f70e6f7956f075c927",
+      "reference_map_sha256": "46af26f4ae9e2edbbd366deab6285d3a4be82a7d33a5adedc42e1faa2366d4d6",
+      "result": "Successful native local SSR TikZ compile and 3 screenshot tiles. Independently viewed all three standalone PNGs at original resolution; both dot-slide rows and full braid panel render with correct signs, dots, labels, three crossings per braid and complete straight correction strands. No clipping or overlaps confirmed.",
+      "limitations": "Local ItemBody preview only; unrelated reference-map diagnostics count 16, recorded by the preview manifest. No HTTP or production route visited."
+    }
+  },
+  "evidence_path_discrepancy": {
+    "declared": "diagram-supplement/screenshots/",
+    "resolved": "research/math-library-rendering-audit-2026-10-23/hecke-algebras-and-categorification/screenshots/",
+    "authentication": "Located only within the assigned category; original standalone PNG SHA256 values exactly match the queue: --01 7e06f1ccdd9fba72937f9b459b88cabe176709b3ecff411f6d3cf41d62cb8857; --02 51d8324607e57f4bfbe5fcd4e3f71a1454956d5659a389d26fcd8151193f2de4."
+  },
+  "remaining_issues": []
+}

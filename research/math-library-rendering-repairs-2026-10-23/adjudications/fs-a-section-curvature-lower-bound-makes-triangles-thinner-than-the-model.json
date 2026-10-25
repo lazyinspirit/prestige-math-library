@@ -1,0 +1,79 @@
+{
+  "id": "fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model",
+  "agent": "/root/rendering_repair_coordinator/dg_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "All three original-resolution flagged tiles were inspected, including standalone tile 02. Unlike the rendered KaTeX in the adjacent numbered refutation, the technique banner visibly prints $e_1,e_2,e_3$, $k=0$ and the backslash-pi expressions literally. The banner is plain React text transformed to uppercase by CSS, so adding delimiters cannot correct it.",
+      "action": "Replaced only the technique sentence mathematical tokens with equivalent prose: the three standard basis vectors, curvature bound zero, half pi, angle sum pi, and half pi exceeds one third pi. Prose also avoids CSS uppercasing Greek pi into capital Pi.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "One body line (73) changed; all mathematical claims, hypotheses, proofs, dependency links, sources, title and frontmatter preserved. No TikZ changes.",
+  "source_lines_after": [
+    {
+      "line": 73,
+      "text": "**Proof technique:** direct: exhibit the octant triangle whose vertices are the three standard basis vectors on the unit round sphere at curvature bound zero, compute its actual angles as half pi from orthonormality of the basis, compute the Euclidean comparison angles from the model cosine law and the zero-curvature angle sum pi, and observe that half pi exceeds one third pi."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Underlying renderer still treats technique banners as uppercase plain text; this item uses a local prose workaround."
+  ],
+  "before_raw_sha256": "1ae43163d469f30732228013c8fe91e1cb31fc0b586d99bc51f731e5fa1f9cb3",
+  "after_raw_sha256": "ec33b6128c33c59f01dea20643a867a9abef72832bff7af8eb29568366c34f06",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model.md --json",
+      "exit_code": 0,
+      "result": "1 file checked; status pass; strategy direct; failed 0"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors []; warnings []"
+    }
+  ],
+  "visual_verification": {
+    "original_inspection_dir": "research/math-library-rendering-audit-2026-10-23/differential-geometry",
+    "original_tiles_inspected": [
+      "01",
+      "02",
+      "03"
+    ],
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg009-final/manifest.json",
+    "preview_manifest_sha256": "3d6bb70ba153ca25c9bef8b2b1dfe4ea707c57e365a5a3c3c5efd232b387a54f",
+    "source_binding": {
+      "id": "fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model",
+      "status": "published",
+      "source": "items/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model.md",
+      "source_sha256": "ec33b6128c33c59f01dea20643a867a9abef72832bff7af8eb29568366c34f06",
+      "snapshot": "snapshots/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model.md",
+      "html": "html/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model.html",
+      "html_sha256": "ed4ba4c0cc79b1ff84cd74f769e6735d4de206faac551abbb2fd586665d3eb28",
+      "reference_map_sha256": "90372a7fa4f5a4c1a4fdf7d5b3a144c3d6d1d4f78244976976f9db4ada16e835"
+    },
+    "standalone_final_tile_inspected": "research/math-library-rendering-repairs-2026-10-23/previews/dg009-final/screenshots/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model--02.png",
+    "result": "Banner is readable plain prose with no dollar delimiters, TeX commands or substituted capital Greek symbols; underlying refutation remains unchanged.",
+    "capture_katex_errors": [],
+    "capture_diagram_failures": [],
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  }
+}

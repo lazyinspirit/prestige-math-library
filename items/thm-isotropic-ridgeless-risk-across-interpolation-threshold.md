@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-isotropic-ridgeless-risk-across-interpolation-threshold.json
+  precheck: pass
 id: thm-isotropic-ridgeless-risk-across-interpolation-threshold
 kind: theorem
 title: Isotropic ridgeless least-squares risk on both sides of interpolation
@@ -16,11 +19,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Hastie, Montanari, Rosset, and Tibshirani, Surprises in High-Dimensional Ridgeless Least Squares Interpolation"
@@ -40,9 +38,13 @@ centered components of variance $\sigma^2$, independent of $X_n$, and let
 $z_{0,n}$ be independent of $(X_n,\varepsilon_n)$, centered, and have
 covariance $I_{p_n}$. Set $y_n=X_n\beta_n+\varepsilon_n$,
 $\widehat\beta_n=X_n^+y_n$, and define the design-conditional prediction risk
+
 $$\mathcal R_n:=\mathbb E_{\varepsilon_n,z_{0,n}} \left[(z_{0,n}^{\mathsf T}(\widehat\beta_n-\beta_n))^2\mid X_n\right].$$
+
 Then almost surely
+
 $$\mathcal R_n\longrightarrow \begin{cases} \displaystyle\frac{\sigma^2\gamma}{1-\gamma},&0<\gamma<1,\\[5pt] \displaystyle r^2\left(1-\frac1\gamma\right)+\frac{\sigma^2}{\gamma-1},&\gamma>1. \end{cases}$$
+
 This result gives no limit assertion for sequences with $p_n/n\to1$.
 
 ## Statement references

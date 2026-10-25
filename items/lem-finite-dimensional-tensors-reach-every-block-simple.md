@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-dimensional-tensors-reach-every-block-simple.json
+  precheck: pass
 id: lem-finite-dimensional-tensors-reach-every-block-simple
 kind: lemma
 title: Finite-dimensional tensoring reaches every simple of a linkage class
@@ -31,22 +34,6 @@ proof_strategy: construct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-7.md"
-      - "research/frontier-38-owner-30-alpha-batch-7-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-7-post-5a.json"
-    content_sha256: "3ae95cc31d3a2cd06298228a8daf926dd918ff0f101aef0da1ff634f8d9db158"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
   - title: Pavel Etingof, Representations of Lie Groups (18.757, Fall 2023), Corollary
@@ -91,7 +78,7 @@ The construction does not assert that $\lambda$ is integral or that $W_\lambda=W
 
 ## Proof
 
-**Proof technique:** constructive: shift $\mu$ to a maximal weight of a linkage class, tensor the projective Verma with the self-dual module $L(N\rho)$, and project to the block of $\mu$.
+**Proof technique:** constructive: shift the chosen weight to a maximal weight of a linkage class, tensor the projective Verma with the self-dual module of highest weight N times rho, and project to the block of the original weight.
 
 1.1 Choose the finite bound. Since a simple reflection reverses only $\alpha_i$ among the positive roots, their half-sum satisfies $\rho-s_i\rho=\alpha_i$, giving the simple coroot pairings one. Thus $\rho$ is regular dominant integral. By [F1], $d_w=\rho-w\rho\in Q^+\setminus\{0\}$ for $w\ne1$; take the first positive coordinate in the fixed finite simple-root enumeration. The finitely many real numbers $-\operatorname{Re}(c_w)_{j(w)}/(d_w)_{j(w)}$ have an upper bound, so choose an integer $N\ge0$ strictly larger than all of them. For rank zero $W=\{1\}$ and there are no restrictions; use $N=0$. With $\lambda=\mu+N\rho$, the identity $\lambda-w\cdot\lambda=c_w+Nd_w$ has positive real part at the selected coordinate for each $w\ne1$. Therefore $w\cdot\lambda-\lambda$ cannot have all nonnegative integer simple-root coordinates; if that coordinate is nonreal it is not even in the real root lattice, and if real it is negative. No distinct dot conjugate lies above $\lambda$. By [F3] this makes $\lambda$ maximal in $C_\lambda$, without claiming it is a greatest weight. [F1, F3, given, algebra]
 

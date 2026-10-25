@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-curvature-two-form-of-a-connection-on-a-trivial-plane-bundle.md

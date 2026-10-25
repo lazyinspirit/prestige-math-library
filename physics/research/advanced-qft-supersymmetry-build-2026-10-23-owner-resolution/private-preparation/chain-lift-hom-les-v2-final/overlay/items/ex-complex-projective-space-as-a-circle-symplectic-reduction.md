@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-complex-projective-space-as-a-circle-symplectic-reduction.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-qc-tqc-pentagon-coordinates.json
+  precheck: pass
 id: thm-qc-tqc-pentagon-coordinates
 kind: theorem
 title: Pentagon in fusion-tree coordinates
@@ -69,15 +72,17 @@ composites stated and proved above; the proof uses the equations and coordinate
 expansion, not the drawing.
 
 ```tikzcd
+\begin{tikzcd}[row sep=7em, column sep=7em, cells={nodes={font=\Large}}, labels={font=\large}]
 ((a\otimes b)\otimes c)\otimes d
   \arrow[r,"\alpha_{a\otimes b,c,d}"]
-  \arrow[d,"\alpha_{a,b,c}\otimes\operatorname{id}_d"']
+  \arrow[d,"\alpha_{a,b,c}\otimes\mathrm{id}_d"']
 & (a\otimes b)\otimes(c\otimes d)
   \arrow[r,"\alpha_{a,b,c\otimes d}"]
 & a\otimes(b\otimes(c\otimes d)) \\
 (a\otimes(b\otimes c))\otimes d
   \arrow[r,"\alpha_{a,b\otimes c,d}"']
 & a\otimes((b\otimes c)\otimes d)
-  \arrow[ru,"\operatorname{id}_a\otimes\alpha_{b,c,d}"']
+  \arrow[ru,"\mathrm{id}_a\otimes\alpha_{b,c,d}"']
 &
+\end{tikzcd}
 ```

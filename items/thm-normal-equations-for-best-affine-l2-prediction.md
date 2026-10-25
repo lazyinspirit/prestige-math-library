@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-normal-equations-for-best-affine-l2-prediction.json
+  precheck: pass
 id: thm-normal-equations-for-best-affine-l2-prediction
 kind: theorem
 title: "Normal equations for best affine $L^2$ prediction"
@@ -10,13 +13,6 @@ provenance:
   proof: ai-altered
 deps: [def-moments-variance-and-covariance, lem-variance-and-covariance-identities-for-random-variables, cor-cauchy-schwarz-for-random-variables, def-l-p-space-as-a-quotient-by-null-functions, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, thm-orthogonal-projection-is-the-unique-nearest-point, thm-nonnegative-integral-zero-iff-zero-almost-everywhere]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   references:
     - title: "Jean-Francois Le Gall, Integration, Probabilities and Stochastic Processes, Section 8.2.2"
@@ -73,3 +69,28 @@ yield the same predictor almost surely.
 6.1 Let $a$ and $b$ be two coefficient vectors satisfying the normal equations, and let $$D:=\sum_{j=1}^n (a_j-b_j)\widetilde Y_j.$$ Subtracting the two linear systems gives $\sum_j \operatorname{Cov}(Y_i,Y_j)(a_j-b_j)=0$ for every $i$. Multiplying the $i$th equation by $a_i-b_i$ and summing over $i$, then using bilinearity from [L1], yields $$\mathbb E[D^2]=\sum_{i=1}^n\sum_{j=1}^n (a_i-b_i)(a_j-b_j)\operatorname{Cov}(Y_i,Y_j)=0.$$ Because $D^2\ge0$, [L5] gives $D=0$ almost surely. Thus the corresponding predictors agree almost surely, so the minimizing class in $L^2(\mathbb P)$ is unique even when the coefficient vector is not. [L1, L5, step 5.1, algebra]
 
 7.1 Step 1.1 gives existence and uniqueness of the minimizing class, step 2.1 identifies the optimal intercept, steps 4.1 and 5.1 characterize the optimal centered coefficients by the covariance normal equations, and step 6.1 proves that all coefficient solutions yield the same predictor almost surely. This is exactly the best affine $L^2$ prediction statement. [step 1.1, step 2.1, step 4.1, step 5.1, step 6.1] ∎
+
+## Remarks
+
+The schematic shows the projection in the finite-dimensional space $V$ of step 1.1; the drawn plane represents $W$ without asserting its dimension. The residual $[X]-[Z_*]$ is orthogonal to every element of $W$, by the orthogonal-projection property used in that step. The point $[Z_*]$ is an almost-everywhere class: different coefficient vectors can represent this same point, as step 6.1 shows. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.1]
+\draw (-0.6,-0.7) -- (4.5,-0.7) -- (5.3,0.7) -- (0.2,0.7) -- (-0.6,-0.7);
+\node at (0.1,-0.35) {$W$};
+\coordinate (O) at (0.6,0);
+\coordinate (P) at (2.8,0);
+\coordinate (X) at (2.8,2.5);
+\draw[->] (O) -- (P);
+\draw[->] (O) -- (X);
+\draw[->,dashed] (P) -- (X);
+\draw (2.8,0.23) -- (3.03,0.23) -- (3.03,0);
+\fill (O) circle (1.4pt);
+\fill (P) circle (1.4pt);
+\fill (X) circle (1.4pt);
+\node[below] at (O) {$0$};
+\node[below] at (P) {$[Z_*]$};
+\node[above] at (X) {$[X]$};
+\node[right] at (2.95,1.6) {$[X]-[Z_*]\in W^\perp$};
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-every-finite-language-is-regular.json
+  precheck: pass
 id: prop-every-finite-language-is-regular
 kind: proposition
 title: "Every finite language is regular"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-regular-language-by-dfa-recognition, def-finite-cardinality, def-language-over-an-alphabet]
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -35,7 +35,9 @@ Every finite language over an alphabet $\Sigma$ is regular.
 
 **Proof technique:** direct.
 
-1.1 Define a machine $D$ with state set $P\cup\{\bot\}$, start state $\varepsilon$, accepting set $F=L$, and transition rule $$ \delta(p,a)=\begin{cases}pa,&\text{if }pa\in P,\\ \bot,&\text{if }pa\notin P,\end{cases}\qquad \delta(\bot,a)=\bot. $$ By [F1] the state set is finite, and the transition rule is total on $(P\cup\{\bot\})\times\Sigma$. [given, F1, construct]
+1.1 Define a machine $D$ with state set $P\cup\{\bot\}$, start state $\varepsilon$, accepting set $F=L$, and transition rule
+$ \delta(p,a)=\begin{cases}pa,&\text{if }pa\in P,\\ \bot,&\text{if }pa\notin P.\end{cases} $
+For the sink state, set $\delta(\bot,a)=\bot$. By [F1] the state set is finite, and the transition rule is total on $(P\cup\{\bot\})\times\Sigma$. [given, F1, construct]
 
 1.2 We claim that, for every word $w$, the run from $\varepsilon$ ends at the state $w$ when $w\in P$, and ends at $\bot$ when $w\notin P$. This follows by induction on the length of $w$: appending a letter keeps the machine at the longer prefix exactly when that longer word still lies in $P$, and otherwise sends the run to $\bot$, where it remains. [construct, induction]
 

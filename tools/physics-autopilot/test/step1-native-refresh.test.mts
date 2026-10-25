@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { stages } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
@@ -86,4 +87,24 @@ test('statement-first physics continuation retains its compact authoring decorat
   assert.notEqual(plan.brief, 'briefs/beta-scaffold.md');
   assert.equal(decorated.modelProfile, f.stage.modelProfile);
   assert.equal(decorated.pattern, f.stage.pattern);
+});
+
+
+test('relocated author continuation authenticates frozen result and prompt through exact Root receipt', t => {
+  const f = fixture(t), dir = join(f.repo, 'research/demo-dispatch'); mkdirSync(dir);
+  f.ctx.dispatchDir = dir;
+  const prompt = 'research/demo-dispatch/beta-batch-1.prompt.md';
+  const result = 'research/demo-dispatch/beta-batch-1.result.json';
+  const oldRoot = f.repo + '-removed';
+  writeFileSync(join(f.repo, prompt), readFileSync(f.prompt));
+  f.original.prompt = join(oldRoot, prompt);
+  writeFileSync(join(f.repo, result), JSON.stringify(f.original));
+  const frozen = readFileSync(join(f.repo, result));
+  assert.throws(() => f.plan(), /relocation/);
+  const artifacts = Object.fromEntries([prompt, result].map(path => [path, createHash('sha256').update(readFileSync(join(f.repo, path))).digest('hex')]));
+  writeFileSync(join(f.repo, 'research/demo-repository-relocation.json'), JSON.stringify({ version: 1, kind: 'root-authorized-run-repository-relocation', run: 'demo', reviewer: '/root', old_root: oldRoot, new_root: f.repo,
+    reason: 'Root moved exact frozen native files, preserving every byte without new execution coverage or review authority.', artifacts }));
+  const plan = f.plan(); assert.equal(plan.label, 'batch-1-refresh-nonce-1');
+  assert.deepEqual(readFileSync(join(f.repo, result)), frozen);
+  assert.ok(readFileSync(join(f.repo, plan.task as string), 'utf8').includes(readFileSync(join(f.repo, prompt), 'utf8')));
 });

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-a-p-distribution-decay-from-maximal-cubes.json
+  precheck: pass
 id: lem-a-p-distribution-decay-from-maximal-cubes
 kind: lemma
-title: Distribution decay from maximal cubes for A_p weights
+title: Distribution decay from maximal cubes for $A_p$ weights
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "The distribution estimate in the proof of Lemma 4.36 and its iteration, printed pp. 87-89"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

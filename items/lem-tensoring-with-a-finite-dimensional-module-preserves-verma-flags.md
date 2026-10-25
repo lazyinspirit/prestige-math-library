@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-tensoring-with-a-finite-dimensional-module-preserves-verma-flags.json
+  precheck: pass
 id: lem-tensoring-with-a-finite-dimensional-module-preserves-verma-flags
 kind: lemma
 title: "Finite-dimensional tensoring preserves Verma flags"
@@ -15,22 +18,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
-    delegated_by: owner
-    evidence:
-      - research/frontier-38-owner-30-reader-7.md
-      - research/frontier-38-owner-30-dispatch/reader-reader-7.result.json
-      - research/frontier-38-owner-30-step5-hash-7-post-5a.json
-      - research/frontier-38-owner-30-alpha-batch-7-5a-decisions.json
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Lin Chen, lecture notes (Spring 2024), Lecture 9, Lemma 3.5 and Construction 3.1"
@@ -73,7 +60,7 @@ $$(E\otimes X:\Delta(\mu))=\sum_\eta\dim E_\eta\,(X:\Delta(\mu-\eta)).$$
 
 ## Proof
 
-**Proof technique:** direct: filter the finite-dimensional $\mathfrak b$-module $E\otimes\mathbb C_\mu$ by one-dimensional quotients and induce, then extend to general $X$ by exactness.
+**Proof technique:** direct: filter the finite-dimensional Borel module obtained by tensoring E with the one-dimensional module of weight μ by one-dimensional quotients and induce, then extend to a general Verma-filtered module by exactness.
 
 1.1 For any $\mathfrak b$-module $V$, define $\Psi:U(\mathfrak g)\otimes_{U(\mathfrak b)}(E\otimes V)\to E\otimes(U(\mathfrak g)\otimes_{U(\mathfrak b)}V)$ by $\Psi(u\otimes(e\otimes v))=u\cdot(e\otimes(1\otimes v))$, using the diagonal action. For $x\in\mathfrak b$, the identity $x\cdot(e\otimes(1\otimes v))=xe\otimes(1\otimes v)+e\otimes(1\otimes xv)$ proves balancing, and the definition is $\mathfrak g$-linear. Under [F2]'s PBW identifications both sides are filtered by the degree in $U(\mathfrak n^-)$. Expanding the diagonal action of a negative-root monomial, its leading term acts entirely on the induced factor, so the associated graded map is the flip $u\otimes e\otimes v\mapsto e\otimes u\otimes v$. It is bijective. Induction on finite degree then proves that $\Psi$ itself is bijective: lift a leading term and subtract to prove surjectivity; a nonzero highest-degree term cannot map to zero, proving injectivity. [F2, algebra, construct]
 

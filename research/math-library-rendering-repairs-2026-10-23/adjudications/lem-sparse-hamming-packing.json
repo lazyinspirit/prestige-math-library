@@ -1,0 +1,115 @@
+{
+  "id": "lem-sparse-hamming-packing",
+  "agent": "/root/rendering_repair_coordinator/dms_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original three tiles contain only prose. A concrete two-row block picture materially clarifies the non-obvious distance conversion in the Statement and step 6.1: differing symbols change two binary coordinates, whereas padding contributes nothing. This is an explanatory opportunity rather than an error in the existing proof.",
+      "action": "Added a fenced TikZ schematic and precise explanatory text in the existing final Remarks section.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Illustrated the block encoding for d=11, k=3, m=3, r=0 using words (0,1,2) and (0,2,1), with three one-hot blocks, two zero-padding cells, and contributions 0,2,2. Explicitly disclaimed membership in the particular greedy code and explained the general 2s bound.",
+  "source_lines_after": {
+    "remarks_explanation": [
+      103,
+      107
+    ],
+    "tikz": [
+      109,
+      140
+    ],
+    "distance_explanation": [
+      142,
+      148
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Parameters and map",
+      "justification": "The Statement defines m=floor(d/k), r=floor(k/4). For d=11,k=3 we have 1<=3<=11/2, m=3, r=0, km=9 and d-km=2. The drawn map is the Statement encoding [3]^3 -> {0,1}^11, with positions 0,1,2 in each block and two final zeros."
+    },
+    {
+      "check": "Actual row contents and sparsity",
+      "justification": "Top blocks are 100|010|001 and bottom blocks 100|001|010, both followed by 00. These encode (0,1,2) and (0,2,1), respectively, and each row has exactly k=3 ones as in step 6.1. No claim is made that this particular pair lies in the greedy C."
+    },
+    {
+      "check": "Differences and squared distance",
+      "justification": "Block 0 agrees. Blocks 1 and 2 each swap a one and a zero, so each has exactly two unit squared differences. Padding agrees and contributes zero. Thus s=2 and total squared Euclidean distance is 4=2s, exactly the relation proved in step 6.1."
+    },
+    {
+      "check": "General code separation",
+      "justification": "For distinct words in C, step 1.1 gives integer s>r, hence s>=r+1; Statement/F1 gives k<4(r+1). Consequently 2s>=2(r+1)>k/2, as independently proved in step 6.1. Figure and caption preserve that strict inequality."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-sparse-hamming-packing.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-sparse-hamming-packing.md --json",
+      "exit_code": 0,
+      "result": "1 file checked, pass; direct strategy"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-sparse-hamming-packing.md --json",
+      "exit_code": 0,
+      "result": "1 file checked, no errors or warnings",
+      "resolved_intermediate_failure": "An initial check parsed the TikZ loop macro dollar-v as a KaTeX accent command; using its numeric expansion in text nodes removed that error before the final preview."
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dms-011 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-sparse-hamming-packing --out research/math-library-rendering-repairs-2026-10-23/previews/dms-011-final",
+      "exit_code": 0,
+      "result": "Native local preview produced 4 tiles; final tiles 03 and 04 independently inspected at original resolution. Figure compiles with both complete rows, eleven cells per row, all block/padding labels and distance labels; no clipping or overlap observed.",
+      "limitation": "Local complete ItemBody preview only; not production HTTP or metadata Sources footer. Reference-map diagnostics count 16 concerns unrelated sources."
+    }
+  ],
+  "evidence": {
+    "original_path_discrepancy": "The entry inspection_dir/evidence_dir diagram-supplement/screenshots paths do not exist. Authentic images were located in the corresponding mathematical-statistics/screenshots directory and all three SHA256 values match the queue exactly. All three original-resolution tiles were inspected.",
+    "original_screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/screenshots/lem-sparse-hamming-packing--01.png",
+        "sha256": "60f69f738b88410a610f8c84d05f35d7403b8e217eea63e7ab79592e1d5c339a"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/screenshots/lem-sparse-hamming-packing--02.png",
+        "sha256": "87ab2b34fa8bae2d910d1fb02f2842bc28aaffb87cdf731cbce53f3a074b4733"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/screenshots/lem-sparse-hamming-packing--03.png",
+        "sha256": "7344686f5bfe8f7e55637721d5329b99412c787bac1d90d0181d280082df5d42"
+      }
+    ],
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dms-011-final/manifest.json",
+    "preview_manifest_sha256": "134a7c0f66b8d335f03ab930aedc563b2901d12abe8ad7b9f2026cb246530858",
+    "source_sha256": "6716e8607b7b60f3ed990a73edc441206a1e6e07ec545255b482caafc8461c37",
+    "source_snapshot_sha256": "6716e8607b7b60f3ed990a73edc441206a1e6e07ec545255b482caafc8461c37",
+    "preview_screenshots": [
+      {
+        "path": "research/math-library-rendering-repairs-2026-10-23/previews/dms-011-final/screenshots/lem-sparse-hamming-packing--03.png",
+        "sha256": "c214ad38ca8fdfdbd477a072a138a8e000886f8d8ade05ccb69c4bf7f5535652"
+      },
+      {
+        "path": "research/math-library-rendering-repairs-2026-10-23/previews/dms-011-final/screenshots/lem-sparse-hamming-packing--04.png",
+        "sha256": "19b1607d35301656388854f57029b26580bcc7a83759eb2815d6f6b2977e2c8a"
+      }
+    ]
+  },
+  "publication_status_preserved": {
+    "before": "published",
+    "after": "published",
+    "frontmatter_byte_identical": true
+  },
+  "remaining_issues": []
+}

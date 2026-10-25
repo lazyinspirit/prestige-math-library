@@ -8,7 +8,7 @@ import { preflightCloseoutScope, operationalContextState, captureOutsidePreserva
   assertOutsidePreservationSame } from './run-commit-scope.mjs';
 import { sha256 } from './step6-lib.mjs';
 import { ownedStep6Paths } from './step6-owned-inputs.mjs';
-import { preflightStep6 } from './step6-commit.mjs';
+import { preflightStep6, commitStep6 } from './step6-commit.mjs';
 
 const run = 'fixture';
 function fixture(t, { legacy = false } = {}) {
@@ -241,6 +241,153 @@ for (const kind of ['readiness', 'report']) {
     f.json(lookalike, g.record);
     f.json('research/fixture-step6-evidence.json', { input_sha256: { [lookalike]: 'hash' } });
     assert.throws(f.scope, SyntaxError);
+  });
+}
+
+function historicalReadiness(f, historicalRun = 'historical-run') {
+  const path = `research/${historicalRun}-publication-readiness.json`, input = 'research/historical-run-input.json';
+  f.json(input, { actual: 'preserved historical structured context' });
+  const record = { schema: 2, run: historicalRun, verdict: 'publishable-pending-owner-approval', workflow_owned_blockers: [],
+    content_sha256: sha256('historical source'), input_sha256: { [input]: sha256(readFileSync(join(f.root, input))) },
+    published_baseline_commit: 'a'.repeat(40), protected_tree_files: 142201, protected_tree_sha256: sha256('historical complete tree'),
+    owner_actions_remaining: ['owner review'], generated_at: '2026-10-15T02:03:36.961Z' };
+  f.json('research/fixture-step6-evidence.json', { input_sha256: { [path]: sha256(JSON.stringify(record)) } });
+  const save = () => f.json(path, record); save(); return { path, input, record, save };
+}
+
+function finalReceiptInventory(f) {
+  const path = 'research/foreign-run-dispatch/tool-step6-finalize-v3.result.json', capture = 'research/foreign-run-history/raw-cli.json';
+  f.put(capture, 'statement-first: 305 item(s) checked; 0 defect(s)\n');
+  const record = { run: 'foreign-run', role: 'tool', label: 'step6-finalize-v3', written_by: 'step6-finalize', ok: true,
+    closeout_scope: { version: 2, owned_paths: [capture, f.link] } };
+  f.json('research/fixture-step6-evidence.json', { input_sha256: { [path]: 'sealed final receipt' } });
+  const save = () => f.json(path, record); save(); return { path, capture, record, save };
+}
+
+test('genuine native final-receipt owned paths stay raw inventory without source discovery', t => {
+  const f = fixture(t), g = finalReceiptInventory(f), original = readFileSync(join(f.root, g.capture)), scope = f.scope();
+  assert.ok(!scope.paths.includes(g.capture)); assert.ok(!scope.paths.includes(f.link));
+  assert.deepEqual(readFileSync(join(f.root, g.capture)), original);
+});
+
+for (const field of ['run', 'role', 'label', 'written_by', 'ok', 'version', 'owned_paths']) {
+  test('malformed native final receipt cannot suppress source discovery: ' + field, t => {
+    const f = fixture(t), g = finalReceiptInventory(f);
+    if (field === 'version') g.record.closeout_scope.version = 1;
+    else if (field === 'owned_paths') g.record.closeout_scope.owned_paths = [{ path: f.link }];
+    else g.record[field] = field === 'ok' ? false : 'wrong';
+    g.save(); assert.throws(f.scope, /invalid native final-receipt inventory/);
+  });
+}
+
+for (const reference of ['input-map', 'nested', 'closeout-field', 'operational-link']) {
+  test('final receipt inventory preserves genuine ' + reference + ' references', t => {
+    const f = fixture(t), g = finalReceiptInventory(f);
+    if (reference === 'input-map') g.record.input_sha256 = { [g.capture]: 'hash' };
+    if (reference === 'nested') g.record.actual = { artifact: { path: g.capture } };
+    if (reference === 'closeout-field') g.record.closeout_scope.actual = { path: g.capture };
+    if (reference === 'operational-link') g.record.input_sha256 = { [f.link]: 'hash' };
+    g.save(); assert.throws(f.scope, reference === 'operational-link' ? /symlink in owned path|authoritative input/ : SyntaxError);
+  });
+}
+
+test('a final-receipt lookalike has no typed inventory exemption', t => {
+  const f = fixture(t), g = finalReceiptInventory(f), copy = g.path.replace('.result.json', '.result-copy.json');
+  f.json(copy, g.record); f.json('research/fixture-step6-evidence.json', { input_sha256: { [copy]: 'hash' } });
+  assert.throws(f.scope, SyntaxError);
+});
+
+function pendingFinalReceipt(f) {
+  const path = 'research/fixture-dispatch/tool-step6-finalize-v3.result.json';
+  const record = { role: 'tool', label: 'step6-finalize-v3', run, covers: ['all'], ok: false,
+    transaction_pending: true, before_head: f.git(['rev-parse', 'HEAD']).trim() };
+  const save = () => f.json(path, record); save(); return { path, record, save };
+}
+
+test('current native provisional receipt stays false and traverses without a success inventory', t => {
+  const f = fixture(t), g = pendingFinalReceipt(f), before = readFileSync(join(f.root, g.path));
+  assert.ok(f.scope().paths.includes(g.path)); assert.equal(JSON.parse(before).ok, false);
+  assert.deepEqual(readFileSync(join(f.root, g.path)), before);
+});
+
+for (const field of ['run', 'role', 'label', 'covers', 'ok', 'before_head']) {
+  test('malformed provisional final receipt remains rejected: ' + field, t => {
+    const f = fixture(t), g = pendingFinalReceipt(f);
+    g.record[field] = field === 'covers' ? ['all', 'foreign'] : field === 'ok' ? true : 'invalid';
+    g.save(); assert.throws(f.scope, /invalid native pending final receipt/);
+  });
+}
+
+test('foreign provisional final receipt cannot use current transaction handling', t => {
+  const f = fixture(t), g = pendingFinalReceipt(f), path = 'research/foreign-dispatch/tool-step6-finalize-v3.result.json';
+  f.json(path, { ...g.record, run: 'foreign' });
+  f.json('research/fixture-step6-evidence.json', { actual: { path } });
+  assert.throws(f.scope, /invalid native pending final receipt/);
+});
+
+for (const reference of ['input-map', 'nested', 'inventory-lookalike', 'operational-link']) {
+  test('provisional final receipt preserves strict ' + reference + ' references', t => {
+    const f = fixture(t), g = pendingFinalReceipt(f), raw = 'research/fixture-history/provisional-raw.json';
+    f.put(raw, 'actual raw output, never a structured source');
+    if (reference === 'input-map') g.record.input_sha256 = { [raw]: 'hash' };
+    if (reference === 'nested') g.record.actual = { path: raw };
+    if (reference === 'inventory-lookalike') g.record.closeout_scope = { owned_paths: [raw] };
+    if (reference === 'operational-link') g.record.actual = { path: f.link };
+    g.save(); assert.throws(f.scope, reference === 'operational-link' ? /symlink in owned path|authoritative input/ : SyntaxError);
+  });
+}
+
+test('actual commit transaction re-preflights its pending receipt before creating successful native coverage', t => {
+  const f = fixture(t);
+  // Packaging fixture only: these do not assert scientific/native gate passes.
+  for (const suffix of ['proof-layout.json', 'step6-evidence.json', 'step6-report.response.json', 'pathway-closure.json', 'judge-closure.json'])
+    f.json('research/fixture-' + suffix, {});
+  f.json('research/fixture-publication-readiness.json', { schema: 2, run, protected_tree_scope: 'frontier-prerequisite-context-v1', protected_tree_paths: [], protected_tree_projections: [] });
+  f.json('research/fixture-step6-report-integrity.json', { version: 2, run, scope: 'frontier-prerequisite-report-v2', protected_tree: {}, selectors: { owned_paths: [], projections: [] } });
+  f.put('research/fixture-step6-report.md', '# Exact packaging fixture\n');
+  const receipt = join(f.root, 'research/fixture-dispatch/tool-step6-finalize-v3.result.json'); let assertions = 0;
+  const result = commitStep6(f.root, run, { assertValidated() {
+    assertions++; const pending = JSON.parse(readFileSync(receipt, 'utf8'));
+    assert.equal(pending.ok, false); assert.equal(pending.transaction_pending, true);
+    assert.equal(pending.closeout_scope, undefined); assert.equal(pending.written_by, undefined);
+  } });
+  assert.equal(assertions, 1); assert.equal(f.git(['rev-parse', 'HEAD']).trim(), result.commit);
+  const completed = JSON.parse(readFileSync(receipt, 'utf8'));
+  assert.equal(completed.ok, true); assert.equal(completed.closeout_scope.version, 2); assert.equal(completed.transaction_pending, undefined);
+});
+
+test('foreign pre-scoped readiness remains unchanged structured context without acquiring ownership', t => {
+  const f = fixture(t), g = historicalReadiness(f), before = readFileSync(join(f.root, g.path)), scope = f.scope();
+  assert.ok(!scope.paths.includes(g.path)); assert.ok(!scope.paths.includes(g.input));
+  assert.deepEqual(readFileSync(join(f.root, g.path)), before);
+});
+
+for (const reference of ['input-map', 'nested', 'operational-link']) {
+  test('foreign legacy readiness preserves strict ' + reference + ' references', t => {
+    const f = fixture(t), g = historicalReadiness(f);
+    if (reference === 'input-map') f.put(g.input, 'actual input is not structured JSON');
+    if (reference === 'nested') g.record.actual = { artifact: { path: g.input } };
+    if (reference === 'nested') f.put(g.input, 'actual nested input is not structured JSON');
+    if (reference === 'operational-link') g.record.input_sha256 = { [f.link]: sha256('sealed link text') };
+    g.save(); assert.throws(f.scope, reference === 'operational-link' ? /symlink in owned path|authoritative input/ : SyntaxError);
+  });
+}
+
+test('current-run readiness cannot use historical aggregate-only compatibility', t => {
+  const f = fixture(t); historicalReadiness(f, run); assert.throws(f.scope, /invalid generated seal inventory/);
+});
+
+for (const field of ['protected_tree_scope', 'protected_tree_paths', 'protected_tree_projections', 'protected_tree_rows']) {
+  test('partial foreign scoped readiness cannot use legacy compatibility: ' + field, t => {
+    const f = fixture(t), g = historicalReadiness(f); g.record[field] = field === 'protected_tree_scope' ? 'frontier-prerequisite-context-v1' : [];
+    g.save(); assert.throws(f.scope, /invalid|malformed generated seal inventory/);
+  });
+}
+
+for (const field of ['run', 'schema', 'protected_tree_sha256', 'input_sha256']) {
+  test('malformed foreign legacy readiness stays rejected: ' + field, t => {
+    const f = fixture(t), g = historicalReadiness(f); g.record[field] = field === 'schema' ? 99 : field === 'input_sha256' ? [] : 'malformed';
+    g.save(); assert.throws(f.scope, /invalid generated seal inventory/);
   });
 }
 

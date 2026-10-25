@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-section-zero-if-all-germs-zero.json
+  precheck: pass
 id: lem-section-zero-if-all-germs-zero
 kind: lemma
 title: "A section of a sheaf of groups is zero exactly when all of its germs are zero"
@@ -8,9 +11,6 @@ provenance:
   proof: ai-altered
 deps: [def-sheaf-on-topological-space, def-presheaf-of-groups-rings-modules, def-germ-of-section, lem-germ-equivalence-relation]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -24,7 +24,10 @@ sources:
 
 Let $\mathcal F$ be a sheaf of groups on a topological space $X$, let
 $U \subseteq X$ be open, and let $s\in\mathcal F(U)$. Then
-$$s=0\text{ in }\mathcal F(U)\qquad\Longleftrightarrow\qquad s_x=0\text{ in }\mathcal F_x\text{ for every }x\in U.$$
+
+$$
+s=0\text{ in }\mathcal F(U)\qquad\Longleftrightarrow\qquad s_x=0\text{ in }\mathcal F_x\text{ for every }x\in U.
+$$
 
 ## Facts & Assumptions
 

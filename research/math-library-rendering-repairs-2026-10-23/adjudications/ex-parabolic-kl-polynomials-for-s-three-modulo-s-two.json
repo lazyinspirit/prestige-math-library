@@ -1,0 +1,99 @@
+{
+  "id": "ex-parabolic-kl-polynomials-for-s-three-modulo-s-two",
+  "agent": "/root/rendering_repair_coordinator/co_012",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "Standalone original tile 01 visibly prints S_3 and S_2 with literal underscores, whereas the same symmetric groups are typeset with subscripts in the Example. Current and frozen source both omit math delimiters in the title.",
+      "action": "Added inline math delimiters around S_3 and S_2 in the title.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original tile 02 visibly prints the literal $S_3$ in the proof-technique banner. This banner is plain React text with uppercase CSS, so inline math delimiters cannot render there.",
+      "action": "Replaced only the banner occurrence of $S_3$ with equivalent Unicode S₃.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset the two symmetric-group indices in the title and use readable Unicode S₃ in the plain-text proof-technique banner.",
+  "source_lines_after": [
+    {
+      "line": 4,
+      "text": "title: \"Parabolic Kazhdan–Lusztig polynomials for $S_3$ modulo $S_2$\""
+    },
+    {
+      "line": 74,
+      "text": "**Proof technique:** direct finite computation in the normalized Hecke algebra of S₃, using the two reduction formulas and the ordinary coefficients of [F1]."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "5507c9fe318b60d621d6fa3067c664f5119de49dc4da45722dedee76e7c61f09",
+  "after_raw_sha256": "2afbe9d3a40eeeac55b944f74a8320c6b434664dd9466daa183ce832f37443af",
+  "metadata_status_check": "All frontmatter except title byte-identical to archived before; status: published unchanged.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two.md",
+            "item_id": "ex-parabolic-kl-polynomials-for-s-three-modulo-s-two",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles_viewed": [
+      "research/math-library-rendering-audit-2026-10-23/category-o-and-geometric-representation-theory/screenshots/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two--01.png",
+      "research/math-library-rendering-audit-2026-10-23/category-o-and-geometric-representation-theory/screenshots/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two--02.png"
+    ],
+    "final_tiles_viewed": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/co012-native-final/screenshots/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/co012-native-final/screenshots/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two--02.png"
+    ],
+    "view_detail": "original; separate standalone calls",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/co012-native-final/manifest.json",
+    "manifest_sha256": "3ca78ab0022b6c7d2e5c7c5be579812f17f46d4bc688cdd44dfd60a891a12c96",
+    "source_sha256": "2afbe9d3a40eeeac55b944f74a8320c6b434664dd9466daa183ce832f37443af",
+    "reference_map_sha256": "6b07541032c2b4a8f79e4e6f5bdfeacbe10ec57da36e5b73605c5214d4f244b7",
+    "observed_result": "Final native local views show typeset S₃/S₂ in the title and readable S₃ without dollar signs or underscore in the technique banner. All body equations remain unchanged.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  }
+}

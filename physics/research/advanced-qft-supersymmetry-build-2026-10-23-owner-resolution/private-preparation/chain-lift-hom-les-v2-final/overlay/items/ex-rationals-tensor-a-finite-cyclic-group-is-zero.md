@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-rationals-tensor-a-finite-cyclic-group-is-zero.md

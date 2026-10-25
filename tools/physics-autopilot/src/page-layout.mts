@@ -44,10 +44,11 @@ export function compactStages(ctx: Ctx, native: Stage[], domain:'physics'): Stag
     const stage={...source};
     if(source.plan)stage.plan=(context,pending,slots)=>source.plan!(context,pending,slots).map(p=>decorate(context,p));
     if(source.refreshPlan)stage.refreshPlan=(context,unit,request)=>decorate(context,source.refreshPlan!(context,unit,request));
-    if(source.onProgress || source.id==='1-scaffold')stage.onProgress=async args=>{
+    const construction=source.id==='1-scaffold'||/^2-prerequisite-construct-\d+$/.test(source.id);
+    if(source.onProgress || construction)stage.onProgress=async args=>{
       // The construction cohort is completely drained; never race its writers.
       // Step-1 readiness hashes bind items/deps, not these page presentation bytes.
-      if(source.id==='1-scaffold' && !(args.ctx as any).doctor
+      if(construction && !(args.ctx as any).doctor
         && ![...args.executor.inflight.values()].some((d:any)=>d.meta.stage===stage.id)
         && !args.executor.adoptedUnits(stage).size && args.executor.stageStatus(stage,args.ctx).unitsDone)
         pageLayout(args.ctx.repo,args.ctx.run,domain,{prepare:true});

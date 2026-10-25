@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rational-map-to-affine-target-indeterminacy-pure-codimension-one.md

@@ -4,18 +4,6 @@ title: Functional Analysis
 status: published
 ---
 
-Functional analysis studies infinite-dimensional vector spaces by combining
-algebraic structure with topology and completeness. The collection begins with
-normed and Banach spaces, their completions, bounded operators, quotient
-spaces, and the geometric and analytic forms of Hahn--Banach. It then develops
-the Baire-category principles behind uniform boundedness, open mapping, and
-closed graph results, before turning to duality, weak topologies, compactness,
-and the geometry of Banach and Hilbert spaces. Later pages treat compact and
-unbounded operators, Banach and $C^*$-algebras, spectral measures, and the
-functional calculi that organize operator theory. The final part connects this
-abstract machinery to Fourier analysis, Schwartz functions, distributions, and
-tempered distributions. Measure theory supplies the $L^p$ examples and
-integration framework used throughout, while topology and real analysis supply
-the metric, compactness, and Baire foundations. The resulting track is intended
-both as a proof-based introduction and as infrastructure for probability,
-partial differential equations, harmonic analysis, and mathematical physics.
+The Functional Analysis pages study normed and Banach spaces, bounded operators, completions, and quotient spaces. They develop the geometric and analytic forms of Hahn–Banach, Baire-category theorems, duality, weak and weak-star topologies, compactness, reflexivity, and Hilbert-space geometry. Operator theory ranges from compact and unbounded operators to spectral measures, functional calculi, Fredholm determinants, and trace formulas. Other pages treat Banach and C*-algebras, GNS representations, locally convex spaces, Banach-valued integration, measurable Hilbert fields, and Banach manifolds. The collection also connects functional analysis to Fourier transforms, approximate identities, Schwartz functions, distributions, and the Plancherel theorem. Companion pages give examples and counterexamples.
+
+Real Analysis, Measure Theory, Topology, Set Theory, Linear Algebra, and Complex Analysis provide the calculus, integration, and structural foundations. Partial Differential Equations, Fourier Analysis, Representation Theory of Groups, Numerical PDEs and Spatial Discretization, Complex Analysis, and Mathematical Statistics use its results on completeness, duality, compactness, and operators in their analytic and spectral arguments.

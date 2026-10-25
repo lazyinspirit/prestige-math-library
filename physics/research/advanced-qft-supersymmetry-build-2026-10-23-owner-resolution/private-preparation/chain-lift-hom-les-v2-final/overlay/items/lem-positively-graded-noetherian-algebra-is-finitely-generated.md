@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-positively-graded-noetherian-algebra-is-finitely-generated.md

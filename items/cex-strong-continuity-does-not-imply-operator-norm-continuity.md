@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-strong-continuity-does-not-imply-operator-norm-continuity.json
+  precheck: pass
 id: cex-strong-continuity-does-not-imply-operator-norm-continuity
 kind: counterexample
 title: "Strong continuity does not imply operator-norm continuity"
@@ -29,12 +32,7 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)"
       url: "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf"
       locator: "Chapter 11 Section 11.3, Example 11.2, printed pp. 256-258"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement refuted
@@ -57,7 +55,7 @@ Assume Countable Choice ([[def-countable-choice]]). Let $1\le p<\infty$ and let 
 
 ## Counterexample
 
-**Proof technique:** direct computation with the unit vector $f_t=t^{-1/p}\mathbf 1_{(0,t)}$.
+**Proof technique:** direct computation with normalized interval indicators.
 
 1.1 For every $t>0$ the vector $f_t$ has norm $\|f_t\|_p^p=\int_0^tt^{-1}\,ds=1$, so $f_t$ is a unit vector of $L^p(\mathbb R)$. [F2]
 

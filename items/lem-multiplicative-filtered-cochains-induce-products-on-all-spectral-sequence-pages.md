@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-multiplicative-filtered-cochains-induce-products-on-all-spectral-sequence-pages.json
+  precheck: pass
 id: lem-multiplicative-filtered-cochains-induce-products-on-all-spectral-sequence-pages
 kind: lemma
 title: Multiplicative filtered cochains induce products on every spectral-sequence page
@@ -7,9 +10,6 @@ origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-r-cycles-and-r-boundaries-of-an-increasingly-filtered-complex, def-r-page-of-the-spectral-sequence-of-a-filtered-complex, lem-the-filtered-differential-induces-d-r-on-the-r-page, lem-spectral-sequence-subquotient-and-local-lifting-calculus, thm-the-cohomological-filtered-complex-construction, thm-the-next-page-is-the-homology-of-the-current-page]
 proof_strategy: direct
-verification:
-  audited: 2026-09-14
-  precheck: pass
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -80,3 +80,18 @@ All assertions are choice-free.
 5.1 The comparison in [F3] is multiplicative. For $r=0$, a $d^0$-cycle represented by $x\in F_pC_n$ already lies in $A^1_{p,n}$, and the comparison sends it to the same representative; hence it sends the product class to $xy$. For $r\geq1$, if page-cycle representatives $x,y$ require the lower-filtration corrections $x-a\in A^{r+1}_{p,n}$ and $y-b\in A^{r+1}_{s,m}$ from [F3], Step 1.1 puts their product in $A^{r+1}_{p+s,n+m}$. Moreover $$(x-a)(y-b)-xy=-ay-xb+ab\in F_{p+s-1}C_{n+m},$$ so it represents the same $E^r$ product class. It is therefore a permitted correction for $xy$, and the representative rule in [F3] sends the product of the two homology classes to the product of their images. Independence follows from [F3]'s kernel calculation, not from a chosen correction. Thus $E_{r+1}\cong H(E_r,d_r)$ is an algebra isomorphism. [F3, Step 1.1, Step 2.1, Step 3.1, Step 4.1]
 
 6.1 If $K=0$, the coefficient ring is zero, or either input is zero, every map is the unique zero map. The unit calculation includes one factor equal to $1$, and $r=0$ and $r=1$ are covered separately in Steps 1.1 and 5.1. Repeated filtration terms, a zero differential, and representatives already in lower filtration satisfy the same containments. Step 2.2 checks both differential-boundary variables and Step 4.2 checks both finite filtration endpoints and both directions of the stable quotient identification. Every correction and calculation concerns finitely many supplied elements, so no choice principle is used. There is no iff assertion. [F1, F2, F3, F4, Step 1.1, Step 2.1, Step 2.2, Step 3.1, Step 4.1, Step 5.1, Step 4.2] ∎
+
+## Remarks
+
+The filtration condition $F^aK\cdot F^cK\subseteq F^{a+c}K$ gives the page product $\mu_r:E_r^{a,b}\otimes_R E_r^{c,e}\to E_r^{a+c,b+e}$ by Steps 1.1–3.1. Its compatibility with the next page is illustrated below. Write $H_r^{a,b}=H(E_r,d_r)^{a,b}$, and let $\alpha_r:H_r^{a,b}\to E_{r+1}^{a,b}$ be the specified comparison of [F3].
+
+```tikzcd
+\begin{tikzcd}[scale=1.5,transform shape,column sep=large,row sep=large]
+H_r^{a,b}\otimes_R H_r^{c,e} \arrow[r,"\mu_{H_r}"] \arrow[d,"\alpha_r\otimes\alpha_r"'] & H_r^{a+c,b+e} \arrow[d,"\alpha_r"] \\
+E_{r+1}^{a,b}\otimes_R E_{r+1}^{c,e} \arrow[r,"\mu_{r+1}"'] & E_{r+1}^{a+c,b+e}
+\end{tikzcd}
+```
+
+Here $\mu_{H_r}$ is induced by $\mu_r$ on $d_r$-cycles modulo $d_r$-boundaries. The differential has bidegree $(r,1-r)$ and satisfies $d_r(xy)=(d_rx)y+(-1)^{a+b}x(d_ry)$ for $x\in E_r^{a,b}$: the sign uses total degree, not filtration degree. Step 4.1 therefore makes the top product well defined, and Step 5.1 proves that the square commutes. The vertical maps apply to homology classes of page cycles; they do not specify a transition on arbitrary elements of $E_r$.
+
+Under the degreewise-finite filtration hypothesis, Step 4.2 also identifies the stable product with the product on $\operatorname{gr}_F H^*(K)$, where $F^aH^n(K)=\operatorname{im}(H^n(F^aK)\to H^n(K))$. This abutment identification uses that additional hypothesis; the square holds for every $r\geq0$ without it. The rigorous proof above is independent of the illustration.

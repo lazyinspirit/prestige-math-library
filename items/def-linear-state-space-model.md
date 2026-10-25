@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-linear-state-space-model.json
+  precheck: n/a
 id: def-linear-state-space-model
 kind: definition
 title: Continuous-time linear state-space model
@@ -11,12 +14,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §2.1"
@@ -42,3 +39,34 @@ Assume the Axiom of Countable Choice, so the usual Lebesgue-measurable sets on $
 [[thm-lebesgue-measure-of-a-box-of-every-kind]]
 
 [[def-countable-choice]]
+
+
+## Remarks
+
+The block diagram separates the state-mediated path from the direct input-to-output path. Each circle adds its incoming signals. The integration block sends a signal $v$ to $x_0+\int_{t_0}^t v(s)\,ds$, so the feedback realizes $x'=Ax+Bu$ almost everywhere with $x(t_0)=x_0$. The output sum realizes $y=Cx+Du$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, thick]
+\node (u) at (-1.8,0) {$u(t)$};
+\node[draw,minimum width=0.8cm,minimum height=0.7cm] (B) at (-0.2,0) {$B$};
+\node[draw,circle,minimum size=0.55cm] (s) at (1.1,0) {$+$};
+\node[draw,minimum width=2.5cm,minimum height=1cm] (int) at (3.6,0) {$x_0+\int_{t_0}^{t}(\cdot)\,ds$};
+\node (x) at (5.6,0) {$x(t)$};
+\node[draw,minimum width=0.8cm,minimum height=0.7cm] (C) at (7,0) {$C$};
+\node[draw,circle,minimum size=0.55cm] (out) at (8.5,0) {$+$};
+\node (y) at (10,0) {$y(t)$};
+\node[draw,minimum width=0.8cm,minimum height=0.7cm] (D) at (3.6,2) {$D$};
+\node[draw,minimum width=0.8cm,minimum height=0.7cm] (A) at (3.6,-1.7) {$A$};
+\draw[->] (u) -- (B);
+\draw[->] (B) -- (s) node[midway,above] {$Bu$};
+\draw[->] (s) -- (int) node[midway,above] {$x'$};
+\draw[->] (int) -- (x);
+\draw[->] (x) -- (C);
+\draw[->] (C) -- (out) node[midway,above] {$Cx$};
+\draw[->] (out) -- (y);
+\draw[->] (-1.1,0) -- (-1.1,2) -- (D);
+\draw[->] (D) -- (8.5,2) -- (out) node[pos=0.8,right] {$Du$};
+\draw[->] (5.9,0) -- (5.9,-1.7) -- (A);
+\draw[->] (A) -- (1.1,-1.7) -- (s) node[pos=0.8,left] {$Ax$};
+\end{tikzpicture}
+```

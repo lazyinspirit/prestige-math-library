@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-every-finite-dimensional-irreducible-representation-has-a-highest-weight-vector.md

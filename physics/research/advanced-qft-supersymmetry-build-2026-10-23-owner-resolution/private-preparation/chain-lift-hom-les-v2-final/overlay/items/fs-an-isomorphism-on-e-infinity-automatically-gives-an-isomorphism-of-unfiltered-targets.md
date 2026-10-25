@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-an-isomorphism-on-e-infinity-automatically-gives-an-isomorphism-of-unfiltered-targets.md

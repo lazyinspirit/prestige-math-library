@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-dj-bridge-row-and-column-shapes-at-rank-three.md

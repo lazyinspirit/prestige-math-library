@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-s4-subwords-and-covers.json
+  precheck: pass
 id: ex-cg-s4-subwords-and-covers
 kind: example
 title: "Subwords, reflection deletions and the covers of the longest element in S4"
@@ -15,12 +18,6 @@ generation:
 proof_strategy: direct
 aliases: []
 landmark: false
-verification:
-  audited: "2026-10-08"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "Anders Bjorner and Francesco Brenti, Combinatorics of Coxeter Groups (Graduate Texts in Mathematics 231, Springer 2005; author-hosted complete PDF)"
@@ -70,3 +67,21 @@ Let $W=S_4$ with simple reflections $s_1=(1\ 2)$, $s_2=(2\ 3)$, $s_3=(3\ 4)$, so
 2.1 For (ii), every element of $S_4$ lies below $w_0$ by step 1.2 and therefore occurs as a subword value by [F4]; conversely every subword value belongs to $S_4$. Thus the $64$ position subsets realize exactly $S_4=[1,w_0]$, a set of $24$ elements. By the position-swapping rule [F2], the seven listed position sets evaluate respectively to $2134$, $1243$, $2143$, $1342$, $2341$, $2431$ and $4321$. Evaluating all $64$ subsets also gives exactly the six listed position sets for $2134$: the singletons $\{1\}$, $\{4\}$ and $\{6\}$ carry $s_1$, and $\{1,2,5\}$, $\{1,4,6\}$ and $\{2,5,6\}$ evaluate to $s_1s_2s_2=s_1$, $s_1^3=s_1$ and $s_2s_2s_1=s_1$, respectively. [F2, F4, step 1.2]
 
 3.1 Collecting: (i) is a direct instance of the subword criterion; (ii) shows that the $64$ subwords of one fixed reduced expression of $w_0$ realize exactly the $24$ elements of $S_4=[1,w_0]$, so subwords of one expression may repeat values, and the element $s_1$ arises from six different position sets; (iii) shows that the single-letter deletions of a reduced expression of $w_0$ realize three covers and three shorter elements, realizing the general cover criterion and reflection-deletion statements. All computations are finite and use no choice principle. [F1, F2, F3, F4, F5, F6, F7, step 1.1, step 1.2, step 2.1, step 1.3] ∎
+
+## Remarks
+
+The diagram shows only the three elements covered by $w_0$, with larger elements above smaller ones. Each edge is a Bruhat cover; its label is the deleted position in $s_1s_2s_3s_1s_2s_1$. The two rows have lengths $6$ and $5$, respectively.
+
+```tikz
+\begin{tikzpicture}
+\node (top) at (0,2) {$w_0=4321$};
+\node (left) at (-3,0) {$4312$};
+\node (middle) at (0,0) {$4231$};
+\node (right) at (3,0) {$3421$};
+\draw (top) -- node[above left] {$i=1$} (left);
+\draw (top) -- node[right] {$i=4$} (middle);
+\draw (top) -- node[above right] {$i=6$} (right);
+\end{tikzpicture}
+```
+
+The other deletion values, $4123$ and $2341$ of length $3$ and $1324$ of length $1$, are strictly below $w_0$ but are not joined to it by cover edges. This is a local cover view, not the full interval $[1,w_0]$. The edge and length assertions are those verified in step 1.3 using [F5]; the rigorous verification above is independent of the figure.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-universal-coefficient-theorem-always-gives-a-natural-direct-sum-decomposition.md

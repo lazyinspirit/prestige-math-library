@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-untwisted-motivic-integration-fails-for-one-arrow-quiver.json
+  precheck: pass
 id: cex-untwisted-motivic-integration-fails-for-one-arrow-quiver
 kind: counterexample
 title: "An untwisted monoid map fails for the one-arrow quiver"
@@ -25,8 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/1002.4372v1"
     - title: "Olivier Schiffmann, Lectures on Hall Algebras, arXiv:math/0611617v2, §§1.1–1.3"
       url: "https://arxiv.org/pdf/math/0611617v2"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement refuted
@@ -39,9 +41,9 @@ is $\mathcal I_Q([X\to\mathfrak M_{\mathbf d}])=[X]x^{\mathbf d}$.
 
 Let $Q$ have vertices $1,2$ and one arrow $1\to2$.
 
-~~~tikzcd
+```tikzcd
 1 \arrow[r] & 2
-~~~
+```
 
 For $k=\mathbb F_2$, let $S_1$ and $S_2$ be the representations supported
 at vertices $1$ and $2$. Use $S_1$ as quotient and $S_2$ as subrepresentation.

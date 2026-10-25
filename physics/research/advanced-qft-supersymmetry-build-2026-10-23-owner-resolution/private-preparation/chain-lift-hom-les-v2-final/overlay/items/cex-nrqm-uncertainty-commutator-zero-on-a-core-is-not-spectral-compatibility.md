@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-nrqm-uncertainty-commutator-zero-on-a-core-is-not-spectral-compatibility.md

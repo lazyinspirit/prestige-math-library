@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-dominant-weight-of-the-abstract-weight-lattice-integrates-to-every-compact-group-form.md

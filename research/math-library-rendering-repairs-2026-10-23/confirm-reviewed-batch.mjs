@@ -1,0 +1,10 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import {itemHashGuard} from '../../tools/item-hash.mjs';
+const base='research/math-library-rendering-repairs-2026-10-23',dir=process.argv[2],scopes=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),m=JSON.parse(fs.readFileSync(dir+'/manifest.json','utf8')),p=base+'/visual-confirmations.json',v=JSON.parse(fs.readFileSync(p,'utf8'));const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
+for(const [id,scope] of Object.entries(scopes)){
+ const e=m.items.find(x=>x.id===id);if(!e)throw Error('Not captured '+id);const raw=fs.readFileSync(dir+'/'+e.snapshot),receipt=JSON.parse(fs.readFileSync(base+'/receipts/'+e.id+'.json','utf8'));
+ if(sha(raw)!==e.source_sha256||itemHashGuard(raw.toString())!==receipt.content_sha256||itemHashGuard(fs.readFileSync(e.source,'utf8'))!==receipt.content_sha256)throw Error('Stale capture: '+id);
+ const screenshots=scope.tiles.map(i=>dir.replace(/^research\//,'')+'/screenshots/'+id+'--'+String(i).padStart(2,'0')+'.png');for(const f of screenshots)if(!fs.existsSync('research/'+f))throw Error('Missing tile');
+ if(v[id]){if(v[id].content_sha256===receipt.content_sha256)throw Error('Existing same-current confirmation '+id);const h=base+'/visual-confirmation-history';fs.mkdirSync(h,{recursive:true});const old=h+'/'+id+'-'+v[id].content_sha256+'.json';if(!fs.existsSync(old))fs.writeFileSync(old,JSON.stringify(v[id],null,2)+'\n',{flag:'wx'});}
+ v[id]={reviewer:'/root/rendering_repair_coordinator',checked_at:new Date().toISOString(),scope:scope.scope+' Specified tiles actually viewed at original resolution; technical changed-region check, not a whole-item mathematical audit.',content_sha256:receipt.content_sha256,source_sha256:e.source_sha256,screenshots,viewed_tiles:screenshots,preview_manifest:dir+'/manifest.json'};
+}
+fs.writeFileSync(p+'.tmp',JSON.stringify(v,null,2)+'\n');fs.renameSync(p+'.tmp',p);console.log('Confirmed '+Object.keys(scopes).length+' changed regions; total '+Object.keys(v).length+'.');

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-positive-braids-have-left-and-right-gcds-and-lcms.json
+  precheck: pass
 id: thm-positive-braids-have-left-and-right-gcds-and-lcms
 kind: theorem
 title: "Positive braids have left and right gcds and lcms"
@@ -27,9 +30,7 @@ sources:
       url: "https://arxiv.org/abs/1010.0321"
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter II, Section 4, printed pp. 63-83"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
@@ -124,3 +125,51 @@ used. For $n\le1$ the monoid is trivial and all these elements are $1$.
   uses.
 - Nothing here uses a choice principle: the enumerations are of finite sets of
   words and all joins are determined, not chosen.
+
+**Illustration (order bounds and reversal).** Put $g=a\wedge_L b$ and
+$j=a\vee_L b$. Let $d$ be any common left divisor of $a,b$, and $m$ any
+common left multiple. Every upward arrow on the left means
+$\preccurlyeq_L$; every upward arrow on the right means $\preccurlyeq_R$.
+The panels show selected non-strict order relations, not Hasse diagrams or
+exhaustive lattices; displayed nodes may coincide.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,scale=1.25,transform shape,>=stealth]
+\node (d) at (0,0) {$d$};
+\node (g) at (0,1) {$g$};
+\node (a) at (-1,2) {$a$};
+\node (b) at (1,2) {$b$};
+\node (j) at (0,3) {$j$};
+\node (m) at (0,4) {$m$};
+\draw[->] (d)--(g);
+\draw[->] (g)--(a);
+\draw[->] (g)--(b);
+\draw[->] (a)--(j);
+\draw[->] (b)--(j);
+\draw[->] (j)--(m);
+\node at (0,4.7) {Left divisibility};
+\node (rd) at (5,0) {$\rho(d)$};
+\node (rg) at (5,1) {$\rho(g)$};
+\node (ra) at (4,2) {$\rho(a)$};
+\node (rb) at (6,2) {$\rho(b)$};
+\node (rj) at (5,3) {$\rho(j)$};
+\node (rm) at (5,4) {$\rho(m)$};
+\draw[->] (rd)--(rg);
+\draw[->] (rg)--(ra);
+\draw[->] (rg)--(rb);
+\draw[->] (ra)--(rj);
+\draw[->] (rb)--(rj);
+\draw[->] (rj)--(rm);
+\node at (5,4.7) {Right divisibility};
+\draw[->] (1.7,2)--node[above] {$\rho$} (3.1,2);
+\end{tikzpicture}
+```
+
+On the left, $d\preccurlyeq_L g$ is the greatest-common-divisor property,
+and $j\preccurlyeq_L m$ is the least-common-multiple property; the four
+middle arrows express that $g$ is a common divisor and $j$ a common multiple.
+By [F4], reversal preserves these arrow directions while exchanging the two
+orders. Consequently the right panel has
+$\rho(g)=\rho(a)\wedge_R\rho(b)$ and
+$\rho(j)=\rho(a)\vee_R\rho(b)$, as in step 4.1. The proof above is independent
+of this illustration.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-minimal-normal-subgroups-of-finite-groups-are-characteristically-simple.md

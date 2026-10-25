@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-invertible-matrix-can-fail-unpivoted-lu-at-the-first-pivot.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-pair-of-pants-is-a-cobordism-realizing-addition-of-circles.md

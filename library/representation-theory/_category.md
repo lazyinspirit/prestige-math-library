@@ -3,9 +3,20 @@ name: representation-theory
 title: Representation Theory of Groups
 status: published
 ---
+Representation Theory of Groups studies linear actions of groups on vector spaces and
+modules, over fields and in topological settings. Finite-group topics develop
+characters, induction, rationality and fields of definition, projective representations,
+Clifford theory and monomial characters. Modular representation theory treats blocks,
+defect groups, Brauer maps, vertices, sources and Green correspondences. For compact and
+locally compact groups, the collection develops Haar measure, unitary representations,
+positive-type functions, GNS constructions, induction, imprimitivity and direct
+integrals. Further topics include group C*-algebras, amenability, property T, and
+representations of finite general linear and real special linear groups.
 
-Representation theory studies groups through their linear actions on vector spaces and modules. This collection develops methods that apply across families of groups: character theory, induction and restriction, fields of definition, projective representations and Clifford theory. The modular branch studies blocks, defect groups, relative projectivity and the Green and Brauer correspondences, with coefficient characteristic and semisimplicity hypotheses kept explicit.
-
-The topological branch begins with Haar measure and convolution, then constructs unitary representations, positive-type functions and cyclic representations. Averaging leads to complete reducibility for compact groups; Peter–Weyl theory supplies the density and decomposition statements needed for their harmonic analysis. Induction for locally compact groups leads toward imprimitivity, group operator algebras and direct integrals. Amenability, property T and the representations of the real special linear group provide concrete applications and boundaries.
-
-Specialized theories have four categories: Symmetric Groups and Symmetric Functions; Quantum Groups and Crystal Bases; Hecke Algebras and Categorification; and Category O and Geometric Representation Theory. Braid Groups and Hopf Algebras & Hecke Algebras have their own categories. Page and item publication statuses distinguish available proofs from future work.
+Finite-group arguments draw on Abstract Algebra, while analytic and unitary topics use
+Functional Analysis and Fourier Analysis; specialized pages also draw on Lie Theory,
+Commutative Algebra and topology. These methods support work in Category O and Geometric
+Representation Theory, Hecke Algebras and Categorification, Quantum Algebra and
+Representation Theory, Symmetric Groups and Symmetric Functions, and Quantum Computing.
+The connections bring finite-group structure together with harmonic analysis and
+geometry.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives.md

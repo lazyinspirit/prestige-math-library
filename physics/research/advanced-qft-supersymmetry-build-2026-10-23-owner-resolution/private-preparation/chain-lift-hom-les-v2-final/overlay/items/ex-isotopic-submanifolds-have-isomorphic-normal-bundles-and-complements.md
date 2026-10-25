@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-isotopic-submanifolds-have-isomorphic-normal-bundles-and-complements.md

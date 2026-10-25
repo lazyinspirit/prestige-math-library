@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-ordinary-node-plane-curve-germ.json
+  precheck: pass
 id: ex-ordinary-node-plane-curve-germ
 kind: example
 title: "An ordinary node has two smooth branches"
@@ -33,9 +36,7 @@ sources:
     - title: "Jean-Pierre Demailly, Complex Analytic and Differential Geometry, Chapter II §§2, 4 and 6"
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (6.6) principal defining equations and irreducible components of a codimension-one germ (pp. 106–107)."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Example
@@ -84,10 +85,36 @@ parametrisation $t\mapsto(t,\pm ts(t))$ with first coordinate $t$.
 
 3.2 Each branch is a holomorphic hypersurface graph and carries an injective convergent parametrisation. For $|t|$ small, $\gamma_+(t)=(t,\,ts(t))$ is holomorphic with $\gamma_+(\Delta)=Z(g_+)\cap\{|x|<\rho\}$ for a suitable radius $\rho>0$, since $y-xs(x)=0$ is exactly the graph $y=xs(x)$; similarly $\gamma_-(t)=(t,-ts(t))$ has image $Z(g_-)\cap\{|x|<\rho\}$. Both maps are injective because their first coordinate is $t$, and both are restrictions of the holomorphic function $s$ of step 1.1, hence convergent. Every point of each branch is therefore regular as a point of that branch by [F5]. At a point other than the origin, step 2.3 separates the two graphs, so $X$ locally equals the branch through that point and is regular there. This does not assert regularity of their union at the origin. [step 1.1, step 2.2, F5, construct]
 
-4.1 The origin is the only singular point of $X$ near $0$. By step 3.1 the reduced defining germ of $X$ is $f$, and
-
-$$df=\bigl(-2x(1+x)-x^2,\;2y\bigr)=\bigl(-x(2+3x),\;2y\bigr)$$
-
-vanishes at the origin, so the origin is singular by [F5]. Conversely let $q=(x,y)\in X$ with $q\ne0$; by step 3.1 the point lies on $Z(g_+)$ or on $Z(g_-)$, and by step 2.3 that forces $x\ne0$. If $q=(x,xs(x))$ with $x\ne0$ small, then $df(q)=(-x(2+3x),\,2xs(x))$ has $2xs(x)\ne0$ because $x\ne0$ and $s(x)\ne0$; the same computation with $-xs(x)$ gives $df(q)\ne0$ on the other branch. At such a point the other factor $g_\mp$ is nonvanishing, so $f$ is a unit times the local graph equation $g_\pm$; hence $f$ is a local reduced equation there. Thus every point of $X$ other than the origin is regular by [F5], and the two branches meet there with distinct tangent directions $(1,\pm1)$, since $s(0)=1$ makes their linear parts $y=\pm x$. [step 3.1, step 3.2, F5, algebra]
+4.1 The origin is the only singular point of $X$ near $0$. By step 3.1 the reduced defining germ of $X$ is $f$, and $df=\bigl(-2x(1+x)-x^2,\;2y\bigr)=\bigl(-x(2+3x),\;2y\bigr)$ vanishes at the origin, so the origin is singular by [F5]. Conversely let $q=(x,y)\in X$ with $q\ne0$; by step 3.1 the point lies on $Z(g_+)$ or on $Z(g_-)$, and by step 2.3 that forces $x\ne0$. If $q=(x,xs(x))$ with $x\ne0$ small, then $df(q)=(-x(2+3x),\,2xs(x))$ has $2xs(x)\ne0$ because $x\ne0$ and $s(x)\ne0$; the same computation with $-xs(x)$ gives $df(q)\ne0$ on the other branch. At such a point the other factor $g_\mp$ is nonvanishing, so $f$ is a unit times the local graph equation $g_\pm$; hence $f$ is a local reduced equation there. Thus every point of $X$ other than the origin is regular by [F5], and the two branches meet there with distinct tangent directions $(1,\pm1)$, since $s(0)=1$ makes their linear parts $y=\pm x$. [step 3.1, step 3.2, F5, algebra]
 
 5.1 Steps 2.1 to 4.1 establish the assertions: $y^2-x^2(1+x)$ is a reduced equation of $X$ whose irreducible components are the two smooth branches $y=\pm x\sqrt{1+x}$ described by the unit square root $s$ of $1+x$; the origin is their only intersection and the only singular point of the germ, with distinct tangent directions, so $X$ is an ordinary node; and each branch carries the convergent parametrisation $t\mapsto(t,\pm ts(t))$ with first coordinate $t$. [step 3.2, step 4.1] ∎
+
+
+## Remarks
+
+The diagram shows a real slice of the two complex branches, with real
+$x$ restricted to $[-1/4,1/4]$. Here the local square root $s$ from step 1.1
+is the positive real square root of $1+x$. The solid curves are
+$y=xs(x)$ and $y=-xs(x)$; the dashed lines are their tangents $y=x$ and
+$y=-x$ at the origin. Their sole local intersection and distinct tangent
+directions are established in steps 2.3 and 4.1. The proof is independent
+of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=7cm,y=7cm]
+\draw[->,gray] (-0.36,0) -- (0.4,0) node[right] {$x$};
+\draw[->,gray] (0,-0.36) -- (0,0.4) node[above] {$y$};
+\draw[dashed,gray] (-0.31,-0.31) -- (0.31,0.31);
+\draw[dashed,gray] (-0.31,0.31) -- (0.31,-0.31);
+\node[anchor=south east] at (-0.27,0.29) {$y=-x$};
+\node[anchor=north east] at (-0.27,-0.29) {$y=x$};
+\draw[blue,very thick,domain=-0.25:0.25,samples=101]
+  plot (\x,{\x*sqrt(1+\x)});
+\draw[red,very thick,domain=-0.25:0.25,samples=101]
+  plot (\x,{-\x*sqrt(1+\x)});
+\node[blue,anchor=west] at (0.26,0.28) {$y=xs(x)$};
+\node[red,anchor=west] at (0.26,-0.28) {$y=-xs(x)$};
+\fill (0,0) circle (1.5pt);
+\node[anchor=north west] at (0.015,-0.015) {$0$};
+\end{tikzpicture}
+```

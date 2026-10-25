@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-de-rham-and-smooth-singular-mayer-vietoris-diagram-commutes-away-from-connectors.md

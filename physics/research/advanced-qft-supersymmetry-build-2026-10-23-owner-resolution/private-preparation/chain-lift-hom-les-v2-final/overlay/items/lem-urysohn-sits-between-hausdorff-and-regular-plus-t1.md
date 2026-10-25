@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-urysohn-sits-between-hausdorff-and-regular-plus-t1.md

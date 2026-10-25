@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-local-frames-and-local-trivializations-are-equivalent-data.md

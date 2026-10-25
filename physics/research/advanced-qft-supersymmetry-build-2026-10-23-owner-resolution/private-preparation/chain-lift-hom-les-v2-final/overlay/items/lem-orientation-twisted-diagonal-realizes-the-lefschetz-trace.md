@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace.md

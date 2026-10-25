@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-closed-compactly-supported-forms-integrate-to-zero-on-boundaries.md

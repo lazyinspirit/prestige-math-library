@@ -1,0 +1,112 @@
+{
+  "id": "def-qa-33-feynman-kitaev-history-hamiltonian",
+  "group": "dqa_011",
+  "agent": "/root/dqa_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone image contains only the definition. A concrete time strip materially clarifies the change from two-clock boundary windows to three-clock interior windows and separates coherent propagation from endpoint penalties. This is a warranted explanatory addition under the expanded diagram scope, not a failure of the original algebraic definition.",
+      "action": "Appended a T=4 unary-clock strip in final Remarks, with computation states, forward gate labels, exact local pre/post windows, and explanatory endpoint/clock-penalty text.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a mathematically checked T=4 history-state clock illustration; preserved the entire original source byte-for-byte as a prefix.",
+  "source_lines_after": {
+    "remarks": [
+      44,
+      70
+    ],
+    "figure": [
+      48,
+      68
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Computation space H_comp and four clock qubits C1,C2,C3,C4; nodes psi_t tensor |c_t> belong to H_comp tensor (C^2)^tensor4.",
+      "justification": "Definition lines 35–37 and local ordered-tensor/Dirac suppliers retain the computation-first tensor ordering. Substitution into c_t=1^t0^(4-t) yields exactly 0000,1000,1100,1110,1111."
+    },
+    {
+      "maps_and_orientation": "The four arrows run left-to-right in increasing time and carry U1,U2,U3,U4. They denote the joint state update, explicitly not application of H_prop,t.",
+      "justification": "By psi_t=U_t...U1 phi, U_t psi_(t-1)=psi_t. The legal-clock forward rank-one factor |c_t><c_(t-1)| maps the pre clock vector to the post clock vector under the local Dirac convention; H_prop,t also has diagonal and adjoint terms with coefficient -1/2, so those are not represented as a unitary evolution arrow."
+    },
+    {
+      "windows": "t=1: 00->10 on C1C2; t=2:100->110 on C1C2C3; t=3:100->110 on C2C3C4; t=4:10->11 on C3C4.",
+      "justification": "Direct restrictions of the five listed words give these four pairs exactly, matching definition line 37. The T=1 case 0->1 on C1 is stated separately. Exhaustive local enumeration additionally checked all 78 propagation edges for T=1..12: each pre/post window isolates exactly t-1/t among legal words."
+    },
+    {
+      "penalties": "On the displayed legal subspace, H_in has clock support only at t=0; H_out only at t=4 with N=5; H_clock is zero.",
+      "justification": "Among the five words only 0000 has C1=0, only 1111 has C4=1, and none contains adjacent 01. Substitution into line 40 gives the stated supports, output rejection projector |0><0|, and weight T+1=5. Each edge uses U_t computation support and its shown clock window, preserving the at-most-five-local claim."
+    },
+    {
+      "proof_independence": "The full original definition, norm identity, and positivity argument are unchanged. The figure only illustrates their T=4 specialization and supplies no premise to them."
+    }
+  ],
+  "evidence": {
+    "before_file": "research/math-library-rendering-repairs-2026-10-23/before/def-qa-33-feynman-kitaev-history-hamiltonian.md",
+    "before_raw_sha256": "12be96c1d76dba46d92f48fc325ba8de67cbd4753284d6de8f8bc939d241d4f1",
+    "current_raw_sha256": "b475e63b829e0740804c492e8e4803b7e0bbedb2d6477e32c3cf6e3b6250bf1f",
+    "original_screenshot": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/def-qa-33-feynman-kitaev-history-hamiltonian--01.png",
+    "original_screenshot_sha256": "8f7f4e23076e3564c75ed74df23c7d0835220d42943afc933914c0840d3007fe",
+    "path_resolution": "Declared evidence_dir/diagram-supplement screenshot path was absent; found authentic image in corresponding category screenshots directory and verified exact recorded SHA256.",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqa-011/manifest.json",
+    "preview_manifest_sha256": "40cfde2df2b95331a0f37aa8464b31efbec73508d95d8a1403ab7683e0f65cdb",
+    "preview_source_sha256": "b475e63b829e0740804c492e8e4803b7e0bbedb2d6477e32c3cf6e3b6250bf1f",
+    "preview_png": "research/math-library-rendering-repairs-2026-10-23/previews/dqa-011/screenshots/def-qa-33-feynman-kitaev-history-hamiltonian--01.png",
+    "preview_png_sha256": "2846cc391c2e1e10b34f72b9947e113fa7c0c4ffb369c6a6747e7ffa91058d24",
+    "visual_inspection": "Viewed authentic original and fresh native PNG separately at original resolution. Fresh native TikZ visibly has five nodes and all four arrows; gate/window labels are readable, without clipping or overlap, with adequate dark-background contrast. Native capture receipt reports tikz_count=1, diagram_failures=[], katex_errors=[]."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-qa-33-feynman-kitaev-history-hamiltonian.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-qa-33-feynman-kitaev-history-hamiltonian.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0,
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-qa-33-feynman-kitaev-history-hamiltonian.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqa-011 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-qa-33-feynman-kitaev-history-hamiltonian --out research/math-library-rendering-repairs-2026-10-23/previews/dqa-011",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 13
+      }
+    },
+    {
+      "command": "Local in-memory Node enumeration of all legal clock words and prescribed pre/post windows, T=1..12",
+      "exit_code": 0,
+      "output": "All 78 edges isolate exactly the adjacent times; T=4 figure agrees. Original complete source remains byte-identical prefix."
+    }
+  ],
+  "remaining_issues": [
+    "Fresh native PNG leaves the unchanged title/Definition area blank despite their presence in generated HTML; the added Remarks and compiled diagram are fully visible. This capture artifact does not establish a source defect in the preserved definition. Original standalone image independently covers the unchanged definition.",
+    "Preview is local native ItemBody/SSR TikZ coverage, not a production route or metadata-footer check; reference-title map has 13 unrelated parse diagnostics."
+  ]
+}

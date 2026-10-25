@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-fishers-exact-test-from-two-binomial-samples.json
+  precheck: pass
 id: ex-fishers-exact-test-from-two-binomial-samples
 kind: example
 title: "Fisher's exact test from two Bernoulli samples"
@@ -24,12 +27,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: "Berkeley Stat 210A Course Reader, Testing with Nuisance Parameters, Conditional testing section"
@@ -69,3 +66,31 @@ and set $Q(s,\{k\})=0$ outside the displayed range. For each $s$, these weights 
 3.1 For $n_1=n_2=2$ and $s=2$, the feasible values are $k=0,1,2$, with counts $1,4,1$ among the six two-success sequences. Their probabilities are therefore $1/6,4/6,1/6$. Summing the masses at or above each observed value gives inclusive p-values $1,5/6,1/6$. The strict-tail-plus-tie formulas are respectively $5/6+U/6$, $1/6+2U/3$, and $U/6$; their intervals $[5/6,1]$, $[1/6,5/6]$, and $[0,1/6]$ have lengths matching the three conditional masses. [F3, F4, step 2.1, given, algebra]
 
 4.1 For each margin $s$ with $P_p(S=s)>0$, [F5] makes the nonrandomized p-value conditionally superuniform and the randomized value conditionally uniform under the null. Rejecting when the nonrandomized value is at most $\alpha$ is therefore a conditional level-$\alpha$ test, so [F6] gives unconditional size at most $\alpha$. The test function of the randomized rule is $\varphi_\alpha(x)=P_U(p_U(x,U)\le\alpha)$; it is measurable because the sample space is finite. By finite conditioning and independence of $U$, $E_p[\varphi_\alpha(X)\mid S=s]=P_p(p_U\le\alpha\mid S=s)=\alpha$, so the randomized rule has conditional and unconditional size exactly $\alpha$. At $p=0$ and $p=1$ the only observed margin has a degenerate conditional law; its inclusive value is $1$ and its randomized value is $U$, so the same validity conclusions hold. [F3, F5, F6, step 2.1, step 3.1, given] ∎
+
+## Remarks
+
+For $n_1=n_2=2$ and $S=2$, the bar heights show the conditional masses $Q(2,\{k\})$. The labels below give the inclusive upper tails $Q(2,\{j:j\ge k\})$: each tail sums the bar at $k$ and all bars to its right. Larger $K$ favors the one-sided alternative. These values are computed in step 3.1; the verification does not depend on the figure.
+
+```tikz
+\begin{tikzpicture}[x=2.2cm,y=1cm]
+  \draw[->] (-0.5,0) -- (2.7,0) node[right] {$k$};
+  \draw[->] (-0.5,0) -- (-0.5,4.9) node[above] {$Q(2,\{k\})$};
+  \draw (-0.56,1) -- (-0.44,1) node[left=5pt] {$1/6$};
+  \draw (-0.56,4) -- (-0.44,4) node[left=5pt] {$4/6$};
+  \draw[fill=blue!20] (-0.16,0) rectangle (0.16,1);
+  \draw[fill=blue!20] (0.84,0) rectangle (1.16,4);
+  \draw[fill=blue!20] (1.84,0) rectangle (2.16,1);
+  \node[above] at (0,1) {$1/6$};
+  \node[above] at (1,4) {$4/6$};
+  \node[above] at (2,1) {$1/6$};
+  \node[below] at (0,0) {$0$};
+  \node[below] at (1,0) {$1$};
+  \node[below] at (2,0) {$2$};
+  \node[left] at (-0.2,-0.9) {inclusive tail:};
+  \node at (0,-0.9) {$1$};
+  \node at (1,-0.9) {$5/6$};
+  \node at (2,-0.9) {$1/6$};
+  \draw[->] (0,-1.5) -- (2,-1.5) node[midway,below] {larger $K$};
+\end{tikzpicture}
+```
+

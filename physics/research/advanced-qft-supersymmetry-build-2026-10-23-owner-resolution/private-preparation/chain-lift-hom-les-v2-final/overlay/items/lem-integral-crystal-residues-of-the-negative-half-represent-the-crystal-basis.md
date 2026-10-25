@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-integral-crystal-residues-of-the-negative-half-represent-the-crystal-basis.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-finitely-generated-group-with-a-word-metric-is-a-geodesic-metric-space.md

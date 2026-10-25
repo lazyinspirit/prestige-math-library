@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-pullback-of-the-thom-class-along-a-transverse-section.md

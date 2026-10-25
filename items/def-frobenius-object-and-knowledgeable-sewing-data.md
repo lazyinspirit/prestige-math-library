@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-frobenius-object-and-knowledgeable-sewing-data.json
+  precheck: n/a
 id: def-frobenius-object-and-knowledgeable-sewing-data
 kind: definition
 title: "Frobenius objects and typed colored knowledgeable sewing data"
@@ -23,8 +26,7 @@ sources:
     - title: "Gregory W. Moore and Graeme Segal, D-branes and K-theory in 2D topological field theory, arXiv:hep-th/0609042v1"
       url: "https://arxiv.org/pdf/hep-th/0609042v1"
       locator: "§2.1–2.4, PDF pp. 5–12, for the independent open/closed algebraic sewing data and Cardy condition."
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -48,11 +50,14 @@ An **S-colored knowledgeable Frobenius datum** consists of:
 - a commutative Frobenius object $(C,\mu_C,\eta_C,\Delta_C,\epsilon_C)$;
 - a finite-dimensional vector space $A_{ab}$ for every ordered pair $a,b\in S$;
 - maps, for every $a,b,c\in S$,
-  $$
+
+$$
 \mu_{abc}:A_{ab}\otimes A_{bc}\to A_{ac},\quad \Delta_{abc}:A_{ac}\to A_{ab}\otimes A_{bc},
 $$
-  and, for every $a\in S$,
-  $$
+
+and, for every $a\in S$,
+
+$$
 \eta_a:k\to A_{aa},\quad \epsilon_a:A_{aa}\to k,\quad i_a:C\to A_{aa},\quad i_a^*:A_{aa}\to C.
 $$
 
@@ -137,7 +142,9 @@ No equality $C=Z(A_{aa})$ is part of the definition. The Cardy equation is an ad
 
 The diagram records the two typed Frobenius composites in the uncolored case. Both arrows start at $A\otimes A$ and end at $A\otimes A$; the associator indicated by $\alpha$ is part of the second composite. The diagram is explanatory; the equations above are the definitions.
 
-~~~tikzcd
+```tikzcd
+\begin{tikzcd}[scale=2, transform shape]
 A\otimes A \arrow[r, bend left=18, "\Delta\circ\mu"] \arrow[r, bend right=18, "{(1\otimes\mu)\circ\alpha\circ(\Delta\otimes1)}"']
 & A\otimes A
-~~~
+\end{tikzcd}
+```

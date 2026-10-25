@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-power-weight-fails-at-both-a-p-endpoints.json
+  precheck: pass
 id: cex-power-weight-fails-at-both-a-p-endpoints
 kind: counterexample
-title: A power weight fails at both A_p endpoints
+title: A power weight fails at both Aₚ endpoints
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Example 4.17, printed p. 75"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement refuted

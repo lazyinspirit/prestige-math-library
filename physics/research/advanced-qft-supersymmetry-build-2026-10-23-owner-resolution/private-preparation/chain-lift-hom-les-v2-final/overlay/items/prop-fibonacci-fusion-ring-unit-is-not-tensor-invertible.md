@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-fibonacci-fusion-ring-unit-is-not-tensor-invertible.md

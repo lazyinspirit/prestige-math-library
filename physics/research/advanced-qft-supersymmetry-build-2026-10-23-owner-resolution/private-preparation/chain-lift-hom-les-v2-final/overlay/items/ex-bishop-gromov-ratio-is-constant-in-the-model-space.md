@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-bishop-gromov-ratio-is-constant-in-the-model-space.md

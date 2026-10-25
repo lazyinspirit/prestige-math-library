@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-temperley-lieb-zero-loop-normalized-trace-fails.json
+  precheck: pass
 id: ex-temperley-lieb-zero-loop-normalized-trace-fails
 kind: example
 title: "At loop value zero the normalized closure trace is undefined"
@@ -46,3 +49,25 @@ Set $R=\mathbb C$ and $\delta=0$. The unnormalized planar closure $\operatorname
 1.1 At $n=1$, closing the single vertical strand joins its top and bottom endpoints to make exactly one circle. By [F1] and [F2], $\operatorname{Tr}_1(1_1)=\delta^1=0$. [F1, F2, given]
 
 2.1 Any normalized trace must send the algebra identity to $1$, but the proposed scalar multiple $\delta^{-1}\operatorname{Tr}_1$ is undefined because $0$ has no multiplicative inverse in $\mathbb C$. Even replacing it by any scalar multiple $c\operatorname{Tr}_1$ gives $c\operatorname{Tr}_1(1_1)=c\cdot0=0$, never $1$. Hence the unnormalized closure exists while the normalized closure does not. [F1, step 1.1, algebra] ∎
+
+## Remarks
+
+The picture shows the one-strand identity and its closure. The arrow denotes the operation of joining the two boundary endpoints outside the rectangle, not a strand or a morphism between object labels. The closed curve has one component, so its unnormalized value is $\delta=0$ in this example. The normalized expression $\delta^{-1}\operatorname{Tr}_1$ is undefined; the verification above does not depend on the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1]
+  \draw[dashed] (-0.55,0) rectangle (0.55,1.6);
+  \draw[thick] (0,0) -- (0,1.6);
+  \fill (0,0) circle (1.5pt);
+  \fill (0,1.6) circle (1.5pt);
+  \node[above] at (0,1.85) {$1_1:1\to1$};
+  \node[below] at (0,-0.35) {identity strand};
+  \draw[->] (1,0.8) -- (2.3,0.8);
+  \node[above] at (1.65,0.9) {close};
+  \draw[dashed] (2.75,0) rectangle (3.85,1.6);
+  \draw[thick] (3.3,0) -- (3.3,1.6);
+  \draw[thick] (3.3,1.6) .. controls (4.8,2.1) and (4.8,-0.5) .. (3.3,0);
+  \node[above] at (3.7,2.05) {one closed component};
+  \node[below] at (3.7,-0.35) {$\mathrm{Tr}_1(1_1)=\delta=0$};
+\end{tikzpicture}
+```

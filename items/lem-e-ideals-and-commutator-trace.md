@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-e-ideals-and-commutator-trace.json
+  precheck: pass
 id: lem-e-ideals-and-commutator-trace
 kind: lemma
-title: "E is a k-algebra, the E_i are ideals, and commutator traces vanish"
+title: "$E$ is a $k$-algebra, the $E_i$ are ideals, and commutator traces vanish"
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -20,18 +23,12 @@ sources:
   references:
     - title: "John Tate, Residues of differentials on curves, Ann. Sci. E.N.S. (4) 1 (1968) 149-159"
       url: "http://www.numdam.org/article/ASENS_1968_4_1_1_149_0.pdf"
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement
 
-Keep the notation of [[def-commensurable-subspaces-and-ideals-of-endomorphisms]]:
+Keep the notation of [[def-commensurable-subspaces-and-ideals-of-endomorphisms|Commensurable subspaces and the ideals $E_0$, $E_1$, $E_2$ of $E$]]:
 $k$ is a field, $V$ a $k$-vector space ([[def-vector-space]]), $A\subseteq V$ a
 $k$-subspace, $K$ a commutative $k$-algebra acting on $V$ with $fA<A$ for all
 $f\in K$, and $E,E_1,E_2,E_0$ are the $k$-subspaces of
@@ -63,7 +60,7 @@ inherited from the linear algebra suppliers ([[def-axiom-of-choice]]). Then:
 
 [F4] (T4)-(T6) of [[lem-finite-potent-trace-linearity-and-conjugation]]: $\operatorname{Tr}_V$ is $k$-linear on every finite potent subspace $F\subseteq\operatorname{End}_k(V)$; if $\varphi\colon V'\to V$ and $\psi\colon V\to V'$ are $k$-linear with $\psi\varphi$ finite potent, then $\varphi\psi$ is finite potent with $\operatorname{Tr}_V(\varphi\psi)=\operatorname{Tr}_{V'}(\psi\varphi)$; and if $\gamma\in E_0$, $\psi\in E$, or $\gamma\in E_1$, $\psi\in E_2$, then $[\gamma,\psi]\in E_0$ with $\operatorname{Tr}_V([\gamma,\psi])=0$.
 
-[F5] $A<B$ means that $(A+B)/B$ is finite-dimensional and $A\sim B$ means $A<B$ and $B<A$; the relation $<$ is reflexive, transitive, preserved by $k$-linear maps and by finite sums, and unchanged on commensurable subspaces; $E=\{\theta:\theta A<A\}$, $E_1=\{\theta:\theta V<A\}$, $E_2=\{\theta:\theta A\text{ finite-dimensional}\}$, $E_0=E_1\cap E_2=\{\theta:\theta V<A\text{ and }\theta A\text{ finite-dimensional}\}$, and $E,E_1,E_2$ are $k$-subspaces while $E_0=E_1\cap E_2$; the image of $K$ is contained in $E$ by the assumed $fA<A$. ([[def-commensurable-subspaces-and-ideals-of-endomorphisms]])
+[F5] $A<B$ means that $(A+B)/B$ is finite-dimensional and $A\sim B$ means $A<B$ and $B<A$; the relation $<$ is reflexive, transitive, preserved by $k$-linear maps and by finite sums, and unchanged on commensurable subspaces; $E=\{\theta:\theta A<A\}$, $E_1=\{\theta:\theta V<A\}$, $E_2=\{\theta:\theta A\text{ finite-dimensional}\}$, $E_0=E_1\cap E_2=\{\theta:\theta V<A\text{ and }\theta A\text{ finite-dimensional}\}$, and $E,E_1,E_2$ are $k$-subspaces while $E_0=E_1\cap E_2$; the image of $K$ is contained in $E$ by the assumed $fA<A$. ([[def-commensurable-subspaces-and-ideals-of-endomorphisms|Commensurable subspaces and the ideals $E_0$, $E_1$, $E_2$ of $E$]])
 
 ## Proof
 

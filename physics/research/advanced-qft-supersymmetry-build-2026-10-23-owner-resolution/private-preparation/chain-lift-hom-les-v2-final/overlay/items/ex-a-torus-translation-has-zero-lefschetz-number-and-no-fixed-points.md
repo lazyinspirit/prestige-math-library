@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-torus-translation-has-zero-lefschetz-number-and-no-fixed-points.md

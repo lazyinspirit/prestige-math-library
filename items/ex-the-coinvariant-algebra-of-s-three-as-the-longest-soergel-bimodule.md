@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-coinvariant-algebra-of-s-three-as-the-longest-soergel-bimodule.json
+  precheck: pass
 id: ex-the-coinvariant-algebra-of-s-three-as-the-longest-soergel-bimodule
 kind: example
-title: "The coinvariant algebra of S_3 as the Soergel bimodule of the longest element"
+title: "The coinvariant algebra of $S_3$ as the Soergel bimodule of the longest element"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -25,8 +28,7 @@ sources:
     - title: "Riche, La theorie de Hodge des bimodules de Soergel (d'apres Soergel et Elias-Williamson), Seminaire Bourbaki no. 1139 (arXiv:1711.02464, Octobre 2017)"
       url: "https://arxiv.org/pdf/1711.02464"
       locator: "Section 1.7 (modules de Soergel) and Section 0.1 (the geometric identification for finite Weyl groups)"
-verification:
-  precheck: pass
+
 ---
 
 ## Example

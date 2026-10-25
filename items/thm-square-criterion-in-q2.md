@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-square-criterion-in-q2.json
+  precheck: pass
 id: thm-square-criterion-in-q2
 kind: theorem
-title: "Square criterion in Q_2"
+title: 'Square criterion in $\mathbb{Q}_2$'
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [cor-zp-is-the-valuation-ring-of-qp, thm-p-adic-newton-criterion]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -39,9 +35,9 @@ in $\mathbb Q_2$ if and only if $n$ is even and $u \equiv 1 \pmod 8$.
 
 **Given:** $x = 2^n u$ with odd $u \in \mathbb Z_2^\times$.
 
-[L1] $\mathbb Z_2$ is the valuation ring of $\mathbb Q_2$ ([[cor-zp-is-the-valuation-ring-of-qp]]).
+[L1] $\mathbb Z_2$ is the valuation ring of $\mathbb Q_2$ ([[cor-zp-is-the-valuation-ring-of-qp|$\mathbb{Z}_p$ is the valuation ring of $\mathbb{Q}_p$]]).
 
-[L2] Newton's criterion holds in $\mathbb Q_2$ ([[thm-p-adic-newton-criterion]]).
+[L2] Newton's criterion holds in $\mathbb Q_2$ ([[thm-p-adic-newton-criterion|Newton's criterion in $\mathbb{Q}_p$]]).
 
 ## Proof
 

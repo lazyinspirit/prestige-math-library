@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-finite-dimensional-gapped-free-hamiltonian-and-stable-equivalence.json
+  precheck: n/a
 id: def-finite-dimensional-gapped-free-hamiltonian-and-stable-equivalence
 kind: definition
 title: "Finite-dimensional gapped free Hamiltonians and stable equivalence"
@@ -12,11 +15,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Alexei Kitaev, Periodic table for topological insulators and superconductors (2009)"
@@ -31,4 +29,4 @@ sources:
 
 A finite-dimensional free-fermion Hamiltonian is a self-adjoint matrix on a finite-dimensional complex Hilbert space. It is gapped at zero if 0 is not in its spectrum. A symmetry class is specified by named unitary and antiunitary operators and exact commutation, anticommutation and square relations with H. Stable equivalence means gap-preserving homotopy after direct sum with fixed reference trivial bands; phases are differences of stabilized systems, not absolute modules.
 
-Class A has no additional antiunitary constraint. A symmetry is unitary or antiunitary and its relation is recorded as S H S^{-1}=σH, σ∈{+1,−1}; any additional square relation is part of the declared model data.
+Class A has no additional antiunitary constraint. A symmetry is unitary or antiunitary and its relation is recorded as $S H S^{-1}=\sigma H$, $\sigma\in\{+1,-1\}$; any additional square relation is part of the declared model data.

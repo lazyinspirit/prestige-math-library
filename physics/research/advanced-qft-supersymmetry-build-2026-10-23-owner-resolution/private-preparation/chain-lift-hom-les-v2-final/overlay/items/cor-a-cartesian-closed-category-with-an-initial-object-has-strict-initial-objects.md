@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-cartesian-closed-category-with-an-initial-object-has-strict-initial-objects.md

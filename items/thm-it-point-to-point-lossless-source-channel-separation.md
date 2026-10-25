@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-it-point-to-point-lossless-source-channel-separation.json
+  precheck: pass
 id: thm-it-point-to-point-lossless-source-channel-separation
 kind: theorem
 title: "Lossless separation for finite IID sources and finite DMCs"
@@ -32,8 +35,7 @@ sources:
     - title: "Robert M. Gray, Entropy and Information Theory, author-hosted full text"
       url: "https://ee.stanford.edu/~gray/it.pdf"
       locator: "Chapter 12, §12.7, printed pp. 269–273, joint source-channel block coding and converse."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -75,3 +77,21 @@ Let $S_1,S_2,\ldots$ be IID with probability vector $P_S$ on a finite nonempty a
 3.1 Compose the source encoder and decoder from step 1.2 with the restricted channel code from step 2.1. The source-code index can have any distribution, but its channel decoding error is at most the maximal error. The joint block-error event is contained in the union of the source-code error event and the channel message-error event, so its probability is at most the sum of those two probabilities and tends to zero. [F1, step 1.2, step 2.1, given, construct, algebra]
 
 4.1 Step 1.1 gives zero-error achievability when the source entropy is zero; steps 1.2, 2.1, and 3.1 give reliable achievability under the strict positive-entropy threshold; and step 1.3 gives the necessary condition. Thus the stated strict-threshold conclusions hold, with no claim at the positive-entropy equality boundary. [step 1.1, step 1.2, step 2.1, step 3.1, step 1.3, algebra] ∎
+
+## Remarks
+
+The joint code has the following cascade. The arrows labelled $f_k$ and $g_k$ are deterministic maps; the middle arrow is the DMC block kernel, not a deterministic map.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw, rounded corners, minimum width=1.3cm, minimum height=0.9cm] (s) at (0,0) {$S^k$};
+\node[draw, rounded corners, minimum width=1.3cm, minimum height=0.9cm] (x) at (3,0) {$X^{n_k}$};
+\node[draw, rounded corners, minimum width=1.3cm, minimum height=0.9cm] (y) at (6,0) {$Y^{n_k}$};
+\node[draw, rounded corners, minimum width=1.3cm, minimum height=0.9cm] (sh) at (9,0) {$\widehat S^k$};
+\draw[->] (s) -- node[above] {$f_k$} (x);
+\draw[->] (x) -- node[above] {$W^{n_k}$} (y);
+\draw[->] (y) -- node[above] {$g_k$} (sh);
+\end{tikzpicture}
+```
+
+Here $S^k\sim P_S^{\otimes k}$, $f_k:\mathcal S^k\to\mathcal X^{n_k}$, $W^{n_k}(y^{n_k}\mid x^{n_k})=\prod_{i=1}^{n_k}W(y_i\mid x_i)$, and $g_k:\mathcal Y^{n_k}\to\mathcal S^k$, so $\widehat S^k=g_k(Y^{n_k})$. With $n_k/k\to\rho$, the strict sufficient condition is $H(P_S)<\rho C(W)$, whereas reliability requires $H(P_S)\le\rho C(W)$. Entropy is in nats per source symbol and capacity in nats per channel use. The zero-entropy case is always achievable, as in step 1.1; no positive-entropy equality conclusion is encoded by the picture. The proof above is independent of this illustration.

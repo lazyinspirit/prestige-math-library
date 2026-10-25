@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-frattini-formula-for-finitely-generated-pro-p-groups.json
+  precheck: pass
 id: thm-frattini-formula-for-finitely-generated-pro-p-groups
 kind: theorem
-title: "For a finitely generated pro-p group, the Frattini subgroup is the closure of [G,G]G^p"
+title: "For a finitely generated pro-p group, the Frattini subgroup is the closure of $[G,G]G^p$"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-frattini-subgroup-commutes-with-surjective-inverse-limits, thm-frattini-subgroup-formula-for-a-finite-p-group, def-pth-power-subgroup-of-a-group]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-parabolic-theta-scheme-local-truncation-error.json
+  precheck: pass
 id: thm-parabolic-theta-scheme-local-truncation-error
 kind: theorem
 title: Local truncation residual for the θ heat scheme
@@ -9,12 +12,6 @@ dependency_level: 2
 deps:
   - def-parabolic-theta-finite-difference-scheme
 justified_by: []
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -36,7 +33,8 @@ sources:
 
 Let $\Omega=(0,L_x)\times(0,L_y)$, $T>0$, $N_x,N_y\ge2$, $M\ge1$, $h_x=L_x/N_x$, $h_y=L_y/N_y$, and $\Delta t=T/M$. Let $\kappa_x,\kappa_y>0$, $\theta\in[0,1]$, and suppose $u$ satisfies
 $$
-u_t-\kappa_xu_{xx}-\kappa_yu_{yy}=f$$
+u_t-\kappa_xu_{xx}-\kappa_yu_{yy}=f
+$$
 on $\overline\Omega\times[0,T]$, with exact sampled initial and Dirichlet rows in the scheme of [[def-parabolic-theta-finite-difference-scheme]]. Assume $u_{tt},u_{ttt},u_{xxxx},u_{yyyy}$ are continuous on the closed cylinder, and write $M_{tt},M_{ttt},M_{x4},M_{y4}$ for their respective sup norms there. If $r^n$ is the exact grid sample at time $t_n$, the complete interior residual is bounded at every time step by
 $$
 \|\tau^n\|_\infty\le \Delta t M_{tt}+\frac{\kappa_xh_x^2M_{x4}+\kappa_yh_y^2M_{y4}}{12}\quad(\theta\ne\tfrac12),

@@ -1,0 +1,117 @@
+{
+  "id": "def-finite-layered-trellis",
+  "agent": "/root/rendering_repair_coordinator/dinfo_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile renders the definition correctly but has no illustration. A finite directed weighted graph materially clarifies allowed edges versus disabled endpoint vertices, reachability, and the multiplicative score; this is a warranted explanatory addition under the expanded diagram scope.",
+      "action": "Added an explicit T=3 example and fenced TikZ diagram in final Remarks, leaving the Definition and all frontmatter byte-identical.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended Remarks with V1={a,b}, V2={c,d}, V3={e,f}, exactly six allowed directed edges, positive edge weights, zero initial/terminal endpoint examples, and two admissible path scores.",
+  "source_lines_after": {
+    "remarks": [
+      56,
+      91
+    ],
+    "example": [
+      58,
+      67
+    ],
+    "tikz": [
+      69,
+      91
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Layer indices and edge domains",
+      "evidence": "Definition lines 34–38 defines E_t subset V_(t-1) x V_t for 2<=t<=T. The example has T=3 and disjoint labeled columns V1={a,b}, V2={c,d}, V3={e,f}; arrows are exactly E2={(a,c),(a,d),(b,d)} and E3={(c,e),(d,e),(d,f)}. All six arrows point to the next layer; no within-layer, backward, skipped-layer or unlisted edge is drawn."
+    },
+    {
+      "check": "Positive weights and endpoint domains",
+      "evidence": "Definition lines 35–39 requires positive edge weights and nonnegative endpoint maps. Diagram sets w2(a,c)=2,w3(c,e)=3 and the remaining four allowed edge weights to 1. Alpha is displayed only on V1 (a=1,b=0), beta only on V3 (e=1,f=0). Zero endpoint values disable endpoint use without deleting the allowed incident edge."
+    },
+    {
+      "check": "Admissibility, scores, and reachability",
+      "evidence": "Definition lines 41–46 gives the score alpha(v1) times edge-weight product times beta(vT). The bold route (a,c,e) uses E2(a,c),E3(c,e) and positive endpoints, with score 1*2*3*1=6. Route (a,d,e) uses the two diagonal weight-1 edges and has score 1*1*1*1=1. There are no other admissible paths: starts at b and ends at f fail the endpoint condition. Both c and d admit prefixes from a, satisfying the reachability definition at lines 48–52."
+    },
+    {
+      "check": "Figure independence and boundary conventions",
+      "evidence": "The unchanged Definition remains complete without the figure. Added prose explicitly restricts the example to T=3 and preserves the original T=0 empty path and T=1 empty-product conventions; no proof depends on the picture."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-finite-layered-trellis.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-finite-layered-trellis.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-finite-layered-trellis.md",
+            "item_id": "def-finite-layered-trellis",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-finite-layered-trellis.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "pre_edit_guard": {
+    "expected_raw_sha256": "6c145901e97909213d64d97a11f397740e5c1294fa6d6621dc3aa82228dc36fc",
+    "matched_immediately_before_edit": true
+  },
+  "original_evidence": {
+    "declared_path_missing": "research/math-library-rendering-audit-2026-10-23/information-theory/diagram-supplement/screenshots/def-finite-layered-trellis--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/information-theory/screenshots/def-finite-layered-trellis--01.png",
+    "sha256": "21e9f56c571301839d87fc92fd2a2a93a5cbd5d5086434ee9f33cba6ba730eb3",
+    "inspection": "Viewed standalone at original resolution; matches recorded hash."
+  },
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo005-trellis-final/manifest.json",
+    "manifest_sha256": "7245f9c3eff2c93d352f35dbaffcfc33814f32230bef6f9668c7a3e5b12b8088",
+    "source_sha256": "d136977e2a30698e9fd02b4c62def75259d511be84cccdee34b8de1378dfad32",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dinfo005-trellis-final/screenshots/def-finite-layered-trellis--01.png",
+    "screenshot_sha256": "793a2089b568181bbfa88bb596c0d7e44e557f64935fc300437d7dec3c1ab59c",
+    "inspection": "Viewed standalone at original resolution. All six vertices and all six directed edges are visible, with layer labels, positive edge weights, endpoint weights, and the thick two-edge path. No diagram clipping or overlap. Capture receipt: katex_count=50,tikz_count=1,katex_errors=[],diagram_failures=[].",
+    "limitations": [
+      "Final capture has an upper-body visibility artifact: unchanged title/Definition mostly black while appended Remarks/diagram are visible. Original authenticated standalone tile shows the Definition cleanly, and final HTML includes the unchanged Definition. No source alteration was made in response to this capture issue.",
+      "Local ItemBody preview only; no production route coverage. Reference-map diagnostics count 16 concerns unrelated parseable-source discovery; this carrier has no item wikilinks."
+    ]
+  },
+  "publication_status_preserved": {
+    "before": "published",
+    "after": "published",
+    "frontmatter_byte_identical": true
+  },
+  "remaining_issues": [
+    "Native capture upper-body visibility artifact noted above; new figure visually verified cleanly."
+  ]
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-universal-property-of-clifford-algebra.json
+  precheck: pass
 id: thm-universal-property-of-clifford-algebra
 kind: theorem
 title: Universal property of the Clifford algebra
@@ -14,12 +17,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Jean Gallier, Clifford Algebras, Clifford Groups, and a Generalization of the Quaternions: The Pin and Spin Groups, §1.2"
@@ -53,3 +50,14 @@ Let $k,V,B,Q$ be as in [[def-clifford-algebra-of-a-quadratic-space]], and let $A
 2.1 For every $v\in V$, $\widetilde f(j(v)^2-Q(v)1)=f(v)^2-Q(v)1_A=0$. Thus [F2] gives a unique unital homomorphism $\bar f:\mathrm{Cl}(V,Q)\to A$ satisfying $\bar f\circ q_Q=\widetilde f$. [given, step 1.1, F2]
 
 3.1 Since $i_Q=q_Q\circ j$, step 2.1 gives $\bar f\circ i_Q=\widetilde f\circ j=f$. Let $g:\mathrm{Cl}(V,Q)\to A$ be any other unital $k$-algebra homomorphism with $g\circ i_Q=f$. Then $g\circ q_Q:T_k(V)\to A$ and $\widetilde f$ are unital algebra extensions of the same map $f$ along $j$, because $(g\circ q_Q)\circ j=g\circ i_Q=f=\widetilde f\circ j$. Uniqueness in [F1] gives $g\circ q_Q=\widetilde f=\bar f\circ q_Q$. Since $q_Q$ is surjective by [F3], $g=\bar f$. [given, F1, F3, step 2.1] ∎
+
+## Remarks
+
+For a $k$-linear map $f$ satisfying $f(v)^2=Q(v)1_A$, the universal property is the commutative triangle below. The maps $i_Q$ and $f$ are $k$-linear; the dashed arrow is the unique unital $k$-algebra homomorphism $\bar f$ with $\bar f\circ i_Q=f$. The triangle is viewed on underlying vector spaces, so it does not assign an algebra structure to $V$.
+
+```tikzcd
+V \arrow[r, "i_Q"] \arrow[dr, "f"'] & \mathrm{Cl}(V,Q) \arrow[d, dashed, "\bar f"] \\
+& A
+```
+
+The figure summarizes step 3.1; the proof above establishes both existence and uniqueness independently of the illustration.

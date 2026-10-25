@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-boundary-score-cone-and-linear-tangent-space.json
+  precheck: pass
 id: ex-boundary-score-cone-and-linear-tangent-space
 kind: example
 title: A boundary score cone differs from its tangent space
@@ -23,12 +26,6 @@ deps:
   - thm-real-power-continuity-and-derivatives
   - thm-mean-zero-square-integrable-space-is-hilbert
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -77,3 +74,23 @@ Assume the general DQM density-version convention uses AC and the mean-zero Hilb
 3.1 Subtract the two mass expansions from step 2.1. Since $\theta(t)=P_{\theta(t)}\{+1\}-P_{\theta(t)}\{-1\}$, we get $\theta(t)/t\to(s(+1)-s(-1))/2$. By [F2], $P_0s=(s(+1)+s(-1))/2=0$, so this limit equals $s(+1)$. The constraints $\theta(t)\ge0$ and $t>0$ force the limit $a:=s(+1)$ to be nonnegative, and $s(-1)=-a$; hence every score is $s(x)=ax$ with $a\ge0$. [step 2.1, F2, algebra]
 
 4.1 The real span of $\{aX:a\ge0\}$ is $\{bX:b\in\mathbb R\}$, and every mean-zero function on the equiprobable two-point space has values $(b,-b)$, so this span is $L^2_0(P_0)$. This space is closed in $L^2(P_0)$ by [F8], hence its closure—and therefore the tangent space by [F3]—is $L^2_0(P_0)$. It strictly contains the non-linear score cone because $X$ is in the cone but $-X$ is not. [A2, F3, F8, step 2.2, algebra] ∎
+
+
+## Remarks
+
+Write $X(x)=x$. The diagram uses the coordinate $b$ for the function $bX$ in $L^2_0(P_0)$. The full line is the tangent space; the blue nonnegative ray is the score cone. In particular, $-X$ belongs to the tangent space but is not an admissible score. The verification above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}
+\node at (0,1.3) {$L^2_0(P_0)=\{bX:b\in\mathbb R\}$};
+\draw[<->,thick] (-3.3,0) -- (3.3,0);
+\draw[->,very thick,blue] (0,0) -- (3.3,0);
+\node[blue] at (1.7,0.65) {$\{aX:a\geq 0\}$};
+\fill (-1.5,0) circle (2pt);
+\fill[blue] (0,0) circle (2pt);
+\fill[blue] (1.5,0) circle (2pt);
+\node at (-1.5,-0.45) {$-X$};
+\node at (0,-0.45) {$0$};
+\node at (1.5,-0.45) {$X$};
+\end{tikzpicture}
+```

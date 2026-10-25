@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-a-nonzero-function-on-a-null-set-has-zero-l-p-seminorm.json
+  precheck: pass
 id: cex-a-nonzero-function-on-a-null-set-has-zero-l-p-seminorm
 kind: counterexample
 title: "A nonzero function on a null set has zero $L^p$ seminorm"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class, thm-rationals-countable, lem-countable-sets-are-null]
 proof_strategy: "Use the indicator of a countable null subset of [0, 1]. It is not the zero function, but its p-seminorm and essential supremum both vanish."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -35,7 +35,7 @@ Every nonzero measurable function has positive $L^p$ seminorm.
 
 ## Counterexample
 
-**Proof technique:** Use the indicator of a countable null subset of $[0,1]$. It is not the zero function, but its $p$-seminorm and essential supremum both vanish.
+**Proof technique:** Use the indicator of a countable null subset of [0,1]. It is not the zero function, but its p-seminorm and essential supremum both vanish.
 
 1.1 Let $f:=\chi_{\mathbb Q\cap[0,1]}$. Then $f$ is not the zero function, [given] because $f(q)=1$ for every rational $q\in[0,1]$. [given]
 

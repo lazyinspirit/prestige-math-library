@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-canonical-map-is-natural.json
+  precheck: pass
 id: lem-canonical-map-is-natural
 kind: lemma
 title: "The canonical map is natural"
@@ -8,13 +11,6 @@ deps: ["def-canonical-map-into-the-bidual", "def-transpose-of-a-bounded-operator
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Lemma 4.3(ii), p.173"
@@ -39,3 +35,14 @@ Let $\mathbb K=\mathbb R$ or $\mathbb C$. If $T:X\to Y$ is bounded linear betwee
 1.1 By [F2], $T^*$ is bounded, so its transpose $T^{**}:X^{**}\to Y^{**}$ is defined. For $x\in X$ and $g\in Y^*$, $(T^{**}J_Xx)(g)=(J_Xx)(T^*g)=(T^*g)(x)$. [F1, F2]
 
 2.1 The last expression is $g(Tx)=(J_YTx)(g)$. Equality at every $g$ proves equality in $Y^{**}$ and then equality of operators for every $x$. With $x=0$ or $T=0$ every expression vanishes; the same calculation covers zero spaces. [F1, F2, step 1.1] ∎
+
+## Remarks
+
+The naturality identity says that the following square commutes. The vertical maps are the canonical evaluation maps, and the lower map is the transpose of $T^*$.
+
+```tikzcd
+X \arrow[r, "T"] \arrow[d, "J_X" swap] & Y \arrow[d, "J_Y"] \\
+X^{**} \arrow[r, "T^{**}" swap] & Y^{**}
+```
+
+Both paths from $X$ to $Y^{**}$ send $x$ to the functional $g\mapsto g(Tx)$ on $Y^*$, as computed in steps 1.1–2.1.

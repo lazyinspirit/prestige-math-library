@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs.md

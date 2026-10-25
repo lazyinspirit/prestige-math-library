@@ -1,0 +1,112 @@
+{
+  "id": "def-ars222-additive-tableau-and-stages",
+  "agent": "/root/rendering_repair_coordinator/dnde_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile shows correctly typeset matrices and equations but no diagram. A stage-dependency picture materially clarifies which previously computed stages feed later stages and why exactly stages 2 and 3 need implicit solves; repeating the already visible matrices would add less explanatory value.",
+      "action": "Added a final Remarks stage graph with three labelled stage vertices, three forward dependency edges and two implicit self-loops; caption fixes the precise weighted-contribution convention and preserves the no-solvability caveat.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only expository Remarks and TikZ. Original Definition and all frontmatter are byte-identical to the frozen before file.",
+  "source_lines_after": {
+    "remarks": [
+      45,
+      60
+    ],
+    "caption": 47,
+    "stage_nodes": [
+      51,
+      53
+    ],
+    "weighted_forward_dependencies": [
+      54,
+      56
+    ],
+    "implicit_self_loops": [
+      57,
+      58
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and evaluation domains",
+      "justification": "def-additive-ode-and-partition defines a,b:U -> R^d. Vertices represent the same stage states Y1,Y2,Y3 in the assigned Definition, not functions or exact subflows. Component evaluations at a source stage are understood only where the original stage equations are defined; the caption makes no existence or uniqueness assertion."
+    },
+    {
+      "check": "Explicit dependency coefficients",
+      "justification": "Definition line 37 has nonzero entries tilde A21=gamma, tilde A31=delta, tilde A32=1-delta. The directed edges Y1->Y2, Y1->Y3 and Y2->Y3 carry respectively gamma h a, delta h a and h(1-delta)a, with a evaluated at their source as captioned. There are no reversed or additional explicit dependencies."
+    },
+    {
+      "check": "Implicit dependency coefficients and self-loops",
+      "justification": "Definition line 38 has A22=gamma, A32=1-gamma, A33=gamma, all other entries zero. Thus the Y2->Y3 edge also contributes h(1-gamma)b(Y2), and the self-loops at Y2 and Y3 contribute gamma h b(Y2) and gamma h b(Y3). These are precisely the implicit terms in lines 40-41. Two self-loops mark the two nonzero diagonal stages; no loop at Y1 is present."
+    },
+    {
+      "check": "Base state and output",
+      "justification": "The caption explicitly adds the common y to every target stage equation, as lines 40-41 require. Y1=y is labelled at the initial vertex; Y3=y+ at the last vertex follows the exact equality y^+=Y3 in line 41. Matching last tableau rows with the displayed weights also confirms the same update."
+    },
+    {
+      "check": "Meaning of arrows and independence",
+      "justification": "Arrows denote algebraic weighted contributions, not maps, geometric trajectories, or positive weights; in particular delta<0 is retained exactly. The original definition and its explicit non-solvability caveat remain intact, and no rigorous argument depends on the added illustration."
+    }
+  ],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/def-ars222-additive-tableau-and-stages.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-ars222-additive-tableau-and-stages.md --json",
+      "exit_code": 0,
+      "result": "1 file; checked 0; failed 0; not-applicable (proof-free definition)"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/def-ars222-additive-tableau-and-stages.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "initial_rendercheck_note": "An initial multiline TikZ label triggered a checker escaped-dollar pairing false positive; replaced with independent above/below labels and reran successfully. Final native preview uses the final source."
+  },
+  "guard": {
+    "before_raw_sha256": "9026daa41c33514eff311edade12a0d7a238d388dfab8d68b15da6acb11661cd",
+    "guard_checked_immediately_before_initial_edit": true,
+    "after_raw_sha256": "67f4aa2b2c3c74659d92a22e1740dd4168d6b417bc591bf36be20e9f256419ce",
+    "frontmatter_byte_identical": true,
+    "original_definition_byte_identical": true,
+    "status_before": "published",
+    "status_after": "published"
+  },
+  "original_visual_evidence": {
+    "declared_path_discrepancy": "Declared inspection/evidence directory includes diagram-supplement/screenshots, which does not exist. Located authentic screenshot within the same category root screenshots directory and verified its recorded SHA256.",
+    "path": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/def-ars222-additive-tableau-and-stages--01.png",
+    "sha256": "1be01e51a75a3ebc7ef4bae1a2484fbce5b4d4bc5b496f19a70139b6cf63fdb0",
+    "inspection": "Standalone view_image at original resolution"
+  },
+  "local_visual_verification": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde016-final/manifest.json",
+    "manifest_sha256": "8b7737e6cbc5d444ddcfb4e8bbff99b214c943578f9f24140ebd7c8722228d41",
+    "source_snapshot_matches_current": true,
+    "source_sha256": "67f4aa2b2c3c74659d92a22e1740dd4168d6b417bc591bf36be20e9f256419ce",
+    "png": "research/math-library-rendering-repairs-2026-10-23/previews/dnde016-final/screenshots/def-ars222-additive-tableau-and-stages--01.png",
+    "png_sha256": "41df4736350d09664b3dd409fdbcf2d5ac172fbc9954141c56094f6cab754240",
+    "inspection": "Standalone original-resolution native ItemBody PNG inspected after compilation. Three boxes, three directed forward edges, and two returning self-loops are visible. All coefficients and endpoint labels are legible and separated; white strokes and labels contrast against dark background; no diagram clipping or overlaps observed.",
+    "limitations": [
+      "Local ItemBody preview, not full production route; 16 unrelated reference-map parse diagnostics are recorded in the preview manifest."
+    ]
+  },
+  "remaining_issues": []
+}

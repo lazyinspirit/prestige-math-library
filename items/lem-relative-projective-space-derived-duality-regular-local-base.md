@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-relative-projective-space-derived-duality-regular-local-base.json
+  precheck: pass
 id: lem-relative-projective-space-derived-duality-regular-local-base
 kind: lemma
 title: "Relative derived duality on projective space over a regular local ring"
@@ -22,12 +25,7 @@ sources:
   references:
     - title: "The Stacks Project, Resolution of Surfaces, 54.7.8 and 54.8.8: relative duality import (proved locally in the projective regular-base case)"
       url: "https://stacks.math.columbia.edu/download/resolve.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -38,7 +36,7 @@ Assume AC and DC. Let $R$ be regular Noetherian local of finite dimension and $P
 
 **Given:** A regular Noetherian local ring $R$ of finite dimension, the projective space $P=\mathbb P^N_R$ with $W=\mathcal O_P(-N-1)$, the residue $t$ on the all-minus-one Laurent monomial, and $K\in D^b_{\mathrm{Coh}}(P)$.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

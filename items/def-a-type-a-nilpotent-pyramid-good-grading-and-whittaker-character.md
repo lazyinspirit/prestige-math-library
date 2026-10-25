@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character.json
+  precheck: pass
 id: def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character
 kind: definition
 title: "The type-A nilpotent pyramid, good grading and Whittaker character"
@@ -25,8 +28,7 @@ sources:
     - title: "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)"
       url: "https://arxiv.org/pdf/math/0508003"
       locator: "Chapter 3, (3.1)-(3.7), printed pp. 23-25: the pyramid and shift matrix, the grading deg e_{i,j}=col(j)-col(i), the parabolic and the good grading of e, the automorphism eta, and the definition of W(pi) used later on this page."
-verification:
-  precheck: pass
+
 ---
 
 ## Definition
@@ -120,3 +122,35 @@ $\chi=0$. These conventions also permit an empty row list.
 - The numbering of boxes down columns from the left makes each row a Jordan string of $e$; this is why the row lengths $p_i$ (weakly increasing) are the Jordan block sizes, while the column heights $q_j$ are the ranks' increments and index the Levi blocks of $\mathfrak h$.
 
 - The shift $s_{i,j}=\max(0,p_j-p_i)$ counts the overlap $\min(p_i,p_j)$ of the two rows $i,j$ through the identity $\#\{r:s_{i,j}\le r<p_j\}=p_j-\max(0,p_j-p_i)$; this count is used again in the loop-mode index sets of the finite W-algebra items.
+
+For example, take $\lambda=(2,3)$, so $N=5$ and $(q_1,q_2,q_3)=(2,2,1)$.
+The box labels below are basis vectors, numbered down successive columns;
+each arrow records the action of $e$.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,>=stealth]
+\node at (0,2.25) {$\mathrm{col}=1$};
+\node at (1.8,2.25) {$\mathrm{col}=2$};
+\node at (3.6,2.25) {$\mathrm{col}=3$};
+\node[anchor=east] at (-2,1.3) {$\mathrm{row}=1$};
+\node[anchor=east] at (-2,0) {$\mathrm{row}=2$};
+\node[draw,minimum width=8mm,minimum height=8mm] (v1) at (0,1.3) {$v_1$};
+\node[draw,minimum width=8mm,minimum height=8mm] (v3) at (1.8,1.3) {$v_3$};
+\node[draw,minimum width=8mm,minimum height=8mm] (v2) at (0,0) {$v_2$};
+\node[draw,minimum width=8mm,minimum height=8mm] (v4) at (1.8,0) {$v_4$};
+\node[draw,minimum width=8mm,minimum height=8mm] (v5) at (3.6,0) {$v_5$};
+\node (z1) at (-1.35,1.3) {$0$};
+\node (z2) at (-1.35,0) {$0$};
+\draw[->] (v3) -- node[above] {$e$} (v1);
+\draw[->] (v1) -- node[above] {$e$} (z1);
+\draw[->] (v5) -- node[above] {$e$} (v4);
+\draw[->] (v4) -- node[above] {$e$} (v2);
+\draw[->] (v2) -- node[above] {$e$} (z2);
+\end{tikzpicture}
+```
+
+Here $e=e_{1,3}+e_{2,4}+e_{4,5}$, with every summand of degree $1$.
+For comparison, $\deg e_{1,2}=0$ and $\deg e_{3,1}=-1$, so
+$e_{1,2}\in\mathfrak h$ and $e_{3,1}\in\mathfrak m$; the character satisfies
+$\chi(e_{3,1})=\operatorname{tr}(e_{3,1}e)=1$.
+The picture illustrates the conventions only; the verification above is independent of it.

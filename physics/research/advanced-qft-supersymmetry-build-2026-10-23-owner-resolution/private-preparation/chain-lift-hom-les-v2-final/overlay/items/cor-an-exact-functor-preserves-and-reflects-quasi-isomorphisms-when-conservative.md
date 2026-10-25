@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-an-exact-functor-preserves-and-reflects-quasi-isomorphisms-when-conservative.md

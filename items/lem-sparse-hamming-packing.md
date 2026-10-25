@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-sparse-hamming-packing.json
+  precheck: pass
 id: lem-sparse-hamming-packing
 kind: lemma
 title: "A sparse Hamming packing for every $1\\le k\\le d/2$"
@@ -98,3 +101,51 @@ $$\|u^\omega-u^{\omega'}\|_2^2>k/2\qquad(\omega\ne\omega').$$
 ## Remarks
 
 The cited sparse Varshamov–Gilbert lemma in Rigollet–Hütter is stated for $k\le d/8$. The proof above supplies the wider $k\le d/2$ range used by the example through a block code; the source citation is context, not a substitute for this local proof.
+
+
+The block map in the Statement is illustrated below for $d=11$, $k=3$,
+$m=3$ and $r=0$. The words $\omega=(0,1,2)$ and $\omega'=(0,2,1)$
+illustrate the map on $[3]^3$; they are not asserted to belong to the
+particular greedy set $\mathcal C$. Cell positions within each block are
+numbered $0,1,2$ from left to right.
+
+```tikz
+\begin{tikzpicture}[x=0.62cm,y=0.8cm]
+\node at (1.5,1.05) {block $0$};
+\node at (5.5,1.05) {block $1$};
+\node at (9.5,1.05) {block $2$};
+\node at (13,1.05) {padding};
+\node[anchor=east] at (-0.4,0) {$u^\omega$};
+\node[anchor=east] at (-0.4,-1.25) {$u^{\omega'}$};
+\foreach \x in {0,1,2,4,5,6,8,9,10,12,13} {
+  \draw (\x,-0.35) rectangle +(1,0.7);
+  \draw (\x,-1.6) rectangle +(1,0.7);
+}
+\foreach \x in {0,5,10} {
+  \fill[blue!20] (\x,-0.35) rectangle +(1,0.7);
+  \draw (\x,-0.35) rectangle +(1,0.7);
+}
+\foreach \x in {0,6,9} {
+  \fill[orange!25] (\x,-1.6) rectangle +(1,0.7);
+  \draw (\x,-1.6) rectangle +(1,0.7);
+}
+\foreach \x/\v in {0/1,1/0,2/0,4/0,5/1,6/0,8/0,9/0,10/1,12/0,13/0} {
+  \node at (\x+0.5,0) {\v};
+}
+\foreach \x/\v in {0/1,1/0,2/0,4/0,5/0,6/1,8/0,9/1,10/0,12/0,13/0} {
+  \node at (\x+0.5,-1.25) {\v};
+}
+\node at (1.5,-2.1) {$0$ changes};
+\node at (5.5,-2.1) {$2$ changes};
+\node at (9.5,-2.1) {$2$ changes};
+\node at (13,-2.1) {all zero};
+\end{tikzpicture}
+```
+
+The two differing symbols give two differing blocks, each contributing two
+squared coordinate differences of $1$. Thus here $s=2$ and
+$\|u^\omega-u^{\omega'}\|_2^2=4$. In general, step 6.1 gives exactly
+$2s$ differing binary coordinates and zero contribution from the $d-km$
+padding coordinates. For distinct words in $\mathcal C$, $s>r$ and
+$k<4(r+1)$ imply $2s\ge2(r+1)>k/2$. The rigorous proof above is independent
+of this illustration.

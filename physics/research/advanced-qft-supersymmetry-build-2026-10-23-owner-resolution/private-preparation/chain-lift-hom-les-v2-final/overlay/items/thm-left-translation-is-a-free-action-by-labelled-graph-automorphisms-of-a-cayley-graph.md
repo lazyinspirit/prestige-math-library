@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-left-translation-is-a-free-action-by-labelled-graph-automorphisms-of-a-cayley-graph.md

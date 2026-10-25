@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology.md

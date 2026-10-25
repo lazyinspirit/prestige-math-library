@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system.md

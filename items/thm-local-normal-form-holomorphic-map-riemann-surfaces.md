@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-local-normal-form-holomorphic-map-riemann-surfaces.json
+  precheck: pass
 id: thm-local-normal-form-holomorphic-map-riemann-surfaces
 kind: theorem
 title: Local power-map normal form on Riemann surfaces
@@ -28,9 +31,7 @@ sources:
     - title: "Eduard Looijenga, Riemann Surfaces (2007)"
       url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
       locator: "Ch. 4 §2, the multiplicity mult_p(f) and the normal form z ↦ z^{mult_p(f)}, printed pp. 43–44."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -86,3 +87,48 @@ covering, and the uniqueness of $e$ proved here is what makes the ramification
 index well defined. If $f$ were constant, the chart expression would be locally
 constant and no finite positive exponent would exist, so nonconstancy is a
 necessary hypothesis, not a convenience.
+
+
+For a precise local picture, write $D_r=\{z\in\mathbb C:|z|<r\}$.
+Shrink the normal-form charts so that $\overline{D_r}$ lies in the source
+coordinate image and $\overline{D_{r^e}}$ lies in the target coordinate image,
+and put $U=\varphi^{-1}(D_r)$ and $W=\psi^{-1}(D_{r^e})$.
+Then $f(U)=W$ and the square below commutes by step 3.1. Its lower sketch
+illustrates the case $e=3$: the three marked points over a nonzero $w$ merge
+at the centre as $w\to0$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (U) at (0,3) {$U\subset X$};
+\node (W) at (5,3) {$W\subset Y$};
+\node (D) at (0,1.5) {$D_r$};
+\node (E) at (5,1.5) {$D_{r^e}$};
+\draw[->] (U) -- node[above] {$f|_U$} (W);
+\draw[->] (U) -- node[left] {$\varphi|_U$} (D);
+\draw[->] (W) -- node[right] {$\psi|_W$} (E);
+\draw[->] (D) -- node[above] {$z\mapsto z^e$} (E);
+\draw[dashed] (0,-1) circle (1);
+\draw[dashed] (5,-1) circle (1);
+\fill (0,-1) circle (1.3pt) node[below right] {$0$};
+\fill (5,-1) circle (1.3pt) node[below left] {$0$};
+\fill (0.8,-1) circle (2pt);
+\fill (-0.4,-0.30718) circle (2pt);
+\fill (-0.4,-1.69282) circle (2pt);
+\fill (5.512,-1) circle (2pt) node[right] {$w$};
+\draw[->] (1.3,-1) -- node[above] {$z\mapsto z^3$} (3.7,-1);
+\node at (0,-2.4) {three distinct roots of $w$};
+\node at (5,-2.4) {one nonzero value $w$};
+\node at (2.5,-3) {local fibre sketch for $e=3$};
+\end{tikzpicture}
+```
+
+The dashed circles depict the boundaries of open coordinate discs; their
+radii in the sketch are schematic. In general, if
+$w=\rho e^{i\alpha}\in D_{r^e}\setminus\{0\}$, the points over it have
+coordinates $z_k=\rho^{1/e}e^{i(\alpha+2\pi k)/e}$ for
+$k=0,\ldots,e-1$. They are distinct and lie in $D_r$, while $0$ has the
+single preimage $0$ with multiplicity $e$. Thus $e>1$ gives a ramification
+point at $x$ and a branch value at $f(x)$, with ramification order $e-1$;
+$e=1$ gives a local biholomorphism. All these descriptions concern the
+restriction $f|_U$, and assert no global covering property. The proof above
+is independent of the illustration.

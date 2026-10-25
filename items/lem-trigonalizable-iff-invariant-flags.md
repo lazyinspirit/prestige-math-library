@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-trigonalizable-iff-invariant-flags.json
+  precheck: pass
 id: lem-trigonalizable-iff-invariant-flags
 kind: lemma
-title: Trigonalizable groups, invariant flags and embeddings into T_n
+title: Trigonalizable groups, invariant flags and embeddings into $T_n$
 dependency_level: 7
 deps:
   - lem-distinct-characters-are-linearly-independent
@@ -26,11 +29,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)

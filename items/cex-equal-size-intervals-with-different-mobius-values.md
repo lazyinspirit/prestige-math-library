@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-equal-size-intervals-with-different-mobius-values.json
+  precheck: pass
 id: cex-equal-size-intervals-with-different-mobius-values
 kind: counterexample
 title: "A four-element chain and a four-element diamond have equal-size endpoint intervals but Möbius values $0$ and $1$"
@@ -14,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -49,10 +49,12 @@ The endpoint Möbius value of a finite interval is determined by the number of e
 
 ## Remarks
 
-```tikz \begin{tikzpicture}[ every node/.style={font=\scriptsize}, elt/.style={draw,circle,minimum size=7mm,inner sep=1pt,fill=white} ] \node[font=\small] at (-2.7,4.15) {four-element chain}; \node[font=\small] at (2.7,4.15) {four-element diamond};
+```tikz
+\begin{tikzpicture}[ every node/.style={font=\scriptsize}, elt/.style={draw,circle,minimum size=7mm,inner sep=1pt,fill=white} ] \node[font=\small] at (-2.7,4.15) {four-element chain}; \node[font=\small] at (2.7,4.15) {four-element diamond};
 
 \node[elt] (c0) at (-2.7,0) {$c_0$}; \node[elt] (c1) at (-2.7,1.05) {$c_1$}; \node[elt] (c2) at (-2.7,2.1) {$c_2$}; \node[elt] (c3) at (-2.7,3.15) {$c_3$}; \draw[gray!70] (c0)--(c1)--(c2)--(c3);
 
 \node[elt] (bot) at (2.7,0) {$\bot$}; \node[elt] (a) at (1.65,1.55) {$a$}; \node[elt] (b) at (3.75,1.55) {$b$}; \node[elt] (top) at (2.7,3.15) {$\top$}; \draw[gray!70] (bot)--(a)--(top) (bot)--(b)--(top);
 
-\node[font=\small] at (-2.7,-.75) {$\mu(c_0,c_3)=0$}; \node[font=\small] at (2.7,-.75) {$\mu(\bot,\top)=1$}; \end{tikzpicture} ```
+\node[font=\small] at (-2.7,-.75) {$\mu(c_0,c_3)=0$}; \node[font=\small] at (2.7,-.75) {$\mu(\bot,\top)=1$}; \end{tikzpicture}
+```

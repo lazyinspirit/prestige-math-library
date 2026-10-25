@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-one-sided-ftc-at-points-with-one-sided-limits.md

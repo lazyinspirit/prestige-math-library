@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-two-points-avoiding-a-finite-set-lie-in-a-common-embedded-ball.md

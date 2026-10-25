@@ -1,0 +1,75 @@
+{
+  "id": "ex-gauss-bonnet-for-a-spherical-cap",
+  "agent": "/root/rendering_repair_coordinator/dg_030",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --02 visibly prints dollar signs and uppercased TeX commands in the technique banner, while the adjacent proof mathematics is typeset. Frozen and initial current source are byte-identical; the banner contains $2\\pi$ and $2\\pi\\chi(D)$. This plain-text renderer field does not parse inline math.",
+      "action": "Replace only the two banner formulas with equivalent prose: two pi and two pi times the Euler characteristic of the cap.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Banner-only prose workaround for unparsed inline math; all mathematical formulas in the Example and Verification steps remain unchanged.",
+  "source_lines_after": {
+    "77": "**Proof technique:** compute the round metric, connection form and curvature in the polar chart, integrate over the cap, compute the geodesic curvature of the positively oriented latitude circle, and identify the constant two pi with two pi times the Euler characteristic of the cap through an explicit finite triangulation of the cap."
+  },
+  "mathematical_meaning_preserved": true,
+  "protected_metadata_preserved": true,
+  "publication_status_preserved": "status: published (frontmatter byte-identical)",
+  "before_raw_sha256": "4f5a9ff268c3adee17445f353bb6bdb4a27b1e9fcaf68ce1191ed8ddb6841aee",
+  "after_raw_sha256": "114232ea35f6a28b3a2ff364b21efc9891b1aa509ad2f4dc81490e1834e1e1f0",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-gauss-bonnet-for-a-spherical-cap.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 10 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-gauss-bonnet-for-a-spherical-cap.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-gauss-bonnet-for-a-spherical-cap.md",
+            "item_id": "ex-gauss-bonnet-for-a-spherical-cap",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-gauss-bonnet-for-a-spherical-cap.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_standalone_image": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/ex-gauss-bonnet-for-a-spherical-cap--02.png",
+    "original_resolution": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg030-native/manifest.json",
+    "preview_manifest_sha256": "b1352145640f0466bda80a5128a0232c34034aa2586f09401d537dd91623795e",
+    "source_sha256": "114232ea35f6a28b3a2ff364b21efc9891b1aa509ad2f4dc81490e1834e1e1f0",
+    "inspected_after_image": "research/math-library-rendering-repairs-2026-10-23/previews/dg030-native/screenshots/ex-gauss-bonnet-for-a-spherical-cap--02.png",
+    "result": "Native local standalone original-resolution output shows readable uppercase prose with no dollar delimiters or raw TeX in the technique banner.",
+    "preview_exit_code": 0,
+    "limitations": "Local ItemBody preview; not the production HTTP route. Reference-map preview reports 16 unrelated parse diagnostics."
+  },
+  "remaining_issues": [
+    "Renderer technique banners remain plain text and do not parse inline math; local prose workaround resolves this carrier."
+  ]
+}

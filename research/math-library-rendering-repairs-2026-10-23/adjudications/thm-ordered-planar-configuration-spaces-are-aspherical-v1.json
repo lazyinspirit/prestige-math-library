@@ -1,0 +1,36 @@
+{
+  "id": "thm-ordered-planar-configuration-spaces-are-aspherical",
+  "agent": "/root/rendering_repair_coordinator/braid_009",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --02 visibly prints dollar delimiters and the TeX command in the uppercase technique banner, while body mathematics is rendered normally. The banner is a plain-text renderer surface.",
+      "action": "Replaced only the technique description with equivalent plain text: induction on n for fixed degree k ≥ 3.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced raw TeX in the proof-technique banner with equivalent Unicode/plain text; all other bytes, including publication status and frontmatter, are unchanged.",
+  "source_lines_after": {
+    "66": "**Proof technique:** induction on n for fixed degree k ≥ 3."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains: proof-technique banners do not parse inline math; this item uses a local plain-text workaround.",
+    "Pre-existing proof-layout failure at unchanged line 86: proof-step-separation, Proof 4.1 [split-step], unnumbered continuation splits the argument from its numbered row. The unchanged concluding paragraph already exists in the frozen before file; left outside this banner-only correction."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+      "exit_code": 1,
+      "output": "FAIL proof-step-separation: items/thm-ordered-planar-configuration-spaces-are-aspherical.md:86 Proof 4.1 [split-step] Unnumbered continuation splits the argument from its numbered row; use single newlines inside a step.\nproof-layout: 1 items, 9 steps, 1 defects"
+    },
+    {
+      "command": "Exact-byte comparison against frozen before with only the banner replacement allowed",
+      "result": "pass; all frontmatter including status: published byte-identical"
+    }
+  ]
+}

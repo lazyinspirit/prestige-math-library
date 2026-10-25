@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-critical-images-of-proper-local-fredholm-restrictions-are-nowhere-dense.md

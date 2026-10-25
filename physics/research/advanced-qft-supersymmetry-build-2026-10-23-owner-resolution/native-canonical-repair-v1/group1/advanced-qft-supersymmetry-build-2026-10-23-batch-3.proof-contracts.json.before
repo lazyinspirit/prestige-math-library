@@ -1,0 +1,789 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "3",
+  "level": 3,
+  "scope": [
+    "def-qftx-gauge-slice-and-faddeev-popov-operator",
+    "thm-qftx-local-faddeev-popov-slice-jacobian",
+    "lem-qftx-smooth-principal-connection-exists",
+    "thm-qftx-singer-global-gauge-section-obstruction",
+    "ex-qftx-translation-gauge-slice-jacobian",
+    "ex-qftx-so2-gauge-slice-multiplicity"
+  ],
+  "contracts": {
+    "def-qftx-gauge-slice-and-faddeev-popov-operator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires an admissible point s in a slice S and positive regulator dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement check: The dimensions satisfy 1 <= k <= n, so a zero-dimensional gauge group is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement check: The finite-dimensional formulas apply when k=1 and n=1 as well as in higher dimensions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition assigns Delta_FP=0 when M_x is singular; transversality is separately defined by invertibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "It introduces finite-dimensional data and a pointwise density ratio, with no limit parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement check: The datum fixes all manifolds, groups, actions, slices and densities; AC_omega is inherited and no further choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff claim appears in the Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff claim appears in the Definition."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "A mathematical definition is checked through its explicit domains, action laws, and density-ratio convention; no discrete finite check applies."
+    },
+    "thm-qftx-local-faddeev-popov-slice-jacobian": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "Choose an embedded smooth submanifold $S\\subset X$ of codimension $k$, a smooth positive density $\\mu_S$, and an open neighborhood $U\\subset X$ of a point $s\\in S$. Embedded means that near each point of $S$, a smooth chart on $X$ identifies $S$ with $\\mathbb R^{n-k}\\times\\{0\\}$. A **gauge condition** on $U$ is a smooth map $\\chi:U\\to\\mathbb R^k$ such that $U\\cap S=\\chi^{-1}(0)$ and, for every $s'\\in U\\cap S$, $d\\chi_{s'}$ is surjective with kernel $T_{s'}S$. For every $x\\in U$, the **infinitesimal orbit map** is $R_x:=d(\\alpha_x)_e:\\mathfrak k\\to T_xX$, where $\\alpha_x(g)=x\\cdot g$; call its kernel the infinitesimal stabilizer at $x$. The **Faddeev–Popov operator** at $x$ is the ordinary linear map $M_x:=d\\chi_x\\circ R_x:\\mathfrak k\\to\\mathbb R^k$. At a slice point $s'\\in U\\cap S$, call the condition **transverse** when $M_{s'}$ is an isomorphism. Choose a positive density $\\nu$ on $\\mathfrak k$ equal to $(\\mu_K)_e$, and the standard positive density $\\lambda$ on $\\mathbb R^k$. For every $x\\in U$, the finite-dimensional Faddeev–Popov Jacobian $\\Delta_{\\mathrm{FP}}(x)$ is the nonnegative density ratio defined by $M_x^*\\lambda=\\Delta_{\\mathrm{FP}}(x)\\nu$; in chosen bases it is $|\\det M_x|$, and it is zero when $M_x$ is singular.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-change-of-variables-for-compactly-supported-functions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\\mathbb R^n\\to\\mathbb R$ be compactly supported Riemann integrable and suppose $\\operatorname{supp}f\\subseteq g(U)$. Define\n$$h(x)=\\begin{cases}f(g(x))|\\det Dg(x)|,&x\\in U,\\\\0,&x\\notin U.\\end{cases}$$\nThen $h$ is compactly supported Riemann integrable and\n$$\\int_{\\mathbb R^n}f(y)\\,dy=\\int_{\\mathbb R^n}h(x)\\,dx.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "adapted-slice-coordinates",
+          "step": "1.1",
+          "claim": "Use the submanifold chart and invertibility of the normal derivative of chi to form adapted target coordinates.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-orbit-slice-diffeomorphism",
+          "step": "2.1",
+          "claim": "Compute the block differential of Psi; its diagonal blocks are M_s0 and the identity, so the inverse function theorem gives the local chart.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "density-normalized-jacobian",
+          "step": "3.1",
+          "claim": "Divide the block determinant by the source density and apply change of variables on the local diffeomorphism chart.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-transverse-intersection-count",
+          "step": "4.1",
+          "claim": "Use the left-invariant frame to identify the orbit derivative with M, apply local change of variables on each cutoff branch, and bound the remainder and approximate-identity error.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement check: The local chart hypothesis supplies s0 and 1 <= k <= n; for the multiplicity clause r=0 is allowed and gives an empty sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If M is singular, the density ratio is zero by the Definition and the transverse hypotheses fail; Step 4.1 requires invertible derivatives at each root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement check: The block determinant and multiplicity argument include k=1 and a single transverse zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement check: Singular roots and non-isolated stabilizer zeros are excluded by the explicit invertibility assumptions; this boundary is not counted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the epsilon down-to-zero limit by continuity and the unit-mass approximate identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement check: The proof selects finitely many inverse neighborhoods and cutoffs for the finite root set; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff claim appears in the Statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff claim appears in the Statement."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The finite-dimensional analytic identities are proved in Steps 2.1–4.1; no separate discrete finite check is registered."
+    },
+    "ex-qftx-translation-gauge-slice-jacobian": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "A **finite-dimensional regulated gauge-slice datum** consists of integers $1\\le k\\le n$; a finite-dimensional Lie group $K$ of dimension $k$, with Lie algebra $\\mathfrak k:=T_eK$ and bracket transported from left-invariant vector fields; a chosen smooth positive left-invariant density $\\mu_K$, meaning $(L_h^K)^*\\mu_K=\\mu_K$ for $L_h^K(g)=hg$; a finite-dimensional smooth manifold $X$ of dimension $n$ with a chosen smooth positive density $\\mu_X$; and a smooth right action $\\alpha:X\\times K\\to X$, written $x\\cdot g$, with $x\\cdot e=x$ and $(x\\cdot g)\\cdot h=x\\cdot(gh)$. A smooth positive density on an $m$-manifold has coordinate form $\\rho(x)|dx^1\\cdots dx^m|$ with smooth $\\rho>0$, and transforms by the absolute coordinate Jacobian. The group $K$ and its action on $X$ are separate regulator data. They are not identified with the full gauge group or the full space of connections unless a particular finite model explicitly constructs such an action and verifies that it preserves $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "Choose an embedded smooth submanifold $S\\subset X$ of codimension $k$, a smooth positive density $\\mu_S$, and an open neighborhood $U\\subset X$ of a point $s\\in S$. Embedded means that near each point of $S$, a smooth chart on $X$ identifies $S$ with $\\mathbb R^{n-k}\\times\\{0\\}$. A **gauge condition** on $U$ is a smooth map $\\chi:U\\to\\mathbb R^k$ such that $U\\cap S=\\chi^{-1}(0)$ and, for every $s'\\in U\\cap S$, $d\\chi_{s'}$ is surjective with kernel $T_{s'}S$. For every $x\\in U$, the **infinitesimal orbit map** is $R_x:=d(\\alpha_x)_e:\\mathfrak k\\to T_xX$, where $\\alpha_x(g)=x\\cdot g$; call its kernel the infinitesimal stabilizer at $x$. The **Faddeev–Popov operator** at $x$ is the ordinary linear map $M_x:=d\\chi_x\\circ R_x:\\mathfrak k\\to\\mathbb R^k$. At a slice point $s'\\in U\\cap S$, call the condition **transverse** when $M_{s'}$ is an isomorphism. Choose a positive density $\\nu$ on $\\mathfrak k$ equal to $(\\mu_K)_e$, and the standard positive density $\\lambda$ on $\\mathbb R^k$. For every $x\\in U$, the finite-dimensional Faddeev–Popov Jacobian $\\Delta_{\\mathrm{FP}}(x)$ is the nonnegative density ratio defined by $M_x^*\\lambda=\\Delta_{\\mathrm{FP}}(x)\\nu$; in chosen bases it is $|\\det M_x|$, and it is zero when $M_x$ is singular.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-local-faddeev-popov-slice-jacobian",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $(X,K,\\alpha,S,\\chi,\\mu_X,\\mu_K,\\mu_S)$ be finite-dimensional regulated gauge-slice data as defined above, with $\\dim X=n$, $\\dim K=k$, $1\\le k\\le n$, and $s_0\\in S\\cap U$. Thus $K$ acts smoothly on the right, $S$ is an embedded codimension-$k$ submanifold, $\\chi:U\\to\\mathbb R^k$ is a smooth defining submersion with $\\ker d\\chi_s=T_sS$, and the Faddeev–Popov operator is $M_s=d\\chi_s\\circ R_s$. Suppose $M_{s_0}$ is an isomorphism. For $\\Psi(g,s)=s\\cdot g$, there are neighborhoods $V$ of the identity in $K$, $W$ of $s_0$ in $S$, and $O$ of $s_0$ in $X$ such that $\\Psi:V\\times W\\to O$ is a $C^1$ diffeomorphism. Consequently, each orbit has exactly one representative in $W$ among the representatives reached using $V$.\n\nFix group coordinates $\\xi$ near the identity, slice coordinates $z$ near $s_0$, and adapted target coordinates $(y,z)=(\\chi,z)$ near $s_0$. Write the densities there as $\\mu_K=\\rho_K(\\xi)|d\\xi|$, $\\mu_S=\\rho_S(z)|dz|$, and $\\mu_X=\\rho_X(y,z)|dy\\,dz|$. The positive Jacobian $J_\\Psi$ defined by $\\Psi^*\\mu_X=J_\\Psi(\\mu_K\\otimes\\mu_S)$ satisfies\n\n$$\nJ_\\Psi(e,s_0)=\\frac{\\rho_X(0,z_0)}{\\rho_S(z_0)}\\,\\Delta_{\\mathrm{FP}}(s_0),\n$$\n\nwhere $\\Delta_{\\mathrm{FP}}$ uses the density $(\\mu_K)_e$ and the standard density on $\\mathbb R^k$. Thus, when the target and slice densities are normalized so that $\\rho_X(0,z_0)=\\rho_S(z_0)$, the ordinary finite-dimensional orbit-to-slice Jacobian is exactly $\\Delta_{\\mathrm{FP}}(s_0)$. For every compactly supported Riemann-integrable function $f:O\\to\\mathbb R$, the local change-of-variables identity is\n$$\n\\int_O f\\,d\\mu_X=\\int_{V\\times W}(f\\circ\\Psi)J_\\Psi\\,d\\mu_K\\,d\\mu_S.\n$$\n\nFor the exact multiplicity statement, fix $x\\in X$ and a relatively compact open set $\\Gamma\\subset K$ such that $x\\cdot\\overline{\\Gamma}\\subset U$. Let $F_x(g)=\\chi(x\\cdot g)$. Let $r\\ge 0$ be finite, and suppose $F_x$ has exactly $r$ zeros $g_1,\\ldots,g_r$ in the support of a smooth function $\\varphi$ compactly supported in $\\Gamma$, each $M_{x\\cdot g_i}$ is invertible, and the slice points $s_i=x\\cdot g_i$ are distinct. Choose a nonnegative $\\eta\\in C_c^\\infty(\\mathbb R^k)$, supported in a ball $B_C(0)$ of finite radius $C>0$, with integral $1$, and set $\\eta_\\epsilon(y)=\\epsilon^{-k}\\eta(y/\\epsilon)$. Then\n\n$$\n\\lim_{\\epsilon\\downarrow0}\\int_\\Gamma \\varphi(g)\\,\\eta_\\epsilon(F_x(g))\\,\\Delta_{\\mathrm{FP}}(x\\cdot g)\\,d\\mu_K(g)=\\sum_{i=1}^r\\varphi(g_i).\n$$\n\nIn particular, if $\\varphi=1$ near the zeros, this finite-regulator expression counts the $r$ distinct transverse intersections exactly. The theorem asserts only a local chart and this finite-dimensional multiplicity formula; it gives no global gauge section, functional determinant, or continuum path-integral measure.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "translation-action-and-slice",
+          "step": "1.1",
+          "claim": "Check the right action and the defining-submersion condition for the coordinate slice.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unit-infinitesimal-jacobian",
+          "step": "1.2",
+          "claim": "Compute the orbit derivative, FP operator, density ratio, and local orbit-to-slice Jacobian.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-orbit-intersection",
+          "step": "2.1",
+          "claim": "Solve the affine gauge condition and verify its unique transverse root.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "approximate-identity-limit",
+          "step": "3.1",
+          "claim": "Change variables to the gauge coordinate and use continuity and unit mass to obtain the test-function value.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes nonempty Euclidean regulator and translation group data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At a=0 the unique transverse root is t=0; Step 2.1 includes this zero-coordinate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies exactly one group parameter and one slice intersection."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 gives M_s=1 at every slice point, so no degeneracy occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the epsilon down-to-zero limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement check: All spaces, densities, and the test function are fixed explicitly; no choice principle is used in the calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff assertion is made."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The examples have complete analytic calculations; no discrete finite check applies."
+    },
+    "ex-qftx-so2-gauge-slice-multiplicity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "A **finite-dimensional regulated gauge-slice datum** consists of integers $1\\le k\\le n$; a finite-dimensional Lie group $K$ of dimension $k$, with Lie algebra $\\mathfrak k:=T_eK$ and bracket transported from left-invariant vector fields; a chosen smooth positive left-invariant density $\\mu_K$, meaning $(L_h^K)^*\\mu_K=\\mu_K$ for $L_h^K(g)=hg$; a finite-dimensional smooth manifold $X$ of dimension $n$ with a chosen smooth positive density $\\mu_X$; and a smooth right action $\\alpha:X\\times K\\to X$, written $x\\cdot g$, with $x\\cdot e=x$ and $(x\\cdot g)\\cdot h=x\\cdot(gh)$. A smooth positive density on an $m$-manifold has coordinate form $\\rho(x)|dx^1\\cdots dx^m|$ with smooth $\\rho>0$, and transforms by the absolute coordinate Jacobian. The group $K$ and its action on $X$ are separate regulator data. They are not identified with the full gauge group or the full space of connections unless a particular finite model explicitly constructs such an action and verifies that it preserves $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-gauge-slice-and-faddeev-popov-operator",
+          "source_section": "Definition",
+          "quote": "Choose an embedded smooth submanifold $S\\subset X$ of codimension $k$, a smooth positive density $\\mu_S$, and an open neighborhood $U\\subset X$ of a point $s\\in S$. Embedded means that near each point of $S$, a smooth chart on $X$ identifies $S$ with $\\mathbb R^{n-k}\\times\\{0\\}$. A **gauge condition** on $U$ is a smooth map $\\chi:U\\to\\mathbb R^k$ such that $U\\cap S=\\chi^{-1}(0)$ and, for every $s'\\in U\\cap S$, $d\\chi_{s'}$ is surjective with kernel $T_{s'}S$. For every $x\\in U$, the **infinitesimal orbit map** is $R_x:=d(\\alpha_x)_e:\\mathfrak k\\to T_xX$, where $\\alpha_x(g)=x\\cdot g$; call its kernel the infinitesimal stabilizer at $x$. The **Faddeev–Popov operator** at $x$ is the ordinary linear map $M_x:=d\\chi_x\\circ R_x:\\mathfrak k\\to\\mathbb R^k$. At a slice point $s'\\in U\\cap S$, call the condition **transverse** when $M_{s'}$ is an isomorphism. Choose a positive density $\\nu$ on $\\mathfrak k$ equal to $(\\mu_K)_e$, and the standard positive density $\\lambda$ on $\\mathbb R^k$. For every $x\\in U$, the finite-dimensional Faddeev–Popov Jacobian $\\Delta_{\\mathrm{FP}}(x)$ is the nonnegative density ratio defined by $M_x^*\\lambda=\\Delta_{\\mathrm{FP}}(x)\\nu$; in chosen bases it is $|\\det M_x|$, and it is zero when $M_x$ is singular.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-local-faddeev-popov-slice-jacobian",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $(X,K,\\alpha,S,\\chi,\\mu_X,\\mu_K,\\mu_S)$ be finite-dimensional regulated gauge-slice data as defined above, with $\\dim X=n$, $\\dim K=k$, $1\\le k\\le n$, and $s_0\\in S\\cap U$. Thus $K$ acts smoothly on the right, $S$ is an embedded codimension-$k$ submanifold, $\\chi:U\\to\\mathbb R^k$ is a smooth defining submersion with $\\ker d\\chi_s=T_sS$, and the Faddeev–Popov operator is $M_s=d\\chi_s\\circ R_s$. Suppose $M_{s_0}$ is an isomorphism. For $\\Psi(g,s)=s\\cdot g$, there are neighborhoods $V$ of the identity in $K$, $W$ of $s_0$ in $S$, and $O$ of $s_0$ in $X$ such that $\\Psi:V\\times W\\to O$ is a $C^1$ diffeomorphism. Consequently, each orbit has exactly one representative in $W$ among the representatives reached using $V$.\n\nFix group coordinates $\\xi$ near the identity, slice coordinates $z$ near $s_0$, and adapted target coordinates $(y,z)=(\\chi,z)$ near $s_0$. Write the densities there as $\\mu_K=\\rho_K(\\xi)|d\\xi|$, $\\mu_S=\\rho_S(z)|dz|$, and $\\mu_X=\\rho_X(y,z)|dy\\,dz|$. The positive Jacobian $J_\\Psi$ defined by $\\Psi^*\\mu_X=J_\\Psi(\\mu_K\\otimes\\mu_S)$ satisfies\n\n$$\nJ_\\Psi(e,s_0)=\\frac{\\rho_X(0,z_0)}{\\rho_S(z_0)}\\,\\Delta_{\\mathrm{FP}}(s_0),\n$$\n\nwhere $\\Delta_{\\mathrm{FP}}$ uses the density $(\\mu_K)_e$ and the standard density on $\\mathbb R^k$. Thus, when the target and slice densities are normalized so that $\\rho_X(0,z_0)=\\rho_S(z_0)$, the ordinary finite-dimensional orbit-to-slice Jacobian is exactly $\\Delta_{\\mathrm{FP}}(s_0)$. For every compactly supported Riemann-integrable function $f:O\\to\\mathbb R$, the local change-of-variables identity is\n$$\n\\int_O f\\,d\\mu_X=\\int_{V\\times W}(f\\circ\\Psi)J_\\Psi\\,d\\mu_K\\,d\\mu_S.\n$$\n\nFor the exact multiplicity statement, fix $x\\in X$ and a relatively compact open set $\\Gamma\\subset K$ such that $x\\cdot\\overline{\\Gamma}\\subset U$. Let $F_x(g)=\\chi(x\\cdot g)$. Let $r\\ge 0$ be finite, and suppose $F_x$ has exactly $r$ zeros $g_1,\\ldots,g_r$ in the support of a smooth function $\\varphi$ compactly supported in $\\Gamma$, each $M_{x\\cdot g_i}$ is invertible, and the slice points $s_i=x\\cdot g_i$ are distinct. Choose a nonnegative $\\eta\\in C_c^\\infty(\\mathbb R^k)$, supported in a ball $B_C(0)$ of finite radius $C>0$, with integral $1$, and set $\\eta_\\epsilon(y)=\\epsilon^{-k}\\eta(y/\\epsilon)$. Then\n\n$$\n\\lim_{\\epsilon\\downarrow0}\\int_\\Gamma \\varphi(g)\\,\\eta_\\epsilon(F_x(g))\\,\\Delta_{\\mathrm{FP}}(x\\cdot g)\\,d\\mu_K(g)=\\sum_{i=1}^r\\varphi(g_i).\n$$\n\nIn particular, if $\\varphi=1$ near the zeros, this finite-regulator expression counts the $r$ distinct transverse intersections exactly. The theorem asserts only a local chart and this finite-dimensional multiplicity formula; it gives no global gauge section, functional determinant, or continuum path-integral measure.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rotation-action-and-slice",
+          "step": "1.1",
+          "claim": "Verify the right rotation action and that chi defines the horizontal axis slice.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "circle-orbit-jacobian",
+          "step": "1.2",
+          "claim": "Differentiate the action and compute the absolute determinant and local chart Jacobian.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-transverse-roots",
+          "step": "2.1",
+          "claim": "Find both zeros on the circle, their distinct slice points, and the nonzero derivatives.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-branch-mollifier-count",
+          "step": "3.1",
+          "claim": "On each inverse branch the FP factor cancels the derivative, yielding one unit mass per zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "origin-stabilizer-boundary",
+          "step": "4.1",
+          "claim": "At the origin the orbit map and FP operator vanish and all group elements are zeros, so the transverse finite-root theorem does not apply.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes X=R^2 and K=SO(2), both nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the zero FP operator and non-isolated zero set at the origin."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes the two global intersections; each root separately has a local inverse branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 records the stabilizer degeneracy and Step 2.1 proves transversality for r>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 evaluates the epsilon down-to-zero limit on the two branches."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement check: The two zeros and all regulator data are explicit; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff assertion is made."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The examples have complete analytic calculations; no discrete finite check applies."
+    },
+    "thm-qftx-singer-global-gauge-section-obstruction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qftx-smooth-principal-connection-exists",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a nonempty compact finite-dimensional Hausdorff second-countable smooth manifold without boundary, let $N\\ge2$, and let $P\\to M$ be any smooth right principal $SU(N)$-bundle. Write $SU(N)=\\{g\\in M_N(\\mathbb C):g^*g=I,\\det g=1\\}$ and $\\mathfrak{su}(N)=\\{X\\in M_N(\\mathbb C):X^*=-X,\\operatorname{tr}X=0\\}$. Then there exists a smooth $\\mathfrak{su}(N)$-valued one-form $\\omega$ on $P$ such that, for every $X\\in\\mathfrak{su}(N)$, its fundamental vertical vector is $X_P(p)=\\left.\\frac{d}{dt}\\right|_{t=0}p\\exp(tX)$, and\n$$\n\\omega(X_P)=X,\\qquad R_h^*\\omega=\\operatorname{Ad}_{h^{-1}}\\omega\\quad(h\\in SU(N)),\n$$\nwhere $R_h(p)=ph$ and $\\operatorname{Ad}_h(X)=hXh^{-1}$. Such a one-form is a smooth principal connection form; the conclusion does not assert a global trivialization of $P$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact, connected, oriented, boundaryless smooth manifold of dimension $d\\in\\{3,4\\}$ with a smooth Riemannian metric, let $N\\ge2$, and fix a smooth right principal $SU(N)$-bundle $\\pi:P\\to M$, a smooth connection $A_0$, and a point $p_m\\in P$ over $x_m\\in M$. Use the standard unitary representation of $SU(N)$ on $\\mathbb C^N$ and the invariant positive inner product $\\langle X,Y\\rangle=-\\operatorname{tr}(XY)$ on $\\mathfrak{su}(N)$. Define the adjoint vector bundle $\\operatorname{ad}P=P\\times_{\\operatorname{Ad}}\\mathfrak{su}(N)$ and the adjoint group bundle $\\operatorname{Ad}P=P\\times_{\\operatorname{Ad}}SU(N)$ with associated-bundle relation $[pg,z]=[p,\\operatorname{Ad}_g z]$.\n\nChoose one finite smooth bundle atlas with relatively compact coordinate domains and a subordinate partition of unity. For each integer $k>d/2+1$, let $H^k(T^*M\\otimes\\operatorname{ad}P)$ and $H^{k+1}(\\operatorname{ad}P)$ be the Sobolev completions of smooth sections in the resulting finite-atlas norms. Define the affine configuration space $\\mathcal A_k:=A_0+H^k(T^*M\\otimes\\operatorname{ad}P)$ and the set $\\mathcal G_{k+1}:=H^{k+1}(\\operatorname{Ad}P)$ of Sobolev gauge sections. The next lemma proves that the pointwise product and inverse close on this set and make it a Hilbert Lie group. Its based subset is $\\mathcal G_{k+1,m}:=\\{u\\in\\mathcal G_{k+1}:u(p_m)=e\\}$. Let $Z_N=\\{zI_N:z^N=1\\}$ be the center of $SU(N)$, viewed as constant gauge sections. Indeed, if $Z=(z_{ij})$ is central and $D=\\operatorname{diag}(t_1,\\ldots,t_N)\\in SU(N)$, then $(t_j-t_i)z_{ij}=0$. For each $i\\ne j$ one can choose such a diagonal matrix with $t_i\\ne t_j$, so $Z$ is diagonal. Commuting with the determinant-one unitary rotation whose block on the $(i,j)$ coordinates is $\\begin{pmatrix}\\cos t&\\sin t\\\\-\\sin t&\\cos t\\end{pmatrix}$ for $t\\notin\\pi\\mathbb Z$ forces the $i$th and $j$th diagonal entries equal. Hence $Z=zI_N$; determinant one gives $z^N=1$, and conversely every such scalar is central. Write $\\bar{\\mathcal G}_{k+1}$ for the set of $Z_N$-cosets with quotient topology; the next lemma also verifies that the induced pointwise operation makes it a Hilbert Lie group.\n\nLet $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty$ be the smooth gauge group, with the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$. In a local section of $P$, write a connection as a matrix-valued one-form $A$ and a gauge section as a map $u$ into $SU(N)$; the right gauge action is $A^u:=u^{-1}Au+u^{-1}du$, equivalently pullback by the gauge automorphism associated with $u$. The calculus lemma proves that this formula defines a smooth action on the Sobolev spaces above. For an adjoint section $\\xi$, set $d_A\\xi:=d\\xi+[A,\\xi]$ using the degree-one Lie-algebra-valued-form bracket. In local coordinates and an orthonormal adjoint frame, define the formal adjoint on an adjoint-valued one-form $a$ by $(d_A^*a)=-g^{ij}(\\nabla_i^{\\mathrm{LC}}a_j+[A_i,a_j])$, where $\\nabla^{\\mathrm{LC}}$ differentiates the covector index. This is the $L^2$ adjoint for the Riemannian volume and stated fiber metric; its local coefficient formula defines a distribution at Sobolev regularity.\n\nFor $A\\in\\mathcal A_k$, parallel transport of its $C^1$ connection form around piecewise smooth loops based at $p_m$ defines a subgroup $\\operatorname{Hol}_{p_m}(A)\\subseteq SU(N)$. Call $A$ irreducible when this subgroup leaves no nonzero proper complex subspace of $\\mathbb C^N$ invariant; changing the chosen frame conjugates the subgroup and leaves this condition unchanged. Write $\\mathcal A_k^*$ and $\\mathcal A_\\infty^*$ for the irreducible loci. Once the calculus lemma verifies the group action, define orbit equivalence by $A\\sim B$ exactly when $B=A^u$ for some gauge section $u$; all resulting quotients carry the quotient topology, whose open sets are those with open inverse image under the orbit projection.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-sobolev-smooth-irreducible-gauge-bundle",
+          "source_section": "Statement",
+          "quote": "Assume the configuration data and integer $k>d/2+1$ from the first definition. The irreducible locus $\\mathcal A_k^*$ is open, and the orbit projection\n\n$$\\pi_k:\\mathcal A_k^*\\longrightarrow \\mathcal A_k^*/\\bar{\\mathcal G}_{k+1}$$\n\nis a locally trivial smooth principal Banach Lie group bundle. For every $A\\in\\mathcal A_k^*$ there is an $\\varepsilon>0$ such that the Coulomb slice\n\n$$S_{A,\\varepsilon}:=\\{A+a:a\\in\\ker d_A^*,\\ \\|a\\|_{H^k}<\\varepsilon\\}$$\n\nlies in $\\mathcal A_k^*$, meets each orbit in its saturation exactly once, and has open saturation. The map $S_{A,\\varepsilon}\\to\\pi_k(S_{A,\\varepsilon})$ is a smooth chart of the quotient, whose quotient topology is Hausdorff.\n\nFor the $C^\\infty$ connection and gauge spaces with the section topologies specified in the first definition, the irreducible projection\n\n$$\\pi_\\infty:\\mathcal A_\\infty^*\\longrightarrow\\mathcal A_\\infty^*/\\bar{\\mathcal G}_\\infty$$\n\nis a locally trivial topological principal $\\bar{\\mathcal G}_\\infty$-bundle with the actual $C^\\infty$ quotient topology. No inverse-limit assertion alone is used to obtain this smooth-space conclusion.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qftx-irreducible-connections-weak-contractibility",
+          "source_section": "Statement",
+          "quote": "Assume ZF together with the Axiom of Choice. Let $M$ be $S^3$ or $S^4$, let $N\\ge2$, and let $P\\to M$ be any smooth principal right $SU(N)$-bundle. Fix a smooth reference connection $A_0$, a basepoint $m\\in M$, and a frame of $P_m$. Equip the affine space $\\mathcal A_\\infty=A_0+\\Omega^1(M;\\operatorname{ad}P)$ with its $C^\\infty$ section topology, and let $\\mathcal A_\\infty^*$ be the connections whose based holonomy action on $\\mathbb C^N$ has no nonzero proper invariant complex subspace. Then $\\mathcal A_\\infty^*$ is nonempty and path-connected, and for every $A\\in\\mathcal A_\\infty^*$ and every integer $j\\ge1$, $\\pi_j(\\mathcal A_\\infty^*,A)=0$. Here $\\pi_j(X,x)$ is the based homotopy group of continuous maps $u:(I^j,\\partial I^j)\\to(X,x)$ modulo homotopies that keep $\\partial I^j$ at $x$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qftx-reduced-gauge-group-sphere-nontriviality",
+          "source_section": "Statement",
+          "quote": "Let $r\\in\\{3,4\\}$, $N\\ge2$, and $P\\to S^r$ be any smooth principal $SU(N)$ bundle. Write $\\mathcal G(P):=\\mathcal G_\\infty(P)$ for its smooth gauge group with the finite-atlas $C^\\infty$ section topology and $\\overline{\\mathcal G}(P):=\\overline{\\mathcal G}_\\infty(P)=\\mathcal G_\\infty(P)/Z_N$ for the quotient by constant central gauge sections. Then either $\\overline{\\mathcal G}(P)$ has more than one path component or at least one of its based homotopy groups $\\pi_j(\\overline{\\mathcal G}(P),e)$, $j\\ge1$, is nonzero. More precisely, for $r=3$ it has infinitely many path components, and for $r=4$ its fundamental group is nontrivial.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qftx-section-retract-obstruction",
+          "source_section": "Statement",
+          "quote": "Let $p:E\\to B$ be a nonempty locally trivial principal topological $H$-bundle with right $H$-action, and suppose it has a continuous section. For any $b_0\\in B$, the fiber $H$ is a retract of $E$. If $E$ is weakly contractible, then $H$ is path connected and $\\pi_j(H,e)=0$ for every $j\\ge1$.\n\nThe retraction is expressed by the commutative diagram\n$$\\begin{array}{ccc}H&\\xrightarrow{i}&E\\\\\\Big\\downarrow{\\scriptstyle\\operatorname{id}_H}&&\\Big\\downarrow{\\scriptstyle r}\\\\H&=&H\\end{array}$$\nwith TikZ source\n```tikz\n\\begin{tikzcd}\nH \\arrow[r,\"i\"] \\arrow[dr,\"\\operatorname{id}_H\"'] & E \\arrow[d,\"r\"]\\\\\n& H\n\\end{tikzcd}\n```",
+          "uses": [
+            "3.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "auxiliary-data-all-sectors",
+          "step": "1.1",
+          "claim": "Apply [F1] to choose a smooth reference connection A0 for every bundle sector, and fix it for the affine configuration and Sobolev intermediary. The construction needs only local bundle charts and a subordinate partition.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "smooth-principal-bundle",
+          "step": "2.1",
+          "claim": "The exact smooth configuration and principal-bundle suppliers match the stated data; weak contractibility makes the nonempty total space path connected with all positive homotopy groups zero, which is the condition used by F6. The center acts trivially, so the reduced action has the same orbits as the full action on the irreducible locus.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "F6"
+          ]
+        },
+        {
+          "id": "homotopy-obstruction",
+          "step": "3.1",
+          "claim": "A section forces weak triviality of the reduced gauge group, contradicting each dimension-specific nontriviality.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "full-orbit-restriction",
+          "step": "4.1",
+          "claim": "Use the open saturated irreducible locus and quotient topology to restrict any full section to the forbidden irreducible section.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 3.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 imports actual nonemptiness; it is not inferred vacuously from a missing section."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the nonzero pi_1 obstruction in the r=4 case and does not assume nontrivial pi_0 there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest rank N=2 is included by suppliers F3–F5 and step 3.1, for every S4 bundle sector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Irreducible holonomy means no invariant proper subspace; the finite center is quotiented exactly, and reducible connections enter only Step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both dimensions r=3 and r=4 are addressed separately in Step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs a reference connection and invokes declared AC; no bundle sector is excluded."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff statement is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff statement is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof is topological and its rank/dimension cases are explicit; no discrete finite experiment is substituted for proof."
+    },
+    "lem-qftx-smooth-principal-connection-exists": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-nonabelian-gauge-data",
+          "source_section": "Definition",
+          "quote": "Choose a smooth right principal $G$-bundle $\\pi:P\\to M$: the projection and right action are smooth, the action is free and transitive on each fibre, and there are local trivializations $\\pi^{-1}(U)\\cong U\\times G$ that are equivariant diffeomorphisms over each open $U\\subseteq M$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-principal-connection-form",
+          "source_section": "Definition",
+          "quote": "Conversely, a smooth $\\mathfrak g$-valued 1-form with the reproduction and equivariance properties determines the principal connection $H=\\ker\\omega$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Every open cover of a smooth manifold admits a smooth partition of unity subordinate to it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-smooth-partition-of-unity-subordinate-to-an-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $(U_i)_{i\\in I}$ be an open cover of $M$. A family of smooth functions $(\\phi_i)_{i\\in I}$ with $\\phi_i:M\\to [0,1]$ is a **smooth partition of unity subordinate to** $(U_i)_{i\\in I}$ when:\n\n1. the family $(\\operatorname{supp}(\\phi_i))_{i\\in I}$ is locally finite;\n2. $\\operatorname{supp}(\\phi_i)\\subseteq U_i$ for every $i\\in I$; and\n3. $\\sum_i \\phi_i(p)=1$ for every $p\\in M$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-trivializing-cover",
+          "step": "1.1",
+          "claim": "A local equivariant trivializing cover exists by F1. Compactness supplies a finite subcover, with the same local product charts.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "subordinate-partition",
+          "step": "2.1",
+          "claim": "A1 and F4 give AC_omega, so F3 supplies a smooth partition subordinate to the finite trivializing cover, with supports in the corresponding chart domains.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "local-product-connection-forms",
+          "step": "3.1",
+          "claim": "In each product chart define omega_i(v,W)=g^{-1}W. Left translation makes it a smooth su(N)-valued one-form. The matrix exponential has derivative X at zero, so omega_i is the identity on fundamental vertical vectors. The identity (gh)^-1(Wh)=h^-1(g^-1W)h proves right equivariance.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "partition-average-connection",
+          "step": "4.1",
+          "claim": "The support-subordinate weighted forms extend smoothly by zero; their finite sum is smooth, right equivariant, and reproduces every fundamental vertical vector because the weights sum to one. F2 identifies this form as a principal connection.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "construct",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonempty base manifold."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The structure group rank is N>=2; no zero-rank case is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the smallest N=2, the local matrix formula in step 3.1 and finite partition construction in step 4.1 still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 uses only local charts and the partition; it applies whether P is trivial or nontrivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no limit parameter or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only choice strength used is AC_omega for the partition theorem, derived explicitly from the stated full AC in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts existence, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts existence, not an iff."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite sample verifies existence for all compact SU(N) bundles; the proof constructs the connection for arbitrary N and bundle through local charts and a partition."
+    }
+  }
+}

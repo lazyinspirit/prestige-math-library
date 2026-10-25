@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-operators-commuting-with-a-point-separating-family-of-multiplications-are-multiplications.md

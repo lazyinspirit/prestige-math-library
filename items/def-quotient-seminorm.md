@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-quotient-seminorm.json
+  precheck: n/a
 id: def-quotient-seminorm
 kind: definition
-title: "The quotient seminorm \\(\\|x+M\\|_{X/M}=\\inf_{m\\in M}\\|x+m\\|=\\operatorname{dist}(x,M)\\)"
+title: "The quotient seminorm $\\|x+M\\|_{X/M}=\\inf_{m\\in M}\\|x+m\\|=\\operatorname{dist}(x,M)$"
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [def-quotient-vector-space-coset-notation, def-norm-and-normed-space]
 justified_by: [lem-quotient-seminorm-is-representative-independent]
 aliases: []
 landmark: false
-verification:
-  audited: 2026-09-01
-  precheck: n/a
 sources:
   scraped: []
   references:

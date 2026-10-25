@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-fibre-derivative-and-legendre-transform-of-a-lagrangian.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-sylow-times-normal-subgroup-covers-when-index-is-a-p-power.md

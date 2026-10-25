@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-level-one-e2-is-a-weight-two-modular-form.json
+  precheck: pass
 id: fs-level-one-e2-is-a-weight-two-modular-form
 kind: false-statement
-title: "FALSE: the weight-two Eisenstein series E_2 is a modular form"
+title: "FALSE: the weight-two Eisenstein series $E_2$ is a modular form"
 status: published
 origin: pipeline
 deps:
@@ -13,22 +16,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-21.md"
-      - "research/frontier-38-owner-30-alpha-batch-21-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-21-post-5a.json"
-    content_sha256: "38eb22f0f66ebf00856caf112291a130bcd4b91c1443b0740a191161407f83de"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "D. Zagier, Elliptic Modular Forms and Their Applications, in The 1-2-3 of Modular Forms (Universitext, Springer, 2008)"

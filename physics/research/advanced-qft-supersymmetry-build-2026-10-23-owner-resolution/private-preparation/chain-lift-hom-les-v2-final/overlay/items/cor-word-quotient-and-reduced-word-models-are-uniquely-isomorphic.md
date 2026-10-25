@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-word-quotient-and-reduced-word-models-are-uniquely-isomorphic.md

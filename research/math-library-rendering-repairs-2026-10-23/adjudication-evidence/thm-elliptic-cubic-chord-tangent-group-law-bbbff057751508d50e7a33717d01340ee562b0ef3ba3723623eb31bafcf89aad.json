@@ -1,0 +1,97 @@
+{
+  "id": "thm-elliptic-cubic-chord-tangent-group-law",
+  "agent": "/root/rendering_repair_coordinator/dcxa_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The source proves the geometric chord/tangent construction and the reflection sign but contains no diagram. A concrete real model materially clarifies the third intersection, reflection and tangent multiplicity; its scope is explicitly illustrative rather than a real picture of every complex cubic.",
+      "action": "Added a three-panel TikZ illustration and explanatory caption to the existing Remarks section.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a real cubic secant/reflection, nonvertical tangent/reflection, and vertical inverse-pair illustration. Caption records the half-period and line-at-infinity multiplicities without falsely plotting infinity as an affine point.",
+  "source_lines_after": {
+    "caption": 157,
+    "tikz_start": 159,
+    "tikz_end": 194
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Illustrative real projective cubic Y^2 Z=4X^3-4XZ^2; affine equation y^2=4x^3-4x, O=[0:1:0].",
+      "check": "g2=4, g3=0 gives discriminant 64. Affine roots -1,0,1 are distinct. Plot domains [-1,0] and [1,1.9] are exactly real branches in this displayed window; negative y branches are reflected positive branches. Axis compression changes no intersections.",
+      "local_basis": "Statement; F5; proof steps 1.3 and 1.4."
+    },
+    {
+      "objects": "Secant L:y=2x, P=((1-sqrt(5))/2,1-sqrt(5)), Q=(0,0), R=((1+sqrt(5))/2,1+sqrt(5)).",
+      "check": "Substitution gives 4x(x^2-x-1)=0, with three distinct roots. Source coordinates approximate these points to six decimals. Step 3.2 gives P⊕Q⊕R=O and step 1.1 identifies negation with (x,y)↦(x,-y); the downward dashed arrow terminates at -R, so P⊕Q=-R. Numeric residuals at exact coordinates were at most 2.3e-16.",
+      "local_basis": "Proof steps 1.1 and 3.2."
+    },
+    {
+      "objects": "Tangent at A=(-1/2,sqrt(6)/2), slope m=-1/sqrt(6), intercept b=5/(2sqrt(6)); residual B=(25/24,35/(24sqrt(6))).",
+      "check": "A and B satisfy the cubic and y=mx+b. The derivative condition 2m y_A=12x_A^2-4=-1 holds. Substitution factors the line intersection polynomial as -4(x+1/2)^2(x-25/24), giving divisor 2A+B, not 3A. The label A (2) records double contact; the dashed arrow reflects B to -B, yielding A⊕A=-B. Floating residual checks were below 5.1e-16.",
+      "local_basis": "Proof steps 1.3, 3.2 and 4.1."
+    },
+    {
+      "objects": "Vertical line x=3/2 through V=(3/2,sqrt(15/2)) and -V, and projective point O.",
+      "check": "4(3/2)^3-4(3/2)=15/2 is nonzero, so the two finite intersections are distinct simple points. The vertical line includes O with multiplicity one by step 1.4, yielding V+(-V)+O. Up/down arrowheads indicate the same projective direction O, never an extra affine vertex. At y=0 the caption correctly changes the finite multiplicity to two. Z=0 is explicitly not plotted and its divisor 3O is stated separately.",
+      "local_basis": "Proof steps 1.4, 2.2 and 2.3."
+    }
+  ],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-elliptic-cubic-chord-tangent-group-law.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 12 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-elliptic-cubic-chord-tangent-group-law.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-elliptic-cubic-chord-tangent-group-law.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "native_preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dcxa014 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-elliptic-cubic-chord-tangent-group-law --out research/math-library-rendering-repairs-2026-10-23/previews/dcxa014",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dcxa014/manifest.json",
+      "source_sha256": "f9a1456b60a13918bc85bd85b573ccb0b81b2855527dee970e1d1bcef00e5d25",
+      "reference_map_sha256": "779c53e1683428fa1007a389a277da4b97c0dfc3a3e135e8d4e0ded0f52b8eb9",
+      "visual_inspection": "All six fresh PNG tiles viewed at original resolution; tile 06 viewed standalone. Native SVG is present. All three panels compile and display, labels and reflection arrow directions are visible, no figure clipping confirmed.",
+      "limitations": "Local native ItemBody preview, not production route coverage; 16 unrelated reference-map parse diagnostics recorded by preview."
+    }
+  },
+  "evidence": {
+    "before_raw_sha256": "7841b1b55bad00faae449b00ea8d9e4a2d5bebf1d86584392e08129bcf4ced6b",
+    "guard": "Actual SHA256 matched immediately before append.",
+    "frozen_current_comparison": "Entire frozen original remains an exact prefix of current file; all original content and frontmatter are byte-identical.",
+    "publication_status_preserved": true,
+    "screenshot_path_discrepancy": "Declared evidence_dir contains no screenshots; all six authentic recorded PNGs were located one directory above under complex-analysis/screenshots. Each SHA256 exactly matched its recorded screenshot_sha256; all six originals viewed at original resolution.",
+    "original_screenshot_dir": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots",
+    "local_sources_read": [
+      "items/thm-elliptic-cubic-chord-tangent-group-law.md",
+      "items/thm-complex-torus-weierstrass-cubic-isomorphism.md"
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-every-open-subset-of-a-manifold-is-the-cozero-set-of-a-smooth-function.md

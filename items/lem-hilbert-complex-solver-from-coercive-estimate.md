@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hilbert-complex-solver-from-coercive-estimate.json
+  precheck: pass
 id: lem-hilbert-complex-solver-from-coercive-estimate
 kind: lemma
 title: A coercive Hilbert-complex estimate solves the closed equation
@@ -33,13 +36,7 @@ sources:
     - title: "Harold P. Boas, Lecture Notes on Several Complex Variables"
       url: https://haroldpboas.gitlab.io/courses/650-2019c/notes.pdf
       locator: "§3.3.3, printed pp. 81-82: the basic estimate implies existence of a solution of the dbar equation in L2."
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement
@@ -91,7 +88,7 @@ No closedness of the range of $T$ and no surjectivity of $S$ is assumed.
 
 [F9] AC states that every family of nonempty sets has a choice function ([[def-axiom-of-choice]]), and it supplies its countable instance ([[def-countable-choice]]).
 
-[F10] A bounded self-adjoint operator $A\in\mathcal B(H_1)$ satisfies $\langle Ax,y\rangle=\langle x,Ay\rangle$ for all $x,y\in H_1$, so in particular $\langle Ax,x\rangle\in\mathbb R$ ([[def-hilbert-space-adjoint]], [[def-self-adjoint-positive-unitary-and-normal-operator]], [[def-space-of-bounded-linear-operators]]).
+[F10] A bounded self-adjoint operator $A\in\mathcal B(H_1)$ satisfies $\langle Ax,y\rangle=\langle x,Ay\rangle$ for all $x,y\in H_1$, so in particular $\langle Ax,x\rangle\in\mathbb R$ ([[def-hilbert-space-adjoint]], [[def-self-adjoint-positive-unitary-and-normal-operator]], [[def-space-of-bounded-linear-operators|Spaces of bounded linear operators]]).
 
 **Choice use.** AC is used only through the countable instance consumed by the operator, decomposition and representation facts [F1], [F2], [F3] and [F4]. The adjoint graph argument, functional extension, minimal-norm projection and the $A$-weighted variant select nothing further.
 

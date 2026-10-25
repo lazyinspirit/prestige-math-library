@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-threshold-median-query-binary-search.json
+  precheck: pass
 id: ex-threshold-median-query-binary-search
 kind: example
 title: "Median queries identify a finite threshold by binary search"
@@ -15,12 +18,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Daniel Joseph Hsu, Algorithms for Active Learning, Chapter 1 §1.2"
@@ -44,7 +41,8 @@ For $n=7$, each internal node is the queried pool point, each edge is its exact 
 ```tikz
 \begin{tikzpicture}[
   level distance=15mm,
-  sibling distance=43mm,
+  level 1/.style={sibling distance=64mm},
+  level 2/.style={sibling distance=32mm},
   every node/.style={draw, rounded corners, align=center, font=\small},
   edge from parent/.style={draw, -latex}
 ]

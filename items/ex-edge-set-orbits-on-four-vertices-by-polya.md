@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-edge-set-orbits-on-four-vertices-by-polya.json
+  precheck: n/a
 id: ex-edge-set-orbits-on-four-vertices-by-polya
 kind: example
-title: "There are 11 S_4-orbits of edge-sets on the pairs of [4]"
+title: "There are 11 $S_4$-orbits of edge-sets on the pairs of [4]"
 status: published
 origin: session
 provenance:
@@ -13,12 +16,6 @@ deps: [thm-edge-set-orbits-on-two-subsets-by-polya]
 justified_by: []
 aliases: []
 landmark: false
-verification:
-  audited: 2026-08-28
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references: []

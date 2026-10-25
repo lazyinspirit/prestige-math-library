@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-residue-sequences-need-not-separate-when-e-is-at-most-n.md

@@ -1,0 +1,100 @@
+{
+  "id": "alg-qa-deutsch-query",
+  "group": "dqa_004",
+  "agent": "/root/dqa_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone image and frozen/current Definition contain only prose for a two-register ordered gate sequence. A concrete two-wire circuit materially clarifies that target preparation precedes the shared oracle, the oracle is called once, and only the address is measured. This is warranted expository diagram work under the expanded scope, not a gap in the algorithm definition.",
+      "action": "Added a TikZ circuit and explanatory prose in a separate final Remarks section.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an address-above-target circuit with target X, H on both wires, one shared Uf box, final address H and M_Z, classical output b, and an unmeasured target ending in |->. Original Definition and complete frontmatter are byte-preserved.",
+  "source_lines_after": {
+    "remarks": [
+      57,
+      91
+    ],
+    "tikz": [
+      61,
+      89
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "before_raw_sha256": "834169d26e209a4d65c45a8fa0c8fc025c9b19ea837ad938d8420fdf6cf6c30c",
+  "after_raw_sha256": "0a094505dc111a224a432adf36517d4da1898b6aaa6b67f7c70f2a2e62e63cd1",
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects_and_order": "Two qubit registers in ordered tensor pair (A,T); A is the upper wire and T the lower wire. Both begin in |0>.",
+      "justification": "Assigned Definition Input and Procedure; def-qa-standard-bit-query Definition fixes address followed by target."
+    },
+    {
+      "maps_and_domains": "X and H on T are I_A tensor X and I_A tensor H; H on A is H tensor I_T. Uf is an endomorphism of the two-qubit register taking |a,t> to |a,t xor f(a)>.",
+      "justification": "def-qc-one-qubit-gate-alphabet-and-rotations Definition gives exact H; def-qa-standard-bit-query Definition fixes the XOR action. The figure contains exactly one two-wire Uf box and four one-qubit gates (one X and three H), matching the Procedure."
+    },
+    {
+      "preparation_and_phase": "Reading left to right, target X precedes H, so HX|0>=|->. H_A prepares (|0>+|1>)/sqrt(2). The single oracle maps this to ((-1)^f(0)|0>+(-1)^f(1)|1>)/sqrt(2) tensor |->.",
+      "justification": "thm-qa-bit-query-to-phase-query Statement and proof steps 1.1-2.1, already cited by the assigned item. Applying the last address H changes only A and leaves the target |->; no target measurement is drawn."
+    },
+    {
+      "measurement_and_output": "M_Z acts only on A and produces the classical bit b; its arrow is a classical-output connector, not another gate. The final address state is (-1)^f(0)|f(0) xor f(1)>, so b=0 for constant and b=1 for balanced.",
+      "justification": "Direct multiplication of the exact H matrix, plus def-qa-deutsch-promise Definition and assigned Output/Procedure. An independent local Python state-vector calculation applied the drawn gate order for all four f truth tables and obtained probability 1 to floating-point accuracy on the required output."
+    },
+    {
+      "proof_independence": "The circuit repeats the existing algorithm without supplying a new premise or replacing a proof. Underlying Definition is byte-identical; its existing supplier-based justification remains independent of the figure."
+    }
+  ],
+  "proof_independent": true,
+  "original_visual_evidence": {
+    "declared_path_missing": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement/screenshots/alg-qa-deutsch-query--01.png",
+    "resolved_authentic_path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/alg-qa-deutsch-query--01.png",
+    "sha256": "cbd29e8495a9d2370d331be3a8eec23b03a2034fb417177c9c168cde6d1a7ebf",
+    "inspection": "Viewed standalone at original resolution; original has no diagram."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qa-deutsch-query.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-deutsch-query.md --json",
+      "exit_code": 0,
+      "result": "1 file; 0 checked; 0 failed; not-applicable (algorithm without proof section)"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qa-deutsch-query.md --json",
+      "exit_code": 0,
+      "result": "checked 1; no errors or warnings"
+    },
+    {
+      "command": "Native repair-preview.mts --ids alg-qa-deutsch-query --out research/math-library-rendering-repairs-2026-10-23/previews/dqa-004, using unique repository-local TMPDIR runtime-dqa-004 and canonical TSX_TSCONFIG_PATH",
+      "exit_code": 0,
+      "result": "1 item, 1 tile; 1 TikZ figure; diagram_failures []; katex_errors []. Original-resolution standalone inspection confirms complete oracle box, four separate gate boxes, uninterrupted intended wire segments, visible labels and arrow, and no diagram clipping/overlap on dark background."
+    },
+    {
+      "command": "Independent local Python finite state-vector calculation for all four Boolean functions",
+      "exit_code": 0,
+      "result": "00 and 11 yield b=0; 01 and 10 yield b=1; required output probability 0.9999999999999996, other output probability 0."
+    }
+  ],
+  "native_visual_evidence": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqa-004/manifest.json",
+    "manifest_sha256": "cacfeb7e7374b5a2aaf355d840f08a66eae4c69e0e81bff74ea55cd11b29d69b",
+    "source_sha256": "0a094505dc111a224a432adf36517d4da1898b6aaa6b67f7c70f2a2e62e63cd1",
+    "html_sha256": "de29a77eb94ec64d7fd5e7181f85ee3ade67ba6eaaf742da4bd7bc15fae0afef",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dqa-004/screenshots/alg-qa-deutsch-query--01.png",
+    "screenshot_sha256": "54bf94d30d1a9977deca70ead44b7b30f50b77612e0ffda04cb50654b9940f88"
+  },
+  "remaining_issues": [
+    "Fresh native PNG shows the new Remarks and diagram clearly, but earlier unchanged Definition text is absent/black in this capture despite being present in the generated HTML. This capture limitation was reported to root; no source defect inferred or unrelated source changed. Preview is local ItemBody coverage, not a production route check. Reference-map generation reports 13 unrelated parse diagnostics."
+  ]
+}

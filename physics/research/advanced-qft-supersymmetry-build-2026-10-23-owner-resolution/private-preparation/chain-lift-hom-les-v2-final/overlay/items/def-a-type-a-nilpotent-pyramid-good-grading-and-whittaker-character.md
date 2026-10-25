@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character.md

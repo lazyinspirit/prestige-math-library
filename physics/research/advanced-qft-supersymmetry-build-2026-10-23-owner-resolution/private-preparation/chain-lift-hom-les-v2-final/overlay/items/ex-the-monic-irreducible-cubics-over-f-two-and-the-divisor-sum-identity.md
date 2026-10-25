@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-monic-irreducible-cubics-over-f-two-and-the-divisor-sum-identity.md

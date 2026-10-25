@@ -1,0 +1,90 @@
+{
+  "id": "ex-policy-iteration-tie-retention",
+  "agent": "/root/rendering_repair_coordinator/orl_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution inspection of both original tiles shows the choose a/b labels colliding with p(s,0|s,a/b)=1 on the two compact branches; action nodes and all four directed relations themselves match the example.",
+      "action": "Spread action nodes horizontally, route choices above and deterministic returns below, and enlarge diagram text with font=\\large.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Diagram-only layout repair: same three nodes, same four arrows, same labels; separated upper choice arcs from lower return arcs.",
+  "source_lines_after": [
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88
+  ],
+  "before_raw_sha256": "1756c6ca1afa939711402280732fd2f83acc19075338e10c4f871a898d12782b",
+  "after_raw_sha256": "f42b801a26d23ca4ac15399af20390c1e65e3653deef8fd29172309ecc2924ef",
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": {
+    "value": "published",
+    "frontmatter_byte_identical": true
+  },
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "State and available actions",
+      "justification": "Example and def-finite-markov-decision-process give S={s} and A(s)={a,b}. The sole circle is s and the two rectangles are action nodes a,b, as explicitly distinguished in Remarks; s->a and s->b are choice arrows, not stochastic transitions or an asserted policy."
+    },
+    {
+      "check": "Reward-transition law and arrow directions",
+      "justification": "Example and F1 specify reward 0 and deterministic return to s for both actions. By the joint-law convention in def-finite-markov-decision-process, p(s,0|s,a)=p(s,0|s,b)=1. Each labeled return arrow therefore starts at its respective action rectangle and ends at s; the final native view independently confirms both arrowheads at s."
+    },
+    {
+      "check": "Fixed policy evaluation and ties",
+      "justification": "With gamma=1/2, r=0 and P(s|s,a)=P(s|s,b)=1, the policy Bellman formula gives T^pi v(s)=v(s)/2 for either deterministic policy. Verification 1.1 solves v=0, uniquely consistent with the local contraction theorem; the optimality formula then gives Q(s,a)=Q(s,b)=0. No figure label implies unequal values or a selected policy."
+    },
+    {
+      "check": "Improvement conventions",
+      "justification": "alg-policy-iteration step 2 retains the current maximizing action, and step 3 stops when the policy is unchanged, so starting a stops after one exact evaluation. Verification 2.2 explicitly defines the alternative switching rule, producing a,b,a,b indefinitely. The diagram depicts the common MDP only and asserts neither that every arbitrary tie rule cycles nor that both actions are selected by one deterministic policy."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-policy-iteration-tie-retention.md --json",
+      "exit_code": 0,
+      "result": "1 file checked, 1 pass, 0 failed; strategy direct"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-policy-iteration-tie-retention.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors []; warnings []"
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-policy-iteration-tie-retention.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/orl-006-final-preview",
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-policy-iteration-tie-retention --out research/math-library-rendering-repairs-2026-10-23/orl-006-final-preview",
+      "exit_code": 0,
+      "katex_errors": [],
+      "diagram_failures": [],
+      "tikz_count": 1,
+      "original_resolution_final_views": [
+        "screenshots/ex-policy-iteration-tie-retention--01.png",
+        "screenshots/ex-policy-iteration-tie-retention--02.png"
+      ],
+      "visual_result": "Standalone original-resolution final views show readable nonoverlapping choice labels above the arcs and probability/reward labels below; all nodes, arrowheads and labels fit within the diagram and page. Light text and lines contrast with the black background."
+    }
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview only, not production route or metadata footer; preview title map reports 16 unrelated parse diagnostics. No external sources or HTTP routes visited."
+  ]
+}

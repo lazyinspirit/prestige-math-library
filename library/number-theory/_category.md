@@ -4,24 +4,6 @@ title: Number Theory
 status: published
 ---
 
-Number theory here starts from the integers as this library constructed them, an
-ordered commutative ring and nothing more, and asks what their multiplicative
-structure is. Division with remainder gives the greatest common divisor and
-Bezout's identity, Bezout gives Euclid's lemma, and Euclid's lemma is the step
-that makes prime factorisation unique rather than merely possible. Congruence
-modulo n turns divisibility into an equivalence relation, so the integers modulo
-n form a ring in which linear equations can be solved; the Chinese remainder
-theorem splits a composite modulus into its prime powers, Euler's totient counts
-the units, and the unit group modulo a prime is cyclic, which is what a
-primitive root is. The collection then asks which residues are squares. The
-Legendre symbol is multiplicative because that unit group is cyclic, Euler's
-criterion and Gauss's lemma compute it, quadratic reciprocity relates the symbol
-for one prime to the symbol for the other, and the Jacobi symbol extends the
-computation to odd composite moduli.
+Published pages develop arithmetic from divisibility, Bézout and prime factorization through congruences, unit groups, quadratic residues, reciprocity, and continued fractions. Pell equations and binary quadratic forms connect Diophantine problems with reduction methods. Advanced branches cover p-adic absolute values, completions and Hilbert symbols; number fields, discriminants, ideals, decomposition and class groups; cyclotomic and Frobenius methods; arithmetic functions, Dirichlet series and L-functions; average-order estimates; and the classical prime number theorem. The collection spans algebraic, local, and analytic number theory.
 
-The number theory track scaffolded to continue this collection rests on exactly
-these pages, and it splits at the point where they stop: an analytic block that
-needs the gamma and zeta functions of the complex analysis track, and a local
-and algebraic block that needs valuation rings, Dedekind domains and ideal
-classes from commutative algebra. The metric completion of the rationals that
-produces the p-adic numbers comes from Topology and Real Analysis.
+Abstract Algebra and Group Theory support divisibility, congruences, and finite-group methods; Commutative Algebra underpins number fields and ideal classes. Complex Analysis supplies tools for Dirichlet series and prime-distribution results, while Topology and Real Analysis support completions and local-field arguments. These results feed Quantum Algorithms and Quantum Computing through factoring, modular arithmetic, and finite-group structure; Representation Theory and Complex Analysis use algebraic and analytic number theory. The branches can be followed from the foundations they need.

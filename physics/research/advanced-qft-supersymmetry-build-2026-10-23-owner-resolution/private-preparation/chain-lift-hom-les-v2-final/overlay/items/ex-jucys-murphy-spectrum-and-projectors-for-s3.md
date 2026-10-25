@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-jucys-murphy-spectrum-and-projectors-for-s3.md

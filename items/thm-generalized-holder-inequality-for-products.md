@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-generalized-holder-inequality-for-products.json
+  precheck: pass
 id: thm-generalized-holder-inequality-for-products
 kind: theorem
 title: "Generalized Holder inequality puts products into $L^r$"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-altered
 deps: [thm-holder-inequality-for-integrals, def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "Raise |fg| to the r-th power and apply Holder to |f|^r and |g|^r with conjugate exponents p/r and q/r."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -48,7 +48,7 @@ $$\|fg\|_r\le\|f\|_p\|g\|_q.$$
 
 ## Proof
 
-**Proof technique:** Raise $|fg|$ to the $r$-th power and apply Holder to $|f|^r$ and $|g|^r$ with conjugate exponents $p/r$ and $q/r$.
+**Proof technique:** Raise the absolute value of the product to the r-th power and apply Holder to the r-th powers of the absolute values of f and g, with conjugate exponents p/r and q/r.
 
 1.1 If $r=\infty$, then $1/p=1/q=0$, so $p=q=\infty$ by [L2]. Hence $$|fg|\le\|f\|_\infty\|g\|_\infty$$ almost everywhere, and taking essential suprema gives $$\|fg\|_\infty\le\|f\|_\infty\|g\|_\infty.$$. [L2, L3, L4, given]
 

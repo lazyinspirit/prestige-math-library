@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-thom-classifying-detector-map-exists-and-is-continuous.json
+  precheck: pass
 id: lem-finite-thom-classifying-detector-map-exists-and-is-continuous
 kind: lemma
 title: "The finite Thom classifying detector map exists and is continuous"
@@ -24,17 +27,12 @@ sources:
     - title: "Tom Weston, An Introduction to Cobordism Theory"
       url: "https://math.stanford.edu/~ralph/morsecourse/cobordismintro%20.pdf"
       locator: "§13, printed pp. 24–25: classifying maps to Eilenberg–Mac Lane spaces; the finite generator product and its continuity are verified locally."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
 
-Assume AC and the construction of [[def-finite-thom-classifying-detector-map]], using the single global basis B=⋃_{d≥0}B_d and section fixed there. For every r≥2, the initial segment B(r)=⋃_{0≤d<r}B_d is finite; for each b∈B_d with d_b=d, the coordinate class m̄_{b,r}∈H̃^{r+d_b}(T_r;F₂) has a based representative f_{r,b}:T_r→K(F₂,r+d_b) representing that class; and the coordinate family uniquely defines a continuous based map f_r:T_r→P_r.
+Assume AC and the construction of [[def-finite-thom-classifying-detector-map]], using the single global basis $B=\bigcup_{d\ge0}B_d$ and section fixed there. For every $r\ge2$, the initial segment $B(r)=\bigcup_{0\le d<r}B_d$ is finite; for each $b\in B_d$ with $d_b=d$, the coordinate class $\bar m_{b,r}\in\widetilde H^{r+d_b}(T_r;\mathbb F_2)$ has a based representative $f_{r,b}:T_r\to K(\mathbb F_2,r+d_b)$ representing that class; and the coordinate family uniquely defines a continuous based map $f_r:T_r\to P_r$.
 
 ## Facts & Assumptions
 
@@ -50,6 +48,6 @@ Assume AC and the construction of [[def-finite-thom-classifying-detector-map]], 
 
 **Proof technique:** direct.
 
-1.1 This initial segment is finite: each Q^d is a quotient of the finite-dimensional M^d, and there are only r degrees in the union. For b∈B_d, the stable coordinate isomorphism M^d→H̃^{r+d}(T_r;F₂) supplies the rank-r class m_{r,b} from the same fixed stable element m_b. Let f_{r,b}:T_r→K(F₂,r+d) classify m_{r,b}, using the published Eilenberg–Mac Lane representability theorem. Set $P_r=\prod_{b\in B(r)}K(\mathbb F_2,r+d_b)$ and $f_r=(f_{r,b})_{b\in B(r)}$. [given, F1, F2, F3]
+1.1 This initial segment is finite: each $Q^d$ is a quotient of the finite-dimensional $M^d$, and there are only $r$ degrees in the union. For $b\in B_d$, the stable coordinate isomorphism $M^d\to\widetilde H^{r+d}(T_r;\mathbb F_2)$ supplies the rank-$r$ class $m_{r,b}$ from the same fixed stable element $m_b$. Let $f_{r,b}:T_r\to K(\mathbb F_2,r+d)$ classify $m_{r,b}$, using the published Eilenberg–Mac Lane representability theorem. Set $P_r=\prod_{b\in B(r)}K(\mathbb F_2,r+d_b)$ and $f_r=(f_{r,b})_{b\in B(r)}$. [given, F1, F2, F3]
 
 2.1 The product is finite, so its coordinate maps define a continuous based map. This is the promised construction from homogeneous free-module generators; the generic representability construction alone would not show the comparison. [step 1.1, F3] ∎

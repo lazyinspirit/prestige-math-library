@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-categories-of-models-for-algebraic-theories-are-complete-and-cocomplete.md

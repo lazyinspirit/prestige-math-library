@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-archimedean-polygon-perimeter-characterization-of-pi.md

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-no-square-root-of-p-in-qp.json
+  precheck: pass
 id: ex-no-square-root-of-p-in-qp
 kind: example
-title: "There is no square root of p in Q_p"
+title: 'There is no square root of $p$ in $\mathbb{Q}_p$'
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-square-criterion-in-qp-for-odd-p, thm-square-criterion-in-q2]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -32,7 +28,7 @@ For every prime $p$, the element $p$ is not a square in $\mathbb Q_p$.
 
 **Given:** A prime $p$.
 
-[L1] The odd-prime and $2$-adic square criteria describe exactly which elements are squares ([[thm-square-criterion-in-qp-for-odd-p]], [[thm-square-criterion-in-q2]]).
+[L1] The odd-prime and $2$-adic square criteria describe exactly which elements are squares ([[thm-square-criterion-in-qp-for-odd-p|Square criterion in $\mathbb{Q}_p$ for odd $p$]], [[thm-square-criterion-in-q2|Square criterion in $\mathbb{Q}_2$]]).
 
 ## Verification
 

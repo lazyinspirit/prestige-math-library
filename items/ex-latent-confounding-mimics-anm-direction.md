@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-latent-confounding-mimics-anm-direction.json
+  precheck: pass
 id: ex-latent-confounding-mimics-anm-direction
 kind: example
 title: "Latent confounding can mimic an observed ANM direction"
@@ -72,7 +75,7 @@ observed there. Model B has the observed edge $X\to Y$. The diagrams show the
 two model graphs; the density and intervention calculations below prove the
 claimed observational and interventional comparisons.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[>=stealth]
   \node[draw,circle,dashed] (u) at (0,0) {$U$};
   \node[draw,circle] (xa) at (2,1) {$X$};
@@ -85,7 +88,7 @@ claimed observational and interventional comparisons.
   \draw[->] (xb) -- (yb);
   \node at (5,-1) {Model B};
 \end{tikzpicture}
-~~~
+```
 
 ## Facts & Assumptions
 

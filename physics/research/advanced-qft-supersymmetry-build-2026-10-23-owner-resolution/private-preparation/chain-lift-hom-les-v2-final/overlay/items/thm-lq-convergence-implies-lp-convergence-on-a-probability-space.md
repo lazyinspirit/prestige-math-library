@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-lq-convergence-implies-lp-convergence-on-a-probability-space.md

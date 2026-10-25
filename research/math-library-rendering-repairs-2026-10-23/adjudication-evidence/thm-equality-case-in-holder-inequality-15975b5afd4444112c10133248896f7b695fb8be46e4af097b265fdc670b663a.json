@@ -1,0 +1,80 @@
+{
+  "id": "thm-equality-case-in-holder-inequality",
+  "agent": "/root/rendering_repair_supervisor2/mt_035",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original standalone tiles 01 and 02 were inspected at original resolution. Tile 01 visibly prints the dollar delimiters and caret exponent syntax in the uppercase proof-technique banner, while identical body expressions typeset. The banner is rendered as plain text.",
+      "action": "Replaced only the two banner formulas with equivalent prose: the pth power of the absolute value of f and the qth power of the absolute value of g.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "One proof-technique body paragraph now uses plain words for its two power expressions; title, full frontmatter, Statement, Facts and numbered proof are byte-identical to the frozen preimage.",
+  "source_lines_after": [
+    58
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "renderer_limitation": "The native proof-technique banner inserts plain text and applies uppercase CSS; inline math delimiters are not parsed there. Local prose workaround only.",
+  "before_raw_sha256": "efe986d44ddd5fe2972718a922b9ad3a9871549559185767823a623de12ce2d9",
+  "after_raw_sha256": "e348fc79e8e76452f88569b92131b879f59436b258da5975505a3f769d1034e6",
+  "raw_sha_guard": "Matched queue before_raw_sha256 immediately before edit.",
+  "status_preserved": true,
+  "non_title_metadata_preserved": true,
+  "original_evidence": [
+    "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/thm-equality-case-in-holder-inequality--01.png",
+    "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/thm-equality-case-in-holder-inequality--02.png"
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-equality-case-in-holder-inequality.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-equality-case-in-holder-inequality.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-equality-case-in-holder-inequality.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/mt035/manifest.json",
+    "manifest_sha256": "4b75eaba4be180cc89cc4450840df31a54ae2f4aba07b3f4c9b894c04939d93a",
+    "source_sha256": "e348fc79e8e76452f88569b92131b879f59436b258da5975505a3f769d1034e6",
+    "html_sha256": "6016d6a7569cc886fe6f82d961ab91a393e41b07ba826fd88e4d7b0a1f5a6c1f",
+    "reference_map_sha256": "21463e42b9f45cc1e4a75f53f360b7bc51e7bd4e75bf1dd4787c9d8266f8fd91",
+    "viewed_tiles": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/mt035/screenshots/thm-equality-case-in-holder-inequality--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/mt035/screenshots/thm-equality-case-in-holder-inequality--02.png"
+    ],
+    "view_detail": "original",
+    "result": "Both current standalone tiles inspected: banner wraps cleanly with readable prose and no raw math delimiters; theorem and proof mathematics remain rendered.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "reference_map_diagnostics": 13
+  },
+  "diagram_changes": false
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-pullback-carries-closed-forms-to-closed-forms-and-exact-forms-to-exact-forms.md

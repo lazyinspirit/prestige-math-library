@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-deleting-stay-put-moves-does-not-preserve-computation.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-free-presentation-construction-is-a-central-extension.json
+  precheck: pass
 id: lem-free-presentation-construction-is-a-central-extension
 kind: lemma
 title: "Free-presentation construction is central"
@@ -14,18 +17,12 @@ sources:
     - title: "Clara Löh, Group Cohomology"
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+
 ---
 
 ## Statement
 
-For perfect G, [F,F]/[F,R]→G is central.
+For perfect $G$, $[F,F]/[F,R]\to G$ is central.
 
 ## Proof
 

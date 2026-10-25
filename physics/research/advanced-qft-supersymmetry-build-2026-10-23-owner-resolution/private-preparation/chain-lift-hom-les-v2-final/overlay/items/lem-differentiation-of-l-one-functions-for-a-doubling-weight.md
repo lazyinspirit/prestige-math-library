@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-differentiation-of-l-one-functions-for-a-doubling-weight.md

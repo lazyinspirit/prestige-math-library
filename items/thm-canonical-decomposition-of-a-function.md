@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-canonical-decomposition-of-a-function.json
+  precheck: pass
 id: thm-canonical-decomposition-of-a-function
 kind: theorem
 title: "Every function $f : A \\to B$ factors as $f = \\iota \\circ \\bar f \\circ \\pi$ with $\\pi : A \\to A/{\\ker f}$ the surjective quotient map, $\\bar f : A/{\\ker f} \\to f[A]$ the bijection $[a] \\mapsto f(a)$, and $\\iota : f[A] \\to B$ the inclusion injection; $\\bar f$ is the only function making the factorisation hold"
@@ -13,14 +16,6 @@ aliases: [thm-first-isomorphism-theorem-for-sets]
 landmark: true
 short: "canonical decomposition"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-08-06
-    scope: page
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -98,3 +93,18 @@ $\iota := \Delta_{f[A]}$, the identity relation on $f[A]$. Then
 3.2 Claim (v): if $h : A/{\sim} \to f[A]$ also satisfies $\iota \circ h \circ \pi = f$, then for $C \in A/{\sim}$ choose $a$ with $C = [a]$ and compute $h(C) = \iota(h(\pi(a))) = f(a) = \bar f(C)$; both have domain $A/{\sim}$, so $h = \bar f$. [L5, L10, L11, L12, step 1.2, step 2.1]
 
 4.1 Claims (i) to (v) are established, which is the statement. [step 1.1, step 1.2, step 2.1, step 3.1, step 3.2] ∎
+
+## Remarks
+
+The canonical factorization is displayed by the commutative square below.
+Here $\pi(a)=[a]$, $\bar f([a])=f(a)$, and $\iota(y)=y$;
+$\pi$ is surjective, $\bar f$ is bijective, and $\iota$ is injective.
+
+```tikzcd
+A \arrow[r, "f"] \arrow[d, "\pi"'] & B \\
+A/{\sim} \arrow[r, "\bar f"'] & f[A] \arrow[u, "\iota"']
+```
+
+The route through $A/{\sim}$ and $f[A]$ sends each $a\in A$ to
+$[a]$, then to $f(a)$, and finally to $f(a)$ in $B$, so it equals $f$
+as established in step 3.1. The proof above is independent of this diagram.

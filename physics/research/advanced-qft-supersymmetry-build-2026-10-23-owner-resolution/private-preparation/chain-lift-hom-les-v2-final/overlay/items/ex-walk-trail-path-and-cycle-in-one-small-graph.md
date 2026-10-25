@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-walk-trail-path-and-cycle-in-one-small-graph.md

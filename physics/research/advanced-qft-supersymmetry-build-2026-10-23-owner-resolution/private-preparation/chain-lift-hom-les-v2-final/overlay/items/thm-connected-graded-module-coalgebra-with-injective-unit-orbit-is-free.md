@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-connected-graded-module-coalgebra-with-injective-unit-orbit-is-free.md

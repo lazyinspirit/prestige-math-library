@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology.md

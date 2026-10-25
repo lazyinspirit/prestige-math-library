@@ -1,0 +1,97 @@
+--- a/tools/physics-support/step3-owner-finding-alias.mjs
++++ b/tools/physics-support/step3-owner-finding-alias.mjs
+@@ -59,7 +59,8 @@
+         primaryBatch, entry, receipt, bytes, sha, hashValue});
+     }
+     const locationAlias = entry.kind === 'location-only-unbound-reader';
+-    const distinctCarrierAlias = entry.kind === 'same-source-distinct-carrier';
++    const proofOnlyAlias = entry.kind === 'same-statement-proof-only-transition';
++    const distinctCarrierAlias = entry.kind === 'same-source-distinct-carrier' || proofOnlyAlias;
+     if (locationAlias) {
+       if (prior.route !== 'reader' || decision.route !== 'flagged'
+         || primary.defect !== alias.defect || primary.severity !== alias.severity
+@@ -77,7 +78,9 @@
+         || !/^[a-f0-9]{64}$/.test(alias.observed_sha256 ?? '')
+         || primary.observed_sha256 === alias.observed_sha256
+         || !/^[a-f0-9]{64}$/.test(primary.observed_source?.item_sha256 ?? '')
+-        || primary.observed_source.item_sha256 !== alias.observed_source?.item_sha256
++        || (proofOnlyAlias ? primary.observed_source.item_sha256 === alias.observed_source?.item_sha256
++          || !/^[a-f0-9]{64}$/.test(alias.observed_source?.item_sha256 ?? '')
++          : primary.observed_source.item_sha256 !== alias.observed_source?.item_sha256)
+         || primary.observed_source.snapshot !== alias.observed_source.snapshot
+         || primary.location !== entry.primary_location || alias.location !== entry.alias_location
+         || primary.observed_sha256 !== entry.primary_observed_sha256
+@@ -123,15 +126,68 @@
+           || record.observed_source_item_sha256 !== finding.observed_source.item_sha256
+           || record.location !== finding.location || record.severity !== finding.severity) return false;
+       }
+-      const observed = entry.observed_raw_archive;
+-      bound(observed);
+-      if (observed.sha256 !== primary.observed_source.item_sha256
+-        || observed.path !== owner.observed_raw_archive?.path
+-        || observed.sha256 !== owner.observed_raw_archive?.sha256) return false;
+       const scopeGuard = entry.frozen_scope_guard;
+       if (scopeGuard?.path !== `research/${run}-step3-scope-${primaryBatch}.json`) return false;
+       const scope = JSON.parse(bound(scopeGuard));
+       if (scope.run !== run || String(scope.batch) !== String(primaryBatch)) return false;
++      if (proofOnlyAlias) {
++        if (primary.defect !== alias.defect || primary.subject_type !== 'in-run-dependency'
++          || alias.subject_type !== 'in-run-dependency'
++          || !/^Statement(?:,|\s|$)/.test(primary.location)
++          || !/^Statement(?:,|\s|$)/.test(alias.location)
++          || hashValue(scope.reader_findings?.find(x => x.obligation === prior.obligation)) !== hashValue(primary)
++          || hashValue(scope.refuter_findings?.find(x => x.obligation === decision.obligation)) !== hashValue(alias)) return false;
++        const archives = entry.observed_raw_archives, texts = [];
++        for (const [key, finding] of [['primary', primary], ['alias', alias]]) {
++          const archive = archives?.[key];
++          if (archive?.sha256 !== finding.observed_source.item_sha256
++            || archive.path !== owner.observed_raw_archives?.[key]?.path
++            || archive.sha256 !== owner.observed_raw_archives?.[key]?.sha256) return false;
++          texts.push(bound(archive).toString());
++        }
++        // Exact byte comparison: only the unique Proof section may differ.
++        // No normalization or claim repair may manufacture historical equality.
++        const splitProof = text => {
++          const headings = [...text.matchAll(/^## (.+)\r?$/gm)];
++          const proofs = headings.filter(h => h[1] === 'Proof');
++          const statements = headings.filter(h => h[1] === 'Statement');
++          if (proofs.length !== 1 || statements.length !== 1
++            || statements[0].index >= proofs[0].index
++            || !text.startsWith('---\n') || !text.includes(`\nid: ${entry.subject}\n`)) throw Error('ambiguous item');
++          const proof = proofs[0], next = headings.find(h => h.index > proof.index);
++          const statement = statements[0], after = headings.find(h => h.index > statement.index);
++          return {outside: text.slice(0, proof.index) + text.slice(next?.index ?? text.length),
++            statement: text.slice(statement.index, after?.index ?? text.length)};
++        };
++        const [left, right] = texts.map(splitProof);
++        if (left.outside !== right.outside || left.statement !== right.statement
++          || sha(left.statement) !== entry.statement_sha256
++          || owner.statement_sha256 !== entry.statement_sha256) return false;
++        const transition = entry.proof_only_transition;
++        for (const [label, finding] of [['pre', primary], ['post', alias]]) {
++          const guard = transition?.[`${label}_snapshot`];
++          if (guard?.path !== `research/${run}-step3-hash-${entry.producer_batch}-${label}.json`) return false;
++          const snapshot = JSON.parse(bound(guard)), carrier = snapshot.hashes?.[entry.subject];
++          if (snapshot.version !== 2 || snapshot.run !== run
++            || String(snapshot.batch) !== String(entry.producer_batch) || snapshot.label !== label
++            || carrier?.item_sha256 !== finding.observed_source.item_sha256
++            || hashValue({producer_batch: entry.producer_batch, ...carrier}) !== finding.observed_sha256) return false;
++        }
++        const nativeGuard = transition?.native_reader_result;
++        if (nativeGuard?.path !== `research/${run}-dispatch/reader-reader-${entry.producer_batch}.result.json`) return false;
++        const native = JSON.parse(bound(nativeGuard));
++        if (native.run !== run || native.role !== 'reader' || native.label !== `reader-${entry.producer_batch}`
++          || native.ok !== true || native.exit_code !== 0 || native.covers?.length !== 1
++          || String(native.covers[0]) !== String(entry.producer_batch)) return false;
++        if (transition.native_reader_report?.path !== `research/${run}-reader-${entry.producer_batch}.md`) return false;
++        bound(transition.native_reader_report);
++      } else {
++        const observed = entry.observed_raw_archive;
++        bound(observed);
++        if (observed.sha256 !== primary.observed_source.item_sha256
++          || observed.path !== owner.observed_raw_archive?.path
++          || observed.sha256 !== owner.observed_raw_archive?.sha256) return false;
++      }
+     }
+     const guards = entry.frozen_file_guards;
+     if (!Array.isArray(guards) || guards.length !== 2

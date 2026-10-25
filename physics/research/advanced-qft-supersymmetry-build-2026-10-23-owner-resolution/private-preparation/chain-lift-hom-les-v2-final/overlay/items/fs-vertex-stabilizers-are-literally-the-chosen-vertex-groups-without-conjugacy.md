@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-vertex-stabilizers-are-literally-the-chosen-vertex-groups-without-conjugacy.md

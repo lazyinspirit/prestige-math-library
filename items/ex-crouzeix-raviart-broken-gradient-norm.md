@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-crouzeix-raviart-broken-gradient-norm.json
+  precheck: pass
 id: ex-crouzeix-raviart-broken-gradient-norm
 kind: example
 title: A nonzero CR function on a two-triangle square
@@ -28,12 +31,7 @@ sources:
       url: https://jschoeberl.github.io/iFEM/FEM/nonconforming.html
       locator: "§25.2, lines 276–290: the nonconforming P1 CR space and its
         broken-gradient form."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Example
@@ -48,7 +46,8 @@ The figure uses Cartesian coordinates with $x$ increasing rightward and $y$
 upward. The red diagonal is the one interior facet; $K_1$ is below and to its
 right, and $K_2$ is above and to its left.
 
-\begin{tikzpicture}[scale=2,line width=0.7pt,every node/.style={font=\small}]
+```tikz
+\begin{tikzpicture}[scale=4,transform shape,line width=0.7pt,every node/.style={font=\small,scale=0.4}]
 \fill[blue!8] (0,0)--(1,0)--(1,1)--cycle;
 \fill[green!8] (0,0)--(0,1)--(1,1)--cycle;
 \draw[gray] (0,0)--(1,0)--(1,1)--(0,1)--cycle;
@@ -58,10 +57,11 @@ right, and $K_2$ is above and to its left.
 \node[below right] at (1,0) {$(1,0)$};
 \node[above right] at (1,1) {$(1,1)$};
 \node[above left] at (0,1) {$(0,1)$};
-\node at (0.72,0.35) {$K_1$};
-\node at (0.28,0.65) {$K_2$};
-\node[red!75!black,above left] at (0.5,0.5) {$F$};
+\node[text=black!90] at (0.72,0.35) {$K_1$};
+\node[text=black!90] at (0.28,0.65) {$K_2$};
+\node[red!75!black,above left] at (0.75,0.75) {$F$};
 \end{tikzpicture}
+```
 
 ## Facts & Assumptions
 

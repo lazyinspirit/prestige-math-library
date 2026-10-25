@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-right-invariant-fields-identify-t-e-g-with-the-same-bracket-as-left-invariant-fields.json
+  precheck: pass
 id: fs-right-invariant-fields-identify-t-e-g-with-the-same-bracket-as-left-invariant-fields
 kind: false-statement
-title: Right-invariant fields identify T_eG with the same bracket as left-invariant fields
+title: Right-invariant fields identify $T_eG$ with the same bracket as left-invariant fields
 status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
@@ -10,12 +13,6 @@ proof_strategy: counterexample
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
 sources:
   references:
     - title: Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed.

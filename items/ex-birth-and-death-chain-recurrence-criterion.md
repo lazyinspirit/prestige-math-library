@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-birth-and-death-chain-recurrence-criterion.json
+  precheck: pass
 id: ex-birth-and-death-chain-recurrence-criterion
 kind: example
 title: "Birth–death recurrence through scale products"
@@ -22,13 +25,6 @@ deps:
   - thm-nonnegative-weighted-sums-of-measures
 proof_strategy: direct
 landmark: false
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"
@@ -41,7 +37,7 @@ provenance:
 
 ## Example
 
-Assume AC. Let $X$ be a Markov chain on $mathbb N_0$ whose only possible
+Assume AC. Let $X$ be a Markov chain on $\mathbb N_0$ whose only possible
 transitions from $i$ are to $i+1$, $i$, and (when $i\ge1$) $i-1$. Write
 $p_i:=p(i,i+1)>0$ for $i\ge0$, $q_i:=p(i,i-1)>0$ for $i\ge1$, $q_0=0$,
 and $r_i:=p(i,i)\ge0$. Thus

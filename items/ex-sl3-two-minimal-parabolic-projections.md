@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-sl3-two-minimal-parabolic-projections.json
+  precheck: pass
 id: ex-sl3-two-minimal-parabolic-projections
 kind: example
 title: Two minimal-parabolic projections for SL(3)
@@ -24,13 +27,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Michel Brion, Lectures on the Geometry of Flag Varieties"
@@ -95,3 +91,34 @@ fibre degree $-2$ on both families.
 2.1 Fibre degrees. By [F2] the degree of $\mathcal L_{\omega_i}$ on the fibre of the projection attached to $\alpha_j$ is $\langle\omega_i,\alpha_j^\vee\rangle=\delta_{ij}$ by step 1.1; hence the fibre-degree pair of $\mathcal L_{\omega_1}$ is $(1,0)$ and that of $\mathcal L_{\omega_2}$ is $(0,1)$ on the two families of fibres. In particular $\mathcal L_{\omega_1}\otimes\mathcal L_{\omega_2}\cong\mathcal L_{\omega_1+\omega_2}=\mathcal L_\rho$ has fibre-degree pair $(1,1)$, and $\omega_{G/B}\cong\mathcal L_{-2\rho}$ has degree $\langle-2\rho,\alpha_j^\vee\rangle=-2$ on both families, matching the behaviour $\mathcal O(-2)$ of a canonical bundle on the fibres of a $\mathbb P^1$-bundle. [F2, F3, F6, step 1.1, step 1.3]
 
 3.1 Wrap-up and the Axiom of Choice. The two projections of the statement are $f_{\alpha_1}$ and $f_{\alpha_2}$ of step 1.3, with fibers $\mathbb P^1$ by step 1.4 and fibre-degree pairs $(1,0)$, $(0,1)$ by step 2.1; the consistency check with $\omega_{G/B}$ is step 2.1. The Axiom of Choice [A1] is assumed in the statement and inherited from the named suppliers [F1]-[F6]; no choice is made in the example itself, whose only selections are the finitely many standard data $\alpha_i,\omega_i$ and the standard flag. [A1, F1, F2, F3, F4, F5, F6, step 2.1] ∎
+
+## Remarks
+
+The two projections form the following incidence correspondence. Here
+$\operatorname{Gr}(r,\mathbb C^3)$ denotes the variety of $r$-dimensional
+subspaces, and $\mathbb P(V)$ parametrizes lines in $V$. The arrows retain the
+indicated subspace; they do not map one base to the other.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={align=center,font=\Large}]
+\node (flags) at (0,3.5) {$G/B=\{(L,H):0\subset L\subset H\subset\mathbb C^3\}$};
+\node (planes) at (-4.2,0) {$G/P_{\alpha_1}=\mathrm{Gr}(2,\mathbb C^3)$\\
+$H$};
+\node (lines) at (4.2,0) {$G/P_{\alpha_2}=\mathrm{Gr}(1,\mathbb C^3)$\\
+$L$};
+\draw[->] (flags.south west) -- node[left] {$f_{\alpha_1}$\\forget $L$} (planes.north);
+\draw[->] (flags.south east) -- node[right] {$f_{\alpha_2}$\\forget $H$} (lines.north);
+\node at (-4.2,-1.5) {$f_{\alpha_1}^{-1}(H)=\mathbb P(H)\cong\mathbb P^1$\\degrees: $(1,0)$};
+\node at (4.2,-1.5) {$f_{\alpha_2}^{-1}(L)=\mathbb P(\mathbb C^3/L)\cong\mathbb P^1$\\degrees: $(0,1)$};
+\end{tikzpicture}
+```
+
+In each fibre annotation, the degrees are ordered by the line bundles
+$(\mathcal L_{\omega_1},\mathcal L_{\omega_2})$. Thus reading across the two
+fibres gives degree pair $(1,0)$ for $\mathcal L_{\omega_1}$ and $(0,1)$ for
+$\mathcal L_{\omega_2}$, as in step 2.1. The root indices follow step 1.3:
+$U_{-\alpha_1}$ varies the line inside the standard plane, whereas
+$U_{-\alpha_2}$ varies the plane containing the standard line. Both bases have
+dimension $2$, the incidence variety has dimension $3$, and both fibres have
+dimension $1$ (steps 1.1, 1.3 and 1.4). This diagram summarizes the preceding
+argument; the proof is independent of the illustration.

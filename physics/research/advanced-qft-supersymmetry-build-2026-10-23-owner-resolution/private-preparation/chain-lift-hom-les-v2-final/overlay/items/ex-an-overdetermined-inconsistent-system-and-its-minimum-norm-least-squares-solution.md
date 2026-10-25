@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-an-overdetermined-inconsistent-system-and-its-minimum-norm-least-squares-solution.md

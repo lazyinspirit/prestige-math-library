@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-feferman-levy-symmetric-collapse-is-finitely-formalizable.md

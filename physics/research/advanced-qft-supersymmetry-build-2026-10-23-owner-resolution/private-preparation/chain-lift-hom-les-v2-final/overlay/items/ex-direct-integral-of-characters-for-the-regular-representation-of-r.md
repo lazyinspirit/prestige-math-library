@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-direct-integral-of-characters-for-the-regular-representation-of-r.md

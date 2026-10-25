@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-four-cocycle-twisted-monoidal-structure-on-2vect-g.json
+  precheck: n/a
 id: def-four-cocycle-twisted-monoidal-structure-on-2vect-g
 kind: definition
-title: Four-cocycle twisted monoidal structure on 2Vect_G
+title: Four-cocycle twisted monoidal structure on $2\mathrm{Vect}_G$
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
@@ -14,12 +17,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: Douglas and Reutter, Fusion 2-Categories and a State-Sum Invariant for 4-Manifolds, Construction 2.1.16

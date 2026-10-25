@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two.json
+  precheck: pass
 id: ex-parabolic-kl-polynomials-for-s-three-modulo-s-two
 kind: example
-title: "Parabolic Kazhdan–Lusztig polynomials for S_3 modulo S_2"
+title: "Parabolic Kazhdan–Lusztig polynomials for $S_3$ modulo $S_2$"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -22,8 +25,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Anders Bjoerner and Francesco Brenti, Combinatorics of Coxeter Groups, Graduate Texts in Mathematics 231, Springer 2005 (author-hosted complete 370-page PDF)"
@@ -71,7 +72,7 @@ nontrivial parabolic: $n_{e,s_2s_1}=0$ while $m_{e,s_2s_1}=v^{2}$.
 
 ## Verification
 
-**Proof technique:** direct finite computation in the normalized Hecke algebra of $S_3$, using the two reduction formulas and the ordinary coefficients of [F1].
+**Proof technique:** direct finite computation in the normalized Hecke algebra of S₃, using the two reduction formulas and the ordinary coefficients of [F1].
 
 1.1 **The ordinary values needed.** By [F2] the comparable pairs needed below are $(e,e)$ (gap 0), $(e,s_2)$ (gap 1), $(s_2,s_2)$, $(s_1,s_1)$, $(s_1,s_1s_2)$ (gap 1), $(s_1s_2,s_1s_2)$, $(e,s_2s_1)$ (gap 2), $(s_1,s_2s_1)$ (gap 1), $(s_2,s_2s_1)$ (gap 1), $(s_2s_1,s_2s_1)$, $(s_1,w_0)$ (gap 2), $(s_1s_2,w_0)$ (gap 1), $(s_2,w_0)$ (gap 2), $(w_0,w_0)$; by [F1] the values are $1$ on the diagonal, $v$ on the listed gap-one pairs, $v^{2}$ on the listed gap-two pairs, and zero on non-comparable pairs such as $(s_1,s_2)$, $(s_1s_2,s_2s_1)$, $(s_1s_2,s_2)$, $(s_1,w_0)$'s reverse orders, and all pairs $y>x$. [F1, F2, algebra]
 

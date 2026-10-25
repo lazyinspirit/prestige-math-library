@@ -1,0 +1,92 @@
+{
+  "id": "cex-a-maximal-antichain-that-is-not-maximum",
+  "agent": "/root/rendering_repair_coordinator/comb_018",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile shows literal node/draw commands in Remarks rather than a picture. Both Markdown fence delimiters share lines with TikZ commands, so the fenced diagram is not parsed correctly. Independently checked all three nodes and the two cover edges against the Given poset, F1, local definitions and proof steps 1.1\u20132.1; the diagram mathematics is sound.",
+      "action": "Placed the opening tikz fence and closing fence on their own lines; preserved all TikZ commands and all other item content.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-label-low-contrast",
+      "verdict": "confirmed",
+      "reason": "Reopened standalone original-resolution comb018-final-unique tile: the a label inherits light surrounding text and is nearly invisible on its pale orange fill, whereas b,c are legible on their dark blue fills. The earlier review missed this contrast defect.",
+      "action": "Added only text=black!90 to the maximal node style. Pure black is mapped to currentColor by the native renderer; black!90 retains a fixed near-black color and produces a readable a on the pale fill.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Cumulative: corrected the two TikZ fence boundaries; followup adds only text=black!90 to maximal/.style for a-label contrast. All mathematical commands, vertices, edges, annotations, prose and proof remain unchanged.",
+  "source_lines_after": [
+    49,
+    50,
+    52,
+    53
+  ],
+  "before_raw_sha256": "b45faa7264200545c4dbf7a252a7b2e5c2a1b6f1659c14285c37833cbccdd32d",
+  "after_raw_sha256": "d6c2c347400262f7b49c9bc5e85912c69a605cd14e3aa9990cf6afa4f90fedcc",
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and cover relations",
+      "result": "Exactly the three elements a,b,c appear. The two solid rising segments a\u2013b and a\u2013c encode a<b and a<c. Neither relation has an intermediate element because P contains only a,b,c and b,c are incomparable. There is no b\u2013c segment, matching the Given poset."
+    },
+    {
+      "check": "Maximal antichain",
+      "result": "The orange singleton {a} is an antichain by the local antichain definition. Neither b nor c can be added because each is comparable with a; hence it is inclusion-maximal as established in proof step 1.1."
+    },
+    {
+      "check": "Maximum antichain and width",
+      "result": "The blue pair {b,c} consists of incomparable elements, so it is an antichain. The only three-element subset contains a<b, so no antichain is larger than two, exactly as step 1.2 and def-height-and-width-of-a-finite-poset assert. Thus {b,c} is maximum, and {a} is not maximum. The dashed horizontal blue guide is an annotation, not a cover relation."
+    },
+    {
+      "check": "Actual native rendering and contrast followup",
+      "result": "Fresh standalone original-resolution comb018-contrast-v2 native PNG reviewed: a is now dark and legible on the pale orange node. The figure retains exactly a,b,c, the two a\u2013b and a\u2013c cover segments, no b\u2013c cover segment, and both antichain annotations; the fixed near-black text affects no mathematical data."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/cex-a-maximal-antichain-that-is-not-maximum.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-a-maximal-antichain-that-is-not-maximum.md --json",
+      "exit_code": 0,
+      "files": 1,
+      "checked": 1,
+      "failed": 0,
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/cex-a-maximal-antichain-that-is-not-maximum.md --json",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "local_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/comb018-contrast-v2",
+      "exit_code": 0,
+      "items": 1,
+      "tiles": 1,
+      "original_resolution_reviewed": true,
+      "reference_map_diagnostics": 13,
+      "scope": "Fresh local native ItemBody SSR preview in dark styling; not live route. Unrelated title-map diagnostics preserved."
+    }
+  },
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "remaining_issues": [],
+  "report_version": 2,
+  "supersedes_report_archive": "research/math-library-rendering-repairs-2026-10-23/followup-history/supervisor2-comb018-closeout/cex-a-maximal-antichain-that-is-not-maximum-v1.json",
+  "followup_before_raw_sha256": "90fca7d5ccfce3bec3703419eeb2b94070e603736a178c8a983d599b3a36c721",
+  "frontmatter_comparison_basis": "Followup current source versus supervisor2-comb018-closeout archived preimage; parent-owned verification changes since original before are preserved byte-for-byte."
+}

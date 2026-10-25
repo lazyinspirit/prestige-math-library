@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-lattice-periodic-continuous-functions-are-determined-by-their-lattice-fourier-coefficients.md

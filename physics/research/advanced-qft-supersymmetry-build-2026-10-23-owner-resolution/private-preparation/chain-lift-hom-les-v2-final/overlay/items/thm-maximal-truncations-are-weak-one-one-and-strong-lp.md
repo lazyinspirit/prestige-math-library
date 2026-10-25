@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-maximal-truncations-are-weak-one-one-and-strong-lp.md

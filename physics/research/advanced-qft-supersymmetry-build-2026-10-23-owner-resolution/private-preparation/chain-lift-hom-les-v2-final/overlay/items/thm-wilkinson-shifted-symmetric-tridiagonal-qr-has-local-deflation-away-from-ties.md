@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-wilkinson-shifted-symmetric-tridiagonal-qr-has-local-deflation-away-from-ties.md

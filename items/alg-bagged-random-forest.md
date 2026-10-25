@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-bagged-random-forest.json
+  precheck: n/a
 id: alg-bagged-random-forest
 kind: algorithm
 title: "Bagged random-forest construction on a fixed finite sample"
@@ -12,12 +15,6 @@ deps:
   - def-empirical-decision-tree
   - alg-cart-greedy-split
 aliases: []
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   scraped: []
   references:
@@ -44,10 +41,10 @@ The data flow is shown below. The arrows mean that the same fixed $D$ and the in
 
 ```tikz
 \begin{tikzpicture}[>=stealth]
-  \node[draw,rounded corners] (data) at (0,0) {fixed data $D$};
-  \node[draw,rounded corners] (random) at (0,-1.2) {IID $\Theta_b$};
-  \node[draw,rounded corners] (tree) at (3,-0.6) {$T_b(x)=h(x,\Theta_b)$};
-  \node[draw,rounded corners] (aggregate) at (6,-0.6) {vote or average over $b=1,\ldots,B$};
+  \node[draw,rounded corners] (data) at (-3,0) {fixed data $D$};
+  \node[draw,rounded corners] (random) at (3,0) {IID $\Theta_b$};
+  \node[draw,rounded corners] (tree) at (0,-2) {$T_b(x)=h(x,\Theta_b)$};
+  \node[draw,rounded corners] (aggregate) at (0,-4) {vote or average over $b=1,\ldots,B$};
   \draw[->] (data) -- (tree);
   \draw[->] (random) -- (tree);
   \draw[->] (tree) -- (aggregate);

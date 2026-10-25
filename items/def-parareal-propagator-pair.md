@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-parareal-propagator-pair.json
+  precheck: n/a
 id: def-parareal-propagator-pair
 kind: definition
 title: "Fine and coarse propagators on a common macro grid"
@@ -15,8 +18,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "R. D. Falgout, S. Friedhoff, Tz. V. Kolev, S. P. MacLachlan, and J. B. Schroder, Parallel Time Integration with Multigrid"
@@ -40,3 +41,20 @@ A canonical ODE instantiation uses the explicit Runge–Kutta stage map of [[def
 
 This definition distinguishes the sequential fine trajectory from samples of an exact ODE solution. Any estimate of the fine method's error relative to that exact solution is a separate obligation.
 
+## Remarks
+
+The picture shows one common macro interval in the two sequential trajectories, conditional on successful propagation. Write $y_0=x_0$ and $y_{n+1}=G_n(y_n)$ for the coarse trajectory. The two rows have the same time endpoints; their state values need not agree. Each arrow is present only for an input in the indicated admitted set, and neither row represents an exact ODE solution in general.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node at (0,2.2) {$t_n$};
+\node at (6,2.2) {$t_{n+1}$};
+\draw[->] (0.6,2.2) -- (5.2,2.2) node[midway,above] {$[t_n,t_{n+1}]$};
+\node (f0) at (0,0.9) {$x_n\in D_n^F$};
+\node (f1) at (6,0.9) {$x_{n+1}\in X$};
+\draw[->] (f0) -- (f1) node[midway,above] {$F_n$};
+\node (g0) at (0,-0.5) {$y_n\in D_n^G$};
+\node (g1) at (6,-0.5) {$y_{n+1}\in X$};
+\draw[->] (g0) -- (g1) node[midway,above] {$G_n$};
+\end{tikzpicture}
+```

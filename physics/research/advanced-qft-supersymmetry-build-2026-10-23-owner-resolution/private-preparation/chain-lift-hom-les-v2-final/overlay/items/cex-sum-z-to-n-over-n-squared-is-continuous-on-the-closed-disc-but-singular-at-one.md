@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-sum-z-to-n-over-n-squared-is-continuous-on-the-closed-disc-but-singular-at-one.md

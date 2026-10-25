@@ -1,0 +1,79 @@
+---
+id: lem-qftx-compact-manifold-cohomology-positive-ideal-nilpotent
+kind: lemma
+title: Positive-degree cohomology of a compact manifold is nilpotent
+status: "published"
+origin: pipeline
+pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
+dependency_level: 1
+domain: mathematics
+library: mathematics
+category: quantum-field-theory-mathematics
+deps:
+  - def-axiom-of-choice
+  - lem-qftx-singular-cohomology-homotopy-invariance
+  - lem-qftx-compact-smooth-manifold-has-finite-good-cover-nerve-model
+  - thm-existence-of-geodesically-convex-neighborhoods
+  - thm-mayer-vietoris-sequence-in-singular-cohomology
+  - def-singular-boundary-operator
+  - def-singular-cochain-complex-with-coefficients
+  - def-singular-cohomology-with-coefficients
+dependency_roles:
+  def-axiom-of-choice: mathematical-premise
+  lem-qftx-singular-cohomology-homotopy-invariance: mathematical-premise
+  lem-qftx-compact-smooth-manifold-has-finite-good-cover-nerve-model: mathematical-premise
+  thm-existence-of-geodesically-convex-neighborhoods: mathematical-premise
+  thm-mayer-vietoris-sequence-in-singular-cohomology: mathematical-premise
+  def-singular-boundary-operator: mathematical-premise
+  def-singular-cochain-complex-with-coefficients: mathematical-premise
+  def-singular-cohomology-with-coefficients: mathematical-premise
+justified_by: []
+axiom_strength: ZF + AC
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: M. F. Atiyah and R. Bott, The Moment Map and Equivariant Cohomology
+      url: https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf
+      locator: Section 3, finite-dimensional cohomological support argument, printed pp. 6–9.
+    - title: Shubham Dwivedi, Jonathan Herman, Lisa C. Jeffrey, and Theo van den Hurk, Hamiltonian Group Actions and Equivariant Cohomology
+      url: https://www.math.toronto.edu/~jeffrey/mat1312/symplecbookpub.pdf
+      locator: Section 9.10, finite cover and Mayer–Vietoris localization route, PDF pp. 86–87.
+landmark: false
+---
+
+## Statement
+
+Assume AC. Let $F$ be a compact finite-dimensional Hausdorff second-countable smooth manifold without boundary, equipped with a Riemannian metric, and let $k$ be a field. There is a finite CW complex $K$ homotopy equivalent to $F$, and an integer $N\geq1$ such that $H^q(F;k)=0$ for every $q\geq N$. Consequently the ideal $J=\bigoplus_{q>0}H^q(F;k)$ in the graded cohomology ring satisfies $J^N=0$. If $F=\varnothing$, take $K=\varnothing$, $N=1$, and $J=0$.
+
+## Statement references
+
+[Finite-dimensional support in the localization proof] [Atiyah–Bott, Section 3, printed pp. 6–9](https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf)
+
+[Finite cover and Mayer–Vietoris route] [Dwivedi et al., Section 9.10, PDF pp. 86–87](https://www.math.toronto.edu/~jeffrey/mat1312/symplecbookpub.pdf)
+
+## Facts & Assumptions
+
+**Given:** AC, a compact smooth Riemannian manifold $F$, and a field $k$.
+
+[A1] Full AC includes the countable-choice hypothesis of the convex-neighborhood theorem. [[def-axiom-of-choice]]
+
+[F1] Every point has a strongly geodesically convex open neighborhood, every finite nonempty intersection of such neighborhoods remains strongly geodesically convex, and its unique minimizing geodesics depend smoothly on endpoints. [[thm-existence-of-geodesically-convex-neighborhoods]]
+
+[F2] Homotopic maps induce the same singular cohomology map with coefficients in $k$. [[lem-qftx-singular-cohomology-homotopy-invariance]]
+
+[F3] An open two-set cover has the singular cohomology Mayer–Vietoris long exact sequence, and cohomology is computed as cocycles modulo coboundaries of the singular cochain complex. [[thm-mayer-vietoris-sequence-in-singular-cohomology]] [[def-singular-cochain-complex-with-coefficients]] [[def-singular-cohomology-with-coefficients]] [[def-singular-boundary-operator]]
+
+[F4] A compact smooth Riemannian manifold has a finite strongly geodesically convex cover whose finite nerve realization is homotopy equivalent to it. [[lem-qftx-compact-smooth-manifold-has-finite-good-cover-nerve-model]]
+
+## Proof
+
+**Given:** The data in the statement.
+
+1.1 For $F\ne\varnothing$, choose the finite cover $U_1,\ldots,U_N$ together with its nerve homotopy equivalence supplied by [F4], with $N\geq1$. Every nonempty finite intersection $U_{i_1}\cap\cdots\cap U_{i_s}$ is strongly geodesically convex. Choosing a point in that intersection, the unique minimizing geodesics to it give a continuous contraction to the point; by [F2] and the singular cochain definition in [F3], its cohomology is $k$ in degree zero and zero in positive degrees. For a point, this follows from the unique singular $n$-simplex: its boundary coefficient is $1$ for even $n$ and $0$ for odd $n$, so the positive-degree cochain complex is alternately identity and zero and has zero cohomology. The nerve of this same cover has at most $N$ vertices; its usual realization, with one open cell for each nonempty simplex, is a finite CW complex homotopy equivalent to $F$ by the chosen [F4] data. [A1, F1, F2, F3, F4, construct]
+
+2.1 We prove by induction on the number $m\geq1$ of members of a finite good cover that its union has cohomology zero in every degree $q\geq m$. For $m=1$, step 1.1 makes the member contractible, giving the claim. Empty cover members have zero cohomology by [F3] and may be discarded; if none remain the union is empty and the assertion holds. For $m>1$, write $A=U_1\cup\cdots\cup U_{m-1}$ and $B=U_m$. The intersection $A\cap B$ is covered by the $m-1$ sets $U_i\cap U_m$, whose nonempty finite intersections are contractible by step 1.1. The induction hypothesis gives $H^q(A;k)=0$ and $H^{q-1}(A\cap B;k)=0$ for $q\geq m$; also $H^q(B;k)=0$ since $q>0$. The exact segment $H^{q-1}(A\cap B;k)\to H^q(A\cup B;k)\to H^q(A;k)\oplus H^q(B;k)$ from [F3] therefore forces $H^q(A\cup B;k)=0$. [F3, step 1.1, induction, algebra]
+
+3.1 Apply step 2.1 to the selected finite cover of $F$ to get $H^q(F;k)=0$ for $q\geq N$. Every homogeneous factor of a product of $N$ elements of $J$ has positive degree, so the product has degree at least $N$ and vanishes; expanding finite sums proves $J^N=0$. For empty $F$, every cohomology group is zero by the empty-space cochain complex, so $N=1$ works. [F3, step 2.1, algebra] ∎

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-integrable-weight-sets-and-multiplicities-are-weyl-invariant.md

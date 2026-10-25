@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-de-rham-mayer-vietoris-with-boundary-and-an-explicit-partition-lift.md

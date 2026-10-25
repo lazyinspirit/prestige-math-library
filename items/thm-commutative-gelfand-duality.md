@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-commutative-gelfand-duality.json
+  precheck: pass
 id: thm-commutative-gelfand-duality
 kind: theorem
 title: Commutative Gelfand duality
@@ -11,12 +14,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Theorem 3.3.5 and Corollary 3.3.6 (compact case), printed pp. 80–81"
@@ -80,3 +77,27 @@ Banach-algebra convention requires a nonzero unit of norm one.
 
 - **AC and DC are both inherited.** The Gelfand–Naimark side spends AC, the evaluation side inherits DC from Urysohn through [[lem-characters-of-continuous-functions-are-evaluations]]; the derivation DC from AC is the declared dependency, so no choice principle weaker than what is used is claimed.
 - **"Equivalence", not "duality of objects only".** The content is the arrow-level statement of [step 3.1]: the two functors are inverse on hom-sets through the natural isomorphisms. The nonempty/nonzero restriction makes the statement agree with the library's normalized unital Banach-algebra convention.
+
+For a continuous map $g:Y\to X$ between nonempty compact Hausdorff spaces,
+the first square displays the evaluation naturality identity of step 2.1.
+Here $g^*:C(X)\to C(Y)$ is pullback and
+$(g^*)^*(\chi)=\chi\circ g^*$.
+
+```tikzcd
+Y \arrow[r, "g"] \arrow[d, "\eta_Y"'] & X \arrow[d, "\eta_X"] \\
+\Delta(C(Y)) \arrow[r, "(g^*)^*"'] & \Delta(C(X))
+```
+
+For a unital $\ast$-homomorphism $\varphi:A\to B$ between nonzero unital
+commutative complex C\*-algebras, the second square displays Gelfand naturality.
+The transpose is $\varphi^*: \Delta(B)\to\Delta(A)$, so the lower arrow is
+pullback $(\varphi^*)^*:C(\Delta(A))\to C(\Delta(B))$.
+
+```tikzcd
+A \arrow[r, "\varphi"] \arrow[d, "\Gamma_A"'] & B \arrow[d, "\Gamma_B"] \\
+C(\Delta(A)) \arrow[r, "(\varphi^*)^*"'] & C(\Delta(B))
+```
+
+Both squares commute by the pointwise identities in step 2.1; their vertical
+maps are the homeomorphisms and isomorphisms supplied by [L2] and [L1],
+respectively. The rigorous proof above is independent of these illustrations.

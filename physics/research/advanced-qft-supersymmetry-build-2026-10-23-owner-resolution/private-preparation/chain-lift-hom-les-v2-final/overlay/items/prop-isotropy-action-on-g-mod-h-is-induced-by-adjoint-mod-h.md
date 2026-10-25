@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-isotropy-action-on-g-mod-h-is-induced-by-adjoint-mod-h.md

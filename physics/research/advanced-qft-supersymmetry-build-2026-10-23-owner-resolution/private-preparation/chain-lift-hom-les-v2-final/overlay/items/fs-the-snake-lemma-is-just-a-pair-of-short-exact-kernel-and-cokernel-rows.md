@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-snake-lemma-is-just-a-pair-of-short-exact-kernel-and-cokernel-rows.md

@@ -1,17 +1,14 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-rpg-rqf-is-the-e-one-page-of-the-grothendieck-spectral-sequence.json
+  precheck: pass
 id: "fs-rpg-rqf-is-the-e-one-page-of-the-grothendieck-spectral-sequence"
 kind: "false-statement"
-title: "R^pG(R^qF) is the E1 page"
+title: "$R^pG(R^qF)$ is the $E_1$ page"
 deps: ["lem-the-two-filtrations-have-e-two-pages-rpg-rqf-and-the-derived-composite-edge", "prop-modules-over-a-field-are-projective-flat-and-injective", "def-axiom-of-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-13
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-12
 sources:
   references:
     - title: "Weibel, 5.8.3"

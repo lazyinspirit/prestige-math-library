@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-normal-in-characteristic-implies-normal-in-the-whole-group.md

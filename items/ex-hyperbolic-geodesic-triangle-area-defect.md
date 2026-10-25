@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-hyperbolic-geodesic-triangle-area-defect.json
+  precheck: pass
 id: ex-hyperbolic-geodesic-triangle-area-defect
 kind: example
 title: Area defect of a hyperbolic geodesic triangle
@@ -27,9 +30,7 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.0.1, printed pp. 10-13, and the Poincare upper half-plane model with constant curvature -1."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -64,7 +65,7 @@ included.
 
 ## Verification
 
-**Proof technique:** exhibit a global positive orthonormal frame, compute its connection form and curvature by the structure equation, then insert $K\equiv-1$ into the geodesic-triangle formula.
+**Proof technique:** exhibit a global positive orthonormal frame, compute its connection form and curvature by the structure equation, then insert constant curvature minus one into the geodesic-triangle formula.
 
 1.1 On $\mathbb H$ oriented so that $(\partial_x,\partial_y)$ is positive, the fields $e_1=y\,\partial_x$ and $e_2=y\,\partial_y$ are smooth and globally defined. Their Gram matrix is the identity because $g(e_1,e_1)=y^2\cdot y^{-2}=1$, $g(e_2,e_2)=y^2\cdot y^{-2}=1$ and $g(e_1,e_2)=0$; hence $(e_1,e_2)$ is a global smooth positive orthonormal frame. [given]
 

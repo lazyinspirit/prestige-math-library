@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-weak-nullstellensatz-algebraically-closed-coordinate-form.md

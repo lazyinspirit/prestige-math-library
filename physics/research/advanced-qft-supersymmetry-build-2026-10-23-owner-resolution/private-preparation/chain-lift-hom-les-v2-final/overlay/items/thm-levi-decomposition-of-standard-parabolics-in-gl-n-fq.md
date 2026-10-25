@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq.md

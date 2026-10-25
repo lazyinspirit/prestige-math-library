@@ -1,0 +1,151 @@
+{
+  "id": "alg-reinforce",
+  "agent": "/root/rendering_repair_coordinator/dorl_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile and frozen/current source contain no diagram. A three-stage flow materially clarifies the defining distinction between a frozen-policy episode, return/score computation, and one subsequent update, without requiring a sample MDP or suggesting online parameter changes. This is an explanatory addition under the expanded diagram scope, not a mathematical gap.",
+      "action": "Added a three-box directed operation flow with exact return, score and single-update formulas in Remarks, together with arrow semantics and the empty-episode case.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a native TikZ operation flow for one frozen-policy REINFORCE training round in Remarks; the defining procedure and existing expectation caveats are unchanged.",
+  "source_lines_after": [
+    67,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "A finite episode (S_0,A_0,R_1,...,S_T) sampled using pi_theta0.",
+      "check": "The top box terminates at the first terminal state and uses a fixed parameter, exactly as Definition lines 43 and 47. No edge feeds a changed policy back into the episode. The T=0 convention is explicitly retained in accompanying prose."
+    },
+    {
+      "data": "G_t scalar and psi_t in R^d for 0<=t<T.",
+      "check": "The middle box repeats the exact sum from Definition line 47 with k=t,...,T-1 and gamma^(k-t), and explicitly evaluates the policy score at theta0. def-differentiable-stochastic-policy Definition supplies positivity on sampled support and the Euclidean gradient type, so log and score are defined. def-episodic-returns-td-errors-and-policy-support Definition confirms these finite discounted returns."
+    },
+    {
+      "data": "One parameter output theta1 in U.",
+      "check": "The last box has theta0 + alpha sum_{t=0}^{T-1} gamma^t G_t psi_t, exactly Definition line 49, with the extra gamma^t retained. Each summand is in R^d and the admissible-condition requirement that the update remain in U is unchanged. For T=0 the empty sum is zero."
+    },
+    {
+      "data": "Directed process graph with three vertices and two edges.",
+      "check": "sample -> scores -> update asserts only operation order, explicitly defined in accompanying prose. The two arrows match the order in Definition lines 47-51, and no cycle or MDP state-transition assertion is made. This algorithm has no rigorous proof section; all defining content and the pre-existing conditional expectation remark remain independently readable and do not rely on the figure."
+    }
+  ],
+  "guard": {
+    "expected_before_raw_sha256": "2720c082419db77fac59dc79336478b08ecbb75690c9baf828e7c6ec67d1008f",
+    "checked_immediately_before_edit": true,
+    "current_raw_sha256": "1bf06a9a674990366894ad590841bedcb248ec08ca3bb64e648c16c595ee68ea",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published"
+  },
+  "evidence": {
+    "original_image_declared_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/alg-reinforce--01.png",
+    "original_path_discrepancy": "Declared screenshot absent under diagram-supplement; authentic image located within the same category screenshots directory and matched recorded SHA256.",
+    "original_image_resolved_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-reinforce--01.png",
+    "original_image_sha256": "2fae1c8a3825eeb2d1dfc25821992c0712e4028ba7294ee9f7d1cd36c6df4e00",
+    "original_and_fresh_tiles_viewed_standalone_original_resolution": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-009-native/manifest.json",
+    "preview_source_sha256": "1bf06a9a674990366894ad590841bedcb248ec08ca3bb64e648c16c595ee68ea",
+    "preview_reference_map_sha256": "d7ab175c45afeaf40d3b04d24b8fbb4850e8b62e6b5309e72deceee4b39f33f9",
+    "capture": {
+      "capture_revision": 2,
+      "id": "alg-reinforce",
+      "height": 1485,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/alg-reinforce--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "a7baee16ef5b1bf32d6080b0d8d9b1e63b8a647e28af43181efc72487197d38f",
+          "encoding": "lossless PNG, compressionLevel 9"
+        },
+        {
+          "path": "screenshots/alg-reinforce--02.png",
+          "y": 1300,
+          "width": 1200,
+          "height": 185,
+          "sha256": "981985a05be91e216a02a7be949dc488e24c749aaf6d1841dccf5012a2f89cb5",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 34,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T02:40:13.167Z"
+    },
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl-009/pi-tikz-cache/ba7d5a04704bb0aae3a7f14b263f532f.svg",
+    "visual_check": "Standalone original-resolution native tile shows all three complete rounded rectangles and both downward arrows with separated labels, no clipping or overlap. Labels and paths are visible on the dark background. SVG uses currentColor strokes/text and none fills; there are no pale filled areas, endpoint rings, or graph-closing edges. Three process vertices and two edges form a path with undirected degrees 1,2,1, as intended."
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-reinforce.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-reinforce.md",
+            "item_id": "alg-reinforce",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-reinforce.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/alg-reinforce.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl-009 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-reinforce --out research/math-library-rendering-repairs-2026-10-23/previews/dorl-009-native",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Preview is native local ItemBody rendering, not production-route coverage. Sixteen unrelated malformed reference-map sources were omitted by the existing preview; assigned explicit labels render correctly."
+  ]
+}

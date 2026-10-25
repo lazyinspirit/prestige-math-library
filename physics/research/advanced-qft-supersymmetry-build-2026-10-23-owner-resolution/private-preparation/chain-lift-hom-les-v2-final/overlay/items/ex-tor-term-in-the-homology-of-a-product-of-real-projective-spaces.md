@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-tor-term-in-the-homology-of-a-product-of-real-projective-spaces.md

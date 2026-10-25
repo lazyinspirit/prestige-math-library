@@ -1,0 +1,112 @@
+{
+  "id": "alg-h2-matrix-vector-multiplication",
+  "agent": "/root/rendering_repair_coordinator/dnla_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A contribution-flow map materially clarifies the change from upward adjoint column transfers to downward row transfers and distinguishes the dense near-field bypass. The original standalone screenshot has no diagram; the prose is already complete but that does not remove the explanatory value.",
+      "action": "Added one representative branch for each coefficient pass, an admissible coupling arrow, and a separate dense near-block arrow in final Remarks; explicitly identified additive contributions and omitted branches.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended final Remarks and native TikZ illustration; the original complete Definition and procedure are byte-for-byte preserved.",
+  "source_lines_after": {
+    "remarks": [
+      42,
+      67
+    ],
+    "diagram": [
+      46,
+      65
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Column leaf projection and upward transfer",
+      "check": "V_{sigma_j} is |sigma_j| by s_{sigma_j}; its adjoint maps F^{sigma_j} to F^{s_{sigma_j}}. E^V_{sigma_j} is s_{sigma_j} by s_sigma, so its adjoint maps the child coefficient to F^{s_sigma}. Both upward arrow directions match procedure step 1 (line 36). Contributions from both children are summed; the picture shows only one.",
+      "justification": "def-h2-nested-cluster-bases-and-interaction-lists, nested column-basis identity and storage convention; local procedure step 1."
+    },
+    {
+      "data": "Admissible interaction",
+      "check": "S_{tau,sigma} has r_tau rows and s_sigma columns, so the horizontal arrow takes z_sigma in F^{s_sigma} to an additive contribution in w_tau in F^{r_tau}. It is drawn only for an admissible block leaf, as stipulated in the Remarks. No commutativity or equality of whole coefficient vectors is asserted.",
+      "justification": "Local step 2 (line 37); supplier definition of admissible U_tau S_{tau,sigma} V_sigma^* blocks and interaction lists."
+    },
+    {
+      "data": "Downward row transfer and leaf expansion",
+      "check": "E^U_{tau_i} is r_{tau_i} by r_tau and maps parent row coefficients to child coefficients; U_{tau_i} then maps F^{r_{tau_i}} to F^{tau_i}. The arrows therefore point downward. tau_i is explicitly depicted as a row leaf. Every incoming transfer and expansion is additive per step 3, not a claim that this branch gives the complete output.",
+      "justification": "Local step 3 (line 38); supplier nested row identity U_tau|_{tau_i}=U_{tau_i}E^U_{tau_i}."
+    },
+    {
+      "data": "Dense near block and actual directed paths",
+      "check": "D_{eta,rho} has |eta| rows and |rho| columns, mapping x|_rho directly to an additive contribution to y|_eta, with no coefficient passes. eta and rho are separate labels so the diagram does not assert that the illustrated admissible pair is also near. Actual native image has 8 data nodes, the 5 directed main-chain edges and 1 separate near edge, all six arrowheads present; it has no cycles or endpoint rings requiring closure/open-point checks.",
+      "justification": "Local step 2 (line 37); def-hlr-and-h2-block-matrix-representations, dense near-block definition."
+    }
+  ],
+  "before_raw_sha256": "aa0d5c9901d15c310ae9ed4793ecfecfc1f0167e1c94ad213d8a650b7a476e39",
+  "after_raw_sha256": "69357458e948153a14b406e0e707be6d1abfe55bff48c36c0cfad88c5305fe14",
+  "guard": "Immediately before the sole source edit, asserted current raw SHA256 equals queue before_raw_sha256 aa0d5c9901d15c310ae9ed4793ecfecfc1f0167e1c94ad213d8a650b7a476e39. After edit verified exact original file prefix and identical frontmatter bytes.",
+  "original_evidence": {
+    "declared_path_discrepancy": "Queue evidence_dir includes diagram-supplement, but screenshot is in the parent category screenshots directory. Located authentic matching file only within the assigned category.",
+    "actual_path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/alg-h2-matrix-vector-multiplication--01.png",
+    "sha256": "b9ad693ef3ed6b9a03cf50e4a5761bbde53f5dd7af506c6189d959fcabc6d0fd",
+    "view": "Standalone view_image detail original; frozen/current files identical before edit."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-h2-matrix-vector-multiplication.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-h2-matrix-vector-multiplication.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0,
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-h2-matrix-vector-multiplication.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnla-002 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-h2-matrix-vector-multiplication --out research/math-library-rendering-repairs-2026-10-23/previews/dnla-002",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16,
+        "tikz_count": 1,
+        "diagram_failures": [],
+        "katex_errors": []
+      }
+    }
+  ],
+  "visual_checks": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-002/manifest.json",
+    "manifest_sha256": "9e5a543faf12b2547264539f884e5ccc6b3483ea35e4912e270d47a7c259f52a",
+    "source_sha256": "69357458e948153a14b406e0e707be6d1abfe55bff48c36c0cfad88c5305fe14",
+    "native_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-002/diagram-native.png",
+    "native_crop_sha256": "363bad6cfe557e3a4efe0c08ef19efbb3b203bcbb89458f6e83358c29bcda6de",
+    "svg": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-002/diagram.svg",
+    "inspection": "Independently viewed full native capture and a fresh standalone native figure screenshot at original resolution. White/light labels, strokes and all six arrowheads are visible against black; no clipping, crossing, overlap, pale fill or obscured endpoints. SVG intrinsic dimensions 343.919 by 236.462; no source graph cycle.",
+    "capture_limitation": "Full tile has blank upper body pixels despite complete bound HTML; standalone native figure crop independently confirms the diagram. Original pre-edit standalone image supplies original body evidence. No application edits or HTTP visits were made."
+  },
+  "remaining_issues": [],
+  "recorded_at": "2026-10-24T02:19:56.328952+00:00"
+}

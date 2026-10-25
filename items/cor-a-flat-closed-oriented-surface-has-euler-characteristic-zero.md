@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero.json
+  precheck: pass
 id: cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero
 kind: corollary
 title: Flat closed oriented surfaces have Euler characteristic zero
@@ -26,9 +29,7 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.2.4, printed pp. 14-15 (PDF pp. 21-22): the global Gauss-Bonnet theorem used in the flat case."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -51,7 +52,7 @@ $\chi$ is the Euler characteristic of
 
 ## Proof
 
-**Proof technique:** insert the identically vanishing curvature into the global identity and divide by $2\pi$.
+**Proof technique:** insert the identically vanishing curvature into the global identity and divide by twice pi.
 
 1.1 Since $K\equiv0$, the top form $K\,dA$ is the zero two-form at every point of $M$; by the definition of the compactly supported top-form integral, $\int_MK\,dA=0$. [F2, given]
 

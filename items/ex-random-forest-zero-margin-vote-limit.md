@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-random-forest-zero-margin-vote-limit.json
+  precheck: pass
 id: ex-random-forest-zero-margin-vote-limit
 kind: example
 title: "A zero-margin bootstrap forest need not approach strict-margin risk"
@@ -16,12 +19,6 @@ deps:
 generation:
   role: example
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   scraped: []
   references:
@@ -38,10 +35,10 @@ For a mixed bootstrap sample, the two possible root splits and their leaf labels
 
 ```tikz
 \begin{tikzpicture}[level distance=10mm,sibling distance=18mm]
-  \node[draw] at (0,0) {$x_1\le\tfrac12$}
+  \node[draw] at (0,0) {$x_1\le\frac12$}
     child {node[draw] {$0$}}
     child {node[draw] {$1$}};
-  \node[draw] at (6,0) {$x_2\le\tfrac12$}
+  \node[draw] at (6,0) {$x_2\le\frac12$}
     child {node[draw] {$1$}}
     child {node[draw] {$0$}};
 \end{tikzpicture}

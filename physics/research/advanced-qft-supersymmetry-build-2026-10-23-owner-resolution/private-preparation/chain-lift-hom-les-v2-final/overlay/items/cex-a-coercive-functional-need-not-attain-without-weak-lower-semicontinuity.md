@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-coercive-functional-need-not-attain-without-weak-lower-semicontinuity.md

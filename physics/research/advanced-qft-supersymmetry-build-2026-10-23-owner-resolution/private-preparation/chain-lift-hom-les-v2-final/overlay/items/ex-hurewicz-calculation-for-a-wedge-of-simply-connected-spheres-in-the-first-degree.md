@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-hurewicz-calculation-for-a-wedge-of-simply-connected-spheres-in-the-first-degree.md

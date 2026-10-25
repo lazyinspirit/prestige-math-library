@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree.md

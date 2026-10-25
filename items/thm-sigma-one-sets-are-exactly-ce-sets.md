@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-sigma-one-sets-are-exactly-ce-sets.json
+  precheck: pass
 id: thm-sigma-one-sets-are-exactly-ce-sets
 kind: theorem
-title: "Sigma_1^0 sets are exactly the computably enumerable sets"
+title: '$\Sigma_1^0$ sets are exactly the computably enumerable sets'
 status: published
 origin: pipeline
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-sigma-n-pi-n-and-delta-n-sets, def-computable-and-partial-computable-function, def-decidable-and-recognizable-language, def-kleene-t-predicate-and-output-function, thm-partial-recursive-iff-turing-computable]
 proof_strategy: direct
-verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (thm-sigma-one-sets-are-exactly-ce-sets). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, Proposition 2.1"

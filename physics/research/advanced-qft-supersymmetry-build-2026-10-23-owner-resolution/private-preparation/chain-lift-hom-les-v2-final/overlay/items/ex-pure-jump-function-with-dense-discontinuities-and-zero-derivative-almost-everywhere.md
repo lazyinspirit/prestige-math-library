@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-pure-jump-function-with-dense-discontinuities-and-zero-derivative-almost-everywhere.md

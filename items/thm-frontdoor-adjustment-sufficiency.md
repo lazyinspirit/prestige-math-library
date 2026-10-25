@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-frontdoor-adjustment-sufficiency.json
+  precheck: pass
 id: thm-frontdoor-adjustment-sufficiency
 kind: theorem
 title: "Front-door adjustment identifies an interventional mean"
@@ -38,12 +41,7 @@ sources:
       url: "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
     - title: "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Technical Point 7.4, p. 101"
       url: "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
+
 ---
 
 ## Statement
@@ -97,3 +95,57 @@ item makes no pointwise claim at a null treatment value.
 3.1 By [F1], $Y^a=Y^{M^a}=F(M^a,U_{I_Y})$ and $M^a$ is independent of $U_{I_Y}$. The integrability from step 2.1 permits Fubini [F3], so $E[Y^a]=\int\!\int F(m,u)\,\nu(du)\,P_{M^a}(dm).$ Also [F1] gives $M^a\perp A$, and consistency on $\{A=a\}$ gives $P_{M^a}=P(M\in\cdot\mid A=a)=\mu_a$. Substituting step 2.1 proves the displayed front-door formula. [F1, step 2.1, F3, given, algebra]
 
 4.1 The right side of the formula uses only the observed law of $(Y,M,A)$. Conditional-mean versions agree $\mu_a$-almost everywhere by step 2.1 and the domination assumption. Therefore any two SCM parameter values with the same observed law give the same target mean, which is identifiability by [F5]. [given, F2, F5, step 3.1] ∎
+
+
+## Remarks
+
+The following example full DAG illustrates the three graph conditions, rather
+than describing every DAG covered by the theorem. Here $C$ is a latent common
+cause of the observed vertices $A$ and $Y$. Each panel retains all four vertices;
+underlining a vertex deletes its outgoing arrows. The box around $A$ in the
+last panel indicates conditioning, not an intervention.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}, thick]
+\begin{scope}
+\node (a) at (0,0) {$A$};
+\node (m) at (1.7,0) {$M$};
+\node (y) at (3.4,0) {$Y$};
+\node[draw,dashed,circle] (c) at (1.7,1.5) {$C$};
+\draw[->] (c) -- (a);
+\draw[->] (c) -- (y);
+\draw[->] (a) -- (m);
+\draw[->] (m) -- (y);
+\node at (1.7,-0.8) {$G$};
+\end{scope}
+\begin{scope}[xshift=5cm]
+\node (a2) at (0,0) {$A$};
+\node (m2) at (1.7,0) {$M$};
+\node (y2) at (3.4,0) {$Y$};
+\node[draw,dashed,circle] (c2) at (1.7,1.5) {$C$};
+\draw[->] (c2) -- (a2);
+\draw[->] (c2) -- (y2);
+\draw[->] (m2) -- (y2);
+\node at (1.7,-0.8) {$G_{\underline A}$};
+\end{scope}
+\begin{scope}[xshift=10cm]
+\node[draw,rectangle] (a3) at (0,0) {$A$};
+\node (m3) at (1.7,0) {$M$};
+\node (y3) at (3.4,0) {$Y$};
+\node[draw,dashed,circle] (c3) at (1.7,1.5) {$C$};
+\draw[->] (c3) -- (a3);
+\draw[->] (c3) -- (y3);
+\draw[->] (a3) -- (m3);
+\node at (1.7,-0.8) {$G_{\underline M}$};
+\end{scope}
+\end{tikzpicture}
+```
+
+In the left panel, the only directed path from $A$ to $Y$ is
+$A\to M\to Y$. In the middle panel, the only path from $A$ to $M$ is
+$A\leftarrow C\to Y\leftarrow M$, which is blocked by the unconditioned
+collider $Y$. In the right panel, the only path from $M$ to $Y$ is
+$M\leftarrow A\leftarrow C\to Y$, which is blocked by conditioning on the
+noncollider $A$. The picture illustrates only the graph hypotheses; the
+support and integrability hypotheses remain essential to the theorem, and
+the proof above is independent of the figure.

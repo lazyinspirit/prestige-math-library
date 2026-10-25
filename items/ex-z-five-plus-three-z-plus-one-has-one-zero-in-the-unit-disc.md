@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-z-five-plus-three-z-plus-one-has-one-zero-in-the-unit-disc.json
+  precheck: pass
 id: ex-z-five-plus-three-z-plus-one-has-one-zero-in-the-unit-disc
 kind: example
-title: "The polynomial z^5 + 3z + 1 has one zero in the unit disc"
+title: "The polynomial $z^5 + 3z + 1$ has one zero in the unit disc"
 status: published
 origin: session
 provenance:
@@ -15,9 +18,6 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:

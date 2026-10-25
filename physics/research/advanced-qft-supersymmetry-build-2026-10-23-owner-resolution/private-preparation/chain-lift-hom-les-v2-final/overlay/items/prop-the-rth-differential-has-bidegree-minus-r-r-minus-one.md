@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-rth-differential-has-bidegree-minus-r-r-minus-one.md

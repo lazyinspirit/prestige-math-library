@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-sphere-polygonal-schema.json
+  precheck: pass
 id: ex-sphere-polygonal-schema
 kind: example
 title: "Sphere as a polygonal quotient"
@@ -21,9 +24,7 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 sphere discussion, printed pp.3–4"
 pipeline_run: frontier-36-complete
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -113,3 +114,41 @@ bigons whose whole boundary circles are glued to each other, and gluing two
 disks along their boundaries is exactly the two-hemisphere model of $S^2$. The
 argument uses only the finite split move and explicit disk-to-hemisphere
 homeomorphisms, and never the classification theorem or the Axiom of Choice.
+
+
+The schematic shows the round representative cut along $\gamma$ (left)
+and its quotient sphere (right). The side arrows indicate boundary traversal,
+not the reference direction of the paired edge: $s_1$ runs from $v_0$ to
+$v_1$, while $s_2$ runs from $v_1$ to $v_0$, with
+$s_1(t)\sim s_2(1-t)$. Cutting produces $B_1$ above and $B_2$ below
+$\gamma$. Their two copies of $\gamma$ are reglued, and together with the
+original side pairing give $h:\partial B_1\to\partial B_2$ from step 1.2.
+The arrow denotes $\Phi\circ q$, where $q:D\to Y$ is the quotient map.
+Under $\Phi$ from step 2.1, these two disks become the closed hemispheres,
+and their glued boundaries become the equator. The dashed cut is an
+auxiliary subdivision, not another edge of the original one-face schema.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[->,thick] (-1.5,0) .. controls (-1.5,1.65) and (1.5,1.65) .. (1.5,0);
+\draw[->,thick] (1.5,0) .. controls (1.5,-1.65) and (-1.5,-1.65) .. (-1.5,0);
+\draw[dashed] (-1.5,0) -- (1.5,0);
+\fill (-1.5,0) circle (0.035);
+\fill (1.5,0) circle (0.035);
+\node[left] at (-1.5,0) {$v_0$};
+\node[right] at (1.5,0) {$v_1$};
+\node[above] at (0,1.26) {$s_1:a$};
+\node[below] at (0,-1.26) {$s_2:a^{-1}$};
+\node at (0,0.62) {$B_1$};
+\node at (0,-0.62) {$B_2$};
+\node[above] at (0,0) {$\gamma$};
+\draw[->,thick] (2.2,0) -- (3.6,0);
+\node[above] at (2.9,0) {$\Phi\circ q$};
+\node[below] at (2.9,0) {$Y\cong S^2$};
+\draw[thick] (5.3,0) circle (1.25);
+\draw[thick] (5.3,0) ellipse (1.25 and 0.3);
+\node at (5.3,0.72) {$S^2_+$};
+\node at (5.3,-0.72) {$S^2_-$};
+\node[below] at (5.3,-1.4) {$\mathrm{equator:}\ \Phi(\partial B_1)=\Phi(\partial B_2)$};
+\end{tikzpicture}
+```

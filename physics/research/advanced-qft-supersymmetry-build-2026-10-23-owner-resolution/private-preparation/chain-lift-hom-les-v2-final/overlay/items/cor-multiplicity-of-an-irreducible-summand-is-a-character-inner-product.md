@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product.md

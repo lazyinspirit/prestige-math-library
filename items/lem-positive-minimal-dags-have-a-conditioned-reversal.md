@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-positive-minimal-dags-have-a-conditioned-reversal.json
+  precheck: pass
 id: lem-positive-minimal-dags-have-a-conditioned-reversal
 kind: lemma
 title: "Distinct positive minimal ANM DAGs contain a conditionally reversible edge"
@@ -102,27 +105,27 @@ not adjacent to $l$. The diagram only records these incident relations. The
 finite path argument in the proof establishes the claim and does not rely on
 the drawing.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[>=stealth]
-  \node[draw,circle] (c1) at (0,1) {$c\in Z$};
+  \node[draw,circle] (c1) at (0,1.6) {$c\in Z$};
   \node[draw,circle] (y1) at (0,0) {$y\in Y$};
-  \node[draw,circle] (w1) at (0,-1) {$w\in W$};
+  \node[draw,circle] (w1) at (0,-1.6) {$w\in W$};
   \node[draw,circle] (l1) at (2,0) {$l$};
   \draw[->] (c1) -- (l1);
   \draw[->] (y1) -- (l1);
   \draw[->] (w1) -- (l1);
-  \node at (1,-1.8) {$G$};
+  \node at (1,-2.5) {$G$};
 
-  \node[draw,circle] (c2) at (4,1) {$c\in Z$};
+  \node[draw,circle] (c2) at (4,1.6) {$c\in Z$};
   \node[draw,circle] (d2) at (4,0) {$d\in D$};
-  \node[draw,circle] (w2) at (4,-1) {$w\in W$};
+  \node[draw,circle] (w2) at (4,-1.6) {$w\in W$};
   \node[draw,circle] (l2) at (6,0) {$l$};
-  \node[draw,circle] (y2) at (8,1) {$y\in Y$};
-  \node[draw,circle] (e2) at (8,-1) {$e\in E$};
+  \node[draw,circle] (y2) at (8,1.6) {$y\in Y$};
+  \node[draw,circle] (e2) at (8,-1.6) {$e\in E$};
   \draw[->] (c2) -- (l2);
   \draw[->] (d2) -- (l2);
   \draw[->] (l2) -- (y2);
   \draw[->] (l2) -- (e2);
-  \node at (6,-1.8) {$G'$};
+  \node at (6,-2.5) {$G'$};
 \end{tikzpicture}
-~~~
+```

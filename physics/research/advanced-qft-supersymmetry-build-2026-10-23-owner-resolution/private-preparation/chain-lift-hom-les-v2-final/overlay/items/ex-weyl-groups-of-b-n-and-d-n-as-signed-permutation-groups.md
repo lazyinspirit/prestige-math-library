@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-weyl-groups-of-b-n-and-d-n-as-signed-permutation-groups.md

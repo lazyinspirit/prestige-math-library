@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-projective-simple-dual-bases-in-a-degenerate-cyclotomic-block.md

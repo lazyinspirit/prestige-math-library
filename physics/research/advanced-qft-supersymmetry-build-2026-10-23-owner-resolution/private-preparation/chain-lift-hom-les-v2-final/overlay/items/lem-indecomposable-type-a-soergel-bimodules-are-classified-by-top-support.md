@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-indecomposable-type-a-soergel-bimodules-are-classified-by-top-support.md

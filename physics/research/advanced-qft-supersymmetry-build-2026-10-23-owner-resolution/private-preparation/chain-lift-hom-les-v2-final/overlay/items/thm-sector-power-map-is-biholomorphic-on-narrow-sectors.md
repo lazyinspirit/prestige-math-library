@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-sector-power-map-is-biholomorphic-on-narrow-sectors.md

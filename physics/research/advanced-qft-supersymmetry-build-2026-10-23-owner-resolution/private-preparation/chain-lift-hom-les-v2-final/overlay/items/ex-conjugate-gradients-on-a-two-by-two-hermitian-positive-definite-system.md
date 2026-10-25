@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-conjugate-gradients-on-a-two-by-two-hermitian-positive-definite-system.md

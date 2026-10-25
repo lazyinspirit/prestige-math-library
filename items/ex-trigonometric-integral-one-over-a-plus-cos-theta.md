@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-trigonometric-integral-one-over-a-plus-cos-theta.json
+  precheck: pass
 id: ex-trigonometric-integral-one-over-a-plus-cos-theta
 kind: example
-title: "The integral of 1 / (a + cos theta) over [0, 2 pi]"
+title: 'The integral of $1/(a+\cos\theta)$ over $[0,2\pi]$'
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: computation
-verification:
-  audited: 2026-08-27
-  precheck: pass
 sources:
   scraped: []
   references:

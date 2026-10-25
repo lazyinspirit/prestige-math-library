@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-arith-affine-commutative-prime-to-characteristic-torsion-bound.md

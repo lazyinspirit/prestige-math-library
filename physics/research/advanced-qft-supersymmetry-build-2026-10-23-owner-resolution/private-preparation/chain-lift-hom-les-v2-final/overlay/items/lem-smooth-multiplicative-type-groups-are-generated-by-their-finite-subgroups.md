@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-smooth-multiplicative-type-groups-are-generated-by-their-finite-subgroups.md

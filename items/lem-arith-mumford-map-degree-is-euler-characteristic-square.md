@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-arith-mumford-map-degree-is-euler-characteristic-square.json
+  precheck: pass
 id: lem-arith-mumford-map-degree-is-euler-characteristic-square
 kind: lemma
 title: "The square degree of a Mumford map"
@@ -35,8 +38,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "B. Edixhoven, G. van der Geer, B. Moonen, Abelian Varieties (2012), 9.1-9.12 (Riemann-Roch and the square degree of a polarization)"
@@ -69,7 +70,7 @@ where $\deg\varphi_{\mathcal L}$ is the finite locally free rank of the isogeny 
 
 ## Proof
 
-**Proof technique:** direct: pull back the Poincare cohomology theorem along the finite flat isogeny $\varphi_{\mathcal L}$, compute $\chi(\Lambda(\mathcal L))$ twice, and deduce the square-degree formula and its invariance under field extension.
+**Proof technique:** direct: pull back the Poincare cohomology theorem along the finite flat Mumford isogeny, compute the Euler characteristic of the pulled-back Poincare bundle twice, and deduce the square-degree formula and its invariance under field extension.
 
 1.1 Put $H=K(\mathcal L)$, finite by hypothesis. The morphism $\varphi=\varphi_{\mathcal L}:A\to A^\vee$ is proper by [F6]. After any algebraically closed field extension, each nonempty fibre is a translate of $H$ as a scheme, hence finite. Thus $\varphi$ is quasi-finite and therefore finite by [F6]. Its geometric image is closed and irreducible. The image-dimension formula, with zero-dimensional generic fibre, gives image dimension $g$; since the geometrically integral target has dimension $g$, this closed image is the whole target. Surjectivity descends to $k$. Form the fppf quotient $q:A\to Q=A/H$ of [F6]. The induced homomorphism $u:Q\to A^\vee$ has trivial scheme-theoretic kernel: any kernel section lifts fppf-locally to a section $a$ of $A$, and $\varphi(a)=0$ means $a\in H$, whose quotient class is zero. Hence $u$ is a closed immersion by [F6]; it is surjective because $\varphi=u q$ is surjective. The target $A^\vee$ is reduced, so the ideal of this surjective closed immersion is zero and $u$ is an isomorphism. Consequently $\varphi=q$ is faithfully flat. Together with its already proved finiteness, this makes $\varphi_*\mathcal O_A$ a finite flat module on each Noetherian affine target chart. It is free at each local ring by [F6]; a local basis and its inverse spread to a neighbourhood because the module is finitely presented. Thus $\varphi$ is finite locally free. Its rank is constant on the connected target and its fibre at zero is $H$, so that rank is $\dim_k\mathcal O(H)=\deg\varphi$. This proves the exact flatness needed for the following base change, including nonreduced $H$. [F2, F6, given, algebra]
 
@@ -83,3 +84,15 @@ where $\deg\varphi_{\mathcal L}$ is the finite locally free rank of the isogeny 
 
 5.1 Finally let $\lambda:A\to A^\vee$ be a polarization. By definition $\lambda_{\bar k}=\varphi_{\mathcal L}$ for an ample invertible sheaf $\mathcal L$ on $A_{\bar k}$, and $\varphi_{\mathcal L}$ is an isogeny with $\deg\varphi_{\mathcal L}=\chi(A_{\bar k},\mathcal L)^2$ by step 4.1. Degree and Euler characteristic are unchanged by field extension (the degree is the rank of a finite locally free morphism, and coherent cohomology is compatible with flat field base change [F4]), so $\deg\lambda=\chi(A_{\bar k},\mathcal L)^2$ is a perfect square in $\mathbb Z$. [F2, F4, step 4.1, algebra] ∎
 
+## Remarks
+
+The Cartesian square used in step 2.1 is displayed below, with $\varphi=\varphi_{\mathcal L}$. Both vertical maps are second projections, and the horizontal maps are finite flat by step 1.1 and base change.
+
+```tikzcd
+\begin{tikzcd}[column sep=large,row sep=large,scale=1.5,transform shape]
+A\times_k A \arrow[r, "\mathrm{id}_A\times\varphi"] \arrow[d, "p_2"'] & A\times_k A^\vee \arrow[d, "p_2"] \\
+A \arrow[r, "\varphi"'] & A^\vee
+\end{tikzcd}
+```
+
+The square commutes because both composites send $(x,y)$ to $\varphi(y)$, and it is Cartesian since $(A\times_k A^\vee)\times_{A^\vee}A\cong A\times_k A$. The normalized Poincare bundle $\mathcal P$ on the upper-right space pulls back to $\Lambda(\mathcal L)$ on the upper-left space by [F2]. On the bases, the scheme-theoretic inverse image of the origin under $\varphi$ is $K(\mathcal L)$; its full length, including any nonreduced structure, is retained in the flat base-change identity of step 2.1. This diagram illustrates that step; the proof does not depend on the picture.

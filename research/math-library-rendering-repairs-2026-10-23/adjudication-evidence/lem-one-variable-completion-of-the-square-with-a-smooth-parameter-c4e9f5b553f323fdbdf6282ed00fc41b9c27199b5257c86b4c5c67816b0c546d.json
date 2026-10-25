@@ -1,0 +1,72 @@
+{
+  "id": "lem-one-variable-completion-of-the-square-with-a-smooth-parameter",
+  "agent": "/root/rendering_repair_coordinator/dt_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-proof-justification-tags",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution PNG visibly prints the entire nested-bracket justification at the end of step 1.2, unlike adjacent blue proof tags. Frozen and current pre-edit source are byte-identical; the malformed assume-case[ positive-parameter] fragment prevents recognition of the complete trailing tag group.",
+      "action": "Remove only the malformed case-marker fragment, leaving [L1, given, construct]. The existing opening sentence Assume $m>0$ retains the complete case assumption.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Removed stray nested case-marker markup from the trailing justifications in Proof step 1.2. No mathematical prose or formulas changed.",
+  "source_lines_after": [
+    53
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "protected_metadata_preserved": true,
+  "publication_status_preserved": true,
+  "before_raw_sha256": "cc6b7fa1195ea26133e5d25c4a39367ff9168ac69e5fe4eabadcfc7746905fb2",
+  "after_raw_sha256": "da08d5484fdb23dc692af627043f0197d33b99b97577e07d0dc731837de8c0cf",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-one-variable-completion-of-the-square-with-a-smooth-parameter.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-one-variable-completion-of-the-square-with-a-smooth-parameter.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "local"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-one-variable-completion-of-the-square-with-a-smooth-parameter.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "repair_process_notes": [
+    "Intermediate delimiter normalization with a hyphenated assume-case label failed proof-layout because labels require word characters. An intermediate underscore label passed proof-layout but failed precheck with strategy-missing(orphan-cases-tag). Neither intermediate is the final carrier; final removal retains the explicit prose assumption and passes all scoped checks.",
+    "The first preview directory dt-002 binds an intermediate revision and is not final evidence."
+  ],
+  "visual_evidence": {
+    "original_png": "research/math-library-rendering-audit-2026-10-23/differential-topology/screenshots/lem-one-variable-completion-of-the-square-with-a-smooth-parameter--01.png",
+    "original_inspection": "Standalone original-resolution view confirms literal malformed tag text.",
+    "final_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dt-002-final/manifest.json",
+    "final_manifest_sha256": "1234ab89f45cba6297fa9c9c1b0cd64471c392153c5632977529afd1cfa1f103",
+    "final_source_sha256": "da08d5484fdb23dc692af627043f0197d33b99b97577e07d0dc731837de8c0cf",
+    "final_png": "research/math-library-rendering-repairs-2026-10-23/previews/dt-002-final/screenshots/lem-one-variable-completion-of-the-square-with-a-smooth-parameter--01.png",
+    "final_inspection": "Standalone original-resolution native local preview shows step 1.2 with blue L1, given, construct tags above its unchanged mathematical prose; no stray marker remains.",
+    "preview_scope": "Local native ItemBody and title; no live website or HTTP(S) visit.",
+    "preview_limitations": [
+      "Reference-map diagnostics report 16 unrelated unparseable sources; assigned item and both linked prerequisite titles render successfully.",
+      "Local preview does not cover production navigation or Sources footer."
+    ]
+  }
+}

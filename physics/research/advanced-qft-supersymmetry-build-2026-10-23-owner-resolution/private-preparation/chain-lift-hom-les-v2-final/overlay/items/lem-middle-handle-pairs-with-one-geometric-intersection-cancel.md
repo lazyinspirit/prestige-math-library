@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-middle-handle-pairs-with-one-geometric-intersection-cancel.md

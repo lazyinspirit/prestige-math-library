@@ -1,0 +1,107 @@
+{
+  "id": "ex-short-versus-long-model-rollouts",
+  "agent": "/root/rendering_repair_coordinator/orl_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Independently viewed flagged original PNG standalone at original resolution: unfenced center/tikzpicture commands print as literal prose and there is no diagram. The original five directed transitions themselves exactly encode the Example.",
+      "action": "Replace center wrapper with supported tikz fence; move unchanged explanatory text and tikzpicture to final Remarks, outside Facts and Verification.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Activated the existing mathematically correct true-versus-learned transition diagram using a fenced tikz block in final Remarks; no transition, reward, or proof changed.",
+  "source_lines_after": {
+    "remarks": [
+      55,
+      75
+    ],
+    "tikz": [
+      59,
+      75
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Both panels have the same two states u and v, each with one action; labels r=1 at u and r=0 at v apply in both models.",
+      "justification": "Example line 31 and def-learned-mdp-model Definition: common state/action sets and state-action expected rewards. No action label is needed because the action is unique."
+    },
+    {
+      "relations": "True panel has exactly u→u probability 1 and v→v probability 1; there is no positive-probability edge between u and v.",
+      "justification": "Example line 31: true process stays at u and v is absorbing. The two displayed outgoing rows each sum to 1."
+    },
+    {
+      "relations": "Learned panel has u→u probability 1−epsilon, dashed u→v probability epsilon, and v→v probability 1. All five displayed edges across both panels are directed transitions, not morphisms or rollout time steps.",
+      "justification": "Example line 31 with 0<epsilon<1 gives nonnegative normalized learned rows (1−epsilon)+epsilon=1 and 1=1. The only additional learned edge is precisely the dashed u→v edge."
+    },
+    {
+      "horizon_and_rewards": "The figure shows transition kernels, not a finite unrolled trajectory or a terminal reward. Starting at u, the true occupancy stays at u, while learned occupancy at u is (1−epsilon)^t; hence returns over times 0 through H−1 are H and sum_{t=0}^{H−1}(1−epsilon)^t.",
+      "justification": "Verification step 1.1 and full local def-finite-horizon-mdp-return Definition: H immediate rewards, no discount or terminal continuation. Step 2.1 and the fully read simulation-bound supplier match TV error epsilon and zero reward error."
+    },
+    {
+      "proof_independence": "The full numbered Verification is byte-identical; its induction and total-variation bound establish the claims without using the illustration."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-short-versus-long-model-rollouts.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-short-versus-long-model-rollouts.md",
+            "item_id": "ex-short-versus-long-model-rollouts",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-short-versus-long-model-rollouts.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-short-versus-long-model-rollouts.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-short-versus-long-model-rollouts --out research/math-library-rendering-repairs-2026-10-23/orl-004-final-preview",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "visual_inspection": {
+    "original_flagged_png": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/ex-short-versus-long-model-rollouts--01.png",
+    "final_png": "research/math-library-rendering-repairs-2026-10-23/orl-004-final-preview/screenshots/ex-short-versus-long-model-rollouts--01.png",
+    "view_mode": "Each PNG independently viewed standalone, detail original.",
+    "result": "Final figure is visible with four nodes and five correctly directed transition arrows. All probability, reward and panel labels are readable and do not overlap. No clipped diagram content. Capture receipt: tikz_count 1, katex_errors [], diagram_failures [].",
+    "preview_limitations": "Local native ItemBody preview; reference map reports 16 unrelated parse diagnostics. No HTTP/live route coverage."
+  },
+  "before_raw_sha256": "c7cc3a89aaaf439df38f5167f773ceb635fc75aaa7b02b8df51053a9a975459f",
+  "after_raw_sha256": "ae69fb3faf30395c0e7079128d18a016060db0db707243c41e60c923c2e580f7",
+  "guard": "Current original raw SHA matched frozen before SHA immediately before edit. Entire frontmatter remains byte-identical, including status: published.",
+  "remaining_issues": []
+}

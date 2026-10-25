@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-local-systems-on-a-connected-cw-complex-correspond-to-modules-over-its-group-ring.md

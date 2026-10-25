@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-f-is-a-first-integral-of-h-iff-f-and-h-poisson-commute.md

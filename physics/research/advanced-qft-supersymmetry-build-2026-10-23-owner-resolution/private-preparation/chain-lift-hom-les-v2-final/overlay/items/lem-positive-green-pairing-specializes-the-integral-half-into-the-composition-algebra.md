@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-positive-green-pairing-specializes-the-integral-half-into-the-composition-algebra.md

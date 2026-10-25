@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-z-one-squared-minus-z-two-prepares-to-z-two-minus-z-one-squared.md

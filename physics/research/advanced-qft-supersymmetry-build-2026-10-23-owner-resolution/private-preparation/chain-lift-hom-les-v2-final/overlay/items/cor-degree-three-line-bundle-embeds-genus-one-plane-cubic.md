@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-degree-three-line-bundle-embeds-genus-one-plane-cubic.md

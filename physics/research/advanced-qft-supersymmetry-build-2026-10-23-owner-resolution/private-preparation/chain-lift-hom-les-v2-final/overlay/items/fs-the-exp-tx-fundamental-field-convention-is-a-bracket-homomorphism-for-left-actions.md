@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-exp-tx-fundamental-field-convention-is-a-bracket-homomorphism-for-left-actions.md

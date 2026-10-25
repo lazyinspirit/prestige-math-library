@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-fock-e-and-f-actions-on-shape-two-one-at-e-three.json
+  precheck: pass
 id: ex-fock-e-and-f-actions-on-shape-two-one-at-e-three
 kind: example
 title: "The Fock E- and F-actions on the shape (2,1) at e = 3"
@@ -72,3 +75,38 @@ normalized Kashiwara action.
 2.2 Normalized crystal arrows. For the quantum-group reading, apply the reference signature: at color $0$ the word is $+$ at $(2,2)$, giving $\tilde f_0 \to (2,2)$; at color $1$ the increasing-content word is $+$ at $(3,1)$ then $-$ at $(1,2)$, with no cancellable pair, so the first surviving $-$ is $(1,2)$ (giving $\tilde e_1 \to (1,1)$) and the last surviving $+$ is $(3,1)$ (giving $\tilde f_1 \to (2,1,1)$); at color $2$ the increasing-content word is $-$ at $(2,1)$ then $+$ at $(1,3)$, which cancels, so $\tilde f_2 = \tilde e_2 = 0$. For the restricted symmetric model, apply the modular top-to-bottom signature: at color $0$ the word is the single $+$ at $(2,2)$, so $\tilde f_0 \to (2,2)$; at color $1$ the top-to-bottom word is $-$ at $(1,2)$ then $+$ at $(3,1)$, which cancels, so $\tilde f_1 = \tilde e_1 = 0$; at color $2$ the word is $+$ at $(1,3)$ then $-$ at $(2,1)$, with no cancellable pair, so the first surviving $-$ is $(2,1)$ (giving $\tilde e_2 \to (2)$) and the last surviving $+$ is $(1,3)$ (giving $\tilde f_2 \to (3,1)$). These are the two arrow tables of the Example statement, and they correspond under conjugation with negated colors as in [F4]. [given, F4, step 1.1]
 
 3.1 Raw vectors versus coefficients. By [F4] the standard vectors represent the crystal basis of the $A_0$ chart, so $|2,1\rangle$ and $M_{2,1}$ are nonzero modulo $q$ and each represents its crystal residue. The ordinary actions computed in steps 1.1-2.1 have coefficients $1$ and $q^{-1}$, and the mismatch with step 2.2 is real: $E_2|2,1\rangle = |2\rangle \ne 0$ while $\tilde e^{\mathrm{QG}}_2(2,1) = 0$, and $F_2|2,1\rangle = |3,1\rangle \ne 0$ while $\tilde f^{\mathrm{QG}}_2(2,1) = 0$; in the symmetric model the corresponding mismatch is in color $1$: $E_1^{\mathrm{sym}}M_{2,1}=M_{1,1}$ and $F_1^{\mathrm{sym}}M_{2,1}=M_{2,1,1}$ are nonzero, while both color-$1$ crystal arrows vanish. Both color-$2$ crystal arrows in that model are nonzero, as step 2.2 records. Hence the Chevalley coefficients do not define the arrows, exactly as stated. [given, F3, F4, step 1.1, step 2.1, step 2.2] ∎
+
+
+## Remarks
+
+The two local crystal neighborhoods below display only the edges incident to
+$(2,1)$. Every directed edge labelled $i$ means $\tilde f_i$ in the indicated
+model; traversing it backwards means $\tilde e_i$. Vertices are partition
+labels of crystal residues, not standard vectors with Chevalley coefficients.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node at (0,1.1) {Quantum-group crystal};
+\node (qa) at (0,0) {$(1,1)$};
+\node (qb) at (0,-1.4) {$(2,1)$};
+\node (qc) at (-1.4,-2.8) {$(2,2)$};
+\node (qd) at (1.4,-2.8) {$(2,1,1)$};
+\draw[->] (qa) -- node[right] {$1$} (qb);
+\draw[->] (qb) -- node[above left] {$0$} (qc);
+\draw[->] (qb) -- node[above right] {$1$} (qd);
+\node at (5.5,1.1) {Restricted symmetric model};
+\node (sa) at (5.5,0) {$(2)$};
+\node (sb) at (5.5,-1.4) {$(2,1)$};
+\node (sc) at (4.1,-2.8) {$(2,2)$};
+\node (sd) at (6.9,-2.8) {$(3,1)$};
+\draw[->] (sa) -- node[right] {$2$} (sb);
+\draw[->] (sb) -- node[above left] {$0$} (sc);
+\draw[->] (sb) -- node[above right] {$2$} (sd);
+\end{tikzpicture}
+```
+
+At the central vertex, both color-$2$ operators vanish on the left and both
+color-$1$ operators vanish on the right; $\tilde e_0$ vanishes in both models.
+Conjugating every partition on the left and replacing $i$ by $-i$ modulo $3$
+gives the right-hand neighborhood. The signatures computed in step 2.2
+establish these edges and zero values independently of the illustration.

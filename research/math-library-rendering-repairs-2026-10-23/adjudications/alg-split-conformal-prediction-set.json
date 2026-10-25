@@ -1,0 +1,117 @@
+{
+  "id": "alg-split-conformal-prediction-set",
+  "agent": "/root/rendering_repair_coordinator/dms_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic standalone screenshot renders all formulas correctly but compresses two distinct computational branches into prose. A flow picture materially clarifies that calibration and candidate scores use the same trained rule, that only calibration scores determine q, and that the optional rank-randomized branch uses one shared independent seed. This is a warranted explanatory addition under the expanded diagram scope, not a repair to a false formula.",
+      "action": "Added a final Remarks section with a computational TikZ flow for deterministic thresholding and a separate optional randomized flow.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only explanatory Remarks and a TikZ flow; complete original frontmatter, Definition and Definition references are byte-identical to the frozen preimage.",
+  "source_lines_after": {
+    "remarks": [
+      56,
+      64
+    ],
+    "diagram": [
+      66,
+      88
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": {
+    "before": "status: published",
+    "after": "status: published",
+    "frontmatter_byte_identical": true
+  },
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects_and_maps": "Training statistic H takes values in the rule space; the existing supplier defines the jointly measurable real-valued score map on the training rule space times X×Y. At fixed H, R_i=s_H(Z_i) and r(y)=s_H(x,y) both use the same rule.",
+      "justification": "Carrier Definition lines 30–34 and supplier def-conformal-nonconformity-score-and-rank-pvalue Definition, first paragraph and final split-scan paragraph.",
+      "relations_checked": [
+        "H → s_H",
+        "s_H → calibration scores",
+        "s_H → candidate scan"
+      ]
+    },
+    {
+      "objects_and_maps": "Calibration data form m real scores. Ordered keys (R_i,i) sort by score and then fixed index; R_(k) in the figure is the score component at sorted position k, exactly as in the Definition.",
+      "justification": "Carrier Definition lines 33–37. Since 0<alpha<1 and m≥0, 1≤k≤m+1; q is selected only for k≤m and is +infinity for k=m+1, including m=0.",
+      "relations_checked": [
+        "Calibration scores → sorted keys",
+        "Sorted keys → q",
+        "q and candidate r(y) → C(x)={y:r(y)≤q}"
+      ]
+    },
+    {
+      "objects_and_maps": "For each y in Y, the optional rank map combines calibration scores, candidate r(y), and one U independent of data/training information. The supplier formula is (# calibration scores > r + U(1 + # calibration scores = r))/(m+1). The +1 is the candidate itself; the same U is used over all y.",
+      "justification": "Carrier Definition lines 40–45 and supplier randomized rank formula plus immediately following shared-seed paragraph. The output is exactly {y:p_U(y)>alpha}; no claim of conditional coverage or commutativity is added.",
+      "relations_checked": [
+        "Calibration scores, r(y), shared independent U → p_U(y)",
+        "p_U(y) → C_U(x)"
+      ]
+    }
+  ],
+  "proof_independent": true,
+  "diagram_visual_checks": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dms_001",
+    "source_sha256": "cdc359cc3e128881b611de8aa5f9c201898c716c06356de2640459b6e44b9e26",
+    "manifest_sha256": "5137b99aa81afc1e2290e8374d0c70447e1ede0f8be4e90eac6e064fac85a54b",
+    "reference_map_sha256": "75ba2df6a80ad2379d5b9027a07f63ebdcfbfc0cffdcdd5cf109d9ec7f868f88",
+    "native_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dms_001/pi-tikz-cache/aa79e7116ab124187eaec7896867f2b5.svg",
+    "native_svg_sha256": "453fa0f0026279d572506a742b2acfdb3c9e58d4280412b9cabb6513b5b1b846",
+    "viewed_original_resolution": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dms_001/screenshots/alg-split-conformal-prediction-set--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dms_001/diagram-browser-native.png"
+    ],
+    "result": "Native preview compiled one TikZ diagram with zero diagram failures and zero KaTeX errors. Standalone Chromium rendering of that exact native SVG with embedded fonts confirmed all 10 nodes and 9 arrows, arrow directions, readable formulas and no overlaps or clipped content. The scaled browser-native supplementary image is an inspection aid, not a changed source diagram."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-split-conformal-prediction-set.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-split-conformal-prediction-set.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-split-conformal-prediction-set.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "evidence_path_resolution": {
+    "declared_missing": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/diagram-supplement/screenshots/alg-split-conformal-prediction-set--01.png",
+    "authentic_viewed": "research/math-library-rendering-audit-2026-10-23/mathematical-statistics/screenshots/alg-split-conformal-prediction-set--01.png",
+    "sha256": "608326cb01a6522cc1d0989beb3ede8cd8c6638336bf1dc8fabdba4c70e011a1",
+    "recorded_sha_match": true
+  },
+  "before_raw_sha256": "9cce66ad4233de412ad637fe834329c6c6819dbc6afbeed443a41e3b4184d007",
+  "after_raw_sha256": "cdc359cc3e128881b611de8aa5f9c201898c716c06356de2640459b6e44b9e26",
+  "remaining_issues": [
+    "Fresh full-item PNG leaves inherited upper content visually blank although the original authentic screenshot renders it and that source is byte-unchanged; the new Remarks and diagram render correctly. No claim of fresh full-item visual coverage is made for that inherited upper region.",
+    "Local preview reference map reports 16 unrelated parse diagnostics; no external website or production route was visited."
+  ]
+}

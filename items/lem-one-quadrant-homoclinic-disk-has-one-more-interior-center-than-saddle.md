@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-one-quadrant-homoclinic-disk-has-one-more-interior-center-than-saddle.json
+  precheck: pass
 id: lem-one-quadrant-homoclinic-disk-has-one-more-interior-center-than-saddle
 kind: lemma
 title: "A one-quadrant homoclinic disk contains a center"
@@ -13,12 +16,6 @@ aliases: []
 landmark: false
 proof_strategy: direct
 dependency_level: 4
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   scraped: []
   references:
@@ -64,3 +61,47 @@ In particular $K$ contains a center. The saddle $q$ is not included in $s_K$.
 4.1 To compute the index sum, approximate C′ inside a zero-free thin collar by a simple inscribed polygon, using finitely many local graph strips; projection in those strips gives a boundary homotopy through nonzero fields. Choose disjoint small squares around every interior zero. Choose a direction with distinct projections of all outer-polygon and square vertices. Between consecutive projections the boundary edges are ordered affine graphs; the zero-free region is a finite union of bands between consecutive graphs. Subdivide their vertical walls at all edge intersections, and split each convex triangle or quadrilateral band into triangles, as in the finite polygonal subdivision of [[thm-simple-polygon-admits-a-triangulation]]. On each zero-free cell the normalized field extends across the cell, so its boundary degree is zero. Summing the boundary degrees cancels every common oriented edge, and gives outer degree equal to the sum of the small-square degrees. The local calculation in [[lem-characteristic-disk-center-saddle-index-count]], in its local-degree paragraph, gives +1 for a center and −1 for a saddle; this calculation and the cancellation argument do not require its outer-boundary alternatives once the outer degree has been computed directly. Hence $c_K-s_K=\deg(X/|X|\text{ on }C\prime)=1$. [F1, step 1.1, step 2.1, step 3.1]
 
 5.1 All original interior zeros are inside K′ and q was cut off, so the count in step 4.1 is exactly the stated strict-interior count. It implies $c_K\ge1$. Only finitely many charts, approximations and polygonal cells were used. [step 2.1, step 4.1] ∎
+
+
+## Remarks
+
+The left panel shows the chosen local Morse sector in steps 1.1–2.1, with $A=(0,\varepsilon)$ and $B=(\varepsilon,0)$. The blue cut is directed from $A$ to $B$; the retained region lies on its left. The arrows on the positive axes and in the open sector indicate $X=c(x,y)(x,-y)$, $c>0$. The right panel is a schematic of $C'$ after the cut, not a global Morse-coordinate chart: the retained orbit runs from $B$ around to $A$, and the cut returns to $B$. The dashed branches meet at the excluded saddle $q$. The illustrated cut represents the arc before the sufficiently close smoothing of step 2.1; that smoothing preserves these orientations and excludes the same zeros.
+
+```tikz
+\begin{tikzpicture}[scale=1.1,>=stealth]
+\begin{scope}
+\fill[blue!10] (0,0) rectangle (3,3);
+\fill[white] (0,0) -- (0,1.15) arc[start angle=90,end angle=0,radius=1.15] -- cycle;
+\draw[->] (-0.5,0) -- (3.25,0) node[right] {$x$};
+\draw[->] (0,-0.5) -- (0,3.25) node[above] {$y$};
+\draw[very thick,blue,->] (0,1.15) arc[start angle=90,end angle=40,radius=1.15];
+\draw[very thick,blue] (40:1.15) arc[start angle=40,end angle=0,radius=1.15];
+\draw[thick,->] (1.7,0) -- (2.5,0);
+\draw[thick,->] (0,2.5) -- (0,1.7);
+\draw[thick,->] (1.5,2.1) -- (2,1.4) node[right] {$X$};
+\fill (0,0) circle (1.5pt) node[below left] {$q$};
+\node[left] at (0,1.15) {$A$};
+\node[below] at (1.15,0) {$B$};
+\node at (2.1,2.7) {$K$ locally};
+\node at (0.35,0.35) {\scriptsize removed};
+\node at (1.4,-0.95) {local sector and cut};
+\end{scope}
+\begin{scope}[xshift=5.3cm]
+\fill[blue!10] (1.05,0) -- (2.2,0) .. controls (3.6,0) and (3.6,3.2) .. (1.6,3.2) .. controls (0,3.2) and (0,2) .. (0,1.05) arc[start angle=90,end angle=0,radius=1.05];
+\draw[thick,->] (1.05,0) -- (2.2,0) .. controls (3.6,0) and (3.6,3.2) .. (1.6,3.2);
+\draw[thick,->] (1.6,3.2) .. controls (0,3.2) and (0,2) .. (0,1.05);
+\draw[very thick,blue,->] (0,1.05) arc[start angle=90,end angle=40,radius=1.05];
+\draw[very thick,blue] (40:1.05) arc[start angle=40,end angle=0,radius=1.05];
+\draw[dashed] (0,1.05) -- (0,0) -- (1.05,0);
+\fill (0,0) circle (1.5pt) node[below left] {$q$};
+\node[left] at (0,1.05) {$A$};
+\node[below] at (1.05,0) {$B$};
+\node at (1.65,2.2) {$K'$};
+\node at (1.65,1.55) {$c_K-s_K=1$};
+\node[right] at (3.05,1.6) {$C'$};
+\node at (1.45,-0.95) {positive boundary; $q$ excluded};
+\end{scope}
+\end{tikzpicture}
+```
+
+The interior centers each contribute $+1$ and the interior saddles each contribute $-1$, while $q$ contributes nothing to this strict-interior sum. Steps 3.1–5.1 identify this sum with the boundary degree $1$. The proof is independent of the illustration.

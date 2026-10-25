@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-folner-boxes-in-zn.json
+  precheck: pass
 id: ex-folner-boxes-in-zn
 kind: example
-title: "Boxes in Z^n are Folner sets"
+title: 'Boxes in $Z^n$ are Folner sets'
 status: published
 origin: session
 provenance:
@@ -14,9 +17,6 @@ landmark: false
 generation:
   role: example
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references: []

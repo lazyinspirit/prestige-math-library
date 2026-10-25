@@ -1,14 +1,11 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-empirical-laws-of-a-finite-valued-iid-sample.json
+  precheck: pass
 id: ex-empirical-laws-of-a-finite-valued-iid-sample
 kind: example
 title: Empirical laws of a finite valued iid sample
 deps: ["thm-empirical-measures-of-iid-euclidean-samples-converge-weakly", "def-weak-convergence-of-borel-probability-measures", "thm-finite-and-countable-subadditivity-of-measures"]
-verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   references:
     - title: Durrett, §§2.4–2.5, pp. 76–87
@@ -45,6 +42,6 @@ including $m=0$, where both sides are $0$.
 
 1.1 Apply F2 to the union of the sample-outside-support events. By F1, the empirical laws converge weakly almost surely. Also all samples lie in the finite set on a conull event, since each outside event has probability zero and there are countably many coordinates. [F1, F2]
 
-1.2 On such an outcome put $q_{n,j}=n^{-1}\#\{i\le n:X_i=a_j\}$. If each q_{n,j}->$p_j$, then for bounded continuous f, $\int f\,d\widehat\mu_n=\sum_jq_{n,j}f(a_j)\to\sum_jp_jf(a_j)=\int f\,d\mu$, proving weak convergence. [given, algebra]
+1.2 On such an outcome put $q_{n,j}=n^{-1}\#\{i\le n:X_i=a_j\}$. If each $q_{n,j}\to p_j$, then for bounded continuous f, $\int f\,d\widehat\mu_n=\sum_jq_{n,j}f(a_j)\to\sum_jp_jf(a_j)=\int f\,d\mu$, proving weak convergence. [given, algebra]
 
-2.1 Conversely, for $m\ge2$ put $r_j=\frac12\min_{l\ne j}\|a_j-a_l\|>0$ and $f_j(x)=\max(0,1-\|x-a_j\|/r_j)$. This bounded continuous test is one at $a_j$ and zero at every other $a_l$. Its empirical integral is q_{n,j} and its $\mu$ integral is $p_j$, so weak convergence implies q_{n,j}->$p_j$. If $m=1$, both frequencies are identically one and the constant test suffices. [given, algebra] ∎
+2.1 Conversely, for $m\ge2$ put $r_j=\frac12\min_{l\ne j}\|a_j-a_l\|>0$ and $f_j(x)=\max(0,1-\|x-a_j\|/r_j)$. This bounded continuous test is one at $a_j$ and zero at every other $a_l$. Its empirical integral is $q_{n,j}$ and its $\mu$ integral is $p_j$, so weak convergence implies $q_{n,j}\to p_j$. If $m=1$, both frequencies are identically one and the constant test suffices. [given, algebra] ∎

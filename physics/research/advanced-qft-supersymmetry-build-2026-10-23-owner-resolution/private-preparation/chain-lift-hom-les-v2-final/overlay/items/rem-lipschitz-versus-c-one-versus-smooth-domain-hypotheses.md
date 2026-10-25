@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-lipschitz-versus-c-one-versus-smooth-domain-hypotheses.md

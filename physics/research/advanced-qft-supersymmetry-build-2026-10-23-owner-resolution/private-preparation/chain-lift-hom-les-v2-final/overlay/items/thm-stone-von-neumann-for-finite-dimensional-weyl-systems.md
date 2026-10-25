@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-stone-von-neumann-for-finite-dimensional-weyl-systems.md

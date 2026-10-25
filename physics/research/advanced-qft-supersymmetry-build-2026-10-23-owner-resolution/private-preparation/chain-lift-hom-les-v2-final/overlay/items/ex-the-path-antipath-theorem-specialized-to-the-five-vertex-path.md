@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-path-antipath-theorem-specialized-to-the-five-vertex-path.md

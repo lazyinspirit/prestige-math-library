@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-weyl-reflection-in-sl-two.json
+  precheck: pass
 id: ex-weyl-reflection-in-sl-two
 kind: example
-title: The Weyl reflection in sl_2
+title: The Weyl reflection in $\mathfrak{sl}_2$
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -17,8 +20,7 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the coroot, reflection and inner-automorphism suppliers."
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example
@@ -27,7 +29,7 @@ Assume AC ([[def-axiom-of-choice]]). In $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\o
 with the root $\alpha$ of [[ex-cartan-subalgebra-and-roots-of-sl-two]], the
 coroot is $h_\alpha=h$. Choose the standard root triple
 $(e_\alpha,f_\alpha,h_\alpha)=(e,f,h)$, whose bracket relations are the
-displayed matrix relations of [[def-special-linear-lie-algebra-sl-two]], and
+displayed matrix relations of [[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]], and
 the reflection
 $s_\alpha:\mathfrak h^*\to\mathfrak h^*$ of
 [[def-root-reflection-from-a-coroot]] is $-\operatorname{id}$, because
@@ -45,7 +47,7 @@ roots $\pm\alpha$.
 
 ## Facts & Assumptions
 
-**Given:** AC; the algebra $\mathfrak{sl}_2(\mathbb C)$ with its root $\alpha$, standard matrices $(e,f,h)$, standard root triple $(e_\alpha,f_\alpha,h_\alpha)=(e,f,h)$, and coroot $h_\alpha=h$ as in [[ex-cartan-subalgebra-and-roots-of-sl-two]], [[def-special-linear-lie-algebra-sl-two]] and [[def-coroot-of-a-lie-algebra-root]], together with the reflection $s_\alpha$ of [[def-root-reflection-from-a-coroot]].
+**Given:** AC; the algebra $\mathfrak{sl}_2(\mathbb C)$ with its root $\alpha$, standard matrices $(e,f,h)$, standard root triple $(e_\alpha,f_\alpha,h_\alpha)=(e,f,h)$, and coroot $h_\alpha=h$ as in [[ex-cartan-subalgebra-and-roots-of-sl-two]], [[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]] and [[def-coroot-of-a-lie-algebra-root]], together with the reflection $s_\alpha$ of [[def-root-reflection-from-a-coroot]].
 
 ## Verification
 

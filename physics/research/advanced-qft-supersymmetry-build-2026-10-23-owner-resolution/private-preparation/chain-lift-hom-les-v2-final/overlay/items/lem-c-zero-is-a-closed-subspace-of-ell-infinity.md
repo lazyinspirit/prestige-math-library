@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-c-zero-is-a-closed-subspace-of-ell-infinity.md

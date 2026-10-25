@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity.json
+  precheck: pass
 id: ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity
 kind: example
 title: A flat torus showing simple connectedness is needed for global exp injectivity
@@ -26,9 +29,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -84,7 +84,7 @@ Simple connectedness cannot be dropped from Cartan–Hadamard.
 
 ## Verification
 
-**Proof technique:** direct: the quotient charts make $q$ a local isometry from the complete Euclidean space, so the completeness/covering theorem makes $q$ a covering map and the torus complete; the constant coordinate metric kills all curvature; straight lines are the geodesics, so $\exp$ is a translated quotient map and is noninjective; a lift of the standard loop through the covering proves that the loop is essential.
+**Proof technique:** direct: the quotient charts make q a local isometry from the complete Euclidean space, so the completeness/covering theorem makes q a covering map and the torus complete; the constant coordinate metric kills all curvature; straight lines are the geodesics, so the exponential map is a translated quotient map and is noninjective; a lift of the standard loop through the covering proves that the loop is essential.
 
 1.1 The quotient map $q$ is a local isometry, a covering map, and $(T^n,g)$ is complete. [F1, F3, F8, given] In a periodic chart of [F1] the metric matrix is the identity. The local inverse charts of $q$ are the inverses of the restrictions of $q$ to boxes of side lengths less than $1$, and in those coordinates $q$ is the identity map of an open subset of $\mathbb R^n$; hence the differential of $q$ preserves the Euclidean metric of $\mathbb R^n$ and the flat metric of $T^n$ at every point. By [F3] this makes $q$ a local isometry from the boundaryless connected Riemannian manifold $(\mathbb R^n,g_{\mathrm E})$ onto $(T^n,g)$, where $T^n$ is connected and boundaryless by [F1]. The Euclidean space is complete by [F8] and nonempty since $n\ge2$. The local isometry is therefore a covering map by [F3], and part 3 of [F3] makes $(T^n,g)$ complete. [F1, F3, F8, given]
 

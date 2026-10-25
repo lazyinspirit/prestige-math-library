@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-lindeberg-feller-central-limit-theorem-sufficiency.json
+  precheck: pass
 id: thm-lindeberg-feller-central-limit-theorem-sufficiency
 kind: theorem
 title: 'Lindeberg-Feller central limit theorem: sufficiency'
@@ -6,12 +9,6 @@ deps: ["def-total-row-variance-and-lindeberg-condition", "lem-second-order-chara
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-13
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-12
 sources:
   references:
     - title: 'Durrett, Probability: Theory and Examples, Theorem 3.4.10'
@@ -31,7 +28,7 @@ Assume AC. If a centered row-wise independent triangular array has finite second
 
 [F1] Normalization makes total variance one and preserves the Lindeberg quantity. [[def-total-row-variance-and-lindeberg-condition]].
 
-[F2] The scalar remainder obeys min(|u|^3/3,4u^2), and the centered exponential increment is bounded by u^2. [[lem-second-order-characteristic-function-expansion]].
+[F2] The scalar remainder obeys $\min(|u|^3/3,4u^2)$, and the centered exponential increment is bounded by $u^2$. [[lem-second-order-characteristic-function-expansion]].
 
 [F3] Lindeberg implies maximal entry variance tends to zero. [[lem-lindeberg-condition-implies-feller-negligibility]].
 
@@ -39,7 +36,7 @@ Assume AC. If a centered row-wise independent triangular array has finite second
 
 [F5] Finite row independence identifies the product transform. [[lem-characteristic-functions-under-affine-maps-and-independent-sums]].
 
-[F6] The standard-normal transform is exp(-t^2/2). [[lem-characteristic-function-of-a-normal-law]].
+[F6] The standard-normal transform is $\exp(-t^2/2)$. [[lem-characteristic-function-of-a-normal-law]].
 
 [F7] Under AC pointwise convergence to a specified characteristic function implies weak convergence. [[cor-characteristic-function-criterion-for-weak-convergence]].
 

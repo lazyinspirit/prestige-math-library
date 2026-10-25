@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension.md

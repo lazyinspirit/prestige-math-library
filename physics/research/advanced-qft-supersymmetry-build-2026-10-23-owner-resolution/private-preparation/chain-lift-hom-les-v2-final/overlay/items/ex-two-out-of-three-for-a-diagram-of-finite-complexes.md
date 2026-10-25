@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-two-out-of-three-for-a-diagram-of-finite-complexes.md

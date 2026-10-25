@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-equivariant-relative-tangent-groupoid-heat-trace-limit.md

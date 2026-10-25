@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-type-a-soergel-generators-are-finite-free-on-both-sides.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complete-regular-surface-degree-p-extension-has-bounded-h1.md

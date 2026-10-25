@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-four-fock-bases-in-a-small-two-factor-tensor-space.md

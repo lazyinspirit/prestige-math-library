@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-separable-reflexive-space-has-separable-dual.json
+  precheck: pass
 id: cor-separable-reflexive-space-has-separable-dual
 kind: corollary
 title: Separable reflexive space has separable dual
@@ -17,15 +20,7 @@ sources:
     - title: "Bühler–Salamon, Functional Analysis, Theorem 2.73(ii)"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Section 2.4.3, printed p. 93"
-verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+
 ---
 
 ## Statement
@@ -46,7 +41,7 @@ and norm separable, then its continuous dual $X^*$ is norm separable.
 
 ## Proof
 
-**Proof technique:** transport a dense set through the canonical isometry and apply the preceding theorem to $X^*$.
+**Proof technique:** transport a dense set through the canonical isometry and apply the preceding theorem to the dual space.
 
 1.1 By [F1], fix an at most countable norm-dense set $D\subseteq X$.  Its image $J_X[D]$ is at most countable: the restriction of the injective map $J_X$ is a bijection from $D$ onto that image. [given, F1, F2]
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-slices-of-a-locally-cartesian-closed-category-are-locally-cartesian-closed.md

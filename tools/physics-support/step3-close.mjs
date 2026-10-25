@@ -46,17 +46,17 @@ const jsonl = (path) => existsSync(path)
   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
 const canonicalRows = (rows, key) => [...rows].sort((left, right) =>
   String(key(left)).localeCompare(String(key(right))));
-const step3LedgerRows = () => {
+const step3LedgerRows = ({ appendOrder = false } = {}) => {
   const rows = jsonl(R('research', 'defect-ledger.jsonl')).filter(row => row.run === run);
   const errors = [];
   // Validate lineage and every substantive field before projecting anything.
   // Original rows remain present; an arbitrary supersession is never hidden.
   taxonomyOwnership(rows, errors);
   if (errors.length) fail(errors.join('; '));
-  return canonicalRows(rows.filter(row =>
+  const selected = rows.filter(row =>
     ['3a-adjudicate', '3b-cross'].includes(row.caught_at_stage)
-    && !isPublishedItem(root, row.subject)),
-  row => row.defect_id);
+    && !isPublishedItem(root, row.subject));
+  return appendOrder ? selected : canonicalRows(selected, row => row.defect_id);
 };
 const currentRunItems = () => {
   const ids = new Set();
@@ -101,11 +101,18 @@ if (mode === 'verify') {
   // even if valid taxonomy corrections were already included when it closed.
   const matchesLedger = rows => sha256(JSON.stringify(rows)) === receipt.step3_ledger_rows_sha256
     && rows.length === receipt.step3_ledger_rows_count;
-  let ledgerRows = step3LedgerRows();
+  const appendOrdered = step3LedgerRows({ appendOrder: true });
+  let ledgerRows = canonicalRows(appendOrdered, row => row.defect_id);
   if (!matchesLedger(ledgerRows)) {
-    // Only authenticated taxonomy successors may be absent from old history.
-    // Original rows and every substantive successor remain in this projection.
-    ledgerRows = ledgerRows.filter(row => row.metadata_correction?.kind !== 'taxonomy-only');
+    // The old digest/count authenticate the exact append-only frozen prefix,
+    // including any taxonomy corrections already present when it closed.
+    // Every omitted later row must have passed full taxonomy lineage checks;
+    // no original or substantive successor may disappear from history.
+    const count = receipt.step3_ledger_rows_count;
+    if (Number.isSafeInteger(count) && count >= 0 && appendOrdered.length >= count
+      && appendOrdered.slice(count).every(row => row.metadata_correction?.kind === 'taxonomy-only')) {
+      ledgerRows = canonicalRows(appendOrdered.slice(0, count), row => row.defect_id);
+    }
   }
   if (!matchesLedger(ledgerRows)) errors.push('Step-3 defect-ledger rows changed');
   if (errors.length) fail(errors.join('; '));

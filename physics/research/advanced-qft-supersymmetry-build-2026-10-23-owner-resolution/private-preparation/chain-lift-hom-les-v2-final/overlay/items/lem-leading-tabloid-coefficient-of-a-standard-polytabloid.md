@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-leading-tabloid-coefficient-of-a-standard-polytabloid.md

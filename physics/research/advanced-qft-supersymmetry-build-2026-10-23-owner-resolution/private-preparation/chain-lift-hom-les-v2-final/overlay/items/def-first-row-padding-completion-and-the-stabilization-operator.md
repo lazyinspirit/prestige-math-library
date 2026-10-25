@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-first-row-padding-completion-and-the-stabilization-operator.md

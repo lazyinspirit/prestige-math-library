@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree.md

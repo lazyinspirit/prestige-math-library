@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-kontsevich-braid-and-knot-isotopy-invariance.json
+  precheck: pass
 id: lem-kontsevich-braid-and-knot-isotopy-invariance
 kind: lemma
 title: Braid and knot isotopy invariance of the normalized integral
@@ -35,13 +38,7 @@ sources:
       url: https://arxiv.org/pdf/q-alg/9702009v1
     - title: The Universal Vassiliev–Kontsevich Invariant for Framed Oriented Links, §§3–4
       url: https://letu.math.gatech.edu/Papers/UN_PAPER.pdf
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -49,21 +46,6 @@ verification:
 Let $K_0,K_1$ be strict Morse presentations of smooth oriented knots. Define a horizontal deformation to be a smooth family $K_s(x)=(z_s(x),t(x))$ that fixes neighborhoods of all height critical points. Define a critical-point move to be a smooth family fixed outside one local arc containing a single nondegenerate critical point in a horizontal slab, such that horizontal deformations can narrow the moving arc to every sufficiently small width $\varepsilon$, each horizontal disk meets that arc in at most two points, and its Morse charts remain uniformly bounded. Let a standard hump birth or death mean insertion or deletion of the fixed local maximum-minimum pair used in the normalization.
 
 The normalized unframed series $I(K)=Z(K)Z(H)^{-r(K)}$ is unchanged by orientation-preserving reparametrizations, horizontal deformations, critical-point moves, and standard hump births or deaths, and hence by any finite sequence of these moves. Assume $\mathrm{AC}_\omega$. If $K_0$ and $K_1$ are related by a smooth ambient isotopy, then $I(K_0)=I(K_1)$. For a fixed parenthesization, the KZ holonomy of a geometric braid is invariant under homotopies of its configuration path with endpoints fixed. Under $\mathrm{AC}_\omega$, finite Markov moves preserve the normalized series of strict Morse knot presentations of their one-component braid closures, and oriented Reidemeister moves preserve the normalized series of strict Morse presentations of the knots they represent.
-
-The diagram shows a horizontal deformation: the local arcs move in the complex coordinate while the height coordinate and critical neighborhoods remain fixed. It illustrates the move convention and is not used as proof.
-
-```tikz
-\begin{tikzpicture}[scale=0.85,thick]
-  \draw[->] (-1.5,0) -- (1.7,0) node[right] {$\operatorname{Re}z$};
-  \draw[->] (-1.5,0) -- (-1.5,3) node[above] {$t$};
-  \draw (-0.4,0.2) .. controls (-0.2,0.9) and (-0.8,1.4) .. (-0.25,2.1);
-  \draw[dashed] (0.1,0.2) .. controls (0.7,0.9) and (0.55,1.4) .. (0.9,2.1);
-  \draw[dotted] (-0.4,0.2) -- (0.1,0.2);
-  \draw[dotted] (-0.25,2.1) -- (0.9,2.1);
-  \node at (-0.8,2.45) {same critical data};
-  \node at (1.25,1.25) {$s\mapsto z_s$};
-\end{tikzpicture}
-```
 
 ## Statement references
 
@@ -149,3 +131,25 @@ The diagram shows a horizontal deformation: the local arcs move in the complex c
 
 5.1 For a fixed parenthesization, a braid path is a path in the configuration space of distinct strand points. Its KZ holonomy is unchanged under fixed-endpoint path homotopy by [F4]. This use is choice-free; changes of parenthesization and the associator coherence equations are handled by a separate result. [F4, algebra] ∎
 
+
+## Remarks
+
+The diagram is a schematic local projection of a horizontal deformation in a regular height band; all critical neighborhoods lie outside the displayed band and remain fixed. The solid arc ($s=0$) and dashed arc ($s=1$) agree on the upper and lower collars. One model is $z_s(t)=s b(t)$ with $b$ a smooth real bump supported inside the band, and fixed height $t$. Extend by the unchanged knot outside this arc, choosing the bump small enough to remain disjoint from the rest of the knot. The arrows show one possible orientation of the local arc, shared by both presentations. No crossing or braid relation is asserted. The dotted horizontal segment illustrates motion at a single fixed height, not an extra strand. The rigorous invariance argument is step 1.2 and is independent of this picture.
+
+```tikz
+\begin{tikzpicture}[scale=1,thick]
+  \draw[->] (-1.2,0) -- (2.3,0) node[right] {$\mathrm{Re}\,z$};
+  \draw[->] (-1.2,0) -- (-1.2,3.6) node[above] {$t$};
+  \draw[->] (0,0.3) -- (0,0.9);
+  \draw (0,0.9) -- (0,2.7);
+  \draw[->] (0,2.7) -- (0,3.3);
+  \draw[dashed] (0,0.9) .. controls (0,1.3) and (1.2,1.3) .. (1.2,1.8)
+    .. controls (1.2,2.3) and (0,2.3) .. (0,2.7);
+  \draw[dotted,->] (0,1.8) -- (1.15,1.8);
+  \node[left] at (0,1.8) {$s=0$};
+  \node[right] at (1.25,1.8) {$s=1$};
+  \node[right] at (0.15,0.55) {fixed collar};
+  \node[right] at (0.15,3.05) {fixed collar};
+  \node at (0.6,2.55) {$s\mapsto z_s(t)$};
+\end{tikzpicture}
+```

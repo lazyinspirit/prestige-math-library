@@ -1,0 +1,128 @@
+{
+  "id": "thm-qa-exact-binary-qft-circuit-correct",
+  "agent": "/root/dqa_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dqa_014",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Both authentic original standalone tiles show a readable theorem/proof but no picture. A three-qubit circuit materially clarifies the nontrivial ascending control order inside descending target blocks and the reversal of tensor factors in steps 1.1\u20132.1. This is an authorized explanatory-diagram addition, not a claim that the proof was incomplete.",
+      "action": "Added n=3 circuit in final Remarks, with explicit computational inputs, fixed wire labels, H and controlled P3/P2 boxes, final SWAP, output factors and positive-sign phase explanation.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a mathematically checked three-wire TikZ illustration and its conventions in Remarks; all original bytes, including metadata, status, Statement, Facts and Proof, remain unchanged.",
+  "source_lines_after": {
+    "remarks_heading": 71,
+    "conventions": 73,
+    "tikz": [
+      75,
+      119
+    ],
+    "phase_and_factor_explanation": 121
+  },
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "metadata_byte_identical": true,
+  "guard": {
+    "before_raw_sha256": "11172f9e5bf4e0645cfecb471a762dd343343d4c883441fbaf7cf4b78862a93b",
+    "guard_matched_immediately_before_edit": true,
+    "after_raw_sha256": "99b555378b3e6de9acb07376b31094e4690529ec9c662c2cd6191738bc8cc6d8",
+    "original_carrier_preserved_as_byte_prefix": true
+  },
+  "original_image_evidence": {
+    "declared_path_issue": "The entry evidence_dir/ screenshots paths do not exist. Authentic tiles were located in the same quantum-algorithms category screenshots directory and their bytes match both recorded SHA256 values.",
+    "resolved_paths": [
+      "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/thm-qa-exact-binary-qft-circuit-correct--01.png",
+      "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/thm-qa-exact-binary-qft-circuit-correct--02.png"
+    ],
+    "sha256": [
+      "0694f793f77e90b2a6528de065c1de88a824bff89251d502e284f79d1396882b",
+      "db90cb282993162e205d8e5c205bfd02a08300c005bf67ca65316f09686c126e"
+    ],
+    "viewed": "Each separately with view_image detail original."
+  },
+  "diagram_math_checks": [
+    {
+      "check": "Objects and register order",
+      "result": "Three C^2 wires, fixed top-to-bottom q2,q1,q0, input |x2 x1 x0>, x=4x2+2x1+x0. Every embedded H, CP or SWAP is an endomorphism of the same ordered eight-dimensional register. This matches alg-qa-exact-binary-qft-circuit Definition and the factorization lemma Statement."
+    },
+    {
+      "check": "Chronological gates and controls",
+      "result": "The pictured sequence is H(q2), CP3(q0,q2), CP2(q1,q2), H(q1), CP2(q0,q1), H(q0), SWAP(q0,q2). The first control loop uses i=0 before i=1, exactly as algorithm step 1. Filled dots indicate only controls; a crossing of a vertical connector with an unmarked wire is not an extra control. Six boxes and three control dots are actually visible."
+    },
+    {
+      "check": "Controlled phase sign and target",
+      "result": "P_s=diag(1,exp(+2 pi i/2^s)) on a target conditioned on control 1 yields CP_s=diag(1,1,1,exp(+2 pi i/2^s)) in control-first order, precisely theorem F2. Each CP_s thus has the required positive sign, not its adjoint."
+    },
+    {
+      "check": "Prepared factors and final reversal",
+      "result": "Step 1.1 and the factorization lemma formula give phi2=x2/2+x1/4+x0/8, phi1=x1/2+x0/4 and phi0=x0/2. Before SWAP the top/middle/bottom factors are R2,R1,R0. Algorithm step 2 swaps q0,q2 only, so the output labels R0,R1,R2 are correct on q2,q1,q0. The middle SWAP connector crossing is unmarked; q1 is unchanged."
+    },
+    {
+      "check": "Fourier relation",
+      "result": "The product R0 tensor R1 tensor R2 has basis coefficient 2^(-3/2) exp(2 pi i (y2*x0/2 + y1*(x1/2+x0/4) + y0*(x2/2+x1/4+x0/8))), equal modulo integer phase to 2^(-3/2) exp(2 pi i*x*y/8) for y=4y2+2y1+y0. This is theorem step 2.1, with the output indexing of the factorization lemma."
+    },
+    {
+      "check": "Independent numerical cross-check",
+      "result": "A standalone Python complex-vector calculation applied the chronological H/CP/SWAP list for all 8 basis inputs and compared all 64 amplitudes against exp(+2 pi i*x*y/8)/sqrt(8). Maximum absolute error was 1.3947004136484323e-15."
+    }
+  ],
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-qa-exact-binary-qft-circuit-correct.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qa-exact-binary-qft-circuit-correct.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-qa-exact-binary-qft-circuit-correct.md",
+            "item_id": "thm-qa-exact-binary-qft-circuit-correct",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-qa-exact-binary-qft-circuit-correct.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqa014 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-qa-exact-binary-qft-circuit-correct --out research/math-library-rendering-repairs-2026-10-23/previews/dqa014-native",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqa014-native/manifest.json",
+    "manifest_sha256": "a5be688e0084924d8ac59ef62f21d3eae70eb649daf1dd241345020b8f1f868a",
+    "source_sha256": "99b555378b3e6de9acb07376b31094e4690529ec9c662c2cd6191738bc8cc6d8",
+    "html_sha256": "4b37b10b4984a80b2600c534d28f5456f05f902032e990021518f0d0a17ef8a3",
+    "reference_map_sha256": "8175f6a7be6a8d6621d94dff972d83d724620d94f8009387dab0ef098bc0fa65",
+    "viewed": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dqa014-native/screenshots/thm-qa-exact-binary-qft-circuit-correct--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dqa014-native/screenshots/thm-qa-exact-binary-qft-circuit-correct--02.png"
+    ],
+    "result": "Both native PNG tiles independently viewed at original resolution. The TikZ compiles to an actual figure. All wire/input/output labels, six boxes, three filled control dots and paired final SWAP crosses are readable on black background, without clipping or overlap. All connectors have visible contrast. No named-node cycle or endpoint-ring convention is involved.",
+    "limitations": "Local ItemBody preview only, not production HTTP route. Reference map reported 13 unrelated parse diagnostics; scoped references render correctly."
+  },
+  "remaining_issues": []
+}

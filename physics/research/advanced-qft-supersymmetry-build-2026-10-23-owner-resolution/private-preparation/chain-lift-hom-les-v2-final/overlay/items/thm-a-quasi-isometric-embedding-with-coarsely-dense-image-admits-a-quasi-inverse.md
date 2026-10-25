@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse.md

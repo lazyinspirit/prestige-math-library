@@ -1,0 +1,75 @@
+{
+  "id": "cor-riemann-theorem-large-degree",
+  "agent": "/root/rendering_repair_coordinator/scm_023",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the flagged original-resolution PNG; the technique banner visibly prints $h^1$ and $D_0+nA+E$ literally while the numbered proof renders the same notation as mathematics. The plain React text/CSS-uppercase technique renderer does not parse inline math.",
+      "action": "Replaced only the technique summary math fragments with equivalent clear prose describing the first cohomology dimension and fixed initial divisor plus an integer multiple of the effective divisor and an effective remainder.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only line 70 changed: plain prose makes the technique banner readable under the existing plain-text renderer. Statement, hypotheses, cohomology and degree/genus formulas, inequalities, all proof steps, dependencies, sources and exact frontmatter/status are untouched.",
+  "source_lines_after": [
+    70
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "5307485bbd8b66d919cb1ca88439b37dd654fd992549aab12e35c760282a836c",
+  "after_raw_sha256": "519e466a1295a981b4a998e454ad2e7bc8bd88a8e003100737db35bb48496e6f",
+  "guard": "Original raw SHA256 matched queue before_raw_sha256 immediately before the edit. Exact frontmatter bytes verified unchanged afterward.",
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/scheme-theory/screenshots/cor-riemann-theorem-large-degree--02.png",
+    "sha256": "8768ca724329f037d374903368d667a69dd1f9b46c99b9d69a7f8832d51befdb",
+    "view": "standalone original resolution"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cor-riemann-theorem-large-degree.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cor-riemann-theorem-large-degree.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cor-riemann-theorem-large-degree.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "fresh_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cor-riemann-theorem-large-degree --out research/math-library-rendering-repairs-2026-10-23/repair-preview/scm_023-independent",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/repair-preview/scm_023-independent/manifest.json",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/repair-preview/scm_023-independent/screenshots/cor-riemann-theorem-large-degree.json",
+    "banner_original_resolution_view": "research/math-library-rendering-repairs-2026-10-23/repair-preview/scm_023-independent/screenshots/banner-original.png",
+    "banner_view_note": "This is an exact byte copy of the generated --02.png (SHA256 60c64653f0e875b8c668312b6d194fe9490e9b373715875eefb824090f1c6884), opened standalone to avoid the viewer cache artifact seen with the initial filename. The entire banner and proof are visibly present and readable; no raw TeX remains in the banner.",
+    "katex_errors": [],
+    "katex_count": 82,
+    "tikz_count": 0,
+    "diagram_failures": [],
+    "reference_map_diagnostics": 16,
+    "coverage": "Local native ItemBody preview only; no HTTP route or application changes."
+  },
+  "renderer_limitation": "Technique text remains plain React/CSS uppercase; the local prose workaround avoids math delimiters."
+}

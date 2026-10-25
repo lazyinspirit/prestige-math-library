@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-a-infinity-power-decay-characterisation.json
+  precheck: pass
 id: thm-a-infinity-power-decay-characterisation
 kind: theorem
-title: The A_infinity power-decay characterisation
+title: The $A_\infty$ power-decay characterisation
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Theorem 4.40 with the equivalence of power decay, membership in some finite A_p class and reverse Hölder, printed pp. 90-92"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-smooth-finite-hk-integrand-koksma-hlawka.md

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information.json
+  precheck: pass
 id: cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information
 kind: counterexample
-title: "The substitution x_i=x^i can erase colour-profile information"
+title: "The substitution $x_i=x^i$ can erase colour-profile information"
 status: published
 origin: session
 provenance:
@@ -15,12 +18,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references: []

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cost-constrained-dmc-mutual-information-under-average-cost.json
+  precheck: pass
 id: lem-cost-constrained-dmc-mutual-information-under-average-cost
 kind: lemma
-title: An average-cost DMC block input has mutual information at most n C_I(Gamma)
+title: An average-cost DMC block input has mutual information at most $n C_I(\Gamma)$
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

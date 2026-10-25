@@ -1,0 +1,62 @@
+{
+  "id": "fs-sigma-n-and-pi-n-are-disjoint",
+  "agent": "/root/rendering_repair_coordinator/cpt_028",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile visibly prints Sigma_n^0 and Pi_n^0 literally in the title, whereas the statement and refutation render the same hierarchy classes as mathematical symbols. The underscores and carets encode intended indices/exponents, so this is a missing-math rendering defect rather than ordinary prose shorthand.",
+      "action": "Replace the two literal hierarchy expressions with inline $\\Sigma_n^0$ and $\\Pi_n^0$ in the title; use YAML single quoting to preserve TeX backslashes.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only title line 4 changed; hierarchy notation now renders with Greek symbols and correct subscript/superscript. Body and all protected metadata, including status: published, remain byte-identical.",
+  "source_lines_after": {
+    "4": "title: 'False: $\\Sigma_n^0$ and $\\Pi_n^0$ are disjoint'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "a7a7a5aae7ae2d17780392ec9f0e0ea587cbec157b707c466c75a8fafffa2b97",
+  "after_raw_sha256": "e38ec56414f7b5172016c633c799bdf38d768f3687c8e671abec6ffad164c707",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/fs-sigma-n-and-pi-n-are-disjoint.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/fs-sigma-n-and-pi-n-are-disjoint.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/fs-sigma-n-and-pi-n-are-disjoint.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/fs-sigma-n-and-pi-n-are-disjoint--01.png",
+    "original_inspection": "Standalone original-resolution view inspected independently.",
+    "current": "research/math-library-rendering-repairs-2026-10-23/previews/cpt028/screenshots/fs-sigma-n-and-pi-n-are-disjoint--01.png",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cpt028/manifest.json",
+    "bound_source_sha256": "e38ec56414f7b5172016c633c799bdf38d768f3687c8e671abec6ffad164c707",
+    "bound_html_sha256": "78cae3935685f5bbc6f4274d571a18aba4063ef6a9c4d6566351894ea334e0b5",
+    "result": "Fresh native local title/ItemBody preview completed with one tile, independently viewed standalone at original resolution: both title expressions typeset correctly; no additional visible defect found.",
+    "limitations": "Preview covers native title/ItemBody, not production route/navigation or metadata footer; reference-map diagnostics concern 16 unrelated malformed/unreadable source entries."
+  }
+}

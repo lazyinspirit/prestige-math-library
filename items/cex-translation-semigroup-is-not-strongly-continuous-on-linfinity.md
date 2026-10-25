@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-translation-semigroup-is-not-strongly-continuous-on-linfinity.json
+  precheck: pass
 id: cex-translation-semigroup-is-not-strongly-continuous-on-linfinity
 kind: counterexample
 title: "The translation semigroup is not strongly continuous on L-infinity"
@@ -28,12 +31,7 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)"
       url: "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf"
       locator: "Chapter 11 Section 11.3, the discussion of translation on $L^\\infty$, printed pp. 256-258"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement refuted
@@ -54,7 +52,7 @@ Assume Countable Choice ([[def-countable-choice]]) for the $L^\infty$ Banach-spa
 
 ## Counterexample
 
-**Proof technique:** direct computation with the step function $f=\mathbf 1_{(-\infty,0]}$.
+**Proof technique:** direct computation with the indicator function of the nonpositive half-line.
 
 1.1 $T(0)=I$ and $T(t+s)=T(t)T(s)$ for $s,t\ge0$: indeed $(T(0)f)(s)=f(s)=f(s)$ and $\bigl(T(t)T(s)f\bigr)(u)=(T(s)f)(u+t)=f(u+t+s)=(T(t+s)f)(u)$ for every $u$. [F2, algebra]
 

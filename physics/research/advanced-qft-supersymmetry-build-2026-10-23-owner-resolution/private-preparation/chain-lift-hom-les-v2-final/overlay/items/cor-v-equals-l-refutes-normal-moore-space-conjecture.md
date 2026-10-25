@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-v-equals-l-refutes-normal-moore-space-conjecture.md

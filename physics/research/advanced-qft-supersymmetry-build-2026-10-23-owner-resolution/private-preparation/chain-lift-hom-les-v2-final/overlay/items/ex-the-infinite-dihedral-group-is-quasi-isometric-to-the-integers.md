@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-infinite-dihedral-group-is-quasi-isometric-to-the-integers.md

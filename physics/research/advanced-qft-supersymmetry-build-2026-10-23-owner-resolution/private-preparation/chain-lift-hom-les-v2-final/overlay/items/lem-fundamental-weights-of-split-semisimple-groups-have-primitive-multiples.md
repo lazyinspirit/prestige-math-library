@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fundamental-weights-of-split-semisimple-groups-have-primitive-multiples.md

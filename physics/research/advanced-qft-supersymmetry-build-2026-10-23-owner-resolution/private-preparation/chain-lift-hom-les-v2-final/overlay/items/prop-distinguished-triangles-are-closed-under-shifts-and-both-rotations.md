@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-final-state-and-empty-stack-acceptance-are-equivalent.md

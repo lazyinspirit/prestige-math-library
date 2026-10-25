@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-equal-actions-on-k-zero-do-not-imply-isomorphic-derived-autoequivalences.json
+  precheck: pass
 id: cex-equal-actions-on-k-zero-do-not-imply-isomorphic-derived-autoequivalences
 kind: counterexample
-title: "Equal actions on K_0 do not imply isomorphic derived autoequivalences"
+title: "Equal actions on $K_0$ do not imply isomorphic derived autoequivalences"
 status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
@@ -27,8 +30,7 @@ sources:
     - title: "Stephen J. Bigelow, The Burau representation is not faithful for n=5, Geometry & Topology 3 (1999) 397-404"
       url: "https://arxiv.org/pdf/math/9904100"
       locator: "Theorems 1.2 and 1.4, printed pp. 397-399"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement refuted
@@ -43,7 +45,7 @@ the Grothendieck group, then it is isomorphic to the identity functor.
 
 [L2] The weak action of $B_5$ on $C_4$ is faithful: $R_\sigma\cong\operatorname{Id}_{C_4}$ implies $\sigma=1$ ([[thm-the-khovanov-seidel-weak-braid-action-is-faithful]]).
 
-[L3] The induced action on $G(A_4)$ is the unreduced Burau action: after the explicit invertible change of basis $C$ and the parameter identification $q=t$, the operator $[R_\sigma]$ equals $\rho^{\mathrm{mat}}_5(\sigma)$ for every $\sigma$ ([[prop-khovanov-seidel-decategorification-is-the-unreduced-burau-action]], [[def-graded-grothendieck-group-of-a-m-perfect-complexes]]).
+[L3] The induced action on $G(A_4)$ is the unreduced Burau action: after the explicit invertible change of basis $C$ and the parameter identification $q=t$, the operator $[R_\sigma]$ equals $\rho^{\mathrm{mat}}_5(\sigma)$ for every $\sigma$ ([[prop-khovanov-seidel-decategorification-is-the-unreduced-burau-action]], [[def-graded-grothendieck-group-of-a-m-perfect-complexes|The graded Grothendieck group of $A_m$]]).
 
 
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-surgery-on-s-p-times-s-q-produces-a-sphere-in-the-standard-framing.json
+  precheck: pass
 id: "ex-surgery-on-s-p-times-s-q-produces-a-sphere-in-the-standard-framing"
 kind: "example"
 title: "Surgery on a product of spheres produces a sphere in the standard framing"
@@ -20,8 +23,6 @@ proof_strategy: "read the two boundary decompositions of a product of disks in t
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-verification:
-  precheck: "pass"
 sources:
   references:
     - title: "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002; electronic copy)"
@@ -80,3 +81,20 @@ sphere has dimension $q-1$ and the dual piece is $D^q\times S^p$.
 3.1 For the dual reading, regard $S^m=\partial(D^{p+1}\times D^q)$ with the decomposition of [F2]; the standard framed $S^p=S^p\times\{0\}$ lies in the solid piece $S^p\times D^q$ and has tubular neighbourhood $S^p\times D^q\subseteq S^m$, framed by the $D^q$-factor. The $p$-surgery on $S^m$ along this sphere removes $S^p\times\operatorname{int}D^q$ and glues in $D^{p+1}\times S^{q-1}$ along $S^p\times S^{q-1}$, leaving two copies of $D^{p+1}\times S^{q-1}$ glued along their common boundary; that double is the product $S^{p+1}\times S^{q-1}$ of the double of $D^{p+1}$, which is $S^{p+1}$ by [F3], with the closed factor $S^{q-1}$, the gluing being the product identification. Hence the surgery on $S^m$ along the standard framed $S^p$ produces $S^{p+1}\times S^{q-1}$. [F1, F2, F3, step 2.1]
 
 4.1 For $p\ge1$, the starting product is connected, so [F5] shows that the inverse of the first computation uses the belt sphere of dimension $q-1$ in $S^m$ and returns $S^p\times S^q$. For $p=0$, compute that inverse directly: in $S^m=\partial(D^1\times D^q)$, remove the interior of the belt tube $D^1\times S^{q-1}$ and insert $S^0\times D^q$. The complement is another $S^0\times D^q$, with the product boundary identification; their union is $S^0\times(D^q\cup_{S^{q-1}}D^q)\cong S^0\times S^q$ by [F3]. The second computation operates on the other sphere, of dimension $p$, in $S^m$, and produces $S^{p+1}\times S^{q-1}$; its inverse returns $S^m$. Thus the two $p$-surgeries are not identified with each other's dual operations. [F1, F2, F3, F5, step 2.1, step 3.1, algebra] ∎
+
+## Remarks
+
+For a schematic of the two different surgeries, put $A=S^p\times D^q$, $B=D^{p+1}\times S^{q-1}$, and $C=\partial A=\partial B=S^p\times S^{q-1}$. Every union below uses the product identification along $C$, and corners are rounded as in the verification. Each forward arrow replaces one copy of $A$ by $B$; its core is $S^p\times\{0\}\subset A$ with the displayed disk-factor framing.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,rounded corners,align=center,minimum width=5.3cm,minimum height=1.1cm] (P) at (0,0) {$A\cup_C A\;\cong S^p\times S^q$};
+\node[draw,rounded corners,align=center,minimum width=5.3cm,minimum height=1.1cm] (S) at (8,0) {$A\cup_C B\;\cong S^m$};
+\node[draw,rounded corners,align=center,minimum width=5.3cm,minimum height=1.1cm] (T) at (0,-2.2) {$A\cup_C B\;\cong S^m$};
+\node[draw,rounded corners,align=center,minimum width=5.3cm,minimum height=1.1cm] (Q) at (8,-2.2) {$B\cup_C B\;\cong S^{p+1}\times S^{q-1}$};
+\draw[->] (P) -- node[above] {$p$-surgery} node[below] {$A\mapsto B$} (S);
+\draw[->] (T) -- node[above] {$p$-surgery} node[below] {$A\mapsto B$} (Q);
+\end{tikzpicture}
+```
+
+The top row is the hemisphere computation of steps 1.2–2.1; the bottom row is the disk double of step 3.1. Reading either row backwards replaces the inserted $B$ by $A$, a $(q-1)$-surgery on its belt sphere, as checked in step 4.1, including the endpoint $p=0$. The two occurrences of $S^m$ have different roles: the top is an output and the bottom is a separate input. The rigorous verification above is independent of this schematic.

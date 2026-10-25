@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-coordinate-formula-for-the-lie-derivative-of-a-covariant-tensor.md

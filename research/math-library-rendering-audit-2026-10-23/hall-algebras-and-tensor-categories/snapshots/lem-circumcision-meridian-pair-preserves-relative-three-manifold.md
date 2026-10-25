@@ -1,0 +1,52 @@
+---
+id: lem-circumcision-meridian-pair-preserves-relative-three-manifold
+kind: lemma
+title: "Circumcision by a framed core and zero-framed meridian preserves the boundary parametrization"
+status: published
+dependency_level: 0
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+deps: ["def-axiom-of-choice", "def-framed-embedded-surgery-sphere", "def-p-surgery-on-a-smooth-m-manifold", "lem-surgery-gluing-has-a-canonical-smooth-structure-up-to-diffeomorphism", "lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors", "lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism"]
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+sources:
+  references:
+    - title: "Justin Roberts, Kirby calculus in manifolds with boundary, Theorem 1 and Stage 1"
+      url: "https://arxiv.org/pdf/math/9812086"
+---
+
+## Statement
+
+Assume full AC. Let $N\cong D^2\times S^1$ be an oriented solid torus in the interior of an oriented smooth 3-manifold, let $K$ be its core with any integral framing, and let $U$ be a small meridian of $K$ with the zero framing given by its meridian disk. Simultaneous framed surgery on $K$ and $U$ returns a solid torus diffeomorphic to $N$ by a diffeomorphism equal to the original identification on $\partial N$. Thus inserting or removing this pair preserves the ambient manifold relative to the complement of $N$, including external collars and boundary parametrizations. An embedded colored ribbon graph avoiding $N$ is fixed. No assertion is made that a graph traversing $N$ is fixed, or that this operation belongs to a complete relative move list.
+
+## Facts & Assumptions
+
+**Given:** Full AC ([[def-axiom-of-choice]]), the oriented product solid torus, the supplied framed core, and its small disk-framed meridian.
+
+[F1] A framed surgery uses the full product attaching embedding; on a 3-manifold it replaces one solid torus by another with its meridian identified with the specified framed longitude. The construction retains the old external boundary ([[def-framed-embedded-surgery-sphere]], [[def-p-surgery-on-a-smooth-m-manifold]]).
+
+[F2] Product disk handles have boundary pieces $S^1\times D^2$ and $D^2\times S^1$ in dimension four. Their signed collar gluings and compatible roundings have the indicated smooth structures, with changes supported in seam collars ([[lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors]], [[lem-surgery-gluing-has-a-canonical-smooth-structure-up-to-diffeomorphism]], [[lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism]]).
+
+## Proof
+
+**Given:** The data in the Statement; all torus slopes below denote actual product curves under the supplied boundary identifications.
+
+1.1 **Product exterior and actual slopes.** Use the abstract product coordinates of $N$ to draw it as an unknotted solid torus in $S^3$. Let $A$ be the core of the complementary solid torus. Then $K$ is linked once with $A$ and $U$, while $A,U$ are disjoint meridians of $K$. The exterior of $A\cup K\cup U$ is  $X=P\times S^1,$  where $P$ is a disk with two disjoint interior disks removed. One way to see this product without a diagram is to remove $K$ first: its exterior in $S^3$ is $D^2\times S^1$, where the circle factor is the meridian of $K$; the two meridians $A,U$ are fibers $\{a\}\times S^1$ and $\{u\}\times S^1$. Removing their product tubular neighborhoods removes two disks from the first factor. The boundary tori are $T_K,T_A,T_U$, corresponding to the three boundary circles of $P$.  Write $h$ for the positive product fiber and $b_K,b_A,b_U$ for the three oriented base-boundary circles. In the usual meridian/longitude coordinates,  $\mu_K=h,\quad\lambda_K=b_K,\qquad\mu_U=b_U,\quad\lambda_U=h.$  The retained external torus is $T_A$; its solid-torus meridian in the original $N$ is $h$. Thus the two filling slopes are $b_K+fh$ and $h$, where $f$ is the integer framing on $K$ relative to the selected product longitude. All these are identifications of actual product annuli and circles; no homology-only recognition of a filled manifold is being used. [given, F1, F2]
+
+2.1 **Framing reduction relative to the retained torus.** There is a smooth map $\xi:P\to S^1$ of degree $f$ on the $K$ boundary, degree $-f$ on the $U$ boundary (with the common oriented-boundary convention), and constant one on a collar of the $A$ boundary. Explicitly draw $P$ as a planar disk punctured at $k,u$, where $k$ and $u$ are the removed disks around $K$ and $U$. With the induced boundary orientations, start with $\xi_0(z)=\left(\frac{z-u}{|z-u|}\frac{|z-k|}{z-k}\right)^f$. Its degrees on the outer boundary $A$, the $K$ boundary and the $U$ boundary are respectively $0,f,-f$: on $A$ the two factors have winding $1$ and $-1$, on $K$ only the second winds and its winding is $+1$, and on $U$ only the first winds and its winding is $-1$. Thus $\xi_0$ has a smooth real argument on an $A$ collar; multiply by the inverse argument with a collar cutoff to make it one there. This changes no boundary degrees. Choose the boundary collar arguments similarly to make the restrictions standard rotations in their angular coordinates. The map $\Phi:X\to X,\qquad\Phi(x,t)=(x,\xi(x)t)$ is an explicit diffeomorphism, the identity on $T_A$, fixing $h$ and sending $b_K$ to $b_K+fh$. On $T_U$ it also preserves the filling slope $h$. It extends over the $U$ filling: a solid torus whose meridian is $h$ admits the explicit extension of the boundary map $b_U\mapsto b_U-fh$, $h\mapsto h$ obtained by rotating its meridian disk by $-f$ turns as its longitude runs once. In coordinates $(re^{i\theta},e^{i\varphi})$ this is $(re^{i(\theta-f\varphi)},e^{i\varphi})$. Constants or zero-degree boundary phase changes extend by the same collar interpolation. Hence it suffices to prove the identity for the pair of slopes $b_K,h$. Equivalently one can choose the product framing on $N$ to agree with the supplied framing of $K$ from the outset; conjugating a boundary-relative diffeomorphism by that product identification is still boundary-relative. [given, F1, F2, step 1.1]
+
+3.1 **The proper disk and the cut-open compression body.** Fill $T_U$ with a solid torus $V=D^2\times S^1$ whose meridian $\partial D^2\times\{1\}$ is identified with $h$. Choose an embedded base arc $\alpha$ from the $A$ boundary to the $U$ boundary, disjoint from the $K$ boundary. The vertical annulus $\alpha\times S^1\subset X$ has a fiber boundary on each of $T_A,T_U$. Cap its $T_U$ boundary by the displayed meridian disk of $V$. After rounding its one seam, this is an embedded proper disk $D$ with boundary $h\subset T_A$.  The cut-open manifold $(X\cup V)\setminus\!\setminus D$ is a punctured solid torus whose uncompressed torus boundary is $T_K$ and whose meridian there is $h$. Here is the cut-and-glue verification. Cut $P$ along $\alpha$; it becomes an annulus. Consequently the product cut along the vertical annulus is an annulus times $S^1$, namely $T^2\times I$. Cutting $V$ along its meridian disk gives $D^2\times I$. Its annular attaching face is $\partial D^2\times I$, attached in the $h$ direction of the boundary created from the $A/U$ sides of the cut. Thus the cut-open manifold is exactly $T^2\times I$ with one 3-dimensional 2-handle $D^2\times I$ attached along the primitive curve $h$ on one of its ends. That end compresses to a sphere, while the other end remains $T_K$.  This compression body is $(D^2\times S^1)\setminus\operatorname{int}B^3$ with meridian $h$: in the explicit product solid torus, take a meridian disk $D^2\times\{1\}$, thicken it, and retain a boundary collar. Their union is the just-described $T^2\times I$ plus the meridian 2-handle. The complementary region is the interior of the product obtained by cutting the solid torus along that meridian disk, hence is a 3-ball. This identifies the compression body by its actual collar and disk, rather than inferring its type from its fundamental group. The compressed sphere consists of the original annular part of $T_A$ and the two copies of $D$, with their product attaching coordinates retained. [given, F1, F2, step 2.1]
+
+4.1 **The remaining filling and boundary reconstruction.** Now fill $T_K$ along $b_K$. Its filling meridian intersects the compression body's meridian $h$ once. The filled, punctured solid torus is therefore a 3-ball. Explicitly, the unpunctured union is the boundary of $D^2\times D^2$: the pieces $D^2\times S^1$ and $S^1\times D^2$ are its two solid tori, and their meridians are the two product circle factors $h,b_K$. Thus it is $S^3$ with its explicit standard product smoothing. Retaining the already specified puncture removes an ordinary product ball from that standard sphere and leaves a ball, with the annular boundary part inherited from $T_A$ and the two disk faces inherited from $D$.  Finally restore the cut along $D$. This attaches one ordinary 3-dimensional 1-handle to that ball, along the two displayed disk faces. It is a solid torus. Its meridian disk is $D$, so its external meridian is exactly $h$. More precisely the ball-with-two-disk-faces just constructed has its remaining annular boundary in the original $T_A$ product coordinates; regluing these two product disk faces reconstructs the same $D^2\times S^1$ product neighborhood with the same annular side. Choose the product ball and the meridian disk in the original $N$ by cutting its specified meridian disk. The preceding product identifications match those cut coordinates and their annular side. They therefore give a diffeomorphism after regluing whose restriction to all of $T_A$ is the original identity. No arbitrary boundary diffeomorphism is discarded or extended by a classification theorem. Compatible corner smoothings are compared in their seam collars by the existing rounding lemma.  Combining this boundary-relative identification with the explicit framing-reduction map $\Phi$ proves the Statement for every integral $f$. [given, F1, F2, step 3.1] ∎
+
+## Remarks
+
+The local support can follow any ambient fundamental-group element. This proves the topology of Roberts’ O3 operation, not completeness of his calculus. The product cut-and-glue proof tracks the retained torus; it does not recognize the resulting solid torus from homology alone.

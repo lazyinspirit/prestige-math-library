@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-formal-derivative-detects-a-repeated-root-in-characteristic-two.md

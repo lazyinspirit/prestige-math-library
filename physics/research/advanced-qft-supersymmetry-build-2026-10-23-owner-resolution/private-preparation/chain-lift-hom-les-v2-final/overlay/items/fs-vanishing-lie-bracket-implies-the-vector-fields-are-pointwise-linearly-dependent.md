@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-vanishing-lie-bracket-implies-the-vector-fields-are-pointwise-linearly-dependent.md

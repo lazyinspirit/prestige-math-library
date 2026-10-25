@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-pullback-of-the-tautological-line-bundle-along-the-antipodal-cover.md

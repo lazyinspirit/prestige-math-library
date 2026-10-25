@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-surface-non-pth-power-detected-by-derivation.json
+  precheck: pass
 id: lem-surface-non-pth-power-detected-by-derivation
 kind: lemma
 title: Surface non pth power detected by derivation
@@ -26,12 +29,7 @@ sources:
     url: https://stacks.math.columbia.edu/download/more-algebra.pdf
   - title: Stacks Lemma 15.49.5 (07PH), complete detecting-derivation proof
     url: https://stacks.math.columbia.edu/tag/07PH
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -69,4 +67,4 @@ Assume AC. Let $B$ be a domain of characteristic $p>0$ finite type over a comple
 ## Remarks
 
 - The proof tracks a single element f through the normalisation and the p-basis separation; no statement about derivations of the whole ring is assumed.
-- The multiplier g^{pN} is invisible to derivations and is used only to move f into the finite subalgebra.
+- The multiplier $g^{pN}$ is invisible to derivations and is used only to move f into the finite subalgebra.

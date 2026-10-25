@@ -1,0 +1,47 @@
+# Batch 61 Step 3a adjudication
+
+Review in progress; no acceptance, judgment or gate authority is asserted.
+
+Level 1 complete: `def-qftx-localized-equivariant-borel-moore-data`, refuter:61:1 confirmed fatal in observed source and repaired locally. Defined total graded BM module, coefficient action H_j → H_{j-q}, fraction degree k+q, degree-piece notation, point target, and localized cap product. Checked fraction equality by common homogeneous denominator, rank zero, empty variety, inherited AC. Sources: normalized BM and six-functor suppliers; rational torus supplier; Edidin–Graham §§3–4 is context only. Risk review recorded. Consumer checks pending below.
+
+Level 2: `lem-qftx-eigenfunction-open-bm-annihilation`: reader repair accepted mathematically, amended only to spell out vanishing of total localization and degree pieces in step 3.1. The homogeneous ideal of the invariant complement gives invariant principal affine neighborhoods; noetherian quasi-compactness yields a finite cover of V, including V empty. The section convention is correct because f(t^{-1}x)=χ(t)^{-1}f(x). Nontrivial character cap is zero H_j → H_{j-2}; each homogeneous fraction vanishes. The pre/post snapshots differ only in this item’s source hash; the report identifies the proof-only finite-cover insertion. No original-byte reconstruction beyond those snapshots is asserted.
+
+Level 2: `lem-qftx-fixed-embedding-bm-euler-self-intersection`: risk review complete, no defect in the weight decomposition, complex orientation, self-intersection or finite nilpotent inverse. Localized cap action is now explicitly supplied by level 1. No decision owed for this unchanged unflagged carrier.
+
+Level 3: `thm-qftx-finite-affine-atlas-bm-concentration`: refuter:61:5 confirmed fatal in observed notation and repaired. Statement identifies degree pieces of total localization. Proof now assembles total modules before exact localization and takes graded pieces afterward; corrected the augmented extension-by-zero resolution to chains (its derived Hom produces cochains). Finite filtration removes convergence ambiguity. Risk review complete.
+
+Level 4: `def-qftx-proper-fixed-locus-localized-pushforward`: refuter:61:2 confirmed fatal in observed source and repaired. The map acts on homogeneous pieces of total localization; coefficient linearity belongs to the total map, rather than an individual degree piece. Proper fixed trace, uniqueness, rank zero and empty fixed locus remain sound.
+
+Level 5: `thm-qftx-proper-fixed-locus-noncompact-localization`: refuter:61:6 confirmed fatal in observed target and repaired by explicit graded-piece convention. Reviewed intrinsic inverse, proper-map compatibility, Thom cap naturality, disjoint fixed components, Euler inverse and degree 2d−q. The diagram F_X→X over F_Y→Y commutes by equivariance, with vertical f^T,f and horizontal inclusions; it is not claimed Cartesian. Risk review complete.
+
+Level 6: `ex-qftx-localized-bm-affine-plane`: refuter:61:3 confirmed fatal in observed degreewise notation. Step 2.1 now explicitly places 1/(u_1u_2) in (S^{-1}R)^{-4}, the homological degree-four piece of total localization. Fixed point, two tangent characters and complex orientation give the unchanged value.
+
+Level 6: `ex-qftx-localized-bm-proper-fixed-component`: refuter:61:4 confirmed fatal in observed target, repaired by explicit total-localized degree-two target. Checked h cap [P1]=[p] at finite stages and the proper trace gives 1, hence 1/u. Risk review complete. The unflagged nonproper-fixed example remains unchanged: zs=1 has nonclosed projected image and no proper-trace integral is assigned.
+
+Published obligations reader:61:1–6: independently confirmed inline-link presentation defects, classified **confirmed_nonfatal** because the mathematical formulations remain explicit and their links do not invalidate the supplier claims. All six are recorded as `nonfatal-recorded` in the canonical defect ledger and in the serialized published maintenance ledger/index. Published/imported bytes unchanged. Mathematics-owner maintenance remains OPEN; no fatal prerequisite gap is inferred from editorial interruption.
+
+Outside consumer-use review (no source edits): `def-qftx-instanton-equivariant-partition-series` Definition and Verification 2.1 caps degree-4kN insertion with degree-4kN fundamental class, hence degree-zero target, embedded in the stated rational ring. `lem-qftx-u1-one-instanton-adhm-space` steps 3.1–4.1 uses the degree-four tangent Euler insertion on C2, hence degree-zero coefficient; hypotheses and rank-zero case unchanged. `pthm-qftx-omega-background-fixed-point-expansion` steps 2.1–4.1 uses the same equal-degree mass-twisted insertion and finite proper fixed points, hence degree zero. `thm-adhm-fixed-point-instanton-count` step 2.3 pushes the degree-4kN fundamental class to (S^{-1}R)^{-4kN}, then embeds in the fraction field; its reciprocal Euler sum is correctly homogeneous. `ex-qftx-s4-n2-partition-function` step 3.1 uses the degree-8k tangent Euler insertion and degree-8k class for complex dimension 4k, hence degree zero. Flavor acts trivially on the base and does not change fixed locus or finite cover. None treats an individual unlocalized H_j as a coefficient module or requires repair. These are checks of the actual supplier uses, not whole-consumer audits. Consequently no necessary outside repair or further-hop interface change remains to escalate.
+
+Source limits: [Edidin–Graham](https://arxiv.org/pdf/alg-geom/9508001), §3 Lemma 1, Proposition 3 and Theorem 1, §4 Proposition 4 and Theorem 2 (PDF pp. 5–8), gives Chow-theoretic localization and the Euler inverse; introduction p.1 explicitly names BM as an analogue. It does not supply this exact normalized BM theorem. [Ginzburg](https://arxiv.org/pdf/math/9802004), §1, printed pp.4–6, gives proper BM pushforward, closed/open exactness and oriented fundamental classes over characteristic-zero fields. Read these relevant sections, not the complete papers. The total grading/fraction arguments and finite affine Cech proof here are local and use the exact named mathematical suppliers; no external theorem has been silently imported.
+
+Inventory and scope: nine assigned items and two frontmatter-only compact pages retained; no new pair/page, withdrawal, physical premise or empirical claim. Only seven local draft items repaired; the fixed-embedding lemma and nonproper-fixed example are unchanged. Required HIGH/CRITICAL risk reviews are complete in the owning contract. Manifest public-section mirrors and own contract citations/derivations synchronized; provenance remains ai-altered/ai-generated as applicable. No assigned carrier had a judge record requiring removal. The engine owns hashing, adjudication gates and transitions.
+
+Local checks (all current final item bytes):
+
+- Reflow on the explicit seven changed paths: all unchanged.
+- `node tools/tsx-run.mjs tools/physics-support/precheck.mts <seven changed paths>`: 7 checked, 0 failing.
+- `node tools/physics-support/rendercheck.mjs <seven changed paths>`: 7 files pass YAML and real KaTeX checks.
+- `node tools/physics-support/proof-contract.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-61.proof-contracts.json --strict`: 9/9 checked, zero errors/warnings.
+- Required risk-report on the owning contract, first without and then with `--require-reviewed`: zero errors; five CRITICAL reviews complete. Both commands were actually run.
+- Required final `node tools/physics-support/proof-layout.mjs <all seven changed paths>` in one command after the final item edit/reflow: 7 items, 23 steps, 0 defects.
+- Scoped `inspectStatement` from the native statement-first module on all nine assigned items: 9 items, errors `[]`; the run-wide CLI was not invoked as a gate.
+- Frontier dependency ledger refreshed and deduplicated after owned input update.
+- Six routed published suppliers verified against their exact `math-imports.json` raw pins; all nine owned carriers are local, not imports.
+- Decisions coverage: exactly all 13 owed obligations (one touched, six refuter, six reader), each with one closed disposition row. No extra item/page decision.
+- Focused `git diff --check`: clean.
+
+Historical comparison: repository HEAD raw sources match all nine immutable pre-reader item hashes and the eight unchanged post-reader hashes. Reversing only this adjudication’s step-3.1 clarification in the eigenfunction lemma reproduces its exact post-reader raw hash `30680719430e5490dd09f7691a23d670a00866543c9bfe49cbd3c123069b9b9e`. Thus its reader delta is the actual finite-invariant-affine-cover insertion in step 1.1, retained here. No historical uncertainty or owner authorization substitute is needed for this touched obligation.
+
+Operational probes: a bare Node invocation cannot load `.mts`; reran precheck/reflow successfully through the repository tsx runner. Help probes for nonexistent `proof-contracts.mjs` and unsupported `--help` switches failed; the correct singular proof-contract command and explicit-file precheck succeeded. These were CLI discovery failures, not content defects, and generated no defect row.
+
+Remaining state: no local mathematical repair, risk review or necessary outside consumer repair is open. The six published presentation maintenance issues remain OPEN for the mathematics owner, with scoped nonfatal adjudication recorded. No judgment, stamp, publication, dispatch, gate battery or transition was performed; engine-owned hashes/gates remain due.

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-residue-of-p-over-q-at-a-simple-zero.json
+  precheck: pass
 id: ex-residue-of-p-over-q-at-a-simple-zero
 kind: example
-title: "A residue of p over q at a simple zero is p(a)/q'(a)"
+title: "A residue of $p$ over $q$ at a simple zero is $p(a)/q'(a)$"
 status: published
 origin: session
 provenance:
@@ -13,9 +16,6 @@ deps: [cor-residue-quotient-simple-zero]
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references: []

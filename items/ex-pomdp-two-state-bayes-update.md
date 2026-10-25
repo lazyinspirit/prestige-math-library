@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-pomdp-two-state-bayes-update.json
+  precheck: pass
 id: ex-pomdp-two-state-bayes-update
 kind: example
 title: "A two-state POMDP update changes a three-to-one prior to nine-to-one"
@@ -19,11 +22,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references: []
 ---
@@ -51,3 +49,28 @@ Let $S=\{s_0,s_1\}$, $A=\{a\}$, $\Omega=\{x,y\}$, reward alphabet $\{0\}$, and h
 2.1 The observation normalizer is $q(x\mid b_0,a)=(3/4)(3/4)+(1/4)(1/4)=9/16+1/16=5/8>0$. [step 1.1, F2, F4, algebra]
 
 3.1 The update gives $b_1(s_0)=(3/4)(3/4)/(5/8)=(9/16)/(10/16)=9/10$ and $b_1(s_1)=(1/4)(1/4)/(5/8)=(1/16)/(10/16)=1/10$. Both coordinates are nonnegative and sum to one, in agreement with [F3]. [step 1.1, step 2.1, F2, F3, algebra] ∎
+
+
+## Remarks
+
+The diagram follows the observation $x$ in the single step $H=1$. Since action $a$ leaves each hidden state fixed, prediction preserves the prior. The first arrows multiply by the indicated observation likelihood; the second arrows divide by the common evidence $q(x\mid b_0,a)=9/16+1/16=5/8$. They show probability calculations, not hidden-state transitions.
+
+```tikz
+\begin{tikzpicture}[>=stealth,every node/.style={font=\small}]
+\node at (0,1.8) {prior = prediction};
+\node at (4,1.8) {joint mass with $x$};
+\node at (8,1.8) {posterior given $x$};
+\node[draw,rounded corners,minimum width=2cm,minimum height=0.8cm] (p0) at (0,0.8) {$s_0:\ 3/4$};
+\node[draw,rounded corners,minimum width=2cm,minimum height=0.8cm] (j0) at (4,0.8) {$s_0,x:\ 9/16$};
+\node[draw,rounded corners,minimum width=2cm,minimum height=0.8cm] (b0) at (8,0.8) {$s_0:\ 9/10$};
+\node[draw,rounded corners,minimum width=2cm,minimum height=0.8cm] (p1) at (0,-1) {$s_1:\ 1/4$};
+\node[draw,rounded corners,minimum width=2cm,minimum height=0.8cm] (j1) at (4,-1) {$s_1,x:\ 1/16$};
+\node[draw,rounded corners,minimum width=2cm,minimum height=0.8cm] (b1) at (8,-1) {$s_1:\ 1/10$};
+\draw[->] (p0) -- node[above] {$\times\,3/4$} (j0);
+\draw[->] (p1) -- node[above] {$\times\,1/4$} (j1);
+\draw[->] (j0) -- node[above] {$\div\,(5/8)$} (b0);
+\draw[->] (j1) -- node[above] {$\div\,(5/8)$} (b1);
+\end{tikzpicture}
+```
+
+The complementary likelihoods are $O(y\mid s_0)=1/4$ and $O(y\mid s_1)=3/4$; the figure displays only the observed $x$ branch. The verification above remains independent of this illustration.

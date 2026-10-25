@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-fundamental-class-of-a-compact-oriented-manifold.md

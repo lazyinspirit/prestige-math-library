@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class.md

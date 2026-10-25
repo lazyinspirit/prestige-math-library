@@ -1,0 +1,135 @@
+{
+  "id": "ex-the-hom-double-complex-in-low-bidegrees",
+  "agent": "/root/rendering_repair_coordinator/ha_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original PNG visibly prints K^{0,0} and the other three bidegrees with raw carets/braces; frozen and current pre-edit line 30 omit math delimiters.",
+      "action": "Wrapped only the four K bidegrees in inline math delimiters.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The example explicitly requests displaying and labeling the low square. The original image offers the four objects only as an inline list, concealing the two index directions. A concrete commutative unsigned square materially clarifies contravariance and the subsequent signed totalization.",
+      "action": "Added a final Remarks tikzcd square with explicit Hom objects, unsigned d_h/d_v arrows, and prose distinguishing unsigned commutativity from the signed total differential.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset prompt bidegrees and add the warranted low Hom square outside the unchanged Verification. No frontmatter, dependency, publication status, hypothesis or proof changes.",
+  "source_lines_after": [
+    {
+      "lines": [
+        30
+      ],
+      "description": "Prompt bidegrees in inline math."
+    },
+    {
+      "lines": [
+        44,
+        55
+      ],
+      "description": "Final Remarks with unsigned Hom square and totalization annotation."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and contravariance",
+      "evidence": "Local def-hom-double-complex-of-a-projective-and-an-injective-resolution defines K^{p,q}=Hom(P_p,I^q). Top row is q=0, bottom q=1, left p=0, right p=1. Precomposition with d_{P,1}:P_1→P_0 sends Hom(P_0,I^q) to Hom(P_1,I^q), hence both horizontal arrows point right and have bidegree (1,0)."
+    },
+    {
+      "check": "Vertical maps and square relation",
+      "evidence": "Postcomposition with d_I^0:I^0→I^1 sends each Hom(P_p,I^0) to Hom(P_p,I^1), so both arrows point down and have bidegree (0,1). Both composites on f:P_0→I^0 equal d_I^0∘f∘d_{P,1}; this is Verification 1.1 and the local commuting-differentials lemma 1.1. The square asserts unsigned commutation, not anticommutation."
+    },
+    {
+      "check": "Signed totalization",
+      "evidence": "Local total-complex definition and Verification 2.1 use D|K^{p,q}=d_h+(-1)^p d_v and finite p+q diagonals. Thus Tot^0=K^{0,0}, Tot^1=K^{1,0}⊕K^{0,1}, Df=(fd_P,d_If). For a:P_1→I^0 and b:P_0→I^1, the mixed K^{1,1} component is -d_Ia+bd_P. Applied to Df it is -d_Ifd_P+d_Ifd_P=0; pure components vanish by the resolution square-zero identities. No full Tot^2 is falsely identified with the single displayed mixed object."
+    }
+  ],
+  "proof_independent": true,
+  "remaining_issues": [],
+  "guard": {
+    "before_raw_sha256": "a2a735c0d4a871ddc7d2963e000e97986297a72d8aa5a82f085293aeaceab78a",
+    "initial_guard_matched": true,
+    "final_raw_sha256": "b4a3a26e303f2e1845c352092208e7e6bcbca8cd818b389d24e9beb188f44276",
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": true
+  },
+  "evidence": {
+    "original_image": "research/math-library-rendering-audit-2026-10-23/homological-algebra/screenshots/ex-the-hom-double-complex-in-low-bidegrees--01.png",
+    "original_image_sha256": "c91e558fe1992d89dca99f3954c977c06ea1b87ec2acfd67c73a527919620632",
+    "original_resolution_viewed": true,
+    "supplement_path_discrepancy": "Declared evidence_dir/ screenshots and snapshots paths do not exist. Resolved authentic originals only in the same homological-algebra category; image hash exactly matches supplemental row and category frozen snapshot SHA is a2a735c0d4a871ddc7d2963e000e97986297a72d8aa5a82f085293aeaceab78a, equal to archived before.",
+    "local_sources_read": [
+      "def-hom-double-complex-of-a-projective-and-an-injective-resolution",
+      "lem-the-two-hom-double-complex-differentials-commute-before-signing",
+      "def-direct-sum-total-complex-on-finite-diagonals"
+    ]
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-the-hom-double-complex-in-low-bidegrees.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-the-hom-double-complex-in-low-bidegrees.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-the-hom-double-complex-in-low-bidegrees.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-ha-002 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-the-hom-double-complex-in-low-bidegrees --out research/math-library-rendering-repairs-2026-10-23/previews/ha-002-final-v3",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/ha-002-final-v3/manifest.json",
+    "source_binding": {
+      "id": "ex-the-hom-double-complex-in-low-bidegrees",
+      "status": "published",
+      "source": "items/ex-the-hom-double-complex-in-low-bidegrees.md",
+      "source_sha256": "b4a3a26e303f2e1845c352092208e7e6bcbca8cd818b389d24e9beb188f44276",
+      "snapshot": "snapshots/ex-the-hom-double-complex-in-low-bidegrees.md",
+      "html": "html/ex-the-hom-double-complex-in-low-bidegrees.html",
+      "html_sha256": "c50f1c5afafd4281f76cea2a91622bf75e629ef1146e7000437e4d57c7c90121",
+      "reference_map_sha256": "1908d9d11a54bae8cb97eea66942b8653c2989a07a361a626f41743420f762db"
+    },
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/ha-002-final-v3/screenshots/ex-the-hom-double-complex-in-low-bidegrees--01.png",
+    "screenshot_sha256": "41b3fe9b1a1cdc53c77491ac24350f37930f3e9d19f1da8b7b8633107b63a050",
+    "original_resolution_viewed": true,
+    "katex_errors": [],
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "assessment": "Standalone final original-resolution image shows all four objects, four arrowheads, both horizontal d_h labels and both vertical d_v labels, without clipping or overlap. Prompt notation and explanatory formulas render correctly.",
+    "iteration_note": "First preview failed TikZ compilation with operatorname; changed diagram-only Hom to equivalent mathrm and compilation succeeded. Final v3 enlarges the new illustration for readable labels. Earlier preview evidence retained.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  }
+}

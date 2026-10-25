@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-normal-surface-trace-cokernel-dualizes-h1-and-bounds-it.json
+  precheck: pass
 id: lem-normal-surface-trace-cokernel-dualizes-h1-and-bounds-it
 kind: lemma
 title: "Trace cokernels detect and bound normal surface H1"
@@ -23,8 +26,7 @@ sources:
   references:
     - title: "The Stacks Project, Resolution of Surfaces, Sections 54.8\u201354.9: complete source arguments with local prerequisite replacements"
       url: "https://stacks.math.columbia.edu/download/resolve.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -35,7 +37,7 @@ Assume AC and DC. Let $R$ be regular Noetherian local of dimension two and $A$ a
 
 **Given:** A regular Noetherian local ring $R$ of dimension two, a finite normal local $R$-domain $A$ of dimension two with $R\hookrightarrow A$ local, in the permitted class, and a projective normal modification $X\to\operatorname{Spec}A$ with $M=H^1(X,\mathcal O_X)$.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-sr-orthogonal-complement-of-a-null-vector-is-not-positive-definite.md

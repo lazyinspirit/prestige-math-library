@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-delta-is-the-lcm-of-the-artin-atoms-and-has-the-same-left-and-right-divisors.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-differential-of-a-smooth-map-is-its-jacobian-matrix.md

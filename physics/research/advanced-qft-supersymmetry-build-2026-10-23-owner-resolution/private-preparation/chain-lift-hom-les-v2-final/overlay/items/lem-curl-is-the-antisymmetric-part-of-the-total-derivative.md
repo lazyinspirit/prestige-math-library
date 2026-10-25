@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-curl-is-the-antisymmetric-part-of-the-total-derivative.md

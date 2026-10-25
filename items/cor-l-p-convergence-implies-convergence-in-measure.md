@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-l-p-convergence-implies-convergence-in-measure.json
+  precheck: pass
 id: cor-l-p-convergence-implies-convergence-in-measure
 kind: corollary
 title: "Convergence in $L^p$ implies convergence in measure"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-convergence-in-measure, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-chebyshev-markov-inequality-for-the-integral, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "For 1 <= p < infinity, apply Chebyshev-Markov to |f_n - f|^p. For p = infinity, the essential-supremum bound makes the bad set null for all large n."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -40,7 +40,7 @@ representatives $f_n,f$. If $\|u_n-u\|_p\to0$, then $f_n\to f$ in measure.
 
 ## Proof
 
-**Proof technique:** For $1 \le p < infinity$, apply Chebyshev-Markov to $|f_n-f|^p$. For $p = infinity$, the essential-supremum bound makes the bad set null for all large $n$.
+**Proof technique:** For finite exponents, apply Chebyshev-Markov to the pth power of the absolute difference of the representatives. For the infinite exponent, the essential-supremum bound makes the bad set null for all sufficiently large indices.
 
 1.1 Assume $1\le p<\infty$ and fix $\varepsilon>0$. Apply [L3] to [L2, L3, given, algebra] $h:=|f_n-f|^p$ and $t:=\varepsilon^p$: $$\mu(\{|f_n-f|>\varepsilon\})=\mu(\{|f_n-f|^p>\varepsilon^p\})\le\varepsilon^{-p}\int |f_n-f|^p\,d\mu=\varepsilon^{-p}\|u_n-u\|_p^p.$$ By [L2], the right-hand side tends to $0$. [L3, L2, given, algebra]
 

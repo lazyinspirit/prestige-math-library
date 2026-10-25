@@ -1,0 +1,38 @@
+{
+  "id": "cor-degree-additive-proper-curve",
+  "agent": "/root/rendering_repair_coordinator/ag_065",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "All four original-resolution screenshot tiles were inspected. Tile 03 visibly prints dollar delimiters and uppercased LaTeX commands in the proof-technique banner while the adjacent numbered proof formulas render correctly. The source confirms the exact defect definition is inside the renderer’s plain-text technique field.",
+      "action": "Replaced the banner formula with equivalent prose and retained its exact LaTeX defect definition in a separate ordinary paragraph immediately below.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Made the proof-technique banner plain prose and moved the unchanged four-term defect formula into ordinary math-rendered proof prose. No mathematical claims, numbered steps, hypotheses, dependencies, sources or frontmatter were changed.",
+  "source_lines_after": [
+    109,
+    111
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The renderer still treats proof-technique banners as plain text; this item now uses prose in that field."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cor-degree-additive-proper-curve.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cor-degree-additive-proper-curve.md",
+      "exit_code": 0,
+      "output": "OK — 1 file(s): no wikilink inside math, no nested or unbalanced delimiters, no multiline display block, every math span parses under the real KaTeX, and every frontmatter block parses under the renderer's YAML parser."
+    }
+  ],
+  "publication_status_preserved": "The entire frontmatter remains byte-for-byte identical to the frozen before file, including status: published."
+}

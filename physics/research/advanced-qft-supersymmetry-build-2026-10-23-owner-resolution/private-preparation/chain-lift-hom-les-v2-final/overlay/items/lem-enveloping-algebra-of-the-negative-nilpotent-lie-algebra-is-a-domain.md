@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-enveloping-algebra-of-the-negative-nilpotent-lie-algebra-is-a-domain.md

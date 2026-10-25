@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-four-dimensional-signature-formula.json
+  precheck: pass
 id: cor-four-dimensional-signature-formula
 kind: corollary
 title: "The four-dimensional signature formula"
@@ -29,12 +32,7 @@ sources:
     - title: "Tom Weston, An Introduction to Cobordism Theory (lecture notes, Stanford)"
       url: "https://math.stanford.edu/~ralph/morsecourse/cobordismintro%20.pdf"
       locator: "section 19, printed p. 35: $L_1(t_1)=t_1/3$"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -58,7 +56,7 @@ Consequently $3$ divides the Pontryagin number $p_1[M]\in\mathbb Z$.
 
 ## Proof
 
-**Proof technique:** direct; specialise the signature theorem to $k=1$.
+**Proof technique:** direct; specialise the signature theorem to k = 1.
 
 1.1 By [F1] and [F2], $\sigma(M)=\langle L_1(TM),[M]\rangle=\langle p_1(TM)/3,[M]\rangle=\tfrac13\langle p_1(TM),[M]\rangle=p_1[M]/3$, using the $\mathbb Q$-linearity of the Kronecker pairing [F3]. [given, F1, F2, F3]
 

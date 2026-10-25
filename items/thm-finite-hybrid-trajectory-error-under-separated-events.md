@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-finite-hybrid-trajectory-error-under-separated-events.json
+  precheck: pass
 id: thm-finite-hybrid-trajectory-error-under-separated-events
 kind: theorem
 title: "Finite separated transverse events give an event-aligned hybrid trajectory error bound"
@@ -21,8 +24,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Ernst Hairer, course notes, Chapter III: Équations Différentielles Ordinaires"
@@ -70,3 +71,39 @@ bounds the state discrepancy at the next aligned mode-segment start. The termina
 3.1 Put $\tau=\tau_{j+1}$, $\widehat\tau=\widehat\tau_{j+1}$, and $\ell=\widehat\tau-\tau$. By step 2.1, $0\le\ell\le\Delta_{j+1}<\delta/3$, so no next exact event occurs before $\widehat\tau$. For $\ell>0$, [F6] and [F7] give $\|y^-(\widehat\tau)-y^-(\tau)\|_2\le M^-_j\ell$ and $\|y^+(\widehat\tau)-R(\tau,y^-(\tau))\|_2\le M^+_{j+1}\ell$ by integrating along the incoming continuation and the exact outgoing solution; for $\ell=0$ both displacements vanish. The total reference error from step 1.1 gives $\|U_j(\widehat\tau)-y^-(\tau)\|_2\le D_j+M^-_j\ell$. Apply the reset's state and time Lipschitz bounds along the assumed coordinate segments to get $\|R(\widehat\tau,U_j(\widehat\tau))-R(\tau,y^-(\tau))\|_2\le L_{R,j+1}D_j+(L_{R,j+1}M^-_j+L_{R,t,j+1})\ell$. Add the exact outgoing displacement and the reported reset-evaluation error $\varepsilon_{R,j+1}$ by the triangle inequality, then use $\ell\le\Delta_{j+1}$ to obtain the stated $E_{j+1}$. Only field bounds along the integrated paths are needed for alignment. [given, F1, F3, F6, F7, step 1.1, step 2.1, algebra]
 
 4.1 Since $N$ is finite, steps 1.1–3.1 give finite nonnegative bounds successively through all event segments. The terminal application of step 1.1 gives $D_N$. Write $\ell_j:=\widehat\tau_j-\tau_j$, so $0\le\ell_j\le\Delta_j$ by step 2.1. The given bound $\Delta_j<\delta/3$ places each reported event before the next exact event. Also $\widehat\tau_{j+1}-\widehat\tau_j=(\tau_{j+1}-\tau_j)+\ell_{j+1}-\ell_j\ge\delta-\Delta_j>2\delta/3$, so the reported event order is unchanged. [given, step 1.1, step 2.1, step 3.1, algebra, induction] ∎
+
+## Remarks
+
+For a single transition, put $\tau=\tau_{j+1}$ and $\widehat\tau=\widehat\tau_{j+1}$. The schematic shows a positive lag; equal event times collapse the bracket. Heights and slopes are illustrative, not numerical state coordinates. Blue is the exact hybrid trajectory, orange is the reported reconstruction and reset, and the dashed blue curve is the incoming-mode continuation $y^-$ used only for reference comparison.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (0,0) -- (11,0) node[right] {$t$};
+\draw[dotted] (1,0) -- (1,4.5);
+\draw[dotted] (5,0) -- (5,4.5);
+\draw[dotted] (7,0) -- (7,4.5);
+\node[below] at (1,0) {$\widehat\tau_j$};
+\node[below] at (5,0) {$\tau$};
+\node[below] at (7,0) {$\widehat\tau$};
+\draw[blue!45!white,thick] (1,3) -- (5,3.2);
+\draw[blue!45!white,thick,->] (5,3.2) -- (5,1);
+\draw[blue!45!white,thick] (5,1) -- (10,1.5);
+\draw[blue!45!white,thick,dashed] (5,3.2) -- (7,3.3);
+\draw[orange!75!white,thick] (1,3.7) -- (7,4);
+\draw[orange!75!white,thick,->] (7,4) -- (7,1.9);
+\draw[orange!75!white,thick] (7,1.9) -- (10,2.2);
+\draw[<->] (1,3.05) -- node[left] {$\le E_j$} (1,3.65);
+\draw[<->] (6.7,3.34) -- node[left] {$\le D_j$} (6.7,3.94);
+\draw[<->] (7.3,1.28) -- node[right] {$\le E_{j+1}$} (7.3,1.88);
+\node[blue!45!white,left] at (4.85,2.1) {$R(\tau,\cdot)$};
+\node[orange!75!white,right] at (7.15,2.95) {reported reset};
+\node[blue!45!white,right] at (7.2,3.4) {$y^-$};
+\node[orange!75!white] at (3,4.1) {$U_j$ (mode $j$)};
+\node[blue!45!white,right] at (10,1.5) {exact};
+\node[orange!75!white,right] at (10,2.2) {reported};
+\draw[<->] (5,4.7) -- node[above] {$0\le\widehat\tau-\tau\le\Delta_{j+1}$} (7,4.7);
+\node at (8.8,0.55) {outgoing mode $j+1$};
+\end{tikzpicture}
+```
+
+The $D_j$ comparison at $\widehat\tau$ is with $y^-(\widehat\tau)$, not with the already-reset exact state. At $\widehat\tau$, the $E_{j+1}$ comparison instead uses the exact outgoing state and the reported post-reset state, including any certified reset-evaluation error. The interval $(\tau,\widehat\tau)$ carries no asserted same-clock hybrid-state bound. These are precisely the comparisons in proof steps 1.1–3.1; the proof does not depend on the figure.

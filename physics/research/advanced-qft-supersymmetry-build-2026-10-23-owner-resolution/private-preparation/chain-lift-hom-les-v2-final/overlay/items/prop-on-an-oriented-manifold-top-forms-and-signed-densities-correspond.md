@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-on-an-oriented-manifold-top-forms-and-signed-densities-correspond.md

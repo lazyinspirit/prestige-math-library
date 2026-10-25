@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-product-measure-extension-axioms-pmea-and-pmea-sigma.md

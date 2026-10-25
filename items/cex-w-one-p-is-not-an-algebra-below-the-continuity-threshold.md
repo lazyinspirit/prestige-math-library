@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-w-one-p-is-not-an-algebra-below-the-continuity-threshold.json
+  precheck: pass
 id: cex-w-one-p-is-not-an-algebra-below-the-continuity-threshold
 kind: counterexample
 title: Subcritical $W^{1,p}$ is not closed under multiplication
@@ -10,13 +13,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -64,7 +60,7 @@ because $p<n$.
 
 ## Counterexample
 
-**Proof technique:** multiply the sharp radial example by a cutoff to manufacture a $W^{1,p}$ function whose square has a non-integrable gradient.
+**Proof technique:** multiply the sharp radial example by a cutoff to manufacture a function in the stated Sobolev space whose square has a non-integrable gradient.
 
 1.1 The choice $\alpha<n/p-1$ gives $p(\alpha+1)<n$, so by [F2] the power function $g$ with $g(0)=0$ and $g(x)=|x|^{-\alpha}$ for $x\ne0$ lies in $W^{1,p}(B;\mathbb R)$. The other inequality $\alpha\ge(n/p-1)/2$ gives $p(2\alpha+1)\ge n$, equivalently the radial exponent $q=n-1-p(2\alpha+1)$ satisfies $q\le-1$. Since $p<n$ and $p\ge1$ we have $n/p-1>0$, so the displayed interval for $\alpha$ is nonempty and contained in $(0,\infty)$. [F2, F4, given]
 

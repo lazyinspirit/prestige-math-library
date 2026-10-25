@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-binary-additive-strong-interference-capacity.json
+  precheck: pass
 id: ex-binary-additive-strong-interference-capacity
 kind: example
 title: The binary additive interference channel in the strong regime
@@ -13,8 +16,6 @@ axiom_use: No choice axiom is used; all alphabets are finite.
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Abbas El Gamal and Young-Han Kim, Lecture Notes on Network Information Theory, arXiv:1001.3404v4
@@ -47,3 +48,20 @@ bits per use.
 1.2 Each receiver's output is one bit, so its multiple-access sum mutual information is at most $H_2(Y_i)\le1$. Also, given the other input, each user sees a noiseless binary channel, whose mutual information is at most one bit. Therefore the region in [F2] is contained in the stated triangle. [F2, given, algebra]
 
 2.1 With independent uniform inputs, $Y_i$ is uniform, and $I_2(X_1;Y_1|X_2)=I_2(X_2;Y_2|X_1)=I_2(X_1,X_2;Y_i)=1$. The MAC intersection contains the two corner points $(1,0)$ and $(0,1)$; the zero pair is achieved by singleton messages. Time sharing among these three points achieves every nonnegative pair with sum at most one. Together with step 1.2 this proves the capacity region. [F1, F2, step 1.2, algebra] ∎
+
+## Remarks
+
+The shaded triangle is the capacity region in bits per use. Its vertices are the three time-sharing points used in step 2.1; the sloping boundary is $R_1+R_2=1$.
+
+```tikz
+\begin{tikzpicture}[scale=3]
+\fill[blue!15] (0,0) -- (1,0) -- (0,1) -- (0,0);
+\draw[->] (0,0) -- (1.35,0) node[right] {$R_1$};
+\draw[->] (0,0) -- (0,1.3) node[above] {$R_2$};
+\draw[thick] (0,0) -- (1,0) -- (0,1) -- (0,0);
+\fill (0,0) circle (0.5pt) node[below left] {$(0,0)$};
+\fill (1,0) circle (0.5pt) node[below] {$(1,0)$};
+\fill (0,1) circle (0.5pt) node[left] {$(0,1)$};
+\node[above right] at (0.55,0.45) {$R_1+R_2=1$};
+\end{tikzpicture}
+```

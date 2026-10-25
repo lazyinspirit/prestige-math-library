@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-planar-brownian-annular-exit-probability.json
+  precheck: pass
 id: lem-planar-brownian-annular-exit-probability
 kind: lemma
 title: "Planar Brownian annular exit probability"
@@ -15,8 +18,7 @@ sources:
       url: "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 9.1.1, Lemma 9.1.3 and formula (9.1.2)"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement
@@ -82,3 +84,30 @@ $$P_x(S_\varepsilon<T_R)=\frac{\log R-\log|x-y|}{\log R-\log\varepsilon}.$$
 ## Source notes
 
 Sousi, Section 6.7 and printed pp. 63--64, computes the annular exit probability from $\log|z-y|$. Durrett, Theorem 9.1.1, Lemma 9.1.3 and formula (9.1.2), gives the same harmonic-martingale calculation and planar formula. The proof above makes the harmonic martingale rigorous with an explicitly spliced bounded $C^2$ extension, a Gaussian integration-by-parts identity and discrete optional sampling at dyadic ceilings.
+
+
+## Remarks
+
+The schematic shows the annulus centered at $y$ and one illustrative continuous curve from $x$ that first reaches the inner circle. For such a curve, $H=S_\varepsilon<T_R$ and $|Z_H-y|=\varepsilon$. The dashed segment marks the initial radius $|x-y|$; the other two radii mark $\varepsilon$ and $R$. The curve is only a geometric illustration, not a typical Brownian path. Steps 1.1 and 7.1 establish the boundary alternatives, and the proof of the probability formula is independent of this figure.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[thick] (0,0) circle (2.6);
+\draw[thick] (0,0) circle (0.7);
+\fill (0,0) circle (1.5pt);
+\node[below left] at (0,0) {$y$};
+\draw[dashed] (0,0) -- (1.7,0.8);
+\node[above,rotate=25] at (1.05,0.52) {$|x-y|$};
+\draw (0,0) -- (-0.7,0);
+\node[above] at (-0.4,0) {$\varepsilon$};
+\draw (0,0) -- (0,-2.6);
+\node[left] at (0,-1.65) {$R$};
+\draw[very thick] (1.7,0.8) -- (1.9,0.4) -- (1.55,0.15) -- (1.7,-0.3) -- (1.2,-0.5) -- (1.05,-0.2) -- (0.7,0);
+\fill (1.7,0.8) circle (2pt);
+\node[above right] at (1.7,0.8) {$x$};
+\fill (0.7,0) circle (2pt);
+\node[below] at (0.78,-0.12) {$Z_H$};
+\node at (0,2.95) {$|z-y|=R\quad (T_R)$};
+\node at (0,-3.05) {$|z-y|=\varepsilon\quad (S_\varepsilon)$};
+\end{tikzpicture}
+```

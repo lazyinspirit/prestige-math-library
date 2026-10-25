@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ucrl2-regret-lower-bound.json
+  precheck: pass
 id: thm-ucrl2-regret-lower-bound
 kind: theorem
 title: "Expected regret lower bound for communicating MDPs"
@@ -84,3 +87,32 @@ There is a universal constant $c=0.015$ such that for every $S,A\ge10$, every $D
 ## Remarks
 
 The lower bound is for expected regret. It asserts no high-probability lower-tail event. The coefficient $0.015$ is retained: the large-diameter calculation gives more than $\frac1{20}\sqrt{35/352}\sqrt{DSAT}>0.015\sqrt{DSAT}$, with the small-diameter calculation stronger still. The explicit feasibility restriction and minimax quantifiers repair a false original statement; they are not inferences from the primary proof's deficient constant-transfer line.
+
+
+For the $D\ge16$ construction in step 2.1, the left panel shows a schematic fragment of the routing tree: each displayed direction is a separate deterministic routing action of reward zero. Its vertices are bad states or the optional bare state; only bad vertices have good partners. The right panel isolates one such pair. For a useful action $a$ at $x_i$, write $q_i(a)=p+e$ if $(i,a)=j$ in $M_j$, and $q_i(a)=p$ otherwise (also throughout $M_0$). Arrow labels in the right panel are transition probabilities, with the originating action's reward indicated by $r$. Routing actions at $x_i$ are omitted from that panel; missing tree slots give routing self-loops. The panels are schematic, not a full state/action enumeration.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\node at (-3,2.6) {Routing tree fragment};
+\node[draw,circle,minimum size=9mm] (root) at (-3,1.3) {$v$};
+\node[draw,circle,minimum size=9mm] (left) at (-4.2,-0.4) {$w_1$};
+\node[draw,circle,minimum size=9mm] (right) at (-1.8,-0.4) {$w_2$};
+\draw[->] (root) to[bend right=12] (left);
+\draw[->] (left) to[bend right=12] (root);
+\draw[->] (root) to[bend left=12] (right);
+\draw[->] (right) to[bend left=12] (root);
+\node at (-3,-1.3) {$\cdots$};
+\node at (-3,-2) {$P=1,\quad r=0$};
+\node at (3,2.6) {One bad/good pair};
+\node[draw,circle,minimum size=10mm] (bad) at (1,0) {$x_i$};
+\node[draw,circle,minimum size=10mm] (good) at (5,0) {$y_i$};
+\draw[->] (bad) to[bend left=22] node[above] {$q_i(a),\ r=0$} (good);
+\draw[->] (good) to[bend left=22] node[below] {$p,\ r=1$} (bad);
+\draw[->] (bad) edge[loop above] node[above] {$1-q_i(a),\ r=0$} (bad);
+\draw[->] (good) edge[loop above] node[above] {$1-p,\ r=1$} (good);
+\node at (1,-1.5) {$B$ useful actions};
+\node at (5,-1.5) {$A$ actions};
+\end{tikzpicture}
+```
+
+Each routing edge is traversable in both directions by the corresponding child/parent actions. The right panel shows why a useful action spends time in a reward-zero bad state before entering its reward-one partner; the perturbation changes only the indicated useful action's two outgoing probabilities. This illustration concerns only the large-diameter branch. The proof and its estimates remain independent of the figure.

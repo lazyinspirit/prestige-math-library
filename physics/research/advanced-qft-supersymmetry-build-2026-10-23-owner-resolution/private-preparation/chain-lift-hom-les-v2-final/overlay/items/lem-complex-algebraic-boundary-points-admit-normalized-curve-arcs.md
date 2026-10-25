@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complex-algebraic-boundary-points-admit-normalized-curve-arcs.md

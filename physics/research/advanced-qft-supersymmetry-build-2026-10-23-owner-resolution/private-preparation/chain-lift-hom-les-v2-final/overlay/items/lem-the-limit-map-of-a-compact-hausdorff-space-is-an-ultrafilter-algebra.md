@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-limit-map-of-a-compact-hausdorff-space-is-an-ultrafilter-algebra.md

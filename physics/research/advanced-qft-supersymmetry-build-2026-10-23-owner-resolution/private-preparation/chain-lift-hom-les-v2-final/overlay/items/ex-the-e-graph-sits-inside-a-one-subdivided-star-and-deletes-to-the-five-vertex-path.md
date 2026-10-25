@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-e-graph-sits-inside-a-one-subdivided-star-and-deletes-to-the-five-vertex-path.md

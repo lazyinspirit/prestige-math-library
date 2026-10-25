@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities.json
+  precheck: pass
 id: lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities
 kind: lemma
 title: "On a finite-measure space, a bounded $L^p$ functional is integration against its Radon-Nikodym density"
@@ -9,14 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-axiom-of-choice, thm-jordan-decomposition-for-signed-measures, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures, lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, cor-measurable-functions-admit-dominated-simple-approximations, thm-dominated-convergence, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: "Apply Radon-Nikodym to the measure $\\nu(E)=\\Lambda(\\mathbf 1_E)$, identify the pairing first on indicators and simple functions, and then extend to bounded measurable representatives by dominated convergence."
-verification:
-  verified:
-    model: gpt-6-astra
-    verdict: pass
-    date: 2026-09-09
-    scope: owner-authorized local defect repair; no independent judge
-    delegated_by: owner
-  precheck: pass
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 6.15"
@@ -54,7 +49,7 @@ In particular the equality holds for every simple function.
 
 ## Proof
 
-**Proof technique:** Apply Radon-Nikodym to the measure $\nu(E)=\Lambda(\mathbf 1_E)$, identify the pairing first on indicators and simple functions, and then extend to bounded measurable representatives by dominated convergence.
+**Proof technique:** Apply Radon-Nikodym to the measure induced by evaluating the functional on indicator functions, identify the pairing first on indicators and simple functions, and then extend to bounded measurable representatives by dominated convergence.
 
 1.1 By [L1] the induced measure is finite signed and absolutely continuous. By [L6] its total variation is finite; the constant exhaustion $X_n=X$ is common and finite for it and $\mu$. Under AC, [L2] therefore applies: choose $g \in L^1(\mu)$ such that $$\nu(E)=\int_E g\,d\mu\qquad(E \in \mathcal A).$$ Since $\nu(E)=\Lambda([\mathbf 1_E])$, this means $$\Lambda([\mathbf 1_E])=\int \mathbf 1_E g\,d\mu\qquad(E \in \mathcal A).$$ [L1, L2, L6, given, choose]
 

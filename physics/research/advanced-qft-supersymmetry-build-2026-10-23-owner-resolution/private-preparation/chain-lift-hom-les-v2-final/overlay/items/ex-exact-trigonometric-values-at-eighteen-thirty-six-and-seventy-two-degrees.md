@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-exact-trigonometric-values-at-eighteen-thirty-six-and-seventy-two-degrees.md

@@ -1,0 +1,87 @@
+{
+  "id": "ex-subnormal-and-overflow-range-failure",
+  "agent": "/root/rendering_repair_coordinator/nla_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged PNG visibly prints N_min, N_max and ^-1022/^-1074 literally in the Example. The full direct model supplier explicitly defines N_{\\min}, N_{\\max}; these are mathematical subscripts and negative powers rather than prose or code.",
+      "action": "Added inline math delimiters, braced negative exponents and min/max subscripts throughout Example line 31.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The same independently viewed original PNG shows literal powers and endpoint subscripts in both Verification steps, source lines 42 and 44.",
+      "action": "Typeset the unchanged exact first-sum identity and N_max+N_max expression.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset existing binary64 endpoint/subnormal formulas in Example and Verification; no numerical values, signs, exponents, claims, prose hypotheses or proof tags changed.",
+  "source_lines_after": [
+    31,
+    42,
+    44
+  ],
+  "mathematical_meaning_preserved": true,
+  "mathematical_checks": [
+    "Read complete direct suppliers def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma and alg-balanced-pairwise-summation. Their exact-result range rule and single internal addition for two inputs agree with the example.",
+    "Kept 2^{-1022}, 2^{-1074}, -(N_{\\min}+2^{-1074}) and -2^{-1074} exactly; the second input remains normal and their exact cancellation is the least negative subnormal. The unchanged endpoint sum exceeds N_max."
+  ],
+  "before_raw_sha256": "d727c61033c1b3ecfae5a858b4c4202c784b9f426bf0de573ad79eac353db4be",
+  "guard_before_edit": "passed immediately before body-only write; matched queue before_raw_sha256",
+  "after_raw_sha256": "74bd0f2086bb25b69a8b0aff381b626d070baf713bb25aa0eaba7a8feda89079",
+  "publication_status_preserved": true,
+  "frontmatter_preserved_byte_for_byte": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-subnormal-and-overflow-range-failure.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-subnormal-and-overflow-range-failure.md",
+            "item_id": "ex-subnormal-and-overflow-range-failure",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-subnormal-and-overflow-range-failure.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-subnormal-and-overflow-range-failure.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    }
+  ],
+  "visual_review": {
+    "before": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/ex-subnormal-and-overflow-range-failure--01.png",
+    "before_view": "Standalone original resolution, all flagged tiles (one).",
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/nla-016-preview-20261024",
+    "after_view": "Standalone original-resolution fresh native ItemBody local preview, sole tile; checked Example and both Verification steps. Negative exponents, min/max subscripts and operators render cleanly without clipping or overlap.",
+    "katex_errors": [],
+    "katex_count": 8,
+    "diagram_failures": [],
+    "limitations": "Local ItemBody preview, not production route or metadata footer. Reference title-map has 16 unrelated parse diagnostics recorded by helper."
+  },
+  "remaining_issues": []
+}

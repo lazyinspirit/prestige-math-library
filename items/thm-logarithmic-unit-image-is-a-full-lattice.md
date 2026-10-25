@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-logarithmic-unit-image-is-a-full-lattice.json
+  precheck: pass
 id: thm-logarithmic-unit-image-is-a-full-lattice
 kind: theorem
 title: The logarithmic unit image is a full lattice
@@ -56,9 +59,7 @@ sources:
     - title: "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory"
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "Ch. 29 pp.149-153 (Minkowski step; compactness)."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -105,7 +106,7 @@ hence it is a full lattice in $H$ of rank $r_1+r_2-1$.
 
 ## Proof
 
-**Proof technique:** contraposition on a linear functional. If some $z$ is not orthogonal to $H$, products of intervals and discs of fixed volume produce, through the equality case of the lattice point principle, an algebraic integer of bounded norm; the finite list of principal ideals of bounded norm converts it to a unit $u$ with $f(u)$ bounded away from a tunable number $t_c$, and rescaled logarithms make $|t_c|$ exceed that bound, forcing $f(u)\ne0$.
+**Proof technique:** contraposition on a linear functional. If some z is not orthogonal to H, products of intervals and discs of fixed volume produce, through the equality case of the lattice point principle, an algebraic integer of bounded norm; the finite list of principal ideals of bounded norm converts it to a unit u with f(u) bounded away from a tunable number t indexed by c, and rescaled logarithms make the absolute value of that number exceed that bound, forcing f(u) ≠ 0.
 
 1.1 The image $\lambda(\mathcal O_K^\times)$ is a subgroup of $\mathbb R^{r_1+r_2}$ contained in $H$, so $W$ is a subspace of $H$; also $H^\perp=\mathbb R(1,\dots,1)$. [F1, F2, F5]
 

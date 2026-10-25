@@ -1,0 +1,85 @@
+{
+  "id": "cor-p-adic-simple-root-lifting",
+  "agent": "/root/rendering_repair_supervisor2/nt_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution tile visibly prints an underscore in Z_p; the body establishes that this denotes the p-adic integer ring, with p a mathematical subscript. This is literal formula markup rather than a plain Lp-style abbreviation. The finding's description as a field is imprecise: no claim about the ring was changed.",
+      "action": "Math-delimit and typeset the title symbol as $\\mathbb{Z}_p$.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "The same original tile visibly shows Z_p and Q_p in the L1 linked supplier title. Current supplier source still has the literal title \"Z_p is the valuation ring of Q_p\" at inspection; no upstream repaired title was available.",
+      "action": "Add an explicit mathematically equivalent local wikilink label for L1; preserve its target and do not edit the supplier.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset the p-adic integer ring in the title and the inherited L1 reference label; no argument, claim, hypothesis, dependency, source, or status change.",
+  "source_lines_after": {
+    "4": "title: 'Simple roots lift uniquely in $\\mathbb{Z}_p$'",
+    "38": "[L1] $\\mathbb Z_p$ is the valuation ring in $\\mathbb Q_p$ ([[cor-zp-is-the-valuation-ring-of-qp|$\\mathbb{Z}_p$ is the valuation ring of $\\mathbb{Q}_p$]])."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "abbc265950fbce23c90b2b8bf7d08edceb750e48f33a4e2b7e7577118d4cf32c",
+  "after_raw_sha256": "49bd6a84458231a4744eee0c87986fdf427c04b754ae24e7b7f6f93902c924be",
+  "raw_guard": "Exact queue raw SHA asserted immediately before edit.",
+  "scope_verification": "All non-title frontmatter lines byte-identical, including status: published. Proof section byte-identical. The only body edit is the L1 display label.",
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/number-theory/screenshots/cor-p-adic-simple-root-lifting--01.png",
+    "sha256": "88177b2f9d992b1aad1ea9d57bba161738709d13b59a51b46ab316600966b3b7",
+    "inspection": "Standalone view_image at original resolution."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cor-p-adic-simple-root-lifting.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cor-p-adic-simple-root-lifting.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/cor-p-adic-simple-root-lifting.md",
+            "item_id": "cor-p-adic-simple-root-lifting",
+            "status": "pass",
+            "strategy": "constructive"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cor-p-adic-simple-root-lifting.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-nt016 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cor-p-adic-simple-root-lifting --out research/math-library-rendering-repairs-2026-10-23/previews/nt016-native",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/nt016-native/manifest.json",
+    "source_sha256": "49bd6a84458231a4744eee0c87986fdf427c04b754ae24e7b7f6f93902c924be",
+    "reference_map_sha256": "9afdd08624674a56b38507b0db406bf4ef7e779df8c90bb7340231b42df432ec",
+    "inspection": "Inspected resulting standalone --01.png at original resolution. The changed title and L1 label visibly show blackboard-bold Z/Q with subscript p, without literal underscores.",
+    "limitations": "Local native ItemBody/title preview, not production-route coverage; 13 unrelated reference-map parse diagnostics recorded by the manifest. No TikZ changes."
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-polynomials-over-an-infinite-domain-are-determined-by-values.md

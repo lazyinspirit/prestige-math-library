@@ -1,0 +1,1494 @@
+{
+  "version": 1,
+  "lane": "09",
+  "review": "Neural Networks and Learning Dynamics rendering audit",
+  "assignment": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/assignment-09.json",
+  "assignment_sha256": "a91662a3df2f4c77192e1e0dd5b46a1a05d7fe7e4b8f17a1ebe8c09711b3c688",
+  "coverage_summary": {
+    "assigned_items": 43,
+    "reviewed_screenshot_tiles": 77,
+    "opened_individually": true,
+    "view_tool": "tools.view_image",
+    "resolution": "original",
+    "source_hash_mismatches": 0,
+    "snapshot_hash_mismatches": 0,
+    "html_hash_mismatches": 0,
+    "tile_hash_mismatches": 0,
+    "source_snapshot_byte_drift": 0,
+    "katex_errors_in_capture_metadata": 0,
+    "tikz_diagrams_in_captured_items": 1
+  },
+  "screenshot_review": "Reviewed every assigned title and complete ItemBody against its local HTML and frozen source snapshot. Opened all 77 assigned PNGs individually with tools.view_image at original resolution. The only assigned TikZ is the fan-in/fan-out example; its forward and reverse arrows and dimensions match the source. No other existing diagram mathematics was present. Screenshot boundaries on long items align with their sequential capture tiles; no clipping was confirmed. Math is rendered through KaTeX with no capture errors. No raw ASCII mathematics, scratch text, or reference-title leaks were observed. Reference links intentionally appear as blocks, and technique banners are expected.",
+  "rendering_findings": [
+    {
+      "id": "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+      "source": "items/thm-isotropic-ridgeless-risk-across-interpolation-threshold.md",
+      "pages": [
+        "minimum-norm-interpolation-and-double-descent"
+      ],
+      "section": "Statement",
+      "lines": [
+        45
+      ],
+      "excerpt": "Then almost surely $$\\mathcal R_n\\longrightarrow \\begin{cases} \\displaystyle\\frac{\\sigma^2\\gamma}{1-\\gamma},&0<\\gamma<1,\\\\[5pt] \\displaystyle r^2\\left(1-\\frac1\\gamma\\right)+\\frac{\\sigma^2}{\\gamma-1},&\\gamma>1. \\end{cases}$$",
+      "kind": "display-math-layout-collision",
+      "classification": "confirmed",
+      "symptom": "In the standalone first tile the tall cases expression is rendered within the same paragraph as the following sentence, “This result gives no limit assertion…”. The sentence starts to the right of the cases array and competes for the same horizontal space, making the statement crowded and difficult to read. The formula itself is typeset; this is a layout defect.",
+      "screenshot": "screenshots/thm-isotropic-ridgeless-risk-across-interpolation-threshold--01.png",
+      "screenshot_sha256": "f171d29802539b6512d2d6f372211518119158341cf5f5159fb8452c1282a9b8",
+      "suggested_repair": "Put the cases formula in its own display block (or move the following caveat to a separate paragraph) so prose cannot flow beside the multi-line expression."
+    }
+  ],
+  "optional_typography": [],
+  "diagram_candidates": [
+    {
+      "id": "alg-transformer-forward-pass",
+      "source": "items/alg-transformer-forward-pass.md",
+      "lines": [
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36
+      ],
+      "kind": "optional encoder-decoder computation-flow diagram",
+      "classification": "uncertain-optional",
+      "why": "The procedure describes two streams and their interaction across encoder, causal decoder self-attention, cross-attention, and tokenwise output. A flow diagram could make the distinction between source-wide access and target-prefix masking easier to scan; the existing step list is complete.",
+      "content_to_draw": "Source tokens x_1,…,x_n → embedding plus position → encoder stack → E. Target prefix y_0,…,y_{m−1} → embedding plus position → decoder layers, with a causal self-attention arrow restricted to j≤i and a cross-attention arrow from decoder queries to E as keys/values → output linear map → vocabulary softmax. Label outputs as one next-token probability vector per prefix position.",
+      "screenshot": "screenshots/alg-transformer-forward-pass--01.png",
+      "screenshot_sha256": "2c65ed85cdc9dceb74f5de655e29e8ba090daa2303954357d8de6970ae676a04"
+    },
+    {
+      "id": "def-lstm-cell",
+      "source": "items/def-lstm-cell.md",
+      "lines": [
+        28,
+        30,
+        32,
+        34
+      ],
+      "kind": "optional recurrent cell-state diagram",
+      "classification": "uncertain-optional",
+      "why": "The definition contains the standard gate equations and explicit recurrence, and a cell-state flow could clarify which gates modulate the carried state versus the hidden output. All relations are already specified by the equations.",
+      "content_to_draw": "Inputs x_t and h_{t−1} feed shared affine maps W_i,U_i,b_i; W_f,U_f,b_f; W_o,U_o,b_o; W_c,U_c,b_c, followed by σ for i_t,f_t,o_t and tanh for g_t. Draw c_{t−1}→multiply by f_t, add i_t⊙g_t to form c_t; then tanh(c_t) multiplied by o_t gives h_t. Mark parameter sharing across time steps.",
+      "screenshot": "screenshots/def-lstm-cell--01.png",
+      "screenshot_sha256": "216d212858d559d287d832b520a0f22072f094db2e2c16af9af4b16b75c84c4c"
+    }
+  ],
+  "existing_diagram_checks": [
+    {
+      "id": "ex-fan-in-versus-fan-out-initialization",
+      "check": "The existing TikZ has the forward path X_{ℓ−1}∈R^64 → Z_ℓ∈R^128 → X_ℓ∈R^128 labeled W_ℓ and ρ; reverse mode is g_ℓ∈R^128 → h_ℓ∈R^128 → g_{ℓ−1}∈R^64 with the reverse map order D_ℓ then W_ℓᵀ. This agrees with the source equations and dimensions; no diagram defect.",
+      "source_lines": [
+        50,
+        56,
+        67
+      ],
+      "screenshot": "screenshots/ex-fan-in-versus-fan-out-initialization--01.png",
+      "screenshot_sha256": "82afde67da10a153ade53c956045122eed98dd41fea80380c94651f393e78537"
+    }
+  ],
+  "coverage": [
+    {
+      "id": "alg-heavy-ball-momentum",
+      "title": "Heavy-ball momentum",
+      "status": "published",
+      "pages": [
+        "momentum-and-accelerated-training"
+      ],
+      "source": "items/alg-heavy-ball-momentum.md",
+      "assignment_source_sha256": "39d721e3dee15e1f682f93fe54e55dd421033adb339d561690960b96f915fbe5",
+      "source_sha256": "39d721e3dee15e1f682f93fe54e55dd421033adb339d561690960b96f915fbe5",
+      "snapshot": "snapshots/alg-heavy-ball-momentum.md",
+      "snapshot_sha256": "39d721e3dee15e1f682f93fe54e55dd421033adb339d561690960b96f915fbe5",
+      "html": "html/alg-heavy-ball-momentum.html",
+      "assignment_html_sha256": "d24ef13eb4aaf24f1e7c7bc05d720c442a0fb106ac9250638da0501a4ac0a0ed",
+      "html_sha256": "d24ef13eb4aaf24f1e7c7bc05d720c442a0fb106ac9250638da0501a4ac0a0ed",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/alg-heavy-ball-momentum.json",
+      "screenshot_metadata_sha256": "87fd6108b5fe37840c03e69ed7e6c3bad78f868d6ad189dd86bc4d1cd649a7e6",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/alg-heavy-ball-momentum--01.png",
+          "sha256": "69c538370f2c18bc825b4b1debfb9670a45e1667c1149ea3485ec58c0da6dc7b",
+          "capture_sha256": "69c538370f2c18bc825b4b1debfb9670a45e1667c1149ea3485ec58c0da6dc7b",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "alg-transformer-forward-pass",
+      "title": "Transformer encoder-decoder forward pass",
+      "status": "published",
+      "pages": [
+        "attention-and-transformer-expressivity"
+      ],
+      "source": "items/alg-transformer-forward-pass.md",
+      "assignment_source_sha256": "c121c426ad8a09e8bb2cedf68a74a2b5b3d269c28a89dd9ce929e5a2ac5b448a",
+      "source_sha256": "c121c426ad8a09e8bb2cedf68a74a2b5b3d269c28a89dd9ce929e5a2ac5b448a",
+      "snapshot": "snapshots/alg-transformer-forward-pass.md",
+      "snapshot_sha256": "c121c426ad8a09e8bb2cedf68a74a2b5b3d269c28a89dd9ce929e5a2ac5b448a",
+      "html": "html/alg-transformer-forward-pass.html",
+      "assignment_html_sha256": "eb37b3a4b57a44a4767f0244333873481fcbcbb89a827eedf31f6ff0d6b5a9cb",
+      "html_sha256": "eb37b3a4b57a44a4767f0244333873481fcbcbb89a827eedf31f6ff0d6b5a9cb",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/alg-transformer-forward-pass.json",
+      "screenshot_metadata_sha256": "1f7ba1063835441f27b64af1803b8deacd59bfcc2bea20cfd116c1b92351d897",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/alg-transformer-forward-pass--01.png",
+          "sha256": "2c65ed85cdc9dceb74f5de655e29e8ba090daa2303954357d8de6970ae676a04",
+          "capture_sha256": "2c65ed85cdc9dceb74f5de655e29e8ba090daa2303954357d8de6970ae676a04",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "cor-isotropic-minimum-norm-risk-closure-under-edge-gap",
+      "title": "Isotropic minimum-norm risk limits under a positive spectral gap",
+      "status": "published",
+      "pages": [
+        "sample-covariance-resolvent-limits"
+      ],
+      "source": "items/cor-isotropic-minimum-norm-risk-closure-under-edge-gap.md",
+      "assignment_source_sha256": "5e86f924e2a432f0f5ea47269bbeb22b95472222f7c56c50817c7b44a3d90b04",
+      "source_sha256": "5e86f924e2a432f0f5ea47269bbeb22b95472222f7c56c50817c7b44a3d90b04",
+      "snapshot": "snapshots/cor-isotropic-minimum-norm-risk-closure-under-edge-gap.md",
+      "snapshot_sha256": "5e86f924e2a432f0f5ea47269bbeb22b95472222f7c56c50817c7b44a3d90b04",
+      "html": "html/cor-isotropic-minimum-norm-risk-closure-under-edge-gap.html",
+      "assignment_html_sha256": "9aa8b6bf78ace3a6428d4874b9e462f672563ca1e75acd5712899a21bfd7008e",
+      "html_sha256": "9aa8b6bf78ace3a6428d4874b9e462f672563ca1e75acd5712899a21bfd7008e",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/cor-isotropic-minimum-norm-risk-closure-under-edge-gap.json",
+      "screenshot_metadata_sha256": "fece38dad5529d9768504e9fb36be5de484c7c4e980e4bca613361b9a638e995",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/cor-isotropic-minimum-norm-risk-closure-under-edge-gap--01.png",
+          "sha256": "109631cbbcc94f68b77552c9e73828e47276e38583a49c35c4b6893c8ea07509",
+          "capture_sha256": "109631cbbcc94f68b77552c9e73828e47276e38583a49c35c4b6893c8ea07509",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/cor-isotropic-minimum-norm-risk-closure-under-edge-gap--02.png",
+          "sha256": "2f14802532dbf766e5f238a6488f1a44acf686434f6c9dedb23a0cb941711ecc",
+          "capture_sha256": "2f14802532dbf766e5f238a6488f1a44acf686434f6c9dedb23a0cb941711ecc",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/cor-isotropic-minimum-norm-risk-closure-under-edge-gap--03.png",
+          "sha256": "09ca25a1fec779dc51f354a37571defce6976e80245721fd1a158f8663a1ddd6",
+          "capture_sha256": "09ca25a1fec779dc51f354a37571defce6976e80245721fd1a158f8663a1ddd6",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/cor-isotropic-minimum-norm-risk-closure-under-edge-gap--04.png",
+          "sha256": "02c8d73f2710020e22f62ce8e9506970a5990405ac9358acc07c2d7749442cca",
+          "capture_sha256": "02c8d73f2710020e22f62ce8e9506970a5990405ac9358acc07c2d7749442cca",
+          "height": 401,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "def-continuity-equation-with-finite-action",
+      "title": "Finite-action continuity equation in Euclidean space",
+      "status": "published",
+      "pages": [
+        "wasserstein-metric-and-continuity-equation"
+      ],
+      "source": "items/def-continuity-equation-with-finite-action.md",
+      "assignment_source_sha256": "2fd98b0761de6a48ebda9d944091a050572019c707ba6f838a7ff1020b0615d8",
+      "source_sha256": "2fd98b0761de6a48ebda9d944091a050572019c707ba6f838a7ff1020b0615d8",
+      "snapshot": "snapshots/def-continuity-equation-with-finite-action.md",
+      "snapshot_sha256": "2fd98b0761de6a48ebda9d944091a050572019c707ba6f838a7ff1020b0615d8",
+      "html": "html/def-continuity-equation-with-finite-action.html",
+      "assignment_html_sha256": "d1916b08ebd6e0fc96faa64d09e8247b61fb8442979e9fded7ba67342eaf1d59",
+      "html_sha256": "d1916b08ebd6e0fc96faa64d09e8247b61fb8442979e9fded7ba67342eaf1d59",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-continuity-equation-with-finite-action.json",
+      "screenshot_metadata_sha256": "df997469381b2504349d9ae0dd715891e959142456b8ea772c9d60f8b959a4b0",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-continuity-equation-with-finite-action--01.png",
+          "sha256": "6260b9376ec15fef50a8d067d85333381cbe5c938e2d204d21dd98419c73dafc",
+          "capture_sha256": "6260b9376ec15fef50a8d067d85333381cbe5c938e2d204d21dd98419c73dafc",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "def-graph-isomorphism",
+      "title": "Label-preserving graph isomorphisms",
+      "status": "published",
+      "pages": [
+        "message-passing-graph-neural-networks"
+      ],
+      "source": "items/def-graph-isomorphism.md",
+      "assignment_source_sha256": "de1206db214dc350983c8380b91194830f2b1371a4e93d390fe220b2ea4557ec",
+      "source_sha256": "de1206db214dc350983c8380b91194830f2b1371a4e93d390fe220b2ea4557ec",
+      "snapshot": "snapshots/def-graph-isomorphism.md",
+      "snapshot_sha256": "de1206db214dc350983c8380b91194830f2b1371a4e93d390fe220b2ea4557ec",
+      "html": "html/def-graph-isomorphism.html",
+      "assignment_html_sha256": "14cdd9d17fffa5ef9447a0e86f592669aafc1cf5cbf393a6d5cb2c0eab0f05f9",
+      "html_sha256": "14cdd9d17fffa5ef9447a0e86f592669aafc1cf5cbf393a6d5cb2c0eab0f05f9",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-graph-isomorphism.json",
+      "screenshot_metadata_sha256": "77749ba2d12509ee0d130561b7338e28264675a2bdca20b1f5cd573f91db6edc",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-graph-isomorphism--01.png",
+          "sha256": "8eb0d57640393836074e02be612fae9b3c0d4dde3c70e2b7b8768bda1e33c18f",
+          "capture_sha256": "8eb0d57640393836074e02be612fae9b3c0d4dde3c70e2b7b8768bda1e33c18f",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "def-lstm-cell",
+      "title": "Standard LSTM cell",
+      "status": "published",
+      "pages": [
+        "recurrent-and-state-space-networks"
+      ],
+      "source": "items/def-lstm-cell.md",
+      "assignment_source_sha256": "028dc8de489425a297edbaaa8da7af8a2a3595e2661bd70a6ee80608be9ea3b5",
+      "source_sha256": "028dc8de489425a297edbaaa8da7af8a2a3595e2661bd70a6ee80608be9ea3b5",
+      "snapshot": "snapshots/def-lstm-cell.md",
+      "snapshot_sha256": "028dc8de489425a297edbaaa8da7af8a2a3595e2661bd70a6ee80608be9ea3b5",
+      "html": "html/def-lstm-cell.html",
+      "assignment_html_sha256": "8fc775fe664e1b71083751affa59db8711b2d469953a258fa904a383f4d3a3b5",
+      "html_sha256": "8fc775fe664e1b71083751affa59db8711b2d469953a258fa904a383f4d3a3b5",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-lstm-cell.json",
+      "screenshot_metadata_sha256": "6395c67af8d692e4ac2562cc271e857a79ba94bb4198967ff631a85d11209bf7",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-lstm-cell--01.png",
+          "sha256": "216d212858d559d287d832b520a0f22072f094db2e2c16af9af4b16b75c84c4c",
+          "capture_sha256": "216d212858d559d287d832b520a0f22072f094db2e2c16af9af4b16b75c84c4c",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "def-neural-tangent-kernel",
+      "title": "The neural tangent kernel of a differentiable parameterized function",
+      "status": "published",
+      "pages": [
+        "neural-tangent-kernels-and-lazy-training"
+      ],
+      "source": "items/def-neural-tangent-kernel.md",
+      "assignment_source_sha256": "e0024308f0fdf6216e4c1d9288d39cd08a00f39c4a2ddab30f781ccd6b6c18dd",
+      "source_sha256": "e0024308f0fdf6216e4c1d9288d39cd08a00f39c4a2ddab30f781ccd6b6c18dd",
+      "snapshot": "snapshots/def-neural-tangent-kernel.md",
+      "snapshot_sha256": "e0024308f0fdf6216e4c1d9288d39cd08a00f39c4a2ddab30f781ccd6b6c18dd",
+      "html": "html/def-neural-tangent-kernel.html",
+      "assignment_html_sha256": "9c64701fe19d437ffd752d3e2ef4c4cf67732e8234f859df3781627662bf601f",
+      "html_sha256": "9c64701fe19d437ffd752d3e2ef4c4cf67732e8234f859df3781627662bf601f",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-neural-tangent-kernel.json",
+      "screenshot_metadata_sha256": "389effcc786f15fab133bc3f0ebda4bf6d4480864393086fe9da0713833f5b4f",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-neural-tangent-kernel--01.png",
+          "sha256": "f2df09e7fd9c86aed442b396a63c8853b434b0a005f67242d3770f257d8bb6f2",
+          "capture_sha256": "f2df09e7fd9c86aed442b396a63c8853b434b0a005f67242d3770f257d8bb6f2",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "def-relu-linear-region",
+      "title": "Connected activation-pattern regions",
+      "status": "published",
+      "pages": [
+        "relu-approximation-rates-and-depth-expressivity"
+      ],
+      "source": "items/def-relu-linear-region.md",
+      "assignment_source_sha256": "517268a163b4d10e1b9823d8d9343be4686827ee0e233df2740e47a45f673b0d",
+      "source_sha256": "517268a163b4d10e1b9823d8d9343be4686827ee0e233df2740e47a45f673b0d",
+      "snapshot": "snapshots/def-relu-linear-region.md",
+      "snapshot_sha256": "517268a163b4d10e1b9823d8d9343be4686827ee0e233df2740e47a45f673b0d",
+      "html": "html/def-relu-linear-region.html",
+      "assignment_html_sha256": "9e9a73c3b2eef19d9f250c4afe2a7aa47179d21e86f81fb7bbe8fcfef1f9e7e3",
+      "html_sha256": "9e9a73c3b2eef19d9f250c4afe2a7aa47179d21e86f81fb7bbe8fcfef1f9e7e3",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-relu-linear-region.json",
+      "screenshot_metadata_sha256": "de5ad7fec6c26a4a2c34416ce5fabc304f5aa1c526b87d4c9abccb3f1c05d20e",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-relu-linear-region--01.png",
+          "sha256": "5cfdc2dd59ff72b7d3daf1a490184e580e803eed94f868e0570854a1619dc64b",
+          "capture_sha256": "5cfdc2dd59ff72b7d3daf1a490184e580e803eed94f868e0570854a1619dc64b",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "def-signed-square-relu-feature-map",
+      "title": "Signed-square ReLU feature parameterization",
+      "status": "published",
+      "pages": [
+        "mean-field-training-and-feature-learning"
+      ],
+      "source": "items/def-signed-square-relu-feature-map.md",
+      "assignment_source_sha256": "8edd3932b84cb982ad5b8d07b933ab9dc323bf8f03d3feaeb42a1afde481ca15",
+      "source_sha256": "8edd3932b84cb982ad5b8d07b933ab9dc323bf8f03d3feaeb42a1afde481ca15",
+      "snapshot": "snapshots/def-signed-square-relu-feature-map.md",
+      "snapshot_sha256": "8edd3932b84cb982ad5b8d07b933ab9dc323bf8f03d3feaeb42a1afde481ca15",
+      "html": "html/def-signed-square-relu-feature-map.html",
+      "assignment_html_sha256": "7ee8751a9967ac1a147780a950481aa3325ff0306206237847917f2052eb7488",
+      "html_sha256": "7ee8751a9967ac1a147780a950481aa3325ff0306206237847917f2052eb7488",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-signed-square-relu-feature-map.json",
+      "screenshot_metadata_sha256": "993f8eeb840598acb44093c5bcc460137acb393a1e4008a75fa5743f6c971112",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-signed-square-relu-feature-map--01.png",
+          "sha256": "014cbae73c4530bd5341340f31a7ddd1c732e04fbc08419ecb8c4eb8537a21e4",
+          "capture_sha256": "014cbae73c4530bd5341340f31a7ddd1c732e04fbc08419ecb8c4eb8537a21e4",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "def-wasserstein-two-space-and-couplings",
+      "title": "The Euclidean quadratic Wasserstein space",
+      "status": "published",
+      "pages": [
+        "wasserstein-metric-and-continuity-equation"
+      ],
+      "source": "items/def-wasserstein-two-space-and-couplings.md",
+      "assignment_source_sha256": "ce085e89b175f7f755c5d6f3e1018579685f5ff5d424aa6ef499dfcc38839cd4",
+      "source_sha256": "ce085e89b175f7f755c5d6f3e1018579685f5ff5d424aa6ef499dfcc38839cd4",
+      "snapshot": "snapshots/def-wasserstein-two-space-and-couplings.md",
+      "snapshot_sha256": "ce085e89b175f7f755c5d6f3e1018579685f5ff5d424aa6ef499dfcc38839cd4",
+      "html": "html/def-wasserstein-two-space-and-couplings.html",
+      "assignment_html_sha256": "b6ef8f61174cf6742ecee399498e8dd9e3736bbd2126ce71f36fc46de0feea4e",
+      "html_sha256": "b6ef8f61174cf6742ecee399498e8dd9e3736bbd2126ce71f36fc46de0feea4e",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-wasserstein-two-space-and-couplings.json",
+      "screenshot_metadata_sha256": "c41cafd46bbdebfdc43a69ba3e6d5e8efc323ce00d7b3750705d4370661876c1",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-wasserstein-two-space-and-couplings--01.png",
+          "sha256": "edc517268be1998efa61526840aa2ba0aa62e19ebd083f7c0d9d47952972be34",
+          "capture_sha256": "edc517268be1998efa61526840aa2ba0aa62e19ebd083f7c0d9d47952972be34",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "ex-degenerate-hard-margin-support-vector",
+      "title": "A redundant active margin with zero KKT multiplier",
+      "status": "published",
+      "pages": [
+        "implicit-bias-of-gradient-training-examples"
+      ],
+      "source": "items/ex-degenerate-hard-margin-support-vector.md",
+      "assignment_source_sha256": "a1fa3cc084662c9280afffd5978e4e118d3106557aa105b56ba44cb5847b1f6c",
+      "source_sha256": "a1fa3cc084662c9280afffd5978e4e118d3106557aa105b56ba44cb5847b1f6c",
+      "snapshot": "snapshots/ex-degenerate-hard-margin-support-vector.md",
+      "snapshot_sha256": "a1fa3cc084662c9280afffd5978e4e118d3106557aa105b56ba44cb5847b1f6c",
+      "html": "html/ex-degenerate-hard-margin-support-vector.html",
+      "assignment_html_sha256": "1b4afb2345745178813d28afb7ee4d24a784ecc1c2415b92c7eda4e28a5e0b6a",
+      "html_sha256": "1b4afb2345745178813d28afb7ee4d24a784ecc1c2415b92c7eda4e28a5e0b6a",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-degenerate-hard-margin-support-vector.json",
+      "screenshot_metadata_sha256": "b8a589ce5e4fe457b074feeba8b4523374063f26e0e928259e8d34efb4b1de8f",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-degenerate-hard-margin-support-vector--01.png",
+          "sha256": "32ebb6a816f629910a75f0094be57ba40e5763854309b8ac9ee0f0db6309cb2e",
+          "capture_sha256": "32ebb6a816f629910a75f0094be57ba40e5763854309b8ac9ee0f0db6309cb2e",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "ex-fan-in-versus-fan-out-initialization",
+      "title": "Fan-in and fan-out target different signal directions",
+      "status": "published",
+      "pages": [
+        "initialization-and-signal-propagation-examples"
+      ],
+      "source": "items/ex-fan-in-versus-fan-out-initialization.md",
+      "assignment_source_sha256": "e89db44607297153a334e092e709359d20f5d58af007f6af170a344cceae57a5",
+      "source_sha256": "e89db44607297153a334e092e709359d20f5d58af007f6af170a344cceae57a5",
+      "snapshot": "snapshots/ex-fan-in-versus-fan-out-initialization.md",
+      "snapshot_sha256": "e89db44607297153a334e092e709359d20f5d58af007f6af170a344cceae57a5",
+      "html": "html/ex-fan-in-versus-fan-out-initialization.html",
+      "assignment_html_sha256": "07f58db947a35271275fe84a091c51b7f17aa1a0bc2fef169479bb7ecd4e1695",
+      "html_sha256": "07f58db947a35271275fe84a091c51b7f17aa1a0bc2fef169479bb7ecd4e1695",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-fan-in-versus-fan-out-initialization.json",
+      "screenshot_metadata_sha256": "ea0a7bf2f95e0f0222de280ac92147cc4312279b224965526810c0e3ee883524",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-fan-in-versus-fan-out-initialization--01.png",
+          "sha256": "82afde67da10a153ade53c956045122eed98dd41fea80380c94651f393e78537",
+          "capture_sha256": "82afde67da10a153ade53c956045122eed98dd41fea80380c94651f393e78537",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "ex-isotropic-sample-covariance-directional-marchenko-pastur-limit",
+      "title": "An isotropic finite-fourth-moment design",
+      "status": "published",
+      "pages": [
+        "sample-covariance-resolvent-limits-examples"
+      ],
+      "source": "items/ex-isotropic-sample-covariance-directional-marchenko-pastur-limit.md",
+      "assignment_source_sha256": "7e382f3d0a7907f8ee7e8ed49c22266905609ee7426618afedcbaddc16ff5437",
+      "source_sha256": "7e382f3d0a7907f8ee7e8ed49c22266905609ee7426618afedcbaddc16ff5437",
+      "snapshot": "snapshots/ex-isotropic-sample-covariance-directional-marchenko-pastur-limit.md",
+      "snapshot_sha256": "7e382f3d0a7907f8ee7e8ed49c22266905609ee7426618afedcbaddc16ff5437",
+      "html": "html/ex-isotropic-sample-covariance-directional-marchenko-pastur-limit.html",
+      "assignment_html_sha256": "a6b82b26aad5fd2a895cca7d19d0998df877ee39233f855da30a5df96abd4648",
+      "html_sha256": "a6b82b26aad5fd2a895cca7d19d0998df877ee39233f855da30a5df96abd4648",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-isotropic-sample-covariance-directional-marchenko-pastur-limit.json",
+      "screenshot_metadata_sha256": "f1ceb2aa5d4ec345cbd4803e8d5a9c5eadbfa92d10e65d80db8ff7d60681c5d7",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-isotropic-sample-covariance-directional-marchenko-pastur-limit--01.png",
+          "sha256": "9d7246b37db5f795efad9d8b79c480aaad435a32897048ce582580a5c237c85b",
+          "capture_sha256": "9d7246b37db5f795efad9d8b79c480aaad435a32897048ce582580a5c237c85b",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-isotropic-sample-covariance-directional-marchenko-pastur-limit--02.png",
+          "sha256": "379454a5889faa4839a4a48e65cc29bf38d76ea2264310e1b34b48e706c894d9",
+          "capture_sha256": "379454a5889faa4839a4a48e65cc29bf38d76ea2264310e1b34b48e706c894d9",
+          "height": 512,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "ex-moving-features-versus-fixed-features",
+      "title": "Moving features can represent a target missed by a fixed feature",
+      "status": "published",
+      "pages": [
+        "mean-field-training-and-feature-learning-examples"
+      ],
+      "source": "items/ex-moving-features-versus-fixed-features.md",
+      "assignment_source_sha256": "5f86721f8b737d9ff66cbf83812006da75dd8b2f25fd2f21bfbab82569166f32",
+      "source_sha256": "5f86721f8b737d9ff66cbf83812006da75dd8b2f25fd2f21bfbab82569166f32",
+      "snapshot": "snapshots/ex-moving-features-versus-fixed-features.md",
+      "snapshot_sha256": "5f86721f8b737d9ff66cbf83812006da75dd8b2f25fd2f21bfbab82569166f32",
+      "html": "html/ex-moving-features-versus-fixed-features.html",
+      "assignment_html_sha256": "82ef5327c015c09f8fe953a30822a6e62b16bd0285893224cff59942a78cf95a",
+      "html_sha256": "82ef5327c015c09f8fe953a30822a6e62b16bd0285893224cff59942a78cf95a",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-moving-features-versus-fixed-features.json",
+      "screenshot_metadata_sha256": "949b24aeaa42fc28c69257faed46eca0f786ffed00e52ef74a3eaed93cbdd880",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-moving-features-versus-fixed-features--01.png",
+          "sha256": "a8010aa8cee8b90074286abcf72f6aeb681d19676a8684680443129e0213289e",
+          "capture_sha256": "a8010aa8cee8b90074286abcf72f6aeb681d19676a8684680443129e0213289e",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "ex-pinn-small-scale-cube-sampling-has-instances",
+      "title": "Uniform cube sampling satisfies the corrected small-scale conditions",
+      "status": "published",
+      "pages": [
+        "neural-operators-and-physics-informed-learning-examples"
+      ],
+      "source": "items/ex-pinn-small-scale-cube-sampling-has-instances.md",
+      "assignment_source_sha256": "8d6264a0154c4ec5fc259a5e5db8f10d4312987f8dbefca92cf054d46eca2871",
+      "source_sha256": "8d6264a0154c4ec5fc259a5e5db8f10d4312987f8dbefca92cf054d46eca2871",
+      "snapshot": "snapshots/ex-pinn-small-scale-cube-sampling-has-instances.md",
+      "snapshot_sha256": "8d6264a0154c4ec5fc259a5e5db8f10d4312987f8dbefca92cf054d46eca2871",
+      "html": "html/ex-pinn-small-scale-cube-sampling-has-instances.html",
+      "assignment_html_sha256": "a914a4a3a8ca9cb95642d04aed82200aadf757a7cf4dc9a5f6a8eba08a88fad0",
+      "html_sha256": "a914a4a3a8ca9cb95642d04aed82200aadf757a7cf4dc9a5f6a8eba08a88fad0",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-pinn-small-scale-cube-sampling-has-instances.json",
+      "screenshot_metadata_sha256": "0a110730bb44900f550bf2bb00abd479a1e2cd75064f2e2404dd7bb6422349de",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-pinn-small-scale-cube-sampling-has-instances--01.png",
+          "sha256": "939037d4769c0d6230c2fd119e7573f13de992a957545b6b5163a1262ace0b85",
+          "capture_sha256": "939037d4769c0d6230c2fd119e7573f13de992a957545b6b5163a1262ace0b85",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "ex-ridge-hyperparameter-hypergradient",
+      "title": "A scalar ridge penalty and its validation hypergradient",
+      "status": "published",
+      "pages": [
+        "bilevel-learning-hypergradients-and-implicit-layers-examples"
+      ],
+      "source": "items/ex-ridge-hyperparameter-hypergradient.md",
+      "assignment_source_sha256": "6a2bd89b42b8faec31c3af07aa1fa272963fbbb19ed5fc06f9dcfffff8e3ca6e",
+      "source_sha256": "6a2bd89b42b8faec31c3af07aa1fa272963fbbb19ed5fc06f9dcfffff8e3ca6e",
+      "snapshot": "snapshots/ex-ridge-hyperparameter-hypergradient.md",
+      "snapshot_sha256": "6a2bd89b42b8faec31c3af07aa1fa272963fbbb19ed5fc06f9dcfffff8e3ca6e",
+      "html": "html/ex-ridge-hyperparameter-hypergradient.html",
+      "assignment_html_sha256": "30ba3817cb89931041b8ec23671d72601f3220a25a84f76f6ac41eb9fa7b3bdf",
+      "html_sha256": "30ba3817cb89931041b8ec23671d72601f3220a25a84f76f6ac41eb9fa7b3bdf",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-ridge-hyperparameter-hypergradient.json",
+      "screenshot_metadata_sha256": "eb8c662e8f7a826259cd1fcb3468eb0f3e3123a85e93f8f4909765ce198e6626",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-ridge-hyperparameter-hypergradient--01.png",
+          "sha256": "36425da4f88bebf084d9d023d468c3d28dfefbcce04d4c850e7a83444493ecf1",
+          "capture_sha256": "36425da4f88bebf084d9d023d468c3d28dfefbcce04d4c850e7a83444493ecf1",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "ex-singular-hessian-nonisolated-inner-minimum",
+      "title": "A singular Hessian leaves the minimizing branch undetermined",
+      "status": "published",
+      "pages": [
+        "bilevel-learning-hypergradients-and-implicit-layers-examples"
+      ],
+      "source": "items/ex-singular-hessian-nonisolated-inner-minimum.md",
+      "assignment_source_sha256": "ac9965465cdee5994256d12c80d03673105330e64465a37bae1e6280f2bc989b",
+      "source_sha256": "ac9965465cdee5994256d12c80d03673105330e64465a37bae1e6280f2bc989b",
+      "snapshot": "snapshots/ex-singular-hessian-nonisolated-inner-minimum.md",
+      "snapshot_sha256": "ac9965465cdee5994256d12c80d03673105330e64465a37bae1e6280f2bc989b",
+      "html": "html/ex-singular-hessian-nonisolated-inner-minimum.html",
+      "assignment_html_sha256": "8c14b962d72baae9db4954120af491d68f35a265f3754b48aa7e389df957bbe2",
+      "html_sha256": "8c14b962d72baae9db4954120af491d68f35a265f3754b48aa7e389df957bbe2",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-singular-hessian-nonisolated-inner-minimum.json",
+      "screenshot_metadata_sha256": "860abf93a96b5bbc7f110d11dab156b50340e0d1586e5ca1e020f794889b488f",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-singular-hessian-nonisolated-inner-minimum--01.png",
+          "sha256": "8f13de8d47e0364ef83c3215aabe54d19a394f4d5900609459b3c966fe455e9f",
+          "capture_sha256": "8f13de8d47e0364ef83c3215aabe54d19a394f4d5900609459b3c966fe455e9f",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "ex-two-token-causal-next-token-mask",
+      "title": "A two-token causal next-token mask",
+      "status": "published",
+      "pages": [
+        "attention-and-transformer-expressivity-examples"
+      ],
+      "source": "items/ex-two-token-causal-next-token-mask.md",
+      "assignment_source_sha256": "e3f9d524cb22a7bc6d35e8c0ee9558a32f723ef5dddb59e80d927136cfad7de0",
+      "source_sha256": "e3f9d524cb22a7bc6d35e8c0ee9558a32f723ef5dddb59e80d927136cfad7de0",
+      "snapshot": "snapshots/ex-two-token-causal-next-token-mask.md",
+      "snapshot_sha256": "e3f9d524cb22a7bc6d35e8c0ee9558a32f723ef5dddb59e80d927136cfad7de0",
+      "html": "html/ex-two-token-causal-next-token-mask.html",
+      "assignment_html_sha256": "4054ee745712eb7bf7178c446d1d266eecdb1cfee0b8cfd16fae51c69cc62727",
+      "html_sha256": "4054ee745712eb7bf7178c446d1d266eecdb1cfee0b8cfd16fae51c69cc62727",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-two-token-causal-next-token-mask.json",
+      "screenshot_metadata_sha256": "0de58abf19b420445ff96d8bbc9a30341e26504d0a5b8dbd9e8b3b6653494482",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/ex-two-token-causal-next-token-mask--01.png",
+          "sha256": "737a6b9375ed8f1346aabf131e7e72feeae40216c41a811c773cc69192eea5fb",
+          "capture_sha256": "737a6b9375ed8f1346aabf131e7e72feeae40216c41a811c773cc69192eea5fb",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-adapted-resolvent-trace-concentration",
+      "title": "Adapted resolvent-trace martingale concentration for independent columns",
+      "status": "published",
+      "pages": [
+        "marchenko-pastur-law-and-edge-bounds"
+      ],
+      "source": "items/lem-adapted-resolvent-trace-concentration.md",
+      "assignment_source_sha256": "236d9316a91e8f6ad3c0b6a7250396db98c7c0a0d0f5c2ce86a12513f7fdbab7",
+      "source_sha256": "236d9316a91e8f6ad3c0b6a7250396db98c7c0a0d0f5c2ce86a12513f7fdbab7",
+      "snapshot": "snapshots/lem-adapted-resolvent-trace-concentration.md",
+      "snapshot_sha256": "236d9316a91e8f6ad3c0b6a7250396db98c7c0a0d0f5c2ce86a12513f7fdbab7",
+      "html": "html/lem-adapted-resolvent-trace-concentration.html",
+      "assignment_html_sha256": "daee84a4aa456caf2fe4e453bc1b89da76b18ef20e076d96fc661aeee7c3583b",
+      "html_sha256": "daee84a4aa456caf2fe4e453bc1b89da76b18ef20e076d96fc661aeee7c3583b",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-adapted-resolvent-trace-concentration.json",
+      "screenshot_metadata_sha256": "53f6f5b8392dd0abaf772877430d9263efa0c589c2270d19e2e727aad1b22a07",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-adapted-resolvent-trace-concentration--01.png",
+          "sha256": "e3668eaa910115a708a17bdb31842458df93b446641b2735766f9f1c7baa2b8e",
+          "capture_sha256": "e3668eaa910115a708a17bdb31842458df93b446641b2735766f9f1c7baa2b8e",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-adapted-resolvent-trace-concentration--02.png",
+          "sha256": "b2acdedbadf679b428472c3bac5ebe086b84a29b45703ea63d48544debad5c82",
+          "capture_sha256": "b2acdedbadf679b428472c3bac5ebe086b84a29b45703ea63d48544debad5c82",
+          "height": 260,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-bochner-time-l2-is-separable-hilbert",
+      "title": "Bochner L2 on a finite interval is a separable Hilbert space",
+      "status": "published",
+      "pages": [
+        "wasserstein-gradient-flow-existence-and-stability"
+      ],
+      "source": "items/lem-bochner-time-l2-is-separable-hilbert.md",
+      "assignment_source_sha256": "2ec20f49f349ba08b39fa315fb0df583a865c56d4004c021a12aa68845a07405",
+      "source_sha256": "2ec20f49f349ba08b39fa315fb0df583a865c56d4004c021a12aa68845a07405",
+      "snapshot": "snapshots/lem-bochner-time-l2-is-separable-hilbert.md",
+      "snapshot_sha256": "2ec20f49f349ba08b39fa315fb0df583a865c56d4004c021a12aa68845a07405",
+      "html": "html/lem-bochner-time-l2-is-separable-hilbert.html",
+      "assignment_html_sha256": "de38be95e17812c99f419caf99611cc060640361d87b2d241fd7993e56200645",
+      "html_sha256": "de38be95e17812c99f419caf99611cc060640361d87b2d241fd7993e56200645",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-bochner-time-l2-is-separable-hilbert.json",
+      "screenshot_metadata_sha256": "8831cf02e4135be971a3e804bfeb1a2a49fdf13624d215f8e3129eeaead06900",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-bochner-time-l2-is-separable-hilbert--01.png",
+          "sha256": "1cc2e81f33c6d2728d526b016ad243c4665228979943e36d803eb3d42de94506",
+          "capture_sha256": "1cc2e81f33c6d2728d526b016ad243c4665228979943e36d803eb3d42de94506",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-bochner-time-l2-is-separable-hilbert--02.png",
+          "sha256": "5c5491980c714536a19bf9dba68b8633441d47edc8350fb85912809f70afad13",
+          "capture_sha256": "5c5491980c714536a19bf9dba68b8633441d47edc8350fb85912809f70afad13",
+          "height": 1039,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-clarke-sum-chain-rule-for-exponential-risk",
+      "title": "Clarke chain rule for finite exponential empirical risk",
+      "status": "published",
+      "pages": [
+        "implicit-bias-of-gradient-training"
+      ],
+      "source": "items/lem-clarke-sum-chain-rule-for-exponential-risk.md",
+      "assignment_source_sha256": "4cfbef3bd73b8f2ee676b7ae473b0082e143723f948aa0f1122e48d10f2af36f",
+      "source_sha256": "4cfbef3bd73b8f2ee676b7ae473b0082e143723f948aa0f1122e48d10f2af36f",
+      "snapshot": "snapshots/lem-clarke-sum-chain-rule-for-exponential-risk.md",
+      "snapshot_sha256": "4cfbef3bd73b8f2ee676b7ae473b0082e143723f948aa0f1122e48d10f2af36f",
+      "html": "html/lem-clarke-sum-chain-rule-for-exponential-risk.html",
+      "assignment_html_sha256": "44a6d12f031aafe36fe9bd6698e30c33a6354ef00a76e391e0830bad1fa85c66",
+      "html_sha256": "44a6d12f031aafe36fe9bd6698e30c33a6354ef00a76e391e0830bad1fa85c66",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-clarke-sum-chain-rule-for-exponential-risk.json",
+      "screenshot_metadata_sha256": "b06370ead175353990cde4616f66b485a66156be66b650d3985fe094bb9616c9",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-clarke-sum-chain-rule-for-exponential-risk--01.png",
+          "sha256": "eaab102acd8fda6929c20c0b975f40d7df1f302ecffb9925e2710460a3093d06",
+          "capture_sha256": "eaab102acd8fda6929c20c0b975f40d7df1f302ecffb9925e2710460a3093d06",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-clarke-sum-chain-rule-for-exponential-risk--02.png",
+          "sha256": "3186a098b74e7bf586b663bc829ccac05c409d8c07b5289ecca50482dc5138e7",
+          "capture_sha256": "3186a098b74e7bf586b663bc829ccac05c409d8c07b5289ecca50482dc5138e7",
+          "height": 191,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-du-activation-normalizer-finite-positive",
+      "title": "The Gaussian activation normalizer is finite and positive",
+      "status": "published",
+      "pages": [
+        "overparameterized-training-and-interpolation"
+      ],
+      "source": "items/lem-du-activation-normalizer-finite-positive.md",
+      "assignment_source_sha256": "f4085f0874ceb7db6ec503f988a00d6ad9ad3d275b7bf64e72098f4a99668f99",
+      "source_sha256": "f4085f0874ceb7db6ec503f988a00d6ad9ad3d275b7bf64e72098f4a99668f99",
+      "snapshot": "snapshots/lem-du-activation-normalizer-finite-positive.md",
+      "snapshot_sha256": "f4085f0874ceb7db6ec503f988a00d6ad9ad3d275b7bf64e72098f4a99668f99",
+      "html": "html/lem-du-activation-normalizer-finite-positive.html",
+      "assignment_html_sha256": "063e685fcf5f8e996804ceefde8d87867ead87419d5253f7e2970a3327279b47",
+      "html_sha256": "063e685fcf5f8e996804ceefde8d87867ead87419d5253f7e2970a3327279b47",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-du-activation-normalizer-finite-positive.json",
+      "screenshot_metadata_sha256": "43e9074b8625294e93695f3b648d1bb5492b1c49d7f3d7e439c0c6fc35454f50",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-du-activation-normalizer-finite-positive--01.png",
+          "sha256": "ec8b4d272d473862ea12792cf0e95566d863b28e38305a2ef4841747cf13f5f6",
+          "capture_sha256": "ec8b4d272d473862ea12792cf0e95566d863b28e38305a2ef4841747cf13f5f6",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-feature-energy-geodesically-semiconvex",
+      "title": "The localized feature energy is semiconvex along generalized geodesics",
+      "status": "published",
+      "pages": [
+        "wasserstein-gradient-flow-existence-and-stability"
+      ],
+      "source": "items/lem-feature-energy-geodesically-semiconvex.md",
+      "assignment_source_sha256": "984bdb3b5c9083b02b34c17134e32899ee5bd5d6ddd6a9b99d397f68aeb7b4da",
+      "source_sha256": "984bdb3b5c9083b02b34c17134e32899ee5bd5d6ddd6a9b99d397f68aeb7b4da",
+      "snapshot": "snapshots/lem-feature-energy-geodesically-semiconvex.md",
+      "snapshot_sha256": "984bdb3b5c9083b02b34c17134e32899ee5bd5d6ddd6a9b99d397f68aeb7b4da",
+      "html": "html/lem-feature-energy-geodesically-semiconvex.html",
+      "assignment_html_sha256": "58eb41832b56328bdf75deda47e92ae44dfa1146bbfad5a698c8af8d5ce51077",
+      "html_sha256": "58eb41832b56328bdf75deda47e92ae44dfa1146bbfad5a698c8af8d5ce51077",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-feature-energy-geodesically-semiconvex.json",
+      "screenshot_metadata_sha256": "e8d103032bbf8412c8a9adc51d591600ec3c74b7d1ee6551924d6820dfcece67",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-feature-energy-geodesically-semiconvex--01.png",
+          "sha256": "87a2c88ff58bf4eb4200ccd96c3621773c89cc30858eb684a3f9e4f372e19059",
+          "capture_sha256": "87a2c88ff58bf4eb4200ccd96c3621773c89cc30858eb684a3f9e4f372e19059",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-feature-energy-geodesically-semiconvex--02.png",
+          "sha256": "a6f41cb6c62306c80dce629097b174d81ce3ed95a9af6c132ccf999827b9b749",
+          "capture_sha256": "a6f41cb6c62306c80dce629097b174d81ce3ed95a9af6c132ccf999827b9b749",
+          "height": 117,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-gaussian-activation-covariance-strictness-and-ntk-recursion",
+      "title": "Gaussian activation covariance and tangent recursion preserve strict positivity",
+      "status": "published",
+      "pages": [
+        "neural-tangent-kernels-and-lazy-training"
+      ],
+      "source": "items/lem-gaussian-activation-covariance-strictness-and-ntk-recursion.md",
+      "assignment_source_sha256": "59eace5f11d065c799fa7e704da535d1f2474064c267feada57b56de6921fd74",
+      "source_sha256": "59eace5f11d065c799fa7e704da535d1f2474064c267feada57b56de6921fd74",
+      "snapshot": "snapshots/lem-gaussian-activation-covariance-strictness-and-ntk-recursion.md",
+      "snapshot_sha256": "59eace5f11d065c799fa7e704da535d1f2474064c267feada57b56de6921fd74",
+      "html": "html/lem-gaussian-activation-covariance-strictness-and-ntk-recursion.html",
+      "assignment_html_sha256": "ad381829c9e74322d2c9c84c635df58d4eafd5c4f530381733d3ad53c0f04942",
+      "html_sha256": "ad381829c9e74322d2c9c84c635df58d4eafd5c4f530381733d3ad53c0f04942",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-gaussian-activation-covariance-strictness-and-ntk-recursion.json",
+      "screenshot_metadata_sha256": "2da5f78d364bf512bb167e645c81339a69e48c39a52652b1d54c6106379b9bc5",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-gaussian-activation-covariance-strictness-and-ntk-recursion--01.png",
+          "sha256": "c021822c943695d22cd3007b8002caaadd1f7a8bcec2a66fee2d26922981db5f",
+          "capture_sha256": "c021822c943695d22cd3007b8002caaadd1f7a8bcec2a66fee2d26922981db5f",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-gaussian-activation-covariance-strictness-and-ntk-recursion--02.png",
+          "sha256": "4c625fcbfcbe8228113508b2fea44c3373819f7de5974b65883cd4bd4d34e182",
+          "capture_sha256": "4c625fcbfcbe8228113508b2fea44c3373819f7de5974b65883cd4bd4d34e182",
+          "height": 1066,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-hermitian-spectral-measure-is-probability",
+      "title": "A Hermitian directional spectral measure is a probability law",
+      "status": "published",
+      "pages": [
+        "sample-covariance-resolvent-limits"
+      ],
+      "source": "items/lem-hermitian-spectral-measure-is-probability.md",
+      "assignment_source_sha256": "d5a8dbf815ca95c088d6f615ba4504526bfa5e4e6b2ef4918a2c8a65b98e9a3c",
+      "source_sha256": "d5a8dbf815ca95c088d6f615ba4504526bfa5e4e6b2ef4918a2c8a65b98e9a3c",
+      "snapshot": "snapshots/lem-hermitian-spectral-measure-is-probability.md",
+      "snapshot_sha256": "d5a8dbf815ca95c088d6f615ba4504526bfa5e4e6b2ef4918a2c8a65b98e9a3c",
+      "html": "html/lem-hermitian-spectral-measure-is-probability.html",
+      "assignment_html_sha256": "762e7c6f45da500ad033b13316f1d87aa906a4a03af4adc5cf279b26080dc79c",
+      "html_sha256": "762e7c6f45da500ad033b13316f1d87aa906a4a03af4adc5cf279b26080dc79c",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-hermitian-spectral-measure-is-probability.json",
+      "screenshot_metadata_sha256": "e092f9cb6f7325607e61c6d7cb0efecc908358b2b8e62a73c851dc22b7880eef",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-hermitian-spectral-measure-is-probability--01.png",
+          "sha256": "3ff6bdffb3734848a12c1a261004c18b4b08ce4deef18b1df77f0d4ba848cf49",
+          "capture_sha256": "3ff6bdffb3734848a12c1a261004c18b4b08ce4deef18b1df77f0d4ba848cf49",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-hermitian-spectral-measure-is-probability--02.png",
+          "sha256": "b075ae692314dd8ee07efc4cfcb09564961a1520c3d3bbef2b026d215f904ee3",
+          "capture_sha256": "b075ae692314dd8ee07efc4cfcb09564961a1520c3d3bbef2b026d215f904ee3",
+          "height": 266,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+      "title": "Inward mollification and smooth finite-rank approximation on Lipschitz domains",
+      "status": "published",
+      "pages": [
+        "neural-operators-and-physics-informed-learning"
+      ],
+      "source": "items/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains.md",
+      "assignment_source_sha256": "b2eea0574a0df3414b8e4f839f4ea47e7c189c950dc817dc91af351960c674dd",
+      "source_sha256": "b2eea0574a0df3414b8e4f839f4ea47e7c189c950dc817dc91af351960c674dd",
+      "snapshot": "snapshots/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains.md",
+      "snapshot_sha256": "b2eea0574a0df3414b8e4f839f4ea47e7c189c950dc817dc91af351960c674dd",
+      "html": "html/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains.html",
+      "assignment_html_sha256": "87377b401df771134858efab4c98cff003d5fe6cc57b1bbcb927b17c82cb36e1",
+      "html_sha256": "87377b401df771134858efab4c98cff003d5fe6cc57b1bbcb927b17c82cb36e1",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains.json",
+      "screenshot_metadata_sha256": "623e8c8412ad738337ce55fd72f2533d6e62a076624f2c97d467e26f8f5b1757",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains--01.png",
+          "sha256": "f4731acc7b58df42f87f03492ec836f1793c03d181c1302169d05ebedd8caee7",
+          "capture_sha256": "f4731acc7b58df42f87f03492ec836f1793c03d181c1302169d05ebedd8caee7",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains--02.png",
+          "sha256": "d2a591316823bffb47b20eb6d5016733a09e82a05a7dcf7fa28926798ab5a404",
+          "capture_sha256": "d2a591316823bffb47b20eb6d5016733a09e82a05a7dcf7fa28926798ab5a404",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains--03.png",
+          "sha256": "49199f2685fffc01927c64221e0df1d0902bfd7682f26f1ca37f1b9f30132017",
+          "capture_sha256": "49199f2685fffc01927c64221e0df1d0902bfd7682f26f1ca37f1b9f30132017",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains--04.png",
+          "sha256": "67e31fd81f4c5dc30b242aea69fa46993a6461fd79ca321c79b55e350b46b9d2",
+          "capture_sha256": "67e31fd81f4c5dc30b242aea69fa46993a6461fd79ca321c79b55e350b46b9d2",
+          "height": 288,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-logistic-and-exponential-losses-have-tight-exponential-tail",
+      "title": "Logistic and exponential losses satisfy the tight-tail condition",
+      "status": "published",
+      "pages": [
+        "implicit-bias-of-gradient-training"
+      ],
+      "source": "items/lem-logistic-and-exponential-losses-have-tight-exponential-tail.md",
+      "assignment_source_sha256": "91634143cabd6fa83cc710b6859dc78c2fdefa1dc1ff0d8461ac355d855e67d9",
+      "source_sha256": "91634143cabd6fa83cc710b6859dc78c2fdefa1dc1ff0d8461ac355d855e67d9",
+      "snapshot": "snapshots/lem-logistic-and-exponential-losses-have-tight-exponential-tail.md",
+      "snapshot_sha256": "91634143cabd6fa83cc710b6859dc78c2fdefa1dc1ff0d8461ac355d855e67d9",
+      "html": "html/lem-logistic-and-exponential-losses-have-tight-exponential-tail.html",
+      "assignment_html_sha256": "d2c572bac51ce7e3c8a3a38c89365cdd469855be99badf130cbdbd2f18e41150",
+      "html_sha256": "d2c572bac51ce7e3c8a3a38c89365cdd469855be99badf130cbdbd2f18e41150",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-logistic-and-exponential-losses-have-tight-exponential-tail.json",
+      "screenshot_metadata_sha256": "60ea959f033e1be2fc193a69df801d4f6e4e12683d65b00a4ed8a70dc0fc81e5",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-logistic-and-exponential-losses-have-tight-exponential-tail--01.png",
+          "sha256": "4af16d5cf703929ddbaa448f7b3d22cae559d4940603e034d0cbc7d132db86a2",
+          "capture_sha256": "4af16d5cf703929ddbaa448f7b3d22cae559d4940603e034d0cbc7d132db86a2",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs",
+      "title": "Kernel Riemann sums converge uniformly on compact continuous-input sets",
+      "status": "published",
+      "pages": [
+        "neural-operators-and-physics-informed-learning"
+      ],
+      "source": "items/lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs.md",
+      "assignment_source_sha256": "ac76f1098694aafaa4266b206266e44d5b086b634674012731be06fe9901333b",
+      "source_sha256": "ac76f1098694aafaa4266b206266e44d5b086b634674012731be06fe9901333b",
+      "snapshot": "snapshots/lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs.md",
+      "snapshot_sha256": "ac76f1098694aafaa4266b206266e44d5b086b634674012731be06fe9901333b",
+      "html": "html/lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs.html",
+      "assignment_html_sha256": "a79660bc6987f56b5875c2cdc56f4bf3269052b2f3d0ed2b2dc371a9dbc3c32e",
+      "html_sha256": "a79660bc6987f56b5875c2cdc56f4bf3269052b2f3d0ed2b2dc371a9dbc3c32e",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs.json",
+      "screenshot_metadata_sha256": "905c7f7013a81719783d21a59eeda62ceef1abf4bb1598eb8844d1656059cb51",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs--01.png",
+          "sha256": "6a64b55a70f61a252ea75a5b79e2457c6e73a2f6ffa2809792d5fe37da07133d",
+          "capture_sha256": "6a64b55a70f61a252ea75a5b79e2457c6e73a2f6ffa2809792d5fe37da07133d",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs--02.png",
+          "sha256": "3cd771bc97d5192d37895d68d45ba18f3de5b2da90bd665125bce2de4a14c054",
+          "capture_sha256": "3cd771bc97d5192d37895d68d45ba18f3de5b2da90bd665125bce2de4a14c054",
+          "height": 663,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-partial-homogeneous-projection-limit-has-convergent-penalty",
+      "title": "A partial signed projection limit has convergent penalty and energy",
+      "status": "published",
+      "pages": [
+        "mean-field-training-and-feature-learning"
+      ],
+      "source": "items/lem-partial-homogeneous-projection-limit-has-convergent-penalty.md",
+      "assignment_source_sha256": "deeeb43737639cc04337dfebc268303f15585779cbd3ba90cc37a49e39da1f27",
+      "source_sha256": "deeeb43737639cc04337dfebc268303f15585779cbd3ba90cc37a49e39da1f27",
+      "snapshot": "snapshots/lem-partial-homogeneous-projection-limit-has-convergent-penalty.md",
+      "snapshot_sha256": "deeeb43737639cc04337dfebc268303f15585779cbd3ba90cc37a49e39da1f27",
+      "html": "html/lem-partial-homogeneous-projection-limit-has-convergent-penalty.html",
+      "assignment_html_sha256": "badc933d4475f1e3bfd5d771ee7c61f838a2346e8046c43d99e653b52442a4db",
+      "html_sha256": "badc933d4475f1e3bfd5d771ee7c61f838a2346e8046c43d99e653b52442a4db",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-partial-homogeneous-projection-limit-has-convergent-penalty.json",
+      "screenshot_metadata_sha256": "fb50ef4d0cd654c0e978ac0f80210063c081fa0314d24300052256de1faacef5",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-partial-homogeneous-projection-limit-has-convergent-penalty--01.png",
+          "sha256": "303e77ab41571043cfab56ecffd075615cb24ff7f81f5cead1e062c8a7d36d74",
+          "capture_sha256": "303e77ab41571043cfab56ecffd075615cb24ff7f81f5cead1e062c8a7d36d74",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-partial-homogeneous-projection-limit-has-convergent-penalty--02.png",
+          "sha256": "d816d39c95bd34f03b0626ea3d577b75d8ecc22417538fba0e66cd5095da3b2b",
+          "capture_sha256": "d816d39c95bd34f03b0626ea3d577b75d8ecc22417538fba0e66cd5095da3b2b",
+          "height": 997,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-pushforward-support-is-closure-of-image",
+      "title": "Support of a continuous pushforward is the image closure",
+      "status": "published",
+      "pages": [
+        "mean-field-training-and-feature-learning"
+      ],
+      "source": "items/lem-pushforward-support-is-closure-of-image.md",
+      "assignment_source_sha256": "6e6cfa123fcb7f78ec1baf54472c117aea20020f5af9b3bb1937cd8d34978f17",
+      "source_sha256": "6e6cfa123fcb7f78ec1baf54472c117aea20020f5af9b3bb1937cd8d34978f17",
+      "snapshot": "snapshots/lem-pushforward-support-is-closure-of-image.md",
+      "snapshot_sha256": "6e6cfa123fcb7f78ec1baf54472c117aea20020f5af9b3bb1937cd8d34978f17",
+      "html": "html/lem-pushforward-support-is-closure-of-image.html",
+      "assignment_html_sha256": "58a7bc9576e0b8b68062fcb7ffa23d710da97ac4b6a804789f2bc964ee63f21e",
+      "html_sha256": "58a7bc9576e0b8b68062fcb7ffa23d710da97ac4b6a804789f2bc964ee63f21e",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-pushforward-support-is-closure-of-image.json",
+      "screenshot_metadata_sha256": "c716db259c4b3b5b14b443067d039ea9552f73e5da4db4ddeaba54412b01c78b",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-pushforward-support-is-closure-of-image--01.png",
+          "sha256": "2a57253a135a81123a18fa35a5b96148ee2fd4e17304e6b06d701141ce2c8919",
+          "capture_sha256": "2a57253a135a81123a18fa35a5b96148ee2fd4e17304e6b06d701141ce2c8919",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-ridgeless-risk-decomposition",
+      "title": "Exact bias and noise decomposition of isotropic prediction risk",
+      "status": "published",
+      "pages": [
+        "minimum-norm-interpolation-and-double-descent"
+      ],
+      "source": "items/lem-ridgeless-risk-decomposition.md",
+      "assignment_source_sha256": "69d81695254927cb03e6882d6b12ec9eea3cda44e16bf5fc15292924505c40a7",
+      "source_sha256": "69d81695254927cb03e6882d6b12ec9eea3cda44e16bf5fc15292924505c40a7",
+      "snapshot": "snapshots/lem-ridgeless-risk-decomposition.md",
+      "snapshot_sha256": "69d81695254927cb03e6882d6b12ec9eea3cda44e16bf5fc15292924505c40a7",
+      "html": "html/lem-ridgeless-risk-decomposition.html",
+      "assignment_html_sha256": "5beac087f771cd67392bb7a7da24713e563405432e001bde0c5244016635b563",
+      "html_sha256": "5beac087f771cd67392bb7a7da24713e563405432e001bde0c5244016635b563",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-ridgeless-risk-decomposition.json",
+      "screenshot_metadata_sha256": "780093f8412071ee4218d4091a6edeb34742eed9e7839ea77f6d0e41803eb951",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-ridgeless-risk-decomposition--01.png",
+          "sha256": "b8961083dc9097edfc3a8a1beb7cf7107add177fe3c6f3a58cb85a412c4ac280",
+          "capture_sha256": "b8961083dc9097edfc3a8a1beb7cf7107add177fe3c6f3a58cb85a412c4ac280",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-shin-interior-parabolic-schauder-estimate",
+      "title": "Interior parabolic Schauder estimates by freezing the Gaussian kernel",
+      "status": "published",
+      "pages": [
+        "neural-operators-and-physics-informed-learning"
+      ],
+      "source": "items/lem-shin-interior-parabolic-schauder-estimate.md",
+      "assignment_source_sha256": "16f856541a37e1438ca512c151dd110aabe5280bbc1a7a642dc093c2da7fdabd",
+      "source_sha256": "16f856541a37e1438ca512c151dd110aabe5280bbc1a7a642dc093c2da7fdabd",
+      "snapshot": "snapshots/lem-shin-interior-parabolic-schauder-estimate.md",
+      "snapshot_sha256": "16f856541a37e1438ca512c151dd110aabe5280bbc1a7a642dc093c2da7fdabd",
+      "html": "html/lem-shin-interior-parabolic-schauder-estimate.html",
+      "assignment_html_sha256": "29a1fc7dea48ec35a0dd155a5e88c9d3df32f44f0e4d7c745440d51eaed60222",
+      "html_sha256": "29a1fc7dea48ec35a0dd155a5e88c9d3df32f44f0e4d7c745440d51eaed60222",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-shin-interior-parabolic-schauder-estimate.json",
+      "screenshot_metadata_sha256": "4537d0f2b7fb54824819125de9df934f9f05631220d58cbaf7b9b9c93e749f56",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-shin-interior-parabolic-schauder-estimate--01.png",
+          "sha256": "97319d37b0f76ae4d24fb8d5418f7550008aabc92e0284178a7d2a3ed8d1f777",
+          "capture_sha256": "97319d37b0f76ae4d24fb8d5418f7550008aabc92e0284178a7d2a3ed8d1f777",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-shin-interior-parabolic-schauder-estimate--02.png",
+          "sha256": "b652283a90d78a2369870986e66c3eaf3e38f2e9467498b84bfc76486ff49d7f",
+          "capture_sha256": "b652283a90d78a2369870986e66c3eaf3e38f2e9467498b84bfc76486ff49d7f",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-shin-interior-parabolic-schauder-estimate--03.png",
+          "sha256": "fae25ddf49c8c9495a87f47fafebf9f565a423629e069148f29564ff5e7270cb",
+          "capture_sha256": "fae25ddf49c8c9495a87f47fafebf9f565a423629e069148f29564ff5e7270cb",
+          "height": 219,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-smooth-compact-tests-dense-in-finite-radon-l2",
+      "title": "Smooth compactly supported tests are dense for finite Radon L2 measures",
+      "status": "published",
+      "pages": [
+        "wasserstein-metric-and-continuity-equation"
+      ],
+      "source": "items/lem-smooth-compact-tests-dense-in-finite-radon-l2.md",
+      "assignment_source_sha256": "c0435a3d8f279c16c3c9cbd9496c8a0046796f30c7fa22a53555a3f0a59d0328",
+      "source_sha256": "c0435a3d8f279c16c3c9cbd9496c8a0046796f30c7fa22a53555a3f0a59d0328",
+      "snapshot": "snapshots/lem-smooth-compact-tests-dense-in-finite-radon-l2.md",
+      "snapshot_sha256": "c0435a3d8f279c16c3c9cbd9496c8a0046796f30c7fa22a53555a3f0a59d0328",
+      "html": "html/lem-smooth-compact-tests-dense-in-finite-radon-l2.html",
+      "assignment_html_sha256": "9edcc0f18e0a32305f9875e59cec5cda33623655a27b0976d6096505bdd10fb7",
+      "html_sha256": "9edcc0f18e0a32305f9875e59cec5cda33623655a27b0976d6096505bdd10fb7",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-smooth-compact-tests-dense-in-finite-radon-l2.json",
+      "screenshot_metadata_sha256": "aabc7f0ce6bac28f827331e87921620a3da56737edf37beea9c94b4efd5b6070",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-smooth-compact-tests-dense-in-finite-radon-l2--01.png",
+          "sha256": "411d431393deeeab3117745b6e547a2fb004ad8ea4f1eb5a215cce103d8301c2",
+          "capture_sha256": "411d431393deeeab3117745b6e547a2fb004ad8ea4f1eb5a215cce103d8301c2",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-smooth-compact-tests-dense-in-finite-radon-l2--02.png",
+          "sha256": "4f9c5cb7e238bbb9b6d66e71526d3cd7963fa75ad808d8517808250b041a5cab",
+          "capture_sha256": "4f9c5cb7e238bbb9b6d66e71526d3cd7963fa75ad808d8517808250b041a5cab",
+          "height": 208,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+      "title": "Stieltjes inversion and uniqueness for probability measures on the real line",
+      "status": "published",
+      "pages": [
+        "marchenko-pastur-law-and-edge-bounds"
+      ],
+      "source": "items/lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line.md",
+      "assignment_source_sha256": "2ea4acd7df40e2a5ada96fccdc7c6cd5f968a2f1f6ae719f76d1b44e0b6f7e54",
+      "source_sha256": "2ea4acd7df40e2a5ada96fccdc7c6cd5f968a2f1f6ae719f76d1b44e0b6f7e54",
+      "snapshot": "snapshots/lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line.md",
+      "snapshot_sha256": "2ea4acd7df40e2a5ada96fccdc7c6cd5f968a2f1f6ae719f76d1b44e0b6f7e54",
+      "html": "html/lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line.html",
+      "assignment_html_sha256": "8da59bb3bfe8a1300d3a9c71bc72e6bc187df73dbef1fe485877e1de8cdc4e6a",
+      "html_sha256": "8da59bb3bfe8a1300d3a9c71bc72e6bc187df73dbef1fe485877e1de8cdc4e6a",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line.json",
+      "screenshot_metadata_sha256": "e01da83b616a1f9e7a291721893a28cb87519cd127615acaf31525412725927f",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line--01.png",
+          "sha256": "bb15931092b5267fbe22c82ac3e898db6eb9db39f796f01b1af7c4f4de91abf8",
+          "capture_sha256": "bb15931092b5267fbe22c82ac3e898db6eb9db39f796f01b1af7c4f4de91abf8",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line--02.png",
+          "sha256": "0a4101c4cb137a1e14540b700ebdb414fd1eb991a3afd987178dde266abefacd",
+          "capture_sha256": "0a4101c4cb137a1e14540b700ebdb414fd1eb991a3afd987178dde266abefacd",
+          "height": 843,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "lem-yun-transformer-grid-lookup",
+      "title": "Two-head fixed-width Transformers implement finite-grid lookups",
+      "status": "published",
+      "pages": [
+        "attention-and-transformer-expressivity"
+      ],
+      "source": "items/lem-yun-transformer-grid-lookup.md",
+      "assignment_source_sha256": "c4a2d81df4a6e23a8f31cd1b6e3a96f4901c5bea40982331f6221f33f027dd4a",
+      "source_sha256": "c4a2d81df4a6e23a8f31cd1b6e3a96f4901c5bea40982331f6221f33f027dd4a",
+      "snapshot": "snapshots/lem-yun-transformer-grid-lookup.md",
+      "snapshot_sha256": "c4a2d81df4a6e23a8f31cd1b6e3a96f4901c5bea40982331f6221f33f027dd4a",
+      "html": "html/lem-yun-transformer-grid-lookup.html",
+      "assignment_html_sha256": "6bbafdd57eb1ea74a3efd4ffc470391e9491aad1663b3883894d1a467a58f1c1",
+      "html_sha256": "6bbafdd57eb1ea74a3efd4ffc470391e9491aad1663b3883894d1a467a58f1c1",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-yun-transformer-grid-lookup.json",
+      "screenshot_metadata_sha256": "a68b27bc734e822931f7fa5f093393f454ecadfc24a110f3855b79a275d8503b",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-yun-transformer-grid-lookup--01.png",
+          "sha256": "8c89ed9dcc2bfd0d8314c1588058d48455456557727eed55a1e59fd248ef22dc",
+          "capture_sha256": "8c89ed9dcc2bfd0d8314c1588058d48455456557727eed55a1e59fd248ef22dc",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-yun-transformer-grid-lookup--02.png",
+          "sha256": "1697054324fedff5aac8fc82a5e4030a9f4371ab8f71e623f0243b544f76641f",
+          "capture_sha256": "1697054324fedff5aac8fc82a5e4030a9f4371ab8f71e623f0243b544f76641f",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/lem-yun-transformer-grid-lookup--03.png",
+          "sha256": "860fa7d6a09aab39fa0dea4944bfc3305f6e551c5b10802cd33e5f37ba63ac2b",
+          "capture_sha256": "860fa7d6a09aab39fa0dea4944bfc3305f6e551c5b10802cd33e5f37ba63ac2b",
+          "height": 731,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "thm-amsgrad-online-convex-regret",
+      "title": "AMSGrad has an online convex regret bound under decaying first-moment weights",
+      "status": "published",
+      "pages": [
+        "adaptive-gradient-optimizers"
+      ],
+      "source": "items/thm-amsgrad-online-convex-regret.md",
+      "assignment_source_sha256": "1af160d800c9b1aa11080e08a1515c69b05c8f663355e238e7fb5d3944f72ea9",
+      "source_sha256": "1af160d800c9b1aa11080e08a1515c69b05c8f663355e238e7fb5d3944f72ea9",
+      "snapshot": "snapshots/thm-amsgrad-online-convex-regret.md",
+      "snapshot_sha256": "1af160d800c9b1aa11080e08a1515c69b05c8f663355e238e7fb5d3944f72ea9",
+      "html": "html/thm-amsgrad-online-convex-regret.html",
+      "assignment_html_sha256": "94e7110a5ebf1d9504f46217dc1cbd8810d4d91eea8d533d5c2ee888c766c8b5",
+      "html_sha256": "94e7110a5ebf1d9504f46217dc1cbd8810d4d91eea8d533d5c2ee888c766c8b5",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-amsgrad-online-convex-regret.json",
+      "screenshot_metadata_sha256": "a8ad602f9154f1bc7562ae25bcb9aa9929ba938cc41f750cbd037cd2d00273b3",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-amsgrad-online-convex-regret--01.png",
+          "sha256": "0a80de7e97858c9b17fbba82cd0cccda2f2bc2b4658131ec9b0deb0a5324835b",
+          "capture_sha256": "0a80de7e97858c9b17fbba82cd0cccda2f2bc2b4658131ec9b0deb0a5324835b",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-amsgrad-online-convex-regret--02.png",
+          "sha256": "94c6db426d8dfdbc90f472e11ed79c0a98f3aabe3016420399a5e333c0ac9968",
+          "capture_sha256": "94c6db426d8dfdbc90f472e11ed79c0a98f3aabe3016420399a5e333c0ac9968",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-amsgrad-online-convex-regret--03.png",
+          "sha256": "7bec7e5cd984b917a5be3680a137fc43ba9bd02f6e8b8607bb65c005c8f75c3d",
+          "capture_sha256": "7bec7e5cd984b917a5be3680a137fc43ba9bd02f6e8b8607bb65c005c8f75c3d",
+          "height": 1173,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "thm-finite-particle-flows-converge-in-w2",
+      "title": "Finite-particle flows converge to the measure-valued flow in W2",
+      "status": "published",
+      "pages": [
+        "wasserstein-gradient-flow-existence-and-stability"
+      ],
+      "source": "items/thm-finite-particle-flows-converge-in-w2.md",
+      "assignment_source_sha256": "7169d134c7ba0fb054f65bc6726cc225b7307be44657faafc4700b31f9780fe3",
+      "source_sha256": "7169d134c7ba0fb054f65bc6726cc225b7307be44657faafc4700b31f9780fe3",
+      "snapshot": "snapshots/thm-finite-particle-flows-converge-in-w2.md",
+      "snapshot_sha256": "7169d134c7ba0fb054f65bc6726cc225b7307be44657faafc4700b31f9780fe3",
+      "html": "html/thm-finite-particle-flows-converge-in-w2.html",
+      "assignment_html_sha256": "9840d1f893da723d279f4c1fad4b18a6faa0f1de39897a008ebd3167bbc11a69",
+      "html_sha256": "9840d1f893da723d279f4c1fad4b18a6faa0f1de39897a008ebd3167bbc11a69",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-finite-particle-flows-converge-in-w2.json",
+      "screenshot_metadata_sha256": "4c1302fd57d7a601131c62840b862836f98bb8f5c301ee21dc23e3d7b7639259",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-finite-particle-flows-converge-in-w2--01.png",
+          "sha256": "6634d2b2dc089657254409217a75e78ddc3525ca0122333da8d77e59c3598099",
+          "capture_sha256": "6634d2b2dc089657254409217a75e78ddc3525ca0122333da8d77e59c3598099",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-finite-particle-flows-converge-in-w2--02.png",
+          "sha256": "23c081575d7c2532c6b459b5b8a447109d0d5a76a311b79dd6eaa4693297bb69",
+          "capture_sha256": "23c081575d7c2532c6b459b5b8a447109d0d5a76a311b79dd6eaa4693297bb69",
+          "height": 1060,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+      "title": "Isotropic ridgeless least-squares risk on both sides of interpolation",
+      "status": "published",
+      "pages": [
+        "minimum-norm-interpolation-and-double-descent"
+      ],
+      "source": "items/thm-isotropic-ridgeless-risk-across-interpolation-threshold.md",
+      "assignment_source_sha256": "492a71083eca7f64acb0b4af1738066a1d867f1a5aeefb3f36bd75913b5e7519",
+      "source_sha256": "492a71083eca7f64acb0b4af1738066a1d867f1a5aeefb3f36bd75913b5e7519",
+      "snapshot": "snapshots/thm-isotropic-ridgeless-risk-across-interpolation-threshold.md",
+      "snapshot_sha256": "492a71083eca7f64acb0b4af1738066a1d867f1a5aeefb3f36bd75913b5e7519",
+      "html": "html/thm-isotropic-ridgeless-risk-across-interpolation-threshold.html",
+      "assignment_html_sha256": "bb3b76599f34ee78d0006f0f229f86a426965ef22e55bf00170e45b18a9e6fd0",
+      "html_sha256": "bb3b76599f34ee78d0006f0f229f86a426965ef22e55bf00170e45b18a9e6fd0",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-isotropic-ridgeless-risk-across-interpolation-threshold.json",
+      "screenshot_metadata_sha256": "b46ee0f41219889f8600f1775afcce5c9e9e1d257c4942caa17bd10e175a3f2d",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-isotropic-ridgeless-risk-across-interpolation-threshold--01.png",
+          "sha256": "f171d29802539b6512d2d6f372211518119158341cf5f5159fb8452c1282a9b8",
+          "capture_sha256": "f171d29802539b6512d2d6f372211518119158341cf5f5159fb8452c1282a9b8",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-isotropic-ridgeless-risk-across-interpolation-threshold--02.png",
+          "sha256": "46a690fdc341e6429bb12f1c3e5238f15d37631c3ec89651fd863714149b09a2",
+          "capture_sha256": "46a690fdc341e6429bb12f1c3e5238f15d37631c3ec89651fd863714149b09a2",
+          "height": 324,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "thm-neural-operator-compact-uniform-universality",
+      "title": "Neural operators approximate continuous maps uniformly on compacta",
+      "status": "published",
+      "pages": [
+        "neural-operators-and-physics-informed-learning"
+      ],
+      "source": "items/thm-neural-operator-compact-uniform-universality.md",
+      "assignment_source_sha256": "ac6285a77ed6e4fc07700fb06f40c167ca451fcc8a114908a1d7c67f61e642c1",
+      "source_sha256": "ac6285a77ed6e4fc07700fb06f40c167ca451fcc8a114908a1d7c67f61e642c1",
+      "snapshot": "snapshots/thm-neural-operator-compact-uniform-universality.md",
+      "snapshot_sha256": "ac6285a77ed6e4fc07700fb06f40c167ca451fcc8a114908a1d7c67f61e642c1",
+      "html": "html/thm-neural-operator-compact-uniform-universality.html",
+      "assignment_html_sha256": "eeb6c44aaa51f8d157447dd7f26b5b23a6d5ef7fda6d5d29e9975a50f81e869c",
+      "html_sha256": "eeb6c44aaa51f8d157447dd7f26b5b23a6d5ef7fda6d5d29e9975a50f81e869c",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-neural-operator-compact-uniform-universality.json",
+      "screenshot_metadata_sha256": "c61e7624527e4ae0ca383f41261112c4fabc7b9fea3510a0693dc1229ff4c4a5",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-neural-operator-compact-uniform-universality--01.png",
+          "sha256": "04a1641a2c231c285ff3a0d234e65b6f73f2e6e5409b72e359bf8c7f9d1cd3ca",
+          "capture_sha256": "04a1641a2c231c285ff3a0d234e65b6f73f2e6e5409b72e359bf8c7f9d1cd3ca",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-neural-operator-compact-uniform-universality--02.png",
+          "sha256": "995e5e9c69193e3739377bbbe9e082edec278ca9da46345fc46e798c9ed14632",
+          "capture_sha256": "995e5e9c69193e3739377bbbe9e082edec278ca9da46345fc46e798c9ed14632",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-neural-operator-compact-uniform-universality--03.png",
+          "sha256": "6ba63ce650c0638639e83415b9f33daf7c739d37cb6fe3e23782d40b4c1c1487",
+          "capture_sha256": "6ba63ce650c0638639e83415b9f33daf7c739d37cb6fe3e23782d40b4c1c1487",
+          "height": 1242,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "thm-relu-backward-variance-recurrence",
+      "title": "ReLU backward gradient-variance recurrence",
+      "status": "published",
+      "pages": [
+        "initialization-and-signal-propagation"
+      ],
+      "source": "items/thm-relu-backward-variance-recurrence.md",
+      "assignment_source_sha256": "aa04f2defe2c1a3d43183c111345fb66366481124d1095146252bb398fef33e5",
+      "source_sha256": "aa04f2defe2c1a3d43183c111345fb66366481124d1095146252bb398fef33e5",
+      "snapshot": "snapshots/thm-relu-backward-variance-recurrence.md",
+      "snapshot_sha256": "aa04f2defe2c1a3d43183c111345fb66366481124d1095146252bb398fef33e5",
+      "html": "html/thm-relu-backward-variance-recurrence.html",
+      "assignment_html_sha256": "947a69889869b7bb5cb54e5b1aaeaa3895894bc7d49b59e4e020c583a225cfd1",
+      "html_sha256": "947a69889869b7bb5cb54e5b1aaeaa3895894bc7d49b59e4e020c583a225cfd1",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-relu-backward-variance-recurrence.json",
+      "screenshot_metadata_sha256": "0ebf7dd0561419f0ef23c9c261e5cc3abad14ce888e47c8e011d9900ae00f734",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-relu-backward-variance-recurrence--01.png",
+          "sha256": "0e747f6582c8cb4ede63b2b49478344cfd4ee09e1b10af78e4c3b0d62cb32004",
+          "capture_sha256": "0e747f6582c8cb4ede63b2b49478344cfd4ee09e1b10af78e4c3b0d62cb32004",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-relu-backward-variance-recurrence--02.png",
+          "sha256": "f77289c3f77c660f92039b3884eeb91e94d9943a0b648ebfb69836e2ce81f605",
+          "capture_sha256": "f77289c3f77c660f92039b3884eeb91e94d9943a0b648ebfb69836e2ce81f605",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-relu-backward-variance-recurrence--03.png",
+          "sha256": "d46f0a72d4c52608411534c709c2db6829084deefb2785cbbad0c7a8c22fa7fe",
+          "capture_sha256": "d46f0a72d4c52608411534c709c2db6829084deefb2785cbbad0c7a8c22fa7fe",
+          "height": 169,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "thm-sgd-stability-nonconvex-loss",
+      "title": "Expected generalization of nonconvex stochastic gradient training",
+      "status": "published",
+      "pages": [
+        "algorithmic-stability-of-stochastic-training"
+      ],
+      "source": "items/thm-sgd-stability-nonconvex-loss.md",
+      "assignment_source_sha256": "4b54234fc861afdd611faf6a9442bb71951800c5eaf1b5d1202ef53343bfd6df",
+      "source_sha256": "4b54234fc861afdd611faf6a9442bb71951800c5eaf1b5d1202ef53343bfd6df",
+      "snapshot": "snapshots/thm-sgd-stability-nonconvex-loss.md",
+      "snapshot_sha256": "4b54234fc861afdd611faf6a9442bb71951800c5eaf1b5d1202ef53343bfd6df",
+      "html": "html/thm-sgd-stability-nonconvex-loss.html",
+      "assignment_html_sha256": "bd58ade2cd7546968766a9aea9b3504bb80dc88b5e64408470d393e55f92351f",
+      "html_sha256": "bd58ade2cd7546968766a9aea9b3504bb80dc88b5e64408470d393e55f92351f",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-sgd-stability-nonconvex-loss.json",
+      "screenshot_metadata_sha256": "f8f341e59ee0bcf217e1b636aef58686b6ad2a2c1bdf24cbc6dfa9f805ec231c",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-sgd-stability-nonconvex-loss--01.png",
+          "sha256": "f8786b24d3e4af3985d857e0f6e2f766fe5fad7822261c635447b1d34fe6c2d0",
+          "capture_sha256": "f8786b24d3e4af3985d857e0f6e2f766fe5fad7822261c635447b1d34fe6c2d0",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-sgd-stability-nonconvex-loss--02.png",
+          "sha256": "7578e1e746e939cba06dc58e216a2edef6cde54de24d81063667787ec553bc8a",
+          "capture_sha256": "7578e1e746e939cba06dc58e216a2edef6cde54de24d81063667787ec553bc8a",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-sgd-stability-nonconvex-loss--03.png",
+          "sha256": "59cee7deffd271549d2d09c2c42873a6fc653cba794a051e3577562321242121",
+          "capture_sha256": "59cee7deffd271549d2d09c2c42873a6fc653cba794a051e3577562321242121",
+          "height": 1267,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "thm-spectral-margin-bound-for-multiclass-networks",
+      "title": "A simultaneous spectral margin bound for multiclass networks",
+      "status": "published",
+      "pages": [
+        "norm-and-margin-generalization-for-neural-networks"
+      ],
+      "source": "items/thm-spectral-margin-bound-for-multiclass-networks.md",
+      "assignment_source_sha256": "746faa4ea5bb69c3e0b5fee6e7114cf056ccb6bc44b959510b3cc3db9abde8d0",
+      "source_sha256": "746faa4ea5bb69c3e0b5fee6e7114cf056ccb6bc44b959510b3cc3db9abde8d0",
+      "snapshot": "snapshots/thm-spectral-margin-bound-for-multiclass-networks.md",
+      "snapshot_sha256": "746faa4ea5bb69c3e0b5fee6e7114cf056ccb6bc44b959510b3cc3db9abde8d0",
+      "html": "html/thm-spectral-margin-bound-for-multiclass-networks.html",
+      "assignment_html_sha256": "730789c8a462480b5282a1b637bd45e6c03b8ebe31b8fa25a6e55850896bfd1c",
+      "html_sha256": "730789c8a462480b5282a1b637bd45e6c03b8ebe31b8fa25a6e55850896bfd1c",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-spectral-margin-bound-for-multiclass-networks.json",
+      "screenshot_metadata_sha256": "5d4374c47dfbefc5992700ac907e942f99ff0ac2aea73d94999679e0f80bf9b2",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-spectral-margin-bound-for-multiclass-networks--01.png",
+          "sha256": "d56aafe643b0ae0f6315149852ce5669c2f24b530f6da6d29f2d75b2704ecce3",
+          "capture_sha256": "d56aafe643b0ae0f6315149852ce5669c2f24b530f6da6d29f2d75b2704ecce3",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-spectral-margin-bound-for-multiclass-networks--02.png",
+          "sha256": "6c85c582b7bc3868c257d52621fc1d3f9bfef486cfeb661b39cec1634d9a4284",
+          "capture_sha256": "6c85c582b7bc3868c257d52621fc1d3f9bfef486cfeb661b39cec1634d9a4284",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-spectral-margin-bound-for-multiclass-networks--03.png",
+          "sha256": "6bb6800e86539b3f284b63d12957e3ea92fe0c29ecdb91ea61839cbd29289dd9",
+          "capture_sha256": "6bb6800e86539b3f284b63d12957e3ea92fe0c29ecdb91ea61839cbd29289dd9",
+          "height": 151,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    },
+    {
+      "id": "thm-warren-polynomial-sign-pattern-bound",
+      "title": "An elementary polynomial sign-pattern bound",
+      "status": "published",
+      "pages": [
+        "relu-approximation-rates-and-depth-expressivity"
+      ],
+      "source": "items/thm-warren-polynomial-sign-pattern-bound.md",
+      "assignment_source_sha256": "deea4c6041ca3368ef5e9fd8d95a49fd091aa3e589eb194d2f5fc0e853c81cf5",
+      "source_sha256": "deea4c6041ca3368ef5e9fd8d95a49fd091aa3e589eb194d2f5fc0e853c81cf5",
+      "snapshot": "snapshots/thm-warren-polynomial-sign-pattern-bound.md",
+      "snapshot_sha256": "deea4c6041ca3368ef5e9fd8d95a49fd091aa3e589eb194d2f5fc0e853c81cf5",
+      "html": "html/thm-warren-polynomial-sign-pattern-bound.html",
+      "assignment_html_sha256": "b7342ba8778a25737c9d5bdce0092879cab58c2dff85d07fef7d9f6638d201cb",
+      "html_sha256": "b7342ba8778a25737c9d5bdce0092879cab58c2dff85d07fef7d9f6638d201cb",
+      "screenshot_metadata": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-warren-polynomial-sign-pattern-bound.json",
+      "screenshot_metadata_sha256": "adcbdeb888685e8afda68f6b2b83dba2ec4784cf5c534d9bec894f98e2a32492",
+      "tiles": [
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-warren-polynomial-sign-pattern-bound--01.png",
+          "sha256": "930701644c884e6c2749478e9509b805128f346433b29b4cd622bb4334fbf0e8",
+          "capture_sha256": "930701644c884e6c2749478e9509b805128f346433b29b4cd622bb4334fbf0e8",
+          "height": 1400,
+          "opened_individually_at_original_resolution": true
+        },
+        {
+          "path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/thm-warren-polynomial-sign-pattern-bound--02.png",
+          "sha256": "0c2bf8d4752ccfe5ae9f6909e3935e6171d211d6fb27e07cc4b799d359701359",
+          "capture_sha256": "0c2bf8d4752ccfe5ae9f6909e3935e6171d211d6fb27e07cc4b799d359701359",
+          "height": 1022,
+          "opened_individually_at_original_resolution": true
+        }
+      ]
+    }
+  ]
+}

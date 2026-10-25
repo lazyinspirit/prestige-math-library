@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-separately-holomorphic-vanishing-on-a-real-box-is-zero.json
+  precheck: pass
 id: lem-separately-holomorphic-vanishing-on-a-real-box-is-zero
 kind: lemma
 title: Separately holomorphic functions vanishing on a real box are zero
@@ -14,12 +17,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: induction
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)"
@@ -48,7 +45,7 @@ $I_1\times\cdots\times I_n$, then $G\equiv0$ on $\mathbb C^n$.
 
 ## Proof
 
-**Proof technique:** induction on $n$.
+**Proof technique:** induction on the number of variables.
 
 1.1 Base case $n=1$. Here $G$ is an entire function of one variable and vanishes on the nondegenerate interval $I_1$. Choose $p$ in the interior of $I_1$; by [F3], $p$ is an accumulation point in $\mathbb C$ of the set where $G$ and the zero function agree, and both are entire [F2]. The identity theorem [F1] on the domain $\mathbb C$ gives $G\equiv0$. [base, F1, F2, F3, given]
 

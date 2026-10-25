@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace.md

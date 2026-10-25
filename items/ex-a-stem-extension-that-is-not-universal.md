@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-stem-extension-that-is-not-universal.json
+  precheck: pass
 id: ex-a-stem-extension-that-is-not-universal
 kind: example
 title: "A stem extension that is not universal"
@@ -14,21 +17,12 @@ sources:
     - title: "Clara Löh, Group Cohomology"
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-05-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+
 ---
 
 ## Example
 
-The central extension C2→D8→C2×C2 is stem but not universal because its base is not perfect.
+The central extension $C_2\to D_8\to C_2\times C_2$ is stem but not universal because its base is not perfect.
 
 ## Verification
 

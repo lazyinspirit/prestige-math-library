@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-nonlinear-functional-remainder-at-parametric-scale.json
+  precheck: pass
 id: ex-nonlinear-functional-remainder-at-parametric-scale
 kind: example
-title: A quadratic remainder at L2 radius n^(-1/4)
+title: A quadratic remainder at an inverse fourth-root L2 radius
 status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62

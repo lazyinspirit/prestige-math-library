@@ -1,0 +1,112 @@
+{
+  "id": "thm-higher-order-rellich-kondrachov",
+  "agent": "/root/rendering_repair_supervisor2/pde_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original tile 02 visibly prints $L^p$ and the backslash/backtick accent in the proof-technique banner. Tile 03 actually covers the continuation rather than the banner; all three original tiles were inspected. The banner renders plain React text, so math delimiters cannot typeset there.",
+      "action": "Use Unicode Lᵖ and Arzelà–Ascoli in the technique banner.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "unsupported-command",
+      "verdict": "confirmed",
+      "reason": "Original standalone tile 02 shows Arzel`a--Ascoli in F6 and H\"older in F8 rather than accented names; tile 03 shows the unparsed Arzel accent again in step 3.1. These TeX accent escapes are outside math and do not typeset as intended.",
+      "action": "Replace the three remaining raw prose accent spellings with equivalent Arzelà–Ascoli and Hölder.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Rendering-only Unicode substitutions in F6, F8, proof-technique text, and step 3.1. No supplier edits or aliases needed.",
+  "source_lines_after": [
+    {
+      "line": 62,
+      "text": "[F6] *Arzelà–Ascoli.* A uniformly bounded equicontinuous family on a nonempty compact metric space has compact closure in the supremum norm; under Countable and Dependent Choice this gives a uniformly convergent subsequence. For complex functions apply the real result to real and imaginary parts. ([[thm-arzela-ascoli-for-real-ck]], [[thm-metric-compactness-equivalences]], [[def-countable-choice]], [[def-dependent-choice]])"
+    },
+    {
+      "line": 66,
+      "text": "[F8] *Hölder interpolation.* For $0<\\beta<\\beta'<1$, a uniformly convergent sequence with uniformly bounded $C^{0,\\beta'}$ seminorms converges in $C^{0,\\beta}$. Indeed, the difference quotient is bounded by the minimum of $2\\|g\\|_\\infty |x-y|^{-\\beta}$ and $[g]_{C^{0,\\beta'}}|x-y|^{\\beta'-\\beta}$, yielding the usual interpolation estimate with a constant depending on $\\beta,\\beta'$. ([[def-local-holder-and-c-two-alpha-norms-on-euclidean-balls]])"
+    },
+    {
+      "line": 70,
+      "text": "**Proof technique:** extract strong Lᵖ convergence for the finite derivative family, interpolate against higher-order Sobolev bounds, and use Arzelà–Ascoli for the supercritical Hölder conclusion."
+    },
+    {
+      "line": 76,
+      "text": "3.1 Consider case (c), and fix $0\\le\\beta<\\min\\{1,k-m-\\frac np\\}$. Choose $\\beta'$ with $\\beta<\\beta'<\\min\\{1,k-m-\\frac np\\}$. By [F3] the sequence is bounded in $C^{m,\\beta'}(\\overline\\Omega)$, so each of its finitely many derivative families of orders at most $m$ is uniformly bounded and equicontinuous on the compact set $\\overline\\Omega$. By [F6], applying Arzelà–Ascoli successively to these derivative families gives a common subsequence on which every $D^\\alpha u_{j_k}$ converges uniformly to a continuous function $v_\\alpha$ on $\\overline\\Omega$. On each ball compactly contained in $\\Omega$, [F7] applied to line segments shows that $v_{\\alpha+e_i}$ is the classical $i$-th derivative of $v_\\alpha$ whenever $|\\alpha|<m$; hence $v_0$ is a representative in $C^m(\\Omega)$ whose derivatives through order $m$ extend continuously to $\\overline\\Omega$. For $\\beta=0$ the uniform convergence is the desired $C^{m,0}$ convergence. For $\\beta>0$, [F8] applied to each difference $D^\\alpha(u_{j_k}-u_{j_\\ell})$, using uniform convergence and the uniform $C^{0,\\beta'}$ bounds, gives convergence in $C^{m,\\beta}(\\overline\\Omega)$ to $v_0$: each uniform limit $v_\\alpha$ retains the bounded $\\beta'$ seminorm by passage to the limit in the pointwise difference quotients, so [F8] applies directly to $D^\\alpha u_{j_k}-v_\\alpha$. Thus the asserted compact embedding holds, and the Axiom of Choice supplies the subsequence and the choice interfaces of [F2] and [F6]. [F3, F6, F7, F8, step 1.1] ∎"
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "meaning_check": "Independently compared all changes against frozen source: Lᵖ denotes exactly the existing L^p convergence in step 1.1; the two named compactness/interpolation results retain identical hypotheses, equations, proof interfaces, and references. Exact replacement reconstruction equals current raw source. Statement and all metadata are byte-identical. This focused rendering check is not a new full mathematical proof audit.",
+  "remaining_issues": [
+    "The technique banner still uses the renderer plain-text/CSS-uppercase path; the local Unicode workaround renders correctly.",
+    "Preview reference-title map reports 13 unrelated parse diagnostics, omitted from its map; this is local ItemBody/current-title coverage, not production route, navigation or Sources-footer coverage."
+  ],
+  "before_raw_sha256": "69f68b969895065a1dcfba0c2398e3193669cf747905123d3e2388edf0c49458",
+  "raw_sha_guard": "Matched immediately before editing",
+  "current_raw_sha256": "5c60a4d9416be6768f1bf053e41bfe36a992ef3e3dbaecad49085a50c819af5c",
+  "metadata_byte_identical": true,
+  "status_preserved_byte_for_byte": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-higher-order-rellich-kondrachov.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-higher-order-rellich-kondrachov.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-higher-order-rellich-kondrachov.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    }
+  ],
+  "original_views": [
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/pde/screenshots/thm-higher-order-rellich-kondrachov--01.png",
+      "sha256": "ec36a911234fab589f16945880de62fd980c98fd1678e6e56c76e56c67892112",
+      "standalone_original_resolution": true
+    },
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/pde/screenshots/thm-higher-order-rellich-kondrachov--02.png",
+      "sha256": "3713feacb067f6da2b952b4c5badb466be6a34bcbc12abddbdda50453b01b3c2",
+      "standalone_original_resolution": true
+    },
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/pde/screenshots/thm-higher-order-rellich-kondrachov--03.png",
+      "sha256": "2e86783a8214082d0151e07fec5a8fd180f54f2b6a91083f02fa9286530d4b60",
+      "standalone_original_resolution": true
+    }
+  ],
+  "native_preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/pde-004-20261024",
+    "manifest_sha256": "82166d231a417834133b3ba0df91a86b43da8caaf3d138637443a3fe58303fe4",
+    "source_sha256": "5c60a4d9416be6768f1bf053e41bfe36a992ef3e3dbaecad49085a50c819af5c",
+    "reference_map_sha256": "9af7485d520438939977238bc959f49ce74f38f2ab01b601f5ee7efb9f382b38",
+    "standalone_original_resolution_tiles_inspected": [
+      1,
+      2,
+      3
+    ],
+    "result": "Fresh tile 02 shows Lᵖ without literal dollars, correct accented names in F6/F8 and the technique banner; tile 03 shows correct Arzelà–Ascoli in step 3.1. No confirmed remaining scoped display defects.",
+    "network": "Local file preview; external requests blocked."
+  }
+}

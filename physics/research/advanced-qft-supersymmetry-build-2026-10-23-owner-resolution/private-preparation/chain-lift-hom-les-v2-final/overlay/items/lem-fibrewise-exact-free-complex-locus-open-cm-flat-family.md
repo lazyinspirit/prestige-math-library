@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fibrewise-exact-free-complex-locus-open-cm-flat-family.md

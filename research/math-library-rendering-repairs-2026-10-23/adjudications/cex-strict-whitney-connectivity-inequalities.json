@@ -1,0 +1,112 @@
+{
+  "id": "cex-strict-whitney-connectivity-inequalities",
+  "agent": "/root/rendering_repair_coordinator/comb_024",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Both original PNG tiles show literal TikZ commands. The opening fence, entire picture and closing fence occupied one source line, which was rendered as inline code rather than a fenced diagram. Percent comments also needed their own lines to preserve the following commands.",
+      "action": "Put opening/closing fences on separate lines and separate TikZ statements and comments.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other:tikz-label-low-contrast",
+      "verdict": "confirmed",
+      "reason": "After native compilation, standalone original-resolution figure shows the white v label against a pale violet disk with little contrast, and a very dark violet vertex-cut annotation against black.",
+      "action": "Remove the cut-vertex fill and brighten only the vertex-cut annotation; retain geometry, ring, labels and all edges.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other:tikz-labels-too-small",
+      "verdict": "confirmed",
+      "reason": "Independent original-resolution reinspection of the earlier standalone native figure confirms approximately 7px node and caption glyphs, with subscripts hard to distinguish. This is concrete diagram legibility loss.",
+      "action": "Add scale=1.8,transform shape to the native picture options, enlarging the entire existing figure proportionally without changing node coordinates, labels, styles, cuts or graph data.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repair fenced TikZ Markdown and restore diagram-label contrast. No graph data or mathematical prose changed. Same-owner guarded followup: uniformly enlarge the existing native picture by 1.8 to make node subscripts and captions legible.",
+  "source_lines_after": [
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Actual graph data",
+      "details": "Nine vertices: v,a1,b1,c1,d1,a2,b2,c2,d2. For each i=1,2 the five lobe edges are ai-ci,ai-di,bi-ci,bi-di,ci-di, and the two attaching edges are v-ai,v-bi: fourteen edges total. No ai-bi edge and no edge joins opposite lobes. Intersections of crossing lobe edges have no node, so are not extra vertices. The final standalone native figure shows all fourteen intended segments; no --cycle paths are used."
+    },
+    {
+      "check": "Degrees and minimum degree",
+      "details": "Each ai and bi has two internal neighbours ci,di plus v: degree 3. Each ci and di has the other three lobe vertices as neighbours: degree 3. Vertex v has a1,b1,a2,b2: degree 4. Sum of degrees is 8*3+4=28=2*14; minimum degree is exactly 3, agreeing with local step 1.2 and F2."
+    },
+    {
+      "check": "Articulation and vertex connectivity",
+      "details": "Deleting v leaves exactly two connected K4-minus-one-edge lobes, each containing ci-di and both ai,bi adjacent to ci,di. The original graph is connected. Thus the violet singleton {v} is a vertex cut and kappa=1 under F1/local definition, as in step 1.1."
+    },
+    {
+      "check": "Edge cut and exact edge connectivity",
+      "details": "The two orange edges va1,vb1 are the entire boundary of the first lobe, so removing both disconnects it (step 1.3). For each i, va_i,vb_i lie on v-ai-ci-bi-v; ai-ci,ai-di,ci-di lie on ai-ci-di-ai; bi-ci,bi-di,ci-di lie on bi-ci-di-bi. Every edge therefore has an alternate path when deleted, and no single edge is a cut (step 1.4). Thus lambda=2."
+    },
+    {
+      "check": "Exact displayed strict inequalities and proof independence",
+      "details": "The diagram caption kappa(G)=1<lambda(G)=2<delta(G)=3 follows from the preceding concrete calculations and matches step 2.1. The underlying Statement refuted, Facts, all five proof steps and all metadata remain byte-identical. The rigorous proof is independent of the figure."
+    },
+    {
+      "check": "Layout-only followup preserves actual graph",
+      "details": "Compared exact current bytes with guarded followup preimage: the only new change is scale=1.8,transform shape on the tikzpicture. All nine node definitions, fourteen edge segments, both cut labels, strict inequality caption, coordinates and diagram styles are otherwise byte-identical. The fresh standalone figure independently shows both K4-minus-ai-bi lobes, all four attaching edges, no extra vertex at crossings, and no lost segments. Uniform positive scaling preserves all incidences and the preceding degree/cut checks; rigorous proof remains independent."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-strict-whitney-connectivity-inequalities.md",
+      "exit_code": 0,
+      "result": "1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-strict-whitney-connectivity-inequalities.md --json",
+      "exit_code": 0,
+      "result": "files=1, checked=1, failed=0, status=pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-strict-whitney-connectivity-inequalities.md --json",
+      "exit_code": 0,
+      "result": "checked=1, errors=[], warnings=[]"
+    },
+    {
+      "command": "TMPDIR=<repo>/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=<local-app>/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-strict-whitney-connectivity-inequalities --out research/math-library-rendering-repairs-2026-10-23/preview-comb-024-20261024-legibility",
+      "exit_code": 0,
+      "result": "Fresh final source native preview: one SVG TikZ figure, two page tiles; capture receipt has zero diagram failures and KaTeX errors. Standalone figure.png inspected at original resolution: node subscripts and cut/inequality captions are clearly distinguishable with no overlap/clipping. Diagram content grows from about 273px to 491px wide, fitting the 1104px carrier."
+    }
+  ],
+  "visual_evidence": "research/math-library-rendering-repairs-2026-10-23/preview-comb-024-20261024-legibility",
+  "current_raw_sha256": "f7f4311df962c56e893fa82f9fafff46093953985b68752fc108489e564a0486",
+  "remaining_issues": [],
+  "prior_report_archive": "research/math-library-rendering-repairs-2026-10-23/adjudication-history/cex-strict-whitney-connectivity-inequalities-0bee3648d176b00df66672f23ee156b608151a277fa22a7d956845f530ea93e3.json",
+  "followup_before_raw_sha256": "75254c438ca07975dda838ee5438f8ae10db30e62b12f500ad8a5717d10cfcf6"
+}

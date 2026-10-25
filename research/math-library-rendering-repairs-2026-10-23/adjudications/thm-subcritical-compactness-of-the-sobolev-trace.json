@@ -1,0 +1,94 @@
+{
+  "id": "thm-subcritical-compactness-of-the-sobolev-trace",
+  "agent": "/root/rendering_repair_supervisor2/pde_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original-resolution frozen tile 02 visibly prints literal $P>N$ in the uppercase technique banner; the same inequality is correctly typeset in adjacent proof prose. The banner is plain renderer text rather than a math-rendering context.",
+      "action": "Replaced only the banner fragment for $p>n$ with when p is greater than n.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Frozen and current native tile 02 show the caret in Bounded C^k domains admit integer-order Sobolev extension as ordinary baseline text. The current supplier title still contains the unformatted C^k, so the original bare wikilink inherits the display defect.",
+      "action": "Added an explicit equivalent local wikilink label with $C^k$; supplier source and link target are unchanged.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Use equivalent prose in the proof-technique banner and format the inherited C^k reference label through an explicit local alias.",
+  "source_lines_after": {
+    "50": "[F4] *The Morrey branch.* For $n<p<\\infty$, the extension theorem at $k=1$ makes the bounded $C^1$ domain $\\Omega$ a $W^{1,p}$-extension domain; hence a bounded sequence in $W^{1,p}(\\Omega)$ has a subsequence whose representatives converge in $C^{0,\\beta}(\\overline\\Omega)$ for every $0\\le\\beta<1-\\frac np$, and the trace of such a class is its classical boundary restriction. ([[thm-extension-theorem-for-bounded-smooth-domains|Bounded $C^k$ domains admit integer-order Sobolev extension]], [[thm-morrey-rellich-compactness-for-p-greater-than-n]], [[lem-sobolev-trace-agrees-with-continuous-boundary-values]])",
+    "54": "**Proof technique:** bound the traces in the boundary fractional space, apply fractional compactness chart by chart, and take the Morrey branch when p is greater than n."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The native proof-technique banner remains plain text with CSS uppercase; equivalent prose is the local workaround.",
+    "Preview reference-title map records 13 diagnostics for unrelated unparseable sources; no full production-route or broad mathematical audit is claimed."
+  ],
+  "before_raw_sha256": "a022c628bd155c894799cf4809a9b2e5dc1580dff365d771cf30629aa7bbbb5d",
+  "after_raw_sha256": "07d53cf35494960e0c2f911f712f028fcc15e8a3ad19b7f9c51638525111fc2b",
+  "exact_frontmatter_preserved": true,
+  "publication_status_preserved": "published",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-subcritical-compactness-of-the-sobolev-trace.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-subcritical-compactness-of-the-sobolev-trace.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-subcritical-compactness-of-the-sobolev-trace.md",
+            "item_id": "thm-subcritical-compactness-of-the-sobolev-trace",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-subcritical-compactness-of-the-sobolev-trace.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/pde/screenshots/thm-subcritical-compactness-of-the-sobolev-trace--01.png",
+      "research/math-library-rendering-audit-2026-10-23/pde/screenshots/thm-subcritical-compactness-of-the-sobolev-trace--02.png"
+    ],
+    "inspection": "Original tiles and both final native tiles inspected at original resolution. Final tile 02 inspected standalone: banner contains readable prose without dollars, and C^k has a raised k; proof rows retain rendered math and chips.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/pde011-independent-final/manifest.json",
+    "manifest_sha256": "f126b10c42bdcc5b6910185a2b4de901ba165ac6a254b6c137f11492d39597cd",
+    "source_sha256": "07d53cf35494960e0c2f911f712f028fcc15e8a3ad19b7f9c51638525111fc2b",
+    "html_sha256": "7b3e28b8fe493b2b51092a394d979d15b59af020be5bf6bfafc01d0952ef116c",
+    "reference_map_sha256": "b2f41dc8385eeb0694a325a4b403094bccef493109cf9cec383da8f7962c6336",
+    "scope": "Current title and complete ItemBody only, including resolved internal titles, proof/facts/remarks/scratch and SSR TikZ. Not the production HTTP route, navigation/dependency widgets, or metadata Sources footer.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "mathematical_check": "The changed banner retains exactly the p>n condition using prose. The formatted reference label retains the same C^k regularity and supplier target. Statement, Facts content other than the reference label, numbered proof, dependencies and sources remain unchanged."
+}

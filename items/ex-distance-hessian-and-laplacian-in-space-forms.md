@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-distance-hessian-and-laplacian-in-space-forms.json
+  precheck: pass
 id: ex-distance-hessian-and-laplacian-in-space-forms
 kind: example
 title: Distance hessian and laplacian in space forms
@@ -35,9 +38,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -117,7 +117,7 @@ interfaces and no family of directions is selected.
 
 ## Proof
 
-**Proof technique:** direct: since the sectional curvature is identically $k$, both the one-sided curvature hypotheses of the Hessian comparison hold, so the two inequalities collapse to the single normal-Hessian identity; adding the known vanishing on the radial direction gives the full tensor $\operatorname{ct}_k(r)(g-dr\otimes dr)$; tracing it in the orthogonal decomposition $T_qM=N\oplus\mathbb R\operatorname{grad}r$ gives the Laplacian, and tracing the constant-curvature tensor gives the Ricci equality that identifies the space form as an equality case of both comparison theorems.
+**Proof technique:** direct: since the sectional curvature is identically the curvature parameter, both the one-sided curvature hypotheses of the Hessian comparison hold, so the two inequalities collapse to the single normal-Hessian identity; adding the known vanishing on the radial direction gives the full tensor as the comparison cotangent times the difference between the metric and the tensor square of the distance differential; tracing it in the orthogonal decomposition of the tangent space at the point into the normal hyperplane and the real line spanned by the distance gradient gives the Laplacian, and tracing the constant-curvature tensor gives the Ricci equality that identifies the space form as an equality case of both comparison theorems.
 
 1.1 The minimizing geodesic, the normal hyperplane and the curvature data. [F1, F2, F3, F4, F5, given] By [F3] there are a unit vector $v\in S_pM$ and a time $t_1$ with $0<t_1<c_p(v)$ and $\exp_p(t_1v)=q$; let $\gamma(t):=\exp_p(tv)$ for $t\ge0$. By [F4] the segment $\gamma|_{[0,t_1]}$ is minimizing from $p$ to $q$, so $t_1=d_g(p,q)=t_0$; hence $q=\gamma(t_0)$ with $0<t_0<c_p(v)$ and $T:=\dot\gamma(t_0)=\operatorname{grad}r(q)$. Put $N:=T^{\perp}\subseteq T_qM$, the orthogonal complement of $T$. Then $T_qM=N\oplus\mathbb RT$, and by [F5], $$dr(W)=g_q\bigl(\operatorname{grad}r(q),W\bigr)=g_q(T,W)\qquad(W\in T_qM),$$ so $dr(T)=|T|_g^2=1$ and $dr$ vanishes on $N$; moreover $r(q)=t_0>0$ and $t_0<\pi/\sqrt k$ when $k>0$ by hypothesis, so the domain restriction of [F7] and [F8] is satisfied. Finally, for every $s\in(0,t_0]$ and every nonzero $X\in\{\dot\gamma(s)\}^{\perp}$ the vector $u:=X/|X|_g$ is a unit vector with $g(u,\dot\gamma(s))=0$, so $(u,\dot\gamma(s))$ is an orthonormal pair and [F2] gives $$\operatorname{Rm}\bigl(X,\dot\gamma(s),\dot\gamma(s),X\bigr)=|X|_g^2\operatorname{Rm}\bigl(u,\dot\gamma(s),\dot\gamma(s),u\bigr)=|X|_g^2\,K\bigl(u\wedge\dot\gamma(s)\bigr)=k|X|_g^2,$$ the last equality because the sectional curvature is constantly $k$; the equality holds also for $X=0$ by four-linearity. Hence both $\operatorname{Rm}(X,\dot\gamma(s),\dot\gamma(s),X)\ge k|X|_g^2$ and the reverse inequality hold for every such $X$, and the geodesic $\gamma$ is the minimizing unit-speed geodesic from $p$ to $q$ with $\dot\gamma(t_0)=\operatorname{grad}r(q)$ required by [F7]. [F1, F2, F3, F4, F5, given]
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-transitive-smooth-actions-identify-m-with-g-mod-h.md

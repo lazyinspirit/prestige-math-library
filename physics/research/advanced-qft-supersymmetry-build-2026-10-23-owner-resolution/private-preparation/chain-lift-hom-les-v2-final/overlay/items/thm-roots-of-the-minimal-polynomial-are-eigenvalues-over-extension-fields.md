@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-roots-of-the-minimal-polynomial-are-eigenvalues-over-extension-fields.md

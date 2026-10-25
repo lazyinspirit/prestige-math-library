@@ -1,0 +1,112 @@
+{
+  "id": "alg-multiple-shooting-for-nonlinear-bvps",
+  "agent": "/root/rendering_repair_coordinator/dnde_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile shows only prose and algorithm steps. An individual segment schematic materially clarifies the distinction between its computed endpoint and the independent next start, which are subtracted in the residual. A generic segment works for every N>=1 without depicting an unjustified joining of trajectories.",
+      "action": "Added a final Remarks illustration with a mesh segment, endpoint-map arrow, dashed residual connector and explicit endpoint-minus-start formula; stated square residual and absence of a zero-residual claim.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only explanatory Remarks and a TikZ schematic. The original carrier, including Definition, steps, title and all metadata/status, remains an exact byte prefix.",
+  "source_lines_after": [
+    40,
+    42,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    60
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_domains": "For 0<=i<N, s_i lies in the supplied segment-start domain U_i subset R^d, the certified map tilde-Phi_i maps U_i to R^d, and s_{i+1} is an independent R^d start. The arrow from s_i to tilde-Phi_i(s_i) is evaluation, not an assertion of exact flow.",
+      "justification": "Definition line 29 and def-certified-ivp-approximation-and-sensitivity-interface Definition specify the approximate endpoint map and its values."
+    },
+    {
+      "relations": "The dashed connector asserts no oriented displacement or equality. The label explicitly defines r_i=tilde-Phi_i(s_i)-s_{i+1}, with exactly the original residual sign. The two time ticks are t_i and t_{i+1}; the ordered mesh and 0<=i<N make this valid also for the first, last, and sole segment.",
+      "justification": "Original Definition line 29; def-nonlinear-two-point-bvp-and-boundary-residual exact multiple-shooting row convention and prop-multiple-shooting-residual-block-jacobian Statement."
+    },
+    {
+      "relations": "There are N interior residual blocks in R^d and one B(s_0,s_N) block in R^d, hence (N+1)d scalar residual entries against (N+1)d scalar unknowns. No residual is asserted to vanish, no trajectory joining is implied, and no exact BVP existence or Newton convergence claim is added.",
+      "justification": "Original Definition lines 29 and 37; prop-multiple-shooting-residual-block-jacobian proof step 2.1. The algorithm remains complete and independent of the figure."
+    }
+  ],
+  "evidence": {
+    "original_path_discrepancy": "The declared diagram-supplement/screenshots path does not exist. Located the authentic PNG in the corresponding category screenshots directory and verified its recorded SHA256.",
+    "original_standalone_image": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/alg-multiple-shooting-for-nonlinear-bvps--01.png",
+    "original_image_sha256": "e7348a159cae5b901fb5a280dd7f97445ea34e7c7329d59147e0342d8e0e9ead",
+    "before_raw_sha256": "379052abb431758d5d60b1f0d9b70b1d7284a3c2ed856632a63011ced75259e7",
+    "current_raw_sha256": "b9a7c0cd819655c45de539aa02d40a3f60565a8790b0068f3d2eac9c56179e0b",
+    "publication_status": "published; original full frontmatter byte-identical",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde-009-final/manifest.json",
+    "preview_source_sha256": "b9a7c0cd819655c45de539aa02d40a3f60565a8790b0068f3d2eac9c56179e0b",
+    "preview_reference_map_sha256": "13bb849a0b1cc11c631fea34a83515811c3323d48b5c79cc84bc17f3b279d5d6",
+    "native_visual_check": "Viewed final PNG standalone at original resolution. TikZ compiles; time ticks, evaluation arrow, detached next start, dashed connector and residual formula all display with visible pale strokes and labels on dark background, without collisions or clipped diagram content. The capture has blank space in the unchanged upper body; the original authentic screenshot was inspected for that body. No graph closing edge or open/closed endpoint encoding is used."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-multiple-shooting-for-nonlinear-bvps.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-multiple-shooting-for-nonlinear-bvps.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-multiple-shooting-for-nonlinear-bvps.md",
+            "item_id": "alg-multiple-shooting-for-nonlinear-bvps",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-multiple-shooting-for-nonlinear-bvps.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnde-009 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-multiple-shooting-for-nonlinear-bvps --out research/math-library-rendering-repairs-2026-10-23/previews/dnde-009-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [
+    "Final local screenshot has blank space in the unchanged upper body; the new Remarks and compiled figure are visible. Preview is local ItemBody coverage only; unrelated reference-map diagnostics are recorded in its manifest."
+  ]
+}

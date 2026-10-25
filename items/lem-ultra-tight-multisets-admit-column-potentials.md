@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-ultra-tight-multisets-admit-column-potentials.json
+  precheck: pass
 id: lem-ultra-tight-multisets-admit-column-potentials
 kind: lemma
 title: "Ultra-tight multisets admit integer column potentials"
@@ -13,12 +16,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "Matthew Fayers, Core blocks of Ariki–Koike algebras, author manuscript, J. Algebraic Combin. 26 (2007), 47–81"
@@ -107,3 +104,21 @@ Statement.
 ## Remarks
 
 The proof is a finite induction: it uses only finite multisets, integer arithmetic, finiteness of the directed graph and the existence of a shortest path among finitely many paths, so it uses no choice principle. The parametrization by $s\in\mathbb Z^r$ is the one used by the arithmetic application on this page; Fayers' original parametrization by $a_1,\dots,a_{r-1}$ is recovered by $a_{kl}=s_k-s_l$ with $s_k=\sum_{i\ge k}a_i$.
+
+In the no-path branch of step 6.1, the reachable set gives the following cut of $G$. The boxes represent vertex sets, and the middle label records the absence of every directed edge from $T$ to $R$, rather than an edge of $G$.
+
+```tikz
+\begin{tikzpicture}
+\draw[rounded corners] (0,0) rectangle (4,2.4);
+\draw[rounded corners] (7,0) rectangle (11,2.4);
+\node at (2,1.95) {$T\quad\mathrm{reachable\ from}\ t$};
+\node at (2,1.2) {$t\in T$};
+\node at (2,0.5) {$\hat s_k=s_k+1\quad(k\in T)$};
+\node at (9,1.95) {$R=\{1,\ldots,r\}\setminus T$};
+\node at (9,1.2) {$r\in R$};
+\node at (9,0.5) {$\hat s_k=s_k\quad(k\in R)$};
+\node at (5.5,1.2) {$\mathrm{no\ edges}\ T\to R$};
+\end{tikzpicture}
+```
+
+Here $k\to l$ means that some occurrence $y\in X$ has $y_k-y_l=a_{kl}-1$. Reachability excludes all arrows from $T$ to $R$: their targets would also be reachable from $t$. Thus the update raises $a_{tr}$ by one; it raises $a_{kl}$ by one on $T\times R$, lowers it by one on $R\times T$, and leaves it unchanged within either set. This is the cut used in step 6.1 to preserve the pair bounds. The rigorous proof above is independent of this illustration.

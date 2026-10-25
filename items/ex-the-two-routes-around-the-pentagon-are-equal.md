@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-two-routes-around-the-pentagon-are-equal.json
+  precheck: pass
 id: ex-the-two-routes-around-the-pentagon-are-equal
 kind: example
 title: "The two routes around the pentagon are equal"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-mac-lane-coherence-in-the-canonical-map-form]
 proof_strategy: direct
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -45,3 +41,23 @@ $A\otimes(B\otimes(C\otimes D))$.
 1.2 The other route is the composite $((A\otimes B)\otimes C)\otimes D \xrightarrow{\alpha_{A,B,C}\otimes1_D} (A\otimes(B\otimes C))\otimes D \xrightarrow{\alpha_{A,B\otimes C,D}} A\otimes((B\otimes C)\otimes D) \xrightarrow{1_A\otimes\alpha_{B,C,D}} A\otimes(B\otimes(C\otimes D))$. [given]
 
 2.1 Both composites are canonical morphisms with the same source and target, so [L1] makes them equal. [L1, step 1.1, step 1.2] ∎
+
+
+## Remarks
+
+The pentagon below displays the two routes of steps 1.1 and 1.2. Each vertex is an object of the given monoidal category; $1_A$ and $1_D$ denote identity morphisms. All parentheses are retained, so no strictness assumption is used. Its commutativity is the equality proved in step 2.1.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (s) at (-4,1.8) {$((A\otimes B)\otimes C)\otimes D$};
+\node (m) at (0,4) {$(A\otimes B)\otimes(C\otimes D)$};
+\node (t) at (4,1.8) {$A\otimes(B\otimes(C\otimes D))$};
+\node (u) at (-3,-1.5) {$(A\otimes(B\otimes C))\otimes D$};
+\node (v) at (3,-1.5) {$A\otimes((B\otimes C)\otimes D)$};
+\draw[->] (s) -- node[above left] {$\alpha_{A\otimes B,C,D}$} (m);
+\draw[->] (m) -- node[above right] {$\alpha_{A,B,C\otimes D}$} (t);
+\draw[->] (s) -- node[left] {$\alpha_{A,B,C}\otimes1_D$} (u);
+\draw[->] (u) -- node[below] {$\alpha_{A,B\otimes C,D}$} (v);
+\draw[->] (v) -- node[right] {$1_A\otimes\alpha_{B,C,D}$} (t);
+\end{tikzpicture}
+```

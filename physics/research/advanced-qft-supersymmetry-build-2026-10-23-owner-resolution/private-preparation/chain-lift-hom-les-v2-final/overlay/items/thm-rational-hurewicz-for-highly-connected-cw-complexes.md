@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-rational-hurewicz-for-highly-connected-cw-complexes.md

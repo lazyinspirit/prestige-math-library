@@ -1,0 +1,77 @@
+{
+  "id": "thm-bounded-borel-pvm-integral",
+  "agent": "/root/rendering_repair_coordinator/fa_014",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly prints \\mathcal B(X,Y) in the A4 link. The frozen/current consumer initially match, and current supplier title still uses legacy \\(…\\) delimiters. This is a link-label rendering failure, not a mathematical error.",
+      "action": "Added an explicit label with $Y$ and $\\mathcal B(X,Y)$ on the same supplier wikilink in A4.",
+      "status": "repaired-and-visually-verified"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced only the inherited completeness-reference display label with supported inline mathematics; the linked supplier identity is unchanged.",
+  "source_lines_after": [
+    {
+      "line": 51,
+      "text": "[A4] $\\mathcal B(H)$ is complete for the operator norm ([[thm-bounded-operator-space-is-banach|If $Y$ is Banach then $\\mathcal B(X,Y)$ is Banach]], [[def-hilbert-space]])."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "protected_metadata_preserved": true,
+  "publication_status": "published; frontmatter byte-identical to frozen before",
+  "before_raw_sha256": "90ec16fa71d695a6ed46961c892dc8b7c0401d65e291188cbd31e9b52fd02a7a",
+  "after_raw_sha256": "b40ae6f0e169299aa3674b3b5e33550176fe09026f8cd48c23154fb6a614fdea",
+  "preedit_guard": "Matched queue before_raw_sha256 immediately before the sole edit.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-bounded-borel-pvm-integral.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-bounded-borel-pvm-integral.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-bounded-borel-pvm-integral.md",
+            "item_id": "thm-bounded-borel-pvm-integral",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-bounded-borel-pvm-integral.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/functional-analysis/screenshots/thm-bounded-borel-pvm-integral--01.png",
+    "original_inspection": "Standalone original resolution",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/fa-014/manifest.json",
+    "preview_source_sha256": "b40ae6f0e169299aa3674b3b5e33550176fe09026f8cd48c23154fb6a614fdea",
+    "preview_reference_map_sha256": "04a67795d97c61d2a8f1832beddc1c9bedddf6ac16a888e4c4e1ade7b1362a18",
+    "preview_inspected": "research/math-library-rendering-repairs-2026-10-23/previews/fa-014/screenshots/thm-bounded-borel-pvm-integral--01.png",
+    "result": "Standalone original-resolution native preview shows Y and calligraphic B(X,Y) correctly typeset in A4, with no raw TeX.",
+    "preview_exit_code": 0,
+    "limitations": "Local ItemBody preview, not production route; 16 unrelated reference-map parse diagnostics reported."
+  },
+  "remaining_issues": []
+}

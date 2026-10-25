@@ -1,0 +1,806 @@
+{
+  "version": 1,
+  "scope": [
+    "def-aqft-local-operator-and-dimension",
+    "lem-aqft-invariant-quotient-exactness",
+    "lem-aqft-finite-order-local-operator-space-finite-dimensional",
+    "def-aqft-lsz-amplitude-data",
+    "def-aqft-operator-basis-quotient",
+    "prop-aqft-integration-by-parts-eom-and-field-redefinition-redundancy",
+    "thm-aqft-field-redefinition-observable-equivalence-at-fixed-order",
+    "ex-aqft-operator-basis-reduction"
+  ],
+  "contracts": {
+    "def-aqft-local-operator-and-dimension": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "The Definition introduces data without asserting a theorem; no finite check is applicable.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition permits an empty finite species set I: J_r=0 and P_r=C. P_{r,q,D} is C at D=0 and zero otherwise; the invariant subspace has the same values."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits q=0 and a target weight with no matching monomial; the selected space is then zero or only its allowed constant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits a single field species and a single jet generator; it assumes no positive lower bound on the finite field list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits zero-dimensional even or odd components and still specifies the finite jet and degree bounds. The representation on the finite graded jet space preserves parity and assigned weights; the explicitly defined contragredient action on P_r therefore preserves each selected P_{r,q,D}, and polynomial evaluation is parity-preserving."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition admits r=0 and q=0. The former retains only undifferentiated fields; the latter retains just constants at engineering weight zero. Both are finite-order data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite species set and each representation are specified inputs of the jet construction. No selection from a family of unspecified nonempty sets is made in defining P_r or its invariant subspace."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Local operators are assigned elements of a finite supercommutative jet algebra, and engineering dimension is a chosen weight. The Definition gives no equivalence theorem or converse about observed scaling dimensions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Local operators are assigned elements of a finite supercommutative jet algebra, and engineering dimension is a chosen weight. The Definition gives no equivalence theorem or converse about observed scaling dimensions."
+        }
+      ]
+    },
+    "lem-aqft-invariant-quotient-exactness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-reductive-and-linearly-reductive-over-c",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a complex affine algebraic group\n([[def-rational-action-on-affine-variety]]).\n\n**Unipotent subgroups.** A closed subgroup $U\\subseteq G$ is **unipotent** if\nevery non-zero finite-dimensional rational $U$-module has a non-zero $U$-fixed\nvector. This fixed-vector condition is the characterization used in Brion's\nExample 1.22 (printed p. 8), and it is\nthe only form of the notion used in this pair. Equivalently, by the Lie–Kolchin\ntheorem, $U$ is unipotent in the standard sense that it admits no non-trivial\nrational characters and all its elements are unipotent; this equivalence is\nrecorded as a sourced parenthetical companion to the definition (Brion Example\n1.22 cites Lie–Kolchin) and is not used as a supplier anywhere in this pair, so\nno edge to the higher-order unipotent/solvable page is introduced.\n\n**Reductive and linearly reductive groups.** The group $G$ is **reductive** if\nit has no non-trivial closed normal unipotent subgroup, and **linearly\nreductive** if every finite-dimensional rational $G$-module is completely\nreducible, i.e. a direct sum of simple $G$-submodules\n([[def-completely-reducible-representation]], [[def-semisimple-module]]).\n\nOver $\\mathbf C$ the two notions coincide: every complex\nreductive affine algebraic group is linearly reductive, and conversely a\nlinearly reductive $G$ has no non-trivial closed normal unipotent subgroup.\nBoth implications, together with the identity-component reduction below, are\nproved in\n[[thm-complete-reducibility-and-reynolds-operator-for-complex-reductive-group]];\nthis definition only records them for consumers of that theorem.\n\nBoth notions depend only on the identity component, in the sense that $G$ is\nreductive if and only if $G^\\circ$ is, and $G$ is linearly reductive if and\nonly if $G^\\circ$ is; the passage from $G^\\circ$ to the finite component group\nfor both notions is carried out in the same theorem.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complete-reducibility-and-reynolds-operator-for-complex-reductive-group",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice inherited from the named suppliers. Let $G$ be a\ncomplex reductive affine algebraic group\n([[def-reductive-and-linearly-reductive-over-c]]).\n\n(i) Every finite-dimensional rational $G$-module is completely reducible, so\n$G$ is linearly reductive.\n\n(ii) Every rational $G$-module $V$ is a direct sum of simple submodules; the\ninvariant subspace $V^G$ therefore has a unique $G$-stable complement $V_G$,\nthe sum of all simple submodules on which $G$ acts non-trivially. The\nprojection $R_V:V\\to V^G$ with kernel $V_G$ is the **Reynolds operator** of\n$V$; it is $G$-equivariant, restricts to the identity of $V^G$, and is natural:\nfor every morphism $f:V\\to W$ of rational $G$-modules one has\n$R_W\\circ f=f^G\\circ R_V$, and if $f$ is surjective then so is\n$f^G:V^G\\to W^G$.\n\n(iii) If $A$ is a commutative $G$-algebra on which $G$ acts by algebra\nautomorphisms and which is a rational $G$-module, then $R_A$ is $A^G$-linear:\n$R_A(ab)=a\\,R_A(b)$ for $a\\in A^G$, $b\\in A$.\n\n(iv) When $K\\subseteq G$ is a compact subgroup whose Zariski closure in $G$ is\nall of $G$, the Reynolds operator of a finite-dimensional rational $G$-module\nis the invariant average $R_V(v)=\\int_K g\\cdot v\\,dg$ with respect to\nnormalized Haar measure; in particular $R_V(v)$ is the unique element of $V^G$\nin the convex hull of the $K$-orbit of $v$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $N$ is $G$-stable, $g\\cdot(v+N):=\\rho(g)v+N$ is well-defined on $V/N$. In a basis extending a basis of $N$, the quotient action is the lower-right block of the algebraic matrix $\\rho(g)$, so $V/N$ is a finite-dimensional rational $G$-module; the quotient map $\\pi$ is surjective and equivariant. Its restriction maps $V^G$ into $(V/N)^G$, and its kernel is $\\ker(\\pi|_{V^G})=V^G\\cap N$ by the definition of the quotient.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under A1 and the reductive hypothesis F1, apply F2 to the equivariant surjection $\\pi$; it follows that $\\pi^G:V^G\\to(V/N)^G$ is surjective.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The displayed map is well-defined because changing $v$ by an element of $V^G\\cap N$ leaves $v+N$ unchanged. It is injective by the kernel computation in step 1.1 and surjective by step 1.2, so it is the claimed canonical linear isomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "For the trivial group, V=C^2 and N=span(e1), the invariant map C^2→C is surjective with kernel N, so the induced map is an isomorphism.",
+        "For N=0 the quotient map is identity; for N=V both quotient spaces are zero."
+      ],
+      "finite_checks_disposition": "Exact finite specializations of the stated algebraic or formal-order argument; they are sanity checks, not substitutes for the general proof.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 remain valid for N=V, when V/N and the invariant quotient are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include N=0, where the quotient map is the identity on V and on invariants."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the proof applies to a one-dimensional V or a trivial group without a dimension or nontriviality restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the kernel for every N, including N=V; step 1.2 remains valid when the target is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The invariant-quotient map is defined for a finite-dimensional module and a subspace, without a real parameter interval or a limiting endpoint. The algebraic extremes N=0 and N=V are covered by its kernel and surjectivity argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 applies the Reynolds-surjectivity result under A1, its explicit full-AC hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The invariant-quotient Statement asserts surjectivity, computes a kernel, and constructs an isomorphism. It does not claim a converse characterizing complex reductivity from exactness of this one quotient map."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The invariant-quotient Statement asserts surjectivity, computes a kernel, and constructs an isomorphism. It does not claim a converse characterizing complex reductivity from exactness of this one quotient map."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Read proof 1.1, 1.2, 2.1, published reductive Definition and Reynolds Statement (ii)/Proof 8.1, and Brion pp. 8–9. Quotient stability gives rationality and an equivariant surjection; natural Reynolds projection lifts invariants under declared AC. Kernel and induced coset map checked for V=0, N=0 and N=V. Both exact rows and inclusion/quotient squares of tikzcd agree with the proof. No defect; published transitive supplier tree not recursively audited."
+      }
+    },
+    "lem-aqft-finite-order-local-operator-space-finite-dimensional": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-local-operator-and-dimension",
+          "source_section": "Definition",
+          "quote": "Use natural units $c=\\hbar=1$ on four-dimensional Minkowski space $M=\\mathbb R^{1,3}$ with coordinates $x^0=ct,x^1,x^2,x^3$ and metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. Fix a complex affine algebraic group $G$ with no nontrivial closed normal unipotent subgroup, where unipotent means that every nonzero finite-dimensional rational module has a nonzero fixed vector; this is the reductive hypothesis. Fix a finite set $I$ of field species. For each $i\\in I$, fix a finite-dimensional complex $\\mathbb Z/2$-graded vector space $\\Phi_i=\\Phi_i^{\\bar 0}\\oplus\\Phi_i^{\\bar 1}$ with a homogeneous basis and its component parities, and an algebraic representation $\\rho_i:G\\to\\operatorname{GL}(\\Phi_i)$ preserving the grading. Include the declared spacetime-index action in $G$ or in its specified finite-dimensional representation data.\n\nFor the field interpretation, fix a finite Grassmann coefficient algebra $\\mathcal G=\\Lambda_{\\mathbb C}(\\zeta_1,\\ldots,\\zeta_s)$, $s\\geq0$, with its usual grading by generator degree modulo two. A field configuration assigns to each homogeneous component of parity $\\bar p$ a function $M\\to\\mathcal G_{\\bar p}$ whose coefficient at each exterior monomial is smooth; spacetime derivatives are taken coefficientwise. Evaluation of a polynomial on an $r$-jet means the parity-preserving algebra homomorphism that sends each polynomial coordinate to the corresponding field component or derivative at that point.\n\nFix a derivative cutoff $r\\geq0$, a maximum polynomial field degree $q\\geq0$, and a rational engineering weight $\\Delta_i$ for each field species. A derivative $\\partial_\\mu$ has engineering weight one, and an $s$-jet generator is a component of $\\partial_{\\mu_1}\\cdots\\partial_{\\mu_s}\\phi_i(x)$ for $0\\leq s\\leq r$. If covariant derivatives are used, their finite jet generators and $G$-action are included explicitly in the same data. Let $J_r$ be the resulting finite-dimensional $\\mathbb Z/2$-graded vector space with its specified algebraic representation $\\rho_r:G\\to\\operatorname{GL}(J_r)$, required to preserve the grading and the assigned engineering weights. Its polynomial algebra is the supercommutative algebra $P_r=\\operatorname{Sym}(J_{r,\\bar 0}^{*})\\otimes\\Lambda(J_{r,\\bar 1}^{*})$: even generators commute and odd generators anticommute. The induced left $G$-action on $P_r$ is $(g\\cdot f)(z)=f(\\rho_r(g^{-1})z)$ for $g\\in G$, $f\\in P_r$, and $z\\in J_r$. For a fixed weight $D\\in\\mathbb Q$, let $P_{r,q,D}$ be the complex span of monomials of total engineering weight $D$ and total polynomial degree at most $q$.\n\nA local operator in this finite-order data is an element of $P_{r,q,D}$ evaluated at $x$ on the $r$-jet of the fields. A scalar operator invariant under the declared symmetries is an element of $V_{r,q,D}=P_{r,q,D}^{G}$. Engineering dimension means this assigned mass weight; it is not a statement about an observed quantity. In four dimensions a term with operator $\\mathcal O_D$ has the convention $C\\mathcal O_D/\\Lambda^{D-4}$, where $\\Lambda$ has mass dimension one and $C$ is dimensionless. Reality conditions, when required for a real action, are additional conjugation data on $V_{r,q,D}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$, the polynomial algebra consists only of constants, so its degree-at-most-$q$ subspace has dimension at most one. If $n>0$, every monomial is indexed by an exponent vector $(a_1,\\ldots,a_n)$ with $0\\leq a_j\\leq q$ for each $j$, since $\\sum_j a_j\\leq q$; hence the full degree-at-most-$q$ algebra is spanned by at most $(q+1)^n$ monomials. The exterior generators only reduce this finite set because their exponents are restricted to $0$ or $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The subspace $P_{q,D}$ is spanned by the subset of those finitely many monomials whose assigned weights sum to $D$, so it is finite-dimensional; if no monomial has weight $D$, it is the zero space. The invariant vectors $P_{q,D}^{G}$ form a linear subspace of $P_{q,D}$ because the action preserves parity and weight, and every subspace of a finite-dimensional vector space is finite-dimensional.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "For n=0 the degree-at-most-q algebra has at most the constant monomial; for n=1 the exponent list has at most q+1 entries.",
+        "For one even generator x and one odd generator theta with q=2, allowed monomials are 1, x, theta, x^2, x theta; the finite bound holds."
+      ],
+      "finite_checks_disposition": "Exact finite specializations of the stated algebraic or formal-order argument; they are sanity checks, not substitutes for the general proof.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles n=0 directly, when the polynomial algebra contains at most its constant monomial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers q=0; step 2.1 allows the target weight component to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the exponent bound for n=1 as a special case of the finite-basis count."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly gives the zero subspace when no monomial has target weight D."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 bounds exponents by 0<=a_j<=q, including q=0; then only the constant monomial remains. Step 2.1 selects the weight-D subset, which is empty if no monomial has that weight."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A finite homogeneous basis is supplied in the Statement; step 1.1 enumerates its bounded exponent vectors and step 2.1 takes a subset. No representatives from arbitrary nonempty fibers are chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite-degree monomial counting lemma concludes finite dimensionality of a span and its invariant subspace. It asserts no converse that finite dimensionality forces the supplied degree cutoff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite-degree monomial counting lemma concludes finite dimensionality of a span and its invariant subspace. It asserts no converse that finite dimensionality forces the supplied degree cutoff."
+        }
+      ]
+    },
+    "def-aqft-lsz-amplitude-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "The Definition introduces data without asserting a theorem; no finite check is applicable.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The regulator index set D is explicitly nonempty; no regulator limit is defined for an empty index set. With no odd coordinates, odd integration is the identity. Empty external tuples use empty products equal to 1, and the zero-fold approach domain is the singleton empty tuple; no existence of external channels is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no zero-value implication beyond the cases explicitly identified in its statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A singleton regulator preorder is allowed: its net is constant and its limit is that value in the specified Hausdorff kernel space. One external channel is allowed with the supplied positive mass, nonzero residue, chosen root, and specified pole approach data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires nonzero simple-pole residues and an invertible overlap matrix, excluding those degenerate cases. Each nonzero complex residue comes with a fixed chosen square root; both compared descriptions use that root and the same U. U-inverse contraction of the external-leg overlap equation is valid also for equal masses. Zero residues and singular U are excluded; empty sectors use empty products. Finite odd polynomials and holomorphic even coefficients define DF and nilpotent Taylor substitution. DF=I modulo epsilon gives invertible diagonal blocks by a finite geometric series. The exact integration identity is supplied separately, with contour/boundary or measure-density conditions; no general Berezinian integral theorem is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: At N=0 the truncated coefficient ring is C and the coordinate change is the identity. For every retained coefficient, regulator convergence is the explicit eventual-neighborhood condition in E_n along D. The subsequent pole limit uses the stated approach domain B_n and Hausdorff target T_n; no interchange with regulator removal or distributional restriction is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The regulator integration functional, local map, Jacobian identity, masses and overlap data are specified parts of an LSZ datum, not objects chosen by a family-selection argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The LSZ interface defines a normalized joint residue conditional on supplied regulator and stable-pole data. It proves no equivalence between such a datum and existence of a continuum quantum field theory."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The LSZ interface defines a normalized joint residue conditional on supplied regulator and stable-pole data. It proves no equivalence between such a datum and existence of a continuum quantum field theory."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "All Definition paragraphs independently checked against its finite-jet supplier and CPV §2 equations (2.2)–(2.8); Witten §3.1 (3.6) checked for the algebraic Berezinian. Confirmed and repaired all three refuter findings: explicit fixed square roots; overlap equation and U-inverse channel projection; holomorphic even/polynomial odd coordinate coefficients and derivative/domain requirements. Coordinate-volume Berezinian is conditional on the exact contour/boundary identity; arbitrary measures retain their full supplied multiplier. N=0 is identity, empty sectors use empty determinants/products, zero-source denominator and residues must be units/nonzero, singular U is excluded. Equal-mass channels remain separated by U-inverse contraction. The sole direct item consumer is the owned equivalence theorem; its normalization is synchronized, and its outside SUSY-action consumer invokes exact full hypotheses and needs no repair. No empirical existence or continuum assertion. Step-5 unit 16 scoped repair: previously unspecified regulator removal is now a net along an explicitly supplied nonempty directed preorder, after common complex-linear reconstruction into specified Hausdorff kernel spaces, coefficientwise in R_N. Pole extraction has separately supplied approach domains, linear slicing/continuation maps and Hausdorff targets; its order follows regulator removal. Equal regulated source derivatives reconstruct to identical nets, whose unique limits and subsequent identical pole extractions agree. The direct equivalence-theorem consumer uses exactly these common operations and remains sound. This is the repair author’s scoped check, not an independent review; prior review attribution is retained."
+      }
+    },
+    "def-aqft-operator-basis-quotient": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "The Definition introduces data without asserting a theorem; no finite check is applicable.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition allows W_D or V_D to be zero, for example when no retained monomial has weight D. Its quotient is then zero and its vector-space basis is represented by the empty finite list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits R_D=0, in which case the quotient is V_D itself."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits a one-element basis when the quotient has dimension one; it imposes no lower dimension bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits R_D=V_D, giving the zero quotient, and records only the declared relation span."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes finite cutoffs r and q; their allowed value zero leaves respectively undifferentiated jets or constants. R_D=0 and R_D=V_D give the full invariant space and the zero quotient."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "An operator basis is defined as a finite list of representatives of a basis of a finite-dimensional quotient. Representatives are needed only for finitely many classes, not for an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition declares equality of two operator classes precisely by their difference lying in R_D. Equal quotient cosets therefore have difference in the specified invariant relation subspace."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition of V_D/R_D identifies cosets differing by a vector in R_D, so a declared invariant relation makes the two operator representatives the same class; this says nothing about undeclared observable relations."
+        }
+      ]
+    },
+    "prop-aqft-integration-by-parts-eom-and-field-redefinition-redundancy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-aqft-local-operator-and-dimension",
+          "source_section": "Definition",
+          "quote": "Use natural units $c=\\hbar=1$ on four-dimensional Minkowski space $M=\\mathbb R^{1,3}$ with coordinates $x^0=ct,x^1,x^2,x^3$ and metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. Fix a complex affine algebraic group $G$ with no nontrivial closed normal unipotent subgroup, where unipotent means that every nonzero finite-dimensional rational module has a nonzero fixed vector; this is the reductive hypothesis. Fix a finite set $I$ of field species. For each $i\\in I$, fix a finite-dimensional complex $\\mathbb Z/2$-graded vector space $\\Phi_i=\\Phi_i^{\\bar 0}\\oplus\\Phi_i^{\\bar 1}$ with a homogeneous basis and its component parities, and an algebraic representation $\\rho_i:G\\to\\operatorname{GL}(\\Phi_i)$ preserving the grading. Include the declared spacetime-index action in $G$ or in its specified finite-dimensional representation data.\n\nFor the field interpretation, fix a finite Grassmann coefficient algebra $\\mathcal G=\\Lambda_{\\mathbb C}(\\zeta_1,\\ldots,\\zeta_s)$, $s\\geq0$, with its usual grading by generator degree modulo two. A field configuration assigns to each homogeneous component of parity $\\bar p$ a function $M\\to\\mathcal G_{\\bar p}$ whose coefficient at each exterior monomial is smooth; spacetime derivatives are taken coefficientwise. Evaluation of a polynomial on an $r$-jet means the parity-preserving algebra homomorphism that sends each polynomial coordinate to the corresponding field component or derivative at that point.\n\nFix a derivative cutoff $r\\geq0$, a maximum polynomial field degree $q\\geq0$, and a rational engineering weight $\\Delta_i$ for each field species. A derivative $\\partial_\\mu$ has engineering weight one, and an $s$-jet generator is a component of $\\partial_{\\mu_1}\\cdots\\partial_{\\mu_s}\\phi_i(x)$ for $0\\leq s\\leq r$. If covariant derivatives are used, their finite jet generators and $G$-action are included explicitly in the same data. Let $J_r$ be the resulting finite-dimensional $\\mathbb Z/2$-graded vector space with its specified algebraic representation $\\rho_r:G\\to\\operatorname{GL}(J_r)$, required to preserve the grading and the assigned engineering weights. Its polynomial algebra is the supercommutative algebra $P_r=\\operatorname{Sym}(J_{r,\\bar 0}^{*})\\otimes\\Lambda(J_{r,\\bar 1}^{*})$: even generators commute and odd generators anticommute. The induced left $G$-action on $P_r$ is $(g\\cdot f)(z)=f(\\rho_r(g^{-1})z)$ for $g\\in G$, $f\\in P_r$, and $z\\in J_r$. For a fixed weight $D\\in\\mathbb Q$, let $P_{r,q,D}$ be the complex span of monomials of total engineering weight $D$ and total polynomial degree at most $q$.\n\nA local operator in this finite-order data is an element of $P_{r,q,D}$ evaluated at $x$ on the $r$-jet of the fields. A scalar operator invariant under the declared symmetries is an element of $V_{r,q,D}=P_{r,q,D}^{G}$. Engineering dimension means this assigned mass weight; it is not a statement about an observed quantity. In four dimensions a term with operator $\\mathcal O_D$ has the convention $C\\mathcal O_D/\\Lambda^{D-4}$, where $\\Lambda$ has mass dimension one and $C$ is dimensionless. Reality conditions, when required for a real action, are additional conjugation data on $V_{r,q,D}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-operator-basis-quotient",
+          "source_section": "Definition",
+          "quote": "Fix a finite jet order $r$, maximum polynomial field degree $q$, engineering weight $D$, finite field-species list, coefficient field $\\mathbb C$, and complex reductive affine algebraic group $G$ with the finite-dimensional rational action specified on the jet generators, including the declared spacetime-index symmetries. Let $W_D$ be the finite-dimensional space of all local polynomials of weight $D$ and degree at most $q$, before imposing $G$-invariance, and let $V_D=W_D^G$ be its invariant scalar subspace. An admitted raw relation space is a specified $G$-stable linear subspace $\\widetilde R_D\\leq W_D$, given by explicit linear identities among the chosen polynomials. Its invariant part is $R_D=\\widetilde R_D\\cap V_D$. Any action, boundary, or observable interpretation of the selected identities is extra mathematical data and must be stated with the result that verifies it.\n\nThe finite-order invariant operator-basis quotient is\n\n$$\n\\mathcal Q_D:=V_D/R_D.\n$$\n\nTwo invariant operators represent the same class exactly when their difference lies in $R_D$. An operator basis is any finite list of representatives in $V_D$ of a vector-space basis of $\\mathcal Q_D$. The quotient records precisely the declared relation space; it does not assert that every relation relevant to an arbitrary EFT, observable, or infinite operator tower has been included.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-aqft-invariant-quotient-exactness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a complex reductive affine algebraic group, let $V$ be a finite-dimensional complex vector space with an algebraic representation $\\rho:G\\to\\operatorname{GL}(V)$, and let $N\\leq V$ be a linear subspace satisfying $\\rho(g)N=N$ for every $g\\in G$. Define $V^G=\\{v\\in V:\\rho(g)v=v\\text{ for all }g\\in G\\}$, give $V/N$ the induced representation, and let $\\pi:V\\to V/N$ be the quotient map. Then the restriction $\\pi^G:V^G\\to(V/N)^G$ is surjective and has kernel $V^G\\cap N$. Consequently the map\n\n$$\nV^G/(V^G\\cap N)\\longrightarrow(V/N)^G,\\qquad v+(V^G\\cap N)\\longmapsto v+N\n$$\n\nis a canonical complex-linear isomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The quotient map $W_D\\to W_D/\\widetilde R_D$ is equivariant because $\\widetilde R_D$ is $G$-stable. By F1 its source is a finite-dimensional rational module, so under A1 we can apply F3 and conclude that its restriction to invariants is surjective.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "An admitted integration-by-parts density is $\\partial_\\mu J^\\mu$ with compactly supported $J^\\mu$. Its action integral is zero by A2, so adding such a density does not change the action functional under the stated boundary convention.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By A3 and the admissibility condition in A4, the first variation of $S_0$ in direction $-\\epsilon^kF$ is $-\\epsilon^k\\mathcal I(F^a\\mathcal E_a^{(0)})$. The formal Taylor terms of degree at least two in the displacement have powers at least $\\epsilon^{2k}$, which are in $O(\\epsilon^{k+1})$ because $k\\geq1$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A3",
+            "A4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "To construct a formal inverse through order $N$, use A4 and seek $\\Phi_k=\\operatorname{id}+\\sum_{m=k}^N\\epsilon^mH_m$. Because $F$ is smooth in finitely many jet coordinates, each coefficient of $F(\\Phi_k(\\phi))$ through order $N$ is defined by a finite Taylor expansion. At order $k$, the coefficient of $\\Psi_k\\circ\\Phi_k-\\operatorname{id}$ is $H_k-F$, so choose $H_k=F$. At each subsequent order $m$, that coefficient is $H_m$ plus an expression determined by the previously chosen $H_k,\\ldots,H_{m-1}$; choosing $H_m$ as its negative cancels it. The recursion is finite, and every coefficient depends on finitely many jets, so it yields a local right inverse modulo $\\epsilon^{N+1}$. The same recursion gives a left inverse, and a left and right inverse of one map agree; thus $\\Psi_k$ is formally invertible.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "A4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The kernel of the restricted invariant map is $W_D^G\\cap\\widetilde R_D=R_D$. By F2, its domain modulo this kernel is exactly $\\mathcal Q_D$, so the first isomorphism theorem gives the canonical isomorphism $\\mathcal Q_D\\cong(W_D/\\widetilde R_D)^G$ and fixes the quotient's declared relation scope.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For each $j\\geq1$, substituting $\\phi-\\epsilon^kF$ into $\\epsilon^jS_j$ changes it first at degree $\\epsilon^{j+k}$, at least $\\epsilon^{k+1}$. Combining this with step 1.3 gives the displayed expansion for $S_\\epsilon\\circ\\Psi_k$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the order-$k$ action contains $+\\epsilon^k\\mathcal I(F^a\\mathcal E_a^{(0)})$, the negative term in step 2.2 cancels it, while the substitutions in all $S_j$ with $j\\geq1$ begin above order $k$. Step 1.4 makes this an allowed invertible local field redefinition; its induced higher-order terms remain part of the transformed truncated action. No off-shell or quantum-measure conclusion follows from this action-level calculation.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "step 1.4",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "At N=k=1, all terms of degree at least epsilon^2 vanish in C[epsilon]/(epsilon^2), leaving the first-variation term exactly.",
+        "For F=0, Psi_k is identity and the inverse recursion in step 1.4 returns H_m=0 for every m."
+      ],
+      "finite_checks_disposition": "Exact finite specializations of the stated algebraic or formal-order argument; they are sanity checks, not substitutes for the general proof.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If N=0 there is no k with 1≤k≤N and the quantified pullback assertion is vacuous; steps 1.3 and 2.2 cover every admitted k otherwise."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With F=0, steps 1.3–1.4 give the identity map, zero action change, and identity inverse."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 cover k=1, including a first-order retained action."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.4 constructs an inverse by a finite coefficient recursion and assumes no rank or nonzero-derivative condition on F."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 cover k=N because omitted powers have degree at least N+1 in the truncated ring."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes full AC, used through F3 in step 1.1 to obtain invariant-quotient exactness. The inverse in step 1.4 is instead a finite coefficient recursion H_k=F followed by determined cancellations, with no additional arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The integration-by-parts and leading-equation proposition derives an order-k action expansion and removal of one admitted coefficient. It does not assert that every observable equivalence is generated by these declared relations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The integration-by-parts and leading-equation proposition derives an order-k action expansion and removal of one admitted coefficient. It does not assert that every observable equivalence is generated by these declared relations."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "All seven proof steps and all four actual suppliers checked. Finite-dimensional rational W_D and stable R meet invariant-exactness hypotheses under full AC. Compact currents make divergence integrals zero. Smooth finite-jet coefficients permit each finite Taylor coefficient and triangular two-sided inverse recursion; derivative order may grow but stays finite at each retained order. Added explicit admissibility/compact support of F[phi] at every application so A3 licenses the direction in 1.3. Higher S_j terms start at j+k>=k+1 and quadratic displacement starts at 2k>=k+1. N=0 has no k, k=N has zero retained remainder, F=0 is identity. Quotient identifies only declared relation span; no quantum-measure or off-shell conclusion. Owned scalar example has polynomial compact-support-preserving F and is unaffected; theorem reference is contextual. Burgess (21)–(26), Neubert (27)–(29) and CPV (3.2) checked at their exact limited scopes."
+      }
+    },
+    "thm-aqft-field-redefinition-observable-equivalence-at-fixed-order": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-lsz-amplitude-data",
+          "source_section": "Definition",
+          "quote": "Fix the field data and Minkowski convention from the earlier finite-jet definition, an integer truncation order $N\\geq0$, and the truncated coefficient ring $R_N=\\mathbb C[\\epsilon]/(\\epsilon^{N+1})$. For each regulator label $\\rho$, let $X_\\rho=X_\\rho^{\\bar 0}\\oplus X_\\rho^{\\bar 1}$ be a finite-dimensional $\\mathbb Z/2$-graded complex vector space of field-mode components, with $n_0=\\dim_{\\mathbb C}X_\\rho^{\\bar 0}$ and $n_1=\\dim_{\\mathbb C}X_\\rho^{\\bar 1}$. Choose even coordinates $q^1,\\ldots,q^{n_0}$ and a basis of $X_\\rho^{\\bar 1}$ whose dual odd coordinate generators are $\\xi_1,\\ldots,\\xi_{n_1}\\in(X_\\rho^{\\bar 1})^*$. Choose a real integration contour $\\Gamma_\\rho$ in the underlying real space of $X_\\rho^{\\bar 0}$ and a specified complex-linear functional $\\ell_\\rho$ on a specified complex algebra $\\mathcal C_\\rho$ of coefficient functions on $\\Gamma_\\rho$. The domain $\\mathcal C_\\rho$ must contain every coefficient function to which $\\ell_\\rho$ is applied. In an actual integral, $\\ell_\\rho(f)=\\int_{\\Gamma_\\rho}f\\,d\\nu_\\rho$ for a stated measure $\\nu_\\rho$ and the coefficients must be integrable; in a formal perturbative integral, $\\ell_\\rho$ is the stated coefficientwise linear functional and its domain is part of the datum.\n\nThe odd-coordinate algebra is the finite exterior algebra $\\Lambda(\\xi_1,\\ldots,\\xi_{n_1})$, where $\\xi_a\\xi_b=-\\xi_b\\xi_a$ and $\\xi_a^2=0$. Put $\\mathcal H_\\rho=\\mathcal C_\\rho\\otimes\\Lambda(\\xi_1,\\ldots,\\xi_{n_1})$ with graded tensor-product multiplication. For an ordered subset $I=\\{i_1<\\cdots<i_k\\}$, write $\\xi_I=\\xi_{i_1}\\cdots\\xi_{i_k}$, and set $\\xi_\\varnothing=1$. Every field-coordinate expression is a finite sum $H=\\sum_I f_I\\xi_I$. Define the normalized odd-coordinate integration functional by\n$$\n\\mathcal B_\\rho(H)=f_{\\{1,\\ldots,n_1\\}},\\qquad \\mathcal B_\\rho(\\xi_1\\cdots\\xi_{n_1})=1.\n$$\nIf $n_1=0$, $\\mathcal B_\\rho$ is the identity. The full integration functional is $\\mathcal I_\\rho=\\ell_\\rho\\circ\\mathcal B_\\rho$, extended coefficientwise to source variables and $R_N$. Thus “integration over odd coordinates” means coefficient extraction in the chosen exterior algebra, not an ordinary integral over odd numbers.\n\nIntroduce commuting formal source variables $j_1,\\ldots,j_{n_0}$ dual to the even coordinates and independent anticommuting formal source generators $\\eta_1,\\ldots,\\eta_{n_1}$ dual to the ordered odd coordinates. Their algebra is $\\mathscr J_\\rho=\\mathbb C[\\![j_1,\\ldots,j_{n_0}]\\!]\\otimes\\Lambda(\\eta_1,\\ldots,\\eta_{n_1})$. In these bases the source pairing is\n$$\n\\langle J,\\varphi\\rangle=\\sum_{a=1}^{n_0}j_aq^a+\\sum_{b=1}^{n_1}\\eta_b\\xi_b,\n$$\nwith each odd source placed to the left of its odd field coordinate, so the pairing is even. In particular, $J$ is a graded formal source, not an ordinary element of the complex dual $X_\\rho^*$.\n\nA regulated perturbative generating datum also specifies an even action $S_{\\rho,\\epsilon}\\in\\mathcal H_\\rho\\otimes R_N$ and the generating functional\n$$\nZ_{\\rho,\\epsilon}[J]=\\mathcal I_\\rho\\!\\left(\\exp\\!\\bigl(iS_{\\rho,\\epsilon}(\\varphi)+i\\langle J,\\varphi\\rangle\\bigr)\\right),\\qquad Z_{\\rho,\\epsilon}[0]\\text{ is a unit}.\n$$\nThe exponential is interpreted in the chosen convergent or formal algebra: the ordinary exponential is applied to the commuting body and the nilpotent odd and $\\epsilon$ parts are expanded finitely. Every coefficient of the generating integrand and of its formal source derivatives must belong to the domain of $\\mathcal I_\\rho$. “A unit” means that the $\\epsilon^0$ coefficient of $Z_{\\rho,\\epsilon}[0]$ is nonzero; hence the normalized functional $\\widehat Z_{\\rho,\\epsilon}[J]=Z_{\\rho,\\epsilon}[J]/Z_{\\rho,\\epsilon}[0]$ is defined in $\\mathscr J_\\rho\\otimes R_N$ and has constant term $1$ at $J=0$.\n\nFor an ordered list of source components, define the connected $n$-point kernel as $i^{-n}$ times the corresponding ordered source derivatives of $\\log\\widehat Z_{\\rho,\\epsilon}[J]$ at $J=0$. Even-source derivatives are ordinary derivatives. Odd-source derivatives are left graded derivatives, characterized by $\\partial^L_{\\eta_a}\\eta_b=\\delta_{ab}$ and\n$$\n\\partial^L_{\\eta_a}(UV)=(\\partial^L_{\\eta_a}U)V+(-1)^{|U|}U(\\partial^L_{\\eta_a}V)\n$$\nfor homogeneous $U,V$. The logarithm is the formal logarithm with zero constant term. The regulator datum supplies the reconstruction of the component kernels as spacetime kernels and a Fourier-transform convention. The Fourier transform is $\\widetilde f(p)=\\int e^{ip\\cdot x}f(x)\\,d^4x$, interpreted in the specified function or distribution space.\n\nAn admissible field-coordinate change is a local, parity-preserving formal map $F_{\\rho,\\epsilon}=\\operatorname{id}+\\sum_{k=1}^{N}\\epsilon^kF_{\\rho,k}$ on these graded coordinates with an inverse modulo $\\epsilon^{N+1}$. Each coefficient of each $F_{\\rho,k}$ is polynomial in the odd coordinates and holomorphic in the even coordinates on a specified open neighborhood of the integration contour. Substitution into nilpotent even displacements uses finite Taylor expansions; the coordinate algebra and integration domain must contain every coefficient used in these substitutions and derivatives. Thus $DF$ is defined coefficientwise, with left odd derivatives and the stated ordering. If the coordinates come from spacetime fields, local means that each output field at $x$ depends on a finite jet of the input fields at $x$. Its regulated Jacobian factor $\\mathcal J_{F,\\rho}$ is a multiplier in the field-coordinate algebra specified by the exact graded change-of-variables identity\n$$\n\\mathcal I_\\rho(h(\\varphi))=\\mathcal I_\\rho\\!\\left(h(F_{\\rho,\\epsilon}(\\psi))\\,\\mathcal J_{F,\\rho}(\\psi)\\right)\n$$\nfor every admissible integrand $h$, with the functional extended coefficientwise over $\\mathscr J_\\rho\\otimes R_N$. No assertion that $\\mathcal J_{F,\\rho}=1$ is part of the definition. In the coordinate-volume case the even functional integrates $dq^1\\wedge\\cdots\\wedge dq^{n_0}$ over an oriented real $n_0$-dimensional contour; its contour and boundary data must satisfy this identity with the Berezinian multiplier. This is additional integration data, not an assertion for arbitrary $\\nu_\\rho$ or $\\ell_\\rho$. The Berezinian is defined algebraically: if the graded derivative has block form $DF=\\begin{pmatrix}A&B\\\\C&D\\end{pmatrix}$ with $D$ invertible, then $\\operatorname{Ber}(DF)=\\det(A-BD^{-1}C)(\\det D)^{-1}$. Here $DF\\equiv I$ modulo $\\epsilon$, so both diagonal blocks are invertible over the truncated algebra; empty determinants are one. For a general even functional the exact identity, including any measure-density factor, remains the requirement. In the transformed coordinates the source is $\\langle J,F_{\\rho,\\epsilon}(\\psi)\\rangle$, so the field insertion remains the same named original coordinate.\n\nAn LSZ amplitude datum additionally specifies a nonempty directed preordered set $(D,\\preceq)$ of regulator labels: $\\preceq$ is reflexive and transitive, and every pair of labels has a common upper bound. The regulator limit means the net limit along this preorder. For each $n$, specify a common complex vector space $E_n$ of momentum-space kernels for all selected ordered lists of field components, with a Hausdorff vector-space topology $\\tau_n$, and complex-linear reconstruction maps from the finite regulated component arrays into $E_n$. The kernel domains, function or distribution spaces, topology, and reconstruction maps must be specified in each instance of the datum; the maps incorporate the declared Fourier convention and, when used, extraction of the overall momentum-conservation delta function. Extend them coefficientwise over $R_N$ and denote their outputs by $G_{\\rho,n}=\\sum_{k=0}^N\\epsilon^kG_{\\rho,n}^{(k)}\\in E_n\\otimes R_N$. The assertion $G_n=\\lim_\\rho G_{\\rho,n}$ means that for every $k\\in\\{0,\\ldots,N\\}$ and every $\\tau_n$-neighborhood $V$ of zero there is $\\rho_0\\in D$ such that $G_{\\rho,n}^{(k)}-G_n^{(k)}\\in V$ whenever $\\rho_0\\preceq\\rho$. Hausdorffness makes this limit unique. For example, weak distribution convergence must name a test-function space and means convergence of the pairing with every test function. Both descriptions in an amplitude comparison use the same $D$, spaces, topologies, and reconstruction maps. Existence is required only in these supplied spaces and along this supplied scheme; independence of other regulator schemes is not asserted.\n\nFor each external one-particle channel $a$ (with a fixed polarization component when the field has spin), the datum specifies a mass $m_a>0$ and nonzero simple-pole residue $Z_a\\in\\mathbb C^\\times$ at $s_a=m_a^2$, where $s_a=-\\eta^{\\mu\\nu}p_{a,\\mu}p_{a,\\nu}$. A stable external channel means precisely that this isolated pole exists with nonzero residue and zero width. Choose a nonzero scalar $z_a$ with $z_a^2=Z_a$ as part of the datum; throughout, $Z_a^{1/2}$ means this chosen $z_a$ and $Z_a^{-1/2}$ means $z_a^{-1}$. These choices are fixed for amplitude comparisons; no canonical complex square-root branch is assumed.\n\nFor each selected field-parity sector, supply equally long finite ordered lists of interpolating-field components $\\varphi_A$ and channels $a$, and an invertible complex matrix $U=(U_{Aa})$. Define channel-coordinate insertions $\\chi_a=\\sum_A(U^{-1})_{aA}\\varphi_A$ and their ordered connected kernels by multilinearity:\n$$\nG_{a_1\\ldots a_n}=\\sum_{A_1,\\ldots,A_n}\\left(\\prod_{j=1}^n(U^{-1})_{a_j A_j}\\right)G_{A_1\\ldots A_n}.\n$$\nRequire the following external-leg pole factorization for the original component kernels:\n$$\nG_{A_1\\ldots A_n}=\\sum_{b_1,\\ldots,b_n}\\left(\\prod_{j=1}^n\\frac{U_{A_j b_j}z_{b_j}}{s_j-m_{b_j}^2}\\right)\\mathcal A_{b_1\\ldots b_n}+\\text{terms missing at least one external pole}.\n$$\nThe sums run over the declared channels in the corresponding parity sectors, and every remainder must have zero joint residue at every declared external-pole tuple. This equation defines the overlap meaning of $U$: the external-leg factor of $\\varphi_A$ for channel $a$ is $U_{Aa}z_a$. Multiplying by $U^{-1}$ on each leg selects its channel factor, also when channel masses coincide. Below $G_n$ abbreviates the channel-coordinate kernel $G_{a_1\\ldots a_n}$. Require its pole factorization\n$$\nG_n(p_1,\\ldots,p_n)=\\left(\\prod_{j=1}^n\\frac{Z_{a_j}^{1/2}}{s_j-m_{a_j}^2}\\right)\\mathcal A_n(p_1,\\ldots,p_n)+\\text{terms missing at least one external pole}.\n$$\nFor each external-pole tuple, the datum also specifies an approach domain $B_n\\subseteq(\\mathbb C\\setminus\\{0\\})^n$ with $0$ in its closure, a Hausdorff topological complex vector space $T_n$ for the remaining kinematic variables, and a complex-linear map $H_n:E_n\\to\\{h:B_n\\to T_n\\}$. This map supplies the off-shell kernel at $\\delta_j=s_j-m_{a_j}^2$, including any required continuation or distributional slicing; its existence is additional data, not an automatic restriction of a distribution. In the following formula the joint limit means the limit of $(\\prod_j\\delta_j)H_n(G_n)(\\delta)$ in $T_n\\otimes R_N$, coefficientwise, as $\\delta\\to0$ within $B_n$: for every coefficient and every neighborhood of zero in $T_n$, the difference from its limit lies in that neighborhood for all $\\delta\\in B_n$ sufficiently close to zero. Require that limit to exist, and interpret every zero-joint-residue remainder above in this same sense. These approach domains, maps and topologies are fixed in amplitude comparisons. First take the regulator limit in $E_n\\otimes R_N$, then this joint pole limit; no exchange of limits is assumed. The normalized LSZ amplitude is the joint residue\n$$\n\\mathcal A_n=\\left(\\prod_{j=1}^n Z_{a_j}^{-1/2}\\right)\\lim_{s_j\\to m_{a_j}^2}\\left(\\prod_{j=1}^n(s_j-m_{a_j}^2)\\right)G_n,\n$$\nwith the overall momentum-conservation delta function removed and the same ordered graded-source convention as above. The joint limits, Fourier transforms, pole factorization and invertible overlap data must all exist as part of the supplied LSZ datum. This definition supplies only the regulator and pole data needed for a conditional amplitude statement. It does not assert that a continuum limit, stable particles, or LSZ poles exist for a given quantum field theory.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\rho$ and apply A2 to $h(\\varphi)=\\exp(iS_{\\rho,\\epsilon}(\\varphi)+i\\langle J,\\varphi\\rangle)$. By F1 this generating integrand and its graded source derivatives lie in the domain of $\\mathcal I_\\rho$, so the exact identity gives $Z'_{\\rho,\\epsilon}[J]=Z_{\\rho,\\epsilon}[J]$ coefficientwise in $R_N$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $J=0$ the partition values are equal by step 1.1 and are units by hypothesis. Division by this common unit shows that the normalized source functionals agree in the graded source algebra over $R_N$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking the formal logarithms of the equal normalized functionals in step 2.1 and then applying the same ordered left graded source derivatives gives equal connected Green functions for the original fields and for the transformed insertions $F_{\\rho,\\epsilon}(\\psi)$. The supplied Fourier transform and removal of the same momentum-conservation delta function preserve equality. Passing to the common regulator limit preserves equality wherever that limit exists.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The LSZ amplitudes are the normalized joint residues of these connected functions. By step 3.1 the component functions agree; applying the same $U^{-1}$ on each external leg gives equal channel-coordinate kernels. Their joint residues agree, and multiplication by the same fixed $z_{a_j}^{-1}$ gives equal normalized amplitudes coefficientwise through order $N$. If any required common limit or stable pole does not exist, the corresponding amplitude conclusion is not asserted.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "For F_epsilon=id, the change-of-variables identity preserves the same normalized generating functional and each defined pole residue.",
+        "For n=1, LSZ multiplies the single-pole residue by Z_a^(-1/2); equal source derivatives preserve that residue."
+      ],
+      "finite_checks_disposition": "Exact finite specializations of the stated algebraic or formal-order argument; they are sanity checks, not substitutes for the general proof.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 proves equality of normalized source functionals at zero source; no external channel is needed for that equality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For F_epsilon=id, step 2.1 is the identity substitution and the normalized generating functionals agree."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies the residue argument to one external channel and one simple pole."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and A3 require stable channels and nonzero residues; F3 carries the invertible overlap condition, so degenerate poles are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 are coefficientwise in the truncated ring, including the highest retained order."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and A1 retain full AC inherited through the invariant-quotient action-level premise used in step 1.1. Steps 2.1 through 3.1 compare the supplied exact integrals and residues without selecting a new regulator family or stable channel."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The amplitude-equivalence theorem assumes an actual invertible coordinate change, full Jacobian, transformed source and common stable-pole limit. It proves equality under these hypotheses and no converse reconstructing such data from equal amplitudes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The amplitude-equivalence theorem assumes an actual invertible coordinate change, full Jacobian, transformed source and common stable-pole limit. It proves equality under these hypotheses and no converse reconstructing such data from equal amplitudes."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Read all four proof steps and its sole direct LSZ supplier; CPV §2 (2.2), (2.5)–(2.8) checked. Exact regulated substitution yields coefficientwise equality, unit division permits normalization, formal logarithm and ordered left source differentiation preserve equality, and supplied common Fourier/regulator/residue operations preserve it. Same U-inverse projections and fixed roots are now explicit in Statement/F1/4.1, preventing phase mismatch. No interchange of limits is inferred. N=0, identity map, zero amplitude, absent stable poles, singular overlap and zero partition value checked with exclusions as stated. Outside direct reference/dependency consumer def-aqft-susy-wilsonian-action requires exact theorem hypotheses; no repair required. No assertion of continuum existence, off-shell action equality, or empirical realization."
+      }
+    },
+    "ex-aqft-operator-basis-reduction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-aqft-local-operator-and-dimension",
+          "source_section": "Definition",
+          "quote": "Use natural units $c=\\hbar=1$ on four-dimensional Minkowski space $M=\\mathbb R^{1,3}$ with coordinates $x^0=ct,x^1,x^2,x^3$ and metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. Fix a complex affine algebraic group $G$ with no nontrivial closed normal unipotent subgroup, where unipotent means that every nonzero finite-dimensional rational module has a nonzero fixed vector; this is the reductive hypothesis. Fix a finite set $I$ of field species. For each $i\\in I$, fix a finite-dimensional complex $\\mathbb Z/2$-graded vector space $\\Phi_i=\\Phi_i^{\\bar 0}\\oplus\\Phi_i^{\\bar 1}$ with a homogeneous basis and its component parities, and an algebraic representation $\\rho_i:G\\to\\operatorname{GL}(\\Phi_i)$ preserving the grading. Include the declared spacetime-index action in $G$ or in its specified finite-dimensional representation data.\n\nFor the field interpretation, fix a finite Grassmann coefficient algebra $\\mathcal G=\\Lambda_{\\mathbb C}(\\zeta_1,\\ldots,\\zeta_s)$, $s\\geq0$, with its usual grading by generator degree modulo two. A field configuration assigns to each homogeneous component of parity $\\bar p$ a function $M\\to\\mathcal G_{\\bar p}$ whose coefficient at each exterior monomial is smooth; spacetime derivatives are taken coefficientwise. Evaluation of a polynomial on an $r$-jet means the parity-preserving algebra homomorphism that sends each polynomial coordinate to the corresponding field component or derivative at that point.\n\nFix a derivative cutoff $r\\geq0$, a maximum polynomial field degree $q\\geq0$, and a rational engineering weight $\\Delta_i$ for each field species. A derivative $\\partial_\\mu$ has engineering weight one, and an $s$-jet generator is a component of $\\partial_{\\mu_1}\\cdots\\partial_{\\mu_s}\\phi_i(x)$ for $0\\leq s\\leq r$. If covariant derivatives are used, their finite jet generators and $G$-action are included explicitly in the same data. Let $J_r$ be the resulting finite-dimensional $\\mathbb Z/2$-graded vector space with its specified algebraic representation $\\rho_r:G\\to\\operatorname{GL}(J_r)$, required to preserve the grading and the assigned engineering weights. Its polynomial algebra is the supercommutative algebra $P_r=\\operatorname{Sym}(J_{r,\\bar 0}^{*})\\otimes\\Lambda(J_{r,\\bar 1}^{*})$: even generators commute and odd generators anticommute. The induced left $G$-action on $P_r$ is $(g\\cdot f)(z)=f(\\rho_r(g^{-1})z)$ for $g\\in G$, $f\\in P_r$, and $z\\in J_r$. For a fixed weight $D\\in\\mathbb Q$, let $P_{r,q,D}$ be the complex span of monomials of total engineering weight $D$ and total polynomial degree at most $q$.\n\nA local operator in this finite-order data is an element of $P_{r,q,D}$ evaluated at $x$ on the $r$-jet of the fields. A scalar operator invariant under the declared symmetries is an element of $V_{r,q,D}=P_{r,q,D}^{G}$. Engineering dimension means this assigned mass weight; it is not a statement about an observed quantity. In four dimensions a term with operator $\\mathcal O_D$ has the convention $C\\mathcal O_D/\\Lambda^{D-4}$, where $\\Lambda$ has mass dimension one and $C$ is dimensionless. Reality conditions, when required for a real action, are additional conjugation data on $V_{r,q,D}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-operator-basis-quotient",
+          "source_section": "Definition",
+          "quote": "Fix a finite jet order $r$, maximum polynomial field degree $q$, engineering weight $D$, finite field-species list, coefficient field $\\mathbb C$, and complex reductive affine algebraic group $G$ with the finite-dimensional rational action specified on the jet generators, including the declared spacetime-index symmetries. Let $W_D$ be the finite-dimensional space of all local polynomials of weight $D$ and degree at most $q$, before imposing $G$-invariance, and let $V_D=W_D^G$ be its invariant scalar subspace. An admitted raw relation space is a specified $G$-stable linear subspace $\\widetilde R_D\\leq W_D$, given by explicit linear identities among the chosen polynomials. Its invariant part is $R_D=\\widetilde R_D\\cap V_D$. Any action, boundary, or observable interpretation of the selected identities is extra mathematical data and must be stated with the result that verifies it.\n\nThe finite-order invariant operator-basis quotient is\n\n$$\n\\mathcal Q_D:=V_D/R_D.\n$$\n\nTwo invariant operators represent the same class exactly when their difference lies in $R_D$. An operator basis is any finite list of representatives in $V_D$ of a vector-space basis of $\\mathcal Q_D$. The quotient records precisely the declared relation space; it does not assert that every relation relevant to an arbitrary EFT, observable, or infinite operator tower has been included.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-aqft-integration-by-parts-eom-and-field-redefinition-redundancy",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Use four-dimensional natural units $c=\\hbar=1$ and a finite jet-polynomial field model with its declared finite rational action of a complex reductive affine algebraic group $G$. Let $W_D$ be a finite raw local-polynomial space at fixed engineering weight $D$, derivative cutoff, and field-degree cutoff; let $V_D=W_D^G$. Let $\\widetilde R_D$ be the $G$-stable linear span in $W_D$ of the declared polynomial identities, admitted total-divergence densities, and leading-equation densities $F^a\\mathcal E_a^{(0)}$ defined below, with $R_D=\\widetilde R_D\\cap V_D$. The finite-order invariant operator quotient is $\\mathcal Q_D=V_D/R_D$.\n\nLet $M=\\mathbb R^{1,3}$ with $x^0=ct$, $\\eta=\\operatorname{diag}(-1,1,1,1)$, and volume measure $d^4x$. Even field components are smooth maps $M\\to\\Phi_a^{\\bar0}$ and odd components are smooth coefficient families in a fixed Grassmann algebra valued in $\\Phi_a^{\\bar1}$; admitted variations and currents have compact support. Let $\\mathcal I[L]=\\int_M L\\,d^4x$ on admitted local densities, with the boundary convention $\\mathcal I(\\partial_\\mu J^\\mu)=0$. Let $S_0[\\phi]$ and each $S_j[\\phi]$ be $G$-invariant local polynomial functionals of these field configurations, so their formal Taylor expansions through order $N$ are defined. Let the variational derivative $\\mathcal E_a^{(0)}[\\phi]$ of $S_0$ be defined by\n\n$$\nD S_0[\\phi](h)=\\mathcal I\\!\\left(\\sum_a h^a\\mathcal E_a^{(0)}[\\phi]\\right)\n$$\n\nfor every admitted compactly supported parity-compatible variation $h$. A leading-equation relation is a density $F^a\\mathcal E_a^{(0)}$ with $F^a[\\phi]$ a smooth function of $x$ and finitely many component jets of $\\phi$ at $x$, with this density in $W_D$, and satisfying the following conditions: its component parity matches that of $\\phi^a$; it is $G$-equivariant, meaning $F[g\\cdot\\phi]=g\\cdot F[\\phi]$; and it preserves compact support, meaning $\\operatorname{supp}F[\\phi]\\subseteq\\operatorname{supp}\\phi$ for compactly supported $\\phi$. At each configuration where the action identities below are applied, require $F[\\phi]$ itself to be an admitted compactly supported variation, so the stated first-variation identity applies to this direction. An integration-by-parts relation is a density $\\partial_\\mu J^\\mu$ satisfying the stated boundary convention. Consider a finite formal action $S_\\epsilon=S_0+\\sum_{j=1}^N\\epsilon^jS_j$ in the ring $\\mathbb C[\\epsilon]/(\\epsilon^{N+1})$, where $\\epsilon$ is dimensionless and each $\\epsilon^kF^a$ has the units of $\\phi^a$. For every $1\\leq k\\leq N$, the local identity-leading change of variables $\\Psi_k(\\phi)=\\phi-\\epsilon^kF[\\phi]$ is invertible as a formal map through order $N$ and satisfies\n\n$$\nS_\\epsilon[\\Psi_k(\\phi)]=S_\\epsilon[\\phi]-\\epsilon^k\\mathcal I\\!\\left(F^a\\mathcal E_a^{(0)}[\\phi]\\right)+O(\\epsilon^{k+1}).\n$$\n\nThus a coefficient $+\\epsilon^k\\mathcal I(F^a\\mathcal E_a^{(0)})$ can be removed at order $k$ without changing lower-order coefficients, provided all induced terms through the retained order are kept. The quotient $\\mathcal Q_D$ identifies exactly the declared polynomial, boundary, and leading-equation relation span; it asserts no equivalence of arbitrary off-shell Green functions and does not by itself assert a quantum measure or amplitude equivalence.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a compactly supported variation $h$, the kinetic variation is $-\\mathcal I(\\partial_\\mu h\\,\\partial^\\mu\\phi)=\\mathcal I(h\\Box\\phi)$, since $\\partial_\\mu(h\\partial^\\mu\\phi)$ integrates to zero. The potential variation is $\\mathcal I(h(-m^2\\phi-g\\phi^3/6))$. Thus $DS_0[\\phi](h)=\\mathcal I(h\\mathcal E_0)$ with the displayed $\\mathcal E_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The field has weight one and each derivative has weight one, so $\\mathcal O_6$ has weight six; $M_s^2\\phi^4$ and $g\\phi^6$ also have weight six. Their derivative orders and field degrees lie within the stated cutoffs, so the displayed identity concerns elements of the declared finite operator space.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The product rule gives $\\partial_\\mu(\\phi^3\\partial^\\mu\\phi)=3\\phi^2\\partial_\\mu\\phi\\partial^\\mu\\phi+\\phi^3\\Box\\phi$. The boundary convention therefore yields $\\mathcal I(\\phi^3\\Box\\phi)=-3\\mathcal I(\\mathcal O_6)$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Before specialization, substituting $\\widehat{\\mathcal E}_0=\\Box\\phi-M_s^2\\phi-g\\phi^3/6$ into step 1.3 gives $\\mathcal I(\\phi^3\\widehat{\\mathcal E}_0)=-3\\mathcal I(\\mathcal O_6)-\\mathcal I(M_s^2\\phi^4)-(g/6)\\mathcal I(\\phi^6)$. Each density has weight six, and the relation subspace contains this leading-equation density and the divergence from step 1.3. The quotient definition [F2] therefore gives the displayed class identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $a=C/(3\\Lambda^2)$ and use [F3] with $k=1$ and $F[\\phi]=-a\\phi^3$, so its map $\\phi-\\epsilon F[\\phi]$ is $\\phi+\\epsilon a\\phi^3$. Its units are those of $\\phi$, and its first-order action change is $-\\epsilon\\mathcal I(F\\mathcal E_0)=\\epsilon a\\mathcal I(\\phi^3\\mathcal E_0)$, as also follows from step 1.1. Since $\\epsilon^2=0$, substituting the shifted field into the order-$\\epsilon$ term changes that term only by zero in the truncated ring.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Specialize $M_s=m$ in step 2.1, insert that identity into step 2.2, and add the original $+\\epsilon(C/\\Lambda^2)\\mathcal I(\\mathcal O_6)$ term. Its coefficient cancels because $3a=C/\\Lambda^2$, leaving exactly the quartic and sextic shifts displayed in the Example.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        "The product rule gives ∂μ(φ^3∂^μφ)=3φ^2(∂φ)^2+φ^3□φ, fixing the -3 sign.",
+        "With a=C/(3Λ^2), the order-epsilon coefficient is C/Λ^2-3a=0, and the remaining coefficients are -am^2 and -ag/6."
+      ],
+      "finite_checks_disposition": "Exact finite specializations of the stated algebraic or formal-order argument; they are sanity checks, not substitutes for the general proof.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero field, for which the variation identity holds and all displayed densities vanish."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives [O_6]=0 when M_s=0 and g=0, the massless free scalar boundary case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies the single real scalar field and its dimension-six density in the declared finite space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when m=0 or g=0; the corresponding quartic or sextic class coefficient vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 uses compact support and the stated no-boundary convention, so no surface term remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example inherits full AC through A1 and F3 in step 2.2. Its actual substitution F=-C phi^3/(3 Lambda^2) is displayed explicitly and requires no selection of quotient representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The scalar dimension-six Example verifies a specific quotient identity and a first-order field substitution. No converse classifies all scalar actions with those quartic and sextic coefficients."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The scalar dimension-six Example verifies a specific quotient identity and a first-order field substitution. No converse classifies all scalar actions with those quartic and sextic coefficients."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "All six Verification steps and actual suppliers checked. Kinetic variation under mostly-plus metric gives Box phi-m^2 phi-g phi^3/6; local product rule gives 3 O6+phi^3 Box phi before integration. Subtracting the declared divergence and EOM density gives -M_s^2 phi^4/3-g phi^6/18 as a polynomial class identity. Explicit F=-C phi^3/(3 Lambda^2) is smooth, equivariant for trivial group, and compactly supported with phi, meeting repaired proposition hypotheses. 3a=C/Lambda^2 cancels the derivative term and leaves exactly the stated quartic/sextic coefficients. Checked m=0,g=0,C=0, zero field and Lambda>0; spurion weights and finite r=2,q=6 bounds hold. Full AC inherited in A1, no new representative selection. Burgess (25)–(26) agrees; no physical realization or scattering conclusion. Contract-only reader enrichment sound; item unchanged."
+      }
+    }
+  }
+}

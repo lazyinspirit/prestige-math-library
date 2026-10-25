@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-a-naive-signed-count-without-the-quotient-orientation-can-fail-d-squared-zero.json
+  precheck: pass
 id: cex-a-naive-signed-count-without-the-quotient-orientation-can-fail-d-squared-zero
 kind: counterexample
 title: "A naive signed count without the quotient orientation can fail to square to zero"
@@ -17,11 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: literature-derived
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Udhav Fowdar, A Functional Analytic Approach to Morse Homology (UCL 4th-year project, 2016, supervised by C. Wendl), complete PDF"
@@ -67,3 +65,42 @@ Assume AC. An arbitrary assignment of signs to the index-one trajectories of a M
 3.1 The coherent convention behaves differently. By [F3] the two ends of each of the four compactified intervals carry opposite products $\epsilon(\gamma_1)\epsilon(\gamma_2)$; summing over the four intervals, the coefficient of $d$ in $\partial^2a$ is the negative total signed boundary count of $\overline{\mathcal M}(a,d)$, which is zero. Thus $\partial^2=0$ with the orientation-induced signs, and the failure of step 2.2 is a failure of the sign assignment, not of the Morse complex. [F3, step 2.2]
 
 4.1 The comparison signs of [F2] are determined by the chosen orientations of the unstable manifolds through the boundary-orientation identity, not chosen per trajectory; the all-plus assignment $\tilde\epsilon$ is not of that form, since it makes both ends of an interval contribute with the same product. The mod-two differential avoids the issue because signs are invisible in $\mathbb Z/2$ by [F4]. Hence a sign convention compatible with the compactified moduli spaces — not an arbitrary assignment of signs to trajectories — is what makes the integral Morse complex a complex. [F2, F3, F4, step 2.2, step 3.1] ∎
+
+
+## Remarks
+
+The following schematic displays the four compactified relative-delay intervals, not trajectories drawn on the torus. Index the two choices of the moving $u$-arc by $i\in\{1,2\}$ and the two choices of the moving $v$-arc by $j\in\{1,2\}$. Write $\alpha_i:a\to b$, $\beta_j:b\to d$, $\gamma_j:a\to c$ and $\eta_i:c\to d$ for the corresponding trajectory classes. The interval $I_{ij}$ has endpoints $(\alpha_i,\beta_j)$ and $(\gamma_j,\eta_i)$, as in the supplier's relative-delay construction. Labels below the endpoints give the coherent sign products: $s_{ij}=\epsilon(\alpha_i)\epsilon(\beta_j)\in\{+1,-1\}$ and $\epsilon(\gamma_j)\epsilon(\eta_i)=-s_{ij}$ by [F3]. They are products, not boundary signs; the latter are their negatives.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (0,1) {through $b$};
+\node at (3,1) {$\overline{\mathcal M}(a,d)$};
+\node at (6,1) {through $c$};
+\draw (0,0)--(6,0);
+\fill (0,0) circle (2pt); \fill (6,0) circle (2pt);
+\node[above] at (0,0) {$(\alpha_1,\beta_1)$};
+\node[above] at (3,0) {$I_{11}$};
+\node[above] at (6,0) {$(\gamma_1,\eta_1)$};
+\node[below] at (0,0) {$s_{11}$}; \node[below] at (6,0) {$-s_{11}$};
+\draw (0,-1.5)--(6,-1.5);
+\fill (0,-1.5) circle (2pt); \fill (6,-1.5) circle (2pt);
+\node[above] at (0,-1.5) {$(\alpha_1,\beta_2)$};
+\node[above] at (3,-1.5) {$I_{12}$};
+\node[above] at (6,-1.5) {$(\gamma_2,\eta_1)$};
+\node[below] at (0,-1.5) {$s_{12}$}; \node[below] at (6,-1.5) {$-s_{12}$};
+\draw (0,-3)--(6,-3);
+\fill (0,-3) circle (2pt); \fill (6,-3) circle (2pt);
+\node[above] at (0,-3) {$(\alpha_2,\beta_1)$};
+\node[above] at (3,-3) {$I_{21}$};
+\node[above] at (6,-3) {$(\gamma_1,\eta_2)$};
+\node[below] at (0,-3) {$s_{21}$}; \node[below] at (6,-3) {$-s_{21}$};
+\draw (0,-4.5)--(6,-4.5);
+\fill (0,-4.5) circle (2pt); \fill (6,-4.5) circle (2pt);
+\node[above] at (0,-4.5) {$(\alpha_2,\beta_2)$};
+\node[above] at (3,-4.5) {$I_{22}$};
+\node[above] at (6,-4.5) {$(\gamma_2,\eta_2)$};
+\node[below] at (0,-4.5) {$s_{22}$}; \node[below] at (6,-4.5) {$-s_{22}$};
+\end{tikzpicture}
+```
+
+For the naive assignment, all eight endpoint products are instead $+1$, yielding $\tilde\partial^2a=8d$ as computed in step 2.2. The rigorous counterexample and its coherent-sign comparison above do not depend on the schematic.

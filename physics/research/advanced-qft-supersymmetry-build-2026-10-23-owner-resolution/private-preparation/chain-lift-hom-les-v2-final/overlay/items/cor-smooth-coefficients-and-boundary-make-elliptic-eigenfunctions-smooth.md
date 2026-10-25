@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-smooth-coefficients-and-boundary-make-elliptic-eigenfunctions-smooth.md

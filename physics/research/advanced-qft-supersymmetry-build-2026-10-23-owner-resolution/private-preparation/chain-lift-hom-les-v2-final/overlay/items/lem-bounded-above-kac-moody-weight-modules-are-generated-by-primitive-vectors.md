@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-bounded-above-kac-moody-weight-modules-are-generated-by-primitive-vectors.md

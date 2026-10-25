@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-l2-rho-invariant-bordism-independence.json
+  precheck: pass
 id: lem-l2-rho-invariant-bordism-independence
 kind: lemma
 title: "Bordism independence of the L²-signature defect"
@@ -20,17 +23,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   scraped: []
   references:
@@ -41,7 +33,7 @@ sources:
 
 ## Statement
 
-Assume full AC. Let M be a closed oriented 3-manifold, Γ a discrete group, and φ:π₁(M)→Γ. If (W₀,ψ₀) and (W₁,ψ₁) are compact oriented 4-manifolds with boundary M over which φ extends, then sign_Γ^(2)(W₀,ψ₀)−sign(W₀)=sign_Γ^(2)(W₁,ψ₁)−sign(W₁). Hence the signature defect depends only on (M,φ).
+Assume full AC. Let M be a closed oriented 3-manifold, Γ a discrete group, and φ:π₁(M)→Γ. If (W₀,ψ₀) and (W₁,ψ₁) are compact oriented 4-manifolds with boundary M over which φ extends, then $\operatorname{sign}^{(2)}_\Gamma(W_0,\psi_0)-\operatorname{sign}(W_0)=\operatorname{sign}^{(2)}_\Gamma(W_1,\psi_1)-\operatorname{sign}(W_1)$. Hence the signature defect depends only on (M,φ).
 
 ## Statement references
 

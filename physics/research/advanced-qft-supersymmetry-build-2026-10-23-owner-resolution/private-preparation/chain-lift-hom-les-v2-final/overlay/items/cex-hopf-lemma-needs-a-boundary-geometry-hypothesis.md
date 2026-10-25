@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-hopf-lemma-needs-a-boundary-geometry-hypothesis.md

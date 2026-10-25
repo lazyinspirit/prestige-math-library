@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric.md

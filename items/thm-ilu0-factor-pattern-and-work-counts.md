@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ilu0-factor-pattern-and-work-counts.json
+  precheck: pass
 id: thm-ilu0-factor-pattern-and-work-counts
 kind: theorem
 title: "ILU(0) factor slots, setup work, and application work"
@@ -17,11 +20,6 @@ deps:
 justified_by: []
 aliases: []
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §§10.3.1–10.3.2, printed pp. 301–310"

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-reeb-foliation-of-the-solid-torus-has-the-boundary-as-a-leaf.md

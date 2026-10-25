@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-fixed-finite-semigroup-has-undecidable-terminal-equality.md

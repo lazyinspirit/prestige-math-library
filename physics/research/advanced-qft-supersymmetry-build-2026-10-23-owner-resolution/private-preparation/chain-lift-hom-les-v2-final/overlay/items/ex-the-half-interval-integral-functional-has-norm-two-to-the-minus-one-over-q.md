@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-half-interval-integral-functional-has-norm-two-to-the-minus-one-over-q.md

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-unipotent-groups-have-central-series-with-subgroups-of-ga-quotients.json
+  precheck: pass
 id: thm-unipotent-groups-have-central-series-with-subgroups-of-ga-quotients
 kind: theorem
-title: "Unipotent groups have central series with quotients embedded in G_a"
+title: "Unipotent groups have central series with quotients embedded in the additive group"
 dependency_level: 7
 deps:
   - def-axiom-of-choice
@@ -39,9 +42,9 @@ of closed subgroup schemes of $G$ whose successive quotients are isomorphic to c
 ## Facts & Assumptions
 **Given:** AC, a field $k$ and an affine unipotent algebraic group $G$ over $k$.
 
-[F1] Assume AC. $G$ is isomorphic to a closed subgroup scheme of $U_n$ for some $n\ge1$ (the triangular criterion), and the image of any closed subscheme under this inclusion is a closed subscheme of $U_n$. ([[thm-unipotent-group-triangular-criterion]])
+[F1] Assume AC. $G$ is isomorphic to a closed subgroup scheme of $U_n$ for some $n\ge1$ (the triangular criterion), and the image of any closed subscheme under this inclusion is a closed subscheme of $U_n$. ([[thm-unipotent-group-triangular-criterion|Unipotent groups are exactly the subgroups of some $U_n$, equivalently the groups with coconnected coordinate Hopf algebra]])
 
-[F2] $U_n$ has a central series $U_n=U_n^{(0)}\supseteq\dots\supseteq U_n^{(m)}=1$ of closed subgroup schemes with successive quotients canonically isomorphic to $\mathbf G_a$. ([[lem-upper-unitriangular-central-series]])
+[F2] $U_n$ has a central series $U_n=U_n^{(0)}\supseteq\dots\supseteq U_n^{(m)}=1$ of closed subgroup schemes with successive quotients canonically isomorphic to $\mathbf G_a$. ([[lem-upper-unitriangular-central-series|The central series of $U_n$ with additive quotients]])
 
 [F3] The cited subgroup-commutator definition concerns abstract groups. Here its scheme-theoretic extension is used explicitly: for closed subgroup schemes $A,B$ of an affine group scheme $G$, define $[A,B]$ as the smallest closed subgroup scheme of $G$ through which the commutator morphism $A\times B\to G$ factors. It exists by schematic intersection of all such closed subgroup schemes (on coordinate rings, the sum of their Hopf ideals). Put $\gamma_1G=G$ and $\gamma_{j+1}G=[G,\gamma_jG]$; call $G$ nilpotent if some $\gamma_jG=1$. A descending series is central when each commutator morphism $G\times G_i\to G$ factors through $G_{i+1}$. The required lower-central-series containment is proved in step 3.1, rather than inferred from abstract-group nilpotence. ([[def-subgroup-commutator-and-lower-central-series]], [[def-derived-subgroup-and-solvable-algebraic-group]])
 

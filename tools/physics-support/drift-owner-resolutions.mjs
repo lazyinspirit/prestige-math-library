@@ -3,6 +3,7 @@ import { existsSync, readFileSync, readdirSync, realpathSync } from 'node:fs';
 import { resolve, join, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
+import { appendBaseContext, appendDriftView } from './frontier-append-evidence.mjs';
 
 export const driftHash = bytes => createHash('sha256').update(bytes).digest('hex');
 const readJSON = file => JSON.parse(readFileSync(file, 'utf8'));
@@ -64,23 +65,24 @@ export function driftOwnerResolutionTemplate(root, run) {
       requires: spec.pages.find(page => page.id === row.page)?.requires ?? [],
     })) };
 }
-export function validateDriftOwnerResolutions(root, run) {
+function checkOwnerResolutions(root, run, historical) {
   if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '')) fail('invalid run');
   const path = driftResolutionPath(run);
   if (!existsSync(join(root, path))) return { resolved: new Set(), inputs: [path] };
   const receipt = readJSON(join(root, path));
   if (receipt.version !== 1 || receipt.run !== run || receipt.authorizing_owner !== '/root') fail('invalid owner or run');
-  const owed = frontier(root, run);
+  const owed = historical?.frontier ?? frontier(root, run);
   if (JSON.stringify(receipt.frontier) !== JSON.stringify(owed)) fail('scope changed since owner resolution');
-  const specPath = join(root, 'research/plan-spec.json');
+  const specPath = historical?.specPath ?? join(root, 'research/plan-spec.json');
   if (driftHash(readFileSync(specPath)) !== receipt.plan_sha256) fail('stale canonical plan');
   const reportPath = `research/${run}-alpha-step1-drift.md`;
   if (receipt.report?.path !== reportPath) fail('wrong native report');
   if (!receipt.inputs || typeof receipt.inputs !== 'object' || Array.isArray(receipt.inputs)) fail('missing evidence inputs');
   const inputs = [path];
   for (const [input, sha256] of Object.entries(receipt.inputs)) {
-    if (!/^[a-f0-9]{64}$/.test(sha256) || driftHash(readFileSync(safePath(root, input))) !== sha256) fail(`stale evidence ${input}`);
-    inputs.push(input);
+    const actual = historical?.inputPaths?.[input] ?? input;
+    if (!/^[a-f0-9]{64}$/.test(sha256) || driftHash(readFileSync(safePath(root, actual))) !== sha256) fail(`stale evidence ${input}`);
+    inputs.push(actual);
   }
   for (const reference of [receipt.report, receipt.native_result]) if (!reference || receipt.inputs[reference.path] !== reference.sha256) fail('unbound native report/result');
   const currentResult = nativeResult(root, run, receipt.native_result);
@@ -99,7 +101,14 @@ export function validateDriftOwnerResolutions(root, run) {
     // current obligation map imposes additional live evidence requirements.
     if (row.current_inputs !== undefined) {
       if (!row.current_inputs || typeof row.current_inputs !== 'object' || Array.isArray(row.current_inputs)) fail(`invalid current inputs ${row.page}`);
-      for (const [input, sha256] of Object.entries(row.current_inputs)) if (!/^[a-f0-9]{64}$/.test(sha256) || receipt.inputs[input] !== sha256) fail(`unbound current evidence ${input}`);
+      for (const [input, sha256] of Object.entries(row.current_inputs)) {
+        if (!/^[a-f0-9]{64}$/.test(sha256) || receipt.inputs[input] !== sha256) fail(`unbound current evidence ${input}`);
+        if (!historical?.historicalCurrentInputs?.includes(input)) {
+          const live = historical?.preparing && input === 'research/plan-spec.json' ? historical.inputPaths[input] : input;
+          if (driftHash(readFileSync(safePath(root,live))) !== sha256) fail(`stale current evidence ${input}`);
+          inputs.push(live);
+        }
+      }
     }
     const pages = spec.pages.filter(page => page.id === row.page);
     if (pages.length !== 1 || pages[0].kind !== 'A' || !Array.isArray(row.requires) || JSON.stringify(row.requires) !== JSON.stringify(pages[0].requires ?? [])) fail(`changed resolved prerequisites ${row.page}`);
@@ -110,6 +119,24 @@ export function validateDriftOwnerResolutions(root, run) {
     resolved.add(row.page);
   }
   return { resolved, inputs };
+}
+export function validateDriftOwnerResolutions(root, run) {
+  return checkOwnerResolutions(root,run,appendBaseContext(root,run));
+}
+// Prepare must validate actual current old-frontier evidence, never archive a stale overlay.
+// The sole projection is the explicitly archived prior plan; its only delta is the new rows.
+export function validateDriftOwnerResolutionsBeforeAppend(root,run,priorPlan,newPages) {
+  const specPath=safePath(root,priorPlan),prior=readJSON(specPath),current=readJSON(join(root,'research/plan-spec.json'));
+  if(JSON.stringify(prior)!==JSON.stringify({...current,pages:current.pages.filter(p=>!newPages.includes(p.id))}))fail('unrelated append plan change');
+  const historical = appendBaseContext(root,run);
+  if (historical) {
+    // Original native coverage remains the original frontier. Authenticate every
+    // completed supplemental review separately; current live obligations survive.
+    const checked = checkOwnerResolutions(root,run,historical);
+    const view = appendDriftView(root,run);
+    return {...checked,priorInputs:[...new Set([...checked.inputs,...view.inputs])],priorViewSha256:driftHash(view.text)};
+  }
+  return checkOwnerResolutions(root,run,{frontier:frontier(root,run),specPath,preparing:true,inputPaths:{'research/plan-spec.json':priorPlan}});
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(resolve(process.argv[1]))).href) {
   try {

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-perfect-graphs-satisfy-kappa-at-least-their-order.json
+  precheck: pass
 id: thm-perfect-graphs-satisfy-kappa-at-least-their-order
 kind: theorem
-title: "Every perfect graph satisfies |V(G)|<=kappa(G)"
+title: 'Every perfect graph satisfies $|V(G)|\leq\kappa(G)$'
 status: published
 origin: session
 provenance:
@@ -16,13 +19,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
 sources:
   scraped: []
   references:
@@ -45,7 +41,7 @@ $$|V(G)|\leq \kappa(G).$$
 
 [L2] Every finite graph satisfies $|V(G)|\leq\chi(G)\alpha(G)$ ([[thm-clique-independence-chromatic-bounds]]).
 
-[L3] By definition, $\kappa(G)=\alpha(G)\omega(G)$ ([[def-kappa-of-a-graph]], [[def-clique-stable-set-and-numbers]]).
+[L3] By definition, $\kappa(G)=\alpha(G)\omega(G)$ ([[def-kappa-of-a-graph|The parameter $\kappa(G)=\alpha(G)\omega(G)$]], [[def-clique-stable-set-and-numbers]]).
 
 ## Proof
 

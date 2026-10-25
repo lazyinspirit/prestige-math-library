@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-singular-boundary-of-a-simplex-is-the-unsigned-sum-of-its-faces.md

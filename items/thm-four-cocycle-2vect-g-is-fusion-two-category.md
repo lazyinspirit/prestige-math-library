@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-four-cocycle-2vect-g-is-fusion-two-category.json
+  precheck: pass
 id: thm-four-cocycle-2vect-g-is-fusion-two-category
 kind: theorem
-title: A normalized group 4-cocycle gives a fusion 2-category 2Vect_G^omega
+title: A normalized group 4-cocycle gives a fusion 2-category $2\mathrm{Vect}^{\omega}_G$
 status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
@@ -66,3 +69,29 @@ Thus $s a=\mu_xT(s)$. For an algebra map $h:(x,a)\to(y,b)$, the identity $ha=bT(
 2.2 The identity functor of a finite semisimple category with simple labels $s_1,\ldots,s_n$ is the direct sum of the $n$ projection-inclusion functors for those labels. Each summand is simple, so the identity is simple exactly when $n=1$. The only simple objects of $2\mathrm{Vect}^{\omega}_G$ are therefore the one-label categories $\delta_g$, one for each $g\in G$. In particular $\delta_e$ is the unique simple summand of the monoidal unit and is simple. [F2, F3, step 1.2, algebra]
 
 3.1 For an object with simple labels $s_{g,i}$, put the dual label $s_{g,i}^{\#}$ in grade $g^{-1}$. Evaluation sends $(s_{g,i},s_{h,j}^{\#})$ to $\mathbb C$ when $h=g$ and $j=i$, and to $0$ otherwise; coevaluation sends $\mathbb C$ to the direct sum of $s_{g,i}^{\#}\otimes s_{g,i}$ over all labels. Each right-dual triangle composite is the identity on every simple label, since only its matching diagonal summand survives; reversing evaluation and coevaluation gives the same check for left duals. Thus both cusp transformations have scalar $1$. These composites use only the associator and unitors on at most three object factors; the 4-cocycle enters the four-input pentagonator already checked in step 1.1, and normalized unit cases contribute scalar $1$. This supplies duals without asserting a pivotal or spherical enhancement. [F1, F2, F4, step 1.1, algebra] ∎
+
+
+## Remarks
+
+For fixed homogeneous grades $g,h,k,l,m$, the scalar part of the pentagonator coherence in step 1.1 has the following commutative diagram. Every vertex is a copy of the scalar line $\mathbb C$, and an arrow labeled $a_i$ or $b_i$ is multiplication by that scalar. This records the coefficients of the two pastings after canonical rebracketing, rather than the full higher-categorical pasting diagram.
+
+$$\begin{aligned} a_1&=\omega(h,k,l,m),&a_2&=\omega(g,hk,l,m),&a_3&=\omega(g,h,k,lm),\\ b_1&=\omega(gh,k,l,m),&b_2&=\omega(g,h,kl,m),&b_3&=\omega(g,h,k,l). \end{aligned}$$
+
+```tikz
+\begin{tikzpicture}
+\node (s) at (0,0) {$\mathbb C$};
+\node (a) at (2,1) {$\mathbb C$};
+\node (b) at (4,1) {$\mathbb C$};
+\node (t) at (6,0) {$\mathbb C$};
+\node (c) at (2,-1) {$\mathbb C$};
+\node (d) at (4,-1) {$\mathbb C$};
+\draw[->] (s) -- node[above left] {$a_1$} (a);
+\draw[->] (a) -- node[above] {$a_2$} (b);
+\draw[->] (b) -- node[above right] {$a_3$} (t);
+\draw[->] (s) -- node[below left] {$b_1$} (c);
+\draw[->] (c) -- node[below] {$b_2$} (d);
+\draw[->] (d) -- node[below right] {$b_3$} (t);
+\end{tikzpicture}
+```
+
+The upper and lower paths multiply by $a_3a_2a_1$ and $b_3b_2b_1$, respectively. Scalars commute, so their equality is precisely the displayed 4-cocycle identity. The grade $ghklm$ is the same throughout by associativity in $G$; the vertices denote scalar coefficients, not different graded objects or strict identifications of their coherence maps. If any input grade is $e$, normalization makes each individual pentagonator with a unit argument the identity. The proof above remains independent of this illustration.

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-one-power-weight-range.json
+  precheck: pass
 id: ex-a-one-power-weight-range
 kind: example
-title: The A_1 range of a power weight
+title: The $A_1$ range of a power weight
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -19,8 +22,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "Example 4.17 and Remark 5.4, printed pp. 75 and 102"
-verification:
-  precheck: pass
+
 ---
 
 ## Example

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-tietze-fails-in-a-t1-space-that-is-not-normal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-degree-d-map-on-a-sphere-has-lefschetz-number-one-plus-minus-d.md

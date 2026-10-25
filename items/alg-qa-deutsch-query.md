@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-qa-deutsch-query.json
+  precheck: n/a
 id: alg-qa-deutsch-query
 kind: algorithm
 title: One-query Deutsch algorithm
@@ -27,8 +30,6 @@ axiom_use: None; all arguments use finite sums, finite sets, and explicit finite
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Ronald de Wolf, Quantum Computing: Lecture Notes, arXiv:1907.09415v6 (2026-08-27)"
@@ -52,3 +53,40 @@ sources:
 The terminal measurement is specified by [[def-qa-finite-branch-output-law]] and is separate from the declared one-qubit gate resource. No circuit-uniformity or classical bit-time bound is asserted.
 
 The standard bit query and its controlled-access conventions are those of [[def-qa-standard-bit-query]] and [[def-qa-quantum-query-algorithm]]. The one-query phase action used by this procedure is verified by [[thm-qa-bit-query-to-phase-query]].
+
+
+## Remarks
+
+The circuit below reads from left to right, with address $A$ above target $T$; the two-wire box is one invocation of $U_f$ on the ordered pair $(A,T)$. The box $M_Z$ is the terminal computational-basis measurement of $A$, whose classical output is $b$. The target is not measured.
+
+```tikz
+\begin{tikzpicture}[x=1.35cm,y=1.2cm]
+\node[left] at (0,1) {$A:\ |0\rangle$};
+\node[left] at (0,0) {$T:\ |0\rangle$};
+\draw (0,1) -- (1.7,1);
+\draw (0,0) -- (0.5,0);
+\draw (1.1,0) -- (1.7,0);
+\draw (0.5,-0.3) rectangle (1.1,0.3);
+\node at (0.8,0) {$X$};
+\draw (1.7,0.7) rectangle (2.3,1.3);
+\node at (2,1) {$H$};
+\draw (1.7,-0.3) rectangle (2.3,0.3);
+\node at (2,0) {$H$};
+\draw (2.3,1) -- (3,1);
+\draw (2.3,0) -- (3,0);
+\draw (3,-0.4) rectangle (4.1,1.4);
+\node at (3.55,0.5) {$U_f$};
+\draw (4.1,1) -- (4.8,1);
+\draw (4.8,0.7) rectangle (5.4,1.3);
+\node at (5.1,1) {$H$};
+\draw (5.4,1) -- (6,1);
+\draw (6,0.7) rectangle (6.8,1.3);
+\node at (6.4,1) {$M_Z$};
+\draw[->] (6.8,1) -- (7.5,1);
+\node[right] at (7.5,1) {$b$};
+\draw (4.1,0) -- (7.5,0);
+\node[right] at (7.5,0) {$|-\rangle$};
+\end{tikzpicture}
+```
+
+The preparation gives $HX|0\rangle_T=|-\rangle_T$. By the phase action already cited above, the target remains $|-\rangle_T$ through the query and the final address gate. The circuit only illustrates the stated procedure; its justification is independent of the picture.

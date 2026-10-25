@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-complete-regular-surface-degree-p-extension-has-bounded-h1.json
+  precheck: pass
 id: lem-complete-regular-surface-degree-p-extension-has-bounded-h1
 kind: lemma
 title: "Degree-p inseparable extensions of complete regular surfaces have bounded H1"
@@ -27,8 +30,7 @@ sources:
   references:
     - title: "The Stacks Project, Resolution of Surfaces, Sections 54.8\u201354.9: complete source arguments with local prerequisite replacements"
       url: "https://stacks.math.columbia.edu/download/resolve.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -39,7 +41,7 @@ Assume AC and DC. Let $A=k[\![u,v]\!]$ have characteristic $p>0$, let $L/K$ be a
 
 **Given:** The complete regular surface $A=k[\![u,v]\!]$ of characteristic $p>0$, a purely inseparable degree-$p$ extension $L/K$ of its fraction field, and the finite normalization $B$ of $A$ in $L$.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

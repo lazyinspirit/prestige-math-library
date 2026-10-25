@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-symmetric-and-alternating-images-are-smooth-subbundles.md

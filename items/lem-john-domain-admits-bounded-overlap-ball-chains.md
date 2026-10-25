@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-john-domain-admits-bounded-overlap-ball-chains.json
+  precheck: pass
 id: lem-john-domain-admits-bounded-overlap-ball-chains
 kind: lemma
 title: "Bounded-overlap ball chains in a bounded John domain"
@@ -11,11 +14,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)"
@@ -64,3 +62,33 @@ For $x\notin B(x_0,2r_0)$ the chain starts with $B_0=B(x_0,r_0)$ and follows a J
 ## Source notes
 
 The construction and properties are Kinnunen's, printed pp. 141-142: the radius $r_{i+1}=|x-x_{i+1}|/(4c_J)$ at the last exit point of the ball, the comparability of consecutive radii and centre distances, the packing bound on centres with pairwise comparable distances, and the terminal convergence $r_i\to0$, $x_i\to x$. Kinnunen leaves the case $x\in B(x_0,2r_0)$ as an exercise; the explicit overlapping geometric chain of step 1.2 supplies it. The roles of the constants are kept separate: the John inequality is used only to put every ball inside $\Omega$ and to bound $|x-x_0|$, the packing bound uses only the comparability of the radii to $|x-y|$, and no monotonicity of the radii is claimed.
+
+## Remarks
+
+For the near case with $d=|x-x_0|>0$, the planar illustration shows three consecutive balls $B_i,B_{i+1},B_{i+2}$ of step 1.2, for $i\ge1$, translated and scaled so that $x=(0,0)$, $x_i=(4,0)$ and $r_i=2$ in the drawing's units. Their centres lie on the segment toward $x$, and the radii halve. The dashed circle bounds the overlap ball $B(z,r_i/4)$, where $z$ is three quarters of the way from $x_i$ to $x_{i+1}$; this ball lies in $B_i\cap B_{i+1}$. Boundaries are drawn to indicate the open balls; the domain boundary is not shown. The same scaled overlap construction applies to each consecutive pair. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.35]
+  \draw (4,0) circle (2);
+  \draw (2,0) circle (1);
+  \draw (1,0) circle (0.5);
+  \draw[dashed] (2.5,0) circle (0.5);
+  \draw[dotted] (0,0) -- (4,0);
+  \fill (0,0) circle (1.5pt);
+  \fill (1,0) circle (1.5pt);
+  \fill (2,0) circle (1.5pt);
+  \fill (4,0) circle (1.5pt);
+  \node[below] at (0,-0.12) {$x$};
+  \node[below] at (1,-0.55) {$x_{i+2}$};
+  \node[below] at (2,-0.12) {$x_{i+1}$};
+  \node[below] at (4,-0.12) {$x_i$};
+  \node at (4,2.3) {$B_i$};
+  \node at (2,1.3) {$B_{i+1}$};
+  \node at (0.85,0.8) {$B_{i+2}$};
+  \node at (0.4,0.05) {$\cdots$};
+  \draw (2.5,-0.55) -- (2.8,-1.25);
+  \node[below] at (2.8,-1.25) {$B(z,r_i/4)$};
+  \draw[<->] (2,-2.4) -- (4,-2.4);
+  \node[below] at (3,-2.4) {$|x_i-x_{i+1}|=r_i$};
+\end{tikzpicture}
+```

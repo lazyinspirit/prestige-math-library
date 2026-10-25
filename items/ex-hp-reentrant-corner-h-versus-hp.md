@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-hp-reentrant-corner-h-versus-hp.json
+  precheck: pass
 id: ex-hp-reentrant-corner-h-versus-hp
 kind: example
 title: A reentrant-corner mode separates fixed-degree h error from hp error
@@ -36,8 +39,7 @@ sources:
         pp. 5–11: weighted corner class and geometric hp comparison context; the
         proof below verifies both the local h witness and its weighted
         membership."
-verification:
-  precheck: pass
+
 ---
 
 ## Example
@@ -71,12 +73,13 @@ The diagram records the reentrant sector and the two boundary edges in $\Gamma_D
 
 ```tikz
 \begin{tikzpicture}[scale=1.35]
-  \fill[gray!12] (-1,-1) -- (0,-1) -- (0,0) -- (1,0) -- (1,1) -- (-1,1) -- cycle;
+  \fill[black!90] (-1,-1) -- (0,-1) -- (0,0) -- (1,0) -- (1,1) -- (-1,1) -- cycle;
   \draw[thick] (-1,-1) -- (0,-1) -- (0,0) -- (1,0) -- (1,1) -- (-1,1) -- cycle;
   \draw[blue,very thick] (0,-1) -- (0,0) -- (1,0);
   \draw[->] (0.42,0) arc[start angle=0,end angle=270,radius=0.42];
   \node[blue] at (0.47,0.13) {$\Gamma_D$};
-  \node[above left] at (0,0) {$c=(0,0)$};
+  \draw[thin] (0,0) -- (0.28,-0.28);
+  \node[below right] at (0.28,-0.28) {$c=(0,0)$};
   \node at (-0.55,0.52) {$u(r,\theta)$};
   \node[right] at (1,0) {$\theta=0$};
   \node[below] at (0,-1) {$\theta=3\pi/2$};

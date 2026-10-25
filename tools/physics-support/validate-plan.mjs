@@ -33,7 +33,8 @@
 // item lists fill in page by page without ever weakening the guarantee.
 //
 //  12. requires-resolve   every `requires` entry names a declared page
-//  13. prereq-order       a declared prerequisite has a STRICTLY LOWER order
+//  13. prereq-order       declared known orders must place prerequisites earlier;
+//                         authenticated imports may have no stored numeric order
 //  14. requires-cycle     the declared page graph is acyclic
 //  15. undeclared-prereq  every page edge induced by an item dep lies inside the
 //                         transitive closure of that page's declared `requires`.
@@ -488,8 +489,14 @@ try {
   }
 } catch (error) { die(`imported page resolution: ${error.message}`); }
 // Rebuild the ordinary order index after adding context-only published pages.
-// Their explicit source order, or the existing P-page default zero, is retained.
-pages.sort((a, b) => a.order - b.order);
+// Canonical P-page declarations retain their supplied order, including zero;
+// authenticated imports retain explicit source order or its actual absence.
+// Only authenticated imported context may lack stored order. Do not synthesize
+// zero or let undefined comparisons scramble the relative order of known pages.
+// Unknown context remains in every resolution/closure/item/page-cycle check.
+const unknownImportedOrder = page => importedContextPages.has(page.id) && page.order === undefined;
+pages.sort((a, b) => unknownImportedOrder(a) ? (unknownImportedOrder(b) ? 0 : 1)
+  : unknownImportedOrder(b) ? -1 : a.order - b.order);
 pageOrder.clear(); pages.forEach((page, index) => pageOrder.set(page.id, index));
 // An imported carrier can explicitly mark an examples page without using the
 // conventional suffix. The earlier b-leaf pass could not know that new kind.
@@ -554,7 +561,8 @@ for (const p of pages)
   if (selectedPages === null || prerequisiteContext.has(p.id)) for (const r of p.requires ?? []) {
     const context = selectedPages === null || selectedPage(p.id) ? '' : `page ${prerequisiteContext.get(p.id)}: prerequisite `;
     if (!pageById.has(r)) { err('requires-resolve', `${context}page ${p.id} requires "${r}", which is not a declared page`); continue; }
-    if (pageOrder.get(r) >= pageOrder.get(p.id))
+    if (!unknownImportedOrder(p) && !unknownImportedOrder(pageById.get(r))
+      && pageOrder.get(r) >= pageOrder.get(p.id))
       err('prereq-order', `${context}page ${p.id} (order ${p.order}) requires ${r} (order ${pageById.get(r).order}) — a prerequisite must come STRICTLY earlier`);
   }
 for (const comp of sccs(prerequisitePageRoots, reqSucc))

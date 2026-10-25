@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-cover-transfer-with-inverted-degree-and-sign-anti-invariants.md

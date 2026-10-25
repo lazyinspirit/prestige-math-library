@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-local-length-comparison-for-a-conjugate-free-geodesic.json
+  precheck: pass
 id: lem-local-length-comparison-for-a-conjugate-free-geodesic
 kind: lemma
 title: Local length comparison for a conjugate-free geodesic
@@ -58,9 +61,7 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Lectures 18 and 22-23, printed pp.134-135 and 163-169: Gauss lemma and the behaviour below the first conjugate point; the equality analysis is carried out locally here and is not quoted."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -209,7 +210,7 @@ dimension is bijective ([[thm-rank-nullity]]).
 
 ## Proof
 
-**Proof technique:** the segment is covered by finitely many tangent balls on which $\exp_p$ is a diffeomorphism; a nearby curve is pulled back to a piecewise $C^1$ curve $\varphi$ with $\exp_p\circ\varphi=\bar\gamma$; the smoothed radius $\sqrt{r^2+\sigma^2}$ with $r=|\varphi|_g$ satisfies the pointwise Gauss-lemma bound $|\bar\gamma'|_g\ge|(\sqrt{r^2+\sigma^2})'|$, and Newton--Leibniz on the strips gives $L_g(\bar\gamma)\ge\sqrt{|X|_g^2+\sigma^2}-\sigma\uparrow|X|_g$. Equality forces $r$ to be nondecreasing, the spherical part of $\varphi'$ to vanish and the direction $\varphi/r$ to be the constant direction of $X$; then $\bar\gamma=\gamma\circ\tau$ with $\tau$ the radial reparametrization, and conversely [F15].
+**Proof technique:** the segment is covered by finitely many tangent balls on which the exponential map at the initial point is a diffeomorphism; a nearby curve is pulled back to a continuous piecewise continuously differentiable tangent-space curve whose exponential image is the nearby curve. The square root of the squared radial norm plus a positive smoothing parameter squared satisfies the pointwise Gauss-lemma bound: the speed of the nearby curve is at least the absolute derivative of this smoothed radius. Newton–Leibniz on the strips bounds the nearby curve’s length below by the smoothed endpoint radius minus the smoothing parameter; this increases to the norm of the terminal tangent vector as the parameter decreases to zero. Equality forces the radial norm to be nondecreasing, the spherical part of the pull-back derivative to vanish, and its direction wherever nonzero to equal the terminal tangent direction. The nearby curve is then the original geodesic composed with the radial reparametrization, and conversely [F15].
 
 1.1 Set-up and exponential parametrization of $\gamma$. [F1, F9, F10, F11, given] Put $X:=(b-a)v\in T_pM$ and $\psi(t):=(t-a)v$ for $t\in[a,b]$, so $\psi$ is affine, $\psi(a)=0$ and $\psi(b)=X$. By [F9] the maximal geodesic $\gamma_{p,v}$ has an open interval $I_{p,v}\ni0$ and, by uniqueness in [F9], $s\mapsto\gamma_{p,v}(s)$ and $s\mapsto\gamma(a+s)$ agree for $s\in[0,b-a]$; in particular $t-a\in I_{p,v}$ for every $t\in[a,b]$. Hence by [F1] each $\psi(t)=(t-a)v$ lies in $\mathcal E_p$ and $$\exp_p(\psi(t))=\gamma_{p,v}(t-a)=\gamma(t)\qquad(a\le t\le b).$$ Finally [F11] with [F10] gives $|\dot\gamma|\equiv|v|_g$, so $L_g(\gamma)=(b-a)|v|_g=|X|_g$. [F1, F9, F10, F11, given]
 

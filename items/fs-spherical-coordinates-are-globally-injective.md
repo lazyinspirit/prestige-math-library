@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-spherical-coordinates-are-globally-injective.json
+  precheck: pass
 id: fs-spherical-coordinates-are-globally-injective
 kind: false-statement
 title: "FALSE: spherical coordinates are globally injective"
@@ -20,13 +23,6 @@ aliases: []
 landmark: true
 short: "Spherical coordinates are not globally injective"
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
-    verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
 sources:
   scraped: []
   references:
@@ -82,9 +78,7 @@ vanishes on the zero-radius and polar-axis loci.
 
 1.3 The coordinate functions of $S$ are finite products and composites of coordinate maps with sine and cosine; their displayed derivatives are continuous, so $S$ is $C^1$. [L1, L6, L8]
 
-2.1 Direct partial differentiation gives the following. [step 1.3, L1, L5, algebra]
-
-$$DS=\begin{pmatrix}\sin\phi\cos\theta&r\cos\phi\cos\theta&-r\sin\phi\sin\theta\\ \sin\phi\sin\theta&r\cos\phi\sin\theta&r\sin\phi\cos\theta\\ \cos\phi&-r\sin\phi&0\end{pmatrix}$$
+2.1 Direct partial differentiation gives the following. $$DS=\begin{pmatrix}\sin\phi\cos\theta&r\cos\phi\cos\theta&-r\sin\phi\sin\theta\\ \sin\phi\sin\theta&r\cos\phi\sin\theta&r\sin\phi\cos\theta\\ \cos\phi&-r\sin\phi&0\end{pmatrix}$$ [step 1.3, L1, L5, algebra]
 
 3.1 Expanding the determinant in step 2.1 and using the Pythagorean identity gives $\det DS=r^2\sin\phi$. [step 2.1, L2, algebra]
 
@@ -93,3 +87,41 @@ $$DS=\begin{pmatrix}\sin\phi\cos\theta&r\cos\phi\cos\theta&-r\sin\phi\sin\theta\
 ## Remarks
 
 Restricting the radius away from zero, the polar angle away from its endpoints, and the azimuth to a half-open interval removes these particular identifications. The false claim fails because the full closed parameter domain retains every seam and collapsed angular coordinate.
+
+
+The following fiber sketches distinguish the seam collision from the collapse of whole angular sets. Each arrow is the restriction of $S$ to the displayed subset of $D$; the first three rows use $r=1$. Lines and the rectangle represent all parameters in their labelled sets, not paths in the image.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (1.5,0.8) {Parameter subsets};
+\node at (7.6,0.8) {Common image under $S$};
+\fill (0,0) circle (2pt);
+\fill (3,0) circle (2pt);
+\node[below] at (0,-0.12) {$(1,\pi/2,0)$};
+\node[below] at (3,-0.12) {$(1,\pi/2,2\pi)$};
+\draw[->,thick] (4.3,0) -- (6.5,0);
+\fill (7,0) circle (2pt);
+\node[right] at (7.2,0) {$(1,0,0)$};
+\draw[thick] (0,-1.8) -- (3,-1.8);
+\fill (0,-1.8) circle (2pt);
+\fill (3,-1.8) circle (2pt);
+\node[below] at (1.5,-1.95) {$\{(1,0,\theta):0\leq\theta\leq2\pi\}$};
+\draw[->,thick] (4.3,-1.8) -- (6.5,-1.8);
+\fill (7,-1.8) circle (2pt);
+\node[right] at (7.2,-1.8) {$(0,0,1)$};
+\draw[thick] (0,-3.6) -- (3,-3.6);
+\fill (0,-3.6) circle (2pt);
+\fill (3,-3.6) circle (2pt);
+\node[below] at (1.5,-3.75) {$\{(1,\pi,\theta):0\leq\theta\leq2\pi\}$};
+\draw[->,thick] (4.3,-3.6) -- (6.5,-3.6);
+\fill (7,-3.6) circle (2pt);
+\node[right] at (7.2,-3.6) {$(0,0,-1)$};
+\draw[thick] (0,-5.7) rectangle (3,-5.1);
+\node[below] at (1.5,-5.85) {$\{0\}\times[0,\pi]\times[0,2\pi]$};
+\draw[->,thick] (4.3,-5.4) -- (6.5,-5.4);
+\fill (7,-5.4) circle (2pt);
+\node[right] at (7.2,-5.4) {$(0,0,0)$};
+\end{tikzpicture}
+```
+
+The seam row has $\det DS=1$ at both displayed parameters; the other rows lie where $\det DS=0$. Thus the seam collision and the singular angular collapses are distinct phenomena. The refutation above is independent of the illustration.

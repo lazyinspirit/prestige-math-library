@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism.md

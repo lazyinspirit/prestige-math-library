@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-closed-subspace-with-trivial-orthogonal-complement-fills-l-two.md

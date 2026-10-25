@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-radix-two-fft-correctness.json
+  precheck: pass
 id: thm-radix-two-fft-correctness
 kind: theorem
 title: "Correctness of the recursive radix-two FFT"
@@ -31,12 +34,7 @@ sources:
     - title: "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)"
       url: "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf"
       locator: "§12, Proposition 12.1 with (12.11)-(12.23): the inductive identities, for the mirror decimation-in-frequency form"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -63,7 +61,7 @@ where $X$ is the unnormalised $N$-point discrete Fourier transform of [[def-unno
 
 ## Proof
 
-**Proof technique:** induction on $m$.
+**Proof technique:** induction on the recursion level.
 
 1.1 Base case $m=0$: the group $\mathbb Z/1\mathbb Z$ has the single class $[0]_1$, $\operatorname{FFT}_0=\mathrm{id}$, and $X_0(f)=f([0]_1)e^{0}=f([0]_1)$ while $X_k(f)=X_{k\bmod1}(f)=X_0(f)$ for every integer $k$ because the length-one transform is $1$-periodic; hence $\operatorname{FFT}_0(f)(k)=f([0]_1)=X_k(f)$ for every $k$. [base, F1, F3, L1]
 

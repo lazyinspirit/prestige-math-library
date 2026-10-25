@@ -6,6 +6,7 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pageBuildability } from './buildability.mjs';
 import { validateDriftOwnerResolutions } from './drift-owner-resolutions.mjs';
+import { appendDriftView, resolveDriftTarget } from './frontier-append-evidence.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -36,7 +37,8 @@ if (!existsSync(reportPath)) {
   console.error(`ERROR drift-check-no-report: ${reportPath} — the drift review has not run`);
   process.exit(1);
 }
-const text = readFileSync(reportPath, 'utf8');
+const driftView = appendDriftView(process.cwd(), run);
+const text = driftView.text;
 
 // A minted/rescoped pair enters the run only *after* this Alpha review has
 // completed. Requiring it to have its own report section turns a successful
@@ -68,6 +70,18 @@ if (!existsSync(specPath)) {
 }
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const pageById = new Map((spec.pages ?? []).map((p) => [p.id, p]));
+// Missing explicitly named targets resolve only through pinned published context.
+// Unknown source order is never converted to zero or accepted for a plan row.
+const importedUnknownOrder = new Set();
+for (const verdict of text.matchAll(/^VERDICT:[ \t]*drift-applied\b([^\r\n]*)/gm)) {
+  for (const named of verdict[1].matchAll(/`?([a-z0-9][a-z0-9-]*)`?\s*\(order\s*(?:[0-9.]+|unspecified)\)/g)) {
+    if (!pageById.has(named[1])) {
+      const resolved = resolveDriftTarget(process.cwd(), named[1], pageById);
+      pageById.set(named[1], resolved.page);
+      if (resolved.imported && resolved.page.order === undefined) importedUnknownOrder.add(named[1]);
+    }
+  }
+}
 const partnerById = new Map();
 for (const page of spec.pages ?? []) {
   if (page.kind !== 'A') continue;
@@ -100,7 +114,7 @@ const owedPages = ledgerPages
 
 const errors = [];
 let ownerResolved = new Set();
-try { ownerResolved = validateDriftOwnerResolutions(process.cwd(), run).resolved; }
+try { ownerResolved = validateDriftOwnerResolutions(process.cwd(), run).resolved; for (const page of driftView.resolved) ownerResolved.add(page); }
 catch (error) { errors.push(error.message); }
 let applied = 0;
 let edgesChecked = 0;
@@ -167,19 +181,24 @@ for (const id of reviewedOwed) {
     // of the spec and must point backward. A report claiming an edit it did not
     // make produces the same file as one that made it — the same failure the
     // step-3 recheck exists for, one stage earlier.
-    const named = idsWithOrder(detail);
+    const named = [...detail.matchAll(/`?([a-z0-9][a-z0-9-]*)`?\s*\(order\s*([0-9.]+|unspecified)\)/g)];
     if (!named.length) {
       errors.push(`drift-check-detail: ${id} is drift-applied but its detail names no \`<page-id> (order <n>)\` edge`);
       continue;
     }
     const page = pageById.get(id);
-    for (const target of named) {
+    for (const [, target, statedOrder] of named) {
       if (!(page?.requires ?? []).includes(target)) {
         errors.push(`drift-check-not-applied: ${id} reports adding \`${target}\` but ${specPath} does not carry the edge`);
         continue;
       }
       const t = pageById.get(target);
-      if (t && page && Number(t.order) >= Number(page.order)) {
+      if (!t || (statedOrder === 'unspecified' ? !importedUnknownOrder.has(target)
+          : !Number.isFinite(t.order) || Number(statedOrder) !== t.order)) {
+        errors.push(`drift-check-order-detail: ${id} names an unknown or contradictory order for ${target}`);
+        continue;
+      }
+      if (!importedUnknownOrder.has(target) && page && Number(t.order) >= Number(page.order)) {
         errors.push(`drift-check-forward-edge: ${id} (order ${page.order}) requires \`${target}\` (order ${t.order}) — `
           + 'a forward edge is a reading-order change and is the owner\'s alone');
       }

@@ -1,0 +1,119 @@
+{
+  "id": "def-arnoldi-process",
+  "agent": "/root/rendering_repair_coordinator/dla_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tile contains only sequential formulas and prose. A fixed-step flow schematic materially clarifies that projection and residual computation precede the mutually exclusive normalization and exact-breakdown branches; this is a warranted explanatory addition, not a claim that the complete definition was mathematically deficient.",
+      "action": "Added a six-node, five-arrow TikZ schematic in final Remarks with the exact local coefficients, residual, norm and branch conditions.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an expository fixed-step Arnoldi flow diagram, preserving all original definition bytes and frontmatter.",
+  "source_lines_after": {
+    "remarks": [
+      53,
+      57
+    ],
+    "tikz": [
+      59,
+      79
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and scalar/vector types",
+      "evidence": "Definition lines 29 and 34 fix one real or complex inner-product space and orthonormal v_1,...,v_j. A acts on that same space, so Av_j, each h_ij v_i, and w_j are vectors in it. The inner product yields a scalar h_ij and the norm yields a nonnegative real h_{j+1,j}. Diagram arrows indicate computational order, not vector-space morphisms or asserted commutative squares."
+    },
+    {
+      "check": "Projection convention and residual",
+      "evidence": "Diagram lines 64 and 66 exactly reproduce Definition lines 36 and 40, with 1 <= i <= j and column index j. The local supplier def-inner-product-space explicitly uses linearity in the first argument, so h_ij=<Av_j,v_i> is the correct coefficient. Orthonormality gives <w_j,v_k>=h_kj-sum_i h_ij delta_ik=0 for each k<=j. No conjugation or sign is changed."
+    },
+    {
+      "check": "Norm, normalization and exact breakdown",
+      "evidence": "Diagram line 68 reproduces line 44. By positive definiteness in def-inner-product-space and the induced norm definition, ||w_j||=0 iff w_j=0. The nonzero branch divides by h_{j+1,j} exactly as lines 46-48; its output is a unit vector orthogonal to the current vectors. The zero branch stops at step j exactly as lines 50-51 and never attempts division by zero. Both branch labels retain h_{j+1,j}, not h_{j,j+1}."
+    },
+    {
+      "check": "Arrows, Krylov and Hessenberg interfaces",
+      "evidence": "All five rendered arrows go forward: input -> coefficients -> residual -> norm, then norm -> normalized new vector or norm -> exact breakdown. This is a fixed-step recurrence schematic; it introduces no matrix dimensions or new Hessenberg identity and preserves the existing Krylov supplier interface. The coefficient rows 1,...,j and optional subdiagonal h_{j+1,j} retain the original Arnoldi indexing. No new statement, dependency or proof claim is inferred from the picture."
+    },
+    {
+      "check": "Independence",
+      "evidence": "The complete original Definition is byte-preserved, and the Remarks explicitly say that the diagram restates it. This proof-free definition remains complete without the figure; any rigorous argument remains independent of it."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-arnoldi-process.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-arnoldi-process.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-arnoldi-process.md",
+            "item_id": "def-arnoldi-process",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-arnoldi-process.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dla002 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-arnoldi-process --out research/math-library-rendering-repairs-2026-10-23/previews/dla002-arnoldi",
+      "exit_code": 0,
+      "output": {
+        "output_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dla002-arnoldi",
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "visual_inspection": {
+    "original": "research/math-library-rendering-audit-2026-10-23/linear-algebra/screenshots/def-arnoldi-process--01.png",
+    "original_sha256": "7afc19baaa43f69a6cd917acd9c59e8fd875d3337bdf8f7334b1fb9dfee5ac89",
+    "path_discrepancy": "The declared diagram-supplement/screenshots path does not exist. Located the authentic original within the corresponding linear-algebra category and verified its exact recorded SHA256 before standalone original-resolution inspection.",
+    "current": "research/math-library-rendering-repairs-2026-10-23/previews/dla002-arnoldi/screenshots/def-arnoldi-process--01.png",
+    "detail": "original",
+    "result": "Standalone fresh native tile shows all six nodes, all five arrowheads, both branch conditions and complete formula labels, with no figure clipping or overlap. The unchanged upper title/definition text is mostly absent in this fresh capture, although it was fully visible in the authentic original; this capture artifact was not used to change correct source. Remarks and the new native TikZ figure are visible.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dla002-arnoldi/manifest.json",
+    "source_sha256": "576b84464d93488cda95c097a1aec30698f168766498f9aeea9494640dfa031e",
+    "html_sha256": "bf40786039b9049ac077b33081b0f2c95ee1b98ed88fa430fde82f04fa409ad6",
+    "reference_map_sha256": "596a7c554c435b784cc1043947311ac2aee2d75e2160619f3da1f364008fd30c"
+  },
+  "guard": {
+    "expected_before_raw_sha256": "7103d6c7455056c65949cf8770974726dbcf2dcb679c53797006fc12e2f14892",
+    "verified_immediately_before_edit": true,
+    "frontmatter_byte_identical": true,
+    "original_definition_byte_preserved": true
+  },
+  "remaining_issues": [
+    "Fresh native capture artifact affects unchanged upper title/definition text; original screenshot independently shows correct original rendering. Preview is local ItemBody coverage, not production route coverage.",
+    "The preview reference map reports 16 unrelated parse diagnostics; this item has no authored wikilinks and the scoped renderer check has zero errors/warnings."
+  ]
+}

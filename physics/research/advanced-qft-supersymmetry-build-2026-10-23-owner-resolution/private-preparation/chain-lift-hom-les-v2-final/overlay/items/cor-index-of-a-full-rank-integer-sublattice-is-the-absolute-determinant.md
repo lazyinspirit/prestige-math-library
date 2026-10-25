@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant.md

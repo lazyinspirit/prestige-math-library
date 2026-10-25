@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-keyhole-branch-boundary-values.json
+  precheck: pass
 id: lem-keyhole-branch-boundary-values
 kind: lemma
-title: "A keyhole contour sees the two boundary values of z^(alpha-1)"
+title: 'A keyhole contour sees the two boundary values of $z^{\alpha-1}$'
 status: published
 origin: session
 provenance:
@@ -14,13 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:

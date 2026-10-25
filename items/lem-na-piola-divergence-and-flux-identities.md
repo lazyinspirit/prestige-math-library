@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-na-piola-divergence-and-flux-identities.json
+  precheck: pass
 id: lem-na-piola-divergence-and-flux-identities
 kind: lemma
 title: Piola divergence and facet-flux identities
@@ -25,12 +28,7 @@ sources:
       url: https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf
       locator: "Complete textbook, Chapter 2 §2.1, equations (2.1.69)–(2.1.74), Piola
         divergence and normal-flux formulas."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -63,8 +61,8 @@ $$
 For smooth fields, the proved identity is represented by
 
 ```tikzcd
-C^1(\overline{\widehat K};\mathbb R^d) \arrow[r,"\operatorname{div}"] \arrow[d,"\mathcal P_K"'] & C(\widehat K) \arrow[d,"J_K^{-1}(\cdot)\circ F_K^{-1}"] \\
-C^1(\overline K;\mathbb R^d) \arrow[r,"\operatorname{div}"'] & C(K)
+C^1(\overline{\widehat K};\mathbb R^d) \arrow[r,"\mathrm{div}"] \arrow[d,"\mathcal P_K"'] & C(\widehat K) \arrow[d,"J_K^{-1}(\cdot)\circ F_K^{-1}"] \\
+C^1(\overline K;\mathbb R^d) \arrow[r,"\mathrm{div}"'] & C(K)
 ```
 
 The top and bottom arrows are divergence, the left arrow is the contravariant Piola push-forward, and the right arrow is scalar pull-forward with the Jacobian factor. The proof above establishes the commutation algebraically; the diagram is only a record of the identity.

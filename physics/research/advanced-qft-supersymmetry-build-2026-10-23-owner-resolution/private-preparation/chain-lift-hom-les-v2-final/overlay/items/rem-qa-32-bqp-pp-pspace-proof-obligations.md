@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-qa-32-bqp-pp-pspace-proof-obligations.md

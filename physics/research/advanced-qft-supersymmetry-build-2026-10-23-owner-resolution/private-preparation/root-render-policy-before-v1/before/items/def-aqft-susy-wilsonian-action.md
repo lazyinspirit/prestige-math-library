@@ -1,0 +1,95 @@
+---
+id: def-aqft-susy-wilsonian-action
+kind: definition
+title: Supersymmetric Wilsonian EFT action and threshold data
+status: draft
+origin: pipeline
+pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
+domain: physics
+library: physics
+category: advanced-qft-and-supersymmetry
+page: aqft-susy-effective-theories
+dependency_level: 6
+deps:
+  - def-qftx-physical-superspace-normalization
+  - def-qftx-wilsonian-n1-action-data
+  - def-aqft-threshold-matching-map
+  - def-aqft-operator-basis-physical-data
+  - thm-aqft-field-redefinition-observable-equivalence-at-fixed-order
+  - def-axiom-of-choice
+dependency_roles:
+  def-qftx-physical-superspace-normalization: formulation-prerequisite
+  def-qftx-wilsonian-n1-action-data: formulation-prerequisite
+  def-aqft-threshold-matching-map: formulation-prerequisite
+  def-aqft-operator-basis-physical-data: formulation-prerequisite
+  thm-aqft-field-redefinition-observable-equivalence-at-fixed-order: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
+axiom_base: "ZF + full Axiom of Choice, inherited only for the declared invariant-quotient/on-shell-amplitude equivalence input; the finite local action data add no choice principle."
+proof_strategy: definition
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+physical_scope: "Finite-order, local, rigid four-dimensional N=1 Wilsonian effective-action data across one declared heavy-field threshold. The definition asserts no generic interacting continuum theory, complete operator classification, arbitrary off-shell equivalence, or empirical realization."
+sources:
+  references:
+    - title: "Steven Weinberg, Non-Renormalization Theorems in Non-Renormalizable Theories"
+      url: "https://arxiv.org/pdf/hep-th/9803099v1"
+      locator: "Equations (1)–(3), printed pp. 2–3: local rigid N=1 superspace action, holomorphic chiral integrand, real D-term, and Wilsonian cutoff."
+    - title: "Stephen P. Martin, A Supersymmetry Primer, version 7"
+      url: "https://arxiv.org/pdf/hep-ph/9709356v7"
+      locator: "§§4.7 and 4.10, printed pp. 41 and 49–50: chiral superspace actions, nonrenormalizable supersymmetric EFT terms, and their holomorphic/real data."
+    - title: "Aneesh V. Manohar, Introduction to Effective Field Theories"
+      url: "https://arxiv.org/pdf/1804.05863"
+      locator: "Chapter 5, §§5.5–5.7 and Chapter 7, §§7.1–7.2: finite-order matching, low-energy expansion, and distinct threshold/RG data."
+    - title: "C. P. Burgess, Introduction to Effective Field Theory"
+      url: "https://arxiv.org/pdf/hep-th/0701053"
+      locator: "§§2.2.1–2.2.2 and §4.1.4: Wilson-action mode split, scale cancellation, and decoupling-subtraction threshold matching."
+    - title: "Juan Carlos Criado and Manuel Pérez-Victoria, Field redefinitions in effective theories at higher orders"
+      url: "https://arxiv.org/pdf/1811.09413"
+      locator: "§2, equations (2.2)–(2.8), and Appendix B: regulated changes of variables, transformed sources, and LSZ-equivalence hypotheses."
+verification:
+  precheck: n/a
+---
+
+## Definition
+
+Use natural units $c=\hbar=1$, flat spacetime $M=\mathbb R^{1,3}$, coordinates $x^0=ct$, and metric $\eta=\operatorname{diag}(-1,1,1,1)$. A local rigid four-dimensional $\mathcal N=1$ supersymmetric Wilsonian action datum uses finitely many smooth classical chiral superfields $\Phi_i$ and, when a gauge sector is selected, a stated compact global gauge group, unitary field representations, and its specified vector-superfield data. A chiral field obeys $\bar D_{\dot\alpha}\Phi_i=0$; the scalar and Weyl-spinor components have the dimensions fixed by $[\Phi_i]=1$, while $[W_\alpha]=3/2$ for the chiral gauge-field-strength superfield. The action has the superspace form
+
+$$\mathcal L_\lambda=[\sum_i\Phi_i^\dagger e^{-V_i}\Phi_i+G_\lambda]_D+2\operatorname{Re}[\frac{\tau_\lambda}{8\pi i}\operatorname{Tr}_{\mathrm h}(W^\alpha W_\alpha)+F_\lambda(\Phi,W)]_F,$$
+
+where the physical action brackets are $[U]_D=-I_D(U)/4$, $[Y]_F=I_F(Y)/2$ from Physical superspace action brackets and canonical chiral components, with physical chiral components $\psi_{\mathrm{raw}}=\sqrt2\psi$, $F_{\mathrm{raw}}=2F$, and $G_\lambda$ is real and gauge invariant, $F_\lambda$ is holomorphic, gauge invariant, and has no superspace or spacetime derivatives, $[\tau_\lambda]=0$, and the chiral and real terms are respectively called the Wilsonian F-term and D-term. The cutoff prescription is formal and coefficientwise at a nonzero Wilsonian mode scale $0<\lambda<\Lambda_0$; it supplies a local derivative expansion and claims neither convergence nor a continuum functional measure. A one-particle-irreducible vertex is a vertex contribution that cannot be disconnected by cutting one internal propagator; it is separate data from the Wilsonian action.
+
+A finite supersymmetric EFT operator datum selects finitely many field species, coefficient spaces and Grassmann parities, their gauge and flavor actions, and a maximum spacetime-jet order $r$. A field jet is a component of a field or one of its spacetime derivatives $\partial_I\Phi_i$ for a multi-index $I$ with $|I|\le r$. It also selects a coefficient field, spurions, maximum engineering weight $D_{\max}$, field-degree cutoff $q$, loop cutoff $L_{\max}$, and a finite ordered basis $\mathcal O_\alpha$ for the declared quotient $\mathcal Q_D=V_D/R_D$ of invariant local polynomials by the explicitly supplied relation subspace. Each $\mathcal O_\alpha$ is a Lorentz-scalar representative built from finitely many such jets and has the declared gauge/flavor transformation law and engineering weight $\Delta_\alpha$. Each retained coefficient $C_{\alpha,\ell}$ is dimensionless in the convention
+
+$$\mathcal L_{\mathrm{tr}}=\sum_{\Delta_\alpha\le D_{\max}}\sum_{\ell=0}^{L_{\max}}\zeta^\ell C_{\alpha,\ell}(\mu_W)\frac{\mathcal O_\alpha}{\Lambda_{\mathrm{op}}^{\Delta_\alpha-4}},$$
+
+where $\zeta$ is formal loop bookkeeping, $\Delta_\alpha$ is the engineering weight of $\mathcal O_\alpha$, and $\Lambda_{\mathrm{op}}>0$ is its coefficient-suppression scale. The declared relations may include polynomial or Fierz identities, superspace integration by parts under stated compact-support or boundary conditions, gauge identities, and leading-superfield-equation relations. Every equation-of-motion or field-redefinition relation records its base action, parity-preserving local identity-leading map, inverse through the retained order, and all induced terms. This quotient records only the supplied relations and does not assert that it is a complete physical basis.
+
+An optional on-shell amplitude-equivalence record for such a relation includes a local, parity-preserving formal field map with identity leading term and inverse through the retained order, an invariant action for the declared complex reductive symmetry, the exact finite-regulator change-of-variables density and its Jacobian, the correspondingly transformed source, and a common regulator limit with stable positive-mass simple poles, nonzero residues, and the stated LSZ pole factorization. Under full Axiom of Choice, the fixed-order equivalence theorem applies to that record and its exact hypotheses. The quotient alone does not identify off-shell Green functions or prove that a regulator, its Jacobian, or an LSZ limit exists.
+
+For one declared threshold, the high-energy and low-energy descriptions share their specified light fields and differ by a nonempty declared heavy-multiplet sector of threshold mass $M>0$. A finite matching record supplies the high- and low-energy coefficient spaces and bases, selected renormalized amplitudes or Green functions, their common infrared regulator, external states and kinematics, matching map, and retained loop, operator, and mass-expansion orders. The Wilsonian scale $\mu_W$, renormalization scale $\mu$, heavy threshold mass $M$, external-energy bound $E_{\mathrm{ext}}$, regulator cutoff $\Lambda_{\mathrm{reg}}$, and operator-suppression scale $\Lambda_{\mathrm{op}}$ all have mass dimension one and are distinct unless additional model data identify them. Matching equality concerns only the selected amplitudes and stated truncation; it supplies no discarded-term error bound and is not an equality of arbitrary one-particle-irreducible functionals.
+
+## Definition references
+
+[[def-qftx-wilsonian-n1-action-data|Local rigid N=1 Wilsonian action and its formal cutoff data]]
+
+[[def-aqft-threshold-matching-map|Finite coefficient spaces, matching map, common infrared regulator, and separate scales]]
+
+[[def-aqft-operator-basis-physical-data|Finite field, jet, symmetry, and operator-basis data]]
+
+[[thm-aqft-field-redefinition-observable-equivalence-at-fixed-order|Full-AC conditional on-shell equivalence under an exact regulated local change of variables]]
+
+[[def-axiom-of-choice|Full Axiom of Choice required by the conditional operator-equivalence input]]
+
+[Weinberg, equations (1)–(3)](https://arxiv.org/pdf/hep-th/9803099v1)
+
+[Martin, §§4.7 and 4.10](https://arxiv.org/pdf/hep-ph/9709356v7)
+
+[Manohar, §§5.5–5.7 and 7.1–7.2](https://arxiv.org/pdf/1804.05863)
+
+[Burgess, §§2.2.1–2.2.2 and 4.1.4](https://arxiv.org/pdf/hep-th/0701053)
+
+[Criado–Pérez-Victoria, §2 and Appendix B](https://arxiv.org/pdf/1811.09413)
+
+[[def-qftx-physical-superspace-normalization]]
+

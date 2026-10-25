@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-continued-fraction-of-square-root-two.json
+  precheck: pass
 id: ex-continued-fraction-of-square-root-two
 kind: example
-title: "The continued fraction [1; overline 2] for sqrt(2)"
+title: 'The continued fraction $[1;\overline{2}]$ for $\sqrt{2}$'
 status: published
 origin: session
 provenance:
@@ -14,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
 sources:
   scraped: []
   references:

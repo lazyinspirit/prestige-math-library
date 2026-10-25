@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dyadic-cube-values-are-forced-by-translation-invariance-and-normalisation.md

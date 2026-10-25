@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-belief-state-and-bayes-filter.json
+  precheck: n/a
 id: def-belief-state-and-bayes-filter
 kind: definition
 title: "Belief states and the finite Bayes filter"
@@ -18,12 +21,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08"
@@ -74,3 +71,24 @@ and the expected one-step reward at belief $b$ under action $a$ is $\bar r(b,a)=
 [Tedrake, MIT Underactuated Robotics course notes](https://underactuated.mit.edu/belief.html).
 
 [Poupart, University of Waterloo CS 886 Lecture 13](https://cs.uwaterloo.ca/~ppoupart/teaching/cs886-fall05/lectureNotes/cs886-lecture13.pdf).
+
+## Remarks
+
+For fixed $b\in\Delta(S)$, $a\in A$, and $o\in\Omega$, write $\bar b=\bar b_{b,a}$, $q(o)=q(o\mid b,a)$, and $\tau(o)=\tau(b,a,o)$ when defined. The schematic separates prediction through $T$, evaluation of the observation likelihood through $O$, and normalization only on the positive-likelihood branch. The zero-likelihood branch has no posterior belief.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node[draw,rounded corners,minimum width=1.3cm,minimum height=0.8cm] (input) at (0,0) {$b,a$};
+\node[draw,rounded corners,minimum width=1.3cm,minimum height=0.8cm] (pred) at (2.6,0) {$\bar b$};
+\node[draw,rounded corners,minimum width=1.3cm,minimum height=0.8cm] (obs) at (5.2,0) {$q(o)$};
+\node[draw,rounded corners,minimum width=1.6cm,minimum height=0.8cm] (post) at (8.5,1.4) {$\tau(o)$};
+\node[align=center] (zero) at (8.5,-1.4) {undefined\\no posterior};
+\draw[->] (input) -- node[above] {$T$} (pred);
+\draw[->] (pred) -- node[above] {$O,\ o$} (obs);
+\draw[->] (obs) -- node[above,sloped] {$q(o)>0$} (post);
+\draw[->] (obs) -- node[below,sloped] {$q(o)=0$} (zero);
+\node at (8.5,2.2) {normalize};
+\end{tikzpicture}
+```
+
+The arrows describe the formulas in the definition, rather than transitions between hidden states. The kernel $K$ collects the posterior beliefs from all positive-likelihood observations with their weights $q(o\mid b,a)$; zero-likelihood observations contribute no term. This illustration supplies no premise for the mathematical arguments.

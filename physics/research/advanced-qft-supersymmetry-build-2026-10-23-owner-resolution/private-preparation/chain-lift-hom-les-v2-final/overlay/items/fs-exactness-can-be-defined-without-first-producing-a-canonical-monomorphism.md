@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-exactness-can-be-defined-without-first-producing-a-canonical-monomorphism.md

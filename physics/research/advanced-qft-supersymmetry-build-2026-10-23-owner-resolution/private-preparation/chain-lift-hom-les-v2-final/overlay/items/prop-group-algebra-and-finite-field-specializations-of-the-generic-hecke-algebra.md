@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra.md

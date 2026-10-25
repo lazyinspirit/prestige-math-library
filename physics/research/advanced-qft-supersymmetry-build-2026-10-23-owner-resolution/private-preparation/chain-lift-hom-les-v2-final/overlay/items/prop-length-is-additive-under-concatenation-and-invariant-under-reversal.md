@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-length-is-additive-under-concatenation-and-invariant-under-reversal.md

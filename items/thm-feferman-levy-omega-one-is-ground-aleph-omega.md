@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-feferman-levy-omega-one-is-ground-aleph-omega.json
+  precheck: pass
 id: thm-feferman-levy-omega-one-is-ground-aleph-omega
 kind: theorem
 title: The new omega one is the old aleph omega
@@ -9,13 +12,6 @@ proof_strategy: contradiction
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - {title: "Thomas Jech, The Axiom of Choice, Chapter 10, Problem 3 and complete hint, printed p. 148", url: "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"}
@@ -25,11 +21,11 @@ sources:
 
 In the Feferman–Levy model $N$,
 
-$$\omega_1^N=\aleph_omega^V.$$
+$$\omega_1^N=\aleph_{\omega}^V.$$
 
 ## Facts & Assumptions
 
-**Given:** Put $\kappa=\aleph_omega^V=\sup_{n<\omega}\aleph_n^V$ and regard all ground ordinals as the same ordinals in the transitive symmetric model.
+**Given:** Put $\kappa=\aleph_{\omega}^V=\sup_{n<\omega}\aleph_n^V$ and regard all ground ordinals as the same ordinals in the transitive symmetric model.
 
 [F1] [[lem-ground-aleph-n-is-countable-in-the-feferman-levy-model]] proves that every $\aleph_n^V$ is countable in $N$.
 
@@ -45,7 +41,7 @@ $$\omega_1^N=\aleph_omega^V.$$
 
 ## Proof
 
-**Proof technique:** contradiction for uncountability of the ground limit, followed by leastness of $\omega_1$.
+**Proof technique:** contradiction for uncountability of the ground limit, followed by leastness of omega-one.
 
 1.1 If $\alpha<\kappa$, then $\alpha<\aleph_n^V$ for some $n<\omega$. For $\alpha=0$ it is finite. Otherwise restrict the surjection from F1 by replacing values outside $\alpha$ with $0$; this is a surjection $\omega\twoheadrightarrow\alpha$ in $N$. Thus every ordinal below $\kappa$ is countable in $N$, and consequently $\kappa\le\omega_1^N$. [F1, F5]
 
@@ -55,4 +51,4 @@ $$\omega_1^N=\aleph_omega^V.$$
 
 2.1 If $p\Vdash\dot f(\check k)=\check\alpha$, then $p\le_Bu_{k,\alpha}$, and F3 gives $p\mathbin{\upharpoonright}m\le_Bu_{k,\alpha}$; hence $\alpha\in A_k$. Because the alleged $f$ is surjective, F4 supplies such a $k$ and $p\in G$ for every $\alpha<\kappa$. Thus $\kappa=\bigcup_{k<\omega}A_k$, contradicting the strict bound in step 1.3. Therefore no such $f$ belongs to $N$, so $\kappa$ is uncountable in $N$. [F3, F4, step 1.2, step 1.3, discharge-contradiction]
 
-3.1 Since $\omega_1^N$ is the least uncountable ordinal of $N$, step 2.1 gives $\omega_1^N\le\kappa$, while step 1.1 gives the reverse inequality. Hence $\omega_1^N=\kappa=\aleph_omega^V$. [step 1.1, step 2.1, discharge-contradiction: step 1.2] ∎
+3.1 Since $\omega_1^N$ is the least uncountable ordinal of $N$, step 2.1 gives $\omega_1^N\le\kappa$, while step 1.1 gives the reverse inequality. Hence $\omega_1^N=\kappa=\aleph_{\omega}^V$. [step 1.1, step 2.1, discharge-contradiction: step 1.2] ∎

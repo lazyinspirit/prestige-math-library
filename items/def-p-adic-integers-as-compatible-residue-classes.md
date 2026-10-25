@@ -1,20 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-p-adic-integers-as-compatible-residue-classes.json
+  precheck: n/a
 id: def-p-adic-integers-as-compatible-residue-classes
 kind: definition
-title: "The p-adic integers are the compatible residue-class tuples in the inverse limit of Z mod p^n"
+title: 'The p-adic integers are the compatible residue-class tuples in the inverse limit of $\mathbb Z/p^n\mathbb Z$'
 status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-compatible-tuple-inverse-limit-of-groups, def-pro-p-group]
-verification:
-  audited: 2026-09-04
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

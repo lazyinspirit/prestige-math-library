@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-affine-quasiconformal-ellipse-map.json
+  precheck: pass
 id: ex-affine-quasiconformal-ellipse-map
 kind: example
 title: The affine ellipse map and its Beltrami coefficient
@@ -19,9 +22,7 @@ sources:
     - title: "Mikhail Lyubich, Conformal Geometry and Dynamics of Quadratic Polynomials, vol. I (book draft, Stony Brook)"
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §11.1, printed pp. 175–178: the ellipse field and maximal dilatation of an orientation-preserving real-linear map."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Statement
@@ -71,3 +72,32 @@ These are the semiaxes of the image ellipse; their ratio equals the value in [F2
 3.1 For $0<r<R<\infty$, linearity and [F3] send the two boundary circles to homothetic ellipses; homeomorphism sends the region between them onto the region between those ellipses. If $r=0$, the omitted origin remains the origin. The bound $|f(z)|\ge(1-\kappa)|z|$ shows that $f$ extends to infinity with $f(\infty)=\infty$, so $R=\infty$ gives an ellipse exterior, or the punctured plane when also $r=0$. The map transports the two annular ends and their path families, and [F4] gives both distortion bounds in every case with its end-path convention. For $\mu=1/3$, $K_f=2$; the finite radii $r=1$, $R=e^{2\pi}$ give $\lambda=\mu(\Gamma)=1$, so each target quantity lies in $[1/2,2]$. [F1, F3, F4, step 2.1, given, algebra]
 
 4.1 By [F5], the restriction to any complex domain remains a homeomorphism onto a complex domain, retains the same constant Wirtinger derivatives and analytic inequality, and satisfies the geometric quadrilateral bounds for every quadrilateral compactly contained in that domain. Hence both definitions hold with constant $K_f$ on the plane and on every such restriction. [F1, F2, F4, F5, given] ∎
+
+
+## Remarks
+
+The diagram shows the finite positive-radius case in principal-axis coordinates. Write $\mu=\kappa e^{i\theta}$, set $u=e^{-i\theta/2}z$ and $v=e^{-i\theta/2}f(z)$, and obtain $v=g(u)=u+\kappa\overline u$. Thus $g(x+iy)=(1+\kappa)x+i(1-\kappa)y$. The outer ellipse has semiaxes $R(1+\kappa)$ and $R(1-\kappa)$; putting $R=1$ gives the unit-circle assertion. The drawing uses $\kappa=1/3$ and $r/R=1/2$ for visibility, not the particular annulus $A(1,e^{2\pi})$ in the statement. Dashed boundaries are excluded. The cases $r=0$ and $R=\infty$ are described in step 3.1 and are not pictured. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=0.9,>=stealth]
+\fill[blue!12,even odd rule] (0,0) circle (1.3) (0,0) circle (0.65);
+\draw[dashed] (0,0) circle (1.3);
+\draw[dashed] (0,0) circle (0.65);
+\draw[->,gray] (-1.65,0)--(1.65,0) node[right] {$\Re u$};
+\draw[->,gray] (0,-1.55)--(0,1.65) node[above] {$\Im u$};
+\node[below left] at (0,0) {$0$};
+\node at (-0.9,1.15) {$R$};
+\node at (-0.48,0.48) {$r$};
+\node at (0,-2.05) {$r<|u|<R$};
+\draw[->,thick] (2.15,0)--(3.65,0) node[midway,above] {$g$};
+\fill[blue!12,even odd rule] (6,0) ellipse (1.7333 and 0.8667) (6,0) ellipse (0.8667 and 0.4333);
+\draw[dashed] (6,0) ellipse (1.7333 and 0.8667);
+\draw[dashed] (6,0) ellipse (0.8667 and 0.4333);
+\draw[->,gray] (4.05,0)--(8.05,0) node[right] {$\Re v$};
+\draw[->,gray] (6,-1.15)--(6,1.65) node[above] {$\Im v$};
+\node[below left] at (6,0) {$0$};
+\draw[<->] (6,-1.4)--(7.7333,-1.4) node[midway,below] {$R(1+\kappa)$};
+\draw[<->] (8.55,0)--(8.55,0.8667) node[midway,right] {$R(1-\kappa)$};
+\node at (6,-2.05) {between homothetic ellipses};
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-ariki-canonical-basis-theorem-in-characteristic-zero.json
+  precheck: pass
 id: thm-ariki-canonical-basis-theorem-in-characteristic-zero
 kind: theorem
 title: "Ariki's canonical basis theorem in characteristic zero"
@@ -37,8 +40,7 @@ sources:
     - title: "Alexander Kleshchev, Representation theory of symmetric groups and related Hecke algebras, arXiv:0909.4844v1, Bull. Amer. Math. Soc. 47 (2010) 419-481 (complete 66-page survey)"
       url: "https://arxiv.org/pdf/0909.4844"
       locator: "Section 9.1-9.5, printed pp. 39-46: Theorems 9.8-9.9 and Corollary 9.10; the graded canonical-basis and decomposition-number statements. Complete passages read."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -131,3 +133,28 @@ restricted coordinate functionals and the transition polynomials of
 1.4 **The ungraded specialization (4).** The forgetful maps satisfy $\zeta(qm)=\zeta(m)$ and specialize $q$ to $1$ [F3]; a graded composition series of a finite-dimensional graded module specializes to an ungraded composition series with the same multiplicities, and the transported identifications therefore specialize to the ungraded statement that the self-dual projective classes are the canonical basis and the simple classes the dual-canonical basis of the basic module, which is Ariki's ungraded canonical-basis statement [F1, F3]. Combining this specialization with the graded decomposition theorem of this page gives the ungraded decomposition-number statement; that combination is recorded as the pointer in clause (4) and is not used in the present proofs [F3, F4]. [F1, F3, F4]
 
 2.1 **Choice.** The transport functor, the label comparison and the specialization are explicit finite constructions on finite-dimensional blocks; the only choice is inherited through the global-basis suppliers, as recorded in [C1]. [C1, F1, given] ∎
+
+
+## Remarks
+
+In characteristic-zero branch (C0), the two basis correspondences of clauses
+(1) and (2) can be read together as follows. The labels
+$\lambda,\mu\in RP=B(\Lambda_0)$ are crystal labels; the second row uses the
+restricted integral form-dual, as in [F2]. The bottom equality records the
+form-duality of the two target bases, not a map between the two rows.
+
+```tikz
+\begin{tikzpicture}
+\node (P) at (0,0) {$\begin{array}{c}K_0^{\mathrm{gr}}(H^\Lambda)\\{}[Y(\lambda)]\end{array}$};
+\node (L) at (6,0) {$\begin{array}{c}V_A(\Lambda_0)\\G(\lambda)\end{array}$};
+\draw[->] (P) -- node[above] {$\phi^{\mathrm{Hecke}}$} (L);
+\node (S) at (0,-1.8) {$\begin{array}{c}G_0^{\mathrm{gr}}(H^\Lambda)\\{}[D(\mu)]\end{array}$};
+\node (U) at (6,-1.8) {$\begin{array}{c}V_A(\Lambda_0)^\vee\\G^*(\mu)\end{array}$};
+\draw[->] (S) -- node[above] {$\Psi_{\mathrm{can}}^{\mathrm{Hecke}}$} (U);
+\node at (3,-3) {$B(G(\lambda),G^*(\mu))=\delta_{\lambda\mu}$};
+\end{tikzpicture}
+```
+
+Each row displays the image of the indicated class under its labelled map.
+The correspondences and the pairing are proved in steps 1.1 and 1.2; the
+proof is independent of this illustration.

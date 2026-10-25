@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-littlewood-paley-square-function-equivalence-on-lp.json
+  precheck: pass
 id: thm-littlewood-paley-square-function-equivalence-on-lp
 kind: theorem
-title: "Littlewood-Paley square-function equivalence on Lp for 1<p<infinity"
+title: 'Littlewood-Paley square-function equivalence on $L^p$ for $1<p<\infty$'
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30

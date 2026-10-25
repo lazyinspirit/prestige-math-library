@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-square-summable-coefficient-power-series-on-the-closed-disc.md

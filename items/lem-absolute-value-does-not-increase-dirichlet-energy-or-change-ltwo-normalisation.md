@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-absolute-value-does-not-increase-dirichlet-energy-or-change-ltwo-normalisation.json
+  precheck: pass
 id: "lem-absolute-value-does-not-increase-dirichlet-energy-or-change-ltwo-normalisation"
 kind: "lemma"
-title: "The absolute value preserves the L^2 norm and the Dirichlet energy on H^1_0"
+title: "The absolute value preserves the $L^2$ norm and the Dirichlet energy on $H^1_0$"
 status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
@@ -20,11 +23,6 @@ proof_strategy: "direct"
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (2011)"

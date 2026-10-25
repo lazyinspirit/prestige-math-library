@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-simply-connected-cw-integral-homology-comparison-implies-finite-range-homotopy-comparison.md

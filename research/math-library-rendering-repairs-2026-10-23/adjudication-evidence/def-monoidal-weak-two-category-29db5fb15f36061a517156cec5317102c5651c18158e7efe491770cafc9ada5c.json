@@ -1,0 +1,133 @@
+{
+  "id": "def-monoidal-weak-two-category",
+  "agent": "/root/rendering_repair_coordinator/hall_014",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "The sole original PNG, inspected standalone at original resolution, displays a red diagram-failed box instead of a pentagon. All five arrow labels contain comma-bearing subscripts without a protective brace group in tikzcd quoted options. Bracing the complete labels produces a successful native local SVG render.",
+      "action": "Protected all five arrow labels with brace groups, preserving their mathematical notation.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "questionable-tikz-mathematics",
+      "verdict": "confirmed",
+      "reason": "The last arrow originates in matrix row 3 column 3. Its original ur target was empty row 2 column 4, whereas the displayed codomain of 1_A tensor a_{B,C,D} is in row 1 column 4. The map in defining clause 4 ends at A tensor (B tensor (C tensor D)).",
+      "action": "Changed only that arrow routing from ur to uur; no defining clause or coherence equation changed.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 1,
+      "defect_type": "tikz-label-legibility",
+      "verdict": "confirmed",
+      "reason": "Reinspection of the prior original-resolution capture confirms arrow labels substantially smaller than surrounding body mathematics. The source-only native scale and transform-shape options visibly enlarge the labels by approximately 1.7 times in the fresh capture while preserving the five vertices, arrows and every label.",
+      "action": "Wrapped the unchanged diagram body in a full tikzcd environment with [scale=1.7,transform shape].",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Braced all comma-bearing pentagon arrow labels and routed the final lower-path associator to its actual upper-right codomain. Followup: enlarged diagram labels using only native TikZ scale/transform-shape options.",
+  "source_lines_after": [
+    48,
+    49,
+    50,
+    51,
+    52
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": true,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "X=(((A tensor B) tensor C) tensor D), U=(A tensor B) tensor (C tensor D), V=(A tensor (B tensor C)) tensor D, W=A tensor ((B tensor C) tensor D), Y=A tensor (B tensor (C tensor D)).",
+      "maps": [
+        "a_{A tensor B,C,D}: X -> U",
+        "a_{A,B,C tensor D}: U -> Y",
+        "a_{A,B,C} tensor 1_D: X -> V",
+        "a_{A,B tensor C,D}: V -> W",
+        "1_A tensor a_{B,C,D}: W -> Y"
+      ],
+      "local_justification": "Every typing follows by substituting the indicated objects in the associator a_{P,Q,R}:(P tensor Q) tensor R -> P tensor (Q tensor R) in Definition clause 3, and by applying the tensor pseudofunctor of clause 1 to an associator and the stated identity. The corrected last matrix arrow now terminates at Y, not an empty cell."
+    },
+    {
+      "relations": [
+        "Upper two-edge path: a_{A,B,C tensor D} composed with a_{A tensor B,C,D}: X -> Y.",
+        "Lower three-edge path: (1_A tensor a_{B,C,D}) composed with a_{A,B tensor C,D} composed with (a_{A,B,C} tensor 1_D): X -> Y.",
+        "The invertible 2-morphism Pi_{A,B,C,D} compares the upper path to the lower path in the direction specified in Definition clause 4. The figure does not assert their literal equality."
+      ],
+      "local_justification": "These are exactly the two displayed composites in clause 4. The adjacent sentence explicitly retains their comparison by Pi. Five-object coherence and unit modifications remain in unchanged prose; no ordinary strictly commuting pentagon is imposed. This item is a definition with no supplied proof; all defining data and equations remain stated independently of the schematic figure."
+    },
+    {
+      "followup_invariance": "The existing five matrix object strings, all five complete arrow labels, every arrow direction and the two boundary composites are byte-identical to the authenticated continuation preimage. Only a surrounding full environment and its native scale/transform-shape options were added. These geometric transforms assert no new relation; Pi continues to compare the two paths rather than enforcing strict commutativity.",
+      "local_justification": "Definition clauses 1, 3 and 4 remain byte-identical. The full concrete typings and relations checked above therefore continue to apply; defining equations remain independent of the diagram."
+    }
+  ],
+  "checks": {
+    "pre_edit_guard": {
+      "expected_before_raw_sha256": "9a347df795e536f454884d343450f599206311b1d4f3d31931311183d2efd7bf",
+      "matched_immediately_before_edit": true
+    },
+    "current_raw_sha256": "cf53796bd564cb21d6fe114fd31cdd46b192d8c13d7ffa36e4be4bf639605430",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published; status line and complete frontmatter byte-identical to authenticated continuation preimage",
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/def-monoidal-weak-two-category.md",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-monoidal-weak-two-category.md",
+            "item_id": "def-monoidal-weak-two-category",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/def-monoidal-weak-two-category.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "proof_layout": {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache/hall_014-followup\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/proof-layout.mjs items/def-monoidal-weak-two-category.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "native_preview": {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache/hall_014-followup\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-monoidal-weak-two-category --out research/math-library-rendering-repairs-2026-10-23/previews/hall_014-legibility-20261024-a",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/hall_014-legibility-20261024-a/manifest.json",
+      "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/hall_014-legibility-20261024-a/screenshots/def-monoidal-weak-two-category.json",
+      "diagram_count": 1,
+      "diagram_failures": [],
+      "katex_errors": [],
+      "visual_inspection": "Fresh single PNG viewed standalone with view_image detail original. All five arrow labels are visibly enlarged, approximately 12px instead of previous approximately 7px. No arrow-label/node overlap or clipping; final lower-path arrow still reaches the upper-right object.",
+      "prior_preview": "research/math-library-rendering-repairs-2026-10-23/previews/hall_014-20261024-b/manifest.json"
+    },
+    "frontmatter_identity_basis": "Authenticated continuation preimage; prior root-owned verification receipt changes are outside this worker followup.",
+    "followup_pre_edit_guard": {
+      "path": "research/math-library-rendering-repairs-2026-10-23/continuation-before/def-monoidal-weak-two-category-20261023T174134734362.md",
+      "expected_raw_sha256": "551b1d2caa9f434f8058ff683c07dd6c64c2972ede9104ae1e94e898955e699d",
+      "matched_immediately_before_edit": true
+    },
+    "followup_check_reexecution": "Actual scoped precheck, rendercheck and proof-layout all rerun after the final followup edit; all exit 0 with outputs recorded above."
+  },
+  "remaining_issues": [],
+  "previous_report": {
+    "path": "research/math-library-rendering-repairs-2026-10-23/adjudication-history/def-monoidal-weak-two-category-before-legibility-4ddd16116933edadc85876c8c9b30c1fefe0186e553e6df8241ae90bb4d4b26a.json",
+    "sha256": "4ddd16116933edadc85876c8c9b30c1fefe0186e553e6df8241ae90bb4d4b26a",
+    "preserved_exact": true
+  }
+}

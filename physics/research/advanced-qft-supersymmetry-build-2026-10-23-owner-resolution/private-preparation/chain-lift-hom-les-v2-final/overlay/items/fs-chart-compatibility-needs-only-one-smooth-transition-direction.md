@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-chart-compatibility-needs-only-one-smooth-transition-direction.md

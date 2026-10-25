@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-kernel-cokernel-sequence-of-a-composite.json
+  precheck: pass
 id: thm-the-kernel-cokernel-sequence-of-a-composite
 kind: theorem
 title: "The kernel-cokernel sequence of a composite"
@@ -15,9 +18,6 @@ deps: [thm-exactness-of-kernel-and-cokernel-sequences-under-endpoint-hypotheses,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-29
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -58,10 +58,28 @@ maps induced by the chosen kernels and cokernels.
 
 2.1 The map $u$ is monic: if $u s = u t$, then $k_f s = k_{g f}u s = k_{g f}u t = k_f t$, and monicity of $k_f$ from [L5] forces $s=t$. So the sequence is exact at $\ker(f)$. [L5, step 1.1, algebra]
 
-2.2 Apply [L1] to the commutative diagram ```tikzcd \ker(f) \arrow[r, "k_f"] \arrow[d, "0"'] & A \arrow[r, "f"] \arrow[d, "g f"'] & B \arrow[d, "g"'] \\ 0 \arrow[r] & C \arrow[r, "1_C"'] & C. ``` The top row is exact, and $0 \to C$ is monic. Hence the induced sequence $$\ker(0) \to \ker(g f) \to \ker(g)$$ is exact. By [L4], $\ker(0)$ is represented by $1_{\ker(f)}$, so this is exactly the sequence $$\ker(f) \xrightarrow{u} \ker(g f) \xrightarrow{v} \ker(g)$$ at $\ker(g f)$. [L1, L4, step 1.1, construct]
+2.2 Apply [L1] to the diagram with rows $\ker(f)\xrightarrow{k_f}A\xrightarrow{f}B$ and $0\xrightarrow{0}C\xrightarrow{1_C}C$, and vertical maps $0:\ker(f)\to0$, $g f:A\to C$, and $g:B\to C$ (illustrated in Remarks). Its squares commute because $(g f)k_f=0$ and $g f=1_C(g f)$. The top row is exact, and $0 \to C$ is monic. Hence the induced sequence $$\ker(0) \to \ker(g f) \to \ker(g)$$ is exact. By [L4], $\ker(0)$ is represented by $1_{\ker(f)}$, so this is exactly the sequence $$\ker(f) \xrightarrow{u} \ker(g f) \xrightarrow{v} \ker(g)$$ at $\ker(g f)$. [L1, L4, step 1.1, construct]
 
-2.3 Apply [L1] again to ```tikzcd A \arrow[r, "f"] \arrow[d, "g f"'] & B \arrow[r, "q_f"] \arrow[d, "g"'] & \operatorname{coker}(f) \arrow[d, "0"'] \\ C \arrow[r, "1_C"'] & C \arrow[r] & 0. ``` The top row is exact, and $1_C$ is monic. Therefore the induced sequence $$\ker(g f) \to \ker(g) \to \ker(0_{\operatorname{coker}(f),0})$$ is exact. By [L4], the last kernel is represented by $1_{\operatorname{coker}(f)}$, and the induced map is $q_f k_g = \delta$. Hence $$\ker(g f) \xrightarrow{v} \ker(g) \xrightarrow{\delta} \operatorname{coker}(f)$$ is exact at $\ker(g)$. [L1, L4, step 1.1, construct]
+2.3 Apply [L1] again to the diagram with rows $A\xrightarrow{f}B\xrightarrow{q_f}\operatorname{coker}(f)$ and $C\xrightarrow{1_C}C\xrightarrow{0}0$, and vertical maps $g f:A\to C$, $g:B\to C$, and $0:\operatorname{coker}(f)\to0$ (illustrated in Remarks). Its squares commute because $g f=1_C(g f)$ and $0q_f=0g$. The top row is exact, and $1_C$ is monic. Therefore the induced sequence $$\ker(g f) \to \ker(g) \to \ker(0_{\operatorname{coker}(f),0})$$ is exact. By [L4], the last kernel is represented by $1_{\operatorname{coker}(f)}$, and the induced map is $q_f k_g = \delta$. Hence $$\ker(g f) \xrightarrow{v} \ker(g) \xrightarrow{\delta} \operatorname{coker}(f)$$ is exact at $\ker(g)$. [L1, L4, step 1.1, construct]
 
 3.1 Apply steps 2.1 to 2.3 in the opposite category to the composable pair $$C \xrightarrow{g^{\mathrm{op}}} B \xrightarrow{f^{\mathrm{op}}} A.$$ Using [L2], the resulting exactness statements transport back to exactness of $$\ker(g) \xrightarrow{\delta} \operatorname{coker}(f) \xrightarrow{w} \operatorname{coker}(g f) \xrightarrow{x} \operatorname{coker}(g) \to 0$$ at $\operatorname{coker}(f)$, at $\operatorname{coker}(g f)$, and at $\operatorname{coker}(g)$. [L2, step 1.1, step 2.1, step 2.2, step 2.3]
 
 4.1 Steps 2.1 to 2.3 and 3.1 give the full exact sequence displayed in the statement. [step 2.1, step 2.2, step 2.3, step 3.1] ∎
+
+## Remarks
+
+The two comparison diagrams used in steps 2.2 and 2.3 are shown below. Their rows, vertical maps and commutativity relations are specified in those steps; the proof uses those relations independently of the figures.
+
+For step 2.2:
+
+```tikzcd
+\ker(f) \arrow[r, "k_f"] \arrow[d, "0"'] & A \arrow[r, "f"] \arrow[d, "g f"'] & B \arrow[d, "g"'] \\
+0 \arrow[r] & C \arrow[r, "1_C"'] & C
+```
+
+For step 2.3:
+
+```tikzcd
+A \arrow[r, "f"] \arrow[d, "g f"'] & B \arrow[r, "q_f"] \arrow[d, "g"'] & \mathrm{coker}(f) \arrow[d, "0"'] \\
+C \arrow[r, "1_C"'] & C \arrow[r] & 0
+```

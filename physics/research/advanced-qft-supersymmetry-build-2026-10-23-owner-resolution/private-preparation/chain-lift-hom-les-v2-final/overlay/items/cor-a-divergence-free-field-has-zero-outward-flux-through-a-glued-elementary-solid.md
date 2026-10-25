@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-divergence-free-field-has-zero-outward-flux-through-a-glued-elementary-solid.md

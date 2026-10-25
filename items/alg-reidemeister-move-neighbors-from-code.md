@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-reidemeister-move-neighbors-from-code.json
+  precheck: n/a
 id: alg-reidemeister-move-neighbors-from-code
 kind: algorithm
 title: "Enumerate Reidemeister move neighbors from a knot code"
@@ -26,14 +29,7 @@ sources:
     - title: "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)"
       url: "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
       locator: "Rotation Systems and Formalities and Trivialities, finite dart permutations and face cycles."
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: pass
+
 ---
 
 ## Definition
@@ -71,3 +67,50 @@ The bound $c+2$ includes every one-move result because R1 changes crossing count
 [Calegari, *Introduction to Knot Theory* (2025), §1.2](https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf)
 
 [Erickson, *Planar Graphs*, Rotation Systems](https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html)
+
+
+## Remarks
+
+The schematic shows one R2 certificate with four cyclically ordered cut points $p_1,p_2,p_3,p_4$ on the dashed disk boundary. Each boundary segment between consecutive cut points lies in a face; these segments illustrate the face-pairing arcs. The marked point $\infty$ is outside the selected disk $D$. The two outside arcs are identical in both panels and join $p_2$ to $p_3$ and $p_4$ to $p_1$, giving a one-component diagram. Their identity is the outside-record isomorphism fixing the boundary labels and infinity region.
+
+```tikz
+\begin{tikzpicture}[scale=1.6]
+\begin{scope}
+\draw[dashed] (0,0) circle (1.3);
+\draw (-1.2,0.5) .. controls (-2,0.5) and (-2,-0.5) .. (-1.2,-0.5);
+\draw (1.2,0.5) .. controls (2,0.5) and (2,-0.5) .. (1.2,-0.5);
+\draw (-1.2,-0.5) -- (-0.7,-0.5);
+\draw (-0.5,-0.5) -- (0.5,-0.5);
+\draw (0.7,-0.5) -- (1.2,-0.5);
+\draw[rounded corners=5pt] (-1.2,0.5) -- (-0.6,0.5) -- (-0.6,-0.92) -- (0.6,-0.92) -- (0.6,0.5) -- (1.2,0.5);
+\draw[->] (-1.05,0.5) -- (-0.82,0.5);
+\draw[->] (0.25,-0.5) -- (0,-0.5);
+\node at (0,1.05) {$D$};
+\node at (0,1.8) {$\infty$};
+\node at (-1.2,0.71) {$p_1$};
+\node at (1.2,0.71) {$p_2$};
+\node at (1.2,-0.73) {$p_3$};
+\node at (-1.2,-0.73) {$p_4$};
+\node at (0,-1.75) {two crossings};
+\end{scope}
+\draw[<->] (2.1,0) -- (2.9,0) node[midway,above] {R2};
+\begin{scope}[xshift=5cm]
+\draw[dashed] (0,0) circle (1.3);
+\draw (-1.2,0.5) .. controls (-2,0.5) and (-2,-0.5) .. (-1.2,-0.5);
+\draw (1.2,0.5) .. controls (2,0.5) and (2,-0.5) .. (1.2,-0.5);
+\draw (-1.2,0.5) -- (1.2,0.5);
+\draw (-1.2,-0.5) -- (1.2,-0.5);
+\draw[->] (-1.05,0.5) -- (-0.82,0.5);
+\draw[->] (0.25,-0.5) -- (0,-0.5);
+\node at (0,1.05) {$D$};
+\node at (0,1.8) {$\infty$};
+\node at (-1.2,0.71) {$p_1$};
+\node at (1.2,0.71) {$p_2$};
+\node at (1.2,-0.73) {$p_3$};
+\node at (-1.2,-0.73) {$p_4$};
+\node at (0,-1.75) {no crossings};
+\end{scope}
+\end{tikzpicture}
+```
+
+The strand from $p_1$ to $p_2$ passes over the strand from $p_3$ to $p_4$ at both crossings (gaps mark the under-strand). In the usual positively oriented drawing plane, the determinant convention in the code definition gives sign $-1$ at the left crossing and $+1$ at the right crossing: the over-strand points downward and upward respectively, while the under-strand points leftward. The disk contains exactly these two strands, with no extra component. This illustrates one orientation/sign variant only; the finite comparison rules still test all R1, R2 and R3 variants and all recorded decorations. The illustration does not replace any of the incidence or template tests in the algorithm.

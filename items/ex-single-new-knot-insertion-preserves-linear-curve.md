@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-single-new-knot-insertion-preserves-linear-curve.json
+  precheck: pass
 id: ex-single-new-knot-insertion-preserves-linear-curve
 kind: example
 title: Inserting a knot leaves a linear B-spline curve fixed
@@ -21,12 +24,7 @@ sources:
     - title: Carl de Boor, A Practical Guide to Splines, revised edition, Chapter XI,
         pp. 135–138
       url: https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Example
@@ -46,10 +44,10 @@ below establishes the represented curves agree.
   blend/.style={->,blue!70!black,line width=1pt}
 ]
 \node[control] (p0) at (0,1.7) {$P_0=0$};
-\node[control] (p1) at (2,1.7) {$P_1=1$};
+\node[control] (p1) at (4,1.7) {$P_1=1$};
 \node[control] (q0) at (0,0) {$Q_0=0$};
-\node[control] (q1) at (1,0) {$Q_1=1/2$};
-\node[control] (q2) at (2,0) {$Q_2=1$};
+\node[control] (q1) at (2,0) {$Q_1=1/2$};
+\node[control] (q2) at (4,0) {$Q_2=1$};
 \draw[copy] (p0) -- (q0);
 \draw[blend] (p0) -- (q1);
 \draw[blend] (p1) -- (q1);

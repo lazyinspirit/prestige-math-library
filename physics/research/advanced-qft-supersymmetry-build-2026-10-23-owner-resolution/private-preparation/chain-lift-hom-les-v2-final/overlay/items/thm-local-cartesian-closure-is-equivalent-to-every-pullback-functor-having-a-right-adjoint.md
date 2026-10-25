@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-local-cartesian-closure-is-equivalent-to-every-pullback-functor-having-a-right-adjoint.md

@@ -1,0 +1,43 @@
+# Batch 25 Step 3a adjudication
+
+Run: `advanced-qft-supersymmetry-build-2026-10-23`. Group: `batch-25`.
+
+The scope owes two touched-carrier decisions, no reader/refuter findings and no page decisions. Both page inventories and empty compact-v1 bodies were inspected. Imported and published suppliers remain read-only.
+
+## Completed level-3 review
+
+`def-aqft-operator-basis-physical-data`: complete current Definition and nine direct supplier interfaces inspected. Finite jet/degree cutoffs give finitely many monomials and weights even for zero/negative engineering weights; invariant subspaces and declared quotients remain finite-dimensional. Finite basis selections need no arbitrary-index choice. Gauge connection, curvature and associated-derivative conventions agree with their suppliers. The physical/algebraic invariant distinction, action/EOM boundary requirements, separate scales and conditional physical scope are explicit. Risk review is complete in the batch-25 contract. No decision is owed for this untouched item.
+
+Sources opened: Burgess, https://arxiv.org/pdf/hep-th/0701053, equations (21)–(26); Criado–Perez-Victoria, https://arxiv.org/pdf/1811.09413, equations (3.2), (5.1)–(5.3); Kaplan, https://arxiv.org/pdf/nucl-th/0510023, section 1.2; Conrad, https://math.stanford.edu/~conrad/papers/luminysga3.pdf, Definition 1.1.11 and Example 1.1.12. Remaining work: finish touched-example dispositions, source checks, risk reviews, manifest synchronization and focused checks.
+
+## Completed scalar EOM example
+
+`ex-aqft-scalar-eom-operator-reduction`: accept reader repair. HEAD raw SHA256 `18d7352c7f5a144b2cfc8303d0b051e991103ad7f452892351af5b00218f11a8` equals the pre-reader snapshot; current raw SHA256 `067ee32fa31641793e9e18bf74cc0032e3f11b3d86735d5303f48a864c239083` equals post-reader. The exact diff adds the required formal-selection label, sourced reductivity verification and complete induced polynomial terms; it preserves the action-level claim. All seven steps independently checked, including compact-support integration by parts, mostly-plus Euler sign, two-sided formal inverse, quotient relation and quartic shift. The full expansion coefficients are 8,22,24,9; no exact inverse or numerical error estimate follows. Zero field, C=0 and m=0 are sound. Complete risk review is recorded before moving to the other level-4 item. Remaining work: finish scalar-gauge example and administrative closure/checks.
+
+## Completed scalar-gauge example
+
+`ex-aqft-scalar-gauge-operator-power-counting`: accept reader repair. HEAD raw SHA256 `509b18790ddf3429bcaf9ef42ea8ec487f766347362376f9d80ae21ae9be978e` equals pre-reader; current raw SHA256 `f6c7b6de6609019c4fcaa44b563148dbf6ba5ae6c34e1b9ae4c2178ed0f6822a` equals post-reader. All four steps check: standard-dual pairing invariance, pointwise invariance for variable gauge maps with no derivatives, antisymmetric zero for even components, and weights 2,4,6 with dimension-four coefficient normalization. The chosen product connection is a fixed background in its specified section; invariance of a derivative-free scalar does not require that arbitrary variable gauge transformations preserve A=0. Zero field and zero relation space cause no exception. The reader's formal-selection qualification meets the physical-data contract without claiming a complete invariant classification. Risk review is complete.
+
+The two nonfatal historical contract omissions are closed in defect rows `advanced-qft-supersymmetry-build-2026-10-23-batch-25-eom-contract` and `advanced-qft-supersymmetry-build-2026-10-23-batch-25-scalar-gauge-contract`. The exact prior claims are available in HEAD; no historical bytes are inferred from hashes alone. The original calculations were sound; the repaired contract omissions concern explicit invariant-space qualification and reductivity justification (and the EOM contract's complete induced-term accounting).
+
+## Consumer and carrier maintenance
+
+Searching all current item and library carriers for both example IDs found only their own files and the owned B-page inventory. Thus the changed Example qualifications have no further direct or indirect item/reference consumers. Page inventory and empty bodies remain sound. No page or item carrier was edited by Alpha. Only the owning manifest's two current Example/source mirrors were synchronized. Two stale full-definition quotations in the owning proof contract were refreshed against the actually read current local-operator supplier: it now explicitly fixes homogeneous component parities, finite Grassmann coefficients, and the induced weight-preserving action. These strengthen the explicit meaning of the already used commuting-even scalar representation; both actual consumer uses remain valid. This mechanical quotation refresh creates no defect row. Dependencies, levels, IDs, provenance and draft status remain unchanged. No withdrawal, outside repair, defective published supplier or blocker was found.
+
+## Sources and limits
+
+[Conrad, Reductive Group Schemes](https://math.stanford.edu/~conrad/papers/luminysga3.pdf), printed p.11, Definition 1.1.11 and Example 1.1.12: inspected the exact reductive/semisimple conventions and classical-group assertions. The base is C; eta is nondegenerate on C^4, with 4>3, and SL acts on C^2. The source points to Appendix C and exercises for the classification proofs; those proofs were not reconstructed here. The local fixed-vector argument for mu2 and product projections is valid: a nontrivial subgroup of mu2 is mu2 itself, excluded by its sign representation, and projection images of a normal unipotent subgroup are normal unipotent in the factors.
+
+[Burgess, Introduction to Effective Field Theory](https://arxiv.org/pdf/hep-th/0701053), printed pp.14–15, equations (21)–(26): inspected the retained-order field redefinition and scalar integration-by-parts relation; section 3.1's mass-scale/operator normalization is context, not an imported numerical error estimate.
+
+[Criado–Perez-Victoria, Field redefinitions in effective theories at higher orders](https://arxiv.org/pdf/1811.09413), printed pp.9–10 and 16–17, equation (3.2) and equations (5.1)–(5.3): inspected the Taylor expansion, linear-order limitation, and induced higher-order terms. The local polynomial derivation supplies the precise example, with compact support and formal truncation; no quantum measure or scattering equivalence is imported.
+
+[Kaplan, Five lectures on effective field theory](https://arxiv.org/pdf/nucl-th/0510023), section 1.2, printed p.4, and section 2.4.1, printed p.22: inspected scalar/density dimensions and the gauge-symmetry context. This is source context for the independently checked finite scalar contractions, not evidence that the chosen model describes nature.
+
+All nine direct suppliers of the physical-data Definition were opened; the local finite-dimensionality proof, quotient Definition, gauge group/bundle datum, connection Definition, curvature convention and associated-derivative Definition agree with the actual uses. Additional unit and reductivity definitions were inspected only at the relevant conventions. No transitive whole-library audit is asserted. Assigned carriers contain no TikZ/tikzcd. The two opened supplier squares agree with the local curvature and associated-derivative transition identities; no missing diagram is needed for these polynomial calculations.
+
+## Checks
+
+Initial risk report routed all three items as CRITICAL (scores 11,8,11). Complete specific risk reviews are recorded in the owning contract. Scoped precheck passed both examples; rendercheck passed the three items and two pages. Initial strict contract check exposed two stale supplier quotations, subsequently refreshed as described above. Bare-node invocation of the TypeScript precheck was unsupported by this Node version; the documented tsx-run invocation passed. Final strict proof-contract check: 3/3 items, 0 errors and 0 warnings. Risk report with --require-reviewed: all three reviews complete, 0 errors. Reflow: both examples unchanged. Final precheck: 2 checked, 0 failing. Final proof-layout command batched both examples: 2 items, 11 steps, 0 defects. No judgment, stamping or engine gate cycle was performed.
+
+Two exact touched obligations are recorded as accepted_repair with repair_confidence 1 and one closed ledger row each. Reader and refuter artifacts contain empty finding arrays, so no finding verdicts are invented. Published findings: none. Blockers and unresolved obligations: none within this dispatch. Engine-owned decision stamping and full gate battery remain for the owner.

@@ -1,0 +1,84 @@
+{
+  "id": "def-linear-state-space-model",
+  "agent": "/root/rendering_repair_coordinator/dnn_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tile shows only the prose definition. A concrete signal-flow diagram materially clarifies the distinction expressly made in line 28 between the state contribution Cx and direct feedthrough Du, and also makes the A feedback and initial-state integrator visible. This is a warranted explanatory addition under the expanded diagram scope.",
+      "action": "Added a final Remarks section and a fenced TikZ block diagram showing B input, positive state sum, integration with x0, A feedback, C output and separate D feedthrough.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added only explanatory Remarks and TikZ; original definition, references and all frontmatter are byte-identical to the archived before source.",
+  "source_lines_after": {
+    "remarks": [
+      47,
+      49
+    ],
+    "diagram": [
+      51,
+      75
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and dimensions",
+      "justification": "Definition line 28 gives u(t) in F^m, x(t) in F^N and y(t) in F^p. Hence B:F^m→F^N and A:F^N→F^N meet at the state sum; C:F^N→F^p and D:F^m→F^p meet at the output sum. Every block uses the matrices and directions in that definition."
+    },
+    {
+      "check": "State equation and initial condition",
+      "justification": "The two positive inputs to the first circle are Bu and Ax; its output is labelled x′. The integration block is explicitly x0 + integral from t0 to t of its input. At t=t0 it gives x0, and the equation is understood almost everywhere, as stated in the unchanged definition and the new prose. The oriented integral also applies for t<t0; the figure does not impose a new forward-time restriction."
+    },
+    {
+      "check": "Feedback and direct path",
+      "justification": "The state output branches downward into A, whose arrow returns upward to the state sum. The input branches before B upward through D into the output sum. Cx and Du therefore add to y without routing Du through the integrator, exactly as in definition line 28."
+    },
+    {
+      "check": "Independence",
+      "justification": "The original rigorous definition remains unchanged and stands independently of the illustration; the figure supplies neither a new hypothesis nor a proof premise."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/def-linear-state-space-model.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-linear-state-space-model.md --json",
+      "exit_code": 0,
+      "result": "1 file, checked 0, failed 0; definition not-applicable"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/def-linear-state-space-model.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors []; warnings []"
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/dnn007",
+      "manifest_sha256": "7ba64000dac3c176c5692308e44c196fb8a2764d74b21561a9e5eaa253dd8386",
+      "source_sha256": "b242ac2811d4a9a25c5637beb0e2466517a131752c41fe517feb3fcd6ee5d4f5",
+      "screenshot": "screenshots/def-linear-state-space-model--01.png",
+      "screenshot_sha256": "276424ebd761ef892eb520d962a6876ad9d6282799c785a5c426ae94adc99aeb",
+      "visual_result": "Viewed standalone at original resolution. Native TikZ displays all matrix blocks, both positive sums, integration bounds and x0, directed feedback and feedthrough, with visible pale strokes and labels on black background; no clipping/overlap in the figure. The fresh tile shows an unrelated partial blank capture of earlier unchanged content, so the original standalone tile supplies inspection evidence for that unchanged portion."
+    }
+  },
+  "evidence_resolution": {
+    "declared_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement/screenshots/def-linear-state-space-model--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-linear-state-space-model--01.png",
+    "sha256": "e45d39f095b6117570c80fb2525e502a5ce858f151531f58e32d2a1727cb2d95",
+    "reason": "Declared screenshot subdirectory was absent; authentic category screenshot located and SHA256 matched the queue exactly. Viewed standalone at original resolution."
+  },
+  "publication_status_preserved": true,
+  "before_raw_sha256": "c0c8adee769c157fcb00bc1c029afcca0e10847cc783d91916c60bef7b3a2252",
+  "after_raw_sha256": "b242ac2811d4a9a25c5637beb0e2466517a131752c41fe517feb3fcd6ee5d4f5",
+  "remaining_issues": []
+}

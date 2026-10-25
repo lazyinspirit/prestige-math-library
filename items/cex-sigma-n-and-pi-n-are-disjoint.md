@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-sigma-n-and-pi-n-are-disjoint.json
+  precheck: pass
 id: cex-sigma-n-and-pi-n-are-disjoint
 kind: counterexample
-title: "A set lying in both Sigma_n^0 and Pi_n^0"
+title: 'A set lying in both $\Sigma_n^0$ and $\Pi_n^0$'
 status: published
 origin: pipeline
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-sigma-n-pi-n-and-delta-n-sets, cor-delta-one-sets-are-exactly-decidable, fs-sigma-n-and-pi-n-are-disjoint]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, §5.2"

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-qa-35-smp-prior-message-decomposition.json
+  precheck: pass
 id: lem-qa-35-smp-prior-message-decomposition
 kind: lemma
 title: "Conditioning on a private message separates average acceptance"
@@ -13,8 +16,6 @@ axiom_use: "No choice axiom is used; all distributions, sums, bases, and selecti
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games"
@@ -27,7 +28,7 @@ sources:
 
 ## Statement
 
-Let A,B be N×m row-stochastic matrices, M∈[0,1]^{m×m}, and let C=AMBᵀ satisfy C_xx≥0.99 and C_xy≤0.01 for x≠y. For every probability row vector D with ||D||₂²≤0.01 there are weights q_j and probability rows D_j with D=Σ_jq_jD_j such that, for rows X_j=(M_ij)_{i=1}^m (the transposes of the columns of M), Σ_j q_j(DA)X_jᵀ≤0.02 and Σ_jq_j(D_jA)X_jᵀ≥0.99.
+Let $A,B$ be $N\times m$ row-stochastic matrices, $M\in[0,1]^{m\times m}$, and let $C=AMB^{\mathsf T}$ satisfy $C_{xx}\ge0.99$ and $C_{xy}\le0.01$ for $x\ne y$. For every probability row vector $D$ with $\|D\|_2^2\le0.01$ there are weights $q_j$ and probability rows $D_j$ with $D=\sum_jq_jD_j$ such that, for rows $X_j=(M_{ij})_{i=1}^m$ (the transposes of the columns of $M$), $\sum_j q_j(DA)X_j^{\mathsf T}\le0.02$ and $\sum_jq_j(D_jA)X_j^{\mathsf T}\ge0.99$.
 
 ## Facts & Assumptions
 

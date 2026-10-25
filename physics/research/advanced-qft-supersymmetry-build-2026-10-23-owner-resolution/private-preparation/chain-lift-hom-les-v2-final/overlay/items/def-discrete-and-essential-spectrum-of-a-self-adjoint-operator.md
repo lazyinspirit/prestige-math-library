@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-discrete-and-essential-spectrum-of-a-self-adjoint-operator.md

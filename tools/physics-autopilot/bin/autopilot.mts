@@ -9,6 +9,8 @@
 //   autopilot pause | resume | stop | report
 //   autopilot retry [--unit N]
 //   autopilot refresh --run RUN --stage 1-scaffold --unit N --reason TEXT
+//   autopilot prerequisites register --run RUN --request FILE --state-dir DIR
+//   autopilot prerequisites finish --run RUN --state-dir DIR
 //
 // The daily shape this is built for:
 //   cd <repo> && autopilot frontier            # see what is buildable
@@ -32,11 +34,14 @@ import { makeExecAdapter } from '../src/adapters/exec.mts';
 import { writeCommand } from '../src/control.mts';
 import { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
 import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
+import { appendFrontier, assertNoAppendTransaction } from '../src/frontier-append.mts';
+import { registerStep2Prerequisites, finishStep2Prerequisites, repairStep2Prerequisites, assertNoPrerequisiteTransaction } from '../src/step2-prerequisites.mts';
 import { doctor } from '../src/doctor.mts';
 import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
 import { reopenStep3 } from '../src/step3-reopen.mts';
+import { inspectStep6PackagingRecovery, recoverStep6Packaging } from '../src/step6-packaging-recovery.mts';
 import type { Config } from '../src/types.mts';
 import { readStatementPolicy, isFreshStatementRun, writeStatementPolicy } from '../../statement-first-policy.mjs';
 
@@ -238,6 +243,17 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
+  case 'recover-step6-packaging': {
+    const run = opt('run') ?? die('--run is required');
+    const authorization = opt('authorization') ?? die('--authorization is required');
+    const config = loadConfig();
+    const options = { repo, run, stateDir: opt('state-dir') ? stateDir : join(repo, '.physics-autopilot', run),
+      dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`), authorizationPath: resolve(repo, authorization) };
+    try {
+      console.log(JSON.stringify(has('inspect') ? inspectStep6PackagingRecovery(options).guards : recoverStep6Packaging(options), null, 2));
+    } catch (error: any) { console.error(String(error?.message ?? error)); process.exitCode = 1; }
+    break;
+  }
   case 'init': {
     const { importMathematics } = await import('../../physics-support/physics-imports.mjs');
     const receipt = importMathematics(repo, resolve(opt('math-repo', join(HERE, '../../..'))));
@@ -313,10 +329,34 @@ switch (cmd) {
     break;
   }
 
+  case 'prerequisites': {
+    const run=opt('run')??die('--run is required');
+    const action=argv[1], config=loadConfig();
+    if(!['register','finish','repair-authorize','repair-complete','authored-metadata-adopt'].includes(action))die('prerequisites register|repair-authorize|repair-complete|authored-metadata-adopt --request FILE | finish --run RUN --state-dir DIR');
+    if(action.startsWith('repair-')||action==='authored-metadata-adopt'){
+      const result=repairStep2Prerequisites({repo,run,stateDir:config.stateDir,request:opt('request')??die('--request is required'),complete:action==='repair-complete',authored:action==='authored-metadata-adopt'});
+      console.log(`Root prerequisite repair ${action}: generation ${result.generation}. Fresh owner preparation and full ordinary gates remain required.`);
+      break;
+    }
+    const result=action==='register'
+      ? registerStep2Prerequisites({repo,run,stateDir:config.stateDir,request:opt('request')??die('--request is required')})
+      : finishStep2Prerequisites({repo,run,stateDir:config.stateDir});
+    console.log(`Supplemental prerequisite generation ${result.number}: batches ${result.batches.join(', ') || '(owner additions only)'}. Registration grants no acceptance or original Step-1 coverage.`);
+    break;
+  }
+
   case 'plan': {
     const { spawnSync } = await import('node:child_process');
     const run = opt('run') ?? die('--run is required');
     const pairsArg = opt('pairs');
+    if (has('append')) {
+      if (has('force') || has('allow-unbuildable') || (opt('cap') && Number(opt('cap')) !== 1)) die('append refuses force, unbuildable waiver or repacking');
+      if (!pairsArg || ['next','wave1'].includes(pairsArg)) die('append requires explicit new A-page IDs');
+      const entry = appendFrontier({repo,run,stateDir:loadConfig().stateDir,pairs:pairsArg.split(',').map((id:string)=>id.trim()),
+        priorPlan:opt('prior-plan')??die('--prior-plan is required'),baseDispositionReview:opt('base-disposition-review'),sourceEvidence:(opt('source-evidence')??'').split(',').filter(Boolean),evidence:driftEvidence,buildability:unsatisfiableEdges});
+      console.log(`Physics native append ${entry.number}: batches ${entry.batches.join(', ')}; original history unchanged. Resume for fresh supplemental Alpha review.`);
+      break;
+    }
     const freshStatementRun = isFreshStatementRun(repo, run, stateDir);
     let pages;
     if (pairsArg === 'next') {
@@ -476,6 +516,8 @@ switch (cmd) {
   }
 
   case 'start': {
+    assertNoAppendTransaction(loadConfig().stateDir);
+    assertNoPrerequisiteTransaction(loadConfig().stateDir);
     const run = opt('run');
     // Validate BEFORE detaching. A spec defect found by the detached child is a
     // blocker in a log nobody is reading yet; found here it is a message on the

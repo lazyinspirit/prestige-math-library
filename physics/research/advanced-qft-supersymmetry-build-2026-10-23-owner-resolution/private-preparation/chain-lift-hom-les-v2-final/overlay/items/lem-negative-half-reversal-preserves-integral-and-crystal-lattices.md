@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-negative-half-reversal-preserves-integral-and-crystal-lattices.md

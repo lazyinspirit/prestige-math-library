@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-grothendieck-spectral-sequence-with-an-exact-outer-functor.md

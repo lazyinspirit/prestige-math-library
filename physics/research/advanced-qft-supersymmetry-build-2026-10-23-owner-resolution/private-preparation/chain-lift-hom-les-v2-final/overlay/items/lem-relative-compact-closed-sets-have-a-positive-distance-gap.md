@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-relative-compact-closed-sets-have-a-positive-distance-gap.md

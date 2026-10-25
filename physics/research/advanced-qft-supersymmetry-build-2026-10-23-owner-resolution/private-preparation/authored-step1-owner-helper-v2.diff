@@ -1,0 +1,22 @@
+--- review-authored-step1-owner-request.mts
++++ review-authored-step1-owner-request-v2.mts
+@@ -2,7 +2,10 @@
+ // Only a future explicit --write-receipt invocation may write ONE current receipt.
+ import{readFileSync,writeFileSync,readdirSync,existsSync,lstatSync,realpathSync,mkdirSync,renameSync}from'node:fs';
+ import{resolve,join,relative,basename}from'node:path';import{createHash,randomUUID}from'node:crypto';import{isDeepStrictEqual as equal}from'node:util';import{spawnSync}from'node:child_process';
+-import{stagesForRun}from'../../../../tools/physics-autopilot/stages/mathlib.mts';
++import{readStatementPolicy}from'../../../../tools/statement-first-policy.mjs';
++import{stagesForRun as baseStagesForRun}from'../../../../tools/physics-autopilot/stages/mathlib.mts';
++import{stagesForRun as compactStagesForRun}from'../../../../tools/physics-autopilot/stages/mathlib.compact.mts';
++import{stagesForRun as statementFirstStagesForRun}from'../../../../tools/physics-autopilot/stages/mathlib.statement-first.mts';
+ import{gateReviewSnapshot}from'../../../../tools/physics-autopilot/src/owner-gate-recertification.mjs';
+ import{scanAppendProcesses}from'../../../../tools/physics-autopilot/src/frontier-append.mts';
+ import{runPages,dependencyLevels}from'../../../../tools/physics-support/item-dependency-levels.mjs';
+@@ -35,6 +38,7 @@
+ // Descriptor materialization may create immutable temporary scope selectors;
+ // no gate body, gate subprocess, stage callback, native state or result executes.
+ const ctx:any={repo:root,run,dispatchDir:join(root,'research',run+'-dispatch'),config:{stateDir},doctor:false};
++const editorialPolicy=readStatementPolicy(root,run,'physics'),stagesForRun=editorialPolicy?(editorialPolicy.page_layout==='compact-v1'?compactStagesForRun:statementFirstStagesForRun):baseStagesForRun;
+ function freshSnapshot(){const stage=stagesForRun(ctx).find((s:any)=>s.id==='1-scaffold');if(!stage)throw Error('Current native authored stage missing');const defined=typeof stage.gates==='function'?stage.gates(ctx):stage.gates;if(!Array.isArray(defined)||!defined.length)throw Error('Empty current native gate inventory');const descriptors=defined.map((g:any)=>({...g,argv:typeof g.argv==='function'?g.argv():[...g.argv],needs:typeof g.needs==='function'?g.needs():g.needs}));const current=gateReviewSnapshot(ctx,descriptors,['1-scaffold']);if(current.sha256!==snapshotHash||!equal(current,snapshot))throw Error('Actual current native snapshot differs; let native issue a new request (reload stale controller code if needed)');return current;}
+ freshSnapshot();
+ const reviewStartedAt=new Date().toISOString();if(Date.parse(reviewStartedAt)<=created)throw Error('Actual review start must follow this fresh request');

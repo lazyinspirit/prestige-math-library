@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic.md

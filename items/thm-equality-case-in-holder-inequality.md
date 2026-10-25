@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-equality-case-in-holder-inequality.json
+  precheck: pass
 id: thm-equality-case-in-holder-inequality
 kind: theorem
 title: "Equality in Holder's inequality for $1 < p < \\infty$"
@@ -9,14 +12,6 @@ provenance:
   proof: ai-altered
 deps: [thm-holder-inequality-for-integrals, thm-young-inequality-real-exponents, thm-exponential-two-point-convexity, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-calligraphic-l-p-on-a-measure-space]
 proof_strategy: "Trace where equality can occur in the normalized Young-inequality proof. Equality in Young forces the normalized powers |f|^p and |g|^q to be proportional almost everywhere, and conversely that proportionality makes the inequality an equality."
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-equality-case-in-holder-inequality). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -55,7 +50,7 @@ $$|f|^p=c\,|g|^q\qquad\mu\text{-almost everywhere}.$$
 
 ## Proof
 
-**Proof technique:** Trace where equality can occur in the normalized Young-inequality proof. Equality in Young forces the normalized powers $|f|^p$ and $|g|^q$ to be proportional almost everywhere, and conversely that proportionality makes the inequality an equality.
+**Proof technique:** Trace where equality can occur in the normalized Young-inequality proof. Equality in Young forces the pth power of the absolute value of f and the qth power of the absolute value of g to be proportional almost everywhere, and conversely that proportionality makes the inequality an equality.
 
 1.1 If $\|f\|_p=0$ or $\|g\|_q=0$, then the corresponding function is zero almost everywhere, and Holder's inequality becomes equality with both sides $0$. [L1, L3, L4]
 

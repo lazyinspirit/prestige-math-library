@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-weight-and-weight-space-of-a-lie-algebra-representation.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-na-periodic-taylor-green-vortex.json
+  precheck: pass
 id: ex-na-periodic-taylor-green-vortex
 kind: example
 title: The two-dimensional Taylor–Green vortex on the flat torus
@@ -22,8 +25,7 @@ sources:
   references: []
 generation:
   role: example
-verification:
-  precheck: pass
+
 ---
 
 ## Example
@@ -31,19 +33,6 @@ verification:
 This is a periodic-boundary example, not a no-slip example. On the torus obtained by identifying opposite sides of $(0,2\pi)^2$, let $A(t)=e^{-2\nu t}$ and define
 $$u(x,y,t)=A(t)(\sin x\cos y,-\cos x\sin y),\qquad p(x,y,t)=\frac{A(t)^2}{4}(\cos 2x+\cos 2y).$$
 The pressure is periodic and has zero mean on the fundamental square.
-
-\begin{center}
-\begin{tikzpicture}[scale=0.85]
-\draw[thick] (0,0) rectangle (4,2.6);
-\node at (2,1.3) {fundamental square};
-\node[blue] at (2,2.82) {$y=0\sim2\pi$};
-\node[blue] at (2,-0.22) {$y=0\sim2\pi$};
-\node[red,rotate=90] at (-0.28,1.3) {$x=0\sim2\pi$};
-\node[red,rotate=90] at (4.28,1.3) {$x=0\sim2\pi$};
-\end{tikzpicture}
-\end{center}
-
-The rectangle is only a fundamental-domain picture: each pair of equally labelled opposite edges is identified point-for-point, so fields and derivatives must be periodic across the seams. The picture records the topology; the verification below is analytic.
 
 ## Facts & Assumptions
 
@@ -64,3 +53,16 @@ The rectangle is only a fundamental-domain picture: each pair of equally labelle
 ## Remarks
 
 The skew form in [[def-na-evolutionary-skew-convective-form]] is defined for zero-boundary fields on bounded Lipschitz domains. This periodic example is verified directly from its classical strong equation; it does not identify these fields with the no-slip test space.
+
+```tikz
+\begin{tikzpicture}[scale=0.85]
+\draw[thick] (0,0) rectangle (4,2.6);
+\node at (2,1.3) {fundamental square};
+\node[blue] at (2,2.82) {$y=0\sim2\pi$};
+\node[blue] at (2,-0.22) {$y=0\sim2\pi$};
+\node[red,rotate=90] at (-0.28,1.3) {$x=0\sim2\pi$};
+\node[red,rotate=90] at (4.28,1.3) {$x=0\sim2\pi$};
+\end{tikzpicture}
+```
+
+The rectangle is only a fundamental-domain picture: each pair of equally labelled opposite edges is identified point-for-point, so fields and derivatives must be periodic across the seams. The picture records the topology; the verification above is analytic.

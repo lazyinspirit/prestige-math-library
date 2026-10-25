@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-proper-endpoint-homotopy-that-is-not-a-proper-combined-map.md

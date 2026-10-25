@@ -1,0 +1,112 @@
+{
+  "id": "alg-qa-bernstein-vazirani-query",
+  "group": "dqa_003",
+  "agent": "/root/dqa_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Standalone original PNG shows a prose-only procedure. A two-register circuit materially clarifies the independently timed target preparation, single shared XOR oracle, address Hadamards and address-only terminal measurement. This is a warranted explanatory addition under expanded diagram scope, not a failure of existing LaTeX.",
+      "action": "Added a final Remarks circuit with an explicitly marked n-qubit address bundle, preserving ordered register semantics for every n>=1, rather than an ellipsis of duplicate endpoint wires that degenerates at n=1.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended explanatory Remarks and one native TikZ circuit. Original definition and every frontmatter byte remain identical.",
+  "source_lines_after": [
+    {
+      "start": 56,
+      "end": 95,
+      "description": "New explanatory Remarks, circuit and measurement/target legend"
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "aspect": "Objects, order and domains",
+      "check": "A is the ordered n-qubit address register (C^2)^{tensor n}; T is C^2, so the shared oracle acts on A tensor T in that order. Initial labels |0^n> and |0> agree with Input line 44. The upper n-marked bundle and both H^{tensor n} boxes denote all n ordered address qubits, not a single qubit.",
+      "basis": "Carrier Definition lines 44,50; def-qa-standard-bit-query Definition; lem-qa-hadamard-f2-kernel Facts F3-F5."
+    },
+    {
+      "aspect": "Preparation and chronological gate order",
+      "check": "Left to right on T: X then H, hence HX|0>=H|1>=(|0>-|1>)/sqrt(2)=|->. On A, H^{tensor n}|0^n>=2^{-n/2} sum_x |x>. No target H is placed after the oracle.",
+      "basis": "Carrier Procedure line 50; thm-qa-bit-query-to-phase-query proof step 1.1; lem-qa-hadamard-f2-kernel step 2.1."
+    },
+    {
+      "aspect": "Single shared XOR invocation and unchanged target",
+      "check": "Exactly one oracle rectangle spans the A and T wires. U_f acts |x>|y> -> |x>|y xor f_a(x)>. Since X|->=-|->, its action on |x>|-> is (-1)^{a dot x}|x>|->. This verifies the right target label and unmeasured terminal target wire, with no controlled-phase or direct f_a measurement falsely depicted.",
+      "basis": "def-qa-standard-bit-query Definition; no-offset def-qa-bernstein-vazirani-promise; thm-qa-bit-query-to-phase-query proof step 2.1."
+    },
+    {
+      "aspect": "Terminal address measurement and classical a output",
+      "check": "After final address H^{tensor n}, coefficient at y is 2^{-n} sum_x (-1)^{x dot (a xor y)}, equal to delta_{a,y} by lem-qa-hadamard-f2-kernel. Thus M_Z on all address qubits yields the n-bit string a; double outgoing line is classical, whereas the single T line remains quantum and unmeasured.",
+      "basis": "Carrier Definition Output and Procedure; lem-qa-hadamard-f2-kernel Statement and proof step 1.1; independently compared thm-qa-bernstein-vazirani-query-correct proof steps 1.1-2.1 without changing it."
+    },
+    {
+      "aspect": "Resource consistency and proof independence",
+      "check": "Two address H^{tensor n} boxes represent 2n one-qubit H occurrences; target X,H contributes two more; one shared oracle is separately charged. M_Z is terminal and separate. No statement, procedure, hypothesis or rigorous proof depends on the picture; the original complete procedure is retained verbatim.",
+      "basis": "Carrier Gate model and terminal-measurement paragraph lines 48-52; independent consistency comparison with thm-qa-bernstein-vazirani-query-correct step 3.1."
+    }
+  ],
+  "original_evidence": {
+    "declared_path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement/screenshots/alg-qa-bernstein-vazirani-query--01.png",
+    "path_discrepancy": "Declared diagram-supplement screenshot subpath is absent; authentic PNG located only within the corresponding quantum-algorithms category and matched recorded SHA256.",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/alg-qa-bernstein-vazirani-query--01.png",
+    "sha256": "97cced29097aeaa36ee2dba2a459f1cc34667584991db45f62c0688777fd1b82",
+    "inspection": "Standalone original-resolution view inspected."
+  },
+  "before_raw_sha256": "d0d2d92a9f3e0c26322875d034813e47a2fe449a17113f758093a89ffcc57bab",
+  "after_raw_sha256": "d14e0e987b639798c427e97fa754cf569e4520f38b5ce55252f98284d105ed52",
+  "metadata_preservation": "Verified corrected source starts with the complete exact frozen before bytes; all frontmatter, publication status, dependencies, provenance and original definition remain byte-identical.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qa-bernstein-vazirani-query.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-bernstein-vazirani-query.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-qa-bernstein-vazirani-query.md",
+            "item_id": "alg-qa-bernstein-vazirani-query",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qa-bernstein-vazirani-query.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqa003 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-qa-bernstein-vazirani-query --out research/math-library-rendering-repairs-2026-10-23/previews/dqa003-native-v1",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqa003-native-v1/manifest.json",
+    "manifest_sha256": "bbbf2ae61879d41db6896ebdc22bc5d38be7235a68a2ece434f6e570dbede68e",
+    "source_sha256": "d14e0e987b639798c427e97fa754cf569e4520f38b5ce55252f98284d105ed52",
+    "png": "research/math-library-rendering-repairs-2026-10-23/previews/dqa003-native-v1/screenshots/alg-qa-bernstein-vazirani-query--01.png",
+    "png_sha256": "3f242318f7b1729d7417ad86939c2c4073079f0edaf600d0a85781e7d1d473fc",
+    "inspection": "Standalone original-resolution native dark-background PNG inspected. All five gate/measurement boxes and the tall oracle boundary render visibly; address/target wires connect to the intended boxes with no crossing. X precedes H on target; top M_Z has a double classical output with arrow toward a; target exits as |-> with no measurement. Upper n slash and H tensor labels visible, no clipping or overlap. Native capture reports 1 TikZ, no diagram failures, 28 KaTeX expressions, no KaTeX errors.",
+    "limitations": "Local complete ItemBody SSR preview, not a production route. Reference map has 13 unrelated parse diagnostics; scoped links render and scoped rendercheck has no warnings."
+  },
+  "remaining_issues": []
+}

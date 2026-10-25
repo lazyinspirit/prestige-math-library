@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-forgetting-labels-can-close-a-nonlooping-coordinate-path.md

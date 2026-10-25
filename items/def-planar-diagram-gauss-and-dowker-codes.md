@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-planar-diagram-gauss-and-dowker-codes.json
+  precheck: n/a
 id: def-planar-diagram-gauss-and-dowker-codes
 kind: definition
 title: "Planar-diagram, Gauss, and signed Dowker–Thistlethwaite codes"
@@ -31,18 +34,6 @@ sources:
     - title: "Knot Atlas, DT (Dowker–Thistlethwaite) Codes manual"
       url: "https://www.math.toronto.edu/~drorbn/private/KAtlas/Manual/DTCode.html"
       locator: "Odd/even pairing and signed DT examples, lines 4–76"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 dependency_level: 1
 ---
 
@@ -158,3 +149,56 @@ face-count tests pass.
 [Knot Atlas, Planar Diagrams](https://katlas.org/wiki/Planar_Diagrams) — PD edge and crossing records.
 
 [Knot Atlas, DT Codes](https://www.math.toronto.edu/~drorbn/private/KAtlas/Manual/DTCode.html) — odd/even DT pairing and signed-code examples.
+
+
+## Remarks
+
+The two local charts below use positively oriented horizontal and vertical
+coordinates. The horizontal strand is over; the gap in the vertical strand
+marks the underpass. Labels give the normalized clockwise dart position and
+its role. The crossing sign is the determinant sign, not the sign of a Gauss
+visit: an over-visit is recorded as $+j$ and an under-visit as $-j$ in either
+chart. Likewise, the DT entry sign records whether the odd visit is over or
+under, separately from the algebraic crossing sign.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+  \node at (0,2) {$\varepsilon=+1$};
+  \draw[->] (-1.25,0) -- (1.25,0);
+  \draw[->] (0,-1.25) -- (0,-0.17);
+  \draw[->] (0,0.17) -- (0,1.25);
+  \node[right] at (1.25,0) {$0:O_{\rm out}$};
+  \node[left] at (-1.25,0) {$2:O_{\rm in}$};
+  \node[above] at (0,1.25) {$3:U_{\rm out}$};
+  \node[below] at (0,-1.25) {$1:U_{\rm in}$};
+  \begin{scope}[xshift=6.5cm]
+    \node at (0,2) {$\varepsilon=-1$};
+    \draw[->] (-1.25,0) -- (1.25,0);
+    \draw[->] (0,1.25) -- (0,0.17);
+    \draw[->] (0,-0.17) -- (0,-1.25);
+    \node[right] at (1.25,0) {$0:O_{\rm out}$};
+    \node[left] at (-1.25,0) {$2:O_{\rm in}$};
+    \node[above] at (0,1.25) {$3:U_{\rm in}$};
+    \node[below] at (0,-1.25) {$1:U_{\rm out}$};
+  \end{scope}
+  \fill (0,-3) circle (2pt);
+  \fill (6.5,-3) circle (2pt);
+  \draw[->] (0,-3) -- (6.5,-3);
+  \node[below] at (0,-3) {$c$};
+  \node[below] at (6.5,-3) {$c'$};
+  \node[above] at (0.6,-3) {$d$};
+  \node[above] at (5.7,-3) {$\alpha(d)$};
+  \node[above] at (3.25,-3) {one oriented edge};
+\end{tikzpicture}
+```
+
+In the positive chart, $v_{\rm over}=(1,0)$ and
+$v_{\rm under}=(0,1)$; in the negative chart the latter vector is $(0,-1)$.
+Thus their determinants are $+1$ and $-1$. Reading clockwise from position
+$0$ gives exactly the two records in the Definition, and the opposite pairs
+are $(0,2)$ and $(1,3)$. The bottom schematic shows only one edge of a larger
+code: $v(d)=c$, $v(\alpha(d))=c'$, and $\alpha(\alpha(d))=d$; its first end is
+outgoing and its second incoming. The endpoints represent distinct darts,
+including when $c=c'$. No global face count or spherical realizability is
+asserted by these local pictures; the definition and its tests are independent
+of the illustration.

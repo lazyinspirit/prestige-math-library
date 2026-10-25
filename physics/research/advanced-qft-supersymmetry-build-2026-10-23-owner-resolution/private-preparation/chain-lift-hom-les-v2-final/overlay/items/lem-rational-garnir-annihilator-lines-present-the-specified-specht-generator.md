@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rational-garnir-annihilator-lines-present-the-specified-specht-generator.md

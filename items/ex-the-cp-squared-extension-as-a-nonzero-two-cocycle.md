@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-cp-squared-extension-as-a-nonzero-two-cocycle.json
+  precheck: pass
 id: ex-the-cp-squared-extension-as-a-nonzero-two-cocycle
 kind: example
-title: "The C_p^2 extension as a nonzero two-cocycle"
+title: "The $C_{p^2}$ extension as a nonzero two-cocycle"
 status: published
 origin: session
 provenance:
@@ -9,14 +12,6 @@ provenance:
   proof: ai-altered
 deps: [cor-an-extension-determines-a-well-defined-h-two-class, def-second-cohomology-by-factor-sets]
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -42,7 +37,7 @@ for $0\le i,j<p$. This cocycle is nonzero in $H^2(C_p,C_p)$.
 
 **Given:** An integer $p\ge2$, the quotient map $\mathbb Z/p^2\mathbb Z\to\mathbb Z/p\mathbb Z$, and the normalized section $s(i)=i$ for $0\le i<p$.
 
-[L1] An extension determines a well-defined class in $H^2$ ([[cor-an-extension-determines-a-well-defined-h-two-class]]).
+[L1] An extension determines a well-defined class in $H^2$ ([[cor-an-extension-determines-a-well-defined-h-two-class|An extension determines a well-defined $H^2$ class]]).
 
 [L2] The zero class in $H^2(C_p,C_p)$ consists of two-coboundaries, with trivial-action coboundary $\delta b(i,j)=b(i)+b(j)-b(i+j)$ ([[def-second-cohomology-by-factor-sets]]).
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-restricted-partition-component-is-the-basic-crystal-in-the-symmetric-group-convention.md

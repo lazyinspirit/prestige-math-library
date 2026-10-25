@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-coherence-says-that-any-two-parallel-morphisms-in-a-monoidal-category-are-equal.md

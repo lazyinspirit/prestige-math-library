@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-time-controlled-self-reference-for-nondeterministic-machines.md

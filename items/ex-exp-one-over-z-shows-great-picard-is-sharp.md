@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-exp-one-over-z-shows-great-picard-is-sharp.json
+  precheck: pass
 id: ex-exp-one-over-z-shows-great-picard-is-sharp
 kind: example
-title: "The function e^(1/z) omits zero and takes every nonzero value infinitely often near the origin"
+title: "The function $e^{1/z}$ omits zero and takes every nonzero value infinitely often near the origin"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-complex-exponential-surjects-onto-the-punctured-plane, thm-kernel-and-fibres-of-complex-exponential, thm-great-picard-theorem, thm-isolated-singularity-trichotomy, thm-removable-singularity-characterizations, thm-pole-characterizations]
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   references:
     - title: "Aleksander Simonic, The Ahlfors lemma and Picard's theorems, §6.4"

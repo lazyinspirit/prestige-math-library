@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-fubini-fails-without-l-one-integrability.json
+  precheck: pass
 id: cex-fubini-fails-without-l-one-integrability
 kind: counterexample
-title: "The function (x^2-y^2)/(x^2+y^2)^2 shows that Fubini's integrability hypothesis is not decorative"
+title: "The function $(x^2-y^2)/(x^2+y^2)^2$ shows that Fubini's integrability hypothesis is not decorative"
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-principal-inverse-tangent-calculus]
 proof_strategy: direct
-verification:
-  audited: 2026-08-29
-  precheck: pass
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Exercise 55(a)"
@@ -29,8 +29,8 @@ $f \in L^1(\mu \times \nu)$.
 
 **Proof technique:** direct.
 
-On $(0,1)^2$, let
-$$f(x,y):=\frac{x^2-y^2}{(x^2+y^2)^2}.$$
+1.1 On $(0,1)^2$, let
+$f(x,y):=\frac{x^2-y^2}{(x^2+y^2)^2}.$ [construct]
 
 ## Facts & Assumptions
 

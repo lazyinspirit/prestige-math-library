@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-coefficients-of-every-cyclotomic-polynomial-lie-in-minus-one-zero-and-one.md

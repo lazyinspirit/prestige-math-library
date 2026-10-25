@@ -1,0 +1,71 @@
+{
+  "id": "ex-ip-approximate-cnn-mmse-denoiser",
+  "agent": "/root/rendering_repair_coordinator/inv_006",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unsupported-tikz-fence",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the flagged original 1200x1400 PNG at original resolution. The Network diagram section visibly prints begin/end tikzpicture, node, and draw commands. Frozen and current source agree: tilde fences are not recognized by this renderer. The authored composition itself is correct.",
+      "action": "Replaced only the opening and closing tilde fences with backtick fences recognized by the native TikZ SSR renderer.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Two fence-line substitutions expose the existing scalar network as a compiled figure rather than literal source. No TikZ commands, mathematical prose, proof, or frontmatter changed.",
+  "source_lines_after": [
+    67,
+    79
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects_and_maps": "One real scalar input z; convolution C:R->R, C(z)=az/sigma^2; activation T:R->(-1,1), T(t)=tanh(t); affine output S:R->R, S(u)=au+b. One input/output channel and one pixel, hence all dimensions are scalar.",
+      "relations_and_justification": "The four arrows run input -> C -> T -> S -> result. Intermediate labels az/sigma^2 and tanh(az/sigma^2) match these maps. S composed with T composed with C equals a tanh(az/sigma^2)+b, exactly the Example and Network diagram prose. Since a,sigma>0, all maps are defined for every real z."
+    },
+    {
+      "approximation_scope": "Verification 1.1 computes the prior-specific exact posterior mean D_sigma(z)=a tanh(az/sigma^2). Verification 2.1 subtracts it from the network to obtain constant error b, uniform norm |b|<eta and nonzero discrepancy at zero. The figure labels the biased output as D-tilde, preserving the distinction from exact MMSE; it asserts neither a new objective nor stationarity for the approximation.",
+      "proof_justification": "Both numbered Verification steps remain unchanged and use the finite prior/Gaussian likelihood and explicit algebra, not the diagram."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-ip-approximate-cnn-mmse-denoiser.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-ip-approximate-cnn-mmse-denoiser.md --json",
+      "exit_code": 0,
+      "summary": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      },
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-ip-approximate-cnn-mmse-denoiser.md --json",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    }
+  ],
+  "visual_check": {
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/inv-006-fresh-20261024b/manifest.json",
+    "viewed_original_resolution": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/inv-006-fresh-20261024b/screenshots/ex-ip-approximate-cnn-mmse-denoiser--01.png"
+    ],
+    "result": "Native local SSR compilation succeeded: screenshot receipt reports tikz_count 1, diagram_failures [], katex_errors []. Viewed the compiled horizontal figure at original PNG resolution: all five nodes and four rightward arrows are visible, with labels matching the scalar composition and no concrete overlap/clipping requiring layout changes.",
+    "limitations": "Local file preview, not a production route or whole-item audit. Reference-title map reports 32 unrelated parse diagnostics."
+  },
+  "before_raw_sha256": "128168927d6e2ee63b4695bbb4b77271711fb5ac928b4cd3991edbd72c009ece",
+  "after_raw_sha256": "7fb5902ef09618bccdbad819bd53a1d50bbe6f68e01018b698f4127deaf971a5",
+  "publication_status_preserved": true
+}

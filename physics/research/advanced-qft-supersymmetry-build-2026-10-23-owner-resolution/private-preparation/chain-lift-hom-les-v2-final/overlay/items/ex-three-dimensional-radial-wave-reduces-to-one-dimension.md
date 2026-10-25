@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-three-dimensional-radial-wave-reduces-to-one-dimension.md

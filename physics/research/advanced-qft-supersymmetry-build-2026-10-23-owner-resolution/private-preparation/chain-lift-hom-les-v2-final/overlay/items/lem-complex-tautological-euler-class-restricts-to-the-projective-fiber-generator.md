@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator.md

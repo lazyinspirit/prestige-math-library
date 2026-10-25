@@ -1,0 +1,132 @@
+{
+  "id": "ex-same-observed-law-different-intervention-law",
+  "group": "dsme_006",
+  "agent": "/root/rendering_repair_supervisor2/dsme_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tile renders the formulas correctly but leaves the two causal graphs in inline prose. Comparing their different arrows before and after do(A=a) materially clarifies why the same observed pair law does not identify the intervention law. A paired factual/intervened illustration is warranted.",
+      "action": "Appended a final Remarks section with one TikZ illustration showing both original DAGs and their interventions, with explanatory text and response-law labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added explanatory factual and intervened DAG pairs outside Facts and Verification. Original title, complete original source prefix, proof and all frontmatter remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      65,
+      105
+    ],
+    "tikz": [
+      73,
+      101
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and parent data",
+      "result": "Each panel contains binary variables U,A,Y. The Example fixes U~Bernoulli(1/2); the observed variables are A,Y and U is unobserved. Independent degenerate errors at A,Y are explicitly omitted from the picture, as permitted by the original Example.",
+      "basis": "Example lines 37\u201340 and def-recursive-structural-causal-model-and-dag Definition (observed/latent partition and independent exogenous family)."
+    },
+    {
+      "check": "Original DAG orientations",
+      "result": "SCM 1 has exactly U\u2192A and A\u2192Y, matching A=U,Y=A. SCM 2 has exactly U\u2192A and U\u2192Y, matching A=U,Y=U. Both have 3 vertices, 2 arrows, no cycles; no bidirected edge or A\u2192Y arrow is introduced in SCM 2.",
+      "basis": "Example lines 37\u201340; local supplier defines parents as incoming graph edges."
+    },
+    {
+      "check": "Intervention operation",
+      "result": "For a in {0,1}, replacing the equation for A by A=a removes U\u2192A in each lower panel. SCM 1 retains exactly A\u2192Y with isolated U; SCM 2 retains exactly U\u2192Y with isolated A. Each lower graph has 3 vertices and 1 arrow. Boxed A denotes intervention rather than conditioning.",
+      "basis": "Fact F3 and actual supplier Definition of do(X_I=a): replace only indexed equations and leave all other functions and exogenous laws unchanged."
+    },
+    {
+      "check": "Displayed equalities and response laws",
+      "result": "Top-row A=Y=U follows by substitution in each original system, yielding masses 1/2 at (0,0),(1,1). In SCM 1 after intervention Y=A=a surely; in SCM 2 Y=U~Bernoulli(1/2). These are exactly the labels shown; a=0 gives success probabilities 0 and 1/2.",
+      "basis": "Verification steps 1.1 and 2.1, independently checked by the two binary cases U=0 and U=1."
+    },
+    {
+      "check": "Proof interface and independence",
+      "result": "No commutative-map assertion is made: arrows represent structural parent relations. The existing numbered verification is byte-preserved and proves both law computations and nonidentifiability without relying on the figure.",
+      "basis": "Unchanged Verification and appended closing Remarks."
+    }
+  ],
+  "before_raw_sha256": "728490aeaa612e79779492b55cbde9715e51d86d545432adf5f62c501caa338d",
+  "after_raw_sha256": "b4b41d8860069a6188bdaaa4e001a16ae7f960f36529a0c29ea3c47e7dc6d73f",
+  "pre_edit_guard": "Current raw SHA256 was checked in the same Python process immediately before first write and matched queue before_raw_sha256.",
+  "status_and_non_title_frontmatter_preserved": true,
+  "original_evidence": {
+    "declared_path_discrepancy": "The screenshot is absent under inspection_dir/diagram-supplement; resolved within the same category at finding.evidence_dir/screenshots.",
+    "path": "research/math-library-rendering-audit-2026-10-23/statistical-models-and-experiments/screenshots/ex-same-observed-law-different-intervention-law--01.png",
+    "sha256": "b60e277ae5a8e47ab8028cf7ae404430799dedbba424ad43c76a32a12ec27271",
+    "viewed": "Standalone original-resolution view; full authentic tile inspected."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-same-observed-law-different-intervention-law.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects",
+      "after_final_edit": true
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-same-observed-law-different-intervention-law.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-same-observed-law-different-intervention-law.md",
+            "item_id": "ex-same-observed-law-different-intervention-law",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      },
+      "after_final_edit": true
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-same-observed-law-different-intervention-law.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      },
+      "after_final_edit": true
+    }
+  ],
+  "native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dsme006 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-same-observed-law-different-intervention-law --out research/math-library-rendering-repairs-2026-10-23/previews/dsme006-native-v2",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dsme006-native-v2/manifest.json",
+    "manifest_sha256": "c0caa51c90f0a0e86eac45510dd22e734f1c5bec5e56712dbc940248fa4d3df7",
+    "source_binding": {
+      "id": "ex-same-observed-law-different-intervention-law",
+      "status": "published",
+      "source": "items/ex-same-observed-law-different-intervention-law.md",
+      "source_sha256": "b4b41d8860069a6188bdaaa4e001a16ae7f960f36529a0c29ea3c47e7dc6d73f",
+      "snapshot": "snapshots/ex-same-observed-law-different-intervention-law.md",
+      "html": "html/ex-same-observed-law-different-intervention-law.html",
+      "html_sha256": "5601cfd1af7be7adc7ee0845e86eb2be3f33715662866b864edeb1bec8f943cc",
+      "reference_map_sha256": "4444ea8dc43d68593020a1e48ba4affdea4dc03f029d82c197e3f124a8b5bab5"
+    },
+    "viewed": [
+      "screenshots/ex-same-observed-law-different-intervention-law--01.png",
+      "screenshots/ex-same-observed-law-different-intervention-law--02.png"
+    ],
+    "visual_result": "Both final native tiles viewed individually at original resolution. SVG compiled; 2 top chain/fork arrows and 1 retained lower arrow per model visible with arrowheads. Labels, intervention boxes and curves contrast against dark background; no overlap or missing graph edge. Figure spans tile boundary with overlap, not clipping.",
+    "initial_attempt": "First preview dsme006-native showed compilation failure from a TikZ label using \\text; replaced that added label with equivalent plain text outside math and successfully recompiled in dsme006-native-v2.",
+    "limitations": "Local native ItemBody preview only, with blocked external requests; unrelated reference-map parse diagnostics (14) are recorded in manifest and confer no whole-corpus coverage."
+  },
+  "remaining_issues": [],
+  "completed_at": "2026-10-24T04:35:44.351375+00:00"
+}

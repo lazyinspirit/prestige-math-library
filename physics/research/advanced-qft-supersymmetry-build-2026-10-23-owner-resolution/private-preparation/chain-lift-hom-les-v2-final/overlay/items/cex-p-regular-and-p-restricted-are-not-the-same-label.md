@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-p-regular-and-p-restricted-are-not-the-same-label.md

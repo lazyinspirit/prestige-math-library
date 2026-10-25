@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-ordinary-cohomology-does-not-give-noncompact-poincare-duality.md

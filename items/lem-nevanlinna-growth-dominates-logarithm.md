@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-nevanlinna-growth-dominates-logarithm.json
+  precheck: pass
 id: lem-nevanlinna-growth-dominates-logarithm
 kind: lemma
 title: "Transcendental characteristic dominates logarithmic growth"
@@ -21,8 +24,7 @@ sources:
     - title: "Goldberg–Ostrovskii, Value Distribution of Meromorphic Functions"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 1 §5–§6 and Ch. 3 §1–§2, printed pp. 23–28 and 87–98: the convex Ahlfors–Shimizu characteristic and the rational growth characterization"
-verification:
-  audited: 2026-10-02
+
 ---
 
 ## Statement
@@ -49,7 +51,7 @@ $O(1)$ term is $o\bigl(T(r,f)\bigr)$.
 
 ## Proof
 
-**Proof technique:** shift the convex Ahlfors–Shimizu potential to the logarithmic variable; a bounded ratio on an unbounded sequence and the convexity chord bound force $T=O(\log r)$, which the rational characterization converts into a contradiction with transcendence.
+**Proof technique:** shift the convex Ahlfors–Shimizu potential to the logarithmic variable; a bounded ratio on an unbounded sequence and the convexity chord bound force T = O(log r), which the rational characterization converts into a contradiction with transcendence.
 
 1.1 Put $u(x):=T(e^x,f)$ for $x\in\mathbb R$. By [F1], $u(x)-C_\infty(f)$ is convex and nondecreasing in $x$; hence $u$ itself is convex and nondecreasing. By [F3], $u(x)>1$ for all sufficiently large $x$. [F1, F3, construct]
 

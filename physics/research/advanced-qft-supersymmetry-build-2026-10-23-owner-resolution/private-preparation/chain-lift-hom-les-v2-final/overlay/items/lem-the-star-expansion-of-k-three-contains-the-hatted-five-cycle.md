@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-star-expansion-of-k-three-contains-the-hatted-five-cycle.md

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three.json
+  precheck: pass
 id: lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three
 kind: lemma
-title: "Standard and reflected two-sphere immersions have homotopic formal data in R^3"
+title: "Standard and reflected two-sphere immersions have homotopic formal data in $\\mathbb{R}^3$"
 status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
@@ -11,12 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §2.1 eversion paragraph"

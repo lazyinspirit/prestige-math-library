@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-anderson-reverse-time-diffusion.json
+  precheck: pass
 id: thm-anderson-reverse-time-diffusion
 kind: theorem
 title: Anderson's bounded-start reverse-time diffusion theorem
@@ -19,8 +22,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pending
 sources:
   references:
   - title: B. D. O. Anderson, Reverse-time diffusion equation models, Sections 3–4
@@ -91,3 +92,33 @@ by Itô's formula and the Brownian-Itô covariation formula. [[thm-multidimensio
 4.1 For $0\le u<v\le U$, put $s=T-v$ and $t=T-u$. Then $B_v-B_u=-(\widetilde W_t-\widetilde W_s)$, so by claim 1 this increment has law $N_r(0,(v-u)I_r)$. It is measurable with respect to the forward filtration at time $t$. By the strong restart assumption in the Statement, the future $X$ path, and hence the future $\widetilde W$ increments, are measurable functions of $X_t$ and the future Brownian increments of $W$; those Brownian increments are independent of $\mathcal F_t$ by [F1]. Since $\widetilde W_t-\widetilde W_s$ is independent of $X_t$ by claim 1, it is independent of the pair consisting of $X_t$ and all future Brownian increments, and thus of the entire future segment $(X_r,\widetilde W_r-\widetilde W_t)_{r\ge t}$. The variables $Y_q$ and $B_q$ for $q\le u$ are measurable with respect to that segment. Therefore $B_v-B_u$ is independent of $\mathcal G_u$. The process $B$ is continuous, starts at zero, and has these centered Gaussian increments independent of its past; hence it is standard Brownian motion in $(\mathcal G_u)$. [F1, step 3.1, given]
 
 5.1 Reparameterize by $u=T-t$ and set $B_u=\widetilde W_{T-u}-\widetilde W_T$. Right-endpoint sums in forward time satisfy $\int_{T-u}^T H_s\,d^{\mathrm b}\widetilde W_s=-\int_0^uH_{T-r}\,dB_r$: each reversed increment is the negative of the corresponding right-endpoint forward increment. Therefore $Y_u-Y_0=-\int_0^u\widehat b(Y_r,T-r)dr+\int_0^u\sigma(Y_r,T-r)dB_r$. The drift is $-\widehat b_i=-b_i+p_t^{-1}\partial_j(p_ta_{ij})=-b_i+\partial_j a_{ij}+\sum_j a_{ij}\partial_j\log p_t$. With $t=T-u$, this is exactly the displayed reverse SDE and completes claim 3. [F6, step 2.2] ∎
+
+## Remarks
+
+The timeline aligns forward time with reverse time for an interior pair $0<u<v<U$, where $U=T-t_0$. Dashed lines identify the same instant under the change of clock; the arrows show each clock's increasing direction. Spacings are schematic.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[anchor=east] at (-0.5,0) {forward time};
+\draw[->,thick] (-0.2,0) -- (9.6,0);
+\node[above] at (0,0.15) {$t_0$};
+\node[above] at (3,0.15) {$s=T-v$};
+\node[above] at (6,0.15) {$t=T-u$};
+\node[above] at (9,0.15) {$T$};
+\draw[dashed,gray] (0,-0.15) -- (0,-1.85);
+\draw[dashed,gray] (3,-0.15) -- (3,-1.85);
+\draw[dashed,gray] (6,-0.15) -- (6,-1.85);
+\draw[dashed,gray] (9,-0.15) -- (9,-1.85);
+\node[fill=white] at (4.5,-1) {$t=T-u$};
+\node[anchor=east] at (-0.5,-2) {reverse time};
+\draw[->,thick] (9.2,-2) -- (-0.6,-2);
+\node[below] at (0,-2.15) {$U=T-t_0$};
+\node[below] at (3,-2.15) {$v$};
+\node[below] at (6,-2.15) {$u$};
+\node[below] at (9,-2.15) {$0$};
+\node at (4.5,-3.2) {$Y_u=X_{T-u},\qquad B_u=\widetilde W_{T-u}-\widetilde W_T,\qquad B_0=0$};
+\node at (4.5,-4) {$B_v-B_u=\widetilde W_s-\widetilde W_t=-(\widetilde W_t-\widetilde W_s)$};
+\end{tikzpicture}
+```
+
+The corresponding intervals have equal length $v-u=t-s$. The subtraction order in the last line is the one used in step 4.1; the same reversal of increments fixes the integral sign in step 5.1. The theorem's hypotheses remain in force, and its rigorous proof is independent of the illustration.

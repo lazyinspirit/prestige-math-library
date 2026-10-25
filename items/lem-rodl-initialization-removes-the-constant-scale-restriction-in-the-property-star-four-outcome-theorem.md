@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rodl-initialization-removes-the-constant-scale-restriction-in-the-property-star-four-outcome-theorem.json
+  precheck: pass
 id: lem-rodl-initialization-removes-the-constant-scale-restriction-in-the-property-star-four-outcome-theorem
 kind: lemma
 title: "Rödl initialization removes the constant-scale restriction in the property (*) four-outcome theorem"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -53,7 +49,7 @@ $|G|\ge x^{-d}$, at least one of the following holds:
 
 ## Proof
 
-**Proof technique:** apply Rödl at the fixed scale $\xi=c^{10}$, then transfer each outcome of the constant-scale theorem back to $G$ by choosing $d$ large enough.
+**Proof technique:** apply Rödl at the fixed scale ξ = c¹⁰, then transfer each outcome of the constant-scale theorem back to the original graph by choosing the exponent d large enough.
 
  1.1 Let $c_1,c_2,c_3>0$, $c_4,c_5\ge 4$, and $c:=2^{-4c_5}$ be the constants from [L1], and set $\xi:=c^{10}$. Let $\delta>0$ be the constant from [L2] for the family $\overline{\mathcal F}$ and the parameter $\xi$. [L1, L2, choose]
 

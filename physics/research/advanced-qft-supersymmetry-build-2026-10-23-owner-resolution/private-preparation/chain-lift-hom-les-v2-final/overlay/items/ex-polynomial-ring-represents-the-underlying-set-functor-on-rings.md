@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-polynomial-ring-represents-the-underlying-set-functor-on-rings.md

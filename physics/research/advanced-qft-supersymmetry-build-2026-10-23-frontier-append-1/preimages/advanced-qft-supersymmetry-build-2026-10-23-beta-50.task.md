@@ -1,0 +1,19 @@
+# Batch 50 of run `advanced-qft-supersymmetry-build-2026-10-23` — Four-Dimensional S4 Localization Examples
+
+1 A/B pair in advanced-qft-and-supersymmetry. Own only these pairs.
+
+Read `research/advanced-qft-supersymmetry-build-2026-10-23-owner-authoring-direction.md` before constructing any item. It is binding and overrides stale task or design text.
+
+## `qftx-s4-partition-functions`
+
+| | |
+|---|---|
+| A page | `qftx-s4-partition-functions` · order **1006** · `advanced-qft-and-supersymmetry` |
+| B page | `qftx-s4-partition-functions-examples` |
+| title | Four-Dimensional S4 Localization Examples |
+| requires | `qftx-qexact-field-theory-localization`, `qftx-adhm-moduli`, `qftx-susy-moduli-and-dualities` |
+| design | `research/plan-advanced-qft-and-supersymmetry-track.md` L695 |
+
+- Read the complete design section; preserve its scope, conventions, warnings and proof route.
+
+- Compare the design with `research/plan-spec.json`; record conflicts in batch notes.

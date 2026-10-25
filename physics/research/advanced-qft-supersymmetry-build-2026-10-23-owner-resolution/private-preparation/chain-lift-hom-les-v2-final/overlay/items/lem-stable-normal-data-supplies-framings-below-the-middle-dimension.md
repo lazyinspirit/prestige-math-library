@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-stable-normal-data-supplies-framings-below-the-middle-dimension.md

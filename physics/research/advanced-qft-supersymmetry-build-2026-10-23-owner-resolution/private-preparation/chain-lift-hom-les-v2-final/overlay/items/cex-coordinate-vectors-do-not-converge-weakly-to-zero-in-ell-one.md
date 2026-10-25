@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-coordinate-vectors-do-not-converge-weakly-to-zero-in-ell-one.md

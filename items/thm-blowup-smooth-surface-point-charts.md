@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-blowup-smooth-surface-point-charts.json
+  precheck: pass
 id: thm-blowup-smooth-surface-point-charts
 kind: theorem
 title: "Blowing up a rational point of a smooth surface"
@@ -41,18 +44,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
       locator: "Chapter 8 Section h, pp. 194-197"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "historical complete Step5 reader; item thm-blowup-smooth-surface-point-charts; evidence research/frontier-38-owner-30-reader-2.md, research/frontier-38-owner-30-reader-findings-2.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
+
 ---
 
 ## Statement
@@ -174,3 +166,34 @@ neighbourhood $U$ glue to the global blowup.
 - For a general closed point the local charts are over $\mathcal O_{S,p}$.
   The exceptional curve is over $\kappa(p)$; the whole blowup need not have a
   $\kappa(p)$-algebra structure.
+
+
+The chart gluing can be read as the following diagram of open immersions.
+Put $Z=\pi^{-1}(U)=V(xv-yu)$,
+$C_u=\operatorname{Spec}R[T]/(xT-y)$ with $T=v/u$, and
+$C_v=\operatorname{Spec}R[U_1]/(yU_1-x)$ with $U_1=u/v$.
+Their common open is $W=\operatorname{Spec}R[T,T^{-1}]/(xT-y)$;
+its map to $C_v$ is induced by $U_1\mapsto T^{-1}$, fixing $R$.
+Thus $C_u\cup C_v=Z$, and both composites from $W$ to $Z$ agree.
+
+```tikzcd
+C_u \arrow[dr, hook] & W \arrow[l, hook] \arrow[r, hook] & C_v \arrow[dl, hook] \\
+& Z &
+```
+
+The exceptional fibre fits into the Cartesian square below. Here
+$p=\operatorname{Spec}k$ because the theorem assumes that $p$ is
+$k$-rational; the vertical maps are the structure map and the restricted
+blowdown, respectively. On $C_u$ the exceptional ideal is $(x)$, giving
+$\operatorname{Spec}k[T]$, and on $C_v$ it is $(y)$, giving
+$\operatorname{Spec}k[U_1]$. Their reciprocal transition glues them to
+$E\cong\mathbb P^1_k$. For the general closed-point convention in the
+preceding remark, these exceptional charts instead have coefficient field
+$\kappa(p)$; no residue-field structure on the whole blowup is implied.
+
+```tikzcd
+E \arrow[r, hook] \arrow[d] & Z \arrow[d, "\pi|_Z"] \\
+p \arrow[r, hook] & U
+```
+
+These diagrams summarize steps 2.1–4.1; the proof does not depend on them.

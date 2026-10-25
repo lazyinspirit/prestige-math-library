@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-maxima-and-minima-of-two-w-one-p-functions-are-w-one-p.md

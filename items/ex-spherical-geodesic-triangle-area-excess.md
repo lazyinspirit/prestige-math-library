@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-spherical-geodesic-triangle-area-excess.json
+  precheck: pass
 id: ex-spherical-geodesic-triangle-area-excess
 kind: example
 title: Area excess of a spherical geodesic triangle
@@ -23,13 +26,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)"
@@ -68,7 +64,7 @@ $A=\pi R^2/2$ and three right angles.
 
 ## Verification
 
-**Proof technique:** compute the constant curvature of the radius-$R$ round metric in spherical coordinates by the structure equation, insert it into the geodesic-polygon formula, and evaluate the octant.
+**Proof technique:** compute the constant curvature of the round metric of radius R in spherical coordinates by the structure equation, insert it into the geodesic-polygon formula, and evaluate the octant.
 
 1.1 Use the chart $X(\theta,\varphi)=(R\sin\theta\cos\varphi,R\sin\theta\sin\varphi,R\cos\theta)$ with $0<\theta<\pi$ and $0<\varphi<2\pi$, positively oriented. The induced round metric is $g=R^2d\theta^2+R^2\sin^2\theta\,d\varphi^2$, so $(\partial_\theta,\partial_\varphi)$ has $g_{\theta\theta}=R^2$, $g_{\varphi\varphi}=R^2\sin^2\theta$ and $g_{\theta\varphi}=0$; the fields $e_1=(1/R)\partial_\theta$ and $e_2=(1/(R\sin\theta))\partial_\varphi$ therefore form a smooth positive orthonormal frame on the chart. [F5, given]
 
@@ -89,3 +85,29 @@ $A=\pi R^2/2$ and three right angles.
 ## Source locator
 
 Lee, *Riemannian Manifolds: An Introduction to Curvature*, Chapter 9, printed pp. 156-172, treats constant-curvature surfaces through the local formula and records the positive-curvature angle excess; Datar, *Lectures on Riemannian Geometry*, Lecture 2, Theorem 2.0.1, gives the same formula. The curvature $R^{-2}$ is computed here from [[thm-gaussian-curvature-structure-equation]] and [[prop-christoffel-formula-for-the-levi-civita-connection]] on the explicit spherical frame, the great-circle geodesics are the published example [[ex-great-circles-as-round-sphere-geodesics]], and the area and right angles of the octant are evaluated directly from the induced round metric of [[ex-the-round-metric-on-the-sphere-as-an-induced-metric]].
+
+## Remarks
+
+The shaded patch below is a projection of the spherical octant $O$ in step 7.1. Its three curved sides are the quarter great circles in the coordinate planes, with vertices $Re_1,Re_2,Re_3$. The angle labels refer to the intrinsic spherical metric; the projection does not preserve angles. The area and angle sum follow from steps 7.1 and 6.1, independently of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\fill[blue!12] plot[domain=0:90,samples=40] ({2.5*cos(\x)-2*sin(\x)},{-0.7*cos(\x)-1.1*sin(\x)})
+  -- plot[domain=0:90,samples=40] ({-2*cos(\x)},{-1.1*cos(\x)+2.5*sin(\x)})
+  -- plot[domain=0:90,samples=40] ({2.5*sin(\x)},{2.5*cos(\x)-0.7*sin(\x)}) -- cycle;
+\draw[thick,blue] plot[domain=0:90,samples=40] ({2.5*cos(\x)-2*sin(\x)},{-0.7*cos(\x)-1.1*sin(\x)});
+\draw[thick,blue] plot[domain=0:90,samples=40] ({-2*cos(\x)},{-1.1*cos(\x)+2.5*sin(\x)});
+\draw[thick,blue] plot[domain=0:90,samples=40] ({2.5*sin(\x)},{2.5*cos(\x)-0.7*sin(\x)});
+\fill (2.5,-0.7) circle (1.6pt);
+\fill (-2,-1.1) circle (1.6pt);
+\fill (0,2.5) circle (1.6pt);
+\node[right] at (2.5,-0.7) {$Re_1$};
+\node[left] at (-2,-1.1) {$Re_2$};
+\node[above] at (0,2.5) {$Re_3$};
+\node at (1.9,-0.35) {$\pi/2$};
+\node at (-1.45,-0.7) {$\pi/2$};
+\node at (0,1.95) {$\pi/2$};
+\node at (0.15,0.55) {$A=\pi R^2/2$};
+\node at (0.15,0) {$\beta_1+\beta_2+\beta_3=3\pi/2$};
+\end{tikzpicture}
+```

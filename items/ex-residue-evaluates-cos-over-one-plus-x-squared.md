@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-residue-evaluates-cos-over-one-plus-x-squared.json
+  precheck: pass
 id: ex-residue-evaluates-cos-over-one-plus-x-squared
 kind: example
-title: "The integral of cos x / (1 + x^2) over the real line is pi / e"
+title: 'The integral of $\cos x / (1 + x^2)$ over the real line is $\pi / e$'
 status: published
 origin: session
 provenance:
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: computation
-verification:
-  audited: 2026-08-27
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:

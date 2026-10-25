@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-graded-module-and-projective-grothendieck-groups-for-klr-towers.json
+  precheck: pass
 id: def-graded-module-and-projective-grothendieck-groups-for-klr-towers
 kind: definition
 title: "Graded module and projective Grothendieck groups of the KLR and Hecke towers"
@@ -33,8 +36,7 @@ sources:
     - title: "Alexander Kleshchev, Representation theory of symmetric groups and related Hecke algebras, arXiv:0909.4844v1, Bull. Amer. Math. Soc. 47 (2010) 419-481 (complete 66-page survey)"
       url: "https://arxiv.org/pdf/0909.4844"
       locator: "Section 2, printed pp. 6-17: cyclotomic Hecke and KLR conventions, weight idempotents and blocks; Section 9.1-9.5, printed pp. 39-46: categorification of f and V(Lambda). Complete passages read."
-verification:
-  precheck: pass
+
 ---
 
 ## Definition
@@ -146,3 +148,35 @@ the explicit mutually inverse sector maps of
 1.4 **Transport to the Hecke tower.** For each nonzero residue-content sector, [F5] gives an algebra isomorphism $\varphi_\alpha:H^\Lambda_\alpha\to R^\Lambda(\alpha)$ for the fixed admissible normalising series, homogeneous for the transported grading. Restriction of scalars along $\varphi_\alpha$ is an exact equivalence with exact inverse given by restriction along $\varphi_\alpha^{-1}$; it preserves finite-dimensional modules, projectives and internal shifts. For every zero Hecke sector, [F6] makes the corresponding KLR sector zero as well. A unital module over the zero algebra satisfies $m=1m=0m=0$, so both Grothendieck groups of either zero sector vanish. Summing the nonzero-sector isomorphisms and these zero-group identifications over finite root supports gives $K_0^{\mathrm{gr}}(H^\Lambda)\cong K_0^{\mathrm{gr}}(R^\Lambda)$ and $G_0^{\mathrm{gr}}(H^\Lambda)\cong G_0^{\mathrm{gr}}(R^\Lambda)$. These are $A$-linear since transport commutes with internal shift, and they intertwine the Cartan maps and the forgetful maps $\zeta$ with the ungraded identifications. [F1, F3, F5, F6]
 
 2.1 **The groups remain distinct and no choice is used.** The identification $K_0^{\mathrm{gr}}(H^\Lambda)\cong K_0^{\mathrm{gr}}(R^\Lambda)$ of step 1.4 transports projective classes between the specified Hecke and KLR towers; it asserts no identification of the arbitrary tower $R$ with $R^\Lambda$. The Cartan homomorphism $c$ and the forgetful $\zeta$ are not inverted or identified, and no statement of the definition equates $K_0^{\mathrm{gr}}$ with $G_0^{\mathrm{gr}}$. All constructions use the finite block decompositions, the local units, and the explicit homogeneous algebra isomorphisms, so no choice principle is invoked. [F1, F5, given] ∎
+
+
+## Remarks
+
+For any of the towers $T=R$, $R^\Lambda$, or $H^\Lambda$ above, the
+Cartan and forgetful maps form the following commuting square. Here
+$c_T^{\mathrm{gr}}$ and $c_T$ both send a projective class to its module
+class, while $\zeta_K$ and $\zeta_G$ forget the internal grading.
+
+```tikzcd
+K_0^{\mathrm{gr}}(T) \arrow[r, "c_T^{\mathrm{gr}}"] \arrow[d, "\zeta_K"'] & G_0^{\mathrm{gr}}(T) \arrow[d, "\zeta_G"] \\
+K_0(T) \arrow[r, "c_T"'] & G_0(T)
+```
+
+The chosen blockwise isomorphisms $\varphi_\alpha:H^\Lambda_\alpha\to
+R^\Lambda_\alpha$ also give the commuting square below. The maps $T_K$
+and $T_G$ transport Hecke modules to KLR modules by restriction of scalars
+along $\varphi_\alpha^{-1}$, summed over finite root supports; zero sectors
+contribute zero groups. The horizontal maps are $A$-linear isomorphisms,
+commute with the $q$-shift, and intertwine the corresponding forgetful maps
+with their ungraded versions.
+
+```tikzcd
+K_0^{\mathrm{gr}}(H^\Lambda) \arrow[r, "T_K", "\cong"'] \arrow[d, "c_{H^\Lambda}^{\mathrm{gr}}"'] & K_0^{\mathrm{gr}}(R^\Lambda) \arrow[d, "c_{R^\Lambda}^{\mathrm{gr}}"] \\
+G_0^{\mathrm{gr}}(H^\Lambda) \arrow[r, "T_G", "\cong"'] & G_0^{\mathrm{gr}}(R^\Lambda)
+```
+
+Both squares commute on projective-class generators: either route gives
+the same underlying module class, with transport applied in the second
+square. They illustrate proof steps 1.2 and 1.4; the proof is independent
+of the figures. Neither square identifies $K_0$ with $G_0$ or asserts that
+a Cartan or forgetful map is invertible.

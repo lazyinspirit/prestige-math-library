@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-equal-coordinate-rank-one-principal-series-of-gl2-fq.md

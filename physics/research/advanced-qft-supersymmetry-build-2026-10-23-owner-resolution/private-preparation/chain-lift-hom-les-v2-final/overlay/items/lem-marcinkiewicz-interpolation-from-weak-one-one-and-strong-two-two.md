@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-marcinkiewicz-interpolation-from-weak-one-one-and-strong-two-two.md

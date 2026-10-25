@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-non-negative-square-root-is-a-polynomial-in-the-operator.md

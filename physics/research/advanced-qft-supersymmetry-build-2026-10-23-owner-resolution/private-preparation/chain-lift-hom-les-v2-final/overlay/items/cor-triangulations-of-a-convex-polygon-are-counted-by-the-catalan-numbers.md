@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-triangulations-of-a-convex-polygon-are-counted-by-the-catalan-numbers.md

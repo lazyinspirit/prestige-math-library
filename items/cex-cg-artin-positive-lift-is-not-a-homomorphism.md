@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-cg-artin-positive-lift-is-not-a-homomorphism.json
+  precheck: pass
 id: cex-cg-artin-positive-lift-is-not-a-homomorphism
 kind: counterexample
-title: "The positive lift b_w is not a monoid homomorphism"
+title: "The positive lift $b_w$ is not a monoid homomorphism"
 status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
@@ -21,9 +24,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
     - title: "George Lusztig, Hecke Algebras with Unequal Parameters (revised book text, arXiv:math/0208154v2)"
       url: "https://arxiv.org/pdf/math/0208154"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Statement refuted
@@ -35,17 +36,17 @@ verification:
 
 ## Facts & Assumptions
 
-**Given:** The rank-one Coxeter matrix with $S=\{s\}$ and $m(s,s)=1$, the presented group $W$ with its length function $\ell$, and the constructions $S^{*}$, $A^{+}$, $A$, $\gamma$, $\sigma_s$ and the lift $b$ of [[def-cg-artin-monoid-and-group-presentations]], [[lem-cg-artin-presentation-universal-properties-and-coxeter-surjection]] and [[thm-cg-reduced-positive-section-and-length-additive-products]].
+**Given:** The rank-one Coxeter matrix with $S=\{s\}$ and $m(s,s)=1$, the presented group $W$ with its length function $\ell$, and the constructions $S^{*}$, $A^{+}$, $A$, $\gamma$, $\sigma_s$ and the lift $b$ of [[def-cg-artin-monoid-and-group-presentations]], [[lem-cg-artin-presentation-universal-properties-and-coxeter-surjection]] and [[thm-cg-reduced-positive-section-and-length-additive-products|The reduced positive section $b_w$, its length additivity, and the degree homomorphism]].
 
 [F1] A braid pair requires two distinct letters $s\ne t$, and $A^{+}$ is the quotient of $S^{*}$ by the smallest congruence containing the braid pairs, with $[u][v]=[uv]$ and $\sigma_s=[s]$. ([[def-cg-artin-monoid-and-group-presentations]])
 
-[F2] $b_w$ depends only on $w$ and not on the chosen reduced expression, $b_1=1_{A^{+}}=[\varepsilon]$, and $\pi^{+}(b_w)=w$. ([[thm-cg-reduced-positive-section-and-length-additive-products]])
+[F2] $b_w$ depends only on $w$ and not on the chosen reduced expression, $b_1=1_{A^{+}}=[\varepsilon]$, and $\pi^{+}(b_w)=w$. ([[thm-cg-reduced-positive-section-and-length-additive-products|The reduced positive section $b_w$, its length additivity, and the degree homomorphism]])
 
-[F3] The monoid homomorphism $L:A^{+}\to(\mathbb N,+,0)$ satisfies $L([s_1\cdots s_k])=k$, hence is additive with $L(1_{A^{+}})=0$ and $L(b_w)=\ell(w)$. ([[thm-cg-reduced-positive-section-and-length-additive-products]])
+[F3] The monoid homomorphism $L:A^{+}\to(\mathbb N,+,0)$ satisfies $L([s_1\cdots s_k])=k$, hence is additive with $L(1_{A^{+}})=0$ and $L(b_w)=\ell(w)$. ([[thm-cg-reduced-positive-section-and-length-additive-products|The reduced positive section $b_w$, its length additivity, and the degree homomorphism]])
 
-[F4] The same assignment defines a group homomorphism $\deg:A\to\mathbb Z$ with $\deg(\sigma_s)=1$ and $\deg(\gamma(x))=L(x)$ for all $x\in A^{+}$. ([[thm-cg-reduced-positive-section-and-length-additive-products]])
+[F4] The same assignment defines a group homomorphism $\deg:A\to\mathbb Z$ with $\deg(\sigma_s)=1$ and $\deg(\gamma(x))=L(x)$ for all $x\in A^{+}$. ([[thm-cg-reduced-positive-section-and-length-additive-products|The reduced positive section $b_w$, its length additivity, and the degree homomorphism]])
 
-[F5] $b_ub_v=b_{uv}$ holds if and only if $\ell(uv)=\ell(u)+\ell(v)$. ([[thm-cg-reduced-positive-section-and-length-additive-products]])
+[F5] $b_ub_v=b_{uv}$ holds if and only if $\ell(uv)=\ell(u)+\ell(v)$. ([[thm-cg-reduced-positive-section-and-length-additive-products|The reduced positive section $b_w$, its length additivity, and the degree homomorphism]])
 
 [F6] A monoid homomorphism satisfies $f(xy)=f(x)f(y)$ and $f(e)=e'$; a group homomorphism satisfies $f(xy)=f(x)f(y)$ and preserves the identity. ([[def-group-homomorphism]])
 

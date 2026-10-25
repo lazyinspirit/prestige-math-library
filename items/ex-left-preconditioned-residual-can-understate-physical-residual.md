@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-left-preconditioned-residual-can-understate-physical-residual.json
+  precheck: pass
 id: ex-left-preconditioned-residual-can-understate-physical-residual
 kind: example
 title: "A small left-preconditioned residual can hide a large physical residual"
@@ -18,11 +21,6 @@ deps:
 justified_by: []
 aliases: []
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §9.3.4, printed pp. 285–286"

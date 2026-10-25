@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-non-closed-leaf-of-a-codimension-one-foliation-meets-a-closed-transversal.md

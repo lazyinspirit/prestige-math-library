@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-galois-descent-for-the-two-nontrivial-characters-of-c-three.md

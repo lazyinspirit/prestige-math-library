@@ -1,0 +1,112 @@
+{
+  "id": "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+  "agent": "/root/rendering_repair_coordinator/dnla_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A concrete sweep picture materially clarifies the algorithm: step 2 reverses adjacent-window order, step 3 fixes opposite canonical environments, and step 5 absorbs the singular values into different sites in the two directions. Original standalone capture shows no diagram. This is an authorized explanatory omission, not a gap in the complete procedure.",
+      "action": "Added a two-site TT environment/sweep schematic and both exact SVD factor placements in final Remarks, with precise index and boundary conventions.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a final-Remarks TikZ illustration of fixed left/right canonical environments, the active two-site center, forward/backward window visitation, and direction-dependent exact SVD absorption. Existing Definition, title, sources, dependencies, verification and publication status unchanged.",
+  "source_lines_after": [
+    69,
+    71,
+    99,
+    102
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "A two-site center J=[k,k+1] in an open-boundary TT; L is the fixed prefix interface, R the suffix interface; each active core G_j has indices (alpha_{j-1},i_j,alpha_j).",
+      "check": "The top path has four boxes and three internal bond segments, with four physical legs: grouped i_L, i_k, i_{k+1}, grouped i_R. It expresses the existing finite TT bond contraction; no cycle or periodic trace is asserted.",
+      "justification": "Algorithm steps 1 and 3; def-tensor-train-cores-bond-ranks-and-canonical-gauges Definition gives G_j shape and adjacent contracted bonds. Grouped boundary tuples can be empty and missing environments are scalar identities."
+    },
+    {
+      "objects": "Canonical prefix L and suffix R; center embedding E.",
+      "check": "L has rows i_L and columns alpha_{k-1}; R has rows alpha_{k+1} and columns i_R. Thus E maps center coefficients with shape r_{k-1} x n_k x n_{k+1} x r_{k+1} to full tensor coefficients. L*L=I and RR*=I give E*E=I; the illustration labels the prefix left-isometric and suffix right-isometric.",
+      "justification": "lem-na-mps-environment-isometry-and-effective-hamiltonian Statement and proof steps 1.1–2.1 explicitly establish those interface identities and the domain/codomain of E; algorithm step 3 invokes that setting."
+    },
+    {
+      "objects": "Sweep arrows and active-window bracket.",
+      "check": "The bracket encloses exactly G_k and G_{k+1}. The forward arrow points right (increasing k); the backward arrow points left (decreasing k). They denote visit order, not linear maps. Width-one interpretation is explicitly separate.",
+      "justification": "Algorithm step 2 visits sites 1,...,d or pairs 1,...,d-1 in forward order and reverses that order backward; caption identifies the two-site example."
+    },
+    {
+      "objects": "The exact compact SVD X=U Sigma V* and its two factorization rows.",
+      "check": "Writing X as (r_{k-1}n_k) by (n_{k+1}r_{k+1}), compact rank q gives U of shape (r_{k-1}n_k) by q and V* of shape q by (n_{k+1}r_{k+1}). Forward factors U and Sigma V* multiply to X; backward factors U Sigma and V* also multiply to X. Site labels assign first/second factors to k/k+1, moving Sigma toward the next window without truncation.",
+      "justification": "Algorithm step 5 states these precise reshapes and absorption conventions and retains every positive singular direction."
+    },
+    {
+      "objects": "Optional rounding timing and independence.",
+      "check": "Caption places rank-capped rounding after both passes; no monotonicity, global minimization, or convergence claim is introduced. Existing procedure and supporting rigorous proofs remain independent of the picture.",
+      "justification": "Algorithm step 6 and original Remarks."
+    }
+  ],
+  "checks": {
+    "before_guard": {
+      "sha256": "fd8c84bfc92b601afd5e7568cc4fe937da5f6ecf2f98d080b8cc8f667ccc069e",
+      "matched": true
+    },
+    "frontmatter_byte_identical": true,
+    "status_before": "published",
+    "status_after": "published",
+    "current_raw_sha256": "e73578cd5b9f5761674256b08846722bf64404c9c14c946f73228c3cb9089ecc",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-na-alternating-tensor-optimization-and-effective-eigenproblems.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-na-alternating-tensor-optimization-and-effective-eigenproblems.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/alg-na-alternating-tensor-optimization-and-effective-eigenproblems.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "native_preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnla004 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-na-alternating-tensor-optimization-and-effective-eigenproblems --out research/math-library-rendering-repairs-2026-10-23/previews/dnla004-final",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnla004-final/manifest.json",
+      "source_sha256": "e73578cd5b9f5761674256b08846722bf64404c9c14c946f73228c3cb9089ecc",
+      "html_sha256": "215cc157e6062e0091be8659ea6a5e5cb199e9826fc7542f0ae45c1a4316ad7d",
+      "reference_map_sha256": "185b071f47c3364bcfa2483a74d7c4a83ad961a7d90cd3c9509c21e256bd062c",
+      "inspected_original_resolution": [
+        "research/math-library-rendering-repairs-2026-10-23/previews/dnla004-final/screenshots/alg-na-alternating-tensor-optimization-and-effective-eigenproblems--01.png",
+        "research/math-library-rendering-repairs-2026-10-23/previews/dnla004-final/screenshots/alg-na-alternating-tensor-optimization-and-effective-eigenproblems--02.png"
+      ],
+      "result": "Native SSR produced one inline SVG and two screenshot tiles, with no TikZ error marker. Both standalone tiles inspected at original resolution. Dark background: labels and all three top bond segments/four physical legs, bracket and two directed arrows are visible; no clipped or overlapping labels, no pale fills hiding strokes. Lower rows each have two boxes and one bond segment. No endpoint-ring or graph-closing-edge convention applies to this open-chain schematic.",
+      "limitations": "Local ItemBody preview only; 16 unrelated reference-map parse diagnostics were reported. No full-site or whole-corpus assertion."
+    }
+  },
+  "evidence_resolution": {
+    "declared_path_missing": true,
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/alg-na-alternating-tensor-optimization-and-effective-eigenproblems--01.png",
+    "sha256": "9549a3c956b8f1e7ffd266dc077c62b0adf937853948edf5f9cf0915a0041039",
+    "matches_recorded_sha": true,
+    "original_standalone_inspected": true
+  },
+  "remaining_issues": []
+}

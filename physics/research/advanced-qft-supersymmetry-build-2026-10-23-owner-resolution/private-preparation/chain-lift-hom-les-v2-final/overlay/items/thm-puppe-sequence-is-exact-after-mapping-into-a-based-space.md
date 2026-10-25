@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-puppe-sequence-is-exact-after-mapping-into-a-based-space.md

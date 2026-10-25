@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-maximal-subgroups-of-a-finite-p-group-are-frattini-hyperplanes.md

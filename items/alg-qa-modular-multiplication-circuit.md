@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-qa-modular-multiplication-circuit.json
+  precheck: n/a
 id: alg-qa-modular-multiplication-circuit
 kind: algorithm
 title: Reversible modular multiplication by a unit
@@ -26,11 +29,6 @@ axiom_use: "None; the construction is finite and uses a supplied modular inverse
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits"
@@ -60,3 +58,21 @@ Generate the following explicit NOT/AND/OR DAG for this function. Bit arrays in 
 5. Pad $z$ by a zero high bit, call $\operatorname{SUB}_{n+1}(z,N)$, and let $h$ be its carry. Emit $v=\operatorname{NOT}(h)$ and $g=\operatorname{AND}(c,v)$. Set $F=\operatorname{SELECT}_n(g,R,z)$. The ordered output ports are $F_{n-1},\ldots,F_0$. This completes the finite DAG and its topological order. Construct a second DAG by the identical recipe with constant $a^{-1}$ in place of $a$.
 
 Compile each DAG to the clean-target XOR oracle of [[def-qc-coherent-function-oracle]] using [[alg-qc-reversible-embedding]], whose exact gate-emission rules apply also to repeated-source ports. Allocate an $n$-bit clean target, compute $f_a(c,z)$ into it, swap the data and target registers with three CNOT gates per bit, then apply the compiled XOR computation for $f_{a^{-1}}$ to the old-data target, using the new data as input. Each compiled XOR oracle is an involution by [[thm-qc-reversible-xor-oracle-unitary]]. Return the concatenated gate list with every compute-copy-uncompute stage included. Separate items `thm-qa-modular-multiplication-circuit-correctness` and `thm-qa-modular-arithmetic-cost` establish its basis action and gate/work bounds. No depth bound is part of this algorithm.
+
+## Remarks
+
+The register flow below isolates the compute, swap, and cleanup stages. Write $z'=f_a(c,z)$, let $t$ be the allocated $n$-bit target, and let $W$ collect the Boolean-value and scratch work for the compiled oracles. States are listed in the fixed register order $(c,z,t,W)$; each arrow denotes a complete reversible block, with time running downward.
+
+```tikz
+\begin{tikzpicture}
+\node (s0) at (0,0) {$|c,z,0^n,0^w\rangle$};
+\node (s1) at (0,-1.4) {$|c,z,z',0^w\rangle$};
+\node (s2) at (0,-2.8) {$|c,z',z,0^w\rangle$};
+\node (s3) at (0,-4.2) {$|c,z',0^n,0^w\rangle$};
+\draw[->] (s0) -- node[right] {$O_{f_a}$} (s1);
+\draw[->] (s1) -- node[right] {$\mathrm{SWAP}_{z,t}$} (s2);
+\draw[->] (s2) -- node[right] {$O_{f_{a^{-1}}}$} (s3);
+\end{tikzpicture}
+```
+
+Both oracle blocks preserve $c$ and the current data register, XOR their function value into $t$, and return $W$ to zero. The swap uses three CNOTs per corresponding pair of data and target bits; it exchanges the two $n$-bit registers without changing their internal bit order. Cleanup uses $f_{a^{-1}}(c,z')=z$, so $t$ becomes $z\oplus z=0^n$. On valid inputs at control $1$, $z'=az\bmod N$; otherwise $z'=z$. This illustration summarizes the specified gate list; the correctness argument is independent of the figure.

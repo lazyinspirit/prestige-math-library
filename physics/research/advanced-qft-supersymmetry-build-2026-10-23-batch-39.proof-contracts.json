@@ -1,0 +1,630 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "39",
+  "level": 4,
+  "scope": [
+    "def-aqft-ising-fusion-data",
+    "lem-aqft-ising-fusion-data-coherence",
+    "pthm-aqft-noninvertible-defect-realization",
+    "ex-aqft-ising-fusion-object-noninvertible",
+    "ex-aqft-ising-chain-three-site-noninvertible-defect"
+  ],
+  "contracts": {
+    "def-aqft-ising-fusion-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: finite formal direct sums include the zero object, while the unit is a separate specified simple label."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the empty direct sum is allowed; the unit is the nonzero simple object 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the candidate has exactly the three stated simple labels 1, psi and sigma."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: this item gives candidate fusion, associator and duality data but does not claim the pentagon, a braiding, or physical realization; the coherence lemma checks the axioms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition contains no interval, limiting process, or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The labels and all channel sets are explicitly finite; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: a fusion space is one-dimensional when its output label occurs in the displayed fusion rule; allowed channels receive the specified basis and associator coefficients."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: a forbidden output label has zero fusion space, and any forbidden required vertex makes the displayed associator coefficient zero. This is a rule for the candidate data; coherence is assigned to the separate result."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This item specifies formal category data; the separate lemma proves their coherence.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-39 author",
+        "notes": "The item separates explicit Ising fusion/associator data from the coherence result and from any physical realization."
+      }
+    },
+    "lem-aqft-ising-fusion-data-coherence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-noninvertible-defect-fusion",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$. In the ordinary categorical case, a **finite semisimple fusion category over $k$** is a finite semisimple tensor category in the sense of the earlier fusion-and-multifusion definition. Concretely, it is a locally small category (each Hom collection is a set) whose Hom spaces are $k$-vector spaces and whose composition maps are $k$-bilinear. A monomorphism $u:Y\\to X$ is a morphism for which precomposition $\\operatorname{Hom}(Z,Y)\\to\\operatorname{Hom}(Z,X)$ is injective for every object $Z$; a subobject of $X$ is an isomorphism class of monomorphisms into $X$. An epimorphism is defined by the dual cancellation condition. The category is abelian: it has finite biproducts, kernels, and cokernels, every monomorphism is a kernel, and every epimorphism is a cokernel. Each Hom space is finite-dimensional, and every object has finite length, meaning a finite composition series with simple quotients. A simple object is nonzero with only the zero subobject and itself as subobjects; every object is a finite direct sum of simple objects, and only finitely many simple isomorphism classes occur. It has a $k$-bilinear tensor bifunctor, a tensor unit $\\mathbf 1$ with $\\operatorname{End}(\\mathbf 1)\\cong k$, and a natural associator $\\alpha_{X,Y,Z}:(X\\otimes Y)\\otimes Z\\to X\\otimes(Y\\otimes Z)$ and left and right unitors satisfying the pentagon and triangle axioms.\n\nFor an object $X$, a left dual $X^L$ consists of morphisms $\\operatorname{ev}_L:X^L\\otimes X\\to\\mathbf 1$ and $\\operatorname{coev}_L:\\mathbf 1\\to X\\otimes X^L$ for which\n$$(\\operatorname{id}_X\\otimes\\operatorname{ev}_L)\\circ\\alpha_{X,X^L,X}\\circ(\\operatorname{coev}_L\\otimes\\operatorname{id}_X)=\\operatorname{id}_X, \\qquad (\\operatorname{ev}_L\\otimes\\operatorname{id}_{X^L})\\circ\\alpha^{-1}_{X^L,X,X^L}\\circ(\\operatorname{id}_{X^L}\\otimes\\operatorname{coev}_L)=\\operatorname{id}_{X^L}.$$\nA right dual $X^R$ consists of $\\operatorname{ev}_R:X\\otimes X^R\\to\\mathbf 1$ and $\\operatorname{coev}_R:\\mathbf 1\\to X^R\\otimes X$ for which\n$$(\\operatorname{ev}_R\\otimes\\operatorname{id}_X)\\circ\\alpha^{-1}_{X,X^R,X}\\circ(\\operatorname{id}_X\\otimes\\operatorname{coev}_R)=\\operatorname{id}_X, \\qquad (\\operatorname{id}_{X^R}\\otimes\\operatorname{ev}_R)\\circ\\alpha_{X^R,X,X^R}\\circ(\\operatorname{coev}_R\\otimes\\operatorname{id}_{X^R})=\\operatorname{id}_{X^R}.$$\nThe unitors are suppressed in these four composites. Rigidity means that each object has both kinds of dual.\n\nFor the ordinary fusion-category clauses below, write $\\mathcal C$ for this category.\n\nChoose representatives $i\\in I$ of the finitely many simple-object isomorphism classes, with $0\\in I$ representing $\\mathbf 1$. For each $i,j,\\ell\\in I$, the **fusion multiplicity** $N_{ij}^{\\ell}\\in\\mathbb Z_{\\ge 0}$ is the number of copies of $\\ell$ in a semisimple decomposition of $i\\otimes j$, so $i\\otimes j\\cong\\bigoplus_{\\ell\\in I}N_{ij}^{\\ell}\\ell$. The associated fusion space is $V_{ij}^{\\ell}:=\\operatorname{Hom}_{\\mathcal C}(i\\otimes j,\\ell)$. For $D_\\ell:=\\operatorname{End}_{\\mathcal C}(\\ell)$, simplicity makes $D_\\ell$ a finite-dimensional division $k$-algebra and $V_{ij}^{\\ell}$ a left $D_\\ell$-module by postcomposition; its rank as a left $D_\\ell$-module is $N_{ij}^{\\ell}$. When $D_\\ell=k$ (in particular for absolutely simple objects), $\\dim_k V_{ij}^{\\ell}=N_{ij}^{\\ell}$.\n\nFor simple $i,j,k,\\ell$, the associator induces an isomorphism between the two fusion-channel spaces\n$$\\bigoplus_{m\\in I} V_{mk}^{\\ell}\\otimes_{D_m}V_{ij}^{m} \\xrightarrow{\\ \\cong\\ } \\bigoplus_{n\\in I} V_{in}^{\\ell}\\otimes_{D_n}V_{jk}^{n}.$$\nHere $V_{mk}^{\\ell}$ is a right $D_m$-module by $g\\cdot d=g\\circ(d\\otimes\\operatorname{id}_k)$, $V_{ij}^{m}$ is a left $D_m$-module by $d\\cdot f=d\\circ f$, $V_{in}^{\\ell}$ is a right $D_n$-module by $f\\cdot d=f\\circ(\\operatorname{id}_i\\otimes d)$, and $V_{jk}^{n}$ is a left $D_n$-module by postcomposition. The isomorphism is defined by the semisimple decomposition identifications with $\\operatorname{Hom}_{\\mathcal C}((i\\otimes j)\\otimes k,\\ell)$ and $\\operatorname{Hom}_{\\mathcal C}(i\\otimes(j\\otimes k),\\ell)$, and the middle map sends $h$ to $h\\circ\\alpha^{-1}_{i,j,k}$. Thus its domain and codomain are the stated fusion-channel spaces, not unspecified multiplicity symbols. In chosen decompositions and bases these are the associator matrices; their coherence is the pentagon. The fusion datum includes the actual associator, unitors, and both duality structures, not just the integers $N_{ij}^{\\ell}$; the unitors satisfy the triangle and the dual maps satisfy the four displayed snake identities.\n\nA **tensor-invertible object** $D$ is an object for which some object $E$ satisfies $D\\otimes E\\cong\\mathbf 1$ and $E\\otimes D\\cong\\mathbf 1$. An object with no such two-sided inverse is **non-invertible**. Simplicity and tensor-invertibility are separate properties: an object can be simple and non-invertible, or a direct sum of invertible simple objects and non-invertible as a whole.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-ising-fusion-data",
+          "source_section": "Definition",
+          "quote": "Let the scalar field be $\\mathbb C$ and let the simple labels be $\\mathbf 1$, $\\psi$, and $\\sigma$. Define a $\\mathbb C$-linear semisimple category candidate whose objects are finite direct sums of these labels, whose simple-label Hom space is $\\mathbb C$ when the labels agree and $0$ otherwise, and whose Hom spaces between direct sums are the corresponding finite matrices. Give the simple-label fusion product by\n\n$$\n\\mathbf 1\\otimes a=a\\otimes\\mathbf 1=a,\\qquad \\psi\\otimes\\psi=\\mathbf 1,\\qquad \\psi\\otimes\\sigma=\\sigma\\otimes\\psi=\\sigma,\\qquad \\sigma\\otimes\\sigma=\\mathbf 1\\oplus\\psi.\n$$\n\nExtend the product bilinearly to direct sums and on morphisms by the induced tensor product of scalar maps. The unit is $\\mathbf 1$ and the unitors are strict. Fusion spaces are $V_{ab}^c=\\operatorname{Hom}(a\\otimes b,c)$; each is one-dimensional when the displayed fusion rule allows $c$ and is zero otherwise. In every allowed one-dimensional fusion space choose its displayed basis vector. On three simple labels, define the associator in these bases by the matrix $[F^{abc}_d]_{xy}$, where $x$ is the intermediate label in $(a\\otimes b)\\otimes c\\to d$ and $y$ is the intermediate label in $a\\otimes(b\\otimes c)\\to d$. Set\n\n$$\n\\left[F^{\\sigma\\sigma\\sigma}_{\\sigma}\\right]_{xy}=\\frac{1}{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}_{xy},\\qquad x,y\\in\\{\\mathbf 1,\\psi\\},\n$$\n\n$$\n\\left[F^{\\psi\\sigma\\psi}_{\\sigma}\\right]_{\\sigma\\sigma}=-1,\\qquad \\left[F^{\\sigma\\psi\\sigma}_{\\psi}\\right]_{\\sigma\\sigma}=-1.\n$$\n\nEvery other coefficient is $1$ when all four fusion vertices are allowed and $0$ when any required fusion vertex is forbidden. Extend each associator linearly over direct sums. The candidate dual of each simple label is itself. For $\\mathbf 1$ and $\\psi$, take evaluation and coevaluation to be the unit-channel basis maps with coefficient $1$. For $\\sigma$, take evaluation $\\sigma\\otimes\\sigma\\to\\mathbf 1$ and coevaluation $\\mathbf 1\\to\\sigma\\otimes\\sigma$ to have coefficient $2^{1/4}$ in the $\\mathbf 1$ channel and zero in the $\\psi$ channel. This item specifies the data; the separate coherence result checks that they satisfy the fusion-category axioms. No braiding or physical realization is included in this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **monoidal category** is a category $\\mathcal C$ equipped with:\n\n- a bifunctor $\\otimes:\\mathcal C\\times\\mathcal C\\to\\mathcal C$\n  ([[def-product-category]], [[def-functor-and-contravariant-functor]]);\n- an object $\\mathbf 1$ of $\\mathcal C$;\n- natural isomorphisms ([[def-natural-isomorphism]])\n  $$\\alpha_{X,Y,Z}:((X\\otimes Y)\\otimes Z)\\longrightarrow X\\otimes(Y\\otimes Z),$$\n  $$\\lambda_X:(\\mathbf 1\\otimes X)\\longrightarrow X,\\qquad \\rho_X:(X\\otimes\\mathbf 1)\\longrightarrow X,$$\n\nsuch that the following two equations hold for all objects\n$W,X,Y,Z\\in\\mathcal C$.\n\nThe **pentagon axiom** is\n\n$$\\alpha_{W,X,Y\\otimes Z}\\circ\\alpha_{W\\otimes X,Y,Z}=(1_W\\otimes\\alpha_{X,Y,Z})\\circ\\alpha_{W,X\\otimes Y,Z}\\circ(\\alpha_{W,X,Y}\\otimes1_Z).$$\n\nThe **triangle axiom** is\n\n$$(1_X\\otimes\\lambda_Y)\\circ\\alpha_{X,\\mathbf 1,Y}=\\rho_X\\otimes1_Y.$$\n\nThis page imposes no further axiom. In particular, the equality\n$\\lambda_{\\mathbf 1}=\\rho_{\\mathbf 1}$ is not built into the definition; it is\nderived later on this page.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For triples with no unit label, the two bracketings have the same direct-sum decomposition: $\\psi\\psi\\psi$ gives $\\psi$; $\\psi\\psi\\sigma$, $\\psi\\sigma\\psi$, and $\\sigma\\psi\\psi$ give $\\sigma$; $\\psi\\sigma\\sigma$, $\\sigma\\psi\\sigma$, and $\\sigma\\sigma\\psi$ give $\\mathbf 1\\oplus\\psi$; and $\\sigma\\sigma\\sigma$ gives $2\\sigma$. Triples containing $\\mathbf 1$ reduce by the explicitly specified canonical unitors. Thus the fusion products define the same channel bases on both sides of each associator. Each component category of finite-dimensional Hilbert spaces and linear maps has kernels and cokernels (the underlying finite-dimensional vector-space kernels and quotients with induced Hilbert structures), and each subspace has an orthogonal complement; hence the triple category is abelian and every short exact sequence splits. It has exactly three simple isomorphism classes, all Hom spaces are finite-dimensional, every object is a finite direct sum of simples, and $\\operatorname{End}(\\mathbf 1)=\\mathbb C$, so it is finite semisimple with simple unit.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The dagger is conjugate-linear, involutive, and contravariant for composition because it is the Hilbert adjoint on every multiplicity block; the trace pairing also gives $\\langle g\\circ f,h\\rangle=\\langle f,g^\\dagger\\circ h\\rangle$ for composable maps by direct substitution in each block. All weights $d_a$ are positive, so the displayed Hom inner product is positive definite. The weights are multiplicative across the fusion rules: $d_{\\mathbf 1}d_a=d_a$, $d_\\psi^2=d_{\\mathbf 1}$, $d_\\psi d_\\sigma=d_\\sigma$, and $d_\\sigma^2=d_{\\mathbf 1}+d_\\psi$. Thus, for morphisms $f,f':X\\to X'$ and $g,g':Y\\to Y'$, expanding the tensor-product blocks gives $\\langle f\\otimes g,f'\\otimes g'\\rangle=\\sum_{a,b,c}d_cN_{ab}^c\\operatorname{Tr}(f_a^\\dagger f'_a)\\operatorname{Tr}(g_b^\\dagger g'_b)=\\langle f,f'\\rangle\\langle g,g'\\rangle$, with the identity extending by sesquilinearity to finite sums. The tensor product is dagger-compatible since each block is a direct sum of Kronecker products of the component maps. The associator acts by the stated $F$ matrices on fusion-channel factors and by identity maps on multiplicity factors, whereas morphisms act on multiplicity factors; hence every naturality square commutes. Its Hadamard block divided by $\\sqrt2$ is unitary, as are the one-channel blocks $1$ and $-1$, so the associator is unitary; the canonical unitors are unitary because their fusion-basis factors have norm one. On the dual multiplicity spaces, the left evaluation is the adjoint of the right coevaluation and the right evaluation is the adjoint of the left coevaluation: each adjoint is the canonical dual-basis pairing map in the same ordered tensor factors, with the same positive coefficient $\\lambda_a$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the pentagon equation, write $F^{abc}_d[x,y]=0$ whenever either intermediate fusion channel is forbidden. For each choice of simple labels $a,b,c,d,e,f,g,k,\\ell\\in\\{\\mathbf 1,\\psi,\\sigma\\}$, the two paths are $F^{fcd}_e[g,\\ell]F^{ab\\ell}_e[f,k]=\\sum_{h\\in\\{\\mathbf 1,\\psi,\\sigma\\}}F^{abc}_g[f,h]F^{ahd}_e[g,k]F^{bcd}_k[h,\\ell]$. The exact checker `research/advanced-qft-supersymmetry-build-2026-10-23-batch-39-ising-pentagon-check.py` substitutes the specified $F$-rules using rational arithmetic in $\\mathbb Q(\\sqrt2)$ over all $3^9=19{,}683$ outer label assignments. It finds 132 assignments with a nonzero side, verifies equality in all 132, and finds the remaining 19,551 assignments are $0=0$. The checker exits successfully only at those exact totals. Thus the pentagon holds for simple labels; multilinearity extends it to finite direct sums.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Every associator coefficient involving $\\mathbf 1$ is $1$. On an elementary tensor $(v\\otimes z\\otimes u_{a\\mathbf 1}^a)\\otimes w\\otimes u_{ab}^c$ in $(X\\otimes\\mathbf 1)\\otimes Y$, the route through the associator and the left unitor sends it to $v\\otimes zw\\otimes u_{ab}^c$, while the route through the right unitor sends it to $zv\\otimes w\\otimes u_{ab}^c$. These are equal by the balancing relation of the complex tensor product. Such tensors span, proving the triangle for all objects. For $\\psi$, each of the two snake composites has scalar $1\\cdot1=1$. For $\\sigma$, each composite uses the unit-channel associator coefficient $[F^{\\sigma\\sigma\\sigma}_{\\sigma}]_{\\mathbf 1,\\mathbf 1}=1/\\sqrt2$ and the two duality coefficients $\\lambda_\\sigma=2^{1/4}$, giving $\\lambda_\\sigma^2/\\sqrt2=1$; the $\\psi$ channel contributes zero because its evaluation coefficient is zero. For $X=(H_a)_a$, the dual object and both coevaluations are the stated direct sums of dual-basis tensors, while evaluation pairs only equal simple labels. Consequently every off-diagonal simple-label block of either snake composite is zero, and on each multiplicity space $H_a$ the dual-basis contraction is the identity multiplied by the corresponding simple-label snake scalar just computed. Both snake identities therefore hold for arbitrary finite direct sums, not only for simple labels.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The candidate has finite-dimensional Hom spaces, exactly three simple isomorphism classes, and every object a finite direct sum of simples; its unit is simple. Its tensor product is bilinear and its natural associator and canonical unitors satisfy the pentagon and triangle, while every object has the left and right duals and snake identities checked above. By [F1] it is a finite semisimple fusion category. Step 1.2 additionally supplies the positive dagger structure, proves tensor compatibility, and verifies unitary associators and adjoint duality maps, so the category is unitary in the explicit sense defined in the Statement. This is a purely mathematical result and makes no QFT-realization claim.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty direct sum is an object, and the unit is a distinct simple label."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero object is the empty direct sum; End(1) is C, so the unit is nonzero and simple."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: all three simple labels and every possible non-unit triple are included in the fusion associativity check."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3: the nontrivial two-channel F matrix and both mixed signs are checked; forbidden channels are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint claim occurs in this finite category theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The simple labels and channel sums are finite and explicitly enumerated; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "All Ising pentagon channel assignments",
+          "status": "checked",
+          "evidence": "Ran research/advanced-qft-supersymmetry-build-2026-10-23-batch-39-ising-pentagon-check.py. It uses exact rational arithmetic in Q(sqrt(2)), enumerates all 19,683 outer label assignments and all three internal channels, reports 132 nonzero assignments and zero failures: PASS: 19683 exact channel assignments; 132 nonzero; 0 failures."
+        },
+        {
+          "name": "Hadamard F-matrix unitarity and sigma snake scalar",
+          "status": "checked",
+          "evidence": "Direct multiplication gives H^T H=I for H=2^(-1/2)[[1,1],[1,-1]]; the sigma snake coefficient is 2^(1/4) times 2^(1/4) times 2^(-1/2)=1."
+        }
+      ],
+      "finite_checks_disposition": "The pentagon enumeration is exact over Q(sqrt(2)); it checks the finite algebraic data only and does not establish a physical realization.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Independently reviewed steps 1.1–2.1 and exact supplier Definitions. The triple category is split abelian with three simples, including the zero multiplicity case. Weighted trace positivity and composition adjointness hold blockwise; sum_c N_ab^c d_c=d_a d_b proves tensor compatibility. Naturality acts on separate multiplicity factors; the Hadamard and scalar blocks are unitary. Inspected and ran the exact Q(sqrt(2)) pentagon checker: all 19683 outer assignments, 132 nonzero, zero failures; its channel convention matches the displayed associator. Unit triangle is tensor balancing; both orientations of each snake give lambda_sigma^2/sqrt(2)=1 and extend by dual-basis contractions. No arbitrary choice or physical premise is used. The reader changed only the final pentagon arrow from ur to rr, now correctly targeting a tensor (b tensor (c tensor d)); no interface or consumer change. HEAD preimage raw hash matches the pre snapshot and current raw hash matches post."
+      }
+    },
+    "pthm-aqft-noninvertible-defect-realization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-topological-defect",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$ and a smooth $d$-manifold $M$, possibly with boundary. Fix the metric and signature, orientation and any time orientation, the geometric background bundles or lifts required by the model, and the boundary conditions. A **selected model** $\\mathcal T$ on $M$ consists of a specified configuration space $\\mathcal C_{\\mathcal T}(M)$ of fields, including each field bundle, regularity class, and admissible boundary behavior; a collection of local observables with their types and supports; a set $\\mathcal B_{\\mathcal T}$ of admissible combined background and boundary data; and a set $\\mathcal A_{\\mathcal T}$ of admissible complete insertion inputs. An element of $\\mathcal A_{\\mathcal T}$ records data $b\\in\\mathcal B_{\\mathcal T}$ and a finite ordered list whose entries are local observable insertions or other model-declared insertion data, together with the model's admissibility conditions on supports and labels. The model supplies a value space $\\mathcal V_{\\mathcal T}$ with a specified topology and a correlator functional $C_{\\mathcal T}:\\mathcal A_{\\mathcal T}\\to\\mathcal V_{\\mathcal T}$ with an explicit normalization convention, which may be normalized or unnormalized; the notation $C_{\\mathcal T}(b;D;X_1,\\ldots,X_n)$ denotes its value on the complete input with combined background and boundary data $b$, defect data $D$, and other insertion data $X_i$. The model also fixes its unit system, action and charge normalizations, and any regulator, measure, or renormalization prescription used to define $C_{\\mathcal T}$. These are model inputs: this definition does not construct them or assume a general interacting continuum theory exists.\n\nA **defect insertion** in $\\mathcal T$ is data $(j,\\lambda)$ where $j:\\Sigma\\hookrightarrow M^\\circ$ is a smooth embedding of a manifold $\\Sigma$ without boundary whose image is closed in the interior $M^\\circ=M\\setminus\\partial M$, and $\\lambda$ is the complete model-specified field, operator, or boundary-condition data supported on $j(\\Sigma)$, including any orientation, coorientation, framing, or label-transport rule the model requires. Its codimension is $d-\\dim\\Sigma$. It is an allowed entry of $\\mathcal A_{\\mathcal T}$ only when the model defines $C_{\\mathcal T}(b;D_{j,\\lambda};O_1,\\ldots,O_n)$ for each stated admissible combined background and boundary datum $b$ and list of other insertions.\n\nA **defect network** is data $D=(K,\\{S_s,j_s,\\lambda_s\\}_{s\\in S},\\{J_t\\}_{t\\in J})$ in which $K\\subset M^\\circ$ is closed, $S$ is finite, $K=\\bigsqcup_{s\\in S}S_s$ is a smooth stratification, and each $j_s:\\Sigma_s\\to S_s$ is a diffeomorphism from a smooth manifold without boundary onto its locally closed embedded stratum. The closure of each stratum is a union of strata, with the frontier condition that if $S_t$ meets the closure of $S_s$ and $S_t\\ne S_s$, then $S_t$ lies in that closure and has smaller dimension; the incidence relation records exactly these pairs. Each stratum carries its complete model-specified field, operator, boundary, orientation, coorientation, framing, and other label data $\\lambda_s$ as required; $J\\subseteq S$ is the set of junction strata, and each $S_t$ with $t\\in J$ carries a model-specified junction operator $J_t$ with an ordering of all incident labels. The model must declare which such networks and other insertions form admissible inputs of $\\mathcal A_{\\mathcal T}$ and define their correlators. A one-stratum network with no junction stratum is the preceding single defect, and a list of strata or a picture without its field and junction data is not a defect insertion.\n\nAn **isotopy** of a defect network is a smooth one-parameter family of its stratum embeddings $j_{s,t}:\\Sigma_s\\hookrightarrow M^\\circ$, $t\\in[0,1]$, compatible on stratum closures and incidence data, whose stratification and incidence relation are unchanged and which creates no additional intersections. The model-specified transport maps carry every stratum label $\\lambda_s$, framing or orientation, and junction operator along the family; the combined background and boundary data remain fixed, and the network stays disjoint from every other insertion throughout the deformation. A single-stratum defect is the one-element special case. The insertion is **topological in $\\mathcal T$** if, for every complete admissible input containing the selected network, every other insertion data $X_1,\\ldots,X_n$ in that input (each of which may itself be an observable or another defect/network), and every such decorated isotopy from $D_0$ to $D_1$ disjoint from all the other insertion data, the model-defined correlators satisfy\n\n$$C_{\\mathcal T}(b;D_0;X_1,\\ldots,X_n)=C_{\\mathcal T}(b;D_1;X_1,\\ldots,X_n).$$\n\nThis is a property to verify for the specified model and insertion, not an automatic consequence of assigning a defect label or drawing a crossing. No physical quantity with units is introduced here; all dimensional quantities and normalizations remain those declared by $\\mathcal T$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-noninvertible-defect-fusion",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$. In the ordinary categorical case, a **finite semisimple fusion category over $k$** is a finite semisimple tensor category in the sense of the earlier fusion-and-multifusion definition. Concretely, it is a locally small category (each Hom collection is a set) whose Hom spaces are $k$-vector spaces and whose composition maps are $k$-bilinear. A monomorphism $u:Y\\to X$ is a morphism for which precomposition $\\operatorname{Hom}(Z,Y)\\to\\operatorname{Hom}(Z,X)$ is injective for every object $Z$; a subobject of $X$ is an isomorphism class of monomorphisms into $X$. An epimorphism is defined by the dual cancellation condition. The category is abelian: it has finite biproducts, kernels, and cokernels, every monomorphism is a kernel, and every epimorphism is a cokernel. Each Hom space is finite-dimensional, and every object has finite length, meaning a finite composition series with simple quotients. A simple object is nonzero with only the zero subobject and itself as subobjects; every object is a finite direct sum of simple objects, and only finitely many simple isomorphism classes occur. It has a $k$-bilinear tensor bifunctor, a tensor unit $\\mathbf 1$ with $\\operatorname{End}(\\mathbf 1)\\cong k$, and a natural associator $\\alpha_{X,Y,Z}:(X\\otimes Y)\\otimes Z\\to X\\otimes(Y\\otimes Z)$ and left and right unitors satisfying the pentagon and triangle axioms.\n\nFor an object $X$, a left dual $X^L$ consists of morphisms $\\operatorname{ev}_L:X^L\\otimes X\\to\\mathbf 1$ and $\\operatorname{coev}_L:\\mathbf 1\\to X\\otimes X^L$ for which\n$$(\\operatorname{id}_X\\otimes\\operatorname{ev}_L)\\circ\\alpha_{X,X^L,X}\\circ(\\operatorname{coev}_L\\otimes\\operatorname{id}_X)=\\operatorname{id}_X, \\qquad (\\operatorname{ev}_L\\otimes\\operatorname{id}_{X^L})\\circ\\alpha^{-1}_{X^L,X,X^L}\\circ(\\operatorname{id}_{X^L}\\otimes\\operatorname{coev}_L)=\\operatorname{id}_{X^L}.$$\nA right dual $X^R$ consists of $\\operatorname{ev}_R:X\\otimes X^R\\to\\mathbf 1$ and $\\operatorname{coev}_R:\\mathbf 1\\to X^R\\otimes X$ for which\n$$(\\operatorname{ev}_R\\otimes\\operatorname{id}_X)\\circ\\alpha^{-1}_{X,X^R,X}\\circ(\\operatorname{id}_X\\otimes\\operatorname{coev}_R)=\\operatorname{id}_X, \\qquad (\\operatorname{id}_{X^R}\\otimes\\operatorname{ev}_R)\\circ\\alpha_{X^R,X,X^R}\\circ(\\operatorname{coev}_R\\otimes\\operatorname{id}_{X^R})=\\operatorname{id}_{X^R}.$$\nThe unitors are suppressed in these four composites. Rigidity means that each object has both kinds of dual.\n\nFor the ordinary fusion-category clauses below, write $\\mathcal C$ for this category.\n\nChoose representatives $i\\in I$ of the finitely many simple-object isomorphism classes, with $0\\in I$ representing $\\mathbf 1$. For each $i,j,\\ell\\in I$, the **fusion multiplicity** $N_{ij}^{\\ell}\\in\\mathbb Z_{\\ge 0}$ is the number of copies of $\\ell$ in a semisimple decomposition of $i\\otimes j$, so $i\\otimes j\\cong\\bigoplus_{\\ell\\in I}N_{ij}^{\\ell}\\ell$. The associated fusion space is $V_{ij}^{\\ell}:=\\operatorname{Hom}_{\\mathcal C}(i\\otimes j,\\ell)$. For $D_\\ell:=\\operatorname{End}_{\\mathcal C}(\\ell)$, simplicity makes $D_\\ell$ a finite-dimensional division $k$-algebra and $V_{ij}^{\\ell}$ a left $D_\\ell$-module by postcomposition; its rank as a left $D_\\ell$-module is $N_{ij}^{\\ell}$. When $D_\\ell=k$ (in particular for absolutely simple objects), $\\dim_k V_{ij}^{\\ell}=N_{ij}^{\\ell}$.\n\nFor simple $i,j,k,\\ell$, the associator induces an isomorphism between the two fusion-channel spaces\n$$\\bigoplus_{m\\in I} V_{mk}^{\\ell}\\otimes_{D_m}V_{ij}^{m} \\xrightarrow{\\ \\cong\\ } \\bigoplus_{n\\in I} V_{in}^{\\ell}\\otimes_{D_n}V_{jk}^{n}.$$\nHere $V_{mk}^{\\ell}$ is a right $D_m$-module by $g\\cdot d=g\\circ(d\\otimes\\operatorname{id}_k)$, $V_{ij}^{m}$ is a left $D_m$-module by $d\\cdot f=d\\circ f$, $V_{in}^{\\ell}$ is a right $D_n$-module by $f\\cdot d=f\\circ(\\operatorname{id}_i\\otimes d)$, and $V_{jk}^{n}$ is a left $D_n$-module by postcomposition. The isomorphism is defined by the semisimple decomposition identifications with $\\operatorname{Hom}_{\\mathcal C}((i\\otimes j)\\otimes k,\\ell)$ and $\\operatorname{Hom}_{\\mathcal C}(i\\otimes(j\\otimes k),\\ell)$, and the middle map sends $h$ to $h\\circ\\alpha^{-1}_{i,j,k}$. Thus its domain and codomain are the stated fusion-channel spaces, not unspecified multiplicity symbols. In chosen decompositions and bases these are the associator matrices; their coherence is the pentagon. The fusion datum includes the actual associator, unitors, and both duality structures, not just the integers $N_{ij}^{\\ell}$; the unitors satisfy the triangle and the dual maps satisfy the four displayed snake identities.\n\nA **tensor-invertible object** $D$ is an object for which some object $E$ satisfies $D\\otimes E\\cong\\mathbf 1$ and $E\\otimes D\\cong\\mathbf 1$. An object with no such two-sided inverse is **non-invertible**. Simplicity and tensor-invertibility are separate properties: an object can be simple and non-invertible, or a direct sum of invertible simple objects and non-invertible as a whole.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-aqft-ising-fusion-data",
+          "source_section": "Definition",
+          "quote": "Let the scalar field be $\\mathbb C$ and let the simple labels be $\\mathbf 1$, $\\psi$, and $\\sigma$. Define a $\\mathbb C$-linear semisimple category candidate whose objects are finite direct sums of these labels, whose simple-label Hom space is $\\mathbb C$ when the labels agree and $0$ otherwise, and whose Hom spaces between direct sums are the corresponding finite matrices. Give the simple-label fusion product by\n\n$$\n\\mathbf 1\\otimes a=a\\otimes\\mathbf 1=a,\\qquad \\psi\\otimes\\psi=\\mathbf 1,\\qquad \\psi\\otimes\\sigma=\\sigma\\otimes\\psi=\\sigma,\\qquad \\sigma\\otimes\\sigma=\\mathbf 1\\oplus\\psi.\n$$\n\nExtend the product bilinearly to direct sums and on morphisms by the induced tensor product of scalar maps. The unit is $\\mathbf 1$ and the unitors are strict. Fusion spaces are $V_{ab}^c=\\operatorname{Hom}(a\\otimes b,c)$; each is one-dimensional when the displayed fusion rule allows $c$ and is zero otherwise. In every allowed one-dimensional fusion space choose its displayed basis vector. On three simple labels, define the associator in these bases by the matrix $[F^{abc}_d]_{xy}$, where $x$ is the intermediate label in $(a\\otimes b)\\otimes c\\to d$ and $y$ is the intermediate label in $a\\otimes(b\\otimes c)\\to d$. Set\n\n$$\n\\left[F^{\\sigma\\sigma\\sigma}_{\\sigma}\\right]_{xy}=\\frac{1}{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}_{xy},\\qquad x,y\\in\\{\\mathbf 1,\\psi\\},\n$$\n\n$$\n\\left[F^{\\psi\\sigma\\psi}_{\\sigma}\\right]_{\\sigma\\sigma}=-1,\\qquad \\left[F^{\\sigma\\psi\\sigma}_{\\psi}\\right]_{\\sigma\\sigma}=-1.\n$$\n\nEvery other coefficient is $1$ when all four fusion vertices are allowed and $0$ when any required fusion vertex is forbidden. Extend each associator linearly over direct sums. The candidate dual of each simple label is itself. For $\\mathbf 1$ and $\\psi$, take evaluation and coevaluation to be the unit-channel basis maps with coefficient $1$. For $\\sigma$, take evaluation $\\sigma\\otimes\\sigma\\to\\mathbf 1$ and coevaluation $\\mathbf 1\\to\\sigma\\otimes\\sigma$ to have coefficient $2^{1/4}$ in the $\\mathbf 1$ channel and zero in the $\\psi$ channel. This item specifies the data; the separate coherence result checks that they satisfy the fusion-category axioms. No braiding or physical realization is included in this definition.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-aqft-ising-fusion-data-coherence",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal I$ be the following complex-linear category. An object is a triple $X=(H_{\\mathbf 1},H_\\psi,H_\\sigma)$ of finite-dimensional complex Hilbert spaces; a morphism $f:X\\to Y$ is a triple of linear maps $f_a:H_a\\to K_a$, with componentwise composition. For $a\\in\\{\\mathbf 1,\\psi,\\sigma\\}$, let $\\underline a$ be the triple with component $\\mathbb C$ in position $a$ and zero in the other two positions. A zero object is an object with a unique morphism to and from every object. A monomorphism $u:Y\\to X$ is a morphism such that $u\\circ f=u\\circ g$ implies $f=g$ for every object $Z$ and maps $f,g:Z\\to Y$; a subobject of $X$ is an isomorphism class of monomorphisms into $X$. An object is simple if it is nonzero and its only subobjects are the zero subobject and itself. The objects $\\underline{\\mathbf 1},\\underline\\psi,\\underline\\sigma$ are the three simple labels, and every object is a finite direct sum of them. The tensor product on these labels is\n\n$$\n\\mathbf 1\\otimes a=a\\otimes\\mathbf 1=a,\\qquad \\psi\\otimes\\psi=\\mathbf 1,\\qquad \\psi\\otimes\\sigma=\\sigma\\otimes\\psi=\\sigma,\\qquad \\sigma\\otimes\\sigma=\\mathbf 1\\oplus\\psi,\n$$\n\nand extends to arbitrary objects by orthogonal direct sums and to morphisms by tensor products of their component maps. More explicitly, if $Y=(K_{\\mathbf 1},K_\\psi,K_\\sigma)$, then $(X\\otimes Y)_c=\\bigoplus_{a,b}H_a\\otimes K_b\\otimes V_{ab}^c$, where $V_{ab}^c=\\mathbb C$ with its unit basis vector when the fusion rule allows $c$, and $V_{ab}^c=0$ otherwise. Put $N_{ab}^c=\\dim_{\\mathbb C}V_{ab}^c$, so $N_{ab}^c$ is $1$ for an allowed channel and $0$ otherwise. The unit object is $\\underline{\\mathbf 1}$. The left unitor on the unique summand $\\mathbb C\\otimes H_a\\otimes V_{\\mathbf 1a}^a$ is $z\\otimes v\\otimes u_{\\mathbf 1a}^a\\mapsto zv$; the right unitor on $H_a\\otimes\\mathbb C\\otimes V_{a\\mathbf 1}^a$ is $v\\otimes z\\otimes u_{a\\mathbf 1}^a\\mapsto zv$. Here $u_{ab}^c$ is the chosen unit fusion basis vector. These canonical unitors are specified isomorphisms, not literal equalities of Hilbert spaces; they realize the skeletal package's strict unit convention in this Hilbert-space presentation. For each allowed one-dimensional fusion space choose this unit basis vector. On simple labels the associator from $(a\\otimes b)\\otimes c$ to $a\\otimes(b\\otimes c)$ has coefficients $[F^{abc}_d]_{xy}$, where $x$ and $y$ are respectively the left and right intermediate labels. Set $\\epsilon(\\mathbf 1)=0$ and $\\epsilon(\\psi)=1$, and specify\n\n$$\n[F^{\\sigma\\sigma\\sigma}_{\\sigma}]_{xy}=\\frac{1}{\\sqrt2}(-1)^{\\epsilon(x)\\epsilon(y)},\\qquad x,y\\in\\{\\mathbf 1,\\psi\\},\n$$\n\n$$\n[F^{\\psi\\sigma\\psi}_{\\sigma}]_{\\sigma\\sigma}=-1,\\qquad [F^{\\sigma\\psi\\sigma}_{\\psi}]_{\\sigma\\sigma}=-1.\n$$\n\nEvery other coefficient is $1$ if all four fusion vertices are allowed and is $0$ otherwise. For general triples $X=(H_a)$, $Y=(K_b)$, $Z=(L_c)$, the associator sends the left-channel elementary tensor\n\n$$\n(v\\otimes w\\otimes u_{ab}^{x})\\otimes z\\otimes u_{xc}^{d}\\ \\longmapsto\\ \\sum_y[F^{abc}_d]_{xy}\\,v\\otimes(w\\otimes z\\otimes u_{bc}^{y})\\otimes u_{ay}^{d},\n$$\n\nwhere $v\\in H_a$, $w\\in K_b$, $z\\in L_c$, and the sum ranges over allowed channels. Extend this formula complex-linearly to every orthogonal direct-sum block. It includes the ordinary reassociation of the three Hilbert-space factors and moves no multiplicity vector between different labels.\n\nFor each simple label $a$, both chosen left and right dual labels are $a$. The four evaluation and coevaluation maps for $a$ have coefficient $\\lambda_a$ in the unique unit channel, where $\\lambda_{\\mathbf 1}=\\lambda_\\psi=1$ and $\\lambda_\\sigma=2^{1/4}$; for $a=\\sigma$ the coefficient in the $\\psi$ channel is zero. For a general object $X=(H_a)_{a\\in\\{\\mathbf 1,\\psi,\\sigma\\}}$, set $X^L=X^R=(H_a^*)_a$, where $H_a^*$ is the linear dual equipped with its dual Hilbert inner product. The evaluation maps pair $x\\otimes\\varphi$ or $\\varphi\\otimes x$ as $\\lambda_a\\varphi(x)$ in the $a\\otimes a\\to\\mathbf 1$ channel, and vanish between different simple labels. For any basis $(e_{a,r})_r$ of each $H_a$ with dual basis $(e_{a,r}^*)_r$, the right coevaluation is $\\sum_a\\lambda_a\\sum_r e_{a,r}^*\\otimes e_{a,r}$ and the left coevaluation is $\\sum_a\\lambda_a\\sum_r e_{a,r}\\otimes e_{a,r}^*$, each in the $a\\otimes a\\to\\mathbf 1$ channel.\n\nEquip the category with the dagger $f^\\dagger=(f_a^\\dagger)_a$, where $f_a^\\dagger$ is the Hilbert-space adjoint, and with the positive Hermitian inner products\n\n$$\n\\langle f,g\\rangle_{X,Y}=\\sum_{a\\in\\{\\mathbf 1,\\psi,\\sigma\\}}d_a\\,\\operatorname{Tr}(f_a^\\dagger g_a),\\qquad d_{\\mathbf 1}=d_\\psi=1,\\quad d_\\sigma=\\sqrt2,\n$$\n\non each $\\operatorname{Hom}_{\\mathcal I}(X,Y)$. Composition-adjoint means $\\langle g\\circ f,h\\rangle_{X,Z}=\\langle f,g^\\dagger\\circ h\\rangle_{X,Y}$ for $f:X\\to Y$, $g:Y\\to Z$, and $h:X\\to Z$. Tensor compatibility means $(f\\otimes g)^\\dagger=f^\\dagger\\otimes g^\\dagger$ and $\\langle f\\otimes g,f'\\otimes g'\\rangle=\\langle f,f'\\rangle\\langle g,g'\\rangle$ for parallel pairs of maps. A morphism is unitary when its dagger is its two-sided inverse. Here “unitary fusion category” means that all Hom spaces are finite-dimensional; the three $\\underline a$ are exactly the simple isomorphism classes and every object is a finite direct sum of them; the component categories have kernels and cokernels and every subspace has a complement; the bilinear tensor product has unit $\\mathbf 1$, its associator is a natural isomorphism satisfying the pentagon, and its specified canonical unitors satisfy the triangle; every object has the stated left and right dual maps satisfying the two snakes; and the dagger and Hom inner products are positive and composition-adjoint, the tensor product satisfies the stated compatibilities, the left evaluation is adjoint to the right coevaluation, the right evaluation is adjoint to the left coevaluation, and the associator and unitors are unitary. These data satisfy all of these conditions.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the $K_L$ kernel, toggling the input height $h_j$ changes the exponent by $\\widehat h_{j-1/2}+\\widehat h_{j+1/2}$, while multiplying the input by $Z_jZ_{j+1}$ contributes $(-1)^{h_j+h_{j+1}}$, which is the exponent change from toggling $\\widehat h_{j+1/2}$. Thus $K_LX_j=\\widehat Z_{j-1/2}\\widehat Z_{j+1/2}K_L$ and $K_LZ_jZ_{j+1}=\\widehat X_{j+1/2}K_L$. Summing gives $K_LH_L=\\widehat H_LK_L$. The reflection sends $\\widehat X_{j+1/2}$ to $X_{-j}$ and $\\widehat Z_{j-1/2}\\widehat Z_{j+1/2}$ to $Z_{1-j}Z_{-j}$; reindexing the periodic sums gives $R_L\\widehat H_L=H_LR_L$, and consequently $D_LH_L=H_LD_L$. To check the square convention, put $k=1-j$ in the exponent of $D_L$ to write it as $\\sum_k r_k(h_{-k}+h_{1-k})$; the two conditions on a pair of indices are $k+j=0$ and $k+j=1$, each symmetric. Hence $D_L^\\dagger=D_L$ and $D_L^2=(R_LK_L)^\\dagger R_LK_L=K_L^\\dagger K_L$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Computing $K_L^\\dagger K_L=D_L^2$ by summing over the intermediate dual heights gives $\\langle\\mathbf h'|D_L^2|\\mathbf h\\rangle=2^{-L}\\sum_{\\widehat{\\mathbf h}\\in\\mathbb Z_2^L}(-1)^{\\sum_j\\widehat h_{j-1/2}(h_{j-1}+h_j+h'_{j-1}+h'_j)}=\\prod_j\\delta_{d_{j-1},d_j}$, where $d_j=h_j+h'_j$ in $\\mathbb Z_2$ and each sum $\\sum_{u\\in\\mathbb Z_2}(-1)^{ur}$ equals $2$ if $r=0$ and $0$ if $r=1$. The constraints force all $d_j$ to be the same bit, so $\\mathbf h'=\\mathbf h$ or $\\mathbf h'=\\mathbf h+\\mathbf 1$. These are exactly the matrix elements of $I+P_L$, proving $D_L^2=I+P_L$. Applying the same character sum to $K_LK_L^\\dagger$ on the dual side imposes constant neighboring differences of the dual heights, proving $K_LK_L^\\dagger=I+\\widehat P_L$ as well.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $t=2^{-1/4}$, $Z_{hh'}=(-1)^h\\delta_{hh'}$ and $Q_{hh'}=\\delta_{h',h+1}$. The corrected identity-termination component is $Q_{h\\widetilde h}\\delta_{hh'}$, as in the source's equation (4.4); it sets $h'=h$ and $\\widetilde h=h+1$, not an unrelated pair of dual heights. Local contractions use $\\sum_k\\delta_{hk}\\delta_{kh'}=\\delta_{hh'}$, $\\sum_kQ_{hk}Q_{kh'}=\\delta_{hh'}$, and $\\sum_kZ_{hk}Z_{kh'}=\\delta_{hh'}$. The scalar from a pair of empty-site termination triangles is $t^2=1/\\sqrt2$; inserting the additional empty site contributes $\\sqrt2$, so its total scalar is $1$. Thus the identity-channel and all unit-leg recouplings have coefficient $1$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction gives $D_LH_L^n=H_L^nD_L$ for every $n\\ge0$. The finite-dimensional exponential series converges absolutely, so termwise equality yields $D_Le^{-sH_L}=e^{-sH_L}D_L$ for every $s\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Toggling every input height leaves the kernel unchanged because each neighboring pair changes by $1+1=0$ in $\\mathbb Z_2$; shifting every output dual height leaves it unchanged because $\\sum_j(h_{j-1}+h_j)=0$ in $\\mathbb Z_2$. Hence $D_LP_L=P_LD_L=D_L$, while $P_L^2=I$ by $X_j^2=I$. Moreover $P_L$ commutes with every $X_j$, and conjugation by $P_L$ changes the signs of both factors of each $Z_jZ_{j+1}$, so $P_LH_L=H_LP_L$. The fusion operators therefore satisfy the stated Ising fusion table, and all three line labels commute with propagation.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "For the four-$\\sigma$ patch, fix its two ordinary external heights $h,h'$. The horizontal unit and $\\psi$ resolutions have components $A_0(h,h')=t^2=1/\\sqrt2$ and $A_1(h,h')=t^2(-1)^{h+h'}$. The vertical resolutions have components $B_0(h,h')=\\delta_{hh'}\\delta_{hh'}=\\delta_{hh'}$ and $B_1(h,h')=Q_{hh'}Q_{hh'}=Q_{hh'}$: the two triangles share the same ordinary corner heights, and the empty corners have no summation index. Since $\\delta_{hh'}+Q_{hh'}=1$ and $\\delta_{hh'}-Q_{hh'}=(-1)^{h+h'}$, these give $A_a=2^{-1/2}(B_0+(-1)^aB_1)$ for each $a\\in\\{0,1\\}$ and every external height assignment. Rotation gives the inverse relation, with the same real symmetric Hadamard matrix. These are the two rows of the source's local identities (4.14)–(4.15), now verified componentwise; hence $[F^{\\sigma\\sigma\\sigma}_\\sigma]_{ab}=2^{-1/2}(-1)^{ab}$.",
+          "step": "2.3",
+          "inputs": [
+            "A1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the defect time $\\tau$ moves inside a gap $(t_a,t_{a+1})$ with no other tensor insertion, the two adjacent propagators combine as $e^{-(t_{a+1}-\\tau)H_L}D_Le^{-(\\tau-t_a)H_L}=D_Le^{-(t_{a+1}-t_a)H_L}$ by [step 2.1] and the semigroup law. All other factors in the correlator stay fixed, so its matrix element is independent of $\\tau$. The same calculation applies to $P_L$ by step 2.2 and trivially to $I$. These are equalities of matrices with all external row indices fixed, so they remain valid inside every declared complete network contraction, for every fixed boundary tensor. Thus every declared line-slide preserves the complete correlator.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The mixed resolutions reduce, after the common positive factors from step 1.3, to moving a shift $Q^a$ past a sign $Z^b$, with $a,b\\in\\{0,1\\}$ the ordinary labels $\\mathbf 1,\\psi$. Their exact contractions are $\\sum_k(Z^b)_{hk}(Q^a)_{kh'}=(-1)^{bh}\\delta_{h',h+a}$ and $\\sum_k(Q^a)_{hk}(Z^b)_{kh'}=(-1)^{bh'}\\delta_{h',h+a}$. The ratio is $(-1)^{ab}$ on every nonzero component. For external labels $(\\sigma,b,\\sigma)$ and output $a$, or $(a,\\sigma,b)$ and output $\\sigma$, these are respectively the two orders of the sign and shift triangles; thus $F^{\\sigma b\\sigma}_a=F^{a\\sigma b}_\\sigma=(-1)^{ab}$. This gives precisely the two exceptional negative coefficients. All remaining nonunit one-channel cases are $\\psi\\psi\\psi\\to\\psi$, $\\psi\\psi\\sigma\\to\\sigma$, $\\sigma\\psi\\psi\\to\\sigma$, and $\\psi\\sigma\\sigma$, $\\sigma\\sigma\\psi\\to\\mathbf 1$ or $\\psi$; their paired shift or sign factors reduce by the three contraction identities in step 1.3 and have coefficient $1$. Forbidden channels have zero components by definition. This exhausts the triples without a unit leg; triples with a unit were covered in step 1.3. The coefficients are exactly those in [F3], and their unitarity and pentagon from [F4] ensure consistency of successive recouplings. Every identity holds for fixed external indices, so multiplying by any remaining network tensors and summing the finitely many shared indices proves the corresponding full-correlator identity. This recoupling argument is separate from the line-slide calculation in step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.3",
+            "step 2.3",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $P_L$ is nontrivial (it sends $|0,\\ldots,0\\rangle$ to $|1,\\ldots,1\\rangle$), the relation $D_LP_L=D_L$ would imply $P_L=I$ if $D_L$ had a left inverse, a contradiction. Thus $D_L$ has no two-sided inverse. Steps 1.3, 2.2, 2.3, 3.1, and 4.1 establish operator fusion, topologicality, and coherent junction data for the finite model; this is a conditional lattice-model deduction, not an empirical or continuum claim.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "step 1.3",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: L>=2 and the Hilbert space has dimension 2^L; the model and defect map are explicitly defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: J>0 and the Hamiltonian includes both ZZ and X terms at equal self-dual coupling; no zero-Hamiltonian shortcut is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.2: the global flip P is a nontrivial involution for every L>=2 and the duality fusion is I+P."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: slides are restricted to gaps without insertions; the result does not claim a continuum isotopy or a general QFT defect."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: each defect position lies strictly inside an insertion-free Euclidean-time gap; no slide crosses a gap endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite-dimensional spaces and explicit finite sums over Z2 heights are used; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Local Pauli intertwiners and Hamiltonian duality",
+          "status": "checked",
+          "evidence": "The two kernel sign changes give the stated local Pauli intertwiners. With the explicitly defined dual Hamiltonian, reflection maps each dual X term to X_{-j} and each dual ZZ term to Z_{1-j}Z_{-j}; reindexing the periodic sums gives R_L Hhat_L = H_L R_L."
+        },
+        {
+          "name": "Character-sum fusion identity",
+          "status": "checked",
+          "evidence": "For each binary height, sum_{u in Z2}(-1)^(ur)=2 delta_{r,0}; the product of these exact sums imposes that h'_j+h_j is constant around the ring, giving I+P."
+        },
+        {
+          "name": "Ising junction coherence",
+          "status": "checked",
+          "evidence": "The finite network uses the exact F and duality maps from the local mathematical coherence lemma; the only nontrivial pentagon was exhaustively checked in the referenced exact-arithmetic script."
+        }
+      ],
+      "finite_checks_disposition": "These checks establish exact finite-dimensional matrix and fusion identities for the declared lattice model. They do not establish an infinite-volume or continuum limit, universality, or empirical applicability.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Read every current proof step and all four exact prerequisite Definitions/Statement uses, plus the reader/refuter artifacts. Verified kernel toggles, periodic dual Hamiltonian, reflection indices Xhat_(j+1/2) -> X_(-j), Zhat_(j-1/2) Zhat_(j+1/2) -> Z_(1-j) Z_(-j), and symmetry of the reflected incidence form. The exact character sum gives I+P on both typed sides for every L>=2 (including the duplicate L=2 bonds). Finite-dimensional absolute exponential convergence justifies commutation; insertion-free gap slides are matrix equalities for every external tensor and boundary value, not arbitrary continuum isotopy. Checked identity-channel site normalization t^2 sqrt(2)=1, Hadamard recoupling for all four external bit pairs and mixed sign/shift commutation QZ=-ZQ; source equations (4.4), (4.6), (4.14)-(4.15), (4.21) match the stated orientations/conventions. Abstract categorical unitarity/duals come from the completed coherence supplier, not operator fusion alone. P is nonidentity so DP=D excludes a left inverse. J>0, inverse-energy time, finite size, no empirical premise and no continuum limit are explicit. The sole actual item consumer is the three-site example; its kernel-square and gap-slide uses remain valid after the added dual-Hamiltonian definition. Manifest statement and consumer contract citation mirrors reconciled; no outside consumer repair or unresolved prerequisite."
+      }
+    },
+    "ex-aqft-ising-fusion-object-noninvertible": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-noninvertible-defect-fusion",
+          "source_section": "Definition",
+          "quote": "A **tensor-invertible object** $D$ is an object for which some object $E$ satisfies $D\\otimes E\\cong\\mathbf 1$ and $E\\otimes D\\cong\\mathbf 1$. An object with no such two-sided inverse is **non-invertible**. Simplicity and tensor-invertibility are separate properties: an object can be simple and non-invertible, or a direct sum of invertible simple objects and non-invertible as a whole.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-ising-fusion-data",
+          "source_section": "Definition",
+          "quote": "Let the scalar field be $\\mathbb C$ and let the simple labels be $\\mathbf 1$, $\\psi$, and $\\sigma$. Define a $\\mathbb C$-linear semisimple category candidate whose objects are finite direct sums of these labels, whose simple-label Hom space is $\\mathbb C$ when the labels agree and $0$ otherwise, and whose Hom spaces between direct sums are the corresponding finite matrices. Give the simple-label fusion product by\n\n$$\n\\mathbf 1\\otimes a=a\\otimes\\mathbf 1=a,\\qquad \\psi\\otimes\\psi=\\mathbf 1,\\qquad \\psi\\otimes\\sigma=\\sigma\\otimes\\psi=\\sigma,\\qquad \\sigma\\otimes\\sigma=\\mathbf 1\\oplus\\psi.\n$$\n\nExtend the product bilinearly to direct sums and on morphisms by the induced tensor product of scalar maps. The unit is $\\mathbf 1$ and the unitors are strict. Fusion spaces are $V_{ab}^c=\\operatorname{Hom}(a\\otimes b,c)$; each is one-dimensional when the displayed fusion rule allows $c$ and is zero otherwise. In every allowed one-dimensional fusion space choose its displayed basis vector. On three simple labels, define the associator in these bases by the matrix $[F^{abc}_d]_{xy}$, where $x$ is the intermediate label in $(a\\otimes b)\\otimes c\\to d$ and $y$ is the intermediate label in $a\\otimes(b\\otimes c)\\to d$. Set\n\n$$\n\\left[F^{\\sigma\\sigma\\sigma}_{\\sigma}\\right]_{xy}=\\frac{1}{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}_{xy},\\qquad x,y\\in\\{\\mathbf 1,\\psi\\},\n$$\n\n$$\n\\left[F^{\\psi\\sigma\\psi}_{\\sigma}\\right]_{\\sigma\\sigma}=-1,\\qquad \\left[F^{\\sigma\\psi\\sigma}_{\\psi}\\right]_{\\sigma\\sigma}=-1.\n$$\n\nEvery other coefficient is $1$ when all four fusion vertices are allowed and $0$ when any required fusion vertex is forbidden. Extend each associator linearly over direct sums. The candidate dual of each simple label is itself. For $\\mathbf 1$ and $\\psi$, take evaluation and coevaluation to be the unit-channel basis maps with coefficient $1$. For $\\sigma$, take evaluation $\\sigma\\otimes\\sigma\\to\\mathbf 1$ and coevaluation $\\mathbf 1\\to\\sigma\\otimes\\sigma$ to have coefficient $2^{1/4}$ in the $\\mathbf 1$ channel and zero in the $\\psi$ channel. This item specifies the data; the separate coherence result checks that they satisfy the fusion-category axioms. No braiding or physical realization is included in this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-aqft-ising-fusion-data-coherence",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal I$ be the following complex-linear category. An object is a triple $X=(H_{\\mathbf 1},H_\\psi,H_\\sigma)$ of finite-dimensional complex Hilbert spaces; a morphism $f:X\\to Y$ is a triple of linear maps $f_a:H_a\\to K_a$, with componentwise composition. For $a\\in\\{\\mathbf 1,\\psi,\\sigma\\}$, let $\\underline a$ be the triple with component $\\mathbb C$ in position $a$ and zero in the other two positions. A zero object is an object with a unique morphism to and from every object. A monomorphism $u:Y\\to X$ is a morphism such that $u\\circ f=u\\circ g$ implies $f=g$ for every object $Z$ and maps $f,g:Z\\to Y$; a subobject of $X$ is an isomorphism class of monomorphisms into $X$. An object is simple if it is nonzero and its only subobjects are the zero subobject and itself. The objects $\\underline{\\mathbf 1},\\underline\\psi,\\underline\\sigma$ are the three simple labels, and every object is a finite direct sum of them. The tensor product on these labels is\n\n$$\n\\mathbf 1\\otimes a=a\\otimes\\mathbf 1=a,\\qquad \\psi\\otimes\\psi=\\mathbf 1,\\qquad \\psi\\otimes\\sigma=\\sigma\\otimes\\psi=\\sigma,\\qquad \\sigma\\otimes\\sigma=\\mathbf 1\\oplus\\psi,\n$$\n\nand extends to arbitrary objects by orthogonal direct sums and to morphisms by tensor products of their component maps. More explicitly, if $Y=(K_{\\mathbf 1},K_\\psi,K_\\sigma)$, then $(X\\otimes Y)_c=\\bigoplus_{a,b}H_a\\otimes K_b\\otimes V_{ab}^c$, where $V_{ab}^c=\\mathbb C$ with its unit basis vector when the fusion rule allows $c$, and $V_{ab}^c=0$ otherwise. Put $N_{ab}^c=\\dim_{\\mathbb C}V_{ab}^c$, so $N_{ab}^c$ is $1$ for an allowed channel and $0$ otherwise. The unit object is $\\underline{\\mathbf 1}$. The left unitor on the unique summand $\\mathbb C\\otimes H_a\\otimes V_{\\mathbf 1a}^a$ is $z\\otimes v\\otimes u_{\\mathbf 1a}^a\\mapsto zv$; the right unitor on $H_a\\otimes\\mathbb C\\otimes V_{a\\mathbf 1}^a$ is $v\\otimes z\\otimes u_{a\\mathbf 1}^a\\mapsto zv$. Here $u_{ab}^c$ is the chosen unit fusion basis vector. These canonical unitors are specified isomorphisms, not literal equalities of Hilbert spaces; they realize the skeletal package's strict unit convention in this Hilbert-space presentation. For each allowed one-dimensional fusion space choose this unit basis vector. On simple labels the associator from $(a\\otimes b)\\otimes c$ to $a\\otimes(b\\otimes c)$ has coefficients $[F^{abc}_d]_{xy}$, where $x$ and $y$ are respectively the left and right intermediate labels. Set $\\epsilon(\\mathbf 1)=0$ and $\\epsilon(\\psi)=1$, and specify\n\n$$\n[F^{\\sigma\\sigma\\sigma}_{\\sigma}]_{xy}=\\frac{1}{\\sqrt2}(-1)^{\\epsilon(x)\\epsilon(y)},\\qquad x,y\\in\\{\\mathbf 1,\\psi\\},\n$$\n\n$$\n[F^{\\psi\\sigma\\psi}_{\\sigma}]_{\\sigma\\sigma}=-1,\\qquad [F^{\\sigma\\psi\\sigma}_{\\psi}]_{\\sigma\\sigma}=-1.\n$$\n\nEvery other coefficient is $1$ if all four fusion vertices are allowed and is $0$ otherwise. For general triples $X=(H_a)$, $Y=(K_b)$, $Z=(L_c)$, the associator sends the left-channel elementary tensor\n\n$$\n(v\\otimes w\\otimes u_{ab}^{x})\\otimes z\\otimes u_{xc}^{d}\\ \\longmapsto\\ \\sum_y[F^{abc}_d]_{xy}\\,v\\otimes(w\\otimes z\\otimes u_{bc}^{y})\\otimes u_{ay}^{d},\n$$\n\nwhere $v\\in H_a$, $w\\in K_b$, $z\\in L_c$, and the sum ranges over allowed channels. Extend this formula complex-linearly to every orthogonal direct-sum block. It includes the ordinary reassociation of the three Hilbert-space factors and moves no multiplicity vector between different labels.\n\nFor each simple label $a$, both chosen left and right dual labels are $a$. The four evaluation and coevaluation maps for $a$ have coefficient $\\lambda_a$ in the unique unit channel, where $\\lambda_{\\mathbf 1}=\\lambda_\\psi=1$ and $\\lambda_\\sigma=2^{1/4}$; for $a=\\sigma$ the coefficient in the $\\psi$ channel is zero. For a general object $X=(H_a)_{a\\in\\{\\mathbf 1,\\psi,\\sigma\\}}$, set $X^L=X^R=(H_a^*)_a$, where $H_a^*$ is the linear dual equipped with its dual Hilbert inner product. The evaluation maps pair $x\\otimes\\varphi$ or $\\varphi\\otimes x$ as $\\lambda_a\\varphi(x)$ in the $a\\otimes a\\to\\mathbf 1$ channel, and vanish between different simple labels. For any basis $(e_{a,r})_r$ of each $H_a$ with dual basis $(e_{a,r}^*)_r$, the right coevaluation is $\\sum_a\\lambda_a\\sum_r e_{a,r}^*\\otimes e_{a,r}$ and the left coevaluation is $\\sum_a\\lambda_a\\sum_r e_{a,r}\\otimes e_{a,r}^*$, each in the $a\\otimes a\\to\\mathbf 1$ channel.\n\nEquip the category with the dagger $f^\\dagger=(f_a^\\dagger)_a$, where $f_a^\\dagger$ is the Hilbert-space adjoint, and with the positive Hermitian inner products\n\n$$\n\\langle f,g\\rangle_{X,Y}=\\sum_{a\\in\\{\\mathbf 1,\\psi,\\sigma\\}}d_a\\,\\operatorname{Tr}(f_a^\\dagger g_a),\\qquad d_{\\mathbf 1}=d_\\psi=1,\\quad d_\\sigma=\\sqrt2,\n$$\n\non each $\\operatorname{Hom}_{\\mathcal I}(X,Y)$. Composition-adjoint means $\\langle g\\circ f,h\\rangle_{X,Z}=\\langle f,g^\\dagger\\circ h\\rangle_{X,Y}$ for $f:X\\to Y$, $g:Y\\to Z$, and $h:X\\to Z$. Tensor compatibility means $(f\\otimes g)^\\dagger=f^\\dagger\\otimes g^\\dagger$ and $\\langle f\\otimes g,f'\\otimes g'\\rangle=\\langle f,f'\\rangle\\langle g,g'\\rangle$ for parallel pairs of maps. A morphism is unitary when its dagger is its two-sided inverse. Here “unitary fusion category” means that all Hom spaces are finite-dimensional; the three $\\underline a$ are exactly the simple isomorphism classes and every object is a finite direct sum of them; the component categories have kernels and cokernels and every subspace has a complement; the bilinear tensor product has unit $\\mathbf 1$, its associator is a natural isomorphism satisfying the pentagon, and its specified canonical unitors satisfy the triangle; every object has the stated left and right dual maps satisfying the two snakes; and the dagger and Hom inner products are positive and composition-adjoint, the tensor product satisfies the stated compatibilities, the left evaluation is adjoint to the right coevaluation, the right evaluation is adjoint to the left coevaluation, and the associator and unitors are unitary. These data satisfy all of these conditions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write an arbitrary object as $E=n_{\\mathbf 1}\\mathbf 1\\oplus n_\\psi\\psi\\oplus n_\\sigma\\sigma$. Distributivity and [F2] give $\\sigma\\otimes E\\cong n_\\sigma\\mathbf 1\\oplus n_\\sigma\\psi\\oplus(n_{\\mathbf 1}+n_\\psi)\\sigma$. If $\\sigma\\otimes E\\cong\\mathbf 1$, equality of simple-object multiplicities would require both $n_\\sigma=1$ and $n_\\sigma=0$ from the $\\mathbf 1$ and $\\psi$ coefficients. This is impossible.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus $\\sigma$ has no right tensor inverse and cannot have a two-sided tensor inverse by [F1]. By [F3], $\\sigma$ is a simple object of $\\mathcal I$; it is therefore simple and non-invertible. The argument is purely categorical.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: E ranges over every finite direct sum, including the zero object; step 1.1 includes zero multiplicities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: if all multiplicities vanish, sigma tensor E is zero and cannot equal the nonzero unit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes each simple candidate E=1, psi, and sigma through the general multiplicity formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses nonnegative integer multiplicities, so no cancellation between simple summands can remove the extra psi channel."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This algebraic example has no interval, limit, or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The candidate object is an arbitrary but fixed finite direct sum; no family is selected and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example proves that sigma has no right tensor inverse, then concludes non-invertibility; it does not assert an if-and-only-if criterion for arbitrary fusion objects."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 2.1 uses only the necessary right-inverse condition for a two-sided inverse. It does not claim that absence of a two-sided inverse implies absence of every right inverse in a general category."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Simple-object multiplicity comparison",
+          "status": "checked",
+          "evidence": "The exact formula sigma tensor E = n_sigma 1 plus n_sigma psi plus (n_1+n_psi) sigma contradicts equality with 1 for every n_1,n_psi,n_sigma in Z_{>=0}."
+        }
+      ],
+      "finite_checks_disposition": "The multiplicity argument is exact over nonnegative integers and has no physical assumptions.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Reviewed both Verification steps against the completed coherence supplier and the exact invertibility Definition. Any finite sum E has nonnegative multiplicities, including all zero. Sigma tensor E has equal 1 and psi multiplicities n_sigma, so equality with the unit would require n_sigma=1 and n_sigma=0 simultaneously. This excludes every right inverse and hence every two-sided inverse; simplicity follows from the supplier or the one-dimensional sigma block directly. No converse, empirical premise, limiting operation, or arbitrary choice is used. The reader/refuter submit no finding for this unchanged example; no new decision or edit is owed."
+      }
+    },
+    "ex-aqft-ising-chain-three-site-noninvertible-defect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-aqft-noninvertible-defect-realization",
+          "source_section": "Statement",
+          "quote": "Fix an integer $L\\ge2$ and the periodic site set $\\mathbb Z/L\\mathbb Z$. Let $\\mathcal H_L=\\ell^2(\\mathbb Z_2^L)$ with orthonormal basis $|h_1,\\ldots,h_L\\rangle$, where every $h_j\\in\\mathbb Z_2$ and $h_0=h_L$. Define Pauli operators by $Z_j|\\mathbf h\\rangle=(-1)^{h_j}|\\mathbf h\\rangle$ and $X_j|\\mathbf h\\rangle=|\\mathbf h+\\mathbf e_j\\rangle$. Adopt the finite quantum Ising model with Hamiltonian\n\n$$\nH_L=-J\\sum_{j=1}^{L}(Z_jZ_{j+1}+X_j),\\qquad J>0,\n$$\n\nwhere $Z_{L+1}=Z_1$, $J$ has units of energy, and $\\hbar=1$. Euclidean propagation through a time interval $s\\ge0$ is the exact finite matrix $e^{-sH_L}$, with $s$ in inverse-energy units. Correlators are matrix elements between arbitrary boundary vectors of finite ordered lists of observable matrices and these propagation factors.\n\nLet $\\widehat{\\mathcal H}_L=\\ell^2(\\mathbb Z_2^L)$ have basis $|\\widehat h_{1/2},\\ldots,\\widehat h_{L-1/2}\\rangle$, with dual Pauli operators $\\widehat Z$ and $\\widehat X$ defined by the same formulas on half-integer sites. Define the dual Hamiltonian, with half-integer indices periodic modulo $L$, by\n\n$$\n\\widehat H_L=-J\\sum_{j=1}^{L}\\bigl(\\widehat Z_{j-1/2}\\widehat Z_{j+1/2}+\\widehat X_{j+1/2}\\bigr).\n$$\n\nDefine the original-to-dual Kramers–Wannier map $K_L:\\mathcal H_L\\to\\widehat{\\mathcal H}_L$ by\n\n$$\n\\langle\\widehat{\\mathbf h}|K_L|\\mathbf h\\rangle=2^{-L/2}(-1)^{\\sum_{j=1}^{L}\\widehat h_{j-1/2}(h_{j-1}+h_j)}.\n$$\n\nThe reverse-oriented map is $K_L^\\dagger:\\widehat{\\mathcal H}_L\\to\\mathcal H_L$. To give a single endodefect with the fusion convention below, use the explicit reflection identification $R_L:\\widehat{\\mathcal H}_L\\to\\mathcal H_L$ sending $|\\widehat{\\mathbf h}\\rangle$ to $|\\mathbf r\\rangle$ with $r_j=\\widehat h_{1/2-j}$ (all indices are periodic), and set $D_L=R_LK_L$. This is an isometry of the two spin bases and identifies the dual Hamiltonian with $H_L$. The matrix of $D_L$ is real symmetric: its exponent is $\\sum_j r_{1-j}(h_{j-1}+h_j)$, whose coefficient matrix is symmetric in $\\mathbf r$ and $\\mathbf h$. Thus $D_L^2=K_L^\\dagger K_L$. The original-to-dual map and its reverse also have the typed fusion $K_L^\\dagger K_L=I+P_L$ and $K_LK_L^\\dagger=I+\\widehat P_L$. A repeated fixed half-site identification is not used for this square; it would retain a spatial translation. A defect line is a wrapping insertion of $D_L$ on a Euclidean time slice. Its allowed position changes are slides within gaps between fixed observable insertions. In this finite lattice model, topologicality means invariance under the declared local line slides; re-association of junction channels is a separate linear recoupling identity; no smooth continuum isotopy claim is made. A finite defect network has labels $\\mathbf 1,\\psi,\\sigma$, represented on the chain by $I,P_L,D_L$, where $P_L=\\prod_jX_j$. Its fusion spaces are one-dimensional precisely for\n\n$$\n\\mathbf 1\\otimes a=a\\otimes\\mathbf 1=a,\\qquad \\psi\\otimes\\psi=\\mathbf 1,\\qquad \\psi\\otimes\\sigma=\\sigma\\otimes\\psi=\\sigma,\\qquad \\sigma\\otimes\\sigma=\\mathbf 1\\oplus\\psi,\n$$\n\nand zero otherwise. Choose a basis vector in each allowed one-dimensional fusion space and define the associator in those bases as follows. Write $\\epsilon(\\mathbf 1)=0$ and $\\epsilon(\\psi)=1$; then\n\n$$\n[F^{\\sigma\\sigma\\sigma}_{\\sigma}]_{ab}=2^{-1/2}(-1)^{\\epsilon(a)\\epsilon(b)},\\qquad a,b\\in\\{\\mathbf 1,\\psi\\},\n$$\n\n$$\n[F^{\\psi\\sigma\\psi}_{\\sigma}]_{\\sigma\\sigma}=-1,\\qquad [F^{\\sigma\\psi\\sigma}_{\\psi}]_{\\sigma\\sigma}=-1,\n$$\n\nand every other allowed associator coefficient is $1$. In the abstract channel category, the unit maps $\\mathbf 1\\otimes a\\to a$ and $a\\otimes\\mathbf 1\\to a$ have coefficient $1$. Each simple label is self-dual; its left and right evaluation and coevaluation maps have coefficient $\\lambda_a$ in the unit channel, where $\\lambda_{\\mathbf 1}=\\lambda_\\psi=1$ and $\\lambda_\\sigma=2^{1/4}$, with zero coefficient in the $\\psi$ channel for $\\sigma\\otimes\\sigma$. These are categorical maps, distinct from the lattice triangle normalizations below.\n\nFor local lattice tensors, heights $h,h',\\widetilde h$ range over $\\mathbb Z_2$, with addition modulo $2$; height $0$ denotes the label $\\mathbf 1$, height $1$ denotes $\\psi$, and a vertex marked $\\sigma$ denotes an empty site. Set $Q_{hh'}=\\delta_{h',h+1}$. The two nontrivial height placements of a trivalent junction of two $\\sigma$ lines and one $\\psi$ line have the following weights: when the vertex between the two $\\sigma$ lines has ordinary height $h$ and the other vertices are empty, the weight is $T_{\\sigma\\sigma\\psi}(h)$; when that vertex is empty and the other two have ordinary heights $h,h'$, the weight is $T_{\\sigma\\psi\\sigma}(h,h')$. Explicitly,\n\n$$\nT_{\\sigma\\sigma\\psi}(h)=2^{-1/4}(-1)^h,\\qquad T_{\\sigma\\psi\\sigma}(h,h')=Q_{hh'}.\n$$\n\nThe identity-defect termination tensors have the following four orientations: the first two represent the two local orientations of the $\\sigma\\otimes\\sigma\\to\\mathbf 1$ unit channel, and the last two represent the two local orientations of the $\\psi\\otimes\\psi\\to\\mathbf 1$ unit channel. In each case the dashed third edge has label $\\mathbf 1$ and the two sloping defect edges have the indicated common label:\n\n- For defect label $\\sigma$, when the upper vertex has height $h$ and the two lower vertices are empty sites, the tensor is $2^{-1/4}$.\n- For defect label $\\sigma$, when the upper vertex is empty and the lower vertices have heights $h,h'$, the tensor is $\\delta_{hh'}$.\n- For defect label $\\psi$, when all three site vertices are empty, the tensor is $2^{-1/4}$.\n- For defect label $\\psi$, when the upper vertex has dual height $\\widetilde h$ and the lower vertices have heights $h,h'$, the tensor is $Q_{h\\widetilde h}\\delta_{hh'}$.\n\nIn the last orientation, $\\widetilde h$ is the upper dual-basis height and $h,h'$ are the lower ordinary heights, all in $\\mathbb Z_2$. The mixed index $Q_{h\\widetilde h}$ uses the same $h$ as $\\delta_{hh'}$; there is no second independent dual height. Reversed orientations use adjoint tensors; every fusion-forbidden label or height assignment has weight zero, and all components outside the stated domains are zero. The other allowed channels use their unit basis maps of coefficient $1$. These local triangles and the abstract channel maps above are the adopted junction data of this finite network model, not consequences of the fusion multiplicities alone.\n\nThe complete admissible input domain is declared as follows. Each input is a finite decorated lattice tensor network with boundary vectors or boundary tensors, arbitrary finite ordinary insertion matrices, propagation tensors $e^{-sH_L}$ (or their dual versions), and any finite number of the wrapping defects and local trivalent junction tensors above, with their oriented site orderings. Local height edges have index set $\\{0,1\\}$, empty-site edges have the singleton label $\\sigma$, and row edges have index set $\\mathbb Z_2^L$. Matching edges are contracted only when their index sets and model sides agree; reversal uses the stated adjoint tensor. Boundary vectors and all uncontracted indices are part of the combined boundary data. The correlator is the unnormalized complex number\n\n$$\nC(\\Gamma;b;O_1,\\ldots,O_n)=\\sum_{\\text{internal admissible indices}}\\left(\\prod_v d_v\\right)\\left(\\prod_{t\\in\\Gamma}\\mathcal T_t(\\text{incident indices})\\right),\\qquad d_v=\\begin{cases}1,&\\text{ordinary spin site},\\\\\\sqrt2,&\\text{empty site}.\\end{cases}\n$$\n\nHere the finite graph $\\Gamma$ records all sites, incidences, side labels, tensor orientations, and the external boundary contraction; $\\mathcal T_t$ is exactly the specified matrix component or local triangle component at $t$. The product over $v$ runs over local patch sites whose factors are not already absorbed into a row tensor; row matrices have their displayed normalization. Every site weight is included once; if a site is split among patches, its positive factors are split with product $d_v$. Unit defect quadrilaterals carry $2^{-1/4}\\delta_{a\\alpha}\\delta_{b\\beta}$, and a duality quadrilateral carries $2^{-1/2}(-1)^{ab}$ at its two ordinary corners; forbidden assignments vanish. These give a fully finite contraction prescription, including the source's site-weight convention, rather than inferring network correlators from fusion multiplicities. On a row with no extra local junction patch it is exactly the ordered matrix element already specified. Reflection identifications permute the row and boundary indices consistently and do not change a contraction. The value space is $\\mathbb C$ with its usual topology. A declared line slide moves an entire $I$, $P_L$ or $D_L$ slice within a gap containing no other tensor insertion, leaving all boundary tensors fixed. Junction recouplings compare the two local contractions with the same external height indices, including site factors; equality or a specified linear combination must hold before the rest of the graph is contracted. No arbitrary continuum network or additional support deformation is asserted.\n\nFor this selected finite model, $D_L$ is topological under the declared defect slides, its exact operator fusion is $D_L^2=I+P_L$, $P_L^2=I$, and $D_LP_L=P_LD_L=D_L$, and the junction spaces and associators are the finite semisimple unitary Ising fusion data above. In particular $D_L$ is non-invertible. The claim is confined to this finite lattice model and asserts no continuum limit or empirical fact.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vector $v$ is nonzero because $|000\\rangle$ and $|111\\rangle$ are distinct orthonormal basis vectors. The global spin flip exchanges them, so $P_3v=|111\\rangle-|000\\rangle=-v$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] at $L=3$, $D_3^2v=(I+P_3)v=v-v=0$. If $D_3$ had a two-sided inverse, then $D_3^2$ would be invertible and could not annihilate the nonzero vector $v$; thus the defect is non-invertible. Its topologicality in every allowed gap follows from the same exact finite transfer-model result.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the Hilbert space is C^8 and v is an explicit nonzero vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: J>0 and the self-dual Hamiltonian is explicitly specified; the defect is not produced by zero propagation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example fixes L=3; step 1.1 verifies the two distinct computational basis vectors directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 exhibits a nonzero vector in the kernel of D_3^2, so the failure of invertibility is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the line is placed and slid only inside a gap between fixed insertions; the example does not move it across an endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only explicit vectors in a finite eight-dimensional space are used; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example derives non-invertibility from the explicit nonzero vector annihilated by D_3 squared; it does not claim a biconditional characterization of topological defects."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 2.1 does not infer the Ising fusion equation or topologicality from mere non-invertibility; those properties use the separately supplied exact finite-model result."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Three-site parity vector and defect kernel",
+          "status": "checked",
+          "evidence": "Directly, P_3(|000>-|111>)=-(|000>-|111>); the theorem's exact D_3^2=I+P_3 gives D_3^2 v=0."
+        }
+      ],
+      "finite_checks_disposition": "The example uses exact finite-dimensional vector identities and the theorem's conditional finite-model result; no continuum or empirical inference is made.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-39 author",
+        "notes": "The example is a three-site specialization of the exact finite model. Its physical-theorem supplier and the supplier theorem’s current topological-defect definition record are ready; the exact definition use matches the stated slide condition. No continuum or empirical claim is made."
+      }
+    }
+  }
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-zero-arrow-quiver-motivic-hall-product.json
+  precheck: pass
 id: ex-zero-arrow-quiver-motivic-hall-product
 kind: example
 title: "The motivic Hall product for a one-vertex zero-arrow quiver"
@@ -25,19 +28,18 @@ sources:
       url: "https://arxiv.org/pdf/1002.4372v1"
     - title: "Olivier Schiffmann, Lectures on Hall Algebras, arXiv:math/0611617v2, §§1.1–1.3"
       url: "https://arxiv.org/pdf/math/0611617v2"
-verification:
-  precheck: pass
+
 ---
 
 ## Example
 
 Let $Q$ have one vertex and no arrows.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}
 \node[circle,draw,inner sep=1.5pt,label=below:{1}] (v) at (0,0) {};
 \end{tikzpicture}
-~~~
+```
 
 The vertex label is $1$; the absence of edges means a representation is
 only a finite-dimensional vector space. Let $S$ be its one-dimensional

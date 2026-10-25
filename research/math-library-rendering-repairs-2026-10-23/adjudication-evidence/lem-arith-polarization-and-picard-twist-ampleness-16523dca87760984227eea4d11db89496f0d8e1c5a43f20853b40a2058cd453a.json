@@ -1,0 +1,35 @@
+{
+  "id": "lem-arith-polarization-and-picard-twist-ampleness",
+  "agent": "/root/rendering_repair_coordinator/ag_002",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile shows literal dollar delimiters and TeX commands in the uppercase proof-technique banner, while the same mathematical notation is typeset in proof steps below. The source uses inline math in the banner, which this plain-text renderer does not parse.",
+      "action": "Replaced only the formula-bearing proof-technique summary with equivalent prose describing the graph pullback, tensor square, and doubled Mumford map.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Line 67 now describes the same comparison entirely in plain prose. No statement, proof step, dependency, source, metadata, or publication-status byte was changed.",
+  "source_lines_after": {
+    "67": "**Proof technique:** direct: compare the Poincare bundle pulled back along the graph of the Mumford map with the tensor square of the given ample bundle, use that both have twice the Mumford map of the given bundle, and invoke invariance of ampleness under algebraically trivial twists."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Underlying proof-technique renderer still treats its label as plain text; this local prose workaround avoids unsupported inline math. No fresh render was performed."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-arith-polarization-and-picard-twist-ampleness.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "Compared frozen-before/current source lines and status line",
+      "result": "Only line 67 differs; status: published is byte-identical."
+    }
+  ]
+}

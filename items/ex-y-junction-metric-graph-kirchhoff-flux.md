@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-y-junction-metric-graph-kirchhoff-flux.json
+  precheck: pass
 id: ex-y-junction-metric-graph-kirchhoff-flux
 kind: example
 title: "A Y-junction satisfies Kirchhoff flux balance"
@@ -33,12 +36,7 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Example
@@ -49,19 +47,21 @@ $u(c)=1$. Define on the three edge coordinates
 $u_1(x)=1+x$, $u_2(x)=1-x$, and $u_3(x)=1$ for $0\le x\le1$. The common
 central trace is $1$, and the total outward diffusive flux at $v$ is zero.
 
+## Illustration
+
 The arrows give the coordinate orientations from the central vertex; the drawing is schematic and the proof uses the exact endpoint values below.
 
-\begin{center}
+```tikz
 \begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
   \node[circle,draw] (v) at (0,0) {$v:1$};
-  \node[circle,draw] (a) at (-2,1.4) {$a:2$};
-  \node[circle,draw] (b) at (2,1.4) {$b:0$};
-  \node[circle,draw] (c) at (0,-2) {$c:1$};
-  \draw[->] (v) -- node[above left] {$u_1(x)=1+x$} (a);
-  \draw[->] (v) -- node[above right] {$u_2(x)=1-x$} (b);
+  \node[circle,draw] (a) at (-3,2.4) {$a:2$};
+  \node[circle,draw] (b) at (3,2.4) {$b:0$};
+  \node[circle,draw] (c) at (0,-2.8) {$c:1$};
+  \draw[->] (v) -- node[above left,xshift=-30pt,yshift=8pt] {$u_1(x)=1+x$} (a);
+  \draw[->] (v) -- node[above right,xshift=30pt,yshift=8pt] {$u_2(x)=1-x$} (b);
   \draw[->] (v) -- node[right] {$u_3(x)=1$} (c);
 \end{tikzpicture}
-\end{center}
+```
 
 ## Facts & Assumptions
 

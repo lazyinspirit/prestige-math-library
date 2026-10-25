@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-onan-scott-is-the-classification-of-finite-simple-groups.md

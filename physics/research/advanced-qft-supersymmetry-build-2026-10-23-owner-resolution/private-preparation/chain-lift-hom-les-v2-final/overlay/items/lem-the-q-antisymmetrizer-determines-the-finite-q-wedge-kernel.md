@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-q-antisymmetrizer-determines-the-finite-q-wedge-kernel.md

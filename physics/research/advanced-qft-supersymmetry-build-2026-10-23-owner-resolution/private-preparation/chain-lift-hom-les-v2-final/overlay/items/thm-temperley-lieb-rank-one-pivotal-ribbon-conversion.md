@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-temperley-lieb-rank-one-pivotal-ribbon-conversion.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-proper-cohomology-has-functorial-mixed-hodge-weights-at-most-degree.json
+  precheck: pass
 id: thm-proper-cohomology-has-functorial-mixed-hodge-weights-at-most-degree
 kind: theorem
 title: "Proper cohomology and functorial mixed Hodge weights"
@@ -102,3 +105,45 @@ $Y\times_X X_c\to X_c$, using each component dimension $d_c$ separately.
 ## Remarks
 
 The construction uses the hyperresolution only through its descent and Hodge theory; the mixed Hodge structure is independent of the chosen diagram by strictness, which is why no splitting or additional structure is transported to the cohomology. The singular comparison is local on affine charts because the proper $Y$ need not be quasi-projective; the metrization is constructed rather than assumed. The class map is stated for Borel-Moore homology, which agrees with ordinary homology for the compact analytic space underlying a proper variety; the identification makes the statement a theorem about ordinary homology without requiring smoothness of $Y$.
+
+The first levels of the hypercover and the corresponding row of its
+cohomological spectral sequence are shown below. In the top row only the
+augmentation and face maps are drawn; degeneracies and higher levels are
+omitted. Each face $d_i:Y_{p+1}\to Y_p$ induces a pullback in the opposite
+direction. For fixed $q\ge0$, the lower row consists of $E_1^{p,q}$ terms,
+with $d_1=\sum_{i=0}^{p+1}(-1)^i d_i^*$ on the arrow from column $p$ to
+column $p+1$; this row is not asserted to be exact.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (Y) at (0,0) {$Y$};
+\node (Y0) at (2.6,0) {$Y_0$};
+\node (Y1) at (5.6,0) {$Y_1$};
+\node (Y2) at (8.6,0) {$Y_2$};
+\draw[->] (Y0) -- node[above] {$a_0$} (Y);
+\draw[->] ([yshift=5pt]Y1.west) -- node[above] {$d_0$} ([yshift=5pt]Y0.east);
+\draw[->] ([yshift=-5pt]Y1.west) -- node[below] {$d_1$} ([yshift=-5pt]Y0.east);
+\draw[->] ([yshift=20pt]Y2.west) -- node[above] {$d_0$} ([yshift=20pt]Y1.east);
+\draw[->] (Y2.west) -- node[above] {$d_1$} (Y1.east);
+\draw[->] ([yshift=-20pt]Y2.west) -- node[below] {$d_2$} ([yshift=-20pt]Y1.east);
+\node at (9.8,0) {$\cdots$};
+\node (H0) at (2.6,-2) {$H^q(Y_0;\mathbb Q)$};
+\node (H1) at (5.6,-2) {$H^q(Y_1;\mathbb Q)$};
+\node (H2) at (8.6,-2) {$H^q(Y_2;\mathbb Q)$};
+\node at (0,-2) {$E_1^{p,q}:$};
+\draw[->] (H0) -- node[above] {$d_0^*-d_1^*$} (H1);
+\draw[->] (H1) -- node[above] {$d_0^*-d_1^*+d_2^*$} (H2);
+\node at (9.8,-2) {$\cdots$};
+\node at (0,-2.8) {total degree:};
+\node at (2.6,-2.8) {$q$};
+\node at (5.6,-2.8) {$q+1$};
+\node at (8.6,-2.8) {$q+2$};
+\end{tikzpicture}
+```
+
+Every displayed cohomology term has pure weight $q$ by [F4], whereas its
+total degree is $p+q$. By [F3] and step 1.1,
+$\operatorname{Gr}^W_q H^n(Y;\mathbb Q)\cong E_2^{n-q,q}$.
+Thus a nonzero weight-graded piece must have $p=n-q\ge0$, giving $q\le n$.
+The picture records this degree bookkeeping and pullback convention; the
+proof, including descent and functoriality, is independent of it.

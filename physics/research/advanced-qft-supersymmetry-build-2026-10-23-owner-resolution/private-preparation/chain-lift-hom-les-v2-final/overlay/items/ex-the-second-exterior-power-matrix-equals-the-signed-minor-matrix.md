@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-second-exterior-power-matrix-equals-the-signed-minor-matrix.md

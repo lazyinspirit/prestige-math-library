@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant.md

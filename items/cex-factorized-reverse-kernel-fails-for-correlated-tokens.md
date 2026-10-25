@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-factorized-reverse-kernel-fails-for-correlated-tokens.json
+  precheck: pass
 id: cex-factorized-reverse-kernel-fails-for-correlated-tokens
 kind: counterexample
 title: A factorized reverse kernel fails for correlated tokens
@@ -54,3 +57,40 @@ For every finite clean-sequence law and every finite absorbing-mask schedule wit
 2.1 Each marginal coordinate of that true law is uniform on $\{0,1\}$, but its joint law is not their product: the product would assign mass $1/4$ to $(0,1)$, while the true law assigns zero. Therefore the exact reverse conditional is not independent across positions. [given, step 1.1, algebra]
 
 3.1 The learned sampler has $c_1=1$ and draws the two coordinates independently from their uniform predictors by [F3]. Its output assigns probability $1/4$ to each of the four strings, so it cannot equal the true reverse law in step 1.1. This refutes the universal factorization statement while leaving the forward conditional independence assumption intact. [F3, step 1.1, step 2.1, algebra] ∎
+
+## Remarks
+
+The tables compare laws on the same four clean strings. In each table the row is the first token $a$ and the column is the second token $b$. The left table is $\Pr(Z_0=(a,b)\mid Z_1=(m,m))$; the right is the product of its two coordinate marginals, which is also the learned sampler's output law here. Conditioning on $Z_1=(m,m)$ adds no information because that event has probability one. Both tables have row and column sums $1/2$, but only the left table is supported on equal tokens.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node at (1.5,3.3) {True reverse conditional};
+  \node at (6.5,3.3) {Product / learned sampler};
+  \node at (4,4.1) {Given $Z_1=(m,m)$};
+  \node at (1.5,2.6) {second token $b$};
+  \node at (6.5,2.6) {second token $b$};
+  \node at (1,2) {$0$}; \node at (2,2) {$1$};
+  \node at (6,2) {$0$}; \node at (7,2) {$1$};
+  \node at (-0.8,0.8) {$a$};
+  \node at (4.2,0.8) {$a$};
+  \node at (0,1.3) {$0$}; \node at (0,0.3) {$1$};
+  \node at (5,1.3) {$0$}; \node at (5,0.3) {$1$};
+  \fill[blue!12] (0.5,0.8) rectangle (1.5,1.8);
+  \fill[blue!12] (1.5,-0.2) rectangle (2.5,0.8);
+  \fill[blue!12] (5.5,-0.2) rectangle (7.5,1.8);
+  \draw (0.5,-0.2) rectangle (2.5,1.8);
+  \draw (1.5,-0.2) -- (1.5,1.8);
+  \draw (0.5,0.8) -- (2.5,0.8);
+  \draw (5.5,-0.2) rectangle (7.5,1.8);
+  \draw (6.5,-0.2) -- (6.5,1.8);
+  \draw (5.5,0.8) -- (7.5,0.8);
+  \node at (1,1.3) {$1/2$}; \node at (2,1.3) {$0$};
+  \node at (1,0.3) {$0$}; \node at (2,0.3) {$1/2$};
+  \node at (6,1.3) {$1/4$}; \node at (7,1.3) {$1/4$};
+  \node at (6,0.3) {$1/4$}; \node at (7,0.3) {$1/4$};
+  \node at (1.5,-0.8) {Total mass $1$};
+  \node at (6.5,-0.8) {Total mass $1$};
+\end{tikzpicture}
+```
+
+The shaded cells have positive probability. Steps 1.1–3.1 establish the comparison independently of the illustration.

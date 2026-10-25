@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-projectives-covering-the-simple-objects-generate-every-finite-length-object.md

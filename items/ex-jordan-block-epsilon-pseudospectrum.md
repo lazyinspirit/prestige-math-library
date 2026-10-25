@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-jordan-block-epsilon-pseudospectrum.json
+  precheck: pass
 id: ex-jordan-block-epsilon-pseudospectrum
 kind: example
 title: "The closed epsilon-pseudospectrum of the two-by-two Jordan block is a disk"
@@ -15,11 +18,6 @@ provenance:
 generation:
   role: example
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Youcef Saad, Numerical Methods for Large Eigenvalue Problems, 2nd ed., §3.5"

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-metropolized-hamiltonian-chain-preserves-target.json
+  precheck: pass
 id: thm-metropolized-hamiltonian-chain-preserves-target
 kind: theorem
 title: The Metropolized Hamiltonian chain preserves its target
@@ -56,11 +59,6 @@ axiom_use: AC is used through the finite-dimensional multivariate-normal density
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
 sources:
   references:
     - title: Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5
@@ -103,7 +101,7 @@ where $\pi(dq)=Z_U^{-1}e^{-U(q)}dq$. The HMC position transition first refreshes
 
 [F10] The general Metropolis-Hastings output kernel is reversible and invariant for its target probability. [[thm-metropolis-hastings-kernel-is-reversible-and-invariant]]
 
-[F11] Each $\lambda_d$ is Lebesgue measure from [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], restricted to Borel sets. Under Countable Choice, the Borel product agrees with Euclidean Lebesgue measure on Borel phase sets; finite products of sigma-finite measures exist, are unique on measurable rectangles, and obey Tonelli, while finite sums of measures are measures. [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-nonnegative-weighted-sums-of-measures]]
+[F11] Each $\lambda_d$ is Lebesgue measure from [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], restricted to Borel sets. Under Countable Choice, the Borel product agrees with Euclidean Lebesgue measure on Borel phase sets; finite products of sigma-finite measures exist, are unique on measurable rectangles, and obey Tonelli, while finite sums of measures are measures. [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets|Borel Lebesgue product agrees with Euclidean Lebesgue measure]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-nonnegative-weighted-sums-of-measures]]
 
 [F12] Scalar multiples, pointwise-defined sums, products, absolute values, and finite maxima and minima of measurable real-valued functions are measurable. [[thm-arithmetic-and-lattice-operations-preserve-measurability]]
 

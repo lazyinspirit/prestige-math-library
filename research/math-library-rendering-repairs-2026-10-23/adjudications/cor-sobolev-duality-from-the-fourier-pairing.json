@@ -1,0 +1,53 @@
+{
+  "id": "cor-sobolev-duality-from-the-fourier-pairing",
+  "agent": "/root/rendering_repair_coordinator/fourier_010",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tex-in-title",
+      "verdict": "confirmed",
+      "reason": "Viewed the complete flagged screenshot at original resolution: heading visibly prints H^s and H^{-s} literally. Frozen/current raw SHA256 matched the queue before any edit.",
+      "action": "Add inline math delimiters around both Sobolev symbols in the title.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "The same screenshot visibly prints H^s literally in inherited supplier labels in Statement and F1. Supplier titles were read locally.",
+      "action": "Supply explicit local wikilink labels with inline math, preserving the exact supplier titles and targets; supplier files unchanged.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The proof-technique paragraph contains $L^2$. Local ItemBody.tsx ProofBlock lines 97\u2013104 insert technique[1] as a plain React text node without math rendering, so delimiters would be printed literally. This banner is below the flagged screenshot; confirmation is from local renderer code.",
+      "action": "Use Unicode L\u00b2 in the proof-technique banner to preserve the mathematical label within the renderer limitation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Add title math delimiters, explicit math-bearing local reference labels, and Unicode L\u00b2 in the plain-text proof-technique banner.",
+  "source_lines_after": {
+    "4": "title: \"Conjugate duality of $H^s$ and $H^{-s}$\"",
+    "43": "([[def-real-order-bessel-potential-sobolev-space|Real-order Bessel-potential completion $H^s$]],",
+    "45": "By [[thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces|Real-order $H^s$ as weighted Fourier distributions]], for",
+    "93": "[F1] For every $\\sigma\\in\\mathbb R$ the canonical embedding restricts to a bijection $E_\\sigma:H^\\sigma\\to\\mathcal W_\\sigma$ onto the set of tempered distributions $u$ for which $\\langle\\xi\\rangle^\\sigma\\mathcal Fu=u_G$ for a unique $G\\in L^2$, with $\\|U\\|_{H^\\sigma}=\\|G\\|_2$ ([[thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces|Real-order $H^s$ as weighted Fourier distributions]]).",
+    "105": "**Proof technique:** transport the weighted L\u00b2 pairing along the surjective Fourier isometries and conjugate the Riesz representation."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/cor-sobolev-duality-from-the-fourier-pairing.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects",
+      "preexisting_failures": []
+    }
+  },
+  "viewed_screenshots": [
+    "research/fourier-analysis-latex-visual-audit-2026-10-23/screenshots/cor-sobolev-duality-from-the-fourier-pairing--01.png"
+  ]
+}

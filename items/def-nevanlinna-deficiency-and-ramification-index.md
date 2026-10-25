@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-nevanlinna-deficiency-and-ramification-index.json
+  precheck: pass
 id: def-nevanlinna-deficiency-and-ramification-index
 kind: definition
 title: "Nevanlinna deficiency and ramification index"
@@ -22,8 +25,7 @@ sources:
     - title: "I. Laine, Complex Analysis III lecture notes"
       url: "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf"
       locator: "§§5–6.1, printed pp. 35–43: deficiency and ramification index conventions"
-verification:
-  audited: 2026-10-02
+
 ---
 
 ## Definition
@@ -58,7 +60,7 @@ enumeration of $S$ is assumed.
 
 ## Proof
 
-**Proof technique:** divide the First Main Theorem by $T$ and use that $T\to\infty$, then bound nonnegative numerators by $T$.
+**Proof technique:** divide the First Main Theorem by T and use that T tends to infinity, then bound nonnegative numerators by T.
 
 1.1 $T(r,f)\to\infty$: this is [F4] in the transcendental case, and in the rational case of degree $d\ge1$ the formula $T(r,f)=d\log r+O(1)$ diverges. [F4]
 

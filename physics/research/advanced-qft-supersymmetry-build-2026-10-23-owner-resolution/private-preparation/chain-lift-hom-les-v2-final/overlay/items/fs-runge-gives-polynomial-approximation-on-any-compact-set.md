@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-runge-gives-polynomial-approximation-on-any-compact-set.md

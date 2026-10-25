@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-spectral-mapping-for-polynomials.json
+  precheck: pass
 id: thm-spectral-mapping-for-polynomials
 kind: theorem
 title: 'If $\chi_T(x)=\prod_{i<n}(x-\lambda_i)$ in $F[x]$, then $\chi_{p(T)}(y)=\prod_{i<n}(y-p(\lambda_i))$ for every $p\in F[x]$: the eigenvalues of $p(T)$ are $p(\lambda_i)$, counted with algebraic multiplicity'
@@ -11,9 +14,6 @@ deps: [def-polynomial-evaluation-at-an-endomorphism, def-characteristic-polynomi
 aliases: []
 landmark: true
 proof_strategy: induction
-verification:
-  precheck: pass
-  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -54,7 +54,7 @@ Consequently the eigenvalues of $p(T)$ are the values $p(\lambda_i)$, counted wi
 
 ## Proof
 
-**Proof technique:** induction on $n$.
+**Proof technique:** induction on the dimension.
 
 1.1 If $n=0$, both sides are the empty product $1$ by [L2]. [base, L2, algebra]
 

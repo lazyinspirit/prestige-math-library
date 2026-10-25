@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-spectral-sequence-supported-in-one-row-or-column-collapses.md

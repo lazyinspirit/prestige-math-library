@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-hermitian-simple-eigenvalue-derivative-is-a-rayleigh-quotient-direction.md

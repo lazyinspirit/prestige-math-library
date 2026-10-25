@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-directed-reduces-to-undirected-hamiltonian-cycle.json
+  precheck: pass
 id: thm-directed-reduces-to-undirected-hamiltonian-cycle
 kind: theorem
 title: "Directed Hamiltonian cycle polynomial-time many-one reduces to undirected Hamiltonian cycle"
@@ -14,13 +17,7 @@ sources:
   references:
     - title: "MIT 6.045J / 18.400J, Lecture 16: More NP-completeness"
       url: "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/567d75f927ca3c11a819baee9ab260ac_MIT6_045JS11_lec16.pdf"
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -51,3 +48,33 @@ Hamiltonian cycle.
 3.1 Conversely, let $C$ be a Hamiltonian cycle in $G_D$. By step 2.1 and, if necessary, reversing the orientation of $C$, we may assume that every gadget is traversed as $v_1,v_2,v_3$. Whenever $C$ moves from the gadget of $u$ to the gadget of $v$, it uses an edge $u_3v_1$, and such an edge exists only when $(u,v)\in A$. Replacing each gadget path $v_1,v_2,v_3$ by the single vertex $v$ therefore projects $C$ to a directed Hamiltonian cycle of $D$. [F1, step 1.1, step 2.1]
 
 4.1 The map $D\mapsto G_D$ uses $3|V|$ vertices and at most $|A|+2|V|$ edges, so it is polynomial-time. Steps 2.2 and 3.1 prove $D$ has a directed Hamiltonian cycle if and only if $G_D$ has an undirected Hamiltonian cycle. By [L1], this is a polynomial-time many-one reduction. [L1, step 1.1, step 2.2, step 3.1] ∎
+
+
+## Remarks
+
+The two-vertex example below shows how direction is encoded by attachment points, even though the target edges are undirected. Take exactly the arcs $u\to v$ and $v\to u$. Step 1.1 replaces them by $u_3v_1$ and $v_3u_1$, respectively, in addition to the two internal edges of each gadget. Thus the target is the six-cycle $u_1,u_2,u_3,v_1,v_2,v_3,u_1$. In particular, each middle vertex has degree two. The arrows belong only to the source graph; all six target edges are undirected.
+
+```tikz
+\begin{tikzpicture}[x=1.3cm,y=1cm]
+\node at (2,3.2) {Source $D$};
+\node[circle,draw,inner sep=3pt] (u) at (1,2.4) {$u$};
+\node[circle,draw,inner sep=3pt] (v) at (3,2.4) {$v$};
+\draw[->] (u) to[bend left=22] (v);
+\draw[->] (v) to[bend left=22] (u);
+\node at (2,1.5) {Target $G_D$};
+\node[circle,fill,inner sep=2pt,label=above:$u_1$] (u1) at (0,0.7) {};
+\node[circle,fill,inner sep=2pt,label=above:$u_2$] (u2) at (2,0.7) {};
+\node[circle,fill,inner sep=2pt,label=above:$u_3$] (u3) at (4,0.7) {};
+\node[circle,fill,inner sep=2pt,label=below:$v_1$] (v1) at (4,-0.7) {};
+\node[circle,fill,inner sep=2pt,label=below:$v_2$] (v2) at (2,-0.7) {};
+\node[circle,fill,inner sep=2pt,label=below:$v_3$] (v3) at (0,-0.7) {};
+\draw (u1) -- (u2);
+\draw (u2) -- (u3);
+\draw (u3) -- (v1);
+\draw (v1) -- (v2);
+\draw (v2) -- (v3);
+\draw (v3) -- (u1);
+\end{tikzpicture}
+```
+
+For a general input, other arcs can add edges at the $1$- and $3$-vertices, while each $v_2$ still has exactly its two internal neighbours. This is the forced traversal used in step 2.1. The proof above is independent of the illustration.

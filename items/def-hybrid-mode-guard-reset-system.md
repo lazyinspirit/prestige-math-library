@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-hybrid-mode-guard-reset-system.json
+  precheck: n/a
 id: def-hybrid-mode-guard-reset-system
 kind: definition
 title: "Smooth hybrid ODE modes, guards, resets, and deterministic event priority"
@@ -14,8 +17,6 @@ aliases: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Joel M. Esposito, Vijay Kumar, and George J. Pappas, Accurate Event Detection for Simulating Hybrid Systems, HSCC 2001, pp. 204–217"
@@ -31,3 +32,17 @@ A **smooth hybrid ODE system** on a finite horizon $[0,T]$, with $T\ge0$ and pos
 An **event time** for transition $(m,n)$ is a time $\tau$ at which $g_{mn}(\tau,y(\tau))=0$ and the guard crosses in its declared direction, meaning $\sigma_{mn}\frac{d}{dt}g_{mn}(t,y(t))|_{t=\tau}>0$. It is **transverse** with margin $\nu>0$ on a bracket when $\sigma_{mn}\frac{d}{dt}g_{mn}(t,y(t))\ge\nu$ throughout that bracket. At an event, the state changes from $y(\tau^-)$ to $R_{mn}(\tau,y(\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.
 
 A hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\tau_1<\cdots<\tau_N<T$ and some $\delta>0$ with $\tau_{j+1}-\tau_j\ge\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.
+
+## Remarks
+
+For a selected transition $(m,n)$ at time $\tau$, write $x^-=y(\tau^-)$ and $x^+=R_{mn}(\tau,x^-)$. The schematic separates the change of mode from the reset of the continuous state:
+
+```tikz
+\begin{tikzpicture}
+\node[draw,rounded corners,inner sep=8pt] (m) at (0,0) {$m:\ y'=f_m(t,y)$};
+\node[draw,rounded corners,inner sep=8pt] (n) at (8,0) {$n:\ y'=f_n(t,y)$};
+\draw[->] (m) -- node[above] {$g_{mn}(\tau,x^-)=0$} node[below] {$x^+=R_{mn}(\tau,x^-)$} (n);
+\end{tikzpicture}
+```
+
+The arrow keeps time fixed: $(\tau,x^-)\in U_{mn}\subseteq D_m$ is sent to $(\tau,x^+)\in D_n$. It is taken only at an event crossing in the declared orientation, $\sigma_{mn}\frac{d}{dt}g_{mn}(t,y(t))|_{t=\tau}>0$; a guard zero alone does not select the transition. If several enabled guards vanish at the same first time, the fixed priority order selects the arrow. The diagram illustrates the definition and asserts no existence or finiteness of trajectories or events.

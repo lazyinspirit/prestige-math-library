@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-lz78-parse-with-explicit-terminator.json
+  precheck: pass
 id: ex-lz78-parse-with-explicit-terminator
 kind: example
 title: "LZ78 parsing of a finite binary word"
@@ -52,12 +55,12 @@ The trie uses the dictionary indices and appended-symbol edges described in the 
 ```tikz
 \begin{tikzpicture}[every node/.style={draw,circle,inner sep=2pt},>=stealth]
 \node (r) at (0,0) {$0:\epsilon$};
-\node (a) at (-2,-1) {$1:0$};
-\node (b) at (2,-1) {$2:1$};
-\node (aa) at (-2,-2) {$3:00$};
-\node (ba) at (2,-2) {$4:10$};
-\node (baa) at (2,-3) {$5:100$};
-\node[draw=none,rectangle] (end) at (4,-2) {$1\#: \text{output only}$};
+\node (a) at (-2,-1.5) {$1:0$};
+\node (b) at (2,-1.5) {$2:1$};
+\node (aa) at (-2,-3) {$3:00$};
+\node (ba) at (2,-3) {$4:10$};
+\node (baa) at (2,-4.5) {$5:100$};
+\node[draw=none,rectangle] (end) at (5,-3) {$1\#$: output only};
 \draw (r)--node[above left,draw=none] {$0$}(a);
 \draw (r)--node[above right,draw=none] {$1$}(b);
 \draw (a)--node[left,draw=none] {$0$}(aa);

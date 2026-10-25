@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-polynomial-rodl-implies-erdos-hajnal-for-a-finite-family.md

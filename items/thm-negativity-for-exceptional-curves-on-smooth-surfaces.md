@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-negativity-for-exceptional-curves-on-smooth-surfaces.json
+  precheck: pass
 id: thm-negativity-for-exceptional-curves-on-smooth-surfaces
 kind: theorem
 title: "Negativity of contracted curves on regular surfaces"
@@ -27,12 +30,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/resolve.pdf"
     - title: "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)"
       url: "https://www.math.ens.psl.eu/~debarre/M2.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -55,9 +53,9 @@ No similar statement is proved here for curves not contracted by a birational mo
 
 [F1] *cor-degree-additive-proper-curve.* Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $k$ be a field and let $C$ be a proper $k$-scheme (def-proper-morphism) whose underlying topological space has dimension at most one (def-dimension-noetherian-topological-space). For all invertible $\mathcal O_C$-modules $\mathcal L$ and $\mathcal M$ (def-invertible-sheaf): 1. ([[cor-degree-additive-proper-curve]])
 
-[F2] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F2] *The Axiom of Choice.* The **Axiom of Choice** (AC) is the following statement: every family of nonempty sets has a choice function (choice function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
-[F3] *def-cartier-divisor.* Let $X$ be a scheme and let $K_X$ be its sheaf of meromorphic functions, with the injective structure map $\mathcal O_X\to K_X$ (def-sheaf-total-quotient-rings, def-sheaf-on-topological-space). ([[def-cartier-divisor]])
+[F3] *Cartier divisor.* Let $X$ be a scheme and let $K_X$ be its sheaf of meromorphic functions, with the injective structure map $\mathcal O_X\to K_X$ (sheaf of total quotient rings, sheaf on a topological space). ([[def-cartier-divisor]])
 
 [F4] *def-degree-invertible-sheaf-proper-dimension-one.* Assume the Axiom of Choice, inherited from the Euler-characteristic supplier below ([[def-axiom-of-choice]]). Let $k$ be a field (def-field) and let $C$ be a proper $k$-scheme (def-proper-morphism) whose underlying topological space is Noetherian of dimension at most one (def-dimension-noetherian-topological-space, def-locally-noetherian-and-noetherian-scheme). ([[def-degree-invertible-sheaf-proper-dimension-one]])
 
@@ -89,3 +87,23 @@ No similar statement is proved here for curves not contracted by a birational mo
 
 - The three assertions are the pointwise UFD fact, the conormal positivity theorem, and the degree bookkeeping converting conormal positivity into self-intersection negativity.
 - The hypothesis that E is contracted by a birational morphism is used only through the containment E in a fibre of a point.
+
+
+The following diagram records the contraction and the degree signs from steps 2.1–3.1. Here $y$ denotes the closed subscheme $\operatorname{Spec}\kappa(y)\hookrightarrow Y$, and $g$ is the factorization of $f|_E$ through this point. Put $L=\mathcal O_X(-E)|_E$; its dual $L^{\vee}=\mathcal O_X(E)|_E$ is the normal line bundle. The diagram imposes no smoothness or rationality assumption on $E$ or $y$, and the proof above is independent of it.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\normalsize}]
+\node (E) at (0,0) {$E$};
+\node (X) at (6,0) {$X$};
+\node (y) at (0,-1.6) {$y=\mathrm{Spec}\kappa(y)$};
+\node (Y) at (6,-1.6) {$Y$};
+\draw[->] (E) -- node[above] {$i$ (inclusion)} (X);
+\draw[->] (X) -- node[right] {$f$} (Y);
+\draw[->] (E) -- node[left] {$g$} (y);
+\draw[->] (y) -- node[below] {closed immersion} (Y);
+\node[align=center] (L) at (0,-3.4) {conormal $L$\\ $\deg_E L>0$};
+\node[align=center] (N) at (6,-3.4) {normal $L^{\vee}$\\ $\deg_E L^{\vee}<0$};
+\draw[->] (L) -- node[above] {take the dual} (N);
+\node at (3,-4.6) {$E\cdot E=\deg_E L^{\vee}=-\deg_E L<0$};
+\end{tikzpicture}
+```

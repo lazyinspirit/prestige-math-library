@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-projective-hyperplane-sections-decrease-the-defect-of-semismallness.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-relative-volume-density-comparison.json
+  precheck: pass
 id: thm-relative-volume-density-comparison
 kind: theorem
 title: Relative volume density comparison
@@ -23,9 +26,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -83,7 +83,7 @@ $c_p(v)\le\tau$ (the empty conjugate-time set gives $\tau=+\infty$), so $S_v$ an
 
 ## Proof
 
-**Proof technique:** direct: write the logarithm of the relative density as $\log J_p(t,v)-(n-1)\log\operatorname{sn}_k(t)$, differentiate with the logarithmic-derivative identity, bound the trace of the Riccati operator by the traced Riccati inequality and the scalar comparison with the model, and integrate from the common initial value one.
+**Proof technique:** direct: write the logarithm of the relative density as the logarithm of the radial volume Jacobian minus the dimension-minus-one multiple of the logarithm of the model sine, differentiate with the logarithmic-derivative identity, bound the trace of the Riccati operator by the traced Riccati inequality and the scalar comparison with the model, and integrate from the common initial value one.
 
 1.1 The logarithmic derivative of the relative density. [F1, F2, F4, F5, given] On $I$ the functions $J_p(t,v)$ and $\operatorname{sn}_k(t)$ are positive, so $\log q_v=\log J_p(t,v)-(n-1)\log\operatorname{sn}_k(t)$ is differentiable with $$\frac{d}{dt}\log q_v(t)=\operatorname{tr}S_v(t) -(n-1)\frac{\operatorname{sn}_k'(t)}{\operatorname{sn}_k(t)} =\operatorname{tr}S_v(t)-(n-1)\operatorname{ct}_k(t),$$ because $\operatorname{sn}_k'=\operatorname{cs}_k$ and $\operatorname{ct}_k=\operatorname{cs}_k/\operatorname{sn}_k$ by [F4]. By [F2] applied at $q=\exp_p(tv)$ this is also $\Delta_gr_p(\exp_p(tv))-(n-1)\operatorname{ct}_k(t)$; the derivative is computed only for $t\in I\subseteq(0,c_p(v))$, where all factors are defined. [F1, F2, F4, F5, given]
 

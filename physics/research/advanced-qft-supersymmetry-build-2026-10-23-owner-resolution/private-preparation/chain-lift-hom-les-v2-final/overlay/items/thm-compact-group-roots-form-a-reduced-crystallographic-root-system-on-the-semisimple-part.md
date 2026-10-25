@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part.md

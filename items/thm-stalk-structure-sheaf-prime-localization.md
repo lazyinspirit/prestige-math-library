@@ -1,17 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-stalk-structure-sheaf-prime-localization.json
+  precheck: pass
 id: thm-stalk-structure-sheaf-prime-localization
 kind: theorem
-title: "The stalk of the affine structure sheaf at a prime is A_p"
+title: "The stalk of the affine structure sheaf at a prime is the localization at that prime"
 status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [thm-structure-sheaf-affine-scheme, thm-sections-basic-open-affine-scheme, def-stalk-of-presheaf, def-localisation-at-a-prime-ideal, thm-universal-property-of-localisation]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "The Stacks Project, Lemma 26.5.4"

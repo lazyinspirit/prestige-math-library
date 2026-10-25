@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-opposite-group-is-naturally-isomorphic-to-the-identity-functor.md

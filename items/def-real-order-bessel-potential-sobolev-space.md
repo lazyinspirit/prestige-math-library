@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-real-order-bessel-potential-sobolev-space.json
+  precheck: n/a
 id: def-real-order-bessel-potential-sobolev-space
 kind: definition
-title: Real-order Bessel-potential completion H^s
+title: Real-order Bessel-potential completion $H^s$
 status: published
 origin: pipeline
 deps:
@@ -14,12 +17,6 @@ landmark: false
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

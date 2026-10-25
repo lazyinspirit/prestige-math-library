@@ -1,0 +1,75 @@
+{
+  "id": "ex-distance-hessian-and-laplacian-in-space-forms",
+  "agent": "/root/rendering_repair_coordinator/dg_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Independently viewed all four original 1200x1400 tiles at original resolution. Tile 03 shows literal dollar delimiters and TeX commands in the uppercase technique banner; the same notation in the proof body is typeset correctly. The renderer treats this banner as plain text.",
+      "action": "Replaced only the three mathematical snippets in the technique banner with equivalent prose: the curvature parameter; the comparison cotangent times the difference between the metric and the tensor square of the distance differential; and the orthogonal decomposition into the normal hyperplane and real radial line.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Plain-prose workaround for a plain-text proof-technique banner; no mathematical statement or proof-step edits.",
+  "source_lines_after": [
+    120
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains: technique banners render as plain React text with CSS uppercase rather than parsing inline mathematics; the assigned item now avoids math markup there."
+  ],
+  "before_raw_sha256": "cb538675170b393ba8cdc686cf22c87f6105f93f280d119fcae421de75ba7a43",
+  "after_raw_sha256": "02c960407ada70833f8b5c46d1dbcedbde932ca5182059cb022364281412ba1a",
+  "metadata_byte_preserved": true,
+  "publication_status": "published",
+  "original_visual_inspection": {
+    "inspection_dir": "research/math-library-rendering-audit-2026-10-23/differential-geometry",
+    "tiles": [
+      "screenshots/ex-distance-hessian-and-laplacian-in-space-forms--01.png",
+      "screenshots/ex-distance-hessian-and-laplacian-in-space-forms--02.png",
+      "screenshots/ex-distance-hessian-and-laplacian-in-space-forms--03.png",
+      "screenshots/ex-distance-hessian-and-laplacian-in-space-forms--04.png"
+    ],
+    "detail": "original"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-distance-hessian-and-laplacian-in-space-forms.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-distance-hessian-and-laplacian-in-space-forms.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-distance-hessian-and-laplacian-in-space-forms.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_preview": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg007/manifest.json",
+    "source_sha256": "02c960407ada70833f8b5c46d1dbcedbde932ca5182059cb022364281412ba1a",
+    "inspected_tile": "screenshots/ex-distance-hessian-and-laplacian-in-space-forms--03.png",
+    "detail": "original",
+    "result": "The corrected banner is readable prose with no literal dollar signs or TeX commands, fits within the item width, and remains distinct from the typeset proof steps.",
+    "capture_note": "Initial preview completed and produced its manifest, HTML, snapshot and four PNG tiles. A redundant second invocation was refused because the output directory already existed; it did not overwrite the successful preview.",
+    "limitations": "Local ItemBody preview, not production HTTP-route coverage."
+  }
+}

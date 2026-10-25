@@ -1,0 +1,113 @@
+{
+  "id": "cex-knot-kt-43-boundary-case",
+  "agent": "/root/rendering_repair_coordinator/knot_010",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile shows a red failure box rather than a diagram. Independent native node-tikzjax compilation with the application preamble reports Undefined control sequence at the first operatorname{int}; the preamble loads amsfonts and tikz-cd, without defining operatorname.",
+      "action": "Use mathrm{int} in exactly the two punctured-summand diagram labels. No proof or ordinary KaTeX label is changed.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "The first successfully compiled standalone original-resolution tile in preview-knot010-final-20261024 shows the B_0 label overlapping the inner U circle/label and the N(U) subset B_0 label extending through the left summand outline. This was visible after compilation, not inferred from a multi-image viewer.",
+      "action": "Increase coordinate scale from 0.95 to 1.4, raise summand labels and B_0, and shift the containment annotation right. Retain the exact rectangles, sphere separator and concentric circle coordinates/radii.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repair unsupported TikZ interior notation and confirmed label collisions, entirely inside the existing diagram fence.",
+  "source_lines_after": [
+    71,
+    74,
+    75,
+    79,
+    82
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Two punctured Poincare summands X=P minus int(B^3)",
+      "relation": "Both boxes carry exactly the same X label, with the dashed S^2 separator between them.",
+      "justification": "Given names Y=P#P and its connected-sum sphere S; Counterexample step 2.1 identifies the two punctured summands and their S^2 intersection. The separated boxes and intervening line are a schematic decomposition, not a literal embedding of the glued 3-manifold."
+    },
+    {
+      "objects": "B_0 and the standard round unknot U in the left summand",
+      "relation": "The larger circle is contained strictly within the left box; the radius-0.2 circle representing U lies strictly inside the concentric radius-0.55 circle representing B_0. Both are disjoint from the separator at x=2.",
+      "justification": "Given places U in B_0 contained in the first summand and disjoint from S. The larger circle has x-range [-1.75,-0.65] and y-range [-0.65,0.45], inside the left rectangle [-2,1.45] x [-1.15,1.15]. Step 1.1 uses the spanning disk inside B_0. The circle is a schematic unknot, with no crossing/orientation or framing data asserted."
+    },
+    {
+      "objects": "The annotation N(U) subset B_0",
+      "relation": "The neighborhood containment is stated in text, not drawn as a third circle or asserted to fill B_0.",
+      "justification": "Given explicitly supplies a tubular neighborhood N(U) subset B_0. No neighborhood topology or knot invariant is modified. Step 3.1 explicitly states the proof uses homology/homotopy arguments rather than the figure."
+    }
+  ],
+  "guards": {
+    "before_raw_sha256": "ecb2353dc68b9390035b6f4b05893d2db9bb681defba7b9d6c87ce1312a595e6",
+    "immediately_before_edit": "Matched actual raw SHA256 to queue entry before first mutation; subsequent edits guarded against exact expected predecessor bytes.",
+    "after_raw_sha256": "a8a2a804589e0744fb10f4f33f67a3a9ff70e61e6e9f133f8fda66724120fa6b",
+    "frontmatter_byte_identical": true,
+    "outside_diagram_byte_identical": true,
+    "status": "published; exact frontmatter bytes preserved"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-knot-kt-43-boundary-case.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs tools/precheck.mts items/cex-knot-kt-43-boundary-case.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cex-knot-kt-43-boundary-case.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache/knot010-spaced\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-knot-kt-43-boundary-case --out research/math-library-rendering-repairs-2026-10-23/preview-knot010-spaced-20261024",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 32,
+        "tikz_count": 1,
+        "diagram_failures": [],
+        "katex_errors": []
+      }
+    }
+  ],
+  "visual_verification": {
+    "original_flagged_tile": "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/cex-knot-kt-43-boundary-case--01.png",
+    "native_compile_error": "Undefined control sequence at operatorname{int}; Emergency stop.",
+    "final_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/preview-knot010-spaced-20261024/manifest.json",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/preview-knot010-spaced-20261024/screenshots/cex-knot-kt-43-boundary-case.json",
+    "standalone_original_resolution_view": "research/math-library-rendering-repairs-2026-10-23/preview-knot010-spaced-20261024/screenshots/cex-knot-kt-43-boundary-case--01.png",
+    "assessment": "Fresh actual ItemBody/node-tikzjax compiled figure has two readable summand labels, S^2, separate B_0 and U labels and containment annotation inside left box. No clipping or overlap remains.",
+    "intermediate_previews": "original reproduces compile failure; final is a superseded first successful capture; exact captures the delimiter-only intermediate; spaced is the final checked source. A transient replacement outside the fence was immediately restored before final checks; final bytes outside the fence equal frozen before."
+  },
+  "remaining_issues": [
+    "Local ItemBody file preview only; not production-route or native workflow coverage. Preview reference map records 32 unrelated parse diagnostics, outside assigned item scope."
+  ]
+}

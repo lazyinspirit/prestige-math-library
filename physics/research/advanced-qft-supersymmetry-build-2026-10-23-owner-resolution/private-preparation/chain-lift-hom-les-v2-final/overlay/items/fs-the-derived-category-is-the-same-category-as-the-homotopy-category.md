@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-derived-category-is-the-same-category-as-the-homotopy-category.md

@@ -1,0 +1,82 @@
+{
+  "id": "thm-parallelogram-law-in-l-two",
+  "agent": "/root/rendering_repair_supervisor2/mt_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The original standalone 1200x1400 tile visibly prints dollar delimiters and ^2 in the uppercase technique banner while the same formulas in the statement and proof render as math. Frozen and current source initially matched. This is the plain-text technique renderer limitation, not malformed mathematical source.",
+      "action": "Replace only the body technique sentence with equivalent plain prose describing expansion of squared absolute values, cancellation of cross terms, and integration.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced raw-math technique banner with equivalent prose; left the complete Statement and numbered proof byte-identical.",
+  "source_lines_after": [
+    {
+      "line": 42,
+      "text": "**Proof technique:** Expand the squared absolute values of the sum and difference pointwise, cancel the cross terms, and integrate."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "f83b93b0dcf08a3d207e947bfb0d000cfa53327abe3f88718b667ec7ac78fc13",
+  "after_raw_sha256": "d6c89ea72879f99cab5cb933c28c932f38a2442ecd1746429bad5346b6ea2d42",
+  "guard": "Asserted exact before_raw_sha256 immediately before the sole item edit.",
+  "metadata_preserved": "Entire frontmatter byte-identical, including status: published.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-parallelogram-law-in-l-two.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-parallelogram-law-in-l-two.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-parallelogram-law-in-l-two.md",
+            "item_id": "thm-parallelogram-law-in-l-two",
+            "status": "pass",
+            "strategy": "\"Expand"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-parallelogram-law-in-l-two.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_standalone": "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/thm-parallelogram-law-in-l-two--01.png",
+    "original_resolution_inspected": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/mt009-fresh/manifest.json",
+    "preview_source_sha256": "d6c89ea72879f99cab5cb933c28c932f38a2442ecd1746429bad5346b6ea2d42",
+    "reference_map_sha256": "94e18e22f47a17f6b1832cbd68bbdd604016d61551f7e429e4c6be57936a8e5c",
+    "preview_standalone": "research/math-library-rendering-repairs-2026-10-23/previews/mt009-fresh/screenshots/thm-parallelogram-law-in-l-two--01.png",
+    "technique_crop": "research/math-library-rendering-repairs-2026-10-23/previews/mt009-fresh/screenshots/technique-crop.png",
+    "result": "Native preview completed with one tile. Inspected standalone original-resolution tile and pixel crop of banner: the complete uppercase prose is visible without raw math delimiters. A full-tile viewer display artifact omitted text, while the separate native pixel crop shows the complete banner correctly. No source change was made for that artifact.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  },
+  "proof_audit_scope": "Focused rendering correction only; no broad proof audit."
+}

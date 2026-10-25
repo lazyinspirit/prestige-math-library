@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-finite-mdp-common-reward-shift.json
+  precheck: pass
 id: ex-finite-mdp-common-reward-shift
 kind: example
 title: "A common reward shift moves every one-state Bellman value equally"
@@ -20,11 +23,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -72,13 +70,13 @@ Let $S=\{s\}$, $A(s)=\{a,b\}$, and $\gamma=1/2$. Both actions return determinist
 The diagram shows the original MDP only: circles are states, rectangles are actions, state-to-action arrows show the two action choices, and return arrows are labeled by their joint transition masses. The shifted MDP changes the two reward labels from $1,3$ to $3,5$ while leaving both transition probabilities equal to one. The verification does not rely on the diagram.
 
 ```tikz
-\begin{tikzpicture}[>=stealth]
+\begin{tikzpicture}[>=stealth,scale=1.5,transform shape,font=\large]
   \node[circle,draw] (s) at (0,0) {$s$};
   \node[rectangle,draw] (a) at (-2,1.4) {$a$};
   \node[rectangle,draw] (b) at (2,1.4) {$b$};
-  \draw[->] (s) -- node[above left] {choose $a$} (a);
-  \draw[->] (a) to[bend left=22] node[left] {$p(s,1\mid s,a)=1$} (s);
-  \draw[->] (s) -- node[above right] {choose $b$} (b);
-  \draw[->] (b) to[bend right=22] node[right] {$p(s,3\mid s,b)=1$} (s);
+  \draw[->] (s) -- node[pos=0.35,below left] {choose $a$} (a);
+  \draw[->] (a) to[bend left=22] node[pos=0.15,above left,yshift=12pt] {$p(s,1\mid s,a)=1$} (s);
+  \draw[->] (s) -- node[pos=0.35,below right] {choose $b$} (b);
+  \draw[->] (b) to[bend right=22] node[pos=0.15,above right,yshift=12pt] {$p(s,3\mid s,b)=1$} (s);
 \end{tikzpicture}
 ```

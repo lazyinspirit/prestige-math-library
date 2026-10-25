@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-dihedral-noncrossing-interval-and-kreweras-complement.json
+  precheck: pass
 id: ex-cg-dihedral-noncrossing-interval-and-kreweras-complement
 kind: example
 title: "The noncrossing interval of a dihedral group: a five-reflection claw for I2(5) and its complement"
@@ -33,8 +36,7 @@ sources:
     - title: "D. Armstrong, Generalized Noncrossing Partitions and Combinatorics of Coxeter Groups, Memoirs of the AMS 202 (2009), no. 949, arXiv:math/0611106v2"
       url: "https://arxiv.org/pdf/math/0611106"
       locator: "§2.5, printed pp. 27–28, Lemma 2.5.4 (the interval Kreweras map); §2.6, printed pp. 30–33, Definitions 2.6.1 and 2.6.7 and Lemma 2.6.2 (finite Coxeter elements and the interval); the dihedral calculations below are supplied locally from the rank-two presentation and the exact order of st."
-verification:
-  audited: "2026-10-08"
+
 ---
 
 ## Example
@@ -69,7 +71,7 @@ Thus $K$ permutes the reflections in one $m$-cycle, and $K^2$ is the identity on
 
 ## Verification
 
-**Proof technique:** use $c=st$ and the exact order $m$ to list all group elements and reflections, then apply the absolute-order length equality to those two element types.
+**Proof technique:** use the product of the two simple generators and its exact order to list all group elements and reflections, then apply the absolute-order length equality to those two element types.
 
 **Given:** The data above.
 

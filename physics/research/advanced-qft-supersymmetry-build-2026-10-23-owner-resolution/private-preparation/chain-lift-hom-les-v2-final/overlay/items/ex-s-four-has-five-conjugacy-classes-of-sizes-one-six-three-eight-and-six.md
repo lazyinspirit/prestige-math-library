@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-s-four-has-five-conjugacy-classes-of-sizes-one-six-three-eight-and-six.md

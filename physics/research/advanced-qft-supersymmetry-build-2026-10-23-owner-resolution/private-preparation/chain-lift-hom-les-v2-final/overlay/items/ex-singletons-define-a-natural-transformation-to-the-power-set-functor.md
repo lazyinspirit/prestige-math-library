@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-singletons-define-a-natural-transformation-to-the-power-set-functor.md

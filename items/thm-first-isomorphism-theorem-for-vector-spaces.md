@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-first-isomorphism-theorem-for-vector-spaces.json
+  precheck: pass
 id: thm-first-isomorphism-theorem-for-vector-spaces
 kind: theorem
 title: 'First isomorphism theorem for vector spaces: $V/\ker T$ is isomorphic to $\operatorname{im}T$'
@@ -11,9 +14,6 @@ deps: [thm-quotient-vector-space-universal-property, thm-linear-kernel-image-and
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -47,5 +47,13 @@ defines a linear isomorphism $\widetilde T:V/\ker T\to\operatorname{im}T$.
 2.1 Its kernel consists of cosets $v+\ker T$ with $T(v)=0$, hence only the zero coset $\ker T$; [L2] makes $\widetilde T$ injective, so it is an isomorphism, including the zero map and the zero-space case. [step 1.1, L2] ∎
 
 ## Remarks
+
+The canonical factorisation is illustrated by the commuting square below. Here $q(v)=v+\ker T$, $\iota:\operatorname{im}T\hookrightarrow U$ is the inclusion, and $\widetilde T(v+\ker T)=T(v)$, so $\iota\circ\widetilde T\circ q=T$.
+
+```tikzcd
+[row sep=large, column sep=large, cells={nodes={font=\large}}, every label/.append style={font=\normalsize}]
+V \arrow[r, "T"] \arrow[d, "q"'] & U \\
+V/\ker T \arrow[r, "\widetilde T"', "\sim"] & \mathrm{im}\,T \arrow[u, hook, "\iota"']
+```
 
 For finite-dimensional $V$, taking dimensions in this isomorphism gives $\dim V=\dim\ker T+\dim\operatorname{im}T$, the equality recorded independently as [[thm-rank-nullity]]. This is an agreement record, not a premise in the proof above.

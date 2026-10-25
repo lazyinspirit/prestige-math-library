@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-general-polynomial-of-degree-n-has-galois-group-s-n.md

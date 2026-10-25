@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-integral-form-of-the-cyclotomic-hecke-klr-block.md

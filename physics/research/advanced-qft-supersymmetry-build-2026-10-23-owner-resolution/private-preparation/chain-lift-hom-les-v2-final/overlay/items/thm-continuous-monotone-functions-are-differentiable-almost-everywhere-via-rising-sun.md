@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-continuous-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun.md

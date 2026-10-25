@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-xd-finite-state-projection-and-cemetery-lift.json
+  precheck: n/a
 id: def-xd-finite-state-projection-and-cemetery-lift
 kind: definition
 title: "Killed finite-state projection and cemetery lift"
@@ -23,12 +26,7 @@ sources:
     - title: "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)"
       url: "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf"
       locator: "§§3.2–3.4, PDF pp. 7–16; transition rates, finite master equations, and uniformization."
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
+
 ---
 
 ## Definition
@@ -44,3 +42,22 @@ For $x\in F$ let $\lambda(x)=\sum_{y\ne x}q(x,y)$. The killed principal subgener
 $$\widetilde Q_{\dagger x}=\lambda(x)-\sum_{\substack{y\in F\\y\ne x}}q(x,y)=\sum_{y\notin F}q(x,y)\quad(x\in F),\qquad \widetilde Q_{x\dagger}=0\quad(x\in F),\qquad \widetilde Q_{\dagger\dagger}=0.$$
 
 Every column of $\widetilde Q_F$ sums to zero and its off-diagonal entries are nonnegative, so it is a finite column generator in the sense of [[def-xd-finite-column-generator]]. The cemetery state is absorbing; trajectories that return to $F$ after their first exit remain at $\dagger$ in this projection.
+
+
+## Remarks
+
+For illustration, take $F=\{a,b\}$ and write $r_x=\sum_{y\notin F}q(x,y)$ for $x\in F$. The arrows below show off-diagonal transition rates of the cemetery lift; an arrow with rate zero is absent. The oval marks $F$. There are no outgoing transitions from $\dagger$, even if the original chain could later return to $F$.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\draw[dashed] (0,0) ellipse (1.5 and 2);
+\node at (-1.1,1.8) {$F$};
+\node[draw,circle,minimum size=9mm] (a) at (0,1.1) {$a$};
+\node[draw,circle,minimum size=9mm] (b) at (0,-1.1) {$b$};
+\node[draw,circle,minimum size=9mm] (d) at (5,0) {$\dagger$};
+\draw[->] (a) to[bend right=35] node[left] {$q(a,b)$} (b);
+\draw[->] (b) to[bend right=35] node[right] {$q(b,a)$} (a);
+\draw[->] (a) -- node[above] {$r_a$} (d);
+\draw[->] (b) -- node[below] {$r_b$} (d);
+\end{tikzpicture}
+```

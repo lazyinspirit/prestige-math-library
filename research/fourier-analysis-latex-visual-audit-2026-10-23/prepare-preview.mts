@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {createRequire} from 'node:module';
+const root=process.cwd();const out=path.join(root,'research/fourier-analysis-latex-visual-audit-2026-10-23');const web=path.resolve(root,'../prestige-intelligence/web');const r=createRequire(web+'/package.json');const YAML=r('yaml');const React=r('react');const {renderToStaticMarkup}=r('react-dom/server');
+process.env.MATH_LIBRARY_DIR=root;
+process.chdir(web);
+const {ItemBody}=await import(web+'/components/library/ItemBody.tsx');
+const {MathMarkdown}=await import(web+'/components/library/MathMarkdown.tsx');
+const {loadItems,resolveWikilinks}=await import(web+'/lib/math-library.ts');
+
+const all=new Map();for(const f of fs.readdirSync(root+"/items").filter(f=>f.endsWith(".md"))){try{const raw=fs.readFileSync(root+"/items/"+f,"utf8");const fm=YAML.parse(raw.split("---")[1]);const id=fm.id??f.slice(0,-3);all.set(id,{id,title:fm.title??id,aliases:fm.aliases??[],provedHere:fm.kind!=="open-problem"&&fm.proved_here!==false});}catch{}}const sha=(s)=>crypto.createHash('sha256').update(s).digest('hex');
+for(const d of ['html','screenshots','snapshots'])fs.mkdirSync(out+'/'+d,{recursive:true});
+const pages=fs.readdirSync(root+'/library/fourier-analysis').filter(x=>!x.startsWith('_')&&x.endsWith('.md')).sort().map(file=>{let raw=fs.readFileSync(root+'/library/fourier-analysis/'+file,'utf8');return {...YAML.parse(raw.split('---')[1]),file:'library/fourier-analysis/'+file,sha256:sha(raw)};});
+const ids=[...new Set(pages.flatMap(p=>[...p.items??[],...p.examples??[]]))].sort();
+let css=fs.readFileSync(web+'/.next/dev/static/chunks/app_globals_0yg4wg8.css','utf8')+'\n'+fs.readFileSync(web+'/app/library/library-design.css','utf8');
+const katex=fs.readFileSync(web+'/node_modules/katex/dist/katex.min.css','utf8').replace(/url\(fonts\/([^)]*)\)/g,(_,f)=>'url(file://'+web+'/node_modules/katex/dist/fonts/'+f+')');
+fs.writeFileSync(out+'/audit.css',css+'\n'+katex+'\nbody{margin:0;background:#000;color:#ededed;font-family:Arial,sans-serif}main{width:1104px;margin:28px auto;padding-bottom:28px}h1{font-size:25px;font-weight:650;margin:16px 0 24px}.audit-id{font-size:13px;color:#aaa;overflow-wrap:anywhere}h4{margin-top:24px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#aaa}');
+const rows=ids.map((id,i)=>{const raw=fs.readFileSync(root+'/items/'+id+'.md','utf8');const m=raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);if(!m)throw Error(id);let fm=YAML.parse(m[1]),body=m[2];fs.writeFileSync(out+'/snapshots/'+id+'.md',raw);const html=renderToStaticMarkup(React.createElement(React.Fragment,null,React.createElement('div',{className:'audit-id'},id),React.createElement('h1',null,React.createElement(MathMarkdown,null,fm.title)),React.createElement(ItemBody,{body:resolveWikilinks(body,all,fm.forward_refs??[])})));
+fs.writeFileSync(out+'/html/'+id+'.html','<!doctype html><html class="dark library-mirror"><head><meta charset="utf-8"><link rel="stylesheet" href="../audit.css"></head><body><main>'+html+'</main></body></html>');
+return {id,title:fm.title,status:fm.status,lane:String(i%10+1).padStart(2,'0'),source:'items/'+id+'.md',sha256:sha(raw),pages:pages.filter(p=>[...p.items??[],...p.examples??[]].includes(id)).map(p=>p.page),html:'html/'+id+'.html',snapshot:'snapshots/'+id+'.md'};});
+const manifest={version:1,created_at:new Date().toISOString(),scope:'All unique items in items/examples placement lists of every library/fourier-analysis page, all statuses; no external dependency closure.',page_count:pages.length,item_count:rows.length,pages,items:rows,renderer:{itemBody:sha(fs.readFileSync(web+'/components/library/ItemBody.tsx')),mathMarkdown:sha(fs.readFileSync(web+'/components/library/MathMarkdown.tsx')),method:'Actual application ItemBody/MathMarkdown SSR with actual resolveWikilinks; local browser preview using existing application CSS and KaTeX fonts. Not production HTTP pages.'}};
+fs.writeFileSync(out+'/manifest.json',JSON.stringify(manifest,null,2)+'\n');for(let n=1;n<=10;n++){let lane=String(n).padStart(2,'0');fs.writeFileSync(out+'/assignment-'+lane+'.json',JSON.stringify(rows.filter(x=>x.lane===lane),null,2)+'\n');}console.log('Prepared',rows.length,'items',pages.length,'pages');

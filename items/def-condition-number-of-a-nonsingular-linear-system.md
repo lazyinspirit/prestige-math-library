@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-condition-number-of-a-nonsingular-linear-system.json
+  precheck: n/a
 id: def-condition-number-of-a-nonsingular-linear-system
 kind: definition
-title: "The condition number kappa_p(A) = ||A||_p ||A^{-1}||_p of a nonsingular linear system"
+title: 'The condition number $\kappa_p(A) = \lVert A\rVert_p\,\lVert A^{-1}\rVert_p$ of a nonsingular linear system'
 status: published
 origin: pipeline
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: not-applicable
 deps: [def-induced-matrix-p-norm, thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized, def-invertible-matrix-and-general-linear-group]
 aliases: []
-verification:
-  audited: 2026-08-29
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -43,7 +39,7 @@ $$\kappa_p(A)\;:=\;\lVert A\rVert_p\,\lVert A^{-1}\rVert_p\;\in\;[1,+\infty).$$
 unique two-sided inverse of $A$ ([[def-invertible-matrix-and-general-linear-group]]),
 so $AA^{-1}=I_n$ and $A^{-1}A=I_n$. For rational finite $p$,
 submultiplicativity and normalisation are
-[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]].
+[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized|Induced matrix norms are compatible with matrix-vector multiplication, submultiplicative, and satisfy $\lVert I\rVert = 1$]].
 For $p=\infty$, the same properties follow directly from the defining
 supremum: $\lVert Ax\rVert_\infty\le\lVert A\rVert_\infty\lVert x\rVert_\infty$
 and applying this estimate twice gives submultiplicativity, while

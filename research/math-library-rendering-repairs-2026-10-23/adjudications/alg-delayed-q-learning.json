@@ -1,0 +1,112 @@
+{
+  "id": "alg-delayed-q-learning",
+  "agent": "/root/rendering_repair_coordinator/dorl_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic standalone original tile shows the complete algorithm as one dense paragraph with no diagram. A two-state per-pair flag diagram materially clarifies the two clock comparisons: failure pauses only when b exceeds the global last-update clock, whereas a subsequent visit reactivates when the opposite comparison holds. This is useful explanatory content even though the procedure is already completely defined.",
+      "action": "Appended a final Remarks section with a two-state, five-transition TikZ diagram and precise batch/clock interpretation.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a per-pair learning-enabled/paused state diagram without changing any existing source byte. Remarks explain successful/failed batches, reset timing, global-clock reactivation, and possible multiple transitions within one visit.",
+  "source_lines_after": [
+    56,
+    58,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    72
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Fixed admissible pair (s,a) in the finite MDP domain D; nodes E and D represent L(s,a)=true and false, not MDP states. Internal Q, B, ell, b and global t* retain Definition line 40 meanings.",
+      "justification": "Read alg-delayed-q-learning Definition, def-pac-mdp-bounded-reward-model Definition (finite admissible domain), def-admissible-mdp-heuristic Definition (initial U), and alg-q-learning Definition (greedy-successor target). No probabilistic independence or convergence assertion is introduced."
+    },
+    {
+      "relation": "E -> D exactly after a failed completed batch with b(s,a)>t*.",
+      "justification": "Definition line 40 sets L=false exactly under this conjunction in the otherwise branch of Q-barB>=2 epsilon1. The Remarks define failed as the strict opposite inequality; reset of B and ell occurs after either completed-batch outcome."
+    },
+    {
+      "relation": "D -> E at a visit with b(s,a)<=t*, before taking the new sample; D -> D with b(s,a)>t* skips sampling.",
+      "justification": "The first visit test of Definition line 40 sets L=true before testing the flag for sampling. If that test does not reactivate a paused pair, no sample/Q update occurs. t* is global and only successful batches change it, so updates at other pairs can enable this test."
+    },
+    {
+      "relation": "Two E -> E loops: successful batch updates Q=barB+epsilon1 and t*=t; incomplete batch or failed batch with b<=t* retains the true flag.",
+      "justification": "Definition line 40 updates Q/t* on the successful threshold branch without setting L=false. The failed branch sets L=false only if b>t*. Before ell=m the batch merely accumulates and retains its flag. Caption explicitly states all completed batches reset B/ell and b is set on the first sample."
+    },
+    {
+      "relation": "A reactivation and subsequent completed-batch transition can happen in the same visit, including m=1.",
+      "justification": "The visit test precedes the sampling block in Definition line 40. Final caption explicitly permits traversal of two arrows within one visit, so arrows are event transitions rather than a false claim of one arrow per interaction."
+    },
+    {
+      "relation": "Rigorous mathematical content remains independent of the figure.",
+      "justification": "The full algorithm Definition is byte-identical to the frozen before source. No proof is present or required for this algorithm item, and the diagram substitutes for no proof or procedure clause."
+    }
+  ],
+  "checks": {
+    "before_raw_sha256": "2aa603334941644fff236a638e8941bfa5c4034bf187e2932c07e95efe611746",
+    "guard": "Immediately before the append, SHA256 was checked against queue before_raw_sha256 and matched. Frozen/current source initially cmp-identical.",
+    "final_raw_sha256": "fc1569d04ba6014e3f9dfede9c57baaed596aed1bb35e91c2ab847190b8deae1",
+    "preservation": "Current source starts with every byte of the frozen before file; entire frontmatter including status: published unchanged.",
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-delayed-q-learning.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-delayed-q-learning.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 0,
+        "failed": 0,
+        "status": "not-applicable"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/alg-delayed-q-learning.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      },
+      "development_note": "An initial rendercheck false-positive paired dollars across TikZ line breaks immediately adjacent to dollars. Inserting TeX whitespace between the line break and math delimiter retained identical intended labels and resolved all reported errors."
+    },
+    "native_preview": {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl003 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-delayed-q-learning --out research/math-library-rendering-repairs-2026-10-23/previews/dorl003-v2",
+      "exit_code": 0,
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl003-v2/manifest.json",
+      "manifest_sha256": "f954c74f6f2f8c89ea359b003dd961821c5dae728f670128548dd37ae2e195d0",
+      "source_binding": "fc1569d04ba6014e3f9dfede9c57baaed596aed1bb35e91c2ab847190b8deae1",
+      "svg": "research/math-library-rendering-repairs-2026-10-23/runtime-dorl003/pi-tikz-cache/47bbd49c6147f0d90d57f4173ccf06ad.svg",
+      "svg_sha256": "5ae59041359b3dd5e9654ccbf94de80bb4d9c360b82cb50d676364bcf948f2d6",
+      "visual_inspection": "Viewed both final native PNG tiles individually at original resolution and standalone diagram-crop.png at original resolution. Two state boxes, two inter-state arrows, and three complete self-loops have visible arrowheads; no missing closing segment (no --cycle used). Label/line contrast is visible against native black background; SVG uses currentColor/none fills and strokes without pale opaque fills. No open/closed mathematical endpoints are asserted. Nonvertex edge crossings near E do not carry dots or imply states. All transition labels remain unobstructed.",
+      "limitations": "Preview covers native local ItemBody, not a live HTTP route. Reference map reports 16 unrelated malformed-source diagnostics; assigned carrier renders successfully."
+    }
+  },
+  "original_evidence": {
+    "declared_path_missing": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/diagram-supplement/screenshots/alg-delayed-q-learning--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/alg-delayed-q-learning--01.png",
+    "resolved_sha256": "989170ba4ffef31d704a682abdbac4fe80a121fc52a206eced71540bf3b69621",
+    "inspection": "Located authentic category-level PNG and verified its hash exactly equals queue screenshot_sha256; viewed standalone at original resolution."
+  },
+  "remaining_issues": []
+}

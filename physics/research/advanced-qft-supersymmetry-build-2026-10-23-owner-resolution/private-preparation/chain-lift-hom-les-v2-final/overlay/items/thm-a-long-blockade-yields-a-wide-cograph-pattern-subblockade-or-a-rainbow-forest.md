@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-long-blockade-yields-a-wide-cograph-pattern-subblockade-or-a-rainbow-forest.md

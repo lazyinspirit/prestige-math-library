@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cz-bad-part-is-integrable-away-from-expanded-cubes.md

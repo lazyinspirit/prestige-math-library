@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b.md

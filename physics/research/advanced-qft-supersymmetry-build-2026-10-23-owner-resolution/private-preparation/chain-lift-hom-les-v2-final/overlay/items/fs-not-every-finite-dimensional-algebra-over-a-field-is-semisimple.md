@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-not-every-finite-dimensional-algebra-over-a-field-is-semisimple.md

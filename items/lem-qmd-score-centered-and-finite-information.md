@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-qmd-score-centered-and-finite-information.json
+  precheck: pass
 id: lem-qmd-score-centered-and-finite-information
 kind: lemma
 title: A QMD score is centered and has finite information
@@ -18,11 +21,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: Peter Bartlett, Theoretical Statistics, Stat 210B Lecture 22, PDF pp. 8–9
@@ -69,7 +67,7 @@ inequality.
 
 ## Proof
 
-**Proof technique:** differentiate the squared $L^2(\mu)$ norm along a line.
+**Proof technique:** differentiate the squared norm of the square-root density along a line.
 
 1.1 Fix $v\in\mathbb R^d$ and put $f_t=\sqrt{p_{\theta_0+tv}}$, $f_0=\sqrt{p_{\theta_0}}$. By [F1]–[F2], $f_t-f_0=\tfrac t2(v^Ts)f_0+r_{tv},\qquad \|r_{tv}\|_2=o(|t|).$ Since each density integrates to one, $\|f_t\|_2=\|f_0\|_2=1$, and $0=2\langle f_0,f_t-f_0\rangle+\|f_t-f_0\|_2^2.$ This identity uses the unit norms of the square-root densities. [A1, F1, F2, given, algebra]
 

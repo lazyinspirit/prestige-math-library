@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy.md

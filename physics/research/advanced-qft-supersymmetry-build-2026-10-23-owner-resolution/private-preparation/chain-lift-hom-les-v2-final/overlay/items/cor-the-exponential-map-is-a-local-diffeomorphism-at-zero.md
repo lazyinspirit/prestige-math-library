@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-exponential-map-is-a-local-diffeomorphism-at-zero.md

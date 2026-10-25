@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-horseshoe-connecting-map-is-independent-without-a-comparison-proof.md

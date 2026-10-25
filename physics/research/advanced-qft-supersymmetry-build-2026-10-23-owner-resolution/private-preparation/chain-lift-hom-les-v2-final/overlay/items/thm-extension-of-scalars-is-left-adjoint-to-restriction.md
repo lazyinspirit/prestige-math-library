@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-extension-of-scalars-is-left-adjoint-to-restriction.md

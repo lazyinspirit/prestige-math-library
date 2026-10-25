@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-weyl-group-of-a-n-is-the-symmetric-group.json
+  precheck: pass
 id: ex-weyl-group-of-a-n-is-the-symmetric-group
 kind: example
-title: The Weyl group of A_n is the symmetric group
+title: The Weyl group of $A_n$ is the symmetric group
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -16,8 +19,7 @@ sources:
       locator: "Lecture 21, Example 21.8"
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example

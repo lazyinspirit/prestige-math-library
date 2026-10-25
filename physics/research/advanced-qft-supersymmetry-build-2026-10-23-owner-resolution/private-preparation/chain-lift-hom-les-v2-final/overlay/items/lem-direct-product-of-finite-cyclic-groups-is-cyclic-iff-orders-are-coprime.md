@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-direct-product-of-finite-cyclic-groups-is-cyclic-iff-orders-are-coprime.md

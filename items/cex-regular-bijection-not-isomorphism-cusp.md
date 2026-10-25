@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-regular-bijection-not-isomorphism-cusp.json
+  precheck: n/a
 id: cex-regular-bijection-not-isomorphism-cusp
 kind: counterexample
-title: "The cusp parametrization t mapsto (t^2,t^3) is bijective but not an isomorphism"
+title: 'The cusp parametrization $t \mapsto (t^2,t^3)$ is bijective but not an isomorphism'
 status: published
 origin: session
 provenance:
@@ -9,12 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-morphism-classical-varieties, thm-affine-morphisms-coordinate-ring-anti-equivalence]
 justified_by: []
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:

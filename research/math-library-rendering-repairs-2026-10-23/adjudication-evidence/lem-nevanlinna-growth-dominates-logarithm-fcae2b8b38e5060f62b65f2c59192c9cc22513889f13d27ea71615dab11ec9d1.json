@@ -1,0 +1,88 @@
+{
+  "id": "lem-nevanlinna-growth-dominates-logarithm",
+  "agent": "/root/rendering_repair_coordinator/cxa_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile 01 shows literal $T=O(\\LOG R)$ in the uppercase proof-technique banner, whereas the same notation in numbered proof steps is rendered mathematically. The banner is plain renderer text, so TeX delimiters are exposed.",
+      "action": "Replaced only $T=O(\\log r)$ in the banner with equivalent plain text T = O(log r).",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Local plain-text workaround for proof-technique renderer limitation; no application code changed.",
+  "source_lines_after": {
+    "52": "**Proof technique:** shift the convex Ahlfors–Shimizu potential to the logarithmic variable; a bounded ratio on an unbounded sequence and the convexity chord bound force T = O(log r), which the rational characterization converts into a contradiction with transcendence."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The renderer still treats proof-technique banners as plain uppercase text; the assigned item uses a compatible local workaround.",
+    "Fresh preview tile 01 has missing painted content outside the changed banner; the banner itself is visible and verified, and tile 02 renders its proof content normally. No broader visual-coverage claim is made."
+  ],
+  "before_raw_sha256": "13e1fe34591e0733b29a1f783e2eaea38a626bc34c6fc2fde46478a6698a7d15",
+  "after_raw_sha256": "b3b7ad114f0d270990e8d77455b29e93e0447cc891a58bab3bc3fcd3845f6b60",
+  "guard": "Immediately before edit the raw SHA256 equaled the queue before_raw_sha256.",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "original_evidence": {
+    "image": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/lem-nevanlinna-growth-dominates-logarithm--01.png",
+    "view": "standalone original resolution"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-nevanlinna-growth-dominates-logarithm.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-nevanlinna-growth-dominates-logarithm.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/lem-nevanlinna-growth-dominates-logarithm.md",
+            "item_id": "lem-nevanlinna-growth-dominates-logarithm",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-nevanlinna-growth-dominates-logarithm.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "local_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-cxa-007 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-nevanlinna-growth-dominates-logarithm --out research/math-library-rendering-repairs-2026-10-23/previews/cxa-007",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa-007/manifest.json",
+    "manifest_sha256": "e69c567bb78240d6bfa63534bd29f372a6877f1f97bb201d129cb66be1f62cb4",
+    "source_sha256": "b3b7ad114f0d270990e8d77455b29e93e0447cc891a58bab3bc3fcd3845f6b60",
+    "reference_map_sha256": "ba2565e27284174a981ecfee07a5c3bf9b6cdc5854e7394309d6723246f573f7",
+    "viewed_original_resolution": [
+      "screenshots/lem-nevanlinna-growth-dominates-logarithm--01.png",
+      "screenshots/lem-nevanlinna-growth-dominates-logarithm--02.png"
+    ],
+    "banner_result": "Corrected banner visibly displays T = O(LOG R) without dollar delimiters or backslash commands.",
+    "katex_errors": [],
+    "katex_count": 81,
+    "tikz_count": 0,
+    "diagram_failures": []
+  }
+}

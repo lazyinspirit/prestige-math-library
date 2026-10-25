@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-affine-variety-product-coordinate-ring.json
+  precheck: pass
 id: thm-affine-variety-product-coordinate-ring
 kind: theorem
-title: The product of affine varieties has coordinate ring k[X] tensor_k k[Y]
+title: The product of affine varieties has coordinate ring $k[X] \otimes_k k[Y]$
 status: published
 origin: pipeline
 provenance:
@@ -16,9 +19,7 @@ sources:
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
     - title: MIT 18.725 Algebraic Geometry, Lecture 7 Products and Lemma 15
       url: https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf
-verification:
-  audited: 2026-09-07
-  precheck: pass
+
 ---
 
 ## Statement

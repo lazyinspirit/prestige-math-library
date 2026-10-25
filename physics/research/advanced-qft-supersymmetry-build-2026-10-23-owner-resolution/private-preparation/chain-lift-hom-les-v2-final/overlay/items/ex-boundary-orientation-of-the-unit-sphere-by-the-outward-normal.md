@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-boundary-orientation-of-the-unit-sphere-by-the-outward-normal.md

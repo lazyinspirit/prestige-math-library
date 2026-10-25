@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-hodge-index-theorem-for-smooth-projective-surfaces.json
+  precheck: pass
 id: thm-hodge-index-theorem-for-smooth-projective-surfaces
 kind: theorem
 title: "The Hodge index theorem for smooth projective surfaces"
@@ -20,11 +23,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21"
@@ -64,7 +62,7 @@ ample.
 
 
 ## Proof
-**Proof technique:** direct: fix an ample reference class and reduce to the ample case, once directly and once through a perturbation $M$ depending on $H$ and $L$.
+**Proof technique:** direct: fix an ample reference class and reduce to the ample case, once directly and once through a perturbation M depending on H and L.
 
 1.1 The case $A\cdot L=0$. Let $A$ be an ample class as in [F1]. If $A\cdot L=0$, then [F2] applied to $A$ and $L$ gives $L\cdot L\le0$ with equality if and only if $L$ is numerically trivial; this is exactly (a) and (b) in this case. [F1, F2]
 

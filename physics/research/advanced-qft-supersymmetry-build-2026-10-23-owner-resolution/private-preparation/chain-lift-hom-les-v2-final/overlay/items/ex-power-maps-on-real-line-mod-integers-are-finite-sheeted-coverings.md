@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-power-maps-on-real-line-mod-integers-are-finite-sheeted-coverings.md

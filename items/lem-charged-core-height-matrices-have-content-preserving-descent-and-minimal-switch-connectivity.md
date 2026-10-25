@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-charged-core-height-matrices-have-content-preserving-descent-and-minimal-switch-connectivity.json
+  precheck: pass
 id: lem-charged-core-height-matrices-have-content-preserving-descent-and-minimal-switch-connectivity
 kind: lemma
 title: "Charged core height matrices: hub-preserving descent and minimal switch connectivity"
@@ -16,8 +19,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Matthew Fayers, Core blocks of Ariki–Koike algebras, author manuscript, J. Algebraic Combin. 26 (2007), 47–81"
@@ -88,3 +89,30 @@ of [F1]–[F3].
 ## Remarks
 
 The energy argument is the normalized replacement for Fayers' weight-theory proof: the column potential makes the minimal rows balanced, every switch is scored by $\gamma-2$, and zero exchanges never change the core size, so the combinatorics of minimal cores reduces to the ultra-tight multiset lemma and the binary-switch connectivity argument. All steps are finite. No choice principle is used.
+
+
+For distinct runners $0\le i,j<e$ and distinct components $1\le a,b\le\ell$,
+the switch in step 1.4 changes only the displayed entries of $T=T(\kappa)$,
+producing $T'=T(\kappa')$. The labels keep the runner indices on rows and
+the component indices on columns.
+
+```tikz
+\begin{tikzpicture}
+\node at (0,1.9) {$T$};
+\node at (6.8,1.9) {$T'$};
+\node at (0,0.6) {$\begin{array}{c|cc} & a & b\\ \hline i & t_{ia} & t_{ib}\\ j & t_{ja} & t_{jb}\end{array}$};
+\node at (6.8,0.6) {$\begin{array}{c|cc} & a & b\\ \hline i & t_{ia}-1 & t_{ib}+1\\ j & t_{ja}+1 & t_{jb}-1\end{array}$};
+\draw[->,thick] (2.2,0.6) -- (4.2,0.6);
+\node at (3.2,1.1) {switch};
+\node at (3.4,-0.8) {Each row sum and each column sum is unchanged.};
+\node at (3.4,-1.7) {$\gamma=t_{ia}-t_{ib}-t_{ja}+t_{jb}\ge2$};
+\node at (3.4,-2.5) {$|\kappa'|-|\kappa|=\frac{e}{2}(4-2\gamma)=-e(\gamma-2)\le0$};
+\end{tikzpicture}
+```
+
+The two changes in each affected row and column sum to zero, so the hub and
+charges stay fixed by step 1.3. Steps 1.4 and 2.2 give the size change shown:
+$\gamma=2$ preserves size and hence content by step 2.1, whereas
+$\gamma\ge3$ strictly decreases size. The diagram illustrates a single
+oriented switch; the descent and connectivity proofs above remain independent
+of it.

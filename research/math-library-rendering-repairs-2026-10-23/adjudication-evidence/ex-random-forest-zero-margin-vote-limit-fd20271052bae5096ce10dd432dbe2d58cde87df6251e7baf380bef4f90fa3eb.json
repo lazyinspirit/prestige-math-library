@@ -1,0 +1,71 @@
+{
+  "id": "ex-random-forest-zero-margin-vote-limit",
+  "agent": "/root/rendering_repair_coordinator/slcm_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Both original tiles were independently viewed standalone at original resolution. Tile 1 shows a red diagram-failure block. A genuine native node-tikzjax compile with the app preamble reports Undefined control sequence at \\tfrac. The tree structure itself is supported: the final native ItemBody renders both original trees after replacing only the unsupported fraction macro.",
+      "action": "Replaced the two TikZ-label occurrences of \\tfrac12 with \\frac12; retained original tree grammar and all mathematical content.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Use supported equivalent \\frac in the two root labels so the existing two-tree illustration compiles.",
+  "source_lines_after": [
+    41,
+    44
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and branches",
+      "evidence": "The mixed bootstrap has one copy of each training point (0,1), label 0, and (1,0), label 1. Algorithm alg-bagged-random-forest defines the left branch by feature <= threshold and the right by > threshold. At feature 1 threshold 1/2, the left leaf is 0 and right leaf 1; at feature 2 the left leaf is 1 and right leaf 0. Both unchanged trees match these cases."
+    },
+    {
+      "check": "Test-point routes and finite combinatorics",
+      "evidence": "Both coordinates of x*=(1/4,1/4) are <=1/2. It follows that the left child is selected in both trees, giving respective labels 0 and 1, exactly as Verification step 2.1 states. Final visual inspection counted six nodes and four downward edges, two edges from each root, with no cross-tree edge or missing branch."
+    },
+    {
+      "check": "Proof independence",
+      "evidence": "The four numbered Verification steps derive bootstrap counts, class probability 1/2, odd-vote risk expectation, and the dominated-convergence contradiction directly. No step uses the figure; no proof text changed."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-random-forest-zero-margin-vote-limit.md --json",
+      "exit_code": 0,
+      "result": "1 file, 1 proof checked, 0 failed; direct strategy pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-random-forest-zero-margin-vote-limit.md --json",
+      "exit_code": 0,
+      "result": "checked 1; errors []; warnings []"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-random-forest-zero-margin-vote-limit.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 4 steps, 0 defects"
+    }
+  ],
+  "visual_verification": {
+    "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-cache/slcm005-final\" TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-random-forest-zero-margin-vote-limit --out research/math-library-rendering-repairs-2026-10-23/slcm005-native-preview-final",
+    "exit_code": 0,
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/slcm005-native-preview-final/screenshots/ex-random-forest-zero-margin-vote-limit.json",
+    "result": "Actual application ItemBody/TikzDiagram native SSR compilation: tikz_count 1, diagram_failures [], katex_errors []. Both final tiles viewed standalone original resolution. The initial final tile had a browser capture paint artifact obscuring introductory text; an additional file-only Playwright capture after fonts and two animation frames produced a complete page, independently viewed at original resolution.",
+    "complete_recapture": "research/math-library-rendering-repairs-2026-10-23/slcm005-native-preview-final/recapture.png",
+    "limitations": "Local file ItemBody preview; external requests blocked, no live HTTP site. Current reference-map preview reports 16 unrelated parse diagnostics; no assigned reference failure observed."
+  },
+  "guard": {
+    "before_raw_sha256": "e5d6855059e652e57994b1e6cffbdea682bba01d22b79ad081678de4acdb9876",
+    "matched_immediately_before_initial_edit": true,
+    "current_raw_sha256": "3068d995cc4eda609401d3532d54eda6a249bcd5b2dde5688c3c40b67f696c82",
+    "frontmatter_byte_identical": true
+  },
+  "remaining_issues": []
+}

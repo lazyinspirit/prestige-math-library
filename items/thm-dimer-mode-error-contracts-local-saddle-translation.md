@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-dimer-mode-error-contracts-local-saddle-translation.json
+  precheck: pass
 id: thm-dimer-mode-error-contracts-local-saddle-translation
 kind: theorem
 title: "A gap-controlled dimer mode gives a local saddle-translation error recurrence"
@@ -107,3 +110,27 @@ Thus exact translation gradients give local contraction, while a fixed bounded t
 
 4.1 If $\|e\|_2\le r$, step 3.1 and [A4] give $\|x^+-x_*\|_2\le\kappa r+\sigma\eta\le r$, so each attempted update stays in the ball and the recurrence can be iterated. Induction on $k$ yields $\|x_k-x_*\|_2\le\kappa^k\|x_0-x_*\|_2+\sigma\eta\sum_{j=0}^{k-1}\kappa^j$. Since $0\le\kappa<1$, the finite geometric sum is $(1-\kappa^k)/(1-\kappa)$, giving the stated error bound. [A4, step 3.1, induction, algebra] ∎
 
+
+
+## Remarks
+
+The diagram illustrates the scalar majorant $f(t)=\kappa t+\sigma\eta$ for the error radius $t=\|x-x_*\|_2$, rather than a trajectory in configuration space. In the nondegenerate case $0<\sigma\eta<(1-\kappa)r$ and $0<\kappa<1$, its fixed radius is $\rho=\sigma\eta/(1-\kappa)<r$. The drawing is schematic: the intercept and slope are not to scale. Step 3.1 gives $\|x^+-x_*\|_2\le f(t)$, and step 4.1 gives $f(r)\le r$; points above $\rho$ have $f(t)<t$, whereas the noise bound need not force a decrease below $\rho$. When $\eta=0$, the fixed radius is zero; when $\sigma\eta=(1-\kappa)r$, it is $r$.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\draw[->] (0,0) -- (4.6,0) node[right] {$t$};
+\draw[->] (0,0) -- (0,4.55) node[above] {radius bound};
+\draw[dashed] (0,0) -- (4,4) node[above right] {$y=t$};
+\draw[thick] (0,0.8) -- (4,3) node[right] {$y=f(t)$};
+\draw[dotted] (4,0) -- (4,4) -- (0,4);
+\draw[dotted] (1.7778,0) -- (1.7778,1.7778) -- (0,1.7778);
+\fill (1.7778,1.7778) circle (1.6pt);
+\fill (4,3) circle (1.6pt);
+\node[below] at (1.7778,0) {$\rho$};
+\node[below] at (4,0) {$r$};
+\node[left] at (0,0.8) {$\sigma\eta$};
+\node[left] at (0,1.7778) {$\rho$};
+\node[left] at (0,4) {$r$};
+\node[below left] at (0,0) {$0$};
+\end{tikzpicture}
+```

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-published-prefix-automata-extend-to-factor-avoidance-dfas.md

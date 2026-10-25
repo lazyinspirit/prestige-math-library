@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family.md

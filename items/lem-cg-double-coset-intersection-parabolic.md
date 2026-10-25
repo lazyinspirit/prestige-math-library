@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cg-double-coset-intersection-parabolic.json
+  precheck: pass
 id: lem-cg-double-coset-intersection-parabolic
 kind: lemma
-title: "The parabolic intersection W_I cap dW_Jd inverse for d in ^IW^J"
+title: 'The parabolic intersection $W_I\cap dW_Jd^{-1}$ for $d\in{}^IW^J$'
 status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
@@ -21,13 +24,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   scraped: []
   references:

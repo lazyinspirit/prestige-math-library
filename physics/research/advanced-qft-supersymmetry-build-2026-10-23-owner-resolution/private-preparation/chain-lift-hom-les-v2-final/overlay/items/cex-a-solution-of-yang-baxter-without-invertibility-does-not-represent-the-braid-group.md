@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-solution-of-yang-baxter-without-invertibility-does-not-represent-the-braid-group.md

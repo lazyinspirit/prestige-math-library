@@ -1,0 +1,55 @@
+---
+id: ex-hotelling-t2-two-dimensional-exact-test
+kind: example
+title: A two-dimensional Hotelling statistic and its exact F cutoff
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 5
+deps:
+  - def-axiom-of-choice
+  - def-multivariate-normal-sample-model-and-statistics
+  - thm-hotelling-t2-exact-f-distribution
+  - cor-exact-hotelling-one-sample-test
+  - def-student-t-and-f-laws
+  - lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Arak Mathai, Serge Provost, and Hans J. Haubold, Multivariate Statistical Analysis in the Real and Complex Domains, Chapter 6 §§6.3–6.4, PDF pp. 20–42"
+      url: "https://link.springer.com/content/pdf/10.1007/978-3-030-95864-0_6.pdf"
+    - title: "Soumendu Mukherjee, Multivariate Analysis 2021, Lecture 3, PDF pp. 1–5"
+      url: "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-3.pdf"
+    - title: "Peter D. Hoff, Multivariate Statistical Analysis, Duke STA 832 lecture notes, relevant sections in Chapters 4 and 7"
+      url: "https://www2.stat.duke.edu/~pdh10/Teaching/832/Materials/notes.pdf"
+verification:
+  precheck: pass
+---
+
+## Example
+
+Assume AC and use the iid multivariate-normal sample model with $p=2$, $n=4$, and fixed positive-definite covariance $\Sigma$. For the observation $x_1=(1,0)^T$, $x_2=(-1,0)^T$, $x_3=(0,1)^T$, and $x_4=(0,-1)^T$, test $H_0:\mu=\mu_0$ with $\mu_0=(1,1)^T$. The sample mean is zero, the sample covariance is $(2/3)I_2$, the Hotelling statistic is $T^2=12$, and its scaled $F_{2,2}$ statistic is $4$. For a chosen $0<\alpha<1$, the exact test rejects precisely when $4>F_{2,2}^{-1}(1-\alpha)$.
+
+## Facts & Assumptions
+
+**Given:** AC, the iid $N_2(\mu,\Sigma)$ sample model with fixed $\Sigma\succ0$, the four displayed observed vectors, $n=4$, $p=2$, $\mu_0=(1,1)^T$, and $0<\alpha<1$.
+
+[F1] The sample covariance is $S=\sum_i(x_i-\bar x)(x_i-\bar x)^T/(n-1)$. [[def-multivariate-normal-sample-model-and-statistics]]
+
+[F2] Under AC, in the iid multivariate-normal model with $\Sigma\succ0$ and $n>p$, $T^2=n(\bar X-\mu_0)^TS^{-1}(\bar X-\mu_0)$ when $S\succ0$ and is zero otherwise. Under $\mu=\mu_0$, $(n-p)T^2/(p(n-1))$ has law $F_{p,n-p}$. [[thm-hotelling-t2-exact-f-distribution]]
+
+[F3] Under the same model assumptions and $0<\alpha<1$, the test rejects when the scaled statistic exceeds the $1-\alpha$ quantile and has exact null size $\alpha$ over all $\Sigma\succ0$. [[cor-exact-hotelling-one-sample-test]]
+
+[F4] $F_{r,s}^{-1}(u)$ is the unique $u$-quantile of the F distribution for positive degrees of freedom. [[def-student-t-and-f-laws]] [[lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing]]
+
+## Verification
+
+1.1 The four vectors sum to zero, so $\bar x=0$. Their outer products sum to $2I_2$, hence $R=2I_2$ and $S=R/3=(2/3)I_2$ by [F1]. This matrix is positive definite and has inverse $(3/2)I_2$. [given, F1, algebra]
+
+2.1 The difference $\bar x-\mu_0=(-1,-1)^T$ has squared Euclidean norm $2$. Therefore [F2] gives $T^2=4(3/2)\cdot2=12$, and the scale $(n-p)/(p(n-1))=2/(2\cdot3)=1/3$ makes the F statistic equal $4$. [F2, step 1.1, algebra]
+
+3.1 By [F3]–[F4], applying the exact test rule to this observation is exactly the stated comparison $4>F_{2,2}^{-1}(1-\alpha)$. The example reports the rule as a function of $\alpha$ and does not infer a rejection decision without choosing $\alpha$. [F3, F4, step 2.1] ∎
+

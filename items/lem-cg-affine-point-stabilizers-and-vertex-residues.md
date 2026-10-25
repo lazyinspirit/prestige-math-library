@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cg-affine-point-stabilizers-and-vertex-residues.json
+  precheck: pass
 id: lem-cg-affine-point-stabilizers-and-vertex-residues
 kind: lemma
 title: "Point stabilizers, vertex residues, and rank-two boundary words"
@@ -49,13 +52,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "M. Aguiar and T. K. Petersen, The module of affine descent classes of a Weyl group (FPSAC extended abstract)"
@@ -148,7 +144,7 @@ For $a\in J$, write $s_a$ for the fundamental facet reflection of type $a$ from 
 ## Proof
 
 
-**Proof technique:** identify the walls through $v$ with a finite root subsystem, apply finite Weyl-chamber simple transitivity, and then read the codimension-two link in its normal plane.
+**Proof technique:** identify the walls through the given point with a finite root subsystem, apply finite Weyl-chamber simple transitivity, and then read the codimension-two link in its normal plane.
 
 1.1 Put $\Phi_v:=\{\alpha\in\Phi:B(v,\alpha)\in\mathbb Z\}$ and $V_v:=\operatorname{span}\Phi_v$. This is finite and spans $V_v$. If $\alpha,\beta\in\Phi_v$, then $s_\alpha\beta=\beta-B(\beta,\alpha^\vee)\alpha\in\Phi$ and $B(v,s_\alpha\beta)=B(v,\beta)-B(\beta,\alpha^\vee)B(v,\alpha)\in\mathbb Z$; hence $s_\alpha\beta\in\Phi_v$. The reducedness and crystallographic conditions restrict from $\Phi$, so $\Phi_v$ is a reduced crystallographic root system in $V_v$. Its root hyperplanes translated through $v$ are exactly the walls in $\mathcal A(v)$. [F1, algebra]
 
@@ -178,3 +174,24 @@ compact and convex. It contains $\overline A=\operatorname{co}(V)$ and $O_C$; he
 ## Remarks
 
 **Step-3 supplier history.** The earlier review held Fact F8/step 2.4 and Fact F9/step 5.1 pending the in-run suppliers. The owner resolved this consumer branch in `research/frontier-42-coxeter-32-step3b-owner-lem-cg-affine-point-stabilizers-and-vertex-residues.json`. The current allowed-label proof supplies the positive-definite crystallographic rank-two restriction, and the presented-group definition supplies the defining relator and universal property. The Step-5 risk review records an independent check of these exact uses; the earlier escalation remains part of the run history.
+
+
+**Rank-two link illustration.** The diagram shows the alcove-adjacency cycle in the case $m=3$. Its vertices represent the six alcoves incident to the codimension-two face $F$, not points in the normal plane. An arrow labelled $p$ or $q$ crosses a panel of that type. Starting at $C_0$ and following the arrows reads $(\sigma_p\sigma_q)^3=1$; traversing in the opposite direction reads $(\sigma_q\sigma_p)^3=1$. For general $m$, the cycle has $2m$ vertices and alternating labels, as proved in step 5.1. The arrows specify a reading direction; adjacency itself is symmetric. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\node (C0) at (2,0) {$C_0$};
+\node (C1) at (1,1.73) {$C_1$};
+\node (C2) at (-1,1.73) {$C_2$};
+\node (C3) at (-2,0) {$C_3$};
+\node (C4) at (-1,-1.73) {$C_4$};
+\node (C5) at (1,-1.73) {$C_5$};
+\draw[->] (C0) -- node[right] {$p$} (C1);
+\draw[->] (C1) -- node[above] {$q$} (C2);
+\draw[->] (C2) -- node[left] {$p$} (C3);
+\draw[->] (C3) -- node[left] {$q$} (C4);
+\draw[->] (C4) -- node[below] {$p$} (C5);
+\draw[->] (C5) -- node[right] {$q$} (C0);
+\node at (0,0) {$m=3$};
+\end{tikzpicture}
+```

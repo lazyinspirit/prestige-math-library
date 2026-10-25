@@ -6,6 +6,9 @@ import { loadStep3 } from './frontier-snapshot.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { yaml } from './pathway-lib.mjs';
 import { physicalInterface } from './physics-interface.mjs';
+import { createHash } from 'node:crypto';
+import {prerequisiteLifecycleBinding} from './step2-prerequisite-lifecycle.mjs';
+import { checkOwnerAdditions, prerequisiteRegistry } from './step2-prerequisites.mjs';
 const read=path=>JSON.parse(readFileSync(path,'utf8'));
 const assert=(ok,message)=>{if(!ok)throw Error(message);};
 const safe=value=>{assert(/^[a-zA-Z0-9_-]+$/.test(value??''),'Invalid identity');return String(value);};
@@ -38,7 +41,10 @@ export function loopState(root,run,batch,pass=null){
   return state;
 }
 function save(ctx,batch,state){atomic(join(loopDir(ctx.repo,ctx.run,batch),'state.json'),state);}
-export function accepted(root,run,batch){return loopState(root,run,batch).phase==='accepted';}
+export function accepted(root,run,batch){
+  if(loopState(root,run,batch).phase!=='accepted')return false;
+  checkOwnerAdditions(root,run,batch,{requireAdoption:true});return true;
+}
 export function engineRepairEligible(ctx,batch){return loopState(ctx.repo,ctx.run,batch).phase!=='held';}
 export function loopPattern(ctx,batches){
   const labels=[];
@@ -203,7 +209,8 @@ export function collectBatch(ctx,batch){
     assert(row.consumer_checks.every(c=>c.decision==='accept')||row.decision==='escalate','Unresolved consumer repair requires escalation');
     assert(row.decision!=='repair','Repairer must finish or escalate');
     delete ctx.scopeLibrary;delete ctx.scopeSnapshot;
-    const entry={round:p.round,changed,consumers:affected};
+    const source_sha256=Object.fromEntries((p.write_files??[]).map(file=>[file,createHash('sha256').update(readFileSync(join(ctx.repo,file))).digest('hex')]));
+    const entry={round:p.round,changed,consumers:affected,source_sha256};
     s.repairs.push(entry);s.phase=row.decision==='escalate'?'held':'review';
   }
   s.reason=row.reason;delete s.prepared;save(ctx,batch,s);
@@ -213,8 +220,18 @@ export function collectBatch(ctx,batch){
 export function resolveOwner(root,run,batch,{decision='accept',reason,reviewer}){
   const s=loopState(root,run,batch);assert(s.phase==='held'||s.phase==='review'&&s.owner_resolution?.decision==='continue','Owner resolution requires hold');
   assert(['accept','continue'].includes(decision)&&reason?.trim()&&reviewer?.trim(),'Specify owner decision, reason and reviewer');
-  const receipt={version:1,run,batch:String(batch),decision:'accept',reason,reviewer,at:new Date().toISOString(),review_count:s.reviews.length,repair_count:s.repairs.length};
-  atomic(join(loopDir(root,run,batch),`owner-${Date.now()}.json`),receipt);s.owner_resolution=receipt;s.phase='accepted';s.reason=reason;delete s.prepared;save({repo:root,run},batch,s);return receipt;
+  checkOwnerAdditions(root,run,batch);
+  const additions=(prerequisiteRegistry(root,run)?.generations??[]).flatMap(generation=>generation.additions.filter(addition=>addition.batch===String(batch)));
+  const receipt={version:1,run,batch:String(batch),decision:'accept',reason,reviewer,at:new Date().toISOString(),review_count:s.reviews.length,repair_count:s.repairs.length,
+    ...(additions.length?{reviewed_inventory:batchInput(root,run,batch).inventory,owner_additions:additions.map(addition=>addition.review)}:{})};
+  const generation=(prerequisiteRegistry(root,run)?.generations??[]).find(row=>row.batches.includes(String(batch)));
+  if(generation&&s.phase==='held'&&reviewer==='/root'&&decision==='accept'){
+    const pages=batchInput(root,run,batch).snapshot.pages.filter(page=>page.batch===String(batch));
+    const files=pages.flatMap(page=>[...page.items.map(item=>`items/${item.id}.md`),`library/${page.category}/${page.id}.md`]);
+    Object.assign(receipt,{previous_phase:'held',source_sha256:Object.fromEntries(files.map(file=>[file,createHash('sha256').update(readFileSync(join(root,file))).digest('hex')]))});
+  }
+  const ownerPath=join(loopDir(root,run,batch),`owner-${Date.now()}.json`);if(receipt.source_sha256)receipt.path=relative(root,ownerPath);
+  atomic(ownerPath,receipt);s.owner_resolution=receipt;s.phase='accepted';s.reason=reason;delete s.prepared;save({repo:root,run},batch,s);return receipt;
 }
 export function checkBatches(root,run){const s=loadStep3(root,run),batches=[...new Set(s.pages.map(p=>p.batch))];for(const b of batches)assert(accepted(root,run,b),`Batch ${b} is not accepted`);return batches.length;}
 if(process.argv[1] && import.meta.url===pathToFileURL(realpathSync(process.argv[1])).href){
@@ -222,6 +239,11 @@ if(process.argv[1] && import.meta.url===pathToFileURL(realpathSync(process.argv[
     const args=process.argv.slice(2),run=args[args.indexOf('--run')+1];
     const option=name=>args.includes(`--${name}`)?args[args.indexOf(`--${name}`)+1]:undefined;
     assert(args.includes('--run'),'Specify --run');
+    if(args.includes('--prerequisite-lifecycle-sha256')){
+      const expected=option('prerequisite-lifecycle-sha256');
+      assert(/^[a-f0-9]{64}$/.test(expected??''),'Specify a valid --prerequisite-lifecycle-sha256');
+      assert(prerequisiteLifecycleBinding(process.cwd(),run)?.fingerprint===expected,'Native prerequisite lifecycle changed since owner preparation');
+    }
     if(args[0]==='owner-resolve')console.log(JSON.stringify(resolveOwner(process.cwd(),run,option('batch'),
       {decision:option('decision'),reason:option('reason'),reviewer:option('reviewer')})));
     else {assert(args[0]==='check','Usage: batch-scope-review.mjs check|owner-resolve --run RUN');

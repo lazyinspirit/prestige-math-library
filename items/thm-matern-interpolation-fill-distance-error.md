@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-matern-interpolation-fill-distance-error.json
+  precheck: pass
 id: thm-matern-interpolation-fill-distance-error
 kind: theorem
-title: "Matérn interpolation and its power function converge at rate h^ν"
+title: 'Matérn interpolation and its power function converge at rate $h^\nu$'
 status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
@@ -30,12 +33,7 @@ sources:
         urface_fitting"
     - title: "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 34–36"
       url: "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement

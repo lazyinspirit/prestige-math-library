@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-finite-mdp-policy-induces-reward-state-chain.json
+  precheck: pass
 id: thm-finite-mdp-policy-induces-reward-state-chain
 kind: theorem
 title: "A finite MDP and stationary policy generate a reward-state Markov chain"
@@ -26,11 +29,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed."
@@ -86,3 +84,21 @@ Then $K_\pi$ is a probability kernel on $E$. For each initial state $s\in S$, th
 3.1 Apply [F3] to $(E,\mathcal P(E))$, $\mu_0$, and the sequence $(K_n)$. Its homogeneous specialization gives a probability law on $E^{\mathbb N}$ with initial state $(s,0)$ and the iterated finite-prefix laws of $K_\pi$. [given, A1, step 2.1, F3]
 
 4.1 The coordinate process under that law is a homogeneous chain relative to its natural filtration by [F3], and its conditional transition identity is exactly the convention in [F4]. This proves the claimed chain construction for every initial $s\in S$. [step 3.1, F3, F4] ∎
+
+
+## Remarks
+
+The schematic separates the two stochastic choices behind one transition. Fix $s,t\in S$, $\eta\in\mathcal R\cup\{0\}$, $a\in A(s)$ and $\rho\in\mathcal R$. The upper route through $(s,a)$ contributes the product of its two labels; summing these products over $a\in A(s)$ gives the lower label. The arrows indicate point probabilities, not deterministic maps or necessarily positive-probability transitions.
+
+```tikz
+\begin{tikzpicture}
+\node (current) at (0,0) {$(s,\eta)$};
+\node (action) at (3.5,0) {$(s,a)$};
+\node (next) at (7,0) {$(t,\rho)$};
+\draw[->] (current) -- node[above] {$\pi(a\mid s)$} (action);
+\draw[->] (action) -- node[above] {$p(t,\rho\mid s,a)$} (next);
+\draw[->] (current) to[bend right=35] node[below] {$K_\pi((s,\eta),\{(t,\rho)\})$} (next);
+\end{tikzpicture}
+```
+
+Thus the old reward coordinate $\eta$ does not affect the transition law. The next reward is recorded together with the next state, preserving their possible dependence. The initial point $(s,0)$ uses the same rule; if $0\notin\mathcal R$, the added dummy-reward points have zero incoming mass, as in proof step 1.1. The proof above is independent of this illustration.

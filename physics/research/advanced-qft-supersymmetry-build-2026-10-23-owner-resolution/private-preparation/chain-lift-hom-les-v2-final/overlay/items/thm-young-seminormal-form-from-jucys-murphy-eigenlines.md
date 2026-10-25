@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-young-seminormal-form-from-jucys-murphy-eigenlines.md

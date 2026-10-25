@@ -1,0 +1,76 @@
+{
+  "id": "thm-regular-equals-smooth-over-perfect-field",
+  "agent": "/root/rendering_repair_coordinator/ag_100",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other: inline-markdown-heading",
+      "verdict": "confirmed",
+      "reason": "Viewed the sole flagged PNG standalone at original resolution. Its last proof row visibly displays literal ## Source qualification after the QED. Frozen and current source put the intended heading on that same line; Markdown headings must start their own block.",
+      "action": "Separated the Source qualification heading from the proof by a blank line.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other: proof-tag-rendering-qed-suffix",
+      "verdict": "confirmed",
+      "reason": "The same standalone tile shows the final justifications as literal bracketed prose rather than blue chips. Actual proof-layout after the heading repair reported missing-or-invalid-tags and rendered-chip-mismatch for step 7.1: the existing math-delimited square is an unsupported suffix for the tag parser.",
+      "action": "Replaced the equivalent math-delimited square QED with the accepted Unicode ∎.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Inserted a blank line before ## Source qualification and normalized the final QED to ∎, restoring the heading and final blue justification chips.",
+  "source_lines_after": [
+    121,
+    123
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "status_preserved": true,
+  "before_raw_sha256": "0a970bf80054e0e183082b40961581d161ecf0c834d29a05986f779be224495d",
+  "after_raw_sha256": "fa730138396ea426d4592ddf499a521c2197ecb7d144e72ac6e9b43073330bc3",
+  "inspection": {
+    "standalone_original_resolution_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/algebraic-geometry/screenshots/thm-regular-equals-smooth-over-perfect-field--03.png"
+    ],
+    "frozen_and_current_source_read": true
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-regular-equals-smooth-over-perfect-field.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-regular-equals-smooth-over-perfect-field.md",
+            "item_id": "thm-regular-equals-smooth-over-perfect-field",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-regular-equals-smooth-over-perfect-field.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-regular-equals-smooth-over-perfect-field.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    }
+  ],
+  "pre_existing_formatting_failures": "After the heading-only repair, proof-layout reported 2 defects on step 7.1 due to the existing $\\square$ suffix; normalized to ∎ and all focused checks rerun successfully."
+}

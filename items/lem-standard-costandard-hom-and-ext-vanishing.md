@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-standard-costandard-hom-and-ext-vanishing.json
+  precheck: pass
 id: lem-standard-costandard-hom-and-ext-vanishing
 kind: lemma
 title: "Standard-costandard Hom and Ext-one orthogonality"
@@ -23,22 +26,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-7.md"
-      - "research/frontier-38-owner-30-alpha-batch-7-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-7-post-5a.json"
-    content_sha256: "8fa377b7d68d786ab6100763fe9fc74fd0ef27c8f21caf29acfdee8fcfcfa030"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Lin Chen, lecture notes (Spring 2024), Lecture 8, Lemmas 3.14 and 3.16 with proofs"
@@ -76,7 +63,7 @@ $\mathcal O$, identified with classes of extensions by the Yoneda theorem.
 
 ## Proof
 
-**Proof technique:** direct: count the $\mathfrak n^+$-fixed weight vectors of a costandard object, then split every extension by a weight argument, dualizing in the remaining case.
+**Proof technique:** direct: count the weight vectors of a costandard object fixed by the positive nilpotent subalgebra, then split every extension by a weight argument, dualizing in the remaining case.
 
 1.1 By [F1] a homomorphism $\Delta(\mu)\to\nabla(\nu)$ corresponds to an $\mathfrak n^+$-fixed vector of weight $\mu$ in $\nabla(\nu)$, and by [F2] the space $\nabla(\nu)_\mu$ is $(M(\nu)_\mu)^*$, a functional being extended by zero off weight $\mu$, with $(x\psi)(m)=\psi(\tau(x)m)$; the fixed condition therefore says exactly that $\psi$ annihilates $\tau(\mathfrak n^+)M(\nu)=\mathfrak n^-M(\nu)$. By [F1] one has $M(\nu)=\mathfrak n^-M(\nu)\oplus\mathbb Cv_\nu$, so a functional supported in weight $\mu$ and vanishing on $\mathfrak n^-M(\nu)$ is zero when $\mu\ne\nu$ (its weight space lies in $\mathfrak n^-M(\nu)$) and is determined by an arbitrary value on $\mathbb Cv_\nu$ when $\mu=\nu$; hence the Hom space has dimension $1$ for $\mu=\nu$ and $0$ otherwise. [F1, F2, given]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-24-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-24-worked-cases
 kind: example
 title: The square knot has a nontrivial character vanishing on a linking metabolizer
@@ -34,13 +37,7 @@ sources:
     - title: Dale Rolfsen, Knots and Links
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf
       locator: Chapter 8.D, printed pp. 212–215; trefoil double-cover matrix calculation read
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 ## Example
 
@@ -112,7 +109,7 @@ $$A=V+V^T=\begin{pmatrix}-2&-1\\-1&-2\end{pmatrix}.$$
 
 The following is the positive trefoil as the closure of the two-strand braid $\sigma_1^3$. Here $\sigma_1$ means the strand entering from the left passes under the strand entering from the right; the closure arcs connect endpoints in equal horizontal positions. Three crossings exchange the two endpoints, so the closure has one component. The proof uses the Seifert-matrix calculations above and does not rely on the drawing.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[x=0.9cm,y=0.9cm,baseline=(current bounding box.center)]
   \draw[thick] (-1,3)--(1,2)--(-1,1)--(1,0);
   \draw[thick] (1,3)--(-1,2)--(1,1)--(-1,0);
@@ -125,6 +122,6 @@ The following is the positive trefoil as the closure of the two-strand braid $\s
   \draw[thick] (-1,0)..controls(-1.7,0)and(-1.7,3)..(-1,3);
   \draw[thick] (1,0)..controls(1.7,0)and(1.7,3)..(1,3);
 \end{tikzpicture}
-~~~
+```
 
 The reverse mirror factor is obtained by reflecting the diagram and reversing its orientation; the square knot is their connected sum. The diagram only records the braid convention used to name $T$.

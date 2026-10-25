@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-exponential-generating-functions-multiply-without-labelled-product-hypothesis.md

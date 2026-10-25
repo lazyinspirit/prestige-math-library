@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-left-garside-normal-form-computation-in-b-three.json
+  precheck: pass
 id: ex-a-left-garside-normal-form-computation-in-b-three
 kind: example
 title: "A left garside normal form computation in b three"
@@ -30,9 +33,7 @@ sources:
       url: "https://arxiv.org/abs/1010.0321"
     - title: "J. Birman and T. Brendle, Braids: A Survey, Section 5.1"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Example
@@ -156,3 +157,21 @@ $1\le i<r$ ([[thm-left-garside-normal-form-is-unique]]).
   $\pi$; the cycle notation is that of [[def-symmetric-group]], so
   $s_1s_2=(1\,2\,3)$. No choice principle is used: every object in the
   computation is an explicitly displayed finite word.
+
+
+**Greedy-factor illustration.** The arrows record removal of the indicated
+left prefix: $A_{i-1}=a_iA_i$, rather than multiplication on the right.
+Here $a_i=\Delta\wedge_LA_{i-1}$; the two stages are the computations of
+steps 2.1 and 4.1. The diagram is a record of remainders, not a divisibility
+lattice, and the verification above is independent of it.
+
+```tikz
+\begin{tikzpicture}[>=stealth, scale=1.8, transform shape, every node/.style={font=\small}]
+\node[draw, rounded corners, minimum width=3cm, minimum height=1.1cm, align=center] (A0) at (0,0) {\(A_0=A(x)\)\\\(\sigma_1\sigma_2^2\)};
+\node[draw, rounded corners, minimum width=2cm, minimum height=1.1cm, align=center] (A1) at (5,0) {\(A_1\)\\\(\sigma_2\)};
+\node[draw, rounded corners, minimum width=1.6cm, minimum height=1.1cm, align=center] (A2) at (9,0) {\(A_2\)\\\(1\)};
+\draw[->] (A0) -- node[above] {\(a_1=\sigma_1\sigma_2\)} node[below] {\(A_0=a_1A_1\)} (A1);
+\draw[->] (A1) -- node[above] {\(a_2=\sigma_2\)} node[below] {\(A_1=a_2A_2\)} (A2);
+\node at (4.5,-1.5) {\(x=\Delta^{-1}a_1a_2=\Delta^{-1}(\sigma_1\sigma_2)\sigma_2,\qquad p(x)=-1\)};
+\end{tikzpicture}
+```

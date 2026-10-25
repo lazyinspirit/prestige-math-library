@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-quiver-full-flag-incidence-varieties-and-geometric-klr-generators.json
+  precheck: n/a
 id: def-quiver-full-flag-incidence-varieties-and-geometric-klr-generators
 kind: definition
 title: "Quiver full-flag incidence varieties and signed geometric KLR generators"
@@ -107,3 +110,50 @@ a graded algebra, and the geometric generator normalization introduces no furthe
 Axiom of Choice is consumed exactly through the AC-declared suppliers named above, while the
 quiver, word and sign data are finite. This specialized presentation is internal and does not
 replace the generic KLR definition.
+
+
+## Remarks
+
+The following local strand pictures show the generators at adjacent positions
+$r,r+1$; all other strands are unchanged and are omitted. Read the word from left
+to right at each horizontal boundary, and read a stacked algebra expression from
+bottom to top. The labels $i=\nu_r$ and $j=\nu_{r+1}$ denote colors, which may
+coincide; the crossing is not an over/under crossing of a knot.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[->,thick] (0,0) -- (0,1.6);
+\draw[->,thick] (1,0) -- (1,1.6);
+\node at (0,-0.3) {$i$};
+\node at (1,-0.3) {$j$};
+\node at (0,1.9) {$i$};
+\node at (1,1.9) {$j$};
+\node at (0.5,-0.8) {$e_\nu$};
+\draw[->,thick] (3,0) -- (3,1.6);
+\draw[->,thick] (4,0) -- (4,1.6);
+\fill (3,0.8) circle (2.5pt);
+\node at (3,-0.3) {$i$};
+\node at (4,-0.3) {$j$};
+\node at (3,1.9) {$i$};
+\node at (4,1.9) {$j$};
+\node at (3.5,-0.8) {$x_r e_\nu$};
+\draw[->,thick] (6,0) -- (7,1.6);
+\draw[->,thick] (7,0) -- (6,1.6);
+\node at (6,-0.3) {$i$};
+\node at (7,-0.3) {$j$};
+\node at (6,1.9) {$j$};
+\node at (7,1.9) {$i$};
+\node at (6.5,-0.8) {$\tau_r e_\nu$};
+\end{tikzpicture}
+```
+
+Thus the crossing has lower word $\nu$ and upper word $s_r\nu$, expressing
+$\tau_re_\nu=e_{s_r\nu}\tau_r$. The dot stays on its strand under a distinct-color
+slide: $\tau_rx_re_\nu=x_{r+1}\tau_re_\nu$ and
+$\tau_rx_{r+1}e_\nu=x_r\tau_re_\nu$ when $i\ne j$. When $i=j$, the differences
+of these two pairs are instead $+e_\nu$ and $-e_\nu$, respectively, as specified
+above. Two stacked crossings give $Q_{ij}(x_r,x_{r+1})e_\nu$, with $Q_{ii}=0$.
+The crossing pictured is the normalized $\tau_r$, not an unnormalized
+fundamental class; its geometric signs and the outer-equal-color braid
+correction remain exactly those in the definition. The picture is explanatory;
+the algebraic definition and its well-formedness arguments are independent of it.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-group-admits-a-universal-central-extension-iff-it-is-perfect.md

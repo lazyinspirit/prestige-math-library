@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-riemannian-volume-of-a-compactly-supported-smooth-density.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-real-quadratic-units-and-pell.json
+  precheck: pass
 id: ex-real-quadratic-units-and-pell
 kind: example
 title: Real quadratic units and Pell's equation
@@ -42,9 +45,7 @@ sources:
     - title: "William A. Stein, Algebraic Number Theory: A Computational Approach"
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§8.2.1 pp.93-95 (Q(sqrt 5) units; the cube subgroup gives the units x+y sqrt 5)."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Example
@@ -95,7 +96,7 @@ has index $3$ in $\mathcal O_K^\times$.
 
 ## Verification
 
-**Proof technique:** identify units with Pell-type solutions of norm $\pm1$; in the solvable case compare the least negative solution with the fundamental positive solution to prove $\varepsilon_d=u_d^2$, and for $d=5$ enumerate the norm-$\pm4$ units of the maximal order and compare with the order's Pell units.
+**Proof technique:** identify units with Pell-type solutions of norm plus or minus one; in the solvable case compare the least negative solution with the fundamental positive solution to prove that epsilon sub d equals the square of u sub d, and for d = 5 enumerate the units of norm plus or minus four in the maximal order and compare with the order's Pell units.
 
 1.1 The ring-of-integers formula gives $\mathcal O_K=\mathbb Z[\sqrt d]$ when $d\equiv2,3\pmod4$ and $\mathcal O_K=\mathbb Z[(1+\sqrt d)/2]\supsetneq\mathbb Z[\sqrt d]$ when $d\equiv1\pmod4$. [F1]
 

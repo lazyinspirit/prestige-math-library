@@ -1,0 +1,87 @@
+{
+  "id": "lem-ideal-orthoscheme-volume",
+  "agent": "/root/rendering_repair_coordinator/knot_028",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile displays literal center/tikzpicture commands, with no shaded projection. The unfenced environment is outside the supported diagram renderer.",
+      "action": "Replace center wrappers with a fenced tikz block; retain the existing picture and all geometric data.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "The first native compiled preview at knot028-final-unique shows the unit-circle equation colliding with the x-axis label; confirmed in its standalone original-resolution tile.",
+      "action": "Increase diagram scale from 2.2 to 4 and move only the unit-circle equation label to the right of the dashed arc. Final standalone original-resolution preview shows separated labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Fence the existing projection picture, remove unsupported center wrappers, enlarge it, and separate the unit-circle equation from the axis label.",
+  "source_lines_after": [
+    50,
+    51,
+    66,
+    68
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Projection and triangle boundaries",
+      "evidence": "Statement inequalities give 0<=x<=cos(zeta), 0<=y<=x tan(zeta). O=(0,0), A=(cos(zeta),0), B=(cos(zeta),sin(zeta)) are exactly the three projected vertices. OA is y=0, AB is x=cos(zeta), BO is y=x tan(zeta). Shading and all three closed sides are visibly present in the final native render."
+    },
+    {
+      "check": "Circle and angle",
+      "evidence": "For 0<zeta<pi/2 both coordinates of B are positive and cos\u00b2(zeta)+sin\u00b2(zeta)=1. The radius-one dashed arc from (1,0) through angle zeta ends at B. OB has positive slope tan(zeta), and the marked small angle is measured counterclockwise from positive x to OB. The schematic chooses 38 degrees inside the allowed interval; coordinate data and labels are unchanged."
+    },
+    {
+      "check": "Upper-half-space interface",
+      "evidence": "The local upper-half-space definition supplies t>0 and density dx dy dt/t\u00b3. Within the triangle x\u00b2+y\u00b2<=1, so the displayed hemisphere height is real; equality occurs at B. The illustration remains a planar projection, and its unchanged caption explicitly identifies the region above the hemisphere and the ideal direction t\u2192infinity."
+    },
+    {
+      "check": "Independent proof",
+      "evidence": "Unchanged proof steps 1.1\u20133.1 integrate the stated density, substitute x=cos(theta), and use F2/F3 Lobachevsky identities. No step invokes the figure. The proof uses A as a temporary scalar sqrt(1-x\u00b2), distinct from the explicitly defined vertex A in the figure."
+    }
+  ],
+  "preservation_evidence": {
+    "before_raw_sha256": "7226ee41e818bcfe01c8f1e9058e504f56e457a1ca0623950fa1cd355ce92b63",
+    "after_raw_sha256": "08e33e381a15fdd96c97eeac78ee7f6d4d2347e9af95c00ad97c51677250ce3c",
+    "frontmatter_byte_identical": true,
+    "statement_and_statement_references_byte_identical": true,
+    "facts_proof_sources_byte_identical": true,
+    "publication_status_byte_identical": "status: published",
+    "guard": "Original queue raw SHA and frozen before bytes matched immediately before first edit; exact guarded intermediate bytes matched immediately before layout-only followup edit."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-ideal-orthoscheme-volume.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-ideal-orthoscheme-volume.md --json",
+      "exit_code": 0,
+      "output": "files=1, checked=1, failed=0; direct proof pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-ideal-orthoscheme-volume.md --json",
+      "exit_code": 0,
+      "output": "errors=[], warnings=[], checked=1"
+    },
+    {
+      "command": "TMPDIR=\"$PWD/research/math-library-rendering-repairs-2026-10-23/runtime-knot028\" TSX_TSCONFIG_PATH=\"$PWD/../prestige-intelligence/web/tsconfig.json\" node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-ideal-orthoscheme-volume --out research/math-library-rendering-repairs-2026-10-23/previews/knot028-final-unique-v2",
+      "exit_code": 0,
+      "output": "1 item; 2 tiles; actual native ItemBody SSR TikZ compilation and local file capture. Both final tiles independently viewed at original resolution. Projection has three edges, shaded interior, legible separated O/A/B/angle/axis/circle labels."
+    }
+  ],
+  "remaining_issues": [],
+  "preview_limitations": [
+    "Local ItemBody preview only, not HTTP route coverage; 32 unrelated reference-map diagnostics reported by preview utility. No whole-item proof audit or publication acceptance claimed."
+  ]
+}

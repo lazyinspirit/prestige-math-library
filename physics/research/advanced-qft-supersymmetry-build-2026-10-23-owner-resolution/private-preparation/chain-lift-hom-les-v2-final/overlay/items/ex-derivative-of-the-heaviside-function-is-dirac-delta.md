@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-derivative-of-the-heaviside-function-is-dirac-delta.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-square-integrability-of-sl2-r-discrete-series-matrix-coefficients.md

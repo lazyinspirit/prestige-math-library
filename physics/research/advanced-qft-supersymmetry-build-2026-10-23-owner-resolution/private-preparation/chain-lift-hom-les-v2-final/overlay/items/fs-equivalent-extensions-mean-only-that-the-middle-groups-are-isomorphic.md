@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-equivalent-extensions-mean-only-that-the-middle-groups-are-isomorphic.md

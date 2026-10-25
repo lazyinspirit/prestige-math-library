@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-every-leaf-is-initial-among-smooth-maps-tangent-to-the-distribution.md

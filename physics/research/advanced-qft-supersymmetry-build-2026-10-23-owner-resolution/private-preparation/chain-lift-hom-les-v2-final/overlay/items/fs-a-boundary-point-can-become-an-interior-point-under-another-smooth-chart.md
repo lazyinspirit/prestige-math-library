@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-boundary-point-can-become-an-interior-point-under-another-smooth-chart.md

@@ -45,7 +45,7 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
     ...scope.pages.map(row => row.file), ...scope.pathwayFiles].filter(path => !imported.has(path)));
   for (const path of selected) regularPath(root, path);
   addOriginalSlotPaths(root, run, selected, physics);
-  for (const suffix of ['proof-layout.json', 'publication-readiness.json', 'step6-report-integrity.json',
+  for (const suffix of ['proof-layout.json', 'rendering-quality.json', 'publication-readiness.json', 'step6-report-integrity.json',
     'step6-report.response.json', 'step6-report.md', 'step6-evidence.json', 'pathway-closure.json', 'judge-closure.json'])
     selected.add(`research/${run}-${suffix}`);
   selected.add(finalReceipt);

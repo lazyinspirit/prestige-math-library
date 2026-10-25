@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-gelfand-tsetlin-algebra-is-the-diagonal-algebra-in-the-young-basis.md

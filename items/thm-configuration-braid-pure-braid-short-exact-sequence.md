@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-configuration-braid-pure-braid-short-exact-sequence.json
+  precheck: pass
 id: thm-configuration-braid-pure-braid-short-exact-sequence
 kind: theorem
 title: 'The configuration braid short exact sequence $1\to PB_n\to B_n^{\mathrm{conf}}\to S_n\to 1$'
@@ -41,9 +44,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.0321"
     - title: "Allen Hatcher, Algebraic Topology, section 1.3, covering spaces and lifting, printed pp. 60-64"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
@@ -126,3 +127,44 @@ identified with a presentation or with a group of strand diagrams.
 5.1 *The endpoint monodromy is surjective.* Let $n\ge2$ and let $T:=\{s_1,\dots,s_{n-1}\}\subseteq S_n$. Step 4.1 exhibits for each $s_j\in T$ a class in $B_n^{\mathrm{conf}}$ with $\pi$-image $s_j$, so $T\subseteq\operatorname{im}\pi$, and $\operatorname{im}\pi$ is a subgroup of $S_n$ by [L7]; since $\langle T\rangle$ is the smallest subgroup containing $T$ by [L8], it follows that $S_n=\langle T\rangle\subseteq\operatorname{im}\pi$, so $\operatorname{im}\pi=S_n$ and $\pi$ is surjective by [L7]. For $n=0,1$ the group $S_n$ is trivial by [L8], so $\pi$ is surjective there as well, its image being a subgroup of a one-element group. Hence $\pi$ is surjective for every $n\ge0$. [step 4.1, L7, L8]
 
 6.1 *Conclusion.* Step 1.1 shows that $p_*$ is an injective homomorphism $PB_n\to B_n^{\mathrm{conf}}$, step 2.1 that the left arrow from the one-element group is injective with image $\ker p_*$, step 3.1 that $\operatorname{im}p_*=\ker\pi$, and step 5.1 that $\pi$ is surjective. By the definition of a short exact sequence in [L7], the displayed sequence is short exact for every $n\ge0$, including the one-point cases $n=0$, where $F_0(D^2)$ and $C_0(D^2)$ are one-point spaces so that $PB_0$ and $B_0^{\mathrm{conf}}$ are one-element groups by [F1] and [L11]. [step 1.1, step 2.1, step 3.1, step 5.1, F1, L7, L11] ∎
+
+
+## Remarks
+
+The upper row shows the short exact sequence. The lower square shows a path
+lift of a based loop $\alpha$; its horizontal arrows are paths, while the
+vertical arrows apply $p$ to their endpoints. The square expresses
+$p\circ\widetilde\alpha=\alpha$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, x=1.25cm, y=1.25cm, every node/.style={font=\Large}]
+\node (oneL) at (0,2.5) {$1$};
+\node (pure) at (2,2.5) {$PB_n$};
+\node (braid) at (4.8,2.5) {$B_n^{\mathrm{conf}}$};
+\node (perm) at (7.6,2.5) {$S_n$};
+\node (oneR) at (9.6,2.5) {$1$};
+\draw[->] (oneL) -- (pure);
+\draw[->] (pure) -- node[above] {$p_*$} (braid);
+\draw[->] (braid) -- node[above] {$\pi$} (perm);
+\draw[->] (perm) -- (oneR);
+\node at (4.8,1.65) {$\mathrm{im}p_*=\ker\pi$};
+\node (q) at (2,0.5) {$q$};
+\node (sigmaq) at (7.6,0.5) {$\sigma_\alpha\cdot q$};
+\node (orbitL) at (2,-1.2) {$[q]$};
+\node (orbitR) at (7.6,-1.2) {$[q]$};
+\draw[->] (q) -- node[above] {$\widetilde\alpha\ \mathrm{in}\ F_n(D^2)$} (sigmaq);
+\draw[->] (q) -- node[left] {$p$} (orbitL);
+\draw[->] (sigmaq) -- node[right] {$p$} (orbitR);
+\draw[->] (orbitL) -- node[below] {$\alpha\ \mathrm{in}\ C_n(D^2)$} (orbitR);
+\end{tikzpicture}
+```
+
+Here $p_*([\gamma])=[p\circ\gamma]$ for a loop $\gamma$ at $q$, and
+$\pi([\alpha])=\sigma_\alpha$. The lift closes at $q$ exactly when
+$\sigma_\alpha=e$, which explains the kernel in the upper row (steps 1.2 and
+2.2). Injectivity of $p_*$ and surjectivity of $\pi$ are proved in steps 1.1
+and 5.1. Both loop groups use the first-then-second product; with the stated
+left coordinate action, $\pi([\alpha][\beta])=\sigma_\alpha\sigma_\beta$,
+where permutation multiplication is composition. For $n=0,1$ the permutation
+group is trivial and the same diagram applies. No section or splitting is
+shown. The proof above is independent of this illustration.

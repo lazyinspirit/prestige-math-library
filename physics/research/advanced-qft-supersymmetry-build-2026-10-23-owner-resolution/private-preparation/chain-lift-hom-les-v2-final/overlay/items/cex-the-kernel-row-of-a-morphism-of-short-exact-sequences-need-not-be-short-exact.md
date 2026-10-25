@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact.md

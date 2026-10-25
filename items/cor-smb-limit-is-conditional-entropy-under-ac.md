@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-smb-limit-is-conditional-entropy-under-ac.json
+  precheck: pass
 id: cor-smb-limit-is-conditional-entropy-under-ac
 kind: corollary
 title: "Invariant conditional-entropy description of the SMB limit"
@@ -19,8 +22,6 @@ axiom_use: "Assume AC only for the published finite-measure Birkhoff-limit ident
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Robert M. Gray, Entropy and Information Theory, corrected edition"
@@ -29,7 +30,7 @@ sources:
 ---
 ## Statement
 
-Under AC, identifies the componentwise SMB limit with E[g_infinity|I], conditional expectation of infinite-past information given the invariant sigma-algebra.
+Under AC, identifies the componentwise SMB limit with $E[g_\infty\mid\mathcal I]$, conditional expectation of infinite-past information given the invariant sigma-algebra.
 
 ## Facts & Assumptions
 

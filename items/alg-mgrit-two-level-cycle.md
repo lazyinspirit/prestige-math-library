@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-mgrit-two-level-cycle.json
+  precheck: n/a
 id: alg-mgrit-two-level-cycle
 kind: algorithm
 title: "A declared two-level MGRIT coarse-correction cycle"
@@ -16,12 +19,6 @@ forward_refs: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "R. D. Falgout, S. Friedhoff, Tz. V. Kolev, S. P. MacLachlan, and J. B. Schroder, Parallel Time Integration with Multigrid"
@@ -50,3 +47,44 @@ For one cycle from a current iterate $u$, apply the selected pre-relaxation; for
 $$E=S_{\rm post}(I-PA_c^{-1}RA_t)S_{\rm pre}.$$
 
 Initialize $u^{(0)}=u_{\rm in}$ and compute $\|b-A_tu^{(0)}\|$. If this is at most $\varepsilon$, return $u^{(0)}$, zero completed cycles, and status `converged`. Otherwise, for $j_{\rm cyc}=1,\ldots,J_{\rm cyc}$, perform one cycle, call the resulting iterate $u^{(j_{\rm cyc})}$, and compute $\|b-A_tu^{(j_{\rm cyc})}\|$. If this norm is at most $\varepsilon$, return that iterate, $j_{\rm cyc}$ completed cycles, and status `converged`; if not, continue. If all $J_{\rm cyc}$ cycles finish without this condition (including when $J_{\rm cyc}=0$), return the last iterate, its residual norm, and status `budget-exhausted`. The matrix $E$ describes exact arithmetic and exact coarse solves; inexact solves contribute an update defect that needs its own bound.
+
+
+## Remarks
+
+The first illustration shows the C/F partition for $m=3$ and $N=6$. Index $0$ is prescribed initial data, not an unknown. The C unknowns are at indices $3$ and $6$; the remaining unknowns are F-points.
+
+```tikz
+\begin{tikzpicture}[x=1.1cm,y=1cm,every node/.style={font=\small}]
+\draw (0,0)--(6,0);
+\draw (0,-0.07) rectangle (0.14,0.07);
+\node[above] at (0,0.12) {$0$};
+\node[below] at (0,-0.18) {fixed};
+\foreach \i in {1,2,3,4,5,6} {
+  \fill (\i,0) circle (2pt);
+  \node[above] at (\i,0.12) {\i};
+}
+\foreach \i in {1,2,4,5} {\node[below] at (\i,-0.18) {F};}
+\foreach \i in {3,6} {\node[below] at (\i,-0.18) {C};}
+\draw[<->] (0,0.8)--node[above] {$m=3$} (3,0.8);
+\draw[<->] (3,0.8)--node[above] {$m=3$} (6,0.8);
+\end{tikzpicture}
+```
+
+The second illustration records the order of one cycle. Here $R:(\mathbb R^d)^N\to(\mathbb R^d)^{N_c}$ restricts the residual and $P:(\mathbb R^d)^{N_c}\to(\mathbb R^d)^N$ interpolates the correction, in the F/C ordering above. The solve uses the practical $A_c$; the exact Schur operator remains $RA_tP=A_{CC}-A_{CF}A_{FF}^{-1}A_{FC}$ and is not identified with $A_c$.
+
+```tikz
+\begin{tikzpicture}[every node/.style={font=\small},cyclebox/.style={draw,rounded corners,minimum width=7cm,minimum height=0.8cm,align=center}]
+\node[cyclebox] (pre) at (0,0) {Selected pre-relaxation};
+\node[cyclebox] (res) at (0,-1.3) {Fine residual $r=b-A_tu$; coarse residual $\rho=Rr$};
+\node[cyclebox] (solve) at (0,-2.8) {Solve $A_cz=\rho$ with $z_0=0$\\
+  $z_j=\rho_j+\Psi_jz_{j-1}$, $j=1,\ldots,N_c$};
+\node[cyclebox] (corr) at (0,-4.3) {Fine-grid correction $u\leftarrow u+Pz$};
+\node[cyclebox] (post) at (0,-5.6) {Selected post-relaxation};
+\draw[->] (pre)--(res);
+\draw[->] (res)--(solve);
+\draw[->] (solve)--(corr);
+\draw[->] (corr)--(post);
+\end{tikzpicture}
+```
+
+Both figures illustrate the definition; all update rules and the error-propagation formula are specified independently above.

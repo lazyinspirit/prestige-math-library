@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-sr-rindler-horizon-is-not-a-physical-boundary.md

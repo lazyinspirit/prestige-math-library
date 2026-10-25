@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-total-degree-versus-tensor-product-work.json
+  precheck: pass
 id: ex-total-degree-versus-tensor-product-work
 kind: example
 title: Three-input degree-two chaos uses ten total-degree modes versus twenty-seven tensor modes
@@ -16,7 +19,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification: {}
 proof_strategy: direct
 
 ---

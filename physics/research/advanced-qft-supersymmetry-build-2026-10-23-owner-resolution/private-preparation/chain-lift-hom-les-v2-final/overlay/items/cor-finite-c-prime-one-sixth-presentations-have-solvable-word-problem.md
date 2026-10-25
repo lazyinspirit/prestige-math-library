@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-finite-c-prime-one-sixth-presentations-have-solvable-word-problem.md

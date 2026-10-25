@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-complexification-is-functorial.json
+  precheck: pass
 id: prop-complexification-is-functorial
 kind: proposition
 title: "Complexification is a functor on real vector spaces and real-linear maps"
@@ -11,13 +14,6 @@ deps: [def-complexification-of-a-real-linear-map, thm-universal-property-and-uni
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-29
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -50,3 +46,16 @@ Thus $V\mapsto V_{\mathbb C}$, $T\mapsto T_{\mathbb C}$ is a functor from real v
 1.2 By [L2] applied with $f=f'=\operatorname{id}_{\mathbb C}$, $g=T$ and $g'=S$, one has $(S\circ T)_{\mathbb C}=\operatorname{id}_{\mathbb C}\otimes(S\circ T)=(\operatorname{id}_{\mathbb C}\circ\operatorname{id}_{\mathbb C})\otimes(S\circ T)=(\operatorname{id}_{\mathbb C}\otimes S)\circ(\operatorname{id}_{\mathbb C}\otimes T)=S_{\mathbb C}\circ T_{\mathbb C}$ by [L1]. [L1, L2, algebra]
 
 2.1 Steps 1.1 and 1.2 are exactly the identity and composition laws of a functor. [step 1.1, step 1.2] ∎
+
+## Remarks
+
+The composition law of step 1.2 is the commutativity of the following triangle of complex vector spaces and complex-linear maps:
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large]
+V_{\mathbb C} \arrow[r, "T_{\mathbb C}"] \arrow[dr, "(S\circ T)_{\mathbb C}"'] & W_{\mathbb C} \arrow[d, "S_{\mathbb C}"] \\
+& U_{\mathbb C}
+\end{tikzcd}
+```
+
+Both routes send $z\otimes v$ to $z\otimes S(T(v))$. The identity law of step 1.1 says that complexifying the identity of $V$ gives the identity of $V_{\mathbb C}$. The proof above is independent of the diagram.

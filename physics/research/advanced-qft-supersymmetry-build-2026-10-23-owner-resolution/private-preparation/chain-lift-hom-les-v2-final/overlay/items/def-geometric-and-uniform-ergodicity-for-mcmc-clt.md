@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-geometric-and-uniform-ergodicity-for-mcmc-clt.md

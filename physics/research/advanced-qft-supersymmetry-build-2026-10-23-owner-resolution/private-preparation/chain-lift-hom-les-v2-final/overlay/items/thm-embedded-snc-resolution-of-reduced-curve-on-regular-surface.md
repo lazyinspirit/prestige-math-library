@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface.md

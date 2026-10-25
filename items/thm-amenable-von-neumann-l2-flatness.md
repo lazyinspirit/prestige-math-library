@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-amenable-von-neumann-l2-flatness.json
+  precheck: pass
 id: thm-amenable-von-neumann-l2-flatness
 kind: theorem
 title: "L²-dimension flatness for amenable groups"
@@ -23,17 +26,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   scraped: []
   references:
@@ -44,7 +36,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Choice. Let G be a countable discrete amenable group. For every right CG-module M and every integer q>0, the N G-von Neumann dimension of Tor_q^{CG}(M,N G) is zero. This dimension-flatness statement does not say that the Tor module itself is zero.
+Assume the Axiom of Choice. Let $G$ be a countable discrete amenable group. For every right $\mathbb CG$-module $M$ and every integer $q>0$, the $\mathcal N G$-von Neumann dimension of $\operatorname{Tor}_q^{\mathbb CG}(M,\mathcal N G)$ is zero. This dimension-flatness statement does not say that the Tor module itself is zero.
 
 ## Statement references
 

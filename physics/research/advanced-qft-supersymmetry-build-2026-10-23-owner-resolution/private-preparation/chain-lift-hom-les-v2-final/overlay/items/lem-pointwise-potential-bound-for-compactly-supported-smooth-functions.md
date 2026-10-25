@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-pointwise-potential-bound-for-compactly-supported-smooth-functions.md

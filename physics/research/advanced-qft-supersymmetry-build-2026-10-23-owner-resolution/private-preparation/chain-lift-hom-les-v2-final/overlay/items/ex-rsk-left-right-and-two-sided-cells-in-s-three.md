@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-rsk-left-right-and-two-sided-cells-in-s-three.md

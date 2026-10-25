@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-qc-square-planar-surface-code-distance-and-path-count.json
+  precheck: pass
 id: thm-qc-square-planar-surface-code-distance-and-path-count
 kind: theorem
 title: Square planar surface-code distance and path count
@@ -21,11 +24,6 @@ axiom_use: "None; the proof is finite binary linear algebra on an explicit grid.
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: 'John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction'
@@ -110,3 +108,39 @@ admit basis extension.
 The count is a combinatorial upper bound on candidate paths, not a decoding
 failure probability. The proof uses the exact relative cellulation and no
 diagram.
+
+For $d=3$, the picture overlays a primal Z row (cyan) and a dual X path
+(orange). Solid grid edges are the $18=2d^2$ physical qubits; the six dashed
+vertical edges on the rough sides, together with their vertices, form $R$.
+Small grid dots indicate primal vertices, and the three orange interior dots
+are face centers. Only the selected dual path is drawn, not the full dual
+graph; its endpoints $t$ and $b$ are the top and bottom exterior vertices.
+
+```tikz
+\begin{tikzpicture}[scale=1.35]
+  \draw (0,0)--(3,0) (0,1)--(3,1) (0,2)--(3,2) (0,3)--(3,3);
+  \draw (1,0)--(1,3) (2,0)--(2,3);
+  \draw[dashed] (0,0)--(0,3) (3,0)--(3,3);
+  \draw[cyan,very thick] (0,1)--(3,1);
+  \draw[orange,very thick] (1.5,3.5)--(1.5,2.5)--(1.5,1.5)--(1.5,0.5)--(1.5,-0.5);
+  \foreach \i in {0,1,2,3} {
+    \foreach \j in {0,1,2,3} { \fill (\i,\j) circle (1pt); }
+  }
+  \foreach \j in {0.5,1.5,2.5} { \fill[orange] (1.5,\j) circle (2pt); }
+  \fill[orange] (1.5,3.5) circle (2pt);
+  \fill[orange] (1.5,-0.5) circle (2pt);
+  \node[left] at (0,1.5) {$R$};
+  \node[right] at (3,1.5) {$R$};
+  \node[right,cyan] at (3,1) {$Z:\ 3$ edges};
+  \node[right,orange] at (3,2.5) {$X:\ 4$ edges};
+  \node[above] at (1.5,3.5) {$t$};
+  \node[below] at (1.5,-0.5) {$b$};
+\end{tikzpicture}
+```
+
+The Z row crosses the three vertical cuts $x=i+\tfrac12$ once each
+($i=0,1,2$), so its $q_i$ are all $1$, as in step 5.1. The X path crosses
+one horizontal physical edge in each row $j=0,1,2,3$, so its $q'_j$ are all
+$1$, as in steps 6.2 and 7.1. The two supports share exactly the physical
+edge from $(1,1)$ to $(2,1)$: their primal/dual crossing illustrates the odd
+binary pairing. The rigorous proof above is independent of this picture.

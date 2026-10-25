@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-local-structure-of-distributions-as-derivatives-of-continuous-functions.md

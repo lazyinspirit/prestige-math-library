@@ -5,25 +5,6 @@ status: published
 library: physics
 ---
 
-The non-relativistic quantum mechanics category develops the framework of
-complex-Hilbert-space quantum theory from explicit, scoped postulates and
-explicit definitions: the state and composition assumptions with their rays,
-density operators and completed tensor products; the observable and probability
-assumptions with self-adjoint operators and spectral outcome laws; the ideal
-conditional-measurement assumption with its Lueders update and discarded
-outcomes; the autonomous-dynamics assumption with the unitary group of a
-self-adjoint energy operator; the non-relativistic kinematics and
-massive-particle model with its Newtonian arena, inertial frames, classical
-apparatus trajectories and one-particle operators; the identical-particle and
-spin assignments with permutation sectors and finite-spin representations; and
-the preparation and apparatus assumptions under which model predictions are
-compared with reported data. Physical postulates are adopted assumptions of a
-model; the mathematical results of the category are complete conditional
-deductions from those postulates and their stated hypotheses, and no theorem of
-the category establishes that the model describes nature. Empirical
-qualifications are carried wherever measured input is used, and the radiation,
-external-field and light-matter extensions are separate adopted model
-assumptions on their own pages, never limits of the massive model. Package:
-the mathematics of the track is developed on the companion mathematics
-category, and the physical pages consume those items through the schema's
-dependency roles.
+These pages adopt a non-relativistic complex-Hilbert-space framework with state and composition, observable and probability, ideal measurement, and unitary dynamics postulates. They specify Newtonian massive-particle kinematics, spin and identical-particle sectors, then treat spectra, potentials, scattering, interference and local detection, symmetries, controlled approximations, driven and open dynamics, many-body models, radiation modes, quantum optics, and light–matter transitions under additional stated preparations and couplings. Results remain conditional on the named postulates, operator domains, Hamiltonians, apparatus assumptions, and mathematical hypotheses. Statistical predictions are distinct from observed data; finite experiments do not prove the framework.
+
+Non-relativistic Quantum Mechanics Mathematics supplies operator, state, measurement, and dynamics results, while Non-relativistic Classical Mechanics Mathematics supplies affine-time and Galilean geometry. Quantum Statistical Mechanics uses the state, composition, and many-body constructions; Thermodynamics uses them in its finite statistical bridge and irreversible-boundary models. Quantum Field Theory mathematics also draws on specific spectral and uncertainty results. Each subject retains its own physical assumptions.

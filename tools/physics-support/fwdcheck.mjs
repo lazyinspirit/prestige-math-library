@@ -113,9 +113,29 @@ function list(fm, key) { return frontmatterList(fm, key); }
 const plan = JSON.parse(readFileSync(join(REPO, 'research/plan-spec.json'), 'utf8'));
 const planPage = new Map();          // pageId -> {order, requires, kind, title}
 const plannedHome = new Map();       // itemId -> pageId
+const planIdCounts = new Map();
+const companionClaims = new Map();
 for (const p of plan.pages) {
-  planPage.set(p.id, { order: p.order, requires: p.requires ?? [], kind: p.kind, title: p.title });
+  planIdCounts.set(p.id, (planIdCounts.get(p.id) ?? 0) + 1);
+  if (typeof p.companion === 'string')
+    companionClaims.set(p.companion, (companionClaims.get(p.companion) ?? 0) + 1);
+  planPage.set(p.id, { order: p.order, requires: p.requires ?? [], kind: p.kind, title: p.title,
+    companion: p.companion, category: p.category, library: p.library });
   for (const it of p.items ?? []) plannedHome.set(it.id, p.id);
+}
+
+// Canonical physics pairs share an order. Only the B -> its own A edge is
+// earlier within that pair; names, page prose and one-sided claims grant no
+// exception. Ambiguous identities/companion claims must not authenticate a pair.
+function earlierCompanion(pid, p, rid, q) {
+  return pid !== rid && p.kind === 'B' && q.kind === 'A'
+    && typeof p.order === 'number' && Number.isFinite(p.order) && p.order === q.order
+    && p.companion === rid && q.companion === pid
+    && planIdCounts.get(pid) === 1 && planIdCounts.get(rid) === 1
+    && companionClaims.get(pid) === 1 && companionClaims.get(rid) === 1
+    && typeof p.category === 'string' && p.category.length > 0 && p.category === q.category
+    && ['mathematics', 'physics'].includes(p.library) && p.library === q.library
+    && !q.requires.includes(pid);
 }
 
 /** level(p) = 1 + max(level of its prerequisites); published pages are 0. */
@@ -199,7 +219,7 @@ const selectedPages = new Set(itemScope.selected === null ? realPages
 for (const [pid, p] of planPage)
   if (itemScope.selected === null || selectedPages.has(pid)) for (const r of p.requires) {
     const q = planPage.get(r);
-    if (q && q.order >= p.order)
+    if (q && q.order >= p.order && !earlierCompanion(pid, p, r, q))
       err('plan-order-broken', `plan order is not topological: ${pid} (#${p.order}) requires ${r} (#${q.order})`);
   }
 

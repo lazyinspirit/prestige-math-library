@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-one-sided-normal-likelihood-ratio-at-boundary.json
+  precheck: pass
 id: ex-one-sided-normal-likelihood-ratio-at-boundary
 kind: example
 title: "A one-sided normal likelihood ratio at the boundary"
@@ -34,12 +37,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: "Peter Bartlett, Theoretical Statistics, Stat 210B Lecture 26"
@@ -107,3 +104,25 @@ In this unit-variance example put $\sigma=1$.
 ## Remarks
 
 The null tangent is a half-line rather than a linear subspace. The atom at zero is the concrete failure of the regular interior chi-square calibration at this boundary.
+
+
+The sketch shows the two projection cases for the limiting score $G$. The thick half-line is the null cone $C_0=(-\infty,0]$ inside the full local model $C=\mathbb R$. When $G\le0$, its projection is itself and the squared distance is zero; when $G>0$, its projection is zero and the squared distance is $G^2$. Each case has probability $1/2$ by normal symmetry, yielding the mixture in step 5.1. The rigorous verification above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (-3,1.6) -- (3,1.6) node[right] {$h$};
+\draw[very thick,blue] (-3,1.6) -- (0,1.6);
+\draw (0,1.5) -- (0,1.7) node[above=4pt] {$0$};
+\fill[blue] (-1.5,1.6) circle (2pt);
+\node[above] at (-1.5,1.8) {$G=\min(G,0)$};
+\node[below] at (0,1.2) {$G\le0:\quad d(G,C_0)^2=0$};
+\draw[->] (-3,-0.4) -- (3,-0.4) node[right] {$h$};
+\draw[very thick,blue] (-3,-0.4) -- (0,-0.4);
+\fill[blue] (0,-0.4) circle (2pt);
+\fill (1.8,-0.4) circle (2pt);
+\node[above] at (0,-0.2) {$0=\min(G,0)$};
+\node[above] at (1.8,-0.2) {$G$};
+\draw[<->] (0,-0.9) -- (1.8,-0.9) node[midway,below] {$G$};
+\node[below] at (0,-1.5) {$G>0:\quad d(G,C_0)^2=G^2$};
+\end{tikzpicture}
+```

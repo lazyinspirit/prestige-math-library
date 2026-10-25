@@ -1,0 +1,105 @@
+{
+  "id": "thm-mixed-precision-refinement-error-recurrence-and-floor",
+  "agent": "/root/rendering_repair_coordinator/nla_013",
+  "model": "gpt-6.1-sol",
+  "configured_reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution original tile 01 shows literal A-hat, r-hat_k, delta_r,k, norm bars with _2, <= and sum_{j=0}^{k-1}; bare underscores also trigger Markdown italics. Frozen and current pre-edit source coincide. The full local algorithm fixes the intended widehat A, widehat r_k, delta_{r,k}, delta_{w,k} and inverse notation without ambiguity.",
+      "action": "Typeset all statement and numbered-proof mathematics with math delimiters, Greek letters, hats, grouped subscripts, inverse exponent, inequalities and finite summation. Display source formulas retain precisely rho_0, q and eta definitions.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The same original tile independently shows literal u_r, u_f, u_w in Given and delta_w in F1; these are the algorithm precision and solve/update-defect symbols, not prose identifiers.",
+      "action": "Typeset those exact symbols locally; retain the distinct-precision and inconclusive-certificate assertions.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Original tile F2 inherits the supplier title with literal ||I|| = 1, rather than a typeset norm. Supplier source confirms exactly that title and its normalization meaning.",
+      "action": "Add an explicit local wiki label preserving the full inherited wording and typesetting only the same norm identity; supplier remains untouched.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Rendering-only conversion of unambiguous ASCII mathematics in statement, Facts/Given and proof, plus explicit corrected F2 display label. Title unchanged.",
+  "source_lines_after": {
+    "statement": [
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "facts": [
+      43,
+      45,
+      47
+    ],
+    "proof": [
+      53,
+      55,
+      57,
+      59
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "preservation_checks": [
+    "Entire frontmatter through Statement heading preimage is byte-identical, including status: published, deps, provenance, verification and sources.",
+    "Preserved e_k=x_*-x_k and computed residual widehat r_k=Ae_k+delta_{r,k}; neither residual nor error is renamed or conflated.",
+    "Local algorithm defines widehat A=widehat L widehat U and delta_{w,k}=widehat A(x_{k+1}-x_k)-widehat r_k; this confirms both negative terms and inverse placement in the unchanged recurrence.",
+    "Preserved rho_0=xi_r+eta_r(||A||_2||x_*||_2+||b||_2), coefficient ((1+eta_w)eta_r+eta_w), and eta=||widehat A^{-1}||_2((1+eta_w)rho_0+xi_w).",
+    "Preserved q<1, every executed k<=N, bound q^k||e_0||_2+eta(1-q^k)/(1-q), precision floor eta/(1-q), distinct precisions and conditional/no-exact-termination qualification.",
+    "All four numbered proof arguments and justification tags remain exact in prose and mathematical operations; read full actual direct supplier bodies for algorithm and both norm theorems."
+  ],
+  "guard": {
+    "before_raw_sha256": "63c932b1cf4fbf12e0c1fb6bb9a0a5003a72c4f32945bb6d6391d3449ea0d134",
+    "matched_immediately_before_edit": true,
+    "after_raw_sha256": "99dd3a6af1987ef16877b698868b50005ceef2fea26be75c3f29108ee9e3d76b"
+  },
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-mixed-precision-refinement-error-recurrence-and-floor.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-mixed-precision-refinement-error-recurrence-and-floor.md --json",
+      "exit_code": 0,
+      "files": 1,
+      "checked": 1,
+      "failed": 0,
+      "status": "pass"
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-mixed-precision-refinement-error-recurrence-and-floor.md --json",
+      "exit_code": 0,
+      "checked": 1,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "visual_review": {
+    "original_screenshots": [
+      "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/thm-mixed-precision-refinement-error-recurrence-and-floor--01.png"
+    ],
+    "fresh_preview": "research/math-library-rendering-repairs-2026-10-23/previews/nla013-final-unique",
+    "fresh_screenshots": [
+      "screenshots/thm-mixed-precision-refinement-error-recurrence-and-floor--01.png"
+    ],
+    "inspection": "Every original and fresh tile viewed standalone with detail original. Fresh view confirms typeset hats, norms, subscripts, inverse, coefficients, geometric sum and F2 label; all four proof rows remain visible with valid chips. No raw ASCII formula or new overlap observed.",
+    "preview_exit_code": 0,
+    "reference_map_diagnostics": 16,
+    "limitation": "Local ItemBody preview only, no HTTP/native route or production coverage. Reference-map diagnostics concern other parseable-source inventory entries; scoped rendercheck has no errors or warnings."
+  },
+  "remaining_issues": [],
+  "ownership_note": "Immutable independent per-item adjudication; root owns receipts and metadata. Coordinator/root hold remains in force. No native workflow action, commit, publication or supplier edit performed."
+}

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-lca-lone-convolution-is-a-commutative-banach-star-algebra.json
+  precheck: pass
 id: lem-lca-lone-convolution-is-a-commutative-banach-star-algebra
 kind: lemma
-title: L^1 of an LCA group is a commutative Banach star algebra under convolution
+title: $L^1$ of an LCA group is a commutative Banach star algebra under convolution
 dependency_level: 1
 deps:
 - thm-absolute-continuity-of-the-integral
@@ -28,11 +31,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)"
@@ -67,7 +65,7 @@ identity exactly when $G$ is discrete, proved later on this page.
 
 [F2] Haar measure on $G$ is invariant under inversion: $m_G(-E)=m_G(E)$ for every Borel $E$ ([[lem-lca-haar-measure-is-inversion-invariant]]), so $\int_Gh(-x)\,dm_G(x)=\int_Gh\,dm_G$ for every nonnegative Borel $h$.
 
-[F3] If $S,T\subseteq G$ are $\sigma$-compact, then so is $S+T$ (the image of the $\sigma$-compact $S\times T$ under the continuous addition map), and the product measure space $S\times(S+T)$ with $m_G\otimes m_G$ is $\sigma$-finite: $S\times(S+T)$ is a countable union of products of compact, hence finite-measure, sets ([[def-compactness-variants]], [[thm-finite-products-of-compact-spaces]], [[thm-compactness-under-continuous-maps]], [[def-left-haar-integral-and-left-haar-measure]]). Tonelli's theorem and Fubini's theorem for $L^1$ functions apply on this product ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).
+[F3] If $S,T\subseteq G$ are $\sigma$-compact, then so is $S+T$ (the image of the $\sigma$-compact $S\times T$ under the continuous addition map), and the product measure space $S\times(S+T)$ with $m_G\otimes m_G$ is $\sigma$-finite: $S\times(S+T)$ is a countable union of products of compact, hence finite-measure, sets ([[def-compactness-variants]], [[thm-finite-products-of-compact-spaces]], [[thm-compactness-under-continuous-maps]], [[def-left-haar-integral-and-left-haar-measure]]). Tonelli's theorem and Fubini's theorem for $L^1$ functions apply on this product ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces|Fubini's theorem for $L^1$ functions on a sigma-finite product]]).
 
 [F4] $C_c(G)$ is dense in $A$ ([[thm-c-c-is-dense-in-l-p-for-radon-measures]]), and two Radon measures with equal integrals of every real $C_c$ function agree on all Borel sets ([[thm-rmk-uniqueness-among-radon-measures]]); an $L^1$ density defines a finite measure with total variation controlled by its $L^1$ norm ([[thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation]]). Such density measures are Radon: approximate the density in $L^1$ by $C_c$ functions and transfer finite-measure regularity with the total-variation error bound. Applying RMK uniqueness to the positive and negative parts of its real and imaginary density therefore shows that a function $\varphi\in A$ with $\int_G\varphi h\,dm_G=0$ for every $h\in C_c(G)$ vanishes $m_G$-a.e. ([[def-dependent-choice]]).
 

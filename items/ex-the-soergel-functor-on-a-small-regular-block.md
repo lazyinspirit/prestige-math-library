@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-soergel-functor-on-a-small-regular-block.json
+  precheck: n/a
 id: ex-the-soergel-functor-on-a-small-regular-block
 kind: example
-title: The Soergel functor on the small regular sl_2 block
+title: The Soergel functor on the small regular sl₂ block
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-crystal-bases-of-integrable-modules-decompose-into-highest-weight-crystals.json
+  precheck: pass
 id: thm-crystal-bases-of-integrable-modules-decompose-into-highest-weight-crystals
 kind: theorem
 title: "Uniqueness: crystal bases of integrable modules decompose into highest weight crystals"
@@ -13,8 +16,6 @@ aliases: []
 landmark: false
 dependency_level: 9
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -78,3 +79,33 @@ sources:
 7.1 Step H: components. Under $\Phi$ the connected components of $B$ are exactly the $\mathcal B(\lambda_j)$: each $\mathcal B(\lambda_j)$ is connected because by [F4] every vertex is a lowering word from $b_{\lambda_j}$, and distinct copies share no vertices, so the partition into copies is the partition into connected components. Each $\mathcal B(\lambda_j)$ has highest weight element $b_{\lambda_j}$ of dominant weight $\lambda_j$ and equals $F(b_{\lambda_j})$ by [F5], and it has no other highest weight element by the uniqueness clause of [F5]; hence the highest weight elements of $B$ are exactly the $b_{\lambda_j}$, each generating its own component, and the crystal graph of $B$ is determined up to isomorphism by $M$. This proves (iii). [step 6.1, F4, F5, F7]
 
 8.1 Choice audit. The axiom of choice of [[def-axiom-of-choice]] is used exactly as recorded: once, through [F1], to obtain the decomposition of $M$ into simple integrable highest weight modules and to select bases of the finite-dimensional maximal-vector spaces simultaneously, and for the simultaneous selection of lifts of the finite residue bases in the (possibly infinite) family of top spaces in steps 2.1 and 6.1. Every subsequent lattice and crystal argument is a finite induction on a fixed weight interval and involves no further selection; no incompatible-axiom branch and no global $\mathbb Z[q,q^{-1}]$-freeness is used. [step 6.1, step 7.1, F1, given] ∎
+
+
+## Remarks
+
+The diagram separates the module, lattice, residue space and crystal levels of $\Phi$. Write $L_j:=\mathcal L(\lambda_j)$, let $\pi$ and $\pi'$ be reduction modulo $q$, and let $\overline\Phi$ be the map induced on residue spaces. The upward arrows labelled “incl.” are inclusions; on the right, each canonical basis is included in its own direct summand. Every square commutes.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (M) at (0,0) {$M$};
+\node (V) at (6,0) {$\bigoplus_{j\in J}V(\lambda_j)$};
+\node (L) at (0,-1.5) {$L$};
+\node (S) at (6,-1.5) {$\bigoplus_{j\in J}L_j$};
+\node (Q) at (0,-3) {$L/qL$};
+\node (T) at (6,-3) {$\bigoplus_{j\in J}(L_j/qL_j)$};
+\node (B) at (0,-4.5) {$B$};
+\node (C) at (6,-4.5) {$\bigsqcup_{j\in J}\mathcal B(\lambda_j)$};
+\draw[->] (M) -- node[above] {$\Phi\;\cong$} (V);
+\draw[->] (L) -- node[above] {$\Phi|_L\;\cong$} (S);
+\draw[->] (Q) -- node[above] {$\overline\Phi\;\cong$} (T);
+\draw[->] (B) -- node[above] {$\overline\Phi|_B\;\cong$} (C);
+\draw[->] (L) -- node[left] {$\mathrm{incl.}$} (M);
+\draw[->] (S) -- node[right] {$\mathrm{incl.}$} (V);
+\draw[->] (L) -- node[left] {$\pi$} (Q);
+\draw[->] (S) -- node[right] {$\pi'$} (T);
+\draw[->] (B) -- node[left] {$\mathrm{incl.}$} (Q);
+\draw[->] (C) -- node[right] {$\mathrm{incl.}$} (T);
+\end{tikzpicture}
+```
+
+In the bottom row, the inverse image $C_j:=\overline\Phi^{-1}(\mathcal B(\lambda_j))$ of each indexed copy is one connected component, with unique highest vertex $b_j:=\overline\Phi^{-1}(b_{\lambda_j})$, and $C_j=F(b_j)$. The bottom bijection preserves every lowering arrow $b\xrightarrow{i}\tilde f_i b$ whenever $\tilde f_i b\ne0$. The index set $J$ may be infinite; only finitely many summands contribute at any fixed label weight. These are the identifications of steps 6.1–7.1; the proof is independent of the illustration.

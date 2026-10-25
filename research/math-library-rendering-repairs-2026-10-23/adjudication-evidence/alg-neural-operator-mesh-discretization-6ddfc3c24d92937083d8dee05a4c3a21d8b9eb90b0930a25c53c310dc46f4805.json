@@ -1,0 +1,110 @@
+{
+  "id": "alg-neural-operator-mesh-discretization",
+  "agent": "/root/rendering_repair_coordinator/dnn_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile contains the algorithm entirely in prose. Its two independent inputs to quadrature layers (tag/volume data and the raw continuous field), stored tag values, and arbitrary query output are concrete distinct roles that a data-flow schematic materially clarifies. A diagram is warranted under the authorized explanatory-diagram criterion; no error in the original algorithm is alleged.",
+      "action": "Added a same-domain TikZ data-flow schematic in Remarks and explicit captions separating the raw continuous-input rule, the reconstructed finite-sampling variant, and the distinct-output-domain case.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added four labelled boxes and three directed data/evaluation arrows; preserved all original content and complete frontmatter byte-for-byte.",
+  "source_lines_after": [
+    40,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    54
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Mesh box: D is partitioned into E_1,...,E_N, with xi_j in E_j and omega_j=|E_j|.",
+      "check": "Exactly the partition, tags and weights of Definition paragraph 2; the arrow to quadrature layers supplies the tags and volume weights used by its finite sum. It is not a function from a domain point to a field."
+    },
+    {
+      "data": "Raw input box: v_{0,n}(x)=P(a(x)).",
+      "check": "Definition paragraph 2 initializes the raw field pointwise on the whole closure of D. Its arrow supplies that full field to the layers, rather than only input samples. The caption explicitly retains access to the continuous input through this field."
+    },
+    {
+      "data": "Layer box: store v_{t,n}(xi_j), evaluate v_{t+1,n}(x).",
+      "check": "The first displayed formula takes W_t v_{t,n}(x), weighted kernel samples, and b_t(x), then sigma_t. Dimensions agree with the continuous-function architecture in def-neural-operator: v_t has q_t channels, W_t and kappa_t map to q_{t+1}, and b_t has q_{t+1} channels. The schematic is restricted to equal input/output domains, so x and tags are on the stipulated domains. It does not omit the local term semantically; the caption requires the complete existing layer formula."
+    },
+    {
+      "data": "Final-field arrow to query Q(v_{L,n}(x)), x in closure D.",
+      "check": "Definition paragraph 2 returns the pointwise projection at every requested query, with Q accepting the final channel dimension. No arrow asserts commutativity, convergence, or factorization. The caption separately retains the zero-local-term final layer on closure D-prime for distinct domains."
+    },
+    {
+      "data": "Finite-sampling variant and fixed parameters.",
+      "check": "Definition paragraph 3 requires reconstruction before lifting and all local terms; the new caption repeats this rule, consistent with the finite-sampling bridge supplier. The existing refinement clause fixes all learned parameters while tags/weights change. No unconditional convergence or stronger-norm reconstruction claim was added; all rigorous arguments remain independent of the figure."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-neural-operator-mesh-discretization.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-neural-operator-mesh-discretization.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-neural-operator-mesh-discretization.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "check": "Frontmatter/status preservation",
+      "output": "Complete frontmatter identical to archived before, including status: published."
+    },
+    {
+      "check": "Native local preview",
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-001-final/manifest.json",
+      "manifest_sha256": "fa77f03d5da64a61b5ebb6cecad3b42e7ab5ee1b20c6e59d7bba100f951a8fee",
+      "source_sha256": "6d8ff00d427e38365f667deddc23233eef576ddb29c9836149464c24105686f1",
+      "result": "Both PNG tiles viewed separately at original resolution; one complete compiled TikZ diagram, four boxes, three arrows, no overlapping labels or clipping; no KaTeX errors or diagram failures.",
+      "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-001-final/screenshots/alg-neural-operator-mesh-discretization.json"
+    }
+  ],
+  "evidence_resolution": {
+    "recorded_evidence_dir": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement",
+    "discrepancy": "The screenshot is absent under diagram-supplement/screenshots.",
+    "resolved_screenshot": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/alg-neural-operator-mesh-discretization--01.png",
+    "sha256": "1c63f042cf8db2bed81dfa4725ca731bfeaecdaf68b383c06abcd991ea512255",
+    "inspection": "Matching original standalone PNG viewed at original resolution; current source matched frozen before prior to edit."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Native preview covers current ItemBody and reference titles, not the production route. It reports 16 unrelated reference-title parse diagnostics.",
+    "An intermediate rendercheck misread a TikZ linebreak immediately followed by a math dollar as an escaped dollar. Empty TeX groups between the break and math delimiter preserve typesetting and allow the final scoped check to parse correctly."
+  ]
+}

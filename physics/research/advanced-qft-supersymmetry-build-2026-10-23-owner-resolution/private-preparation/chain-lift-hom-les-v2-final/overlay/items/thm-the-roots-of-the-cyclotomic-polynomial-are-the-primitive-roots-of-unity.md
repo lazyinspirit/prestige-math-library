@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-roots-of-the-cyclotomic-polynomial-are-the-primitive-roots-of-unity.md

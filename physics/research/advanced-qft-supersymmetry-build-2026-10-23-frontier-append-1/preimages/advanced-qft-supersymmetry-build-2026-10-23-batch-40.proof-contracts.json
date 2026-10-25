@@ -1,0 +1,564 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "40",
+  "level": 6,
+  "scope": [
+    "def-aqft-finite-two-group-state-sum",
+    "post-aqft-finite-gauging-model",
+    "pthm-aqft-finite-gauging-gluing",
+    "ex-aqft-finite-two-group-point-normalization",
+    "ex-aqft-finite-two-group-interval-gluing"
+  ],
+  "contracts": {
+    "def-aqft-finite-two-group-state-sum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-two-group-symmetry-realization",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\geq2$, a closed compact oriented smooth $d$-manifold $M$, and a finite ordered triangulation $K$ of $M$, meaning a finite vertex-ordered simplicial complex whose geometric realization is $M$. The model fixes an orientation and any additional spin or related lifting data required by its fields; these choices are its tangential structure. A **selected finite-regulator Euclidean model** on $K$ specifies its exact symmetry groups, field representations, finite field-value sets $X_\\sigma$ for cells $\\sigma\\in K$, constraints, and configuration spaces $\\Phi_x\\subseteq\\prod_{\\sigma\\in K}X_\\sigma$ for each background $x$. It also specifies a dimensionless Euclidean action $S_x:\\Phi_x\\to\\mathbb R$, finite measure weights $\\mu_x:\\Phi_x\\to\\mathbb C$, and a unital algebra $\\mathcal O_x$ of model-defined observables, represented as functions on $\\Phi_x$. An observable is **local** when its function depends only on field variables on a specified subcomplex of $K$; a line observable has support on a one-dimensional subcomplex. Write $W_x(\\phi):=\\mu_x(\\phi)e^{-S_x(\\phi)}$. For local insertion functions $o_{j,x}:\\Phi_x\\to\\mathbb C$, define the unnormalized correlator by $C_x(O_1,\\ldots,O_n):=\\sum_{\\phi\\in\\Phi_x}W_x(\\phi)\\prod_{j=1}^n o_{j,x}(\\phi)$; the empty tuple has value $Z_x=C_x()$. Use natural units $c=\\hbar=1$; cochain labels, action phases, and the partition weight are dimensionless. The model separately assigns dimensions to any continuous field quantities or observables it includes. No continuum limit or Lorentzian continuation is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-two-group-symmetry-realization",
+          "source_section": "Definition",
+          "quote": "Let $G$ be the selected finite discrete internal $0$-form symmetry group. Its action on the model's local field and observable data is specified by group homomorphisms into the corresponding automorphism groups. Let $A$ be the selected finite discrete abelian $1$-form symmetry group, written additively, with the exact support, charge, and background conventions of the selected p-form symmetry model. Choosing a finite Abelian $A$ is part of this 2-group model's input; no claim is made that every p-form symmetry group is Abelian without further hypotheses. The group is effective in the selected model: elements inducing identical actions in every admitted correlator, observable, and background are identified. Each generator $U_a(\\Sigma)$ is a defect insertion with support $j(\\Sigma)$, where $\\Sigma$ is a smooth manifold without boundary and $j:\\Sigma\\hookrightarrow M$ is a smooth embedding with closed codimension-two image represented by a subcomplex of $K$; the insertion includes the model-specified local field or operator data and any required orientation, coorientation, framing, or junction data on that image. It is topological when the model's correlators are invariant under permitted isotopies of that support avoiding other insertions; an allowed isotopy is a piecewise-smooth family of such embeddings in $M$ with disjoint supports and transported defect data. The generators fuse by $U_aU_{a'}=U_{a+a'}$. A genuine line observable is a line-supported insertion defined without an attached surface or other defect. For a nonzero genuine line observable $O_\\gamma$ whose one-dimensional span is preserved by every $U_a$, its scalar $A$-action is a character $\\chi_\\gamma\\in\\widehat A:=\\operatorname{Hom}(A,U(1))$; sweeping $U_a(\\Sigma)$ once across that line in the chosen positive orientation multiplies the correlator by $\\chi_\\gamma(a)$. Other line observables need not carry a scalar character. The selected $0$-form symmetry acts on these defect labels through a specified left action $\\rho:G\\to\\operatorname{Aut}(A)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-aqft-background-gauging-data",
+          "source_section": "Definition",
+          "quote": "For the finite $2$-group specialization, fix finite $(G,A,\\rho,\\beta)$ and let $\\mathcal B(K)$ be the explicit background gauge $2$-groupoid: objects are flat $G$-edge cochains and $A$-face cochains satisfying $\\delta_aB=a^*\\beta$; $1$-arrows retain raw vertex/edge parameters $(g,\\lambda)$, and $2$-arrows are vertex cochains $t$ with $\\lambda'-\\lambda=\\delta_{a^g}t$, for fixed $g$. The raw $1$-composition is the displayed $\\tau$-corrected composition; its associator is $\\beta(k_i,h_i,g_i)$. Write $\\pi_0$ for object equivalence classes, $\\pi_1(\\mathcal B(K),x)$ for $2$-isomorphism classes of $1$-automorphisms, and $\\pi_2(\\mathcal B(K),x)$ for $2$-automorphisms of the identity $1$-arrow. For a phase weight $W_K$ constant on all $1$-arrows, define the higher normalized gauging sum",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-spin-configuration-set",
+          "step": "1.1",
+          "claim": "The finite vertex-spin configuration set, unital function algebra, and normalized spin measure are well-defined for every finite complex.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gauge-transport-and-effective-action",
+          "step": "2.1",
+          "claim": "Vertex-label translations give coherent configuration bijections and an effective global C2 action; the A sector is the identity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-background-and-state-space",
+          "step": "2.2",
+          "claim": "The finite background groupoid and its boundary function space have finite component sets; each background has unit spin partition weight.",
+          "inputs": [
+            "given",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "relative-spin-normalization",
+          "step": "3.1",
+          "claim": "For a fixed background restriction on L, the relative convention fixes no spins; the normalized spin sum over all configurations is one, leaving the specified relative background higher-gauge sum.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty complex has V=0 and one spin assignment of weight 1; step 1.1 gives the normalized measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A={0} and beta=0 are fixed in A1; step 2.1 checks that only identity 2-gauge labels remain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The relative convention at a one-vertex background fixes no spin values; step 3.1 leaves the normalized spin sum equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The selected two-group has trivial A and zero Postnikov cocycle; steps 2.1–2.2 retain the ordinary C2 gauge groupoid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For every finite boundary subcomplex the convention fixes background data only; step 3.1 proves the full normalized spin sum remains one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition and step 1.1 specify finite sets and explicit values; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "normalized spin measure",
+          "result": "checked",
+          "evidence": "For V vertices there are exactly 2^V configurations, each of weight 2^-V, so the total is 1."
+        }
+      ]
+    },
+    "post-aqft-finite-gauging-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate adopts the explicit C2 vertex-spin configuration set, zero action, normalized uniform measure, observable algebra, background gauge transport, trivial A sector, and relative background state-sum convention from the local model definition."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The scope is the finite oriented three-dimensional regulator and its stated subcomplex extension. It makes no continuum, Lorentzian, universal, or empirical claim."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Moore–Saxena §23.3 and Freed–Quinn §2 were read in full at the recorded finite-state-sum and sewing locators. They support the finite measure and sewing context; the exact spin-model choices remain explicitly adopted and local."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The finite spin action, normalized measure, trivial A sector, and boundary convention are adopted model data, not consequences about nature or a continuum theory."
+        }
+      }
+    },
+    "pthm-aqft-finite-gauging-gluing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-finite-two-group-state-sum",
+          "source_section": "Definition",
+          "quote": "For each background $x=(a,0)$, the model's cell-value sets are $X_v=G$ at each vertex and a singleton at every positive-dimensional simplex. The configuration set is $\\Phi_x=C^0(K;G)$, the set of spin assignments $\\sigma=(\\sigma_v)_{v\\in K^{(0)}}$. There are no further constraints. Set the dimensionless action $S_x(\\sigma)=0$, the finite measure weight $\\mu_x(\\sigma)=2^{-V_K}$, where $V_K$ is the number of vertices, and the observable algebra $\\mathcal O_x=\\operatorname{Fun}(\\Phi_x,\\mathbb C)$. A function is local when it depends on spins in a specified subcomplex. The local spin observable $m_v(\\sigma)=(-1)^{\\sigma_v}$ transforms nontrivially under the constant global $G$ action, so this $0$-form symmetry is effective. For a closed one-dimensional subcomplex $\\gamma$, the product $\\prod_{v\\in\\gamma^{(0)}}m_v(\\sigma)$ is a line-supported observable defined without an attached surface. The selected $1$-form group is trivial: its only defect is $U_0(\\Sigma)=1$, and the line observable has only the trivial $A$-character.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-finite-two-group-state-sum",
+          "source_section": "Definition",
+          "quote": "For a background gauge arrow with vertex labels $g$, the configuration bijection is $T_g(\\sigma)_v=\\sigma_v+g_v$ and the observable-algebra isomorphism is $\\alpha_g(O)=O\\circ T_g^{-1}$. These assignments respect identity and composition. The per-background partition weight is",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-aqft-finite-gauging-model",
+          "source_section": "Postulate",
+          "quote": "Adopt as the finite physical model the three-dimensional vertex-spin regulator with $G=\\mathbb Z/2$, trivial $1$-form group $A=\\{0\\}$, zero Postnikov cocycle, zero action, and the normalized uniform measure on spins. Its global $G$ symmetry flips every spin, its background response is the unit weight for every flat background, and its selected boundary state space and relative amplitudes are those specified by the model definition. The finite background gauging and sewing prescription is part of this adopted model. This postulate says nothing about a continuum limit, an empirical realization, or the truth of any more general quantum field theory.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-aqft-finite-two-group-gauging-gluing",
+          "source_section": "Statement",
+          "quote": "Fix a finite group $G$, finite abelian group $A$, action $\\rho$, normalized $3$-cocycle $\\beta$, and a finite ordered simplicial complex $K$. Let $\\mathcal B(K)$ be the full background gauge $2$-groupoid, retaining its vertex $2$-gauge transformations, and let $W_K:\\operatorname{Ob}\\mathcal B(K)\\to U(1)$ be constant on $1$-arrows. Let $V_K,E_K$ be the numbers of vertices and edges and define\n\n$$\nc(K)=\\frac{|A|^{V_K-E_K}}{|G|^{V_K}}.\n$$\n\nThen its higher gauging sum satisfies\n\n$$\nZ_K^{(2)}(W_K)=\\sum_{[x]}W_K(x)\\frac{|\\pi_2(\\mathcal B(K),x)|}{|\\pi_1(\\mathcal B(K),x)|}=c(K)\\sum_{x\\in\\operatorname{Ob}\\mathcal B(K)}W_K(x).\n$$\n\nFor any subcomplex $L$ and fixed field $s$ on $L$, the higher sum over the relative $2$-groupoid is\n\n$$\nZ_{K,L}^{(2)}(s)=\\frac{c(K)}{c(L)}\\sum_{x|_L=s}W_K(x).\n$$\n\nIn particular let $K=K_1\\cup_\\Sigma K_2$, where the intersection is the subcomplex $\\Sigma$ and all orders are induced. Assume invariant weights $W_i$ and $W_K$ obey $W_K(x)=W_2(x|_{K_2})W_1(x|_{K_1})$. Put $Z_i(s)=Z_{K_i,\\Sigma}^{(2)}(s)$. These boundary functions are invariant on $1$-arrows of $\\mathcal B(\\Sigma)$ and obey the actual finite $2$-group gluing law\n\n$$\nZ_K^{(2)}(W_K)=\\sum_{[s]\\in\\pi_0\\mathcal B(\\Sigma)}Z_2(s)Z_1(s)\\frac{|\\pi_2(\\mathcal B(\\Sigma),s)|}{|\\pi_1(\\mathcal B(\\Sigma),s)|}.\n$$\n\nThe empty complex has $c=1$ and one empty field. For a point and unit weight the sum is $|A|/|G|$. When $A$ is trivial these formulas reduce to ordinary finite flat $G$-connection normalization. The theorem assumes scalar invariant weights and their stated factorization; it does not assert that an arbitrary higher cocycle defines such boundary scalar data.\n\n",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "unit-spin-partition-and-covariance",
+          "step": "1.1",
+          "claim": "There are 2^V spin configurations with weight 2^-V; gauge translations biject the configuration sets and the transported correlators have phase one.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "absolute-and-relative-gauge-counts",
+          "step": "2.1",
+          "claim": "The finite two-group theorem applies with |G|=2, |A|=1, beta=0, and unit invariant scalar weight, giving c(J)=2^-V_J and the stated relative formula.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "seam-contraction",
+          "step": "3.1",
+          "claim": "The compatible decomposition and unit-weight factorization satisfy the finite two-group gluing hypotheses; the trivial A sector leaves the reciprocal seam automorphism factor.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "point-normalization",
+          "step": "4.1",
+          "claim": "For one vertex the unique background has V=1, so the absolute formula gives 1/2.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement covers the finite formula; step 2.1 gives c=1 for the empty complex and its unique background."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The model fixes A={0}; steps 2.1 and 3.1 show pi2 is trivial and the formula reduces to ordinary finite C2 gauging."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the one-vertex amplitude exactly as 1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero action and beta=0 are normalized and the weight W=1 is gauge invariant by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the relative formula for every boundary subcomplex and step 3.1 uses it at the seam."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 specifies only finite configuration and gauge-label sets; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "C2 point mass",
+          "result": "checked",
+          "evidence": "One background object, automorphism order 2, trivial pi2, and unit spin partition give 1/2 by step 4.1."
+        },
+        {
+          "name": "two-edge interval sewing",
+          "result": "checked",
+          "evidence": "The exact edge, path, relative-edge, and seam counts are supplied and verified in ex-aqft-finite-two-group-interval-gluing."
+        }
+      ]
+    },
+    "ex-aqft-finite-two-group-point-normalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-finite-two-group-state-sum",
+          "source_section": "Definition",
+          "quote": "For each background $x=(a,0)$, the model's cell-value sets are $X_v=G$ at each vertex and a singleton at every positive-dimensional simplex. The configuration set is $\\Phi_x=C^0(K;G)$, the set of spin assignments $\\sigma=(\\sigma_v)_{v\\in K^{(0)}}$. There are no further constraints. Set the dimensionless action $S_x(\\sigma)=0$, the finite measure weight $\\mu_x(\\sigma)=2^{-V_K}$, where $V_K$ is the number of vertices, and the observable algebra $\\mathcal O_x=\\operatorname{Fun}(\\Phi_x,\\mathbb C)$. A function is local when it depends on spins in a specified subcomplex. The local spin observable $m_v(\\sigma)=(-1)^{\\sigma_v}$ transforms nontrivially under the constant global $G$ action, so this $0$-form symmetry is effective. For a closed one-dimensional subcomplex $\\gamma$, the product $\\prod_{v\\in\\gamma^{(0)}}m_v(\\sigma)$ is a line-supported observable defined without an attached surface. The selected $1$-form group is trivial: its only defect is $U_0(\\Sigma)=1$, and the line observable has only the trivial $A$-character.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-aqft-finite-gauging-gluing",
+          "source_section": "Statement",
+          "quote": "For a one-vertex boundary complex the amplitude is $1/2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-aqft-finite-gauging-model",
+          "source_section": "Postulate",
+          "quote": "Adopt as the finite physical model the three-dimensional vertex-spin regulator with $G=\\mathbb Z/2$, trivial $1$-form group $A=\\{0\\}$, zero Postnikov cocycle, zero action, and the normalized uniform measure on spins. Its global $G$ symmetry flips every spin, its background response is the unit weight for every flat background, and its selected boundary state space and relative amplitudes are those specified by the model definition. The finite background gauging and sewing prescription is part of this adopted model. This postulate says nothing about a continuum limit, an empirical realization, or the truth of any more general quantum field theory.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "point-objects-and-stabilizers",
+          "step": "1.1",
+          "claim": "A point has one background object, two vertex automorphisms, no nontrivial 2-gauge labels, and normalized spin sum 1.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "point-background-measure",
+          "step": "2.1",
+          "claim": "The sole background component contributes 1 times pi2/pi1 = 1/2.",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This Example fixes a one-vertex complex, not the empty complex."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The model fixes A={0}; step 1.1 checks that pi2 is trivial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 counts the unique background object and its point stabilizers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The unit action weight and zero Postnikov cocycle are fixed; step 2.1 computes the normalized component mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is a closed one-vertex background count and asserts no endpoint formula."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly enumerates the two C2 vertex labels and the unique A label; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-vertex spin and gauge sum",
+          "result": "checked",
+          "evidence": "Two spin values each of weight 1/2 give per-background weight 1; the unique background component has automorphism order 2 and contributes 1/2."
+        }
+      ]
+    },
+    "ex-aqft-finite-two-group-interval-gluing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-finite-two-group-state-sum",
+          "source_section": "Definition",
+          "quote": "The boundary state space on a subcomplex $L$ is the finite-dimensional space $\\mathcal H(L)=\\operatorname{Fun}(\\pi_0\\mathcal B(L),\\mathbb C)$. For a fixed background $s$ on $L$, the relative convention fixes only this background restriction and sums over all spins on $K$ with weight $2^{-V_K}$; it does not fix boundary spin values. Thus the spin sector contributes $1$ for each extending background and introduces no additional seam factor. The relative background amplitude then uses the relative higher-gauge sum.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-aqft-finite-gauging-gluing",
+          "source_section": "Statement",
+          "quote": "If $K=K_1\\cup_\\Sigma K_2$ is a union of ordered subcomplexes with compatible restrictions and opposite induced seam orientations, the relative boundary amplitudes are gauge-invariant and obey $$ Z_K^{(2)}=\\sum_{[s]\\in\\pi_0\\mathcal B(\\Sigma)} Z_{K_2,\\Sigma}^{(2)}(s)Z_{K_1,\\Sigma}^{(2)}(s)\\frac{|\\pi_2(\\mathcal B(\\Sigma),s)|}{|\\pi_1(\\mathcal B(\\Sigma),s)|}. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-aqft-finite-gauging-model",
+          "source_section": "Postulate",
+          "quote": "Adopt as the finite physical model the three-dimensional vertex-spin regulator with $G=\\mathbb Z/2$, trivial $1$-form group $A=\\{0\\}$, zero Postnikov cocycle, zero action, and the normalized uniform measure on spins. Its global $G$ symmetry flips every spin, its background response is the unit weight for every flat background, and its selected boundary state space and relative amplitudes are those specified by the model definition. The finite background gauging and sewing prescription is part of this adopted model. This postulate says nothing about a continuum limit, an empirical realization, or the truth of any more general quantum field theory.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "edge-and-path-object-counts",
+          "step": "1.1",
+          "claim": "Each edge has two backgrounds and c=1/4; the full two-edge path has four backgrounds and c=1/8, with spin contribution 1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "relative-edge-amplitudes",
+          "step": "2.1",
+          "claim": "Fixing the shared point leaves two edge-label extensions and relative normalization 1/2, hence each relative amplitude is 1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "seam-automorphism-contraction",
+          "step": "3.1",
+          "claim": "The point seam has mass 1/2; contracting the two unit relative amplitudes gives 1/2, the direct path amplitude.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty two-edge path and a one-vertex seam."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A={0} throughout; steps 1.1, 2.1, and 3.1 use the ordinary C2 automorphism factor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The seam is the one-vertex complex; step 2.1 computes its unique background and relative normalization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The model fixes beta=0 and unit action; step 1.1 counts every flat edge assignment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 verify the exact relative amplitude and seam contraction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly enumerates the finite C2 edge labels; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-edge C2 interval count",
+          "result": "checked",
+          "evidence": "One edge: 2(1/4)=1/2; two-edge path: 4(1/8)=1/2; relative edge: 2(1/2)=1; seam mass 1/2; both sewing sides are 1/2."
+        }
+      ]
+    }
+  }
+}

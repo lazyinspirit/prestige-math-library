@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-iid-and-markov-source-entropy-rates.json
+  precheck: pass
 id: ex-iid-and-markov-source-entropy-rates
 kind: example
 title: "IID and two-state Markov entropy rates"
@@ -25,7 +28,7 @@ sources:
 ---
 ## Example
 
-Computes h=1 bit/symbol for fair IID bits and h=H2(1/4) for the stationary symmetric two-state Markov source with switch probability 1/4; compares the stationary LZ78 expected rates.
+Computes $h=1$ bit/symbol for fair IID bits and $h=H_2(1/4)$ for the stationary symmetric two-state Markov source with switch probability 1/4; compares the stationary LZ78 expected rates.
 
 ## Facts & Assumptions
 

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-upper-triangular-unipotent-groups.json
+  precheck: pass
 id: ex-upper-triangular-unipotent-groups
 kind: example
-title: Upper unitriangular groups are unipotent, and the additive group is U_2
+title: Upper unitriangular groups are unipotent, and the additive group is $U_2$
 dependency_level: 7
 deps:
   - lem-upper-unitriangular-coordinate-ring-is-coconnected
@@ -17,11 +20,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)
@@ -30,7 +28,7 @@ sources:
 ---
 ## Example
 
-Let $k$ be a field. The group scheme $U_n$ of upper unitriangular matrices ([[def-upper-unitriangular-group-scheme]]) is a smooth connected unipotent algebraic group over $k$: it is a closed subgroup of $U_n$ trivially, its coordinate ring $k[X_{ij}\mid i<j]$ is coconnected by the weight filtration, and its central series has additive quotients ([[lem-upper-unitriangular-central-series]]).
+Let $k$ be a field. The group scheme $U_n$ of upper unitriangular matrices ([[def-upper-unitriangular-group-scheme|The upper unitriangular group scheme $U_n$ and its coordinate ring]]) is a smooth connected unipotent algebraic group over $k$: it is a closed subgroup of $U_n$ trivially, its coordinate ring $k[X_{ij}\mid i<j]$ is coconnected by the weight filtration, and its central series has additive quotients ([[lem-upper-unitriangular-central-series|The central series of $U_n$ with additive quotients]]).
 
 The map
 $$a\mapsto\begin{pmatrix}1&a\\0&1\end{pmatrix}$$
@@ -39,13 +37,13 @@ is an isomorphism $\mathbf G_a\to U_2$, so $\mathbf G_a$ is unipotent. In charac
 ## Facts & Assumptions
 **Given:** A field $k$ and an integer $n\ge1$.
 
-[F1] $U_n$ is the closed subgroup scheme of $\mathrm{GL}_n$ of upper unitriangular matrices, with $U_n(R)=\{(\alpha_{ij})\in\mathrm{GL}_n(R):\alpha_{ij}=0\ (i>j),\ \alpha_{ii}=1\}$ for every commutative unital $k$-algebra $R$, and $O(U_n)=k[X_{ij}:i<j]$ with the displayed comultiplication. ([[def-upper-unitriangular-group-scheme]])
+[F1] $U_n$ is the closed subgroup scheme of $\mathrm{GL}_n$ of upper unitriangular matrices, with $U_n(R)=\{(\alpha_{ij})\in\mathrm{GL}_n(R):\alpha_{ij}=0\ (i>j),\ \alpha_{ii}=1\}$ for every commutative unital $k$-algebra $R$, and $O(U_n)=k[X_{ij}:i<j]$ with the displayed comultiplication. ([[def-upper-unitriangular-group-scheme|The upper unitriangular group scheme $U_n$ and its coordinate ring]])
 
-[F2] The explicit polynomial Hopf algebra $O(U_n)$ is coconnected by its weight filtration, and any surjective Hopf-algebra quotient of a coconnected algebra is coconnected. These are the choice-free algebraic clauses of [[lem-upper-unitriangular-coordinate-ring-is-coconnected]]. A group with coconnected coordinate Hopf algebra is unipotent, the choice-free implication(c) implies(a) of [[thm-unipotent-group-triangular-criterion]]. The explicit matrix central series of $U_n$ has additive quotients ([[lem-upper-unitriangular-central-series]], [[def-unipotent-algebraic-group]]).
+[F2] The explicit polynomial Hopf algebra $O(U_n)$ is coconnected by its weight filtration, and any surjective Hopf-algebra quotient of a coconnected algebra is coconnected. These are the choice-free algebraic clauses of [[lem-upper-unitriangular-coordinate-ring-is-coconnected|Coconnected Hopf algebras: the coordinate ring of $U_n$ and passage to quotients]]. A group with coconnected coordinate Hopf algebra is unipotent, the choice-free implication(c) implies(a) of [[thm-unipotent-group-triangular-criterion|Unipotent groups are exactly the subgroups of some $U_n$, equivalently the groups with coconnected coordinate Hopf algebra]]. The explicit matrix central series of $U_n$ has additive quotients ([[lem-upper-unitriangular-central-series|The central series of $U_n$ with additive quotients]], [[def-unipotent-algebraic-group]]).
 
-[F3] For every $R$, the map $a\mapsto\begin{pmatrix}1&a\\0&1\end{pmatrix}$ identifies addition on $R$ with multiplication in $U_2(R)$, and is natural in $R$; equivalently the coordinate Hopf algebras are both $k[x]$ with $\Delta(x)=x\otimes1+1\otimes x$. ([[def-upper-unitriangular-group-scheme]])
+[F3] For every $R$, the map $a\mapsto\begin{pmatrix}1&a\\0&1\end{pmatrix}$ identifies addition on $R$ with multiplication in $U_2(R)$, and is natural in $R$; equivalently the coordinate Hopf algebras are both $k[x]$ with $\Delta(x)=x\otimes1+1\otimes x$. ([[def-upper-unitriangular-group-scheme|The upper unitriangular group scheme $U_n$ and its coordinate ring]])
 
-[F4] In characteristic $p$, $x^p$ and $x^p-x$ are primitive in the additive Hopf algebra, so the ideals they generate are Hopf ideals and give explicit Hopf quotients $k[x]/(x^p)$ and $k[x]/(x^p-x)$. Quotient Hopf algebras carry their canonical group scheme structures. The latter polynomial factors as $\prod_{i\in\mathbf F_p}(x-i)$ with distinct roots, and finite Chinese remainder gives $k[x]/(x^p-x)\cong\prod_{i\in\mathbf F_p}k$. ([[lem-hopf-ideal-kernels-and-quotients]], [[def-upper-unitriangular-group-scheme]])
+[F4] In characteristic $p$, $x^p$ and $x^p-x$ are primitive in the additive Hopf algebra, so the ideals they generate are Hopf ideals and give explicit Hopf quotients $k[x]/(x^p)$ and $k[x]/(x^p-x)$. Quotient Hopf algebras carry their canonical group scheme structures. The latter polynomial factors as $\prod_{i\in\mathbf F_p}(x-i)$ with distinct roots, and finite Chinese remainder gives $k[x]/(x^p-x)\cong\prod_{i\in\mathbf F_p}k$. ([[lem-hopf-ideal-kernels-and-quotients]], [[def-upper-unitriangular-group-scheme|The upper unitriangular group scheme $U_n$ and its coordinate ring]])
 
 ## Proof
 

@@ -217,8 +217,8 @@ const writeBlock = (text, block) => {
   if (precheck.test(text)) return text.replace(precheck, `$1${block}`);
   const verification = /^verification:\n/m;
   if (verification.test(text)) return text.replace(verification, `$&${block}`);
-  const sources = /^sources:\n/m;
-  if (sources.test(text)) return text.replace(sources, `verification:\n${block}sources:\n`);
+  const sources = /^sources:(?=[ \t\r\n]|$)/m;
+  if (sources.test(text)) return text.replace(sources, `verification:\n${block}sources:`);
   // Some authored examples have neither a precheck nor sources. They still
   // have valid YAML frontmatter and a current configured-judge pass, so the
   // absence of those optional mappings must not make stamping impossible.

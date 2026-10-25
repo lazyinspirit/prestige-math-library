@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-maurer-cartan-form-is-a-pointwise-isomorphism-and-left-invariant.md

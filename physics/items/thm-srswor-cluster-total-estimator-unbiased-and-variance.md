@@ -1,0 +1,76 @@
+---
+id: thm-srswor-cluster-total-estimator-unbiased-and-variance
+kind: theorem
+title: "Unbiasedness and variance of the SRSWOR cluster-total estimator"
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 4
+deps:
+  - def-cluster-sampling-design-and-cluster-totals
+  - def-moments-variance-and-covariance
+  - thm-covariance-bilinearity-and-symmetry
+  - thm-variance-of-a-finite-sum
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: "Shalabh, Sampling Theory, Chapter 9: Cluster Sampling, PDF pp. 4–5, IIT Kanpur"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter9-sampling-cluster-sampling.pdf"
+    - title: "Sharon L. Lohr, Sampling: Design and Analysis, 2nd ed., §5.2.1, printed pp. 136–138"
+      url: "https://drive.uqu.edu.sa/_/maatia/files/Sampling.pdf"
+---
+
+## Statement
+
+Let a fixed finite population have $M\ge2$ PSUs with fixed cluster totals
+$T_1,\ldots,T_M$. Select $m$ PSUs by uniform SRSWOR, where $1\le m\le M$.
+For $S_1$ the selected set, define
+$$\widehat T_C=\frac{M}{m}\sum_{i\in S_1}T_i, \qquad S_T^2=\frac1{M-1}\sum_{i=1}^M(T_i-\bar T)^2, \qquad \bar T=\frac1M\sum_{i=1}^M T_i.$$
+Then $E_d[\widehat T_C]=T:=\sum_{i=1}^M T_i$ and
+$$\operatorname{Var}_d(\widehat T_C) =\frac{M^2(1-m/M)}{m}S_T^2.$$
+
+## Facts & Assumptions
+
+**Given:** $M\ge2$ fixed PSU totals, a uniform SRSWOR sample $S_1$ of size
+$1\le m\le M$, and design expectation $E_d$ over that sample only.
+
+[F1] [[def-cluster-sampling-design-and-cluster-totals]]: For a uniform SRSWOR
+of $m$ PSUs, the first-stage sample space is the set of all $m$-element
+subsets of $[M]$, each with probability $\binom{M}{m}^{-1}$; $T_i$ is fixed.
+
+[F2] [[def-moments-variance-and-covariance]]: For square-integrable real
+random variables, variance and covariance are the expectations of the
+centered square and centered product.
+
+[F3] [[thm-covariance-bilinearity-and-symmetry]]: Covariance is symmetric
+and bilinear in finite linear combinations of square-integrable variables.
+
+[F4] [[thm-variance-of-a-finite-sum]]: The variance of a finite sum of
+square-integrable real random variables is the sum of all pairwise
+covariances.
+
+## Proof
+
+1.1 For each PSU define $I_i=1\{i\in S_1\}$. Counting $m$-subsets gives $\pi_i=\binom{M-1}{m-1}/\binom{M}{m}=m/M$; for distinct $i,r$, $\pi_{ir}=0$ when $m=1$ and $\pi_{ir}=\binom{M-2}{m-2}/\binom{M}{m}=m(m-1)/(M(M-1))$ when $m\ge2$. Hence $\operatorname{Var}_d(I_i)=\pi_i(1-\pi_i)=m(M-m)/M^2$ and $\operatorname{Cov}_d(I_i,I_r)=\pi_{ir}-\pi_i\pi_r=-m(M-m)/(M^2(M-1))$. [given, F1, choose, algebra]
+
+2.1 Since $\widehat T_C=(M/m)\sum_i I_iT_i$, linearity of finite expectation and $E_d[I_i]=m/M$ from step 1.1 give $E_d[\widehat T_C]=(M/m)\sum_i(m/M)T_i=\sum_iT_i=T$. [given, step 1.1, algebra]
+
+3.1 Put $x_i=T_i-\bar T$, so $\sum_i x_i=0$ and fixed sample size gives $\widehat T_C-T=(M/m)\sum_i I_ix_i$. By [F4] and [F3], its variance is $(M^2/m^2)(\sum_i\operatorname{Var}(I_i)x_i^2+\sum_{i\ne r}\operatorname{Cov}(I_i,I_r)x_ix_r)$. Since $\sum_{i\ne r}x_ix_r=-\sum_i x_i^2$, substitution from step 1.1 gives $\operatorname{Var}_d(\widehat T_C)=(M^2/m^2)(m(M-m)/M^2)(1+1/(M-1))\sum_i x_i^2=M^2(1-m/M)S_T^2/m$. [given, F2, F3, F4, step 1.1, algebra] ∎
+
+## Remarks
+
+The proof is design-based and uses no distributional model for the fixed
+$T_i$, no normal approximation, and no axiom of choice. At $m=M$ the sample
+is a census and the displayed variance is zero; $m=1$ is covered by the
+zero pair-inclusion probability in step 1.1. The statement excludes $M=1$
+because $S_T^2$ with denominator $M-1$ is then undefined; that sole-PSU census
+has zero variance directly.

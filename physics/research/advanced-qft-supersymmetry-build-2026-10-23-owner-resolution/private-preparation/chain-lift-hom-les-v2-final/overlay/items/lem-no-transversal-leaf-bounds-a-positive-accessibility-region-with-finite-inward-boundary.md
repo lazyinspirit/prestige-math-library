@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-no-transversal-leaf-bounds-a-positive-accessibility-region-with-finite-inward-boundary.md

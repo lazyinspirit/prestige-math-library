@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-age-structured-renewal-characteristic-solution.json
+  precheck: pass
 id: thm-age-structured-renewal-characteristic-solution
 kind: theorem
 title: Characteristic formula and Volterra solution for age renewal transport
@@ -75,3 +78,30 @@ $$n(t,a)=\begin{cases}n_0(a-t)\exp\!\left(-\int_{a-t}^{a}\mu(r)\,dr\right),&a\ge
 
 6.1 Any mild solution has a birth rate satisfying the Volterra equation in step 2.1. Uniqueness from step 2.2 forces that same birth rate, and the characteristic formula in step 1.1 then forces the same density. [F1, step 1.1, step 2.1, step 2.2] ∎
 
+
+## Remarks
+
+The diagram traces two representative cohorts to a fixed time $0<t\le T$: an old cohort at age $a_o>t$ starts at initial age $a_o-t$, while a newborn cohort at age $0<a_b<t$ enters at birth time $t-a_b$. Both arrows satisfy $da/dt=1$. Their density values are respectively $n_0(a_o-t)S(a_o-t,t)$ and $B(t-a_b)S(0,a_b)$, exactly the two branches of the Statement with the survival function from [F1]. The dashed line $a=t$ is the separating characteristic; its value is assigned to the old-cohort branch in the formula, with no compatibility at the corner asserted. The unbounded age axis is shown only in part. The proof is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.15cm,y=0.85cm,>=stealth]
+\draw[->] (0,0) -- (5.9,0) node[right] {time};
+\draw[->] (0,0) -- (0,6.4) node[above] {age};
+\draw[densely dotted] (3.6,0) -- (3.6,5.5);
+\node[below] at (3.6,0) {$t$};
+\draw[dashed] (0,0) -- (5.15,5.15) node[above right] {$a=t$};
+\node at (1.05,5.65) {$a>t$};
+\node at (4.85,1) {$0<a<t$};
+\draw[thick,->] (0,1.2) -- (3.6,4.8);
+\fill (0,1.2) circle (2pt);
+\node[left] at (0,1.2) {$a_o-t$};
+\node[right] at (3.6,4.8) {$(t,a_o)$};
+\node at (1.4,3.7) {initial cohort};
+\draw[thick,->] (1.4,0) -- (3.6,2.2);
+\fill (1.4,0) circle (2pt);
+\node[below] at (1.4,0) {$t-a_b$};
+\node[right] at (3.6,2.2) {$(t,a_b)$};
+\node at (4.85,3.05) {newborn cohort};
+\node[below] at (2.5,-0.65) {renewal boundary $n(s,0)=B(s)$};
+\end{tikzpicture}
+```

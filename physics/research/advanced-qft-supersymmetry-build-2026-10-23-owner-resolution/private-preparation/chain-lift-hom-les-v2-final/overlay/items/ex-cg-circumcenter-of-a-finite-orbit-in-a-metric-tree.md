@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cg-circumcenter-of-a-finite-orbit-in-a-metric-tree.md

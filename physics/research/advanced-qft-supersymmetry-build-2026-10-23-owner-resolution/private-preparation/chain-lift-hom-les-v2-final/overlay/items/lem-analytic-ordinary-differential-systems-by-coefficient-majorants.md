@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-analytic-ordinary-differential-systems-by-coefficient-majorants.md

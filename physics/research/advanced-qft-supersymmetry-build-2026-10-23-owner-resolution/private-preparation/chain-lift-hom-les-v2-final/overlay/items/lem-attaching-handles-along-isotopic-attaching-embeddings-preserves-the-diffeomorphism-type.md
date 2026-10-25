@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type.md

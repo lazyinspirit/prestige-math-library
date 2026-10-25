@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-exact-top-form-with-nonzero-integral-on-a-manifold-with-boundary.md

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-existence-and-uniqueness-of-multilinear-extension.json
+  precheck: pass
 id: ex-existence-and-uniqueness-of-multilinear-extension
 kind: example
-title: "Interpolating a two-bit table over F_5"
+title: 'Interpolating a two-bit table over $\mathbb F_5$'
 status: published
 origin: pipeline
 deps: [thm-existence-and-uniqueness-of-multilinear-extension]
@@ -9,12 +12,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct calculation
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Justin Thaler, Proofs, Arguments, and Zero-Knowledge (2023), Figure 3.2 p.31"

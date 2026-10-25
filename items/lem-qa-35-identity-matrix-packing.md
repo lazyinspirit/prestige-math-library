@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-qa-35-identity-matrix-packing.json
+  precheck: pass
 id: lem-qa-35-identity-matrix-packing
 kind: lemma
 title: "Packing bound for separated randomized message rows"
@@ -13,8 +16,6 @@ axiom_use: "No choice axiom is used; all distributions, sums, bases, and selecti
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Ilan Newman and Mario Szegedy, Public vs. Private Coin Flips in One Round Communication Games"
@@ -24,7 +25,7 @@ sources:
 
 ## Statement
 
-If A,B are N×m row-stochastic matrices and M∈[0,1]^{m×m} satisfies (AMBᵀ)_xx≥0.99 and (AMBᵀ)_xy≤0.01 for x≠y, then for every m≥2, N≤exp(60(ln m)²).
+If $A,B$ are $N\times m$ row-stochastic matrices and $M\in[0,1]^{m\times m}$ satisfies $(AMB^{\mathsf T})_{xx}\ge0.99$ and $(AMB^{\mathsf T})_{xy}\le0.01$ for $x\ne y$, then for every $m\ge2$, $N\le\exp(60(\ln m)^2)$.
 
 ## Facts & Assumptions
 

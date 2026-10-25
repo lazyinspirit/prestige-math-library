@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-nrqm-controlled-dynamics-wkb-explicit-error.md

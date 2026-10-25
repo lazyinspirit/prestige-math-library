@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-wave-energy-need-not-be-conserved-through-an-open-boundary.md

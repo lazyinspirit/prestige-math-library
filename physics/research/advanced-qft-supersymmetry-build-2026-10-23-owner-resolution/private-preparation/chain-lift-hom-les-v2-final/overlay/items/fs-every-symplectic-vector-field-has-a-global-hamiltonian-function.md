@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-symplectic-vector-field-has-a-global-hamiltonian-function.md

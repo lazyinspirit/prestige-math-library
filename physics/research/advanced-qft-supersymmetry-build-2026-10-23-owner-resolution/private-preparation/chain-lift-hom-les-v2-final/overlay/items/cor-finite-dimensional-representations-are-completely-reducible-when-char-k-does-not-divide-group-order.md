@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order.md

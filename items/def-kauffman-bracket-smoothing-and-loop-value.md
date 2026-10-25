@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-kauffman-bracket-smoothing-and-loop-value.json
+  precheck: pass
 id: def-kauffman-bracket-smoothing-and-loop-value
 kind: definition
 title: "Kauffman bracket smoothing and loop value"
@@ -14,17 +17,6 @@ axiom_use: "Choice-free: each input diagram has a finite crossing set and the st
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §III, printed pp. 430–432"
@@ -58,22 +50,22 @@ changes of local coordinates. Thus turning right from an entering underpassing
 half-strand gives the A-smoothing.
 
 ```tikz
-\begin{tikzpicture}[scale=0.72, line cap=round, line join=round]
+\begin{tikzpicture}[scale=1, line cap=round, line join=round]
   \begin{scope}
     \draw[thick] (-1,1)--(-0.14,0.14);
     \draw[thick] (0.14,-0.14)--(1,-1);
     \draw[very thick] (-1,-1)--(1,1);
     \node at (0,-1.45) {crossing};
   \end{scope}
-  \begin{scope}[xshift=3.4cm]
+  \begin{scope}[xshift=3.8cm]
     \draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);
     \draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);
-    \node at (0,-1.45) {$A$-smoothing, weight $A$};
+    \node[align=center] at (0,-1.65) {$A$-smoothing\\weight $A$};
   \end{scope}
-  \begin{scope}[xshift=6.8cm]
+  \begin{scope}[xshift=7.6cm]
     \draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);
     \draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);
-    \node at (0,-1.45) {$B$-smoothing, weight $A^{-1}$};
+    \node[align=center] at (0,-1.65) {$B$-smoothing\\weight $A^{-1}$};
   \end{scope}
 \end{tikzpicture}
 ```

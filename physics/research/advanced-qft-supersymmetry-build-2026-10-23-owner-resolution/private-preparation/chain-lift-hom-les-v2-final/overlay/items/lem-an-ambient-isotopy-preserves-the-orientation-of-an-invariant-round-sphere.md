@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-an-ambient-isotopy-preserves-the-orientation-of-an-invariant-round-sphere.md

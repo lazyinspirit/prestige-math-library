@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-distance-between-corresponding-side-points-in-toponogov-comparison.json
+  precheck: pass
 id: prop-distance-between-corresponding-side-points-in-toponogov-comparison
 kind: proposition
 title: Distance between corresponding side points in toponogov comparison
@@ -25,8 +28,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  repair: research/frontier-38-owner-30-published-format-misc-prop-distance-between-corresponding-side-points-in-toponogov-comparison.receipt.json
 sources:
   scraped: []
   references:
@@ -87,7 +88,7 @@ inherited $\mathrm{AC}_\omega$ is used.
 
 ## Proof
 
-**Proof technique:** direct. Two auxiliary triangles at an interior point $W$ of one leg have comparison angles at $W$ summing to at most $\pi$; gluing their model configurations along the side $Wr$ and straightening the bent leg at $W$ is the model transfer (Lang, Lemma 5.3), which shows that the model angle at $p$ of the triple $(p,W,r)$ is at least the full comparison angle $\alpha$. The monotone model cosine law then gives the chord inequality of the model triangle, first for an interior point against the opposite endpoint, and then, applied to the wedge $(p,u,r)$, for two arbitrary points of the two legs.
+**Proof technique:** direct. Two auxiliary triangles at an interior point W of one leg have comparison angles at W summing to at most pi; gluing their model configurations along the side Wr and straightening the bent leg at W is the model transfer (Lang, Lemma 5.3), which shows that the model angle at p of the triple (p,W,r) is at least the full comparison angle alpha. The monotone model cosine law then gives the chord inequality of the model triangle, first for an interior point against the opposite endpoint, and then, applied to the wedge (p,u,r), for two arbitrary points of the two legs.
 
 1.1 Setup and the model chord identification. Take the data of the statement. The triple $(\bar p,\bar q,\bar r)$ is a comparison triangle with $d_k(\bar p,\bar q)=a$, $d_k(\bar p,\bar r)=b$, $d_k(\bar q,\bar r)=c$, and $\alpha\in(0,\pi)$ is its angle at $\bar p$ [F1]. For $0<s\le a$ and $0<t\le b$ the points $\bar u,\bar v$ lie at distances $s,t$ from $\bar p$ on the minimizing comparison sides, and the included angle at $\bar p$ between $\bar p\bar u$ and $\bar p\bar v$ is $\alpha$; hence $$d_k(\bar u,\bar v)=c_k(s,t,\alpha)$$ by the independence of $c_k$ from the choices of the unit-speed geodesics [F3]. All distances that occur below are distances in $M^2_k$ when the model or its vertices are mentioned, and distances in $M$ otherwise; the letters $p,q,r,u,v$ always denote points of $M$ and their barred letters the corresponding comparison points. [given, F1]
 
@@ -112,3 +113,44 @@ inherited $\mathrm{AC}_\omega$ is used.
 ## Source locator
 
 The chord comparison is Lang, *Riemannian and Metric Geometry*, Chapter 5, Definition 5.7 and Lemma 5.9 (printed pp. 66–67, PDF pp. 70–71): under $K\ge\kappa$, angle comparison on all subhinges of a hinge implies the chord comparison of corresponding points, the inequality $|uv|\ge|\bar u\bar v|$ proved here. Lemma 5.3 of the same chapter (Alexandrov's lemma, printed p. 65) is the transfer proved in step 2.1: the sign of $\pi$ minus the angle sum at the interior point equals the sign of the angle difference at the vertex; it is derived there from the monotone model cosine law, which is Lemma 5.2 of the source and is recorded as the bijection of [F3] from [[thm-toponogov-hinge-comparison]]. Every segment in a Riemannian manifold is balanced (Lang, p. 66), which is the straight-angle identity of step 1.5, used again in steps 3.1 and 4.1. Lang, *Riemannian and Metric Geometry*, Chapter 5, Definition 5.7 and Lemma 5.9 (printed pp.65–67, PDF pp.69–70), states the chord comparison for curvature at least κ. Eschenburg, *Comparison Theorems in Riemannian Geometry*, §6 (printed pp.21–25), proves the corresponding distance comparison in Theorem 6.1 and the angle comparison in Corollary 6.3.
+
+## Remarks
+
+The schematic below shows interior choices of the corresponding points. The actual legs have lengths $a$ and $b$, respectively. Solid sides represent minimizing geodesics; dashed chords indicate the two distances being compared. The drawings are not to scale and encode neither Euclidean angles nor an isometric embedding. There is no map between the two ambient manifolds: correspondence means only matching distances from the distinguished vertex along the chosen sides. The rigorous proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\coordinate (p) at (0,2.8);
+\coordinate (q) at (-1.8,0);
+\coordinate (r) at (1.8,0);
+\coordinate (u) at (-0.9,1.4);
+\coordinate (v) at (0.9,1.4);
+\draw (p) -- node[pos=0.25,left] {$\sigma_1$} (q);
+\draw (p) -- node[pos=0.25,right] {$\sigma_2$} (r);
+\draw (q) -- node[below] {$c$} (r);
+\draw[dashed] (u) -- node[below] {$d_g(u,v)$} (v);
+\fill (p) circle (1.5pt) node[above] {$p$};
+\fill (q) circle (1.5pt) node[below left] {$q$};
+\fill (r) circle (1.5pt) node[below right] {$r$};
+\fill (u) circle (1.5pt) node[left] {$u$};
+\fill (v) circle (1.5pt) node[right] {$v$};
+\node at (0,3.6) {$(M,g),\quad K\ge k$};
+\coordinate (P) at (5,2.8);
+\coordinate (Q) at (3.6,0);
+\coordinate (R) at (6.4,0);
+\coordinate (U) at (4.3,1.4);
+\coordinate (V) at (5.7,1.4);
+\draw (P) -- node[pos=0.25,left] {$a$} (Q);
+\draw (P) -- node[pos=0.25,right] {$b$} (R);
+\draw (Q) -- node[below] {$c$} (R);
+\draw[dashed] (U) -- node[below] {$d_k(\bar u,\bar v)$} (V);
+\fill (P) circle (1.5pt) node[above] {$\bar p$};
+\fill (Q) circle (1.5pt) node[below left] {$\bar q$};
+\fill (R) circle (1.5pt) node[below right] {$\bar r$};
+\fill (U) circle (1.5pt) node[left] {$\bar u$};
+\fill (V) circle (1.5pt) node[right] {$\bar v$};
+\node at (5,3.6) {$M^2_k$};
+\node at (2.5,-1) {$d_g(p,u)=d_k(\bar p,\bar u)=s,\qquad d_g(p,v)=d_k(\bar p,\bar v)=t$};
+\node at (2.5,-1.7) {$d_g(u,v)\ge d_k(\bar u,\bar v)$};
+\end{tikzpicture}
+```

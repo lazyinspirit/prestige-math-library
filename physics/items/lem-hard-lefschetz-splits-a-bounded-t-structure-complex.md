@@ -1,0 +1,83 @@
+---
+id: lem-hard-lefschetz-splits-a-bounded-t-structure-complex
+kind: lemma
+title: "Hard Lefschetz splits a bounded t-structure complex"
+status: published
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 3
+deps: [def-truncation-functors-and-cohomology-of-a-t-structure, lem-truncation-triangles-are-essentially-unique-and-functorial, lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude, def-triangulated-category, def-triangulated-category-axiom-tr-one, def-triangulated-category-axiom-tr-three, def-morphism-and-isomorphism-of-triangles, def-rotation-of-a-triangle, prop-zero-and-split-triangles-are-distinguished, prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations, prop-a-distinguished-triangle-with-zero-first-map-is-split, def-additive-category, def-biproduct]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: induction
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-11
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  scraped: []
+  references:
+    - title: "P. Deligne, «Théorème de Lefschetz et critères de dégénérescence de suites spectrales», Publ. Math. IHÉS 35 (1968) 107–126 (complete numdam PDF)"
+      url: "https://www.numdam.org/item/PMIHES_1968__35__107_0.pdf"
+      locator: "§1, results (1.1)–(1.13) with proofs, printed pp. 107–110"
+    - title: "M. A. A. de Cataldo and L. Migliorini, «The Hodge theory of algebraic maps», arXiv:math/0306030v2 (complete arXiv PDF)"
+      url: "https://arxiv.org/pdf/math/0306030"
+      locator: "§2.2.3(c) printed p. 12; Theorem 4.4.4 printed p. 36; §4.5 formulas (22)–(27) printed pp. 37–38"
+    - title: "A. A. Beilinson, J. Bernstein and P. Deligne, «Faisceaux pervers», Astérisque 100 (1982), Société Mathématique de France (complete numdam PDF)"
+      url: "https://www.numdam.org/item/AST_1982__100__1_0.pdf"
+      locator: "§1.3.1–1.3.9, printed pp. 28–33; §5.4.10–5.4.13, printed pp. 143–147"
+---
+
+## Statement
+
+Let $\mathcal T$ be a triangulated category with a bounded t-structure, with truncation functors and t-cohomology as in [[def-truncation-functors-and-cohomology-of-a-t-structure]] and [[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]. Let $K\in\mathcal T$ and let $L:K\to K[2]$ be a morphism such that for every integer $j\ge0$ the map
+$$H^{-j}_t(L^j):H^{-j}_t(K)\longrightarrow H^{-j}_t(K[2j])\cong H^j_t(K)$$
+is an isomorphism, where $L^j:=L[2j-2]\circ\cdots\circ L[2]\circ L$ is the $j$-fold iterate (so $L^0=1_K$) and the identification is the shift isomorphism $H^j_t(K)\cong H^{-j}_t(K[2j])$ of that lemma. Then there is an isomorphism
+$$K\cong\bigoplus_j H^j_t(K)[-j]$$
+in $\mathcal T$; the sum is finite because the t-structure is bounded. The isomorphism is not asserted to be canonical, and no compatibility with primitive lifts is claimed: this is the abstract splitting criterion, not the stronger primitive-compatible decomposition used in the Hodge theory of projective maps. The degenerate case in which $H^{-n}_t(K)$ and $H^n_t(K)$ are both zero (they vanish together because $H^{-n}_t(L^n)$ is an isomorphism) is covered by the same formulas, all of which are then the zero maps between zero objects.
+
+## Facts & Assumptions
+
+**Given:** A t-structure $(\mathcal T^{\le0},\mathcal T^{\ge0})$ on a triangulated category $\mathcal T$, bounded in the sense of [[def-truncation-functors-and-cohomology-of-a-t-structure]], with truncation functors $\tau_{\le n},\tau_{\ge n}$ and t-cohomology $H^n_t$; an object $K\in\mathcal T$ and a morphism $L:K\to K[2]$ whose iterates $L^j:K\to K[2j]$ satisfy the hard Lefschetz hypothesis of the Statement.
+
+[F1] Boundedness and amplitude detection: there is $n\ge0$ with $K\in\mathcal T^{\le n}\cap\mathcal T^{\ge -n}$, and then $H^j_t(K)=0$ for every $|j|>n$; conversely, if $H^j_t(K)=0$ for every $|j|>n$ then $K\in\mathcal T^{\le n}\cap\mathcal T^{\ge -n}$ ([[def-truncation-functors-and-cohomology-of-a-t-structure]], (iv) of [[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]).
+
+[F2] Truncation package ([[lem-truncation-triangles-are-essentially-unique-and-functorial]], [[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]): $\operatorname{Hom}(\mathcal T^{\le m},\mathcal T^{\ge m+1})=0$ for every $m$, and $\mathcal T^{\le m}\subseteq\mathcal T^{\le m'}$, $\mathcal T^{\ge m'}\subseteq\mathcal T^{\ge m}$ whenever $m\le m'$; $X\in\mathcal T^{\le m}$ if and only if $\tau_{\ge m+1}X=0$, and $X\in\mathcal T^{\ge m}$ if and only if $\tau_{\le m-1}X=0$; the aisles are closed under extensions and finite direct sums, and a finite direct sum lies in an aisle exactly when each summand does. If $X\in\mathcal T^{\ge m}$ then $\tau_{\le m}X\cong H^m_t(X)[-m]$, and if $X\in\mathcal T^{\le m}$ then $\tau_{\ge m}X\cong H^m_t(X)[-m]$, the identification using the truncation maps of $X$; in particular an object lying in $\mathcal T^{\le m}\cap\mathcal T^{\ge m}$ is canonically isomorphic to $H^m_t(X)[-m]$. The assignments $H^m_t$ are functors, $H^m_t(X[r])\cong H^{m+r}_t(X)$ naturally, and for a finite biproduct $X\oplus Y$ the structure maps give mutually inverse isomorphisms $(H^m_t(i_X),H^m_t(i_Y)):H^m_t(X)\oplus H^m_t(Y)\to H^m_t(X\oplus Y)$ and $(H^m_t(p_X),H^m_t(p_Y))$. If $X,Y$ lie in $\mathcal T^{\le m}\cap\mathcal T^{\ge m}$, then under the canonical identifications $X\cong H^m_t(X)[-m]$, $Y\cong H^m_t(Y)[-m]$ the map $\operatorname{Hom}(X,Y)\to\operatorname{Hom}(H^m_t(X),H^m_t(Y))$, $f\mapsto H^m_t(f)$, is a bijection; in particular a morphism $X\to Y$ is an isomorphism exactly when $H^m_t(f)$ is.
+
+[F3] TR1 and TR3: every morphism extends to a distinguished triangle, and a commutative square formed by the first maps of two distinguished triangles extends to a morphism of triangles ([[def-triangulated-category-axiom-tr-one]], [[def-triangulated-category-axiom-tr-three]], [[def-morphism-and-isomorphism-of-triangles]]).
+
+[F4] Rotations and split triangles: with the signs of [[def-rotation-of-a-triangle]], the inverse rotation $Z[-1]\xrightarrow{-h[-1]}X\xrightarrow fY\xrightarrow gZ$ of a distinguished triangle $X\xrightarrow fY\xrightarrow gZ\xrightarrow hX[1]$ is distinguished ([[prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations]]); the triangle $X\xrightarrow{1_X}X\to0\to X[1]$ is distinguished, and a distinguished triangle $X\xrightarrow0Y\xrightarrow gZ\xrightarrow hX[1]$ is isomorphic to $X\xrightarrow0Y\xrightarrow{\binom10}Y\oplus X[1]\xrightarrow{(0\;1)}X[1]$ ([[prop-zero-and-split-triangles-are-distinguished]], [[prop-a-distinguished-triangle-with-zero-first-map-is-split]]).
+
+[F5] The triangulated category is additive and has finite biproducts ([[def-triangulated-category]], [[def-additive-category]], [[def-biproduct]]): for a biproduct diagram $(X\oplus Y,i_X,i_Y,p_X,p_Y)$ one has $p_Xi_X=1_X$, $p_Yi_Y=1_Y$, $p_Xi_Y=0$, $p_Yi_X=0$ and $i_Xp_X+i_Yp_Y=1_{X\oplus Y}$, and a pair of morphisms into or out of a biproduct is determined by its components, composition being matrix multiplication.
+
+## Proof
+
+**Proof technique:** induction on an amplitude bound
+
+1.1 Base case. Let $n=0$ and let $K\in\mathcal T^{\le0}\cap\mathcal T^{\ge0}$ admit such an $L$. Then $K$ lies in both aisles, so the concentration identity of (F2) applied with $m=0$ gives a canonical isomorphism $K\cong H^0_t(K)[0]=H^0_t(K)$, while amplitude detection gives $H^j_t(K)=0$ for every $j\ne0$; hence the asserted direct sum is the single term $H^0_t(K)$ and the conclusion holds. [base, given, F1, F2]
+
+1.2 Induction step. Fix $n\ge1$ and assume as induction hypothesis that the assertion holds for every object of $\mathcal T^{\le n-1}\cap\mathcal T^{\ge -(n-1)}$ admitting a morphism $L'$ with $H^{-j}_t(L'^{\,j})$ an isomorphism for every $j\ge0$. Let $K\in\mathcal T^{\le n}\cap\mathcal T^{\ge -n}$ and let $L:K\to K[2]$ satisfy the hard Lefschetz hypothesis, and put $A:=H^{-n}_t(K)$, $B:=H^n_t(K)$ and $h:=H^{-n}_t(L^n):A\to B$; the map $h$ is an isomorphism by hypothesis and $A,B$ lie in the heart. Since $K\in\mathcal T^{\ge -n}$ and $K\in\mathcal T^{\le n}$, concentration (F2) identifies the truncation maps of $K$ at $-n$ and $n$ with morphisms $a:A[n]\to K$ and $b:K\to B[-n]$ for which $H^{-n}_t(a):A\to H^{-n}_t(K)=A$ and $H^n_t(b):B\to H^n_t(B[-n])=B$ are the canonical identifications. Since $A[n]\in\mathcal T^{\le -n}$, $B[-n]\in\mathcal T^{\ge n}$ and $\mathcal T^{\ge n}\subseteq\mathcal T^{\ge -n+1}$ as $n\ge1$, the orthogonality in (F2) gives $ba=0$. [ih, given, F1, F2]
+
+2.1 Define $c:=L^n[-2n]\circ a[-2n]\circ h^{-1}[-n]:B[-n]\to K$ and $r:=h^{-1}[n]\circ b[2n]\circ L^n:K\to A[n]$, so that $bc=1_{B[-n]}$ and $ra=1_{A[n]}$. Indeed, on $H^n_t$ the composite $bc$ induces $h\circ1_A\circ h^{-1}=1_B$: the shift isomorphisms of (F2) convert the induced maps of $h^{-1}[-n]$, $a[-2n]$ and $L^n[-2n]$ into $h^{-1}$, the canonical identification of $A\cong H^{-n}_t(K)$ and $h$ respectively, and $b$ induces the canonical identification of $B$; since $B[-n]$ lies in $\mathcal T^{\le n}\cap\mathcal T^{\ge n}$ and therefore has $H^m_t=0$ for $m\ne n$, map detection (F2) upgrades the identity on $H^n_t$ to the identity of morphisms $bc=1_{B[-n]}$. Symmetrically $ra=1_{A[n]}$: the shift isomorphisms convert the induced maps of $L^n$, $b[2n]$ and $h^{-1}[n]$ into $h$, the canonical identification of $B$ and $h^{-1}$, so $ra$ induces $h^{-1}\circ1_B\circ h=1_A$ on $H^{-n}_t$, and $A[n]$ lies in $\mathcal T^{\le -n}\cap\mathcal T^{\ge -n}$ with t-cohomology concentrated in degree $-n$. [step 1.2, F2]
+
+3.1 Put $r':=r-(rc)b$, where $rc:=r\circ c:B[-n]\to A[n]$ and $(rc)b:=(rc)\circ b:K\to A[n]$. Then $r'a=ra-(rc)(ba)=1-0=1$ and $r'c=rc-(rc)(bc)=rc-rc=0$, while $ba=0$ and $bc=1$ by steps 1.2 and 2.1; hence with respect to the biproduct structure of $A[n]\oplus B[-n]$ the composite $(r',b)\circ(a,c)$ has matrix $\begin{pmatrix}r'a&r'c\\ba&bc\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}$ and equals the identity, so $(a,c)$ has the left inverse $(r',b)$. [step 1.2, step 2.1, F5]
+
+4.1 By TR1 complete the map $u:=(a,c):A[n]\oplus B[-n]\to K$ to a distinguished triangle $A[n]\oplus B[-n]\xrightarrow{u}K\xrightarrow{v}K_0\xrightarrow{w}(A[n]\oplus B[-n])[1]$. The square formed by $u$ and by $(r',b):K\to A[n]\oplus B[-n]$ commutes, since $(r',b)u=1$ by step 3.1; TR3 applied to this square and to the distinguished triangle $A[n]\oplus B[-n]\xrightarrow{1}A[n]\oplus B[-n]\to0\to\cdots$ of (F4) yields a morphism of triangles whose first two components are the identity and $(r',b)$ and whose third component $h'$ satisfies $w=\delta h'$, where $\delta:0\to(A[n]\oplus B[-n])[1]$ is the zero morphism; hence $w=0$. [step 3.1, F3, F4]
+
+5.1 The inverse rotation is $K_0[-1]\xrightarrow0 X\xrightarrow{u}K\xrightarrow{v}K_0$, where $X=A[n]\oplus B[-n]$, by step 4.1 and (F4). Applying the zero-first-map split criterion (F4) supplies an isomorphism $g:K\to X\oplus K_0$ with $gu=\binom10$ and $(0\;1)g=v$. Here the criterion can be taken to fix its first two vertices: its proof constructs the third-vertex isomorphism from a section of the final map. Put $R:=(1\;0)g$, $i:=g^{-1}\binom01$ and $p:=(0\;1)g=v$. Then $pi=1_{K_0}$, $Ru=1_X$, $pu=0$, $Ri=0$ and $uR+ip=1_K$. Thus $(u,i,R,p)$ is a biproduct diagram and $K\cong A[n]\oplus K_0\oplus B[-n]$. [step 4.1, F4, F5]
+
+6.1 Additivity (F2) applied to this biproduct gives, for every $m$, an isomorphism $(H^m_t(u),H^m_t(i)):H^m_t(X)\oplus H^m_t(K_0)\to H^m_t(K)$ with inverse $(H^m_t(R),H^m_t(p))$, where $X:=A[n]\oplus B[-n]$. On the extreme degrees the first component is an isomorphism: with respect to the biproduct $X=A[n]\oplus B[-n]$ the map $H^{-n}_t(u)$ has components $(H^{-n}_t(a),H^{-n}_t(c))=(1_A,0)$, since $H^{-n}_t(a)=1_A$ by step 1.2 and $H^{-n}_t(B[-n])=H^{-2n}_t(B)=0$; and $H^n_t(u)$ has components $(H^n_t(a),H^n_t(c))=(0,H^n_t(c))$, since $H^n_t(A[n])=H^{2n}_t(A)=0$ while $H^n_t(c)$ is an isomorphism because $H^n_t(b)H^n_t(c)=H^n_t(bc)=1_B$ and $H^n_t(b)$ is the canonical identification. An isomorphism $(f,g):C\oplus D\to E$ with $f$ an isomorphism has $D=0$: if $(\psi_1,\psi_2)$ is its inverse, then $\psi_2f=0$ forces $\psi_2=\psi_2ff^{-1}=0$, and then $1_D=\psi_2g=0$. Applying this to the isomorphisms $(H^{-n}_t(u),H^{-n}_t(i))$ and $(H^n_t(u),H^n_t(i))$, whose first components are isomorphisms, yields $H^{-n}_t(K_0)=0$ and $H^n_t(K_0)=0$. [step 1.2, step 5.1, F2, F5]
+
+7.1 Since $K\cong X\oplus K_0$ and $K\in\mathcal T^{\le n}\cap\mathcal T^{\ge -n}$, the direct-sum clause of (F2) gives $K_0\in\mathcal T^{\le n}\cap\mathcal T^{\ge -n}$. From $K_0\in\mathcal T^{\ge -n}$ and $H^{-n}_t(K_0)=0$, concentration gives $\tau_{\le -n}K_0\cong H^{-n}_t(K_0)[n]=0$, so $K_0\in\mathcal T^{\ge -n+1}$ by the aisle criterion of (F2); dually $K_0\in\mathcal T^{\le n}$ and $H^n_t(K_0)=0$ give $\tau_{\ge n}K_0\cong H^n_t(K_0)[-n]=0$, so $K_0\in\mathcal T^{\le n-1}$. Moreover additivity gives morphisms $(H^m_t(u),H^m_t(i)):H^m_t(X)\oplus H^m_t(K_0)\to H^m_t(K)$ with inverse $(H^m_t(R),H^m_t(p))$; for $-n<m<n$ both components $H^m_t(a)$ and $H^m_t(c)$ of $H^m_t(u)$ vanish, because their sources $H^m_t(A[n])=H^{m+n}_t(A)$ and $H^m_t(B[-n])=H^{m-n}_t(B)$ are zero when $m\ne -n$ respectively $m\ne n$, so $H^m_t(u)=0$ and $H^m_t(i):H^m_t(K_0)\to H^m_t(K)$ is an isomorphism with inverse $H^m_t(p)$, since $H^m_t(p)H^m_t(i)=H^m_t(pi)=1$. In particular $H^m_t(K_0)\cong H^m_t(K)$ for every $|m|<n$. [step 6.1, F2]
+
+8.1 Define $L_0:=p[2]\circ L\circ i:K_0\to K_0[2]$, so that $L_0^0=1_{K_0}$. For $1\le j<n$ the map $H^{-j}_t(L_0^j)$ is an isomorphism. Indeed, expanding the iterate $L_0^j=L_0[2j-2]\circ\cdots\circ L_0[2]\circ L_0$ and applying $H^{-j}_t$ factor by factor, the factor $H^{-j}_t(L_0[2k])$ corresponds under the shift isomorphisms of (F2) to $H^{m_k}_t(p[2]\circ L\circ i)=H^{m_k+2}_t(p)\circ H^{m_k}_t(L)\circ H^{m_k}_t(i)$, where $m_k:=-j+2k$; for the intermediate degrees $m_k$ with $1\le k\le j-1$ one has $|m_k|<n$, so by step 7.1 together with $H^{m_k}_t(p)H^{m_k}_t(i)=H^{m_k}_t(pi)=1$ the maps $H^{m_k}_t(i)$ and $H^{m_k}_t(p)$ are mutually inverse isomorphisms and the inserted pair $H^{m_k}_t(i)\circ H^{m_k}_t(p)=H^{m_k}_t(ip)$ is the identity. The composite therefore corresponds to $H^{j}_t(p)\circ H^{-j}_t(L^j)\circ H^{-j}_t(i)$, in which $H^{-j}_t(L^j)$ is an isomorphism by hypothesis and the outer maps are isomorphisms because $-j$ and $j$ are interior degrees. For $j\ge n$, both $H^{-j}_t(K_0)$ and $H^{j}_t(K_0)$ vanish by step 7.1 and amplitude detection, so $H^{-j}_t(L_0^j)$ is a morphism between zero objects, hence an isomorphism. Thus $L_0$ satisfies the hard Lefschetz hypothesis on the object $K_0\in\mathcal T^{\le n-1}\cap\mathcal T^{\ge -(n-1)}$. [step 7.1, F1, F2]
+
+9.1 By the induction hypothesis of step 1.2, applied to the object $K_0\in\mathcal T^{\le n-1}\cap\mathcal T^{\ge -(n-1)}$ and the morphism $L_0$ of step 8.1, there is an isomorphism $K_0\cong\bigoplus_jH^j_t(K_0)[-j]$, a finite sum because $H^j_t(K_0)=0$ for $|j|>n-1$. [step 1.2, step 8.1]
+
+10.1 Combining the results: step 5.1 gives an isomorphism $K\cong A[n]\oplus K_0\oplus B[-n]$; step 7.1 identifies $H^m_t(K_0)\cong H^m_t(K)$ for $|m|<n$; step 9.1 decomposes $K_0$. Substituting $A=H^{-n}_t(K)$, $B=H^n_t(K)$ and inserting the vanishing extreme cohomology of $K_0$ gives the asserted isomorphism $K\cong H^{-n}_t(K)[n]\oplus\bigoplus_{|j|<n}H^j_t(K)[-j]\oplus H^n_t(K)[-n]=\bigoplus_jH^j_t(K)[-j]$, a finite sum because $H^j_t(K)=0$ for $|j|>n$ by amplitude detection. Boundedness supplies such an $n$ for every object $K$, the base case of step 1.1 and the induction step of steps 1.2 to 9.1 cover every $n\ge0$, and therefore the splitting holds for arbitrary $K$. [step 1.1, step 5.1, step 7.1, step 9.1, discharge-induction] ∎

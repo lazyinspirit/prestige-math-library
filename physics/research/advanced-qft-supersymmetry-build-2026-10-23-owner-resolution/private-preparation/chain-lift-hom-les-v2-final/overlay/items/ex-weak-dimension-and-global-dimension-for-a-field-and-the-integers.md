@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-weak-dimension-and-global-dimension-for-a-field-and-the-integers.md

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-piecewise-c-one-fourier-series-converges-to-midpoint-values.json
+  precheck: pass
 id: cor-piecewise-c-one-fourier-series-converges-to-midpoint-values
 kind: corollary
-title: "Piecewise C^1 Fourier series converges to midpoint values"
+title: "Piecewise $C^1$ Fourier series converges to midpoint values"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [thm-dirichlet-jordan-pointwise-convergence, thm-c1-lipschitz-ac-bv-hierarchy]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

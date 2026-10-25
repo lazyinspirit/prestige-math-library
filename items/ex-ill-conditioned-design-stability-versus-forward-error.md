@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-ill-conditioned-design-stability-versus-forward-error.json
+  precheck: pass
 id: ex-ill-conditioned-design-stability-versus-forward-error
 kind: example
 title: "An ill conditioned design with large forward sensitivity"
@@ -18,8 +21,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Fundamentals of Numerical Computation, QR factorization and least squares"
@@ -32,7 +33,7 @@ sources:
 
 ## Example
 
-Let A=diag(1,2^-40), with condition number 2^40. For b=(1,0)^T the unique solution is x=(1,0)^T; for b-tilde=(1,2^-40)^T it is x-tilde=(1,1)^T. The relative data change is 2^-40 while the relative solution change is 1. Thus backward stability does not imply small forward error for an ill-conditioned design.
+Let $A=\operatorname{diag}(1,2^{-40})$, with condition number $2^{40}$. For $b=(1,0)^T$ the unique solution is $x=(1,0)^T$; for $\widetilde b=(1,2^{-40})^T$ it is $\widetilde x=(1,1)^T$. The relative data change is $2^{-40}$ while the relative solution change is $1$. Thus backward stability does not imply small forward error for an ill-conditioned design.
 
 ## Facts & Assumptions
 **Given:** the diagonal design and right-hand sides.
@@ -41,14 +42,14 @@ Let A=diag(1,2^-40), with condition number 2^40. For b=(1,0)^T the unique soluti
 
 [F2] [[thm-computed-full-rank-least-squares-backward-stability]]: its guarantee controls perturbations of data under its hypotheses.
 
-[F3] [[def-condition-number-of-a-nonsingular-linear-system]]: $\kappa_2(A)=\|A\|_2\|A^{-1}\|_2$.
+[F3] [[def-condition-number-of-a-nonsingular-linear-system|The condition number $\kappa_p(A)=\|A\|_p\|A^{-1}\|_p$ of a nonsingular linear system]]: $\kappa_2(A)=\|A\|_2\|A^{-1}\|_2$.
 
 [F4] [[def-induced-matrix-p-norm]]: $\|M\|_2=\sup_{\|z\|_2=1}\|Mz\|_2$.
 
 ## Verification
 
-1.1 Direct multiplication by A^-1=diag(1,2^40) gives x=A^-1b=(1,0)^T and x-tilde=A^-1b-tilde=(1,1)^T; uniqueness follows from [F1]. [given, F1, algebra]
+1.1 Direct multiplication by $A^{-1}=\operatorname{diag}(1,2^{40})$ gives $x=A^{-1}b=(1,0)^T$ and $\widetilde x=A^{-1}\widetilde b=(1,1)^T$; uniqueness follows from [F1]. [given, F1, algebra]
 
-2.1 The input difference and x norm are both measured against unit vectors: ||b-tilde-b||_2/||b||_2=2^-40 and ||x-tilde-x||_2/||x||_2=1. [step 1.1, algebra]
+2.1 The input difference and $x$ norm are both measured against unit vectors: $\|\widetilde b-b\|_2/\|b\|_2=2^{-40}$ and $\|\widetilde x-x\|_2/\|x\|_2=1$. [step 1.1, algebra]
 
 3.1 For every $z$, $\|Az\|_2^2=z_1^2+2^{-80}z_2^2\le\|z\|_2^2$, with equality at $e_1$, so [F4] gives $\|A\|_2=1$. Likewise $\|A^{-1}z\|_2^2=z_1^2+2^{80}z_2^2\le2^{80}\|z\|_2^2$, with equality at $e_2$, hence $\|A^{-1}\|_2=2^{40}$. Thus [F3] gives $\kappa_2(A)=2^{40}$. The exact data calculation proves order-one forward change under a relative $2^{-40}$ right-hand-side perturbation; backward stability [F2] alone is not a forward-accuracy guarantee. [step 1.1, step 2.1, F2, F3, F4, algebra] ∎

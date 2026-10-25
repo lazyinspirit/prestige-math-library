@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-row-operations-on-a-singular-matrix-over-z-mod-six.md

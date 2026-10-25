@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-orthonormal-frame-fields-along-a-clean-whitney-disk-in-the-stable-range.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-orthogonal-complements-of-subbundles-are-smooth-subbundles.md

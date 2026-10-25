@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-elementary-matrix-operations-are-realized-by-handle-slides.md

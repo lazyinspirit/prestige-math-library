@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-degenerate-and-nondegenerate-ariki-theorems-have-distinct-parameter-ranges.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-an-l-two-class-invariant-in-modulus-under-all-translations-of-the-line-is-zero.md

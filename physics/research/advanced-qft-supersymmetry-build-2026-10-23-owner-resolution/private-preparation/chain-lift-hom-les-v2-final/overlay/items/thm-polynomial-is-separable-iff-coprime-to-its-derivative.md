@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-polynomial-is-separable-iff-coprime-to-its-derivative.md

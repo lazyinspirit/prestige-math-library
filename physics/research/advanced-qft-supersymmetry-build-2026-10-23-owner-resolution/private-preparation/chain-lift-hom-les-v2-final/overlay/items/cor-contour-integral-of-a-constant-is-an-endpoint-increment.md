@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-contour-integral-of-a-constant-is-an-endpoint-increment.md

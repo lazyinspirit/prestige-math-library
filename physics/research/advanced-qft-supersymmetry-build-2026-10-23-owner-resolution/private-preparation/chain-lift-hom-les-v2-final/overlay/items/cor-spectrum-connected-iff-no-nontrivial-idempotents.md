@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-spectrum-connected-iff-no-nontrivial-idempotents.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-age-cohort-characteristic-quadrature.json
+  precheck: n/a
 id: alg-age-cohort-characteristic-quadrature
 kind: algorithm
 title: Age-cohort quadrature along exact characteristics
@@ -16,12 +19,6 @@ forward_refs: []
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Åke Brännström, Linus Carlsson, and Daniel Simpson, On the Convergence of the Escalator Boxcar Train"
@@ -46,3 +43,30 @@ and updates its survival mass by forward Euler,
 $$m_i^{k+1}=(1-\Delta t\,\mu(a_i^k))m_i^k.$$
 
 If $\Delta t\|\mu\|_\infty>1$, return status invalid-step with no updates. Otherwise initialize the birth and outflow records as empty and set $\nu_h^0=\sum_i m_i^0\delta_{a_i^0}$. For each $k=0,\ldots,N-1$, first calculate $B_h^k=\sum_i\beta(a_i^k)m_i^k$. Advance every existing cohort by $a_i^{k+1}=a_i^k+\Delta t$ and update its survival mass by $m_i^{k+1}=(1-\Delta t\mu(a_i^k))m_i^k$. If an updated age is at least $A$, record that updated mass as discrete outflow and discard the cohort; otherwise retain it. Then insert a newborn cohort of age $0$ and mass $\Delta t B_h^k$ at time $t_{k+1}$. Record $B_h^k$ and the step's outflow, and form $\nu_h^{k+1}$ from the retained cohorts and this newborn. A failed rate evaluation returns failure with no partial update. The procedure returns the finite sequence $(\nu_h^k)_{k=0}^N$ and its birth/outflow records. The bounded-Lipschitz quadrature defect of the initial measure and the Euler survival error are separate inputs to any consistency claim.
+
+
+## Remarks
+
+The schematic shows one valid time step, with time horizontal and age vertical. Both existing cohorts increase their age by $\Delta t$: cohort $i$ remains below $A$, whereas cohort $j$ reaches or exceeds $A$ at the updated level and is discarded after its updated mass is recorded as outflow. The newborn is inserted at $(t_{k+1},0)$; it does not travel an age characteristic during the step in which it is inserted. Axis scales and the chosen cohorts are illustrative.
+
+```tikz
+\begin{tikzpicture}[x=1.35cm,y=0.95cm,>=stealth]
+\draw[->] (0,0) -- (6.6,0) node[right] {$t$};
+\draw[->] (0,0) -- (0,5.1) node[above] {$a$};
+\draw[dashed] (0,3.8) node[left] {$A$} -- (6.3,3.8);
+\draw[dotted] (1,0) -- (1,4.8);
+\draw[dotted] (5,0) -- (5,4.8);
+\node[below] at (1,0) {$t_k$};
+\node[below] at (5,0) {$t_{k+1}$};
+\draw[->,thick] (1,1) -- (5,2.4);
+\fill (1,1) circle (2pt) node[left] {$a_i^k$};
+\fill (5,2.4) circle (2pt) node[right] {$a_i^k+\Delta t<A$};
+\draw[->,thick] (1,3) -- (5,4.4);
+\fill (1,3) circle (2pt) node[left] {$a_j^k$};
+\fill (5,4.4) circle (2pt) node[right] {$a_j^k+\Delta t\ge A$};
+\fill (5,0) circle (3pt);
+\node[above right] at (5,0) {$\mathrm{newborn}$};
+\end{tikzpicture}
+```
+
+Each existing cohort has updated survival mass $(1-\Delta t\mu(a_i^k))m_i^k$ (and likewise for $j$), whether it is retained or recorded as outflow. The newborn mass is $\Delta t B_h^k$, with $B_h^k$ calculated from the old level before any update. The algorithm and its formulas specify these operations independently of the illustration.

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-weight-and-weighted-lp-space.json
+  precheck: n/a
 id: def-weight-and-weighted-lp-space
 kind: definition
-title: Weights, their associated measures, and the spaces L^p(w)
+title: Weights, their associated measures, and the spaces $L^p(w)$
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
@@ -18,8 +21,7 @@ sources:
     - title: "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)"
       url: "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf"
       locator: "§4.1, weights, their measures and the weighted L^p spaces, printed pp. 65-66"
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent.md

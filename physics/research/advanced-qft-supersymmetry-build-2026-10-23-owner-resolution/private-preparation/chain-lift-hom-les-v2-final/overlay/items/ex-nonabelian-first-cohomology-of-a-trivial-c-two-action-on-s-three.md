@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-nonabelian-first-cohomology-of-a-trivial-c-two-action-on-s-three.md

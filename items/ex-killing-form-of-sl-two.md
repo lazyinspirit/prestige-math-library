@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-killing-form-of-sl-two.json
+  precheck: pass
 id: ex-killing-form-of-sl-two
 kind: example
-title: Killing form of sl_2
+title: 'Killing form of $\mathfrak{sl}_2$'
 status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
@@ -11,12 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Kirillov, An Introduction to Lie Groups and Lie Algebras, Example 5.51"

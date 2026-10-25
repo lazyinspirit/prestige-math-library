@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-periodic-orbit-pseudoarclength-continuation.json
+  precheck: n/a
 id: alg-periodic-orbit-pseudoarclength-continuation
 kind: algorithm
 title: "Finite pseudo-arclength continuation of phase-fixed periodic orbits"
@@ -20,8 +23,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "E. J. Doedel and B. E. Oldeman, AUTO-07P full manual (2021)"
@@ -46,3 +47,26 @@ A certified upper bound for $\|\widehat g\|_2$ may replace the norm conservative
 When the fixed-parameter phase-bordered $(x,T)$ Jacobian is certified invertible, the full derivative $DF$ has row rank $d+1$: its $(x,T)$ columns already span $\mathbb R^{d+1}$. Thus a fold in the parameter projection does not by itself make the branch singular. Missing tangent/rank evidence, tube exit, failed Krawczyk inclusion, unresolved angle, or exhausted finite budgets returns the corresponding inconclusive status; no global branch-completeness claim is made. Any requested fold certificate is emitted only when the generic continuation algorithm's separate fold checks succeed.
 
 The generic section keeps the supplied previous unit orientation fixed as its normal during each attempt, while the predictor uses the current certified tangent candidate. Forward this previous normal and certify its angle with the current true kernel, along with the generic predictor-offset/chart inequalities. Finite termination is conditional on every invoked flow/jet, tangent, section and fold callback returning in finite time; an outer work budget is not a timeout for a nonreturning callback.
+
+## Remarks
+
+The schematic below separates the current tangent from the previous orientation. It depicts the idealized case in which the current ball center equals its branch root and the tangent candidate is exact: $\bar z_k=z_k^*$ and $\widehat t_k=t_k$. Thus $z_p=\bar z_k+h\widehat t_k$ lies along the current tangent, whereas the section through $z_p$ is normal to the fixed previous orientation $\tau_k$. The point $z_{k+1}^*$ denotes the unique local branch intersection selected only after the chart, angle, offset and root-certificate checks in the Definition succeed. This is a planar schematic in the physical $(x,T,\mu)$ space; it does not depict validation-ball sizes or Newton iterates. The algorithm and its certification requirements are independent of the picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.4]
+\draw[thick] plot[domain=-0.8:3.4,samples=60] (\x,{0.144*\x*\x});
+\node at (0.45,1.25) {$F=0$};
+\draw[->,thick] (0,0) -- (3,0);
+\node at (1.45,-0.3) {$h\widehat t_k$};
+\draw[dashed] (1.85,2.07) -- (3.45,-0.81);
+\node[anchor=west] at (2.1,2.45) {$\tau_k^T(y-z_p)=0$};
+\draw[->,thick] (3,0) -- (4.08,0.6);
+\node[anchor=west] at (4.08,0.6) {$\tau_k$};
+\fill (0,0) circle (1.5pt);
+\node[anchor=north east] at (-0.05,-0.08) {$z_k^*=\bar z_k$};
+\draw (3,0) circle (2pt);
+\node[anchor=north west] at (3.08,-0.13) {$z_p$};
+\fill (2.5,0.9) circle (1.5pt);
+\node[anchor=east] at (2.35,0.95) {$z_{k+1}^*$};
+\end{tikzpicture}
+```

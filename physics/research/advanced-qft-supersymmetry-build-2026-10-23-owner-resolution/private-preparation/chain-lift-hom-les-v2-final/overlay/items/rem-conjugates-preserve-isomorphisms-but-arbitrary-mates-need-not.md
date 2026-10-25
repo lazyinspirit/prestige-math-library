@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-conjugates-preserve-isomorphisms-but-arbitrary-mates-need-not.md

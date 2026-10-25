@@ -1,0 +1,134 @@
+{
+  "id": "def-finite-markov-decision-process",
+  "agent": "/root/rendering_repair_coordinator/dorl_012",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "group": "dorl_012",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The two authentic original standalone tiles contain no figure. A branching picture materially clarifies that state marginalization and reward expectation are two operations on one joint law; separate state/reward branches must not suggest independent draws. This is warranted explanatory scope, although the existing definition and verification are complete.",
+      "action": "Append a TikZ branching illustration and precise interpretation in the existing final Remarks section.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a three-node, two-arrow illustration from the fixed-input joint mass to the state-transition marginal and expected reward, with their exact existing finite-sum formulas and an empty-state caveat. Original carrier is an unchanged byte prefix; no title, definition, proof, source, dependency, status or metadata changed.",
+  "source_lines_after": {
+    "explanation": 108,
+    "tikz": [
+      110,
+      118
+    ],
+    "formulas": [
+      112,
+      114
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Fix an admissible (s,a) in D. The top node p(.,.|s,a) is the probability mass on S × R from Definition lines 46–50; it is not a point in S × R or a pair of independent laws.",
+      "justification": "The Definition explicitly supplies nonnegative joint masses of total 1 and permits dependence."
+    },
+    {
+      "relation": "Left arrow sends the joint mass to the function t ↦ P(t|s,a), for t in S, by summing over rho in R.",
+      "justification": "The displayed node equation is Definition line 52 with the dummy next-state variable renamed from s-prime to t. Existing Remarks lines 96–98 check normalization, hence this operation produces a probability mass on S."
+    },
+    {
+      "relation": "Right arrow sends the same joint mass to r(s,a) in the real numbers by summing rho p(t,rho|s,a) over both indices.",
+      "justification": "This is exactly the expected-reward formula in Definition line 52 with s-prime renamed to t. All sums are finite. The existing Remarks prove its absolute value is at most M."
+    },
+    {
+      "relation": "Both arrows start at the joint law and end at derived quantities; no factorization, independence, inverse, cycle, or commutative square is asserted.",
+      "justification": "The new explanatory paragraph states these are operations on masses, not independent draws, matching the Definition and final preexisting Remarks sentence. There are exactly 3 vertices, 2 directed edges, outdegree 2 at the joint node and indegree 1 at each output."
+    },
+    {
+      "relation": "The illustration is conditional on an admissible input, so it asserts no mass for the empty-state case.",
+      "justification": "D is empty when S is empty. The added caveat makes that case explicit; for an admissible input the existing normalization forces a nonempty reward set."
+    },
+    {
+      "relation": "Rigorous verification remains independent of the figure.",
+      "justification": "The two original Verification steps and all original Remarks calculations remain byte-identical. They do not cite the illustration."
+    }
+  ],
+  "evidence": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots paths do not exist. Authentic images located within the same category screenshots directory and SHA256 matched exactly.",
+    "original_screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/def-finite-markov-decision-process--01.png",
+        "sha256": "add7a431864244f82fdfa143dd3e0f1f2be5b6073ef158c496e0373992e19aa4",
+        "view": "standalone original resolution"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/def-finite-markov-decision-process--02.png",
+        "sha256": "873675e8433b50ee76f2af8c5fddcdcb0e1c72beb255655237916cbad748f003",
+        "view": "standalone original resolution"
+      }
+    ],
+    "before_raw_sha256": "15672d75698499877c2bd32d6a00e24c0457d631242b07e184f1652c7cc6f734",
+    "before_guard": "Passed immediately before first edit; current and frozen before files also compared equal.",
+    "after_raw_sha256": "80efdea93625f7b17421f5734a4d17e8d5ed21be3d71daa7fda655348800d3f5",
+    "frontmatter_byte_identical": true,
+    "original_carrier_unchanged_prefix": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-012-final/manifest.json",
+    "preview_html_sha256": "a167aa176dbc4f57915e043582d3809c9a1aa0b4b5557aecc0690fdda3206145",
+    "reference_map_sha256": "16a18af04427140054a8a255b024bda6fececca6bb134a057c27c77d9a805676",
+    "native_crop": "research/math-library-rendering-repairs-2026-10-23/previews/dorl-012-final/diagram-native.png"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-finite-markov-decision-process.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-finite-markov-decision-process.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-finite-markov-decision-process.md",
+            "item_id": "def-finite-markov-decision-process",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-finite-markov-decision-process.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dorl-012 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-finite-markov-decision-process --out research/math-library-rendering-repairs-2026-10-23/previews/dorl-012-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    },
+    {
+      "check": "Native standalone original-resolution visual inspection",
+      "result": "Viewed final tile 02 and native SVG element screenshot diagram-native.png. Formula labels are complete, separate, and legible on black. Two visible arrow shafts and arrowheads descend to the correct outputs. SVG has 4 paths: two shafts plus two arrowheads; all inherit currentColor rgb(236,238,242), no opaque fills. No clipping, overlap, open/closed endpoint convention, crossing or cycle is present. Native crop dimensions 426.296875 × 99.328125 pixels."
+    }
+  ],
+  "remaining_issues": [
+    "Native full-tile final capture shows a body-text paint omission outside the figure; authentic original tiles and first local preview show that unchanged text. A separate fresh local native SVG element capture confirms the final figure at original resolution. Preview reference map reports 16 unrelated parsing diagnostics; this is local ItemBody coverage, not production-route coverage."
+  ]
+}

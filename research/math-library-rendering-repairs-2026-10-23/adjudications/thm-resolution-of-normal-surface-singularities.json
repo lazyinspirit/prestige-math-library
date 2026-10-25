@@ -1,0 +1,78 @@
+{
+  "id": "thm-resolution-of-normal-surface-singularities",
+  "agent": "/root/rendering_repair_coordinator/ag_078",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "unparsed-blockquote-markers",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly prints two > characters inside F1, matching flattened blockquote markers in source line 69. These are prose markup rather than inequalities; removing only those markers preserves every word and formula. Tiles 02 and 03 show no additional literal quote markers.",
+      "action": "Removed the two > markers and their following spaces in F1 only.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": 0,
+      "defect_type": "optional-typography/not-a-rendering-defect",
+      "verdict": "not-a-defect",
+      "reason": "The italic Fact headings, parenthetical def-choice-function, and other plain item slugs are literal authored prose. They contain no raw TeX, broken delimiters, or unsupported command. In F2 the relation and DC render as mathematics; existing wikilinks render linked titles. Replacing these slugs would be an optional editorial rewrite.",
+      "action": "Preserved all Fact headings and authored item slugs, including F2.",
+      "status": "preserved"
+    }
+  ],
+  "changed": true,
+  "correction": "Only removed two literal quote markers from F1 on line 69; every heading, word, formula, link, statement, proof, dependency, source and frontmatter byte is preserved.",
+  "source_lines_after": [
+    69
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "dd6c3c6b8ee39722e9a3a48c8e69cde8e3e42fa5f9ce06923b9c127d44adff99",
+  "after_raw_sha256": "a4c4c923d267f36a91357118d02be4b5d341474310fd66a7210fbc878fda35d7",
+  "publication_status_preserved": true,
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-resolution-of-normal-surface-singularities.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-resolution-of-normal-surface-singularities.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-resolution-of-normal-surface-singularities.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_review": {
+    "original_tiles_inspected_standalone_at_original_resolution": [
+      "01",
+      "02",
+      "03"
+    ],
+    "fresh_preview_dir": "research/math-library-rendering-repairs-2026-10-23/previews/ag078-final-unique",
+    "preview_exit_code": 0,
+    "preview_items": 1,
+    "preview_tiles": 3,
+    "reference_map_diagnostics": 20,
+    "fresh_tiles_inspected_standalone_at_original_resolution": [
+      "01",
+      "02",
+      "03"
+    ],
+    "result": "F1 displays prose with neither literal > marker; all inspected formulas and six numbered proof rows render, with no additional confirmed LaTeX/TikZ display defect."
+  }
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-the-dual-representation-has-x-lambda-v-equal-lambda-x-v-with-no-minus-sign.json
+  precheck: pass
 id: fs-the-dual-representation-has-x-lambda-v-equal-lambda-x-v-with-no-minus-sign
 kind: false-statement
 title: The dual action needs a minus sign
@@ -11,12 +14,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
 sources:
   references:
     - title: "Etingof, MIT 18.745 notes, dual representations in §11.2, printed pp. 62–63"
@@ -37,7 +34,7 @@ The dual action is $(x\lambda)(v)=\lambda(xv)$, with no minus sign.
 
 ## Refutation
 
-**Proof technique:** direct computation in the standard $\mathfrak{sl}_2$-module over a characteristic-zero field.
+**Proof technique:** direct computation in the standard sl₂-module over a characteristic-zero field.
 
 1.1 Write $P_x(\lambda)=\lambda\circ\rho(x)$ for the proposed plus-sign operator. Then $[P_x,P_y](\lambda)=\lambda\circ(\rho(y)\rho(x)-\rho(x)\rho(y))=-P_{[x,y]}(\lambda)$, so the proposed operators reverse rather than preserve the Lie bracket. [given, algebra]
 

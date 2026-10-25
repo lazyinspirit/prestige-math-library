@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-central-ga-subgroup-of-smooth-connected-unipotent-group.json
+  precheck: pass
 id: lem-central-ga-subgroup-of-smooth-connected-unipotent-group
 kind: lemma
-title: "A nontrivial smooth connected unipotent group with split torus action over a perfect field has a stable central G_a"
+title: "A nontrivial smooth connected unipotent group with split torus action over a perfect field has a stable central $G_a$"
 dependency_level: 10
 deps:
   - def-axiom-of-choice
@@ -20,11 +23,6 @@ provenance:
 proof_strategy: direct
 status: published
 origin: pipeline
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)
@@ -45,7 +43,7 @@ Let $k$ be a perfect field, let $U$ be a smooth connected unipotent algebraic gr
 
 [F1] The semidirect product $H=U\rtimes T$ is a smooth connected trigonalizable affine group with largest normal unipotent subgroup $H_u=U$: the quotient $H/U\cong T$ is a torus, and a normal unipotent closed subgroup of $H$ maps into this torus, where it is trivial because a closed subgroup that is both unipotent and diagonalizable is trivial. ([[def-trigonalizable-algebraic-group]], [[def-group-of-multiplicative-type-and-torus]], [[lem-unipotent-and-diagonalizable-intersection-is-trivial]])
 
-[F2] Assume AC. The smooth connected trigonalizable group $H$ has a normal series $H\supseteq H_0=U\supseteq H_1\supseteq\dots\supseteq H_r=1$ in which every term $H_i$ with $i\ge0$ is smooth, connected and normal in $H$, and every successive quotient $H_i/H_{i+1}$ is isomorphic to $\mathbf G_a$; the series refines the $H/H_u$-equivariant series with quotients embedded in $\mathbf G_a$. ([[lem-smooth-trigonalizable-group-normal-series-refinement]], [[thm-trigonalizable-group-has-normal-series-with-vector-quotients]])
+[F2] Assume AC. The smooth connected trigonalizable group $H$ has a normal series $H\supseteq H_0=U\supseteq H_1\supseteq\dots\supseteq H_r=1$ in which every term $H_i$ with $i\ge0$ is smooth, connected and normal in $H$, and every successive quotient $H_i/H_{i+1}$ is isomorphic to $\mathbf G_a$; the series refines the $H/H_u$-equivariant series with quotients embedded in $\mathbf G_a$. ([[lem-smooth-trigonalizable-group-normal-series-refinement|Unipotent radicals of smooth connected trigonalizable groups over perfect fields have normal $G_a$ series]], [[thm-trigonalizable-group-has-normal-series-with-vector-quotients]])
 
 [F3] An automorphism of $\mathbf G_a$ over a field is linear: an automorphism of the polynomial algebra has degree one, and preserving zero removes its constant term. For a smooth affine acting group $H$, apply this fact only to its points over an algebraic closure. Smooth schemes have schematically dense rational points there, so coefficients vanishing at those points vanish in $O(H_{\bar k})$ and hence in $O(H)$. This proves linearity of an $H$-action on $\mathbf G_a$ below; it does not identify the full automorphism functor with $\mathbf G_m$. ([[lem-smooth-finite-type-schemes-have-schematically-dense-rational-points]])
 

@@ -1,0 +1,133 @@
+{
+  "id": "alg-transformer-forward-pass",
+  "agent": "/root/rendering_repair_coordinator/dnn_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile shows a complete readable procedure but no diagram. Two separate streams with different attention access materially benefit from a computation-flow picture: target causal self-attention is distinct from source keys/values supplied to every decoder layer. The expanded editorial diagram criterion warrants adding this illustration despite the complete step list.",
+      "action": "Added a final Remarks section with a two-stream TikZ dataflow diagram and explicit abstraction/shape explanations.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended an explanatory encoder-decoder flow diagram distinguishing source representations E, causal target processing, cross-attention keys/values, final decoder states D, and rowwise next-token probabilities P. Entire original item remains byte-identical as a prefix; metadata/status/dependencies/source references and procedure are unchanged.",
+  "source_lines_after": {
+    "remarks": [
+      48,
+      50
+    ],
+    "diagram": [
+      52,
+      75
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_shapes": "Source stream has n tokens and X,E in R^(n x d). Target stream has m prefix tokens and U,D in R^(m x d). P is m x |V| for the existing finite vocabulary; each row is a probability vector.",
+      "justification": "Original procedure steps 1\u20133 and 5, Outputs, and supplier def-transformer-encoder-decoder-layer row-token conventions. The existing output linear map has one vocabulary logit per coordinate; softmax preserves row count."
+    },
+    {
+      "relations": "Source tokens -> embedding + position -> X -> encoder stack -> E; target prefix -> embedding + position -> U -> decoder stack -> D -> rowwise output map/softmax -> P. All nine directed edges on ten boxes represent dataflow, not inverse maps or mathematical commutative-square assertions.",
+      "justification": "Procedure steps 1\u20135 in their stated order; E and D boxes also explicitly represent returned intermediate matrices."
+    },
+    {
+      "attention_access": "Within each decoder layer, self-attention permits j <= i; cross-attention obtains keys/values from source E and queries from current decoder rows. The E-to-decoder arrow is directed into the decoder and is labeled keys/values, source rows.",
+      "justification": "Procedure step 4 and Outputs; supplier definition specifies masked self-attention then cross-attention then positionwise feedforward, including residual/LN operations. Adjacent prose explicitly preserves additional allowed masks and the complete residual/normalization conventions. The figure makes no claim that source attention must assign positive weight to every source row."
+    },
+    {
+      "independence": "The original algorithm definition and all five procedure steps are unchanged; the figure is explanatory and supplies no logical premise. No proof was supplied by this algorithm item, and the diagram does not replace or assert one."
+    }
+  ],
+  "original_evidence": {
+    "declared_path_missing": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement/screenshots/alg-transformer-forward-pass--01.png",
+    "resolved_authentic_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/alg-transformer-forward-pass--01.png",
+    "sha256": "2c65ed85cdc9dceb74f5de655e29e8ba090daa2303954357d8de6970ae676a04",
+    "inspection": "Viewed standalone at original resolution; exact SHA matches queue."
+  },
+  "write_guard": {
+    "before_raw_sha256": "c121c426ad8a09e8bb2cedf68a74a2b5b3d269c28a89dd9ce929e5a2ac5b448a",
+    "immediately_before_first_edit_matched": true,
+    "original_bytes_preserved_as_prefix": true,
+    "status_byte_identical": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-transformer-forward-pass.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-transformer-forward-pass.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-transformer-forward-pass.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-transformer-forward-pass.md",
+            "item_id": "alg-transformer-forward-pass",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    }
+  ],
+  "check_history": "Initial new-figure rendercheck saw false math spans when a TeX linebreak immediately preceded a math dollar; inserted harmless whitespace between the linebreak and dollar. All final explicit checks pass. No pre-existing formatting failure observed.",
+  "local_visual_verification": {
+    "preview_command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnn-003-accepted node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-transformer-forward-pass --out research/math-library-rendering-repairs-2026-10-23/previews/dnn-003-transformer-accepted",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-003-transformer-accepted/manifest.json",
+    "manifest_sha256": "54d9c094f64d23fb10eeeb74c47ac0349b7f4c4b6d86e5ce7e34334e4fba0085",
+    "source_sha256": "d6d8720b361b968c513db61a1a71795f03c17bbe0b324e69171e891c410d58ee",
+    "manifest_source_sha256": "d6d8720b361b968c513db61a1a71795f03c17bbe0b324e69171e891c410d58ee",
+    "capture": {
+      "capture_revision": 2,
+      "id": "alg-transformer-forward-pass",
+      "height": 1400,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/alg-transformer-forward-pass--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "420b04d3dcdf55abd99d7d93478e567dca91c7824ce4d4f078a81a1c2dcb118c",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 19,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T01:37:59.552Z"
+    },
+    "standalone_figure_detail": "research/math-library-rendering-repairs-2026-10-23/previews/dnn-003-transformer-accepted/screenshots/figure-detail.png",
+    "figure_detail_sha256": "7a0058af188a4b96f14efd24278f1ab7b03c6f2958edb70cd4fb0e5465eaf5b9",
+    "inspection": "Viewed final full-page PNG and standalone original-resolution figure detail. Full-page viewer intermittently blanks regions although identical PNG SHA and extracted pixels are stable; standalone native screenshot detail confirms all ten boxes and nine directed arrows, readable labels, no clipping/overlap, and the E-to-decoder branch. One native TikZ figure compiled with zero diagram failures and zero KaTeX errors."
+  },
+  "remaining_issues": []
+}

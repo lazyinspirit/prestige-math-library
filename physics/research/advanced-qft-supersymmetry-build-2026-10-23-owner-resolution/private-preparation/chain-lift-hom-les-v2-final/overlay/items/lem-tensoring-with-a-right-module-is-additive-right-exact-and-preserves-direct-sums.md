@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums.md

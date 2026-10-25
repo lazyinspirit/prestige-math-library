@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-chamber-face-stabilizers-in-a2.json
+  precheck: pass
 id: ex-cg-chamber-face-stabilizers-in-a2
 kind: example
 title: "Chamber faces and their stabilizers in $A_2$"
@@ -22,9 +25,7 @@ sources:
     - title: "Nicolas Perrin, Introduction to Kac-Moody groups and Lie algebras (lecture notes, November 9, 2015)"
       url: "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"
       locator: "Chapter 6, Section 6.5 'Dominant chambers and Tits cone', printed pp. 55-56 (Definition 6.5.1 and Theorem 6.5.2 (i)-(vi) with proof)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Statement
@@ -92,3 +93,35 @@ every point of the open face $C_{\{s\}}=\{x_s=0,\ x_t>0\}$ has stabilizer $\{1,s
 2.2 An orbit and the intersection rule, (iv). Using the generator formulas, $s\cdot(0,1)=(0,1)$, $t\cdot(0,1)=(1,-1)$ and $st\cdot(0,1)=(-1,0)$; moreover the three-element set $S_0:=\{(0,1),(1,-1),(-1,0)\}$ is stable under $s$ and $t$, since $s$ fixes $(0,1)$ and interchanges $(1,-1)$ with $(-1,0)$, while $t$ interchanges $(0,1)$ with $(1,-1)$ and fixes $(-1,0)$; hence $W\cdot(0,1)\subseteq S_0$. Conversely $(0,1)$, $t\cdot(0,1)$ and $st\cdot(0,1)$ are three distinct elements of the orbit, so $W\cdot(0,1)=S_0$, of cardinality $3=|W|/|\operatorname{Stab}_W(0,1)|=6/2$ by steps 1.1 and 1.2, and only $(0,1)$ has both coordinates $\ge0$, so it is the unique point of the orbit in $C$, in accordance with the collision theorem. Finally, for $f\in C$, membership in $sC$ is equivalent to $s\cdot f=(-x_s,x_s+x_t)\in C$, hence to $x_s=0$; therefore $sC\cap C=\{x_s=0,\ x_t\ge0\}$, as asserted. [F3, F10, step 1.1, step 1.2, algebra]
 
 3.1 The whole plane is the Tits cone, (v). Every standard parabolic subgroup of the finite group $W$ is finite, so every point of $C$ has finite $W_{S(f)}$ and the interior criterion gives $C\subseteq U^\circ$. Since $U^\circ$ is $W$-invariant and the six chambers cover $V^*$ by step 1.1, one has $V^*=\bigcup_{w\in W}wC\subseteq U^\circ\subseteq U\subseteq V^*$, so all three sets are equal. [F1, F2, F3, F10, step 1.1, algebra] ∎
+
+
+## Remarks
+
+In the dual-coordinate drawing below the three root lines divide the plane into the six chambers. The shaded sector is $C$; its upper boundary ray is $C\cap sC$, and its right boundary ray is $C\cap tC$. The dots $a=(0,1)$, $b=(1,-1)$ and $c=(-1,0)$ form the orbit in (iv). The coordinate axes are drawn perpendicular for readability; the displayed action formulas, rather than Euclidean reflection in these drawing axes, specify $s$ and $t$.
+
+```tikz
+\begin{tikzpicture}[scale=1.25]
+\fill[blue!12] (0,0) -- (2.7,0) -- (2.7,2.7) -- (0,2.7) -- (0,0);
+\draw[gray] (-2.7,2.7) -- (2.7,-2.7);
+\draw[->] (-2.9,0) -- (3,0) node[right] {$x_s$};
+\draw[->] (0,-2.9) -- (0,3) node[above] {$x_t$};
+\draw[blue,very thick] (0,0) -- (0,2.7);
+\draw[blue,very thick] (0,0) -- (2.7,0);
+\node at (1.8,1.8) {$C$};
+\node at (-0.8,2.1) {$sC$};
+\node at (-2.1,0.8) {$stC$};
+\node at (-1.8,-1.8) {$stsC$};
+\node at (0.8,-2.1) {$tsC$};
+\node at (2.1,-0.8) {$tC$};
+\node[above right] at (0,2.7) {$x_s=0$};
+\node[above] at (2.2,0) {$x_t=0$};
+\node[above left] at (-2.5,2.5) {$x_s+x_t=0$};
+\fill (0,1) circle (1.8pt) node[left] {$a$};
+\fill (1,-1) circle (1.8pt) node[below left] {$b$};
+\fill (-1,0) circle (1.8pt) node[above] {$c$};
+\fill (1,1) circle (1.8pt) node[below right] {$q=(1,1)$};
+\fill (0,0) circle (1.8pt) node[below left] {$0$};
+\end{tikzpicture}
+```
+
+The nonzero points on the two blue rays have stabilizers $\{1,s\}$ (vertical) and $\{1,t\}$ (horizontal). At $q$ the stabilizer is $\{1\}$, whereas the origin has stabilizer $W$. Thus the drawing distinguishes the open faces from their common vertex. These labels follow from Verification steps 1.1–2.2; the proof above is independent of the illustration.

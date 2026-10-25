@@ -1,0 +1,1316 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "63",
+  "level": 0,
+  "scope": [
+    "def-qftx-analytic-coherent-module",
+    "lem-qftx-analytic-coherent-matrix-kernels",
+    "lem-qftx-gaga-analytic-bounded-degree-relations",
+    "lem-qftx-coherent-analytic-module-calculus",
+    "thm-qftx-gaga-analytic-oka-coherence",
+    "ex-qftx-gaga-analytic-relation-kernel",
+    "ex-qftx-gaga-analytic-skyscraper-presentation"
+  ],
+  "contracts": {
+    "def-qftx-analytic-coherent-module": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition permits the finite rank r=0, so the zero module needs no generators."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition uses only finite local generation and includes the zero module with r=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Definition singles out no parameter value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-module case is included by r=0 in the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition concerns neighborhoods in a topological space and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition states a local existence condition and assumes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No calculation can establish a local sheaf condition; this item is a definition."
+    },
+    "lem-qftx-analytic-coherent-matrix-kernels": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kernel-cokernel-image-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of abelian\ngroups on a topological space $X$.\n\nThe **kernel sheaf** is the subsheaf\n$$\n\\ker(\\varphi)\\subseteq \\mathcal F\n$$\ndefined objectwise by\n$$\n\\ker(\\varphi)(U):=\\ker\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr).\n$$\n\nThe **cokernel presheaf** is\n$$\nU\\longmapsto \\operatorname{coker}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **cokernel sheaf** $\\operatorname{coker}(\\varphi)$ is its\nsheafification.\n\nThe **image presheaf** is\n$$\nU\\longmapsto \\operatorname{im}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **image sheaf** $\\operatorname{im}(\\varphi)$ is its sheafification.\n\nFor sheaves of modules on a ringed space, the same formulas are taken in the\ncorresponding module categories on each open set.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Induct on the target rank $q$. If $q=0$, then $\\ker\\Phi=\\mathcal A^{\\oplus p}$, generated by its $p$ standard sections (and equal to zero if $p=0$). If $q=1$, the images of the $p$ standard sections are a finite tuple in $\\mathcal A$, and [F1] says its relation sheaf, which is $\\ker\\Phi$ by [F2], is locally of finite type.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $q\\ge1$ and the result for target rank $q$. Let $\\Phi:\\mathcal A^{\\oplus p}\\to\\mathcal A^{\\oplus(q+1)}$, and let $\\pi:\\mathcal A^{\\oplus(q+1)}\\to\\mathcal A^{\\oplus q}$ drop the first coordinate. By the induction hypothesis, around any fixed $x\\in X$ the sheaf $\\ker(\\pi\\Phi)$ has finitely many generating sections $s_1,\\ldots,s_r$ whose germs generate every stalk on one neighborhood $V$ of $x$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\Phi(s_i)$ lies in $\\ker\\pi=\\mathcal A\\oplus0^{\\oplus q}$, write $\\Phi(s_i)=(h_i,0,\\ldots,0)$ with $h_i\\in\\mathcal A(V)$. By [F1], after shrinking $V$ the relation sheaf of $(h_1,\\ldots,h_r)$ is generated on $V$ by finitely many sections $t^{(1)},\\ldots,t^{(m)}\\in\\mathcal A(V)^{\\oplus r}$. For each $\\ell$, define $\\sigma_\\ell=\\sum_{i=1}^r t_i^{(\\ell)}s_i$. Then $\\Phi(\\sigma_\\ell)=0$ because $\\sum_i t_i^{(\\ell)}h_i=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any $y\\in V$ and any germ $v\\in(\\ker\\Phi)_y$, step 2.1 gives $v=\\sum_i c_i(s_i)_y$ for some germs $c_i\\in\\mathcal A_y$. The first coordinate of $\\Phi_y(v)=0$ says $\\sum_i c_i(h_i)_y=0$, so $(c_i)_i$ lies in the relation stalk generated by the $t^{(\\ell)}_y$. Hence $v$ is an $\\mathcal A_y$-linear combination of $(\\sigma_\\ell)_y$. Thus these finitely many sections generate every kernel stalk on $V$; [F2] and [F3] identify the resulting subsheaf with $\\ker\\Phi$, proving local finite type.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Target rank q=0 and source rank p=0 are handled in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero source rank p=0 and zero target rank q=0 cases are explicitly handled in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The q=1 induction base is proved in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate zero map is included in the finite tuple relation argument of steps 1.1 and 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The target-rank induction base and successor are covered in steps 1.1–4.1 for every finite q."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The local finite generating families are supplied by coherence in steps 2.1 and 3.1; no choice axiom is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts one implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts one implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite calculation establishes the analytic local generation claims; each is proved under its stated hypotheses in the numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Checked every step and F1–F3: q=0 gives the finite free source, q=1 is the scalar relation condition, and projection drops the first coordinate at q+1. A common neighborhood carries generators s_i and then scalar-relation generators t_l; their combinations generate every kernel stalk. The p=0 and r=0 cases yield zero kernels without a nonempty selection. Stalkwise exactness applies to module sheaves by the underlying abelian groups. The triangle diagram commutes and its arrows have the stated domains. Compared with Wehler Theorem 4.28(ii), Release 5.0 printed pp. 139–140. No defect or choice requirement."
+      }
+    },
+    "lem-qftx-gaga-analytic-bounded-degree-relations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weierstrass-polynomial",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$, write $z=(z',z_m)$ with $z'\\in\\mathbb C^{m-1}$, and let\n$d\\in\\mathbb N$. A **Weierstrass polynomial of degree $d$** is a germ in\n$\\mathcal O_{m,0}$ represented by\n\n$$W(z',z_m)=z_m^d+a_{d-1}(z')z_m^{d-1}+\\cdots+a_0(z'),$$\n\nwhere each $a_j$ is an element of $\\mathcal O_{m-1,0}$, so for $m=1$ the\ncoefficients are complex constants, and $a_j(0)=0$.\n\nFor $d=0$ the lower-coefficient list and sum are empty, so the unique\ndegree-$0$ Weierstrass polynomial is $W=1$.\n\nIn particular $W(0,z_m)=z_m^d$, so every Weierstrass polynomial of degree $d$\nis regular in $z_m$ of order $d$ in the sense of\n[[def-regular-holomorphic-germ]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-weierstrass-preparation-theorem",
+          "source_section": "Statement",
+          "quote": "Let $f\\in\\mathcal O_{m,0}$ be regular in $z_m$ of order $d$. Then there are a\nunit $u\\in\\mathcal O_{m,0}$ and a Weierstrass polynomial $W$ of degree $d$ such\nthat\n\n$$f=uW.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-weierstrass-division-theorem",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a Weierstrass polynomial of degree $d$ in the variable $z_m$. Then\nfor every $f\\in\\mathcal O_{m,0}$ there exist unique germs\n$q\\in\\mathcal O_{m,0}$ and $r_0,\\dots,r_{d-1}\\in\\mathcal O_{m-1,0}$, meaning\ncomplex constants when $m=1$, such that\n\n$$f=qW+r_0+r_1z_m+\\cdots+r_{d-1}z_m^{d-1}.$$\n\nEquivalently, every germ has a unique quotient and a unique remainder of\n$z_m$-degree $<d$ upon division by $W$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-power-series-expansion-in-several-complex-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$ and a polyradius $\\rho$, let\n$f:\\Delta_\\rho(a)\\to\\mathbb C$ be continuous and separately holomorphic, let $r$\nbe a polyradius with $r_k<\\rho_k$ for every $k<m$, and let\n$C_k(t)=a_k+r_k\\exp(it)$ on $[0,2\\pi]$. For each multi-index $\\alpha$ set\n\n$$c_\\alpha:=\\frac1{(2\\pi i)^m}\\int_{C_0}\\!\\cdots\\!\\int_{C_{m-1}} f(\\zeta)\\prod_{k<m}(\\zeta_k-a_k)^{-\\alpha_k-1}\\,d\\zeta_{m-1}\\cdots d\\zeta_0 ,$$\n\nan iterated integral as in the polydisc Cauchy formula. Then, with\n$M=\\sup_{\\Gamma_r(a)}|f|$,\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k},$$\n\nand for every real $\\theta$ with $0<\\theta<1$ the series\n$\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n$\\overline\\Delta_{\\theta r}(a)$ with\n\n$$f(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha\\qquad(z\\in\\overline\\Delta_{\\theta r}(a)).$$\n\nSince every $z\\in\\Delta_r(a)$ lies in $\\overline\\Delta_{\\theta r}(a)$ for some\n$\\theta<1$, the expansion holds throughout $\\Delta_r(a)$.\n\n**The coefficients are asserted here only as those iterated integrals.** That\n$c_\\alpha$ equals $\\partial^\\alpha f(a)/\\alpha!$ needs termwise differentiation\nand is not claimed by this statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-regular-holomorphic-germ",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$, write $z=(z',z_m)$ with\n$z'=(z_1,\\dots,z_{m-1})\\in\\mathbb C^{m-1}$, and let $f\\in\\mathcal O_{m,0}$.\nFor $d\\in\\mathbb N$, the germ $f$ is **regular in $z_m$ of order $d$** if some\nrepresentative satisfies\n\n$$f(0,\\zeta)=\\zeta^d h(\\zeta)$$\n\non a neighbourhood of $0\\in\\mathbb C$, where $h$ is holomorphic and\n$h(0)\\ne0$. Equivalently, the one-variable slice $\\zeta\\mapsto f(0,\\zeta)$ has a\nzero of exact order $d$ at the origin.\n\nThe case $d=0$ is exactly the unit case $f(0)\\ne0$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $q=1$, a relation germ $g$ satisfies $gP_1=0$ by [F1]. The polynomial $P_1$ is nonzero by [F2], and [F5] makes the ring of holomorphic germs an integral domain, so $g=0$, which is already a polynomial relation of bounded degree.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $q\\ge2$. If $P_q(x)\\ne0$, then $P_q$ is a unit germ. For every relation $g=(g_1,\\ldots,g_q)$, [F1] gives $g_q=-\\sum_{j<q}g_jP_j/P_q$, hence $g=\\sum_{j<q}(g_j/P_q)(P_qe_j-P_je_q)$. Each vector $P_qe_j-P_je_q$ is a relation whose component degrees are at most $d$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose $P_q(x)=0$, and set $e=\\deg_wP_q\\le d$. Let $r\\ge1$ be its order of vanishing in $w-w_0$; this is finite and at most $e\\le d$ by [F2, F6]. By [F3], after shrinking near $x$ write $P_q=u p$, where $u$ is a holomorphic unit and $p$ is a monic Weierstrass polynomial of degree $r$ in $w-w_0$. Ordinary polynomial division of $P_q$ by the monic polynomial $p$ gives a polynomial quotient and a remainder of degree below $r$. The division pair $(u,0)$ also represents $P_q$ as a holomorphic germ divided by $p$; uniqueness in [F4] makes the polynomial remainder zero and identifies the polynomial quotient with $u$. Since $P_q$ and $p$ are monic of degrees $e$ and $r$, respectively, this polynomial $u$ has degree $e-r\\le d-r$ and remains a unit near $x$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $g=(g_1,\\ldots,g_q)$ be a relation germ at $x$. For $j<q$, divide by $p$ using [F4] to write $g_j=t_jp+r_j$, where $t_j$ is holomorphic and $r_j$ is a polynomial in $w-w_0$ of degree below $r$. Set $\\alpha_j=t_j/u$ and $v_j=P_qe_j-P_je_q$. Then $\\delta=g-\\sum_{j<q}\\alpha_jv_j$ is a relation whose first $q-1$ components are $r_j$. Its last component satisfies $p(u\\delta_q)=-\\sum_{j<q}r_jP_j$, whose right-hand side is a polynomial of degree at most $d+r-1$. Dividing this polynomial by $p$ and using uniqueness [F4] shows that $u\\delta_q$ is a polynomial of degree at most $d-1$. Each $ur_j$ also has degree at most $d-1$, since $\\deg u=e-r\\le d-r$ and $\\deg r_j<r$. Thus $u\\delta$ is a polynomial relation with all component degrees at most $d$, and $g=\\sum_{j<q}\\alpha_jv_j+u^{-1}(u\\delta)$ is generated by polynomial relation germs of the required bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes q>=1 and each e_j>=1. The q=1 zero relation module is handled in proof 1.1; the later sums over j<q are in the q>=2 branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step3_boundary_gate_resolution",
+            "reason": "The detected polynomial-coefficient sum has e_j>=1 terms; the relation tuple has q>=1 entries. At q=1 proof 1.1 proves its relation module is {0}; this is a nonempty module, not an empty relation family obligation. Sums over j<q occur only after q>=2 in proof 1.2 and 2.1. Thus no admitted empty polynomial tuple or empty index set is hidden by the fixed positive-degree aggregate syntax."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The q=1 case, whose relation module is zero because P1 is nonzero, is proved in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-polynomial case q=1 is verified in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The last polynomial is treated separately when it is a unit in step 1.2 and when it vanishes at the base point in steps 1.3–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement fixes a common center for the Weierstrass coefficients, and step 1.3 has 1 <= r <= e <= d; steps 1.3 and 2.1 preserve the endpoint degree bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses only finite local choices and divisions in steps 1.3–2.1; no choice axiom is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a generation claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a generation claim, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite calculation establishes the analytic local generation claims; each is proved under its stated hypotheses in the numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Checked all four steps and F1–F6. For q=1 the integral-domain argument gives zero. If P_q(x) is a unit, the elementary relations generate with degree at most d. Otherwise translation to (x_prime,w_0) makes P_q regular of order r between 1 and e. Preparation and uniqueness of division show the unit u is a polynomial of degree e-r. Subtracting (t_j/u)(P_q e_j-P_j e_q) leaves remainders of degree below r; multiplying the residual vector by u gives component degrees at most d-1. Division uniqueness forces its last component to be polynomial. This proves the bound at every point, not only at the center. n=1 uses constant base coefficients. Compared with Demailly II3.20 complete proof and Wehler 4.28(iii.2–iii.3); the local proof correctly retains units even where source notation suppresses them. Common-center clarification accepted; the only direct item consumer is the owned Oka theorem, whose preparation step supplies these hypotheses."
+      }
+    },
+    "lem-qftx-coherent-analytic-module-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kernel-cokernel-image-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of abelian\ngroups on a topological space $X$.\n\nThe **kernel sheaf** is the subsheaf\n$$\n\\ker(\\varphi)\\subseteq \\mathcal F\n$$\ndefined objectwise by\n$$\n\\ker(\\varphi)(U):=\\ker\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr).\n$$\n\nThe **cokernel presheaf** is\n$$\nU\\longmapsto \\operatorname{coker}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **cokernel sheaf** $\\operatorname{coker}(\\varphi)$ is its\nsheafification.\n\nThe **image presheaf** is\n$$\nU\\longmapsto \\operatorname{im}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **image sheaf** $\\operatorname{im}(\\varphi)$ is its sheafification.\n\nFor sheaves of modules on a ringed space, the same formulas are taken in the\ncorresponding module categories on each open set.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-exact-sequence-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. A sequence of sheaves of abelian groups on $X$\nis **exact** when it is exact in the abelian category of\n[[thm-abelian-sheaves-form-abelian-category]], equivalently in the sense of\n[[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]].\n\nThus a sequence\n$$\n\\cdots\\to \\mathcal F_{i-1}\\to \\mathcal F_i\\to \\mathcal F_{i+1}\\to\\cdots\n$$\nis exact at $\\mathcal F_i$ when the image sheaf of the first morphism equals\nthe kernel sheaf of the second.\n\nThe same language applies to $\\mathcal O_X$-modules on a ringed space.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal F$ be coherent and fix $x\\in X$. Local finite type gives, after choosing a neighborhood $U$ of $x$, a finite-rank free module sheaf map $\\pi:\\mathcal O_U^{\\oplus k}\\to\\mathcal F|_U$ that is surjective on every stalk. By [F1], its kernel is locally of finite type; after shrinking to $V\\subseteq U$, choose finitely many sections generating that kernel on $V$ and let $\\rho:\\mathcal O_V^{\\oplus m}\\to\\mathcal O_V^{\\oplus k}$ be the corresponding map. The sequence $\\mathcal O_V^{\\oplus m}\\xrightarrow{\\rho}\\mathcal O_V^{\\oplus k}\\xrightarrow{\\pi}\\mathcal F|_V\\to0$ is exact by [F2], [F3], and [F4]. Thus every coherent module has a local finite presentation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $f:\\mathcal F\\to\\mathcal G$ be a morphism of coherent modules and set $\\mathcal K=\\ker f$. Choose locally a finite-rank free epimorphism $\\pi:\\mathcal O^{\\oplus k}\\to\\mathcal F$. The composite $f\\pi:\\mathcal O^{\\oplus k}\\to\\mathcal G$ has a locally finite-type kernel by [F1]; its image under $\\pi$ is exactly $\\mathcal K$ on each stalk, since $\\pi$ is stalkwise surjective. Hence $\\mathcal K$ is locally of finite type by [F4]. For every finite-rank map $\\eta:\\mathcal O^{\\oplus p}\\to\\mathcal K$, its composite with the inclusion $\\mathcal K\\hookrightarrow\\mathcal F$ has the same kernel; [F1] for $\\mathcal F$ makes that kernel locally of finite type. Thus $\\mathcal K$ is coherent.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $\\mathcal C=\\operatorname{coker}f$. It is locally of finite type because it is a quotient of the locally finite-type module $\\mathcal G$. To check its relation condition, fix a finite-rank map $\\gamma:\\mathcal O^{\\oplus p}\\to\\mathcal C$ and a point $x$. Since $\\mathcal G\\to\\mathcal C$ is a sheaf epimorphism, choose local lifts of the finitely many images of the standard basis near $x$; they define $\\widetilde\\gamma:\\mathcal O^{\\oplus p}\\to\\mathcal G$ lifting $\\gamma$. Also choose a local finite-rank epimorphism $\\delta:\\mathcal O^{\\oplus m}\\to\\mathcal F$. Define $\\epsilon:\\mathcal O^{\\oplus(m+p)}\\to\\mathcal G$ by $\\epsilon(a,b)=f(\\delta(a))+\\widetilde\\gamma(b)$. By [F1], $\\ker\\epsilon$ is locally of finite type. Projection of $\\ker\\epsilon$ to the second factor has image exactly $\\ker\\gamma$ on every stalk: an element of $\\ker\\epsilon$ maps to zero in $\\mathcal C$, and any stalk element $b\\in\\ker\\gamma$ has $\\widetilde\\gamma(b)\\in\\operatorname{im}f$, so a stalk preimage under $\\delta$ completes it to an element of $\\ker\\epsilon$. The image of a locally finite-type module is locally finite type, so $\\ker\\gamma$ is locally of finite type. This holds for every $\\gamma$, hence $\\mathcal C$ is coherent.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Consider a short exact sequence $0\\to\\mathcal F'\\xrightarrow{i}\\mathcal E\\xrightarrow{p}\\mathcal F''\\to0$. If $\\mathcal E$ and $\\mathcal F''$ are coherent, then $\\mathcal F'=\\ker p$ is coherent by step 2.1. If $\\mathcal F'$ and $\\mathcal E$ are coherent, then $\\mathcal F''=\\operatorname{coker}i$ is coherent by step 2.2.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "It remains to assume $\\mathcal F'$ and $\\mathcal F''$ coherent. Local finite generators of $\\mathcal F'$ together with local lifts to $\\mathcal E$ of finite generators of $\\mathcal F''$ generate $\\mathcal E$, so $\\mathcal E$ is locally of finite type. For any finite-rank map $g:\\mathcal O^{\\oplus k}\\to\\mathcal E$, the kernel of $pg$ is locally of finite type by [F1] for $\\mathcal F''$; choose a local finite-rank epimorphism $\\gamma:\\mathcal O^{\\oplus m}\\to\\ker(pg)$. Exactness gives a map $\\delta:\\mathcal O^{\\oplus m}\\to\\mathcal F'$ with $i\\delta=g\\gamma$. By [F1] for $\\mathcal F'$, $\\ker\\delta$ is locally of finite type. On each stalk, $\\gamma$ maps $\\ker\\delta$ onto $\\ker g$: inclusion follows from $i\\delta=g\\gamma$, and if $s\\in\\ker g$, then $pg(s)=0$, so $s=\\gamma(t)$ for some $t$ and $i\\delta(t)=g(s)=0$; injectivity of $i$ gives $\\delta(t)=0$. Therefore $\\ker g$ is locally of finite type. Since this holds for every $g$, $\\mathcal E$ is coherent.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The proof allows zero-rank finite free presentations and uses finite generators in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero modules and zero morphisms are covered by the kernel and cokernel constructions in steps 2.1–2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "All finite ranks, including rank one, are included in the presentations of steps 1.1–2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate cases of the short exact sequence are included in steps 3.1–4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoint cases among the three terms of a short exact sequence are covered in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite local lifts and finite generators are chosen from the stated local finite type and sheaf epimorphism properties in steps 1.1 and 2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives closure implications, not equivalences."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives closure implications, not equivalences."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite calculation establishes the analytic local generation claims; each is proved under its stated hypotheses in the numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Checked all five steps, F1–F4, and all three exact-sequence cases on an arbitrary ringed space. Finite generators admit simultaneous local lifts through a sheaf epimorphism. Projection of ker epsilon surjects onto ker gamma (choose the negative of a lift under delta); images of finite-type sheaves have finite local generators. In the extension case injectivity of i identifies ker delta with the preimage needed to generate ker g. Zero modules and rank-zero free maps satisfy the same arguments. The exact-sequence diagram has correct orientation. Demailly II3.13–3.14 supplies the general ringed-space argument; Wehler Release 5.0 Propositions 4.32/4.34 and Release 4.3 Propositions 4.31/4.33 agree. Citation edition ambiguity amended; no mathematical interface change."
+      }
+    },
+    "thm-qftx-gaga-analytic-oka-coherence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-complex-manifolds-and-holomorphic-vector-bundles",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$. A **chart** on a topological space $X$ is a homeomorphism\n$\\varphi:U\\to\\varphi(U)$ from an open set $U\\subseteq X$ onto an open subset of\n$\\mathbb C^m$ with its usual topology ([[def-homeomorphism-and-open-maps]]);\ntwo charts $\\varphi,\\psi$ are **holomorphically compatible** when the\ntransition maps $\\psi\\circ\\varphi^{-1}$ and $\\varphi\\circ\\psi^{-1}$ are\nholomorphic on the open sets where they are defined\n([[def-holomorphic-function-in-several-complex-variables]]). A **holomorphic\natlas** is a family of pairwise compatible charts whose domains cover $X$. A\n**complex manifold of dimension $m$** is a nonempty Hausdorff\n([[def-hausdorff-space]]) second-countable ([[def-second-countable-space]])\ntopological space carrying a holomorphic atlas; the same maximal-atlas argument\nas for [[def-riemann-surface-and-holomorphic-atlas]] applies verbatim with\n$\\mathbb C^m$ in place of $\\mathbb C$: the union of a holomorphic atlas with all\ncharts compatible with it is again a holomorphic atlas, so one passes to the\nunique maximal atlas and calls its members holomorphic charts. Each chart is a\nhomeomorphism onto an open subset of $\\mathbb C^m\\cong\\mathbb R^{2m}$, so $X$ is\na topological manifold without boundary of real dimension $2m$\n([[def-topological-manifold-without-boundary]]), and for connected $X$ the case\n$m=1$ recovers Riemann surfaces ([[def-riemann-surface-and-holomorphic-atlas]]).\n\nA **holomorphic map** $f:X\\to Y$ between complex manifolds is a continuous map\nwhose expression in every pair of holomorphic charts is holomorphic\n([[def-holomorphic-map-and-complex-jacobian]]); equivalently, for every open\n$V\\subseteq Y$ and every holomorphic function $h$ on $V$, the function\n$h\\circ f$ is holomorphic on $f^{-1}(V)$. The forward implication is the\nholomorphic chain rule; conversely apply this condition to the coordinate\nfunctions of a chart on $Y$.\n\n**Induced smooth structure and complex structure.** Holomorphic functions on\nopen subsets of $\\mathbb C^m$ are smooth\n([[cor-holomorphic-functions-in-several-variables-are-smooth]]), so every\nholomorphic atlas is a smooth atlas ([[def-smooth-atlas]]) and $X$ is a smooth\nmanifold of real dimension $2m$ ([[def-smooth-manifold]]) whose smooth charts\ninclude the holomorphic ones. In holomorphic coordinates\n$z_k=x_k+iy_k$ the **complex structure** is the endomorphism field $J$ of the\ntangent bundle determined by $J\\partial_{x_k}=\\partial_{y_k}$ and\n$J\\partial_{y_k}=-\\partial_{x_k}$; it satisfies $J^2=-\\mathrm{id}$ and is\nindependent of the holomorphic chart, because a holomorphic transition map has\ncomplex-linear differential ([[def-holomorphic-map-and-complex-jacobian]],\n[[thm-chain-rule-for-holomorphic-maps-in-several-variables]]) and complex-linear\nmaps intertwine the two coordinate definitions of multiplication by $i$. A\n**Hermitian metric** on $X$ is a Riemannian metric $g$\n([[def-riemannian-metric-and-riemannian-manifold]]) satisfying\n$g(Jv,Jw)=g(v,w)$ for all tangent vectors $v,w$; its Riemannian volume density\nis written $\\mu_g$ ([[def-riemannian-volume-density]]). The complex structure\nmakes each tangent space a complex vector space, so the tangent bundle is a\nsmooth complex vector bundle in the sense of\n[[def-complex-linear-and-compatible-bundle-connections]].\n\n**Holomorphic vector bundles and Hermitian bundle metrics.** A **holomorphic\nvector bundle of rank $r$** on $X$ is a smooth complex vector bundle\n$\\pi:E\\to X$ of rank $r$\n([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]],\n[[def-complex-linear-and-compatible-bundle-connections]]) together with an open\ncover $(V_\\alpha)$ of $X$ and smooth local trivializations\n$\\theta_\\alpha:E|_{V_\\alpha}\\to V_\\alpha\\times\\mathbb C^r$ whose transition\nmatrices $g_{\\alpha\\beta}:V_\\alpha\\cap V_\\beta\\to\\mathrm{GL}_r(\\mathbb C)$,\ndefined by $\\theta_\\alpha\\theta_\\beta^{-1}(p,v)=(p,g_{\\alpha\\beta}(p)v)$, are\nholomorphic. A **holomorphic frame** over an open set $V$ is a smooth\ncomplex-linear trivialization whose transition matrices with the supplied\ntrivializations are holomorphic on every overlap. Changing holomorphic frame multiplies a local section by a\nholomorphic matrix, hence a smooth local section is **holomorphic** exactly when\nits representatives in holomorphic frames are holomorphic functions. A\n**Hermitian metric** $h$ on $E$ is a smooth bundle metric\n([[def-smooth-bundle-metric]]) whose fibre pairings are positive definite\nHermitian forms, linear in the first variable and conjugate-linear in the\nsecond; the condition is frame-independent because the gauge freedom is\nconjugation by a pointwise invertible matrix. Smooth sections are\n$\\Gamma(E)$ ([[def-smooth-section-local-section-and-support]]).",
+          "uses": [
+            "1.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "7.1",
+            "9.1",
+            "10.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "2.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-analytic-coherent-matrix-kernels",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a ringed space whose structure sheaf $\\mathcal A$ is coherent in the sense that every finite tuple of its local sections has a locally finite-type relation sheaf. For all finite integers $p,q\\ge0$ and every $\\mathcal A$-module morphism $\\Phi:\\mathcal A^{\\oplus p}\\to\\mathcal A^{\\oplus q}$, the kernel sheaf $\\ker\\Phi$ is locally of finite type.",
+          "uses": [
+            "6.1",
+            "7.1",
+            "8.1",
+            "10.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-gaga-analytic-bounded-degree-relations",
+          "source_section": "Statement",
+          "quote": "Let $n,q,d\\ge1$ be integers, let $U'\\subseteq\\mathbb C^{n-1}$ and $D\\subseteq\\mathbb C$ be polydiscs centered at $0$, and let $w$ denote the last coordinate. For $1\\le j\\le q$, write\n$$P_j(x',w)=w^{e_j}+\\sum_{k=0}^{e_j-1}a_{jk}(x')w^k,$$\nwhere $1\\le e_j\\le d$, $a_{jk}\\in\\mathcal O(U')$, and $a_{jk}(0)=0$. For every $x=(x',w_0)\\in U'\\times D$, each germ in the relation sheaf of $(P_1,\\ldots,P_q)$ at $x$ is an $\\mathcal O_{U'\\times D,x}$-linear combination of relation germs whose components are polynomials in $w-w_0$ of degree at most $d$ with coefficients in $\\mathcal O_{U',x'}$.",
+          "uses": [
+            "5.1",
+            "8.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qftx-coherent-analytic-module-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space and use the coherence definition on the A page. The kernel and cokernel of any morphism between coherent $\\mathcal O_X$-module sheaves are coherent. In every short exact sequence $0\\to\\mathcal F'\\to\\mathcal E\\to\\mathcal F''\\to0$ of $\\mathcal O_X$-module sheaves, if any two of $\\mathcal F'$, $\\mathcal E$, and $\\mathcal F''$ are coherent, then the third is coherent.",
+          "uses": [
+            "7.1",
+            "10.1",
+            "10.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-holomorphic-germ-ring-is-noetherian",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$, the holomorphic germ ring $\\mathcal O_{m,0}$ is a\nNoetherian commutative ring.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-finite-generation-and-finite-presentation-over-a-noetherian-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring and let $M$ be an $R$-module. The\nfollowing are equivalent.\n\n1. $M$ is a Noetherian module ([[def-noetherian-module]]).\n2. $M$ is finitely generated\n   ([[def-generated-cyclic-finitely-generated-and-free-modules]]).\n3. $M$ is finitely presented ([[def-finitely-presented-module-and-algebra]]).\n\nThe proof below shows exactly where the Noetherian hypothesis is used to make\nconditions 2 and 3 agree.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$ and let $f\\in\\mathcal O_{m,0}$ be nonzero. Then there is an\ninvertible complex-linear map $T:\\mathbb C^m\\to\\mathbb C^m$ and an integer\n$d\\ge0$ such that the pulled-back germ $f\\circ T$ is regular in the last\nvariable of order $d$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-regular-holomorphic-germ",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$, write $z=(z',z_m)$ with\n$z'=(z_1,\\dots,z_{m-1})\\in\\mathbb C^{m-1}$, and let $f\\in\\mathcal O_{m,0}$.\nFor $d\\in\\mathbb N$, the germ $f$ is **regular in $z_m$ of order $d$** if some\nrepresentative satisfies\n\n$$f(0,\\zeta)=\\zeta^d h(\\zeta)$$\n\non a neighbourhood of $0\\in\\mathbb C$, where $h$ is holomorphic and\n$h(0)\\ne0$. Equivalently, the one-variable slice $\\zeta\\mapsto f(0,\\zeta)$ has a\nzero of exact order $d$ at the origin.\n\nThe case $d=0$ is exactly the unit case $f(0)\\ne0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-weierstrass-preparation-theorem",
+          "source_section": "Statement",
+          "quote": "Let $f\\in\\mathcal O_{m,0}$ be regular in $z_m$ of order $d$. Then there are a\nunit $u\\in\\mathcal O_{m,0}$ and a Weierstrass polynomial $W$ of degree $d$ such\nthat\n\n$$f=uW.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-weierstrass-polynomial",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$, write $z=(z',z_m)$ with $z'\\in\\mathbb C^{m-1}$, and let\n$d\\in\\mathbb N$. A **Weierstrass polynomial of degree $d$** is a germ in\n$\\mathcal O_{m,0}$ represented by\n\n$$W(z',z_m)=z_m^d+a_{d-1}(z')z_m^{d-1}+\\cdots+a_0(z'),$$\n\nwhere each $a_j$ is an element of $\\mathcal O_{m-1,0}$, so for $m=1$ the\ncoefficients are complex constants, and $a_j(0)=0$.\n\nFor $d=0$ the lower-coefficient list and sum are empty, so the unique\ndegree-$0$ Weierstrass polynomial is $W=1$.\n\nIn particular $W(0,z_m)=z_m^d$, so every Weierstrass polynomial of degree $d$\nis regular in $z_m$ of order $d$ in the sense of\n[[def-regular-holomorphic-germ]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-weierstrass-division-theorem",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a Weierstrass polynomial of degree $d$ in the variable $z_m$. Then\nfor every $f\\in\\mathcal O_{m,0}$ there exist unique germs\n$q\\in\\mathcal O_{m,0}$ and $r_0,\\dots,r_{d-1}\\in\\mathcal O_{m-1,0}$, meaning\ncomplex constants when $m=1$, such that\n\n$$f=qW+r_0+r_1z_m+\\cdots+r_{d-1}z_m^{d-1}.$$\n\nEquivalently, every germ has a unique quotient and a unique remainder of\n$z_m$-degree $<d$ upon division by $W$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-power-series-expansion-in-several-complex-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$ and a polyradius $\\rho$, let\n$f:\\Delta_\\rho(a)\\to\\mathbb C$ be continuous and separately holomorphic, let $r$\nbe a polyradius with $r_k<\\rho_k$ for every $k<m$, and let\n$C_k(t)=a_k+r_k\\exp(it)$ on $[0,2\\pi]$. For each multi-index $\\alpha$ set\n\n$$c_\\alpha:=\\frac1{(2\\pi i)^m}\\int_{C_0}\\!\\cdots\\!\\int_{C_{m-1}} f(\\zeta)\\prod_{k<m}(\\zeta_k-a_k)^{-\\alpha_k-1}\\,d\\zeta_{m-1}\\cdots d\\zeta_0 ,$$\n\nan iterated integral as in the polydisc Cauchy formula. Then, with\n$M=\\sup_{\\Gamma_r(a)}|f|$,\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k},$$\n\nand for every real $\\theta$ with $0<\\theta<1$ the series\n$\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n$\\overline\\Delta_{\\theta r}(a)$ with\n\n$$f(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha\\qquad(z\\in\\overline\\Delta_{\\theta r}(a)).$$\n\nSince every $z\\in\\Delta_r(a)$ lies in $\\overline\\Delta_{\\theta r}(a)$ for some\n$\\theta<1$, the expansion holds throughout $\\Delta_r(a)$.\n\n**The coefficients are asserted here only as those iterated integrals.** That\n$c_\\alpha$ equals $\\partial^\\alpha f(a)/\\alpha!$ needs termwise differentiation\nand is not claimed by this statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "7.1",
+            "8.1",
+            "9.1",
+            "11.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Work under [A1]. In a holomorphic chart, prove the relation assertion by induction on dimension $n$, and for a fixed $n$ by induction on tuple length $q$. On $\\mathbb C^0=\\{0\\}$ each relation space is a subspace of the finite-dimensional vector space $\\mathbb C^q$, so a finite basis gives local generators. For any dimension, the empty tuple has zero relation sheaf.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If some tuple entry has zero germ at the chosen point, [F13] gives a neighborhood on which that entry vanishes identically; its coordinate in a relation is then arbitrary, and the relation sheaf is the direct sum of one copy of $\\mathcal O$ with the shorter tuple's relation sheaf. The induction on $q$ gives finite local generators, and repeating this finite reduction removes every zero germ. If some remaining entry, say $f_1$, is nonzero at the point, shrink until $f_1$ is a unit; the sections $e_j-(f_j/f_1)e_1$, $2\\le j\\le q$, generate the relation sheaf because the relation equation uniquely determines its first coordinate.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F13",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "It remains to treat a tuple of nonzero germs all vanishing at the point. By [F11], the product $G=\\prod_j f_j$ is a nonzero germ. Apply [F8] to $G$; after the resulting linear coordinate change the restriction of $G$ to the last coordinate line has finite order. Since this restriction is the product of the corresponding one-variable restrictions of the $f_j$, each factor is nonzero and hence has a finite order; each $f_j$ is therefore regular in the last variable.",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "F11",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F9] to each of the finitely many $f_j$ and intersect the resulting neighborhoods. On one common product polydisc each $f_j=u_jP_j$, where $u_j$ is a unit and $P_j$ is a monic Weierstrass polynomial. Multiplication of the relation coefficients by the units $u_j$ is an isomorphism from the relation sheaf of $(f_j)$ to that of $(P_j)$. Set $d=\\max_j\\deg_w P_j$.",
+          "step": "4.1",
+          "inputs": [
+            "F9",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F4], whose quotient/remainder step uses the uniqueness in [F10], every relation germ of $(P_1,\\ldots,P_q)$ is generated by polynomial relation germs whose components have $w$-degree at most $d$. Such vectors are identified with coefficient vectors in $\\mathcal O_{\\Delta'}^{\\oplus q(d+1)}$, where $\\Delta'$ is the base polydisc. Multiplication by the $P_j$ defines a finite matrix map $\\Psi:\\mathcal O_{\\Delta'}^{\\oplus q(d+1)}\\to\\mathcal O_{\\Delta'}^{\\oplus(2d+1)}$ by taking coefficients of $\\sum_j Q_jP_j$. Its kernel is exactly the bounded-degree polynomial relation sheaf.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F10",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "By dimension induction, $\\mathcal O_{\\Delta'}$ is coherent; [F3] therefore makes $\\mathcal K=\\ker\\Psi$ locally of finite type. At the base point, its stalk is a submodule of $A^{\\oplus q(d+1)}$, where $A=\\mathcal O_{n-1,0}$ after translation. If $n>1$, [F6] makes $A$ Noetherian; if $n=1$, $A=\\mathbb C$ is a field and hence Noetherian. The finite free module is finitely generated, so [F7] makes it Noetherian and its submodule $\\mathcal K_0$ finitely generated.",
+          "step": "6.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7",
+            "step 5.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "The sheaf $\\mathcal K$ is coherent: it is locally of finite type by step 6.1, and for any finite free map into $\\mathcal K$, composition with its inclusion into the finite free domain of $\\Psi$ has the same kernel, locally of finite type by [F3]. A finite-rank free module over the coherent structure sheaf is coherent, since its standard basis gives finite type and [F3] gives the kernel condition. Choose finitely many germs generating $\\mathcal K_0$ and represent them by sections on one smaller base neighborhood. Their cokernel in $\\mathcal K$ is coherent by [F5]; its stalk at the base point is zero by the chosen generators and the stalk definition [F13]. Since that cokernel is locally of finite type, a finite generating family has zero germs there and vanishes after a common shrinking. Thus the selected sections generate every kernel stalk on a smaller base neighborhood.",
+          "step": "7.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F12",
+            "F13",
+            "step 6.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Regard these finite coefficient sections as polynomial relation sections on the product polydisc. Together with the finitely many elementary polynomial relations $P_qe_j-P_je_q$, they generate every bounded-degree relation stalk over the smaller base neighborhood; [F4] then makes them generate every relation stalk of $(P_1,\\ldots,P_q)$ throughout a smaller product neighborhood. The unit isomorphisms from step 4.1 transfer these generators back to $(f_1,\\ldots,f_q)$. Equality of the generated subsheaf with the relation sheaf follows from their equal stalks by [F12]. Thus the relation sheaf is locally of finite type at the chosen point.",
+          "step": "8.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F12",
+            "step 4.1",
+            "step 7.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Since the point and tuple were arbitrary, every finite tuple of holomorphic functions on every chart has a locally finite-type relation sheaf. A holomorphic coordinate change induces an isomorphism of structure sheaves and transports the relation map and its kernel, so the chart-local property is independent of coordinates. Hence [F2] makes $\\mathcal O_M$ coherent on all of $M$.",
+          "step": "9.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F12",
+            "step 8.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "Apply [F5] to the coherent structure sheaf $\\mathcal O_M$. It gives closure of coherent $\\mathcal O_M$-modules under kernels, cokernels, and finite extensions, as stated.",
+          "step": "10.1",
+          "inputs": [
+            "F5",
+            "step 9.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-10-2",
+          "claim": "Fix coherent $\\mathcal F$, $x\\in M$, and finite $\\ell\\ge0$. Local finite type gives a finite-rank epimorphism $\\mathcal O^{\\oplus p_0}\\to\\mathcal F$ near $x$. The finite free source is coherent by [F3] and the coherence of $\\mathcal O_M$ from step 9.1; hence its kernel is coherent by [F5]. Choose a finite-rank epimorphism onto that kernel, compose with its inclusion into $\\mathcal O^{\\oplus p_0}$, and repeat this operation until $\\ell+1$ free modules have been chosen. At each intermediate stage the kernel is coherent by [F5], so the next finite-rank epimorphism exists locally.",
+          "step": "10.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 9.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-11-1",
+          "claim": "Only finitely many neighborhoods are used for the finite length $\\ell+1$ construction; their intersection is a chart neighborhood $W$ of $x$. Each new free module maps onto the preceding kernel, so the resulting sequence is exact at $\\mathcal F|_W$ and every free term before the leftmost one. No further kernel is chosen at the leftmost term, and no global choices of generators or global resolution are asserted.",
+          "step": "11.1",
+          "inputs": [
+            "F4",
+            "F12",
+            "step 10.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty tuple is explicitly assigned zero relation sheaf in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero tuple entries are removed locally in step 2.1, while zero modules are included by finite generation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The induction covers tuple length one and all finite dimensions in steps 1.1–8.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero germs and unit germs are handled separately in step 2.1; the all-vanishing case is treated in steps 3.1–8.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The partial resolution includes length ell=0 and is exact at each asserted term in steps 10.2–11.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The adopted Axiom of Choice is stated in A1; the proof uses finite local selections and shrinkings in steps 1.1, 7.1, and 10.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts coherence and finite partial resolutions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts coherence and finite partial resolutions, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite calculation establishes the analytic local generation claims; each is proved under its stated hypotheses in the numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Checked every one of the 12 steps and all 17 cited dependency statements. The supplier definition uses positive complex dimension; C^0 is the auxiliary induction base. Empty tuples, zero germs and unit entries are handled before simultaneous preparation of the nonzero product. The coefficient matrix has q(d+1) columns and 2d+1 rows. A polynomial relation germ at (x_prime,w_0) gives a base coefficient relation because a polynomial vanishing on a product neighborhood has zero coefficients; translation between w and w-w_0 preserves the degree bound. Dimension induction plus the matrix lemma gives one neighborhood generating K. The Noetherian stalk and coherent-cokernel argument in steps 6–7 is valid though more than is needed. Extending coefficient sections to the product and using bounded-degree reduction generates all relation stalks. Free modules are coherent by the matrix lemma; finite repeated coherent kernels give the requested partial resolution, including ell=0, with no left-end exactness claim. AC is retained as adopted ambient scope, not inferred necessary. Demailly II3.19–3.20 and II3.17, and Wehler 4.28, checked. No missing prerequisite or empirical premise."
+      }
+    },
+    "ex-qftx-gaga-analytic-relation-kernel": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-gaga-analytic-oka-coherence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a finite-dimensional complex manifold and let $\\mathcal O_M$ be its sheaf of holomorphic functions. For every open $U\\subseteq M$ and every finite tuple $f_1,\\ldots,f_q\\in\\mathcal O_M(U)$, the relation sheaf\n$$\n\\ker\\!\\left(\\mathcal O_U^{\\oplus q}\\longrightarrow\\mathcal O_U,\\quad(a_1,\\ldots,a_q)\\longmapsto\\sum_{j=1}^q a_jf_j\\right)\n$$\nis locally of finite type: every point has a neighborhood on which one finite family of relation sections generates the relation stalk at every point. Consequently $\\mathcal O_M$ is coherent. Coherent $\\mathcal O_M$-module sheaves are closed under kernels, cokernels, and finite extensions. For every coherent $\\mathcal O_M$-module $\\mathcal F$, point $x\\in M$, and finite integer $\\ell\\ge0$, there are a chart neighborhood $W$ of $x$ and finite ranks $p_0,\\ldots,p_\\ell$ for which\n$$\n\\mathcal O_W^{\\oplus p_\\ell}\\longrightarrow\\cdots\\longrightarrow\\mathcal O_W^{\\oplus p_0}\\longrightarrow\\mathcal F|_W\\longrightarrow0\n$$\nis exact at $\\mathcal F|_W$ and at every free term except the leftmost one. No exactness at the leftmost free term and no global analytic free resolution are asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-coherent-analytic-module-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space and use the coherence definition on the A page. The kernel and cokernel of any morphism between coherent $\\mathcal O_X$-module sheaves are coherent. In every short exact sequence $0\\to\\mathcal F'\\to\\mathcal E\\to\\mathcal F''\\to0$ of $\\mathcal O_X$-module sheaves, if any two of $\\mathcal F'$, $\\mathcal E$, and $\\mathcal F''$ are coherent, then the third is coherent.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-power-series-expansion-in-several-complex-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$ and a polyradius $\\rho$, let\n$f:\\Delta_\\rho(a)\\to\\mathbb C$ be continuous and separately holomorphic, let $r$\nbe a polyradius with $r_k<\\rho_k$ for every $k<m$, and let\n$C_k(t)=a_k+r_k\\exp(it)$ on $[0,2\\pi]$. For each multi-index $\\alpha$ set\n\n$$c_\\alpha:=\\frac1{(2\\pi i)^m}\\int_{C_0}\\!\\cdots\\!\\int_{C_{m-1}} f(\\zeta)\\prod_{k<m}(\\zeta_k-a_k)^{-\\alpha_k-1}\\,d\\zeta_{m-1}\\cdots d\\zeta_0 ,$$\n\nan iterated integral as in the polydisc Cauchy formula. Then, with\n$M=\\sup_{\\Gamma_r(a)}|f|$,\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k},$$\n\nand for every real $\\theta$ with $0<\\theta<1$ the series\n$\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n$\\overline\\Delta_{\\theta r}(a)$ with\n\n$$f(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha\\qquad(z\\in\\overline\\Delta_{\\theta r}(a)).$$\n\nSince every $z\\in\\Delta_r(a)$ lies in $\\overline\\Delta_{\\theta r}(a)$ for some\n$\\theta<1$, the expansion holds throughout $\\Delta_r(a)$.\n\n**The coefficients are asserted here only as those iterated integrals.** That\n$c_\\alpha$ equals $\\partial^\\alpha f(a)/\\alpha!$ needs termwise differentiation\nand is not claimed by this statement.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $x=(x_1,x_2)\\in D$ with $x\\ne0$. If $z_1(x)\\ne0$, then $z_1$ is a unit germ and a relation $z_1a+z_2b=0$ satisfies $(a,b)=(b/z_1)(-z_2,z_1)$. If $z_1(x)=0$, then $z_2(x)\\ne0$, so $z_2$ is a unit germ and $(a,b)=(-a/z_2)(-z_2,z_1)$. Thus the stated section generates every relation stalk away from the origin.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At the origin, let $a z_1+b z_2=0$ as a holomorphic germ. Restricting to $z_1=0$ gives $z_2b(0,z_2)=0$ as a one-variable germ, so [F5] makes $b(0,z_2)=0$. Write the convergent series $b(z_1,z_2)=\\sum_{m,n\\ge0}c_{mn}z_1^mz_2^n$. Uniqueness of coefficients makes $c_{0n}=0$ for every $n$, so $b=z_1c$ for the holomorphic germ $c=\\sum_{m\\ge1,n\\ge0}c_{mn}z_1^{m-1}z_2^n$.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $b=z_1c$ into the relation gives $z_1(a+z_2c)=0$. The germ ring is a domain by [F5], so $a=-z_2c$ and $(a,b)=c(-z_2,z_1)$. Hence the same section generates the relation stalk at the origin.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 show that the generated subsheaf and $\\ker\\mu$ have equal stalks at every point, where a stalk is the germ module from [F6]; [F4] identifies them. Therefore the relation sheaf is locally of finite type. Under the assumed Axiom of Choice [A1], [F2] makes $\\mathcal O_D$ coherent; $\\mathcal O_D^{\\oplus2}$ is coherent by the split short exact sequence $0\\to\\mathcal O_D\\to\\mathcal O_D^{\\oplus2}\\to\\mathcal O_D\\to0$ and [F3]. Applying [F3] to $\\mu$ shows that its kernel is coherent.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes a nonempty bidisc and a two-coordinate map."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At the origin the generator vanishes but generates the full relation stalk, as proved in steps 1.2–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At each nonzero point at least one coordinate is a unit, handled in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The origin where both coordinates vanish is handled by divisibility in steps 1.2–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The bidisc has no interval endpoints in the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice is an explicit assumption A1, and the pointwise nonzero-coordinate selection is finite in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts a generation claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts a generation claim, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite calculation establishes the analytic local generation claims; each is proved under its stated hypotheses in the numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Checked all four verification steps and every supplier statement. The nonorigin cases use the correct unit coordinate and signs. At the origin restriction to z_1=0 forces all coefficients c_0n of b to vanish, and the divided convergent series remains holomorphic on a smaller bidisc. Cancellation in the holomorphic germ domain then gives (a,b)=c(-z_2,z_1). Stalkwise equality proves generation of the sheaf on D, without claiming arbitrary global coefficients from stalk data. Oka plus the split extension makes the free source coherent; kernel calculus gives coherence. Inherited AC is explicit; no measurements or global resolution are asserted. Source locator cleanup does not change the claim."
+      }
+    },
+    "ex-qftx-gaga-analytic-skyscraper-presentation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-analytic-coherent-module",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, so $X$ is a topological space and $\\mathcal O_X$ is a sheaf of commutative rings. An $\\mathcal O_X$-module sheaf $\\mathcal F$ is **locally of finite type** if for every $x\\in X$ there are an open neighborhood $U$ of $x$, a finite integer $r\\ge0$, and sections $s_1,\\ldots,s_r\\in\\mathcal F(U)$ such that their germs generate $\\mathcal F_y$ as an $\\mathcal O_{X,y}$-module for every $y\\in U$.\n\nFor an open $V\\subseteq X$, a finite integer $p\\ge0$, and an $\\mathcal O_X$-module morphism $\\phi:\\mathcal O_V^{\\oplus p}\\to\\mathcal F|_V$, its **relation sheaf** is the kernel sheaf $\\ker\\phi$. The module sheaf $\\mathcal F$ is **coherent** if it is locally of finite type and, for every such $V$, $p$, and $\\phi$, the relation sheaf $\\ker\\phi$ is locally of finite type. Here $\\mathcal O_V^{\\oplus0}$ is the zero module sheaf.\n\nIn particular, for a finite tuple $f_1,\\ldots,f_p\\in\\mathcal O_X(U)$, its holomorphic relation sheaf is the kernel of the morphism $\\mathcal O_U^{\\oplus p}\\to\\mathcal O_U$ that sends $(a_1,\\ldots,a_p)$ to $\\sum_{j=1}^p a_jf_j$. The structure sheaf is coherent when it is coherent as a module over itself. If $M$ is a complex manifold, an **analytic coherent module on $M$** means a coherent module sheaf over its sheaf $\\mathcal O_M$ of holomorphic functions.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-gaga-analytic-oka-coherence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a finite-dimensional complex manifold and let $\\mathcal O_M$ be its sheaf of holomorphic functions. For every open $U\\subseteq M$ and every finite tuple $f_1,\\ldots,f_q\\in\\mathcal O_M(U)$, the relation sheaf\n$$\n\\ker\\!\\left(\\mathcal O_U^{\\oplus q}\\longrightarrow\\mathcal O_U,\\quad(a_1,\\ldots,a_q)\\longmapsto\\sum_{j=1}^q a_jf_j\\right)\n$$\nis locally of finite type: every point has a neighborhood on which one finite family of relation sections generates the relation stalk at every point. Consequently $\\mathcal O_M$ is coherent. Coherent $\\mathcal O_M$-module sheaves are closed under kernels, cokernels, and finite extensions. For every coherent $\\mathcal O_M$-module $\\mathcal F$, point $x\\in M$, and finite integer $\\ell\\ge0$, there are a chart neighborhood $W$ of $x$ and finite ranks $p_0,\\ldots,p_\\ell$ for which\n$$\n\\mathcal O_W^{\\oplus p_\\ell}\\longrightarrow\\cdots\\longrightarrow\\mathcal O_W^{\\oplus p_0}\\longrightarrow\\mathcal F|_W\\longrightarrow0\n$$\nis exact at $\\mathcal F|_W$ and at every free term except the leftmost one. No exactness at the leftmost free term and no global analytic free resolution are asserted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-coherent-analytic-module-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space and use the coherence definition on the A page. The kernel and cokernel of any morphism between coherent $\\mathcal O_X$-module sheaves are coherent. In every short exact sequence $0\\to\\mathcal F'\\to\\mathcal E\\to\\mathcal F''\\to0$ of $\\mathcal O_X$-module sheaves, if any two of $\\mathcal F'$, $\\mathcal E$, and $\\mathcal F''$ are coherent, then the third is coherent.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kernel-cokernel-image-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of abelian\ngroups on a topological space $X$.\n\nThe **kernel sheaf** is the subsheaf\n$$\n\\ker(\\varphi)\\subseteq \\mathcal F\n$$\ndefined objectwise by\n$$\n\\ker(\\varphi)(U):=\\ker\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr).\n$$\n\nThe **cokernel presheaf** is\n$$\nU\\longmapsto \\operatorname{coker}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **cokernel sheaf** $\\operatorname{coker}(\\varphi)$ is its\nsheafification.\n\nThe **image presheaf** is\n$$\nU\\longmapsto \\operatorname{im}\\!\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr),\n$$\nand the **image sheaf** $\\operatorname{im}(\\varphi)$ is its sheafification.\n\nFor sheaves of modules on a ringed space, the same formulas are taken in the\ncorresponding module categories on each open set.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-power-series-expansion-in-several-complex-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$ and a polyradius $\\rho$, let\n$f:\\Delta_\\rho(a)\\to\\mathbb C$ be continuous and separately holomorphic, let $r$\nbe a polyradius with $r_k<\\rho_k$ for every $k<m$, and let\n$C_k(t)=a_k+r_k\\exp(it)$ on $[0,2\\pi]$. For each multi-index $\\alpha$ set\n\n$$c_\\alpha:=\\frac1{(2\\pi i)^m}\\int_{C_0}\\!\\cdots\\!\\int_{C_{m-1}} f(\\zeta)\\prod_{k<m}(\\zeta_k-a_k)^{-\\alpha_k-1}\\,d\\zeta_{m-1}\\cdots d\\zeta_0 ,$$\n\nan iterated integral as in the polydisc Cauchy formula. Then, with\n$M=\\sup_{\\Gamma_r(a)}|f|$,\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k},$$\n\nand for every real $\\theta$ with $0<\\theta<1$ the series\n$\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n$\\overline\\Delta_{\\theta r}(a)$ with\n\n$$f(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha\\qquad(z\\in\\overline\\Delta_{\\theta r}(a)).$$\n\nSince every $z\\in\\Delta_r(a)$ lies in $\\overline\\Delta_{\\theta r}(a)$ for some\n$\\theta<1$, the expansion holds throughout $\\Delta_r(a)$.\n\n**The coefficients are asserted here only as those iterated integrals.** That\n$c_\\alpha$ equals $\\partial^\\alpha f(a)/\\alpha!$ needs termwise differentiation\nand is not claimed by this statement.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $y\\in D$ is not the origin, choose an index $k$ with $z_k(y)\\ne0$. Then $z_k$ is a unit in the germ ring $\\mathcal O_{D,y}$, so the ideal generated by the coordinates is the whole stalk and $\\mathcal F_y=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At the origin, evaluation $\\operatorname{ev}_0:\\mathcal O_{D,0}\\to\\mathbb C$ is surjective. Its kernel is generated by $z_1,\\ldots,z_N$: if $f(0)=0$, its convergent power series has no constant term, and grouping each nonconstant monomial according to the first coordinate with positive exponent writes $f=\\sum_i z_i g_i$ with convergent germs $g_i$; each of the finitely many grouped subseries remains convergent on a smaller polydisc. Conversely every such sum vanishes at $0$. Hence $\\mathcal F_0\\cong\\mathbb C$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "At a point $y\\ne0$, choose $k$ with $z_k(y)\\ne0$. If $a=(a_1,\\ldots,a_N)$ is a relation germ in the stalk from [F6], then $a_k=-\\sum_{i\\ne k}a_i z_i/z_k$, so\n$$\na=\\sum_{i\\ne k}(a_i/z_k)(z_ke_i-z_ie_k).\n$$\nEach vector $z_ke_i-z_ie_k$ is one of the stated pairwise sections or its negative. Thus those sections generate the relation stalk at every nonzero point, including when $N=1$, where the sum is empty.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Let $a=(a_1,\\ldots,a_N)$ be a relation germ at the origin, so $\\sum_i a_i z_i=0$. We prove by induction on $N$ that it is generated by the stated pairwise sections. For $N=1$, $a_1z_1=0$ and the germ ring is a domain by [F5], so $a_1=0$. For $N>1$, restrict to $z_N=0$; the first $N-1$ coefficients form a relation among $z_1,\\ldots,z_{N-1}$. By induction subtract a combination of the pairwise sections with both indices below $N$, extending their coefficient germs independently of $z_N$. The resulting first $N-1$ coefficients vanish at $z_N=0$.",
+          "step": "1.4",
+          "inputs": [
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5], each remaining coefficient has a convergent series divisible by $z_N$, so write $a_i=z_Nc_i$ for $i<N$. The relation becomes $z_N(\\sum_{i<N}c_i z_i+a_N)=0$. Since the germ ring is a domain, $a_N=-\\sum_{i<N}c_i z_i$, and the remaining vector is $\\sum_{i<N}c_i(z_Ne_i-z_i e_N)$, a combination of the stated pairwise sections.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At every point, steps 1.3–2.1 show that the pairwise sections generate the kernel stalk. Therefore [F4] identifies their generated subsheaf with $\\ker\\mu$. The quotient sequence is exact by the definition of $\\mathcal F$ as a cokernel.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "step 1.3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under the assumed Axiom of Choice [A1], [F2] makes $\\mathcal O_D$ coherent. Repeatedly applying the finite-extension case of [F3] to the split sequences $0\\to\\mathcal O_D^{\\oplus(j-1)}\\to\\mathcal O_D^{\\oplus j}\\to\\mathcal O_D\\to0$ shows that $\\mathcal O_D^{\\oplus N}$ is coherent. The cokernel case of [F3] applied to $\\mu$ then makes $\\mathcal F$ coherent.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypothesis N≥1 excludes an empty coordinate family, and the boundary case N=1 with empty syzygy family is proved in steps 1.3–2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The quotient stalk is computed as zero off the origin and C at the origin in steps 1.1–1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1 the relation kernel is zero and the pairwise generating family is empty, as shown in steps 1.3–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The origin and nonorigin cases, including the vanishing coordinate vector at the origin, are treated in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The centered polydisc has no interval endpoints in the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states the adopted Axiom of Choice; its coherence use is explicit in step 4.1, and only a finite index is selected in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts stalk and generation claims, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts stalk and generation claims, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite calculation establishes the analytic local generation claims; each is proved under its stated hypotheses in the numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Checked all seven verification steps and all supplier statements. A nonzero point has a unit coordinate and zero quotient stalk. Grouping absolutely convergent monomials at the origin gives the coordinate maximal ideal and quotient C. Nonorigin relations have the displayed signs; at the origin the induction subtracts lower-coordinate Koszul relations, then coordinate divisibility and domain cancellation give the remaining pairwise relations. For N=1 the kernel is zero and the pairwise family is empty. Stalkwise equality gives sheaf generation on D, and the coherent-cokernel argument retains AC. Sources support coherence context; the explicit coordinate argument is local rather than attributed as a quoted source theorem. No diagram or statistical claim."
+      }
+    }
+  }
+}

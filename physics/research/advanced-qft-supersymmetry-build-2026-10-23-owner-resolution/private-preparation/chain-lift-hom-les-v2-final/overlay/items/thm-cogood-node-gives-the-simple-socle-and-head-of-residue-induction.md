@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cogood-node-gives-the-simple-socle-and-head-of-residue-induction.md

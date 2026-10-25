@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-period-matrix-and-jacobian-of-the-pentagon-curve.json
+  precheck: pass
 id: ex-period-matrix-and-jacobian-of-the-pentagon-curve
 kind: example
 title: Period matrix and Jacobian of the pentagon curve
@@ -59,9 +62,7 @@ sources:
     - title: "Elias M. Stein and Rami Shakarchi, Complex Analysis"
       url: "https://zr9558.com/wp-content/uploads/2013/11/complex_analysis-stein-shakarchi.pdf"
       locator: "Ch. 8 §§4.1–4.4, printed pp. 231–245: singular-exponent boundary calculation, Schwarz–Christoffel formula and the distinction between mapping the boundary and proving conformality. The special regular-pentagon formula and its univalence are proved locally here."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
+
 ---
 
 ## Statement
@@ -177,3 +178,68 @@ divisor and $\operatorname{Pic}^0(X)\cong\operatorname{Jac}(X)$
 ## Source notes
 
 McMullen's printed p. 128/Theorem 15.3 states the classical double-pentagon example and its cyclic homology module without constructing its integral witness. The projective charts, two half-plane disks, special regular-pentagon primitive, integral cellular quotient and positive periods above supply that witness locally. Stein–Shakarchi, Ch. 8 §§4.1–4.4 (printed pp. 231–245), explains the singular-exponent boundary calculation and warns that a polygonal boundary image alone need not imply a conformal interior map; the argument-principle step here proves univalence for this specific convex regular pentagon. No general Schwarz–Christoffel or branched-cover classification theorem is used as an unproved prerequisite.
+
+## Remarks
+
+The two pentagons below are shown after a common rotation and rescaling of the primitive coordinates $W_+$ and $W_-$ from step 5.1; their centres are separated only for display. Indices are modulo five. Each arrow is the orientation of the real-$y$ seam $e_j$ from $y=-\infty$ to $+\infty$, not the boundary orientation of both faces. Thus the arrows follow the upper face boundary and oppose the lower face boundary.
+
+```tikz
+\begin{tikzpicture}[scale=1.05, every node/.style={font=\small}]
+\draw[thick] (1.4500,0.0000) -- (0.4481,1.3790);
+\draw[->,thick] (1.0492,0.5516) -- (0.8488,0.8274);
+\node at (1.1673,0.8481) {$e_1$};
+\draw[thick] (0.4481,1.3790) -- (-1.1731,0.8523);
+\draw[->,thick] (-0.2004,1.1683) -- (-0.5246,1.0630);
+\node at (-0.4459,1.3723) {$e_2$};
+\draw[thick] (-1.1731,0.8523) -- (-1.1731,-0.8523);
+\draw[->,thick] (-1.1731,0.1705) -- (-1.1731,-0.1705);
+\node at (-1.4429,0.0000) {$e_3$};
+\draw[thick] (-1.1731,-0.8523) -- (0.4481,-1.3790);
+\draw[->,thick] (-0.5246,-1.0630) -- (-0.2004,-1.1683);
+\node at (-0.4459,-1.3723) {$e_4$};
+\draw[thick] (0.4481,-1.3790) -- (1.4500,0.0000);
+\draw[->,thick] (0.8488,-0.8274) -- (1.0492,-0.5516);
+\node at (1.1673,-0.8481) {$e_0$};
+\fill (1.4500,0.0000) circle (1.2pt);
+\node at (1.8125,0.0000) {$V_0$};
+\fill (0.4481,1.3790) circle (1.2pt);
+\node at (0.5601,1.7238) {$V_1$};
+\fill (-1.1731,0.8523) circle (1.2pt);
+\node at (-1.4663,1.0654) {$V_2$};
+\fill (-1.1731,-0.8523) circle (1.2pt);
+\node at (-1.4663,-1.0654) {$V_3$};
+\fill (0.4481,-1.3790) circle (1.2pt);
+\node at (0.5601,-1.7238) {$V_4$};
+\node at (0.0,0.15) {$W_+$};
+\node at (0.0,-0.25) {$\partial F_+=\sum_j e_j$};
+\draw[thick] (3.8500,-0.0000) -- (4.8519,-1.3790);
+\draw[->,thick] (4.4512,-0.8274) -- (4.2508,-0.5516);
+\node at (4.1327,-0.8481) {$e_1$};
+\draw[thick] (4.8519,-1.3790) -- (6.4731,-0.8523);
+\draw[->,thick] (5.8246,-1.0630) -- (5.5004,-1.1683);
+\node at (5.7459,-1.3723) {$e_2$};
+\draw[thick] (6.4731,-0.8523) -- (6.4731,0.8523);
+\draw[->,thick] (6.4731,0.1705) -- (6.4731,-0.1705);
+\node at (6.7429,-0.0000) {$e_3$};
+\draw[thick] (6.4731,0.8523) -- (4.8519,1.3790);
+\draw[->,thick] (5.5004,1.1683) -- (5.8246,1.0630);
+\node at (5.7459,1.3723) {$e_4$};
+\draw[thick] (4.8519,1.3790) -- (3.8500,-0.0000);
+\draw[->,thick] (4.2508,0.5516) -- (4.4512,0.8274);
+\node at (4.1327,0.8481) {$e_0$};
+\fill (3.8500,-0.0000) circle (1.2pt);
+\node at (3.4875,-0.0000) {$-V_0$};
+\fill (4.8519,-1.3790) circle (1.2pt);
+\node at (4.7399,-1.7238) {$-V_1$};
+\fill (6.4731,-0.8523) circle (1.2pt);
+\node at (6.7663,-1.0654) {$-V_2$};
+\fill (6.4731,0.8523) circle (1.2pt);
+\node at (6.7663,1.0654) {$-V_3$};
+\fill (4.8519,1.3790) circle (1.2pt);
+\node at (4.7399,1.7238) {$-V_4$};
+\node at (5.3,0.15) {$W_-$};
+\node at (5.3,-0.25) {$\partial F_-=-\sum_j e_j$};
+\end{tikzpicture}
+```
+
+For each $k$, the pairing is the translation $W\mapsto W-V_k-V_{k+1}$ from the upper side $[V_k,V_{k+1}]$ to the lower side $[-V_{k+1},-V_k]$, preserving the indicated seam arrow. All ten vertices represent $p_\infty$. Rotation by $\zeta$ on both pentagons sends $e_j$ to $e_{j+1}$. The boundary labels summarize step 6.1: $d_2(a,b)=(a-b)(1,1,1,1,1)$ and $e_0+e_1+e_2+e_3+e_4=0$ in homology. Steps 1.1–14.1 establish the claims independently of this illustration.

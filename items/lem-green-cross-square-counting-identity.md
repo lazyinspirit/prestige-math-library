@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-green-cross-square-counting-identity.json
+  precheck: pass
 id: lem-green-cross-square-counting-identity
 kind: lemma
 title: "The Green cross–square counting identity"
@@ -23,8 +26,7 @@ sources:
     - title: "Claus Michael Ringel, Hall algebras and quantum groups, Inventiones Mathematicae 101 (1990), 583–591"
       url: "https://noah.nrw/ubbihs/download/pdf/5112433"
       locator: "§§1–2, printed pp. 585–588: composition-algebra flag counts and Serre relations (background only). The cross–square identity is proved locally following Schiffmann §1.5, cited above."
-verification:
-  precheck: pending
+
 ---
 
 ## Statement
@@ -51,15 +53,15 @@ A **square datum** is the isomorphism class of these four exact edges:
 $$ 0\to L_1\to N\to K_1\to0, \quad 0\to L_1\to L\to L_2\to0, \quad 0\to K_1\to K\to K_2\to0, \quad 0\to L_2\to M\to K_2\to0. $$
 
 ```tikzcd
-0 \arrow[r] & L_1 \arrow[r, tail] \arrow[d, equal] & N \arrow[r, two heads] & K_1 \arrow[r] & 0 \\
+0 \arrow[r] & L_1 \arrow[r, tail] & N \arrow[r, two heads] & K_1 \arrow[r] & 0 \\
 0 \arrow[r] & L_1 \arrow[r, tail] & L \arrow[r, two heads] & L_2 \arrow[r] & 0
 \\[1.2em]
-0 \arrow[r] & K_1 \arrow[r, tail] & K \arrow[r, two heads] & K_2 \arrow[r] \arrow[d, equal] & 0 \\
+0 \arrow[r] & K_1 \arrow[r, tail] & K \arrow[r, two heads] & K_2 \arrow[r] & 0 \\
 0 \arrow[r] & L_2 \arrow[r, tail] & M \arrow[r, two heads] & K_2 \arrow[r] & 0
 ```
 
-The equal labels indicate shared endpoint isomorphism classes only; no
-additional morphisms between the two rows are part of the square datum.
+Repeated labels indicate shared endpoint isomorphism classes only; no
+additional morphisms between the rows are part of the square datum.
 
 ## Facts & Assumptions
 

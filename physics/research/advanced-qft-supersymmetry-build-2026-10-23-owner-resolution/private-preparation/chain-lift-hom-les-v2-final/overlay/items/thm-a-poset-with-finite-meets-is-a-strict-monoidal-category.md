@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-poset-with-finite-meets-is-a-strict-monoidal-category.md

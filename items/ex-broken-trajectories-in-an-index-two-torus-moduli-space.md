@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-broken-trajectories-in-an-index-two-torus-moduli-space.json
+  precheck: pass
 id: ex-broken-trajectories-in-an-index-two-torus-moduli-space
 kind: example
 title: "Broken trajectories in an index-two torus moduli space"
@@ -9,11 +12,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: literature-derived
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Alexander F. Ritter, Part III Morse Homology (Cambridge lecture notes), Lectures 17-19, complete combined PDF"
@@ -57,3 +55,42 @@ Assume AC. A concrete model of the tilted-torus trajectory picture is $M=(\mathb
 3.1 On each of the four open rectangles between the coordinate separatrices, both coordinates run from $0$ to $\pi$. On either chosen arc the time coordinate $\tau(\theta)=\int_{\theta_*}^{\theta}d\eta/Y(\eta)$ is a diffeomorphism onto $\mathbb R$: its derivative has the sign of $Y$, and the simple zeros of $Y$ make the endpoint times infinite. Every trajectory is therefore $u(t)=\tau_u^{-1}(t-A)$, $v(t)=\tau_v^{-1}(t-B)$. Common time translation changes $A$ and $B$ equally, leaving the relative delay $A-B\in\mathbb R$ as the unique parameter. Its two infinite ends break through $b$ and $c$, respectively, with the arc choices fixed. Hence there are four open intervals, each with its two distinct broken endpoints. [step 1.1, step 2.1, algebra]
 
 4.1 By [F3] these are exactly the compactifying endpoints, with one collar branch each; the fixed arc choices identify each broken pair with the appropriate rectangle, so no endpoints are identified across intervals. There are $2\cdot2+2\cdot2=8$ pairs in $(\mathcal M(a,b)\times\mathcal M(b,d))\sqcup(\mathcal M(a,c)\times\mathcal M(c,d))$, two per closed interval. By [F4] the differential is $\partial a=2b+2c=0$, $\partial b=\partial c=2d=0$ and $\partial d=0$. [A1, F3, F4, step 2.1, step 3.1] ∎
+
+
+## Remarks
+
+The left schematic records the eight adjacent-index orbit classes, rather than an embedding of their union in the torus. For each sign $\sigma\in\{+,-\}$, let $\alpha_\sigma:a\to b$ and $\beta_\sigma:c\to d$ denote the two choices of the $u$-coordinate arc. For each $\tau\in\{+,-\}$, let $\gamma_\tau:a\to c$ and $\delta_\tau:b\to d$ denote the two choices of the $v$-coordinate arc. The curves represent trajectories modulo time translation; the labels specify their flow endpoints.
+
+For fixed arc choices $(\sigma,\tau)$, step 3.1 gives one open interval of unbroken trajectories. Its two compactifying endpoints are the broken pairs $B_{\sigma\tau}=(\alpha_\sigma,\delta_\tau)$ through $b$ and $C_{\sigma\tau}=(\gamma_\tau,\beta_\sigma)$ through $c$. The right schematic displays all four closed intervals separately, so the eight endpoints are distinct, as proved in step 4.1. The rigorous verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=0.95]
+\node (a) at (0,3) {$a\ (2)$};
+\node (b) at (-1.7,1.5) {$b\ (1)$};
+\node (c) at (1.7,1.5) {$c\ (1)$};
+\node (d) at (0,0) {$d\ (0)$};
+\draw (a) to[bend right=22] node[left] {$\alpha_+$} (b);
+\draw (a) to[bend left=18] node[pos=0.7,right] {$\alpha_-$} (b);
+\draw (a) to[bend left=22] node[right] {$\gamma_+$} (c);
+\draw (a) to[bend right=18] node[pos=0.7,left] {$\gamma_-$} (c);
+\draw (b) to[bend right=22] node[left] {$\delta_+$} (d);
+\draw (b) to[bend left=18] node[pos=0.3,right] {$\delta_-$} (d);
+\draw (c) to[bend left=22] node[right] {$\beta_+$} (d);
+\draw (c) to[bend right=18] node[pos=0.3,left] {$\beta_-$} (d);
+\node at (0,-0.65) {critical points (indices)};
+\node at (6,3.65) {$\overline{\mathcal M}(a,d)$};
+\draw (4.6,3) -- (7.4,3);
+\fill (4.6,3) circle (2pt); \fill (7.4,3) circle (2pt);
+\node[left] at (4.6,3) {$B_{++}$}; \node[right] at (7.4,3) {$C_{++}$};
+\draw (4.6,2) -- (7.4,2);
+\fill (4.6,2) circle (2pt); \fill (7.4,2) circle (2pt);
+\node[left] at (4.6,2) {$B_{+-}$}; \node[right] at (7.4,2) {$C_{+-}$};
+\draw (4.6,1) -- (7.4,1);
+\fill (4.6,1) circle (2pt); \fill (7.4,1) circle (2pt);
+\node[left] at (4.6,1) {$B_{-+}$}; \node[right] at (7.4,1) {$C_{-+}$};
+\draw (4.6,0) -- (7.4,0);
+\fill (4.6,0) circle (2pt); \fill (7.4,0) circle (2pt);
+\node[left] at (4.6,0) {$B_{--}$}; \node[right] at (7.4,0) {$C_{--}$};
+\node at (6,-0.65) {four components, eight endpoints};
+\end{tikzpicture}
+```

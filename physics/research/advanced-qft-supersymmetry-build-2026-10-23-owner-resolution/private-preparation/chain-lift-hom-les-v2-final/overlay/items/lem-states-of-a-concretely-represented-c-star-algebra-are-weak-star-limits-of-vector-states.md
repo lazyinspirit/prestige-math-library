@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-states-of-a-concretely-represented-c-star-algebra-are-weak-star-limits-of-vector-states.md

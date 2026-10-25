@@ -677,8 +677,14 @@ owner actions, separate from this build.
 
 Fresh Step 6 uses metadata/render checks -> focused repair -> all final gates
 (repeat after repairs) -> concise report -> scoped commit, for both mathematics
-and physics. Every distinct mechanical condition and repair route remains;
-identical checks run once. Readiness/report integrity hash only the frontier,
+and physics. Actual preparation includes the scoped
+[rendering-quality checks](tools/RENDERING-QUALITY.md): source/context lint,
+application AST/KaTeX validation, production TikZ compilation and SVG/layout
+smoke checks, backed by small real-render regression packs. The final
+`rendering-quality` gate requires the exact current nonempty prepared receipt;
+unchanged source/renderer/toolchain caches avoid a second compile. Every distinct
+mechanical condition and repair route remains; identical checks run once.
+Readiness/report integrity hash only the frontier,
 actual suppliers, owned evidence and workflow inputs. Git plumbing preserves
 foreign working files by construction and verifies outside index flags/HEAD
 metadata plus owned committed blobs inside the transaction. There is no

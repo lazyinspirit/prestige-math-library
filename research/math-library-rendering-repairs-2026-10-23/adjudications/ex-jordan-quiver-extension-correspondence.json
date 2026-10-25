@@ -1,0 +1,79 @@
+{
+  "id": "ex-jordan-quiver-extension-correspondence",
+  "agent": "/root/rendering_repair_coordinator/hall_007",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Independently viewed both original PNG tiles at original resolution, including a standalone view of tile 01. The intended single-vertex self-loop is visibly printed as literal TikZ source. The renderer recognizes backtick TikZ fences but this tilde fence emitted no diagram.",
+      "action": "Replaced only the tilde fence delimiters with backticks. After native rendering showed a tiny x label and loop, added scale=2,transform shape to the existing picture options; all node and edge commands remain exact.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Restored native rendering of the original one-loop quiver and enlarged its concrete tiny label with local TikZ options.",
+  "source_lines_after": {
+    "34": "```tikz",
+    "35": "\\begin{tikzpicture}[>=stealth,scale=2,transform shape]",
+    "36": "  \\node[circle,draw,inner sep=2.5pt] (v) at (0,0) {$\\bullet$};",
+    "37": "  \\draw[->] (v) edge[loop above] node {$x$} (v);",
+    "38": "\\end{tikzpicture}",
+    "39": "```"
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Exactly one node v and one arrow x:v→v.",
+      "relations": "Both endpoints of the sole edge are v. The loop remains above v, with the original directed arrow option and stealth arrowhead unchanged. Positive scaling preserves orientation.",
+      "justification": "Example opening specifies one vertex and one loop x; Verification 1.1 identifies a loop representation with one endomorphism. The diagram asserts no additional relation on x, such as nilpotence."
+    },
+    {
+      "objects": "The unchanged extension atlas has pairs (A,L), L⊂C² a line, A(L)⊂L; A=[[λ,c],[0,μ]] in a basis adapted to L.",
+      "relations": "q records the ordered subrepresentation and quotient scalars (λ,μ), while p forgets L. No extra diagram arrows or stack identifications were added.",
+      "justification": "Read the local definition supplier and smooth/proper supplier in full. The definition fixes 0→M_a→M_(a+b)→M_b→0, matching the upper triangular matrix and F1. Verification 1.2 retains g_t A g_t^{-1}, c↦c+(μ−λ)t; all proof text is byte-identical."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-jordan-quiver-extension-correspondence.md",
+      "result": "pass",
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-jordan-quiver-extension-correspondence.md --json",
+      "result": "pass",
+      "output": "1 file checked; 0 failed; direct strategy pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-jordan-quiver-extension-correspondence.md --json",
+      "result": "pass",
+      "output": "checked: 1; errors: []; warnings: []"
+    }
+  ],
+  "visual_check": {
+    "native_compilation": "Canonical repair-preview.mts using actual local ItemBody and native TikZ compilation; repo-local TMPDIR, existing web tsconfig, no HTTP. Initial v1 succeeded but revealed tiny loop/x; final v2 succeeded after local scaling.",
+    "preview": "research/math-library-rendering-repairs-2026-10-23/preview-hall007-independent-20261024-v2/manifest.json",
+    "original_resolution_views": [
+      "original tiles 01 and 02",
+      "final v2 tiles 01 and 02"
+    ],
+    "result": "One rendered TikZ figure; zero diagram failures; zero KaTeX errors. Readable x and directed self-loop, no clipping or overlap.",
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "limitations": "Local ItemBody preview does not cover full production route. Reference-title map reports 32 unrelated parse diagnostics."
+  },
+  "write_guard": {
+    "initial_raw_sha256": "178918df0f521c8feeadbf1f32c8fd317e3851bcd3e9b17adec38aa7e49add1a",
+    "initial_queue_guard_passed": true,
+    "second_edit_guard": "Exact own fence-only intermediate source checked against frozen preimage before scaling.",
+    "after_raw_sha256": "7c71a2abc2d85cd06b0a4775ffdff4820cc5e76fcc41b51e71f526234e050a86",
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": true
+  },
+  "remaining_issues": []
+}

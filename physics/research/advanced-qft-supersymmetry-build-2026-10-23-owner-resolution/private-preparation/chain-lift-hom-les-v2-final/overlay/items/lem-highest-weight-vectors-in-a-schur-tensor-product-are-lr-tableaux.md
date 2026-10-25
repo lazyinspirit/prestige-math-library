@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-highest-weight-vectors-in-a-schur-tensor-product-are-lr-tableaux.md

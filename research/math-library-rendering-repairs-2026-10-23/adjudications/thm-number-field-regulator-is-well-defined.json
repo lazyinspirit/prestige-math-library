@@ -1,0 +1,78 @@
+{
+  "id": "thm-number-field-regulator-is-well-defined",
+  "agent": "/root/rendering_repair_supervisor2/nt_004",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the original standalone tile at original resolution: the CSS-uppercase technique banner visibly exposes RANK-$R$ and $\\PM1$, whereas adjacent proof math is typeset. Frozen and current source matched before editing; the two expressions are legitimate math in a renderer field emitted as plain text.",
+      "action": "Replaced rank-$r$ with rank-r and $\\pm1$ with plus or minus one only in the technique banner.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Equivalent plain-text notation in the Proof technique paragraph at line 73; no other source lines changed.",
+  "source_lines_after": {
+    "73": "**Proof technique:** prove the two invariance statements of the definition separately. The deleted-row statement reduces to the sign pattern of the cofactors of a rank-r matrix with zero column sums. For a change of fundamental system, form the integer matrix whose columns give the new basis vectors in the old basis; it is unimodular, so every deleted-row determinant is multiplied by plus or minus one. Positivity follows because the common determinant is nonzero."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "49ebee109559686e46a956bb374a050d0d29cd2df25b4a4456eebd51708ab443",
+  "after_raw_sha256": "96d3bedb982de36f96e143c189a1f3d374e538bcd27cff471d7173fbcb6cd473",
+  "pre_edit_raw_sha_guard": "passed immediately before edit against queue before_raw_sha256",
+  "metadata_preservation": "Entire frontmatter is byte-identical to frozen preimage, including exact status: published.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-number-field-regulator-is-well-defined.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-number-field-regulator-is-well-defined.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-number-field-regulator-is-well-defined.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_standalone_view": "research/math-library-rendering-audit-2026-10-23/number-theory/screenshots/thm-number-field-regulator-is-well-defined--02.png",
+    "original_resolution_inspected": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/nt-004-independent/manifest.json",
+    "preview_manifest_sha256": "7db72eaa3fe0aec1a27749e1d8b0275e8ebe961f3dfa03b9614debac549dc1be",
+    "preview_source_sha256": "96d3bedb982de36f96e143c189a1f3d374e538bcd27cff471d7173fbcb6cd473",
+    "preview_html_sha256": "fc3d1f642d47e0130b36698cb87cb45b51954dd6178368b08013d34f1fe1c7ee",
+    "fresh_standalone_tile": "research/math-library-rendering-repairs-2026-10-23/previews/nt-004-independent/screenshots/thm-number-field-regulator-is-well-defined--02.png",
+    "focused_native_capture": "research/math-library-rendering-repairs-2026-10-23/previews/nt-004-independent/focused-banner.png",
+    "focused_native_capture_sha256": "9cbf0ad53719a53fa5ee7aa9d95dd0e01ad582caa67a606b0e39432a296ee30d",
+    "focused_native_dom_evidence": "research/math-library-rendering-repairs-2026-10-23/previews/nt-004-independent/focused-banner.json",
+    "observations": "Fresh full-page tile has blank text regions, so a second local Playwright capture loaded the exact same generated native HTML/CSS, opened details, awaited fonts, scrolled the banner into view, and captured the viewport. Independently inspected focused-banner.png at original resolution: complete banner is legible and shows RANK-R and PLUS OR MINUS ONE with no raw dollars or TeX macros. Network routes blocked except file/data/about. No application files changed.",
+    "katex_errors": [],
+    "katex_count": 142,
+    "tikz_count": 0,
+    "diagram_failures": [],
+    "limitations": [
+      "Native ItemBody local preview; not production-route coverage.",
+      "Current reference map reports 13 unrelated parse diagnostics; no carrier renderer errors.",
+      "Full-page tile blank regions were avoided by focused viewport capture; no source repair inferred from that capture artifact."
+    ]
+  },
+  "renderer_limitation": "Technique labels are plain React text with CSS uppercase; local prose workaround applied without changing renderer.",
+  "proof_scope": "No statement, hypothesis, proof step, dependency, source, or mathematical claim changed; no broad proof audit performed."
+}

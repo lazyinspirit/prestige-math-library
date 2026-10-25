@@ -1,0 +1,81 @@
+{
+  "id": "thm-minimum-intensity-tau-leap-level-variance",
+  "agent": "/root/rendering_repair_coordinator/dnde_044",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "An explanatory timeline materially clarifies the asymmetric update schedule: the fine state changes after h, while the second coarse count still uses the starting z. Showing shared/residual count sums below both halves also clarifies cancellation in the error recurrence. This is an editorial diagram omission, not a flaw in the complete proof.",
+      "action": "Added a final Remarks section defining the two half-step count splits and a TikZ fine/coarse timeline, with the coarse midpoint explicitly marked as holding z and storing its first increment.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended final Remarks only; all original title, metadata, statement, Facts, proof, Notes, dependencies and status preserved byte-for-byte.",
+  "source_lines_after": {
+    "remarks": [
+      92,
+      127
+    ],
+    "tikz": [
+      104,
+      122
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "data": "For i=1,2 and every reaction channel j, C_ij,F_ij,B_ij are nonnegative-integer Poisson counts with the exact shared-minimum and residual means at (x_i,z).",
+      "justification": "The item Statement lines 38–47 and supplier lem-shared-minimum-poisson-count-coupling Statement give exactly C+fine residual and C+coarse residual. Substituting lambda_1=a_j(x_i), lambda_2=a_j(z) preserves both marginals. Conditional independence is within each half; fresh second-half inputs are stated conditional on first-half history, not an assertion of unconditional independence of the halves."
+    },
+    {
+      "data": "R_i=sum_j nu_j K^f_ij and S_i=sum_j nu_j K^c_ij lie in Z^d; upper arrows x -> x+R_1 -> x+R_1+R_2 update at t+h and t+2h.",
+      "justification": "Reaction increments are integer vectors by F1, and the marginal tau-leap rule F3 supplies these increments. The Statement updates the fine state at each half; proof step 1.2 names x prime and step 2.1 evaluates the second half there."
+    },
+    {
+      "data": "The lower midpoint remains z, with S_1 stored; z prime=z+S_1+S_2 occurs only at t+2h. Both coarse rate vectors are evaluated at z.",
+      "justification": "This is precisely the Statement instruction to accumulate two coarse count vectors into one coarse leap at the coarse starting state. The dashed segment is explicitly explained as storage, not a state transition."
+    },
+    {
+      "data": "The four timeline arrows point forward in time. R_1-S_1 and R_2-S_2 sum with initial x-z to give endpoint x double-prime-z prime; shared C_ij cancels in each difference.",
+      "justification": "Algebra from the defined count sums gives K^f_ij-K^c_ij=F_ij-B_ij. Proof step 1.1 uses this cancellation; proof step 3.1 writes the corresponding endpoint error as e+eta_1+eta_2. This is not a commutative square or a closed graph, and no additional edge/closure relation is asserted."
+    }
+  ],
+  "checks": {
+    "before_sha256_guard": "Passed immediately before initial edit; current bytes matched the frozen before file and queue SHA256 628eb6cd3b8615c7fb009f2708834ade9d569af15780fc7fc76d6e2687778b70. Follow-up diagram layout edit guarded the preceding exact worker SHA256.",
+    "frontmatter_and_status": "Exact frontmatter byte equality and original-source prefix equality checked after final edit; status remains published.",
+    "proof_layout": "proof-layout: 1 items, 6 steps, 0 defects",
+    "precheck": "1 file checked, 0 failed; direct strategy pass",
+    "rendercheck": "1 file checked, errors [], warnings []",
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/dnde044-final2",
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde044-final2/manifest.json",
+      "source_sha256": "442ec79c6940e859582806689cc420eb4d0bdafa42371f65ca06c828d2a8e1bb",
+      "reference_map_sha256": "c473b61151fdeab485104e060857acb6fa270b30bcab19c53f130e4c5c331e54",
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "katex_errors": [],
+      "original_resolution_views": [
+        "screenshots/thm-minimum-intensity-tau-leap-level-variance--02.png",
+        "screenshots/thm-minimum-intensity-tau-leap-level-variance--03.png"
+      ],
+      "visual_result": "Standalone original-resolution final tiles show all three time labels, three fine states, three coarse displayed states, four arrows, dashed holding segment, both count panels and all endpoint labels. White labels and remapped strokes are legible on the native dark background; no clipping/overlap or pale fills. No open/closed endpoint ring convention or cycle closure applies."
+    }
+  },
+  "evidence_path_resolution": {
+    "declared": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/diagram-supplement/screenshots/thm-minimum-intensity-tau-leap-level-variance--01.png",
+    "resolved": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/thm-minimum-intensity-tau-leap-level-variance--01.png",
+    "sha256": "dc46a69659c958f9b63f125171286db4ec8f0de178aed86c4700a27c81c191de",
+    "inspection": "Declared screenshot path was absent. Authentic same-category parent screenshot has exactly the queued SHA256 and was inspected standalone at original resolution."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Preview is native local ItemBody/SSR TikZ, not a production route. Its reference-title map reports 16 unrelated parse diagnostics; no scoped diagram or KaTeX failures.",
+    "The scoped rendercheck initially treated a TikZ line-break immediately followed by a dollar as an escaped delimiter. A space between those tokens resolved the checker ambiguity; final native rendering and all scoped checks pass."
+  ]
+}

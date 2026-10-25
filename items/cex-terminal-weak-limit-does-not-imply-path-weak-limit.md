@@ -1,9 +1,7 @@
 ---
 verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-terminal-weak-limit-does-not-imply-path-weak-limit.json
+  precheck: pass
 id: cex-terminal-weak-limit-does-not-imply-path-weak-limit
 kind: counterexample
 title: A terminal weak limit does not imply a path-space weak limit
@@ -53,3 +51,35 @@ as single $H$-valued random elements, not paths indexed by $t\in[0,1]$
 1.2 Define $\Phi:\mathcal C\to\mathbb R$ by $\Phi(w)=\min\{1,\sup_{0\le t\le1}\|w(t)\|_H\}$. The supremum norm inequality gives $$|\sup_t\|w(t)\|_H-\sup_t\|v(t)\|_H| \le\sup_t\|w(t)-v(t)\|_H=d(w,v),$$ and truncation by $x\mapsto\min(1,x)$ is 1-Lipschitz on $[0,\infty)$. Hence $\Phi$ is bounded and continuous. It equals $0$ on every even path and $1$ on every odd path, so its expectations under the path laws alternate between $0$ and $1$ and do not converge. By [F1], those path laws cannot converge weakly. [F1, algebra]
 
 2.1 The example has convergence only after applying the terminal evaluation map; the bounded continuous path functional in step 1.2 detects the missing path-space convergence. Therefore endpoint convergence alone supplies no functional CLT conclusion, consistently with the scope in [F2]. [F2, step 1.1, step 1.2] ∎
+
+## Remarks
+
+Writing each path as $w_n(t)=a_n(t)e$, the following plot shows its real
+coefficient $a_n(t)$. Both paths end at $0$, so terminal evaluation
+$\mathrm{ev}_1:\mathcal C\to H$, $w\mapsto w(1)$, sends both to $0$.
+Their supremum distance is nevertheless $1$, attained at $t=1/2$.
+The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[->] (-0.3,0) -- (5.7,0) node[right] {$t$};
+\draw[->] (0,-0.4) -- (0,2.6) node[above] {$a_n(t)$};
+\draw[blue,very thick] (0,0) -- (5,0);
+\draw[orange,very thick,domain=0:1,samples=41,smooth]
+  plot ({5*\x},{2*sin(180*\x)});
+\draw[dashed] (2.5,0) -- (2.5,2);
+\draw[dashed] (2.5,2) -- (5.45,2);
+\draw[<->] (5.45,0.08) -- (5.45,1.92)
+  node[midway,right] {$d(w_{2r},w_{2r+1})=1$};
+\fill (0,0) circle (2pt);
+\fill (5,0) circle (2pt);
+\fill[orange] (2.5,2) circle (2pt);
+\node[below left] at (0,0) {$0$};
+\node[below] at (2.5,0) {$1/2$};
+\node[below] at (5,0) {$1$};
+\draw (-0.08,2) -- (0.08,2);
+\node[left] at (0,2) {$1$};
+\node[orange,above] at (2.5,2.15) {$a_{2r+1}(t)=\sin(\pi t)$};
+\node[blue,below] at (2.5,-0.55) {$a_{2r}(t)=0$};
+\end{tikzpicture}
+```

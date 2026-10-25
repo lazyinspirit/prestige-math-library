@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-gauss-bonnet-for-a-geodesic-triangle.json
+  precheck: pass
 id: thm-gauss-bonnet-for-a-geodesic-triangle
 kind: theorem
 title: Gauss-Bonnet for a geodesic triangle
@@ -18,13 +21,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)"
@@ -79,3 +75,30 @@ claim is made about the existence of such a triangle on a general surface.
 ## Source locator
 
 Lee, *Riemannian Manifolds: An Introduction to Curvature*, Chapter 9, Theorem 9.3, printed pp. 165-167, gives the local formula for a curved polygon, of which the geodesic triangle with vanishing boundary curvature is the special case computed here; Datar, *Lectures on Riemannian Geometry*, Lecture 2, Theorem 2.0.1, printed pp. 10-13, states the same computation. The identification of the corner jumps with $\pi$ minus the interior angles is the library definition [[def-signed-exterior-angle-at-a-piecewise-smooth-corner]], and the vanishing of $k_g$ along geodesics is the library definition [[def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve]] together with [[def-geodesic-of-an-affine-connection]].
+
+## Remarks
+
+The following schematic records the boundary order and interior-angle labels, not an isometric planar realization of $T$. The arrows run from $A$ to $B$ to $C$ to $A$ in a positive surface chart; along the bottom side the outward vector $\nu$ and boundary tangent $\tau$ form a positive ordered pair. The displayed sectors illustrate convex corners only; the theorem also allows reflex interior sectors. The side images stand for geodesic segments, and their drawn Euclidean angles do not prescribe $\alpha,\beta,\gamma$ or the curvature integral. The proof above is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[thick] (0,0)--(4,0)--(2,3)--(0,0);
+\draw[->,thick] (1.5,0)--(2.5,0);
+\draw[->,thick] (3.3,1.05)--(2.7,1.95);
+\draw[->,thick] (1.3,1.95)--(.7,1.05);
+\draw (0.48,0) arc (0:56.31:0.48);
+\draw (3.734,0.399) arc (123.69:180:0.48);
+\draw (1.734,2.601) arc (236.31:303.69:0.48);
+\node at (.72,.36) {$\alpha$};
+\node at (3.28,.36) {$\beta$};
+\node at (2,2.23) {$\gamma$};
+\node[below left] at (0,0) {$A$};
+\node[below right] at (4,0) {$B$};
+\node[above] at (2,3) {$C$};
+\node at (2,1.15) {$T$};
+\draw[->] (2,0)--(2,-.8) node[below] {$\nu$};
+\node[below] at (2.75,0) {$\tau$};
+\node at (6.8,1.6) {$\displaystyle\int_T K\,dA=\alpha+\beta+\gamma-\pi$};
+\node at (6.8,.8) {$k_g=0\quad\mathrm{on\ each\ side}$};
+\end{tikzpicture}
+```

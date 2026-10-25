@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-clustered-eigenvalues-give-a-better-cg-bound-than-spread-eigenvalues.md

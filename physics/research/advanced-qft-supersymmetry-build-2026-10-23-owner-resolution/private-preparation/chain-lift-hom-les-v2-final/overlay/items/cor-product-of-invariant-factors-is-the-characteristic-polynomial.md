@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-product-of-invariant-factors-is-the-characteristic-polynomial.md

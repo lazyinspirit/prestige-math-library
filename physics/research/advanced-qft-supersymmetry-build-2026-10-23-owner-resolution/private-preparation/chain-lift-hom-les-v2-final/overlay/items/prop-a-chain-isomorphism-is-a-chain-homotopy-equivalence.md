@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-chain-isomorphism-is-a-chain-homotopy-equivalence.md

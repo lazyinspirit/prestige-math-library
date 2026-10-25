@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-coordinate-projections-and-inclusions-on-product-banach-spaces.md

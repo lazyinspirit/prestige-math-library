@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-local-intersection-form-for-a-soergel-summand.json
+  precheck: n/a
 id: def-local-intersection-form-for-a-soergel-summand
 kind: definition
-title: "The local intersection form on Hom(B_y, B_x B_s)"
+title: 'The local intersection form on $\operatorname{Hom}(B_y, B_x B_s)$'
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -25,8 +28,7 @@ sources:
     - title: "Riche, La theorie de Hodge des bimodules de Soergel (d'apres Soergel et Elias-Williamson), Seminaire Bourbaki no. 1139 (arXiv:1711.02464, Octobre 2017)"
       url: "https://arxiv.org/pdf/1711.02464"
       locator: "Section 0.3 (the forms on Hom_B(B_z, B_y \\otimes_R B_s) and the reference to Soergel's Lemma 7.1)"
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition

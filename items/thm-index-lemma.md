@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-index-lemma.json
+  precheck: pass
 id: thm-index-lemma
 kind: theorem
 title: Index lemma
@@ -30,13 +33,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -173,7 +169,7 @@ $\langle X,Y\rangle:=g(X,Y)$.
 
 ## Proof
 
-**Proof technique:** the Jacobi matrix of the fixed initial point is invertible exactly because there is no conjugate instant; the difference $V-J$ is expanded in the Jacobi basis and the integrand identity $\langle D_tW,D_tW\rangle-\operatorname{Rm}(W,T,T,W)=\langle Af',Af'\rangle+\varphi'$ turns the index form at both vanishing endpoints into $\int\langle Af',Af'\rangle$; the equality case then forces the coefficients of $W$ to be constant and hence $W=0$.
+**Proof technique:** the Jacobi matrix of the fixed initial point is invertible exactly because there is no conjugate instant; the difference between the comparison field and the Jacobi field is expanded in the Jacobi basis. The integrand identity writes the index-form integrand as the squared norm of the Jacobi matrix applied to the coefficient derivative plus a total derivative. The boundary terms vanish at both endpoints, leaving the integral of that squared norm; the equality case then forces the coefficients of the difference field to be constant and hence the difference field to vanish.
 
 1.1 Set-up and the initial-value family. [F1, F2, F3, given] Put $T:=\dot\gamma$; by hypothesis no $t\in(a,b]$ makes $\gamma(a)$ and $\gamma(t)$ conjugate along $\gamma|_{[a,t]}$. For $v\in T_{\gamma(a)}M$ let $J_v$ be the unique smooth Jacobi field along $\gamma$ with $J_v(a)=0$ and $D_tJ_v(a)=v$ (one-sided at $a$), which exists and is unique by [F1]. For $v,z\in T_{\gamma(a)}M$ and $\lambda,\mu\in\mathbb R$ the field $\lambda J_v+\mu J_z$ is a smooth Jacobi field by [F2], and it has the initial data of $J_{\lambda v+\mu z}$; uniqueness in [F1] therefore gives $$J_{\lambda v+\mu z}=\lambda J_v+\mu J_z.$$ In particular every map $\Phi_t:T_{\gamma(a)}M\to T_{\gamma(t)}M$, $\Phi_t(v):=J_v(t)$, is real-linear, and $\Phi_a=0$. [F1, F2]
 
@@ -191,7 +187,7 @@ $\langle X,Y\rangle:=g(X,Y)$.
 
 6.1 Equality case and conclusion. [F13, step 3.2, step 5.1] Suppose $I_\gamma(W,W)=0$ for some $W\in\mathcal X_0(\gamma)$. By step 5.1 the integrand $\langle Af',Af'\rangle$ is continuous and nonnegative on each closed piece and the sum of the piece integrals is $0$; since every piece integral is nonnegative [F12], each piece integral vanishes, and [F13] makes $\langle A(t)f'(t),A(t)f'(t)\rangle=0$ for every $t$ of that piece. The metric is positive definite and $A(t)$ is invertible for $t\in(a,b]$ (step 2.1), so $f'(t)=0$ there; hence $f$ is constant on $(a,b)$ and, being continuous on $(a,b]$, constant on $(a,b]$ with value $c\in\mathbb R^n$. Then $W(t)=A(t)c$ on $(a,b]$ and, evaluating at $b$, $0=W(b)=A(b)c$ with $A(b)$ invertible, so $c=0$ and $W=0$. Therefore $I_\gamma(W,W)>0$ for every nonzero $W\in\mathcal X_0(\gamma)$, and step 3.2 gives $$I_\gamma(V,V)=I_\gamma(J,J)+I_\gamma(W,W)\ge I_\gamma(J,J),$$ with equality exactly when $W=0$, that is exactly when $V=J$. This proves both assertions. [F13, step 3.2, step 5.1]
 
-7.1 Boundary and choice audit. [A1, F1, F2, F3, F4, F5, step 2.1, step 6.1] Every hypothesis is used at the point where it is needed: $a<b$ and the exclusion of conjugate instants on $(a,b]$ are exactly what make each $\Phi_t$, $t\in(a,b]$, an isomorphism in step 2.1, and the exclusion at $t=b$ is what makes the endpoint-value problem in step 3.1 uniquely solvable and the constant $c$ in step 6.1 vanish. If $\gamma$ is constant, then $T=0$ and the conjugacy hypothesis is automatic: [F3] states that $\mathcal K_\gamma(a,b)=\{0\}$ for a constant geodesic, and [F2] makes the curvature term of the Jacobi equation and of the index-form integrand vanish (the Jacobi-field convention gives $D_t^2J=0$ when $\dot\gamma=0$, and $R$ is $C^\infty$-linear in its second slot, so $R(\cdot,0)=0$), so all steps above apply verbatim and the constant case is included; the same steps never divide by $T$ or by the speed. In dimension zero $T_{\gamma(a)}M=\{0\}$, so $u=w=0$, $V=0$, $J=0$ and both sides of the inequality are $0$. Dimension one and non-unit speed are unconstrained by any step. Included endpoints use the one-sided conventions of [F1], [F4] and [F5]. Exactly the declared $\mathrm{AC}_\omega$ is inherited through the index-form, Jacobi-field, Wronskian and integration-by-parts suppliers [A1]; the construction of the fields $J_v$ uses the uniqueness statement of [F1] rather than any selection, the parallel frame is fixed once by [F9], and the finite-dimensional linear algebra of steps 2.1, 3.3 and 6.1 makes no choice. No converse is claimed: the lemma asserts an inequality and its equality case, not that failure at some $t\in(a,b]$ produces a nonzero $W$ with $I_\gamma(W,W)=0$. $\square$
+7.1 Boundary and choice audit. [A1, F1, F2, F3, F4, F5, step 2.1, step 6.1] Every hypothesis is used at the point where it is needed: $a<b$ and the exclusion of conjugate instants on $(a,b]$ are exactly what make each $\Phi_t$, $t\in(a,b]$, an isomorphism in step 2.1, and the exclusion at $t=b$ is what makes the endpoint-value problem in step 3.1 uniquely solvable and the constant $c$ in step 6.1 vanish. If $\gamma$ is constant, then $T=0$ and the conjugacy hypothesis is automatic: [F3] states that $\mathcal K_\gamma(a,b)=\{0\}$ for a constant geodesic, and [F2] makes the curvature term of the Jacobi equation and of the index-form integrand vanish (the Jacobi-field convention gives $D_t^2J=0$ when $\dot\gamma=0$, and $R$ is $C^\infty$-linear in its second slot, so $R(\cdot,0)=0$), so all steps above apply verbatim and the constant case is included; the same steps never divide by $T$ or by the speed. In dimension zero $T_{\gamma(a)}M=\{0\}$, so $u=w=0$, $V=0$, $J=0$ and both sides of the inequality are $0$. Dimension one and non-unit speed are unconstrained by any step. Included endpoints use the one-sided conventions of [F1], [F4] and [F5]. Exactly the declared $\mathrm{AC}_\omega$ is inherited through the index-form, Jacobi-field, Wronskian and integration-by-parts suppliers [A1]; the construction of the fields $J_v$ uses the uniqueness statement of [F1] rather than any selection, the parallel frame is fixed once by [F9], and the finite-dimensional linear algebra of steps 2.1, 3.3 and 6.1 makes no choice. No converse is claimed: the lemma asserts an inequality and its equality case, not that failure at some $t\in(a,b]$ produces a nonzero $W$ with $I_\gamma(W,W)=0$. [A1, F1, F2, F3, F4, F5, step 2.1, step 6.1] ∎
 
 
 

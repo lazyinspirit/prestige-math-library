@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-four-vertex-path-is-the-only-prime-graph-on-four-vertices.md

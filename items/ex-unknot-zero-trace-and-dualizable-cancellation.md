@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-unknot-zero-trace-and-dualizable-cancellation.json
+  precheck: pass
 id: ex-unknot-zero-trace-and-dualizable-cancellation
 kind: example
 title: "The unknot zero-trace and a dualizable cancellation diagram"
@@ -29,13 +32,7 @@ sources:
     - title: "Jennifer Hom, Getting a handle on the Conway knot"
       url: "https://arxiv.org/pdf/2107.09171"
       locator: "§5, product handles and the framing convention; §7, trace embeddings"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Example
@@ -88,7 +85,7 @@ trace.
 
 ## Diagram
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[node distance=2.5cm,>=stealth]
   \node (x) {$B^4\cup_R h^1\cup_B h^2_0\cup_G h^2_0$};
   \node (g) [below left of=x] {$B^4\cup_U h^2_0$};
@@ -96,7 +93,7 @@ trace.
   \draw[->] (x) -- node[left,align=center] {slide $G$ over $B$;\\cancel $(R,B)$} (g);
   \draw[->] (x) -- node[right,align=center] {slide $B$ over $G$;\\cancel $(R,G)$} (b);
 \end{tikzpicture}
-~~~
+```
 
 The sketch shows handle incidence only: dotted $R$ denotes the $1$-handle and subscript $0$ denotes zero framing. Each slide produces the disk-bounding remaining circle before the indicated single-intersection cancellation; the proof is independent of the sketch.
 

@@ -1,0 +1,75 @@
+---
+id: lem-finite-cw-relative-ko-triples-and-homotopy-invariance
+kind: lemma
+title: Finite-CW relative KO triples and homotopy invariance
+status: published
+origin: pipeline
+page: real-clifford-modules-ko-and-abs-orientations
+deps:
+- def-real-ko-and-ksp-grothendieck-groups
+- def-reduced-relative-ko-and-ko-compact-support
+- cor-finite-cw-real-vector-bundle-has-orthogonal-complement-under-ac
+- thm-homotopy-invariance-of-vector-bundle-pullback
+- thm-tietze-extension-theorem
+- lem-ac-supplies-dependent-choice-for-vector-bundle-constructions
+- thm-subordinate-partitions-of-unity-exist
+- prop-compact-spaces-are-paracompact
+- def-axiom-of-choice
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+sources:
+  references:
+  - title: M. F. Atiyah, K-Theory, §§1.3–1.4 and 2.4 (complex source; real arguments
+      supplied locally)
+    url: https://www.maths.ed.ac.uk/~v1ranick/papers/atiyahk.pdf
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+dependency_level: 3
+---
+
+## Statement
+
+Assume AC. For a finite CW pair $(X,A)$, $KO^0(X,A)$ is naturally the group of triples $(E,F,g)$, with $E,F$ real bundles on $X$ and $g:E|_A\to F|_A$ an isomorphism. Relations are bundle isomorphism, direct-sum additivity, homotopy of $g$, and deletion of a triple whose $g$ extends to an isomorphism on $X$. Equivalently, use stable homotopy of triples, allowing addition of such elementary triples. Pullback along homotopic maps of pairs induces equal maps. In degree zero over $X$, equality of virtual bundles is equality after common trivial stabilization. Every real bundle on $X$ has a finite trivial complement. The analogous complement, stable-isomorphism, homotopy and triple statements hold for right-$\mathbb H$ bundles. All these conclusions also hold for compact Hausdorff pairs with closed subspace; this includes disk, sphere and Thom bundle spaces over compact finite CW bases.
+
+## Facts & Assumptions
+
+**Given:** AC, a finite CW complex $X$, a subcomplex $A$, and triples as stated. All isomorphisms in the quaternionic version are right-$\mathbb H$ linear.
+
+[F1] Real finite-CW bundles have finite trivial complements under AC ([[cor-finite-cw-real-vector-bundle-has-orthogonal-complement-under-ac]]).
+
+[F2] Numerable real bundle pullbacks over paracompact Hausdorff spaces are homotopy invariant under AC ([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
+
+[F4] Compact Hausdorff spaces are paracompact ([[prop-compact-spaces-are-paracompact]]) and admit subordinate partitions under AC and DC ([[thm-subordinate-partitions-of-unity-exist]]).
+
+[F3] Bounded real functions on a closed subset of a normal space extend under DC ([[thm-tietze-extension-theorem]]); AC supplies DC ([[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]], [[def-axiom-of-choice]]).
+
+## Proof
+
+**Proof technique:** explicit finite-bundle constructions.
+
+1.1 Finite CW spaces are compact Hausdorff and hence normal. For completeness, disjoint closed subsets in a compact Hausdorff space have disjoint open neighborhoods: separate a fixed point of the first set from every point of the second, take a finite subcover of the second and intersect the corresponding first neighborhoods, then take a finite subcover of the first and intersect the corresponding second neighborhoods. For a general compact Hausdorff base, a finite trivializing cover and [F4] give a finite numeration: a locally finite family on a compact space has only finitely many nonempty supports. The real weighted chart embedding $v\mapsto(\sqrt{\rho_i(x)}\tau_i(v))_i$ is continuous by support subordination and injective because a partition member is positive. In local coordinates its full-rank matrix $Q$ has continuous projection $Q(Q^{\mathsf T}Q)^{-1}Q^{\mathsf T}$, whose orthogonal complement is a bundle. Thus [F1]'s complement statement extends to compact Hausdorff bases. Apply this on each of the finitely many clopen rank strata, enlarging their trivial ambient ranks to a common integer. Group completion says $[E]=[F]$ iff $E\oplus G\cong F\oplus G$ for some $G$. Adding a complement of $G$ turns this into $E\oplus\varepsilon^k\cong F\oplus\varepsilon^k$; the converse is immediate in the group. [F1, F4, algebra, construct]
+
+
+2.1 We record the extension argument used below. Embed $E$ into $X\times\mathbb R^N$ with projection $P(x)$, and suppose a frame $s_1,\ldots,s_n$ is supplied on a closed subset $B$ on which $E$ has rank $n$. Its finitely many ambient coordinate functions are bounded, so [F3] extends them to vectors $\widehat s_i$ on $X$. The sections $P\widehat s_i$ extend the frame. Their Gram determinant is nonzero on $B$, and thus on an open neighborhood $U$ of $B$ lying in the rank-$n$ stratum. They form a frame on $U$. This also extends a prescribed bundle homomorphism: embed its target in a trivial bundle, extend the matrix entries from $B$, and project to the target. For a map between nontrivial source bundles apply the same argument to its Hom bundle, which is a finite-rank real bundle. Apply the construction on $X\times I$ for families. AC is used through [F1] and the implication AC to DC in [F3]. [F1, F3, step 1.1, construct]
+
+
+3.1 Add the elementary triple $(F',F',1)$ where $F\oplus F'\cong\varepsilon^n$. Every triple is thereby represented by $(H,\varepsilon^n,\tau)$ with $\tau:H|_A\cong A\times\mathbb R^n$. Extend this trivialization over a neighborhood $U$ by step 2.1. Collapse the fibers of $H$ above $A$ using $\tau$ to one copy of $\mathbb R^n$. This gives a bundle $\bar H$ on $X/A$: on $q(U)$ use the extended frame, and elsewhere use the old charts. Here $q(U)$ is open because $U$ contains $A$ and is saturated. The transition maps near the collapsed point are continuous by the quotient topology. Define the triple class to be $[\bar H]-[\varepsilon^n]$. Its fiber difference at the basepoint is zero. If $A$ is empty this means $[H]-[\varepsilon^n]$ on $X$, extended by zero to the extra point. [step 2.1, construct]
+
+
+4.1 The collapse construction is intrinsic to the relation $(a,v)\sim(a',v')$ iff $\tau(v)=\tau(v')$; hence its bundle isomorphism class does not depend on the neighborhood or extension frame. We spell out invariance under a global gauge, since it need not be constant on $A$. Suppose the normalized frame changes from $\tau$ to $b|_A\tau$, where $b:X\to GL_n(\mathbb R)$. Add a trivial $n$-plane to $H$. On a framed neighborhood $U$ of $A$, the two-block rotation contracts $\operatorname{diag}(b^{-1},b)$ to identity: use $\operatorname{diag}(b^{-1},I)R_t\operatorname{diag}(I,b)R_t^{-1}$. Choose a continuous cutoff equal to one on $A$ with support in $U$, which exists by first shrinking to $A\subset W\subset\overline W\subset U$ using normality and then extending the values one on $A$ and zero on $X\setminus W$ by [F3], and use it to run this contraction backwards only near $A$. This defines a global automorphism $c$ of $H\oplus\varepsilon^n$ restricting in its old frame to $\operatorname{diag}(b^{-1},b)$ on $A$. Multiply $c$ on the left by the global automorphism that is identity on $H$ and $b^{-1}$ on the added trivial factor. The resulting automorphism restricts to $\operatorname{diag}(b^{-1},I)$, so it identifies the two descended stabilized bundles in their collapse frames. Thus they have the same quotient class. Any change of the global trivialization of $F\oplus F'$ is precisely such a gauge. A homotopy of $\tau$ gives the same construction over $(X/A)\times I$; [F2] identifies its endpoint classes. Adding an elementary triple $(G,G,h)$ does not change the result: extend $h$ globally, add a complement of $G$, and use the resulting global frame identification on both entries. The added descended difference is $[\varepsilon^k]-[\varepsilon^k]=0$. Two choices of complement are compared by adding both complements and the same bundle $F$; after the evident permutations each resulting stabilization contains the same globally trivialized summand. Thus the construction respects exactly the listed relations. [F1, F2, step 3.1, algebra]
+
+
+5.1 Conversely, any reduced class on $Y=X/A$ is $[P]-[Q]$. Complement $Q$ to a trivial bundle, so the class is $[H]-[\varepsilon^n]$. Its reduced condition implies $\operatorname{rank}H_*=n$. Choose a linear identification $H_*\cong\mathbb R^n$. Pullback along $q$ gives $(q^*H,\varepsilon^n,\tau)$, with $\tau$ the constant fiber identification on $A$. Its collapse recovers the original bundle and class. For injectivity suppose two normalized triples collapse to the same class. Their denominators may first be equalized by adding trivial elementary triples. Step 1.1 on the compact Hausdorff quotient $Y$ then gives an isomorphism $\phi:\bar H\oplus\varepsilon^k\to\bar H'\oplus\varepsilon^k$. In the chosen frames its value at $*$ is one matrix $B\in GL_{n+k}(\mathbb R)$. Pull back $\phi$ on the first entries and use the constant automorphism $B$ on the trivial second entries; these form an isomorphism of the stabilized triples. This proves both inverses and injectivity, including rank variations on components disjoint from $A$. [F1, step 1.1, step 3.1, step 4.1, construct]
+
+
+6.1 The triple presentation is a group, even if described initially by stable sums: the inverse of $(E,F,g)$ is $(F,E,g^{-1})$. After normalizing $g$ to an isometry, identify the second direct sum with $E\oplus F$ by permutation. The rotation matrix on $E|_A\oplus F|_A$ with diagonal $\cos t$ and off-diagonal $-\sin t\,g^{-1}$ and $\sin t\,g$ connects identity to the off-diagonal interchange. This makes the summed triple elementary up to homotopy. Polar normalization is valid since $g^*g$ is positive definite, and the positive square root varies continuously; one can see the latter locally by the uniformly convergent binomial series after scaling positive matrices to have spectrum in a compact subinterval of $(0,2)$. All collapse operations commute with pullback. A homotopy of pair maps descends to a based homotopy of quotients; [F2] proves the claimed homotopy invariance. [F2, step 5.1, algebra, construct]
+
+
+7.1 Here are the quaternionic details, rather than an appeal to a complex-only result. By [F4], choose finitely many right-linear charts and a real subordinate partition $\rho_i$, the map $v\mapsto(\sqrt{\rho_i(x)}\,\tau_i(v))_i$ embeds a right-$\mathbb H$ bundle in a finite trivial right-$\mathbb H$ bundle. It is continuous by support subordination and injective because some $\rho_i(x)>0$. In a local full-rank frame $Q$ its orthogonal projection is $Q(Q^*Q)^{-1}Q^*$; this is right-linear, and continuous because the inverse, viewed in real coordinates, is continuous by the cofactor formula. Orthogonal complements are therefore right-$\mathbb H$ subbundles. For homotopy invariance on compact $X\times I$, use this embedding and its projection $P(x,t)$. Compactness gives a subdivision for which $\|P(x,t_{i+1})-P(x,t_i)\|<1$ uniformly in $x$. Projection between the two image bundles is injective by this inequality and hence an isomorphism; these right-linear isomorphisms compose to identify endpoints. For extending a Hom section in step 2.1, embed the Hom bundle as a real bundle and extend its real coordinates; it is the bundle of right-linear maps, so the resulting section is right-linear. All the collapse, stabilization and rotation arguments above now apply over $\mathbb H$. This proves the quaternionic statements independently. [F1, F3, step 2.1, step 3.1, step 5.1, step 6.1, construct] ∎

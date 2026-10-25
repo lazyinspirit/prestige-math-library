@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-projective-covers-in-o-are-indecomposable-and-unique.json
+  precheck: pass
 id: prop-projective-covers-in-o-are-indecomposable-and-unique
 kind: proposition
 title: "Projective covers in O are indecomposable and unique"
@@ -14,17 +17,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "historical complete Step5 reader; item prop-projective-covers-in-o-are-indecomposable-and-unique; evidence research/frontier-38-owner-30-reader-7.md, research/frontier-38-owner-30-reader-findings-7.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Lin Chen, lecture notes (Spring 2024), Lecture 8, Theorem 4.4 and Appendix A"
@@ -59,7 +51,7 @@ projectives with head $L$; when such a cover exists it is written $P(L)$.
 
 ## Proof
 
-**Proof technique:** direct: split $P$ into indecomposables, make the nonzero component an essential epimorphism, and compare two covers by lifting.
+**Proof technique:** direct: split the projective object into indecomposables, make the nonzero component an essential epimorphism, and compare two covers by lifting.
 
 1.1 By [F1] write $P=P_1\oplus\cdots\oplus P_n$ with each $P_i$ indecomposable. If every composite $\pi_i:P_i\hookrightarrow P\xrightarrow{\pi}L$ were zero, then $\pi=\sum_i\pi_i=0$, contradicting that $\pi$ is an epimorphism onto the nonzero object $L$; so some $\pi_j\ne0$, and $\pi_j$ is an epimorphism because $L$ is simple and $0\ne\operatorname{im}\pi_j\subseteq L$. [F1, given]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-projective-plane-total-curvature-from-a-hemisphere-identification.json
+  precheck: pass
 id: ex-projective-plane-total-curvature-from-a-hemisphere-identification
 kind: example
 title: Projective-plane curvature via a hemisphere
@@ -35,13 +38,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)"
@@ -94,7 +90,7 @@ classification of compact surfaces is used.
 
 ## Verification
 
-**Proof technique:** build the quotient charts, push the round metric forward to a metric making $\pi$ a local isometry, compute $K$ and the area in one chart while proving that the omitted equatorial circle is null, and conclude with the nonorientable Gauss-Bonnet theorem.
+**Proof technique:** build the quotient charts, push the round metric forward to a metric making the quotient map a local isometry, compute the curvature and the area in one chart while proving that the omitted equatorial circle is null, and conclude with the nonorientable Gauss-Bonnet theorem.
 
 1.1 For $i\in\{0,1,2\}$ put $H_i:=\{x\in S^2_R:x_i>0\}$ and $U_i:=\pi(H_i)$. Every antipodal pair meets $\bigcup_iH_i$, because some coordinate of $x$ is nonzero and exactly one of $x,-x$ has its $i$-th coordinate positive whenever $x_i\ne0$; hence the $U_i$ cover $\mathbb{RP}^2$. The restriction $\pi|_{H_i}$ is injective: if $x,y\in H_i$ and $\pi(x)=\pi(y)$, then $y=\pm x$, and $x_i>0$, $y_i>0$ force $y=x$. Since $\pi$ is open by [F2], each $\pi|_{H_i}$ is a homeomorphism onto $U_i$. [F2, given]
 

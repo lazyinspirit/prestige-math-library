@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-cohomology-over-a-field-is-dual-to-homology-over-that-field.md

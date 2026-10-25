@@ -1,0 +1,53 @@
+---
+id: lem-qftx-module-localization-preserves-exactness
+kind: lemma
+title: Localization preserves exact sequences of modules
+status: draft
+origin: pipeline
+pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
+dependency_level: 0
+domain: mathematics
+library: mathematics
+category: quantum-field-theory-mathematics
+deps: []
+dependency_roles: {}
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: M. F. Atiyah and R. Bott, The Moment Map and Equivariant Cohomology
+      url: https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf
+      locator: Section 3, localization of equivariant-cohomology modules, printed pp. 5–7.
+landmark: false
+---
+
+## Statement
+
+Let $R$ be a commutative ring with identity, let $S\subseteq R$ contain $1$, be closed under multiplication, and not contain $0$, and let $0\to M'\xrightarrow{f}M\xrightarrow{g}M''\to0$ be an exact sequence of $R$-modules. The localization $S^{-1}M$ is the module of fractions $m/s$, with $(m,s)\sim(m',s')$ exactly when some $t\in S$ satisfies $t(s'm-sm')=0$. Then
+$$
+0\longrightarrow S^{-1}M'\xrightarrow{S^{-1}f}S^{-1}M\xrightarrow{S^{-1}g}S^{-1}M''\longrightarrow0
+$$
+is exact.
+
+## Statement references
+
+[Module localization and support] [Atiyah–Bott, Section 3, printed pp. 5–7](https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf)
+
+## Facts & Assumptions
+
+**Given:** A commutative ring $R$, a multiplicative set $S$, and the exact module sequence in the statement.
+
+## Proof
+
+**Given:** The exact sequence and the fraction definition of localization in the statement.
+
+1.1 The map $S^{-1}f$ is injective. If $f(m')/s=0$, the fraction relation gives $t f(m')=0$ for some $t\in S$. Then $f(tm')=0$; injectivity of $f$ gives $tm'=0$, so $m'/s=0$ in $S^{-1}M'$. [given, construct]
+
+1.2 The map $S^{-1}g$ is surjective. For any $m''/s\in S^{-1}M''$, surjectivity of $g$ supplies $m\in M$ with $g(m)=m''$, and $m/s$ maps to $m''/s$. [given, choose]
+
+2.1 Let $m/s\in S^{-1}M$ lie in the kernel of $S^{-1}g$. The zero-fraction criterion gives $t\in S$ with $t g(m)=0$, hence $g(tm)=0$. Exactness of the original sequence gives $m'\in M'$ with $f(m')=tm$. Since $t\in S$ is invertible in the localization, $m/s=tm/(ts)=f(m')/(ts)$, which lies in the image of $S^{-1}f$. [given, step 1.1, algebra]
+
+3.1 Conversely $g\circ f=0$, so every fraction in the image of $S^{-1}f$ maps to zero under $S^{-1}g$. Step 2.1 proves the reverse inclusion at the middle term, and steps 1.1 and 1.2 prove exactness at the two ends. If a module is zero, the same fraction criterion yields the unique zero map; no choice principle or flatness assumption is used beyond choosing one preimage for one element in step 1.2. [given, step 1.1, step 1.2, step 2.1] ∎

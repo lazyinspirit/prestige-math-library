@@ -1,0 +1,8 @@
+# Supplemental Step-2 prerequisite construction 1, batch 70
+Run: advanced-qft-supersymmetry-build-2026-10-23. This is separate supplemental authoring, not a Step-1 rerun or acceptance.
+Read research/advanced-qft-supersymmetry-build-2026-10-23-step2-prerequisite-request-1.json and its actual source/design evidence, the complete approved declarations in research/advanced-qft-supersymmetry-build-2026-10-23-batch-70.pages.json, and owner directions.
+Fully author exactly these A/B pages and their declared items: qftx-equivariant-pseudodifferential-calculus, qftx-equivariant-pseudodifferential-calculus-examples. Preserve sound existing drafts.
+Source write scope: ["library/quantum-field-theory-mathematics/qftx-equivariant-pseudodifferential-calculus.md","items/lem-equivariant-finite-chart-symbol-calculus.md","items/lem-equivariant-controlled-symbol-realization.md","items/lem-equivariant-associated-symbol-product-index.md","items/lem-equivariant-compact-bott-index-normalization.md","library/quantum-field-theory-mathematics/qftx-equivariant-pseudodifferential-calculus-examples.md","items/ex-equivariant-fourier-hardy-symbol-index.md"].
+Write only these sources and this batch's actual coverage, contracts, notes, cross-batch-dependencies and per-item readiness. Preserve exact declared inventory and scope; escalate additional missing theory to Root.
+Never edit canonical plan, original manifests/sources/history, imported mathematics, owner adoption evidence or engine state. Do not create Step-1 native results or acceptance.
+Use the ordinary rigorous authoring, actual-source, contract and readiness duties of briefs/beta-scaffold.md. Missing proofs remain escalated. No private worktrees or backups.

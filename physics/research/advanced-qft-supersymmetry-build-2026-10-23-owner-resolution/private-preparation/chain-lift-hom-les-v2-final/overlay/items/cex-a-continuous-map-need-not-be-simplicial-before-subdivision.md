@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-continuous-map-need-not-be-simplicial-before-subdivision.md

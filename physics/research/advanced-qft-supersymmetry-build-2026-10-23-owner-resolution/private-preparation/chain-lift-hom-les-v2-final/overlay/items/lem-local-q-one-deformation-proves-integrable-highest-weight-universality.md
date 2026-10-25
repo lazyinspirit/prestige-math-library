@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-local-q-one-deformation-proves-integrable-highest-weight-universality.md

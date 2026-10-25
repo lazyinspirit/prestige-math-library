@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-ip-solit-parameter-choice.json
+  precheck: n/a
 id: alg-ip-solit-parameter-choice
 kind: algorithm
 title: SOLIT parameter choice on a geometric-variance grid
@@ -19,14 +22,6 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 axiom_use: "Countable Choice is inherited through the fixed SVD coordinates in the sequence model; the finite selector search and minimum-index choice are otherwise choice-free."
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
 sources:
   references:
     - title: "Housen Li and Frank Werner, Adaptive minimax optimality in statistical inverse problems via SOLIT, §§3.2.1–3.2.2"
@@ -76,11 +71,11 @@ Given fixed $\beta>0$ and $\gamma>0$, for $0\le m<m_{\max}$ put $x_m:=2(1+\gamma
 The arrows show the order of the finite procedure: form the regularized estimates, compare each candidate with every finer one using the two-index threshold, then return the smallest candidate that passes all of its comparisons. The diagram illustrates the algorithm only; the proofs of its properties use the coordinate definitions and inequalities.
 
 ```tikz
-\begin{tikzpicture}[>=stealth]
-  \node[draw,rounded corners,align=center] (data) at (0,0) {observations $y_j=Y_x(u_j)$};
-  \node[draw,rounded corners,align=center] (est) at (3,0) {observed-data partial sums $\widehat x_{m,N}$};
-  \node[draw,rounded corners,align=center] (tests) at (6,0) {all finer-index two-index tests};
-  \node[draw,rounded corners,align=center] (choose) at (9,0) {smallest accepted index $\widehat m$};
+\begin{tikzpicture}[>=stealth, every node/.style={draw,rounded corners,align=center,text width=6cm,minimum height=0.9cm}]
+  \node (data) at (0,0) {observations $y_j=Y_x(u_j)$};
+  \node (est) at (0,-1.5) {observed-data partial sums $\widehat x_{m,N}$};
+  \node (tests) at (0,-3) {all finer-index two-index tests};
+  \node (choose) at (0,-4.5) {smallest accepted index $\widehat m$};
   \draw[->] (data) -- (est);
   \draw[->] (est) -- (tests);
   \draw[->] (tests) -- (choose);

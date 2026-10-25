@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-weak-smooth-topology-is-independent-of-the-chosen-atlas.md

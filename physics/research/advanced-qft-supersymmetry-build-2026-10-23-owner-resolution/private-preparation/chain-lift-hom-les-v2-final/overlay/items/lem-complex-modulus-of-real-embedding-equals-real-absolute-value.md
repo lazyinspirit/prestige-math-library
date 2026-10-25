@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complex-modulus-of-real-embedding-equals-real-absolute-value.md

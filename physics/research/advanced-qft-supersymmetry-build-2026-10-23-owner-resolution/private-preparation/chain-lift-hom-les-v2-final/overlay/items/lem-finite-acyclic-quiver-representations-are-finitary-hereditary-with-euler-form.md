@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form.md

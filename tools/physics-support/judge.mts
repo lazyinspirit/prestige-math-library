@@ -42,7 +42,7 @@ for (let i = 0; i < argv.length; i += 1) {
 
 if (!file && !flags.has('preflight') && !values.has('context-hashes')) {
   console.error('usage: node tools/physics-support/tsx-run.mjs tools/physics-support/judge.mts items/<id>.md [--model M] [--effort low|medium|high|xhigh|max] [--context-hash|--dump-prompt]');
-  console.error('       node tools/physics-support/tsx-run.mjs tools/physics-support/judge.mts --context-hashes <id,id,...>');
+  console.error('       node tools/physics-support/tsx-run.mjs tools/physics-support/judge.mts --context-hashes <id,id,...> [--currency-inputs]');
   console.error('       node tools/physics-support/tsx-run.mjs tools/physics-support/judge.mts --preflight [--model M]');
   process.exit(2);
 }
@@ -137,6 +137,7 @@ const buildPrompt = (itemFile: string): {
   id: string;
   prompt: string;
   itemSha256: string;
+  otherPromptInputsSha256?: string;
   stats: Record<string, number>;
 } => {
   const targetPath = resolve(REPO, itemFile);
@@ -229,11 +230,16 @@ Return one minified JSON object and nothing else: {"keep":true|false,"reason":"s
       ? `=== OTHER CURRENT-BATCH INTERFACES ===\n${batchInterfaces.join('\n\n')}`
       : '',
   ].filter(Boolean);
-  const prompt = `${system}\n\n${blocks.join('\n\n')}\n\nEND OF CONTEXT. Return the single JSON verdict now.`;
+  const composePrompt = (contents: string[]) => `${system}\n\n${contents.join('\n\n')}\n\nEND OF CONTEXT. Return the single JSON verdict now.`;
+  const prompt = composePrompt(blocks);
   return {
     id,
     prompt,
     itemSha256: itemHashJudge(body),
+    // Mechanical provenance for the exact non-own-item prompt inputs. This
+    // never changes or normalizes the real prompt/provider context hash.
+    ...(flags.has('currency-inputs') ? { otherPromptInputsSha256: createHash('sha256')
+      .update(composePrompt(['', ...blocks.slice(1)])).digest('hex') } : {}),
     stats: {
       prompt_chars: prompt.length,
       item_chars: body.length,
@@ -427,12 +433,13 @@ if (values.has('context-hashes')) {
     console.error('[judge] --context-hashes needs at least one item id');
     process.exit(2);
   }
-  const contexts: Record<string, { context_sha256: string; item_sha256: string }> = {};
+  const contexts: Record<string, { context_sha256: string; item_sha256: string; other_prompt_inputs_sha256?: string }> = {};
   for (const id of ids) {
     const built = buildPrompt(`items/${id}.md`);
     contexts[id] = {
       context_sha256: createHash('sha256').update(built.prompt).digest('hex'),
       item_sha256: built.itemSha256,
+      ...(flags.has('currency-inputs') ? { other_prompt_inputs_sha256: built.otherPromptInputsSha256 } : {}),
     };
   }
   // stdout is a pipe for the stamp tool. `console.log(); process.exit()` can

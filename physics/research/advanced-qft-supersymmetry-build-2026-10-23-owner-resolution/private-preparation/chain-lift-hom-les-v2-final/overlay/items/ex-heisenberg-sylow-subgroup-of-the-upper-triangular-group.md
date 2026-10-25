@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-heisenberg-sylow-subgroup-of-the-upper-triangular-group.md

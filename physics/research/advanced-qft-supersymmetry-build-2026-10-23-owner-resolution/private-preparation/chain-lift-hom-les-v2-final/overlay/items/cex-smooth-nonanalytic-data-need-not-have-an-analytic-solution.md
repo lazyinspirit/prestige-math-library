@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-smooth-nonanalytic-data-need-not-have-an-analytic-solution.md

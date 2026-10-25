@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-mayer-vietoris-sequence-is-obtained-by-restricting-forms-without-a-partition-of-unity.md

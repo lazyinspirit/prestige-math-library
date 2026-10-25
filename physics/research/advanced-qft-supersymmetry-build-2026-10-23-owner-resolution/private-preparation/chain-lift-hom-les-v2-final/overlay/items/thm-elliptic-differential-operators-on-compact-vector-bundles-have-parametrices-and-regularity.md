@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-conjugate-gradients-can-break-on-a-symmetric-indefinite-system.md

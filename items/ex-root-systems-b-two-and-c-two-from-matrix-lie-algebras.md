@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras.json
+  precheck: pass
 id: ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras
 kind: example
-title: Root systems B_2 and C_2 from matrix Lie algebras
+title: Root systems $B_2$ and $C_2$ from matrix Lie algebras
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -21,8 +24,7 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the general reduced crystallographic root-system theorem."
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Example

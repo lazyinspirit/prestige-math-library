@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cg-classical-coxeter-spectra-from-reflection-models.json
+  precheck: pass
 id: lem-cg-classical-coxeter-spectra-from-reflection-models
 kind: lemma
-title: "The Coxeter elements of the classical types A_n, B_n, D_n and I_2(m): characteristic polynomials, orders and spectral exponents from their reflection models"
+title: "The Coxeter elements of the classical types $A_n$, $B_n$, $D_n$ and $I_2(m)$: characteristic polynomials, orders and spectral exponents from their reflection models"
 status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
@@ -12,9 +15,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 sources:
   references:
     - title: "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)"

@@ -1,0 +1,120 @@
+{
+  "id": "alg-finite-galerkin-v-cycle",
+  "agent": "/root/rendering_repair_coordinator/dnla_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original screenshot and frozen/current definition show only prose instructions. A level-j descent/ascent schematic materially clarifies that restriction acts on the fixed fine residual while prolongation acts on the recursively updated coarse iterate. In particular, the W-cycle reuses the first coarse result rather than starting a second independent zero solve. This warrants an explanatory figure without asserting a mathematical error in the original algorithm.",
+      "action": "Added one two-transfer recursion schematic and explicit V/W interpretation in final Remarks.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Append final Remarks with a native TikZ three-state schematic for pre-sweeps/residual, gamma successive recursive coarse calls, and prolongation/post-sweeps; explain domains, fixed coarse RHS, coarse-iterate reuse and base case.",
+  "source_lines_after": {
+    "remarks": [
+      52,
+      79
+    ],
+    "tikz": [
+      59,
+      70
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "data": "At j>0, the left state has x,b,r in R^{n_j}; the lower state has b_c,e_t in R^{n_{j-1}}.",
+      "justification": "Definition lines 29-37 supplies matrix dimensions; instructions 2-3 (lines 41-44) define r=b-A_j x and the coarse RHS. Thus P_j^T maps R^{n_j} to R^{n_{j-1}} as drawn on the descending arrow."
+    },
+    {
+      "data": "The lower state sets e_0=0 and e_t=Cycle(j-1,e_{t-1},b_c) for t=1,...,gamma with b_c fixed.",
+      "justification": "This is instruction 3 with indexed names for successive values of the same variable e. For gamma=1 there is one recursive call; for gamma=2 the second input is e_1, not zero. No assertion of an exact coarse solve at a positive level is made."
+    },
+    {
+      "data": "The ascending arrow carries P_j e_gamma in R^{n_j}; the right state adds it to x and then applies nu_2 post-sweeps.",
+      "justification": "P_j has shape n_j by n_{j-1} in the Definition, and instruction 4 (lines 45-46) specifies exactly this correction followed by post-smoothing. The left state shows the nu_1 pre-sweeps of instruction 2."
+    },
+    {
+      "data": "The picture is one recursive invocation, with no commutative-square assertion or convergence assertion. Recursion is applied at level j-1, and level zero returns the exact solution for its own RHS.",
+      "justification": "Instruction 1 (line 40) fixes the base case; lines 48-50 disclaim convergence and make separate claims of termination/setup/error. The complete original instructions remain unchanged and independent of the illustration; no proof is replaced."
+    }
+  ],
+  "before_raw_sha256": "a244a4c914e360791e95d25a33cb7c5e1d2492ba85d94e6d522e7178af1b1312",
+  "after_raw_sha256": "7849dabb204c13749f35f5dac4fc027757b7e80598e4f061d91006732036656b",
+  "preservation_check": "Entire original raw carrier is an exact prefix of the final file; only final Remarks appended. Frontmatter including published status is byte-identical. Original mathematical claims, hypotheses, instructions, dependencies and sources unchanged.",
+  "evidence": {
+    "original_screenshot": {
+      "declared_path_missing": true,
+      "resolved_path": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots/alg-finite-galerkin-v-cycle--01.png",
+      "sha256": "739c653f9f77661a89835bd29982bfa80edb9ce23926ee48a30784838ed449d4",
+      "inspection": "Standalone original-resolution view; resolved within the corresponding category and matched intake hash exactly."
+    },
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-001-final/manifest.json",
+    "source_binding": {
+      "id": "alg-finite-galerkin-v-cycle",
+      "status": "published",
+      "source": "items/alg-finite-galerkin-v-cycle.md",
+      "source_sha256": "7849dabb204c13749f35f5dac4fc027757b7e80598e4f061d91006732036656b",
+      "snapshot": "snapshots/alg-finite-galerkin-v-cycle.md",
+      "html": "html/alg-finite-galerkin-v-cycle.html",
+      "html_sha256": "ef54a8828a1a42584fb6e57a429fac5e48d656b86f4c929a763315a24ad13750",
+      "reference_map_sha256": "317af683ed6b040474c946c30f6d2c4c48e2ff7ffd0130d07ad94b948bbfef78"
+    },
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-001-final/screenshots/alg-finite-galerkin-v-cycle.json",
+    "visual_checks": "Standalone original-resolution final PNG inspected. Native diagram renders three nonoverlapping outlined states and both directed transfer segments with arrowheads in the intended direction. White/pale math labels and gray strokes are visible against black; no pale fill obscures paths. This is an open directed path, so graph closing edges and open/closed point endpoints do not apply. No diagram failures or KaTeX errors in capture receipt."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-finite-galerkin-v-cycle.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-finite-galerkin-v-cycle.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-finite-galerkin-v-cycle.md",
+            "item_id": "alg-finite-galerkin-v-cycle",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-finite-galerkin-v-cycle.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnla-001 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids alg-finite-galerkin-v-cycle --out research/math-library-rendering-repairs-2026-10-23/previews/dnla-001-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody/TikZ preview, not production-route coverage. The preview reference map reports 16 unrelated parse diagnostics."
+  ]
+}

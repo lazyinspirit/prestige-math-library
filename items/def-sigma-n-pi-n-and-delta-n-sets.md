@@ -1,20 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-sigma-n-pi-n-and-delta-n-sets.json
+  precheck: n/a
 id: def-sigma-n-pi-n-and-delta-n-sets
 kind: definition
-title: "The classes Sigma_n^0, Pi_n^0, and Delta_n^0"
+title: 'The classes $\Sigma_n^0$, $\Pi_n^0$, and $\Delta_n^0$'
 status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-bounded-arithmetic-formula]
-verification:
-  audited: 2026-09-06
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Douglas Cenzer and Jeffrey Remmel, Effectively Closed Sets, Definition II.6.5"

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-nilpotent-groups-and-finite-p-groups-are-solvable.md

@@ -1,0 +1,99 @@
+{
+  "id": "thm-ordered-planar-configuration-spaces-are-aspherical",
+  "agent": "/root/rendering_repair_coordinator/braid_009",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile --02 visibly prints dollar delimiters and the TeX command in the uppercase technique banner, while body mathematics is rendered normally. The banner is a plain-text renderer surface.",
+      "action": "Replaced only the technique description with equivalent plain text: induction on n for fixed degree k ≥ 3.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "The mandatory actual-renderer proof-layout check found that the existing unnumbered closing paragraph splits step 4.1. Parent authorized a focused same-owner formatting correction.",
+      "action": "Joined the closing paragraph onto the existing final step and placed its unchanged justification list after the complete step, before the unchanged end marker. No wording, proof order, or mathematics changed.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Replaced raw TeX in the technique banner with equivalent plain text; joined the existing closing induction paragraph to proof step 4.1 and moved that step’s unchanged trailing tags to its end. All frontmatter and publication status remain byte-identical.",
+  "source_lines_after": {
+    "66": "**Proof technique:** induction on n for fixed degree k ≥ 3.",
+    "84": "4.1 **All degrees and all models.** Combining step 3.1 with step 1.5 covers every $k\\ge2$ and every base configuration in the open-disc model; applying step 1.6 gives the same vanishing for $F_n(\\mathbb C)$ and $F_n(D^2)$, and [F7] identifies the fundamental group of the open-disc and plane models with $PB_n$, so these spaces are $\\mathrm K(PB_n,1)$ in the higher-homotopy sense. The induction is on the number of strands for each fixed degree $k\\ge3$; the case $k=2$ was proved separately in advance and is not derived from any point-pushing statement. [step 1.5, step 1.6, step 3.1, F7, discharge-induction] ∎"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains: proof-technique banners do not parse inline math; this item uses a local plain-text workaround."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+      "exit_code": 1,
+      "output": "FAIL proof-step-separation: items/thm-ordered-planar-configuration-spaces-are-aspherical.md:86 Proof 4.1 [split-step] Unnumbered continuation splits the argument from its numbered row; use single newlines inside a step.\nproof-layout: 1 items, 9 steps, 1 defects"
+    },
+    {
+      "command": "Exact-byte comparison against frozen before with only the banner replacement allowed",
+      "result": "pass; all frontmatter including status: published byte-identical"
+    }
+  ],
+  "prior_report": "research/math-library-rendering-repairs-2026-10-23/adjudications/thm-ordered-planar-configuration-spaces-are-aspherical-v1.json",
+  "followup_check_rounds": {
+    "first": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 0,
+        "output": "PASS items/thm-ordered-planar-configuration-spaces-are-aspherical.md (induction)\n\n1 checked, 0 failing — all clean\n"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 0,
+        "output": "\nOK — 1 file(s): no wikilink inside math, no nested or unbalanced\ndelimiters, no multiline display block, every math span parses under the real\nKaTeX, and every frontmatter block parses under the renderer's YAML parser.\n"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 1,
+        "output": "FAIL proof-blue-tags: items/thm-ordered-planar-configuration-spaces-are-aspherical.md:84 Proof 4.1 [missing-or-invalid-tags] End the complete step with valid [justifications], optionally followed by ∎; put punctuation before the tags.\nFAIL proof-blue-tags: items/thm-ordered-planar-configuration-spaces-are-aspherical.md:84 Proof 4.1 [rendered-chip-mismatch] Rendered blue chips are missing or differ from the trailing source justifications.\nproof-layout: 1 items, 9 steps, 2 defects\n"
+      }
+    ],
+    "second": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 1,
+        "output": "FAIL items/thm-ordered-planar-configuration-spaces-are-aspherical.md: strategy-missing(discharge-induction-final)\n\n1 checked, 1 failing\n"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 0,
+        "output": "\nOK — 1 file(s): no wikilink inside math, no nested or unbalanced\ndelimiters, no multiline display block, every math span parses under the real\nKaTeX, and every frontmatter block parses under the renderer's YAML parser.\n"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 9 steps, 0 defects\n"
+      }
+    ],
+    "final": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 0,
+        "output": "PASS items/thm-ordered-planar-configuration-spaces-are-aspherical.md (induction)\n\n1 checked, 0 failing — all clean\n"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 0,
+        "output": "\nOK — 1 file(s): no wikilink inside math, no nested or unbalanced\ndelimiters, no multiline display block, every math span parses under the real\nKaTeX, and every frontmatter block parses under the renderer's YAML parser.\n"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-ordered-planar-configuration-spaces-are-aspherical.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 9 steps, 0 defects\n"
+      }
+    ]
+  },
+  "current_raw_sha256": "752c3876192ed7fea6c47c927964e26b646a1aabf8426a26f1ff5e1505c46d58"
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-rank-of-a-compact-connected-lie-group-is-well-defined.md

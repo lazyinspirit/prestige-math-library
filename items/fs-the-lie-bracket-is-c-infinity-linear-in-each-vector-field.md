@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-the-lie-bracket-is-c-infinity-linear-in-each-vector-field.json
+  precheck: pass
 id: fs-the-lie-bracket-is-c-infinity-linear-in-each-vector-field
 kind: false-statement
-title: "FALSE: the Lie bracket is C^infty-linear in each vector-field entry"
+title: "FALSE: the Lie bracket is C∞-linear in each vector-field entry"
 status: published
 origin: session
 provenance:
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

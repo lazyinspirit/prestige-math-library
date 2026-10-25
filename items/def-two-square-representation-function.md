@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-two-square-representation-function.json
+  precheck: n/a
 id: def-two-square-representation-function
 kind: definition
-title: "The two-square representation function r_2"
+title: "The two-square representation function $r_2$"
 status: published
 origin: session
 provenance:
@@ -10,9 +13,6 @@ provenance:
 deps: [def-arithmetic-function,
        def-sum-of-two-squares-representation]
 justified_by: []
-verification:
-  audited: 2026-08-31
-  precheck: n/a
 sources:
   scraped: []
   references:

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-additive-functors-from-a-small-preadditive-category-to-an-abelian-category-form-an-abelian-category.md

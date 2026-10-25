@@ -1,0 +1,54 @@
+---
+id: ex-equivariant-index-on-a-two-sphere
+kind: example
+title: "The de Rham index character of a rotating two-sphere"
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+category: quantum-field-theory-mathematics
+page: qftx-equivariant-index-examples
+dependency_level: 1
+deps:
+  - def-equivariant-elliptic-complex-index
+  - def-countable-choice
+  - thm-de-rham-cohomology-of-spheres
+  - thm-general-stokes-theorem
+dependency_roles:
+  def-equivariant-elliptic-complex-index: mathematical-premise
+  def-countable-choice: mathematical-premise
+  thm-de-rham-cohomology-of-spheres: mathematical-premise
+  thm-general-stokes-theorem: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+sources:
+  references: []
+---
+
+## Example
+
+Assume countable choice. Give $S^2=\{(x,y,z)\in\mathbb R^3:x^2+y^2+z^2=1\}$ its outward orientation and the de Rham complex. Let $T=\mathbb R/\mathbb Z$ act by rotation through angle $2\pi s$ about the $z$-axis for $[s]\in T$. For every nonidentity $g=[s]$, the fixed set consists of the north and south poles. The de Rham index character is $2$, and the two isolated fixed-point contributions are each $1$.
+
+## Facts & Assumptions
+
+**Given:** The standard two-sphere, its outward orientation, the stated rotation action, and $g=[s]\ne[0]$.
+
+[A1] Assume countable choice, as required by the sphere cohomology and Stokes suppliers. [[def-countable-choice]]
+
+[F1] The index character is the alternating trace on finite-dimensional cohomology representations. [[def-equivariant-elliptic-complex-index]]
+
+[F2] Under countable choice, $H^0_{\mathrm{dR}}(S^2)=\mathbb R$, $H^1_{\mathrm{dR}}(S^2)=0$, and $H^2_{\mathrm{dR}}(S^2)=\mathbb R$. [[thm-de-rham-cohomology-of-spheres]]
+
+[F3] For a compact oriented manifold without boundary, the integral of an exact top form is zero. [[thm-general-stokes-theorem]]
+
+## Verification
+
+1.1 The normalized area form is $\omega=(x\,dy\wedge dz+y\,dz\wedge dx+z\,dx\wedge dy)/(4\pi)$. In spherical coordinates it is $\sin\vartheta\,d\vartheta\wedge d\varphi/(4\pi)$, so its integral over $S^2$ is $1$. It is rotation-invariant. By [F3], it cannot be exact; [F2] then makes $[\omega]$ a generator of $H^2_{\mathrm{dR}}(S^2)$. Constants generate $H^0$ and are fixed by $T$, while $H^1=0$. Thus the action on both nonzero cohomology groups is trivial and [F1] gives $\chi_{\operatorname{Ind}_T(E^\bullet)}(g)=1+1=2$. [A1, F1, F2, F3, given, algebra]
+
+1.2 Write $\theta=2\pi s$. The equation $g(x,y,z)=(x,y,z)$ and $\theta\notin2\pi\mathbb Z$ force $x=y=0$, so $M^g=\{(0,0,1),(0,0,-1)\}$. At either pole, $dg$ on the tangent plane is the rotation matrix $R_\theta$, hence $|\det_{\mathbb R}(I-dg)|=\det(I-R_\theta)=(1-\cos\theta)^2+\sin^2\theta=2-2\cos\theta>0$. [given, algebra]
+
+2.1 The fiber complex at a pole is $\Lambda^\bullet T_p^*S^2$, and the induced fiber action has eigenvalues $e^{i\theta}$ and $e^{-i\theta}$ on $T_p^*S^2$. Its alternating trace is $1-(e^{i\theta}+e^{-i\theta})+1=2-2\cos\theta$, equal to the denominator in step 1.2. Each local quotient is therefore $1$, and summing the two fixed-point contributions gives $2$, the character computed in step 1.1. [F1, step 1.1, step 1.2, algebra] ∎

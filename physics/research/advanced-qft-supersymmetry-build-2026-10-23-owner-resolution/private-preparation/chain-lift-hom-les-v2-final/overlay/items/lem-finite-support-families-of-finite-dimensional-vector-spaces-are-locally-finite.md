@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-support-families-of-finite-dimensional-vector-spaces-are-locally-finite.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup.md

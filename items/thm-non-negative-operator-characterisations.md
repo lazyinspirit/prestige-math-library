@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-non-negative-operator-characterisations.json
+  precheck: pass
 id: thm-non-negative-operator-characterisations
 kind: theorem
-title: "A non-negative operator is equivalently self-adjoint with nonnegative eigenvalues, a positive semidefinite matrix in an orthonormal basis, or an operator of the form S^*S"
+title: "A non-negative operator is equivalently self-adjoint with nonnegative eigenvalues, a positive semidefinite matrix in an orthonormal basis, or an operator of the form $S^*S$"
 status: published
 origin: session
 provenance:
@@ -11,9 +14,6 @@ deps: [def-non-negative-and-positive-operator, prop-operator-positivity-agrees-w
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  repair: research/quantum-computing-algorithms-60-2026-10-15-owner-step4-published-alerts/non-negative-operator/repair-receipt.json
 sources:
   scraped: []
   references:

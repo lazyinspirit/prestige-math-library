@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-minimal-parabolic-relative-canonical-line-bundle-root-weight.md

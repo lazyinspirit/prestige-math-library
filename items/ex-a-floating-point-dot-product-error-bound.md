@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-floating-point-dot-product-error-bound.json
+  precheck: pass
 id: ex-a-floating-point-dot-product-error-bound
 kind: example
-title: "A short floating-point dot product obeys the gamma_n error bound"
+title: "A short floating-point dot product obeys the γₙ error bound"
 status: published
 origin: pipeline
 provenance:
@@ -10,9 +13,6 @@ provenance:
 deps: [thm-floating-point-dot-product-componentwise-and-normwise-error-bounds]
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-08-29
-  precheck: pass
 sources:
   scraped: []
   references:

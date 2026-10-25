@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-instanton-surgery-triangle-data.json
+  precheck: n/a
 id: def-instanton-surgery-triangle-data
 kind: definition
 title: "Candidate instanton surgery-triangle input data"
@@ -26,14 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/0807.4891"
     - title: "Kimihiko Motegi, Dehn surgery on knots: survey, pp. 7–10"
       url: "https://www.math.tsukuba.ac.jp/~tange/diftop22/Dehn_surgery_survey.pdf"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -63,6 +59,30 @@ The **candidate instanton surgery-triangle input data** consist of a principal $
 ## Remarks
 
 The ordinary closed-manifold $SO(3)$ theory in this definition is distinct from the singular earring complex and sutured closure used for Khovanov detection. No Khovanov or singular-instanton rank detector is a logical input to Property P in the proof route considered here.
+
+For a concrete surgery-triad schematic, take representatives $v_0=(1,0)$, $v_1=(0,1)$ and $v_\infty=(-1,-1)$ in the ordered coordinate basis $(\mu,\lambda)$. Each cyclic determinant is $+1$, so all three geometric intersection numbers are one. The arrows on the left are vectors in the coordinate plane, not oriented curves on the boundary torus; the slopes themselves are unoriented. The subscripts label the cyclic positions, not surgery coefficients. The right-hand arrows denote the three 2-handle cobordisms from the definition, not Floer maps or an asserted exact sequence.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.05]
+  \draw[gray!50,->] (-1.6,0) -- (1.7,0);
+  \draw[gray!50,->] (0,-1.5) -- (0,1.7);
+  \draw[blue,thick,->] (0,0) -- (1,0)
+    node[below right] {$v_0=(1,0)$};
+  \draw[blue,thick,->] (0,0) -- (0,1)
+    node[above] {$v_1=(0,1)$};
+  \draw[blue,thick,->] (0,0) -- (-1,-1)
+    node[below] {$v_\infty=(-1,-1)$};
+  \fill (0,0) circle (1.2pt);
+  \node at (0,-2) {slope representatives};
+  \node (Y0) at (5,1.2) {$Y_0=E_K(s_0)$};
+  \node (Y1) at (7,-1.1) {$Y_1=E_K(s_1)$};
+  \node (Yi) at (3,-1.1) {$Y_\infty=E_K(s_\infty)$};
+  \draw[thick,->] (Y0) -- (Y1);
+  \draw[thick,->] (Y1) -- (Yi);
+  \draw[thick,->] (Yi) -- (Y0);
+  \node at (5,-2) {2-handle cobordisms};
+\end{tikzpicture}
+```
 
 ## Remarks references
 

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-greedy-set-cover-is-an-h-n-approximation.json
+  precheck: pass
 id: thm-greedy-set-cover-is-an-h-n-approximation
 kind: theorem
-title: "Weighted greedy set cover has approximation factor H_n"
+title: "Weighted greedy set cover has approximation factor $H_n$"
 status: published
 origin: pipeline
 deps:
@@ -20,13 +23,7 @@ sources:
       url: "https://designofapproxalgs.com/book.pdf"
     - title: "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §2.1 Theorem 3, PDF pp. 2–3"
       url: "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement

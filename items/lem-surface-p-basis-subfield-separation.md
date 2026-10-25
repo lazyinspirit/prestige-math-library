@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-surface-p-basis-subfield-separation.json
+  precheck: pass
 id: lem-surface-p-basis-subfield-separation
 kind: lemma
 title: "Surface p basis subfield separation"
@@ -19,12 +22,7 @@ sources:
   references:
     - title: "The Stacks Project, More on Algebra, Lemmas 47.2–47.5 (p-bases, subfield intersections, and the power-series-ring application)"
       url: "https://stacks.math.columbia.edu/download/more-algebra.pdf"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -35,7 +33,7 @@ Assume AC. Let $k$ have characteristic $p>0$, $A=k[\![X_1,\ldots,X_n]\!][Y_1,\ld
 
 **Given:** A field $k$ of characteristic $p>0$, the ring $A=k[\![X_1,\dots,X_n]\!][Y_1,\dots,Y_m]$ with fraction field $K$, and a $p$-basis $(b_i)_{i\in I}$ of $k/k^p$ whose restricted monomials of finite support form a $k^p$-basis of $k$.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

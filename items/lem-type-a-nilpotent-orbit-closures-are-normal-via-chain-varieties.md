@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-type-a-nilpotent-orbit-closures-are-normal-via-chain-varieties.json
+  precheck: pass
 id: lem-type-a-nilpotent-orbit-closures-are-normal-via-chain-varieties
 kind: lemma
 title: "Type-A nilpotent orbit closures are normal via chain varieties"
@@ -30,8 +33,7 @@ sources:
     - title: "W. Borho and H. Kraft, Ueber Bahnen und deren Deformationen bei linearen Aktionen reduktiver Gruppen, Comment. Math. Helv. 54 (1979) 61-104"
       url: "https://doi.org/10.1007/BF02566256"
       locator: "Section 3: dim O_mu = N^2 - sum_i (2i-1) mu_i for a nilpotent orbit of type mu and the parity of codimensions of nilpotent orbit closures; quoted here only in the form already carried by the published orbit-dimension item of the library."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -113,3 +115,31 @@ codimension is $+\infty$.
 - The chain scheme $Z$ parametrizes compatible alternating-string data: its smooth open part dominates the conjugacy orbit of $e$ through the end map $\theta$, and the invariant quotient collapses the chain data to the orbit closure. No rational-singularity or Hochster-Roberts input is used.
 
 - The nonsmooth-locus estimate of step 6.1 is the ab-string computation of the source: the strata are read off from alternating letter strings, whose graded Hom dimension counts give the correction terms $\Delta_i$. Non-top strata may be smooth divisors; it is the complement of $Z^\circ$ that has codimension at least two. The singleton-string case is retained in the five-placement induction.
+
+
+For $2\le i<t$, the two backtracking paths based at $U_i$ have the
+same composite. The local picture of the chain is
+
+```tikzcd
+\begin{tikzcd}[column sep=huge, font=\Large, labels={font=\large}]
+U_{i-1} \arrow[r, "A_{i-1}", shift left=2] & U_i \arrow[l, "B_{i-1}", shift left=2] \arrow[r, "A_i", shift left=2] & U_{i+1} \arrow[l, "B_i", shift left=2]
+\end{tikzcd}
+```
+
+Here $B_i\circ A_i=A_{i-1}\circ B_{i-1}$ in
+$\operatorname{End}(U_i)$. At the first vertex, the boundary relation is
+$B_1\circ A_1=0$ in $\operatorname{End}(U_1)$. For every $t\ge2$, the
+terminal endomorphism instead traverses the last link in the order
+
+```tikzcd
+\begin{tikzcd}[column sep=huge, font=\Large, labels={font=\large}]
+U_t \arrow[r, "B_{t-1}"] \arrow[rr, bend right=35, "\theta"'] & U_{t-1} \arrow[r, "A_{t-1}"] & U_t
+\end{tikzcd}
+```
+
+Thus $\theta=A_{t-1}\circ B_{t-1}$ lies in
+$\operatorname{End}(U_t)$, whereas $B_{t-1}\circ A_{t-1}$ lies in
+$\operatorname{End}(U_{t-1})$. The first picture has an interior vertex
+only when $t\ge3$; the terminal picture also applies when $t=2$.
+For $t=0,1$ there are no links, as in step 1.1. These pictures illustrate
+the defining equations and end map; the proof above is independent of them.

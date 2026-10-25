@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-kernel-of-the-gelfand-transform-is-the-radical.md

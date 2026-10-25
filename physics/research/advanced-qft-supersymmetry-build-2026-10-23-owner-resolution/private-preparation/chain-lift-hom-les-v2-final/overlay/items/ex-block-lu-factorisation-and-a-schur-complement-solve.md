@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-block-lu-factorisation-and-a-schur-complement-solve.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-na-two-triangle-hybrid-static-condensation.json
+  precheck: pass
 id: ex-na-two-triangle-hybrid-static-condensation
 kind: example
 title: Two-triangle hybrid RT0 local elimination
@@ -32,12 +35,7 @@ sources:
       url: https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf
       locator: "Complete textbook, Chapter 7 §7.2: hybridization and static
         condensation."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Statement
@@ -72,17 +70,19 @@ where $\theta_1(x,y)=(x-1,y)$ and $\theta_2(x,y)=(x,y-1)$. The local elimination
 ## Mesh diagram
 
 ```tikz
-\begin{tikzpicture}[scale=2]
+\begin{tikzpicture}[scale=5]
   \coordinate (A) at (0,0); \coordinate (B) at (1,0);
   \coordinate (C) at (1,1); \coordinate (D) at (0,1);
   \draw[thick] (A)--(B)--(C)--(D)--cycle;
   \draw[thick] (A)--(C);
-  \node at (.72,.25) {$K_1$, $f=1$};
-  \node at (.25,.72) {$K_2$, $f=-1$};
-  \node[above right] at (.52,.52) {$\lambda$};
-  \draw[->,blue] (.72,.38)--(.56,.22) node[below right] {$u_1$};
-  \draw[->,red] (.28,.62)--(.44,.78) node[above left] {$u_2$};
+  \node at (.74,.22) {$K_1$};
+  \node at (.74,.13) {$f=1$};
+  \node at (.24,.94) {$K_2$};
+  \node at (.24,.85) {$f=-1$};
+  \node[above left] at (.5,.5) {$\lambda$};
+  \draw[->,blue] (.78,.35)--(.692,.49) node[right] {$u_1$};
+  \draw[->,red] (.35,.68)--(.21,.808) node[below left] {$u_2$};
 \end{tikzpicture}
 ```
 
-The shared diagonal is the only interior facet. Flux arrows are schematic; the proof computes their exact integrated outward values as $1/2$ and $-1/2$.
+The shared diagonal is the only interior facet. The arrows show the directions of $u_1$ at $(0.78,0.35)$ and $u_2$ at $(0.35,0.68)$; each displacement is $0.8$ times the field at its tail. They are field samples, not outward normals. On the diagonal, the cell-outward normals are $n_1=(-1,1)/\sqrt2$ and $n_2=(1,-1)/\sqrt2$, so the integrated outward fluxes are $1/2$ from $K_1$ and $-1/2$ from $K_2$, as computed in the proof.

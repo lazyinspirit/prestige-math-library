@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-p-local-subgroup.json
+  precheck: n/a
 id: def-p-local-subgroup
 kind: definition
 title: "p-local subgroup"
@@ -8,12 +11,6 @@ deps: [def-normalizer-of-a-subgroup]
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -23,4 +20,4 @@ sources:
 
 ## Definition
 
-A p-local subgroup is N_G(P) for a nontrivial p-subgroup P of G.
+A $p$-local subgroup is $N_G(P)$ for a nontrivial $p$-subgroup $P$ of $G$.

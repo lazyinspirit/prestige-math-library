@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-root-inversions-and-chambers-in-i2-5-a2-and-i2-infinity.json
+  precheck: pass
 id: ex-cg-root-inversions-and-chambers-in-i2-5-a2-and-i2-infinity
 kind: example
 title: "Roots, inversions and chamber images in $I_2(5)$, $A_2$ and infinite dihedral type"
@@ -22,13 +25,7 @@ sources:
     - title: "Anders Bjorner and Francesco Brenti, Combinatorics of Coxeter Groups (Graduate Texts in Mathematics 231, Springer 2005; author-hosted full PDF)"
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "S4.4, printed pp. 101-105 (Definition 4.4.1 and the root system pictures of Example 4.4.2, Lemma 4.4.3, Proposition 4.4.4, Propositions 4.4.5-4.4.6); S4.2, printed pp. 93-97 (Proposition 4.2.5, Theorem 4.2.7); read in the extracted full text; exercises excluded"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -99,3 +96,94 @@ of cardinalities $2k=\ell((st)^k)$ and $2k+1=\ell((st)^ks)$. The chambers $wC^\c
 5.1 **The case $I_2(5)$: the inversion sets $N(u_k)$, $5\le k<10$.** Since $N(u_5)=\Phi_+$ by 4.1, the reflection $\rho(u_5)$ maps $\Phi_+$ bijectively onto $\Phi_-$ (as $N(u_5)=\Phi_+$ means $\rho(u_5)\Phi_+\subseteq\Phi_-$, and $\rho(u_5)$ induces a bijection of $\Phi$); hence for $\alpha\in\Phi_+$: $\alpha\in N(u_5w)$ if and only if $\rho(w)\alpha\in\Phi_+$, because $\rho(u_5)$ maps $\Phi_+$ onto $\Phi_-$ and $\Phi_-$ onto $\Phi_+$. Comparing with the definition of $N(w)$ this gives $N(u_5w)=\Phi_+\setminus N(w)$ for every $w\in W$. For $5\le k<10$ one has $u_k=u_5\,u_{k-5}'$, where $u_j'$ is the alternating word of length $j$ beginning with $t$; hence $N(u_k)=\Phi_+\setminus N(u_{k-5}')$. In particular $N(u_6)=\Phi_+\setminus\{e_t\}$ and, using the recursion of [F3] once more for $u_2'=ts$ (read with the roles of $s$ and $t$ exchanged, $\ell(u_2')=2>\ell(t)=1$), $N(u_2')=\{e_s\}\sqcup\rho(s)N(u_1')=\{e_s,\ e_t+\phi e_s\}$, so that $N(u_7)=\Phi_+\setminus N(u_2')=\{e_t,\ e_s+\phi e_t,\ \phi(e_s+e_t)\}$, of cardinality $3=\ell(u_7)$. [F3, F5, step 4.1, algebra]
 
 6.1 **The case $I_2(\infty)$: the chambers.** Let $\delta(f):=f(e_s)+f(e_t)$ for $f\in V^*$, so that $\delta(f)=f(u)$; since $\rho(w)u=u$ for all $w$ by 1.3, the value $\delta(f)$ is preserved by the dual action: $\delta(w\cdot f)=(w\cdot f)(u)=f(\rho(w)^{-1}u)=f(u)=\delta(f)$. On $L:=\{f:\delta(f)=1\}$ with coordinate $y_s=f(e_s)$, $C^\circ$ has trace $(0,1)$. By [F1] and the dual action in [F6], $s$ acts by $y_s\mapsto-y_s$ and $t$ by $y_s\mapsto2-y_s$; hence $st$ acts by translation $y_s\mapsto y_s-2$. It follows that $(st)^kC^\circ\cap L=(-2k,1-2k)$ and $(st)^ksC^\circ\cap L=(-2k-1,-2k)$ for every integer $k$. These are all intervals $(j,j+1)$, and all group elements are alternating words by [F5] (cancelling adjacent equal letters); therefore these are exactly the open chamber traces, and no integer point belongs to one. Every chamber is a nonempty cone contained in $\{\delta>0\}$, since this holds for $C^\circ$ and $\delta$ is invariant. Each chamber $K$ equals the cone $\{\lambda x:\lambda>0,\ x\in K\cap L\}$ over its trace, because for $f\in K$ its normalisation $f/\delta(f)$ lies in $K\cap L$ and $f=\delta(f)\,(f/\delta(f))$ with $\delta(f)>0$; hence the chambers are exactly the cones over the intervals $(j,j+1)$. Finally $H_{e_s}\cap L$ is the point with $y_s=0$, and $H_{e_t}\cap L$ is the point with $y_s=1$, because $y_t=1-y_s$ on $L$. Together with 1.1-1.3, 2.1-2.5, 3.1-3.2, 4.1 and 5.1 this verifies all the claims of (i), (ii) and (iii). [F1, F5, F6, step 1.3, algebra] ∎
+
+
+## Remarks
+
+The finite pictures use the evaluation coordinates $(y_s,y_t)=(f(e_s),f(e_t))$ on $V^*$, with $y_s$ horizontal and $y_t$ vertical. A root $ae_s+be_t$ defines the wall $ay_s+by_t=0$; the lines drawn are walls in $V^*$, not root vectors in $V$. Sector number $k$ means $u_kC^\circ$. For $A_2$ the wall equations are $y_s=0$, $y_t=0$ and $y_s+y_t=0$; for $I_2(5)$ they are $y_s=0$, $y_t=0$, $\phi y_s+y_t=0$, $y_s+\phi y_t=0$ and $y_s+y_t=0$. The last equation corresponds to the unit root $\phi(e_s+e_t)$ in the latter case. These coordinate drawings do not measure angles or $B$-norms: both Coxeter systems have rank two, while the word length of sector $k$ is $\min(k,2m-k)$.
+
+```tikz
+\begin{tikzpicture}[scale=0.95]
+\node at (0,3.5) {$A_2\quad (y_s,y_t)$};
+\draw[thick] (-2.80000,-0.00000) -- (2.80000,0.00000);
+\draw[thick] (-0.00000,-2.80000) -- (0.00000,2.80000);
+\draw[thick] (1.97990,-1.97990) -- (-1.97990,1.97990);
+\node at (1.44957,1.44957) {$0$};
+\node at (-0.78450,1.89395) {$1$};
+\node at (-1.89395,0.78450) {$2$};
+\node at (-1.44957,-1.44957) {$3$};
+\node at (0.78450,-1.89395) {$4$};
+\node at (1.89395,-0.78450) {$5$};
+\node[above] at (0,2.8) {$H_{e_s}$};
+\node[right] at (2.8,0) {$H_{e_t}$};
+\fill (0,0) circle (1pt);
+\end{tikzpicture}
+```
+```tikz
+\begin{tikzpicture}[scale=0.95]
+\node at (0,3.5) {$I_2(5)\quad (y_s,y_t)$};
+\draw[thick] (-2.80000,-0.00000) -- (2.80000,0.00000);
+\draw[thick] (-0.00000,-2.80000) -- (0.00000,2.80000);
+\draw[thick] (1.47205,-2.38182) -- (-1.47205,2.38182);
+\draw[thick] (1.97990,-1.97990) -- (-1.97990,1.97990);
+\draw[thick] (2.38182,-1.47205) -- (-2.38182,1.47205);
+\node at (1.44957,1.44957) {$0$};
+\node at (-0.56020,1.97197) {$1$};
+\node at (-1.27220,1.60749) {$2$};
+\node at (-1.60749,1.27220) {$3$};
+\node at (-1.97197,0.56020) {$4$};
+\node at (-1.44957,-1.44957) {$5$};
+\node at (0.56020,-1.97197) {$6$};
+\node at (1.27220,-1.60749) {$7$};
+\node at (1.60749,-1.27220) {$8$};
+\node at (1.97197,-0.56020) {$9$};
+\node[above] at (0,2.8) {$H_{e_s}$};
+\node[right] at (2.8,0) {$H_{e_t}$};
+\fill (0,0) circle (1pt);
+\end{tikzpicture}
+```
+
+The cyclic labels agree with Verification 2.2 and 1.2. Wall separation for $wC^\circ$ records $N(w^{-1})$, whereas the inversion sets displayed in the Example are $N(w)=\{\alpha\in\Phi_+:\rho(w)\alpha\in\Phi_-\}$. For example, the walls separating sector $2=stC^\circ$ from sector $0$ have roots $e_s,e_s+e_t$ in $A_2$, and $e_s,e_t+\phi e_s$ in $I_2(5)$; these are $N(ts)$, rather than $N(st)$. Indeed, for $f=w\cdot g$ with $g\in C^\circ$, the sign of $f(\alpha)=g(\rho(w)^{-1}\alpha)$ is negative precisely when $\alpha\in N(w^{-1})$.
+
+For $I_2(\infty)$ the following is a finite window of the affine slice $L=\{f:f(u)=1\}$, with coordinate $x=y_s$ and $y_t=1-x$. The dots continue in both directions. The simple walls meet $L$ at $0$ and $1$; the other integer points are traces of other root walls. The labels name the chamber traces, not roots. Here $s:x\mapsto-x$, $t:x\mapsto2-x$ and $st:x\mapsto x-2$, as in Verification 6.1.
+
+```tikz
+\begin{tikzpicture}[x=1.65cm,y=1cm]
+\draw[->,thick] (-2.5,0) -- (3.5,0) node[right] {$x$};
+\node at (-2.7,0) {$\cdots$};
+\node at (3.8,0) {$\cdots$};
+\fill (-2,0) circle (1.5pt);\node[below] at (-2,-0.08) {$-2$};
+\fill (-1,0) circle (1.5pt);\node[below] at (-1,-0.08) {$-1$};
+\fill (0,0) circle (1.5pt);\node[below] at (0,-0.08) {$0$};
+\fill (1,0) circle (1.5pt);\node[below] at (1,-0.08) {$1$};
+\fill (2,0) circle (1.5pt);\node[below] at (2,-0.08) {$2$};
+\fill (3,0) circle (1.5pt);\node[below] at (3,-0.08) {$3$};
+\node[above] at (-1.5,0.2) {$stC^\circ$};
+\node[above] at (-0.5,0.2) {$sC^\circ$};
+\node[above] at (0.5,0.2) {$C^\circ$};
+\node[above] at (1.5,0.2) {$tC^\circ$};
+\node[above] at (2.5,0.2) {$tsC^\circ$};
+\node[below] at (0,-0.6) {$H_{e_s}\cap L$};
+\node[below] at (1,-1.1) {$H_{e_t}\cap L$};
+\end{tikzpicture}
+```
+
+In the separate coefficient plane $V$, the two positive-root strings are $(k+1,k)=e_s+ku$ and $(k,k+1)=e_t+ku$ for integers $k\ge0$. The next picture shows $k=0,1,2$ and their direction of continuation $u=(1,1)$. It is not a Euclidean unit-circle picture: $B$ has rank one, $u$ is radical, and every displayed root still has $B$-norm one. The Coxeter system has rank two. Inversion cardinality is word length, as verified in 2.5, and is unrelated to the plotted Euclidean distance of a root from the origin.
+
+```tikz
+\begin{tikzpicture}[scale=1.25]
+\draw[->] (0,0) -- (4,0) node[right] {$e_s$};
+\draw[->] (0,0) -- (0,4) node[above] {$e_t$};
+\draw[dashed,->] (1,0) -- (3.5,2.5);
+\draw[dashed,->] (0,1) -- (2.5,3.5);
+\fill (1,0) circle (1.5pt) node[below] {$e_s$};
+\fill (2,1) circle (1.5pt) node[right] {$e_s+u$};
+\fill (3,2) circle (1.5pt) node[right] {$e_s+2u$};
+\fill (0,1) circle (1.5pt) node[left] {$e_t$};
+\fill (1,2) circle (1.5pt) node[left] {$e_t+u$};
+\fill (2,3) circle (1.5pt) node[left] {$e_t+2u$};
+\draw[->,thick] (0,0) -- (1,1) node[right] {$u$};
+\end{tikzpicture}
+```
+
+All pictures illustrate the computations above; the rigorous verification is independent of them.

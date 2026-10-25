@@ -1,0 +1,90 @@
+{
+  "id": "cex-a-subgraph-copy-need-not-be-induced",
+  "agent": "/root/rendering_repair_coordinator/comb_015",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "The original-resolution flagged tile prints raw draw/node commands under Remarks. Opening fence includes TikZ source on its info-string line, and closing fence is appended to end{tikzpicture}; these are not a valid standalone fenced diagram.",
+      "action": "Put opening and closing fence delimiters on separate lines.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other:tikz-cycle-omits-closing-edge",
+      "verdict": "confirmed",
+      "reason": "After fence repair, independently compiled standalone SVG and original-resolution PNG omitted edge 02 from the left graph: node-to-node chained cycle compiled to a degenerate final M6.175-23.7Z. This incorrectly depicted the object captioned K3 as P3.",
+      "action": "Replace --cycle by --(k0), explicitly drawing the original intended closing edge 20. Final compiled SVG contains its horizontal segment; final screenshot shows all three K3 edges.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Repair standalone TikZ fence parsing and explicitly close K3 through vertex k0. Preserve the original vertices 0,1,2, intended edge sets, deletion arrow, dashed deleted edge, captions, all claims/proof/dependencies/sources and published status.",
+  "source_lines_after": [
+    50,
+    51,
+    53,
+    55,
+    56
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": true,
+  "diagram_math_checks": [
+    {
+      "check": "Complete graph",
+      "objects": "Left graph V={0,1,2}, E={01,12,20}.",
+      "justification": "def-standard-complete-bipartite-path-and-cycle-graphs defines K3 by all unordered pairs. Explicit closed path k0-k1-k2-k0 now renders each of its three edges exactly once."
+    },
+    {
+      "check": "Edge deletion",
+      "objects": "Right graph V={0,1,2}, E={01,12}; gray dashed 02 labelled deleted is excluded from the graph.",
+      "justification": "The solid p0-p1-p2 chain is the local definition of P3. def-subgraph-induced-subgraph-and-spanning-subgraph permits deleting 02 while retaining every vertex. The comparison arrow is an operation annotation, not a graph edge or morphism."
+    },
+    {
+      "check": "Failure of inducedness",
+      "objects": "Endpoints 0 and 2 are nonadjacent in P3 but adjacent in K3.",
+      "justification": "def-induced-embedding-and-induced-copy requires preservation of nonadjacency. Every injection between these three-vertex sets is bijective; all images in K3 are adjacent, as Counterexample step 1.2 states. Thus the right caption not induced refers to its inclusion in K3."
+    },
+    {
+      "check": "Crossings and independence",
+      "objects": "Both planar vertex layouts use two rising/falling sides; K3 alone has the solid horizontal base. No edges cross at additional vertices.",
+      "justification": "The deletion arrow lies strictly between the two graph drawings and the right dashed guide is explicitly labelled deleted. Counterexample steps 1.1,1.2,2.1 and Facts are byte-identical and establish the claim independently of the figure."
+    }
+  ],
+  "proof_independent": true,
+  "checks": [
+    {
+      "name": "proof-layout",
+      "chunk_id": "20befd",
+      "wall_time_seconds": 0.467470443,
+      "exit_code": 0,
+      "original_token_count": 11,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects\n"
+    },
+    {
+      "name": "precheck",
+      "chunk_id": "ce8447",
+      "wall_time_seconds": 0.090942867,
+      "exit_code": 0,
+      "original_token_count": 71,
+      "output": "{\n  \"summary\": {\n    \"files\": 1,\n    \"checked\": 1,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/cex-a-subgraph-copy-need-not-be-induced.md\",\n      \"item_id\": \"cex-a-subgraph-copy-need-not-be-induced\",\n      \"status\": \"pass\",\n      \"strategy\": \"direct\"\n    }\n  ]\n}\n"
+    },
+    {
+      "name": "rendercheck",
+      "chunk_id": "5dbcdd",
+      "wall_time_seconds": 0.000012657,
+      "exit_code": 0,
+      "original_token_count": 14,
+      "output": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 1\n}\n"
+    }
+  ],
+  "local_rendering": {
+    "command": "env TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids cex-a-subgraph-copy-need-not-be-induced --out research/math-library-rendering-repairs-2026-10-23/diagram-checks/cex-a-subgraph-copy-need-not-be-induced/final-preview",
+    "result": "Actual local SSR TikZ compilation completed; one TikZ figure, zero diagram failures and zero KaTeX errors. Final full tile and standalone diagram PNG inspected with view_image detail original. Compiled SVG independently checked for both blue edge paths; K3 base exists and P3 base is only dashed.",
+    "artifacts": "research/math-library-rendering-repairs-2026-10-23/diagram-checks/cex-a-subgraph-copy-need-not-be-induced/final-preview",
+    "limitations": "Local ItemBody preview, not production route. Reference map records 32 unrelated parse diagnostics. Initial compiled evidence retained in parent diagram-checks directory."
+  },
+  "remaining_issues": []
+}

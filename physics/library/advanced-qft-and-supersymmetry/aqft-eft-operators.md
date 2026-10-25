@@ -1,0 +1,20 @@
+---
+page: aqft-eft-operators
+title: Physical EFT Operator Contracts and Power Counting
+status: "published"
+library: physics
+category: advanced-qft-and-supersymmetry
+kind: A
+companion: aqft-eft-operators-examples
+order: 981
+items:
+  - def-aqft-operator-basis-physical-data
+examples: []
+requires:
+  - aqft-eft-foundations
+  - qftx-gauge-geometry
+  - qftx-eft-operator-quotients
+  - countability-and-uncountability
+  - gr-fx13-tetrads-and-lorentz-spin
+page_layout: compact-v1
+---

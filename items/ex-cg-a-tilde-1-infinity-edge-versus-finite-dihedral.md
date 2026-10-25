@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-a-tilde-1-infinity-edge-versus-finite-dihedral.json
+  precheck: pass
 id: ex-cg-a-tilde-1-infinity-edge-versus-finite-dihedral
 kind: example
 title: "The A-tilde 1 infinity edge, separated from finite dihedral families and from the 4-edge"
@@ -29,12 +32,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: "2026-10-08"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups (first-edition author manuscript, Princeton University Press, 2008; 600 PDF pages)"
@@ -123,3 +120,29 @@ Let $S=\{s,t\}$, let $m(s,t)=\infty$, let $V=\mathbb R^S$ with coordinate basis 
 2.2 For $m(s,t)=4$, the finite diagram has one label-$4$ edge, whereas $\tilde A_1$ has one label-$\infty$ edge by [F6]; these labelled graphs are distinct. Xiong's low-rank coincidence [F16] matches the two names $B_2$ and $C_2$ for this finite type. Their rank-two affine extensions have one additional label-$4$ edge by [F10], giving the three-vertex path $(4,4)=\tilde B_2=\tilde C_2$, not $\tilde A_1$. [F6,F10,F16,step 1.5,algebra]
 
 3.1 The matrix entry $B(e_s,e_t)=-1$ for $m(s,t)=\infty$ is the defining convention in [F1]. For any $\varepsilon>0$, [F20] gives $\varepsilon/\pi>0$, so apply [F19] to choose $N\ge1$ with $1/N<\varepsilon/\pi$. If $m\ge N$, then $0<N/m\le1$, so $0<\pi/m\le\pi/N<\varepsilon$. By the Lipschitz bound [F18] and $\cos0=1$ [F12], $|\cos(\pi/m)-1|\le\pi/m<\varepsilon$; hence $\lim_{m\to\infty}\cos(\pi/m)=1$, confirming that the matrix convention is the numerical limit. The infinite label still imposes no finite relator by [F3]. By [F15], Davis's cited Euclidean simplex criterion assumes every Coxeter label is finite, so the rank-one $\infty$-edge case is established directly here. No choice principle is used. [F1,F3,F12,F15,F18,F19,F20,algebra] ∎
+
+
+## Remarks
+
+The three labelled graphs below display the distinction in (iv). Edges are undirected Coxeter edges, not arrows or multiple bonds; the bottom row uses the path-order vertex names of the standard affine diagram. Its two endpoints are not adjacent, so their Coxeter label is $2$.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[anchor=east] at (-0.7,0) {$\tilde A_1$};
+\node[circle,draw,inner sep=0pt,minimum size=6pt,label=below:$s$] (a) at (0,0) {};
+\node[circle,draw,inner sep=0pt,minimum size=6pt,label=below:$t$] (b) at (2,0) {};
+\draw (a) -- node[above] {$\infty$} (b);
+\node[anchor=east] at (-0.7,-1.4) {$B_2=C_2=I_2(4)$};
+\node[circle,draw,inner sep=0pt,minimum size=6pt,label=below:$s$] (c) at (0,-1.4) {};
+\node[circle,draw,inner sep=0pt,minimum size=6pt,label=below:$t$] (d) at (2,-1.4) {};
+\draw (c) -- node[above] {$4$} (d);
+\node[anchor=east] at (-0.7,-2.8) {$\tilde B_2=\tilde C_2$};
+\node[circle,draw,inner sep=0pt,minimum size=6pt,label=below:$v_0$] (e) at (0,-2.8) {};
+\node[circle,draw,inner sep=0pt,minimum size=6pt,label=below:$v_1$] (f) at (2,-2.8) {};
+\node[circle,draw,inner sep=0pt,minimum size=6pt,label=below:$v_2$] (g) at (4,-2.8) {};
+\draw (e) -- node[above] {$4$} (f);
+\draw (f) -- node[above] {$4$} (g);
+\end{tikzpicture}
+```
+
+The $\infty$ label imposes no finite product relator, whereas each $4$ label imposes a fourth-power relator. These are Coxeter diagrams, so the common $B_2/C_2$ names do not encode the two dual root-length assignments. The proof above establishes the claims independently of this illustration.

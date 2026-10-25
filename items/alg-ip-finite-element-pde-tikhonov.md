@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-ip-finite-element-pde-tikhonov.json
+  precheck: n/a
 id: alg-ip-finite-element-pde-tikhonov
 kind: algorithm
 title: Finite-budget finite-element PDE Tikhonov inversion
@@ -23,14 +26,7 @@ sources:
       url: "https://arxiv.org/pdf/2503.13170"
     - title: "Hannes Meinlschmidt, Optimization with Partial Differential Equations, complete lecture notes"
       url: "https://hannes.meinlschmidt.eu/lecture_notes/pde_opt.pdf"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -74,3 +70,42 @@ The global solve budget counts all primal and adjoint solves used both at iterat
 [Fernando Gaspoz, Christian Kreuzer, Andreas Veeser, and Winnifried Wollner, *A Posteriori Error Analysis for Optimization with PDE Constraints*](https://arxiv.org/pdf/2503.13170)
 
 [Hannes Meinlschmidt, *Optimization with Partial Differential Equations*, complete lecture notes](https://hannes.meinlschmidt.eu/lecture_notes/pde_opt.pdf)
+
+
+## Remarks
+
+The flowchart records the order of the numbered stages. Downward arrows mean that the stage has returned no terminal status; rightward arrows collect precisely that stage's possible terminal statuses, with the conditions and their order specified in the Definition. The return arrow is taken only after accepting the first admissible, changed projected trial with $u_h(q_j)\le\ell_h(q)$; then $q:=q_j$ and the outer index increases by one. Rejected trials advance only the inner index, within its finite budget. The diagram is an illustration; the procedure and its certificate guarantees are independent of it.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node[draw,align=center,text width=5cm] (initial) at (0,0) {Step 1: initial admissibility\\set $q:=q_{\rm init}$ if admissible};
+\node[draw,align=center,text width=4cm] (exit1) at (6,0) {inadmissible};
+\node[draw,align=center,text width=5cm] (outer) at (0,-1.7) {Step 2: outer admissibility\\and remaining global budgets};
+\node[draw,align=center,text width=4cm] (exit2) at (6,-1.7) {inadmissible\\budget-exhausted};
+\node[draw,align=center,text width=5cm] (solve) at (0,-3.4) {Step 3: state/adjoint solve\\validate all certificates};
+\node[draw,align=center,text width=4cm] (exit3) at (6,-3.4) {linear-solve-failed};
+\node[draw,align=center,text width=5cm] (stationary) at (0,-5.1) {Step 4: exact projection\\test $\widetilde\rho+\varepsilon_g\le\tau_g$};
+\node[draw,align=center,text width=4cm] (exit4) at (6,-5.1) {budget-exhausted\\converged};
+\node[draw,align=center,text width=5cm] (data) at (0,-6.8) {Step 5: discrepancy test\\ $d^+\le\kappa\delta$};
+\node[draw,align=center,text width=4cm] (exit5) at (6,-6.8) {discrepancy-stopped};
+\node[draw,align=center,text width=5cm] (objective) at (0,-8.5) {Step 6: outer limit, then\\current objective interval};
+\node[draw,align=center,text width=4cm] (exit6) at (6,-8.5) {budget-exhausted\\linear-solve-failed};
+\node[draw,align=center,text width=5cm] (trial) at (0,-10.4) {Steps 7--8: bounded projected trials\\reject unchanged or inadmissible trials\\accept first $u_h(q_j)\le\ell_h(q)$};
+\node[draw,align=center,text width=4cm] (exit7) at (6,-10.4) {budget-exhausted\\linear-solve-failed};
+\draw[->] (initial) -- (outer);
+\draw[->] (outer) -- (solve);
+\draw[->] (solve) -- (stationary);
+\draw[->] (stationary) -- (data);
+\draw[->] (data) -- (objective);
+\draw[->] (objective) -- (trial);
+\draw[->] (initial) -- (exit1);
+\draw[->] (outer) -- (exit2);
+\draw[->] (solve) -- (exit3);
+\draw[->] (stationary) -- (exit4);
+\draw[->] (data) -- (exit5);
+\draw[->] (objective) -- (exit6);
+\draw[->] (trial) -- (exit7);
+\draw[->] (trial.west) -- (-3.5,-10.4) -- (-3.5,-1.7) -- (outer.west);
+\node[rotate=90,fill=white,inner sep=3pt] at (-3.5,-6) {accepted: $q:=q_j$, next $k$};
+\end{tikzpicture}
+```

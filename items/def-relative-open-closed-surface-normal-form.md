@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-relative-open-closed-surface-normal-form.json
+  precheck: pass
 id: def-relative-open-closed-surface-normal-form
 kind: definition
 title: "The marked boundary-relative open-closed normal word"
@@ -67,17 +70,27 @@ For a disconnected morphism, define its candidate normal word as the ordered ten
 
 For $r,n\ge1$ the candidate map factors through the open boundary cycles, their cozipper images in $C$, and the closed multiplication/window/handle/comultiplication word. The displayed arrows have exactly the domains specified above; when $r=0$ or $n=0$, replace the corresponding map using the stated unit or counit convention.
 
-~~~tikzcd
+The first stage is $T_M$; the second continues from its target $C^{\otimes r}$. The labels $T_j$ are the typed cozipper composites defined above.
+
+```tikzcd
+\begin{tikzcd}[cells={font=\Large}, labels={font=\large}, column sep=large]
 \bigotimes_{\ell=1}^{m} A_{a_\ell b_\ell}
   \arrow[r, "P"]
 & \bigotimes_{j=1}^{r}\bigotimes_{\ell=1}^{q_j} A_{a_{j,\ell-1}a_{j,\ell}}
-  \arrow[r, "\bigotimes_j(i_{a_{j,0}}^*\mu^{(q_j)}_{a_{j,0},\ldots,a_{j,q_j}})"]
-& C^{\otimes r} \arrow[r, "\mu_C^{[r]}"]
+  \arrow[r, "\bigotimes_j T_j"]
+& C^{\otimes r}
+\end{tikzcd}
+```
+
+```tikzcd
+\begin{tikzcd}[cells={font=\Large}, labels={font=\large}, column sep=large]
+C^{\otimes r} \arrow[r, "\mu_C^{[r]}"]
 & C \arrow[r, "W_M"]
 & C \arrow[r, "H^g"]
 & C \arrow[r, "\Delta_C^{[n]}"]
 & C^{\otimes n}
-~~~
+\end{tikzcd}
+```
 
 ## Facts & Assumptions
 

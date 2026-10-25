@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-delayed-q-learning.json
+  precheck: n/a
 id: alg-delayed-q-learning
 kind: algorithm
 title: "Delayed Q-learning with an admissible heuristic"
@@ -16,8 +19,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis"
@@ -52,3 +53,21 @@ Initialize $Q(s,a)=U(s,a)$, batch sum $B(s,a)=0$, sample count $\ell(s,a)=0$, ba
 [Strehl et al., *PAC Model-Free Reinforcement Learning*](https://hunch.net/~jl/projects/RL/Delayed_Q/icml06.pdf).
 
 [Szepesvári, *Algorithms for Reinforcement Learning*](https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf).
+
+## Remarks
+
+For a fixed pair $(s,a)$, the diagram shows changes to the learning flag during visits. A successful batch means $Q(s,a)-\bar B\ge2\epsilon_1$; a failed batch means the strict opposite inequality. On success, set $Q(s,a)=\bar B+\epsilon_1$ and $t^*=t$. Every completed batch resets $B$ and $\ell$ to zero. An incomplete batch retains its accumulated samples. The clock $t^*$ is global, so a successful update at another pair can reactivate this pair on its next visit. The visit test precedes sampling, including the first sample after reactivation.
+
+```tikz
+\begin{tikzpicture}[>=stealth, line width=0.8pt, every node/.style={font=\small}, state/.style={draw,rounded corners,align=center,minimum width=3.5cm,minimum height=1cm}]
+\node[state] (E) at (0,0) {Learning enabled\\ $L(s,a)=\mathrm{true}$};
+\node[state] (D) at (7,0) {Learning paused\\ $L(s,a)=\mathrm{false}$};
+\draw[->] (E) to[bend right=25] node[below,align=center] {failed batch\\ $b(s,a)>t^*$} (D);
+\draw[->] (D) to[bend right=25] node[above,align=center] {visit with $b(s,a)\le t^*$\\reactivate before sampling} (E);
+\draw[->] (E.north west) .. controls (-2,2.6) and (2,2.6) .. (E.north east) node[pos=0.5,above,align=center] {successful batch\\update $Q(s,a)$ and $t^*$};
+\draw[->] (E.south east) .. controls (2,-3) and (-2,-3) .. (E.south west) node[pos=0.5,below,align=center] {incomplete batch, or\\failed batch with $b(s,a)\le t^*$};
+\draw[->] (D.north east) .. controls (10,2) and (10,-2) .. (D.south east) node[pos=0.5,right,align=center] {visit with\\ $b(s,a)>t^*$:\\skip sampling};
+\end{tikzpicture}
+```
+
+Each self-loop describes a visit while the corresponding flag remains unchanged. Reactivation and completion of a batch can occur on the same visit, so the diagram can traverse two arrows during one visit. A completed-batch transition is taken only after all $m$ samples have been accumulated; the batch-start time $b(s,a)$ is set when its first sample is collected. This illustration adds no convergence or sample-complexity claim.

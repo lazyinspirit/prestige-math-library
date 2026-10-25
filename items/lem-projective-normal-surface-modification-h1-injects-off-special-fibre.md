@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-projective-normal-surface-modification-h1-injects-off-special-fibre.json
+  precheck: pass
 id: lem-projective-normal-surface-modification-h1-injects-off-special-fibre
 kind: lemma
 title: H1 of a normal surface modification injects off its special fibre
@@ -26,12 +29,7 @@ sources:
   - title: The Stacks Project, Resolution of Surfaces, Lemmas 54.7.3–8 (complete proofs read; normal-surface arguments
       reconstructed)
     url: https://stacks.math.columbia.edu/download/resolve.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -42,7 +40,7 @@ Assume AC and DC. Let $A$ be a normal two-dimensional Noetherian local domain es
 
 **Given:** A normal two-dimensional Noetherian local domain $A$ essentially of finite type over a field or complete equicharacteristic local base, a projective normal modification $X\to\operatorname{Spec}A$, and $U$ the inverse image of the punctured spectrum.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-dependent-choice.* Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]])
 

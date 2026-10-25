@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-factorization-of-birational-morphisms-of-smooth-surfaces.json
+  precheck: pass
 id: thm-factorization-of-birational-morphisms-of-smooth-surfaces
 kind: theorem
 title: Factorization of birational morphisms of regular surfaces into point blowups
@@ -40,12 +43,7 @@ sources:
     url: https://www.math.ens.psl.eu/~debarre/M2.pdf
   - title: The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)
     url: https://stacks.math.columbia.edu/download/resolve.pdf
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -64,7 +62,7 @@ contractions of exceptional curves of the first kind ([[def-exceptional-curve-an
 
 **Given:** A field $k$, integral regular finite-type proper $k$-schemes $X,Y$ of pure dimension two, and a birational morphism $f\colon X\to Y$.
 
-[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
+[F1] *def-axiom-of-choice.* The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function (def-choice-function). Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$. ([[def-axiom-of-choice]])
 
 [F2] *def-birational-morphism-schemes.* Let $k$ be a field and let $X$ and $Y$ be integral $k$-schemes of finite type (def-integral-scheme, def-locally-finite-type-and-finite-type-morphism). ([[def-birational-morphism-schemes]])
 
@@ -103,4 +101,29 @@ contractions of exceptional curves of the first kind ([[def-exceptional-curve-an
 ## Remarks
 
 - The induction measure is the number of contracted curves, which drops by exactly one at each factorization step.
-- No equality of rational maps f^{-1} composed with f is used; the undefinedness of the inverse at the chosen point is proved by the section argument.
+- No equality of rational maps $f^{-1}$ composed with $f$ is used; the undefinedness of the inverse at the chosen point is proved by the section argument.
+
+
+The factorization has the following schematic form. Write
+$b_i\colon X_i\to X_{i-1}$ for the blowup at $y_{i-1}$, and let
+$\phi\colon X\xrightarrow{\sim}X_n$ be the isomorphism over $Y$ from the statement.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.6,transform shape]
+\node (X) at (0,0) {$X$};
+\node (Xn) at (2,0) {$X_n$};
+\node (dots) at (4,0) {$\cdots$};
+\node (Y) at (6,0) {$X_0=Y$};
+\draw[->] (X) -- node[above] {$\phi$} node[below] {$\sim$} (Xn);
+\draw[->] (Xn) -- (dots);
+\draw[->] (dots) -- (Y);
+\draw[->] (X) to[bend right=30] node[below] {$f$} (Y);
+\end{tikzpicture}
+```
+
+The upper chain from $X_n$ to $X_0$ represents $b_1\circ b_2\circ\cdots\circ b_n$, so its
+composite with $\phi$ is $f$. Each $b_i$ points from the blown-up surface
+$X_i$ to $X_{i-1}$, where its closed centre lies; no centre is assumed
+$k$-rational. For $n=1$ the chain consists of $b_1$ alone, and for $n=0$
+it is empty and $f=\phi\colon X\xrightarrow{\sim}Y$.
+The figure summarizes the statement and step 5.1; the proof is independent of it.

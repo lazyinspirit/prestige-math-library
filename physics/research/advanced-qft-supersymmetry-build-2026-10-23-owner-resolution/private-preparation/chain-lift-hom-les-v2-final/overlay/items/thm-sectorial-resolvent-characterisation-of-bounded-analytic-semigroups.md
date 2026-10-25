@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-sectorial-resolvent-characterisation-of-bounded-analytic-semigroups.md

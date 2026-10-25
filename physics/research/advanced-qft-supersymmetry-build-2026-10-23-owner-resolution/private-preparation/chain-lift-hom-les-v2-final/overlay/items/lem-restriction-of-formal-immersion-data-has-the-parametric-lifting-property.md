@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property.md

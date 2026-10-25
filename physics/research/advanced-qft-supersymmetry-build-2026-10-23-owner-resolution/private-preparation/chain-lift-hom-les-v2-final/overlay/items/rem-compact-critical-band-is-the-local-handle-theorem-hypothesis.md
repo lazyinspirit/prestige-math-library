@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-compact-critical-band-is-the-local-handle-theorem-hypothesis.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric.json
+  precheck: n/a
 id: def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric
 kind: definition
 title: "Abstract isometric polyhedral gluings and the chain metric"
@@ -19,13 +22,7 @@ sources:
     - title: "Michael W. Davis, The Geometry and Topology of Coxeter Groups (first-edition author manuscript, 2007-2008)"
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.3, printed pp. 507–508 (X_k-cell structures, the length metric as an infimum of piecewise geodesic lengths, Definition I.3.3 and Proposition I.3.4); §7.3, printed pp. 128–131 (Coxeter polytopes and the natural cell structure)"
-verification:
-  audited: "2026-10-08"
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Definition
@@ -56,9 +53,17 @@ The elements of $P$ are called **faces**, $p\le q$ is read "$p$ is a face of $q$
 **Standing hypotheses.** (H1) *Connectedness*: $X\ne\emptyset$ and $X$ is connected. (H2) *Local finiteness*: every point of $X$ lies in $\iota_p(C_p)$ for only finitely many $p$. (H3) *Finite shapes*: the cells $C_p$ fall into only finitely many isometry classes. By (H1) at least one cell exists, so by (H3) the maximum $D:=\max\{\dim C_p:p\in P\setminus\{\varnothing\}\}$ of the dimensions of the cells is a well-defined natural number.
 
 **Chains and the chain metric candidate.** Write $d_p$ for the Euclidean metric on the affine span of $C_p$. Let $x,y\in X$. A **chain** from $x$ to $y$ is a finite sequence $x=x_0,x_1,\dots,x_m=y$ of points of $X$ such that for each $i\in\{1,\dots,m\}$ some cell contains both $x_{i-1}$ and $x_i$; for $m=0$ the chain is the one-term sequence $x$. Its **length** is
-$$\ell(x_0,\dots,x_m):=\sum_{i=1}^{m}d_{p_i}(x_{i-1},x_i),$$
+
+$$
+\ell(x_0,\dots,x_m):=\sum_{i=1}^{m}d_{p_i}(x_{i-1},x_i),
+$$
+
 where for each $i$ the face $p_i$ is *any* nonempty face with $x_{i-1},x_i\in\iota_{p_i}(C_{p_i})$; this number does not depend on these choices. The **chain metric candidate** of the gluing is
-$$d(x,y):=\inf\bigl\{\,\ell(x_0,\dots,x_m):x_0,\dots,x_m\text{ is a chain from }x\text{ to }y\,\bigr\}.$$
+
+$$
+d(x,y):=\inf\bigl\{\,\ell(x_0,\dots,x_m):x_0,\dots,x_m\text{ is a chain from }x\text{ to }y\,\bigr\}.
+$$
+
 Because $X$ is connected, every two points of $X$ are joined by a chain (this and the independence of $\ell$ from the chosen faces are proved in [[thm-cg-polyhedral-chain-metric-topology-and-properness]]), so the infimum is taken over a nonempty set of real numbers, and $0\le d(x,y)<\infty$. This finiteness follows from (H1) and the gluing data; it is not an additional hypothesis.
 
 **What is asserted, and what is not.** For all $x,y,z\in X$ one has $d(x,x)=0$ (the one-term chain), $d(x,y)=d(y,x)$ (reverse a chain) and $d(x,z)\le d(x,y)+d(y,z)$ (concatenate chains), and these three facts need no hypothesis beyond the definitions. No other metric axiom, no agreement of $d$ with the weak topology, and no completeness, properness or geodesic property is asserted here: those are the conclusions of the theorems of this page, under (H1)–(H3).

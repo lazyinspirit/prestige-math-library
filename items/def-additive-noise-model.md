@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-additive-noise-model.json
+  precheck: n/a
 id: def-additive-noise-model
 kind: definition
 title: "Continuous additive-noise models on finite DAGs"
@@ -24,8 +27,7 @@ sources:
       url: "https://web.math.ku.dk/~peters/jonas_files/ElementsOfCausalInference.pdf"
     - title: "K. Assaad, E. Devijver, and G. Gaussier, Causal discovery: noise-based methods, slides 22–23 and 29–31"
       url: "https://ckassaad.github.io/courses/courses_materials/ENSLyon_Causality/2023/CausalDiscoveryNoiseBased.pdf"
-verification:
-  precheck: n/a
+
 ---
 
 ## Definition
@@ -67,3 +69,32 @@ values. A root has no parent-coordinate minimality condition.
 [Peters, Janzing, and Schölkopf, Elements of Causal Inference, §4.1.4](https://web.math.ku.dk/~peters/jonas_files/ElementsOfCausalInference.pdf)
 
 [Assaad, Devijver, and Gaussier, course notes (2023), slides 22–23 and 29–31](https://ckassaad.github.io/courses/courses_materials/ENSLyon_Causality/2023/CausalDiscoveryNoiseBased.pdf)
+
+## Remarks
+
+For illustration, take the observed DAG with arrows $1\to2$ and $1\to3$.
+Its equations are $X_1=f_1()+N_1$, $X_2=f_2(X_1)+N_2$, and
+$X_3=f_3(X_1)+N_3$; the empty parent tuple makes $f_1()$ a constant.
+Solid arrows below are the edges of this observed DAG. Dashed arrows show
+additive noise inputs, not additional graph vertices or edges. The noises
+$N_1,N_2,N_3$ are mutually independent and have the positive densities required
+above; independence of $X_1,X_2,X_3$ is not asserted.
+
+```tikz
+\begin{tikzpicture}[>=stealth, thick]
+\node[draw,circle,minimum size=11mm] (x1) at (0,0) {$X_1$};
+\node[draw,circle,minimum size=11mm] (x2) at (3,1) {$X_2$};
+\node[draw,circle,minimum size=11mm] (x3) at (3,-1) {$X_3$};
+\node (n1) at (-2,0) {$N_1$};
+\node (n2) at (3,2.5) {$N_2$};
+\node (n3) at (3,-2.5) {$N_3$};
+\draw[->] (x1) -- (x2);
+\draw[->] (x1) -- (x3);
+\draw[->,dashed] (n1) -- (x1);
+\draw[->,dashed] (n2) -- (x2);
+\draw[->,dashed] (n3) -- (x3);
+\end{tikzpicture}
+```
+
+The diagram only illustrates the recursive definition; it supplies no proof
+or additional assumption.

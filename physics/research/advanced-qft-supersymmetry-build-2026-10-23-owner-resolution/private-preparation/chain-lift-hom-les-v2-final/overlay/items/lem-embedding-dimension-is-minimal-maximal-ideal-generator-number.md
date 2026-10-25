@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-embedding-dimension-is-minimal-maximal-ideal-generator-number.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-laurent-series-on-a-punctured-disc-can-have-infinitely-many-negative-terms.md

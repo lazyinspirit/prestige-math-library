@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-affine-a1-gcm-has-singular-rank-one-realization-data.json
+  precheck: pass
 id: ex-the-affine-a1-gcm-has-singular-rank-one-realization-data
 kind: example
 title: "The affine a1 gcm has singular rank one realization data"
@@ -8,12 +11,6 @@ deps: ["prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism"]
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   references:
     - title: "Kleshchev, Lectures on Infinite Dimensional Lie Algebras — Example 1.2.3 and Proposition 1.2.4, pp.10–12; affine A1 data in Example 1.5.4, pp.23–24"
@@ -27,9 +24,9 @@ The GCM $A=\begin{pmatrix}2&-2\\-2&2\end{pmatrix}$ has rank one and requires a t
 
 ## Facts & Assumptions
 
-**Given:** The displayed matrix and independent h_0,h_1,d.
+**Given:** The displayed matrix and independent $h_0,h_1,d$.
 
-[F1] The smallest Cartan dimension with both families independent is 2n−rank A. ([[prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism]]).
+[F1] The smallest Cartan dimension with both families independent is $2n-\operatorname{rank}A$. ([[prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism]]).
 
 ## Verification
 

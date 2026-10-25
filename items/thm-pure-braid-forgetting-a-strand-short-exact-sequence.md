@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-pure-braid-forgetting-a-strand-short-exact-sequence.json
+  precheck: pass
 id: thm-pure-braid-forgetting-a-strand-short-exact-sequence
 kind: theorem
 title: "The Fadell-Neuwirth short exact sequence for pure braids"
@@ -12,13 +15,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
 sources:
   scraped: []
   references:
@@ -86,6 +82,37 @@ is exact, exactness meaning incoming image equals inverse image of the distingui
 
 3.1 **Transport to the closed-disc convention.** Conjugating the sequence of step 2.1 by the isomorphisms of step 1.2 identifies it with $1\to F_{n-1}\xrightarrow{\kappa}PB_n\xrightarrow{\varphi}PB_{n-1}\to1$, where $\kappa=\iota^F_*\circ i_*$ is the composite of the fibre inclusion with the open-to-closed isomorphism $\iota^F_*$ for $m=n$, and $\varphi=p^D_*$ is the induced map of the closed-disc forgetting map; exactness is preserved by these isomorphisms and $\varphi$ is the map induced by forgetting the last strand. [step 1.2, step 2.1]
 
-4.1 **Elementary cases and conclusion.** By [F3] the group $PB_1$ is trivial, so for $n=2$ the quotient in the displayed sequence is trivial and the sequence reads $1\to F_1\to PB_2\to 1\to 1$; the general case $n\ge2$ is step 3.1, so the theorem is proved. [step 3.1, step 1.1, F3]
+4.1 **Elementary cases and conclusion.** By [F3] the group $PB_1$ is trivial, so for $n=2$ the quotient in the displayed sequence is trivial and the sequence reads $1\to F_1\to PB_2\to 1\to 1$; the general case $n\ge2$ is step 3.1, so the theorem is proved.
+The proof used the published choice-dependent Fadell–Neuwirth fibration only through the AC/DC deduction in step 1.3, and no Artin presentation, group action, or Birman injectivity is used. [step 3.1, step 1.1, step 1.3, F3] ∎
 
-The proof used the published choice-dependent Fadell–Neuwirth fibration only through the AC/DC deduction in step 1.3, and no Artin presentation, group action, or Birman injectivity is used. ∎
+
+## Remarks
+
+The fibre inclusion and the open-to-closed comparison fit into the following
+commutative diagram. Here $M_{n-1}=\operatorname{int}D^2\setminus\{q_1,\dots,q_{n-1}\}$
+is based at $q_n$, the configuration spaces are based at $q$ and $q'$, and
+$\iota_m^F$ denotes inclusion of the open-disc configuration space into the
+closed-disc one.
+
+```tikzcd
+M_{n-1} \arrow[r, "i"] & F_n(\mathrm{int}D^2) \arrow[r, "p"] \arrow[d, "\iota_n^F"'] & F_{n-1}(\mathrm{int}D^2) \arrow[d, "\iota_{n-1}^F"] \\
+& F_n(D^2) \arrow[r, "p^D"'] & F_{n-1}(D^2)
+```
+
+The maps are $i(x)=(q_1,\dots,q_{n-1},x)$ and the two projections forget the
+last coordinate; thus $p\circ i$ is constant at $q'$ and the square commutes
+by step 1.2. A loop $\gamma$ in $M_{n-1}$ based at $q_n$ maps to the loop
+$t\mapsto(q_1,\dots,q_{n-1},\gamma(t))$: the first $n-1$ points stay fixed
+while the last point moves among their punctures. On fundamental groups this
+gives the exact sequence below, with $\kappa=(\iota_n^F)_*i_*$ and
+$\varphi=(p^D)_*$.
+
+```tikzcd
+1 \arrow[r] & F_{n-1} \arrow[r, "\kappa"] & PB_n \arrow[r, "\varphi"] & PB_{n-1} \arrow[r] & 1
+```
+
+As shown in steps 1.1 and 2.1, vanishing of $\pi_2$ of the base gives
+injectivity of $\kappa$, path-connectedness of the fibre gives surjectivity
+of $\varphi$, and exactness identifies $\operatorname{im}\kappa=\ker\varphi$.
+The vertical inclusions induce the isomorphisms used in step 3.1. These diagrams
+illustrate the maps in the proof; the rigorous proof is independent of them.

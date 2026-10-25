@@ -1,0 +1,162 @@
+{
+  "id": "ex-binary-confounding-standardization",
+  "group": "dsme_003",
+  "agent": "/root/rendering_repair_supervisor2/dsme_003",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic original tiles have no diagram. A concrete four-variable input DAG materially clarifies why the observed treatment groups differ in baseline L and why common target weighting recovers the contrast. This is a warranted explanatory addition under the expanded diagram scope; the existing verification was already complete.",
+      "action": "Appended a final Remarks section with the exact input diagram W -> A, L -> A, L -> Y, A -> Y and a caption tying the shared input L to standardization.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added an explanatory TikZ input DAG and caption in final Remarks; no existing title, statement, proof or frontmatter bytes were changed.",
+  "source_lines_after": [
+    {
+      "start": 61,
+      "end": 78,
+      "description": "New Remarks, input interpretation, four-node TikZ DAG and contrast/standardization caption."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and functional interfaces",
+      "result": "pass",
+      "justification": "The Example defines L in {0,1}, W in {1,2,3,4}, A in {0,1} with A=f(L,W), and potential outcomes Y^a=10L+a. Consistency gives Y=10L+A in {0,1,10,11}. Nodes represent these random variables; arrows represent functional inputs, not arbitrary maps between their value sets."
+    },
+    {
+      "check": "Assignment arrows W -> A and L -> A",
+      "result": "pass",
+      "justification": "For L=0, f is 1 exactly at W=1; for L=1 it is 1 at W=1,2,3. Thus both inputs occur in the actual assignment rule. The uniform product space makes L and W independent: each joint atom has 1/8=(1/2)(1/4). No L-W edge is shown."
+    },
+    {
+      "check": "Outcome arrows L -> Y and A -> Y",
+      "result": "pass",
+      "justification": "The local equality Y=Y^A=10L+A establishes both displayed inputs. W affects observed outcome through A only; no W -> Y direct edge is asserted. The four displayed arrows are acyclic, with roots L,W, intermediate A, terminal Y."
+    },
+    {
+      "check": "Confounding path and common target weights",
+      "result": "pass",
+      "justification": "The two arrows L -> A and L -> Y form exactly A <- L -> Y. Step 1.2 counts P(A=1|L=0)=1/4 and P(A=1|L=1)=3/4; step 2.1 gives P(L=1|A=1)=3/4 versus 1/4 for A=0. Step 1.3 uses target probabilities 1/2 in both arms, yielding means 6 and 5 and contrast 1. Independent exact Fraction enumeration of all eight points reproduced these probabilities and crude means 17/2,5/2 (contrast 6)."
+    },
+    {
+      "check": "Proof independence",
+      "result": "pass",
+      "justification": "The complete original four numbered verification steps and every preceding byte remain a byte-exact prefix of the successor source. The diagram and caption follow the final QED in a separate Remarks section and are not used as proof premises."
+    }
+  ],
+  "original_evidence": {
+    "frozen_before_file": "research/math-library-rendering-repairs-2026-10-23/before/ex-binary-confounding-standardization.md",
+    "before_raw_sha256": "d100d1f0f1d756eb5c6bd27d82c90b170560d8efbf862d078f5dfc728a4727c3",
+    "guard": "The expected raw SHA was checked immediately inside the edit operation before appending; it matched.",
+    "screenshot_resolution": "Both authentic original tiles viewed separately with view_image detail original. The finding-specific evidence_dir is the category root; screenshot hashes matched exactly.",
+    "screenshots": [
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/statistical-models-and-experiments/screenshots/ex-binary-confounding-standardization--01.png",
+        "sha256": "a77cf0ba1190a64c0f7d2f53094cd1f161e45193836d32c2e84d748ef268a83b"
+      },
+      {
+        "path": "research/math-library-rendering-audit-2026-10-23/statistical-models-and-experiments/screenshots/ex-binary-confounding-standardization--02.png",
+        "sha256": "46f176ead8a5282136974386c244cbce30565bbd60bbfa7f569eef584e05cf2a"
+      }
+    ]
+  },
+  "sources_inspected": [
+    "CLAUDE.md",
+    "README.md",
+    "SCHEMA.md (relevant content/proof/diagram rules)",
+    "WORKFLOW.md (relevant build scope and diagram rules)",
+    "research/math-library-rendering-repairs-2026-10-23/worker-brief.md",
+    "research/math-library-rendering-repairs-2026-10-23/before/ex-binary-confounding-standardization.md",
+    "items/ex-binary-confounding-standardization.md",
+    "items/def-potential-outcomes-and-consistency.md",
+    "items/def-conditional-exchangeability-of-potential-outcomes.md",
+    "items/def-conditional-independence-given-a-sigma-algebra.md",
+    "items/def-positivity-for-discrete-treatment.md",
+    "items/def-causal-average-treatment-effects.md",
+    "items/thm-discrete-treatment-potential-outcome-mean-identification.md"
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-binary-confounding-standardization.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects",
+      "pre_existing_failures": []
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-binary-confounding-standardization.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-binary-confounding-standardization.md",
+            "item_id": "ex-binary-confounding-standardization",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-binary-confounding-standardization.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Inline Python3 Fraction enumeration of all eight (L,W) atoms",
+      "exit_code": 0,
+      "output": "P(A=1|L=0)=1/4; P(A=1|L=1)=3/4; P(L=1|A=0)=1/4; P(L=1|A=1)=3/4; E[Y|A=0]=5/2; E[Y|A=1]=17/2; crude contrast=6; target contrast=1."
+    }
+  ],
+  "native_preview": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dsme-003-owner2 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-binary-confounding-standardization --out research/math-library-rendering-repairs-2026-10-23/previews/dsme-003-owner2",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dsme-003-owner2/manifest.json",
+    "manifest_sha256": "222285e72bf5476c0d9deae3c3d7cf1df2a40a7ffd48f73765aecbe642a6a021",
+    "source_sha256": "b060e4645b4928bdcc3813731b15848da83074b08b2d428d01eb83bd8837cc2a",
+    "source_snapshot": "research/math-library-rendering-repairs-2026-10-23/previews/dsme-003-owner2/snapshots/ex-binary-confounding-standardization.md",
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dsme-003-owner2/screenshots/ex-binary-confounding-standardization.json",
+    "receipt_sha256": "9766d71f38c3d1a67d8320dd7910b43b8148f3c369e4ca54b6d8f91a51f566ae",
+    "katex_errors": [],
+    "diagram_failures": [],
+    "tikz_count": 1,
+    "standalone_original_resolution_views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dsme-003-owner2/screenshots/ex-binary-confounding-standardization--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dsme-003-owner2/screenshots/ex-binary-confounding-standardization--02.png"
+    ],
+    "visual_result": "Actual native dark-background output shows all four nodes W,A,L,Y and exactly four arrows W->A, L->A, L->Y, A->Y. Arrowheads, strokes and labels are legible with no overlap or clipping. No cycle/closing edge or open/closed endpoint conventions apply.",
+    "reference_map_sha256": "0d5e2dc1920caf1e79e40a2c93ee59dea608fd5d206893827064141da9facc4b",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "unrelated_reference_map_diagnostics": 13
+  },
+  "status_preservation": {
+    "before_line": "status: published",
+    "after_line": "status: published",
+    "all_frontmatter_byte_identical": true
+  },
+  "current_raw_sha256": "b060e4645b4928bdcc3813731b15848da83074b08b2d428d01eb83bd8837cc2a",
+  "remaining_issues": [],
+  "completed_at": "2026-10-24T04:31:36.258256+00:00"
+}

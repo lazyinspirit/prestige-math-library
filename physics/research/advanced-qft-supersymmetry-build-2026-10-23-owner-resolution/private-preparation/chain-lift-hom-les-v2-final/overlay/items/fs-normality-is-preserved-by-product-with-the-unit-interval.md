@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-normality-is-preserved-by-product-with-the-unit-interval.md

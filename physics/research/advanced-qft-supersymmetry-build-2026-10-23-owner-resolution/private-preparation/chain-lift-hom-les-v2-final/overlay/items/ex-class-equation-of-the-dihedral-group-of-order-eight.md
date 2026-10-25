@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-class-equation-of-the-dihedral-group-of-order-eight.md

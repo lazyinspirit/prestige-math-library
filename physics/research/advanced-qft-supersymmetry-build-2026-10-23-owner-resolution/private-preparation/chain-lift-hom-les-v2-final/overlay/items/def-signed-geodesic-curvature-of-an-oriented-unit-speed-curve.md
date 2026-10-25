@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve.md

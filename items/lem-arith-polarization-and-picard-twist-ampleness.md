@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-arith-polarization-and-picard-twist-ampleness.json
+  precheck: pass
 id: lem-arith-polarization-and-picard-twist-ampleness
 kind: lemma
 title: "Polarizations and ampleness under Picard twists"
@@ -28,8 +31,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "B. Edixhoven, G. van der Geer, B. Moonen, Abelian Varieties (2012), 11.4-11.6 (ampleness and polarizations)"
@@ -64,7 +65,7 @@ Assume AC and DC as inherited from the supplied scheme and cohomology results. L
 
 ## Proof
 
-**Proof technique:** direct: compare the bundle $(\operatorname{id},\varphi_{\mathcal L})^*\mathcal P$ with $\mathcal L^2$, use that both have Mumford map $2\varphi_{\mathcal L}$, and invoke invariance of ampleness under algebraically trivial twists.
+**Proof technique:** direct: compare the Poincare bundle pulled back along the graph of the Mumford map with the tensor square of the given ample bundle, use that both have twice the Mumford map of the given bundle, and invoke invariance of ampleness under algebraically trivial twists.
 
 1.1 By [F1], $\varphi_{\mathcal L,\bar k}$ is an isogeny with finite scheme-theoretic kernel. Every geometric fibre of $\varphi_{\mathcal L}$ is, after choosing a point in it, a translate of that geometric kernel. In particular $K(\mathcal L)\to\operatorname{Spec}k$ is proper and quasi-finite, since it is closed in $A$ and has a finite geometric fibre; [F1] makes it finite over $k$. Surjectivity follows from geometric surjectivity after the field extension, so $\varphi_{\mathcal L}$ is an isogeny. By [F3], $(\operatorname{id},\varphi_{\mathcal L})^*\mathcal P$ has Mumford map $2\varphi_{\mathcal L}$, the same as $\mathcal L^2$; since $\ker\varphi=\operatorname{Pic}^0$ as a sheaf [F1], the two bundles differ by an algebraically trivial class: $(\operatorname{id},\varphi_{\mathcal L})^*\mathcal P\cong\mathcal L^2\otimes\mathcal M$ with $\mathcal M\in\operatorname{Pic}^0$. For symmetry, the family classifying $\varphi_{\mathcal L}^\vee\circ\kappa_A$ on the second copy of $A$ is obtained by switching the Poincare factors and pulling back along $\varphi_{\mathcal L}$ on the other factor. It is therefore the switched bundle $\sigma^*\Lambda(\mathcal L)$, where $\sigma(x,y)=(y,x)$. The family classifying $\varphi_{\mathcal L}$ is $\Lambda(\mathcal L)$. Since multiplication is commutative, the two normalized bundles are isomorphic, including their rigidifications on both axes. The all-test universal property gives $\varphi_{\mathcal L}^\vee\circ\kappa_A=\varphi_{\mathcal L}$, which proves symmetry rather than assuming it. For the bundle comparison in [F3], diagonal pullback of $\Lambda(\mathcal L)$ gives $[2]^*\mathcal L\otimes\mathcal L^{-2}$ up to a constant line. For any homomorphism $f$, translation commutation and pullback of Picard classes give $\varphi_{f^*\mathcal L}=f^\vee\varphi_{\mathcal L}f$; with $f=[2]$ and additivity of duality this gives $\varphi_{[2]^*\mathcal L}=4\varphi_{\mathcal L}$ and hence the asserted $2\varphi_{\mathcal L}$. [F1, F2, F3, given, construct]
 

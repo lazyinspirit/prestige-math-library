@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-brownian-step-potential-resolvent-at-zero.json
+  precheck: pass
 id: lem-brownian-step-potential-resolvent-at-zero
 kind: lemma
 title: "Brownian step-potential resolvent at zero"
@@ -13,8 +16,7 @@ sources:
   references:
     - title: "Nobuo Yoshida, Probability Theory, Lemmas 6.8.1-6.8.3, printed pp. 214-216"
       url: "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement
@@ -68,7 +70,7 @@ $$u(0)=\frac{1}{\sqrt{\alpha(\alpha+\beta)}} .$$
 
 5.1 At every x unequal to zero, apply step 3.1 to 1 and to f from step 4.1. The coefficient beta must multiply both terms of its second derivative: $$\tfrac12u''=\alpha G_\alpha1-1-\beta(\alpha G_\alpha f-f)=\alpha u-1+\beta1_{\{x>0\}}u.$$ This is continuous separately on the half-lines, so u is C2 there and satisfies the stated two equations. At zero only the already established C1 regularity is used. [step 3.1, step 4.1]
 
-6.1 To solve the ODE without an unproved general-solution assertion, on an interval where $v''=k^2v$, k>0, set $F=v'-kv$. Then $(e^{kx}F)'=0$, so [F5] makes F a constant times $e^{-kx}$. Differentiating $e^{-kx}v$ and then subtracting the explicit primitive of that exponential gives, again by [F5], $v=Ae^{kx}+De^{-kx}$. Apply this with $v=u-1/\alpha$, k=lambda, on the negative half-line and with $v=u-1/(\alpha+\beta)$, $k=\mu=\sqrt{2(\alpha+\beta)}$, on the positive half-line. Boundedness in step 1.1 excludes the exponentially growing term at the respective infinite endpoint. Hence $$u(x)=1/\alpha+Ae^{\lambda x}\ (x<0),\qquad u(x)=1/(\alpha+\beta)+De^{-\mu x}\ (x>0).$$ [F5, step 1.1, step 5.1]
+6.1 To solve the ODE without an unproved general-solution assertion, on an interval where $v''=k^2v$, k>0, set $F=v'-kv$. Then $(e^{kx}F)'=0$, so [F5] makes F a constant times $e^{-kx}$. Differentiating $e^{-kx}v$ and then subtracting the explicit primitive of that exponential gives, again by [F5], $v=Ae^{kx}+De^{-kx}$. Apply this with $v=u-1/\alpha$, $k=\lambda$, on the negative half-line and with $v=u-1/(\alpha+\beta)$, $k=\mu=\sqrt{2(\alpha+\beta)}$, on the positive half-line. Boundedness in step 1.1 excludes the exponentially growing term at the respective infinite endpoint. Hence $$u(x)=1/\alpha+Ae^{\lambda x}\ (x<0),\qquad u(x)=1/(\alpha+\beta)+De^{-\mu x}\ (x>0).$$ [F5, step 1.1, step 5.1]
 
 7.1 Continuity of $u$ and of $u'$ at $0$, from [step 5.1], gives $1/\alpha+A=1/(\alpha+\beta)+D$ and $\lambda A=-\mu D$; substituting the second into the first yields $u(0)=1/\alpha+A$ with $\sqrt\alpha\bigl(u(0)-1/\alpha\bigr)=-\sqrt{\alpha+\beta}\bigl(u(0)-1/(\alpha+\beta)\bigr)$, whose solution is $u(0)=1/\sqrt{\alpha(\alpha+\beta)}$. [step 6.1]
 
@@ -77,3 +79,35 @@ $$u(0)=\frac{1}{\sqrt{\alpha(\alpha+\beta)}} .$$
 ## Source notes
 
 Yoshida, Lemmas 6.8.1-6.8.3, computes the step-potential resolvent at the origin by an ODE matching argument after identifying the resolvent kernel of the Gaussian semigroup. The proof above separates the two analytical inputs: the Gaussian resolvent kernel $\lambda^{-1}e^{-\lambda|x-y|}$ from the time integral of the heat kernel, and the Duhamel identity for the potential $V=\alpha+\beta1_{\{x>0\}}$, which is proved pathwise from the fundamental theorem for absolutely continuous functions. The conditional expectation step uses the future-path Markov property of the page and takes the bounded $\mathcal F_s$-measurable factor out.
+
+
+## Remarks
+
+The illustration uses $\alpha=1$ and $\beta=3$. The potential jumps at zero, while the bounded resolvent joins with a common value and tangent. In this example step 6.1 and step 7.1 give
+$$u(x)=1-\tfrac12e^{\sqrt2 x}\quad(x\le0),\qquad u(x)=\tfrac14+\tfrac14e^{-\sqrt8 x}\quad(x\ge0).$$
+The horizontal dashed lines in the right panel are the limits at the two infinite endpoints; the vertical scale there is enlarged for readability. The filled and open endpoints in the left panel specify $V(0)=1$. The curve on the right is $C^1$ across zero, with $u(0)=1/2$ and $u'(0)=-1/\sqrt2$; no $C^2$ matching is asserted. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}
+\draw[->] (-3,0) -- (3,0) node[right] {$x$};
+\draw[->] (0,0) -- (0,4.6) node[above] {$V(x)$};
+\draw[very thick,blue] (-2.8,1) -- (0,1);
+\draw[very thick,blue] (0,4) -- (2.8,4);
+\fill[blue] (0,1) circle (0.08);
+\draw[blue,fill=white,thick] (0,4) circle (0.12);
+\node[left] at (-0.15,1) {$1$};
+\node[left] at (-0.15,4) {$4$};
+\node[below left] at (0,0) {$0$};
+\draw[->] (5,0) -- (11,0) node[right] {$x$};
+\draw[->] (8,0) -- (8,3.7) node[above] {$u(x)$};
+\draw[dashed,gray] (5.1,3) -- (10.8,3);
+\draw[dashed,gray] (5.1,0.75) -- (10.8,0.75);
+\draw[very thick,blue] plot[domain=5.2:8,samples=45] (\x,{3-1.5*exp(sqrt(2)*(\x-8))});
+\draw[very thick,blue] plot[domain=8:10.8,samples=45] (\x,{0.75+0.75*exp(-sqrt(8)*(\x-8))});
+\fill[blue] (8,1.5) circle (0.06);
+\node[above] at (5.4,3) {$1$};
+\node[below] at (10.5,0.75) {$1/4$};
+\node[above right] at (8,1.5) {$u(0)=1/2$};
+\node[below left] at (8,0) {$0$};
+\end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-universal-real-thom-spaces-are-r-minus-one-connected.json
+  precheck: pass
 id: lem-universal-real-thom-spaces-are-r-minus-one-connected
 kind: lemma
 title: "Universal real Thom spaces are (r−1)-connected"
@@ -20,13 +23,12 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "§4.L cell-attachment argument, printed pp. 351–353: cells above a given dimension do not affect lower homotopy."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
 
-Assume AC, inherited from the cited bundle, cohomology, or operation suppliers. For each r≥2, T_r=Th(γ_r over BO(r)) is a nonempty (r−1)-connected based CW complex.
+Assume AC, inherited from the cited bundle, cohomology, or operation suppliers. For each $r\ge2$, $T_r=\mathrm{Th}(\gamma_r\text{ over }BO(r))$ is a nonempty $(r-1)$-connected based CW complex.
 
 ## Facts & Assumptions
 
@@ -42,6 +44,6 @@ Assume AC, inherited from the cited bundle, cohomology, or operation suppliers. 
 
 **Proof technique:** direct.
 
-1.1 The prespectrum construction constructs T_r as a based CW complex. Over a d-dimensional Schubert cell of BO(r), its Thom attachment contributes cells of dimension d+r, with d≥0; hence every cell outside the basepoint has dimension at least r. Apply the published high-relative-cells lemma to the CW pair (T_r,*): it is (r−1)-connected. In particular T_r is path-connected and simply connected for r≥2. The basepoint is a vertex. [given, F1, F2]
+1.1 The prespectrum construction constructs $T_r$ as a based CW complex. Over a $d$-dimensional Schubert cell of $BO(r)$, its Thom attachment contributes cells of dimension $d+r$, with $d\ge0$; hence every cell outside the basepoint has dimension at least $r$. Apply the published high-relative-cells lemma to the CW pair $(T_r,*)$: it is $(r-1)$-connected. In particular $T_r$ is path-connected and simply connected for $r\ge2$. The basepoint is a vertex. [given, F1, F2]
 
 2.1 This is the separate connectivity argument required by the finite-range comparison; it does not follow from a cohomological Thom isomorphism alone. [step 1.1, F3] ∎

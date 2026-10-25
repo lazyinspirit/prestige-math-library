@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-powers-locally-uniform-not-uniform-on-closed-disc.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-arc-length-under-lipschitz-maps-and-euclidean-similarities.md

@@ -1,19 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-bounded-reachability-recursion.json
+  precheck: n/a
 id: def-bounded-reachability-recursion
 kind: definition
-title: "The bounded reachability recursion for directed paths of length at most 2^i"
+title: "The bounded reachability recursion for directed paths of length at most $2^i$"
 status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-multigraph-loop-and-digraph]
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:

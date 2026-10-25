@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-three-compartment-weighted-migration.json
+  precheck: pass
 id: ex-three-compartment-weighted-migration
 kind: example
 title: "Three-compartment migration conserves weighted mass"
@@ -28,12 +31,7 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Example
@@ -44,21 +42,6 @@ $u(0)=(2,1,4)^{\mathsf T}$. Its conserved weighted mass is $16$. The
 constant state $(8/3,8/3,8/3)^{\mathsf T}$ is an equilibrium with that same
 weighted mass, and the exact trajectory from the stated nonnegative initial
 state stays entrywise nonnegative. No convergence-to-equilibrium claim is made.
-
-The diagram records the orientation, conductances, and vertex masses; edge lengths are schematic and are not used in the matrix calculation.
-
-\begin{center}
-\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
-  \node[circle,draw] (v1) at (0,0) {$1$};
-  \node[circle,draw] (v2) at (2.1,0) {$2$};
-  \node[circle,draw] (v3) at (4.2,0) {$3$};
-  \draw[->] (v1) -- node[above] {$c_1=1$} (v2);
-  \draw[->] (v2) -- node[above] {$c_2=2$} (v3);
-  \node[below=4pt] at (v1) {$m_1=1$};
-  \node[below=4pt] at (v2) {$m_2=2$};
-  \node[below=4pt] at (v3) {$m_3=3$};
-\end{tikzpicture}
-\end{center}
 
 ## Facts & Assumptions
 
@@ -91,3 +74,19 @@ network equation in the Example.
 
 3.1 Since $u(0)\ge0$, [F3] implies the exact semigroup trajectory remains entrywise nonnegative for every $t\ge0$. [F3, given, step 1.1] ∎
 
+## Remarks
+
+The diagram records the orientation, conductances, and vertex masses; edge lengths are schematic and are not used in the matrix calculation.
+
+```tikz
+\begin{tikzpicture}[>=stealth, scale=1.5, transform shape, every node/.style={font=\normalsize}]
+  \node[circle,draw] (v1) at (0,0) {$1$};
+  \node[circle,draw] (v2) at (2.1,0) {$2$};
+  \node[circle,draw] (v3) at (4.2,0) {$3$};
+  \draw[->] (v1) -- node[above] {$c_1=1$} (v2);
+  \draw[->] (v2) -- node[above] {$c_2=2$} (v3);
+  \node[below=4pt] at (v1) {$m_1=1$};
+  \node[below=4pt] at (v2) {$m_2=2$};
+  \node[below=4pt] at (v3) {$m_3=3$};
+\end{tikzpicture}
+```

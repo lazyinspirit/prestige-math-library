@@ -101,6 +101,36 @@ test('reached imported prerequisite declarations and actual supplier page/item c
   f.pin('deep', { order: 0, items: ['lem-deep'] }); f.item('lem-supplier', ['lem-deep']); f.item('lem-deep', ['lem-supplier']);
   const items = f.run(); assert.notEqual(items.status, 0); assert.match(output(items), /\[item-cycle\]/); assert.match(output(items), /\[page-cycle\]/);
 });
+test('unknown imported orders are not fabricated as zero; explicit zero and known reversals remain enforced', t => {
+  const f = fixture(t);
+  f.pin('foreign', { deps: ['deep'] }); f.pin('deep', { items: ['lem-deep'] }); f.item('lem-deep');
+  const unknown = f.run(); assert.equal(unknown.status, 0, output(unknown));
+  assert.equal(importedPlanPage(f.root, 'foreign', f.receipt, ['math/foreign.md']).order, undefined);
+  f.pin('foreign', { order: 0, deps: ['deep'] }); f.pin('deep', { order: -1, items: ['lem-deep'] });
+  const zero = f.run(); assert.equal(zero.status, 0, output(zero));
+  assert.equal(importedPlanPage(f.root, 'foreign', f.receipt, ['math/foreign.md']).order, 0);
+  // A third, unknown-order import must not disturb comparison of the known pair.
+  f.pin('unknown-context', { items: ['lem-unknown'] }); f.item('lem-unknown');
+  f.pages[0].requires.push('unknown-context');
+  f.pin('deep', { order: 1, items: ['lem-deep'] });
+  const reversed = f.run(); assert.notEqual(reversed.status, 0);
+  assert.match(output(reversed), /\[prereq-order\].*foreign \(order 0\) requires deep \(order 1\)/);
+  f.pin('foreign', { order: 0 }); f.pages[0].order = -1;
+  const beforeZero = f.run(); assert.notEqual(beforeZero.status, 0);
+  assert.match(output(beforeZero), /\[prereq-order\].*selected \(order -1\) requires foreign \(order 0\)/);
+});
+test('unknown-order imported context still rejects missing suppliers and declared/item/page cycles', t => {
+  const f = fixture(t); f.pin('foreign', { deps: ['deep'] });
+  const missing = f.run(); assert.notEqual(missing.status, 0);
+  assert.match(output(missing), /\[requires-resolve\].*deep/);
+  f.pin('deep', { deps: ['foreign'], items: ['lem-deep'] }); f.item('lem-deep');
+  const declared = f.run(); assert.notEqual(declared.status, 0);
+  assert.match(output(declared), /\[requires-cycle\]/);
+  f.pin('deep', { items: ['lem-deep'] });
+  f.item('lem-supplier', ['lem-deep']); f.item('lem-deep', ['lem-supplier']);
+  const items = f.run(); assert.notEqual(items.status, 0);
+  assert.match(output(items), /\[item-cycle\]/); assert.match(output(items), /\[page-cycle\]/);
+});
 test('unrelated bad imported pages and stale unrelated plan declarations stay outside current frontier resolution', t => {
   const f = fixture(t); f.pin('unrelated', { status: 'draft', deps: ['missing-page'], items: ['lem-other'] });
   f.receipt.files.find(row => row.path.endsWith('/unrelated.md')).sha256 = '0'.repeat(64);

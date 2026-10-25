@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant.md

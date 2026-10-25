@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-relative-position-classifies-pairs-of-complete-flags.json
+  precheck: pass
 id: thm-relative-position-classifies-pairs-of-complete-flags
 kind: theorem
 title: Relative position classifies pairs of complete flags
@@ -19,9 +22,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf"
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 4.28, printed pp. 38-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Statement
@@ -105,3 +106,37 @@ diagonal action of $G$ on $X\times X$. Then:
 5.1 By step 4.1 the fibres of the composite assignment (pair $\mapsto$ intersection-dimension function $\mapsto$ southwest rank matrix $\mapsto$ double coset) are exactly the diagonal orbits, and by step 3.1 the fibres of $\Psi$ are the same orbits; the Bruhat decomposition [L2] identifies the double cosets $BxB$ bijectively with $S_n$ through $\sigma\mapsto BP_\sigma B$. Hence $\sigma(F,E)$ is well defined, is determined by the intersection dimensions $\dim(F_i\cap E_j)$, and classifies the diagonal $G$-orbits on $X\times X$. In particular, when $F=V_\bullet$ the southwest rank matrix of the single matrix $g$ with $E=gV_\bullet$ determines $\sigma$ by [L3], while two choices $g,g'$ with $gV_\bullet=g'V_\bullet$ differ by right multiplication by an element of $B$ and give the same rank matrix by the first assertion of [L3]. ∎ [step 1.1, step 2.1, step 3.1, step 4.1, L2, L3]
 
 **Remark.** The relative position is the analogue for complete flags of the Bruhat index of a matrix: the double coset $B h^{-1}gB$ records how the two flags are positioned, and the intersection dimensions $\dim(F_i\cap E_j)$ are the coordinate-free form of the southwest rank matrix. The dimension identity of step 1.2 is the only place where the direction of the picture enters: the ranks are taken on the rows $i+1,\dots,n$, so the formula pairs the prefix flag $V_j$ with the suffix quotient $V/V_i$.
+
+
+## Remarks
+
+For $F=hV_\bullet$ and $E=gV_\bullet$, set $x=h^{-1}g$ and
+$d_{ij}=\dim(F_i\cap E_j)$. The left-hand schematic marks the southwest block
+$A_{ij}=x[i+1,\dots,n\,;\,1,\dots,j]$ for $i<n$; its rank is
+$r_{i+1,j}(x)$. The right-hand chain records the complete invariant, not a
+sequence of linear maps. Here $(d_{ij})$ and $(r_{ab}(x))$ denote the full
+arrays, with $r_{1j}(x)=j$ and $r_{n+1,j}(x)=0$. For $i=n$ the block is empty
+and $d_{nj}=j$. The schematic illustrates steps 1.2, 2.2, 4.1 and 5.1;
+the proof above is independent of it.
+
+```tikz
+\begin{tikzpicture}[scale=0.95]
+\draw (0,0) rectangle (4,3);
+\draw (0,1.5) -- (4,1.5);
+\draw (2,0) -- (2,3);
+\draw[very thick] (0,0) rectangle (2,1.5);
+\node at (1,0.75) {$A_{ij}$};
+\node at (1,3.35) {$1,\ldots,j$};
+\node at (3,3.35) {$j+1,\ldots,n$};
+\node[anchor=east] at (-0.15,2.25) {$1,\ldots,i$};
+\node[anchor=east] at (-0.15,0.75) {$i+1,\ldots,n$};
+\node at (2,-0.45) {$x=h^{-1}g$};
+\node (d) at (7.3,3) {$(d_{ij})$};
+\node (r) at (7.3,1.65) {$(r_{ab}(x))$};
+\node (b) at (7.3,0.3) {$BxB=BP_\sigma B$};
+\node (s) at (7.3,-1.05) {$\sigma(F,E)\in S_n$};
+\draw[->] (d) -- node[right] {$r_{i+1,j}=j-d_{ij}$} (r);
+\draw[->] (r) -- node[right] {determines} (b);
+\draw[->] (b) -- node[right] {Bruhat index} (s);
+\end{tikzpicture}
+```

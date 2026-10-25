@@ -1,0 +1,26 @@
+---
+id: def-schur-multiplier-of-a-group
+kind: definition
+title: "Schur multiplier"
+status: published
+origin: pipeline
+deps: [def-group-homology-as-a-derived-functor]
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  audited: 2026-09-06
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-06
+sources:
+  scraped: []
+  references:
+    - title: "Clara Löh, Group Cohomology"
+      url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
+---
+
+## Definition
+
+$M(G)=H_2(G;\mathbb{Z})$, not $H^2(G,\mathbb{C}^{\times})$ by definition.

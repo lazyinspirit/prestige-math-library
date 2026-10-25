@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-the-zero-h-two-class-corresponds-to-the-direct-product-only.json
+  precheck: pass
 id: fs-the-zero-h-two-class-corresponds-to-the-direct-product-only
 kind: false-statement
-title: "FALSE: the zero H^2 class corresponds to the direct product only"
+title: "FALSE: the zero $H^2$ class corresponds to the direct product only"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-twisted-product-extension-from-a-two-cocycle, def-second-cohomology-by-factor-sets, cor-an-extension-determines-a-well-defined-h-two-class]
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -38,7 +34,7 @@ $M\times G$.
 
 [F2] The zero cocycle represents the zero element of $H^2(G,M)$ ([[def-second-cohomology-by-factor-sets]]).
 
-[L1] An extension with a specified normalized section has the class of its factor set ([[cor-an-extension-determines-a-well-defined-h-two-class]]).
+[L1] An extension with a specified normalized section has the class of its factor set ([[cor-an-extension-determines-a-well-defined-h-two-class|An extension determines a well-defined $H^2$ class]]).
 
 ## Refutation
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-model-predictive-control.json
+  precheck: n/a
 id: alg-model-predictive-control
 kind: algorithm
 title: "Finite-horizon model-predictive control"
@@ -16,12 +19,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Sergey Levine, Aviral Kumar, George Tucker, and Justin Fu, Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems"
@@ -46,3 +43,22 @@ At the current state $s_0$, return the first action in its supplied listing that
 [[lem-finite-set-has-max|Every finite nonempty list of real action values has an attained maximum.]]
 
 [Levine, Kumar, Tucker, and Fu, *Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems*](https://arxiv.org/pdf/2005.01643).
+
+
+## Remarks
+
+The diagram separates the finite-horizon model calculation from the single true-environment transition. Here $a_0$ is the first action in the supplied ordering with $Q_H(s_0,a_0)=V_H(s_0)$, and $s_1$ denotes the observed next state. The dashed arrow is an optional new invocation at $s_1$, with a newly supplied model; it specifies no model-update rule. The algorithm is defined fully above, independently of this illustration.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}, box/.style={draw,rounded corners,align=center,text width=5.8cm,minimum height=1cm}]
+\node[box] (plan) at (0,0) {Learned model, current state $s_0$, horizon $H$\\Compute $V_0=0$, then $Q_h,V_h$ for $h=1,\ldots,H$};
+\node[box] (choose) at (0,-1.9) {Select $a_0\in A(s_0)$\\First listed action attaining $V_H(s_0)$};
+\node[box] (execute) at (0,-3.8) {Execute only $a_0$ in the true environment};
+\node[box] (observe) at (0,-5.7) {Observe the next state $s_1\in S$};
+\draw[->] (plan) -- (choose);
+\draw[->] (choose) -- (execute);
+\draw[->] (execute) -- (observe);
+\draw[->,dashed] (observe.east) -- (4.7,-5.7) -- (4.7,0) -- (plan.east);
+\node[align=center,text width=2.2cm] at (6.1,-2.85) {Optional replan\\at $s_1$ with a\\supplied model};
+\end{tikzpicture}
+```

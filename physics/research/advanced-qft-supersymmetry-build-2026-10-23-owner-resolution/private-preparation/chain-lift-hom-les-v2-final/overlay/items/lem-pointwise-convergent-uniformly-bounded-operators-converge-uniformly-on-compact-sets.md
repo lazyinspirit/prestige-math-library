@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-pointwise-convergent-uniformly-bounded-operators-converge-uniformly-on-compact-sets.md

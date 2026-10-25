@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-k-theory-of-projective-space-and-projections.json
+  precheck: pass
 id: lem-k-theory-of-projective-space-and-projections
 kind: lemma
 title: "K-theory of projective space and of projective bundles"
@@ -27,12 +30,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "The Stacks Project, Chow Homology and Chern Classes, Section 42.36 (projective space bundle formula, tags 02TW-02TX)"
@@ -90,7 +87,7 @@ Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $k$ be a field.
 
 ## Proof
 
-**Proof technique:** direct; resolve the diagonal of $P\times_YP$ by the Koszul complex of its defining regular section, push forward, and read generation and independence off the resulting class identity.
+**Proof technique:** direct; resolve the diagonal of the fiber product of P with itself over Y by the Koszul complex of its defining regular section, push forward, and read generation and independence off the resulting class identity.
 
 1.1 The diagonal section. On $P\times_YP$ use the quotient convention of [F1], with $S=\ker(q^*\mathcal E\to\mathcal O(1))$ of rank $r$. The composite $S_2\hookrightarrow q^*\mathcal E\twoheadrightarrow\mathcal O(1)_1$ is a section of $S_2^\vee\otimes\mathcal O(1)_1$; its zero scheme is the diagonal, because the first quotient then factors through the second quotient and the resulting surjection of invertible sheaves is an isomorphism. On a common standard chart where the same coordinate of both quotients is nonzero, the section has regular equations $x_i-y_i$, $1\le i\le r$. These are a regular sequence over every base ring, successively eliminating one coordinate. Such charts cover the diagonal, and off the diagonal one component of the section is a unit so the Koszul complex is contractible. The Koszul complex therefore resolves $\mathcal O_\Delta$ globally, with terms $\mathcal O(-j)_1\otimes\bigwedge^jS_2$. [F1, F3, given, algebra]
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-projective-versus-simple-grothendieck-classes-in-a-small-block.md

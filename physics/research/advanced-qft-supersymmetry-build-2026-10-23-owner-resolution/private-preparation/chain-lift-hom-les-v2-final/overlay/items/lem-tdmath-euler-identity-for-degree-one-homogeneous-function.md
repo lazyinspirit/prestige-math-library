@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-tdmath-euler-identity-for-degree-one-homogeneous-function.md

@@ -1,0 +1,70 @@
+{
+  "id": "ex-framed-links-represent-elements-of-pi-three-of-s-two",
+  "agent": "/root/rendering_repair_coordinator/dt_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile shows literal pi_3 of S^2, including underscore and caret, in the heading. The body already consistently identifies the intended homotopy group as pi_3(S^2).",
+      "action": "Replaced the title formula with delimited $\\pi_3(S^2)$, using single-quoted YAML to preserve the TeX backslash.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Typeset the title homotopy-group notation; no body or protected metadata changes.",
+  "source_lines_after": {
+    "4": "title: 'The framed unknot represents a generator of $\\pi_3(S^2)$'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "guards": {
+    "before_raw_sha256": "62287ef6584d48c2ce929c807e505ad1c82c425be904ee03bbdf62afa0c9effa",
+    "after_raw_sha256": "87e589c68e598e2ab9c9f2ba2b3444bcfa0f1f95c3ef542fb006be5f7fcdf866",
+    "original_equal_current_before_edit": true,
+    "only_title_changed": true,
+    "status_byte_preserved": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-framed-links-represent-elements-of-pi-three-of-s-two.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-framed-links-represent-elements-of-pi-three-of-s-two.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-framed-links-represent-elements-of-pi-three-of-s-two.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/differential-topology/screenshots/ex-framed-links-represent-elements-of-pi-three-of-s-two--01.png",
+    "original_view": "Standalone view_image, original resolution",
+    "final": "research/math-library-rendering-repairs-2026-10-23/previews/dt006-final/screenshots/ex-framed-links-represent-elements-of-pi-three-of-s-two--01.png",
+    "final_view": "Standalone view_image, original resolution: heading displays pi with subscript 3 and S with superscript 2 inside parentheses, with no literal delimiters or raw ASCII formula.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dt006-final/manifest.json",
+    "source_sha256": "87e589c68e598e2ab9c9f2ba2b3444bcfa0f1f95c3ef542fb006be5f7fcdf866",
+    "reference_map_sha256": "aecda657830ec3324efd5a9f8fb97420392d451f8e56ef7e791a55e65cd8106a",
+    "limitations": "Local native title/ItemBody preview only; 16 unrelated reference-map parse diagnostics. No production HTTP route coverage."
+  },
+  "intermediate_checks": "An initial temporary title replacement lost its closing YAML quote through JavaScript replacement-string substitution; scoped rendercheck and preview caught it. Corrected immediately with a guarded functional replacement, then reran all final checks successfully."
+}

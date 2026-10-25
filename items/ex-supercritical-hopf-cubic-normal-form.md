@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-supercritical-hopf-cubic-normal-form.json
+  precheck: pass
 id: ex-supercritical-hopf-cubic-normal-form
 kind: example
 title: A supercritical planar cubic Hopf bifurcation
@@ -53,3 +56,23 @@ The normal-form convention is that $q^*q=p^*q=1$ and $\ell_1=\operatorname{Re}G_
 2.1 Therefore $\ell_1=-2$. The hypotheses of [F2] hold, and $\beta\ell_1<0$ exactly when $\mu>0$; since there are no transverse modes, the small cycle on that side is orbitally stable. [F1, F2, step 1.1, step 1.2, algebra]
 
 3.1 In polar coordinates $R=\sqrt{x^2+y^2}$ the equations give $\dot R=\mu R-R^3$ and $\dot\theta=1$. For $\mu>0$ the nonzero radial equilibrium is $R=\sqrt{\mu}$, and its radial derivative is $\mu-3R^2=-2\mu<0$, verifying the stable cycle and period $2\pi$. [step 1.1, algebra] ∎
+
+## Remarks
+
+For a fixed $\mu>0$, the circle below is the periodic orbit $R=\sqrt{\mu}$. Straight arrows indicate only the radial component $\dot R=R(\mu-R^2)$, not full trajectories; motion on the circle is counterclockwise because $\dot\theta=1$. The origin remains an equilibrium and is unstable for $\mu>0$. For $\mu\leq0$, $\dot R<0$ for every $R>0$, so there is no nonzero periodic circle. These observations follow directly from step 3.1, independently of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.25]
+  \draw[thick] (0,0) circle (1.4);
+  \draw[->,very thick] (35:1.4) arc (35:85:1.4);
+  \draw[->,thick,dashed] (0.35,0) -- (1.1,0);
+  \draw[->,thick,dashed] (2.15,0) -- (1.65,0);
+  \draw[->,thick,dashed] (-0.35,0) -- (-1.1,0);
+  \draw[->,thick,dashed] (-2.15,0) -- (-1.65,0);
+  \fill (0,0) circle (0.045);
+  \node[below] at (0,-0.1) {$0$};
+  \node at (0,1.8) {$\mu>0,\quad R=\sqrt{\mu}$};
+  \node at (2.15,1.1) {$\dot\theta=1$};
+  \node at (0,-1.85) {Dashed arrows: radial drift};
+\end{tikzpicture}
+```

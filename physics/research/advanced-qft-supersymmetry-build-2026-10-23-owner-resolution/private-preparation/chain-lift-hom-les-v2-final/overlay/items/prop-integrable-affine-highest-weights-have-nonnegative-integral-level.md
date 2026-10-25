@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-integrable-affine-highest-weights-have-nonnegative-integral-level.md

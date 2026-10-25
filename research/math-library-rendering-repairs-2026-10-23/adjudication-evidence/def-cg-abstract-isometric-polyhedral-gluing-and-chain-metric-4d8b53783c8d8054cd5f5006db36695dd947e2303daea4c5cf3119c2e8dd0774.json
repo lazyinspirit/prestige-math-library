@@ -1,0 +1,85 @@
+{
+  "id": "def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric",
+  "agent": "/root/rendering_repair_coordinator/cox_026",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-display-math-block",
+      "verdict": "confirmed",
+      "reason": "Both authentic original PNG tiles were inspected separately at original resolution. In tile 01, the chain paragraph runs beyond the right viewport edge after the face-membership expression; the two authored $$ formulas render inline inside the prose instead of as display blocks. Tile 02 confirms the following text continues normally. Source shows same-line delimiters with no surrounding paragraph breaks. The native renderer uses remark-math, which parses this as inline math. This is a genuine source-level display defect, not a multi-image clipping artifact.",
+      "action": "Separated each formula from prose with blank lines and placed its opening and closing $$ delimiters on their own lines. Formula strings and all prose remain identical.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Restore the chain-length and chain-metric-candidate formulas as standalone display blocks by changing whitespace only.",
+  "source_lines_after": [
+    58,
+    60,
+    61,
+    62,
+    64,
+    66,
+    67,
+    68,
+    70
+  ],
+  "mathematical_meaning_preserved": true,
+  "preservation_checks": {
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": "status: published",
+    "entire_carrier_identical_after_removing_whitespace": true,
+    "before_raw_sha256": "a772b39424511bfdace881569279c675c818a1c43fdd9d281d179adaab294033",
+    "after_raw_sha256": "e6fafd8e61bc7cd1ed3775191b0ddceb42ab65b5acbfe5d26dd8dae5cd8698cf"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric.md",
+            "item_id": "def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_verification": {
+    "preview_dir": "research/math-library-rendering-repairs-2026-10-23/previews/cox026-final-display-blocks",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cox026-final-display-blocks/manifest.json",
+    "manifest_sha256": "e3650bb65416885f10e63877c96a6248e8684af455653d09999fc821b5595bdb",
+    "source_sha256": "e6fafd8e61bc7cd1ed3775191b0ddceb42ab65b5acbfe5d26dd8dae5cd8698cf",
+    "reference_map_sha256": "216961e18ba8f16397ad22e2c17c21ad0dc939948d55b610f51d1e9885bf0d23",
+    "inspected_original_resolution_tiles": [
+      "screenshots/def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric--01.png",
+      "screenshots/def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric--02.png"
+    ],
+    "result": "Both formulas now render as centered display blocks. The complete chain prose wraps inside the content width, and the complete infimum formula is visible with ample horizontal margin. No remaining clipping appears in the repaired region.",
+    "limitations": "Local native ItemBody preview only, not a production HTTP route. The title map reports 16 unrelated parse diagnostics; scoped rendercheck has no errors or warnings."
+  },
+  "remaining_issues": []
+}

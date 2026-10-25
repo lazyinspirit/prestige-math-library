@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-level-one-vector-representation-has-a-perfect-crystal-with-lower-global-basis.md

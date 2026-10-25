@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-successive-minima-attainment-and-adapted-flag.json
+  precheck: pass
 id: lem-successive-minima-attainment-and-adapted-flag
 kind: lemma
 title: "Attained successive minima and adapted flag"
@@ -26,13 +29,7 @@ sources:
     - title: "Martin Henk, Successive Minima and Lattice Points"
       url: "https://arxiv.org/pdf/math/0204158"
       locator: "§§1-2 pp.1-4."
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement
@@ -120,3 +117,37 @@ one element at a time that lies in the span of the others.
 8.1 Suppose $v\notin\operatorname{span}\{a_j:\lambda_j<\lambda_i\}=\operatorname{span}\{a_1,\dots,a_p\}$. By steps 1.2 and 7.3 the independent family $a_1,\dots,a_p$ together with $v$ lies in $(\lambda_i-\varepsilon)C\cap\Lambda$, so $\dim\operatorname{span}((\lambda_i-\varepsilon)C\cap\Lambda)\ge p+1$; by definition of the infimum $\lambda_{p+1}\le\lambda_i-\varepsilon<\lambda_i=\lambda_{p+1}$, a contradiction. Therefore $v\in\operatorname{span}\{a_j:\lambda_j<\lambda_i\}$, which is clause 3. [F1, step 7.2, step 1.2, step 7.3]
 
 9.1 Clauses 1, 2 and 3 are steps 4.1, 7.1 and 8.1 respectively. [step 4.1, step 7.1, step 8.1] ∎
+
+
+## Remarks
+
+For a concrete picture of the flag, take $\Lambda=\mathbb Z^2$ and
+$C=\{(x,y):x^2+4y^2\le1\}$. Then $\lambda_1=1$ and $\lambda_2=2$:
+$C$ contains $(1,0)$, while $tC$ contains no lattice point off the
+$x$-axis until $t=2$. Choose $a_1=(1,0)$ and $a_2=(0,1)$.
+The dashed ellipse is $C$ and the solid ellipse is $2C$; the horizontal
+line is the earlier span $\mathbb R a_1$. The lattice points in
+$\operatorname{int}(2C)$ are exactly $(-1,0),(0,0),(1,0)$, whereas
+$a_2$ appears on the boundary and completes the independent family.
+This illustrates clauses 1--3; the proof above is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[scale=1.5,>=stealth]
+  \draw[->] (-2.7,0) -- (2.8,0) node[right] {$\mathbb R a_1$};
+  \draw[->] (0,-1.35) -- (0,1.5);
+  \draw[dashed] (0,0) ellipse (1 and 0.5);
+  \draw[thick] (0,0) ellipse (2 and 1);
+  \foreach \x in {-2,-1,0,1,2} {
+    \foreach \y in {-1,0,1} {
+      \fill (\x,\y) circle (1.2pt);
+    }
+  }
+  \draw[->,very thick] (0,0) -- (1,0);
+  \draw[->,very thick] (0,0) -- (0,1);
+  \node[below right] at (0,0) {$0$};
+  \node[below] at (1,-0.08) {$a_1$};
+  \node[above right] at (0,1) {$a_2$};
+  \node at (0.55,0.63) {$C$};
+  \node at (1.7,0.83) {$2C$};
+\end{tikzpicture}
+```

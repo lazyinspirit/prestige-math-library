@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-flat-connections-have-vanishing-positive-degree-real-chern-weil-classes.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors.md

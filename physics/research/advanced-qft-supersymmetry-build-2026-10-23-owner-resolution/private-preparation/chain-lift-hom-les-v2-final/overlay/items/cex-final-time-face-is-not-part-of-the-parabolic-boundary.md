@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-final-time-face-is-not-part-of-the-parabolic-boundary.md

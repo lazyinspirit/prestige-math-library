@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-manifold-with-boundary-has-a-global-inward-pointing-vector-field-along-the-boundary.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-kauffman-bracket-state-sum.json
+  precheck: n/a
 id: alg-kauffman-bracket-state-sum
 kind: algorithm
 title: "Kauffman bracket state sum"
@@ -13,18 +16,6 @@ axiom_use: "Choice-free: the input crossing set is finite, and every state is tr
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §III, printed pp. 430–432"
@@ -74,3 +65,34 @@ $|S|\ge1$ and every exponent of $\delta$ is nonnegative.
 [Roberts, *Knots Knotes* (1999), §4.3](https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf)
 
 [Funar, *A Crash Course in Quantum Invariants of Knots and 3-Manifolds*, Chapter 3, §1.1](https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf)
+
+## Remarks
+
+The three panels show the local chart and its two replacements used in step 2.
+The strands are unoriented; horizontal-right followed by vertical-up is the
+positive orientation of the chart. The A-panel pairs northwest with southwest
+and northeast with southeast; the B-panel pairs northwest with northeast and
+southwest with southeast. The displayed weights multiply to
+$A^{a(S)-b(S)}$ for a complete state; its loop factor remains
+$\delta^{|S|-1}$ as in the algorithm.
+
+```tikz
+\begin{tikzpicture}[scale=1, line cap=round, line join=round]
+  \begin{scope}
+    \draw[thick] (-1,1)--(-0.14,0.14);
+    \draw[thick] (0.14,-0.14)--(1,-1);
+    \draw[very thick] (-1,-1)--(1,1);
+    \node at (0,-1.45) {crossing};
+  \end{scope}
+  \begin{scope}[xshift=3.8cm]
+    \draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);
+    \draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);
+    \node[align=center] at (0,-1.65) {$A$-smoothing\\weight $A$};
+  \end{scope}
+  \begin{scope}[xshift=7.6cm]
+    \draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);
+    \draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);
+    \node[align=center] at (0,-1.65) {$B$-smoothing\\weight $A^{-1}$};
+  \end{scope}
+\end{tikzpicture}
+```

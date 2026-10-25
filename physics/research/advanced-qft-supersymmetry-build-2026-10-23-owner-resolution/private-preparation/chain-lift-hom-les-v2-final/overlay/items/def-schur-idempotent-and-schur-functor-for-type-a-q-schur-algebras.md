@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras.md

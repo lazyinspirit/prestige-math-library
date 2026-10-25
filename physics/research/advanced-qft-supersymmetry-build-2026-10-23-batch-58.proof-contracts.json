@@ -1,0 +1,2291 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "58",
+  "level": 2,
+  "scope": [
+    "lem-qftx-parametric-vector-bundle-section-smoothing",
+    "def-qftx-mapping-cone-hopf-invariant",
+    "def-qftx-suspension-pinch-map",
+    "lem-qftx-hopf-generator-and-cone",
+    "lem-qftx-folded-product-attachment-suspends-to-zero",
+    "lem-qftx-suspended-hopf-composite-adem-obstruction",
+    "lem-qftx-special-unitary-column-fibration",
+    "lem-qftx-low-unitary-homotopy-inputs",
+    "lem-qftx-pi5-special-unitary-nonzero",
+    "lem-qftx-parametric-gauge-smoothing",
+    "lem-qftx-sphere-gauge-evaluation-fibration",
+    "lem-qftx-based-gauge-sphere-homotopy",
+    "thm-qftx-reduced-gauge-group-sphere-nontriviality",
+    "lem-qftx-section-retract-obstruction",
+    "ex-qftx-sphere-gauge-s3-components"
+  ],
+  "contracts": {
+    "lem-qftx-parametric-vector-bundle-section-smoothing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-vector-bundle-chart-and-transition-function",
+          "source_section": "Definition",
+          "quote": "Let $\\pi:E\\to M$ be a smooth rank-$r$ vector bundle and let\n$\\Phi_\\alpha:\\pi^{-1}(U_\\alpha)\\to U_\\alpha\\times\\mathbb R^r$ be a local\ntrivialization whose restriction on each fibre is a linear isomorphism. The\npair $(U_\\alpha,\\Phi_\\alpha)$ is a **vector bundle chart**.\n\nFor two vector bundle charts $(U_\\alpha,\\Phi_\\alpha)$ and\n$(U_\\beta,\\Phi_\\beta)$, the overlap map\n\n$$\\Phi_\\beta\\circ\\Phi_\\alpha^{-1}:(U_\\alpha\\cap U_\\beta)\\times\\mathbb R^r\\to (U_\\alpha\\cap U_\\beta)\\times\\mathbb R^r$$\n\nhas the form\n\n$$\\Phi_\\beta\\circ\\Phi_\\alpha^{-1}(p,v)=(p,g_{\\beta\\alpha}(p)v),$$\n\nwhere $g_{\\beta\\alpha}:U_\\alpha\\cap U_\\beta\\to GL(r,\\mathbb R)$ is smooth. The\nmap $g_{\\beta\\alpha}$ is the **transition function** from chart $\\alpha$ to\nchart $\\beta$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Every open cover of a smooth manifold admits a smooth partition of unity subordinate to it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-partition-of-unity-subordinate-to-an-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $(U_i)_{i\\in I}$ be an open cover of $M$. A family of smooth functions $(\\phi_i)_{i\\in I}$ with $\\phi_i:M\\to [0,1]$ is a **smooth partition of unity subordinate to** $(U_i)_{i\\in I}$ when:\n\n1. the family $(\\operatorname{supp}(\\phi_i))_{i\\in I}$ is locally finite;\n2. $\\operatorname{supp}(\\phi_i)\\subseteq U_i$ for every $i\\in I$; and\n3. $\\sum_i \\phi_i(p)=1$ for every $p\\in M$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $X$ is empty, take the unique empty family. If $M$ is empty, its bundle has the unique empty smooth section, and take the unique family of those sections. In either case all agreement constraints and the straight-line homotopy hold vacuously, and the displayed error is $\\sup\\{0\\}=0$. We may therefore assume $X$ and $M$ nonempty. Choose a finite bundle atlas and a subordinate finite smooth partition of unity using compactness and [F1, F2]. In each chart multiply a section coefficient by its partition function, extend by zero within the chart, convolve with a fixed compactly supported smooth mollifier of radius $\\delta$, and sum the finitely many resulting local sections. For each $\\delta>0$ this defines a linear operator $S_\\delta:C^0(M,E)\\to\\Gamma^\\infty(E)$: every output derivative is an integral of the input against a derivative of a fixed smooth kernel, so each $C^r$ seminorm is bounded by a finite constant times the input $C^0$ norm. Uniform continuity of each input on compact chart supports gives $\\|S_\\delta u-u\\|_{C^0}\\to0$ for every $u$. Since $x\\mapsto s(x,\\cdot)$ has compact image in $C^0(M,E)$, a finite subcover argument makes this convergence uniform over $x\\in X$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The family $x\\mapsto S_\\delta s(x,\\cdot)$ is continuous into $C^\\infty$ by the seminorm bounds in step 1.1. Let $U$ be the chosen collar neighborhood of $K$, with projection $r:U\\to K$, and choose a continuous cutoff $\\chi:X\\to[0,1]$ equal to $1$ on $K$ and supported inside $U$. For an interior hypersurface use the two-sided collar $c:K\\times(-2a,2a)\\to U$, $r(c(k,t))=k$, with $\\chi$ supported in $|t|<a$; no boundary of $X$ is needed. Set\n$$s_1(x)=S_\\delta s(x)+\\chi(x)\\bigl(s(r(x))-S_\\delta s(r(x))\\bigr)$$\non $U$ and $s_1=S_\\delta s$ off $U$. Every term is a smooth section in $m$ and varies continuously in $C^\\infty$ with $x$. At $x\\in K$, $s_1(x)=s(x)$. As $x$ approaches $K$, continuity into $C^0$ and the uniform approximation in step 1.1 make the correction uniformly small; choose the collar width and then $\\delta$ so $s_1$ remains arbitrarily $C^0$-close to $s$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each marked point choose a bundle chart and a smooth bump $b_i$ supported in that chart with $b_i(m_i)=1$; shrink the charts to be pairwise disjoint. In the chart extend $v_i-s_1(x,m_i)$ as the constant coefficient vector and multiply by $b_i$. The resulting correction $c_i(x,\\cdot)$ is a smooth section continuous in $x$ in every $C^r$ seminorm, is zero on $K$ because $s_1=s=v_i$ there, and changes the value at $m_i$ by exactly $v_i-s_1(x,m_i)$. Put $\\widetilde s=s_1+\\sum_i c_i$. The finite corrections preserve $C^\\infty$ continuity and the relative condition. Since the errors at the marked points are bounded by the uniform $C^0$ error from step 2.1 and the bumps have fixed bounded norms, choosing that error sufficiently small gives the prescribed $\\varepsilon$ bound.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $0\\le t\\le1$ define $H_t(x,m)=(1-t)s(x,m)+t\\widetilde s(x,m)$ in the vector space $E_m$. This is continuous, equals $s$ at $t=0$ and $\\widetilde s$ at $t=1$, and is constant on $K$ and at each marked point because both endpoint families agree there. Thus the required relative homotopy exists.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the error is the real supremum of {0} union the set of nonnegative pointwise errors. If X or M is empty this set is {0}, so the unique empty family or family of empty sections has error zero and satisfies the relative homotopy conditions. On nonempty products adding zero does not change the error. Empty K and q=0 still omit the collar and marked-point corrections in steps 2.1 and 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero section is allowed; the fiberwise straight-line homotopy fixes it. (step 4.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1: a one-point parameter space is a single section approximation, and a single marked point requires just one bump correction. The stated epsilon remains strictly positive; the argument makes no epsilon=0 approximation claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "With no marked points the finite correction sum is empty. (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relative homotopy is exactly the original family at t=0 and the smoothed family at t=1. (step 4.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and step 1.1: full AC is declared for the smooth partition-of-unity supplier; compactness reduces the actual bundle atlas and partition to a finite collection. Step 3.1 chooses finitely many disjoint marked-point charts, not an unrecorded arbitrary-index selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives an approximation and a relative homotopy under fixed regularity hypotheses; it does not characterize all families admitting a smoothing by an if-and-only-if condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse deriving C-infinity continuity on K from the bare existence of some approximate family is claimed. The on-K topology is an input used by the collar correction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Read all four steps and exact smooth-manifold, bundle-chart and partition suppliers. Compact chart supports allow a sufficiently small common mollifier radius; kernel derivative bounds make each smoothing operator C0-to-Cinfinity continuous. Compact image plus uniformly bounded C0 operator norms yields uniform approximation. The relative correction uses the collar projection and a cutoff, with the two-sided convention on an interior hypersurface; marked points use disjoint finite bumps. Empty X/M, empty K, q=0, zero sections and strict positive epsilon are covered. AC dominates the partition supplier AC-omega. No extension to parameter manifolds with boundary is claimed."
+      }
+    },
+    "def-qftx-mapping-cone-hopf-invariant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-mapping-cylinder-and-mapping-cone",
+          "source_section": "Definition",
+          "quote": "For a continuous $f:X\\to Y$, the **unreduced mapping cylinder** is\n$$M_f=(Y\\amalg(X\\times I))/((x,0)\\sim f(x)).$$\nWrite $j:X\\to M_f$, $j(x)=[x,1]$, and $r:M_f\\to Y$, $r(y)=y$, $r([x,s])=f(x)$. The formula for r descends continuously by [[thm-quotient-universal-property]]. The **unreduced mapping cone** is $C_f=M_f/j(X)$, collapsing the entire free end to a point when it is nonempty. If X is empty this quotient is Y, with no extra cone point adjoined. These constructions do not collapse a basepoint track. Reduced cones and suspensions are defined separately below. Deformations always use the homotopy convention in [[def-homotopy-relative-and-path-homotopy]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "source_section": "Statement",
+          "quote": "Let $(X,A)$ be a CW pair with $A\\ne\\varnothing$ and supplied characteristic maps. The ordinary quotient $X/A$ is a CW complex, with one vertex $*$ replacing $A$ and one cell of the same dimension for every cell of $X\\setminus A$.\n\nIf $A$ admits a contraction $H:A\\times I\\to A$, $H(-,0)=\\mathrm{id}_A$, $H(-,1)=a\\in A$, then the quotient map $q:X\\to X/A$ is a homotopy equivalence and a weak homotopy equivalence. If $H(a,t)=a$ for every $t$, the constructed inverse and inverse homotopies are based at $a$ and $*$. No choice principle is required; a contraction is one witness, not a family of selected contractions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-reduced-cone-suspension-and-cofiber-sequence",
+          "source_section": "Definition",
+          "quote": "For a well-pointed CGWH based space $(X,x_0)$ set\n$$CX=(X\\times I)/(X\\times\\{1\\}\\cup\\{x_0\\}\\times I),\\qquad \\Sigma X=CX/(X\\times\\{0\\}).$$\nThe common collapsed set is the basepoint; the copy of X at height zero is the cone base. All products and mapping conventions are those of [[def-compactly-generated-conventions-for-based-homotopy]], and well-pointedness means [[def-cofibration-and-homotopy-extension-property]].\n\nFor a based $f:X\\to Y$ put $C_f=Y\\cup_f CX$, the **reduced homotopy cofiber**, with $i:Y\\to C_f$ the inclusion and $q:C_f\\to\\Sigma X$ collapsing Y. This reduced notation is used in this item and its based consumers; it differs from the unreduced cone of [[def-mapping-cylinder-and-mapping-cone]]. A reduced cylinder also collapses the basepoint track. Maps on all these quotients are defined by [[thm-quotient-universal-property]].\n\nWrite $\\rho_X([x,t])=[x,1-t]$ and $-\\Sigma f=\\rho_Y\\Sigma f$. The cofiber sequence convention is\n$$X\\xrightarrow{f}Y\\xrightarrow{i}C_f\\xrightarrow{q}\\Sigma X\\xrightarrow{-\\Sigma f}\\Sigma Y\\xrightarrow{-\\Sigma i}\\Sigma C_f\\xrightarrow{-\\Sigma q}\\Sigma^2X\\xrightarrow{\\Sigma^2 f}\\Sigma^2Y\\longrightarrow\\cdots.$$\nThe homotopy equivalences and mapping-set exactness behind this notation are proved below; this definition does not assert a covariant exact sequence of homotopy groups.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-singular-cohomology-ring",
+          "source_section": "Definition",
+          "quote": "For a space $X$ and commutative unital coefficient ring $R$, put\n$$H^*(X;R)=\\bigoplus_{n\\ge0}H^n(X;R),\\qquad [\\varphi]\\smile[\\psi]=[\\varphi\\smile\\psi].$$\nThe groups and equality of representatives are those of [[def-singular-cohomology-with-coefficients]]. The multiplication descends through both quotient maps by [[thm-cup-product-leibniz-identity]], including simultaneous changes. Extend to finite sums of homogeneous classes by distributivity; only finitely many summands occur, so each product belongs to the displayed direct sum.\n\nThis is the **singular cohomology ring**. To check the ring assertion before using it, let $\\varphi,\\psi,\\eta$ have degrees $p,q,r$. On an arbitrary $(p+q+r)$-simplex both parenthesizations of their cochain cup product evaluate to\n$$\\varphi(\\sigma[0,\\ldots,p])\\,\\psi(\\sigma[p,\\ldots,p+q])\\,\\eta(\\sigma[p+q,\\ldots,p+q+r]).$$\nRestriction to a face and then a face of that face is restriction to the listed vertex block, and multiplication in $R$ is associative. Thus cochain associativity holds exactly and descends to classes. Bilinearity gives the two distributive laws. Addition, additive inverses and zero come from the abelian quotient groups. Products of degrees $p,q$ have degree $p+q$.\n\nIts multiplicative unit is the class of the cochain $\\mathbf1\\in C^0(X;R)$ assigning $1_R$ to every singular vertex. On any edge, $\\delta\\mathbf1=1_R-1_R=0$. The front/back formula gives $\\mathbf1\\smile\\varphi=\\varphi=\\varphi\\smile\\mathbf1$ on every simplex. This includes all components at once: degree-zero cochains need not have finite support on the set of vertices or components.\n\nIf $X$ is empty or $R=0$, the ring is the zero ring and its unit equals zero, as allowed by our unital-ring convention. The formula for three factors works also when any degree is zero and for degenerate simplices; for one-point $X$ it has the same unit. Nothing here chooses a representative for every class: the quotient operation is defined by representative independence. No AC is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cellular-cochains-compute-cohomology-with-local-coefficients",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a CW pair $(X,A)$ and local system $\\mathcal L$, the cellular cochain complex obtained from the skeletal filtration computes singular cohomology with local coefficients:\n$$H^n\\bigl(C^*_{\\mathrm{cell}}(X,A;\\mathcal L)\\bigr)\\cong H^n(X,A;\\mathcal L).$$\nFor a connected pair, it is the equivariant-Hom complex on cellular chains after the published right chain action is converted to the left action $g\\cdot c=c\\cdot g^{-1}$; equivalently its cochains satisfy $\\varphi(c\\cdot g)=g^{-1}\\varphi(c)$. The comparison is natural for cellular maps with correctly directed coefficient morphisms.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the cells of $C_f$ have dimensions $0,2,4$. Its cellular cochain groups are therefore $\\mathbb Z$ in those degrees and zero in degrees $1$ and $3$; every cellular coboundary into or out of degrees $2$ and $4$ is zero because the adjacent cochain group is zero. [F3] gives $H^2(C_f;\\mathbb Z)\\cong\\mathbb Z$ and $H^4(C_f;\\mathbb Z)\\cong\\mathbb Z$, with the restriction and oriented top-cell generators in the Definition.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $x\\smile x$ belongs to $H^4(C_f;\\mathbb Z)=\\mathbb Z y$. Since $y$ is a generator, there is a unique integer $H(f)$ with $x\\smile x=H(f)y$. The orientations fix its sign, so the displayed equation defines an integer without any further choice.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition and step 1.1: S^3 and S^2 are nonempty and based, so the mapping cone always has its basepoint, bottom sphere and attached cell. The adjacent cellular cochain groups in degrees 1 and 3 are zero, making both relevant coboundaries zero rather than eliminating the generators."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and step 2.1: H(f)=0 means exactly that x cup x is zero in the free group Z y. For a constant attachment the cone is S^2 wedge S^4 and the bottom square vanishes, so the defining coefficient is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition and step 2.1: H(f)=1 is allowed and is precisely the coefficient equation x cup x=y with the chosen top-cell orientation; the verification establishes uniqueness of that coefficient, without claiming every map has coefficient one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate input beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The invariant is an integral cup-product coefficient on a fixed CW cone; no interval parameter or endpoint-dependent limiting operation occurs in its definition or the cellular verification."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and steps 1.1 and 2.1: full AC is retained for the imported cohomology suppliers. Once the sphere/cell orientations are fixed, x and y and the integer coefficient are uniquely determined; no further choice of a cohomology generator is hidden."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines H(f) by the unique coefficient equation in Z y; it does not state that a particular Hopf-invariant value characterizes a homotopy class of attaching maps."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No inverse construction of f from an integer is part of this definition. Existence and uniqueness here concern the coefficient for an already given based f."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked both Verification steps and the exact ordinary/reduced cone, CW-collapse, cellular-cochain and cohomology-ring interfaces. The cell groups in degrees 0,2,4 have zero adjacent coboundaries; restriction in degree 2 is an isomorphism and the oriented top cell fixes y. Therefore the integer coefficient is unique, including zero. AC is inherited only through the cellular supplier; no empirical premise. Ordinary and reduced cones are distinguished."
+      }
+    },
+    "def-qftx-suspension-pinch-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reduced-cone-suspension-and-cofiber-sequence",
+          "source_section": "Definition",
+          "quote": "For a well-pointed CGWH based space $(X,x_0)$ set\n$$CX=(X\\times I)/(X\\times\\{1\\}\\cup\\{x_0\\}\\times I),\\qquad \\Sigma X=CX/(X\\times\\{0\\}).$$\nThe common collapsed set is the basepoint; the copy of X at height zero is the cone base. All products and mapping conventions are those of [[def-compactly-generated-conventions-for-based-homotopy]], and well-pointedness means [[def-cofibration-and-homotopy-extension-property]].\n\nFor a based $f:X\\to Y$ put $C_f=Y\\cup_f CX$, the **reduced homotopy cofiber**, with $i:Y\\to C_f$ the inclusion and $q:C_f\\to\\Sigma X$ collapsing Y. This reduced notation is used in this item and its based consumers; it differs from the unreduced cone of [[def-mapping-cylinder-and-mapping-cone]]. A reduced cylinder also collapses the basepoint track. Maps on all these quotients are defined by [[thm-quotient-universal-property]].\n\nWrite $\\rho_X([x,t])=[x,1-t]$ and $-\\Sigma f=\\rho_Y\\Sigma f$. The cofiber sequence convention is\n$$X\\xrightarrow{f}Y\\xrightarrow{i}C_f\\xrightarrow{q}\\Sigma X\\xrightarrow{-\\Sigma f}\\Sigma Y\\xrightarrow{-\\Sigma i}\\Sigma C_f\\xrightarrow{-\\Sigma q}\\Sigma^2X\\xrightarrow{\\Sigma^2 f}\\Sigma^2Y\\longrightarrow\\cdots.$$\nThe homotopy equivalences and mapping-set exactness behind this notation are proved below; this definition does not assert a covariant exact sequence of homotopy groups.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-quotient-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $q : X \\to Y$ be a quotient map ([[def-quotient-topology]]). Then:\n\n1. **Characteristic property.** For every space $W$ and every function\n   $k : Y \\to W$,\n   $$k \\text{ is continuous } \\iff k \\circ q \\text{ is continuous} .$$\n2. **Factorisation.** Let $f : X \\to W$ be continuous and **constant on the\n   fibres of $q$**, that is $q(x) = q(x')$ implies $f(x) = f(x')$. Then there is\n   exactly one function $\\bar f : Y \\to W$ with $\\bar f \\circ q = f$, and it is\n   continuous.\n3. **Composites.** If $q : X \\to Y$ and $p : Y \\to Z$ are quotient maps then\n   $p \\circ q : X \\to Z$ is a quotient map.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the closed subspaces $Z\\times[0,\\tfrac12]$ and $Z\\times[\\tfrac12,1]$, the two formulas in the Definition are continuous. They agree at $t=\\tfrac12$, since each suspension endpoint is collapsed, and they send the basepoint track and both outer end slices to the wedge basepoint. For any closed subset $C$ of the wedge, the preimage under each restricted formula is closed in its closed half, hence closed in $Z\\times[0,1]$; their finite union is closed. Thus the pasted map is continuous and constant on every equivalence class of the reduced suspension quotient.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], the map descends uniquely and continuously to $p_Z:\\Sigma Z\\to\\Sigma Z\\vee\\Sigma Z$. On the first half it is the first wedge inclusion with linear rescaling of the suspension coordinate, and on the second half it is the second inclusion with linear rescaling; the midpoint maps to the common basepoint. Thus the displayed formula is well-defined at all endpoints and defines the reduced suspension pinch map.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: a based space has the specified z_0, excluding an empty Z. The collapsed endpoint slices and basepoint track are nonempty, so the reduced suspension and wedge always have their declared basepoints."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and step 1.1: at t=0 the first branch is iota_1([z,0]), the wedge basepoint. On the entire track z=z_0 both branches are also the basepoint, so the quotient relation is respected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition and step 1.1: at t=1 the second rescaling is 2t-1=1, an endpoint of the second reduced suspension, hence the wedge basepoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate input beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: at t=1/2 the first rescaling is 1 and the second is 0, both collapsed endpoints. At t=0 and t=1 the corresponding outer slices also collapse; closed-half pasting and quotient descent prove continuity at these seams."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition and step 2.1: the two rescaling formulas and quotient universal property determine a unique descended map. A supplied basepoint is the only selected point; the construction chooses no representatives of quotient classes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition with a well-definedness verification of the specific pinch map; it asserts no characterization of all maps into a wedge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse reconstruction of a based space from a wedge-valued map is stated. The quotient and its distinguished point are fixed before the map is constructed."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked both Verification steps against the quotient universal property and reduced suspension definition. The closed halves paste for every based space, agree at t=1/2, and send t=0,1 and the entire basepoint track to the wedge point. Empty/unusual separation cases do not affect the quotient argument; no choice is used."
+      }
+    },
+    "lem-qftx-hopf-generator-and-cone": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-real-line-is-universal-cover-of-circle",
+          "source_section": "Statement",
+          "quote": "The quotient projection\n\n$$p:\\mathbb R\\longrightarrow\\mathbb R/\\mathbb Z,\\qquad t\\longmapsto[t],$$\n\nis a universal covering space of the quotient circle, pointed by $0\\mapsto[0]$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-covering-space-lifting-criterion",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be path-connected and locally path-connected, let $f:(Y,y_0)\\to(B,b_0)$ be based, and let $p:(E,e_0)\\to(B,b_0)$ be a covering. A based lift $\\widetilde f:(Y,y_0)\\to(E,e_0)$ exists if and only if $f_*\\pi_1(Y,y_0)\\subseteq p_*\\pi_1(E,e_0)$; when it exists it is unique.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "source_section": "Statement",
+          "quote": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ with fiber $F=p^{-1}(b_0)$, the sequence\n$$\\cdots\\to\\pi_n(F)\\xrightarrow{i_*}\\pi_n(E)\\xrightarrow{p_*}\\pi_n(B)\\xrightarrow{\\partial_p}\\pi_{n-1}(F)\\to\\cdots\\to\\pi_1(B)\\xrightarrow{\\partial_p}\\pi_0(F)\\xrightarrow{i_*}\\pi_0(E)\\xrightarrow{p_*}\\pi_0(B)$$\nis exact wherever there is an incoming and outgoing arrow. Basepoints are $e_0,b_0$ as appropriate. Exactness means incoming image equals the inverse image of the distinguished element. Arrows are homomorphisms where both group structures are defined; the component terms are pointed sets. The last arrow is onto precisely when $p(E)$ meets every path component of $B$.\n\nThere is a right action of $\\pi_1(B,b_0)$ on $\\pi_0(F)$: $[e]\\cdot[\\gamma]$ is the endpoint component of a lift of $\\gamma$ starting at $e$, with loop products traversed left-to-right. Its orbits are precisely the fibers of $i_*:\\pi_0(F)\\to\\pi_0(E)$, and the stabilizer of $[e_0]$ is $p_*\\pi_1(E,e_0)$. Our boundary convention gives $\\partial_p[\\gamma]=[e_0]\\cdot[\\gamma]^{-1}$. These assertions require no AC.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "source_section": "Statement",
+          "quote": "For every r≥1, degree is an isomorphism $\\pi_r(S^r,b)\\to\\mathbb Z$, sending the identity to +1 and cubical concatenation, equivalently oriented pinch sum, to addition. Two based sphere self-maps are homotopic through based maps if and only if their degrees agree. No infinite choice principle is needed.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-integral-cohomology-ring-of-complex-projective-space-by-splitting",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every $N\\geq0$ identify\n$\\mathbb{CP}^N=\\operatorname{Gr}_1(\\mathbb C^{N+1})$, the space of complex\nlines in $\\mathbb C^{N+1}$, and let $\\gamma$ be the tautological complex line\nwith $x=e(\\gamma_{\\mathbb R})\\in H^2(\\mathbb{CP}^N;\\mathbb Z)$ its Euler class\nin the complex orientation. Then, as a graded ring,\n$$H^*(\\mathbb{CP}^N;\\mathbb Z)=\\mathbb Z[x]/(x^{N+1}),$$\nthe class $x$ generating each even degree and the odd groups vanishing; for\n$0\\leq m\\leq N$ the standard inclusion\n$\\mathbb{CP}^m\\hookrightarrow\\mathbb{CP}^N$, induced by\n$\\mathbb C^{m+1}\\subseteq\\mathbb C^{N+1}$, pulls $x$ back to $x$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qftx-mapping-cone-hopf-invariant",
+          "source_section": "Definition",
+          "quote": "Let $f:S^3\\to S^2$ be a based continuous map. Give $S^2$ an orientation and give the attached $4$-cell its chosen orientation. Its mapping cone is the CW complex $C_f=S^2\\cup_fD^4$, with the basepoint as its $0$-cell. Let $x\\in H^2(C_f;\\mathbb Z)$ be the unique class restricting to the positive generator of $H^2(S^2;\\mathbb Z)$, and let $y\\in H^4(C_f;\\mathbb Z)$ be the generator determined by the oriented $4$-cell. Define the integral mapping-cone Hopf invariant $H(f)\\in\\mathbb Z$ by the equation\n$$x\\smile x=H(f)y.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every numerable fiber bundle, with its supplied ordinary local product charts and support-subordinate locally finite partition of unity, is a Hurewicz fibration in all ordinary spaces. In particular a bundle of CGWH spaces with these charts is a Hurewicz fibration in CGWH. AC is used to well-order the set of finite chart words. No selection of a chart for every base point or of a separate lift for every path is made.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
+          "source_section": "Statement",
+          "quote": "For integers $0\\le k<r$, $r\\ge1$, every continuous based map $(S^k,a)\\to(S^r,b)$ is nullhomotopic through maps fixing a. For k=0 this says every point of $S^r$ can be joined to b. No arbitrary choice principle is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$C=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$$\n\nwith the Euclidean subspace topology. The function\n\n$$h:\\mathbb R/\\mathbb Z\\longrightarrow C,\\qquad h([t])=(\\cos 2\\pi t,\\sin 2\\pi t),$$\n\nis a homeomorphism. Thus $[t]\\mapsto(\\cos 2\\pi t,\\sin 2\\pi t)$ is a homeomorphism from $\\mathbb R/\\mathbb Z$ to the unit circle and sends $[0]$ to $(1,0)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-suspension-isomorphism-in-reduced-singular-homology",
+          "source_section": "Statement",
+          "quote": "Let $G$ be an abelian group. For a based well-pointed space $X$—meaning that the basepoint inclusion\n$\\{x_0\\}\\hookrightarrow X$ is a cofibration—reduced singular homology has\nnatural isomorphisms\n$\\widetilde H_{n+1}(\\Sigma X;G)\\cong\\widetilde H_n(X;G)$ for all integers $n$. Here $\\Sigma X$ is the suspension with two distinct\napices, as in [[def-adjunction-cone-suspension]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Hopf map is a locally trivial circle bundle: in the chart $z_0\\ne0$ with $w=z_1/z_0$, the section is $(1,w)/\\sqrt{1+|w|^2}$ and the fiber coordinate is $z_0/|z_0|$; use $(w,1)/\\sqrt{1+|w|^2}$ and $z_1/|z_1|$ in the other chart. These formulas give continuous inverse bundle charts. Put $a_i([z])=|z_i|^2/(|z_0|^2+|z_1|^2)$, $b_i=\\max(0,a_i-1/4)$ and $\\rho_i=b_i/(b_0+b_1)$. At least one $a_i\\ge1/2$, so the denominator is positive, and $\\operatorname{supp}\\rho_i\\subseteq\\{a_i\\ge1/4\\}\\subseteq\\{z_i\\ne0\\}$. This is a finite numeration with closed supports subordinate to the charts. By [F6] the Hopf bundle is Hurewicz and hence Serre. By [F1], $\\pi_2(S^1)=\\pi_3(S^1)=0$; the LES [F2] therefore makes $h_*:\\pi_3(S^3)\\to\\pi_3(S^2)$ an isomorphism. By [F3] its source is generated by the identity, so $[h]$ generates $\\pi_3(S^2)\\cong\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $\\mathbb{CP}^2=\\{[z_0:z_1:z_2]\\}$ and use the open cell $z_2\\ne0$ with representative $(w_0,w_1,1)$, $w\\in\\mathbb C^2$. Its characteristic disk can be taken as the unit ball in $\\mathbb C^2$ via $w\\mapsto[w_0:w_1:\\sqrt{1-|w|^2}]$; the interior parametrizes the complement of $\\mathbb{CP}^1$, and on $|w|=1$ the boundary map is $[w_0:w_1]=h(w)$. Thus $\\mathbb{CP}^2$ is the mapping cone $C_h$. By [F4], the degree-two generator squares to the degree-four generator, so [F5] gives $H(h)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $d_m:S^3\\to S^3$ have degree $m$. The radial cone extension $D^4\\to D^4$, $ru\\mapsto r d_m(u)$, has relative degree $m$ and boundary $d_m$: on collapsing the disk boundary its map is $\\Sigma d_m$, whose degree is $m$ by the natural homology suspension in [F6]. Together with the identity on $S^2$, it defines a map $C_{h\\circ d_m}\\to C_h$, since the boundary attaching maps agree. It pulls the degree-two generator of $C_h$ back to that of $C_{h\\circ d_m}$ and the degree-four generator back to $m$ times the latter. Pulling back $x_h^2=y_h$ therefore gives $x_{h\\circ d_m}^2=m y_{h\\circ d_m}$, which is exactly $H(h\\circ d_m)=m$ by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The coefficient $H(f)$ is invariant under a based homotopy $H_t$ of attaching maps. A comparison $C_{f_0}\\to C_{f_1}$ is the identity on $S^2$; on a cone point $[x,t]$ it equals $H_{2t}(x)$ for $0\\le t\\le1/2$ and the target cone point $[x,2t-1]$ for $1/2\\le t\\le1$. The formulas agree at the seam, respect the tip, and are continuous by quotient descent. Reversing the homotopy gives its homotopy inverse: the composites insert a path followed by its reverse, which contracts by shrinking its traversed homotopy parameter, and then a linear cone reparametrization removes the constant collar. Both maps restrict to the identity on the bottom sphere and have relative top-cell degree $+1$, so cup-product naturality preserves $H$. Since step 1.1 identifies every homotopy class with $[h\\circ d_m]$ for a unique integer $m$, step 2.1 implies that any attachment with $H(f)=m$ has class $m[h]$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the unit sphere contains (1,0), and at least one of the two projective coordinates is nonzero at every point. The numeration denominator b_0+b_1 is therefore positive; the Hopf fibers are nonempty circles."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For m=0 the cone coefficient is zero by the degree-zero radial extension. (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Hopf cone has coefficient one. (step 1.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degree-zero composite case is included in the cone-map construction. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1: the characteristic disk maps its unit boundary by h, and the radial extension sends radius 0 to the disk center and radius 1 by d_m. In step 3.1 the homotopy/cell formulas agree at the half-cone seam and send the tip to the tip, so comparison maps respect the attachments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and steps 1.1 and 2.1: AC is declared for fibration/cohomology suppliers. The Hopf bundle numeration is explicit from two coordinates; oriented cohomology generators and pullbacks fix the sign, rather than an unrecorded selection of generators."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts a generator, a cone identification and H(h composed with d_m)=m; it presents no biconditional. The proof separately derives class identification from its integer coefficient, without claiming every source map is literally a chosen degree representative."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication identifying the actual attaching function solely from its coefficient is stated. Step 3.1 obtains a homotopy-class identification via cone comparisons, preserving the distinction between a map and its based class."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked every step and direct supplier interfaces: Hopf charts have a genuine support-subordinate finite numeration, circle maps lift to contractible R for degrees 2 and 3, and LES gives the generator from degree on S3. The CP2 characteristic disk has exactly the Hopf boundary and preserves complex top orientation. The cone extension of degree m pulls back y by m and x identically, including m=0 and negative m; attaching-homotopy comparison has relative degree +1. Independently checked Hatcher Example 4.51 (p.380) and Appendix 4.B (pp.427–428). AC is carried from cohomology and bundle suppliers."
+      }
+    },
+    "lem-qftx-folded-product-attachment-suspends-to-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-hopf-generator-and-cone",
+          "source_section": "Statement",
+          "quote": "Let $h:S^3\\to\\mathbb{CP}^1\\cong S^2$ be the Hopf map $h(z_0,z_1)=[z_0:z_1]$ on the unit sphere in $\\mathbb C^2$. Then $h$ generates $\\pi_3(S^2)\\cong\\mathbb Z$. Use the integral mapping-cone Hopf invariant $H(f)$ defined for based maps $f:S^3\\to S^2$ by $x^2=H(f)y$ in $C_f=S^2\\cup_fD^4$, with the positive degree-two and oriented top-cell generators. With the complex orientations, $C_h\\cong\\mathbb{CP}^2$, $H(h)=1$, and for every integer $m$ and degree-$m$ map $d_m:S^3\\to S^3$, $H(h\\circ d_m)=m$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative unital ring. Give the graded tensor product the multiplication\n$$(a\\otimes b)(a'\\otimes b')=(-1)^{|b||a'|}(a\\smile a')\\otimes(b\\smile b').$$\nFor arbitrary spaces $X,Y$, external product $a\\times b=\\operatorname{pr}_X^*a\\smile\\operatorname{pr}_Y^*b$ gives a unital graded-ring homomorphism to $H^*(X\\times Y;R)$. This multiplicativity requires no AC.\n\nAssume in addition AC, that $R$ is a PID, and that either every $H_q(Y;R)$ or every $H_p(X;R)$ is finite free over $R$. Then this homomorphism is an isomorphism.\n\nFor CW pairs $(X,A),(Y,B)$ with supplied characteristic maps, relative external product is likewise a graded-ring homomorphism\n$$H^*(X,A;R)\\mathbin{\\widehat\\otimes}_R H^*(Y,B;R)\\longrightarrow H^*(X\\times Y,(A\\times Y)\\cup(X\\times B);R),$$\nwhere the hat denotes the displayed graded multiplication on the ordinary graded direct-sum tensor product, not a completion. Relative rings need not have units. This relative multiplicativity is choice-free for every commutative unital $R$. Under AC and the PID hypothesis it is an isomorphism if either every $H_q(Y,B;R)$ or every $H_p(X,A;R)$ is finite free. Neither additive assertion requires bounded dimension or finite-rank singular chain groups. Products have their ordinary product topologies; AC enters only in additive bijectivity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-suspension-pinch-map",
+          "source_section": "Definition",
+          "quote": "Let $(Z,z_0)$ be a based topological space. Define its reduced suspension as $\\Sigma Z=(Z\\times[0,1])/(Z\\times\\{0,1\\}\\cup\\{z_0\\}\\times[0,1])$, with the collapsed subset as basepoint. Let $\\iota_1,\\iota_2:\\Sigma Z\\to\\Sigma Z\\vee\\Sigma Z$ be the wedge inclusions. The reduced suspension pinch map $p_Z:\\Sigma Z\\to\\Sigma Z\\vee\\Sigma Z$ is induced by\n$$p_Z([z,t])=\\begin{cases}\\iota_1([z,2t]),&0\\le t\\le\\tfrac12,\\\\\\iota_2([z,2t-1]),&\\tfrac12\\le t\\le1.\\end{cases}$$\nAt $t=\\tfrac12$ both values are the wedge basepoint.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $a,b\\in H^2(S^2\\times S^2;\\mathbb Z)$ be the positive generators from the two projections. By [F2], $a^2=b^2=0$ and $ab$ is the positive top generator. The map $\\nabla:W\\to S^2$ extends over the cone on $\\beta$ by the definition $\\beta=\\nabla\\alpha$; hence it extends to a map $q:S^2\\times S^2=W\\cup_\\alpha D^4\\to C_\\beta$. On $W$, $q$ is the fold into the bottom $S^2$ of $C_\\beta$, so $q^*x=a+b$. On the open $4$-cell, the extension is the characteristic disk of $C_\\beta$ with degree $+1$ by [A1], so $q^*y=ab$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $i:W\\hookrightarrow S^2\\times S^2$ be the $2$-skeleton inclusion. The characteristic disk extends $i\\alpha$ over $D^4$, so $\\Sigma i\\circ\\Sigma\\alpha$ is null. Define\n$$r=(\\Sigma p_1\\vee\\Sigma p_2)\\circ\\operatorname{pinch}:\\Sigma(S^2\\times S^2)\\longrightarrow\\Sigma S^2\\vee\\Sigma S^2,$$\nwhere $p_1,p_2$ are the projections and the pinch is [F3]. On the first suspended wedge summand, the first projection branch is the identity up to linear rescaling of the suspension coordinate and the second branch is constant; on the second summand the roles reverse. Thus $r\\circ\\Sigma i\\simeq\\operatorname{id}_{\\Sigma W}$. Applying $r$ to the nullhomotopy in the first sentence gives $\\Sigma\\alpha\\simeq *$. Composing with $\\Sigma\\nabla$ gives $\\Sigma\\beta\\simeq *$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the cone $C_\\beta$, $x^2=H(\\beta)y$ by [F1]. Pulling back with step 1.1 yields $(a+b)^2=H(\\beta)ab$. Since $a^2=b^2=0$ and degree-two classes commute, the left side is $2ab$. The class $ab$ is a generator, so $H(\\beta)=2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For based maps $a,b:S^3\\to S^2$, the group operation on $\\pi_3(S^2)$ is represented by $(a\\vee b)\\circ p_{S^2}$, where $p_{S^2}:\\Sigma S^2\\to\\Sigma S^2\\vee\\Sigma S^2$ is the pinch in [F3]; the operation on $\\pi_4(S^3)$ is represented by $p_{S^3}:\\Sigma S^3\\to\\Sigma S^3\\vee\\Sigma S^3$. In the quotient model $\\Sigma^2 Z=(Z\\times[0,1]^2)/\\!\\sim$, the map $\\Sigma p_Z$ pinches one suspension coordinate and $p_{\\Sigma Z}$ pinches the other. Write the square of suspension coordinates as a disk with its boundary collapsed. For each angle $\\theta$, split the disk by the diameter at angle $\\theta$, map the two half-disks to the two wedge summands using their boundary-collapsing rescalings to a full disk, and keep the first and second summands in that order. Choose these rescalings by rotating fixed rescalings of the two half-disks, so they vary continuously with $\\theta$. As the diameter turns through a right angle, this gives a based homotopy between the two coordinate pinches; smashing this homotopy with $Z$ proves $\\Sigma p_Z\\simeq p_{\\Sigma Z}$. Taking $Z=S^2$ and using $\\Sigma S^2\\cong S^3$ gives $\\Sigma p_{S^2}\\simeq p_{S^3}$. Since suspension preserves composition and sends a wedge of maps to the wedge of their suspensions, this compatibility gives $[\\Sigma(a+b)]=[\\Sigma a]+[\\Sigma b]$; hence $E:[a]\\mapsto[\\Sigma a]$ is a homomorphism on $\\pi_3(S^2)$. Now [F1, step 2.1] gives $[\\beta]=2[h]$, so $[\\Sigma\\beta]=E([\\beta])=2E([h])=2[\\Sigma h]$. Since $\\Sigma\\beta$ is null by step 1.2, $2[\\eta_3]=0$ for $\\eta_3=\\Sigma h$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: W contains its wedge point and both S^2 summands; the product has its oriented top cell. Neither the cup-product generator ab nor the two branches of the pinch is indexed by a possibly empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The suspended attaching class is zero. (step 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: q has degree +1 on the relative top cell by the product orientation, giving q* y=ab. This unit coefficient is necessary for step 2.1 to deduce H(beta)=2 rather than an unspecified multiple."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The fold coefficient is computed as exactly two from the product ring. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1: the suspension pinch uses the two half-intervals whose midpoint and outer ends are collapsed basepoints. Restricting its projection branches to each suspended wedge summand gives identity plus a constant branch, homotopic to the identity by suspension-coordinate rescaling."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and steps 1.1 and 3.1: the proof explicitly works under AC for the imported Kunneth supplier. The fold, projections and pinch are fixed maps; the nullhomotopy comes from the characteristic disk and the retraction, with no new selection of lifts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conjunction H(beta)=2 and suspension(beta) null is established for one folded attachment; it is not an equivalence characterizing all maps of Hopf invariant two."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Nullity of a suspension is not used to infer Hopf invariant two for arbitrary maps. The value two is computed first from (a+b) squared for this specific fold."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Read all four steps. Kunneth hypotheses hold for integral homology of two finite spheres; both squares vanish and graded sign in degree 2 is +1, yielding (a+b)^2=2ab. The product attachment extends over its disk. Pinch and projections give a left homotopy inverse to the suspended wedge inclusion, so its attachment is null after suspension. Coordinate-pinch compatibility supplies additivity of E, hence 2 eta3=0 from the exact Hopf classification. Endpoint and orientation conventions are preserved; no claim that eta3 is already known nonzero is used."
+      }
+    },
+    "lem-qftx-suspended-hopf-composite-adem-obstruction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-hopf-generator-and-cone",
+          "source_section": "Statement",
+          "quote": "Let $h:S^3\\to\\mathbb{CP}^1\\cong S^2$ be the Hopf map $h(z_0,z_1)=[z_0:z_1]$ on the unit sphere in $\\mathbb C^2$. Then $h$ generates $\\pi_3(S^2)\\cong\\mathbb Z$. Use the integral mapping-cone Hopf invariant $H(f)$ defined for based maps $f:S^3\\to S^2$ by $x^2=H(f)y$ in $C_f=S^2\\cup_fD^4$, with the positive degree-two and oriented top-cell generators. With the complex orientations, $C_h\\cong\\mathbb{CP}^2$, $H(h)=1$, and for every integer $m$ and degree-$m$ map $d_m:S^3\\to S^3$, $H(h\\circ d_m)=m$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-mod-two-cohomology-rings-of-complex-projective-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every integer $n\\geq0$,\n$$H^*(\\mathbb {CP}^n;\\mathbb F_2)\\cong\\mathbb F_2[c_n]/(c_n^{n+1}),\\qquad |c_n|=2,$$\nwhere $c_n$ is reduction modulo two of the normalized integral generator. Also\n$$H^*(\\mathbb {CP}^{\\infty};\\mathbb F_2)\\cong\\mathbb F_2[c],\\qquad |c|=2.$$\nAll odd cohomology groups vanish. Standard skeletal restrictions preserve the\nnamed generators and are isomorphisms in every degree at most twice the\ncomplex dimension of the finite target.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-steenrod-squares-are-well-defined-and-natural",
+          "source_section": "Statement",
+          "quote": "For every integer $k$, $Sq^k$ is independent of the cocycle representative and\nof the chosen coherently carried higher-diagonal system. It is additive and\nnatural for maps of spaces and pairs. Thus\n\n$$\nSq^k\\colon H^n(X,A;\\mathbb F_2)\\longrightarrow H^{n+k}(X,A;\\mathbb F_2)\n$$\n\nis a natural homomorphism, with the outside-range values fixed to zero by the\ndefinition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-steenrod-square-normalization-instability-and-top-square",
+          "source_section": "Statement",
+          "quote": "For $x\\in H^n(X;\\mathbb F_2)$,\n\n$$\nSq^0x=x,\\qquad Sq^k x=0\\ \\text{if }k>n,\\qquad Sq^n x=x\\smile x.\n$$\n\nThe same assertions hold relatively. On reduced cohomology of based CW\ncomplexes, every square commutes with the standard cohomology suspension:\n\n$$\nSq^k(\\sigma x)=\\sigma(Sq^k x).\n$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-adem-relations-for-steenrod-squares",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $a,b$ be positive integers with $0<a<2b$. For every space\n$X$, every $q\\geq0$, and every $x\\in H^q(X;\\mathbb F_2)$,\n\n$$Sq^aSq^b(x)=\\sum_{j=0}^{\\lfloor a/2\\rfloor}\\binom{b-j-1}{a-2j}Sq^{a+b-j}Sq^j(x).$$\n\nThe binomial coefficients are reduced modulo two. A binomial coefficient is\nzero when its lower index is negative or exceeds its nonnegative upper index,\nand a Steenrod square with an index outside its defining nonnegative range is\nzero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cellular-cochains-compute-cohomology-with-local-coefficients",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a CW pair $(X,A)$ and local system $\\mathcal L$, the cellular cochain complex obtained from the skeletal filtration computes singular cohomology with local coefficients:\n$$H^n\\bigl(C^*_{\\mathrm{cell}}(X,A;\\mathcal L)\\bigr)\\cong H^n(X,A;\\mathcal L).$$\nFor a connected pair, it is the equivariant-Hom complex on cellular chains after the published right chain action is converted to the left action $g\\cdot c=c\\cdot g^{-1}$; equivalently its cochains satisfy $\\varphi(c\\cdot g)=g^{-1}\\varphi(c)$. The comparison is natural for cellular maps with correctly directed coefficient morphisms.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-reduced-cone-suspension-and-cofiber-sequence",
+          "source_section": "Definition",
+          "quote": "For a well-pointed CGWH based space $(X,x_0)$ set\n$$CX=(X\\times I)/(X\\times\\{1\\}\\cup\\{x_0\\}\\times I),\\qquad \\Sigma X=CX/(X\\times\\{0\\}).$$\nThe common collapsed set is the basepoint; the copy of X at height zero is the cone base. All products and mapping conventions are those of [[def-compactly-generated-conventions-for-based-homotopy]], and well-pointedness means [[def-cofibration-and-homotopy-extension-property]].\n\nFor a based $f:X\\to Y$ put $C_f=Y\\cup_f CX$, the **reduced homotopy cofiber**, with $i:Y\\to C_f$ the inclusion and $q:C_f\\to\\Sigma X$ collapsing Y. This reduced notation is used in this item and its based consumers; it differs from the unreduced cone of [[def-mapping-cylinder-and-mapping-cone]]. A reduced cylinder also collapses the basepoint track. Maps on all these quotients are defined by [[thm-quotient-universal-property]].\n\nWrite $\\rho_X([x,t])=[x,1-t]$ and $-\\Sigma f=\\rho_Y\\Sigma f$. The cofiber sequence convention is\n$$X\\xrightarrow{f}Y\\xrightarrow{i}C_f\\xrightarrow{q}\\Sigma X\\xrightarrow{-\\Sigma f}\\Sigma Y\\xrightarrow{-\\Sigma i}\\Sigma C_f\\xrightarrow{-\\Sigma q}\\Sigma^2X\\xrightarrow{\\Sigma^2 f}\\Sigma^2Y\\longrightarrow\\cdots.$$\nThe homotopy equivalences and mapping-set exactness behind this notation are proved below; this definition does not assert a covariant exact sequence of homotopy groups.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-mapping-cylinder-and-mapping-cone",
+          "source_section": "Definition",
+          "quote": "For a continuous $f:X\\to Y$, the **unreduced mapping cylinder** is\n$$M_f=(Y\\amalg(X\\times I))/((x,0)\\sim f(x)).$$\nWrite $j:X\\to M_f$, $j(x)=[x,1]$, and $r:M_f\\to Y$, $r(y)=y$, $r([x,s])=f(x)$. The formula for r descends continuously by [[thm-quotient-universal-property]]. The **unreduced mapping cone** is $C_f=M_f/j(X)$, collapsing the entire free end to a point when it is nonempty. If X is empty this quotient is Y, with no extra cone point adjoined. These constructions do not collapse a basepoint track. Reduced cones and suspensions are defined separately below. Deformations always use the homotopy convention in [[def-homotopy-relative-and-path-homotopy]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "source_section": "Statement",
+          "quote": "Let $(X,A)$ be a CW pair with $A\\ne\\varnothing$ and supplied characteristic maps. The ordinary quotient $X/A$ is a CW complex, with one vertex $*$ replacing $A$ and one cell of the same dimension for every cell of $X\\setminus A$.\n\nIf $A$ admits a contraction $H:A\\times I\\to A$, $H(-,0)=\\mathrm{id}_A$, $H(-,1)=a\\in A$, then the quotient map $q:X\\to X/A$ is a homotopy equivalence and a weak homotopy equivalence. If $H(a,t)=a$ for every $t$, the constructed inverse and inverse homotopies are based at $a$ and $*$. No choice principle is required; a contraction is one witness, not a family of selected contractions.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $C_{\\eta_2}=\\mathbb{CP}^2$ and $Sq^2$ sends its bottom degree-two generator to the nonzero degree-four class by [F2]. For reduced cones, suspension commutes with this cell cofiber: both $\\Sigma C_f$ and $C_{\\Sigma f}$ are the quotient of $I\\times S^n\\sqcup I\\times S^{n+1}\\times I$ by the same relations, collapsing suspension ends, cone tips and based tracks and identifying $(s,x,0)$ with $(s,f(x))$. Quotient descent therefore gives inverse continuous comparison maps. By [F5], ordinary cones are based homotopy equivalent to these reduced cones. Thus for every $n\\ge2$ there is a based equivalence $C_{\\eta_n}\\simeq\\Sigma^{n-2}C_h$, preserving the bottom and top cohomology classes. Suspension compatibility in [F2] therefore gives a nonzero $Sq^2:H^n(C_{\\eta_n};\\mathbb F_2)\\to H^{n+2}(C_{\\eta_n};\\mathbb F_2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose for contradiction that $\\eta_n\\eta_{n+1}$ is null. Put $f=\\eta_n:S^{n+1}\\to S^n$ and $g=\\eta_{n+1}:S^{n+2}\\to S^{n+1}$. Let $K:CS^{n+2}\\to S^n$ be a based cone extension of $f\\circ g$, and let $\\chi:CS^{n+1}\\to C_f$ be the characteristic map of the cell attached by $f$. Decompose $S^{n+3}$ into two cones on $S^{n+2}$. On the first define $k:S^{n+3}\\to C_f$ by $\\chi\\circ Cg$; on the second define it by $K$ followed by $S^n\\hookrightarrow C_f$. On the common equator both formulas equal $f\\circ g$, and on the chosen basepoint both equal the target basepoint, so they paste to a based continuous map. Attach an $(n+4)$-cell along $k$, obtaining $X=C_f\\cup_kD^{n+4}$. Its cells have dimensions $0,n,n+2,n+4$. Collapsing the bottom $S^n$ gives an attaching map $\\bar k=(\\Sigma g)\\circ c$, where $c:S^{n+3}\\to S^{n+3}$ collapses the hemisphere carrying $K$ and expands the other hemisphere. In suspension coordinates $[x,s]$, $-1\\le s\\le1$, take $c[x,s]=[x,\\varphi(s)]$, where $\\varphi(s)=-1$ for $s\\le0$ and $\\varphi(s)=2s-1$ for $s\\ge0$. The coordinate maps $\\varphi_t(s)=(1-t)s+t\\varphi(s)$ preserve the endpoints and give a based homotopy from the identity to $c$. Hence $\\bar k$ is based homotopic to $\\Sigma g=\\eta_{n+2}$. An attaching homotopy $H$ induces a cone comparison equal to the identity on the bottom sphere, equal to $H(x,2t)$ on the first half of the cone, and equal to the target cone point $[x,2t-1]$ on the second half. The reverse homotopy gives an inverse up to homotopy by cancelling the traversed homotopy and its reverse. This comparison has degree $+1$ on the relative top cell. Consequently $X/S^n\\simeq C_{\\eta_{n+2}}$ by a based homotopy equivalence preserving both upper cellular generators. No covariant homotopy exact sequence for cofibers is assumed.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The cells of $X$ have dimensions $0,n,n+2,n+4$, so its cellular cochain differential is zero and $H^{n+1}(X;\\mathbb F_2)=0$. Let $x,y,z$ denote the nonzero classes in degrees $n,n+2,n+4$, respectively. Inclusion $C_{\\eta_n}\\hookrightarrow X$ induces isomorphisms in degrees $n$ and $n+2$, since these cellular cochain groups and their differentials are unchanged by the single top cell. By step 1.1 and naturality [F2], $Sq^2x=y$. The based equivalence $X/S^n\\simeq C_{\\eta_{n+2}}$ from step 1.2 preserves the upper generators, so the quotient has nonzero $Sq^2$ between degrees $n+2$ and $n+4$ by step 1.1 at index $n+2$. Collapsing the bottom subcomplex removes precisely its $0$- and $n$-cells from the cellular cochains; the quotient map preserves the upper cellular generators and their differentials. Naturality [F2] therefore gives $Sq^2y=z$. Thus $Sq^2Sq^2x=z\\ne0$. But $H^{n+1}(X;\\mathbb F_2)=0$, so $Sq^1x=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the other hand, [F3] gives $Sq^2Sq^2x=Sq^3Sq^1x=0$ by step 2.1. This contradicts $Sq^2Sq^2x=z\\ne0$, so the assumed null composite is impossible. Hence $\\eta_n\\eta_{n+1}\\ne0$ for every $n\\ge2$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.2: n>=2 fixes nonempty based spheres and a CW cone with a bottom and a top positive-dimensional cell. The contradiction complex adds an actual top cell; its vanishing degree-(n+1) group is a missing cochain degree, not an empty ambient space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The null-composite case is assumed and contradicted. (step 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: Sq^1 x lies in H^(n+1)(X;F_2)=0, so it is zero. Thus the Adem expression Sq^3 Sq^1 x vanishes, contradicting the nonzero Sq^2 Sq^2 x=z; the degree-one operation is explicitly essential."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate null composite is the contradiction hypothesis, not an omitted case. (step 1.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2: the two cone formulas for k agree on their common equator with f composed with g and preserve the based track. The collapse interpolation phi_t preserves both suspension endpoints, while the later cone comparison pastes at t=1/2 and respects the tip."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and step 1.2: AC is retained for the imported cohomology and Steenrod suppliers. The cone extension K is obtained from the single assumed nullhomotopy in the contradiction argument; this is not a choice of extensions over an unspecified family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts nonnullity of every specified eta_n composed with eta_(n+1). Assuming nullity to construct a contradiction complex is a proof by contradiction, not the forward half of an equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse characterizing maps by a Steenrod obstruction; the argument uses the obstruction only to disprove nullity of the named Hopf composites."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked all four steps, exact cellular and Steenrod suppliers, and Hatcher Proposition 4L.11 pp.498–499. The two-cone extension under an assumed null composite attaches the (n+4)-cell; after collapsing Sn the hemisphere-collapse map is homotopic to identity and the attaching map is eta_(n+2). Upper cellular generators survive inclusion/quotient, so Sq2 x=y and Sq2 y=z while H^(n+1)=0. Adem at a=b=2 has only Sq3 Sq1 nonzero coefficient, contradicting z!=0. This also covers n=2; no invalid covariant cofiber homotopy LES is used."
+      }
+    },
+    "lem-qftx-special-unitary-column-fibration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-trivial-fiber-bundle",
+          "source_section": "Definition",
+          "quote": "A **locally trivial fiber bundle with fiber $F$** is a continuous map $p:E\\to B$, an open cover $(U_i)_{i\\in S}$ of $B$, and homeomorphisms\n$$\\theta_i:p^{-1}(U_i)\\longrightarrow U_i\\times F,\\qquad \\operatorname{pr}_1\\theta_i=p|_{p^{-1}(U_i)}.$$\nHere bundle charts, including those used later for principal and associated bundles, are charts in ordinary topological spaces with ordinary product and subspace topologies. A bundle whose spaces are CGWH in addition can be considered in the CGWH fibration convention; we do not silently replace an ordinary product chart by a weaker k-product-chart assumption. Products and homeomorphisms have the meanings of [[thm-product-universal-property]] and [[def-homeomorphism-and-open-maps]].\n\nOn $U_i\\cap U_j$, the coordinate change has the form $(b,x)\\mapsto(b,g_{ji}(b,x))$, with continuous inverse $(b,y)\\mapsto(b,g_{ij}(b,y))$. In particular each $g_{ji}(b,-)$ is a homeomorphism of $F$. The identities $g_{ii}(b,x)=x$ and $g_{ki}(b,x)=g_{kj}(b,g_{ji}(b,x))$ hold because the corresponding chart composites cancel. No topology on a homeomorphism group of $F$ is assumed.\n\nThe bundle is **numerable** when the data include a partition $(\\rho_i:B\\to[0,1])_{i\\in S}$ with locally finite cozero sets, sum one, and\n$$\\operatorname{supp}(\\rho_i)=\\overline{\\{b:\\rho_i(b)>0\\}}\\subseteq U_i.$$\nThis is the support-subordinate convention of [[def-partition-of-unity-subordinate-to-a-cover]]. Repeating a chart with multiple indices is allowed, so a partition subordinate to a refinement can be accompanied by an explicitly assigned original chart. Merely having pointwise finite sums or cozero containment is not this specified numerating data.\n\nAn empty base forces $E$ empty and allows the empty cover and partition. The fiber $F$ may be empty: then every chart domain, hence $E$, is empty even when $B$ is nonempty. When $F$ is nonempty the charts imply surjectivity by taking one point in the chart fiber for each particular base point; this assertion does not require choosing a simultaneous section. Over a point a chart identifies $E$ with $F$. No AC is assumed in the definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every numerable fiber bundle, with its supplied ordinary local product charts and support-subordinate locally finite partition of unity, is a Hurewicz fibration in all ordinary spaces. In particular a bundle of CGWH spaces with these charts is a Hurewicz fibration in CGWH. AC is used to well-order the set of finite chart words. No selection of a chart for every base point or of a separate lift for every path is made.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Every open cover of a smooth manifold admits a smooth partition of unity subordinate to it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-partition-of-unity-subordinate-to-an-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $(U_i)_{i\\in I}$ be an open cover of $M$. A family of smooth functions $(\\phi_i)_{i\\in I}$ with $\\phi_i:M\\to [0,1]$ is a **smooth partition of unity subordinate to** $(U_i)_{i\\in I}$ when:\n\n1. the family $(\\operatorname{supp}(\\phi_i))_{i\\in I}$ is locally finite;\n2. $\\operatorname{supp}(\\phi_i)\\subseteq U_i$ for every $i\\in I$; and\n3. $\\sum_i \\phi_i(p)=1$ for every $p\\in M$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $v_0\\in S^{2N-1}$. Choose an orthonormal basis $w_1,\\ldots,w_{N-1}$ of $v_0^\\perp$ so the matrix $(w_1,\\ldots,w_{N-1},v_0)$ has determinant $1$. For $v$ in a sufficiently small neighborhood $U$ of $v_0$, project each $w_i$ onto $v^\\perp$ and apply Gram–Schmidt in that fixed order. The projected vectors remain linearly independent after shrinking $U$, because their Gram determinant is continuous and equals $1$ at $v_0$. The resulting orthonormal frame depends smoothly on $v$. Multiply its first vector by the inverse of the determinant of the frame if necessary; this scalar has modulus one and the adjustment is smooth, preserves orthonormality, and makes the determinant exactly one. Thus $s(v)\\in SU(N)$ is a smooth local section of $p$ on $U$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $g\\in p^{-1}(U)$ with last column $v$, the matrix $s(v)^{-1}g$ fixes the last basis vector. Unitarity makes its orthogonal complement invariant, so it is block diagonal $\\operatorname{diag}(A,1)$; determinant one gives $A\\in SU(N-1)$. The maps\n$$(A,v)\\longmapsto s(v)\\operatorname{diag}(A,1),\\qquad g\\longmapsto(\\operatorname{upperBlock}(s(p(g))^{-1}g),p(g))$$\nare smooth inverses between $SU(N-1)\\times U$ and $p^{-1}(U)$. This proves local triviality with the asserted fiber.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The sphere is compact, so finitely many such neighborhoods cover it; [F2] gives a smooth partition of unity and hence a numeration. Applying [F1] proves the bundle is a Hurewicz fibration. For $N=2$, the stabilizer of the last column in $SU(2)$ has its upper block in $SU(1)=\\{1\\}$, so the fiber is a point.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: for N>=2 each unit column v_0 has an (N-1)-dimensional orthogonal complement with a finite orthonormal frame. The base sphere and every fiber are nonempty; the identity belongs to SU(N-1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: a zero Gram determinant is excluded by choosing a neighborhood where projected vectors remain independent; it equals 1 at v_0. A unitary frame has nonzero determinant of modulus one, making its inverse phase correction defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: at the minimal N=2 the fiber is SU(1)={1}, so the local product has a one-point fiber. The construction still has one perpendicular frame vector on which to perform the determinant correction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At N=2 the fiber SU(1) is the one-point group. (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "N ranges over integers N>=2 without an upper endpoint, and p is a last-column bundle map, not an interval-parametrized path. The N=2 fiber is handled explicitly rather than by a limiting endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and steps 1.1 and 3.1: AC is declared for the numerable-bundle supplier. A finite orthonormal frame is selected at each chart center; compactness gives a finite trivializing cover and the partition-of-unity supplier gives its numeration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim constructs local bundle charts for the specified last-column map. It does not assert that every smooth SU(N-1) bundle arises from such a column map."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstructing a special-unitary matrix from an arbitrary sphere fibration is claimed; reconstruction occurs only inside the explicit local chart with a supplied local section."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked all three steps. Projected fixed complement vectors retain positive Gram determinant near v0; inverse determinant adjustment of the first column preserves unitarity and fixes determinant one. The stabilizer is exactly diag(SU(N-1),1), including N=2 with point fiber. Compact sphere and support-subordinate partition give the numeration required by the exact Hurewicz theorem under AC."
+      }
+    },
+    "lem-qftx-low-unitary-homotopy-inputs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-special-unitary-column-fibration",
+          "source_section": "Statement",
+          "quote": "For each integer $N\\ge2$, let $SU(N)=\\{U\\in M_N(\\mathbb C):U^*U=I,\\det U=1\\}$ and let $p:SU(N)\\to S^{2N-1}\\subset\\mathbb C^N$ send a matrix to its last column. Then $p$ is a smooth, locally trivial fiber bundle with fiber $SU(N-1)$ over the last standard basis vector; for $N=2$, the fiber is the one-point group $SU(1)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "source_section": "Statement",
+          "quote": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ with fiber $F=p^{-1}(b_0)$, the sequence\n$$\\cdots\\to\\pi_n(F)\\xrightarrow{i_*}\\pi_n(E)\\xrightarrow{p_*}\\pi_n(B)\\xrightarrow{\\partial_p}\\pi_{n-1}(F)\\to\\cdots\\to\\pi_1(B)\\xrightarrow{\\partial_p}\\pi_0(F)\\xrightarrow{i_*}\\pi_0(E)\\xrightarrow{p_*}\\pi_0(B)$$\nis exact wherever there is an incoming and outgoing arrow. Basepoints are $e_0,b_0$ as appropriate. Exactness means incoming image equals the inverse image of the distinguished element. Arrows are homomorphisms where both group structures are defined; the component terms are pointed sets. The last arrow is onto precisely when $p(E)$ meets every path component of $B$.\n\nThere is a right action of $\\pi_1(B,b_0)$ on $\\pi_0(F)$: $[e]\\cdot[\\gamma]$ is the endpoint component of a lift of $\\gamma$ starting at $e$, with loop products traversed left-to-right. Its orbits are precisely the fibers of $i_*:\\pi_0(F)\\to\\pi_0(E)$, and the stabilizer of $[e_0]$ is $p_*\\pi_1(E,e_0)$. Our boundary convention gives $\\partial_p[\\gamma]=[e_0]\\cdot[\\gamma]^{-1}$. These assertions require no AC.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
+          "source_section": "Statement",
+          "quote": "For integers $0\\le k<r$, $r\\ge1$, every continuous based map $(S^k,a)\\to(S^r,b)$ is nullhomotopic through maps fixing a. For k=0 this says every point of $S^r$ can be joined to b. No arbitrary choice principle is required.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "source_section": "Statement",
+          "quote": "For every r≥1, degree is an isomorphism $\\pi_r(S^r,b)\\to\\mathbb Z$, sending the identity to +1 and cubical concatenation, equivalently oriented pinch sum, to addition. Two based sphere self-maps are homotopic through based maps if and only if their degrees agree. No infinite choice principle is needed.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-freudenthal-suspension-theorem",
+          "source_section": "Statement",
+          "quote": "Let $(X,x_0)$ be a based CW complex that is $(n-1)$-connected, where $n\\ge1$. Let $\\Sigma X=C_+X\\cup_X C_-X$ be its unreduced two-cone suspension, based at the lower cone point $p_-$. The suspension homomorphism\n$$E:\\pi_i(X,x_0)\\longrightarrow\\pi_{i+1}(\\Sigma X,p_-),\\qquad [h]\\longmapsto[\\Sigma h],$$\nwhere the source sphere is also suspended by the two-cone construction and based at its lower cone point, is an isomorphism for $1\\le i<2n-1$ and a surjection for $i=2n-1$. In degree zero both $\\pi_0(X)$ and $\\pi_1(\\Sigma X)$ are singletons, so the corresponding pointed map is a bijection. The theorem and these precise basepoint conventions require no choice principle. No endpoint injectivity is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-freudenthal-identifies-the-eventual-suspension-system-for-spheres",
+          "source_section": "Statement",
+          "quote": "For integers $k\\geq0$ and $n\\geq1$, the sphere-system bonding map\n\n$$ E:\\pi_{n+k}(S^n)\\longrightarrow\\pi_{n+k+1}(S^{n+1}) $$\n\nis an isomorphism when $n>k+1$ and is a surjection when $n=k+1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qftx-hopf-generator-and-cone",
+          "source_section": "Statement",
+          "quote": "Let $h:S^3\\to\\mathbb{CP}^1\\cong S^2$ be the Hopf map $h(z_0,z_1)=[z_0:z_1]$ on the unit sphere in $\\mathbb C^2$. Then $h$ generates $\\pi_3(S^2)\\cong\\mathbb Z$. Use the integral mapping-cone Hopf invariant $H(f)$ defined for based maps $f:S^3\\to S^2$ by $x^2=H(f)y$ in $C_f=S^2\\cup_fD^4$, with the positive degree-two and oriented top-cell generators. With the complex orientations, $C_h\\cong\\mathbb{CP}^2$, $H(h)=1$, and for every integer $m$ and degree-$m$ map $d_m:S^3\\to S^3$, $H(h\\circ d_m)=m$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qftx-folded-product-attachment-suspends-to-zero",
+          "source_section": "Statement",
+          "quote": "Give $S^2\\times S^2$ its product CW structure with $2$-skeleton $W=S^2\\vee S^2$ and one oriented $4$-cell attached by $\\alpha:S^3\\to W$. Let $\\nabla:W\\to S^2$ fold the two oriented summands by the identity and put $\\beta=\\nabla\\circ\\alpha$. For a based map $f:S^3\\to S^2$, its integral Hopf invariant $H(f)$ is defined by $x^2=H(f)y$ in the mapping cone $C_f=S^2\\cup_fD^4$, where $x$ and $y$ are the positive generators of $H^2(C_f;\\mathbb Z)$ and $H^4(C_f;\\mathbb Z)$. With the product orientation, $H(\\beta)=2$. Moreover the suspension $\\Sigma\\beta:S^4\\to S^3$ is nullhomotopic. Consequently, if $\\eta_3=\\Sigma h$ is the suspension of the Hopf generator, then $2[\\eta_3]=0$ in $\\pi_4(S^3)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qftx-suspended-hopf-composite-adem-obstruction",
+          "source_section": "Statement",
+          "quote": "Set $\\eta_2=h:S^3\\to S^2$ and $\\eta_j=\\Sigma^{j-2}h:S^{j+1}\\to S^j$ for $j\\ge2$. For every $n\\ge2$, the composite $\\eta_n\\circ\\eta_{n+1}:S^{n+2}\\to S^n$ is not nullhomotopic.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The unit-quaternion parametrization $q=a+bi+cj+dk\\mapsto\\begin{pmatrix}a+bi&c+di\\\\-c+di&a-bi\\end{pmatrix}$ is a continuous bijection from compact $S^3$ to Hausdorff $SU(2)$; direct multiplication shows it is unitary with determinant one, and every matrix in $SU(2)$ has this form. It is therefore a homeomorphism. By [F3], $\\pi_1(S^3)=\\pi_2(S^3)=0$ and $\\pi_3(S^3)=\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], the two-cone Freudenthal suspension map on $\\pi_3(S^2)$ is surjective at the boundary index. The comparison in [F5], with $n=2$ and $k=1$, identifies this map with reduced suspension, so $E[h]=[\\Sigma h]=\\eta_3$ generates the quotient $\\pi_4(S^3)$. The order relation $2\\eta_3=0$ and the nonzero composite $\\eta_3\\circ\\eta_4$ are supplied by [F6]. The latter implies $\\eta_3\\ne0$, since a composite with a null factor is null. Thus the cyclic quotient generated by $\\eta_3$ has exactly two elements, proving $\\pi_4(SU(2))\\cong\\mathbb Z/2$; the same nonzero composite lies in $\\pi_5(S^3)$, so that group is nonzero.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Induct on $N\\ge3$. The base sphere $S^{2N-1}$ has dimension at least five, so [F3] makes its homotopy groups in degrees $1,2,3,4$ zero. Exactness [F2] at degrees one and two therefore gives $\\pi_1(SU(N-1))\\cong\\pi_1(SU(N))$ and $\\pi_2(SU(N-1))\\cong\\pi_2(SU(N))$; at degree three it gives $\\pi_3(SU(N-1))\\cong\\pi_3(SU(N))$. The component exact sequence and the connected fiber and base show $SU(N)$ is path connected: the map on components is onto, and its kernel is the image of the one-point component set of the fiber. Starting from [step 1.1], induction gives all three displayed low groups and connectedness for every $N$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: SU(2) is the nonempty unit-quaternion sphere, with its identity basepoint. Step 3.1 propagates connectedness through nonempty column fibrations, so no empty component set enters the homotopy sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero classes in pi1 and pi2 are the stated low-degree vanishings. (step 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1: pi_1(SU(N)) vanishes from the S^3 base case and the LES induction. The point fiber SU(1) in the preceding column construction is not an extra N=1 case of this theorem, whose rank assumption is N>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The base rank N=2 is handled separately before the induction. (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1: N=2 is the quaternion base case. For N=3 the sphere is S^5, and the required sphere degrees 1,2,3,4 are all strictly below 5, so the induction already works at its first rank."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and step 3.1: ZF+AC is explicitly assumed because the numerable column-bundle supplier uses AC. The induction transfers the actual base-case groups through the LES; no additional family of homotopy representatives is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem lists connectedness and particular homotopy groups of SU(N), with extra SU(2) values. It does not give an equivalence recognizing spaces from this list of groups."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse inferring that a space is SU(N) from low homotopy data; the matrix groups and their column fibrations are fixed inputs."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Read all three steps and the exact Freudenthal boundary-range and bonding-map interfaces. SU2 is homeomorphic to S3 by its explicit matrix parametrization; lower sphere groups vanish and degree gives pi3. Freudenthal supplies surjectivity, not injectivity, at pi3(S2); the order-two relation plus the nonzero eta3 eta4 composite forces the generator to have exactly order 2. The column LES stabilizes degrees 1–3 for N>=3 since the sphere dimensions are >=5. Component exactness uses a connected fiber and base. AC remains inherited."
+      }
+    },
+    "lem-qftx-pi5-special-unitary-nonzero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-low-unitary-homotopy-inputs",
+          "source_section": "Statement",
+          "quote": "For every $N\\ge2$, $SU(N)$ is path connected, $\\pi_1(SU(N))=\\pi_2(SU(N))=0$, and $\\pi_3(SU(N))\\cong\\mathbb Z$. In addition, $\\pi_4(SU(2))\\cong\\mathbb Z/2$ is finite and $\\pi_5(SU(2))\\ne0$. Here $SU(2)\\cong S^3$ by the map sending a unit quaternion to its defining special-unitary matrix.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-special-unitary-column-fibration",
+          "source_section": "Statement",
+          "quote": "For each integer $N\\ge2$, let $SU(N)=\\{U\\in M_N(\\mathbb C):U^*U=I,\\det U=1\\}$ and let $p:SU(N)\\to S^{2N-1}\\subset\\mathbb C^N$ send a matrix to its last column. Then $p$ is a smooth, locally trivial fiber bundle with fiber $SU(N-1)$ over the last standard basis vector; for $N=2$, the fiber is the one-point group $SU(1)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "source_section": "Statement",
+          "quote": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ with fiber $F=p^{-1}(b_0)$, the sequence\n$$\\cdots\\to\\pi_n(F)\\xrightarrow{i_*}\\pi_n(E)\\xrightarrow{p_*}\\pi_n(B)\\xrightarrow{\\partial_p}\\pi_{n-1}(F)\\to\\cdots\\to\\pi_1(B)\\xrightarrow{\\partial_p}\\pi_0(F)\\xrightarrow{i_*}\\pi_0(E)\\xrightarrow{p_*}\\pi_0(B)$$\nis exact wherever there is an incoming and outgoing arrow. Basepoints are $e_0,b_0$ as appropriate. Exactness means incoming image equals the inverse image of the distinguished element. Arrows are homomorphisms where both group structures are defined; the component terms are pointed sets. The last arrow is onto precisely when $p(E)$ meets every path component of $B$.\n\nThere is a right action of $\\pi_1(B,b_0)$ on $\\pi_0(F)$: $[e]\\cdot[\\gamma]$ is the endpoint component of a lift of $\\gamma$ starting at $e$, with loop products traversed left-to-right. Its orbits are precisely the fibers of $i_*:\\pi_0(F)\\to\\pi_0(E)$, and the stabilizer of $[e_0]$ is $p_*\\pi_1(E,e_0)$. Our boundary convention gives $\\partial_p[\\gamma]=[e_0]\\cdot[\\gamma]^{-1}$. These assertions require no AC.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
+          "source_section": "Statement",
+          "quote": "For integers $0\\le k<r$, $r\\ge1$, every continuous based map $(S^k,a)\\to(S^r,b)$ is nullhomotopic through maps fixing a. For k=0 this says every point of $S^r$ can be joined to b. No arbitrary choice principle is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "source_section": "Statement",
+          "quote": "For every r≥1, degree is an isomorphism $\\pi_r(S^r,b)\\to\\mathbb Z$, sending the identity to +1 and cubical concatenation, equivalently oriented pinch sum, to addition. Two based sphere self-maps are homotopic through based maps if and only if their degrees agree. No infinite choice principle is needed.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $N=2$, the assertion is [F1]. For $N=3$, the LES of [F2] contains\n$$\\pi_5(SU(3))\\longrightarrow\\pi_5(S^5)\\xrightarrow{\\partial}\\pi_4(SU(2)).$$\nBy [F1], the target of $\\partial$ has two elements. The degree theorem [F4] gives $\\pi_5(S^5)\\cong\\mathbb Z$, and every homomorphism from $\\mathbb Z$ to a group of order two has kernel containing $2\\mathbb Z$, which is nonzero. Exactness identifies that kernel with the image of $\\pi_5(SU(3))$, so $\\pi_5(SU(3))\\ne0$. This argument makes no surjectivity assumption on $\\partial$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $N\\ge4$, [F3] and the LES [F2] make the inclusion-induced map $\\pi_5(SU(N-1))\\to\\pi_5(SU(N))$ an isomorphism: its preceding and following sphere groups are $\\pi_6(S^{2N-1})$ and $\\pi_5(S^{2N-1})$, both zero. Induction from the nonzero $N=3$ case proves nonvanishing for every $N\\ge4$, completing all cases.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: N>=2 and the matrix identity supplies a basepoint of each SU(N). The kernel used at N=3 contains 2Z, hence a nonzero element; the proof does not confuse an empty image with a merely proper image."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-group possibility is ruled out explicitly in N=2 and N=3. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: every homomorphism from Z to a group of order two kills the nonzero integer 2. Even if it sends the generator 1 to the nonidentity element, its kernel is still nonzero, so surjectivity of the connecting map is unnecessary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The N=4 stabilization boundary uses pi5 and pi6 of S7, both below sphere dimension. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 separately handle N=2, N=3 and the stable induction N>=4. At N=4 the base sphere has dimension 7, so both sphere degrees 5 and 6 lie strictly below it as required."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and step 2.1: ZF+AC is retained for the column-fibration LES context. Nonzero image at N=3 follows from the kernel containing 2Z, and induction uses isomorphisms; no simultaneous choice of generators for all ranks is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement deliberately asserts only nonvanishing of pi_5 and no full group computation; it is not a necessary-and-sufficient criterion for a matrix group to have a given rank."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse inference from a nonzero fifth homotopy group to membership in the SU(N) family is asserted. All groups are fixed before their LES is applied."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked both steps. N=2 is supplied by the nonzero suspended Hopf composite. At N=3, exactness gives image(pi5 SU3)=ker(Z→Z/2), which contains 2Z regardless of boundary surjectivity. For N>=4 both pi5 and pi6 of S^(2N-1) vanish, so the inclusion is an isomorphism on pi5. No full group computation or invalid endpoint stability is asserted."
+      }
+    },
+    "lem-qftx-parametric-gauge-smoothing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-parametric-vector-bundle-section-smoothing",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a compact finite-dimensional smooth manifold, $K\\subseteq X$ a closed smooth submanifold with a chosen collar, $M$ a compact smooth manifold, and $E\\to M$ a finite-rank smooth real vector bundle. Let $s:X\\times M\\to E$ be a continuous family of sections, meaning $s(x,m)\\in E_m$ and $(x,m)\\mapsto s(x,m)$ is continuous. Assume $x\\mapsto s(x,\\cdot)$ is continuous in the uniform topology, its restriction to $K$ is continuous in the $C^\\infty$ section topology, and for distinct marked points $m_1,\\ldots,m_q\\in M$ the values $s(x,m_i)=v_i\\in E_{m_i}$ are independent of $x$. For every $\\varepsilon>0$ there is a family $\\widetilde s:X\\to\\Gamma^\\infty(E)$ continuous in the $C^\\infty$ topology, equal to $s$ on $K$, equal to $v_i$ at every $m_i$, and satisfying $\\sup(\\{0\\}\\cup\\{\\|\\widetilde s(x,m)-s(x,m)\\|:(x,m)\\in X\\times M\\})<\\varepsilon$ for any fixed bundle norm. The straight-line homotopy in each vector fiber from $s$ to $\\widetilde s$ fixes $K$ and all marked values.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "source_section": "Statement",
+          "quote": "Assume countable choice $\\mathrm{AC}_\\omega$. Let $i:S\\hookrightarrow M$ be a closed smooth embedded submanifold. Then there are an open neighbourhood $\\Omega\\subseteq\\nu(S)$ of the zero section in the quotient normal bundle and a diffeomorphism $\\Phi:\\Omega\\to U$ onto an open neighbourhood $U$ of $i(S)$ in $M$, with $\\Phi(0_p)=i(p)$ for every $p\\in S$. Thus $S$ has a tubular neighbourhood in $M$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-nearest-point-projection-is-the-tubular-retraction-after-shrinking",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $S\\subseteq\\mathbb R^m$ be a closed embedded smooth submanifold. After\nshrinking the tubular neighbourhood from the Euclidean tubular neighbourhood\ntheorem, the tubular retraction agrees with the unique nearest-point\nprojection onto $S$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Realize $Ad(P)$ as the associated bundle with fiber $SU(N)$ under conjugation and embed that fiber in the real vector space of complex matrices with its Hilbert–Schmidt norm. The associated matrix bundle has linear conjugation transition functions. A continuous family of sections parametrized by a compact smooth pair $(X,K)$ is a continuous family of sections of this matrix bundle; on $K$ it is continuous in the $C^\\infty$ topology. Apply [F2], using the fixed basepoint value $I$ as a marked fiber value in the based case, to obtain a uniformly close matrix-valued smooth-section family, unchanged on $K$ and at that point.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The compact matrix submanifold $SU(N)$ has a positive-radius tubular neighborhood by [F3]. The Hilbert–Schmidt metric is invariant under conjugation by $SU(N)$; uniqueness of the nearest point therefore makes the retraction equivariant under every transition function of $Ad(P)$. Choose the approximation in step 1.1 closer than half the tubular radius and compose it fiberwise with this retraction. The result is a family of smooth $SU(N)$-sections, continuous in the $C^\\infty$ topology; it still agrees with the original family on $K$ and at the fixed fiber value because the retraction fixes $SU(N)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each parameter and each $t\\in[0,1]$, the straight segment from the original matrix section to its close approximation stays in the tubular neighborhood: every point on the segment is within the approximation error of the original $SU(N)$ value. Applying the retraction to this segment gives a continuous homotopy through $SU(N)$-sections, relative to $K$ and the fixed fiber value.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "To treat a disk family $H:D^q\\to\\mathcal G^0(P)$, $q\\ge1$, whose boundary family is continuous in the smooth-section topology, set $S^q=\\{(x,z)\\in\\mathbb R^q\\times\\mathbb R:|x|^2+z^2=1\\}$ and let $\\rho:S^q\\to D^q$ be $\\rho(x,z)=x$. The doubled family $H\\circ\\rho$ is continuous on the boundaryless parameter manifold $S^q$. Its restriction to the equator $K=\\{z=0\\}\\cong S^{q-1}$ is exactly the original boundary family, continuous in the smooth-section topology. A two-sided collar is $c(a,t)=(\\sqrt{1-t^2}\\,a,t)$ for $a\\in S^{q-1}$ and $|t|<1/2$. Apply steps 1.1–3.1 on $(S^q,K)$ and restrict the resulting family and homotopy to the upper hemisphere, identified with $D^q$ by $\\rho$. This smooths the disk family relative to its boundary and preserves the marked spatial value in the based subgroup. For a path take $q=1$: the double is $S^1$, and its equator is the two endpoints $S^0$, so both endpoints stay fixed. Thus every disk or path application below uses [F2] only on a boundaryless sphere with an explicitly collared submanifold.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For surjectivity on $\\pi_j$ with $j\\ge1$, take a continuous sphere family $f:S^j\\to\\mathcal G^0(P)$ based at the identity section and apply steps 1.1–3.1 with empty relative boundary, obtaining a homotopy $F_t$ to a family continuous into the smooth-section topology. If $x_0$ is the parameter basepoint, normalize this entire homotopy by $\\widehat F_t(x)=F_t(x_0)^{-1}F_t(x)$. Its initial family is $f$, its value at $x_0$ is the identity for every $t$, and its endpoint is continuous in the smooth-section topology because multiplication and inversion there are continuous. In the based spatial subgroup this normalization also preserves the value $I$ at the marked fiber. Thus the smooth representative and its comparison homotopy are genuinely based in the parameter variable. For injectivity, a nullhomotopy in the continuous group is a family $H:D^{j+1}\\to\\mathcal G^0(P)$ whose restriction to $S^j$ is the given smooth-topology family; apply the doubled-disk construction of step 4.1 to make the extension smooth in the section variable while fixing its boundary. Choose the basepoint $x_0\\in S^j$ on the boundary and identify the disk with the unit ball; the contraction $R_t(x)=(1-t)x+t x_0$ fixes $x_0$ and contracts the boundary into the disk's interior. Then $H(R_t(x))$ is a based nullhomotopy because its value at $x_0$ is the fixed boundary value $e$. Thus injectivity holds in based homotopy groups, not only free homotopy classes. For path components, approximate a single section for surjectivity; for injectivity, use the $q=1$ construction of step 4.1 to approximate a continuous path relative to its two smooth endpoints. These constructions give the component bijection without imposing identity normalization on arbitrary components. In the based subgroup, mark the chosen fiber and preserve the value $I$ throughout. Pointwise multiplication and inversion on $\\mathcal G_\\infty$ are continuous in its $C^\\infty$ topology: in each finite-atlas chart the product rule and chain rule bound each derivative seminorm by finitely many seminorms of the inputs. The compact-open section group is also a topological group because $SU(N)$ multiplication and inversion are continuous and $M$ is compact. Thus translations in both groups are homeomorphisms and transfer the identity-based conclusion to every basepoint.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The sphere/disk relative identifications follow from the same two constructions: absolute sphere families are approximated relative to no boundary, and any disk equality or nullhomotopy is approximated relative to its boundary by step 4.1. These prove the asserted weak homotopy equivalences for both section groups, conditional on [A1].",
+          "step": "6.1",
+          "inputs": [
+            "A1",
+            "step 4.1",
+            "step 5.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: the frame over m makes the spatial base nonempty, and both gauge groups contain the identity section. Absolute sphere smoothing explicitly uses an empty relative parameter boundary; the collar correction is then omitted, while based normalization still fixes the parameter basepoint."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identity section remains fixed at the marked fiber. (step 5.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1: j=1 is a circle family for surjectivity and a disk D^2 with boundary S^1 for injectivity. Multiplication by the inverse of the value at the chosen parameter basepoint keeps the comparison homotopy based, including this first positive homotopy degree."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The j=0 case is stated separately as a path-component bijection. (step 5.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof 4.1 doubles D^q to S^q by rho(x,z)=x and fixes the equator with its explicit two-sided collar; q=1 fixes both path endpoints. Step 5.1 uses the resulting relative smooth disk extension and a contraction fixing its chosen boundary basepoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and steps 1.1 and 2.1: the configuration context carries full AC, and the vector-bundle smoothing supplier uses it for partitions of unity. The tubular nearest-point retraction is unique and conjugation-equivariant, so chart retractions are not selected independently."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts the two inclusions induce component bijections and homotopy-group isomorphisms. Surjectivity and injectivity are separately proved properties of these maps, not a biconditional between unrelated conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The injectivity argument smooths a given nullhomotopy relative to its boundary; it is not a converse saying every weak equivalence of section spaces comes from this smoothing construction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Confirmed refuter:58:1 as nonfatal. F2 parameter spaces are boundaryless by def-smooth-manifold, so its old direct disk/path invocation was not licensed. New step 4.1 explicitly doubles D^q to S^q via rho(x,z)=x, fixes the equator with collar (sqrt(1-t^2)a,t), and restricts to one hemisphere; q=1 treats paths with both endpoints fixed. Checked every step, the vector smoothing proof including its collar clarification, matrix-bundle transition equivariance, compact SU(N) uniform tubular radius, nearest-point uniqueness, and the based normalization at parameter basepoint. Disk contraction fixes that basepoint; marked spatial I is preserved. Translation transfers identity-based homotopy groups to all smooth basepoints. No statement/dependency change or Sobolev equivalence is asserted."
+      }
+    },
+    "lem-qftx-sphere-gauge-evaluation-fibration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-locally-trivial-fiber-bundle",
+          "source_section": "Definition",
+          "quote": "A **locally trivial fiber bundle with fiber $F$** is a continuous map $p:E\\to B$, an open cover $(U_i)_{i\\in S}$ of $B$, and homeomorphisms\n$$\\theta_i:p^{-1}(U_i)\\longrightarrow U_i\\times F,\\qquad \\operatorname{pr}_1\\theta_i=p|_{p^{-1}(U_i)}.$$\nHere bundle charts, including those used later for principal and associated bundles, are charts in ordinary topological spaces with ordinary product and subspace topologies. A bundle whose spaces are CGWH in addition can be considered in the CGWH fibration convention; we do not silently replace an ordinary product chart by a weaker k-product-chart assumption. Products and homeomorphisms have the meanings of [[thm-product-universal-property]] and [[def-homeomorphism-and-open-maps]].\n\nOn $U_i\\cap U_j$, the coordinate change has the form $(b,x)\\mapsto(b,g_{ji}(b,x))$, with continuous inverse $(b,y)\\mapsto(b,g_{ij}(b,y))$. In particular each $g_{ji}(b,-)$ is a homeomorphism of $F$. The identities $g_{ii}(b,x)=x$ and $g_{ki}(b,x)=g_{kj}(b,g_{ji}(b,x))$ hold because the corresponding chart composites cancel. No topology on a homeomorphism group of $F$ is assumed.\n\nThe bundle is **numerable** when the data include a partition $(\\rho_i:B\\to[0,1])_{i\\in S}$ with locally finite cozero sets, sum one, and\n$$\\operatorname{supp}(\\rho_i)=\\overline{\\{b:\\rho_i(b)>0\\}}\\subseteq U_i.$$\nThis is the support-subordinate convention of [[def-partition-of-unity-subordinate-to-a-cover]]. Repeating a chart with multiple indices is allowed, so a partition subordinate to a refinement can be accompanied by an explicitly assigned original chart. Merely having pointwise finite sums or cozero containment is not this specified numerating data.\n\nAn empty base forces $E$ empty and allows the empty cover and partition. The fiber $F$ may be empty: then every chart domain, hence $E$, is empty even when $B$ is nonempty. When $F$ is nonempty the charts imply surjectivity by taking one point in the chart fiber for each particular base point; this assertion does not require choosing a simultaneous section. Over a point a chart identifies $E$ with $F$. No AC is assumed in the definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every numerable fiber bundle, with its supplied ordinary local product charts and support-subordinate locally finite partition of unity, is a Hurewicz fibration in all ordinary spaces. In particular a bundle of CGWH spaces with these charts is a Hurewicz fibration in CGWH. AC is used to well-order the set of finite chart words. No selection of a chart for every base point or of a separate lift for every path is made.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "source_section": "Statement",
+          "quote": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ with fiber $F=p^{-1}(b_0)$, the sequence\n$$\\cdots\\to\\pi_n(F)\\xrightarrow{i_*}\\pi_n(E)\\xrightarrow{p_*}\\pi_n(B)\\xrightarrow{\\partial_p}\\pi_{n-1}(F)\\to\\cdots\\to\\pi_1(B)\\xrightarrow{\\partial_p}\\pi_0(F)\\xrightarrow{i_*}\\pi_0(E)\\xrightarrow{p_*}\\pi_0(B)$$\nis exact wherever there is an incoming and outgoing arrow. Basepoints are $e_0,b_0$ as appropriate. Exactness means incoming image equals the inverse image of the distinguished element. Arrows are homomorphisms where both group structures are defined; the component terms are pointed sets. The last arrow is onto precisely when $p(E)$ meets every path component of $B$.\n\nThere is a right action of $\\pi_1(B,b_0)$ on $\\pi_0(F)$: $[e]\\cdot[\\gamma]$ is the endpoint component of a lift of $\\gamma$ starting at $e$, with loop products traversed left-to-right. Its orbits are precisely the fibers of $i_*:\\pi_0(F)\\to\\pi_0(E)$, and the stabilizer of $[e_0]$ is $p_*\\pi_1(E,e_0)$. Our boundary convention gives $\\partial_p[\\gamma]=[e_0]\\cdot[\\gamma]^{-1}$. These assertions require no AC.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-special-unitary-column-fibration",
+          "source_section": "Statement",
+          "quote": "For each integer $N\\ge2$, let $SU(N)=\\{U\\in M_N(\\mathbb C):U^*U=I,\\det U=1\\}$ and let $p:SU(N)\\to S^{2N-1}\\subset\\mathbb C^N$ send a matrix to its last column. Then $p$ is a smooth, locally trivial fiber bundle with fiber $SU(N-1)$ over the last standard basis vector; for $N=2$, the fiber is the one-point group $SU(1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-euclidean-spheres-are-path-connected",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, the unit sphere $S^{n-1}\\subseteq\\mathbb R^n$ is path-connected and connected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-homotopy-lifting-for-covering-maps",
+          "source_section": "Statement",
+          "quote": "Let $p:E\\to B$ be a covering, $H:Y\\times I\\to B$ a homotopy, and $\\widetilde H_0:Y\\to E$ a lift of $H(-,0)$. There is a unique lift $\\widetilde H:Y\\times I\\to E$ of $H$ extending $\\widetilde H_0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In a trivializing ball around $m$, choose a smooth bump $b$ supported in that ball with $b(m)=1$. For $g$ near $I$, use a smooth logarithm $X=\\log g\\in\\mathfrak{su}(N)$ and define a gauge section by $u_g(x)=\\exp(b(x)X)$ in that chart and the identity outside. This gives a continuous local section of evaluation near $I$. To see that every value is attained, begin at $N=2$: [F4] gives a bundle $SU(1)\\to SU(2)\\to S^3$ with one-point fiber, and [F5] makes the base path connected; the component exactness [F3] therefore makes $SU(2)$ path connected. Inductively, [F4] is a surjective locally trivial bundle with path-connected fiber $SU(N-1)$ and path-connected base sphere [F5]; path lifting and [F3] imply $SU(N)$ is path connected. A path from $I$ to any $g_0$ is covered by finitely many logarithm neighborhoods; subdividing it writes $g_0$ as a finite product of elements in the identity chart. Multiplying the corresponding bump-supported sections gives a gauge section $v_0$ with $v_0(p_m)=g_0$. Translation of the identity-neighborhood section by $v_0$ yields a local section near every $g_0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The finite group $Z_N$ acts on the Hausdorff topological group $\\mathcal G(P)$ by free translations. Choose an identity neighborhood $V$ with $V^{-1}V\\cap Z_N=\\{e\\}$; this is possible because the finite set $Z_N\\setminus\\{e\\}$ is closed and avoids the identity. The translates $Vz$ are pairwise disjoint. Since the quotient map is open and identifies each translate homeomorphically with the image of $V$, that image is evenly covered. Translation gives the same construction around every group element, so the quotient map is a covering with exactly $|Z_N|=N$ sheets. By [F1] and [A1], this is the finite-center quotient specified in the Statement.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the finite-atlas $C^\\infty$ topology, pointwise multiplication and inversion are continuous: each derivative seminorm of a product or inverse is bounded on compact chart supports by finitely many derivative seminorms of the inputs, by the finite-dimensional product and chain rules. If $s:U\\to\\mathcal G(P)$ is one of the local sections, the maps\n$$(v,g)\\longmapsto v\\,s(g),\\qquad u\\longmapsto\\bigl(u\\,s(ev_m(u))^{-1},ev_m(u)\\bigr)$$\nare continuous inverses between $\\mathcal G_m(P)\\times U$ and $ev_m^{-1}(U)$. The first coordinate in the inverse evaluates to $e$, and the product reconstructs $u$. Thus evaluation is a locally trivial bundle with fiber exactly its kernel $\\mathcal G_m(P)$. A finite cover of compact $SU(N)$ by such neighborhoods and a partition of unity make this bundle numerable. By [F2] it is a Hurewicz fibration; [F3] supplies its homotopy LES.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The base $SU(N)$ is compact, so the finite local trivializations of evaluation admit a subordinate partition of unity. By [F2, F3] the evaluation bundle is a Serre fibration with the homotopy LES. The finite quotient is a covering; [F6] gives its homotopy lifting property and hence its fibration property. This completes the claims.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 2.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: the gauge group and its evaluation kernel contain the identity section. Every g in SU(N) is realized by a finite product of bump-supported sections, so evaluation has no empty fiber over any base value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Evaluation at the identity has the explicit logarithm-chart section. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: evaluation at the identity is lifted by X=log(I)=0, hence the identity gauge section. Step 1.2 has exactly N covering sheets; a one-sheet quotient is outside N>=2, while the identity translate always provides one sheet."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 is included by the SU(1) fiber case in the column fibration. (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the group path starts at I and ends at the prescribed g_0; finitely many logarithm neighborhoods yield a product attaining that endpoint. The bump has value 1 at m and zero outside its chart, so the local lift evaluates to g and pastes to the identity away from the support."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and steps 1.1 and 2.1: AC is explicit for the numerable-bundle theorem. For each specified target g_0 a path and finite subdivision supply a lift; compact SU(N) reduces the trivializing cover to finitely many neighborhoods for a numeration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement constructs evaluation as a bundle and the finite central quotient as a covering. It does not characterize all gauge-group fibrations by an if-and-only-if condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse recovering a principal SU(N) sphere bundle from an arbitrary finite covering of topological groups is asserted; P and its frame are supplied at the start."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked all five steps, exact configuration, column fibration, covering HLP and numerable-bundle interfaces. The smooth matrix logarithm and bump provide a local section near I; connected SU(N) writes any g as a finite product of chart elements. The displayed inverse is u s(ev(u))^-1 in the evaluation kernel, with continuous operations in all derivative seminorms. Compact finite-dimensional SU(N) admits the required support-subordinate numeration. Finite free central translations give evenly covered quotient neighborhoods. The TikZ square and its array have matching domains/arrows and commute because ev(v s(g))=g. No Sobolev topology is substituted."
+      }
+    },
+    "lem-qftx-based-gauge-sphere-homotopy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-parametric-gauge-smoothing",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact connected oriented boundaryless smooth Riemannian manifold of dimension $d\\in\\{3,4\\}$, let $N\\ge2$, let $P\\to M$ be a smooth principal $SU(N)$ bundle, and fix a frame $p_m$ over $m\\in M$. Use the adjoint group bundle $Ad(P)=P\\times_{Ad}SU(N)$. Write $\\mathcal G_\\infty(P)$ for the smooth gauge group with its $C^\\infty$ section topology as defined from finite-atlas derivative seminorms, and set $\\mathcal G_{\\infty,m}(P)=\\{u\\in\\mathcal G_\\infty(P):u(p_m)=e\\}$. Define $\\mathcal G^0(P)$ as the group of continuous sections of $Ad(P)$ with the compact-open topology and $\\mathcal G^0_m(P)=\\{u\\in\\mathcal G^0(P):u(p_m)=e\\}$. Then the inclusions $\\mathcal G_\\infty(P)\\hookrightarrow\\mathcal G^0(P)$ and $\\mathcal G_{\\infty,m}(P)\\hookrightarrow\\mathcal G^0_m(P)$ induce bijections on path components and isomorphisms on all homotopy groups at every basepoint. More precisely, finite sphere/disk parameter families and their relative homotopies have the same classes in the smooth and continuous section topologies.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-sphere-gauge-evaluation-fibration",
+          "source_section": "Statement",
+          "quote": "Let $P\\to S^r$ be a smooth principal $SU(N)$ bundle with $r\\in\\{3,4\\}$, $N\\ge2$, a chosen point $m\\in S^r$, and a chosen frame $p_m$ in its fiber. Write $\\mathcal G(P):=\\mathcal G_\\infty(P)$ for the smooth gauge group defined by the finite-atlas $C^\\infty$ section topology, let $\\mathcal G_m(P):=\\{u\\in\\mathcal G_\\infty(P):u(p_m)=e\\}$, and put $\\overline{\\mathcal G}(P):=\\overline{\\mathcal G}_\\infty(P)=\\mathcal G_\\infty(P)/Z_N$, where $Z_N$ is the finite subgroup of constant central gauge sections. Evaluation $ev_m(u)=u(p_m)$ gives a locally trivial bundle\n$$\\mathcal G_m(P)\\longrightarrow\\mathcal G(P)\\xrightarrow{ev_m}SU(N),$$\nand the quotient map $\\mathcal G(P)\\to\\overline{\\mathcal G}(P)$ is a finite covering. For a local section $s:U\\to\\mathcal G(P)$, the bundle chart has the commutative form\n$$\\begin{array}{ccc}\\mathcal G_m(P)\\times U&\\xrightarrow{\\Phi_s}&ev_m^{-1}(U)\\\\\\downarrow{\\operatorname{pr}_2}&&\\downarrow{ev_m}\\\\U&\\hookrightarrow&SU(N)\\end{array}$$\nwhere $\\Phi_s(v,g)=v\\,s(g)$; the square commutes because $ev_m(v)=e$ and $ev_m(s(g))=g$. The corresponding TikZ source is:\n```tikz\n\\begin{tikzcd}\n\\mathcal G_m(P)\\times U \\arrow[r,\"{\\Phi_s}\"] \\arrow[d,\"{\\mathrm{pr}_2}\"'] & ev_m^{-1}(U) \\arrow[d,\"{ev_m}\"]\\\\\nU \\arrow[r,hook] & SU(N)\n\\end{tikzcd}\n```\nThe evaluation bundle is numerable; both maps are Serre fibrations and have the homotopy long exact sequence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-loop-suspension-adjunction-on-based-homotopy-classes",
+          "source_section": "Statement",
+          "quote": "Naturally for a well-pointed based CGWH space $X$ and a based CGWH space $Y$, there is a bijection $[\\Sigma X,Y]_*\\cong[X,\\Omega Y]_*$, where $\\Omega Y$ is the kified compact-open space of loops based at $y_0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-higher-homotopy-groups-are-iterated-loop-components",
+          "source_section": "Statement",
+          "quote": "For a based CGWH space X and n≥1, $\\pi_n(X,x_0)\\cong\\pi_0(\\Omega^nX)$ naturally. The operation on components on the right is induced by concatenating the first cube coordinate of the adjoint n-loop, and this bijection respects it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be jointly $C^\\infty$ in $(t,x,\\lambda)$ on an open time-state-parameter\ndomain. Near any base data $(t_0,x_0,\\lambda_0)$ there are a compact time\ninterval $I$ and a neighbourhood $W$ of $(x_0,\\lambda_0)$ such that, for every\n$(y,\\lambda)\\in W$, the solution of\n\n$$x'(t)=F(t,x(t),\\lambda),\\qquad x(t_0)=y,$$\n\nis defined on $I$, and the resulting solution map is smooth in the pair\n$(y,\\lambda)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "source_section": "Statement",
+          "quote": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ with fiber $F=p^{-1}(b_0)$, the sequence\n$$\\cdots\\to\\pi_n(F)\\xrightarrow{i_*}\\pi_n(E)\\xrightarrow{p_*}\\pi_n(B)\\xrightarrow{\\partial_p}\\pi_{n-1}(F)\\to\\cdots\\to\\pi_1(B)\\xrightarrow{\\partial_p}\\pi_0(F)\\xrightarrow{i_*}\\pi_0(E)\\xrightarrow{p_*}\\pi_0(B)$$\nis exact wherever there is an incoming and outgoing arrow. Basepoints are $e_0,b_0$ as appropriate. Exactness means incoming image equals the inverse image of the distinguished element. Arrows are homomorphisms where both group structures are defined; the component terms are pointed sets. The last arrow is onto precisely when $p(E)$ meets every path component of $B$.\n\nThere is a right action of $\\pi_1(B,b_0)$ on $\\pi_0(F)$: $[e]\\cdot[\\gamma]$ is the endpoint component of a lift of $\\gamma$ starting at $e$, with loop products traversed left-to-right. Its orbits are precisely the fibers of $i_*:\\pi_0(F)\\to\\pi_0(E)$, and the stabilizer of $[e_0]$ is $p_*\\pi_1(E,e_0)$. Our boundary convention gives $\\partial_p[\\gamma]=[e_0]\\cdot[\\gamma]^{-1}$. These assertions require no AC.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qftx-nonabelian-gauge-data",
+          "source_section": "Definition",
+          "quote": "Choose a smooth right principal $G$-bundle $\\pi:P\\to M$: the projection and right action are smooth, and the action is free and transitive on each fibre. There is an open cover $\\{U_\\alpha\\}_{\\alpha\\in A}$ of $M$ with a family of equivariant diffeomorphisms $\\phi_\\alpha:\\pi^{-1}(U_\\alpha)\\to U_\\alpha\\times G$ for $\\alpha\\in A$, each over $U_\\alpha$. Explicitly, $\\operatorname{pr}_1\\circ\\phi_\\alpha=\\pi$, and if $\\phi_\\alpha(p)=(x,g)$ then $\\phi_\\alpha(ph)=(x,gh)$ for every $h\\in G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Every open cover of a smooth manifold admits a smooth partition of unity subordinate to it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-smooth-partition-of-unity-subordinate-to-an-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and let $(U_i)_{i\\in I}$ be an open cover of $M$. A family of smooth functions $(\\phi_i)_{i\\in I}$ with $\\phi_i:M\\to [0,1]$ is a **smooth partition of unity subordinate to** $(U_i)_{i\\in I}$ when:\n\n1. the family $(\\operatorname{supp}(\\phi_i))_{i\\in I}$ is locally finite;\n2. $\\operatorname{supp}(\\phi_i)\\subseteq U_i$ for every $i\\in I$; and\n3. $\\sum_i \\phi_i(p)=1$ for every $p\\in M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qftx-principal-connection-form",
+          "source_section": "Definition",
+          "quote": "Then $\\omega$ is a smooth $\\mathfrak g$-valued 1-form satisfying $\\omega(Z_P)=Z$, $\\ker\\omega=H$, and $R_g^*\\omega=\\operatorname{Ad}_{g^{-1}}\\omega$ for every fixed $g\\in G$. Conversely, a smooth $\\mathfrak g$-valued 1-form with the reproduction and equivariance properties determines the principal connection $H=\\ker\\omega$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the gauge group under consideration consists of smooth sections with value $e$ at $p_m$, and [F3] identifies this subgroup with the evaluation fiber and its subspace topology. First calculate its continuous-section model, which is related by [F2]. Choose a finite trivializing cover $(U_i)$ of compact $S^r$. In each equivariant chart $P|_{U_i}\\cong U_i\\times SU(N)$, set $\\omega_i(v,W)=g^{-1}W$ for a tangent vector $(v,W)$ at $(x,g)$. Direct calculation gives $\\omega_i(X_P)=X$ and $R_h^*\\omega_i=\\operatorname{Ad}_{h^{-1}}\\omega_i$. By [F8] choose a subordinate partition $(\\rho_i)$ and extend $(\\rho_i\\circ\\pi)\\omega_i$ by zero outside $P|_{U_i}$. Their finite sum $A_0=\\sum_i(\\rho_i\\circ\\pi)\\omega_i$ is smooth, right equivariant, and reproduces vertical vectors because $\\sum_i\\rho_i=1$; [F9] makes it a smooth principal connection. Choose hemisphere frames with the upper frame equal to $p_m$ and transport them radially using $A_0$. The ODE statement [F6] gives smooth sections up to the equator, including the disk centers, and hence the smooth transition $\\psi$ in [A1]. In that model a based section is a pair of maps $f_+:D_+^r\\to SU(N)$ and $f_-:D_-^r\\to SU(N)$ satisfying",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each compatible pair $(f_+,f_-)$, the product $v=\\sigma_{f_+}^{-1}f_-$ is the identity on $\\partial D_-^r$, so it descends continuously to a based map $D_-^r/\\partial D_-^r\\cong S^r\\to SU(N)$. Conversely, given $f\\in J$ and such a based map $v$, the pair $(f,\\sigma_f v)$ satisfies the clutching condition. On maps from a compact disk to the metric space $SU(N)$, the compact-open topology is the uniform topology. Unitary conjugation preserves the Hilbert--Schmidt metric, so $\\|\\sigma_f-\\sigma_g\\|_\\infty\\le\\|f-g\\|_\\infty$ for $f,g\\in J$; at the disk center both extensions equal $e$. Thus $f\\mapsto\\sigma_f$ is continuous. Restrictions, multiplication, inversion, and finite pasting are continuous in the same topologies, so both assignments are continuous and inverse. Hence the continuous based section space is homeomorphic to $J\\times\\operatorname{Map}_*(S^r,SU(N))$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "construct",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The space $J$ is contractible by $f_t(x)=f((1-t)x)$, which keeps the center value $e$. Hence projection of the product in step 2.1 onto $\\operatorname{Map}_*(S^r,SU(N))$ induces a bijection on components and isomorphisms on all homotopy groups. Equivalently, the restriction to the upper disk is a trivial fibration with contractible base $J$; [F5] gives the same conclusion from its exact sequence.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F4], the homotopy groups of $\\operatorname{Map}_*(S^r,SU(N))$ are $\\pi_{j+r}(SU(N))$ for $j\\ge1$, and its pointed components are based homotopy classes $[S^r,SU(N)]_*=\\pi_r(SU(N))$. Finally [F2] transfers these continuous-section identifications to the smooth based gauge group.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: each section space has its identity and J contains the constant map. The hemisphere compatibility problem has an explicit solution sigma_f, so the product-model fibers are nonempty even for a nontrivial clutching map."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The constant based map represents the distinguished component and group identity. (step 4.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: at j=1 the adjunction gives pi_1(G_m)=pi_(r+1)(SU(N)). Components j=0 are treated separately as pointed sets, so the proof does not assume they are the same sort of group isomorphism."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The radial extension is continuous at its center because the family is based there. (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The contraction fixes the basepoint and contracts J to the constant map. (step 3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and steps 1.1 and 4.1: the actual configuration context includes AC and the parametric smoothing supplier retains it. A fixed reference connection and chosen hemisphere frames determine the trivializations; sigma_f is then an explicit formula from the fixed clutching function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim gives homotopy-group identifications independent of clutching class, not an equivalence asserting that different bundles are isomorphic. It explicitly allows the unbased evaluation fibration to retain clutching dependence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from equality of these homotopy groups to equality of clutching classes is claimed. The product description concerns the based section space of a fixed P."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked all four steps and every exact direct supplier. Reader construction A0=sum rho_i omega_i reproduces vertical vectors and is right-equivariant, so it meets the principal-connection definition for every bundle sector. Radial parallel transport has smooth dependence up to each hemisphere boundary; compact fiber permits continuation over finitely many intervals. The extension sigma_f tends uniformly to I at the disk center and is 1-Lipschitz in the uniform Hilbert–Schmidt metric. Compatible section pairs therefore give an actual homeomorphism J×Map_*(Sr,SU(N)); J contracts preserving its center value. The adjunction/loop suppliers identify homotopy groups, while the repaired smoothing lemma transfers them to the smooth topology. Chosen point/frame addition has only the two same-batch consumers; both actual uses checked and remain valid. Reader repair accepted; manifest synchronized to its actual direct suppliers."
+      }
+    },
+    "thm-qftx-reduced-gauge-group-sphere-nontriviality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-sphere-gauge-evaluation-fibration",
+          "source_section": "Statement",
+          "quote": "Let $P\\to S^r$ be a smooth principal $SU(N)$ bundle with $r\\in\\{3,4\\}$, $N\\ge2$, a chosen point $m\\in S^r$, and a chosen frame $p_m$ in its fiber. Write $\\mathcal G(P):=\\mathcal G_\\infty(P)$ for the smooth gauge group defined by the finite-atlas $C^\\infty$ section topology, let $\\mathcal G_m(P):=\\{u\\in\\mathcal G_\\infty(P):u(p_m)=e\\}$, and put $\\overline{\\mathcal G}(P):=\\overline{\\mathcal G}_\\infty(P)=\\mathcal G_\\infty(P)/Z_N$, where $Z_N$ is the finite subgroup of constant central gauge sections. Evaluation $ev_m(u)=u(p_m)$ gives a locally trivial bundle\n$$\\mathcal G_m(P)\\longrightarrow\\mathcal G(P)\\xrightarrow{ev_m}SU(N),$$\nand the quotient map $\\mathcal G(P)\\to\\overline{\\mathcal G}(P)$ is a finite covering. For a local section $s:U\\to\\mathcal G(P)$, the bundle chart has the commutative form\n$$\\begin{array}{ccc}\\mathcal G_m(P)\\times U&\\xrightarrow{\\Phi_s}&ev_m^{-1}(U)\\\\\\downarrow{\\operatorname{pr}_2}&&\\downarrow{ev_m}\\\\U&\\hookrightarrow&SU(N)\\end{array}$$\nwhere $\\Phi_s(v,g)=v\\,s(g)$; the square commutes because $ev_m(v)=e$ and $ev_m(s(g))=g$. The corresponding TikZ source is:\n```tikz\n\\begin{tikzcd}\n\\mathcal G_m(P)\\times U \\arrow[r,\"{\\Phi_s}\"] \\arrow[d,\"{\\mathrm{pr}_2}\"'] & ev_m^{-1}(U) \\arrow[d,\"{ev_m}\"]\\\\\nU \\arrow[r,hook] & SU(N)\n\\end{tikzcd}\n```\nThe evaluation bundle is numerable; both maps are Serre fibrations and have the homotopy long exact sequence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-based-gauge-sphere-homotopy",
+          "source_section": "Statement",
+          "quote": "Let $P\\to S^r$ be any smooth principal $SU(N)$ bundle, where $r=3$ or $4$ and $N\\ge2$. Fix a point $m\\in S^r$ and a frame $p_m\\in P_m$. Write $\\mathcal G_{\\infty,m}(P)=\\{u\\in\\mathcal G_\\infty(P):u(p_m)=e\\}$ for the based subgroup of the smooth gauge group defined by finite-atlas $C^\\infty$ derivative seminorms; for brevity put $\\mathcal G_m(P):=\\mathcal G_{\\infty,m}(P)$. For every $j\\ge1$ there is a group isomorphism\n$$\\pi_j(\\mathcal G_m(P),e)\\cong\\pi_{j+r}(SU(N),e),$$\nand there is a bijection of pointed component sets $\\pi_0(\\mathcal G_m(P),e)\\cong\\pi_r(SU(N),e)$. These identifications are independent of the clutching class of $P$; the unbased evaluation fibration may still depend on that class.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-low-unitary-homotopy-inputs",
+          "source_section": "Statement",
+          "quote": "For every $N\\ge2$, $SU(N)$ is path connected, $\\pi_1(SU(N))=\\pi_2(SU(N))=0$, and $\\pi_3(SU(N))\\cong\\mathbb Z$. In addition, $\\pi_4(SU(2))\\cong\\mathbb Z/2$ is finite and $\\pi_5(SU(2))\\ne0$. Here $SU(2)\\cong S^3$ by the map sending a unit quaternion to its defining special-unitary matrix.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qftx-pi5-special-unitary-nonzero",
+          "source_section": "Statement",
+          "quote": "For every integer $N\\ge2$, $\\pi_5(SU(N))$ is nonzero. The claim is only nonvanishing; no full computation of these groups is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "source_section": "Statement",
+          "quote": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ with fiber $F=p^{-1}(b_0)$, the sequence\n$$\\cdots\\to\\pi_n(F)\\xrightarrow{i_*}\\pi_n(E)\\xrightarrow{p_*}\\pi_n(B)\\xrightarrow{\\partial_p}\\pi_{n-1}(F)\\to\\cdots\\to\\pi_1(B)\\xrightarrow{\\partial_p}\\pi_0(F)\\xrightarrow{i_*}\\pi_0(E)\\xrightarrow{p_*}\\pi_0(B)$$\nis exact wherever there is an incoming and outgoing arrow. Basepoints are $e_0,b_0$ as appropriate. Exactness means incoming image equals the inverse image of the distinguished element. Arrows are homomorphisms where both group structures are defined; the component terms are pointed sets. The last arrow is onto precisely when $p(E)$ meets every path component of $B$.\n\nThere is a right action of $\\pi_1(B,b_0)$ on $\\pi_0(F)$: $[e]\\cdot[\\gamma]$ is the endpoint component of a lift of $\\gamma$ starting at $e$, with loop products traversed left-to-right. Its orbits are precisely the fibers of $i_*:\\pi_0(F)\\to\\pi_0(E)$, and the stabilizer of $[e_0]$ is $p_*\\pi_1(E,e_0)$. Our boundary convention gives $\\partial_p[\\gamma]=[e_0]\\cdot[\\gamma]^{-1}$. These assertions require no AC.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-covering-maps-inject-fundamental-groups",
+          "source_section": "Statement",
+          "quote": "For a covering $p:(E,e_0)\\to(B,b_0)$, the induced homomorphism $p_*:\\pi_1(E,e_0)\\to\\pi_1(B,b_0)$ is injective.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-path-lifting-for-covering-maps",
+          "source_section": "Statement",
+          "quote": "Let $p:E\\to B$ be a covering, let $\\alpha:I\\to B$ be a path, and let $e_0\\in E$ satisfy $p(e_0)=\\alpha(0)$. There is a unique path $\\widetilde\\alpha:I\\to E$ with $\\widetilde\\alpha(0)=e_0$ and $p\\circ\\widetilde\\alpha=\\alpha$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $r=3$. By [F3, F4], $\\pi_0(\\mathcal G_m(P))\\cong\\pi_3(SU(N))\\cong\\mathbb Z$. The evaluation LES [F2, F6] has the component segment\n$$\\pi_1(SU(N))\\longrightarrow\\pi_0(\\mathcal G_m(P))\\longrightarrow\\pi_0(\\mathcal G(P))\\longrightarrow\\pi_0(SU(N)).$$\nThe outer terms are one-point sets by [F4]. The induced map on components is surjective by exactness, and its fibers are the orbits of $\\pi_1(SU(N))$ on $\\pi_0(\\mathcal G_m(P))$ in the action clause of [F6]. That acting group is trivial, so each fiber is a singleton and the middle map is a bijection. Thus $\\mathcal G(P)$ has infinitely many components. Write $q:\\mathcal G(P)\\to\\overline{\\mathcal G}(P)$ for the quotient covering. Translation $u\\mapsto uz$ by any $z\\in Z_N$ is a homeomorphism and therefore acts on path components. If $q(x)$ and $q(y)$ are joined by a path $\\alpha$, lift $\\alpha$ starting at $x$ by [F7]. Its endpoint lies in $q^{-1}(q(y))=yZ_N$, so $x$ is joined upstairs to $yz$ for some $z\\in Z_N$. Conversely, any path from $x$ to $yz$ projects to a path from $q(x)$ to $q(y)$. Since $q$ is surjective, its induced map on component sets is surjective, and these two implications identify its fibers exactly with the $Z_N$-orbits. Each orbit has at most $N$ elements; finitely many quotient components would therefore make the upstairs component set finite. Thus infinitely many components remain downstairs.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $r=4$. By [F3] and [F5], $\\pi_1(\\mathcal G_m(P))\\cong\\pi_5(SU(N))\\ne0$. In the evaluation LES, the map $\\pi_1(\\mathcal G_m(P))\\to\\pi_1(\\mathcal G(P))$ has preceding term $\\pi_2(SU(N))=0$ by [F4]; exactness makes it injective. The finite covering in [F2] induces an injection $\\pi_1(\\mathcal G(P))\\hookrightarrow\\pi_1(\\overline{\\mathcal G}(P))$ by [F6]. Hence $\\pi_1(\\overline{\\mathcal G}(P))$ contains a nonzero subgroup. The two cases establish the statement for every $r,N,P$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: identity sections give basepoints upstairs and downstairs. For r=3 the component set upstairs is Z, not empty; finite deck orbits cannot turn it into a finite component set. For r=4 an injected nonzero subgroup witnesses nontriviality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The pi1 conclusion rules out the zero fundamental group for r=4. (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the first based homotopy group downstairs is nonzero when r=4 by two injections. In step 1.1 singleton outer component sets and the trivial pi_1(SU(N)) make the middle component map a bijection; singleton sets are not being treated as empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The r=3 case is handled by components, including every N and bundle sector. (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The only sphere dimensions are r=3 and r=4, and both are treated. (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and steps 1.1 and 2.1: the configuration/fibration suppliers retain full AC. The proof uses finite deck orbits and injections on fundamental groups, without selecting representatives of all components or all nonzero homotopy classes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The alternatives more than one component or some nonzero positive homotopy group form a disjunction, not a biconditional. The sharper r=3 and r=4 conclusions are separately established."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Neither infinite components nor nonzero pi_1 is claimed to characterize bundles over S^3 or S^4; the base sphere and rank are fixed hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u58",
+        "notes": "Adjudicator repair review, not independent acceptance: checked the actual evaluation LES action clause and the smooth finite-center covering. A lift from x of a path q(x) to q(y) ends at yz for some central z, giving one direction of the component-orbit correspondence; projecting a path x to yz gives the converse. Translation by each of the N central elements is a homeomorphism. Each orbit has at most N components, so the infinite upstairs set has infinitely many quotient components. For r=4, vanishing pi2 SU(N) and covering injectivity give the two required pi1 injections. Statement, topology, ranks and all bundle sectors remain unchanged."
+      }
+    },
+    "lem-qftx-section-retract-obstruction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-trivial-fiber-bundle",
+          "source_section": "Definition",
+          "quote": "A **locally trivial fiber bundle with fiber $F$** is a continuous map $p:E\\to B$, an open cover $(U_i)_{i\\in S}$ of $B$, and homeomorphisms $$\\theta_i:p^{-1}(U_i)\\longrightarrow U_i\\times F,\\qquad \\operatorname{pr}_1\\theta_i=p|_{p^{-1}(U_i)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant",
+          "source_section": "Statement",
+          "quote": "A based map $f:(X,x_0)\\to(Y,y_0)$ induces $f_*[a]=[f\\circ a]$ on all pointed component and cubical homotopy sets. For $n\\ge1$ this is a homomorphism, identities and composition are preserved, and based homotopic maps induce equal maps. Based homotopy equivalences induce isomorphisms.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\Phi:B\\times H\\to E$ by $\\Phi(b,h)=s(b)h$. Every $e\\in E$ lies over a unique $b=p(e)$ and the principal action is free and transitive on $p^{-1}(b)$, so there is a unique $h$ with $e=s(b)h$. Thus $\\Phi$ is bijective. In each local principal chart, $s$ is a continuous local section and the group coordinate $h$ is continuous; these charts cover $B$, so the inverse $e\\mapsto(p(e),h(e))$ is continuous. The forward map is continuous by the action. Hence $\\Phi$ is a homeomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $b_0\\in B$. Under $\\Phi$, the inclusion $i:H\\to E$, $h\\mapsto s(b_0)h$, and the map $r:E\\to H$, $r(e)=\\operatorname{pr}_H(\\Phi^{-1}(e))$, satisfy $r\\circ i=\\operatorname{id}_H$. Thus $H$ is a retract. If $E$ is weakly contractible, it is path connected by [A1], so its continuous image $r(E)=H$ is path connected.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Choose basepoint $e_0=s(b_0)$. The maps $i$ and $r$ are based and [F2] gives $r_*i_*=(r\\circ i)_*=\\operatorname{id}_{\\pi_j(H,e)}$. But $\\pi_j(E,e_0)=0$ by [A1], so $i_*$ has zero target; the identity on $\\pi_j(H,e)$ factors through zero and is zero. Therefore $\\pi_j(H,e)=0$ for each $j\\ge1$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the principal bundle is nonempty, hence has a basepoint b_0 in B and a point s(b_0) in E. An empty total/base bundle is excluded because it would give no fiber inclusion at b_0. The group H is nonempty by its identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "All positive homotopy groups of H vanish under the weak-contractibility hypothesis. (step 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: j=1 is covered by the same based functorial identity r_* i_*=id. If H is the one-point group the explicit product and retraction still work and every positive homotopy group is trivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If H is trivial the retraction and path-connectedness conclusions still hold. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument uses an exact homeomorphism E=B times H and a retract identity. It does not construct an interval homotopy or take endpoint limits; weak contractibility is a hypothesis for the final implication."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: the global section s is supplied, and one basepoint b_0 is fixed in the nonempty base. Each group coordinate is uniquely determined by e=s(p(e))h, so r requires no choice of a fiber point at every b."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion says that a section gives a retract and weak contractibility of E forces trivial homotopy of H; it does not assert the converse implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Path connectedness and zero homotopy groups of H are not used to infer a global section or weak contractibility of E. Those converse claims are absent from the statement."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps."
+    },
+    "ex-qftx-sphere-gauge-s3-components": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-based-gauge-sphere-homotopy",
+          "source_section": "Statement",
+          "quote": "Let $P\\to S^r$ be any smooth principal $SU(N)$ bundle, where $r=3$ or $4$ and $N\\ge2$. Fix a point $m\\in S^r$ and a frame $p_m\\in P_m$. Write $\\mathcal G_{\\infty,m}(P)=\\{u\\in\\mathcal G_\\infty(P):u(p_m)=e\\}$ for the based subgroup of the smooth gauge group defined by finite-atlas $C^\\infty$ derivative seminorms; for brevity put $\\mathcal G_m(P):=\\mathcal G_{\\infty,m}(P)$. For every $j\\ge1$ there is a group isomorphism\n$$\\pi_j(\\mathcal G_m(P),e)\\cong\\pi_{j+r}(SU(N),e),$$\nand there is a bijection of pointed component sets $\\pi_0(\\mathcal G_m(P),e)\\cong\\pi_r(SU(N),e)$. These identifications are independent of the clutching class of $P$; the unbased evaluation fibration may still depend on that class.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-low-unitary-homotopy-inputs",
+          "source_section": "Statement",
+          "quote": "For every $N\\ge2$, $SU(N)$ is path connected, $\\pi_1(SU(N))=\\pi_2(SU(N))=0$, and $\\pi_3(SU(N))\\cong\\mathbb Z$. In addition, $\\pi_4(SU(2))\\cong\\mathbb Z/2$ is finite and $\\pi_5(SU(2))\\ne0$. Here $SU(2)\\cong S^3$ by the map sending a unit quaternion to its defining special-unitary matrix.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "source_section": "Statement",
+          "quote": "For every r≥1, degree is an isomorphism $\\pi_r(S^r,b)\\to\\mathbb Z$, sending the identity to +1 and cubical concatenation, equivalently oriented pinch sum, to addition. Two based sphere self-maps are homotopic through based maps if and only if their degrees agree. No infinite choice principle is needed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-reduced-gauge-group-sphere-nontriviality",
+          "source_section": "Statement",
+          "quote": "Let $r\\in\\{3,4\\}$, $N\\ge2$, and $P\\to S^r$ be any smooth principal $SU(N)$ bundle. Write $\\mathcal G(P):=\\mathcal G_\\infty(P)$ for its smooth gauge group with the finite-atlas $C^\\infty$ section topology and $\\overline{\\mathcal G}(P):=\\overline{\\mathcal G}_\\infty(P)=\\mathcal G_\\infty(P)/Z_N$ for the quotient by constant central gauge sections. Then either $\\overline{\\mathcal G}(P)$ has more than one path component or at least one of its based homotopy groups $\\pi_j(\\overline{\\mathcal G}(P),e)$, $j\\ge1$, is nonzero. More precisely, for $r=3$ it has infinitely many path components, and for $r=4$ its fundamental group is nontrivial.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qftx-parametric-gauge-smoothing",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact connected oriented boundaryless smooth Riemannian manifold of dimension $d\\in\\{3,4\\}$, let $N\\ge2$, let $P\\to M$ be a smooth principal $SU(N)$ bundle, and fix a frame $p_m$ over $m\\in M$. Use the adjoint group bundle $Ad(P)=P\\times_{Ad}SU(N)$. Write $\\mathcal G_\\infty(P)$ for the smooth gauge group with its $C^\\infty$ section topology as defined from finite-atlas derivative seminorms, and set $\\mathcal G_{\\infty,m}(P)=\\{u\\in\\mathcal G_\\infty(P):u(p_m)=e\\}$. Define $\\mathcal G^0(P)$ as the group of continuous sections of $Ad(P)$ with the compact-open topology and $\\mathcal G^0_m(P)=\\{u\\in\\mathcal G^0(P):u(p_m)=e\\}$. Then the inclusions $\\mathcal G_\\infty(P)\\hookrightarrow\\mathcal G^0(P)$ and $\\mathcal G_{\\infty,m}(P)\\hookrightarrow\\mathcal G^0_m(P)$ induce bijections on path components and isomorphisms on all homotopy groups at every basepoint. More precisely, finite sphere/disk parameter families and their relative homotopies have the same classes in the smooth and continuous section topologies.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-path-lifting-for-covering-maps",
+          "source_section": "Statement",
+          "quote": "Let $p:E\\to B$ be a covering, let $\\alpha:I\\to B$ be a path, and let $e_0\\in E$ satisfy $p(e_0)=\\alpha(0)$. There is a unique path $\\widetilde\\alpha:I\\to E$ with $\\widetilde\\alpha(0)=e_0$ and $p\\circ\\widetilde\\alpha=\\alpha$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], each integer $k$ is represented by a based map $u_k:S^3\\to SU(2)$ of degree $k$. The standard degree representative may be chosen smooth by a relative smooth approximation; [F5] then identifies its class with one in the smooth based section topology. Distinct integers give distinct elements of $\\pi_3(SU(2))$ by degree classification, so [F1] proves that the based gauge group has components indexed by $\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The evaluation fibration has connected base $SU(2)$ and $\\pi_1(SU(2))=0$ by [F2, F3]. Its component LES therefore identifies $\\pi_0(\\mathcal G_m)$ with $\\pi_0(\\mathcal G)$, so the full group also has infinitely many components. The quotient by $Z_2$ is a two-sheeted covering; [F6] shows its components are the orbits of the two-element deck action on the components upstairs. Each orbit has at most two members, so an infinite component set remains infinite after quotient; this instance is also the $r=3,N=2$ case of [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example and step 1.1: all integer degrees label based components, including the constant identity map of degree zero. Thus the component set is Z rather than empty, and step 2.1 keeps infinitely many components after a quotient with orbits of size at most two."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Degree zero is represented and is the identity component. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree one supplies the standard nontrivial component. (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two-element center quotient merges at most two components. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The full-group and quotient component conclusions follow from the evaluation and covering maps. (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and step 1.1: for each fixed integer k, degree classification supplies a representative and relative smoothing supplies a smooth one under the retained AC context. The claim about components needs existence for each k, not an independently specified simultaneous list of all maps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes infinite components for the fixed trivial SU(2) bundle over S^3, with no biconditional characterizing trivial bundles by their component set."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse inferring this bundle or its rank from an infinite gauge-component set is asserted; the example explicitly declines an arbitrary-rank or S^4 conclusion."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No programmatic finite check proves these general topological statements; the applicable finite boundary cases are recorded explicitly and discharged by the cited numbered steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked both Verification steps, exact degree, smoothing, based gauge and covering path-lifting interfaces. Every integer degree has a representative and marked-point smoothing preserves its based homotopy class; distinct degrees remain distinct smooth section components. Evaluation with connected simply connected SU2 identifies full components, and the center quotient has orbits of size at most 2. The example retains its trivial SU2/S3 scope and does not claim an S4 or arbitrary-rank calculation. Only the reader contract quotation changed; no item defect."
+      }
+    }
+  }
+}

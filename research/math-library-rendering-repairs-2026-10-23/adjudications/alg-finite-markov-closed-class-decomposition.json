@@ -1,0 +1,97 @@
+{
+  "id": "alg-finite-markov-closed-class-decomposition",
+  "agent": "/root/rendering_repair_coordinator/dnde_005",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone original tile has no figure. A concrete weighted directed graph materially clarifies the column-source convention and distinguishes mutual reachability from the outgoing-edge closure test. The existing complete algorithm remains intact; the added example is warranted under the expanded explanatory-diagram scope.",
+      "action": "Added a final Remarks example with an exact four-state column-stochastic matrix and the complete five-edge transition graph with dashed SCC boundaries.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only a Remarks illustration. Original Definition and all frontmatter, including published status, are byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      36,
+      60
+    ],
+    "matrix": 40,
+    "explanation": 42,
+    "tikz": [
+      44,
+      60
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and stochastic interface",
+      "detail": "S={1,2,3,4}; P has columns (0,1,0,0), (1/2,0,1/2,0), (0,0,0,1), (0,0,1,0). Each is nonnegative and sums to one, satisfying the linked finite-column-stochastic definition and algorithm input; K=P^T."
+    },
+    {
+      "check": "Every positive transition and arrow convention",
+      "detail": "Exactly five positive entries occur: P21=1, P12=1/2, P32=1/2, P43=1, P34=1. The figure draws precisely 1→2, 2→1, 2→3, 3→4, 4→3 with these labels. Each j→i label is Pij=Kji, consistent with Definition line 27 and the row-source procedure line 33; no self-loops are drawn because all diagonal entries vanish."
+    },
+    {
+      "check": "Components and closure",
+      "detail": "Mutual arrows give SCCs {1,2} and {3,4}. The only intercomponent edge is 2→3, with no return path, so neither SCC merges with the other. The source component is nonclosed; C={3,4} has Kij=0 for i∈C and j∉C, satisfying the exact closure test in line 33. The condensation graph has exactly {1,2}→C. Probability of remaining in {1,2} after repeated visits to 2 decays geometrically, consistent with the algorithm marking states 1,2 transient."
+    },
+    {
+      "check": "Independence",
+      "detail": "The figure is outside the Definition in final Remarks; the original exact arithmetic input contract and complete Boolean procedure are unchanged and do not rely on the illustration."
+    }
+  ],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-finite-markov-closed-class-decomposition.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects",
+      "preexisting_failures": []
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-finite-markov-closed-class-decomposition.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/alg-finite-markov-closed-class-decomposition.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  },
+  "visual_checks": {
+    "original": {
+      "recorded_path_discrepancy": "Declared diagram-supplement/screenshots path absent; resolved authentic tile within the same category screenshots directory.",
+      "path": "research/math-library-rendering-audit-2026-10-23/numerical-differential-equations-and-stochastic-dynamics/screenshots/alg-finite-markov-closed-class-decomposition--01.png",
+      "sha256": "e876c6b3f24c980d2c48e3bb76946d09306ef9e14bcf8982fe436967a9e4b6c2",
+      "inspection": "Standalone original-resolution view."
+    },
+    "preview": {
+      "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnde005/manifest.json",
+      "source_sha256": "c7badd0d7a735635f897b0583e438b42dcb58b7c2164992543ed236351c69d00",
+      "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dnde005/screenshots/alg-finite-markov-closed-class-decomposition--01.png",
+      "inspection": "Standalone original-resolution native local preview inspected. Four distinct circular vertices, all five directed edges and probability labels, both dashed SCC boxes and component labels are visible against dark background without clipping or overlap. No native cycle primitive is used.",
+      "exit_code": 0,
+      "limitations": "Local native ItemBody preview, not production route; manifest records 16 unrelated reference-title parse diagnostics."
+    }
+  },
+  "remaining_issues": []
+}

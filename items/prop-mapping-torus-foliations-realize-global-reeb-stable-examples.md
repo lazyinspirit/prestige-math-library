@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-mapping-torus-foliations-realize-global-reeb-stable-examples.json
+  precheck: pass
 id: prop-mapping-torus-foliations-realize-global-reeb-stable-examples
 kind: proposition
 title: "Mapping torus foliations realize global Reeb stable examples"
@@ -84,3 +87,23 @@ to the identity, and monodromies with nonconjugate classes in $\pi_0\operatornam
 ## Remarks
 
 The same quotient also carries the suspension foliation of $n\mapsto f^n$ over $S^1$, whose leaves are the images of $\mathbb R\times\{y\}$ ([[def-suspension-foliation-of-a-group-action]]). This is the foliation in the base direction. The present item concerns instead the fibre foliation by images of $L\times\{t\}$; its descent follows from F1 and the slice-invariance computation of step 1.1, rather than from the suspension leaf description.
+
+The rectangle below is a schematic of the fundamental domain $L\times[0,1]$: its horizontal segments represent whole slices, not coordinates on $L$. The upward arrow is the transverse flow. The lower line records the endpoint identification, so its composite is the first-return map $f^{-1}$ (step 1.5). The projection is $q([x,t])=t\bmod 1$ (step 1.4).
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \draw (0,0) rectangle (5,3);
+  \draw[gray] (0,1) -- (5,1);
+  \draw[gray] (0,2) -- (5,2);
+  \node[left] at (0,0) {$L\times\{0\}$};
+  \node[left] at (0,3) {$L\times\{1\}$};
+  \node[left] at (0,1.5) {slices};
+  \draw[->,thick] (3,0.2) -- (3,2.8) node[midway,right] {$\partial/\partial t$};
+  \node at (2.5,3.5) {$L\times[0,1]$};
+  \node (a) at (-0.5,-1.3) {$(x,0)$};
+  \node (b) at (2.5,-1.3) {$(x,1)$};
+  \node (c) at (6,-1.3) {$(f^{-1}(x),0)$};
+  \draw[->] (a) -- (b) node[midway,above] {time $1$};
+  \draw[->,dashed] (b) -- (c) node[midway,above] {seam $\sim$};
+\end{tikzpicture}
+```

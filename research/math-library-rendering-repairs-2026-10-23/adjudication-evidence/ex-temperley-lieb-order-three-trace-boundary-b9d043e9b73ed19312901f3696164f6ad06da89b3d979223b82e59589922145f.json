@@ -1,0 +1,99 @@
+{
+  "id": "ex-temperley-lieb-order-three-trace-boundary",
+  "agent": "/root/rendering_repair_coordinator/qar_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "malformed-environment",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile 01 shows the complete TikZ source as ordinary text; the local ItemBody renderer recognizes backtick TikZ fences but did not recognize this tilde fence.",
+      "action": "Changed both tilde fence delimiters to backticks.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-clipping-or-overlap",
+      "verdict": "confirmed",
+      "reason": "The first native fence-only preview, inspected standalone at original resolution, showed basis diagram overlapping closed graph: one component. This was an actual caption collision in the rendered figure.",
+      "action": "Moved the right panel two coordinate units right and increased coordinate units and label font for readable, separated captions; all four graph arcs and their endpoint pairings were retained.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Render the existing two-panel matching-graph illustration using recognized backtick TikZ fencing, with separated readable panel captions. No mathematical relation changed.",
+  "source_lines_after": {
+    "diagram_prose": 44,
+    "fence_start": 46,
+    "tikz_options": 47,
+    "right_panel": [
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61
+    ],
+    "fence_end": 63
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and endpoint pairings",
+      "evidence": "Read the complete item and all six direct suppliers. The local diagram definition puts top and bottom positions left to right. At n=2, d_1 pairs t1-t2 and b1-b2, with no through strand. Both displayed panels have exactly these two solid arcs and four distinct boundary points. They encode a 2-to-2 basis matching, not two different algebra elements."
+    },
+    {
+      "check": "Closure arcs and actual cycle",
+      "evidence": "The right panel adds exactly t1-b1 on its left exterior and t2-b2 on its right exterior, matching def-temperley-lieb-normalized-markov-trace-by-closure. The visible final graph follows t1 -> t2 -> b2 -> b1 -> t1; it has four vertices, four arcs, degree two at each vertex, and exactly one connected closed component. Both closing arcs are explicit endpoint-to-endpoint paths, with no cycle shorthand. There are no crossings, arrows or asserted over/under data."
+    },
+    {
+      "check": "Loop scalar and normalization",
+      "evidence": "The diagram-category supplier and generator-relations lemma 1.1 give u^2=delta u by removing one internal stacked loop. The normalized closure supplier gives tau_2(u)=delta^(1-2)=delta^-1, while the identity has two closure circles and tau_2(1)=delta^(2-2)=1. Here q=exp(i*pi/3), delta=1 and q^2 has order 3, in agreement with the quantum-characteristic supplier and the item. Thus the pictured single closure component agrees with F2 and Verification 2.1 without substituting an unnormalized loop evaluation."
+    },
+    {
+      "check": "Proof and claim preservation",
+      "evidence": "Verification 1.1 algebraically establishes the two nonzero orthogonal idempotents and the product decomposition. Verification 2.1 independently computes the rank-one trace-pairing matrix. Both original proof paragraphs, every Fact, all hypotheses and all metadata are byte-identical to the frozen source; the figure remains an illustration and is not a proof premise."
+    }
+  ],
+  "before_raw_sha256": "cc1144380c1f2ae29efce4f7ccf5fdf77fc27d049a4c9f1f9983e43e4431254a",
+  "after_raw_sha256": "33f268b4c597f4bdcef1653ac3c77d3cf6f3ccbee2f212c5c46b71dbe3e5c7a5",
+  "status_preserved": "status: published (entire frontmatter byte-identical)",
+  "checks": {
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-temperley-lieb-order-three-trace-boundary.md --json",
+      "exit_code": 0,
+      "stdout": "{\n  \"summary\": {\n    \"files\": 1,\n    \"checked\": 1,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/ex-temperley-lieb-order-three-trace-boundary.md\",\n      \"item_id\": \"ex-temperley-lieb-order-three-trace-boundary\",\n      \"status\": \"pass\",\n      \"strategy\": \"direct\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-temperley-lieb-order-three-trace-boundary.md --json",
+      "exit_code": 0,
+      "stdout": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 1\n}\n",
+      "stderr": ""
+    },
+    "proof-layout": {
+      "command": "node tools/proof-layout.mjs items/ex-temperley-lieb-order-three-trace-boundary.md",
+      "exit_code": 0,
+      "stdout": "proof-layout: 1 items, 2 steps, 0 defects\n",
+      "stderr": ""
+    }
+  },
+  "visual_inspection": {
+    "original_tiles": [
+      "research/math-library-rendering-audit-2026-10-23/quantum-algebra-and-representation-theory/screenshots/ex-temperley-lieb-order-three-trace-boundary--01.png"
+    ],
+    "initial_preview": "research/math-library-rendering-repairs-2026-10-23/qar-001-native-preview",
+    "final_preview": "research/math-library-rendering-repairs-2026-10-23/qar-001-native-preview-final",
+    "final_tile": "research/math-library-rendering-repairs-2026-10-23/qar-001-native-preview-final/screenshots/ex-temperley-lieb-order-three-trace-boundary--01.png",
+    "standalone_original_resolution": true,
+    "result": "Final native preview shows both complete panels, separated readable captions, cap and cup in each panel and both real dashed closure arcs. No caption overlap, TikZ failure or KaTeX error. One figure rendered. All original and final screenshots were viewed separately at original resolution."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview only, with external network blocked; no live website was visited. Preview reference map reports 16 unrelated parse diagnostics; those carriers are outside scope."
+  ]
+}

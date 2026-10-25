@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-disk-sphere-and-thom-space-of-a-metric-vector-bundle.md

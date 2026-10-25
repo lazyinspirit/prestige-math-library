@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-absolute-and-relative-local-condition-numbers-of-a-problem-map.md

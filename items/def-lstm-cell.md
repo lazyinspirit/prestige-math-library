@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-lstm-cell.json
+  precheck: n/a
 id: def-lstm-cell
 kind: definition
 title: Standard LSTM cell
@@ -11,12 +14,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
 sources:
   references:
     - title: "Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10, §10.10.1, Eqs. 10.40–10.44"
@@ -36,3 +33,35 @@ where $\odot$ is coordinatewise multiplication. The same matrices and biases are
 ## Definition references
 
 [Goodfellow, Bengio, and Courville, *Deep Learning*, Chapter 10, §10.10.1, Eqs. 10.40–10.44](https://www.deeplearningbook.org/contents/rnn)
+
+## Remarks
+
+The diagram separates the carried cell state from the hidden output. Each $\odot$ node takes the coordinatewise product of its two incoming vectors; the $+$ node adds its two incoming vectors. The gates $f_t,i_t,o_t$ and candidate $g_t$ are computed from $x_t,h_{t-1}$ by the affine maps and nonlinearities in the definition, with the same matrices and biases at every time step. All displayed vectors lie in $\mathbb R^{d_h}$.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={inner sep=4pt}]
+  \node (prev) at (0,0) {$c_{t-1}$};
+  \node[draw,circle] (forget) at (2,0) {$\odot$};
+  \node[draw,circle] (add) at (4,0) {$+$};
+  \node (cell) at (6,0) {$c_t$};
+  \node[draw,rounded corners] (tanh) at (8,0) {$\tanh$};
+  \node[draw,circle] (output) at (10,0) {$\odot$};
+  \node (hidden) at (12,0) {$h_t$};
+  \node (f) at (2,1.2) {$f_t$};
+  \node (o) at (10,1.2) {$o_t$};
+  \node[draw,circle] (update) at (4,-1.3) {$\odot$};
+  \node (i) at (3,-2.5) {$i_t$};
+  \node (g) at (5,-2.5) {$g_t$};
+  \draw[->] (prev) -- (forget);
+  \draw[->] (f) -- (forget);
+  \draw[->] (forget) -- (add);
+  \draw[->] (i) -- (update);
+  \draw[->] (g) -- (update);
+  \draw[->] (update) -- (add);
+  \draw[->] (add) -- (cell);
+  \draw[->] (cell) -- (tanh);
+  \draw[->] (tanh) -- (output);
+  \draw[->] (o) -- (output);
+  \draw[->] (output) -- (hidden);
+\end{tikzpicture}
+```

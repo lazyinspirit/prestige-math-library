@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-w-one-p-to-lq-bound-fails-for-q-greater-than-p-star-by-dilation.md

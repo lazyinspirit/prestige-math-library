@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-qc-clean-uncomputation-restores-workspace.json
+  precheck: pass
 id: thm-qc-clean-uncomputation-restores-workspace
 kind: theorem
 title: "Compute-copy-uncompute restores clean workspace"
@@ -25,12 +28,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-16
 sources:
   references:
     - title: "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits (updated July 2015)"
@@ -89,3 +86,27 @@ The identity holds coherently on superpositions and with any reference register.
 
 3.1 By [F7]–[F11], the ordered basis vectors $|x,y,0_W\rangle$ form a basis of the subspace with work fixed to zero. Step 2.1 therefore extends by linearity to every superposition in that subspace, with data action $V|x,y\rangle=|x,y\oplus g(x)\rangle$. This data map is an involutive permutation of its orthonormal computational basis, since applying it twice restores $y$; hence $V$ is unitary. The complete compute-copy-inverse operation thus satisfies the clean identity in [F1], and [F2] extends it to every finite reference register and matrix. The tensor-map and chronological-circuit conventions [F4]–[F5] preserve the ordered factors in these extensions. [step 2.1, F1, F2, F4, F5, F7, F8, F9, F10, F11, algebra] ∎
 
+## Remarks
+
+The circuit below groups $XW$ into its upper row; the lower row is the distinct $m$-bit target $Y$. Time runs from left to right. The middle box applies bitwise CNOT from the designated $g(x)$ subregister of $W$ to $Y$, leaving $XW$ unchanged. It copies computational-basis bits coherently, rather than cloning an arbitrary quantum state.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=0.8cm]
+\node at (-0.7,1) {$XW:\ |x,0_W\rangle$};
+\node at (-0.7,-1) {$Y:\ |y\rangle$};
+\node[draw,minimum width=1.2cm,minimum height=0.7cm] (compute) at (1.8,1) {$C$};
+\draw (3.0,-1.5) rectangle (5.4,1.5);
+\node[align=center] at (4.2,0) {bitwise CNOT\\ $g\to Y$};
+\node[draw,minimum width=1.2cm,minimum height=0.7cm] (inverse) at (6.6,1) {$C^{-1}$};
+\draw (0.6,1) -- (compute.west);
+\draw (compute.east) -- (3.0,1);
+\draw (5.4,1) -- (inverse.west);
+\draw (inverse.east) -- (7.7,1);
+\draw (0.6,-1) -- (3.0,-1);
+\draw (5.4,-1) -- (7.7,-1);
+\node[anchor=west] at (7.7,1) {$|x,0_W\rangle$};
+\node[anchor=west] at (7.7,-1) {$|y\oplus g(x)\rangle$};
+\end{tikzpicture}
+```
+
+After $C$, the upper row is $|x,g(x),r(x)\rangle$; after the middle box it is still that same basis vector, so $C^{-1}$ restores $|x,0_W\rangle$. The lower row changes only in the middle box. These basis-state labels illustrate proof steps 1.1–2.1; the coherent extension, including reference registers, is established independently in step 3.1.

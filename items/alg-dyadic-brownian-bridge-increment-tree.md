@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-dyadic-brownian-bridge-increment-tree.json
+  precheck: n/a
 id: alg-dyadic-brownian-bridge-increment-tree
 kind: algorithm
 title: Dyadic Brownian bridge increment tree
@@ -14,12 +17,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Mike Giles, Monte Carlo Methods, Module 4: Monte Carlo path simulation, Brownian bridge, pp. 27–30"
@@ -53,3 +50,30 @@ cross-covariance is $-(h/4)I_m$, so they are not conditionally independent.
 The exact unconditional Brownian increment laws at fixed dyadic depth are
 proved separately on the A page; this procedure makes no law claim for a
 data-dependent set of requested leaves.
+
+## Remarks
+
+One requested split is pictured below. Arrows record parent-to-child
+refinement, not independent draws: the same innovation $Z$ enters with
+opposite signs. The parent remains stored, and either child can later be
+split using a fresh innovation if named by the finite ordered request list.
+
+```tikz
+\begin{tikzpicture}
+\node (P) at (0,0) {$[u,u+h],\quad \Delta W\in\mathbb R^m$};
+\node (L) at (-3,-1.7) {$[u,u+h/2]$};
+\node (R) at (3,-1.7) {$[u+h/2,u+h]$};
+\node at (-3,-2.3) {$\Delta W_L=\frac{1}{2}\Delta W+Z$};
+\node at (3,-2.3) {$\Delta W_R=\frac{1}{2}\Delta W-Z$};
+\draw[->] (P) -- (L);
+\draw[->] (P) -- (R);
+\node at (0,-3.2) {$Z\sim N_m(0,(h/4)I_m)$};
+\node at (0,-3.9) {$\Delta W_L+\Delta W_R=\Delta W$};
+\end{tikzpicture}
+```
+
+For fixed $\Delta W$, the two children have conditional cross-covariance
+$-(h/4)I_m$: their centered fluctuations are $Z$ and $-Z$. This picture
+illustrates the defined split only; it does not assert unconditional laws
+for data-dependent leaves. The algorithm and its stated qualifications are
+independent of the illustration.

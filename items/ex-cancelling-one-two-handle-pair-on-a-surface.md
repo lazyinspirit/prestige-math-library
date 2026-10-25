@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cancelling-one-two-handle-pair-on-a-surface.json
+  precheck: pass
 id: ex-cancelling-one-two-handle-pair-on-a-surface
 kind: example
 title: "A cancelling one-two handle pair on a surface"
@@ -21,8 +24,7 @@ sources:
     - title: "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow; scanned edition with text layer)"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
       locator: "§6, printed pp. 67-70 (local intersection signs and the single-point count)"
-verification:
-  precheck: pass
+
 ---
 
 ## Example
@@ -48,3 +50,36 @@ Assume $\mathrm{AC}_\omega$. In dimension $n=2$ start with a closed disc $D^2$ (
 2.1 Attaching the $2$-handle along one boundary circle makes the attaching circle meet the belt sphere in exactly one point, and the intersection is isolated and automatic in these dimensions; by [F2] the pair is geometrically cancelling, with the transverse count equal to $1$ modulo $2$ and local sign $\pm1$ by [F3]. [F2, F3, step 1.1]
 
 3.1 By [F3] the pair cancels: $D^2\cup h^1\cup h^2\cong D^2$ relative to the incoming boundary. The attaching-belt matrix is not defined here: its definition requires $1\le k\le n-2$, and with $n=2$ and $k=1$ we have $k=n-1$, so the endpoint case is handled directly by the geometric criterion. [F2, F3, step 2.1, given] ∎
+
+
+## Remarks
+
+In the schematic below, the shaded sector is the band $h^1$; its two dashed radial sides are the attaching intervals on the original disc (the remainder of the annulus). The dotted radial arc is its cocore, with belt points $b_{\mathrm{in}}$ and $b_{\mathrm{out}}$ on distinct boundary circles. Choose the inner circle $A$ as the attaching sphere of $h^2$. Then $A\cap\{b_{\mathrm{in}},b_{\mathrm{out}}\}=\{b_{\mathrm{in}}\}$, so the mod-$2$ count is $1$. Filling this circle by the second disc gives the disc at right. This is the endpoint case $n=2$, $k=1$, and the verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.15]
+\fill[gray!75,even odd rule] (0,0) circle (1.5) (0,0) circle (0.7);
+\fill[gray!55] (40:0.7) -- (40:1.5) arc (40:-40:1.5) -- (-40:0.7) arc (-40:40:0.7) -- cycle;
+\draw (0,0) circle (1.5);
+\draw[blue,thick] (0,0) circle (0.7);
+\draw[dashed] (40:0.7) -- (40:1.5);
+\draw[dashed] (-40:0.7) -- (-40:1.5);
+\draw[dotted,thick] (0.7,0) -- (1.5,0);
+\fill (0.7,0) circle (0.045);
+\fill (1.5,0) circle (0.045);
+\node at (0.67,-0.25) {$b_{\mathrm{in}}$};
+\node at (1.65,-0.25) {$b_{\mathrm{out}}$};
+\node at (1.1,0.35) {$h^1$};
+\node[blue] at (-0.33,0.35) {$A$};
+\node at (-0.9,0) {$D^2$};
+\node at (0,-1.9) {$D^2\cup h^1$};
+\draw[->] (1.9,0.65) -- (3.3,0.65);
+\node at (2.6,1.05) {cap $A$};
+\fill[gray!75] (5,0) circle (1.5);
+\fill[blue!65] (5,0) circle (0.7);
+\draw (5,0) circle (1.5);
+\draw[blue,dashed] (5,0) circle (0.7);
+\node at (5,0) {$h^2$};
+\node at (5,-1.9) {$D^2\cup h^1\cup h^2\cong D^2$};
+\end{tikzpicture}
+```

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-arith-field-prime-to-characteristic-torsion-and-tate-module.md

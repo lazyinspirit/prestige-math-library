@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-variation-of-constants-integral-is-continuous-for-lone-time-forcing.md

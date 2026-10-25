@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-right-invariant-fields-carry-the-opposite-lie-bracket.md

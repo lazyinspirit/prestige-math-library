@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-jordan-eigenvalue-residual-square-root-instability.json
+  precheck: pass
 id: ex-jordan-eigenvalue-residual-square-root-instability
 kind: example
 title: "A Jordan eigenpair residual can be much smaller than its eigenvalue error"
@@ -16,11 +19,6 @@ provenance:
 generation:
   role: example
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Youcef Saad, Numerical Methods for Large Eigenvalue Problems, 2nd ed., §3.1 and §3.5"

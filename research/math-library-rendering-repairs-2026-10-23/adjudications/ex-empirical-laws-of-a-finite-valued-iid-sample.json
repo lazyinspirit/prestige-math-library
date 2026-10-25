@@ -1,0 +1,81 @@
+{
+  "id": "ex-empirical-laws-of-a-finite-valued-iid-sample",
+  "agent": "/root/rendering_repair_supervisor2/prob_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution historical tile visibly prints q_{n,j}-> in steps 1.2 and 2.1 and q_{n,j} as literal prose in step 2.1; the same frequency variable is already defined in math mode at the start of step 1.2. These are mathematical expressions with missing delimiters, not alternate notation.",
+      "action": "Enclose both frequency convergence expressions in inline math and replace the ASCII arrow with \\to; enclose the empirical-integral frequency in inline math.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Three local notation replacements on source lines 48 and 50; no title or frontmatter changes.",
+  "source_lines_after": {
+    "48": "1.2 On such an outcome put $q_{n,j}=n^{-1}\\#\\{i\\le n:X_i=a_j\\}$. If each $q_{n,j}\\to p_j$, then for bounded continuous f, $\\int f\\,d\\widehat\\mu_n=\\sum_jq_{n,j}f(a_j)\\to\\sum_jp_jf(a_j)=\\int f\\,d\\mu$, proving weak convergence. [given, algebra]",
+    "50": "2.1 Conversely, for $m\\ge2$ put $r_j=\\frac12\\min_{l\\ne j}\\|a_j-a_l\\|>0$ and $f_j(x)=\\max(0,1-\\|x-a_j\\|/r_j)$. This bounded continuous test is one at $a_j$ and zero at every other $a_l$. Its empirical integral is $q_{n,j}$ and its $\\mu$ integral is $p_j$, so weak convergence implies $q_{n,j}\\to p_j$. If $m=1$, both frequencies are identically one and the constant test suffices. [given, algebra] \u220e"
+  },
+  "mathematical_meaning_preserved": true,
+  "mathematical_checks": [
+    "The convergence expressions still assert convergence of the same atom frequency q_{n,j} to p_j. The integral in step 2.1 remains exactly q_{n,j}.",
+    "Independent focused reading: finite support gives the finite-sum integral identity in step 1.2; the separated-point bump test in step 2.1 equals one at a_j and zero at the other atoms, so its empirical integral is that same frequency. No claim or proof change was needed. This is not a full supplier proof audit."
+  ],
+  "frontmatter_byte_identical": true,
+  "status_preserved": "published",
+  "before_raw_sha256": "1734d0e6609056f099f1590bfce330cb9616bb04bd6befeff9cdbe4d7ce9b5bd",
+  "after_raw_sha256": "0da1e00066b10ee4a94cb5ef81033c5061bf93700548775d9a5e09c478ac307e",
+  "original_visual_evidence": {
+    "path": "research/math-library-rendering-audit-2026-10-23/probability/screenshots/ex-empirical-laws-of-a-finite-valued-iid-sample--01.png",
+    "sha256": "58a3f2589555b807f9b5a4bd87c0a6e9a7e2bfac135b22362415ea5712a48350",
+    "inspection": "Standalone view_image with detail original."
+  },
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-empirical-laws-of-a-finite-valued-iid-sample.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-empirical-laws-of-a-finite-valued-iid-sample.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-empirical-laws-of-a-finite-valued-iid-sample.md",
+            "item_id": "ex-empirical-laws-of-a-finite-valued-iid-sample",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-empirical-laws-of-a-finite-valued-iid-sample.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "current_visual_evidence": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/prob-009-supervisor2/manifest.json",
+    "manifest_sha256": "3140e875609b1f58d78e4f950b2f5d617eb2c6e91be5d17d298fe688a684c0df",
+    "source_sha256": "0da1e00066b10ee4a94cb5ef81033c5061bf93700548775d9a5e09c478ac307e",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/prob-009-supervisor2/screenshots/ex-empirical-laws-of-a-finite-valued-iid-sample--01.png",
+    "screenshot_sha256": "a7ec9ba3f46be0ef8666607fd6dd29db6601f34826c1cd20d211841d407afcce",
+    "inspection": "Standalone original-resolution native local preview inspected: all three corrected expressions typeset with proper subscripts and convergence arrows; complete title/body visible.",
+    "limitations": "Local ItemBody preview uses current reference map and existing native renderer, not production HTTP route or navigation/metadata footer. Manifest records 13 unrelated reference-map parse diagnostics. A redundant second preview invocation refused to overwrite the completed output; the first completed manifest and screenshots provide the actual evidence."
+  },
+  "remaining_issues": []
+}

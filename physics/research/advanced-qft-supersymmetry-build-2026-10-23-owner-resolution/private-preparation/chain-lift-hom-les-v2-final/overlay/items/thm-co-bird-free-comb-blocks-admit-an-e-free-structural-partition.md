@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-co-bird-free-comb-blocks-admit-an-e-free-structural-partition.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-lifting-of-indecomposable-projectives-to-the-deformed-family.json
+  precheck: pass
 id: thm-lifting-of-indecomposable-projectives-to-the-deformed-family
 kind: theorem
 title: Lifting of indecomposable projectives to the deformed family
@@ -84,7 +87,7 @@ indecomposables.
 
 ## Proof
 
-**Proof technique:** construct relative truncated weight projectives, then lift both maps of an actual split inclusion; no idempotent-lifting assumption on $R$ is used.
+**Proof technique:** construct relative truncated weight projectives, then lift both maps of an actual split inclusion; no idempotent-lifting assumption on R is used.
 
 1.1 Here is the ambient category used for the truncated assertions. For a deformation algebra $T$, its objects are finitely generated $U(\mathfrak g)\otimes T$-modules which are direct sums of relative weight spaces $N^\xi=\{n:hn=(\xi(h)+\tau(h))n\text{ for all }h\in\mathfrak h\}$, have finite $T$-modules as weight spaces, and have weights in a finite union of downward root cones. Morphisms preserve those weight spaces. The full subcategory $\mathcal O_T^{\le\Lambda}$ has weights $\xi\le\Lambda$ in one root-lattice coset; for a finite union of cosets use one bound in each coset. Kernels and cokernels remain in this category, as do extensions whose middle terms are relative-weight modules: weight decomposition makes weight spaces exact, the enveloping algebra over Noetherian $R$ is Noetherian by PBW, and positive-root action is locally nilpotent because only finitely many weights above a fixed weight occur. For arbitrary $R'$ the representing construction below uses the analogous category of relative weight modules, without requiring kernels of finitely generated objects to be finitely generated. Thus every projectivity/base-change assertion has a specified ambient category, distinct from the additive tensor family. [F1, algebra]
 

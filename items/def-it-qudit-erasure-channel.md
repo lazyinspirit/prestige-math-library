@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-it-qudit-erasure-channel.json
+  precheck: n/a
 id: def-it-qudit-erasure-channel
 kind: definition
 title: Finite-dimensional quantum erasure channel
@@ -18,12 +21,6 @@ justified_by:
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "John Watrous, The Theory of Quantum Information, §8.3.2"
@@ -41,3 +38,22 @@ For an erasure probability $\epsilon\in[0,1]$, the **$d$-dimensional quantum era
 $$\mathcal E_{d,\epsilon}(X):=(1-\epsilon)JXJ^*+ \epsilon\operatorname{tr}(X)|e\rangle\langle e|,\qquad X\in\mathcal L(A).$$
 
 For a density operator $\rho$, this outputs the data state with probability $1-\epsilon$ and the orthogonal erasure flag with probability $\epsilon$. The definition is on the full operator space, and its channel property is established in [[thm-it-qudit-erasure-channel-is-cptp]].
+
+## Remarks
+
+The two branches below are operator contributions in $\mathcal L(B)$ and are added to form $\mathcal E_{d,\epsilon}(X)$. Their supports lie in the orthogonal summands $J(A)$ and $\mathbb C e$ of $B$, respectively. For a density operator input, their traces are $1-\epsilon$ and $\epsilon$; for a general operator $X$, the labels denote linear contributions rather than branch probabilities.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (input) at (0,0) {$X\in\mathcal L(A)$};
+\node[draw,rounded corners,minimum width=1.4cm,minimum height=0.8cm] (channel) at (2.6,0) {$\mathcal E_{d,\epsilon}$};
+\node (data) at (6.2,1) {$(1-\epsilon)JXJ^*$};
+\node (flag) at (6.2,-1) {$\epsilon\,\mathrm{tr}(X)|e\rangle\langle e|$};
+\node at (6.2,1.6) {data summand $J(A)$};
+\node at (6.2,-1.6) {erasure summand $\mathbb C e$};
+\draw[->] (input) -- (channel);
+\draw[->] (channel) -- (data);
+\draw[->] (channel) -- (flag);
+\node at (3.8,-2.4) {$B=J(A)\oplus\mathbb C e,\quad e\perp J(A),\quad\dim B=d+1$};
+\end{tikzpicture}
+```

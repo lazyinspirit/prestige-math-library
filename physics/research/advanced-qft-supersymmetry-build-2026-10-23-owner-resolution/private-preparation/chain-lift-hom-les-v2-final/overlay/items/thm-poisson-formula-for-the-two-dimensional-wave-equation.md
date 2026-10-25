@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-poisson-formula-for-the-two-dimensional-wave-equation.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-normal-density-has-total-mass-one.json
+  precheck: pass
 id: lem-normal-density-has-total-mass-one
 kind: lemma
 title: The standard normal density has total mass one
@@ -13,8 +16,7 @@ provenance:
 status: published
 origin: pipeline
 proof_strategy: direct
-verification:
-  repair: research/bayesian-computational-statistics-62-owner-step2-b41-lem-normal-density-has-total-mass-one-published-repair.json
+
 ---
 
 ## Statement
@@ -65,6 +67,6 @@ This is the point at which the completeness of Lebesgue measure is used essentia
 
 1.1 F1 gives positivity of the exponential, and F2 gives continuity. Thus $\phi$ is positive and continuous. AC restricts to a choice function on every countable nonempty family, giving CC; F3 therefore applies to $\phi$. F4 makes its positive denominator well defined. [F1, F2, F3, F4]
 
-2.1 For integer $n\ge1$, F5 with $\varphi(x)=x/\sqrt2$ and continuous f(t)=exp(-t^2) gives $\int_{-n}^n e^{-x^2/2}\,dx=\sqrt2\int_{-n/\sqrt2}^{n/\sqrt2}e^{-t^2}\,dt$. The derivative is the constant 1/sqrt2, hence integrable. Both integrands are continuous on the compact intervals, so F6 gives bounded Riemann integrability. F7 identifies the left side with its Lebesgue integral, under the CC in step 1.1. [F5, F6, F7, step 1.1]
+2.1 For integer $n\ge1$, F5 with $\varphi(x)=x/\sqrt2$ and continuous $f(t)=\exp(-t^2)$ gives $\int_{-n}^n e^{-x^2/2}\,dx=\sqrt2\int_{-n/\sqrt2}^{n/\sqrt2}e^{-t^2}\,dt$. The derivative is the constant $1/\sqrt2$, hence integrable. Both integrands are continuous on the compact intervals, so F6 gives bounded Riemann integrability. F7 identifies the left side with its Lebesgue integral, under the CC in step 1.1. [F5, F6, F7, step 1.1]
 
 3.1 Put $g_n(x)=e^{-x^2/2}\mathbf1_{[-n,n]}(x)$. Each $g_n$ is Borel measurable: for $a<0$, $\{x:g_n(x)>a\}=\mathbb R$, while for $a\ge0$ it is $[-n,n]\cap\{x:e^{-x^2/2}>a\}$, a Borel set because the exponential expression is continuous by step 1.1. By F11 and the CC established in step 1.1, each Borel $g_n$ is also Lebesgue measurable. Thus the nonnegative Lebesgue measurable functions $g_n$ increase pointwise to $e^{-x^2/2}$. By F8, its Lebesgue integral is the limit of the compact integrals in step 2.1. F9 identifies the right-hand improper limit as $\sqrt2\sqrt\pi=\sqrt{2\pi}$; the equality follows because both sides are positive with square $2\pi$, by square-root uniqueness. Applying F10 with the positive scalar $1/\sqrt{2\pi}$ gives $\int\phi\,d\lambda_1=1$. [F8, F9, F10, F11, step 1.1, step 2.1] ∎

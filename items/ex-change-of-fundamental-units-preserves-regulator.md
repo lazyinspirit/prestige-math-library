@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-change-of-fundamental-units-preserves-regulator.json
+  precheck: pass
 id: ex-change-of-fundamental-units-preserves-regulator
 kind: example
 title: "A unimodular change of generators preserves the regulator determinants"
@@ -24,9 +27,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-10-02
-  precheck: pass
 sources:
   references:
     - title: "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory"
@@ -87,7 +87,7 @@ example. Then:
 
 ## Verification
 
-**Proof technique:** derive the exact algebraic relations among the three real conjugates from the polynomial $X^3-3X+1$, translate them into relations among the logarithmic coordinates, and compare the deleted-row determinants of the two tuples through the explicit unimodular matrices.
+**Proof technique:** derive the exact algebraic relations among the three real conjugates from the polynomial X³ − 3X + 1, translate them into relations among the logarithmic coordinates, and compare the deleted-row determinants of the two tuples through the explicit unimodular matrices.
 
 1.1 The setting is as in [F1]-[F4]: $\lambda(\alpha)=(a,b,c)$ and $\lambda(\alpha-1)$ are vectors in the hyperplane $H$ of $\mathbb R^3$, where $a=\log x$, $b=\log y$, $c=\log|z|$; these logarithms are defined because $x>1$, $0<y<1$ and $|z|>1$; and $\lambda$ is additive, $\lambda(u_1u_2)=\lambda(u_1)+\lambda(u_2)$. [F1, F2, F3, F4]
 

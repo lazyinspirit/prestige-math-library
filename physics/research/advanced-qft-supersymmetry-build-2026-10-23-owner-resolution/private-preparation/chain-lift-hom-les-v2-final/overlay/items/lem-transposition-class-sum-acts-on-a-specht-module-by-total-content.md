@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-transposition-class-sum-acts-on-a-specht-module-by-total-content.md

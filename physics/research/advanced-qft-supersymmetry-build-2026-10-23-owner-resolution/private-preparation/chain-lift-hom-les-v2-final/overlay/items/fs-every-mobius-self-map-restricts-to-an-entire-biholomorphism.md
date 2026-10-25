@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-mobius-self-map-restricts-to-an-entire-biholomorphism.md

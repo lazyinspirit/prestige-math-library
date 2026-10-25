@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-nonzero-compactly-supported-final-profile-is-not-reached-by-whole-space-heat-flow.md

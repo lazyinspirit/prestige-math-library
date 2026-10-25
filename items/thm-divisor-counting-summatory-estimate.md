@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-divisor-counting-summatory-estimate.json
+  precheck: pass
 id: thm-divisor-counting-summatory-estimate
 kind: theorem
-title: "The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x)"
+title: 'The summatory divisor-counting function is $x\log x+(2\gamma-1)x+O(\sqrt{x})$'
 status: published
 origin: session
 provenance:
@@ -12,13 +15,6 @@ deps: [lem-harmonic-sum-asymptotic,
        prop-divisor-functions-under-dirichlet-convolution]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:

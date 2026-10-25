@@ -1,0 +1,116 @@
+{
+  "id": "ex-givens-qr-on-a-sparse-matrix",
+  "agent": "/root/rendering_repair_coordinator/dla_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile shows only the initial and final matrices in the Example and prose computations in Verification. A three-state matrix sequence materially clarifies the changing zero pattern and the noninterchangeable row-pair order; it exposes the intermediate -7/5 entry that the second rotation annihilates. This is a warranted explanatory addition under the expanded diagram criterion, not a claim that the existing proof was incomplete.",
+      "action": "Added a final Remarks section with a TikZ A -> G1 A -> R sequence, row-pair arrow labels and the exact Q and QR identities.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only Remarks prose and a native-compatible TikZ matrix transformation sequence. Original title, Example, Facts, Verification and frontmatter remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      53,
+      58
+    ],
+    "diagram": [
+      60,
+      72
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_maps": "Each state is a real 3-by-2 matrix representing a map R^2 -> R^3. G1 and G2 are the 3-by-3 rotations from Verification steps 1.1 and 2.1, acting on the codomain by left multiplication. Both arrows therefore have valid dimensions and run in the actual application order."
+    },
+    {
+      "relation": "G1 A = [[5,24/5],[0,-7/5],[0,2]].",
+      "justification": "Step 1.1: first column is ((9+16)/5,(-12+12)/5,0)=(5,0,0); second column is ((12+12)/5,(-16+9)/5,2)=(24/5,-7/5,2). Thus the first arrow zeros (2,1) and keeps (3,1)=0."
+    },
+    {
+      "relation": "G2(G1 A) = [[5,24/5],[0,sqrt(149)/5],[0,0]] = R.",
+      "justification": "Step 2.1: G2 fixes row 1. On the second-column tail (-7/5,2), its first coordinate is (49/5+20)/sqrt(149)=sqrt(149)/5 and its second is (70/5-14)/sqrt(149)=0. On the first-column tail (0,0), both entries stay zero. The second arrow zeros (3,2)."
+    },
+    {
+      "relation": "Q=(G2 G1)^* and A=QR.",
+      "justification": "Step 3.1: the squared rotation coefficients sum to 1 (9+16)/25=1 and (49+100)/149=1, with orthogonal row pairs and the exact negative lower-left signs used in the source. Hence (G2 G1)^*(G2 G1)=I and multiplying R=G2 G1 A by this adjoint gives A=QR. The order is G2 G1, not its reverse."
+    },
+    {
+      "proof_independence": "The complete original four-step Verification is untouched; Remarks explicitly states independence from the illustration."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-givens-qr-on-a-sparse-matrix.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-givens-qr-on-a-sparse-matrix.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-givens-qr-on-a-sparse-matrix.md",
+            "item_id": "ex-givens-qr-on-a-sparse-matrix",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-givens-qr-on-a-sparse-matrix.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "preexisting_formatting_failures": [],
+  "original_evidence": {
+    "declared_path_missing": true,
+    "declared_path": "research/math-library-rendering-audit-2026-10-23/linear-algebra/diagram-supplement/screenshots/ex-givens-qr-on-a-sparse-matrix--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/linear-algebra/screenshots/ex-givens-qr-on-a-sparse-matrix--01.png",
+    "sha256": "a28c1174c9d3e622c350ddbf46a37de63bec3fd5f05073647f758258b6bb1f5c",
+    "inspected": "Standalone original-resolution view; hash matches queue evidence."
+  },
+  "write_guard": {
+    "before_raw_sha256": "9cf02b180cc305bfab88369677d60124ee75b4f8a45ab5d66e14e5791654d081",
+    "matched_immediately_before_first_edit": true,
+    "current_raw_sha256": "1f0117cd71782d1b60785841db9e6661c6ad6b6b07707a889d92feb7f82c36e6",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published"
+  },
+  "local_visual_check": {
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dla006-givens-20261024-v2/manifest.json",
+    "manifest_sha256": "574622d0dada110d7a639e60a2d8249ccc14a3bdaa656891bcd184964eb6f7d0",
+    "source_sha256": "1f0117cd71782d1b60785841db9e6661c6ad6b6b07707a889d92feb7f82c36e6",
+    "reference_map_sha256": "dd6700b6d974facffa1bc3fd98e8b541fb4d18ef240517c5f67412a5b42ab589",
+    "native_preview_exit_code": 0,
+    "standalone_original_resolution_tiles_inspected": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dla006-givens-20261024-v2/screenshots/ex-givens-qr-on-a-sparse-matrix--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dla006-givens-20261024-v2/screenshots/ex-givens-qr-on-a-sparse-matrix--02.png"
+    ],
+    "result": "Native SVG visible in screenshot: all three matrices, two rightward arrows, row labels, three state labels, and QR identities rendered without overlap or clipping.",
+    "initial_compile_failure": "First preview failed on pmatrix within native TikZ; replaced only the new figure matrices by equivalent left/right-parenthesized array environments and successfully reran native preview. Initial failure retained in previews/dla006-givens-20261024.",
+    "limitations": "Local ItemBody SSR preview only; 16 unrelated reference-map parsing diagnostics are recorded by the preview manifest. No HTTP visits or app edits."
+  },
+  "remaining_issues": []
+}

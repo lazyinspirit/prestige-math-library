@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-monoidal-weak-two-category.json
+  precheck: n/a
 id: def-monoidal-weak-two-category
 kind: definition
 title: Weak monoidal 2-category
@@ -13,12 +16,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: Douglas and Reutter, Fusion 2-Categories and a State-Sum Invariant for 4-Manifolds, §2.1.1
@@ -48,9 +45,11 @@ All pseudofunctor comparison maps, transformations, and modifications are natura
 The ordinary associator pentagon is represented schematically below. In a weak monoidal 2-category its two boundary composites are compared by $\Pi$, rather than required to be literally equal.
 
 ```tikzcd
-& (A\otimes B)\otimes(C\otimes D) \arrow[rr,"a_{A,B,C\otimes D}"] & & A\otimes(B\otimes(C\otimes D)) \\
-((A\otimes B)\otimes C)\otimes D \arrow[ur,"a_{A\otimes B,C,D}"] \arrow[dr,"a_{A,B,C}\otimes 1_D"'] & & & \\
-& (A\otimes(B\otimes C))\otimes D \arrow[r,"a_{A,B\otimes C,D}"'] & A\otimes((B\otimes C)\otimes D) \arrow[ur,"1_A\otimes a_{B,C,D}"'] &
+\begin{tikzcd}[scale=1.7,transform shape]
+& (A\otimes B)\otimes(C\otimes D) \arrow[rr,"{a_{A,B,C\otimes D}}"] & & A\otimes(B\otimes(C\otimes D)) \\
+((A\otimes B)\otimes C)\otimes D \arrow[ur,"{a_{A\otimes B,C,D}}"] \arrow[dr,"{a_{A,B,C}\otimes 1_D}"'] & & & \\
+& (A\otimes(B\otimes C))\otimes D \arrow[r,"{a_{A,B\otimes C,D}}"'] & A\otimes((B\otimes C)\otimes D) \arrow[uur,"{1_A\otimes a_{B,C,D}}"'] &
+\end{tikzcd}
 ```
 
 This definition uses the weak presentation directly. It invokes no global strictification theorem.

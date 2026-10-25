@@ -1,0 +1,457 @@
+{
+  "version": 1,
+  "scope": [
+    "def-equivariant-elliptic-complex-index",
+    "lem-equivariant-relative-tangent-groupoid-heat-trace-limit",
+    "thm-equivariant-index-character-formula",
+    "ex-equivariant-index-on-a-zero-manifold",
+    "ex-equivariant-index-on-a-two-sphere"
+  ],
+  "contracts": {
+    "def-equivariant-elliptic-complex-index": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition permits the empty compact manifold; all section and cohomology spaces are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero cohomology gives the zero virtual representation and zero character."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition has no distinguished scalar parameter with a value-one case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero-dimensional compact manifolds and their finite-dimensional bundle complexes are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition asserts no parameterized limit or endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the index is formed from the given finite-dimensional cohomology representations and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "notes": "Definition only; its action convention is used verbatim by the dependent lemma and examples."
+    },
+    "lem-equivariant-relative-tangent-groupoid-heat-trace-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-equivariant-elliptic-complex-index",
+          "source_section": "Definition",
+          "quote": "$$ (U_t^j s)(x):=\\rho_t^j\\bigl(s(t^{-1}\\cdot x)\\bigr) $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rescaled-operator-limit",
+          "step": "1.1",
+          "claim": "Establish finiteness of the simple fixed set and compute the coefficientwise tangent rescaling; isolate the kernel convergence as [A1].",
+          "inputs": [
+            "given",
+            "A1"
+          ]
+        },
+        {
+          "id": "local-tangent-trace",
+          "step": "2.1",
+          "claim": "Apply the explicitly stated local rescaled-kernel limit and identify the fiber action in the heat-supertrace density.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "jacobian-and-fourier-integral",
+          "step": "3.1",
+          "claim": "Change tangent variables, evaluate the constant-symbol heat-kernel integral by Fourier inversion, and sum the local terms.",
+          "inputs": [
+            "step 2.1",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1: when M^g is empty, the finite fixed-point sum is empty and [A1] makes the trace limit zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: a zero graded fiber trace contributes zero to the local summand."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: for n=0, the empty-dimensional tangent integral and determinant equal 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: the n=0 case uses the empty determinant convention and remains the stated formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: t=0 is a limit only; the heat kernel is assumed for t>0 and [A1] supplies the rescaled limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: M^g is finite, so only finitely many disjoint normal neighborhoods are chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way limit formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way limit formula, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "notes": "Conditional proof only. [A1] contains the exact rescaled-kernel convergence, integrable domination, and off-fixed-set decay that remain without a local proof carrier; readiness must remain escalated."
+    },
+    "thm-equivariant-index-character-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-equivariant-elliptic-complex-index",
+          "source_section": "Definition",
+          "quote": "$$\\operatorname{Ind}_T(E^\\bullet):=\\sum_{j=0}^N(-1)^j[H^j(E^\\bullet)]\\in R(T),\\qquad \\chi_{E^\\bullet}(t):=\\sum_{j=0}^N(-1)^j\\operatorname{tr}\\!\\left(U_t^j\\bigm|_{H^j(E^\\bullet)}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-equivariant-relative-tangent-groupoid-heat-trace-limit",
+          "source_section": "Statement",
+          "quote": "$$\\lim_{t\\downarrow0}\\operatorname{Str}(U_g e^{-t\\Delta})=\\sum_{x\\in M^g}\\frac{\\sum_{j=0}^N(-1)^j\\operatorname{tr}(\\rho_g^j|_{E_x^j})}{|\\det_{\\mathbb R}(I-dg_x)|}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "equivariant-mckean-singer-identity",
+          "step": "1.1",
+          "claim": "Pair positive Laplacian eigenspaces by the equivariant odd operator d+d* and identify the zero-mode supertrace with the index character.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "substitute-local-heat-limit",
+          "step": "2.1",
+          "claim": "Take the positive-time heat-trace limit and substitute the conditional local fixed-point formula.",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1: the empty fixed set gives the empty sum; [L1] then gives character zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: if the alternating cohomology character is zero, the heat supertrace is zero for every t; step 2.1 equates its limit to the fixed sum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 and the statement: at an identity element with simple fixed points, the positive-dimensional case is excluded; in dimension zero the empty determinant is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: zero-dimensional eigenspaces and the empty tangent determinant are covered by the local lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the proof takes t down to zero through positive heat times and asserts no value at t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the argument fixes one arbitrary g with simple fixed points and makes no choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a one-way character identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a one-way character identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "notes": "The deduction is complete conditional on [L1]. The local carrier for [L1] records an unresolved rescaled heat-kernel input, so this theorem is not ready."
+    },
+    "ex-equivariant-index-on-a-zero-manifold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-equivariant-elliptic-complex-index",
+          "source_section": "Definition",
+          "quote": "$$\\operatorname{Ind}_T(E^\\bullet):=\\sum_{j=0}^N(-1)^j[H^j(E^\\bullet)]\\in R(T),\\qquad \\chi_{E^\\bullet}(t):=\\sum_{j=0}^N(-1)^j\\operatorname{tr}\\!\\left(U_t^j\\bigm|_{H^j(E^\\bullet)}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compute-pointwise-cohomology-index",
+          "step": "1.1",
+          "claim": "Use vacuous symbol exactness in dimension zero and compute the alternating cohomology representation.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "compute-fixed-point-sum",
+          "step": "2.1",
+          "claim": "Use the empty tangent determinant and sum the two fiber supertraces.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty two-point manifold and both points are fixed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no scalar parameter with a zero-value specialization; the zero differential is part of the fixed data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: at z=1 the character and fixed-point sum both equal 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the 0-dimensional tangent spaces have empty determinant 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: all fibers and representations are explicitly specified on two points."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "character identity",
+          "calculation": "(1+z-z^2)+(z-1)=2z-z^2",
+          "result": "matches the cohomological index character"
+        },
+        {
+          "name": "tangent determinant",
+          "calculation": "det(I on the zero vector space)=1",
+          "result": "each local denominator is 1"
+        }
+      ],
+      "notes": "Direct finite-dimensional computation; no analytic index theorem is invoked."
+    },
+    "ex-equivariant-index-on-a-two-sphere": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-equivariant-elliptic-complex-index",
+          "source_section": "Definition",
+          "quote": "$$\\operatorname{Ind}_T(E^\\bullet):=\\sum_{j=0}^N(-1)^j[H^j(E^\\bullet)]\\in R(T),\\qquad \\chi_{E^\\bullet}(t):=\\sum_{j=0}^N(-1)^j\\operatorname{tr}\\!\\left(U_t^j\\bigm|_{H^j(E^\\bullet)}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-de-rham-cohomology-of-spheres",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $n\\ge1$, $H^k_{\\mathrm{dR}}(S^n)$ is $\\mathbb R$ in degrees $0,n$ and zero otherwise. For $S^0$ it is $\\mathbb R^2$ in degree zero and zero otherwise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-general-stokes-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be an oriented smooth $n$-manifold with boundary, $n\\geq1$, and let $\\eta\\in\\Omega_c^{n-1}(M)$. With $j:\\partial M\\hookrightarrow M$ and the outward-normal-first orientation, $$\\int_M d\\eta=\\int_{\\partial M}j^*\\eta.$$ An empty boundary contributes zero; in dimension one its integral is a finite signed sum of point values.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cohomological-character",
+          "step": "1.1",
+          "claim": "Normalize the invariant area form, use Stokes to prove its class nonzero, then compute the trivial cohomology action and index character.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "fixed-poles-and-jacobian",
+          "step": "1.2",
+          "claim": "Solve the fixed-point equation and compute the absolute tangent Jacobian at each pole.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "fiber-supertrace-contributions",
+          "step": "2.1",
+          "claim": "Compute the de Rham fiber supertrace and compare it with the pole denominator.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sphere is nonempty and each admitted nonidentity rotation has two fixed poles."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: for every admitted nonidentity g, 2-2 cos(theta)>0, so the denominator never vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The identity rotation is excluded by the example hypothesis g not equal to [0]."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The identity has a non-isolated fixed set and is outside the simple-fixed-point regime; every admitted nonidentity rotation is nondegenerate by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or limiting parameter endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the explicit normalized area form; the stated countable-choice assumption is carried from the suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a character identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a character identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "rotation determinant",
+          "calculation": "det(I-R_theta)=(1-cos(theta))^2+sin(theta)^2=2-2cos(theta)",
+          "result": "positive for every nonidentity rotation"
+        },
+        {
+          "name": "pole fiber supertrace",
+          "calculation": "1-(e^{i theta}+e^{-i theta})+1=2-2cos(theta)",
+          "result": "each local quotient is 1"
+        }
+      ],
+      "notes": "The cohomological and local sides are computed independently. Countable choice is stated because both imported mathematical suppliers assume it."
+    }
+  }
+}

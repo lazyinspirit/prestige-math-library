@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-tor-is-symmetric-over-every-noncommutative-ring.md

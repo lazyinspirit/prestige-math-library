@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-heart-of-the-canonical-t-structure-is-equivalent-to-the-original-abelian-category.md

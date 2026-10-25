@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-relative-algebraic-closure-is-relatively-algebraically-closed.md

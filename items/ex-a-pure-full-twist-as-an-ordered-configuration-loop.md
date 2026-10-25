@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-pure-full-twist-as-an-ordered-configuration-loop.json
+  precheck: pass
 id: ex-a-pure-full-twist-as-an-ordered-configuration-loop
 kind: example
 title: "A pure two-strand full twist as an ordered loop"
@@ -41,13 +44,7 @@ sources:
   references:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, §1.2, printed pp. 4–5"
       url: "https://arxiv.org/pdf/1010.0321"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
+
 ---
 
 ## Example
@@ -104,4 +101,56 @@ The formulae below specify every path and homotopy. No lift, representative, or 
 
 3.1 The families $H_1$ and $H_2$ agree at their common braid $\beta_{\mathrm{round}}$. Pasting $H_1(2s,t)$ for $s\le1/2$ to $H_2(2s-1,t)$ for $s\ge1/2$ gives a jointly continuous family by [L11]. Each slice is a braid and its endpoints remain $Q$, so this is a braid isotopy from $\sigma_1\star\sigma_1$ to $\beta_\eta$. By [L9] and [L10], $$[\beta_\eta]=[\sigma_1\star\sigma_1]=[\sigma_1]^2.$$ Together with step 1.2, this proves that the trace of the stated ordered loop is the positive full twist and has identity endpoint permutation. [L9, L10, L11, step 1.2, step 2.1, step 2.2]
 
-4.1 Since $\beta_\eta$ is pure by step 1.2, the exact ordered representative of its class under the pure-braid isomorphism [L12] is $$\Psi([\beta_\eta])=\bigl(\iota^F_*[\eta]\bigr)^{-1}\in PB_2.$$ Thus the displayed collision-free ordered loop records this positive full twist under the common basepoint convention, including the inverse in the published identification. [L12, step 1.2, step 3.1] $\square$
+4.1 Since $\beta_\eta$ is pure by step 1.2, the exact ordered representative of its class under the pure-braid isomorphism [L12] is $$\Psi([\beta_\eta])=\bigl(\iota^F_*[\eta]\bigr)^{-1}\in PB_2.$$ Thus the displayed collision-free ordered loop records this positive full twist under the common basepoint convention, including the inverse in the published identification. [L12, step 1.2, step 3.1] ∎
+
+## Remarks
+
+The two panels show independently scaled motions in the complex plane; they
+are not projections of the space-time strands. In the literal loop
+$\eta$, label $1$ is fixed at $-h$, while label $2$ travels anticlockwise around
+it with radius $2h$. The centred representative from step 2.1 has both labels
+moving anticlockwise on the same circle at opposite points. Its first half turn
+and second half turn represent the two positive factors $\sigma_1$ (after the
+round-to-diamond isotopy); at $t=1/2$ the labels are exchanged, and at $t=1$ each
+returns to its own starting point.
+
+```tikz
+\begin{tikzpicture}[>=stealth,font=\large,line width=0.9pt]
+\begin{scope}[xshift=1.5cm]
+  \node at (0,2.0) {Literal loop $\eta$};
+  \draw[gray] (0,0) circle (1.25);
+  \draw[->,orange!80!black,very thick] (1.25,0) arc (0:115:1.25);
+  \draw[->,orange!80!black,very thick] (-1.25,0) arc (180:295:1.25);
+  \draw[dashed,gray] (0,0)--node[above] {$2h$}(1.25,0);
+  \fill[blue!70!black] (0,0) circle (2.5pt);
+  \node[below] at (0,-0.08) {$1:\ -h$};
+  \fill[orange!80!black] (1.25,0) circle (2.5pt);
+  \node[right] at (1.32,0) {$2:\ h$};
+  \node at (0,-1.8) {$\eta_1(t)=-h$};
+  \node at (0,-2.35) {$\eta_2(t)=-h+2h\omega(t)$};
+\end{scope}
+\begin{scope}[xshift=7.2cm]
+  \node at (0,2.0) {Centred representative};
+  \draw[gray] (0,0) circle (1.25);
+  \draw[->,blue!70!black,very thick] (-1.25,0) arc (180:295:1.25);
+  \draw[->,orange!80!black,very thick] (1.25,0) arc (0:115:1.25);
+  \fill (0,0) circle (1.3pt);
+  \node[below] at (0,-0.06) {$0$};
+  \fill[blue!70!black] (-1.25,0) circle (2.5pt);
+  \fill[orange!80!black] (1.25,0) circle (2.5pt);
+  \node[left] at (-1.32,0) {$1$};
+  \node[right] at (1.32,0) {$2$};
+  \node at (0,-1.8) {$(-h\omega(t),h\omega(t))$};
+  \node at (0,-2.35) {$\sigma_1\quad (0\le t\le 1/2)$};
+  \node at (0,-2.9) {$\sigma_1\quad (1/2\le t\le 1)$};
+\end{scope}
+\draw[<->] (3.5,0.65)--node[above] {$H_2$}(4.8,0.65);
+\node at (4.3,-3.6) {Dots show $t=0,1$; arrows show increasing $t$.};
+\end{tikzpicture}
+```
+
+Here $\omega(t)=\exp(2\pi i t)$. In both panels the second-minus-first coordinate
+is $2h\omega(t)\ne0$, so a shared spatial track never means a collision at the
+same time. The isotopy $H_2$ is the one in step 2.2. The loop-to-trace operation
+gives $[\beta_\eta]=[\sigma_1]^2$, whereas $\Psi([\beta_\eta])$ still includes
+the inverse specified in step 4.1. The proof above is independent of the figure.

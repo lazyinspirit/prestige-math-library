@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions.md

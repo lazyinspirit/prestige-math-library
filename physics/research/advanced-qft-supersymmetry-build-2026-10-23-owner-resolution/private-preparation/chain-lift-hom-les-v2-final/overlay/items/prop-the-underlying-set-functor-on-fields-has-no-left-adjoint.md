@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-underlying-set-functor-on-fields-has-no-left-adjoint.md

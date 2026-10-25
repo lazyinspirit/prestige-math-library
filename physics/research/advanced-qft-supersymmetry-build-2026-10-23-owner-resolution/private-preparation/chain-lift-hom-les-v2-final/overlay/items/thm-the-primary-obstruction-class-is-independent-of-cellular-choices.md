@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-primary-obstruction-class-is-independent-of-cellular-choices.md

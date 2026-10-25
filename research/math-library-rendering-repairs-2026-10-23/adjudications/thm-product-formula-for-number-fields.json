@@ -1,0 +1,87 @@
+{
+  "id": "thm-product-formula-for-number-fields",
+  "group": "nt_009",
+  "agent": "/root/rendering_repair_supervisor2/nt_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the authentic original standalone 1200px tile at original resolution. Both norm expressions in the uppercase proof-technique banner visibly retain literal dollar delimiters, underscore/subscript syntax and mathbb command, while proof formulas beneath it typeset. Frozen and current pre-edit source were identical. This is a plain-text banner renderer limitation, rather than malformed mathematical notation.",
+      "action": "Replaced both banner occurrences of the absolute field norm formula with the equivalent prose \u201cthe absolute field norm of x\u201d. All mathematical proof steps retain their original formulas.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Only line 91, the optional proof-technique paragraph, changed to readable plain prose. No title, statement, proof-step, supplier, source or metadata changes.",
+  "source_lines_after": [
+    {
+      "line": 91,
+      "text": "**Proof technique:** split the product into its finite and archimedean parts; the finite part is the reciprocal of the absolute field norm of x by unique factorisation and the ideal-norm formulas, and the archimedean part is the absolute field norm of x by the embedding formula for the norm."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "preservation_evidence": "The only raw diff is the two norm-expression substitutions in line 91. \u201cAbsolute field norm of x\u201d denotes the original absolute value of N_{K/Q}(x). The complete frontmatter is byte-identical, including status: published. Every numbered proof step and the statement are unchanged.",
+  "guard": {
+    "expected_before_raw_sha256": "b0103735d94737417f01e56fee108ba4f116c4f23486db23c28079458fc04a7b",
+    "immediately_before_edit_matched": true,
+    "after_raw_sha256": "17a07b68bee30d34980df3cef305d03192d366cf1b3ab191ddcf43e707f42ac5"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-product-formula-for-number-fields.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-product-formula-for-number-fields.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-product-formula-for-number-fields.md",
+            "item_id": "thm-product-formula-for-number-fields",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-product-formula-for-number-fields.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_tile": "research/math-library-rendering-audit-2026-10-23/number-theory/screenshots/thm-product-formula-for-number-fields--02.png",
+    "original_tile_sha256": "98c93e3497ec8aa4e357d6859f78dad8fdb5085eab9854dad3a2c1690917c5a4",
+    "original_resolution_viewed": true,
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/nt009-fresh/manifest.json",
+    "preview_manifest_sha256": "99ad428db2b3468bcc9491f4970f1bc40489bea8fa367920eea5deab7953cd49",
+    "native_changed_region_tile": "research/math-library-rendering-repairs-2026-10-23/previews/nt009-fresh/screenshots/thm-product-formula-for-number-fields--02.png",
+    "native_tile_sha256": "0d5d29e3ee5c28e8897e794d4eb73370a802a669345451e7af5174e4db63f11d",
+    "native_original_resolution_viewed": true,
+    "result": "The changed proof-technique banner is visible across two lines as plain prose, without dollar signs or TeX commands.",
+    "source_sha256": "17a07b68bee30d34980df3cef305d03192d366cf1b3ab191ddcf43e707f42ac5",
+    "reference_map_sha256": "6941b5fe22db1a125b77cb836b14300e56f93f571f18bf7bc9c9cf22b2ff4503"
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview only; no production HTTP route or metadata Sources footer coverage.",
+    "Preview reference-map scan reports 13 unrelated parse diagnostics; these are outside assigned scope.",
+    "The renderer still handles proof-technique labels as uppercase plain text; the local prose workaround avoids exposing mathematical markup.",
+    "No broad mathematical audit was performed."
+  ]
+}

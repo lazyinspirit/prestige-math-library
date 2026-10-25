@@ -1,16 +1,7 @@
 ---
 verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
-    delegated_by: owner
-    evidence:
-      - research/frontier-38-owner-30-reader-27.md
-      - research/frontier-38-owner-30-dispatch/reader-reader-27.result.json
-      - research/frontier-38-owner-30-step5-hash-27-post-5a.json
-      - research/frontier-38-owner-30-alpha-batch-27-5a-decisions.json
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface.json
+  precheck: pass
 id: thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface
 kind: theorem
 title: Embedded strict-normal-crossings resolution of a reduced curve on a regular surface
@@ -93,3 +84,34 @@ resolution in dimension greater than two is asserted.
 5.1 Suppose there is a closed point $p$ at which three or more components $C_1,\dots,C_s$ ($s\ge3$) of the current support meet. By step 4.1 all pairwise multiplicities $m_p(C_i\cap C_j)$ equal $1$, and all components are regular curves, so [F4] applies to each pair: blowing up $p$ makes the strict transforms $C_i'$ pairwise disjoint over $p$ and makes each $C_i'$ meet the new exceptional curve $E$ at its own point $q_i$ with $m_{q_i}(C_i'\cap E)=1$. Consequently every point of the new support lying over $p$ carries at most two components (one strict transform together with $E$, or $E$ alone), all components remain regular curves by [F3] and [F4], all pairwise multiplicities remain at most one by step 4.1, and no new point at which three components meet is created. Blowing up all points at which at least three components meet therefore strictly decreases their finite number, and iterating this finitely many times reaches a configuration in which at every closed point at most two components meet, and the pairwise contacts that exist have multiplicity one. [F3, F4, step 4.1]
 
 6.1 In the terminal configuration the total transform $Z_n$ of $Z$ is an effective Cartier divisor by step 3.1; its support has only regular irreducible components by steps 2.1 and 3.1; and at every closed point either no component passes, exactly one regular component passes, or exactly two regular components pass and meet transversally in the sense $m_p=1$ of [[def-strict-normal-crossings-divisor]]. No three components meet, by step 5.1. Hence the support is a strict normal crossings divisor in the sense of the definition, which is assertion 3; assertions 1 and 2 are steps 2.1 and 3.1. Every center used was a closed point of a regular surface, so by [F3] no smoothness over a ground field was used or asserted: the ambient surfaces and individual components are regular, the support is SNC, and no higher-dimensional statement is made. [F6, step 2.1, step 3.1, step 5.1] ∎
+
+
+## Remarks
+
+For a step $\pi_i:S_i\to S_{i-1}$ of the chosen sequence, put $S_0=S$,
+$Z_0=Z$ and $Z_i=\pi_i^*Z_{i-1}$. Write $T_i$ for the iterated strict
+transform of the original reduced curve $Z$. The diagram separates this
+strict transform from the total transform:
+
+```tikzcd
+[font=\LARGE, every label/.append style={font=\Large}, column sep=large, row sep=large]
+T_i \arrow[r, hook] & Z_i \arrow[r] \arrow[d, hook] & Z_{i-1} \arrow[d, hook] \\
+& S_i \arrow[r, "\pi_i"'] & S_{i-1}
+```
+
+The right-hand square is Cartesian: $Z_i=Z_{i-1}\times_{S_{i-1}}S_i$ as a
+closed subscheme. The left arrow is the closed inclusion of the strict
+transform, not an equality with the total transform; the latter retains its
+divisor multiplicities. In the construction of the proof, each center
+$p_{i-1}$ lies on the preceding support and has
+$\dim\mathcal O_{S_{i-1},p_{i-1}}=2$, so the new exceptional curve
+$E_i=\pi_i^{-1}(p_{i-1})$ is $\mathbb P^1_{\kappa(p_{i-1})}$ and belongs to
+$\operatorname{Supp}(Z_i)$ (steps 2.1–5.1).
+
+At the end, the reduced support consists of the regular components of $T_n$
+and the strict transforms of the exceptional curves. At any closed point of
+that support there is either one component, or two components whose local
+intersection multiplicity is one; no three meet (step 6.1). This describes
+regularity and SNC support on a surface, without asserting smoothness over a
+ground field or a canonical choice of centers. The proof above is independent
+of the diagram.

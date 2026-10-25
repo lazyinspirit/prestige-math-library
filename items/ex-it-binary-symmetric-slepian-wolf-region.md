@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-it-binary-symmetric-slepian-wolf-region.json
+  precheck: pass
 id: ex-it-binary-symmetric-slepian-wolf-region
 kind: example
 title: "Binary symmetric source: Slepian–Wolf corners and common part"
@@ -25,8 +28,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Thomas M. Cover and Joy A. Thomas, Elements of Information Theory, second edition, Chapter 15"
@@ -74,3 +75,44 @@ The sloped segment of its Slepian–Wolf lower boundary joins $(h(p),\ln2)$ to $
 ## Remarks
 
 The Wyner quantity in [F4] is defined by a different optimization; its value is not asserted here.
+
+
+The shaded sets below illustrate the three inequalities in step 3.1, with rates in nats per source symbol. The left panel is schematic for $0<p<1/2$: $A=(h(p),\ln2)$ and $B=(\ln2,h(p))$, and the sloped edge lies on $R_1+R_2=\ln2+h(p)$. The arrows on the boundary rays indicate unbounded continuation. At $p=0$, $h(p)=0$ and the endpoints are $(0,\ln2)$ and $(\ln2,0)$. The right panel shows $p=1/2$, where $A=B=(\ln2,\ln2)$ and the region is the upper-right quadrant based at that corner. The verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.05]
+\begin{scope}
+\fill[blue!12] (1,3.6) -- (1,2.5) -- (2.5,1) -- (3.6,1) -- (3.6,3.6) -- (1,3.6);
+\draw[->] (0,0) -- (3.9,0) node[right] {$R_1$};
+\draw[->] (0,0) -- (0,3.9) node[above] {$R_2$};
+\draw[dashed,gray] (0,2.5) -- (1,2.5) -- (1,0);
+\draw[dashed,gray] (0,1) -- (2.5,1) -- (2.5,0);
+\draw[thick,->] (1,2.5) -- (1,3.6);
+\draw[thick] (1,2.5) -- (2.5,1);
+\draw[thick,->] (2.5,1) -- (3.6,1);
+\fill (1,2.5) circle (1.8pt) node[left] {$A$};
+\fill (2.5,1) circle (1.8pt) node[below left] {$B$};
+\node[below] at (1,0) {$h(p)$};
+\node[below] at (2.5,0) {$\ln2$};
+\node[left] at (0,1) {$h(p)$};
+\node[left] at (0,2.5) {$\ln2$};
+\node[below left] at (0,0) {$0$};
+\node at (2.5,3.1) {achievable};
+\node at (1.9,4.4) {$0<p<1/2$};
+\end{scope}
+\begin{scope}[xshift=6cm]
+\fill[blue!12] (1.8,1.8) -- (3.6,1.8) -- (3.6,3.6) -- (1.8,3.6) -- (1.8,1.8);
+\draw[->] (0,0) -- (3.9,0) node[right] {$R_1$};
+\draw[->] (0,0) -- (0,3.9) node[above] {$R_2$};
+\draw[dashed,gray] (0,1.8) -- (1.8,1.8) -- (1.8,0);
+\draw[thick,->] (1.8,1.8) -- (1.8,3.6);
+\draw[thick,->] (1.8,1.8) -- (3.6,1.8);
+\fill (1.8,1.8) circle (1.8pt) node[below left] {$A=B$};
+\node[below] at (1.8,0) {$\ln2$};
+\node[left] at (0,1.8) {$\ln2$};
+\node[below left] at (0,0) {$0$};
+\node at (2.7,2.7) {achievable};
+\node at (1.9,4.4) {$p=1/2$};
+\end{scope}
+\end{tikzpicture}
+```

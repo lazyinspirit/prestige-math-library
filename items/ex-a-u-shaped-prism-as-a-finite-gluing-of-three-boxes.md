@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-u-shaped-prism-as-a-finite-gluing-of-three-boxes.json
+  precheck: pass
 id: ex-a-u-shaped-prism-as-a-finite-gluing-of-three-boxes
 kind: example
 title: "A U-shaped prism is a finite gluing of three boxes and is not simple in every coordinate direction"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -78,3 +78,32 @@ and put $E=E_1\cup E_2\cup E_3$. Then $E$ is a finite gluing of three elementary
 ## Remarks
 
 - The subdivision in step 1.2 is not optional. Without it, the larger face of $E_1$ on $y=1$ could not be paired patch-for-patch with the smaller faces of $E_2$ and $E_3$.
+
+At fixed $z=1/2$, the three boxes have the following $xy$ cross-section. The highlighted section at $y=2$ consists of $[0,1]\cup[2,3]$, as in step 2.2; the dashed segment across the gap is outside $E$. The horizontal joins at $y=1$ mark where the box faces meet. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.3]
+\draw[->] (-0.35,-0.35) -- (3.7,-0.35) node[right] {$x$};
+\draw[->] (-0.35,-0.35) -- (-0.35,3.5) node[above] {$y$};
+\draw[thick] (0,0) rectangle (3,1);
+\draw[thick] (0,1) rectangle (1,3);
+\draw[thick] (2,1) rectangle (3,3);
+\node at (1.5,0.5) {$E_1$};
+\node at (0.5,2.6) {$E_2$};
+\node at (2.5,2.6) {$E_3$};
+\draw[dashed] (-0.35,2) -- (3.3,2);
+\draw[very thick,blue] (0,2) -- (1,2);
+\draw[very thick,blue] (2,2) -- (3,2);
+\fill[blue] (0,2) circle (2pt);
+\fill[blue] (1,2) circle (2pt);
+\fill[blue] (2,2) circle (2pt);
+\fill[blue] (3,2) circle (2pt);
+\node[left] at (-0.35,2) {$2$};
+\node[left] at (-0.35,1) {$1$};
+\node[left] at (-0.35,3) {$3$};
+\node[below] at (0,-0.35) {$0$};
+\node[below] at (1,-0.35) {$1$};
+\node[below] at (2,-0.35) {$2$};
+\node[below] at (3,-0.35) {$3$};
+\end{tikzpicture}
+```

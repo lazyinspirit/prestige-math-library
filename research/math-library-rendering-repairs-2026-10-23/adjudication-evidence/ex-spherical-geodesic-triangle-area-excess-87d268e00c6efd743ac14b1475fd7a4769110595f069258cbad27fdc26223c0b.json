@@ -1,0 +1,82 @@
+{
+  "id": "ex-spherical-geodesic-triangle-area-excess",
+  "agent": "/root/rendering_repair_coordinator/ddg_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The explicit octant is a concrete non-Euclidean triangle: a shaded curved three-sided patch with three intrinsic right angles materially explains why its angle sum is 3pi/2. The original standalone screenshot and frozen source contain no figure. A complete proof does not remove this explanatory benefit.",
+      "action": "Added a projected spherical octant in final Remarks with three labelled coordinate-axis vertices, all three quarter-great-circle sides, intrinsic pi/2 labels, area, and angle sum.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Original standalone tile 02 visibly prints the dollars in radius-$R$ in the plain-text proof technique banner.",
+      "action": "Replaced radius-$R$ round metric with round metric of radius R; native preview tile 02 confirms readable plain text. Application renderer unchanged.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added explanatory TikZ octant and removed unsupported math markup from the plain-text technique banner.",
+  "source_lines_after": {
+    "technique_banner": [
+      71
+    ],
+    "remarks": [
+      93,
+      95
+    ],
+    "tikz": [
+      97,
+      117
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and projection",
+      "details": "The figure represents O = S_R^2 intersect {x1,x2,x3 >= 0}, exactly step 7.1. The linear projection of normalized coordinates sends e1 to (2.5,-0.7), e2 to (-2,-1.1), e3 to (0,2.5); labels restore scale R. Thus the three labelled vertices represent Re1, Re2, Re3."
+    },
+    {
+      "check": "Boundary arcs and incidence",
+      "details": "The three plotted curves are respectively projections of cos(t)e1+sin(t)e2, cos(t)e2+sin(t)e3, and cos(t)e3+sin(t)e1 for 0 <= t <= pi/2. Each has unit norm, nonnegative coordinates and one zero coordinate, so it is exactly the corresponding quarter great circle from step 7.1, geodesic by F4. Endpoints match consecutively; independent draw commands show all three sides and their closure. Each vertex has degree two. No arrows assert orientation."
+    },
+    {
+      "check": "Intrinsic angles",
+      "details": "At Rei, the two inward tangent directions are ej and ek for distinct i,j,k, hence their ambient dot product is zero. F5 and step 7.1 identify this with the intrinsic metric, justifying each pi/2 label. Caption explicitly says that projected planar angles are not the intrinsic angles."
+    },
+    {
+      "check": "Area and angle sum",
+      "details": "Step 7.1 integrates R^2 sin(theta) on [0,pi/2]^2 to pi R^2/2. Three pi/2 angles sum to 3pi/2, agreeing with pi+A/R^2 from step 6.1. Both labels restate proved values; rigorous Verification is unchanged and independent of the illustration."
+    }
+  ],
+  "checks": {
+    "proof_layout": "proof-layout: 1 items, 8 steps, 0 defects (exit 0)",
+    "precheck": "1 file checked, 0 failed, direct strategy pass (exit 0)",
+    "rendercheck": "checked 1, errors [], warnings [] (exit 0)",
+    "frontmatter": "Byte-identical to archived before, including status: published.",
+    "guard_before_sha256": "3df15f2d06b816bea98e1625051b51f360b55683751d475b20e2259a6194ac94",
+    "current_sha256": "f094221d91a5104996fec88c5b2f2781d217b2ce6c3c5a465e1d5652c902b6f6"
+  },
+  "evidence": {
+    "original_path_discrepancy": "Declared diagram-supplement/screenshots path absent. Authentic image found within corresponding differential-geometry category screenshots directory.",
+    "original_image": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/ex-spherical-geodesic-triangle-area-excess--01.png",
+    "original_image_sha256": "baeb5d4f912d58a211791853cde2ddbf3caf1238ff98f6ec1c2b4c972f536b7e",
+    "additional_original_image": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/ex-spherical-geodesic-triangle-area-excess--02.png",
+    "native_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/ddg006-octant/manifest.json",
+    "native_source_sha256": "f094221d91a5104996fec88c5b2f2781d217b2ce6c3c5a465e1d5652c902b6f6",
+    "native_html_sha256": "9c36c4deb5f900983593ef3e2146f441b957cda35284db70b086e747ac101a4f",
+    "native_reference_map_sha256": "c52f2ac7ec4e8971ce41afda05e63e01d6dc261a4841ba903017726e450c41f2",
+    "native_views": "Standalone original-resolution PNG tiles 02 and 03 inspected. Tile 03 shows filled curved patch, all three complete edges, three vertices and unobscured labels; tile 02 confirms technique-banner repair."
+  },
+  "remaining_issues": [
+    "Native preview reference-title map records 16 unrelated parse diagnostics; item precheck/rendercheck pass. Preview covers native ItemBody SSR, not production route."
+  ]
+}

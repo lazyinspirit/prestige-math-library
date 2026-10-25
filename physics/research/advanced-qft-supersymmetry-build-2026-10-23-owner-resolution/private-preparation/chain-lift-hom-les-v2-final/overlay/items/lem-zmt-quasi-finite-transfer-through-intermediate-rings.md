@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-zmt-quasi-finite-transfer-through-intermediate-rings.md

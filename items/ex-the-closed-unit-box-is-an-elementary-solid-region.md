@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-the-closed-unit-box-is-an-elementary-solid-region.json
+  precheck: pass
 id: ex-the-closed-unit-box-is-an-elementary-solid-region
 kind: example
 title: "The closed unit box, with its six faces, is an elementary solid region"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: constructive
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-25
 sources:
   scraped: []
   references:
@@ -83,3 +79,43 @@ all on $S$, and their oriented area vectors are the constants $e_z$, $-e_z$, $e_
 - **The parameter order on each face is chosen, and the choice is what fixes the sign.** Exchanging $u$ and $v$ on any one face reverses its oriented area vector and would make that face fail the adaptation condition in the direction where it is a graph face. The six orders above are the ones for which the oriented area vector is the outward standard basis vector, which is also what makes the presentation the outward one in the sense of [[cor-every-face-of-an-elementary-solid-region-is-outward-oriented]].
 
 - **Each face is lateral in two directions and a graph face in one.** That is visible in step 1.1: the oriented area vector of each face is $\pm$ one standard basis vector, so exactly one of its three coordinates is nonzero. It is the concrete case of the general fact that no patch can be lateral in all three directions.
+
+
+The two views below show opposite sides of the same box. A face label $k^\pm$ denotes the patch $\varphi_{k^\pm}$ above; its arrow is the oriented area vector at an interior point of that face. Dashed edges are hidden in that view. The closed faces share edges and vertices, but no single normal at an edge or corner is asserted.
+
+```tikz
+\begin{tikzpicture}[scale=1.5, transform shape, every node/.style={font=\small}, line join=round]
+\begin{scope}
+\node at (0,3.1) {$x^+,y^+,z^+$ faces};
+\draw[dashed,gray] (0,0)--(2,-0.7) (0,0)--(-2,-0.7) (0,0)--(0,2);
+\draw (2,-0.7)--(0,-1.4)--(-2,-0.7)--(-2,1.3)--(0,2)--(2,1.3)--(2,-0.7);
+\draw (2,1.3)--(0,0.6)--(-2,1.3) (0,0.6)--(0,-1.4);
+\draw[->,thick] (1,0)--(2.3,-0.455) node[right] {$e_x$};
+\node at (1.3,0.65) {$x^+$};
+\draw[->,thick] (-1,0)--(-2.3,-0.455) node[left] {$e_y$};
+\node at (-1.3,0.65) {$y^+$};
+\draw[->,thick] (0,1.3)--(0,2.6) node[above] {$e_z$};
+\node at (0.8,1.65) {$z^+$};
+\node[below] at (0,-1.4) {$(1,1,0)$};
+\end{scope}
+\begin{scope}[xshift=7.5cm]
+\node at (0,3.1) {$x^-,y^-,z^-$ faces};
+\draw[dashed,gray] (0,0)--(2,-0.7) (0,0)--(-2,-0.7) (0,0)--(0,2);
+\draw (2,-0.7)--(0,-1.4)--(-2,-0.7)--(-2,1.3)--(0,2)--(2,1.3)--(2,-0.7);
+\draw (2,1.3)--(0,0.6)--(-2,1.3) (0,0.6)--(0,-1.4);
+\draw[->,thick] (1,0)--(2.3,-0.455) node[right] {$-e_x$};
+\node at (1.3,0.65) {$x^-$};
+\draw[->,thick] (-1,0)--(-2.3,-0.455) node[left] {$-e_y$};
+\node at (-1.3,0.65) {$y^-$};
+\draw[->,thick] (0,1.3)--(0,2.6) node[above] {$-e_z$};
+\node at (0.8,1.65) {$z^-$};
+\node[below] at (0,-1.4) {$(0,0,1)$};
+\end{scope}
+\node[anchor=west] at (-2.7,-2.4) {$\varphi_{z^+}(u,v)=(u,v,1):\quad e_z$};
+\node[anchor=west] at (-2.7,-3) {$\varphi_{x^+}(u,v)=(1,u,v):\quad e_x$};
+\node[anchor=west] at (-2.7,-3.6) {$\varphi_{y^+}(u,v)=(v,1,u):\quad e_y$};
+\node[anchor=west] at (4.8,-2.4) {$\varphi_{z^-}(u,v)=(v,u,0):\quad -e_z$};
+\node[anchor=west] at (4.8,-3) {$\varphi_{x^-}(u,v)=(0,v,u):\quad -e_x$};
+\node[anchor=west] at (4.8,-3.6) {$\varphi_{y^-}(u,v)=(u,0,v):\quad -e_y$};
+\end{tikzpicture}
+```

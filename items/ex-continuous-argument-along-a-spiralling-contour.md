@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-continuous-argument-along-a-spiralling-contour.json
+  precheck: pass
 id: ex-continuous-argument-along-a-spiralling-contour
 kind: example
 title: "A continuous argument computed along a spiralling contour"
@@ -14,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -74,3 +74,27 @@ statement, which needs closedness.
 2.1 By [L3] and step 1.2, $\int_\gamma dz/z=\lambda(1)-\lambda(0)=\bigl(\log2+2\pi i\bigr)-\bigl(\log1+0\bigr)=\log2+2\pi i$ using [L4]; and $\theta(1)-\theta(0)=2\pi$. By [L2] the value does not depend on which continuous logarithm is taken. [step 1.1, step 1.2, L2, L3, L4]
 
 3.1 The endpoint values are $\gamma(0)=1$ and $\gamma(1)=2\exp(2\pi i)=2$ by [L6], so $\gamma$ is not closed by [L5] and no winding number is defined for it; consistently, $\log2+2\pi i$ is not an element of $2\pi i\mathbb Z$ because $\log2\ne0$ by [L4]. [step 2.1, L4, L5, L6] ∎
+
+## Remarks
+
+The arrows follow increasing $t$: the radius grows from $1$ to $2$ while the
+continuous argument grows from $0$ to $2\pi$. The distinct endpoints on the
+positive real axis show why one full turn does not make this contour closed.
+
+```tikz
+\begin{tikzpicture}[scale=1.35]
+  \draw[->,gray] (-2,0) -- (2.8,0) node[right] {$\mathrm{Re}\,z$};
+  \draw[->,gray] (0,-2.1) -- (0,2) node[above] {$\mathrm{Im}\,z$};
+  \draw[thick,domain=0:360,samples=145,smooth,variable=\u]
+    plot ({(1+\u/360)*cos(\u)},{(1+\u/360)*sin(\u)});
+  \draw[thick,->,domain=55:85,samples=15,smooth,variable=\u]
+    plot ({(1+\u/360)*cos(\u)},{(1+\u/360)*sin(\u)});
+  \draw[thick,->,domain=225:255,samples=15,smooth,variable=\u]
+    plot ({(1+\u/360)*cos(\u)},{(1+\u/360)*sin(\u)});
+  \fill (0,0) circle (1.5pt) node[below left] {$p=0$};
+  \fill (1,0) circle (1.5pt) node[below] {$\gamma(0)=1$};
+  \fill (2,0) circle (1.5pt) node[below right] {$\gamma(1)=2$};
+\end{tikzpicture}
+```
+
+The illustration records the parametrization; the verification above is independent of it.

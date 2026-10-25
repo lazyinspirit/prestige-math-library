@@ -1,0 +1,74 @@
+---
+id: thm-signature-classifies-oriented-smooth-four-bordism
+kind: theorem
+title: "Signature classifies integral oriented smooth four-bordism"
+status: published
+dependency_level: 1
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+deps: [def-axiom-of-choice, lem-closed-oriented-smooth-one-and-two-manifolds-bound, thm-every-closed-oriented-smooth-three-manifold-bounds-a-compact-oriented-smooth-four-manifold, lem-integral-eilenberg-maclane-offset-five-homology-vanishes, thm-universal-pontryagin-thom-correspondence-for-unoriented-and-oriented-bordism, thm-rational-oriented-bordism-is-detected-by-pontryagin-numbers, thm-signature-is-an-oriented-cobordism-invariant, lem-signature-and-l-genus-agree-on-complex-projective-spaces, thm-bo-bso-cohomology-away-from-two, thm-mod-two-cohomology-of-bo-n, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, lem-oriented-grassmannian-has-two-lifted-schubert-cells, lem-universal-oriented-sphere-bundle-has-bso-n-minus-one-total-space, thm-thom-isomorphism-for-oriented-vector-bundles, thm-thom-identity-for-stiefel-whitney-classes, thm-real-splitting-principle-with-mod-two-injective-pullback, thm-cartan-formula-for-steenrod-squares, prop-steenrod-square-normalization-instability-and-top-square, lem-reduction-of-the-integral-bockstein-is-the-first-steenrod-square, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules, thm-eilenberg-maclane-spaces-represent-singular-cohomology, thm-freudenthal-suspension-theorem, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex, thm-homotopy-invariance-of-vector-bundle-pullback, lem-a-connected-cw-pair-has-a-model-without-low-relative-cells, thm-mapping-path-factorization, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, thm-absolute-hurewicz-theorem, thm-cw-approximation-of-an-arbitrary-space, lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice, thm-homological-serre-spectral-sequence, lem-rationalization-is-exact-and-commutes-with-singular-homology, def-unoriented-and-oriented-bordism-groups]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Daniel S. Freed, Bordism: Old and New"
+      url: "https://people.math.harvard.edu/~dafr/bordism.pdf"
+      locator: "Printed pp.19–20,96–102 read; only the rational computation and signature normalization are used. Integral torsion-freeness is proved locally."
+    - title: "Allen Hatcher, Spectral Sequences in Algebraic Topology, Chapter 1"
+      url: "https://pi.math.cornell.edu/~hatcher/SSAT/SSch1.pdf"
+      locator: "Printed pp.41–42,52–58 read; local EM helper supplies all additional integral calculations."
+---
+
+## Statement
+
+Assume AC. The signature induces an isomorphism
+$$\sigma:\Omega^{SO}_4\xrightarrow{\cong}\mathbb Z,$$
+whose inverse sends $1$ to the complex-oriented projective plane. In particular every compact closed oriented smooth four-manifold $M$, with arbitrary fundamental group and any finite number of components, satisfies
+$$[M]=\sigma(M)[\mathbb {CP}^{2}].$$
+If $\sigma(M)=0$, then $M$ itself is the oriented boundary of a compact oriented smooth five-manifold.
+
+## Facts & Assumptions
+
+**Given:** AC and the geometric oriented bordism groups of closed smooth manifolds.
+
+[A1] [[def-axiom-of-choice]] is inherited from the Thom, classifying-space, UCT and Hurewicz suppliers.
+
+[F1] [[lem-closed-oriented-smooth-one-and-two-manifolds-bound]] and [[thm-every-closed-oriented-smooth-three-manifold-bounds-a-compact-oriented-smooth-four-manifold]] give actual integral single-copy fillings in dimensions one, two and three. [[thm-universal-pontryagin-thom-correspondence-for-unoriented-and-oriented-bordism]] identifies geometric oriented bordism with the stable homotopy of the universal oriented Thom prespectrum.
+
+[F2] [[lem-integral-eilenberg-maclane-offset-five-homology-vanishes]] proves $H_{q+5}(K(\mathbb Z,q);\mathbb Z)=0$ for $q\ge8$, including the integral degreewise finite-generation and all primary calculations.
+
+[F3] [[thm-bo-bso-cohomology-away-from-two]] computes the actual $BSO(q)$ cohomology over $\mathbb Q$ and every odd-prime field. [[thm-mod-two-cohomology-of-bo-n]] gives $H^*(BO(q);\mathbb F_2)=\mathbb F_2[w_1,\ldots,w_q]$. [[thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle]] applies with the canonical mod-two orientation also to the determinant line bundle and its sphere double cover. [[lem-oriented-grassmannian-has-two-lifted-schubert-cells]] gives finite generation of integral homology in every degree.
+
+[F4] [[thm-real-splitting-principle-with-mod-two-injective-pullback]], [[thm-cartan-formula-for-steenrod-squares]] and [[prop-steenrod-square-normalization-instability-and-top-square]] compute $Sq^1$ by roots. [[lem-reduction-of-the-integral-bockstein-is-the-first-steenrod-square]], [[thm-topological-universal-coefficient-short-exact-sequence-for-cohomology]] and [[cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules]] detect primary cyclic summands.
+
+[F5] [[lem-universal-oriented-sphere-bundle-has-bso-n-minus-one-total-space]] gives the actual $S^q$-fibration with total homotopy equivalent to $BSO(q)$ over $BSO(q+1)$, with the tautological bundle splitting as a line plus the complement. [[lem-a-connected-cw-pair-has-a-model-without-low-relative-cells]] and [[thm-freudenthal-suspension-theorem]] give the relative cell model and suspension comparison. [[lem-cw-quotients-and-collapse-of-a-contractible-subcomplex]] compares reduced and unreduced suspensions by collapsing the basepoint meridian. [[thm-homotopy-invariance-of-vector-bundle-pullback]] transports the finite-rank bundle across the relative CW equivalence. [[thm-thom-isomorphism-for-oriented-vector-bundles]] gives the integral and mod-two Thom isomorphisms, and [[thm-thom-identity-for-stiefel-whitney-classes]] gives $Sq^i\bar u=w_i\bar u$.
+
+[F6] [[thm-eilenberg-maclane-spaces-represent-singular-cohomology]], [[thm-mapping-path-factorization]], [[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]], [[thm-absolute-hurewicz-theorem]], [[thm-cw-approximation-of-an-arbitrary-space]], [[lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice]] and [[thm-homological-serre-spectral-sequence]] supply the represented Thom-class map, its actual homotopy fiber and the homotopy/homology comparisons.
+
+[F7] [[thm-signature-is-an-oriented-cobordism-invariant]] supplies the additive integral signature, [[lem-signature-and-l-genus-agree-on-complex-projective-spaces]] gives $\sigma(\mathbb {CP}^2)=1$, and [[thm-rational-oriented-bordism-is-detected-by-pontryagin-numbers]] gives rational rank one. [[lem-rationalization-is-exact-and-commutes-with-singular-homology]] identifies the kernel of rationalization with torsion. [[def-unoriented-and-oriented-bordism-groups]] identifies a zero geometric class with an actual compact oriented smooth filling.
+
+## Proof
+
+1.1 Fix $q\ge8$. The determinant-line sphere bundle over $BO(q)$ is its orientation double cover $BSO(q)$. Its mod-two Gysin sequence has multiplication by $w_1$ as its Euler map. This multiplication is injective in the polynomial ring of [F3], so pullback gives $H^*(BSO(q);\mathbb F_2)=\mathbb F_2[w_2,\ldots,w_q]$. This uses the canonical mod-two orientation of the line bundle, rather than assuming it is integrally oriented. The same space has degreewise finitely generated integral homology by its lifted Schubert cells. It is simply connected: the universal oriented-frame bundle has contractible total space and connected fiber $SO(q)$, so its component sequence gives $\pi_1BSO(q)=0$. The frame-bundle description and connectedness also follow from the actual sphere-bundle induction starting with the contractible $BSO(1)$. [A1, F3, F5]
+
+1.2 Let $T_q$ be the Thom space of the universal oriented $q$-plane bundle. Its Thom cells are shifted up by $q$. Their integral cellular boundary is the base cellular boundary shifted by $q$: over an adjacent pair of base characteristic disks the fiber orientation is preserved, so the incidence degree is the base incidence degree multiplied by the fixed oriented fiber degree one. With the fiber-first convention this also identifies evaluation of $w_4\bar u_q$ on a shifted homology class with evaluation of $w_4$ on the base class. Hence $H_{q+j}(T_q;\mathbb Z)=H_j(BSO(q);\mathbb Z)$, compatibly with mod-two reduction and evaluation. In particular it is $(q-1)$-connected with $H_q(T_q;\mathbb Z)=\mathbb Z$ on the normalized fiber generator. The stabilization $BSO(q)\to BSO(q+1)$ is $q$-connected by the sphere fibration in [F5] and its homotopy sequence. A relative CW model therefore has no new cells of dimension at most $q$. Over each relative characteristic disk trivialize the pulled-back $(q+1)$-plane bundle; its Thom cell has dimension the disk dimension plus $q+1$. This proves that $\Sigma T_q\to T_{q+1}$ has no relative cells below $2q+2$, hence is an isomorphism on homotopy through $2q$. The construction uses a mapping-cylinder relative model and bundle homotopy transport, so it does not assume that particular Grassmannian Schubert structures form a literal relative cell inclusion. [F5, F6]
+
+2.1 With mod-two splitting roots $t_j$ of degree one, $Sq^1t_j=t_j^2$ and Cartan makes $Sq^1$ a derivation. Expand the elementary symmetric functions: in $w_1w_k$, the terms in which the extra root lies in the chosen $k$-subset are precisely $Sq^1w_k$; every $(k+1)$-subset occurs $k+1$ times among the other terms. Hence $Sq^1w_k=w_1w_k+(k-1)w_{k+1}$. On $BSO(q)$ this gives $Sq^1w_2=w_3$ and $Sq^1w_4=w_5$, both nonzero by step 1.1. [F4, step 1.1]
+
+2.2 Freudenthal applies to the $(q-1)$-connected Thom CW space and gives $\pi_{q+i}(T_q)\cong\pi_{q+i+1}(\Sigma T_q)$ when $q+i\le2q-2$. The unreduced suspension convention of [F5] agrees with the reduced Thom suspension after collapsing the contractible basepoint meridian; that CW collapse is a homotopy equivalence and respects the represented suspension map. For $i\le4$, $q\ge8$ satisfies both this range and step 1.2's range. Iteration identifies the actual finite-rank groups with the stable colimit. Thus [F1] gives $\pi_{q+i}(T_q)=0$ for $1\le i\le3$ and $\pi_{q+4}(T_q)=\Omega^{SO}_4$. The bottom group $\pi_q(T_q)=\mathbb Z$ is supplied by the first Hurewicz theorem and step 1.2. [F1, F5, F6, step 1.2]
+
+3.1 The rational and odd-field calculations of [F3], with the coefficient UCT, give ranks zero for $H_2,H_3$, rank one for $H_4$, and no odd-primary torsion in these groups. Here $H_1=0$ by simple connectivity. Since $H^2(-;\mathbb F_2)$ has dimension one, $H_2$ has exactly one two-primary cyclic summand. The nonzero $Sq^1w_2$ forces this summand to have order exactly two. Explicitly, for $\mathbb Z/2^a$ the integral Bockstein of its nonzero $\mathbb F_2$-valued homomorphism is $2^{a-1}$ in $\operatorname{Ext}(\mathbb Z/2^a,\mathbb Z)=\mathbb Z/2^a$, whose mod-two reduction is nonzero exactly when $a=1$; a free summand has zero Bockstein. Thus $H_2=\mathbb Z/2$. The dimension-one group $H^3(-;\mathbb F_2)$ is already accounted for by $\operatorname{Ext}(H_2,\mathbb F_2)$, so $H_3/2=0$ and $H_3=0$. [F3, F4, step 1.1, step 2.1]
+
+3.2 Represent the integral Thom class by $f:T_q\to K(\mathbb Z,q)$. It induces an isomorphism on $\pi_q$: evaluation of the normalized class sends the bottom fiber sphere generator to one, and the first Hurewicz isomorphisms identify both groups with $\mathbb Z$. Replace $f$ by its mapping-path fibration and let $F$ be its strict fiber. Its homotopy exact sequence, the sole nonzero homotopy group of $K(\mathbb Z,q)$, and step 2.2 make $F$ $(q+3)$-connected and identify $\pi_{q+4}F$ with $\Omega^{SO}_4$. Apply the ordinary Hurewicz theorem to a CW approximation of $F$; the weak approximation induces both homotopy and integral singular-homology isomorphisms by [F6]. Consequently $\Omega^{SO}_4\cong H_{q+4}(F;\mathbb Z)$ naturally under inclusion into $T_q$. [F6, step 1.2, step 2.2]
+
+4.1 Now $H^4(-;\mathbb F_2)$ has dimension two and $H_3=0$, so $H_4$ has exactly one two-primary cyclic summand in addition to its rank-one free part. The same cyclic-resolution calculation, applied to $Sq^1w_4=w_5\ne0$, makes that summand $\mathbb Z/2$ and makes $w_4$ evaluate nontrivially on its generator. Therefore $H_4(BSO(q);\mathbb Z)=\mathbb Z\oplus\mathbb Z/2$, and $\langle w_4,z\rangle=1$ for its nonzero torsion element $z$. This assertion is about evaluation on torsion with mod-two coefficients; it is not an integral characteristic-number evaluation. [F3, F4, step 2.1, step 3.1]
+
+4.2 The homological Serre sequence for $F\to T_q\to K(\mathbb Z,q)$ has only axes in total degrees through $q+5$: any mixed term needs base degree at least $q$ and fiber degree at least $q+4$. Its edge and sole possible transgression therefore give the exact segment $H_{q+5}(T_q)\to H_{q+5}(K(\mathbb Z,q))\to H_{q+4}(F)\to H_{q+4}(T_q)\xrightarrow{f_*}H_{q+4}(K(\mathbb Z,q))$. For example the middle transgression is the differential from bidegree $(q+5,0)$ to $(0,q+4)$, and all its earlier incoming/outgoing alternatives vanish by those connectivities. [F6, step 3.2]
+
+5.1 The middle base group is zero by [F2]. The integral Thom isomorphism and step 4.1 therefore embed $\Omega^{SO}_4$ as $\ker f_*\subset H_{q+4}(T_q;\mathbb Z)=\mathbb Z\oplus\mathbb Z/2$. Let $z'$ be its nonzero order-two element, the Thom image of $z$. By naturality and the Thom identity, $f^*(Sq^4\bar\iota_q)=Sq^4\bar u_q=w_4\bar u_q$. Evaluation on $z'$ equals one by step 4.1, so $f_*z'\ne0$. Thus the kernel contains no nonzero torsion, and $\Omega^{SO}_4$ is torsion-free. This is the integral step; a rational rank calculation alone would not prove it. [F2, F5, F6, step 4.1, step 3.2, step 4.2]
+
+6.1 Signature is an integral homomorphism and takes the value one on $[\mathbb {CP}^2]$ by [F7]. Rational oriented bordism has rank one, so every integral class $a$ has rational image equal to $\sigma(a)[\mathbb {CP}^2]$. The difference $a-\sigma(a)[\mathbb {CP}^2]$ is therefore torsion by the rationalization criterion. It is zero by step 5.1. This proves both injectivity and surjectivity of the asserted signature map, with the stated generator. [F7, step 5.1]
+
+7.1 If $\sigma(M)=0$, step 6.1 gives $[M]=0$ in the geometric oriented bordism group. By [F7] this means an actual compact oriented smooth five-manifold has oriented boundary diffeomorphic to $M$, rather than only a positive multiple of $M$. The proof never imposes a condition on $\pi_1M$. Empty inputs and finite disjoint unions are covered by the group law and the componentwise constructions in [F1]. AC is inherited exactly as in [A1]. [A1, F1, F7, step 6.1] ∎

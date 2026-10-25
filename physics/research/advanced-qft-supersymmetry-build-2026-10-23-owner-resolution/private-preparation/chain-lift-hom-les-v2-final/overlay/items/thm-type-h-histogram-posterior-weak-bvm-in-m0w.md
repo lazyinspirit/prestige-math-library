@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-type-h-histogram-posterior-weak-bvm-in-m0w.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-no-transversal-leaf-is-a-torus-via-the-finite-accessibility-boundary-sum.md

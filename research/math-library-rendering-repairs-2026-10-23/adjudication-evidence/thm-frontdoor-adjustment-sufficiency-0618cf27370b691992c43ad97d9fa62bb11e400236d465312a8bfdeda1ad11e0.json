@@ -1,0 +1,128 @@
+{
+  "id": "thm-frontdoor-adjustment-sufficiency",
+  "group": "dsme_010",
+  "agent": "/root/rendering_repair_supervisor2/dsme_010",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A three-panel example materially distinguishes the all-directed-path mediation condition from deletion of outgoing A or M arrows and the different collider/noncollider separation tests. The original standalone tiles contain no such explanation. A complete proof does not remove that explanatory benefit.",
+      "action": "Added a final Remarks section containing a full four-vertex example DAG, both outgoing-arrow-deleted graphs and explicit path-blocking explanations.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only expository Remarks with a three-panel TikZ illustration. Original title, frontmatter, Statement, Facts, and complete Proof are byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      102,
+      153
+    ],
+    "tikz": [
+      110,
+      144
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Each panel has vertices C,A,M,Y; A,M,Y are observed and C is latent. These are endogenous SCM vertices, not exogenous noise coordinates.",
+      "check": "The SCM definition explicitly allows latent common-cause vertices while requiring independent exogenous coordinates. The full edge set C->A,C->Y,A->M,M->Y has topological order C,A,M,Y and no cycle. This example does not assert all theorem graphs have this form.",
+      "basis": "def-recursive-structural-causal-model-and-dag, Definition; assigned Statement lines 51-57."
+    },
+    {
+      "relation": "Full DAG mediation",
+      "check": "The only directed A-to-Y path is A->M->Y, so M intercepts every such path. C->A cannot be followed backward in a directed path. All four intended arrows and their directions are visible in the compiled first panel.",
+      "basis": "Assigned Statement condition (i); helper lem-frontdoor-interventional-identities condition (i) and proof step 3.1."
+    },
+    {
+      "relation": "G_underA: A and M d-separated given empty set",
+      "check": "Deleting outgoing A->M leaves exactly C->A,C->Y,M->Y. Its skeleton is a chain; the unique A-to-M path A<-C->Y<-M has collider Y. With no conditioning and no conditioned descendant, that path is inactive. Each vertex remains, with three arrows in the rendered middle panel.",
+      "basis": "def-d-separation-in-a-dag, outgoing-tail deletion and active-path definition; assigned condition (ii); helper proof step 1.2."
+    },
+    {
+      "relation": "G_underM: M and Y d-separated given A",
+      "check": "Deleting outgoing M->Y leaves exactly C->A,C->Y,A->M. The unique M-to-Y path M<-A<-C->Y contains conditioned noncollider A and is blocked. The rectangle marks conditioning only; it neither deletes incoming C->A nor adds a do-operation. Three arrows and the A box are visible in the third panel.",
+      "basis": "def-d-separation-in-a-dag; assigned condition (iii); helper proof steps 1.3-1.4."
+    },
+    {
+      "relation": "Proof interface and limitations",
+      "check": "The existing proof still obtains the counterfactual identities from F1 and integrates the observed kernel in steps 1.1-4.1. No proof step cites the illustration. Remarks explicitly preserve support and integrability hypotheses and state that the rigorous proof is independent of the figure.",
+      "basis": "Assigned Facts F1, proof steps 1.1-4.1 and new Remarks lines 151-153."
+    }
+  ],
+  "guard": {
+    "before_raw_sha256": "733f0740ba66d54b6d2f9283eaf33aff781e4c4aee4edde712cf3fb2c9752741",
+    "guard_matched_immediately_before_edit": true,
+    "after_raw_sha256": "3cde0d4d36ba6aed66b96c44a3b9f37111ca162c16792ab89596b0b5ce31fffa",
+    "full_original_prefix_preserved": true,
+    "all_frontmatter_byte_identical": true,
+    "status_byte_identical": "status: published"
+  },
+  "original_evidence": [
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/statistical-models-and-experiments/screenshots/thm-frontdoor-adjustment-sufficiency--01.png",
+      "sha256": "c74a8b8ca6a589eb9bf300c03a1257c16dd50f6dc372e6bf1be4a06bd71a879a",
+      "viewed": "standalone original-resolution view_image"
+    },
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/statistical-models-and-experiments/screenshots/thm-frontdoor-adjustment-sufficiency--02.png",
+      "sha256": "19093f41b80690e492893a60bb33ee9c77bdd0b5a781de2bded7c7ad5bb7ded6",
+      "viewed": "standalone original-resolution view_image"
+    }
+  ],
+  "evidence_path_resolution": "Finding evidence_dir correctly resolves the original screenshot paths; inspection_dir points to the supplement rather than its parent screenshot directory. Authentic original hashes match the queue.",
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-frontdoor-adjustment-sufficiency.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-frontdoor-adjustment-sufficiency.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-frontdoor-adjustment-sufficiency.md",
+            "item_id": "thm-frontdoor-adjustment-sufficiency",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-frontdoor-adjustment-sufficiency.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dsme010-frontdoor node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-frontdoor-adjustment-sufficiency --out research/math-library-rendering-repairs-2026-10-23/previews/dsme010-frontdoor",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dsme010-frontdoor/manifest.json",
+    "manifest_sha256": "2982c950d8d7fc6d6f4738b59a6766812161834d37f25fc06c9a12b88bf59836",
+    "source_sha256": "3cde0d4d36ba6aed66b96c44a3b9f37111ca162c16792ab89596b0b5ce31fffa",
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dsme010-frontdoor/screenshots/thm-frontdoor-adjustment-sufficiency.json",
+    "viewed": "All three resulting PNG tiles inspected independently with standalone original-resolution view_image; diagram is entirely in tile 03.",
+    "result": "One native TikZ figure, zero diagram failures, zero KaTeX errors. Dark-background white arrows, labels, dashed latent rings and conditioning rectangle are visible, unclipped and nonoverlapping; counted four vertices per panel and 4/3/3 arrows. No filled nodes obscure strokes.",
+    "limitations": "Local ItemBody SSR preview, not a production route or metadata footer; current reference map has 14 unrelated parse diagnostics."
+  },
+  "remaining_issues": [],
+  "completed_at": "2026-10-24T04:35:26.038975+00:00"
+}

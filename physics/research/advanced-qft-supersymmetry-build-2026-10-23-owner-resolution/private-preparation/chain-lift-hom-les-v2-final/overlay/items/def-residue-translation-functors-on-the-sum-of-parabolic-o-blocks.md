@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-residue-translation-functors-on-the-sum-of-parabolic-o-blocks.md

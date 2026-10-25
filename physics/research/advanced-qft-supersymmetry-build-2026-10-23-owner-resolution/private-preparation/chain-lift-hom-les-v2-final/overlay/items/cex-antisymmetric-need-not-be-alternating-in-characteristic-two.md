@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-antisymmetric-need-not-be-alternating-in-characteristic-two.md

@@ -1,0 +1,69 @@
+---
+id: lem-compatible-normal-disk-boundary-paths-have-a-unique-type-preserving-switch
+kind: lemma
+title: Compatible normal disk boundary paths have a unique type-preserving switch
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-normal-surface-coordinate-box
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+dependency_level: 1
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
+sources:
+  references:
+    - title: "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375"
+      url: https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf
+      locator: Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement.
+  attribution_boundary: Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.
+  reading_limits: URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim.
+---
+
+## Statement
+
+Let $P,Q$ be two normal disk types in one tetrahedron, subject to quadrilateral compatibility. Thus if both are quadrilaterals they have the same type. Choose two distinct faces $f,g$ met by both types, and cut each normal boundary word at one point of its arc in $f$ and one point of its arc in $g$. Each boundary is divided into two paths from $f$ to $g$.
+
+There are two pairings that join one path from $P$ to one from $Q$ at both ends, producing two new closed boundary words. Exactly one pairing gives the original two normal disk boundary types, as an unordered pair, up to cyclic rotation and reversal of the words. The other pairing has a word crossing some tetrahedral edge at least twice and therefore cannot give those two normal types.
+
+The conclusion concerns the finite boundary words and type counts in the original tetrahedron. It does not assert that arbitrary surface intersections already have the geometric regular-position or partial-switching properties.
+
+## Statement references
+
+[[def-normal-surface-coordinate-box]] — the four triangle and three quadrilateral types.
+
+## Facts & Assumptions
+
+**Given:** A tetrahedron with vertices $A,B,C,D$, compatible types and two distinct common faces.
+
+[F1] A triangle $T_A$ has cyclic edge word $(AB,AC,AD)$. A quadrilateral $Q_{AB\mid CD}$ has cyclic edge word $(AC,AD,BD,BC)$. Relabeling the vertices gives all seven types. Consecutive edge symbols specify the intervening triangular face. ([[def-normal-surface-coordinate-box]])
+
+[F2] A normal disk boundary crosses each of its indicated edges once and every other edge zero times. A boundary word containing an edge twice is therefore not any normal triangle or quadrilateral word. ([[def-normal-surface-coordinate-box]])
+
+## Proof
+
+1.1 For each disk, the two cut paths partition its cyclic list of edge symbols. To form a new word, follow its chosen $f$-to-$g$ path and then the reverse of the chosen $f$-to-$g$ path of the other disk. Once the paths paired in one output have been chosen, the two remaining paths must be paired in the second. Thus there are exactly two pairings. We now check the compatible type cases. The edge sets displayed below also inherit their orders from [F1], so their concatenations determine the indicated cyclic words. [given, F1, construct]
+
+2.1 If the two types are equal, their two path edge sets are the same nonempty complementary sets $U,V$. Pairing $U$ with $V$ in each output recovers the original word twice. Pairing $U$ with $U$ and $V$ with $V$ repeats every edge in the corresponding nonempty set, so [F2] excludes that pairing. This covers equal triangles and equal quadrilaterals, for every pair of common faces, including the two-edge paths between opposite faces of a quadrilateral boundary. [F1, F2, step 1.1, construct]
+
+2.2 For distinct triangles, relabel so they are $T_A,T_B$. Their common faces are exactly $ABC,ABD$. The paths of $T_A$ have edge sets $\{AB\}$ and $\{AC,AD\}$; those of $T_B$ have $\{AB\}$ and $\{BC,BD\}$. Pair the singleton in one disk with the two-edge path of the other. The resulting words are $T_B$ and $T_A$. The other pairing repeats $AB$ in one output, so is excluded by [F2]. [F1, F2, step 1.1, construct]
+
+2.3 For a triangle and quadrilateral, relabel them $T_A,Q_{AB\mid CD}$. If the common faces are $ABC,ABD$, their common edge $AB$ is avoided by the quadrilateral. The triangle paths have edge sets $\{AB\}$ and $\{AC,AD\}$; the quadrilateral paths have $\{AC,AD\}$ and $\{BC,BD\}$. Pair $\{AB\}$ with the quadrilateral's $\{AC,AD\}$, giving $T_A$. The remaining two paths concatenate in the order $(AC,AD,BD,BC)$, giving the same quadrilateral. The other pairing joins the two copies of $\{AC,AD\}$ in one output, repeating both edges, and is excluded. [F1, F2, step 1.1, construct]
+
+2.4 The other common-face pairs are $ABC,ACD$ and $ABD,ACD$, whose common edges $AC,AD$ are crossed by the quadrilateral. Interchanging $C,D$ identifies these two cases, so consider $ABC,ACD$. The triangle paths have $\{AC\}$ and $\{AB,AD\}$; the quadrilateral paths have $\{AC\}$ and $\{AD,BD,BC\}$. Pair the singleton $\{AC\}$ from the triangle with the three-edge path of the quadrilateral, giving the quadrilateral word up to reversal. Pair the two-edge triangle path with the other singleton, giving $T_A$. The other pairing repeats $AC$, so is excluded. Vertex relabeling covers any other triangle–quadrilateral pair. [F1, F2, step 1.1, construct]
+
+3.1 The allowed pairs consist of equal types, distinct triangles, and a triangle with a quadrilateral; distinct quadrilateral types were excluded in the hypothesis. Steps 2.1–2.4 cover them all and prove both existence and uniqueness of the type-preserving pairing, with the stated repeated-edge obstruction for its alternative. All lists and relabelings are finite and refer to the original seven types. [given, step 2.1, step 2.2, step 2.3, step 2.4, cases] ∎

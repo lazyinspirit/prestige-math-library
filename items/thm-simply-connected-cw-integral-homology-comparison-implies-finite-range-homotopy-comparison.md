@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-simply-connected-cw-integral-homology-comparison-implies-finite-range-homotopy-comparison.json
+  precheck: pass
 id: thm-simply-connected-cw-integral-homology-comparison-implies-finite-range-homotopy-comparison
 kind: theorem
 title: "Integral homology comparison gives finite-range homotopy comparison for simply connected CW complexes"
@@ -24,17 +27,12 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology, Chapter 4"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf"
       locator: "Theorem 4.32 and Corollary 4.33, printed pp.366–368; finite-range endpoint proved locally"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
 
-Assume AC. Let N≥2 and let f:(X,x₀)→(Y,y₀) be a based continuous map between nonempty path-connected simply connected CW complexes. Suppose f_*:H_i(X;Z)→H_i(Y;Z) is an isomorphism for 0≤i<N and a surjection for i=N. Then f_*:π_i(X,x₀)→π_i(Y,y₀) is an isomorphism for 1≤i<N and a surjection for i=N. No conclusion about π_{N+1} or homotopy equivalence of the spaces is included.
+Assume AC. Let $N\ge2$ and let $f:(X,x_0)\to(Y,y_0)$ be a based continuous map between nonempty path-connected simply connected CW complexes. Suppose $f_*:H_i(X;\mathbb Z)\to H_i(Y;\mathbb Z)$ is an isomorphism for $0\le i<N$ and a surjection for $i=N$. Then $f_*:\pi_i(X,x_0)\to\pi_i(Y,y_0)$ is an isomorphism for $1\le i<N$ and a surjection for $i=N$. No conclusion about $\pi_{N+1}$ or homotopy equivalence of the spaces is included.
 
 ## Facts & Assumptions
 

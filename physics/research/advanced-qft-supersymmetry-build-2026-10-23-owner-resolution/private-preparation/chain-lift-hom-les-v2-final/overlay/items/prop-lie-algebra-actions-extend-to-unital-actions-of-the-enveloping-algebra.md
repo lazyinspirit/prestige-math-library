@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-lie-algebra-actions-extend-to-unital-actions-of-the-enveloping-algebra.md

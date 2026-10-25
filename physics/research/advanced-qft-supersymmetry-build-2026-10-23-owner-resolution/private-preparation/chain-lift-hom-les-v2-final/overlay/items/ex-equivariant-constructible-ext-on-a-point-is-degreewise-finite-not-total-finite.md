@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-equivariant-constructible-ext-on-a-point-is-degreewise-finite-not-total-finite.md

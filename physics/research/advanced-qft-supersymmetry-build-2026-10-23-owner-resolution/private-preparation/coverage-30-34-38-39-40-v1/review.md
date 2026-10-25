@@ -1,0 +1,15 @@
+# Private coverage metadata proposal: batches30,34,38,39,40
+
+All five staged candidates pass the physics coverage checklist with `--require-destination` (zero errors and warnings) and physics source-fetch-check in check mode. The checks validate existing stamps; no source was fetched or newly stamped.
+
+The proposal canonicalizes actual document kinds: Martin/Bilal lecture notes, Princeton course notes, Simon textbook, Baez–Lauda and the collaboration/PAS research papers, and the CMS official reference page. Missing harvest names are the verbatim pre-existing `source_review.supports` result descriptions, with their field origin recorded. They are not newly invented headings or copied carrier titles. The source’s existing read extent and limitations remain authoritative; these names add no new reading claim.
+
+Batch34 uses the Root-approved A/B pair-level A container. It retains all six original sources and every empirical row/item destination, records each original page and source index, and distinguishes theory conceptual backing from collider-report evidence. No lecture note is represented as experimental support. Every old source record can be recovered exactly by removing the recorded metadata additions and restoring the original kind/name/disposition fields; the preparation script asserts this equality.
+
+Context dispositions distinguish conventions actually adopted in definitions (included with an explicit context-only role) from broader source examples, physical F-moves, boundary realizations, associator arguments or background-transformation applications that are excluded from these local finite-model proofs. Each exclusion states its particular scope and retains its original item context pointer. The local C2 arithmetic and physical sewing theorem continue to use their existing local mathematical suppliers and adopted physical model; no proof was changed.
+
+Original coverage and sibling manifests are archived in `preimages/`; staged sibling manifests are exact copies. `application-proposal.json` contains the five guarded production targets and candidate hashes, while `proposal.json`, `changes.json` and `diffs/` show the exact corrections. The ten production coverage/manifest guards were rechecked unchanged. Historical native status/readiness prose, all fetch/recovery stamps, URLs, read ranges and qualifications are preserved; the owner addendum identifies their historical nature without granting readiness or native acceptance.
+
+The initial generic root-tool source-fetch invocation resolved paths against the mathematics repository and failed before reading these private candidates. Its empty output artifacts are retained. All reported successful checks use `tools/physics-support/coverage-checklist.mjs` and `tools/physics-support/source-fetch-check.mjs` with the physics workspace root.
+
+No production coverage, item, manifest, readiness, authority, source original, imported pin or native state was written. No external textbook, paper or screenshot was newly read or retrieved for this correction. Subsequent late-two finalized-original authority work is separate and does not alter these coverage candidates.

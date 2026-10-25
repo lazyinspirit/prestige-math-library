@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-conjugates-of-an-average-of-roots-of-unity-are-averages-of-roots-of-unity.md

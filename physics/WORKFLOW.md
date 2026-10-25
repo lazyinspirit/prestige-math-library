@@ -129,6 +129,14 @@ a nonempty explicit item selection; a bare invocation checks the whole library.
 before loading renderers or collecting content. Pass explicit item/page paths
 to keep a render check within the current scope.
 
+The physics `fwdcheck` plan-order check permits a B page to require its own A
+page at the same finite numeric order only when the canonical plan names unique,
+reciprocal A/B companions with the same category and library. An A-to-B
+requirement, shared or duplicate companion identity, unrelated equal-order
+prerequisite, or later prerequisite remains an error. This matches the canonical
+pair representation without changing item forward-reference, spine, or cycle
+checks. Use `--items-file` for the actual nonempty frontier selection.
+
 ## Owner-requested Step-1 author continuation
 
 An operationally successful author process can leave actual inventory or authored
@@ -160,6 +168,78 @@ continuation for the same unit is refused, and an unresolved result escalates to
 the owner. Closed stages cannot be reopened by this command. The CLI only writes a
 control request; upgrading controller code and supervising restart/resume remain
 owner operations.
+
+## Guarded prerequisite append during Step 1
+
+An explicitly owner-approved prerequisite extension may append pairs while the
+original Step 1 remains unclosed. Stop the controller after pausing new dispatch
+and draining **all** native/adopted writers. Every later step must be unstarted.
+Archive the prior canonical plan before registering only the new reciprocal A/B
+rows, with complete proposed item declarations and actual source/design dossiers.
+Do not transcribe the old frontier from a stale plan or repack its batch IDs.
+
+The physics native planner supports an explicit append transaction:
+
+```bash
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts plan --append \
+  --run RUN --state-dir .physics-autopilot/RUN --pairs NEW_A,NEW_B,NEW_C \
+  --prior-plan research/EXACT_PRIOR_PLAN.json \
+  --source-evidence research/EXACT_DESIGN.json,research/EXACT_SOURCE_DOSSIER.md \
+  --base-disposition-review research/EXACT_ROOT_PLANNING_DISPOSITION_REVIEW.json
+```
+
+This does not write native state or acceptance. It validates the paused/drained
+boundary, pair cap, exact ownership, new-scope buildability, and plan projection;
+archives original manifests, source/task/history bytes and review inputs; appends
+fresh batch IDs; and regenerates the scope ledger, covers, planning groups,
+new tasks and last valid dependency graph. Existing manifest/item/task bytes and
+native drift report/results remain unchanged. An active or interrupted append
+lock blocks another preparation and controller start. Both observed native
+controller lock names (`.controller.lock` and `controller.lock`) are checked.
+The exact read-only `RUN-supervision-checkpoint.json` may advance during review;
+if explicitly bound as source or owner evidence it remains immutable. No other
+run-file preservation rule changes. Failed preparation restores its generated
+files and retains a failure archive for inspection.
+
+Original blocked-section owner dispositions must first be genuinely rechecked
+against current original-frontier evidence. Stale input hashes fail before any
+append mutation. The archive then authenticates historical inputs, so later
+legitimate authoring does not retroactively alter that review. Explicit
+`current_inputs` remain live obligations. Reclassifying a research planning input
+as historical requires a separate actual Root review, never a mechanical hash
+refresh. The optional `--base-disposition-review` file has version 1, `run`,
+`reviewer: /root`, `kind: historical-scoped-planning-dispositions`, exact
+`owner_resolution_sha256`, `scope_ledger_sha256`, `prior_plan_sha256`, the original
+resolved `pages`, a substantive `reason`, the explicitly reclassified
+`historical_current_inputs` subset, and nonempty `{path, sha256}` source evidence.
+It is required when extending a plan recorded as an explicitly current obligation.
+Mathematical source obligations cannot be reclassified by this planning route.
+
+On the owner's guarded restart, two native internal stages precede ordinary
+scaffolding: `1-append-drift-N` dispatches a fresh physics Luna-max Alpha for
+exactly the new A pages, and `1-append-apply-N` applies that review only to the
+new batch metadata. Original units and completed stage history are retained.
+Both joins require ordinary owner formatting/metadata receipts for exactly the
+new proposed declarations; original items remain context. This avoids requiring
+a missing consumer proof before planning its prerequisites. The source and
+low-homotopy dossiers are review inputs, not accepted authored proofs.
+
+The fresh report is `research/RUN-alpha-step1-append-N-drift.md`; its genuine
+current/immutable-attempt native results must match before application. The
+report may correct only new-row prerequisite/order fields and cannot drop or
+rewrite proposed item scopes. A blocked supplemental review stays a hold unless
+Root supplies a separate source-bound
+`research/RUN-append-N-drift-owner-resolutions.json` tied to that actual new
+report/result and its exact blocked sections. It grants no old-report rewrite
+or fabricated native coverage. The ordinary drift gate reads an authenticated,
+separately attributed composite view; it never modifies the original report.
+
+After application, the new batches still require complete ordinary authoring,
+readiness, independent review and all later gate batteries. Any missing original
+consumer carrier or newly needed consumer edge is a separately preserved,
+explicitly authorized repair; append itself never changes an old batch. Do not
+use ordinary `drift-apply`, a global plan sync, `plan --force`, or hand-written
+native state to implement this extension.
 
 ## Cross-batch dependency inputs
 
@@ -301,6 +381,143 @@ resolution only after source writers drain. This never dispatches another engine
 review, restores a spent local repair, or replaces the orchestrator's pre-battery
 work.
 
+## Supplemental prerequisites while Step 2 is unfinished
+
+The physics-only `prerequisites register` transaction supports explicitly
+Root-approved missing mathematical prerequisites discovered in Step 2. It does
+not reopen Step 1, extend its historical review coverage, or resolve the
+originating escalation. Without a registration registry, stage composition,
+units, workers and gates are unchanged. The existing Step-1 `plan --append`
+boundary remains strict.
+
+Root first pauses dispatch, drains every native/adopted/outside source writer,
+and stops the controller and preflight processes. The exact unfinished paused
+stage must be `2-scope-review`, original `1-scaffold` must have passed, and no
+later stage may have entered. Both controller locks and the shared metadata lock
+are checked, alongside process scanning and Root's explicit drained attestation.
+The state directory and state file must resolve regularly inside the physics
+workspace; symlinks, dangling target links and nonregular inputs are rejected.
+Commit the current canonical plan, all existing manifests, scope ledger, covers,
+group assignment and dependency-level metadata on main before registration.
+Original source repairs and any existing page's inventory update must already
+be in their intended form: supplemental authors cannot change original sources.
+An exact argument may honestly depend on a pending supplier; that supplier is
+not accepted or proved merely because it is planned.
+
+From the physics workspace:
+
+```bash
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts prerequisites register \
+  --run RUN --state-dir .physics-autopilot/RUN \
+  --request research/RUN-step2-prerequisite-request-1.json
+```
+
+The version-1 request has `run`, `reviewer: "/root"`, a substantive `reason`
+(at least 80 characters), the exact 40-hex `base_commit`,
+`writers_drained: true`, `writer_scopes: []`, `escalation: {path, sha256}`
+naming the actual current held `RUN-scope-review/batch-N/state.json`, and
+nonempty `evidence: [{path, sha256}]` naming genuine source/design work.
+Every evidence path is a regular run-local research file. `pairs` contains
+`{pages: [A, B]}` entries with complete new reciprocal mathematical declarations:
+unique identity, category, order, `requires`, and nonempty exact item objects
+with `id`, `kind`, `domain`, `library`, `statement` and `deps`. Both pages use
+`library: mathematics`; item domains are mathematics. These are scope promises,
+not proof acceptance. Draft carriers may be incomplete or absent.
+
+Every already existing new-pair item/page carrier also requires exactly one
+`source_adoptions` entry: `{path, sha256, page, ownership:
+"unowned-local-draft", reason}`. The reason concretely explains Root's source
+ownership grant (at least 40 characters); `sha256` binds the actual current draft
+bytes. This grants subsequent scoped native authorship, not proof acceptance.
+Missing carriers need no entry. The lightweight actual identity/alias/page-home
+index rejects collisions even outside the canonical plan.
+Empty/null page inventory fields contribute no members; the page's identity
+remains indexed, and malformed non-null inventory shapes remain blocking.
+Any foreign run's manifest claim remains blocking, including for a draft with
+an adoption entry.
+Nonempty foreign `pipeline_run` markers also block adoption even when their
+manifest no longer exists; this route supplies no orphaned foreign-owner release.
+The relevant ownership projection is rechecked before install and interrupted
+completion; unrelated prose is not an ownership claim.
+
+New pairs get fresh contiguous batch IDs after the current frontier. Original
+inventory promises retain their contents and relative order; only explicitly
+listed existing-page additions alter old manifests. Batch IDs, original group
+membership and source/native history remain intact.
+The ordinary prospective plan validator checks identities, prerequisite closure,
+ordering and cycles before installation. Do not omit a real edge to evade a
+page cycle; suppliers and consumers need a genuinely consistent placement.
+The transaction adds canonical declarations/manifests, extends the owed scope,
+covers and groups, derives the full dependency graph and writes exact new tasks.
+
+`research/RUN-step2-prerequisites.json` records the original construction units
+and separate supplemental generations. Each generation with new batches inserts
+`2-prerequisite-construct-N` after the completed Step-1 prefix and before the
+unfinished scope review. Actual Luna-max authors use distinct
+`beta-prerequisite-N-batch-B.result.json` identities. They author only their new
+pair's sources and actual batch evidence, preserve exact approved inventory,
+complete contracts, source coverage and current readiness, and escalate gaps.
+No original `beta-batch-B` result, Step-1 gate pass or scope acceptance is written.
+The original Step-1 unit projection remains frozen; Step 2 and later stages use
+all actual current manifests.
+
+Supplemental construction retains the complete current-frontier content,
+metadata, dependency, policy, contract, finite-check and gate-liveness duties,
+plus new-item readiness and exact supplemental source coverage/fetch/backing
+checks. Source outputs have separate generation filenames. Compact-page
+preparation waits for the supplemental authors to drain. Root still resolves
+all escalations and supplies fresh ordinary full-frontier owner preparation
+before any battery. Registered declarations, missing carriers, incomplete proofs
+or successful processes alone cannot pass construction. Original item/page
+sources, manifests and native receipts are digest-protected through this join;
+finish their intended original repairs before registration or wait until the
+supplemental join completes. Once constructed, new batches automatically enter
+the ordinary two-review/one-local-repair Step-2 loop with fresh counters.
+Supplemental failures write `RUN-prerequisite-N-blockers.json`; original
+`RUN-step1-blockers.json` remains historical evidence.
+
+An already genuinely authored local prerequisite may instead be appended to an
+existing held batch's A page through
+`additions: [{batch, page, items, review:{path,sha256}}]`.
+Optional `before: "EXISTING_ITEM_ID"` inserts its suppliers before an existing
+consumer without changing the relative order of any original items; otherwise
+the additions append. The actual page inventory must already match that order.
+This does not dispatch another author for that existing batch. Root's immutable
+review JSON has `run`, `reviewer: "/root"`, `native_review: false`,
+`decision: "accept"`, a substantive `reason`, exact added `items`, their current
+`source_sha256` map, and complete current `consumer_checks` with `id`,
+`decision: "accept"` or `"unaffected"`, and a concrete `reason` (at least 40
+characters). `consumer_sha256` binds exactly every actual direct/indirect
+consumer, including aliases and nonlogical uses; use an empty map/list only
+when no such consumer exists. Root first updates the actual page inventory and
+supplies genuine owning contracts and source coverage. Registration adds only
+the declared plan/manifest inventory. Ordinary `owner-resolve` then binds the
+expanded inventory and actual review while preserving previous observations,
+review counters and repair budget. Source/review drift remains blocking until
+Step 2 closes; genuine later native repairs do not erase historical acceptance.
+
+Import snapshots and pins never change. Enlarging the manifest frontier or
+adding an item invalidates the exact existing authored-frontier original
+successor authority. Root must supply fresh actual bindings to the complete new
+frontier, declarations and reached consumer sources before authorizing the
+ordinary battery. A previous run's or previous scope's receipt is not reusable
+authority. Registration neither generates that scientific review nor relaxes
+the import guard.
+
+This route creates **no backups or preimage copies**. Prior committed versions
+are identified by existing Git commit/blob objects; original native history is
+retained. Every prospective output is validated/precomputed before installation.
+A durable exclusive lock and digest-only journal guard atomic file replacements;
+temporary files contain prospective output only. Native state is not edited.
+An interruption blocks controller start. With the same stopped/drained boundary,
+`prerequisites finish --run RUN --state-dir .physics-autopilot/RUN` checks every
+target against its exact before/after digest before completing that same
+transaction. Unexpected edits, changed evidence/state, missing prospective bytes
+or an interruption before the complete journal cause a fail-closed refusal;
+there is no automatic rollback or replacement acceptance. The completed journal
+is retained as immutable digest evidence. Root owns inspection and any further
+reconciliation.
+
 ## Independent review through closeout
 
 Defect evidence may identify a repository path or an absolute HTTP(S) source
@@ -343,6 +560,50 @@ finding, an exact original finding and typed post-reader snapshot, and an
 explicit same-defect reference with substantive evidence. Independent ledger,
 severity, current-content and application checks remain mandatory.
 
+Root may classify independent **reader/flagged findings only** as one actual
+repaired defect through `research/RUN-step3-root-shared-findings.json`. Decisions
+point to its raw SHA256 with `root_shared_finding_receipt_sha256`. This is a
+separate scientific classification route: original findings may have different
+raw-source observations or an originally unbound observation. It never asserts
+historical byte equality, adds a native finding, or shares touched/page coverage.
+An independent producer's touched nonfatal cover repair retains its own row;
+only actual frozen fatal findings participate in the shared fatal row. Legitimate
+severity reclassification uses an append-only taxonomy successor; original
+finding severity and observation fields remain exact. All participating decisions
+must have the same final `confirmed_fatal` or `confirmed_nonfatal` verdict,
+confidence 1, and the current canonical fixed row's severity. Ordinary source
+application, consumer checks, ledger validity, readiness and full gates remain.
+
+The receipt schema is version 1, `run`, `reviewed_by: root`,
+`kind: root-adjudicated-shared-findings`, `inputs` (path → raw SHA256), and
+`findings`. Each finding entry has `canonical_defect_id`, `subject`,
+`canonical_row_sha256` (canonical object hash), `one_actual_defect: true`,
+`final_severity`, a substantive `rationale` of at least 100 characters,
+`participants`, `scientific_evidence`, `current_carrier_sha256`, `current_source`
+(`{path, sha256}` for the actual item), and 2–12 distinct
+`reviewed_source_excerpts` of 80–4000 characters actually present in that source.
+At least two distinct existing scientific evidence guards `{path, sha256}` are
+required; routing scopes, decisions and original reader/refuter reports cannot
+stand in for scientific reviews. Every guard and the current source must appear
+in `inputs`; native owner recertification recursively binds those inputs and the
+verifier code. This is Root's explicit same-issue judgment, not a new independent
+scientific review or proof-acceptance stamp.
+
+Each participant has `batch`, `obligation` (`reader:N:K` or `refuter:N:K`),
+`route` (`reader` or `flagged`), `decision_path` (the canonical
+`research/RUN-alpha-batch-N-3a-decisions.json`), `decision_core_sha256`,
+`frozen_finding_sha256`, `scope_guard`, and exactly two `report_guards` for
+`RUN-reader-findings-N.json` and `RUN-refute-N.json`. Their hashes must equal
+the frozen scope's report hashes. The complete participant set must equal the
+canonical row's complete `adjudication_ref` set. Each decision references only
+that canonical defect ID. Decision cores exclude only their own receipt pointer
+and `subject_sha256`, avoiding circular hashes while ordinary current stamp
+checks remain mandatory. Decision files remain native recertification inputs;
+do not put their raw hashes in the receipt's `inputs`, creating a circular
+receipt/decision hash. Frozen original unbound observations retain explicit
+`historical_delta_unknown` and owner-resolution limits, never a manufactured
+historical `observed_source`.
+
 One bounded refuter coverage correction per unit may be authorized through
 `research/RUN-step3-refuter-continuations.json`. When the native receipt's
 40-line diagnostic clips the coverage headers, `original_last_message` can bind
@@ -370,6 +631,15 @@ verdict, subject and other decision field stays exact. Current native external
 context checks remain mandatory. Original closure and historical evidence are
 never resealed. Valid append-only taxonomy successors retain their original
 Step-3 ledger predecessors in the authenticated historical projection.
+The exact existing canonical ledger digest/count is checked first. If later
+taxonomy successors were appended, verification retains the original receipt's
+row count as the filtered JSONL append-prefix boundary, then canonically sorts
+that prefix and requires its exact original digest/count. Every omitted tail
+row must pass full taxonomy-only lineage and substantive-field checks; those
+checks run over all run rows before projection. Taxonomy successors already
+frozen remain included. No original or substantive row may be dropped, and
+inherited timestamps grant no projection authority. Ledger rows, frozen reports
+and closure receipts are never rewritten by verification.
 Step-3 readers and refuters use GPT-6 Luna/max; batch adjudicators use GPT-6.1
 Sol/medium. Step-4 read-only batch readers use GPT-6.1 Sol/medium, and the
 per-item judge sweep uses GPT-6 Luna/max.
@@ -935,6 +1205,69 @@ and native report basis, and uses the current contract hash. It never edits or
 reseals the old certificate, closure, report or supporting evidence, and does
 not claim that missing historical contract bytes have been recovered.
 
+Initial certification has a separate exact metadata transition when the
+immutable `initial-1-collected.json` predates genuine completed native initial
+impact repairs. It applies only at `5.3-certify`, initial impact round one,
+before any certificate exists. Root may advertise
+`research/RUN-step5-v2/owner-initial-metadata-request.json` containing
+`{version: 1, run, request: {path, sha256}}`. The request names immutable
+`owner-initial-metadata-ID.json` in that workflow directory. It contains
+`version: 1`, `run`, `reviewer: "/root"`, `phase: "impact-initial"`, `round: 1`,
+raw references `source_collection`, `impact_progress`, `impact_closed`,
+`predecessor_gate`, and a nonempty `artifacts` array. References use relative
+run-local paths and SHA256; the predecessor names the actual consumed
+`.physics-autopilot/RUN/owner-gate-history/ATTEMPT.json`.
+
+Each artifact declares `kind` (`owning-proof-contract` or
+`owning-page-manifest`), canonical `research/RUN-batch-N.proof-contracts.json`
+or `research/RUN-batch-N.pages.json` `path`, `batch`, authenticated raw `before`
+archive, exact live `after_sha256`, and `changes`. Every change contains one
+scalar `json_pointer`, its frozen owning `subject`, and exact native `pack`,
+`task`, `report`, `dispatch` references in `native`. The complete parsed scalar
+diff must equal these unique pointers, including every leaf of a newly added
+object. Historical archive bytes must equal the original collection's exact
+binding; Git can supply a missing preimage only when its actual bytes reproduce
+that hash. Neither a hash assertion nor a reconstructed approximation suffices.
+
+Supported contract fields are exact citation quotes, derivation claim mirrors,
+and the native `owner_repair` dispatch/kind/evidence/false-independent-acceptance
+record under the assigned subject. Every contract subject requires a direct
+structured successful strict scoped native validator row, followed by an actual
+current strict scoped contract check during intake with unchanged raw bytes.
+Supported page fields are source-reference title mirrors under the assigned
+subject row; the complete current source mapping must equal the item's actual
+frontmatter, and the assigned native source repair must have changed its guard.
+Both artifact types require authentic closed impact progress, native assigned
+Sol 6.1 high authority, current item guards and review contexts, drained writers,
+and the consumed complete `5.2-impact` battery with passing full-frontier Root
+formatting/metadata checks and current item/manifest bytes. This authenticates
+the actual predecessor; it does not claim that its snapshot bound contract raw
+hashes. No new predecessor battery or engine stage is introduced by this
+bookkeeping transition.
+
+Only the new certificate receives current hashes, raw archives, immutable
+request/native/closure/gate evidence, and typed `initial-native-metadata`
+transitions. Original reports, supporting evidence, collections, receipts,
+sources and existing certificates remain immutable. Unlisted scalar changes,
+other metadata fields, source/proof substitutions, unsupported artifacts and
+unrelated stale evidence fail closed. Ordinary evidence verification and the
+normal certification-stage gates remain strict.
+
+A consumed earlier owner-finding queue retains its original metadata hashes in
+its parent, progress and child receipts. If an original initial-impact
+certificate sealed an `initial-native-metadata` transition, historical queue
+replay may resolve that exact old canonical metadata guard to its already
+certificate-bound raw archive. The unique transition must match the supported
+canonical artifact, original/current hashes, immutable Root request, exact
+scalar diff and native report basis; its source parent, impact progress,
+closure, predecessor gate and native references must remain raw-hash-bound by
+that certificate. Current canonical metadata must still equal the sealed after
+hash. Replay uses the ordinary strict binder for the archive, request and current
+metadata; it neither edits old receipts nor rechecks historical proofs against
+later source revisions. All direct evidence bindings retain their existing
+strict checks. This route does not chain later metadata transitions or accept
+other stale evidence.
+
 A collected initial page correction can bind an owning pages manifest before a
 later native impact owner repairs one consumer's public statement and its exact
 manifest mirror. The old parent, page receipt and native report stay immutable.
@@ -1072,13 +1405,131 @@ unscoped verification continues to parse every original in full.
 Item/page validators select current run manifests. Outside suppliers stay
 prerequisite context; do not validate or repair unrelated content. Closeout verifies the engine's exact owned content commit inside its transaction.
 Fresh Step 6 uses metadata/render checks -> focused repair -> all final gates
-(repeat after repairs) -> concise report -> commit. All distinct old mechanical
+(repeat after repairs) -> concise report -> commit. Actual preparation includes
+the shared scoped [rendering-quality checks](../tools/RENDERING-QUALITY.md):
+source/context lint, application AST/KaTeX validation, production TikZ compilation
+and SVG/layout smoke checks, with small real-render regression packs. The final
+`rendering-quality` gate verifies an exact current nonempty receipt; unchanged
+source/renderer/toolchain caches avoid a second compile. All distinct old mechanical
 conditions and repair mechanisms remain. The report immediately follows the
 genuine gate pass; there is no post-commit content battery. New v3 stage identities
 require guarded cutover rather than adoption of old coverage. Earlier owner-gate
 protocols remain current-hash-bound under CLAUDE.md. See
 [the implementation](../tools/STEP6-REBUILD.md) and
 [mechanical check map](../tools/STEP6-MECHANICAL-CHECKS.md).
+
+An actual physics Step-6 rendering failure may require source repairs that
+invalidate existing judge currencies. Root can explicitly authorize current
+judgments through `.physics-autopilot/RUN/step6-currency-request.json`, with
+`{version: 1, run, request: {path, sha256}}` naming an immutable
+`supervision/step6-currency-authorization-ID.json`. The authorization embeds the
+five actual repair-author reports and Root's exact source/metadata reconciliation,
+binds the genuine failed rendering cache, preserved gate certificate and Git
+preimage commit, and names the exact target/current/unchanged scope partition.
+It grants no semantic-equivalence acceptance. Unlisted item or selected page
+changes, dependency/identity changes and unrelated stale evidence fail closed.
+The only historical metadata exception is the actual batch-48 fluctuation
+definition's statement mirror: its Git bytes must reproduce the old certificate
+hash, its complete scalar diff must be exactly the authorized mirror, and the
+current mirror must equal the actual repaired source. Original certificates,
+reports, decisions and provider context hashes are never rewritten.
+
+The existing `step6-prepare-final-v3` native unit becomes `judgement` work with
+the existing long judge timeout while this request is pending. Before stamping,
+it obtains actual Luna/max strict-context judgments only for stale central
+currencies and changed ordinary keeps. Current central coverage and unchanged
+ordinary item-byte coverage retain their existing predicates. Missing, null or
+rejecting fresh results block preparation for genuine owner resolution; neither
+the author reports nor the renderer can accept them. Retry reuses actual current
+append-only verdicts and provider-response records.
+
+Native execution writes durable
+`research/RUN-step6-currency-authority.json`, retaining the complete Root
+authorization/report payload, original certificate/Git metadata bindings, exact
+scope, actual provider rows and response records, immutable ledger-prefix seals,
+and native command identity. Public stamp/coverage consumers require its
+completed current authority. Old central hashes remain unchanged; stale central
+rows fall through to the actual fresh Luna verdicts. Preparation, readiness and
+report source selection seal this authority and its implementation. Future
+verification does not depend on ignored supervision/cache files.
+
+Only small own-judge mapping fragments and hashes are retained across native
+stamping, never full sources or prompts. Exact reconstruction of the before raw
+source, unchanged Guard/Judge hashes and actual other-prompt-input hashes prove
+the native stamp-only delta without changing the real provider context. Seven
+already observed ordinary stamp baseline edges additionally require unchanged
+Git `stripJudgeStamp` bytes, actual current Luna keep coverage, the expected native
+mapping and exact failed-render-cache raw binding; this never refreshes a central
+Guard. A later raw mathematics-import consumer authority may consequently need
+an explicit truthful Root rebind. Such a hold preserves the genuine judgments;
+it does not create new scientific acceptance or require duplicate provider calls
+when the actual judged item and remaining prompt inputs are unchanged. Normal
+metadata/render preparation and the complete final battery still follow.
+
+If that actual sweep rejects, Root may authorize a bounded
+`physics-step6-scientific-rejection-resolution` request in the same native
+preparation unit. It binds the immutable blocked authority, every actual rejected
+provider tuple, the seven scientific owner reports and exact Root dispositions,
+explicit repaired sources, complete affected-consumer checks, and owned cumulative
+metadata differences against the original Git preimage. Shared-plan differences
+must belong to frozen items or selected pages. Every other source and page remains
+guarded. This is a scientific repair authorization, separate from the original
+rendering request; the original certificate and actual verdict rows remain intact.
+
+Native preparation archives the blocked authority byte for byte, appends genuine
+Guard-form adjudications and fixed defect records through the existing ledger
+validator, and invokes the frozen Luna/max strict-context sweep. Existing exact
+current responses are reused. An unchanged false-positive or nonfatal rejection
+closes only its exact original item/context tuple through the existing adjudication
+policy. Repaired sources and affected stale contexts require actual current
+judgments; new rejections, nulls, missing responses or owner evidence block again.
+No rejected item receives a pass stamp; only exact native stale-pass removal is
+permitted. The completed durable authority binds the predecessor archive, compact
+reports, native provider responses, adjudications and defect ownership, retaining
+verification after ignored supervision state is removed. Fresh metadata/render
+preparation and the ordinary full final battery remain required.
+
+The two-cycle limit applies to each escalation, not to the build's number of
+scientific judgment episodes. A newly advertised continuation names the actual
+blocked predecessor, separate owner reports, and exactly its failed tuples.
+Each new disposition supplies an escalation ID, repair cycle 1 or 2, and an
+evidenced comparison against every historical decision for the same item. A
+distinct issue starts cycle 1 with a new ID only when all comparisons classify
+the prior issues as distinct. A follow-up retains the prior issue ID and advances
+cycle 1 to cycle 2; a third cycle for that issue blocks. Existing immutable
+decisions receive stable derived legacy IDs without rewriting their bytes.
+
+The archive chain must be complete, hash-bound and strictly ordered back to the
+original rendering authority. Source after-guards are folded forward through all
+episodes; historical adjudication and defect segments are authenticated to their
+captured boundaries without requiring historical sources to remain current.
+Previously accepted rejections are inherited only through genuine native
+adjudication bindings for exact unchanged provider tuples. Current responses are
+reused, changed contexts receive fresh judgments, and every new rejection still
+blocks for actual owner resolution. No continuation starts automatically.
+
+After completed scientific coverage, an actual failed final precheck or provenance
+gate may require mechanical source/contract repairs. Root can advertise a separate
+`physics-step6-final-gate-mechanical-current-judgments` request bound to the actual
+authorized battery events, exact guarded proposal/application, and native fixed
+mechanical defect rows. The native preparation unit archives the COMPLETE authority
+unchanged; this route creates no scientific rejection or adjudication. Unlisted
+sources, pages and metadata remain guarded. Genuine completed judgments carry only
+when current item/other-prompt inputs and authenticated post-stamp context match;
+all stale subjects receive actual current Luna/max judgments. A fresh rejection
+blocks and remains eligible for the ordinary per-escalation scientific repair
+route. Native stamp checks, fresh preparation and the full final battery remain.
+That immediate scientific continuation retains the mechanical parent's genuine
+post-stamp coverage using the same exact carry checks and original provider
+contexts. Its sweep omits carried subjects and still reuses any exact-current
+responses among the remaining targets; a repair never refreshes an old verdict.
+Pending physics currency schedules the existing native final-preparation tool
+through the executor before handoff continues. It never runs judgment/stamping
+inline without that tracked dispatch. Failed native attempts hold until native
+retry re-arms them; pause, writer/adoption guards and the full gate barrier remain.
+The native stamper inserts a first verification mapping before an existing
+`sources:` key in either block or flow YAML, preserving that source line and both
+existing item hashes. Strict stamp-delta verification remains unchanged.
 
 ## Pre-gate recertification
 
@@ -1209,6 +1660,16 @@ examples-page leaf protections remain active. The adapter never fabricates an
 item inventory or imports new source bytes.
 
 ## Reviewed original mathematics maintenance
+
+Current-original raw hash drift is reported together for all mismatched paths
+in the existing selected original-source loop, in sorted path order. Exact
+already accepted successor hashes remain excluded. This is diagnostic only:
+local snapshot pin changes still fail immediately, and source identity, home,
+classification, metadata, missing-source and publication guards retain their
+hard failures. A hard failure may stop the loop before all drift is observed;
+the aggregate is complete only when that loop reaches its end. Scope selection,
+category handling, acceptance rules, successful return counts and failing exit
+status are unchanged; no unrelated originals are added to the selection.
 
 An authored run may encounter a relevant published mathematics original whose
 bytes changed after the immutable local import was pinned. Root may review a
@@ -1478,3 +1939,186 @@ substantive `owner_resolution`; ordinary verdict, ledger, current-carrier,
 unchanged-repair and exact refuter-coverage checks still apply. Do not dispatch
 recovery, manufacture a receipt, or alter existing observations to use this
 route. Root owns the actual authorization, guarded recovery and recertification.
+
+### Coupled Penrose finite smoke checks
+
+The physics-private `finite-smoke-penrose.mjs` registers the seven batch-68
+coupled-Penrose obligations through the ordinary `finite_smoke` selector and
+exact current item assertion excerpts. It retains native assertion, selection,
+error and check-count handling. A supplied `expected` value must match the
+computed invariant; registration supplies no readiness or review acceptance.
+
+- `quadratic-curvature-polynomial` evaluates 729 real two-forms on the actual
+  incidence alpha vectors at four complex parameters, verifies interpolation,
+  the positive-orientation ASD conditions and the second-chart infinity value.
+- `unit-four-sphere-curvature-trace` contracts the unit-sphere Gauss tensor over
+  16 ordered pairs, obtaining six unordered two-planes and scalar curvature 12.
+- `negative-twist-fibre-groups` computes chart intersection and quotient modes
+  for twists -1 and -2 in the Laurent window -6 through 6. Only the degree-one
+  mode `t^-1` for twist -2 survives.
+- `flat-constant-section-coefficient` differentiates `1/(1+|x|^2)` twice and
+  contracts the local residual at the 81 points of `{-1,0,1}^4`. Dividing by
+  the local nonzero conformal frame factor gives the coefficient 2.
+- `trivial-rank-one-case` checks 25 complex constants and computes degree-one
+  cohomology of 206 homogeneous degree -2 Laurent-mode Čech subcomplexes on
+  the four standard projective charts, with exponents in -3 through 3. Matrix
+  ranks use exact integer elimination, and adjacent differentials compose to zero.
+- `flat-ranks-zero-and-one` checks the empty complex and the same scalar
+  rank-one complex, which also represents the identical trivial dual.
+- `overlap-and-zero-class` checks the canonical-frame/chart-order residue sign
+  on 65 bounded fibre cochains, explicitly reconstructs the 60 chart-tail
+  primitives, and checks the absent horizontal twist -1 degree-zero modes.
+
+These are bounded algebraic tests. They do not prove convergence of infinite
+Laurent sums, analytic sheaf/Dolbeault comparison, smooth parameter dependence,
+Hodge theory, base-chart gluing of general bundle data, global injectivity, or
+the general coupled theorem. The overlap check models the fibre trace under
+coordinate inversion; it does not certify arbitrary stereographic transition
+functions. The full authored proofs and ordinary workflow gates retain those
+duties. Run `node --test tools/physics-support/finite-smoke-penrose.test.mjs`
+for the focused model, assertion/selection, expected-value and mutation checks.
+
+
+### Root source repairs inside unfinished Step-2 prerequisite construction
+
+Protected old source bytes remain immutable unless Root first uses native
+`prerequisites repair-authorize` at a paused, stopped, fully drained latest
+`2-prerequisite-construct-N` boundary. Root names exact current-run draft items
+and a committed original preimage, then performs the admitted repairs. Native
+`repair-complete` requires exact before/after hashes, actual scientific and
+focused review, scoped proof-supplier-use justification, and same-owner full
+consumer checks when public contract bytes change. Proof-only corrections do not
+claim a blanket consumer proof audit. Only exact predeclared source-mirror JSON pointers (deps, dependency roles or
+canonical public-section statement) and computed numeric metadata consequences
+are admitted, with genuine current full-graph validation. Foreign planning
+context remains unchanged.
+
+The original registration generation, Step-1 stamps and native history are never
+rewritten. Separate immutable authorization/completion receipts authenticate the
+new exact bytes; incomplete or stale receipts block construction. Receipt
+presence/absence and every bound input invalidate earlier owner preparation.
+Fresh preparation and the full ordinary battery remain required. The commands
+do not edit sources, state, authority or acceptance and create no backups. Exact
+request fields and fail-closed interruption behavior are documented in
+`tools/physics-autopilot/README.md` under “Guarded Root repair during supplemental
+construction”.
+
+### Exact malformed and duplicate proof-support rendering successors
+
+The opt-in `exact_native_presentation` inventory includes the observed
+`lem-one-variable-completion-of-the-square-with-a-smooth-parameter` and
+`thm-c-c-is-dense-in-l-p-for-radon-measures` body pairs. The first removes only
+the malformed nested case tag in step 1.2; its explicit positive-parameter
+assumption remains. The second renders the exact Radon-density title and moves
+or removes only duplicate support clusters in steps 1.1 and 2.1. Fixed body
+hashes, unique named proof paragraphs, unchanged mathematical AST literals,
+exact title pairs and unchanged scientific metadata guard these two routes.
+Every individual delta still requires a typed Root review and all current
+consumer, native published-repair authentication, evidence and gate checks.
+Graphics-free exact cases retain honestly absent diagram keys; partial, null
+or contradictory supplied keys fail. These routes neither modify import pins
+nor accept original mathematical changes or arbitrary support rewrites.
+
+
+When a genuine supplemental native author clarifies an approved full-scope
+statement or supplies actual references, Root may reconcile only the new-owned
+item's exact source/header mirrors through native
+`prerequisites authored-metadata-adopt`, after successful native completion and
+writer drain, before original-source repair authorization. This grants no source
+edit permission and cannot change original rows, identities or inventories.
+The separate immutable receipt authenticates only new-batch manifest hashes,
+actual Root full-scope/reference/consumer review and real ended native results.
+Its effective baseline can then be committed and consumed by original-source
+repair authorization. Both receipts invalidate old owner preparation and retain
+all ordinary gates; detailed schema is in the native physics README.
+
+
+At authored-metadata admission, native plan/dependency subjects are the actual
+new generation pages/items with full prerequisite context; unresolved old-page
+prerequisite defects remain blockers before the full supplemental battery.
+The existing original repair authorization may explicitly name old protected
+draft `pages` for frontmatter `requires` additions only. Original entries/order,
+body, inventory and every other source byte remain exact. Root reviews actual
+source-dependency homes and exact before/after hashes, with matching explicit
+plan/manifest requires pointers. Published mathematical context may be local or
+imported, but is not edited. The existing repair completion receipt binds the
+used context and replay checks it. Full current-frontier validation at original
+repair completion and all ordinary native gates remain mandatory.
+
+
+After a genuine supplemental construction pass, its new items may undergo the
+ordinary native Step-2 local repair lifecycle. The admission guard authenticates
+the complete native passed battery/owner history and immutable admission inputs,
+then recognizes only exact later native new-batch write-file ownership. Active
+or returned-but-uncollected work retains that assignment; native collection
+captures actual owned-file hashes, which must remain current afterward. Old
+Root-repaired sources/pages and current addition-consumer review remain strict.
+This creates no acceptance or metadata waiver: native repair/final-review and
+fresh Root preparation/full gates still apply. Owner currency binds stable
+history/assignment/result inputs and derived lineage, never the whole changing
+driver state/events files. See the native physics README lifecycle section.
+
+### Original public-claim findings after a same-batch reader proof repair
+
+Root may retain an exact original finding through
+`research/RUN-step3-partial-reader-repair-BATCH.json` (version 1,
+`kind: "same-batch-proof-only-partial-reader-repair"`, `authorized_by: "/root"`,
+`mathematical_acceptance: false`, `edit_permission: false`, substantive `reason`).
+It binds `{path, sha256}` evidence in `native_receipt`, `native_attempt`,
+`native_prompt`, `native_last_message`, `original_findings`, `reader_report`,
+`review`, `pre_snapshot`, `post_snapshot`, `manifest`, `before_contracts`, and
+`after_contracts`. The contract archives are complete documents with `contracts`;
+`manifest` is a raw batch-manifest archive. Every reference belongs in the
+`inputs` path-to-raw-SHA256 map. Each `findings` entry supplies `finding_index`,
+the exact `original_finding`, and raw `before_source`/`after_source` references.
+
+Admission requires a genuine successful immutable native reader attempt and
+final message, unique same-batch own-run draft mathematics, source/contract/manifest
+archives reproducing native pre/post fingerprints, and source changes confined
+to the existing Proof section. All other source bytes, including frontmatter
+and public claim, remain identical. Current carriers must equal native post at
+split. Later collect/check authenticate that immutable history and exact route
+hash while allowing ordinary adjudicated repairs. The original unbound finding
+is preserved, its post carrier remains the repair comparison basis, and the item
+requires a full current refuter read. Separate touched and reader obligations,
+ledger closure, ordinary source ownership and all gates remain mandatory.
+The receipt grants routing only and never certifies scientific acceptance.
+
+### Native v3 packaging recovery after a pre-ref receipt refusal
+
+`recover-step6-packaging` is a narrow physics compact-v3 transition for the
+exact `invalid native final-receipt inventory` failure of the native finalizer.
+It requires a paused run, a stopped controller and drained dispatches, the
+original completed 29-gate battery and preparation seal, an absent final receipt
+and index lock, and an owner-authorized committed packaging-only successor.
+It refuses a landed content commit, scientific/context drift, an unrelated
+finalizer error, uncommitted tooling, or a changed gate inventory. It does not
+infer or manufacture a pending-receipt observation.
+
+Place the authorization inside the run's ignored state directory. It contains
+`version: 1`, `kind: physics-v3-packaging-recovery`, `run`,
+`authorized_by: owner`, a substantive `authorization`, the explicitly observed
+`passed_head`, the new committed `tooling_head`, exact `failed_attempts`
+(`dispatch` and `failure` event objects), and `packaging_changes`. Each change
+names a Git-root-relative `path`, its original prepared `before_seal` (null
+only for a new file), and committed `after_seal`, both SHA256 of `file\0` plus
+the exact bytes. The fixed allowlist comprises the pending-receipt helper,
+its test/documentation, and the physics recovery helper/CLI/test/WORKFLOW.
+The Git path `physics/WORKFLOW.md` maps to prepared key `WORKFLOW.md`.
+Every existing old blob must match both the explicitly observed passed HEAD
+and the genuine preparation seal; the publication baseline is a separate ref.
+
+```sh
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts recover-step6-packaging --run RUN --state-dir .physics-autopilot/RUN --authorization .physics-autopilot/RUN/supervision/packaging-authorization.json --inspect
+```
+
+Copy the returned `guards` into that authorization, then issue the same command
+without `--inspect`. Inspection is read-only. Application acquires the native
+controller lock, rechecks all guards, archives genuine state/events/preparation
+and retired coverage as immutable `.snapshot`/`.record` evidence, and clears
+only final-validation/finalization coverage and their active preparation files.
+Earlier stages, scientific sources, judgments and original event history are
+preserved. The run remains paused at `6-final-validation-v3`; native start/resume
+must perform fresh metadata/render preparation and all 29 gates before another
+report/commit attempt. Archived passes never supply current coverage. Recovery
+itself runs no models or gates, commits nothing, and neither publishes nor pushes.

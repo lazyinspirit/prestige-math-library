@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-fourier-restriction-is-not-defined-on-lp-equivalence-classes-pointwise.md

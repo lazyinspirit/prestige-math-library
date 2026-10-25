@@ -1,0 +1,33 @@
+{
+  "id": "ex-negative-sobolev-order-containing-a-dirac-mass",
+  "agent": "/root/rendering_repair_coordinator/fourier_018",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Inspected flagged screenshot tile --03 at original resolution: the technique banner visibly prints $P$-SERIES with dollar delimiters, while math in the proof below is typeset. Frozen and current sources contain $p$ in that banner. The plain React text technique field does not process math delimiters.",
+      "action": "Replaced only the technique-banner phrase real $p$-series with real p-series.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Removed inline-math delimiters around p in the plain-text proof technique banner; no other source bytes changed.",
+  "source_lines_after": {
+    "119": "**Proof technique:** reduce the membership to the finiteness of a radial integral, bracket that integral between blocks of a real p-series, and read off the threshold and its strict endpoint."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains: proof technique banners do not typeset inline math; this item now uses equivalent plain prose."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-negative-sobolev-order-containing-a-dirac-mass.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects",
+      "pre_existing_formatting_failures": false
+    }
+  ],
+  "source_guard": "Raw SHA256 matched queue before_raw_sha256 immediately before edit."
+}

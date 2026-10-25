@@ -1,0 +1,56 @@
+{
+  "id": "lem-keyhole-branch-boundary-values",
+  "agent": "/root/rendering_repair_coordinator/cxa_016",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution screenshot displays z^(alpha-1) literally in the heading. The Statement explicitly identifies the same function as z raised to alpha minus one, so inline math restores the intended expression without changing its meaning.",
+      "action": "Replaced the ASCII exponent title fragment with $z^{\\alpha-1}$, using single-quoted YAML to preserve the LaTeX backslash.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Title-only inline-math correction; all body and other frontmatter bytes remain unchanged.",
+  "source_lines_after": {
+    "4": "title: 'A keyhole contour sees the two boundary values of $z^{\\alpha-1}$'"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-keyhole-branch-boundary-values.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-keyhole-branch-boundary-values.md --json",
+      "exit_code": 0,
+      "result": "1 checked, 0 failed; direct strategy pass"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-keyhole-branch-boundary-values.md --json",
+      "exit_code": 0,
+      "result": "1 checked, no errors, no warnings"
+    }
+  ],
+  "before_raw_sha256": "e30288ec0e34ec2045157410695793de6caf31df794ae6cb384e83ce7e267255",
+  "after_raw_sha256": "8315622bc8543b0189fe71e7c6203cafe29d85a5227488e46844a58fdbf9ea59",
+  "status_preserved": {
+    "before": "status: published",
+    "after": "status: published",
+    "byte_identical": true
+  },
+  "visual_evidence": {
+    "original": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/lem-keyhole-branch-boundary-values--01.png",
+    "current": "research/math-library-rendering-repairs-2026-10-23/previews/cxa-016/screenshots/lem-keyhole-branch-boundary-values--01.png",
+    "inspection": "Both standalone PNGs inspected at original resolution. Current title cleanly typesets z with alpha minus one as superscript; complete item body remains readable.",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa-016/manifest.json",
+    "manifest_sha256": "98c00bcdf0d3faebf9d296454facb40030ce372de6386ff63534ba1c9dce1323",
+    "source_sha256": "8315622bc8543b0189fe71e7c6203cafe29d85a5227488e46844a58fdbf9ea59",
+    "preview_scope": "Native local title and ItemBody preview; no production HTTP route. Reference-map collection reported 16 unrelated parsing diagnostics; no wikilinks occur in this carrier."
+  }
+}

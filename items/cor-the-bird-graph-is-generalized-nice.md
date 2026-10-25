@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-the-bird-graph-is-generalized-nice.json
+  precheck: pass
 id: cor-the-bird-graph-is-generalized-nice
 kind: corollary
 title: "The singleton Bird family is generalized nice"
@@ -13,12 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-27
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-27
 sources:
   scraped: []
   references:
@@ -48,7 +45,7 @@ The singleton finite family $\{\mathrm{Bird}\}$ is generalized nice.
 
 ## Proof
 
-**Proof technique:** direct specialization of the property-$(*)$-plus-leaf-reducibility implication to the family $\{\mathrm{Bird}\}$.
+**Proof technique:** direct specialization of the property-(*)-plus-leaf-reducibility implication to the singleton Bird family.
 
 1.1 The family $\{\mathrm{Bird}\}$ satisfies both hypotheses of [L3]: property $(*)$ by [L1] and leaf-reducibility by [L2]. [L1, L2, L5]
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-classical-morphism-inverse-image-of-closed-is-closed.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent.json
+  precheck: pass
 id: thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent
 kind: theorem
 title: 'Eigenvectors belonging to pairwise distinct eigenvalues are linearly independent'
@@ -11,13 +14,6 @@ deps: [def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-linear-independen
 aliases: []
 landmark: true
 proof_strategy: induction
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-13
-  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -42,7 +38,7 @@ Let $T:V\to V$ be linear. If $v_1,\ldots,v_m$ are eigenvectors of $T$ belonging 
 
 ## Proof
 
-**Proof technique:** induction on $m$.
+**Proof technique:** induction on the number of eigenvectors.
 
 1.1 For $m=0$ the empty family is independent, and for $m=1$ the equation $a_1v_1=0$ forces $a_1=0$ because $v_1\ne0$. [base, L1, L2, F1]
 

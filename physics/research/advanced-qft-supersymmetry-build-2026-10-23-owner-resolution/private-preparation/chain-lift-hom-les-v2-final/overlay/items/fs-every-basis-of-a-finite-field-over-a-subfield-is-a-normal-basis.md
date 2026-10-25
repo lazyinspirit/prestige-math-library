@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-basis-of-a-finite-field-over-a-subfield-is-a-normal-basis.md

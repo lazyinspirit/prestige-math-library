@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-vertices-of-modules-in-a-block-lie-in-a-defect-group.md

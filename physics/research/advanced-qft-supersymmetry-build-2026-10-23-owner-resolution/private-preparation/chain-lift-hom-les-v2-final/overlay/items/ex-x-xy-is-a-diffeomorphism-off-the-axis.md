@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-x-xy-is-a-diffeomorphism-off-the-axis.md

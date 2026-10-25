@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-full-lattice-fundamental-domain-and-bounded-points.json
+  precheck: pass
 id: lem-full-lattice-fundamental-domain-and-bounded-points
 kind: lemma
 title: "Fundamental parallelotope and finite bounded intersections"
@@ -29,9 +32,7 @@ sources:
     - title: "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory"
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§27 Lemma 27.2, pp.139-140."
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement
@@ -117,3 +118,43 @@ $\|s\|\le\|s-x_0\|+\|x_0\|$ for $s\in B(x_0,r)$.
 3.1 Every integer $m_i$ with $|m_i|\le C_i$ satisfies $-\lceil C_i\rceil\le m_i\le\lceil C_i\rceil$; the set $\{m\in\mathbb Z:|m|\le C_i\}$ is therefore a subset of the finite set $\{-\lceil C_i\rceil,\dots,\lceil C_i\rceil\}$ and is finite. Hence $S\cap\Lambda$ is contained in the image under $(m_1,\dots,m_n)\mapsto\sum_im_ib_i$ of the finite set $\prod_{i=1}^n\{m\in\mathbb Z:|m|\le C_i\}$, so $S\cap\Lambda$ is finite; for $S=\varnothing$ it is empty. [F1, step 2.3]
 
 4.1 Step 2.1 proves the unique tiling, step 2.2 the volume $\lambda_n(P)=\operatorname{covol}(\Lambda)$, and step 3.1 the finiteness of $S\cap\Lambda$ for bounded $S$; these are the three claims of the statement. [step 2.1, step 2.2, step 3.1] ∎
+
+## Remarks
+
+For $n=2$, the coefficient map $T(t_1,t_2)=t_1b_1+t_2b_2$ sends the
+half-open square $(0,1]^2$ onto $P$. The schematic below shows an oblique
+basis. Dashed edges are excluded; solid edges are included except at the
+open endpoint circles. Only the upper-right vertex is included.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\draw[dashed,thick] (0,2) -- (0,0) -- (2,0);
+\draw[thick] (0,2) -- (2,2) -- (2,0);
+\draw[fill=white] (0,0) circle (2pt);
+\draw[fill=white] (2,0) circle (2pt);
+\draw[fill=white] (0,2) circle (2pt);
+\fill (2,2) circle (2pt);
+\node[below left] at (0,0) {$0$};
+\node[below] at (2,0) {$e_1$};
+\node[above] at (0,2) {$e_2$};
+\node[above] at (2,2) {$e_1+e_2$};
+\node at (1,1) {$(0,1]^2$};
+\draw[->,thick] (2.7,1) -- (4.1,1) node[midway,above] {$T$};
+\draw[dashed,thick] (5.5,2) -- (4.5,0) -- (6.5,0);
+\draw[thick] (5.5,2) -- (7.5,2) -- (6.5,0);
+\draw[fill=white] (4.5,0) circle (2pt);
+\draw[fill=white] (6.5,0) circle (2pt);
+\draw[fill=white] (5.5,2) circle (2pt);
+\fill (7.5,2) circle (2pt);
+\node[below left] at (4.5,0) {$0$};
+\node[below] at (6.5,0) {$b_1$};
+\node[above] at (5.5,2) {$b_2$};
+\node[above] at (7.5,2) {$b_1+b_2$};
+\node at (6,1) {$P$};
+\end{tikzpicture}
+```
+
+The lattice translates $\lambda+P$ use this same face convention, so a
+point on a shared face belongs to exactly one translate (step 2.1).
+The measure calculation in step 2.2 applies the same map $T$ to the
+unit square. The proof above remains independent of the illustration.

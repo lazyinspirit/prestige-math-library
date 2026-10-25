@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-sum-check-verifier-is-polynomial-time-given-point-evaluation.json
+  precheck: pass
 id: lem-sum-check-verifier-is-polynomial-time-given-point-evaluation
 kind: lemma
 title: "Sum-check verifier resources"
@@ -9,12 +12,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct calculation
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Justin Thaler, Proofs, Arguments, and Zero-Knowledge (2023), \u00a74.1 Discussion of costs, Table 4.1 and Remark 4.2, pp.37\u201339"
@@ -33,7 +30,7 @@ With supplied $b$-bit field representations, efficient encoding checks and field
 
 **Given:** The objects and hypotheses in the statement above.
 
-[F1] Sum-check caps each coefficient list at d_i+1, samples a fresh challenge each round and uses trusted evaluation only for the terminal comparison ([[def-sum-check-instance-and-protocol]]).
+[F1] Sum-check caps each coefficient list at $d_i+1$, samples a fresh challenge each round and uses trusted evaluation only for the terminal comparison ([[def-sum-check-instance-and-protocol]]).
 
 ## Proof
 

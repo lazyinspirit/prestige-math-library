@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-euler-characteristic-finite-support-twist-invariance.json
+  precheck: pass
 id: lem-euler-characteristic-finite-support-twist-invariance
 kind: lemma
 title: "Euler characteristic of a closed point, and invariance under an invertible twist"
@@ -37,18 +40,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "historical complete Step5 reader; item lem-euler-characteristic-finite-support-twist-invariance; evidence research/frontier-38-owner-30-reader-26.md, research/frontier-38-owner-30-reader-findings-26.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "The Stacks Project, Varieties, Section 33.33 (tag 0BEI)"
@@ -100,7 +91,7 @@ $\mathcal L$ ([[def-invertible-sheaf]]):
 
 ## Proof
 
-**Proof technique:** direct; identify $Z$ and its sheaves, compute the cohomology of $i_*\kappa(p)$, trivialise the pullback of $\mathcal L$, and apply the projection formula.
+**Proof technique:** direct; identify the one-point scheme and its sheaves, compute the cohomology of the pushed-forward residue field, trivialise the pullback of the invertible sheaf, and apply the projection formula.
 
 1.1 Set-up. The morphism $i:\operatorname{Spec}\kappa(p)\to X$ is a closed immersion with image the closed point $p$, so $i$ is a homeomorphism onto $\{p\}$; the scheme $Z=\operatorname{Spec}\kappa(p)$ has one point $q$, its structure sheaf is the one-point sheaf $\kappa(p)$, and the stalk of any sheaf on $Z$ at $q$ is its group of global sections. Since $X$ is proper over $k$, it is of finite type over the field $k$, hence locally Noetherian. [F1, F2, given]
 

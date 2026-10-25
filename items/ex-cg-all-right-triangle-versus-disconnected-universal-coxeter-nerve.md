@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-all-right-triangle-versus-disconnected-universal-coxeter-nerve.json
+  precheck: pass
 id: ex-cg-all-right-triangle-versus-disconnected-universal-coxeter-nerve
 kind: example
 title: "The all-right triangle must be filled; the disconnected universal-Coxeter nerve is CAT(1) vacuously"
@@ -34,13 +37,7 @@ sources:
     - title: "Michael W. Davis, The Geometry and Topology of Coxeter Groups (first-edition author manuscript, 2007-2008)"
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Chapter 7.3 and Chapter 12 (right-angled Coxeter systems and their nerve; the free product of $\\mathbb Z/2$'s)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Example
@@ -88,3 +85,30 @@ verification:
 3.1 Clause (i), the boundary loop. Let $\Gamma$ be the boundary $3$-cycle, of length $3\cdot\pi/2<2\pi$. Fix a corner and let $x_t,y_t$ be the points at distance $t\in(0,\pi/4)$ from it on the two incident edges: their inner product is $\cos^{2}t+\sin^{2}t\cos(\pi/2)=\cos^{2}t$, so their distance is $d(t)=\arccos(\cos^{2}t)<2t$ because $\cos$ is strictly decreasing on $[0,\pi]$ and $\cos^{2}t>\cos2t$ for $t\in(0,\pi/2)$ [F7]; replacing the two boundary subarcs of total length $2t$ by the geodesic segment of length $d(t)$ inside the convex triangle is a strict shortening of $\Gamma$ near the corner, so $\Gamma$ is not locally geodesic and hence not an isometrically embedded circle, whose sufficiently short arcs would be minimizing [F5]. [F5, F7, step 2.1, algebra]
 
 4.1 Clause (iii), the discrete nerve and the comparison. Since $L''$ is discrete [step 2.2], every continuous map from the connected space $\mathbb R/\ell\mathbb Z$ into $L''$ is constant, so $L''$ contains no isometrically embedded circle. Together with step 2.3 this proves both girth values are $+\infty$, hence at least $2\pi$. For the comparison: the value $0$ of the all-right cosine matrix lies at the boundary of the large hypothesis and makes the metric flag test the ordinary flag test, which fills the triangle of 1.1; the value $-1$ of a non-edge pair of $L''$ would make the $2\times2$ principal block $\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ have the nonzero kernel vector $(1,1)$, hence not positive definite [F6], so it is never the cosine of an edge and no set of two or more vertices triggers the metric flag test. [F1, F2, F5, F6, step 1.1, step 2.2, step 2.3] ∎
+
+## Remarks
+
+The following schematic compares the simplices, rather than giving a planar isometric realization of the spherical metric. The shaded region is the entire spherical $2$-simplex of $L'$, including its boundary; its three edge lengths are $\pi/2$. In $L''$ there are only three point cells: the distance formula below the points does not represent edges. These are precisely the cell and metric computations in verification steps 1.1, 1.2 and 2.2; the verification is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\coordinate (s) at (0,0);
+\coordinate (t) at (2.6,0);
+\coordinate (u) at (1.3,2);
+\fill[blue!15] (s) -- (t) -- (u) -- (s);
+\draw (s) -- node[below] {$\pi/2$} (t);
+\draw (t) -- node[right] {$\pi/2$} (u);
+\draw (u) -- node[left] {$\pi/2$} (s);
+\fill (s) circle (1.5pt) node[below left] {$s$};
+\fill (t) circle (1.5pt) node[below right] {$t$};
+\fill (u) circle (1.5pt) node[above] {$u$};
+\node at (1.3,2.8) {$L':\ m_{xy}=2$};
+\node at (1.3,-0.9) {Filled spherical $2$-simplex};
+\fill (5,0) circle (1.5pt) node[below] {$s_1$};
+\fill (7.6,0) circle (1.5pt) node[below] {$s_2$};
+\fill (6.3,2) circle (1.5pt) node[above] {$s_3$};
+\node at (6.3,2.8) {$L'':\ m_{s_i s_j}=\infty\ (i\ne j)$};
+\node at (6.3,-0.9) {Three vertices; no edges};
+\node at (6.3,-1.5) {$d_\pi(s_i,s_j)=\pi\quad(i\ne j)$};
+\end{tikzpicture}
+```

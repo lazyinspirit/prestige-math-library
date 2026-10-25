@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-gluing-two-reeb-components-gives-a-foliation-of-s-three.md

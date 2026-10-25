@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-unequal-dimensional-proper-pushforwards-have-the-summed-dimension-ext-bm-shift.md

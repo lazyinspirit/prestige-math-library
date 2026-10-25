@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-unshifted-elliptic-equation-is-an-identity-minus-compact-equation.md

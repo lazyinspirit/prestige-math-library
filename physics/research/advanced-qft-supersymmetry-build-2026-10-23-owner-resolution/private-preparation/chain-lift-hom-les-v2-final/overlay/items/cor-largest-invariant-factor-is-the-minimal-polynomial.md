@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-largest-invariant-factor-is-the-minimal-polynomial.md

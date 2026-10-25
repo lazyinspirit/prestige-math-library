@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-naturality-and-edge-maps-of-the-ahss.json
+  precheck: pass
 id: thm-naturality-and-edge-maps-of-the-ahss
 kind: theorem
 title: Naturality and edge maps of the AHSS
@@ -15,8 +18,7 @@ sources:
     - title: "Davis–Kirk, Lecture Notes in Algebraic Topology, §9.1, printed pp. 237–246"
       url: https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf
       locator: "§9.1, naturality of the skeletal exact couple, printed pp. 237–246"
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement
@@ -63,3 +65,45 @@ compatible with composition and identities.
 ## Source notes
 
 Compare [Davis–Kirk](https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf), §9.1, printed pp. 237–246, for naturality of the skeletal exact couple and of its edge maps.
+
+
+## Remarks
+
+For a cellular map $f:X\to Y$, the upper square below is cohomological
+(contravariant in the space) and the lower square is homological
+(covariant). Here $r\ge1$ and $p,q\in\mathbb Z$; the theory $h$ is fixed.
+The horizontal arrows have total degree $+1$ and $-1$, respectively.
+
+```tikzcd
+[column sep=huge, row sep=large, font=\Large]
+E_r^{p,q}(Y) \arrow[r,"d_r"] \arrow[d,"f_r^*"'] & E_r^{p+r,q-r+1}(Y) \arrow[d,"f_r^*"] \\
+E_r^{p,q}(X) \arrow[r,"d_r"'] & E_r^{p+r,q-r+1}(X) \\[2em]
+E^r_{p,q}(X) \arrow[r,"d^r"] \arrow[d,"f_{r,*}"'] & E^r_{p-r,q+r-1}(X) \arrow[d,"f_{r,*}"] \\
+E^r_{p,q}(Y) \arrow[r,"d^r"'] & E^r_{p-r,q+r-1}(Y)
+```
+
+Taking homology of these commuting squares gives the corresponding maps
+on page $r+1$; there is no asserted map from every element of $E_r$ directly
+to $E_{r+1}$. At the stable page, the following squares illustrate the
+$0$-column edges in total degree $n$:
+
+```tikzcd
+[column sep=huge, row sep=large, font=\Large]
+h^n(Y) \arrow[r,"\epsilon_Y"] \arrow[d,"f^*"'] & E_\infty^{0,n}(Y) \arrow[d,"f_\infty^*"] \\
+h^n(X) \arrow[r,"\epsilon_X"'] & E_\infty^{0,n}(X) \\[2em]
+E^\infty_{0,n}(X) \arrow[r,"\eta_X"] \arrow[d,"f_{\infty,*}"'] & h_n(X) \arrow[d,"f_*"] \\
+E^\infty_{0,n}(Y) \arrow[r,"\eta_Y"'] & h_n(Y)
+```
+
+Here $\epsilon_Z$ is the quotient
+$h^n(Z)\to h^n(Z)/F^1h^n(Z)\cong E_\infty^{0,n}(Z)$,
+and $\eta_Z$ is the identification
+$E^\infty_{0,n}(Z)\cong F_0h_n(Z)$ followed by inclusion into $h_n(Z)$.
+The filtrations are $F^ph^n(Z)=\ker(h^n(Z)\to h^n(Z^{p-1}))$ and
+$F_ph_n(Z)=\operatorname{im}(h_n(Z^p)\to h_n(Z))$.
+Cellularity makes $f^*$ and $f_*$ preserve these filtrations, so the stable
+maps above are the induced maps on the appropriate filtration quotients,
+as in step 3.1 and [F4]. Finiteness of the skeletal filtration ensures
+stabilization; no bound on the coefficient degree is imposed. A morphism
+of theories gives the analogous squares with arrows from $h$ to $k$ at a
+fixed space. Both diagrams illustrate the proof, which is independent of them.

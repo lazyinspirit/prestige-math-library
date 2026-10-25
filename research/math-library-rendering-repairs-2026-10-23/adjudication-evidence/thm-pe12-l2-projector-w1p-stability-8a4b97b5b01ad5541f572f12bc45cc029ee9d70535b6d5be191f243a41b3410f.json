@@ -1,0 +1,81 @@
+{
+  "id": "thm-pe12-l2-projector-w1p-stability",
+  "agent": "/root/rendering_repair_coordinator/npde_018",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-fence-not-recognized",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile --04 visibly prints the complete TikZ body as source; the tilde fence is not recognized by the native TikZ extraction. The intended triangulation is mathematically correct.",
+      "action": "Replace only tilde fence delimiters with backtick TikZ fences; preserve mathematical drawing data.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "tikz-label-contrast-and-size",
+      "verdict": "confirmed",
+      "reason": "The first compiled local native preview makes the orange-cell label faint against an unmapped pale fill and all labels small. The final standalone original-resolution preview confirms readable labels after using a theme-recognized orange fill and increasing diagram scale/font.",
+      "action": "Use explicit FFE8D1 cellorange (mapped by the local native renderer), scale 4 and large font. Preserve geometry and all labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Enable the existing coordinate-order subdivision illustration with supported fences and make its labels readable. No mathematical relations changed.",
+  "source_lines_after": {
+    "diagram": [
+      164,
+      180
+    ],
+    "caption": [
+      158,
+      162
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "Closed unit square in coordinates (x_1,x_2), with two closed triangles.",
+      "check": "Proof step 1.2 with a=0,N=1,d=2 gives cumulative vertices (0,0),(1,0),(1,1) for permutation (1,2) and (0,0),(0,1),(1,1) for (2,1). These are exactly the two fill paths."
+    },
+    {
+      "relation": "Blue lower-right K_(1,2) and orange upper-left K_(2,1).",
+      "check": "For vertices of the blue triangle 0<=x_2<=x_1<=1, and for orange 0<=x_1<=x_2<=1. Label locations (.72,.28) and (.28,.72) satisfy their respective strict inequalities."
+    },
+    {
+      "relation": "Shared whole edge x_1=x_2.",
+      "check": "The red segment joins (0,0) and (1,1), exactly the common edge of both triangles. The four rectangle edges and this explicit diagonal render fully; no closing-edge omission is present."
+    },
+    {
+      "relation": "Coordinate/corner labels and proof independence.",
+      "check": "Horizontal arrow is x_1 and vertical arrow x_2; all four corner labels match their coordinates. The figure illustrates only d=2,N=1. Proof steps 1.2 and 2.2 remain byte-identical and establish the general matching/shape claims independently of the drawing."
+    }
+  ],
+  "before_raw_sha256": "aad13301ccf1ad4c3954ab62faf0f89f9a733c65df4f548d62fd55325eabe058",
+  "after_raw_sha256": "c20d3090fccda7287e729012d9a2262e36369ed3823aac5c3954e0e8908e5d25",
+  "status_byte_identical": true,
+  "frontmatter_byte_identical": true,
+  "statement_facts_proof_byte_identical": true,
+  "checks_file": "research/math-library-rendering-repairs-2026-10-23/npde-018-checks/checks.json",
+  "native_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/npde-018-native-preview-final/manifest.json",
+  "visual_checks": {
+    "original_viewed": [
+      "research/math-library-rendering-audit-2026-10-23/numerical-pdes-and-spatial-discretization/screenshots/thm-pe12-l2-projector-w1p-stability--04.png"
+    ],
+    "final_viewed": [
+      "research/math-library-rendering-repairs-2026-10-23/npde-018-native-preview-final/screenshots/thm-pe12-l2-projector-w1p-stability--04.png"
+    ],
+    "detail": "original",
+    "result": "Exactly one visible diagram, two correctly labeled triangles, four correct corners, complete rectangle and shared diagonal. Labels readable with good contrast; no clipping/overlap.",
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": []
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview; no production HTTP route visited. Reference map reports 16 unrelated parse diagnostics; they do not prevent the scoped diagram rendering."
+  ]
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-transfinite-induction-fails-when-the-minimum-is-exempted.md

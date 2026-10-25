@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-bounded-yosida-semigroups-converge-to-the-generated-semigroup.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-handles-of-equal-index-can-be-attached-on-one-level.md

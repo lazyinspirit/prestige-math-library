@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-second-countable-smooth-manifolds-have-cw-homotopy-type.json
+  precheck: pass
 id: lem-second-countable-smooth-manifolds-have-cw-homotopy-type
 kind: lemma
 title: Smooth manifolds have CW homotopy type
@@ -38,13 +41,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology
@@ -140,6 +136,8 @@ Assume AC. Every finite-dimensional Hausdorff second-countable smooth manifold, 
 
 6.1 The interior is a finite-dimensional Hausdorff second-countable smooth manifold without boundary by [F14] and restriction of the charts and smooth structure in [F16] and [F17]. Applying the boundaryless argument of steps 2.3, 3.1, 4.1, and 5.1 to $\operatorname{int}M$ gives it CW homotopy type; step 2.4 makes its inclusion into $M$ a homotopy equivalence. Therefore $M$ also has CW homotopy type. [F14, F16, F17, step 2.3, step 2.4, step 3.1, step 4.1, step 5.1]
 
-7.1 Step 2.1 establishes paracompactness; steps 1.3 and 2.2 establish weak Hausdorffness and compact generation, while Hausdorffness is assumed. Steps 5.1 and 6.1 establish CW homotopy type in the boundaryless and boundary cases, and step 2.5 establishes numerability. Together with step 1.1, all AC-dependent supplier hypotheses are met, proving the statement. [step 1.1, step 2.1, step 1.3, step 2.2, step 5.1, step 6.1, step 2.5] ∎ ## Remarks
+7.1 Step 2.1 establishes paracompactness; steps 1.3 and 2.2 establish weak Hausdorffness and compact generation, while Hausdorffness is assumed. Steps 5.1 and 6.1 establish CW homotopy type in the boundaryless and boundary cases, and step 2.5 establishes numerability. Together with step 1.1, all AC-dependent supplier hypotheses are met, proving the statement. [step 1.1, step 2.1, step 1.3, step 2.2, step 5.1, step 6.1, step 2.5] ∎
+
+## Remarks
 
 The statement assumes full AC, but the proof uses only its countable-choice consequence: step 1.1 derives $\mathrm{AC}_\omega$. It is spent in the cited embedding, tube, collar, Lindelöf-to-paracompact, and smooth partition suppliers. Hatcher's open-cover-to-nerve argument needs a subordinate partition, supplied here by [F6]. The Euclidean cover consists of all eligible balls, the contraction of each nonempty convex intersection is pointwise, and the collar displacement uses the displayed fixed cutoff; none requires an uncountable selection.

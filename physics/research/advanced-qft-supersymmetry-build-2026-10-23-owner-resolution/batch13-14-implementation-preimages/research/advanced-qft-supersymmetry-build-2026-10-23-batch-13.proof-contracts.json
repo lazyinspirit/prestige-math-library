@@ -1,0 +1,450 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "13",
+  "level": 0,
+  "scope": [
+    "def-aqft-two-group-background",
+    "thm-aqft-two-group-background-consistency",
+    "ex-aqft-two-group-twisted-local-coefficient-background",
+    "ex-aqft-two-group-postnikov-background"
+  ],
+  "contracts": {
+    "def-aqft-two-group-background": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition explicitly permits the empty finite complex; its cochain assignments and equations are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With A trivial, all cochain labels and equations in the Definition reduce to the unique zero label."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the one-vertex complex, no edge, face, or tetrahedron equation is required by the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Normalized beta vanishes on identity arguments, and the Definition states this convention explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite cochain Definition has no analytic endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All finite group, action, cochain, and gauge data are specified directly; the Definition invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition introduces data and notation; it does not assert an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition introduces data and notation; it does not assert an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The carrier is a mathematical definition; the finite cochain operations are fixed by explicit formulas and checked in the dependent theorem and examples."
+    },
+    "thm-aqft-two-group-background-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-two-group-background",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite group with identity $e$, let $A$ be a finite abelian group written additively, and let $\\rho:G\\to\\operatorname{Aut}(A)$ be a left action, so $\\rho_{gh}=\\rho_g\\rho_h$ and $\\rho_e=\\operatorname{id}_A$. A group $2$-cochain is a function $c:G^2\\to A$; it is normalized when it vanishes if either input is $e$. Its coboundary is\n\n$$\n(\\delta_\\rho c)(g,h,k)=\\rho_g c(h,k)-c(gh,k)+c(g,hk)-c(g,h).\n$$\n\nA normalized group $3$-cocycle is a function $\\beta:G^3\\to A$ that vanishes whenever any argument is $e$ and satisfies\n\n$$\n\\rho_g\\beta(h,k,l)-\\beta(gh,k,l)+\\beta(g,hk,l)-\\beta(g,h,kl)+\\beta(g,h,k)=0\n$$\n\nfor all $g,h,k,l\\in G$. Two normalized $3$-cocycles represent the same class when their difference is $\\delta_\\rho c$ for a normalized $2$-cochain $c$; this is an equivalence relation by additivity of $\\delta_\\rho$. The class $[\\beta]$ is the Postnikov class in this skeletal model.\n\nThe corresponding skeletal categorical $2$-group has objects $g\\in G$ and, for each $g$, one automorphism labelled by each $u\\in A$; there are no morphisms between distinct objects. Composition of automorphisms adds their labels, tensor product is\n\n$$\n(g,u)\\otimes(h,v)=(gh,u+\\rho_gv),\n$$\n\nand the associator from $(gh)k$ to $g(hk)$ has label $\\beta(g,h,k)$. The two pentagon path labels are $\\beta(gh,k,l)+\\beta(g,h,kl)$ and $\\rho_g\\beta(h,k,l)+\\beta(g,hk,l)+\\beta(g,h,k)$; equality of these labels is exactly the displayed $3$-cocycle equation.\n\nA finite ordered simplicial complex $K$ is a finite vertex set with a total order and a collection of nonempty finite vertex subsets, called simplices, closed under taking nonempty subsets. Write each simplex in increasing order. A $q$-cochain with values in a local coefficient system assigns an element to each ordered $q$-simplex at its first vertex. A flat $G$-valued edge cochain is a family $a_{ij}\\in G$ for each edge $i<j$ such that $a_{ij}a_{jk}=a_{ik}$ on every triangle. It defines the local coefficient system with fiber $A$ at each vertex and transport $\\rho_{a_{ij}}$ from vertex $j$ to vertex $i$.\n\nFor each integer $q\\geq0$ and local-coefficient $q$-cochain $c$, define the twisted coboundary on each ordered $(q+1)$-simplex by\n\n$$\n(\\delta_a c)_{i_0\\ldots i_{q+1}}=\\rho_{a_{i_0i_1}}c_{i_1\\ldots i_{q+1}}+\\sum_{r=1}^{q+1}(-1)^r c_{i_0\\ldots\\widehat{i_r}\\ldots i_{q+1}}.\n$$\n\nIn particular, for an $A$-valued $2$-cochain $B$,\n\n$$\n(\\delta_aB)_{ijkl}=\\rho_{a_{ij}}B_{jkl}-B_{ikl}+B_{ijl}-B_{ijk},\\qquad (a^*\\beta)_{ijkl}=\\beta(a_{ij},a_{jk},a_{kl}).\n$$\n\nA finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.\n\nA $1$-gauge transformation consists of vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$ at vertex $i$. Define\n\n$$\na^g_{ij}=g_i a_{ij}g_j^{-1},\n$$\n\n$$\n\\zeta^g_{ijk}=-\\beta(g_i,a_{ij},a_{jk})+\\beta(a^g_{ij},g_j,a_{jk})-\\beta(a^g_{ij},a^g_{jk},g_k),\n$$\n\n$$\nB^{g,\\lambda}_{ijk}=\\rho_{g_i}B_{ijk}+\\zeta^g_{ijk}+(\\delta_{a^g}\\lambda)_{ijk},\\qquad (\\delta_{a^g}\\lambda)_{ijk}=\\rho_{a^g_{ij}}\\lambda_{jk}-\\lambda_{ik}+\\lambda_{ij}.\n$$\n\nChanging the chosen representative to $\\beta'=\\beta+\\delta_\\rho c$ for a normalized $2$-cochain $c$ and simultaneously replacing $B$ by $B+a^*c$ changes the cochain presentation but preserves the background equation: on every tetrahedron, flatness gives\n\n$$\n(\\delta_a(a^*c))_{ijkl}=\\rho_{a_{ij}}c(a_{jk},a_{kl})-c(a_{ik},a_{kl})+c(a_{ij},a_{jl})-c(a_{ij},a_{jk})=(\\delta_\\rho c)(a_{ij},a_{jk},a_{kl}).\n$$\n\nThis finite mathematical model makes no assertion that a physical theory realizes the symmetry or has an anomaly.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-aqft-two-group-background",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite group with identity $e$, let $A$ be a finite abelian group written additively, and let $\\rho:G\\to\\operatorname{Aut}(A)$ be a left action, so $\\rho_{gh}=\\rho_g\\rho_h$ and $\\rho_e=\\operatorname{id}_A$. A group $2$-cochain is a function $c:G^2\\to A$; it is normalized when it vanishes if either input is $e$. Its coboundary is\n\n$$\n(\\delta_\\rho c)(g,h,k)=\\rho_g c(h,k)-c(gh,k)+c(g,hk)-c(g,h).\n$$\n\nA normalized group $3$-cocycle is a function $\\beta:G^3\\to A$ that vanishes whenever any argument is $e$ and satisfies\n\n$$\n\\rho_g\\beta(h,k,l)-\\beta(gh,k,l)+\\beta(g,hk,l)-\\beta(g,h,kl)+\\beta(g,h,k)=0\n$$\n\nfor all $g,h,k,l\\in G$. Two normalized $3$-cocycles represent the same class when their difference is $\\delta_\\rho c$ for a normalized $2$-cochain $c$; this is an equivalence relation by additivity of $\\delta_\\rho$. The class $[\\beta]$ is the Postnikov class in this skeletal model.\n\nThe corresponding skeletal categorical $2$-group has objects $g\\in G$ and, for each $g$, one automorphism labelled by each $u\\in A$; there are no morphisms between distinct objects. Composition of automorphisms adds their labels, tensor product is\n\n$$\n(g,u)\\otimes(h,v)=(gh,u+\\rho_gv),\n$$\n\nand the associator from $(gh)k$ to $g(hk)$ has label $\\beta(g,h,k)$. The two pentagon path labels are $\\beta(gh,k,l)+\\beta(g,h,kl)$ and $\\rho_g\\beta(h,k,l)+\\beta(g,hk,l)+\\beta(g,h,k)$; equality of these labels is exactly the displayed $3$-cocycle equation.\n\nA finite ordered simplicial complex $K$ is a finite vertex set with a total order and a collection of nonempty finite vertex subsets, called simplices, closed under taking nonempty subsets. Write each simplex in increasing order. A $q$-cochain with values in a local coefficient system assigns an element to each ordered $q$-simplex at its first vertex. A flat $G$-valued edge cochain is a family $a_{ij}\\in G$ for each edge $i<j$ such that $a_{ij}a_{jk}=a_{ik}$ on every triangle. It defines the local coefficient system with fiber $A$ at each vertex and transport $\\rho_{a_{ij}}$ from vertex $j$ to vertex $i$.\n\nFor each integer $q\\geq0$ and local-coefficient $q$-cochain $c$, define the twisted coboundary on each ordered $(q+1)$-simplex by\n\n$$\n(\\delta_a c)_{i_0\\ldots i_{q+1}}=\\rho_{a_{i_0i_1}}c_{i_1\\ldots i_{q+1}}+\\sum_{r=1}^{q+1}(-1)^r c_{i_0\\ldots\\widehat{i_r}\\ldots i_{q+1}}.\n$$\n\nIn particular, for an $A$-valued $2$-cochain $B$,\n\n$$\n(\\delta_aB)_{ijkl}=\\rho_{a_{ij}}B_{jkl}-B_{ikl}+B_{ijl}-B_{ijk},\\qquad (a^*\\beta)_{ijkl}=\\beta(a_{ij},a_{jk},a_{kl}).\n$$\n\nA finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.\n\nA $1$-gauge transformation consists of vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$ at vertex $i$. Define\n\n$$\na^g_{ij}=g_i a_{ij}g_j^{-1},\n$$\n\n$$\n\\zeta^g_{ijk}=-\\beta(g_i,a_{ij},a_{jk})+\\beta(a^g_{ij},g_j,a_{jk})-\\beta(a^g_{ij},a^g_{jk},g_k),\n$$\n\n$$\nB^{g,\\lambda}_{ijk}=\\rho_{g_i}B_{ijk}+\\zeta^g_{ijk}+(\\delta_{a^g}\\lambda)_{ijk},\\qquad (\\delta_{a^g}\\lambda)_{ijk}=\\rho_{a^g_{ij}}\\lambda_{jk}-\\lambda_{ik}+\\lambda_{ij}.\n$$\n\nChanging the chosen representative to $\\beta'=\\beta+\\delta_\\rho c$ for a normalized $2$-cochain $c$ and simultaneously replacing $B$ by $B+a^*c$ changes the cochain presentation but preserves the background equation: on every tetrahedron, flatness gives\n\n$$\n(\\delta_a(a^*c))_{ijkl}=\\rho_{a_{ij}}c(a_{jk},a_{kl})-c(a_{ik},a_{kl})+c(a_{ij},a_{jl})-c(a_{ij},a_{jk})=(\\delta_\\rho c)(a_{ij},a_{jk},a_{kl}).\n$$\n\nThis finite mathematical model makes no assertion that a physical theory realizes the symmetry or has an anomaly.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "1.2",
+            "2.3",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "transformed-edge-flatness",
+          "step": "1.1",
+          "claim": "Use the vertex conjugation formula and flatness of a to verify a^g_ij a^g_jk=a^g_ik.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "twisted-differential-square",
+          "step": "2.1",
+          "claim": "Expand the local coefficient differential twice on an edge cochain; flatness and the action law cancel every term, so the shifted two-cochain satisfies no extra tetrahedron obstruction.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "postnikov-descendant-identity",
+          "step": "2.2",
+          "claim": "Expand delta_a^g zeta and express the discrepancy as the signed sum of four normalized group 3-cocycle identities.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "background-equation-preservation",
+          "step": "3.1",
+          "claim": "Use the transported-coefficient identity, the source background equation, the zeta identity, and delta squared zero to obtain delta_a^g B^g,lambda=(a^g)^*beta.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "edge-composition-law",
+          "step": "1.2",
+          "claim": "Compose the five associator and edge-morphism labels to obtain the stated nu_ij formula.",
+          "inputs": [
+            "given",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "triangle-composition-coherence",
+          "step": "2.3",
+          "claim": "Apply the associator pentagon to show the sequential and composite formulas agree on each triangle, not only on edges.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weak-associativity-and-gauge-two-groupoid",
+          "step": "4.1",
+          "claim": "For a fixed source background, choose h_i=g_i^{-1} and the reverse edge cochain that cancels the other terms in nu; the composite is the identity transformation, so every gauge arrow has a reverse.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement is vacuous on the empty complex because it has no edges or tetrahedra; preservation and composition claims have no simplex instances."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If A is trivial then every cochain label is zero; steps 2.1–3.1 reduce to the unique background equation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For identity vertex labels and zero edge labels, the transformation fixes a and B by the displayed formulas in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When any beta input is the group identity, normalization removes that associator term; step 2.2 retains the same identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite simplicial theorem has no analytic endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every gauge parameter is a specified finite cochain; steps 1.2–4.1 use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves preservation and coherent composition, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves preservation and coherent composition, not an iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "twisted-action tetrahedron closure and composition",
+          "result": "20,000 randomized cases passed",
+          "evidence": "For G=Z2 and A=Z2×Z2 with the swap action and beta(g,h,k)=ghk·(1,1), random flat edge labels were generated from vertex potentials, B was solved to satisfy the source equation, and random vertex/edge gauges were applied. Each case checked the transformed tetrahedron equation and equality of sequential with composed transformations."
+        },
+        {
+          "name": "odd-coefficient sign-sensitive tetrahedron closure and composition",
+          "result": "20,000 randomized cases passed",
+          "evidence": "For G=Z2, A=Z4 with trivial action, and beta(g,h,k)=2ghk, random flat edge labels and compatible B cochains were paired with random vertex/edge gauges. Each case checked the transformed equation and sequential/composite agreement, retaining nonzero signs in A."
+        },
+        {
+          "name": "odd-order Postnikov cocycle gauge composition",
+          "result": "20,000 randomized cases passed",
+          "evidence": "For G=A=Z3 with trivial action and beta(g,h,k)=g floor((h+k)/3), the cocycle identity was first checked on all 81 four-tuples. Random flat tetrahedron edges were generated from vertex potentials, B was solved to satisfy the source equation, and random vertex/edge gauges checked both transformed-equation preservation and equality of sequential and composed transformations."
+        }
+      ],
+      "finite_checks_disposition": "These bounded formula checks cover two finite convention slices only. They do not prove the general theorem; the local proof supplies that argument."
+    },
+    "ex-aqft-two-group-twisted-local-coefficient-background": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-two-group-background",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite group with identity $e$, let $A$ be a finite abelian group written additively, and let $\\rho:G\\to\\operatorname{Aut}(A)$ be a left action, so $\\rho_{gh}=\\rho_g\\rho_h$ and $\\rho_e=\\operatorname{id}_A$. A group $2$-cochain is a function $c:G^2\\to A$; it is normalized when it vanishes if either input is $e$. Its coboundary is\n\n$$\n(\\delta_\\rho c)(g,h,k)=\\rho_g c(h,k)-c(gh,k)+c(g,hk)-c(g,h).\n$$\n\nA normalized group $3$-cocycle is a function $\\beta:G^3\\to A$ that vanishes whenever any argument is $e$ and satisfies\n\n$$\n\\rho_g\\beta(h,k,l)-\\beta(gh,k,l)+\\beta(g,hk,l)-\\beta(g,h,kl)+\\beta(g,h,k)=0\n$$\n\nfor all $g,h,k,l\\in G$. Two normalized $3$-cocycles represent the same class when their difference is $\\delta_\\rho c$ for a normalized $2$-cochain $c$; this is an equivalence relation by additivity of $\\delta_\\rho$. The class $[\\beta]$ is the Postnikov class in this skeletal model.\n\nThe corresponding skeletal categorical $2$-group has objects $g\\in G$ and, for each $g$, one automorphism labelled by each $u\\in A$; there are no morphisms between distinct objects. Composition of automorphisms adds their labels, tensor product is\n\n$$\n(g,u)\\otimes(h,v)=(gh,u+\\rho_gv),\n$$\n\nand the associator from $(gh)k$ to $g(hk)$ has label $\\beta(g,h,k)$. The two pentagon path labels are $\\beta(gh,k,l)+\\beta(g,h,kl)$ and $\\rho_g\\beta(h,k,l)+\\beta(g,hk,l)+\\beta(g,h,k)$; equality of these labels is exactly the displayed $3$-cocycle equation.\n\nA finite ordered simplicial complex $K$ is a finite vertex set with a total order and a collection of nonempty finite vertex subsets, called simplices, closed under taking nonempty subsets. Write each simplex in increasing order. A $q$-cochain with values in a local coefficient system assigns an element to each ordered $q$-simplex at its first vertex. A flat $G$-valued edge cochain is a family $a_{ij}\\in G$ for each edge $i<j$ such that $a_{ij}a_{jk}=a_{ik}$ on every triangle. It defines the local coefficient system with fiber $A$ at each vertex and transport $\\rho_{a_{ij}}$ from vertex $j$ to vertex $i$.\n\nFor each integer $q\\geq0$ and local-coefficient $q$-cochain $c$, define the twisted coboundary on each ordered $(q+1)$-simplex by\n\n$$\n(\\delta_a c)_{i_0\\ldots i_{q+1}}=\\rho_{a_{i_0i_1}}c_{i_1\\ldots i_{q+1}}+\\sum_{r=1}^{q+1}(-1)^r c_{i_0\\ldots\\widehat{i_r}\\ldots i_{q+1}}.\n$$\n\nIn particular, for an $A$-valued $2$-cochain $B$,\n\n$$\n(\\delta_aB)_{ijkl}=\\rho_{a_{ij}}B_{jkl}-B_{ikl}+B_{ijl}-B_{ijk},\\qquad (a^*\\beta)_{ijkl}=\\beta(a_{ij},a_{jk},a_{kl}).\n$$\n\nA finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.\n\nA $1$-gauge transformation consists of vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$ at vertex $i$. Define\n\n$$\na^g_{ij}=g_i a_{ij}g_j^{-1},\n$$\n\n$$\n\\zeta^g_{ijk}=-\\beta(g_i,a_{ij},a_{jk})+\\beta(a^g_{ij},g_j,a_{jk})-\\beta(a^g_{ij},a^g_{jk},g_k),\n$$\n\n$$\nB^{g,\\lambda}_{ijk}=\\rho_{g_i}B_{ijk}+\\zeta^g_{ijk}+(\\delta_{a^g}\\lambda)_{ijk},\\qquad (\\delta_{a^g}\\lambda)_{ijk}=\\rho_{a^g_{ij}}\\lambda_{jk}-\\lambda_{ik}+\\lambda_{ij}.\n$$\n\nChanging the chosen representative to $\\beta'=\\beta+\\delta_\\rho c$ for a normalized $2$-cochain $c$ and simultaneously replacing $B$ by $B+a^*c$ changes the cochain presentation but preserves the background equation: on every tetrahedron, flatness gives\n\n$$\n(\\delta_a(a^*c))_{ijkl}=\\rho_{a_{ij}}c(a_{jk},a_{kl})-c(a_{ik},a_{kl})+c(a_{ij},a_{jl})-c(a_{ij},a_{jk})=(\\delta_\\rho c)(a_{ij},a_{jk},a_{kl}).\n$$\n\nThis finite mathematical model makes no assertion that a physical theory realizes the symmetry or has an anomaly.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "split-background-flatness",
+          "step": "1.1",
+          "claim": "Compute the six edges from the vertex potential, verify each triangle is flat, and check the zero cochain against beta=0.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-form-face-shift",
+          "step": "1.2",
+          "claim": "Compute delta_a lambda on all four faces; the two faces incident to edge 01 receive label 1 and the other two receive 0.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "shifted-background-check",
+          "step": "2.1",
+          "claim": "Substitute the four shifted face values into the twisted tetrahedron equation and obtain zero on both sides.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty tetrahedron Delta^3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial B is zero and beta is zero; step 1.1 verifies the resulting equation directly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes G=Z2 and A=Z3, neither of which is the one-element group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The edge list includes identity edges and beta is the zero cocycle; step 1.1 checks all triangles."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite example has no analytic endpoint or limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All groups, vertex labels, face labels, and the gauge parameter are explicitly listed in the Example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example verifies one explicit background and its gauge transform; it is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example verifies one explicit background and its gauge transform; it is not an iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "explicit twisted-coefficient tetrahedron",
+          "result": "delta_a B=0 and delta_a(B+delta_a lambda)=0",
+          "evidence": "The example lists a_01=a_12=a_23=a_03=1, a_02=a_13=0, B=0, and the shifted face tuple (B_012,B_013,B_023,B_123)=(1,1,0,0); direct substitution gives the two tetrahedron checks."
+        }
+      ],
+      "finite_checks_disposition": "This is a direct finite example calculation, not a physical claim or a general theorem."
+    },
+    "ex-aqft-two-group-postnikov-background": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-two-group-background",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite group with identity $e$, let $A$ be a finite abelian group written additively, and let $\\rho:G\\to\\operatorname{Aut}(A)$ be a left action, so $\\rho_{gh}=\\rho_g\\rho_h$ and $\\rho_e=\\operatorname{id}_A$. A group $2$-cochain is a function $c:G^2\\to A$; it is normalized when it vanishes if either input is $e$. Its coboundary is\n\n$$\n(\\delta_\\rho c)(g,h,k)=\\rho_g c(h,k)-c(gh,k)+c(g,hk)-c(g,h).\n$$\n\nA normalized group $3$-cocycle is a function $\\beta:G^3\\to A$ that vanishes whenever any argument is $e$ and satisfies\n\n$$\n\\rho_g\\beta(h,k,l)-\\beta(gh,k,l)+\\beta(g,hk,l)-\\beta(g,h,kl)+\\beta(g,h,k)=0\n$$\n\nfor all $g,h,k,l\\in G$. Two normalized $3$-cocycles represent the same class when their difference is $\\delta_\\rho c$ for a normalized $2$-cochain $c$; this is an equivalence relation by additivity of $\\delta_\\rho$. The class $[\\beta]$ is the Postnikov class in this skeletal model.\n\nThe corresponding skeletal categorical $2$-group has objects $g\\in G$ and, for each $g$, one automorphism labelled by each $u\\in A$; there are no morphisms between distinct objects. Composition of automorphisms adds their labels, tensor product is\n\n$$\n(g,u)\\otimes(h,v)=(gh,u+\\rho_gv),\n$$\n\nand the associator from $(gh)k$ to $g(hk)$ has label $\\beta(g,h,k)$. The two pentagon path labels are $\\beta(gh,k,l)+\\beta(g,h,kl)$ and $\\rho_g\\beta(h,k,l)+\\beta(g,hk,l)+\\beta(g,h,k)$; equality of these labels is exactly the displayed $3$-cocycle equation.\n\nA finite ordered simplicial complex $K$ is a finite vertex set with a total order and a collection of nonempty finite vertex subsets, called simplices, closed under taking nonempty subsets. Write each simplex in increasing order. A $q$-cochain with values in a local coefficient system assigns an element to each ordered $q$-simplex at its first vertex. A flat $G$-valued edge cochain is a family $a_{ij}\\in G$ for each edge $i<j$ such that $a_{ij}a_{jk}=a_{ik}$ on every triangle. It defines the local coefficient system with fiber $A$ at each vertex and transport $\\rho_{a_{ij}}$ from vertex $j$ to vertex $i$.\n\nFor each integer $q\\geq0$ and local-coefficient $q$-cochain $c$, define the twisted coboundary on each ordered $(q+1)$-simplex by\n\n$$\n(\\delta_a c)_{i_0\\ldots i_{q+1}}=\\rho_{a_{i_0i_1}}c_{i_1\\ldots i_{q+1}}+\\sum_{r=1}^{q+1}(-1)^r c_{i_0\\ldots\\widehat{i_r}\\ldots i_{q+1}}.\n$$\n\nIn particular, for an $A$-valued $2$-cochain $B$,\n\n$$\n(\\delta_aB)_{ijkl}=\\rho_{a_{ij}}B_{jkl}-B_{ikl}+B_{ijl}-B_{ijk},\\qquad (a^*\\beta)_{ijkl}=\\beta(a_{ij},a_{jk},a_{kl}).\n$$\n\nA finite $2$-group background on $K$ is a flat edge cochain $a$ and an $A$-valued $2$-cochain $B$ satisfying $\\delta_aB=a^*\\beta$ on every ordered tetrahedron. This fixes the cochain representative, local coefficient action, and sign convention.\n\nA $1$-gauge transformation consists of vertex labels $g_i\\in G$ and edge labels $\\lambda_{ij}\\in A$ at vertex $i$. Define\n\n$$\na^g_{ij}=g_i a_{ij}g_j^{-1},\n$$\n\n$$\n\\zeta^g_{ijk}=-\\beta(g_i,a_{ij},a_{jk})+\\beta(a^g_{ij},g_j,a_{jk})-\\beta(a^g_{ij},a^g_{jk},g_k),\n$$\n\n$$\nB^{g,\\lambda}_{ijk}=\\rho_{g_i}B_{ijk}+\\zeta^g_{ijk}+(\\delta_{a^g}\\lambda)_{ijk},\\qquad (\\delta_{a^g}\\lambda)_{ijk}=\\rho_{a^g_{ij}}\\lambda_{jk}-\\lambda_{ik}+\\lambda_{ij}.\n$$\n\nChanging the chosen representative to $\\beta'=\\beta+\\delta_\\rho c$ for a normalized $2$-cochain $c$ and simultaneously replacing $B$ by $B+a^*c$ changes the cochain presentation but preserves the background equation: on every tetrahedron, flatness gives\n\n$$\n(\\delta_a(a^*c))_{ijkl}=\\rho_{a_{ij}}c(a_{jk},a_{kl})-c(a_{ik},a_{kl})+c(a_{ij},a_{jl})-c(a_{ij},a_{jk})=(\\delta_\\rho c)(a_{ij},a_{jk},a_{kl}).\n$$\n\nThis finite mathematical model makes no assertion that a physical theory realizes the symmetry or has an anomaly.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "normalized-cocycle-check",
+          "step": "1.1",
+          "claim": "Expand the inhomogeneous coboundary of beta(g,h,k)=ghk over Z2 and cancel equal monomials.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonzero-postnikov-class-check",
+          "step": "1.2",
+          "claim": "Assume beta=delta c and use the coboundary equations at (0,1,1), (1,0,1), and (1,1,1) to derive a contradiction.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nontrivial-background-check",
+          "step": "2.1",
+          "claim": "Compute the edge labels from the vertex potential and verify flatness and the original tetrahedron equation.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-form-gauge-transform",
+          "step": "2.2",
+          "claim": "Substitute the vertex gauge labels into the explicit formula to compute a prime and the four zeta face values.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "transformed-background-check",
+          "step": "2.3",
+          "claim": "Verify the transformed zero face cochain has twisted coboundary zero and beta(a prime)=0.",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty tetrahedron Delta^3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The transformed face cochain is zero and step 2.3 verifies its tetrahedron equation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes G=A=Z2, both nontrivial groups."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cocycle vanishes when an argument is zero; step 1.1 verifies normalization and the edge list includes zero labels."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite example has no analytic endpoint or limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example explicitly lists all group elements, vertex potentials, face labels, and gauge labels; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example gives one cocycle, one background, and one gauge transform; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example gives one cocycle, one background, and one gauge transform; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "nonzero C2 Postnikov cocycle and gauge transform",
+          "result": "delta beta=0, beta is not a coboundary, and both listed tetrahedron equations hold",
+          "evidence": "The five-term polynomial expansion cancels over Z2; any coboundary would force c(0,0)=c(0,1)=c(1,0) and then delta c(1,1,1)=0 despite beta(1,1,1)=1. The listed background has delta_a B=1, and after g=(1,0,0,0) it has a prime first edge 0, B prime=0, and beta(a prime)=0."
+        }
+      ],
+      "finite_checks_disposition": "This is a direct calculation on one tetrahedron and does not classify all finite 2-group backgrounds."
+    }
+  }
+}

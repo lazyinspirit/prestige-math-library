@@ -1,0 +1,88 @@
+{
+  "id": "lem-alexander-one-knot-has-trivial-alexander-basis",
+  "agent": "/root/rendering_repair_coordinator/knot_030",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 visibly prints omega(a_i,b_j)=delta_ij, T_v(z)=z+omega(z,v)v, subscripts, inverse exponents and matrix-unit identity as raw prose. Tile 01 was also independently viewed; the queue points at tile 01 but the flagged steps are on tile 02. The existing pairing, indices, inverse exponents and signs are unambiguous.",
+      "action": "Added inline math delimiters and faithful LaTeX notation in steps 1.3 and 1.5; retained all prose and formulas.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "The same standalone original tile 02 shows the block matrix [[0,I+U],[U^T,W]], orthogonal-transvection composition in 1.4, Euclidean-reduction coordinates in 1.6 and symplectic induction coordinates/transvection in 2.1 as unformatted mathematical prose. The algebraic suppliers confirm the existing tube/block conventions; no mathematical correction is inferred.",
+      "action": "Typeset these existing expressions and their variables in steps 1.2, 1.4, 1.6 and 2.1, preserving the exact block entries, transvection order, signs, indices and argument.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Rendering-only inline math markup throughout proof steps 1.2\u20132.1; raw 2-by-2 block notation is now a pmatrix. No TikZ changes.",
+  "source_lines_after": {
+    "80": "1.2 Reversing these reductions also produces the claimed trivial Alexander block. Keep all short vectors first and all long vectors second. A reverse tube addition introduces a new short $x$ with zero column and only the entry 1 in its own long column, and a new long $y$ with zero diagonal. Its couplings to earlier short vectors occupy precisely the new LAST column of $U$, so $U$ stays strictly upper triangular. Its couplings to earlier long vectors give a symmetric new row/column of $W$, with zero new diagonal. Starting from the empty matrix therefore gives $\\begin{pmatrix}0&I+U\\\\U^T&W\\end{pmatrix}$ with exactly the advertised conditions. This is an integral symplectic basis of the original lattice; the finite construction below realizes it geometrically rather than assuming that arbitrary integral basis changes are surface homeomorphisms. [F3, F4, algebra]",
+    "82": "1.3 Fix a standard geometric basis $a_i,b_i$ on the actual compact oriented genus-$g$ surface with one boundary circle. Its existence follows by cutting a finite disk-and-handle model of the surface, not from an arbitrary homology basis. Put $\\omega(a_i,b_j)=\\delta_{ij}$. An annular Dehn twist about an embedded curve $v$ acts by the transvection $T_v(z)=z+\\omega(z,v)v$, choosing the twist sign accordingly. This formula is proved by cutting each transverse arc at the annulus: the twisted arc acquires one oriented copy of its core. Curves representing $a_i+a_j$, $b_i+b_j$ and $a_i+b_j$ for $i\\ne j$ are embedded band sums on distinct handles. The joining arc lies in the complement of the other standard handles; the band gives the indicated homology class. Thus these transvections and their inverses are actual boundary-fixed surface homeomorphisms (smooth diffeomorphisms in the smooth model). [F5, construct]",
+    "84": "1.4 For orthogonal $u,v$, direct expansion gives $T_{u+v}T_u^{-1}T_v^{-1}(z)=z+\\omega(z,u)v+\\omega(z,v)u$. [F5, construct]",
+    "86": "1.5 Taking $u=a_i,v=b_j$, $i\\ne j$, realizes the elementary block-GL operation $a_j$ to $a_j+a_i$ and $b_i$ to $b_i-b_j$. Its powers realize arbitrary integral elementary additions. Handle permutations and simultaneous sign reversal of $a_i,b_i$ are also realized; the latter is the square of the two-twist rotation on that handle. Euclidean elimination consequently realizes every block action $(x,y)$ to $(A x,A^{-T}y)$ for $A\\in\\operatorname{GL}_g(\\mathbb Z)$. Likewise the $a_i$ and $a_i+a_j$ twists realize every symmetric upper shear, because the diagonal rank-one matrices and the identity $(e_i+e_j)(e_i+e_j)^T-E_{ii}-E_{jj}=E_{ij}+E_{ji}$ generate all symmetric integral matrices; the $b_i$ analogues realize every symmetric lower shear. [F5, construct]",
+    "88": "1.6 Here is a complete generation argument, so this is not an appeal to mapping-class surjectivity. Given a primitive vector $v=(x,y)$, first interchange the $a$ and $b$ directions on a handle if necessary to make $x$ nonzero. A block-GL operation makes $x=(d,0,\\ldots,0)$, $d>0$. If some $y_j$ is not divisible by $d$, reduce $d$ strictly: for $j=1$ use the ordinary Euclidean two-twist $\\operatorname{SL}_2$ algorithm on $(d,y_1)$; for $j\\ne1$ an upper diagonal shear inserts $y_j$ in $x_j$, then block-GL Euclidean reduction replaces $d$ by $\\gcd(d,y_j)$. Repeat. The positive integer $d$ decreases until every $y_j$ is divisible by $d$; primitivity then forces $d=1$. A lower symmetric shear with first column $-y$ clears $y$ while keeping $x=e_1$. Thus an actual finite product of the specified twists takes every primitive vector to $a_1$. [F5, construct]",
+    "90": "2.1 Let $A$ be an arbitrary symplectic integral matrix. Apply this procedure to its first column, so the resulting matrix fixes $a_1$. Its image of $b_1$ has the form $b_1+c a_1+z$, with $z$ in the span $W$ of the remaining handles. The displayed orthogonal-transvection combination for $u=a_1$ and each basis vector $v$ of $W$ fixes $a_1$. Its $k$-th power subtracts $k v$ from that image of $b_1$ and only changes its $a_1$ coefficient in addition. Use these powers to clear all coordinates of $z$. Then a power of $T_{a_1}$ clears $c$. The resulting matrix fixes both $a_1,b_1$, and hence restricts symplectically to $W$. Induct on $g$. We have reduced $A$ to the identity by actual twists; reversing the finite list realizes $A$. In particular the symplectic lattice basis from the preceding primitive-vector/tube reduction is represented by an ACTUAL geometric basis, with disjoint short curves, disjoint long curves and exactly one transverse short\u2013long intersection on each matching pair. [F5, construct] \u220e"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "fd928856cf1219ae99f6ed50ac0ac80fd3767d1d441647b2f29328ef569a0be8",
+  "after_raw_sha256": "45a7bb37be3691dcbf3910d07c74b92d87b1279b0da6d5264b11be8a73da9e92",
+  "preedit_guard": "Exact current raw SHA256 matched queue before_raw_sha256 immediately before the sole item edit.",
+  "metadata_preserved_byte_for_byte": true,
+  "publication_status_preserved": "published",
+  "local_suppliers_consulted": [
+    "items/def-seifert-form-s-equivalence.md",
+    "items/lem-alexander-one-seifert-form-is-s-equivalent-to-empty.md",
+    "items/lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups.md"
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-alexander-one-knot-has-trivial-alexander-basis.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-alexander-one-knot-has-trivial-alexander-basis.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-alexander-one-knot-has-trivial-alexander-basis.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_review": {
+    "preview_dir": "research/math-library-rendering-repairs-2026-10-23/previews/knot030-final-unique",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/knot030-final-unique/manifest.json",
+    "original_tiles_reviewed_standalone_original_resolution": [
+      "--01.png",
+      "--02.png"
+    ],
+    "fresh_tiles_reviewed_standalone_original_resolution": [
+      "--01.png",
+      "--02.png"
+    ],
+    "result": "All repaired formulas render legibly; both tiles reviewed. No clipping or overlap defect observed.",
+    "limitations": "Local ItemBody preview only; 32 unrelated reference-map parse diagnostics reported by preview utility. No HTTP or production route inspected."
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-shannon-sampling-for-bandlimited-ltwo-functions.md

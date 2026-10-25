@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-gr-constant-rescaling-preserves-levi-civita-and-curvature.md

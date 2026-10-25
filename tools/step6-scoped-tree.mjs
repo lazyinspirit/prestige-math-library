@@ -8,6 +8,7 @@ import { protectedEntryHash, runScope, sha256, splitFrontmatter } from './step6-
 import { frontmatterList } from './frontmatter-list.mjs';
 import { originalImportPath } from './physics-support/physics-imports.mjs';
 import { loadOriginalSlotReclassification } from './step5-original-slot-reclassification.mjs';
+import { step6CurrencyInputPaths } from './physics-support/step6-currency-repair.mjs';
 
 export function scopedReadinessTree(run, root, { scope = runScope(run, root), includeRows = false, physics = false, ownedPaths = [], projectionOnly = false, sourceOverrides = {} } = {}) {
   const readSource = file => Object.hasOwn(sourceOverrides, file) ? sourceOverrides[file] : readFileSync(join(root, file), 'utf8');
@@ -378,6 +379,7 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
     }
     add('physics-autopilot.config.json');
   }
+  if(physics)for(const file of step6CurrencyInputPaths(root,run))add(file);
   if (projectionOnly) return { projection_values: Object.fromEntries(projections) };
   for (const file of projections.keys()) files.delete(file);
   const physical = [...files].sort();

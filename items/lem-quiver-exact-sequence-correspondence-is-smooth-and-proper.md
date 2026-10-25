@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-quiver-exact-sequence-correspondence-is-smooth-and-proper.json
+  precheck: pass
 id: lem-quiver-exact-sequence-correspondence-is-smooth-and-proper
 kind: lemma
 title: "The quiver exact-sequence correspondence is smooth and proper"
@@ -33,8 +36,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 
 sources:
   references:
@@ -109,3 +110,25 @@ For the quotient-stack smoothness used here, pullback along a smooth atlas of th
 2.1 Pull back $q$ along the atlas $Z=\operatorname{Rep}_Q(\mathbf a)\times\operatorname{Rep}_Q(\mathbf b) \to\mathfrak M_{\mathbf a}\times\mathfrak M_{\mathbf b}$. This fixes the endpoint representations. Every middle representation is a block matrix from step 1.1, and every isomorphism inducing the identity on the fixed endpoints is a unique upper-right vertex block. Hence the pullback stack is $[Y/U]\to Z$, where $Y\to Z$ is the rank-$e$ vector bundle of off-diagonal blocks and $U$ is the rank-$u$ vector group of changes of splitting. For any scheme $T\to[Y/U]$, its base change is a $U\cong\mathbb G_a^u$-torsor, represented by an affine scheme using [F8]. Cover $T$ by affine opens. On each affine base, choose an affine fppf cover of the torsor as in [F11]; the unique group element between the two pulled-back torsor points is a vector $\delta\in(B\otimes_A B)^u$ satisfying the additive Amitsur $1$-cocycle equation coordinatewise. Exactness in [F11] gives $b\in B^u$ with $\delta=b\otimes1-1\otimes b$, and translation by $b$ descends a section, trivializing the torsor there. Thus $Y\to[Y/U]$ is Zariski-locally $U\times T\to T$, which is smooth by [F9] and [F10], and it is surjective as a torsor. The same inverse-image-of-$\Delta_Y$ argument as in step 1.1, with $U$ in place of $P_{\mathbf a,\mathbf b}$, gives $[Y/U]$ an affine representable diagonal, so it is an algebraic stack. Its composite $Y\to Z$ is a vector bundle projection of relative dimension $e$. By the atlas convention just stated, $[Y/U]\to Z$ is smooth of relative stack dimension $e-u$. Smoothness and relative dimension are checked after the displayed smooth target atlas, so the same holds for $q$. Substitution of the definition of $\chi_Q$ gives $e-u=-\chi_Q(\mathbf b,\mathbf a)$, including arrows that are loops or occur with multiplicity. [F1, F2, F5, F8, F9, F10, F11, step 1.1, algebra]
 
 3.1 The construction in step 1.2 identifies every scheme base change of $p$ with the incidence scheme, so [F7] proves that $p$ is representable by schemes, hence by algebraic spaces; the same step proves every such base-changed map is proper. If some $a_i=0$ or $a_i=a_i+b_i$, the corresponding Grassmannian is a point and the same closed-incidence argument applies. Step 2.1 proves the smoothness of $q$, so both claims of the Statement follow. AC is used only through [A1]. [A1, F4, F7, step 1.2, step 2.1] ∎
+
+## Remarks
+
+The two maps have the following correspondence shape:
+
+```tikzcd
+\begin{tikzcd}[font=\Large, column sep=large]
+\mathfrak M_{\mathbf a}\times\mathfrak M_{\mathbf b}
+& \mathfrak E_{\mathbf a,\mathbf b}
+  \arrow[l,"{\textstyle q}"']
+  \arrow[r,"{\textstyle p}"]
+& \mathfrak M_{\mathbf a+\mathbf b}
+\end{tikzcd}
+```
+
+For an exact sequence $0\to A\to E\to B\to0$ with dimension vectors
+$\mathbf a,\mathbf a+\mathbf b,\mathbf b$, respectively, $q$ records
+$(A,B)$ in that order, whereas $p$ records $E$. The smooth leg has relative
+stack dimension $-\chi_Q(\mathbf b,\mathbf a)$, as calculated in step 2.1;
+the representable proper leg has the subrepresentation incidence schemes
+constructed in step 1.2 as its scheme base changes. The span asserts no
+commutativity relation, and the proof above is independent of the figure.

@@ -1,0 +1,138 @@
+{
+  "id": "thm-qc-teleportation-bell-expansion",
+  "group": "dqc_013",
+  "agent": "/root/rendering_repair_supervisor2/dqc_013",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The standalone authenticated original tile has no circuit. A left-to-right circuit materially clarifies that CNOT A->B precedes H_A, while C is untouched, and a coherent coefficient table prevents confusing the X^b Z^a encoding states with the reverse correction product. This is a warranted expository addition under the expanded diagram scope; the existing proof is complete.",
+      "action": "Added an encoding-only circuit and four coefficient states in final Remarks; explicitly excluded measurement and corrections from the depicted unitary.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended final Remarks containing a native TikZ three-wire encoding circuit, coherent coefficient table and exact explanation of the factor 1/2 and operator order. Original title, complete mathematical body and every metadata byte are preserved.",
+  "source_lines_after": {
+    "remarks": [
+      80,
+      124
+    ],
+    "tikz": [
+      87,
+      116
+    ],
+    "coefficient_and_order_explanation": [
+      118,
+      124
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects_and_maps": "Ordered register Q_2(A) tensor Q_2(B) tensor Q_2(C); input psi_A tensor Phi+_BC. CNOT_AB tensor I_C and H_A tensor I_BC are endomorphisms of this same ordered register. X_C,Z_C are endomorphisms of Q_2(C).",
+      "justification": "Statement lines 40-48; F1-F6; read current alg-qc-teleportation, def-qc-bell-basis, def-qc-cnot-and-control-target-order, def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-pauli-matrices and def-qc-tensor-map."
+    },
+    {
+      "relation": "Circuit has A top, B middle, C bottom. Filled control on A and circled-plus target on B share the first gate column; H lies later on A alone; C has no gate. Thus its map is (H_A tensor I_BC) CNOT_A->B.",
+      "justification": "F1, F3, F4 and F6; proof steps 2.1 and 3.1. The Bell-resource rectangle is an input, not a gate."
+    },
+    {
+      "relation": "For ab=00,01,10,11, the table row 2c_ab equals psi, X psi, Z psi, XZ psi. All c_ab are vectors in Q_2(C), including for unnormalized or zero psi. No measurement is asserted.",
+      "justification": "Exact signs and order follow from proof steps 3.1-4.1 and Pauli actions F5. Also independently checked all eight coefficient triples on each of input basis vectors (1,0),(0,1) using integer arithmetic after factoring 1/2; linearity extends to arbitrary complex alpha,beta."
+    },
+    {
+      "relation": "For 11, XZ means Z first, then X; the later correction applies X^b then Z^a and has operator Z^a X^b, inverse to X^b Z^a.",
+      "justification": "Read alg-qc-teleportation Definition steps 1 and 4 and Pauli matrices: (Z^a X^b)(X^b Z^a)=I because X^2=Z^2=I. No correction gate is included in this figure."
+    },
+    {
+      "relation": "The complete original numbered algebraic proof is byte-identical and independent of the figure.",
+      "justification": "Byte comparison verifies current carrier starts with the entire frozen before carrier; the only added material is final Remarks."
+    }
+  ],
+  "before_raw_sha256": "ff130f1d906e4ab51c1e8c34a5ceb8ffbed779be075911a83ffd95af4170cbeb",
+  "after_raw_sha256": "41ca2c4cf6dbc7f98c33b1c70146b26675e3edf011e54b7cb7bf863078ac2acf",
+  "guard": "Immediately before the only edit, current raw SHA256 matched queue before_raw_sha256 ff130f1d906e4ab51c1e8c34a5ceb8ffbed779be075911a83ffd95af4170cbeb.",
+  "metadata_preserved": true,
+  "publication_status_preserved": "status: published byte-identical; entire frontmatter byte-identical",
+  "original_evidence": {
+    "declared_path_discrepancy": "The declared diagram-supplement/screenshots path is absent. Located authentic tile only inside the same quantum-computing category; SHA256 matches the queued value exactly.",
+    "actual_path": "research/math-library-rendering-audit-2026-10-23/quantum-computing/screenshots/thm-qc-teleportation-bell-expansion--01.png",
+    "sha256": "a1212266714bab41e24f8e93d02f6052168e4c77aa4c2afb89fe32f8d8604975",
+    "inspection": "Viewed standalone original resolution before adjudication; compared full frozen and current item sources."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-qc-teleportation-bell-expansion.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qc-teleportation-bell-expansion.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-qc-teleportation-bell-expansion.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Exact integer-arithmetic computational basis expansion in Python, both input basis vectors and all four ab labels",
+      "exit_code": 0,
+      "output": "Exact basis-coefficient check: 2 input basis vectors x 4 labels passed; all coefficients equal X^b Z^a / 2."
+    }
+  ],
+  "native_visual_check": {
+    "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dqc013-native node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-qc-teleportation-bell-expansion --out research/math-library-rendering-repairs-2026-10-23/previews/dqc013-native",
+    "exit_code": 0,
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqc013-native/manifest.json",
+    "manifest_sha256": "982d3f389702aba22adf1974f7caac2a42ce1f7f63bc624f97c47c0d5092da29",
+    "source_sha256": "41ca2c4cf6dbc7f98c33b1c70146b26675e3edf011e54b7cb7bf863078ac2acf",
+    "receipt": "research/math-library-rendering-repairs-2026-10-23/previews/dqc013-native/screenshots/thm-qc-teleportation-bell-expansion.json",
+    "inspection": "Both PNG tiles inspected separately via view_image detail original. Second tile shows whole compiled circuit on dark background: distinct filled control and open circled-plus target, connected A/B gate, uninterrupted C wire, H box, three output arrows, and four legible coefficient columns without overlap or clipping. Light labels and strokes remain visible.",
+    "katex_errors": [],
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "screenshots": [
+      {
+        "path": "screenshots/thm-qc-teleportation-bell-expansion--01.png",
+        "y": 0,
+        "width": 1200,
+        "height": 1400,
+        "sha256": "3779dff738b87a0f5ea39f191e5d71c328d8b1fb717c45d24a5b5c5699d18a47",
+        "encoding": "lossless PNG, compressionLevel 9"
+      },
+      {
+        "path": "screenshots/thm-qc-teleportation-bell-expansion--02.png",
+        "y": 1300,
+        "width": 1200,
+        "height": 471,
+        "sha256": "029b1cc1f3865cbc8ac6c42db7b0be80cbcb43e211e5bfd4d7ed04aae28ab31e",
+        "encoding": "lossless PNG, compressionLevel 9"
+      }
+    ]
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local native ItemBody preview only, not the production route or metadata footer; external network blocked. Reference-map construction reports 13 unrelated parse diagnostics; no scoped failure.",
+    "No broad mathematical audit or native workflow gate coverage is claimed."
+  ]
+}

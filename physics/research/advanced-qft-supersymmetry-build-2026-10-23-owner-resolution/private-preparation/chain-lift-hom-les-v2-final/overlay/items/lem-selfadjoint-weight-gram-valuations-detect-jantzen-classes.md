@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-selfadjoint-weight-gram-valuations-detect-jantzen-classes.md

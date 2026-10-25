@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cg-coxeter-elements-are-conjugate-via-source-sink-moves.json
+  precheck: pass
 id: lem-cg-coxeter-elements-are-conjugate-via-source-sink-moves
 kind: lemma
 title: "Coxeter elements of tree type are conjugate by source and sink firings"
@@ -27,8 +30,7 @@ sources:
     - title: "H. Eriksson and K. Eriksson, Conjugacy of Coxeter Elements, Electronic Journal of Combinatorics 16(2) (2009), #R4"
       url: "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v16i2r4/pdf/"
       locator: "Introduction, p. 1 (Coxeter words and Theorem 1.1); §2, Proposition 2.3 and its proof (all orientations of a tree are connected by source/sink firings, by induction on a leaf); §4 (orientations and conjugacy). The complete 7-page article was read."
-verification:
-  audited: "2026-10-08"
+
 ---
 
 ## Statement
@@ -72,3 +74,27 @@ Let $(W,S)$ be a Coxeter system with $S$ finite, $|S|=n$, Coxeter diagram $\Gamm
 2.1 (One firing is conjugation.) If $s$ is a source, choose a realizing ordering that starts with $s$ and write $c=sz$. After firing $s$, the ordering with $s$ moved to the end realizes the new orientation, so its product is $zs=s(sz)s^{-1}$ by $s^2=1$. If $s$ is a sink, choose a realizing ordering ending in $s$, write $c=zs$, and move $s$ to the beginning after firing; the new product is $sz=s(zs)s^{-1}$. This also covers an isolated vertex: it is both source and sink, firing changes no edge, and it commutes with all other generators. Hence each firing conjugates by its simple reflection. [F4, step 1.2, algebra]
 
 3.1 (Componentwise conjugacy.) If $S=\emptyset$, both products are $1$. Otherwise suppose every connected component of $\Gamma$ is a tree; finite type guarantees this by [F2]. Restrict the orderings defining $c,c'$ to each component. By step 1.1 a finite firing sequence connects the resulting orientations, and by step 2.1 each firing conjugates the corresponding component product by a simple reflection. Thus each component pair is conjugate by some $w_i\in W_{S_i}$. The component decomposition in [F6] combines these into $w=(w_i)\in W$ with $c'=wcw^{-1}$. If $\Gamma$ is connected, this conjugator is a product of simple reflections, as each firing uses one. This proves (3). [F2, F3, F6, step 1.1, step 2.1, construct, algebra] ∎
+
+## Remarks
+
+For the three-vertex path with unlabelled edges, the ordering $(s_1,s_2,s_3)$ gives the orientation on the left. Firing the source $s_1$ reverses only the edge $\{s_1,s_2\}$; the ordering $(s_2,s_3,s_1)$ realizes the orientation on the right. The vertices stay fixed: no edge joins $s_1$ to $s_3$.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (a1) at (0,0) {$s_1$};
+\node (a2) at (1.4,0) {$s_2$};
+\node (a3) at (2.8,0) {$s_3$};
+\draw[->] (a1) -- (a2);
+\draw[->] (a2) -- (a3);
+\node at (1.4,-0.8) {$c=s_1s_2s_3$};
+\draw[->] (3.5,0) -- (5.2,0) node[midway,above] {fire $s_1$};
+\node (b1) at (5.9,0) {$s_1$};
+\node (b2) at (7.3,0) {$s_2$};
+\node (b3) at (8.7,0) {$s_3$};
+\draw[->] (b2) -- (b1);
+\draw[->] (b2) -- (b3);
+\node at (7.3,-0.8) {$c'=s_2s_3s_1=s_1cs_1$};
+\end{tikzpicture}
+```
+
+The product equality follows from $s_1^2=1$, exactly as in step 2.1. This illustration is independent of the proof above.

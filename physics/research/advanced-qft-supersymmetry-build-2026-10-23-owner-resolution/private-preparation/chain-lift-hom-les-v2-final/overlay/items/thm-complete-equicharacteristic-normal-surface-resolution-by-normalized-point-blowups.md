@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-complete-equicharacteristic-normal-surface-resolution-by-normalized-point-blowups.md

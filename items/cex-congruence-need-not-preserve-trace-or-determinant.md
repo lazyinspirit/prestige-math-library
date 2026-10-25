@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-congruence-need-not-preserve-trace-or-determinant.json
+  precheck: pass
 id: cex-congruence-need-not-preserve-trace-or-determinant
 kind: counterexample
 title: 'Congruence need not preserve trace or determinant: the real $1\times1$ matrices $[1]$ and $[4]$ are congruent'
@@ -12,9 +15,6 @@ generation:
 deps: [thm-change-of-basis-for-a-bilinear-form-is-congruence, cor-rank-and-nondegeneracy-are-congruence-invariants, def-trace-of-a-square-matrix, def-determinant-of-a-square-matrix]
 aliases: []
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-13
 sources:
   scraped: []
   references: []
@@ -37,7 +37,7 @@ pipeline_run: null
 
 ## Counterexample
 
-**Proof technique:** direct $1\times1$ computation.
+**Proof technique:** direct 1×1 computation.
 
 1.1 Since $P^{\mathsf T}AP=[2][1][2]=[4]=C$ and $P$ is invertible, [L1] makes $A$ and $C$ congruent. [L1, algebra]
 

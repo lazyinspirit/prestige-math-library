@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism.md

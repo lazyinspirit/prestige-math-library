@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-a-non-locally-finite-poset.json
+  precheck: pass
 id: cex-a-non-locally-finite-poset
 kind: counterexample
 title: "A poset with a bottom, a top and countably many incomparable middle elements has an infinite interval, so convolution of constant-one functions is not defined"
@@ -12,14 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-04
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -58,8 +53,10 @@ Convolution of incidence functions is defined on every poset, even without local
 
 ## Remarks
 
-```tikz \begin{tikzpicture}[ every node/.style={font=\scriptsize}, elt/.style={draw,circle,minimum size=8mm,inner sep=1pt,fill=white} ] \node[elt] (bot) at (0,0) {$\bot$}; \node[elt] (m0) at (-3,1.6) {$(0,m)$}; \node[elt] (m1) at (-1.35,1.6) {$(1,m)$}; \node[elt] (m2) at (.3,1.6) {$(2,m)$}; \node[font=\normalsize] (dots) at (1.65,1.6) {$\cdots$}; \node[elt] (mn) at (3,1.6) {$(n,m)$}; \node[font=\normalsize] at (4.35,1.6) {$\cdots$}; \node[elt] (top) at (0,3.2) {$\top$};
+```tikz
+\begin{tikzpicture}[ every node/.style={font=\Large}, elt/.style={draw,circle,minimum size=8mm,inner sep=1pt,fill=white} ] \node[elt] (bot) at (0,0) {$\bot$}; \node[elt] (m0) at (-3,1.6) {$(0,m)$}; \node[elt] (m1) at (-1.35,1.6) {$(1,m)$}; \node[elt] (m2) at (.3,1.6) {$(2,m)$}; \node[font=\Large] (dots) at (1.65,1.6) {$\cdots$}; \node[elt] (mn) at (3,1.6) {$(n,m)$}; \node[font=\Large] at (4.35,1.6) {$\cdots$}; \node[elt] (top) at (0,3.2) {$\top$};
 
 \draw[gray!65] (bot)--(m0) (bot)--(m1) (bot)--(m2) (bot)--(mn) (m0)--(top) (m1)--(top) (m2)--(top) (mn)--(top); \draw[gray!55,densely dotted] (bot)--(dots)--(top);
 
-\node[anchor=west] at (5.15,2.05) {countably many incomparable}; \node[anchor=west] at (5.15,1.55) {middle elements}; \node[anchor=west] at (5.15,.75) {$[\bot,\top]=P$ is infinite}; \end{tikzpicture} ```
+\node[anchor=west] at (5.15,2.05) {countably many incomparable}; \node[anchor=west] at (5.15,1.55) {middle elements}; \node[anchor=west] at (5.15,.75) {$[\bot,\top]=P$ is infinite}; \end{tikzpicture}
+```

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-pseudo-arclength-continuation-with-certified-local-corrector.json
+  precheck: n/a
 id: alg-pseudo-arclength-continuation-with-certified-local-corrector
 kind: algorithm
 title: "Finite-budget pseudo-arclength continuation with a certified local corrector"
@@ -23,8 +26,6 @@ aliases: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Eugene L. Allgower and Kurt Georg, Numerical Continuation Methods: An Introduction, Springer Series in Computational Mathematics 13 (1990)"
@@ -114,3 +115,39 @@ root certificate, not silently set to zero. The exact Newton branch preserves
 the supplier's `root` convention: residual tolerance was met, not necessarily
 an exact zero. No finite trace certifies that a connected component is
 exhausted or that another component is absent.
+
+The following planar schematic shows the special case of an exact center
+$\bar z_k=z_k^*$ and an exact candidate $\widehat t_k=t_k$; the general
+procedure retains its stated center and tangent error bounds. The predictor
+lies on the tangent line, while the selected branch point lies on the section
+$H_k=\{z:\tau_k^T(z-z_p)=0\}$. The previous orientation $\tau_k$ is the
+section normal, even when it differs from $t_k$. The dashed segment only
+marks the displacement from predictor to section root, not Newton iterates
+or a convergence guarantee.
+
+```tikz
+\begin{tikzpicture}[scale=1.8]
+\draw[thick] (-1,-0.375) .. controls (-0.666667,-0.291667) and (-0.333333,-0.166667) .. (0,0);
+\draw[thick] (0,0) .. controls (1,0.5) and (2,1.375) .. (3,2.625);
+\node[above right] at (3,2.625) {$F(z)=0$};
+\draw (2,-0.65) -- (2,2.8);
+\node[above] at (2,2.8) {$H_k$};
+\draw[->,thick] (0,0) -- (2,1);
+\node[below right] at (0.65,0.325) {$h\widehat t_k$};
+\draw[dashed,->] (2,1) -- (2,1.5);
+\fill (0,0) circle (1.5pt);
+\node[below] at (0,-0.5) {$z_k^*=\bar z_k$};
+\fill (2,1) circle (1.5pt);
+\node[right] at (2.08,0.95) {$z_p$};
+\fill (2,1.5) circle (1.5pt);
+\node[right] at (2.08,1.5) {$c_k(s_*)$};
+\draw[->,thick] (-0.35,-1.25) -- (0.65,-1.25);
+\node[below] at (0.15,-1.25) {$\tau_k$};
+\end{tikzpicture}
+```
+
+The positive chart-angle bound makes $u\mapsto\tau_k^T(c_k(u)-z_p)$
+strictly increasing. Together with the offset bounds in step 3, this selects
+the unique forward section intersection depicted above. This illustration
+adds no certificate; the procedure and its supporting proofs remain
+independent of the figure.

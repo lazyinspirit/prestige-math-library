@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-positive-c-zero-functionals-have-finite-regular-representing-measures.json
+  precheck: pass
 id: lem-positive-c-zero-functionals-have-finite-regular-representing-measures
 kind: lemma
-title: "Positive C_0(X) functionals have finite regular representing measures"
+title: "Positive $C_0(X)$ functionals have finite regular representing measures"
 status: published
 origin: pipeline
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-dependent-choice, def-compact-support-c-c-and-c-zero-on-an-lch-space, def-regular-borel-measure-on-an-lch-space, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, thm-rmk-positive-functional-is-integration-against-its-representing-measure, thm-rmk-uniqueness-among-radon-measures]
 proof_strategy: direct
-verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (lem-positive-c-zero-functionals-have-finite-regular-representing-measures). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   references:
     - title: "Donald L. Cohn, Measure Theory, 2nd ed., Chapter 7"
@@ -32,7 +28,7 @@ $L(f)=\int f\,d\mu$ for all $f\in C_0(X)$, and $\mu(X)=\|L\|$.
 
 **Given:** Dependent Choice and $L$ bounded and positive on $C_0(X)$.
 
-[L1] Positive functionals on $C_c(X)$ have unique Radon representing measures. ([[thm-rmk-positive-functional-is-integration-against-its-representing-measure]], [[thm-rmk-uniqueness-among-radon-measures]])
+[L1] Positive functionals on $C_c(X)$ have unique Radon representing measures. ([[thm-rmk-positive-functional-is-integration-against-its-representing-measure|Positive functionals on $C_c(X)$ are integration against a Radon measure]], [[thm-rmk-uniqueness-among-radon-measures]])
 
 [L2] Under Dependent Choice, compact sets inside open sets have continuous compactly supported cutoffs. ([[lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]])
 

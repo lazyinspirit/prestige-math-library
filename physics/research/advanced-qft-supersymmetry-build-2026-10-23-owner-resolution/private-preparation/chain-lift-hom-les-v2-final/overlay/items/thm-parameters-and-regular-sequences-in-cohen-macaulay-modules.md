@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-parameters-and-regular-sequences-in-cohen-macaulay-modules.md

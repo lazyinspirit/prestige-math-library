@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-simple-markovian-mediation-scm.json
+  precheck: n/a
 id: def-simple-markovian-mediation-scm
 kind: definition
 title: "A simple Markovian mediation model"
@@ -19,12 +22,6 @@ proof_strategy: definition
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
 sources:
   references:
     - title: "Judea Pearl, Causal inference in statistics: An overview, §3.1 and §5.1 (Statistics Surveys 3, 2009)"
@@ -59,3 +56,28 @@ In particular, recursion gives $Y^a=Y(a,M(a))$. The model's absence of an
 additional post-treatment common cause is part of the hypothesis; if such a
 variable is present, this definition does not cover that causal system.
 
+
+## Remarks
+
+The diagram records the endogenous parent arguments in the displayed structural
+equations: the direct path from $A$ to $Y$ and the mediated path through $M$
+are both allowed, with $L$ entering each later equation. Arrows specify permitted
+arguments, not necessarily nonzero effects. The separate exogenous inputs
+$U_L,U_A,U_M,U_Y$ are omitted from the picture and remain mutually independent
+as required in the definition. The equations and intervention definitions above
+are independent of this illustration.
+
+```tikz
+\begin{tikzpicture}
+\node (L) at (3,2) {$L$};
+\node (A) at (0,0) {$A$};
+\node (M) at (3,0) {$M$};
+\node (Y) at (6,0) {$Y$};
+\draw[->] (L) -- (A);
+\draw[->] (L) -- (M);
+\draw[->] (L) -- (Y);
+\draw[->] (A) -- (M);
+\draw[->] (M) -- (Y);
+\draw[->] (A) to[bend right=35] (Y);
+\end{tikzpicture}
+```

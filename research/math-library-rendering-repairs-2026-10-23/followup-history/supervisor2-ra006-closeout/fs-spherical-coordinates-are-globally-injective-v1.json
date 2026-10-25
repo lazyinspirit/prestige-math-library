@@ -1,0 +1,141 @@
+{
+  "id": "fs-spherical-coordinates-are-globally-injective",
+  "agent": "/root/rendering_repair_supervisor2/ra_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Independently viewed both original PNG tiles separately at original resolution. Existing formulas render correctly, but no illustration distinguishes the seam two-point fiber from one-dimensional pole fibers and the two-dimensional zero-radius angular fiber. Those concrete different identifications are the geometric content of the counterexample; a fiber sketch materially clarifies them. A four-row subset-to-image illustration is more precise than depicting the unbounded parameter domain as a finite box.",
+      "action": "Added four native TikZ fiber sketches and explanatory prose in Remarks only.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended a TikZ illustration of the seam collision, north/south polar angular fibers and the full zero-radius angular rectangle; explained which rows have singular derivative. Original carrier, including all frontmatter and proof, is an exact byte prefix of the result.",
+  "source_lines_after": {
+    "remarks_explanation": [
+      98,
+      98
+    ],
+    "tikz": [
+      100,
+      131
+    ],
+    "determinant_explanation": [
+      133,
+      133
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "S restricted to subsets of D=[0,infinity) x [0,pi] x [0,2pi], with codomain R^3.",
+      "check": "Every source tuple lies in D. Each arrow maps the displayed source subset to its common coordinate value; the source intervals and rectangle are parameter sets, explicitly not image paths."
+    },
+    {
+      "relation": "S(1,pi/2,0)=S(1,pi/2,2pi)=(1,0,0).",
+      "justification": "Statement formula and proof step 1.1: sin(pi/2)=1, cos(pi/2)=0, and sine/cosine periodicity. Two disconnected source dots correctly avoid suggesting all intermediate azimuths have this image."
+    },
+    {
+      "relation": "S(1,0,theta)=(0,0,1) for all theta in [0,2pi].",
+      "justification": "Proof step 1.2, sin(0)=0 and cos(0)=1. Closed interval with solid endpoints represents the full azimuth interval."
+    },
+    {
+      "relation": "S(1,pi,theta)=(0,0,-1) for all theta in [0,2pi].",
+      "justification": "Proof step 1.2, sin(pi)=0 and cos(pi)=-1. The negative third coordinate is retained."
+    },
+    {
+      "relation": "S({0} x [0,pi] x [0,2pi])={(0,0,0)}.",
+      "justification": "Every coordinate contains factor r, as in Statement and proof step 1.2. Closed rectangle represents the two angular parameters at radius zero."
+    },
+    {
+      "relation": "det DS=1 at both seam dots; det DS=0 on the other three displayed subsets.",
+      "justification": "Proof step 3.1 gives r^2 sin(phi): substitute r=1, phi=pi/2 in seam; phi=0 or pi at poles; r=0 on last row. This avoids conflating a global periodic collision with local derivative singularity."
+    },
+    {
+      "proof_independence": "Original Refutation bytes remain unchanged. No proof step depends on the illustration."
+    }
+  ],
+  "guards": {
+    "before_raw_sha256": "7642f264d18ff2c58d46b61d5cd561d4efe3a31be600a270399fadfc0a8e2a6c",
+    "current_raw_sha256": "704daaa1c9222386ed6a00da69e32a08dc4786489229aff764952271cacb8edc",
+    "guard_before_edit_matched": true,
+    "entire_original_is_exact_prefix": true,
+    "all_frontmatter_byte_identical": true,
+    "status_before": "published",
+    "status_after": "published",
+    "status_line_byte_identical": true
+  },
+  "original_views": [
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/real-analysis/screenshots/fs-spherical-coordinates-are-globally-injective--01.png",
+      "sha256": "ed9a06d31df1fcfb5235fec2b677873e2355bf134dd5cdf2bf5cf4cf700c91b2",
+      "inspection": "Standalone view_image, detail original"
+    },
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/real-analysis/screenshots/fs-spherical-coordinates-are-globally-injective--02.png",
+      "sha256": "136dcd128841f2086195dbadbc08151831616706f8f4eb7ee3a2afb545d906cc",
+      "inspection": "Standalone view_image, detail original"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/fs-spherical-coordinates-are-globally-injective.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/fs-spherical-coordinates-are-globally-injective.md",
+            "item_id": "fs-spherical-coordinates-are-globally-injective",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/fs-spherical-coordinates-are-globally-injective.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/fs-spherical-coordinates-are-globally-injective.md",
+      "exit_code": 1,
+      "output": "FAIL proof-step-separation: items/fs-spherical-coordinates-are-globally-injective.md:87 Refutation 2.1 [split-step] Unnumbered continuation splits the argument from its numbered row; use single newlines inside a step.\nproof-layout: 1 items, 6 steps, 1 defects",
+      "pre_existing": true,
+      "explanation": "Exact original proof bytes retained. A temporary single-newline trial produced missing-tag failures and was reverted before final checks; this report does not claim a clean proof-layout pass."
+    }
+  ],
+  "native_preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/ra006-fresh",
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/ra006-fresh/manifest.json",
+    "manifest_sha256": "3cf4aa225a45a9f151a65af26205666516fc65539c9f9d23ca320899e42be9e0",
+    "source_sha256": "704daaa1c9222386ed6a00da69e32a08dc4786489229aff764952271cacb8edc",
+    "current_source_matches_manifest": true,
+    "capture_receipt": "research/math-library-rendering-repairs-2026-10-23/previews/ra006-fresh/screenshots/fs-spherical-coordinates-are-globally-injective.json",
+    "original_resolution_views": [
+      "screenshots/fs-spherical-coordinates-are-globally-injective--01.png",
+      "screenshots/fs-spherical-coordinates-are-globally-injective--02.png"
+    ],
+    "visual_result": "Both authentic current-source tiles inspected separately with view_image detail original. Four rows have visible closed dots/intervals, a complete rectangle, four rightward arrows and readable labels against the dark background, without overlap or clipping. Native receipt: one TikZ figure, zero diagram failures, zero KaTeX errors.",
+    "reference_map_diagnostics": 13,
+    "limitations": "Native local title/ItemBody preview, not production route or Sources footer. Unrelated reference-map diagnostics do not constitute scoped failures. previews/ra006-final was a transient formatting trial and is not current-source evidence; ra006-fresh is the exact current-source binding."
+  },
+  "remaining_issues": [
+    "Pre-existing proof-layout split-step failure at Refutation 2.1 remains unchanged. No unresolved mathematical issue identified within the assigned illustration scope; no whole-item proof audit claimed."
+  ]
+}

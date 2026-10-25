@@ -1,0 +1,333 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "17",
+  "level": 2,
+  "scope": [
+    "def-aqft-scheme-and-wilson-coefficients",
+    "thm-aqft-truncated-coupled-rge-wellposedness",
+    "ex-aqft-coupled-rge-linear-mixing"
+  ],
+  "contracts": {
+    "def-aqft-scheme-and-wilson-coefficients": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The definition assumes a supplied quotient basis with N >= 1; it does not define coordinates for the zero-dimensional case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition, trajectory equation: A supplied zero beta vector field is allowed; every trajectory satisfying its equation is constant on its interval."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition, realification formula: N=1 is included and the realification maps one complex coordinate isometrically to two real coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The quotient, relation space, ordered basis, scale interval, coordinate maps, and beta field are inputs; the definition asserts no existence or physical completeness theorem for them."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition, logarithmic-scale interval: J is an open interval in positive scales and its logarithmic image I is open; no endpoint regularity or global-flow conclusion is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: A basis is supplied as part of the datum. The definition makes no simultaneous selection from a family of quotient spaces and carries no Axiom-of-Choice hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is stated."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "This is a definition of supplied mathematical data and conventions; it makes no finite calculation or quotient-existence claim.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-17 author",
+        "notes": "The fixed-weight quotient and supplied basis match the current batch-16 item interface and populated page inventory. The definition separates the quotient, scheme coordinate maps, supplied beta field, and any relation among them; it does not assert physical completeness."
+      }
+    },
+    "thm-aqft-truncated-coupled-rge-wellposedness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-scheme-and-wilson-coefficients",
+          "source_section": "Definition",
+          "quote": "With the Euclidean norm on $\\mathbb R^{2N}$, $\\rho_N$ is a real-linear isometry. A supplied finite-dimensional truncated RG datum for this scheme is an open set $\\Omega\\subset I\\times\\mathbb R^{2N}$ and a supplied continuous map $\\beta:\\Omega\\to\\mathbb R^{2N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ with $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, and let $F:D\\to\\mathbb R^n$. The map $F$ is **locally Lipschitz in the state variable, locally uniformly in time**, if every compact time-state cylinder $C\\subseteq D$ has a finite $L\\ge0$ such that\n\n$$\\|F(t,x)-F(t,y)\\|_2\\le L\\|x-y\\|_2$$\n\nwhenever $(t,x),(t,y)\\in C$ have the same time coordinate.\n\nOn every compact time-state cylinder the state-variable inequality holds with one finite constant $L$. More generally, let $p\\ge1$, let $\\Lambda\\subseteq\\mathbb R^p$, let $D_\\Lambda\\subseteq\\mathbb R\\times\\mathbb R^n\\times\\Lambda$ be open in its relative Euclidean topology, and let $F:D_\\Lambda\\to\\mathbb R^n$. The parameter family is **locally Lipschitz in the state variable, locally uniform in time and parameters** when every compact time-state-parameter cylinder $C\\subseteq D_\\Lambda$ has one finite $L\\ge0$ such that\n\n$$\\|F(t,x,\\lambda)-F(t,y,\\lambda)\\|_2\\le L\\|x-y\\|_2$$\n\nwhenever $(t,x,\\lambda),(t,y,\\lambda)\\in C$ have the same time and parameter coordinates.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "common-cylinder-and-uniform-bounds",
+          "step": "1.1",
+          "claim": "Choose a compact cylinder inside the open domain, obtain finite field and state-Lipschitz bounds, and select a positive common time radius meeting the quantitative Picard conditions.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "common-local-solutions",
+          "step": "2.1",
+          "claim": "Apply the quantitative Picard\u2013Lindel\u00f6f result to every initial vector in a smaller coefficient ball, obtaining unique solutions on one common interval in cylinders centered at those vectors.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integral-difference-inequality",
+          "step": "3.1",
+          "claim": "Use the oriented Volterra form and shared state-Lipschitz constant to bound the trajectory distance by the initial distance plus its time integral, and bound that distance uniformly.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "iterated-integral-bound",
+          "step": "4.1",
+          "claim": "Iterate the integral inequality and bound its final remainder by 4r times (Ld)^m/m!.",
+          "inputs": [
+            "step 3.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "continuous-dependence-limit",
+          "step": "5.1",
+          "claim": "Let m tend to infinity to obtain the exponential continuous-dependence estimate, including equality at the base time.",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: The coefficient dimension is N >= 1, and the argument is for a nonempty open time-state domain around the given point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 4.1 and 5.1: The choice h(M+1) <= r and h(L+1) < 1 remains valid when M=0 or L=0; the factorial remainder and estimate also remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1\u20135.1: Every argument is dimension-independent for finite N >= 1 and includes N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20135.1: The proof requires no invertibility, nonzero eigenvalue, diagonalization, or nonzero beta value."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1\u20132.1: The compact cylinder is chosen inside the open domain and the claim is only on its short closed subinterval; no behavior at the boundary or at infinite scale is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof selects one compact cylinder and constants for the fixed initial point and uses a finite-dimensional local theorem; it does not select a family of bases or invoke full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way local well-posedness assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way local well-posedness assertion, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The claim is for an arbitrary continuous locally Lipschitz vector field; no finite numerical check replaces the compact-cylinder and integral-inequality proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-17 author",
+        "notes": "The local argument matches the current Picard\u2013Lindel\u00f6f hypotheses and proves continuous dependence independently. The finite quotient is conditional at the actual batch-16 interface. No global-existence or QFT beta-calculation claim is made."
+      }
+    },
+    "ex-aqft-coupled-rge-linear-mixing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-aqft-scheme-and-wilson-coefficients",
+          "source_section": "Definition",
+          "quote": "With the Euclidean norm on $\\mathbb R^{2N}$, $\\rho_N$ is a real-linear isometry.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-aqft-truncated-coupled-rge-wellposedness",
+          "source_section": "Statement",
+          "quote": "Any two solutions through the same initial data agree on every common interval containing $t_0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "initial-value-check",
+          "step": "1.1",
+          "claim": "Evaluate the explicit curve at t=0 and verify both initial coefficients.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "linear-system-substitution",
+          "step": "2.1",
+          "claim": "Differentiate both components and multiply the displayed matrix by the candidate vector to verify the supplied complex-linear ODE for all real t.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "global-explicit-solution-and-uniqueness",
+          "step": "3.1",
+          "claim": "Cauchy\u2013Schwarz bounds the matrix operator norm by sqrt(6); realification preserves that bound, so the vector field is globally Lipschitz and common-interval uniqueness identifies the explicit all-real solution as the unique global one.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: The example fixes a two-dimensional coefficient space and makes no empty-system claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The supplied matrix is nonzero; the example does not infer that every RG system has nonzero flow."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This worked example is specifically two-dimensional; the general theorem includes N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20133.1: The direct substitution uses no diagonalization or eigenbasis assumption and the matrix need not be interpreted through its spectrum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 2.1: The chosen scale interval is (0,infinity), so logarithmic time ranges over all real numbers and the displayed solution is defined on the whole interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The finite quotient and its ordered basis are supplied data; the example makes no family-wide choice and invokes no AC premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-component initial condition and ODE substitution",
+          "status": "checked",
+          "evidence": "Proof steps 1.1\u20132.1 evaluate both components at t=0 and verify C1\u2032=-C1+C2 and C2\u2032=-2C2 exactly for every real t."
+        }
+      ],
+      "finite_checks_disposition": "The only finite calculation is the exact two-component symbolic substitution shown in the verification; no floating-point or physical coefficient claim is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-17 author",
+        "notes": "The matrix is expressly supplied, not derived from a QFT. The example uses only the conditional fixed-weight complex quotient input and claims no perturbative accuracy or omitted-term bound."
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cg-sphere-coxeter-complex-of-a3-and-a-parabolic-residue.md

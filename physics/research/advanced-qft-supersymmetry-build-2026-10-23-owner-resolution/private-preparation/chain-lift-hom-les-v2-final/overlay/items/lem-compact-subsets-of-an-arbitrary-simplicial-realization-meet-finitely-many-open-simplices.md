@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-compact-subsets-of-an-arbitrary-simplicial-realization-meet-finitely-many-open-simplices.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-complete-locally-small-category-with-a-jointly-weakly-initial-set-has-an-initial-object.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-nrqm-many-body-fixed-n-countable-mode-partition-criterion.md

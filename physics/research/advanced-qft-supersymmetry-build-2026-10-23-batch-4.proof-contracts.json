@@ -1,0 +1,760 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qftx-nonabelian-brst-complex",
+    "lem-qftx-nonabelian-brst-nilpotence",
+    "def-qftx-local-brst-cohomology",
+    "def-qftx-bv-antibracket-master-action",
+    "lem-qftx-bv-canonical-action-generates-brst-differential",
+    "lem-qftx-bv-master-equation-brst-nilpotence",
+    "ex-qftx-su2-brst-nilpotence",
+    "ex-qftx-su2-bv-ghost-master-equation"
+  ],
+  "contracts": {
+    "def-qftx-nonabelian-brst-complex": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: U is expressly nonempty and n>=1; the algebra still contains C-infinity(U) and its unit if the Lie algebra and matter space have dimension zero. There are then no field/ghost jets and s=0 on coefficients."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition, displayed BRST generator formulas and jet prolongation: If all fields and ghosts vanish, the specified derivation acts as zero on the generators."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: at n=1 the only total derivative is D_1 and the rule s(Phi_I)=D_I(sPhi) is unchanged. The algebra unit is a coefficient function, so s(1)=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition, finite-dimensional Lie-algebra/representation data and displayed generator formulas: The zero Lie algebra and zero matter representation are permitted; the formulas reduce to the zero differential."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "U is an open coordinate domain; the BRST generator and jet rules have no interpolation parameter or imposed endpoint values. Spacetime boundary conditions enter only the later local-functional construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition, fixed basis and finite-jet polynomial/exterior-algebra construction: The construction uses fixed finite-dimensional data and finite jets; it makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The declaration that these formulas become a BRST complex once s squared vanishes refers to a subsequent nilpotence proof; it asserts no equivalence characterizing all degree-one derivations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reconstruction of the gauge, ghost and matter formulas from an arbitrary BRST complex is claimed; the differential candidate is specified explicitly."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The definition fixes finite-jet algebraic data and exact transformation formulas; there is no independent numerical or finite-enumeration assertion.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked the free polynomial/exterior algebra, finite jet dependence, odd left derivation and commuting total-derivative prolongation. Generator images have parity shifted by one and ghost number increased by one; extension respects odd squares in characteristic zero. Fixed finite basis needs no indexed choice. Zero Lie algebra or matter dimension and n=1 are admitted; U is explicitly nonempty. Nilpotence is deferred to the following lemma; independently checked all its ghost Jacobi, gauge Jacobi, matter representation and prolongation steps. No global geometry, action, empirical premise or nonminimal contractibility is claimed. Reader and refuter contain no findings. Source comparison: Barnich\u2013Brandt\u2013Henneaux \u00a72.2 and Gomis\u2013Par\u00eds\u2013Samuel \u00a74.2; mathematical validity follows from the explicit local convention."
+      }
+    },
+    "lem-qftx-nonabelian-brst-nilpotence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-nonabelian-brst-complex",
+          "source_section": "Definition",
+          "quote": "Let $n\\geq 1$, let $U\\subseteq\\mathbb R^n$ be a nonempty open set with coordinates $x^1,\\ldots,x^n$, and let $\\mathfrak g$ be a finite-dimensional real Lie algebra with bilinear alternating bracket $[\\ ,\\ ]_{\\mathfrak g}$ satisfying the Jacobi identity. Let $V=V_{\\bar 0}\\oplus V_{\\bar 1}$ be a finite-dimensional $\\mathbb Z_2$-graded complex vector space, and let $\\rho:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V)$ be an even representation, meaning $\\rho([X,Y]_{\\mathfrak g})=\\rho(X)\\rho(Y)-\\rho(Y)\\rho(X)$ for all $X,Y\\in\\mathfrak g$ and each $\\rho(X)$ preserves the grading of $V$. This is local Lie-algebra data; no global group, principal bundle, action functional, or quantum theory is selected here.\n\nChoose a basis $T_a$ of $\\mathfrak g$ and write $[T_b,T_c]_{\\mathfrak g}=f^a{}_{bc}T_a$. A local gauge potential is a $\\mathfrak g$-valued one-form $A=A_\\mu^aT_a\\,dx^\\mu$ whose component jet generators $A_{\\mu,I}^a$ are even and have ghost number zero. A matter field is a $V$-valued local field $\\psi$ with each component jet generator $\\psi_I^\\alpha$ assigned the parity of its graded component and ghost number zero. The ghost is $c=c^aT_a$, with odd component jet generators $c_I^a$ of ghost number one. The coefficient bracket of homogeneous $\\mathfrak g$-valued fields is $[X,Y]^a=f^a{}_{bc}X^bY^c$, using multiplication in the graded-commutative coefficient algebra; in particular $[c,c]^a=f^a{}_{bc}c^bc^c$ has no factor of $1/2$.\n\nFor a multi-index $I=(I_1,\\ldots,I_n)\\in\\mathbb N^n$, let $\\Phi_I$ denote the corresponding formal jet generator of a field component $\\Phi$. The finite-jet local algebra $\\mathcal F_U$ is $C^\\infty(U)$ tensored with the polynomial algebra in its even jet generators and the exterior algebra in its odd jet generators, where each element uses only finitely many jet generators. The total derivatives $D_\\mu$ act by $D_\\mu f=\\partial_\\mu f$ on $f\\in C^\\infty(U)$ and $D_\\mu\\Phi_I=\\Phi_{I+e_\\mu}$ on every jet generator; the multi-index derivatives commute.\n\nDefine the degree-one BRST operator candidate $s$ on the fields by\n\n$$sA_\\mu=\\partial_\\mu c+[A_\\mu,c],\\qquad sc=-\\frac12[c,c],\\qquad s\\psi=-\\rho(c)\\psi.$$\n\nOn coefficient functions set $sf=0$, and on every jet generator set $s(\\Phi_I)=D_I(s\\Phi)$; extend $s$ to $\\mathcal F_U$ by the odd left-derivation rule $s(FG)=(sF)G+(-1)^{|F|}F(sG)$ for homogeneous $F$, where $|F|$ is total parity. The minimal sector here contains only $A,\\psi,c$ and their jets. Antighosts and Nakanishi\u2013Lautrup variables are not included; adjoining such a nonminimal pair requires separate definitions and a proof before any cohomological triviality claim. The specified data are a BRST complex once $s^2=0$, which is established for these formulas in the following nilpotence lemma.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-nonabelian-brst-complex",
+          "source_section": "Definition",
+          "quote": "Let $n\\geq 1$, let $U\\subseteq\\mathbb R^n$ be a nonempty open set with coordinates $x^1,\\ldots,x^n$, and let $\\mathfrak g$ be a finite-dimensional real Lie algebra with bilinear alternating bracket $[\\ ,\\ ]_{\\mathfrak g}$ satisfying the Jacobi identity. Let $V=V_{\\bar 0}\\oplus V_{\\bar 1}$ be a finite-dimensional $\\mathbb Z_2$-graded complex vector space, and let $\\rho:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V)$ be an even representation, meaning $\\rho([X,Y]_{\\mathfrak g})=\\rho(X)\\rho(Y)-\\rho(Y)\\rho(X)$ for all $X,Y\\in\\mathfrak g$ and each $\\rho(X)$ preserves the grading of $V$. This is local Lie-algebra data; no global group, principal bundle, action functional, or quantum theory is selected here.\n\nChoose a basis $T_a$ of $\\mathfrak g$ and write $[T_b,T_c]_{\\mathfrak g}=f^a{}_{bc}T_a$. A local gauge potential is a $\\mathfrak g$-valued one-form $A=A_\\mu^aT_a\\,dx^\\mu$ whose component jet generators $A_{\\mu,I}^a$ are even and have ghost number zero. A matter field is a $V$-valued local field $\\psi$ with each component jet generator $\\psi_I^\\alpha$ assigned the parity of its graded component and ghost number zero. The ghost is $c=c^aT_a$, with odd component jet generators $c_I^a$ of ghost number one. The coefficient bracket of homogeneous $\\mathfrak g$-valued fields is $[X,Y]^a=f^a{}_{bc}X^bY^c$, using multiplication in the graded-commutative coefficient algebra; in particular $[c,c]^a=f^a{}_{bc}c^bc^c$ has no factor of $1/2$.\n\nFor a multi-index $I=(I_1,\\ldots,I_n)\\in\\mathbb N^n$, let $\\Phi_I$ denote the corresponding formal jet generator of a field component $\\Phi$. The finite-jet local algebra $\\mathcal F_U$ is $C^\\infty(U)$ tensored with the polynomial algebra in its even jet generators and the exterior algebra in its odd jet generators, where each element uses only finitely many jet generators. The total derivatives $D_\\mu$ act by $D_\\mu f=\\partial_\\mu f$ on $f\\in C^\\infty(U)$ and $D_\\mu\\Phi_I=\\Phi_{I+e_\\mu}$ on every jet generator; the multi-index derivatives commute.\n\nDefine the degree-one BRST operator candidate $s$ on the fields by\n\n$$sA_\\mu=\\partial_\\mu c+[A_\\mu,c],\\qquad sc=-\\frac12[c,c],\\qquad s\\psi=-\\rho(c)\\psi.$$\n\nOn coefficient functions set $sf=0$, and on every jet generator set $s(\\Phi_I)=D_I(s\\Phi)$; extend $s$ to $\\mathcal F_U$ by the odd left-derivation rule $s(FG)=(sF)G+(-1)^{|F|}F(sG)$ for homogeneous $F$, where $|F|$ is total parity. The minimal sector here contains only $A,\\psi,c$ and their jets. Antighosts and Nakanishi\u2013Lautrup variables are not included; adjoining such a nonminimal pair requires separate definitions and a proof before any cohomological triviality claim. The specified data are a BRST complex once $s^2=0$, which is established for these formulas in the following nilpotence lemma.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $c$ is odd, the coefficient bracket is graded symmetric on $(c,c)$ and $s[c,c]=2[sc,c]$. Therefore $s^2c=-\\tfrac12s[c,c]=-[sc,c]=\\tfrac12\\lbrack\\lbrack c,c\\rbrack,c\\rbrack$. Its component is proportional to $f^a{}_{de}f^d{}_{bc}c^bc^cc^e$; because the ghost coefficients anticommute, only the complete antisymmetrization in $b,c,e$ contributes, and the Jacobi identity $f^a{}_{d[b}f^d{}_{ce]}=0$ makes it vanish.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Because $A_\\mu$ is even, the left-derivation rule gives $s^2A_\\mu=\\partial_\\mu(sc)+[sA_\\mu,c]+[A_\\mu,sc]=-[\\partial_\\mu c,c]+[\\partial_\\mu c+[A_\\mu,c],c]-\\tfrac12\\lbrack A_\\mu,\\lbrack c,c\\rbrack\\rbrack=\\lbrack\\lbrack A_\\mu,c\\rbrack,c\\rbrack-\\tfrac12\\lbrack A_\\mu,\\lbrack c,c\\rbrack\\rbrack=0$. Here $\\partial_\\mu[c,c]=2[\\partial_\\mu c,c]$, and Jacobi with $A_\\mu$ even and $c$ odd gives $\\lbrack A_\\mu,\\lbrack c,c\\rbrack\\rbrack=2\\lbrack\\lbrack A_\\mu,c\\rbrack,c\\rbrack$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For any homogeneous matter component, the odd left-derivation rule gives $s^2\\psi=-\\rho(sc)\\psi+\\rho(c)s\\psi=\\tfrac12\\rho([c,c])\\psi-\\rho(c)^2\\psi$. Writing $c=c^aT_a$, graded commutativity yields $\\rho(c)^2=\\tfrac12c^ac^b[\\rho(T_a),\\rho(T_b)]=\\tfrac12\\rho([c,c])$ by [A2], so $s^2\\psi=0$ for either matter parity.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a coefficient function $f(x)$, both $sD_\\mu f$ and $D_\\mu sf$ vanish. On each jet generator $\\Phi_I$, the defining rule gives $sD_\\mu\\Phi_I=s\\Phi_{I+e_\\mu}=D_\\mu D_I(s\\Phi)=D_\\mu s\\Phi_I$, since the total derivatives commute. Thus $sD_\\mu=D_\\mu s$ on generators, and composition gives $s^2\\Phi_I=D_I(s^2\\Phi)=0$ for every multi-index $I$. The square of an odd derivation is an even derivation because its two cross terms cancel, so steps 1.1\u20131.3 and this jet calculation make $s^2$ vanish on every finite polynomial in the generators.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: U is nonempty and n>=1. If both the Lie algebra and matter space are zero, the generator checks are empty, but the remaining coefficient algebra has s=0 and sD_mu=D_mu s=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 1.2, 1.3 and 2.1: If c=0, then sA, sc, and s\u03c8 vanish, so s\u00b2 vanishes on those generators."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats I=0 and each single derivative jet as well as higher jets; with n=1 it proves commutation with D_1. On the unit coefficient 1 both s squared and the commutator vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 1.2 and 1.3: If the Lie algebra or matter representation is zero, the affected transformation formulas vanish and the remaining Jacobi/representation identities still apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof concerns formal jets on an open U; no path, time interval or boundary-value problem is used in the Jacobi cancellations."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 2.1, the canonical finite-polynomial jet extension: The construction uses fixed finite-dimensional data and finite jets; it makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is the conjunction s squared=0 and commutation with total derivatives for the prescribed representation; it does not characterize which arbitrary derivations arise from a Lie algebra."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Nilpotence is deduced from the given Jacobi and representation identities; the lemma makes no converse recovering those identities from a square-zero operator."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof is symbolic for every finite-dimensional Lie algebra and representation. No numerical approximation or sampled test is used."
+    },
+    "def-qftx-local-brst-cohomology": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The coordinate patch is assumed nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition, the p=0 convention, displayed quotient and denominator verification: At ghost number or form degree zero the absent negative-degree forms are set to the zero space; the quotient remains defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: p=1 is allowed since n>=1. Its descent companion b has form degree zero, while n=1 also makes p=1 the top horizontal degree. The denominator calculation s(sm+d_H n)+d_H(sn)=0 remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For p=0 the definition explicitly sets A_U^{g,-1}=0; for p=n the horizontal differential still maps into the defined local n-form space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: at p=0 the spaces in form degree -1 are set to zero, leaving ker(s)/im(s). At p=n, horizontal (n+1)-forms vanish by the exterior algebra, while sa+d_H b and sm+d_H n remain n-forms."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition, finite local horizontal forms and the explicit quotient construction: The construction uses fixed finite-dimensional data and finite jets; it makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The quotient specifies its numerator by existence of b and verifies that every displayed denominator element is a cocycle; it does not assert that every cocycle is exact."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no claim that a local BRST cocycle has a representative sm+d_H n; such a converse would erase the cohomology that this definition introduces."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The definition is a quotient of explicitly typed local-form spaces; no finite calculation or classification theorem is asserted.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Read the full Definition, both dependency carriers and reader/refuter evidence. Horizontal p-forms have finite-jet coefficients and defined ghost degree, with total parity convention s(dx wedge a)=-dx wedge sa. Commuting total derivatives give d_H squared zero, and prolonged s commutes with them, giving anticommutation of s and d_H. All numerator/denominator terms have bidegrees (g,p), (g+1,p-1), (g-1,p), (g,p-1) as required. For sm+d_Hn choose b=sn: the two mixed terms cancel, so the quotient is defined; existence witnesses also add and scale. At p=0 the negative-form space is zero; at p=n the equations remain typed; negative ghost spaces in the minimal sector can be zero without invalidating the quotient. No Poincare lemma or assumption on topology of U is used. Top-form integration is explicitly conditional on killed surface terms. Compared with Barnich\u2013Brandt\u2013Henneaux \u00a7\u00a74.1\u20134.4 (finite jets, local forms, total derivatives) and \u00a72.3 relative cohomology; no physical Hilbert-space or empirical interpretation is asserted. No defect found."
+      }
+    },
+    "def-qftx-bv-antibracket-master-action": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the canonical bracket is a sum over field/ghost coordinates. If that finite coordinate list is empty, the algebra is constants, the empty bracket sum is zero, and any even ghost-number-zero constant satisfies the master equation. The local-field construction retains its stated domain hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition, minimal BV functional candidate and its displayed antifield coupling: If the gauge algebra is zero, the ghost/antifield terms vanish and the candidate reduces to S0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for a single coordinate-antifield pair the bracket sum has one term with the same right/left signs; the scalar unit is central with ghost number zero, consistent with exclusion only of a ghost-number-one center."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition, minimal field/antifield sector and separately typed optional nonminimal sector: The minimal sector has the declared fields and antifields; the optional nonminimal pair is separately typed and no cohomological removal is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the local-functional version admits integrations by parts only with compact support or boundary conditions killing surface terms. Thus it expressly conditions the bracket domain on the vanishing boundary contribution; no endpoint cancellation is assumed for arbitrary fields."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition, fixed canonical coordinates and stated finite-jet functional domain: The construction uses fixed finite-dimensional data and finite jets; it makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: calling the displayed candidate a classical master action requires (S_BV,S_BV)=0. This is the stated defining criterion, not an assertion that gauge invariance alone has already verified it."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: an admitted candidate satisfying (S_BV,S_BV)=0 is a classical master action by the explicit exactly-when clause; the optional nonminimal term does not remove the domain requirements."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The definition specifies a canonical bracket and a conditional master-action candidate; it does not assert that an arbitrary S0 solves the master equation.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked both mathematical prerequisites, all displayed formulas and no-finding reader/refuter evidence. Antifield parity is epsilon+1 and ghost degree -1-g, giving bracket parity/ghost degree +1. Shifted skew, cyclic Jacobi and both reordered Leibniz formulas match Gomis\u2013Par\u00eds\u2013Samuel \u00a74.2 equations (4.4)\u2013(4.7); Appendix A (A.2)\u2013(A.4) fixes derivative-side signs. The factor (-1)^epsilon multiplying antifield times s0Phi produces the declared (S,Phi) convention for either parity, including -antighost-antifield times b. Central polynomials have all coordinate derivatives zero and hence are numerical constants; no ghost-degree-one constant exists. The local-functional extension explicitly requires an admissible variational domain, killed boundary terms and separately the center condition; no general analytic or path-integral construction is claimed. Irreducibility and off-shell closure are assumed rather than asserted for every Lie algebra (constant central parameters can violate irreducibility). The candidate is called a master action only after its equation holds. No choice, physical postulate or empirical assertion is used. No defect found."
+      }
+    },
+    "lem-qftx-bv-master-equation-brst-nilpotence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qftx-bv-antibracket-master-action",
+          "source_section": "Definition",
+          "quote": "Use the local field data and BRST convention on an open set $U\\subseteq\\mathbb R^n$ given by a finite-dimensional real Lie algebra $\\mathfrak g$, a graded representation space $V$, an even $\\mathfrak g$-valued gauge potential $A_\\mu$, an odd ghost $c$ of ghost number $1$, and matter components $\\psi^\\alpha$ of parity $\\epsilon_\\alpha$ and ghost number $0$. For every field or ghost coordinate $\\Phi^A$ of parity $\\epsilon_A$ and ghost number $g_A$, introduce an antifield $\\Phi_A^*$ of parity $\\epsilon_A+1\\pmod 2$ and ghost number $-1-g_A$. Thus $A^*$ and the antifields of even matter are odd of ghost number $-1$, while $c^*$ is even of ghost number $-2$. The minimal sector consists of $A,\\psi,c$ and these antifields.\n\nFor a finite-dimensional canonical coordinate algebra, take the polynomial algebra in the even coordinates tensor the exterior algebra in the odd coordinates. In the local-field notation, use finite-jet local functionals with variational derivatives only when the chosen domain makes those derivatives and integrations by parts well-defined; compact support or boundary conditions that kill surface terms are part of that domain. For homogeneous functionals $F,G$, define the canonical antibracket by\n\n$$\n(F,G):=\\sum_A\\left(\\frac{\\partial_r F}{\\partial\\Phi^A}\\frac{\\partial_lG}{\\partial\\Phi_A^*}-\\frac{\\partial_rF}{\\partial\\Phi_A^*}\\frac{\\partial_lG}{\\partial\\Phi^A}\\right),\n$$\n\nwith an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. Write $|F|\\in\\mathbb Z_2$ for the parity and $\\operatorname{gh}(F)\\in\\mathbb Z$ for the ghost number of a homogeneous functional $F$. The bracket has parity and ghost number\n\n$$|(F,G)|=|F|+|G|+1\\pmod 2,\\qquad \\operatorname{gh}((F,G))=\\operatorname{gh}(F)+\\operatorname{gh}(G)+1.$$\n\nFor homogeneous $F,G,H$, its shifted graded-skew identity and Jacobi identity are\n\n$$ (F,G)=-(-1)^{(|F|+1)(|G|+1)}(G,F), $$\n\n$$ ((F,G),H)+(-1)^{(|F|+1)(|G|+|H|)}((G,H),F)+(-1)^{(|H|+1)(|F|+|G|)}((H,F),G)=0. $$\n\nThe bracket is a graded biderivation, with the exact Leibniz identities\n\n$$ (F,GH)=(F,G)H+(-1)^{|G||H|}(F,H)G,\\qquad (FG,H)=F(G,H)+(-1)^{|F||G|}G(F,H). $$\n\nA regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.\n\nLet a local gauge parameter be a smooth map $\\lambda:U\\to\\mathfrak g$, and define its infinitesimal action on the fields by $\\delta_\\lambda A_\\mu=\\partial_\\mu\\lambda+[A_\\mu,\\lambda]$ and $\\delta_\\lambda\\psi=-\\rho(\\lambda)\\psi$. Write these variations as $\\delta_\\lambda\\Phi^i=R^i_\\alpha[\\Phi]\\lambda^\\alpha$, where $R$ is the resulting linear differential operator in $\\lambda$. Assume this declared gauge action is irreducible: if $\\delta_\\lambda\\Phi^i\\equiv0$ for every field configuration, then $\\lambda\\equiv0$. Assume also that its Lie-algebra action closes off shell, meaning its commutator closes without using equations of motion, and that no additional gauge symmetry is included. Let $S_0[A,\\psi]$ be a specified local classical action invariant under these transformations. Write $s_0$ for the BRST operator on the minimal fields given by $s_0A_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $s_0c=-\\tfrac12[c,c]$, and $s_0\\psi=-\\rho(c)\\psi$. The minimal BV functional candidate is\n\n$$S_{\\mathrm{BV}}:=S_0+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*\\,s_0\\Phi^A,$$\n\nwhere each product is in the displayed order and the same left/right derivative convention is used in the antibracket. It is a **classical master action** exactly when it satisfies the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$; the displayed formula alone does not assert that a particular $S_0$ satisfies that equation.\n\nThe optional nonminimal sector adds an odd antighost $\\bar c^a$ of ghost number $-1$, an even auxiliary field $b^a$ of ghost number $0$, and their antifields, with the BV functional term $-\\bar c_a^*b^a$ giving $s\\bar c=b$ and $sb=0$. This definition makes no cohomological contractibility claim for that pair. The formal local-field notation does not define an infinite-dimensional measure, a BV Laplacian $\\Delta$, a path integral, or the quantum master equation.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-bv-antibracket-master-action",
+          "source_section": "Definition",
+          "quote": "Use the local field data and BRST convention on an open set $U\\subseteq\\mathbb R^n$ given by a finite-dimensional real Lie algebra $\\mathfrak g$, a graded representation space $V$, an even $\\mathfrak g$-valued gauge potential $A_\\mu$, an odd ghost $c$ of ghost number $1$, and matter components $\\psi^\\alpha$ of parity $\\epsilon_\\alpha$ and ghost number $0$. For every field or ghost coordinate $\\Phi^A$ of parity $\\epsilon_A$ and ghost number $g_A$, introduce an antifield $\\Phi_A^*$ of parity $\\epsilon_A+1\\pmod 2$ and ghost number $-1-g_A$. Thus $A^*$ and the antifields of even matter are odd of ghost number $-1$, while $c^*$ is even of ghost number $-2$. The minimal sector consists of $A,\\psi,c$ and these antifields.\n\nFor a finite-dimensional canonical coordinate algebra, take the polynomial algebra in the even coordinates tensor the exterior algebra in the odd coordinates. In the local-field notation, use finite-jet local functionals with variational derivatives only when the chosen domain makes those derivatives and integrations by parts well-defined; compact support or boundary conditions that kill surface terms are part of that domain. For homogeneous functionals $F,G$, define the canonical antibracket by\n\n$$\n(F,G):=\\sum_A\\left(\\frac{\\partial_r F}{\\partial\\Phi^A}\\frac{\\partial_lG}{\\partial\\Phi_A^*}-\\frac{\\partial_rF}{\\partial\\Phi_A^*}\\frac{\\partial_lG}{\\partial\\Phi^A}\\right),\n$$\n\nwith an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. Write $|F|\\in\\mathbb Z_2$ for the parity and $\\operatorname{gh}(F)\\in\\mathbb Z$ for the ghost number of a homogeneous functional $F$. The bracket has parity and ghost number\n\n$$|(F,G)|=|F|+|G|+1\\pmod 2,\\qquad \\operatorname{gh}((F,G))=\\operatorname{gh}(F)+\\operatorname{gh}(G)+1.$$\n\nFor homogeneous $F,G,H$, its shifted graded-skew identity and Jacobi identity are\n\n$$ (F,G)=-(-1)^{(|F|+1)(|G|+1)}(G,F), $$\n\n$$ ((F,G),H)+(-1)^{(|F|+1)(|G|+|H|)}((G,H),F)+(-1)^{(|H|+1)(|F|+|G|)}((H,F),G)=0. $$\n\nThe bracket is a graded biderivation, with the exact Leibniz identities\n\n$$ (F,GH)=(F,G)H+(-1)^{|G||H|}(F,H)G,\\qquad (FG,H)=F(G,H)+(-1)^{|F||G|}G(F,H). $$\n\nA regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.\n\nLet a local gauge parameter be a smooth map $\\lambda:U\\to\\mathfrak g$, and define its infinitesimal action on the fields by $\\delta_\\lambda A_\\mu=\\partial_\\mu\\lambda+[A_\\mu,\\lambda]$ and $\\delta_\\lambda\\psi=-\\rho(\\lambda)\\psi$. Write these variations as $\\delta_\\lambda\\Phi^i=R^i_\\alpha[\\Phi]\\lambda^\\alpha$, where $R$ is the resulting linear differential operator in $\\lambda$. Assume this declared gauge action is irreducible: if $\\delta_\\lambda\\Phi^i\\equiv0$ for every field configuration, then $\\lambda\\equiv0$. Assume also that its Lie-algebra action closes off shell, meaning its commutator closes without using equations of motion, and that no additional gauge symmetry is included. Let $S_0[A,\\psi]$ be a specified local classical action invariant under these transformations. Write $s_0$ for the BRST operator on the minimal fields given by $s_0A_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $s_0c=-\\tfrac12[c,c]$, and $s_0\\psi=-\\rho(c)\\psi$. The minimal BV functional candidate is\n\n$$S_{\\mathrm{BV}}:=S_0+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*\\,s_0\\Phi^A,$$\n\nwhere each product is in the displayed order and the same left/right derivative convention is used in the antibracket. It is a **classical master action** exactly when it satisfies the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$; the displayed formula alone does not assert that a particular $S_0$ satisfies that equation.\n\nThe optional nonminimal sector adds an odd antighost $\\bar c^a$ of ghost number $-1$, an even auxiliary field $b^a$ of ghost number $0$, and their antifields, with the BV functional term $-\\bar c_a^*b^a$ giving $s\\bar c=b$ and $sb=0$. This definition makes no cohomological contractibility claim for that pair. The formal local-field notation does not define an infinite-dimensional measure, a BV Laplacian $\\Delta$, a path integral, or the quantum master equation.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-qftx-bv-antibracket-master-action",
+          "source_section": "Definition",
+          "quote": "Use the local field data and BRST convention on an open set $U\\subseteq\\mathbb R^n$ given by a finite-dimensional real Lie algebra $\\mathfrak g$, a graded representation space $V$, an even $\\mathfrak g$-valued gauge potential $A_\\mu$, an odd ghost $c$ of ghost number $1$, and matter components $\\psi^\\alpha$ of parity $\\epsilon_\\alpha$ and ghost number $0$. For every field or ghost coordinate $\\Phi^A$ of parity $\\epsilon_A$ and ghost number $g_A$, introduce an antifield $\\Phi_A^*$ of parity $\\epsilon_A+1\\pmod 2$ and ghost number $-1-g_A$. Thus $A^*$ and the antifields of even matter are odd of ghost number $-1$, while $c^*$ is even of ghost number $-2$. The minimal sector consists of $A,\\psi,c$ and these antifields.\n\nFor a finite-dimensional canonical coordinate algebra, take the polynomial algebra in the even coordinates tensor the exterior algebra in the odd coordinates. In the local-field notation, use finite-jet local functionals with variational derivatives only when the chosen domain makes those derivatives and integrations by parts well-defined; compact support or boundary conditions that kill surface terms are part of that domain. For homogeneous functionals $F,G$, define the canonical antibracket by\n\n$$\n(F,G):=\\sum_A\\left(\\frac{\\partial_r F}{\\partial\\Phi^A}\\frac{\\partial_lG}{\\partial\\Phi_A^*}-\\frac{\\partial_rF}{\\partial\\Phi_A^*}\\frac{\\partial_lG}{\\partial\\Phi^A}\\right),\n$$\n\nwith an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. Write $|F|\\in\\mathbb Z_2$ for the parity and $\\operatorname{gh}(F)\\in\\mathbb Z$ for the ghost number of a homogeneous functional $F$. The bracket has parity and ghost number\n\n$$|(F,G)|=|F|+|G|+1\\pmod 2,\\qquad \\operatorname{gh}((F,G))=\\operatorname{gh}(F)+\\operatorname{gh}(G)+1.$$\n\nFor homogeneous $F,G,H$, its shifted graded-skew identity and Jacobi identity are\n\n$$ (F,G)=-(-1)^{(|F|+1)(|G|+1)}(G,F), $$\n\n$$ ((F,G),H)+(-1)^{(|F|+1)(|G|+|H|)}((G,H),F)+(-1)^{(|H|+1)(|F|+|G|)}((H,F),G)=0. $$\n\nThe bracket is a graded biderivation, with the exact Leibniz identities\n\n$$ (F,GH)=(F,G)H+(-1)^{|G||H|}(F,H)G,\\qquad (FG,H)=F(G,H)+(-1)^{|F||G|}G(F,H). $$\n\nA regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.\n\nLet a local gauge parameter be a smooth map $\\lambda:U\\to\\mathfrak g$, and define its infinitesimal action on the fields by $\\delta_\\lambda A_\\mu=\\partial_\\mu\\lambda+[A_\\mu,\\lambda]$ and $\\delta_\\lambda\\psi=-\\rho(\\lambda)\\psi$. Write these variations as $\\delta_\\lambda\\Phi^i=R^i_\\alpha[\\Phi]\\lambda^\\alpha$, where $R$ is the resulting linear differential operator in $\\lambda$. Assume this declared gauge action is irreducible: if $\\delta_\\lambda\\Phi^i\\equiv0$ for every field configuration, then $\\lambda\\equiv0$. Assume also that its Lie-algebra action closes off shell, meaning its commutator closes without using equations of motion, and that no additional gauge symmetry is included. Let $S_0[A,\\psi]$ be a specified local classical action invariant under these transformations. Write $s_0$ for the BRST operator on the minimal fields given by $s_0A_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $s_0c=-\\tfrac12[c,c]$, and $s_0\\psi=-\\rho(c)\\psi$. The minimal BV functional candidate is\n\n$$S_{\\mathrm{BV}}:=S_0+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*\\,s_0\\Phi^A,$$\n\nwhere each product is in the displayed order and the same left/right derivative convention is used in the antibracket. It is a **classical master action** exactly when it satisfies the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$; the displayed formula alone does not assert that a particular $S_0$ satisfies that equation.\n\nThe optional nonminimal sector adds an odd antighost $\\bar c^a$ of ghost number $-1$, an even auxiliary field $b^a$ of ghost number $0$, and their antifields, with the BV functional term $-\\bar c_a^*b^a$ giving $s\\bar c=b$ and $sb=0$. This definition makes no cohomological contractibility claim for that pair. The formal local-field notation does not define an infinite-dimensional measure, a BV Laplacian $\\Delta$, a path integral, or the quantum master equation.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-bv-antibracket-master-action",
+          "source_section": "Definition",
+          "quote": "Use the local field data and BRST convention on an open set $U\\subseteq\\mathbb R^n$ given by a finite-dimensional real Lie algebra $\\mathfrak g$, a graded representation space $V$, an even $\\mathfrak g$-valued gauge potential $A_\\mu$, an odd ghost $c$ of ghost number $1$, and matter components $\\psi^\\alpha$ of parity $\\epsilon_\\alpha$ and ghost number $0$. For every field or ghost coordinate $\\Phi^A$ of parity $\\epsilon_A$ and ghost number $g_A$, introduce an antifield $\\Phi_A^*$ of parity $\\epsilon_A+1\\pmod 2$ and ghost number $-1-g_A$. Thus $A^*$ and the antifields of even matter are odd of ghost number $-1$, while $c^*$ is even of ghost number $-2$. The minimal sector consists of $A,\\psi,c$ and these antifields.\n\nFor a finite-dimensional canonical coordinate algebra, take the polynomial algebra in the even coordinates tensor the exterior algebra in the odd coordinates. In the local-field notation, use finite-jet local functionals with variational derivatives only when the chosen domain makes those derivatives and integrations by parts well-defined; compact support or boundary conditions that kill surface terms are part of that domain. For homogeneous functionals $F,G$, define the canonical antibracket by\n\n$$\n(F,G):=\\sum_A\\left(\\frac{\\partial_r F}{\\partial\\Phi^A}\\frac{\\partial_lG}{\\partial\\Phi_A^*}-\\frac{\\partial_rF}{\\partial\\Phi_A^*}\\frac{\\partial_lG}{\\partial\\Phi^A}\\right),\n$$\n\nwith an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. Write $|F|\\in\\mathbb Z_2$ for the parity and $\\operatorname{gh}(F)\\in\\mathbb Z$ for the ghost number of a homogeneous functional $F$. The bracket has parity and ghost number\n\n$$|(F,G)|=|F|+|G|+1\\pmod 2,\\qquad \\operatorname{gh}((F,G))=\\operatorname{gh}(F)+\\operatorname{gh}(G)+1.$$\n\nFor homogeneous $F,G,H$, its shifted graded-skew identity and Jacobi identity are\n\n$$ (F,G)=-(-1)^{(|F|+1)(|G|+1)}(G,F), $$\n\n$$ ((F,G),H)+(-1)^{(|F|+1)(|G|+|H|)}((G,H),F)+(-1)^{(|H|+1)(|F|+|G|)}((H,F),G)=0. $$\n\nThe bracket is a graded biderivation, with the exact Leibniz identities\n\n$$ (F,GH)=(F,G)H+(-1)^{|G||H|}(F,H)G,\\qquad (FG,H)=F(G,H)+(-1)^{|F||G|}G(F,H). $$\n\nA regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.\n\nLet a local gauge parameter be a smooth map $\\lambda:U\\to\\mathfrak g$, and define its infinitesimal action on the fields by $\\delta_\\lambda A_\\mu=\\partial_\\mu\\lambda+[A_\\mu,\\lambda]$ and $\\delta_\\lambda\\psi=-\\rho(\\lambda)\\psi$. Write these variations as $\\delta_\\lambda\\Phi^i=R^i_\\alpha[\\Phi]\\lambda^\\alpha$, where $R$ is the resulting linear differential operator in $\\lambda$. Assume this declared gauge action is irreducible: if $\\delta_\\lambda\\Phi^i\\equiv0$ for every field configuration, then $\\lambda\\equiv0$. Assume also that its Lie-algebra action closes off shell, meaning its commutator closes without using equations of motion, and that no additional gauge symmetry is included. Let $S_0[A,\\psi]$ be a specified local classical action invariant under these transformations. Write $s_0$ for the BRST operator on the minimal fields given by $s_0A_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $s_0c=-\\tfrac12[c,c]$, and $s_0\\psi=-\\rho(c)\\psi$. The minimal BV functional candidate is\n\n$$S_{\\mathrm{BV}}:=S_0+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*\\,s_0\\Phi^A,$$\n\nwhere each product is in the displayed order and the same left/right derivative convention is used in the antibracket. It is a **classical master action** exactly when it satisfies the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$; the displayed formula alone does not assert that a particular $S_0$ satisfies that equation.\n\nThe optional nonminimal sector adds an odd antighost $\\bar c^a$ of ghost number $-1$, an even auxiliary field $b^a$ of ghost number $0$, and their antifields, with the BV functional term $-\\bar c_a^*b^a$ giving $s\\bar c=b$ and $sb=0$. This definition makes no cohomological contractibility claim for that pair. The formal local-field notation does not define an infinite-dimensional measure, a BV Laplacian $\\Delta$, a path integral, or the quantum master equation.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-bv-canonical-action-generates-brst-differential",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal B$ be the finite-dimensional algebra that is polynomial in even canonical coordinates and exterior in odd canonical coordinates $\\Phi^A,\\Phi_A^*$. Give each homogeneous minimal coordinate $\\Phi^A$ parity $\\epsilon_A\\in\\{0,1\\}$ and ghost number $g_A$, and give its antifield parity $\\epsilon_A+1\\pmod 2$ and ghost number $-1-g_A$. Use the canonical antibracket\n\n$$ (F,G)=\\sum_A\\left(\\frac{\\partial_rF}{\\partial\\Phi^A}\\frac{\\partial_lG}{\\partial\\Phi_A^*}-\\frac{\\partial_rF}{\\partial\\Phi_A^*}\\frac{\\partial_lG}{\\partial\\Phi^A}\\right). $$\n\nSuppose each $s_0\\Phi^A$ is independent of all antifields, has parity $\\epsilon_A+1\\pmod 2$ and ghost number $g_A+1$, and let $S_0$ be even of ghost number zero and independent of antifields. Define $S:=S_0+\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*s_0\\Phi^A$, with the displayed product order. Then $(S,\\Phi^A)=s_0\\Phi^A$ for each minimal coordinate. For a local-field version on a nonempty open $U\\subseteq\\mathbb R^n$, use fields $\\Phi^A(x)$ and antifields $\\Phi_A^*(x)$ with the same parity and ghost-number assignments, replace coordinate derivatives in the bracket by variational derivatives and the sum by $\\int_U d^nx$, and set $S_U:=S_{0,U}+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*(x)s_0\\Phi^A(x)$. If this domain makes the variational derivatives and integrations by parts well-defined and its boundary term vanishes, then $(S_U,\\Phi^A(x))=s_0\\Phi^A(x)$ pointwise.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-nonabelian-brst-nilpotence",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq 1$, let $U\\subseteq\\mathbb R^n$ be nonempty and open, let $\\mathfrak g$ be a finite-dimensional real Lie algebra, and let $V=V_{\\bar 0}\\oplus V_{\\bar 1}$ be a finite-dimensional graded complex vector space with an even Lie-algebra representation $\\rho:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V)$. Form the graded-commutative finite-jet algebra over $C^\\infty(U)$ from an even $\\mathfrak g$-valued local one-form $A=A_\\mu^aT_a\\,dx^\\mu$, a ghost $c=c^aT_a$ with odd components of ghost number one, and matter fields $\\psi^\\alpha$ of fixed component parity and ghost number zero. Let $D_\\mu$ be the total derivatives on coefficient functions and formal field jets, and let $s$ be the left odd derivation of ghost number one specified by $sA_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $sc=-\\tfrac12[c,c]$, $s\\psi=-\\rho(c)\\psi$, and $s(D_I\\Phi)=D_I(s\\Phi)$ on every multi-index jet. Then $s^2=0$ on the entire finite-jet algebra and $sD_\\mu=D_\\mu s$ for each $\\mu$.",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For homogeneous $F$ of parity $|F|$, the shifted Jacobi identity with entries $S_{\\mathrm{BV}},S_{\\mathrm{BV}},F$ gives $((S_{\\mathrm{BV}},S_{\\mathrm{BV}}),F)+2(-1)^{|F|}((S_{\\mathrm{BV}},F),S_{\\mathrm{BV}})=0$. Shifted skew-symmetry gives $((S_{\\mathrm{BV}},F),S_{\\mathrm{BV}})=(-1)^{|F|+1}(S_{\\mathrm{BV}},(S_{\\mathrm{BV}},F))$. Combining these identities yields $s^2F=(S_{\\mathrm{BV}},(S_{\\mathrm{BV}},F))=\\tfrac12((S_{\\mathrm{BV}},S_{\\mathrm{BV}}),F)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $S_1=\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*s_0\\Phi^A$. Since $S_0$ is antifield-independent, $(S_0,S_0)=0$. The displayed antifield signs and left/right derivative convention give $(S_0,S_1)=s_0S_0$, with $s_0$ acting only on $A,\\psi$ here. Gauge invariance says the first variation of $S_0$ vanishes for every admitted even parameter $\\lambda$; its coefficientwise Noether identity therefore remains zero after replacing $\\lambda$ by the formal ghost $c$, so $(S_0,S_1)=0$. The boundary hypothesis justifies the variational derivatives and integrations by parts in this identity. Both $S_0$ and $S_1$ are even, so shifted skew-symmetry gives $(S_1,S_0)=(S_0,S_1)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$, step 1.1 gives $s^2F=0$ for every $F\\in\\mathcal B$. This is the forward implication.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, if $s^2F=0$ for every $F$, step 1.1 implies $((S_{\\mathrm{BV}},S_{\\mathrm{BV}}),F)=0$ for every $F$, so $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})$ is central. Its ghost number is $0+0+1=1$ by [F1], and [A1] therefore forces $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$. This proves the reverse implication.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "By [F3], $qF:=(S_1,F)$ agrees with $s_0$ on each minimal field and ghost, and therefore on every finite-jet expression in them. Applying the identity of step 1.1 with $S_1$ in place of $S_{\\mathrm{BV}}$ gives $((S_1,S_1),\\Phi^A)=2s_0^2\\Phi^A=0$ by [F4]. The canonical bracket formula gives $((S_1,S_1),\\Phi^A)=-\\delta_r(S_1,S_1)/\\delta\\Phi_A^*$. Since $(S_1,S_1)$ is linear in antifields, these variational derivatives determine it modulo boundary terms and yield $(S_1,S_1)=-2\\int_U d^nx\\,\\sum_A\\Phi_A^*s_0^2\\Phi^A$. It vanishes by [F4].",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Expanding $(S_0+S_1,S_0+S_1)$, the pure $S_0$ term and both cross terms vanish by step 1.2, while the pure $S_1$ term vanishes by step 2.3. Thus the defined minimal action satisfies the classical master equation under the stated gauge-invariance, off-shell-closure, and domain hypotheses.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F2",
+            "step 1.2",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns an algebra and has no coordinate-patch emptiness case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: For S_BV=0, both the master equation and s squared hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: the potentially central bracket (S_BV,S_BV) has ghost number one, precisely the degree excluded by A1. The unit 1 has ghost number zero and s(1)=0, so its centrality does not obstruct the reverse implication."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 and 3.1: The forward implication holds for any odd Poisson bracket; the reverse uses exactly the stated vanishing of ghost-number-one central elements."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.2, 2.3 and 3.1: the local-functional application requires admitted variational derivatives and integrations by parts with vanishing boundary terms. No arbitrary boundary-domain assertion is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 and 3.1: The proof uses only the given algebra and one element S_BV; it makes no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 derive s\u00b2F=1/2((S_BV,S_BV),F) and then apply the master equation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 shows that (S_BV,S_BV) is central of ghost number one and hence zero under A1."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No enumeration is needed. In finite canonical coordinates, the center check is the coordinate-derivative argument in the Statement, used in step 2.2; formal local-functional domains must supply the explicit center hypothesis.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Independently read every statement, hypothesis, Fact, six proof steps, all three dependency carriers and their proofs, matching contract citations and reader/refuter no-finding evidence. Step 1.1 has the correct cyclic-Jacobi and skew signs for even S, giving s squared F=one half ((S,S),F). Step 2.1 proves the forward direction for all homogeneous F and hence by linearity all F. Step 2.2 correctly uses centrality AND ghost degree one, with the explicit center hypothesis, for the converse; constants of degree zero cause no obstruction, including S=0 or an empty coordinate list. Local step 1.2 uses the coefficientwise gauge-variation identity and killed surface terms to substitute the formal ghost, not a quantum assertion. In 2.3 the antifield-linear Hamiltonian gives the prolonged s0 on jets; bracket of two antifield-linear densities stays linear after integration by parts. For H=(S1,S1), parity one makes the right derivative of Phi-star times its coefficient have no extra sign, giving H=-2 integral Phi-star s0 squared Phi modulo killed boundary terms. No antifield-independent term can remain by antifield degree; all coefficients vanish by the checked nilpotence supplier. Step 3.1 expands the remaining zero terms. No arbitrary-domain center theorem or full BV measure is inferred. Compared with Gomis\u2013Par\u00eds\u2013Samuel \u00a74.2 (4.4)\u2013(4.7), \u00a74.6 (4.32)\u2013(4.36), Appendix A, and Qiu\u2013Zabzine Definition 4.1; GPS uses (F,S) while this carrier explicitly derives its (S,F) convention. No substantive defect or prerequisite gap found. Stale contract step locators are corrected as audit metadata only."
+      }
+    },
+    "ex-qftx-su2-brst-nilpotence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-nonabelian-brst-complex",
+          "source_section": "Definition",
+          "quote": "Let $n\\geq 1$, let $U\\subseteq\\mathbb R^n$ be a nonempty open set with coordinates $x^1,\\ldots,x^n$, and let $\\mathfrak g$ be a finite-dimensional real Lie algebra with bilinear alternating bracket $[\\ ,\\ ]_{\\mathfrak g}$ satisfying the Jacobi identity. Let $V=V_{\\bar 0}\\oplus V_{\\bar 1}$ be a finite-dimensional $\\mathbb Z_2$-graded complex vector space, and let $\\rho:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V)$ be an even representation, meaning $\\rho([X,Y]_{\\mathfrak g})=\\rho(X)\\rho(Y)-\\rho(Y)\\rho(X)$ for all $X,Y\\in\\mathfrak g$ and each $\\rho(X)$ preserves the grading of $V$. This is local Lie-algebra data; no global group, principal bundle, action functional, or quantum theory is selected here.\n\nChoose a basis $T_a$ of $\\mathfrak g$ and write $[T_b,T_c]_{\\mathfrak g}=f^a{}_{bc}T_a$. A local gauge potential is a $\\mathfrak g$-valued one-form $A=A_\\mu^aT_a\\,dx^\\mu$ whose component jet generators $A_{\\mu,I}^a$ are even and have ghost number zero. A matter field is a $V$-valued local field $\\psi$ with each component jet generator $\\psi_I^\\alpha$ assigned the parity of its graded component and ghost number zero. The ghost is $c=c^aT_a$, with odd component jet generators $c_I^a$ of ghost number one. The coefficient bracket of homogeneous $\\mathfrak g$-valued fields is $[X,Y]^a=f^a{}_{bc}X^bY^c$, using multiplication in the graded-commutative coefficient algebra; in particular $[c,c]^a=f^a{}_{bc}c^bc^c$ has no factor of $1/2$.\n\nFor a multi-index $I=(I_1,\\ldots,I_n)\\in\\mathbb N^n$, let $\\Phi_I$ denote the corresponding formal jet generator of a field component $\\Phi$. The finite-jet local algebra $\\mathcal F_U$ is $C^\\infty(U)$ tensored with the polynomial algebra in its even jet generators and the exterior algebra in its odd jet generators, where each element uses only finitely many jet generators. The total derivatives $D_\\mu$ act by $D_\\mu f=\\partial_\\mu f$ on $f\\in C^\\infty(U)$ and $D_\\mu\\Phi_I=\\Phi_{I+e_\\mu}$ on every jet generator; the multi-index derivatives commute.\n\nDefine the degree-one BRST operator candidate $s$ on the fields by\n\n$$sA_\\mu=\\partial_\\mu c+[A_\\mu,c],\\qquad sc=-\\frac12[c,c],\\qquad s\\psi=-\\rho(c)\\psi.$$\n\nOn coefficient functions set $sf=0$, and on every jet generator set $s(\\Phi_I)=D_I(s\\Phi)$; extend $s$ to $\\mathcal F_U$ by the odd left-derivation rule $s(FG)=(sF)G+(-1)^{|F|}F(sG)$ for homogeneous $F$, where $|F|$ is total parity. The minimal sector here contains only $A,\\psi,c$ and their jets. Antighosts and Nakanishi–Lautrup variables are not included; adjoining such a nonminimal pair requires separate definitions and a proof before any cohomological triviality claim. The specified data are a BRST complex once $s^2=0$, which is established for these formulas in the following nilpotence lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-nonabelian-brst-nilpotence",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq 1$, let $U\\subseteq\\mathbb R^n$ be nonempty and open, let $\\mathfrak g$ be a finite-dimensional real Lie algebra, and let $V=V_{\\bar 0}\\oplus V_{\\bar 1}$ be a finite-dimensional graded complex vector space with an even Lie-algebra representation $\\rho:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V)$. Form the graded-commutative finite-jet algebra over $C^\\infty(U)$ from an even $\\mathfrak g$-valued local one-form $A=A_\\mu^aT_a\\,dx^\\mu$, a ghost $c=c^aT_a$ with odd components of ghost number one, and matter fields $\\psi^\\alpha$ of fixed component parity and ghost number zero. Let $D_\\mu$ be the total derivatives on coefficient functions and formal field jets, and let $s$ be the left odd derivation of ghost number one specified by $sA_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $sc=-\\tfrac12[c,c]$, $s\\psi=-\\rho(c)\\psi$, and $s(D_I\\Phi)=D_I(s\\Phi)$ on every multi-index jet. Then $s^2=0$ on the entire finite-jet algebra and $sD_\\mu=D_\\mu s$ for each $\\mu$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives $\\sigma_1\\sigma_2=i\\sigma_3$, $\\sigma_2\\sigma_1=-i\\sigma_3$, $\\sigma_2\\sigma_3=i\\sigma_1$, $\\sigma_3\\sigma_2=-i\\sigma_1$, $\\sigma_3\\sigma_1=i\\sigma_2$, and $\\sigma_1\\sigma_3=-i\\sigma_2$, while $\\sigma_a^2=I$. Hence $[T_a,T_b]=(-i/2)^2[\\sigma_a,\\sigma_b]=\\epsilon_{ab}{}^cT_c$ by [A1]. Matrix commutators satisfy Jacobi because the Jacobiator expands to $XYZ-YXZ-ZXY+ZYX+YZX-ZYX-XYZ+XZY+ZXY-XZY-YZX+YXZ=0$, so these structure constants obey Jacobi. Since $\\rho(T_a)=T_a$, the same commutator identity is the representation identity; it preserves either chosen pure grading of $V$. For $n\\geq1$, substitution into [F1] gives exactly the three component formulas.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $n\\geq1$, the hypotheses of [F2] hold for $\\mathfrak{su}(2)$ and its defining representation with either pure grading. Applying that lemma gives $s^2=0$ on the generators, every total-derivative jet, and their finite graded-polynomial algebra.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $n=0$, the displayed formulas reduce to $sc^1=-c^2c^3$, $sc^2=-c^3c^1$, $sc^3=-c^1c^2$, and $s\\psi=-c^aT_a\\psi$. The odd left-derivation rule gives $s^2c^1=c^3c^1c^3-c^2c^1c^2=0$, since each odd ghost has square zero; cyclic permutation proves $s^2c^2=s^2c^3=0$. Put $C=c^aT_a$. Anticommutation and step 1.1 give $C^2=\\tfrac12c^ac^b[T_a,T_b]=\\tfrac12\\epsilon^d{}_{ab}c^ac^bT_d=-sC$, so $s^2\\psi=-(sC)\\psi+C(s\\psi)=C^2\\psi-C^2\\psi=0$ for either matter parity. The square of an odd derivation is an even derivation, as the cross terms in $s^2(FG)$ cancel. It therefore vanishes on this entire freely generated graded-commutative algebra. There are no remaining gauge components or positive-order jets. Together with step 2.1, this proves the assertion for every allowed $n$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a nonempty open coordinate patch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example, displayed component transformations, and verification step 1.1: If c=0, the three component transformations vanish. For n=0, verification step 3.1 separately checks nilpotence on all ghost and matter generators and extends it by the even-derivation rule for s squared; no spatial jets or gauge components exist."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 1.1: each Pauli matrix squares to I, establishing the unit-matrix normalization used with T_a=-i sigma_a/2. With one spacetime coordinate the same component calculation and jet extension still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and verification steps 1.1 and 2.1: The matter field may be set to zero without changing the SU(2) gauge/ghost verification."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Pauli-matrix verification uses an open coordinate patch and formal jets, without a path or boundary integral whose endpoint values require checking."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example, displayed Pauli basis, and verification step 1.1: The three Pauli matrices and their displayed basis are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example verifies square-zero BRST formulas for the chosen SU(2) matrices; it does not assert that every nilpotent BRST algebra is this defining representation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The only deduction is from the checked SU(2) structure constants to nilpotence. No converse reconstructing SU(2) from nilpotence is stated."
+        }
+      ],
+      "finite_checks": [
+        "Using T_a=-i sigma_a/2, matrix multiplication gives [T_a,T_b]=epsilon_ab^c T_c and the corresponding Jacobi sum is zero; step 1.1 identifies exactly where this finite basis identity enters."
+      ],
+      "finite_checks_disposition": "The finite component check is the displayed Pauli-matrix commutator and SU(2) Jacobi identity; it is written symbolically and is not a code-run or numerical test."
+    },
+    "ex-qftx-su2-bv-ghost-master-equation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-bv-antibracket-master-action",
+          "source_section": "Definition",
+          "quote": "Use the local field data and BRST convention on an open set $U\\subseteq\\mathbb R^n$ given by a finite-dimensional real Lie algebra $\\mathfrak g$, a graded representation space $V$, an even $\\mathfrak g$-valued gauge potential $A_\\mu$, an odd ghost $c$ of ghost number $1$, and matter components $\\psi^\\alpha$ of parity $\\epsilon_\\alpha$ and ghost number $0$. For every field or ghost coordinate $\\Phi^A$ of parity $\\epsilon_A$ and ghost number $g_A$, introduce an antifield $\\Phi_A^*$ of parity $\\epsilon_A+1\\pmod 2$ and ghost number $-1-g_A$. Thus $A^*$ and the antifields of even matter are odd of ghost number $-1$, while $c^*$ is even of ghost number $-2$. The minimal sector consists of $A,\\psi,c$ and these antifields.\n\nFor a finite-dimensional canonical coordinate algebra, take the polynomial algebra in the even coordinates tensor the exterior algebra in the odd coordinates. In the local-field notation, use finite-jet local functionals with variational derivatives only when the chosen domain makes those derivatives and integrations by parts well-defined; compact support or boundary conditions that kill surface terms are part of that domain. For homogeneous functionals $F,G$, define the canonical antibracket by\n\n$$\n(F,G):=\\sum_A\\left(\\frac{\\partial_r F}{\\partial\\Phi^A}\\frac{\\partial_lG}{\\partial\\Phi_A^*}-\\frac{\\partial_rF}{\\partial\\Phi_A^*}\\frac{\\partial_lG}{\\partial\\Phi^A}\\right),\n$$\n\nwith an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. Write $|F|\\in\\mathbb Z_2$ for the parity and $\\operatorname{gh}(F)\\in\\mathbb Z$ for the ghost number of a homogeneous functional $F$. The bracket has parity and ghost number\n\n$$|(F,G)|=|F|+|G|+1\\pmod 2,\\qquad \\operatorname{gh}((F,G))=\\operatorname{gh}(F)+\\operatorname{gh}(G)+1.$$\n\nFor homogeneous $F,G,H$, its shifted graded-skew identity and Jacobi identity are\n\n$$ (F,G)=-(-1)^{(|F|+1)(|G|+1)}(G,F), $$\n\n$$ ((F,G),H)+(-1)^{(|F|+1)(|G|+|H|)}((G,H),F)+(-1)^{(|H|+1)(|F|+|G|)}((H,F),G)=0. $$\n\nThe bracket is a graded biderivation, with the exact Leibniz identities\n\n$$ (F,GH)=(F,G)H+(-1)^{|G||H|}(F,H)G,\\qquad (FG,H)=F(G,H)+(-1)^{|F||G|}G(F,H). $$\n\nA regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.\n\nLet a local gauge parameter be a smooth map $\\lambda:U\\to\\mathfrak g$, and define its infinitesimal action on the fields by $\\delta_\\lambda A_\\mu=\\partial_\\mu\\lambda+[A_\\mu,\\lambda]$ and $\\delta_\\lambda\\psi=-\\rho(\\lambda)\\psi$. Write these variations as $\\delta_\\lambda\\Phi^i=R^i_\\alpha[\\Phi]\\lambda^\\alpha$, where $R$ is the resulting linear differential operator in $\\lambda$. Assume this declared gauge action is irreducible: if $\\delta_\\lambda\\Phi^i\\equiv0$ for every field configuration, then $\\lambda\\equiv0$. Assume also that its Lie-algebra action closes off shell, meaning its commutator closes without using equations of motion, and that no additional gauge symmetry is included. Let $S_0[A,\\psi]$ be a specified local classical action invariant under these transformations. Write $s_0$ for the BRST operator on the minimal fields given by $s_0A_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $s_0c=-\\tfrac12[c,c]$, and $s_0\\psi=-\\rho(c)\\psi$. The minimal BV functional candidate is\n\n$$S_{\\mathrm{BV}}:=S_0+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*\\,s_0\\Phi^A,$$\n\nwhere each product is in the displayed order and the same left/right derivative convention is used in the antibracket. It is a **classical master action** exactly when it satisfies the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$; the displayed formula alone does not assert that a particular $S_0$ satisfies that equation.\n\nThe optional nonminimal sector adds an odd antighost $\\bar c^a$ of ghost number $-1$, an even auxiliary field $b^a$ of ghost number $0$, and their antifields, with the BV functional term $-\\bar c_a^*b^a$ giving $s\\bar c=b$ and $sb=0$. This definition makes no cohomological contractibility claim for that pair. The formal local-field notation does not define an infinite-dimensional measure, a BV Laplacian $\\Delta$, a path integral, or the quantum master equation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-bv-master-equation-brst-nilpotence",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal B$ be the graded-commutative canonical field/antifield algebra of the preceding definition: $|\\Phi^A|=\\epsilon_A$, $\\operatorname{gh}(\\Phi^A)=g_A$, $|\\Phi_A^*|=\\epsilon_A+1$, and $\\operatorname{gh}(\\Phi_A^*)=-1-g_A$. Its canonical antibracket is odd, has ghost number $+1$, and satisfies the shifted skew and Jacobi identities stated there. Assume the center of $\\mathcal B$ contains no nonzero element of ghost number one. In the finite-dimensional coordinate algebra this follows because a central element has zero derivative with respect to every field and antifield coordinate and is therefore a numerical constant; for a formal local-functional domain it is an explicit hypothesis. For any even $S_{\\mathrm{BV}}\\in\\mathcal B$ of ghost number zero, define $sF:=(S_{\\mathrm{BV}},F)$. Then $s^2=0$ on $\\mathcal B$ if and only if the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$ holds.\n\nIn the local-field case of the preceding definition, let $U\\subseteq\\mathbb R^n$ be nonempty and open, let $\\mathfrak g$ be a finite-dimensional real Lie algebra, and let $\\rho$ be the stated parity-preserving representation on the graded matter space. Take the minimal fields $A,\\psi,c$ and their antifields, with $\\delta_\\lambda A_\\mu=\\partial_\\mu\\lambda+[A_\\mu,\\lambda]$ and $\\delta_\\lambda\\psi=-\\rho(\\lambda)\\psi$ for every admitted smooth $\\lambda:U\\to\\mathfrak g$. Assume $[\\delta_\\lambda,\\delta_\\mu]=\\delta_{[\\lambda,\\mu]}$ without equations of motion, where $[\\lambda,\\mu](x):=[\\lambda(x),\\mu(x)]_{\\mathfrak g}$, and that $\\delta_\\lambda\\Phi\\equiv0$ for every field configuration implies $\\lambda\\equiv0$. Let $S_0[A,\\psi]$ be a local functional with well-defined variational derivatives, invariant under these transformations. Choose a functional domain and support or boundary conditions for which the antibracket, integrations by parts, and gauge-variation identity are well-defined and boundary terms vanish. For $s_0A_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $s_0c=-\\tfrac12[c,c]$, and $s_0\\psi=-\\rho(c)\\psi$, form the minimal action $S_{\\mathrm{BV}}=S_0+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*s_0\\Phi^A$ in the order specified in the definition. Then this minimal action satisfies the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The ghost number of $S_{\\mathrm{CE}}$ is $-2+1+1=0$, and its parity is even. The derivative convention gives $\\partial_rS_{\\mathrm{CE}}/\\partial c^a=-c_e^*\\epsilon^e{}_{ab}c^b$, $\\partial_lS_{\\mathrm{CE}}/\\partial c^a=+c_e^*\\epsilon^e{}_{ab}c^b$, and $\\partial_rS_{\\mathrm{CE}}/\\partial c_a^*=\\partial_lS_{\\mathrm{CE}}/\\partial c_a^*=\\tfrac12\\epsilon^a{}_{cd}c^cc^d$. Since $c_a^*$ is even, substitution in the defining bracket gives $(S_{\\mathrm{CE}},S_{\\mathrm{CE}})=(-c_e^*\\epsilon^e{}_{ab}c^b)(\\tfrac12\\epsilon^a{}_{cd}c^cc^d)-(\\tfrac12\\epsilon^a{}_{cd}c^cc^d)(+c_e^*\\epsilon^e{}_{ab}c^b)=-c_e^*\\epsilon^e{}_{ab}\\epsilon^a{}_{cd}c^bc^cc^d$. The ghost product is totally antisymmetric, so the tensor contraction reduces to its antisymmetrization $\\epsilon^e{}_{a[b}\\epsilon^a{}_{cd]}$, which is the Jacobi identity and vanishes by [A1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coordinate algebra is finite and canonical, so its center consists of constants and has no nonzero ghost-number-one element. Step 1.1 proves the classical master equation, and [F2] therefore gives $s^2=0$ on the entire algebra.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a finite-dimensional algebra with no spacetime patch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example, canonical antibracket formula, and verification steps 1.1 and 2.1: For S_CE=0, the master equation and Hamiltonian square are both zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 2.1: the unit polynomial is central of ghost number zero; no nonzero ghost-number-one central polynomial exists. This is the precise center condition needed to apply the nilpotence equivalence to S_CE."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example uses the nonzero algebra su(2); the proof identifies the exact Jacobi tensor that would vanish for any Lie algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has three ghost-antifield pairs and a finite polynomial/exterior algebra, with no spacetime integration, path, or endpoint conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example, the three fixed ghost coordinate pairs, and verification step 1.1: The finite ghost basis is fixed as c^1,c^2,c^3; no family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 establish the master equation and apply the general implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies the master equation and then nilpotence; it does not use the reverse implication."
+        }
+      ],
+      "finite_checks": [
+        "The coefficient of c^b c^c c^d in (S_CE,S_CE) is the antisymmetrized epsilon contraction epsilon^e_ab epsilon^a_cd, equal to the su(2) Jacobiator and zero."
+      ],
+      "finite_checks_disposition": "The finite check is the exact epsilon-structure-constant Jacobi contraction in step 1.1; no floating-point or code-generated result is claimed."
+    },
+    "lem-qftx-bv-canonical-action-generates-brst-differential": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-bv-antibracket-master-action",
+          "source_section": "Definition",
+          "quote": "Use the local field data and BRST convention on an open set $U\\subseteq\\mathbb R^n$ given by a finite-dimensional real Lie algebra $\\mathfrak g$, a graded representation space $V$, an even $\\mathfrak g$-valued gauge potential $A_\\mu$, an odd ghost $c$ of ghost number $1$, and matter components $\\psi^\\alpha$ of parity $\\epsilon_\\alpha$ and ghost number $0$. For every field or ghost coordinate $\\Phi^A$ of parity $\\epsilon_A$ and ghost number $g_A$, introduce an antifield $\\Phi_A^*$ of parity $\\epsilon_A+1\\pmod 2$ and ghost number $-1-g_A$. Thus $A^*$ and the antifields of even matter are odd of ghost number $-1$, while $c^*$ is even of ghost number $-2$. The minimal sector consists of $A,\\psi,c$ and these antifields.\n\nFor a finite-dimensional canonical coordinate algebra, take the polynomial algebra in the even coordinates tensor the exterior algebra in the odd coordinates. In the local-field notation, use finite-jet local functionals with variational derivatives only when the chosen domain makes those derivatives and integrations by parts well-defined; compact support or boundary conditions that kill surface terms are part of that domain. For homogeneous functionals $F,G$, define the canonical antibracket by\n\n$$\n(F,G):=\\sum_A\\left(\\frac{\\partial_r F}{\\partial\\Phi^A}\\frac{\\partial_lG}{\\partial\\Phi_A^*}-\\frac{\\partial_rF}{\\partial\\Phi_A^*}\\frac{\\partial_lG}{\\partial\\Phi^A}\\right),\n$$\n\nwith an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. Write $|F|\\in\\mathbb Z_2$ for the parity and $\\operatorname{gh}(F)\\in\\mathbb Z$ for the ghost number of a homogeneous functional $F$. The bracket has parity and ghost number\n\n$$|(F,G)|=|F|+|G|+1\\pmod 2,\\qquad \\operatorname{gh}((F,G))=\\operatorname{gh}(F)+\\operatorname{gh}(G)+1.$$\n\nFor homogeneous $F,G,H$, its shifted graded-skew identity and Jacobi identity are\n\n$$ (F,G)=-(-1)^{(|F|+1)(|G|+1)}(G,F), $$\n\n$$ ((F,G),H)+(-1)^{(|F|+1)(|G|+|H|)}((G,H),F)+(-1)^{(|H|+1)(|F|+|G|)}((H,F),G)=0. $$\n\nThe bracket is a graded biderivation, with the exact Leibniz identities\n\n$$ (F,GH)=(F,G)H+(-1)^{|G||H|}(F,H)G,\\qquad (FG,H)=F(G,H)+(-1)^{|F||G|}G(F,H). $$\n\nA regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.\n\nLet a local gauge parameter be a smooth map $\\lambda:U\\to\\mathfrak g$, and define its infinitesimal action on the fields by $\\delta_\\lambda A_\\mu=\\partial_\\mu\\lambda+[A_\\mu,\\lambda]$ and $\\delta_\\lambda\\psi=-\\rho(\\lambda)\\psi$. Write these variations as $\\delta_\\lambda\\Phi^i=R^i_\\alpha[\\Phi]\\lambda^\\alpha$, where $R$ is the resulting linear differential operator in $\\lambda$. Assume this declared gauge action is irreducible: if $\\delta_\\lambda\\Phi^i\\equiv0$ for every field configuration, then $\\lambda\\equiv0$. Assume also that its Lie-algebra action closes off shell, meaning its commutator closes without using equations of motion, and that no additional gauge symmetry is included. Let $S_0[A,\\psi]$ be a specified local classical action invariant under these transformations. Write $s_0$ for the BRST operator on the minimal fields given by $s_0A_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $s_0c=-\\tfrac12[c,c]$, and $s_0\\psi=-\\rho(c)\\psi$. The minimal BV functional candidate is\n\n$$S_{\\mathrm{BV}}:=S_0+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*\\,s_0\\Phi^A,$$\n\nwhere each product is in the displayed order and the same left/right derivative convention is used in the antibracket. It is a **classical master action** exactly when it satisfies the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$; the displayed formula alone does not assert that a particular $S_0$ satisfies that equation.\n\nThe optional nonminimal sector adds an odd antighost $\\bar c^a$ of ghost number $-1$, an even auxiliary field $b^a$ of ghost number $0$, and their antifields, with the BV functional term $-\\bar c_a^*b^a$ giving $s\\bar c=b$ and $sb=0$. This definition makes no cohomological contractibility claim for that pair. The formal local-field notation does not define an infinite-dimensional measure, a BV Laplacian $\\Delta$, a path integral, or the quantum master equation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-bv-antibracket-master-action",
+          "source_section": "Definition",
+          "quote": "Use the local field data and BRST convention on an open set $U\\subseteq\\mathbb R^n$ given by a finite-dimensional real Lie algebra $\\mathfrak g$, a graded representation space $V$, an even $\\mathfrak g$-valued gauge potential $A_\\mu$, an odd ghost $c$ of ghost number $1$, and matter components $\\psi^\\alpha$ of parity $\\epsilon_\\alpha$ and ghost number $0$. For every field or ghost coordinate $\\Phi^A$ of parity $\\epsilon_A$ and ghost number $g_A$, introduce an antifield $\\Phi_A^*$ of parity $\\epsilon_A+1\\pmod 2$ and ghost number $-1-g_A$. Thus $A^*$ and the antifields of even matter are odd of ghost number $-1$, while $c^*$ is even of ghost number $-2$. The minimal sector consists of $A,\\psi,c$ and these antifields.\n\nFor a finite-dimensional canonical coordinate algebra, take the polynomial algebra in the even coordinates tensor the exterior algebra in the odd coordinates. In the local-field notation, use finite-jet local functionals with variational derivatives only when the chosen domain makes those derivatives and integrations by parts well-defined; compact support or boundary conditions that kill surface terms are part of that domain. For homogeneous functionals $F,G$, define the canonical antibracket by\n\n$$\n(F,G):=\\sum_A\\left(\\frac{\\partial_r F}{\\partial\\Phi^A}\\frac{\\partial_lG}{\\partial\\Phi_A^*}-\\frac{\\partial_rF}{\\partial\\Phi_A^*}\\frac{\\partial_lG}{\\partial\\Phi^A}\\right),\n$$\n\nwith an integral over $U$ replacing the sum in a local-field expression. Left and right derivatives are the graded derivatives acting from the indicated side. Write $|F|\\in\\mathbb Z_2$ for the parity and $\\operatorname{gh}(F)\\in\\mathbb Z$ for the ghost number of a homogeneous functional $F$. The bracket has parity and ghost number\n\n$$|(F,G)|=|F|+|G|+1\\pmod 2,\\qquad \\operatorname{gh}((F,G))=\\operatorname{gh}(F)+\\operatorname{gh}(G)+1.$$\n\nFor homogeneous $F,G,H$, its shifted graded-skew identity and Jacobi identity are\n\n$$ (F,G)=-(-1)^{(|F|+1)(|G|+1)}(G,F), $$\n\n$$ ((F,G),H)+(-1)^{(|F|+1)(|G|+|H|)}((G,H),F)+(-1)^{(|H|+1)(|F|+|G|)}((H,F),G)=0. $$\n\nThe bracket is a graded biderivation, with the exact Leibniz identities\n\n$$ (F,GH)=(F,G)H+(-1)^{|G||H|}(F,H)G,\\qquad (FG,H)=F(G,H)+(-1)^{|F||G|}G(F,H). $$\n\nA regular finite-dimensional canonical domain has no nonzero central element of ghost number $1$: an element central against every coordinate has all coordinate derivatives zero and is a numerical constant. A formal local-functional domain used below must separately satisfy this same no-ghost-number-one-center condition.\n\nLet a local gauge parameter be a smooth map $\\lambda:U\\to\\mathfrak g$, and define its infinitesimal action on the fields by $\\delta_\\lambda A_\\mu=\\partial_\\mu\\lambda+[A_\\mu,\\lambda]$ and $\\delta_\\lambda\\psi=-\\rho(\\lambda)\\psi$. Write these variations as $\\delta_\\lambda\\Phi^i=R^i_\\alpha[\\Phi]\\lambda^\\alpha$, where $R$ is the resulting linear differential operator in $\\lambda$. Assume this declared gauge action is irreducible: if $\\delta_\\lambda\\Phi^i\\equiv0$ for every field configuration, then $\\lambda\\equiv0$. Assume also that its Lie-algebra action closes off shell, meaning its commutator closes without using equations of motion, and that no additional gauge symmetry is included. Let $S_0[A,\\psi]$ be a specified local classical action invariant under these transformations. Write $s_0$ for the BRST operator on the minimal fields given by $s_0A_\\mu=\\partial_\\mu c+[A_\\mu,c]$, $s_0c=-\\tfrac12[c,c]$, and $s_0\\psi=-\\rho(c)\\psi$. The minimal BV functional candidate is\n\n$$S_{\\mathrm{BV}}:=S_0+\\int_U d^nx\\,\\sum_A(-1)^{\\epsilon_A}\\Phi_A^*\\,s_0\\Phi^A,$$\n\nwhere each product is in the displayed order and the same left/right derivative convention is used in the antibracket. It is a **classical master action** exactly when it satisfies the classical master equation $(S_{\\mathrm{BV}},S_{\\mathrm{BV}})=0$; the displayed formula alone does not assert that a particular $S_0$ satisfies that equation.\n\nThe optional nonminimal sector adds an odd antighost $\\bar c^a$ of ghost number $-1$, an even auxiliary field $b^a$ of ghost number $0$, and their antifields, with the BV functional term $-\\bar c_a^*b^a$ giving $s\\bar c=b$ and $sb=0$. This definition makes no cohomological contractibility claim for that pair. The formal local-field notation does not define an infinite-dimensional measure, a BV Laplacian $\\Delta$, a path integral, or the quantum master equation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $G=\\Phi^A$, $\\partial_lG/\\partial\\Phi_B^*=0$ and $\\partial_lG/\\partial\\Phi^B=\\delta^A_B$, so the first bracket term vanishes and the second gives $(S,\\Phi^A)=-\\partial_rS/\\partial\\Phi_A^*$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The right-derivative Leibniz rule is $\\partial_r(XY)/\\partial z=X(\\partial_rY/\\partial z)+(-1)^{|z||Y|}(\\partial_rX/\\partial z)Y$. Apply it with $X=\\Phi_A^*$, $Y=s_0\\Phi^A$, and $z=\\Phi_A^*$; by [A1] the derivative of $Y$ is zero, while $|z|=|Y|=\\epsilon_A+1$. Thus $\\partial_r(\\Phi_A^*s_0\\Phi^A)/\\partial\\Phi_A^*=(-1)^{(\\epsilon_A+1)(\\epsilon_A+1)}s_0\\Phi^A=(-1)^{\\epsilon_A+1}s_0\\Phi^A$. Multiplying by $(-1)^{\\epsilon_A}$ and using [F2], we obtain $\\partial_rS/\\partial\\Phi_A^*=-s_0\\Phi^A$, so step 1.1 yields $(S,\\Phi^A)=s_0\\Phi^A$. In the local version $\\delta_rS_U/\\delta\\Phi_A^*(x)$ has the same value $-s_0\\Phi^A(x)$ because the antifield occurs without derivatives, and the functional bracket with $\\Phi^A(x)$ is its negative.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a finite canonical coordinate algebra and has no spacetime patch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: If every s0 Phi^A vanishes, the antifield-linear term is zero and both sides of the coordinate identity vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply to each individual coordinate pair: the Kronecker delta leaves exactly one right antifield derivative. For even Phi the coupling sign is +1 and derivative sign -1; for odd Phi they are -1 and +1, giving (S,Phi)=s_0 Phi in either case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement, finite canonical coordinate list, and steps 1.1 and 2.1: If the coordinate list is empty, the identity is vacuous; otherwise the derivative calculation applies to each canonical pair."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the local-field equality requires well-defined variational derivatives and vanishing integration-by-parts boundary terms. The antifield appears without derivatives, so its variational derivative is the same local coefficient -s_0 Phi; no extra boundary term is generated in this differentiation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1, each for a fixed arbitrary coordinate index: The calculation fixes one arbitrary coordinate index A and makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The carrier is a one-way coordinate identity, not an equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The carrier is a one-way coordinate identity, not an equivalence claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof is an exact parity-dependent right-derivative calculation for every canonical coordinate; no numerical or finite-enumeration assertion is made.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Read the full Statement, Facts and both proof steps, its exact BV-definition supplier, matching contract derivations and reader/refuter evidence. Step 1.1 leaves only minus the right antifield derivative. In step 2.1 antifield independence kills every other derivative, and the two factors (-1)^epsilon and (-1)^(epsilon+1) multiply to -1 for both coordinate parities, which cancels the bracket minus sign. The right derivative product rule follows from the variation placement in Gomis\u2013Par\u00eds\u2013Samuel Appendix A (A.2)\u2013(A.4); their \u00a74.2 fixes the bracket. Empty coordinate list gives a vacuous assertion, zero variations give zero, and no nilpotence or invariance assumption is required. Local evaluation is the standard distributional coordinate-kernel extension: differentiating the antifield-linear density introduces a delta kernel and no derivative of the antifield, giving the displayed coefficient after integration. This is conditional on the stated admissible domain/boundary hypotheses, not an existence theorem for arbitrary functional spaces. No choice or empirical premise. No defect found."
+      }
+    }
+  }
+}

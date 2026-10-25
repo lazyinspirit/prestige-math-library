@@ -1,0 +1,168 @@
+{
+  "id": "alg-qa-quantum-phase-estimation",
+  "group": "dqa_007",
+  "agent": "/root/dqa_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Both authentic original standalone tiles contain instructions and instrument justification but no circuit. A register-level circuit materially clarifies the reversed control-power index, positive-sign inverse QFT, and coherent-prefix boundary. This is an explanatory addition under the expanded diagram criterion, not a claim of a faulty procedure.",
+      "action": "Added a bundled phase/system circuit and exact definition of its controlled-power block in existing final Remarks; retained all original text.",
+      "status": "resolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a general-m register-level QPE circuit showing Hadamards, controlled block D, inverse positive-sign QFT, coherent-prefix cut and phase measurement; documented exact wire-power assignment and nonzero-branch system output.",
+  "source_lines_after": [
+    67,
+    69,
+    70,
+    71,
+    94,
+    99
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "P=(C^2)^{tensor m} and finite-dimensional H; phase bundle ordered q_0,...,q_{m-1}; input |0^m> tensor psi.",
+      "check": "The upper H^{tensor m} acts P to P and all subsequent phase gates act P to P; D acts P tensor H to itself. Each supplied controlled gate is C^2 tensor H to itself with control first, as def-qc-controlled-unitary-access specifies. Bundling avoids implying extra wires at m=1.",
+      "justification": "Definition input and steps 1-3; def-qa-eigenphase-estimation-model; def-qc-ordered-bitstring-encoding; def-qc-controlled-unitary-access."
+    },
+    {
+      "objects": "Controlled-power block D.",
+      "check": "For chronological j=0,...,m-1 use control q_{m-1-j} and target U^{2^j}. On |x> tensor v the exponent is sum_j b_{m-1-j}2^j=x, hence D(|x> tensor v)=|x> tensor U^x v. The diagram annotation retains this assignment rather than reversing the big-endian bundle.",
+      "justification": "Step 3 and the exact weight assignment in def-qa-eigenphase-estimation-model, whose bitstring index is defined by def-qc-ordered-bitstring-encoding."
+    },
+    {
+      "objects": "QFT_Q^{-1} on phase register, Q=2^m.",
+      "check": "The positive-sign QFT has entry Q^{-1/2} exp(2 pi i xy/Q); its inverse has negative sign. After D on eigenvector input the phase amplitudes are Q^{-1/2} exp(2 pi i x theta); applying the inverse therefore compares theta with y/Q with the correct sign. The inverse-QFT box does not apply U^{-1}.",
+      "justification": "Step 4 and following original caveat; def-qa-cyclic-quantum-fourier-transform explicitly defines positive sign."
+    },
+    {
+      "objects": "Dashed prefix boundary, M measurement, outputs y,y/Q and psi.",
+      "check": "Boundary is after QFT inverse and before M. M touches only P and has the original projectors |y><y| tensor I_H. Because U^x psi=exp(2 pi i x theta)psi, the state is a tensor product before M, and every nonzero-probability conditioned branch keeps system state psi (up to irrelevant global phase). No exact m-bit phase promise is implied by the output.",
+      "justification": "Original step 5 and original instrument argument in Remarks; eigenvector promise in def-qa-eigenphase-estimation-model. All original procedure and instrument justification remain independent of the figure."
+    }
+  ],
+  "original_evidence": {
+    "path_discrepancy": "Recorded evidence_dir/inspection_dir places screenshots under diagram-supplement, but files are absent there. Authentic files were located within the same quantum-algorithms category and verified against both recorded SHA256 values.",
+    "resolved_directory": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots",
+    "sha256": [
+      "6f23f0a370de0f601a31374f4b00a5191fcc6b18cf107b9c429306e875450463",
+      "4a3e87548e0451e4ebe4ffc3b713215d1d623ec9782e453c81647a8399502df1"
+    ],
+    "standalone_original_resolution_views": true
+  },
+  "guards": {
+    "before_raw_sha256": "7d7c727605c0017e184f74d196c9869763a8bcd6b77a3956d0cee49cba03e835",
+    "after_raw_sha256": "390ea16e515ccb52c258342a2c25e9eabb19fa872afcb24f2046ec2f6817b655",
+    "raw_preimage_verified_immediately_before_first_edit": true,
+    "frontmatter_byte_identical": true,
+    "status_byte_identical": true,
+    "original_body_preserved_as_prefix": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/alg-qa-quantum-phase-estimation.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-quantum-phase-estimation.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-qa-quantum-phase-estimation.md",
+            "item_id": "alg-qa-quantum-phase-estimation",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-qa-quantum-phase-estimation.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_visual_check": {
+    "preview_directory": "research/math-library-rendering-repairs-2026-10-23/previews/dqa007-native-accepted",
+    "manifest_path": "research/math-library-rendering-repairs-2026-10-23/previews/dqa007-native-accepted/manifest.json",
+    "manifest_sha256": "f7158e06eabd52bcd85f6ebb9ce96374407d0810ea81dbfd86ff3da5741131c0",
+    "source_binding": {
+      "id": "alg-qa-quantum-phase-estimation",
+      "status": "published",
+      "source": "items/alg-qa-quantum-phase-estimation.md",
+      "source_sha256": "390ea16e515ccb52c258342a2c25e9eabb19fa872afcb24f2046ec2f6817b655",
+      "snapshot": "snapshots/alg-qa-quantum-phase-estimation.md",
+      "html": "html/alg-qa-quantum-phase-estimation.html",
+      "html_sha256": "73b1acbe5097b63f60d8888d76f24f8a82c58f2c0a58f0df5e12e07016303fdb",
+      "reference_map_sha256": "9f5aba984d3a19bb6515dc1d1cbed697736ff3ee4c489c900d3262e9dd2b80b5"
+    },
+    "capture": {
+      "capture_revision": 2,
+      "id": "alg-qa-quantum-phase-estimation",
+      "height": 2144,
+      "viewport": {
+        "width": 1200,
+        "height": 1400
+      },
+      "tile_step": 1300,
+      "overlap": 100,
+      "screenshots": [
+        {
+          "path": "screenshots/alg-qa-quantum-phase-estimation--01.png",
+          "y": 0,
+          "width": 1200,
+          "height": 1400,
+          "sha256": "66e1c03ae7b087a3744e1842152add6dd372e304826c50b329fdfb52ff136ccd",
+          "encoding": "lossless PNG, compressionLevel 9"
+        },
+        {
+          "path": "screenshots/alg-qa-quantum-phase-estimation--02.png",
+          "y": 1300,
+          "width": 1200,
+          "height": 844,
+          "sha256": "41f4328cf5d492a122afac04f0f87b01c74314beebb9abc49e01b265ba2d63e3",
+          "encoding": "lossless PNG, compressionLevel 9"
+        }
+      ],
+      "katex_errors": [],
+      "katex_count": 55,
+      "tikz_count": 1,
+      "diagram_failures": [],
+      "captured_at": "2026-10-24T03:51:08.103Z"
+    },
+    "katex_errors": [],
+    "diagram_failures": [],
+    "standalone_original_resolution_views": [
+      "01",
+      "02"
+    ],
+    "observations": "One actual compiled SVG circuit visible on dark background. All phase/system segments, H/D/QFT/M boxes, dashed prefix marker and rightward output arrows are visible; labels have contrast and no overlaps. First successful compile showed clipped bottom caption; explicit bounding-box padding repaired it, then final native preview visibly showed the complete q index, exponent, j range and system label. No graph cycles occur.",
+    "iterations": "Initial preview failed because native TeX lacks \\text; direct native compiler diagnostic confirmed that exact command. Replaced it with spaced \\mathrm. Intermediate successful preview had a clipped bottom label; final preview adds bounding-box padding. Intermediate evidence directories retained.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ],
+    "reference_map_diagnostic_count": 13
+  },
+  "remaining_issues": []
+}

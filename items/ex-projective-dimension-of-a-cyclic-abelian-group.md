@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-projective-dimension-of-a-cyclic-abelian-group.json
+  precheck: pass
 id: ex-projective-dimension-of-a-cyclic-abelian-group
 kind: example
 title: "Projective dimension of a cyclic abelian group"
@@ -11,13 +14,6 @@ deps: [lem-ext-one-of-z-mod-n-by-z-is-z-mod-n, thm-projective-dimension-at-most-
 generation:
   role: example
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   scraped: []
   references:
@@ -27,7 +23,7 @@ pipeline_run: frontier-31a
 ---
 ## Example
 
-Use 0 -> Z --n--> Z -> Z/n -> 0 and the nonzero Ext^1 calculation to prove that Z/n has projective dimension one over Z.
+Use $0\to\mathbb Z\xrightarrow{n}\mathbb Z\to\mathbb Z/n\mathbb Z\to0$ and the nonzero $\operatorname{Ext}^1$ calculation to prove that $\mathbb Z/n\mathbb Z$ has projective dimension one over $\mathbb Z$.
 
 ## Facts & Assumptions
 

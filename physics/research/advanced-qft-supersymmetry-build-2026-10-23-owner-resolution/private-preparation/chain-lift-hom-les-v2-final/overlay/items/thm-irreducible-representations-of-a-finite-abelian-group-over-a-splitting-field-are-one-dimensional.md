@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional.md

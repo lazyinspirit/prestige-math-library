@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cyclic-tensor-coinvariants-of-matrix-bimodules.json
+  precheck: pass
 id: ex-cyclic-tensor-coinvariants-of-matrix-bimodules
 kind: example
-title: "Matrix-unit rotation for a k–Mat_n(k) Morita pair"
+title: "Matrix-unit rotation for a $k$–$M_n(k)$ Morita pair"
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -42,9 +45,7 @@ sources:
     - title: "Charles A. Weibel, An Introduction to Homological Algebra, Chapter 9, Definition 9.5.7 and Corollary 9.5.8, printed pp.329–330"
       url: "https://math.mit.edu/~hrm/palestine/weibel/09-hochschild_and_cyclic_homology.pdf"
       locator: "The trace map on matrix-valued Hochschild chains and its role in the Morita isomorphism; this example checks the degree-zero matrix-unit case directly."
-verification:
-  audited: 2026-10-02
-  precheck: n/a
+
 ---
 
 ## Example

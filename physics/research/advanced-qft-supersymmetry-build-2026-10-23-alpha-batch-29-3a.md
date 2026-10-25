@@ -1,0 +1,42 @@
+# Batch 29 Step 3a adjudication
+
+Run: advanced-qft-supersymmetry-build-2026-10-23. Group: batch-29. Scope: batch 29 only.
+
+## Level 3 completed: pthm-qftx-n2-bps-saturation-kernel-equivalence
+
+All four current proof steps and the exact central-charge theorem, representation definition, rest algebra and countable-choice suppliers were independently checked. In the first-linear inner product the displayed conjugations are correct. Invariance supplies every product; the proof does not identify the algebraic adjoint combination with a maximal-domain adjoint. Expansion gives 4(M-|z|) times the squared norm. Positive norm for a nonzero vector proves annihilation implies equality; nonnegativity of the two squared norms proves equality implies annihilation. The identity includes zero vectors; the biconditional excludes them. At z=0 the specified phase is 1 and M>0 forbids saturation. No massless claim, physical realization, stability or empirical premise is inferred. The HIGH risk review is complete in the owning contract. No item edit or decision is owed for this unchanged carrier. Refreshed the F2 contract quotation to the actual current expanded representation definition as audit enrichment.
+
+Sources independently retrieved and read: [Bilal, section 3.4](https://arxiv.org/pdf/hep-th/0101055), printed pp.13-15, equations (3.12)-(3.16), and [Tong, section 2.4.2](https://davidtong.org/pdfs/teaching/supersymmetric-field-theory/susy2.pdf), printed pp.40-41 (zero-based PDF pages 31-32). Bilal uses {Q,Q}=epsilon Z and 2m>=q; the paragraph immediately after (3.16) contains an inconsistent equality to m, while the subsequent paragraph uses 2m. No such coefficient is imported. Tong writes Z^{IJ}=2 epsilon^{IJ}Z and obtains the bound m>=|Z| by oscillator positivity, allowing a phase for complex Z. Neither text supplies the local unbounded-domain details. Local suppliers and the current proof supply those details explicitly.
+
+Reader and refuter findings arrays are empty. The reader/refuter routing-metadata alert is retained for owner disposition. Subsequent item reviews and final checks are recorded below.
+
+## Level 4 completed: def-qftx-bps-state-and-saturation
+
+The complete definition and its four actual prerequisites agree. The selected representation plus massive rest-fiber data are assumed, with no assertion that a fixed-momentum fiber is a normalizable subspace or that a spectral disintegration exists. The general-N norm bound is supplied by the local positivity theorem; the N=2 matrix has Z*Z=|z|^2 I and the earlier equivalence gives both annihilator directions. Nonzero vectors, dense invariant domain, positive M, complex phase and actual adjoints are preserved. At Z=0 the bound is strict; the massless case is excluded. The HIGH risk review is complete. No item edit or routed decision is owed.
+
+## Level 5 completed: ex-qftx-n2-long-rest-fiber-algebra
+
+Obligation `touched:29:ex-qftx-n2-long-rest-fiber-algebra`: **accepted_repair**, repair_confidence 1. Git HEAD supplies the exact original raw carrier, matching pre-reader SHA256 `147ebff6ad0b109a92e3a1b2c398e7098decf99e42921d7a4530ad9d50814020`. The current carrier matches post-reader SHA256 `09da0e7aa1849ae976e4505025061206d992a8c2de218c7288f7e62095a5ec82`. There is no unknown historical delta.
+
+The original step 3.1 used undefined matrix notation |Z| and classified finite-module vectors through a definition requiring selected full-representation rest-fiber data. The reader correctly substituted the declared operator norm and confined the conclusion to failure of the numerical saturation equality. These connected corrections preserve the full explicit CAR construction and strict-bound example; they do not remove a supplied representation theorem. The current Example and manifest statement match exactly. The two closed defect rows are `advanced-qft-supersymmetry-build-2026-10-23-batch-29-long-module-scope` and `advanced-qft-supersymmetry-build-2026-10-23-batch-29-long-matrix-norm`.
+
+Independently checked Verification 1.1-4.1: actual adjoints insert a missing label with the same parity sign; distinct contractions anticommute and each matching contraction/adjoint anticommutator is identity. The four labels map bijectively to the flavor/spin labels, scaling gives 2M, and all same-chirality brackets vanish. The chosen rest convention has P_0=-M; Z=0 has norm zero, strictly below M>0. All products are everywhere defined in this sixteen-dimensional Hilbert space, the grading anticommutes with every charge, and no family choice is used. This is a conditional finite model calculation, with no observed data, full Lorentz action, state existence or stability conclusion.
+
+Consumer search over current items and library finds only the example itself and its owning B-page inventory; there is no dependency or reference item consumer, no outside affected consumer, and no further propagation hop. The B page retains empty body, compact-v1 and unchanged inventory; no narrative repair is needed. No TikZ/tikzcd diagram occurs in the routed carriers and none is needed for these algebraic arguments. No item source was edited by Alpha. The owning contract's copied empty-boundary evidence incorrectly said dimension four; corrected that audit record to the actual 2^4=16 basis size, without changing the item.
+
+## Owner alert and published suppliers
+
+The reader/refuter metadata alert is independently confirmed: `research/advanced-qft-supersymmetry-build-2026-10-23-batch-29.cross-batch-dependencies.json` retains a verified page edge from `qftx-susy-algebra-and-multiplets` to `qftx-nonabelian-yang-mills-model`, absent from the current A-page source and owning manifest. The current source requires only `aqft-susy-math-foundations` and `countability-and-uncountability`; no Yang-Mills premise is used by the assigned arguments. The stale routing row and old notes require owner/native reconciliation. No unowed content decision or mechanical defect-ledger row is invented for this alert; no outside carrier was edited. No substantial mathematical prerequisite blocks the routed decision.
+
+No defective published item was found in the inspected supplier use. Imported countable choice is used only for its exact sequence-choice axiom; the finite calculation adds no such selection. This is not a recursive audit of unrelated functional-analysis mathematics. Both HIGH risk reviews are complete, with specific domain, boundary, iff, source and physical-scope checks in the owning contract. Stable IDs, inventories and draft status are preserved; no withdrawal, publication, judgment, stamp or engine transition was made.
+
+## Local checks
+
+Initial risk-report: HIGH scores 6 and 7 for the theorem and definition; four items routed, zero errors. The one-off exact integer matrix calculation passed 32 CAR identities on all sixteen subset basis vectors. All four current item raw hashes match the immutable post-reader snapshot, and the changed example's current description equals its manifest mirror. Precheck on the repaired example passed (one checked, zero failing); rendercheck passed (one file). The initial guessed plural `proof-contracts.mjs` command did not exist; the actual checker is `proof-contract.mjs`. Final strict contract, required-risk and layout results follow. No failed check is represented as passing.
+
+- `node tools/physics-support/proof-contract.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-29.proof-contracts.json --strict`: exit 0, four of four items checked, zero errors and warnings.
+- `node tools/physics-support/risk-report.mjs research/advanced-qft-supersymmetry-build-2026-10-23-batch-29.proof-contracts.json --require-reviewed`: exit 0, four items routed, zero errors; both HIGH reviews complete.
+- `node tools/physics-support/proof-layout.mjs items/ex-qftx-n2-long-rest-fiber-algebra.md`: exit 0, one item, four steps, zero defects; run after final content state.
+- Native ledger append: two fixed defect rows added successfully with this decision's exact obligation, caught_at_stage 3a-adjudicate and repair_confidence 1. No row was created for the routing discrepancy or failed command lookup.
+
+Handoff: one owed touched decision supplied, both required risk reviews complete, no Alpha item edits. Engine decision hashes and gate battery remain pending. Owner attention remains required only for the independently confirmed stale page-edge routing record above; this report does not clear it.

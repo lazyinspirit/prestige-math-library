@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-covering-morphism-subgroup-criterion.json
+  precheck: pass
 id: prop-covering-morphism-subgroup-criterion
 kind: proposition
 title: "A based morphism between connected coverings exists exactly when the induced subgroups are included"
@@ -20,13 +23,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-21
-  audited: 2026-08-21
 sources:
   scraped: []
   references:
@@ -76,3 +72,14 @@ When it exists, $f$ is unique and is itself a surjective covering map.
 2.1 Uniqueness is part of [F1], and also follows from [F3] because any two such maps lift $p_1$ and agree at $e_1$. [step 1.1, F1, F3]
 
 3.1 First, $f$ is surjective. Indeed, [F2] and [F5] make $E_2$ path-connected. Join $f(e_1)$ to any $z\in E_2$ by a path, project that path through $p_2$, and lift the projection through $p_1$ from $e_1$. The image of this lift under $f$ is a lift with the original initial point, so uniqueness in [F6] makes it the original path and its endpoint maps to $z$. Now fix $b\in B$. Intersect evenly covered neighbourhoods of $b$ for $p_1$ and $p_2$, then use local path-connectedness to choose a path-connected open neighbourhood $O$ inside that intersection. For a $p_1$-sheet $U$ over $O$, choose $x\in U$ and let $V$ be the $p_2$-sheet containing $f(x)$. The maps $f|_U$ and $(p_2|_V)^{-1}\circ p_1|_U$ are lifts of $p_1|_U$ through $p_2$, agree at $x$, and have connected domain $U$; hence [F3] makes them equal. Thus $f|_U:U\to V$ is a homeomorphism. Conversely, every point of $f^{-1}(V)$ lies in one such $U$. Hence $f^{-1}(V)$ is the disjoint union of exactly those $p_1$-sheets sent to $V$, each mapped homeomorphically onto $V$. Surjectivity makes this family nonempty for every $V$, so every point of $E_2$ has an evenly covered neighbourhood and [F4] makes $f$ a covering map. [step 1.1, F2, F3, F4, F5, F6] ∎
+
+## Remarks
+
+When the subgroup inclusion in the Statement holds, the unique based morphism gives the commutative square
+
+```tikzcd
+(E_1,e_1) \arrow[r, "f"] \arrow[d, "p_1"'] & (E_2,e_2) \arrow[d, "p_2"] \\
+(B,b_0) \arrow[r, "\mathrm{id}_B"'] & (B,b_0)
+```
+
+Thus $p_2\circ f=p_1$ and $f(e_1)=e_2$. Applying fundamental groups gives $(p_2)_*\circ f_*=(p_1)_*$, so the image of $(p_1)_*$ is contained in the image of $(p_2)_*$. The proof above establishes the converse and the covering-map conclusion independently of this illustration.

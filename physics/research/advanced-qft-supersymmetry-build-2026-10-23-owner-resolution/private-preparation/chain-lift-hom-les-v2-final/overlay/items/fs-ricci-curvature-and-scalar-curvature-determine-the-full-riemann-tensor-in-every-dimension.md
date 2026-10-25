@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-ricci-curvature-and-scalar-curvature-determine-the-full-riemann-tensor-in-every-dimension.md

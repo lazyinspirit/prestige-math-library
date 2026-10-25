@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-age-structured-renewal-transport-problem.json
+  precheck: n/a
 id: def-age-structured-renewal-transport-problem
 kind: definition
 title: Linear age-structured renewal transport problem
@@ -14,12 +17,6 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Benoît Perthame, Introduction to Structured Equations in Biology, full lecture notes"
@@ -53,3 +50,27 @@ A **mild solution** is a weak solution that also satisfies, for almost every $a\
 $$n(t,a)=\begin{cases}n_0(a-t)S(a-t,t),&a\ge t,\\B(t-a)S(0,a),&0\le a<t,\end{cases}$$
 
 The formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.
+
+## Remarks
+
+The diagram shows two representative characteristics at a fixed time $0<t\le T$, with $a_0>0$ and $0<s<t$. The dashed ray $a=t$ separates the initial-cohort branch from the birth-inflow branch of the mild formula. Each solid arrow has slope $da/dt=1$; its label gives the survival factor along that segment. The age axis continues indefinitely, with no finite-age cutoff. The diagram is explanatory; the definition and its formulas are independent of it.
+
+```tikz
+\begin{tikzpicture}[x=1.15cm,y=0.85cm,>=stealth]
+\draw[->] (0,0) -- (5.8,0) node[right] {time};
+\draw[->] (0,0) -- (0,6.4) node[above] {age};
+\draw[densely dotted] (4,0) -- (4,5.6);
+\node[below] at (4,0) {$t$};
+\draw[dashed] (0,0) -- (4.65,4.65) node[above right] {$a=t$};
+\draw[thick,->] (0,1.3) -- (4,5.3) node[right] {$(t,a_0+t)$};
+\node at (1.3,3.6) {$S(a_0,t)$};
+\fill (0,1.3) circle (2pt);
+\node[left] at (0,1.3) {$a_0$};
+\draw[thick,->] (1.5,0) -- (4,2.5) node[right] {$(t,t-s)$};
+\node at (3.3,0.8) {$S(0,t-s)$};
+\fill (1.5,0) circle (2pt);
+\node[below] at (1.5,0) {$s$};
+\node[below] at (2.7,-0.6) {birth inflow $n(s,0)=B(s)$};
+\node[left] at (0,4.8) {$n_0(a)$};
+\end{tikzpicture}
+```

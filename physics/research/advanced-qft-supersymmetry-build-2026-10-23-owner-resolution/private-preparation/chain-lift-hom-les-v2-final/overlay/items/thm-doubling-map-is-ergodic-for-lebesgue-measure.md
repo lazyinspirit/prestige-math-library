@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-doubling-map-is-ergodic-for-lebesgue-measure.md

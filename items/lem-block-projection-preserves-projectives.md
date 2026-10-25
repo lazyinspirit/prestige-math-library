@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-block-projection-preserves-projectives.json
+  precheck: pass
 id: lem-block-projection-preserves-projectives
 kind: lemma
 title: "Exact projections onto linkage blocks preserve projectives"
@@ -16,17 +19,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "historical complete Step5 reader; item lem-block-projection-preserves-projectives; evidence research/frontier-38-owner-30-reader-7.md, research/frontier-38-owner-30-reader-findings-7.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
-    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "Pavel Etingof, Representations of Lie Groups (18.757, Fall 2023), Sec. 16.1-16.3"
@@ -69,7 +61,7 @@ corresponding exactness in $\mathcal O_C$ or in $\mathcal O$.
 
 ## Proof
 
-**Proof technique:** direct, through the functorial block decomposition and the $\operatorname{Hom}$ characterisation of projectivity.
+**Proof technique:** direct, through the functorial block decomposition and the Hom characterisation of projectivity.
 
 1.1 By [F1] every object $X$ is $\bigoplus_CX_C$ with finitely many nonzero terms, the decomposition is functorial, and morphisms between objects supported on disjoint collections of classes vanish. Hence a morphism $f:X\to Y$ between decomposed objects is block diagonal, $f=\bigoplus_Cf_C$ with $f_C:X_C\to Y_C$. [given, F1]
 

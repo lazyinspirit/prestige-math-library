@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-two-sided-coideal-in-an-enveloping-algebra-is-generated-by-its-primitive-part.md

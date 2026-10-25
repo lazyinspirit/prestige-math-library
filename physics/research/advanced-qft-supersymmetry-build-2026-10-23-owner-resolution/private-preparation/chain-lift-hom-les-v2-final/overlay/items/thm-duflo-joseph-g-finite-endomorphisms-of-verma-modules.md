@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-duflo-joseph-g-finite-endomorphisms-of-verma-modules.md

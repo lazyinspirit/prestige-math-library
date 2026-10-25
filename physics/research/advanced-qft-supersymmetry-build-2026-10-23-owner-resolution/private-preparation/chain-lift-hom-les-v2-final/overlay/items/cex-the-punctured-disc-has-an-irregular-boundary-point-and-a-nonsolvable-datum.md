@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum.md

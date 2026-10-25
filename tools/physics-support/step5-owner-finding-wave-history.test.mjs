@@ -165,3 +165,75 @@ test('new current repeat request validates normally while prior initial parent r
 test('wrong state-directory advertisement remains invalid for consumed history',t=>{const f=complete(fixture(t));const path=join(f.dir,'owner-finding-queue-request.json'),pointer=JSON.parse(readFileSync(path));pointer.state_dir='.physics-autopilot/another-run';f.save(path,pointer);assert.throws(()=>f.later(),/wrong state directory/);});
 test('new earlier-wave advertisement is not substituted for genuinely consumed request',t=>{const f=complete(fixture(t));const request=structuredClone(f.request);request.entries[0].subject=f.ids[2];const path=join(f.dir,'owner-finding-queue-unconsumed.json');f.save(path,request);f.save(join(f.dir,'owner-finding-queue-request.json'),{version:1,run:f.run,request:f.ref(path)});assert.throws(()=>f.later(),/consume this exact queue/);});
 test('re-sealed certificate cannot conceal a parent naming another request',t=>{const f=complete(fixture(t));f.parent.native_owner_finding_corrections.request.sha256='0'.repeat(64);f.save(f.parentPath,f.parent);f.certificate.evidence[f.parentPath]=hash(readFileSync(f.parentPath));f.seal();assert.throws(()=>f.later(),/consume this exact queue/);});
+
+// This fixture extends the synthetic certificate anchor above with its sealed
+// metadata transition. Actual transition minting/native checks are covered by
+// step5-initial-metadata-transition.test.mjs; here only historical replay runs.
+function transitionedMetadata(t, suffix = 'pages') {
+  const f = fixture(t), path = join(f.root, 'research', `${f.run}-batch-19.${suffix}.json`);
+  const before = suffix === 'pages' ? [{ items: [{ id: f.ids[0], sources: { references: [{ title: 'Historical attribution' }] } }] }]
+    : { contracts: { [f.ids[0]]: { citations: [{ quote: 'Historical quotation' }] } } };
+  f.save(path, before); f.request.entries[0].science.push(f.ref(path)); f.bind(); complete(f);
+  const archivePath = join(f.root, 'research', f.run + '-science', 'metadata.before.json'); writeFileSync(archivePath, readFileSync(path));
+  const after = structuredClone(before);
+  if (suffix === 'pages') after[0].items[0].sources.references[0].title = 'Native corrected attribution';
+  else after.contracts[f.ids[0]].citations[0].quote = 'Native corrected quotation';
+  f.save(path, after);
+  const progressPath = join(f.dir, 'impact-initial-1-progress.json'), closedPath = join(f.dir, 'impact-initial-1-closed.json');
+  f.save(progressPath, { complete: true }); f.save(closedPath, { errors: [] });
+  const historyDir = join(f.root, '.physics-autopilot', f.run, 'owner-gate-history'); mkdirSync(historyDir);
+  const gatePath = join(historyDir, 'consumed-native.json'); f.save(gatePath, { fixture: 'synthetic sealed predecessor anchor' });
+  const native = { pack: f.ref(join(f.dir, 'initial-1.json')), report: f.ref(f.originalPath), task: f.ref(f.originalPath.replace(/\.json$/, '.task.md')),
+    dispatch: f.ref(join(f.root, 'research', f.run + '-dispatch', 'alpha-adjudicate-step5-v2-initial-r1-u19.result.json')) };
+  const pointers = [suffix === 'pages' ? '/0/items/0/sources/references/0/title' : '/contracts/' + f.ids[0] + '/citations/0/quote'];
+  const metadataRequestPath = join(f.dir, 'owner-initial-metadata-fixture.json');
+  const metadataRequest = { version: 1, run: f.run, reviewer: '/root', phase: 'impact-initial', round: 1,
+    source_collection: f.ref(f.parentPath), impact_progress: f.ref(progressPath), impact_closed: f.ref(closedPath), predecessor_gate: f.ref(gatePath),
+    artifacts: [{ kind: suffix === 'pages' ? 'owning-page-manifest' : 'owning-proof-contract', batch: '19', path: relative(f.root, path), before: f.ref(archivePath),
+      after_sha256: hash(readFileSync(path)), changes: pointers.map(json_pointer => ({ json_pointer, subject: f.ids[0], native })) }] };
+  const transition = { kind: 'initial-native-metadata', path, before_sha256: f.ref(archivePath).sha256, after_sha256: hash(readFileSync(path)),
+    archive: { path: archivePath, sha256: f.ref(archivePath).sha256 }, binding: { path: metadataRequestPath, sha256: '' }, json_pointers: pointers,
+    native_reports: [{ path: f.originalPath, sha256: native.report.sha256, subjects: [f.ids[0]] }] };
+  f.certificate.evidence_transitions = [transition];
+  f.rebindMetadataRequest = () => {
+    f.save(metadataRequestPath, metadataRequest); transition.binding.sha256 = hash(readFileSync(metadataRequestPath));
+    f.certificate.evidence[metadataRequestPath] = transition.binding.sha256; f.seal();
+  };
+  for (const bound of [path, archivePath, progressPath, closedPath, gatePath]) f.certificate.evidence[bound] = hash(readFileSync(bound));
+  f.rebindMetadataRequest();
+  return Object.assign(f, { metadataPath: path, archivePath, metadataRequestPath, metadataRequest, transition, metadataGatePath: gatePath });
+}
+
+for (const suffix of ['pages', 'proof-contracts']) test('consumed queue resolves only its sealed historical ' + suffix + ' archive', t => {
+  const f = transitionedMetadata(t, suffix), progressPath = join(f.dir, 'owner-finding-correction-initial-1-progress.json');
+  const preserved = [f.parentPath, progressPath, f.certificatePath, join(f.dir, 'owner-finding-correction-initial-1-collected.json')]
+    .map(path => [path, readFileSync(path)]);
+  assert.notEqual(f.parent.evidence[f.metadataPath], f.certificate.evidence[f.metadataPath]);
+  assert.equal(f.later(), null);
+  // Legitimate later source changes never demand new historical proof reviews.
+  const source = join(f.root, 'items', f.ids[0] + '.md'); writeFileSync(source, readFileSync(source, 'utf8') + '\nLater native source revision.\n');
+  assert.equal(f.later(), null);
+  for (const [path, bytes] of preserved) assert.deepEqual(readFileSync(path), bytes);
+});
+
+for (const [name, mutate, expected] of [
+  ['wrong transition kind', f => { f.transition.kind = 'untyped-refresh'; f.seal(); }, /unique sealed historical/],
+  ['wrong before hash', f => { f.transition.before_sha256 = 'a'.repeat(64); f.seal(); }, /unique sealed historical/],
+  ['duplicate transition', f => { f.certificate.evidence_transitions.push(structuredClone(f.transition)); f.seal(); }, /unique sealed historical/],
+  ['wrong after hash', f => { f.transition.after_sha256 = 'b'.repeat(64); f.seal(); }, /current metadata binding/],
+  ['changed current metadata', f => writeFileSync(f.metadataPath, readFileSync(f.metadataPath, 'utf8') + ' '), /current metadata binding/],
+  ['changed raw archive', f => writeFileSync(f.archivePath, readFileSync(f.archivePath, 'utf8') + ' '), /not intact and certificate-bound/],
+  ['unbound raw archive', f => { delete f.certificate.evidence[f.archivePath]; f.seal(); }, /not intact and certificate-bound/],
+  ['changed Root request', f => writeFileSync(f.metadataRequestPath, readFileSync(f.metadataRequestPath, 'utf8') + ' '), /not intact and certificate-bound/],
+  ['unbound Root request', f => { delete f.certificate.evidence[f.metadataRequestPath]; f.seal(); }, /not intact and certificate-bound/],
+  ['wrong artifact kind', f => { f.metadataRequest.artifacts[0].kind = 'source'; f.rebindMetadataRequest(); }, /artifact or exact scalar set/],
+  ['another canonical artifact path', f => { f.metadataRequest.artifacts[0].path = 'research/demo-batch-99.pages.json'; f.rebindMetadataRequest(); }, /one exact artifact/],
+  ['extra scalar pointer', f => { f.transition.json_pointers.push('/0/items/0/id'); f.seal(); }, /artifact or exact scalar set/],
+  ['wrong native report basis', f => { f.transition.native_reports[0].subjects = ['thm-outsider']; f.seal(); }, /native report basis/],
+  ['unbound native report', f => { delete f.certificate.evidence[f.originalPath]; f.seal(); }, /not intact and certificate-bound/],
+  ['unbound predecessor gate', f => { delete f.certificate.evidence[f.metadataGatePath]; f.seal(); }, /not intact and certificate-bound/],
+  ['changed impact progress', f => { const path = join(f.root, f.metadataRequest.impact_progress.path); writeFileSync(path, readFileSync(path, 'utf8') + ' '); }, /not intact and certificate-bound/],
+  ['another source parent', f => { f.metadataRequest.source_collection = f.ref(join(f.dir, 'owner-finding-correction-initial-1-collected.json')); f.rebindMetadataRequest(); }, /another parent or wave/],
+]) test('consumed metadata history rejects ' + name, t => {
+  const f = transitionedMetadata(t); mutate(f); assert.throws(() => f.later(), expected);
+});

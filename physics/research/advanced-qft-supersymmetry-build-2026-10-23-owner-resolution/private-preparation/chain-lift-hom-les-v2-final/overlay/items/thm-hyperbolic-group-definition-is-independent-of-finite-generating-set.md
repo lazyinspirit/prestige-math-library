@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hyperbolic-group-definition-is-independent-of-finite-generating-set.md

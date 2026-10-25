@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-banach-gaussian-covariance-rkhs-is-well-defined.md

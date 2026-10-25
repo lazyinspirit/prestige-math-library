@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-l1-of-a-locally-compact-group-is-a-banach-star-algebra.md

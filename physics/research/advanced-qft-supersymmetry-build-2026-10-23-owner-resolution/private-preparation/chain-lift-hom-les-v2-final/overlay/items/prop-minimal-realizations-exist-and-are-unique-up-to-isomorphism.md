@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism.md

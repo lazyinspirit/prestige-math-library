@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer.md

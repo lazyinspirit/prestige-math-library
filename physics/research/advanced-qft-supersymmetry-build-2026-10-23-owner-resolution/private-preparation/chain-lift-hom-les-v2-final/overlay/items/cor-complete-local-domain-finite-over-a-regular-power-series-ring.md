@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-complete-local-domain-finite-over-a-regular-power-series-ring.md

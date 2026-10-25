@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-orientable-compact-surface-has-euler-characteristic-two-minus-two-g.md

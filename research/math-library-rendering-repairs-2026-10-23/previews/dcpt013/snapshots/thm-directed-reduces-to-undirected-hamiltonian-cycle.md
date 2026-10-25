@@ -1,0 +1,83 @@
+---
+id: thm-directed-reduces-to-undirected-hamiltonian-cycle
+kind: theorem
+title: "Directed Hamiltonian cycle polynomial-time many-one reduces to undirected Hamiltonian cycle"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [def-directed-hamiltonian-path-and-cycle-problems, def-polynomial-time-many-one-reduction, def-finite-simple-graph, def-graph-walk-trail-path-and-cycle, def-multigraph-loop-and-digraph]
+proof_strategy: direct
+sources:
+  scraped: []
+  references:
+    - title: "MIT 6.045J / 18.400J, Lecture 16: More NP-completeness"
+      url: "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/567d75f927ca3c11a819baee9ab260ac_MIT6_045JS11_lec16.pdf"
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
+---
+
+## Statement
+
+Directed Hamiltonian cycle polynomial-time many-one reduces to undirected
+Hamiltonian cycle.
+
+## Facts & Assumptions
+
+**Given:** A finite directed graph $D=(V,A)$.
+
+[L1] A polynomial-time many-one reduction is a total polynomial-time function preserving membership in both directions, by [[def-polynomial-time-many-one-reduction]].
+
+[F1] Directed Hamiltonian cycles and undirected Hamiltonian cycles are the problems defined in [[def-directed-hamiltonian-path-and-cycle-problems]].
+
+[F2] A directed graph has a finite vertex set and an arc set $A\subseteq V\times V$, by [[def-multigraph-loop-and-digraph]].
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Use adjacency-matrix encodings of finite directed and undirected graphs. Matrix dimensions and entries are checked in polynomial time; a malformed source word denotes no instance and is sent to the fixed undirected no-instance consisting of one isolated vertex. If a valid $D$ has $|V|\le 1$, decide directly whether it has a directed Hamiltonian cycle and map it to the triangle as a fixed yes-instance or to that no-instance accordingly. Thus it is enough to treat the case $|V|\ge 2$. Delete every loop, since a Hamiltonian cycle through at least two distinct vertices cannot use a loop. For each vertex $v\in V$, create three undirected vertices $v_1,v_2,v_3$ and the two edges $v_1v_2$ and $v_2v_3$. For each arc $(u,v)\in A$ with $u\ne v$, add the undirected edge $u_3v_1$. Call the resulting graph $G_D$. [F1, F2, given, construct]
+
+2.1 In any Hamiltonian cycle of $G_D$, the middle vertex $v_2$ has degree two, so the cycle must traverse the gadget for $v$ as the consecutive path $v_1,v_2,v_3$ or as the consecutive path $v_3,v_2,v_1$. Moreover, every external gadget edge joins a $3$-vertex to a $1$-vertex. Hence, after orienting the cycle, once one gadget is traversed in one of those two directions, every subsequent gadget is forced to be traversed in the same direction around the cycle. [step 1.1, F1]
+
+2.2 If $D$ has a directed Hamiltonian cycle $v^{(1)}\to v^{(2)}\to\cdots\to v^{(n)}\to v^{(1)}$, then $v^{(1)}_1,v^{(1)}_2,v^{(1)}_3,v^{(2)}_1,v^{(2)}_2,v^{(2)}_3,\ldots,v^{(n)}_1,v^{(n)}_2,v^{(n)}_3,v^{(1)}_1$ is a Hamiltonian cycle in $G_D$, because each directed arc $v^{(i)}\to v^{(i+1)}$ supplies the edge $v^{(i)}_3v^{(i+1)}_1$. [step 1.1, construct]
+
+3.1 Conversely, let $C$ be a Hamiltonian cycle in $G_D$. By step 2.1 and, if necessary, reversing the orientation of $C$, we may assume that every gadget is traversed as $v_1,v_2,v_3$. Whenever $C$ moves from the gadget of $u$ to the gadget of $v$, it uses an edge $u_3v_1$, and such an edge exists only when $(u,v)\in A$. Replacing each gadget path $v_1,v_2,v_3$ by the single vertex $v$ therefore projects $C$ to a directed Hamiltonian cycle of $D$. [F1, step 1.1, step 2.1]
+
+4.1 The map $D\mapsto G_D$ uses $3|V|$ vertices and at most $|A|+2|V|$ edges, so it is polynomial-time. Steps 2.2 and 3.1 prove $D$ has a directed Hamiltonian cycle if and only if $G_D$ has an undirected Hamiltonian cycle. By [L1], this is a polynomial-time many-one reduction. [L1, step 1.1, step 2.2, step 3.1] ∎
+
+
+## Remarks
+
+The two-vertex example below shows how direction is encoded by attachment points, even though the target edges are undirected. Take exactly the arcs $u\to v$ and $v\to u$. Step 1.1 replaces them by $u_3v_1$ and $v_3u_1$, respectively, in addition to the two internal edges of each gadget. Thus the target is the six-cycle $u_1,u_2,u_3,v_1,v_2,v_3,u_1$. In particular, each middle vertex has degree two. The arrows belong only to the source graph; all six target edges are undirected.
+
+```tikz
+\begin{tikzpicture}[x=1.3cm,y=1cm]
+\node at (2,3.2) {Source $D$};
+\node[circle,draw,inner sep=3pt] (u) at (1,2.4) {$u$};
+\node[circle,draw,inner sep=3pt] (v) at (3,2.4) {$v$};
+\draw[->] (u) to[bend left=22] (v);
+\draw[->] (v) to[bend left=22] (u);
+\node at (2,1.5) {Target $G_D$};
+\node[circle,fill,inner sep=2pt,label=above:$u_1$] (u1) at (0,0.7) {};
+\node[circle,fill,inner sep=2pt,label=above:$u_2$] (u2) at (2,0.7) {};
+\node[circle,fill,inner sep=2pt,label=above:$u_3$] (u3) at (4,0.7) {};
+\node[circle,fill,inner sep=2pt,label=below:$v_1$] (v1) at (4,-0.7) {};
+\node[circle,fill,inner sep=2pt,label=below:$v_2$] (v2) at (2,-0.7) {};
+\node[circle,fill,inner sep=2pt,label=below:$v_3$] (v3) at (0,-0.7) {};
+\draw (u1) -- (u2);
+\draw (u2) -- (u3);
+\draw (u3) -- (v1);
+\draw (v1) -- (v2);
+\draw (v2) -- (v3);
+\draw (v3) -- (u1);
+\end{tikzpicture}
+```
+
+For a general input, other arcs can add edges at the $1$- and $3$-vertices, while each $v_2$ still has exactly its two internal neighbours. This is the forced traversal used in step 2.1. The proof above is independent of the illustration.

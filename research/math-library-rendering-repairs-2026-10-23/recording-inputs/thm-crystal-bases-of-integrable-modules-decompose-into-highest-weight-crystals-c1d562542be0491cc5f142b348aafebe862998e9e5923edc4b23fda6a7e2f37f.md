@@ -1,0 +1,111 @@
+---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-crystal-bases-of-integrable-modules-decompose-into-highest-weight-crystals.json
+  precheck: pass
+id: thm-crystal-bases-of-integrable-modules-decompose-into-highest-weight-crystals
+kind: theorem
+title: "Uniqueness: crystal bases of integrable modules decompose into highest weight crystals"
+status: published
+origin: pipeline
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [prop-integrable-quantum-highest-weight-modules-are-semisimple, def-axiom-of-choice, def-highest-weight-element-and-connected-highest-weight-crystal, thm-the-highest-weight-crystal-b-lambda-exists, def-crystal-lattice-and-crystal-basis, def-crystal-graph-epsilon-phi-and-weight, def-kashiwara-lattices-lambda-and-infinity, thm-grand-loop-existence-of-highest-weight-crystal-bases, def-kashiwara-crystal-operators, thm-integrable-quantum-highest-weight-module-exists-and-is-unique, def-quantum-verma-module-and-simple-highest-weight-quotient, def-quantum-weight-module-and-integrability, def-kac-moody-integral-and-dominant-integral-weights]
+justified_by: []
+aliases: []
+landmark: false
+dependency_level: 9
+proof_strategy: direct
+sources:
+  scraped: []
+  references:
+    - title: "Masaki Kashiwara, On crystal bases of the q-analogue of universal enveloping algebras, Duke Math. J. 63 (1991), no. 2, 465-516"
+      url: "https://webpages.math.luc.edu/~ptingley/oldseminars/QuantumGroupsSpring2011/Kashiwara91.pdf"
+      locator: "§2.6, printed pp. 478-479, Theorem 3 with Lemmas 2.6.1-2.6.3: 'Let $M\\in Ob(O_{\\mathrm{int}})$ and let $(L,B)$ be a crystal base of $M$. Then there exists an isomorphism $M\\cong\\bigoplus_jV(\\lambda_j)$ by which $(L,B)$ is isomorphic to $\\bigoplus_j(L(\\lambda_j),B(\\lambda_j))$'; the splitting $L=L_1\\oplus L_2$, $B=B_1\\sqcup B_2$ is (2.6.1)."
+    - title: "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)"
+      url: "https://categorified.net/LieQuantumGroups.pdf"
+      locator: "Ch. 13, §13.3, printed pp. 332-333, Propositions 13.3.0.11 and 13.3.0.12: uniqueness of the crystal base of $L(\\lambda)$ and decomposition of a finite-dimensional crystal base into standard components."
+    - title: "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390"
+      url: "https://arxiv.org/pdf/math/0305390"
+      locator: "§7: the grand loop supplies $\\mathcal B(\\lambda)$; the paper records that 'assuming the existence theorem, the uniqueness of crystal bases can be proved by the same argument as in [10] or [6, Section 5.2]'."
+---
+
+## Statement
+
+**Assume the axiom of choice** ([[def-axiom-of-choice]]). Let $M$ be a chosen $P$-graded type-one quantum weight module that is integrable, has finite-dimensional label-weight spaces and weight set contained in a finite union of cones $\lambda-Q_+$ ([[def-quantum-weight-module-and-integrability]]), and let $(L,B)$ be a crystal basis of $M$ ([[def-crystal-lattice-and-crystal-basis]]).
+
+(i) **Splitting along the top isotypic part.** Let $\lambda$ be a maximal weight of $M$, put $N_0:=U_q(\mathfrak g)M_\lambda$ and let $N_1$ be the sum of the remaining simple constituents, so that $M=N_0\oplus N_1$ and $N_0\cong V(\lambda)^{\oplus m}$ with $m=\dim M_\lambda$. Then $L=(L\cap N_0)\oplus(L\cap N_1)$, $B=\bigl(B\cap(L\cap N_0)/q(L\cap N_0)\bigr)\sqcup\bigl(B\cap(L\cap N_1)/q(L\cap N_1)\bigr)$, and both pairs are crystal bases of $N_0$ and $N_1$.
+
+(ii) **Uniqueness.** There is a locally weight-finite indexed family $(\lambda_j)_{j\in J}$ in $P^+$ and an isomorphism of $U_q(\mathfrak g)$-modules $\Phi:M\xrightarrow{\ \sim\ }\bigoplus_{j\in J}V(\lambda_j)$ with $\Phi(L)=\bigoplus_j\mathcal L(\lambda_j)$ and $\Phi$ inducing a bijection $B\to\bigsqcup_j\mathcal B(\lambda_j)$ of crystals. The multiset $\{\lambda_j:j\in J\}$ is the multiset of highest weights of the simple integrable constituents of $M$: the number of $j$ with $\lambda_j=\lambda$ equals the multiplicity $[M:V(\lambda)]$.
+
+(iii) **Components.** Through $\Phi$ the connected components of the crystal $B$ are exactly the canonical highest weight crystals $\mathcal B(\lambda_j)$; each component has a unique highest weight element $b$, of dominant weight $\lambda$, and equals the lowering-generated subcrystal $F(b)$ of [[def-highest-weight-element-and-connected-highest-weight-crystal]]. In particular the crystal graph of any crystal basis of $M$ is determined up to isomorphism by $M$, and no other highest weight elements occur.
+
+**Choice.** The axiom of choice is declared in [[def-axiom-of-choice]] and used to obtain the decomposition of $M$ into simple integrable highest weight modules from [[prop-integrable-quantum-highest-weight-modules-are-semisimple]], which selects a maximal independent family of simple submodules simultaneously. It also permits simultaneous choices of lifts of the finite residue bases in the possibly infinite family of top spaces. After those choices, each lattice and crystal argument is finite and choice-free. No incompatible-axiom branch is used, and no global $\mathbb Z[q,q^{-1}]$-freeness is assumed. The index set $J$ need not be finite in affine or indefinite type; local weight finiteness means only finitely many summands contribute to any fixed label-weight space.
+
+## Facts & Assumptions
+
+**Given:** The axiom of choice ([[def-axiom-of-choice]]); a chosen $P$-graded type-one integrable quantum weight module $M$ with finite-dimensional label-weight spaces and $\mathrm{wt}(M)$ in a finite union of cones $\lambda-Q_+$ ([[def-quantum-weight-module-and-integrability]]); a crystal basis $(L,B)$ of $M$ ([[def-crystal-lattice-and-crystal-basis]]). For a dominant label $\lambda\in P^+$ ([[def-kac-moody-integral-and-dominant-integral-weights]]) write $V(\lambda)=L(\lambda)$ for the simple integrable highest weight module ([[thm-integrable-quantum-highest-weight-module-exists-and-is-unique]]) and $(\mathcal L(\lambda),\mathcal B(\lambda))$ for its lattice and basis ([[def-kashiwara-lattices-lambda-and-infinity]]).
+
+[F1] Semisimplicity ([[prop-integrable-quantum-highest-weight-modules-are-semisimple]], under AC): $M$ is isomorphic to an algebraic direct sum of simple integrable highest weight modules $L(\lambda)$, every nonzero submodule of $M$ contains a maximal vector $v$ with $U_q(\mathfrak g)v\cong L(\lambda)$, and $M$ is the direct sum of the submodules generated by the vectors of any maximal independent family of simple submodules; AC is used exactly to select a maximal independent family of simple submodules simultaneously, and restricted to a module generated by one finite-dimensional $U_q^{\ge0}$-submodule the decomposition is finite and choice-free.
+
+[F2] Canonicity of cyclic highest weight modules ([[thm-integrable-quantum-highest-weight-module-exists-and-is-unique]], [[def-quantum-verma-module-and-simple-highest-weight-quotient]]): every nonzero integrable cyclic highest weight module of weight $\lambda\in P^+$ is isomorphic to $L(\lambda)$, which is universal among them, has support $\lambda-Q_+$ and finite-dimensional label-weight spaces, and has one-dimensional $\lambda$-weight space spanned by the image of the Verma highest vector (it is the simple graded quotient of $M(\lambda)=U_q(\mathfrak g)v_\lambda$, whose highest line is $\mathbb Q(q)v_\lambda$).
+
+[F3] Crystal lattice and basis ([[def-crystal-lattice-and-crystal-basis]]): $L=\bigoplus_\mu L_\mu$ with $L_\mu=L\cap M_\mu$ is a free $A_0$-module generating $M$ over $\mathbb Q(q)$ and stable under $\tilde e_i,\tilde f_i$; $B=\bigsqcup_\mu B_\mu$ is a $\mathbb Q$-basis of $L/qL$ with $\dim_{\mathbb Q(q)}M_\mu=\operatorname{rank}_{A_0}L_\mu=\#B_\mu$, operators preserve $B\cup\{0\}$ and satisfy $\tilde f_ib=b'\iff b=\tilde e_ib'$.
+
+[F4] The lattice and basis of $V(\lambda)$ ([[thm-grand-loop-existence-of-highest-weight-crystal-bases]], with [[def-kashiwara-lattices-lambda-and-infinity]]): $(\mathcal L(\lambda),\mathcal B(\lambda))$ is a crystal basis of $V(\lambda)$; $\mathcal L(\lambda)_\lambda$ is free of rank one generated by $v_\lambda$; $\dim_{\mathbb Q(q)}V(\lambda)_\mu=\#\mathcal B(\lambda)_\mu$; and every $b\in\mathcal B(\lambda)$ is an iterated lowering image of $b_\lambda$ (also [[thm-the-highest-weight-crystal-b-lambda-exists]]).
+
+[F5] The highest weight crystal $B(\lambda)$ ([[thm-the-highest-weight-crystal-b-lambda-exists]]): $b_\lambda=v_\lambda+q\mathcal L(\lambda)$ is the unique highest weight element of $\mathcal B(\lambda)$, of dominant weight $\lambda$, and for every $\mu\ne\lambda$ every nonzero homogeneous class of $\mathcal L(\lambda)_\mu/q\mathcal L(\lambda)_\mu$ is moved by some $\tilde e_i$.
+
+[F6] Crystal graph conventions ([[def-crystal-graph-epsilon-phi-and-weight]]) and the Kashiwara operators ([[def-kashiwara-crystal-operators]]): $\tilde e_i$ shifts weight by $+\alpha_i$ on vertices, $\varepsilon_i(b)=\max\{n:\tilde e_i^{\,n}b\ne0\}$, and the operators act as shifts on the finite module strings.
+
+[F7] The highest weight element and lowering-generated set ([[def-highest-weight-element-and-connected-highest-weight-crystal]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Step A: the top isotypic decomposition. By [F1] write $M$ as a direct sum of simple integrable highest weight modules; let $\lambda$ be a maximal weight of $M$ and let $N_0:=U_q(\mathfrak g)M_\lambda$ be the sum of the summands isomorphic to $V(\lambda)$, and $N_1$ the sum of the remaining ones. Each nonzero $w\in M_\lambda$ generates a nonzero integrable cyclic highest weight module of weight $\lambda$, isomorphic to $V(\lambda)$ by [F2]; the sum of these cyclic submodules is $N_0$, and since $M_\lambda$ has dimension $m$ and each copy of $V(\lambda)$ contributes a one-dimensional $\lambda$-weight space, $N_0\cong V(\lambda)^{\oplus m}$ with $m=\dim M_\lambda$, while $M=N_0\oplus N_1$ by [F1]. A simple constituent $V(\nu)$ of $N_1$ with $\lambda\in\nu-Q_+$ would satisfy $\nu\ge\lambda$, and maximality of $\lambda$ in $\mathrm{wt}(M)$ gives $\nu=\lambda$, a contradiction; hence $N_1$ has no weight $\lambda$. [F1, F2, F6, algebra]
+
+2.1 Step B: descent for $V(\lambda)^{\oplus m}$. Since $M_\lambda=N_0{}_\lambda$ has dimension $m=\#B_\lambda$ by [F3], choose one lift in $L_\lambda$ of each element of the finite basis $B_\lambda$. Their reduction modulo $qL_\lambda$ is a basis, so their determinant in any $A_0$-basis of the free module $L_\lambda$ is a unit of $A_0$ and they form an $A_0$-basis of $L_\lambda$. Each lift generates a copy of $V(\lambda)$ by [F2], these $m$ cyclic submodules are linearly independent and their sum has $\lambda$-weight space of dimension $m$, so they sum directly to $N_0$; fixing the identification $N_0\cong V(\lambda)^{\oplus m}$ that sends the chosen lift to the standard top generator $v_\lambda^{(j)}$ of the $j$-th copy, one has $\Phi_0(L_\lambda)=\bigoplus_j\mathcal L(\lambda)^{(j)}_\lambda$ and $B_\lambda$ corresponds to the $m$ standard top residues $b_\lambda^{(j)}$. Claim: if $u\in V(\lambda)^{\oplus m}_\mu$ with $\mu\ne\lambda$ and $\tilde e_iu\in\mathcal L(\lambda)^{\oplus m}$ for all $i\in I$, then $u\in\mathcal L(\lambda)^{\oplus m}$. Indeed, since $\mathcal L(\lambda)$ generates $V(\lambda)$ over $\mathbb Q(q)$, some $q^nu$ lies in $\mathcal L(\lambda)^{\oplus m}$; take the minimal such $n\ge0$. If $n>0$, then $b:=q^nu+q\mathcal L(\lambda)^{\oplus m}\ne0$ is homogeneous of weight $\mu$ and $\tilde e_i(q^nu)=q^n\tilde e_iu\in q^n\mathcal L(\lambda)^{\oplus m}\subseteq q\mathcal L(\lambda)^{\oplus m}$ for all $i$, so $b$ is killed by every $\tilde e_i$; writing $b=\sum_jb^{(j)}$ componentwise, each $b^{(j)}$ is a class in $\mathcal L(\lambda)_\mu/q\mathcal L(\lambda)_\mu$ killed by every $\tilde e_i$, so $b^{(j)}=0$ for all $j$ by [F5] (note $\mu\ne\lambda$), and $b=0$, a contradiction. Hence $n=0$ and $u\in\mathcal L(\lambda)^{\oplus m}$. [step 1.1, F2, F3, F4, F5]
+
+3.1 Step C: $L\cap N_0=\mathcal L(\lambda)^{\oplus m}$. Use the identification of step 2.1 and put $L_0:=L\cap N_0$. It is weight-graded and stable under both Kashiwara operators, since these commute with the inclusion of the graded submodule $N_0$. Its top part equals the standard top lattice. Every standard lattice generator is a lowering word applied to a top lift, hence lies in $L_0$; therefore $\mathcal L(\lambda)^{\oplus m}\subseteq L_0$, and $L_0$ generates $N_0$ over the field by [F4]. For the reverse inclusion, induct on $\operatorname{ht}(\lambda-\mu)$. The top parts agree; at a lower weight every $\tilde e_i u$, $u\in(L_0)_\mu$, belongs to the standard lattice by the induction hypothesis. The descent criterion of step 2.1 then places $u$ in that lattice. Weights outside $\lambda-Q_+$ have zero $N_0$-space. Thus $L_0=\mathcal L(\lambda)^{\oplus m}$. [step 2.1, F3, F4, F6, algebra]
+
+4.1 Step D: the splitting of $L$. Put $N_1$ as in step 1.1 and let $u\in L_\mu$; write $u=u_0+u_1$ with $u_j\in N_j$. Prove $u_j\in L\cap N_j$ by induction on $\operatorname{ht}(\lambda-\mu)$. At $\mu=\lambda$ one has $u_1=0$ because $N_1$ has no weight $\lambda$ by step 1.1, and $u_0=u\in L\cap N_0$. For $\mu\ne\lambda$, each $\tilde e_iu\in L_{\mu+\alpha_i}$ splits by the induction hypothesis into its $N_0$- and $N_1$-parts, and since the operators preserve the $U_q(\mathfrak g)$-submodules $N_j$, the $N_0$-part of $\tilde e_iu$ is $\tilde e_iu_0$; the induction hypothesis gives $\tilde e_iu_0\in L\cap N_0=\mathcal L(\lambda)^{\oplus m}$ for all $i$, and step 2.1 gives $u_0\in\mathcal L(\lambda)^{\oplus m}\subseteq L$; then $u_1=u-u_0\in L\cap N_1$. Weights outside $\lambda-Q_+$ have $N_0$-component zero, so the induction starts there. Hence $L=(L\cap N_0)\oplus(L\cap N_1)$, and both summands are free $A_0$-modules generating $N_0,N_1$ respectively (their $\mathbb Q(q)$-spans are $N_0,N_1$ because $\mathbb Q(q)\otimes L=M=N_0\oplus N_1$ and the splitting is compatible); both are stable and weight-graded, so they are crystal lattices. [step 1.1, step 3.1, F3, F6, algebra]
+
+5.1 Step E: the residue basis splits. Put $L_1:=L\cap N_1$ and $B_0:=B\cap(L_0/qL_0)$. The standard basis $S:=\bigsqcup_j\mathcal B(\lambda)^{(j)}$ lies in $B_0$, because each standard vertex is a lowering word from a top residue in $B_\lambda$. Since $S$ spans $L_0/qL_0$ and $B$ is linearly independent, $B_0=S$. To show that each remaining vertex lies in $L_1/qL_1$, use the splitting of step 4.1 and induct on $\operatorname{ht}(\lambda-\mu)$. Outside $\lambda-Q_+$ the $L_0$-component is zero; at $\mu=\lambda$ every vertex is in $B_0$. At a lower weight write $b=c_0+c_1$, with $c_j\in L_j/qL_j$. If $c_0\ne0$, [F5] supplies an $i$ with $\tilde e_i c_0\ne0$. Then $\tilde e_i b$ is a nonzero basis vertex; its nonzero $L_0$-component and the induction hypothesis place it in $B_0$. Partial inversion gives $b=\tilde f_i\tilde e_i b\in B_0$. Hence every $b\in B\setminus B_0$ has $c_0=0$. The direct-sum decomposition and the basis property of $B$ now imply that $B_1:=B\setminus B_0$ is a basis of $L_1/qL_1$. Operators preserve both summands and $B\cup\{0\}$, so both pairs are crystal bases. [step 2.1, step 4.1, F3, F4, F5, F6]
+
+6.1 Step G: locally finite iteration. Fix upper bounds $\lambda_a$ with $\mathrm{wt}(M)\subseteq\bigcup_{a=1}^s(\lambda_a-Q_+)$ and define $D(\nu):=\max\{\operatorname{ht}(\lambda_a-\nu):\lambda_a-\nu\in Q_+\}$. Each level $D(\nu)=n$ is finite, since it is contained in the finite union of root-height-$n$ slices of those cones. If $\tau>\nu$, every cone containing $\tau$ contains $\nu$, and $D(\tau)\le D(\nu)-\operatorname{ht}(\tau-\nu)<D(\nu)$. Thus, in increasing order of $D$, the highest weights of the simple constituents in [F1] are maximal among the remaining weights and may be peeled using steps 3.1-5.1. For a fixed weight $\mu$, only finitely many constituent tops $\nu\ge\mu$ occur: in each cone the nonnegative root coefficients of $\nu-\mu$ and $\lambda_a-\nu$ sum to those of $\lambda_a-\mu$. Each such top has finite multiplicity, bounded by $\dim M_\nu$. Consequently finitely many peelings exhaust every fixed weight space. The module decomposition of [F1] is algebraic, so every vector has finite constituent support; the compatible lattice and residue splittings therefore give $\Phi(L)=\bigoplus_{j\in J}\mathcal L(\lambda_j)$ and a crystal bijection $B\to\bigsqcup_j\mathcal B(\lambda_j)$ under an isomorphism $\Phi:M\to\bigoplus_jV(\lambda_j)$. The family is locally weight-finite and has exactly the constituent multiplicities of [F1]. AC permits the simultaneous top lifts used in these identifications. This proves (i) and (ii) without requiring $J$ finite. [step 3.1, step 4.1, step 5.1, F1, F3, algebra]
+
+7.1 Step H: components. Under $\Phi$ the connected components of $B$ are exactly the $\mathcal B(\lambda_j)$: each $\mathcal B(\lambda_j)$ is connected because by [F4] every vertex is a lowering word from $b_{\lambda_j}$, and distinct copies share no vertices, so the partition into copies is the partition into connected components. Each $\mathcal B(\lambda_j)$ has highest weight element $b_{\lambda_j}$ of dominant weight $\lambda_j$ and equals $F(b_{\lambda_j})$ by [F5], and it has no other highest weight element by the uniqueness clause of [F5]; hence the highest weight elements of $B$ are exactly the $b_{\lambda_j}$, each generating its own component, and the crystal graph of $B$ is determined up to isomorphism by $M$. This proves (iii). [step 6.1, F4, F5, F7]
+
+8.1 Choice audit. The axiom of choice of [[def-axiom-of-choice]] is used exactly as recorded: once, through [F1], to obtain the decomposition of $M$ into simple integrable highest weight modules and to select bases of the finite-dimensional maximal-vector spaces simultaneously, and for the simultaneous selection of lifts of the finite residue bases in the (possibly infinite) family of top spaces in steps 2.1 and 6.1. Every subsequent lattice and crystal argument is a finite induction on a fixed weight interval and involves no further selection; no incompatible-axiom branch and no global $\mathbb Z[q,q^{-1}]$-freeness is used. [step 6.1, step 7.1, F1, given] ∎
+
+
+## Remarks
+
+The diagram separates the module, lattice, residue space and crystal levels of $\Phi$. Write $L_j:=\mathcal L(\lambda_j)$, let $\pi$ and $\pi'$ be reduction modulo $q$, and let $\overline\Phi$ be the map induced on residue spaces. The upward arrows labelled “incl.” are inclusions; on the right, each canonical basis is included in its own direct summand. Every square commutes.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\node (M) at (0,0) {$M$};
+\node (V) at (6,0) {$\bigoplus_{j\in J}V(\lambda_j)$};
+\node (L) at (0,-1.5) {$L$};
+\node (S) at (6,-1.5) {$\bigoplus_{j\in J}L_j$};
+\node (Q) at (0,-3) {$L/qL$};
+\node (T) at (6,-3) {$\bigoplus_{j\in J}(L_j/qL_j)$};
+\node (B) at (0,-4.5) {$B$};
+\node (C) at (6,-4.5) {$\bigsqcup_{j\in J}\mathcal B(\lambda_j)$};
+\draw[->] (M) -- node[above] {$\Phi\;\cong$} (V);
+\draw[->] (L) -- node[above] {$\Phi|_L\;\cong$} (S);
+\draw[->] (Q) -- node[above] {$\overline\Phi\;\cong$} (T);
+\draw[->] (B) -- node[above] {$\overline\Phi|_B\;\cong$} (C);
+\draw[->] (L) -- node[left] {$\mathrm{incl.}$} (M);
+\draw[->] (S) -- node[right] {$\mathrm{incl.}$} (V);
+\draw[->] (L) -- node[left] {$\pi$} (Q);
+\draw[->] (S) -- node[right] {$\pi'$} (T);
+\draw[->] (B) -- node[left] {$\mathrm{incl.}$} (Q);
+\draw[->] (C) -- node[right] {$\mathrm{incl.}$} (T);
+\end{tikzpicture}
+```
+
+In the bottom row, the inverse image $C_j:=\overline\Phi^{-1}(\mathcal B(\lambda_j))$ of each indexed copy is one connected component, with unique highest vertex $b_j:=\overline\Phi^{-1}(b_{\lambda_j})$, and $C_j=F(b_j)$. The bottom bijection preserves every lowering arrow $b\xrightarrow{i}\tilde f_i b$ whenever $\tilde f_i b\ne0$. The index set $J$ may be infinite; only finitely many summands contribute at any fixed label weight. These are the identifications of steps 6.1–7.1; the proof is independent of the illustration.

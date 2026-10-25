@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-jordan-form-exists-iff-the-characteristic-polynomial-splits.md

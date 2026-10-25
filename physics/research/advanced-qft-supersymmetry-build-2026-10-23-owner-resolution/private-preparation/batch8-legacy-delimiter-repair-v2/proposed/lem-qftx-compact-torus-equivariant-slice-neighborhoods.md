@@ -1,0 +1,85 @@
+---
+id: lem-qftx-compact-torus-equivariant-slice-neighborhoods
+kind: lemma
+title: Equivariant tubular and slice neighborhoods for compact torus actions
+status: draft
+origin: pipeline
+pipeline_run: advanced-qft-supersymmetry-build-2026-10-23
+dependency_level: 1
+domain: mathematics
+library: mathematics
+category: quantum-field-theory-mathematics
+deps:
+  - def-countable-choice
+  - lem-qftx-compact-torus-fixed-locus-normal-weights
+  - thm-every-orbit-is-an-injectively-immersed-homogeneous-space
+  - thm-existence-uniqueness-and-smooth-dependence-of-geodesics
+  - lem-local-isometries-send-geodesics-to-geodesics
+  - thm-smooth-inverse-function-theorem-on-manifolds
+  - thm-compactness-under-continuous-maps
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-qftx-compact-torus-fixed-locus-normal-weights: mathematical-premise
+  thm-every-orbit-is-an-injectively-immersed-homogeneous-space: mathematical-premise
+  thm-existence-uniqueness-and-smooth-dependence-of-geodesics: mathematical-premise
+  lem-local-isometries-send-geodesics-to-geodesics: mathematical-premise
+  thm-smooth-inverse-function-theorem-on-manifolds: mathematical-premise
+  thm-compactness-under-continuous-maps: mathematical-premise
+justified_by: []
+axiom_strength: ZF + AC_omega
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: M. F. Atiyah and R. Bott, The Moment Map and Equivariant Cohomology
+      url: https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf
+      locator: Section 3, orbit tubes and isotropy groups, printed pp. 6–8.
+    - title: Shubham Dwivedi, Jonathan Herman, Lisa C. Jeffrey, and Theo van den Hurk, Hamiltonian Group Actions and Equivariant Cohomology
+      url: https://www.math.toronto.edu/~jeffrey/mat1312/symplecbookpub.pdf
+      locator: Section 9.10, Borel localization proof, PDF pp. 86–87.
+landmark: false
+---
+
+## Statement
+
+Assume countable choice. Let $T=(\mathbb R/\mathbb Z)^r$ act smoothly on a compact finite-dimensional smooth manifold $M$ without boundary, and let $g$ be a $T$-invariant Riemannian metric. If $S\subseteq M$ is a compact embedded $T$-invariant submanifold, its orthogonal normal bundle $\nu(S)$ has a $T$-invariant open disk neighborhood $D_\epsilon(\nu(S))$ of the zero section, and the normal exponential map is a $T$-equivariant diffeomorphism from that disk bundle onto a $T$-invariant open neighborhood of $S$. In particular, for $x\in M$, with stabilizer $H=T_x$, orbit $O=T\cdot x$, and normal fiber $V=\nu_x(O)$, let $H$ act on $V$ by its differentials. There is an open $H$-invariant disk $D_\epsilon(V)$ such that $[t,v]$, the equivalence class of $(t,v)$ under $(t,v)\sim(th,h^{-1}v)$ for $h\in H$, maps by $[t,v]\mapsto t\cdot\exp_x(v)$ to a $T$-equivariant diffeomorphism from $T\times_H D_\epsilon(V)$ onto an open neighborhood $U_x$ of $O$. Every stabilizer of a point in $U_x$ is a subgroup of $H$.
+
+## Statement references
+
+[Orbit tubes and isotropy groups] [Atiyah–Bott, Section 3, printed pp. 6–8](https://www.math.stonybrook.edu/~mmovshev/MAT570Spring2008/BOOKS/atiyahbott_moment.pdf)
+
+[Equivariant tubular neighborhood and localization proof] [Dwivedi et al., Section 9.10, PDF pp. 86–87](https://www.math.toronto.edu/~jeffrey/mat1312/symplecbookpub.pdf)
+
+## Facts & Assumptions
+
+**Given:** Countable choice, the compact smooth torus action, and the invariant metric $g$.
+
+[A1] Countable choice is used by the orbit, geodesic, and metric interfaces. [[def-countable-choice]]
+
+[F1] The preceding local lemma constructs a $T$-invariant metric for the given action. [[lem-qftx-compact-torus-fixed-locus-normal-weights]]
+
+[F2] For a smooth action, the orbit map factors through $T/T_x$ as an injective immersion; under countable choice the stabilizer is closed Lie and this quotient is a smooth homogeneous manifold. [[thm-every-orbit-is-an-injectively-immersed-homogeneous-space]]
+
+[F3] Geodesic evaluation is smooth on an open neighborhood of the zero section; isometries preserve geodesics and uniqueness determines their images. [[thm-existence-uniqueness-and-smooth-dependence-of-geodesics]] [[lem-local-isometries-send-geodesics-to-geodesics]]
+
+[F4] An invertible differential makes a smooth map a local diffeomorphism. [[thm-smooth-inverse-function-theorem-on-manifolds]]
+
+[F5] A continuous bijection from a compact space to a Hausdorff space is a homeomorphism. [[thm-compactness-under-continuous-maps]]
+
+## Proof
+
+**Given:** The data in the statement.
+
+1.1 For a point $x\in M$, let $H=T_x$. By [F2], $O=T\cdot x$ has the intrinsic manifold $T/H$ and its orbit map into $M$ is a continuous injective immersion. The domain $T/H$ is compact as a continuous image of compact $T$, and $M$ is Hausdorff, so [F5] makes the orbit map a homeomorphism onto $O$; together with immersion this makes $O$ an embedded submanifold. [A1, F2, F5]
+
+1.2 Now let $S\subseteq M$ be any compact invariant embedded submanifold and write $E(p,v)=\exp_p(v)$ on the open set where the geodesic exists up to time $1$. The geodesic theorem in [F3] makes this a smooth map on an open neighborhood of the zero section. At $(p,0)$, its differential on $T_pS\oplus\nu_p(S)$ is $(u,w)\mapsto u+w$: on the zero section $E(p,0)=p$, while $\frac{d}{ds}|_{s=0}E(p,sw)=w$ by the initial-velocity definition and time rescaling of the geodesic. This is an isomorphism because $T_pM=T_pS\oplus\nu_p(S)$, so [F4] makes $E$ a local diffeomorphism at every point of the zero section. [F3, F4, given, algebra]
+
+2.1 The zero section of $\nu(S)$ is compact. A finite cover by the local diffeomorphism neighborhoods in step 1.2, followed by shrinking in local bundle charts, gives $\epsilon_0>0$ such that $E$ is defined and a local diffeomorphism on $D_{\epsilon_0}(\nu(S))$. Suppose no smaller uniform disk is injective. For each sufficiently large $n$, choose distinct $(p_n,v_n),(q_n,w_n)$ with $\|v_n\|,\|w_n\|<1/n$ and $E(p_n,v_n)=E(q_n,w_n)$. Compactness and first countability of $S$ give a subsequence with $p_n\to p$ and then one with $q_n\to q$: compactness gives a cluster point and a countable neighborhood basis gives the subsequence. Continuity and the vanishing fiber norms imply $E(p_n,v_n)\to p$, $E(q_n,w_n)\to q$, hence $p=q$ by Hausdorffness of $M$. Both bundle points then converge to $(p,0)$, contradicting local injectivity near $(p,0)$. Thus $E$ is injective on some $D_\epsilon(\nu(S))$, and since it is a local diffeomorphism there, it is a diffeomorphism onto its open image. [A1, F4, F5, step 1.2]
+
+2.2 Each $t\in T$ is an isometry of $g$, so [F3] and uniqueness of geodesics give $E(t\cdot p,(d t)_p v)=t\cdot E(p,v)$. The norm of the normal vector is preserved, so the disk $D_\epsilon(\nu(S))$ and its image are $T$-invariant, proving the equivariant tubular assertion. [F1, F3, step 2.1]
+
+3.1 Apply the tube construction to $S=O$ from step 1.1. The normal bundle of $O$ is $T$-equivariantly isomorphic to $T\times_H V$ by $[t,v]\mapsto (t\cdot x,(d t)_xv)$; this is well defined because replacing $(t,v)$ by $(th,h^{-1}v)$ leaves the vector unchanged. The isomorphism is smooth in the homogeneous charts of [F2], and it identifies the normal disk bundle with $T\times_HD_\epsilon(V)$. If $g_0$ fixes a point $[t,v]$, then $g_0tH=tH$, hence $t^{-1}g_0t\in H$; because $T$ is abelian this means $g_0\in H$. Thus every stabilizer in the slice neighborhood is contained in $H$. [F2, step 1.1, step 2.2]
+
+4.1 If $S=\varnothing$ the zero bundle and neighborhood are empty. If $S=M$, the normal bundle has rank zero and $E$ is the identity. For the orbit of a fixed point, $H=T$ and the displayed slice is the ordinary invariant normal disk. [step 2.1, step 3.1] ∎

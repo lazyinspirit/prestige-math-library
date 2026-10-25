@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-second-order-kernel-convolution-l2-bias-bound.json
+  precheck: pass
 id: lem-second-order-kernel-convolution-l2-bias-bound
 kind: lemma
 title: "Second-order kernel convolution has an L² bias bound"
@@ -23,11 +26,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-14
 sources:
   references:
     - title: "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, integrated MSE calculation, PDF pp. 5–7"
@@ -56,11 +54,11 @@ $$\|S_hf-f\|_{L^2}\le\frac{h^2}{2}M_2(K)\,\|D^2f\|_{2,F}.$$
 
 [F1] Under $\mathrm{AC}_\omega$, $W^{2,2}$ consists of $L^2$ classes whose weak partial derivatives through order two are in $L^2$ ([[def-sobolev-space-wkp-and-its-norm]]).
 
-[F2] Under $\mathrm{AC}_\omega$, $C_c^\infty(\mathbb R^d)$ is dense in $W^{2,2}(\mathbb R^d)$: for every $\epsilon>0$ there is a smooth compactly supported $g$ with $\|g-f\|_{W^{2,2}}<\epsilon$ ([[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]]).
+[F2] Under $\mathrm{AC}_\omega$, $C_c^\infty(\mathbb R^d)$ is dense in $W^{2,2}(\mathbb R^d)$: for every $\epsilon>0$ there is a smooth compactly supported $g$ with $\|g-f\|_{W^{2,2}}<\epsilon$ ([[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn|Compactly supported smooth functions are dense in $W^{k,p}(\mathbb R^n)$]]).
 
 [F3] Tonelli interchanges the integrals of nonnegative product-measurable functions on sigma-finite product spaces ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[def-product-measure-on-sigma-finite-spaces]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).
 
-[F4] Under $\mathrm{AC}_\omega$, a $C^1$ diffeomorphism satisfies the change-of-variables formula for integrable functions; translations therefore preserve $L^2$ norms ([[cor-c-one-change-of-variables-for-l-one-functions]]).
+[F4] Under $\mathrm{AC}_\omega$, a $C^1$ diffeomorphism satisfies the change-of-variables formula for integrable functions; translations therefore preserve $L^2$ norms ([[cor-c-one-change-of-variables-for-l-one-functions|A $C^1$ diffeomorphism satisfies the change-of-variables formula for $L^1$ functions]]).
 
 [F5] Holder's inequality with exponents $2,2$ gives $|\int ab|^2\le(\int|a|^2)(\int|b|^2)$ when the square integrals are finite ([[thm-holder-inequality-for-integrals]]).
 

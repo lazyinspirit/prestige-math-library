@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-c1-regular-codimension-one-foliation-and-transverse-orientation.md

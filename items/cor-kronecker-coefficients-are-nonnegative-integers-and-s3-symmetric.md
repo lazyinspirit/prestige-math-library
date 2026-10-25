@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric.json
+  precheck: pass
 id: cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric
 kind: corollary
-title: Kronecker coefficients are nonnegative integers with full S_3 and conjugation symmetries
+title: Kronecker coefficients are nonnegative integers with full $S_3$ and conjugation symmetries
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -15,11 +18,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-11
 sources:
   references:
     - title: "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014)"

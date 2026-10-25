@@ -1,0 +1,87 @@
+{
+  "id": "ex-finite-trellis-viterbi-tie-and-unreachable-state",
+  "agent": "/root/rendering_repair_coordinator/info_005",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other:unsupported-tilde-tikz-fence",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged PNG shows literal begin/node/draw/end source instead of the trellis. The tilde fence bypasses the renderer diagram extractor. Replacing only its delimiters yields an actual compiled trellis.",
+      "action": "Replaced opening and closing tilde fences with triple-backtick fences; retained every TikZ command.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Two fence delimiters changed. All title, frontmatter, mathematical prose, verification steps, and TikZ drawing commands are unchanged.",
+  "source_lines_after": [
+    48,
+    61
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "data": "Layers V1={s}, V2={a,b,c}, V3={t}; initial alpha(s)=1 and terminal beta(t)=1.",
+      "justification": "Example and finite weighted trellis definition: each directed edge runs from one layer to the next. Fresh figure has exactly five vertices arranged in these columns."
+    },
+    {
+      "data": "Exactly five directed edges: s→a and s→b have weight 2; a→t and b→t have weight 3; c→t has weight 100.",
+      "justification": "Each original draw command matches one explicit Example edge. Fresh original-resolution figure shows all five arrows and labels, with no extra incoming arrow at dashed c."
+    },
+    {
+      "data": "The only admissible full paths are (s,a,t) and (s,b,t), both with score 1·2·3·1=6. No path reaches c.",
+      "justification": "Verification 1.1 independently enumerates paths from the explicit edge list. The absence of an edge into c gives D2(c)=0, so the outgoing weight 100 cannot create a positive prefix."
+    },
+    {
+      "data": "D2(a)=D2(b)=2, D2(c)=0, D3(t)=max(6,6,0)=6; the supplied a<b<c order selects a on the tie, yielding (s,a,t).",
+      "justification": "Algorithm Definition step 1 stores the first maximizing predecessor only for positive values; Verification 2.1 applies exactly that convention. Neither the drawing nor its dashed style is used as a proof premise."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-finite-trellis-viterbi-tie-and-unreachable-state.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-finite-trellis-viterbi-tie-and-unreachable-state.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-finite-trellis-viterbi-tie-and-unreachable-state.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "native_compile_visual": {
+    "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-info005-independent TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-finite-trellis-viterbi-tie-and-unreachable-state --out research/math-library-rendering-repairs-2026-10-23/preview-info005-independent",
+    "exit_code": 0,
+    "compiled_svg": "research/math-library-rendering-repairs-2026-10-23/runtime-info005-independent/pi-tikz-cache/f2dea96833536080b42f57ba3b02490e.svg",
+    "capture": "research/math-library-rendering-repairs-2026-10-23/preview-info005-independent/screenshots/ex-finite-trellis-viterbi-tie-and-unreachable-state.json",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/preview-info005-independent/screenshots/ex-finite-trellis-viterbi-tie-and-unreachable-state--01.png",
+    "tikz_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "visual_review": "Fresh standalone original-resolution PNG inspected: five vertices, five directed edges and all five weight labels are visible and legible; dashed c is distinct; no concrete overlap or clipping. Proof and Facts render normally.",
+    "limitations": "Local ItemBody SSR and file-only Chromium capture; reference map reports 32 unrelated diagnostics, not scoped-item failures."
+  },
+  "before_raw_sha256": "5032f577be6c07ac536660a19d16978e9ad7b69eb6c73426194169539c555685",
+  "after_raw_sha256": "ce05a7bc2bec209515b46a8d9569a3a70d547092899ae7a3b816c871252db67d",
+  "publication_status_preserved": true,
+  "remaining_issues": []
+}

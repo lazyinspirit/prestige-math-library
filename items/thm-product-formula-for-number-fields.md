@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-product-formula-for-number-fields.json
+  precheck: pass
 id: thm-product-formula-for-number-fields
 kind: theorem
 title: Product formula for a number field
@@ -40,13 +43,7 @@ sources:
     - title: "Andrew V. Sutherland, MIT 18.785 Lecture 15: Dirichlet's Unit Theorem (Fall 2021)"
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "p.4: the product formula, with the normalized factors at complex places equal to |x|_C^2 as recorded in §15.2."
-verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+
 ---
 
 ## Statement
@@ -88,7 +85,7 @@ complex embeddings; only finitely many factors differ from $1$.
 
 ## Proof
 
-**Proof technique:** split the product into its finite and archimedean parts; the finite part is the reciprocal of $|N_{K/\mathbb Q}(x)|$ by unique factorisation and the ideal-norm formulas, and the archimedean part is $|N_{K/\mathbb Q}(x)|$ by the embedding formula for the norm.
+**Proof technique:** split the product into its finite and archimedean parts; the finite part is the reciprocal of the absolute field norm of x by unique factorisation and the ideal-norm formulas, and the archimedean part is the absolute field norm of x by the embedding formula for the norm.
 
 1.1 Write $x=a/b$ with $a,b\in\mathcal O_K\setminus\{0\}$. Indeed, $K/\mathbb Q$ is finite so $x$ is algebraic over $\mathbb Q$ and has a monic minimal polynomial $m(X)=X^{d}+c_{d-1}X^{d-1}+\cdots+c_0\in\mathbb Q[X]$ ([[thm-evaluation-kernel-and-minimal-polynomial]]); choose $M\ge1$ with all $M^{j}c_{d-j}\in\mathbb Z$, and set $a=Mx$. Then $a^{d}+Mc_{d-1}a^{d-1}+\cdots+M^{d}c_0=M^{d}m(x)=0$, a monic integer polynomial relation, so $a\in\mathcal O_K$ by the minimal-polynomial criterion ([[cor-algebraic-integer-minimal-polynomial-criterion]]); with $b=M\in\mathbb Z\setminus\{0\}\subseteq\mathcal O_K$ this gives $x=a/b$. [given, algebra]
 

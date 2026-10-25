@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-uct-for-homology-has-an-ext-term-and-uct-for-cohomology-a-tor-term.md

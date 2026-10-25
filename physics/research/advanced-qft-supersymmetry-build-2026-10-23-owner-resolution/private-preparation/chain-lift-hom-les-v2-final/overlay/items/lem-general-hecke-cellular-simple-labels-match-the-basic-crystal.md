@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-general-hecke-cellular-simple-labels-match-the-basic-crystal.md

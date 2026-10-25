@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-sigma-compactness-and-lindelof-in-the-line-and-the-rationals.json
+  precheck: pass
 id: ex-sigma-compactness-and-lindelof-in-the-line-and-the-rationals
 kind: example
-title: "$\\mathbb{R}$ and $\\mathbb{Q}$ are $\\sigma$-compact, and Lindel\\\"of assuming countable choice; $\\mathbb{R}$ is locally compact and $\\mathbb{Q}$ is nowhere locally compact"
+title: "$\\mathbb{R}$ and $\\mathbb{Q}$ are $\\sigma$-compact, and Lindelöf assuming countable choice; $\\mathbb{R}$ is locally compact and $\\mathbb{Q}$ is nowhere locally compact"
 status: published
 origin: session
 provenance:
@@ -13,14 +16,6 @@ aliases: []
 landmark: true
 short: "sigma-compactness and Lindelofness of R and Q"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-05
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -37,7 +32,7 @@ Let $\mathbb{R}$ carry its usual topology and let $\mathbb{Q}$, the rationals
 inside $\mathbb{R}$, carry the subspace topology
 ([[def-subspace-topology-top]]). Then:
 
-1. **$\mathbb{R}$ is $\sigma$-compact** ([[def-compactness-variants]]):
+1. **$\mathbb{R}$ is $\sigma$-compact** ([[def-compactness-variants|Countably compact, Lindelöf, sequentially compact, limit point compact and $\sigma$-compact spaces, and relatively compact subsets]]):
    $\mathbb{R} = \bigcup_{n \in \mathbb{N}} [-\iota(n), \iota(n)]$, and each of
    those intervals is compact.
 2. **$\mathbb{Q}$ is $\sigma$-compact**, being an at most countable union of its
@@ -66,7 +61,7 @@ countably many finite families at most countable.
 
 [L5] Countable choice: for every family $(Y_n)_{n \in \mathbb{N}}$ of nonempty sets there is $f$ on $\mathbb{N}$ with $f(n) \in Y_n$ ([[def-countable-choice]]).
 
-[L6] A space is $\sigma$-compact when it is the union of an at most countable family of compact subsets, and Lindel&ouml;f when every open cover has an at most countable subcover; a space is locally compact when every point has a compact neighbourhood, a neighbourhood of $x$ being a set containing an open set containing $x$ ([[def-compactness-variants]], [[def-locally-compact-space]], [[def-neighbourhood-top]]).
+[L6] A space is $\sigma$-compact when it is the union of an at most countable family of compact subsets, and Lindel&ouml;f when every open cover has an at most countable subcover; a space is locally compact when every point has a compact neighbourhood, a neighbourhood of $x$ being a set containing an open set containing $x$ ([[def-compactness-variants|Countably compact, Lindelöf, sequentially compact, limit point compact and $\sigma$-compact spaces, and relatively compact subsets]], [[def-locally-compact-space]], [[def-neighbourhood-top]]).
 
 [L7] For reals $c < d$ there is a rational strictly between them, and there is also an irrational strictly between them ([[lem-of-q-dense]], [[lem-q-and-irrationals-dense-r]], claim 2; [[def-interior-closure-boundary-top]]).
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-graph-automorphism-and-group-action-on-a-simplicial-graph.md

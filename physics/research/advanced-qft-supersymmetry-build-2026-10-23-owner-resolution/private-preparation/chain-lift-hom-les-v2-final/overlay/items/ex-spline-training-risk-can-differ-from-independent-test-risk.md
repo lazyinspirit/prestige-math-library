@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-spline-training-risk-can-differ-from-independent-test-risk.md

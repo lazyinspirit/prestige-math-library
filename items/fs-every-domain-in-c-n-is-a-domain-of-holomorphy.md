@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-every-domain-in-c-n-is-a-domain-of-holomorphy.json
+  precheck: pass
 id: fs-every-domain-in-c-n-is-a-domain-of-holomorphy
 kind: false-statement
-title: "FALSE: every domain in C^n is a domain of holomorphy"
+title: 'FALSE: every domain in $\mathbb C^n$ is a domain of holomorphy'
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:

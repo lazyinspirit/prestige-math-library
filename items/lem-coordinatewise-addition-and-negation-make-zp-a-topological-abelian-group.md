@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-coordinatewise-addition-and-negation-make-zp-a-topological-abelian-group.json
+  precheck: pass
 id: lem-coordinatewise-addition-and-negation-make-zp-a-topological-abelian-group
 kind: lemma
-title: "Coordinatewise addition and negation make Zp a topological abelian group"
+title: 'Coordinatewise addition and negation make $\mathbb Z_p$ a topological abelian group'
 status: published
 origin: session
 provenance:
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-p-adic-integers-as-compatible-residue-classes]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   scraped: []
   references:

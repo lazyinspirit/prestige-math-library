@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-bounded-local-displacement-on-a-geodesic-space-implies-coarse-lipschitz.md

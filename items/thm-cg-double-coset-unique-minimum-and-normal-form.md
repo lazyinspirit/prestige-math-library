@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-cg-double-coset-unique-minimum-and-normal-form.json
+  precheck: pass
 id: thm-cg-double-coset-unique-minimum-and-normal-form
 kind: theorem
 title: "Unique minimal double coset representatives and the additive normal form u-d-v"
@@ -17,13 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   scraped: []
   references:
@@ -104,7 +100,7 @@ dropped.
 
 ## Proof
 
-**Proof technique:** direct; existence by factoring inside $W_I$ and $W_J$, uniqueness by the intercoset intersection $W_K$, then the cardinality and necessity clauses.
+**Proof technique:** direct; existence by factoring inside the two parabolic subgroups, uniqueness by their conjugated intersection, then the cardinality and necessity clauses.
 
 1.1 *Existence of the normal form.* Let $x\in W_IdW_J$. By [F3] write $x=adc$ with $a\in W_I$, $c\in W_J$ and $\ell(x)=\ell(a)+\ell(d)+\ell(c)$; by [F1] factor $a=u_0z$ with $u_0\in W_I^K$, $z\in W_K$ and $\ell(a)=\ell(u_0)+\ell(z)$. Put $z':=d^{-1}zd\in W_J$ by [F2], which satisfies $zd=dz'$ because $z=d z' d^{-1}$, and put $v:=z'c\in W_J$. Then $x=u_0zdc=u_0 d z'c=u_0dv$ with $u_0\in W_I^K$, $v\in W_J$, so every element of the double coset has a representation of the required form. [F1, F2, F3, F5]
 

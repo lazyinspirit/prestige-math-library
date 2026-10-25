@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-borel-sigma-algebra-of-a-subspace-is-the-trace.md

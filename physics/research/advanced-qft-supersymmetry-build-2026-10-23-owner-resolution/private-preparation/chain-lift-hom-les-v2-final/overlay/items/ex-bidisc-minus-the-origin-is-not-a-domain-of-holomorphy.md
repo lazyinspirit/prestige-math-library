@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-bidisc-minus-the-origin-is-not-a-domain-of-holomorphy.md

@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-lusins-theorem.json
+  precheck: pass
 id: thm-lusins-theorem
 kind: theorem
-title: "Assuming countable choice, Lusin's theorem on finite-measure subsets of R^n"
+title: "Assuming countable choice, Lusin's theorem on finite-measure subsets of $\\mathbb R^n$"
 status: published
 origin: session
 provenance:
@@ -10,9 +13,6 @@ provenance:
 deps: [def-measurable-function-between-measurable-spaces, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, lem-simple-approximants-converge-uniformly-on-a-large-closed-set, thm-continuity-from-below-for-measures, thm-uniform-limit-theorem, thm-finite-and-countable-subadditivity-of-measures]
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   references:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Theorem 5.15"

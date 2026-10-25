@@ -1,0 +1,92 @@
+---
+id: ex-equivariant-fourier-hardy-symbol-index
+kind: example
+title: Fourier–Hardy index and the sign of the cotangent plane symbol
+status: "published"
+origin: pipeline
+domain: mathematics
+library: mathematics
+category: quantum-field-theory-mathematics
+page: qftx-equivariant-pseudodifferential-calculus-examples
+deps:
+  - def-axiom-of-choice
+  - lem-equivariant-finite-chart-symbol-calculus
+  - lem-equivariant-controlled-symbol-realization
+  - thm-hopf-line-calculation-of-k-zero-of-the-two-sphere
+dependency_roles:
+  def-axiom-of-choice: mathematical-premise
+  lem-equivariant-finite-chart-symbol-calculus: mathematical-premise
+  lem-equivariant-controlled-symbol-realization: mathematical-premise
+  thm-hopf-line-calculation-of-k-zero-of-the-two-sphere: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: "M. F. Atiyah and I. M. Singer, The Index of Elliptic Operators: I,
+        Annals of Mathematics 87 (1968), 484–530"
+      url: https://math.uchicago.edu/~shmuel/tom-readings/ASI.pdf
+      locator: "§8, printed pp. 525–526, the Hardy projection and rectangle clutching
+        computation."
+dependency_level: 2
+---
+
+## Example
+
+Assume AC. Let $S^1=\mathbb R/(2\pi\mathbb Z)$, with coordinate $x$ and density $dx/(2\pi)$. Let a compact Lie group $G$ act trivially on $S^1$ and let $V$ be a finite-dimensional unitary complex $G$-representation, acting pointwise on $L^2(S^1;V)$. Write $R(G)$ for the Grothendieck group of finite-dimensional continuous complex $G$-representations. For a bounded $G$-equivariant operator $Q:\mathcal H_0\to\mathcal H_1$ between Hilbert $G$-representations, Fredholm means that $\ker Q$ is finite dimensional, $\operatorname{ran}Q$ is closed, and $\operatorname{coker}Q:=\mathcal H_1/\operatorname{ran}Q$ is finite dimensional. The quotient representation is unitarily isomorphic to $\ker Q^*$, where $Q^*$ is the Hilbert adjoint, and we set $\operatorname{Ind}_G(Q)=[\ker Q]-[\operatorname{coker}Q]=[\ker Q]-[\ker Q^*]\in R(G)$. In the finite-chart classical calculus, an order-zero operator has localized symbols satisfying $|\partial_x^\alpha\partial_\xi^\beta p(x,\xi)|\le C_{\alpha\beta K}\langle\xi\rangle^{-|\beta|}$ on compact coordinate subsets, with a smooth leading symbol $p_0$ on nonzero cotangent vectors satisfying $p_0(x,t\xi)=p_0(x,\xi)$ for $t>0$; ellipticity means that $p_0(x,\xi)$ is invertible at every such vector. On $L^2(S^1;V)$ let $P_+$ be the orthogonal projection onto the closed span of $e^{inx}v$ with $n\ge0$. The bounded operator
+
+$$A=e^{ix}P_++(1-P_+)$$
+
+is an equivariant order-zero elliptic pseudodifferential operator. Its leading symbol on the two components of the cotangent sphere is $e^{ix}I_V$ at $\xi>0$ and $I_V$ at $\xi<0$. Its kernel is zero, its cokernel is the constant copy of $V$, and $\operatorname{Ind}_G(A)=-[V]$.
+
+For a locally compact space $Z$, define $K_c^0(Z)$ to be the Grothendieck group under block sum of pairs of finite-rank complex vector bundles over $Z$ and continuous bundle maps that are isomorphisms outside a compact subset, modulo bundle isomorphism, homotopies with a common compact subset outside which every map is invertible, and addition or removal of everywhere-invertible pairs. Write $b\in K_c^0(T^*\mathbb R)$ for the class of the pair of trivial complex lines over $T^*\mathbb R\cong\mathbb R^2$ whose map is multiplication by $z=x+i\xi$, invertible outside the origin. Its one-point compactification $(T^*\mathbb R)^+\cong S^2$ identifies this relative group with $\widetilde K^0(S^2)$, the virtual complex-bundle classes of rank zero at the compactification point. On $|z|=1$, the normalized map $z/|z|=e^{i\vartheta}$ is the clutching transition. Identify $S^2=\mathbb{CP}^1$ with the set of complex lines $\ell\subset\mathbb C^2$, and let $\gamma=\{(\ell,v):v\in\ell\}$ be its tautological line bundle. Choose hemispheric trivializations whose transition is $g(e^{i\vartheta})=e^{i\vartheta}$. With this convention, $b$ is $\beta=[\gamma]-[\underline{\mathbb C}]=[\gamma]-1$, where $\underline{\mathbb C}$ is the trivial line over $S^2$. A realization on a compact ambient base is controlled if its Schwartz kernel agrees with the exterior bundle isomorphism's multiplication kernel whenever either kernel variable lies outside a compact set. Define the controlled analytic index of a compact-support class to be the Fredholm index $[\ker P]-[\ker P^*]$ of a G-invariant elliptic realization on a compact ambient base. After a homotopy through degree-zero homogeneous principal symbols, the symbol of $A$ differs from the identity only over a compact coordinate interval, and its compact-support class there is $-b\otimes V$. Thus the compact-support analytic index of $b$ is $1$.
+
+For clarity about orientation, the tautological cotangent form is $\theta=\xi\,dx$ and $d\theta=d\xi\wedge dx$. The positively oriented boundary for the complex plane $x+i\xi$ traverses the top of a rectangle from right to left. The Hardy symbol winds $-1$ on that boundary. Reversing to the $d\theta$ orientation reverses both boundary windings; it does not change the class identity $[\sigma(A)]=-b\otimes V$.
+
+## Example references
+
+[Atiyah–Singer I, §8, printed pp. 525–526](https://math.uchicago.edu/~shmuel/tom-readings/ASI.pdf)
+
+[[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]
+
+## Facts & Assumptions
+
+**Given:** The circle, trivial geometric $G$-action, coefficient representation $V$, and Fourier convention $e^{inx}$ in the example.
+
+[A1] AC is inherited from the bundle, Sobolev and Fredholm suppliers. [[def-axiom-of-choice]]
+
+[F1] Smooth classical symbols with the positive Fourier kernel $e^{i(x-y)\xi}$ have the local symbol calculus and Sobolev/Fredholm properties specified by the finite-chart supplier. [[lem-equivariant-finite-chart-symbol-calculus]]
+
+[F2] The compact symbol index is invariant under stabilized symbol homotopy, equals the Fredholm kernel difference of a realization, is compatible with coefficient representations, and is independent of compactification for controlled compact-support representatives. [[lem-equivariant-controlled-symbol-realization]]
+
+[F3] The relative plane symbol clutched by $z$ represents $\beta=[\gamma]-1$ in the fixed root convention; a loop of winding $k$ represents $k\beta$. [[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]
+
+## Verification
+
+**Given:** The preceding data and symbol/index conventions.
+
+1.1 Under [A1], all calculus and index constructions below use the declared AC hypothesis. The exponentials are an orthonormal complete system. Completeness can be checked without an additional spectral theorem: convolution of a continuous periodic function with the Fejér kernel is a trigonometric polynomial and converges uniformly, since the nonnegative kernel has integral one and its mass outside each neighborhood of zero tends to zero; continuous functions are dense in $L^2$ by approximation of interval indicators and simple functions. Thus an $L^2$ function orthogonal to every exponential is zero. Consequently $P_+$ is an orthogonal projection of norm at most one, including when $V=0$. On Fourier basis vectors, $A(e^{inx}v)=e^{i(n+1)x}v$ for $n\ge0$ and $A(e^{inx}v)=e^{inx}v$ for $n<0$. These images are exactly the distinct nonzero modes, so $A$ is an isometry onto their closed span, its kernel is zero, and its cokernel is the constants. Every identification commutes with $G$, proving $\operatorname{Ind}_G(A)=-[V]$. [A1, given, construct, algebra]
+
+2.1 To verify the actual classical symbol, let $f$ be a smooth cutoff supported in a coordinate interval of length less than $2\pi$, and extend it by zero to $\mathbb R$. With $\widehat f(\eta)=\int e^{-ix\eta}f(x)\,dx$, local application to $f(x)e^{ix\xi}$ gives $e^{-ix\xi}P_+(fe^{i(\cdot)\xi})(x)=(2\pi)^{-1}\sum_{n\ge0}\widehat f(n-\xi)e^{ix(n-\xi)}$. Every derivative of $\widehat f$ decays faster than every power, by repeated integration by parts. For $\xi\to-\infty$ the sum and all its $x,\xi$ derivatives are rapidly decreasing, since $n-\xi\ge n+|\xi|$. For $\xi\to+\infty$ use full Fourier reconstruction, whose sum is $f(x)$ on the chosen chart, and subtract the sum over $n<0$; that sum has the same rapid estimates. Uniform bounds on the remaining compact $\xi$ interval follow by convergence of the differentiated sums. Hence this localized complete symbol has leading term $f(x)$ on the positive ray and zero on the negative ray, with smooth rapidly decreasing remainders away from a bounded frequency interval. Off the diagonal the localized kernels are smooth by the same integration-by-parts estimates. This establishes $P_+$ in the calculus [F1], with the asserted two-ray symbol. Multiplication by $e^{ix}$ gives the displayed elliptic symbol of $A$. [F1, step 1.1, construct, algebra]
+
+3.1 Choose a smooth real function $\varphi$ on $[0,2\pi]$, equal to $0$ near $0$, equal to $2\pi$ near $2\pi$, and increasing only in a proper interior interval $I$. The loops $u_t(x)=\exp(i((1-t)x+t\varphi(x)))$ are smooth periodic degree-one loops, for $0\le t\le1$, joining $e^{ix}$ to a loop equal to $1$ outside $I$. All derivatives match at the endpoints because $\varphi$ is constant there. On the positive cotangent ray replace $e^{ix}$ by $u_t(x)$, leaving the negative symbol $1$. These are elliptic symbol homotopies; [F2] preserves their index. At $t=1$ the symbol is the identity outside the compact subinterval where $\varphi$ varies, and its class is extended from $T^*I$. A coordinate on $I$ gives the following compact representative on $\mathbb R^2$: $a(x,\xi)=1+(e^{i\varphi(x)}-1)h(\xi)$, where $h=0$ on $\xi\le-1$, $h=1$ on $\xi\ge1$, and $\varphi$ is extended by its endpoint constants. Its possible zeros lie in a compact rectangle, and its boundary values are $e^{i\varphi(x)}$ on the top and $1$ on the other three sides. [F2, step 2.1, construct]
+
+4.1 Traverse that rectangle counterclockwise in the coordinate orientation $dx\wedge d\xi$. On the top $x$ decreases, so the change of argument is $-2\pi$. The boundary map has winding $-1$, whereas $x+i\xi$ has winding $+1$. Their class identity can also be seen directly: map the rectangle to a disk; the ratio of its boundary function to $\bar z$ has winding zero and hence a continuous logarithm (integrate its logarithmic derivative and use the zero total integral). Exponentiating scalar multiples of that logarithm gives a homotopy to $\bar z$. The sum of the $z$ and $\bar z$ relative symbols is zero: the boundary matrices $\operatorname{diag}(z,\bar z)$ contract through $\left(\begin{smallmatrix}t z&-\sqrt{1-t^2}\\\sqrt{1-t^2}&t\bar z\end{smallmatrix}\right)$, $1\ge t\ge0$, to a constant invertible matrix, and then to the identity. Thus $[a]=-b$, consistently with [F3]. Tensoring the argument by $V$ proves the class assertion. Taking $G=\{1\}$ and $V=\mathbb C$ in steps 1.1 and 3.1 gives the scalar compact representative index $-1$; since its class is $-b$, additivity and excision give $a_{\{1\}}(b)=1$, where $a$ denotes the compact-support analytic index. Finally $d\theta=d\xi\wedge dx$ reverses the chosen complex orientation, giving precisely the orientation statement in the example. [F2, F3, step 1.1, step 3.1, construct, algebra] ∎
+
+## Remarks
+
+The geometric action on the circle is trivial here. Multiplication by $e^{ix}$ does not commute with geometric circle rotations on the same source and target bundle, so this operator does not supply a rotation-equivariant Hardy index. The coefficient-representation statement is the equivariant assertion used here.
+
+The rectangle below uses coordinates $(x,\xi)$ and the orientation $dx\wedge d\xi$. Its counterclockwise top edge runs from right to left, where the compact representative has value $e^{i\varphi(x)}$; it equals $1$ on the other three edges. The diagram records this setup only; the winding and class identity are established in the Verification.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \draw[->] (-0.2,0) -- (3.5,0) node[below] {$x$};
+  \draw[->] (0,-0.2) -- (0,2.7) node[left] {$\xi$};
+  \draw[->] (0.6,0.6) -- (3.0,0.6) node[midway,below] {$1$};
+  \draw[->] (3.0,0.6) -- (3.0,2.0) node[midway,right] {$1$};
+  \draw[->] (3.0,2.0) -- (0.6,2.0) node[midway,above] {$e^{i\varphi(x)}$};
+  \draw[->] (0.6,2.0) -- (0.6,0.6) node[midway,left] {$1$};
+\end{tikzpicture}
+```

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-projection-from-b-infinity-to-a-highest-weight-crystal.md

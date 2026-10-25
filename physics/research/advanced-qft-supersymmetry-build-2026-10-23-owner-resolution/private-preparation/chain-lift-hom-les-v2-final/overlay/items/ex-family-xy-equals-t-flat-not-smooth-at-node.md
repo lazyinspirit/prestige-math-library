@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-family-xy-equals-t-flat-not-smooth-at-node.md

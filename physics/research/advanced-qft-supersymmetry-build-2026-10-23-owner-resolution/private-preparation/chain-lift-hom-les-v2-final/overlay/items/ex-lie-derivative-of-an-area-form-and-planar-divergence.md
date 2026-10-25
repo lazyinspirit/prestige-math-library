@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-lie-derivative-of-an-area-form-and-planar-divergence.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-c1-planar-fields-on-a-closed-disk-extend-to-a-neighborhood.md

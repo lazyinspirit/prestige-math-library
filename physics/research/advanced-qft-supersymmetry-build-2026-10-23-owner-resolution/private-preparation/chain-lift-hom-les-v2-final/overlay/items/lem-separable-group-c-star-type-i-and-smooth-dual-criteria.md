@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-separable-group-c-star-type-i-and-smooth-dual-criteria.md

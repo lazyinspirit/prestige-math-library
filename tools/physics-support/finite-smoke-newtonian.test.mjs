@@ -39,7 +39,9 @@ test('Newtonian smoke checks the actual coefficient assertion and rejects sign/f
   assert.equal(absent.body.errors[0].code, 'smoke-assertion-mismatch');
   assert.deepEqual(absent.body.outcomes, []);
 
-  const source = readFileSync(tool, 'utf8');
+  // Preserve the registered module when executing a temporary source mutant.
+  const source = readFileSync(tool, 'utf8').replace('./finite-smoke-penrose.mjs',
+    new URL('./finite-smoke-penrose.mjs', import.meta.url).href);
   for (const [label, before, after] of [
     ['missing shear factor two', '2 * mu * D[i][j]', 'mu * D[i][j]'],
     ['wrong bulk sign', 'lambda * trace : 0', '-lambda * trace : 0'],

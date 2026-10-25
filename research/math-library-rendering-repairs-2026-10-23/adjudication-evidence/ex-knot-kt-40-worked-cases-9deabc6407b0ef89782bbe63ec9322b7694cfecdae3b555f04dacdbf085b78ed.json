@@ -1,0 +1,114 @@
+{
+  "id": "ex-knot-kt-40-worked-cases",
+  "agent": "/root/rendering_repair_coordinator/knot_034",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Independently viewed the original flagged tile standalone at original resolution: the entire diagram is replaced by a red failure panel and raw source. The original tikz fence contains a tikzcd environment and an operatorname label; the renderer loads amsfonts and tikz-cd but not amsmath. A tikzcd fence alone still failed in the actual local preview. Native basic TikZ nodes with the equivalent mathrm identity label compile successfully.",
+      "action": "Replaced the failing embedded tikzcd environment with a tikzpicture having the same three modules and two directed map arrows; used mathrm for the identity label.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Render the existing birth-then-merge local-map illustration with basic TikZ primitives and a supported identity label. No object, map, relation, statement or proof was changed.",
+  "source_lines_after": [
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and domains/codomains",
+      "details": "The three nodes are A, A tensor_Z A, A for A=Z[X]/(X^2). The first arrow id_A tensor eta is shorthand under A=A tensor_Z Z for a -> a tensor 1, matching the birth of a new second circle. The second arrow m:A tensor_Z A -> A is the merge multiplication. These are exactly the Example display and supplier Definition."
+    },
+    {
+      "check": "Composite and coefficients",
+      "details": "Over Z, eta(1)=1; m(1 tensor 1)=1 and m(X tensor 1)=X by supplier Definition and local F1. Thus m(id_A tensor eta) fixes the free Z-basis {1,X}, as checked in local Proof 1.1 and 2.1. No arrow for a reverse operation, no alternative tensor ordering, and no extra commutativity relation is asserted."
+    },
+    {
+      "check": "Gradings and signs",
+      "details": "The supplier Definition sets deg(1)=1, deg(X)=-1, deg(eta)=+1 and deg(m)=-1. Therefore the two-arrow composite has quantum degree 0. This is a crossingless algebraic TQFT local movie, not a differential cube edge; no crossing ordering sign or chain-level movie functoriality claim is introduced. The plus signs agree with the specified unit and multiplication."
+    },
+    {
+      "check": "Independent rigorous proof",
+      "details": "The unchanged local Proof computes both basis images and concludes by Z-linearity; it neither uses nor needs the drawing."
+    }
+  ],
+  "write_guards": {
+    "before_raw_sha256": "47f4dc2cdb7b7fce4d8bdcd802ed0ce4642441dbc0c41340551cb6bebcd74448",
+    "raw_sha_guard_passed_immediately_before_initial_edit": true,
+    "frontmatter_byte_identical": true,
+    "facts_and_proof_byte_identical": true,
+    "status_byte_identical": "status: published",
+    "after_raw_sha256": "67c354903730e9f50cec042ed6da60729e5338732a30c34579fed86f940e29ba"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-knot-kt-40-worked-cases.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-knot-kt-40-worked-cases.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-knot-kt-40-worked-cases.md",
+            "item_id": "ex-knot-kt-40-worked-cases",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-knot-kt-40-worked-cases.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-cache TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-knot-kt-40-worked-cases --out research/math-library-rendering-repairs-2026-10-23/preview-knot-034-independent-20261024-v3",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 32
+      },
+      "result": "Canonical local ItemBody SSR and node-tikzjax native compilation produce one diagram and no diagram failures or KaTeX errors."
+    }
+  ],
+  "visual_inspection": {
+    "original": "research/math-library-rendering-audit-2026-10-23/knot-theory/screenshots/ex-knot-kt-40-worked-cases--01.png",
+    "fresh": "research/math-library-rendering-repairs-2026-10-23/preview-knot-034-independent-20261024-v3/screenshots/ex-knot-kt-40-worked-cases--01.png",
+    "detail": "Both viewed individually at original resolution. Fresh diagram shows three distinct modules, two right-pointing arrows and separate readable labels; no failure panel or overlap.",
+    "capture": "research/math-library-rendering-repairs-2026-10-23/preview-knot-034-independent-20261024-v3/screenshots/ex-knot-kt-40-worked-cases.json"
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Focused local diagram repair, not a new whole-item mathematical audit.",
+    "Initial preview and v2 preserve actual failed trial evidence; v3 is the final successful capture.",
+    "The preview reference-title map records 32 unrelated parse diagnostics; no whole-corpus validation is claimed."
+  ]
+}

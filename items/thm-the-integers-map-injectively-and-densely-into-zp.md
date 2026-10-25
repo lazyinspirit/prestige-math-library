@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-integers-map-injectively-and-densely-into-zp.json
+  precheck: pass
 id: thm-the-integers-map-injectively-and-densely-into-zp
 kind: theorem
-title: "The canonical map from the integers into Zp is injective and has dense image"
+title: "The canonical map from the integers into the p-adic integers is injective and has dense image"
 status: published
 origin: session
 provenance:
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [def-canonical-map-from-the-integers-to-zp, def-p-adic-integers-as-compatible-residue-classes]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -36,7 +32,7 @@ its image is dense in $\mathbb Z_p$.
 
 [F1] The canonical map sends $m$ to the residue tuple $(m\bmod p^n)_{n\ge1}$ ([[def-canonical-map-from-the-integers-to-zp]]).
 
-[L1] An element of $\mathbb Z_p$ is a compatible system of residue classes modulo $p^n$ ([[def-p-adic-integers-as-compatible-residue-classes]]).
+[L1] An element of $\mathbb Z_p$ is a compatible system of residue classes modulo $p^n$ ([[def-p-adic-integers-as-compatible-residue-classes|The p-adic integers are the compatible residue-class tuples in the inverse limit of $\mathbb Z$ modulo $p^n$]]).
 
 ## Proof
 

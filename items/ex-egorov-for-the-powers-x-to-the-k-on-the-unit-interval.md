@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-egorov-for-the-powers-x-to-the-k-on-the-unit-interval.json
+  precheck: pass
 id: ex-egorov-for-the-powers-x-to-the-k-on-the-unit-interval
 kind: example
-title: "Egorov for x^k on the unit interval"
+title: "Egorov for $x^k$ on the unit interval"
 status: published
 origin: session
 provenance:
@@ -11,13 +14,7 @@ generation:
   role: example
 deps: [thm-egorovs-theorem]
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
+
 ---
 
 ## Example

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-pointwise-and-integral-constraints-have-different-regularity-tests.md

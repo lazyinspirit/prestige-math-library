@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two.md

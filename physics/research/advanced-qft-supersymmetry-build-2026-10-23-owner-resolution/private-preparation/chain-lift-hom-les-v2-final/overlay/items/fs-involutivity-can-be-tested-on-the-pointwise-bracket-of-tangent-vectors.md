@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-involutivity-can-be-tested-on-the-pointwise-bracket-of-tangent-vectors.md

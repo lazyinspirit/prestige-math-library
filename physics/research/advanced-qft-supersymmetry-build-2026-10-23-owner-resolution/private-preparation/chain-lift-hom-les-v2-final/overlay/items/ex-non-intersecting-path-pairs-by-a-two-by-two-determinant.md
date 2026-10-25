@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-non-intersecting-path-pairs-by-a-two-by-two-determinant.md

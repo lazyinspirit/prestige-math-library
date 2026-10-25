@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-vector-field-is-flow-invariant-if-and-only-if-its-lie-derivative-vanishes.md

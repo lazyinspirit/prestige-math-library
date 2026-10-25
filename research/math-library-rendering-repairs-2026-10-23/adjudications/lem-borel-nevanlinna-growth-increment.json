@@ -1,0 +1,76 @@
+{
+  "id": "lem-borel-nevanlinna-growth-increment",
+  "agent": "/root/rendering_repair_coordinator/cxa_029",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The original standalone 1200×1400 screenshot visibly prints $U$, $S_M$, $M$, and the raw exponent command in the uppercase technique banner, while neighboring body mathematics is rendered. Current source matches the frozen before byte-for-byte before repair. The technique banner is rendered as plain text rather than math markdown.",
+      "action": "Replaced only the technique paragraph’s symbolic notation with equivalent prose describing integer function levels, first crossing radii, and lengths given by the positive integer levels raised to minus one minus epsilon.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Local plain-prose workaround for mathematical notation exposed by the renderer’s plain-text technique banner; no application changes.",
+  "source_lines_after": [
+    58
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Underlying renderer limitation remains: proof-technique banners do not parse math. The local prose workaround renders cleanly."
+  ],
+  "before_raw_sha256": "0820eac96d589c01ec99ef6d093c6f371088b2ee9a63c21ff423450240c93106",
+  "after_raw_sha256": "c6dfdbc497d1e756d4308253f418380c01965388a5561fa2b131f0bf3ca968fd",
+  "scope_preserved": "Only line 58 of the body changed; all frontmatter, including publication status, and every numbered proof step remain byte-identical.",
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-borel-nevanlinna-growth-increment.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 8 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-borel-nevanlinna-growth-increment.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-borel-nevanlinna-growth-increment.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_standalone": "research/math-library-rendering-audit-2026-10-23/complex-analysis/screenshots/lem-borel-nevanlinna-growth-increment--01.png",
+    "original_detail": "original",
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/cxa-029/manifest.json",
+    "source_sha256": "c6dfdbc497d1e756d4308253f418380c01965388a5561fa2b131f0bf3ca968fd",
+    "html_sha256": "fc023e0b25ed8d11d1f0aafd7392ccb2bc07c4c5aecf6b450c0700039c5f009c",
+    "reference_map_sha256": "4b50f2b3d3558931002e62acd981c621b38dbb26221909fba5e73552e01d4316",
+    "final_standalone_original_views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/cxa-029/screenshots/lem-borel-nevanlinna-growth-increment--01.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/cxa-029/screenshots/lem-borel-nevanlinna-growth-increment--02.png"
+    ],
+    "result": "Both fresh native ItemBody tiles inspected individually at original resolution. Technique text wraps visibly without raw delimiters or commands; proof formulas render correctly. No TikZ source present or changed.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  }
+}

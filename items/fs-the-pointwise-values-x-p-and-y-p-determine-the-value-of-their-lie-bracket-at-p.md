@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-the-pointwise-values-x-p-and-y-p-determine-the-value-of-their-lie-bracket-at-p.json
+  precheck: pass
 id: fs-the-pointwise-values-x-p-and-y-p-determine-the-value-of-their-lie-bracket-at-p
 kind: false-statement
-title: "FALSE: the point values X_p and Y_p determine the bracket value [X,Y]_p"
+title: "FALSE: the point values $X_p$ and $Y_p$ determine the bracket value $[X,Y]_p$"
 status: published
 origin: session
 provenance:
@@ -12,14 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl (fs-the-pointwise-values-x-p-and-y-p-determine-the-value-of-their-lie-bracket-at-p). No independent judge or whole-closure certification.
-    delegated_by: owner
 sources:
   scraped: []
   references:

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-time-dependent-evolution-satisfies-the-two-time-cocycle-law.md

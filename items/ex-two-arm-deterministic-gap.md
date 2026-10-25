@@ -1,9 +1,7 @@
 ---
 verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-two-arm-deterministic-gap.json
+  precheck: pass
 id: ex-two-arm-deterministic-gap
 kind: example
 title: "A two-arm deterministic gap and explore-then-commit"
@@ -57,3 +55,17 @@ Let $m\ge1$ be an integer, let $n\ge2m+1$, and fix $0<\Delta<1$. In a two-arm $n
 2.1 The exploration means equal the deterministic rewards, so [F3] commits to arm 1. During exploration it pulls arm 2 exactly $m$ times, each with gap $\Delta$; all other pulls have gap $0$. Therefore both the realized reward regret and its expectation equal $m\Delta$. [given, F1, F3, step 1.1, algebra]
 
 3.1 Substituting $\Delta_1=0$ and $\Delta_2=\Delta$ into [F4] gives $m\Delta+(n-2m)\Delta e^{-m\Delta^2/4}$, which is at least $m\Delta$ because $n-2m>0$, $\Delta>0$, and [F5] makes the exponential factor positive. [given, F4, F5, step 2.1, algebra] ∎
+
+
+## Remarks
+
+The schedule below separates the two sources of regret. In each exploration pair, arm 1 contributes zero regret and arm 2 contributes $\Delta$; after commitment, every pull has zero regret. The diagram illustrates the accounting in step 2.1 and is not used in the verification.
+
+```tikz
+\begin{tikzpicture}
+\node[draw, rounded corners, minimum width=5.3cm, minimum height=2.7cm, align=center] (explore) at (0,0) {Exploration: $2m$ rounds\\[5pt] $A_{2r-1}=1,\quad A_{2r}=2$\\ $1\le r\le m$\\[5pt] Regret: $m\Delta$};
+\node[draw, rounded corners, minimum width=4.7cm, minimum height=2.7cm, align=center] (commit) at (6.8,0) {Commit to arm 1\\[5pt] $A_t=1$\\ $2m<t\le n$\\[5pt] Regret: $0$};
+\draw[->, thick] (explore.east) -- node[above] {$J=1$} (commit.west);
+\node at (3.25,-2) {Total regret: $m\Delta+0=m\Delta$};
+\end{tikzpicture}
+```

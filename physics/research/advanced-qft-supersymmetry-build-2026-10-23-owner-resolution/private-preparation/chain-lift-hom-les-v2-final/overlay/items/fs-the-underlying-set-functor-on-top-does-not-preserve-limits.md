@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-underlying-set-functor-on-top-does-not-preserve-limits.md

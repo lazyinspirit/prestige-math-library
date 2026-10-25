@@ -1,0 +1,83 @@
+{
+  "id": "ex-temperley-lieb-order-three-noncritical-gram-radical",
+  "agent": "/root/rendering_repair_coordinator/qar_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "raw-tikz-source-rendered-as-text",
+      "verdict": "confirmed",
+      "reason": "Both original PNG tiles were independently viewed separately at original resolution. Tile 01 shows literal begin/end tikzpicture and commands instead of the two matching diagrams. The tilde fence is not recognized by this native ItemBody TikZ path.",
+      "action": "Changed only the opening and closing tilde fences to triple backticks, retaining every TikZ path, endpoint and label.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Use the supported backtick TikZ fence so the two existing link-state diagrams compile and display.",
+  "source_lines_after": [
+    44,
+    64
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and endpoints",
+      "result": "By def-temperley-lieb-link-state-standard-modules, n=4, p=2 means t=0 and four ordered bottom sites with two arcs and no defects. The left panel has coordinates 0,1,2,3 labeled 1,2,3,4; arcs join 0 to 1 and 2 to 3, exactly (12)(34). The right panel has coordinates 5,6,7,8 labeled 1,2,3,4; arcs join 5 to 8 and 6 to 7, exactly (14)(23). All eight drawn endpoints are incident to exactly one arc."
+    },
+    {
+      "check": "Planarity and actual rendering",
+      "result": "Standalone original-resolution final tile 01 shows both disjoint adjacent arcs for x and an outer arc enclosing the inner arc for y. Neither panel has a crossing; all arcs reach their endpoint dots. Labels 1–4 and both matching labels are readable and separated. These are half-diagrams, so no closed polygon edge is asserted or required."
+    },
+    {
+      "check": "Gluing and loop scalar",
+      "result": "Using reflection and capping from lem-temperley-lieb-link-state-gram-form-is-invariant and the closed-component scalar in def-temperley-lieb-diagram-category, self-gluing either matching gives two components (one for each doubled pair). Mixed gluing has the single alternating cycle 1-x-2-y-3-x-4-y-1. Thus diagonal values are delta^2 and off-diagonal values delta; at q=exp(pi i/3), delta=q+q^{-1}=1, producing the all-ones matrix of verification step 1.1."
+    },
+    {
+      "check": "Radical and critical-label convention",
+      "result": "The form is complex bilinear, so the all-ones Gram matrix has kernel a+b=0, namely C(x-y), as in step 2.1. No conjugate-linear convention is introduced by the figure. t=0 and kappa=3 give 3 not dividing t+1=1, matching the noncritical definition and step 3.1. The source quantum-integer recurrence gives [1]=[2]=1 and [3]=0, consistent with the stated determinant."
+    }
+  ],
+  "proof_independent": true,
+  "checks": {
+    "guard_before_edit_sha256": "a63bcab5d8e9da35754ba8b0e6156ca2e35938a4031dcbbd267efb7b600cf8b2",
+    "after_raw_sha256": "469a719ce76c9cfe5d66e3155d2023cc356f04cba5ca9b8321f9f2f8fd16cc5f",
+    "scope_verification": "Exact byte comparison shows only the two fence replacements; frontmatter including status: published is unchanged.",
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-temperley-lieb-order-three-noncritical-gram-radical.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/ex-temperley-lieb-order-three-noncritical-gram-radical.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/ex-temperley-lieb-order-three-noncritical-gram-radical.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/qar_002-native-preview",
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": [],
+      "tiles_independently_viewed_original_resolution": [
+        "screenshots/ex-temperley-lieb-order-three-noncritical-gram-radical--01.png",
+        "screenshots/ex-temperley-lieb-order-three-noncritical-gram-radical--02.png"
+      ],
+      "limitations": "Local complete ItemBody preview, not production route or metadata widgets. Preview title map reports 16 unrelated parse diagnostics."
+    }
+  },
+  "remaining_issues": []
+}

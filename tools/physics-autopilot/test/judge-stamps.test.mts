@@ -18,6 +18,7 @@ import { tmpdir } from 'node:os';
 
 
 import { itemHashGuard, itemHashJudge } from '../../physics-support/item-hash.mjs';
+import { stampObservation, verifyNativeStampDelta } from '../../physics-support/step6-judge-stamp-delta.mjs';
 import { writeAuditorCreatedBaseline, certifyAuditorCreatedItems, loadAuditorCreatedCertifications } from '../../physics-support/auditor-created-items.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP, MODELS } from '../../physics-support/models.mjs';
 
@@ -226,6 +227,22 @@ test('apply creates verification for a definition with no precheck and preserves
 
   result = run(dir, '--verify');
   assert.equal(result.status, 0, result.stderr);
+});
+
+for (const sources of ['sources: {"references": []}\ngeneration: {"role": "example"}\n', 'sources:\n  references: []\n'])
+test('first native Luna stamp preserves both hashes and the exact sources spelling: ' + (sources.includes('sources: {') ? 'flow' : 'block'), t => {
+  const dir = fixture(['def-first-luna-stamp']); t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const file = join(dir, 'items/def-first-luna-stamp.md'), original = itemText('def-first-luna-stamp').replace('verification:\n  precheck: pass\n', sources);
+  writeFileSync(file, original); const before = stampObservation(original);
+  writeLedger(dir, [ledgerRow('def-first-luna-stamp', MODELS.luna.id, true, before.item_sha256)]);
+  const invoke = (...args: string[]) => spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl', '--manifests', 'research/m.pages.json', ...args],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000, env: { ...process.env, JUDGE_LINEUP: 'luna' } });
+  let result = invoke('--apply'); assert.equal(result.status, 0, result.stderr);
+  const stamped = readFileSync(file, 'utf8'); assert.ok(stamped.includes(sources)); assert.equal((stamped.match(/^verification:/gm) ?? []).length, 1);
+  assert.equal(itemHashJudge(stamped), itemHashJudge(original)); assert.equal(itemHashGuard(stamped), itemHashGuard(original));
+  verifyNativeStampDelta(stamped, before, { model: MODELS.luna.id });
+  result = invoke('--apply'); assert.equal(result.status, 0, result.stderr); assert.equal(readFileSync(file, 'utf8'), stamped);
+  result = invoke('--verify'); assert.equal(result.status, 0, result.stderr);
 });
 
 test('apply creates verification when frontmatter has neither precheck nor sources', () => {

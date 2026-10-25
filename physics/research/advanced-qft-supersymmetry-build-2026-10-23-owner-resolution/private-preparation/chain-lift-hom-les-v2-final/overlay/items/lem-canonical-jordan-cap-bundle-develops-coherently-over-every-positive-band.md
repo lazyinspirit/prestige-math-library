@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-canonical-jordan-cap-bundle-develops-coherently-over-every-positive-band.md

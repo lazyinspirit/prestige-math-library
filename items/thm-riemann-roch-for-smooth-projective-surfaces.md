@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-riemann-roch-for-smooth-projective-surfaces.json
+  precheck: pass
 id: thm-riemann-roch-for-smooth-projective-surfaces
 kind: theorem
 title: "Riemann-Roch for smooth projective surfaces"
@@ -21,11 +24,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21"
@@ -67,7 +65,7 @@ effectivity or vanishing hypothesis is imposed on $\mathcal L$.
 
 
 ## Proof
-**Proof technique:** direct: evaluate the defining alternating sum on the pair $(\mathcal L^{\vee},\mathcal L\otimes\omega_X^{\vee})$ and replace two terms by Serre duality.
+**Proof technique:** direct: evaluate the defining alternating sum on the pair defined in step 1.1 and replace two terms by Serre duality.
 
 1.1 The defining sum. Put $A:=\mathcal L^{\vee}$ and $B:=\mathcal L\otimes\omega_X^{\vee}$. By [F1], $$A\cdot B=\chi(X,\mathcal O_X)-\chi(X,A^{\vee})-\chi(X,B^{\vee})+\chi(X,A^{\vee}\otimes B^{\vee})=\chi(X,\mathcal O_X)-\chi(X,\mathcal L)-\chi(X,\mathcal L^{\vee}\otimes\omega_X)+\chi(X,\omega_X),$$ because $A^{\vee}\cong\mathcal L$, $B^{\vee}\cong\mathcal L^{\vee}\otimes\omega_X$ and $A^{\vee}\otimes B^{\vee}\cong\omega_X$ ([[lem-invertible-sheaf-dual-tensor-inverse]]). [F1]
 

@@ -1,0 +1,1213 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-qftx-hodge-star-decomposition-four-dimensions",
+    "lem-qftx-two-chart-principal-bundle-gluing",
+    "def-qftx-instanton-number-and-asd-sector",
+    "thm-qftx-yang-mills-selfdual-action-bound",
+    "prop-qftx-su2-bpst-explicit-connection-on-s4",
+    "lem-qftx-round-s4-spin-twist-index-one",
+    "lem-qftx-periodic-su2-product-kernel-and-center-line-sign",
+    "ex-qftx-su2-bpst-one-instanton"
+  ],
+  "contracts": {
+    "lem-qftx-hodge-star-decomposition-four-dimensions": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a positively oriented orthonormal coframe $e^1,e^2,e^3,e^4$ of $V^*$. The defining wedge identity gives $*_g e^{12}=e^{34}$, $*_g e^{13}=-e^{24}$, $*_g e^{14}=e^{23}$, $*_g e^{23}=e^{14}$, $*_g e^{24}=-e^{13}$, and $*_g e^{34}=e^{12}$. Thus $*_g$ permutes the orthonormal basis of $\\Lambda^2V^*$ with signs, so it is an isometry; applying it twice to each of the six basis vectors gives $*_g^2=I$. The same conclusions hold after tensoring each basis vector with any member of an orthonormal basis of $W$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\Phi^+=\\tfrac12(\\Phi+*_g\\Phi)$ and $\\Phi^-=\\tfrac12(\\Phi-*_g\\Phi)$, the identity $*_g^2=I$ from step 1.1 gives $*_g\\Phi^+=\\Phi^+$, $*_g\\Phi^-=-\\Phi^-$, and $\\Phi=\\Phi^++\\Phi^-$. If $*_g\\alpha=\\alpha$ and $*_g\\beta=-\\beta$, the isometry property from step 1.1 gives $\\langle\\alpha,\\beta\\rangle=\\langle *_g\\alpha,*_g\\beta\\rangle=-\\langle\\alpha,\\beta\\rangle$, hence $\\langle\\alpha,\\beta\\rangle=0$. The decomposition is unique because the intersection of the two eigenspaces is zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under $\\widehat g=\\lambda^2g$, the induced inner product on $\\Lambda^2V^*$ scales by $\\lambda^{-4}$ because each covector factor scales by $\\lambda^{-2}$, while the oriented volume form scales by $\\lambda^4$. Hence for all $\\alpha,\\beta\\in\\Lambda^2V^*$, $\\langle\\alpha,\\beta\\rangle_{\\widehat g}\\,\\mathrm{vol}_{\\widehat g}=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$. The defining wedge identity therefore gives $\\alpha\\wedge *_{\\widehat g}\\beta=\\alpha\\wedge *_g\\beta$ for every $\\alpha$; nondegeneracy of the wedge pairing between two-forms in dimension four implies $*_{\\widehat g}\\beta=*_g\\beta$. The identity extends $W$-linearly.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is pointwise on a stipulated four-dimensional space; it has no underlying manifold or empty-domain case.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: if W is zero the tensor product is zero, so the identities and unique zero decomposition hold vacuously."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter has a distinguished value one.",
+          "evidence": ""
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the coframe computation covers every four-dimensional inner product and includes the zero coefficient-space case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter.",
+          "evidence": ""
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: only finite orthonormal bases for the fixed finite-dimensional spaces are chosen; no arbitrary-family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives a direct-sum decomposition and eigenspace properties, not an iff claim.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives a direct-sum decomposition and eigenspace properties, not an iff claim.",
+          "evidence": ""
+        }
+      ]
+    },
+    "lem-qftx-two-chart-principal-bundle-gluing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-principal-g-bundle",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group, $M$ a smooth manifold, and $P$\na smooth manifold. A **smooth right principal $G$-bundle** is a right principal\n$G$-bundle $\\pi:P\\to M$ in the topological sense of\n[[def-principal-g-bundle-and-associated-fiber-bundle]], with the following\nadditional smooth structure: $\\pi$ and the right $G$-action are smooth, and\nthe principal-bundle charts can be chosen as equivariant diffeomorphisms\n$\\pi^{-1}(U)\\cong U\\times G$. Thus each chart respects the projection to\n$U$ and the right action on the $G$ factor. The smoothness convention is that\nof [[def-smooth-map-between-manifolds-with-boundary]]; boundaryless manifolds\nare the default in this item.\n\nThe topological principal-bundle clause retains its free, transitive right\naction on every fibre and its local triviality. Smoothness adds compatible\ndifferentiable structure; it does not select a connection or assert that a\nglobal trivialization exists. The empty-base case is allowed and then $P$ is\nempty by the cited topological definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lie-group",
+          "source_section": "Definition",
+          "quote": "A **finite-dimensional real Lie group** is a group $G$, in the sense of\n[[def-group]], together with the structure of a finite-dimensional real smooth\nmanifold such that the maps\n\n$$m:G\\times G\\longrightarrow G,\\qquad m(g,h)=gh,$$\n\nand\n\n$$\\operatorname{inv}:G\\longrightarrow G,\\qquad \\operatorname{inv}(g)=g^{-1},$$\n\nare smooth in the sense of\n[[def-smooth-map-between-manifolds-with-boundary]]. Its identity element is\ndenoted by $e$ (or occasionally $1$).\n\nUnless an item explicitly says otherwise, every Lie group on this page is real,\nfinite-dimensional, and has no manifold boundary. Dimension zero is allowed;\nfor example, any countable discrete group with its discrete zero-dimensional\nsmooth structure is a Lie group. A Lie group cannot be empty because a group\ncontains its identity. The definition applies unchanged in dimension one,\nuses no metric or nondegeneracy hypothesis, and makes no choice from a family\nof sets.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The generated equivalence classes contain one representative from each chart copy exactly when the base point is in $U\\cap V$: the transition $(x,h)_V\\mapsto(x,\\tau(x)h)_U$ is bijective there, with inverse $(x,k)_U\\mapsto(x,\\tau(x)^{-1}k)_V$ by [F2]. Thus the canonical maps $j_U:U\\times G\\to P$ and $j_V:V\\times G\\to P$ are injective. For every open $W\\subseteq U\\times G$, the preimage of $j_U(W)$ in $Q$ is the open subset $W_U$ together with the inverse transition image of $W|_{(U\\cap V)\\times G}$ in the $V$ copy; hence $j_U(W)$ is open in the quotient. The same argument applies to $j_V$, so these maps are open embeddings and their images give product charts covering $P$. On their overlap $j_U^{-1}j_V(x,h)=(x,\\tau(x)h)$, a diffeomorphism with inverse $(x,k)\\mapsto(x,\\tau(x)^{-1}k)$ by [F2]. Therefore these product charts define a smooth atlas on $P$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The induced projection is continuous because the two product projections agree on the equivalence relation. If two points of $P$ project to distinct points of $X$, disjoint base neighborhoods separate them since $X$ is Hausdorff. If they project to the same $x$, choose $U$ or $V$ containing $x$; both points lie in that product chart, where distinct group coordinates have disjoint neighborhoods because the chart is Hausdorff. Hence $P$ is Hausdorff. Each product chart is second-countable, and the union of countable bases from the two charts is a countable base for $P$. The coordinate changes are smooth by step 1.1, so the resulting smooth manifold structure has the required separation and countability properties.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The formula $[x,h]_i\\cdot k=[x,hk]_i$ is well-defined because $(x,\\tau(x)h)_U\\cdot k=(x,\\tau(x)hk)_U\\sim(x,hk)_V$; associativity and the identity law follow from the group law. In each chart it is the smooth product action by [F2], and it is free and transitive on each fibre because right multiplication on the $G$ coordinate has those properties. By steps 1.1 and 2.1, the charts are smooth product charts and $P$ is Hausdorff and second-countable. The map $\\pi$ is smooth and locally the product projection, so [F1] applies and $P\\to X$ is a smooth right principal $G$-bundle. The sections $s_U,s_V$ are smooth in these charts, and $[x,e]_V=[x,\\tau(x)]_U$ gives $s_V=s_U\\tau$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the construction and separation argument also apply to the empty manifold, with empty total space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: the trivial zero-dimensional Lie group has a valid identity action, with free/transitive one-point fibres."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter has a distinguished value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: if U intersection V is empty, the quotient is the disjoint union of the two trivial bundles and the proof remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: the two charts and one transition are fixed supplied data; no chart or group element is chosen from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement constructs a bundle and section transition; it asserts no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement constructs a bundle and section transition; it asserts no iff characterization."
+        }
+      ]
+    },
+    "def-qftx-instanton-number-and-asd-sector": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-nonabelian-gauge-data",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$. Let $M$ be a finite-dimensional, Hausdorff, second-countable smooth manifold without boundary. A **non-Abelian gauge datum on $M$** consists of the following specified objects.\n\nFirst choose a finite-dimensional real Lie group $G$ that is compact in its manifold topology (every open cover has a finite subcover) and noncommutative (there are $g,h\\in G$ with $gh\\ne hg$). The actual group $G$, including its global form, is part of the datum. Its Lie algebra is $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$ with the bracket transported from left-invariant smooth vector fields.\n\nChoose a smooth right principal $G$-bundle $\\pi:P\\to M$: the projection and right action are smooth, the action is free and transitive on each fibre, and there are local trivializations $\\pi^{-1}(U)\\cong U\\times G$ that are equivariant diffeomorphisms over each open $U\\subseteq M$.\n\nChoose a specified set $I$ of representation labels and, for each $a\\in I$, a finite-dimensional complex vector space $V_a$, a positive-definite Hermitian form $h_a$, and a smooth group homomorphism $\\rho_a:G\\to U(V_a,h_a)$. Here $U(V_a,h_a)$ is the group of complex-linear isometries of $h_a$, and a representation is the corresponding finite-dimensional group action. Its associated vector bundle is the quotient $E_a=P\\times_{\\rho_a}V_a$ with relation $[pg,v]=[p,\\rho_a(g)v]$.\n\nTwo smooth right principal $G$-bundles over $M$ are isomorphic over $M$ when a smooth diffeomorphism between their total spaces covers $\\operatorname{id}_M$ and commutes with the right $G$-actions. A **bundle sector** is one equivalence class under this relation. The datum specifies a set $\\Sigma$ of admitted bundle sectors and requires $[P]\\in\\Sigma$; a model may take $\\Sigma=\\{[P]\\}$. The Lie algebra alone does not replace the chosen group or sector. This definition does not choose a connection, an action functional, or a quantum theory.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-principal-connection-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle for a finite-dimensional real Lie group $G$, with $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$. A supplied principal connection is a smooth, right-invariant complement $TP=VP\\oplus H$, where $VP=\\ker d\\pi$; write $v:TP\\to VP$ for the projection along $H$, and let $K_H(X,Y)=-v([hX,hY])$ be its vertical-valued curvature. For $Z\\in\\mathfrak g$ and $p\\in P$, define the fundamental vertical vector $Z_P(p)=\\left.\\frac{d}{dt}\\right|_{t=0}p\\exp_G(tZ)$. The orbit differential $\\zeta_p: \\mathfrak g\\to V_pP$, $Z\\mapsto Z_P(p)$, is a linear isomorphism, as proved below. Define the **principal connection 1-form** by\n\n$$\\omega_p(X):=\\zeta_p^{-1}(v_pX),\\qquad X\\in T_pP.$$\n\nThen $\\omega$ is a smooth $\\mathfrak g$-valued 1-form satisfying $\\omega(Z_P)=Z$, $\\ker\\omega=H$, and $R_g^*\\omega=\\operatorname{Ad}_{g^{-1}}\\omega$ for every fixed $g\\in G$. Conversely, a smooth $\\mathfrak g$-valued 1-form with the reproduction and equivariance properties determines the principal connection $H=\\ker\\omega$. The converted vertical curvature $\\kappa_H:=\\omega\\circ K_H$ is a $\\mathfrak g$-valued alternating 2-form; its equality with the Cartan curvature is established in the curvature lemma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-associated-covariant-derivative",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be a finite-dimensional smooth manifold, $G$ a finite-dimensional real Lie group, $\\pi:P\\to M$ a smooth right principal $G$-bundle, and $\\omega$ the principal connection 1-form of a supplied horizontal distribution. Fix a finite-dimensional complex representation $\\rho:G\\to\\operatorname{GL}_{\\mathbb C}(V)$ that is smooth, and let $E=P\\times_\\rho V$ be its associated vector bundle with relation $[pg,v]=[p,\\rho(g)v]$. Define $\\rho_*:=d\\rho_e:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V)$, where the differential is taken after viewing $\\rho$ as a smooth matrix-valued map. For any open cover with smooth local sections $s_i:U_i\\to P$, write $A_i=s_i^*\\omega$. A smooth section $\\sigma$ of $E$ has unique local components $\\psi_i:U_i\\to V$ given by $\\sigma(x)=[s_i(x),\\psi_i(x)]$. Define the **associated covariant derivative** $\\nabla^\\omega\\sigma$ by its local components\n\n$$\n(\\nabla^\\omega\\sigma)_i=d\\psi_i+\\rho_*(A_i)\\psi_i,\n$$\n\nwhere $(\\rho_*(A_i)\\psi_i)(X)=\\rho_*(A_i(X))\\psi_i$ for $X\\in TU_i$. These expressions patch to a smooth $E$-valued 1-form on $M$, independently of the chosen local sections, and satisfy $\\nabla^\\omega(f\\sigma)=df\\otimes\\sigma+f\\nabla^\\omega\\sigma$ for every smooth scalar function $f$ on $M$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-lie-algebra-valued-form-bracket",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $\\mathfrak g$ a finite-dimensional real Lie algebra. For homogeneous $\\alpha\\in\\Omega^p(M,\\mathfrak g)$ and $\\beta\\in\\Omega^q(M,\\mathfrak g)$, define their **graded bracket** by\n\n$$[\\alpha\\wedge\\beta](X_1,\\ldots,X_{p+q}) := \\frac{1}{p!q!}\\sum_{\\sigma\\in S_{p+q}}\\operatorname{sgn}(\\sigma)[\\alpha(X_{\\sigma(1)},\\ldots,X_{\\sigma(p)}),\\beta(X_{\\sigma(p+1)},\\ldots,X_{\\sigma(p+q)})].$$\n\nHere $\\Omega^p(M,\\mathfrak g)$ is the space of smooth alternating $p$-linear forms with values in $\\mathfrak g$, the inner bracket is the Lie-algebra bracket, and the sum is over all permutations. This is a smooth $\\mathfrak g$-valued $(p+q)$-form. It obeys graded skew-symmetry $[\\alpha\\wedge\\beta]=-(-1)^{pq}[\\beta\\wedge\\alpha]$, graded Jacobi\n\n$$\\left[\\alpha\\wedge\\left[\\beta\\wedge\\gamma\\right]\\right]=\\left[\\left[\\alpha\\wedge\\beta\\right]\\wedge\\gamma\\right]+(-1)^{pq}\\left[\\beta\\wedge\\left[\\alpha\\wedge\\gamma\\right]\\right],$$\n\nand the exterior-derivative rule\n\n$$d[\\alpha\\wedge\\beta]=[d\\alpha\\wedge\\beta]+(-1)^p[\\alpha\\wedge d\\beta].$$\n\nIn particular, for $\\mathfrak g$-valued 1-forms $A,B$, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$, so $\\tfrac12[A\\wedge A](X,Y)=[A(X),A(Y)]$. This fixes the normalization used by the Cartan curvature formula.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-principal-curvature-cartan-bianchi",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle with a principal connection form $\\omega$ associated to $H$, using $Z_P(p)=\\left.\\frac{d}{dt}\\right|_0p\\exp_G(tZ)$ for the right action. For Lie-algebra-valued forms use the graded bracket defined by alternating shuffle and the Lie bracket; in degree one, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$. Define\n\n$$\\Omega_\\omega:=d\\omega+\\frac12[\\omega\\wedge\\omega],\\qquad D_\\omega\\eta:=d\\eta+[\\omega\\wedge\\eta].$$\n\nThen $\\Omega_\\omega$ is horizontal and $\\operatorname{Ad}$-equivariant, and $\\Omega_\\omega=\\omega\\circ K_H$ for the imported vertical-valued curvature $K_H(X,Y)=-v([hX,hY])$. For any trivializing cover with smooth sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=s_i^*\\Omega_\\omega$. On an overlap, let $g_{ij}:U_i\\cap U_j\\to G$ be the smooth map determined by $s_j=s_i g_{ij}$, and write $\\theta_L(g_{ij})=g_{ij}^*\\theta_L$ for the left Maurer–Cartan form. Then\n\n$$A_j=\\operatorname{Ad}_{g_{ij}^{-1}}A_i+\\theta_L(g_{ij}),\\qquad F_i=dA_i+\\frac12[A_i\\wedge A_i],\\qquad F_j=\\operatorname{Ad}_{g_{ij}^{-1}}F_i,\\qquad D_{A_i}F_i=0,$$\n\nwhere $D_{A_i}\\eta:=d\\eta+[A_i\\wedge\\eta]$. The transition equations concern changes of local sections; they do not identify an arbitrary map $M\\to G$ with a global automorphism of a nontrivial bundle.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-invariant-polynomial-on-a-matrix-lie-algebra",
+          "source_section": "Definition",
+          "quote": "Let $G$ be either a real matrix Lie group $G\\subseteq\\operatorname{GL}_n(\\mathbb R)$\nwith real Lie algebra $\\mathfrak g$, or a complex matrix Lie group\n$G\\subseteq\\operatorname{GL}_n(\\mathbb C)$ with complex Lie algebra\n$\\mathfrak g$. In the real case let $K\\in\\{\\mathbb R,\\mathbb C\\}$\nand use polynomials in real linear coordinates with coefficients in $K$.\nIn the complex case take $K=\\mathbb C$ and use polynomials in complex\nlinear coordinates (with no conjugate-coordinate variables). A homogeneous\ndegree-$k$ polynomial $P:\\mathfrak g\\to K$ is **$G$-invariant**\nwhen\n$$P(\\operatorname{Ad}_g A)=P(A)\\quad(g\\in G,\\ A\\in\\mathfrak g),$$\nwhere the adjoint action is the one in\n[[def-conjugation-and-the-adjoint-representation-of-a-lie-group]]. For\n$k\\geq1$, its polarization is the unique symmetric multilinear map\n$P_k:\\mathfrak g^k\\to K$ with\n$$P(A)=P_k(A,\\ldots,A).$$\nHere multilinearity is over $\\mathbb R$ when $\\mathfrak g$ is a real Lie\nalgebra and over $\\mathbb C$ when it is a complex Lie algebra; thus a\n$\\mathbb C$-valued polynomial on a real Lie algebra still has a real-multilinear\npolarization. A complex matrix Lie group may also be regarded as a real Lie\ngroup, in which case the underlying real Lie algebra and real-multilinear\nconvention apply; this is also the convention for real-valued coordinate\npolynomials on a complex matrix Lie algebra, such as $z\\mapsto\\operatorname{Re}z$\non $\\mathfrak{gl}_1(\\mathbb C)$.\n\nThe polarization can be computed by\n$$P_k(A_1,\\ldots,A_k)=\\frac1{k!}[t_1\\cdots t_k]P(t_1A_1+\\cdots+t_kA_k),$$\nwhere the bracket extracts the coefficient of $t_1\\cdots t_k$. A homogeneous\ndegree-$k$ coordinate polynomial makes this coefficient symmetric and\nmultilinear in the $A_j$; setting every $A_j=A$ gives the coefficient\n$k!P(A)$, and the same extraction proves uniqueness. Since $K$ has\ncharacteristic zero, division by $k!$ is valid. For $k=0$, the invariant\npolynomials are constants, viewed as symmetric $0$-linear forms $P_0\\in K$.\nFinite sums of these homogeneous invariant polynomials form the invariant\npolynomial algebra; sums and products remain invariant because the adjoint\naction respects addition and multiplication of scalar values.\n\nPolarization preserves invariance: simultaneous application of $\\operatorname{Ad}_g$\nto the arguments leaves every term in the coefficient formula unchanged.\nConversely, if a symmetric $P_k$ is invariant under simultaneous adjoint action,\nits diagonal $A\\mapsto P_k(A,\\ldots,A)$ is a $G$-invariant polynomial.\nDifferentiating that multilinear invariance along $g(t)=\\exp(tX)$ gives the\ninfinitesimal identity\n$$\\sum_{j=1}^kP_k(A_1,\\ldots,[X,A_j],\\ldots,A_k)=0\\quad(X\\in\\mathfrak g).$$\nIndeed, for matrices,\n$\\left.\\frac{d}{dt}\\right|_{0}\\operatorname{Ad}_{\\exp(tX)}A_j=[X,A_j]$,\nso the chain rule gives exactly the displayed sum. For $k=0$ the sum is empty\nand equals zero.\n\nFor $\\mathfrak{gl}_r(\\mathbb C)$, every coefficient of\n$\\det(I-tA)$ is invariant under $\\operatorname{GL}_r(\\mathbb C)$, since\n$I-t(gAg^{-1})=g(I-tA)g^{-1}$ and determinant is unchanged by conjugation.\nIts restriction to $\\mathfrak u(r)$ is therefore invariant for the adjoint\naction of $U(r)$. For the Pfaffian, use only\n$\\mathfrak{so}(2m)$ with $G=SO(2m)$ and a fixed oriented orthonormal frame.\nFor $A=(a_{ij})\\in\\mathfrak{so}(2m)$, define $\\alpha_A=\\frac12\\sum_{i,j}\na_{ij}e^i\\wedge e^j$ and set\n$$\\frac{\\alpha_A^m}{m!}=\\operatorname{Pf}(A)\\,e^1\\wedge\\cdots\\wedge e^{2m}.$$\nThis is a homogeneous polynomial of degree $m$. If $S\\in O(2m)$, the induced\naction on the top exterior power multiplies the oriented volume by $\\det S$;\nhence $\\operatorname{Pf}(SAS^{\\mathsf T})=(\\det S)\\operatorname{Pf}(A)$.\nIt is invariant under $SO(2m)$, and a reversal of orientation changes its\nsign. The convention gives $\\operatorname{Pf}\\!\\left(\\begin{smallmatrix}0&a\\\\-a&0\\end{smallmatrix}\\right)=a$; for $m=0$ it gives the empty-matrix Pfaffian $1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-evaluation-of-an-invariant-polynomial-on-curvature",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a finite-dimensional Hausdorff second-countable smooth manifold,\npossibly with boundary. Let $\\mathbb F,\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nlet $G$ be a real or complex matrix Lie group in\n$\\operatorname{GL}_r(\\mathbb F)$, and let $\\mathfrak g$ be its Lie algebra.\nFor a smooth rank-$r$ $\\mathbb F$-vector bundle $E\\to M$, a **$G$-frame\natlas** is a supplied open cover with local frames $e_\\alpha$ whose transition\nmatrices $A_{\\beta\\alpha}$, defined by $e_\\beta=e_\\alpha A_{\\beta\\alpha}$,\ntake values in $G$. This is the local-frame description of a reduction of\nthe frame group to $G$. If $\\mathbb F=\\mathbb C$, a connection means a\ncomplex connection as in\n[[def-complex-linear-and-compatible-bundle-connections]]; for\n$\\mathbb F=\\mathbb R$ it means an ordinary smooth bundle connection. A\nconnection is **compatible with this reduction** when its connection matrix\n$\\omega_\\alpha$ in every supplied $G$-frame is $\\mathfrak g$-valued. In\nthe convention of\n[[thm-curvature-two-form-structure-equation]], its curvature matrix is\n$$\n\\Omega_\\alpha=d\\omega_\\alpha+\\omega_\\alpha\\wedge\\omega_\\alpha.\n$$\nIt is $\\mathfrak g$-valued: for tangent vectors $X,Y$, the second term\nevaluates to $[\\omega_\\alpha(X),\\omega_\\alpha(Y)]$, and both this bracket\nand $d\\omega_\\alpha(X,Y)$ lie in $\\mathfrak g$.\n\nLet $P:\\mathfrak g\\to\\mathbb K$ be a homogeneous degree-$k$\n$G$-invariant polynomial, with symmetric multilinear polarization\n$P_k$ as in [[def-invariant-polynomial-on-a-matrix-lie-algebra]]. For\n$k\\ge1$, define its **evaluation on curvature** in a supplied $G$-frame by\nthe alternating $2k$-form\n$$\nP_k(\\Omega_\\alpha,\\ldots,\\Omega_\\alpha) =\\sum_{a_1,\\ldots,a_k} P_k(T_{a_1},\\ldots,T_{a_k})\\, \\Omega_\\alpha^{a_1}\\wedge\\cdots\\wedge\\Omega_\\alpha^{a_k},\n$$\nwhere $(T_a)$ is any basis of $\\mathfrak g$ and\n$\\Omega_\\alpha=\\sum_a T_a\\otimes\\Omega_\\alpha^a$. The right side is the\nmultilinear extension of $P_k$ followed by exterior multiplication, so it is\nindependent of the chosen basis or tensor decomposition. Equivalently, for\n$v_1,\\ldots,v_{2k}\\in T_xM$,\n$$\n\\bigl(P_k(\\Omega_\\alpha^k)\\bigr)_x(v_1,\\ldots,v_{2k}) =\\frac{1}{(2!)^k} \\sum_{\\sigma\\in S_{2k}}\\operatorname{sgn}(\\sigma)\\, P_k\\!\\left( \\Omega_\\alpha(v_{\\sigma(1)},v_{\\sigma(2)}),\\ldots, \\Omega_\\alpha(v_{\\sigma(2k-1)},v_{\\sigma(2k)}) \\right).\n$$\nFor $k=0$, set $P_0(\\Omega_\\alpha^0)=P_0$, the corresponding constant\n$\\mathbb K$-valued $0$-form. A finite sum of homogeneous invariant\npolynomials is evaluated degree by degree and the resulting forms are added.\n\nThese local forms agree on overlaps. Indeed, [[prop-vector-bundle-curvature-is-an-endomorphism-valued-two-form]]\nmakes the curvature a global $\\operatorname{End}(E)$-valued $2$-form. To\nsee its frame transformation, if a fibre vector has coordinate columns\n$x_\\alpha=A_{\\beta\\alpha}x_\\beta$ and an endomorphism has matrices\n$T_\\alpha,T_\\beta$, then $T_\\beta=A_{\\beta\\alpha}^{-1}T_\\alpha\nA_{\\beta\\alpha}$. Applying this pointwise to curvature gives\n$\\Omega_\\beta=A_{\\beta\\alpha}^{-1}\\Omega_\\alpha\nA_{\\beta\\alpha}$. Since $A_{\\beta\\alpha}\\in G$, simultaneous\n$G$-invariance of $P_k$ gives\n$$\nP_k(\\Omega_\\beta,\\ldots,\\Omega_\\beta) =P_k(\\Omega_\\alpha,\\ldots,\\Omega_\\alpha).\n$$\nThus the local evaluations define a global $\\mathbb K$-valued $2k$-form.\nFor $\\mathbb K=\\mathbb C$, this means a complex-valued form, obtained by\ncomplexifying the real form convention; the same local formulas are smooth up\nto boundary charts by\n[[lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-the-chern-weil-homomorphism",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a finite-dimensional Hausdorff second-countable smooth manifold,\npossibly with boundary. Let $E\\to M$ be a smooth rank-$r$ real or complex\nvector bundle with a supplied $G$-frame atlas, where $G$ is a real or complex\nmatrix Lie group, and let $\\nabla$ be a fixed connection compatible with that\nreduction. For the algebra of finite sums of $\\operatorname{Ad}(G)$-invariant\npolynomials $P=\\sum_k P_k$ with values in $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\nFor each $P_k$, write $P_k^{\\mathrm{pol}}$ for its normalized symmetric\npolarization (with $P_0^{\\mathrm{pol}}=P_0$), and define\n$$\\operatorname{CW}_{E,\\nabla}(P)=\\sum_k [P_k^{\\mathrm{pol}}(\\Omega_\\nabla,\\ldots,\\Omega_\\nabla)]\\in H^{\\mathrm{even}}_{\\mathrm{dR}}(M;\\mathbb K).$$\nwhere a degree-$k$ polynomial maps to cohomological degree $2k$. The map is a\ngraded unital $\\mathbb K$-algebra homomorphism, with polynomial multiplication\non the source and wedge product on the target, and\n$\\operatorname{CW}_{E,\\nabla}(1)=[1]$. The coefficient convention for\n$H_{\\mathrm{dR}}(M;\\mathbb K)$ on boundary manifolds is specified below.\nThis definition depends on the fixed connection; independence of its\ncohomology value is a later theorem.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chern-weil-homomorphism-is-independent-of-connection-and-natural",
+          "source_section": "Statement",
+          "quote": "Let $M$ and $N$ be finite-dimensional Hausdorff second-countable smooth\nmanifolds, with boundary allowed. Let $E\\to M$ be a finite-rank real or\ncomplex bundle with a supplied $G$-frame reduction, where the applicable\ngroup is $\\operatorname{GL}_r(\\mathbb R)$, $\\operatorname{GL}_r(\\mathbb C)$,\n$U(r)$, or $SO(r)$. For a finite sum $P$ of $G$-invariant polynomials, let\n$\\operatorname{CW}_{E,\\nabla}(P)$ be the map defined in\n[[def-the-chern-weil-homomorphism]] using a connection compatible with this\nsame reduction.\n\nFor any two compatible connections $\\nabla_0,\\nabla_1$ on $E$,\n$$\\operatorname{CW}_{E,\\nabla_0}(P)=\\operatorname{CW}_{E,\\nabla_1}(P).$$\nFor every smooth map $f:N\\to M$, equip $f^*E$ with its pulled-back\n$G$-reduction and use the pullback connection $f^*\\nabla$. Then\n$$\\operatorname{CW}_{f^*E,f^*\\nabla}(P)=f^*\\operatorname{CW}_{E,\\nabla}(P),$$\nwhere for boundary manifolds smoothness and pullback of forms use the library's\nlocal-extension convention. For each supplied compatible connection,\n$\\operatorname{CW}_{E,\\nabla}$ is a unital graded algebra homomorphism in\n$P$.\n\nAssume full Axiom of Choice (AC) for the existence assertion: every such\nreal or complex bundle with a fixed $\\operatorname{GL}$, $U$, or $SO$\nreduction admits a compatible connection. The connection-independence and\npullback assertions for supplied compatible connections do not use AC.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-chern-pontryagin-and-euler-characteristic-forms",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a finite-dimensional Hausdorff second-countable smooth manifold,\npossibly with boundary. If $E\\to M$ is a rank-$r$ complex vector bundle with\ncomplex connection $\\nabla$ and curvature $\\Omega$, define the total Chern form\n$$c(\\nabla)=\\det\\!\\left(I-\\frac{\\Omega}{2\\pi i}\\right)=\\sum_{j=0}^r c_j(\\nabla),$$\nwhere $c_j(\\nabla)$ has degree $2j$. For a Hermitian connection these forms\nare real-valued; a general complex connection need not give real-valued forms.\n\nFor a rank-$r$ real vector bundle with real connection $\\nabla$, let\n$E_{\\mathbb C}=E\\otimes_{\\mathbb R}\\mathbb C$ carry the complexified\nconnection $\\nabla_{\\mathbb C}$ and set\n$$p_j(\\nabla)=(-1)^j c_{2j}(\\nabla_{\\mathbb C})\\quad\\text{in degree }4j,\\qquad p(\\nabla)=\\sum_{j\\geq0}p_j(\\nabla).$$\nThen $p_0=1$, $p_j=0$ when $2j>r$, and every $p_j(\\nabla)$ is real-valued,\neven if $\\nabla$ is not metric-compatible. If $\\nabla$ is compatible with a\nEuclidean metric, each odd Chern form $c_{2j+1}(\\nabla_{\\mathbb C})$ vanishes\npointwise. Assume full Axiom of Choice (AC); for every real connection each\n$c_{2j+1}(\\nabla_{\\mathbb C})$ is then exact, with AC used through existence\nof a metric-compatible connection and the transgression lemma.\n\nIf $E$ is an oriented Euclidean bundle of even rank $2m$ and $\\nabla$ is\nmetric-compatible, define\n$$e(\\nabla)=\\operatorname{Pf}\\!\\left(\\frac{\\Omega}{2\\pi}\\right),$$\nwhere the Pfaffian uses the ordered oriented orthonormal frame and\n$\\operatorname{Pf}\\!\\left(\\begin{smallmatrix}0&a\\\\-a&0\\end{smallmatrix}\\right)=a$.\nThese curvature evaluations are closed forms. In rank zero,\n$c(\\nabla)=p(\\nabla)=e(\\nabla)=1$. The Euler form is defined here only for\noriented even-rank Euclidean bundles with a metric-compatible connection.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals",
+          "source_section": "Statement",
+          "quote": "Assume full Axiom of Choice. Let $M$ be a finite-dimensional Hausdorff\nsecond-countable smooth manifold, possibly with boundary or empty, and let\n$\\rho_M:H^*(M;\\mathbb Z)\\to H^*(M;\\mathbb R)$ be induced by\n$\\mathbb Z\\hookrightarrow\\mathbb R$. Write $J_M$ for the natural de Rham\nisomorphism from real de Rham cohomology to singular cohomology with real\ncoefficients.\n\nFor every finite-rank smooth complex bundle $E\\to M$ with a Hermitian metric\nand Hermitian connection $\\nabla$, and every $j\\geq0$,\n$$J_M([c_j(\\nabla)])=\\rho_M(c_j(E)).$$\nFor every finite-rank smooth real bundle $V\\to M$ with any real connection\n$D$, and every $j\\geq0$,\n$$J_M([p_j(D)])=\\rho_M(p_j(V)).$$\nFor every oriented Euclidean bundle $W\\to M$ of even rank with a\nmetric-compatible connection $\\nabla$, and its Thom-normalized Euler class,\n$$J_M([e(\\nabla)])=\\rho_M(e(W)).$$\nHere $c_j(\\nabla)$, $p_j(D)$, and $e(\\nabla)$ use the normalizations in\n[[def-chern-pontryagin-and-euler-characteristic-forms]], while $c_j(E)$,\n$p_j(V)$, and $e(W)$ are the published topological classes. In particular\n$c_1(L)=e(L_{\\mathbb R})$ for a complex line and\n$p_j(V)=(-1)^j c_{2j}(V_{\\mathbb C})$. These are equalities after passage to\nreal coefficients; no equality with integral torsion is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-chern-classes-from-the-projective-bundle-relation",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $E\\to B$ be a numerable complex rank-$n$ bundle with $n\\geq1$\nover a path-connected CW complex $B$ (or over one of the CW-type bases of\n[[thm-integral-complex-projective-bundle-theorem]]). By that theorem there are\nunique classes $a_i\\in H^{2i}(B;\\mathbb Z)$, $1\\leq i\\leq n$, such that\n$$x_E^{\\,n}-a_1x_E^{\\,n-1}+a_2x_E^{\\,n-2}-\\cdots+(-1)^na_n=0\\qquad\\text{in }H^{2n}(P(E);\\mathbb Z),$$\nwhere $x_E\\in H^2(P(E);\\mathbb Z)$ is the Euler class of the underlying real\nbundle of the tautological line\n([[def-complex-projective-bundle-and-tautological-complex-line]]). The\n**Chern classes** of $E$ are these coefficients:\n$$c_i(E):=a_i\\in H^{2i}(B;\\mathbb Z)\\qquad(1\\leq i\\leq n),$$\ncompleted by the conventions $c_0(E):=1\\in H^0(B;\\mathbb Z)$ and\n$c_i(E):=0$ for $i>n$, and the **total Chern class** is the finite sum\n$c(E):=\\sum_{i\\geq0}c_i(E)=1+c_1(E)+\\cdots+c_n(E)\\in H^*(B;\\mathbb Z)$.\n\nFor the zero bundle of rank $0$ the conventions give $c(0_B)=1$. The definition\ndepends only on the isomorphism class of $E$, because an isomorphism of\nbundles induces an isomorphism of projective bundles pulling $x$ back to $x$\nand hence preserves the unique relation. For a complex line bundle $L\\to B$ one\nhas $P(L)\\cong B$ over $B$ with $\\gamma_L$ corresponding to $L$ under that\nidentification, so the relation is $x_L-c_1(L)=0$; since $x_L=e(L_{\\mathbb R})$\nunder the identification, this gives\n$$c_1(L)=e(L_{\\mathbb R}).$$\nThis is the normalization used throughout the page: the first Chern class of a\ncomplex line is the Euler class of its underlying real bundle in the complex\norientation, not a separately chosen normalization.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-linear-and-compatible-bundle-connections",
+          "source_section": "Definition",
+          "quote": "Let $E\\to M$ be a smooth real vector bundle of rank $2r$, where $r\\geq0$,\nover a smooth manifold that may have boundary. A **smooth complex structure**\non $E$ is a smooth bundle endomorphism $J:E\\to E$ with $J^2=-I$. It makes\neach fiber a complex vector space by $(a+ib)v=av+bJv$. Equivalently, $E$ has\nlocal smooth complex frames with transition maps in $\\operatorname{GL}_r(\\mathbb C)$. In one direction, multiplication by $i$ in complex bundle charts gives\nsuch a smooth $J$ because the transition maps are complex-linear. Conversely,\nnear any point choose a complex basis in its fiber and extend its vectors to\nlocal smooth real sections; those sections together with their $J$-images\nremain a real frame after shrinking the neighborhood, and give a local complex\nframe. Forgetting smoothness in these charts gives the associated rank-$r$\ncomplex topological vector bundle of\n[[def-real-and-complex-topological-vector-bundle]].\n\nFor a smooth complex bundle $(E,J)$, write $\\Gamma_{\\mathbb C}(E)$ for its\nsmooth complex sections. A **complex connection** is a covariant derivative\n$\\nabla:\\Gamma_{\\mathbb C}(E)\\to\\Omega^1(M;E)$ that is $\\mathbb C$-linear\nand satisfies\n$$\\nabla(fs)=df\\otimes s+f\\nabla s$$\nfor every smooth complex-valued function $f$ and section $s$. This extends the\nreal bundle-connection convention of\n[[def-connection-on-a-smooth-vector-bundle]]. A complex connection is\n**Hermitian** for a supplied Hermitian metric $h$, taken linear in its first\nvariable and conjugate-linear in its second, when\n$$Xh(s,t)=h(\\nabla_Xs,t)+h(s,\\nabla_Xt)$$\nfor all smooth sections $s,t$ and vector fields $X$. A real connection on a\nEuclidean vector bundle is **Euclidean-compatible** when it obeys the same\nidentity for the real bundle metric, as in\n[[def-metric-compatible-connection-on-a-riemannian-vector-bundle]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-de-rham-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For every finite-dimensional Hausdorff second-countable smooth manifold $M$, possibly with boundary, integration on smooth simplices followed by the inverse of restriction from continuous to smooth singular cohomology gives a natural isomorphism of unital graded real algebras\n$$J_M:H^*_{\\mathrm{dR}}(M)\\xrightarrow{\\cong}H^*_{\\mathrm{sing}}(M;\\mathbb R).$$\nThe source product is wedge of form classes, the target product is the front/back singular cup product, and both stars denote direct sums of the homogeneous groups. Naturality is for smooth maps. No compactness assumption is imposed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qftx-hodge-star-decomposition-four-dimensions",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a four-dimensional real vector space with an orientation and inner product $g$, and let $W$ be a finite-dimensional real inner-product space. Define the Hodge operator $*_g$ on $\\Lambda^2V^*$ by $\\alpha\\wedge *_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$, and extend it $W$-linearly to $\\Lambda^2V^*\\otimes W$. Give this tensor product the inner product induced by those on $\\Lambda^2V^*$ and $W$. Then $*_g^2=I$, $*_g$ is an isometry, and its $+1$ and $-1$ eigenspaces are orthogonal. Every $\\Phi\\in\\Lambda^2V^*\\otimes W$ has the unique decomposition\n\n$$\n\\Phi=\\Phi^++\\Phi^-,\\qquad \\Phi^\\pm:=\\frac{\\Phi\\pm *_g\\Phi}{2},\\qquad *_g\\Phi^\\pm=\\pm\\Phi^\\pm.\n$$\n\nIf the inner product on $V$ is rescaled to $\\widehat g=\\lambda^2g$ for any $\\lambda>0$, then the Hodge operator on two-forms is unchanged: $*_{\\widehat g}=*_g$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On an overlap with $s_j=s_i g_{ij}$, [F3] gives $F_j=\\operatorname{Ad}_{g_{ij}^{-1}}F_i$. Since $B$ is invariant, $B(F_j\\wedge F_j)=B(F_i\\wedge F_i)$; these restrictions therefore define the global four-form $\\beta_B$. The polynomial $P_B(Z)=B(Z,Z)/(8\\pi^2)$ is homogeneous, quadratic, and $G$-invariant, so its curvature evaluation [F4] is exactly $\\beta_B$. Connection independence of its Chern–Weil class follows from the supplied-connection clause of [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any two supplied connections on the same $G$-reduction, [F4] makes their Chern–Weil classes equal, so integration over the fixed orientation class gives the same $q_B$. In the $SU(2)$ defining representation, the associated connection matrix is $A_i$ because $\\rho_*$ is the identity inclusion, and its curvature matrix is $\\Omega_i=F_i$ by [F2, F3]. Put $C=i\\Omega_i/(2\\pi)=-\\Omega_i/(2\\pi i)$. Its entries have even form degree and commute, so the degree-four coefficient of $\\det(I+C)$ is $\\det C=\\tfrac12((\\operatorname{tr}_2C)^2-\\operatorname{tr}_2(C\\wedge C))$. By [F5], $\\operatorname{tr}_2C=0$, and $C\\wedge C=-\\Omega_i\\wedge\\Omega_i/(4\\pi^2)$; hence $c_2(\\nabla)=\\operatorname{tr}_2(\\Omega_i\\wedge\\Omega_i)/(8\\pi^2)$ and $\\beta_B=-c_2(\\nabla)$ because $B=-\\operatorname{tr}_2$. The associated connection is Hermitian by [F7], so [F6] sends this de Rham class to the negative realification of $c_2(E)\\in H^4(X;\\mathbb Z)$. Evaluating by [F8] on the orientation class gives $q_B=-\\langle c_2(E),[X]\\rangle\\in\\mathbb Z$. Full AC is used only through the stated characteristic-class comparison and integral-class construction.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F9], $F_i^\\pm=(F_i\\pm *_gF_i)/2$ are the projections to the $\\pm1$ eigenspaces, so $F_i^-=0$ is equivalent to $F_i=*_gF_i$, and $F_i^+=0$ is equivalent to $F_i=-*_gF_i$. The curvature transforms by the adjoint action on overlaps by [F3], while $*_g$ acts only on the form arguments, so each $F_i^\\pm$ transforms by that same adjoint action. Thus $F^\\pm$ are global adjoint-valued two-forms and the stated self-dual and ASD conditions do not depend on the local sections.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: X is explicitly assumed nonempty, so no charge assertion is made for an empty four-manifold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition permits q_B=0 and makes no implication that zero charge forces a flat connection."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter has a distinguished value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The supplied bundle may be trivial and the chosen connection may be flat; the charge and duality definitions remain meaningful."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: local sections are used in principal-bundle charts and no global section is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 derives F^-=0 iff F=*F and F^+=0 iff F=-*F from the local Hodge lemma."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves both reverse implications using the involution and eigenspace projections."
+        }
+      ]
+    },
+    "thm-qftx-yang-mills-selfdual-action-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-instanton-number-and-asd-sector",
+          "source_section": "Definition",
+          "quote": "Assume full Axiom of Choice. Let $X$ be a nonempty, connected, compact, oriented, finite-dimensional Hausdorff second-countable smooth four-manifold without boundary, with a supplied Riemannian metric. Let $G\\subseteq U(V,h)$ be a compact non-Abelian matrix Lie group in its specified global form, let $\\pi:P\\to X$ be a smooth right principal $G$-bundle in a specified bundle sector (an isomorphism class of smooth principal bundles under isomorphisms over $X$), and let $\\omega$ be a supplied smooth principal connection. Let $B:\\mathfrak g\\times\\mathfrak g\\to\\mathbb R$ be a positive-definite symmetric bilinear form invariant under $\\operatorname{Ad}(G)$. For local sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=dA_i+\\tfrac12[A_i\\wedge A_i]$. If $F_i=\\sum_a e_a F_i^a$ in a finite basis of $\\mathfrak g$, define $B(F_i\\wedge F_i):=\\sum_{a,b}B(e_a,e_b)F_i^a\\wedge F_i^b$; this expression is independent of the basis. Invariance of $B$ makes the local expressions $\\beta_B|_{U_i}:=(8\\pi^2)^{-1}B(F_i\\wedge F_i)$ restrictions of a global four-form $\\beta_B$. The **trace-normalized topological charge** is\n\n$$\nq_B(P,\\omega):=\\int_X\\beta_B.\n$$\n\nThe number $q_B(P,\\omega)$ is independent of the supplied connection. For a general compact matrix group and invariant $B$, it is a real characteristic number; no integrality is asserted. In the special case $G=SU(2)$ in its defining representation on $\\mathbb C^2$, with $h(v,w)=v^*w$ and $B(X,Y)=-\\operatorname{tr}_2(XY)$, the associated Hermitian bundle $E=P\\times_{SU(2)}\\mathbb C^2$ has\n\n$$\nq_B(P,\\omega)=-\\langle c_2(E),[X]\\rangle\\in\\mathbb Z,\n$$\n\nwhere $c_2(E)\\in H^4(X;\\mathbb Z)$ is the integral second Chern class and $[X]\\in H_4(X;\\mathbb Z)$ is the orientation fundamental class. This sign is fixed by the library convention $c(E,\\nabla)=\\det(I-\\Omega_\\nabla/(2\\pi i))$.\n\nThe Hodge operator $*_g$ on two-forms is characterized by $\\alpha\\wedge *_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,d\\operatorname{vol}_g$ and acts componentwise on $\\mathfrak g$-valued forms. Set $F_i^+=(F_i+*_gF_i)/2$ and $F_i^-=(F_i-*_gF_i)/2$. The self-dual sector consists of connections with $F_i^-=0$, equivalently $F_i=*_gF_i$; the anti-self-dual (ASD) sector consists of connections with $F_i^+=0$, equivalently $F_i=-*_gF_i$. These conditions are independent of the local section.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-instanton-number-and-asd-sector",
+          "source_section": "Definition",
+          "quote": "Assume full Axiom of Choice. Let $X$ be a nonempty, connected, compact, oriented, finite-dimensional Hausdorff second-countable smooth four-manifold without boundary, with a supplied Riemannian metric. Let $G\\subseteq U(V,h)$ be a compact non-Abelian matrix Lie group in its specified global form, let $\\pi:P\\to X$ be a smooth right principal $G$-bundle in a specified bundle sector (an isomorphism class of smooth principal bundles under isomorphisms over $X$), and let $\\omega$ be a supplied smooth principal connection. Let $B:\\mathfrak g\\times\\mathfrak g\\to\\mathbb R$ be a positive-definite symmetric bilinear form invariant under $\\operatorname{Ad}(G)$. For local sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=dA_i+\\tfrac12[A_i\\wedge A_i]$. If $F_i=\\sum_a e_a F_i^a$ in a finite basis of $\\mathfrak g$, define $B(F_i\\wedge F_i):=\\sum_{a,b}B(e_a,e_b)F_i^a\\wedge F_i^b$; this expression is independent of the basis. Invariance of $B$ makes the local expressions $\\beta_B|_{U_i}:=(8\\pi^2)^{-1}B(F_i\\wedge F_i)$ restrictions of a global four-form $\\beta_B$. The **trace-normalized topological charge** is\n\n$$\nq_B(P,\\omega):=\\int_X\\beta_B.\n$$\n\nThe number $q_B(P,\\omega)$ is independent of the supplied connection. For a general compact matrix group and invariant $B$, it is a real characteristic number; no integrality is asserted. In the special case $G=SU(2)$ in its defining representation on $\\mathbb C^2$, with $h(v,w)=v^*w$ and $B(X,Y)=-\\operatorname{tr}_2(XY)$, the associated Hermitian bundle $E=P\\times_{SU(2)}\\mathbb C^2$ has\n\n$$\nq_B(P,\\omega)=-\\langle c_2(E),[X]\\rangle\\in\\mathbb Z,\n$$\n\nwhere $c_2(E)\\in H^4(X;\\mathbb Z)$ is the integral second Chern class and $[X]\\in H_4(X;\\mathbb Z)$ is the orientation fundamental class. This sign is fixed by the library convention $c(E,\\nabla)=\\det(I-\\Omega_\\nabla/(2\\pi i))$.\n\nThe Hodge operator $*_g$ on two-forms is characterized by $\\alpha\\wedge *_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,d\\operatorname{vol}_g$ and acts componentwise on $\\mathfrak g$-valued forms. Set $F_i^+=(F_i+*_gF_i)/2$ and $F_i^-=(F_i-*_gF_i)/2$. The self-dual sector consists of connections with $F_i^-=0$, equivalently $F_i=*_gF_i$; the anti-self-dual (ASD) sector consists of connections with $F_i^+=0$, equivalently $F_i=-*_gF_i$. These conditions are independent of the local section.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-hodge-star-decomposition-four-dimensions",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a four-dimensional real vector space with an orientation and inner product $g$, and let $W$ be a finite-dimensional real inner-product space. Define the Hodge operator $*_g$ on $\\Lambda^2V^*$ by $\\alpha\\wedge *_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$, and extend it $W$-linearly to $\\Lambda^2V^*\\otimes W$. Give this tensor product the inner product induced by those on $\\Lambda^2V^*$ and $W$. Then $*_g^2=I$, $*_g$ is an isometry, and its $+1$ and $-1$ eigenspaces are orthogonal. Every $\\Phi\\in\\Lambda^2V^*\\otimes W$ has the unique decomposition\n\n$$\n\\Phi=\\Phi^++\\Phi^-,\\qquad \\Phi^\\pm:=\\frac{\\Phi\\pm *_g\\Phi}{2},\\qquad *_g\\Phi^\\pm=\\pm\\Phi^\\pm.\n$$\n\nIf the inner product on $V$ is rescaled to $\\widehat g=\\lambda^2g$ for any $\\lambda>0$, then the Hodge operator on two-forms is unchanged: $*_{\\widehat g}=*_g$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-principal-curvature-cartan-bianchi",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle with a principal connection form $\\omega$ associated to $H$, using $Z_P(p)=\\left.\\frac{d}{dt}\\right|_0p\\exp_G(tZ)$ for the right action. For Lie-algebra-valued forms use the graded bracket defined by alternating shuffle and the Lie bracket; in degree one, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$. Define\n\n$$\\Omega_\\omega:=d\\omega+\\frac12[\\omega\\wedge\\omega],\\qquad D_\\omega\\eta:=d\\eta+[\\omega\\wedge\\eta].$$\n\nThen $\\Omega_\\omega$ is horizontal and $\\operatorname{Ad}$-equivariant, and $\\Omega_\\omega=\\omega\\circ K_H$ for the imported vertical-valued curvature $K_H(X,Y)=-v([hX,hY])$. For any trivializing cover with smooth sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=s_i^*\\Omega_\\omega$. On an overlap, let $g_{ij}:U_i\\cap U_j\\to G$ be the smooth map determined by $s_j=s_i g_{ij}$, and write $\\theta_L(g_{ij})=g_{ij}^*\\theta_L$ for the left Maurer–Cartan form. Then\n\n$$A_j=\\operatorname{Ad}_{g_{ij}^{-1}}A_i+\\theta_L(g_{ij}),\\qquad F_i=dA_i+\\frac12[A_i\\wedge A_i],\\qquad F_j=\\operatorname{Ad}_{g_{ij}^{-1}}F_i,\\qquad D_{A_i}F_i=0,$$\n\nwhere $D_{A_i}\\eta:=d\\eta+[A_i\\wedge\\eta]$. The transition equations concern changes of local sections; they do not identify an arbitrary map $M\\to G$ with a global automorphism of a nontrivial bundle.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $F_i=F_i^++F_i^-$ with $*_{g_X}F_i^+=F_i^+$ and $*_{g_X}F_i^-=-F_i^-$. Let $a=\\int_X B(F_i^+\\wedge *_{g_X}F_i^+)$ and $b=\\int_X B(F_i^-\\wedge *_{g_X}F_i^-)$. Orthogonality of the two Hodge eigenspaces [F3] makes the cross terms vanish; positivity of $B$ [F2] gives $a,b\\geq0$. Consequently $\\int_XB(F_i\\wedge *_{g_X}F_i)=a+b$, while $\\int_XB(F_i\\wedge F_i)=a-b$. By [F1], $S_B=(a+b)/g^2$ and $q_B=(a-b)/(8\\pi^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For nonnegative $a,b$, $a+b\\geq|a-b|$, so the claimed bound follows after division by $g^2>0$. If $q_B>0$, then $a>b$ and equality is equivalent to $b=0$. Its integrand is the continuous nonnegative squared norm of $F_i^-$; if $F_i^-$ were nonzero at a point, it would be bounded away from zero on a neighborhood of positive Riemannian volume, contradicting $b=0$. Thus $F_i^-=0$. If $q_B<0$, equality in $a+b\\geq b-a$ is equivalent to $a=0$; the same continuity and positivity argument gives $F_i^+=0$. If $q_B=0$, equality forces $a+b=0$, so nonnegativity gives $a=b=0$ and both components vanish, hence $F_i=0$. Conversely each of the three stated conditions makes its corresponding norm vanish and gives equality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], $D_{A_i}F_i=0$. For a self-dual connection, $D_{A_i}(*_{g_X}F_i)=D_{A_i}F_i=0$; for an anti-self-dual connection, $D_{A_i}(*_{g_X}F_i)=-D_{A_i}F_i=0$. This is the stated source-free Euclidean Yang–Mills equation. No boundary term or variational argument is used.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonempty base.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 treats q_B=0 explicitly; equality then forces both nonnegative component norms to vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: g>0 allows g=1, and the proof divides only by g^2, so charge magnitude one is also included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The flat case F=0 has q_B=S_B=0 and is exactly the zero-charge equality case in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter.",
+          "evidence": ""
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the bundle and connection are supplied and the proof uses local sections only; it selects no global section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves equality implies the stated duality condition separately for positive, negative, and zero charge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "For each sign, step 2.1 also shows the corresponding duality/flatness condition gives equality."
+        }
+      ]
+    },
+    "ex-qftx-su2-bpst-one-instanton": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-qftx-su2-bpst-explicit-connection-on-s4",
+          "source_section": "Statement",
+          "quote": "Assume full Axiom of Choice. Let $S^4=\\{z\\in\\mathbb R^5:|z|=1\\}$ have its unit round metric $g_X$. Denote by $p_\\infty$ the point omitted by the north stereographic chart and by $p_0$ the point with north-chart coordinates $x=0$. Orient $S^4$ so that north-chart coordinates $x=(x^1,x^2,x^3,x^4)$ satisfy $dx^1\\wedge dx^2\\wedge dx^3\\wedge dx^4>0$. Set $r^2=\\sum_{\\mu=1}^4(x^\\mu)^2$. The metric in the north chart is $4(1+r^2)^{-2}\\sum_{\\mu=1}^4(dx^\\mu)^2$. Let $U_N=S^4\\setminus\\{p_\\infty\\}$ carry coordinate $x$, and $U_S=S^4\\setminus\\{p_0\\}$ carry coordinate $y=x/r^2$; the metric in the south chart is $4(1+|y|^2)^{-2}\\sum_{\\mu=1}^4(dy^\\mu)^2$.\n\nDefine $SU(2)=\\{U\\in M_2(\\mathbb C):U^*U=I,\\det U=1\\}$. Write $\\epsilon_{123}=1$ and let\n\n$$ \\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\qquad T_a=-\\frac{i}{2}\\sigma_a. $$\n\nThe $T_a$ are traceless anti-Hermitian generators. Set $B(X,Y)=-\\operatorname{tr}_2(XY)$. Define antisymmetric symbols by $\\eta_{aij}=\\epsilon_{aij}$, $\\eta_{ai4}=\\delta_{ai}$, $\\bar\\eta_{aij}=-\\epsilon_{aij}$, and $\\bar\\eta_{ai4}=\\delta_{ai}$ for spatial indices $i,j\\in\\{1,2,3\\}$, where $\\delta_{ai}$ is the Kronecker delta; extend them antisymmetrically in the last two indices. For a scale parameter $\\rho>0$, define $u(x)=(x^4I-i x^j\\sigma_j)/r\\in SU(2)$ on $U_N\\cap U_S$. Form the quotient of the two trivial right $SU(2)$-bundles by identifying $(x,h)_S\\sim(x,u(x)^{-1}h)_N$ for each $x\\in U_N\\cap U_S$ and $h\\in SU(2)$, so its local sections satisfy $s_S=s_Nu^{-1}$. Take the set of admitted bundle sectors to be the singleton containing the isomorphism class of this glued bundle, and take the representation family to be the singleton defining representation on $\\mathbb C^2$. Define the local connection potentials by\n\n$$ A_N=\\frac{2\\eta_{a\\mu\\nu}x^\\nu}{r^2+\\rho^2}T_a\\,dx^\\mu,\\qquad A_S=-\\frac{2\\rho^2\\bar\\eta_{a\\mu\\nu}y^\\nu}{1+\\rho^2|y|^2}T_a\\,dy^\\mu. $$\n\nOn the overlap these obey $A_S=\\operatorname{Ad}_u A_N+u\\,d(u^{-1})$, so they define a smooth principal connection on the glued bundle. Let $F$ be its global curvature, with chart representatives $F_N$ and $F_S$. In the north chart its curvature, written $F_N=\\tfrac12F^N_{\\mu\\nu}dx^\\mu\\wedge dx^\\nu$, has components\n\n$$ F^N_{\\mu\\nu}=-\\frac{4\\rho^2}{(r^2+\\rho^2)^2}\\eta_{a\\mu\\nu}T_a. $$\n\nLet $*_{g_X}$ be the Hodge star characterized on two-forms by $\\alpha\\wedge *_{g_X}\\beta=\\langle\\alpha,\\beta\\rangle_{g_X}\\,d\\operatorname{vol}_X$, acting componentwise on the Lie-algebra coefficients. This curvature is self-dual, meaning $F_N=*_{g_X}F_N$. With $B$ as fixed above, define the charge by $q_B=(8\\pi^2)^{-1}\\int_{S^4}B(F\\wedge F)$ and, for any real $g>0$, define the action by $S_B(g)=g^{-2}\\int_{S^4}B(F\\wedge *_{g_X}F)$. Then $q_B=1$, $S_B(g)=8\\pi^2/g^2<\\infty$, and the action saturates the self-dual bound. This is one explicit Belavin–Polyakov–Schwartz–Tyupkin (BPST) charge-one connection; no uniqueness or moduli classification is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Apply",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Its conclusions give every asserted property, including the global smooth connection, displayed curvature, self-duality, $q_B=1$ and $S_B(g)=8\\pi^2/g^2$. No classification follows.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the construction is on the nonempty sphere S^4 and specifies both stereographic charts and their overlap."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: rho>0 is explicit; rho=0 is excluded and no limiting smooth connection is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: rho=1 and g=1 are allowed, with positive denominators and finite integral."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example asserts one charge-one connection for each supplied rho>0 and makes no moduli or uniqueness claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: the two charts and overlap transition are explicit and no global trivialization or section is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one self-dual connection and does not assert an iff classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one self-dual connection and does not assert an iff classification."
+        }
+      ]
+    },
+    "prop-qftx-su2-bpst-explicit-connection-on-s4": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-unitary-and-special-unitary-lie-groups",
+          "source_section": "Example",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $n\\geq1$. Regarded as real Lie groups,\n\n$$U(n)=\\{A\\in\\operatorname{GL}_n(\\mathbb C):A^*A=I\\},\\qquad SU(n)=\\{A\\in U(n):\\det A=1\\}$$\n\nhave Lie algebras\n\n$$\\mathfrak u(n)=\\{X:X^*+X=0\\},\\qquad \\mathfrak{su}(n)=\\{X\\in\\mathfrak u(n):\\operatorname{tr}X=0\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-principal-connection-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle for a finite-dimensional real Lie group $G$, with $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$. A supplied principal connection is a smooth, right-invariant complement $TP=VP\\oplus H$, where $VP=\\ker d\\pi$; write $v:TP\\to VP$ for the projection along $H$, and let $K_H(X,Y)=-v([hX,hY])$ be its vertical-valued curvature. For $Z\\in\\mathfrak g$ and $p\\in P$, define the fundamental vertical vector $Z_P(p)=\\left.\\frac{d}{dt}\\right|_{t=0}p\\exp_G(tZ)$. The orbit differential $\\zeta_p: \\mathfrak g\\to V_pP$, $Z\\mapsto Z_P(p)$, is a linear isomorphism, as proved below. Define the **principal connection 1-form** by\n\n$$\\omega_p(X):=\\zeta_p^{-1}(v_pX),\\qquad X\\in T_pP.$$\n\nThen $\\omega$ is a smooth $\\mathfrak g$-valued 1-form satisfying $\\omega(Z_P)=Z$, $\\ker\\omega=H$, and $R_g^*\\omega=\\operatorname{Ad}_{g^{-1}}\\omega$ for every fixed $g\\in G$. Conversely, a smooth $\\mathfrak g$-valued 1-form with the reproduction and equivariance properties determines the principal connection $H=\\ker\\omega$. The converted vertical curvature $\\kappa_H:=\\omega\\circ K_H$ is a $\\mathfrak g$-valued alternating 2-form; its equality with the Cartan curvature is established in the curvature lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-principal-curvature-cartan-bianchi",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle with a principal connection form $\\omega$ associated to $H$, using $Z_P(p)=\\left.\\frac{d}{dt}\\right|_0p\\exp_G(tZ)$ for the right action. For Lie-algebra-valued forms use the graded bracket defined by alternating shuffle and the Lie bracket; in degree one, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$. Define\n\n$$\\Omega_\\omega:=d\\omega+\\frac12[\\omega\\wedge\\omega],\\qquad D_\\omega\\eta:=d\\eta+[\\omega\\wedge\\eta].$$\n\nThen $\\Omega_\\omega$ is horizontal and $\\operatorname{Ad}$-equivariant, and $\\Omega_\\omega=\\omega\\circ K_H$ for the imported vertical-valued curvature $K_H(X,Y)=-v([hX,hY])$. For any trivializing cover with smooth sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=s_i^*\\Omega_\\omega$. On an overlap, let $g_{ij}:U_i\\cap U_j\\to G$ be the smooth map determined by $s_j=s_i g_{ij}$, and write $\\theta_L(g_{ij})=g_{ij}^*\\theta_L$ for the left Maurer–Cartan form. Then\n\n$$A_j=\\operatorname{Ad}_{g_{ij}^{-1}}A_i+\\theta_L(g_{ij}),\\qquad F_i=dA_i+\\frac12[A_i\\wedge A_i],\\qquad F_j=\\operatorname{Ad}_{g_{ij}^{-1}}F_i,\\qquad D_{A_i}F_i=0,$$\n\nwhere $D_{A_i}\\eta:=d\\eta+[A_i\\wedge\\eta]$. The transition equations concern changes of local sections; they do not identify an arbitrary map $M\\to G$ with a global automorphism of a nontrivial bundle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-lie-algebra-valued-form-bracket",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $\\mathfrak g$ a finite-dimensional real Lie algebra. For homogeneous $\\alpha\\in\\Omega^p(M,\\mathfrak g)$ and $\\beta\\in\\Omega^q(M,\\mathfrak g)$, define their **graded bracket** by\n\n$$[\\alpha\\wedge\\beta](X_1,\\ldots,X_{p+q}) := \\frac{1}{p!q!}\\sum_{\\sigma\\in S_{p+q}}\\operatorname{sgn}(\\sigma)[\\alpha(X_{\\sigma(1)},\\ldots,X_{\\sigma(p)}),\\beta(X_{\\sigma(p+1)},\\ldots,X_{\\sigma(p+q)})].$$\n\nHere $\\Omega^p(M,\\mathfrak g)$ is the space of smooth alternating $p$-linear forms with values in $\\mathfrak g$, the inner bracket is the Lie-algebra bracket, and the sum is over all permutations. This is a smooth $\\mathfrak g$-valued $(p+q)$-form. It obeys graded skew-symmetry $[\\alpha\\wedge\\beta]=-(-1)^{pq}[\\beta\\wedge\\alpha]$, graded Jacobi\n\n$$\\left[\\alpha\\wedge\\left[\\beta\\wedge\\gamma\\right]\\right]=\\left[\\left[\\alpha\\wedge\\beta\\right]\\wedge\\gamma\\right]+(-1)^{pq}\\left[\\beta\\wedge\\left[\\alpha\\wedge\\gamma\\right]\\right],$$\n\nand the exterior-derivative rule\n\n$$d[\\alpha\\wedge\\beta]=[d\\alpha\\wedge\\beta]+(-1)^p[\\alpha\\wedge d\\beta].$$\n\nIn particular, for $\\mathfrak g$-valued 1-forms $A,B$, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$, so $\\tfrac12[A\\wedge A](X,Y)=[A(X),A(Y)]$. This fixes the normalization used by the Cartan curvature formula.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qftx-instanton-number-and-asd-sector",
+          "source_section": "Definition",
+          "quote": "Assume full Axiom of Choice. Let $X$ be a nonempty, connected, compact, oriented, finite-dimensional Hausdorff second-countable smooth four-manifold without boundary, with a supplied Riemannian metric. Let $G\\subseteq U(V,h)$ be a compact non-Abelian matrix Lie group in its specified global form, let $\\pi:P\\to X$ be a smooth right principal $G$-bundle in a specified bundle sector (an isomorphism class of smooth principal bundles under isomorphisms over $X$), and let $\\omega$ be a supplied smooth principal connection. Let $B:\\mathfrak g\\times\\mathfrak g\\to\\mathbb R$ be a positive-definite symmetric bilinear form invariant under $\\operatorname{Ad}(G)$. For local sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=dA_i+\\tfrac12[A_i\\wedge A_i]$. If $F_i=\\sum_a e_a F_i^a$ in a finite basis of $\\mathfrak g$, define $B(F_i\\wedge F_i):=\\sum_{a,b}B(e_a,e_b)F_i^a\\wedge F_i^b$; this expression is independent of the basis. Invariance of $B$ makes the local expressions $\\beta_B|_{U_i}:=(8\\pi^2)^{-1}B(F_i\\wedge F_i)$ restrictions of a global four-form $\\beta_B$. The **trace-normalized topological charge** is\n\n$$\nq_B(P,\\omega):=\\int_X\\beta_B.\n$$\n\nThe number $q_B(P,\\omega)$ is independent of the supplied connection. For a general compact matrix group and invariant $B$, it is a real characteristic number; no integrality is asserted. In the special case $G=SU(2)$ in its defining representation on $\\mathbb C^2$, with $h(v,w)=v^*w$ and $B(X,Y)=-\\operatorname{tr}_2(XY)$, the associated Hermitian bundle $E=P\\times_{SU(2)}\\mathbb C^2$ has\n\n$$\nq_B(P,\\omega)=-\\langle c_2(E),[X]\\rangle\\in\\mathbb Z,\n$$\n\nwhere $c_2(E)\\in H^4(X;\\mathbb Z)$ is the integral second Chern class and $[X]\\in H_4(X;\\mathbb Z)$ is the orientation fundamental class. This sign is fixed by the library convention $c(E,\\nabla)=\\det(I-\\Omega_\\nabla/(2\\pi i))$.\n\nThe Hodge operator $*_g$ on two-forms is characterized by $\\alpha\\wedge *_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,d\\operatorname{vol}_g$ and acts componentwise on $\\mathfrak g$-valued forms. Set $F_i^+=(F_i+*_gF_i)/2$ and $F_i^-=(F_i-*_gF_i)/2$. The self-dual sector consists of connections with $F_i^-=0$, equivalently $F_i=*_gF_i$; the anti-self-dual (ASD) sector consists of connections with $F_i^+=0$, equivalently $F_i=-*_gF_i$. These conditions are independent of the local section.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qftx-yang-mills-selfdual-action-bound",
+          "source_section": "Statement",
+          "quote": "Assume full Axiom of Choice. Let $X$ be a nonempty, connected, compact, oriented, finite-dimensional Hausdorff second-countable smooth four-manifold without boundary, with Riemannian metric $g_X$. Let $G\\subseteq U(V,h)$ be a compact non-Abelian matrix Lie group in its specified global form, let $P\\to X$ be a smooth right principal $G$-bundle, and let $\\omega$ be a supplied smooth principal connection. Let $B$ be a positive-definite, symmetric, $\\operatorname{Ad}(G)$-invariant bilinear form on $\\mathfrak g$. For any local section $s_i$, set $A_i=s_i^*\\omega$ and $F_i=dA_i+\\tfrac12[A_i\\wedge A_i]$. Invariance of $B$ makes the local four-forms $\\beta_B|_{U_i}=\\frac{1}{8\\pi^2}B(F_i\\wedge F_i)$ and $\\gamma_B|_{U_i}=B(F_i\\wedge *_{g_X}F_i)$ restrictions of global forms. Define $q_B=\\int_X\\beta_B$. For a real scalar $g>0$, define the Euclidean Yang–Mills functional by\n\n$$\nS_B(P,\\omega):=\\frac{1}{g^2}\\int_X\\gamma_B,\n$$\n\nwhere the Hodge operator is characterized by $\\alpha\\wedge *_{g_X}\\beta=\\langle\\alpha,\\beta\\rangle_{g_X}\\,d\\operatorname{vol}_{g_X}$ and acts componentwise on $\\mathfrak g$-valued forms. Then\n\n$$\nS_B(P,\\omega)\\geq \\frac{8\\pi^2}{g^2}\\,|q_B(P,\\omega)|.\n$$\n\nEquality holds exactly in these cases: if $q_B>0$, then $F_i=*_{g_X}F_i$; if $q_B<0$, then $F_i=-*_{g_X}F_i$; if $q_B=0$, then $F_i=0$. Every self-dual or anti-self-dual supplied connection satisfies the source-free Euclidean Yang–Mills equation $D_{A_i}(*_{g_X}F_i)=0$, where $D_{A_i}\\eta=d\\eta+[A_i\\wedge\\eta]$. The statement asserts neither existence nor uniqueness of a connection in any charge sector.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qftx-nonabelian-gauge-data",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$. Let $M$ be a finite-dimensional, Hausdorff, second-countable smooth manifold without boundary. A **non-Abelian gauge datum on $M$** consists of the following specified objects.\n\nFirst choose a finite-dimensional real Lie group $G$ that is compact in its manifold topology (every open cover has a finite subcover) and noncommutative (there are $g,h\\in G$ with $gh\\ne hg$). The actual group $G$, including its global form, is part of the datum. Its Lie algebra is $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$ with the bracket transported from left-invariant smooth vector fields.\n\nChoose a smooth right principal $G$-bundle $\\pi:P\\to M$: the projection and right action are smooth, the action is free and transitive on each fibre, and there are local trivializations $\\pi^{-1}(U)\\cong U\\times G$ that are equivariant diffeomorphisms over each open $U\\subseteq M$.\n\nChoose a specified set $I$ of representation labels and, for each $a\\in I$, a finite-dimensional complex vector space $V_a$, a positive-definite Hermitian form $h_a$, and a smooth group homomorphism $\\rho_a:G\\to U(V_a,h_a)$. Here $U(V_a,h_a)$ is the group of complex-linear isometries of $h_a$, and a representation is the corresponding finite-dimensional group action. Its associated vector bundle is the quotient $E_a=P\\times_{\\rho_a}V_a$ with relation $[pg,v]=[p,\\rho_a(g)v]$.\n\nTwo smooth right principal $G$-bundles over $M$ are isomorphic over $M$ when a smooth diffeomorphism between their total spaces covers $\\operatorname{id}_M$ and commutes with the right $G$-actions. A **bundle sector** is one equivalence class under this relation. The datum specifies a set $\\Sigma$ of admitted bundle sectors and requires $[P]\\in\\Sigma$; a model may take $\\Sigma=\\{[P]\\}$. The Lie algebra alone does not replace the chosen group or sector. This definition does not choose a connection, an action functional, or a quantum theory.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qftx-two-chart-principal-bundle-gluing",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a Hausdorff, second-countable smooth manifold covered by open sets $U$ and $V$. Let $G$ be a finite-dimensional, Hausdorff, second-countable real Lie group, and let $\\tau:U\\cap V\\to G$ be smooth. On the disjoint union $Q=(U\\times G)_U\\sqcup(V\\times G)_V$, impose the equivalence relation generated, for $x\\in U\\cap V$ and $h\\in G$, by\n\n$$ (x,h)_V\\sim (x,\\tau(x)h)_U. $$\n\nLet $P:=Q/{\\sim}$ with the quotient topology, write $[x,h]_U$ and $[x,h]_V$ for its classes, and define $\\pi:P\\to X$ by $\\pi([x,h]_U)=\\pi([x,h]_V)=x$. Define the right action by $[x,h]_i\\cdot k=[x,hk]_i$ for $k\\in G$ and $i\\in\\{U,V\\}$. Then $P$ is a smooth right principal $G$-bundle over $X$. Its local sections $s_U(x)=[x,e]_U$ and $s_V(x)=[x,e]_V$ satisfy $s_V(x)=s_U(x)\\tau(x)$ on $U\\cap V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qftx-hodge-star-decomposition-four-dimensions",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a four-dimensional real vector space with an orientation and inner product $g$, and let $W$ be a finite-dimensional real inner-product space. Define the Hodge operator $*_g$ on $\\Lambda^2V^*$ by $\\alpha\\wedge *_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$, and extend it $W$-linearly to $\\Lambda^2V^*\\otimes W$. Give this tensor product the inner product induced by those on $\\Lambda^2V^*$ and $W$. Then $*_g^2=I$, $*_g$ is an isometry, and its $+1$ and $-1$ eigenspaces are orthogonal. Every $\\Phi\\in\\Lambda^2V^*\\otimes W$ has the unique decomposition\n\n$$\n\\Phi=\\Phi^++\\Phi^-,\\qquad \\Phi^\\pm:=\\frac{\\Phi\\pm *_g\\Phi}{2},\\qquad *_g\\Phi^\\pm=\\pm\\Phi^\\pm.\n$$\n\nIf the inner product on $V$ is rescaled to $\\widehat g=\\lambda^2g$ for any $\\lambda>0$, then the Hodge operator on two-forms is unchanged: $*_{\\widehat g}=*_g$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Pauli identity $\\sigma_i\\sigma_j=\\delta_{ij}I+i\\epsilon_{ijk}\\sigma_k$ gives $(x^4I-i x^j\\sigma_j)^*(x^4I-i x^j\\sigma_j)=r^2I$. In entries this matrix is $\\begin{pmatrix}x^4-i x^3&-i x^1-x^2\\\\-i x^1+x^2&x^4+i x^3\\end{pmatrix}$, whose determinant is $(x^4)^2+(x^3)^2+(x^1)^2+(x^2)^2=r^2$. Thus $u(x)$ is unitary with determinant one wherever $r>0$. The equations $U^*U=I$ and $\\det U=1$ make $SU(2)$ closed in the eight-dimensional real matrix space, and its entries have modulus at most one, so it is bounded; [F2] gives compactness. The traceless skew-Hermitian $2\\times2$ matrices have the form $\\begin{pmatrix}ia&z\\\\-\\bar z&-ia\\end{pmatrix}$ for $a\\in\\mathbb R$ and $z\\in\\mathbb C$, so $T_1,T_2,T_3$ form a real basis. Direct multiplication gives $[T_a,T_b]=\\epsilon_{abc}T_c$ and $B(T_a,T_b)=\\tfrac12\\delta_{ab}$. For $X,Y\\in\\mathfrak{su}(2)$, cyclicity gives $B(X,Y)=B(Y,X)$, while $\\overline{\\operatorname{tr}(XY)}=\\operatorname{tr}(Y^*X^*)=\\operatorname{tr}(YX)=\\operatorname{tr}(XY)$, so $B(X,Y)\\in\\mathbb R$. Since $X^*=-X$, $B(X,X)=\\operatorname{tr}(X^*X)>0$ for $X\\ne0$; and $B(UXU^{-1},UYU^{-1})=B(X,Y)$ by cyclicity for $U\\in SU(2)$. Thus $B$ is symmetric, positive definite, and adjoint-invariant. Finally $M=\\operatorname{diag}(i,-i)$ and $N=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$ lie in $SU(2)$, while $MN=-NM$, so $SU(2)$ is non-Abelian. Together with [F1], this verifies the group, representation, and trace hypotheses of the definition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F7], the quotient with $\\tau=u^{-1}$ is a smooth right principal $SU(2)$-bundle with sections satisfying $s_S=s_Nu^{-1}$. Full AC [A1] supplies the countable-choice hypothesis of the gauge-data interface [F6], which specifies the actual global form, singleton defining-representation family, and bundle sector selected in the Statement. Matrix multiplication using $\\sigma_i\\sigma_j=\\delta_{ij}I+i\\epsilon_{ijk}\\sigma_k$ gives $u^{-1}du=\\frac{2\\eta_{a\\mu\\nu}x^\\nu}{r^2}T_a\\,dx^\\mu$ and $du\\,u^{-1}=\\frac{2\\bar\\eta_{a\\mu\\nu}x^\\nu}{r^2}T_a\\,dx^\\mu$. Thus $A_N=\\frac{r^2}{r^2+\\rho^2}u^{-1}du$. With transition $g=u^{-1}$, [F3] gives $\\operatorname{Ad}_u A_N+u\\,d(u^{-1})=-\\frac{\\rho^2}{r^2+\\rho^2}du\\,u^{-1}=-\\frac{2\\rho^2\\bar\\eta_{a\\mu\\nu}x^\\nu}{r^2(r^2+\\rho^2)}T_a\\,dx^\\mu$. Substituting $y=x/r^2$ and $dx^\\mu=(\\delta_{\\mu\\lambda}/|y|^2-2y^\\mu y_\\lambda/|y|^4)dy^\\lambda$, the term containing $y^\\mu y^\\nu\\bar\\eta_{a\\mu\\nu}$ vanishes by antisymmetry, leaving exactly the displayed $A_S$. The $A_N$ coefficients are smooth at $x=0$ because $\\rho>0$, and $A_S$ is smooth at $y=0$ because its denominator is positive and its numerator is linear in $y$. Hence the two forms define a smooth global connection with the declared patch-at-infinity transition.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Differentiating $A^a_{N,\\nu}=2\\eta_{a\\nu\\lambda}x^\\lambda/(r^2+\\rho^2)$ and using [F4] gives $F^a_{N,\\mu\\nu}=-4\\eta_{a\\mu\\nu}/D+4Q_{a\\mu\\nu}/D^2$, where $D=r^2+\\rho^2$ and $Q_{a\\mu\\nu}=-\\eta_{a\\nu\\lambda}x^\\lambda x_\\mu+\\eta_{a\\mu\\lambda}x^\\lambda x_\\nu+\\epsilon_{bca}\\eta_{b\\mu\\lambda}\\eta_{c\\nu\\kappa}x^\\lambda x^\\kappa$. Put $t=x^4$, write $x_a=x^a$ for spatial indices, and set $|\\vec x|^2=\\sum_{k=1}^3(x^k)^2$. For $\\mu=i,\\nu=4$, expanding the symbols gives $Q_{ai4}=x_ax_i+t(\\epsilon_{aik}x_k+\\delta_{ai}t)-\\epsilon_{bka}(\\epsilon_{bil}x_l+\\delta_{bi}t)x_k$. The contraction $\\sum_b\\epsilon_{bka}\\epsilon_{bil}=\\delta_{ki}\\delta_{al}-\\delta_{kl}\\delta_{ai}$ makes the $x_ax_i$ terms cancel, and $\\epsilon_{ika}=\\epsilon_{aik}$ cancels the terms linear in $t$; hence $Q_{ai4}=(|\\vec x|^2+t^2)\\delta_{ai}=r^2\\eta_{ai4}$. For distinct spatial $i,j$, expansion gives the derivative terms $-\\epsilon_{ajl}x_lx_i-\\delta_{aj}tx_i+\\epsilon_{ail}x_lx_j+\\delta_{ai}tx_j$. The terms in the bracket product linear in $t$ equal $t(-\\delta_{ai}x_j+\\delta_{aj}x_i)$, so they cancel those derivative terms. Contracting the two spatial epsilon factors by $\\sum_b\\epsilon_{bca}\\epsilon_{bil}=\\delta_{ci}\\delta_{al}-\\delta_{cl}\\delta_{ai}$ leaves $R_{aij}=\\epsilon_{ijm}x_ax_m-\\epsilon_{ajl}x_lx_i+\\epsilon_{ail}x_lx_j$, and the two-index-$4$ term is $t^2\\epsilon_{aij}$. Let $k$ be the remaining spatial index and $\\varepsilon=\\epsilon_{ijk}$. If $a=i$, the first two terms of $R$ are $\\varepsilon x_ix_k-\\varepsilon x_kx_i=0$; if $a=j$, they are $\\varepsilon x_jx_k-\\varepsilon x_kx_j=0$; if $a=k$, all three terms sum to $\\varepsilon(x_i^2+x_j^2+x_k^2)$. Thus $R_{aij}=\\epsilon_{aij}|\\vec x|^2$ and $Q_{aij}=r^2\\eta_{aij}$. These are all independent antisymmetric index pairs, so $F^a_{N,\\mu\\nu}=-4\\rho^2\\eta_{a\\mu\\nu}/(r^2+\\rho^2)^2$. The two-forms $\\eta_1=dx^{14}+dx^{23}$, $\\eta_2=dx^{24}+dx^{31}$, and $\\eta_3=dx^{34}+dx^{12}$ are self-dual in the chosen Euclidean orientation because the star interchanges the two displayed summands in each. The round metric is conformal to the Euclidean metric, and [F8] gives the same Hodge star on two-forms; therefore $F_N=*_{g_X}F_N$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The trace form gives $B(T_a,T_b)=\\tfrac12\\delta_{ab}$ and the defining symbols satisfy $\\sum_{a,\\mu,\\nu}\\eta_{a\\mu\\nu}^2=12$. Since $F_N=\\tfrac12F_{N,\\mu\\nu}dx^\\mu\\wedge dx^\\nu$, the local action density is $B(F_N\\wedge *_{g_X}F_N)=48\\rho^4(r^2+\\rho^2)^{-4}d^4x$. The radial substitution $t=r^2/\\rho^2$ gives $\\int_{\\mathbb R^4}\\rho^4(r^2+\\rho^2)^{-4}d^4x=2\\pi^2\\cdot\\tfrac12\\int_0^\\infty t(1+t)^{-4}dt=\\pi^2/6$: with $v=1+t$, $\\int_0^\\infty t(1+t)^{-4}dt=\\int_1^\\infty(v^{-3}-v^{-4})dv=[-1/(2v^2)+1/(3v^3)]_1^\\infty=1/2-1/3=1/6$. Hence $\\int_{S^4}B(F\\wedge *_{g_X}F)=8\\pi^2$; the omitted stereographic point has measure zero and the patched curvature is smooth. Self-duality gives $B(F\\wedge F)=B(F\\wedge *_{g_X}F)$, so $q_B=1$. The action is $S_B=8\\pi^2/g^2$, finite and equal to the bound in [F5]. The definition and bound interfaces invoked in [F5] both assume full AC [A1].",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F5",
+            "F8",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the construction is on the nonempty sphere S^4 and specifies both stereographic charts and their overlap."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: rho>0 is explicit; rho=0 is excluded and no limiting smooth connection is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: rho=1 and g=1 are allowed, with positive denominators and finite integral."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example asserts one charge-one connection for each supplied rho>0 and makes no moduli or uniqueness claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: the two charts and overlap transition are explicit and no global trivialization or section is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one self-dual connection and does not assert an iff classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one self-dual connection and does not assert an iff classification."
+        }
+      ]
+    },
+    "lem-qftx-periodic-su2-product-kernel-and-center-line-sign": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-round-s4-spin-twist-index-one",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Give the unit sphere $S^4\\subset\\mathbb R^5$ its boundary orientation, round metric and standard spin structure induced from the Euclidean ball. Let $S=S^+\\oplus S^-$ be its complex spinor bundle, with skew-Hermitian Clifford action $c(v)c(w)+c(w)c(v)=-2\\langle v,w\\rangle$ and positive chirality the $+1$ eigenspace of $\\Gamma=-c(e_1)c(e_2)c(e_3)c(e_4)$ in an oriented orthonormal frame. A spin lift here is a principal $\\operatorname{Spin}(4)$ bundle double-covering the oriented orthonormal frame bundle; explicitly $\\operatorname{Spin}(4)=Sp(1)\\times Sp(1)$ covers $SO(4)$ by $(a,b):q\\mapsto aqb^{-1}$ on $\\mathbb H\\cong\\mathbb R^4$, where $Sp(1)$ is the unit-quaternion group, identified with $SU(2)$. The connection on spinors is the lift of the Levi-Civita connection. Set $E=S^+$ with its rank-two Hermitian $SU(2)$ connection $A_+$.\n\nThe twisted chiral Dirac operator $D^+_{A_+}=\\sum_i c(e_i)\\nabla_{e_i}:H^1(S^4;S^+\\otimes E)\\to L^2(S^4;S^-\\otimes E)$ is Fredholm, with complex kernel dimension $1$, cokernel dimension $0$ and index $1$. In the anti-Hermitian Chern convention,\n\n$$\n\\langle c_2(E),[S^4]\\rangle=\\frac1{8\\pi^2}\\int_{S^4}\\operatorname{tr}(F_{A_+}\\wedge F_{A_+})=-1.\n$$\n\nIts positive trace-form instanton charge $q=-(8\\pi^2)^{-1}\\int\\operatorname{tr}(F\\wedge F)$ is $1$; its connection is the scale-one self-dual BPST connection. More precisely there are parallel unitary identifications $F:\\Lambda^0_{\\mathbb C}\\oplus\\Lambda^2_{+,\\mathbb C}\\to S^+\\otimes S^+$ and $G:\\Lambda^1_{\\mathbb C}\\to S^-\\otimes S^+$ under which\n\n$$\nG^{-1}D^+_{A_+}F(f,\\omega)=df+\\sqrt2\\,d^*\\omega.\n$$\n\nHere $\\Lambda^2_+$ is the $+1$ Hodge-star subbundle, $d^*$ is the Riemannian formal adjoint, and all Sobolev spaces and adjoints use the specified bundle metrics. In the complete twisted spinor bundle the full Dirac operator is selfadjoint with domain $H^1$ and its square has domain $H^2$. This is a direct operator calculation for this explicit bundle, not an application of a general index formula.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M,E,P$ have exactly the compact, boundaryless, scalar-positive-symbol and formal symmetry hypotheses of [[thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity]], with $\\operatorname{dom}P=H^2(M,E)$. Write $\\mathcal H=\\ker P$.\n\nThen $\\mathcal H$ is finite dimensional and consists of smooth sections, $\\operatorname{ran}P=\\mathcal H^\\perp$ is closed in $L^2$, and\n$$L^2(M,E)=\\mathcal H\\mathbin{\\oplus^\\perp}\\operatorname{ran}P.$$\nLet $\\Pi$ be the orthogonal projection onto $\\mathcal H$. There is a unique linear operator $G:L^2\\to H^2\\cap\\mathcal H^\\perp$ with\n$$PG=I-\\Pi\\quad\\hbox{on }L^2,\\qquad GP=I-\\Pi\\quad\\hbox{on }H^2,\\qquad G\\Pi=\\Pi G=0.$$\nIt is bounded from $H^k$ to $H^{k+2}$ for every integer $k\\ge0$, compact and selfadjoint on $L^2$, and preserves smooth sections. For all such $k$,\n$$H^k=\\mathcal H\\oplus P(H^{k+2}),\\qquad C^\\infty(M,E)=\\mathcal H\\oplus P(C^\\infty(M,E)),$$\nwhere the second summands are the corresponding intersections with $\\mathcal H^\\perp$, and the decompositions are topological. The projection is smoothing: for every integer $r\\ge0$, $\\|\\Pi f\\|_{C^r}\\le C_r\\|f\\|_2$. Consequently $G$ is a two-sided parametrix with finite-rank smoothing remainders. If additionally $(Pu,u)_2\\ge0$ for smooth $u$, then $P$ and $G$ are nonnegative on their respective domains.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact smooth manifold without boundary of real dimension $n\\ge2$, equipped with a smooth positive density, and $E\\to M$ a finite-rank real Euclidean or complex Hermitian smooth vector bundle. Let $P$ be a smooth-coefficient second-order differential operator on $E$, formally symmetric for the density and metric, whose positive-frequency principal symbol is\n$$\\sigma_2(P)(x,\\xi)=a_x(\\xi,\\xi)I_{E_x},$$\nwhere $a$ is a smooth positive-definite real quadratic form on cotangent vectors. Thus in any local frame $P=-a^{ij}\\partial_i\\partial_j+B^j\\partial_j+C$, with scalar real positive-definite $a^{ij}$ and matrix-valued lower coefficients. Nonnegativity of $P$ is not needed here.\n\nFor nonnegative integers $k$, define $H^k(M,E)$ by requiring the coefficients of each member of a finite smooth partition of unity times the section, in precompact bundle charts and extended by zero, to lie in $H^k(\\mathbb R^n)$; the norm is the square root of the sum of these component Sobolev norms squared. Different such choices give equivalent norms. The following hold.\n\n1. These are Hilbert spaces, smooth sections are dense, $H^0=L^2$ with equivalent norms, $H^{k+1}\\hookrightarrow H^k$ is compact, and $H^k\\hookrightarrow C^r$ continuously whenever $k>r+n/2$.\n2. If $u\\in H^1$ and $Pu=f\\in H^k$ distributionally, then $u\\in H^{k+2}$ and\n$$\\|u\\|_{H^{k+2}}\\le C_k(\\|f\\|_{H^k}+\\|u\\|_{L^2}).$$\nIn particular smooth data give smooth weak solutions. The same estimate holds for all $u\\in H^{k+2}$.\n3. For sufficiently large real $\\lambda>0$, $P+\\lambda:H^2\\to L^2$ is a bounded bijection with bounded inverse $B:L^2\\to H^2$. As an operator on $L^2$, $B$ is compact, injective and selfadjoint, has dense range $H^2$, and the unbounded operator $P$ with domain exactly $H^2$ is selfadjoint. The map $B:H^k\\to H^{k+2}$ is bounded for every nonnegative integer $k$ and preserves smooth sections.\n4. It supplies two-sided parametrices **modulo compact operators**:\n$$PB=I-\\lambda B\\quad\\hbox{on }L^2,\\qquad BP=I-\\lambda B\\quad\\hbox{on }H^2.$$\nHere on the second space $B$ denotes its restriction after inclusion $H^2\\hookrightarrow L^2$; it is compact on $H^2$. No assertion concerning arbitrary-order elliptic operators, or pseudodifferential symbol classes, is part of this theorem.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "supplement-1-1",
+          "step": "1.1",
+          "claim": "For any given spin four-manifold the local quaternionic model glues by its specified Spin(4) lift",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "supplement-1-2",
+          "step": "1.2",
+          "claim": "Chirality anticommutes with $D_4$ and is parallel, so $D_5^2=D_4^2-\\partial_t^2$",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supplement-1-3",
+          "step": "1.3",
+          "claim": "The constant central automorphism acts by $-1$ on both chiral spinor kernels and cokernels, and fixes the background connection",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supplement-2-1",
+          "step": "2.1",
+          "claim": "For any finite-dimensional complex vector space $V$ with anti-linear involution $J$, every $v$ has the unique decomposition $v=(v+Jv)/2+i(v-Jv)/(2i)$ with both displayed real components fixed by $J$",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "supplement-2-2",
+          "step": "2.2",
+          "claim": "For antiperiodic boundary conditions the energy argument in step 1.2 would again force a zero mode to be constant in $t$, but a constant antiperiodic spinor is zero",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supplement-3-1",
+          "step": "3.1",
+          "claim": "The kernel parity, central inverse-determinant action and spin-clutch distinctions follow from the explicit Clifford construction, energy identity and finite exterior powers",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 1.3",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty round-sphere product and its actual rank-two twist."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 proves that the antiperiodic product kernel is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 prove one complex product zero mode and one real zero mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement gives the N-fold determinant sign; for even N its value is1 by step 1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 distinguishes the periodic, antiperiodic and center-gauge clutch signs rather than conflating them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly retains full AC through the source operator realization; the remaining real-form decomposition is explicit in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement computes a fixed kernel and line action, not a general spectral-flow or index equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement computes a fixed kernel and line action, not a general spectral-flow or index equivalence."
+        }
+      ]
+    },
+    "lem-qftx-round-s4-spin-twist-index-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-qftx-su2-bpst-explicit-connection-on-s4",
+          "source_section": "Statement",
+          "quote": "Assume full Axiom of Choice. Let $S^4=\\{z\\in\\mathbb R^5:|z|=1\\}$ have its unit round metric $g_X$. Denote by $p_\\infty$ the point omitted by the north stereographic chart and by $p_0$ the point with north-chart coordinates $x=0$. Orient $S^4$ so that north-chart coordinates $x=(x^1,x^2,x^3,x^4)$ satisfy $dx^1\\wedge dx^2\\wedge dx^3\\wedge dx^4>0$. Set $r^2=\\sum_{\\mu=1}^4(x^\\mu)^2$. The metric in the north chart is $4(1+r^2)^{-2}\\sum_{\\mu=1}^4(dx^\\mu)^2$. Let $U_N=S^4\\setminus\\{p_\\infty\\}$ carry coordinate $x$, and $U_S=S^4\\setminus\\{p_0\\}$ carry coordinate $y=x/r^2$; the metric in the south chart is $4(1+|y|^2)^{-2}\\sum_{\\mu=1}^4(dy^\\mu)^2$.\n\nDefine $SU(2)=\\{U\\in M_2(\\mathbb C):U^*U=I,\\det U=1\\}$. Write $\\epsilon_{123}=1$ and let\n\n$$ \\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\qquad T_a=-\\frac{i}{2}\\sigma_a. $$\n\nThe $T_a$ are traceless anti-Hermitian generators. Set $B(X,Y)=-\\operatorname{tr}_2(XY)$. Define antisymmetric symbols by $\\eta_{aij}=\\epsilon_{aij}$, $\\eta_{ai4}=\\delta_{ai}$, $\\bar\\eta_{aij}=-\\epsilon_{aij}$, and $\\bar\\eta_{ai4}=\\delta_{ai}$ for spatial indices $i,j\\in\\{1,2,3\\}$, where $\\delta_{ai}$ is the Kronecker delta; extend them antisymmetrically in the last two indices. For a scale parameter $\\rho>0$, define $u(x)=(x^4I-i x^j\\sigma_j)/r\\in SU(2)$ on $U_N\\cap U_S$. Form the quotient of the two trivial right $SU(2)$-bundles by identifying $(x,h)_S\\sim(x,u(x)^{-1}h)_N$ for each $x\\in U_N\\cap U_S$ and $h\\in SU(2)$, so its local sections satisfy $s_S=s_Nu^{-1}$. Take the set of admitted bundle sectors to be the singleton containing the isomorphism class of this glued bundle, and take the representation family to be the singleton defining representation on $\\mathbb C^2$. Define the local connection potentials by\n\n$$ A_N=\\frac{2\\eta_{a\\mu\\nu}x^\\nu}{r^2+\\rho^2}T_a\\,dx^\\mu,\\qquad A_S=-\\frac{2\\rho^2\\bar\\eta_{a\\mu\\nu}y^\\nu}{1+\\rho^2|y|^2}T_a\\,dy^\\mu. $$\n\nOn the overlap these obey $A_S=\\operatorname{Ad}_u A_N+u\\,d(u^{-1})$, so they define a smooth principal connection on the glued bundle. Let $F$ be its global curvature, with chart representatives $F_N$ and $F_S$. In the north chart its curvature, written $F_N=\\tfrac12F^N_{\\mu\\nu}dx^\\mu\\wedge dx^\\nu$, has components\n\n$$ F^N_{\\mu\\nu}=-\\frac{4\\rho^2}{(r^2+\\rho^2)^2}\\eta_{a\\mu\\nu}T_a. $$\n\nLet $*_{g_X}$ be the Hodge star characterized on two-forms by $\\alpha\\wedge *_{g_X}\\beta=\\langle\\alpha,\\beta\\rangle_{g_X}\\,d\\operatorname{vol}_X$, acting componentwise on the Lie-algebra coefficients. This curvature is self-dual, meaning $F_N=*_{g_X}F_N$. With $B$ as fixed above, define the charge by $q_B=(8\\pi^2)^{-1}\\int_{S^4}B(F\\wedge F)$ and, for any real $g>0$, define the action by $S_B(g)=g^{-2}\\int_{S^4}B(F\\wedge *_{g_X}F)$. Then $q_B=1$, $S_B(g)=8\\pi^2/g^2<\\infty$, and the action saturates the self-dual bound. This is one explicit Belavin–Polyakov–Schwartz–Tyupkin (BPST) charge-one connection; no uniqueness or moduli classification is asserted.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-instanton-number-and-asd-sector",
+          "source_section": "Definition",
+          "quote": "Assume full Axiom of Choice. Let $X$ be a nonempty, connected, compact, oriented, finite-dimensional Hausdorff second-countable smooth four-manifold without boundary, with a supplied Riemannian metric. Let $G\\subseteq U(V,h)$ be a compact non-Abelian matrix Lie group in its specified global form, let $\\pi:P\\to X$ be a smooth right principal $G$-bundle in a specified bundle sector (an isomorphism class of smooth principal bundles under isomorphisms over $X$), and let $\\omega$ be a supplied smooth principal connection. Let $B:\\mathfrak g\\times\\mathfrak g\\to\\mathbb R$ be a positive-definite symmetric bilinear form invariant under $\\operatorname{Ad}(G)$. For local sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=dA_i+\\tfrac12[A_i\\wedge A_i]$. If $F_i=\\sum_a e_a F_i^a$ in a finite basis of $\\mathfrak g$, define $B(F_i\\wedge F_i):=\\sum_{a,b}B(e_a,e_b)F_i^a\\wedge F_i^b$; this expression is independent of the basis. Invariance of $B$ makes the local expressions $\\beta_B|_{U_i}:=(8\\pi^2)^{-1}B(F_i\\wedge F_i)$ restrictions of a global four-form $\\beta_B$. The **trace-normalized topological charge** is\n\n$$\nq_B(P,\\omega):=\\int_X\\beta_B.\n$$\n\nThe number $q_B(P,\\omega)$ is independent of the supplied connection. For a general compact matrix group and invariant $B$, it is a real characteristic number; no integrality is asserted. In the special case $G=SU(2)$ in its defining representation on $\\mathbb C^2$, with $h(v,w)=v^*w$ and $B(X,Y)=-\\operatorname{tr}_2(XY)$, the associated Hermitian bundle $E=P\\times_{SU(2)}\\mathbb C^2$ has\n\n$$\nq_B(P,\\omega)=-\\langle c_2(E),[X]\\rangle\\in\\mathbb Z,\n$$\n\nwhere $c_2(E)\\in H^4(X;\\mathbb Z)$ is the integral second Chern class and $[X]\\in H_4(X;\\mathbb Z)$ is the orientation fundamental class. This sign is fixed by the library convention $c(E,\\nabla)=\\det(I-\\Omega_\\nabla/(2\\pi i))$.\n\nThe Hodge operator $*_g$ on two-forms is characterized by $\\alpha\\wedge *_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,d\\operatorname{vol}_g$ and acts componentwise on $\\mathfrak g$-valued forms. Set $F_i^+=(F_i+*_gF_i)/2$ and $F_i^-=(F_i-*_gF_i)/2$. The self-dual sector consists of connections with $F_i^-=0$, equivalently $F_i=*_gF_i$; the anti-self-dual (ASD) sector consists of connections with $F_i^+=0$, equivalently $F_i=-*_gF_i$. These conditions are independent of the local section.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hodge-laplacian-kernel-represents-de-rham-and-dolbeault-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact smooth Riemannian manifold without boundary, of real dimension at least two. Its metric defines the $L^2$ pairing on forms by the Riemannian density; orientation is unnecessary. Let $d^*$ denote the formal adjoint of $d$, and $\\Delta=dd^*+d^*d$ on total real forms, or on their complexification. With domain $H^2$ the operator is nonnegative and selfadjoint. Its degreewise smooth kernels $\\mathcal H^k$ are finite dimensional, and there is an orthogonal smooth decomposition\n$$\\Omega^k(M)=\\mathcal H^k\\mathbin{\\oplus^\\perp}d\\Omega^{k-1}(M)\\mathbin{\\oplus^\\perp}d^*\\Omega^{k+1}(M).$$\nThe map $h\\mapsto[h]$ is an isomorphism $\\mathcal H^k\\to H^k_{\\mathrm{dR}}(M)$, over $\\mathbb R$ or $\\mathbb C$ as appropriate.\n\nMore generally let $X$ be a compact complex manifold of complex dimension $m\\ge1$ with a smooth Hermitian metric. Let $E$ be a holomorphic bundle of finite rank with a smooth Hermitian metric. The holomorphic bundle structure supplies frames with holomorphic invertible transition matrices; the Hermitian metric is separate smooth positive-definite pairing data. On $E$-valued $(p,q)$ forms, define $\\bar\\partial_E$ by the coefficientwise Dolbeault operator in holomorphic bundle charts and let $\\bar\\partial_E^*$ be its formal adjoint. For each fixed $p$, $\\Delta_{\\bar\\partial_E}=\\bar\\partial_E\\bar\\partial_E^*+\\bar\\partial_E^*\\bar\\partial_E$ on the sum over $q$ is nonnegative and selfadjoint on $H^2$; its smooth harmonic spaces $\\mathcal H_E^{p,q}$ are finite dimensional and\n$$\\Omega^{p,q}(X,E)=\\mathcal H_E^{p,q}\\mathbin{\\oplus^\\perp}\\bar\\partial_E\\Omega^{p,q-1}(X,E)\\mathbin{\\oplus^\\perp}\\bar\\partial_E^*\\Omega^{p,q+1}(X,E).$$\nIn particular harmonic forms represent the smooth Dolbeault quotient\n$$H_{\\bar\\partial}^{p,q}(X,E):=\\ker\\bar\\partial_E/\\operatorname{im}\\bar\\partial_E$$\nuniquely. Terms outside the degree range are zero. This asserts smooth Dolbeault cohomology; an identification with sheaf cohomology requires a separate Dolbeault-resolution comparison theorem.\n\nFor either complex write $D=d$ or $D=\\bar\\partial_E$, $P=DD^*+D^*D$, and let $\\Pi,G$ be the preceding Green projection and inverse. They preserve degree, $G$ preserves smooth forms, and on smooth forms\n$$DG=GD,\\qquad D^*G=GD^*,\\qquad D\\Pi=\\Pi D=D^*\\Pi=\\Pi D^*=0.$$\nEvery closed smooth $u$ satisfies $u=\\Pi u+D(D^*Gu)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-de-rham-cohomology-of-spheres",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $n\\ge1$, $H^k_{\\mathrm{dR}}(S^n)$ is $\\mathbb R$ in degrees $0,n$ and zero otherwise. For $S^0$ it is $\\mathbb R^2$ in degree zero and zero otherwise.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M,E,P$ have exactly the compact, boundaryless, scalar-positive-symbol and formal symmetry hypotheses of [[thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity]], with $\\operatorname{dom}P=H^2(M,E)$. Write $\\mathcal H=\\ker P$.\n\nThen $\\mathcal H$ is finite dimensional and consists of smooth sections, $\\operatorname{ran}P=\\mathcal H^\\perp$ is closed in $L^2$, and\n$$L^2(M,E)=\\mathcal H\\mathbin{\\oplus^\\perp}\\operatorname{ran}P.$$\nLet $\\Pi$ be the orthogonal projection onto $\\mathcal H$. There is a unique linear operator $G:L^2\\to H^2\\cap\\mathcal H^\\perp$ with\n$$PG=I-\\Pi\\quad\\hbox{on }L^2,\\qquad GP=I-\\Pi\\quad\\hbox{on }H^2,\\qquad G\\Pi=\\Pi G=0.$$\nIt is bounded from $H^k$ to $H^{k+2}$ for every integer $k\\ge0$, compact and selfadjoint on $L^2$, and preserves smooth sections. For all such $k$,\n$$H^k=\\mathcal H\\oplus P(H^{k+2}),\\qquad C^\\infty(M,E)=\\mathcal H\\oplus P(C^\\infty(M,E)),$$\nwhere the second summands are the corresponding intersections with $\\mathcal H^\\perp$, and the decompositions are topological. The projection is smoothing: for every integer $r\\ge0$, $\\|\\Pi f\\|_{C^r}\\le C_r\\|f\\|_2$. Consequently $G$ is a two-sided parametrix with finite-rank smoothing remainders. If additionally $(Pu,u)_2\\ge0$ for smooth $u$, then $P$ and $G$ are nonnegative on their respective domains.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact smooth manifold without boundary of real dimension $n\\ge2$, equipped with a smooth positive density, and $E\\to M$ a finite-rank real Euclidean or complex Hermitian smooth vector bundle. Let $P$ be a smooth-coefficient second-order differential operator on $E$, formally symmetric for the density and metric, whose positive-frequency principal symbol is\n$$\\sigma_2(P)(x,\\xi)=a_x(\\xi,\\xi)I_{E_x},$$\nwhere $a$ is a smooth positive-definite real quadratic form on cotangent vectors. Thus in any local frame $P=-a^{ij}\\partial_i\\partial_j+B^j\\partial_j+C$, with scalar real positive-definite $a^{ij}$ and matrix-valued lower coefficients. Nonnegativity of $P$ is not needed here.\n\nFor nonnegative integers $k$, define $H^k(M,E)$ by requiring the coefficients of each member of a finite smooth partition of unity times the section, in precompact bundle charts and extended by zero, to lie in $H^k(\\mathbb R^n)$; the norm is the square root of the sum of these component Sobolev norms squared. Different such choices give equivalent norms. The following hold.\n\n1. These are Hilbert spaces, smooth sections are dense, $H^0=L^2$ with equivalent norms, $H^{k+1}\\hookrightarrow H^k$ is compact, and $H^k\\hookrightarrow C^r$ continuously whenever $k>r+n/2$.\n2. If $u\\in H^1$ and $Pu=f\\in H^k$ distributionally, then $u\\in H^{k+2}$ and\n$$\\|u\\|_{H^{k+2}}\\le C_k(\\|f\\|_{H^k}+\\|u\\|_{L^2}).$$\nIn particular smooth data give smooth weak solutions. The same estimate holds for all $u\\in H^{k+2}$.\n3. For sufficiently large real $\\lambda>0$, $P+\\lambda:H^2\\to L^2$ is a bounded bijection with bounded inverse $B:L^2\\to H^2$. As an operator on $L^2$, $B$ is compact, injective and selfadjoint, has dense range $H^2$, and the unbounded operator $P$ with domain exactly $H^2$ is selfadjoint. The map $B:H^k\\to H^{k+2}$ is bounded for every nonnegative integer $k$ and preserves smooth sections.\n4. It supplies two-sided parametrices **modulo compact operators**:\n$$PB=I-\\lambda B\\quad\\hbox{on }L^2,\\qquad BP=I-\\lambda B\\quad\\hbox{on }H^2.$$\nHere on the second space $B$ denotes its restriction after inclusion $H^2\\hookrightarrow L^2$; it is compact on $H^2$. No assertion concerning arbitrary-order elliptic operators, or pseudodifferential symbol classes, is part of this theorem.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-general-stokes-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be an oriented smooth $n$-manifold with boundary, $n\\geq1$, and let $\\eta\\in\\Omega_c^{n-1}(M)$. With $j:\\partial M\\hookrightarrow M$ and the outward-normal-first orientation,\n$$\\int_M d\\eta=\\int_{\\partial M}j^*\\eta.$$\nAn empty boundary contributes zero; in dimension one its integral is a finite signed sum of point values.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.2",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "supplement-1-1",
+          "step": "1.1",
+          "claim": "Write a quaternion as $q=x^4I+x^aQ_a$ with $Q_a=-i\\sigma_a$, where the Pauli matrices satisfy $\\sigma_a\\sigma_b=\\delta_{ab}I+i\\epsilon_{abc}\\sigma_c$",
+          "inputs": [
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "supplement-2-1",
+          "step": "2.1",
+          "claim": "For an oriented orthonormal coframe let $\\Omega_1=e^{14}+e^{23}$, $\\Omega_2=e^{24}+e^{31}$, $\\Omega_3=e^{34}+e^{12}$",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supplement-3-1",
+          "step": "3.1",
+          "claim": "Put $T(f,\\omega)=df+\\sqrt2d^*\\omega$",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supplement-3-2",
+          "step": "3.2",
+          "claim": "Use the stereographic embedding $x\\mapsto(2x/(1+r^2),(1-r^2)/(1+r^2))$",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supplement-4-1",
+          "step": "4.1",
+          "claim": "If $T(f,\\omega)=0$ with $(f,\\omega)\\in H^1$, step 3.1 and weak regularity [F3] make both entries smooth and harmonic",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "supplement-4-2",
+          "step": "4.2",
+          "claim": "For the full Dirac operator use the block $\\mathscr D=\\begin{pmatrix}0&T^*\\\\T&0\\end{pmatrix}$ under the unitary identifications",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supplement-5-1",
+          "step": "5.1",
+          "claim": "The exact isometries and operator identities prove the chiral kernel, cokernel and Fredholm index directly, while step 3.2 supplies the actual global charge-one bundle and connection and step 4.2 the analytic full-Dirac realization",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 4.1",
+            "step 4.2",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes the nonempty unit round S4 and its rank-two positive-spin twist."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement proves cokernel dimension zero; step 4.1 supplies the actual Green right inverse."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 proves that constants form exactly the one-dimensional complex kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a unit-radius, charge-one connection, not a zero-curvature or variable-rank family."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.2 matches the two oriented stereographic frames and global u-inverse clutch, including both poles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and steps 4.1–4.2 explicitly assume full AC through the pinned Hodge Green and elliptic suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Statement proves exact identities and index values, not a biconditional classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Statement proves exact identities and index values, not a biconditional classification."
+        }
+      ]
+    }
+  }
+}

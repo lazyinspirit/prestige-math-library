@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-jacobian-sign-is-constant-on-a-connected-regular-domain.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-higher-order-rellich-kondrachov.json
+  precheck: pass
 id: thm-higher-order-rellich-kondrachov
 kind: theorem
 title: "Higher-order Rellich--Kondrachov compactness"
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)"
@@ -59,18 +57,18 @@ $p^{*}_{k-m}=\frac{np}{n-(k-m)p}$ when $(k-m)p<n$.
 
 [F5] *Weak derivatives pass to strong limits.* If $f_j\to f$ and $D_i f_j\to g_i$ in $L^q(\Omega)$ for $1\le q<\infty$, passing to the limit in the test identity shows $D_i f=g_i$ weakly. Iterating gives the same conclusion for all derivatives of order at most $m$. ([[def-weak-derivative-of-a-locally-integrable-function]], [[def-sobolev-space-wkp-and-its-norm]])
 
-[F6] *Arzel\`a--Ascoli.* A uniformly bounded equicontinuous family on a nonempty compact metric space has compact closure in the supremum norm; under Countable and Dependent Choice this gives a uniformly convergent subsequence. For complex functions apply the real result to real and imaginary parts. ([[thm-arzela-ascoli-for-real-ck]], [[thm-metric-compactness-equivalences]], [[def-countable-choice]], [[def-dependent-choice]])
+[F6] *Arzelà–Ascoli.* A uniformly bounded equicontinuous family on a nonempty compact metric space has compact closure in the supremum norm; under Countable and Dependent Choice this gives a uniformly convergent subsequence. For complex functions apply the real result to real and imaginary parts. ([[thm-arzela-ascoli-for-real-ck]], [[thm-metric-compactness-equivalences]], [[def-countable-choice]], [[def-dependent-choice]])
 
 [F7] *Uniform limits preserve classical derivatives.* If $C^1$ functions and their first derivatives converge uniformly on compact balls, the limit is $C^1$ there and its derivatives are the corresponding limits; apply the fundamental theorem of calculus on line segments, coordinate by coordinate. ([[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]], [[def-ck-and-multi-index-notation-in-several-variables]])
 
-[F8] *H\"older interpolation.* For $0<\beta<\beta'<1$, a uniformly convergent sequence with uniformly bounded $C^{0,\beta'}$ seminorms converges in $C^{0,\beta}$. Indeed, the difference quotient is bounded by the minimum of $2\|g\|_\infty |x-y|^{-\beta}$ and $[g]_{C^{0,\beta'}}|x-y|^{\beta'-\beta}$, yielding the usual interpolation estimate with a constant depending on $\beta,\beta'$. ([[def-local-holder-and-c-two-alpha-norms-on-euclidean-balls]])
+[F8] *Hölder interpolation.* For $0<\beta<\beta'<1$, a uniformly convergent sequence with uniformly bounded $C^{0,\beta'}$ seminorms converges in $C^{0,\beta}$. Indeed, the difference quotient is bounded by the minimum of $2\|g\|_\infty |x-y|^{-\beta}$ and $[g]_{C^{0,\beta'}}|x-y|^{\beta'-\beta}$, yielding the usual interpolation estimate with a constant depending on $\beta,\beta'$. ([[def-local-holder-and-c-two-alpha-norms-on-euclidean-balls]])
 
 ## Proof
 
-**Proof technique:** extract strong $L^p$ convergence for the finite derivative family, interpolate against higher-order Sobolev bounds, and use Arzel\`a--Ascoli for the supercritical Hölder conclusion.
+**Proof technique:** extract strong Lᵖ convergence for the finite derivative family, interpolate against higher-order Sobolev bounds, and use Arzelà–Ascoli for the supercritical Hölder conclusion.
 
 1.1 If $\Omega=\varnothing$, all target spaces are trivial and the assertions hold. Otherwise choose the bounded extension $E$ at $(k,p)$ and a smooth cutoff $\eta$ equal to one near $\overline\Omega$, with compact support in a ball $B$. By the weak Leibniz rule, $v_j=\eta Eu_j$ is bounded in $W^{k,p}(\mathbb R^n)$ and equals $u_j$ on $\Omega$ ([[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]], [[lem-weak-leibniz-rule-with-a-smooth-factor]]). For each $|\alpha|\le m$, $D^\alpha v_j$ is bounded in $W^{1,p}(B)$ by [F1]. The smooth ball is a $W^{1,p}$-extension domain ([[thm-extension-theorem-for-bounded-smooth-domains]]), so [F2] applied on $B$, followed by restriction to $\Omega$, gives a common subsequence on which all $D^\alpha u_j$ converge in $L^p(\Omega)$. Only finitely many derivative sequences are extracted. [F1, F2, F3, given]
 
 2.1 Consider cases (a) and (b). By [F3], for every $|\alpha|\le m$ the sequence $(D^\alpha u_{j_k})$ is bounded in $L^{p^*_{k-m}}(\Omega)$ in case (a), and in every finite $L^r(\Omega)$ in case (b). If $q\le p$, finite- measure inclusion [F4] and step 1.1 make each derivative sequence Cauchy in $L^q$. If $p<q<p^*_{k-m}$ in case (a), choose $r=p^*_{k-m}$; if $p<q<\infty$ in case (b), choose any finite $r>q$. Lyapunov interpolation [F4] applied to differences, whose $L^p$ norms tend to zero by step 1.1 and whose $L^r$ norms are uniformly bounded by [F3], makes every derivative sequence Cauchy in $L^q$. Completeness of $L^q$ gives limits $v_\alpha$. Passing to the limit in the weak derivative test identities by [F5] shows that $v_\alpha=D^\alpha v_0$ for all $|\alpha|\le m$, so $u_{j_k}\to v_0$ in $W^{m,q}(\Omega)$. The higher-order embedding [F3] also gives boundedness of the inclusion into each stated target, so this is compact embedding. [F3, F4, F5, step 1.1]
 
-3.1 Consider case (c), and fix $0\le\beta<\min\{1,k-m-\frac np\}$. Choose $\beta'$ with $\beta<\beta'<\min\{1,k-m-\frac np\}$. By [F3] the sequence is bounded in $C^{m,\beta'}(\overline\Omega)$, so each of its finitely many derivative families of orders at most $m$ is uniformly bounded and equicontinuous on the compact set $\overline\Omega$. By [F6], applying Arzel\`a--Ascoli successively to these derivative families gives a common subsequence on which every $D^\alpha u_{j_k}$ converges uniformly to a continuous function $v_\alpha$ on $\overline\Omega$. On each ball compactly contained in $\Omega$, [F7] applied to line segments shows that $v_{\alpha+e_i}$ is the classical $i$-th derivative of $v_\alpha$ whenever $|\alpha|<m$; hence $v_0$ is a representative in $C^m(\Omega)$ whose derivatives through order $m$ extend continuously to $\overline\Omega$. For $\beta=0$ the uniform convergence is the desired $C^{m,0}$ convergence. For $\beta>0$, [F8] applied to each difference $D^\alpha(u_{j_k}-u_{j_\ell})$, using uniform convergence and the uniform $C^{0,\beta'}$ bounds, gives convergence in $C^{m,\beta}(\overline\Omega)$ to $v_0$: each uniform limit $v_\alpha$ retains the bounded $\beta'$ seminorm by passage to the limit in the pointwise difference quotients, so [F8] applies directly to $D^\alpha u_{j_k}-v_\alpha$. Thus the asserted compact embedding holds, and the Axiom of Choice supplies the subsequence and the choice interfaces of [F2] and [F6]. [F3, F6, F7, F8, step 1.1] ∎
+3.1 Consider case (c), and fix $0\le\beta<\min\{1,k-m-\frac np\}$. Choose $\beta'$ with $\beta<\beta'<\min\{1,k-m-\frac np\}$. By [F3] the sequence is bounded in $C^{m,\beta'}(\overline\Omega)$, so each of its finitely many derivative families of orders at most $m$ is uniformly bounded and equicontinuous on the compact set $\overline\Omega$. By [F6], applying Arzelà–Ascoli successively to these derivative families gives a common subsequence on which every $D^\alpha u_{j_k}$ converges uniformly to a continuous function $v_\alpha$ on $\overline\Omega$. On each ball compactly contained in $\Omega$, [F7] applied to line segments shows that $v_{\alpha+e_i}$ is the classical $i$-th derivative of $v_\alpha$ whenever $|\alpha|<m$; hence $v_0$ is a representative in $C^m(\Omega)$ whose derivatives through order $m$ extend continuously to $\overline\Omega$. For $\beta=0$ the uniform convergence is the desired $C^{m,0}$ convergence. For $\beta>0$, [F8] applied to each difference $D^\alpha(u_{j_k}-u_{j_\ell})$, using uniform convergence and the uniform $C^{0,\beta'}$ bounds, gives convergence in $C^{m,\beta}(\overline\Omega)$ to $v_0$: each uniform limit $v_\alpha$ retains the bounded $\beta'$ seminorm by passage to the limit in the pointwise difference quotients, so [F8] applies directly to $D^\alpha u_{j_k}-v_\alpha$. Thus the asserted compact embedding holds, and the Axiom of Choice supplies the subsequence and the choice interfaces of [F2] and [F6]. [F3, F6, F7, F8, step 1.1] ∎

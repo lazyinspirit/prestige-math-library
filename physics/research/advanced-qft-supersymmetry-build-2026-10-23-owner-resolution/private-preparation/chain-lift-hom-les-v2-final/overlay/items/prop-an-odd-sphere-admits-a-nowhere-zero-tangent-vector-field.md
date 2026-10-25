@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-an-odd-sphere-admits-a-nowhere-zero-tangent-vector-field.md

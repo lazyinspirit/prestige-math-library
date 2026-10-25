@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-finite-weighted-network-diffusion-data.json
+  precheck: n/a
 id: def-finite-weighted-network-diffusion-data
 kind: definition
 title: "Finite weighted network diffusion data"
@@ -19,12 +22,6 @@ landmark: false
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Fan R. K. Chung, Spectral Graph Theory, Chapter 1: Eigenvalues and the Laplacian of a Graph, CBMS 92 (1997), complete chapter text"
@@ -65,3 +62,35 @@ Laplacian by
 allowed and remove those edges from the diffusion coupling; they do not remove
 the vertices or masses.
 
+
+## Remarks
+
+For example, order the vertices as $(v_1,v_2,v_3)$ and the edges as
+$(e_1,e_2)$ in the path below, with $D=\{v_3\}$ and $I=\{v_1,v_2\}$.
+Circles mark free vertices and the square marks the Dirichlet vertex;
+arrows specify the incidence orientation, not the direction of diffusion.
+
+```tikz
+\begin{tikzpicture}[>=stealth,thick]
+\node[draw,circle,minimum size=9mm] (v1) at (0,0) {$v_1$};
+\node[draw,circle,minimum size=9mm] (v2) at (3,0) {$v_2$};
+\node[draw,rectangle,minimum size=9mm] (v3) at (6,0) {$v_3$};
+\draw[->] (v1) -- node[above] {$e_1,\ c_1$} (v2);
+\draw[->] (v2) -- node[above] {$e_2,\ c_2$} (v3);
+\node[below=5mm] at (v1) {$m_1>0$};
+\node[below=5mm] at (v2) {$m_2>0$};
+\node[below=5mm] at (v3) {$v_3\in D$};
+\end{tikzpicture}
+```
+
+The tail/head convention gives
+
+$$B=\begin{pmatrix}-1&0\\1&-1\\0&1\end{pmatrix},\qquad L_C=\begin{pmatrix}c_1&-c_1&0\\-c_1&c_1+c_2&-c_2\\0&-c_2&c_2\end{pmatrix}.$$
+
+Deleting the row and column of $v_3$ gives
+
+$$L_D=\begin{pmatrix}c_1&-c_1\\-c_1&c_1+c_2\end{pmatrix},\qquad M=\begin{pmatrix}m_1&0\\0&m_2\end{pmatrix}.$$
+
+These matrices follow directly from the definition and do not rely on the
+illustration. In particular, the contribution $c_2$ remains on the $v_2$
+diagonal of $L_D$, even though $v_3$ is not a free vertex.

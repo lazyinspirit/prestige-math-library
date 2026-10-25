@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-binary-confounding-standardization.json
+  precheck: pass
 id: ex-binary-confounding-standardization
 kind: example
 title: "Binary confounding and standardization"
@@ -18,12 +21,6 @@ proof_strategy: direct
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
 generation:
   role: example
 ---
@@ -57,3 +54,22 @@ Let $\Omega=\{0,1\}\times\{1,2,3,4\}$ with each point having probability $1/8$, 
 1.3 In stratum $L=0$, the observed outcome means are $E[Y\mid A=1,L=0]=1$ and $E[Y\mid A=0,L=0]=0$. In stratum $L=1$, they are $11$ and $10$. Since $P(L=0)=P(L=1)=1/2$, [F6] standardizes the treatment means to $E[Y^1]=(1+11)/2=6$ and $E[Y^0]=(0+10)/2=5$, so [F5] gives ATE $1$. [F5, F6, algebra]
 
 2.1 Bayes' rule gives $P(L=1\mid A=1)=3/4$ and $P(L=1\mid A=0)=1/4$. Therefore $E[Y\mid A=1]=(1/4)1+(3/4)11=8.5$ and $E[Y\mid A=0]=(3/4)0+(1/4)10=2.5$, whose difference is $6$, not the ATE. The difference comes from the different target-covariate mixtures in the two treatment groups. [given, step 1.2, algebra] ∎
+
+## Remarks
+
+The arrows below show the inputs in the construction: $A=f(L,W)$ is the assignment rule in the example, and $Y=10L+A$. The independent coordinates $L$ and $W$ generate assignment, while $L$ also directly contributes to the outcome.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}]
+\node (W) at (-2,0) {$W$};
+\node (A) at (0,0) {$A$};
+\node (L) at (0,1.8) {$L$};
+\node (Y) at (3,0) {$Y$};
+\draw[->,thick] (W) -- (A);
+\draw[->,thick] (L) -- (A);
+\draw[->,thick] (L) -- (Y);
+\draw[->,thick] (A) -- (Y);
+\end{tikzpicture}
+```
+
+The common input $L$ makes the path $A\leftarrow L\to Y$ visible. Within either stratum, the outcome contrast is $1$; the crude contrast instead mixes the strata with different weights in the two treatment arms. Standardization uses the same target weights $P(L=0)=P(L=1)=1/2$ for both arms. The verification above establishes these facts independently of the diagram.

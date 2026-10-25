@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-restriction-of-marked-ideal-to-a-smooth-subvariety.md

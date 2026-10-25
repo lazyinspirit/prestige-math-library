@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-for-invertible-a-the-exact-solution-enters-the-krylov-space-at-the-grade.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-degree-additive-proper-curve.json
+  precheck: pass
 id: cor-degree-additive-proper-curve
 kind: corollary
 title: "Degree is additive on invertible sheaves over a proper curve"
@@ -34,23 +37,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: devissage
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
-    delegated_by: owner
-    evidence:
-      - research/frontier-38-owner-30-reader-26.md
-      - research/frontier-38-owner-30-dispatch/reader-reader-26.result.json
-      - research/frontier-38-owner-30-step5-hash-26-post-5a.json
-      - research/frontier-38-owner-30-alpha-batch-26-5a-decisions.json
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "The Stacks Project, Varieties, Section 33.44 (Degrees on curves), Lemma 33.44.7 (tag 0AYX)"
@@ -106,7 +92,9 @@ the intended instances.
 
 ## Proof
 
-**Proof technique:** devissage on the Noetherian scheme $C$ for the defect $D(\mathcal F):=\chi(C,\mathcal F)-\chi(C,\mathcal L\otimes\mathcal F)-\chi(C,\mathcal M\otimes\mathcal F)+\chi(C,\mathcal L\otimes\mathcal M\otimes\mathcal F)$.
+**Proof technique:** devissage on the given Noetherian scheme for the four-term Euler-characteristic defect.
+
+Define the defect by $D(\mathcal F):=\chi(C,\mathcal F)-\chi(C,\mathcal L\otimes\mathcal F)-\chi(C,\mathcal M\otimes\mathcal F)+\chi(C,\mathcal L\otimes\mathcal M\otimes\mathcal F)$.
 
 1.1 Set-up and defect. For a coherent $\mathcal O_C$-module $\mathcal F$ the four tensor products appearing in $D(\mathcal F)$ are coherent by [F2], so all four Euler characteristics are defined; by [F2] $D(\mathcal O_C)=\chi(C,\mathcal O_C)-\chi(C,\mathcal L)-\chi(C,\mathcal M)+\chi(C,\mathcal L\otimes\mathcal M)$, and it suffices for statements 1 and 3 to prove $D(\mathcal F)=0$ for the single coherent module $\mathcal F=\mathcal O_C$. [F1, F2]
 

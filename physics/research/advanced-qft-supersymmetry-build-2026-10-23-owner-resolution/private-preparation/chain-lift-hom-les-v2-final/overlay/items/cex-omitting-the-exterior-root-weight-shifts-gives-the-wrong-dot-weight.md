@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-omitting-the-exterior-root-weight-shifts-gives-the-wrong-dot-weight.md

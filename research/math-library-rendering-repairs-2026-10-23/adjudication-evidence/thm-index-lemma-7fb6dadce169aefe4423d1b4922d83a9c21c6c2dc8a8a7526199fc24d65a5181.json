@@ -1,0 +1,86 @@
+{
+  "id": "thm-index-lemma",
+  "agent": "/root/rendering_repair_coordinator/dg_018",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution views of all five authentic original tiles show literal dollar delimiters and TeX commands in the uppercase technique banner (tile 03). Ordinary proof formulas render normally. The specific screenshot_evidence tile 05 is authentic but contains the end of the proof/source locator rather than the banner; the full original screenshot list locates the actual defect.",
+      "action": "Replaced only the technique banner mathematics with equivalent prose describing the same Jacobi-basis integrand identity, vanishing endpoint terms and equality argument.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "other: missing-trailing-proof-justifications",
+      "verdict": "confirmed",
+      "reason": "The actual scoped proof-layout check found final step 7.1 lacks trailing justification tags, so its blue justification chips were missing in the native renderer. The original source instead ends with a math-mode square.",
+      "action": "Added the same justification group already at the start of step 7.1 as trailing tags and used the supported Unicode QED marker; all argument text is preserved.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Converted the plain-text proof-technique banner from raw TeX to equivalent prose and repaired final-step justification/QED layout.",
+  "source_lines_after": [
+    176,
+    194
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "before_raw_sha256": "2df23b5486ec7895be9181e2a132157ecd4961794e255cbd5836fcd5118bf082",
+  "after_raw_sha256": "873d315d11d91e6b3a3e7b60c875dc99f88ecfecebe91efe2e463d233b828ee8",
+  "publication_status_preserved": true,
+  "frontmatter_byte_identical": true,
+  "original_evidence": {
+    "inspection_dir": "research/math-library-rendering-audit-2026-10-23/differential-geometry",
+    "standalone_original_resolution_views": [
+      "screenshots/thm-index-lemma--01.png",
+      "screenshots/thm-index-lemma--02.png",
+      "screenshots/thm-index-lemma--03.png",
+      "screenshots/thm-index-lemma--04.png",
+      "screenshots/thm-index-lemma--05.png"
+    ],
+    "tile_05_sha256": "92a3e6bf171968c9bc895254ae21d889a036fd07d4bfa710d41a981508dd733c"
+  },
+  "checks": {
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-index-lemma.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/thm-index-lemma.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-index-lemma.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects",
+      "initial_result": "Exit 1: step 7.1 missing-or-invalid-tags and rendered-chip-mismatch; focused formatting correction applied before final successful checks."
+    }
+  },
+  "native_preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/dg018-final-v2",
+    "command": "TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dg018 TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-index-lemma --out research/math-library-rendering-repairs-2026-10-23/previews/dg018-final-v2",
+    "exit_code": 0,
+    "standalone_original_resolution_final_views": [
+      "screenshots/thm-index-lemma--03.png",
+      "screenshots/thm-index-lemma--05.png"
+    ],
+    "result": "Technique banner is readable prose with no raw TeX. Proof ending and source locator render normally. Capture: 327 KaTeX spans, zero KaTeX errors, zero TikZ diagrams, zero diagram failures.",
+    "limitations": "Local native ItemBody/title preview only, no production-route coverage. Helper reported 16 unrelated reference-map diagnostics."
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-tangent-space-is-defined-only-after-embedding-the-manifold-in-euclidean-space.md

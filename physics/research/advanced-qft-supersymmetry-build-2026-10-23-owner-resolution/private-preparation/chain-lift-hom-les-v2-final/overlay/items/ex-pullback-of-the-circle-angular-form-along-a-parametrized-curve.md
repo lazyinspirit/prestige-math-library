@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-pullback-of-the-circle-angular-form-along-a-parametrized-curve.md

@@ -1,0 +1,829 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": 64,
+  "dependency_level": 0,
+  "scope": [
+    "lem-qftx-gaga-algebraic-analytic-local-completions",
+    "thm-qftx-gaga-analytic-local-ring-flatness",
+    "ex-qftx-gaga-analytic-equal-completions",
+    "ex-qftx-gaga-analytic-nonreduced-quotient"
+  ],
+  "contracts": {
+    "lem-qftx-gaga-algebraic-analytic-local-completions": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multiplicative-subset-and-localisation",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. A subset $S\\subseteq R$ is **multiplicative** if $1\\in S$ and $s,t\\in S$ implies $st\\in S$.\n\nOn $R\\times S$, define\n$$ (r,s)\\sim(r',s')\\quad\\Longleftrightarrow\\quad u(rs'-r's)=0\\text{ for some }u\\in S. $$\nThe **localisation** of $R$ at $S$, denoted $S^{-1}R$, is the set of equivalence classes for this relation. The class of $(r,s)$ is written $r/s$, and its arithmetic is\n$$ \\frac r s+\\frac{r'}{s'}=\\frac{rs'+r's}{ss'},\\qquad \\frac r s\\frac{r'}{s'}=\\frac{rr'}{ss'}. $$\nThe **localisation map** is the ring homomorphism\n$$ \\lambda_S:R\\longrightarrow S^{-1}R,\\qquad r\\longmapsto r/1. $$\nEvery $s\\in S$ maps to a unit, with $(s/1)^{-1}=1/s$. The construction permits $0\\in S$; in that case the localisation is the zero ring.\n",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-holomorphic-germ-ring-and-its-maximal-ideal",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$. Two holomorphic functions on neighbourhoods of\n$0\\in\\mathbb C^m$ ([[def-holomorphic-function-in-several-complex-variables]])\nare **equivalent at $0$** when they agree on some smaller neighbourhood of $0$.\nAn equivalence class is a **holomorphic germ at $0$**, and the set of all such\ngerms is denoted $\\mathcal O_{m,0}$.\n\nFor the $m=1$ boundary case used later, also set\n$$\\mathcal O_{0,0}:=\\mathbb C,\\qquad \\mathfrak m_{0,0}:=\\{0\\}.$$\nThis is the ring of constant germs at the unique point of $\\mathbb C^0$.\n\nIf $[f]$ and $[g]$ are germs, choose representatives defined on a common\nneighbourhood of $0$ and set\n\n$$[f]+[g]:=[f+g],\\qquad [f][g]:=[fg].$$\n\nThese are well defined because agreement on a smaller neighbourhood is\npreserved by pointwise addition and multiplication. Thus $\\mathcal O_{m,0}$ is a\ncommutative ring with identity $[1]$.\n\nIts distinguished ideal is\n\n$$\\mathfrak m_{m,0}:=\\{[f]\\in\\mathcal O_{m,0}:f(0)=0\\}.$$\n\nThis is well defined because equivalent representatives have the same value at\n$0$. The local-ring terminology used later is that of [[def-local-ring]].\n",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holomorphic-germs-at-a-point-form-a-local-ring",
+          "source_section": "Statement",
+          "quote": "Fix $a \\in \\mathbb C$, and let $\\mathcal O_a$ be the set of holomorphic germs at\n$a$. Define\n\n$$[f]_a + [g]_a := [f+g]_a,\\qquad [f]_a[g]_a := [fg]_a.$$\n\nThen $\\mathcal O_a$ is a commutative ring with identity $[1]_a$. A germ\n$[f]_a \\in \\mathcal O_a$ is a unit if and only if $f(a) \\ne 0$. Consequently\n\n$$\\mathfrak m_a := \\{[f]_a \\in \\mathcal O_a : f(a)=0\\}$$\n\nis the unique maximal ideal, so $\\mathcal O_a$ is a local ring.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-units-in-the-holomorphic-germ-ring",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$ and let $[f]\\in\\mathcal O_{m,0}$. Then $[f]$ is a unit in\n$\\mathcal O_{m,0}$ if and only if $f(0)\\ne0$. Consequently\n$\\mathcal O_{m,0}$ is a local ring with maximal ideal $\\mathfrak m_{m,0}$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-holomorphic-germ-ring-is-noetherian",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$, the holomorphic germ ring $\\mathcal O_{m,0}$ is a\nNoetherian commutative ring.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-power-series-expansion-in-several-complex-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$ and a polyradius $\\rho$, let\n$f:\\Delta_\\rho(a)\\to\\mathbb C$ be continuous and separately holomorphic, let $r$\nbe a polyradius with $r_k<\\rho_k$ for every $k<m$, and let\n$C_k(t)=a_k+r_k\\exp(it)$ on $[0,2\\pi]$. For each multi-index $\\alpha$ set\n\n$$c_\\alpha:=\\frac1{(2\\pi i)^m}\\int_{C_0}\\!\\cdots\\!\\int_{C_{m-1}} f(\\zeta)\\prod_{k<m}(\\zeta_k-a_k)^{-\\alpha_k-1}\\,d\\zeta_{m-1}\\cdots d\\zeta_0 ,$$\n\nan iterated integral as in the polydisc Cauchy formula. Then, with\n$M=\\sup_{\\Gamma_r(a)}|f|$,\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k},$$\n\nand for every real $\\theta$ with $0<\\theta<1$ the series\n$\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n$\\overline\\Delta_{\\theta r}(a)$ with\n\n$$f(z)=\\sum_\\alpha c_\\alpha(z-a)^\\alpha\\qquad(z\\in\\overline\\Delta_{\\theta r}(a)).$$\n\nSince every $z\\in\\Delta_r(a)$ lies in $\\overline\\Delta_{\\theta r}(a)$ for some\n$\\theta<1$, the expansion holds throughout $\\Delta_r(a)$.\n\n**The coefficients are asserted here only as those iterated integrals.** That\n$c_\\alpha$ equals $\\partial^\\alpha f(a)/\\alpha!$ needs termwise differentiation\nand is not claimed by this statement.\n\n",
+          "uses": [
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.\n\n",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-hilbert-basis-theorem",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring. Then the polynomial ring $R[x]$ is a\nNoetherian commutative ring.\n\nNo hypothesis beyond Noetherianity is placed on $R$: it may have zero divisors,\nand it may be the zero ring.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-noetherian-ring-quotients-and-localisations",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring. Then\n\n1. $R/I$ is Noetherian for every ideal $I$ of $R$\n   ([[def-quotient-ring]]), and\n2. $S^{-1}R$ is Noetherian for every multiplicative subset $S\\subseteq R$\n   ([[def-multiplicative-subset-and-localisation]]).\n\nBoth cases include their degenerate instances: $I=R$ makes $R/I$ the zero ring,\nand $0\\in S$ makes $S^{-1}R$ the zero ring, and the zero ring is Noetherian.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-completion-commutes-with-finite-quotients-and-submodules",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring, let $I \\subseteq R$ be an ideal, and let\n$N \\subseteq M$ be finitely generated $R$-modules.\n\n1. The natural map\n   $$    \\widehat M/\\widehat N \\longrightarrow \\widehat{M/N}    $$\n   is an isomorphism.\n2. Under the natural map $\\widehat N \\to \\widehat M$, the image of\n   $\\widehat N$ is the $\\widehat R$-submodule $N\\widehat R \\subseteq \\widehat M$.\n   In particular, for every ideal $J \\subseteq R$,\n   $$    \\widehat{JM}\\cong J\\widehat M.    $$\n3. For every $n \\ge 0$,\n   $$    \\widehat M/I^n\\widehat M \\cong M/I^nM.    $$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "AC implies DC. For a nonempty set $Y$ with a serial relation $R$, the successor sets $\\{z\\in Y:yRz\\}$ are nonempty; [A1] chooses one successor for each such set. This defines a self-map $s:Y\\to Y$ with $yRs(y)$, and [F10] recursively generates a sequence from any specified starting point.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F10",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "By [F8], $P$ is Noetherian and, using the DC established in step 1.1, its localization $A_0$ is Noetherian. The ring $A_0$ is local: fractions with numerator outside $\\mathfrak m$ are units, while the residue map $p/q\\mapsto p(0)/q(0)$ is a surjective homomorphism to $\\mathbb C$ with kernel $\\mathfrak m A_0$. The ring $H$ is Noetherian by [F5] and local by [F3] when $n=1$ and by [F4] for every $n$. Since $I\\subseteq\\mathfrak m$ and every element of $I$ vanishes at the origin, $IA_0$ and $IH$ lie in the respective maximal ideals. Their quotients are therefore Noetherian local rings, with maximal ideals the images of those ambient maximal ideals.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "claim": "For each $k\\ge1$, every $s\\in P\\setminus\\mathfrak m$ has the form $s=c(1+h)$ with $c=s(0)\\ne0$ and $h\\in\\mathfrak m$. Modulo $\\mathfrak m^k$, $h^k=0$, so $c^{-1}\\sum_{j=0}^{k-1}(-h)^j$ is an inverse for $s$. Thus localization changes no $k$-jet and $A_0/\\mathfrak m^kA_0\\cong P/\\mathfrak m^k$. A compatible sequence of these truncated polynomials is exactly one formal power series, so $\\widehat{A_0}\\cong T$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.4",
+          "claim": "Every germ in $\\mathfrak n$ has a power series with no constant term by [F6]. Assign each nonconstant monomial to the first coordinate with positive exponent; grouping the terms by that coordinate writes the germ as $\\sum_{i=1}^n w_i g_i$, where each $g_i$ converges on a smaller polydisc by absolute convergence. Hence $\\mathfrak n=(w_1,\\ldots,w_n)$.",
+          "step": "1.4",
+          "inputs": [
+            "F2",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1.5",
+          "claim": "For $k\\ge1$, truncate the unique Taylor series from [F6] to total degree less than $k$. This gives a surjection $H\\to P/\\mathfrak m^k$. For each multi-index $\\alpha$ of degree at least $k$, assign the first monomial divisor $w^\\beta$ in a fixed ordering among the finitely many divisors of total degree $k$; grouping the absolutely convergent subseries by the finitely many possible $\\beta$ writes the tail as $\\sum_{|\\beta|=k}w^\\beta g_\\beta$. Thus the kernel is contained in $\\mathfrak n^k$. Conversely, step 1.4 makes $\\mathfrak n^k$ generated by the degree-$k$ coordinate monomials, and each such monomial times any germ has no Taylor terms of degree below $k$; uniqueness [F7] shows every element of $\\mathfrak n^k$ lies in the kernel. Therefore $H/\\mathfrak n^k\\cong P/\\mathfrak m^k$.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "derive-1.6",
+          "claim": "Taking inverse limits in steps 1.3 and 1.5 identifies $\\widehat{A_0}$ and $\\widehat H$ with $T$. Each polynomial variable maps to the same formal variable under both completion maps, so the induced map $\\widehat{A_0}\\to\\widehat H$ is the identity of $T$.",
+          "step": "1.6",
+          "inputs": [
+            "step 1.3",
+            "step 1.5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Under the assumed AC, apply [F9] to the finitely generated ideals $IA_0\\subseteq A_0$ and $IH\\subseteq H$; these rings are Noetherian by step 1.2. Their images in $T$ are both generated by the same finite polynomial generators of $I$, because the maps in step 1.6 send each $w_i$ to the same formal variable. Thus $\\widehat{A_I}\\cong T/IT\\cong\\widehat{H_I}$, and the induced map on completions is the identity under these identifications. The quotient is by $I$ itself, not by its radical.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F9",
+            "step 1.2",
+            "step 1.6",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero ideal is generated by the empty list; step 2.1 identifies its quotient completion with the ambient T."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For I=(0), step 2.1 leaves the ambient completion T unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate case is included in the n≥1 arguments of steps 1.3–1.5."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For I=(w_1,…,w_n), step 2.1 identifies both quotient completions with the residue field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The first truncation k=1 and every k≥1 are included in steps 1.3–1.5."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 derives DC from AC; step 2.1 applies the AC-dependent finite-quotient completion result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts canonical completion identifications, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts canonical completion identifications, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "scope": "Authoring check of the complete conditional argument for lem-qftx-gaga-algebraic-analytic-local-completions; independent approval is not claimed.",
+        "findings": [
+          "Checked polynomial localization, analytic Taylor truncations, the common ambient completion, and same-ideal finite quotients under AC. The DC-dependent Noetherian quotient/localization input is discharged from AC. No unresolved local mathematical obligation identified."
+        ],
+        "residual_risk": "No unresolved prerequisite gap identified after inspecting current supplier statements and proofs. Independent review and later workflow gates remain outstanding.",
+        "status": "authoring_complete"
+      },
+      "routine_steps": []
+    },
+    "thm-qftx-gaga-analytic-local-ring-flatness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-scheme",
+          "source_section": "Definition",
+          "quote": "A **scheme** is a locally ringed space $(X,\\mathcal O_X)$ such that every\npoint has an open neighbourhood which, with the restricted structure sheaf, is\nan affine scheme. The empty locally ringed space is consequently a scheme.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-locally-finite-type-and-finite-type-morphism",
+          "source_section": "Definition",
+          "quote": "A morphism $f:X\\to S$ is **locally of finite type** if every point of $X$ has\nan affine open neighbourhood $U$ and $f(U)$ lies in an affine open\n$V=\\operatorname{Spec}A$ of $S$ such that $U=\\operatorname{Spec}B$ and\n$A\\to B$ is of finite type. It is **of finite type** if it is locally of finite\ntype and quasi-compact.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-type-and-module-finite-algebras",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and let $A$ be a commutative $R$-algebra with\nstructure map $\\eta_A\\colon R\\to A$ ([[def-algebra-over-a-commutative-ring]]).\n\n**The subalgebra generated by finitely many elements.** Let $n\\in\\mathbb N$ and\n$a_1,\\ldots,a_n\\in A$. Iterating the universal property of a polynomial ring\n([[thm-universal-property-of-a-polynomial-ring]]) along the recursion\n$R[x_1,\\ldots,x_{k+1}]=R[x_1,\\ldots,x_k][x_{k+1}]$ of\n[[def-multivariate-polynomial-ring-by-iteration]] gives a unique unital ring\nhomomorphism\n\n$$\\operatorname{ev}\\colon R[x_1,\\ldots,x_n]\\longrightarrow A$$\n\nthat agrees with $\\eta_A$ on constants and sends $x_i$ to $a_i$ for each $i$;\nat each step of the recursion the one-variable universal property supplies\nexistence and uniqueness of the extension, and at $n=0$ the map is $\\eta_A$\nitself. Its image is written $R[a_1,\\ldots,a_n]$ and is called the\n**$R$-subalgebra of $A$ generated by $a_1,\\ldots,a_n$**. It is a subring of $A$\ncontaining $\\eta_A(R)$, and it is the smallest such subring containing\n$a_1,\\ldots,a_n$, since any subring with those properties is closed under the\nsums and products that make up a polynomial expression. At $n=0$ it is\n$\\eta_A(R)$, the image of $R$ in $A$.\n\n**Finite type.** $A$ is **of finite type over $R$**, equivalently a **finitely\ngenerated $R$-algebra**, when $A=R[a_1,\\ldots,a_n]$ for some $n\\in\\mathbb N$ and\nsome $a_1,\\ldots,a_n\\in A$. Equivalently, $A$ is isomorphic as an $R$-algebra to\na quotient $R[x_1,\\ldots,x_n]/\\mathfrak a$ for some $n\\in\\mathbb N$ and some\nideal $\\mathfrak a$: the map $\\operatorname{ev}$ above is then surjective, and\n[[thm-first-isomorphism-theorem-rings]] identifies $A$ with\n$R[x_1,\\ldots,x_n]/\\ker\\operatorname{ev}$; conversely the composite of the\ncanonical projection with the inclusion of the indeterminates exhibits any such\nquotient as generated by the residues of $x_1,\\ldots,x_n$.\n\n**Module-finite.** $A$ is **module-finite over $R$**, equivalently a **finite\n$R$-algebra**, when $A$ is finitely generated as an $R$-module\n([[def-generated-cyclic-finitely-generated-and-free-modules]]) for the action\n$r\\cdot a=\\eta_A(r)a$.\n\n**Module-finite implies finite type.** If $b_1,\\ldots,b_n$ generate $A$ as an\n$R$-module then $R[b_1,\\ldots,b_n]$, being a subring of $A$ that contains\n$\\eta_A(R)$ and every $b_i$, contains every $R$-linear combination\n$\\sum_i\\eta_A(r_i)b_i$ and hence all of $A$; so $A=R[b_1,\\ldots,b_n]$. The\nconverse fails, and the companion examples page carries a witness.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-basis-theorem",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring. Then the polynomial ring $R[x]$ is a\nNoetherian commutative ring.\n\nNo hypothesis beyond Noetherianity is placed on $R$: it may have zero divisors,\nand it may be the zero ring.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-noetherian-ring-ideal-characterisations",
+          "source_section": "Statement",
+          "quote": "Assume dependent choice, as available under the Axiom of Choice. Let $R$ be a commutative ring. The following are equivalent.\n\n1. $R$ is Noetherian ([[def-noetherian-ring]]).\n2. Every ideal of $R$ is finitely generated: for every ideal $\\mathfrak a$ there\n   are finitely many $a_1,\\ldots,a_n\\in\\mathfrak a$, with $n\\in\\mathbb N$, such\n   that $\\mathfrak a=(a_1,\\ldots,a_n)$.\n3. **Ascending chain condition.** Every chain of ideals\n   $\\mathfrak a_0\\subseteq\\mathfrak a_1\\subseteq\\mathfrak a_2\\subseteq\\cdots$\n   indexed by $\\mathbb N$ stabilises: there is $N\\in\\mathbb N$ with\n   $\\mathfrak a_n=\\mathfrak a_N$ for every $n\\ge N$.\n4. **Maximal condition.** Every nonempty set of ideals of $R$ has a maximal\n   member with respect to inclusion.\n\nThe implication $3\\Rightarrow4$ uses dependent choice. The implications\n$1\\Leftrightarrow2$, $2\\Rightarrow3$, and $4\\Rightarrow2$ are choice-free. The same\nattribution is carried by\n[[thm-equivalent-characterizations-of-noetherian-modules]], from which this\nstatement is obtained.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-gaga-algebraic-analytic-local-completions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix an integer $n\\ge1$, put\n$P=\\mathbb C[w_1,\\ldots,w_n]$, and let $\\mathfrak m=(w_1,\\ldots,w_n)$.\nLet $A_0=P_{\\mathfrak m}$ be the localization at the polynomials nonzero at\nthe origin, let $H=\\mathbb C\\{w_1,\\ldots,w_n\\}$ be the ring of holomorphic\nfunction germs at the origin, and let $T=\\mathbb C\\llbracket w_1,\\ldots,w_n\\rrbracket$ be the\nformal power-series ring. For any finitely generated ideal $I\\subseteq\n\\mathfrak m$, set $A_I=A_0/IA_0$ and $H_I=H/IH$. For a local ring $R$ with\nmaximal ideal $\\mathfrak m_R$, define its completion by\n$\\widehat R=\\varprojlim_{k\\ge1}R/\\mathfrak m_R^k$.\n\nThe polynomial-to-germ map induces a local homomorphism $A_I\\to H_I$. The\nfour rings $A_0,H,A_I,H_I$ are Noetherian local rings, and the induced map on\ncompletions identifies both $\\widehat{A_I}$ and $\\widehat{H_I}$ canonically\nwith $T/IT$. In particular, the comparison uses the same extended defining\nideal $I$ and does not replace it by its radical, so nilpotent classes are\nretained.\n\n",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-completion-of-a-noetherian-local-ring",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\n\nLet $(R,\\mathfrak m)$ be a Noetherian local ring, and let $\\widehat R$ be its\n$\\mathfrak m$-adic completion.\n\n1. $\\widehat R$ is a Noetherian local ring with maximal ideal\n   $\\mathfrak m\\widehat R$.\n2. The residue field is unchanged:\n   $$    \\widehat R/\\mathfrak m\\widehat R \\cong R/\\mathfrak m.    $$\n3. The completion map $R \\to \\widehat R$ is faithfully flat.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-flatness-of-noetherian-completion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring and let $I \\subseteq R$ be an ideal. Then the\ncompletion map\n$$ R \\to \\widehat R $$\nmakes $\\widehat R$ into a flat $R$-module.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-flatness-criteria-by-injections-and-ideals",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $M$ be an $R$-module. The following are equivalent:\n\n1. $M$ is flat.\n2. For every injection $K\\hookrightarrow N$, the induced map $K\\otimes_RM\\to N\\otimes_RM$ is injective.\n3. For every ideal $I\\subseteq R$, the multiplication map $I\\otimes_RM\\to M$, $a\\otimes m\\mapsto am$, is injective.\n4. The map in claim 3 is injective for every finitely generated ideal $I$.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-flat-and-faithfully-flat-modules-and-ring-maps",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and let $M$ be an $R$-module. The module $M$ is **flat** if the functor $-\\otimes_RM$ preserves exact sequences: whenever $A\\to B\\to C$ is exact, so is\n\n$$A\\otimes_RM\\longrightarrow B\\otimes_RM\\longrightarrow C\\otimes_RM.$$\n\nSince tensoring is always right exact ([[thm-right-exactness-of-tensor-products]], [[def-exact-and-short-exact-sequences-of-modules]]), the definition asks for the remaining left-hand exactness. Its equivalent formulation as preservation of injections is proved separately rather than built into the definition.\n\nThe module $M$ is **faithfully flat** if a sequence of $R$-modules is exact exactly when its tensor with $M$ is exact.\n\nFor a unital ring homomorphism $f:R\\to S$ ([[def-ring-homomorphism]]) between commutative rings, $S$ is an $R$-module by $r\\cdot s=f(r)s$. The map $f$ is **flat**, respectively **faithfully flat**, when this $R$-module is flat, respectively faithfully flat.\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-faithfully-flat-ring-map-characterisations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the prime and maximal ideal existence used in the\nspectral reformulations.\n\nLet $f:R\\to S$ be a flat homomorphism of commutative rings. The following are\nequivalent:\n\n1. $f$ is faithfully flat.\n2. For every proper ideal $I\\subsetneq R$, the extended ideal $IS$ is proper.\n3. Every maximal ideal of $R$ has a prime ideal of $S$ lying over it.\n4. The map on prime spectra\n   $$    \\operatorname{Spec}(S)\\to\\operatorname{Spec}(R)    $$\n   is surjective.\n\n",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-long-exact-tor-sequence-in-the-right-module-variable",
+          "source_section": "Statement",
+          "quote": "Assume Dependent Choice (DC). For a short exact sequence\n$0\\to N'\\to N\\to N''\\to0$ of right $R$-modules and a left module $M$\nwith a supplied projective resolution, there is a natural exact sequence\n$$\\cdots\\to\\operatorname{Tor}_i^R(N',M)\\to\\operatorname{Tor}_i^R(N,M)\\to\\operatorname{Tor}_i^R(N'',M)\\xrightarrow{\\partial_i}\\operatorname{Tor}_{i-1}^R(N',M)\\to\\cdots.$$\nIts degree-zero tail is\n$$\\operatorname{Tor}_1^R(N'',M)\\xrightarrow{\\partial_1}N'\\otimes_R M\\to N\\otimes_R M\\to N''\\otimes_R M\\to0.$$\nThe sequence is natural in morphisms of short exact sequences and in maps\nof left modules equipped with projective resolutions. Tor can be computed\nusing that left resolution, or using the balanced identification whenever\nresolutions on the other side are supplied.\n\n",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-a-right-module-is-flat-exactly-when-tor-one-with-every-left-module-vanishes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice and supplied projective-resolution data.\nA right $R$-module $N$ is flat if and only if $\\operatorname{Tor}_1^R(N,M)=0$ for every left $R$-module $M$.\n\n",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-free-module-on-a-set-and-standard-basis",
+          "source_section": "Definition",
+          "quote": "For a unital ring $R$ and a set $X$, the **free left $R$-module on $X$** is\n$$R^{(X)}:=\\bigoplus_{x\\in X}R.$$\nFor $x\\in X$, the **standard basis vector** $e_x$ has coordinate $1_R$ at $x$ and zero elsewhere. Every element is represented by a unique finitely supported coefficient family $(r_x)_{x\\in X}$, and is written\n$$\\sum_{x\\in X}r_xe_x.$$\nThe **standard basis map** $X\\to R^{(X)}$ sends $x$ to $e_x$. It is injective exactly when $1_R\\ne0$ or $X$ has at most one element; in these cases it is the standard basis inclusion. Indeed, for distinct $x,y$ the $x$-coordinates of $e_x$ and $e_y$ are $1_R$ and $0$. For the zero ring every $e_x$ is zero, but the indexed family $(e_x)_{x\\in X}$ still has unique finitely supported coefficients.\n\nMore generally, a family $(b_x)_{x\\in X}$ is a **basis** of a module $M$ when every element of $M$ is uniquely a finite $R$-linear combination of the $b_x$ ([[def-generated-cyclic-finitely-generated-and-free-modules]]). For $X=\\varnothing$, $R^{(X)}=0$ and its empty family is a basis.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-universal-property-of-free-modules",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a unital ring, $X$ a set, and $M$ a left $R$-module. Every set map $u:X\\to M$ extends uniquely to an $R$-module homomorphism $\\bar u:R^{(X)}\\to M$ satisfying $\\bar u(e_x)=u(x)$. Explicitly,\n$$\\bar u\\left(\\sum_{x\\in F}r_xe_x\\right)=\\sum_{x\\in F}r_xu(x).$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "AC implies DC: for a nonempty set $Y$ and a serial relation $R\\subseteq Y\\times Y$, the family of successor sets $\\{\\{z\\in Y:yRz\\}:y\\in Y\\}$ consists of nonempty sets. [A1] gives a choice function on this family; composing it with the successor-set map gives a self-map $s:Y\\to Y$ with $yRs(y)$. For any prescribed $y_0$, [F10] gives the sequence $y_{k+1}=s(y_k)$. For any $A$-module $N$, let $F_0$ be free on its underlying set and let $\\epsilon_0:F_0\\twoheadrightarrow N$ send each standard basis vector to the element it names, using [F11]. A free module on any set is projective: given a surjection $E\\twoheadrightarrow Q$ and a map from the free module to $Q$, [A1] chooses a preimage in $E$ for the image of each basis vector, and [F11] extends that assignment to a lift. Put $K_0=\\ker\\epsilon_0$; recursively, for each $j\\ge0$, take $F_{j+1}$ free on the set $K_j$, let $\\epsilon_{j+1}:F_{j+1}\\twoheadrightarrow K_j$ send each basis vector to the element it names, and set $K_{j+1}=\\ker\\epsilon_{j+1}$. The differential $F_{j+1}\\to F_j$ is $\\epsilon_{j+1}$ followed by the inclusion $K_j\\hookrightarrow F_j$. The sequence is exact by the definitions of the kernels, each $F_j$ is projective by the lifting argument, and [F10] supplies the recursion. Thus every $A$-module has the projective-resolution data required by [F8] and [F9], and AC supplies their DC hypothesis.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "By [F1], around $x$ the scheme has a finite-type affine chart; [F2] and [F3], whose dependent-choice hypothesis is supplied by step 1.1, make its polynomial defining ideal $I$ finitely generated. Translate the coordinates to put $x$ at the origin, adding a dummy coordinate with relation $w_1=0$ if the chart has no polynomial coordinates. Apply [F4] to obtain the local map $A\\to B$ and its common completion $T=\\mathbb C\\llbracket w_1,\\ldots,w_n\\rrbracket/I\\mathbb C\\llbracket w_1,\\ldots,w_n\\rrbracket$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F5] under [A1], the completion maps $A\\to T$ and $B\\to T$ are faithfully flat. For a nonzero $a\\in A$, the ideal $(a)$ is a nonzero $A$-module. Faithfulness means $(a)\\otimes_A T\\ne0$: otherwise the nonexact sequence $0\\to(a)\\to0$ would become exact after tensoring. Flatness makes the multiplication map $(a)\\otimes_A T\\to A\\otimes_A T=T$ injective. If $a$ mapped to zero in $T$, this map would be zero, a contradiction. Hence $A\\to T$ is injective. If an element of $A$ maps to zero in $B$, its image in $T$ is zero as well, so injectivity of $A\\to T$ makes it zero. Therefore $A\\to B$ is injective.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "Let $U\\hookrightarrow V$ be any injection of $A$-modules and let $K$ be the kernel of $B\\otimes_A U\\to B\\otimes_A V$. Tensoring $0\\to K\\to B\\otimes_A U\\to B\\otimes_A V$ over $B$ with $T$ preserves its kernel because $T$ is flat over $B$ by [F5] under [A1]. By associativity, the resulting map is $T\\otimes_A U\\to T\\otimes_A V$, which is injective because $T$ is flat over $A$. Thus $K\\otimes_B T=0$; faithful flatness of $B\\to T$ gives $K=0$. The flatness criterion [F6] now makes $B$ flat over $A$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The map $A\\to B$ is local by [F4]. If $J\\subsetneq A$ is a proper ideal, then $J$ lies in the maximal ideal of the local ring $A$, whose image lies in the maximal ideal of $B$; hence $JB\\subsetneq B$. Combining this with the flatness in step 2.2 and [F7] shows that $A\\to B$ is faithfully flat.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "claim": "Let $M$ be any $A$-module and $m\\in M$ nonzero. Its annihilator $J=\\{a\\in A:am=0\\}$ is a proper ideal, and the map $A/J\\to M$ sending $1+J$ to $m$ is injective. Flatness from step 2.2 preserves this injection. The balanced tensor relations give inverse maps $(A/J)\\otimes_A B\\to B/JB$, $(a+J)\\otimes b\\mapsto ab+JB$, and $B/JB\\to(A/J)\\otimes_A B$, $b+JB\\mapsto(1+J)\\otimes b$. By [F7], $B/JB\\ne0$, so $m\\otimes1\\ne0$. Therefore $M\\to M\\otimes_A B$ is injective for every $M$.",
+          "step": "3.2",
+          "inputs": [
+            "F7",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "Put $C=B/A$, which is defined because step 2.1 proves $A\\hookrightarrow B$. For any left $A$-module $M$, apply [F8] under the DC and resolution construction in step 1.1 to the short exact sequence of right $A$-modules $0\\to A\\to B\\to C\\to0$. The long exact sequence gives $\\operatorname{Tor}_1^A(A,M)\\to\\operatorname{Tor}_1^A(B,M)\\to\\operatorname{Tor}_1^A(C,M)\\to A\\otimes_A M\\to B\\otimes_A M$. The first two Tor groups vanish: $A$ is free over itself and $B$ is flat by step 2.2. The final map is injective by step 3.2, so exactness forces $\\operatorname{Tor}_1^A(C,M)=0$ for every $M$. By [F9], $C=B/A$ is a flat $A$-module.",
+          "step": "4.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.2"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If a chart has no coordinates, step 1.2 adds a dummy coordinate w_1=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero defining ideal is allowed by the local completion lemma in step 1.2; the subsequent proof applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-coordinate chart is included in steps 1.2 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A zero-dimensional closed point, including I=(w_1,…,w_n), is covered by the same-ideal argument in steps 1.2 and 2.1–4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Completion at every k≥1 and the Tor sequence endpoints are handled in steps 2.1–2.2 and 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit; step 1.1 derives DC and constructs projective resolutions, and steps 2.1–2.2 use the completion hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "scope": "Authoring check of the complete conditional argument for thm-qftx-gaga-analytic-local-ring-flatness; independent approval is not claimed.",
+        "findings": [
+          "Checked the finite-type chart, common completion, completion-based flatness descent, proper-ideal criterion, tensor-unit injection, and Tor argument for B/A. AC and the derived DC/projective-resolution inputs are explicit; conclusions remain local and scheme-theoretic."
+        ],
+        "residual_risk": "No unresolved prerequisite gap identified after inspecting current supplier statements and proofs. Independent review and later workflow gates remain outstanding.",
+        "status": "authoring_complete"
+      },
+      "routine_steps": []
+    },
+    "ex-qftx-gaga-analytic-equal-completions": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multiplicative-subset-and-localisation",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. A subset $S\\subseteq R$ is **multiplicative** if $1\\in S$ and $s,t\\in S$ implies $st\\in S$.\n\nOn $R\\times S$, define\n$$ (r,s)\\sim(r',s')\\quad\\Longleftrightarrow\\quad u(rs'-r's)=0\\text{ for some }u\\in S. $$\nThe **localisation** of $R$ at $S$, denoted $S^{-1}R$, is the set of equivalence classes for this relation. The class of $(r,s)$ is written $r/s$, and its arithmetic is\n$$ \\frac r s+\\frac{r'}{s'}=\\frac{rs'+r's}{ss'},\\qquad \\frac r s\\frac{r'}{s'}=\\frac{rr'}{ss'}. $$\nThe **localisation map** is the ring homomorphism\n$$ \\lambda_S:R\\longrightarrow S^{-1}R,\\qquad r\\longmapsto r/1. $$\nEvery $s\\in S$ maps to a unit, with $(s/1)^{-1}=1/s$. The construction permits $0\\in S$; in that case the localisation is the zero ring.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-gaga-analytic-local-ring-flatness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a scheme of finite type over $\\mathbb C$\nand let $x\\in X$ be a closed point with residue field $\\mathbb C$. Choose an\naffine neighborhood of $x$ presented as (adding a dummy coordinate if needed)\n$\\operatorname{Spec}(\\mathbb C[w_1,\\ldots,w_n]/I)$, with $n\\ge1$, $I$ a\nfinitely generated polynomial ideal contained in $(w_1,\\ldots,w_n)$, and $x$\nthe origin. Write\n$A=(\\mathbb C[w_1,\\ldots,w_n]_{(w_1,\\ldots,w_n)})/I\\mathbb C[w_1,\\ldots,w_n]_{(w_1,\\ldots,w_n)}$.\nOn this chart, define the analytic local ring by extending the same ideal to\nholomorphic germs,\n$B=\\mathbb C\\{w_1,\\ldots,w_n\\}/I\\mathbb C\\{w_1,\\ldots,w_n\\}$; this quotient\nretains the given scheme structure, including nilpotents. For a local ring $R$\nwith maximal ideal $\\mathfrak m_R$, let\n$\\widehat R=\\varprojlim_{k\\ge1}R/\\mathfrak m_R^k$.\n\nThe canonical local homomorphism $A\\to B$, which sends each polynomial class\nto the same holomorphic germ, is injective and faithfully flat.\nIts induced map $\\widehat A\\to\\widehat B$ is an isomorphism, with both\ncompletions canonically identified with\n$\\mathbb C\\llbracket w_1,\\ldots,w_n\\rrbracket/I\\mathbb C\\llbracket w_1,\\ldots,w_n\\rrbracket$. For every\n$A$-module $M$, the map $M\\to M\\otimes_A B$ is injective, and the quotient\n$B/A$ is a flat $A$-module. These are local-ring conclusions; no relative\ndirect-image comparison is asserted.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-power-series-define-holomorphic-functions-in-several-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$, a polyradius $r$, a real $M\\ge0$ and\ncoefficients $c:\\mathbb N^m\\to\\mathbb C$ with\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}\\qquad\\text{for every multi-index }\\alpha.$$\n\nThen:\n\n1. for every $\\theta$ with $0<\\theta<1$ the series\n   $\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n   $\\overline\\Delta_{\\theta r}(a)$, so its sum $g$ is defined on\n   $\\Delta_r(a)$;\n2. $g$ is holomorphic on $\\Delta_r(a)$, with\n   $$Dg(z)h=\\sum_{k<m}b_k(z)h_k,\\qquad b_k(z)=\\sum_{\\alpha}\\alpha_k\\,c_\\alpha(z-a)^{\\alpha-e_k},$$\n   the $k$th series running over the multi-indices with $\\alpha_k\\ge1$ and\n   converging absolutely on $\\Delta_r(a)$; equivalently\n   $\\partial_{z_k}g=b_k$;\n3. for every $\\theta$ with $0<\\theta<1$ the derived coefficients\n   $\\alpha_kc_\\alpha$, re-indexed as a power series, obey a bound of the same\n   shape on the polyradius $\\theta r$, so the differentiation may be iterated;\n   and every iterated complex partial derivative\n   $\\partial^\\beta_zg:=\\partial_{z_0}^{\\beta_0}\\cdots\\partial_{z_{m-1}}^{\\beta_{m-1}}g$\n   exists on $\\Delta_r(a)$ with\n   $$\\partial^\\beta_zg(a)=\\beta!\\,c_\\beta .$$\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Apply [F2] to $X=\\operatorname{Spec}\\mathbb C[t]$ and its closed point $t=0$. It gives faithful flatness of $A\\to B$ and identifies both maximal-ideal completions with $\\mathbb C\\llbracket t\\rrbracket$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "The ratio of successive absolute terms of $e(t)$ is $|t|/(n+1)$, which tends to zero; hence its series converges absolutely on every disk and defines a holomorphic germ by [F4].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Suppose $e(t)=p(t)/q(t)$ in $A$, with $q(0)\\ne0$. Then $q(t)e(t)=p(t)$ as germs and evaluation at $0$ gives $p(0)=q(0)\\ne0$. Write $q(t)=\\sum_{j=0}^{d}q_jt^j$ with $q_d\\ne0$, and let $m=\\deg p$. Both $q e$ and $p$ have convergent power series on a disk about $0$: $e$ converges there by step 1.2, and multiplication by the polynomial $q$ preserves convergence. For every integer $N>\\max(d,m)$, the coefficient of $t^N$ in $p$ is zero, so [F3] gives $\\sum_{j=0}^{d}q_j/(N-j)!=0$. Multiplying by $N!$ yields $Q(N)=0$, where $Q(z)=\\sum_{j=0}^{d}q_j z(z-1)\\cdots(z-j+1)$. This is a nonzero polynomial of degree $d$ with leading coefficient $q_d$, so it cannot vanish at all sufficiently large integers. This contradiction proves that $e(t)$ is not in the image of $A$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Step 1.1 establishes faithful flatness and equality of completions, while step 2.1 establishes failure of surjectivity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed one-variable example has no empty object or empty family parameter."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A hypothetical representation has p(0)=q(0)≠0, ruling out a zero numerator in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coefficient argument includes degree-zero p or q; for d=0, Q is the nonzero constant q_0 in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant nonzero denominator is precisely the d=0 case handled in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For every N>max(d,m), all factorial indices N−j are nonnegative and the contradiction in step 2.1 applies."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The assumed AC is passed to the local theorem in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        }
+      ],
+      "risk_review": {
+        "scope": "Authoring check of the complete conditional argument for ex-qftx-gaga-analytic-equal-completions; independent approval is not claimed.",
+        "findings": [
+          "Checked convergence and coefficient comparison for every rational representative with denominator nonzero at the origin, including constant denominators. No unresolved local mathematical obligation identified."
+        ],
+        "residual_risk": "No unresolved prerequisite gap identified after inspecting current supplier statements and proofs. Independent review and later workflow gates remain outstanding.",
+        "status": "authoring_complete"
+      },
+      "routine_steps": []
+    },
+    "ex-qftx-gaga-analytic-nonreduced-quotient": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-gaga-analytic-local-ring-flatness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a scheme of finite type over $\\mathbb C$\nand let $x\\in X$ be a closed point with residue field $\\mathbb C$. Choose an\naffine neighborhood of $x$ presented as (adding a dummy coordinate if needed)\n$\\operatorname{Spec}(\\mathbb C[w_1,\\ldots,w_n]/I)$, with $n\\ge1$, $I$ a\nfinitely generated polynomial ideal contained in $(w_1,\\ldots,w_n)$, and $x$\nthe origin. Write\n$A=(\\mathbb C[w_1,\\ldots,w_n]_{(w_1,\\ldots,w_n)})/I\\mathbb C[w_1,\\ldots,w_n]_{(w_1,\\ldots,w_n)}$.\nOn this chart, define the analytic local ring by extending the same ideal to\nholomorphic germs,\n$B=\\mathbb C\\{w_1,\\ldots,w_n\\}/I\\mathbb C\\{w_1,\\ldots,w_n\\}$; this quotient\nretains the given scheme structure, including nilpotents. For a local ring $R$\nwith maximal ideal $\\mathfrak m_R$, let\n$\\widehat R=\\varprojlim_{k\\ge1}R/\\mathfrak m_R^k$.\n\nThe canonical local homomorphism $A\\to B$, which sends each polynomial class\nto the same holomorphic germ, is injective and faithfully flat.\nIts induced map $\\widehat A\\to\\widehat B$ is an isomorphism, with both\ncompletions canonically identified with\n$\\mathbb C\\llbracket w_1,\\ldots,w_n\\rrbracket/I\\mathbb C\\llbracket w_1,\\ldots,w_n\\rrbracket$. For every\n$A$-module $M$, the map $M\\to M\\otimes_A B$ is injective, and the quotient\n$B/A$ is a flat $A$-module. These are local-ring conclusions; no relative\ndirect-image comparison is asserted.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariable-power-series",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$ and read $\\mathbb C^m$ through\n[[rem-complex-euclidean-space-dictionary]]. A **multi-index** is\n$\\alpha\\in\\mathbb N^m$, with $|\\alpha|=\\sum_{k<m}\\alpha_k$ and\n$\\alpha!=\\prod_{k<m}\\alpha_k!$ as in\n[[def-ck-and-multi-index-notation-in-several-variables]], every index running\nover $k<m$ from $0$. For $w\\in\\mathbb C^m$ the **complex monomial** is\n\n$$w^\\alpha:=\\prod_{k<m}w_k^{\\alpha_k},$$\n\na finite product in the multiplicative commutative monoid of $\\mathbb C$\n([[def-monoid-finite-product]], [[thm-complex-numbers-form-a-field]]) of natural powers\nin $\\mathbb C$ ([[def-complex-integer-powers]]); for the zero multi-index\n$w^0=1$.\n\n**Enumerating the index set.** $\\mathbb N$ is countable and\n[[lem-finite-powers-of-countable-sets-are-countable]] makes $\\mathbb N^m$ at\nmost countable; it is infinite, so there is a bijection\n$\\sigma:\\mathbb N\\to\\mathbb N^m$ ([[def-injection-surjection-bijection]],\n[[def-countable]]).\n\nLet $c:\\mathbb N^m\\to\\mathbb C$ and $a,z\\in\\mathbb C^m$. The **multi-indexed\npower series** $\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ **converges absolutely at $z$**\nwhen the complex series $\\sum_n c_{\\sigma(n)}(z-a)^{\\sigma(n)}$ converges\nabsolutely ([[def-complex-series-power-series-and-absolute-convergence]]) for one\nbijection $\\sigma$, equivalently for every one. The two conditions agree, and the\nsums agree, because for bijections $\\sigma,\\tau$ the series along $\\tau$ is a\nrearrangement of the series along $\\sigma$: applying\n[[thm-absolute-convergence-of-complex-series]] to the nonnegative series of\nmoduli transfers convergence, and applying it again to the series itself\ntransfers the sum. That common value is written $\\sum_\\alpha c_\\alpha(z-a)^\\alpha$\nand no other notion of unordered sum is introduced.\n\n**Box partial sums.** For $N\\in\\mathbb N$ put\n$B_N:=\\{\\alpha\\in\\mathbb N^m:\\alpha_k\\le N\\ \\text{for every }k<m\\}$, a finite\nset, and let $S_N(z):=\\sum_{\\alpha\\in B_N}c_\\alpha(z-a)^\\alpha$ be the\ncorresponding finite sum ([[def-finite-sum-in-a-commutative-monoid]]). If the\nseries converges absolutely at $z$ with sum $S$, then $S_N(z)\\to S$. Given\n$\\varepsilon>0$, absolute convergence supplies $n_0$ with\n$\\sum_{n\\ge n_0}|c_{\\sigma(n)}(z-a)^{\\sigma(n)}|<\\varepsilon$ and\n$\\bigl|\\sum_{n<n_0}c_{\\sigma(n)}(z-a)^{\\sigma(n)}-S\\bigr|\\le\\varepsilon$; taking\n$N$ large enough that $B_N$ contains $\\sigma(0),\\dots,\\sigma(n_0-1)$, every index\nof $B_N$ outside that finite list is $\\sigma(n)$ for some $n\\ge n_0$, so\n$|S_N(z)-S|\\le2\\varepsilon$. The same argument bounds $|S_N(z)|$ and the tail of\nthe series by the corresponding tails of the series of moduli.\n\nThe series **converges absolutely and uniformly on a set $S\\subseteq\\mathbb C^m$**\nwhen there are reals $M_\\alpha\\ge0$ with\n$|c_\\alpha(z-a)^\\alpha|\\le M_\\alpha$ for every $z\\in S$ and every $\\alpha$, and\nwith $\\sum_n M_{\\sigma(n)}$ convergent. By\n[[thm-weierstrass-m-test-for-complex-function-series]] the partial sums along\n$\\sigma$ then converge uniformly on $S$\n([[def-uniform-convergence-of-complex-valued-functions]]) and the series converges\nabsolutely at every point of $S$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, $a\\in\\mathbb C^m$ and let $r$ be a polyradius. Suppose\n$c,c':\\mathbb N^m\\to\\mathbb C$ both satisfy a bound\n$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}$ and\n$|c'_\\alpha|\\le M'\\prod_{k<m}r_k^{-\\alpha_k}$, and suppose\n\n$$\\sum_\\alpha c_\\alpha(z-a)^\\alpha=\\sum_\\alpha c'_\\alpha(z-a)^\\alpha \\qquad\\text{for every }z\\in\\Delta_r(a).$$\n\nThen $c_\\alpha=c'_\\alpha$ for every multi-index $\\alpha$. In particular a\nfunction has at most one such power-series representation about a given centre,\nand its coefficients are $\\partial^\\alpha_zf(a)/\\alpha!$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Apply [F1] to $X$ and $p$. The map $A\\to B$ is faithfully flat, and both completions identify with $T=\\mathbb C\\llbracket x,y\\rrbracket/(x^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "The class of $x$ in $T$ is nonzero: its coefficient of $x^1y^0$ is $1$, whereas every element of the ideal $x^2\\mathbb C\\llbracket x,y\\rrbracket$ has coefficient $0$ there by [F2]. If the class of $x$ were zero in either $A$ or $B$, its image under that ring's completion map would be zero in $T$, contradicting this coefficient.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By the quotient definitions in the example, $x^2=0$ in $A$ and $B$. Step 1.2 proves that $x$ is nonzero in both, so it is a nonzero nilpotent class preserved by the faithfully flat comparison.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed example has the nonempty principal defining ideal (x^2); no empty family is a parameter."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 proves that the class of x is nonzero in the common completion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coefficient of x^1y^0 is exactly 1, the witness in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The quotient is intentionally nonreduced; step 2.1 verifies x≠0 and x^2=0 in each local ring."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The witness exponent 1 lies below the x-degree threshold 2 for every element of (x^2), as used in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit AC hypothesis is used to apply the theorem in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        }
+      ],
+      "risk_review": {
+        "scope": "Authoring check of the complete conditional argument for ex-qftx-gaga-analytic-nonreduced-quotient; independent approval is not claimed.",
+        "findings": [
+          "Checked nonvanishing by the formal x^1y^0 coefficient and x^2=0 from the quotient. The same ideal is retained in both completions; no radicalization occurs."
+        ],
+        "residual_risk": "No unresolved prerequisite gap identified after inspecting current supplier statements and proofs. Independent review and later workflow gates remain outstanding.",
+        "status": "authoring_complete"
+      },
+      "routine_steps": []
+    }
+  }
+}

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-huffman-coding-is-prefix-optimal.json
+  precheck: pass
 id: thm-huffman-coding-is-prefix-optimal
 kind: theorem
 title: "The deterministic Huffman code is prefix-optimal"
@@ -11,8 +14,6 @@ justified_by: []
 proof_strategy: induction
 strategy: "Establish an optimal finite prefix tree, move the two least weights to a deepest sibling pair by exchanges, contract that pair, and induct on the alphabet size."
 axiom_use: "No choice axiom is used; optimality reduces to a finite set of integer length vectors and every tie is deterministic."
-verification:
-  precheck: pass
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -49,7 +50,7 @@ For every finite full-support source, the algorithm [[alg-binary-huffman-coding]
 
 ## Proof
 
-**Proof technique:** Induct on list size $m\ge2$: for every finite list of at least two positive weights with distinct serial numbers and total weight one, every sequence of minimum-weight merges, including every tie resolution, gives an optimal prefix code. The base case is size two; the one-symbol source is handled separately in step 1.1. A reduced list retains positive weights, total weight one, and distinct serials because each parent receives a fresh serial. The original source and each reduced active list are instances of this claim.
+**Proof technique:** Induct on list size at least two: for every finite list of at least two positive weights with distinct serial numbers and total weight one, every sequence of minimum-weight merges, including every tie resolution, gives an optimal prefix code. The base case is size two; the one-symbol source is handled separately in step 1.1. A reduced list retains positive weights, total weight one, and distinct serials because each parent receives a fresh serial. The original source and each reduced active list are instances of this claim.
 
 1.1 If $m=1$, the algorithm returns $0$ by [F7]. Every codeword is nonempty by [F3], so every one-symbol code has expected length at least $1$; the returned code is prefix-free by [F2] and attains that value. [F2, F3, F7, given]
 

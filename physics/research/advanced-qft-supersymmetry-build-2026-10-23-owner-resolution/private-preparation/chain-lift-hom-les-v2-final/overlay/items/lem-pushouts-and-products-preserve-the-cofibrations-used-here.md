@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-pushouts-and-products-preserve-the-cofibrations-used-here.md

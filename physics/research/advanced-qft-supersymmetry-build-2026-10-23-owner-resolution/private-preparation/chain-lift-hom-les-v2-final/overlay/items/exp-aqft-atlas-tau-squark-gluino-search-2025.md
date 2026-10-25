@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/exp-aqft-atlas-tau-squark-gluino-search-2025.md

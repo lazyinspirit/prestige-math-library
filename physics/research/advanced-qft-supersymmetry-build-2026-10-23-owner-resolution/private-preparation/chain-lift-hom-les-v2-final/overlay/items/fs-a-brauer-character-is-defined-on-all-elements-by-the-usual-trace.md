@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-brauer-character-is-defined-on-all-elements-by-the-usual-trace.md

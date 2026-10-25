@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-two-sided-projective-khovanov-seidel-bimodule-functors.json
+  precheck: pass
 id: def-two-sided-projective-khovanov-seidel-bimodule-functors
 kind: definition
-title: "The two-sided projective bimodules U_i and their tensor functors"
+title: "The two-sided projective bimodules $U_i$ and their tensor functors"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -18,9 +21,7 @@ sources:
   references:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2b, printed pp. 11-12"
       url: "https://arxiv.org/pdf/math/0006056"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Definition
@@ -57,7 +58,7 @@ projectives are proved below.
 **Convention.** The index range is $1\le i\le m$ as in the source; the case
 $i=0$ is excluded, so the neighboring vertices are $i-1,i+1$ when $i<m$, and only $m-1$ when $i=m$. Internal shifts
 on $U_i$ are those of $A_m\text{-mod}$ in each variable, and the homological
-shift $[1]$ of [[def-bounded-projective-homotopy-category-for-a-m]] never acts
+shift $[1]$ of [[def-bounded-projective-homotopy-category-for-a-m|The bounded projective homotopy category $C_m$ and the two shifts]] never acts
 on $U_i$ here.
 
 ## Facts & Assumptions

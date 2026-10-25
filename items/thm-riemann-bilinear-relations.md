@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-riemann-bilinear-relations.json
+  precheck: pass
 id: thm-riemann-bilinear-relations
 kind: theorem
 title: The Riemann bilinear relations and the period lattice
@@ -38,13 +41,7 @@ sources:
     - title: "Otto Forster, Lectures on Riemann Surfaces, GTM 81, 4th corrected printing"
       url: "https://ebooks.karbust.me/Mathematics/Otto%20Forster%20-%20Lectures%20on%20Riemann%20Surfaces%20%281981%29%20%5B978-1-4612-5961-9%5D.pdf"
       locator: "Ch. 2, Theorem 21.4 and full proof (a)–(c), printed pp. 168–170: an alternative proof that the period subgroup is a lattice, using a local Jacobi map, Abel's theorem, the residue theorem, and a real-linear spanning argument."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Statement
@@ -181,3 +178,27 @@ identifies it with $\Pi$ as defined here. The square-torus check is
 $X=\mathbb C/(\mathbb Z+i\mathbb Z)$, $a$ horizontal, $b$ vertical, and
 $\omega=dz$: $P(a,dz)=1$, the normalized period matrix is $(i)$, and
 $\operatorname{Im}(i)=1>0$.
+
+## Remarks
+
+The following square displays the period map in normalized coordinates. Let
+$\kappa(\sum_i(m_i a_i+n_i b_i))=(m,n)$ and let
+$c(\xi)=(\xi(\omega_1),\ldots,\xi(\omega_g))$.
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=huge, cells={nodes={font=\Large}}, every label/.append style={font=\large}]
+H_1(X;\mathbb Z) \arrow[r, "e"] \arrow[d, "\kappa"', "\cong"] & \Omega(X)^* \arrow[d, "c", "\cong"'] \\
+\mathbb Z^g\oplus\mathbb Z^g \arrow[r, "{(m,n)\mapsto m+\Pi^{\mathsf T}n}"'] & \mathbb C^g
+\end{tikzcd}
+```
+
+Indeed, $c(e(a_i))=(\delta_{ij})_{j=1}^g$ and
+$c(e(b_i))=(\Pi_{ij})_{j=1}^g$, regarded as column vectors. Thus the
+$b_i$-cycle gives the transpose of row $i$ of $\Pi$; the bottom arrow uses
+$\Pi^{\mathsf T}$ before applying the symmetry proved in step 4.1.
+Step 6.1 then identifies the image with
+$\mathbb Z^g+\Pi\mathbb Z^g$. The symplectic sign convention is
+$\langle a_i,b_j\rangle_X=\delta_{ij}$ and
+$\langle b_i,a_j\rangle_X=-\delta_{ij}$, as in [F1]. For $g=0$ the same
+square consists of zero groups and vector spaces. The proof above is
+independent of this illustration.

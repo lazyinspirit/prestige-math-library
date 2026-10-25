@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-subfield-lattice-of-the-field-of-order-two-to-the-twelve.md

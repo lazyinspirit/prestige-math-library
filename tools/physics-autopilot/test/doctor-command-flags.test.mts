@@ -20,6 +20,12 @@ test('real physics finalizer exposes only its invoked native CLI flags', () => {
   for (const flag of ['--validated', '--final', '--unknown']) assert.equal(defines(sources, flag), false, flag);
 });
 
+test('native scope tool declares its prerequisite lifecycle binding flag', () => {
+  const sources = commandFlagSources(new URL('../../physics-support/batch-scope-review.mjs', import.meta.url).pathname);
+  assert.ok(defines(sources, '--prerequisite-lifecycle-sha256'));
+  assert.equal(defines(sources, '--prerequisite-lifecycle'), false);
+});
+
 test('delegation excludes other exports, uncalled imports and calls inside helpers', t => {
   const dir = mkdtempSync(join(tmpdir(), 'physics-doctor-flags-'));
   t.after(() => rmSync(dir, { recursive: true, force: true }));

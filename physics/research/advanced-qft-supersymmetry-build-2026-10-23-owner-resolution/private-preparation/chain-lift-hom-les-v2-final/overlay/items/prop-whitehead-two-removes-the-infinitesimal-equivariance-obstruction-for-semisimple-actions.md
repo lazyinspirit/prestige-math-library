@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-whitehead-two-removes-the-infinitesimal-equivariance-obstruction-for-semisimple-actions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-dual-representation-has-x-lambda-v-equal-lambda-x-v-with-no-minus-sign.md

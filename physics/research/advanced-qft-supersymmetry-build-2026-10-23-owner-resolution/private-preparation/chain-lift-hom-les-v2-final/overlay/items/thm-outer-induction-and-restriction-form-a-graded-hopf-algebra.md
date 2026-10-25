@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-outer-induction-and-restriction-form-a-graded-hopf-algebra.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-dyadic-partition-choice-does-not-change-the-lp-square-function-space.md

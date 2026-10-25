@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-hatted-five-cycle-and-its-complement-have-the-erdos-hajnal-property.md

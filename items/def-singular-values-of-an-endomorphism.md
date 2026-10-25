@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-singular-values-of-an-endomorphism.json
+  precheck: n/a
 id: def-singular-values-of-an-endomorphism
 kind: definition
-title: "The singular values of a linear map as the eigenvalues of the positive square root of T^*T"
+title: "The singular values of a linear map as the eigenvalues of the positive square root of $T^*T$"
 status: published
 origin: session
 provenance:
@@ -10,10 +13,6 @@ provenance:
 deps: [thm-non-negative-square-root-exists-and-is-unique, prop-adjoint-algebra]
 aliases: []
 landmark: false
-verification:
-  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-singular-values-of-an-endomorphism.json
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:

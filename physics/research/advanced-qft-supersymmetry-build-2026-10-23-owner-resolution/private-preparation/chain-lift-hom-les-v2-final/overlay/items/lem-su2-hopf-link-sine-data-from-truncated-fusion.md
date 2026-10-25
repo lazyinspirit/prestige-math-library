@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-su2-hopf-link-sine-data-from-truncated-fusion.md

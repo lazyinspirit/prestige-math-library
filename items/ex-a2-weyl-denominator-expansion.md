@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a2-weyl-denominator-expansion.json
+  precheck: pass
 id: ex-a2-weyl-denominator-expansion
 kind: example
 title: The A2 Weyl denominator expansion
@@ -21,12 +24,7 @@ sources:
     - title: "A. W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Ch. V §6, printed p. 320 (Weyl denominator formula and the finite expansion for a fixed root system)"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Example
@@ -88,4 +86,42 @@ $A(\nu)=\sum_{w\in W}(-1)^{\ell(w)}e^{w\nu}$
 
 1.2 The left side $e^{\rho}(1-e^{-\alpha_1})(1-e^{-\alpha_2})(1-e^{-\alpha_1-\alpha_2})$ expands over the eight subsets $S$ of $\Phi^+$ as $\sum_S(-1)^{|S|}e^{\rho-\sum_{\alpha\in S}\alpha}$; the exponents are $\rho$ for $S=\emptyset$, $\alpha_2$ for $S=\{\alpha_1\}$, $\alpha_1$ for $S=\{\alpha_2\}$, $0$ for $S=\{\alpha_1+\alpha_2\}$ and for $S=\{\alpha_1,\alpha_2\}$, $-\alpha_1$ for $S=\{\alpha_1,\alpha_1+\alpha_2\}$, $-\alpha_2$ for $S=\{\alpha_2,\alpha_1+\alpha_2\}$ and $-\rho$ for $S=\Phi^+$, with the signs $+,-,-,-,+,+,+,-$ in this order. [F1, algebra]
 
-2.1 The two unit contributions in step 1.2, namely $-e^0$ from $S=\{\alpha_1+\alpha_2\}$ and $+e^0$ from $S=\{\alpha_1,\alpha_2\}$, cancel, so the left side equals $e^{\rho}-e^{\alpha_2}-e^{\alpha_1}+e^{-\alpha_1}+e^{-\alpha_2}-e^{-\rho}$, the same six monomials with the same signs as the right side computed in step 1.1; hence both sides of the denominator identity agree term by term in $\mathbb Z[P]$. [F3, step 1.1, step 1.2, algebra] ∎ 
+2.1 The two unit contributions in step 1.2, namely $-e^0$ from $S=\{\alpha_1+\alpha_2\}$ and $+e^0$ from $S=\{\alpha_1,\alpha_2\}$, cancel, so the left side equals $e^{\rho}-e^{\alpha_2}-e^{\alpha_1}+e^{-\alpha_1}+e^{-\alpha_2}-e^{-\rho}$, the same six monomials with the same signs as the right side computed in step 1.1; hence both sides of the denominator identity agree term by term in $\mathbb Z[P]$. [F3, step 1.1, step 1.2, algebra] ∎
+
+## Remarks
+
+The six weights in the orbit of $\rho$ form a regular hexagon in the real
+root plane. In the picture, take $\alpha_1=(1,0)$ and
+$\alpha_2=(-\tfrac12,\tfrac{\sqrt3}{2})$; the labels show each weight
+$w\rho$ and its contribution $(-1)^{\ell(w)}e^{w\rho}$ to the alternant.
+The hexagon edges only outline the orbit, and do not denote group actions.
+
+```tikz
+\begin{tikzpicture}[scale=2.8, every node/.style={font=\large}]
+\coordinate (r) at (0.5,0.8660254);
+\coordinate (a) at (1,0);
+\coordinate (b) at (-0.5,0.8660254);
+\coordinate (ma) at (-1,0);
+\coordinate (mb) at (0.5,-0.8660254);
+\coordinate (mr) at (-0.5,-0.8660254);
+\draw[gray] (r)--(a)--(mb)--(mr)--(ma)--(b)--(r);
+\fill (r) circle (1.5pt);
+\fill (a) circle (1.5pt);
+\fill (b) circle (1.5pt);
+\fill (ma) circle (1.5pt);
+\fill (mb) circle (1.5pt);
+\fill (mr) circle (1.5pt);
+\fill (0,0) circle (1pt);
+\node[below] at (0,0) {$0$};
+\node[above,align=center] at (r) {$\rho$\\ $1:\quad +e^{\rho}$};
+\node[right,align=center] at (a) {$\alpha_1$\\ $s_2:\quad -e^{\alpha_1}$};
+\node[above,align=center] at (b) {$\alpha_2$\\ $s_1:\quad -e^{\alpha_2}$};
+\node[left,align=center] at (ma) {$-\alpha_1$\\ $s_1s_2:\quad +e^{-\alpha_1}$};
+\node[below,align=center] at (mb) {$-\alpha_2$\\ $s_2s_1:\quad +e^{-\alpha_2}$};
+\node[below,align=center] at (mr) {$-\rho$\\ $w_0:\quad -e^{-\rho}$};
+\end{tikzpicture}
+```
+
+The two subset contributions at weight $0$ cancel as in step 2.1, so no
+central monomial remains. The verification above is independent of the picture.
+

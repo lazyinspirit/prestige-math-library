@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-complex-semisimple-lie-algebras-are-classified-by-finite-disjoint-unions-of-dynkin-diagrams.json
+  precheck: pass
 id: cor-complex-semisimple-lie-algebras-are-classified-by-finite-disjoint-unions-of-dynkin-diagrams
 kind: corollary
 title: Semisimple algebras and disjoint unions of diagrams
@@ -19,8 +22,7 @@ sources:
       locator: "Chapter II, §11, consequences of the classification, printed pp. 202-203"
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
+
 ---
 
 ## Statement
@@ -54,3 +56,25 @@ ideals.
 2.1 By [L1] write $\mathfrak g=\mathfrak g_1\oplus\cdots\oplus\mathfrak g_m$ as a direct sum of simple ideals. Each $\mathfrak g_j$ is a finite-dimensional complex simple Lie algebra, so by [L2] it has a connected finite-type Dynkin diagram, well defined up to isomorphism, and step 1.1 makes the resulting multiset depend only on the isomorphism class of $\mathfrak g$. [L1, L2, step 1.1, algebra]
 
 3.1 Steps 1.2 and 2.1 give inverse assignments between isomorphism classes of finite-dimensional complex semisimple Lie algebras and finite multisets of connected finite-type Dynkin diagrams, which is the asserted classification with multiplicity. [step 1.2, step 2.1, A1, algebra] ∎
+
+
+## Remarks
+
+The following example makes multiplicity visible. Write $\mathfrak g_{A_r}$ for a complex simple Lie algebra of type $A_r$, as supplied by [L2]. The two isolated vertices are two distinct connected components, both of type $A_1$; the remaining component is of type $A_2$.
+
+```tikz
+\begin{tikzpicture}
+\node at (2.2,1.8) {$[\mathfrak g_{A_1}\oplus\mathfrak g_{A_1}\oplus\mathfrak g_{A_2}]$};
+\node at (2.2,0.9) {$\updownarrow$};
+\node[circle,draw,inner sep=2.5pt] (a) at (0,0) {};
+\node[circle,draw,inner sep=2.5pt] (b) at (1.8,0) {};
+\node[circle,draw,inner sep=2.5pt] (c) at (3.6,0) {};
+\node[circle,draw,inner sep=2.5pt] (d) at (4.4,0) {};
+\draw (c) -- (d);
+\node at (0,-0.5) {$A_1$};
+\node at (1.8,-0.5) {$A_1$};
+\node at (4,-0.5) {$A_2$};
+\end{tikzpicture}
+```
+
+Brackets denote the Lie algebra isomorphism class, and the vertical symbol denotes the classification correspondence, not a Lie algebra map. Permuting components does not change the class, but deleting either $A_1$ component changes the multiset. The diagram illustrates steps 1.1–3.1; the proof is independent of it.

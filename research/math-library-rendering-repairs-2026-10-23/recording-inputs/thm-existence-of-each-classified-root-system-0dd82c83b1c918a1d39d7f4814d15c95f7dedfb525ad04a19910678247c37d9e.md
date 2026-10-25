@@ -1,0 +1,154 @@
+---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-existence-of-each-classified-root-system.json
+  precheck: pass
+id: thm-existence-of-each-classified-root-system
+kind: theorem
+title: Existence of each classified root system
+status: published
+origin: pipeline
+pipeline_run: phase-2-remaining-27
+deps: [thm-classification-of-irreducible-reduced-crystallographic-root-systems, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, def-reduced-crystallographic-euclidean-root-system, def-reducible-and-irreducible-root-system]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter II"
+      url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
+      locator: "Chapter II, §7, Proposition 2.87 and (2.85)-(2.89), printed pp. 181-184"
+    - title: "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I, Lectures 19-24"
+      url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
+      locator: "Lecture 23, Definitions 23.8, 23.11, 23.14, 23.15 and Exercises 23.9-23.10, 23.12-23.13"
+landmark: false
+proof_strategy: direct
+
+---
+
+## Statement
+
+Every type of the classification list of
+[[thm-classification-of-irreducible-reduced-crystallographic-root-systems]]
+is realized by a reduced crystallographic Euclidean root system with the
+indicated Dynkin diagram: for every $n\ge1$ there are root systems
+$A_n,B_n\ (n\ge2),C_n\ (n\ge3),D_n\ (n\ge4)$ in Euclidean space, and there
+are root systems $E_6,E_7,E_8,F_4,G_2$ whose Dynkin diagrams are the diagrams
+of the classification list.
+
+## Facts & Assumptions
+
+**Given:** The standard Euclidean spaces $\mathbb R^n$ with their standard inner products, unit coordinate vectors $e_1,\dots,e_n$, and the classification list with its diagram conventions.
+
+[L1] A reduced crystallographic root system is a finite spanning set $\Phi$ of nonzero vectors with $s_\alpha(\Phi)=\Phi$, integral Cartan integers $2(\beta,\alpha)/(\alpha,\alpha)$, and $\mathbb R\alpha\cap\Phi=\{\pm\alpha\}$ ([[def-reduced-crystallographic-euclidean-root-system]]). For a positive system, its simple roots form a basis and every root has integral coordinates of one sign in that basis ([[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]); their Cartan matrix determines the Dynkin diagram ([[def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]]).
+
+[L2] Every nonempty irreducible root system has one of the listed diagram types, and each diagram type determines its isomorphism class ([[thm-classification-of-irreducible-reduced-crystallographic-root-systems]]). In particular, isomorphic root systems have the same number of roots.
+
+[L3] Reducibility means a partition into two nonempty mutually orthogonal root subsets ([[def-reducible-and-irreducible-root-system]]). Thus roots joined by a chain of nonzero inner products must belong to the same part of any such partition.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 (Type $A_n$.) In $E=\{x\in\mathbb R^{n+1}:\sum_ix_i=0\}$ put $\Phi=\{e_i-e_j:i\ne j\}$; it is finite, nonempty, spans $E$, and contains no zero vector. For $\alpha=e_i-e_j$ the reflection $s_\alpha$ sends $e_i$ to $e_j$, $e_j$ to $e_i$ and fixes every other coordinate vector, so it permutes $\Phi$ and $\Phi\cap\mathbb R\alpha=\{\pm\alpha\}$; the Cartan integers are $2(e_k-e_l,e_i-e_j)/2\in\{0,\pm1,\pm2\}$. For the regular functional $x\mapsto(x,(n+1,n,\dots,1))$, the positive roots are $e_i-e_j$ with $i<j$; each is $\sum_{k=i}^{j-1}(e_k-e_{k+1})$, and only the adjacent differences are indecomposable. Thus the simple roots are $e_i-e_{i+1}$ for $1\le i\le n$, whose Cartan matrix is $A_n$. [L1, algebra]
+
+1.2 (Types $B_n$ and $C_n$.) In $\mathbb R^n$ put $\Phi_{B}=\{\pm e_i\}\cup\{\pm e_i\pm e_j:i<j\}$ and $\Phi_C=\{\pm2e_i\}\cup\{\pm e_i\pm e_j:i<j\}$. Both are finite, span $\mathbb R^n$, omit $0$, and are reduced. Reflections: $s_{e_i}$ negates the $i$-th coordinate, $s_{2e_i}$ does the same, and $s_{e_i\pm e_j}$ permutes or changes the signs of coordinates $i,j$ and fixes the others, so each reflection permutes $\Phi_B$ and $\Phi_C$. Integrality is checked directly from $(e_k,e_l)=\delta_{kl}$: for $\Phi_B$ the Cartan integers lie in $\{0,\pm1,\pm2\}$, and for $\Phi_C$ the values $2(\beta,2e_i)/(2e_i,2e_i)=\beta_i$ and $2(\beta,\alpha)/(\alpha,\alpha)$ with $\alpha$ of the second kind are likewise integers in $\{0,\pm1,\pm2\}$. For a regular vector with $t_1>\cdots>t_n>0$, direct expansion of the positive roots $e_i-e_j,e_i+e_j,e_i$ for $B_n$, and $e_i-e_j,e_i+e_j,2e_i$ for $C_n$, shows that their simple roots are respectively $e_1-e_2,\dots,e_{n-1}-e_n,e_n$ and $e_1-e_2,\dots,e_{n-1}-e_n,2e_n$; their Cartan matrices are $B_n$ and $C_n$. [L1, algebra]
+
+1.3 (Type $D_n$.) In $\mathbb R^n$ put $\Phi_D=\{\pm e_i\pm e_j:i<j\}$ for $n\ge4$. It is finite, spans, is reduced, and each reflection $s_{e_i\pm e_j}$ fixes the other coordinates or changes their signs, so it permutes $\Phi_D$; the Cartan integers are $0,\pm1,\pm2$. For a regular vector with $t_1>\cdots>t_n>0$, direct expansion of the positive roots $e_i-e_j,e_i+e_j$ shows that the simple roots are $e_1-e_2,\dots,e_{n-2}-e_{n-1},e_{n-1}-e_n,e_{n-1}+e_n$; their Cartan matrix is $D_n$. [L1, algebra]
+
+1.4 (Type $G_2$.) In $\mathbb R^2$ let $\alpha,\beta$ satisfy $(\alpha,\alpha)=6$, $(\beta,\beta)=2$, $(\alpha,\beta)=-3$ and put $\Phi_G=\{\pm\alpha,\pm\beta,\pm(\alpha+\beta),\pm(\alpha+2\beta),\pm(\alpha+3\beta),\pm(2\alpha+3\beta)\}$; the twelve vectors are distinct and nonzero. Direct computation gives $(\alpha,\alpha+\beta)=3$, $(\alpha,\alpha+2\beta)=0$, $(\alpha,\alpha+3\beta)=-3$, $(\alpha,2\alpha+3\beta)=3$, $(\beta,\alpha+\beta)=-1$, $(\beta,\alpha+2\beta)=1$, $(\beta,\alpha+3\beta)=3$, $(\beta,2\alpha+3\beta)=0$, from which the Cartan integers with denominator root $\alpha$ or $\beta$ are seen to lie in $\{0,\pm1,\pm2,\pm3\}$ and every root is reduced; the same formulae show $s_\alpha$ permutes $\Phi_G$ (it sends $\beta\mapsto\alpha+\beta$, $\alpha+\beta\mapsto\beta$, $\alpha+3\beta\mapsto2\alpha+3\beta$, $2\alpha+3\beta\mapsto\alpha+3\beta$, and fixes $\alpha+2\beta$) and $s_\beta$ permutes $\Phi_G$ (it sends $\alpha\mapsto\alpha+3\beta$, $\alpha+\beta\mapsto\alpha+2\beta$, $\alpha+2\beta\mapsto\alpha+\beta$, $\alpha+3\beta\mapsto\alpha$, and fixes $2\alpha+3\beta$). These permutations put every root in the orbit of $\alpha$ or $\beta$: the long positive roots are $\alpha,\alpha+3\beta,2\alpha+3\beta$ and the short ones are $\beta,\alpha+\beta,\alpha+2\beta$; their negatives are reached by the corresponding simple reflection and conjugation. Since these permutations are orthogonal, $s_{w\delta}=ws_\delta w^{-1}$ proves reflection invariance for every root, and invariance of inner products reduces all Cartan integers to the two denominator roots already checked. Choosing a regular vector positive on the six displayed unnegated roots makes $\alpha,\beta$ the only indecomposable positive roots, since the other four roots have the decompositions $\alpha+\beta$, $(\alpha+\beta)+\beta$, $(\alpha+2\beta)+\beta$, and $\alpha+(\alpha+3\beta)$ into two positive roots. The coefficient pairs show that $\alpha,\beta$ cannot so decompose. Their Cartan matrix is $\begin{pmatrix}2&-1\\-3&2\end{pmatrix}$, which is the $G_2$ diagram. [L1, algebra]
+
+2.1 (Type $F_4$.) In $\mathbb R^4$ put $\Phi_F=\{\pm e_i\}\cup\{\pm e_i\pm e_j:i<j\}\cup\{\frac12\sum_{i=1}^4\epsilon_i e_i:\epsilon_i=\pm1\}$. It has $8+24+16=48$ roots, spans, and is reduced by inspection of the coordinate supports and absolute values. Reflections in coordinate roots and in two-coordinate roots are signed coordinate permutations, hence preserve the set. For a half-root $h=\frac12\sum\epsilon_i e_i$, of squared norm $1$, use $s_h(x)=x-2(x,h)h$. A coordinate root maps to a half-root. For $x=u e_i+v e_j$, $u,v\in\{\pm1\}$, the inner product is $0$ or $\pm1$; in the latter case the reflection cancels the two occupied coordinates and leaves coefficients $\pm1$ in the other two coordinates. For another half-root $k$, let $m$ be the number of agreeing signs. Then $(h,k)=(m-2)/2$. If $m=0,4$ the roots are opposite or equal and reflection negates $k$; if $m=2$ it fixes $k$; if $m=1,3$ it gives a coordinate root. Thus all reflections preserve $\Phi_F$. For a denominator root of norm $1$, all inner products are half-integers, so its Cartan integers are integral. For a denominator root of norm $2$ (a two-coordinate root), all inner products are integers, including those with half-roots; this checks the other denominators. The coordinate roots all lie in one part of any orthogonal partition, since $e_i+e_j$ connects $e_i$ to $e_j$. Every other root pairs nontrivially with a coordinate root. Hence the system is irreducible. By [L2], rank four permits $A_4,B_4,C_4,D_4,F_4$; the first four constructions have respectively $20,32,32,24$ roots. Thus the 48-root system has diagram $F_4$. [L1, L2, L3, step 1.1, step 1.2, step 1.3, algebra]
+
+2.2 (Type $E_8$.) Put $\Phi_8=\{\pm e_i\pm e_j:i<j\}\cup\{\frac12\sum_{i=1}^8\epsilon_i e_i:\epsilon_i=\pm1,\ \prod_i\epsilon_i=1\}$. All roots have squared norm $2$; the $D_8$ subset spans, and reducedness is immediate. Reflections in its integer roots permute coordinates and change either zero or two signs, preserving both subsets. For two half-roots $h,k$, the number $m$ of agreeing signs is even and $(h,k)=(m-4)/2$. For $m=0,8$ reflection negates $k$; for $m=4$ it fixes $k$; for $m=2,6$ the vector $k-(k,h)h$ has exactly two nonzero entries, both $\pm1$, hence is an integer root. For a half-root $h$ and integer root $x=u e_i+v e_j$, $(x,h)$ is $0$ or $\pm1$. If it is zero reflection fixes $x$. Otherwise $x-(x,h)h$ is a half-root: its signs differ from those of $h$ in six positions when $(x,h)=1$, and in two positions when $(x,h)=-1$, so the parity remains even. All pairwise inner products are integers by these formulas and the integer-root calculation; with norm squared $2$ this is crystallographic integrality. The integer roots form an irreducible spanning subset: their displayed $D_8$ base has a connected chain with a fork, so all its members lie in one part of any orthogonal partition; spanning then excludes a root in the other part. Thus $\Phi_8$ is irreducible. It has $4\binom82+2^7=240$ roots. Equal root lengths force every diagram edge to be simple by [L1], so [L2] leaves $A_8,D_8,E_8$. The first two have $72$ and $112$ roots by their explicit constructions; hence the diagram is $E_8$. [L1, L2, L3, step 1.1, step 1.3, algebra]
+
+3.1 (The two restrictions.) Let $V_7=(e_7+e_8)^\perp$, $V_6=V_7\cap(e_6+e_8)^\perp$, and $\Phi_i=\Phi_8\cap V_i$. Reflection in a root of $V_i$ preserves $V_i$, so reflection closure, integrality and reducedness are inherited. In $\Phi_7$ the integer roots are the $60$ roots $\pm e_i\pm e_j$ on the first six coordinates and $\pm(e_7-e_8)$. Half-roots have $\epsilon_7=-\epsilon_8$, giving two choices for the last pair and $32$ odd-parity choices on the first six coordinates: $64$ half-roots, thus $126$ roots in all. The integer roots span $V_7$. In $\Phi_6$, the last three coordinates obey $x_6=x_7=-x_8$. The integer roots are precisely the $40$ two-coordinate roots on the first five coordinates. The half-roots have last signs $(+,+,-)$ or $(-,-,+)$, with respectively odd or even parity among the first five signs: $16+16=32$ choices. Thus there are $72$ roots. The integer roots span the first five coordinate directions, and any half-root adds the remaining direction of $V_6$, proving spanning and rank six. [L1, step 2.2, algebra]
+
+4.1 (Irreducibility and identification of the restrictions.) The $D_6$ integer roots on the first six coordinates of $\Phi_7$ cannot split between orthogonal parts: their connected standard base spans those six coordinates. Every half-root has nonzero projection on that span, so pairs nontrivially with at least one such root and lies in the same part. Each of $\pm(e_7-e_8)$ pairs nontrivially with each half-root. Thus all roots lie in one part. The same argument for $\Phi_6$ uses the connected spanning $D_5$ base on the first five coordinates, and the nonzero projection there of every half-root. Both restrictions are therefore irreducible. Their roots have equal length, so their diagrams are simply laced. In rank six [L2] leaves $A_6,D_6,E_6$; the first two have $42,60$ roots, whereas $\Phi_6$ has $72$, giving $E_6$. In rank seven the possibilities are $A_7,D_7,E_7$, with the first two counts $56,84$, whereas $\Phi_7$ has $126$, giving $E_7$. [L1, L2, L3, step 1.1, step 1.3, step 3.1, algebra]
+
+5.1 These constructions realize every positive-rank type stated, with the classical and $G_2$ diagrams computed from simple roots and the exceptional diagrams identified using the independently established classification and explicit root counts. The additional empty rank-zero system allowed by the local convention is realized in $E=0$, where the spanning and reflection axioms hold vacuously. No unsolved source exercise is used as a proof premise. [L1, L2, step 1.1, step 1.2, step 1.3, step 1.4, step 2.1, step 2.2, step 3.1, step 4.1, algebra] ∎
+
+## Remarks
+
+The atlas below shows the classical diagrams at ranks $4,4,4,5$ and the five exceptional diagrams. A vertex labelled $i$ denotes $\alpha_i$. In general $A_n,B_n,C_n$ have the chain $1-2-\cdots-n$ (a single vertex for $A_1$); only the last edge is doubled in $B_n,C_n$. For $D_n$ the chain $1-\cdots-(n-2)$ has the two additional leaves $n-1,n$ at $n-2$. Thus the pictured classical rows extend to every rank in the statement, including $B_2,C_3,D_4$. An arrow points toward the shorter root; parallel strokes are separate edges.
+
+For the classical rows use the simple roots of steps 1.1–1.3, in the order given there. For $G_2$ use $\alpha_1=\alpha$, $\alpha_2=\beta$ of step 1.4, with squared lengths $6,2$ and Cartan matrix $\begin{pmatrix}2&-1\\-3&2\end{pmatrix}$. For $F_4$ a compatible base in the set of step 2.1 is $\alpha_1=e_2-e_3$, $\alpha_2=e_3-e_4$, $\alpha_3=e_4$, $\alpha_4=(e_1-e_2-e_3-e_4)/2$, with squared lengths $2,2,1,1$.
+
+For $E_r$, $r=6,7,8$, use the first $r$ vectors of $\alpha_1=(e_1+e_8-e_2-e_3-e_4-e_5-e_6-e_7)/2$, $\alpha_2=e_1+e_2$, and $\alpha_j=e_{j-1}-e_{j-2}$ for $3\le j\le8$. These are roots of the sets constructed in steps 2.2 and 3.1 and have squared length $2$. Their nonzero off-diagonal inner products are $-1$, precisely on the pictured edges. In particular the exceptional branch is at vertex $4$, with arms of lengths $2,1,r-4$. The diagrams illustrate the outcomes of the proof; the proof is independent of this atlas.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node at (-1,0) {$A_4$};
+\draw (0,0)--(1.2,0)--(2.4,0)--(3.6,0);
+\fill (0,0) circle (2pt); \node[below] at (0,0) {$1$};
+\fill (1.2,0) circle (2pt); \node[below] at (1.2,0) {$2$};
+\fill (2.4,0) circle (2pt); \node[below] at (2.4,0) {$3$};
+\fill (3.6,0) circle (2pt); \node[below] at (3.6,0) {$4$};
+\node at (-1,-1.1) {$B_4$};
+\draw (0,-1.1)--(1.2,-1.1)--(2.4,-1.1);
+\draw (2.4,-1.04)--(3.6,-1.04); \draw (2.4,-1.16)--(3.6,-1.16);
+\draw (2.88,-0.91)--(3.12,-1.1)--(2.88,-1.29);
+\fill (0,-1.1) circle (2pt); \node[below] at (0,-1.1) {$1$};
+\fill (1.2,-1.1) circle (2pt); \node[below] at (1.2,-1.1) {$2$};
+\fill (2.4,-1.1) circle (2pt); \node[below] at (2.4,-1.1) {$3$};
+\fill (3.6,-1.1) circle (2pt); \node[below] at (3.6,-1.1) {$4$};
+\node at (-1,-2.2) {$C_4$};
+\draw (0,-2.2)--(1.2,-2.2)--(2.4,-2.2);
+\draw (2.4,-2.14)--(3.6,-2.14); \draw (2.4,-2.26)--(3.6,-2.26);
+\draw (3.12,-2.01)--(2.88,-2.2)--(3.12,-2.39);
+\fill (0,-2.2) circle (2pt); \node[below] at (0,-2.2) {$1$};
+\fill (1.2,-2.2) circle (2pt); \node[below] at (1.2,-2.2) {$2$};
+\fill (2.4,-2.2) circle (2pt); \node[below] at (2.4,-2.2) {$3$};
+\fill (3.6,-2.2) circle (2pt); \node[below] at (3.6,-2.2) {$4$};
+\node at (-1,-3.5) {$D_5$};
+\draw (0,-3.5)--(1.2,-3.5)--(2.4,-3.5)--(3.6,-2.95);
+\draw (2.4,-3.5)--(3.6,-4.05);
+\fill (0,-3.5) circle (2pt); \node[below] at (0,-3.5) {$1$};
+\fill (1.2,-3.5) circle (2pt); \node[below] at (1.2,-3.5) {$2$};
+\fill (2.4,-3.5) circle (2pt); \node[below] at (2.4,-3.5) {$3$};
+\fill (3.6,-2.95) circle (2pt); \node[below] at (3.6,-2.95) {$4$};
+\fill (3.6,-4.05) circle (2pt); \node[below] at (3.6,-4.05) {$5$};
+\node at (-1,-5.2) {$E_6$};
+\draw (0,-5.2)--(1.2,-5.2)--(2.4,-5.2)--(3.6,-5.2)--(4.8,-5.2);
+\draw (2.4,-5.2)--(2.4,-4.5);
+\fill (0,-5.2) circle (2pt); \node[below] at (0,-5.2) {$1$};
+\fill (1.2,-5.2) circle (2pt); \node[below] at (1.2,-5.2) {$3$};
+\fill (2.4,-5.2) circle (2pt); \node[below] at (2.4,-5.2) {$4$};
+\fill (3.6,-5.2) circle (2pt); \node[below] at (3.6,-5.2) {$5$};
+\fill (4.8,-5.2) circle (2pt); \node[below] at (4.8,-5.2) {$6$};
+\fill (2.4,-4.5) circle (2pt); \node[above] at (2.4,-4.5) {$2$};
+\node at (-1,-6.7) {$E_7$};
+\draw (0,-6.7)--(1.2,-6.7)--(2.4,-6.7)--(3.6,-6.7)--(4.8,-6.7)--(6,-6.7);
+\draw (2.4,-6.7)--(2.4,-6);
+\fill (0,-6.7) circle (2pt); \node[below] at (0,-6.7) {$1$};
+\fill (1.2,-6.7) circle (2pt); \node[below] at (1.2,-6.7) {$3$};
+\fill (2.4,-6.7) circle (2pt); \node[below] at (2.4,-6.7) {$4$};
+\fill (3.6,-6.7) circle (2pt); \node[below] at (3.6,-6.7) {$5$};
+\fill (4.8,-6.7) circle (2pt); \node[below] at (4.8,-6.7) {$6$};
+\fill (6,-6.7) circle (2pt); \node[below] at (6,-6.7) {$7$};
+\fill (2.4,-6) circle (2pt); \node[above] at (2.4,-6) {$2$};
+\node at (-1,-8.2) {$E_8$};
+\draw (0,-8.2)--(1.2,-8.2)--(2.4,-8.2)--(3.6,-8.2)--(4.8,-8.2)--(6,-8.2)--(7.2,-8.2);
+\draw (2.4,-8.2)--(2.4,-7.5);
+\fill (0,-8.2) circle (2pt); \node[below] at (0,-8.2) {$1$};
+\fill (1.2,-8.2) circle (2pt); \node[below] at (1.2,-8.2) {$3$};
+\fill (2.4,-8.2) circle (2pt); \node[below] at (2.4,-8.2) {$4$};
+\fill (3.6,-8.2) circle (2pt); \node[below] at (3.6,-8.2) {$5$};
+\fill (4.8,-8.2) circle (2pt); \node[below] at (4.8,-8.2) {$6$};
+\fill (6,-8.2) circle (2pt); \node[below] at (6,-8.2) {$7$};
+\fill (7.2,-8.2) circle (2pt); \node[below] at (7.2,-8.2) {$8$};
+\fill (2.4,-7.5) circle (2pt); \node[above] at (2.4,-7.5) {$2$};
+\node at (-1,-9.4) {$F_4$};
+\draw (0,-9.4)--(1.2,-9.4); \draw (2.4,-9.4)--(3.6,-9.4);
+\draw (1.2,-9.34)--(2.4,-9.34); \draw (1.2,-9.46)--(2.4,-9.46);
+\draw (1.68,-9.21)--(1.92,-9.4)--(1.68,-9.59);
+\fill (0,-9.4) circle (2pt); \node[below] at (0,-9.4) {$1$};
+\fill (1.2,-9.4) circle (2pt); \node[below] at (1.2,-9.4) {$2$};
+\fill (2.4,-9.4) circle (2pt); \node[below] at (2.4,-9.4) {$3$};
+\fill (3.6,-9.4) circle (2pt); \node[below] at (3.6,-9.4) {$4$};
+\node at (-1,-10.5) {$G_2$};
+\draw (0,-10.5)--(1.2,-10.5); \draw (0,-10.4)--(1.2,-10.4); \draw (0,-10.6)--(1.2,-10.6);
+\draw (0.48,-10.27)--(0.72,-10.5)--(0.48,-10.73);
+\fill (0,-10.5) circle (2pt); \node[below] at (0,-10.5) {$1$};
+\fill (1.2,-10.5) circle (2pt); \node[below] at (1.2,-10.5) {$2$};
+\end{tikzpicture}
+```

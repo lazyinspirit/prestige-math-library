@@ -32,6 +32,7 @@ report-and-commit transaction, and PREP means an actual deterministic mutator.
 | readiness / fwdcheck | `node Pfrontier-item-gate.mjs --run RUN --tool fwdcheck -- --quiet` | G unchanged. |
 | readiness / extcheck | `node Pfrontier-item-gate.mjs --run RUN --tool extcheck --` | G unchanged. |
 | readiness / rendercheck | `node Pfrontier-item-gate.mjs --run RUN --tool rendercheck --` | G unchanged, after actual metadata/render recertification. |
+| rendering quality | `node Prendering-quality.mjs --run RUN --verify` | PREP performs actual scoped source/context/AST/KaTeX checks and production TikZ/SVG smoke checks, using the existing proof-render pass and content/toolchain caches. G requires the exact current nonempty receipt, min 1 checked file. Source/compile/empty-render errors block; visual heuristics remain warnings. No mathematical review credit. |
 | readiness / depsource | `node Pfrontier-item-gate.mjs --run RUN --tool depsource --` | G unchanged. |
 | readiness / manifest-integrity | `node Pmanifest-integrity.mjs --run RUN` | G unchanged. |
 | readiness / splice-verify | `node Psplice-plan.mjs --run RUN --verify` | G unchanged. |

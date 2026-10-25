@@ -1,0 +1,103 @@
+{
+  "id": "thm-canonical-decomposition-of-a-function",
+  "agent": "/root/rendering_repair_coordinator/set_009",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "Independently viewed all three standalone original-resolution tiles and read the complete frozen/current carrier. Existing math renders correctly, but the four objects and three-stage canonical factorization materially benefit from a commutative square: it distinguishes quotient, image and codomain while comparing the three-map path with f. This is a warranted explanatory diagram under the expanded diagram scope, rather than a claim that the existing formulas failed to render.",
+      "action": "Added a fenced tikzcd commutative square and concise map/commutativity explanation in a final Remarks section.",
+      "status": "repaired; scoped checks pass and actual final native-preview tiles viewed"
+    }
+  ],
+  "changed": true,
+  "correction": "Append a Remarks illustration of A --f--> B and A --pi--> A/~ --bar f--> f[A] --iota--> B, with the established map formulas and commutativity. All original bytes, including title, Statement, Facts, Proof and metadata, are preserved.",
+  "source_lines_after": [
+    102,
+    104,
+    105,
+    106,
+    108,
+    109,
+    110,
+    111,
+    113,
+    114,
+    115
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "A, B, A/{~}, f[A], with ~ = ker f as in the Statement and kernel lemma.",
+      "maps": "Top arrow f:A->B; left downward pi:A->A/{~}; bottom rightward bar f:A/{~}->f[A]; right upward iota:f[A]->B. The domains/codomains match clauses (i)-(iii) exactly.",
+      "justification": "The quotient definition and universal-property theorem give pi(a)=[a] and surjectivity. Item step 2.1 gives well-defined bar f([a])=f(a) and bijectivity using a~a' iff f(a)=f(a'). Item step 1.2 gives iota(y)=y and injectivity with f[A] contained in B."
+    },
+    {
+      "relation": "iota composed with bar f composed with pi = f, so the square commutes.",
+      "justification": "For each a in A the three-map route is a -> [a] -> f(a) -> f(a), precisely the computation in step 3.1. The four drawn arrows assert only this relation; there is no inverse arrow, section, additional surjectivity of f, or assumed equality f[A]=B. Clause (v) remains in the independent proof, not encoded as an extra diagram premise."
+    }
+  ],
+  "proof_independent": true,
+  "remaining_issues": [],
+  "evidence": {
+    "before_raw_sha256": "0bd9bc8535a79df52f09fa0b15cbd5e8a64932f65bd6a811ffffdad4ba4f9a10",
+    "after_raw_sha256": "c493eea586611a97f9d87ce179a99e578908cae02830d0746348e086a91037a0",
+    "original_tiles_viewed": [
+      1,
+      2,
+      3
+    ],
+    "original_inspection_dir": "research/math-library-rendering-audit-2026-10-23/set-theory",
+    "final_preview_directory": "research/math-library-rendering-repairs-2026-10-23/preview-set-009-independent-20261024",
+    "final_tiles_viewed": [
+      1,
+      2,
+      3
+    ],
+    "visual_result": "Standalone original-resolution final tile 03 shows all four nodes, four labeled arrows and correct arrowheads without overlap or clipping; tiles 01 and 02 retain the original rendered statement/facts. Local actual ItemBody/MathMarkdown/TikZ SSR preview only; no live website visited.",
+    "preview_reference_map_diagnostics": 16,
+    "scope_guard": "Exact assigned raw SHA256 checked immediately before the only item edit; original source is an exact byte prefix of final source, so metadata/status and all original mathematics remain byte-identical."
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-canonical-decomposition-of-a-function.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-canonical-decomposition-of-a-function.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-canonical-decomposition-of-a-function.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-canonical-decomposition-of-a-function --out research/math-library-rendering-repairs-2026-10-23/preview-set-009-independent-20261024",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 3,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ]
+}

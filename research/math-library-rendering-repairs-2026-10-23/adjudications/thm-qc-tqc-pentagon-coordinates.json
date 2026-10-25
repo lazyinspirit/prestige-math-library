@@ -1,0 +1,93 @@
+{
+  "id": "thm-qc-tqc-pentagon-coordinates",
+  "agent": "/root/rendering_repair_coordinator/qc_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "tikz-compilation-failure",
+      "verdict": "confirmed",
+      "reason": "Both flagged PNGs were inspected standalone at original resolution. Native node-tikzjax reproduction fails with Undefined control sequence at \\operatorname in the identity-tensored associator label; the native renderer loads amsfonts and tikz-cd, but does not provide this amsmath macro. All five original vertices and associator directions already agree with the local monoidal pentagon.",
+      "action": "Replace only the two TikZ identity-label macros with equivalent \\mathrm{id}; use an explicit tikzcd environment with increased row/column separation and larger node/label fonts so the successful native rendering has readable, separated arrow labels.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Restore native rendering of the five-vertex associator pentagon by using supported roman identity labels and explicit diagram spacing/font options. All mathematical vertices, arrows, directions, relations, Statement, Facts, proof, dependencies, sources and publication status are unchanged.",
+  "source_lines_after": [
+    72,
+    75,
+    82,
+    84
+  ],
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Five objects",
+      "result": "The rendered vertices are S=(((a tensor b) tensor c) tensor d), U=((a tensor b) tensor (c tensor d)), T=a tensor (b tensor (c tensor d)), V=(a tensor (b tensor c)) tensor d, W=a tensor ((b tensor c) tensor d). These are precisely the five binary parenthesizations of four ordered objects, without changing leaf order."
+    },
+    {
+      "check": "Two-arrow route and types",
+      "result": "S -> U is alpha_(a tensor b,c,d); U -> T is alpha_(a,b,c tensor d). Substituting X,Y,Z in the full def-monoidal-category associator definition ((X tensor Y) tensor Z) -> X tensor (Y tensor Z) gives each exact source/target. The composite is alpha_(a,b,c tensor d) circle alpha_(a tensor b,c,d), with coordinate matrix A5 A4."
+    },
+    {
+      "check": "Three-arrow route and tensor identities",
+      "result": "S -> V is alpha_(a,b,c) tensor id_d; V -> W is alpha_(a,b tensor c,d); W -> T is id_a tensor alpha_(b,c,d). The first changes only the left triple and fixes d; the last fixes a and changes only the right triple. Each arrow points in the local associator direction, and all consecutive domains/codomains match. The composite is (id_a tensor alpha_(b,c,d)) circle alpha_(a,b tensor c,d) circle (alpha_(a,b,c) tensor id_d), with matrix A3 A2 A1."
+    },
+    {
+      "check": "Commutativity and matrix products",
+      "result": "The complete pentagon axiom in def-monoidal-category with W,X,Y,Z=a,b,c,d gives equality of those exact two S -> T composites. The full def-qc-tqc-f-symbol uses inverse-precomposition L circle alpha^{-1} to target Hom coordinates, with target rows/source columns, so successive route coordinates multiply in reverse written composition order as A3 A2 A1 and A5 A4. The full fusion-tree-dimension supplier establishes bases for every parenthesization; proof steps 1.1–3.1 independently establish equality with all charge/multiplicity indices and finite sums. The drawing contributes no premise."
+    },
+    {
+      "check": "Native visual arrows",
+      "result": "Fresh final native preview tile 02 was viewed standalone at original resolution: five vertices, five directed arrows, two top arrows and three lower-route arrows, with every label readable and nonoverlapping. No edge or label was dropped."
+    }
+  ],
+  "input_guard": {
+    "before_raw_sha256": "4f0bcc08b9cfaf500b36b670ba042b12b52c5bdc23e12a1a9f6ded8fc326e2b4",
+    "after_raw_sha256": "e5cca754be0c80bd74672866349287f53589b9fb24566eb4c35decad549f59da",
+    "first_edit_guard_passed": true,
+    "subsequent_edit_guard_passed": true,
+    "frontmatter_exactly_unchanged": true,
+    "statement_facts_proof_exactly_unchanged": true,
+    "publication_status_before": "published",
+    "publication_status_after": "published"
+  },
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-qc-tqc-pentagon-coordinates.md --json",
+      "exit_code": 0,
+      "result": "1 file, 1 checked proof, 0 failed; pass",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/qc006-checks/final-precheck.json"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-qc-tqc-pentagon-coordinates.md --json",
+      "exit_code": 0,
+      "result": "1 checked, no errors or warnings",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/qc006-checks/final-rendercheck.json"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-qc-tqc-pentagon-coordinates.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 3 steps, 0 defects",
+      "evidence": "research/math-library-rendering-repairs-2026-10-23/qc006-checks/final-proof-layout.txt"
+    }
+  ],
+  "native_render": {
+    "diagnosis": "research/math-library-rendering-repairs-2026-10-23/qc006-checks/diagnose.log",
+    "preview": "research/math-library-rendering-repairs-2026-10-23/qc006-preview-v2/manifest.json",
+    "capture": "research/math-library-rendering-repairs-2026-10-23/qc006-preview-v2/screenshots/thm-qc-tqc-pentagon-coordinates.json",
+    "tikz_count": 1,
+    "katex_errors": [],
+    "diagram_failures": [],
+    "original_resolution_views": [
+      "original flagged tiles 01 and 02",
+      "final preview tiles 01 and 02"
+    ],
+    "limitations": "Local native ItemBody SSR and file-only browser preview; not a production HTTP route. Preview reference-title-map records 16 unrelated parse diagnostics."
+  },
+  "remaining_issues": []
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-universal-mod-two-class-detects-admissible-composites-in-the-strict-range.md

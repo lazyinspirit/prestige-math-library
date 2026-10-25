@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-evaluation-bundle-boundary-map-is-an-isomorphism-for-the-disk.md

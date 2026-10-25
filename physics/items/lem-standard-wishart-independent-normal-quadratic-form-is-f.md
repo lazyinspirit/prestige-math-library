@@ -1,0 +1,95 @@
+---
+id: lem-standard-wishart-independent-normal-quadratic-form-is-f
+kind: lemma
+title: The standard Wishart inverse quadratic form has an exact Fisher law
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 1
+deps:
+  - def-wishart-law
+  - lem-standard-normal-matrix-has-full-row-rank-almost-surely
+  - def-axiom-of-choice
+  - def-multivariate-normal-law
+  - def-standard-normal-and-normal-laws
+  - def-independent-random-elements
+  - thm-independent-random-elements-have-product-joint-law
+  - thm-grouping-independent-sigma-algebras
+  - lem-measurable-functions-preserve-independence
+  - thm-orthogonal-transform-preserves-standard-normal-product-law
+  - thm-orthogonal-projection-has-independent-chi-square-sums
+  - def-orthogonal-projection
+  - thm-self-adjoint-idempotents-are-exactly-orthogonal-projections
+  - def-chi-square-law
+  - def-student-t-and-f-laws
+  - lem-positive-df-chi-square-has-density-and-regular-cdf
+  - thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - cor-continuous-functions-are-borel-measurable
+  - lem-ac-supplies-sequential-choices-for-probability-constructions
+  - thm-finite-dimensional-orthogonal-decomposition
+  - cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Arak Mathai, Serge Provost, and Hans J. Haubold, Multivariate Statistical Analysis in the Real and Complex Domains, Chapter 5 §5.5, PDF pp. 52–66; Chapter 6 §6.3, PDF pp. 20–36"
+      url: "https://link.springer.com/content/pdf/10.1007/978-3-030-95864-0_5.pdf"
+    - title: "Soumendu Sundar Mukherjee, Multivariate Analysis 2021, Lecture 3, PDF pp. 3–5"
+      url: "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-3.pdf"
+    - title: "Peter D. Hoff, Multivariate Statistical Analysis, Duke STA 832 lecture notes, relevant sections in Chapters 4 and 7"
+      url: "https://www2.stat.duke.edu/~pdh10/Teaching/832/Materials/notes.pdf"
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+---
+
+## Statement
+
+Assume AC. Let $m\ge p\ge1$, let $W\sim W_p(I_p,m)$, and let $Z\sim N_p(0,I_p)$ be independent of $W$. Then $W$ is positive definite almost surely and
+$$\frac{m-p+1}{p}Z^TW^{-1}Z\sim F_{p,m-p+1}.$$
+
+## Facts & Assumptions
+
+**Given:** AC, integers $m\ge p\ge1$, $W\sim W_p(I_p,m)$, $Z\sim N_p(0,I_p)$, and independence of $W$ and $Z$.
+
+[A1] The Axiom of Choice is assumed in the multivariate-normal and orthogonal-coordinate suppliers. [[def-axiom-of-choice]]
+
+[F1] $W_p(\Sigma,m)$ is the law of the sum of $m$ independent Gaussian outer products; singular support is allowed by the stated convention. [[def-wishart-law]]
+
+[F2] An independent standard-normal $p\times m$ matrix has full row rank almost surely when $m\ge p$. [[lem-standard-normal-matrix-has-full-row-rank-almost-surely]]
+
+[F3] An orthogonal transform preserves the independent standard-normal product law. [[thm-orthogonal-transform-preserves-standard-normal-product-law]]
+
+[F4] For a fixed orthogonal projection $P$ of rank $r$ and standard-normal $g\in\mathbb R^m$, $\|(I-P)g\|^2\sim\chi^2_{m-r}$. [[thm-orthogonal-projection-has-independent-chi-square-sums]]
+
+[F5] The law of a standard-normal squared norm with $k$ coordinates is $\chi_k^2$, and the Fisher law is the ratio of independent scaled chi-square laws with positive degrees of freedom. [[def-chi-square-law]] [[def-student-t-and-f-laws]]
+
+[F6] Positive-degree chi-square variables are positive almost surely. [[lem-positive-df-chi-square-has-density-and-regular-cdf]]
+
+[F7] Disjoint groups of an independent family remain independent, and measurable coordinatewise maps preserve independence. [[def-independent-random-elements]] [[thm-grouping-independent-sigma-algebras]] [[lem-measurable-functions-preserve-independence]]
+
+[F8] Independent random elements have product joint law; nonnegative product integrals may be computed by Tonelli. [[thm-independent-random-elements-have-product-joint-law]] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
+
+[F9] A self-adjoint idempotent is the orthogonal projection onto its image, and an orthogonal projection is the component map for $V=W\oplus W^\perp$. [[def-orthogonal-projection]] [[thm-self-adjoint-idempotents-are-exactly-orthogonal-projections]]
+
+[F10] Every finite-dimensional inner-product space decomposes as a subspace plus its orthogonal complement, which has an orthonormal basis. [[thm-finite-dimensional-orthogonal-decomposition]] [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]
+
+[F11] Continuous Euclidean maps are Borel measurable under the countable-choice consequence of AC. [[cor-continuous-functions-are-borel-measurable]] [[lem-ac-supplies-sequential-choices-for-probability-constructions]]
+
+## Proof
+
+1.1 By [F1], realize $W=GG^T$ with $G=[g_1|\cdots|g_m]$ and independent $g_j\sim N_p(0,I_p)$. For any square matrix $A$, extend inversion by setting $J(A)=A^{-1}$ when $\det A\ne0$ and $J(A)=0$ otherwise. This is Borel: the invertible matrices form an open set, inversion is continuous there, and the complementary branch is constant; [F11] supplies Euclidean Borel measurability. Thus $J(GG^T)$ is a Borel matrix-valued random element and agrees with $W^{-1}$ whenever $GG^T$ is invertible. Since $m\ge p$, [F2] makes $G$ full row rank almost surely; hence for nonzero $v$, $v^TWv=\|G^Tv\|^2>0$ and $W$ is invertible almost surely. [A1, F1, F2, F11, algebra]
+
+2.1 For $p\ge2$, write the first row of $G$ as $g$ and the remaining $p-1$ rows as $G_2$. The event $E_2=\{\det(G_2G_2^T)\ne0\}$ is Borel. Define $C^\dagger=(G_2G_2^T)^{-1}$ on $E_2$ and $C^\dagger=0$ on $E_2^c$, and put $P=G_2^TC^\dagger G_2$; this is Borel by the same piecewise-inversion argument as in step 1.1. By [F2], $E_2$ has probability one. On $E_2$, direct multiplication gives $P^T=P$ and $P^2=P$, and its image is the row space of $G_2$, of dimension $p-1$; [F9] identifies it as an orthogonal projection. For $p=1$, use the empty-row convention $G_2=0$, $P=0$. In either case define the Borel scalar $Q=g(I_m-P)g^T$ on the whole matrix space. On the full-probability event that $G$ has full row rank, the block matrix $W=GG^T=\begin{pmatrix}gg^T&gG_2^T\\G_2g^T&C\end{pmatrix}$ has invertible lower block $C$ when $p\ge2$, and solving $Wx=e_1$ gives $e_1^TW^{-1}e_1=(gg^T-gG_2^TC^{-1}G_2g^T)^{-1}$. Thus for $p\ge2$ this $Q$ equals $(e_1^TW^{-1}e_1)^{-1}$ on the full-probability event. For $p=1$, $W=gg^T$ and the same identity reads $Q=gg^T=(e_1^TW^{-1}e_1)^{-1}$. [F2, F9, F11, step 1.1, algebra]
+
+3.1 The entries of $G$ are independent standard normals, so its first row $g$ is independent of the remaining rows $G_2$ by [F7]. For each fixed full-row-rank value of $G_2$, $I_m-P$ is an orthogonal projection of rank $m-p+1$. Therefore [F4] gives the section law $Q\sim\chi^2_{m-p+1}$ for every such $G_2$; the $p=1$ case follows from [F5]. The matrix rank event is Borel because it is determined by continuous minors, and the extended map $P(G_2)$ is Borel by step 2.1. The exceptional set has probability zero by [F2]. Applying the product-law identity [F8] to these Borel sections shows that the unconditional law of the Borel extension $Q=g(I_m-P)g^T$ is also $\chi^2_{m-p+1}$. [F2, F4, F5, F7, F8, F11, step 2.1]
+
+4.1 For any fixed unit vector $u\in\mathbb R^p$, [F10] supplies an orthogonal matrix $U$ with $Uu=e_1$. By [F3] and [F7], applying $U$ to each independent column preserves their joint standard-normal product law; hence $UWU^T$ has the same law as $W$. Let $h(t)=t^{-1}$ for $t>0$ and $h(t)=0$ otherwise. Since $J(W)=W^{-1}$ almost surely by step 1.1 and $W\succ0$ almost surely, $h(u^TJ(W)u)$ has the same law as $Q$ in step 3.1 for every unit $u$, using the orthogonal invariance just proved. Set $U_Z=Z/\|Z\|$ when $Z\ne0$ and let $U_Z=e_1$ when $Z=0$. The map $z\mapsto U_z$ is Borel, and $Q_Z:=h(U_Z^TJ(W)U_Z)$ is Borel because $J$ and $h$ are Borel; $Z=0$ is null by [F5]–[F6]. For Borel sets $A,B$, independence and the product law give $$\mathbb P(\|Z\|^2\in A,Q_Z\in B)=\int_{\{z:\|z\|^2\in A\}}\mathbb P_W\bigl(h(u_z^TJ(W)u_z)\in B\bigr)\,d\mathbb P_Z(z),$$ where $u_z=z/\|z\|$ for $z\ne0$ and $u_0=e_1$. The inner probability is the same for every unit $u_z$, so this factors as $\mathbb P(\|Z\|^2\in A)\mathbb P(Q\in B)$. Thus $Q_Z$ is independent of $\|Z\|^2$ and has the same $\chi^2_{m-p+1}$ law as $Q$ in step 3.1. [A1, F3, F5, F6, F7, F8, F10, F11, step 1.1, step 3.1]
+
+5.1 By [F5], $\|Z\|^2\sim\chi_p^2$ and it is independent of $Q_Z\sim\chi^2_{m-p+1}$ by step 4.1. Therefore $\frac{m-p+1}{p}Z^TW^{-1}Z=\frac{\|Z\|^2/p}{Q_Z/(m-p+1)}$ has law $F_{p,m-p+1}$ by the defining Fisher ratio; its denominator is positive almost surely by [F6]. [F5, F6, step 4.1, algebra] ∎
+

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-deformed-hard-lefschetz-for-b-x-b-s.md

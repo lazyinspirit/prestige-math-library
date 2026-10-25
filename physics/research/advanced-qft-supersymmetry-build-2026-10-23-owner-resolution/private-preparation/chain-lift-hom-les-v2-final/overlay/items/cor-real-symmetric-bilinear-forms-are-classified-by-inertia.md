@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-real-symmetric-bilinear-forms-are-classified-by-inertia.md

@@ -1,0 +1,80 @@
+{
+  "id": "cor-cauchy-schwarz-inequality-for-l-two",
+  "agent": "/root/rendering_repair_supervisor2/mt_007",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution tile visibly prints literal dollar delimiters in TECHNIQUE: SPECIALIZE HOLDER TO $P=Q=2$. The same equality in numbered proof steps is typeset correctly, isolating this to the plain-text technique banner. Frozen and current pre-edit source were byte-identical.",
+      "action": "Replaced only the banner math fragment $p=q=2$ with the equivalent readable plain text p = q = 2.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "One body-line substitution in the proof-technique banner; all frontmatter, title, numbered proof steps, claims and hypotheses remain byte-identical.",
+  "source_lines_after": {
+    "45": "**Proof technique:** Specialize Holder to p = q = 2, and inherit the equality clause from the strict-exponent equality theorem."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The renderer technique banner accepts plain text and applies uppercase CSS; authored math delimiters there remain a renderer limitation.",
+    "Fresh local capture has an unrelated text-visibility artifact affecting much of the unchanged ordinary text; the corrected technique banner itself is visible and has no raw dollars. Original standalone tile was fully inspected."
+  ],
+  "before_raw_sha256": "dbc45006a6f8014ad19918e1483009ee0223c4ced7cc2fe0f542fb9dfab9518f",
+  "after_raw_sha256": "facf0bee55064418f52feec1595bb85b7918cd6b6035c759e35f65f3c89306d1",
+  "guard": "Current raw SHA256 checked immediately before the sole source edit and equalled queue before_raw_sha256.",
+  "status_preserved": {
+    "raw_line": "status: published",
+    "value": "published",
+    "all_frontmatter_byte_identical": true
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cor-cauchy-schwarz-inequality-for-l-two.md",
+      "exit_code": 0,
+      "result": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cor-cauchy-schwarz-inequality-for-l-two.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cor-cauchy-schwarz-inequality-for-l-two.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "Local repair-preview.mts --ids cor-cauchy-schwarz-inequality-for-l-two --out research/math-library-rendering-repairs-2026-10-23/previews/mt007-cauchy-schwarz",
+      "exit_code": 0,
+      "result": "1 item, 1 tile; 16 KaTeX expressions, no KaTeX errors; no TikZ; 13 unrelated reference-map parse diagnostics."
+    }
+  ],
+  "visual_evidence": {
+    "original": {
+      "path": "research/math-library-rendering-audit-2026-10-23/measure-theory/screenshots/cor-cauchy-schwarz-inequality-for-l-two--01.png",
+      "view": "Standalone view_image detail original; all assigned tiles inspected."
+    },
+    "current": {
+      "path": "research/math-library-rendering-repairs-2026-10-23/previews/mt007-cauchy-schwarz/screenshots/cor-cauchy-schwarz-inequality-for-l-two--01.png",
+      "sha256": "baabd32522de39a38de02956c60248d9c1d2c55ce4938d3c3895e3553a820d73",
+      "view": "Standalone view_image detail original; banner visibly shows P = Q = 2 without dollar signs. Unrelated text visibility artifact limits whole-item recapture assessment."
+    },
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/mt007-cauchy-schwarz/manifest.json",
+    "manifest_source_sha256": "facf0bee55064418f52feec1595bb85b7918cd6b6035c759e35f65f3c89306d1",
+    "reference_map_sha256": "bfdd7998482993d46b4e1da00ef265bff42d7181d8eae2a20e996f8a657e3ef3"
+  },
+  "pre_existing_formatting_failures": []
+}

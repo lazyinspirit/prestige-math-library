@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-direct-image-and-preimage-form-an-adjoint-triple-on-power-sets.md

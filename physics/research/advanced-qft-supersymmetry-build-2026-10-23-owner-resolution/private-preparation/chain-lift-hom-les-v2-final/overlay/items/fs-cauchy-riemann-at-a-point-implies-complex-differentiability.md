@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-cauchy-riemann-at-a-point-implies-complex-differentiability.md

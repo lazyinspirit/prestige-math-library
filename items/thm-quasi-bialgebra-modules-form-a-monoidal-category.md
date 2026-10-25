@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-quasi-bialgebra-modules-form-a-monoidal-category.json
+  precheck: pass
 id: thm-quasi-bialgebra-modules-form-a-monoidal-category
 kind: theorem
 title: "Modules over a quasi-bialgebra form a monoidal category"
@@ -21,8 +24,7 @@ sources:
     - title: "F. Haußer and F. Nill, Doubles of Quasi-Quantum Groups"
       url: "https://arxiv.org/pdf/q-alg/9708023"
       locator: "Section 2.1, PDF p. 5: quasi-bialgebra module tensor product and reassociator; PDF p. 6: pentagon."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -35,21 +37,25 @@ The left and right unit constraints are the canonical vector-space maps. No quas
 
 ## Pentagon diagram
 
-The arrows are the indicated rebracketing maps, each acting by the corresponding component of $\Phi$. The proof below verifies their equality by multiplying the induced operators in $H^{\otimes4}$.
+Write the five parenthesized tensor products as
+$$A=((U\otimes V)\otimes W)\otimes X,\qquad B=(U\otimes(V\otimes W))\otimes X,$$
+$$C=(U\otimes V)\otimes(W\otimes X),\qquad D=U\otimes((V\otimes W)\otimes X),$$
+$$E=U\otimes(V\otimes(W\otimes X)).$$
+The arrows are the indicated associators, acting by $\Phi$ as in the Statement. Both paths from $A$ to $E$ agree by the pentagon identity; step 2.1 verifies this by multiplying the induced operators in $H^{\otimes4}$.
 
-```tikzcd
-& (((U\otimes V)\otimes W)\otimes X)
-  \arrow[rr,"a_{U\otimes V,W,X}"]
-  \arrow[dl,"a_{U,V,W}\otimes 1_X"']
-&& (U\otimes V)\otimes(W\otimes X)
-  \arrow[dr,"a_{U,V,W\otimes X}"]
-& \\
-(U\otimes(V\otimes W))\otimes X
-  \arrow[dr,"a_{U,V\otimes W,X}"']
-&&&& U\otimes(V\otimes(W\otimes X)) \\
-& U\otimes((V\otimes W)\otimes X)
-  \arrow[ur,"1_U\otimes a_{V,W,X}"']
-&&&
+```tikz
+\begin{tikzpicture}[x=1.5cm,y=1.5cm,every node/.style={font=\LARGE}]
+\node (A) at (0,2) {$A$};
+\node (B) at (-2,0) {$B$};
+\node (C) at (5,2) {$C$};
+\node (D) at (1.5,-2) {$D$};
+\node (E) at (7,0) {$E$};
+\draw[->] (A) -- node[above] {$a_{U\otimes V,W,X}$} (C);
+\draw[->] (A) -- node[above left] {$a_{U,V,W}\otimes 1_X$} (B);
+\draw[->] (C) -- node[above right] {$a_{U,V,W\otimes X}$} (E);
+\draw[->] (B) -- node[below left] {$a_{U,V\otimes W,X}$} (D);
+\draw[->] (D) -- node[below right] {$1_U\otimes a_{V,W,X}$} (E);
+\end{tikzpicture}
 ```
 
 ## Facts & Assumptions

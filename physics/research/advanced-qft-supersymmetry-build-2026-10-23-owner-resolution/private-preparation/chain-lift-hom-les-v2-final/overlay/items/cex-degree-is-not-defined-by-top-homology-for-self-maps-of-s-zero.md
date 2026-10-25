@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-degree-is-not-defined-by-top-homology-for-self-maps-of-s-zero.md

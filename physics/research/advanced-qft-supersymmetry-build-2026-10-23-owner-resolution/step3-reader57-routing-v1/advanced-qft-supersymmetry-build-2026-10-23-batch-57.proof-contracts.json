@@ -1,0 +1,978 @@
+{
+  "version": 1,
+  "run": "advanced-qft-supersymmetry-build-2026-10-23",
+  "batch": "57",
+  "level": 2,
+  "scope": [
+    "lem-qftx-complex-grassmannian-compactness",
+    "lem-qftx-holonomy-incidence-codimension",
+    "lem-qftx-irreducible-finite-holonomy-witness",
+    "lem-qftx-relative-finite-parameter-irreducible-avoidance",
+    "thm-qftx-irreducible-connections-weak-contractibility",
+    "ex-qftx-relative-affine-disk-filling"
+  ],
+  "contracts": {
+    "lem-qftx-complex-grassmannian-compactness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-heine-borel-in-the-product-topology",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ ([[lem-metrics-on-rn]]) carrying the product topology of $n$\ncopies of the usual topology of $\\mathbb{R}$ ([[def-product-topology]]), and let\n$d_2$ be the Euclidean metric. Then:\n\n1. The product topology on $\\mathbb{R}^n$ **is** the metric topology of $d_2$\n   ([[def-metric-topology]]), so $\\mathbb{R}^n$ as a product and $\\mathbb{R}^n$ as\n   a metric space are one topological space, and it is metrizable\n   ([[def-metrizable-space]]).\n2. A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset for the product\n   topology ([[def-compact-space]]) **if and only if** $K$ is closed in\n   $\\mathbb{R}^n$ and bounded ([[def-metric-bounded-diameter]]).\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its three metrics only there; for $n = 0$ the product is a\none-point space and is compact. **No choice principle is used**: the metric\nstatement it is read off from is proved by bisection\n([[thm-heine-borel-rn]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $P^*=P$ and $P^2=P$, then $\\mathbb C^N=\\operatorname{ran}P\\oplus\\ker P$: every $x$ equals $Px+(x-Px)$, and the intersection is zero. The two summands are orthogonal because $\\langle Pu,y\\rangle=\\langle u,P^*y\\rangle=0$ for $y\\in\\ker P$. An orthonormal basis adapted to this decomposition makes $P$ diagonal with one $1$ for each basis vector in $\\operatorname{ran}P$ and zero otherwise. Trace is invariant under change of basis, so $\\operatorname{tr}P=\\dim_{\\mathbb C}\\operatorname{ran}P$, while $\\|P\\|_F^2=\\operatorname{tr}(P^*P)=\\operatorname{tr}(P^2)=k$. Thus the stated equations are exactly the orthogonal projections onto $k$-planes, and every such plane has one unique projection.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $k$, the equations $P^*=P$, $P^2=P$, and $\\operatorname{tr}P=k$ are closed conditions on the real and imaginary matrix entries, and step 1.1 bounds the Frobenius norm by $\\sqrt{k}$. Since $2N^2\\ge1$, [F1] makes $\\operatorname{Gr}_{\\mathbb C}(k,N)$ compact. There are finitely many indices $k$; restricting any open cover of their union to each compact member gives a finite subcover for that member, and the union of these finitely many finite subfamilies is finite. Hence $\\mathscr G_N$ is compact.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement has N≥2, so k=1 is in range; step 2.1 treats the finite union of its compact Grassmannians."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement only ranges over proper nonzero planes, so k=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=2 there is one index k=1; step 2.1 reduces to one compact member."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The zero and identity projections have ranks outside the Statement range 1≤k<N."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no parameter, convergence, or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses finitely many compact subcovers; [F1] states the Heine–Borel input is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 sends every stated projection to its k-dimensional range."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the unique orthogonal projection onto each k-plane."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "smallest admissible case N=2",
+          "calculation": "The only index is k=1; a rank-one orthogonal projection has Frobenius norm sqrt(1)=1.",
+          "result": "Agrees with step 1.1 and the closed-bounded compactness argument in step 2.1; this finite case is a consistency check, not the general proof."
+        }
+      ],
+      "finite_checks_disposition": "The N=2 calculation checks the projection norm and indexing convention only; the proof uses closedness, boundedness, and finite union compactness for every N≥2."
+    },
+    "lem-qftx-holonomy-incidence-codimension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-complex-grassmannian-compactness",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$. For $1\\le k<N$, let $\\operatorname{Gr}_{\\mathbb C}(k,N)$ be the set of matrices $P\\in M_N(\\mathbb C)$ satisfying $P^*=P$, $P^2=P$, and $\\operatorname{tr}P=k$, with the topology inherited from $M_N(\\mathbb C)\\cong\\mathbb R^{2N^2}$. The map $P\\mapsto\\operatorname{ran}P$ identifies this space with the usual Grassmannian of complex $k$-planes in $\\mathbb C^N$. The finite union $\\mathscr G_N=\\bigcup_{1\\le k<N}\\operatorname{Gr}_{\\mathbb C}(k,N)$ is compact.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "source_section": "Statement",
+          "quote": "Let $F:M^m\\to N^n$ be smooth, let $q\\in N$ be a regular value, and assume\n$F^{-1}(q)$ is nonempty. Then $F^{-1}(q)$ is an embedded submanifold of\ncodimension $n$. Equivalently, it has dimension $m-n$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $M_m(\\mathbb C)$ as $\\mathbb R^{2m^2}$ and the Hermitian matrices as a real vector space of dimension $m^2$. On the open set of invertible matrices, the smooth map $\\Theta(Q)=Q^*Q$ has derivative $d\\Theta_Q(X)=Q^*X+X^*Q$. At a unitary $Q$, every Hermitian $H$ is the derivative value for $X=\\tfrac12 QH$. Thus $I_m$ is a regular value and [F2] makes $U(m)=\\Theta^{-1}(I_m)$ a manifold of dimension $m^2$. The determinant map $U(m)\\to S^1$ is a submersion: at the identity its derivative on a skew-Hermitian tangent matrix $X$ is $\\operatorname{tr}X$, which reaches the tangent line $i\\mathbb R$ by $X=itI_m/m$, and translation gives surjectivity at every group element. Consequently $SU(m)=\\det^{-1}(1)$ has dimension $m^2-1$. The same determinant argument for $(U(k)\\times U(N-k))\\to S^1$, $(U,V)\\mapsto\\det U\\det V$, shows that\n$$H_k=\\{\\operatorname{diag}(U,V):U\\in U(k),\\,V\\in U(N-k),\\,\\det U\\det V=1\\}$$\nis a closed Lie subgroup of dimension $k^2+(N-k)^2-1$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a $k$-plane $V_0$ and its orthogonal complement. A plane transverse to $V_0^\\perp$ is the graph of a unique complex-linear map $T:V_0\\to V_0^\\perp$. The graph projection is\n$$\nP_T=\\begin{pmatrix}I\\\\T\\end{pmatrix}(I+T^*T)^{-1}\\begin{pmatrix}I&T^*\\end{pmatrix},\n$$\nand its inverse chart is $T=(P_T)_{21}(P_T)_{11}^{-1}$. These formulas are smooth, and such planes form an open neighborhood because invertibility of $(P)_{11}$ is an open matrix condition. Thus the Grassmannian has local charts modeled on $\\operatorname{Hom}_{\\mathbb C}(V_0,V_0^\\perp)$ and real dimension $2k(N-k)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a sufficiently small graph chart, Gram–Schmidt applied to the columns of $\\binom I T$ and $\\binom{-T^*}I$ gives a smoothly varying unitary matrix $Q(T)$ carrying $V_0$ to the graph of $T$; all normalization denominators are positive because each list is linearly independent. A unitary matrix preserving a plane also preserves its orthogonal complement. Therefore $g_iV_P=V_P$ exactly when $Q(T)^*g_iQ(T)$ is block diagonal and belongs to $H_k$. The map $$(T,h_1,\\ldots,h_r)\\longmapsto(Q(T)h_1Q(T)^*,\\ldots,Q(T)h_rQ(T)^*,P_T)$$ and its inverse are smooth local coordinates for $I_{k,r}$. Hence $I_{k,r}$ is an embedded submanifold with dimension $2k(N-k)+r\\dim H_k$. It is closed because it is the zero set of the continuous matrix equations $g_iP-Pg_i=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting $\\dim H_k=k^2+(N-k)^2-1$ gives the displayed dimension. Since $\\dim SU(N)=N^2-1$, subtraction from the ambient product dimension gives codimension $r\\bigl((N^2-1)-(k^2+(N-k)^2-1)\\bigr)=2r\\,k(N-k)$. Subtracting $\\dim I_{k,r}$ from $\\dim SU(N)^r=r(N^2-1)$ instead gives $2(r-1)k(N-k)$, the dimension deficit used when the plane variable is included in the source of a holonomy family.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity tuple preserves every k-plane, so the incidence set in the Statement is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes r≥1; an empty holonomy tuple is outside its domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For r=1 the deficit formula in step 2.1 gives zero, as the incidence projects with stabilizer fibers."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The endpoints k=0 and k=N are excluded by the Statement hypothesis 1≤k<N."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no parameter or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 use explicit finite-dimensional charts and finite matrix operations only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.2 shows a plane-preserving unitary is block diagonal in the adapted frame."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2 shows every block-diagonal element in H_k preserves the graph plane."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=2, k=1, r=1 dimension check",
+          "calculation": "dim Gr_C(1,2)=2; dim S(U(1)×U(1))=1; hence dim I=3, ambient dimension=dim SU(2)+2=5, codimension=2, and deficit=0.",
+          "result": "Matches the formulas in the Statement and step 2.1; this arithmetic case does not prove the general dimension formula."
+        }
+      ],
+      "finite_checks_disposition": "The N=2,r=1 arithmetic is a convention check only; steps 1.1–4.1 establish the dimension and codimension formulas for all stated N,r,k."
+    },
+    "lem-qftx-irreducible-finite-holonomy-witness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact, connected, oriented, boundaryless smooth manifold of dimension $d\\in\\{3,4\\}$ with a smooth Riemannian metric, let $N\\ge2$, and fix a smooth right principal $SU(N)$-bundle $\\pi:P\\to M$, a smooth connection $A_0$, and a point $p_m\\in P$ over $x_m\\in M$. Use the standard unitary representation of $SU(N)$ on $\\mathbb C^N$ and the invariant positive inner product $\\langle X,Y\\rangle=-\\operatorname{tr}(XY)$ on $\\mathfrak{su}(N)$. Define the adjoint vector bundle $\\operatorname{ad}P=P\\times_{\\operatorname{Ad}}\\mathfrak{su}(N)$ and the adjoint group bundle $\\operatorname{Ad}P=P\\times_{\\operatorname{Ad}}SU(N)$ with associated-bundle relation $[pg,z]=[p,\\operatorname{Ad}_g z]$.\n\nChoose one finite smooth bundle atlas of local sections $(U_\\alpha,s_\\alpha)$ whose coordinate images are bounded balls, and a subordinate partition of unity with each cutoff compactly supported in its chart. On an overlap write $s_\\beta=s_\\alpha g_{\\alpha\\beta}$ for its smooth transition map $g_{\\alpha\\beta}:U_\\alpha\\cap U_\\beta\\to SU(N)$. Local representatives of an adjoint section $\\xi$ and an adjoint group section $u$ are defined by $\\xi(x)=[s_\\alpha(x),\\xi_\\alpha(x)]$ and $u(x)=[s_\\alpha(x),u_\\alpha(x)]$. They obey the transition rules $\\xi_\\beta=\\operatorname{Ad}_{g_{\\alpha\\beta}^{-1}}\\xi_\\alpha$ and $u_\\beta=g_{\\alpha\\beta}^{-1}u_\\alpha g_{\\alpha\\beta}$.\n\nFor each integer $k>d/2+1$, define $H^k(T^*M\\otimes\\operatorname{ad}P)$ and $H^{k+1}(\\operatorname{ad}P)$ by completion of smooth sections in the resulting finite-atlas norms, using weak derivatives of their local coefficients. Define $H^{k+1}(\\operatorname{Ad}P)$ as the corresponding completion of smooth group-bundle sections, represented locally by matrix-valued $H^{k+1}$ maps satisfying the stated transition rule. After localization by the partition of unity and extension by zero to the coordinate balls, the higher-order Sobolev embedding gives unique continuous representatives (indeed $C^1$); the group-valued representatives take values in the closed subgroup $SU(N)$ everywhere. This embedding is the point-evaluation convention used below. If $p\\in P$ lies over $x$ and $p=s_\\alpha(x)h$, define $u(p):=h^{-1}u_\\alpha(x)h$. The transition rule makes this independent of the chosen local section, and $u(x)=[p,u(p)]$. In particular, if $p_m=s_\\alpha(x_m)h_{\\alpha m}$, then $u(p_m)=h_{\\alpha m}^{-1}u_\\alpha(x_m)h_{\\alpha m}$ is the value in the $p_m$-trivialization. The map $\\widetilde u:P\\to P$ defined by $\\widetilde u(p):=p\\,u(p)$ is a $C^1$ bundle automorphism over $\\operatorname{id}_M$, with inverse $\\widetilde{u^{-1}}$; it is smooth when $u$ is smooth. Conversely, if $\\Phi:P\\to P$ is a $C^1$ bundle automorphism over $\\operatorname{id}_M$ commuting with the right $SU(N)$ action, write $\\Phi(p)=p\\,g_p$ for the unique $g_p\\in SU(N)$. Equivariance gives $g_{ph}=h^{-1}g_ph$, so $u(x):=[p,g_p]$ for $p\\in P_x$ is a well-defined $C^1$ adjoint-group section. These assignments are inverse; in the smooth case they identify smooth sections with the smooth gauge group defined by principal-bundle automorphisms.\n\nDefine the affine configuration space $\\mathcal A_k:=A_0+H^k(T^*M\\otimes\\operatorname{ad}P)$ and the set $\\mathcal G_{k+1}:=H^{k+1}(\\operatorname{Ad}P)$ of Sobolev gauge sections. Its based subset is $\\mathcal G_{k+1,m}:=\\{u\\in\\mathcal G_{k+1}:u(p_m)=e\\}$, equivalently the sections whose associated bundle automorphism fixes $p_m$. Let $Z_N=\\{zI_N:z^N=1\\}$ be the center of $SU(N)$, viewed as constant gauge sections. Indeed, if $Z=(z_{ij})$ is central and $D=\\operatorname{diag}(t_1,\\ldots,t_N)\\in SU(N)$, then $(t_j-t_i)z_{ij}=0$. For each $i\\ne j$ one can choose such a diagonal matrix with $t_i\\ne t_j$, so $Z$ is diagonal. Commuting with the determinant-one unitary rotation whose block on the $(i,j)$ coordinates is $\\begin{pmatrix}\\cos t&\\sin t\\\\-\\sin t&\\cos t\\end{pmatrix}$ for $t\\notin\\pi\\mathbb Z$ forces the $i$th and $j$th diagonal entries equal. Hence $Z=zI_N$; determinant one gives $z^N=1$, and conversely every such scalar is central. Write $\\bar{\\mathcal G}_{k+1}$ for the set of $Z_N$-cosets with quotient topology; the calculus lemma verifies that the induced pointwise operation makes it a Hilbert Lie group.\n\nLet $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$. For a connection form $\\omega$, write $A_\\alpha=s_\\alpha^*\\omega$ for its local form. The right-principal convention gives $A_\\beta=g_{\\alpha\\beta}^{-1}A_\\alpha g_{\\alpha\\beta}+g_{\\alpha\\beta}^{-1}dg_{\\alpha\\beta}$. The right gauge action is locally $A_\\alpha^u:=u_\\alpha^{-1}A_\\alpha u_\\alpha+u_\\alpha^{-1}du_\\alpha$. For smooth $u$, this is the pullback by $\\widetilde u$: for $X\\in T_xM$, $d(\\widetilde u\\circ s_\\alpha)_xX=d(R_{u_\\alpha(x)})_{s_\\alpha(x)}\\,ds_\\alpha(X)+(u_\\alpha^{-1}du_\\alpha(X))_P(s_\\alpha(x)u_\\alpha(x))$, and the connection equivariance and vertical reproduction identities give the displayed formula. For Sobolev $u$, the calculus lemma verifies that the local forms patch under the stated transition rules and define a smooth action on the Sobolev spaces above. For an adjoint section $\\xi$, set $d_A\\xi:=d\\xi+[A,\\xi]$ using the degree-one Lie-algebra-valued-form bracket. In local coordinates and an orthonormal adjoint frame, define the formal adjoint on an adjoint-valued one-form $a$ by $(d_A^*a)=-g^{ij}(\\nabla_i^{\\mathrm{LC}}a_j+[A_i,a_j])$, where $\\nabla^{\\mathrm{LC}}$ differentiates the covector index. This is the $L^2$ adjoint for the Riemannian volume and stated fiber metric; its local coefficient formula defines a distribution at Sobolev regularity.\n\nFor $A\\in\\mathcal A_k$, parallel transport of its $C^1$ connection form around piecewise smooth loops based at $p_m$ defines a subgroup $\\operatorname{Hol}_{p_m}(A)\\subseteq SU(N)$. Call $A$ irreducible when this subgroup leaves no nonzero proper complex subspace of $\\mathbb C^N$ invariant; changing the chosen frame conjugates the subgroup and leaves this condition unchanged. Write $\\mathcal A_k^*$ and $\\mathcal A_\\infty^*$ for the irreducible loci. Once the calculus lemma verifies the group action, define orbit equivalence by $A\\sim B$ exactly when $B=A^u$ for some gauge section $u$; all resulting quotients carry the quotient topology, whose open sets are those with open inverse image under the orbit projection.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-complex-grassmannian-compactness",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$. For $1\\le k<N$, let $\\operatorname{Gr}_{\\mathbb C}(k,N)$ be the set of matrices $P\\in M_N(\\mathbb C)$ satisfying $P^*=P$, $P^2=P$, and $\\operatorname{tr}P=k$, with the topology inherited from $M_N(\\mathbb C)\\cong\\mathbb R^{2N^2}$. The map $P\\mapsto\\operatorname{ran}P$ identifies this space with the usual Grassmannian of complex $k$-planes in $\\mathbb C^N$. The finite union $\\mathscr G_N=\\bigcup_{1\\le k<N}\\operatorname{Gr}_{\\mathbb C}(k,N)$ is compact.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), and let $\\mathbb{R}$ carry its usual topology, the\nmetric topology of $d_{\\mathbb{R}}(s,t) = |s-t|$\n([[lem-real-line-is-a-metric-space]], [[def-metric-topology]],\n[[def-metrizable-space]]). Then:\n\n1. **Continuous images.** If $f : X \\to Y$ is continuous\n   ([[def-continuous-map-top]]) and $(X, \\mathcal{T}_X)$ is compact\n   ([[def-compact-space]]), then $f[X]$ is a compact subset of $Y$. More\n   generally, if $K \\subseteq X$ is a compact subset of $X$ then $f[K]$ is a\n   compact subset of $Y$.\n2. **Extreme values.** If $(X, \\mathcal{T}_X)$ is compact and nonempty and\n   $g : X \\to \\mathbb{R}$ is continuous, then $g[X]$ has a maximum and a minimum\n   ([[def-max-min]]): there are $x_{\\max}, x_{\\min} \\in X$ with\n   $$g(x_{\\min}) \\;\\le\\; g(x) \\;\\le\\; g(x_{\\max}) \\qquad \\text{for every } x \\in X .$$\n3. **Compact to Hausdorff.** If $(X, \\mathcal{T}_X)$ is compact, $(Y,\n   \\mathcal{T}_Y)$ is Hausdorff ([[def-hausdorff-space]]) and $f : X \\to Y$ is a\n   continuous bijection, then $f$ is a homeomorphism\n   ([[def-homeomorphism-and-open-maps]]).\n\nNonemptiness in claim 2 is a hypothesis and not an oversight: for\n$X = \\varnothing$ the image is empty and has neither a maximum nor a minimum. **No\nchoice principle is used**: the one selection made below is over a finite index\nset, where [[lem-finite-choice]] is a theorem of ZF.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "source_section": "Statement",
+          "quote": "Let $I=[a,b]\\subseteq\\mathbb R$ be a nonempty compact interval, let\n$C:I\\to M_n(\\mathbb R)$ be continuous, let $t_0\\in I$, and let\n$Y_0\\in M_n(\\mathbb R)$. For $n=0$, there is exactly one map $Y:I\\to M_0(\\mathbb R)$, namely the empty-matrix map, and all entrywise differential identities are vacuous. For $n\\ge1$ and $a<b$, the linear matrix initial value problem\n\n$$Y'(t)=C(t)Y(t),\\qquad Y(t_0)=Y_0,$$\n\nhas a unique solution on all of $I$, with domain-relative one-sided\nderivatives at the endpoints. If $n\\ge1$ and $a=b$, then $t_0=a$ and there is exactly\none map $Y:I\\to M_n(\\mathbb R)$ with $Y(a)=Y_0$. This singleton map\nextends to a solution of $Z'=C(a)Z$, $Z(a)=Y_0$, on an open interval\naround $a$; any two such local continuations agree on their common interval\ncontaining $a$. No time derivative or IVP solution on the singleton itself\nis asserted.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\mathcal A_\\infty^*$ is exactly the set of connections whose holonomy action has no common proper nonzero invariant subspace.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $V\\in\\mathscr G_N$, irreducibility supplies a based piecewise-smooth loop $\\ell_V$ whose holonomy $g_V=\\operatorname{Hol}_A(\\ell_V)$ does not preserve $V$. If $P_V$ is the orthogonal projection onto $V$, then $(I-P_V)g_VP_V\\ne0$. For each fixed loop $\\ell$, the set of $V$ with $(I-P_V)\\operatorname{Hol}_A(\\ell)P_V\\ne0$ is open, since the projector topology and matrix multiplication are continuous. These open sets cover $\\mathscr G_N$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compactness in [F2] gives a finite subcover, hence finitely many loops $\\ell_1,\\ldots,\\ell_r$ for which no proper nonzero subspace is invariant under every $g_j=\\operatorname{Hol}_A(\\ell_j)$. The case $r=0$ cannot cover the nonempty space $\\mathscr G_N$, so $r\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define the continuous function\n$$h_A(P)=\\sum_{j=1}^r\\|(I-P)g_jP\\|_F$$\non $\\mathscr G_N$, where $\\|\\cdot\\|_F$ is the Frobenius norm. It is positive at every $P$ by step 2.1. By [F3] it has a minimum $\\delta>0$, and $h_A(P)\\ge\\delta$ for every $P\\in\\mathscr G_N$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On each smooth segment of a chosen loop, in a smooth trivialization along that segment, parallel transport satisfies $U'=-B(t)U$, $U(a)=I_N$, where $B:[a,b]\\to\\mathfrak{su}(N)$ is continuous. Identify $M_N(\\mathbb C)$ with $\\mathbb R^{2N^2}$ by taking real and imaginary parts of all entries. Left multiplication $X\\mapsto-B(t)X$ is then a real-linear endomorphism represented by a continuous matrix $C(t)\\in M_{2N^2}(\\mathbb R)$. Regard the realified transport vector as the first column of a $2N^2\\times2N^2$ real matrix with its other columns zero; it satisfies the first-column equation of the square matrix IVP $Y'=C(t)Y$. Thus [F4] gives its unique solution on the entire compact segment, and the same realification applies to a nearby coefficient $B+b$. Since $b(t)\\in\\mathfrak{su}(N)$, both $B$ and $B+b$ are in $\\mathfrak{su}(N)$. For either complex coefficient $B_0\\in\\{B,B+b\\}$ and its solution $Y'=-B_0Y$, $Y(a)=I_N$, skew-Hermiticity gives $(Y^*Y)'=Y^*B_0Y-Y^*B_0Y=0$, and Jacobi's formula gives $(\\det Y)'=-\\operatorname{tr}(B_0)\\det Y=0$. Thus $Y(t)\\in SU(N)$. If $\\widetilde U$ solves the equation with coefficient $B+b$, put $W=U^{-1}\\widetilde U$. Then $W'=-U^{-1}bU\\,W$, $W(a)=I_N$, and $W(t)\\in SU(N)$. The integral equation and unitary invariance of the Frobenius norm give $\\|W(b)-I_N\\|_F\\le\\int_a^b\\|b(t)\\|_F\\,dt$. A $C^1$ perturbation of the connection makes each of the finitely many segment integrals arbitrarily small; finite composition therefore makes all $g_j$ vary continuously in the stated $C^1$ topology. Choose a neighborhood with $\\|g_j(A')-g_j(A)\\|_F<\\delta/(2r)$ for every $j$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For any orthogonal projection $P$, both $\\|P\\|_{\\mathrm{op}}$ and $\\|I-P\\|_{\\mathrm{op}}$ are at most $1$. Thus $$\\left|\\|(I-P)\\operatorname{Hol}_{A'}(\\ell_j)P\\|_F-\\|(I-P)g_jP\\|_F\\right|\\le\\|\\operatorname{Hol}_{A'}(\\ell_j)-g_j\\|_F.$$ Summing over $j$ and using step 4.1 together with the uniform positive margin from step 3.1 gives $h_{A'}(P)>\\delta/2$ uniformly in $P$. Hence the same finite tuple has no common invariant proper nonzero subspace for every such $A'$.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "A $C^1$ neighborhood on the compact base is specified by finitely many continuous section seminorms; each is continuous in the $C^\\infty$ section topology. Therefore the neighborhood in step 4.1 is also a $C^\\infty$ neighborhood, and $\\mathcal A_\\infty^*$ is open in the $C^\\infty$ topology. Step 2.1 gives the finite holonomy witness at $A$.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "N≥2 makes the proper-plane Grassmannian union nonempty, and step 2.1 extracts a nonempty finite loop tuple."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 rules out an empty tuple because it cannot cover the nonempty Grassmannian union."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=2 only k=1 occurs; the compact-cover and positive-margin steps 1.2–3.1 still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes A is irreducible; reducible A is outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no limiting or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC; [A1] records it and the finite subcover is taken from a compact space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives existence and openness, not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives existence and openness, not a biconditional claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite matrix sample can establish the uniform witness for arbitrary holonomy; the proof is the compact Grassmannian cover and ODE continuity argument."
+    },
+    "lem-qftx-relative-finite-parameter-irreducible-avoidance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact, connected, oriented, boundaryless smooth manifold of dimension $d\\in\\{3,4\\}$ with a smooth Riemannian metric, let $N\\ge2$, and fix a smooth right principal $SU(N)$-bundle $\\pi:P\\to M$, a smooth connection $A_0$, and a point $p_m\\in P$ over $x_m\\in M$. Use the standard unitary representation of $SU(N)$ on $\\mathbb C^N$ and the invariant positive inner product $\\langle X,Y\\rangle=-\\operatorname{tr}(XY)$ on $\\mathfrak{su}(N)$. Define the adjoint vector bundle $\\operatorname{ad}P=P\\times_{\\operatorname{Ad}}\\mathfrak{su}(N)$ and the adjoint group bundle $\\operatorname{Ad}P=P\\times_{\\operatorname{Ad}}SU(N)$ with associated-bundle relation $[pg,z]=[p,\\operatorname{Ad}_g z]$.\n\nChoose one finite smooth bundle atlas of local sections $(U_\\alpha,s_\\alpha)$ whose coordinate images are bounded balls, and a subordinate partition of unity with each cutoff compactly supported in its chart. On an overlap write $s_\\beta=s_\\alpha g_{\\alpha\\beta}$ for its smooth transition map $g_{\\alpha\\beta}:U_\\alpha\\cap U_\\beta\\to SU(N)$. Local representatives of an adjoint section $\\xi$ and an adjoint group section $u$ are defined by $\\xi(x)=[s_\\alpha(x),\\xi_\\alpha(x)]$ and $u(x)=[s_\\alpha(x),u_\\alpha(x)]$. They obey the transition rules $\\xi_\\beta=\\operatorname{Ad}_{g_{\\alpha\\beta}^{-1}}\\xi_\\alpha$ and $u_\\beta=g_{\\alpha\\beta}^{-1}u_\\alpha g_{\\alpha\\beta}$.\n\nFor each integer $k>d/2+1$, define $H^k(T^*M\\otimes\\operatorname{ad}P)$ and $H^{k+1}(\\operatorname{ad}P)$ by completion of smooth sections in the resulting finite-atlas norms, using weak derivatives of their local coefficients. Define $H^{k+1}(\\operatorname{Ad}P)$ as the corresponding completion of smooth group-bundle sections, represented locally by matrix-valued $H^{k+1}$ maps satisfying the stated transition rule. After localization by the partition of unity and extension by zero to the coordinate balls, the higher-order Sobolev embedding gives unique continuous representatives (indeed $C^1$); the group-valued representatives take values in the closed subgroup $SU(N)$ everywhere. This embedding is the point-evaluation convention used below. If $p\\in P$ lies over $x$ and $p=s_\\alpha(x)h$, define $u(p):=h^{-1}u_\\alpha(x)h$. The transition rule makes this independent of the chosen local section, and $u(x)=[p,u(p)]$. In particular, if $p_m=s_\\alpha(x_m)h_{\\alpha m}$, then $u(p_m)=h_{\\alpha m}^{-1}u_\\alpha(x_m)h_{\\alpha m}$ is the value in the $p_m$-trivialization. The map $\\widetilde u:P\\to P$ defined by $\\widetilde u(p):=p\\,u(p)$ is a $C^1$ bundle automorphism over $\\operatorname{id}_M$, with inverse $\\widetilde{u^{-1}}$; it is smooth when $u$ is smooth. Conversely, if $\\Phi:P\\to P$ is a $C^1$ bundle automorphism over $\\operatorname{id}_M$ commuting with the right $SU(N)$ action, write $\\Phi(p)=p\\,g_p$ for the unique $g_p\\in SU(N)$. Equivariance gives $g_{ph}=h^{-1}g_ph$, so $u(x):=[p,g_p]$ for $p\\in P_x$ is a well-defined $C^1$ adjoint-group section. These assignments are inverse; in the smooth case they identify smooth sections with the smooth gauge group defined by principal-bundle automorphisms.\n\nDefine the affine configuration space $\\mathcal A_k:=A_0+H^k(T^*M\\otimes\\operatorname{ad}P)$ and the set $\\mathcal G_{k+1}:=H^{k+1}(\\operatorname{Ad}P)$ of Sobolev gauge sections. Its based subset is $\\mathcal G_{k+1,m}:=\\{u\\in\\mathcal G_{k+1}:u(p_m)=e\\}$, equivalently the sections whose associated bundle automorphism fixes $p_m$. Let $Z_N=\\{zI_N:z^N=1\\}$ be the center of $SU(N)$, viewed as constant gauge sections. Indeed, if $Z=(z_{ij})$ is central and $D=\\operatorname{diag}(t_1,\\ldots,t_N)\\in SU(N)$, then $(t_j-t_i)z_{ij}=0$. For each $i\\ne j$ one can choose such a diagonal matrix with $t_i\\ne t_j$, so $Z$ is diagonal. Commuting with the determinant-one unitary rotation whose block on the $(i,j)$ coordinates is $\\begin{pmatrix}\\cos t&\\sin t\\\\-\\sin t&\\cos t\\end{pmatrix}$ for $t\\notin\\pi\\mathbb Z$ forces the $i$th and $j$th diagonal entries equal. Hence $Z=zI_N$; determinant one gives $z^N=1$, and conversely every such scalar is central. Write $\\bar{\\mathcal G}_{k+1}$ for the set of $Z_N$-cosets with quotient topology; the calculus lemma verifies that the induced pointwise operation makes it a Hilbert Lie group.\n\nLet $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$. For a connection form $\\omega$, write $A_\\alpha=s_\\alpha^*\\omega$ for its local form. The right-principal convention gives $A_\\beta=g_{\\alpha\\beta}^{-1}A_\\alpha g_{\\alpha\\beta}+g_{\\alpha\\beta}^{-1}dg_{\\alpha\\beta}$. The right gauge action is locally $A_\\alpha^u:=u_\\alpha^{-1}A_\\alpha u_\\alpha+u_\\alpha^{-1}du_\\alpha$. For smooth $u$, this is the pullback by $\\widetilde u$: for $X\\in T_xM$, $d(\\widetilde u\\circ s_\\alpha)_xX=d(R_{u_\\alpha(x)})_{s_\\alpha(x)}\\,ds_\\alpha(X)+(u_\\alpha^{-1}du_\\alpha(X))_P(s_\\alpha(x)u_\\alpha(x))$, and the connection equivariance and vertical reproduction identities give the displayed formula. For Sobolev $u$, the calculus lemma verifies that the local forms patch under the stated transition rules and define a smooth action on the Sobolev spaces above. For an adjoint section $\\xi$, set $d_A\\xi:=d\\xi+[A,\\xi]$ using the degree-one Lie-algebra-valued-form bracket. In local coordinates and an orthonormal adjoint frame, define the formal adjoint on an adjoint-valued one-form $a$ by $(d_A^*a)=-g^{ij}(\\nabla_i^{\\mathrm{LC}}a_j+[A_i,a_j])$, where $\\nabla^{\\mathrm{LC}}$ differentiates the covector index. This is the $L^2$ adjoint for the Riemannian volume and stated fiber metric; its local coefficient formula defines a distribution at Sobolev regularity.\n\nFor $A\\in\\mathcal A_k$, parallel transport of its $C^1$ connection form around piecewise smooth loops based at $p_m$ defines a subgroup $\\operatorname{Hol}_{p_m}(A)\\subseteq SU(N)$. Call $A$ irreducible when this subgroup leaves no nonzero proper complex subspace of $\\mathbb C^N$ invariant; changing the chosen frame conjugates the subgroup and leaves this condition unchanged. Write $\\mathcal A_k^*$ and $\\mathcal A_\\infty^*$ for the irreducible loci. Once the calculus lemma verifies the group action, define orbit equivalence by $A\\sim B$ exactly when $B=A^u$ for some gauge section $u$; all resulting quotients carry the quotient topology, whose open sets are those with open inverse image under the orbit projection.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1",
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-irreducible-finite-holonomy-witness",
+          "source_section": "Statement",
+          "quote": "Assume ZF together with the Axiom of Choice. Let $M$ be $S^3$ or $S^4$ with its compact, connected, oriented, boundaryless smooth structure and a smooth Riemannian metric. Let $N\\ge2$, let $P\\to M$ be a smooth principal right $SU(N)$-bundle, choose a smooth reference connection $A_0$, and fix a basepoint $m\\in M$ and a point $p_m\\in P_m$ to frame its fiber. Put $\\mathcal A_\\infty=A_0+\\Omega^1(M;\\operatorname{ad}P)$ with the Fréchet topology generated by suprema of all derivatives of section coefficients in a fixed finite smooth bundle atlas. A based piecewise-smooth loop is a continuous map $\\ell:[0,1]\\to M$ that is smooth on finitely many subintervals and satisfies $\\ell(0)=\\ell(1)=m$. For a smooth connection $A$ and such a loop, parallel transport from $p_m$ ends at $p_mg_\\ell$ for a unique $g_\\ell\\in SU(N)$; let $\\operatorname{Hol}_A\\subseteq SU(N)$ be the subgroup generated by these elements. The standard representation is $g\\cdot v=gv$ on $\\mathbb C^N$. Call $A$ irreducible when there is no complex-linear subspace $V$ with $0\\subsetneq V\\subsetneq\\mathbb C^N$ and $gV=V$ for every $g\\in\\operatorname{Hol}_A$, and write $\\mathcal A_\\infty^*$ for this locus. Measure $C^1$ closeness by coefficient and first-derivative suprema in the same fixed finite bundle atlas. For every $A\\in\\mathcal A_\\infty^*$, a finite tuple of based piecewise-smooth loops has holonomies with no common nonzero proper invariant subspace; the same tuple continues to witness irreducibility on a $C^1$ neighborhood of $A$, so $\\mathcal A_\\infty^*$ is open in the $C^\\infty$ topology. Irreducibility here does not assert $\\operatorname{Hol}_A=SU(N)$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-holonomy-incidence-codimension",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$, $r\\ge1$, and $1\\le k<N$. For each orthogonal projection $P$ onto a complex $k$-plane in $\\mathbb C^N$, write $V_P=\\operatorname{ran}P$. Define\n$$\nI_{k,r}=\\{(g_1,\\ldots,g_r,P)\\in SU(N)^r\\times\\operatorname{Gr}_{\\mathbb C}(k,N):g_iV_P=V_P\\text{ for every }i\\},\n$$\nwhere $SU(N)$ has its usual matrix Lie-group structure and $\\operatorname{Gr}_{\\mathbb C}(k,N)$ has the orthogonal-projection topology. Then $I_{k,r}$ is a closed embedded smooth submanifold,\n$$\n\\dim I_{k,r}=2k(N-k)+r\\bigl(k^2+(N-k)^2-1\\bigr).\n$$\nIts codimension in $SU(N)^r\\times\\operatorname{Gr}_{\\mathbb C}(k,N)$ is $2r\\,k(N-k)$, and\n$$\n\\dim SU(N)^r-\\dim I_{k,r}=2(r-1)k(N-k).\n$$",
+          "uses": [
+            "7.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be jointly $C^\\infty$ in $(t,x,\\lambda)$ on an open time-state-parameter\ndomain. Near any base data $(t_0,x_0,\\lambda_0)$ there are a compact time\ninterval $I$ and a neighbourhood $W$ of $(x_0,\\lambda_0)$ such that, for every\n$(y,\\lambda)\\in W$, the solution of\n\n$$x'(t)=F(t,x(t),\\lambda),\\qquad x(t_0)=y,$$\n\nis defined on $I$, and the resulting solution map is smooth in the pair\n$(y,\\lambda)$.",
+          "uses": [
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-parametric-transversality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\mathcal F:M\\times S\\to N$ be a smooth family of maps and let $Z\\subseteq N$\nbe an embedded submanifold. If $\\mathcal F\\pitchfork Z$, then the set of\nparameters $s\\in S$ for which the slice $\\mathcal F_s:M\\to N$ fails to be\ntransverse to $Z$ is a null subset of $S$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "source_section": "Statement",
+          "quote": "Let $F:M^m\\to N^n$ be smooth, let $q\\in N$ be a regular value, and assume\n$F^{-1}(q)$ is nonempty. Then $F^{-1}(q)$ is an embedded submanifold of\ncodimension $n$. Equivalently, it has dimension $m-n$.",
+          "uses": [
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-morse-sard-for-smooth-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $F:M\\to N$ be a smooth map between smooth manifolds. Then the critical value\nset of $F$ is a null subset of $N$.",
+          "uses": [
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a positive-dimensional smooth manifold, let $\\mathcal A$ be a smooth\natlas on $M$, and let $E\\subseteq M$ be $\\mathcal A$-null in the sense of\n[[def-null-subset-of-a-smooth-manifold]]. Then $M\\setminus E$ is dense in $M$.\nIn particular, under Countable Choice the conclusion holds for any manifold-null\nset $E$.",
+          "uses": [
+            "9.1",
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-countable-unions-and-subsets-of-manifold-null-sets-are-null",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every subset of a manifold null set is\nnull, and every countable union of manifold null sets is null.",
+          "uses": [
+            "9.1",
+            "10.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $K=\\varnothing$ or $f(K)\\subseteq\\mathcal A_\\infty^*$, the constant homotopy suffices. Otherwise embed the finite complex compactly in $\\mathbb R^q$, $q\\ge1$, and let $U=f^{-1}(\\mathcal A_\\infty^*)$. Because $K$ is compact metrizable and $L$ is closed, nested metric neighborhoods with nested closures exist. The image $f(\\overline U_2)$ is compact by the open-cover definition of compactness and continuity of $f$, and remains compact in the weaker $C^1$ topology. The finite-loop openness in [F2] gives a $C^1$ ball around each image point; a finite cover by half-radius balls and the minimum of their radii give one uniform perturbation tolerance.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "cases",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a small positive tolerance $\\delta$ in each of those seminorms. Uniform continuity on compact $K$ gives a radius $\\rho>0$ so that $f(s_i)-f(s)$ is smaller than $\\delta$ in every selected seminorm when $s,s_i\\in K$ and $|s-s_i|<2\\rho$. Choose finitely many $s_i\\in K$ with the balls $B_\\rho(s_i)$ covering $K$. Let $\\psi_i$ be nonnegative smooth ambient bumps supported in $B_{2\\rho}(s_i)$ and positive on $B_\\rho(s_i)$, constructed by translating and rescaling $\\exp(-1/(1-|x|^2))$ on the unit ball and extending by zero. On the open neighborhood $V=\\{\\sum_i\\psi_i>0\\}$ of $K$, put $\\lambda_i=\\psi_i/\\sum_j\\psi_j$ and $g(s)=A_0+\\sum_i\\lambda_i(s)(f(s_i)-A_0)$. This is an ambient smooth finite-affine family of smooth connections. For $s\\in K$, every contributing sample is within $2\\rho$ of $s$, so $p(g(s)-f(s))<\\delta$ for each selected seminorm $p$. This construction smooths the parameter dependence directly and simultaneously on the whole polyhedron; it changes no face independently of its cofaces.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Choose a smooth ambient cutoff $0\\le\\theta\\le1$ which is zero on a neighborhood of $\\overline U_0$ and one on a neighborhood of the disjoint compact set $K\\setminus U_1$. Such a cutoff follows from finitely many ambient bumps separating the two compact sets. Define on $K$ the continuous family $h(s)=f(s)+\\theta(s)(g(s)-f(s))$. The straight interpolation from $f$ to $h$ is fixed near $L$ and is $\\delta$-small in every selected seminorm. By the uniform $C^1$ margin in step 1.1, choosing $\\delta$ small ensures it is irreducible on $\\overline U_2$. Its closed reducible-parameter set $R=\\{s\\in K:h(s)\\notin\\mathcal A_\\infty^*\\}$ is compact and contained in $K\\setminus U_2$, hence in the ambient open region where $\\theta=1$ and $h=g$ on $K$. If $R$ is empty the first interpolation already proves the result. Otherwise choose an ambient open $W$ with compact closure in $V\\cap\\{\\theta=1\\}$, containing $R$ and avoiding a neighborhood of $L$, and a smooth cutoff $0\\le\\chi\\le1$ with compact support $T\\subset W$, positive on $R$. All subsequent holonomy calculations use the ambient family $g$ on $W$; on the actual parameter subset $K\\cap W$ this is exactly $h$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Choose $r$ with $2(r-1)(N-1)>q$. Stereographic projection identifies $M\\setminus\\{m\\}$ with $\\mathbb R^d$, $d=3$ or $4$. Choose disjoint closed coordinate balls. Their exterior is path connected: detour polygonal paths around slightly larger disjoint balls along their connected boundary spheres, which lie outside the original closed balls; a ray outside all balls extends to $m$ under inverse stereographic projection. In each ball choose a small circle and a short arc, connect the basepoint to a point off the arc by a stem disjoint from the arc and other balls, and return along the same stem. In Euclidean coordinates a short arc has an explicit product tube from its radial and perpendicular normal directions. Shrink each tube to miss its stems and all other balls; the resulting loops have pairwise disjoint private control tubes.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "construct",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Along each fixed loop segment the realified transport equation has smooth coefficients in the ambient parameter. For each base parameter, the local solution intervals from [F4] cover the compact segment; a finite subcover, a subordinate subdivision, and the intersection of finitely many parameter neighborhoods yield smooth solution maps across the segment. Hence transport depends smoothly on the parameter locally throughout $W$. Choose the loop parameter to equal the tube coordinate $t$ on its control arc. The explicit tube form $b_{i,a}(s)=\\rho_i(t)c(z)U_i(s,t)X_aU_i(s,t)^{-1}\\,dt$ is a smooth adjoint-valued one-form; its contraction along the loop is the transported Lie-algebra element.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The realified equation in [F4] applies to the $w$-dependent coefficient $B_i(s,t)+\\sum_{j,a}w_{j,a}b_{j,a}(s,t)$ on each loop segment, so $\\Psi$ is a smooth real map and its parameter derivative exists. For the full transport $U:[0,1]\\to SU(N)$ satisfying $U'=-B(t)U$ on each segment and a perturbation $b(t)$, differentiate the real matrix ODE segmentwise to obtain $(U^{-1}\\delta U)'=-U^{-1}bU$ and integrate across the finitely many segments to get $U(1)^{-1}\\delta U(1)=-\\int_0^1 U(t)^{-1}b(t)U(t)\\,dt$. The control form in step 5.1 makes this last integral $-X_a$ for loop $i$. The other loop holonomies do not vary, since their images miss its tube. Therefore, for $D=r(N^2-1)$ real parameters $w=(w_{i,a})$, the derivative at $w=0$ of $\\Psi(s,w)=(\\operatorname{Hol}_{\\ell_i}(g(s)+\\sum_{j,a}w_{j,a}b_{j,a}(s)))_{i=1}^r$ is an isomorphism in the $w$ variable onto $T SU(N)^r$, for every $s\\in W$. Smooth ODE dependence and compactness of $T$ give a number $a>0$ on which this derivative remains an isomorphism uniformly for $s\\in T$ and $|w|<a$.",
+          "step": "6.1",
+          "inputs": [
+            "F4",
+            "step 4.1",
+            "step 5.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Choose a ball $B\\subset\\mathbb R^D$ about zero of radius less than $a$ and put $\\Phi(s,v)=\\Psi(s,\\chi(s)v)$ for $s\\in W$. Where $\\chi(s)>0$, its parameter derivative is $\\chi(s)D_w\\Psi(s,\\chi(s)v)$, still invertible by step 6.1. For each $1\\le k<N$, the map $\\mathcal F_k:((W_+\\times\\operatorname{Gr}_{\\mathbb C}(k,N))\\times B)\\to SU(N)^r\\times\\operatorname{Gr}_{\\mathbb C}(k,N)$, $((s,Q),v)\\mapsto(\\Phi(s,v),Q)$, with $W_+=\\{s\\in W:\\chi(s)>0\\}$, is a submersion and thus transverse to $I_{k,r}$ of [F3]. Notice that the smooth source is the ambient open set $W_+$, not an individual simplex or a nonsmooth polyhedron.",
+          "step": "7.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 3.1",
+            "step 6.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "By [F5], outside a null subset of $B$ the fixed-$v$ map from $W_+\\times\\operatorname{Gr}_{\\mathbb C}(k,N)$ is transverse to $I_{k,r}$. Its source dimension is $q+2k(N-k)$, while that incidence manifold has codimension $2r k(N-k)$ by [F3]. Since $k(N-k)\\ge N-1$ and $2(r-1)(N-1)>q$, the codimension is strictly larger than the source dimension. A transverse slice can therefore have no incidence preimage: a putative preimage would require a surjection from a smaller-dimensional tangent space to the normal space.",
+          "step": "8.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "step 4.1",
+            "step 7.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "If $Z_k$ is empty its projection is empty. Otherwise, in each target chart $I_{k,r}$ is a coordinate slice of codimension $2rk(N-k)$. The submersion $\\mathcal F_k$ composed with the normal-coordinate projection is a submersion, so [F7] in those charts gives $Z_k=\\mathcal F_k^{-1}(I_{k,r})$ as an embedded manifold of dimension $q+D+2k(N-k)-2rk(N-k)=q+D-2(r-1)k(N-k)<D$. Its projection to $B$ consists of critical values; [F8] makes that image null. The finite union with the exceptional sets from step 8.1 is null by [F9], so its complement is dense and supplies arbitrarily small good parameters.",
+          "step": "9.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "step 7.1",
+            "step 8.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "Define on all of $K$ the final family $h_v(s)=h(s)+\\chi(s)\\sum_{j,a}v_{j,a}b_{j,a}(s)$, with the added term zero off $W$. The compact support $T$ and its spatial smoothness make this term continuous in every section seminorm, and its value uniformly small in any specified finite list by taking $v$ sufficiently small. If $\\chi(s)>0$, then $s\\in W$ and $h(s)=g(s)$, so $h_v(s)$ has the holonomy tuple $\\Phi(s,v)$, which has no common invariant proper subspace by step 9.1. Therefore $h_v(s)$ is irreducible. If $\\chi(s)=0$, then $s\\notin R$ since $\\chi$ is positive on $R$, so $h_v(s)=h(s)$ was already irreducible. The straight perturbation homotopy from $h$ to $h_v$ is fixed on an open neighborhood of $L$. Concatenate it with the interpolation in step 3.1. Choose $\\delta$ and then $v$ within half of each requested seminorm tolerance; the triangle inequality gives the asserted bounds relative to the original $f$ for the entire concatenated homotopy. All formulas are global on $K$, so faces and cofaces agree automatically.",
+          "step": "10.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "step 9.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step1.1 uses the constant homotopy for emptyK."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The barycentric embedding in step1.1 uses an ambient Euclidean dimensionq>=1 even for zero-dimensionalK; the global finite-affine smoothing and incidence argument do not require simplex interiors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "ForN=2 onlyk=1 occurs; step4.1 choosesr with2(r−1)(N−1)>q and step8.1 verifies the strict dimension inequality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step1.1 handles an already entirely irreducible family; step3.1 also terminates if its reducible-parameter set is empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps3.1 and10.1 fix an open neighborhood ofL throughout both interpolations and bound the total change by the assigned seminorm tolerances."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 retains fullAC; steps8.1–9.1 apply its countable-choice Sard/transversality consequences and select a small parameter from a dense complement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a relative homotopy conclusion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a relative homotopy conclusion, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite computation checks the parameter-transversality claim for all finite polyhedra; the proof establishes it through smooth finite-dimensional incidence maps and Sard/transversality."
+    },
+    "thm-qftx-irreducible-connections-weak-contractibility": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact, connected, oriented, boundaryless smooth manifold of dimension $d\\in\\{3,4\\}$ with a smooth Riemannian metric, let $N\\ge2$, and fix a smooth right principal $SU(N)$-bundle $\\pi:P\\to M$, a smooth connection $A_0$, and a point $p_m\\in P$ over $x_m\\in M$. Use the standard unitary representation of $SU(N)$ on $\\mathbb C^N$ and the invariant positive inner product $\\langle X,Y\\rangle=-\\operatorname{tr}(XY)$ on $\\mathfrak{su}(N)$. Define the adjoint vector bundle $\\operatorname{ad}P=P\\times_{\\operatorname{Ad}}\\mathfrak{su}(N)$ and the adjoint group bundle $\\operatorname{Ad}P=P\\times_{\\operatorname{Ad}}SU(N)$ with associated-bundle relation $[pg,z]=[p,\\operatorname{Ad}_g z]$.\n\nChoose one finite smooth bundle atlas of local sections $(U_\\alpha,s_\\alpha)$ whose coordinate images are bounded balls, and a subordinate partition of unity with each cutoff compactly supported in its chart. On an overlap write $s_\\beta=s_\\alpha g_{\\alpha\\beta}$ for its smooth transition map $g_{\\alpha\\beta}:U_\\alpha\\cap U_\\beta\\to SU(N)$. Local representatives of an adjoint section $\\xi$ and an adjoint group section $u$ are defined by $\\xi(x)=[s_\\alpha(x),\\xi_\\alpha(x)]$ and $u(x)=[s_\\alpha(x),u_\\alpha(x)]$. They obey the transition rules $\\xi_\\beta=\\operatorname{Ad}_{g_{\\alpha\\beta}^{-1}}\\xi_\\alpha$ and $u_\\beta=g_{\\alpha\\beta}^{-1}u_\\alpha g_{\\alpha\\beta}$.\n\nFor each integer $k>d/2+1$, define $H^k(T^*M\\otimes\\operatorname{ad}P)$ and $H^{k+1}(\\operatorname{ad}P)$ by completion of smooth sections in the resulting finite-atlas norms, using weak derivatives of their local coefficients. Define $H^{k+1}(\\operatorname{Ad}P)$ as the corresponding completion of smooth group-bundle sections, represented locally by matrix-valued $H^{k+1}$ maps satisfying the stated transition rule. After localization by the partition of unity and extension by zero to the coordinate balls, the higher-order Sobolev embedding gives unique continuous representatives (indeed $C^1$); the group-valued representatives take values in the closed subgroup $SU(N)$ everywhere. This embedding is the point-evaluation convention used below. If $p\\in P$ lies over $x$ and $p=s_\\alpha(x)h$, define $u(p):=h^{-1}u_\\alpha(x)h$. The transition rule makes this independent of the chosen local section, and $u(x)=[p,u(p)]$. In particular, if $p_m=s_\\alpha(x_m)h_{\\alpha m}$, then $u(p_m)=h_{\\alpha m}^{-1}u_\\alpha(x_m)h_{\\alpha m}$ is the value in the $p_m$-trivialization. The map $\\widetilde u:P\\to P$ defined by $\\widetilde u(p):=p\\,u(p)$ is a $C^1$ bundle automorphism over $\\operatorname{id}_M$, with inverse $\\widetilde{u^{-1}}$; it is smooth when $u$ is smooth. Conversely, if $\\Phi:P\\to P$ is a $C^1$ bundle automorphism over $\\operatorname{id}_M$ commuting with the right $SU(N)$ action, write $\\Phi(p)=p\\,g_p$ for the unique $g_p\\in SU(N)$. Equivariance gives $g_{ph}=h^{-1}g_ph$, so $u(x):=[p,g_p]$ for $p\\in P_x$ is a well-defined $C^1$ adjoint-group section. These assignments are inverse; in the smooth case they identify smooth sections with the smooth gauge group defined by principal-bundle automorphisms.\n\nDefine the affine configuration space $\\mathcal A_k:=A_0+H^k(T^*M\\otimes\\operatorname{ad}P)$ and the set $\\mathcal G_{k+1}:=H^{k+1}(\\operatorname{Ad}P)$ of Sobolev gauge sections. Its based subset is $\\mathcal G_{k+1,m}:=\\{u\\in\\mathcal G_{k+1}:u(p_m)=e\\}$, equivalently the sections whose associated bundle automorphism fixes $p_m$. Let $Z_N=\\{zI_N:z^N=1\\}$ be the center of $SU(N)$, viewed as constant gauge sections. Indeed, if $Z=(z_{ij})$ is central and $D=\\operatorname{diag}(t_1,\\ldots,t_N)\\in SU(N)$, then $(t_j-t_i)z_{ij}=0$. For each $i\\ne j$ one can choose such a diagonal matrix with $t_i\\ne t_j$, so $Z$ is diagonal. Commuting with the determinant-one unitary rotation whose block on the $(i,j)$ coordinates is $\\begin{pmatrix}\\cos t&\\sin t\\\\-\\sin t&\\cos t\\end{pmatrix}$ for $t\\notin\\pi\\mathbb Z$ forces the $i$th and $j$th diagonal entries equal. Hence $Z=zI_N$; determinant one gives $z^N=1$, and conversely every such scalar is central. Write $\\bar{\\mathcal G}_{k+1}$ for the set of $Z_N$-cosets with quotient topology; the calculus lemma verifies that the induced pointwise operation makes it a Hilbert Lie group.\n\nLet $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$. For a connection form $\\omega$, write $A_\\alpha=s_\\alpha^*\\omega$ for its local form. The right-principal convention gives $A_\\beta=g_{\\alpha\\beta}^{-1}A_\\alpha g_{\\alpha\\beta}+g_{\\alpha\\beta}^{-1}dg_{\\alpha\\beta}$. The right gauge action is locally $A_\\alpha^u:=u_\\alpha^{-1}A_\\alpha u_\\alpha+u_\\alpha^{-1}du_\\alpha$. For smooth $u$, this is the pullback by $\\widetilde u$: for $X\\in T_xM$, $d(\\widetilde u\\circ s_\\alpha)_xX=d(R_{u_\\alpha(x)})_{s_\\alpha(x)}\\,ds_\\alpha(X)+(u_\\alpha^{-1}du_\\alpha(X))_P(s_\\alpha(x)u_\\alpha(x))$, and the connection equivariance and vertical reproduction identities give the displayed formula. For Sobolev $u$, the calculus lemma verifies that the local forms patch under the stated transition rules and define a smooth action on the Sobolev spaces above. For an adjoint section $\\xi$, set $d_A\\xi:=d\\xi+[A,\\xi]$ using the degree-one Lie-algebra-valued-form bracket. In local coordinates and an orthonormal adjoint frame, define the formal adjoint on an adjoint-valued one-form $a$ by $(d_A^*a)=-g^{ij}(\\nabla_i^{\\mathrm{LC}}a_j+[A_i,a_j])$, where $\\nabla^{\\mathrm{LC}}$ differentiates the covector index. This is the $L^2$ adjoint for the Riemannian volume and stated fiber metric; its local coefficient formula defines a distribution at Sobolev regularity.\n\nFor $A\\in\\mathcal A_k$, parallel transport of its $C^1$ connection form around piecewise smooth loops based at $p_m$ defines a subgroup $\\operatorname{Hol}_{p_m}(A)\\subseteq SU(N)$. Call $A$ irreducible when this subgroup leaves no nonzero proper complex subspace of $\\mathbb C^N$ invariant; changing the chosen frame conjugates the subgroup and leaves this condition unchanged. Write $\\mathcal A_k^*$ and $\\mathcal A_\\infty^*$ for the irreducible loci. Once the calculus lemma verifies the group action, define orbit equivalence by $A\\sim B$ exactly when $B=A^u$ for some gauge section $u$; all resulting quotients carry the quotient topology, whose open sets are those with open inverse image under the orbit projection.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-relative-finite-parameter-irreducible-avoidance",
+          "source_section": "Statement",
+          "quote": "Assume ZF together with the Axiom of Choice. Let $M$ be $S^3$ or $S^4$ with its compact, connected, oriented, boundaryless smooth structure, let $N\\ge2$, and let $P\\to M$ be a smooth principal right $SU(N)$-bundle with a smooth reference connection $A_0$. Fix a basepoint $m\\in M$ and a frame of $P_m$. Equip $\\mathcal A_\\infty=A_0+\\Omega^1(M;\\operatorname{ad}P)$ with the Fréchet topology generated by suprema of all derivatives of section coefficients in a fixed finite bundle atlas. Let $\\mathcal A_\\infty^*$ consist of connections whose based holonomy action on $\\mathbb C^N$ has no nonzero proper invariant complex subspace. Let $K$ be the geometric realization of a finite simplicial complex, let $L$ be the realization of a subcomplex, and let $f:K\\to\\mathcal A_\\infty$ be continuous with $f(L)\\subseteq\\mathcal A_\\infty^*$. Then there is a continuous homotopy $H:K\\times[0,1]\\to\\mathcal A_\\infty$, fixed on $L$ and on an open neighborhood of $L$, such that $H(\\cdot,1)$ maps all of $K$ into $\\mathcal A_\\infty^*$. For every finite list of these $C^\\infty$ section seminorms $p_1,\\ldots,p_m$ and positive tolerances $\\epsilon_1,\\ldots,\\epsilon_m$, the homotopy can be chosen with $\\sup_{(s,t)\\in K\\times[0,1]}p_j(H(s,t)-f(s))<\\epsilon_j$ for every $j$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-higher-homotopy-group-by-based-cubes",
+          "source_section": "Definition",
+          "quote": "Let $I=[0,1]$, $n\\ge1$, and $x_0\\in X$. Write $\\partial I^n$ for the points with at least one coordinate 0 or 1. The set $\\pi_n(X,x_0)$ consists of continuous $a:I^n\\to X$ with $a(\\partial I^n)=\\{x_0\\}$, modulo homotopies fixed on that entire boundary. This is a quotient by an equivalence relation by [[cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]].\n\nThe proposed product traverses $a$ first in coordinate 1:\n$$(a*b)(s,u)=\\begin{cases}a(2s,u)&0\\le s\\le1/2,\\\\b(2s-1,u)&1/2\\le s\\le1.\\end{cases}$$\nHere $u\\in I^{n-1}$, absent when $n=1$. The constant map is denoted $e$ and reversal is $a^{-}(s,u)=a(1-s,u)$. The following lemmas establish well-definedness and the group laws. For $n=1$ this is the convention of [[def-based-loops-and-fundamental-group]]. Separately, $\\pi_0(X,x_0)$ is the set of path components pointed by the component of $x_0$; no group law on it is asserted.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The affine space $\\mathcal A_\\infty$ contains $A_0$. Apply [F2] to the constant map from a one-point polyhedron with empty subpolyhedron and value $A_0$. Its endpoint is an element of $\\mathcal A_\\infty^*$, proving nonemptiness.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $A,B\\in\\mathcal A_\\infty^*$. The affine path $\\gamma(t)=(1-t)A+tB$ is continuous in the Fréchet topology and has irreducible endpoints. Apply [F2] with $K=I$ and $L=\\{0,1\\}$. The resulting endpoint path remains in $\\mathcal A_\\infty^*$ and fixes both endpoints, so the locus is path-connected.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix $j\\ge1$ and a based representative $u:(I^j,\\partial I^j)\\to(\\mathcal A_\\infty^*,A)$. The quotient $I^j/\\partial I^j$ is homeomorphic to $S^j$, so regard $u$ as a continuous sphere map with value $A$ at the collapsed boundary point. Identify $D^{j+1}$ with the cone on $S^j$ and define $F([r,x])=A_0+r(u(x)-A_0)$ for $0\\le r\\le1$. For each continuous section seminorm $p$, compactness of $S^j$ gives $C_p=\\sup_x p(u(x)-A_0)<\\infty$; hence $p(F([r,x])-A_0)\\le rC_p\\to0$ as $r\\to0$. This proves continuity at the cone apex in every defining seminorm, and away from the apex continuity follows from continuity of $u$ and affine operations. Thus $F:D^{j+1}\\to\\mathcal A_\\infty$ is a continuous filling of $u$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to $F$ with $K=D^{j+1}$ and $L=\\partial D^{j+1}=S^j$. Its boundary is already irreducible, so the endpoint is a map $G:D^{j+1}\\to\\mathcal A_\\infty^*$ agreeing with $u$ on the boundary. Choose the based point $x_0\\in S^j$ with $u(x_0)=A$. Since the disk is convex, $C_t(x)=(1-t)x+tx_0$ remains in the disk and fixes $x_0$. Then $G(C_t(x))$ is a homotopy from $G$ to the constant map at $A$ that fixes $x_0$ and remains in $\\mathcal A_\\infty^*$. Restricting it to $S^j$ gives a based nullhomotopy of $u$; by [F3], its class in $\\pi_j(\\mathcal A_\\infty^*,A)$ is zero. Since $j$ and $u$ were arbitrary, every stated homotopy group vanishes.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.3",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 proves A∞* is nonempty by avoidance from A0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement treats j≥1; step 1.2 separately proves path connectedness, the π0 boundary case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits N=2, and steps 1.3–2.1 apply to every j≥1 without a larger-N assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant based sphere map is included in the construction of step 1.3 and is repaired by step 1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.3 fixes the based boundary point during contraction of the repaired disk."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes ZF+AC and the conditional avoidance input carries the same axiom base."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts vanishing and path connectedness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts vanishing and path connectedness, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite homotopy-group sample proves vanishing for all j; the proof treats an arbitrary based cube map and repairs its affine disk extension."
+    },
+    "ex-qftx-relative-affine-disk-filling": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-smooth-sobolev-gauge-configuration",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact, connected, oriented, boundaryless smooth manifold of dimension $d\\in\\{3,4\\}$ with a smooth Riemannian metric, let $N\\ge2$, and fix a smooth right principal $SU(N)$-bundle $\\pi:P\\to M$, a smooth connection $A_0$, and a point $p_m\\in P$ over $x_m\\in M$. Use the standard unitary representation of $SU(N)$ on $\\mathbb C^N$ and the invariant positive inner product $\\langle X,Y\\rangle=-\\operatorname{tr}(XY)$ on $\\mathfrak{su}(N)$. Define the adjoint vector bundle $\\operatorname{ad}P=P\\times_{\\operatorname{Ad}}\\mathfrak{su}(N)$ and the adjoint group bundle $\\operatorname{Ad}P=P\\times_{\\operatorname{Ad}}SU(N)$ with associated-bundle relation $[pg,z]=[p,\\operatorname{Ad}_g z]$.\n\nChoose one finite smooth bundle atlas of local sections $(U_\\alpha,s_\\alpha)$ whose coordinate images are bounded balls, and a subordinate partition of unity with each cutoff compactly supported in its chart. On an overlap write $s_\\beta=s_\\alpha g_{\\alpha\\beta}$ for its smooth transition map $g_{\\alpha\\beta}:U_\\alpha\\cap U_\\beta\\to SU(N)$. Local representatives of an adjoint section $\\xi$ and an adjoint group section $u$ are defined by $\\xi(x)=[s_\\alpha(x),\\xi_\\alpha(x)]$ and $u(x)=[s_\\alpha(x),u_\\alpha(x)]$. They obey the transition rules $\\xi_\\beta=\\operatorname{Ad}_{g_{\\alpha\\beta}^{-1}}\\xi_\\alpha$ and $u_\\beta=g_{\\alpha\\beta}^{-1}u_\\alpha g_{\\alpha\\beta}$.\n\nFor each integer $k>d/2+1$, define $H^k(T^*M\\otimes\\operatorname{ad}P)$ and $H^{k+1}(\\operatorname{ad}P)$ by completion of smooth sections in the resulting finite-atlas norms, using weak derivatives of their local coefficients. Define $H^{k+1}(\\operatorname{Ad}P)$ as the corresponding completion of smooth group-bundle sections, represented locally by matrix-valued $H^{k+1}$ maps satisfying the stated transition rule. After localization by the partition of unity and extension by zero to the coordinate balls, the higher-order Sobolev embedding gives unique continuous representatives (indeed $C^1$); the group-valued representatives take values in the closed subgroup $SU(N)$ everywhere. This embedding is the point-evaluation convention used below. If $p\\in P$ lies over $x$ and $p=s_\\alpha(x)h$, define $u(p):=h^{-1}u_\\alpha(x)h$. The transition rule makes this independent of the chosen local section, and $u(x)=[p,u(p)]$. In particular, if $p_m=s_\\alpha(x_m)h_{\\alpha m}$, then $u(p_m)=h_{\\alpha m}^{-1}u_\\alpha(x_m)h_{\\alpha m}$ is the value in the $p_m$-trivialization. The map $\\widetilde u:P\\to P$ defined by $\\widetilde u(p):=p\\,u(p)$ is a $C^1$ bundle automorphism over $\\operatorname{id}_M$, with inverse $\\widetilde{u^{-1}}$; it is smooth when $u$ is smooth. Conversely, if $\\Phi:P\\to P$ is a $C^1$ bundle automorphism over $\\operatorname{id}_M$ commuting with the right $SU(N)$ action, write $\\Phi(p)=p\\,g_p$ for the unique $g_p\\in SU(N)$. Equivariance gives $g_{ph}=h^{-1}g_ph$, so $u(x):=[p,g_p]$ for $p\\in P_x$ is a well-defined $C^1$ adjoint-group section. These assignments are inverse; in the smooth case they identify smooth sections with the smooth gauge group defined by principal-bundle automorphisms.\n\nDefine the affine configuration space $\\mathcal A_k:=A_0+H^k(T^*M\\otimes\\operatorname{ad}P)$ and the set $\\mathcal G_{k+1}:=H^{k+1}(\\operatorname{Ad}P)$ of Sobolev gauge sections. Its based subset is $\\mathcal G_{k+1,m}:=\\{u\\in\\mathcal G_{k+1}:u(p_m)=e\\}$, equivalently the sections whose associated bundle automorphism fixes $p_m$. Let $Z_N=\\{zI_N:z^N=1\\}$ be the center of $SU(N)$, viewed as constant gauge sections. Indeed, if $Z=(z_{ij})$ is central and $D=\\operatorname{diag}(t_1,\\ldots,t_N)\\in SU(N)$, then $(t_j-t_i)z_{ij}=0$. For each $i\\ne j$ one can choose such a diagonal matrix with $t_i\\ne t_j$, so $Z$ is diagonal. Commuting with the determinant-one unitary rotation whose block on the $(i,j)$ coordinates is $\\begin{pmatrix}\\cos t&\\sin t\\\\-\\sin t&\\cos t\\end{pmatrix}$ for $t\\notin\\pi\\mathbb Z$ forces the $i$th and $j$th diagonal entries equal. Hence $Z=zI_N$; determinant one gives $z^N=1$, and conversely every such scalar is central. Write $\\bar{\\mathcal G}_{k+1}$ for the set of $Z_N$-cosets with quotient topology; the calculus lemma verifies that the induced pointwise operation makes it a Hilbert Lie group.\n\nLet $\\mathcal A_\\infty:=A_0+\\Omega^1(M,\\operatorname{ad}P)$ and let $\\mathcal G_\\infty:=\\Gamma^\\infty(\\operatorname{Ad}P)$ be the group of smooth adjoint-group sections under pointwise multiplication, identified above with the smooth gauge group. Give it the $C^\\infty$ section topology generated by all finite-atlas derivative seminorms. Define $\\bar{\\mathcal G}_\\infty:=\\mathcal G_\\infty/Z_N$. For a connection form $\\omega$, write $A_\\alpha=s_\\alpha^*\\omega$ for its local form. The right-principal convention gives $A_\\beta=g_{\\alpha\\beta}^{-1}A_\\alpha g_{\\alpha\\beta}+g_{\\alpha\\beta}^{-1}dg_{\\alpha\\beta}$. The right gauge action is locally $A_\\alpha^u:=u_\\alpha^{-1}A_\\alpha u_\\alpha+u_\\alpha^{-1}du_\\alpha$. For smooth $u$, this is the pullback by $\\widetilde u$: for $X\\in T_xM$, $d(\\widetilde u\\circ s_\\alpha)_xX=d(R_{u_\\alpha(x)})_{s_\\alpha(x)}\\,ds_\\alpha(X)+(u_\\alpha^{-1}du_\\alpha(X))_P(s_\\alpha(x)u_\\alpha(x))$, and the connection equivariance and vertical reproduction identities give the displayed formula. For Sobolev $u$, the calculus lemma verifies that the local forms patch under the stated transition rules and define a smooth action on the Sobolev spaces above. For an adjoint section $\\xi$, set $d_A\\xi:=d\\xi+[A,\\xi]$ using the degree-one Lie-algebra-valued-form bracket. In local coordinates and an orthonormal adjoint frame, define the formal adjoint on an adjoint-valued one-form $a$ by $(d_A^*a)=-g^{ij}(\\nabla_i^{\\mathrm{LC}}a_j+[A_i,a_j])$, where $\\nabla^{\\mathrm{LC}}$ differentiates the covector index. This is the $L^2$ adjoint for the Riemannian volume and stated fiber metric; its local coefficient formula defines a distribution at Sobolev regularity.\n\nFor $A\\in\\mathcal A_k$, parallel transport of its $C^1$ connection form around piecewise smooth loops based at $p_m$ defines a subgroup $\\operatorname{Hol}_{p_m}(A)\\subseteq SU(N)$. Call $A$ irreducible when this subgroup leaves no nonzero proper complex subspace of $\\mathbb C^N$ invariant; changing the chosen frame conjugates the subgroup and leaves this condition unchanged. Write $\\mathcal A_k^*$ and $\\mathcal A_\\infty^*$ for the irreducible loci. Once the calculus lemma verifies the group action, define orbit equivalence by $A\\sim B$ exactly when $B=A^u$ for some gauge section $u$; all resulting quotients carry the quotient topology, whose open sets are those with open inverse image under the orbit projection.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-relative-finite-parameter-irreducible-avoidance",
+          "source_section": "Statement",
+          "quote": "Assume ZF together with the Axiom of Choice. Let $M$ be $S^3$ or $S^4$ with its compact, connected, oriented, boundaryless smooth structure, let $N\\ge2$, and let $P\\to M$ be a smooth principal right $SU(N)$-bundle with a smooth reference connection $A_0$. Fix a basepoint $m\\in M$ and a frame of $P_m$. Equip $\\mathcal A_\\infty=A_0+\\Omega^1(M;\\operatorname{ad}P)$ with the Fréchet topology generated by suprema of all derivatives of section coefficients in a fixed finite bundle atlas. Let $\\mathcal A_\\infty^*$ consist of connections whose based holonomy action on $\\mathbb C^N$ has no nonzero proper invariant complex subspace. Let $K$ be the geometric realization of a finite simplicial complex, let $L$ be the realization of a subcomplex, and let $f:K\\to\\mathcal A_\\infty$ be continuous with $f(L)\\subseteq\\mathcal A_\\infty^*$. Then there is a continuous homotopy $H:K\\times[0,1]\\to\\mathcal A_\\infty$, fixed on $L$ and on an open neighborhood of $L$, such that $H(\\cdot,1)$ maps all of $K$ into $\\mathcal A_\\infty^*$. For every finite list of these $C^\\infty$ section seminorms $p_1,\\ldots,p_m$ and positive tolerances $\\epsilon_1,\\ldots,\\epsilon_m$, the homotopy can be chosen with $\\sup_{(s,t)\\in K\\times[0,1]}p_j(H(s,t)-f(s))<\\epsilon_j$ for every $j$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-irreducible-connections-weak-contractibility",
+          "source_section": "Statement",
+          "quote": "Assume ZF together with the Axiom of Choice. Let $M$ be $S^3$ or $S^4$, let $N\\ge2$, and let $P\\to M$ be any smooth principal right $SU(N)$-bundle. Fix a smooth reference connection $A_0$, a basepoint $m\\in M$, and a frame of $P_m$. Equip the affine space $\\mathcal A_\\infty=A_0+\\Omega^1(M;\\operatorname{ad}P)$ with its $C^\\infty$ section topology, and let $\\mathcal A_\\infty^*$ be the connections whose based holonomy action on $\\mathbb C^N$ has no nonzero proper invariant complex subspace. Then $\\mathcal A_\\infty^*$ is nonempty and path-connected, and for every $A\\in\\mathcal A_\\infty^*$ and every integer $j\\ge1$, $\\pi_j(\\mathcal A_\\infty^*,A)=0$. Here $\\pi_j(X,x)$ is the based homotopy group of continuous maps $u:(I^j,\\partial I^j)\\to(X,x)$ modulo homotopies that keep $\\partial I^j$ at $x$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The zero connection has parallel transport equal to the identity in the product trivialization, so its based holonomy group is $\\{I_N\\}$. Since $N\\ge2$, every complex line in $\\mathbb C^N$ is a nonzero proper subspace invariant under $I_N$. Thus $0\\notin\\mathcal A_\\infty^*$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The cone $D^{j+1}=CS^j$ identifies all $(0,x)$ to one apex and has boundary parameter $r=1$. The formula $F([r,x])=r f(x)$ is well-defined because it is independent of $x$ at $r=0$, and equals $f(x)$ at $r=1$. For every continuous section seminorm $p$, compactness of $S^j$ gives $C_p=\\sup_x p(f(x))<\\infty$, so $p(F([r,x]))\\le rC_p\\to0$ as $r\\to0$. Away from the apex, continuity follows from continuity of $f$ and scalar multiplication in the Fréchet vector space. Hence $F$ is a continuous affine filling in $\\mathcal A_\\infty$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By step 1.1, the apex value lies outside $\\mathcal A_\\infty^*$; therefore this explicit extension is not an irreducible filling, regardless of its irreducible boundary values. In particular, convexity of the full affine space does not imply convexity of its irreducible subset.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Apply [F2] to $F$ with $K=D^{j+1}$ and $L=S^j$. The lemma fixes the boundary and supplies a homotopic endpoint $\\widetilde F:D^{j+1}\\to\\mathcal A_\\infty^*$. If $x_0\\in S^j$ is the based point with $f(x_0)=A$, the maps $x\\mapsto\\widetilde F((1-t)x+tx_0)$ stay in the disk, remain in $\\mathcal A_\\infty^*$, and fix $x_0$. Their restriction to the boundary is a based nullhomotopy of $f$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Theorem [F3] supplies such irreducible sphere families, for example the constant family at any irreducible connection, and identifies the conclusion with vanishing of $\\pi_j(\\mathcal A_\\infty^*,A)$. The example therefore isolates the precise role of relative avoidance: it upgrades a continuous affine filling, which may hit a reducible connection, to an irreducible filling without moving the sphere family.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes j≥1, so its sphere boundary is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 computes identity holonomy at the zero connection and proves it is reducible."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=2 every complex line is proper; step 1.1 shows identity holonomy preserves it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant sphere family still has the cone apex zero; steps 1.1–2.1 apply unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 checks both r=0 at the apex and r=1 on the prescribed boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes ZF+AC and invokes the same conditional theorem for existence of sphere families."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example gives an explicit filling and repair, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example gives an explicit filling and repair, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-holonomy check in the smallest group",
+          "calculation": "For N=2 the product zero connection has holonomy {I_2}; every complex line is invariant under I_2.",
+          "result": "Matches step 1.1 and checks the reducible apex in the example; it is not a homotopy-group proof."
+        }
+      ],
+      "finite_checks_disposition": "The N=2 identity-holonomy calculation is a finite illustration only; the cone continuity and relative repair are proved for all stated N and all j≥1."
+    }
+  }
+}

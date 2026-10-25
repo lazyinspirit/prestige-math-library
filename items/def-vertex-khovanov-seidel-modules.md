@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-vertex-khovanov-seidel-modules.json
+  precheck: pass
 id: def-vertex-khovanov-seidel-modules
 kind: definition
-title: "The vertex modules S_i and their prime quotients"
+title: "The vertex modules $S_i$ and their prime quotients"
 status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
@@ -17,9 +20,7 @@ sources:
   references:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2a, printed pp. 9-11"
       url: "https://arxiv.org/pdf/math/0006056"
-verification:
-  audited: 2026-09-27
-  precheck: pass
+
 ---
 
 ## Definition

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-alternating-harmonic-power-series-at-the-boundary.json
+  precheck: pass
 id: ex-alternating-harmonic-power-series-at-the-boundary
 kind: example
 title: "The alternating harmonic power series tends to log 2 at the boundary point 1"
@@ -11,13 +14,6 @@ deps: [thm-abel-limit-theorem-for-complex-series-in-stolz-regions, thm-log-one-p
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-16
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -34,7 +30,7 @@ For $|z|<1$, put $F(z)=\sum_{n=1}^{\infty}(-1)^{n+1}z^n/n$. Then $F(z)\to\log2$ 
 
 **Given:** The alternating harmonic coefficients indexed from $n=1$.
 
-[L1] The alternating harmonic series converges to $\log2$ ([[thm-log-one-plus-x-power-series]]).
+[L1] The alternating harmonic series converges to $\log2$ ([[thm-log-one-plus-x-power-series|Logarithm power series with the Abel endpoint]]).
 
 [L2] A convergent complex series is recovered by its power series along every Stolz approach to $1$ ([[thm-abel-limit-theorem-for-complex-series-in-stolz-regions]]).
 

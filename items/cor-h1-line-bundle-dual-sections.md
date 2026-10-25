@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-h1-line-bundle-dual-sections.json
+  precheck: pass
 id: cor-h1-line-bundle-dual-sections
 kind: corollary
-title: "h^1 of a line bundle equals the dimension of the space of dual sections"
+title: "h¹ of a line bundle equals the dimension of the space of dual sections"
 status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
@@ -26,9 +29,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
     - title: "Joseph Lipman, Residues, duality, and the fundamental class of a scheme-map (2011)"
       url: "https://www.math.purdue.edu/~lipman/papers/Algecom.pdf"
-verification:
-  audited: 2026-10-02
-  precheck: pass
+
 ---
 
 ## Statement

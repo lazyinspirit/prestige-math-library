@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-qc-reversible-and-oracle-compute-copy-uncompute.json
+  precheck: pass
 id: ex-qc-reversible-and-oracle-compute-copy-uncompute
 kind: example
 title: "A reversible AND oracle with clean work"
@@ -24,8 +27,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pass
 sources:
   references:
     - title: "John Preskill, Quantum Computation, Chapter 5: Classical and Quantum Circuits (updated July 2015)"
@@ -83,3 +84,42 @@ The complete basis check is
 
 3.1 The vectors $|a,b,y,0\rangle$ in the eight table rows form a basis of the subspace with clean work fixed to zero, by [F6]–[F7]. Each gate is linear, so the verified basis action in Step 2.1 extends to every superposition in that subspace. For $S=1$, $E=2$, and $m=1$, the circuit uses three gate occurrences and one clean work bit, within the stated bounds $6S+4E+m=15$ and $S+E=3$ from [F3]. [step 2.1, F2, F3, F5, F6, F7, algebra] ∎
 
+## Remarks
+
+Read the circuit from left to right in the ordered register $(a,b,y,w)$. Filled dots are controls; a circled plus is the target. A crossing without a dot is not a control.
+
+```tikz
+\begin{tikzpicture}[x=1.2cm,y=0.9cm]
+\draw (0,0) -- (6,0);
+\draw (0,-0.8) -- (6,-0.8);
+\draw (0,-1.6) -- (6,-1.6);
+\draw (0,-2.4) -- (6,-2.4);
+\node[left] at (0,0) {$a$};
+\node[left] at (0,-0.8) {$b$};
+\node[left] at (0,-1.6) {$y$};
+\node[left] at (0,-2.4) {$w=0$};
+\node[right] at (6,0) {$a$};
+\node[right] at (6,-0.8) {$b$};
+\node[right] at (6,-1.6) {$y\oplus ab$};
+\node[right] at (6,-2.4) {$w=0$};
+\node at (1.4,0.6) {compute};
+\node at (3,0.6) {copy};
+\node at (4.6,0.6) {uncompute};
+\draw (1.4,0) -- (1.4,-2.4);
+\fill (1.4,0) circle (0.06);
+\fill (1.4,-0.8) circle (0.06);
+\draw (1.4,-2.4) circle (0.13);
+\draw (1.4,-2.53) -- (1.4,-2.27);
+\draw (3,-2.4) -- (3,-1.6);
+\fill (3,-2.4) circle (0.06);
+\draw (3,-1.6) circle (0.13);
+\draw (3,-1.73) -- (3,-1.47);
+\draw (4.6,0) -- (4.6,-2.4);
+\fill (4.6,0) circle (0.06);
+\fill (4.6,-0.8) circle (0.06);
+\draw (4.6,-2.4) circle (0.13);
+\draw (4.6,-2.53) -- (4.6,-2.27);
+\end{tikzpicture}
+```
+
+The first and third columns are Toffoli gates with controls $a,b$ and target $w$; the middle column is CNOT with control $w$ and target $y$. Thus the work value is successively $0,ab,ab,0$, while the target changes only in the middle column to $y\oplus ab$, exactly as in Verification Steps 1.1–2.1. The table and verification above establish the action independently of this illustration.

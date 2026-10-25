@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-monotone-finite-volume-entropy-scheme.json
+  precheck: n/a
 id: def-monotone-finite-volume-entropy-scheme
 kind: definition
 title: Monotone finite-volume scheme and invariant-interval CFL
@@ -25,12 +28,7 @@ sources:
         lic_pdes.pdf"
       locator: "§4.4.4, PDF pp. 49–50: local Lipschitz monotone fluxes and the CFL
         condition; §4.6, pp. 55–57: convergence hypotheses."
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
+
 ---
 
 ## Definition
@@ -70,7 +68,7 @@ recurrence, not the drawing.
   \draw[->] (3.55,1.05) -- (4.45,1.05);
   \node at (2,1.32) {$F(U_{j-1}^n,U_j^n)$};
   \node at (4,1.32) {$F(U_j^n,U_{j+1}^n)$};
-  \node[align=center] at (3,-0.7) {$U_j^{n+1}=U_j^n-\lambda(\text{right flux}-\text{left flux})$};
+  \node[align=center] at (3,-0.7) {$U_j^{n+1}=U_j^n-\lambda(\mathrm{right\ flux}-\mathrm{left\ flux})$};
 \end{tikzpicture}
 ```
 

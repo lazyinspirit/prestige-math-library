@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-product-of-content-zero-set-and-interval-has-content-zero.md

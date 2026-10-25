@@ -1,0 +1,1395 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qftx-nonabelian-gauge-data",
+    "def-qftx-principal-connection-form",
+    "def-qftx-lie-algebra-valued-form-bracket",
+    "lem-qftx-principal-curvature-cartan-bianchi",
+    "def-qftx-associated-covariant-derivative",
+    "ex-qftx-su2-flat-pure-gauge-connection",
+    "ex-qftx-su2-noncommuting-curvature"
+  ],
+  "contracts": {
+    "def-qftx-nonabelian-gauge-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "definition: the base, bundle, group, representation family, and admitted sectors are specified input data; no existence assertion over every base is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "definition: finite-dimensional representation spaces may have dimension zero; no positive representation degree is required."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The admitted sector set may be the singleton {[P]}; the definition explicitly permits this while retaining the specified global group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "definition: the admitted sector set may be the singleton containing the supplied bundle class."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The base M is without boundary; bundle sectors and representation labels are sets, not points on a parameter interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "definition: group, bundle, representations, and sector set are supplied objects; no arbitrary-family choice is added."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition specifies data, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition specifies data, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Reviewed the complete Definition and the eight direct supplier statements: countable choice, Lie group, tangent Lie algebra, topological/smooth principal bundles, finite representation, associated quotient, and its smooth vector-bundle theorem. The relation [pg,v]=[p,rho(g)v] agrees with the inverse diagonal action. The real associated-bundle theorem applies to the underlying real representation; its transition maps are complex-linear and therefore define the stated complex bundle. Compactness and noncommutativity are separate input conditions; a nonabelian finite discrete group can have zero Lie algebra and is not excluded. Supplied labelled representations add no choice principle; empty labels, zero representation dimension, empty base and singleton admitted sector set are allowed. AC_omega is declared for the supplied Lie-algebra construction. No universal classification/existence or empirical assertion is made. Definitions of isomorphism and sectors retain global group information. No statement links or diagrams occur. No defect or repair; reader/refuter findings are empty. Relevant convention source: Vákár §§1.1.3 and 1.1.5; local supplier statements, rather than source authority alone, justify the constructions."
+      }
+    },
+    "def-qftx-principal-connection-form": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smooth-principal-g-bundle",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group, $M$ a smooth manifold, and $P$\na smooth manifold. A **smooth right principal $G$-bundle** is a right principal\n$G$-bundle $\\pi:P\\to M$ in the topological sense of\n[[def-principal-g-bundle-and-associated-fiber-bundle]], with the following\nadditional smooth structure: $\\pi$ and the right $G$-action are smooth, and\nthe principal-bundle charts can be chosen as equivariant diffeomorphisms\n$\\pi^{-1}(U)\\cong U\\times G$. Thus each chart respects the projection to\n$U$ and the right action on the $G$ factor. The smoothness convention is that\nof [[def-smooth-map-between-manifolds-with-boundary]]; boundaryless manifolds\nare the default in this item.\n\nThe topological principal-bundle clause retains its free, transitive right\naction on every fibre and its local triviality. Smoothness adds compatible\ndifferentiable structure; it does not select a connection or assert that a\nglobal trivialization exists. The empty-base case is allowed and then $P$ is\nempty by the cited topological definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-principal-connection-and-vertical-curvature",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as recorded by\n[[def-countable-choice]], and let $\\pi:P\\to M$ be a smooth right principal\n$G$-bundle in the sense of\n[[def-smooth-principal-g-bundle]]. The tangent bundle $TP$ has the canonical\nsmooth structure supplied by\n[[thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure]]. Its\n**vertical subbundle** is\n$$VP:=\\ker(d\\pi)\\subseteq TP.$$\nIn each principal chart $U\\times G$, this is the tangent bundle in the $G$\nfactor, so it is a smooth vector subbundle of $TP$ in the sense of\n[[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]].\n\nA **principal connection** on $P$ is a smooth vector subbundle $H\\subseteq TP$\nsuch that $T_pP=V_pP\\oplus H_p$ for every $p\\in P$ and\n$$d(R_g)_p(H_p)=H_{pg}\\qquad(p\\in P,\\ g\\in G),$$\nwhere $R_g(p)=pg$ is the principal right action. Thus $H$ is a smoothly varying\nhorizontal complement to the vertical tangent directions, invariant under the\nstructure-group action. This definition is conditional on a specified $H$;\nit is not an existence theorem for connections on every bundle.\n\nLet $h:TP\\to H$ and $v:TP\\to VP$ be the projections given by this direct-sum\ndecomposition. For smooth vector fields $X,Y$ on $P$, define the\n**vertical-valued curvature** by\n$$K_H(X,Y):=-v([hX,hY]),$$\nwhere the vector-field bracket is the commutator\n[[def-lie-bracket-of-smooth-vector-fields]]. The bracket definition gives the\ncommutator on functions; [[thm-vector-fields-form-a-lie-algebra]] proves that\nit is again a smooth vector field. In a local frame adapted to the smooth\nsplitting $TP=VP\\oplus H$, the projections $h$ and $v$ are smooth. Therefore\n$v([hX,hY])$ is a smooth vertical vector field whenever $X,Y$ are smooth.\nThis formula is tensorial in $X,Y$: for a smooth function $f$,\n$$v([f hX,hY])=f\\,v([hX,hY])-hY(f)\\,v(hX)=f\\,v([hX,hY]),$$\nbecause $v(hX)=0$, and the same calculation in the second input gives\n$v([hX,f hY])=f\\,v([hX,hY])$, since $v(hY)=0$. It is alternating because\nthe bracket is alternating. To see the induced bundle map is smooth, choose\nlocal smooth frames $E_1,\\ldots,E_n$ of $TP$ and $F_1,\\ldots,F_r$ of $VP$.\nTensoriality gives, for\n$X=\\sum_i f_iE_i$ and $Y=\\sum_j g_jE_j$,\n$$K_H(X,Y)=\\sum_{i,j}f_i g_j K_H(E_i,E_j).$$\nEach $K_H(E_i,E_j)$ is a smooth section of $VP$, so its components in the\n$F_a$ frame are smooth; the displayed formula therefore has smooth local\ncoefficient functions. Thus the formula defines a smooth alternating bundle\nmap $TP\\times_P TP\\to VP$, independent of the local vector-field extensions\nrepresenting the tangent vectors.\n\nThis item uses the vertical-valued convention. It does not identify $VP$ with a\nLie-algebra-valued form or assert a Maurer–Cartan formula. Its axiom base\ncontains $\\mathrm{AC}_\\omega$ exactly through the canonical tangent-bundle\nand vector-field suppliers above; the displayed splitting and curvature\nformula themselves select no objects from a family.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-tangent-space-at-the-identity-is-a-lie-algebra",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. If $G$ is a finite-dimensional real Lie group\nwith identity $e$, then $\\mathfrak g=T_eG$, equipped with the bracket\ntransported from left-invariant smooth vector fields, is a finite-dimensional\nreal Lie algebra. It is denoted\n\n$$\\operatorname{Lie}(G)=\\mathfrak g.$$\n\nThe countable-choice assumption is used exactly through the supplied\ninvariant-field and smooth-vector-field results.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-exponential-map-of-a-lie-group",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, let $G$ be a finite-dimensional real Lie group\nwith identity $e$, and write $\\mathfrak g=T_eG$. For each\n$X\\in\\mathfrak g$, the existence-and-uniqueness theorem\n[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]]\nsupplies a unique one-parameter subgroup\n$\\gamma_X:\\mathbb R\\to G$ with $\\gamma_X'(0)=X$. The **exponential map of\n$G$** is the well-defined total map\n\n$$\\exp_G:\\mathfrak g\\longrightarrow G,\\qquad \\exp_G(X):=\\gamma_X(1).$$\n\nHere $\\mathrm{AC}_\\omega$ is the axiom of\n[[def-countable-choice|countable choice]].\nThe same theorem identifies $\\gamma_X$ with the integral curve through $e$\nof the left-invariant field $X^L$; the left translate\n$t\\mapsto g\\gamma_X(t)$ is therefore the corresponding integral curve through\n$g$. The countable-choice assumption is used exactly through that supplied\nsmooth invariant-field and completeness result, and evaluation at the single\ntime $1$ adds no choice.\n\nA Lie group is nonempty and boundaryless. If $\\dim G=0$, then\n$\\mathfrak g=0$ and $\\exp_G(0)=e$; the definition is unchanged in dimension\none. No metric or nondegeneracy condition occurs, and $1$ is not an endpoint\nof the global parameter domain $\\mathbb R$. This item defines a map and asserts\nno biconditional characterization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $G$ be a finite-dimensional real Lie group\nwith Lie algebra $\\mathfrak g=T_eG$.\n\nIf $\\gamma:\\mathbb R\\to G$ is a one-parameter subgroup and\n$X=\\gamma'(0)$, then\n\n$$\\gamma'(t)=d(L_{\\gamma(t)})_eX=X^L_{\\gamma(t)}$$\n\nfor every $t\\in\\mathbb R$; thus $\\gamma$ is the integral curve through $e$ of\nthe left-invariant field $X^L$. Conversely, the global integral curve through\n$e$ of $X^L$ is a one-parameter subgroup. Consequently every\n$X\\in\\mathfrak g$ determines a unique one-parameter subgroup with initial\nvelocity $X$.\n\nThe countable-choice assumption is used exactly through the supplied smooth\ninvariant-field construction and completeness theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conjugation-and-the-adjoint-representation-of-a-lie-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group with identity $e$ and Lie\nalgebra $\\mathfrak g=T_eG$. For $g\\in G$, **conjugation by $g$** is\n\n$$C_g:G\\longrightarrow G,\\qquad C_g(h)=ghg^{-1}.$$\n\nIt is a Lie-group automorphism. Indeed, associativity gives\n$C_g(hk)=C_g(h)C_g(k)$, its smoothness follows from the smooth multiplication\nand inversion of [[def-lie-group]], and $C_{g^{-1}}$ is its smooth inverse.\nThus its differential at the identity is the invertible linear map\n\n$$\\operatorname{Ad}_g:=d(C_g)_e:\\mathfrak g\\longrightarrow\\mathfrak g.$$\n\nHere $C_g(e)=e$, so the source and target tangent spaces are both\n$\\mathfrak g$; invertibility follows from\n[[cor-the-differential-of-a-diffeomorphism-is-an-isomorphism]]. Write\n$\\operatorname{GL}(\\mathfrak g)$ for the group of invertible real-linear maps\nof $\\mathfrak g$ in the sense of\n[[def-linear-isomorphism-and-invertible-linear-map]]. The **adjoint map** is\n\n$$\\operatorname{Ad}:G\\longrightarrow\\operatorname{GL}(\\mathfrak g),\\qquad g\\longmapsto\\operatorname{Ad}_g.$$\n\nThe target carries its standard smooth structure. Explicitly, if\n$n=\\dim\\mathfrak g\\geq1$, one fixed basis identifies\n$\\mathcal L(\\mathfrak g,\\mathfrak g)$ with $M_n(\\mathbb R)\\simeq\\mathbb R^{n^2}$\nby [[def-coordinate-column-and-matrix-of-a-linear-map]]. Under this\nidentification $\\operatorname{GL}(\\mathfrak g)$ is the open set\n$\\det\\ne0$: determinant is a polynomial by\n[[cor-determinant-is-a-polynomial-in-the-matrix-entries]], and invertibility\nis equivalent to nonzero determinant by\n[[thm-real-square-matrix-invertible-iff-determinant-nonzero]]. It therefore\nhas the restricted smooth structure from\n[[prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]].\nA second basis changes a matrix by $A\\mapsto P^{-1}AP$, a linear\ndiffeomorphism, so this smooth structure is independent of the fixed basis.\nIf $n=0$, then $\\operatorname{GL}(\\mathfrak g)$ is the singleton containing\nthe unique endomorphism of the zero vector space, with its unique\nzero-dimensional smooth structure; no determinant criterion is needed.\n\nThe next proposition proves that this map is a smooth group representation;\nafter that result it is called the **adjoint representation of $G$**.\n\nA Lie group is nonempty and boundaryless. If $\\dim G=0$, every\n$\\operatorname{Ad}_g$ is the unique automorphism of the zero vector space,\neven when the discrete group itself is nonabelian; dimension one requires no\nchange. No metric, nondegeneracy, interval, endpoint, choice principle, or\nbiconditional is involved. Fixing one finite basis of the supplied\nfinite-dimensional space is a single finite existential instantiation, not a\nchoice from a family.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-adjoint-is-a-smooth-lie-group-representation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite-dimensional real Lie group with Lie algebra\n$\\mathfrak g$. Its adjoint map is a group homomorphism\n\n$$\\operatorname{Ad}:G\\longrightarrow\\operatorname{GL}(\\mathfrak g),$$\n\nand it is smooth for the standard smooth structure on\n$\\operatorname{GL}(\\mathfrak g)$. In particular,\n\n$$\\operatorname{Ad}_{gh}=\\operatorname{Ad}_g\\circ\\operatorname{Ad}_h,\\qquad \\operatorname{Ad}_e=\\operatorname{id}_{\\mathfrak g}.$$\n\nThus $\\operatorname{Ad}$ is a smooth finite-dimensional real representation\nof $G$ on $\\mathfrak g$. No choice principle is required.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-differential-of-a-smooth-map",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth and let $p\\in M$. The **differential of $F$ at $p$** is the map $dF_p:T_pM\\to T_{F(p)}N$ defined by\n$$ dF_p(v)([g]):=v([g\\circ F]) $$\nfor every derivation $v\\in T_pM$ and every germ $[g]\\in C_{F(p)}^\\infty(N)$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-differentials-of-smooth-maps",
+          "source_section": "Statement",
+          "quote": "If $F:M\\to N$ and $G:N\\to P$ are smooth, then $d(G\\circ F)_p=dG_{F(p)}\\circ dF_p$ for every $p\\in M$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $p=s(x)a$ in an equivariant principal chart, with $s$ its local section and $a\\in G$. Then $\\phi_p(h)=p h=s(x)(a h)$; freeness and transitivity give bijectivity on the fibre, and this coordinate formula gives a smooth inverse. Hence $\\phi_p:G\\to P_x$, $h\\mapsto p h$, is a diffeomorphism, so its differential at $e$ is a linear isomorphism $T_eG\\to T_pP_x=V_pP$. For each $t\\in\\mathbb R$, the curve $c_t(s):=\\gamma_Z(ts)$ is a one-parameter subgroup with initial tangent $tZ$; uniqueness in [F4] gives $c_t=\\gamma_{tZ}$. Thus $\\exp_G(tZ)=\\gamma_{tZ}(1)=\\gamma_Z(t)$. The curve $t\\mapsto p\\exp_G(tZ)$ is therefore $\\phi_p\\circ\\gamma_Z$, whose derivative at zero is $d(\\phi_p)_eZ$; hence $\\zeta_p$ is the stated isomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the same chart, $\\zeta_p$ is the derivative of the smooth action map and its inverse is the derivative of the inverse fibre coordinate, so the family $\\zeta$ and its inverse are smooth bundle maps. The complement $TP=VP\\oplus H$ gives a smooth bundle projection $v$, so $\\omega=\\zeta^{-1}\\circ v$ is a smooth fibrewise-linear 1-form. On a vertical vector $Z_P(p)=\\zeta_p(Z)$, the projection is the vector itself; therefore $\\omega(Z_P)=Z$. Also $v_pX=0$ exactly when $X\\in H_p$, so $\\ker\\omega=H$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $g\\in G$, let $R_g(p)=pg$. The maps $R_g\\circ\\phi_p$ and $\\phi_{pg}\\circ C_{g^{-1}}$ agree because $p h g=pg(g^{-1}hg)$. Differentiating at $e$ by [F6] gives $d(R_g)_p Z_P(p)=(\\operatorname{Ad}_{g^{-1}}Z)_P(pg)$. Since $H$ and $VP$ are right-invariant, their projections commute with $dR_g$; applying the definition of $\\omega$ yields $\\omega_{pg}(dR_gX)=\\operatorname{Ad}_{g^{-1}}\\omega_p(X)$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, if $\\omega$ has the stated reproduction and equivariance properties, define $v:=\\zeta\\circ\\omega$ and $H:=\\ker\\omega$. Reproduction gives $v\\circ\\zeta=\\zeta$, hence $v^2=v$, $\\operatorname{im}v=VP$, and $TP=VP\\oplus H$. Equivariance of $\\omega$ and the orbit differential identity from step 2.2 make $H$ right-invariant; smoothness of $\\omega$ makes it a smooth subbundle. Thus this is a principal connection and the construction is inverse to step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The imported curvature $K_H$ is a smooth alternating map with values in $VP$, and $\\omega$ restricts to the inverse of $\\zeta:P\\times\\mathfrak g\\to VP$; consequently $\\kappa_H=\\omega\\circ K_H$ is a well-defined smooth $\\mathfrak g$-valued alternating 2-form. This is only the conversion of its target fibre; the Cartan identity is proved separately.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is conditional on a supplied bundle and splitting; it asserts no existence theorem for an empty base."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: for a zero-dimensional Lie group the Lie algebra and vertical tangent are zero, so the orbit differential remains the stated isomorphism."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional structure group the orbit differential still identifies its one-dimensional Lie algebra with each vertical tangent space; proof 1.1 uses only the principal chart isomorphism."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: the projection/form construction remains meaningful in zero vertical dimension."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The t=0 in the fundamental vector is differentiation of the two-sided exponential curve, not an endpoint condition on H or omega."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: a local chart at the given point is used; no family of charts or global section is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1: the supplied horizontal splitting produces a form with reproduction, kernel, and equivariance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.2: a form with reproduction and equivariance reconstructs the principal horizontal splitting."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Reviewed Definition and every proof step 1.1–4.1 against its eleven direct supplier statements. The orbit map in an equivariant chart is h -> (x,ah), hence its differential is a smooth vertical trivialization with smooth inverse. Reparametrizing the unique one-parameter subgroup proves exp(tZ)=gamma_Z(t); no unprovided smooth exponential assertion is used. Differentiating R_g phi_p=phi_pg C_(g^-1) gives the correct Ad_(g^-1) law for a right action. Smooth projection v and its kernel recover the supplied horizontal splitting; conversely reproduction gives a smooth idempotent of constant vertical rank, so its kernel is a smooth complement. Curvature conversion is only omega composed with the imported tensor K_H=-v[hX,hY], not an assumed Cartan identity. Checked zero-dimensional G, zero vertical fibres, empty base and both reconstruction directions. AC_omega is inherited explicitly and no connection-existence claim is made. No diagram or statement-link defect. No repair; reader/refuter findings are empty. Independently inspected Vákár §1.3.1, Claim 1.3.1 (orbit differential) and Neeb §5.4 (right connection convention)."
+      }
+    },
+    "def-qftx-lie-algebra-valued-form-bracket": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-dimensional-lie-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be either $\\mathbb R$ or $\\mathbb C$. A\n**finite-dimensional Lie algebra over $\\mathbb F$** is a finite-dimensional\n$\\mathbb F$-vector space $\\mathfrak g$ together with an $\\mathbb F$-bilinear\nmap\n\n$$[\\ ,\\ ]:\\mathfrak g\\times\\mathfrak g\\longrightarrow\\mathfrak g$$\n\nsuch that, for all $X,Y,Z\\in\\mathfrak g$,\n\n$$[X,X]=0$$\n\nand\n\n$$[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0.$$\n\nThe first identity is **alternation** and the second is the **Jacobi\nidentity**. Over $\\mathbb R$ or $\\mathbb C$, alternation is equivalent to\nskew-symmetry. Indeed, bilinearity and alternation give\n$0=[X+Y,X+Y]=[X,Y]+[Y,X]$, while skew-symmetry gives\n$2[X,X]=0$ and hence $[X,X]=0$ because both fields have characteristic zero.\nFor a complex Lie algebra the bracket is required to be complex-bilinear, not\nmerely real-bilinear.\n\nThe definition permits the zero bracket. The zero vector space, with its\nunique bracket, is a zero-dimensional Lie algebra. On a one-dimensional space,\nevery alternating bilinear bracket is zero: any two vectors are scalar\nmultiples of one vector and bilinearity reduces their bracket to $[X,X]=0$.\nA vector space is nonempty because it contains zero. No basis is selected by\nasserting finite-dimensionality, so the definition is choice-free. It is\npurely algebraic and has no metric, nondegeneracy, manifold-boundary, or\nendpoint condition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, let $V$ be a finite-dimensional real vector\nspace, and let $k\\geq0$. A **smooth $V$-valued differential $k$-form** on\n$M$ is a family of alternating $k$-linear maps\n\n$$\\alpha_p:(T_pM)^k\\longrightarrow V$$\n\nsuch that $\\lambda\\circ\\alpha$ is a scalar smooth $k$-form in the sense of\n[[def-smooth-differential-k-form]] for every $\\lambda\\in V^*$. Equivalently,\nfor one (and hence every) basis $(v_1,\\ldots,v_r)$ of $V$, the unique\ncomponents in $\\alpha=\\sum_i v_i\\alpha^i$ all belong to $\\Omega^k(M)$.\n\nFor such an $\\alpha$, its **componentwise exterior derivative** is the unique\n$V$-valued $(k+1)$-form $d_V\\alpha$ characterized by\n\n$$\\lambda\\circ d_V\\alpha=d(\\lambda\\circ\\alpha)$$\n\nfor every $\\lambda\\in V^*$. Indeed, in a basis with dual basis\n$(\\lambda^1,\\ldots,\\lambda^r)$, set\n\n$$d_V\\alpha=\\sum_i v_i\\,d\\alpha^i,\\qquad \\alpha^i=\\lambda^i\\circ\\alpha.$$\n\nThe scalar formula defining $d$ is real-linear term by term\n[[def-exterior-derivative-by-the-invariant-vector-field-formula]], and its\noutput is a smooth form\n[[lem-the-invariant-exterior-derivative-formula-is-c-infinity-multilinear]].\nThus the displayed construction has the stated characterization. It is\nindependent of the chosen basis because linear functionals separate points of\n$V$, and the characterization also proves uniqueness.\n\nThe two smoothness descriptions are equivalent in both directions: testing\nall $\\lambda$ includes the dual basis components, while every\n$\\lambda\\circ\\alpha$ is a fixed real linear combination of the components in\none basis. If $M$ is empty, these assignments and identities are vacuous. If\n$V=0$, there is only the zero-valued form and its derivative is zero; if\n$\\dim V=1$, the definition is exactly the scalar definition after choosing\none nonzero basis vector. No metric, nondegeneracy, manifold boundary, or\nendpoint is involved. A single finite basis exists by finite-dimensionality;\nthe definition is basis-independent and chooses no basis or family, so no\nchoice axiom is used.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-exterior-derivative-is-a-graded-derivation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold. The exterior derivative is an\n$\\mathbb R$-linear map $d:\\Omega^*(M)\\to\\Omega^*(M)$ of degree one.\nFor homogeneous smooth forms $\\alpha\\in\\Omega^p(M)$ and\n$\\beta\\in\\Omega^q(M)$, $$d(\\alpha\\wedge\\beta)=d\\alpha\\wedge\\beta+(-1)^{\\deg\\alpha}\\alpha\\wedge d\\beta.$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-wedge-product-of-differential-forms",
+          "source_section": "Definition",
+          "quote": "Let $\\alpha\\in\\Omega^k(M)$ and $\\beta\\in\\Omega^\\ell(M)$. Their **wedge product**\nis the differential form defined pointwise by\n\n$$ (\\alpha\\wedge\\beta)_p:=\\alpha_p\\wedge\\beta_p\\in\\operatorname{Alt}^{k+\\ell}(T_pM). $$\n\nThe next proposition verifies that this pointwise field is smooth.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-differential-forms-form-a-graded-commutative-algebra",
+          "source_section": "Statement",
+          "quote": "The graded vector space\n\n$$ \\Omega^*(M):=\\bigoplus_{k\\ge 0}\\Omega^k(M) $$\n\nwith the wedge product is an associative graded-commutative algebra.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a finite basis $(e_a)_{a=1}^n$ of $\\mathfrak g$ with dual basis $(e^a)_{a=1}^n$, and write $\\alpha=\\sum_a e_a\\alpha^a$, $\\beta=\\sum_b e_b\\beta^b$, where $\\alpha^a=e^a\\circ\\alpha$ and $\\beta^b=e^b\\circ\\beta$ are smooth scalar forms. Expanding the alternating permutation sum gives $[\\alpha\\wedge\\beta]=\\sum_{a,b}[e_a,e_b]\\,\\alpha^a\\wedge\\beta^b$; this finite sum is smooth and alternating, hence is in $\\Omega^{p+q}(M,\\mathfrak g)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Swapping the two blocks of $p$ and $q$ arguments in the defining permutation sum contributes the sign $(-1)^{pq}$; antisymmetry of the inner Lie bracket contributes the minus sign. Therefore $[\\alpha\\wedge\\beta]=-(-1)^{pq}[\\beta\\wedge\\alpha]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the finite basis expansion of step 1.1, apply the scalar graded derivation rule [F3] to each $\\alpha^a\\wedge\\beta^b$ and retain the fixed coefficient $[e_a,e_b]$. Summing the resulting finite terms gives $d[\\alpha\\wedge\\beta]=[d\\alpha\\wedge\\beta]+(-1)^p[\\alpha\\wedge d\\beta]$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "For homogeneous $\\alpha,\\beta,\\gamma$, the same basis expansion writes $\\left[\\alpha\\wedge\\left[\\beta\\wedge\\gamma\\right]\\right]$ with coefficient $[e_a,[e_b,e_c]]$ and form factor $\\alpha^a\\wedge\\beta^b\\wedge\\gamma^c$. The right-hand terms have coefficients $\\left[\\,\\left[e_a,e_b\\right],e_c\\right]$ and, after commuting $\\beta^b$ past $\\alpha^a$ using [F4], $[e_b,[e_a,e_c]]$, with the same form factor. The equality of coefficients is exactly the Lie-algebra Jacobi identity in [F1], so the graded Jacobi formula follows.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\mathfrak g=0$, all forms and brackets are zero; if $p=0$ or $q=0$, the same formulas use the empty wedge with sign $+1$. The finite basis in step 1.1 is one finite-dimensional coordinate calculation, not a choice from a family. The definition and identities hold on the empty manifold as well.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: the identities also hold on the empty manifold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: when the Lie algebra is zero all forms and brackets vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For p=q=1 the alternating sum is [A(X),B(Y)]-[A(Y),B(X)], giving one half [A wedge A](X,Y)=[A(X),A(Y)] as stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: degree zero uses the empty wedge with sign plus one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The degrees p,q are nonnegative form degrees; no integration domain or limiting parameter occurs in the shuffle definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 and step 3.1: only one finite basis of the fixed finite-dimensional space is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states identities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states identities, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Reviewed Definition and Proof steps 1.1–3.1 against all five direct suppliers (finite-dimensional Lie algebra, vector-valued forms, wedge product, graded-commutative algebra, and graded derivation). The permutation normalization equals the finite component sum [e_a,e_b] alpha^a wedge beta^b; block permutation gives -(-1)^(pq), and the second Jacobi term acquires precisely the cancelling (-1)^(pq). Componentwise differentiation gives the asserted signed derivative rule. Checked p=0, q=0, zero Lie algebra, degrees above dimension, and empty M; selecting one finite basis invokes no family choice. Definition is uninterrupted; references follow it. No diagram is needed. No defect or repair; current reader/refuter findings are empty. Vákár §1.3.1 and Neeb §6.1 are convention references, while all identities are proved locally."
+      }
+    },
+    "lem-qftx-principal-curvature-cartan-bianchi": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-principal-connection-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle for a finite-dimensional real Lie group $G$, with $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$. A supplied principal connection is a smooth, right-invariant complement $TP=VP\\oplus H$, where $VP=\\ker d\\pi$; write $v:TP\\to VP$ for the projection along $H$, and let $K_H(X,Y)=-v([hX,hY])$ be its vertical-valued curvature. For $Z\\in\\mathfrak g$ and $p\\in P$, define the fundamental vertical vector $Z_P(p)=\\left.\\frac{d}{dt}\\right|_{t=0}p\\exp_G(tZ)$. The orbit differential $\\zeta_p: \\mathfrak g\\to V_pP$, $Z\\mapsto Z_P(p)$, is a linear isomorphism, as proved below. Define the **principal connection 1-form** by\n\n$$\\omega_p(X):=\\zeta_p^{-1}(v_pX),\\qquad X\\in T_pP.$$\n\nThen $\\omega$ is a smooth $\\mathfrak g$-valued 1-form satisfying $\\omega(Z_P)=Z$, $\\ker\\omega=H$, and $R_g^*\\omega=\\operatorname{Ad}_{g^{-1}}\\omega$ for every fixed $g\\in G$. Conversely, a smooth $\\mathfrak g$-valued 1-form with the reproduction and equivariance properties determines the principal connection $H=\\ker\\omega$. The converted vertical curvature $\\kappa_H:=\\omega\\circ K_H$ is a $\\mathfrak g$-valued alternating 2-form; its equality with the Cartan curvature is established in the curvature lemma.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-principal-connection-and-vertical-curvature",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as recorded by\n[[def-countable-choice]], and let $\\pi:P\\to M$ be a smooth right principal\n$G$-bundle in the sense of\n[[def-smooth-principal-g-bundle]]. The tangent bundle $TP$ has the canonical\nsmooth structure supplied by\n[[thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure]]. Its\n**vertical subbundle** is\n$$VP:=\\ker(d\\pi)\\subseteq TP.$$\nIn each principal chart $U\\times G$, this is the tangent bundle in the $G$\nfactor, so it is a smooth vector subbundle of $TP$ in the sense of\n[[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]].\n\nA **principal connection** on $P$ is a smooth vector subbundle $H\\subseteq TP$\nsuch that $T_pP=V_pP\\oplus H_p$ for every $p\\in P$ and\n$$d(R_g)_p(H_p)=H_{pg}\\qquad(p\\in P,\\ g\\in G),$$\nwhere $R_g(p)=pg$ is the principal right action. Thus $H$ is a smoothly varying\nhorizontal complement to the vertical tangent directions, invariant under the\nstructure-group action. This definition is conditional on a specified $H$;\nit is not an existence theorem for connections on every bundle.\n\nLet $h:TP\\to H$ and $v:TP\\to VP$ be the projections given by this direct-sum\ndecomposition. For smooth vector fields $X,Y$ on $P$, define the\n**vertical-valued curvature** by\n$$K_H(X,Y):=-v([hX,hY]),$$\nwhere the vector-field bracket is the commutator\n[[def-lie-bracket-of-smooth-vector-fields]]. The bracket definition gives the\ncommutator on functions; [[thm-vector-fields-form-a-lie-algebra]] proves that\nit is again a smooth vector field. In a local frame adapted to the smooth\nsplitting $TP=VP\\oplus H$, the projections $h$ and $v$ are smooth. Therefore\n$v([hX,hY])$ is a smooth vertical vector field whenever $X,Y$ are smooth.\nThis formula is tensorial in $X,Y$: for a smooth function $f$,\n$$v([f hX,hY])=f\\,v([hX,hY])-hY(f)\\,v(hX)=f\\,v([hX,hY]),$$\nbecause $v(hX)=0$, and the same calculation in the second input gives\n$v([hX,f hY])=f\\,v([hX,hY])$, since $v(hY)=0$. It is alternating because\nthe bracket is alternating. To see the induced bundle map is smooth, choose\nlocal smooth frames $E_1,\\ldots,E_n$ of $TP$ and $F_1,\\ldots,F_r$ of $VP$.\nTensoriality gives, for\n$X=\\sum_i f_iE_i$ and $Y=\\sum_j g_jE_j$,\n$$K_H(X,Y)=\\sum_{i,j}f_i g_j K_H(E_i,E_j).$$\nEach $K_H(E_i,E_j)$ is a smooth section of $VP$, so its components in the\n$F_a$ frame are smooth; the displayed formula therefore has smooth local\ncoefficient functions. Thus the formula defines a smooth alternating bundle\nmap $TP\\times_P TP\\to VP$, independent of the local vector-field extensions\nrepresenting the tangent vectors.\n\nThis item uses the vertical-valued convention. It does not identify $VP$ with a\nLie-algebra-valued form or assert a Maurer–Cartan formula. Its axiom base\ncontains $\\mathrm{AC}_\\omega$ exactly through the canonical tangent-bundle\nand vector-field suppliers above; the displayed splitting and curvature\nformula themselves select no objects from a family.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-lie-algebra-valued-form-bracket",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $\\mathfrak g$ a finite-dimensional real Lie algebra. For homogeneous $\\alpha\\in\\Omega^p(M,\\mathfrak g)$ and $\\beta\\in\\Omega^q(M,\\mathfrak g)$, define their **graded bracket** by\n\n$$[\\alpha\\wedge\\beta](X_1,\\ldots,X_{p+q}) := \\frac{1}{p!q!}\\sum_{\\sigma\\in S_{p+q}}\\operatorname{sgn}(\\sigma)[\\alpha(X_{\\sigma(1)},\\ldots,X_{\\sigma(p)}),\\beta(X_{\\sigma(p+1)},\\ldots,X_{\\sigma(p+q)})].$$\n\nHere $\\Omega^p(M,\\mathfrak g)$ is the space of smooth alternating $p$-linear forms with values in $\\mathfrak g$, the inner bracket is the Lie-algebra bracket, and the sum is over all permutations. This is a smooth $\\mathfrak g$-valued $(p+q)$-form. It obeys graded skew-symmetry $[\\alpha\\wedge\\beta]=-(-1)^{pq}[\\beta\\wedge\\alpha]$, graded Jacobi\n\n$$\\left[\\alpha\\wedge\\left[\\beta\\wedge\\gamma\\right]\\right]=\\left[\\left[\\alpha\\wedge\\beta\\right]\\wedge\\gamma\\right]+(-1)^{pq}\\left[\\beta\\wedge\\left[\\alpha\\wedge\\gamma\\right]\\right],$$\n\nand the exterior-derivative rule\n\n$$d[\\alpha\\wedge\\beta]=[d\\alpha\\wedge\\beta]+(-1)^p[\\alpha\\wedge d\\beta].$$\n\nIn particular, for $\\mathfrak g$-valued 1-forms $A,B$, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$, so $\\tfrac12[A\\wedge A](X,Y)=[A(X),A(Y)]$. This fixes the normalization used by the Cartan curvature formula.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conjugation-and-the-adjoint-representation-of-a-lie-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group with identity $e$ and Lie\nalgebra $\\mathfrak g=T_eG$. For $g\\in G$, **conjugation by $g$** is\n\n$$C_g:G\\longrightarrow G,\\qquad C_g(h)=ghg^{-1}.$$\n\nIt is a Lie-group automorphism. Indeed, associativity gives\n$C_g(hk)=C_g(h)C_g(k)$, its smoothness follows from the smooth multiplication\nand inversion of [[def-lie-group]], and $C_{g^{-1}}$ is its smooth inverse.\nThus its differential at the identity is the invertible linear map\n\n$$\\operatorname{Ad}_g:=d(C_g)_e:\\mathfrak g\\longrightarrow\\mathfrak g.$$\n\nHere $C_g(e)=e$, so the source and target tangent spaces are both\n$\\mathfrak g$; invertibility follows from\n[[cor-the-differential-of-a-diffeomorphism-is-an-isomorphism]]. Write\n$\\operatorname{GL}(\\mathfrak g)$ for the group of invertible real-linear maps\nof $\\mathfrak g$ in the sense of\n[[def-linear-isomorphism-and-invertible-linear-map]]. The **adjoint map** is\n\n$$\\operatorname{Ad}:G\\longrightarrow\\operatorname{GL}(\\mathfrak g),\\qquad g\\longmapsto\\operatorname{Ad}_g.$$\n\nThe target carries its standard smooth structure. Explicitly, if\n$n=\\dim\\mathfrak g\\geq1$, one fixed basis identifies\n$\\mathcal L(\\mathfrak g,\\mathfrak g)$ with $M_n(\\mathbb R)\\simeq\\mathbb R^{n^2}$\nby [[def-coordinate-column-and-matrix-of-a-linear-map]]. Under this\nidentification $\\operatorname{GL}(\\mathfrak g)$ is the open set\n$\\det\\ne0$: determinant is a polynomial by\n[[cor-determinant-is-a-polynomial-in-the-matrix-entries]], and invertibility\nis equivalent to nonzero determinant by\n[[thm-real-square-matrix-invertible-iff-determinant-nonzero]]. It therefore\nhas the restricted smooth structure from\n[[prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]].\nA second basis changes a matrix by $A\\mapsto P^{-1}AP$, a linear\ndiffeomorphism, so this smooth structure is independent of the fixed basis.\nIf $n=0$, then $\\operatorname{GL}(\\mathfrak g)$ is the singleton containing\nthe unique endomorphism of the zero vector space, with its unique\nzero-dimensional smooth structure; no determinant criterion is needed.\n\nThe next proposition proves that this map is a smooth group representation;\nafter that result it is called the **adjoint representation of $G$**.\n\nA Lie group is nonempty and boundaryless. If $\\dim G=0$, every\n$\\operatorname{Ad}_g$ is the unique automorphism of the zero vector space,\neven when the discrete group itself is nonabelian; dimension one requires no\nchange. No metric, nondegeneracy, interval, endpoint, choice principle, or\nbiconditional is involved. Fixing one finite basis of the supplied\nfinite-dimensional space is a single finite existential instantiation, not a\nchoice from a family.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-adjoint-is-a-smooth-lie-group-representation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite-dimensional real Lie group with Lie algebra\n$\\mathfrak g$. Its adjoint map is a group homomorphism\n\n$$\\operatorname{Ad}:G\\longrightarrow\\operatorname{GL}(\\mathfrak g),$$\n\nand it is smooth for the standard smooth structure on\n$\\operatorname{GL}(\\mathfrak g)$. In particular,\n\n$$\\operatorname{Ad}_{gh}=\\operatorname{Ad}_g\\circ\\operatorname{Ad}_h,\\qquad \\operatorname{Ad}_e=\\operatorname{id}_{\\mathfrak g}.$$\n\nThus $\\operatorname{Ad}$ is a smooth finite-dimensional real representation\nof $G$ on $\\mathfrak g$. No choice principle is required.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $F:G\\to H$ be a homomorphism of\nfinite-dimensional real Lie groups, with Lie algebras\n$\\mathfrak g=T_eG$ and $\\mathfrak h=T_{e_H}H$. Then\n\n$$dF_e:\\mathfrak g\\longrightarrow\\mathfrak h$$\n\nis a Lie-algebra homomorphism. The countable-choice assumption is used exactly\nthrough the supplied smooth invariant-field and tangent-bracket results.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-differential-of-adjoint-is-ad",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $G$ be a finite-dimensional real Lie group\nwith Lie algebra $\\mathfrak g$. Under the canonical open-subset identification\n\n$$T_I\\operatorname{GL}(\\mathfrak g)\\simeq\\operatorname{End}(\\mathfrak g),$$\n\nthe differential of the adjoint representation at the identity is\n\n$$d(\\operatorname{Ad})_e(X)=\\operatorname{ad}_X\\qquad(X\\in\\mathfrak g).$$\n\nConsequently\n$[\\operatorname{ad}_X,\\operatorname{ad}_Y]=\\operatorname{ad}_{[X,Y]_G}$.\nThe countable-choice assumption is used exactly through the supplied smooth\ninvariant-field, tangent-bracket, exponential, and vector-field pushforward\ninterfaces.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-left-maurer-cartan-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as in [[def-countable-choice]], let $G$ be a Lie\ngroup [[def-lie-group]] with identity $e$, and write $\\mathfrak g=T_eG$. A\n**$\\mathfrak g$-valued one-form** on $G$ means a\nsmooth map $\\alpha:TG\\to\\mathfrak g$ whose restriction\n$\\alpha_g:T_gG\\to\\mathfrak g$ is linear for every $g$. Equivalently,\n$V\\mapsto(\\pi_G(V),\\alpha(V))$ is a smooth vector-bundle map\n$TG\\to G\\times\\mathfrak g$ over $\\operatorname{id}_G$ in the sense of\n[[def-vector-bundle-map-over-a-smooth-base-map]].\n\nThe **left Maurer--Cartan form** is the $\\mathfrak g$-valued one-form\n$\\theta:TG\\to\\mathfrak g$ whose fibre map at $g$ is\n\n$$\\theta_g=d(L_{g^{-1}})_g:T_gG\\longrightarrow T_eG=\\mathfrak g.$$\n\nThis formula is well-defined because left translation by $g^{-1}$ sends $g$\nto $e$. It is smooth and fibrewise linear because\n[[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]]\nidentifies\n\n$$TG\\longrightarrow G\\times\\mathfrak g,\\qquad V_g\\longmapsto(g,\\theta_gV_g)$$\n\nas the inverse vector-bundle isomorphism to left trivialization. In\nparticular, $\\theta_e=d(L_e)_e=\\operatorname{id}_{\\mathfrak g}$.\n\nThe stated $\\mathrm{AC}_\\omega$ is used exactly through that supplied smooth\nleft-trivialization theorem; the pointwise formula and passage to its second\ncomponent add no choice. A Lie group is nonempty. When $\\dim G=0$, $\\theta$\nis the unique map between zero tangent fibres, and the definition is unchanged\nin dimension one. Lie groups are boundaryless by convention, and no metric,\nnondegeneracy, endpoint, or biconditional occurs.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, let $V$ be a finite-dimensional real vector\nspace, and let $k\\geq0$. A **smooth $V$-valued differential $k$-form** on\n$M$ is a family of alternating $k$-linear maps\n\n$$\\alpha_p:(T_pM)^k\\longrightarrow V$$\n\nsuch that $\\lambda\\circ\\alpha$ is a scalar smooth $k$-form in the sense of\n[[def-smooth-differential-k-form]] for every $\\lambda\\in V^*$. Equivalently,\nfor one (and hence every) basis $(v_1,\\ldots,v_r)$ of $V$, the unique\ncomponents in $\\alpha=\\sum_i v_i\\alpha^i$ all belong to $\\Omega^k(M)$.\n\nFor such an $\\alpha$, its **componentwise exterior derivative** is the unique\n$V$-valued $(k+1)$-form $d_V\\alpha$ characterized by\n\n$$\\lambda\\circ d_V\\alpha=d(\\lambda\\circ\\alpha)$$\n\nfor every $\\lambda\\in V^*$. Indeed, in a basis with dual basis\n$(\\lambda^1,\\ldots,\\lambda^r)$, set\n\n$$d_V\\alpha=\\sum_i v_i\\,d\\alpha^i,\\qquad \\alpha^i=\\lambda^i\\circ\\alpha.$$\n\nThe scalar formula defining $d$ is real-linear term by term\n[[def-exterior-derivative-by-the-invariant-vector-field-formula]], and its\noutput is a smooth form\n[[lem-the-invariant-exterior-derivative-formula-is-c-infinity-multilinear]].\nThus the displayed construction has the stated characterization. It is\nindependent of the chosen basis because linear functionals separate points of\n$V$, and the characterization also proves uniqueness.\n\nThe two smoothness descriptions are equivalent in both directions: testing\nall $\\lambda$ includes the dual basis components, while every\n$\\lambda\\circ\\alpha$ is a fixed real linear combination of the components in\none basis. If $M$ is empty, these assignments and identities are vacuous. If\n$V=0$, there is only the zero-valued form and its derivative is zero; if\n$\\dim V=1$, the definition is exactly the scalar definition after choosing\none nonzero basis vector. No metric, nondegeneracy, manifold boundary, or\nendpoint is involved. A single finite basis exists by finite-dimensionality;\nthe definition is basis-independent and chooses no basis or family, so no\nchoice axiom is used.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-the-exterior-derivative-commutes-with-pullback",
+          "source_section": "Statement",
+          "quote": "For every smooth map $F:M\\to N$ and every form $\\omega$ on $N$, $$d(F^*\\omega)=F^*(d\\omega).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-the-exterior-derivative-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every differential form $\\omega$, $d(d\\omega)=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-smooth-principal-g-bundle",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group, $M$ a smooth manifold, and $P$\na smooth manifold. A **smooth right principal $G$-bundle** is a right principal\n$G$-bundle $\\pi:P\\to M$ in the topological sense of\n[[def-principal-g-bundle-and-associated-fiber-bundle]], with the following\nadditional smooth structure: $\\pi$ and the right $G$-action are smooth, and\nthe principal-bundle charts can be chosen as equivariant diffeomorphisms\n$\\pi^{-1}(U)\\cong U\\times G$. Thus each chart respects the projection to\n$U$ and the right action on the $G$ factor. The smoothness convention is that\nof [[def-smooth-map-between-manifolds-with-boundary]]; boundaryless manifolds\nare the default in this item.\n\nThe topological principal-bundle clause retains its free, transitive right\naction on every fibre and its local triviality. Smoothness adds compatible\ndifferentiable structure; it does not select a connection or assert that a\nglobal trivialization exists. The empty-base case is allowed and then $P$ is\nempty by the cited topological definition.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-lie-derivative-of-a-tensor-field",
+          "source_section": "Definition",
+          "quote": "If $X$ has local flow $\\Phi_t$ and $T$ is a smooth tensor field of type $(r,s)$, its Lie derivative is $$\\mathcal L_XT=\\left.\\frac d{dt}\\right|_{t=0}\\Phi_t^*T,$$ on every local flow domain where this derivative is defined. Here the pullback by the local diffeomorphism $\\Phi_t$ acts by $d\\Phi_{-t}$ on each contravariant slot and by $d\\Phi_t$ on each covariant slot.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-lie-derivative-of-a-differential-form",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a smooth vector field on $M$.  For $\\omega\\in\\Omega^k(M)$,\n$\\mathcal L_X\\omega$ is the Lie derivative of $\\omega$ regarded as an\nalternating covariant tensor.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lie-derivative-of-a-vector-field-equals-the-lie-bracket",
+          "source_section": "Statement",
+          "quote": "For smooth vector fields $X$ and $Y$ on $M$,\n\n$$ \\mathcal L_XY=[X,Y]. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-lie-bracket-of-smooth-vector-fields",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be smooth vector fields on $M$. Their **Lie bracket** is the\noperator on smooth functions defined by\n\n$$ [X,Y]f:=X(Yf)-Y(Xf). $$\n\nThe next results show that this commutator is again induced by a smooth vector\nfield on $M$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fundamental field $Z_P$, $\\omega(Z_P)=Z$ is constant. The exterior-derivative formula therefore gives $d\\omega(Z_P,Y)=Z_P(\\omega(Y))-\\omega([Z_P,Y])=(\\mathcal L_{Z_P}\\omega)(Y)$ by [F9]. Differentiating $R_{\\exp(tZ)}^*\\omega=\\operatorname{Ad}_{\\exp(-tZ)}\\omega$ at $t=0$, [F5] yields $\\mathcal L_{Z_P}\\omega=-[Z,\\omega]$. The shuffle convention gives $\\tfrac12[\\omega\\wedge\\omega](Z_P,Y)=[Z,\\omega(Y)]$, so $\\Omega_\\omega(Z_P,Y)=0$. Every vertical vector is fundamental by the orbit-differential isomorphism, hence $\\Omega_\\omega$ is horizontal.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "F7",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Pullback commutes with $d$, and the fixed linear map $\\operatorname{Ad}_{g^{-1}}$ preserves the Lie bracket by [F4]. Consequently, for fixed $g\\in G$, $R_g^*\\Omega_\\omega=d(\\operatorname{Ad}_{g^{-1}}\\omega)+\\tfrac12[\\operatorname{Ad}_{g^{-1}}\\omega\\wedge\\operatorname{Ad}_{g^{-1}}\\omega]=\\operatorname{Ad}_{g^{-1}}\\Omega_\\omega$. This is the claimed equivariance.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "On an overlap, differentiate $s_j(x)=s_i(x)g_{ij}(x)$ along $X\\in T_xM$. The derivative is the sum of $d(R_{g_{ij}(x)})ds_i(X)$ and the fundamental vertical vector at $s_j(x)$ generated by $\\theta_L(g_{ij})(X)$, since $g_{ij}(x)^{-1}g_{ij}(x(t))$ has initial tangent $\\theta_L(g_{ij})(X)$ at the identity. Applying $\\omega$, its right equivariance and reproduction property give $A_j(X)=\\operatorname{Ad}_{g_{ij}^{-1}}A_i(X)+\\theta_L(g_{ij})(X)$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F6",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "By [F7] and the graded-derivation rule in [F3], $d\\Omega_\\omega=\\tfrac12 d[\\omega\\wedge\\omega]=[d\\omega\\wedge\\omega]$, because graded skew-symmetry gives $[\\omega\\wedge d\\omega]=-[d\\omega\\wedge\\omega]$. Hence $D_\\omega\\Omega_\\omega=d\\Omega_\\omega+[\\omega\\wedge\\Omega_\\omega]=\\tfrac12[\\omega\\wedge[\\omega\\wedge\\omega]]=0$, the last equality being graded Jacobi from [F3] and the Jacobi identity in [F1]. Pulling back by each $s_i$ gives $D_{A_i}F_i=dF_i+[A_i\\wedge F_i]=0$.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For horizontal vector fields $X,Y$, $\\omega(X)=\\omega(Y)=0$, so $\\Omega_\\omega(X,Y)=d\\omega(X,Y)=-\\omega([X,Y])$. Meanwhile $\\omega(K_H(X,Y))=-\\omega(v([X,Y]))=-\\omega([X,Y])$, since $\\omega$ vanishes on the horizontal component. Both $\\Omega_\\omega$ and $K_H$ depend only on the horizontal components of their inputs, so the equality extends to all $X,Y$: $\\Omega_\\omega=\\omega\\circ K_H$. This fixes the sign relative to the imported vertical-valued curvature.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F7], pullback along $s_i$ commutes with the componentwise exterior derivative; the bracket is pointwise and pullback preserves its alternating arguments. Thus $F_i=s_i^*\\Omega_\\omega=dA_i+\\tfrac12[A_i\\wedge A_i]$. On the overlap, the same differentiated-section decomposition as in step 1.3 has a vertical term, which vanishes when inserted into $\\Omega_\\omega$ by step 1.1. Its remaining term is transformed by the equivariance in step 1.2, yielding $F_j=\\operatorname{Ad}_{g_{ij}^{-1}}F_i$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The statements include the zero-dimensional or abelian Lie-algebra cases: then the corresponding brackets vanish, and each displayed identity reduces to the ordinary exterior-derivative identity. A zero-dimensional base has no nonzero 2-forms, and the formulas remain valid. Only the declared $\\mathrm{AC}_\\omega$ is inherited from [F1] and [F2]; no global section or full choice principle is assumed.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 1.3",
+            "step 2.2",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: on an empty or zero-dimensional base there are no nonzero 2-forms and the identities remain valid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: in an abelian or zero Lie algebra the bracket terms vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional Lie algebra every bracket is zero; the Cartan and Bianchi formulas reduce to Omega=d omega and d Omega=0, covered by proof 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: zero-dimensional and abelian Lie-algebra cases satisfy the same formulas."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The derivative at t=0 in proof 1.1 is along R_exp(tZ); the local overlap identities require no integration or endpoint data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1: only AC_omega is inherited; no global section or full choice principle is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states curvature identities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states curvature identities, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Reviewed Statement, seven proof steps, all 22 direct supplier statements and the commutative curvature square. The right flow p -> p exp(tZ) yields L_(Z_P)omega=-[Z,omega], cancelling the positive bracket insertion and proving horizontality. Fixed adjoint maps preserve brackets, giving equivariance. Horizontal evaluation yields -omega([X,Y])=omega(K_H(X,Y)) with the imported minus sign. Differentiating s_j=s_i g_ij gives the left Maurer-Cartan term; vertical insertions vanish in curvature, proving its transition law. In step 1.4, graded skew cancels [d omega,omega] against [omega,d omega]; for degree-one omega, graded Jacobi implies [omega,[omega,omega]]=0 over R (three equal terms, characteristic zero). The reference there to Jacobi in F1 is redundant: F3 alone supplies exactly the required identity. Pullback gives the local Bianchi identity. Checked abelian/zero Lie algebra, empty base and zero-dimensional base (horizontal 2-forms then vanish). The square maps all 1-forms by the affine gauge transformation and all 2-forms by Ad_(g^-1); any local A is realized on the trivial principal bundle by the same product formula verified in the examples, so its displayed domains are sound. No proof relies on the diagram. Contract citation/derivation and boundary records support the current argument; no substantive defect, repair or escalation. Empty reader/refuter findings independently checked. Source conventions agree with Vákár §1.3.1, Claims 1.3.1–1.3.5 and Theorem 1.3.6, and Neeb §6.1, Definition 6.1.1/Lemma 6.1.2."
+      }
+    },
+    "def-qftx-associated-covariant-derivative": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smooth-principal-g-bundle",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group, $M$ a smooth manifold, and $P$\na smooth manifold. A **smooth right principal $G$-bundle** is a right principal\n$G$-bundle $\\pi:P\\to M$ in the topological sense of\n[[def-principal-g-bundle-and-associated-fiber-bundle]], with the following\nadditional smooth structure: $\\pi$ and the right $G$-action are smooth, and\nthe principal-bundle charts can be chosen as equivariant diffeomorphisms\n$\\pi^{-1}(U)\\cong U\\times G$. Thus each chart respects the projection to\n$U$ and the right action on the $G$ factor. The smoothness convention is that\nof [[def-smooth-map-between-manifolds-with-boundary]]; boundaryless manifolds\nare the default in this item.\n\nThe topological principal-bundle clause retains its free, transitive right\naction on every fibre and its local triviality. Smoothness adds compatible\ndifferentiable structure; it does not select a connection or assert that a\nglobal trivialization exists. The empty-base case is allowed and then $P$ is\nempty by the cited topological definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-associated-bundle-to-a-principal-bundle-and-representation",
+          "source_section": "Definition",
+          "quote": "Let $\\pi:P\\to M$ be a smooth right principal $H$-bundle, meaning that the\ntopological principal charts of\n[[def-principal-g-bundle-and-associated-fiber-bundle]] are diffeomorphisms, and\nlet $\\rho:H\\to GL(V)$ be a smooth finite-dimensional real representation.\nDefine a right action on $P\\times V$ by\n\n$$(p,v)\\cdot h=(ph,\\rho(h)^{-1}v).$$\n\nThe **vector bundle associated to $P$ and $\\rho$** is the quotient set with\nquotient topology\n\n$$P\\times_HV=(P\\times V)/H.$$\n\nWrite $[p,v]$ for the orbit of $(p,v)$. Equivalently, the generating relation\nis\n\n$$[ph,v]=[p,\\rho(h)v].$$\n\nThe projection is\n\n$$r:P\\times_HV\\to M,\\qquad r([p,v])=\\pi(p).$$\n\nIt is well defined because $\\pi(ph)=\\pi(p)$ and continuous by the quotient\nuniversal property [[thm-quotient-universal-property]]. The inverse in the\ndiagonal action is essential: it makes the displayed relation and the right\naction law agree. The quotient construction itself uses no choices. The\nhomogeneous principal bundle of\n[[thm-g-to-g-mod-h-is-a-smooth-principal-h-bundle]] is one instance, not a\nhypothesis of the general definition. The next theorem supplies the smooth\nvector-bundle atlas in the sense of\n[[def-vector-bundle-chart-and-transition-function]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-associated-vector-bundle-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $\\pi:P\\to M$ be a smooth right principal $H$-bundle and let\n$\\rho:H\\to GL(V)$ be a smooth representation on a finite-dimensional real\nvector space. Then $P\\times_HV$ has a unique smooth rank-$\\dim V$ vector-bundle\nstructure over $M$ whose local trivializations are induced by principal-bundle\nsections. If $s_i=s_jg_{ji}$ on an overlap, the transition from the\n$i$-coordinates to the $j$-coordinates is $\\rho(g_{ji})$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-principal-connection-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle for a finite-dimensional real Lie group $G$, with $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$. A supplied principal connection is a smooth, right-invariant complement $TP=VP\\oplus H$, where $VP=\\ker d\\pi$; write $v:TP\\to VP$ for the projection along $H$, and let $K_H(X,Y)=-v([hX,hY])$ be its vertical-valued curvature. For $Z\\in\\mathfrak g$ and $p\\in P$, define the fundamental vertical vector $Z_P(p)=\\left.\\frac{d}{dt}\\right|_{t=0}p\\exp_G(tZ)$. The orbit differential $\\zeta_p: \\mathfrak g\\to V_pP$, $Z\\mapsto Z_P(p)$, is a linear isomorphism, as proved below. Define the **principal connection 1-form** by\n\n$$\\omega_p(X):=\\zeta_p^{-1}(v_pX),\\qquad X\\in T_pP.$$\n\nThen $\\omega$ is a smooth $\\mathfrak g$-valued 1-form satisfying $\\omega(Z_P)=Z$, $\\ker\\omega=H$, and $R_g^*\\omega=\\operatorname{Ad}_{g^{-1}}\\omega$ for every fixed $g\\in G$. Conversely, a smooth $\\mathfrak g$-valued 1-form with the reproduction and equivariance properties determines the principal connection $H=\\ker\\omega$. The converted vertical curvature $\\kappa_H:=\\omega\\circ K_H$ is a $\\mathfrak g$-valued alternating 2-form; its equality with the Cartan curvature is established in the curvature lemma.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-left-maurer-cartan-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as in [[def-countable-choice]], let $G$ be a Lie\ngroup [[def-lie-group]] with identity $e$, and write $\\mathfrak g=T_eG$. A\n**$\\mathfrak g$-valued one-form** on $G$ means a\nsmooth map $\\alpha:TG\\to\\mathfrak g$ whose restriction\n$\\alpha_g:T_gG\\to\\mathfrak g$ is linear for every $g$. Equivalently,\n$V\\mapsto(\\pi_G(V),\\alpha(V))$ is a smooth vector-bundle map\n$TG\\to G\\times\\mathfrak g$ over $\\operatorname{id}_G$ in the sense of\n[[def-vector-bundle-map-over-a-smooth-base-map]].\n\nThe **left Maurer--Cartan form** is the $\\mathfrak g$-valued one-form\n$\\theta:TG\\to\\mathfrak g$ whose fibre map at $g$ is\n\n$$\\theta_g=d(L_{g^{-1}})_g:T_gG\\longrightarrow T_eG=\\mathfrak g.$$\n\nThis formula is well-defined because left translation by $g^{-1}$ sends $g$\nto $e$. It is smooth and fibrewise linear because\n[[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]]\nidentifies\n\n$$TG\\longrightarrow G\\times\\mathfrak g,\\qquad V_g\\longmapsto(g,\\theta_gV_g)$$\n\nas the inverse vector-bundle isomorphism to left trivialization. In\nparticular, $\\theta_e=d(L_e)_e=\\operatorname{id}_{\\mathfrak g}$.\n\nThe stated $\\mathrm{AC}_\\omega$ is used exactly through that supplied smooth\nleft-trivialization theorem; the pointwise formula and passage to its second\ncomponent add no choice. A Lie group is nonempty. When $\\dim G=0$, $\\theta$\nis the unique map between zero tangent fibres, and the definition is unchanged\nin dimension one. Lie groups are boundaryless by convention, and no metric,\nnondegeneracy, endpoint, or biconditional occurs.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-differential-of-a-smooth-map",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth and let $p\\in M$. The **differential of $F$ at $p$** is the map $dF_p:T_pM\\to T_{F(p)}N$ defined by\n$$ dF_p(v)([g]):=v([g\\circ F]) $$\nfor every derivation $v\\in T_pM$ and every germ $[g]\\in C_{F(p)}^\\infty(N)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-differentials-of-smooth-maps",
+          "source_section": "Statement",
+          "quote": "If $F:M\\to N$ and $G:N\\to P$ are smooth, then $d(G\\circ F)_p=dG_{F(p)}\\circ dF_p$ for every $p\\in M$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-conjugation-and-the-adjoint-representation-of-a-lie-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group with identity $e$ and Lie\nalgebra $\\mathfrak g=T_eG$. For $g\\in G$, **conjugation by $g$** is\n\n$$C_g:G\\longrightarrow G,\\qquad C_g(h)=ghg^{-1}.$$\n\nIt is a Lie-group automorphism. Indeed, associativity gives\n$C_g(hk)=C_g(h)C_g(k)$, its smoothness follows from the smooth multiplication\nand inversion of [[def-lie-group]], and $C_{g^{-1}}$ is its smooth inverse.\nThus its differential at the identity is the invertible linear map\n\n$$\\operatorname{Ad}_g:=d(C_g)_e:\\mathfrak g\\longrightarrow\\mathfrak g.$$\n\nHere $C_g(e)=e$, so the source and target tangent spaces are both\n$\\mathfrak g$; invertibility follows from\n[[cor-the-differential-of-a-diffeomorphism-is-an-isomorphism]]. Write\n$\\operatorname{GL}(\\mathfrak g)$ for the group of invertible real-linear maps\nof $\\mathfrak g$ in the sense of\n[[def-linear-isomorphism-and-invertible-linear-map]]. The **adjoint map** is\n\n$$\\operatorname{Ad}:G\\longrightarrow\\operatorname{GL}(\\mathfrak g),\\qquad g\\longmapsto\\operatorname{Ad}_g.$$\n\nThe target carries its standard smooth structure. Explicitly, if\n$n=\\dim\\mathfrak g\\geq1$, one fixed basis identifies\n$\\mathcal L(\\mathfrak g,\\mathfrak g)$ with $M_n(\\mathbb R)\\simeq\\mathbb R^{n^2}$\nby [[def-coordinate-column-and-matrix-of-a-linear-map]]. Under this\nidentification $\\operatorname{GL}(\\mathfrak g)$ is the open set\n$\\det\\ne0$: determinant is a polynomial by\n[[cor-determinant-is-a-polynomial-in-the-matrix-entries]], and invertibility\nis equivalent to nonzero determinant by\n[[thm-real-square-matrix-invertible-iff-determinant-nonzero]]. It therefore\nhas the restricted smooth structure from\n[[prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]].\nA second basis changes a matrix by $A\\mapsto P^{-1}AP$, a linear\ndiffeomorphism, so this smooth structure is independent of the fixed basis.\nIf $n=0$, then $\\operatorname{GL}(\\mathfrak g)$ is the singleton containing\nthe unique endomorphism of the zero vector space, with its unique\nzero-dimensional smooth structure; no determinant criterion is needed.\n\nThe next proposition proves that this map is a smooth group representation;\nafter that result it is called the **adjoint representation of $G$**.\n\nA Lie group is nonempty and boundaryless. If $\\dim G=0$, every\n$\\operatorname{Ad}_g$ is the unique automorphism of the zero vector space,\neven when the discrete group itself is nonabelian; dimension one requires no\nchange. No metric, nondegeneracy, interval, endpoint, choice principle, or\nbiconditional is involved. Fixing one finite basis of the supplied\nfinite-dimensional space is a single finite existential instantiation, not a\nchoice from a family.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-exponential-map-of-a-lie-group",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, let $G$ be a finite-dimensional real Lie group\nwith identity $e$, and write $\\mathfrak g=T_eG$. For each\n$X\\in\\mathfrak g$, the existence-and-uniqueness theorem\n[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]]\nsupplies a unique one-parameter subgroup\n$\\gamma_X:\\mathbb R\\to G$ with $\\gamma_X'(0)=X$. The **exponential map of\n$G$** is the well-defined total map\n\n$$\\exp_G:\\mathfrak g\\longrightarrow G,\\qquad \\exp_G(X):=\\gamma_X(1).$$\n\nHere $\\mathrm{AC}_\\omega$ is the axiom of\n[[def-countable-choice|countable choice]].\nThe same theorem identifies $\\gamma_X$ with the integral curve through $e$\nof the left-invariant field $X^L$; the left translate\n$t\\mapsto g\\gamma_X(t)$ is therefore the corresponding integral curve through\n$g$. The countable-choice assumption is used exactly through that supplied\nsmooth invariant-field and completeness result, and evaluation at the single\ntime $1$ adds no choice.\n\nA Lie group is nonempty and boundaryless. If $\\dim G=0$, then\n$\\mathfrak g=0$ and $\\exp_G(0)=e$; the definition is unchanged in dimension\none. No metric or nondegeneracy condition occurs, and $1$ is not an endpoint\nof the global parameter domain $\\mathbb R$. This item defines a map and asserts\nno biconditional characterization.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $G$ be a finite-dimensional real Lie group\nwith Lie algebra $\\mathfrak g=T_eG$.\n\nIf $\\gamma:\\mathbb R\\to G$ is a one-parameter subgroup and\n$X=\\gamma'(0)$, then\n\n$$\\gamma'(t)=d(L_{\\gamma(t)})_eX=X^L_{\\gamma(t)}$$\n\nfor every $t\\in\\mathbb R$; thus $\\gamma$ is the integral curve through $e$ of\nthe left-invariant field $X^L$. Conversely, the global integral curve through\n$e$ of $X^L$ is a one-parameter subgroup. Consequently every\n$X\\in\\mathfrak g$ determines a unique one-parameter subgroup with initial\nvelocity $X$.\n\nThe countable-choice assumption is used exactly through the supplied smooth\ninvariant-field construction and completeness theorem.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field ([[def-field]]) and let $G$ be a group. A\n**finite-dimensional representation of $G$ over $k$** is a finite-dimensional\n$k$-vector space $V$ ([[def-vector-space]], [[def-dimension]]) together with a\ngroup homomorphism\n$$\\rho:G\\longrightarrow \\operatorname{GL}(V),$$\nwhere $\\operatorname{GL}(V)$ denotes the group of invertible $k$-linear maps\n$V \\to V$ ([[def-linear-isomorphism-and-invertible-linear-map]], [[def-group-homomorphism]]).\n\nThe associated action is\n$$g \\cdot v:=\\rho(g)(v).$$\nThis makes $V$ into a $G$-module over $k$ in the sense of\n[[def-g-module-over-a-commutative-ring]].\n\nThe **degree** of the representation is the dimension of its underlying vector\nspace:\n$$\\deg(\\rho):=\\dim_k V.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a principal chart, each $p\\in\\pi^{-1}(U_i)$ has a unique expression $p=s_i(x)h$. The associated-bundle chart therefore assigns $[s_i(x)h,v]$ the vector coordinate $\\rho(h)v$. In particular $[s_i(x),\\psi_i(x)]$ determines a unique smooth component $\\psi_i$. If $s_j=s_i g_{ij}$, then $[s_j,\\psi_j]=[s_i,\\rho(g_{ij})\\psi_j]$; equality with $[s_i,\\psi_i]$ gives $\\psi_j=\\rho(g_{ij}^{-1})\\psi_i$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In a finite basis of $V$, $\\operatorname{GL}_{\\mathbb C}(V)$ is the open subset where the determinant is nonzero, so its tangent space at the identity is $\\operatorname{End}_{\\mathbb C}(V)$. Thus the differential $\\rho_*$ is real-linear by [F6]. For fixed $g$, [F9] gives $\\rho\\circ C_{g^{-1}}=C_{\\rho(g^{-1})}\\circ\\rho$. The derivative of target conjugation is the linear map $T\\mapsto\\rho(g^{-1})T\\rho(g)$, while the derivative of source conjugation is $\\operatorname{Ad}_{g^{-1}}$ by [F7]. The chain rule [F6] therefore gives $\\rho_*(\\operatorname{Ad}_{g^{-1}}Z)=\\rho(g^{-1})\\rho_*(Z)\\rho(g)$. For a smooth transition $g_{ij}:U_i\\cap U_j\\to G$, differentiation of $s_j=s_i g_{ij}$ decomposes a tangent vector into the right translate of the tangent from $s_i$ and the fundamental vertical vector with generator $\\theta_L(g_{ij})(X)$, by [F5]. Reproduction and equivariance in [F4] yield $A_j=\\operatorname{Ad}_{g_{ij}^{-1}}A_i+\\theta_L(g_{ij})$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $g=g_{ij}(x)$, $Z=\\theta_L(g)(X)$, and $R=\\rho(g^{-1})$. Let $c$ be a smooth curve through $x$ with $c'(0)=X$, and write $h(t)=g_{ij}(c(t))$. By [F5], $h(0)=g$ and $h'(0)=d(L_g)_eZ$. For each $t\\in\\mathbb R$, $s\\mapsto\\gamma_Z(ts)$ is a one-parameter subgroup with initial tangent $tZ$, so uniqueness in [F8] and the exponential definition give $\\exp_G(tZ)=\\gamma_Z(t)$. Hence $k(t):=g\\exp_G(tZ)=g\\gamma_Z(t)$ has the same initial value and tangent as $h$. By [F6], differentiating the smooth map $q\\mapsto\\rho(q^{-1})$ along these curves gives the same derivative at zero. Since $k(t)^{-1}=\\gamma_Z(-t)g^{-1}$, the homomorphism law [F9] and $\\gamma_Z'(0)=Z$ yield $dR(X)=-\\rho_*(Z)R$. Using step 1.1, step 2.1, and the adjoint-intertwining identity in step 2.1, $d\\psi_j(X)+\\rho_*(A_j(X))\\psi_j=-\\rho_*(Z)R\\psi_i+R\\,d\\psi_i(X)+\\rho_*(\\operatorname{Ad}_{g^{-1}}A_i(X))R\\psi_i+\\rho_*(Z)R\\psi_i=R\\bigl(d\\psi_i(X)+\\rho_*(A_i(X))\\psi_i\\bigr)$. The two Maurer–Cartan terms cancel, and the remaining equality uses $\\rho(g)R=\\mathrm{id}_V$. This is precisely the associated-bundle coordinate transition for an $E$-valued 1-form, so the local expressions define one global smooth $E$-valued 1-form and do not depend on the selected sections.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In any local chart, multiplication by a scalar function obeys $d(f\\psi_i)=df\\otimes\\psi_i+f\\,d\\psi_i$; the endomorphism term obeys $\\rho_*(A_i)(f\\psi_i)=f\\rho_*(A_i)\\psi_i$ by pointwise linearity. Adding these identities gives $(\\nabla^\\omega(f\\sigma))_i=df\\otimes\\psi_i+f(\\nabla^\\omega\\sigma)_i$, which is the asserted Leibniz rule in the associated bundle. If $V=0$, every term is zero and the same formulas hold; the argument is pointwise and also applies on an empty base.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1: the construction also applies on an empty base."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1: for a zero representation space every term vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For dim V=1 the representation differential is a scalar endomorphism and the same cancellation of the Maurer-Cartan terms in proof 3.1 patches d psi+rho_*(A)psi."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1: the zero-fibre case is covered by the same local formulas."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Leibniz and patching assertions are pointwise on chart overlaps; the exponential curve in proof 3.1 supplies a tangent at zero, not boundary values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 and step 3.1: only local sections from a given bundle cover are used; no global section is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition constructs a covariant derivative and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition constructs a covariant derivative and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Reviewed Definition, all four proof steps, twelve direct supplier statements, citation and boundary worksheets, and the tikzcd square. In the quotient convention the local coordinate change is R=rho(g_ij^-1). Differentiating conjugation gives rho_*(Ad_(g^-1)Z)=R rho_*(Z) rho(g). For Z=theta_L(g_ij)(X), differentiating the inverse representation along g gamma_Z(t) gives dR(X)=-rho_*(Z)R; the plus Maurer-Cartan connection term cancels exactly. Thus d psi+rho_*(A)psi transforms by R, patches independently of sections, and satisfies the scalar Leibniz rule by the product rule. The differential is real-linear into complex endomorphisms; the underlying-real associated bundle acquires complex-linear charts. Checked zero V, zero-dimensional base/group, empty base, and rank one. AC_omega is inherited; no global section is presumed. The diagram has functions on the overlap at both top vertices and V-valued 1-forms below; its lower R multiplication agrees with the proven transition, including the varying g. No diagram-dependent proof, statement-link violation, defect or repair. Reader/refuter findings are empty. Sources are convention support only; local chain-rule calculations supply the deduction."
+      }
+    },
+    "ex-qftx-su2-flat-pure-gauge-connection": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qftx-nonabelian-gauge-data",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$. Let $M$ be a finite-dimensional, Hausdorff, second-countable smooth manifold without boundary. A **non-Abelian gauge datum on $M$** consists of the following specified objects.\n\nFirst choose a finite-dimensional real Lie group $G$ that is compact in its manifold topology (every open cover has a finite subcover) and noncommutative (there are $g,h\\in G$ with $gh\\ne hg$). The actual group $G$, including its global form, is part of the datum. Its Lie algebra is $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$ with the bracket transported from left-invariant smooth vector fields.\n\nChoose a smooth right principal $G$-bundle $\\pi:P\\to M$: the projection and right action are smooth, and the action is free and transitive on each fibre. There is an open cover $\\{U_\\alpha\\}_{\\alpha\\in A}$ of $M$ with a family of equivariant diffeomorphisms $\\phi_\\alpha:\\pi^{-1}(U_\\alpha)\\to U_\\alpha\\times G$ for $\\alpha\\in A$, each over $U_\\alpha$. Explicitly, $\\operatorname{pr}_1\\circ\\phi_\\alpha=\\pi$, and if $\\phi_\\alpha(p)=(x,g)$ then $\\phi_\\alpha(ph)=(x,gh)$ for every $h\\in G$.\n\nChoose a specified set $I$ of representation labels and, for each $a\\in I$, a finite-dimensional complex vector space $V_a$, a positive-definite Hermitian form $h_a$, and a smooth group homomorphism $\\rho_a:G\\to U(V_a,h_a)$. Here $U(V_a,h_a)$ is the group of complex-linear isometries of $h_a$, and a representation is the corresponding finite-dimensional group action. Its associated vector bundle is the quotient $E_a=P\\times_{\\rho_a}V_a$ with relation $[pg,v]=[p,\\rho_a(g)v]$.\n\nTwo smooth right principal $G$-bundles over $M$ are isomorphic over $M$ when a smooth diffeomorphism between their total spaces covers $\\operatorname{id}_M$ and commutes with the right $G$-actions. To represent their isomorphism types by sets, encode a bundle by the ordered tuple of its total-space set, topology, maximal smooth atlas, projection, and right action; $M$ and $G$ are fixed parameters. Write $q\\cong_M P$ when $q$ is such a bundle code isomorphic to $P$. In the cumulative hierarchy $V_0=\\varnothing$, $V_{\\alpha+1}=\\mathcal P(V_\\alpha)$, and $V_\\lambda=\\bigcup_{\\alpha<\\lambda}V_\\alpha$ at limit ordinals; $\\operatorname{rank}(q)$ is the least ordinal $\\alpha$ with $q\\subseteq V_\\alpha$. Let $r(P)$ be the least rank of a code $q\\cong_M P$, and define the **bundle sector** of $P$ to be its set code\n$$[P]:=\\{q\\in V_{r(P)+1}:q\\cong_M P\\text{ and }\\operatorname{rank}(q)=r(P)\\}.$$\nThe given bundle supplies a code, so minimizing the attained ranks at most its rank defines $r(P)$. Minimum-rank selection and Separation in $V_{r(P)+1}$ make $[P]$ a nonempty set. Isomorphic bundles have the same code, and equality of codes gives a common representative and hence a bundle isomorphism. This construction requires no representative choice and applies to every bundle allowed above. The datum specifies a set $\\Sigma$ of admitted bundle-sector codes and requires $[P]\\in\\Sigma$; a model may take $\\Sigma=\\{[P]\\}$. References to the isomorphism class as a sector use this set code. The Lie algebra alone does not replace the chosen group or sector. This definition does not choose a connection, an action functional, or a quantum theory.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-unitary-and-special-unitary-lie-groups",
+          "source_section": "Example",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $n\\geq1$. Regarded as real Lie groups,\n\n$$U(n)=\\{A\\in\\operatorname{GL}_n(\\mathbb C):A^*A=I\\},\\qquad SU(n)=\\{A\\in U(n):\\det A=1\\}$$\n\nhave Lie algebras\n\n$$\\mathfrak u(n)=\\{X:X^*+X=0\\},\\qquad \\mathfrak{su}(n)=\\{X\\in\\mathfrak u(n):\\operatorname{tr}X=0\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-principal-connection-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle for a finite-dimensional real Lie group $G$, with $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$. A supplied principal connection is a smooth, right-invariant complement $TP=VP\\oplus H$, where $VP=\\ker d\\pi$; write $v:TP\\to VP$ for the projection along $H$, and let $K_H(X,Y)=-v([hX,hY])$ be its vertical-valued curvature. For $Z\\in\\mathfrak g$ and $p\\in P$, define the fundamental vertical vector $Z_P(p)=\\left.\\frac{d}{dt}\\right|_{t=0}p\\exp_G(tZ)$. The orbit differential $\\zeta_p: \\mathfrak g\\to V_pP$, $Z\\mapsto Z_P(p)$, is a linear isomorphism, as proved below. Define the **principal connection 1-form** by\n\n$$\\omega_p(X):=\\zeta_p^{-1}(v_pX),\\qquad X\\in T_pP.$$\n\nThen $\\omega$ is a smooth $\\mathfrak g$-valued 1-form satisfying $\\omega(Z_P)=Z$, $\\ker\\omega=H$, and $R_g^*\\omega=\\operatorname{Ad}_{g^{-1}}\\omega$ for every fixed $g\\in G$. Conversely, a smooth $\\mathfrak g$-valued 1-form with the reproduction and equivariance properties determines the principal connection $H=\\ker\\omega$. The converted vertical curvature $\\kappa_H:=\\omega\\circ K_H$ is a $\\mathfrak g$-valued alternating 2-form; its equality with the Cartan curvature is established in the curvature lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-principal-curvature-cartan-bianchi",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle with a principal connection form $\\omega$ associated to $H$, using $Z_P(p)=\\left.\\frac{d}{dt}\\right|_0p\\exp_G(tZ)$ for the right action. For Lie-algebra-valued forms use the graded bracket defined by alternating shuffle and the Lie bracket; in degree one, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$. Define\n\n$$\\Omega_\\omega:=d\\omega+\\frac12[\\omega\\wedge\\omega],\\qquad D_\\omega\\eta:=d\\eta+[\\omega\\wedge\\eta].$$\n\nThen $\\Omega_\\omega$ is horizontal and $\\operatorname{Ad}$-equivariant, and $\\Omega_\\omega=\\omega\\circ K_H$ for the imported vertical-valued curvature $K_H(X,Y)=-v([hX,hY])$. For any trivializing cover with smooth sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=s_i^*\\Omega_\\omega$. On an overlap, let $g_{ij}:U_i\\cap U_j\\to G$ be the smooth map determined by $s_j=s_i g_{ij}$, and write $\\theta_L(g_{ij})=g_{ij}^*\\theta_L$ for the left Maurer–Cartan form. Then\n\n$$A_j=\\operatorname{Ad}_{g_{ij}^{-1}}A_i+\\theta_L(g_{ij}),\\qquad F_i=dA_i+\\frac12[A_i\\wedge A_i],\\qquad F_j=\\operatorname{Ad}_{g_{ij}^{-1}}F_i,\\qquad D_{A_i}F_i=0,$$\n\nwhere $D_{A_i}\\eta:=d\\eta+[A_i\\wedge\\eta]$. The transition equations concern changes of local sections; they do not identify an arbitrary map $M\\to G$ with a global automorphism of a nontrivial bundle.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-lie-algebra-valued-form-bracket",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $\\mathfrak g$ a finite-dimensional real Lie algebra. For homogeneous $\\alpha\\in\\Omega^p(M,\\mathfrak g)$ and $\\beta\\in\\Omega^q(M,\\mathfrak g)$, define their **graded bracket** by\n\n$$[\\alpha\\wedge\\beta](X_1,\\ldots,X_{p+q}) := \\frac{1}{p!q!}\\sum_{\\sigma\\in S_{p+q}}\\operatorname{sgn}(\\sigma)[\\alpha(X_{\\sigma(1)},\\ldots,X_{\\sigma(p)}),\\beta(X_{\\sigma(p+1)},\\ldots,X_{\\sigma(p+q)})].$$\n\nHere $\\Omega^p(M,\\mathfrak g)$ is the space of smooth alternating $p$-linear forms with values in $\\mathfrak g$, the inner bracket is the Lie-algebra bracket, and the sum is over all permutations. This is a smooth $\\mathfrak g$-valued $(p+q)$-form. It obeys graded skew-symmetry $[\\alpha\\wedge\\beta]=-(-1)^{pq}[\\beta\\wedge\\alpha]$, graded Jacobi\n\n$$\\left[\\alpha\\wedge\\left[\\beta\\wedge\\gamma\\right]\\right]=\\left[\\left[\\alpha\\wedge\\beta\\right]\\wedge\\gamma\\right]+(-1)^{pq}\\left[\\beta\\wedge\\left[\\alpha\\wedge\\gamma\\right]\\right],$$\n\nand the exterior-derivative rule\n\n$$d[\\alpha\\wedge\\beta]=[d\\alpha\\wedge\\beta]+(-1)^p[\\alpha\\wedge d\\beta].$$\n\nIn particular, for $\\mathfrak g$-valued 1-forms $A,B$, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$, so $\\tfrac12[A\\wedge A](X,Y)=[A(X),A(Y)]$. This fixes the normalization used by the Cartan curvature formula.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-left-maurer-cartan-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as in [[def-countable-choice]], let $G$ be a Lie\ngroup [[def-lie-group]] with identity $e$, and write $\\mathfrak g=T_eG$. A\n**$\\mathfrak g$-valued one-form** on $G$ means a\nsmooth map $\\alpha:TG\\to\\mathfrak g$ whose restriction\n$\\alpha_g:T_gG\\to\\mathfrak g$ is linear for every $g$. Equivalently,\n$V\\mapsto(\\pi_G(V),\\alpha(V))$ is a smooth vector-bundle map\n$TG\\to G\\times\\mathfrak g$ over $\\operatorname{id}_G$ in the sense of\n[[def-vector-bundle-map-over-a-smooth-base-map]].\n\nThe **left Maurer--Cartan form** is the $\\mathfrak g$-valued one-form\n$\\theta:TG\\to\\mathfrak g$ whose fibre map at $g$ is\n\n$$\\theta_g=d(L_{g^{-1}})_g:T_gG\\longrightarrow T_eG=\\mathfrak g.$$\n\nThis formula is well-defined because left translation by $g^{-1}$ sends $g$\nto $e$. It is smooth and fibrewise linear because\n[[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]]\nidentifies\n\n$$TG\\longrightarrow G\\times\\mathfrak g,\\qquad V_g\\longmapsto(g,\\theta_gV_g)$$\n\nas the inverse vector-bundle isomorphism to left trivialization. In\nparticular, $\\theta_e=d(L_e)_e=\\operatorname{id}_{\\mathfrak g}$.\n\nThe stated $\\mathrm{AC}_\\omega$ is used exactly through that supplied smooth\nleft-trivialization theorem; the pointwise formula and passage to its second\ncomponent add no choice. A Lie group is nonempty. When $\\dim G=0$, $\\theta$\nis the unique map between zero tangent fibres, and the definition is unchanged\nin dimension one. Lie groups are boundaryless by convention, and no metric,\nnondegeneracy, endpoint, or biconditional occurs.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-adjoint-is-a-smooth-lie-group-representation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite-dimensional real Lie group with Lie algebra\n$\\mathfrak g$. Its adjoint map is a group homomorphism\n\n$$\\operatorname{Ad}:G\\longrightarrow\\operatorname{GL}(\\mathfrak g),$$\n\nand it is smooth for the standard smooth structure on\n$\\operatorname{GL}(\\mathfrak g)$. In particular,\n\n$$\\operatorname{Ad}_{gh}=\\operatorname{Ad}_g\\circ\\operatorname{Ad}_h,\\qquad \\operatorname{Ad}_e=\\operatorname{id}_{\\mathfrak g}.$$\n\nThus $\\operatorname{Ad}$ is a smooth finite-dimensional real representation\nof $G$ on $\\mathfrak g$. No choice principle is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-smooth-principal-g-bundle",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group, $M$ a smooth manifold, and $P$\na smooth manifold. A **smooth right principal $G$-bundle** is a right principal\n$G$-bundle $\\pi:P\\to M$ in the topological sense of\n[[def-principal-g-bundle-and-associated-fiber-bundle]], with the following\nadditional smooth structure: $\\pi$ and the right $G$-action are smooth, and\nthe principal-bundle charts can be chosen as equivariant diffeomorphisms\n$\\pi^{-1}(U)\\cong U\\times G$. Thus each chart respects the projection to\n$U$ and the right action on the $G$ factor. The smoothness convention is that\nof [[def-smooth-map-between-manifolds-with-boundary]]; boundaryless manifolds\nare the default in this item.\n\nThe topological principal-bundle clause retains its free, transitive right\naction on every fibre and its local triviality. Smoothness adds compatible\ndifferentiable structure; it does not select a connection or assert that a\nglobal trivialization exists. The empty-base case is allowed and then $P$ is\nempty by the cited topological definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $M_2(\\mathbb C)$ as $\\mathbb R^8$. The conditions $g^*g=I$ and $\\det g=1$ are closed equations in the matrix entries, so $SU(2)$ is closed. For a unitary matrix each column has norm one, hence every entry has absolute value at most one; thus the subset is bounded. By [F2], it is compact. The matrices $D=\\begin{pmatrix}i&0\\\\0&-i\\end{pmatrix}$ and $J=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$ are unitary with determinant one, while $DJ=\\begin{pmatrix}0&i\\\\i&0\\end{pmatrix}\\ne\\begin{pmatrix}0&-i\\\\-i&0\\end{pmatrix}=JD$. Therefore $SU(2)$ is noncommutative. Together with [F1], this verifies the group conditions in [A1]. The declared axiom base is $\\mathrm{AC}_\\omega$ by [A2], and [F2] requires no additional choice.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The matrix $u(x,y)$ is unitary and has determinant one because its diagonal entries have modulus one and multiply to one. Differentiating its entries gives $du=\\operatorname{diag}(-\\tfrac i2e^{-ix/2},\\tfrac i2e^{ix/2})dx$, hence $u^{-1}du=T_3dx$. The coefficient $T_3\\ne0$, so $A$ is not the zero form. The defining representation is unitary.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The product $P=M\\times SU(2)$ has projection to $M$ and right action on its second coordinate; both are smooth, the action is free and transitive on each fibre, and the product chart is equivariant, so [F7] makes it a smooth right principal bundle. By [F5], the displayed $\\omega$ is smooth. On the fundamental vector generated by $Z\\in\\mathfrak{su}(2)$, the tangent is $(0,gZ)$, and $(\\theta_L)_g(gZ)=Z$; thus $\\omega(Z_P)=Z$. For fixed $h\\in SU(2)$, right translation sends $(X,\\xi)$ to $(X,\\xi h)$, and $\\operatorname{Ad}_{(gh)^{-1}}A(X)+(\\theta_L)_{gh}(\\xi h)=\\operatorname{Ad}_{h^{-1}}(\\operatorname{Ad}_{g^{-1}}A(X)+(\\theta_L)_g(\\xi))$. The equality uses [F6] for the adjoint product and the matrix formula for $\\theta_L$ from [F5]. Thus $R_h^*\\omega=\\operatorname{Ad}_{h^{-1}}\\omega$, and [F3] shows it is a principal connection form. Since $s(z)=(z,e)$, its pullback is $s^*\\omega=A$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The coefficient $T_3$ is constant and $d(dx)=0$, so $dA=0$. For tangent vectors $X,Y$, the bracket term is $[A(X),A(Y)]$; both values are scalar multiples of $T_3$, so this bracket is zero. Therefore $F=dA+\\tfrac12[A\\wedge A]=0$ everywhere by [F4], while step 1.2 showed $A\\ne0$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed configuration A=T3 dx on the specified product R^2 x SU(2), with curvature zero fixes a nonempty two-dimensional base; deleting the base is not a specialization of this example."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero T_3 and asserts a nonzero potential."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The canonical product section s(z)=(z,e) uses the group identity; the principal-form reproduction and equivariance checks apply there as at every g in SU(2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: curvature is zero although step 1.2 verifies that the potential is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The coordinate directions x,y range over R^2 in the configuration A=T3 dx on the specified product R^2 x SU(2), with curvature zero; no finite segment or endpoint condition is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: all matrices and the global product trivialization are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts matrix identities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts matrix identities, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Reviewed the full Example and Verification 1.1–3.1, all ten direct supplier statements and its contract citations/derivations/boundaries. SU(2) is closed in R^8 by the unitary/determinant equations and bounded by column normalization; Heine-Borel applies with n=8. The displayed D,J satisfy DJ=-JD and are distinct, establishing noncommutativity without confusing it with Lie-algebra dimension. Direct differentiation gives u^-1 du=diag(-i/2,i/2) dx=T3 dx, which is nonzero. The product form reproduces (0,gZ) and transforms under right h by Ad_(h^-1), so the converse connection-form construction applies; the canonical section pulls it back to A. Constant coefficients give dA=0 and bracket values are multiples of the same T3, so F=0. This is one specified mathematical product-bundle example, not a claim that every flat potential is globally pure gauge. Base is fixed R^2, with no boundary or empty-base quantifier. Countable-choice premises are explicit in Given and axiom_base; no measured inputs or empirical conclusions occur. No diagrams or hyperlink interruptions. No defect or repair; reader/refuter findings empty. Vákár §2.5.1 is explicitly only U(1) context, not the source of the locally proved SU(2) calculation."
+      }
+    },
+    "ex-qftx-su2-noncommuting-curvature": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qftx-nonabelian-gauge-data",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$. Let $M$ be a finite-dimensional, Hausdorff, second-countable smooth manifold without boundary. A **non-Abelian gauge datum on $M$** consists of the following specified objects.\n\nFirst choose a finite-dimensional real Lie group $G$ that is compact in its manifold topology (every open cover has a finite subcover) and noncommutative (there are $g,h\\in G$ with $gh\\ne hg$). The actual group $G$, including its global form, is part of the datum. Its Lie algebra is $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$ with the bracket transported from left-invariant smooth vector fields.\n\nChoose a smooth right principal $G$-bundle $\\pi:P\\to M$: the projection and right action are smooth, and the action is free and transitive on each fibre. There is an open cover $\\{U_\\alpha\\}_{\\alpha\\in A}$ of $M$ with a family of equivariant diffeomorphisms $\\phi_\\alpha:\\pi^{-1}(U_\\alpha)\\to U_\\alpha\\times G$ for $\\alpha\\in A$, each over $U_\\alpha$. Explicitly, $\\operatorname{pr}_1\\circ\\phi_\\alpha=\\pi$, and if $\\phi_\\alpha(p)=(x,g)$ then $\\phi_\\alpha(ph)=(x,gh)$ for every $h\\in G$.\n\nChoose a specified set $I$ of representation labels and, for each $a\\in I$, a finite-dimensional complex vector space $V_a$, a positive-definite Hermitian form $h_a$, and a smooth group homomorphism $\\rho_a:G\\to U(V_a,h_a)$. Here $U(V_a,h_a)$ is the group of complex-linear isometries of $h_a$, and a representation is the corresponding finite-dimensional group action. Its associated vector bundle is the quotient $E_a=P\\times_{\\rho_a}V_a$ with relation $[pg,v]=[p,\\rho_a(g)v]$.\n\nTwo smooth right principal $G$-bundles over $M$ are isomorphic over $M$ when a smooth diffeomorphism between their total spaces covers $\\operatorname{id}_M$ and commutes with the right $G$-actions. To represent their isomorphism types by sets, encode a bundle by the ordered tuple of its total-space set, topology, maximal smooth atlas, projection, and right action; $M$ and $G$ are fixed parameters. Write $q\\cong_M P$ when $q$ is such a bundle code isomorphic to $P$. In the cumulative hierarchy $V_0=\\varnothing$, $V_{\\alpha+1}=\\mathcal P(V_\\alpha)$, and $V_\\lambda=\\bigcup_{\\alpha<\\lambda}V_\\alpha$ at limit ordinals; $\\operatorname{rank}(q)$ is the least ordinal $\\alpha$ with $q\\subseteq V_\\alpha$. Let $r(P)$ be the least rank of a code $q\\cong_M P$, and define the **bundle sector** of $P$ to be its set code\n$$[P]:=\\{q\\in V_{r(P)+1}:q\\cong_M P\\text{ and }\\operatorname{rank}(q)=r(P)\\}.$$\nThe given bundle supplies a code, so minimizing the attained ranks at most its rank defines $r(P)$. Minimum-rank selection and Separation in $V_{r(P)+1}$ make $[P]$ a nonempty set. Isomorphic bundles have the same code, and equality of codes gives a common representative and hence a bundle isomorphism. This construction requires no representative choice and applies to every bundle allowed above. The datum specifies a set $\\Sigma$ of admitted bundle-sector codes and requires $[P]\\in\\Sigma$; a model may take $\\Sigma=\\{[P]\\}$. References to the isomorphism class as a sector use this set code. The Lie algebra alone does not replace the chosen group or sector. This definition does not choose a connection, an action functional, or a quantum theory.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-unitary-and-special-unitary-lie-groups",
+          "source_section": "Example",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $n\\geq1$. Regarded as real Lie groups,\n\n$$U(n)=\\{A\\in\\operatorname{GL}_n(\\mathbb C):A^*A=I\\},\\qquad SU(n)=\\{A\\in U(n):\\det A=1\\}$$\n\nhave Lie algebras\n\n$$\\mathfrak u(n)=\\{X:X^*+X=0\\},\\qquad \\mathfrak{su}(n)=\\{X\\in\\mathfrak u(n):\\operatorname{tr}X=0\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-principal-connection-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle for a finite-dimensional real Lie group $G$, with $\\mathfrak g=\\operatorname{Lie}(G)=T_eG$. A supplied principal connection is a smooth, right-invariant complement $TP=VP\\oplus H$, where $VP=\\ker d\\pi$; write $v:TP\\to VP$ for the projection along $H$, and let $K_H(X,Y)=-v([hX,hY])$ be its vertical-valued curvature. For $Z\\in\\mathfrak g$ and $p\\in P$, define the fundamental vertical vector $Z_P(p)=\\left.\\frac{d}{dt}\\right|_{t=0}p\\exp_G(tZ)$. The orbit differential $\\zeta_p: \\mathfrak g\\to V_pP$, $Z\\mapsto Z_P(p)$, is a linear isomorphism, as proved below. Define the **principal connection 1-form** by\n\n$$\\omega_p(X):=\\zeta_p^{-1}(v_pX),\\qquad X\\in T_pP.$$\n\nThen $\\omega$ is a smooth $\\mathfrak g$-valued 1-form satisfying $\\omega(Z_P)=Z$, $\\ker\\omega=H$, and $R_g^*\\omega=\\operatorname{Ad}_{g^{-1}}\\omega$ for every fixed $g\\in G$. Conversely, a smooth $\\mathfrak g$-valued 1-form with the reproduction and equivariance properties determines the principal connection $H=\\ker\\omega$. The converted vertical curvature $\\kappa_H:=\\omega\\circ K_H$ is a $\\mathfrak g$-valued alternating 2-form; its equality with the Cartan curvature is established in the curvature lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-lie-algebra-valued-form-bracket",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $\\mathfrak g$ a finite-dimensional real Lie algebra. For homogeneous $\\alpha\\in\\Omega^p(M,\\mathfrak g)$ and $\\beta\\in\\Omega^q(M,\\mathfrak g)$, define their **graded bracket** by\n\n$$[\\alpha\\wedge\\beta](X_1,\\ldots,X_{p+q}) := \\frac{1}{p!q!}\\sum_{\\sigma\\in S_{p+q}}\\operatorname{sgn}(\\sigma)[\\alpha(X_{\\sigma(1)},\\ldots,X_{\\sigma(p)}),\\beta(X_{\\sigma(p+1)},\\ldots,X_{\\sigma(p+q)})].$$\n\nHere $\\Omega^p(M,\\mathfrak g)$ is the space of smooth alternating $p$-linear forms with values in $\\mathfrak g$, the inner bracket is the Lie-algebra bracket, and the sum is over all permutations. This is a smooth $\\mathfrak g$-valued $(p+q)$-form. It obeys graded skew-symmetry $[\\alpha\\wedge\\beta]=-(-1)^{pq}[\\beta\\wedge\\alpha]$, graded Jacobi\n\n$$\\left[\\alpha\\wedge\\left[\\beta\\wedge\\gamma\\right]\\right]=\\left[\\left[\\alpha\\wedge\\beta\\right]\\wedge\\gamma\\right]+(-1)^{pq}\\left[\\beta\\wedge\\left[\\alpha\\wedge\\gamma\\right]\\right],$$\n\nand the exterior-derivative rule\n\n$$d[\\alpha\\wedge\\beta]=[d\\alpha\\wedge\\beta]+(-1)^p[\\alpha\\wedge d\\beta].$$\n\nIn particular, for $\\mathfrak g$-valued 1-forms $A,B$, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$, so $\\tfrac12[A\\wedge A](X,Y)=[A(X),A(Y)]$. This fixes the normalization used by the Cartan curvature formula.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qftx-principal-curvature-cartan-bianchi",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, and let $\\pi:P\\to M$ be a smooth right principal $G$-bundle with a principal connection form $\\omega$ associated to $H$, using $Z_P(p)=\\left.\\frac{d}{dt}\\right|_0p\\exp_G(tZ)$ for the right action. For Lie-algebra-valued forms use the graded bracket defined by alternating shuffle and the Lie bracket; in degree one, $[A\\wedge B](X,Y)=[A(X),B(Y)]-[A(Y),B(X)]$. Define\n\n$$\\Omega_\\omega:=d\\omega+\\frac12[\\omega\\wedge\\omega],\\qquad D_\\omega\\eta:=d\\eta+[\\omega\\wedge\\eta].$$\n\nThen $\\Omega_\\omega$ is horizontal and $\\operatorname{Ad}$-equivariant, and $\\Omega_\\omega=\\omega\\circ K_H$ for the imported vertical-valued curvature $K_H(X,Y)=-v([hX,hY])$. For any trivializing cover with smooth sections $s_i:U_i\\to P$, set $A_i=s_i^*\\omega$ and $F_i=s_i^*\\Omega_\\omega$. On an overlap, let $g_{ij}:U_i\\cap U_j\\to G$ be the smooth map determined by $s_j=s_i g_{ij}$, and write $\\theta_L(g_{ij})=g_{ij}^*\\theta_L$ for the left Maurer–Cartan form. Then\n\n$$A_j=\\operatorname{Ad}_{g_{ij}^{-1}}A_i+\\theta_L(g_{ij}),\\qquad F_i=dA_i+\\frac12[A_i\\wedge A_i],\\qquad F_j=\\operatorname{Ad}_{g_{ij}^{-1}}F_i,\\qquad D_{A_i}F_i=0,$$\n\nwhere $D_{A_i}\\eta:=d\\eta+[A_i\\wedge\\eta]$. The transition equations concern changes of local sections; they do not identify an arbitrary map $M\\to G$ with a global automorphism of a nontrivial bundle.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "ex-unitary-and-special-unitary-lie-groups",
+          "source_section": "Example",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $n\\geq1$. Regarded as real Lie groups,\n\n$$U(n)=\\{A\\in\\operatorname{GL}_n(\\mathbb C):A^*A=I\\},\\qquad SU(n)=\\{A\\in U(n):\\det A=1\\}$$\n\nhave Lie algebras\n\n$$\\mathfrak u(n)=\\{X:X^*+X=0\\},\\qquad \\mathfrak{su}(n)=\\{X\\in\\mathfrak u(n):\\operatorname{tr}X=0\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qftx-associated-covariant-derivative",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be a finite-dimensional smooth manifold, $G$ a finite-dimensional real Lie group, $\\pi:P\\to M$ a smooth right principal $G$-bundle, and $\\omega$ the principal connection 1-form of a supplied horizontal distribution. Fix a finite-dimensional complex representation $\\rho:G\\to\\operatorname{GL}_{\\mathbb C}(V)$ that is smooth, and let $E=P\\times_\\rho V$ be its associated vector bundle with relation $[pg,v]=[p,\\rho(g)v]$. Define $\\rho_*:=d\\rho_e:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V)$, where the differential is taken after viewing $\\rho$ as a smooth matrix-valued map. For any open cover with smooth local sections $s_i:U_i\\to P$, write $A_i=s_i^*\\omega$. A smooth section $\\sigma$ of $E$ has unique local components $\\psi_i:U_i\\to V$ given by $\\sigma(x)=[s_i(x),\\psi_i(x)]$. Define the **associated covariant derivative** $\\nabla^\\omega\\sigma$ by its local components\n\n$$\n(\\nabla^\\omega\\sigma)_i=d\\psi_i+\\rho_*(A_i)\\psi_i,\n$$\n\nwhere $(\\rho_*(A_i)\\psi_i)(X)=\\rho_*(A_i(X))\\psi_i$ for $X\\in TU_i$. These expressions patch to a smooth $E$-valued 1-form on $M$, independently of the chosen local sections, and satisfy $\\nabla^\\omega(f\\sigma)=df\\otimes\\sigma+f\\nabla^\\omega\\sigma$ for every smooth scalar function $f$ on $M$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-left-maurer-cartan-form",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as in [[def-countable-choice]], let $G$ be a Lie\ngroup [[def-lie-group]] with identity $e$, and write $\\mathfrak g=T_eG$. A\n**$\\mathfrak g$-valued one-form** on $G$ means a\nsmooth map $\\alpha:TG\\to\\mathfrak g$ whose restriction\n$\\alpha_g:T_gG\\to\\mathfrak g$ is linear for every $g$. Equivalently,\n$V\\mapsto(\\pi_G(V),\\alpha(V))$ is a smooth vector-bundle map\n$TG\\to G\\times\\mathfrak g$ over $\\operatorname{id}_G$ in the sense of\n[[def-vector-bundle-map-over-a-smooth-base-map]].\n\nThe **left Maurer--Cartan form** is the $\\mathfrak g$-valued one-form\n$\\theta:TG\\to\\mathfrak g$ whose fibre map at $g$ is\n\n$$\\theta_g=d(L_{g^{-1}})_g:T_gG\\longrightarrow T_eG=\\mathfrak g.$$\n\nThis formula is well-defined because left translation by $g^{-1}$ sends $g$\nto $e$. It is smooth and fibrewise linear because\n[[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]]\nidentifies\n\n$$TG\\longrightarrow G\\times\\mathfrak g,\\qquad V_g\\longmapsto(g,\\theta_gV_g)$$\n\nas the inverse vector-bundle isomorphism to left trivialization. In\nparticular, $\\theta_e=d(L_e)_e=\\operatorname{id}_{\\mathfrak g}$.\n\nThe stated $\\mathrm{AC}_\\omega$ is used exactly through that supplied smooth\nleft-trivialization theorem; the pointwise formula and passage to its second\ncomponent add no choice. A Lie group is nonempty. When $\\dim G=0$, $\\theta$\nis the unique map between zero tangent fibres, and the definition is unchanged\nin dimension one. Lie groups are boundaryless by convention, and no metric,\nnondegeneracy, endpoint, or biconditional occurs.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-adjoint-is-a-smooth-lie-group-representation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite-dimensional real Lie group with Lie algebra\n$\\mathfrak g$. Its adjoint map is a group homomorphism\n\n$$\\operatorname{Ad}:G\\longrightarrow\\operatorname{GL}(\\mathfrak g),$$\n\nand it is smooth for the standard smooth structure on\n$\\operatorname{GL}(\\mathfrak g)$. In particular,\n\n$$\\operatorname{Ad}_{gh}=\\operatorname{Ad}_g\\circ\\operatorname{Ad}_h,\\qquad \\operatorname{Ad}_e=\\operatorname{id}_{\\mathfrak g}.$$\n\nThus $\\operatorname{Ad}$ is a smooth finite-dimensional real representation\nof $G$ on $\\mathfrak g$. No choice principle is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-smooth-principal-g-bundle",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group, $M$ a smooth manifold, and $P$\na smooth manifold. A **smooth right principal $G$-bundle** is a right principal\n$G$-bundle $\\pi:P\\to M$ in the topological sense of\n[[def-principal-g-bundle-and-associated-fiber-bundle]], with the following\nadditional smooth structure: $\\pi$ and the right $G$-action are smooth, and\nthe principal-bundle charts can be chosen as equivariant diffeomorphisms\n$\\pi^{-1}(U)\\cong U\\times G$. Thus each chart respects the projection to\n$U$ and the right action on the $G$ factor. The smoothness convention is that\nof [[def-smooth-map-between-manifolds-with-boundary]]; boundaryless manifolds\nare the default in this item.\n\nThe topological principal-bundle clause retains its free, transitive right\naction on every fibre and its local triviality. Smoothness adds compatible\ndifferentiable structure; it does not select a connection or assert that a\nglobal trivialization exists. The empty-base case is allowed and then $P$ is\nempty by the cited topological definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $M_2(\\mathbb C)$ as $\\mathbb R^8$. The conditions $g^*g=I$ and $\\det g=1$ defining $SU(2)$ are closed equations in the matrix entries, so $SU(2)$ is closed. Each column of a unitary matrix has norm one, hence all entries have modulus at most one, so $SU(2)$ is bounded. By [F2], it is compact. The matrices $D=\\begin{pmatrix}i&0\\\\0&-i\\end{pmatrix}$ and $J=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$ are unitary with determinant one, but $DJ=\\begin{pmatrix}0&i\\\\i&0\\end{pmatrix}\\ne\\begin{pmatrix}0&-i\\\\-i&0\\end{pmatrix}=JD$. Thus $SU(2)$ is noncommutative, and [F1] supplies its Lie-group structure. This verifies the group conditions in [A1]. The declared axiom base is $\\mathrm{AC}_\\omega$ by [A2], while [F2] uses no choice. Each Pauli matrix is Hermitian and traceless, so each $T_a$ is anti-Hermitian and traceless; [F6] puts them in $\\mathfrak{su}(2)$. Direct multiplication gives $\\sigma_1\\sigma_2=i\\sigma_3$ and $\\sigma_2\\sigma_1=-i\\sigma_3$, hence $[T_1,T_2]=(-i/2)^2[\\sigma_1,\\sigma_2]=-(1/4)(2i\\sigma_3)=T_3$. Since $T_3\\ne0$, this also verifies that $T_1$ and $T_2$ do not commute.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The product $P=M\\times SU(2)$ with right multiplication on its second coordinate is smooth, free, and transitive on each fibre, and the product chart is equivariant; [F10] therefore makes it a smooth right principal bundle. By [F8], the displayed $\\omega$ is smooth. A fundamental vertical vector generated by $Z\\in\\mathfrak{su}(2)$ at $(z,g)$ is $(0,gZ)$, and $(\\theta_L)_g(gZ)=Z$, so $\\omega(Z_P)=Z$. For a fixed $h\\in SU(2)$, the right-translated tangent is $(X,\\xi h)$; [F8] gives $(\\theta_L)_{gh}(\\xi h)=h^{-1}(\\theta_L)_g(\\xi)h=\\operatorname{Ad}_{h^{-1}}((\\theta_L)_g(\\xi))$, and [F9] gives $\\operatorname{Ad}_{(gh)^{-1}}=\\operatorname{Ad}_{h^{-1}}\\operatorname{Ad}_{g^{-1}}$. Therefore $\\omega_{(z,gh)}(X,\\xi h)=\\operatorname{Ad}_{h^{-1}}\\omega_{(z,g)}(X,\\xi)$. Together with reproduction, [F3] shows it is a principal connection form. Its pullback along $s(z)=(z,e)$ is $A$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The coefficients of $A$ are constant, so $dA=0$. Evaluating the bracket on $(\\partial_x,\\partial_y)$, [F4] gives $\\tfrac12[A\\wedge A](\\partial_x,\\partial_y)=[T_1,T_2]=T_3$ by step 1.1. Since a 2-form on $\\mathbb R^2$ is determined by this value on the coordinate basis, $F=T_3dx\\wedge dy$.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the defining representation, the differential $\\rho_*$ sends each tangent matrix $T\\in\\mathfrak{su}(2)$ to the same endomorphism $T$ of $\\mathbb C^2$, since $\\rho$ is the matrix inclusion. Applying [F7] to a smooth $\\psi:M\\to\\mathbb C^2$ gives the two displayed covariant derivatives. The constant matrices commute with the coordinate derivatives, and $\\partial_x\\partial_y\\psi=\\partial_y\\partial_x\\psi$; expansion gives $[\\nabla_{\\partial_x},\\nabla_{\\partial_y}]\\psi=(T_1T_2-T_2T_1)\\psi=T_3\\psi$. This verifies the stated operator commutator for every smooth section in the global trivialization.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed configuration A=T1 dx+T2 dy on R^2, with curvature T3 dx wedge dy fixes a nonempty two-dimensional base; deleting the base is not a specialization of this example."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example computes nonzero T_3 as curvature and commutator coefficient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The canonical product section s(z)=(z,e) uses the group identity; the principal-form reproduction and equivariance checks apply there as at every g in SU(2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2: the exterior-derivative contribution vanishes while the bracket contribution is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The coordinate directions x,y range over R^2 in the configuration A=T1 dx+T2 dy on R^2, with curvature T3 dx wedge dy; no finite segment or endpoint condition is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: all matrices, representation, and global product trivialization are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts computations, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts computations, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Reviewed the full Example, Verification steps 1.1, 2.1, 2.2 and 3.1, all eleven direct supplier statements and the contract citation/derivation/boundary records. Recomputed sigma1 sigma2=i sigma3 and its reversed product, obtaining [T1,T2]=(-1/4)(2i sigma3)=T3 with T_a=-i sigma_a/2. Anti-Hermitian traceless matrices lie in the supplied tangent Lie algebra. The closed/bounded SU(2) argument meets Heine-Borel n=8 and the displayed D,J witness noncommutativity. Checked reproduction and right equivariance of the principal product form, then canonical-section pullback. Constant coefficients give dA=0, while half the bracket wedge evaluates to T3 on (partial_x,partial_y), so F=T3 dx wedge dy is nonzero. On smooth C^2-valued functions, rho_* is matrix inclusion; commuting mixed partials and constant coefficients reduce the covariant commutator to [T1,T2]=T3. Both sides act on the same smooth domain, with no unbounded-Hilbert-operator claim. This fixed two-dimensional example asserts no universal zero/empty-base case or physical measurement; AC_omega remains explicit. No diagram, statement-link defect, repair or escalation. Empty reader/refuter findings independently checked."
+      }
+    }
+  }
+}

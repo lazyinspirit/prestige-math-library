@@ -1,0 +1,127 @@
+{
+  "id": "ex-subset-construction-can-require-exponentially-many-states",
+  "agent": "/root/rendering_repair_coordinator/dcpt_011",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "A paired NFA/subset-DFA picture materially clarifies how the guessing state persists while two later positions are tracked, and concretely exhibits the four reachable subsets. This is an explanatory diagram addition under the expanded scope; no malformed original rendering is asserted.",
+      "action": "Added two TikZ diagrams and their state-label/acceptance/reachability explanation in final Remarks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended only final Remarks: complete three-state NFA and complete reachable four-state subset DFA. Existing title, statement, proof, dependencies, sources, all frontmatter and published status remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      53,
+      97
+    ],
+    "nfa_tikz": [
+      60,
+      70
+    ],
+    "dfa_tikz": [
+      79,
+      92
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "proof_independent": true,
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "object": "NFA",
+      "local_basis": "Example paragraph and Verification step 1.1",
+      "check": "q0 is start/still guessing; q1 records a just-guessed penultimate 1; q2 is accepting after exactly one more symbol. delta(q0,0)={q0}, delta(q0,1)={q0,q1}, delta(q1,0)=delta(q1,1)={q2}, delta(q2,0)=delta(q2,1)=empty. The picture has three states, four labelled edge paths (the two-symbol labels encode the corresponding two transitions), and no outgoing edge from q2."
+    },
+    {
+      "object": "Reachable subset DFA",
+      "local_basis": "def-subset-construction-dfa Definition union-of-successors formula, with no epsilon transitions; Verification step 2.1",
+      "check": "A={q0}, B={q0,q1}, C={q0,q2}, D={q0,q1,q2}. Applying the actual NFA union-of-successors formula gives A:0->A,1->B; B:0->C,1->D; C:0->A,1->B; D:0->C,1->D. All eight directed symbol transitions are drawn. A direct local Node calculation independently enumerated these exact transitions."
+    },
+    {
+      "object": "Start, reachability and acceptance",
+      "local_basis": "def-subset-construction-dfa S0 and G formulas; Verification steps 1.1 and 2.1",
+      "check": "No epsilon moves imply S0={q0}=A. Prefixes epsilon,1,10,11 reach A,B,C,D respectively. q0 persists on both symbols, so the empty subset is unreachable. F={q2}, hence precisely C,D meet F; precisely these two vertices have double circles. The figure adds no minimality claim."
+    },
+    {
+      "object": "Visual edge audit",
+      "local_basis": "Native compiled preview dcpt-011, original-resolution standalone tiles 01 and 02",
+      "check": "NFA has start arrow into q0, q0 loop labelled 0,1, q0->q1 labelled 1, q1->q2 labelled 0,1, and accepting q2. DFA has four vertices, two loops, six other directed edges, and separate opposed B/C curves with labels 0 and 1. Each vertex has one outgoing transition per symbol; A start arrow and C,D double circles are visible. No clipping or overlap in the diagrams; no named-node cycle shortcut is used."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/ex-subset-construction-can-require-exponentially-many-states.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-subset-construction-can-require-exponentially-many-states.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-subset-construction-can-require-exponentially-many-states.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dcpt-011 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-subset-construction-can-require-exponentially-many-states --out research/math-library-rendering-repairs-2026-10-23/previews/dcpt-011",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16,
+        "tikz_count": 2,
+        "katex_errors": [],
+        "diagram_failures": []
+      }
+    }
+  ],
+  "original_evidence": {
+    "declared_path_missing": "research/math-library-rendering-audit-2026-10-23/computability-theory/diagram-supplement/screenshots/ex-subset-construction-can-require-exponentially-many-states--01.png",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/computability-theory/screenshots/ex-subset-construction-can-require-exponentially-many-states--01.png",
+    "sha256": "fab5ea363cf4fe3b99a8d8535eaef8f1da28efb205439802d5566dae442bbf4a",
+    "inspected": "Standalone original-resolution view; matching recorded SHA verified."
+  },
+  "guard": {
+    "before_raw_sha256": "cd9ca9b35dc027a98043653cd9789a4ff4f676ee8d0824b194b35c41b3a533dd",
+    "matched_immediately_before_edit": true,
+    "current_raw_sha256": "ba61c422e65f54efbc9028d0e17582a8c0015b7c5cecba566b0eb30ab828db11",
+    "all_original_bytes_preserved_as_prefix": true
+  },
+  "preview": {
+    "directory": "research/math-library-rendering-repairs-2026-10-23/previews/dcpt-011",
+    "manifest_sha256": "a460cae185d56fd996afe791f6bbe3d171d2ba38f7d34b9b95e7d27ac3306463",
+    "source_sha256": "ba61c422e65f54efbc9028d0e17582a8c0015b7c5cecba566b0eb30ab828db11",
+    "html_sha256": "6b0ef0aef260fff1b7a38fcd88114783b971b25c7f07404deb414280be59cc51",
+    "reference_map_sha256": "6763931c46989820af183537b1285328276f84c20a982e3cd8825ce0b9eb00a1",
+    "viewed_original_resolution_tiles": [
+      "01",
+      "02"
+    ],
+    "limitations": [
+      "Local ItemBody SSR preview, not production route coverage.",
+      "Fresh tile 01 omits much pre-existing text while retaining its boxes; original authentic capture shows that text. Added prose and both compiled diagrams are visible; this capture artifact did not motivate source changes.",
+      "16 unrelated current reference-map parse diagnostics reported by preview."
+    ]
+  },
+  "remaining_issues": []
+}

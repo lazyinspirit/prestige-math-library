@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-cg-right-angled-cube-davis-complex.json
+  precheck: pass
 id: "ex-cg-right-angled-cube-davis-complex"
 kind: example
 title: "The right-angled cube Davis complex and its boundary 2-sphere"
@@ -11,9 +14,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 sources:
   references:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups (MSC lecture slides, Tsinghua, 2013)"
@@ -202,3 +202,64 @@ $U\subseteq T$ and $w^{-1}w'\in W_T$.
 ## Remarks
 
 The item remains escalated while these in-run suppliers require current decisions or audits. Consumer `ex-cg-right-angled-cube-davis-complex` uses `def-cg-spherical-nerve-coset-poset-and-davis-realization` in step 4.2; `lem-cg-spherical-coset-inclusion-and-intersection` in steps 2.2 and 3.1; `lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics` in steps 2.1, 3.1, and 4.1; and `thm-cg-davis-complex-cell-incidence-and-stabilizers` in steps 2.2, 4.1, and 4.2. Its cross-batch suppliers are `def-cg-coxeter-diagram-components-and-finite-type` (step 1.1); `lem-cg-diagram-products-and-invariant-form-comparison` (steps 1.1 and 2.1); `def-cg-real-coxeter-form-and-reflection`, `lem-cg-reflection-form-invariance-and-rank-two-orders`, and `def-cg-canonical-reflection-homomorphism` (step 2.1); `thm-hh-parabolic-minimal-representatives-and-length-additivity` and `def-hh-coxeter-matrix-word-group-and-length` (step 1.1); and `thm-cg-finite-chamber-tiling-and-coset-face-identification` (step 5.1). These supplier statements were inspected provisionally; keep each obligation open until its current Step-3 decision and this exact use are reconciled.
+
+
+The following schematic uses normalized box coordinates $x_s/d_s$; a label
+$++-$ means $(+1,+1,-1)$ in the order $(a,b,c)$. On the right,
+$s^\pm$ denotes the Coxeter vertex $(s,\pm1)$, or equivalently the coset
+with fixed $s$-sign. Dashed edges are hidden edges, not additional cells.
+The marked box vertex $+++$ is dual to the shaded Coxeter triangle
+$\{a^+,b^+,c^+\}$. More generally, a box face with fixed $s$-sign is dual
+to $s^\pm$, and a box edge with two fixed signs is dual to the edge joining
+the corresponding two signed vertices. These are the incidence-reversing
+correspondences of step 5.1; the proof above is independent of this picture.
+
+```tikz
+\begin{tikzpicture}[scale=1.25, every node/.style={font=\small}]
+\begin{scope}
+\coordinate (A) at (0,0);
+\coordinate (B) at (1.8,0);
+\coordinate (C) at (2.6,.7);
+\coordinate (D) at (.8,.7);
+\coordinate (E) at (0,1.9);
+\coordinate (F) at (1.8,1.9);
+\coordinate (G) at (2.6,2.6);
+\coordinate (H) at (.8,2.6);
+\draw[dashed] (A)--(D) (D)--(C) (D)--(H);
+\draw (A)--(B)--(C)--(G)--(H)--(E)--(A);
+\draw (B)--(F)--(E) (F)--(G);
+\foreach \p in {A,B,C,D,E,F,G,H} {\fill (\p) circle (1.5pt);}
+\fill[blue] (G) circle (3pt);
+\node[below left] at (A) {$---$};
+\node[below] at (B) {$+--$};
+\node[right] at (C) {$++-$};
+\node[above left] at (D) {$-+-$};
+\node[left] at (E) {$--+$};
+\node[below right] at (F) {$+-+$};
+\node[above right] at (G) {$+++$};
+\node[above left] at (H) {$-++$};
+\node at (1.3,3.25) {Cubical boundary};
+\node at (1.3,-.85) {$8$ vertices, $12$ edges, $6$ squares};
+\end{scope}
+\begin{scope}[xshift=6.2cm]
+\coordinate (P) at (2,1.2);
+\coordinate (Q) at (.6,.65);
+\coordinate (R) at (-.8,1.2);
+\coordinate (T) at (.6,1.75);
+\coordinate (U) at (.6,2.9);
+\coordinate (V) at (.6,-.5);
+\fill[blue!20] (P)--(Q)--(U)--(P);
+\draw[dashed] (R)--(T)--(P) (U)--(T)--(V);
+\draw (R)--(Q)--(P) (U)--(R)--(V)--(P)--(U) (U)--(Q)--(V);
+\foreach \p in {P,Q,R,T,U,V} {\fill (\p) circle (1.5pt);}
+\node[right] at (P) {$a^+$};
+\node[below left] at (Q) {$b^+$};
+\node[left] at (R) {$a^-$};
+\node[above right] at (T) {$b^-$};
+\node[above] at (U) {$c^+$};
+\node[below] at (V) {$c^-$};
+\node at (.6,3.6) {Dual Coxeter complex};
+\node at (.6,-1.25) {$6$ vertices, $12$ edges, $8$ triangles};
+\end{scope}
+\end{tikzpicture}
+```

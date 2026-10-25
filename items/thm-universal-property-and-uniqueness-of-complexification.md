@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-universal-property-and-uniqueness-of-complexification.json
+  precheck: pass
 id: thm-universal-property-and-uniqueness-of-complexification
 kind: theorem
 title: "Complexification is initial for real-linear maps into complex vector spaces, and is unique up to unique isomorphism"
@@ -11,9 +14,6 @@ deps: [def-complexification-of-a-real-vector-space, thm-tensor-and-direct-sum-mo
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-29
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -56,3 +56,14 @@ Moreover, if $U$ is a complex vector space and $\iota':V\to U$ is a real-linear 
 4.1 For the uniqueness up to unique isomorphism, apply the universal property of $(V_{\mathbb C},\iota)$ to $\iota'$ to get a unique complex-linear $u:V_{\mathbb C}\to U$ with $u\circ\iota=\iota'$, and the universal property of $(U,\iota')$ to $\iota$ to get $v:U\to V_{\mathbb C}$ with $v\circ\iota'=\iota$. Both $v\circ u$ and $\operatorname{id}$ carry $\iota$ to itself, and both $u\circ v$ and $\operatorname{id}$ carry $\iota'$ to itself, so step 3.3 forces both composites to be identities; this is the two-application argument recorded in [L3]. [step 3.3, L3]
 
 5.1 Steps 3.1 and 3.2 prove the universal property, step 3.3 its uniqueness clause, and step 4.1 the uniqueness of the representing pair up to unique isomorphism. [step 3.1, step 3.2, step 3.3, step 4.1] ∎
+
+## Remarks
+
+The commutative triangle displays the universal property. The maps $\iota$ and $f$ are real-linear, while the unique extension $F$ is complex-linear; $W$ is regarded as a real vector space when composing with $\iota$.
+
+```tikzcd
+V \arrow[r, "\iota"] \arrow[dr, "f"'] & V_{\mathbb C} \arrow[d, dashed, "\exists!\,F"] \\
+& W
+```
+
+Commutativity means $F\circ\iota=f$, as verified in proof step 3.2; steps 3.1 and 3.3 establish the complex linearity and uniqueness of $F$. The proof is independent of the illustration.

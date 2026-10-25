@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-distance-to-a-set-is-attained-on-a-compact-set.md

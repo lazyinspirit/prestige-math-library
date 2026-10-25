@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-end-of-the-hom-functor-is-the-monoid-of-natural-endomorphisms-of-the-identity.md

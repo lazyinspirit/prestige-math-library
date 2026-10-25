@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-smooth-function-not-equal-to-its-maclaurin-series.md

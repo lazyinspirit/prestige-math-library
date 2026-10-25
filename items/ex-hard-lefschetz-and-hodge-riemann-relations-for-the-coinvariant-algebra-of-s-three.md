@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-hard-lefschetz-and-hodge-riemann-relations-for-the-coinvariant-algebra-of-s-three.json
+  precheck: pass
 id: ex-hard-lefschetz-and-hodge-riemann-relations-for-the-coinvariant-algebra-of-s-three
 kind: example
-title: "Hard Lefschetz and the Hodge-Riemann signs for the coinvariant algebra of S_3"
+title: "Hard Lefschetz and the Hodge-Riemann signs for the coinvariant algebra of S₃"
 status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
@@ -25,8 +28,7 @@ sources:
     - title: "Riche, La theorie de Hodge des bimodules de Soergel (d'apres Soergel et Elias-Williamson), Seminaire Bourbaki no. 1139 (arXiv:1711.02464, Octobre 2017)"
       url: "https://arxiv.org/pdf/1711.02464"
       locator: "Section 0.2, the case of a finite Weyl group"
-verification:
-  precheck: pass
+
 ---
 
 ## Example

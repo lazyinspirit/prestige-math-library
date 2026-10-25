@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks.md

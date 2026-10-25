@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hh-left-dual-evaluation-coevaluation-and-triangle-identities.md

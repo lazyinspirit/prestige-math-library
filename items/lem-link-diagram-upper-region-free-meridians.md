@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-link-diagram-upper-region-free-meridians.json
+  precheck: pass
 id: lem-link-diagram-upper-region-free-meridians
 kind: lemma
 title: The upper link-diagram region is free on strand meridians
@@ -26,13 +29,7 @@ sources:
       url: https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf
       locator: Claim 2 and the vertical-sheet decomposition, printed pp. 71–72, PDF
         pp. 72–73
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Statement
@@ -91,19 +88,37 @@ also induces an isomorphism on fundamental groups.
 
 ## Remarks
 
-The cross-section shows one sheet below a strand between two underpassing points. The embedded sheet is a disk strip, and its two side collars are the two components used in the van Kampen step; the proof uses these products, not the drawing.
+The left panel is a parameter-height view of the closure of one vertical sheet: its upper boundary is the strand, and its two ends approach underpassing points on the excluded level plane. The right panel is a normal-plane slice at an interior strand point, showing the sheet below the strand, local portions of its two side collars, and a small meridian meeting the sheet once. The labels $N_-$ and $N_+$ distinguish the two sides, without prescribing their signs. Here $\Sigma=(\mathbb R^2\times\{-1\})\cup\{\infty\}$ is the level sphere from [F1]; only its finite level-plane portion is shown. Shading indicates subsets, not additional boundary components. The product neighborhoods and corridor in step 3.1, rather than the drawing, justify the van Kampen step.
 
-~~~tikz
-\begin{tikzpicture}[scale=1.0,>=stealth]
-  \draw[thick] (-2,0) -- (2,0) node[right] {$z=-1$};
-  \draw[thick,->] (-1.5,2) .. controls (-0.5,2.3) and (0.5,2.3) .. (1.5,2);
-  \draw[dashed] (-1.5,0) .. controls (-0.5,0.5) and (0.5,0.5) .. (1.5,0);
-  \draw[dotted] (-1.5,0) -- (-1.5,2);
-  \draw[dotted] (1.5,0) -- (1.5,2);
-  \node at (-1.5,-0.25) {$p_-$};
-  \node at (1.5,-0.25) {$p_+$};
-  \node at (0,0.85) {$D_j$};
-  \node at (0,2.35) {strand};
-  \node at (0,-0.55) {level sphere};
+```tikz
+\begin{tikzpicture}[scale=0.95,>=stealth]
+  \node at (0,3.3) {Parameter-height view};
+  \fill[blue!15] (-2,0) .. controls (-1.4,0) and (-1.2,2.1) .. (0,2.1) .. controls (1.2,2.1) and (1.4,0) .. (2,0) -- cycle;
+  \draw[dashed] (-2.6,0) -- (2.6,0);
+  \draw[very thick] (-2,0) .. controls (-1.4,0) and (-1.2,2.1) .. (0,2.1) .. controls (1.2,2.1) and (1.4,0) .. (2,0);
+  \filldraw[fill=white] (-2,0) circle (0.06);
+  \filldraw[fill=white] (2,0) circle (0.06);
+  \node at (0,1) {$D_j$};
+  \node at (0,2.55) {strand: $z=\eta(s)$};
+  \node[below] at (-2,-0.12) {$p_-$};
+  \node[below] at (2,-0.12) {$p_+$};
+  \node at (0,-0.9) {$\Sigma$: $z=-1$ (excluded)};
+  \draw[->] (-1.4,-1.4) -- (1.4,-1.4) node[right] {$s\in I_j$};
+  \node at (6.5,3.3) {Normal-plane slice};
+  \fill[orange!25] (6.12,0.5) rectangle (6.5,1.35);
+  \fill[green!20] (6.5,0.5) rectangle (6.88,1.35);
+  \draw[blue,very thick] (6.5,0.06) -- (6.5,2.2);
+  \draw[dashed] (4.4,0) -- (8.6,0);
+  \filldraw[fill=white] (6.5,0) circle (0.06);
+  \draw[thick] (6.5,2.2) circle (0.55);
+  \fill (6.5,2.2) circle (0.06);
+  \node[right] at (7.3,2.2) {strand point};
+  \node at (6.5,2.95) {meridian};
+  \draw (5.15,1.05) -- (6.25,0.9);
+  \node[left] at (5.15,1.05) {$N_-$};
+  \draw (7.8,1.05) -- (6.75,0.9);
+  \node[right] at (7.8,1.05) {$N_+$};
+  \node[right] at (6.6,0.3) {$D_j$};
+  \node at (6.5,-0.6) {$\Sigma$: $z=-1$ (excluded)};
 \end{tikzpicture}
-~~~
+```

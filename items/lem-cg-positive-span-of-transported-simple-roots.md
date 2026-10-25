@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-cg-positive-span-of-transported-simple-roots.json
+  precheck: pass
 id: "lem-cg-positive-span-of-transported-simple-roots"
 kind: "lemma"
 title: "A transported simple root lies in the positive span of the simple root and the inversion roots"
@@ -31,13 +34,7 @@ sources:
     - title: "A. Bjorner and F. Brenti, Combinatorics of Coxeter Groups, Graduate Texts in Mathematics 231, Springer 2005"
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Sections 4.2 and 4.4, pp. 93-97 and 101-105 (the reflection representation, positive roots and inversion sets)"
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+
 ---
 
 ## Statement
@@ -74,7 +71,7 @@ Let $S$ be a finite set, $m$ a Coxeter matrix, $W$ the presented group with leng
 
 ## Proof
 
-**Proof technique:** Induction on $\ell(u)$, over a statement that also records the support of the transported root.
+**Proof technique:** Induction on the length of u, over a statement that also records the support of the transported root.
 
 1.1 We prove the following statement $P(\ell)$ for every $\ell\ge0$: for every $u\in W$ with $\ell(u)=\ell$, every $t\notin S(u)$ and every reduced expression $u=s_1\cdots s_\ell$ with prefix roots $\gamma_i:=\rho(s_1\cdots s_{i-1})e_{s_i}$, one has $\rho(u)e_t=e_t+\sum_{i=1}^{\ell}c_i\gamma_i$ with $c_i\ge0$ for all $i$. For the given pair $(w,s)$ we have $\ell(w)=k$ by the reducedness of $w=r_1\cdots r_k$, so clause (1) is the instance $u=w$, $t=s$ of $P(k)$, clause (3) is the same statement quantified over all pairs $(u,s)$ with $s\notin S(u)$, and clause (2) is obtained from it in the last steps. [given, induction]
 

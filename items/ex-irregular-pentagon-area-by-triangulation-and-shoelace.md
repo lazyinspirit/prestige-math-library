@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-irregular-pentagon-area-by-triangulation-and-shoelace.json
+  precheck: pass
 id: ex-irregular-pentagon-area-by-triangulation-and-shoelace
 kind: example
 title: "An irregular pentagon computed by triangulation and the shoelace formula"
@@ -14,9 +17,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-21
 sources:
   scraped: []
   references: []
@@ -44,3 +44,37 @@ Let $P$ have counterclockwise vertices $(0,0),(4,0),(5,2),(2,4),(0,3)$. It is a 
 1.2 The cyclic shoelace sum is $(0+8+20+6+0)-(0+0+4+0+0)=30$, so [L2] gives content $30/2=15$. [L2, algebra]
 
 2.1 The triangulation and shoelace computations agree at $15$. [step 1.1, step 1.2] ∎
+
+## Remarks
+
+The arrows follow the counterclockwise boundary order. The two dashed diagonals from $v_0$ give the three triangles of step 1.1; their displayed areas sum to $4+8+3=15$, agreeing with the shoelace computation in step 1.2.
+
+```tikz
+\begin{tikzpicture}[scale=1.2,>=stealth]
+\coordinate (v0) at (0,0);
+\coordinate (v1) at (4,0);
+\coordinate (v2) at (5,2);
+\coordinate (v3) at (2,4);
+\coordinate (v4) at (0,3);
+\draw[thick,->] (v0) -- (v1);
+\draw[thick,->] (v1) -- (v2);
+\draw[thick,->] (v2) -- (v3);
+\draw[thick,->] (v3) -- (v4);
+\draw[thick,->] (v4) -- (v0);
+\draw[dashed] (v0) -- (v2);
+\draw[dashed] (v0) -- (v3);
+\fill (v0) circle (1.5pt);
+\fill (v1) circle (1.5pt);
+\fill (v2) circle (1.5pt);
+\fill (v3) circle (1.5pt);
+\fill (v4) circle (1.5pt);
+\node[below left] at (v0) {$v_0=(0,0)$};
+\node[below] at (v1) {$v_1=(4,0)$};
+\node[right] at (v2) {$v_2=(5,2)$};
+\node[above] at (v3) {$v_3=(2,4)$};
+\node[left] at (v4) {$v_4=(0,3)$};
+\node at (3,0.65) {$4$};
+\node at (2.4,2) {$8$};
+\node at (0.65,2.35) {$3$};
+\end{tikzpicture}
+```

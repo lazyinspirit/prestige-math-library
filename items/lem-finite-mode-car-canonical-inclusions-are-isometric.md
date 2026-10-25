@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-mode-car-canonical-inclusions-are-isometric.json
+  precheck: pass
 id: lem-finite-mode-car-canonical-inclusions-are-isometric
 kind: lemma
 title: Canonical Finite-Mode CAR Inclusions Are Isometric
@@ -17,12 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Günther Hörmann, C*-Algebras with Aspects of Quantum Physics, Chapter 6, §6.4"
@@ -55,3 +52,18 @@ For $n\ge0$, let $\iota_n:\mathsf{CAR}_n\to\mathsf{CAR}_{n+1}$ be the unique uni
 ## Remarks
 
 The embeddings use the fixed ordering in which the new mode is appended last. No choice principle is used.
+
+The occupation representations make the inclusion concrete in the commuting square below. Here $\alpha_n(A)=A\otimes I_2$, and both vertical arrows are the faithful matrix identifications from [F1].
+
+```tikzcd
+\begin{tikzcd}[column sep=5em, row sep=3em, cells={nodes={font=\Large}}, labels={font=\large}]
+\mathsf{CAR}_n \arrow[r, "\iota_n"] \arrow[d, "\pi_n"', "\cong"] & \mathsf{CAR}_{n+1} \arrow[d, "\pi_{n+1}", "\cong"'] \\
+M_{2^n}(\mathbb C) \arrow[r, "\alpha_n"'] & M_{2^{n+1}}(\mathbb C)
+\end{tikzcd}
+```
+
+Under $\mathcal F_{n+1}\cong\mathcal F_n\otimes\mathbb C^2$, group the occupation basis into the two blocks $\mathcal F_n\otimes e_0$ (last mode empty) and $\mathcal F_n\otimes e_1$ (last mode occupied). Relative to this grouped basis,
+
+$$ \alpha_n(A)=\begin{pmatrix}A&0\\0&A\end{pmatrix},\qquad (x_0,x_1)\longmapsto(Ax_0,Ax_1),\qquad \|\alpha_n(A)\|=\|A\|. $$
+
+For $j\le n$, the last occupation bit leaves the toggle sign unchanged, so both $c_j$ and $c_j^\dagger$ act identically on the two blocks, as shown in step 1.2. The square and block display illustrate steps 1.2 and 2.1; the proof remains independent of the illustration.

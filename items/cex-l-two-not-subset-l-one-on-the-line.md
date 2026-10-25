@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cex-l-two-not-subset-l-one-on-the-line.json
+  precheck: pass
 id: cex-l-two-not-subset-l-one-on-the-line
 kind: counterexample
 title: "$L^2$ is not a subset of $L^1$ on the line"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership]
 proof_strategy: "Use the power-function family x^(-a) at infinity with 1/2 < a <= 1."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -31,7 +31,7 @@ On $\mathbb R$ with Lebesgue measure, every $L^2$ function lies in $L^1$.
 
 ## Counterexample
 
-**Proof technique:** Use the power-function family $x^{-a}$ at infinity with $1/2<a\le1$.
+**Proof technique:** Use negative powers at infinity, with exponent magnitude greater than one half and at most one.
 
 1.1 Choose $a=3/4$ and set $f(x):=x^{-3/4}\chi_{(1,\infty)}(x)$. Then [L1] $a\cdot2=3/2>1$, so [L1] gives $f\in L^2$. But $a\cdot1=3/4\not>1$, so gives $f\notin L^1$. [L1, given]
 

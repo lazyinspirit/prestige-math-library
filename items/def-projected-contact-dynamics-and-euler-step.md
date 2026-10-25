@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-projected-contact-dynamics-and-euler-step.json
+  precheck: n/a
 id: def-projected-contact-dynamics-and-euler-step
 kind: definition
 title: Projected contact dynamics and explicit projection Euler step
@@ -18,12 +21,6 @@ deps:
 provenance:
   statement: ai-altered
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "David E. Stewart, Dynamics with Inequalities: Impacts and Hard Constraints"
@@ -47,3 +44,31 @@ $$x_{k+1}=P_C\bigl(x_k+h f(t_k,x_k)\bigr),\qquad k=0,\ldots,N-1,$$
 starting from $x_0$. Its affine interpolant joins consecutive nodes linearly on each interval $[t_k,t_{k+1}]$.
 
 For a map $x:[0,T]\to\mathbb R^d$, **absolutely continuous** means that each coordinate is absolutely continuous in the scalar sense of [[def-absolutely-continuous-function]], and $\dot x(t)$ is the vector of coordinate derivatives, from [[def-derivative]], wherever they all exist. The solution condition requires a Lebesgue-null set $N\subseteq[0,T]$ such that for every $t\notin N$ all coordinate derivatives exist and the displayed inclusion holds. Here **almost every $t$** is relative to Lebesgue measure $\lambda$ from [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], with the convention of [[def-measure-null-set-and-almost-everywhere]].
+
+## Remarks
+
+For an illustrative planar case, take $C$ to be the closed unit disk. The trial point $y=x_k+h f(t_k,x_k)$ below lies outside $C$, and its projection is $p=x_{k+1}$. The outward normal cone at this boundary point is the ray of nonnegative multiples of $y-p$; the picture draws its translate $p+N_C(p)$ based at $p$. The straight segment from $x_k$ to $p$ is the spatial trace of the affine interpolant on this step; it stays in $C$ by convexity. The curved dashed arrow indicates projection, not a trajectory of the continuous dynamics.
+
+```tikz
+\begin{tikzpicture}[scale=1.8]
+  \draw[thick] (0,0) circle (1.5);
+  \node at (-0.6,0.65) {$C$};
+  \coordinate (x) at (-0.65,-0.7);
+  \coordinate (p) at (1.5,0);
+  \coordinate (y) at (2.8,0);
+  \draw[->,thick,orange] (x) -- (y);
+  \node[below] at (1.2,-0.65) {$h f(t_k,x_k)$};
+  \draw[->,thick,cyan] (x) -- (p);
+  \node[above,rotate=18] at (0.2,-0.4) {affine segment};
+  \draw[->,thick] (p) -- (4.2,0);
+  \node[above] at (3.7,0) {$p+N_C(p)$};
+  \draw[->,dashed] (y) .. controls (2.65,0.85) and (1.65,0.85) .. (p);
+  \node[above] at (2.15,0.65) {$P_C$};
+  \fill (x) circle (1.5pt);
+  \fill (p) circle (1.5pt);
+  \fill (y) circle (1.5pt);
+  \node[below left] at (x) {$x_k$};
+  \node[above left] at (p) {$p=x_{k+1}$};
+  \node[below] at (y) {$y$};
+\end{tikzpicture}
+```

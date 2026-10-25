@@ -1,0 +1,120 @@
+{
+  "id": "ex-model-accurate-on-behavior-support",
+  "agent": "/root/rendering_repair_coordinator/orl_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other: raw-tikz-not-fenced",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution flagged tile visibly prints the center/tikzpicture commands as prose rather than drawing the transition graph. The source lacks the supported tikz code fence. Independent inspection of the complete item and both direct suppliers confirms the intended transition and reward labels already agree with the Example.",
+      "action": "Replaced only the outer center environment with a fenced tikz block; preserved every internal TikZ command and label.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Fence the existing mathematically correct state-transition diagram so the native ItemBody renderer compiles it. No state, action, reward, transition, support, proof, dependency, title, or status change.",
+  "source_lines_after": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "diagram_mathematics_corrected": false,
+  "diagram_math_checks": [
+    {
+      "objects": "Two vertices s,g; admissible actions A(s)={a,b}, A(g)={d}.",
+      "check": "These are exactly the state/action domain in the Example and the finite-model interface in def-learned-mdp-model. No extra vertex or action is drawn."
+    },
+    {
+      "relation": "s --a:1--> g",
+      "check": "The Example says action a at s moves to g with reward 1; both models agree on (s,a). The sole intervertex directed arrow has precisely this source, target and reward."
+    },
+    {
+      "relation": "g --d:0--> g",
+      "check": "The right self-loop encodes the Example dummy action d at g with reward 0 in both models."
+    },
+    {
+      "relation": "s --b:0 (hat b:1)--> s",
+      "check": "The left self-loop encodes the shared self-transition for b, true reward 0 and learned reward 1. The hat is the existing label convention explained in the immediately preceding prose; it does not introduce a new admissible action."
+    },
+    {
+      "relation": "B={(s,a),(g,d)} and fixed-policy return",
+      "check": "Under the specified policy, s occurs only at time 0, a reaches g deterministically, and d remains at g. Therefore the reachable pair union is B for H>=2, with reward sequence 1,0,... in both models. This agrees with Verification steps 1.1 and 2.1 and the zero-error case of thm-single-policy-finite-horizon-simulation-bound. No diagram claim implies accuracy on (s,b)."
+    },
+    {
+      "relation": "Rendered graph incidence",
+      "check": "Standalone final original-resolution PNG shows exactly two vertices, one s-to-g arrow and the two self-loops, all three labels visible without overlap. No closure/commutativity claim is present."
+    }
+  ],
+  "proof_independent": true,
+  "inspected_sources": [
+    "items/ex-model-accurate-on-behavior-support.md",
+    "items/def-learned-mdp-model.md",
+    "items/thm-single-policy-finite-horizon-simulation-bound.md"
+  ],
+  "before_raw_sha256": "46ca755eca1a8c19cda9a7c638f77c6bc2b691880ddc98372fdd35381b1faf84",
+  "current_raw_sha256": "8c440063c165c1626f8b557b948dd9d20ffb64dcc7ff2d0f37379ee013bd73e9",
+  "guard": "Exact original raw SHA256 checked immediately before the only source edit.",
+  "status_preserved": "Frontmatter byte-for-byte unchanged, including status: published.",
+  "local_checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-model-accurate-on-behavior-support.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/ex-model-accurate-on-behavior-support.md",
+            "item_id": "ex-model-accurate-on-behavior-support",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/ex-model-accurate-on-behavior-support.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/ex-model-accurate-on-behavior-support.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 2 steps, 0 defects"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids ex-model-accurate-on-behavior-support --out research/math-library-rendering-repairs-2026-10-23/orl-001-independent-preview",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 1,
+        "reference_map_diagnostics": 16
+      },
+      "receipt": "research/math-library-rendering-repairs-2026-10-23/orl-001-independent-preview/screenshots/ex-model-accurate-on-behavior-support.json",
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": []
+    }
+  ],
+  "original_standalone_view": "research/math-library-rendering-audit-2026-10-23/online-and-reinforcement-learning/screenshots/ex-model-accurate-on-behavior-support--01.png",
+  "final_standalone_original_resolution_view": "research/math-library-rendering-repairs-2026-10-23/orl-001-independent-preview/screenshots/ex-model-accurate-on-behavior-support--01.png",
+  "visual_inspection": "Both original and final PNGs viewed separately using view_image detail original. Final labels s,g,a:1,d:0,b:0 (hat b:1) are readable and do not overlap; no raw environment commands remain.",
+  "preview_limitations": "Local native ItemBody SSR/file preview, not an HTTP route or metadata widget check. Preview reference-title map lists 16 unrelated parse diagnostics; explicit assigned item renders successfully."
+}

@@ -4,10 +4,41 @@ import { existsSync, readFileSync, readdirSync, realpathSync, lstatSync } from '
 import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
+import { execFileSync } from 'node:child_process';
 import { yaml } from './pathway-lib.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const fail = message => { throw Error(`Invalid original maintenance: ${message}`); };
 const idPattern = /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+// A single historical, exact-byte metadata relocation; not a general stamp exception.
+const relocation = Object.freeze({
+  path: 'items/lem-borel-product-of-second-countable-spaces.md',
+  pin: '65062144095b46cdb23b0b159812f572217ad831bd3aff0f34fae9d72cf2c05b',
+  current: 'faac2722234dc29b7e2e7b4adbf31695fc61371c3f9afc1e335dfac2c8cff432',
+  source_commit: '29450da28f82d81f6865b920e64b2dd106cbe4e6',
+  source_blob: '7593c68f7ed478e48d42176d47580c5899ef10b3',
+});
+function verificationMetadataRelocation(entry, sourceRoot, before, after) {
+  const optIn = entry.verification_metadata_relocation;
+  if (!isDeepStrictEqual(optIn, { source_commit: relocation.source_commit, source_blob: relocation.source_blob })
+    || entry.path !== relocation.path || sha(before) !== relocation.pin || sha(after) !== relocation.current
+    || entry.pinned_sha256 !== relocation.pin || entry.original_sha256 !== relocation.current
+    || !Array.isArray(entry.titles) || entry.titles.length) fail('verification metadata relocation scope');
+  const deletion = Buffer.from('verification:\n  precheck: pending\n');
+  const at = before.indexOf(deletion);
+  if (at < 0 || before.indexOf(deletion, at + deletion.length) !== -1
+    || !Buffer.concat([before.subarray(0, at), before.subarray(at + deletion.length)]).equals(after))
+    fail('verification metadata relocation bytes');
+  try {
+    const options = { cwd: sourceRoot, env: { ...process.env, GIT_NO_REPLACE_OBJECTS: '1' },
+      stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 1024 * 1024 };
+    const object = `${relocation.source_commit}:${relocation.path}`;
+    const blob = execFileSync('git', ['rev-parse', '--verify', object], options).toString('utf8').trim();
+    const committed = execFileSync('git', ['cat-file', 'blob', object], options);
+    if (blob !== relocation.source_blob || !committed.equals(after)) fail('verification metadata relocation committed bytes');
+  } catch (error) {
+    fail(`verification metadata relocation Git binding: ${error.message}`);
+  }
+}
 export function originalMaintenancePath(root, run) {
   if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '')) fail('invalid run');
   return join(root, 'research', `${run}-original-maintenance.json`);
@@ -65,18 +96,21 @@ export function originalMaintenance(root, run, { receipt, scope, planning = fals
       || accepted.has(entry.path) || !scope.paths.has(entry.path) || entry.pinned_sha256 !== pin.sha256) fail('entry scope/pin');
     const original = resolve(receipt.source_root, entry.path);
     if (entry.original_path !== original || entry.original_sha256 === pin.sha256) fail('original identity');
-    const before = parse(bind(entry.path, pin.sha256)), after = parse(bind(original, entry.original_sha256));
+    const beforeBytes = bind(entry.path, pin.sha256), afterBytes = bind(original, entry.original_sha256);
+    const before = parse(beforeBytes), after = parse(afterBytes);
     if (!idPattern.test(before.data.id ?? '') || entry.path !== `items/${before.data.id}.md`
       || !scope.importedItems.has(before.data.id)) fail('imported identity');
     const prior = structuredClone(before.data), current = structuredClone(after.data);
-    // Only an added repair locator may differ; no stamps, sources or claims move.
-    if (prior.verification?.repair === undefined && current.verification?.repair !== undefined) {
+    const metadataRelocation = Object.hasOwn(entry, 'verification_metadata_relocation');
+    if (metadataRelocation) verificationMetadataRelocation(entry, receipt.source_root, beforeBytes, afterBytes);
+    // The relocation route cannot compose with a repair locator or reference move.
+    if (!metadataRelocation && prior.verification?.repair === undefined && current.verification?.repair !== undefined) {
       if (typeof current.verification.repair !== 'string' || !/^research\/[\w./-]+\.json$/.test(current.verification.repair)
         || current.verification.repair.split('/').includes('..')) fail('repair locator');
       delete current.verification.repair;
       if (prior.verification === undefined && !Object.keys(current.verification).length) delete current.verification;
     }
-    if (!isDeepStrictEqual(prior, current)) fail('metadata/interface changed');
+    if (!metadataRelocation && !isDeepStrictEqual(prior, current)) fail('metadata/interface changed');
     if (!Array.isArray(entry.evidence) || !entry.evidence.length) fail('missing scientific evidence');
     for (const evidence of entry.evidence) {
       if (typeof evidence.path !== 'string' || !evidence.path.startsWith(`research/${run}-`)

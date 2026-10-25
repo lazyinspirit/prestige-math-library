@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cg-a2-discriminant-jacobian-and-top-coinvariant-class.md

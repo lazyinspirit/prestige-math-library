@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-knot-kt-07-worked-cases.json
+  precheck: pass
 id: ex-knot-kt-07-worked-cases
 kind: example
 title: "Trefoil and figure-eight Alexander polynomials from Seifert matrices"
@@ -42,13 +45,7 @@ sources:
     - title: "Knot Theory Lecture Notes, Chapter 7: Seifert Matrices and Derived Invariants"
       url: "https://www2.math.kyushu-u.ac.jp/~saeki/Lee-Lectures.pdf"
       locator: "Examples 7.4–7.5, printed pp. 78–79; alternate ordered-core sign convention"
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Example
@@ -125,7 +122,7 @@ This displayed representative has values $1$ at $t=1$ and $-15$ at $t=-1$.
 
 The panels show the local square-plumbing charts: the horizontal and vertical core arcs cross transversely once in the shaded common square and continue outside the displayed neighborhoods to close. The labels $+,+$ and $+,-$ give the Hopf-band signs for the trefoil and figure-eight surfaces; the local charts do not depict their twists. Orient each square so the ordered rightward and upward tangents are positive; the arrows then give $a\cdot_F b=+1$. This schematic records the local construction; the proof computes the matrix entries in words.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[scale=0.85]
   % Trefoil: positive horizontal and vertical Hopf bands.
   \draw[fill=blue!10,thick] (-4.5,-0.4) rectangle (-0.6,0.4);
@@ -149,4 +146,4 @@ The panels show the local square-plumbing charts: the horizontal and vertical co
   \node[orange] at (3.8,1.5) {$b$-band};
   \node at (2.5,-2.2) {$a\cdot_F b=+1$};
 \end{tikzpicture}
-~~~
+```

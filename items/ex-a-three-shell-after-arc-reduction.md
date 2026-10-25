@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-three-shell-after-arc-reduction.json
+  precheck: pass
 id: ex-a-three-shell-after-arc-reduction
 kind: example
 title: "A three shell after arc reduction"
@@ -10,12 +13,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   references:
     - title: "Touikan Definition 3.5.3 and Figure 3.5.4"
@@ -44,4 +41,9 @@ This is a local shell length ledger. It does not assert a globally labelled $C'(
 
 ## Diagram
 
-```tikz \begin{tikzpicture} \draw[very thick] (0,0) -- node[above] {exterior: 10} (4,0); \draw (4,0) -- node[right] {3} (3,-2) -- node[below] {3} (1,-2) -- node[left] {3} (0,0); \end{tikzpicture} ```
+```tikz
+\begin{tikzpicture}
+\draw[very thick] (0,0) -- node[above] {exterior: 10} (4,0);
+\draw (4,0) -- node[right] {3} (3,-2) -- node[below] {3} (1,-2) -- node[left] {3} (0,0);
+\end{tikzpicture}
+```

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-smooth-isotopy-of-links-can-be-put-in-general-position.md

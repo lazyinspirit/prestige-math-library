@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-chern-class-of-tautological-and-hyperplane-lines-on-complex-projective-space.md

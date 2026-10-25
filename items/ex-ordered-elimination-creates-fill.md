@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-ordered-elimination-creates-fill.json
+  precheck: pass
 id: ex-ordered-elimination-creates-fill
 kind: example
 title: "Eliminating the middle vertex creates structural fill"
@@ -14,8 +17,6 @@ deps: [def-symmetric-structural-elimination-graph-and-ordering, thm-filled-graph
 justified_by: []
 aliases: []
 proof_strategy: direct
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., Chapter 3 §§3.2.1, 3.3.2 and 3.6, printed pp. 77–83 and 96–98"
@@ -52,3 +53,26 @@ with vertices $\{0,1,2\}$ and elimination order $(1,0,2)$. The initial structura
 2.1 The first eliminated vertex is $v_0=1$, whose later-neighbor set is $\{0,2\}$. By [L1] its elimination adds the previously absent edge $\{0,2\}$; the computed $S^1_{02}=-1/2$ is nonzero. Since $A$ is symmetric over the field $\mathbb Q$ and step 1.1 verifies all pivots, [L4] applies to these Schur complements. After the first elimination only two vertices remain, so later eliminations cannot join a new pair. Thus this ordering creates exactly one fill edge, realized by a numerical nonzero. [given, L1, L2, L4, step 1.1, algebra]
 
 3.1 This ordering creates one structural fill edge. The computation gives a finite example only and supplies no general fill bound. [step 1.1, step 2.1] ∎
+
+## Remarks
+
+The graph transition below shows the first elimination only. The dashed edge is the new fill edge; vertex $1$ and its incident edges have been deleted. Its numerical counterpart is $S^1_{02}=-1/2$, as computed in step 1.1. The verification above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\node at (1.4,1.2) {$G_0$};
+\node[circle,draw,minimum size=7mm] (a) at (0,0) {$0$};
+\node[circle,draw,minimum size=7mm] (b) at (1.4,0) {$1$};
+\node[circle,draw,minimum size=7mm] (c) at (2.8,0) {$2$};
+\draw (a) -- (b);
+\draw (b) -- (c);
+\node at (1.4,-0.8) {$N_0(1)=\{0,2\}$};
+\draw[->,thick] (3.5,0) -- (5.1,0);
+\node at (4.3,0.6) {delete $1$};
+\node at (6.9,1.2) {$G_1$};
+\node[circle,draw,minimum size=7mm] (d) at (5.8,0) {$0$};
+\node[circle,draw,minimum size=7mm] (e) at (8,0) {$2$};
+\draw[dashed,thick] (d) -- (e);
+\node at (6.9,-0.8) {fill: $\{0,2\}$};
+\end{tikzpicture}
+```

@@ -1,0 +1,50 @@
+# Spectral-network context staleness: completed same-owner follow-up
+
+2026-10-24. Both55 source items remain unchanged. This is the focused consumer check requested after the30/31/32 normalization and54 bridge repairs. No33 source, native readiness row, state, plan, import, manifest, contract, stamp or engine file was edited. Root owns native recertification.
+
+## Actual cause and proposed disposition
+
+`def-qftx-spectral-network-data` declares only `def-aqft-topological-defect`; `ex-qftx-t3-finite-web-index` declares only the spectral-network definition. The old native readiness rows additionally record context dependencies on the topological-interface definition, pure-SU2 physical BPS-charge datum, unweighted physical Witten-index definition, and conditional physical Hall-transport theorem. The example also records the spectral definition itself. These explicit extra dependencies participate in the native *transitive* hash even though they are not additional class-S logical premises.
+
+The actual code `frontier-snapshot.mjs:itemHash` hashes the transitive union of the item's declared dependencies and these explicit record inputs, including source bodies, scientific frontmatter, manifest contracts and page order/requires metadata. It intentionally omits the verification frontmatter field. `step1Decision` compares that composite with the stored row digest; it is not comparing just the55 source bytes. Both exact current decisions were read using the native read-only functions and report “Item or dependency changed; record current readiness.”
+
+A concrete current normalization path is:
+
+`55 item → recorded context def-qftx-physical-bps-charge-data → def-qftx-n2-coulomb-branch-data → post-qftx-n2-pure-su2-ultraviolet-model → def-qftx-physical-superspace-normalization`.
+
+The same path reaches the vector definition. The repaired54 wall-crossing theorem is itself an explicit context input, so its corrected single-Omega KS factor also enters. There is no current item-dependency path from these55 context roots to the31N4 postulate or35SCFT definition;35 was checked as requested comparison context rather than falsely inserted as a logical supplier. My preliminary parent message suggesting a53→47→31 path was corrected after reconstructing the exact graph. `dependencies-proposal.json` contains the actual shortest source-dependency paths.
+
+The old rows store only an aggregate digest, not historical per-input digests. This evidence identifies definite changed inputs in the current recorded-context closure and reproduces the stale decision; it does not claim exclusive attribution of every byte of the aggregate delta. The earlier source/manifest changes and54 before-image are already archived in the canonical normalization evidence.
+
+Recommend root recertify these two existing rows with their **same five/six explicit dependencies**, after independently recapturing current inputs. Do not delete the context inputs merely to avoid future invalidation. No source, declared dependency-role, contract, or dependency-level change is scientifically needed. The proposal remains native authoring readiness only, not independent proof approval or publication acceptance.
+
+## Full applicable source check
+
+The complete55 definition and complete T3 example, all four verification steps, Facts, qualifications, diagram explanation and references were read. The actual current55 manifest, strict proof contract, cross-page evidence and both native rows were read. The two required pages are contextual Hall/BPS and defect pages; their scope is not silently generalized to all class-S models.
+
+The class-S definition supplies its own complete physical model record, chosen global form, field/boundary/normalization data, spectral curve and meromorphic differential, geometric homology group and quotient map `rho:Gamma_0→Gamma_T`. Its optional GMN physical central-charge convention is `Z_T(rho(gamma))=integral_gamma(lambda)/pi` **only if** every element of the quotient kernel has zero period. This is the exact descent condition; an otherwise nonzero geometric period need not be an allowed physical charge. The alternative is explicitly a separate model-supplied physical central charge. Nothing equates this GMN normalization with pure-SU2 Seiberg–Witten period coordinates merely because both use the letter Z.
+
+Current33 is compatible: its pure-SU2 regular patch supplies `Z_SW=n_e a+n_m a_D` and its actual central charge is `z=sqrt(2) Z_SW`. Its represented massive rest-fiber theorem gives `M≥|z|`, with saturation/null-supercharge conclusions only for an already supplied nonzero massive unitary representation. It proves neither charge realization nor stability.55 uses the same invariant statement `M=|Z|` when its own physical model supplies a massive rest fiber and central charge, preserving model normalization; it does not borrow33's sqrt(2) factor or its selected SU2 lattice. The ongoing33 nonlinear bosonic vortex work is not a logical input to55, and no33 file was modified here.
+
+Current35 is also compatible and separate: its radial SCFT `delta=2{S,Q}` is a nonnegative dimensionless S3 shortening operator. Its trace requires actual selfadjoint/reducing joint-domain data and trace-class weighted diagonal products, allowing infinitely many finite joint blocks. Its shortening/index cancellation is not massive rest-frame central-charge saturation.55 neither invokes that pairing argument nor identifies its geometric periods with E, delta or a chemical-potential fugacity. Its source-specific class-S model and trace inputs remain separate from35's N4 SU2 coupling/global-form family and conjectural duality.
+
+The two directly recorded BPS/index context interfaces remain distinct.54's supplied pure-SU2 stable massive one-particle sector defines the trace-class second-helicity operator `(-1)^(2J3)(2J3)^2` and `Omega=-Tr/2`. Its exact per-phase Hall-to-Hilbert bridge remains an additional model input. The corrected physical KS factor already contains Omega and is used once;55 asserts no Hall identity or numerical Omega, so that correction requires no formula change in55.53's unweighted Witten datum instead uses a supplied selfadjoint odd Q, K=Q², pure-point finite-energy sectors and trace-class heat operators; it calls a kernel a BPS sector only if the model independently identifies it with massive saturation.55 does not identify this heat supertrace with its second-helicity, soliton or framed traces. Its trace expressions are explicitly conditional on supplied Hilbert sectors, operator domains/sign data and trace class, and no unbounded trace manipulation or positive-energy cancellation is used in the T3 proof.
+
+The defect supplier provides model-bound local insertions and correlators, with topologicality a separate isotopy-invariance property.55 uses only that local insertion/model-data interface and explicitly asserts no topological invariance. Its interface between two-dimensional surface defects is model-supplied lower-dimensional defect data, not a conclusion that the separate ambient codimension-one topological-interface definition automatically supplies it. No fusion, invertibility or supersymmetry follows merely from the word interface.
+
+The T3 verification retains its exact geometric content: in the Eisenstein basis the segment displacement is `(2/3,1/3)`, its KT length is `1/sqrt(3)` and angle pi/6; the selected sheet-difference factor has modulus sqrt(3) and argument -pi/6, giving GMN edge length1 and WKB phase0. The optional string-normalized number is1/pi, explicitly not an assigned physical mass. The open-segment lattice tests and its two nontrivial deck images exclude interior branch points and self-identifications. The two branch endpoints are fixed by deck rotation, so `p-tau(p)` is closed; its period is `(1-omega)(2+omega)/3=1`. Since lambda is closed, this proves nonzero geometric homology, not a physical BPS state or numerical bulk/soliton/framed index. These facts involve neither superspace raw-measure coefficients nor the formal32/physical35 tau dictionary.
+
+## Exact bindings and focused checks
+
+At this read-only observation:
+
+| Item | Old native composite | Current composite with preserved recorded dependencies |
+|---|---|---|
+| spectral definition | `a3e6662000a2e49acfc64d8605b138c54a8607faf9965d53031a90b6bb765f6f` | `7b4cbda6a6f50df6a5a02d220d217b42a06416278c01b89afce196790cb46955` |
+| T3 example | `9e84044b7d651e61fc40f3299703e8ced4c668b1657f9d5c47316463d0a94578` | `4fcc2e78422116174c6f7b8bdd60a8b72daabec7e96dc632c24568414940d483` |
+
+Current source SHA256 values are respectively `255e2db3c357316b88d3a24f8ed1d6b389beac34bb2c5a6e2c5abed1c0948b98` and `7d077a40b17f68accc3dd6372178aedeb277256c098d4f31caee793adb2a8e4c`. The full native-observed path/hash sets (2381/2382 paths) are in `observations.json`; these are context-hash inputs, not a claim that every imported mathematical carrier was freshly audited. The nine relevant current interface source digests are in `current-context-hashes.json`. Exact observed55 source/native/manifest/contract/cross files were copied read-only into `observed/`.
+
+Both selected items pass precheck, strict actual55 proof contracts, focused dependency checks, actual-manifest content policy and explicit proof layout. Both items and both actual55 library pages render without errors. The receipts and `checks-summary.json` are alongside this report. No check stamps were written, no source bytes were changed, and no native transition was attempted.
+
+Reading limits: this is a source-interface and physical-convention compatibility check with independent verification of the displayed finite geometric algebra. No fresh primary-paper or monograph retrieval, exhaustive class-S review, continuum construction, zero-mode quantization, numerical BPS computation or renewed independent audit of the entire mathematical context is claimed. The earlier source coverage remains historical author evidence. Root must recompute current composite hashes immediately before its own native recertification.

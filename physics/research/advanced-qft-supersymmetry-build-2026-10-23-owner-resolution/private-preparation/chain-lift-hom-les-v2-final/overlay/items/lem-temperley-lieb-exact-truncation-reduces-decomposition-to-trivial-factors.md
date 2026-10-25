@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors.md

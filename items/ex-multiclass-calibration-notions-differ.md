@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-multiclass-calibration-notions-differ.json
+  precheck: pass
 id: ex-multiclass-calibration-notions-differ
 kind: example
 title: "Three distinct calibration notions in three classes"
@@ -15,7 +18,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification: {judge: {model: "gpt-6-luna", verdict: pass, date: 2026-10-20}}
 sources:
   references:
     - title: "Vaicenavicius et al., Evaluating Model Calibration in Classification, PMLR 89 (2019), Sections 2–3"
@@ -25,11 +27,17 @@ sources:
 ## Example
 
 For each of three models let $X$ and $Y$ have their full power-set sigma-algebras, let $X$ be uniform on $\{1,2,3\}$, set $G(X=i)=g_i$, and specify the conditional law of $Y$ at $X=i$ by the row $p_i=P(Y=\cdot\mid X=i)$. In Model A take
+
 $$\begin{array}{c|c|c} i & g_i & p_i\\\hline 1 &(0.4,0.3,0.3)&(0.4,0.4,0.2)\\ 2 &(0.3,0.4,0.3)&(0.2,0.4,0.4)\\ 3 &(0.3,0.3,0.4)&(0.4,0.2,0.4) \end{array}$$
+
 In Model B take
+
 $$\begin{array}{c|c|c} i & g_i & p_i\\\hline 1 &(0.5,0.3,0.2)&(0.7,0.2,0.1)\\ 2 &(0.2,0.5,0.3)&(0.1,0.5,0.4)\\ 3 &(0.3,0.2,0.5)&(0.4,0.3,0.3) \end{array}$$
+
 In Model C take
+
 $$\begin{array}{c|c|c} i & g_i & p_i\\\hline 1 &(0.5,0.5,0)&(0.8,0.2,0)\\ 2 &(0.5,0,0.5)&(0.2,0,0.8)\\ 3 &(0,0.5,0.5)&(0,0.8,0.2) \end{array}$$
+
 Use the smallest-index rule to break top-class ties. Model A is classwise and top-confidence calibrated but not fully reliable; Model B is top-confidence calibrated but neither classwise calibrated nor fully reliable; Model C is classwise calibrated but neither top-confidence calibrated nor fully reliable. Hence the three calibration notions are pairwise distinct.
 
 ## Example references

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-fock-space-node-formulas-satisfy-the-quantum-affine-relations.json
+  precheck: pass
 id: thm-the-fock-space-node-formulas-satisfy-the-quantum-affine-relations
 kind: theorem
 title: "The Fock space node formulas satisfy the quantum affine relations"
@@ -21,8 +24,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Bernard Leclerc, Fock space representations (author-hosted complete 38-page treatment)"
@@ -72,3 +73,44 @@ a separate statement.
 3.1 The Serre sums. By steps 1.1 and 2.1 the node operators satisfy every toral rule and every mixed commutator, and by [F2] each single-color action is integrable; the rank-one Serre engine [F3] then forces both quantum Serre sums for every pair $i\ne j$, the $e=2$ cubic case included. No Serre relation was used before this point. [step 2.1, F2, F3, given, algebra]
 
 4.1 Conclusion. The node operators satisfy all defining relations of the affine algebra with the fixed coproduct, each color acts on finite cubes (integrability), the weight shifts are $\mp\alpha_i$, and ordinary coefficients with negative powers of $q$ are kept separate from the normalized lattice statement. [step 1.1, step 2.1, step 3.1] ∎
+
+
+## Remarks
+
+For $e=2$ and $i=1$, start at the partition $(1)$. Its two addable
+residue-$1$ slots are $a=(1,2)$ and $b=(2,1)$, of contents $1$ and $-1$.
+The small English diagram marks these slots beside the original residue-$0$
+cell. Choosing subsets of $\{a,b\}$ gives the four vertices of the square.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw (0,0) rectangle (0.8,-0.8);
+\draw[dashed] (0.8,0) rectangle (1.6,-0.8);
+\draw[dashed] (0,-0.8) rectangle (0.8,-1.6);
+\node at (0.4,-0.4) {$0$};
+\node at (1.2,-0.4) {$a:1$};
+\node at (0.4,-1.2) {$b:1$};
+\node (h) at (4,0) {$|1\rangle$};
+\node (x) at (7,0) {$|2\rangle$};
+\node (y) at (4,-2.3) {$|1,1\rangle$};
+\node (z) at (7,-2.3) {$|2,1\rangle$};
+\draw[->] (h) -- node[above] {$a;\ 1$} (x);
+\draw[->] (h) -- node[left] {$b;\ q$} (y);
+\draw[->] (x) -- node[right] {$b;\ q^{-1}$} (z);
+\draw[->] (y) -- node[below] {$a;\ 1$} (z);
+\end{tikzpicture}
+```
+
+An arrow is one summand of $F_1$, labelled by the added slot and its
+coefficient, not the full image of its source. In decreasing-content order
+$(a,b)$ the four states are $++,-+,+-,--$. The signed counts in
+[[def-the-node-order-and-n-i-exponents-for-fock-space]] give
+$F_1|1\rangle=|2\rangle+q|1,1\rangle$,
+$F_1|2\rangle=q^{-1}|2,1\rangle$ and
+$F_1|1,1\rangle=|2,1\rangle$.
+The reverse $E_1$ terms have coefficients $q^{-1},1,1,q$, respectively,
+for the four arrows in the order top, left, right, bottom.
+The square records the Boolean support, not equality of the two weighted
+paths: their products are $q^{-1}$ and $q$. It is not a Kashiwara crystal
+arrow diagram. This illustrates the single-color cube in [F2]; the mixed
+relations and Serre relations still require the independent proof above.

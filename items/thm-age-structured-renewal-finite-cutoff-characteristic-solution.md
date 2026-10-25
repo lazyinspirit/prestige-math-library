@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-age-structured-renewal-finite-cutoff-characteristic-solution.json
+  precheck: pass
 id: thm-age-structured-renewal-finite-cutoff-characteristic-solution
 kind: theorem
 title: Characteristic solution and mass bound for the finite-age renewal model
@@ -73,3 +76,32 @@ $$O_A(t)=\int_{A-t}^{A}n_0^A(x)S(x,A-x)\,dx.$$
 
 5.1 For $t\le T<A$, newborn cohorts have age at most $T$ and cannot reach $A$. An initial cohort with age $x$ exits by time $t$ precisely when $A-t\le x<A$; it survives until exit by $S(x,A-x)$. Integrating its initial density over those ages gives the stated $O_A(t)$. Any mild solution must follow these same characteristics and its birth rate must solve the Volterra equation from step 3.1, whose solution is unique by step 2.1. Thus the density and outflow are unique. Translation continuity in $L^1$, continuity of $B_A$ and of $S$, and the vanishing measure of the newly entering cohort region give continuity of $n^A$ in time with values in $L^1(0,A)$. [F1, step 2.1, step 3.1, step 4.1, algebra] ∎
 
+
+## Remarks
+
+The time–age sketch shows the two branches of the density formula. Along a characteristic, age increases at speed $1$: the initial cohort starting at age $x$ follows $a=x+t$, whereas a cohort born at time $t_b$ follows $a=t-t_b$. The dashed line $a=t$ separates these branches. The labels give the density transported along each sample path, including mortality survival. At the absorbing boundary an initial cohort exits at time $A-x$; hence the initial ages contributing to $O_A(T)$ are exactly $A-T\le x<A$. A newborn cohort has age at most $T<A$ and cannot exit during the illustrated interval. The sketch is schematic; the proof above is independent of it.
+
+```tikz
+\begin{tikzpicture}[scale=0.9,>=stealth]
+  \draw[->] (0,0) -- (5,0) node[right] {$t$};
+  \draw[->] (0,0) -- (0,6.7) node[above] {$a$};
+  \draw[dashed] (4,0) -- (4,6);
+  \node[below] at (4,0) {$T$};
+  \node[below left] at (0,0) {$0$};
+  \draw[thick] (0,6) -- (4,6);
+  \node[above] at (2,6.15) {absorbing outflow: $a=A$};
+  \draw[dashed] (0,0) -- (4,4);
+  \node[above,rotate=45] at (3,3) {$a=t$};
+  \draw[thick,->] (0,3.5) -- (2.5,6);
+  \node[left] at (0,3.5) {$x$};
+  \node[right] at (3,5) {$n_0^A(x)S(x,t)$};
+  \node[below] at (2.6,5.95) {$t=A-x$};
+  \draw[thick,->] (1,0) -- (4,3);
+  \node[below] at (1,0) {$t_b$};
+  \node at (2.9,0.9) {$B_A(t_b)S(0,t-t_b)$};
+  \node[below] at (2,-0.65) {renewal inflow $B_A(t)$};
+  \draw (-0.15,2) -- (-0.4,2) -- (-0.4,6) -- (-0.15,6);
+  \node[left] at (-0.4,4.8) {$A-T\le x<A$};
+  \node[left] at (0,2) {$A-T$};
+\end{tikzpicture}
+```

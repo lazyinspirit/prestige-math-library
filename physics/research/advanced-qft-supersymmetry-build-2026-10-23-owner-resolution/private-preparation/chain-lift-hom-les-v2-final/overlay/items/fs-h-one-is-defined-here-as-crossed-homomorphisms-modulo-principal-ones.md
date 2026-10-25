@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-h-one-is-defined-here-as-crossed-homomorphisms-modulo-principal-ones.md

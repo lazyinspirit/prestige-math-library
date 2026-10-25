@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-nonmaximal-quadratic-order.json
+  precheck: pass
 id: ex-nonmaximal-quadratic-order
 kind: example
-title: "The nonmaximal quadratic order Z[sqrt 5] inside O_Q(sqrt 5)"
+title: 'The nonmaximal quadratic order $\mathbb{Z}[\sqrt{5}]$ inside $\mathcal{O}_{\mathbb{Q}(\sqrt{5})}$'
 status: published
 origin: pipeline
 provenance:
@@ -9,12 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-order-in-a-number-field, ex-ring-of-integers-of-q-sqrt-five, cor-order-index-discriminant-formula]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "J. S. Milne, Algebraic Number Theory, Proposition 2.9"

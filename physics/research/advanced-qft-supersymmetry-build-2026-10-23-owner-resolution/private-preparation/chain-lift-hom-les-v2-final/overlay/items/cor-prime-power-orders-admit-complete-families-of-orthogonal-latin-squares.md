@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-prime-power-orders-admit-complete-families-of-orthogonal-latin-squares.md

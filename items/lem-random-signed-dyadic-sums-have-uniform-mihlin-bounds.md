@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-random-signed-dyadic-sums-have-uniform-mihlin-bounds.json
+  precheck: pass
 id: lem-random-signed-dyadic-sums-have-uniform-mihlin-bounds
 kind: lemma
-title: "Random signed dyadic sums have uniform Mihlin and Lp multiplier bounds"
+title: "Random signed dyadic sums have uniform Mihlin and $L^p$ multiplier bounds"
 status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30

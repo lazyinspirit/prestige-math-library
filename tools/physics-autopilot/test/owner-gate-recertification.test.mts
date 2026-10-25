@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { driftOwnerResolutionTemplate, driftResolutionPath } from '../../physics-support/drift-owner-resolutions.mjs';
 import { authorizeOwnerGate, gateReviewSnapshot } from '../src/owner-gate-recertification.mjs';
@@ -64,6 +65,23 @@ test('Step-3 cross-group causal authority and its repair evidence are gate input
   assert.ok(first.inputs.some((row: any) => row.path.endsWith(archive)));
   writeFileSync(join(f.repo, archive), 'Changed evidence invalidates the owner snapshot.');
   assert.notEqual(gateReviewSnapshot(f.ctx, gates, ['3a-split']).sha256, first.sha256);
+});
+test('Root shared-finding authority, scientific inputs and verifier code bind native recertification', t => {
+  const f = fixture(t), evidence = 'research/demo-shared-scientific-review.json';
+  writeFileSync(join(f.repo, evidence), '{"review":"actual supplier and consumer evidence"}');
+  const authority = 'research/demo-step3-root-shared-findings.json';
+  writeFileSync(join(f.repo, authority), JSON.stringify({inputs: {[evidence]: sha(readFileSync(join(f.repo, evidence), 'utf8'))}}));
+  mkdirSync(join(f.repo, 'tools/physics-support'), {recursive: true});
+  const verifier = 'tools/physics-support/step3-root-shared-findings.mjs';
+  writeFileSync(join(f.repo, verifier), '// fixture verifier bytes');
+  const gates = [{id: 'routing', argv: ['node', 'tools/physics-support/step3-scope.mjs', 'check', '--run', 'demo']}];
+  const first = gateReviewSnapshot(f.ctx, gates, ['3a-adjudicate']);
+  for (const path of [authority, evidence, verifier]) assert.ok(first.inputs.some((row: any) => row.path.endsWith(path)));
+  writeFileSync(join(f.repo, evidence), '{"review":"changed evidence"}');
+  const second = gateReviewSnapshot(f.ctx, gates, ['3a-adjudicate']);
+  assert.notEqual(second.sha256, first.sha256);
+  writeFileSync(join(f.repo, verifier), '// changed verifier bytes');
+  assert.notEqual(gateReviewSnapshot(f.ctx, gates, ['3a-adjudicate']).sha256, second.sha256);
 });
 test('Step-3 continuation authority and immutable references invalidate stale snapshots', t => {
   const f = fixture(t);
@@ -310,6 +328,69 @@ test('canonical prerequisite location permits only identical pinned category-rel
   assert.throws(() => gateReviewSnapshot(f.ctx, f.gates, f.stages), /Wrong prerequisite page identity/);
 });
 
+function canonicalImportedPlacement(t: any, mode = 'tracked') {
+  const f = fixture(t);
+  const manifestPath = join(f.repo, 'research/demo-batch-1.pages.json');
+  const manifests = JSON.parse(readFileSync(manifestPath, 'utf8')); manifests[0].requires = ['external-page'];
+  writeFileSync(manifestPath, JSON.stringify(manifests));
+  for (const category of ['canonical', 'historical']) mkdirSync(join(f.repo, 'library', category));
+  const page = '---\npage: external-page\nstatus: published\nlibrary: mathematics\nitems: [def-external]\nexamples: []\nrequires: []\n---\nAn unchanged published mathematical page.\n';
+  const canonical = 'library/canonical/external-page.md', historical = 'library/historical/external-page.md';
+  writeFileSync(join(f.repo, canonical), page);
+  writeFileSync(join(f.repo, historical), mode === 'different-history' ? page + 'An older distinct body.\n' : page);
+  writeFileSync(join(f.repo, 'research/plan-spec.json'), JSON.stringify({ pages: [{ id: 'external-page', category: 'canonical', kind: 'P' }] }));
+  const source = join(f.repo, 'originals'); mkdirSync(join(source, 'library/canonical'), { recursive: true });
+  writeFileSync(join(source, canonical), page);
+  const receipt = { version: 1, source_root: source, files: [{ path: canonical, sha256: sha(page) }] };
+  writeFileSync(join(f.repo, 'research/math-imports.json'), JSON.stringify(receipt));
+  const git = (...args: string[]) => execFileSync('git', ['-C', f.repo, ...args], { stdio: 'pipe' });
+  git('init', '--quiet');
+  git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '--allow-empty', '--quiet', '-m', 'Empty baseline');
+  if (mode !== 'untracked') git('add', '--', historical);
+  if (!['untracked', 'staged'].includes(mode)) git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '--quiet', '-m', 'Historical regular placement');
+  if (mode === 'different-history') writeFileSync(join(f.repo, historical), page);
+  return { ...f, page, canonical, historical, source, receipt };
+}
+test('canonical pinned prerequisite permits an exact HEAD historical placement and binds both local paths and original', t => {
+  const f = canonicalImportedPlacement(t);
+  const snapshot = gateReviewSnapshot(f.ctx, f.gates, f.stages);
+  for (const path of [join(f.repo, f.canonical), join(f.repo, f.historical), join(f.source, f.canonical)])
+    assert.ok(snapshot.inputs.some((row: any) => row.path === path && row.sha256 === sha(f.page)), path);
+  writeFileSync(join(f.source, f.canonical), f.page + 'Current original changed.');
+  assert.notEqual(gateReviewSnapshot(f.ctx, f.gates, f.stages).sha256, snapshot.sha256);
+});
+test('canonical pinned prerequisite still rejects untracked, staged-only and historically different alternate placements', t => {
+  for (const mode of ['untracked', 'staged', 'different-history']) {
+    const f = canonicalImportedPlacement(t, mode);
+    assert.throws(() => gateReviewSnapshot(f.ctx, f.gates, f.stages), /HEAD|historical tracked placement/);
+  }
+});
+test('canonical pinned prerequisite still rejects distinct bytes, symlinks, wrong identity/publication and changed pins', t => {
+  for (const mode of ['distinct', 'symlink-alternate', 'symlink-pin', 'identity', 'draft', 'classification', 'hash', 'third', 'duplicate-pin']) {
+    const f = canonicalImportedPlacement(t);
+    if (mode === 'distinct') writeFileSync(join(f.repo, f.historical), f.page + 'Different current body.');
+    if (mode.startsWith('symlink')) {
+      const path = mode === 'symlink-pin' ? f.canonical : f.historical;
+      rmSync(join(f.repo, path)); symlinkSync(join(f.source, f.canonical), join(f.repo, path));
+    }
+    if (['identity', 'draft', 'classification'].includes(mode)) {
+      const body = mode === 'identity' ? f.page.replace('page: external-page', 'page: wrong-page')
+        : mode === 'draft' ? f.page.replace('status: published', 'status: draft')
+        : f.page.replace('library: mathematics', 'library: physics');
+      writeFileSync(join(f.repo, f.canonical), body); writeFileSync(join(f.repo, f.historical), body);
+      f.receipt.files[0].sha256 = sha(body);
+      if (mode !== 'identity') {
+        execFileSync('git', ['-C', f.repo, 'add', '--', f.historical], { stdio: 'pipe' });
+        execFileSync('git', ['-C', f.repo, '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '--quiet', '-m', 'Same invalid metadata at historical placement'], { stdio: 'pipe' });
+      }
+    }
+    if (mode === 'hash') f.receipt.files[0].sha256 = '0'.repeat(64);
+    if (mode === 'third') { mkdirSync(join(f.repo, 'library/third')); writeFileSync(join(f.repo, 'library/third/external-page.md'), f.page); }
+    if (mode === 'duplicate-pin') f.receipt.files.push({ path: f.historical, sha256: sha(f.page) });
+    writeFileSync(join(f.repo, 'research/math-imports.json'), JSON.stringify(f.receipt));
+    assert.throws(() => gateReviewSnapshot(f.ctx, f.gates, f.stages), /immutable pin|regular local snapshot|identity|publication|ambiguous/i);
+  }
+});
 test('drift owner overlay binds original native evidence and every declared resolution input', t => {
   const f = fixture(t);
   const page = { id: 'test-page', category: 'test', kind: 'A', order: 2, requires: [], items: [] };

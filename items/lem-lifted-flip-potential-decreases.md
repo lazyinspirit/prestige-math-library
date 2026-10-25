@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-lifted-flip-potential-decreases.json
+  precheck: pass
 id: lem-lifted-flip-potential-decreases
 kind: lemma
 title: "An illegal planar Delaunay flip strictly decreases lifted interpolation
@@ -27,8 +30,7 @@ sources:
     - title: "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22"
       url: "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delau\
         nay.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -60,3 +62,51 @@ in the lexicographic order of the formal lift field.
 3.1 On a triangle, the integral of an affine function is its area times the average of its three vertex values; this follows by mapping to the reference triangle, where each barycentric coordinate has integral one third of its area. Thus each of the four overlay triangles contributes its area times $\delta/3$ to the integral of $g_{BD}-g_{AC}$. Their areas sum to the quadrilateral area, so the total difference is $\operatorname{area}(ABCD)\delta/3<0$. [step 1.1, step 2.1, algebra, algebra]
 
 4.1 The row-subtraction and height-column elimination used in [F2] are polynomial determinant identities in the site heights, so they remain valid coefficientwise after each height is replaced by its formal perturbation. Writing $\Delta_D$ for the query height minus that plane's height at $D$ and $O$ for the base orientation determinant, the identity is $OP=-O^2\Delta_D$. The normalized determinant therefore has the opposite sign to $\Delta_D$, so the strict below-plane condition gives a positive, illegal sign. By [F3]–[F4], one common formal configuration resolves a zero constant term. Thus the below-plane condition is exactly the illegal incircle sign and its flip strictly decreases the potential. [F2, F3, F4, step 3.1, algebra] ∎
+
+
+## Remarks
+
+The left panel overlays the two diagonal triangulations: $AC$ is dashed and $BD$ is solid. Their intersection $O$ divides the quadrilateral into the four triangles used in step 3.1. In the right panel, $\ell$ denotes the affine plane through the lifts of $A,B,C$, restricted to $BD$, and $h_D$ is the common formal height at $D$. Since $O\in AC$, $\ell(O)=g_{AC}(O)$. The displayed downward gap is $\delta=g_{BD}(O)-g_{AC}(O)<0$ from step 2.1. Heights are schematic order comparisons in the formal field, not a numerical evaluation of the infinitesimal. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=0.9]
+\coordinate (A) at (0,0);
+\coordinate (B) at (3,0);
+\coordinate (C) at (3,2.4);
+\coordinate (D) at (0,2.4);
+\coordinate (O) at (1.5,1.2);
+\draw[thick] (A)--(B)--(C)--(D)--(A);
+\draw[thick,dashed,blue!60!white] (A)--(C);
+\draw[thick,orange] (B)--(D);
+\fill (O) circle (2pt);
+\node[below left] at (A) {$A$};
+\node[below right] at (B) {$B$};
+\node[above right] at (C) {$C$};
+\node[above left] at (D) {$D$};
+\node[above] at (O) {$O$};
+\node at (1.5,-0.8) {diagonal overlay};
+\coordinate (HB) at (5,2.4);
+\coordinate (HD) at (9,0.4);
+\coordinate (PD) at (9,2.4);
+\coordinate (PO) at (7,2.4);
+\coordinate (HO) at (7,1.4);
+\draw[thick,dashed,blue!60!white] (HB)--(PD);
+\draw[thick,orange] (HB)--(HD);
+\draw[dotted] (PD)--(HD);
+\draw[->,thick] (PO)--(HO);
+\fill (HB) circle (2pt);
+\fill (PD) circle (2pt);
+\fill (HD) circle (2pt);
+\fill (PO) circle (2pt);
+\fill (HO) circle (2pt);
+\node[above] at (HB) {$h_B$};
+\node[right] at (PD) {$\ell(D)$};
+\node[right] at (HD) {$h_D$};
+\node[above] at (PO) {$g_{AC}(O)$};
+\node[below left] at (HO) {$g_{BD}(O)$};
+\node[right] at (7,1.9) {$\delta<0$};
+\node at (7,-0.8) {height comparison along $BD$};
+\end{tikzpicture}
+```
+
+On each overlay triangle the difference is zero at the boundary vertices and equals $\delta$ at $O$, so step 3.1 gives $\int_{ABCD}(g_{BD}-g_{AC})=\operatorname{area}(ABCD)\delta/3<0$.

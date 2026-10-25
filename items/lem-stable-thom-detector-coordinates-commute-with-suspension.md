@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-stable-thom-detector-coordinates-commute-with-suspension.json
+  precheck: pass
 id: lem-stable-thom-detector-coordinates-commute-with-suspension
 kind: lemma
 title: "Stable Thom detector coordinates commute with suspension"
@@ -33,13 +36,12 @@ sources:
     - title: "Daniel S. Freed, Bordism: Old and New"
       url: "https://people.math.harvard.edu/~dafr/bordism.pdf"
       locator: "Lectures 7–10, printed pp. 55–91: Thom classes, Thom spectra, and stabilization; the coordinate-pairing compatibility is proved locally."
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
 
-Assume AC. Fix n≥0 and V_n=F₂^{B_n}. For every r≥n+2 let D_{r,n}:π_{r+n}(T_r)→V_n pair a sphere class with the rank-r stable-coordinate classes m_{r,b}, b∈B_n. If β_r:S¹∧T_r→T_{r+1} is the prespectrum structure map, then D_{r+1,n}∘(β_r)_*=D_{r,n} under suspension of representatives.
+Assume AC. Fix $n\ge0$ and $V_n=\mathbb F_2^{B_n}$. For every $r\ge n+2$ let $D_{r,n}:\pi_{r+n}(T_r)\to V_n$ pair a sphere class with the rank-$r$ stable-coordinate classes $m_{r,b}$, $b\in B_n$. If $\beta_r:S^1\wedge T_r\to T_{r+1}$ is the prespectrum structure map, then $D_{r+1,n}\circ(\beta_r)_*=D_{r,n}$ under suspension of representatives.
 
 ## Facts & Assumptions
 
@@ -55,6 +57,6 @@ Assume AC. Fix n≥0 and V_n=F₂^{B_n}. For every r≥n+2 let D_{r,n}:π_{r+n}(
 
 **Proof technique:** direct.
 
-1.1 Fix n≥0 and the degree-n part B_n of the single global basis fixed in the detector definition. For every r≥n+2, define D_{r,n}:π_{r+n}(T_r)→V_n, V_n=F₂^{B_n}, by pairing with the stable coordinates m_{r,b}, b∈B_n. The finite-range theorem says D_{r,n} is an isomorphism. This is the same map as the π_{r+n} map of f_r after identifying π_{r+n}(P_r) with V_n by its normalized Eilenberg–Mac Lane fundamental classes. [given, F1]
+1.1 Fix $n\ge0$ and the degree-$n$ part $B_n$ of the single global basis fixed in the detector definition. For every $r\ge n+2$, define $D_{r,n}:\pi_{r+n}(T_r)\to V_n$, $V_n=\mathbb F_2^{B_n}$, by pairing with the stable coordinates $m_{r,b}$, $b\in B_n$. The finite-range theorem says $D_{r,n}$ is an isomorphism. This is the same map as the $\pi_{r+n}$ map of $f_r$ after identifying $\pi_{r+n}(P_r)$ with $V_n$ by its normalized Eilenberg–Mac Lane fundamental classes. [given, F1]
 
-2.1 Let β_r:S¹∧T_r→T_{r+1} be the prespectrum structure map, and let b_{r,n} be its induced stabilization map on π_{r+n}. Since m_b is an inverse-limit element, its coordinates satisfy σ⁻¹β_r^* m_{r+1,b}=m_{r,b}. For a based representative α:S^{r+n}→T_r, naturality of the Kronecker pairing gives ⟨m_{r+1,b}, (β_r∘(1∧α))_*[S¹∧S^{r+n}]_{F₂}⟩ =⟨β_r^* m_{r+1,b}, (1∧α)_*[S¹∧S^{r+n}]_{F₂}⟩ =⟨m_{r,b}, α_*[S^{r+n}]_{F₂}⟩. All sphere classes in these pairings are mod-two fundamental classes, not unreduced integral classes. For the second equality, represent the cohomology suspension of m_{r,b} by its external product with the degree-one generator of S¹. Under S¹∧S^{r+n}≅S^{r+n+1}, the mod-two sphere fundamental class is the external product of the two mod-two fundamental classes. Evaluation of external products on product chains is the product of the two evaluations; the S¹ factor evaluates to 1. Naturality of the Kronecker pairing then gives exactly the displayed equality. These are the published suspension, external-product/Künneth, and Kronecker naturality interfaces; coefficients are F₂, so there is no sign ambiguity. Thus $D_{r+1,n}b_{r,n}=D_{r,n}$ coordinate by coordinate, proving the claimed suspension compatibility. [step 1.1, F1, F2, F3] ∎
+2.1 Let $\beta_r:S^1\wedge T_r\to T_{r+1}$ be the prespectrum structure map, and let $b_{r,n}$ be its induced stabilization map on $\pi_{r+n}$. Since $m_b$ is an inverse-limit element, its coordinates satisfy $\sigma^{-1}\beta_r^*m_{r+1,b}=m_{r,b}$. For a based representative $\alpha:S^{r+n}\to T_r$, naturality of the Kronecker pairing gives $\langle m_{r+1,b}, (\beta_r\circ(1\wedge\alpha))_*[S^1\wedge S^{r+n}]_{\mathbb F_2}\rangle$ $=\langle\beta_r^*m_{r+1,b}, (1\wedge\alpha)_*[S^1\wedge S^{r+n}]_{\mathbb F_2}\rangle$ $=\langle m_{r,b}, \alpha_*[S^{r+n}]_{\mathbb F_2}\rangle$. All sphere classes in these pairings are mod-two fundamental classes, not unreduced integral classes. For the second equality, represent the cohomology suspension of $m_{r,b}$ by its external product with the degree-one generator of $S^1$. Under $S^1\wedge S^{r+n}\cong S^{r+n+1}$, the mod-two sphere fundamental class is the external product of the two mod-two fundamental classes. Evaluation of external products on product chains is the product of the two evaluations; the $S^1$ factor evaluates to $1$. Naturality of the Kronecker pairing then gives exactly the displayed equality. These are the published suspension, external-product/Künneth, and Kronecker naturality interfaces; coefficients are $\mathbb F_2$, so there is no sign ambiguity. Thus $D_{r+1,n}b_{r,n}=D_{r,n}$ coordinate by coordinate, proving the claimed suspension compatibility. [step 1.1, F1, F2, F3] ∎

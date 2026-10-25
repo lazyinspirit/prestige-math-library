@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-holder-equality-forces-the-functions-themselves-to-be-proportional.json
+  precheck: pass
 id: fs-holder-equality-forces-the-functions-themselves-to-be-proportional
 kind: false-statement
 title: "FALSE: Holder equality forces the functions themselves to be proportional"
@@ -9,13 +12,6 @@ provenance:
   proof: ai-generated
 deps: [thm-holder-inequality-for-integrals, thm-equality-case-in-holder-inequality]
 proof_strategy: "Refute at the endpoint p = 1, q = infinity with f = 1_A and g = 1 on a proper positive-measure subset A. Equality holds, but the functions are not proportional on the whole space."
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -40,7 +36,7 @@ proportional almost everywhere.
 
 ## Refutation
 
-**Proof technique:** Refute at the endpoint $p=1$, $q=\infty$ with $f=\chi_A$ and $g=1$ on a proper positive-measure subset $A$. Equality holds, but the functions are not proportional on the whole space.
+**Proof technique:** Refute at the endpoint p = 1, q = ∞ using the indicator of a proper positive-measure subset and the constant-one function. Equality holds, but the functions are not proportional on the whole space.
 
 1.1 Let $A=[0,1/2]$, let $f:=\chi_A$, and let $g:=\chi_{[0,1]}$. Then $$\int_0^1 |fg|\,d\lambda=\lambda(A)=\frac12,\qquad \|f\|_1=\frac12,\qquad \|g\|_\infty=1.$$ So equality holds in Holder: $$\int_0^1 |fg|\,d\lambda=\|f\|_1\|g\|_\infty.$$. [L1, given, algebra]
 

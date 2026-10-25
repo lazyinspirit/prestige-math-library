@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-folner-sequences-for-second-countable-compactly-generated-groups.md

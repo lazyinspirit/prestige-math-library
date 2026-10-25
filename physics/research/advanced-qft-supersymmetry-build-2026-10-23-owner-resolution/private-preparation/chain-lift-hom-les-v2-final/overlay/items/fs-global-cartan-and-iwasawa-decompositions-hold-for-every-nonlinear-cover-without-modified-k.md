@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-global-cartan-and-iwasawa-decompositions-hold-for-every-nonlinear-cover-without-modified-k.md

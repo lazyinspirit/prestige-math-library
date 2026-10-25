@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-tikhonov-regularised-least-squares-has-a-unique-minimiser.md

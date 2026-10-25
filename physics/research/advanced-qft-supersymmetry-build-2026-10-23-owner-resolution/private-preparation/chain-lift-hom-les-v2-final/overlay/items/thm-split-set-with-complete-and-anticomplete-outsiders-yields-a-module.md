@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-split-set-with-complete-and-anticomplete-outsiders-yields-a-module.md

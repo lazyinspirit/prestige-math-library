@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-half-space-chart-transitions-extend-locally-to-side-preserving-diffeomorphisms.md

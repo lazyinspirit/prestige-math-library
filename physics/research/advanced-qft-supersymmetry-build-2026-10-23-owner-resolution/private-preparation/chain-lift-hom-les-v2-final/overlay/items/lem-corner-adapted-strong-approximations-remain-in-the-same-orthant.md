@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-corner-adapted-strong-approximations-remain-in-the-same-orthant.md

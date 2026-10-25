@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-qftx-su2-bpst-explicit-connection-on-s4.md

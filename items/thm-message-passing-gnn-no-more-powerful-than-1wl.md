@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-message-passing-gnn-no-more-powerful-than-1wl.json
+  precheck: pass
 id: thm-message-passing-gnn-no-more-powerful-than-1wl
 kind: theorem
 title: "Message-passing GNNs cannot distinguish beyond one-dimensional Weisfeiler–Leman"
@@ -26,12 +29,7 @@ sources:
     - title: "Pan Li and Jure Leskovec, Graph Representation Learning"
       url: "https://www-cs-faculty.stanford.edu/people/jure/pubs/gnnpower-springer22.pdf"
       locator: "Chapter 5 §5.3.3, Theorem 5.2 and its upper-bound interpretation."
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-20
+
 ---
 
 ## Statement
@@ -71,3 +69,17 @@ Let $G,H$ be finite vertex-labeled simple undirected graphs with labels in a com
 1.1 By induction on $t=0,\ldots,K$, equal round-$t$ WL colors of vertices from either graph imply equal GNN states after $t$ layers. At $t=0$, the shared initial embedding gives this implication. If it holds at $t$ and two vertices have equal round-$(t+1)$ colors, [F2] says their center colors and neighbor-color multisets agree. By the induction hypothesis, equal neighbor colors have equal GNN states; applying this correspondence occurrence by occurrence gives equal neighbor-state multisets. The shared aggregation and update functions in [F1] therefore give equal next-layer states. Thus a well-defined map from each round-$t$ color occurring in either graph to its common GNN state exists. [given, F1, F2, induction, algebra]
 
 2.1 At round $K$, the assumed equal WL color multisets become equal multisets of GNN states when each color is sent to its common state from step 1.1; multiplicities are preserved by [F3]. The shared graph readout in [F4] receives equal multisets, so the two graph outputs are equal. The contrapositive gives the stated distinguishing implication. [given, F2, F3, F4, step 1.1, algebra] ∎
+
+
+## Remarks
+
+The following square illustrates the induction in step 1.1 for $0\le t<K$. Let $D_t\subseteq C_t$ be the colors occurring in either graph, and let $\phi_t:D_t\to H_t$ send each color to its common node state. Let $P_t\subseteq D_t\times\mathsf M_{\mathrm{fin}}(D_t)$ consist of the center-color and neighbor-color-multiset pairs actually occurring in either graph. The canonical WL update is $q_t(c,M)=(c,M)\in D_{t+1}$. Define $p_t(c,M)=(\phi_t(c),\mathsf M_{\mathrm{fin}}(\phi_t)(M))$, where the multiset map applies $\phi_t$ to each occurrence, and define $F_{t+1}(h,S)=U_{t+1}(h,A_{t+1}(S))$ using the shared network maps.
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=large, scale=1.8, transform shape]
+P_t \arrow[r, "q_t"] \arrow[d, "p_t"'] & D_{t+1} \arrow[d, "\phi_{t+1}"] \\
+H_t\times\mathsf M_{\mathrm{fin}}(H_t) \arrow[r, "F_{t+1}"'] & H_{t+1}
+\end{tikzcd}
+```
+
+Commutativity means $\phi_{t+1}(q_t(c,M))=F_{t+1}(p_t(c,M))$ for each occurring pair. Equal next-round colors therefore yield the same next-layer state, even for vertices in different graphs. At round $K$, applying $\phi_K$ occurrence by occurrence to equal graph color multisets gives equal final-state multisets and hence equal readouts, as in step 2.1. The square illustrates the argument; the proof above is independent of it and does not assert that $\phi_t$ is injective.

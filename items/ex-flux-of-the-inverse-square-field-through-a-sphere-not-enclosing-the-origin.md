@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-flux-of-the-inverse-square-field-through-a-sphere-not-enclosing-the-origin.json
+  precheck: pass
 id: ex-flux-of-the-inverse-square-field-through-a-sphere-not-enclosing-the-origin
 kind: example
 title: "The inverse-square field is divergence free, and its flux through the sphere bounding the translated unit ball vanishes"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -86,3 +82,23 @@ $B=\{(x,y,z):(x^2+y^2+(z-2)^2)\le1\}$ is $0$.
 ## Remarks
 
 - The translation moves the sphere away from the singular origin. The direct patch calculation proves its zero flux without requiring an elementary-solid presentation of the ball.
+
+
+The meridian section $y=0$ shows the translated ball and its outward normal. Here $c=(0,0,2)$, $P=(\sqrt3/2,0,5/2)=\psi(\pi/3,0)$, and $n=P-c$ is a unit outward normal. Step 3.1 gives $\psi_\phi\times\psi_\theta=\sin\phi\,n$ at this point. The circle represents $\partial B$ in this section, not a sphere centered at the singular origin; the proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[x=1.6cm,y=1.6cm]
+\draw[->] (-1.45,0) -- (1.8,0) node[right] {$x$};
+\draw[->] (0,-0.25) -- (0,3.7) node[above] {$z$};
+\draw[thick] (0,2) circle (1);
+\node at (-0.6,2.25) {$B$};
+\fill (0,0) circle (1.5pt) node[below left] {$O=(0,0,0)$};
+\fill (0,2) circle (1.5pt) node[left] {$c$};
+\draw[dashed] (0,2) -- (0.866,2.5);
+\fill (0.866,2.5) circle (1.5pt) node[below right] {$P$};
+\draw[thick,->] (0.866,2.5) -- (1.472,2.85) node[right] {$n$};
+\node[below left] at (0,1) {$z=1$};
+\node[above left] at (0,3) {$z=3$};
+\node at (-0.8,3.2) {$\partial B$};
+\end{tikzpicture}
+```

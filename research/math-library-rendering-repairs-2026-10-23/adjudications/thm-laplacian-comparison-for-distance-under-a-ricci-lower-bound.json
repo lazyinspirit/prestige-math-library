@@ -1,0 +1,91 @@
+{
+  "id": "thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound",
+  "agent": "/root/rendering_repair_coordinator/dg_032",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 02 visibly displays dollar delimiters and TeX commands in the uppercase technique banner, while adjacent numbered proof formulas are typeset. The banner is a plain-text renderer field, so ordinary inline math cannot render there.",
+      "action": "Replaced only the technique-banner math with equivalent prose describing the distance Laplacian, radial trace, trace divided by the normal dimension, model comparison cotangent, and matched singular asymptotics.",
+      "status": "repaired; fresh native local tile 02 inspected at original resolution and banner displays readable prose with no raw math markup"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "nested-proof-parser-limitation",
+      "verdict": "confirmed",
+      "reason": "The inner QED intentionally closes the inline scalar-comparison auxiliary proof, while step 3.1 already has the final theorem QED. The layout parser recognizes only one final numbered-step terminator; the reported early-qed is a nested-proof parser limitation, not invalid mathematics.",
+      "action": "Root-authorized removal of only the inner QED marker; retained final terminator and all mathematical words/formulas/order.",
+      "status": "repaired; layout, precheck and rendercheck pass; fresh native tiles 02 and 03 inspected at original resolution"
+    }
+  ],
+  "changed": true,
+  "correction": "Cumulative: banner formulas replaced with equivalent prose at line 88, and only the inner auxiliary-lemma QED marker removed at line 94. All mathematical words, formulas, ordering and final theorem QED retained. Frontmatter byte-identical.",
+  "source_lines_after": {
+    "88": "**Proof technique:** direct: identify the distance Laplacian at the chosen point with the trace of the radial Riccati operator, use the trace Riccati inequality of the page to obtain the scalar Riccati inequality for the trace divided by the normal dimension, and compare this normalized trace with the model comparison cotangent by the integrating-factor argument with matched asymptotics at the singular initial point.",
+    "94": "1.3 The scalar comparison lemma. We use the following elementary fact, the integrating-factor comparison for Riccati inequalities with matched asymptotics at the singular endpoint. Let $0<T\\le t_0$ and let $a,c:(0,T]\\to\\mathbb R$ be differentiable with $$a'+a^2\\le-k,\\qquad c'+c^2=-k\\qquad\\text{on }(0,T],$$ both $a(t)=1/t+O(t)$ and $c(t)=1/t+O(t)$ as $t\\downarrow0$. Then $a\\le c$ on $(0,T]$. *Proof.* Put $\\varphi:=a-c$. Subtracting the two equations, $$\\varphi'=a'-c'\\le(-a^2-k)-(-c^2-k)=-(a+c)\\varphi .$$ Fix $0<\\varepsilon_0<t\\le T$ and define $\\Phi(s):=\\varphi(s)\\exp\\bigl(-\\int_s^t(a+c)\\bigr)$ for $s\\in[\\varepsilon_0,t]$. Since $(a+c)$ is continuous, $\\Phi$ is differentiable with $$\\Phi'(s)=\\exp\\Bigl(-\\int_s^t(a+c)\\Bigr) \\bigl(\\varphi'(s)+(a(s)+c(s))\\varphi(s)\\bigr)\\le0 ,$$ so $\\Phi$ is nonincreasing and $$\\varphi(t)\\le\\varphi(\\varepsilon_0)\\exp\\Bigl(-\\int_{\\varepsilon_0}^{t}(a+c)\\Bigr).$$ By the two asymptotics, choose $\\delta\\in(0,T]$ so that $a+c\\ge1/t$ on $(0,\\delta)$. Put $\\delta':=\\min(\\delta,t)$ and $K:=(t-\\delta')\\max_{[\\delta',t]}|a+c|$; then $$\\int_{\\varepsilon_0}^{t}(a+c)\\ge\\int_{\\varepsilon_0}^{\\delta'}\\frac{du}{u}-K =\\log\\frac{\\delta'}{\\varepsilon_0}-K \\qquad(0<\\varepsilon_0<\\delta' ),$$ and hence $$\\varphi(t)\\le e^{K}\\delta'^{-1}\\varepsilon_0|\\varphi(\\varepsilon_0)|\\longrightarrow0\\qquad(\\varepsilon_0\\downarrow0),$$ using $\\varepsilon_0|\\varphi(\\varepsilon_0)|\\to0$; therefore $\\varphi(t)\\le0$. [given]"
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "Renderer limitation remains: technique banners use plain text rather than MathMarkdown; assigned banner now uses equivalent readable prose.",
+    "Proof-layout parser does not model nested auxiliary-proof QED markers; this item now uses only its final theorem terminator."
+  ],
+  "source_binding": {
+    "before_raw_sha256": "2fff266d352ac2ea8f669a4f8c2840e7a1cf95a0b0f7c98d2f1cd62c1f50296a",
+    "after_raw_sha256": "0c23281228ffb2bcbd75defc32d9b77e82cf0f29c8ecc6f7d9f83d1d697b70b9",
+    "frontmatter_byte_identical": true,
+    "publication_status": "published",
+    "followup_preimage_sha256": "b93a3ba74d4e9a53192ae22e84e03d713a7bab08e2d54abe1090bbd503c44b7b"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md --json",
+      "exit_code": 0,
+      "result": {
+        "files": 1,
+        "checked": 1,
+        "failed": 0,
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "visual_evidence": {
+    "original_inspected": "research/math-library-rendering-audit-2026-10-23/differential-geometry/screenshots/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound--02.png",
+    "original_detail": "original",
+    "fresh_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dg032-qed-final/manifest.json",
+    "manifest_sha256": "f50963b68cd581aeffe21960a7921de2d29170419983e63ecab38a68b75afc53",
+    "fresh_inspected": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dg032-qed-final/screenshots/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound--02.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dg032-qed-final/screenshots/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound--03.png"
+    ],
+    "fresh_detail": "original",
+    "fresh_source_sha256": "0c23281228ffb2bcbd75defc32d9b77e82cf0f29c8ecc6f7d9f83d1d697b70b9",
+    "fresh_html_sha256": "6e4220c35e0453892e6cbe6a1ed9a1b5855032a7de20c2b58b582963096e7365",
+    "reference_map_sha256": "64f47f847b83248f37dc5c5d2e8f7edb1b280cb4782c918c375009f7a8bd257b",
+    "preview_exit_code": 0,
+    "observations": "Tile 02 shows readable prose banner and auxiliary proof without a QED badge; tile 03 shows auxiliary comparison conclusion without inner terminator and the retained final theorem QED badge at step 3.1.",
+    "limitations": "Local native ItemBody preview, not full production route; reference map has 16 unrelated parse diagnostics. Earlier dg032-qed preview predates the successful edit and is superseded by dg032-qed-final."
+  },
+  "previous_report": {
+    "path": "research/math-library-rendering-repairs-2026-10-23/dg_032-qed-followup/report-0c1f371091ea10f9594f21e1b626d508f7e07eda9976716997f9dcd49ad94a75.json",
+    "sha256": "0c1f371091ea10f9594f21e1b626d508f7e07eda9976716997f9dcd49ad94a75"
+  },
+  "qa_status": "hold for coordinator QA; no receipt recorded by worker"
+}

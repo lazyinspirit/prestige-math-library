@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-generic-cyclotomic-type-a-support-is-bounded-by-rank.md

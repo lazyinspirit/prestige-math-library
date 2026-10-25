@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-two-out-of-three-for-acyclicity-in-a-short-exact-sequence-of-complexes.md

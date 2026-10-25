@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-verdier-duality-on-oriented-stratified-complex-varieties.md

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations.json
+  precheck: pass
 id: cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations
 kind: corollary
 title: Simultaneous triangularization of solvable representations
@@ -11,12 +14,6 @@ proof_strategy: induction
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Milne, Lie Algebras, Theorem 3.7"
@@ -43,7 +40,7 @@ there is a basis in which every representing matrix is upper triangular.
 
 ## Proof
 
-**Proof technique:** induction on $\dim V$.
+**Proof technique:** induction on the dimension of V.
 
 1.1 If $V=0$, the empty flag and empty basis have the required properties. [base, given]
 

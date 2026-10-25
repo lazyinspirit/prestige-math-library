@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-balancing-and-hopf-link-character-identity.json
+  precheck: pass
 id: lem-balancing-and-hopf-link-character-identity
 kind: lemma
 title: "Balancing and the Hopf-link character identity"
@@ -12,8 +15,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: n/a
 sources:
   references:
     - title: "Etingof, Gelaki, Nikshych, and Ostrik, Tensor Categories, Propositions 8.13.8 and 8.13.10"
@@ -70,7 +71,9 @@ Also $s_{ij}=s_{ji}$, $s_{i^*j^*}=s_{ij}$, $s_{i0}=d_i$, and $d_{i^*}=d_i$. Cons
 
 The following commutative trace diagram records only the order of evaluation: closing the $Z$ strand first and then the $X$ strand equals the single pivotal trace on $X\otimes Z$. The proof above verifies this by substituting the coevaluation and evaluation composites; the diagram is not a proof premise.
 
-~~~tikzcd
-\operatorname{End}(X\otimes Z) \arrow[r, "\operatorname{ptr}_Z"] \arrow[dr, "\operatorname{tr}_{X\otimes Z}"'] & \operatorname{End}(X) \arrow[d, "\operatorname{tr}_X"] \\
-& \operatorname{End}(\mathbf 1)
-~~~
+```tikzcd
+\begin{tikzcd}[cells={font=\Large}, labels={font=\large}, column sep=large, row sep=large]
+\mathrm{End}(X\otimes Z) \arrow[r, "\mathrm{ptr}_Z"] \arrow[dr, "\mathrm{tr}_{X\otimes Z}"'] & \mathrm{End}(X) \arrow[d, "\mathrm{tr}_X"] \\
+& \mathrm{End}(\mathbf 1)
+\end{tikzcd}
+```

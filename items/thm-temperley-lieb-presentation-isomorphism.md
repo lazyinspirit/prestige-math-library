@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-temperley-lieb-presentation-isomorphism.json
+  precheck: pass
 id: thm-temperley-lieb-presentation-isomorphism
 kind: theorem
 title: "The generator presentation is the planar diagram algebra over every commutative ring"
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "David Ridout and Yvan Saint-Aubin, Standard Modules, Induction and the Structure of the Temperley-Lieb Algebra, §2"
@@ -78,3 +76,24 @@ Let $R$ be a commutative ring with unit, $\delta\in R$, and $n\ge0$. The homomor
 ## Remarks
 
 The ring-theoretic independence argument is what extends the normal-form count to arbitrary commutative rings: a surjective square matrix has a right inverse, so its determinant is a unit. No specialization argument, flatness assumption, division by $\delta$, or semisimplicity hypothesis is used.
+
+
+The upper triangle displays the maps of step 2.1: $q(e_N)=[N]$, $\pi_n(u_i)=d_i$, and $S=\pi_n\circ q$, with $\mathrm{TL}_n(R,\delta)=R^{(\mathcal D(n,n))}$. All three maps are initially known to be surjective. The separate lower row displays only the indexing bijections from [F3] and [F4]; write $\mathrm{Dyck}_n$ for the set of Dyck paths of semilength $n$.
+
+```tikz
+\begin{tikzpicture}
+  \node (P) at (0,1.8) {$P_n(R,\delta)$};
+  \node (T) at (6,1.8) {$\mathrm{TL}_n(R,\delta)$};
+  \node (F) at (0,0) {$R^{(\mathcal N_n)}$};
+  \draw[->] (F) -- node[left] {$q$} (P);
+  \draw[->] (P) -- node[above] {$\pi_n$} (T);
+  \draw[->] (F) -- node[below right] {$S=\pi_n\circ q$} (T);
+  \node (N) at (0,-1.8) {$\mathcal N_n$};
+  \node (Y) at (3,-1.8) {$\mathrm{Dyck}_n$};
+  \node (D) at (6,-1.8) {$\mathcal D(n,n)$};
+  \draw[<->] (N) -- node[above] {bijection} (Y);
+  \draw[<->] (Y) -- node[above] {bijection} (D);
+\end{tikzpicture}
+```
+
+The lower row gives equal finite ranks, not a claim that $S$ sends each $e_N$ to the diagram with the same path encoding. Injectivity follows from the determinant argument in steps 3.1–6.1. The rigorous proof is independent of this illustration.

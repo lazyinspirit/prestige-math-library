@@ -1,0 +1,125 @@
+{
+  "id": "def-hahn-hard-soft-attention-sequence-model",
+  "agent": "/root/rendering_repair_coordinator/dnn_006",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The original standalone tile contains only the algebraic update. A fork-and-merge data-flow picture materially clarifies that soft and hard attention differ only in the weight rule while sharing value aggregation and the H-head positionwise update. This is a warranted explanatory addition under the expanded diagram scope, not a claim that the existing formulas rendered incorrectly.",
+      "action": "Added a final Remarks section with explicit local aliases, deterministic tie-breaking caption, and a fenced TikZ comparison diagram.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Added a mathematically checked soft/hard attention data-flow comparison in Remarks; existing Definition and reference text remain byte-identical.",
+  "source_lines_after": {
+    "remarks": [
+      45,
+      72
+    ],
+    "caption": 47,
+    "tikz": [
+      49,
+      72
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "objects": "For fixed i,k,h, a and alpha are real n-vectors; each V_{k,h}(y_j^{(k-1)}) and b_{i,k,h} is in R^d.",
+      "justification": "Definition paragraph at line 27 defines the real scores and the maps V:R^d→R^d; displayed update at line 30 gives the weighted sum."
+    },
+    {
+      "relation": "The soft branch applies softmax:R^n→R^n. The hard branch sets alpha_j=1_{j=j_*}, where j_* is the smallest maximizing index.",
+      "justification": "These are exactly the two alternative rules in the first Definition paragraph, restated with aliases in Remarks. The finite nonempty index set guarantees a maximizer and a unique smallest maximizing index; the fork is explicitly alternative, not simultaneous."
+    },
+    {
+      "relation": "Both rules feed b_{i,k,h}=sum_{j=1}^n alpha_j V_{k,h}(y_j^{(k-1)}).",
+      "justification": "This is the first equality of the original displayed update; the incoming values arrow carries an n-tuple in (R^d)^n, so the weighted sum is in R^d."
+    },
+    {
+      "relation": "The downward all-heads edge and previous-state edge feed F_k(y_i^{(k-1)},b_{i,k,1},...,b_{i,k,H}), producing y_i^{(k)}.",
+      "justification": "The caption states that the h-indexed computation is repeated for all H heads. F_k:(R^d)^{H+1}→R^d is defined at line 27 and the output is exactly the second equality at line 30. All nine arrows point from inputs to subsequent data; no commutativity, masking, or extra map constraint is asserted."
+    }
+  ],
+  "evidence": {
+    "original_declared_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/diagram-supplement/screenshots/def-hahn-hard-soft-attention-sequence-model--01.png",
+    "original_resolved_path": "research/math-library-rendering-audit-2026-10-23/neural-networks-and-learning-dynamics/screenshots/def-hahn-hard-soft-attention-sequence-model--01.png",
+    "original_sha256": "8471b0929b3b1c406748835a38b74d955b3a4d8a31e1ffba91ab65326dc9d5de",
+    "path_discrepancy": "Declared screenshot absent; authentic corresponding-category screenshot located and matched recorded SHA256.",
+    "original_view": "Standalone original-resolution view inspected.",
+    "frozen_current_before_comparison": "cmp matched; immediate pre-edit raw SHA256 guard matched d67de28eb7c228e52147e829b14142e99386735f9f2ec9c76d9813272373d2a9.",
+    "current_sha256": "2b41364ee950afe8d344fb92a9ca54ea7cb53f3def13dd4f2637bf2cf607ddbc",
+    "native_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnn006-independent-final/manifest.json",
+    "manifest_sha256": "ed657a958f28d3e0af94db34312d9cf88d0d32fa6e708ce07c9b7ea9650549b8",
+    "native_preview_source_sha256": "2b41364ee950afe8d344fb92a9ca54ea7cb53f3def13dd4f2637bf2cf607ddbc",
+    "preview_views": [
+      {
+        "path": "research/math-library-rendering-repairs-2026-10-23/previews/dnn006-independent-final/screenshots/def-hahn-hard-soft-attention-sequence-model--01.png",
+        "sha256": "55296862ed4472f31f9be3a9ae25e302bb0a431f232f5795a5309358518abd59",
+        "view": "Standalone original-resolution inspected"
+      },
+      {
+        "path": "research/math-library-rendering-repairs-2026-10-23/previews/dnn006-independent-final/screenshots/def-hahn-hard-soft-attention-sequence-model--02.png",
+        "sha256": "199685dc26851de77cf0dfb7e3c91c408a078fd7db1e08d7a0848941334cca97",
+        "view": "Standalone original-resolution inspected"
+      }
+    ],
+    "visual_result": "Actual native TikZ rendered with all nine data-flow arrows, two alternative weight-rule boxes, visible values and previous-state inputs, H-head annotation, and output. White labels/strokes are readable on black; no overlap or hidden edge observed. Output repeated in overlapping second tile, not clipped in full first tile."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/def-hahn-hard-soft-attention-sequence-model.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-hahn-hard-soft-attention-sequence-model.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/def-hahn-hard-soft-attention-sequence-model.md",
+            "item_id": "def-hahn-hard-soft-attention-sequence-model",
+            "status": "not-applicable"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-hahn-hard-soft-attention-sequence-model.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnn006 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids def-hahn-hard-soft-attention-sequence-model --out research/math-library-rendering-repairs-2026-10-23/previews/dnn006-independent-final",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      },
+      "limitation": "Sixteen unrelated current-frontmatter title-map diagnostics are recorded by native manifest; no assigned-item failure. Preview is local ItemBody only, not HTTP route."
+    }
+  ],
+  "status_preserved": {
+    "before": "published",
+    "after": "published",
+    "frontmatter_byte_identical": true
+  },
+  "remaining_issues": []
+}

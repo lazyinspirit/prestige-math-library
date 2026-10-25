@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-aep-implies-fixed-rate-lossless-coding.json
+  precheck: pass
 id: lem-aep-implies-fixed-rate-lossless-coding
 kind: lemma
 title: "AEP criterion for fixed-rate lossless coding"
@@ -23,7 +26,7 @@ sources:
 ---
 ## Statement
 
-For any finite-alphabet source with -n^{-1}log2 P(X^n) converging in probability to h, proves vanishing block error is achievable for R>h and impossible for R<h.
+For any finite-alphabet source with $-n^{-1}\log_2 P(X^n)$ converging in probability to $h$, proves vanishing block error is achievable for $R>h$ and impossible for $R<h$.
 
 ## Facts & Assumptions
 

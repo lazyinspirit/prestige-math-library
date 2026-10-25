@@ -1,20 +1,16 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/rem-borel-product-equality-needs-second-countability.json
+  precheck: n/a
 id: rem-borel-product-equality-needs-second-countability
 kind: remark
-title: "The equality B(X) tensor B(Y) = B(X x Y) needs second countability"
+title: 'The equality $\mathcal B(X)\otimes\mathcal B(Y) = \mathcal B(X\times Y)$ needs second countability'
 status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-borel-products-of-euclidean-spaces-are-euclidean-borel, def-second-countable-space]
-verification:
-  audited: 2026-08-29
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-29
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Proposition 5.3"

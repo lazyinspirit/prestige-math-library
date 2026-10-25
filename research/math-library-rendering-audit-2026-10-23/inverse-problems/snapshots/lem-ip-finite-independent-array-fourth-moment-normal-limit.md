@@ -1,0 +1,115 @@
+---
+id: lem-ip-finite-independent-array-fourth-moment-normal-limit
+kind: lemma
+title: A finite-array normal limit from vanishing fourth moments
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-countable-choice
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - thm-independent-random-elements-have-product-joint-law
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+  - thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions
+  - lem-taylor-lagrange-remainder-from-mean-value
+  - thm-integration-by-parts
+  - thm-exponential-beats-every-polynomial
+  - thm-monotone-convergence-for-the-integral
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+axiom_use: Countable Choice is used through the stated scalar Lebesgue change-of-variables supplier. All products and replacements within a row are finite. A standard-normal probability law is supplied, so no stronger-choice normalization or general central-limit supplier is invoked.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
+sources:
+  references:
+    - title: "Rick Durrett, Probability: Theory and Examples, Version 5 (11 January 2019), section 3.4.2"
+      url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
+      locator: "Classical comparison: Theorem 3.4.10 and proof, printed pp.148–149 (PDF pp.156–157), and Lyapunov Exercise 3.4.12, printed p.152 (PDF p.160). The present supplied-normal-law/Countable-Choice formulation is an adaptation proved independently by finite smooth Gaussian replacement below; no full-Choice CLT is imported as a logical supplier."
+dependency_level: 0
+---
+
+## Statement
+
+Assume Countable Choice, and suppose the probability law with density
+$\phi(t)=(2\pi)^{-1/2}e^{-t^2/2}$ is supplied. Write
+$\Phi(t)=\int_{-\infty}^t\phi(s)\,ds$; normalization is part of the given
+probability-law hypothesis. For each positive integer $n$, let
+$X_{n,1},\ldots,X_{n,k_n}$ be independent centered real random variables,
+where $k_n$ is finite and each variable has a finite fourth moment. Different
+rows need not share a probability space. Suppose
+
+$$\sum_{j=1}^{k_n}\mathbb E X_{n,j}^2\longrightarrow v\in(0,\infty), \qquad \sum_{j=1}^{k_n}\mathbb E X_{n,j}^4\longrightarrow0.$$
+
+Then, for $S_n=\sum_jX_{n,j}$,
+
+$$\sup_{t\in\mathbb R}\left|\mathbb P(S_n\le t)-\Phi(t/\sqrt v)\right| \longrightarrow0.$$
+
+The same conclusion applies to any specified sequence of finite arrays
+satisfying these two limits; no identical-distribution hypothesis is needed.
+
+## Facts & Assumptions
+
+**Given:** The supplied normalized scalar Gaussian probability law and the
+finite independent arrays in the Statement.
+
+[A1] [[def-countable-choice]]: Countable Choice is assumed. No family of
+uncountably many auxiliary random variables is constructed.
+
+[F1] [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]
+and [[thm-independent-random-elements-have-product-joint-law]]: finite
+products of probability laws exist, have the rectangle formula, and give
+the joint law of a finite independent family.
+
+[F2] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]:
+absolutely integrable functions on a finite product of probability spaces
+can be integrated successively.
+
+[F3] [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]]:
+under Countable Choice, a scalar invertible affine substitution has the
+usual Jacobian formula for nonnegative Lebesgue integrals.
+
+[F4] [[lem-taylor-lagrange-remainder-from-mean-value]]: for a $C^3$ function
+with third derivative bounded by $C$, expansion through degree two at
+$a$ has remainder of absolute value at most $C|x-a|^3/6$.
+
+[F5] [[thm-integration-by-parts]]: on each finite interval, differentiable
+functions with integrable derivatives satisfy the integration-by-parts
+identity. The polynomial and Gaussian functions used below are continuously
+differentiable on every $[-R,R]$, with continuous, hence integrable, derivatives.
+
+[F6] [[thm-exponential-beats-every-polynomial]]: every fixed polynomial times
+$e^{-x^2/2}$ tends to zero as $|x|\to\infty$; for odd powers this follows by
+putting $y=x^2$ and bounding $|x|^m$ by an integer power of $y$ for $|x|\ge1$.
+
+[F7] [[thm-monotone-convergence-for-the-integral]]: the integrals of the
+nonnegative truncations $x^{2k}\phi(x)\mathbf1_{[-R,R]}(x)$ increase to the
+integral over $\mathbb R$ as integer $R\to\infty$.
+
+## Proof
+
+1.1 For each row put $a_{n,j}=\mathbb E X_{n,j}^2$ and $v_n=\sum_ja_{n,j}$. Finite products in [F1] allow us to integrate replacement coordinates with independent centered Gaussian laws of variances $a_{n,j}$; a zero variance means the point mass at zero. These products need not be coupled across rows. The supplied scalar density already has integral one, so [F3] gives its scaled probability laws without a separate Gaussian-normalization theorem. For $\phi(t)=(2\pi)^{-1/2}e^{-t^2/2}$, direct differentiation gives $\phi'(t)=-t\phi(t)$. On $[-R,R]$, apply [F5] with $(u,v)=(t,\phi(t))$ and then $(u,v)=(t^3,\phi(t))$ to obtain
+$$\int_{-R}^R t^2\phi(t)\,dt=[-t\phi(t)]_{-R}^R+\int_{-R}^R\phi(t)\,dt,$$
+$$\int_{-R}^R t^4\phi(t)\,dt=[-t^3\phi(t)]_{-R}^R+3\int_{-R}^R t^2\phi(t)\,dt.$$
+The boundary terms tend to zero by [F6]; [F7] and the supplied normalization $\int\phi=1$ then give $\mathbb E G^2=1$ and $\mathbb E G^4=3$. Odd moments vanish by symmetry. Consequently a replacement coordinate $G_{n,j}$ has mean zero, variance $a_{n,j}$ and fourth moment $3a_{n,j}^2$. [given, A1, F1, F3, F5, F6, F7, construct, algebra]
+
+2.1 The sum of the replacement coordinates has law $N(0,v_n)$. One can verify this using only scalar integration: for positive variances $a,b$, Fubini and the substitution $y=t-x$ make the sum density the convolution of the two scalar densities. Completing the square in $x^2/a+(t-x)^2/b$ and using [F3] together with the given unit Gaussian integral makes that convolution $(2\pi(a+b))^{-1/2}\exp(-t^2/(2(a+b)))$. Induction gives the assertion for every finite row, and zero-variance coordinates have no effect. The absolute integrals here are finite because they are probability densities. [given, F1, F2, F3, step 1.1, induction, algebra]
+
+2.2 Let $f$ be bounded and $C^3$ on $\mathbb R$, with bounded first, second and third derivatives. In the finite product integral replace $X_{n,j}$ by $G_{n,j}$ one coordinate at a time. Conditional on the other coordinates, the constant, linear and quadratic terms of the Taylor expansion of $f$ at their sum have the same integrals, since both coordinates have mean zero and variance $a_{n,j}$. The two remainders are bounded by [F4]. Fubini is legitimate since $f$ is bounded and the displayed moments are finite. Summing the telescoping differences therefore gives $|\mathbb E f(S_n)-\mathbb E f(\sum_jG_{n,j})|\le\|f'''\|_\infty\sum_j(\mathbb E|X_{n,j}|^3+\mathbb E|G_{n,j}|^3)/6$. [F1, F2, F4, step 1.1, construct, algebra]
+
+3.1 Cauchy--Schwarz, first for each coordinate integral and then for the finite index sum, gives $\sum_j\mathbb E|X_{n,j}|^3\le(\sum_j\mathbb E X_{n,j}^2)^{1/2}(\sum_j\mathbb E X_{n,j}^4)^{1/2}\to0$. Also $a_{n,j}^2\le\mathbb E X_{n,j}^4$, by expanding the nonnegative integral of $(X_{n,j}^2-a_{n,j})^2$. Hence $\sum_ja_{n,j}^2\to0$, and the same calculation with the Gaussian fourth moments in step 1.1 gives $\sum_j\mathbb E|G_{n,j}|^3\le(3v_n\sum_ja_{n,j}^2)^{1/2}\to0$. Both Cauchy--Schwarz inequalities follow by expanding a nonnegative square and minimizing its scalar coefficient, for the coordinate integral and the finite index sum respectively. Thus the replacement error in step 2.2 tends to zero for each such test $f$. [given, step 1.1, step 2.2, algebra]
+
+4.1 For $\eta>0$, a concrete $C^3$ cutoff is obtained by integrating the nonnegative polynomial $s^3(1-s)^3$ on $[0,1]$, normalizing its integral to one, and extending the resulting cumulative function by zero and one outside that interval. Its first three derivatives join continuously at the endpoints. Translate, rescale and subtract this function from one to bound $\mathbf1_{(-\infty,t]}$ from below and above by bounded $C^3$ functions that differ only on $[t-\eta,t+\eta]$. Apply step 3.1 to these two fixed cutoffs. By step 2.1 the replacement sum has variance $v_n\to v>0$; its probability of this interval is at most $2\eta/\sqrt{2\pi v_n}$, and its distribution at each fixed endpoint converges to $\Phi$ scaled by $\sqrt v$. Taking $n\to\infty$ and then $\eta\downarrow0$ proves $\mathbb P(S_n\le t)\to\Phi(t/\sqrt v)$ for every real $t$. [given, step 2.1, step 3.1, construct, algebra]
+
+5.1 Finally fix $\delta>0$. Choose finitely many increasing real grid points so that the two tails of the limiting normal law each have mass below $\delta$ and its mass between consecutive grid points is below $\delta$. Such a finite grid exists because its density is bounded and its total integral is one. Step 4.1 gives convergence at every grid point simultaneously. Between consecutive points monotonicity of the two distribution functions bounds their difference by the largest grid-point difference plus $\delta$; the tail intervals have the same bound using zero and one. Thus the supremum in the Statement has limsup at most $\delta$. Letting $\delta\downarrow0$ proves the asserted uniform convergence. All replacements were finite products of supplied probability laws, and the only additional choice hypothesis remains [A1]. [given, A1, step 4.1, construct, algebra] ∎

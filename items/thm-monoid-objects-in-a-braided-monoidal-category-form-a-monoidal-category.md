@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category.json
+  precheck: pass
 id: thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category
 kind: theorem
 title: "Monoid objects in a braided monoidal category form a monoidal category"
@@ -10,13 +13,6 @@ provenance:
 deps: [def-braided-monoidal-category, def-monoid-object-and-comonoid-object-in-a-monoidal-category, thm-the-monoid-object-axioms-may-be-written-without-associators]
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   scraped: []
   references:
@@ -57,3 +53,27 @@ with brackets suppressed by coherence.
 2.1 The associativity and unit axioms for this multiplication are exactly the braided interchange identities proved in [F1]: one repeatedly moves the middle $B$-tensorand past the middle $A$-tensorand by the braiding, and the two possible threefold rearrangements agree because the hexagons express the Yang-Baxter compatibility needed for those moves. Hence $A\otimes B$ is again a monoid object. [F1, step 1.1, algebra]
 
 3.1 If $f:A\to A'$ and $g:B\to B'$ are monoid morphisms, then $f\otimes g$ preserves the units and multiplications because tensoring respects composition and the braiding is natural. Thus tensoring extends to morphisms. The ambient associator and unit object of $\mathcal C$ are monoid morphisms by the same coherence computation recorded in [F1], so they supply the associator and unit data for $\operatorname{Mon}(\mathcal C)$. Therefore $\operatorname{Mon}(\mathcal C)$ is monoidal. [L1, L2, F1, step 2.1, algebra] ∎
+
+## Remarks
+
+The multiplication factors through a single interchange of the middle two
+tensor factors. With brackets suppressed as in the statement, the triangle
+commutes by the definition of $\mu_{A\otimes B}$:
+
+```tikzcd
+\begin{tikzcd}[column sep=8em, row sep=4em, font=\large, every label/.append style={font=\normalsize}]
+A\otimes B\otimes A\otimes B
+  \arrow[r, "1_A\otimes c_{B,A}\otimes 1_B"]
+  \arrow[dr, "\mu_{A\otimes B}"']
+& A\otimes A\otimes B\otimes B
+  \arrow[d, "\mu_A\otimes\mu_B"] \\
+& A\otimes B
+\end{tikzcd}
+```
+
+Here $c_{B,A}:B\otimes A\to A\otimes B$ interchanges only the middle
+factors, leaving the first $A$ and last $B$ fixed. The chosen braiding is
+used in this direction; no symmetry assumption is needed. The unit is
+$\eta_A\otimes\eta_B:\mathbf 1\otimes\mathbf 1\to A\otimes B$, with
+$\mathbf 1\otimes\mathbf 1$ identified with $\mathbf 1$ by the unitor.
+The figure illustrates the construction; the proof above is independent of it.

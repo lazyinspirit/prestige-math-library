@@ -49,6 +49,12 @@ tooling selection. This changes neither commit ownership nor any gate.
 Metadata/render preparation is reused only for the exact unchanged inputs and
 repair round. Changed inputs or repairs require fresh preparation and the full
 battery. Quiet engine ticks neither launch renderers nor rehash the library.
+Both engines also execute the scoped [rendering-quality checks](RENDERING-QUALITY.md)
+in this actual preparation: source/context lint, application AST/KaTeX checks,
+production TikZ compilation, SVG/layout smoke checks and their regression pack.
+The final `rendering-quality` gate verifies the resulting nonempty current
+receipt. It reuses unchanged source/renderer/toolchain caches and the existing
+proof-render pass; it adds no corpus scan or substantive review acceptance.
 The terminal helper requires the genuine immediately preceding native gate pass,
 its complete event sequence, current prepared inputs and drained writers. A
 failed preparation, gate or transaction remains a visible blocker. Outside OPEN
@@ -381,6 +387,29 @@ receipts and all existing raw evidence remain sealed and owned as before. True
 still traverse strictly, even when the same path also occurs in an inventory.
 Malformed receipts or genuine JSON sources still fail; no parse-error fallback
 or operational symlink source acceptance is introduced.
+
+Foreign historical schema-2 readiness receipts may instead contain only an
+aggregate protected-tree count/digest, without the later scoped inventory
+fields. Exact matching foreign-run receipts with valid aggregate/input hashes
+receive ordinary complete structured traversal, including all real input and
+nested references. They acquire no current readiness or commit authority.
+Current-run receipts and malformed or partial scoped receipts retain the strict
+current schema/scope checks; historical evidence bytes are never rewritten.
+
+Exact native `RUN-dispatch/tool-step6-finalize-v3.result.json` receipts also
+carry a commit inventory in `closeout_scope.owned_paths`. Matching run and native
+producer identity, success, scope version and string-array inventory are required
+before treating only that field as metadata. Every other field still traverses
+strictly. A genuine input reference to the same raw capture or operational link
+remains authoritative and receives no inventory exemption.
+
+During the current run's isolated v3 commit, the same final path temporarily
+contains the native provisional shape: matching run/role/label, `covers: [all]`,
+`ok: false`, `transaction_pending: true`, and a valid `before_head` object ID.
+It receives ordinary complete structured traversal, without any inventory
+exemption or success authority. The transaction's second preflight must accept
+that false pending carrier; only the fully checked transaction materializes the
+separate successful receipt. Foreign or malformed pending receipts still fail.
 
 Proof-layout receipt scope uses the mathematical item grammar from SCHEMA.md:
 known lowercase kind prefixes and case-sensitive ASCII alphanumeric segments.

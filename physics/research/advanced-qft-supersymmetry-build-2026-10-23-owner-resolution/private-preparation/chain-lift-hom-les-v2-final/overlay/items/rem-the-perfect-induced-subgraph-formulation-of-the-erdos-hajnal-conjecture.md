@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-perfect-induced-subgraph-formulation-of-the-erdos-hajnal-conjecture.md

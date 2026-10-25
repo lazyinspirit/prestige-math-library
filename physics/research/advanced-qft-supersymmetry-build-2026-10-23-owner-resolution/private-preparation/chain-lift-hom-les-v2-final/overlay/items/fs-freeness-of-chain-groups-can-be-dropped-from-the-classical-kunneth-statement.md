@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-freeness-of-chain-groups-can-be-dropped-from-the-classical-kunneth-statement.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-admissible-square-algebra-is-a-connected-bialgebra.md

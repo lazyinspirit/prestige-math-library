@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-compact-group-symplectic-actions-admit-an-invariant-compatible-almost-complex-structure.md

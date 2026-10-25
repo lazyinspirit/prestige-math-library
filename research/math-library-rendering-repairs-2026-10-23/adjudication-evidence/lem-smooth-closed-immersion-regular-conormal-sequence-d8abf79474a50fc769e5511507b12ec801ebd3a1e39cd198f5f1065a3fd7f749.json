@@ -1,0 +1,39 @@
+{
+  "id": "lem-smooth-closed-immersion-regular-conormal-sequence",
+  "agent": "/root/rendering_repair_coordinator/ag_005",
+  "model": "gpt-6.1-sol",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "The standalone original-resolution screenshot visibly retains dollar delimiters and the underscore in the proof-technique banner, while mathematics in adjacent proof steps is typeset. The source places $H_1$ in a banner rendered as plain text, so ordinary math delimiters cannot fix that location.",
+      "action": "Replaced “Koszul $H_1$” with the mathematically equivalent prose “first Koszul homology” in the proof-technique paragraph only.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Rewrote the plain-text proof-technique banner phrase using equivalent prose so it no longer exposes raw TeX delimiters.",
+  "source_lines_after": [
+    {
+      "line": 81,
+      "text": "**Proof technique:** compute the local codimension at every scheme point, obtain a regular sequence from the regular-quotient criterion, identify its conormal basis using first Koszul homology, and prove left exactness of the conormal sequence by the ranks of smooth differential modules."
+    }
+  ],
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [
+    "The renderer continues to treat proof-technique banners as plain text; the local prose workaround avoids that limitation."
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-smooth-closed-immersion-regular-conormal-sequence.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 5 steps, 0 defects"
+    },
+    {
+      "check": "Exact before/current comparison",
+      "result": "Only the stated banner phrase changed; frontmatter, including status: published, is byte-identical."
+    }
+  ],
+  "pre_existing_formatting_failures": []
+}

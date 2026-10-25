@@ -1,0 +1,100 @@
+{
+  "id": "alg-dogleg-trust-region-step",
+  "agent": "/root/rendering_repair_coordinator/dnouq_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The two-segment dogleg, interior Cauchy point, exterior Newton point and boundary intersection are materially clearer in a geometric picture. The historical standalone screenshot confirms no illustration. The intake suggestion of a boundary Cauchy point followed by an intersection is incompatible with local step 2; the added picture instead depicts the actual step-3 branch.",
+      "action": "Added a concrete positive-definite two-dimensional dogleg illustration and explanatory caption in final Remarks. Kept the model-value comparison and early returns explicit in surrounding prose.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Append final Remarks with a native TikZ dogleg diagram for g=(-1,0), B=[[1,-1],[-1,2]], Delta=3/2; preserve the complete Definition and all frontmatter bytes.",
+  "source_lines_after": {
+    "remarks": [
+      52,
+      89
+    ],
+    "tikz": [
+      62,
+      83
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Admissible model",
+      "justification": "Local Definition requires symmetric positive-definite B. For the displayed B, (u,v)B(u,v)^T=(u-v)^2+v^2>0 for (u,v) nonzero; Delta=3/2>0 and g nonzero."
+    },
+    {
+      "check": "Cauchy point and negative-gradient segment",
+      "justification": "alg-trust-region-cauchy-step Definition gives g^TBg=1, ||g||=1 and tau=min(1,3/2)=1. Hence p_C=-g=(1,0); its norm 1<3/2. The O-to-C segment follows -g."
+    },
+    {
+      "check": "Newton point",
+      "justification": "The displayed B times (2,1)^T equals (1,0)^T=-g. Thus p_N=(2,1), with norm sqrt(5)>3/2, so local steps 1 and 2 do not return."
+    },
+    {
+      "check": "Boundary intersection and segment direction",
+      "justification": "Local step 3 gives d=(1,1), a=2, b=2, c=-5/4; its positive root is (sqrt(14)-2)/4 in (0,1). Hence p_D=(1+t,t), ||p_D||=3/2. TikZ coordinates use a common factor two (O=(0,0), C=(2,0), N=(4,2), circle radius 3); D=(2.870829,0.870829) approximates 2p_D to below 1e-6. C,D,N are collinear in that order."
+    },
+    {
+      "check": "Continuation and return comparison",
+      "justification": "Along p_C+s d the boundary polynomial is 2s^2+2s-5/4, increasing for s>=0. It is positive after t, so the dashed D-to-N continuation is exterior. The caption retains local step 4 comparing m(p_D),m(p_C) rather than implying every input returns p_D; for this concrete model m(p_D)-m(p_C)=-t+t^2/2<0."
+    },
+    {
+      "check": "Interfaces and independence",
+      "justification": "The diagram concerns vectors in R^2 and the Euclidean trust-region ball from def-trust-region-quadratic-model-and-ratio; no new maps, commutativities, dependencies, or claims for all models are introduced. The original Definition is unchanged. lem-positive-definite-model-has-unique-newton-step steps 2.1 and 3.1 establish the branch interfaces and unique intersection independently of the figure."
+    }
+  ],
+  "checks": {
+    "proof_layout": "proof-layout: 1 items, 0 steps, 0 defects",
+    "precheck": {
+      "files": 1,
+      "checked": 0,
+      "failed": 0,
+      "status": "not-applicable"
+    },
+    "rendercheck": {
+      "errors": [],
+      "warnings": [],
+      "checked": 1
+    },
+    "native_preview": {
+      "directory": "research/math-library-rendering-repairs-2026-10-23/previews/dnouq-001-final",
+      "manifest_sha256": "be92264e2c363e430345ceaf5701863e9cebfb4338ece87f1e57bd6c3291434d",
+      "source_sha256": "c802e887170a968966765e8646416ba3416ddccc8e0e2384948fcb64b4d45e98",
+      "tikz_count": 1,
+      "katex_errors": [],
+      "diagram_failures": []
+    },
+    "visual": "Inspected authentic historical screenshot and final native dark-background screenshot at original resolution. Also inspected standalone native figure and settled full-page capture. All four filled points, circle, solid two-segment path, dashed continuation, arrows and labels are visible; boundary label moved above circle after first preview. No open endpoints are asserted. Circle is complete; this is a path, not a named-node cycle.",
+    "frontmatter": "Exact byte equality with frozen before frontmatter; status remains published."
+  },
+  "evidence": {
+    "before_raw_sha256": "0ee91d3d08a363c7f0a7e34686a3a636df582db674239b96d8b5cb7569827b0e",
+    "after_raw_sha256": "c802e887170a968966765e8646416ba3416ddccc8e0e2384948fcb64b4d45e98",
+    "guard": "Immediately before initial edit asserted current raw SHA256 equal queue before_raw_sha256.",
+    "historical_path_discrepancy": "Declared diagram-supplement/screenshots file was absent. Located authentic file only within the same recorded category at screenshots/alg-dogleg-trust-region-step--01.png; its SHA256 exactly matches the queue.",
+    "historical_screenshot": "research/math-library-rendering-audit-2026-10-23/numerical-optimization-inverse-problems-and-uncertainty-quantification/screenshots/alg-dogleg-trust-region-step--01.png",
+    "historical_screenshot_sha256": "d243ddc52022aab1ee0fb1b2c8edfd01ebdf716ac277e8b15a3b3d7d60081a4b",
+    "final_native_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnouq-001-final/manifest.json",
+    "settled_full": {
+      "path": "research/math-library-rendering-repairs-2026-10-23/previews/dnouq-001-final/screenshots/settled-full.png",
+      "sha256": "820b28879ec41effd83468edd2c7efafb599bec46b9a2c2596df6791e8fe9847"
+    },
+    "standalone_figure": {
+      "path": "research/math-library-rendering-repairs-2026-10-23/previews/dnouq-001-final/screenshots/standalone-figure.png",
+      "sha256": "6927703f0ae70c6a8e8fd802909ead343f6b4af8b7aa57ddbae43d428b2e70b1"
+    },
+    "capture_note": "Default preview screenshot transiently omitted upper animated text. A fresh file-only local Playwright capture with reducedMotion reduce and animations disabled displays the entire unchanged Definition and Remarks correctly; no source repair was inferred from the transient capture."
+  },
+  "remaining_issues": []
+}

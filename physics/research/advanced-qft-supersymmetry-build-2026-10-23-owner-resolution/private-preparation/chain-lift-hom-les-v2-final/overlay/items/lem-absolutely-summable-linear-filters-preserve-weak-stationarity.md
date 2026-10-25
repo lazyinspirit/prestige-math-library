@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-absolutely-summable-linear-filters-preserve-weak-stationarity.md

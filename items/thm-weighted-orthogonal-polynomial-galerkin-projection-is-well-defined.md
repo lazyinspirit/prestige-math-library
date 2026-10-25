@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-weighted-orthogonal-polynomial-galerkin-projection-is-well-defined.json
+  precheck: pass
 id: thm-weighted-orthogonal-polynomial-galerkin-projection-is-well-defined
 kind: theorem
 title: "The weighted orthogonal-polynomial Galerkin projection is well-defined"
@@ -14,11 +17,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: "No choice axiom is used; only finite orthogonal expansions and a positive inner product are used."
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
 sources:
   references:
     - title: "Jie Shen and Tao Tang, Spectral and High-Order Methods with Applications, §3.1"

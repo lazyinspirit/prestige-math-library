@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-transgression-for-the-integral-heisenberg-extension.json
+  precheck: pass
 id: ex-transgression-for-the-integral-heisenberg-extension
 kind: example
 title: "The Heisenberg transgression and its sign"
@@ -9,12 +12,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   scraped: []
   references:
@@ -30,9 +27,9 @@ Give $E=\mathbb Z^3$ the product $(a,b,c)(u,v,w)=(a+u,b+v,c+w+av)$. For the cent
 
 **Given:** E, A and d are as in the example; use the DHW normalizer-quotient sign convention.
 
-[F1] For invariant d and chosen alpha, eta the normalizer quotient has factor cocycle eta(q)+alpha(q)eta(r)-f(q,r)eta(qr)-d(f(q,r)); its construction works with supplied choices. ([[def-low-degree-transgression-for-a-group-extension]]).
+[F1] For invariant $d$ and chosen $\alpha$, $\eta$ the normalizer quotient has factor cocycle $\eta(q)+\alpha(q)\eta(r)-f(q,r)\eta(qr)-d(f(q,r))$; its construction works with supplied choices. ([[def-low-degree-transgression-for-a-group-extension]]).
 
-[F2] The factor set of a supplied normalized section represents its extension; a normalized two-coboundary is b(q)+q b(r)-b(qr). ([[lem-bar-two-cocycles-classify-abelian-kernel-extensions]]).
+[F2] The factor set of a supplied normalized section represents its extension; a normalized two-coboundary is $b(q)+q b(r)-b(qr)$. ([[lem-bar-two-cocycles-classify-abelian-kernel-extensions]]).
 
 ## Verification
 

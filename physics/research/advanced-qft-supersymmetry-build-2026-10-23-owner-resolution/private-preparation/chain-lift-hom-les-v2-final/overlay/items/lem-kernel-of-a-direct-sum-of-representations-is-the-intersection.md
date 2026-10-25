@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-kernel-of-a-direct-sum-of-representations-is-the-intersection.md

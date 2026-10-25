@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-rack-fundamental-quandle-and-adjoint-group.json
+  precheck: n/a
 id: def-rack-fundamental-quandle-and-adjoint-group
 kind: definition
 title: "Racks, diagram fundamental quandles, and adjoint groups"
@@ -12,17 +15,6 @@ proof_strategy: not-applicable
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
 sources:
   references:
     - title: "V. O. Manturov, Knot Theory, Chapter 5, §§5.1–5.2, printed pp. 49–55"
@@ -86,3 +78,30 @@ this definition makes no completeness or knot-classification assertion.
 [Carter, *A Survey of Quandle Ideas*](https://arxiv.org/pdf/1002.4429).
 
 [Nelson, *Link invariants from finite racks*](https://arxiv.org/pdf/0808.0029).
+
+## Remarks
+
+In the standard oriented plane (right, up), the upward overarc below has
+positive normal $n$ pointing left. Thus the right underarc $u$ is the
+source and the left underarc $v$ is the target. The gap marks the
+underpass; the overarc $o$ keeps its color. Underarc orientation is shown
+for this example, but source and target are determined by $n$.
+
+```tikz
+\begin{tikzpicture}
+  \draw[->] (1.6,0) -- (0.18,0);
+  \draw[->] (-0.18,0) -- (-1.6,0);
+  \draw[->,line width=1.2pt] (0,-1) -- (0,1.25);
+  \draw[->,dashed] (-0.15,0.65) -- (-1,0.65);
+  \node[above] at (-0.65,0.65) {$n$};
+  \node[below] at (1.15,-0.1) {$u:\ x_u$};
+  \node[below] at (-1.15,-0.1) {$v:\ x_v$};
+  \node[above] at (0,1.3) {$o:\ x_o$};
+  \node[right] at (2,0.5) {$x_v=x_u*x_o$};
+  \node[right] at (2,-0.3) {$x_u=x_v\mathbin{\bar *}x_o$};
+\end{tikzpicture}
+```
+
+The equations show the same crossing relation in the two directions:
+$R_{x_o}^{-1}$ recovers the source color from the target color. This
+illustration adds no relations to the diagram quandle presentation.

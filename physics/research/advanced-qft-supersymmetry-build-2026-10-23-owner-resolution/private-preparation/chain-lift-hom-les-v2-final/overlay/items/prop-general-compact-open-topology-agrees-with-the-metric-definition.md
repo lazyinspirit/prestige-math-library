@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-general-compact-open-topology-agrees-with-the-metric-definition.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-complex-jacobian-of-a-quadratic-map-of-the-bidisc.md

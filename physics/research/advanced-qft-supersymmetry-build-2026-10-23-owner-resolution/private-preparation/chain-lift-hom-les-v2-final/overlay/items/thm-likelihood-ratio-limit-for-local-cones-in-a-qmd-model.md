@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-likelihood-ratio-limit-for-local-cones-in-a-qmd-model.md

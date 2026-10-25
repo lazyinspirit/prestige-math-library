@@ -1,0 +1,88 @@
+{
+  "id": "thm-deformed-hard-lefschetz-for-b-x-b-s",
+  "agent": "/root/rendering_repair_coordinator/co_028",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-math-delimiters",
+      "verdict": "confirmed",
+      "reason": "Standalone original-resolution tile 01 visibly renders literal B_x B_s in the title; the body identifies the same bimodules with mathematical subscripts. Frozen and pre-edit current source agree exactly.",
+      "action": "Wrapped B_x B_s in inline math delimiters in the title.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "raw-tex-in-reference-label",
+      "verdict": "confirmed",
+      "reason": "Native preview tile 02 visibly displayed B_s literally in the tensoring-lemma link. The current supplier title still has literal B_s, so this is not resolved upstream.",
+      "action": "Added an explicit label preserving the supplier title wording with $B_s$ formatted as math; supplier and dependency unchanged.",
+      "status": "repaired"
+    },
+    {
+      "original_finding_index": null,
+      "defect_type": "renderer-plain-text-math-label",
+      "verdict": "confirmed",
+      "reason": "Authentic original tile 03 and native pre-supplemental preview tile 03 show raw $\\overline d_i$ in the uppercase proof-technique banner. This banner uses plain React text instead of math rendering.",
+      "action": "Replaced the notation in the banner with equivalent prose, induced reduced differentials.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Formatted title subscripts, formatted an inherited tensoring reference label locally, and used equivalent prose for the induced reduced differentials in the plain-text proof banner.",
+  "source_lines_after": {
+    "4": "title: \"Hard Lefschetz for the deformed operator on $B_x B_s$, in the three cases\"",
+    "43": "[F6] Tensoring lemma: if $B=\\bigoplus_zB_z^{R,m_z}$ is self-dual with $m_z\\ne0\\Rightarrow\\mathrm S(z)$ and $\\mathrm{HR}(z,s)_\\zeta$, and $B$ carries an invariant non-degenerate form making it even or odd and satisfying HR with the standard sign for $\\rho$, then $BB_s$ satisfies HR with the standard sign for $L_\\zeta$ and the induced form ([[lem-tensoring-with-b-s-preserves-hodge-riemann-signs|Tensoring a direct sum of Hodge-Riemann bimodules with $B_s$ preserves the signs]]).",
+    "64": "**Proof technique:** direct; case (1) is the explicit descent matrix, case (2) uses the factorization identity and the weak-Lefschetz substitute, and case (3) separates the kernel of the reduced third component. Bimodule differentials are unreduced; their actions on reduced vectors below always mean the induced reduced differentials. All hL/HR spaces are finite right reductions."
+  },
+  "mathematical_meaning_preserved": true,
+  "remaining_issues": [],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/thm-deformed-hard-lefschetz-for-b-x-b-s.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 9 steps, 0 defects",
+      "pre_existing_formatting_failures": []
+    },
+    "precheck": {
+      "checked": 1,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "rendercheck": {
+      "checked": 1,
+      "errors": [],
+      "warnings": [],
+      "exit_code": 0
+    },
+    "metadata": "Every frontmatter line except title is byte-identical to frozen before; status remains published."
+  },
+  "visual_verification": {
+    "original_standalone_tiles": [
+      "01",
+      "03"
+    ],
+    "native_preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/co-028-final-v2/manifest.json",
+    "final_standalone_tiles_inspected": [
+      "01",
+      "02",
+      "03"
+    ],
+    "initial_full_preview_tiles_inspected": [
+      "01",
+      "02",
+      "03",
+      "04"
+    ],
+    "source_sha256": "2d6cd897d9eaff729d297a25c97ce12209a642edc8b3cb129aff6ca316b5ecf9",
+    "reference_map_sha256": "a087bd6d2a4d7f5bd28a502967e6d0570a0eceb52cd4fd6803530c50780a5518",
+    "result": "Correct title and reference subscripts; readable banner without raw TeX.",
+    "limitations": [
+      "Reference titles are built from parseable current item frontmatter; malformed or unreadable unrelated items are listed in reference-title-map.json diagnostics and omitted.",
+      "This is a local ItemBody preview, not full native library-loader or production-route coverage.",
+      "Horizontally scrollable diagrams retain browser scroll behavior; inspectors should check clipped diagram content when relevant.",
+      "External network requests are blocked by the local Playwright route."
+    ]
+  }
+}

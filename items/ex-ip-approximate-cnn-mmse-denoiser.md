@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-ip-approximate-cnn-mmse-denoiser.json
+  precheck: pass
 id: ex-ip-approximate-cnn-mmse-denoiser
 kind: example
 title: "A biased one-pixel CNN approximates but is not the exact MMSE denoiser"
@@ -35,13 +38,7 @@ sources:
     - title: "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)"
       url: "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
       locator: "§4.2, proximal-gradient update; the exact-MMSE stationarity conclusion requires the local theorem's stricter denoiser hypothesis."
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
+
 ---
 
 ## Example
@@ -64,7 +61,7 @@ This map is implemented by a $1\times1$ convolution, a $\tanh$ activation, outpu
 
 For this one-channel, one-pixel input, a $1\times1$ convolution with weight $w$ is scalar multiplication $z\mapsto wz$. The architecture applies weight $a/\sigma^2$, then $\tanh$, then output scaling by $a$ and bias addition by $b$. The arrows depict function composition, and the sequence computes exactly $\widetilde D_\sigma(z)=a\tanh(az/\sigma^2)+b$.
 
-~~~tikz
+```tikz
 \begin{tikzpicture}[x=1.45cm,y=0.8cm,>=stealth]
   \node (input) at (0,0) {$z$};
   \node[draw,rounded corners,minimum width=2.3cm,minimum height=0.9cm] (conv) at (2,0) {$1\times1$ conv: $a/\sigma^2$};
@@ -76,7 +73,7 @@ For this one-channel, one-pixel input, a $1\times1$ convolution with weight $w$ 
   \draw[->] (act) -- node[above] {$\tanh(az/\sigma^2)$} (out);
   \draw[->] (out) -- (result);
 \end{tikzpicture}
-~~~
+```
 
 ## Facts & Assumptions
 

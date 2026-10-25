@@ -1,13 +1,11 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/fs-two-roofs-are-equal-whenever-their-right-hand-arrows-are-equal.json
+  precheck: pass
 id: "fs-two-roofs-are-equal-whenever-their-right-hand-arrows-are-equal"
+title: "Two roofs are equal whenever their right-hand arrows are equal"
 kind: "false-statement"
 deps: ["thm-the-calculus-of-fractions-constructs-the-localization", "prop-cohomology-factors-through-the-derived-category"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-u-of-a-one-dimensional-abelian-lie-algebra-is-a-polynomial-algebra.md

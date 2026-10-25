@@ -1,0 +1,126 @@
+{
+  "id": "alg-qa-14-zero-completion-query-simulation",
+  "agent": "/root/dqa_002",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The authentic original tile contains only the ordered procedure. A register-flow schematic materially clarifies the asymmetry between a controlled response swap and an ordinary unconditional oracle call, as well as the inverse cleanup order; this is a warranted explanatory addition under the expanded diagram scope, independent of proof completeness.",
+      "action": "Added a nine-stage arrowed register-flow TikZ schematic and exact register/branch legend in final Remarks.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended explanatory Remarks only: C -> R_N,M -> H_r -> S_v -> O_x -> S_v -> H_r -> R_N,M^{-1} -> C^{-1}, with the acted-on registers, clean ancilla lifecycle, valid/invalid branch explanation, and direct N=M branch.",
+  "source_lines_after": {
+    "remarks": [
+      55,
+      81
+    ],
+    "tikz": [
+      59,
+      79
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and domains",
+      "evidence": "Input Definition lines 37-39 declares A_M of dimension M, Q_N of dimension N, and a response qubit; v and r are qubits. The schematic names B for the original response. C is the reversible comparison of Step 2 on A_M,v with clean internal workspace; R_N,M is the finite unitary on A_M,v,Q_N, not an m-bit target. H_r acts on r; S_v acts on v,B,r; O_x acts on Q_N,r with N valid raw addresses."
+    },
+    {
+      "check": "Order and arrows",
+      "evidence": "Eight directed connectors join nine boxes exactly in Step 2 comparison/routing, Step 3 Hadamard/swap, Step 4 oracle, Step 5 reverse-swap/Hadamard/inverse-routing/inverse-comparison order. Top and bottom rows go right; middle row goes left. There is no commutativity assertion, closed edge, or controlled-oracle connector."
+    },
+    {
+      "check": "Valid addresses and response",
+      "evidence": "For j<N, Step 2 gives v=1 and Q_N=j. Step 3 produces B=|+>, r=|b>; the ordinary XOR action of def-qa-14-boolean-search-query-model yields r=|b XOR x_{j+1}>. The second Fredkin S_v restores r=|+> and returns that response to B. H_r then gives |0> by the displayed H matrix in def-qc-one-qubit-gate-alphabet-and-rotations."
+    },
+    {
+      "check": "Invalid addresses and coherent cleanup",
+      "evidence": "For j>=N, v=0, Q_N=0 and both swaps are identities; O_x acts on r=|+>, invariant under either I or X, so B is unchanged with no phase. H clears r. Since A_M,v,Q_N were preserved by the response operations and oracle, the same R_N,M inverse clears Q_N, then C inverse clears v. Clean comparison workspace is supplied by alg-qc-reversible-embedding. Linearity gives the same ancilla factor for superpositions, matching def-qc-clean-and-dirty-ancillas."
+    },
+    {
+      "check": "Boundary branch and proof independence",
+      "evidence": "The picture is explicitly for N<M. N=M (including N=1) uses the unchanged Step 1 direct call on A_M,B. The entire original Definition is byte-identical and complete without the picture; no proof or algorithmic obligation is delegated to the diagram."
+    }
+  ],
+  "checks": {
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-qa-14-zero-completion-query-simulation.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 0 steps, 0 defects"
+    },
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-qa-14-zero-completion-query-simulation.md --json",
+      "exit_code": 0,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 0,
+          "failed": 0
+        },
+        "status": "not-applicable"
+      }
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/alg-qa-14-zero-completion-query-simulation.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    "development_note": "Initial rendercheck detected validator delimiter confusion at adjacent linebreak/dollar tokens in the new TikZ labels. Added separating whitespace, reran proof-layout/rendercheck/precheck and regenerated final native preview; all final checks above are on final bytes.",
+    "basis_response_simulation": {
+      "cases": 3648,
+      "N": [
+        3,
+        5,
+        6,
+        7
+      ],
+      "inputs": "All Boolean x, all padded basis j, b=0,1",
+      "result": "Passed: B=b XOR padded x[j], r=0 to tolerance 1e-12; routing/comparison cleanup justified algebraically."
+    }
+  },
+  "original_evidence": {
+    "declared_evidence_dir": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/diagram-supplement",
+    "path_discrepancy": "The declared supplement/screenshots path is absent; the authentic matching PNG is in the category main screenshots directory.",
+    "resolved_path": "research/math-library-rendering-audit-2026-10-23/quantum-algorithms/screenshots/alg-qa-14-zero-completion-query-simulation--01.png",
+    "sha256": "432523b9609cf0d9d67c0e59c71f495ef5f932882396d399cc177c1d6fdf7c5a",
+    "viewed": "Standalone original-resolution view; frozen before and current source byte comparison before editing."
+  },
+  "native_visual_checks": {
+    "preview_manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dqa-002-native-final/manifest.json",
+    "manifest_sha256": "7d899c7ab031e2af03a0df24d8d29711eefaba5bc4da356c51b33a027a7593ff",
+    "source_sha256": "60e58a0df1d8103eb3e71873e376310ef72b22622569152db766e74b469511fc",
+    "html_sha256": "9d71bd275f383653cca1e80bba1487cbc0687fef2108aa0efe73e34a7018931e",
+    "screenshot": "research/math-library-rendering-repairs-2026-10-23/previews/dqa-002-native-final/screenshots/alg-qa-14-zero-completion-query-simulation--01.png",
+    "screenshot_sha256": "68e13dfb70d7f6f6476a50774f87376ca7d61ac5744455535249a0a21b801047",
+    "diagram_count": 1,
+    "diagram_failures": [],
+    "katex_errors": [],
+    "views": [
+      "research/math-library-rendering-repairs-2026-10-23/previews/dqa-002-native-final/diagram-native-crop.png",
+      "research/math-library-rendering-repairs-2026-10-23/previews/dqa-002-native-final/definition-native-crop.png"
+    ],
+    "result": "Viewed original-resolution native tile and standalone lossless pixel crops. Nine labeled boxes and all eight directional connectors visibly present; no overlaps or clipping; labels and strokes have visible contrast on black. The viewer partially elided repeated regions in full-tile display, so standalone crops verified both the original Definition and full new diagram.",
+    "limitations": "Local ItemBody/TikZ SSR preview with external requests blocked; not a production route. Thirteen unrelated reference-map parse diagnostics recorded by preview; no assigned item render failure."
+  },
+  "preservation": {
+    "before_raw_sha256": "3a4c16a86b8858dd1e7332767fa6993ed0786114600a54092c577c2bb93878a1",
+    "after_raw_sha256": "60e58a0df1d8103eb3e71873e376310ef72b22622569152db766e74b469511fc",
+    "original_bytes_unchanged_prefix": true,
+    "frontmatter_unchanged": true,
+    "status": "published",
+    "status_unchanged": true
+  },
+  "remaining_issues": []
+}

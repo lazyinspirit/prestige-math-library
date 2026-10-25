@@ -1,0 +1,140 @@
+{
+  "id": "lem-na-mixed-radix-cooley-tukey-factorization",
+  "group": "dnla_018",
+  "agent": "/root/rendering_repair_coordinator/dnla_018",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "missing-tikz-diagram",
+      "verdict": "confirmed",
+      "reason": "The two differently indexed transform stages and intervening twiddle form a concrete flow that is easier to distinguish visually. The original standalone tiles contain no illustration. A flow schematic materially clarifies strided input grouping, stage multiplicities, and final output ordering without changing the claim.",
+      "action": "Added a five-node, four-arrow index-flow schematic in final Remarks, with index ranges, intermediate arrays and local proof justification.",
+      "status": "repaired"
+    }
+  ],
+  "changed": true,
+  "correction": "Appended final Remarks with a warranted TikZ flow for input reindexing, r length-s unitary transforms, the negative-sign twiddle, and s length-r unitary transforms with output k=k2+s*k1.",
+  "source_lines_after": {
+    "remarks": [
+      57,
+      75
+    ],
+    "tikz": [
+      61,
+      73
+    ]
+  },
+  "mathematical_meaning_preserved": true,
+  "diagram_mathematics_corrected": false,
+  "proof_independent": true,
+  "diagram_math_checks": [
+    {
+      "check": "Objects and dimensions",
+      "justification": "All stages have N=rs complex coordinates. Input x is in C^N; splitting gives r vectors x^(u) in C^s. A has indices (u,k2) in {0,...,r-1} x {0,...,s-1}; y is equivalently s vectors of length r; z has indices (k1,k2) in the same product size. Ranges are stated immediately above the figure, matching Statement and F2."
+    },
+    {
+      "check": "Input arrow",
+      "justification": "j=u+rv is the bijective input index map in F2 and proof step 1.1; x^(u)_v=x_(u+rv) is exactly the Statement definition. No coprimality is introduced."
+    },
+    {
+      "check": "Inner transform arrow",
+      "justification": "For each fixed u, F_s:C^s -> C^s yields A_(u,k2)=(F_s x^(u))(k2). There are r transforms, with negative exponent -2*pi*i*v*k2/s and factor s^(-1/2) from local DFT supplier Definition/F1 and step 3.1."
+    },
+    {
+      "check": "Twiddle arrow",
+      "justification": "Coordinatewise multiplication sends A_(u,k2) to y_u^(k2)=exp(-2*pi*i*u*k2/N) A_(u,k2), exactly the Statement and the exponent decomposition in step 2.1. The sign is explicitly negative, and neither coordinate changes."
+    },
+    {
+      "check": "Outer arrow and output ordering",
+      "justification": "For each fixed k2, F_r:C^r -> C^r gives z_(k1,k2)=(F_r y^(k2))(k1); there are s such transforms. Step 3.1 proves the displayed equality with (F_N x)(k2+s*k1). F2 gives the output bijection. Product normalization s^(-1/2)r^(-1/2)=N^(-1/2) follows from step 2.1/F4."
+    },
+    {
+      "check": "Directions and topology",
+      "justification": "The native figure visibly has five stage boxes and four downward arrows in the order split, F_s, twiddle, F_r. It asserts a sequential factorization, not a cyclic graph or an extra commutative square. No crossings, graph-closing edge, or open/closed scalar endpoints are applicable."
+    }
+  ],
+  "local_supplier_justification": {
+    "def-unitary-discrete-fourier-transform-on-z-mod-n": "Read local Definition: negative-sign finite sum with q^(-1/2), a map on q complex coordinates. Used only this definition, not an unproved unitarity property.",
+    "lem-finite-sum-reindexing-and-fubini": "Read local Statement and proof: bijective finite reindexing and finite Fubini justify the existing proof regrouping. The figure directly restates the carrier F2 and steps 1.1\u20133.1."
+  },
+  "before_guard": {
+    "expected_raw_sha256": "1785151e41f6cbf2d9ee537b2d8b1dba1e69b0cf7c751d623acc999ad3cfd7ce",
+    "actual_raw_sha256": "1785151e41f6cbf2d9ee537b2d8b1dba1e69b0cf7c751d623acc999ad3cfd7ce",
+    "checked_immediately_before_first_edit": true
+  },
+  "preservation_check": "Current bytes begin with the complete frozen before carrier byte-for-byte; only final Remarks were appended. Full frontmatter including status: published, Statement, Facts, Proof and sources are unchanged.",
+  "current_raw_sha256": "2900742fcf1177cd604385fed51739a6650a6a9e350c84da4807959b1e490377",
+  "original_evidence": {
+    "path_discrepancy": "Declared diagram-supplement/screenshots files were absent. Authentic images were located in the same category screenshots directory and matched both intake SHA256 values.",
+    "resolved_directory": "research/math-library-rendering-audit-2026-10-23/numerical-linear-algebra-and-approximation/screenshots",
+    "standalone_original_resolution_views": [
+      "--01.png",
+      "--02.png"
+    ],
+    "snapshot_comparison": "Frozen before and category snapshot are byte-identical."
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-na-mixed-radix-cooley-tukey-factorization.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-na-mixed-radix-cooley-tukey-factorization.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "status": "pass",
+        "strategy": "direct"
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-na-mixed-radix-cooley-tukey-factorization.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json TMPDIR=/home/lazyinspirit/Projects/prestige-math-library/research/math-library-rendering-repairs-2026-10-23/runtime-dnla-018 node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids lem-na-mixed-radix-cooley-tukey-factorization --out research/math-library-rendering-repairs-2026-10-23/previews/dnla-018-verified",
+      "exit_code": 0,
+      "output": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "native_visual_checks": {
+    "manifest": "research/math-library-rendering-repairs-2026-10-23/previews/dnla-018-verified/manifest.json",
+    "manifest_sha256": "dff638850b7b6b57d0bbb98a1a3ccd280c99a693b000e21d25c07b6bfb719540",
+    "binding": {
+      "id": "lem-na-mixed-radix-cooley-tukey-factorization",
+      "status": "published",
+      "source": "items/lem-na-mixed-radix-cooley-tukey-factorization.md",
+      "source_sha256": "2900742fcf1177cd604385fed51739a6650a6a9e350c84da4807959b1e490377",
+      "snapshot": "snapshots/lem-na-mixed-radix-cooley-tukey-factorization.md",
+      "html": "html/lem-na-mixed-radix-cooley-tukey-factorization.html",
+      "html_sha256": "cfb0bcf3c22d6355361156638b267165d11e6c3d86b94ca2c55d777b76a37f61",
+      "reference_map_sha256": "8421796dbbb009198e815408ed29a29074c15b9ebc2e01120e5afa38f9f9b239"
+    },
+    "standalone_original_resolution_views": [
+      "screenshots/lem-na-mixed-radix-cooley-tukey-factorization--01.png",
+      "screenshots/lem-na-mixed-radix-cooley-tukey-factorization--02.png"
+    ],
+    "result": "Actual native SSR SVG compiled; exactly one SVG and no diagram-failed banner. All five stage boxes, four arrowheads, formulas and labels visible, with no clipping or overlap. Dark-background labels and outlines remain visible. SVG uses currentColor and none only; no pale fill obscures strokes. No endpoint ring semantics or graph-cycle closure applies.",
+    "development_failures_resolved": "First attempt exposed unsupported text command; second exposed native SVG conversion bug on less-than glyph. Plain text arrow labels and equivalent tuple input label compile successfully in final verified preview."
+  },
+  "remaining_issues": [],
+  "limitations": [
+    "Local ItemBody preview only, not full production-route coverage. The preview reference map records 16 unrelated parse diagnostics; scoped item renders and validates successfully."
+  ]
+}

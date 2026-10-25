@@ -1,0 +1,63 @@
+---
+id: cex-knot-kt-19-boundary-case
+kind: counterexample
+title: "A nonprimitive pair is not an ordinary slope"
+status: published
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 2
+deps:
+  - def-multicusped-dehn-filling
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "William P. Thurston, The Geometry and Topology of Three-Manifolds"
+      url: "https://library.slmath.org/nonmsri/gt3m/PDF/4.pdf"
+      locator: "Chapter 4, §4.5, generalized Dehn surgery invariants"
+    - title: "William P. Thurston, The Geometry and Topology of Three-Manifolds"
+      url: "https://library.slmath.org/nonmsri/gt3m/PDF/5.pdf"
+      locator: "Chapter 5, §5.8, cone and ordinary filling parameters"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
+  precheck: pending
+---
+
+## Statement refuted
+
+Every nonzero integral pair $(p,q)$ on a torus with ordered basis $([\mu],[\lambda])$ represents an ordinary Dehn-filling slope.
+
+## Statement references
+
+[William P. Thurston, *The Geometry and Topology of Three-Manifolds*, Chapter 4, §4.5](https://library.slmath.org/nonmsri/gt3m/PDF/4.pdf)
+
+[William P. Thurston, *The Geometry and Topology of Three-Manifolds*, Chapter 5, §5.8](https://library.slmath.org/nonmsri/gt3m/PDF/5.pdf)
+
+## Facts & Assumptions
+
+**Given:** An oriented torus with ordered integral basis $([\mu],[\lambda])$ and the generalized cone-filling convention.
+
+[F1] [[def-multicusped-dehn-filling]]: an ordinary slope is represented by a primitive integral pair modulo simultaneous sign; a realized generalized parameter $r(p,q)$ with primitive $(p,q)$ has core direction $(p,q)$ and cone angle $2\pi/r$.
+
+## Proof
+
+**Given:** The torus with ordered basis $([\mu],[\lambda])$ and the generalized cone-filling convention.
+
+1.1 The coordinates $(2,0)$ have greatest common divisor $2$, so they are not primitive. By [F1], they therefore do not represent an ordinary slope or the meridian class of an ordinary smooth filling. The primitive pair on the same ray is $(1,0)$. [given, F1, algebra]
+
+2.1 Write $(2,0)=2(1,0)$, so the radial factor is $r=2$. If a hyperbolic deformation realizes this generalized parameter, [F1] gives its completion cone angle $2\pi/2=\pi$, rather than the full angle $2\pi$ of an ordinary smooth filling. No realization is asserted or needed: step 1.1 already supplies a nonzero integral pair that cannot be the primitive meridian class of an ordinary filling, refuting the stated universal claim. [given, F1, step 1.1, algebra] ∎
+
+## Sources
+
+[William P. Thurston, *The Geometry and Topology of Three-Manifolds*, Chapter 4, §4.5](https://library.slmath.org/nonmsri/gt3m/PDF/4.pdf)
+
+[William P. Thurston, *The Geometry and Topology of Three-Manifolds*, Chapter 5, §5.8](https://library.slmath.org/nonmsri/gt3m/PDF/5.pdf)

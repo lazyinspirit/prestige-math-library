@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-noninvertible-elliptic-shifts-form-a-discrete-set-in-the-self-adjoint-case.md

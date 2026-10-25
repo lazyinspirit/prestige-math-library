@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-integration-over-the-signed-shuffle-equals-the-product-of-simplex-integrals.md

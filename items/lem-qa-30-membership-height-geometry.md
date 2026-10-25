@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-qa-30-membership-height-geometry.json
+  precheck: pass
 id: lem-qa-30-membership-height-geometry
 kind: lemma
 title: "Height geometry and weak-membership binary search"
@@ -63,4 +66,34 @@ Finally, let $a\ge0$. If $x=-\|x\|e_n$ receives OUT and $h(y)\ge h(0)+\langle v,
 5.1 Maintain endpoints $\ell,u$. Initially $\ell=-R\le h(y)+2\delta/3$ and $u=-r/2\ge h(y)-\delta$. An IN answer replaces $u$ by the midpoint and preserves its lower bound by step 4.1; OUT replaces $\ell$ and preserves its upper bound by step 2.2. When $u-\ell\le\delta/3$, these invariants give $h(y)-\delta\le u\le h(y)+\delta$. Each iteration halves the bracket, proving the logarithmic query count. Fixed finite arithmetic and the deterministic oracle completion make the whole binary-search transcript a function of the input label. Store its transcript, copy its output, and reverse its computation and oracle calls; this implements that value oracle with clean work and only a constant factor more queries. [F1, step 4.1, step 2.2, construct, algebra]
 
 6.1 Write $z=(y,t)\in K$. Evaluating the approximate-subgradient premise at $y=0$ gives $b\ge0$. Since $a\ge0$ and $\|y\|\le R$, that inequality gives $\langle(-v,1),z\rangle=t-\langle v,y\rangle\ge h(0)-aR-b$. At $x=(0,-\|x\|)$ the OUT implication gives $h(0)\ge-\|x\|-2R\varepsilon/r$; if its height is below $-R$, this inequality follows directly from $h(0)\ge-R$. If $\|x\|<r/2$, an OUT answer requires $\varepsilon\ge r/2$ by the inner ball, and the same inequality again follows from $h(0)\ge-R$. Divide by $\|(-v,1)\|\ge1$ to obtain the stated separation inequality. [step 2.2, given, algebra] ∎
+
+## Remarks
+
+The schematic planar section below illustrates the radius sandwich and a vertical query at a fixed $\|y\|\le r/2$. The lower marked point is $(y,t)$; the boundary point above it is $(y,h(y))$. The projection of $K$ onto the horizontal axis is $C$. The drawing is illustrative, not to scale; the proof does not depend on it.
+
+```tikz
+\begin{tikzpicture}[scale=0.95]
+\draw[dashed] (0,0) circle (2.5);
+\draw[thick] (0,0) ellipse (2.25 and 1.7);
+\draw[dotted] (0,0) circle (1);
+\draw[->] (-2.7,0) -- (2.9,0) node[right] {$y$};
+\draw[->] (0,-2.65) -- (0,2.8) node[above] {$t$};
+\draw[->] (0,0) -- (-0.8,0.6) node[left] {$r$};
+\draw[->] (0,0) -- (1.5,2) node[right] {$R$};
+\node at (-1.5,1.15) {$K$};
+\draw[dashed] (0.45,-2.4) -- (0.45,0.3);
+\fill (0.45,-1.6657) circle (1.5pt);
+\draw (0.45,-1.6657) -- (1.25,-1.85) node[right] {$(y,h(y))$};
+\fill (0.45,-2.15) circle (1.5pt);
+\draw (0.45,-2.15) -- (1.25,-2.45) node[right] {$(y,t)$};
+\draw[|-|] (-2.25,-3.05) -- (2.25,-3.05) node[midway,below] {$C$};
+\node[anchor=west] at (3.6,1.7) {$\|y\|\le r/2,\quad t\le-r/2$};
+\node[anchor=west] at (3.6,0.7) {$\mathrm{IN}:\quad t\ge h(y)-3R\varepsilon/r$};
+\node[anchor=west] at (3.6,-0.3) {$\mathrm{OUT}:\quad t\le h(y)+2R\varepsilon/r$};
+\node[anchor=west] at (3.6,-1.5) {$m=(\ell+u)/2$};
+\node[anchor=west] at (3.6,-2.3) {$\mathrm{IN}:\ u\leftarrow m,\quad\mathrm{OUT}:\ \ell\leftarrow m$};
+\end{tikzpicture}
+```
+
+For binary search, the maintained bounds are $\ell\le h(y)+2\delta/3$ and $u\ge h(y)-\delta$, as in step 5.1; $h(y)$ need not lie in $[\ell,u]$. The IN and OUT implications in the figure are one-way bounds and do not prescribe a unique answer in the weak-membership overlap. The clean coherent implementation in step 5.1 stores the deterministic transcript, copies the output, and reverses the computation and oracle calls.
 

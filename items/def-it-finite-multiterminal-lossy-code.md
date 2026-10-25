@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-it-finite-multiterminal-lossy-code.json
+  precheck: n/a
 id: def-it-finite-multiterminal-lossy-code
 kind: definition
 title: "Finite-alphabet multiterminal lossy source code"
@@ -16,12 +19,6 @@ axiom_use: "No choice axiom is used; encoders and decoder are functions on finit
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "Abbas El Gamal and Young-Han Kim, Network Information Theory, author lecture notes"
@@ -45,3 +42,26 @@ Write $\widehat X_i^n$ for the $i$th reconstruction and define its expected per-
 ## Remarks
 
 No encoder observes another encoder's source block. The common decoder receives all message indices and outputs one reconstruction sequence for each source.
+
+The diagram shows the first and last encoder branches; when $k>2$, the intermediate branches have the same form. Each wire into the common decoder carries $m_i=f_{i,n}(X_i^n)\in[M_i]$, where $[M_i]$ is a message alphabet of cardinality $M_i$. The decoder acts on the full tuple $(m_1,\ldots,m_k)$ and returns $(\widehat X_1^n,\ldots,\widehat X_k^n)$.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+\node (x1) at (0,1.2) {$X_1^n$};
+\node (xk) at (0,-1.2) {$X_k^n$};
+\node[draw,minimum width=1.3cm,minimum height=0.8cm] (f1) at (2,1.2) {$f_{1,n}$};
+\node[draw,minimum width=1.3cm,minimum height=0.8cm] (fk) at (2,-1.2) {$f_{k,n}$};
+\node at (0,0) {$\vdots$};
+\node at (2,0) {$\vdots$};
+\node[draw,minimum width=1.3cm,minimum height=3.4cm] (g) at (6,0) {$g_n$};
+\draw[->] (x1) -- (f1);
+\draw[->] (xk) -- (fk);
+\draw[->] (f1.east) -- node[above] {$m_1\in[M_1]$} (5.35,1.2);
+\draw[->] (fk.east) -- node[above] {$m_k\in[M_k]$} (5.35,-1.2);
+\node at (4,0) {$\vdots$};
+\draw[->] (g.east) -- (8,0);
+\node[right] at (8,0) {$(\widehat X_1^n,\ldots,\widehat X_k^n)$};
+\end{tikzpicture}
+```
+
+Here $X_i^n\in\mathcal X_i^n$, and the decoder output lies in $\prod_{i=1}^k\widehat{\mathcal X}_i^n$. The wires depict data flow, with no source access between encoder branches; the source blocks may still be correlated under the given joint law.

@@ -1,16 +1,7 @@
 ---
 verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-7.md"
-      - "research/frontier-38-owner-30-alpha-batch-7-5a.md"
-      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u7.json"
-    content_sha256: "131c46a53a97031b3d41fcf03738eb61a34dfaa928515ffb86a8fb3317e82c6e"
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hom-to-costandards-counts-verma-flag-factors.json
+  precheck: pass
 id: lem-hom-to-costandards-counts-verma-flag-factors
 kind: lemma
 title: Hom to costandards counts Verma-flag factors
@@ -61,7 +52,7 @@ The result is stated for all weights, including equal and incomparable labels.
 
 ## Proof
 
-**Proof technique:** induction on the length of a Verma flag, using the long exact sequence and the $\Delta$-$\nabla$ orthogonality.
+**Proof technique:** induction on the length of a Verma flag, using the long exact sequence and the Δ–∇ orthogonality.
 
 1.1 If $X=0$ has the empty flag, then $\operatorname{Hom}(X,\nabla(\nu))=0$ and $\operatorname{Ext}^1(X,\nabla(\nu))=0$ while all multiplicities $(X:\Delta(\nu))$ vanish, so both formulas hold. [F1, F2, base]
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-convex-and-strictly-convex-functions-on-euclidean-sets.md

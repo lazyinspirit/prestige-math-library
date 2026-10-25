@@ -1,0 +1,91 @@
+{
+  "id": "thm-order-two-field-variogram-is-conditionally-negative-definite",
+  "agent": "/root/rendering_repair_coordinator/sme_001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "findings": [
+    {
+      "original_finding_index": 0,
+      "defect_type": "other: misplaced-display-math",
+      "verdict": "confirmed",
+      "reason": "Independently viewed original standalone 1200x1400 tile at original resolution. In step 2.1 the two-line aligned expression sits beside the lead-in and the first explanatory words, interrupting reading order; it is not image clipping. Current/frozen source places the aligned $$ expression mid-source-line, causing inline KaTeX placement.",
+      "action": "Changed only whitespace: placed opening and closing $$ delimiters on standalone lines, keeping the aligned formula on one source line and the whole numbered step in one Markdown paragraph.",
+      "status": "visually-corrected; legacy-precheck-incompatibility-unresolved"
+    }
+  ],
+  "changed": true,
+  "correction": "Whitespace-only block-display separation in proof step 2.1; exact formulas, hypotheses, argument, tags, title and all frontmatter preserved.",
+  "source_lines_after": [
+    76,
+    77,
+    78,
+    79,
+    80
+  ],
+  "mathematical_meaning_preserved": true,
+  "publication_status_preserved": true,
+  "before_raw_sha256": "a94bcfe6fccaab585f69907071f81eb481c4a569810e3948db3164601b29c73c",
+  "after_raw_sha256": "ee1eec9f1bb0e95bc68e8154b607126f95c754e9d2f78d6ccf62a85eaffa7498",
+  "original_visual_evidence": [
+    {
+      "path": "research/math-library-rendering-audit-2026-10-23/statistical-models-and-experiments/screenshots/thm-order-two-field-variogram-is-conditionally-negative-definite--01.png",
+      "detail": "original",
+      "viewed": true
+    }
+  ],
+  "final_visual_evidence": [
+    {
+      "path": "research/math-library-rendering-repairs-2026-10-23/preview-sme-001-final-20261024/screenshots/thm-order-two-field-variogram-is-conditionally-negative-definite--01.png",
+      "detail": "original",
+      "viewed": true
+    },
+    {
+      "path": "research/math-library-rendering-repairs-2026-10-23/preview-sme-001-final-20261024/screenshots/thm-order-two-field-variogram-is-conditionally-negative-definite--02.png",
+      "detail": "original",
+      "viewed": true
+    }
+  ],
+  "visual_result": "Native preview independently confirms lead-in above centered aligned display and full explanatory sentence below. All three step labels retain genuine blue tags and QED. Both final tiles viewed standalone.",
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-order-two-field-variogram-is-conditionally-negative-definite.md --json",
+      "exit_code": 1,
+      "result": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 1
+        },
+        "error": "untagged-steps"
+      },
+      "explanation": "New compatibility failure, not pre-existing: line-based legacy precheck inspects tags only on numbered source line (worker/src/precheck.ts:183-204). Step 2.1 tags remain correctly on the final continuation line, so only 2/3 numbered source lines appear tagged, below 0.7 threshold. Frozen before actually passed the same scoped checker."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-order-two-field-variogram-is-conditionally-negative-definite.md --json",
+      "exit_code": 0,
+      "result": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-order-two-field-variogram-is-conditionally-negative-definite.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    },
+    {
+      "command": "TSX_TSCONFIG_PATH=/home/lazyinspirit/Projects/prestige-intelligence/web/tsconfig.json node tools/tsx-run.mjs research/math-library-rendering-repairs-2026-10-23/repair-preview.mts --ids thm-order-two-field-variogram-is-conditionally-negative-definite --out research/math-library-rendering-repairs-2026-10-23/preview-sme-001-final-20261024",
+      "exit_code": 0,
+      "result": {
+        "items": 1,
+        "tiles": 2,
+        "reference_map_diagnostics": 16
+      }
+    }
+  ],
+  "remaining_issues": [
+    "Actual legacy precheck remains failed with untagged-steps due its single-source-line tag detection; escalated precise parser evidence to coordinator. Native proof-layout and final native preview confirm correct tags on all three rows. Receipt readiness is held; no pass is claimed."
+  ],
+  "scope_notes": "No HTTP visits, publication, metadata/status/dependency edits, commits, or app/native code changes. Initial preimage guard matched immediately before first edit. Intermediate preview is superseded by final preview after correcting a transient JavaScript replacement-string dollar escaping mistake; only final preview/checks cited as repaired visual evidence."
+}

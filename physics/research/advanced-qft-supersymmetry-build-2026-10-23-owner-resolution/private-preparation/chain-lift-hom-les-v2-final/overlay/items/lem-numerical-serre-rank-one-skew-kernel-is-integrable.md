@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-numerical-serre-rank-one-skew-kernel-is-integrable.md
