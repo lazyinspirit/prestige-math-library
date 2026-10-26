@@ -36,6 +36,24 @@ export function driftScopeHash(ledger, spec) {
     })() })).sort((a, b) => a.id.localeCompare(b.id)) }));
 }
 
+export function verifyNativeAppendReport(root, run, original, current) {
+  if (original.equals(current)) return true;
+  const registry = JSON.parse(readFileSync(local(root, `research/${run}-frontier-appends.json`)));
+  let reconstructed = original.toString('utf8');
+  for (const entry of registry.appends ?? []) {
+    const receipt = JSON.parse(readFileSync(local(root, `${entry.archive}/review-applied.json`)));
+    const added = readFileSync(local(root, entry.report), 'utf8');
+    assert(receipt.run === run && receipt.number === entry.number
+      && receipt.inventoriesPreserved === true
+      && receipt.originalReportSha256 === sha(reconstructed)
+      && receipt.reportSha256 === sha(added), 'invalid native append report binding');
+    reconstructed += `\n\n<!-- native append review ${entry.number}; original preimage retained in ${entry.archive} -->\n` + added;
+    assert(receipt.mergedReportSha256 === sha(reconstructed), 'native merged report changed');
+  }
+  assert(current.toString('utf8') === reconstructed, 'original drift report changed outside native append');
+  return true;
+}
+
 export function loadDriftOwnerResolutions(root, run, report, ledger, spec) {
   root = resolve(root);
   const path = `research/${run}-owner-drift-resolutions.json`;
@@ -47,7 +65,8 @@ export function loadDriftOwnerResolutions(root, run, report, ledger, spec) {
   assert(doc.scope_sha256 === driftScopeHash(ledger, spec), 'owner drift scope changed');
   assert(doc.report?.path === `research/${run}-alpha-step1-drift.md`, 'wrong native drift report');
   const rawReport = bytes(root, doc.report);
-  assert(rawReport.toString('utf8') === report && bytes(root, doc.original_report).equals(rawReport), 'original drift report changed');
+  assert(rawReport.toString('utf8') === report, 'current drift report changed');
+  verifyNativeAppendReport(root, run, bytes(root, doc.original_report), rawReport);
   assert(doc.drift_evidence?.path === `research/${run}-drift-evidence.json`, 'wrong original drift evidence');
   const driftEvidence = JSON.parse(bytes(root, doc.drift_evidence));
   assert(Array.isArray(driftEvidence), 'invalid original drift evidence');

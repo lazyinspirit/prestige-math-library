@@ -26,3 +26,10 @@ plan validation, retaining the full plan and actual prerequisite inputs as
 context. Existing manifests remain guarded by native preimage/integrity checks;
 old content escalations stay held. This follows the owner's minimal-check
 direction and avoids turning a new-pair planning gate into a whole-run audit.
+
+Owner drift resolutions continue to bind the immutable original native report.
+When native append materialization adds reviewed sections, the loader verifies
+each exact report/preimage/merged digest against its native apply receipt and
+reconstructs the entire current report. Unrecorded edits still fail closed.
+The owner separately refreshes current planning scope and document bindings;
+this grants no new finite computation exception or content acceptance.
