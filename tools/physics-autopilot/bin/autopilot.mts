@@ -58,7 +58,7 @@ const { makeExecAdapter } = await import('../src/adapters/exec.mts');
 const { writeCommand } = await import('../src/control.mts');
 const { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } = await import('../src/frontier.mts');
 const { MAX_RUN_PAIRS } = await import('../src/capacity.mjs');
-const { appendFrontier, assertNoAppendTransaction } = await import('../src/frontier-append.mts');
+const { appendFrontier, assertNoAppendTransaction, scanAppendProcesses } = await import('../src/frontier-append.mts');
 const { registerStep2Prerequisites, finishStep2Prerequisites, repairStep2Prerequisites, assertNoPrerequisiteTransaction } = await import('../src/step2-prerequisites.mts');
 const { doctor } = await import('../src/doctor.mts');
 const { writeBatchDependencyLevels } = await import('../../physics-support/batch-dependency-levels.mjs');
@@ -254,6 +254,18 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
+  case 'retire-unknown-step1-dispatch': {
+    const { retireUnknownStep1Dispatch } = await import('../src/unknown-step1-dispatch.mts');
+    const run = opt('run') ?? die('--run is required');
+    try {
+      console.log(JSON.stringify(retireUnknownStep1Dispatch({ repo, run,
+        stateDir: opt('state-dir') ? stateDir : join(repo, '.physics-autopilot', run),
+        key: opt('dispatch') ?? die('--dispatch is required'), reason: opt('reason'),
+        inspect: has('inspect'), scan: scanAppendProcesses }), null, 2));
+    } catch (error: any) { console.error(String(error?.message ?? error)); process.exitCode = 1; }
+    break;
+  }
+
   case 'recover-step6-packaging': {
     const run = opt('run') ?? die('--run is required');
     const authorization = opt('authorization') ?? die('--authorization is required');

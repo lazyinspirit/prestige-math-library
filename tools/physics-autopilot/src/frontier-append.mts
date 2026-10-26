@@ -7,6 +7,7 @@ import { appendRegistry, appendReview, appendHash as hash, appendJSON as read, a
 import { validateDriftOwnerResolutionsBeforeAppend } from '../../physics-support/drift-owner-resolutions.mjs';
 import { authenticateAppendHold } from './step1-hold-evidence.mjs';
 import { MAX_RUN_PAIRS } from './capacity.mjs';
+import { unknownStep1DispatchRetired } from './unknown-step1-dispatch.mts';
 import type { Stage } from './types.mts';
 export { appendRegistry };
 const fail = (why: string): never => { throw Error(`physics plan --append: ${why}`); };
@@ -70,7 +71,7 @@ function inactive(repo: string, run: string, stateDir: string, scan: any) {
     if (state.stages?.['1-scaffold']?.doneAt || state.stages?.['1-scaffold']?.gatesPassedAt
         || Object.entries<any>(state.stages ?? {}).some(([id, s]) => !id.startsWith('1-') && (s.enteredAt || s.doneAt)))
         fail('Step 1 closed or later stage entered');
-    if (Object.values<any>(state.dispatches ?? {}).some(d => d.startedAt && !d.endedAt))
+    if (Object.entries<any>(state.dispatches ?? {}).some(([key, d]) => d.startedAt && !d.endedAt && !unknownStep1DispatchRetired(repo, run, stateDir, key, d)))
         fail('dispatches not drained');
     // Guard both observed native lock names; do not rely on process scanning alone.
     for (const name of ['.controller.lock', 'controller.lock']) {

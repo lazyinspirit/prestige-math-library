@@ -2129,3 +2129,47 @@ preserved. The run remains paused at `6-final-validation-v3`; native start/resum
 must perform fresh metadata/render preparation and all 29 gates before another
 report/commit attempt. Archived passes never supply current coverage. Recovery
 itself runs no models or gates, commits nothing, and neither publishes nor pushes.
+
+### Abandoned unknown Step-1 dispatch observation
+
+An original `1-scaffold:batch-N` author row with `endedAt: null` and
+`lastExitOk: null` may remain after its process disappears without producing a
+native result. Native `retry` only rearms counters; ordinary adopted-result
+reconciliation requires a real result, and author `refresh` requires an original
+success. Root may use this narrowly scoped administrative command only after
+pausing the unfinished Step-1 run, stopping the controller/preflight, and draining
+**all** native/adopted/outside writers. From the repository root:
+
+```sh
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts retire-unknown-step1-dispatch \
+  --run RUN --state-dir physics/.physics-autopilot/RUN \
+  --dispatch 1-scaffold:batch-N \
+  --reason 'Actual Root observation and concrete operational reason' --inspect
+```
+
+Use the same command without `--inspect` to record the observation. Inspection is
+read-only. The command requires the exact positive-attempt unknown native beta
+row, its original nonempty stable and immutable attempt prompts, and the absence
+of **every** stable/immutable/replay result for that identity. A malformed or
+failed result must use ordinary native reconciliation instead. Custom dispatch
+directories are outside this recovery. Symlinked evidence/state paths, live
+controller locks, other open dispatches without authenticated observations,
+active transactions and detected controller/preflight/writers fail closed.
+Creation takes the native controller lock and rechecks all inputs and processes.
+
+The exclusive, read-only JSON receipt and SHA256 sidecar live under
+`STATE_DIR/unknown-step1-dispatch-retirements/`. They preserve the exact original
+raw state snapshot, original row and all original prompt bytes/hashes, the Root
+reason and actual `observed_at`. The outcome stays `unknown`; the receipt gives
+no coverage, success, proof, readiness, review, acceptance or gate credit. It
+writes neither state nor results and never changes original timestamps/counters,
+source, plan or scope. An interrupted or changed receipt fails closed and must
+be inspected; do not replace its evidence by hand.
+
+Only Step-1 prerequisite append's inactive check recognizes this exact original
+row as administratively drained. It reauthenticates the receipt, raw binding,
+unchanged row/prompts and absent results, then retains all ordinary current
+controller/process/writer checks. Any subsequent changed dispatch identity is
+outside the receipt. The original unit remains uncovered and owed through the
+ordinary future native authoring path; the observation grants no append guard
+waiver or stage transition.
