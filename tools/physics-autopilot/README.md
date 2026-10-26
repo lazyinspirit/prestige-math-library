@@ -1,5 +1,9 @@
 # Physics workflow engine
 
+CLI status checks use a shared, nonblocking computation slot across mathematics
+and physics, with explicitly dated five-second caching. See
+[status admission control](../AUTOPILOT-STATUS.md). Worker concurrency is unchanged.
+
 Use `physics/WORKFLOW.md` for the six-step stage table, run controls, owner holds and evidence procedures.
 
 The rebuild plan is `physics/research/workflow-rebuild-plan.md`. Step 1 performs complete initial authoring; Step 2 is the bounded Luna-max whole-batch scope/prerequisite loop. Planning generates group metadata; accepted plan synchronization is part of the Step-2 mechanical handoff. There are no separate assignment or splice stages.

@@ -12,6 +12,7 @@
 
 import { spawnSync } from 'node:child_process';
 import { tsxLoader } from './paths.mjs';
+import { statusFromRunner } from './autopilot-status.mjs';
 
 const [target, ...rest] = process.argv.slice(2);
 if (!target) {
@@ -22,6 +23,14 @@ if (!target) {
 let loader;
 try {
   loader = tsxLoader();
+} catch (error) {
+  console.error(`tsx-run: ${error.message}`);
+  process.exit(2);
+}
+
+try {
+  const status = await statusFromRunner(target, rest, loader);
+  if (status !== null) process.exit(status);
 } catch (error) {
   console.error(`tsx-run: ${error.message}`);
   process.exit(2);

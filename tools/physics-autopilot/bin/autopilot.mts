@@ -26,24 +26,7 @@ import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 
-import { State, statePath } from '../src/state.mts';
-import { assertWorkflowRevision } from '../src/workflow-revision.mts';
-import { Reporter, renderStatus } from '../src/reporter.mts';
-import { Executor } from '../src/executor.mts';
-import { makeExecAdapter } from '../src/adapters/exec.mts';
-import { writeCommand } from '../src/control.mts';
-import { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
-import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
-import { appendFrontier, assertNoAppendTransaction } from '../src/frontier-append.mts';
-import { registerStep2Prerequisites, finishStep2Prerequisites, repairStep2Prerequisites, assertNoPrerequisiteTransaction } from '../src/step2-prerequisites.mts';
-import { doctor } from '../src/doctor.mts';
-import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
-import { formatProblems } from '../src/spec.mts';
-import { acquireControllerLock } from '../src/controller-lock.mts';
-import { reopenStep3 } from '../src/step3-reopen.mts';
-import { inspectStep6PackagingRecovery, recoverStep6Packaging } from '../src/step6-packaging-recovery.mts';
-import type { Config } from '../src/types.mts';
-import { readStatementPolicy, isFreshStatementRun, writeStatementPolicy } from '../../statement-first-policy.mjs';
+import { isStatusComputation, runStatus } from '../../autopilot-status.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -57,6 +40,34 @@ const stateDir = resolve(opt('state-dir', join(repo, '.physics-autopilot')));
 if (repo === resolve(HERE, '../../..')) throw new Error('physics engine refuses the mathematics repository as --repo');
 if (!stateDir.startsWith(repo + '/')) throw new Error('physics state-dir must be inside its workspace');
 const CONFIG_PATH = join(repo, 'physics-autopilot.config.json');
+
+// Acquire the shared, nonblocking status slot before importing the executor or
+// stage graph. Waiting pollers must never build their own expensive snapshots.
+if (cmd === 'status' && !isStatusComputation()) {
+  process.exit(await runStatus({
+    cli: fileURLToPath(import.meta.url), argv, repo, stateDir,
+    guardDir: resolve(HERE, '../../..', '.autopilot'), configPath: CONFIG_PATH,
+  }));
+}
+
+const { State, statePath } = await import('../src/state.mts');
+const { assertWorkflowRevision } = await import('../src/workflow-revision.mts');
+const { Reporter, renderStatus } = await import('../src/reporter.mts');
+const { Executor } = await import('../src/executor.mts');
+const { makeExecAdapter } = await import('../src/adapters/exec.mts');
+const { writeCommand } = await import('../src/control.mts');
+const { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } = await import('../src/frontier.mts');
+const { MAX_RUN_PAIRS } = await import('../src/capacity.mjs');
+const { appendFrontier, assertNoAppendTransaction } = await import('../src/frontier-append.mts');
+const { registerStep2Prerequisites, finishStep2Prerequisites, repairStep2Prerequisites, assertNoPrerequisiteTransaction } = await import('../src/step2-prerequisites.mts');
+const { doctor } = await import('../src/doctor.mts');
+const { writeBatchDependencyLevels } = await import('../../physics-support/batch-dependency-levels.mjs');
+const { formatProblems } = await import('../src/spec.mts');
+const { acquireControllerLock } = await import('../src/controller-lock.mts');
+const { reopenStep3 } = await import('../src/step3-reopen.mts');
+const { inspectStep6PackagingRecovery, recoverStep6Packaging } = await import('../src/step6-packaging-recovery.mts');
+import type { Config } from '../src/types.mts';
+const { readStatementPolicy, isFreshStatementRun, writeStatementPolicy } = await import('../../statement-first-policy.mjs');
 
 function loadConfig(): Config {
   const base: any = {
@@ -622,17 +633,9 @@ switch (cmd) {
   }
 
   case 'status': {
-    // RECOMPUTE, don't print the last report.
-    //
-    // Printing status.md showed a stage as current thirty minutes after it had
-    // cleared, because the file is only rewritten on the report interval. Someone
-    // reading it at 3am would have concluded the run was stuck when it was three
-    // stages further on. Coverage is a set difference over files on disk — it is
-    // cheap to recompute and always true, so compute it.
-    //
-    // The stored file remains the fallback for the case where the run name
-    // cannot be resolved (no config, no --run), which is the only situation
-    // where recomputation is impossible.
+    // Only the shared status-lock holder reaches this computation. Briefly
+    // cached or contended reads are explicitly dated by autopilot-status.mjs;
+    // they cannot certify readiness or drive a transition.
     try {
       const cfg = loadConfig();
       const run = opt('run') ?? cfg.run;
@@ -645,7 +648,10 @@ switch (cmd) {
       console.error(`(live status unavailable: ${err?.message ?? err}; showing the last report)`);
     }
     const p = join(stateDir, 'status.md');
-    if (existsSync(p)) { console.log(readFileSync(p, 'utf8')); break; }
+    if (existsSync(p)) {
+      console.error('(status not recomputed; showing the last controller report)');
+      console.log(readFileSync(p, 'utf8')); break;
+    }
     die('no run configured and no status.md yet; pass --run');
     break;
   }
