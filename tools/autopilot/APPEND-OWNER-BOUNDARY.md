@@ -15,3 +15,8 @@ changes worker concurrency or grants publication authority.
 The immutable `1-baseline` stage may sit between original drift application
 and scaffolding. Appended planning is inserted after that baseline; its existing
 snapshot and history are retained.
+
+Metadata recertification preserves a prior page that is explicitly empty in
+both its original manifest and current plan. It records the page separately as
+an outstanding authoring obligation, grants no item/readiness credit, and still
+rejects missing inventory where the plan declares items.

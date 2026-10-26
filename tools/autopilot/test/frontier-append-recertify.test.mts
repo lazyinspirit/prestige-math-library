@@ -65,3 +65,16 @@ test('published summaries and batch-note strategies retain their actual carriers
   assert.equal(report.subjects, 4);
   assert.ok(report.guards.some((g: any) => g.path === 'research/demo-batch-1.notes.md'));
 });
+
+
+test('preserves explicitly empty prior planned pages without readiness credit', t => {
+  const f = fixture(t);
+  f.old[1].items = [];
+  f.write('demo-batch-1.pages.json', f.old);
+  f.write('plan-spec.json', { pages: [...f.old, ...f.planned] });
+  const report = recertifyAppendFrontier(f.root, 'demo', f.entry);
+  assert.equal(report.subjects, 3);
+  assert.deepEqual(report.empty_prior_pages, ['old-examples']);
+  assert.equal(report.readiness_or_hold_changes, false);
+  assert.equal(readFileSync(join(f.root, 'research', 'demo-step1-def-old.json'), 'utf8'), f.hold);
+});

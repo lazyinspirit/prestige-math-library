@@ -18,9 +18,20 @@ export function recertifyAppendFrontier(root, run, entry) {
   }
   const snapshot = loadStep3(root, run);
   const plannedPages = new Set();
+  const planPages = JSON.parse(readFileSync(join(root, "research", "plan-spec.json"), "utf8")).pages;
+  const emptyPriorPages = [];
   const pages = snapshot.pages.map(page => {
     if (page.items?.length) return page;
-    if (!entry.newPages.includes(page.id)) throw Error(`Empty prior frontier inventory: ${page.id}`);
+    if (!entry.newPages.includes(page.id)) {
+      const declared = planPages.find(row => row.id === page.id);
+      // A genuinely empty original plan is an outstanding authoring obligation,
+      // not lost metadata. Preserve it without certifying any item or readiness.
+      if (Array.isArray(declared?.items) && declared.items.length === 0) {
+        emptyPriorPages.push(page.id);
+        return page;
+      }
+      throw Error(`Empty prior frontier inventory: ${page.id}`);
+    }
     const planned = [...snapshot.planned.values()].filter(row => row.page.id === page.id);
     if (!planned.length) throw Error(`Missing declared append inventory: ${page.id}`);
     plannedPages.add(page.id);
@@ -32,7 +43,7 @@ export function recertifyAppendFrontier(root, run, entry) {
     return replacement;
   });
   if (entry.newPages.some(id => !pages.some(page => page.id === id))) throw Error('Append page absent from manifests');
-  const graph = dependencyLevels(pages, { validateLabels: false });
+  const graph = dependencyLevels(pages.filter(page => !emptyPriorPages.includes(page.id)), { validateLabels: false });
   if (graph.errors.length) throw Error(graph.errors.join('\n'));
   const ordered = [...graph.items].sort(([a], [b]) => graph.levels.get(a) - graph.levels.get(b) || a.localeCompare(b));
   const rows = [];
@@ -74,7 +85,7 @@ export function recertifyAppendFrontier(root, run, entry) {
   }
   const report = { version: 1, run, generation: entry.number, at: new Date().toISOString(),
     mode: 'dependency-ordered formatting/metadata/hash-only', pages: pages.length,
-    subjects: rows.length, rows, guards: [...guards].map(([path, sha256]) => ({ path: relative(root, path), sha256 })),
+    subjects: rows.length, empty_prior_pages: emptyPriorPages, rows, guards: [...guards].map(([path, sha256]) => ({ path: relative(root, path), sha256 })),
     mathematical_review: false, readiness_or_hold_changes: false, main_gate_permission: false };
   const path = join(root, 'research', `${run}-append-${entry.number}-metadata-recert-${randomUUID()}.json`);
   writeFileSync(path, JSON.stringify(report, null, 2) + '\n', { flag: 'wx' });
