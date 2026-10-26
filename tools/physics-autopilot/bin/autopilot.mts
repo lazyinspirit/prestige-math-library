@@ -58,7 +58,7 @@ const { makeExecAdapter } = await import('../src/adapters/exec.mts');
 const { writeCommand } = await import('../src/control.mts');
 const { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } = await import('../src/frontier.mts');
 const { MAX_RUN_PAIRS } = await import('../src/capacity.mjs');
-const { appendFrontier, assertNoAppendTransaction, scanAppendProcesses } = await import('../src/frontier-append.mts');
+const { appendFrontier, assertNoAppendTransaction, scanAppendProcesses, authorizeAppendPbwRoleRepair } = await import('../src/frontier-append.mts');
 const { registerStep2Prerequisites, finishStep2Prerequisites, repairStep2Prerequisites, assertNoPrerequisiteTransaction } = await import('../src/step2-prerequisites.mts');
 const { doctor } = await import('../src/doctor.mts');
 const { writeBatchDependencyLevels } = await import('../../physics-support/batch-dependency-levels.mjs');
@@ -254,6 +254,15 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
+  case 'authorize-append-pbw-role-repair': {
+    const run = opt('run') ?? die('--run is required');
+    try {
+      console.log(JSON.stringify(authorizeAppendPbwRoleRepair({ repo, run,
+        stateDir: opt('state-dir') ? stateDir : join(repo, '.physics-autopilot', run),
+        requestPath: resolve(repo, opt('request') ?? die('--request is required')), inspect: has('inspect') }), null, 2));
+    } catch (error: any) { console.error(String(error?.message ?? error)); process.exitCode = 1; }
+    break;
+  }
   case 'retire-unknown-step1-dispatch': {
     const { retireUnknownStep1Dispatch } = await import('../src/unknown-step1-dispatch.mts');
     const run = opt('run') ?? die('--run is required');

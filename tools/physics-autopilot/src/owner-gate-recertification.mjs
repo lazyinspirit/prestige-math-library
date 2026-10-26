@@ -255,12 +255,20 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   }
   if (appendOnly) {
     bindNativePath(`research/${ctx.run}-frontier-appends.json`);
-    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/src/step1-hold-evidence.mjs','tools/physics-autopilot/stages/step1-hold.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/imported-plan-pages.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
+    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/src/append-pbw-role-repair.mjs','tools/physics-autopilot/src/step1-hold-evidence.mjs','tools/physics-autopilot/stages/step1-hold.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/imported-plan-pages.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
     for(const suffix of ['batch-dependency-levels.json','scope-ledger.json','covers.json','alpha-groups.json'])bindNativePath(`research/${ctx.run}-${suffix}`);
     for (const entry of appendRegistry(ctx.repo, ctx.run).appends) {
       for (const ref of entry.fixedInputs) bindNativePath(ref.path);
       for (const suffix of ['prepared.json','committed.json','new-pages.json']) bindNativePath(`${entry.archive}/${suffix}`);
       bindNativePath(entry.report); bindNativePath(entry.task); bindNativePath(entry.evidence);
+      const roleAuthorization = `research/${ctx.run}-append-1-pbw-role-repair.json`;
+      bindNativePath(roleAuthorization); bindNativePath(roleAuthorization + '.sha256');
+      if (existsSync(join(ctx.repo, roleAuthorization))) {
+        const receipt = readJSON(join(ctx.repo, roleAuthorization));
+        for (const ref of [receipt.entry, receipt.original_manifest, receipt.original_manifest?.archive, receipt.protected_ref, receipt.protected_ref?.archive,
+          receipt.native_author, receipt.native_author?.archive, receipt.native_attempt, receipt.native_attempt?.archive, receipt.native_prompt, receipt.native_prompt?.archive])
+          if (ref?.path) bindNativePath(ref.path);
+      }
       const clarification = `research/${ctx.run}-append-${entry.number}-drift-format-clarification.json`;
       bindNativePath(clarification);
       if (existsSync(join(ctx.repo, clarification))) {

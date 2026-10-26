@@ -1,9 +1,13 @@
 import test from 'node:test';
+import { PBW_ITEM, PBW_PATH, pbwRolePostimage, pbwRoleRepairPath } from '../src/append-pbw-role-repair.mjs';
+import { appendHash } from '../../physics-support/frontier-append-evidence.mjs';
+import { chmodSync } from 'node:fs';
+import { covered } from '../src/coverage.mts';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync, rmSync, symlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { appendFrontier, applyAppendReview, checkAppendReview, appendStages, assertNoAppendTransaction, scanAppendProcesses } from '../src/frontier-append.mts';
+import { appendFrontier, applyAppendReview, checkAppendReview, appendStages, assertNoAppendTransaction, scanAppendProcesses, authorizeAppendPbwRoleRepair } from '../src/frontier-append.mts';
 import { step1HoldPacket, authenticateAppendHold } from '../src/step1-hold-evidence.mjs';
 import { appendDriftView, appendBaseContext } from '../../physics-support/frontier-append-evidence.mjs';
 import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
@@ -739,4 +743,187 @@ test('relocated native append prompts need exact Root-bound frozen result and pr
     assert.ok(appendDriftView(f.repo, 'demo').inputs.includes('research/demo-repository-relocation.json'));
     f.save(prompt, 'Unreviewed changed historical assignment');
     assert.throws(() => appendDriftView(f.repo, 'demo'), /changed historical artifact/);
+});
+
+
+function pbwFixture(t: any) {
+    const f = fixture(t);
+    const dep = 'def-cft-virasoro-verma-module';
+    const source = `---
+id: ${PBW_ITEM}
+kind: lemma
+status: draft
+origin: pipeline
+pipeline_run: demo
+domain: mathematics
+library: mathematics
+deps:
+  - ${dep}
+dependency_roles:
+  ${dep}: formulation-prerequisite
+---
+
+## Statement
+
+PBW applies to the specified induced module.
+
+## Facts & Assumptions
+
+[F1] [[${dep}]] supplies the actual induced module.
+
+## Proof
+
+1.1 Apply the tensor construction to that induced module. [F1] ∎
+`;
+    f.save(PBW_PATH, source);
+    f.save(`items/${dep}.md`, `---
+id: ${dep}
+kind: definition
+domain: mathematics
+status: draft
+deps: []
+---
+
+## Definition
+
+An induced module.
+`);
+    const manifest = JSON.parse(f.read('research/demo-batch-9.pages.json').toString());
+    manifest[0].items = [{id: PBW_ITEM, kind: 'lemma', domain: 'mathematics', title: 'PBW', statement: 'Original full statement.', deps: [dep]}];
+    manifest[1].items = [{id: dep, kind: 'definition', domain: 'mathematics', title: 'Verma module', statement: 'Original definition.', deps: []}];
+    f.save('research/demo-batch-9.pages.json', manifest);
+    const original = { run: 'demo', role: 'beta', label: 'batch-9', covers: ['9'], ok: true, exit_code: 0, attempt: 1, started_at: AT, ended_at: AT };
+    for (const suffix of ['', '.attempt-1']) f.save(`research/demo-dispatch/beta-batch-9${suffix}.result.json`, original);
+    f.save('research/demo-dispatch/beta-batch-9.attempt-1.prompt.md', 'Genuine original batch-9 scoped author assignment.');
+    f.state.dispatches['1-scaffold:batch-9'] = { stage: '1-scaffold', role: 'beta', label: 'batch-9', covers: ['9'], attempts: 1, attempt: 1, lastExitOk: true, startedAt: AT, endedAt: AT };
+    f.save('.physics-autopilot/demo/state.json', f.state);
+    const entry = appendFrontier(f.options); f.review(entry); f.native(entry);
+    const state = JSON.parse(f.read('.physics-autopilot/demo/state.json').toString());
+    state.stage = '1-append-drift-1'; state.paused = true; state.stages[state.stage] = {enteredAt: AT, doneAt: null, gatesPassedAt: null};
+    f.save('.physics-autopilot/demo/state.json', state);
+    const failure = {at: AT, type: 'gate', id: 'append-planned-physics', code: 1, output: `ERROR mathematical-role [${PBW_ITEM}]: mathematical deps must be mathematical-premise`, ok: false};
+    const events = [{at: AT, type: 'gates', message: '1-append-drift-1: running 3 gate(s)'}, failure,
+      {at: AT, type: 'blocked', stage: state.stage, gate: failure.id}].map(e => JSON.stringify(e)).join('\n') + '\n';
+    f.save('.physics-autopilot/demo/events.jsonl', events);
+    const after = pbwRolePostimage(Buffer.from(source), 'demo');
+    const request = {version: 1, run: 'demo', generation: 1, reviewer: '/root', writers_drained: true, writer_scopes: [],
+      reason: 'Root observed the native mathematical-role failure in the supplemental prerequisite gate battery.',
+      mathematical_use: `The actual proof uses ${dep} as its induced-module premise in [F1]; this changes only the incorrect role annotation.`,
+      before_sha256: appendHash(source), after_sha256: appendHash(after)};
+    f.save('.physics-autopilot/demo/request.json', request);
+    const options = {repo: f.repo, run: 'demo', stateDir: f.stateDir, requestPath: join(f.stateDir, 'request.json'), scan: f.options.scan};
+    return {...f, source, after, entry, request, state, events, repairOptions: options};
+}
+
+test('exact original PBW role authorization preserves history, source and coverage; guard admits only computed successor', t => {
+    const f = pbwFixture(t), beforeState = f.read('.physics-autopilot/demo/state.json'), prepared = f.read(`${f.entry.archive}/prepared.json`), oldCoverage = [...covered(join(f.repo, 'research/demo-dispatch'), /beta/)];
+    authorizeAppendPbwRoleRepair({...f.repairOptions, inspect: true});
+    assert.equal(existsSync(join(f.repo, pbwRoleRepairPath('demo'))), false);
+    const receipt = authorizeAppendPbwRoleRepair(f.repairOptions);
+    assert.equal(receipt.mathematical_acceptance, false); assert.equal(receipt.coverage_credit, false);
+    assert.equal(receipt.failed_gate.event.id, 'append-planned-physics');
+    assert.deepEqual(f.read(PBW_PATH), Buffer.from(f.source));
+    assert.deepEqual(f.read('.physics-autopilot/demo/state.json'), beforeState);
+    assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /exact authorized role-only postimage/);
+    f.save(PBW_PATH, f.after.toString());
+    assert.doesNotThrow(() => checkAppendReview(f.repo, 'demo', 1));
+    assert.deepEqual(f.read(`${f.entry.archive}/items/${PBW_ITEM}.md`), Buffer.from(f.source));
+    assert.deepEqual(f.read(`${f.entry.archive}/prepared.json`), prepared);
+    assert.deepEqual([...covered(join(f.repo, 'research/demo-dispatch'), /beta/)], oldCoverage);
+    f.save(PBW_PATH, f.after.toString().replace('tensor construction', 'different argument'));
+    assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /exact authorized role-only postimage/);
+});
+
+test('original PBW role repair refuses active state, closed stage, writers/controllers and missing native failure', t => {
+    const f = pbwFixture(t);
+    for (const change of [{paused: false}, {stage: '1-scaffold'}, {finishedAt: AT}]) {
+      f.save('.physics-autopilot/demo/state.json', {...f.state, ...change});
+      assert.throws(() => authorizeAppendPbwRoleRepair(f.repairOptions));
+    }
+    f.save('.physics-autopilot/demo/state.json', f.state);
+    for (const kind of ['controller', 'preflight', 'writer'])
+      assert.throws(() => authorizeAppendPbwRoleRepair({...f.repairOptions, scan: () => ({controller: [], preflight: [], writer: [], [kind]: [123]})}), /stopped and drained/);
+    f.save('.physics-autopilot/demo/controller.lock', {pid: process.pid});
+    assert.throws(() => authorizeAppendPbwRoleRepair(f.repairOptions), /live controller lock/);
+    rmSync(join(f.stateDir, 'controller.lock'));
+    f.save('.physics-autopilot/demo/events.jsonl', f.events.replace('mathematical-role', 'unrelated-defect'));
+    assert.throws(() => authorizeAppendPbwRoleRepair(f.repairOptions), /gate failure required/);
+});
+
+test('PBW authorization cannot match arbitrary postimages or altered original/native evidence', t => {
+    const f = pbwFixture(t);
+    f.save('.physics-autopilot/demo/request.json', {...f.request, after_sha256: appendHash(f.after.toString() + 'extra')});
+    assert.throws(() => authorizeAppendPbwRoleRepair(f.repairOptions), /exact computed before\/after/);
+    f.save('.physics-autopilot/demo/request.json', f.request);
+    const archive = `${f.entry.archive}/items/${PBW_ITEM}.md`;
+    f.save(archive, f.source + 'Changed archive');
+    assert.throws(() => authorizeAppendPbwRoleRepair(f.repairOptions), /changed bound input/);
+    f.save(archive, f.source);
+    f.save('research/demo-dispatch/beta-batch-9.result.json', '{}');
+    assert.throws(() => authorizeAppendPbwRoleRepair(f.repairOptions), /prior item changed/);
+});
+
+test('PBW successor keeps all other original sources/manifests/plan bindings frozen', t => {
+    const f = pbwFixture(t); authorizeAppendPbwRoleRepair(f.repairOptions); f.save(PBW_PATH, f.after.toString());
+    f.save('items/def-old-1-0.md', 'Unrelated changed source');
+    assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /prior item changed/);
+    f.save('items/def-old-1-0.md', '---\nid: def-old-1-0\nkind: definition\ndomain: mathematics\nstatus: draft\ndeps: []\n---\n\n## Definition\n\nExisting declaration.\n');
+    const manifest = f.read('research/demo-batch-9.pages.json'); f.save('research/demo-batch-9.pages.json', manifest.toString() + '\n');
+    assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /batch-9 manifest changed/);
+    f.save('research/demo-batch-9.pages.json', manifest.toString());
+    const plan = JSON.parse(f.read('research/plan-spec.json').toString()); plan.pages[0].title = 'Changed original plan'; f.save('research/plan-spec.json', plan);
+    assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /canonical plan changed/);
+});
+
+test('changed PBW receipt/history fail and owner snapshot binds authorization absence/presence', t => {
+    const f = pbwFixture(t);
+    const table = appendStages([{id:'1-drift', gates:()=>[]}, {id:'1-scaffold'}] as any, {repo:f.repo,run:'demo'});
+    const gates = table.find(s => s.id === '1-append-drift-1')!.gates!({repo:f.repo,run:'demo'} as any);
+    const ctx = {repo:f.repo,run:'demo',config:{repo:f.repo,run:'demo',dispatchDir:join(f.repo,'research/demo-dispatch')}};
+    mkdirSync(join(f.repo, 'tools/physics-autopilot/src'), {recursive:true});
+    f.save('tools/physics-autopilot/src/append-pbw-role-repair.mjs', '// Native verifier bytes for snapshot.');
+    const before = gateReviewSnapshot(ctx, gates, ['1-append-drift-1']);
+    authorizeAppendPbwRoleRepair(f.repairOptions); f.save(PBW_PATH, f.after.toString());
+    const after = gateReviewSnapshot(ctx, gates, ['1-append-drift-1']); assert.notEqual(after.sha256, before.sha256);
+    assert.ok(after.inputs.some((r: any) => r.path.endsWith(pbwRoleRepairPath('demo') + '.sha256')));
+    assert.ok(after.inputs.some((r: any) => r.path.endsWith('tools/physics-autopilot/src/append-pbw-role-repair.mjs')));
+    f.save('tools/physics-autopilot/src/append-pbw-role-repair.mjs', '// Changed verifier invalidates current preparation.');
+    assert.notEqual(gateReviewSnapshot(ctx, gates, ['1-append-drift-1']).sha256, after.sha256);
+    f.save('.physics-autopilot/demo/events.jsonl', f.events.replace('mathematical-role', 'invented-role'));
+    assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /historical failed-gate evidence changed/);
+    f.save('.physics-autopilot/demo/events.jsonl', f.events);
+    const receipt = join(f.repo, pbwRoleRepairPath('demo')); chmodSync(receipt, 0o600); f.save(pbwRoleRepairPath('demo'), '{}');
+    assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /immutable role authorization changed/);
+});
+
+test('PBW authorization rechecks drain under the native lock and refuses symlinked source', t => {
+    const f = pbwFixture(t); let calls = 0;
+    assert.throws(() => authorizeAppendPbwRoleRepair({...f.repairOptions, scan: () => ({controller: [], preflight: [], writer: ++calls > 1 ? [123] : []})}), /stopped and drained/);
+    assert.equal(existsSync(join(f.repo, pbwRoleRepairPath('demo'))), false);
+    assert.equal(existsSync(join(f.stateDir, 'controller.lock')), false);
+    rmSync(join(f.repo, PBW_PATH));
+    symlinkSync(join(f.repo, f.entry.archive, 'items', `${PBW_ITEM}.md`), join(f.repo, PBW_PATH));
+    assert.throws(() => authorizeAppendPbwRoleRepair(f.repairOptions), /unsafe or symlinked evidence/);
+});
+
+test('PBW postimage computation refuses other identities, reverse roles and duplicate raw role lines', t => {
+    const f = pbwFixture(t);
+    assert.throws(() => pbwRolePostimage(Buffer.from(f.source.replace(`id: ${PBW_ITEM}`, 'id: lem-another-item')), 'demo'), /wrong original item/);
+    assert.throws(() => pbwRolePostimage(f.after, 'demo'), /wrong original item/);
+    assert.throws(() => pbwRolePostimage(Buffer.from(f.source.replace('  def-cft-virasoro-verma-module: formulation-prerequisite', '  def-cft-virasoro-verma-module: formulation-prerequisite\n  def-cft-virasoro-verma-module: formulation-prerequisite')), 'demo'));
+    const authorization = authorizeAppendPbwRoleRepair(f.repairOptions);
+    const receipt = join(f.repo, pbwRoleRepairPath('demo'));
+    assert.equal(authorization.after.raw.replace('  def-cft-virasoro-verma-module: mathematical-premise', '  def-cft-virasoro-verma-module: formulation-prerequisite'), authorization.before.raw);
+    assert.ok(readFileSync(receipt, 'utf8').includes('mathematical_acceptance'));
+});
+
+
+test('PBW role postimage changes the whole role line while preserving earlier comment and quoted substrings', t => {
+    const f = pbwFixture(t);
+    const role = '  def-cft-virasoro-verma-module: formulation-prerequisite';
+    const before = f.source.replace('dependency_roles:\n', `# earlier comment contains ${role} as text\nnote: "Preserve ${role} inside this quoted value"\ndependency_roles:\n`);
+    const expected = before.split('\n').map(line => line === role ? '  def-cft-virasoro-verma-module: mathematical-premise' : line).join('\n');
+    assert.equal(pbwRolePostimage(Buffer.from(before), 'demo').toString(), expected);
+    assert.ok(expected.includes(`# earlier comment contains ${role} as text`));
+    assert.ok(expected.includes(`note: "Preserve ${role} inside this quoted value"`));
 });

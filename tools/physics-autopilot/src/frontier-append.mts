@@ -8,6 +8,8 @@ import { validateDriftOwnerResolutionsBeforeAppend } from '../../physics-support
 import { authenticateAppendHold } from './step1-hold-evidence.mjs';
 import { MAX_RUN_PAIRS } from './capacity.mjs';
 import { unknownStep1DispatchRetired } from './unknown-step1-dispatch.mts';
+import { acquireControllerLock } from './controller-lock.mts';
+import { PBW_PATH, pbwRoleRepairPath, pbwRepairBytes, preparePbwRoleAuthorization, authenticatePbwRoleSuccessor } from './append-pbw-role-repair.mjs';
 import type { Stage } from './types.mts';
 export { appendRegistry };
 const fail = (why: string): never => { throw Error(`physics plan --append: ${why}`); };
@@ -58,12 +60,12 @@ export function scanAppendProcesses({ repo, run, stateDir }: any, proc = '/proc'
     }
     return found;
 }
-function inactive(repo: string, run: string, stateDir: string, scan: any) {
+function inactive(repo: string, run: string, stateDir: string, scan: any, expectedStage = '1-scaffold', ownController = false) {
     if (!resolve(stateDir).startsWith(resolve(repo) + '/'))
         fail('state directory must be inside physics workspace');
     regular(join(stateDir, 'state.json'));
     const state = read(join(stateDir, 'state.json'));
-    if (state.run !== run || state.version !== 1 || !state.paused || state.finishedAt || state.stage !== '1-scaffold')
+    if (state.run !== run || state.version !== 1 || !state.paused || state.finishedAt || state.stage !== expectedStage)
         fail('exact unfinished paused Step 1 required');
     for (const id of ['1-drift', '1-drift-apply'])
         if (!state.stages?.[id]?.doneAt || !state.stages[id].gatesPassedAt)
@@ -77,6 +79,7 @@ function inactive(repo: string, run: string, stateDir: string, scan: any) {
     for (const name of ['.controller.lock', 'controller.lock']) {
         if (existsSync(join(stateDir, name))) {
             const lock = read(join(stateDir, name));
+            if (name === 'controller.lock' && ownController && lock.pid === process.pid) continue;
             if (lock.pid && alive(lock.pid))
                 fail(`live controller lock: ${name}`);
         }
@@ -103,6 +106,8 @@ function noOldPlanChanges(root: string, entry: any) {
         fail('canonical plan changed outside appended pages; no global sync is authorized');
 }
 function oldManifestsUnchanged(root: string, entry: any) {
+    const roleSuccessor = entry.number === 1 && existsSync(join(root, pbwRoleRepairPath(entry.run)))
+        ? authenticatePbwRoleSuccessor(root, entry, { path: PBW_PATH, sha256: entry.protectedItems.find((r: any) => r.path === PBW_PATH)?.sha256 }) : false;
     for (const ref of [...entry.protectedItems ?? [], ...entry.protectedResearch ?? [], ...entry.protectedNative ?? [], ...entry.priorReviewInputs ?? []]) {
         if (ref.sha256 === null) {
             if (existsSync(join(root,ref.path))) fail(`previously absent review input appeared: ${ref.path}`);
@@ -112,7 +117,7 @@ function oldManifestsUnchanged(root: string, entry: any) {
             boundAppendFile(root, ref.archive);
         if (hash(bytes(join(root, ref.path))) !== ref.sha256) {
             if (ref.path === `research/${entry.run}-step1-blockers.json`) authenticateAppendHold(root, entry, ref);
-            else fail(`prior item changed: ${ref.path}`);
+            else if (!(roleSuccessor && ref.path === PBW_PATH && authenticatePbwRoleSuccessor(root, entry, ref))) fail(`prior item changed: ${ref.path}`);
         }
     }
     for (const row of entry.oldManifests) {
@@ -356,6 +361,40 @@ export function appendFrontier({ repo, run, stateDir, pairs, priorPlan, sourceEv
         rmSync(lock, { recursive: true, force: true });
     }
 }
+/** Authorize only the computed original PBW dependency-role successor; never edit sources. */
+export function authorizeAppendPbwRoleRepair({ repo, run, stateDir, requestPath, inspect = false, scan = scanAppendProcesses }: any) {
+    repo = realpathSync(repo);
+    if (realpathSync(stateDir) !== resolve(stateDir)) fail('symlinked state directory');
+    const entry = appendRegistry(repo, run).appends.find((e: any) => e.number === 1);
+    if (!entry || resolve(repo, entry.stateDir) !== resolve(stateDir)) fail('exact original append state identity required');
+    const output = join(repo, pbwRoleRepairPath(run));
+    if (existsSync(output) || existsSync(output + '.sha256')) fail('existing/interrupted PBW role authorization; inspect immutable evidence');
+    const observe = (owned = false) => {
+        assertNoAppendTransaction(stateDir);
+        inactive(repo, run, stateDir, scan, '1-append-drift-1', owned);
+        if (existsSync(join(repo, entry.archive, 'review-applied.json'))) fail('supplemental review already applied');
+        if (existsSync(join(stateDir, 'step6-packaging-recovery.lock'))) fail('unresolved native recovery transaction');
+        oldManifestsUnchanged(repo, entry);
+        noOldPlanChanges(repo, entry);
+        appendReview(repo, run, 1, { requireNative: true });
+        const rawRequest = pbwRepairBytes(repo, requestPath), stateRaw = pbwRepairBytes(repo, join(entry.stateDir, 'state.json')).toString('utf8');
+        const eventsRaw = pbwRepairBytes(repo, join(entry.stateDir, 'events.jsonl')).toString('utf8');
+        const authorization = preparePbwRoleAuthorization(repo, entry, JSON.parse(rawRequest.toString('utf8')), stateRaw, eventsRaw);
+        return { request: hash(rawRequest), state: hash(stateRaw), events: hash(eventsRaw), authorization };
+    };
+    const before = observe();
+    if (inspect) return before.authorization;
+    const release = acquireControllerLock(stateDir, run);
+    try {
+        const after = observe(true);
+        if (before.request !== after.request || before.state !== after.state || before.events !== after.events) fail('role authorization inputs changed while acquiring lock');
+        const raw = JSON.stringify(after.authorization, null, 2) + '\n';
+        writeFileSync(output + '.sha256', hash(raw) + '\n', { flag: 'wx', mode: 0o444 });
+        writeFileSync(output, raw, { flag: 'wx', mode: 0o444 });
+        return after.authorization;
+    } finally { release(); }
+}
+
 export function checkAppendReview(repo: string, run: string, number: number) { const e = appendReview(repo, run, number).entry; noOldPlanChanges(repo, e); oldManifestsUnchanged(repo, e); return e; }
 export function applyAppendReview(repo: string, run: string, number: number, { invoke = invokeDefault(repo) }: any = {}) {
     const { entry, text, native, prompt, ownerInputs } = appendReview(repo, run, number, { requireNative: true });

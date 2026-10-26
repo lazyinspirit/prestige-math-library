@@ -2173,3 +2173,62 @@ controller/process/writer checks. Any subsequent changed dispatch identity is
 outside the receipt. The original unit remains uncovered and owed through the
 ordinary future native authoring path; the observation grants no append guard
 waiver or stage transition.
+
+### Exact original PBW dependency-role repair during supplemental planning
+
+The first append's original-context `mathematical-role` failure on
+`lem-cft-virasoro-verma-pbw-basis` has one native metadata authorization route.
+It admits only that item's existing `def-cft-virasoro-verma-module` role changing
+from `formulation-prerequisite` to `mathematical-premise`. The induced module is
+an actual mathematical premise in [F1] and the proof. No other byte changes are
+admitted: Statement, Proof, body, `deps`, other metadata and every other protected
+source/manifest/plan remain frozen. The mathematical-role validator is unchanged.
+The Step-2 `prerequisites repair-authorize` route does not apply to this boundary.
+
+Root first pauses the unfinished native `1-append-drift-1` stage, stops the
+controller/preflight, and drains all native/adopted/outside writers. A run-local
+request file contains `version: 1`, `run`, `generation: 1`, `reviewer: "/root"`,
+`writers_drained: true`, `writer_scopes: []`, substantive `reason` and
+`mathematical_use` (identifying the actual induced-module premise), and exact
+`before_sha256`/`after_sha256`. The postimage is computed from the protected
+original by exported `pbwRolePostimage(beforeBytes, run)` in
+`tools/physics-autopilot/src/append-pbw-role-repair.mjs`; arbitrary replacement
+bytes, other edges/items, and reverse changes are outside this route.
+
+From the repository root:
+
+```sh
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts authorize-append-pbw-role-repair \
+  --run RUN --state-dir "$PWD/physics/.physics-autopilot/RUN" \
+  --request "$PWD/physics/.physics-autopilot/RUN/pbw-role-request.json" --inspect
+```
+
+Both absolute flags select the same run directory in the physics workspace.
+Inspection is read-only.
+Use the same command without `--inspect` to authorize, then Root performs only
+the exact admitted role-line edit. The command writes no source, state, plan,
+original archive, native result or gate history. It authenticates the current
+append preparation/protected reference, original batch-9 manifest and completed
+native author state/stable result/immutable attempt/prompt, the genuine fresh
+supplemental Alpha result, and the actual native `append-planned-physics`
+mathematical-role failure with its matching append-stage battery/block. It takes
+the controller lock and rechecks frozen inputs, current state and process drain
+before writing exclusive read-only authorization and digest files:
+`research/RUN-append-1-pbw-role-repair.json` and `.json.sha256`.
+
+The receipt archives exact before/prospective-after source bytes and hashes,
+the actual current paused native state and failed-event prefix, and the Root
+reason/use review at the real authorization time. The prospective postimage is
+not claimed to have been applied. Pending authorization blocks native checks
+until current source equals that exact computed postimage. Replay authenticates
+the untouched historical archive, original native bindings and preserved event
+prefix; future native events may append. Changed evidence, receipts, extra source
+changes, symlinks and live writers fail closed. An interrupted authorization must
+be inspected; never replace evidence or alter the original preparation.
+
+This authorizes metadata correction only and supplies no mathematical acceptance,
+readiness, review coverage, native success, or gate credit. Receipt/digest
+presence or absence and verifier bytes bind the native owner snapshot. Root must
+restart at the safe join and obtain fresh actual formatting/metadata preparation
+and the full ordinary append-prefix gate battery against current inputs before
+transition. No previous preparation or pass is carried forward as new coverage.
