@@ -124,7 +124,7 @@ test('saved Step1 completion cannot cover fresh append drift or launch scaffold 
   assert.equal(gates.length, 4);
   assert.equal(gates[0].id, 'append-frontier-metadata-recertify');
   assert.equal(table[3].gates!({ repo: f.repo, run: 'demo' } as any)[0].id, 'append-frontier-metadata-recertify');
-  assert.ok(gates.some((g: any) => g.argv.includes('--run') && g.argv.includes('tools/validate-plan.mjs')));
+  assert.ok(gates.some((g: any) => g.argv.includes('--pages-file') && g.argv.includes('tools/validate-plan.mjs')));
   assert.ok(gates.some((g: any) => g.argv.includes('--before-apply')));
   assert.ok(!table[3].gates!({ repo: f.repo, run: 'demo' } as any).some((g: any) => g.argv.includes('--before-apply')));
   const planned = gates.find((g: any) => g.argv.includes('--pages-file'))!;

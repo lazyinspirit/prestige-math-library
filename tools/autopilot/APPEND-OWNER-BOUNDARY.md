@@ -20,3 +20,9 @@ Metadata recertification preserves a prior page that is explicitly empty in
 both its original manifest and current plan. It records the page separately as
 an outstanding authoring obligation, grants no item/readiness credit, and still
 rejects missing inventory where the plan declares items.
+
+Append planning selects only the explicitly appended pages for metadata and
+plan validation, retaining the full plan and actual prerequisite inputs as
+context. Existing manifests remain guarded by native preimage/integrity checks;
+old content escalations stay held. This follows the owner's minimal-check
+direction and avoids turning a new-pair planning gate into a whole-run audit.

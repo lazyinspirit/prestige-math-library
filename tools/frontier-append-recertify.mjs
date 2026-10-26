@@ -5,7 +5,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { loadStep3, itemHash, itemInputPaths } from './step3-decisions.mjs';
 import { dependencyLevels } from './item-dependency-levels.mjs';
 
-export function recertifyAppendFrontier(root, run, entry) {
+export function recertifyAppendFrontier(root, run, entry, options = {}) {
   if (entry.run !== run || !entry.newPages?.length) throw Error('Nonempty append scope required');
   const digest = bytes => createHash('sha256').update(bytes).digest('hex');
   const guards = new Map();
@@ -20,7 +20,8 @@ export function recertifyAppendFrontier(root, run, entry) {
   const plannedPages = new Set();
   const planPages = JSON.parse(readFileSync(join(root, "research", "plan-spec.json"), "utf8")).pages;
   const emptyPriorPages = [];
-  const pages = snapshot.pages.map(page => {
+  const selected = options.appendedOnly ? snapshot.pages.filter(page => entry.newPages.includes(page.id)) : snapshot.pages;
+  const pages = selected.map(page => {
     if (page.items?.length) return page;
     if (!entry.newPages.includes(page.id)) {
       const declared = planPages.find(row => row.id === page.id);
@@ -43,11 +44,13 @@ export function recertifyAppendFrontier(root, run, entry) {
     return replacement;
   });
   if (entry.newPages.some(id => !pages.some(page => page.id === id))) throw Error('Append page absent from manifests');
-  const graph = dependencyLevels(pages.filter(page => !emptyPriorPages.includes(page.id)), { validateLabels: false });
+  const graphPages = options.appendedOnly ? snapshot.pages.map(page => pages.find(selected => selected.id === page.id) ?? page).filter(page => page.items?.length) : pages.filter(page => !emptyPriorPages.includes(page.id));
+  const graph = dependencyLevels(graphPages, { validateLabels: false });
   if (graph.errors.length) throw Error(graph.errors.join('\n'));
   const ordered = [...graph.items].sort(([a], [b]) => graph.levels.get(a) - graph.levels.get(b) || a.localeCompare(b));
   const rows = [];
   for (const [id, { item, page }] of ordered) {
+    if (options.appendedOnly && !entry.newPages.includes(page.id)) continue;
     if (!item.kind || !item.title?.trim() || !Array.isArray(item.deps))
       throw Error(`Malformed frontier metadata: ${id}`);
     const canonical = join(root, 'items', `${id}.md`);
@@ -84,7 +87,7 @@ export function recertifyAppendFrontier(root, run, entry) {
     if (current !== expected) throw Error(`Input changed during recertification: ${relative(root, path)}`);
   }
   const report = { version: 1, run, generation: entry.number, at: new Date().toISOString(),
-    mode: 'dependency-ordered formatting/metadata/hash-only', pages: pages.length,
+    mode: 'dependency-ordered formatting/metadata/hash-only', scope: options.appendedOnly ? 'appended-pages-with-prerequisite-context' : 'entire-frontier', pages: pages.length,
     subjects: rows.length, empty_prior_pages: emptyPriorPages, rows, guards: [...guards].map(([path, sha256]) => ({ path: relative(root, path), sha256 })),
     mathematical_review: false, readiness_or_hold_changes: false, main_gate_permission: false };
   const path = join(root, 'research', `${run}-append-${entry.number}-metadata-recert-${randomUUID()}.json`);

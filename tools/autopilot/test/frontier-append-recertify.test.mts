@@ -78,3 +78,15 @@ test('preserves explicitly empty prior planned pages without readiness credit', 
   assert.equal(report.readiness_or_hold_changes, false);
   assert.equal(readFileSync(join(f.root, 'research', 'demo-step1-def-old.json'), 'utf8'), f.hold);
 });
+
+test('appended scope retains prerequisite context without revalidating unrelated old metadata', t => {
+  const f = fixture(t);
+  delete f.old[1].items[0].title;
+  f.write('demo-batch-1.pages.json', f.old);
+  const report = recertifyAppendFrontier(f.root, 'demo', f.entry, { appendedOnly: true });
+  assert.equal(report.subjects, 2);
+  assert.equal(report.pages, 2);
+  assert.equal(report.scope, 'appended-pages-with-prerequisite-context');
+  assert.equal(report.readiness_or_hold_changes, false);
+  assert.equal(readFileSync(join(f.root, 'research', 'demo-step1-def-old.json'), 'utf8'), f.hold);
+});

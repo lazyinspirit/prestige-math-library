@@ -15,7 +15,7 @@ try {
   if (action === 'recertify') {
     const entry = appendRegistry(process.cwd(), run).appends.find((entry: any) => entry.number === number);
     if (!entry) throw new Error('unknown append generation');
-    const report = recertifyAppendFrontier(process.cwd(), run, entry);
+    const report = recertifyAppendFrontier(process.cwd(), run, entry, { appendedOnly: true });
     console.log(`APPEND_RECERT ${report.subjects} item(s), ${report.pages} pages: ${report.path}`);
   } else if (action === 'check-review') {
     const entry = checkAppendReview(process.cwd(), run, number);
