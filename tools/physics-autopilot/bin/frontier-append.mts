@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-import { checkAppendReview, applyAppendReview } from '../src/frontier-append.mts';
+import { checkAppendReview, applyAppendReview, assertAppendApplyBoundary } from '../src/frontier-append.mts';
 import { appendRegistry } from '../../physics-support/frontier-append-evidence.mjs';
-import { readFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { resolve } from 'node:path';
 const args = process.argv.slice(2), action = args[0];
 const option = (name: string) => { const i = args.indexOf(name); return i < 0 ? undefined : args[i + 1]; };
 try {
@@ -14,9 +13,8 @@ try {
         console.log(`APPEND_REVIEW ${e.pairs.length} page(s), generation ${n}`);
     }
     else if (action === 'apply') {
-        const stateDir = resolve(option('--state-dir') ?? `.physics-autopilot/${run}`), state = JSON.parse(readFileSync(join(stateDir, 'state.json'), 'utf8'));
-        if (state.run !== run || state.stage !== `1-append-apply-${n}` || state.finishedAt || Object.entries<any>(state.dispatches ?? {}).some(([, d]) => d.startedAt && !d.endedAt && d.label !== `drift-append-apply-${n}`))
-            throw Error('apply requires exact native supplemental apply stage and drained other writers');
+        const stateDir = resolve(option('--state-dir') ?? `.physics-autopilot/${run}`);
+        assertAppendApplyBoundary(process.cwd(), run, n, stateDir);
         const e = appendRegistry(process.cwd(), run).appends.find((e: any) => e.number === n);
         if (!e)
             throw Error('unknown generation');

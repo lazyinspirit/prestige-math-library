@@ -395,6 +395,62 @@ export function authorizeAppendPbwRoleRepair({ repo, run, stateDir, requestPath,
     } finally { release(); }
 }
 
+/** Native apply may own exactly its tool lane; every other writer must be absent. */
+export function assertAppendApplyBoundary(repo: string, run: string, number: number, stateDir: string, scan = scanAppendProcesses) {
+    repo = realpathSync(repo);
+    if (realpathSync(stateDir) !== resolve(stateDir)) fail('symlinked native apply state');
+    const entry = appendRegistry(repo, run).appends.find((e: any) => e.number === number);
+    if (!entry || resolve(repo, entry.stateDir) !== resolve(stateDir)) fail('wrong native apply state identity');
+    const state = JSON.parse(pbwRepairBytes(repo, join(entry.stateDir, 'state.json')).toString('utf8'));
+    const stage = `1-append-apply-${number}`, label = `drift-append-apply-${number}`, ownKey = `${stage}:${label}`;
+    const own = state.dispatches?.[ownKey];
+    if (state.version !== 1 || state.run !== run || state.stage !== stage || state.finishedAt
+        || state.stages?.['1-scaffold']?.doneAt || state.stages?.['1-scaffold']?.gatesPassedAt
+        || Object.entries<any>(state.stages ?? {}).some(([id,s]) => !id.startsWith('1-') && (s.enteredAt || s.doneAt))
+        || state.stages?.[stage]?.doneAt || !state.stages?.[`1-append-drift-${number}`]?.gatesPassedAt
+        || !state.stages?.[`1-append-drift-${number}`]?.doneAt
+        || own?.stage !== stage || own.role !== 'tool' || own.label !== label
+        || JSON.stringify(own.covers) !== JSON.stringify([`append-${number}`]) || own.attempt !== own.attempts || own.attempt < 1
+        || !Number.isInteger(own.attempt) || !Number.isFinite(Date.parse(own.startedAt)) || own.endedAt !== null || own.lastExitOk !== null)
+        fail('apply requires exact current native supplemental tool row and completed drift prefix');
+    for (const [key, row] of Object.entries<any>(state.dispatches ?? {}))
+        if (key !== ownKey && row.startedAt && !row.endedAt && !unknownStep1DispatchRetired(repo, run, stateDir, key, row))
+            fail('apply requires drained other writers');
+    // Only this invocation's exact apply wrappers and lock-owning controller may
+    // accompany the native child. A matching label elsewhere is not ownership.
+    const ancestors = new Set<number>(), wrappers = new Set<number>();
+    let pid = process.ppid;
+    while (pid > 1 && !ancestors.has(pid)) {
+        ancestors.add(pid);
+        try {
+            const path = `/proc/${pid}`, args = readFileSync(join(path, 'cmdline'), 'utf8').split('\0').filter(Boolean);
+            const option = (name: string) => {const i = args.indexOf('--' + name); return i < 0 ? null : args[i + 1];};
+            if (args.some(a => a.endsWith('physics-autopilot/bin/frontier-append.mts')) && args.includes('apply')
+                && option('run') === run && option('generation') === String(number)
+                && readlinkSync(join(path, 'cwd')) === repo
+                && resolve(repo, option('state-dir') ?? `.physics-autopilot/${run}`) === resolve(stateDir)) wrappers.add(pid);
+            pid = Number(/^PPid:\s+(\d+)/m.exec(readFileSync(join(path, 'status'), 'utf8'))?.[1]);
+            if (!Number.isInteger(pid)) fail('native apply process ancestry unavailable');
+        } catch (e: any) { if (e.code === 'ENOENT' || e.code === 'ESRCH') break; throw e; }
+    }
+    const live = scan({repo, run, stateDir});
+    let controller: number | null = null;
+    for (const name of ['.controller.lock', 'controller.lock']) {
+        const path = join(stateDir, name); if (!existsSync(path)) continue;
+        const owner = JSON.parse(pbwRepairBytes(repo, relative(repo, path)).toString('utf8'));
+        if (!Number.isInteger(owner.pid) || owner.pid < 1) fail('unverifiable native controller lock');
+        if (!alive(owner.pid)) continue;
+        if (name !== 'controller.lock' || owner.run !== run || !ancestors.has(owner.pid) || !live.controller.includes(owner.pid))
+            fail('foreign live controller during native apply');
+        controller = owner.pid;
+    }
+    if (live.preflight.length || live.controller.some((p: number) => p !== controller) || live.writer.some((p: number) => !wrappers.has(p)))
+        fail('other controller/preflight/writers must be absent during native apply');
+    if (controller === null) fail('native apply requires its live lock-owning ancestor controller');
+    assertNoAppendTransaction(stateDir);
+    return state;
+}
+
 export function checkAppendReview(repo: string, run: string, number: number) { const e = appendReview(repo, run, number).entry; noOldPlanChanges(repo, e); oldManifestsUnchanged(repo, e); return e; }
 export function applyAppendReview(repo: string, run: string, number: number, { invoke = invokeDefault(repo) }: any = {}) {
     const { entry, text, native, prompt, ownerInputs } = appendReview(repo, run, number, { requireNative: true });

@@ -2166,11 +2166,12 @@ writes neither state nor results and never changes original timestamps/counters,
 source, plan or scope. An interrupted or changed receipt fails closed and must
 be inspected; do not replace its evidence by hand.
 
-Only Step-1 prerequisite append's inactive check recognizes this exact original
-row as administratively drained. It reauthenticates the receipt, raw binding,
+Step-1 prerequisite append's inactive and native supplemental apply checks
+recognize this exact original row as administratively drained. It reauthenticates the receipt, raw binding,
 unchanged row/prompts and absent results, then retains all ordinary current
-controller/process/writer checks. Any subsequent changed dispatch identity is
-outside the receipt. The original unit remains uncovered and owed through the
+controller/process/writer checks. A changed row is outside the original receipt;
+only the separately authenticated native-rearm succession below can preserve
+absence across its exact administrative counter reset. The original unit remains uncovered and owed through the
 ordinary future native authoring path; the observation grants no append guard
 waiver or stage transition.
 
@@ -2232,3 +2233,65 @@ presence or absence and verifier bytes bind the native owner snapshot. Root must
 restart at the safe join and obtain fresh actual formatting/metadata preparation
 and the full ordinary append-prefix gate battery against current inputs before
 transition. No previous preparation or pass is carried forward as new coverage.
+
+### Native retry succession of an already retired unknown author
+
+A global native `retry` resets both policy counters of an unfinished unknown
+row to zero. It does not establish execution failure, retire history or create a
+new dispatch. Its changed counters no longer match an earlier exact absence
+receipt. Never restore counters, edit that original receipt, or create a result
+to reconcile this administrative change.
+
+For the first append only, after the genuine drift-prefix gates pass and the
+run pauses at unfinished `1-append-apply-1`, Root may record a separate native
+rearm absence observation. Stop the controller/preflight and drain **all**
+native/adopted/outside writers first. From the repository root:
+
+```sh
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts retire-unknown-step1-dispatch-rearm \
+  --run RUN --state-dir "$PWD/physics/.physics-autopilot/RUN" \
+  --dispatch 1-scaffold:batch-N \
+  --reason 'Actual Root observation of the native administrative retry and continued process absence' --inspect
+```
+
+Use the same command without `--inspect` after inspecting the evidence. The
+command authenticates the unchanged original positive-attempt-one absence
+receipt/digest, the original append preparation and archived row, and only the
+exact `attempt: 1, attempts: 1` to `0, 0` succession. Every other current row
+field, including original start time and unknown outcome, must match exactly.
+Original prompts must remain unchanged, with no new original-stem attempt/replay
+prompt or stable/immutable result. One genuine native global `retry-armed` event
+must follow the original observation and state exactly one unfinished lane and
+zero failed lanes. Any later dispatch of that exact original stage/role/label
+or key fails. A distinct genuine refresh identity remains separate and gives the
+original unknown dispatch no credit.
+
+The second read-only receipt and digest are adjacent to the original under
+`STATE_DIR/unknown-step1-dispatch-retirements/SHA256(DISPATCH_KEY).rearm.json`
+and `.rearm.json.sha256`. They retain the original receipt digest/positive row,
+the exact zero-counter raw paused state, actual native retry event and immutable
+event prefix, Root reason, current observed time and empty process observation.
+The command takes the native controller lock and rechecks inputs/process absence
+before exclusive publication. It edits no original receipt, source, scope,
+state, history, timestamps or counters, and supplies no result, success,
+acceptance, readiness, review, coverage or gate credit. Interrupted or changed
+evidence fails closed; later native events may append to the preserved prefix.
+The original unit remains uncovered and owed through a valid future native
+authoring route.
+
+The actual supplemental `apply` CLI now uses the same authenticated original
+absence/succession predicate for other open rows. It requires its exact active
+native tool row, completed drift prefix and correct state identity. Process
+checking requires that invocation's live lock-owning ancestor controller and
+permits only its own exact apply wrappers alongside that controller. A manual
+child with only an orphaned active tool row is rejected; other controllers, preflight and writers fail.
+Original scientific/source/manifest/plan preservation and all ordinary gates
+remain mandatory. Native owner planning snapshots bind original and successor
+receipt/digest presence or absence and the actual verifier/CLI code, so obtain
+fresh current preparation and the full apply battery after this tooling/recovery.
+
+Use `retry --unit append-1` for this supplemental lane. Physics CLI `retry`
+rejects unsupported `--stage` explicitly before writing control; a stage flag
+never limited native retry scope. Unscoped retry otherwise retains its ordinary
+native semantics. Existing `refresh` requirements, including its original
+successful-result prerequisite, are unchanged by this administrative route.

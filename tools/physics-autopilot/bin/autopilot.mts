@@ -263,11 +263,13 @@ switch (cmd) {
     } catch (error: any) { console.error(String(error?.message ?? error)); process.exitCode = 1; }
     break;
   }
+  case 'retire-unknown-step1-dispatch-rearm':
   case 'retire-unknown-step1-dispatch': {
-    const { retireUnknownStep1Dispatch } = await import('../src/unknown-step1-dispatch.mts');
+    const { retireUnknownStep1Dispatch, retireUnknownStep1NativeRearm } = await import('../src/unknown-step1-dispatch.mts');
+    const observe = cmd === 'retire-unknown-step1-dispatch-rearm' ? retireUnknownStep1NativeRearm : retireUnknownStep1Dispatch;
     const run = opt('run') ?? die('--run is required');
     try {
-      console.log(JSON.stringify(retireUnknownStep1Dispatch({ repo, run,
+      console.log(JSON.stringify(observe({ repo, run,
         stateDir: opt('state-dir') ? stateDir : join(repo, '.physics-autopilot', run),
         key: opt('dispatch') ?? die('--dispatch is required'), reason: opt('reason'),
         inspect: has('inspect'), scan: scanAppendProcesses }), null, 2));
@@ -701,6 +703,7 @@ switch (cmd) {
   }
 
   case 'retry': {
+    if (argv.some(arg => arg === '--stage' || arg.startsWith('--stage='))) die('retry does not support --stage; use --unit (for example --unit append-1)');
     writeCommand(stateDir, 'retry', opt('unit') ? { unit: opt('unit') } : {});
     console.log('retry armed');
     break;

@@ -255,12 +255,18 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   }
   if (appendOnly) {
     bindNativePath(`research/${ctx.run}-frontier-appends.json`);
-    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/src/append-pbw-role-repair.mjs','tools/physics-autopilot/src/step1-hold-evidence.mjs','tools/physics-autopilot/stages/step1-hold.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/imported-plan-pages.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
+    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/src/append-pbw-role-repair.mjs','tools/physics-autopilot/src/unknown-step1-dispatch.mts','tools/physics-autopilot/src/controller-lock.mts','tools/physics-autopilot/bin/autopilot.mts','tools/physics-autopilot/src/step1-hold-evidence.mjs','tools/physics-autopilot/stages/step1-hold.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/imported-plan-pages.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
     for(const suffix of ['batch-dependency-levels.json','scope-ledger.json','covers.json','alpha-groups.json'])bindNativePath(`research/${ctx.run}-${suffix}`);
     for (const entry of appendRegistry(ctx.repo, ctx.run).appends) {
       for (const ref of entry.fixedInputs) bindNativePath(ref.path);
       for (const suffix of ['prepared.json','committed.json','new-pages.json']) bindNativePath(`${entry.archive}/${suffix}`);
       bindNativePath(entry.report); bindNativePath(entry.task); bindNativePath(entry.evidence);
+      const nativeState = readJSON(join(ctx.repo, entry.stateDir, 'state.json'));
+      for (const [key, row] of Object.entries(nativeState.dispatches ?? {})) {
+        if (row.stage !== '1-scaffold' || !row.startedAt || row.endedAt) continue;
+        const originalAbsence = join(ctx.repo, entry.stateDir, 'unknown-step1-dispatch-retirements', `${digest(key)}.json`);
+        for (const path of [originalAbsence, originalAbsence + '.sha256', originalAbsence.replace(/\.json$/, '.rearm.json'), originalAbsence.replace(/\.json$/, '.rearm.json.sha256')]) bind(path);
+      }
       const roleAuthorization = `research/${ctx.run}-append-1-pbw-role-repair.json`;
       bindNativePath(roleAuthorization); bindNativePath(roleAuthorization + '.sha256');
       if (existsSync(join(ctx.repo, roleAuthorization))) {

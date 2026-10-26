@@ -2,21 +2,26 @@ import test from 'node:test';
 import { PBW_ITEM, PBW_PATH, pbwRolePostimage, pbwRoleRepairPath } from '../src/append-pbw-role-repair.mjs';
 import { appendHash } from '../../physics-support/frontier-append-evidence.mjs';
 import { chmodSync } from 'node:fs';
-import { covered } from '../src/coverage.mts';
+import { covered, pending } from '../src/coverage.mts';
+import { retireUnknownStep1Dispatch, retireUnknownStep1NativeRearm, unknownStep1DispatchRetired } from '../src/unknown-step1-dispatch.mts';
+import { State } from '../src/state.mts';
+import { Executor } from '../src/executor.mts';
+import { Reporter } from '../src/reporter.mts';
+import { writeCommand } from '../src/control.mts';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync, rmSync, symlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { appendFrontier, applyAppendReview, checkAppendReview, appendStages, assertNoAppendTransaction, scanAppendProcesses, authorizeAppendPbwRoleRepair } from '../src/frontier-append.mts';
+import { appendFrontier, applyAppendReview, checkAppendReview, appendStages, assertNoAppendTransaction, scanAppendProcesses, authorizeAppendPbwRoleRepair, assertAppendApplyBoundary } from '../src/frontier-append.mts';
 import { step1HoldPacket, authenticateAppendHold } from '../src/step1-hold-evidence.mjs';
 import { appendDriftView, appendBaseContext } from '../../physics-support/frontier-append-evidence.mjs';
 import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
 import { gateReviewSnapshot } from '../src/owner-gate-recertification.mjs';
 import { driftOwnerResolutionTemplate, validateDriftOwnerResolutions, driftHash } from '../../physics-support/drift-owner-resolutions.mjs';
-import { spawnSync } from 'node:child_process';
+import { spawnSync, spawn } from 'node:child_process';
 import { validateStages } from '../src/spec.mts';
 const AT = '2026-10-23T00:00:00.000Z';
-function fixture(t: any, newPairCount = 3) {
+function fixture(t: any, newPairCount = 3, oldPairCount = 55) {
     const repo = mkdtempSync(join(tmpdir(), 'physics-append-'));
     t.after(() => rmSync(repo, { recursive: true, force: true }));
     const dir = join(repo, 'research'), stateDir = join(repo, '.physics-autopilot', 'demo');
@@ -26,7 +31,7 @@ function fixture(t: any, newPairCount = 3) {
     const read = (p: string) => readFileSync(join(repo, p));
     const pair = (id: string, order: number, requires: string[] = []) => [{ id, title: id, kind: 'A', category: 'math', library: 'mathematics', companion: id + '-examples', order, requires, items: [] }, { id: id + '-examples', title: id + ' examples', kind: 'B', category: 'math', library: 'mathematics', companion: id, order, requires: [id], items: [] }];
     const oldPages: any[] = [], ledger: any[] = [];
-    for (let n = 1; n <= 55; n++) {
+    for (let n = 1; n <= oldPairCount; n++) {
         const pp = pair('old-' + n, 100 + n);
         oldPages.push(...pp);
         const manifest = pp.map((p: any, i: number) => ({ ...p, requires: n === 3 && !i ? ['old-2'] : p.requires, items: [{ id: `def-old-${n}-${i}`, kind: 'definition', domain: 'mathematics', title: 'Existing ' + n, statement: 'An unchanged prior declaration.', deps: [] }] }));
@@ -926,4 +931,152 @@ test('PBW role postimage changes the whole role line while preserving earlier co
     assert.equal(pbwRolePostimage(Buffer.from(before), 'demo').toString(), expected);
     assert.ok(expected.includes(`# earlier comment contains ${role} as text`));
     assert.ok(expected.includes(`note: "Preserve ${role} inside this quoted value"`));
+});
+
+
+function rearmFixture(t: any) {
+    const f = fixture(t, 3, 97), key = '1-scaffold:batch-92';
+    const state = new State(join(f.stateDir, 'state.json'));
+    const row = state.recordDispatchStart(key, {stage:'1-scaffold', role:'beta', label:'batch-92', covers:['92']});
+    for (const suffix of ['', '.attempt-1']) f.save(`research/demo-dispatch/beta-batch-92${suffix}.prompt.md`, 'Genuine original scoped unit-92 assignment, with unknown execution outcome.');
+    const observation = {repo:f.repo, run:'demo', stateDir:f.stateDir, key, reason:'Root confirms the absent original author and preserves unknown outcome and owed unit92.', scan:f.options.scan};
+    retireUnknownStep1Dispatch(observation);
+    const entry = appendFrontier(f.options); f.review(entry); f.native(entry);
+    const current = new State(join(f.stateDir, 'state.json'));
+    current.data.stage = '1-append-drift-1';
+    current.data.stages['1-append-drift-1'] = {enteredAt:AT, gatesPassedAt:AT, doneAt:AT, fixRounds:0}; current.save();
+    const config = {repo:f.repo, run:'demo', stateDir:f.stateDir, dispatchDir:join(f.repo,'research/demo-dispatch'), concurrency:1, globalConcurrency:1, adoptCommand:false};
+    const ex = new Executor({config, stages:[], adapter:{name:'fixture', describe:()=>'', invoke:async()=>({ok:true,code:0,stdout:'',stderr:''})}, state:current,
+      reporter:new Reporter({dir:f.stateDir,sink:()=>{}})} as any);
+    writeCommand(f.stateDir, 'retry'); ex.handleControl();
+    assert.equal(ex.state.data.dispatches[key].attempt, 0);
+    ex.state.data.stage = '1-append-apply-1'; ex.state.data.stages['1-append-apply-1'] = {enteredAt:new Date().toISOString(), doneAt:null, gatesPassedAt:null, fixRounds:0}; ex.state.save();
+    return {...f, key, row, entry, state:ex.state, observation};
+}
+
+test('native original retirement -> append preparation -> actual global retry -> rearm observation -> real CLI apply preserves owed unit92', t => {
+    const f = rearmFixture(t), current = f.state.data.dispatches[f.key];
+    assert.equal(unknownStep1DispatchRetired(f.repo,'demo',f.stateDir,f.key,current), false);
+    const originalFiles = readdirSync(join(f.stateDir,'unknown-step1-dispatch-retirements')).map(n => [n, readFileSync(join(f.stateDir,'unknown-step1-dispatch-retirements',n))] as const);
+    const stateBefore = f.read('.physics-autopilot/demo/state.json'), eventsBefore = f.read('.physics-autopilot/demo/events.jsonl');
+    const seen = retireUnknownStep1NativeRearm({...f.observation,inspect:true});
+    assert.equal(seen.rearmed_row.attempt,0);
+    const receipt = retireUnknownStep1NativeRearm(f.observation);
+    assert.equal(receipt.original_row.attempt,1); assert.equal(receipt.coverage_credit,false);
+    assert.equal(unknownStep1DispatchRetired(f.repo,'demo',f.stateDir,f.key,current),true);
+    assert.deepEqual(f.read('.physics-autopilot/demo/state.json'),stateBefore);
+    assert.deepEqual(f.read('.physics-autopilot/demo/events.jsonl'),eventsBefore);
+    for(const [name,raw] of originalFiles) assert.deepEqual(readFileSync(join(f.stateDir,'unknown-step1-dispatch-retirements',name)),raw);
+    f.state.recordDispatchStart('1-append-apply-1:drift-append-apply-1',{stage:'1-append-apply-1',role:'tool',label:'drift-append-apply-1',covers:['append-1']});
+    symlinkSync(new URL('../../',import.meta.url).pathname.replace(/\/$/,''),join(f.repo,'tools'));
+    const runner = new URL('../../tsx-run.mjs',import.meta.url).pathname, cli = new URL('../bin/frontier-append.mts',import.meta.url).pathname;
+    const result = spawnSync(process.execPath,[runner,cli,'apply','--run','demo','--generation','1','--state-dir',f.stateDir],{cwd:f.repo,encoding:'utf8'});
+    assert.notEqual(result.status,0);
+    assert.match(result.stderr,/requires its live lock-owning ancestor controller/);
+    assert.equal(existsSync(join(f.repo,f.entry.archive,'review-applied.json')),false);
+    // A native controller ancestor may accompany its own apply child; a
+    // separately started controller with the same label remains forbidden.
+    const harness = `const fs=require('node:fs'), cp=require('node:child_process'); fs.writeFileSync(${JSON.stringify(join(f.stateDir,'controller.lock'))},JSON.stringify({pid:process.pid,run:'demo'})); const r=cp.spawnSync(process.execPath,${JSON.stringify([runner,cli,'apply','--run','demo','--generation','1','--state-dir',f.stateDir])},{cwd:${JSON.stringify(f.repo)},encoding:'utf8'}); fs.unlinkSync(${JSON.stringify(join(f.stateDir,'controller.lock'))}); process.stdout.write(r.stdout);process.stderr.write(r.stderr);process.exit(r.status??1);`;
+    const nativeChild = spawnSync(process.execPath,['-e',harness,'--','tools/physics-autopilot/bin/autopilot.mts','start','--run','demo','--repo',f.repo],{cwd:f.repo,encoding:'utf8'});
+    assert.equal(nativeChild.status,0,nativeChild.stderr+nativeChild.stdout);
+    assert.ok(existsSync(join(f.repo,f.entry.archive,'review-applied.json')));
+    assert.deepEqual(pending(['92'],covered(join(f.repo,'research/demo-dispatch'),/^beta-/)),['92']);
+    assert.equal(existsSync(join(f.repo,'research/demo-dispatch/beta-batch-92.result.json')),false);
+    assert.equal(JSON.parse(f.read('.physics-autopilot/demo/state.json').toString()).dispatches[f.key].attempt,0);
+});
+
+test('native rearm observation refuses arbitrary rows, missing retry, changed prompts/results and live writers', t => {
+    const f = rearmFixture(t), initial = {...f.state.data.dispatches[f.key]}, events = f.read('.physics-autopilot/demo/events.jsonl').toString();
+    for (const change of [{attempt:2,attempts:2},{attempt:0,attempts:1},{startedAt:AT},{endedAt:AT},{covers:['93']}]) {
+      f.state.data.dispatches[f.key] = {...initial,...change}; f.state.save();
+      assert.throws(()=>retireUnknownStep1NativeRearm(f.observation),/exact zero-counter row/);
+    }
+    f.state.data.dispatches[f.key] = initial; f.state.save();
+    f.save('.physics-autopilot/demo/events.jsonl',events.replace('retry-armed','not-native-retry'));
+    assert.throws(()=>retireUnknownStep1NativeRearm(f.observation),/native global retry event/);
+    f.save('.physics-autopilot/demo/events.jsonl',events);
+    for(const kind of ['controller','preflight','writer']) assert.throws(()=>retireUnknownStep1NativeRearm({...f.observation,scan:()=>({controller:[],preflight:[],writer:[],[kind]:[123]})}),/must be absent/);
+    f.save('research/demo-dispatch/beta-batch-92.attempt-1.replay-2.prompt.md','New original identity attempt prompt');
+    assert.throws(()=>retireUnknownStep1NativeRearm(f.observation),/prompt evidence changed/);
+    rmSync(join(f.repo,'research/demo-dispatch/beta-batch-92.attempt-1.replay-2.prompt.md'));
+    f.save('research/demo-dispatch/beta-batch-92.attempt-1.result.json','{}');
+    assert.throws(()=>retireUnknownStep1NativeRearm(f.observation),/result exists/);
+});
+
+test('rearm succession rejects counter restoration and historical mutation, while distinct refresh identity stays separate', t => {
+    const f = rearmFixture(t); retireUnknownStep1NativeRearm(f.observation);
+    assert.equal(unknownStep1DispatchRetired(f.repo,'demo',f.stateDir,f.key,f.row),false);
+    const events = f.read('.physics-autopilot/demo/events.jsonl').toString();
+    f.save('.physics-autopilot/demo/events.jsonl',events+JSON.stringify({at:new Date().toISOString(),type:'dispatch',stage:'1-scaffold',role:'beta',label:'batch-92-refresh-actual-native-request',covers:['92'],attempt:1})+'\n');
+    assert.equal(unknownStep1DispatchRetired(f.repo,'demo',f.stateDir,f.key,f.state.data.dispatches[f.key]),true);
+    f.save('.physics-autopilot/demo/events.jsonl',events+JSON.stringify({at:new Date().toISOString(),type:'dispatch',stage:'1-scaffold',role:'beta',label:'batch-92',covers:['92'],attempt:1})+'\n');
+    assert.throws(()=>unknownStep1DispatchRetired(f.repo,'demo',f.stateDir,f.key,f.state.data.dispatches[f.key]),/dispatched again/);
+    f.save('.physics-autopilot/demo/events.jsonl',events.replace('retry-armed','altered-retry'));
+    assert.throws(()=>unknownStep1DispatchRetired(f.repo,'demo',f.stateDir,f.key,f.state.data.dispatches[f.key]),/prefix changed/);
+});
+
+test('real apply guard requires authenticated absence, exact own row and live controller, refusing other rows/processes', t => {
+    const f = rearmFixture(t);
+    f.state.recordDispatchStart('1-append-apply-1:drift-append-apply-1',{stage:'1-append-apply-1',role:'tool',label:'drift-append-apply-1',covers:['append-1']});
+    assert.throws(()=>assertAppendApplyBoundary(f.repo,'demo',1,f.stateDir,f.options.scan),/drained other writers/);
+    // Administrative observation itself permits no active own apply writer.
+    f.state.recordDispatchEnd('1-append-apply-1:drift-append-apply-1',false);
+    retireUnknownStep1NativeRearm(f.observation);
+    f.state.recordDispatchStart('1-append-apply-1:drift-append-apply-1',{stage:'1-append-apply-1',role:'tool',label:'drift-append-apply-1',covers:['append-1']});
+    assert.throws(()=>assertAppendApplyBoundary(f.repo,'demo',1,f.stateDir,f.options.scan),/requires its live lock-owning ancestor controller/);
+    for(const kind of ['controller','preflight','writer']) assert.throws(()=>assertAppendApplyBoundary(f.repo,'demo',1,f.stateDir,()=>({controller:[],preflight:[],writer:[],[kind]:[123]})),/must be absent/);
+    f.state.data.dispatches['foreign:writer']={...f.row,label:'foreign'};f.state.save();
+    assert.throws(()=>assertAppendApplyBoundary(f.repo,'demo',1,f.stateDir,f.options.scan),/drained other writers/);
+});
+
+
+test('supplemental owner planning binds original and rearm receipt absence/presence and native CLI/verifier code', t => {
+    const f = rearmFixture(t), ctx = {repo:f.repo,run:'demo',config:{repo:f.repo,run:'demo',stateDir:f.stateDir,dispatchDir:join(f.repo,'research/demo-dispatch')}};
+    const table = appendStages([{id:'1-drift',gates:()=>[]},{id:'1-scaffold'}] as any,ctx);
+    const gates = table.find(s=>s.id==='1-append-drift-1')!.gates!(ctx as any);
+    mkdirSync(join(f.repo,'tools/physics-autopilot/src'),{recursive:true});mkdirSync(join(f.repo,'tools/physics-autopilot/bin'),{recursive:true});
+    for(const path of ['src/unknown-step1-dispatch.mts','src/frontier-append.mts','src/controller-lock.mts','bin/frontier-append.mts','bin/autopilot.mts']) f.save('tools/physics-autopilot/'+path,'// Native input bytes.');
+    const before = gateReviewSnapshot(ctx,gates,['1-append-drift-1']);
+    const rearmRows = before.inputs.filter((r:any)=>r.path.endsWith('.rearm.json')||r.path.endsWith('.rearm.json.sha256'));
+    assert.equal(rearmRows.length,2);assert.ok(rearmRows.every((r:any)=>r.sha256===null));
+    assert.equal(before.inputs.filter((r:any)=>r.path.includes('unknown-step1-dispatch-retirements')).length,4);
+    for(const suffix of ['src/unknown-step1-dispatch.mts','bin/frontier-append.mts','bin/autopilot.mts']) assert.ok(before.inputs.some((r:any)=>r.path.endsWith(suffix)));
+    retireUnknownStep1NativeRearm(f.observation);
+    const after = gateReviewSnapshot(ctx,gates,['1-append-drift-1']);assert.notEqual(after.sha256,before.sha256);
+    assert.ok(after.inputs.filter((r:any)=>r.path.endsWith('.rearm.json')||r.path.endsWith('.rearm.json.sha256')).every((r:any)=>r.sha256));
+});
+
+test('physics retry CLI rejects unsupported stage before writing control, preserving scoped native retry', t => {
+    const f = fixture(t), runner = new URL('../../tsx-run.mjs',import.meta.url).pathname, cli = new URL('../bin/autopilot.mts',import.meta.url).pathname;
+    for(const flags of [['--stage','1-append-drift-1'],['--stage=1-append-drift-1']]) {
+      const result = spawnSync(process.execPath,[runner,cli,'retry','--repo',f.repo,'--state-dir',f.stateDir,...flags],{cwd:f.repo,encoding:'utf8'});
+      assert.notEqual(result.status,0);assert.match(result.stderr,/retry does not support --stage; use --unit/);
+      assert.equal(existsSync(join(f.stateDir,'control.json')),false);
+    }
+    const result = spawnSync(process.execPath,[runner,cli,'retry','--repo',f.repo,'--state-dir',f.stateDir,'--unit','append-1'],{cwd:f.repo,encoding:'utf8'});
+    assert.equal(result.status,0,result.stderr+result.stdout);
+    assert.equal(JSON.parse(readFileSync(join(f.stateDir,'control.json'),'utf8')).unit,'append-1');
+});
+
+test('apply production process scan rejects a real foreign writer even after authenticated rearm', async t => {
+    const f = rearmFixture(t);retireUnknownStep1NativeRearm(f.observation);
+    f.state.recordDispatchStart('1-append-apply-1:drift-append-apply-1',{stage:'1-append-apply-1',role:'tool',label:'drift-append-apply-1',covers:['append-1']});
+    const writer=spawn(process.execPath,['-e','setInterval(()=>{},1000)','--','--run','demo'],{cwd:f.repo});t.after(()=>writer.kill());
+    await new Promise<void>(resolve=>writer.once('spawn',resolve));
+    assert.throws(()=>assertAppendApplyBoundary(f.repo,'demo',1,f.stateDir),/writers must be absent/);
+});
+
+test('native-rearm observation rejects active/closed boundary and preserves tamper detection', t => {
+    const f = rearmFixture(t), before=JSON.parse(f.read('.physics-autopilot/demo/state.json').toString());
+    for(const change of [{paused:false},{stage:'1-scaffold'},{finishedAt:AT}]) {
+      f.save('.physics-autopilot/demo/state.json',{...before,...change});
+      assert.throws(()=>retireUnknownStep1NativeRearm(f.observation),/paused unfinished/);
+    }
+    f.save('.physics-autopilot/demo/state.json',before);
+    let calls=0;
+    assert.throws(()=>retireUnknownStep1NativeRearm({...f.observation,scan:()=>({controller:[],preflight:[],writer:++calls>1?[123]:[]})}),/must be absent/);
+    retireUnknownStep1NativeRearm(f.observation);
+    const dir=join(f.stateDir,'unknown-step1-dispatch-retirements'),path=join(dir,readdirSync(dir).find(n=>n.endsWith('.rearm.json'))!);
+    chmodSync(path,0o600);writeFileSync(path,readFileSync(path,'utf8').replace('Root confirms','Root changed'));
+    assert.throws(()=>unknownStep1DispatchRetired(f.repo,'demo',f.stateDir,f.key,f.state.data.dispatches[f.key]),/rearm absence receipt changed/);
 });
