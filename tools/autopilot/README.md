@@ -87,3 +87,12 @@ Freshly planned namespaces now use `six-step-v1-statement-first` through the com
 `mathlib.statement-first.mts` table. Every item class presents uninterrupted
 statements/descriptions and separate following reference lines. Existing runs
 keep their original revision and table. See [the editorial policy](../STATEMENT-FIRST.md).
+
+Step-1 status uses negative-only short circuits after authoring drains: an
+explicit escalated item receipt rejects its batch before dependency hashing,
+and the shared executor stops artifact inspection at the first incomplete
+unit. Reports therefore name the first artifact blocker rather than enumerate
+all later failures. Per-unit scheduling and repair still enumerate every
+unit independently. This applies to both math and physics executor joins.
+Clearing the blocker restores ordinary current-input, level, artifact and gate
+checks; neither shortcut grants readiness, coverage or a gate stamp.

@@ -164,3 +164,21 @@ test('prerequisite scheduling reads current requirements and logical carrier dep
   writeFileSync(join(f.repo,'items/lem-later.md'),'---\nid: lem-later\ndeps: []\n---\n');
   assert.deepEqual(prerequisites(f.ctx(), '2'), []);
 });
+
+test('explicit escalation defers dependency hashing but clearing it restores current-input checks', t => {
+  const f = fixture(t); f.ready(); f.artifacts();
+  const cached = scaffoldSnapshot(f.ctx());
+  const supplierStamp = cached.itemStamps.get('lem-published');
+  const receipt = join(f.repo, 'research', 'demo-step1-lem-local.json');
+  const ready = readFileSync(receipt, 'utf8');
+  writeFileSync(receipt, JSON.stringify({ ...JSON.parse(ready), decision: 'escalated' }));
+  f.body('lem-published', 'Changed supplier proof');
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  assert.equal(cached.itemStamps.get('lem-published'), supplierStamp,
+    'known negative readiness does not walk or invalidate dependency inputs');
+  writeFileSync(receipt, ready);
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')),
+    'once escalation clears, the stale ready hash must still block completion');
+  f.ready();
+  assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+});

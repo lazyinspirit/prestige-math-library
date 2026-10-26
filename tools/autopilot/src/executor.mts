@@ -508,10 +508,15 @@ export class Executor {
       // unit, including a dead worker's success, without hashing uncovered drafts.
       const artifactUnits = units.mode === 'coverage'
         ? owed.filter((u: any) => !units.missing.includes(u)) : owed;
-      const absent = artifactUnits.filter((u: any) => {
+      // One missing artifact already proves the join incomplete. Do not walk
+      // every later unit's potentially full-frontier hash just to report false.
+      // Completion still requires every predicate on a pass with no blocker;
+      // per-unit scheduling uses unitsComplete's independent checks below.
+      const firstAbsent = artifactUnits.find((u: any) => {
         const paths = [stage.artifacts(ctx, u)].flat().filter(Boolean);
         return !paths.every((f: any) => existsSync(join(ctx.repo, f)));
       });
+      const absent = firstAbsent === undefined ? [] : [firstAbsent];
       if (absent.length) {
         return {
           ...units,

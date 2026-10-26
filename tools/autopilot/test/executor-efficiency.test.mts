@@ -622,3 +622,29 @@ plan: () => [], gates: () => [{ id: 'g', argv: ['true'] }] }];`;
   assert.equal(readFileSync(ex.state.path, 'utf8'), before);
   assert.ok(notifications.some(n => n.kind === 'stages-reload-refused' && /fresh run/.test(n.message)));
 });
+
+test('artifact status stops at the first blocker and checks every unit before completion', () => {
+  const fx = fixture(), scanned: string[] = [];
+  const stage = {
+    id: 'artifact-join', label: 'join', units: () => ['1', '2'], pattern: /^worker-/,
+    plan: () => [], gates: () => [{ id: 'native', argv: ['true'] }],
+    artifacts: (_ctx: any, unit: string) => { scanned.push(unit); return [`ready-${unit}`]; },
+  };
+  const { ex } = makeExecutor(fx, [stage]);
+  cover(fx, 'worker', 'covered', ['1', '2']);
+  assert.equal(ex.stageStatus(stage).unitsDone, false);
+  assert.deepEqual(scanned, ['1']);
+  scanned.length = 0;
+  assert.deepEqual([...ex.unitsComplete(stage)], []);
+  assert.deepEqual(scanned, ['1', '2'], 'repair and prerequisite accounting still checks every unit');
+  scanned.length = 0;
+  writeFileSync(join(fx.repo, 'ready-1'), 'current');
+  assert.equal(ex.stageStatus(stage).unitsDone, false);
+  assert.deepEqual(scanned, ['1', '2']);
+  scanned.length = 0;
+  writeFileSync(join(fx.repo, 'ready-2'), 'current');
+  const status = ex.stageStatus(stage);
+  assert.deepEqual(scanned, ['1', '2']);
+  assert.equal(status.unitsDone, true);
+  assert.equal(status.done, false, 'the native gate battery remains required');
+});

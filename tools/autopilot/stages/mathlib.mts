@@ -157,6 +157,26 @@ function scaffoldArtifacts(ctx: any, unit: string): string[] {
   let cached: ScaffoldSnapshot | undefined;
   try {
     const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
+    // An explicit current hold cannot be made ready by rehashing other items.
+    // Reject this batch before building the full dependency snapshot. This
+    // negative-only shortcut is reread each pass; after the final hold clears,
+    // the ordinary strict snapshot, levels and all receipt hashes run below.
+    const items = (Array.isArray(pages) ? pages : [])
+      .flatMap((page: any) => Array.isArray(page?.items) ? page.items : []);
+    out.push(...items.filter((item: any) => typeof item?.id === 'string' && item.id)
+      .map((item: any) => `research/${ctx.run}-step1-${item.id}.json`));
+    for (const item of items) {
+      if (typeof item?.id !== 'string' || !item.id) continue;
+      const receipt = `research/${ctx.run}-step1-${item.id}.json`;
+      if (existsSync(R(ctx, receipt))) {
+        const row = JSON.parse(readFileSync(R(ctx, receipt), 'utf8'));
+        if (row.version === 1 && row.run === ctx.run && row.item === item.id
+          && row.decision === 'escalated') {
+          out.push(`research/${ctx.run}-batch-${unit}.scaffold-incomplete`);
+          return [...new Set(out)];
+        }
+      }
+    }
     cached = scaffoldSnapshot(ctx);
     const { snapshot, levelCheck } = cached;
     if (levelCheck.errors.some((error: string) => error.startsWith('dependency cycle:'))) complete = false;
