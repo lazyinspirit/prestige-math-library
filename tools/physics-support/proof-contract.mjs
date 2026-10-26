@@ -248,7 +248,7 @@ function validateStepEntries(entries, field, id, facts, steps, classified) {
       if (classified.has(entry.step)) error('step-entry-overlap', `${entry.step} is mapped by both ${classified.get(entry.step)} and ${entry.id ?? '?'}`, id);
       else classified.set(entry.step, entry.id ?? field);
       const inputs = new Set(entry.inputs ?? []);
-      for (const token of explicitTokens(step.text, steps)) {
+      for (const token of explicitTokens(step.text, steps, facts)) {
         const acceptable = inputs.has(token) || inputs.has(`step ${token}`);
         if (!acceptable) error('step-entry-input-omitted', `${entry.id ?? field} omits ${token}, cited by ${entry.step}`, id);
       }
@@ -334,12 +334,19 @@ function factsByLabel(body) { return factParagraphs(body); }
 function numberedSteps(body) {
   return new Map(numberedProofSteps(body).map((step) => [step.id, step]));
 }
-function explicitTokens(text, steps = null) {
+function explicitTokens(text, steps = null, facts = null) {
   const out = new Set();
+  // Bare local variables such as A0 are not undeclared Fact citations. Keep
+  // explicit bracketed references visible even when their label is unknown.
+  const bracketed = new Set([...text.matchAll(/\[[^\[\]\n]*\]/g)]
+    .flatMap(match => [...match[0].matchAll(/\b[FAL]\d+\b/g)].map(token => token[0])));
+  for (const match of text.matchAll(/\b(?:facts?|assumptions?|lemmas?)\s+([FAL]\d+)\b/gi)) bracketed.add(match[1]);
   for (const match of text.matchAll(/\b(?:step\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
     // Bare decimals are numeric constants unless they identify a real step.
     // Explicit "step p.q" references remain visible even when missing.
-    if (match[2] || !steps || /^step\s/.test(match[0]) || steps.has(match[1])) out.add(match[1] ?? match[2]);
+    if (match[2]) {
+      if (!facts || facts.has(match[2]) || bracketed.has(match[2])) out.add(match[2]);
+    } else if (!steps || /^step\s/.test(match[0]) || steps.has(match[1])) out.add(match[1]);
   }
   return out;
 }

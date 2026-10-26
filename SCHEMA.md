@@ -294,6 +294,9 @@ paraphrase. See [the statement policy](tools/STATEMENT-FIRST.md).
   Citation contracts record every actual numbered proof use; `uses: []` is
   valid when there are none, including in a proof-free definition. Regeneration
   refreshes these citations while preserving historical proof obligations.
+  Worksheet inputs include declared Fact labels and explicit bracketed or
+  named Fact references. Bare local variables such as `A0` or `L0` do not
+  declare Facts; explicit references to unknown labels still fail validation.
   A Facts section alone does not turn a definition into a phase proof. Any
   supplied proof section or numbered proof still requires the ordinary checks.
 - Proof-like sections need `proof_strategy` in frontmatter and `**Given:**` in

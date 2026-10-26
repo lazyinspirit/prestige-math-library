@@ -16,7 +16,7 @@ const sourceBody = `## Statement\n\n${clause}\n\n## Remarks\nThis is not part of
 const boundaries = ['empty', 'zero', 'one', 'degenerate', 'endpoints', 'nonempty-choice', 'iff-forward', 'iff-reverse']
   .map(name => ({ case: name, status: 'not_applicable', reason: 'The fixture has no parameter or equivalence branch.' }));
 
-function fixture(t, { proof = false, reviewed = false, sourceId = reviewed ? allowed : 'lem-source' } = {}) {
+function fixture(t, { proof = false, reviewed = false, sourceId = reviewed ? allowed : 'lem-source', physics = false } = {}) {
   const root = mkdtempSync(join(tmpdir(), 'proof-contract-native-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   for (const sub of ['items', 'research', 'tools']) mkdirSync(join(root, sub));
@@ -40,13 +40,47 @@ function fixture(t, { proof = false, reviewed = false, sourceId = reviewed ? all
   const contractPath = join(root, 'research/contracts.json');
   const check = () => {
     writeFileSync(contractPath, JSON.stringify(doc));
-    const child = spawnSync(process.execPath, [join(root, 'tools/proof-contract.mjs'), contractPath, '--strict', '--json'],
-      { cwd: root, encoding: 'utf8', env: { ...process.env, ...(APP_DIR ? { PRESTIGE_APP_DIR: APP_DIR } : {}) } });
+    const checker = physics ? join(tools, 'physics-support/proof-contract.mjs') : join(root, 'tools/proof-contract.mjs');
+    const child = spawnSync(process.execPath, [checker, contractPath, '--strict', '--json'],
+      { cwd: root, encoding: 'utf8', env: { ...process.env, ...(APP_DIR ? { PRESTIGE_APP_DIR: APP_DIR } : {}), ...(physics ? { PHYSICS_REPO: root } : {}) } });
     assert.equal(child.error, undefined);
     assert.ok([0, 1].includes(child.status), child.stdout + child.stderr);
     return { status: child.status, ...JSON.parse(child.stdout) };
   };
   return { check, citation, entry, sourcePath, sourceHeader, id };
+}
+
+for (const physics of [false, true]) {
+  const workflow = physics ? 'physics' : 'math';
+  test(`${workflow}: local A0/L0 variables do not become missing Fact inputs`, t => {
+    const f = fixture(t, { proof: true, physics });
+    const file = join(dirname(f.sourcePath), `${f.id}.md`);
+    writeFileSync(file, readFileSync(file, 'utf8').replace('Start the finite argument.', 'Descend to A0 and construct L0.'));
+    assert.equal(f.check().status, 0);
+    f.entry.derivations[0].inputs.push('A0');
+    assert.ok(f.check().errors.some(e => e.code === 'step-entry-input-fact-missing'));
+  });
+  test(`${workflow}: unknown bracketed Fact citations still fail closed`, t => {
+    const f = fixture(t, { proof: true, physics });
+    const file = join(dirname(f.sourcePath), `${f.id}.md`);
+    writeFileSync(file, readFileSync(file, 'utf8').replace('Start the finite argument.', 'Use [A0].'));
+    assert.ok(f.check().errors.some(e => e.code === 'step-entry-input-omitted' && /A0/.test(e.message)));
+    f.entry.derivations[0].inputs.push('A0');
+    assert.ok(f.check().errors.some(e => e.code === 'step-entry-input-fact-missing'));
+  });
+  test(`${workflow}: declared bare Fact references still require worksheet inputs`, t => {
+    const f = fixture(t, { proof: true, physics });
+    const file = join(dirname(f.sourcePath), `${f.id}.md`);
+    writeFileSync(file, readFileSync(file, 'utf8').replace('Its continuation uses [F1]. [given, F1]', 'Its continuation uses F1. [given]'));
+    f.entry.derivations[0].inputs = ['given'];
+    assert.ok(f.check().errors.some(e => e.code === 'step-entry-input-omitted' && /F1/.test(e.message)));
+  });
+  test(`${workflow}: explicitly named unknown Facts still fail closed`, t => {
+    const f = fixture(t, { proof: true, physics });
+    const file = join(dirname(f.sourcePath), `${f.id}.md`);
+    writeFileSync(file, readFileSync(file, 'utf8').replace('Start the finite argument.', 'Apply Fact L9.'));
+    assert.ok(f.check().errors.some(e => e.code === 'step-entry-input-omitted' && /L9/.test(e.message)));
+  });
 }
 
 test('native checker accepts exact empty uses for a declarative Fact', t => {
