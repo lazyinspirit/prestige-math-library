@@ -72,7 +72,7 @@ concordance between $C$ and $K_P$.
 
 **Proof technique:** direct.
 
-1.1 By [F1], the two zero-traces are diffeomorphic to the same framed handlebody. Compose the first diffeomorphism with the inverse of the second to obtain $X_0(C)\cong X_0(K_P)$. The supplier uses the published trace equality for the named Figure 2 knot independently of its local endpoint encoding. [A1, F1, construct]
+1.1 By [F1], the two zero-traces are diffeomorphic to the same framed handlebody. Compose the first diffeomorphism with the inverse of the second to obtain $X_0(C)\cong X_0(K_P)$. The supplier uses the published trace equality for the named [Figure 2](https://arxiv.org/pdf/1808.02923#page=3) knot independently of its local endpoint encoding. [A1, F1, construct]
 
 2.1 Apply [F2] to that specified diagram to obtain $s(K_P)=2$. Together with step 1.1 this gives both conclusions of the Statement. [A1, A2, F2, step 1.1, construct] ∎
 

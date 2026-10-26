@@ -37,9 +37,9 @@ sources:
 
 ## Definition
 
-Let $C$ denote the Conway knot represented by the Conway diagram in Figure 1 of
+Let $C$ denote the Conway knot represented by the Conway diagram in [Figure 1](https://arxiv.org/pdf/1808.02923#page=2) of
 Piccirillo's paper, and let $K_P$ denote the knot represented by the partner
-diagram in Figure 2 of that paper. Choose an orientation on each diagram. The
+diagram in [Figure 2](https://arxiv.org/pdf/1808.02923#page=3) of that paper. Choose an orientation on each diagram. The
 symbols $C$ and $K_P$ refer to these specified diagram isotopy classes.
 
 ## Definition references
@@ -52,7 +52,7 @@ symbols $C$ and $K_P$ refer to these specified diagram isotopy classes.
 
 **Given:** The two diagram isotopy classes specified in the Definition.
 
-[F1] Piccirillo labels the knot in Figure 1 as the Conway knot and the knot in Figure 2 as its trace partner $K'$. The figures determine the two isotopy classes used here.
+[F1] Piccirillo labels the knot in [Figure 1](https://arxiv.org/pdf/1808.02923#page=2) as the Conway knot and the knot in [Figure 2](https://arxiv.org/pdf/1808.02923#page=3) as its trace partner $K'$. The figures determine the two isotopy classes used here.
 
 ## Proof
 

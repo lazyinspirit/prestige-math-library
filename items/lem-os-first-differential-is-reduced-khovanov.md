@@ -57,7 +57,7 @@ Assume the $\mathrm{AC}_\omega$ Heegaard Floer analytic package. Fix a finite re
 
 [F3] The reduced Khovanov complex uses precisely the marked-circle quotient and merge/split maps in [[def-reduced-khovanov-cohomology-of-a-based-link-over-f2]].
 
-[F4] **External input — local surgery/mirror smoothing identification.** Ozsváth–Szabó, arXiv:math/0309170v1, Section2 Proposition2.1 and following paragraph, pp.6–7, together with Figure1 p.2 and Theorem6.3 pp.34–35, identifies the three branched fillings with crossing/0/1 resolutions and the immediate surgery edge with the saddle. In its displayed chart the over-strand is northwest–southeast, the 0-resolution joins the left pair and the right pair, and the 1-resolution joins the top pair and bottom pair. After switching over/under to form the mirror, this is exactly A then B in the library source chart. Thus the surgery bits agree with the mirror Khovanov 0/1 bits. Only the fixed-diagram mod-two assertion is imported.
+[F4] **External input — local surgery/mirror smoothing identification.** Ozsváth–Szabó, arXiv:math/0309170v1, Section2 Proposition2.1 and following paragraph, pp.6–7, together with [Figure1](https://arxiv.org/pdf/math/0309170v1#page=2) p.2 and Theorem6.3 pp.34–35, identifies the three branched fillings with crossing/0/1 resolutions and the immediate surgery edge with the saddle. In its displayed chart the over-strand is northwest–southeast, the 0-resolution joins the left pair and the right pair, and the 1-resolution joins the top pair and bottom pair. After switching over/under to form the mirror, this is exactly A then B in the library source chart. Thus the surgery bits agree with the mirror Khovanov 0/1 bits. Only the fixed-diagram mod-two assertion is imported.
 
 ## Proof
 

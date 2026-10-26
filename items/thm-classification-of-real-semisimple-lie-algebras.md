@@ -43,8 +43,8 @@ $\mathfrak{su}(p,q)$, $\mathfrak{so}(p,q)$, $\mathfrak{sp}(p,q)$,
 $\mathfrak{sp}_{2n}(\mathbb R)$, $\mathfrak{so}^{*}(2n)$,
 $\mathfrak{sl}_n(\mathbb R)$, $\mathfrak{sl}_n(\mathbb H)$ in their admissible
 ranges, and the twelve exceptional noncompact noncomplex forms; the classical
-families are recorded in the source in Figure 6.1 (Knapp, printed pp. 413-415)
-and the exceptional ones in Figures 6.2 and 6.3 (Knapp, printed pp. 416 and
+families are recorded in the source in [Figure 6.1](https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf#page=432) (Knapp, printed pp. 413-415)
+and the exceptional ones in [Figures 6.2 and 6.3](https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf#page=434) (Knapp, printed pp. 416 and
 420). This list is complete up to isomorphism, and the
 directions of the rest of this page identify its entries by their Vogan and
 Satake diagrams ([[thm-classification-of-real-forms-by-vogan-diagrams]],
@@ -64,7 +64,7 @@ Satake diagrams ([[thm-classification-of-real-forms-by-vogan-diagrams]],
 
 [L4] The compact and split terms have the meanings of [[def-compact-real-form-of-a-complex-semisimple-lie-algebra]] and [[def-split-real-form]]. Knapp's Borel--de Siebenthal theorem says that, after changing the positive system while retaining the diagram involution, a Vogan diagram for a noncomplex simple real algebra has at most one painted simple root. When the involution is trivial it also gives the stated numerical restriction on the painted vertex. The source explicitly says that there is no redundancy in the involution (Source, Chapter VI, Theorem 6.96 and the preceding paragraph, printed pp. 408--412).
 
-[L5] Knapp's classification theorem states both directions: up to isomorphism every simple real Lie algebra, and every entry of its list, is respectively a complex simple algebra regarded as real, a compact real form, one of the classical matrix algebras $\mathfrak{su}(p,q)$, $\mathfrak{so}(p,q)$, $\mathfrak{sp}(p,q)$, $\mathfrak{sp}(n,\mathbb R)$, $\mathfrak{so}^{*}(2n)$, $\mathfrak{sl}(n,\mathbb R)$ or $\mathfrak{sl}(n,\mathbb H)$ in the displayed ranges, or one of the twelve exceptional noncompact noncomplex algebras in Figures 6.2 and 6.3. It also states that $\mathfrak{so}^{*}(8)\cong\mathfrak{so}(6,2)$ is the only isomorphism among entries of that range-normalized list (Source, Theorem 6.105 and its remarks, printed pp. 421--422).
+[L5] Knapp's classification theorem states both directions: up to isomorphism every simple real Lie algebra, and every entry of its list, is respectively a complex simple algebra regarded as real, a compact real form, one of the classical matrix algebras $\mathfrak{su}(p,q)$, $\mathfrak{so}(p,q)$, $\mathfrak{sp}(p,q)$, $\mathfrak{sp}(n,\mathbb R)$, $\mathfrak{so}^{*}(2n)$, $\mathfrak{sl}(n,\mathbb R)$ or $\mathfrak{sl}(n,\mathbb H)$ in the displayed ranges, or one of the twelve exceptional noncompact noncomplex algebras in [Figures 6.2 and 6.3](https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf#page=434). It also states that $\mathfrak{so}^{*}(8)\cong\mathfrak{so}(6,2)$ is the only isomorphism among entries of that range-normalized list (Source, Theorem 6.105 and its remarks, printed pp. 421--422).
 
 [L6] Etingof independently classifies the classical real forms type by type and the exceptional forms by Vogan diagrams, retaining the nontrivial diagram involutions for the outer classes (Source, Lecture 40, §§40.2--40.3, printed pp. 185--189, and Lecture 41, §41.1, printed pp. 190--193).
 
@@ -90,5 +90,5 @@ Satake diagrams ([[thm-classification-of-real-forms-by-vogan-diagrams]],
 
 ## Remarks
 
-- **Where the case analysis enters.** The Borel--de Siebenthal theorem leaves at most one painted simple root but retains the diagram involution. The complete finite case analysis is the one proved in Knapp, §10: Figure 6.1 identifies the classical matrix algebras, Figures 6.2--6.3 identify all exceptional entries (including E I and E IV), and Theorem 6.105 records the exhaustive, range-normalized result. The proof above applies that theorem rather than replacing it with an incomplete local vertex count.
+- **Where the case analysis enters.** The Borel--de Siebenthal theorem leaves at most one painted simple root but retains the diagram involution. The complete finite case analysis is the one proved in Knapp, §10: [Figure 6.1](https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf#page=432) identifies the classical matrix algebras, [Figures 6.2--6.3](https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf#page=434) identify all exceptional entries (including E I and E IV), and Theorem 6.105 records the exhaustive, range-normalized result. The proof above applies that theorem rather than replacing it with an incomplete local vertex count.
 - **The complex case.** A complex simple Lie algebra regarded as a real Lie algebra is simple ([[thm-complexification-dichotomy-for-a-real-simple-lie-algebra]]) and contributes the entries $(\mathfrak g)_{\mathbb R}$ of the source's classification; the split forms of the complex simple algebras are the $\mathfrak{sl}(n,\mathbb R)$, $\mathfrak{so}(n+1,n)$, $\mathfrak{sp}(n,\mathbb R)$ and exceptional split forms on the list.

@@ -94,7 +94,7 @@ with two slits of 50 nm width, 280 nm centre-to-centre separation and
 downstream of the double-slit; an electrostatic quadrupole lens magnifying the
 pattern; and a two-dimensional microchannel plate and phosphor screen imaged by
 a CCD camera. The body of the paper gives the mask height as 10 micrometre
-while the caption of figure 1 gives 20 micrometre; the inconsistency is
+while the caption of [figure 1](https://arxiv.org/pdf/1210.6243v1#page=6) gives 20 micrometre; the inconsistency is
 recorded and not resolved here. The comparison is a reported experiment of the
 framework in the sense of the preparation and apparatus postulate
 [[post-nrqm-framework-preparation-and-apparatus]]; the identification of the

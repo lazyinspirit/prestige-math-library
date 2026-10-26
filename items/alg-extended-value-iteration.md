@@ -1,6 +1,6 @@
 ---
 verification:
-  repair: research/math-library-rendering-repairs-2026-10-23/receipts/alg-extended-value-iteration.json
+  repair: research/figure-reference-repairs-2026-10-27/receipts/alg-extended-value-iteration.json
   precheck: n/a
 id: alg-extended-value-iteration
 kind: algorithm
@@ -36,7 +36,7 @@ For each state, compute $B_i(s,a)=\widetilde r(s,a)+q_{i,s,a}\cdot u_{i-1}$ for 
 
 [EVI correctness and termination](../items/lem-ucrl2-evi-termination.md): proves that the transfer routine returns the exact row maximum and that positive radii give finite termination.
 
-[UCRL2 Extended Value Iteration](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf): §3.1.2, Figure 2 and equation (5).
+[UCRL2 Extended Value Iteration](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf): §3.1.2, [Figure 2](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf#page=9) and equation (5).
 
 [Average-reward value iteration discussion](https://raw.githubusercontent.com/martyput/MDP_book/master/07%20Chapter/Book___chapter07.pdf): Chapter 7, §§7.3–7.4.
 

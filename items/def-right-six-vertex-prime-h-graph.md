@@ -40,7 +40,7 @@ $$\{ac,ae,af,bf,cd,ce,cf,df\}.$$
 The degrees in the order $a,b,c,d,e,f$ are $3,1,4,2,2,4$.
 
 This complement is isomorphic to the right drawing in Nguyen–Scott–Seymour,
-Figure 1; the shared labels here are inherited from the left graph and are
+[Figure 1](https://arxiv.org/pdf/2307.06455#page=2); the shared labels here are inherited from the left graph and are
 not the positions in the right drawing.
 
 ## Remarks

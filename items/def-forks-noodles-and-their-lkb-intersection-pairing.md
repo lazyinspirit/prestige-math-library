@@ -66,7 +66,7 @@ $T(F)$, an embedded edge from $p_i$ to $p_j$ through $z$. The tine edge is
 oriented so that the handle lies to its right. A **parallel copy** of $F$ is a
 parallel tree $F'$ whose handle starts at $d_2$, obtained by pushing the tine and handle of $F$ off themselves and then translating
 the two tine endpoints through $P$ along the respective tine ends, as in
-Bigelow 2001 Figure 1; write $z'$ for its trivalent vertex and $T(F')$ for its
+Bigelow 2001 [Figure 1](https://web.math.ucsb.edu/~bigelow/publications/03.pdf#page=4); write $z'$ for its trivalent vertex and $T(F')$ for its
 tine edge. The **surface of the fork** is
 $$\Sigma(F)=\{\{x,y\}\in C: x\in T(F)\setminus P,\ y\in T(F')\setminus P\} \subset C,$$
 homeomorphic to the interior of the square $T(F)\times T(F')$ and oriented by

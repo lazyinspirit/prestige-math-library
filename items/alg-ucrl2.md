@@ -36,9 +36,9 @@ Set $\widetilde r_k(s,a)=\min\{1,\widehat r_k(s,a)+b^r_k(s,a)\}$. Run extended v
 
 [Communicating MDP and diameter](../items/def-communicating-mdp-and-diameter.md): specifies the environment class.
 
-[UCRL2](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf): §3, Figure 1.
+[UCRL2](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf): §3, [Figure 1](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf#page=8).
 
-[Extended Value Iteration](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf): §3.1.2, Figure 2 and equation (5).
+[Extended Value Iteration](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf): §3.1.2, [Figure 2](https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf#page=9) and equation (5).
 
 [Independent UCRL2 treatment](https://www.cse.chalmers.se/~chrdimi/downloads/book.pdf): Chapter 10.3.1, printed pp. 224–228.
 

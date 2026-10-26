@@ -26,7 +26,7 @@ sources:
 
 ## Example
 
-In SimCLR's ImageNet experiments, a projection head is a map $g$ applied to the encoder representation $h$ to produce $z=g(h)$; linear evaluation trains a linear classifier on a fixed representation. The authors report a comparison among an identity head, a linear projection head, and a nonlinear projection head with one additional hidden layer and ReLU. In their Figure 8, the nonlinear head's pre-projection representation $h$ scores about three percentage points above the linear-head condition and more than ten points above the no-head condition; they also report that $h$ scores more than ten points above the projected representation $z=g(h)$. Their default setup uses a ResNet-50 encoder, a two-layer MLP projection head to a 128-dimensional latent space, NT-Xent (normalized temperature-scaled cross-entropy), batch size 4096 and 100 training epochs. These are reported empirical results under the paper's evaluation protocol, not a theorem that projection heads universally improve representations.
+In SimCLR's ImageNet experiments, a projection head is a map $g$ applied to the encoder representation $h$ to produce $z=g(h)$; linear evaluation trains a linear classifier on a fixed representation. The authors report a comparison among an identity head, a linear projection head, and a nonlinear projection head with one additional hidden layer and ReLU. In their [Figure 8](https://proceedings.mlr.press/v119/chen20j/chen20j.pdf#page=6), the nonlinear head's pre-projection representation $h$ scores about three percentage points above the linear-head condition and more than ten points above the no-head condition; they also report that $h$ scores more than ten points above the projected representation $z=g(h)$. Their default setup uses a ResNet-50 encoder, a two-layer MLP projection head to a 128-dimensional latent space, NT-Xent (normalized temperature-scaled cross-entropy), batch size 4096 and 100 training epochs. These are reported empirical results under the paper's evaluation protocol, not a theorem that projection heads universally improve representations.
 
 ## Example references
 
@@ -42,7 +42,7 @@ In SimCLR's ImageNet experiments, a projection head is a map $g$ applied to the 
 
 [F1] The default configuration in Section 4 uses a ResNet-50 base encoder, a two-layer MLP projection head to dimension 128, NT-Xent, batch size 4096 and 100 epochs. [Chen et al., Section 4, default setting](https://proceedings.mlr.press/v119/chen20j/chen20j.pdf)
 
-[F2] Figure 8 reports linear evaluation for identity, linear and nonlinear projection heads; its text reports roughly a three-point gain over a linear projection, more than ten points over no projection, and more than ten points for pre-projection $h$ over $z=g(h)$. [Chen et al., Section 4.2 and Figure 8](https://proceedings.mlr.press/v119/chen20j/chen20j.pdf)
+[F2] [Figure 8](https://proceedings.mlr.press/v119/chen20j/chen20j.pdf#page=6) reports linear evaluation for identity, linear and nonlinear projection heads; its text reports roughly a three-point gain over a linear projection, more than ten points over no projection, and more than ten points for pre-projection $h$ over $z=g(h)$. [Chen et al., Section 4.2 and Figure 8](https://proceedings.mlr.press/v119/chen20j/chen20j.pdf)
 
 ## Proof
 

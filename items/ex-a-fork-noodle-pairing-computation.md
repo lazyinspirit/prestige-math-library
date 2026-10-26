@@ -41,7 +41,7 @@ $$T=[p_1,(-0.3,0.1),(0.25,0.1),(0.25,0.07),(0.15,0.07),(0.15,0.04),(0.3,0.04),(0
 $$T'=[p_1,(-0.3,0.095),(-0.28,0.095),(0.245,0.095),(0.245,0.075),(0.145,0.075),(0.145,0.035),(0.305,0.035),(0.305,0.095),(0.495,0.095),(0.495,-0.145),(-0.095,-0.145),p_2].$$
 The handles are
 $$H=[d_1,(-0.3,-0.3),(-0.3,0.1)],\qquad H'=[d_2,(-0.28,-0.35),(-0.28,0.095)].$$
-They end at the indicated tine vertices. Each tree is embedded, meets the outer boundary only at its handle start, and meets $P$ only at $p_1,p_2$. The tine interiors are disjoint. Their orientations put their respective handles to the right. The narrow parallel strips and the handle strip give the parallel-copy convention of Bigelow 2001 Figure 1; the handles need not avoid the other tree's tine. The extra hairpin near $(0.2,0.07)$ lies in a puncture-free rectangle and adds two removable crossings.
+They end at the indicated tine vertices. Each tree is embedded, meets the outer boundary only at its handle start, and meets $P$ only at $p_1,p_2$. The tine interiors are disjoint. Their orientations put their respective handles to the right. The narrow parallel strips and the handle strip give the parallel-copy convention of Bigelow 2001 [Figure 1](https://web.math.ucsb.edu/~bigelow/publications/03.pdf#page=4); the handles need not avoid the other tree's tine. The extra hairpin near $(0.2,0.07)$ lies in a puncture-free rectangle and adds two removable crossings.
 
 ## Verification
 

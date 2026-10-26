@@ -106,7 +106,7 @@ is used in this definition.
   punctures on the real axis, so that tracing the counterclockwise boundary
   from $d$ meets the angular positions of $s_1,\dots,s_n$ in increasing index
   order.
-- The loops $x_1,\dots,x_n$ are the loops denoted $x_1,\dots,x_n$ in Figure 3
+- The loops $x_1,\dots,x_n$ are the loops denoted $x_1,\dots,x_n$ in [Figure 3](https://arxiv.org/pdf/1010.0321#page=8)
   of [[def-boundary-fixed-mapping-class-group-of-a-punctured-disk]]'s source
   (Gonzalez-Meneses, section 1.6) and correspond to Artin's generators
   $t_1,\dots,t_n$ of the free group of the punctured disk.

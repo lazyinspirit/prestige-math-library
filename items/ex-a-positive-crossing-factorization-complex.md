@@ -1,6 +1,6 @@
 ---
 verification:
-  repair: research/math-library-rendering-repairs-2026-10-23/receipts/ex-a-positive-crossing-factorization-complex.json
+  repair: research/figure-reference-repairs-2026-10-27/receipts/ex-a-positive-crossing-factorization-complex.json
   precheck: pass
 id: ex-a-positive-crossing-factorization-complex
 kind: example
@@ -59,7 +59,7 @@ negative complex applies the overall shift $\{0,-2\}$ to both terms.
 Caveat: the source's arXiv prose misprints the negative crossing in terms of
 $\chi_0$; this example uses the corrected $\chi_1$ complex of
 [[def-positive-and-negative-khovanov-rozansky-crossing-complexes]]
-(Khovanov-Rozansky II, Figure 6 and formula (6); published formula (13)).
+(Khovanov-Rozansky II, [Figure 6](https://arxiv.org/pdf/math/0505056v2#page=6) and formula (6); published formula (13)).
 
 ## Facts & Assumptions
 

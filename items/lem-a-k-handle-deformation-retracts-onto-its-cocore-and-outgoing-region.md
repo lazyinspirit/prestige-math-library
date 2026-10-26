@@ -77,6 +77,6 @@ retraction fixes $S^{k-1}\times S^{n-k-1}$ pointwise.
 
 ## Remarks
 
-- **Relation to Wall's retraction.** Statement (a) is Wall's handle retraction onto the core and attaching region in the disk-factor direction (Wall, Figure 5.6), and (b) is its dual in the complementary disk-factor direction; (c) is the punctured-disk retraction $D^k\smallsetminus\{0\}\to S^{k-1}$ written in the outgoing coordinates.
+- **Relation to Wall's retraction.** Statement (a) is Wall's handle retraction onto the core and attaching region in the disk-factor direction (Wall, [Figure 5.6](https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf#page=147)), and (b) is its dual in the complementary disk-factor direction; (c) is the punctured-disk retraction $D^k\smallsetminus\{0\}\to S^{k-1}$ written in the outgoing coordinates.
 - **Use.** In Milnor's proof of Lemma 7.2 the local computation is exactly (b) together with (c): the handle retracts to its cocore while the complement of the belt sphere in the outgoing region is pushed back onto the attaching boundary $S^{k-1}\times S^{n-k-1}$.
 - **Choice.** All three homotopies are explicit formulas, so no choice principle is used.

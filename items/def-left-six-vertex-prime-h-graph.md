@@ -39,7 +39,7 @@ with edge set
 
 $$\{ab,bc,ad,bd,be,de,ef\}.$$
 
-The labels follow the left drawing in Nguyen–Scott–Seymour, Figure 1:
+The labels follow the left drawing in Nguyen–Scott–Seymour, [Figure 1](https://arxiv.org/pdf/2307.06455#page=2):
 $a,b,c$ run from left to right along its top row and $d,e,f$ along its bottom
 row. The vertices $a,b,d,e$ form a diamond (a complete four-vertex graph
 with the edge $ae$ removed); $c$ is attached only to $b$ and $f$ only to $e$.
@@ -50,4 +50,4 @@ Their degrees in the displayed order are $2,4,1,3,3,1$.
 The earlier triangle-with-three-pendant-leaves description specified the
 net, a different graph with degree sequence $3,3,3,1,1,1$. It is superseded
 here; conclusions about that earlier graph do not establish conclusions
-about the Figure 1 graph.
+about the [Figure 1](https://arxiv.org/pdf/2307.06455#page=2) graph.

@@ -215,7 +215,7 @@ $-2d_ih$ and $2d_ih$ at their respective, different input weights.
 
 The native single-crossing signs follow from $\kappa=-\tau$; two-crossing
 signs are unchanged. The literal triple-dot sum is $-2$, not the compact
-$-1$ printed in Webster's Figure 2: in the full positive-weight equation,
+$-1$ printed in Webster's [Figure 2](https://arxiv.org/pdf/1001.2020v9#page=9): in the full positive-weight equation,
 coefficient indices satisfy $f_1+f_2+f_3=h-1$ and the bubble has literal
 count $b=-h-1+f_2$, giving $a+b+c=-2$; the negative-weight equation uses
 $g_1+g_2+g_3=-h-1$ and $b=h-1+g_2$, giving the same value. Reflection

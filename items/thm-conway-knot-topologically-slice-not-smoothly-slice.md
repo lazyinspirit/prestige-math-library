@@ -76,7 +76,7 @@ disk in the standard $B^4$, but it bounds no smooth proper disk there.
 
 [F4] [[thm-knot-slice-iff-zero-trace-embeds-in-s-four]]: a smooth knot is smoothly slice if and only if its zero-trace smoothly embeds in standard $S^4$.
 
-[F5] [[thm-piccirillo-conway-trace-partner-has-s-two]]: under full AC, the Figure 2 partner $K_P$ has $X_0(C)\cong X_0(K_P)$ and $s(K_P)=2$.
+[F5] [[thm-piccirillo-conway-trace-partner-has-s-two]]: under full AC, the [Figure 2](https://arxiv.org/pdf/1808.02923#page=3) partner $K_P$ has $X_0(C)\cong X_0(K_P)$ and $s(K_P)=2$.
 
 [F6] [[thm-rasmussen-s-bounds-smooth-four-ball-genus]]: under countable choice, $|s(K)|\le2g_4^{\mathrm{sm}}(K)$, with its collared properly embedded cobordism hypotheses satisfied by an actual smooth slice disk.
 
@@ -88,4 +88,4 @@ disk in the standard $B^4$, but it bounds no smooth proper disk there.
 
 2.1 That disk gives $g_4^{\mathrm{sm}}(K_P)=0$. But [F5] gives $s(K_P)=2$, whereas [F6] gives $2=|s(K_P)|\le2g_4^{\mathrm{sm}}(K_P)=0$, a contradiction. Hence $C$ bounds no smooth proper disk in standard $B^4$. [A1, L1, F5, F6, step 1.2, algebra, contradiction]
 
-3.1 Steps 1.1 and 2.1 establish the two conclusions of the unchanged Statement using the Figure 2 partner fixed in the assigned Definition. [step 1.1, step 2.1, construct] ∎
+3.1 Steps 1.1 and 2.1 establish the two conclusions of the unchanged Statement using the [Figure 2](https://arxiv.org/pdf/1808.02923#page=3) partner fixed in the assigned Definition. [step 1.1, step 2.1, construct] ∎

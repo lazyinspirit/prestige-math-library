@@ -103,5 +103,5 @@ Empty rows and products are $1$. All the latter words lie in $B_{2m-1}$, except 
 The abstract packet theorem permits arbitrary internal boxes in $\alpha$.
 Applying it to a pictured geometric band move still requires identifying its
 cut, strand placements and full-twist compensation with $W_m$ or its mirrored
-packet. The statement alone does not identify Traczyk's Figure 10 or certify the
-remaining Figure 8 and Figure 11 comparisons.
+packet. The statement alone does not identify Traczyk's [Figure 10](https://matwbn.icm.edu.pl/ksiazki/bcp/bcp42/bcp42127.pdf#page=10) or certify the
+remaining [Figure 8](https://matwbn.icm.edu.pl/ksiazki/bcp/bcp42/bcp42127.pdf#page=8) and [Figure 11](https://matwbn.icm.edu.pl/ksiazki/bcp/bcp42/bcp42127.pdf#page=10) comparisons.

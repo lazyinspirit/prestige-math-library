@@ -85,6 +85,6 @@ form with coefficients in $\{1,-1\}$. The conventions (two-variable bigrading
 with $\deg a=(2,0)$, $\deg x_i=(0,2)$; $d$ of bidegree $(1,1)$; homotopies of
 bidegree $(-1,-1)$; morphisms commuting with $d$) follow Khovanov-Rozansky,
 *Matrix factorizations and link homology II*, section 1, formulas (1)-(2) and
-the lattice picture of its Figure 3; the ungraded definitions of a duplex and a free-module factorization are
+the lattice picture of its [Figure 3](https://arxiv.org/pdf/math/0505056v2#page=3); the ungraded definitions of a duplex and a free-module factorization are
 Definitions 1-2 in section 2 (printed pp. 13-14) of Khovanov-Rozansky, *Matrix
 factorizations and link homology*.

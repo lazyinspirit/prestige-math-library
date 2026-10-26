@@ -69641,3 +69641,15 @@ Added six P,Q tableau pairs and their shapes in final Remarks; original statemen
 This is a meaning-preserving rendering correction independently adjudicated by /root/rendering_repair_supervisor2/sym_004 (GPT-6.1-Sol, medium), not a new whole-item proof audit. Original source and acceptance evidence remain archived. Current content SHA256: e927db7b7281a7bb170be2a8299a3c167993a3381c0ecd1639dd741edcb9c09e.
 
 <!-- local-published-repair:rendering:ex-rsk-shapes-of-all-six-permutations-in-s3:end -->
+
+<!-- local-published-repair:figure-links:alg-extended-value-iteration:begin -->
+- alg-extended-value-iteration: linked existing figure references to verified source PDF pages; mathematical text unchanged. Current content SHA256: 5c27726e986aea62f5c5c23244534a10e0c4b064f6af85d4f8cf73fe20ea59a0.
+<!-- local-published-repair:figure-links:alg-extended-value-iteration:end -->
+
+<!-- local-published-repair:figure-links:ex-a-positive-crossing-factorization-complex:begin -->
+- ex-a-positive-crossing-factorization-complex: linked existing figure references to verified source PDF pages; mathematical text unchanged. Current content SHA256: 9c661c03141117103c7b59bea0a7917b2bb72314f7feb684a8d38b0f8d8d9476.
+<!-- local-published-repair:figure-links:ex-a-positive-crossing-factorization-complex:end -->
+
+<!-- local-published-repair:figure-links:lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers:begin -->
+- lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers: linked existing figure references to verified source PDF pages; mathematical text unchanged. Current content SHA256: fa6432768e87dc4a988a8b8ca32386027cd7a7a5afe8eecd2fbcd016cf2e1122.
+<!-- local-published-repair:figure-links:lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers:end -->

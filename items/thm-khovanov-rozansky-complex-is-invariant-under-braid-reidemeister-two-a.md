@@ -29,7 +29,7 @@ sources:
 ## Statement
 
 Let $D_1,D_2$ be the two oriented diagrams of the braid-like Reidemeister IIa
-move of Khovanov-Rozansky II, Figure 15 (the move available inside braid
+move of Khovanov-Rozansky II, [Figure 15](https://arxiv.org/pdf/math/0505056v2#page=21) (the move available inside braid
 diagrams), with potential $w=a(x_1+x_2-x_3-x_4)$. Then
 $C(D_1)\cong C(D_2)$ in $K(\mathrm{hmf}_w)$; in particular there is no grading
 shift, and the trigraded cohomology of a braid diagram is unchanged by an IIa
@@ -42,9 +42,9 @@ prove IIb invariance and does not need it for braid closures.
 
 ## Facts & Assumptions
 
-**Given:** the two diagrams $D_1,D_2$ of Figure 15, the four resolutions $\Gamma_{00},\Gamma_{10},\Gamma_{01},\Gamma_{11}$ of $D_1$ with $\Gamma_{01}$ the resolution of $D_2$, their Koszul matrices over $R=\mathbb Q[a,x_1,x_2,x_3,x_4,x_5,x_6]$, and the maps $f_1\colon C(\Gamma_{00})\to C(\Gamma_{10})$, $f_2\colon C(\Gamma_{10})\to C(\Gamma_{11})$ of the resolution cube.
+**Given:** the two diagrams $D_1,D_2$ of [Figure 15](https://arxiv.org/pdf/math/0505056v2#page=21), the four resolutions $\Gamma_{00},\Gamma_{10},\Gamma_{01},\Gamma_{11}$ of $D_1$ with $\Gamma_{01}$ the resolution of $D_2$, their Koszul matrices over $R=\mathbb Q[a,x_1,x_2,x_3,x_4,x_5,x_6]$, and the maps $f_1\colon C(\Gamma_{00})\to C(\Gamma_{10})$, $f_2\colon C(\Gamma_{10})\to C(\Gamma_{11})$ of the resolution cube.
 
-[F1] $C(D)$ is the tensor product of the crossing complexes and arc factors; it is an object of $K(\mathrm{hmf}_w)$ with $w=a(x_1+x_2-x_3-x_4)$ for the diagrams of Figure 15, and $C(D_2)\cong C(\Gamma_{01})$ ([[def-khovanov-rozansky-complex-and-trigraded-braid-homology]]).
+[F1] $C(D)$ is the tensor product of the crossing complexes and arc factors; it is an object of $K(\mathrm{hmf}_w)$ with $w=a(x_1+x_2-x_3-x_4)$ for the diagrams of [Figure 15](https://arxiv.org/pdf/math/0505056v2#page=21), and $C(D_2)\cong C(\Gamma_{01})$ ([[def-khovanov-rozansky-complex-and-trigraded-braid-homology]]).
 
 [F2] The morphisms $\chi_0,\chi_1$ of the crossing complexes are the flip morphisms in the Koszul forms of the resolutions; the differential of a resolution cube is a sum of such morphisms, and the element $\mathrm{Id}\otimes\psi(y)$ acts by the identity on the first term and by multiplication by $y$ on the middle term ([[def-chi-zero-and-chi-one-wide-edge-morphisms]]).
 
@@ -62,4 +62,4 @@ prove IIb invariance and does not need it for braid closures.
 
 3.1 *Splitting the reduced diagram.* In the reduced diagram the first factorization has a contractible summand $R'\xrightarrow{1}R'(x_2-x_6)$, whose removal leaves the rank-one row $R'(x_6+x_2-x_3-x_4)\xrightarrow{(x_2-x_4)(x_2-x_3)}R'$; the middle factorization is the direct sum of the two factorizations $R'\xrightarrow{(x_2-x_4)(x_3-x_2)}R'$ and $R'(x_6+x_2-x_3-x_4)\xrightarrow{(x_2-x_4)(x_3-x_2)}R'(x_6+x_2-x_3-x_4)$, isomorphic to the first up to a grading shift; and the third factorization is the rank-one row over $R'$ with differential $(x_2-x_4)(x_3-x_2)$. The map $g_1$ takes the reduced first factorization isomorphically onto the second summand of the middle factorization, and $g_2$ restricts to an isomorphism from the first summand of the middle factorization onto the third factorization; thus $f_1$ is an isomorphism onto a direct summand and $f_2$ restricts to an isomorphism from a complement, as required by step 1.1, so $C(D_1)$ is isomorphic in $K(\mathrm{hmf}_w)$ to the direct sum of two contractible complexes and $C(\Gamma_{01})\cong C(D_2)$. Every map in the computation is homogeneous of bidegree $(0,0)$ between the shifted rows, so no grading shift occurs. [F1, step 1.1, step 2.1]
 
-4.1 *Conclusion and mirror image.* Steps 1.2-3.1 verify the splitting criterion of step 1.1 for the pair of Figure 15, giving $C(D_1)\cong C(D_2)$ in $K(\mathrm{hmf}_w)$ with no shift of the trigrading, hence an isomorphism of trigraded cohomology for the two braid-like IIa diagrams. The mirror-image move is the same computation with the signs of all potentials reversed and the roles of the two sides exchanged, which leaves the conclusion unchanged; both diagrams have potential $w$ in Figure 15 and potential $-w$ after all orientations are reversed, and no step of the argument uses the Axiom of Choice. [F1, F2, step 3.1] ∎
+4.1 *Conclusion and mirror image.* Steps 1.2-3.1 verify the splitting criterion of step 1.1 for the pair of [Figure 15](https://arxiv.org/pdf/math/0505056v2#page=21), giving $C(D_1)\cong C(D_2)$ in $K(\mathrm{hmf}_w)$ with no shift of the trigrading, hence an isomorphism of trigraded cohomology for the two braid-like IIa diagrams. The mirror-image move is the same computation with the signs of all potentials reversed and the roles of the two sides exchanged, which leaves the conclusion unchanged; both diagrams have potential $w$ in [Figure 15](https://arxiv.org/pdf/math/0505056v2#page=21) and potential $-w$ after all orientations are reversed, and no step of the argument uses the Axiom of Choice. [F1, F2, step 3.1] ∎

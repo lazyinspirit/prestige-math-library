@@ -31,7 +31,7 @@ sources:
 ## Statement
 
 Let $D_1,D_2$ be the two diagrams of the braid-like Reidemeister III move with
-orientations pointing in the same direction (Khovanov-Rozansky II, Figure 18),
+orientations pointing in the same direction (Khovanov-Rozansky II, [Figure 18](https://arxiv.org/pdf/math/0505056v2#page=27)),
 with the ground ring $R=\mathbb Q[a,x_1,\dots,x_6]$ and potential
 $w=a(x_1+x_2+x_3-x_4-x_5-x_6)$. Then
 $C(D_1)\cong C(D_2)$ in $K(\mathrm{hmf}_w)$, with no grading shift.

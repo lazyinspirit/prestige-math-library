@@ -57,7 +57,7 @@ Assume the Axiom of Choice for the general density-based Metropolis–Hastings i
 
 [F1] In the stated $m=256$, $\gamma^2=10^{-5}$, $n_{KL}=128$ setting, Table 1 reports baseline MLP-800 acceptance rates $(0.66,11.21,5.97,5.47)\%$ for the four truths. [[Blechschmidt et al., §4.2.1, Fig. 6 and Table 1](https://arxiv.org/pdf/2610.02377)]
 
-[F2] In the same Fig. 6 setting, the paper reports that the MLP's posterior means and 95\% bands match the DRAM reference between $0.8\%$ and $1.8\%$ in relative $L^2$. [[Blechschmidt et al., §4.2.1](https://arxiv.org/pdf/2610.02377)]
+[F2] In the same [Fig. 6](https://arxiv.org/pdf/2610.02377#page=15) setting, the paper reports that the MLP's posterior means and 95\% bands match the DRAM reference between $0.8\%$ and $1.8\%$ in relative $L^2$. [[Blechschmidt et al., §4.2.1](https://arxiv.org/pdf/2610.02377)]
 
 [F3] For the first truth the normalized observation radius is $2.53$ versus median training radius $0.85$, and the source reports that $0.12\%$ of the two million training observations have a still larger radius. It describes the sine observation as an extreme prior-predictive tail with almost no nearby training data. [[Blechschmidt et al., §4.2.2](https://arxiv.org/pdf/2610.02377)]
 

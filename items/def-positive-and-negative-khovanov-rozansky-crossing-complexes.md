@@ -32,7 +32,7 @@ With $\chi_0\colon C(\Gamma_0)\to C(\Gamma_1)$ and
 $\chi_1\colon C(\Gamma_1)\to C(\Gamma_0)$ as in
 [[def-chi-zero-and-chi-one-wide-edge-morphisms]], assign to a crossing $p$ of a
 tangle diagram the following two-term complex of matrix factorizations, using
-the integer grading of arXiv:math/0505056v2, Figure 6.
+the integer grading of arXiv:math/0505056v2, [Figure 6](https://arxiv.org/pdf/math/0505056v2#page=6).
 
 **Positive crossing.**
 $$C_p=\bigl[0\to C(\Gamma_0)\{0,2\}\xrightarrow{\chi_0}C(\Gamma_1)\to0\bigr],$$
@@ -48,9 +48,9 @@ normalization required by the Reidemeister IIa move.
 In both cases the differential is $\chi_0$ or $\chi_1$ and has bidegree
 $(0,0)$ as a map of the shifted terms.
 
-**Recorded source conflict and regrading.** The arXiv prose before Figure 6
+**Recorded source conflict and regrading.** The arXiv prose before [Figure 6](https://arxiv.org/pdf/math/0505056v2#page=6)
 incorrectly displays the negative crossing with $\chi_0$ in the opposite
-direction. Its Figure 6, the bidegrees of the matrices (5)-(6), and the
+direction. Its [Figure 6](https://arxiv.org/pdf/math/0505056v2#page=6), the bidegrees of the matrices (5)-(6), and the
 negative-crossing Euler relation in section 7 agree with the $\chi_1$-cone
 above. The published version of record corrects the direction but also
 changes the grading: writing $C_{p,\mathrm{v2}}^+$ and
@@ -80,4 +80,4 @@ only by the source's IIa normalization.
 
 1.2 *The negative complex is a complex of factorizations.* Likewise the two-term complex $0\to C(\Gamma_1)\{0,-2\}\xrightarrow{\chi_1}C(\Gamma_0)\{0,-2\}\to0$ has zero composite on the one composable side, its terms are objects of $\mathrm{hmf}_w$, and $\chi_1$ has bidegree $(0,0)$ by [F1]; the overall shift $\{0,-2\}$ is applied to both terms, so it shifts the grading of both terms alike and leaves the differential bidegree-preserving. With $C(\Gamma_1)\{0,-2\}$ in degree $0$ and $C(\Gamma_0)\{0,-2\}$ in degree $1$, the two terms are exactly the cone of $\chi_1$. [F1, algebra]
 
-2.1 *The source conflict and the grading comparison.* In the integer grading, the negative cone has Euler characteristic $q^{-2}(\langle De_i\rangle-\langle D\rangle)$, as in arXiv section 7, whereas reversing its two terms changes the sign; moreover the printed $\chi_0$ with equal shifts would still have bidegree $(0,2)$ by [F1]. Thus that prose display is incompatible with both the bidegree condition and Figure 6. For the published positive cone, shifting the outer degrees $-1,0$ by $[-\tfrac12]$ gives $-\tfrac12,\tfrac12$, and adding $(-\tfrac12,-\tfrac12)$ to the internal shifts gives $(-\tfrac12,\tfrac32)$ and $(-\tfrac12,-\tfrac12)$, exactly formula (12). For the negative cone, $[\tfrac12]$ moves degrees $0,1$ to $-\tfrac12,\tfrac12$, and adding $(\tfrac12,\tfrac12)$ to both internal shifts $(0,-2)$ gives $(\tfrac12,-\tfrac32)$, exactly formula (13). The maps remain $\chi_0,\chi_1$, up to compatible shift signs; agreement with the published cones therefore requires the recorded regrading. [F1, step 1.1, step 1.2, algebra] ∎
+2.1 *The source conflict and the grading comparison.* In the integer grading, the negative cone has Euler characteristic $q^{-2}(\langle De_i\rangle-\langle D\rangle)$, as in arXiv section 7, whereas reversing its two terms changes the sign; moreover the printed $\chi_0$ with equal shifts would still have bidegree $(0,2)$ by [F1]. Thus that prose display is incompatible with both the bidegree condition and [Figure 6](https://arxiv.org/pdf/math/0505056v2#page=6). For the published positive cone, shifting the outer degrees $-1,0$ by $[-\tfrac12]$ gives $-\tfrac12,\tfrac12$, and adding $(-\tfrac12,-\tfrac12)$ to the internal shifts gives $(-\tfrac12,\tfrac32)$ and $(-\tfrac12,-\tfrac12)$, exactly formula (12). For the negative cone, $[\tfrac12]$ moves degrees $0,1$ to $-\tfrac12,\tfrac12$, and adding $(\tfrac12,\tfrac12)$ to both internal shifts $(0,-2)$ gives $(\tfrac12,-\tfrac32)$, exactly formula (13). The maps remain $\chi_0,\chi_1$, up to compatible shift signs; agreement with the published cones therefore requires the recorded regrading. [F1, step 1.1, step 1.2, algebra] ∎

@@ -80,7 +80,7 @@ For the R-parity-conserving (RPC) benchmarks, the lightest neutralino $\tilde\ch
 - **TChiWZ:** $\tilde\chi^\pm_1\tilde\chi^0_2$ production with $m_{\tilde\chi^\pm_1}=m_{\tilde\chi^0_2}$, followed by $\tilde\chi^\pm_1\to W^\pm\tilde\chi^0_1$ and $\tilde\chi^0_2\to Z\tilde\chi^0_1$.
 - **TChiWW:** $\tilde\chi^+_1\tilde\chi^-_1$ production, with each chargino decaying to $W^\pm\tilde\chi^0_1$.
 
-In Figure 7 the RPC contours are plotted against the parent-sparticle mass and $m_{\tilde\chi^0_1}$; for TChiWZ the parent-mass coordinate satisfies $m_{\tilde\chi^\pm_1}=m_{\tilde\chi^0_2}$, and for TChiWW it is $m_{\tilde\chi^\pm_1}$.
+In [Figure 7](https://inspirehep.net/files/be754b4c35f11643a9b6f4cabf36deaa#page=26) the RPC contours are plotted against the parent-sparticle mass and $m_{\tilde\chi^0_1}$; for TChiWZ the parent-mass coordinate satisfies $m_{\tilde\chi^\pm_1}=m_{\tilde\chi^0_2}$, and for TChiWW it is $m_{\tilde\chi^\pm_1}$.
 
 A branching fraction is the assumed fraction of a parent particle's decays that use a specified mode; the displayed 0.5/0.5 values encode equal fractions. The PAS diagrams do not state additional branching fractions for the T5qqqqWH or electroweakino benchmarks, so none is added here. A production cross section is the model's rate parameter with area units; multiplied by integrated luminosity it predicts produced pairs before detector acceptance and selection efficiency.
 
@@ -128,7 +128,7 @@ Confidence sets and coverage levels: [[def-cm-confidence-set-and-coverage]].
 
 ## Observations
 
-The collaboration reports that data are consistent with Standard Model expectations and that no significant deviations were observed. Its observed 95% confidence-level mass reaches are: gluino masses up to 2.25 TeV in T5ttcc, 2.35 TeV in T5qqqqWH, and 2.30 TeV in T5bbbbZH; top-squark masses up to 1.45 TeV in T6ttZH; nearly mass-degenerate chargino/neutralino masses up to 1.05 TeV in TChiWZ and 0.94 TeV in TChiWW; bottom-squark masses up to 0.97 TeV in R2bbqqlv; and gluino masses up to 1.82 TeV in R5ttbl. Figures 7–8 also show observed and expected 95% confidence-level upper limits on production cross sections and their corresponding mass-contour boundaries, with expected-fluctuation bands. The expected contours use the background-only test-statistic distribution; the PAS does not tabulate numerical expected mass reaches and this report does not digitize them. The reported limits depend on each model's plotted decay and mass assumptions.
+The collaboration reports that data are consistent with Standard Model expectations and that no significant deviations were observed. Its observed 95% confidence-level mass reaches are: gluino masses up to 2.25 TeV in T5ttcc, 2.35 TeV in T5qqqqWH, and 2.30 TeV in T5bbbbZH; top-squark masses up to 1.45 TeV in T6ttZH; nearly mass-degenerate chargino/neutralino masses up to 1.05 TeV in TChiWZ and 0.94 TeV in TChiWW; bottom-squark masses up to 0.97 TeV in R2bbqqlv; and gluino masses up to 1.82 TeV in R5ttbl. [Figures 7–8](https://inspirehep.net/files/be754b4c35f11643a9b6f4cabf36deaa#page=26) also show observed and expected 95% confidence-level upper limits on production cross sections and their corresponding mass-contour boundaries, with expected-fluctuation bands. The expected contours use the background-only test-statistic distribution; the PAS does not tabulate numerical expected mass reaches and this report does not digitize them. The reported limits depend on each model's plotted decay and mass assumptions.
 
 ## Observations references
 

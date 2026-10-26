@@ -31,7 +31,7 @@ verification:
 
 Let $D$ be a closed marked MOY resolution with $r$ wide edges and $m$ strands,
 carrying marks $(i,j)$ with $0\le i\le r$, $1\le j\le m$, as in Khovanov's
-figure 4: for each layer $1\le i\le r$ the $i$-th wide edge occupies two
+[figure 4](https://arxiv.org/pdf/math/0510265#page=9): for each layer $1\le i\le r$ the $i$-th wide edge occupies two
 adjacent positions $s,s+1$, and the variables $x_{i,j}$ label the marks. Let
 $C(D)$ be the factorization of [[def-factorization-of-a-marked-moy-graph]]
 built from the arc and wide-edge factorizations of

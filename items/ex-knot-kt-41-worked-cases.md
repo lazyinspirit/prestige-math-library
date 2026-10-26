@@ -97,7 +97,7 @@ The braid schematic is the closure of the positive two-strand braid $\sigma_1^3$
 
 [A1] [[def-countable-choice]] is the assumption retained in the Statement.
 
-[F1] **External input, authorized by the run-specific source boundary.** Hom, *A survey on Heegaard Floer homology and concordance*, §2.2, Figure 3(a),(c), gives the normalized $CFK^\infty(T_{2,3})$ staircase with generators $a,b,c$, $\partial b=Ua+c$, and Maslov gradings $0,-1,-2$. The displayed Alexander levels are $1,0,-1$. The same section identifies $\widehat{CFK}(T_{2,3})$ as the $i=0$ filtered complex; Example 3.3 in §3.1 computes $\tau(T_{2,3})=1$, and Theorem 3.1(1) states that this is the standard knot invariant. I read the figure caption, threshold definition, and examples; I do not claim to reconstruct the Heegaard-diagram computation.
+[F1] **External input, authorized by the run-specific source boundary.** Hom, *A survey on Heegaard Floer homology and concordance*, §2.2, [Figure 3(a),(c)](https://arxiv.org/pdf/1512.00383v3#page=6), gives the normalized $CFK^\infty(T_{2,3})$ staircase with generators $a,b,c$, $\partial b=Ua+c$, and Maslov gradings $0,-1,-2$. The displayed Alexander levels are $1,0,-1$. The same section identifies $\widehat{CFK}(T_{2,3})$ as the $i=0$ filtered complex; Example 3.3 in §3.1 computes $\tau(T_{2,3})=1$, and Theorem 3.1(1) states that this is the standard knot invariant. I read the figure caption, threshold definition, and examples; I do not claim to reconstruct the Heegaard-diagram computation.
 
 [F2] [[lem-tau-of-the-unknot-is-zero]] computes $\tau(U)=0$ in the normalized genus-zero one-pointed model.
 

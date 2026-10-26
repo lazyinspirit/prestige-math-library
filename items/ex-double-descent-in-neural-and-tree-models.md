@@ -44,15 +44,15 @@ networks, trees, or ensembles.
 **Given:** The reported empirical plots and experiment descriptions in the
 source cited in Example references.
 
-[F1] Figure 2 describes the random-Fourier-feature MNIST experiment and its
-interpolation threshold; Figure 4 describes the two-layer neural-network
-experiment; Figure 5 describes the random-forest experiment. The paper labels
+[F1] [Figure 2](https://arxiv.org/pdf/1812.11118#page=5) describes the random-Fourier-feature MNIST experiment and its
+interpolation threshold; [Figure 4](https://arxiv.org/pdf/1812.11118#page=8) describes the two-layer neural-network
+experiment; [Figure 5](https://arxiv.org/pdf/1812.11118#page=9) describes the random-forest experiment. The paper labels
 these as empirical evidence, not a universal theorem.
 
 ## Verification
 
-1.1 The Figure 2 description gives $n=10^4$, ten classes, and the threshold $N=n=10^4$; these are the random-feature quantities stated in the Example. [given, F1]
+1.1 The [Figure 2](https://arxiv.org/pdf/1812.11118#page=5) description gives $n=10^4$, ten classes, and the threshold $N=n=10^4$; these are the random-feature quantities stated in the Example. [given, F1]
 
-1.2 The Figure 4 description gives $n=4\cdot10^3$, input dimension $784$, ten outputs, and threshold observed at $nK$ parameters. The Figure 5 description gives $n=10^4$ and indexes forest complexity by maximum leaves and tree count. [given, F1]
+1.2 The [Figure 4](https://arxiv.org/pdf/1812.11118#page=8) description gives $n=4\cdot10^3$, input dimension $784$, ten outputs, and threshold observed at $nK$ parameters. The [Figure 5](https://arxiv.org/pdf/1812.11118#page=9) description gives $n=10^4$ and indexes forest complexity by maximum leaves and tree count. [given, F1]
 
 2.1 The source reports experiments for those specified datasets and model families, so the Example is an empirical report with those qualifications; it does not claim a theorem for models beyond the experiments. [given, F1] ∎ 

@@ -58,10 +58,28 @@ Deleting either leaf does **not** give the bull.
 
 2.1 The following table covers every unordered pair of vertices. Starting from the pair in the first column, append the vertices in the second column from left to right. At each append, [F1] shows that the new vertex has a neighbour and a nonneighbour in the set already obtained. Consequently step 1.2 forces all six vertices into every module containing the initial pair. [F1, step 1.2]
 
-| Initial pair | Successive forced vertices | |---|---| | $a,b$ | $c,d,e,f$ | | $a,c$ | $d,e,f,b$ | | $a,d$ | $e,f,b,c$ | | $a,e$ | $f,b,c,d$ | | $a,f$ | $b,c,d,e$ | | $b,c$ | $a,d,e,f$ | | $b,d$ | $c,a,e,f$ | | $b,e$ | $a,c,d,f$ | | $b,f$ | $a,c,d,e$ | | $c,d$ | $a,e,f,b$ | | $c,e$ | $d,a,f,b$ | | $c,f$ | $b,a,d,e$ | | $d,e$ | $a,f,b,c$ | | $d,f$ | $a,b,c,e$ | | $e,f$ | $b,a,c,d$ |
-
 3.1 Every set with at least two vertices contains one of those pairs, so step 2.1 excludes every proper module of size at least two. By [L1], $L$ is prime. Together with step 1.1 this proves all the stated claims. [L1, step 1.1, step 2.1] ∎
+
+## Pair-closure table
+
+| Initial pair | Successive forced vertices |
+|---|---|
+| $a,b$ | $c,d,e,f$ |
+| $a,c$ | $d,e,f,b$ |
+| $a,d$ | $e,f,b,c$ |
+| $a,e$ | $f,b,c,d$ |
+| $a,f$ | $b,c,d,e$ |
+| $b,c$ | $a,d,e,f$ |
+| $b,d$ | $c,a,e,f$ |
+| $b,e$ | $a,c,d,f$ |
+| $b,f$ | $a,c,d,e$ |
+| $c,d$ | $a,e,f,b$ |
+| $c,e$ | $d,a,f,b$ |
+| $c,f$ | $b,a,d,e$ |
+| $d,e$ | $a,f,b,c$ |
+| $d,f$ | $a,b,c,e$ |
+| $e,f$ | $b,a,c,d$ |
 
 ## Remarks
 
-The stable item ID retains its earlier bull-deletion wording for link compatibility. That claim concerned the superseded net interpretation of the left graph. The title, statement and verification above concern the actual Nguyen–Scott–Seymour Figure 1 graph.
+The stable item ID retains its earlier bull-deletion wording for link compatibility. That claim concerned the superseded net interpretation of the left graph. The title, statement and verification above concern the actual Nguyen–Scott–Seymour [Figure 1](https://arxiv.org/pdf/2307.06455#page=2) graph.

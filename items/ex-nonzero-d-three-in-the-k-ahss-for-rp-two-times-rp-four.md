@@ -51,4 +51,4 @@ $K$-theory Künneth theorem or group-order argument is used.
 
 ## Source notes
 
-Compare [Ji](https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf), §3.2.4, Figure 2 and Proposition 3.12, printed pp. 11–12, for the nonzero $d_3$ on $\mathbb{RP}^2\times\mathbb{RP}^4$.
+Compare [Ji](https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf), §3.2.4, [Figure 2](https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf#page=12) and Proposition 3.12, printed pp. 11–12, for the nonzero $d_3$ on $\mathbb{RP}^2\times\mathbb{RP}^4$.

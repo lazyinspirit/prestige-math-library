@@ -60,4 +60,4 @@ $\{ac,ae,af,bf,cd,ce,cf,df\}$.
 
 ## Remarks
 
-For comparison with Nguyen–Scott–Seymour Figure 1, label the right drawing's top row $A,B,C$ and bottom row $D,E,F$. The bijection $$a\mapsto D,\quad b\mapsto F,\quad c\mapsto B,\quad d\mapsto C,\quad e\mapsto A,\quad f\mapsto E$$ sends the eight edges above to $BD,AD,DE,EF,BC,AB,BE,CE$, exactly the edges of that drawing. The former labels and complement-of-net interpretation are superseded; the complement argument now applies to the corrected seven-edge left graph.
+For comparison with Nguyen–Scott–Seymour [Figure 1](https://arxiv.org/pdf/2307.06455#page=2), label the right drawing's top row $A,B,C$ and bottom row $D,E,F$. The bijection $$a\mapsto D,\quad b\mapsto F,\quad c\mapsto B,\quad d\mapsto C,\quad e\mapsto A,\quad f\mapsto E$$ sends the eight edges above to $BD,AD,DE,EF,BC,AB,BE,CE$, exactly the edges of that drawing. The former labels and complement-of-net interpretation are superseded; the complement argument now applies to the corrected seven-edge left graph.

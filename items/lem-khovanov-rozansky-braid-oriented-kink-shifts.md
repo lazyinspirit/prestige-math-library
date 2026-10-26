@@ -29,10 +29,10 @@ sources:
 ## Statement
 
 Let $D_1,D_2$ be the two diagrams of the **type IA** oriented Reidemeister I
-move of Khovanov-Rozansky II, Figure 12 (the two braid-oriented curl diagrams,
+move of Khovanov-Rozansky II, [Figure 12](https://arxiv.org/pdf/math/0505056v2#page=20) (the two braid-oriented curl diagrams,
 with the orientations displayed there and potential $w=a(x_1-x_4)$), and let
 $E_1,E_2$ be the two diagrams of the **type IB** oriented Reidemeister I move
-of Figure 14. Then, in $K(\mathrm{hmf}_w)$:
+of [Figure 14](https://arxiv.org/pdf/math/0505056v2#page=21). Then, in $K(\mathrm{hmf}_w)$:
 
 $$C(D_1)\cong\Pi C(D_2)\{1,1\}[1]$$
 

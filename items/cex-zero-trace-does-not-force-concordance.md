@@ -57,7 +57,7 @@ $X_0(K_0)\cong X_0(K_1)$ implies that $K_0$ and $K_1$ are smoothly concordant.
 
 ## Facts & Assumptions
 
-**Given:** Full AC, the Conway knot $C$ and its Figure 2 trace partner $K_P$.
+**Given:** Full AC, the Conway knot $C$ and its [Figure 2](https://arxiv.org/pdf/1808.02923#page=3) trace partner $K_P$.
 
 [A1] The Axiom of Choice, written AC, is assumed. [[def-axiom-of-choice]]
 

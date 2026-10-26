@@ -213,7 +213,7 @@ amounts to quotienting by terms indexed by $y<w$.
    linearly independent over the fraction field; and by the result of item 3
    below they span.
 2. *Construction of light leaves.* (Elias–Williamson, Construction 6.1 with
-   Figure 2.) For every pair $(\underline x,e)$ expressing $w$ and every
+   [Figure 2](https://arxiv.org/pdf/1309.0865#page=58).) For every pair $(\underline x,e)$ expressing $w$ and every
    $k\le\ell(\underline x)$, the truncated light leaf on the first $k$ letters is
    obtained from the truncated light leaf on the first $k-1$ letters by a rex
    move $\beta$ when the $k$-th letter is a down step, followed by exactly one of
