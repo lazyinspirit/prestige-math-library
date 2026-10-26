@@ -285,7 +285,10 @@ export function appendStages(stages: Stage[], ctx: Pick<Ctx, 'repo' | 'run'>): S
   const entries = appendRegistry(ctx.repo, ctx.run).appends;
   if (!entries.length) return stages;
   const index = stages.findIndex(s => s.id === '1-scaffold'), original = stages.find(s => s.id === '1-drift');
-  if (index < 0 || !original || stages[index - 1]?.id !== '1-drift-apply') fail('unsupported native Step-1 stage table');
+  const applied = stages.findIndex(s => s.id === '1-drift-apply');
+  if (index < 0 || !original || applied < 0 || applied >= index
+    || stages.slice(applied + 1, index).some(s => s.id !== '1-baseline'))
+    fail('unsupported native Step-1 stage table');
   const inserted: Stage[] = entries.flatMap((e: any) => {
     const label = `drift-review-append-${e.number}`, unit = `append-${e.number}`;
     const recertify = () => ({ id: 'append-frontier-metadata-recertify', argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'recertify', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_RECERT (\\d+) item', min: 1 } });

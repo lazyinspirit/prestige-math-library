@@ -114,6 +114,12 @@ test('saved Step1 completion cannot cover fresh append drift or launch scaffold 
   ];
   const table = appendStages(base, { repo: f.repo, run: 'demo' });
   assert.deepEqual(table.map(s => s.id), ['1-drift', '1-drift-apply', '1-append-drift-1', '1-append-apply-1', '1-scaffold']);
+  const baseline = { id: '1-baseline', label: 'immutable baseline', gatesWaived: 'Existing snapshot' };
+  const withBaseline = appendStages([...base.slice(0, 2), baseline, base[2]], { repo: f.repo, run: 'demo' });
+  assert.deepEqual(withBaseline.map(s => s.id), ['1-drift', '1-drift-apply', '1-baseline', '1-append-drift-1', '1-append-apply-1', '1-scaffold']);
+  assert.equal(withBaseline[2], baseline);
+  assert.equal(withBaseline[3].gates!({ repo: f.repo, run: 'demo' } as any).length, 4);
+  assert.throws(() => appendStages([...base.slice(0, 2), { id: 'unrelated' }, base[2]], { repo: f.repo, run: 'demo' }), /unsupported/);
   const gates = table[2].gates!({ repo: f.repo, run: 'demo' } as any);
   assert.equal(gates.length, 4);
   assert.equal(gates[0].id, 'append-frontier-metadata-recertify');
