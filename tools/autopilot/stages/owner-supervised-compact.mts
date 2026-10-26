@@ -39,8 +39,10 @@ export function ownerSupervisedCompactStages(stages: any[]) {
     return !doc.holds.some((h: any) => h.stages.includes(stageId) && h.units.includes(unit));
   };
   return stages.map((source: any) => {
-    // Step 6 owns its metadata/render preparation and final transaction.
-    if (source.id.startsWith('6-')) return source;
+    // Step 6 and native appended-page planning own their scoped preparation.
+    // Appended planning runs before its new carriers exist; the authored-frontier
+    // owner battery cannot certify it. Keep every native append review/gate.
+    if (source.id.startsWith('6-') || /^1-append-(?:drift|apply)-[1-9]\d*$/.test(source.id)) return source;
     const stage = { ...source };
     stage.unitEligible = (context: any, unit: string) =>
       source.unitEligible?.(context, unit) !== false && ownerEligible(context, source.id, unit);
