@@ -19,5 +19,4 @@ Uncertainty Quantification uses PDE-constrained optimization and spectral bounds
 Specialized results also connect these pages to Complex Analysis, Differential Geometry,
 Fourier Analysis, and Probability. A ceiling bound from Statistical Models and Experiments
 enters monotone Hamilton–Jacobi–Bellman convergence. Variational and evolution estimates
-support Inverse Problems, Neural Networks and Learning Dynamics, and Representation Learning
-and Generative Models.
+support Inverse Problems, Neural Networks and Learning Dynamics, and Machine Learning Algorithms.

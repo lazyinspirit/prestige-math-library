@@ -16,6 +16,5 @@ Differential Equations and Stochastic Dynamics uses survival and point-process m
 Numerical Linear Algebra and Approximation uses time-series prediction. Causal and design
 results serve Inverse Problems and Numerical Optimization Inverse Problems and Uncertainty
 Quantification. Distribution results also appear in Information Theory, Neural Networks and
-Learning Dynamics, Online and Reinforcement Learning, Representation Learning and Generative
-Models, and Statistical Learning and Classical Models; ceiling and integer-threshold facts
+Learning Dynamics, Machine Learning Algorithms, and Statistical Learning and Classical Models; ceiling and integer-threshold facts
 are used in Quantum Algorithms and Numerical Pdes and Spatial Discretization.

@@ -15,5 +15,5 @@ Algebra, Linear Algebra, Probability, Measure Theory, Real Analysis, and Number 
 support finite encodings and algebraic or probabilistic arguments. Group Theory uses
 undecidability and machine models, while Quantum Algorithms and Quantum Computing use
 machine, circuit, and promise-problem interfaces. Information Theory uses Kraft's
-inequality; Online and Reinforcement Learning uses coding of finite sequences, and
+inequality; the Machine Learning Algorithms collection uses coding of finite sequences, and
 Statistical Models and Experiments draws on the harmonic bound for set cover.

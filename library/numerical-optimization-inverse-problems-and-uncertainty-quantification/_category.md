@@ -18,6 +18,5 @@ Algebra and Approximation and Numerical Differential Equations and Stochastic Dy
 supply computational tools. Regularization results serve Inverse Problems; Newton and
 sensitivity methods support Numerical Differential Equations and Stochastic Dynamics and
 Numerical Pdes and Spatial Discretization. Reverse-mode differentiation and
-simulation-gradient methods recur in Neural Networks and Learning Dynamics, Online and
-Reinforcement Learning, and Representation Learning and Generative Models; convex-duality
+simulation-gradient methods recur in Neural Networks and Learning Dynamics and Machine Learning Algorithms; convex-duality
 results also serve Statistical Learning and Classical Models.
