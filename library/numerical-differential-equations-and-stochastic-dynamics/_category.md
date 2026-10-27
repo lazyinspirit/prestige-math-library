@@ -19,5 +19,5 @@ Approximation contributes verified-evaluation tools. Runge–Kutta error recurre
 solvers in Numerical Optimization Inverse Problems and Uncertainty Quantification and
 Numerical Pdes and Spatial Discretization, while Euler–Maruyama and Brownian coupling
 support Bayesian Computational Statistics. These results also appear in Inverse Problems and
-Representation Learning and Generative Models, including projection and continuous-flow
+Machine Learning Algorithms, including projection and continuous-flow
 analyses.

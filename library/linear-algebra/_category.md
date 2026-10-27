@@ -18,5 +18,5 @@ algebra supplies methods used in Abstract Algebra, Representation Theory of Grou
 Coxeter Groups, Algebraic Geometry and Differential Topology. Its inner-product,
 spectral, matrix and subspace tools support Numerical Linear Algebra and Approximation,
 Quantum Algorithms, Quantum Computing and Statistical Learning and Classical Models.
-Other applied connections include Online and Reinforcement Learning, Neural Networks and
+Other applied connections include Machine Learning Algorithms, Neural Networks and
 Learning Dynamics, and Inverse Problems.

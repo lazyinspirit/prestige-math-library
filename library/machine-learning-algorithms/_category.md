@@ -1,0 +1,9 @@
+---
+name: machine-learning-algorithms
+title: Machine Learning Algorithms
+status: published
+---
+
+Machine learning algorithms construct representations, model data distributions, and learn decisions from feedback. These pages develop self-supervised and contrastive objectives, reconstruction and latent-variable models, energy and adversarial learning, transport duality, normalizing flows, flow matching, and diffusion. Multimodal alignment and foundation-model transfer connect representation methods to broader modeling tasks. The sequential-decision branch covers online regret, adaptive confidence, stochastic and adversarial bandits, finite MDPs, tabular control, policy gradients, function approximation, planning, and offline evaluation. Further topics include partial observability, imitation, constrained policies, preference optimization, and verifiable generation.
+
+Probability, Measure Theory, and Mathematical Statistics provide sampling, concentration, and inference tools; Statistical Learning and Classical Models supplies risk, prediction, and generalization methods. Neural Networks and Learning Dynamics contributes architectures and differentiation, while Linear Algebra and Functional Analysis support approximation. Numerical Optimization, Inverse Problems and Uncertainty Quantification informs training and policy optimization; Numerical Differential Equations and Stochastic Dynamics supports continuous flows and diffusion. The reading pathway connects these foundations to representation, generation, and sequential decisions, with example companions alongside the theory pages. Guarantees retain each algorithm’s feedback protocol, comparator, regularity, approximation, and solver assumptions, and empirical scaling evidence remains distinct from mathematical conclusions.

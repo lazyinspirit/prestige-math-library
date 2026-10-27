@@ -18,5 +18,4 @@ uses prior and posterior laws for Gaussian inverse models; Monte Carlo and multi
 support Numerical Optimization Inverse Problems and Uncertainty Quantification and Numerical
 Differential Equations and Stochastic Dynamics. Leapfrog and interpolation results appear in
 Numerical Pdes and Spatial Discretization. Gaussian-process results serve Statistical
-Learning and Classical Models; variational inference serves Representation Learning and
-Generative Models.
+Learning and Classical Models; variational inference serves Machine Learning Algorithms.

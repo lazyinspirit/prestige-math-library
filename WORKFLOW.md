@@ -69,6 +69,17 @@ review coverage, rewrites no native evidence, and leaves all scope checks,
 later reviews, recertification and complete gate batteries mandatory. The schema
 and scope-digest calculation are in [tools/drift-owner-resolutions.md](tools/drift-owner-resolutions.md).
 
+A native appended-frontier blocker has the corresponding exact owner path in
+`research/RUN-frontier-append-N/owner-drift-resolutions.json`. It additionally
+binds the already successful engine-started refresh/seal, exact affected
+planned item/design and consumer/prerequisite interfaces, their ledger rows,
+appended page identities and actual proof evidence. Unrelated plan additions
+and ordinary inventory authoring do not invalidate that scoped acceptance. Both the append
+check and post-merge drift check validate it; the native blocked verdict stays
+unchanged. This resolves only the named planning blocker, without new native
+coverage or whole-theorem readiness. See
+[tools/append-drift-owner-resolutions.md](tools/append-drift-owner-resolutions.md).
+
 Construction readiness retains its snapshot and receipt-stamped decisions across
 fresh controller contexts belonging to the same configuration and frontier.
 Manifest, coverage, plan, consumed supplier and missing-dependency file stamps

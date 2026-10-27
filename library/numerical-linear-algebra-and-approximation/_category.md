@@ -18,5 +18,5 @@ Differential Equations and Stochastic Dynamics, optimization and least-squares m
 Numerical Optimization Inverse Problems and Uncertainty Quantification, and finite-element
 solvers in Numerical Pdes and Spatial Discretization. Certified enclosures and kernel
 approximations also serve Information Theory, Inverse Problems, Neural Networks and Learning
-Dynamics, Online and Reinforcement Learning, Representation Learning and Generative Models,
+Dynamics, Machine Learning Algorithms,
 and Statistical Learning and Classical Models.
