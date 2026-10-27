@@ -8,6 +8,7 @@ import { appendFrontier, appendStages, checkAppendReview, applyAppendReview, rec
 import { unsatisfiableEdges } from '../src/frontier.mts';
 import { writeManifests } from '../../plan-manifests.mjs';
 import { Executor } from '../src/executor.mts';
+import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
 
@@ -92,7 +93,7 @@ test('duplicate/unsafe IDs, late/unpaused state and active writers fail before m
 
 test('cap and combined buildability are checked rather than bypassed', t => {
   const f = fixture(t);
-  assert.throws(() => appendFrontier({ ...f.options, pairs: Array.from({ length: 53 }, (_, n) => `extra-${n}`) }), /80/);
+  assert.throws(() => appendFrontier({ ...f.options, pairs: Array.from({ length: MAX_RUN_PAIRS - 28 + 1 }, (_, n) => `extra-${n}`) }), new RegExp(String(MAX_RUN_PAIRS)));
   assert.throws(() => appendFrontier({ ...f.options, buildability: () => [{ requires: 'missing' }] }), /unbuildable/);
 });
 
@@ -118,11 +119,12 @@ test('saved Step1 completion cannot cover fresh append drift or launch scaffold 
   const withBaseline = appendStages([...base.slice(0, 2), baseline, base[2]], { repo: f.repo, run: 'demo' });
   assert.deepEqual(withBaseline.map(s => s.id), ['1-drift', '1-drift-apply', '1-baseline', '1-append-drift-1', '1-append-apply-1', '1-scaffold']);
   assert.equal(withBaseline[2], baseline);
-  assert.equal(withBaseline[3].gates!({ repo: f.repo, run: 'demo' } as any).length, 4);
+  assert.equal(withBaseline[3].gates!({ repo: f.repo, run: 'demo' } as any).length, 5);
   assert.throws(() => appendStages([...base.slice(0, 2), { id: 'unrelated' }, base[2]], { repo: f.repo, run: 'demo' }), /unsupported/);
   const gates = table[2].gates!({ repo: f.repo, run: 'demo' } as any);
-  assert.equal(gates.length, 4);
-  assert.equal(gates[0].id, 'append-frontier-metadata-recertify');
+  assert.equal(gates.length, 5);
+  assert.equal(gates[0].id, 'append-refresh-receipt');
+  assert.equal(gates[1].id, 'append-frontier-metadata-recertify');
   assert.equal(table[3].gates!({ repo: f.repo, run: 'demo' } as any)[0].id, 'append-frontier-metadata-recertify');
   assert.ok(gates.some((g: any) => g.argv.includes('--pages-file') && g.argv.includes('tools/validate-plan.mjs')));
   assert.ok(gates.filter((g: any) => g.argv.includes('tools/validate-plan.mjs')).every((g: any) => g.argv.includes('--pages-file') && !g.argv.includes('--run')));

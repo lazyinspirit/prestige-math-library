@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { packBatches, writeManifests, loadPlan, syncManifestsPreservingItems } from '../../plan-manifests.mjs';
 import { MAX_RUN_PAIRS } from './capacity.mjs';
+import { loadAppendDriftOwnerResolutions, appendOwnerResolutionPath } from '../../append-drift-owner-resolutions.mjs';
 import { scanProcesses } from '../bin/watchdog.mjs';
 import type { Stage, Ctx } from './types.mts';
 
@@ -184,10 +185,13 @@ export function checkAppendReview(repo: string, run: string, number: number): an
   const headings = [...text.matchAll(/^###\s+`?([a-z0-9]+(?:-[a-z0-9]+)*)`?\s*$/gm)];
   if (headings.length !== entry.pairs.length || new Set(headings.map(m => m[1])).size !== entry.pairs.length
     || headings.some(m => !entry.pairs.includes(m[1]))) fail('append report must review exactly its assigned A pages once');
+  const ownerResolved = loadAppendDriftOwnerResolutions(repo, run, entry, text);
   for (const [n, heading] of headings.entries()) {
     const body = text.slice(heading.index! + heading[0].length, headings[n + 1]?.index ?? text.length);
     const verdicts = [...body.matchAll(/^VERDICT:\s*(no-drift|drift-applied|drift-reordered|drift-blocked)\b/gm)];
-    if (verdicts.length !== 1 || /^VERDICT:/gm.test(body.replace(verdicts[0][0], '')) || verdicts[0][1] === 'drift-blocked') fail(`invalid/blocked append review for ${heading[1]}`);
+    if (verdicts.length !== 1 || /^VERDICT:/gm.test(body.replace(verdicts[0][0], ''))) fail(`invalid/blocked append review for ${heading[1]}`);
+    if (verdicts[0][1] === 'drift-blocked' && ownerResolved.get(heading[1]) !== /^VERDICT:.*$/m.exec(body)?.[0])
+      fail(`invalid/blocked append review for ${heading[1]}`);
   }
   return entry;
 }
@@ -327,6 +331,8 @@ export function applyAppendReview(repo: string, run: string, number: number): an
   const receipt = { run, number, reportSha256: hash(report), originalReportSha256: hash(original), mergedReportSha256: hash(readFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`))),
     manifests: paths.map(path => ({ path: relative(repo, path), sha256: hash(readFileSync(path)) })), inventoriesPreserved: true,
     ...(refresh ? { refresh } : {}),
+    ...(existsSync(join(repo, appendOwnerResolutionPath(entry)))
+      ? { ownerResolutionSha256: hash(readFileSync(join(repo, appendOwnerResolutionPath(entry)))) } : {}),
     ...(recovery ? { itemOrderRecoverySha256: hash(readFileSync(recoveryPath)) } : {}) };
   writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n');
   return receipt;

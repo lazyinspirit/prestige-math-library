@@ -6,6 +6,7 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pageBuildability } from './buildability.mjs';
 import { loadDriftOwnerResolutions } from './drift-owner-resolutions.mjs';
+import { loadAppliedAppendDriftOwnerResolutions } from './append-drift-owner-resolutions.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -104,6 +105,10 @@ let edgesChecked = 0;
 let ownerResolved = new Map();
 try {
   ownerResolved = loadDriftOwnerResolutions(process.cwd(), run, text, ledger, spec);
+  for (const [page, verdict] of loadAppliedAppendDriftOwnerResolutions(process.cwd(), run, text)) {
+    if (ownerResolved.has(page)) throw Error(`duplicate original/append owner resolution: ${page}`);
+    ownerResolved.set(page, verdict);
+  }
 } catch (error) {
   errors.push(`drift-check-owner-resolution: ${error.message}`);
 }
