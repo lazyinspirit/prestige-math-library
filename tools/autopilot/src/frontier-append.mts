@@ -1,9 +1,10 @@
 // Guarded extension of an unclosed Step-1 frontier. This never edits state.
-import { existsSync, readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync, copyFileSync, lstatSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync, copyFileSync, lstatSync, statSync, renameSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { packBatches, writeManifests, loadPlan, syncManifestsPreservingItems } from '../../plan-manifests.mjs';
+import { readNativeAppendReportBase } from '../../drift-owner-resolutions.mjs';
 import { MAX_RUN_PAIRS } from './capacity.mjs';
 import { loadAppendDriftOwnerResolutions, appendOwnerResolutionPath, loadAppendManifestAuthoringRecovery } from '../../append-drift-owner-resolutions.mjs';
 import { scanProcesses } from '../bin/watchdog.mjs';
@@ -269,6 +270,47 @@ export function sealAppendReviewRefresh(repo: string, run: string, number: numbe
   return seal;
 }
 
+function appendReportText(entry: any, base: string, report: string): string {
+  return base + `\n\n<!-- native append review ${entry.number}; original preimage retained in ${entry.archive} -->\n` + report;
+}
+
+/** Reconstruct exactly the already applied predecessor chain, never a stale
+ * preparation-time capture or an unverified current report. */
+function predecessorAppendReport(repo: string, run: string, number: number): string {
+  const entries = appendRegistry(repo, run).appends;
+  const first = entries[0];
+  const original = readFileSync(join(repo, first.originalReport), 'utf8');
+  const record = first.preimages.find((p: any) => p.archive === first.originalReport && p.path === `research/${run}-alpha-step1-drift.md`);
+  if (!record || hash(original) !== record.sha256) fail('first native report capture changed');
+  let merged = original;
+  for (const entry of entries.filter((e: any) => e.number < number)) {
+    const receiptPath = join(repo, entry.archive, 'review-applied.json');
+    if (!existsSync(receiptPath)) fail('predecessor append application is missing');
+    const receipt = read(receiptPath), report = readFileSync(join(repo, entry.report), 'utf8');
+    if (receipt.run !== run || receipt.number !== entry.number || receipt.inventoriesPreserved !== true
+      || readNativeAppendReportBase(repo, run, entry, receipt) !== merged
+      || receipt.reportSha256 !== hash(report)) fail('predecessor native append report binding changed');
+    merged = appendReportText(entry, merged, report);
+    if (receipt.mergedReportSha256 !== hash(merged)) fail('predecessor native append merge changed');
+  }
+  if (entries.some((e: any) => e.number > number && existsSync(join(repo, e.archive, 'review-applied.json'))))
+    fail('cannot reapply an append before an already applied later generation');
+  return merged;
+}
+
+function preserveExact(path: string, raw: string | Buffer): void {
+  if (existsSync(path)) { if (!readFileSync(path).equals(Buffer.from(raw))) fail(`archived report evidence changed: ${path}`); }
+  else writeFileSync(path, raw, { flag: 'wx' });
+}
+
+function appendMergeBinding(repo: string, entry: any, captured: string, base: string): any {
+  if (base === captured) return {};
+  const path = `${entry.archive}/report-merge-bases/${hash(base)}.md`;
+  mkdirSync(join(repo, entry.archive, 'report-merge-bases'), { recursive: true });
+  preserveExact(join(repo, path), base);
+  return { capturedOriginalReportSha256: hash(captured), mergeBase: { path, sha256: hash(base) } };
+}
+
 export function applyAppendReview(repo: string, run: string, number: number): any {
   const entry = checkAppendReview(repo, run, number), archive = join(repo, entry.archive);
   const dir = join(repo, 'research', `${run}-dispatch`);
@@ -295,6 +337,15 @@ export function applyAppendReview(repo: string, run: string, number: number): an
     fail('archived original drift report differs from its recorded preimage');
   const receiptPath = join(archive, 'review-applied.json');
   const priorApplication = existsSync(receiptPath) ? read(receiptPath) : null;
+  const mergeBase = predecessorAppendReport(repo, run, number);
+  const actualReport = readFileSync(join(repo, entry.report), 'utf8');
+  const expectedMerged = appendReportText(entry, mergeBase, actualReport);
+  const currentMerged = readFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`), 'utf8');
+  if (priorApplication) {
+    if (priorApplication.originalReportSha256 !== hash(mergeBase) || priorApplication.reportSha256 !== hash(actualReport)
+      || priorApplication.mergedReportSha256 !== hash(expectedMerged) || currentMerged !== expectedMerged)
+      fail('existing append report needs explicit authenticated rebase-report recovery');
+  } else if (currentMerged !== mergeBase) fail('current drift report differs from authenticated predecessor');
   const recoveryPath = join(archive, 'item-order-recovery.json');
   const recovery = existsSync(recoveryPath) ? read(recoveryPath) : null;
   let authoringRecovery: any = null;
@@ -330,10 +381,13 @@ export function applyAppendReview(repo: string, run: string, number: number): an
     throw error;
   }
   const report = readFileSync(join(repo, entry.report), 'utf8');
-  writeFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`), original + `\n\n<!-- native append review ${number}; original preimage retained in ${entry.archive} -->\n` + report);
-  const receipt = { run, number, reportSha256: hash(report), originalReportSha256: hash(original), mergedReportSha256: hash(readFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`))),
+  if (report !== actualReport) fail('append review changed during application');
+  const mergeBinding = appendMergeBinding(repo, entry, original, mergeBase);
+  writeFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`), appendReportText(entry, mergeBase, report));
+  const receipt = { run, number, reportSha256: hash(report), originalReportSha256: hash(mergeBase), ...mergeBinding, mergedReportSha256: hash(readFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`))),
     manifests: paths.map(path => ({ path: relative(repo, path), sha256: hash(readFileSync(path)) })), inventoriesPreserved: true,
     ...(refresh ? { refresh } : {}),
+    ...(priorApplication?.reportRebase ? { reportRebase: priorApplication.reportRebase } : {}),
     ...(existsSync(join(repo, appendOwnerResolutionPath(entry)))
       ? { ownerResolutionSha256: hash(readFileSync(join(repo, appendOwnerResolutionPath(entry)))) } : {}),
     ...(recovery ? { itemOrderRecoverySha256: hash(readFileSync(recoveryPath)) } : {}),
@@ -341,6 +395,63 @@ export function applyAppendReview(repo: string, run: string, number: number): an
       ? { ownerManifestRecoverySha256: authoringRecovery?.sha256 ?? priorApplication.ownerManifestRecoverySha256 } : {}) };
   writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n');
   return receipt;
+}
+
+/** Owner-invoked mechanical recovery of an actual legacy stale-base merge.
+ * No state/result/gate stamps or inventories are changed. */
+export function rebaseAppliedAppendReport(repo: string, run: string, number: number, stateDir: string,
+  reason: string, scan = scanProcesses): any {
+  if (!reason?.trim()) fail('an explicit owner report-rebase reason is required');
+  inactive(repo, run, stateDir, scan);
+  const entry = checkAppendReview(repo, run, number), archive = join(repo, entry.archive);
+  const receiptPath = join(archive, 'review-applied.json'); regular(receiptPath);
+  const oldReceiptRaw = readFileSync(receiptPath), old = JSON.parse(oldReceiptRaw.toString());
+  const reportPath = join(repo, 'research', `${run}-alpha-step1-drift.md`), oldReport = readFileSync(reportPath, 'utf8');
+  const added = readFileSync(join(repo, entry.report), 'utf8');
+  const captured = readNativeAppendReportBase(repo, run, entry, { originalReportSha256: hash(readFileSync(join(repo, entry.originalReport))) });
+  const base = predecessorAppendReport(repo, run, number), merged = appendReportText(entry, base, added);
+  if (old.reportRebase && old.originalReportSha256 === hash(base) && old.mergedReportSha256 === hash(merged) && oldReport === merged) {
+    readNativeAppendReportBase(repo, run, entry, old); return old;
+  }
+  if (old.run !== run || old.number !== number || old.inventoriesPreserved !== true || old.reportSha256 !== hash(added)
+    || old.originalReportSha256 !== hash(captured) || old.mergedReportSha256 !== hash(oldReport)
+    || oldReport !== appendReportText(entry, captured, added) || base === captured)
+    fail('not an exact legacy captured-base append merge');
+  const resultPath = `research/${run}-dispatch/tool-drift-append-apply-${number}.result.json`;
+  const resultRaw = readFileSync(join(repo, resultPath)), result = JSON.parse(resultRaw.toString());
+  const state = read(join(stateDir, 'state.json')), label = `drift-append-apply-${number}`, stage = `1-append-apply-${number}`;
+  const dispatch = state.dispatches?.[`${stage}:${label}`];
+  if (result.run !== run || result.role !== 'tool' || result.label !== label || result.ok !== true || result.written_by !== 'autopilot'
+    || JSON.stringify(result.covers) !== JSON.stringify([`append-${number}`]) || !Number.isFinite(Date.parse(result.ended_at))
+    || dispatch?.role !== 'tool' || dispatch.lastExitOk !== true || !dispatch.endedAt
+    || Date.parse(dispatch.startedAt) > Date.parse(result.ended_at) || Date.parse(dispatch.endedAt) < Date.parse(result.ended_at))
+    fail('report rebase requires the actual completed native application result');
+  const historical = `${entry.archive}/report-rebase-preimages/${hash(oldReceiptRaw)}-${hash(oldReport)}`;
+  mkdirSync(join(repo, historical), { recursive: true });
+  const priorReceipt = `${historical}/review-applied.json`, priorMergedReport = `${historical}/merged-report.md`;
+  preserveExact(join(repo, priorReceipt), oldReceiptRaw); preserveExact(join(repo, priorMergedReport), oldReport);
+  const archivedResult = `${historical}/native-application.result.json`; preserveExact(join(repo, archivedResult), resultRaw);
+  const mergeBinding = appendMergeBinding(repo, entry, captured, base);
+  const successor = { ...old, originalReportSha256: hash(base), ...mergeBinding, mergedReportSha256: hash(merged),
+    reportRebase: { at: new Date().toISOString(), reason, action: 'authenticated-predecessor-report-rebase',
+      priorReceipt: { path: priorReceipt, sha256: hash(oldReceiptRaw) }, priorMergedReport: { path: priorMergedReport, sha256: hash(oldReport) },
+      nativeApplicationResult: { path: archivedResult, sha256: hash(resultRaw) }, nativeApplicationResultOriginalPath: resultPath,
+      inventoriesUnchangedByRecovery: true, noNewNativeExecutionOrCoverage: true } };
+  const raw = JSON.stringify(successor, null, 2) + '\n';
+  inactive(repo, run, stateDir, scan);
+  if (!readFileSync(receiptPath).equals(oldReceiptRaw) || readFileSync(reportPath, 'utf8') !== oldReport
+    || readFileSync(join(repo, entry.report), 'utf8') !== added || predecessorAppendReport(repo, run, number) !== base
+    || !readFileSync(join(repo, resultPath)).equals(resultRaw)) fail('report-rebase input changed before application');
+  const reportTmp = reportPath + `.rebase-${process.pid}.tmp`, receiptTmp = receiptPath + `.rebase-${process.pid}.tmp`;
+  try {
+    writeFileSync(reportTmp, merged, { flag: 'wx' }); writeFileSync(receiptTmp, raw, { flag: 'wx' });
+    renameSync(reportTmp, reportPath); renameSync(receiptTmp, receiptPath);
+  } catch (error) {
+    if (existsSync(reportPath) && readFileSync(reportPath, 'utf8') === merged) writeFileSync(reportPath, oldReport);
+    if (existsSync(receiptPath) && readFileSync(receiptPath, 'utf8') === raw) writeFileSync(receiptPath, oldReceiptRaw);
+    throw error;
+  } finally { rmSync(reportTmp, { force: true }); rmSync(receiptTmp, { force: true }); }
+  return successor;
 }
 
 /** Insert only after the unchanged completed drift prefix; no state stamp is cleared. */

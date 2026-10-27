@@ -36,6 +36,41 @@ export function driftScopeHash(ledger, spec) {
     })() })).sort((a, b) => a.id.localeCompare(b.id)) }));
 }
 
+// Read the immutable capture separately from the actual authenticated merge
+// base. Overlapping preparations may have captured an earlier native prefix.
+export function readNativeAppendReportBase(root, run, entry, receipt) {
+  root = resolve(root);
+  const original = readFileSync(local(root, entry.originalReport));
+  const record = entry.preimages?.find(p => p.archive === entry.originalReport && p.path === `research/${run}-alpha-step1-drift.md`);
+  assert(record && sha(original) === record.sha256, 'native captured report preimage changed');
+  let base = original;
+  if (receipt.mergeBase) {
+    assert(receipt.capturedOriginalReportSha256 === sha(original)
+      && receipt.mergeBase.path === `${entry.archive}/report-merge-bases/${receipt.originalReportSha256}.md`, 'invalid authenticated append merge base');
+    base = bytes(root, receipt.mergeBase);
+  }
+  assert(receipt.originalReportSha256 === sha(base), 'native append merge base changed');
+  if (receipt.reportRebase) {
+    const rebase = receipt.reportRebase;
+    assert(rebase.action === 'authenticated-predecessor-report-rebase' && nonempty(rebase.reason)
+      && Number.isFinite(Date.parse(rebase.at)) && rebase.inventoriesUnchangedByRecovery === true
+      && rebase.noNewNativeExecutionOrCoverage === true, 'invalid report-rebase provenance');
+    const prior = JSON.parse(bytes(root, rebase.priorReceipt)), priorReport = bytes(root, rebase.priorMergedReport).toString('utf8');
+    const added = readFileSync(local(root, entry.report), 'utf8');
+    assert(prior.run === run && prior.number === entry.number && prior.inventoriesPreserved === true
+      && prior.originalReportSha256 === sha(original) && prior.reportSha256 === sha(added)
+      && prior.mergedReportSha256 === sha(priorReport)
+      && priorReport === original.toString('utf8') + `\n\n<!-- native append review ${entry.number}; original preimage retained in ${entry.archive} -->\n` + added,
+      'archived legacy report-rebase preimage changed');
+    const result = JSON.parse(bytes(root, rebase.nativeApplicationResult));
+    assert(rebase.nativeApplicationResultOriginalPath === `research/${run}-dispatch/tool-drift-append-apply-${entry.number}.result.json`
+      && result.run === run && result.role === 'tool' && result.label === `drift-append-apply-${entry.number}`
+      && result.ok === true && result.written_by === 'autopilot' && equal(result.covers, [`append-${entry.number}`]),
+      'archived genuine application result changed');
+  }
+  return base.toString('utf8');
+}
+
 export function verifyNativeAppendReport(root, run, original, current, acceptedReportSha256 = null) {
   const registryPath = `research/${run}-frontier-appends.json`;
   const registry = existsSync(resolve(root, registryPath))
@@ -51,6 +86,7 @@ export function verifyNativeAppendReport(root, run, original, current, acceptedR
     assert(!pending, 'native append application gap');
     const receipt = JSON.parse(readFileSync(local(root, receiptPath)));
     const added = readFileSync(local(root, entry.report), 'utf8');
+    if (receipt.mergeBase) assert(readNativeAppendReportBase(root, run, entry, receipt) === reconstructed, 'native append merge base is not its predecessor');
     assert(receipt.run === run && receipt.number === entry.number
       && receipt.inventoriesPreserved === true
       && receipt.originalReportSha256 === sha(reconstructed)

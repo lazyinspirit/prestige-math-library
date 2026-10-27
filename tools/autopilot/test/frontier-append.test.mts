@@ -5,10 +5,11 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
-import { appendFrontier, appendStages, checkAppendReview, applyAppendReview, recoverAppendItemOrder, sealAppendReviewRefresh } from '../src/frontier-append.mts';
+import { appendFrontier, appendStages, checkAppendReview, applyAppendReview, recoverAppendItemOrder, sealAppendReviewRefresh, rebaseAppliedAppendReport } from '../src/frontier-append.mts';
 import { unsatisfiableEdges } from '../src/frontier.mts';
 import { writeManifests } from '../../plan-manifests.mjs';
 import { Executor } from '../src/executor.mts';
+import { verifyNativeAppendReport } from '../../drift-owner-resolutions.mjs';
 import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
@@ -346,4 +347,104 @@ test('exact owner authoring recovery retains new helpers and repaired old rows t
   assert.deepEqual(JSON.parse(f.bytes('demo-batch-1.pages.json').toString()).map((p: any) => p.items), pages.map((p: any) => p.items));
   assert.deepEqual(readFileSync(join(f.repo, original.archive)), originalBytes);
   assert.equal(applyAppendReview(f.repo, 'demo', 1).ownerManifestRecoverySha256, recovery.sha256);
+});
+
+
+function overlappingAppends(t: any) {
+  const f = fixture(t);
+  for (let n = 1; n <= 28; n++) {
+    const pages = JSON.parse(f.bytes(`demo-batch-${n}.pages.json`).toString()).map((page: any) =>
+      Object.fromEntries(['order', 'id', 'kind', 'category', 'title', 'companion', 'requires', 'items'].filter(k => k in page).map(k => [k, page[k]])));
+    writeFileSync(join(f.research, `demo-batch-${n}.pages.json`), JSON.stringify(pages, null, 3) + '\n');
+  }
+  const first = appendFrontier(f.options);
+  const second = appendFrontier({ ...f.options, pairs: ['new-c'] });
+  const original = f.bytes('demo-alpha-step1-drift.md').toString();
+  const reports = ['### new-a\nVERDICT: no-drift\n### new-b\nVERDICT: no-drift\n', '### new-c\nVERDICT: no-drift\n'];
+  mkdirSync(join(f.research, 'demo-dispatch'));
+  for (const e of [first, second]) {
+    writeFileSync(join(f.repo, e.report), reports[e.number - 1]);
+    writeFileSync(join(f.research, 'demo-dispatch', `alpha-drift-review-append-${e.number}.result.json`), JSON.stringify({ run: 'demo', role: 'alpha',
+      label: `drift-review-append-${e.number}`, covers: [`append-${e.number}`], ok: true, started_at: AT }));
+  }
+  applyAppendReview(f.repo, 'demo', 1);
+  const predecessor = f.bytes('demo-alpha-step1-drift.md').toString();
+  recoverAppendItemOrder(f.repo, 'demo', 2, f.stateDir, f.options.scan);
+  const receipt = applyAppendReview(f.repo, 'demo', 2);
+  return { ...f, first, second, original, reports, predecessor, receipt };
+}
+
+test('overlapping append preparations merge onto authenticated predecessors and preserve each capture', t => {
+  const f = overlappingAppends(t);
+  const merged = f.bytes('demo-alpha-step1-drift.md');
+  assert.ok(merged.toString().startsWith(f.predecessor));
+  assert.equal(f.receipt.capturedOriginalReportSha256, createHash('sha256').update(f.original).digest('hex'));
+  assert.equal(f.receipt.originalReportSha256, createHash('sha256').update(f.predecessor).digest('hex'));
+  assert.equal(readFileSync(join(f.repo, f.receipt.mergeBase.path), 'utf8'), f.predecessor);
+  assert.equal(readFileSync(join(f.repo, f.second.originalReport), 'utf8'), f.original);
+  assert.equal(verifyNativeAppendReport(f.repo, 'demo', Buffer.from(f.original), merged), true);
+  assert.throws(() => applyAppendReview(f.repo, 'demo', 1), /already applied later generation/);
+});
+
+function legacyOverlappingMerge(t: any) {
+  const f = overlappingAppends(t), hash = (raw: any) => createHash('sha256').update(raw).digest('hex');
+  const legacyReport = f.original + `\n\n<!-- native append review 2; original preimage retained in ${f.second.archive} -->\n` + f.reports[1];
+  const legacy = { ...f.receipt, originalReportSha256: hash(f.original), mergedReportSha256: hash(legacyReport) };
+  delete legacy.mergeBase; delete legacy.capturedOriginalReportSha256;
+  const receiptPath = join(f.repo, f.second.archive, 'review-applied.json');
+  writeFileSync(receiptPath, JSON.stringify(legacy, null, 2) + '\n');
+  writeFileSync(join(f.research, 'demo-alpha-step1-drift.md'), legacyReport);
+  const label = 'drift-append-apply-2', stage = '1-append-apply-2';
+  writeFileSync(join(f.research, 'demo-dispatch', `tool-${label}.result.json`), JSON.stringify({ run: 'demo', role: 'tool', label,
+    covers: ['append-2'], ok: true, written_by: 'autopilot', ended_at: AT }));
+  const state = JSON.parse(readFileSync(statePath(f.stateDir), 'utf8'));
+  state.dispatches[`${stage}:${label}`] = { stage, role: 'tool', label, covers: ['append-2'], startedAt: AT, endedAt: AT, lastExitOk: true };
+  writeFileSync(statePath(f.stateDir), JSON.stringify(state));
+  return { ...f, legacyReport, receiptPath, legacyReceipt: readFileSync(receiptPath) };
+}
+
+test('explicit report rebase archives the exact failed merge and receipt with no native/state/inventory rewrite', t => {
+  const f = legacyOverlappingMerge(t), state = readFileSync(statePath(f.stateDir));
+  const inventory = f.bytes('demo-batch-1.pages.json');
+  assert.throws(() => applyAppendReview(f.repo, 'demo', 2), /explicit authenticated rebase-report/);
+  const repaired = rebaseAppliedAppendReport(f.repo, 'demo', 2, f.stateDir, 'Restore actual sequential native report chain', f.options.scan);
+  assert.deepEqual(readFileSync(join(f.repo, repaired.reportRebase.priorReceipt.path)), f.legacyReceipt);
+  assert.equal(readFileSync(join(f.repo, repaired.reportRebase.priorMergedReport.path), 'utf8'), f.legacyReport);
+  assert.deepEqual(readFileSync(statePath(f.stateDir)), state); assert.deepEqual(f.bytes('demo-batch-1.pages.json'), inventory);
+  assert.equal(verifyNativeAppendReport(f.repo, 'demo', Buffer.from(f.original), f.bytes('demo-alpha-step1-drift.md')), true);
+  assert.deepEqual(rebaseAppliedAppendReport(f.repo, 'demo', 2, f.stateDir, 'Retry', f.options.scan), repaired);
+  assert.deepEqual(applyAppendReview(f.repo, 'demo', 2).reportRebase, repaired.reportRebase);
+});
+
+test('report rebase rejects changed predecessor, arbitrary report bytes and missing native application success', t => {
+  for (const defect of ['predecessor', 'report', 'native']) {
+    const f = legacyOverlappingMerge(t);
+    if (defect === 'predecessor') {
+      const path = join(f.repo, f.first.archive, 'review-applied.json'), data = JSON.parse(readFileSync(path, 'utf8'));
+      data.reportSha256 = '0'.repeat(64); writeFileSync(path, JSON.stringify(data));
+    } else if (defect === 'report') writeFileSync(join(f.research, 'demo-alpha-step1-drift.md'), f.legacyReport + 'tampered');
+    else rmSync(join(f.research, 'demo-dispatch', 'tool-drift-append-apply-2.result.json'));
+    const before = f.bytes('demo-alpha-step1-drift.md');
+    assert.throws(() => rebaseAppliedAppendReport(f.repo, 'demo', 2, f.stateDir, 'Exact recovery', f.options.scan));
+    assert.deepEqual(f.bytes('demo-alpha-step1-drift.md'), before); assert.deepEqual(readFileSync(f.receiptPath), f.legacyReceipt);
+  }
+});
+
+test('primary report-rebase CLI safely ignores only its own launcher and preserves native state', t => {
+  const f = legacyOverlappingMerge(t), source = process.cwd(), state = readFileSync(statePath(f.stateDir));
+  cpSync(join(source, 'tools'), join(f.repo, 'tools'), { recursive: true });
+  const result = spawnSync(process.execPath, ['tools/tsx-run.mjs', 'tools/autopilot/bin/autopilot.mts', 'rebase-append-report',
+    '--run', 'demo', '--generation', '2', '--state-dir', f.stateDir, '--reason', 'Restore authenticated predecessor chain'],
+    { cwd: f.repo, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /APPEND_REPORT_REBASE 2/);
+  assert.deepEqual(readFileSync(statePath(f.stateDir)), state);
+});
+
+
+test('authenticated rebase readers reject changed archived legacy evidence', t => {
+  const f = legacyOverlappingMerge(t);
+  const repaired = rebaseAppliedAppendReport(f.repo, 'demo', 2, f.stateDir, 'Restore chain', f.options.scan);
+  writeFileSync(join(f.repo, repaired.reportRebase.priorReceipt.path), '{}');
+  assert.throws(() => verifyNativeAppendReport(f.repo, 'demo', Buffer.from(f.original), f.bytes('demo-alpha-step1-drift.md')), /stale evidence/);
 });

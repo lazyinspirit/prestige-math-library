@@ -2,6 +2,7 @@
 import { readFileSync, existsSync, lstatSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
+import { readNativeAppendReportBase } from './drift-owner-resolutions.mjs';
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const assert = (ok, why) => { if (!ok) throw Error(`append owner resolution: ${why}`); };
@@ -225,9 +226,7 @@ export function loadAppliedAppendDriftOwnerResolutions(root, run, mergedReport) 
     assert(receipt.run === run && receipt.number === entry.number && receipt.inventoriesPreserved === true
       && receipt.reportSha256 === sha(report)
       && receipt.ownerResolutionSha256 === sha(readFileSync(local(root, appendOwnerResolutionPath(entry)))), 'stale native append application receipt');
-    const original = readFileSync(local(root, entry.originalReport), 'utf8');
-    const record = entry.preimages?.find(p => p.path === `research/${run}-alpha-step1-drift.md` && p.archive === entry.originalReport);
-    assert(record?.sha256 === sha(original) && receipt.originalReportSha256 === sha(original), 'stale original append report preimage');
+    const original = readNativeAppendReportBase(root, run, entry, receipt);
     const merged = original + `\n\n<!-- native append review ${entry.number}; original preimage retained in ${entry.archive} -->\n` + report;
     assert(receipt.mergedReportSha256 === sha(merged) && mergedReport.startsWith(merged)
       && (mergedReport.length === merged.length || mergedReport.slice(merged.length).startsWith('\n\n<!-- native append review ')), 'merged native append report changed');
@@ -268,11 +267,9 @@ function nativeSyncManifest(root, run, entry, row) {
   const registry = JSON.parse(readFileSync(local(root, `research/${run}-frontier-appends.json`)));
   const prior = registry.appends?.find(e => e.number === sync.number);
   assert(registry.run === run && prior?.archive === archive && prior.run === run, 'missing predecessor native SYNC generation');
-  const original = readFileSync(local(root, prior.originalReport), 'utf8');
-  const record = prior.preimages?.find(p => p.path === `research/${run}-alpha-step1-drift.md` && p.archive === prior.originalReport);
+  const original = readNativeAppendReportBase(root, run, prior, application);
   const report = readFileSync(local(root, prior.report), 'utf8');
-  assert(record?.sha256 === sha(original) && application.originalReportSha256 === sha(original)
-    && application.reportSha256 === sha(report), 'native SYNC report preimage changed');
+  assert(application.reportSha256 === sha(report), 'native SYNC report preimage changed');
   const merged = original + `\n\n<!-- native append review ${sync.number}; original preimage retained in ${archive} -->\n` + report;
   const currentReport = readFileSync(local(root, `research/${run}-alpha-step1-drift.md`), 'utf8');
   assert(application.mergedReportSha256 === sha(merged) && currentReport.startsWith(merged)

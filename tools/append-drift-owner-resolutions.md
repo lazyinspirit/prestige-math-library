@@ -233,3 +233,39 @@ current item inventories to remain frozen forever.
 `repair_evidence` may truthfully document an unresolved/held mathematical edit.
 It need not be a close-authoring report, and this recovery does not turn that
 edit or its parent theorem into an accepted proof or ready item.
+
+## Authenticated report bases for overlapping append preparations
+
+Native append preparation retains its full original drift-report preimage even
+if an earlier generation is still reviewing. Application now reconstructs and
+validates the **immediately preceding applied report chain**, then merges its
+own genuine report onto that prefix. It refuses missing predecessor receipts,
+stale report hashes, arbitrary current report edits, and applying an older
+generation after a later one already applied. When the preparation capture is
+older, the receipt keeps `capturedOriginalReportSha256` and binds a separate
+`mergeBase: {path, sha256}` under `report-merge-bases/`. Its
+`originalReportSha256` denotes the actual authenticated predecessor used in the
+merge. Original captures and registry entries never change. All report-chain,
+owner-resolution and prior-SYNC readers validate this distinction.
+
+A legacy application may already have overwritten an intervening report by
+merging onto its stale capture. Ordinary `apply` refuses to silently reinterpret
+that receipt. The explicit owner mechanical recovery is:
+
+```bash
+node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts rebase-append-report --run RUN --generation N --state-dir .autopilot/RUN --reason 'Restore the exact authenticated predecessor report chain'
+```
+
+The run must be paused and native controllers/preflights/writers drained, with
+its actual application tool dispatch completed successfully. The current
+report and receipt must match **exactly** the old captured-base merge of that
+generation's unchanged genuine review. All predecessors are reconstructed and
+verified. Recovery archives the full prior report, receipt and actual native
+application result under `report-rebase-preimages/`, preserves its capture and
+all inventories, then writes the correctly merged report and an explicit
+successor application receipt. `reportRebase` identifies those immutable
+preimages and declares `noNewNativeExecutionOrCoverage: true` and
+`inventoriesUnchangedByRecovery: true`. Readers verify the archived hashes and
+original application result. No dispatch, state, review result or gate stamp is
+created, reset or changed. A guarded two-file update rolls back only its own
+writes on failure. An exact retry remains idempotent.

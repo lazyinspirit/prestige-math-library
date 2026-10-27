@@ -59,7 +59,7 @@ const { inspectReportReopen, reopenReport, inspectPackagingReopen, reopenPackagi
 const { reopenStep3 } = await import('../src/step3-reopen.mts');
 const { inspectStep6Cutover, cutoverStep6 } = await import('../src/step6-cutover.mts');
 const { inspectCloseoutReopen, reopenCloseout } = await import('../src/closeout-reopen.mts');
-const { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder } = await import('../src/frontier-append.mts');
+const { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder, rebaseAppliedAppendReport } = await import('../src/frontier-append.mts');
 import type { Config } from '../src/types.mts';
 const { readStatementPolicy, isFreshStatementRun, writeStatementPolicy } = await import('../../statement-first-policy.mjs');
 
@@ -376,6 +376,15 @@ switch (cmd) {
       console.log(`BLOCKED OUTSIDE SCOPE — ${blocked.length} pair(s) need a page this scope does not build:`);
       for (const b of blocked) console.log(`  ${b.id}  <- ${b.blockedBy.join(', ')}`);
     }
+    break;
+  }
+
+  case 'rebase-append-report': {
+    const run = opt('run') ?? die('--run is required'), generation = Number(opt('generation'));
+    if (!Number.isInteger(generation) || generation < 1) die('--generation must be a positive integer');
+    const receipt = rebaseAppliedAppendReport(repo, run, generation, loadConfig().stateDir,
+      opt('reason') ?? die('--reason is required'));
+    console.log(`APPEND_REPORT_REBASE ${generation}: authenticated merge ${receipt.mergedReportSha256}`);
     break;
   }
 
