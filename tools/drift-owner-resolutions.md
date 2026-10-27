@@ -65,3 +65,18 @@ exit codes and completed, unaborted terminal summary. Its prompt path and
 run/output assignment must match the exact hash-bound original native prompt.
 Only explicitly resolved `drift-blocked` lines are satisfied; malformed
 receipts fail even when other drift decisions are valid.
+
+Native append reports are verified as a sequential **applied prefix** of the
+append registry. An unapplied suffix contributes no report bytes and requires
+no application receipt yet; an applied generation after an unapplied one fails
+closed. Every applied receipt must bind the exact reconstructed preceding
+report, exact appended report, preserved inventories and exact resulting merge.
+
+The owner receipt's `report.sha256` may identify an authenticated earlier prefix
+of that same chain, including the full original report. It cannot identify
+arbitrary stale bytes: the validator reconstructs the entire current report
+from actual sequential application receipts and requires the accepted hash to
+occur on that chain. This preserves the owner's historical report acceptance
+without rebinding it after every native append. Source/evidence hashes, scope,
+blocked verdicts, native prompt/result and affected-consumer checks remain
+mandatory and unchanged.

@@ -36,12 +36,20 @@ export function driftScopeHash(ledger, spec) {
     })() })).sort((a, b) => a.id.localeCompare(b.id)) }));
 }
 
-export function verifyNativeAppendReport(root, run, original, current) {
-  if (original.equals(current)) return true;
-  const registry = JSON.parse(readFileSync(local(root, `research/${run}-frontier-appends.json`)));
-  let reconstructed = original.toString('utf8');
-  for (const entry of registry.appends ?? []) {
-    const receipt = JSON.parse(readFileSync(local(root, `${entry.archive}/review-applied.json`)));
+export function verifyNativeAppendReport(root, run, original, current, acceptedReportSha256 = null) {
+  const registryPath = `research/${run}-frontier-appends.json`;
+  const registry = existsSync(resolve(root, registryPath))
+    ? JSON.parse(readFileSync(local(root, registryPath))) : { appends: [] };
+  assert(Array.isArray(registry.appends), 'invalid native append registry');
+  assert(acceptedReportSha256 === null || hash(acceptedReportSha256), 'invalid accepted native report hash');
+  let reconstructed = original.toString('utf8'), pending = false;
+  let acceptedPrefix = acceptedReportSha256 === null || sha(original) === acceptedReportSha256;
+  for (const [index, entry] of registry.appends.entries()) {
+    assert(entry.number === index + 1, 'nonsequential native append generations');
+    const receiptPath = `${entry.archive}/review-applied.json`;
+    if (!existsSync(resolve(root, receiptPath))) { pending = true; continue; }
+    assert(!pending, 'native append application gap');
+    const receipt = JSON.parse(readFileSync(local(root, receiptPath)));
     const added = readFileSync(local(root, entry.report), 'utf8');
     assert(receipt.run === run && receipt.number === entry.number
       && receipt.inventoriesPreserved === true
@@ -49,8 +57,10 @@ export function verifyNativeAppendReport(root, run, original, current) {
       && receipt.reportSha256 === sha(added), 'invalid native append report binding');
     reconstructed += `\n\n<!-- native append review ${entry.number}; original preimage retained in ${entry.archive} -->\n` + added;
     assert(receipt.mergedReportSha256 === sha(reconstructed), 'native merged report changed');
+    if (receipt.mergedReportSha256 === acceptedReportSha256) acceptedPrefix = true;
   }
   assert(current.toString('utf8') === reconstructed, 'original drift report changed outside native append');
+  assert(acceptedPrefix, 'accepted owner report is not an authenticated native prefix');
   return true;
 }
 
@@ -64,9 +74,10 @@ export function loadDriftOwnerResolutions(root, run, report, ledger, spec) {
     && nonempty(doc.reason) && nonempty(doc.authorized_at) && Number.isFinite(Date.parse(doc.authorized_at)), 'invalid owner drift authorization');
   assert(doc.scope_sha256 === driftScopeHash(ledger, spec), 'owner drift scope changed');
   assert(doc.report?.path === `research/${run}-alpha-step1-drift.md`, 'wrong native drift report');
-  const rawReport = bytes(root, doc.report);
+  assert(hash(doc.report.sha256), 'invalid owner report hash');
+  const rawReport = readFileSync(local(root, doc.report.path));
   assert(rawReport.toString('utf8') === report, 'current drift report changed');
-  verifyNativeAppendReport(root, run, bytes(root, doc.original_report), rawReport);
+  verifyNativeAppendReport(root, run, bytes(root, doc.original_report), rawReport, doc.report.sha256);
   assert(doc.drift_evidence?.path === `research/${run}-drift-evidence.json`, 'wrong original drift evidence');
   const driftEvidence = JSON.parse(bytes(root, doc.drift_evidence));
   assert(Array.isArray(driftEvidence), 'invalid original drift evidence');
