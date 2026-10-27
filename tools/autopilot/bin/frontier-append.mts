@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Native appended-frontier review gates/materialization; --run and --generation
 // name one fresh review, never an already completed original drift label.
-import { checkAppendReview, applyAppendReview, appendRegistry } from '../src/frontier-append.mts';
+import { checkAppendReview, applyAppendReview, appendRegistry, sealAppendReviewRefresh } from '../src/frontier-append.mts';
 import { recertifyAppendFrontier } from '../../frontier-append-recertify.mjs';
 const args = process.argv.slice(2), action = args[0];
 const option = (name: string) => {
@@ -17,6 +17,9 @@ try {
     if (!entry) throw new Error('unknown append generation');
     const report = recertifyAppendFrontier(process.cwd(), run, entry, { appendedOnly: true });
     console.log(`APPEND_RECERT ${report.subjects} item(s), ${report.pages} pages: ${report.path}`);
+  } else if (action === 'seal-refresh') {
+    sealAppendReviewRefresh(process.cwd(), run, number);
+    console.log('APPEND_REFRESH 1 generation checked');
   } else if (action === 'check-review') {
     const entry = checkAppendReview(process.cwd(), run, number);
     console.log(`APPEND_REVIEW ${entry.pairs.length} page(s) reviewed for generation ${number}`);

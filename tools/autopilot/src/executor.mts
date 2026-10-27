@@ -357,13 +357,14 @@ export class Executor {
   requestNativeRefresh(command: Control): void {
     const stage = this.stages.find(s => s.id === command.stage);
     const ctx = this.ctx();
-    if (command.run !== this.config.run || !stage || !['1-scaffold', '3b-author'].includes(stage.id) || !stage.refreshPlan
+    const appendReview = Boolean(stage && /^1-append-drift-[1-9]\d*$/.test(stage.id));
+    if (command.run !== this.config.run || !stage || (!['1-scaffold', '3b-author'].includes(stage.id) && !appendReview) || !stage.refreshPlan
       || !command.unit || !String(command.reason ?? '').trim()
       || !/^[a-zA-Z0-9-]{1,80}$/.test(command.requestId ?? ''))
-      throw new Error('refresh requires exact run, opted-in authoring stage, unit, reason and request identity');
+      throw new Error('refresh requires exact run, opted-in authoring/append-review stage, unit, reason and request identity');
     const saved = this.state.data.stages[stage.id];
     if (!saved || saved.skipped || saved.doneAt || saved.gatesPassedAt || this.currentStage().stage?.id !== stage.id)
-      throw new Error('refresh is restricted to the active unclosed authoring stage');
+      throw new Error('refresh is restricted to the active unclosed authoring/append-review stage');
     const owed = (stage.units?.(ctx) ?? []).map(String);
     if (!owed.includes(command.unit) || !this.stageCoverage(stage, ctx).has(command.unit)) {
       if (this.pendingRefreshes(stage, ctx).some(r => r.unit === command.unit)) {
@@ -384,7 +385,7 @@ export class Executor {
     if ([...cohort].some(unit => active.has(unit))) throw new Error('refresh refused while a unit/cohort writer is active');
     const requestedAt = new Date(this.clock.now()).toISOString();
     const plan = stage.refreshPlan(ctx, command.unit, { id: command.requestId, reason: command.reason, requestedAt });
-    const refreshRole = stage.id === '1-scaffold' ? 'beta' : 'alpha-high';
+    const refreshRole = appendReview ? 'alpha' : stage.id === '1-scaffold' ? 'beta' : 'alpha-high';
     if (plan.role !== refreshRole || (stage.role && plan.role !== stage.role) || plan.argv
       || plan.covers?.length !== 1 || plan.covers[0] !== command.unit
       || !stagePattern(stage, ctx).test(`${plan.role}-${plan.label}.result.json`)

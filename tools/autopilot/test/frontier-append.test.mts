@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync, exist
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { appendFrontier, appendStages, checkAppendReview, applyAppendReview, recoverAppendItemOrder } from '../src/frontier-append.mts';
+import { appendFrontier, appendStages, checkAppendReview, applyAppendReview, recoverAppendItemOrder, sealAppendReviewRefresh } from '../src/frontier-append.mts';
 import { unsatisfiableEdges } from '../src/frontier.mts';
 import { writeManifests } from '../../plan-manifests.mjs';
 import { Executor } from '../src/executor.mts';
@@ -244,4 +244,65 @@ test('primary recovery CLI does not mistake its own launcher for a target writer
   const result = spawnSync(process.execPath, ['tools/tsx-run.mjs', 'tools/autopilot/bin/autopilot.mts', 'recover-item-order', '--run', 'demo', '--generation', '1', '--state-dir', f.stateDir], { cwd: f.repo, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.match(result.stdout, /APPEND_ORDER_RECOVERY 1 manifest/);
+});
+
+
+test('explicit append-review refresh masks historical success and binds fresh native review bytes', async t => {
+  const f = fixture(t), entry = appendFrontier(f.options);
+  mkdirSync(join(f.repo, 'briefs'));
+  writeFileSync(join(f.repo, 'briefs/alpha-drift.md'), 'Native drift review.');
+  const dispatchDir = join(f.research, 'demo-dispatch'); mkdirSync(dispatchDir);
+  const oldPath = join(dispatchDir, 'alpha-drift-review-append-1.result.json');
+  const old = JSON.stringify({ run: 'demo', role: 'alpha', label: 'drift-review-append-1',
+    covers: ['append-1'], ok: true, started_at: AT });
+  writeFileSync(oldPath, old);
+  const base: any[] = [
+    { id: '1-drift', label: 'drift', units: () => ['all'], pattern: /^old-drift-/, plan: () => [], gates: () => [{ id: 'old', argv: ['true'] }] },
+    { id: '1-drift-apply', label: 'apply', units: () => ['all'], pattern: /^old-apply-/, plan: () => [], gates: () => [{ id: 'old', argv: ['true'] }] },
+    { id: '1-scaffold', label: 'author', units: () => ['1'], pattern: /^beta-/, plan: () => [], gates: () => [{ id: 'author', argv: ['true'] }] },
+  ];
+  const stages = appendStages(base, { repo: f.repo, run: 'demo' });
+  const stage = stages.find(s => s.id === '1-append-drift-1')!;
+  const state = new State(statePath(f.stateDir)); state.stage(stage.id);
+  const ex = new Executor({ config: { repo: f.repo, run: 'demo', stateDir: f.stateDir, dispatchDir,
+    argv: ['true'], coversMap: {}, adoptCommand: false, dispatchStaggerMs: 0, maxAttempts: 2 } as any,
+    stages, state, reporter: new Reporter({ dir: f.stateDir, intervalMs: 10 ** 9, sink: () => {} }),
+    adapter: { name: 'pending', describe: () => 'pending', invoke: () => new Promise(() => {}) } });
+  ex.requestNativeRefresh({ command: 'refresh', run: 'demo', stage: stage.id, unit: 'append-1',
+    reason: 'Review corrected A3 scope only', requestId: 'new-review' });
+  assert.equal(ex.stageCoverage(stage).has('append-1'), false);
+  assert.equal(ex.stageStatus(stage).unitsDone, false);
+  const request = ex.state.data.nativeRefreshes![0];
+  assert.equal(request.plan.role, 'alpha'); assert.equal(request.plan.job, 'verification');
+  assert.ok(String(request.plan.task).includes('refresh-new-review.task.md'));
+  await ex.dispatchStage(stage, ex.ctx());
+  assert.equal(ex.inflight.size, 1);
+  writeFileSync(join(f.repo, entry.report), '### new-a\nVERDICT: no-drift\n### new-b\nVERDICT: no-drift\n');
+  assert.throws(() => applyAppendReview(f.repo, 'demo', 1), /must be sealed/,
+    'historical success cannot apply the new mutable report');
+  const freshPath = join(dispatchDir, `alpha-${request.plan.label}.result.json`);
+  const fresh = { run: 'demo', role: 'alpha', label: request.plan.label, covers: ['append-1'], ok: true,
+    started_at: new Date(Date.parse(request.requestedAt) + 1).toISOString(),
+    ended_at: new Date(Date.parse(request.requestedAt) + 2).toISOString() };
+  writeFileSync(freshPath, JSON.stringify({ ...fresh, started_at: AT }));
+  assert.throws(() => sealAppendReviewRefresh(f.repo, 'demo', 1), /exact fresh/);
+  writeFileSync(freshPath, JSON.stringify(fresh));
+  const seal = sealAppendReviewRefresh(f.repo, 'demo', 1);
+  assert.equal(seal.label, request.plan.label);
+  assert.equal(ex.stageCoverage(stage).has('append-1'), true);
+  assert.equal(readFileSync(oldPath, 'utf8'), old);
+  const taskPath = join(f.repo, String(request.plan.task)), task = readFileSync(taskPath, 'utf8');
+  writeFileSync(taskPath, task + '\nChanged task');
+  assert.throws(() => applyAppendReview(f.repo, 'demo', 1), /task changed/);
+  writeFileSync(taskPath, task);
+  writeFileSync(freshPath, JSON.stringify({ ...fresh, exit_code: 0 }));
+  assert.throws(() => applyAppendReview(f.repo, 'demo', 1), /sealed append refresh inputs changed/);
+  writeFileSync(freshPath, JSON.stringify(fresh));
+  const report = readFileSync(join(f.repo, entry.report), 'utf8');
+  writeFileSync(join(f.repo, entry.report), report + '\nChanged review');
+  assert.throws(() => applyAppendReview(f.repo, 'demo', 1), /sealed append refresh inputs changed/);
+  writeFileSync(join(f.repo, entry.report), report);
+  const applied = applyAppendReview(f.repo, 'demo', 1);
+  assert.equal(applied.refresh.reportSha256, seal.reportSha256);
+  assert.equal(readFileSync(oldPath, 'utf8'), old);
 });

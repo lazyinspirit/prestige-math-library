@@ -96,3 +96,13 @@ all later failures. Per-unit scheduling and repair still enumerate every
 unit independently. This applies to both math and physics executor joins.
 Clearing the blocker restores ordinary current-input, level, artifact and gate
 checks; neither shortcut grants readiness, coverage or a gate stamp.
+
+An active, unclosed `1-append-drift-N` stage also opts into explicit native
+`refresh` for its single `append-N` unit. It requires successful historical
+coverage and no unit/cohort writer, then freezes the current delta task under a
+new Alpha verification label. The old result and its retry history remain
+unchanged. A pending request masks historical coverage until the exact fresh
+native result arrives. The append receipt gate seals that result, frozen task
+and freshly written report; application requires the current seal and rejects
+changed bytes. All ordinary append review, metadata, plan and ledger gates
+remain required. This does not reopen completed append stages.

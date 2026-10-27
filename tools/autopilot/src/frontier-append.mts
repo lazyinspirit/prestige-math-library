@@ -1,6 +1,6 @@
 // Guarded extension of an unclosed Step-1 frontier. This never edits state.
-import { existsSync, readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync, copyFileSync, lstatSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { existsSync, readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync, copyFileSync, lstatSync, statSync } from 'node:fs';
+import { join, relative, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { packBatches, writeManifests, loadPlan, syncManifestsPreservingItems } from '../../plan-manifests.mjs';
@@ -222,11 +222,62 @@ export function recoverAppendItemOrder(repo: string, run: string, number: number
   return receipt;
 }
 
+/** Bind an explicitly requested fresh review to its actual native result and
+ * output bytes. Initial append reviews keep their original receipt path. */
+export function sealAppendReviewRefresh(repo: string, run: string, number: number): any {
+  const entry = appendRegistry(repo, run).appends.find((e: any) => e.number === number);
+  if (!entry) fail('unknown append generation');
+  const pointer = join(repo, entry.archive, 'current-review-refresh.json');
+  if (!existsSync(pointer)) return null;
+  const request = read(pointer), stage = `1-append-drift-${number}`, unit = `append-${number}`;
+  if (request.run !== run || request.stage !== stage || request.unit !== unit
+    || !/^[a-zA-Z0-9-]{1,80}$/.test(request.id ?? '')
+    || request.label !== `drift-review-append-${number}-refresh-${request.id}`
+    || request.task !== `${entry.archive}/refresh-${request.id}.task.md`
+    || !Number.isFinite(Date.parse(request.requestedAt))) fail('invalid append refresh request');
+  const state = read(request.stateFile);
+  const native = state.nativeRefreshes?.find((r: any) => r.id === request.id && r.stage === stage);
+  const dispatch = state.dispatches?.[`${stage}:${request.label}`];
+  if (state.run !== run || !native || native.run !== run || native.unit !== unit
+    || native.requestedAt !== request.requestedAt || native.plan?.label !== request.label
+    || native.plan?.role !== 'alpha' || !dispatch || dispatch.role !== 'alpha'
+    || !dispatch.covers?.includes(unit)) fail('append refresh lacks engine-started request/dispatch');
+  const resultPath = join(request.dispatchDir, `alpha-${request.label}.result.json`);
+  if (!existsSync(resultPath)) fail('append refresh result missing');
+  const result = read(resultPath), start = Date.parse(result.started_at), end = Date.parse(result.ended_at);
+  if (result.run !== run || result.role !== 'alpha' || result.label !== request.label
+    || result.ok !== true || result.timed_out === true || result.written_by === 'autopilot'
+    || (result.exit_code !== undefined && result.exit_code !== 0)
+    || !Array.isArray(result.covers) || result.covers.length !== 1 || result.covers[0] !== unit
+    || !Number.isFinite(start) || !Number.isFinite(end) || start < Date.parse(request.requestedAt) || end < start)
+    fail('append refresh requires its exact fresh successful native receipt');
+  const task = readFileSync(join(repo, request.task));
+  if (hash(task) !== request.taskSha256) fail('append refresh task changed');
+  const reportPath = join(repo, entry.report);
+  if (!existsSync(reportPath) || statSync(reportPath).mtimeMs < Date.parse(request.requestedAt))
+    fail('append refresh report was not written after the request');
+  const seal = { run, number, id: request.id, label: request.label, requestSha256: hash(readFileSync(pointer)),
+    resultSha256: hash(readFileSync(resultPath)), reportSha256: hash(readFileSync(reportPath)), taskSha256: hash(task) };
+  const sealPath = join(repo, entry.archive, `refresh-${request.id}.seal.json`);
+  if (existsSync(sealPath)) {
+    if (JSON.stringify(read(sealPath)) !== JSON.stringify(seal)) fail('sealed append refresh inputs changed');
+  } else writeFileSync(sealPath, JSON.stringify(seal, null, 2) + '\n', { flag: 'wx' });
+  return seal;
+}
+
 export function applyAppendReview(repo: string, run: string, number: number): any {
   const entry = checkAppendReview(repo, run, number), archive = join(repo, entry.archive);
   const dir = join(repo, 'research', `${run}-dispatch`);
   const pattern = new RegExp(`^alpha-(?:alpha-)?drift-review-append-${number}\\.result\\.json$`);
-  const success = existsSync(dir) && readdirSync(dir).filter(n => pattern.test(n)).some(n => {
+  const refreshed = existsSync(join(archive, 'current-review-refresh.json'));
+  const refreshSealPath = refreshed ? (() => {
+    const request = read(join(archive, 'current-review-refresh.json'));
+    if (!/^[a-zA-Z0-9-]{1,80}$/.test(request.id ?? '')) fail('invalid append refresh identity');
+    return join(archive, `refresh-${request.id}.seal.json`);
+  })() : null;
+  if (refreshSealPath && !existsSync(refreshSealPath)) fail('append refresh must be sealed before application');
+  const refresh = refreshed ? sealAppendReviewRefresh(repo, run, number) : null;
+  const success = refresh || existsSync(dir) && readdirSync(dir).filter(n => pattern.test(n)).some(n => {
     const result = read(join(dir, n));
     return result.run === run && result.role === 'alpha' && result.label === `drift-review-append-${number}`
       && result.ok === true && result.timed_out !== true && (result.exit_code === undefined || result.exit_code === 0) && result.covers?.includes(`append-${number}`)
@@ -275,6 +326,7 @@ export function applyAppendReview(repo: string, run: string, number: number): an
   writeFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`), original + `\n\n<!-- native append review ${number}; original preimage retained in ${entry.archive} -->\n` + report);
   const receipt = { run, number, reportSha256: hash(report), originalReportSha256: hash(original), mergedReportSha256: hash(readFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`))),
     manifests: paths.map(path => ({ path: relative(repo, path), sha256: hash(readFileSync(path)) })), inventoriesPreserved: true,
+    ...(refresh ? { refresh } : {}),
     ...(recovery ? { itemOrderRecoverySha256: hash(readFileSync(recoveryPath)) } : {}) };
   writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n');
   return receipt;
@@ -293,10 +345,28 @@ export function appendStages(stages: Stage[], ctx: Pick<Ctx, 'repo' | 'run'>): S
     const label = `drift-review-append-${e.number}`, unit = `append-${e.number}`;
     const recertify = () => ({ id: 'append-frontier-metadata-recertify', argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'recertify', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_RECERT (\\d+) item', min: 1 } });
     return [{ ...original, id: `1-append-drift-${e.number}`, label: `Step 1 — appended frontier drift ${e.number}`,
-      units: () => [unit], pattern: new RegExp(`^alpha-(?:alpha-)?${label}\\.result\\.json$`), labelFor: () => label,
+      units: () => [unit], pattern: new RegExp(`^alpha-(?:alpha-)?${label}(?:-refresh-[a-zA-Z0-9-]{1,80})?\\.result\\.json$`), labelFor: () => label,
       artifacts: () => e.report,
-      plan: () => [{ role: 'alpha', label, job: 'verification', covers: [unit], brief: 'briefs/alpha-drift.md', task: [e.task], timeout: 7200 }],
-      gates: () => [recertify(), { id: `append-review-${e.number}`, argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'check-review', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_REVIEW (\\d+) page', min: e.pairs.length } },
+      refreshPlan: (context: any, requestedUnit: string, request: any) => {
+        if (requestedUnit !== unit) fail('append refresh unit differs from generation');
+        const freshLabel = `${label}-refresh-${request.id}`;
+        const task = `${e.archive}/refresh-${request.id}.task.md`;
+        const text = readFileSync(join(context.repo, e.task), 'utf8')
+          + `\n\nNative append-review refresh ${request.id}: ${request.reason}\n`
+          + `This request supersedes the earlier review for this generation only. Write the actual fresh review to ${e.report}. Preserve the previous result and review archives.\n`;
+        writeFileSync(join(context.repo, task), text, { flag: 'wx' });
+        const frozen = { run: context.run, stage: `1-append-drift-${e.number}`, unit, id: request.id,
+          label: freshLabel, requestedAt: request.requestedAt, task, taskSha256: hash(text),
+          stateFile: resolve(context.repo, context.config.stateDir, 'state.json'),
+          dispatchDir: resolve(context.repo, context.dispatchDir) };
+        writeFileSync(join(context.repo, e.archive, `refresh-${request.id}.request.json`), JSON.stringify(frozen, null, 2) + '\n', { flag: 'wx' });
+        writeFileSync(join(context.repo, e.archive, 'current-review-refresh.json'), JSON.stringify(frozen, null, 2) + '\n');
+        return { role: 'alpha', label: freshLabel, job: 'verification', covers: [unit],
+          brief: 'briefs/alpha-drift.md', task: [task], timeout: 7200 };
+      },
+      plan: (_context: any, pending: string[]) => pending.includes(unit)
+        ? [{ role: 'alpha', label, job: 'verification', covers: [unit], brief: 'briefs/alpha-drift.md', task: [e.task], timeout: 7200 }] : [],
+      gates: () => [{ id: 'append-refresh-receipt', argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'seal-refresh', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_REFRESH (\\d+) generation', min: 1 } }, recertify(), { id: `append-review-${e.number}`, argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'check-review', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_REVIEW (\\d+) page', min: e.pairs.length } },
         { id: 'append-review-plan', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--pages-file', `${e.archive}/new-pages.json`] },
         { id: 'append-planned-items', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--pages-file', `${e.archive}/new-pages.json`] }],
     }, { id: `1-append-apply-${e.number}`, label: `materialize appended drift ${e.number}`, units: () => [unit],
