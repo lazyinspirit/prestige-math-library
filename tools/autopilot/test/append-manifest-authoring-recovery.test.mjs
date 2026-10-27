@@ -58,7 +58,7 @@ test('missing owner recovery grants no exception', t => {
 for (const [name, change, error] of [
   ['old ID loss', f => { f.after[0].items.shift(); }, /old item lost or moved/],
   ['old ID move', f => { f.after[1].items.push(f.after[0].items.shift()); }, /old item lost or moved/],
-  ['page kind change', f => { f.after[0].kind = 'B'; }, /page identity, kind or fields changed/],
+  ['page kind change', f => { f.after[0].kind = 'B'; }, /page identity.*kind/],
   ['page addition', f => { f.after.push({ id: 'extra', kind: 'A', items: [] }); }, /lost or added prior page/],
   ['unbound row update', f => { f.row.items.pop(); }, /unbound changed or added item/],
   ['wrong item change class', f => { f.row.items[0].change = 'added'; }, /unbound authoring delta/],
@@ -97,4 +97,64 @@ test('new ID cannot duplicate an item on an unlisted prior batch', t => {
 test('generation-specific receipt cannot be reused for another append', t => {
   const f = fixture(t); f.doc.number = 4; f.save();
   assert.throws(() => loadAppendManifestAuthoringRecovery(f.root, 'demo', f.entry), /invalid manifest authoring authorization/);
+});
+
+function nativeSyncFixture(t) {
+  const f = fixture(t, 4), archive = 'research/demo-frontier-append-3';
+  f.before[0].examples = [];
+  f.row.original = f.put(f.original.path, f.before);
+  f.entry.preimages[0].sha256 = f.row.original.sha256;
+  f.doc.entry_sha256 = sha(JSON.stringify(f.entry));
+  f.after[0].order = 2;
+  const snapshot = f.put('research/native-sync-batch-20.json', f.after);
+  const original = f.put(`${archive}/preimages/demo-alpha-step1-drift.md`, 'Original actual report\n');
+  const report = f.put('research/demo-alpha-step1-append-3-drift.md', '### prior-native\nVERDICT: no-drift\n');
+  const merged = readFileSync(join(f.root, original.path), 'utf8')
+    + `\n\n<!-- native append review 3; original preimage retained in ${archive} -->\n`
+    + readFileSync(join(f.root, report.path), 'utf8');
+  f.put('research/demo-alpha-step1-drift.md', merged);
+  const prior = { run: 'demo', number: 3, archive, report: report.path, originalReport: original.path,
+    preimages: [{ path: 'research/demo-alpha-step1-drift.md', archive: original.path, sha256: original.sha256 }] };
+  f.put('research/demo-frontier-appends.json', { version: 1, run: 'demo', appends: [prior, f.entry] });
+  const application = f.put(`${archive}/review-applied.json`, { run: 'demo', number: 3, inventoriesPreserved: true,
+    manifests: [{ path: f.path, sha256: snapshot.sha256 }], originalReportSha256: original.sha256,
+    reportSha256: report.sha256, mergedReportSha256: sha(merged) });
+  const result = f.put('research/demo-dispatch/tool-drift-append-apply-3.result.json', { role: 'tool', run: 'demo',
+    label: 'drift-append-apply-3', covers: ['append-3'], ok: true, written_by: 'autopilot', ended_at: '2026-10-27T01:00:00Z' });
+  f.put('.autopilot/demo/state.json', { run: 'demo', dispatches: { '1-append-apply-3:drift-append-apply-3': {
+    stage: '1-append-apply-3', role: 'tool', label: 'drift-append-apply-3', covers: ['append-3'],
+    startedAt: '2026-10-27T00:59:00Z', endedAt: '2026-10-27T01:00:01Z', lastExitOk: true } } });
+  f.row.native_sync = { number: 3, application, result, manifest: snapshot };
+  f.update(); return f;
+}
+
+test('prior native SYNC authenticates exact order changes and removal of legacy page fields', t => {
+  const f = nativeSyncFixture(t);
+  assert.equal(loadAppendManifestAuthoringRecovery(f.root, 'demo', f.entry).manifests.get(f.path), f.row.current_sha256);
+  // Subsequent item-only authoring can be bound while the exact native page-field snapshot stays immutable.
+  f.after[0].items[0].statement = 'Later genuine held metadata repair'; f.update();
+  assert.equal(loadAppendManifestAuthoringRecovery(f.root, 'demo', f.entry).manifests.size, 1);
+});
+
+test('native page-field recovery rejects unbound field changes, wrong generation and changed evidence', t => {
+  const f = nativeSyncFixture(t);
+  f.after[0].title = 'Unbound later page-field change'; f.update();
+  assert.throws(() => loadAppendManifestAuthoringRecovery(f.root, 'demo', f.entry), /do not match authenticated prior native SYNC/);
+  delete f.after[0].title; f.row.native_sync.number = 4; f.update();
+  assert.throws(() => loadAppendManifestAuthoringRecovery(f.root, 'demo', f.entry), /wrong prior native SYNC generation/);
+  f.row.native_sync.number = 3; f.save();
+  f.put(f.row.native_sync.application.path, '{}');
+  assert.throws(() => loadAppendManifestAuthoringRecovery(f.root, 'demo', f.entry), /stale evidence/);
+});
+
+test('a fresh owner hash cannot replace missing successful native SYNC execution', t => {
+  const f = nativeSyncFixture(t);
+  f.row.native_sync.result = f.put(f.row.native_sync.result.path, { run: 'demo', role: 'tool', label: 'drift-append-apply-3', ok: false }); f.save();
+  assert.throws(() => loadAppendManifestAuthoringRecovery(f.root, 'demo', f.entry), /not an actual successful native SYNC/);
+});
+
+test('a snapshot must match the native receipt full-manifest hash, not just its claimed page fields', t => {
+  const f = nativeSyncFixture(t);
+  f.row.native_sync.manifest = f.put(f.row.native_sync.manifest.path, f.after.map(p => ({ ...p, title: 'Changed snapshot' }))); f.save();
+  assert.throws(() => loadAppendManifestAuthoringRecovery(f.root, 'demo', f.entry), /does not bind exact manifest snapshot/);
 });

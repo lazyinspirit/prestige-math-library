@@ -242,6 +242,44 @@ export function appendManifestAuthoringRecoveryPath(entry) {
   return `${entry.archive}/owner-manifest-authoring-recovery.json`;
 }
 
+function nativeSyncManifest(root, run, entry, row) {
+  const sync = row.native_sync;
+  if (!sync) return null;
+  assert(Number.isInteger(sync.number) && sync.number > 0 && sync.number < entry.number, 'wrong prior native SYNC generation');
+  const archive = `research/${run}-frontier-append-${sync.number}`;
+  assert(sync.application?.path === `${archive}/review-applied.json`, 'wrong native SYNC application receipt');
+  const application = json(root, sync.application);
+  assert(application.run === run && application.number === sync.number && application.inventoriesPreserved === true
+    && application.manifests?.some(m => m.path === row.path && m.sha256 === sync.manifest?.sha256), 'native SYNC receipt does not bind exact manifest snapshot');
+  const snapshot = json(root, sync.manifest);
+  assert(Array.isArray(snapshot), 'invalid native SYNC manifest snapshot');
+  const label = `drift-append-apply-${sync.number}`, stage = `1-append-apply-${sync.number}`;
+  assert(sync.result?.path === `research/${run}-dispatch/tool-${label}.result.json`, 'wrong native SYNC tool result');
+  const result = json(root, sync.result);
+  assert(result.run === run && result.role === 'tool' && result.label === label && result.ok === true
+    && result.written_by === 'autopilot' && equal(result.covers, [`append-${sync.number}`])
+    && Number.isFinite(Date.parse(result.ended_at)), 'not an actual successful native SYNC tool result');
+  const state = JSON.parse(readFileSync(local(root, `.autopilot/${run}/state.json`)));
+  const dispatch = state.dispatches?.[`${stage}:${label}`];
+  assert(state.run === run && dispatch?.role === 'tool' && dispatch.stage === stage && dispatch.label === label
+    && equal(dispatch.covers, [`append-${sync.number}`]) && dispatch.lastExitOk === true
+    && Date.parse(dispatch.startedAt) <= Date.parse(result.ended_at)
+    && Date.parse(dispatch.endedAt) >= Date.parse(result.ended_at), 'missing successful engine-started native SYNC dispatch');
+  const registry = JSON.parse(readFileSync(local(root, `research/${run}-frontier-appends.json`)));
+  const prior = registry.appends?.find(e => e.number === sync.number);
+  assert(registry.run === run && prior?.archive === archive && prior.run === run, 'missing predecessor native SYNC generation');
+  const original = readFileSync(local(root, prior.originalReport), 'utf8');
+  const record = prior.preimages?.find(p => p.path === `research/${run}-alpha-step1-drift.md` && p.archive === prior.originalReport);
+  const report = readFileSync(local(root, prior.report), 'utf8');
+  assert(record?.sha256 === sha(original) && application.originalReportSha256 === sha(original)
+    && application.reportSha256 === sha(report), 'native SYNC report preimage changed');
+  const merged = original + `\n\n<!-- native append review ${sync.number}; original preimage retained in ${archive} -->\n` + report;
+  const currentReport = readFileSync(local(root, `research/${run}-alpha-step1-drift.md`), 'utf8');
+  assert(application.mergedReportSha256 === sha(merged) && currentReport.startsWith(merged)
+    && (currentReport.length === merged.length || currentReport.slice(merged.length).startsWith('\n\n<!-- native append review ')), 'native SYNC merge history changed');
+  return new Map(snapshot.map(p => [p.id, p]));
+}
+
 /** Read-only reconciliation of an actual authoring delta, not mathematical
  * acceptance. Called only when native application detects unexpected prior
  * manifests; successful application retains its own post-SYNC inventory hashes. */
@@ -279,6 +317,7 @@ export function loadAppendManifestAuthoringRecovery(root, run, entry) {
     const after = JSON.parse(current);
     assert(Array.isArray(before) && Array.isArray(after) && before.length === after.length, 'lost or added prior page');
     const priorPages = new Map(), currentPages = new Map();
+    const syncedPages = nativeSyncManifest(root, run, entry, row);
     for (const page of before) {
       assert(nonempty(page.id) && ['A', 'B'].includes(page.kind) && !priorPages.has(page.id) && Array.isArray(page.items), 'invalid archived page inventory');
       priorPages.set(page.id, page);
@@ -288,7 +327,13 @@ export function loadAppendManifestAuthoringRecovery(root, run, entry) {
       currentPages.set(page.id, page);
       const { items: oldItems, ...oldFields } = priorPages.get(page.id);
       const { items: newItems, ...newFields } = page;
-      assert(equal(canonical(oldFields), canonical(newFields)), 'prior page identity, kind or fields changed');
+      assert(oldFields.id === newFields.id && oldFields.kind === newFields.kind, 'prior page identity or kind changed');
+      if (!equal(canonical(oldFields), canonical(newFields))) {
+        const synced = syncedPages?.get(page.id);
+        assert(synced, 'prior page identity, kind or fields changed');
+        const { items: syncedItems, ...syncedFields } = synced;
+        assert(equal(canonical(syncedFields), canonical(newFields)), 'page fields do not match authenticated prior native SYNC');
+      }
     }
     const expected = new Map(), allCurrentIds = new Set();
     for (const [pageId, prior] of priorPages) {

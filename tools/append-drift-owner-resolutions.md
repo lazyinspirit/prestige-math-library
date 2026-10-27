@@ -203,3 +203,33 @@ Focused recovery and native application tests:
 ```bash
 node tools/tsx-run.mjs --test tools/autopilot/test/append-manifest-authoring-recovery.test.mjs tools/autopilot/test/append-owner-resolution.test.mts tools/autopilot/test/frontier-append.test.mts
 ```
+
+### Page fields already changed by an authentic earlier native SYNC
+
+A later append may have captured its preimages before an earlier generation
+applied native SYNC. In that case its recovery record may add:
+
+```json
+"native_sync": {
+  "number": 3,
+  "application": {"path": "research/RUN-frontier-append-3/review-applied.json", "sha256": "HASH"},
+  "result": {"path": "research/RUN-dispatch/tool-drift-append-apply-3.result.json", "sha256": "HASH"},
+  "manifest": {"path": "research/ARCHIVE/native-sync-3-batch-BATCH.pages.json", "sha256": "HASH"}
+}
+```
+
+This accepts no arbitrary page-field edit. The full immutable manifest snapshot
+must hash-match the earlier native application receipt's exact post-SYNC row
+for this same batch. Its full report merge and archived report preimage must
+remain exact. The actual successful native tool result and completed
+engine-started dispatch must agree with that earlier generation. Every changed
+current page field must equal the corresponding snapshot field; old page IDs,
+page kinds, batch identity and all old item IDs on their original pages are
+still mandatory. Later item-only changes remain subject to every exact current
+source/worksheet/delegated-evidence binding in the ordinary recovery records.
+The evidence snapshot preserves historical native metadata without requiring
+current item inventories to remain frozen forever.
+
+`repair_evidence` may truthfully document an unresolved/held mathematical edit.
+It need not be a close-authoring report, and this recovery does not turn that
+edit or its parent theorem into an accepted proof or ready item.
