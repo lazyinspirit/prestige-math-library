@@ -1,5 +1,5 @@
 // Exact owner resolution of native append planning blockers, never Alpha credit.
-import { readFileSync, existsSync, lstatSync } from 'node:fs';
+import { readFileSync, existsSync, lstatSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 
@@ -236,4 +236,101 @@ export function loadAppliedAppendDriftOwnerResolutions(root, run, mergedReport) 
     }
   }
   return accepted;
+}
+
+export function appendManifestAuthoringRecoveryPath(entry) {
+  return `${entry.archive}/owner-manifest-authoring-recovery.json`;
+}
+
+/** Read-only reconciliation of an actual authoring delta, not mathematical
+ * acceptance. Called only when native application detects unexpected prior
+ * manifests; successful application retains its own post-SYNC inventory hashes. */
+export function loadAppendManifestAuthoringRecovery(root, run, entry) {
+  root = resolve(root);
+  const path = appendManifestAuthoringRecoveryPath(entry);
+  if (!existsSync(resolve(root, path))) return null;
+  const raw = readFileSync(local(root, path)), doc = JSON.parse(raw);
+  assert(doc.version === 1 && doc.policy === 'owner-retained-append-manifest-authoring'
+    && doc.run === run && doc.number === entry.number && doc.authorized_by === 'owner'
+    && nonempty(doc.owner_identity) && nonempty(doc.reason)
+    && Number.isFinite(Date.parse(doc.authorized_at))
+    && doc.entry_sha256 === sha(JSON.stringify(entry)), 'invalid manifest authoring authorization');
+  assert(Array.isArray(doc.records) && doc.records.length > 0, 'empty manifest authoring recovery');
+  // Check current manifest identities once; an allegedly new ID must not
+  // duplicate an old item on an unlisted page/batch.
+  const currentIds = new Set();
+  const prefix = `${run}-batch-`;
+  for (const name of readdirSync(resolve(root, 'research')).filter(n => n.startsWith(prefix) && /^[1-9]\d*\.pages\.json$/.test(n.slice(prefix.length)))) {
+    const pages = JSON.parse(readFileSync(local(root, `research/${name}`)));
+    assert(Array.isArray(pages), 'invalid current manifest inventory');
+    for (const page of pages) for (const item of page.items ?? []) {
+      assert(nonempty(item.id) && !currentIds.has(item.id), 'duplicate current item across page or batch');
+      currentIds.add(item.id);
+    }
+  }
+  const accepted = new Map(), changedIds = new Set();
+  for (const row of doc.records) {
+    const preimage = entry.preimages?.find(p => p.path === row.path && p.path.endsWith('.pages.json'));
+    assert(preimage && !accepted.has(row.path) && row.original?.path === preimage.archive
+      && row.original.sha256 === preimage.sha256 && hash(row.current_sha256), 'wrong manifest preimage binding');
+    const before = JSON.parse(bytes(root, row.original));
+    const current = readFileSync(local(root, row.path));
+    assert(sha(current) === row.current_sha256 && row.current_sha256 !== preimage.sha256, 'stale or unchanged recovered manifest');
+    const after = JSON.parse(current);
+    assert(Array.isArray(before) && Array.isArray(after) && before.length === after.length, 'lost or added prior page');
+    const priorPages = new Map(), currentPages = new Map();
+    for (const page of before) {
+      assert(nonempty(page.id) && ['A', 'B'].includes(page.kind) && !priorPages.has(page.id) && Array.isArray(page.items), 'invalid archived page inventory');
+      priorPages.set(page.id, page);
+    }
+    for (const page of after) {
+      assert(priorPages.has(page.id) && !currentPages.has(page.id) && Array.isArray(page.items), 'lost, moved or duplicate prior page');
+      currentPages.set(page.id, page);
+      const { items: oldItems, ...oldFields } = priorPages.get(page.id);
+      const { items: newItems, ...newFields } = page;
+      assert(equal(canonical(oldFields), canonical(newFields)), 'prior page identity, kind or fields changed');
+    }
+    const expected = new Map(), allCurrentIds = new Set();
+    for (const [pageId, prior] of priorPages) {
+      const oldItems = new Map(), newItems = new Map();
+      for (const item of prior.items) {
+        assert(nonempty(item.id) && !oldItems.has(item.id), 'duplicate archived item'); oldItems.set(item.id, item);
+      }
+      for (const item of currentPages.get(pageId).items) {
+        assert(nonempty(item.id) && !newItems.has(item.id) && !allCurrentIds.has(item.id), 'duplicate current item');
+        newItems.set(item.id, item); allCurrentIds.add(item.id);
+      }
+      for (const id of oldItems.keys()) assert(newItems.has(id), 'old item lost or moved from its original page');
+      for (const [id, item] of newItems) {
+        if (!oldItems.has(id)) expected.set(`${pageId}:${id}`, 'added');
+        else if (!equal(canonical(oldItems.get(id)), canonical(item))) expected.set(`${pageId}:${id}`, 'updated');
+      }
+    }
+    assert(Array.isArray(row.items) && row.items.length === expected.size, 'unbound changed or added item');
+    const seen = new Set();
+    const batch = /^research\/.*-batch-([1-9]\d*)\.pages\.json$/.exec(row.path)?.[1];
+    assert(batch, 'invalid recovered batch path');
+    for (const item of row.items) {
+      const key = `${item.page}:${item.id}`;
+      assert(!seen.has(key) && expected.get(key) === item.change && !changedIds.has(item.id)
+        && nonempty(item.reason), 'wrong, duplicate or unbound authoring delta');
+      seen.add(key); changedIds.add(item.id);
+      assert(item.source?.path?.startsWith('items/') && item.source.path.endsWith('.md'), 'wrong actual item source');
+      const source = bytes(root, item.source, 'items/').toString('utf8');
+      const id = item.id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      assert(new RegExp(`^id:\\s*["']?${id}["']?\\s*$`, 'm').test(source), 'source does not declare the changed item');
+      assert(item.contract?.path === `research/${run}-batch-${batch}.proof-contracts.json`, 'wrong actual owner worksheet');
+      const worksheet = json(root, item.contract);
+      assert(Array.isArray(worksheet.scope) && worksheet.scope.includes(item.id)
+        && worksheet.contracts && Object.hasOwn(worksheet.contracts, item.id), 'worksheet does not bind the changed item');
+      assert(item.repair_evidence?.path !== doc.evidence?.path
+        && bytes(root, item.repair_evidence).toString('utf8').trim().length > 0, 'missing actual delegated item repair evidence');
+    }
+    accepted.set(row.path, row.current_sha256);
+  }
+  const evidence = json(root, doc.evidence);
+  assert(evidence.run === run && evidence.number === entry.number && evidence.owner === true
+    && evidence.decision === 'retain-authoring' && nonempty(evidence.reason)
+    && equal(evidence.records, doc.records), 'owner evidence does not bind exact manifest authoring changes');
+  return { manifests: accepted, sha256: sha(raw), path };
 }

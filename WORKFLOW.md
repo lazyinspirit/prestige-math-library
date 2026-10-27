@@ -78,7 +78,12 @@ and ordinary inventory authoring do not invalidate that scoped acceptance. Both 
 check and post-merge drift check validate it; the native blocked verdict stays
 unchanged. This resolves only the named planning blocker, without new native
 coverage or whole-theorem readiness. See
-[tools/append-drift-owner-resolutions.md](tools/append-drift-owner-resolutions.md).
+[tools/append-drift-owner-resolutions.md](tools/append-drift-owner-resolutions.md). The same
+mechanism document specifies the separate exact owner manifest-authoring
+recovery: it retains old page fields and every old item ID on its original
+page, binds every added/updated item to current source/worksheet and genuine
+repair evidence, and leaves native SYNC inventory preservation mandatory.
+It confers no proof acceptance, readiness, review or worker coverage.
 
 Construction readiness retains its snapshot and receipt-stamped decisions across
 fresh controller contexts belonging to the same configuration and frontier.

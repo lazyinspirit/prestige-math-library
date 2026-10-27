@@ -4,6 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync, exist
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import { createHash } from 'node:crypto';
 import { appendFrontier, appendStages, checkAppendReview, applyAppendReview, recoverAppendItemOrder, sealAppendReviewRefresh } from '../src/frontier-append.mts';
 import { unsatisfiableEdges } from '../src/frontier.mts';
 import { writeManifests } from '../../plan-manifests.mjs';
@@ -307,4 +308,42 @@ test('explicit append-review refresh masks historical success and binds fresh na
   const applied = applyAppendReview(f.repo, 'demo', 1);
   assert.equal(applied.refresh.reportSha256, seal.reportSha256);
   assert.equal(readFileSync(oldPath, 'utf8'), old);
+});
+
+
+test('exact owner authoring recovery retains new helpers and repaired old rows through native SYNC and retry', t => {
+  const f = fixture(t), e = appendFrontier(f.options);
+  const hash = (raw: any) => createHash('sha256').update(raw).digest('hex');
+  const put = (path: string, value: any) => {
+    const raw = typeof value === 'string' ? value : JSON.stringify(value);
+    writeFileSync(join(f.repo, path), raw); return { path, sha256: hash(raw) };
+  };
+  mkdirSync(join(f.repo, 'items'));
+  const path = 'research/demo-batch-1.pages.json';
+  const original = e.preimages.find((row: any) => row.path === path);
+  const originalBytes = readFileSync(join(f.repo, original.archive));
+  const pages = JSON.parse(f.bytes('demo-batch-1.pages.json').toString());
+  pages[0].items[0].statement = 'Actual authorized repaired statement';
+  pages[0].items.push({ id: 'lem-actual-new-helper', kind: 'lemma', statement: 'New completed helper', deps: [] });
+  const current = put(path, pages);
+  const ids = [pages[0].items[0].id, 'lem-actual-new-helper'];
+  const contract = put('research/demo-batch-1.proof-contracts.json', { scope: ids, contracts: Object.fromEntries(ids.map(id => [id, {}])) });
+  const repair_evidence = put('research/delegated-authoring-repair.md', 'Actual authoring evidence; not a new native review.');
+  const items = ids.map((id, index) => ({ page: pages[0].id, id, change: index ? 'added' : 'updated', reason: 'Authorized actual source repair',
+    source: put(`items/${id}.md`, `---\nid: ${id}\n---\nCurrent carrier\n`), contract, repair_evidence }));
+  const records = [{ path, original: { path: original.archive, sha256: original.sha256 }, current_sha256: current.sha256, items }];
+  const evidence = put('research/owner-retain-authoring.json', { run: 'demo', number: 1, owner: true,
+    decision: 'retain-authoring', reason: 'Retain genuine concurrent authoring without proof/review credit', records });
+  const recovery = put(`${e.archive}/owner-manifest-authoring-recovery.json`, { version: 1, policy: 'owner-retained-append-manifest-authoring',
+    run: 'demo', number: 1, authorized_by: 'owner', owner_identity: '/root', authorized_at: AT, reason: 'Actual authorized changes',
+    entry_sha256: hash(JSON.stringify(e)), records, evidence });
+  put(e.report, '### new-a\nVERDICT: no-drift\n### new-b\nVERDICT: no-drift\n');
+  mkdirSync(join(f.research, 'demo-dispatch'));
+  put('research/demo-dispatch/alpha-drift-review-append-1.result.json', { run: 'demo', role: 'alpha', label: 'drift-review-append-1',
+    covers: ['append-1'], ok: true, started_at: AT });
+  const receipt = applyAppendReview(f.repo, 'demo', 1);
+  assert.equal(receipt.ownerManifestRecoverySha256, recovery.sha256);
+  assert.deepEqual(JSON.parse(f.bytes('demo-batch-1.pages.json').toString()).map((p: any) => p.items), pages.map((p: any) => p.items));
+  assert.deepEqual(readFileSync(join(f.repo, original.archive)), originalBytes);
+  assert.equal(applyAppendReview(f.repo, 'demo', 1).ownerManifestRecoverySha256, recovery.sha256);
 });

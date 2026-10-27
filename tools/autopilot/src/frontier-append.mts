@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { packBatches, writeManifests, loadPlan, syncManifestsPreservingItems } from '../../plan-manifests.mjs';
 import { MAX_RUN_PAIRS } from './capacity.mjs';
-import { loadAppendDriftOwnerResolutions, appendOwnerResolutionPath } from '../../append-drift-owner-resolutions.mjs';
+import { loadAppendDriftOwnerResolutions, appendOwnerResolutionPath, loadAppendManifestAuthoringRecovery } from '../../append-drift-owner-resolutions.mjs';
 import { scanProcesses } from '../bin/watchdog.mjs';
 import type { Stage, Ctx } from './types.mts';
 
@@ -297,6 +297,7 @@ export function applyAppendReview(repo: string, run: string, number: number): an
   const priorApplication = existsSync(receiptPath) ? read(receiptPath) : null;
   const recoveryPath = join(archive, 'item-order-recovery.json');
   const recovery = existsSync(recoveryPath) ? read(recoveryPath) : null;
+  let authoringRecovery: any = null;
   for (const record of entry.preimages.filter((p: any) => p.path.endsWith('.pages.json'))) {
     const expected = priorApplication?.manifests?.find((p: any) => p.path === record.path)?.sha256 ?? record.sha256;
     const current = readFileSync(join(repo, record.path));
@@ -304,7 +305,9 @@ export function applyAppendReview(repo: string, run: string, number: number): an
     const recovered = !priorApplication && recovery?.run === run && recovery?.number === number
       && recovery.records?.find((p: any) => p.path === record.path && p.beforeSha256 === record.sha256 && p.afterSha256 === hash(current));
     const before = readFileSync(join(repo, record.archive));
-    if (!recovered || hash(before) !== record.sha256 || !sameItemsAndPageFields(before, current))
+    if (recovered && hash(before) === record.sha256 && sameItemsAndPageFields(before, current)) continue;
+    authoringRecovery ??= loadAppendManifestAuthoringRecovery(repo, run, entry);
+    if (authoringRecovery?.manifests.get(record.path) !== hash(current))
       fail(`prior manifest changed before append application: ${record.path}`);
   }
   for (const batch of entry.batches) {
@@ -333,7 +336,9 @@ export function applyAppendReview(repo: string, run: string, number: number): an
     ...(refresh ? { refresh } : {}),
     ...(existsSync(join(repo, appendOwnerResolutionPath(entry)))
       ? { ownerResolutionSha256: hash(readFileSync(join(repo, appendOwnerResolutionPath(entry)))) } : {}),
-    ...(recovery ? { itemOrderRecoverySha256: hash(readFileSync(recoveryPath)) } : {}) };
+    ...(recovery ? { itemOrderRecoverySha256: hash(readFileSync(recoveryPath)) } : {}),
+    ...((authoringRecovery?.sha256 ?? priorApplication?.ownerManifestRecoverySha256)
+      ? { ownerManifestRecoverySha256: authoringRecovery?.sha256 ?? priorApplication.ownerManifestRecoverySha256 } : {}) };
   writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n');
   return receipt;
 }

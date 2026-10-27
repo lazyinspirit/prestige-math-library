@@ -129,3 +129,77 @@ Focused tests:
 ```bash
 node tools/tsx-run.mjs --test tools/autopilot/test/append-owner-resolution.test.mts
 ```
+
+## Retaining concurrent authoring in prior manifests
+
+A separate receipt allows native append application to retain actual owner-
+authorized authoring performed after its immutable prior-manifest capture. It
+is **not** drift resolution, mathematical acceptance, readiness, review or
+worker coverage. It does not overwrite the native preimages or replace the
+existing order-only recovery.
+
+The owner writes
+`research/RUN-frontier-append-N/owner-manifest-authoring-recovery.json`:
+
+```json
+{
+  "version": 1,
+  "policy": "owner-retained-append-manifest-authoring",
+  "run": "RUN", "number": 3,
+  "authorized_by": "owner", "owner_identity": "/root",
+  "authorized_at": "ISO timestamp",
+  "reason": "Retain the exact genuine authorized authoring changes",
+  "entry_sha256": "SHA256_OF_JSON.stringify(EXACT_REGISTRY_ENTRY)",
+  "records": [{
+    "path": "research/RUN-batch-20.pages.json",
+    "original": {
+      "path": "research/RUN-frontier-append-3/preimages/RUN-batch-20.pages.json",
+      "sha256": "EXACT_NATIVE_PREIMAGE_HASH"
+    },
+    "current_sha256": "FULL_CURRENT_MANIFEST_RAW_HASH",
+    "items": [{
+      "page": "ORIGINAL_PAGE_ID", "id": "EXACT_ITEM_ID",
+      "change": "added",
+      "reason": "Actual authorized authoring and its status limits",
+      "source": {"path": "items/EXACT_ITEM_ID.md", "sha256": "CURRENT_RAW_HASH"},
+      "contract": {"path": "research/RUN-batch-20.proof-contracts.json", "sha256": "CURRENT_RAW_HASH"},
+      "repair_evidence": {"path": "research/ACTUAL_DELEGATED_REPAIR_REPORT.md", "sha256": "HASH"}
+    }]
+  }],
+  "evidence": {"path": "research/OWNER_AUTHORING_ACCEPTANCE.json", "sha256": "HASH"}
+}
+```
+
+The separate owner evidence has `run`, `number`, `owner: true`,
+`decision: "retain-authoring"`, a nonempty `reason`, and `records` **identical**
+to the receipt's records. Every actually changed or added item has exactly one
+item record; `change` is `updated` for an existing item and `added` for a new ID.
+Source files must declare that exact ID. The current batch worksheet must
+contain both its scope declaration and exact contract object. Each record binds
+nonempty genuine delegated repair evidence separately from the owner wrapper.
+These are evidence checks, not an automatic mathematical evaluation.
+
+For each listed manifest, all old pages and all their fields except `items`
+remain equal, allowing only JSON key/page ordering differences. Every old item
+ID stays on its original page. All exact existing-item metadata changes and
+inserted IDs must be enumerated; item reordering itself requires no item record.
+Current duplicate IDs across any batch fail closed. Missing, moved or dropped
+old IDs, unbound deltas, changed page fields, stale preimages/current manifests,
+source/worksheet/evidence hashes and a wrong generation fail closed. The same
+mechanism works independently for append 3, append 4, and later generations;
+each binds its own actual native capture.
+
+`loadAppendManifestAuthoringRecovery` is read-only. Native application consults
+it only for unexpected prior-manifest changes. Other changed manifests still
+need their own exact recovery binding. Native SYNC must then preserve **all
+current** page/item inventories, including the retained helpers and updates.
+Its application receipt records `ownerManifestRecoverySha256` alongside the
+post-SYNC full manifest hashes. An ordinary retry matching that successful
+application uses its own hashes; it does not reinterpret the historical
+pre-SYNC owner receipt as a new baseline or discard old evidence.
+
+Focused recovery and native application tests:
+
+```bash
+node tools/tsx-run.mjs --test tools/autopilot/test/append-manifest-authoring-recovery.test.mjs tools/autopilot/test/append-owner-resolution.test.mts tools/autopilot/test/frontier-append.test.mts
+```
