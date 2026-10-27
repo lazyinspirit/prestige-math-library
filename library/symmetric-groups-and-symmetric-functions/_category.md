@@ -16,7 +16,7 @@ and Plancherel measure connects to random Young diagrams.
 These developments draw on character theory, induction and tensor products from Abstract
 Algebra, with selected foundations from Representation Theory of Groups, Commutative
 Algebra, Homological Algebra and Category Theory. Their results support work in Lie
-Theory, Hecke Algebras and Categorification, Quantum Groups and Crystal Bases,
-Representation Theory of Groups, and Hall Algebras and Tensor Categories. The
+Theory, Categorification and Geometric Representation Theory, Quantum Groups and Crystal Bases,
+and Representation Theory of Groups. The
 connections run through branching, tensor products, modular structure and symmetric
 functions.

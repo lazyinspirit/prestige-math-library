@@ -335,6 +335,14 @@ paraphrase. See [the statement policy](tools/STATEMENT-FIRST.md).
 
 ## Pages and categories
 
+The former `hecke-algebras-and-categorification`, `hopf-hecke-algebras`,
+`hall-algebras-and-tensor-categories`, and
+`category-o-and-geometric-representation-theory` categories are merged into
+`categorification-and-geometric-representation-theory`. Page/item IDs, page
+bytes, and publication statuses are preserved; historical workflow evidence
+retains its recorded paths. The exact moves and combined dependency ordering
+are in [the owner-approved category record](research/categorification-and-geometric-representation-theory-category-reorganization.json).
+
 Set Theory uses the internal category identifier `set-theory` and directory
 `library/set-theory/` (renamed from `foundations` on 2026-10-12). Page and item
 identities are unchanged; historical run receipts retain their recorded paths.

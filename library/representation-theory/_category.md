@@ -15,8 +15,7 @@ representations of finite general linear and real special linear groups.
 
 Finite-group arguments draw on Abstract Algebra, while analytic and unitary topics use
 Functional Analysis and Fourier Analysis; specialized pages also draw on Lie Theory,
-Commutative Algebra and topology. These methods support work in Category O and Geometric
-Representation Theory, Hecke Algebras and Categorification, Quantum Algebra and
+Commutative Algebra and topology. These methods support work in Categorification and Geometric Representation Theory, Quantum Algebra and
 Representation Theory, Symmetric Groups and Symmetric Functions, and Quantum Computing.
 The connections bring finite-group structure together with harmonic analysis and
 geometry.

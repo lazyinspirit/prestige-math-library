@@ -16,8 +16,7 @@ cohomology, Kac–Moody algebras, superalgebras and geometric interfaces.
 Foundational Lie-group topics use smooth-manifold, tangent-bundle and flow theory from
 Differential Geometry; other topics draw on Abstract Algebra, Linear Algebra,
 Homological Algebra, Algebraic Geometry and symmetric-function methods. Lie-theoretic
-results are used in Representation Theory of Groups, Category O and Geometric
-Representation Theory, Coxeter Groups, Quantum Algebra and Representation Theory and
+results are used in Representation Theory of Groups, Categorification and Geometric Representation Theory, Coxeter Groups, Quantum Algebra and Representation Theory and
 related geometric applications. The connections run through root systems, highest
 weights, enveloping algebras and representations of Lie groups. Related constructions
 also appear in Symmetric Groups and Symmetric Functions.

@@ -12,7 +12,7 @@ parts:
 
 ## representation-theory
 
-Quantized enveloping algebras and divided powers prepare highest-weight modules. Kashiwara operators and crystal lattices lead to tensor-product crystals and global bases. Quantum affine type A supplies the Fock-space action, followed by its residue-crystal conventions for symmetric-group applications. KLR categorification and Hecke decomposition numbers are developed in Hecke Algebras and Categorification.
+Quantized enveloping algebras and divided powers prepare highest-weight modules. Kashiwara operators and crystal lattices lead to tensor-product crystals and global bases. Quantum affine type A supplies the Fock-space action, followed by its residue-crystal conventions for symmetric-group applications. KLR categorification and Hecke decomposition numbers are developed in Categorification and Geometric Representation Theory.
 
 ## algebra-and-physics-extensions
 
