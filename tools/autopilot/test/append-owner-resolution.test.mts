@@ -4,6 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSyn
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { checkAppendReview } from '../src/frontier-append.mts';
 import { loadAppendDriftOwnerResolutions, loadAppliedAppendDriftOwnerResolutions, appendDriftOwnerScopeHash, appendManifestPageHash } from '../../append-drift-owner-resolutions.mjs';
 const sha = (x: any) => createHash('sha256').update(x).digest('hex');
@@ -162,4 +163,31 @@ test('post-apply merged report uses the same exact receipt and rejects changed n
     ownerResolutionSha256: sha(readFileSync(join(f.root, f.archive, 'owner-drift-resolutions.json'))) });
   assert.equal(loadAppliedAppendDriftOwnerResolutions(f.root, 'demo', merged).get('new'), f.row.verdict);
   assert.throws(() => loadAppliedAppendDriftOwnerResolutions(f.root, 'demo', merged.replace('missing local proof', 'rewritten verdict')), /merged native append report changed/);
+});
+
+
+test('actual merged drift gate honors an exact owner-resolved bare blocked line, without fabricating edge prose', t => {
+  const f = fixture(t), bare = '### new\nVERDICT: drift-blocked\n';
+  f.doc.report = f.put(f.entry.report, bare); f.row.verdict = 'VERDICT: drift-blocked';
+  f.acceptance.verdict = f.row.verdict; f.row.evidence = f.put(f.row.evidence.path, f.acceptance);
+  const seal = JSON.parse(readFileSync(join(f.root, f.doc.native_seal.path), 'utf8'));
+  seal.reportSha256 = f.doc.report.sha256; f.doc.native_seal = f.put(f.doc.native_seal.path, seal);
+  const plan = JSON.parse(readFileSync(join(f.root, f.doc.plan.path), 'utf8'));
+  plan.pages.unshift({ id: 'old', kind: 'A', order: 0, category: 'math', requires: [] });
+  for (const [index, page] of plan.pages.entries()) { page.order ??= index; page.category ??= 'math'; }
+  f.put(f.doc.plan.path, plan);
+  const ledger = { run: 'demo', allow_in_run_dependencies: true, pages: [{ id: 'old', kind: 'A' }, { id: 'new', kind: 'A' }, { id: 'new-examples', kind: 'B' }] };
+  f.put(f.doc.ledger.path, ledger); f.doc.scope_sha256 = appendDriftOwnerScopeHash(f.entry, f.doc.resolutions, ledger, plan); f.save();
+  const original = readFileSync(join(f.root, f.entry.originalReport), 'utf8');
+  const merged = original + `\n\n<!-- native append review 1; original preimage retained in ${f.archive} -->\n` + bare;
+  f.put('research/demo-alpha-step1-drift.md', merged);
+  f.put(`${f.archive}/review-applied.json`, { run: 'demo', number: 1, inventoriesPreserved: true,
+    originalReportSha256: sha(original), reportSha256: sha(bare), mergedReportSha256: sha(merged),
+    ownerResolutionSha256: sha(readFileSync(join(f.root, f.archive, 'owner-drift-resolutions.json'))) });
+  const tool = new URL('../../drift-review-check.mjs', import.meta.url).pathname;
+  const check = () => spawnSync(process.execPath, [tool, '--run', 'demo'], { cwd: f.root, encoding: 'utf8' });
+  const accepted = check(); assert.equal(accepted.status, 0, accepted.stderr);
+  assert.match(accepted.stdout, /1 exact blocker\(s\) owner-resolved/);
+  rmSync(join(f.root, f.archive, 'owner-drift-resolutions.json'));
+  assert.equal(check().status, 1); assert.match(check().stderr, /drift-check-blocked/);
 });

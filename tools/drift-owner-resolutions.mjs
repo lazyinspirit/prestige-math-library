@@ -161,3 +161,39 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   console.log(driftScopeHash(JSON.parse(readFileSync(`research/${run}-scope-ledger.json`, 'utf8')),
     JSON.parse(readFileSync('research/plan-spec.json', 'utf8'))));
 }
+
+// Ledger entries for a prepared append reserve planning scope before that
+// generation's native review/application. They are not review coverage owed by
+// the earlier applied-prefix gate. Every later generation keeps its own stages.
+export function unappliedNativeAppendPages(root, run, report, ledger) {
+  root = resolve(root);
+  const path = `research/${run}-frontier-appends.json`;
+  if (!existsSync(resolve(root, path))) return new Set();
+  const registry = JSON.parse(readFileSync(local(root, path)));
+  assert(registry.version === 1 && registry.run === run && Array.isArray(registry.appends), 'invalid native append scope registry');
+  if (!registry.appends.length) return new Set();
+  const first = registry.appends[0];
+  const original = first.preimages?.find(p => p.path === `research/${run}-alpha-step1-drift.md` && p.archive === first.originalReport);
+  assert(original, 'missing native original report preimage');
+  verifyNativeAppendReport(root, run, bytes(root, { path: original.archive, sha256: original.sha256 }), Buffer.from(report));
+  const pending = new Set(), pages = new Map((ledger.pages ?? []).map(p => [p.id, p]));
+  const headings = new Set([...report.matchAll(/^###\s+`?([a-z0-9][a-z0-9-]*)`?\s*$/gm)].map(m => m[1]));
+  for (const entry of registry.appends) {
+    assert(entry.run === run && entry.archive === `research/${run}-frontier-append-${entry.number}`
+      && Array.isArray(entry.pairs) && entry.pairs.length > 0
+      && Array.isArray(entry.newPages) && entry.newPages.length === 2 * entry.pairs.length,
+      'invalid native append page scope');
+    if (existsSync(resolve(root, `${entry.archive}/review-applied.json`))) continue;
+    const prepared = JSON.parse(readFileSync(local(root, `${entry.archive}/prepared.json`)));
+    const selector = JSON.parse(readFileSync(local(root, `${entry.archive}/new-pages.json`)));
+    assert(equal(prepared, entry) && equal(selector, entry.newPages), 'pending native append selector changed');
+    const aPages = entry.newPages.filter(id => pages.get(id)?.kind === 'A');
+    assert(equal([...aPages].sort(), [...entry.pairs].sort()), 'pending native append A scope changed');
+    for (const id of entry.newPages) {
+      assert(!pending.has(id) && ['A', 'B'].includes(pages.get(id)?.kind)
+        && !headings.has(id), 'invalid, duplicate or already reviewed pending page');
+      pending.add(id);
+    }
+  }
+  return pending;
+}

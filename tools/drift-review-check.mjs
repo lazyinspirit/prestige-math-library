@@ -5,7 +5,7 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pageBuildability } from './buildability.mjs';
-import { loadDriftOwnerResolutions } from './drift-owner-resolutions.mjs';
+import { loadDriftOwnerResolutions, unappliedNativeAppendPages } from './drift-owner-resolutions.mjs';
 import { loadAppliedAppendDriftOwnerResolutions } from './append-drift-owner-resolutions.mjs';
 
 const argv = process.argv.slice(2);
@@ -38,6 +38,13 @@ if (!existsSync(reportPath)) {
   process.exit(1);
 }
 const text = readFileSync(reportPath, 'utf8');
+let pendingAppendPages;
+try {
+  pendingAppendPages = unappliedNativeAppendPages(process.cwd(), run, text, ledger);
+} catch (error) {
+  console.error(`ERROR drift-check-append-scope: ${error.message}`);
+  process.exit(1);
+}
 
 // A minted/rescoped pair enters the run only *after* this Alpha review has
 // completed. Requiring it to have its own report section turns a successful
@@ -55,7 +62,7 @@ for (const [i, heading] of reportHeadings.entries()) {
     mintedOrRescoped.add(id[1]);
   }
 }
-const reviewedOwed = owed.filter((id) => !mintedOrRescoped.has(id));
+const reviewedOwed = owed.filter((id) => !mintedOrRescoped.has(id) && !pendingAppendPages.has(id));
 
 // Buildability is page-local: strictly more than 95% of each page's
 // same-category `requires` must already be published. The A/B partner and
@@ -94,9 +101,9 @@ const walkLibrary = (dir) => {
 };
 walkLibrary('library');
 
-const builtHere = new Set(ledgerPages.map((p) => p.id));
+const builtHere = new Set(ledgerPages.filter(p => !pendingAppendPages.has(p.id)).map((p) => p.id));
 const owedPages = ledgerPages
-  .filter((p) => p.kind === 'A' || p.kind === 'B')
+  .filter((p) => (p.kind === 'A' || p.kind === 'B') && !pendingAppendPages.has(p.id))
   .map((p) => p.id);
 
 const errors = [];
@@ -166,7 +173,8 @@ for (const id of reviewedOwed) {
     continue;
   }
   const [, kind, detail] = verdicts[0];
-  if (kind !== 'no-drift' && !detail.trim()) {
+  if (kind !== 'no-drift' && !detail.trim()
+    && !(kind === 'drift-blocked' && ownerResolved.get(id) === verdicts[0][0])) {
     errors.push(`drift-check-detail: ${id} is ${kind} but names no edge`);
   }
   if (kind === 'drift-applied' && detail.trim()) {

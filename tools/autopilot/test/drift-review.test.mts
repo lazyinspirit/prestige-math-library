@@ -18,6 +18,7 @@ import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'nod
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 import { stages, MECHANICAL_REPAIRS } from '../stages/mathlib.mts';
 import { identityPlaceholders } from '../src/doctor.mts';
@@ -621,5 +622,38 @@ test('stage 1 declares the drift gate, and it names the run', () => {
   const argv = typeof g.argv === 'function' ? g.argv() : g.argv;
   assert.deepEqual(argv.slice(0, 2), ['node', 'tools/drift-review-check.mjs']);
   assert.ok(argv.includes('demo'));
+  rmSync(dir, { recursive: true, force: true });
+});
+
+
+test('earlier drift gate excludes only prepared unapplied append pages and later requires their actual report', () => {
+  const report = '### alpha-page\nVERDICT: no-drift\n### beta-page\nVERDICT: no-drift\n';
+  const addedPages = [{ id: 'pending-page', kind: 'A', batch: '3' }, { id: 'pending-page-examples', kind: 'B', batch: '3' }];
+  const dir = fixture([...PAGES, ...addedPages], report, { specPages: [...SPEC_PAGES,
+    { id: 'pending-page', kind: 'A', order: 30, requires: [] }, { id: 'pending-page-examples', kind: 'B', order: 31, requires: [] }] });
+  const sha = (raw: any) => createHash('sha256').update(raw).digest('hex');
+  const archive = 'research/demo-frontier-append-1'; mkdirSync(join(dir, archive, 'preimages'), { recursive: true });
+  const originalReport = archive + '/preimages/demo-alpha-step1-drift.md'; writeFileSync(join(dir, originalReport), report);
+  const entry = { run: 'demo', number: 1, archive, pairs: ['pending-page'], newPages: addedPages.map(p => p.id),
+    report: 'research/demo-alpha-step1-append-1-drift.md', originalReport,
+    preimages: [{ path: 'research/demo-alpha-step1-drift.md', archive: originalReport, sha256: sha(report) }] };
+  writeFileSync(join(dir, 'research/demo-frontier-appends.json'), JSON.stringify({ version: 1, run: 'demo', appends: [entry] }));
+  writeFileSync(join(dir, archive, 'prepared.json'), JSON.stringify(entry));
+  writeFileSync(join(dir, archive, 'new-pages.json'), JSON.stringify(entry.newPages));
+  assert.equal(check(dir).status, 0);
+  assert.match(check(dir).stdout, /2 page\(s\) reviewed/);
+  writeFileSync(join(dir, archive, 'new-pages.json'), JSON.stringify(['alpha-page', 'pending-page-examples']));
+  assert.match(check(dir).stderr, /pending native append selector changed/);
+  writeFileSync(join(dir, archive, 'new-pages.json'), JSON.stringify(entry.newPages));
+  const apply = (added: string) => {
+    const merged = report + `\n\n<!-- native append review 1; original preimage retained in ${archive} -->\n` + added;
+    writeFileSync(join(dir, entry.report), added); writeFileSync(join(dir, 'research/demo-alpha-step1-drift.md'), merged);
+    writeFileSync(join(dir, archive, 'review-applied.json'), JSON.stringify({ run: 'demo', number: 1, inventoriesPreserved: true,
+      originalReportSha256: sha(report), reportSha256: sha(added), mergedReportSha256: sha(merged) }));
+  };
+  apply('No assigned page section was actually supplied.\n');
+  assert.match(check(dir).stderr, /drift-check-missing-page: no `### pending-page`/);
+  apply('### pending-page\nVERDICT: no-drift\n');
+  assert.equal(check(dir).status, 0); assert.match(check(dir).stdout, /3 page\(s\) reviewed/);
   rmSync(dir, { recursive: true, force: true });
 });

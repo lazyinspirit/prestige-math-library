@@ -80,3 +80,19 @@ occur on that chain. This preserves the owner's historical report acceptance
 without rebinding it after every native append. Source/evidence hashes, scope,
 blocked verdicts, native prompt/result and affected-consumer checks remain
 mandatory and unchanged.
+
+The merged drift gate checks only the frontier that has actually applied.
+Prepared but unapplied append pages are identified from the exact native
+`prepared.json`/`new-pages.json` selectors and registered ledger identities,
+after authenticating the complete applied report prefix. They are excluded
+from the earlier gate's owed pages and in-run availability; their own append
+review/application stages remain mandatory. Applying a generation makes its
+pages owed immediately, so a missing actual review section still fails.
+Changed selectors, application gaps, or merged bytes not justified by genuine
+application receipts fail closed.
+
+A native append may truthfully write a bare `VERDICT: drift-blocked` and name
+its missing proof in the surrounding section. The gate does not invent an edge
+for that line: it omits the separate prose-detail error only when the exact
+line already has a fully validated original/append owner resolution. Without
+that resolution it remains blocked, with all ordinary checks intact.
