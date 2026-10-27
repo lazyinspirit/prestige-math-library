@@ -9,4 +9,4 @@ parts:
 
 ## representation-theory
 
-Young diagrams and permutation modules lead to Specht modules, branching and hook lengths. Symmetric functions translate characters into Schur bases; outer products and rim hooks give character rules. Integral lattices, cores and blocks prepare modular branching. Kronecker coefficients, FI-modules and Plancherel measure develop the stable and asymptotic branches. Crystal prerequisites are linked from Quantum Groups and Crystal Bases.
+Young diagrams and permutation modules lead to Specht modules, branching and hook lengths. Symmetric functions translate characters into Schur bases; outer products and rim hooks give character rules. Integral lattices, cores and blocks prepare modular branching. Kronecker coefficients, FI-modules and Plancherel measure develop the stable and asymptotic branches. Crystal prerequisites are linked from Categorification and Geometric Representation Theory.

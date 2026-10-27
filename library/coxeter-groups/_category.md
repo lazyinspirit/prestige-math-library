@@ -15,6 +15,5 @@ cycles, sign, conjugacy, simplicity and permutation statistics.
 
 These developments draw on Group Theory, Linear Algebra and Lie Theory, with geometric
 topics using Algebraic Topology, Topology, Real Analysis and Functional Analysis.
-Coxeter methods support work in Categorification and Geometric Representation Theory
-and Quantum Groups and Crystal Bases. Shared structures include root systems, Bruhat order, reflection geometry
+Coxeter methods support work in Categorification and Geometric Representation Theory. Shared structures include root systems, Bruhat order, reflection geometry
 and Hecke algebras.

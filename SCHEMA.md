@@ -343,6 +343,12 @@ bytes, and publication statuses are preserved; historical workflow evidence
 retains its recorded paths. The exact moves and combined dependency ordering
 are in [the owner-approved category record](research/categorification-and-geometric-representation-theory-category-reorganization.json).
 
+The former `quantum-groups-and-crystal-bases` category is also merged into
+`categorification-and-geometric-representation-theory`, preserving every page
+byte, item/page identity, publication status, and historical workflow path.
+The additional moves and revised dependency ordering are in
+[the quantum-group merge record](research/quantum-groups-categorification-category-reorganization.json).
+
 Set Theory uses the internal category identifier `set-theory` and directory
 `library/set-theory/` (renamed from `foundations` on 2026-10-12). Page and item
 identities are unchanged; historical run receipts retain their recorded paths.
