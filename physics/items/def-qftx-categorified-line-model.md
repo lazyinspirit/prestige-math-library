@@ -72,15 +72,15 @@ The diagram shows the positive Artin generator on adjacent strands, with time in
 
 ```tikz
 \begin{tikzpicture}[baseline=(current bounding box.center),>=stealth,thick]
-  \draw (0,0) .. controls (0,1.1) and (1.4,1.9) .. (1.4,3);
-  \draw[white,line width=5pt] (1.4,0) .. controls (1.4,1.1) and (0,1.9) .. (0,3);
+  \draw (0,0) .. controls (0,0.484) and (0.271,0.910) .. (0.575,1.329);
+  \draw (0.825,1.671) .. controls (1.129,2.090) and (1.4,2.516) .. (1.4,3);
   \draw (1.4,0) .. controls (1.4,1.1) and (0,1.9) .. (0,3);
   \node at (0,-0.35) {$i$};
   \node at (1.4,-0.35) {$i+1$};
   \node at (0,3.3) {$i+1$};
   \node at (1.4,3.3) {$i$};
-  \node at (0.7,1.5) {$\sigma_i$};
-  \draw[->] (2.1,0.2) -- (2.1,2.8) node[midway,right] {$\text{time}$};
+  \node at (-0.55,1.5) {$\sigma_i$};
+  \draw[->] (2.1,0.2) -- (2.1,2.8) node[midway,right] {time};
 \end{tikzpicture}
 ```
 
