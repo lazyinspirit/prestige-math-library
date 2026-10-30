@@ -5,8 +5,13 @@ title: "A metabolic Seifert matrix has Fox–Milnor factorization"
 status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-dependency_level: 0
-deps: []
+dependency_level: 1
+deps:
+  - lem-finitely-generated-torsion-free-abelian-freeness-without-choice
+  - def-determinant-of-a-square-matrix
+  - thm-determinant-multiplicative
+  - thm-determinant-of-transpose
+  - thm-determinant-under-elementary-row-operations
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -14,16 +19,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: "pass"
-    date: "2026-10-22"
-    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
-    delegated_by: "owner"
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-22
+  precheck: pass
+  repair: research/metabolic-fox-milnor-dependencies-2026-10-30/repair.json
 sources:
   references:
     - title: "Charles Livingston, A Survey of Classical Knot Concordance"
@@ -48,12 +45,20 @@ In the Laurent polynomial ring, define $p\doteq q$ to mean $p=\pm t^kq$ for some
 
 [A1] The stated hypotheses are the entire input: $L\cong\mathbb Z^{2g}$, $\det(V-V^T)=\pm1$, $M$ is a direct summand of rank $g$, and $V|_{M\times M}=0$.
 
+[F1] [[lem-finitely-generated-torsion-free-abelian-freeness-without-choice]]: every subgroup of a finite-rank integer lattice has a finite integral basis, without any choice axiom.
+
+[F2] [[def-determinant-of-a-square-matrix]]: over a commutative ring the determinant is the signed Leibniz sum. For a block-triangular matrix, its nonzero terms preserve the diagonal blocks, so the sum factors into their determinants.
+
+[F3] [[thm-determinant-multiplicative]] and [[thm-determinant-of-transpose]]: determinants multiply and are unchanged by transposition over any commutative ring.
+
+[F4] [[thm-determinant-under-elementary-row-operations]]: a row swap negates the determinant, and scaling a row scales the determinant by the same scalar.
+
 ## Proof
 
-1.1 If $g=0$, then $L=M=0$, so the empty determinant and $f=1$ give the formula. Suppose $g>0$. Write $L=M\oplus N$ and choose integral bases of the two rank-$g$ summands. In the combined basis, $V=\begin{pmatrix}0&B\\C&D\end{pmatrix}$ with $B,C,D\in M_g(\mathbb Z)$, because $V$ vanishes on $M\times M$. [A1, given, choose, construct]
+1.1 If $g=0$, then $L=M=0$, so the empty determinant and $f=1$ give the formula. Suppose $g>0$. Write $L=M\oplus N$. Both summands have finite integral bases by [F1]; their combined basis has $2g$ elements, so $N$ has rank $g$. Choose these finite bases. In the combined basis, $V=\begin{pmatrix}0&B\\C&D\end{pmatrix}$ with $B,C,D\in M_g(\mathbb Z)$, because $V$ vanishes on $M\times M$. [A1, F1, given, choose, construct]
 
-2.1 A basis change $P\in\operatorname{GL}_{2g}(\mathbb Z)$ replaces $V-tV^T$ by $P^T(V-tV^T)P$ and leaves its determinant unchanged, since $(\det P)^2=1$. Hence it suffices to calculate in the basis of step 1.1. [A1, step 1.1, algebra]
+2.1 A basis change $P\in\operatorname{GL}_{2g}(\mathbb Z)$ replaces $V-tV^T$ by $P^T(V-tV^T)P$ and leaves its determinant unchanged by [F3]: since $P$ has an integral inverse, multiplicativity gives $\det P=\pm1$, hence $(\det P)^2=1$. Hence it suffices to calculate in the basis of step 1.1. [A1, F3, step 1.1, algebra]
 
-3.1 Put $f(t)=\det(B-tC^T)$. In $V-tV^T$ the upper-left $g\times g$ block is zero, the upper-right block is $B-tC^T$, and the lower-left block is $C-tB^T$. Swapping its two row blocks contributes $(-1)^{g^2}=(-1)^g$ and produces a block-triangular matrix, so $d_V(t)=(-1)^g\det(B-tC^T)\det(C-tB^T)$. Also $t^g f(t^{-1})=\det(tB-C^T)=(-1)^g\det(C-tB^T)$, by factoring $-1$ from each row and transposing. Therefore $d_V(t)=t^g f(t)f(t^{-1})$. The assumption on $V-V^T$ gives $d_V(1)=\pm1$, so the displayed determinant is nonzero. [A1, step 2.1, algebra]
+3.1 Put $f(t)=\det(B-tC^T)$. In $V-tV^T$ the upper-left $g\times g$ block is zero, the upper-right block is $B-tC^T$, and the lower-left block is $C-tB^T$. By [F4], swapping its two row blocks contributes $(-1)^{g^2}=(-1)^g$ and produces a block-triangular matrix, so [F2] gives $d_V(t)=(-1)^g\det(B-tC^T)\det(C-tB^T)$. Also $t^g f(t^{-1})=\det(tB-C^T)=(-1)^g\det(C-tB^T)$, by scaling rows using [F4] and transposing using [F3]. Therefore $d_V(t)=t^g f(t)f(t^{-1})$. The assumption on $V-V^T$ gives $d_V(1)=\pm1$, so the displayed determinant is nonzero. [A1, F2, F3, F4, step 2.1, algebra]
 
 4.1 Since $t^g$ is a unit in $\mathbb Z[t^{\pm1}]$, the exact identity in step 3.1 implies $d_V(t)\doteq f(t)f(t^{-1})$. This proves the factorization, including the rank-zero case of step 1.1. [step 1.1, step 3.1, algebra] ∎

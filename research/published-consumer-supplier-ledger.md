@@ -69653,3 +69653,7 @@ This is a meaning-preserving rendering correction independently adjudicated by /
 <!-- local-published-repair:figure-links:lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers:begin -->
 - lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers: linked existing figure references to verified source PDF pages; mathematical text unchanged. Current content SHA256: fa6432768e87dc4a988a8b8ca32386027cd7a7a5afe8eecd2fbcd016cf2e1122.
 <!-- local-published-repair:figure-links:lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers:end -->
+
+<!-- local-published-repair:metabolic-fox-milnor-dependencies-2026-10-30:begin -->
+- lem-metabolic-seifert-form-implies-fox-milnor-factorization: fe35e62cfd71ac1bc21347d17430041fff9483421133a429f8b7977aac7abec5. Record finite integral bases and determinant prerequisites and cite their exact proof uses. The Statement is unchanged; no consumer interface changes. This local repair supplies no fresh whole-item audit.
+<!-- local-published-repair:metabolic-fox-milnor-dependencies-2026-10-30:end -->
