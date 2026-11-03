@@ -18,6 +18,8 @@ let direction = 'dependencies', hovered = -1, closure = new Set();
 let lastTime = 0, frameId = 0, dirty = true, loaded = false, projectionDirty = true;
 let gesture = null, moved = false, pinned = false, visibleFraction = 1;
 
+const itemUrl = node => `https://alphabetamath.cc${node.href ?? `/item/${encodeURIComponent(node.id)}`}`;
+
 function invalidate() { dirty = true; projectionDirty = true; schedule(); }
 function resize() {
   width = innerWidth; height = innerHeight;
@@ -83,7 +85,7 @@ function updateTooltip() {
   const visibleCount = [...closure].filter(i => visible[i]).length;
   $('#tip-detail').hidden = !highlighting;
   $('#tip-detail').textContent = `${closure.size.toLocaleString()} ${direction === 'dependencies' ? 'prerequisites' : 'downstream consumers'} · ${visibleCount.toLocaleString()} visible`;
-  tip.href = `https://alphabetamath.cc/item/${encodeURIComponent(node.id)}`;
+  tip.href = itemUrl(node);
   tip.hidden = false;
   const [x, y] = project(node, camera, rotation, width, height);
   tip.style.left = `${clamp(x + 18, 12, width - tip.offsetWidth - 12)}px`;
@@ -119,7 +121,7 @@ function updateSearch() {
   const matches = nodes.filter((n, i) => visible[i] && (n.title.toLowerCase().includes(query) || n.id.includes(query))).slice(0, 30);
   for (const node of matches) {
     const a = document.createElement('a'); renderTitle(a, node.title);
-    a.href = `https://alphabetamath.cc/item/${encodeURIComponent(node.id)}`; a.target = '_blank'; a.rel = 'noopener';
+    a.href = itemUrl(node); a.target = '_blank'; a.rel = 'noopener';
     results.append(a);
   }
   if (!matches.length) { const p = document.createElement('p'); p.textContent = 'No matching stars in the selected categories.'; results.append(p); }
@@ -219,7 +221,7 @@ function bindControls() {
     if (!moved && !pointers.size && event.button === 0) {
       const index = hitTest(event.clientX, event.clientY);
       if (index >= 0 && event.pointerType === 'mouse') {
-        window.open(`https://alphabetamath.cc/item/${encodeURIComponent(nodes[index].id)}`, '_blank', 'noopener');
+        window.open(itemUrl(nodes[index]), '_blank', 'noopener');
       } else { inspect(index); pinned = index >= 0; }
     }
     if (pointers.size === 1) { beginGesture(event); moved = true; }

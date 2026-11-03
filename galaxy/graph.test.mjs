@@ -153,3 +153,47 @@ test('algorithm composition belongs in the mathematical universe with definition
   assert.deepEqual(mathematicalItems(items).map(item=>item.id),['alg-small','alg-composite','lem-property']);
   assert.equal(colorIndex('algorithm'),colorIndex('definition'));
 });
+
+test('pure mathematics from the physics checkout joins one graph with canonical links and cross-library exclusions', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'galaxy-physics-math-'));
+  try {
+    for (const dir of ['items', 'library/algebra', 'physics/items', 'physics/library/qm-mathematics']) await mkdir(join(root, dir), { recursive: true });
+    const put = (path, fm) => writeFile(join(root, path), `---\n${JSON.stringify(fm)}\n---\n`);
+    await put('items/def-shared.md', { id: 'def-shared', status: 'published', kind: 'definition', title: 'Canonical math', aliases: ['math-alias'] });
+    await put('items/lem-owner-impure.md', { id: 'lem-owner-impure', status: 'published', kind: 'lemma', deps: [] });
+    await put('items/thm-cross-bad.md', { id: 'thm-cross-bad', status: 'published', kind: 'theorem', deps: ['physics-premise'] });
+    const physics = [
+      { id: 'def-shared', kind: 'definition', title: 'Imported copy', aliases: ['physics-math-alias'] },
+      { id: 'lem-physics-math', kind: 'lemma', domain: 'mathematics', deps: ['physics-math-alias'] },
+      { id: 'ex-physics-math', kind: 'example', deps: ['lem-physics-math'] },
+      { id: 'lem-orphan-physics-math', kind: 'lemma', deps: ['def-shared'] },
+      { id: 'post-model', kind: 'postulate', aliases: ['physics-premise'] },
+      { id: 'exp-observation', kind: 'experiment' },
+      { id: 'pthm-claim', kind: 'physics-theorem' },
+      { id: 'def-physical', kind: 'definition', domain: 'physics' },
+      { id: 'lem-owner-impure', kind: 'lemma', deps: ['post-model'] },
+      { id: 'lem-direct', kind: 'lemma', deps: ['physics-premise'], aliases: ['impure-alias'] },
+      { id: 'lem-indirect', kind: 'lemma', deps: ['impure-alias'] },
+      { id: 'lem-forward', kind: 'lemma', forward_refs: ['exp-observation'] },
+      { id: 'def-justified', kind: 'definition', justified_by: ['pthm-claim'] },
+      { id: 'lem-missing-physics', kind: 'lemma', deps: ['post-not-authored'] },
+      { id: 'lem-draft', kind: 'lemma', status: 'draft' },
+    ];
+    for (const item of physics) await put(`physics/items/${item.id}.md`, { status: 'published', ...item });
+    await put('library/algebra/_category.md', { title: 'Algebra', library: 'mathematics' });
+    await put('library/algebra/main.md', { status: 'published', items: ['def-shared', 'thm-cross-bad'] });
+    await put('physics/library/qm-mathematics/_category.md', { title: 'Quantum Mathematics', library: 'mathematics' });
+    await put('physics/library/qm-mathematics/tensor.md', { status: 'published', items: ['def-shared', 'lem-physics-math', 'lem-owner-impure'], examples: ['ex-physics-math'] });
+    const graph = await loadGraph(root);
+    assert.deepEqual(graph.nodes.map(node => node.id).sort(), ['def-shared', 'ex-physics-math', 'lem-orphan-physics-math', 'lem-physics-math']);
+    const shared = graph.nodes.find(node => node.id === 'def-shared');
+    assert.equal(shared.title, 'Canonical math');
+    assert.equal(shared.href, '/item/def-shared');
+    assert.deepEqual(shared.categories, ['algebra', 'physics/qm-mathematics']);
+    assert.equal(graph.nodes.find(node => node.id === 'lem-physics-math').href, '/physics/item/lem-physics-math');
+    assert.equal(graph.nodes.find(node => node.id === 'lem-orphan-physics-math').href, '/physics/item/lem-orphan-physics-math');
+    assert.ok(graph.categories.some(category => category.id === 'physics/qm-mathematics'));
+    assert.equal(graph.edges.length, 3);
+    assert.deepEqual(graph.unresolved, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

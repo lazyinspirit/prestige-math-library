@@ -2,7 +2,7 @@ import { watch } from 'node:fs';
 import { readdir, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { loadGraph } from './data.mjs';
+import { loadGraph, graphCollections } from './data.mjs';
 
 /** A cheap polling fallback for dropped watch events, including added/deleted directories. */
 async function fingerprint(root) {
@@ -19,7 +19,9 @@ async function fingerprint(root) {
       }));
     }
   }
-  await Promise.all(['items', 'library'].map(name => walk(join(root, name))));
+  for (const collection of await graphCollections(root)) {
+    await Promise.all(['items', 'library'].map(name => walk(join(collection.root, name))));
+  }
   return createHash('sha256').update(entries.sort().join('\n')).digest('hex');
 }
 
@@ -33,9 +35,9 @@ export class GraphStore {
     this.running = false; this.pending = false; this.closed = false;
   }
   async start() {
-    for (const name of ['items', 'library']) {
+    for (const collection of await graphCollections(this.root)) for (const name of ['items', 'library']) {
       try {
-        const watcher = watch(join(this.root, name), { recursive: true }, (_event, file) => {
+        const watcher = watch(join(collection.root, name), { recursive: true }, (_event, file) => {
           if (!file || String(file).endsWith('.md')) this.schedule();
         });
         watcher.on('error', error => this.onError(`Galaxy watcher: ${error.message}; polling remains active.`));

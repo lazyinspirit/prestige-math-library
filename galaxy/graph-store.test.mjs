@@ -54,3 +54,26 @@ test('watch additions, alterations, body edits, unpublication, deletion and reco
     await until(() => store.snapshot.nodes.length === 0, 'polling must catch deletion when watch events are lost');
   } finally { store?.close(); await rm(root, { recursive: true, force: true }); }
 });
+
+test('polling discovers an optional physics checkout and follows its mathematical publication changes', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'galaxy-physics-live-'));
+  let store;
+  try {
+    for (const dir of ['items', 'library']) await mkdir(join(root, dir));
+    const put = (path, fm) => writeFile(join(root, path), `---\n${JSON.stringify(fm)}\n---\n`);
+    const errors = [];
+    store = await new GraphStore(root, { debounceMs: 20, pollMs: 80, onError: message => errors.push(message) }).start();
+    for (const dir of ['physics/items', 'physics/library']) await mkdir(join(root, dir), { recursive: true });
+    const item = { id: 'lem-physics-math', kind: 'lemma', status: 'published', deps: [] };
+    await put('physics/items/lem-physics-math.md', item);
+    await until(() => store.snapshot.nodes.length === 1, 'a physics-only mathematical publication joins the graph');
+    assert.equal(store.snapshot.nodes[0].href, '/physics/item/lem-physics-math');
+    await put('physics/items/post-model.md', { id: 'post-model', kind: 'postulate', status: 'draft' });
+    await put('physics/items/lem-physics-math.md', { ...item, deps: ['post-model'] });
+    await until(() => store.snapshot.nodes.length === 0, 'physics-dependent mathematics is removed even when its postulate is draft');
+    await put('physics/items/lem-physics-math.md', item);
+    await until(() => store.snapshot.nodes.length === 1, 'pure mathematics reappears after its metadata changes');
+    await put('physics/items/lem-physics-math.md', { ...item, status: 'draft' });
+    await until(() => store.snapshot.nodes.length === 0, 'unpublished physics mathematics disappears');
+  } finally { store?.close(); await rm(root, { recursive: true, force: true }); }
+});

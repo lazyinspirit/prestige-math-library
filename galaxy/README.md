@@ -30,14 +30,21 @@ are required.
 ## Automatic content updates
 
 The repository's `status: published` flags are authoritative. Both startup and
-refreshes include published mathematical items; drafts and physics are excluded. A stale
+refreshes include published mathematical items from both `items/` and
+`physics/items/`. Drafts, postulates, experiments, physics theorems and every
+item with a known physics prerequisite/justification/forward-reference chain
+are excluded, including aliased chains across the two collections. Shared IDs
+produce one star. Authored page homes choose canonical metadata and links: Math
+homes take priority; mathematics authored only in Physics links to its Physics
+reader. Physics mathematical categories appear in the filters. A stale
 live-site sitemap cannot delay an addition or prevent a deletion/unpublication.
 This view follows this checkout, which may be ahead of the deployed website.
 The server must be running and reading the checkout receiving publication edits.
 `GALAXY_CONTENT_DIR` can point it at another content root; by default it uses this
 repository. No content files are modified by the preview.
 
-`graph-store.mjs` watches `items/` and `library/` recursively, batches changes for
+`graph-store.mjs` watches `items/`, `library/` and their optional `physics/`
+counterparts recursively, batches changes for
 one second, and checks file metadata every 30 seconds as a fallback for missed
 watch events. Added/deleted files and directories, status changes, item titles,
 kinds, dependency lists, category membership and category names are rebuilt.
@@ -200,7 +207,8 @@ no KaTeX errors, working search and tooltip formulas, and loaded local fonts.
 
 Automatic-update tests use temporary content trees and cover publication additions,
 title and body alterations, unpublication, deletion, malformed-write recovery,
-draft-only no-ops and missed-event polling. Browser integration verifies pushed
+draft-only no-ops, cross-library alias/dependency exclusions, canonical item
+links and missed-event polling, including a physics checkout added after startup. Browser integration verifies pushed
 add/edit/delete updates, retained camera and category filters, and reused GPU layers.
 
 Star tests cover exact transitive counts through diamonds and cycles, comparison

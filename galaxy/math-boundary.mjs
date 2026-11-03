@@ -14,7 +14,10 @@ export function mathematicalItems(rows) {
     if (!isMathematicalItem(item)) excluded.add(item.id);
     for (const dependency of [...(item.deps ?? []), ...(item.justifiedBy ?? item.justified_by ?? []), ...(item.forwardRefs ?? item.forward_refs ?? [])]) {
       const id = canonical.has(dependency) ? dependency : aliases.get(dependency);
-      if (!id) continue; // Unauthored mathematics retains its existing handling.
+      if (!id) {
+        if (/^(post|exp|pthm|texp)-/.test(dependency)) excluded.add(item.id);
+        continue; // Unauthored mathematics retains its existing handling.
+      }
       const supplier = canonical.get(id);
       if (supplier?.kind === 'open-problem'
         && [...(item.deps ?? []), ...(item.justifiedBy ?? item.justified_by ?? [])].includes(dependency)) excluded.add(item.id);

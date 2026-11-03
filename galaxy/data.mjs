@@ -14,9 +14,20 @@ for (const candidate of yamlCandidates()) {
 if (!parse) throw new Error('Install yaml or set PRESTIGE_APP_DIR to the app checkout.');
 const list = value => Array.isArray(value) ? value.filter(x => typeof x === 'string') : [];
 
+/** The physics checkout is optional, but a present checkout must be complete. */
+export async function graphCollections(root) {
+  const collections = [{ root, physics: false }];
+  try {
+    if ((await stat(join(root, 'physics'))).isDirectory()) collections.push({ root: join(root, 'physics'), physics: true });
+  } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  return collections;
+}
+
 /** Snapshot exactly the published item census; never alter content or infer proof edges. */
 export async function loadGraph(root = REPO, publishedIds = null, cache = null) {
   let items = [];
+  const collections = await graphCollections(root);
+  const rootPublished = new Set();
   const hashes = [], seen = new Set();
   const read = async path => {
     seen.add(path);
@@ -38,49 +49,76 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
     }
     return record.fm;
   };
-  const files = (await readdir(join(root, 'items'))).filter(f => f.endsWith('.md')).sort();
-  // Bound filesystem concurrency while loading a large content tree.
-  for (let start = 0; start < files.length; start += 128) {
-    const batch = await Promise.all(files.slice(start, start + 128).map(async file => {
-      const fm = await read(join(root, 'items', file));
-      return { ...fm, id: fm.id ?? file.slice(0, -3) };
-    }));
-    items.push(...batch);
+  const canonical = new Map(), rootRecords = new Map(), physicsRecords = new Map();
+  for (const collection of collections) {
+    const files = (await readdir(join(collection.root, 'items'))).filter(f => f.endsWith('.md')).sort();
+    // Bound filesystem concurrency while loading both content trees.
+    for (let start = 0; start < files.length; start += 128) {
+      const batch = await Promise.all(files.slice(start, start + 128).map(async file => {
+        const fm = await read(join(collection.root, 'items', file));
+        return { ...fm, id: fm.id ?? file.slice(0, -3) };
+      }));
+      for (const item of batch) {
+        (collection.physics ? physicsRecords : rootRecords).set(item.id, item);
+        if (!collection.physics && item.status === 'published') rootPublished.add(item.id);
+        const prior = canonical.get(item.id);
+        const preferred = !prior || (prior.status !== 'published' && item.status === 'published') ? item : prior;
+        // Shared items are one star; preserve aliases used by either library.
+        canonical.set(item.id, { ...preferred, aliases: [...new Set([...list(prior?.aliases), ...list(item.aliases)])] });
+      }
+    }
   }
+  items = [...canonical.values()];
+  let byId = new Map(items.map((item, i) => [item.id, i]));
+  let aliases = new Map(items.flatMap((item, i) => list(item.aliases).map(alias => [alias, i])));
+  const resolve = id => byId.get(id) ?? aliases.get(id);
+  let memberships = items.map(() => new Set());
+  const categories = [];
+  const rootHomes = new Set(), physicsHomes = new Set();
+  async function walk(collection, directory, parts = []) {
+    const entries = await readdir(directory, { withFileTypes: true });
+    for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
+      const path = join(directory, entry.name);
+      if (entry.isDirectory()) { await walk(collection, path, [...parts, entry.name]); continue; }
+      if (!entry.name.endsWith('.md')) continue;
+      if (entry.name === '_category.md' && parts.length === 1) {
+        const fm = await read(path);
+        if (collection.physics || fm.library !== 'physics') categories.push({ id: `${collection.physics ? 'physics/' : ''}${parts[0]}`, title: `${fm.title ?? parts[0]}${collection.physics ? ' (Physics Library)' : ''}` });
+      }
+      if (entry.name.startsWith('_')) continue;
+      const page = await read(path);
+      const category = parts.length ? await read(join(collection.root, 'library', parts[0], '_category.md')).catch(() => ({})) : {};
+      if (page.status !== 'published' || (!collection.physics && (page.library === 'physics' || category.library === 'physics'))) continue;
+      for (const id of [...list(page.items), ...list(page.examples)]) {
+        const i = resolve(id);
+        if (i !== undefined) {
+          memberships[i].add(`${collection.physics ? 'physics/' : ''}${parts[0] ?? 'unassigned'}`);
+          (collection.physics ? physicsHomes : rootHomes).add(items[i].id);
+        }
+      }
+    }
+  }
+  for (const collection of collections) await walk(collection, join(collection.root, 'library'));
+  const membershipsById = new Map(items.map((item, index) => [item.id, memberships[index]]));
+  // Prefer the authored owner's metadata over an imported reference copy.
+  items = items.map(item => {
+    const math = rootRecords.get(item.id), physics = physicsRecords.get(item.id);
+    const mathOwns = math?.status === 'published' && (rootHomes.has(item.id) || !physicsHomes.has(item.id));
+    const preferred = mathOwns ? math : physics?.status === 'published' ? physics : math ?? physics;
+    return { ...preferred, aliases: item.aliases };
+  });
   items = mathematicalItems(items).filter(item => item.status === 'published' && (!publishedIds || publishedIds.has(item.id)));
   if (publishedIds) {
     const loaded = new Set(items.map(item => item.id));
     const missing = [...publishedIds].filter(id => !loaded.has(id));
     if (missing.length) throw new Error(`Live items missing from published local content: ${missing.join(', ')}`);
   }
-  const byId = new Map(items.map((item, i) => [item.id, i]));
-  const aliases = new Map(items.flatMap((item, i) => list(item.aliases).map(alias => [alias, i])));
-  const resolve = id => byId.get(id) ?? aliases.get(id);
-  const memberships = items.map(() => new Set());
-  const categories = [];
-  async function walk(directory, parts = []) {
-    const entries = await readdir(directory, { withFileTypes: true });
-    for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
-      const path = join(directory, entry.name);
-      if (entry.isDirectory()) { await walk(path, [...parts, entry.name]); continue; }
-      if (!entry.name.endsWith('.md')) continue;
-      if (entry.name === '_category.md' && parts.length === 1) {
-        const fm = await read(path);
-        if (fm.library !== 'physics') categories.push({ id: parts[0], title: fm.title ?? parts[0] });
-      }
-      if (entry.name.startsWith('_')) continue;
-      const page = await read(path);
-      const category = parts.length ? await read(join(root, 'library', parts[0], '_category.md')).catch(() => ({})) : {};
-      if (page.status !== 'published' || page.library === 'physics' || category.library === 'physics') continue;
-      for (const id of [...list(page.items), ...list(page.examples)]) {
-        const i = resolve(id);
-        if (i !== undefined) memberships[i].add(parts[0] ?? 'unassigned');
-      }
-    }
-  }
-  await walk(join(root, 'library'));
+  memberships = items.map(item => membershipsById.get(item.id));
+  byId = new Map(items.map((item, index) => [item.id, index]));
+  aliases = new Map(items.flatMap((item, index) => list(item.aliases).map(alias => [alias, index])));
   if (memberships.some(set => !set.size)) categories.push({ id: 'unassigned', title: 'Other published items' });
   const nodes = items.map((item, i) => ({
+    href: `${rootHomes.has(item.id) || (!physicsHomes.has(item.id) && rootPublished.has(item.id)) ? '' : '/physics'}/item/${encodeURIComponent(item.id)}`,
     id: item.id, title: item.title ?? item.id, kind: item.kind ?? 'remark', landmark: item.landmark === true,
     categories: memberships[i].size ? [...memberships[i]] : ['unassigned'],
   }));
