@@ -89,6 +89,13 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
       const page = await read(path);
       const category = parts.length ? await read(join(collection.root, 'library', parts[0], '_category.md')).catch(() => ({})) : {};
       if (page.status !== 'published' || (!collection.physics && (page.library === 'physics' || category.library === 'physics'))) continue;
+      if (collection.physics && page.library !== 'physics' && category.library !== 'physics') {
+        // Imported math categories are prerequisite context, not Physics homes.
+        const slug = parts[0] ?? '';
+        if ((page.library ?? category.library) !== 'mathematics' || !slug.endsWith('-mathematics')) continue;
+        const base = await read(join(collection.root, 'library', slug.slice(0, -'-mathematics'.length), '_category.md')).catch(() => ({}));
+        if (base.library !== 'physics') continue;
+      }
       for (const id of [...list(page.items), ...list(page.examples)]) {
         const i = resolve(id);
         if (i !== undefined) {
