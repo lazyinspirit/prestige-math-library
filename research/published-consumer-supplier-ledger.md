@@ -69657,3 +69657,7 @@ This is a meaning-preserving rendering correction independently adjudicated by /
 <!-- local-published-repair:metabolic-fox-milnor-dependencies-2026-10-30:begin -->
 - lem-metabolic-seifert-form-implies-fox-milnor-factorization: fe35e62cfd71ac1bc21347d17430041fff9483421133a429f8b7977aac7abec5. Record finite integral bases and determinant prerequisites and cite their exact proof uses. The Statement is unchanged; no consumer interface changes. This local repair supplies no fresh whole-item audit.
 <!-- local-published-repair:metabolic-fox-milnor-dependencies-2026-10-30:end -->
+
+<!-- local-published-repair:gram-map-links-2026-11-05:begin -->
+- lem-gram-map-fibers-and-rank-strata: d1f656e42cb6c6ab926b4a1c6c66c99f1eacb735b81d21400ee63ca2fc52b42d. Restore eleven actual prerequisite dependencies and twelve internal hyperlinks. Make the maximal-rank spanning argument and the algebraic rank-stratum chart, inverse, dimension bounds and boundary cases explicit. The Statement is byte-identical; no consumer interface changes. This is a focused root proof/prerequisite repair, with no fresh independent whole-item audit.
+<!-- local-published-repair:gram-map-links-2026-11-05:end -->
