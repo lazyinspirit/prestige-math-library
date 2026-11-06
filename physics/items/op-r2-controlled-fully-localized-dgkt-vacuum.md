@@ -42,6 +42,7 @@ sources:
       url: https://arxiv.org/pdf/2609.17342v1
       locator: "v1 §1, §4.1 Eqs.(4.5)–(4.11), and §5: one-modulus scalar-wave calculation, DGKT absorption exponent and limitations."
 verification:
+  precheck: n/a
   sources_checked:
     date: 2026-11-04
     scope: Recorded source, statement and proof-status review for this open-problem in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

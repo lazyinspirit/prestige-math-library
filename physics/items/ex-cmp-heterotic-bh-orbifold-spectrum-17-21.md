@@ -25,7 +25,7 @@ sources:
       url: "https://arxiv.org/pdf/2607.19289v2"
       locator: "§§3–5, PDF pp. 4–7: Shapovalov-rank multiplicities, twist/field-identification and mutual-locality rules, and the (17,21) orbifold spectrum."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

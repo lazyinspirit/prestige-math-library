@@ -27,6 +27,7 @@ sources:
     locator: §§2–5; flux conventions and tadpole in §§3.1–3.14; N=1 system in §§4.18–4.36; explicit bulk and blow-up extrema
       in §5.1; hierarchy and control discussion in §5.2.
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

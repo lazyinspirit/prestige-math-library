@@ -45,7 +45,7 @@ sources:
       url: https://math.berkeley.edu/~robin/math274root.pdf
       locator: Chapter 1, §§1–2, printed pp. 1–10; Chapter 2, §10, Theorem 10.1, printed pp. 58–60.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

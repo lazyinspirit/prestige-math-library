@@ -45,6 +45,7 @@ page: gts-bridgeland-stability-dt-frontiers
 reference: items/lem-gts-small-slope-counterexample-and-integral-restriction-hn-certificate.md
 dependency_level: 5
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

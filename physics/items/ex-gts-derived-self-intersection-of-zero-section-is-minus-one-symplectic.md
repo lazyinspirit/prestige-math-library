@@ -36,6 +36,7 @@ sources:
     url: https://arxiv.org/pdf/2510.04625
     locator: Example 3.12 (PDF pp. 25–26), Example 3.20 (p. 29); §4.3, Definition 4.8 and derived Lagrangian-intersection examples (pp. 35–38).
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

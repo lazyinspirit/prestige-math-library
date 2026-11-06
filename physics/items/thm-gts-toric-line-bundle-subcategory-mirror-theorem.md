@@ -61,7 +61,7 @@ sources:
     url: https://www.numdam.org/item/10.24033/bsmf.2365.pdf
     locator: "Section 2b, printed pp. 109–112, grading lifts and the negative deck-translation shift; Section 2d, printed pp. 115–116, absolute index and its deck-shift law. These convention passages were consulted for the sign correction; no reading of the whole article or external HMS proof is claimed."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

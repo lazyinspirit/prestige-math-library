@@ -46,6 +46,7 @@ sources:
       url: https://arxiv.org/pdf/2411.07707v4
       locator: "Theorem 4.13 and its setup/proof, §§4.4.1–4.4.3, PDF pp. 61–64."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

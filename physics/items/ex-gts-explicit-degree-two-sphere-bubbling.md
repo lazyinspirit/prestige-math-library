@@ -30,7 +30,7 @@ sources:
       url: https://arxiv.org/pdf/1403.6139v2
       locator: §§1.3–1.5, printed pp. 3–4, stable component-tree and node conventions
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

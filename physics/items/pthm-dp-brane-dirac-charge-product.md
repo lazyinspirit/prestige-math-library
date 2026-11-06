@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9510017v3"
       locator: "§2, PDF pp. 2–4; RR charge normalization and Dirac quantization."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

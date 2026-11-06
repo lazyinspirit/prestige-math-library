@@ -33,7 +33,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture III §3.2, PDF pp. 22–25, for the source-charge and tadpole consistency interpretation."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

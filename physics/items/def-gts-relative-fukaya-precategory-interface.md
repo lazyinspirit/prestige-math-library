@@ -27,7 +27,7 @@ sources:
       url: https://arxiv.org/pdf/math/0610004v4
       locator: §§1 and 3.1, printed pp. 4–5 and 12–13, relative Fukaya pre-category and admissible branes
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -68,6 +68,7 @@ sources:
       only; this is not a proof of the analytic convergence theorem.
 proof_strategy: direct
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

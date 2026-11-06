@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0607105v3"
       locator: "pp. 2–5; relative BRST/no-ghost discussion, but not the claimed old-covariant quotient isomorphism. The Kato–Ogawa full article was not retrieved in the inherited source history."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

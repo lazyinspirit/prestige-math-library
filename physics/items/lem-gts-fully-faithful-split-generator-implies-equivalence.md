@@ -26,7 +26,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0310414v4"
       locator: "§2b, printed pp. 8–9 (PDF 12–13), Lemmas 2.4–2.6 and proofs, especially Lemma 2.5. This is the split-closed derived A-infinity-category instance of the thick essential-image argument. The ambient-choice and abstract triangulated-category formulation is proved locally."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

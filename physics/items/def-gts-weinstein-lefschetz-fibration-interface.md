@@ -24,7 +24,7 @@ sources:
       url: https://arxiv.org/pdf/1411.6176v3
       locator: Definitions 1.4, 1.8, 1.9 and Remark 1.11; abstract and geometric conventions
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -41,6 +41,7 @@ sources:
       url: https://arxiv.org/pdf/hep-th/9108028
       locator: "§2.2, printed pp. 15–20: radial coordinate and order; §2.3, printed pp. 21–24: free-field OPE normalization. The source does not prove the general convergence theorem."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -63,7 +63,7 @@ sources:
       url: https://aif.centre-mersenne.org/item/AIF_1999__49_1_287_0/
       locator: "Full article read. Lemma 7, Theorem 12 and Theorem 14/Corollary 15 guide the locally reconstructed irrational real-class Kähler-cone argument."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -36,7 +36,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0607105v3"
       locator: "pp. 2–5; open bosonic BRST nilpotence at D=26 and intercept one."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

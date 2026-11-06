@@ -47,7 +47,7 @@ sources:
       url: https://arxiv.org/pdf/1103.4956v2
       locator: "§2, printed3–6, shifted Euler collection, quotient-stack generator and deformation algebra; Lemmas2.1–2.2 and Proposition2.4. The ambient Koszul–Čech contraction, actual finite-free minimality and scalar-extension comparisons are locally reconstructed. Complete paper1–29 read; source external Beilinson/Seidel proofs are not imported as local proofs."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

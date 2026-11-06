@@ -56,7 +56,7 @@ sources:
       url: https://arxiv.org/pdf/1211.7124v3
       locator: Section10.5–10.10, regular central-character deformations; the annihilator, affine induction and splitting are reconstructed here.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

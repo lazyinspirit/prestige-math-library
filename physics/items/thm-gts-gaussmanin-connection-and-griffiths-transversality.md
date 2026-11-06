@@ -54,7 +54,7 @@ sources:
       url: "https://www.numdam.org/item/PMIHES_1971__40__5_0.pdf"
       locator: "§4.2.1–§4.2.5, printed pp. 43–45, especially the added-in-proof footnote on p. 45: geometric variations, holomorphic Hodge filtration and Griffiths transversality; the filtration itself is not generally flat."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -37,6 +37,7 @@ sources:
       url: https://www.mathematik.uni-muenchen.de/~schotten/Texte/978-3-540-74955-4_Book_LNP726corr1.pdf
       locator: "Chapter 4, Role of the Freed–Witten Anomaly and the Twisted K-Theory, PDF pp. 17–20."
 verification:
+  precheck: pass
   sources_checked:
     date: 2026-10-26
     scope: Read the full Freed–Witten paper and the complete relevant Husemoller chapter passage; checked the stated worldsheet, target, normal-bundle, and exclusion hypotheses.

@@ -24,7 +24,7 @@ sources:
       url: https://arxiv.org/pdf/alg-geom/9608004v3
       locator: §1 Proposition 1.3 and its proof; §2 K3 involution; §3 Borcea–Voisin construction and Proposition 3.1
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

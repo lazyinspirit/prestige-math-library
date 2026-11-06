@@ -28,6 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9510017v3"
       locator: "§2, PDF pp. 2–4, equation (4): mixed Neumann/Dirichlet data, Type IIA/IIB parity, and the flat Dp hyperplane."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

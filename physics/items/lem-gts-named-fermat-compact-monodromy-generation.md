@@ -40,7 +40,7 @@ sources:
       url: https://arxiv.org/pdf/math/0411264v1
       locator: "Section 6.3, Definition 6.2, Lemma 6.4 and Theorem 6.5, printed pp.51-52: orthogonal-crossing condition and smooth relative Moser mechanism. Step 11.2 supplies a separate explicit first-jet extension for the actual finite-point/curve-axis exceptional arrangement; no general isotopy theorem is imported as a proof premise."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

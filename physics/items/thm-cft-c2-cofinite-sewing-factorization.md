@@ -58,6 +58,7 @@ sources:
       maps are reconstructed below. Definition 3.11 gives the assumed family-product
       convention.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

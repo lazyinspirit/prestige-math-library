@@ -33,7 +33,7 @@ sources:
       url: "https://edoc.ub.uni-muenchen.de/13381/1/Schlotterer_Oliver.pdf"
       locator: "§§2.3.5–2.3.6, printed pp. 46–48 (PDF pp. 67–69), NS/R vacuum conventions; §3.1.4, printed pp. 60–61 (PDF pp. 81–82), open mass shell. The closed factor of four is sourced to Weigand (6.115)."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

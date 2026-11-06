@@ -49,6 +49,7 @@ sources:
     locator: Lecture III, §3.3, equation (3.25), O-minus charge ratio and fixed-plane
       count.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

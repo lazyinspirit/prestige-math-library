@@ -28,6 +28,7 @@ sources:
       locator: "Finite twisting and comparison setting; the finite-polarization determinant is proved locally rather than assumed."
 dependency_level: 2
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

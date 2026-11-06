@@ -32,6 +32,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

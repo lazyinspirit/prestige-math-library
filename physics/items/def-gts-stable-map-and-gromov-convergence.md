@@ -23,7 +23,7 @@ sources:
       url: https://arxiv.org/pdf/1403.6139v2
       locator: §§1.3–1.5, printed pp. 3–4, stable maps and Gromov convergence
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

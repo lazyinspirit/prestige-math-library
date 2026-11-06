@@ -53,7 +53,7 @@ sources:
       url: https://www.kurims.kyoto-u.ac.jp/~arakawa/errata_admissible.pdf
       locator: Both pages; corrected Main Theorem and Proposition 4.5. Extended-Weyl conjugacy replaces abstract root-system isomorphism, which is insufficient in type C with even denominator.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

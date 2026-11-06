@@ -36,6 +36,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "Whitney product formula and the definition of Stiefel–Whitney classes."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

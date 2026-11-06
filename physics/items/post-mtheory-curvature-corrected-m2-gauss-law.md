@@ -68,7 +68,7 @@ sources:
     url: https://pure.rug.nl/ws/portalfiles/portal/14453122/1987PhysLettBBergshoeff4.pdf
     locator: §2, Eqs. (3)–(20), printed pp. 76–77; M2 Wess–Zumino source and superspace assumptions.
 verification:
-  precheck: pending
+  precheck: pass
   sources_checked:
     date: 2026-11-05
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

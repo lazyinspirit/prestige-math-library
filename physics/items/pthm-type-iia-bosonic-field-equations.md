@@ -43,7 +43,7 @@ sources:
       url: "https://library.institutpendidikan.ac.id/wp-content/uploads/2024/08/Joseph-Polchinski-_String-Theory-Volume-II-Superstring-Theory-and-Beyond_.pdf"
       locator: "§12.1, printed pp. 86–89, IIA string-frame action and field-strength conventions."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

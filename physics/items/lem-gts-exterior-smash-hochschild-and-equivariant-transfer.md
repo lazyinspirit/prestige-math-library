@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/1103.4956v2
       locator: "§2, Lemmas2.1–2.3 and Proposition2.4, printed3–6, exterior/trivial-extension algebra and formal-comparison context. The source states raw dimension2n+3 and a cyclic-invariant line; the present complete-graph dimension7/11 and even-coordinate invariant calculation are explicit local corrections/extensions, not imported source assertions. Complete paper printed1–29 read in the present outside source review."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

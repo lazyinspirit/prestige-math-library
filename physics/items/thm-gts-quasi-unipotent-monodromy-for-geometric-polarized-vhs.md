@@ -34,7 +34,7 @@ sources:
       url: "https://numdam.org/item/AST_1989__179-180__67_0.pdf"
       locator: "§§1–3, printed pp. 68–81, especially Remark (1.10)(i), p. 70: integral polarized variations and the monodromy theorem; §§2–3 supply nilpotent-orbit context, not an imported proof of quasi-unipotence."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -28,6 +28,7 @@ sources:
     locator: Appendix B.1–B.2, printed pp. 136–141, provides closed-curve gluing and neck-coordinate context only. The tame transverse-strip coercive estimate, onto inverse and weighted perturbation argument are proved locally below, not attributed to a Pardon strip theorem.
 dependency_level: 1
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

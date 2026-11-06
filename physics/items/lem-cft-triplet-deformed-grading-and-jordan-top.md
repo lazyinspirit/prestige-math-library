@@ -35,6 +35,7 @@ sources:
       url: https://arxiv.org/pdf/0707.1857v2
       locator: "§1, printed pp.4–5: conformal vector, screening derivations, [Q,Qtilde]=0 and generators."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

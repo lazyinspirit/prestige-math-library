@@ -28,7 +28,7 @@ sources:
       url: https://arxiv.org/pdf/2005.11530v1
       locator: "Sections 1.2–1.6 and 3–6; explicit local construction below. Actual source-reading limits are recorded in the attached research proofs; no full-paper reading is asserted."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

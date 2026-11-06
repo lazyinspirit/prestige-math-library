@@ -24,7 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§2.1–2.1.2 and 2.3–2.3.3 (PDF file pp.35–38 and 47–52; printed pp.28–31 and 40–45); printed pp.28–31 and 40–45); printed pp.28–31 and 40–45); printed pp.28–31 and 40–45); printed pp.28–31 and 40–45); printed pp.28–31 and 40–45); printed pp.28–32 and 40–45); source context for covariant Fock states and Virasoro conditions."
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

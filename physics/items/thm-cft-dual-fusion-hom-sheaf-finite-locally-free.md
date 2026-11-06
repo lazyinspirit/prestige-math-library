@@ -33,6 +33,7 @@ sources:
       url: https://arxiv.org/pdf/2503.23995v4
       locator: "Theorem 3.13 and proof, §3.3, PDF pp. 57–58: the source identifies the Hom-sheaf source as locally free before its fiberwise matrix argument."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

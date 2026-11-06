@@ -53,7 +53,7 @@ sources:
     url: https://arxiv.org/pdf/math/0604046
     locator: Lemma 2.2 and its complete proof (PDF pp.4–5), read for the equational construction. Steps 5.1–8.1 give the local proof with explicit Noetherian and positive-degree hypotheses; no theorem is imported.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

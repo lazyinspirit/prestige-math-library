@@ -29,6 +29,7 @@ sources:
       url: https://people.math.harvard.edu/~demarco/Math274/DinhSibony_Introduction.pdf
       locator: "§3.1, pp. 31–33; §3.2, p. 35; and §4.4, Example 4.4.1, p. 44: form-current pairing, differential, and integration on a submanifold. The product-test reduction and test-first/source-first sign conversion are the explicit local calculation below, not a theorem quoted verbatim from this source."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

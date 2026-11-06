@@ -66,7 +66,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
       locator: "§11.6, Theorem 11.14, printed pp. 131–133 (Wu formula); §14 (mod-two Chern/Stiefel–Whitney comparison)."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

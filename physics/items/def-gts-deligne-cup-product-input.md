@@ -31,6 +31,7 @@ sources:
       url: https://arxiv.org/pdf/1208.3961v6
       locator: Section 3.4, Definition 3.94 and Proposition 3.95, PDF pp. 57–60; Problems 3.96–3.99 identify the local algebra and uniqueness obligations.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -28,7 +28,7 @@ sources:
       url: https://academicweb.nd.edu/~pmnev/f22/CFT_book.pdf
       locator: Sections 6.1.5–6.1.6 and 6.3.11.4, printed pp. 199–200 and 221–222, lattice sectors and the current/vertex-operator map.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

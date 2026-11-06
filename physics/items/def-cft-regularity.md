@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0607679v1"
       locator: "§§1–2 and Corollary 5.5; module conventions kept distinct."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

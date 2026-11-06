@@ -30,6 +30,7 @@ sources:
     url: https://arxiv.org/pdf/2510.04625
     locator: Definitions 3.13–3.14 (PDF pp. 26–27); Definition 4.5 and the preceding descent setup (PDF p. 31). These named definitions use a regraded de Rham convention.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -32,7 +32,7 @@ sources:
       url: https://academicweb.nd.edu/~pmnev/f22/CFT_book.pdf
       locator: Sections 6.3.10.3–6.3.11.2, printed pp. 218–220, Majorana modes, the spin-structure vector, and the complex Dirac character.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

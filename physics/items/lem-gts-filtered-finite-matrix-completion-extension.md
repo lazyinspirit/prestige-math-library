@@ -26,7 +26,7 @@ sources:
       url: https://arxiv.org/pdf/1309.2370v6
       locator: Definitions 7.7.2–7.7.3 and the bounded-extension and matrix-identity argument following equation 7.7.3; adapted here to the larger energy completion
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

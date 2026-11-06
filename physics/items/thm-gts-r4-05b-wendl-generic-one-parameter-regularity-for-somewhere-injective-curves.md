@@ -46,7 +46,7 @@ sources:
       url: https://people.math.harvard.edu/~dafr/M392C-2018-MorseTheory/Readings/Smale.pdf
       locator: Theorem 1.3; exact imported theorem and proof are linked below
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

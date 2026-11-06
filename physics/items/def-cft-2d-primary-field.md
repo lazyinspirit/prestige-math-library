@@ -30,6 +30,7 @@ sources:
       url: https://davidtong.org/pdfs/teaching/string-theory/string4.pdf
       locator: "§4.2.3, Eq. (4.18), printed p. 76 (chapter PDF p. 16): displayed forward-derivative primary-operator law, distinguished here from passive tensor coefficients."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

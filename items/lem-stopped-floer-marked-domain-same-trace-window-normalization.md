@@ -30,6 +30,7 @@ sources:
     url: https://math.mit.edu/~seidel/texts/937-lecture-notes.pdf
     locator: "Lecture 10, strip-ended Floer convention only. The finite marked-family normalization and its quantitative applicability are reconstructed below; no compactness or gluing theorem is imported."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

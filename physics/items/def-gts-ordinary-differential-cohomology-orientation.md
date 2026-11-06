@@ -35,6 +35,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -27,7 +27,7 @@ sources:
       locator: "§1, equation (1), printed p. 1, for the genus/boundary coupling expansion; equations (3)–(6), especially leading actions (4)–(5), printed pp. 2–3, for the separate heterotic and Type-I field, RR two-form, and dilaton-weight conventions."
       source_key: "R4:R4-SUGRA-13:S2"
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

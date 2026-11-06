@@ -23,7 +23,7 @@ sources:
       locator: "§§3.3.1–3.3.2, equations (3.34)–(3.44), and §3.4.1, equation (3.55), PDF pp. 50–54: complexified Euclidean chiral charts and invariant top form. Nekrasov's current is $J_V=\beta_iV^i$; the pole below is separately derived for the explicitly declared $j_V=-\beta_iV^i$ convention."
 proof_strategy: direct
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

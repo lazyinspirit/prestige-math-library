@@ -30,7 +30,7 @@ sources:
     url: https://arxiv.org/pdf/2605.13952v1
     locator: §3.4, equations (3.16)–(3.19), related cyclic self-duality fusion rules for the two-Weyl-fermion theory; this is a model-specific comparison, not the proof of the general finite-wall count below.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

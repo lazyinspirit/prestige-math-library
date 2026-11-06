@@ -31,7 +31,7 @@ sources:
       attached local supplier and the entire nonzero-symbol calculation is supplied
       here.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

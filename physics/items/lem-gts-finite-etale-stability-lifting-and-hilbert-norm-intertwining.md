@@ -42,7 +42,7 @@ sources:
     locator: Sections2–5; exact missing constructions are supplied below rather than
       imported by citation.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

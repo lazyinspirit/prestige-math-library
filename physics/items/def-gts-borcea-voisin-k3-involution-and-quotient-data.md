@@ -20,7 +20,7 @@ sources:
       url: https://arxiv.org/pdf/alg-geom/9608004v3
       locator: "§2, printed pp. 8–10: invariant/anti-invariant lattices, D′_M/T′_M and mirror-period exclusion; §3, printed pp. 17–20: quotient, resolution and dual construction."
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

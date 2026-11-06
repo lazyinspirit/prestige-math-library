@@ -34,7 +34,7 @@ sources:
       url: https://arxiv.org/pdf/1004.1554
       locator: Retrieved banner v5, sections 3.4–3.8; principal integral-grading algebraic construction below, with an explicit formal-transverse proof replacing the cited flatness input.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

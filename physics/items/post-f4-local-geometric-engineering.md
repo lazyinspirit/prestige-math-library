@@ -37,7 +37,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.5780"
       locator: "§1, printed pp. 3–4, non-diagonalizable Higgs data; §2, pp. 6–7, twisted (2,0)-form and equations (2.1)–(2.3); §3.1.1, pp. 28–30, nilpotent example and adjoint commutator. Only these bounded passages were used for the local definition."
 verification:
-  precheck: n/a
+  precheck: pass
   sources_checked:
     date: 2026-11-04
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

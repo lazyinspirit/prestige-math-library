@@ -37,7 +37,7 @@ sources:
       url: "https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
       locator: "§4.1.1, printed p. 145, PDF p. 152; M_pl^2 = ħc/(8πG) and the Einstein–Hilbert coefficient M_pl^2/2."
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -25,7 +25,7 @@ sources:
     - title: "Timo Weigand, TASI Lectures on F-theory, §4.1, pp. 22–25"
       url: "https://arxiv.org/pdf/1806.01854v1"
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

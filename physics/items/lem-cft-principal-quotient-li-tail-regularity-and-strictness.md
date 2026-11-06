@@ -32,7 +32,7 @@ sources:
       url: https://arxiv.org/pdf/1004.1554
       locator: Retrieved v5, sections 4.3–4.5; the explicit finite-top PBW contraction, increasing-bottom resolution and adjusted double filtration below supply the required convergence and truncation arguments.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

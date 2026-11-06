@@ -32,6 +32,7 @@ physical_scope: Purely local source-free differential identities from smooth pot
   patching, or global flux quantization.
 aliases: []
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

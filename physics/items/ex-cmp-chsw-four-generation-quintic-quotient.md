@@ -82,7 +82,7 @@ sources:
       url: "https://members.ift.uam-csic.es/auranga/lect13.pdf"
       locator: "PDF pp. 16–23: HYM equations, standard embedding, E8→E6×SU3 branching, and index sign convention."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

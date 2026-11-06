@@ -28,6 +28,7 @@ sources:
       url: "https://pierre.ag.gerard.web.ulb.be/textbooks/books/A_First_Course_In_String_Theory.pdf"
       locator: "§24.6, printed pp. 583–587, equations (24.91)–(24.98): local conformal gauge and the remaining metric equations."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

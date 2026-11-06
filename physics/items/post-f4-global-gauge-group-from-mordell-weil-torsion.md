@@ -37,7 +37,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV, §5, Theorem 4.36 and Corollary 4.47, printed pp. 255–259 (PDF pp. 272–276): conjugacy into a maximal torus and containment of the center in every maximal torus. The root-space and lattice calculation is supplied locally here."
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

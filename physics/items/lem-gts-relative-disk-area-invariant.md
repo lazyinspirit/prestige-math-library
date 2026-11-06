@@ -24,7 +24,7 @@ sources:
       url: https://arxiv.org/pdf/0802.1703v3
       locator: §3, printed pp. 18–19, the relative disk class and energy weight
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

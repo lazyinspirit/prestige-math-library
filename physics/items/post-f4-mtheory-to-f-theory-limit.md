@@ -41,7 +41,7 @@ sources:
     url: https://arxiv.org/pdf/1806.01854v1
     locator: "§2.3, printed pp. 12–13, F/M circle duality; §3.4, printed pp. 19–24, generic-fiber-wrapped M2 Kaluza–Klein states and the fiber-volume limit; §9.2, printed pp. 86–87, equation (9.11) and the separate space-filling M2/D3 charge correspondence."
 verification:
-  precheck: n/a
+  precheck: pass
   sources_checked:
     date: 2026-11-05
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

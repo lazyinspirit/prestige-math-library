@@ -59,7 +59,7 @@ sources:
       url: https://arxiv.org/pdf/2609.16111v1
       locator: "Theorem 1.1, footnote 3: the radius conversion R=sqrt(2) r and the self-dual values R=1 and r=1/sqrt(2)."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

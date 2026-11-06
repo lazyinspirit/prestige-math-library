@@ -72,7 +72,7 @@ sources:
     locator: arXiv:0908.1439v1, §§2.1–4.5 printed pp. 3–12, including Proposition 3.1, Corollaries 4.3–4.4 and Theorem
       4.5. Its c=3 proof is left to the reader; the complete exact local enumeration is retained separately.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

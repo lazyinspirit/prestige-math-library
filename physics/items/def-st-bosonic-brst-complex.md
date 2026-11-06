@@ -33,7 +33,7 @@ sources:
       url: "https://inspirehep.net/files/4e83b34189b9aa75c9ac544ecbdd3b7a"
       locator: "Chapter III.2, printed p.38 (PDF p.48), equations (III.20)–(III.23); linear BPZ and graded mode-product reversal only."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

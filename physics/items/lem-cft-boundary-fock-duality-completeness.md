@@ -37,6 +37,7 @@ sources:
       url: https://arxiv.org/pdf/hep-th/9412231v1
       locator: Chapter 2 §§2.2.1–2.2.5, Verma factors used conditionally
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

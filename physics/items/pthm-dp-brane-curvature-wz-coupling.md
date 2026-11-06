@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture II §2.5, equation (2.19), PDF p. 15; leading WZ normalization and charge/tension distinction."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

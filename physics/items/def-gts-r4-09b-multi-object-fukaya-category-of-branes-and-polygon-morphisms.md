@@ -39,7 +39,7 @@ sources:
       url: https://arxiv.org/pdf/alg-geom/9411018v1
       locator: pp. 16–18, early candidate Fukaya operations and explicitly preliminary analytic/categorical claims
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

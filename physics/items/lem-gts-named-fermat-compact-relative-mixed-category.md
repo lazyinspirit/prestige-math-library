@@ -49,7 +49,7 @@ sources:
       url: https://arxiv.org/pdf/math/0310414v4
       locator: "§6a–b, printed pp. 29–31 (PDF 33–35), rational branes, action periods and equations (6.2)–(6.7); §8c–f, printed pp. 58–66 (PDF 62–70), especially equations (8.16)–(8.26), Propositions 8.7–8.8 and Lemmas 8.9–8.15. These provide only the Calabi–Yau surface action-line and relative/projective coefficient interfaces. The compact curved virtual construction retaining positive-intersection strata, mixed graph comparison, strict group action and N=5 extension are proved locally, not by this source."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

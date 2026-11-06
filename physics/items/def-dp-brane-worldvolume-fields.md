@@ -28,6 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9510017v3"
       locator: "§2, PDF pp. 2–3: D-brane massless open-string excitations and their interpretation as transverse collective coordinates."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

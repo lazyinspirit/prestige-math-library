@@ -28,6 +28,7 @@ sources:
       locator: Appendix A.14 and Sections3.4–3.5; the proof below replaces the projective-cover argument in3.29 by a universal top-window argument.
 dependency_level: 3
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

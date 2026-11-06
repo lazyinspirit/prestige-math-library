@@ -36,7 +36,7 @@ sources:
       url: "https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
       locator: "§4.1.1, printed pp. 141–145, PDF pp. 148–152; local compactly supported variations and coefficient extraction."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

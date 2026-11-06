@@ -25,6 +25,7 @@ sources:
       url: https://arxiv.org/pdf/1304.6368v4
       locator: "§§3.1, 3.3, 4.3, 5.1: local stabilization charts, convention comparison, transition maps, and their continuity."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

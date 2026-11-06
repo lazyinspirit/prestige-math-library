@@ -30,6 +30,7 @@ sources:
       url: https://arxiv.org/pdf/1209.2459v5
       locator: "§2.1, PDF pp. 3–5, and §4.1.3, PDF pp. 41–42: local SRS coordinates and the Ramond divisor model."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

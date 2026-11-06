@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/alg-geom/9608004v3
       locator: §§1–3, smooth dual torus fibrations and their topological compactifications
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

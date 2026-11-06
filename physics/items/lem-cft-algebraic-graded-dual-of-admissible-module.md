@@ -42,7 +42,7 @@ sources:
       url: https://arxiv.org/pdf/math/0607679v1
       locator: "§4, opening paragraph, states the invariant pairing formula for the contragredient of an admissible V-module and cites Frenkel–Huang–Lepowsky for its construction. It is retained as background; the unrestricted algebraic dual extension is established by the argument here."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0204199v3"
       locator: "§2 and §4.4 Definition 4.3, PDF pp. 2–3 and 17–18, for the bundle-gerbe stable-isomorphism convention."
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

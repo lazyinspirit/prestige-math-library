@@ -28,7 +28,7 @@ sources:
       locator: Definitions 4.2.4, 4.2.8 and 4.2.15; the obstruction is the elementary consequence of the naturality equation proved here, not a separately quoted HMS theorem.
 proof_strategy: direct
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

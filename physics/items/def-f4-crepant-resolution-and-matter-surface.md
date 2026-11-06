@@ -33,7 +33,7 @@ sources:
       url: "https://arxiv.org/pdf/1401.7844v2"
       locator: "§2 and §5.1; genus-one/Jacobian distinctions and the Weierstrass hypersurface/section construction."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

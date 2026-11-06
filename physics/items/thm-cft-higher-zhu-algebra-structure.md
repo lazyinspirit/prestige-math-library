@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0607679v1"
       locator: "§2, higher Zhu quotient and admissible-module conventions."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

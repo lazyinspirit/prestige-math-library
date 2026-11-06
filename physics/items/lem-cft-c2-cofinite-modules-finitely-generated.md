@@ -31,6 +31,7 @@ sources:
       url: https://arxiv.org/pdf/2305.10180v4
       locator: "Appendix A.2.2, Theorem A.14, PDF pp. 78–79; the grading-restricted-to-finitely-generated direction."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

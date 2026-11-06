@@ -33,6 +33,7 @@ sources:
     url: repository:items/def-derived-scheme-and-cotangent-complex.md
     locator: Definition and Source applications
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/1012.4196v2
       locator: Equations 3.76–3.78 and Proposition 3.44; skew symmetry is verified locally below rather than imported.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

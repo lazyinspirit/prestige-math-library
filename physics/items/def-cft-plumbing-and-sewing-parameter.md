@@ -30,6 +30,7 @@ sources:
       url: https://www.damtp.cam.ac.uk/user/tong/string/string.pdf
       locator: "§6.4.1, printed pp. 145–147, for the torus-modulus and worldsheet sewing context; this is not a proof of analytic plumbing or sewing convergence."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

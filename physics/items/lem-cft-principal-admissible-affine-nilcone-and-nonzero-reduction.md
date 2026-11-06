@@ -55,7 +55,7 @@ sources:
       arithmetic and filtered-Zhu arguments are reconstructed locally, with actual
       quotient Li/BRST supplied separately.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

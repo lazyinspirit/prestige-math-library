@@ -47,6 +47,7 @@ sources:
       locator: §§4.3–4.4; this proof supplies the nonstable-domain charts and replaces the sketched global domain-degeneration exhaustion by countably many local smooth slices.
 dependency_level: 7
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -31,6 +31,7 @@ sources:
       locator: "Both pages; corrected orbit predicate and Proposition 4.5. The congruence and orbit-to-direction arguments used here are proved locally."
 dependency_level: 6
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

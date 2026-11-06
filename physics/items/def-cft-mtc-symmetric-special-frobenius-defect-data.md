@@ -31,6 +31,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/tensor/tensor.ps.gz"
       locator: "Chapter 2, §2.4; Chapter 3, §3.1."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

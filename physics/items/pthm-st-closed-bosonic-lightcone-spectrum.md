@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§2.2–2.3.3 (PDF file pp.39–52; printed pp.32–45); printed pp.32–45); printed pp.32–45); printed pp.32–45); printed pp.32–45); printed pp.32–45); printed pp.32–45); left/right modes, level matching, and closed mass formula."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

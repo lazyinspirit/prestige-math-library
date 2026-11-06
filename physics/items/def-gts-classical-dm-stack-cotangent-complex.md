@@ -26,6 +26,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/cotangent.pdf"
       locator: "Definitions 92.18.2 and 92.24.1 for the scheme cotangent complex and its étale-local comparison used on an atlas."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

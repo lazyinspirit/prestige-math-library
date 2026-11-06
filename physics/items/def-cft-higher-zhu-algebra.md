@@ -24,7 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/q-alg/9612010"
       locator: "§2, the definition of O_n(V), A_n(V), and the product *_n; Theorem 2.3."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

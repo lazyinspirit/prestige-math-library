@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/1806.01854v1"
       locator: "§§3.2–3.4, pp. 17–22, and §§4.1–4.3, pp. 22–31: monodromy, splitness, Kodaira fibers and gauge-algebra interpretation; the mathematical geometric classification is proved separately from this physical dictionary."
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -22,7 +22,7 @@ sources:
       url: https://www.math.utoronto.ca/mgualt/Morse%20Theory/Salamon%20floer.pdf
       locator: §1.4, printed p. 10, action functional; §2.4, printed pp. 20–21, Conley–Zehnder loop convention
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

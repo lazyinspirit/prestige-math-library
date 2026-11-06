@@ -31,6 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/1202.3929v2"
       locator: "Section 2.4, (2.38)–(2.40): bimodule trace pairing; ordinary trace-dual bases are used here without multiplying their contraction by an object's dimension."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

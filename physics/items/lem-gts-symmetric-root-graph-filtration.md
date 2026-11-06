@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/2601.22994v1
       locator: Section 4 and Proposition 6.2; a monic ordered-root proof of the required graph filtration replaces classical Schubert-basis inputs and the unexplained homogenization sentence.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

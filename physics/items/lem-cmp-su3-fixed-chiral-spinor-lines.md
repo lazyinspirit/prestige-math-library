@@ -26,7 +26,7 @@ sources:
       url: https://arxiv.org/pdf/1607.00327v3
       locator: "§3.3, PDF pp. 13–14, defines the Levi-Civita-induced spin connection on an associated spinor bundle; §3.5, PDF p. 15, defines the Spin-equivariant antilinear involution and Majorana fixed real form; §3.6, PDF p. 16, states that both ten-dimensional chiralities admit Majorana–Weyl modules of real dimension 16. Used only for these representation and connection conventions, not as a Type-II compactification result."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

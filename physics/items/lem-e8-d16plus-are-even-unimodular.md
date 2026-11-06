@@ -34,6 +34,7 @@ sources:
       url: "https://www.thphys.uni-heidelberg.de/courses/weigand/Strings11-12.pdf"
       locator: "Chapter 6.9, printed pp. 151-154, and §7.2, printed pp. 157-160; heterotic rank-16 sector context, not lattice property proofs."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

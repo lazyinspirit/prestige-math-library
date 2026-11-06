@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/1403.6139v2
       locator: §1.1, printed p. 2, symplectic area and boundary convention
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

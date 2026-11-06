@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/2206.08166v1"
       locator: 'Sections 132–142, especially §§137, 139–142 and Theorem 141 / estimate (142.1): invariant-vector boundedness, flat Hom comparison, the $\mathfrak{sl}_2$ model and the rescaled Hodge-form estimate.'
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

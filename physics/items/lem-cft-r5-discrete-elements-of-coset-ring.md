@@ -22,7 +22,7 @@ sources:
       url: https://arxiv.org/pdf/math/9904065
       locator: "§3.2, Theorem 3 and Lemma 2, printed pp. 6–7. The local proof below specializes the result to additive subgroups of R^d."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

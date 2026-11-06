@@ -30,7 +30,7 @@ sources:
       url: https://arxiv.org/pdf/2510.22432v1
       locator: Sections3–4; only the particular product-exponential charge is treated below, without importing the forthcoming general uniqueness theorem.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

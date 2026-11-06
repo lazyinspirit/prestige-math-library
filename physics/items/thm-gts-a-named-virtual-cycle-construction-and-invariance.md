@@ -40,7 +40,7 @@ sources:
     url: https://arxiv.org/pdf/1309.2370v6
     locator: §9.2 Theorem 9.2.10; full setup in §9.1; Appendix B, Theorem B.1.1 and proof.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

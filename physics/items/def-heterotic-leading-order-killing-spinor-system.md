@@ -31,7 +31,7 @@ sources:
       locator: "§2.2, printed pp. 11–12, ten-dimensional N=1 gravitino, dilatino, and gaugino representation content."
       source_key: "R4:R4-SUGRA-15:S2"
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

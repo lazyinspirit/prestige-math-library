@@ -29,6 +29,7 @@ sources:
       locator: 'Sections3.1.1–3.1.2 and3.1.12,3.3.1–3.3.3,3.5.10 and3.5.13–3.5.15. The full polar operation and its three-input residue identity are reconstructed below; the singular restriction alone is not substituted for a chiral operation.'
 dependency_level: 1
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

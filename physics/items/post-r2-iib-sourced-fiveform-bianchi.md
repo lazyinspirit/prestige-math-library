@@ -37,6 +37,7 @@ sources:
       url: "https://arxiv.org/pdf/2305.01722"
       locator: "§4.1 Eqs. (4.15)–(4.23), PDF pp. 25–26; §4.4 Eqs. (4.76)–(4.78), PDF pp. 34–35."
 verification:
+  precheck: pass
   sources_checked:
     date: 2026-11-05
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

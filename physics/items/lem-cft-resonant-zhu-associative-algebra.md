@@ -33,7 +33,7 @@ sources:
       url: https://arxiv.org/pdf/q-alg/9612010
       locator: "§2; higher Zhu algebras specialize at n=0. The local proof below does not import the higher-level construction."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

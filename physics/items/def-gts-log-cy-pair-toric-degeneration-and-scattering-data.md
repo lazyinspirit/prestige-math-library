@@ -44,7 +44,7 @@ sources:
       url: https://arxiv.org/pdf/2010.13656v3
       locator: Introduction, SNC anticanonical pair and relative log-canonical bundle
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

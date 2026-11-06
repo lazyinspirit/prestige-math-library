@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9604119v1"
       locator: "§2, NS two-form gauge shift, compensating worldvolume gauge transformation, and WZ exponential."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

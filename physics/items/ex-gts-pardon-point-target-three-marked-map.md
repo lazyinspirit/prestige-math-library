@@ -37,7 +37,7 @@ sources:
       url: https://www.math.utoronto.ca/mgualt/Morse%20Theory/Salamon%20floer.pdf
       locator: §4.2, pp. 45–51, definitions and equivalence of genus-zero stable maps.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

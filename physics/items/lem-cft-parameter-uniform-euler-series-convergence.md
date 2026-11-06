@@ -21,7 +21,7 @@ sources:
       url: https://arxiv.org/pdf/2209.10443v3
       locator: Appendix A, Lemma A.4, Proposition A.5 and Corollary A.6; source comparison only, with the coefficient-majorant proof reconstructed here.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

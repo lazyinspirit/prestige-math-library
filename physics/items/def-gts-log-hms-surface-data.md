@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/2005.05010v3
       locator: Definition 2.1, §2.1.1 and §2.2, maximal boundary and distinguished complex structure
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

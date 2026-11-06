@@ -37,6 +37,7 @@ dependency_roles:
   thm-gts-local-structure-of-stability-condition-space: mathematical-premise
   thm-naturality-normalization-and-whitney-sum-for-chern-classes: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

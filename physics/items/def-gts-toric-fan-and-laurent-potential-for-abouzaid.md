@@ -34,7 +34,7 @@ sources:
       url: https://arxiv.org/pdf/2203.01690v1
       locator: 'Section2.6, printed/PDF pp.12–14, Definitions2.30–2.31 and2.36–2.37; Example2.65, p.21; Definition3.42, p.33; Section4.2, p.41, gluing data and Theorem4.5. These are the bounded source passages used; the affine schemes, face localizations and cocycle construction are specified locally below, using the declared mathematical suppliers rather than importing a general toric classification or HMS theorem.'
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

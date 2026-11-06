@@ -59,7 +59,7 @@ sources:
     url: https://stacks.math.columbia.edu/tag/0A4T
     locator: Bibliographic comparison only; the projective relative-dimension-one consequence is proved locally in F7 by two affine hyperplane complements, without importing this theorem.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

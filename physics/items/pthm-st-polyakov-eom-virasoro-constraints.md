@@ -31,6 +31,7 @@ sources:
       url: "https://pierre.ag.gerard.web.ulb.be/textbooks/books/A_First_Course_In_String_Theory.pdf"
       locator: "§24.6, printed pp. 585–587, equations (24.75)–(24.98): X and metric variation and conformal-gauge constraints."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

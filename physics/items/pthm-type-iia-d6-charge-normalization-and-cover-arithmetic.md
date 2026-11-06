@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture III §3.3, Eq. (3.25), PDF p. 30."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

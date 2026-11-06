@@ -32,6 +32,7 @@ sources:
       url: "https://www.thphys.uni-heidelberg.de/courses/weigand/Strings11-12.pdf"
       locator: "Chapter 6.9, printed pp. 151-154, and §7.2, printed pp. 157-160, the two heterotic rank-16 gauge-group alternatives."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

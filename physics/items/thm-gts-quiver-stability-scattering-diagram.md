@@ -27,7 +27,7 @@ sources:
       url: https://arxiv.org/pdf/1603.00416v4
       locator: Theorem 1.1; complete Sections 2–6.5 and 11.1–11.2; local HN, framed no-poles and mixed-Hessian integration proof supplied in the attached Hall lemma
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -55,7 +55,7 @@ sources:
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Chapters 2–3"
       url: https://linear.axler.net/LADR4e.pdf
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

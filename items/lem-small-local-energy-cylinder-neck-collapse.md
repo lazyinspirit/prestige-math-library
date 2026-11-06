@@ -40,6 +40,7 @@ dependency_roles:
   lem-small-gradient-almost-complex-cylinder-neck-energy-decay: mathematical-premise
   lem-small-gradient-totally-real-boundary-neck-energy-decay: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

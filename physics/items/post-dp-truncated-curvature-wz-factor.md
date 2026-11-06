@@ -30,7 +30,7 @@ sources:
     locator: §§2–3, characteristic-class structure of D-brane RR couplings; context only, not used to assert an all-orders
       formula here.
 verification:
-  precheck: pending
+  precheck: pass
   sources_checked:
     date: 2026-11-04
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

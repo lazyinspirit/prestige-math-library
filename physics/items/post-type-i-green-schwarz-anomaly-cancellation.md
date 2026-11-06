@@ -29,7 +29,7 @@ sources:
       locator: "§1, equations (3)–(6), printed pp. 2–3, source's distinction between heterotic NS–NS and Type-I RR two-forms."
       source_key: "R4:R4-SUGRA-14T:S2"
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -31,7 +31,7 @@ sources:
       url: https://www.math.utoronto.ca/mgualt/Morse%20Theory/Salamon%20floer.pdf
       locator: §4.2, pp. 45–51; stable-map topology and the regular zero-dimensional genus-zero case.
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

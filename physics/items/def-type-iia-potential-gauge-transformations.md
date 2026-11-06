@@ -28,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/1607.00327v3"
       locator: "§6.1, Definition 6.1 and the potential gauge transformations immediately following it."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

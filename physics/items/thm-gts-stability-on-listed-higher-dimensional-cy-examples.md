@@ -55,7 +55,7 @@ sources:
       uses an elliptic cover of Alb(S), not a fixed original automorphism factor. The local strictness proof does
       not import Bogomolov decomposition.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

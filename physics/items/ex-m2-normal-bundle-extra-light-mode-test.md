@@ -25,6 +25,7 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

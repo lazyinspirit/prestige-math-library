@@ -40,7 +40,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
       locator: "Lecture 33.6 and Lectures 34–36, printed pp. 123–135, for Stiefel–Whitney classes, splitting, and the Whitney sum formula."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

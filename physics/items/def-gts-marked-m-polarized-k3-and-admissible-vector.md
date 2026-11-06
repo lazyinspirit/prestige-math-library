@@ -22,7 +22,7 @@ sources:
       url: https://arxiv.org/pdf/alg-geom/9608004v3
       locator: §1, K3 lattice, M-polarized period domain, and definition of m-admissibility
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

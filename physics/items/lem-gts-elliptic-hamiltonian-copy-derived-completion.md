@@ -40,7 +40,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9801119v3"
       locator: "§§3.1–3.3 printed281–284 and complete §5 printed288–294: graded rational circles, unit-modulus eigenvalue local systems including Jordan blocks, H0-category equivalence and torsion objects. The source projects higher operations to H0; the current smooth Hamiltonian-copy/all-arity dg perfect completion is the local attached proof, not an assertion proved there. Entire23-page v3 PDF read."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -26,7 +26,7 @@ sources:
       url: "https://members.ift.uam-csic.es/auranga/Lect.pdf"
       locator: "§14.3.1, printed pp. 290–291, and Appendix B.2, printed pp. 324–326: the IIB axiodilaton, classical SL(2,R) covariance, charge quantization, and conjectural full SL(2,Z) symmetry. Uranga's two-form-doublet convention differs from Schwarz's and is not used to fix the local charge-sign convention."
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

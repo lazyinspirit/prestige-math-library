@@ -27,7 +27,7 @@ sources:
       url: https://www.math.ias.edu/~lurie/papers/DAG-X.pdf
       locator: Construction 2.2.1, Remarks 2.2.2–2.2.5, Proposition 2.2.7 with proof and Lemmas 2.2.8–2.2.9; Construction 2.2.13 and Remark 2.2.14 fix the coaugmented CE-chain/cochain convention. The graded PBW and contraction arguments are reconstructed below.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

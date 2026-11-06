@@ -39,6 +39,7 @@ sources:
       url: https://arxiv.org/pdf/1012.4193
       locator: "§2, Definition 2.12 and the contragredient-module construction for grading-restricted generalized modules."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

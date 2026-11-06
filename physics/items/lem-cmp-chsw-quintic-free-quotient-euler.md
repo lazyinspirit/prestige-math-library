@@ -50,7 +50,7 @@ sources:
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "Chapter 2, §2.2: Euler characteristic of finite CW complexes and the cellular calculation used with the local finite-cover lemma."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

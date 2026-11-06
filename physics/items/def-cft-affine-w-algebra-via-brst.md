@@ -40,7 +40,7 @@ sources:
       url: https://arxiv.org/pdf/1605.00138v2
       locator: §5.1, charged fermion Fock space, BRST state, and Definition 5.6.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

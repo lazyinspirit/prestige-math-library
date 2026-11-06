@@ -36,6 +36,7 @@ dependency_roles:
   thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one: mathematical-premise
   lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

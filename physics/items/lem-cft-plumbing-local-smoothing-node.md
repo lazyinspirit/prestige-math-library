@@ -28,6 +28,7 @@ sources:
       url: https://arxiv.org/pdf/2411.07707v4
       locator: "§1.2 and §4.1 for the local equation zw=q and multi-pair plumbing; the proof below verifies the local analytic geometry directly."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

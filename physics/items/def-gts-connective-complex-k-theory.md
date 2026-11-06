@@ -38,6 +38,7 @@ sources:
       url: https://www.math.uic.edu/~bshipley/symmetric.pdf
       locator: Definitions 1.2.2, 2.1.1, 2.1.3, 2.2.3, 3.1.1 and 3.1.3, and Proposition 2.2.1; symmetric spectra, symmetric sequences, smash product, S-module description and stable equivalences.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

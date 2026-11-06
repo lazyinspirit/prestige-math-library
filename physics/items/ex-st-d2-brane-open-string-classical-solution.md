@@ -39,6 +39,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9510017v3"
       locator: "§2, PDF pp. 2–4, equation (4): a static Type IIA D2-brane has Neumann directions 0, 1, 2 and Dirichlet directions 3 through 9."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

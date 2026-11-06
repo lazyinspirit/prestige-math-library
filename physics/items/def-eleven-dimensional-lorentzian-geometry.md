@@ -38,7 +38,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0212008"
       locator: "Appendix A, eleven-dimensional signature and Clifford convention; the Hodge-star existence argument is proved locally in this item."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

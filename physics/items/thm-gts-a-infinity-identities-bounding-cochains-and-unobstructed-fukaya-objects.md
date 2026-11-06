@@ -27,7 +27,7 @@ sources:
     url: https://arxiv.org/pdf/0802.1703v3
     locator: §3, printed pp. 15–19, Definition 3.1, filtered curvature, geometric operations, and Theorem 3.8; the article identifies §3 as a quick summary and refers complete proofs to the trilogy
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

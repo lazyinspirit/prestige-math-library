@@ -34,7 +34,7 @@ sources:
       url: https://www.imo.universite-paris-saclay.fr/~anne.moreau/Arc_space-vertex_algebras-BOOK_version.pdf
       locator: Appendix D.3, Jacobson-Morozov and Dynkin grading conventions.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

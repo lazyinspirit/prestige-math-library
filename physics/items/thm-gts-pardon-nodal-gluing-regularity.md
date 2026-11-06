@@ -37,7 +37,7 @@ sources:
       url: https://arxiv.org/pdf/1309.2370v6
       locator: Proposition 9.2.6 and its proof via Theorem B.1.1 in Appendix B, §§B.5–B.13; the source's weighted gluing estimates are recorded as hypotheses below, not claimed as locally proved here.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

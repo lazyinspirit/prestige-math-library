@@ -37,7 +37,7 @@ sources:
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "Chapter 2, §2.2, printed pp. 147–148 (PDF pp. 154–155): finite CW Euler characteristic and Theorem 2.44; the covering-cell lift argument is given locally below."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -20,7 +20,7 @@ sources:
       url: "https://dlmf.nist.gov/25.11"
       locator: "Equations 25.11.1 and 25.11.14; Hurwitz zeta definition and Bernoulli-polynomial value at negative integers."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

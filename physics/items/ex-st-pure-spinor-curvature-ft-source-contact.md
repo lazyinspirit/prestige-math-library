@@ -35,7 +35,7 @@ sources:
       locator: "§3.1, equations (3.1)–(3.11), including the conventional constraints (3.3): type-II canonical momenta, the full minimal Qd transformation, and its field-dependent Lorentz parameter; the AdS specialization in §4 is not used."
 proof_strategy: direct
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

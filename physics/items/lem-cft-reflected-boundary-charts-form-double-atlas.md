@@ -30,7 +30,7 @@ sources:
       url: https://arxiv.org/pdf/hep-th/0411189v2
       locator: "§2, PDF pp. 8–9: analytic half-disk boundary charts and doubling convention."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

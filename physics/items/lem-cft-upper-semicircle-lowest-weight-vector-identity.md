@@ -30,6 +30,7 @@ page: cft-euclidean-axioms-and-sewing
 reference: items/lem-cft-upper-semicircle-lowest-weight-vector-identity.md
 dependency_level: 2
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

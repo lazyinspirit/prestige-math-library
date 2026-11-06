@@ -34,7 +34,7 @@ sources:
       url: https://stacks.math.columbia.edu/download/more-morphisms.pdf
       locator: "Lemma 2.2 (05YV), complete proof; Lemma 10.1 (063Y), complete proof. The Artin-base proof below replaces its general local-flatness criterion."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

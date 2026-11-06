@@ -35,6 +35,7 @@ dependency_roles:
   lem-local-sobolev-bootstrap-for-almost-complex-strips: mathematical-premise
   lem-smooth-strip-compactness-away-from-energy-concentration: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

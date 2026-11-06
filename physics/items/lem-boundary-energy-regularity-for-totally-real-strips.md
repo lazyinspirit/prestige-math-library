@@ -31,6 +31,7 @@ dependency_roles:
   lem-interior-energy-regularity-for-smooth-almost-complex-strips: mathematical-premise
   lem-heinz-half-disk-boundary-mean-value-estimate: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

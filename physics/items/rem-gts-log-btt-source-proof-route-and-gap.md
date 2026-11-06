@@ -32,7 +32,7 @@ sources:
     locator: Theorem 1.1; §§3.2–3.4; Theorems 3.3 and 3.7, Lemma 3.1, Proposition
       2.8
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

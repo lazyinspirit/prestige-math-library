@@ -23,7 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§2.1–2.1.2 and 4.5.2 (PDF file pp.35–38 and 101–102; printed pp.28–31 and 94–95); printed pp.28–31 and 94–95); printed pp.28–31 and 94–95); printed pp.28–31 and 94–95); printed pp.28–31 and 94–95); printed pp.28–31 and 94–95); printed pp.28–32 and 94–96); source convention only, with the oscillator commutator proved locally."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

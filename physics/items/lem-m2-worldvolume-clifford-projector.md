@@ -27,7 +27,7 @@ sources:
   - title: M. F. Atiyah, R. Bott, and A. Shapiro, Clifford Modules, Part I, §1
     url: https://ncatlab.org/nlab/files/Bott-KTheory.pdf
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

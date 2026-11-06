@@ -28,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0507286v1"
       locator: "§IV.4, Proposition IV.24, printed pp. 55–56 (PDF pp. 61–62): intrinsic derivations and the tangent-valued bracket; DGLA identities are checked locally."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

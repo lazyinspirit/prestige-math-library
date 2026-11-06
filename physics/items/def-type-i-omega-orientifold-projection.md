@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture II §2.6 and Lecture III §§3.1–3.2, full 47-page lecture notes: unoriented strings, orientifolds, and Type I projection conventions."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

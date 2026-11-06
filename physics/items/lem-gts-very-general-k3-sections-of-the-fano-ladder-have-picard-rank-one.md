@@ -39,6 +39,7 @@ dependency_roles:
   lem-local-morse-sublevel-pair-is-a-handle-pair: mathematical-premise
   thm-baire-category-locally-compact-hausdorff: mathematical-premise
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

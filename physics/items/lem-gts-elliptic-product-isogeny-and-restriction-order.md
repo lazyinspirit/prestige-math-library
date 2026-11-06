@@ -32,6 +32,7 @@ dependency_roles:
   lem-gts-isotrivial-fibre-stability-restriction-from-torsion-invariance: mathematical-premise
   lem-gts-compact-adjoint-induced-stability: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

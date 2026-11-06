@@ -26,6 +26,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9503124v2"
       locator: "§§2.2–2.3, PDF pp. 5–10: the source-reported type-IIA/M-theory circle interpretation and its low-energy scope."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

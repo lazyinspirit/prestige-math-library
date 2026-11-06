@@ -45,7 +45,7 @@ sources:
     url: https://arxiv.org/pdf/1810.03434v2
     locator: Lemma4.8, read completely and reconstructed with the actual surface theory
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

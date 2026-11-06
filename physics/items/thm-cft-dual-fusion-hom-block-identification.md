@@ -33,6 +33,7 @@ sources:
       url: https://arxiv.org/pdf/2503.23995v4
       locator: "§0.4, equations (0.7)–(0.9), and §3.2, Lemma 3.6: the dual-fusion universal property identifies the relevant Hom and conformal-block coend factors."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -26,7 +26,7 @@ sources:
       url: https://stacks.math.columbia.edu/download/defos.pdf
       locator: "Section 2, marked square-zero algebra-extension convention. The polynomial computation below is a self-contained generated example, not a theorem imported from this source."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

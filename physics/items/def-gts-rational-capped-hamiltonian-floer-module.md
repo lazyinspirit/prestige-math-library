@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/1309.2370v6
       locator: Definitions 7.7.2 and 10.1.1, footnote 35, and Definition 10.4.1; the full energy completion below is a local extension of the source graded completion
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

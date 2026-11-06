@@ -42,6 +42,7 @@ sources:
     locator: Section 5.1, Definition 5.1.12, printed pp. 97–98; Section 5.2, Theorem
       5.2.3, pp. 99–103; Section 5.7, pp. 127–130. Preliminary lecture-note version.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§2.2.1 (PDF file pp.40–42; printed pp.33–35); printed pp.33–35); printed pp.33–35); printed pp.33–35); printed pp.33–35); printed pp.33–35); printed pp.33–35); light-cone chart requires p^+ nonzero; the spatial-rotation proof is local."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

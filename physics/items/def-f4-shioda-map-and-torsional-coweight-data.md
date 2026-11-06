@@ -32,7 +32,7 @@ sources:
       url: "https://arxiv.org/pdf/1208.2695v2"
       locator: "§1 and §3.1, printed pp. 1–3 and 6–8; rational sections and the Shioda map in the six-dimensional CY3 setting."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

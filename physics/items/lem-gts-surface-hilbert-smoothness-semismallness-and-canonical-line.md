@@ -41,6 +41,7 @@ page: gts-bridgeland-stability-dt-frontiers
 reference: items/lem-gts-surface-hilbert-smoothness-semismallness-and-canonical-line.md
 dependency_level: 0
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

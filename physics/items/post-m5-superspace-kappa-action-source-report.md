@@ -28,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9701037v3"
       locator: "§§2–3, Eqs. (16)–(18), PDF pp. 2–6; bosonic local action and gauge convention."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

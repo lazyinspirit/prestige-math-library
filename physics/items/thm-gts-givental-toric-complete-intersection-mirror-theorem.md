@@ -70,7 +70,7 @@ sources:
       url: https://arxiv.org/pdf/alg-geom/9708001v2
       locator: §§1–3, printed pp. 4–13, fixed and moving obstruction theories and cone/Gysin comparison; Appendices A–C, printed pp. 23–28, equivariant stable-map presentations, obstruction theories and rational-stack localization. These constructions are reconstructed in the proof; the virtual-localization theorem is not an unproved imported premise.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

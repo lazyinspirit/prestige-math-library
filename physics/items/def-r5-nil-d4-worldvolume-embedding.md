@@ -28,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture II §§2.3–2.5, PDF pp. 12–15; smooth embedded D-brane worldvolume and pullback fields."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

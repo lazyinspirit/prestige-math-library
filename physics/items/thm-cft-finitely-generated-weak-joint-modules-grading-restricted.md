@@ -35,6 +35,7 @@ sources:
       url: https://arxiv.org/pdf/2305.10180v4
       locator: "Appendix A.2.1–A.2.2, Theorems A.13–A.14, PDF pp. 77–79."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

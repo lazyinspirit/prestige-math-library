@@ -37,6 +37,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9912161v1"
       locator: "§7, printed pp. 41–46, equations (7.229)–(7.265), especially (7.251)–(7.265): fixed-picture superghost vacua, full matter-plus-superghost GSO operators, vacuum phases, and their spin-structure sums."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

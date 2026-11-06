@@ -37,6 +37,7 @@ sources:
       url: https://arxiv.org/pdf/2305.10180v4
       locator: "§§1.2–1.7, especially Definitions 1.7–1.8 and 1.16–1.21, PDF pp. 18–25, and Theorem 0.5, PDF pp. 7–8."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

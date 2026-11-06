@@ -40,6 +40,7 @@ sources:
       here, not arbitrary varying curves.
 dependency_level: 4
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

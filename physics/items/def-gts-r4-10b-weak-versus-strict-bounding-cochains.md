@@ -27,7 +27,7 @@ sources:
       url: https://arxiv.org/pdf/0802.1703v3
       locator: §3, Definition 3.2, Lemma 3.3, Proposition 3.5, Definitions 3.6–3.7, printed pp. 16–18
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

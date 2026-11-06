@@ -31,7 +31,7 @@ sources:
       url: https://arxiv.org/pdf/2412.08531v1
       locator: "Section 2.2; the finite-group lifting and charge-quotient support proof are reconstructed below."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

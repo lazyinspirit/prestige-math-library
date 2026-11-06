@@ -32,7 +32,7 @@ sources:
       url: "https://arxiv.org/pdf/1806.01854v1"
       locator: "§5.2, pp. 41–43, equations (5.8)–(5.13), for signed intersection weights; §6.1.2, pp. 54–55, for the two SU(5) cubic types and local-splitting qualifications; §7.6, pp. 73–74, equations (7.76)–(7.77), for the restricted-model loci and conjugated singlet coupling."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

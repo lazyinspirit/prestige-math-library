@@ -26,6 +26,7 @@ sources:
       url: "https://arxiv.org/pdf/alg-geom/9601010v1"
       locator: "§5 before Definition 5.1: rational Chow groups of separated Deligne–Mumford stacks, bivariant groups, and zero-section intersection in the global-resolution construction."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

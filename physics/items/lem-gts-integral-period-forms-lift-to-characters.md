@@ -40,6 +40,7 @@ sources:
       url: https://arxiv.org/pdf/1208.3961v6
       locator: Section 3.2, exact sequence (20), PDF pp. 36–39.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

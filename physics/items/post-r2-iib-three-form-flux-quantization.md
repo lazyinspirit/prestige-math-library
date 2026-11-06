@@ -30,6 +30,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0509003v3"
       locator: "§2.2 Eq. (2.5), PDF pp. 5–6; §4.2 Eqs. (4.21)–(4.22), PDF pp. 28–29."
 verification:
+  precheck: pass
   sources_checked:
     date: 2026-11-05
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

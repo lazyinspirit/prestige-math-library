@@ -41,7 +41,7 @@ sources:
       url: "https://arxiv.org/pdf/2206.08166v1"
       locator: "§§113–128 (PDF pp. 53–58), §§132–142 (pp. 60–66) and §§239–241 (pp. 107–108): invariant-subspace recognition, invariant norm comparison, explicit models and graded limiting structure. The analytic extension argument is reconstructed directly below."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

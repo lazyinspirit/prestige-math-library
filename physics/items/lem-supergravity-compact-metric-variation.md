@@ -40,7 +40,7 @@ sources:
       url: "https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
       locator: "§4.1.1, printed pp. 141–145, PDF pp. 148–152; inverse-metric, Ricci, density, and compact-support variation formulas."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

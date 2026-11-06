@@ -27,6 +27,7 @@ sources:
       url: https://arxiv.org/pdf/2501.03108v2
       locator: Definition 5.5, Lemma 5.4 and the homotopy-pullback model of connective differential K-theory.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -45,7 +45,7 @@ sources:
       url: https://fgenovese1987.github.io/documents/papers/qfun_adj.pdf
       locator: §1, pp. 1–2, right quasi-representable bimodule convention; used for terminology, not as an imported localization theorem.
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -26,6 +26,7 @@ sources:
     url: https://arxiv.org/pdf/0705.0344
     locator: Definition 3.4 (PDF pp. 29–30), cohomological dg Lie identities; Definition 3.5 for morphisms.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

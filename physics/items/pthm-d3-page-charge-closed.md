@@ -35,7 +35,7 @@ sources:
       url: "https://arxiv.org/pdf/1607.00327v3"
       locator: "§7.1, Type IIB field-strength definitions and source-free Bianchi identities."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

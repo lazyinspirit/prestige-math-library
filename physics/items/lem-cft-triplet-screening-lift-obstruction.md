@@ -33,6 +33,7 @@ sources:
         irreducibility are not asserted.
 dependency_level: 3
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -48,7 +48,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0204199v3"
       locator: "§§2 and 4.4, Proposition 4.4, PDF pp. 2–3 and 17–18: bundle-gerbe anomaly action and the Dixmier–Douady criterion for stable isomorphism."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

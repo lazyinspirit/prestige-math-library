@@ -45,7 +45,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0412270v4"
       locator: "§2.1 Eqs. (2.2)–(2.6), PDF pp. 3–5; cover source density and O3 weight."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

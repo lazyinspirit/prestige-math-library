@@ -20,7 +20,7 @@ sources:
       url: https://arxiv.org/pdf/1011.1690v2
       locator: §2.2, equation (2.6), Definition 2.18 and Proposition 2.19, printed pp. 32–33
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

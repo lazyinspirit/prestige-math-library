@@ -30,7 +30,7 @@ sources:
       url: https://arxiv.org/pdf/2601.22994v1
       locator: Section 3; Proposition 3.4 has an interchanged source-category label, corrected below.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

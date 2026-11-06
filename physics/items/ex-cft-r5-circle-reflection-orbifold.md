@@ -43,7 +43,7 @@ sources:
       url: https://arxiv.org/pdf/q-alg/9703016
       locator: "Introduction and Theorems 1 and 3; used only as a scope comparison for the additional hypotheses in rigorous chiral-VOA orbifold results."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

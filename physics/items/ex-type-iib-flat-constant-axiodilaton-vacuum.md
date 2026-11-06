@@ -40,6 +40,7 @@ physical_scope: A local classical source-free vacuum of the adopted two-derivati
   flux vacuum, stability result, or empirical claim.
 aliases: []
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

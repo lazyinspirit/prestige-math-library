@@ -35,7 +35,7 @@ sources:
       url: "https://edoc.ub.uni-muenchen.de/13381/1/Schlotterer_Oliver.pdf"
       locator: "§§2.3.5 and 3.1.4, printed pp. 46–47 and 60–61 (PDF pp. 67–68 and 81–82), NS vacuum and open mass formula."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

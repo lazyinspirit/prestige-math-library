@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/2609.03152v1"
       locator: "§1.4, setup (7), equations (8)–(9), and the fixed-locus assumptions for the K-theoretic stable-pair series."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

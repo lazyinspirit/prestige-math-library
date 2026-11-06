@@ -37,6 +37,7 @@ sources:
       url: "https://pierre.ag.gerard.web.ulb.be/textbooks/books/A_First_Course_In_String_Theory.pdf"
       locator: "§7.5 and §§24.5–24.6, printed pp. 142–145 and 580–587: closed-string chiral motion, classical closed Virasoro modes, and Polyakov conventions; the local proof supplies the C2 Fourier convergence argument."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

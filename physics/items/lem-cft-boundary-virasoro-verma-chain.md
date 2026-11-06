@@ -33,6 +33,7 @@ sources:
       url: "https://arxiv.org/pdf/1004.1287v2"
       locator: "Chapter IV §4, printed pp. 71–73; determinant normalization and source proof route"
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

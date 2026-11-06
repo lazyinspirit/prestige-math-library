@@ -33,7 +33,7 @@ sources:
       url: https://arxiv.org/pdf/1012.4202v3
       locator: Lemma 9.3, equations 9.1–9.12 and equation 9.124; the analytic coefficient-extraction theorem is not imported.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

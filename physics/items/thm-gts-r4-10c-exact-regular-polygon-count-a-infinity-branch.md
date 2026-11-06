@@ -52,7 +52,7 @@ sources:
     url: https://arxiv.org/pdf/math/9903049
     locator: 'Section 2b (Maslov coverings and Gauss-map lifts), Example 2.9 (squared phase), and Section 2d (absolute index), pp. 4–10. These definitions and conventions were consulted; analytic polygon gluing is proved locally below.'
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

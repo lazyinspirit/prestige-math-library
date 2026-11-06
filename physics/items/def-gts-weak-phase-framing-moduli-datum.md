@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/0908.3499
       locator: "Sections 3.3–3.7, 4.1–4.2 and Theorem 4.8 proof: finite diagonal resolution, inverse dualizing tensor category and its trace; reconstructed in the actual master, not imported as an enhancement-identification theorem."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

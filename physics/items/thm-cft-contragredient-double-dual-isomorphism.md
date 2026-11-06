@@ -29,6 +29,7 @@ sources:
       url: https://arxiv.org/pdf/1012.4193
       locator: "Theorem 2.34, PDF pp. 67–68: the grading-restricted generalized module and its double contragredient are identified; the proof refers to FHL Theorems 5.2.1 and 5.3.1 and HLZ Lemma 2.22."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

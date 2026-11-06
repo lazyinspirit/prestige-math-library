@@ -66,6 +66,7 @@ sources:
       url: https://arxiv.org/pdf/1911.09766v1
       locator: §2.3.1–2.3.2 through Remark 2.3.18, printed pp. 60–68 (PDF pp. 61–69), for Spin lifts and the obstruction/torsor convention. The Thom-spectrum and structured-collapse construction is supplied locally; Section 4 concerns the analytic index theorem and is not cited as a Thom-spectrum source.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

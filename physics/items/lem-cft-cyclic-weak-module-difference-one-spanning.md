@@ -28,6 +28,7 @@ sources:
       url: https://arxiv.org/pdf/math/0209101v2
       locator: "Lemma 2.4 and complete proof, printed pp. 8–9."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

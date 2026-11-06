@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/math/0404373
       locator: §2.3.5.1, characteristic-zero normalization and shuffle multiplication; the proof below supplies the module homotopies locally.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -29,6 +29,7 @@ dependency_roles:
   def-countable-choice: mathematical-premise
   def-sobolev-space-wkp-and-its-norm: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

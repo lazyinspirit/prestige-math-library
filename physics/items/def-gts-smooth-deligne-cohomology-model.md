@@ -41,6 +41,7 @@ sources:
       url: https://arxiv.org/pdf/dg-ga/9407015v1
       locator: Section 11, PDF pp. 14–15, Deligne cocycle convention.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

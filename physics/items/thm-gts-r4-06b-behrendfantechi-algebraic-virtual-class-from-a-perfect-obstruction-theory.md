@@ -28,6 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/alg-geom/9601010v1"
       locator: "§5, Definition 5.1 and construction of the class; Proposition 5.3 and its full resolution-independence proof."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

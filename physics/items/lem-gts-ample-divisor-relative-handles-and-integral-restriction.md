@@ -23,6 +23,7 @@ dependency_roles:
   thm-morse-lemma: mathematical-premise
   lem-local-morse-sublevel-pair-is-a-handle-pair: mathematical-premise
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

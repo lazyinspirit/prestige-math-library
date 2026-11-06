@@ -23,7 +23,7 @@ sources:
       url: https://arxiv.org/pdf/math/0309070v3
       locator: §3.1, Definition 3.1 and Example 3.2, log structures, morphisms and divisorial data
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

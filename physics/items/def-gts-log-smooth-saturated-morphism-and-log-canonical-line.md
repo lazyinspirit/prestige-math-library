@@ -32,7 +32,7 @@ sources:
       url: https://arxiv.org/pdf/2010.13656v3
       locator: §3.2, relative log differentials and log-canonical line bundle
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

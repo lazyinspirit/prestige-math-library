@@ -33,7 +33,7 @@ sources:
       url: "https://arxiv.org/pdf/2410.19600v1"
       locator: "§3.2.1, equations (3.7)–(3.13), printed pp. 28–29; independent string/Einstien frame relation, determinant, p-form norm, and Weyl formula."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

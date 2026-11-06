@@ -23,7 +23,7 @@ sources:
       locator: "§§4.2–4.3: canonical odd antibracket; §§8.5–8.7: quantum-master-equation consistency and local counterterm removability; §10.7, equations (10.44)–(10.49), gives the density-based BV Laplacian and square-root measure on isotropic integration submanifolds. The finite pushforward and stationary identities here are derived locally and not attributed to this source."
 proof_strategy: direct
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

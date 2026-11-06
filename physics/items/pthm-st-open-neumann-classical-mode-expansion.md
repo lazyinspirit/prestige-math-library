@@ -39,6 +39,7 @@ sources:
       url: "https://pierre.ag.gerard.web.ulb.be/textbooks/books/A_First_Course_In_String_Theory.pdf"
       locator: "§6.5, §9.4, and §24.2, printed pp. 112–115, 183–186, and 570–572: endpoint variation, Neumann open modes, and classical constraint modes."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -34,6 +34,7 @@ sources:
     locator: Section 9.1–9.3 and Appendix B; the exact local constructions and reading limits are specified below.
 dependency_level: 3
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

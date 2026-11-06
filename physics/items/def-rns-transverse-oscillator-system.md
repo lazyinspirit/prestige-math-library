@@ -31,7 +31,7 @@ sources:
       url: "https://edoc.ub.uni-muenchen.de/13381/1/Schlotterer_Oliver.pdf"
       locator: "§§2.2.1–2.2.4 and §3.1.4, printed pp. 35–40 and 60–61 (PDF pp. 56–61 and 81–82), fermion sectors and open-string mass shell."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -46,7 +46,7 @@ sources:
       url: https://arxiv.org/pdf/math/0506056v4
       locator: Sections 8.1–8.8; the actual cone retraction, restricted-dual bounds and filtered W-mode comparison are constructed below.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

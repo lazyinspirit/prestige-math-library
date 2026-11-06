@@ -37,7 +37,7 @@ sources:
       url: "https://arxiv.org/pdf/1011.6388v2"
       locator: "§3, pp. 5–8, Proposition and proof for the restricted smooth global-Weierstrass Calabi–Yau fourfold class."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

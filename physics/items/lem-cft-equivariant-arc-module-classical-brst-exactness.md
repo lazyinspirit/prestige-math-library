@@ -24,7 +24,7 @@ sources:
       url: https://arxiv.org/pdf/1004.1554
       locator: Retrieved v5, sections 3.6–3.8 and 4.4; the finite equivariant-module transport and Hopf formulas below replace citation-only flatness/descent inputs.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

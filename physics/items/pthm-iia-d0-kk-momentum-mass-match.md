@@ -28,7 +28,7 @@ sources:
     - title: "Paul K. Townsend, Four Lectures on M-theory, §§1–3"
       url: https://arxiv.org/pdf/hep-th/9612121v3
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

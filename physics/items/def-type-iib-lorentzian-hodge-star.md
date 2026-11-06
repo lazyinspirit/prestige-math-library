@@ -38,6 +38,7 @@ sources:
       locator: "Chapter 1, Hodge duality, equations (1.87)-(1.88), PDF pp. 29-30; Chapter 2, Levi-Civita tensor and metric volume density, equation (2.42), PDF p. 58."
 aliases: []
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

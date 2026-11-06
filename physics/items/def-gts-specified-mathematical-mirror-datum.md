@@ -23,7 +23,7 @@ sources:
       url: https://arxiv.org/pdf/alg-geom/9411018v1
       locator: pp. 16–18, tentative homological mirror comparison and required categorical data
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

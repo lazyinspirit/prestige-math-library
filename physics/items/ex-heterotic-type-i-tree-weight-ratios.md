@@ -30,7 +30,7 @@ sources:
       locator: "§1, equations (3)–(6), printed pp. 2–3, the separate heterotic and Type-I tree-level dilaton weights."
       source_key: "R4:R4-SUGRA-13:S2"
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

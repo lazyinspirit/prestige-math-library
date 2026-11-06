@@ -54,6 +54,7 @@ sources:
       url: https://math.stanford.edu/~ralph/bookR4.pdf
       locator: "Theorems 9.2–9.5, normal Thom class, Poincare duality and transverse intersection."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

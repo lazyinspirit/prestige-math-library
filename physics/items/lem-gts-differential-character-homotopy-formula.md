@@ -33,6 +33,7 @@ sources:
       url: https://arxiv.org/pdf/math/0211216v2
       locator: Section 2.3, cochain model for differential characters, PDF pp. 8–10.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

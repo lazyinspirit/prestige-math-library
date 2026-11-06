@@ -31,7 +31,7 @@ sources:
       url: https://arxiv.org/pdf/1103.4956v2
       locator: "§2 Proposition2.4, printed6, formal parameter comparison for actual nontrivial invariant deformations; §3 Proposition3.8, printed12, its named application. The recursive all-arity gauge, q-adic convergence and finite-free-cohomology/minimality distinctions are proved locally; no unrestricted source cyclic-dimension claim is imported. Complete paper1–29 read."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

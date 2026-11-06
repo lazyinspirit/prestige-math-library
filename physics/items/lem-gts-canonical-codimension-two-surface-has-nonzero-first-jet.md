@@ -34,7 +34,7 @@ sources:
     locator: 'arXiv:alg-geom/9705012v1, complete printed pp. 1–10 read, especially §2 pp. 4–8: Lemma 2.1 and Theorems
       2.2–2.5. This is source context; the present proof reconstructs its actual stated interface locally.'
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -32,7 +32,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§5.1–5.4.3 and 6.1–6.2.3 (PDF file pp.115–145; printed pp.108–138); printed pp.108–138); printed pp.108–138); printed pp.108–138); printed pp.108–138); printed pp.108–138); printed pp.108–138); formal Faddeev–Popov prescription, ghost determinant, residual moduli, and path-integral limits."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

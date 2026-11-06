@@ -28,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9611100v1"
       locator: "§II.2, Eqs. (3)–(12), PDF pp. 4–5; auxiliary-scalar gauge and the free chiral two-form equation."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

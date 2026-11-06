@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0503194v2"
       locator: "Appendix A.3, equations (A.6)–(A.8), for the separability idempotent and relative tensor retract."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

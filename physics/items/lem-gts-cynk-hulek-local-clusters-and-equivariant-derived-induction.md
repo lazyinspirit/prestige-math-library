@@ -42,7 +42,7 @@ sources:
     locator: §§2.2–2.3 (PDF pp.6–10) and §§5.4–5.5 (pp.28–34), especially Propositions5.1–5.2,Lemma5.3 andCorollary5.4;
       actual A1/A2/scalar3 and residual-action comparison.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

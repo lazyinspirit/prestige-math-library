@@ -23,7 +23,7 @@ sources:
       url: https://arxiv.org/pdf/2605.00516v1
       locator: §1, polarized maximal degeneration and normalized Ricci-flat metrics
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

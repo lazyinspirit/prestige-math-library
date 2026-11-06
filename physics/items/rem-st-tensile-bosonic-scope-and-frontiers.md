@@ -20,7 +20,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§2.2–2.4 and 5.1–5.4.3 (PDF file pp.39–54 and 115–131; printed pp.32–47 and 108–124); printed pp.32–47 and 108–124); printed pp.32–47 and 108–124); printed pp.32–47 and 108–124); printed pp.32–47 and 108–124); printed pp.32–47 and 108–124); printed pp.32–48 and 108–124); this source fixes the flat tensile scope and labels the path-integral and BRST limits."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

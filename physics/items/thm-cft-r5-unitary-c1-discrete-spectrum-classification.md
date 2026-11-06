@@ -65,7 +65,7 @@ sources:
       url: https://doi.org/10.1007/s00041-022-09944-4
       locator: "§2.1, printed pp. 8–9: the multivariate Hermite functions form a basis of the Schwartz space and are eigenfunctions of the harmonic oscillator; the paper states this standard basis result but does not prove it in that paragraph."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

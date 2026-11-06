@@ -20,7 +20,7 @@ sources:
       url: https://arxiv.org/pdf/2007.04190v1
       locator: "Section 2.1, PDF pp. 3–5, differentiates dilation-eigenvector identities to obtain Jordan blocks; §3.1, PDF pp. 11–12, derives logarithmic two-point coefficients. The finite-dimensional exponential argument here is proved locally."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

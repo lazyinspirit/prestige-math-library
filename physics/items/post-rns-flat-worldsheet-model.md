@@ -24,7 +24,7 @@ sources:
       url: "https://www.thphys.uni-heidelberg.de/courses/weigand/Strings11-12.pdf"
       locator: "Chapter 6.1, printed pp. 128–131, equations (6.7)–(6.22), including the adopted supercurrent convention and residual constraints."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

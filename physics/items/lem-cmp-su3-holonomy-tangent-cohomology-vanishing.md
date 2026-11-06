@@ -33,7 +33,7 @@ sources:
       url: "https://members.ift.uam-csic.es/auranga/lect13.pdf"
       locator: "PDF pp. 20–23: Calabi–Yau Hodge/holomorphic-form conventions. The local determinant-holonomy, contraction and Hodge-star arguments below supply the analytic endpoint vanishings."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

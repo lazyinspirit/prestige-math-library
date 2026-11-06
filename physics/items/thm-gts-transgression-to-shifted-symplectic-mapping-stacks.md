@@ -31,6 +31,7 @@ sources:
     url: https://arxiv.org/pdf/2510.04625
     locator: §5.2, Definition 5.6, Example 5.7, Theorem 5.8 and Lemma 5.9 (PDF pp. 40–41).
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

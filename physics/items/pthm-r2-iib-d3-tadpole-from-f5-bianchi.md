@@ -46,7 +46,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0412270v4"
       locator: "§2.1 Eqs. (2.2)–(2.6), PDF pp. 3–5; cover tadpole, D3 images, and O3 cover-density charge QO3=-1/2."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

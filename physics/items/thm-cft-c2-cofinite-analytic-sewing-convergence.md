@@ -48,6 +48,7 @@ sources:
       url: https://arxiv.org/pdf/2411.07707v4
       locator: "Theorem 4.9 and proof for ordinary sewing, §4.3, PDF pp. 55–60; Theorem 4.13 and setup for pseudo-sewing, §4.4, PDF pp. 61–64."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

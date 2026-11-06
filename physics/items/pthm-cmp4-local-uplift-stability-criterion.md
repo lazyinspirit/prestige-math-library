@@ -26,7 +26,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

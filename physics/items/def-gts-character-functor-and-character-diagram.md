@@ -25,6 +25,7 @@ sources:
       url: https://arxiv.org/pdf/math/0701077v1
       locator: Section 1, Definition of Character Functor and Character Diagram, PDF pp. 2–3.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

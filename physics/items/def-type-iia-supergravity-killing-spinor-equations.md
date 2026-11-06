@@ -26,7 +26,7 @@ sources:
       url: "https://arxiv.org/pdf/1607.00327v3"
       locator: "§§3.2–3.6 for Lorentzian spinors and Clifford conventions; §6.2, Theorem 6.8 and its proof for the type IIA Killing-spinor equations and the on-shell bosonic-solution hypothesis."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

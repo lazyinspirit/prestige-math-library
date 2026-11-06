@@ -70,6 +70,7 @@ sources:
         no blanket external classification is used as a premise."
 dependency_level: 8
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

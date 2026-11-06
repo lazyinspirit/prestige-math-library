@@ -35,6 +35,7 @@ sources:
       url: "https://arxiv.org/pdf/1409.7616v2"
       locator: "§II.3, Example on printed pp. 38-39 (PDF pp. 43-44), for the two even extensions and their sign-change isometry; Corollaire 3.6 on printed p. 41 (PDF p. 46) applies this to rank 16. The local proof enumerates the four dual quotient classes and the two even extensions."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

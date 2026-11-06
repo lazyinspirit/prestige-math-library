@@ -40,6 +40,7 @@ physical_scope: Local string-frame supersymmetry condition for a smooth nonzero 
   equations.
 aliases: []
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

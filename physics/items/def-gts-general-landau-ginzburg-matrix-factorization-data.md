@@ -21,7 +21,7 @@ sources:
       url: https://arxiv.org/pdf/1002.2116v3
       locator: "§2.1, Definition 2.1.1 and equation (2.3), printed pp. 15–16: the finite-projective commutative-algebra definition and Hom differential. Here the same algebraic construction is applied to finite-rank locally free sheaves and global sheaf maps on the stated ringed space; no singularity, generation or equivalence theorem is imported."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

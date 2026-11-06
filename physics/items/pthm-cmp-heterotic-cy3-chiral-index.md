@@ -58,7 +58,7 @@ sources:
     url: https://members.ift.uam-csic.es/auranga/lect13.pdf
     locator: 'PDF pp. 20–23: Dirac index, bundle cohomology and the convention-dependent sign of the net chiral count.'
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

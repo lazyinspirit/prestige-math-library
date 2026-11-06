@@ -37,6 +37,7 @@ sources:
       locator: "PDF p.4, introduction paragraph identifying families with H1(X,V) and antifamilies with H2(X,V); PDF p.5, §2 preamble and equation (2.1), and PDF p.6, Table 1 and start of §2.1: gauge-adjoint branching into structure-group and gauge-centralizer representations, associated-bundle harmonic one-forms and conjugate-sector assignments. Physical lowest-order smooth Calabi–Yau matter input; no new mathematical theorem is imported."
 physical_scope: "Adopted gauge-adjoint matter dictionary with explicit bundle-structure/unbroken-gauge representation pairing, at leading tree-level, two-derivative zero-mode order in a smooth heterotic bundle phase, with constant dilaton coupling g_str=exp(Phi_0) tending to zero and alpha'/L^2 tending to zero at fixed smooth internal shape and bundle. Corrections and finite-parameter error bounds are not supplied; singular, non-geometric and arbitrary string vacua are outside scope."
 verification:
+  precheck: pass
   sources_checked:
     date: 2026-11-04
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

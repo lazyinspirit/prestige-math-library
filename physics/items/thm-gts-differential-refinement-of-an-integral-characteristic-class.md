@@ -47,6 +47,7 @@ sources:
       url: https://arxiv.org/pdf/1208.3961v6
       locator: Section 2.3, Lemma 2.51, equations (5)–(6), PDF p. 13, for transgression additivity modulo exact forms; Section 3.3, Lemma 3.40 and Theorem 3.42 with proof, PDF pp. 42–44, for the refinement argument and its finite classifying approximations.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

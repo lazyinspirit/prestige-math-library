@@ -31,7 +31,7 @@ sources:
       url: https://arxiv.org/pdf/2310.07949v3
       locator: Sections 2.3–2.4 and chapter 9; finite-cover, chart-descent and absolute-gauge constructions are given below.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

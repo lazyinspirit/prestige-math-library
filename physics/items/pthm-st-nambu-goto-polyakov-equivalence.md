@@ -31,6 +31,7 @@ sources:
       url: "https://pierre.ag.gerard.web.ulb.be/textbooks/books/A_First_Course_In_String_Theory.pdf"
       locator: "§24.6, printed pp. 583–587, equations (24.70)–(24.90): metric variation, proportionality, determinant, and classical action equivalence."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

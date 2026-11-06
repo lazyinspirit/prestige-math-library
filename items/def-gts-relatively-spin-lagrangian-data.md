@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/0802.1703v3
       locator: §3, printed pp. 15–19; Theorem 3.8 uses compact relatively spin Lagrangians
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

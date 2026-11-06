@@ -38,7 +38,7 @@ sources:
     url: https://arxiv.org/pdf/0802.1703v3
     locator: §3, printed pp. 15–19, shifted bar definition, curvature, Novikov completion, disk operations and Theorem 3.8
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

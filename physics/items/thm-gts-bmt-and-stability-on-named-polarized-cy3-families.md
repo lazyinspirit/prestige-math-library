@@ -42,7 +42,7 @@ sources:
     url: https://arxiv.org/pdf/2509.24990v2
     locator: Theorems 1.1, 1.3, and 1.4; §§2.4, 3, 4, and 5
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

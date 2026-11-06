@@ -33,6 +33,7 @@ sources:
     url: https://arxiv.org/pdf/2510.04625
     locator: Complete §4.3, Definition 4.8, Examples 4.9–4.12 and Remark 4.13 (PDF pp. 35–38).
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

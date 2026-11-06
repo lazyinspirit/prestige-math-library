@@ -28,6 +28,7 @@ sources:
       url: https://www.damtp.cam.ac.uk/user/tong/string/string.pdf
       locator: "§§5.1.1–5.3.1, printed pp. 113–120: bc ghosts, their OPE/weights and the formal status of the Faddeev–Popov path-integral argument."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

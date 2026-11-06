@@ -56,6 +56,7 @@ sources:
     - title: The Stacks Project, Abelian sheaves on a space, Lemma 19.4.1
       url: https://stacks.math.columbia.edu/tag/01DF
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

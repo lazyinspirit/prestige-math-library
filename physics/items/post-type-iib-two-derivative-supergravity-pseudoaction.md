@@ -31,6 +31,7 @@ sources:
 physical_scope: "Adopted massless, source-free, local ten-dimensional type IIB bosonic effective action at tree level and leading two-derivative order. It excludes brane currents, loop and higher-derivative terms, global potential patching, and claims that the pseudoaction alone supplies the self-dual five-form dynamics."
 aliases: []
 verification:
+  precheck: pass
   sources_checked:
     date: 2026-11-04
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

@@ -30,7 +30,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0607105v3"
       locator: "pp. 2–5; decomposition of Q_B and the D=26, intercept-one condition."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -32,7 +32,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture III §3.3, PDF pp. 27–31; Wess–Zumino coupling and localized RR charge."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

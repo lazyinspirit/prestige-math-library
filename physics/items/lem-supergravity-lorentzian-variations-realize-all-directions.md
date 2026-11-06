@@ -42,7 +42,7 @@ sources:
       url: "https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
       locator: "§2.1, Lorentzian signature and local orthonormal frames."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

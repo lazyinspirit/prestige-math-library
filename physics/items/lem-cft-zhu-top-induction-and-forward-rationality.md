@@ -41,7 +41,7 @@ sources:
       url: https://arxiv.org/pdf/math/0607679v1
       locator: Section 2, top correspondence and forward rationality; no reverse rationality theorem is imported here.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

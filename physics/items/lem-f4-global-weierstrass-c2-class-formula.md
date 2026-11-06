@@ -64,7 +64,7 @@ sources:
       url: "https://arxiv.org/pdf/1806.01854v1"
       locator: "§2.2, pp. 7–11, Weierstrass ambient line-bundle twists and section."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

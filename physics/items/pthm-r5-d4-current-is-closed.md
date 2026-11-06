@@ -35,7 +35,7 @@ sources:
       url: "https://link.springer.com/content/pdf/10.1007/978-1-4419-9982-5.pdf"
       locator: "Chapter 16, Stokes' theorem for oriented manifolds with boundary; local application to compactly supported test forms."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

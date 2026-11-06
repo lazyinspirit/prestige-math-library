@@ -28,7 +28,7 @@ sources:
       url: https://arxiv.org/pdf/1309.2370v6
       locator: Convention 7.0.1, equations 7.5.1 and 7.6.1, Definitions 7.7.2–7.7.6, Proposition 7.7.4 and §§10.1–10.4; local completion extension stated separately
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

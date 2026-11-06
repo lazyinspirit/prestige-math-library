@@ -43,7 +43,7 @@ sources:
       url: https://arxiv.org/pdf/1707.08785
       locator: "§2.3, Theorem 2.4 (probabilistic three-point/DOZZ identity); §5.2 opening of its proof. The proof continues through §§5–11 and is reconstructed by the declared local probabilistic DOZZ supplier."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

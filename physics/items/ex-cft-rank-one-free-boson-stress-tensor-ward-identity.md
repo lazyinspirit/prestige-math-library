@@ -47,6 +47,7 @@ sources:
       url: https://www.damtp.cam.ac.uk/user/tong/string/string.pdf
       locator: "§4.3.3, printed pp. 79–81 (PDF pp. 87–89), free-scalar stress tensor and primary OPE; §4.4, printed pp. 82–84 (PDF pp. 90–92), the TT OPE and central charge."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

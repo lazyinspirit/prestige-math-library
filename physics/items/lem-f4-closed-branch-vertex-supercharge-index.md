@@ -42,6 +42,7 @@ sources:
       url: https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf
       locator: "Theorem 180, printed pp.88–90."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

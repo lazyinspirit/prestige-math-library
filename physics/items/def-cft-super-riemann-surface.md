@@ -27,6 +27,7 @@ sources:
       url: https://arxiv.org/pdf/2205.01106v2
       locator: "§2.1, PDF p. 4, for the 1|1 distribution and NS/R puncture conventions."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

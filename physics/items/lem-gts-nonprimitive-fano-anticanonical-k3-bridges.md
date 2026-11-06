@@ -66,7 +66,7 @@ dependency_roles:
   thm-proper-quasi-finite-is-finite: mathematical-premise
   lem-finite-birational-to-normal-is-isomorphism: mathematical-premise
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

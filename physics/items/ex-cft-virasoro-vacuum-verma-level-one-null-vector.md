@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/hep-th/9108028v1
       locator: "§4.2, printed pp. 55–60: the level-one Gram determinant (2h) and the level-two matrix."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

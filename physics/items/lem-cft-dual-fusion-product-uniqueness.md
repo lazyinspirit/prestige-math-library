@@ -21,6 +21,7 @@ sources:
       url: https://arxiv.org/pdf/2305.10180v4
       locator: "Theorem 0.5 and Remark 3.22; the uniqueness argument below is the direct representing-object argument."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

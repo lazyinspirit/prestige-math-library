@@ -23,6 +23,7 @@ provenance:
 physical_scope: "One source-specific, classical, four-dimensional N=1 constant-mode DGKT solution with smeared/averaged O6 charge. It is not a localized global ten-dimensional solution or a universal theorem about massive IIA."
 empirical_premises: []
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

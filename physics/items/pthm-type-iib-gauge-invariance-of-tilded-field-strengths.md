@@ -35,6 +35,7 @@ physical_scope: Conditional local calculation for smooth potentials and gauge pa
   brane, or boundary action claim.
 aliases: []
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

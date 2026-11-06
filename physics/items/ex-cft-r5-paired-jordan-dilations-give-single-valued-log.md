@@ -26,7 +26,7 @@ sources:
       url: https://arxiv.org/pdf/2007.04190v1
       locator: "§§2.1 and 3.1, on Jordan dilation and logarithmic coefficients; this local finite-dimensional example supplies no vertex-algebra or full-CFT construction."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

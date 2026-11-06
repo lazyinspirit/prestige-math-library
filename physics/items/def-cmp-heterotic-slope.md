@@ -31,7 +31,7 @@ sources:
       url: "https://odr.chalmers.se/bitstreams/f124ffe2-1d73-4b8d-bd00-38f03504f9f8/download"
       locator: "Chapter 4, §4.1, equations (4.1)–(4.3): degree and slope defined from a Kähler class; the local definition fixes the complex threefold normalization."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

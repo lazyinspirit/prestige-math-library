@@ -28,7 +28,7 @@ sources:
       url: https://cgp.ibs.re.kr/~yongoh/all.pdf
       locator: §18.4.4, Proposition 18.4.4(2); §18.4.6, Theorem 18.4.6, Eq. (18.4.25); §18.4.7, Remark 18.4.7, printed pp. 479–483
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

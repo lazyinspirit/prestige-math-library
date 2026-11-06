@@ -23,7 +23,7 @@ sources:
       url: "https://members.ift.uam-csic.es/auranga/lect13.pdf"
       locator: "PDF pp. 16–19: holomorphic gauge bundles, the tangent-bundle standard embedding, and the representation decomposition. The chart-gluing definition below is supplied locally."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

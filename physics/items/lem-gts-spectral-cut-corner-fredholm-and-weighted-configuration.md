@@ -40,6 +40,7 @@ sources:
       corner capping, arbitrary-forcing inverse, weighted nonlinear charts and full proof below are local constructions,
       not assertions imported from these sections.'
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

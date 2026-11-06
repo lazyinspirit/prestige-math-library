@@ -25,7 +25,7 @@ sources:
       url: https://www.math.utoronto.ca/mgualt/Morse%20Theory/Salamon%20floer.pdf
       locator: §1.1, printed p. 3, Hamiltonian vector-field convention and local evolution
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

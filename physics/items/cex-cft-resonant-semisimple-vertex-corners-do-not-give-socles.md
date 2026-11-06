@@ -35,7 +35,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-706-noncommutative-algebra-spring-2023/mit18_706_s23_lec06.pdf
       locator: "§6.2, Definitions 6.6–6.7 and Example 6.8, complete four-page lecture note; supports essential-epimorphism and projective-cover conventions, while the example is calculated locally."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

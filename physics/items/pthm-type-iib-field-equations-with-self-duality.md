@@ -55,6 +55,7 @@ physical_scope: Conditional local source-free classical field equations of the s
   currents, loop or higher-derivative corrections, global flux quantization, or empirical claim is included.
 aliases: []
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

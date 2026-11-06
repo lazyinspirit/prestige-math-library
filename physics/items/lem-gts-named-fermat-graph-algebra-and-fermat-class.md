@@ -37,7 +37,7 @@ sources:
       url: https://arxiv.org/pdf/math/0310414v4
       locator: "§6a–b, printed pp. 29–31 (PDF 33–35), equations (6.2)–(6.7); §8c–e, printed pp. 58–61 (PDF 62–65), especially Proposition 8.8 and equation (8.26). This citation supplies the surface relative/action-line coefficient context only. The graph-sphere algebra, signed rigid counts, contact-power comparison, even-coordinate Fermat class and N=5 case are local constructions; Seidel's different quartic vanishing-cycle computation is §11b–c, Proposition 11.6."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

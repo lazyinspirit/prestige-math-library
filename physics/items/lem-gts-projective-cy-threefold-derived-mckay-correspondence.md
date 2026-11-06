@@ -50,7 +50,7 @@ sources:
     locator: Theorem1, full proof and Corollary2; complete two-page v1 read, including invariant geometric source
       parameters.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

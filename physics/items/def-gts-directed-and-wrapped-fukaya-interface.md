@@ -31,7 +31,7 @@ sources:
       url: https://arxiv.org/pdf/0712.3177v2
       locator: Introduction, pp. 1–2, chord complexes, sequential continuation and the homotopy direct limit; used for interface conventions only, not an imported construction theorem.
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -47,7 +47,7 @@ sources:
       url: https://arxiv.org/pdf/1211.7124v3
       locator: Theorem 10.8, Corollary 10.9 and Theorem 10.10; the minimal-series cross-factor and extension arguments are supplied here.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

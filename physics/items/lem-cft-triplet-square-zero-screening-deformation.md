@@ -22,6 +22,7 @@ sources:
       url: https://arxiv.org/pdf/0902.3417v2
       locator: "Theorem 2.1; §4 square-zero extension; Lemma 9.1 and Theorem 9.1. This lemma proves the square-zero special case directly, including the formal identity and module-Jacobi transport."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

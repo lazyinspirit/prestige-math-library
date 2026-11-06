@@ -35,7 +35,7 @@ sources:
       url: "https://bpb-us-w2.wpmucdn.com/voices.uchicago.edu/dist/1/1946/files/2020/08/Math_319.pdf"
       locator: "§2a, Lemma 2.9 and Theorem 2.10: smooth Riemannian surfaces admit local isothermal coordinates; the lemma constructs a compatible complex structure from orientation-preserving isothermal charts. The theorem refers to Spivak, A Comprehensive Introduction to Differential Geometry, Vol. IV, Addendum 1 to Chapter 9, for a full proof."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

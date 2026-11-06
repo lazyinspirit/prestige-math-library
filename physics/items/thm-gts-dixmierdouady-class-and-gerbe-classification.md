@@ -46,6 +46,7 @@ sources:
       url: https://arxiv.org/pdf/1208.3961v6
       locator: Sections 3.1–3.2, exponential sequence and Deligne complex, PDF pp. 32–39.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

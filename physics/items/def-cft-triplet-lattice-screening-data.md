@@ -24,6 +24,7 @@ sources:
       url: https://arxiv.org/pdf/0707.1857v2
       locator: "§1, printed pp.4–7: rank-one lattice, conformal vector, screenings and triplet generators; §3, printed pp.13–15: endpoint labels."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -42,7 +42,7 @@ sources:
     url: https://arxiv.org/pdf/1309.2370v6
     locator: §9.3 Definition 9.3.1 and Lemma 9.3.2 with complete proof; §§5.2–5.3, especially Lemmas 5.2.3–5.2.5.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

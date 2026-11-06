@@ -39,7 +39,7 @@ sources:
       url: https://stacks.math.columbia.edu/tag/0GPZ
       locator: "Section 91.7, Lemma 91.7.4 (0GPZ): square-zero ringed-space extensions with any O_X-module kernel are classified by Ext^1 of the naive cotangent complex."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -35,7 +35,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0201028v2"
       locator: "§2.1, equation (2.4), PDF p. 4; Kachru–Schulz–Trivedi D3/O3 source-coupled five-form identity, used here only through the separately adopted single-D3 premise."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

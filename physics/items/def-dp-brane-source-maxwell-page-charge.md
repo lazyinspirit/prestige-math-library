@@ -36,6 +36,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture III §3.3, equations (3.20)–(3.24), PDF pp. 27–31; D3 RR charge and flux conventions."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -21,7 +21,7 @@ sources:
       url: "https://arxiv.org/pdf/2410.19600v1"
       locator: "§3.2.1, equations (3.11)–(3.12), printed p. 29; the dimension-D Weyl transformation of scalar curvature."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

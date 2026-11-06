@@ -27,6 +27,7 @@ sources:
       url: https://arxiv.org/pdf/1208.6449v3
       locator: "§1, equations (1.1)–(1.8), PDF pp. 3–6; §2, PDF pp. 7–8: channel OPE and the separated-insertion domain."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

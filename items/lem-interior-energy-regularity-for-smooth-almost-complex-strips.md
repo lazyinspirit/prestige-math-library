@@ -30,6 +30,7 @@ dependency_roles:
   def-countable-choice: mathematical-premise
   lem-heinz-small-energy-mean-value-estimate: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

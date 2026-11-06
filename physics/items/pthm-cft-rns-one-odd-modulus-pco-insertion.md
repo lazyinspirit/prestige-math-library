@@ -24,6 +24,7 @@ sources:
       url: https://arxiv.org/pdf/2205.01106v2
       locator: "§5.1, equations (5.1)–(5.7), PDF pp. 17–18."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -33,7 +33,7 @@ sources:
       url: "https://arxiv.org/pdf/1412.1030v1"
       locator: "§3.1, equations (3.5)–(3.11), for the type-II canonical momenta and minimal curved BRST transformations; §3.2, equations (3.12)–(3.23), for the curved non-minimal sector. Neither section establishes the complete sourced QME restoration claimed by no item here."
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

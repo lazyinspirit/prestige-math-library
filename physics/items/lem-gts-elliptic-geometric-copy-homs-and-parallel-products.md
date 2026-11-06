@@ -37,7 +37,7 @@ sources:
       url: https://arxiv.org/pdf/math/9801119v3
       locator: "Sections3.1–3.3, printed282–284, and5.1 printed289: source grading and ordinary geometric-category context. The omitted parallel-copy construction is supplied locally here; no clean-circle comparison is imported from the source's equal-slope remark."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

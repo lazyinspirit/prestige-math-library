@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/math/9910179
       locator: "Printed pp.13–14, §4.2, modules, morphisms and suspended comodules; printed pp.19–20, §§7.2–7.4, categories, modules and Yoneda vocabulary. The category exercise and published module conventions are context; all custom left/opposite signs, homologically unital contractions and count transport below are proved locally."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

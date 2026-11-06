@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9510017v3"
       locator: "Eqs. (12)–(15), PDF pp. 7–8; RR Dirac quantization and the stated factor-of-two discrepancy in the D2 comparison."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

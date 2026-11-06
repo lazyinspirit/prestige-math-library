@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/1012.4202v3
       locator: Section 9, local grading conditions and Theorems 9.17 and 9.27; the present lemma isolates the explicit cyclic category-admission clause and does not import those theorems.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

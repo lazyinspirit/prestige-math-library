@@ -37,7 +37,7 @@ sources:
       url: "https://arxiv.org/pdf/q-alg/9612010"
       locator: "§§2–4; higher Zhu operations and admissible-module layers."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/math/0506056v4
       locator: Sections3.9,4.16,6.5 and8.1–8.5; in particular PDFpp70–75, equations333 and352–355 define the Chevalley-dual pairing and the top-height/induced-tail dual filtration. The literal equation330 is replaced by the signed bridge below in the production J-minus-chi convention.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

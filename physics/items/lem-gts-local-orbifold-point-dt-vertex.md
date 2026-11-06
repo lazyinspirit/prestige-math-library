@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/2412.08531v1
       locator: "Section4.3 displays the source vertex product; the signs, interlacing product and Hall extraction are reconstructed below. No full-text reading of its cited Bryan–Cadman–Young proof is claimed."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

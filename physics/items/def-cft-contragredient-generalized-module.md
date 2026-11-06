@@ -30,6 +30,7 @@ sources:
       url: https://arxiv.org/pdf/1012.4193
       locator: "§2, Definition 2.32, Theorem 2.34 and Definition 2.35, PDF pp. 66–68, for the restricted dual, induced action, and asserted module structure."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

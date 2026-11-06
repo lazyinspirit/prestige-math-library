@@ -37,6 +37,7 @@ sources:
       url: "https://pierre.ag.gerard.web.ulb.be/textbooks/books/A_First_Course_In_String_Theory.pdf"
       locator: "§§24.1 and 24.6, printed pp. 570–571 and 583–587: canonical momentum, Hamiltonian density, and metric constraints."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

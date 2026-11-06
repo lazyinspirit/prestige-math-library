@@ -28,6 +28,7 @@ page: cft-euclidean-axioms-and-sewing
 reference: items/lem-cft-positive-half-sided-modular-commutation.md
 dependency_level: 0
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

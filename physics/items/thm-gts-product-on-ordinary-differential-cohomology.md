@@ -40,6 +40,7 @@ sources:
       url: https://arxiv.org/pdf/math/0701077v1
       locator: Section 1, Character Diagram, PDF pp. 2–4.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

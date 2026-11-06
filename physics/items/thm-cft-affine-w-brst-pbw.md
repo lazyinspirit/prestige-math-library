@@ -43,7 +43,7 @@ sources:
       url: https://arxiv.org/pdf/1605.00138v2
       locator: §§5.2 and 5.6, associated-graded BRST cohomology and the quantum PBW spectral sequence.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

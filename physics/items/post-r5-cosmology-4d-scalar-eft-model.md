@@ -25,6 +25,7 @@ provenance:
   proof: not-applicable
 physical_scope: "An adopted low-energy Einstein-frame model premise for the stated smooth scalar EFT data: the displayed two-derivative scalar action and compactly supported scalar stationarity, together with the direct Einstein equation at zero cosmological constant. It does not derive either premise, establish EFT control or solution existence, or claim a global string realization or empirical truth."
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -54,6 +54,7 @@ sources:
       locator: "Section 3, especially the spinor bundle, Clifford multiplication, Weyl, and Majorana conventions, printed pp. 9-14."
 aliases: []
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

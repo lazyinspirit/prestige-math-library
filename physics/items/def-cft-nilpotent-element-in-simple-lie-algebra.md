@@ -23,7 +23,7 @@ sources:
       url: https://www.imo.universite-paris-saclay.fr/~anne.moreau/Arc_space-vertex_algebras-BOOK_version.pdf
       locator: Appendix D.3, the adjoint nilpotence convention for nilpotent elements and triples.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

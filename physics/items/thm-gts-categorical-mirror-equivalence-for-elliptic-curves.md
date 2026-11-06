@@ -50,7 +50,7 @@ sources:
     url: "https://arxiv.org/pdf/math/0001048v2"
     locator: "Complete §§2–3 printed7–18: Definition2.1, Theorem2.2/Lemma2.3 arity-weight induction including the exceptional weight-two case, Theorem3.1 unipotent extension, §3.3 isogeny descent and §3.4 fundamental Massey products. This is transversal comparison; the separate local Hamiltonian-copy proof supplies nontransversal/derived completion. The source omits Theorem3.1 proof by analogy; the present matrix/Artin construction remains local. §1.5 also read."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

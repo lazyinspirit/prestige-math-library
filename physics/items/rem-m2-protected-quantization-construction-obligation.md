@@ -22,6 +22,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

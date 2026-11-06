@@ -41,6 +41,7 @@ sources:
       url: https://arxiv.org/pdf/1806.01854v1
       locator: "§§9.1–9.2, printed pp. 84–87, flux versus flat background and constraints; §9.5.1, pp. 93–95, the algebraic-background curve reduction. These do not supply the general physical construction requested here."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

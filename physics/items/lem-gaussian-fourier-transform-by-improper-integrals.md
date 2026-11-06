@@ -58,6 +58,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

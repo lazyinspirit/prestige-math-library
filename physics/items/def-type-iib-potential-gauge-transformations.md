@@ -30,6 +30,7 @@ physical_scope: Local small gauge transformations of smooth potentials on a sour
   excludes large gauge transformations, nontrivial gerbe patching, brane worldvolume fields, and boundary contributions.
 aliases: []
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

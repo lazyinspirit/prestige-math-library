@@ -29,7 +29,7 @@ sources:
       locator: "§2.4, equations (25)–(31), printed pp. 14–16, Type-I/heterotic Green–Schwarz and ten-dimensional anomaly-polynomial conventions."
       source_key: "R4:R4-SUGRA-14:S1"
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

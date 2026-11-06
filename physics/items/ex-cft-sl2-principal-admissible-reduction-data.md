@@ -38,7 +38,7 @@ sources:
       url: https://arxiv.org/pdf/1211.7124v3
       locator: Theorem 10.2, rank-one principal-admissible level test.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

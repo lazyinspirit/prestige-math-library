@@ -49,7 +49,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
       locator: "§11.6, Lemma 11.13 and Theorem 11.14 (Wu), printed pp. 131–133; diagonal Thom class, dual-basis proof, and total identity."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

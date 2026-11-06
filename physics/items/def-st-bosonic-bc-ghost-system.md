@@ -24,7 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§5.1.2–5.2 (PDF file pp.119–124; printed pp.112–117); Faddeev–Popov determinant, ghost action, OPE, stress tensor, and weights. The Laurent modes, CAR, vacuum, and ghost-number conventions are adopted locally, not attributed to these sections."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

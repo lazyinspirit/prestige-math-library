@@ -7,6 +7,7 @@ items:
   - def-cft-r5-topological-defect-interface-conventions
   - def-cft-r5-finite-gauging-wall-conventions
   - pthm-cft-r5-finite-gauging-wall-fusion
+  - post-cft-r5-compact-boson-flat-gauging-model
   - pthm-cft-r5-compact-boson-noninvertible-tduality
 requires:
   - cft-compact-bosons-and-fermionic-spin-theories

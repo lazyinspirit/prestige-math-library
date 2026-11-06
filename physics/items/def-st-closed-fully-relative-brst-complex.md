@@ -25,7 +25,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0607105v3"
       locator: "pp. 2–5, single-chiral relative BRST source conventions only; the left/right tensor complex is defined locally."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

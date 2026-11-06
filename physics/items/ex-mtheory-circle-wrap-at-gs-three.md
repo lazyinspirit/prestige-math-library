@@ -39,7 +39,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture III §3.3, Eqs. (3.20)–(3.24), PDF pp. 27–31; leading constant-dilaton D4 tension."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

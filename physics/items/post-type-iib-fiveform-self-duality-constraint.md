@@ -42,6 +42,7 @@ physical_scope: Adopted on-shell first-order condition for the gauge-invariant f
   type IIB formulation. It is imposed after variation and is not a consequence of the undoubled pseudoaction alone.
 aliases: []
 verification:
+  precheck: pass
   sources_checked:
     date: 2026-11-05
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

@@ -26,6 +26,7 @@ sources:
       url: https://arxiv.org/pdf/1304.6368v4
       locator: "§§3.1, 3.3, 4.3, and 5.1: stabilization topology, comparison of determinant conventions, Fredholm stabilization, and continuity of transition maps."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

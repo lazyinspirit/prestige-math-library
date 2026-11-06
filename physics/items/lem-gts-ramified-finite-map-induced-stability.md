@@ -43,7 +43,7 @@ sources:
       url: https://arxiv.org/pdf/2601.22994v1
       locator: Section 3, corrected Proposition 3.4, and Lemma 6.1; the adjoints, geometric hypotheses and ramified kernel are reconstructed here.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

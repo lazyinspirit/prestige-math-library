@@ -34,6 +34,7 @@ sources:
       url: https://arxiv.org/pdf/0809.1380
       locator: "§2.7.3, PDF pp. 38–40; §3.4, PDF pp. 47–49; §4.3, PDF pp. 67–72: Heisenberg currents, formal products and normal ordering."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

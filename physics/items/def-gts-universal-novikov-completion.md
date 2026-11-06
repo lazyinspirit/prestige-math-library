@@ -22,7 +22,7 @@ sources:
       url: https://arxiv.org/pdf/0802.1703v3
       locator: §3, printed pp. 16–17, universal Novikov rings and the energy filtration
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -45,6 +45,7 @@ sources:
       url: https://abel.math.harvard.edu/~dafr/CBMS133.pdf
       locator: "Ch. 11 §§11.1–11.2, full lecture-note PDF, for the distinction between a line, a connection, and a section. The product-family and Fourier calculations are explicit here."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

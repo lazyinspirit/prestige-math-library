@@ -34,7 +34,7 @@ sources:
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
       locator: "§3.1, printed pp. 197–198; singular cochains, coefficient groups, and the cohomology quotient."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

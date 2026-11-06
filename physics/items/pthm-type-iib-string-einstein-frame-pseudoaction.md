@@ -44,6 +44,7 @@ physical_scope: Conditional pointwise Weyl rewrite of the source-free two-deriva
   supported bulk variations are unaffected. The five-form constraint remains separate.
 aliases: []
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

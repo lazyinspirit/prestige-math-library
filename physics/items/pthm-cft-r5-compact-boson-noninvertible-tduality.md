@@ -5,7 +5,7 @@ title: Noninvertible T-duality defect for the compact boson
 status: published
 origin: pipeline
 pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
-dependency_level: 4
+dependency_level: 5
 domain: physics
 library: physics
 physical_scope: Conditional topological-defect construction in the idealized compact-boson two-dimensional QFT under the stated
@@ -18,6 +18,7 @@ deps:
 - def-cft-r5-topological-defect-interface-conventions
 - def-cft-r5-finite-gauging-wall-conventions
 - pthm-cft-r5-finite-gauging-wall-fusion
+- post-cft-r5-compact-boson-flat-gauging-model
 dependency_roles:
   def-cft-r5-compact-boson-full-theory: mathematical-premise
   def-fusion-and-multifusion-category: mathematical-premise
@@ -26,6 +27,7 @@ dependency_roles:
   def-cft-r5-topological-defect-interface-conventions: operational-prerequisite
   def-cft-r5-finite-gauging-wall-conventions: operational-prerequisite
   pthm-cft-r5-finite-gauging-wall-fusion: physical-result
+  post-cft-r5-compact-boson-flat-gauging-model: physical-assumption
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -47,17 +49,12 @@ sources:
     url: https://arxiv.org/pdf/2604.09126v1
     locator: §§2–2.1, 3.4, and 4.3–4.4, lattice/Hamiltonian realization and noncompact edge modes.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass
     date: 2026-11-06
-  verified:
-    model: gpt-6.1-sol
-    verdict: pass
-    date: 2026-11-04
-    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
-    delegated_by: /root (workflow orchestrator under owner authorization)
+  repair: research/cft-publication-followup-20261106/repairs/pthm-cft-r5-compact-boson-noninvertible-tduality.json
 ---
 
 ## Statement
@@ -71,6 +68,8 @@ For the operator interpretation let $\mathcal V_R=\bigoplus_{(n,w)\in\mathbb Z^2
 This is a conditional physics deduction. The two-step flat-gauging/SymTFT construction and its rational self-duality identification are stated inputs below, not consequences of the compact-boson operator algebra alone.
 
 ## Statement references
+
+[[post-cft-r5-compact-boson-flat-gauging-model]]
 
 [[def-cft-r5-compact-boson-full-theory]]
 
@@ -112,9 +111,9 @@ This is a conditional physics deduction. The two-step flat-gauging/SymTFT constr
 
 [F7] [[pthm-cft-r5-finite-gauging-wall-fusion]]: under its finite semisimple line-sector and pairwise-distinct-simple-line hypotheses, fusing the gauging wall and its reverse gives one copy of each group line indexed by the finite group.
 
-[A1] Adopt the source's noncompact SymTFT/two-step flat-gauging construction. First gauge $U(1)_w$ with flat connections, producing the noncompact intermediate scalar theory; then gauge the period-$2\pi/R$ subgroup $\mathbb Z\subset\mathbb R$ of its momentum-shift symmetry, producing the radius-changing topological interface $I_R:C_R\to C_{1/R}$. Compose with the standard invertible radius-duality interface $U_{1/R\to R}:C_{1/R}\to C_R$. The source identifies this composite as a topological line and gives its charge-label action on genuine and non-genuine vertex endpoints up to an overall prefactor. The functional-measure foundation and, for irrational $R^2$, an absolute normalization of this construction are not claimed as proved here.
+[A1] [[post-cft-r5-compact-boson-flat-gauging-model]]: adopt the source's noncompact SymTFT/two-step flat-gauging construction. First gauge $U(1)_w$ with flat connections, producing the noncompact intermediate scalar theory; then gauge the period-$2\pi/R$ subgroup $\mathbb Z\subset\mathbb R$ of its momentum-shift symmetry, producing the radius-changing topological interface $I_R:C_R\to C_{1/R}$. Compose with the standard invertible radius-duality interface $U_{1/R\to R}:C_{1/R}\to C_R$. The source identifies this composite as a topological line and gives its charge-label action on genuine and non-genuine vertex endpoints up to an overall prefactor. The functional-measure foundation and, for irrational $R^2$, an absolute normalization of this construction are not claimed as proved here.
 
-[A2] For reduced rational $R^2=p/q$, with $p,q\in\mathbb Z_{>0}$ coprime, adopt the source's anomaly-free finite subgroup gauging and self-duality interface $U_R:C_R/G_R\to C_R$. Let $G_R=\{g_{a,b}:0\le a<p,\ 0\le b<q\}\cong\mathbb Z_p\times\mathbb Z_q$, acting by $g_{a,b}V_{n,w}=e^{2\pi i(an/p+bw/q)}V_{n,w}$, and assume $U_R$ maps each gauging symmetry line $L_{a,b}$ to this line $g_{a,b}$. Assume the $G_R$-generated topological-line subcategory is finite semisimple and the $g_{a,b}$ are pairwise non-isomorphic simple objects. Normalize the rational defect exactly as $N_R=U_R\circ W_{G_R}$, with $W_{G_R}:C_R\to C_R/G_R$ the endpoint-framed wall of [[def-cft-r5-finite-gauging-wall-conventions]]; there is no additional scalar. Argurio et al. §3.1, equation (3.20), identifies the continuous two-step and rational discrete constructions only up to normalization, and §4.2, equations (4.19)–(4.25), derives the group-line sum up to proportionality and states that modular-bootstrap/locality fixes the rational normalization. The exact finite-wall normalization here is therefore an explicit adopted rational input, not a claim that those source passages prove the scalar match. No continuous-gauging normalization is inferred.
+[A2] [[post-cft-r5-compact-boson-flat-gauging-model]]: For reduced rational $R^2=p/q$, with $p,q\in\mathbb Z_{>0}$ coprime, adopt the source's anomaly-free finite subgroup gauging and self-duality interface $U_R:C_R/G_R\to C_R$. Let $G_R=\{g_{a,b}:0\le a<p,\ 0\le b<q\}\cong\mathbb Z_p\times\mathbb Z_q$, acting by $g_{a,b}V_{n,w}=e^{2\pi i(an/p+bw/q)}V_{n,w}$, and assume $U_R$ maps each gauging symmetry line $L_{a,b}$ to this line $g_{a,b}$. Assume the $G_R$-generated topological-line subcategory is finite semisimple and the $g_{a,b}$ are pairwise non-isomorphic simple objects. Normalize the rational defect exactly as $N_R=U_R\circ W_{G_R}$, with $W_{G_R}:C_R\to C_R/G_R$ the endpoint-framed wall of [[def-cft-r5-finite-gauging-wall-conventions]]; there is no additional scalar. Argurio et al. §3.1, equation (3.20), identifies the continuous two-step and rational discrete constructions only up to normalization, and §4.2, equations (4.19)–(4.25), derives the group-line sum up to proportionality and states that modular-bootstrap/locality fixes the rational normalization. The exact finite-wall normalization here is therefore an explicit adopted rational input, not a claim that those source passages prove the scalar match. No continuous-gauging normalization is inferred.
 
 ## Proof
 

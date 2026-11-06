@@ -29,6 +29,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/cotangent.pdf"
       locator: "Definition 92.3.2 and the scheme cotangent-complex construction in Sections 92.18–92.24."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

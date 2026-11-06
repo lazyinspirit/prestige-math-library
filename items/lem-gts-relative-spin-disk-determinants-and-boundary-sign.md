@@ -44,6 +44,7 @@ sources:
     locator: 'Section 6.2, printed/PDF pp.86–89, equations (61)–(67) and sign contributions (S1)–(S4), read completely in that range; PDF SHA256 c7bafa445131f8a3bda3b7cae0505ff1ccfee91ac674e50e9a37a09a3887f0e6. Its Floer cap-word ordering and suspension conventions were compared; the actual Morse normal-matrix calculation below is reconstructed locally and is not supplied by that Floer theorem, nor does that reference supply the curved low-arity construction or this atlas.'
 dependency_level: 8
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

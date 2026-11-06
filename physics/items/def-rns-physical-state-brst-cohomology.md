@@ -43,7 +43,7 @@ sources:
       url: "https://www.thphys.uni-heidelberg.de/courses/weigand/Strings11-12.pdf"
       locator: "Chapter 6.4, printed pp. 136–142, super-Virasoro physical-state constraints and Ramond zero-mode condition."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -23,7 +23,7 @@ sources:
       url: https://math.mit.edu/~etingof/liegroups.pdf
       locator: Finite-dimensional Lie algebra and semisimplicity conventions used locally.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

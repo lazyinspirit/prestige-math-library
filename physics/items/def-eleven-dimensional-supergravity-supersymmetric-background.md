@@ -37,7 +37,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0212008"
       locator: "§2, equation (2.3), and Appendix A, Clifford/Majorana conventions."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

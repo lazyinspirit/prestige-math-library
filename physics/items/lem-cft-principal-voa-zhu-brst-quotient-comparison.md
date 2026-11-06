@@ -34,7 +34,7 @@ sources:
       url: https://arxiv.org/pdf/1211.7124v3
       locator: Sections 4–8; old/new conformal shift, natural closed-representative map, and actual-ideal cokernel comparison reconstructed below.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

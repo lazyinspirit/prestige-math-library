@@ -66,7 +66,7 @@ sources:
       url: "https://cmsa.fas.harvard.edu/media/Voisin_HSTAVharvardrevision.pdf"
       locator: "§3.6, Theorem 3.25, printed p. 53: scope and distinction from the Hodge conjecture."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

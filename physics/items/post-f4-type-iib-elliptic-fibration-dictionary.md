@@ -40,7 +40,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/eisenbudharris.pdf"
       locator: "Chapter IV, §2.4, printed pp. 184–185: the standard elliptic-curve j formula with j(i)=1728 and classification of complex elliptic curves by j."
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

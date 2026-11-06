@@ -27,7 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9601038v3"
       locator: "§§2–3, PDF pp. 5–10: Chan–Paton sign, crosscap normalization, and the flat Type I tadpole condition."
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

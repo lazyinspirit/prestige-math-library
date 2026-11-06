@@ -31,7 +31,7 @@ sources:
       url: "https://library.institutpendidikan.ac.id/wp-content/uploads/2024/08/Joseph-Polchinski-_String-Theory-Volume-II-Superstring-Theory-and-Beyond_.pdf"
       locator: "§12.1.5 and §12.1.8, printed pp. 86–89; \u007eF_4=dA_3-A_1∧F_3 and its differential identity."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

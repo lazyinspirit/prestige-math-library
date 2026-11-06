@@ -25,6 +25,7 @@ sources:
       url: https://arxiv.org/pdf/1406.3231v1
       locator: Definitions 4.1, 4.6, 4.9 and 4.11, the de Rham algebra equivalence (12), and Section 5, differential twists, shifted twists and the differential-function spectrum.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

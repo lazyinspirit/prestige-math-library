@@ -33,7 +33,7 @@ sources:
       url: https://www.math.utoronto.ca/mgualt/Morse%20Theory/Salamon%20floer.pdf
       locator: §1.1 printed p. 3; §1.4 printed p. 10; §2.4 printed pp. 20–21, general Hamiltonian Floer conventions used only as background
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

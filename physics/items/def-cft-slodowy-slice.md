@@ -27,7 +27,7 @@ sources:
       url: https://www.imo.universite-paris-saclay.fr/~anne.moreau/Arc_space-vertex_algebras-BOOK_version.pdf
       locator: §7.2, Definition 7.1, the affine slice and its identification in the dual.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

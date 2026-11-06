@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/1011.1690v2
       locator: §2.1, Definition 2.8, printed p. 28; §2.2, compatible and tame almost-complex structures, printed pp. 31–32
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

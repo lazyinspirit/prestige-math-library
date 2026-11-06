@@ -28,6 +28,7 @@ sources:
       locator: "Section 2, Proposition 2.4 and Remark 2.5 (MFF expression and vacuum generator), and Proposition 2.6 (projection comparison); singular transport, polynomial descent, projection product and the null polynomial are proved locally below."
 dependency_level: 7
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

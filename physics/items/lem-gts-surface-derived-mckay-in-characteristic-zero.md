@@ -60,7 +60,7 @@ sources:
     locator: Theorem37.53.4 (03H0), full statement and proof read; contextual reference only. The proof below instead
       uses finite graph normalization and the declared local proper-quasi-finite theorem.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

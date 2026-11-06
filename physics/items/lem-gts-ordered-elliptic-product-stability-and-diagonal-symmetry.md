@@ -42,7 +42,7 @@ sources:
       url: https://arxiv.org/abs/math/0606013v2
       locator: Theorem 3.3.6 and its proof; locality and ample independence are reconstructed below.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

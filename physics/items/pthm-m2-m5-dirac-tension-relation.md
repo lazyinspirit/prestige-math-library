@@ -28,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9510017v3"
       locator: "Eqs. (12)–(15), PDF pp. 7–8; RR electric/magnetic Dirac pairing and the unresolved D2 charge-normalization comparison."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

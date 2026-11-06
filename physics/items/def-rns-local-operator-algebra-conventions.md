@@ -36,7 +36,7 @@ sources:
       url: "https://edoc.ub.uni-muenchen.de/13381/1/Schlotterer_Oliver.pdf"
       locator: "§§2.1.5–2.1.6, PDF pp. 32–34, equations (2.1.17)–(2.1.22): free-field two-point functions/OPEs, stress tensor, supercurrent, and matter central charge."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

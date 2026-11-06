@@ -40,7 +40,7 @@ sources:
     url: https://arxiv.org/pdf/2509.24990v2
     locator: Section4.1, the classical/nonhyperelliptic BN inequalities
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

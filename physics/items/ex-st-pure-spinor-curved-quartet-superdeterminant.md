@@ -25,7 +25,7 @@ sources:
       locator: "§3.2, equations (3.12)–(3.23), generic type-II non-minimal transformations and action; §4 is the special $AdS_5\times S^5$ case. The finite matched determinant is derived here and is not attributed as a theorem of that paper."
 proof_strategy: direct
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

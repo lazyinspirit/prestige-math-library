@@ -31,7 +31,7 @@ sources:
       url: https://arxiv.org/pdf/1207.4857v4
       locator: Proposition 3.1, admissible level and lacing-number conventions.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

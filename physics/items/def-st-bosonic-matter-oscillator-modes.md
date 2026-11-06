@@ -26,7 +26,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§1.4–1.4.1 and 2.1–2.3.3 (PDF file pp.32–34 and 35–52; printed pp.25–27 and 28–45); printed pp.25–27 and 28–45); printed pp.25–27 and 28–45); printed pp.25–27 and 28–45); printed pp.25–27 and 28–45); printed pp.25–27 and 28–45); printed pp.25–27 and 28–45); open/closed oscillator conventions."
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

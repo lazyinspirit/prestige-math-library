@@ -27,7 +27,7 @@ sources:
       url: https://arxiv.org/pdf/2607.24626v1
       locator: §2.1, Hamiltonian Floer action and complex setup; used only as restricted context
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

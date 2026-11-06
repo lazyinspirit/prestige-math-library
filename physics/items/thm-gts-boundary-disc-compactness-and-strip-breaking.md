@@ -33,7 +33,7 @@ sources:
       url: https://arxiv.org/pdf/1403.6139v2
       locator: Theorem 1.1 and §§1.3–1.5, 2.2–2.5, 3.1–3.2, printed pp. 2–15
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

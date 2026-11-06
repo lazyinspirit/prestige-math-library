@@ -71,7 +71,7 @@ dependency_roles:
   thm-extension-by-zero-adjunction-exactness: mathematical-premise
   thm-exactness-of-sheaves-stalkwise: mathematical-premise
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

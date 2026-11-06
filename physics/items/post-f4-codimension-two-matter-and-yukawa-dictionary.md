@@ -34,7 +34,7 @@ sources:
       url: "https://arxiv.org/pdf/1806.01854v1"
       locator: "§5.2, printed pp. 41–42, especially equation (5.8), which identifies the Cartan weight components with the intersections E_i·C for the selected oriented curve; §§5.3–5.6, pp. 45–51; §6.1, pp. 53–57, on chamber-dependent codimension-three candidate interactions and their limitations."
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -48,6 +48,7 @@ sources:
       url: https://arxiv.org/pdf/hep-th/0409135v3
       locator: "§§1.1, 1.3, and 5.2: smooth Euclidean fermion/Pfaffian and differential-cohomology architecture, within the recorded reading limits."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

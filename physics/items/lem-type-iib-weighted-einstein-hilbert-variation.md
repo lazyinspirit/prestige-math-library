@@ -47,6 +47,7 @@ sources:
       local algebra.
 aliases: []
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

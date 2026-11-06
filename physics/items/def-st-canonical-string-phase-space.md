@@ -25,6 +25,7 @@ sources:
       url: "https://pierre.ag.gerard.web.ulb.be/textbooks/books/A_First_Course_In_String_Theory.pdf"
       locator: "§24.1, printed p. 570, equations (24.4)–(24.6): canonical momentum density and Hamiltonian."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -22,7 +22,7 @@ sources:
       url: https://arxiv.org/pdf/2010.13656v3
       locator: §3.2, log-smooth deformation functor and Art_{k\llbracket Q\rrbracket}
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

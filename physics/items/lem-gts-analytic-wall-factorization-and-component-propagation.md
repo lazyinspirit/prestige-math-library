@@ -27,7 +27,7 @@ sources:
       url: https://arxiv.org/pdf/2005.10651v3
       locator: "Sections 3.1–3.5, 3.8 and 3.11; analytic factorization is reconstructed by explicit Wiener/Newton estimates."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -41,6 +41,7 @@ sources:
 dependency_level: 8
 axiom_use: "Full AC is inherited through the actual proper-stack/DVR, curve-deformation, closed-surface Fredholm, domain-slice, weighted-gluing, normalization, and Hilbert-family suppliers used in F1–F5. The local constructions below add no stronger choice principle."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -32,7 +32,7 @@ sources:
       url: "https://www.numdam.org/item/PMIHES_1971__40__5_0.pdf"
       locator: "§4.2.1–§4.2.7, printed pp. 43–47: geometric Hodge variations and their algebraic setting."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

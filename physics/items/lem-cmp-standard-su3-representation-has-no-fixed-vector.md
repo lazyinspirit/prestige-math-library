@@ -22,7 +22,7 @@ sources:
       url: "https://web.math.princeton.edu/~smorel/rep_theory_notes.pdf"
       locator: "Chapter VI, §VI.9.2, Definition VI.9.2.1 and Proposition VI.9.2.2, PDF pp. 156–157; standard SU(n) representation and irreducibility for d=1."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

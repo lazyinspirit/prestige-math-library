@@ -25,7 +25,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§2.3–2.3.3, 3.1–3.1.1 and 5.4–5.4.3 (PDF file pp.47–52, 60–61 and 127–131; printed pp.40–45, 53–54 and 120–124); printed pp.40–45, 53–54 and 120–124); printed pp.40–45, 53–54 and 120–124); printed pp.40–45, 53–54 and 120–124); printed pp.40–45, 53–54 and 120–124); printed pp.40–45, 53–54 and 120–124); printed pp.40–45, 53–54 and 121–124); spectrum conventions; each level and polarization count is checked locally."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

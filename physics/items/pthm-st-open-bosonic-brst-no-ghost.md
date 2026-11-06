@@ -35,7 +35,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0607105v3"
       locator: "all six pages, especially pp. 2–5; similarity-transform proof route at D=26, intercept one, on-shell L_0=0, b_0=0, and p^+ nonzero. The local proof below gives a finite filtered similarity and the exact ghost-number-one Hermitian c_0 pairing, replacing the omitted commutator route."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

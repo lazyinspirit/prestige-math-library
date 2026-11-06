@@ -22,7 +22,7 @@ sources:
       url: https://djvu.online/file/qufswWArYbwIP
       locator: "Lecture 3, Calabi–Yau Compactifications, printed p. 21, opening paragraph: toroidal compactification preserves 32 real supercharges, denoted N=8 in four dimensions."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -33,6 +33,7 @@ sources:
       url: https://arxiv.org/pdf/hep-th/0505160v3
       locator: "§3.8–3.9, RR flux quantization and the canonical sqrt(2) rescaling; equations (3.8)–(3.9)."
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

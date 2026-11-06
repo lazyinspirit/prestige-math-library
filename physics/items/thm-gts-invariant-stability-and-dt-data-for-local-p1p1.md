@@ -56,7 +56,7 @@ sources:
       url: https://arxiv.org/pdf/1008.4205v1
       locator: §4.3 and Theorem 12 (including the empty-boundary vertex formula); conventions compared, not the entire §7 proof
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

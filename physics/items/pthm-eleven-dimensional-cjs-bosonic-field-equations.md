@@ -54,7 +54,7 @@ sources:
     url: https://arxiv.org/pdf/1104.2051v2
     locator: §1.4, equation (9), for the 11D action context; it is not used in place of the variation derivation.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

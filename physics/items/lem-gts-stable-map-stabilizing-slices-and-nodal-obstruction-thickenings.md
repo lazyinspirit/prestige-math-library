@@ -38,6 +38,7 @@ dependency_roles:
   thm-fredholm-index-is-stable-under-compact-perturbations: mathematical-premise
   thm-bounded-inverse-theorem: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

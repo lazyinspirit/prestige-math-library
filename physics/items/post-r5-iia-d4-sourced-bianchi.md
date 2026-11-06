@@ -40,7 +40,7 @@ sources:
     url: https://arxiv.org/pdf/0803.3085v2
     locator: §3.1.2, PDF pp. 18–19; a distinct charged D4-flux variant involving the F2 wedge H3 contribution.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

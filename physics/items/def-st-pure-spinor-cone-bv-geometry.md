@@ -27,7 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9412228v1"
       locator: "§§4.2–4.3 give the canonical field–antifield bracket and odd-symplectic structure; §§8.5–8.7 discuss quantum-master-equation consistency and local counterterm removability; §10.7, especially equations (10.44)–(10.49), gives the density-derived BV Laplacian and square-root integration measure on an isotropic integration submanifold. The finite semidensity data and identities here are stated locally, not attributed to this source."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

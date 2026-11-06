@@ -51,7 +51,7 @@ sources:
       url: https://arxiv.org/pdf/1706.00331v1
       locator: §§4–5, fixed-source interior rescaling only; it does not treat Lagrangian strip breaking
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

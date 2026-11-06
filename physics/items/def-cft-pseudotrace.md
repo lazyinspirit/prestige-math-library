@@ -21,6 +21,7 @@ sources:
       url: https://arxiv.org/pdf/2411.07707v4
       locator: "§4.4.1, PDF pp. 61–62, for the pseudo-trace on finite projective weight truncations."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -39,6 +39,7 @@ sources:
       url: "https://arxiv.org/pdf/1409.7616v2"
       locator: "§II.3, Proposition-Définition 3.3 on printed p. 40 (PDF p. 45) and Corollaire 3.6 on printed p. 41 (PDF p. 46); the source uses equal Coxeter numbers and a type inspection, while the present item supplies an explicit coordinate count and root-system bound."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

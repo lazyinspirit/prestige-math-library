@@ -30,6 +30,7 @@ dependency_roles:
   thm-smooth-partitions-of-unity-exist-on-manifolds: mathematical-premise
 dependency_level: 0
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

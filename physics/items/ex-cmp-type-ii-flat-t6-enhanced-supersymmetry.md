@@ -51,7 +51,7 @@ sources:
       url: https://arxiv.org/pdf/1607.00327v3
       locator: "§§3.2–3.6, §6.2 Theorem 6.8, and §7.2 Theorem 7.9: Lorentzian spinors and the Type-II Killing-spinor systems."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

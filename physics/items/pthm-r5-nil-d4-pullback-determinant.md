@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9602052v2"
       locator: "Lecture II §2.5, equation (2.19), PDF p. 15; pullback determinant in the leading DBI action."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

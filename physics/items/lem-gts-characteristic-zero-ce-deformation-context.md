@@ -52,7 +52,7 @@ sources:
       url: https://www.math.univ-toulouse.fr/~btoen/hagII.pdf
       locator: §2.3.1, Lemma 2.3.1.1 and Proposition 2.3.1.4 (proof); §2.3.5.1. For a characteristic-zero base, the homotopy theory of (−1)-connected commutative DG algebras is equivalent to simplicial commutative algebras; normalization is homotopically fully faithful and the induced derived-stack functor preserves homotopy limits and colimits.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

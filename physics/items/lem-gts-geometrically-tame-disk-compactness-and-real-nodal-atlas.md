@@ -48,6 +48,7 @@ sources:
     locator: Section 3, printed pp.15–20, source framework/interface only; the article calls this a summary. The attached proof is reconstructed locally from its explicitly named mathematical suppliers; no reading of the complete trilogy is claimed.
 dependency_level: 7
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

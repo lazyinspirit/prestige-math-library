@@ -29,7 +29,7 @@ sources:
       url: "https://cmsa.fas.harvard.edu/media/Voisin_HSTAVharvardrevision.pdf"
       locator: "§3.4.2, Theorem 3.17, printed p.48, and §3.4.3, printed p.49: the induced Hodge metric up to scalar and the curvature/Schwarz route. The complete curvewise estimate and comparison are reconstructed locally below."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

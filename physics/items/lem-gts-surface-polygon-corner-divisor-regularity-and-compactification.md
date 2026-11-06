@@ -40,6 +40,7 @@ sources:
     locator: "§1.5 printed5–7: Dolbeault/minimal models and concrete affine polygon/clockwise sign conventions. The current non-affine-near-corner regularity, divisor index and compactification are local analytic proofs; no comparison theorem or general regularization is imported from this motivating passage. Complete §1.5 and §§2–3 printed7–18 read."
 dependency_level: 13
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

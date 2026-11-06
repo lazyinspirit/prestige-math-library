@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/hep-th/9108028v1
       locator: Section 8.1, printed pp. 112–114, oscillator trace and conformal weights of charge sectors.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

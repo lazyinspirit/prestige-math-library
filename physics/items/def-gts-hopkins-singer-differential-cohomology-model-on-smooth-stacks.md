@@ -25,6 +25,7 @@ sources:
       url: https://arxiv.org/pdf/2501.03108v2
       locator: Definition 4.2, homotopy-pullback model for differential cohomology with graded coefficients.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

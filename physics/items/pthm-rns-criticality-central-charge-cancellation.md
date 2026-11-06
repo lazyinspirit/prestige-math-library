@@ -33,7 +33,7 @@ sources:
       url: "https://edoc.ub.uni-muenchen.de/13381/1/Schlotterer_Oliver.pdf"
       locator: "§§2.3.2–2.3.6, printed pp. 43–48 (PDF pp. 64–69), superghost stress and bosonization; §3.1.2, printed pp. 57–58 (PDF pp. 78–79), BRST conventions."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

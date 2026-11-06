@@ -30,6 +30,7 @@ dependency_roles:
   lem-interior-energy-regularity-for-smooth-almost-complex-strips: mathematical-premise
   thm-fourier-basis-and-parseval-on-the-n-torus: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

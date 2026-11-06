@@ -26,7 +26,7 @@ sources:
       url: https://www.mathunion.org/fileadmin/ICM/Proceedings/ICM2006.2/ICM2006.2.ocr.pdf
       locator: §3, printed pp. 1071–1072, stable disk moduli and relative-spin orientation data
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

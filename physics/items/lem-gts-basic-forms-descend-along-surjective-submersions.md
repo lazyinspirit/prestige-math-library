@@ -24,6 +24,7 @@ sources:
       url: https://arxiv.org/pdf/dg-ga/9407015v1
       locator: Section 7, local descent of the Dixmier–Douady three-form, PDF pp. 11–12.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

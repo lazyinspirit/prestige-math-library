@@ -29,6 +29,7 @@ sources:
       url: https://arxiv.org/pdf/2501.03108v2
       locator: Definitions 2.1 and 3.1–3.4; the nerve model for B-nabla-G and totalized de Rham forms.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

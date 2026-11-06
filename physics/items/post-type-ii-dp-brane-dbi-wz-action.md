@@ -47,7 +47,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0007170v3"
       locator: "§5.4, equation (254), and §5.9, equations (274)–(275), PDF pp. 96, 108–109; absolute charge/tension normalization with κ₀. §5.10, PDF p. 112, qualifies the self-dual p=3 case. §6.2, equation (286), PDF p. 113, is used only to compare the usual connection coefficient, not its opposite B-sign convention."
 verification:
-  precheck: pending
+  precheck: pass
   sources_checked:
     date: 2026-11-05
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

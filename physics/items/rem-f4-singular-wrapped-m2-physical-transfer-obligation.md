@@ -37,6 +37,7 @@ sources:
       url: https://arxiv.org/pdf/1806.01854v1
       locator: "§§4.5–5.6: a selected resolution-chamber matter surface as geometric data."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -31,6 +31,7 @@ sources:
       url: https://arxiv.org/pdf/1706.00331v1
       locator: Definition 1.1 and Theorem 1.2; the complete local interior bubble-tree argument is supplied by the exact mathematical prerequisite below.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

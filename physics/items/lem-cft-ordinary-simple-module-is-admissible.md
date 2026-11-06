@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0204021"
       locator: "§2, ordinary and admissible module definitions."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

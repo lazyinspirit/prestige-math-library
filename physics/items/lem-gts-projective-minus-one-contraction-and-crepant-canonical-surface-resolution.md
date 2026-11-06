@@ -62,6 +62,7 @@ page: gts-bridgeland-stability-dt-frontiers
 reference: items/lem-gts-projective-minus-one-contraction-and-crepant-canonical-surface-resolution.md
 dependency_level: 2
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

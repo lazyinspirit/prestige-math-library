@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/html/2608.23515v1
       locator: "§§3.2 and 4.2; exact conditional hypotheses and scope limits."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

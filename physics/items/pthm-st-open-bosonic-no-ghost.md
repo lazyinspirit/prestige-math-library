@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§2.1–2.1.2 (PDF file pp.35–38; printed pp.28–31); printed pp.28–31); printed pp.28–31); printed pp.28–31); printed pp.28–31); printed pp.28–31); printed pp.28–32); old-covariant conditions and indefinite ambient form. Full positivity proof is not supplied by this locator."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -23,7 +23,7 @@ sources:
       url: https://www.math.utoronto.ca/mgualt/Morse%20Theory/Salamon%20floer.pdf
       locator: §§1.1–1.3 and 3.1–3.4, printed pp. 3–13 and 25–38; periodic-orbit source context only. The source uses the opposite Hamiltonian vector-field sign; translate its Hamiltonian by H_source = −H here. The conditional chain-count argument and its action sign are proved locally below.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

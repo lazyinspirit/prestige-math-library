@@ -46,6 +46,7 @@ sources:
       A.
 proof_strategy: direct
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

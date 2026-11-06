@@ -22,7 +22,7 @@ sources:
       url: "https://www.thphys.uni-heidelberg.de/courses/weigand/Strings11-12.pdf"
       locator: "Chapter 6.1, printed pp. 128–130, equations (6.7)–(6.11), gauge-fixed action and field equations."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

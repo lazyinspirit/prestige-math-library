@@ -24,7 +24,7 @@ sources:
       url: "https://edoc.ub.uni-muenchen.de/13381/1/Schlotterer_Oliver.pdf"
       locator: "§§2.3.2–2.3.6, PDF pp. 64–69, beta-gamma OPE, stress tensor, bosonization, NS/R vacua and pictures."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

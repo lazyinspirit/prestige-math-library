@@ -33,6 +33,7 @@ sources:
       url: https://www.jirka.org/ra/html/sec_svinvfuncthm.html
       locator: "Theorem 8.5.1, the Euclidean inverse function theorem used to produce the local product coordinates."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

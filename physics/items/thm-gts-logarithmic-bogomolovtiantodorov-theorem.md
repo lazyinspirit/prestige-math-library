@@ -40,7 +40,7 @@ sources:
     locator: Sections 2.3–2.4, chapters 5, 9–10; the three attached lemmas reconstruct
       the required local arguments.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

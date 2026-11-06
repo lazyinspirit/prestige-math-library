@@ -30,6 +30,7 @@ sources:
       url: https://arxiv.org/pdf/dg-ga/9407015v1
       locator: Sections 11–12, Deligne cocycles and gerbe curvature, PDF pp. 14–18.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

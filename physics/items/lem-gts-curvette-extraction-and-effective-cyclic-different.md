@@ -69,6 +69,7 @@ page: gts-bridgeland-stability-dt-frontiers
 reference: items/lem-gts-curvette-extraction-and-effective-cyclic-different.md
 dependency_level: 4
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

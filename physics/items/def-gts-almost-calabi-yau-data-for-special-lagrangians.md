@@ -25,7 +25,7 @@ sources:
       url: https://arxiv.org/pdf/math/0111111v3
       locator: §4.1, Calabi–Yau and almost-Calabi–Yau conventions
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -29,6 +29,7 @@ sources:
       url: https://arxiv.org/pdf/0707.1857v2
       locator: "§1, printed pp.4–5: lattice oscillator construction and exponential product (1.4)."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -31,7 +31,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "Chapter VI, §8.2, Lemma 8.6 and Corollary 8.7, pp. 311–312, and §11, equations (11.1)–(11.3), pp. 322–323. The source supplies the ddbar and Frölicher spectral-sequence conventions and the Kähler case; the implication for any compact complex manifold satisfying the stated ddbar hypothesis is derived locally here."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

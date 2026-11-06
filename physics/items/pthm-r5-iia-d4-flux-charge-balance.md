@@ -31,7 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/0803.3085v2"
       locator: "§3.1.2, PDF pp. 18–19; flux contribution in a charged orientation distinct from the main phi^(2/3) case."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

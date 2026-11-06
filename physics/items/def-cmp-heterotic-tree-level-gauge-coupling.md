@@ -32,7 +32,7 @@ sources:
       url: "https://members.ift.uam-csic.es/auranga/lect13.pdf"
       locator: "PDF pp. 16–23: heterotic gauge fields, string-frame compactification, and tree-level reduction context."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

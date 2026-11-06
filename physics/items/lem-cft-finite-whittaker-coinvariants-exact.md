@@ -42,7 +42,7 @@ sources:
       url: https://arxiv.org/pdf/math/0506056v4
       locator: Section 2.5, reconstructed by the finite Rees/Whittaker proof here.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

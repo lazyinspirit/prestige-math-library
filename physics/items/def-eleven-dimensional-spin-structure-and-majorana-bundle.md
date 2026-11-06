@@ -45,7 +45,7 @@ sources:
       url: "https://arxiv.org/pdf/0805.0311"
       locator: "§§1.3–1.5 for the Clifford group and Pin/Spin definitions with the twisted adjoint action; §1.8 for double covers. Gallier does not supply the global bundle lift, which is defined locally in this item."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

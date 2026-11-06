@@ -43,6 +43,7 @@ sources:
       locator: Section 5 uses the integral Cech-to-singular identification for the Dixmier–Douady class; no external comparison theorem is imported as a proof premise.
 dependency_level: 0
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

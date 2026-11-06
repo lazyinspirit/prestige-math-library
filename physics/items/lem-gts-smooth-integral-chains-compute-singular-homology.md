@@ -34,6 +34,7 @@ sources:
       url: https://arxiv.org/pdf/math/0211216v2
       locator: Section 2.3, PDF pp. 8–10, smooth singular differential cochains.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

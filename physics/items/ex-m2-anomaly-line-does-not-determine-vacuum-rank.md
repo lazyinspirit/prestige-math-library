@@ -35,6 +35,7 @@ provenance:
 generation:
   role: example
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

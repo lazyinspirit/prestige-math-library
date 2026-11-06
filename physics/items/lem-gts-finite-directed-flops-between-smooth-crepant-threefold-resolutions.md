@@ -49,7 +49,7 @@ sources:
       Singular-configuration diagrams at the end of§4 are not used in the local proof. Directed termination and
       contraction existence are reconstructed here.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

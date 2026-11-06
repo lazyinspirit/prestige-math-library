@@ -32,7 +32,7 @@ sources:
       url: https://arxiv.org/pdf/1605.00138v2
       locator: §§5.1–5.2, grading and BRST conventions.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

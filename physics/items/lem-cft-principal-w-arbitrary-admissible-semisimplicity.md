@@ -34,7 +34,7 @@ sources:
       url: https://arxiv.org/pdf/1211.7124v3
       locator: Theorem10.10; the finite-window length proof and preservation of an arbitrary specified admissible grading are supplied explicitly below.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

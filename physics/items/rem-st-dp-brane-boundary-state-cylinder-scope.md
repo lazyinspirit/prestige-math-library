@@ -29,6 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/9510017v3"
       locator: "§2, PDF pp. 3–7, boundary-state source, cylinder factorization, and the source's charge-normalization comparison."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

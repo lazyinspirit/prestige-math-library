@@ -30,6 +30,7 @@ provenance:
   proof: ai-altered
 axiom_strength: ZF + full AC inherited from the Spin classification theorem and cohomology suppliers.
 verification:
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

@@ -64,6 +64,7 @@ sources:
       url: "https://people.math.harvard.edu/~elkies/M272.19/sep23.pdf"
       locator: "The modular-form ring theorem and theta-series corollary, PDF pp. 3-5; the normalization and weight-8 coefficient used by the local proof."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -43,7 +43,7 @@ sources:
       url: https://arxiv.org/pdf/math/0303172v3
       locator: "§§5.1–5.5 and Theorem 5.7 prove vanishing outside degree zero for the principal minus complex of every affine Verma module; the paper does not identify the degree-zero W module there."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -22,6 +22,7 @@ provenance:
   proof: not-applicable
 physical_scope: "Source-reported distinction between the main Silverstein–Westphal D4 orientation producing the geometric phi^(2/3) potential and a different charged orientation discussed as a phi-tilde^(2/5) variant; no charge cancellation is derived here."
 verification:
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

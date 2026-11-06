@@ -42,7 +42,7 @@ sources:
     url: https://arxiv.org/pdf/2601.22994v1
     locator: Theorems 1.1 and 6.5; Sections 2–3 and 5–6 consulted; local supplier proves the existence assertion
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

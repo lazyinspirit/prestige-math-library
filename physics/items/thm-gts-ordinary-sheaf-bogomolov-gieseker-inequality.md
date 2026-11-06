@@ -49,6 +49,7 @@ sources:
       locator: Independent ordinary restriction supplied by the separately authored local restriction lemma, not by a tilt theorem
 dependency_level: 2
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

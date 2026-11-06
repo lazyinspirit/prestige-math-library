@@ -29,7 +29,7 @@ sources:
       url: https://arxiv.org/pdf/2607.24626v1
       locator: §2.1 is a restricted symplectic-cohomology setup and does not supply this general chain interface
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

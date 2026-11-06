@@ -42,6 +42,7 @@ dependency_roles:
   thm-long-exact-sequence-sheaf-cohomology: mathematical-premise
 dependency_level: 1
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

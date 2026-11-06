@@ -35,7 +35,7 @@ sources:
       url: "https://arxiv.org/pdf/2410.19600v1"
       locator: "§3.2.1, equation (3.10), printed p. 29; independent string-frame action and field-normalization comparison."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

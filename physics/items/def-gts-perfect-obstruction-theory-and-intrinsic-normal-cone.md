@@ -32,6 +32,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/cotangent.pdf"
       locator: "The scheme cotangent-complex convention in Definitions 92.18.2 and 92.24.1."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

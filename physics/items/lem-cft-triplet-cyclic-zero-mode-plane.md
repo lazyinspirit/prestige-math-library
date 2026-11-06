@@ -31,6 +31,7 @@ sources:
         zero-mode table in the specified cocycle convention.
 dependency_level: 4
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

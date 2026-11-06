@@ -23,7 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§5.2–5.3.2 (PDF file pp.121–126; printed pp.114–119); printed pp.114–119); printed pp.114–119); printed pp.114–119); printed pp.114–119); printed pp.114–119); printed pp.113–120); bc stress tensor and displayed TT double-contraction calculation."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

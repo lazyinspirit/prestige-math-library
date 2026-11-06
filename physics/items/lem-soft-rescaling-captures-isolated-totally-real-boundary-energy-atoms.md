@@ -34,6 +34,7 @@ dependency_roles:
   lem-small-local-energy-cylinder-neck-collapse: mathematical-premise
   lem-soft-rescaling-captures-isolated-interior-energy-atoms: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

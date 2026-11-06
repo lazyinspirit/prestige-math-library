@@ -32,7 +32,7 @@ sources:
       url: https://arxiv.org/pdf/1211.7124v3
       locator: Sections 2–3 and 8; the HC-relative Artin–Rees proof and bounded-ghost filtered comparison below reconstruct the needed exactness and good-Kazhdan comparison.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

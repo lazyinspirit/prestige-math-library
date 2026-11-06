@@ -37,7 +37,7 @@ sources:
       url: https://arxiv.org/pdf/1211.7124v3
       locator: Section 3, universal Whittaker bimodule and quotient-module use.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

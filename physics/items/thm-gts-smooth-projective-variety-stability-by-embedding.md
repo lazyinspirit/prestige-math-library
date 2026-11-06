@@ -44,6 +44,7 @@ sources:
 axiom_use: ZF + AC
 dependency_level: 8
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

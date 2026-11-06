@@ -40,6 +40,7 @@ sources:
       url: https://arxiv.org/pdf/math/0701077v1
       locator: Section 2, Facts 2.1–2.3, PDF pp. 11–15; Section 1, Fact 1.1, PDF pp. 7–8.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

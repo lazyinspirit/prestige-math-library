@@ -40,7 +40,7 @@ sources:
       url: "https://arxiv.org/pdf/1806.01854v1"
       locator: "§§8.1–8.2, printed pp. 79–83; torsional cohomology, discrete gauge groups, bisections, genus-one fibrations, and the M/F interpretation."
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

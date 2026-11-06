@@ -47,7 +47,7 @@ sources:
       url: https://arxiv.org/pdf/math/0310414v4
       locator: "§2c, printed pp. 9–11 (PDF 13–15), Lemma 2.7 and proof; §6a–b, printed pp. 29–31 (PDF 33–35), rational action periods; §9a–c, printed pp. 71–74 (PDF 75–78), Proposition 9.1, Propositions 9.4–9.5 and their arguments. Seidel gives derived object-level evaluation-cone identifications for exact branes and Calabi–Yau surfaces, using discrete rational periods. The present all-arity Yoneda-module naturality, compact cap construction and dimension-three extension are local proofs, not claims proved there."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

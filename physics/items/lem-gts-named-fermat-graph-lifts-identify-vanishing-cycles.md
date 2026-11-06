@@ -35,7 +35,7 @@ sources:
       url: https://arxiv.org/pdf/1103.4956v2
       locator: "§5 printed22–27, Lemmas5.1–5.9, Theorem5.7, Proposition5.10 and Remark5.11; §3 Proposition3.1, printed8. The source identifies the graph and vanishing objects up to suitable grading through an auxiliary branched cover; the actual finite-bar/coefficient contraction, determinant/character binding and last-cap absolute grading are supplied locally. Complete paper1–29 read."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

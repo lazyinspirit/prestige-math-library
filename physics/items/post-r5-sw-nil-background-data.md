@@ -28,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/0803.3085v2"
       locator: "§3.1.1–§3.1.2, PDF pp. 17–19; distinction between the main φ^(2/3) orientation and the charged φ~^(2/5) variant."
 verification:
-  precheck: pending
+  precheck: pass
   sources_checked:
     date: 2026-11-05
     scope: Recorded source, statement and proof-status review for this postulate in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

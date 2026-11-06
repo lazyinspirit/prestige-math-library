@@ -44,7 +44,7 @@ sources:
       url: https://arxiv.org/pdf/hep-th/0201028v2
       locator: §2.1, equations (2.4), (2.8)–(2.9), footnote 3, printed pp. 3–4 (PDF pp. 4–5); explicit negative-wedge transverse-star convention attributed there to GKP.
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

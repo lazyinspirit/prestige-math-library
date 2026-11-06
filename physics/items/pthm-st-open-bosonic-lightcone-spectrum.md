@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/0908.0333v3"
       locator: "§§2.2–2.3.3 and 3.1 (PDF file pp.39–52 and 60–61; printed pp.32–45 and 53–54); printed pp.32–45 and 53–54); printed pp.32–45 and 53–54); printed pp.32–45 and 53–54); printed pp.32–45 and 53–54); printed pp.32–45 and 53–54); printed pp.32–45 and 53–54); light-cone gauge and open-string mass formula."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

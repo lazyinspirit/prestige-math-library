@@ -39,6 +39,7 @@ sources:
       url: https://arxiv.org/pdf/1208.3961v6
       locator: Sections 3.1–3.2, Deligne cocycles and curvature diagram, PDF pp. 32–41.
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -20,7 +20,7 @@ sources:
       url: https://www.math.utoronto.ca/mgualt/Morse%20Theory/Salamon%20floer.pdf
       locator: §1.1, printed p. 3, Hamiltonian vector fields and their symplectic flows (used after replacing the source Hamiltonian h by -H)
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

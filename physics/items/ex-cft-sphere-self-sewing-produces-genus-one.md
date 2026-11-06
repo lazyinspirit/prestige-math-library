@@ -49,6 +49,7 @@ sources:
       url: https://www.damtp.cam.ac.uk/user/tong/string/string.pdf
       locator: "§6.4.1, printed pp. 145–147, for genus-one torus modulus context only; the local topological verification is supplied below."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

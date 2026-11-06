@@ -35,6 +35,7 @@ sources:
       locator: "Theorems 2.1–2.3, pp. 113–116 (scans 119–122): two opposite ghost filtrations and the free/cofree vanishing argument. Reconstructed locally in steps 28.1–29.1, not assumed as an external input."
 dependency_level: 8
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -31,6 +31,7 @@ sources:
 dependency_level: 11
 axiom_use: "Full AC is used in step 4.1 to assert exactness of arbitrary products of Q-vector spaces in the rigid-cover Čech comparison, and is also an explicit hypothesis of the compact-Hausdorff comparison supplier F4."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

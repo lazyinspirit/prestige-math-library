@@ -28,7 +28,7 @@ sources:
       url: https://arxiv.org/pdf/alg-geom/9608004v3
       locator: §1, normalized Calabi–Yau special-Lagrangian phase convention
 verification:
-  precheck: pending
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

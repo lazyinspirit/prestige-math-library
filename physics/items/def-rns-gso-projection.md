@@ -30,7 +30,7 @@ sources:
       url: "https://edoc.ub.uni-muenchen.de/13381/1/Schlotterer_Oliver.pdf"
       locator: "§3.1.7, printed pp. 64–66 (PDF pp. 85–87), GSO parity, chirality and ghost-inclusive bosonized charge."
 verification:
-  precheck: pending
+  precheck: n/a
   judge:
     model: gpt-6-luna
     verdict: pass

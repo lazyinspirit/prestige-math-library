@@ -35,6 +35,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0503194v2"
       locator: "Section 4.2 and Appendix C.1: boundary projector and two-point coefficient conventions."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

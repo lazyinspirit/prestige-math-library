@@ -39,6 +39,7 @@ sources:
       url: https://arxiv.org/pdf/math/0702081v2
       locator: Section 4, screening strings at integral charges
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

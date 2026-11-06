@@ -27,6 +27,7 @@ sources:
     url: repository:items/def-derived-scheme-and-cotangent-complex.md
     locator: Definition of derived schemes and their cotangent complexes; the homotopy-pullback formula is supplied separately by HAG II Remark 1.1.0.9
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

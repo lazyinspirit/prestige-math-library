@@ -19,7 +19,7 @@ provenance:
 generation:
   role: example
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

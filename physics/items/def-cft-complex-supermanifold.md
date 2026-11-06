@@ -23,6 +23,7 @@ sources:
       url: https://arxiv.org/pdf/2205.01106v2
       locator: "§§2.1 and 4.1, PDF pp. 4–12: super-coordinate charts and Berezinian integration."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

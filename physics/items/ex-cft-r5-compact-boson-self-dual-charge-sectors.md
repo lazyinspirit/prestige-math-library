@@ -28,7 +28,7 @@ sources:
       url: https://academicweb.nd.edu/~pmnev/f22/CFT_book.pdf
       locator: Sections 6.1.5–6.1.6, printed pp. 198–200, momentum-winding charge sectors and radius duality.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -97,6 +97,7 @@ sources:
       url: https://www.math.stonybrook.edu/~aknapp/pdf-files/1-27.pdf
       locator: Theorem 3.6, printed pp. 16–17; for a compact connected Lie group, maximal tori are the analytic subgroups from maximal abelian subalgebras and are conjugate.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

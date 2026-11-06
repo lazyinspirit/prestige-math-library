@@ -38,7 +38,7 @@ sources:
     url: https://arxiv.org/pdf/1607.00327v3
     locator: §§3.4–3.6 and 8.2, Type IIA/IIB Killing-spinor equation conventions and flat-background specialization.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

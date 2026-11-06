@@ -29,7 +29,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf
       locator: Root decomposition of a simple Lie algebra and irreducibility of its root system.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

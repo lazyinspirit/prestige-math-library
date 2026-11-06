@@ -29,6 +29,7 @@ sources:
       url: https://arxiv.org/pdf/2305.10180v4
       locator: "Definitions 1.16 and 1.19, §1.5–1.7, PDF pp. 22–25."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

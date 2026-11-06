@@ -41,7 +41,7 @@ sources:
     locator: Section 3, particularly the smooth-surface branch of the curve reduction;
       dimension-two restriction reconstruction included here
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

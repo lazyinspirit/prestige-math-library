@@ -42,7 +42,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0212008"
       locator: "Appendix A, Lorentzian metric and connection conventions in eleven dimensions; the complete Koszul construction is proved locally here."
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

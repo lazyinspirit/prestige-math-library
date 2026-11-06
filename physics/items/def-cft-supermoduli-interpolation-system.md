@@ -24,6 +24,7 @@ sources:
       url: https://arxiv.org/pdf/2205.01106v2
       locator: "§4.2, equations (4.17)–(4.19), for source reparameterizations; §4.4, equations (4.29)–(4.31), PDF pp. 16–17, for paired face maps and boundary matching."
 verification:
+  precheck: n/a
   verified:
     model: gpt-6.1-sol
     verdict: pass

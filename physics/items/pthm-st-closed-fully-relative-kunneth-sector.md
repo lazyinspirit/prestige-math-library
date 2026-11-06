@@ -27,7 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0607105v3"
       locator: "Single-chiral source context only. No source theorem for the full closed sector is claimed; the finite-level Künneth argument is supplied locally."
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

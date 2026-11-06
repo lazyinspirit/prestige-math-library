@@ -50,7 +50,7 @@ sources:
     url: https://arxiv.org/pdf/1706.00331v1
     locator: Lemma 5.2, Corollary 5.3, Lemma 5.4 and Proposition 5.5, printed pp. 39–46, complete statements and proofs read; the varying-coefficient disk extraction is supplied locally in steps 4.1–6.1.
 verification:
-  precheck: pending
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

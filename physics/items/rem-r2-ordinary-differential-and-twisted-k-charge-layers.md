@@ -63,6 +63,7 @@ sources:
     url: https://arxiv.org/pdf/hep-th/9710230v3
     locator: Introduction and equation (1.1), PDF pp. 1–3.
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

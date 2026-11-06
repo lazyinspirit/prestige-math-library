@@ -25,7 +25,7 @@ sources:
       locator: "§§4.2–4.3 and 8.5–8.7: finite BV measure/operator conventions; no physical double-counting claim is sourced."
 proof_strategy: direct
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

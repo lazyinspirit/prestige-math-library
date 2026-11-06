@@ -35,6 +35,7 @@ dependency_roles:
   thm-euclidean-inverse-function-theorem: mathematical-premise
   thm-higher-regularity-of-local-inverses: mathematical-premise
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

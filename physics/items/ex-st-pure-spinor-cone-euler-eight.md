@@ -25,7 +25,7 @@ sources:
       locator: "§§3.3.1–3.4.1, PDF pp. 50–54: eleven-coordinate pure-spinor patch, top form, and Euler-current third pole."
 proof_strategy: direct
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass

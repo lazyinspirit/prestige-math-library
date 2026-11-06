@@ -67,6 +67,7 @@ sources:
       url: "https://arxiv.org/html/2110.00483v1"
       locator: "Appendix F, especially F.3: Fourier-transform-spectrometer bandpasses and conservative band-centre sensitivity tests; selected sections only."
 verification:
+  precheck: pass
   sources_checked:
     date: 2026-11-04
     scope: Recorded source, statement and proof-status review for this experiment in conformal-field-theory-string-theory-step3-fresh-2026-11-04, within the native reports' stated reading limits. This records no proof or new empirical validation.

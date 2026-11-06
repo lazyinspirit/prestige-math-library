@@ -56,6 +56,7 @@ sources:
       url: "https://people.math.harvard.edu/~elkies/M272.19/sep23.pdf"
       locator: "The modular-form ring theorem and theta-series corollary, PDF pp. 4-6; the rank-16 classification paragraph is on PDF p. 6, after invoking the root-lattice classification, which is supplied locally here."
 verification:
+  precheck: pass
   verified:
     model: gpt-6.1-sol
     verdict: pass

@@ -31,7 +31,7 @@ sources:
     url: https://arxiv.org/pdf/hep-th/9602052v2
     locator: Lecture III §§3.1–3.3, PDF pp. 22–31; Type II spinor chirality and D-brane Ramond boundary state.
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: gpt-6-luna
     verdict: pass
