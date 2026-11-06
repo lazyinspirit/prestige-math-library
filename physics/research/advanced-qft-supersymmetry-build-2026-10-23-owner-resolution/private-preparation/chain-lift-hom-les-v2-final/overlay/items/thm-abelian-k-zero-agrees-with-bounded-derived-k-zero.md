@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-abelian-k-zero-agrees-with-bounded-derived-k-zero.md

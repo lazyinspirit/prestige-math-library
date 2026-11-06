@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-clocked-universal-simulation-with-time-and-space-bounds.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-self-conjugate-partition-and-its-diagonal-hooks.md

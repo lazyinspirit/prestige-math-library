@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-strict-minimum-has-positive-semidefinite-hessian.md

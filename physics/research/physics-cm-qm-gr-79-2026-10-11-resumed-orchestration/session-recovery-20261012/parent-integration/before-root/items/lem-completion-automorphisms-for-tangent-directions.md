@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-completion-automorphisms-for-tangent-directions.md

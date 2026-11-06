@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex.md

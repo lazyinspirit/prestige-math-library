@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-directed-set-and-inverse-system-of-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-locally-finite-type-not-finite-type.md

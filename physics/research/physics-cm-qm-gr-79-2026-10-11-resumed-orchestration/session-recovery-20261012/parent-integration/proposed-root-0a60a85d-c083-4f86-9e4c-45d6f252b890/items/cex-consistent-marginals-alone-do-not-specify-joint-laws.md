@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-consistent-marginals-alone-do-not-specify-joint-laws.md

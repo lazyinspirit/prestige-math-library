@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-fibre-bundle-and-local-trivialization.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-coherent-module-scheme.md

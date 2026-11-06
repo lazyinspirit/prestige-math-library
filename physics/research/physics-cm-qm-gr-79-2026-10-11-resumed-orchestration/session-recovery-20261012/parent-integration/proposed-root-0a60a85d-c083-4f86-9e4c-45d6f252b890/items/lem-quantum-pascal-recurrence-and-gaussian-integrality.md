@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quantum-pascal-recurrence-and-gaussian-integrality.md

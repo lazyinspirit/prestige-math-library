@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-arbitrary-disjoint-union-of-second-countable-manifolds-is-second-countable.md

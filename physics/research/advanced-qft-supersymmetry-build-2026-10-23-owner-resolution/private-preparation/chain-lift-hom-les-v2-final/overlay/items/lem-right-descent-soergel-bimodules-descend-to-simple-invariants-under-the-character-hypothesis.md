@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-right-descent-soergel-bimodules-descend-to-simple-invariants-under-the-character-hypothesis.md

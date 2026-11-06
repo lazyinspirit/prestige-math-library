@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-grand-equivalence-for-simply-connected-plane-domains.md

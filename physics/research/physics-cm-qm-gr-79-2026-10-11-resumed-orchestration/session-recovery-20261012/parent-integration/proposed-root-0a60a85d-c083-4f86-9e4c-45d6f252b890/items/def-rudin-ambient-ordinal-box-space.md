@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-rudin-ambient-ordinal-box-space.md

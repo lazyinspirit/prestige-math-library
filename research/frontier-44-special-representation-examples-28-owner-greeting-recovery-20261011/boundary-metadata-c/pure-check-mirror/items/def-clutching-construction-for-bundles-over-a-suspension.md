@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-clutching-construction-for-bundles-over-a-suspension.md

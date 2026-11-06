@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-half-period-values-and-branching.md

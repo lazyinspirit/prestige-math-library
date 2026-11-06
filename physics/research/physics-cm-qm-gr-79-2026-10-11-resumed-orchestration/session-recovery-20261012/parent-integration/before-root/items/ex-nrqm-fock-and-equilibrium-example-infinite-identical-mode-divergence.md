@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-fock-and-equilibrium-example-infinite-identical-mode-divergence.md

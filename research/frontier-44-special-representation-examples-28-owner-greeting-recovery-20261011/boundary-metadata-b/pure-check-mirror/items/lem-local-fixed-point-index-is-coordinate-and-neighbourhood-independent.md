@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent.md

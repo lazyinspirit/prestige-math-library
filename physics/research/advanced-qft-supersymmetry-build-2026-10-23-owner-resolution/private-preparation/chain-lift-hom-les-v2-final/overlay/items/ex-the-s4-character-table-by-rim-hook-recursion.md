@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-s4-character-table-by-rim-hook-recursion.md

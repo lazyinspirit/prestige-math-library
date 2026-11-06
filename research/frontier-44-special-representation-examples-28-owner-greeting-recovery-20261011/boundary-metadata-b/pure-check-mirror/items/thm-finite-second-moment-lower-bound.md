@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-second-moment-lower-bound.md

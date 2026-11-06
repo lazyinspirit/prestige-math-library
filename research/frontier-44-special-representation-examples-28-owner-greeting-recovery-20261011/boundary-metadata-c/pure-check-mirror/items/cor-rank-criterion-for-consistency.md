@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-rank-criterion-for-consistency.md

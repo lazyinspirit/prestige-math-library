@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-trace-is-a-sigma-algebra.md

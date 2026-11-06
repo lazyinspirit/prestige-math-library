@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-level-one-e2-is-a-weight-two-modular-form.md

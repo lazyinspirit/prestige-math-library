@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-orders-of-decomposition-and-inertia-groups.md

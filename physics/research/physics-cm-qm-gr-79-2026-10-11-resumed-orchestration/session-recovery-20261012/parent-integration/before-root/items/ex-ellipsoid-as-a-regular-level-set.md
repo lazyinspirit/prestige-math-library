@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-ellipsoid-as-a-regular-level-set.md

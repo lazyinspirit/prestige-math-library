@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-relations-among-the-five-spectral-parts.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-valuation-ring-ideals-linearly-ordered.md

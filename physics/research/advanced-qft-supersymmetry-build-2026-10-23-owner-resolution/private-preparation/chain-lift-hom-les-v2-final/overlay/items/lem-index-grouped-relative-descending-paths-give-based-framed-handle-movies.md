@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-index-grouped-relative-descending-paths-give-based-framed-handle-movies.md

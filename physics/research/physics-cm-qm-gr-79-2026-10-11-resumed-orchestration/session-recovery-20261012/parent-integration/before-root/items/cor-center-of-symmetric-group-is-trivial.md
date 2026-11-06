@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-center-of-symmetric-group-is-trivial.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fundamental-group-acts-on-its-bass-serre-tree.md

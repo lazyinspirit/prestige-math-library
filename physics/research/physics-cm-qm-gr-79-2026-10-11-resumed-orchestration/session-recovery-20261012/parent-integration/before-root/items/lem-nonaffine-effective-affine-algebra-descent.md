@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonaffine-effective-affine-algebra-descent.md

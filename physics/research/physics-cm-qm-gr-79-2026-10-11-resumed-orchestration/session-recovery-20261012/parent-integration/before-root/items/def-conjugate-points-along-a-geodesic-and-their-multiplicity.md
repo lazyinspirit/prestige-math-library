@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-conjugate-points-along-a-geodesic-and-their-multiplicity.md

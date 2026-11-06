@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-fundamental-solution-by-division-of-a-fourier-symbol.md

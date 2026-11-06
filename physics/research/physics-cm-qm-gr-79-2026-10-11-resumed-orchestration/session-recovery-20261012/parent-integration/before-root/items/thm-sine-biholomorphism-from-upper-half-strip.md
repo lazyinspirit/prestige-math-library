@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sine-biholomorphism-from-upper-half-strip.md

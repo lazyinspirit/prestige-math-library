@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-f-four-as-a-polynomial-quotient.md

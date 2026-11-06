@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-connected-subsets-of-the-line.md

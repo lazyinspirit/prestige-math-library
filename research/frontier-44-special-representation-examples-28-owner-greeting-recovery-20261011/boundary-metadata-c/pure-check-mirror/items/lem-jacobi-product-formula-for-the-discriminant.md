@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-jacobi-product-formula-for-the-discriminant.md

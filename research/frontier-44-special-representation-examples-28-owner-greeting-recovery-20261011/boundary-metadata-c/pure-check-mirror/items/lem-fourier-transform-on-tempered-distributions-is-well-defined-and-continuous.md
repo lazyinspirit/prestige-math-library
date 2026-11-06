@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fourier-transform-on-tempered-distributions-is-well-defined-and-continuous.md

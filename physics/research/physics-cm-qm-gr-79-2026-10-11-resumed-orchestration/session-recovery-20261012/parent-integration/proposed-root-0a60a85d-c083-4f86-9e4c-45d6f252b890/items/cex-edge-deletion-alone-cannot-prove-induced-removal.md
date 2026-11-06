@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-edge-deletion-alone-cannot-prove-induced-removal.md

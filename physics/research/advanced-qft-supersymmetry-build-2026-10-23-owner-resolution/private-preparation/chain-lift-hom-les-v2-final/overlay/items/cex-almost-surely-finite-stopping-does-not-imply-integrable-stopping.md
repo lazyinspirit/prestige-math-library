@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-almost-surely-finite-stopping-does-not-imply-integrable-stopping.md

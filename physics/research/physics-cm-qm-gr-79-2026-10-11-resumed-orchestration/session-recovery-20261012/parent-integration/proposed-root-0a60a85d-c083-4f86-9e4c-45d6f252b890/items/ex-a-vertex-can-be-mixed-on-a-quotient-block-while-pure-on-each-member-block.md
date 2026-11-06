@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-vertex-can-be-mixed-on-a-quotient-block-while-pure-on-each-member-block.md

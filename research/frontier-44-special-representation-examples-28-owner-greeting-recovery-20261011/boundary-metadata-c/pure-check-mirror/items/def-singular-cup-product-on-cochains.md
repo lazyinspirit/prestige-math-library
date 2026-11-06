@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-singular-cup-product-on-cochains.md

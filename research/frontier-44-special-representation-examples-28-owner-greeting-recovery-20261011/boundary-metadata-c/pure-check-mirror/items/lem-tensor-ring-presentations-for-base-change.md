@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-tensor-ring-presentations-for-base-change.md

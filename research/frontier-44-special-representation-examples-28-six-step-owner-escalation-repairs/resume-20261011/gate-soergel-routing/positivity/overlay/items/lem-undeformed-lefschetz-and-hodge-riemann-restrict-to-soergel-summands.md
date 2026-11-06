@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-undeformed-lefschetz-and-hodge-riemann-restrict-to-soergel-summands.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonprincipal-dirichlet-character-partial-sums.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-uncorrelated-random-variables-need-not-be-independent.md

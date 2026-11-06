@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-commensurator-unitary-character-and-monomial-induced-representation.md

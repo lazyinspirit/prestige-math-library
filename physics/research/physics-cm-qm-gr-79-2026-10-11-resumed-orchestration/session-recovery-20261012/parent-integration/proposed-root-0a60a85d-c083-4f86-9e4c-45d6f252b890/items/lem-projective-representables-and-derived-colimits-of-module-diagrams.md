@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-representables-and-derived-colimits-of-module-diagrams.md

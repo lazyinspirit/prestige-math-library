@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-root-limit-one-decides-nothing.md

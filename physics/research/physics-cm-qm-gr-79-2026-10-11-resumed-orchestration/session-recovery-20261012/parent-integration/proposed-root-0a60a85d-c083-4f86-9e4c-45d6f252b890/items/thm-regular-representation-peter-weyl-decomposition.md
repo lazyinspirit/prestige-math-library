@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-regular-representation-peter-weyl-decomposition.md

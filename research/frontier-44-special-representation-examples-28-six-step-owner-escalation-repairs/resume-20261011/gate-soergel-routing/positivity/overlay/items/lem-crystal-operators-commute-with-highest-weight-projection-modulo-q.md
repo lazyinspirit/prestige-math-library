@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-crystal-operators-commute-with-highest-weight-projection-modulo-q.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cyclotomic-klr-module-g-zero-is-the-dual-integral-highest-weight-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cardinality-of-a-finite-dimensional-space-over-a-finite-field.md

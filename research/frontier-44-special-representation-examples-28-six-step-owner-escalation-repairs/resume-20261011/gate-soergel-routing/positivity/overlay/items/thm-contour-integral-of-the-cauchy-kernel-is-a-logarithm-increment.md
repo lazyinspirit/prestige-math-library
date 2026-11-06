@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-contour-integral-of-the-cauchy-kernel-is-a-logarithm-increment.md

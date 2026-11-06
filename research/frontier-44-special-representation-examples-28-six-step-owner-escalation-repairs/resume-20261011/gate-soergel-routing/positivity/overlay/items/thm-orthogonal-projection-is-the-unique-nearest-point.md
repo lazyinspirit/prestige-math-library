@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-orthogonal-projection-is-the-unique-nearest-point.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-reverse-continuation-is-an-inverse-on-morse-homology.md

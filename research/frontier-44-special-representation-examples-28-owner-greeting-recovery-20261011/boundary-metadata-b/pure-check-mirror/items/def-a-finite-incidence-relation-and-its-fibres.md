@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-a-finite-incidence-relation-and-its-fibres.md

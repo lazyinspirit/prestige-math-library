@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-factorization-of-expectations-for-independent-variables.md

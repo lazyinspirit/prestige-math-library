@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-small-product-of-abelian-categories-is-abelian.md

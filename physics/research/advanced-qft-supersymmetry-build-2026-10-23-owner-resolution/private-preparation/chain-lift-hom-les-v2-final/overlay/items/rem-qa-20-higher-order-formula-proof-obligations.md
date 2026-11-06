@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-qa-20-higher-order-formula-proof-obligations.md

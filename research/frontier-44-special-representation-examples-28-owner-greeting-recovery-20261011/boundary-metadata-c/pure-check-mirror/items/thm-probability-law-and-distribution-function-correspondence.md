@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-probability-law-and-distribution-function-correspondence.md

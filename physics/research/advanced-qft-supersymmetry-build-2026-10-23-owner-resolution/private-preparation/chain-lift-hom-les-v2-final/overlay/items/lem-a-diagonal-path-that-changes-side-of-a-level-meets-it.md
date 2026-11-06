@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-diagonal-path-that-changes-side-of-a-level-meets-it.md

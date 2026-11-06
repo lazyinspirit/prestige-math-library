@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-principal-divisor-degree-zero-proper-curve.md

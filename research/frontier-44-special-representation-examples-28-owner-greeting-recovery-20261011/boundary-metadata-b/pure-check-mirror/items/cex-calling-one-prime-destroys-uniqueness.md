@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-calling-one-prime-destroys-uniqueness.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-erdos-hajnal-property-passes-to-hereditary-subclasses.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-intrinsic-topology-of-an-immersed-submanifold-is-always-the-subspace-topology.md

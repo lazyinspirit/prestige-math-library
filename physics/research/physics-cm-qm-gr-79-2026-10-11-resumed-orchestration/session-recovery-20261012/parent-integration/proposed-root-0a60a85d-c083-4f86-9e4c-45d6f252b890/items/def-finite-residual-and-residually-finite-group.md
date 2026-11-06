@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-finite-residual-and-residually-finite-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-injectivity-radius-at-a-point-and-of-a-manifold.md

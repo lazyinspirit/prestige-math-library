@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-schwartz-function-need-not-have-compact-support.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-logarithmic-unit-image-is-a-full-lattice.md

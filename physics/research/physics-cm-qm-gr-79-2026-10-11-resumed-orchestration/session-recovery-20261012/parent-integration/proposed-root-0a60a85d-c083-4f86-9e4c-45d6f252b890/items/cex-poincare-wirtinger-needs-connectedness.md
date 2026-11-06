@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-poincare-wirtinger-needs-connectedness.md

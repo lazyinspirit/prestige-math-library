@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-ordinary-exchange-moves-are-markov-sequences.md

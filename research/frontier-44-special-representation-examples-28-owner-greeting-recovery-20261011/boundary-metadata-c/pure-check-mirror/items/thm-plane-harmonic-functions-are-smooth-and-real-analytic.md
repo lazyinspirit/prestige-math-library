@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-plane-harmonic-functions-are-smooth-and-real-analytic.md

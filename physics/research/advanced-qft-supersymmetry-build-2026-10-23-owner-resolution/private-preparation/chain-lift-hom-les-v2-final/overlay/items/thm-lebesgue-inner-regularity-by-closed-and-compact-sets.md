@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-lebesgue-inner-regularity-by-closed-and-compact-sets.md

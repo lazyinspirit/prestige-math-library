@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-gaussian-attains-heisenberg-equality.md

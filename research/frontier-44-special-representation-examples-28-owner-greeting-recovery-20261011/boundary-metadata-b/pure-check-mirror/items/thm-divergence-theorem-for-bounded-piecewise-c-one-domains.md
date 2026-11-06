@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-divergence-theorem-for-bounded-piecewise-c-one-domains.md

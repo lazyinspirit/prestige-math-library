@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-l-series-coefficient-identity-for-projective-spaces.md

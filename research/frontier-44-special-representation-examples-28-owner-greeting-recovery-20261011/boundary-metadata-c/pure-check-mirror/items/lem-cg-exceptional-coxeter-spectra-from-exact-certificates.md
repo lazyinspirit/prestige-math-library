@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-exceptional-coxeter-spectra-from-exact-certificates.md

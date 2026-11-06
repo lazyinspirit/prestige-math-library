@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-middle-lefschetz-primitive-polarization-follows-from-nonmiddle-polarizations.md

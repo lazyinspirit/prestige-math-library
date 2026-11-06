@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-levy-collapse-of-a-regular-cardinal.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coherent-sheaf-finite-twisted-locally-free-resolution-projective-space.md

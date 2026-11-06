@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-koszul-differential-is-well-defined-and-squares-to-zero.md

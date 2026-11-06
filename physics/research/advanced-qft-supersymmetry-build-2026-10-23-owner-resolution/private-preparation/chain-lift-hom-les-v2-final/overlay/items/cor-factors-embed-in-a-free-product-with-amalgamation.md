@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-factors-embed-in-a-free-product-with-amalgamation.md

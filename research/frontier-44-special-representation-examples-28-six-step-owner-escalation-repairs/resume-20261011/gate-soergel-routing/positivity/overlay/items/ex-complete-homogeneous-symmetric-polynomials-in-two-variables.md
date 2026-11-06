@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-complete-homogeneous-symmetric-polynomials-in-two-variables.md

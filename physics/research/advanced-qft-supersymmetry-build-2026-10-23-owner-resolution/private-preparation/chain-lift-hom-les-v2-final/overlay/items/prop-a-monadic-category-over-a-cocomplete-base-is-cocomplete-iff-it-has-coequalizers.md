@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-monadic-category-over-a-cocomplete-base-is-cocomplete-iff-it-has-coequalizers.md

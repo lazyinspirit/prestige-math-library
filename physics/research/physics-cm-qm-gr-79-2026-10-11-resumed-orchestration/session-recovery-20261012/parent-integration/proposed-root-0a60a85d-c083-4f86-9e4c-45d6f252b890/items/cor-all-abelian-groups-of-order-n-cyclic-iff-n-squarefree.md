@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-all-abelian-groups-of-order-n-cyclic-iff-n-squarefree.md

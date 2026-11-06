@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-reducible-semidefinite-forms-are-factorwise.md

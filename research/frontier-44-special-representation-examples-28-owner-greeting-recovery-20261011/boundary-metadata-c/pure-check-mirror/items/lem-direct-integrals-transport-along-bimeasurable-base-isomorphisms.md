@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-direct-integrals-transport-along-bimeasurable-base-isomorphisms.md

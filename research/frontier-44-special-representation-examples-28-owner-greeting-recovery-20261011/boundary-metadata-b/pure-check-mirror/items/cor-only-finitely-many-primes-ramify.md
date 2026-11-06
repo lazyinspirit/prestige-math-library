@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-only-finitely-many-primes-ramify.md

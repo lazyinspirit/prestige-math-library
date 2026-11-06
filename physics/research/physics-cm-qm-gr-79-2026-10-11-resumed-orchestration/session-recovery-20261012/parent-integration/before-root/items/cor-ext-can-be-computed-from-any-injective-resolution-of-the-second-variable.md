@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ext-can-be-computed-from-any-injective-resolution-of-the-second-variable.md

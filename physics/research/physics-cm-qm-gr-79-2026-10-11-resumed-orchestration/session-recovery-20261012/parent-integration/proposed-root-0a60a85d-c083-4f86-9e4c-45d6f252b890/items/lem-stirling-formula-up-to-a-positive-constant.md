@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stirling-formula-up-to-a-positive-constant.md

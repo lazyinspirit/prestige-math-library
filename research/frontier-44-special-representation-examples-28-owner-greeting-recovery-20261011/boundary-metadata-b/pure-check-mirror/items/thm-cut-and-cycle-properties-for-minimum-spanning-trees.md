@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cut-and-cycle-properties-for-minimum-spanning-trees.md

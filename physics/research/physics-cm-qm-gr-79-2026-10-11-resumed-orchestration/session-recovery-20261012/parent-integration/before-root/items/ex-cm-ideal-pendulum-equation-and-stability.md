@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm-ideal-pendulum-equation-and-stability.md

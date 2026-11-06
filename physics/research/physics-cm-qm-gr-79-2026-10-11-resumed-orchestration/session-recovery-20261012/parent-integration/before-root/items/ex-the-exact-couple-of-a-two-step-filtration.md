@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-exact-couple-of-a-two-step-filtration.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-evaluation-is-monic-and-coevaluation-is-epic-for-nonzero-objects.md

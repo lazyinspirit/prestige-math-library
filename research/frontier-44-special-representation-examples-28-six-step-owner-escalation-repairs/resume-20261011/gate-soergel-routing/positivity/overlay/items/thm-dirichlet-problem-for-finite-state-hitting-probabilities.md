@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-dirichlet-problem-for-finite-state-hitting-probabilities.md

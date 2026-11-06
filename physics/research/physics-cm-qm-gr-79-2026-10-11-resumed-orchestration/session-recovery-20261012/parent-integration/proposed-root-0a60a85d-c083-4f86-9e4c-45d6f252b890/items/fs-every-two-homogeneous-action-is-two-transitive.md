@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-two-homogeneous-action-is-two-transitive.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-greens-theorem-for-finite-unions-of-elementary-regions.md

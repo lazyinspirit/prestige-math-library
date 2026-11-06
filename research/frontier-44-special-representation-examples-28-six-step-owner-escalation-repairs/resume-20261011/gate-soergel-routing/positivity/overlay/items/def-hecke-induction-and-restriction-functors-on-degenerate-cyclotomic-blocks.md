@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks.md

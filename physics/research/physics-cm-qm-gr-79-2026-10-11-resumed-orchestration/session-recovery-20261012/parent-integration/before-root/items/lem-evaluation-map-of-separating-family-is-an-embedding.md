@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-evaluation-map-of-separating-family-is-an-embedding.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-monad-morphism-induces-restriction-of-algebras-and-a-comparison-of-free-algebras.md

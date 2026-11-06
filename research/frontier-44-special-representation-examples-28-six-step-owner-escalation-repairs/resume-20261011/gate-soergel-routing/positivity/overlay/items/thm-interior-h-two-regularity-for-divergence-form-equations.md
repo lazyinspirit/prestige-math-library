@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-interior-h-two-regularity-for-divergence-form-equations.md

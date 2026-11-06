@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-endofunctor-category-of-a-small-category-is-strict-monoidal-under-composition.md

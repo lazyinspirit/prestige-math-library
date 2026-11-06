@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue.md

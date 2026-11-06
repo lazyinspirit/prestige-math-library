@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-eight-dimensional-adjoint-representation-of-sl-three.md

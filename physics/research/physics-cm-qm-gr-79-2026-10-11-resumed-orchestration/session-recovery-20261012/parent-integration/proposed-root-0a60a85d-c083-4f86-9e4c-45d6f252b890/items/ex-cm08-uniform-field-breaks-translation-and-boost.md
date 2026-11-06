@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm08-uniform-field-breaks-translation-and-boost.md

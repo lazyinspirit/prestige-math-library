@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-mean-value-inequality-for-total-derivatives.md

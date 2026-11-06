@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-uniform-maximum-has-n-rate-not-root-n.md

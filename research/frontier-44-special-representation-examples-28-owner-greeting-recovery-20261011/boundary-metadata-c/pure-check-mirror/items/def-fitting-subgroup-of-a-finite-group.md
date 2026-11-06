@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-fitting-subgroup-of-a-finite-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-doob-decomposition-of-an-integrable-adapted-process.md

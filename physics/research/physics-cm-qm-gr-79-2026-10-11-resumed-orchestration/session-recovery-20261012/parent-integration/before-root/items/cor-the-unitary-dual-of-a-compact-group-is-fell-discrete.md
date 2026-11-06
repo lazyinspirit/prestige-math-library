@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-unitary-dual-of-a-compact-group-is-fell-discrete.md

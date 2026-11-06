@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-floating-point-conjugate-gradients-can-lose-orthogonality-conjugacy-and-finite-termination.md

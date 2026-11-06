@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-equivalent-metrics-need-not-come-from-equivalent-norms.md

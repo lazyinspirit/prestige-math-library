@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fundamental-path-fibration-class-has-the-normalized-relative-lift.md

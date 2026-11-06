@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-equidimensional-fibre-dimension-bound-regular-sequence.md

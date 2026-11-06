@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-analytic-semigroups-are-operator-norm-differentiable-away-from-zero.md

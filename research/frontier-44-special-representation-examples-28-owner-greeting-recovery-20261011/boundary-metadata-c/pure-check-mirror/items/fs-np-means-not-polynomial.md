@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-np-means-not-polynomial.md

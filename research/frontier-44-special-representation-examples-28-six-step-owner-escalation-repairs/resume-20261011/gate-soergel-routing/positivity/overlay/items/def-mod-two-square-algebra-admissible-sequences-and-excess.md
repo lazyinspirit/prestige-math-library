@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-mod-two-square-algebra-admissible-sequences-and-excess.md

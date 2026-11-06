@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-real-ultralimits-and-free-tail-extension.md

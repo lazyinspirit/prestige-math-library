@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-compactly-supported-cutoff-of-an-incomplete-vector-field-is-complete.md

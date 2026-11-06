@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-annihilators-of-simple-highest-weight-modules-are-primitive.md

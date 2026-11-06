@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-curvature-is-c-infinity-linear-in-all-three-vector-fields.md

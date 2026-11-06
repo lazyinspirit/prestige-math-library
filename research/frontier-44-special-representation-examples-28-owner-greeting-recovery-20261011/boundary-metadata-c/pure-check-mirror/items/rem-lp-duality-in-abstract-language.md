@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-lp-duality-in-abstract-language.md

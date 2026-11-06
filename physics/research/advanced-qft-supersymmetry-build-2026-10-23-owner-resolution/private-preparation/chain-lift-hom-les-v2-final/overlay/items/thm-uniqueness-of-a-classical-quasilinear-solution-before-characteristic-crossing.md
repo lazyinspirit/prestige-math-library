@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-uniqueness-of-a-classical-quasilinear-solution-before-characteristic-crossing.md

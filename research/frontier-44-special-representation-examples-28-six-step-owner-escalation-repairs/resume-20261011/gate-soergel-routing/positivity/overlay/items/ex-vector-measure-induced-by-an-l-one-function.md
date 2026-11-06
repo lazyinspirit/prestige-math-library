@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-vector-measure-induced-by-an-l-one-function.md

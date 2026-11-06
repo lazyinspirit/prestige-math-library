@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-epsilon-net-of-unit-sphere-has-cardinality-bound.md

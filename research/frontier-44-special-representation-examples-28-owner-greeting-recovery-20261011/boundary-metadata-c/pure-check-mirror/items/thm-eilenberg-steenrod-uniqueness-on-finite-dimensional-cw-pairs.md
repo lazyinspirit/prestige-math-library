@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-eilenberg-steenrod-uniqueness-on-finite-dimensional-cw-pairs.md

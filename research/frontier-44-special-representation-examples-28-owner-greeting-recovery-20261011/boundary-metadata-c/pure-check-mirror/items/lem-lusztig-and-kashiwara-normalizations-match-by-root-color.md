@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-lusztig-and-kashiwara-normalizations-match-by-root-color.md

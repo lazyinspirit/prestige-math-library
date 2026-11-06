@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-an-lkb-kernel-braid-fixes-every-standard-adjacent-edge-up-to-isotopy.md

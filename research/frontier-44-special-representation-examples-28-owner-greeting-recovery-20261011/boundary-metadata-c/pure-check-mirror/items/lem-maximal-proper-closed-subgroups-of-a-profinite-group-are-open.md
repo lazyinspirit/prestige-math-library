@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-maximal-proper-closed-subgroups-of-a-profinite-group-are-open.md

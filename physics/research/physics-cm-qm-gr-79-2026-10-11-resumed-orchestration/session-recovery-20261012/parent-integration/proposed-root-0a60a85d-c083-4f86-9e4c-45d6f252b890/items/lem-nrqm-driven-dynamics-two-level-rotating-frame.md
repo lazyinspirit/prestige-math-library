@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-driven-dynamics-two-level-rotating-frame.md

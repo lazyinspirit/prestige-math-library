@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coproduct-preserves-the-positive-and-negative-quantum-serre-ideals.md

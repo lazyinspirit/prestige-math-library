@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-convergence-of-infinite-regular-continued-fractions.md

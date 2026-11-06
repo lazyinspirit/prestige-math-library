@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-primitive-root-iff-unit-group-generator.md

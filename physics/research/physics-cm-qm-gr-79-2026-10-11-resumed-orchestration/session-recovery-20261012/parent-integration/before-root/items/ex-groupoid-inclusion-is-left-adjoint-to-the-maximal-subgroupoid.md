@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-groupoid-inclusion-is-left-adjoint-to-the-maximal-subgroupoid.md

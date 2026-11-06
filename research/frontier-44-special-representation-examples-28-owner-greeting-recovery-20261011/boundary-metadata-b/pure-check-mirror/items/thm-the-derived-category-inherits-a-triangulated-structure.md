@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-derived-category-inherits-a-triangulated-structure.md

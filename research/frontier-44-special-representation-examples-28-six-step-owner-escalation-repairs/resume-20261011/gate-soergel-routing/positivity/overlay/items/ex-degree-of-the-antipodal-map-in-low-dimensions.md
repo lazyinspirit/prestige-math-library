@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-degree-of-the-antipodal-map-in-low-dimensions.md

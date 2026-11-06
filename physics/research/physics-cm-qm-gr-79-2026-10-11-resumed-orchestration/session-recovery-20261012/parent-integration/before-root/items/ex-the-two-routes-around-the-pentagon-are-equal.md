@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-two-routes-around-the-pentagon-are-equal.md

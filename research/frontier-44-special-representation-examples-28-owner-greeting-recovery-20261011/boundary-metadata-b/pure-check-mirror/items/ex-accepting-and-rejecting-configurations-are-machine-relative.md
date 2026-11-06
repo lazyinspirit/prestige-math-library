@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-accepting-and-rejecting-configurations-are-machine-relative.md

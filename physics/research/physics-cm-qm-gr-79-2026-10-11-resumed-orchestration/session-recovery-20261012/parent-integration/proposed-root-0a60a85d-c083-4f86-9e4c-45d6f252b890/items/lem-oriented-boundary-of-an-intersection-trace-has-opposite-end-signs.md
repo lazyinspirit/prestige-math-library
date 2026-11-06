@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-oriented-boundary-of-an-intersection-trace-has-opposite-end-signs.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-semilinear-and-quasilinear-first-order-cauchy-problems.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-normed-space-completions-are-uniquely-linearly-isometric.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-positive-negative-part-and-truncation-calculus-in-w-one-p.md

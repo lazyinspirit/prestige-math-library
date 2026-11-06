@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-standard-inner-product-on-complex-class-functions.md

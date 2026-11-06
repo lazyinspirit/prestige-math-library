@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero.md

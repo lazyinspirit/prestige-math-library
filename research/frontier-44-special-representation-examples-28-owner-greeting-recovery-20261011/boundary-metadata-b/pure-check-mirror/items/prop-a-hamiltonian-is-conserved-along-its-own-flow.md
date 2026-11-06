@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-hamiltonian-is-conserved-along-its-own-flow.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-what-is-needed-before-a-trace-can-be-written.md

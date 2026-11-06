@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-positive-definite-hessian-implies-strict-convexity.md

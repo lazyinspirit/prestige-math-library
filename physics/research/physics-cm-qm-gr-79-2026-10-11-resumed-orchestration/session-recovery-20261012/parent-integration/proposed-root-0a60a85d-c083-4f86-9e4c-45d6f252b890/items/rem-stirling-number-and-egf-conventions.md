@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-stirling-number-and-egf-conventions.md

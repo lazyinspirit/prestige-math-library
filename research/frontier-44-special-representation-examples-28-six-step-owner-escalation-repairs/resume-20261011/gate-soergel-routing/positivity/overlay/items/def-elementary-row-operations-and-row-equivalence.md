@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-elementary-row-operations-and-row-equivalence.md

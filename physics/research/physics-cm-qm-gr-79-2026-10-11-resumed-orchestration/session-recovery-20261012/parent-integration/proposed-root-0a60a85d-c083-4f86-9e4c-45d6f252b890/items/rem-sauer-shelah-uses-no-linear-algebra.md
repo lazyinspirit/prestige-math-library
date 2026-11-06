@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-sauer-shelah-uses-no-linear-algebra.md

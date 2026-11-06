@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-absolutely-convergent-non-smooth-fourier-series.md

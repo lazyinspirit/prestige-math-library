@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cauchy-integral-formula-computed-on-a-bidisc.md

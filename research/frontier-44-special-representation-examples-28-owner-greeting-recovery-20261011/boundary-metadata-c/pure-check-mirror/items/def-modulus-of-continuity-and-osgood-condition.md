@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-modulus-of-continuity-and-osgood-condition.md

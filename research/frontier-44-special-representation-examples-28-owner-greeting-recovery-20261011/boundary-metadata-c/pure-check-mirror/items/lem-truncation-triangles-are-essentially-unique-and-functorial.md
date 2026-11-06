@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-truncation-triangles-are-essentially-unique-and-functorial.md

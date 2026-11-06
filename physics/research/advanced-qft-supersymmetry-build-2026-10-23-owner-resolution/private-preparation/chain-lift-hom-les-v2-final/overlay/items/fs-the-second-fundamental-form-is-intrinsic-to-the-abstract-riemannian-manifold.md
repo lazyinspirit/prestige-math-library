@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-second-fundamental-form-is-intrinsic-to-the-abstract-riemannian-manifold.md

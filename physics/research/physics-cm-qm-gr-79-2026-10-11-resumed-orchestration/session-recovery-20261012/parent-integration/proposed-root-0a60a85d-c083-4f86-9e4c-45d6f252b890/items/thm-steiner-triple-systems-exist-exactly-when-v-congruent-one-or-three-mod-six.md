@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-prikry-forcing-is-ccc.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-regular-base-surface-cartier-curve-canonical-adjunction.md

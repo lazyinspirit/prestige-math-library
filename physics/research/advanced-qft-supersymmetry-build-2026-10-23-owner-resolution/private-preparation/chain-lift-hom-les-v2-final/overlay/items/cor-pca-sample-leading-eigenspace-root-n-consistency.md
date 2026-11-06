@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-pca-sample-leading-eigenspace-root-n-consistency.md

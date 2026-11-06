@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-complete-graph-has-no-large-sparse-set.md

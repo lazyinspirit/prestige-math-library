@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-parabolic-semi-regular-duality-and-reverse-column-label-map.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-bounded-vector-field-on-all-of-euclidean-space-is-complete.md

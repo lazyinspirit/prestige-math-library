@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-transpose-range-need-not-be-norm-dense.md

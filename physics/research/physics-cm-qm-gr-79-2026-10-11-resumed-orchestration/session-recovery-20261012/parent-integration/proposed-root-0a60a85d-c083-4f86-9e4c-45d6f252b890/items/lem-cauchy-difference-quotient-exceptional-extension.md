@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cauchy-difference-quotient-exceptional-extension.md

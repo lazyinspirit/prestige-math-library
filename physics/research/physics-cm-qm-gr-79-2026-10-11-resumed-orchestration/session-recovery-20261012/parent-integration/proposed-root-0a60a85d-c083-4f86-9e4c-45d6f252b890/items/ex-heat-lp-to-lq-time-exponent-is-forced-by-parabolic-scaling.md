@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-heat-lp-to-lq-time-exponent-is-forced-by-parabolic-scaling.md

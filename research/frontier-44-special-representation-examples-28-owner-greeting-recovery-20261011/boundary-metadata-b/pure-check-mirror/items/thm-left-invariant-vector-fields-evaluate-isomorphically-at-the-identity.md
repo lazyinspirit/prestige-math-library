@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity.md

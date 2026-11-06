@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-open-manifolds-admit-handle-filtrations-without-top-index-handles.md

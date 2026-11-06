@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-conjugation-does-not-send-distinct-parts-to-odd-parts.md

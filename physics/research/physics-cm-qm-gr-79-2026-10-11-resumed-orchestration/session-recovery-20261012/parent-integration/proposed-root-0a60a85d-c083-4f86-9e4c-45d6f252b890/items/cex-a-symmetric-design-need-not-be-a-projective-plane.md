@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-symmetric-design-need-not-be-a-projective-plane.md

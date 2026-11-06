@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional.md

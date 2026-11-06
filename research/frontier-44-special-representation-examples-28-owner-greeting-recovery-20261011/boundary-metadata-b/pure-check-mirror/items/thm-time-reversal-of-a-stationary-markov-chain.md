@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-time-reversal-of-a-stationary-markov-chain.md

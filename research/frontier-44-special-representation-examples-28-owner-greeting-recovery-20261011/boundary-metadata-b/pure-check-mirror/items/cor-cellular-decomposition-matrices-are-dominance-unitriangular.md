@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-cellular-decomposition-matrices-are-dominance-unitriangular.md

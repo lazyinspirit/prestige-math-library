@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-projective-rational-point-koszul-residue-normalization.md

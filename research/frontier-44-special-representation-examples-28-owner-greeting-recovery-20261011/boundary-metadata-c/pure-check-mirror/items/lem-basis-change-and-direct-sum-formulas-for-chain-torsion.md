@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-basis-change-and-direct-sum-formulas-for-chain-torsion.md

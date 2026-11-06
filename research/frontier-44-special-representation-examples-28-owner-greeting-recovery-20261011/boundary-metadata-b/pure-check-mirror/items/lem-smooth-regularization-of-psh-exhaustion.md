@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-regularization-of-psh-exhaustion.md

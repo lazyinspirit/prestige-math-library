@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-morphisms-between-finite-biproducts-correspond-to-matrices.md

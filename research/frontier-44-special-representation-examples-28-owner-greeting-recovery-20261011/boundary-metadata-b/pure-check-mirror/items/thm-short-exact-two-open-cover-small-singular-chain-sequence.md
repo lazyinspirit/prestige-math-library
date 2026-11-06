@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-short-exact-two-open-cover-small-singular-chain-sequence.md

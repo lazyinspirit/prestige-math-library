@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-schur-generic-deformation-standards-have-nondegenerate-forms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-green-function-uniqueness-symmetry-and-monotonicity.md

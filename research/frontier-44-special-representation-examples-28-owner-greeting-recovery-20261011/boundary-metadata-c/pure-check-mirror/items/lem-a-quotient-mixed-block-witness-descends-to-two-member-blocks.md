@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-quotient-mixed-block-witness-descends-to-two-member-blocks.md

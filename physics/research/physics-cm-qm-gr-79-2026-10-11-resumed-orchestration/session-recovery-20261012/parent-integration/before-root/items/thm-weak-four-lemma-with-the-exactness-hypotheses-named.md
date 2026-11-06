@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-weak-four-lemma-with-the-exactness-hypotheses-named.md

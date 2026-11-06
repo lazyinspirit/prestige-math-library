@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euclidean-chart-measure-agrees-with-polar-surface-measure.md

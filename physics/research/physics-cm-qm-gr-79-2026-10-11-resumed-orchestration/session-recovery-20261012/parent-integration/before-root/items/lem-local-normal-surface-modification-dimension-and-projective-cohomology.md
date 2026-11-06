@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-normal-surface-modification-dimension-and-projective-cohomology.md

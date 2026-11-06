@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-tits-cone-and-fundamental-chamber.md

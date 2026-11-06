@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves.md

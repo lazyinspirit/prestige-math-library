@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-disjoint-union-of-small-cliques-is-a-sparse-vertex-set.md

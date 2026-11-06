@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-leaf-equivalence-relation-of-an-integrable-distribution.md

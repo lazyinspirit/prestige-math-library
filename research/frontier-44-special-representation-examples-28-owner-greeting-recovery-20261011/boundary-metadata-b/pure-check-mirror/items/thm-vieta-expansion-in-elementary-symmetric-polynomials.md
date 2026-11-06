@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-vieta-expansion-in-elementary-symmetric-polynomials.md

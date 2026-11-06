@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-distinct-borel-measures-can-represent-the-same-c-c-functional.md

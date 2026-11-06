@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-isomorphism-characterised-by-composition-bijections.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-groups-of-order-forty-five-are-abelian.md

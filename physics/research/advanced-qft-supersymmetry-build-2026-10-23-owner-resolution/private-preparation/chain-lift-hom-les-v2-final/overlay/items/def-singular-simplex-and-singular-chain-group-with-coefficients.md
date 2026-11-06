@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-singular-simplex-and-singular-chain-group-with-coefficients.md

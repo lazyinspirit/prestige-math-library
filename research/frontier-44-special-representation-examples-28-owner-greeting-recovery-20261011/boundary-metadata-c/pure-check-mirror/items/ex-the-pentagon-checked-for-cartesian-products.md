@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-pentagon-checked-for-cartesian-products.md

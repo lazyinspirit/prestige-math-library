@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-uniqueness-of-beltrami-solutions-without-normalization.md

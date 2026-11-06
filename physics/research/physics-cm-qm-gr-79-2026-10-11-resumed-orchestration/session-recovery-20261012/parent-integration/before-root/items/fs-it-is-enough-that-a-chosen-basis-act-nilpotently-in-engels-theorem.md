@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-it-is-enough-that-a-chosen-basis-act-nilpotently-in-engels-theorem.md

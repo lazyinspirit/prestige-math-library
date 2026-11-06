@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity.md

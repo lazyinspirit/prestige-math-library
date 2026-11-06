@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-raw-versus-usual-filtration-in-the-strong-markov-theorem.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-barrier-characterization-of-regular-boundary-points.md

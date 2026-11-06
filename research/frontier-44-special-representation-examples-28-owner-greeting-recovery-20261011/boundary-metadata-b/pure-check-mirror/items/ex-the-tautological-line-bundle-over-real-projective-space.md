@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-tautological-line-bundle-over-real-projective-space.md

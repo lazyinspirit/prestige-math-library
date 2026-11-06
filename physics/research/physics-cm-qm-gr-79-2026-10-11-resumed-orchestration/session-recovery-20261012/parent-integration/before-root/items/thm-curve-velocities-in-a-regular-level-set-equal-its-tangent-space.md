@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-curve-velocities-in-a-regular-level-set-equal-its-tangent-space.md

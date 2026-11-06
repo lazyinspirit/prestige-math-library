@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rapid-filters-are-not-lebesgue-measurable.md

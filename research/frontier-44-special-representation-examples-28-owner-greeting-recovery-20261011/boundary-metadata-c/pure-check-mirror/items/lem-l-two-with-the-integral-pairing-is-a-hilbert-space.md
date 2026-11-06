@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-l-two-with-the-integral-pairing-is-a-hilbert-space.md

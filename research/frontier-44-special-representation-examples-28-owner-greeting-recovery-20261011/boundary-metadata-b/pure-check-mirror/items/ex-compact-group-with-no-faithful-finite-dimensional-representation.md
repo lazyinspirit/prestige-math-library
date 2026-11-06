@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-compact-group-with-no-faithful-finite-dimensional-representation.md

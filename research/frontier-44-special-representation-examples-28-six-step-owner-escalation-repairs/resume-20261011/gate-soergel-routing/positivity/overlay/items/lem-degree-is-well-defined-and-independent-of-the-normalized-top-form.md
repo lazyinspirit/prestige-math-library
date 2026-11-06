@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-degree-is-well-defined-and-independent-of-the-normalized-top-form.md

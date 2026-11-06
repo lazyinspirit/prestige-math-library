@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-normal-surface-normalization-commutes-with-base-completion.md

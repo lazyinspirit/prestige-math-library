@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fejer-uniform-convergence-for-continuous-periodic-functions.md

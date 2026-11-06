@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-based-homotopies-transverse-to-the-zero-section-give-normal-cobordisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-reed-solomon-outer-code-and-binary-linear-inner-code.md

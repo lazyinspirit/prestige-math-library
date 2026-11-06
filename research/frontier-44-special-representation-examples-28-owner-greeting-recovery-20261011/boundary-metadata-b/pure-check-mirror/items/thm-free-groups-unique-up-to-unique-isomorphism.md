@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-free-groups-unique-up-to-unique-isomorphism.md

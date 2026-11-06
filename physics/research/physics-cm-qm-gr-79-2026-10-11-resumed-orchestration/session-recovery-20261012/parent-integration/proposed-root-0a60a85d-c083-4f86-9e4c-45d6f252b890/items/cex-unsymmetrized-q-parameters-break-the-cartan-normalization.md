@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-unsymmetrized-q-parameters-break-the-cartan-normalization.md

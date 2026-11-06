@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-easton-singular-cardinal-caveat.md

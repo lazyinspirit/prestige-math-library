@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-point-divisor-exact-sequence-and-euler-characteristic-step.md

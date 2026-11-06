@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-steenrod-squares-are-not-integral-cohomology-operations.md

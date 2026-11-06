@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure.md

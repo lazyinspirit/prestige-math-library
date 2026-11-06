@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-finite-hausdorff-space-is-discrete.md

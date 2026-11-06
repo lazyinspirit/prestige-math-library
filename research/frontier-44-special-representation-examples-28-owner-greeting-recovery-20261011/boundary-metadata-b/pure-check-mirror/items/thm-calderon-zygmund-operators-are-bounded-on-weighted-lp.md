@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-calderon-zygmund-operators-are-bounded-on-weighted-lp.md

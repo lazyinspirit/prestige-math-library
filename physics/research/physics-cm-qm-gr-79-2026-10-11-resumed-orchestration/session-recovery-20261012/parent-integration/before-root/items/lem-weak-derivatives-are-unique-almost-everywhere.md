@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-derivatives-are-unique-almost-everywhere.md

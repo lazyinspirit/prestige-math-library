@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-uct-cohomology-of-a-two-term-free-complex.md

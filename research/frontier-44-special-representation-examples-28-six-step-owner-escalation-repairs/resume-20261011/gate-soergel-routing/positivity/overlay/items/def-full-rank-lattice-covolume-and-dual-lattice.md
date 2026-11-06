@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-full-rank-lattice-covolume-and-dual-lattice.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism.md

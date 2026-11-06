@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-su-two-to-so-three-as-a-covering-homomorphism.md

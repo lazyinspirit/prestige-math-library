@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-braid-category-is-the-free-strict-braided-monoidal-category-on-one-generator.md

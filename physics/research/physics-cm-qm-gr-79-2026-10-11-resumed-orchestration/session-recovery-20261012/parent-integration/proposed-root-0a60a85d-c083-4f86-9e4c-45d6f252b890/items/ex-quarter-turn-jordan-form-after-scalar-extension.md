@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-quarter-turn-jordan-form-after-scalar-extension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-pairwise-and-mutual-independence-of-events.md

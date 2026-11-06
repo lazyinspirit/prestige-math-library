@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-same-number-of-removable-p-hooks-does-not-replace-the-core-test.md

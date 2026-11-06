@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-time-translation-acts-freely-on-nonconstant-trajectories.md

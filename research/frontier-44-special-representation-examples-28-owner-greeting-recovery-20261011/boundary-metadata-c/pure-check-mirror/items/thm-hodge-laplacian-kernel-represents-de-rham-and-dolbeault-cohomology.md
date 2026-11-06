@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hodge-laplacian-kernel-represents-de-rham-and-dolbeault-cohomology.md

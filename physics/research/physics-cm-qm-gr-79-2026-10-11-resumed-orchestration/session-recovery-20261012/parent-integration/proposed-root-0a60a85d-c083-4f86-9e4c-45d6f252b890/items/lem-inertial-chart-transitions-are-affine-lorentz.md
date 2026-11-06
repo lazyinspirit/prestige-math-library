@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-inertial-chart-transitions-are-affine-lorentz.md

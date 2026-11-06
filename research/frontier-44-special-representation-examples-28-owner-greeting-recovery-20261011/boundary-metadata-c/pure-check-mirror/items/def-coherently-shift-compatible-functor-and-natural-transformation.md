@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-coherently-shift-compatible-functor-and-natural-transformation.md

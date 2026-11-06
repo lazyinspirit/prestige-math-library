@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-deck-groups-of-connected-circle-coverings.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-derivative-estimate-proof-of-one-sided-harmonic-liouville.md

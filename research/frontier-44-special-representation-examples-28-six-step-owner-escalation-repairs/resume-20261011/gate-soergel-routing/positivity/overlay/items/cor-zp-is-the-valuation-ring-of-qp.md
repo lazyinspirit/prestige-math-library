@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-zp-is-the-valuation-ring-of-qp.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-universal-hyperplanes-lower-the-defect-for-projective-space-to-a-point.md

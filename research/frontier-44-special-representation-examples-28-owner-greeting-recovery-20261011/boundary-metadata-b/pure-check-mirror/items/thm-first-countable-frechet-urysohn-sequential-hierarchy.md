@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-first-countable-frechet-urysohn-sequential-hierarchy.md

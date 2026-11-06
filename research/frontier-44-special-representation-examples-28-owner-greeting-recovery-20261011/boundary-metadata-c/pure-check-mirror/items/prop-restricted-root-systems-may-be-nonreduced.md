@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-restricted-root-systems-may-be-nonreduced.md

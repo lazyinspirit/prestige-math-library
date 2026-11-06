@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-standard-handle-admits-an-adapted-morse-function.md

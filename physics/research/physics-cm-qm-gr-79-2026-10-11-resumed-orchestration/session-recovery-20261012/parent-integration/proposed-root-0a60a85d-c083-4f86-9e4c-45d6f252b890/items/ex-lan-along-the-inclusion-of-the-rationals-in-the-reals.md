@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lan-along-the-inclusion-of-the-rationals-in-the-reals.md

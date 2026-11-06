@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-brauer-homomorphism-for-a-p-subgroup.md

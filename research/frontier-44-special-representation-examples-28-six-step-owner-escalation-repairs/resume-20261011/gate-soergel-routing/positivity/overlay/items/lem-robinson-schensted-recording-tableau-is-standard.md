@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-robinson-schensted-recording-tableau-is-standard.md

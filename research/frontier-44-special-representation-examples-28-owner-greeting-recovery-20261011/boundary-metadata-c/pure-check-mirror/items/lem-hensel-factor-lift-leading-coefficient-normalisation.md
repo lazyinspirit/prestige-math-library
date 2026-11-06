@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hensel-factor-lift-leading-coefficient-normalisation.md

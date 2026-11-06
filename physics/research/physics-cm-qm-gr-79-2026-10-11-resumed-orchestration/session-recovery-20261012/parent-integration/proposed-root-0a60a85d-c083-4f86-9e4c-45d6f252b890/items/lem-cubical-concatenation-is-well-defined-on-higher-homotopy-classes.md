@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cubical-concatenation-is-well-defined-on-higher-homotopy-classes.md

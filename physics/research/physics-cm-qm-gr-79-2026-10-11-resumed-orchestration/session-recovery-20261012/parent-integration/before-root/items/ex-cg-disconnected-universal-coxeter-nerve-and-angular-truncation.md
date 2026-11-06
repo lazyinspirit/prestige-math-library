@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-disconnected-universal-coxeter-nerve-and-angular-truncation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-interior-estimate-for-poisson-equation-with-holder-data.md

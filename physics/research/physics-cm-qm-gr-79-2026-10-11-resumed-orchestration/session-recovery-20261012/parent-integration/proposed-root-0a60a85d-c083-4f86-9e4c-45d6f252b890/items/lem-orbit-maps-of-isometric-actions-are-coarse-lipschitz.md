@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orbit-maps-of-isometric-actions-are-coarse-lipschitz.md

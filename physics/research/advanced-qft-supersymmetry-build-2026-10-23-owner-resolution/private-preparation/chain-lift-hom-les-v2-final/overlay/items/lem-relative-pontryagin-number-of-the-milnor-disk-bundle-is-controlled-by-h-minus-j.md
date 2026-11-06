@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-relative-pontryagin-number-of-the-milnor-disk-bundle-is-controlled-by-h-minus-j.md

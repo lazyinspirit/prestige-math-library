@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fixed-trace-and-free-trace-variations-give-different-boundary-equations.md

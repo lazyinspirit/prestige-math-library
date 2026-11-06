@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-finite-fields-are-splitting-fields-of-x-q-minus-x.md

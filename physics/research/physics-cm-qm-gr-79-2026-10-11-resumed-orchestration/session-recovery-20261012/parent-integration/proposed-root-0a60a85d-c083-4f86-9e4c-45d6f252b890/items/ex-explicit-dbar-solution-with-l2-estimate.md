@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-explicit-dbar-solution-with-l2-estimate.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-projective-lines-have-one-mod-two-intersection.md

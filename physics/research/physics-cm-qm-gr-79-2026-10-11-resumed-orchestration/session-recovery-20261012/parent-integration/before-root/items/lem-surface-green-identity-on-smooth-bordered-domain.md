@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-surface-green-identity-on-smooth-bordered-domain.md

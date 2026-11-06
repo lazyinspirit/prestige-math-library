@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-prime-to-p-roots-lift-uniquely-in-a-complete-discrete-valuation-ring.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-heat-kernel-is-the-causal-fundamental-solution.md

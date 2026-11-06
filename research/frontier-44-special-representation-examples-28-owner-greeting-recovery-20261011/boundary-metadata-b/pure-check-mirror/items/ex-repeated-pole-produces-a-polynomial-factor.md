@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-repeated-pole-produces-a-polynomial-factor.md

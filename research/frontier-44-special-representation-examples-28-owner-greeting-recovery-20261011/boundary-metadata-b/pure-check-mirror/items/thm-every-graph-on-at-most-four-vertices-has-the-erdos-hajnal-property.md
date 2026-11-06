@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-graph-on-at-most-four-vertices-has-the-erdos-hajnal-property.md

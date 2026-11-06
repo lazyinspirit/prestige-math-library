@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-type-i-type-ii-and-elementary-green-regions.md

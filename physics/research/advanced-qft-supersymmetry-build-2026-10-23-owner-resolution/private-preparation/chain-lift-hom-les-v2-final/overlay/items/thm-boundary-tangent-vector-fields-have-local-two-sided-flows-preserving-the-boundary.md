@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-boundary-tangent-vector-fields-have-local-two-sided-flows-preserving-the-boundary.md

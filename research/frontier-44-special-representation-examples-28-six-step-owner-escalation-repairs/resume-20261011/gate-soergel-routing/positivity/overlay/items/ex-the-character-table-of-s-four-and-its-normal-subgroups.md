@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-character-table-of-s-four-and-its-normal-subgroups.md

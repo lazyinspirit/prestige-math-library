@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-singular-planar-diagrams-have-controlled-coarse-disk-thickenings.md

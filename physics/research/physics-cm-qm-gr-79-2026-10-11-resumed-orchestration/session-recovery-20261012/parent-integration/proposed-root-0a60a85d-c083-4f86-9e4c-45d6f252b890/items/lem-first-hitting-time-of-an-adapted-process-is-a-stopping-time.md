@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time.md

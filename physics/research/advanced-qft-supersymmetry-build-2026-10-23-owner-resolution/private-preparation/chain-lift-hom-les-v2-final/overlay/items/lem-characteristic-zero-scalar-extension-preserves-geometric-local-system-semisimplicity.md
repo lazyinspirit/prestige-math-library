@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-characteristic-zero-scalar-extension-preserves-geometric-local-system-semisimplicity.md

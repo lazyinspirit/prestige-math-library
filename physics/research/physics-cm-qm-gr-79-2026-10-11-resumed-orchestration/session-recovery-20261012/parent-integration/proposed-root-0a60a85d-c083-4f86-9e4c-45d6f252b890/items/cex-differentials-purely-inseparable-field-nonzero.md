@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-differentials-purely-inseparable-field-nonzero.md

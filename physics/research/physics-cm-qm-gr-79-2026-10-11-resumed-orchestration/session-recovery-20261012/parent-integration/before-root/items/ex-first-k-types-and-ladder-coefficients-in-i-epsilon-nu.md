@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-first-k-types-and-ladder-coefficients-in-i-epsilon-nu.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-spatial-rotation-of-an-inertial-frame.md

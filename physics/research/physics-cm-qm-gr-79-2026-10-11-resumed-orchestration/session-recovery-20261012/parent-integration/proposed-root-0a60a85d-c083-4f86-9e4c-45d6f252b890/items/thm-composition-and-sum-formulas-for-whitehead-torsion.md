@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-composition-and-sum-formulas-for-whitehead-torsion.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cyclic-etale-covers-give-geometric-semisimple-weight-zero-monodromy.md

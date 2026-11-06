@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-embedded-submanifold-is-an-open-subset-of-the-ambient-manifold.md

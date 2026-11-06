@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix.md

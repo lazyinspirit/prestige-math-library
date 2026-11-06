@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image.md

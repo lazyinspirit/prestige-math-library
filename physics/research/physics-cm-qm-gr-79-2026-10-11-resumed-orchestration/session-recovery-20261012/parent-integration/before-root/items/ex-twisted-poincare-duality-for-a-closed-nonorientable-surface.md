@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-twisted-poincare-duality-for-a-closed-nonorientable-surface.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-similarity-is-an-equivalence-relation-and-models-basis-change.md

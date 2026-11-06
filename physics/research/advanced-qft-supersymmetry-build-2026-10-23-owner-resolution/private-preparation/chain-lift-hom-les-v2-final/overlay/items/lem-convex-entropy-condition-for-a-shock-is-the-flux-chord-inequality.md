@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality.md

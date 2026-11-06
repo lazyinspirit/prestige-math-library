@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-involutions-generate-the-infinite-dihedral-group.md

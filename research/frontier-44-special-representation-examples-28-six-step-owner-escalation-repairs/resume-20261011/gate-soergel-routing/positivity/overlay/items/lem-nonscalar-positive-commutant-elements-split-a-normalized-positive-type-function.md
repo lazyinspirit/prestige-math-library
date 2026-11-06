@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonscalar-positive-commutant-elements-split-a-normalized-positive-type-function.md

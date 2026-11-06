@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lc-first-inaccessible-is-not-mahlo.md

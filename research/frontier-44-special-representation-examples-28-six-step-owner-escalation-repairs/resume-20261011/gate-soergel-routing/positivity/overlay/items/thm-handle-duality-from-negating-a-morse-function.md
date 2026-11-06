@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-handle-duality-from-negating-a-morse-function.md

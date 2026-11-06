@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-continuity-principle-for-domains-of-holomorphy.md

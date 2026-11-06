@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-geodesic-triangles-in-trees-are-tripods.md

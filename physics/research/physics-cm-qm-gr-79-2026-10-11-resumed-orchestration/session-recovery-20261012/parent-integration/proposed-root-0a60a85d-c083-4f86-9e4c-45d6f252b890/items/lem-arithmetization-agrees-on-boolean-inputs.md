@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-arithmetization-agrees-on-boolean-inputs.md

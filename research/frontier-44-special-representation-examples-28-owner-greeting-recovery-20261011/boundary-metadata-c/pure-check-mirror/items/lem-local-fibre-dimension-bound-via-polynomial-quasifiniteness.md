@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-fibre-dimension-bound-via-polynomial-quasifiniteness.md

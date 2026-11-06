@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unitary-eigenfunction-for-a-probability-system.md

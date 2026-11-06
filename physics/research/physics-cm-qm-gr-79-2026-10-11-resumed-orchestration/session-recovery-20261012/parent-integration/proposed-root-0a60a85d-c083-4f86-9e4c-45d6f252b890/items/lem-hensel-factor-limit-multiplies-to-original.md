@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hensel-factor-limit-multiplies-to-original.md

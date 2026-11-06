@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-markov-kakutani-fixed-point-theorem-for-abelian-affine-actions.md

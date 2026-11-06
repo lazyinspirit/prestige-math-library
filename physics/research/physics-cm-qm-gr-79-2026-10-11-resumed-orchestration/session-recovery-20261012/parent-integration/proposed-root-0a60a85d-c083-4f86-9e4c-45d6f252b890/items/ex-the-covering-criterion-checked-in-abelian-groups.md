@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-covering-criterion-checked-in-abelian-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-analytic-quasiconformality-implies-modulus-distortion.md

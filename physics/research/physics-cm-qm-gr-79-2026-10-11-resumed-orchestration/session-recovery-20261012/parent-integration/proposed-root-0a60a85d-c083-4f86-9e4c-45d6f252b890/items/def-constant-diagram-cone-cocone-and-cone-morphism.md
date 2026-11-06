@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-constant-diagram-cone-cocone-and-cone-morphism.md

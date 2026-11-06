@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/texp-nrqm-identical-particles-two-fermion-spatial-spin-symmetry.md

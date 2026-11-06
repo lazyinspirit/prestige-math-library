@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-myhill-isomorphism-theorem-for-creative-sets.md

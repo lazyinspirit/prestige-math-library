@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-three-mod-four-prime-dividing-two-square-sum.md

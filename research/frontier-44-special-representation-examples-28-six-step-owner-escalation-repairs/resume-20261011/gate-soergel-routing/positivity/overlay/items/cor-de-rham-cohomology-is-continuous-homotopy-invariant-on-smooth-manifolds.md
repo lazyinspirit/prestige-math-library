@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-de-rham-cohomology-is-continuous-homotopy-invariant-on-smooth-manifolds.md

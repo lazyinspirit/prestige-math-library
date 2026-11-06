@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel.md

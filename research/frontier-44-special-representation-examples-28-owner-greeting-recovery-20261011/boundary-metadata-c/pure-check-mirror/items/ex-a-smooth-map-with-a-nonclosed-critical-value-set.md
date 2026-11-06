@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-smooth-map-with-a-nonclosed-critical-value-set.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-mihlin-dyadic-pieces-sum-to-an-off-support-kernel-representation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quasi-compact-immersion-boundary-specialization.md

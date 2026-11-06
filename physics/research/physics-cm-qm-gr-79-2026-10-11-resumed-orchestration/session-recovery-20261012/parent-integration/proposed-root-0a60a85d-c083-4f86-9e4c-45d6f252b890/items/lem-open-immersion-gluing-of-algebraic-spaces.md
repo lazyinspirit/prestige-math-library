@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-open-immersion-gluing-of-algebraic-spaces.md

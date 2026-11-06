@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-feferman-levy-omega-one-has-countable-cofinality.md

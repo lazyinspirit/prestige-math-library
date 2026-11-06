@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lebesgue-measure-of-a-linear-image-of-the-unit-cube.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra.md

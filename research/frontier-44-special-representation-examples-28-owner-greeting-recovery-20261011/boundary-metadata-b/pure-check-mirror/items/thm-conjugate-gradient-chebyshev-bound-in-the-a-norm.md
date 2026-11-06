@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-conjugate-gradient-chebyshev-bound-in-the-a-norm.md

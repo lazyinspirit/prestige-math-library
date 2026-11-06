@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-forbidden-pattern-and-its-complement-share-eh-status.md

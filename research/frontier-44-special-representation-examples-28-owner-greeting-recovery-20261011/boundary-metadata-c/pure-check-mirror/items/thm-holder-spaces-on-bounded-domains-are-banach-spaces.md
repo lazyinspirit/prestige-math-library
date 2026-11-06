@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-holder-spaces-on-bounded-domains-are-banach-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-khovanov-rozansky-braid-homology-is-a-link-invariant-up-to-explicit-shift.md

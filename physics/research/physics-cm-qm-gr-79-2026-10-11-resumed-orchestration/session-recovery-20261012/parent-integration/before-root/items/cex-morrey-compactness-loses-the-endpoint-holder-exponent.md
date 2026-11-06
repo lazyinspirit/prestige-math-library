@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-morrey-compactness-loses-the-endpoint-holder-exponent.md

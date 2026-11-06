@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-empty-incoming-boundary-requires-zero-handles.md

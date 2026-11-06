@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-convergent-sequence-with-its-limit-is-compact.md

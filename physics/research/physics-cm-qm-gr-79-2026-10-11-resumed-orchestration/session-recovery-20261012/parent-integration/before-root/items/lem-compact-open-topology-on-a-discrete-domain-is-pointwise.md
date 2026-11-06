@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-open-topology-on-a-discrete-domain-is-pointwise.md

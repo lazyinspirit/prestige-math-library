@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-hyperbolic-groups-have-solvable-word-problem.md

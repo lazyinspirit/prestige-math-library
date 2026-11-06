@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-differentiation-of-borel-measures-finite-on-compact-sets-on-r-n.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-homology-of-a-degreewise-split-direct-sum-sequence.md

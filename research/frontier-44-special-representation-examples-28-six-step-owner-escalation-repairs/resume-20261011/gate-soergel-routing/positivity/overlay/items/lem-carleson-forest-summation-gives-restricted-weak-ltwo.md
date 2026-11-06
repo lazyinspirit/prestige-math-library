@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-carleson-forest-summation-gives-restricted-weak-ltwo.md

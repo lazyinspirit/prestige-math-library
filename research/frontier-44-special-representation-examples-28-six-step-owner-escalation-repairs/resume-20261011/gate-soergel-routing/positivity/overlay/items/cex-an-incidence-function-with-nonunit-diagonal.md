@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-incidence-function-with-nonunit-diagonal.md

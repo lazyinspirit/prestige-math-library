@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-ell-p-is-l-p-of-counting-measure.md

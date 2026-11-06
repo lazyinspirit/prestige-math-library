@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-based-cellular-chain-complex-of-a-universal-cover.md

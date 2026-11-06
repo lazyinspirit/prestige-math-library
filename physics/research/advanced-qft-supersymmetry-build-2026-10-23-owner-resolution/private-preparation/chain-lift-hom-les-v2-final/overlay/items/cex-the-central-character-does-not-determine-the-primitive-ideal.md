@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-central-character-does-not-determine-the-primitive-ideal.md

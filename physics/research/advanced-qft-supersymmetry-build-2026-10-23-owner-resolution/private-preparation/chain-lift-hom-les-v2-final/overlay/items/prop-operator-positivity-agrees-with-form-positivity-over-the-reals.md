@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-operator-positivity-agrees-with-form-positivity-over-the-reals.md

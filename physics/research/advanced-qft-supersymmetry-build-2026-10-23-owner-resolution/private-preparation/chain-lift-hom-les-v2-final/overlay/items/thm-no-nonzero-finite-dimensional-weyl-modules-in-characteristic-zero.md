@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-no-nonzero-finite-dimensional-weyl-modules-in-characteristic-zero.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-type-a-hecke-specht-module-and-cell-form.md

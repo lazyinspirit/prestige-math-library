@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-irreducible-real-polynomial-has-degree-one.md

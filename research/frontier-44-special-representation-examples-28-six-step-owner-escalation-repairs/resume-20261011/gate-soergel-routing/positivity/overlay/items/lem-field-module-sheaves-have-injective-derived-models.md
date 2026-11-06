@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-field-module-sheaves-have-injective-derived-models.md

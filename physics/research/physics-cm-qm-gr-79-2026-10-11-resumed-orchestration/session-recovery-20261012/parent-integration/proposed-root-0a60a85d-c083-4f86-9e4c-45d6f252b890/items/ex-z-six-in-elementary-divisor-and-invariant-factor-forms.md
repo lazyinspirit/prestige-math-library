@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-z-six-in-elementary-divisor-and-invariant-factor-forms.md

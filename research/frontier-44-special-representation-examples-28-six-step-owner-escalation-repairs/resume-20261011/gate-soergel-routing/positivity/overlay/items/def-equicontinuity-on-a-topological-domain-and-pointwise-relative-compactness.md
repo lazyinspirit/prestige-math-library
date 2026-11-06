@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness.md

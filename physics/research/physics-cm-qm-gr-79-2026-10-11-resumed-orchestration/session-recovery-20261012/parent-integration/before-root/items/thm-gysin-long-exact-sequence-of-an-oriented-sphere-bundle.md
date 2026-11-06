@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle.md

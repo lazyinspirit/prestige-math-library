@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-basic-bull-free-hole-with-a-complete-outside-vertex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-twisted-arrow-category-of-the-walking-arrow.md

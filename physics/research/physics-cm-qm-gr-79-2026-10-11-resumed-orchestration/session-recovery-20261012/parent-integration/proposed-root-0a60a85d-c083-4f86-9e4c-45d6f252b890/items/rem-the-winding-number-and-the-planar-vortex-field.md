@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-winding-number-and-the-planar-vortex-field.md

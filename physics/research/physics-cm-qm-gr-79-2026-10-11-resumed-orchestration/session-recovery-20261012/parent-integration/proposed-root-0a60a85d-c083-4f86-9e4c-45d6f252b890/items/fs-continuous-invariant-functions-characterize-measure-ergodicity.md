@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-continuous-invariant-functions-characterize-measure-ergodicity.md

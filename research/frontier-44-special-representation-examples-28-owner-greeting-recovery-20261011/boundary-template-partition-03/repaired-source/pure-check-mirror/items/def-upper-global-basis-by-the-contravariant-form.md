@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-upper-global-basis-by-the-contravariant-form.md

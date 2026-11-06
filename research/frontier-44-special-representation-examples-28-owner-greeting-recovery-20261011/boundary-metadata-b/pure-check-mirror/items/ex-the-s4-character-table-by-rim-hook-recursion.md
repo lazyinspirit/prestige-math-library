@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-s4-character-table-by-rim-hook-recursion.md

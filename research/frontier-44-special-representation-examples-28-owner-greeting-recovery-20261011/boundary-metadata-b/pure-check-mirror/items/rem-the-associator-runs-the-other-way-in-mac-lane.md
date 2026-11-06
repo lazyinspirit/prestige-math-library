@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-the-associator-runs-the-other-way-in-mac-lane.md

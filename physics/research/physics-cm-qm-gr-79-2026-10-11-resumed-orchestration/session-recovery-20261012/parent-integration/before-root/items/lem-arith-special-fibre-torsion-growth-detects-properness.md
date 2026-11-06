@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-arith-special-fibre-torsion-growth-detects-properness.md

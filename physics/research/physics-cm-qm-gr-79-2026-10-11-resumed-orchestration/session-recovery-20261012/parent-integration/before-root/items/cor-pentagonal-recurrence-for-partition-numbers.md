@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-pentagonal-recurrence-for-partition-numbers.md

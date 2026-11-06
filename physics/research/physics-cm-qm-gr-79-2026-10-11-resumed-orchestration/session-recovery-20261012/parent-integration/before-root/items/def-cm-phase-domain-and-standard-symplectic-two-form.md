@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm-phase-domain-and-standard-symplectic-two-form.md

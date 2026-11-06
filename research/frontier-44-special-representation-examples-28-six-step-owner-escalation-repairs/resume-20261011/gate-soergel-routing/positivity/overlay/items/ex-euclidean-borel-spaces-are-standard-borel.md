@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-euclidean-borel-spaces-are-standard-borel.md

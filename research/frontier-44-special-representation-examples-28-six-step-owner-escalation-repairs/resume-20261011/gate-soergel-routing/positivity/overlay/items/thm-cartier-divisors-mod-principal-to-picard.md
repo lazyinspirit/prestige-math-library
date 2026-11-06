@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cartier-divisors-mod-principal-to-picard.md

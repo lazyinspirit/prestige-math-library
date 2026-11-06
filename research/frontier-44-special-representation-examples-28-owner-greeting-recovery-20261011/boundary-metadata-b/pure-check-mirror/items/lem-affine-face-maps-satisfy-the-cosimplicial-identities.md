@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-affine-face-maps-satisfy-the-cosimplicial-identities.md

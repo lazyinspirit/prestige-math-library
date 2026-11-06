@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-edge-set-orbits-on-two-subsets-by-polya.md

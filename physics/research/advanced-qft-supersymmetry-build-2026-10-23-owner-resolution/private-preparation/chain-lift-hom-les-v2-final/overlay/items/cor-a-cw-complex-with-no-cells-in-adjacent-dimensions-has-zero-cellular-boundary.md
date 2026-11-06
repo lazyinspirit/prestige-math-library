@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary.md

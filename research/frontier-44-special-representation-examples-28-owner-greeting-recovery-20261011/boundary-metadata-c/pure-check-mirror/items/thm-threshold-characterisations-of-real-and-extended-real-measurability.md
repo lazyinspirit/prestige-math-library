@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-threshold-characterisations-of-real-and-extended-real-measurability.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-derivation-at-a-point-and-tangent-space.md

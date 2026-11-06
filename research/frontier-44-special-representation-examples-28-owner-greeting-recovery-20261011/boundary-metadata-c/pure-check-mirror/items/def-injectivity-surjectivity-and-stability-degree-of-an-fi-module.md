@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-injectivity-surjectivity-and-stability-degree-of-an-fi-module.md

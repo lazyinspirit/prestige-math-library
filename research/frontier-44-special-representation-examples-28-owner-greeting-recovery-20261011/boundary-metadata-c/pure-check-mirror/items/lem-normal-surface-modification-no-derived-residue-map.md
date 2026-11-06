@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-normal-surface-modification-no-derived-residue-map.md

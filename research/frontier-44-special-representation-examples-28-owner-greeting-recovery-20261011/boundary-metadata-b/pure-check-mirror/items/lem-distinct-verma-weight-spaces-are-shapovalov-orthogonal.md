@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-distinct-verma-weight-spaces-are-shapovalov-orthogonal.md

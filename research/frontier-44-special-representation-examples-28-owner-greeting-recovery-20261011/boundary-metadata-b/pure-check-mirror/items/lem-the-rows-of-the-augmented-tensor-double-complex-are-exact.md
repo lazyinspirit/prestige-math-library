@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-rows-of-the-augmented-tensor-double-complex-are-exact.md

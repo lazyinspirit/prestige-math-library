@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-componentwise-family-that-is-not-a-unit.md

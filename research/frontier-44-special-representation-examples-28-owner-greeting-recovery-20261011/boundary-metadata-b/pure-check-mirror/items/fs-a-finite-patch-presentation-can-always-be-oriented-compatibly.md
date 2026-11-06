@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-finite-patch-presentation-can-always-be-oriented-compatibly.md

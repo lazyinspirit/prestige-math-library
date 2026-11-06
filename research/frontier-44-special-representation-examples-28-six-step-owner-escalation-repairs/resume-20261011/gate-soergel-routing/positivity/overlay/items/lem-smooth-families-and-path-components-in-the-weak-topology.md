@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-families-and-path-components-in-the-weak-topology.md

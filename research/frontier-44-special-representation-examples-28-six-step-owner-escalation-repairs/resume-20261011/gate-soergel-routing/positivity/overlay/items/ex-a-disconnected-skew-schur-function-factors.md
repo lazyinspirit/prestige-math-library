@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-disconnected-skew-schur-function-factors.md

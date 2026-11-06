@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hg-toolkit-loxodromics-and-independent-poles.md

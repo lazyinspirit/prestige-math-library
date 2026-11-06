@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-c-one-images-of-content-zero-compact-sets-have-content-zero.md

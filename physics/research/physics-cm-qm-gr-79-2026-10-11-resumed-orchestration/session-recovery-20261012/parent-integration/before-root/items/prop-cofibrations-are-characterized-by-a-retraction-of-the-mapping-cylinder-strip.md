@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cofibrations-are-characterized-by-a-retraction-of-the-mapping-cylinder-strip.md

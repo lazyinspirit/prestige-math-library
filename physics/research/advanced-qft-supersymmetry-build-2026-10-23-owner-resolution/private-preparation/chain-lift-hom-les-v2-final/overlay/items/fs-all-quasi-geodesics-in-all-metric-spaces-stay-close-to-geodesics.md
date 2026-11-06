@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-all-quasi-geodesics-in-all-metric-spaces-stay-close-to-geodesics.md

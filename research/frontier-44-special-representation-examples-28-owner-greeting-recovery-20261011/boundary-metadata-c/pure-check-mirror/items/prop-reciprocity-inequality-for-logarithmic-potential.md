@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-reciprocity-inequality-for-logarithmic-potential.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-freudenthal-recursion-terminates-from-the-highest-weight.md

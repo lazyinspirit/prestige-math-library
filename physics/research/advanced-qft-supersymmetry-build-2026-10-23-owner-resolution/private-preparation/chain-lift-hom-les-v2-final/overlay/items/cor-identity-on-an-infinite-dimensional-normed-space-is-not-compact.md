@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact.md

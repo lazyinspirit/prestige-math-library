@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-magnetic-and-detection-gauge-h2-domain-preservation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-lebesgue-outer-measure-equals-jordan-outer-content-for-bounded-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nikiforov-few-induced-copies-force-a-linear-restricted-set.md

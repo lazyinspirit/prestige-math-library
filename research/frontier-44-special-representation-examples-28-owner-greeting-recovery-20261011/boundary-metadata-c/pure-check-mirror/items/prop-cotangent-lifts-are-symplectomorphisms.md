@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-cotangent-lifts-are-symplectomorphisms.md

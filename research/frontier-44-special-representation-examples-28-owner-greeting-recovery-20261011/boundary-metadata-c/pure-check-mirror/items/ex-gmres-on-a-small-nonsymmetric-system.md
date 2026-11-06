@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-gmres-on-a-small-nonsymmetric-system.md

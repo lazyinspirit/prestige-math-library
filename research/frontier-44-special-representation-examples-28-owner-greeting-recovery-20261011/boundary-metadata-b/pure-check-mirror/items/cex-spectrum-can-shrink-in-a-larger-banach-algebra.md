@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-spectrum-can-shrink-in-a-larger-banach-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-compact-groups-have-a-constant-reiter-net.md

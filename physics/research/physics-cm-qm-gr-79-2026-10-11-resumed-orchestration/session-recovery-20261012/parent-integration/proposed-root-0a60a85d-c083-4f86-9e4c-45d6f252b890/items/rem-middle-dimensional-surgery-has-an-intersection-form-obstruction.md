@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-middle-dimensional-surgery-has-an-intersection-form-obstruction.md

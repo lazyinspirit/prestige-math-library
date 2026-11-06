@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-cut-point-that-is-not-conjugate-because-two-minimizers-arrive.md

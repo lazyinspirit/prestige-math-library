@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-colimit-of-a-set-valued-functor-is-the-set-of-connected-components-of-its-category-of-elements.md

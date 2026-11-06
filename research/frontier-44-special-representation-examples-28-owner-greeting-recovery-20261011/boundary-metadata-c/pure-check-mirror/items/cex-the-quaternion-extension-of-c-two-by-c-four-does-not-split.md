@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-quaternion-extension-of-c-two-by-c-four-does-not-split.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-homotopy-relative-and-path-homotopy-are-equivalence-relations.md

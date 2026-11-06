@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization.md

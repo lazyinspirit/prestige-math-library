@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-c-two-boundary-flattening-transforms-uniform-ellipticity.md

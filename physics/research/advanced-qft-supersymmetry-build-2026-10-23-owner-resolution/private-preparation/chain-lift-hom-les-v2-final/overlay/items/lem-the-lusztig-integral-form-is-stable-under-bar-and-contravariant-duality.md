@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-lusztig-integral-form-is-stable-under-bar-and-contravariant-duality.md

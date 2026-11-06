@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-loop-products-in-a-topological-group-agree-up-to-homotopy.md

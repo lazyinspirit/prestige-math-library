@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-kreweras-complement-and-type-a-partition-model.md

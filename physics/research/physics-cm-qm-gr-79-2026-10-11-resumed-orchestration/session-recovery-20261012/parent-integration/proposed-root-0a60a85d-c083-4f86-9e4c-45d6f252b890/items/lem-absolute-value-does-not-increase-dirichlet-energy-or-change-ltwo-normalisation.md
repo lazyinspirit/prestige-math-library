@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-absolute-value-does-not-increase-dirichlet-energy-or-change-ltwo-normalisation.md

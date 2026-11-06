@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonsingular-square-root-lift-modulo-odd-prime-powers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-chain-rule-for-holomorphic-maps-in-several-variables.md

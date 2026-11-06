@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-dihedral-group-of-order-eight-is-a-split-extension-of-c-four-by-c-two.md

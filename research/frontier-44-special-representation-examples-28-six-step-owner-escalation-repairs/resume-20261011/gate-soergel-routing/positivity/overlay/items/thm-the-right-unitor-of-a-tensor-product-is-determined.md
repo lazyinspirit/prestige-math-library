@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-right-unitor-of-a-tensor-product-is-determined.md

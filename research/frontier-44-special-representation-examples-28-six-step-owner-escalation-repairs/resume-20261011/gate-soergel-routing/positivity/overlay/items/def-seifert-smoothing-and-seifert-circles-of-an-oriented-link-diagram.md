@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram.md

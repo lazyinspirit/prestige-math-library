@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-postnikov-towers-exist-for-connected-cw-complexes.md

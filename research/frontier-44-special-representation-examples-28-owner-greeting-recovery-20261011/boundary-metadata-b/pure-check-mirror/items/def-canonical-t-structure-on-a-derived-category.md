@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-canonical-t-structure-on-a-derived-category.md

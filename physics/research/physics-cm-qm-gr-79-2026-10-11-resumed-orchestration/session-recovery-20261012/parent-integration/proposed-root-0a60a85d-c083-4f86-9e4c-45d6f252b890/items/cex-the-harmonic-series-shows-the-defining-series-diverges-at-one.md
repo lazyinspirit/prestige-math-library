@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-harmonic-series-shows-the-defining-series-diverges-at-one.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-sine-of-xy-and-its-mixed-partials.md

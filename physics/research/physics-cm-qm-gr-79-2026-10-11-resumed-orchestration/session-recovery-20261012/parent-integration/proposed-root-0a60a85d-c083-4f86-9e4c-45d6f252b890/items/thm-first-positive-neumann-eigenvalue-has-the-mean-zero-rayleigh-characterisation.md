@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-first-positive-neumann-eigenvalue-has-the-mean-zero-rayleigh-characterisation.md

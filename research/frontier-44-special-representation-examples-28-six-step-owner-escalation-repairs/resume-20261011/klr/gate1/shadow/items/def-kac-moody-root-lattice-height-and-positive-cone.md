@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-kac-moody-root-lattice-height-and-positive-cone.md

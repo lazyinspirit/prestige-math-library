@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-su-two-and-so-three-share-a-root-system-but-are-not-isomorphic.md

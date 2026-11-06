@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-tukey-finite-character-equivalent-to-choice.md

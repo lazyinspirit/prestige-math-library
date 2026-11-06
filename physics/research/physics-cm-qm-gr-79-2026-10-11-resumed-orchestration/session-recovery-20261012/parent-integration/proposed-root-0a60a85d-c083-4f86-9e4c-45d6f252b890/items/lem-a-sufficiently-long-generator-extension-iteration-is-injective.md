@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-sufficiently-long-generator-extension-iteration-is-injective.md

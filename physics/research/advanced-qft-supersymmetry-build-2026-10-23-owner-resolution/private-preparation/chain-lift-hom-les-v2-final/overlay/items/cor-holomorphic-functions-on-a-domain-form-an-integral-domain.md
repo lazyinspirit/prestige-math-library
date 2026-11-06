@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-holomorphic-functions-on-a-domain-form-an-integral-domain.md

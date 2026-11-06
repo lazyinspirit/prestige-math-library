@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-inclusion-of-a-reflective-subcategory-is-monadic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-eilenberg-watts-recovers-extension-of-scalars.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-common-plaque-lifted-caps-admit-nested-source-disk-inclusions.md

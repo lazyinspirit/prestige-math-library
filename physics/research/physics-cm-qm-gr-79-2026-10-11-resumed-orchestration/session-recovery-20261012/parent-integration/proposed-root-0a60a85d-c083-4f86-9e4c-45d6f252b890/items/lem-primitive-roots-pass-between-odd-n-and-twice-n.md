@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-primitive-roots-pass-between-odd-n-and-twice-n.md

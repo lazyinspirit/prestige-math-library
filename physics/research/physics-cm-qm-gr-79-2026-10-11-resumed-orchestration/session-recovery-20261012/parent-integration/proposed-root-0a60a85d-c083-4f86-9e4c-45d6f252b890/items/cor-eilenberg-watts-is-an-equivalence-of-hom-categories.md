@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-eilenberg-watts-is-an-equivalence-of-hom-categories.md

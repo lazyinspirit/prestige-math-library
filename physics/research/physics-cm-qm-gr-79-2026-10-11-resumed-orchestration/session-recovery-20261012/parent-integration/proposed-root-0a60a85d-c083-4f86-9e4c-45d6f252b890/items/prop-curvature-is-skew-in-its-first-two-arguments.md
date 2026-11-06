@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-curvature-is-skew-in-its-first-two-arguments.md

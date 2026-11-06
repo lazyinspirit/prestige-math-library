@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-expected-exit-time-from-an-interval-via-ito-formula.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-relative-norming-in-a-finite-dimensional-space.md

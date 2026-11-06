@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-euler-characteristic-of-a-compact-manifold.md

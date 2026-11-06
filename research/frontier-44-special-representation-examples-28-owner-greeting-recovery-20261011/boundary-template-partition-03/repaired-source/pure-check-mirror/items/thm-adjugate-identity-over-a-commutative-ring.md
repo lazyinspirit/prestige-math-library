@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-adjugate-identity-over-a-commutative-ring.md

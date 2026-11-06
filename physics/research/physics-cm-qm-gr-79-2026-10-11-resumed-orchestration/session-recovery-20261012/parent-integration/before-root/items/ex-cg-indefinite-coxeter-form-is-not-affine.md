@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-indefinite-coxeter-form-is-not-affine.md

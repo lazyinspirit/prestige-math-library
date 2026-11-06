@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-kan-extension-that-is-not-pointwise.md

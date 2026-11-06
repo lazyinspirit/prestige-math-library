@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-standard-representations-of-classical-matrix-lie-algebras.md

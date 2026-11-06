@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-direct-product-a-times-z-as-an-hnn-extension.md

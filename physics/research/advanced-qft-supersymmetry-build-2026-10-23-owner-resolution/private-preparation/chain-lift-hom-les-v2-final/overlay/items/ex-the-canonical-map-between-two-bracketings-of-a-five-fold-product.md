@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-canonical-map-between-two-bracketings-of-a-five-fold-product.md

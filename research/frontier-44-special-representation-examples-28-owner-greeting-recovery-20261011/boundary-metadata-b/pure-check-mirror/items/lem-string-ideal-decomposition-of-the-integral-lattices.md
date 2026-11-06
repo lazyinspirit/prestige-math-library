@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-string-ideal-decomposition-of-the-integral-lattices.md

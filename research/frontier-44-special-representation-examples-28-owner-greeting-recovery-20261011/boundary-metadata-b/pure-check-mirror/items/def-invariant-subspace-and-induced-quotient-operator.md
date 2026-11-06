@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-invariant-subspace-and-induced-quotient-operator.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-projective-resolution-hypotheses-identify-perfect-and-bounded-derived-categories.md

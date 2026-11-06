@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complex-gamma-restricts-to-the-real-gamma-function.md

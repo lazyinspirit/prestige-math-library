@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-graded-fitting-decomposition-preserves-homogeneous-summands.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-order-topology-on-a-linearly-ordered-set.md

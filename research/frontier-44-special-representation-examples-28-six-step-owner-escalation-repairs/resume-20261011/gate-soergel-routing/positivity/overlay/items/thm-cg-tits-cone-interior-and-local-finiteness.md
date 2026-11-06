@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-tits-cone-interior-and-local-finiteness.md

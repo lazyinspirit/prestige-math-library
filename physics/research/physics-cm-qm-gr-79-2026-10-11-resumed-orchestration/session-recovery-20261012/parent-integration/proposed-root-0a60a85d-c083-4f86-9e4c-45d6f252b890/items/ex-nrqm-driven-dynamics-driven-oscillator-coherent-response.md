@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-driven-dynamics-driven-oscillator-coherent-response.md

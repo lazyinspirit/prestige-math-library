@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-metastable-cohomology-of-eilenberg-maclane-spaces.md

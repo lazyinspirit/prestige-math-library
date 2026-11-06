@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-associated-primes-in-a-short-exact-sequence.md

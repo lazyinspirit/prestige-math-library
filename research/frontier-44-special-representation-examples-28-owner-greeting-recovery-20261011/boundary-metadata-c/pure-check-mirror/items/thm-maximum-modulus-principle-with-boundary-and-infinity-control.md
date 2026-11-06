@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-maximum-modulus-principle-with-boundary-and-infinity-control.md

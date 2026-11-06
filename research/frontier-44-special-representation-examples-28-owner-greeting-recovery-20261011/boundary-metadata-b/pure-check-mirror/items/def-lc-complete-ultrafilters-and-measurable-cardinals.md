@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lc-complete-ultrafilters-and-measurable-cardinals.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fadell-neuwirth-forgetful-fibration.md

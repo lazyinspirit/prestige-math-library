@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-riemann-stieltjes-integral-on-a-polygonal-contour.md

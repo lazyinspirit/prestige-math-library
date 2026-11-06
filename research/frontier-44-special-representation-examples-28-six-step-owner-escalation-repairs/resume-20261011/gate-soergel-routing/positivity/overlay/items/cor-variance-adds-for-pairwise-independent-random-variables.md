@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-variance-adds-for-pairwise-independent-random-variables.md

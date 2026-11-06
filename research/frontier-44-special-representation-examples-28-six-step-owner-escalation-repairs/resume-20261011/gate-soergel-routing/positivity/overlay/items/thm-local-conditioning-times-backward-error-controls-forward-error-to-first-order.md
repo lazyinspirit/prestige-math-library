@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order.md

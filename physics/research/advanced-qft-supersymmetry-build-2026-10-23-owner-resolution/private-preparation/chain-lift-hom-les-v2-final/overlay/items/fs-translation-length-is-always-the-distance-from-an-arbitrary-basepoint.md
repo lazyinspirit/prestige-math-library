@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-translation-length-is-always-the-distance-from-an-arbitrary-basepoint.md

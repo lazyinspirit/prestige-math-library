@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-associated-variety-of-a-primitive-ideal-is-conical-and-g-invariant.md

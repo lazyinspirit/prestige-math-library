@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-projective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable.md

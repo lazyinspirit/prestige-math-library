@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups.md

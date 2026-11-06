@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-bilinear-form-as-a-type-zero-two-tensor.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-riemannian-distance-is-defined-by-the-length-of-a-unique-shortest-curve.md

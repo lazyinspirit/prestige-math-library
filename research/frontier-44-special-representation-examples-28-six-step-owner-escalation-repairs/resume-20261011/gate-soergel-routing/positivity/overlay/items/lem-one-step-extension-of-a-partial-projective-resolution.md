@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-one-step-extension-of-a-partial-projective-resolution.md

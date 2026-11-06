@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-symmetric-and-alternating-covariant-tensor-subbundles.md

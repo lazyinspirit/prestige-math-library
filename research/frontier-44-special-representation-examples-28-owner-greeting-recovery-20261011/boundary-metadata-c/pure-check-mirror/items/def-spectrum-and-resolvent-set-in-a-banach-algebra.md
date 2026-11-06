@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-spectrum-and-resolvent-set-in-a-banach-algebra.md

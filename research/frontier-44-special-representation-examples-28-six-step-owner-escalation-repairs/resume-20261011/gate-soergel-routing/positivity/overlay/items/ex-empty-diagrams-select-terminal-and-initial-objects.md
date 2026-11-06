@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-empty-diagrams-select-terminal-and-initial-objects.md

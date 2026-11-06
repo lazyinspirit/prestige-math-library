@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-extension-inducing-a-prescribed-abelian-kernel-action.md

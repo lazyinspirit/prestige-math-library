@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-rank-and-isomorphism-of-root-systems.md

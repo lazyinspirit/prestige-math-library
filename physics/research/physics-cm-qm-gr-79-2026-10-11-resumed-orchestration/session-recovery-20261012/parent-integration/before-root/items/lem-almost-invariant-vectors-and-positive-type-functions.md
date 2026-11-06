@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-almost-invariant-vectors-and-positive-type-functions.md

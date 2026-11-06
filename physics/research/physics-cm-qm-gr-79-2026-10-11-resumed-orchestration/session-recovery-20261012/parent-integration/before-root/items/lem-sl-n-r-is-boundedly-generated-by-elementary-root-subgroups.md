@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sl-n-r-is-boundedly-generated-by-elementary-root-subgroups.md

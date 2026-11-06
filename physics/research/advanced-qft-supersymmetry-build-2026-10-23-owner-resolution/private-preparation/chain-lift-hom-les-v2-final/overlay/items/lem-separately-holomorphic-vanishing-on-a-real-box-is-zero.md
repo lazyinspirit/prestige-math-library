@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-separately-holomorphic-vanishing-on-a-real-box-is-zero.md

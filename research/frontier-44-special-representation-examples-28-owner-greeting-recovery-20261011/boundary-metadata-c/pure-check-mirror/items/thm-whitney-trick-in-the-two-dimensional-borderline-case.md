@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-whitney-trick-in-the-two-dimensional-borderline-case.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-subreciprocal-function-and-ell-divisibility.md

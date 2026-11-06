@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-dualizing-and-closed-support-shifts-on-the-complex-line.md

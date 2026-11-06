@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-regular-flat-local-map-with-singular-closed-fibre.md

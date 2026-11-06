@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-faithful-irrep-with-a-noncentral-abelian-normal-subgroup-is-properly-induced.md

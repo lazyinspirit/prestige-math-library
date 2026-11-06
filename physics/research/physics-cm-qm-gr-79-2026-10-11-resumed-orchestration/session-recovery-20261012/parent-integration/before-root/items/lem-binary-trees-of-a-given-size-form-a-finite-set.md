@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-binary-trees-of-a-given-size-form-a-finite-set.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-hecke-tower-is-free-over-the-previous-level.md

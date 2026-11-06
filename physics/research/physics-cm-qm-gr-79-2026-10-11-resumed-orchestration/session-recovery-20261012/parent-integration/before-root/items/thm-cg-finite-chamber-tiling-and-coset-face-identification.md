@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cg-finite-chamber-tiling-and-coset-face-identification.md

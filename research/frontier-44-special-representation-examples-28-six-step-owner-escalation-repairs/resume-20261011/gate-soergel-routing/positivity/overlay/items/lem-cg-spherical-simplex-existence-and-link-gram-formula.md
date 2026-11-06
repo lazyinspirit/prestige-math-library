@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-spherical-simplex-existence-and-link-gram-formula.md

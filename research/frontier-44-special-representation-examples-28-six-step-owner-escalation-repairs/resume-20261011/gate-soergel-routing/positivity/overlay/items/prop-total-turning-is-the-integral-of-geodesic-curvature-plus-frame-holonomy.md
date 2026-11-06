@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-total-turning-is-the-integral-of-geodesic-curvature-plus-frame-holonomy.md

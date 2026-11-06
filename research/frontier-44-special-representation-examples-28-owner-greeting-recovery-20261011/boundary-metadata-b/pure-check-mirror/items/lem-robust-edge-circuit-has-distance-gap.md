@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-robust-edge-circuit-has-distance-gap.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hardy-littlewood-maximal-operator-characterises-a-p.md

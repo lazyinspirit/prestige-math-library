@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-gallagher-correspondence-for-an-extendible-character.md

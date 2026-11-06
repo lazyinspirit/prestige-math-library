@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-graph-nonisomorphism-is-in-ip.md

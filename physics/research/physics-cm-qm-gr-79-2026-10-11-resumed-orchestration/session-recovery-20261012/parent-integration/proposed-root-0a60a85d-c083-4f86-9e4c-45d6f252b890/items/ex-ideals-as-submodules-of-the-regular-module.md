@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-ideals-as-submodules-of-the-regular-module.md

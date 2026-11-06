@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-divergence-theorem-relative-to-a-volume-form.md

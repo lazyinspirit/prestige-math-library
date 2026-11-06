@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-moment-maps-for-one-action-form-an-affine-space-over-coadjoint-fixed-covectors.md

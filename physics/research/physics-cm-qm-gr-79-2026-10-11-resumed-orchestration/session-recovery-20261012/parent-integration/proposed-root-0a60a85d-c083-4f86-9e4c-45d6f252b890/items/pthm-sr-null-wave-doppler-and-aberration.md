@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-sr-null-wave-doppler-and-aberration.md

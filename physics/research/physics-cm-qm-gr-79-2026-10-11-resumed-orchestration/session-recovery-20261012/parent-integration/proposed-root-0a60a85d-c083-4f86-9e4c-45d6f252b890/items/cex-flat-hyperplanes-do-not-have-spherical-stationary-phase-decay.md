@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-flat-hyperplanes-do-not-have-spherical-stationary-phase-decay.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-composition-series-and-composition-factors-of-an-object.md

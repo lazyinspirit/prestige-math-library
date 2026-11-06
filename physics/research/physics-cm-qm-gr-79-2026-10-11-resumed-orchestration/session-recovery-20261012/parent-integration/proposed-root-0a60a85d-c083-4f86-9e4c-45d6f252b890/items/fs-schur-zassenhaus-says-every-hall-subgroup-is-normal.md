@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-schur-zassenhaus-says-every-hall-subgroup-is-normal.md

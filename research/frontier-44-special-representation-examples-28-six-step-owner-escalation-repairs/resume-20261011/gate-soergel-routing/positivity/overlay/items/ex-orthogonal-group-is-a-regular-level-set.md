@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-orthogonal-group-is-a-regular-level-set.md

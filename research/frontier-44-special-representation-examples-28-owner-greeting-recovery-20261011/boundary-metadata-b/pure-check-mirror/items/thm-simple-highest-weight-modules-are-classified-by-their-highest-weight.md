@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-highest-weight-modules-are-classified-by-their-highest-weight.md

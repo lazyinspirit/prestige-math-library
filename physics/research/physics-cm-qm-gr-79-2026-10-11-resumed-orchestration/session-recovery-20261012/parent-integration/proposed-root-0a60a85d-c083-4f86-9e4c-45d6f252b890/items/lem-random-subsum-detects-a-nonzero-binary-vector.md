@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-random-subsum-detects-a-nonzero-binary-vector.md

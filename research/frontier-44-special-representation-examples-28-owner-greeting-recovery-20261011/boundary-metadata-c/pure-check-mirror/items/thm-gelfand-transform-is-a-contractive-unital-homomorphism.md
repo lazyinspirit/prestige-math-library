@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-gelfand-transform-is-a-contractive-unital-homomorphism.md

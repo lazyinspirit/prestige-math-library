@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-elementary-expansion-and-collapse-of-finite-cw-complexes.md

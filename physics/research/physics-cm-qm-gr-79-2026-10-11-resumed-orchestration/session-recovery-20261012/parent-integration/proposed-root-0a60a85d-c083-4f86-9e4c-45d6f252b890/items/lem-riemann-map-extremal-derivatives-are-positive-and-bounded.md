@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-riemann-map-extremal-derivatives-are-positive-and-bounded.md

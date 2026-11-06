@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-uniformly-integrable-family-with-no-integrable-majorant.md

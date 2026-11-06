@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-category-enriched-in-the-two-element-lattice-is-a-preordered-set.md

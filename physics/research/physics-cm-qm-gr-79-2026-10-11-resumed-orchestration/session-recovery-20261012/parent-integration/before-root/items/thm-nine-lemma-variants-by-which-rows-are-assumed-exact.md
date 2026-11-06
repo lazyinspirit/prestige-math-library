@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nine-lemma-variants-by-which-rows-are-assumed-exact.md

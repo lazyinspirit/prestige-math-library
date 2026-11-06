@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-balanced-triple-for-the-two-dimensional-quantum-sl-two-module.md

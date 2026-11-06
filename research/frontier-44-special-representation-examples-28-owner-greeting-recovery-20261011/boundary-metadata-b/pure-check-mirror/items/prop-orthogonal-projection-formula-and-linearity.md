@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-orthogonal-projection-formula-and-linearity.md

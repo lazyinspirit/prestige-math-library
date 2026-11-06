@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-diagonalization-needs-literal-source-self-reading.md

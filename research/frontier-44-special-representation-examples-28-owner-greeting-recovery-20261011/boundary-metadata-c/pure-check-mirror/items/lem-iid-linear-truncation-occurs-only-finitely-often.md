@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-iid-linear-truncation-occurs-only-finitely-often.md

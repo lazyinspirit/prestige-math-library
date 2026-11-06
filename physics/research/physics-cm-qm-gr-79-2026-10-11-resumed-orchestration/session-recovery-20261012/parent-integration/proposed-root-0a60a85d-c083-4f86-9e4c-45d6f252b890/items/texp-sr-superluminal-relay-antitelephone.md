@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/texp-sr-superluminal-relay-antitelephone.md

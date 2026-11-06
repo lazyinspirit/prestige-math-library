@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-depth-bounded-by-associated-prime-quotient-dimension.md

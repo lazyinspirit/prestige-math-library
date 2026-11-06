@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-tqbf-has-a-polynomial-round-interactive-proof.md

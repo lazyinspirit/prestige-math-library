@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-explicit-definitions-give-conservative-extensions.md

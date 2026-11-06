@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-complex-k-ahss-for-complex-projective-space.md

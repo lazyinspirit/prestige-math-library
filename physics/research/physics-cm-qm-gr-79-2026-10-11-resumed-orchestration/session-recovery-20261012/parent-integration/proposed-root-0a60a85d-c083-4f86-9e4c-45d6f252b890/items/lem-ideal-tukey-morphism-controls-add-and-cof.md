@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ideal-tukey-morphism-controls-add-and-cof.md

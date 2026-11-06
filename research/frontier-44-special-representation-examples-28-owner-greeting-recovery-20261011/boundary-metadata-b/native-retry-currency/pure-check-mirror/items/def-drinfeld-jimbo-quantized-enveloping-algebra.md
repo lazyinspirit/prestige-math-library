@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-drinfeld-jimbo-quantized-enveloping-algebra.md

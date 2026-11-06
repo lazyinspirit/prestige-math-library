@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-kronecker-foliation-of-the-torus-has-trivial-leaf-holonomy.md

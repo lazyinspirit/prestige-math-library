@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-highest-weight-vector-and-cyclic-highest-weight-module.md

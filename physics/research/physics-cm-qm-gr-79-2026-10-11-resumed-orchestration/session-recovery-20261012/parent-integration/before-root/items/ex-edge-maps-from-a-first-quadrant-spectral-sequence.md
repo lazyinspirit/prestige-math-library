@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-edge-maps-from-a-first-quadrant-spectral-sequence.md

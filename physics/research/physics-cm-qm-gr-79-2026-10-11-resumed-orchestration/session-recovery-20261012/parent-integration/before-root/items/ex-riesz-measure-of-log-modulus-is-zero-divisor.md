@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-riesz-measure-of-log-modulus-is-zero-divisor.md

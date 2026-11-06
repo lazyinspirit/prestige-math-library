@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ad-and-dc-imply-lebesgue-measurability.md

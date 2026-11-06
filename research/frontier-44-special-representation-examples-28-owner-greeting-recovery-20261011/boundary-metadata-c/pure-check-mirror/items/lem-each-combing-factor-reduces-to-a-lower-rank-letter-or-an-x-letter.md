@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-each-combing-factor-reduces-to-a-lower-rank-letter-or-an-x-letter.md

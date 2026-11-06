@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-busy-beaver-dominates-every-total-computable-function.md

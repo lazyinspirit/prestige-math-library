@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-triangle-count-in-the-erdos-renyi-random-graph.md

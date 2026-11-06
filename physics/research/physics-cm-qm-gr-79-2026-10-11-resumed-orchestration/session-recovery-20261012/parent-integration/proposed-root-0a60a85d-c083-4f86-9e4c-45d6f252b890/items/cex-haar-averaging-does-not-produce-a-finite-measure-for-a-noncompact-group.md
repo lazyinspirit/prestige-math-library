@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-haar-averaging-does-not-produce-a-finite-measure-for-a-noncompact-group.md

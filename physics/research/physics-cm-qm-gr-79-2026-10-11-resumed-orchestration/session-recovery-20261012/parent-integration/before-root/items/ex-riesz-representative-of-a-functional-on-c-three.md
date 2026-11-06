@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-riesz-representative-of-a-functional-on-c-three.md

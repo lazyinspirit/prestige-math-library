@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-binary-resultant-zero-iff-common-geometric-projective-root.md

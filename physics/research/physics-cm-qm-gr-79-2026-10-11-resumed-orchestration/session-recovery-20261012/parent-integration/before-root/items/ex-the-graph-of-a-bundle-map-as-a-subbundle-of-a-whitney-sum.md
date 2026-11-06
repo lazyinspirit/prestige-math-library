@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-graph-of-a-bundle-map-as-a-subbundle-of-a-whitney-sum.md

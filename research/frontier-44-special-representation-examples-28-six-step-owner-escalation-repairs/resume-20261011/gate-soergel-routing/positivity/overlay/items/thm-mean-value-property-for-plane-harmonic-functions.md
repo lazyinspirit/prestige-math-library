@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-mean-value-property-for-plane-harmonic-functions.md

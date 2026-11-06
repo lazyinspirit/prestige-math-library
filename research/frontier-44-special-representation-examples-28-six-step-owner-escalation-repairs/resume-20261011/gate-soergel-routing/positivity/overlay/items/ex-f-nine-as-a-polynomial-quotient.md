@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-f-nine-as-a-polynomial-quotient.md

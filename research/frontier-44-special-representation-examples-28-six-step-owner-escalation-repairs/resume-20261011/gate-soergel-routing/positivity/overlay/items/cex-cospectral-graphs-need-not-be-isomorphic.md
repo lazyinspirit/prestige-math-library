@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-cospectral-graphs-need-not-be-isomorphic.md

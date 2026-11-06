@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-limit-point-of-a-gradient-trajectory-is-critical.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-l-one-convergence-implies-almost-everywhere-convergence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hopf-formula-for-the-schur-multiplier.md

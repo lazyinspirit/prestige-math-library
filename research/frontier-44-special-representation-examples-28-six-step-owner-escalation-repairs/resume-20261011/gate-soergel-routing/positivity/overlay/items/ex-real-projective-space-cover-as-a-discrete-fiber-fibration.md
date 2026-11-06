@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-real-projective-space-cover-as-a-discrete-fiber-fibration.md

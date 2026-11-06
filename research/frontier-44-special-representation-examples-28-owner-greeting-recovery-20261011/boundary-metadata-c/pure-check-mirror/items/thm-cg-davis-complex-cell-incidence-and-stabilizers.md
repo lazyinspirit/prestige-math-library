@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-davis-complex-cell-incidence-and-stabilizers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-horseshoe-gives-a-short-exact-sequence-after-applying-a-right-exact-functor.md

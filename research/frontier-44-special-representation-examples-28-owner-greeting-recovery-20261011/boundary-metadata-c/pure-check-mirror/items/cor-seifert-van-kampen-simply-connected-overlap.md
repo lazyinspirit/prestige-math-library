@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-seifert-van-kampen-simply-connected-overlap.md

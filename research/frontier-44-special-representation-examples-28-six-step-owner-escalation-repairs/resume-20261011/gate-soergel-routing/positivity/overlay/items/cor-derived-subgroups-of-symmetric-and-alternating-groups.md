@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-derived-subgroups-of-symmetric-and-alternating-groups.md

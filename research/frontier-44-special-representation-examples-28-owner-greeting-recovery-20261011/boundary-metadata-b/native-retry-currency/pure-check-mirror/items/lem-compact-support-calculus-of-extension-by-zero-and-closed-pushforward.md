@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward.md

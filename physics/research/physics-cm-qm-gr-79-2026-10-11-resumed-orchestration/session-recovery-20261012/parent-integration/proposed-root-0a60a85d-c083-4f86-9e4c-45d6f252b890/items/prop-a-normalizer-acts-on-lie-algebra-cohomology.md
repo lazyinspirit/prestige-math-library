@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-normalizer-acts-on-lie-algebra-cohomology.md

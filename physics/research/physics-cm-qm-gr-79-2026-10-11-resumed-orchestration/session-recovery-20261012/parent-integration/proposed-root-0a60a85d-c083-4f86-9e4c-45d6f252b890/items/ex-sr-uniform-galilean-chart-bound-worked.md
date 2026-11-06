@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sr-uniform-galilean-chart-bound-worked.md

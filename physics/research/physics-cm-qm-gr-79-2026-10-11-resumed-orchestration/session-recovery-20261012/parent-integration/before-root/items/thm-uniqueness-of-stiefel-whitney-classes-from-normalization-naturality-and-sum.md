@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-uniqueness-of-stiefel-whitney-classes-from-normalization-naturality-and-sum.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-powers-of-a-regular-sequence-remain-regular.md

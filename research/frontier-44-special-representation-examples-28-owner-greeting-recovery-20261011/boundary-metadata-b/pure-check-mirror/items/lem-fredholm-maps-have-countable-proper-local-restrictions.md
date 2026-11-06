@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fredholm-maps-have-countable-proper-local-restrictions.md

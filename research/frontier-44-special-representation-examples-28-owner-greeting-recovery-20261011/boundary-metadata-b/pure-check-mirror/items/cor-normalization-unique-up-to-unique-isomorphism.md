@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-normalization-unique-up-to-unique-isomorphism.md

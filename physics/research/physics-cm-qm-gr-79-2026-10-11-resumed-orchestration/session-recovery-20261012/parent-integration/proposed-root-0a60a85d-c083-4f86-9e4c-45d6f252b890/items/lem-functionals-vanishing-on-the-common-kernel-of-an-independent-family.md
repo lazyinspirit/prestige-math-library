@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-functionals-vanishing-on-the-common-kernel-of-an-independent-family.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hopf-lax-dynamic-programming-semigroup.md

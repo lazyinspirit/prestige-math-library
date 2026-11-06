@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-meromorphic-functions-on-a-domain-form-a-field.md

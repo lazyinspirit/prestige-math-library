@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-parabolic-kazhdan-lusztig-polynomials-are-alternating-sums-of-ordinary-ones.md

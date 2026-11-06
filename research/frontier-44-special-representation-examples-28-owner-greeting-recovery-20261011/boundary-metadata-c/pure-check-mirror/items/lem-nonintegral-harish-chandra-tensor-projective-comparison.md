@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonintegral-harish-chandra-tensor-projective-comparison.md

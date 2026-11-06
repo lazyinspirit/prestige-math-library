@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-general-type-a-decomposition-numbers-remain-unsolved.md

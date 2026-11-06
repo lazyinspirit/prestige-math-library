@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-russian-profile-and-sqrt-n-scaling-of-a-young-diagram.md

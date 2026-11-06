@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-inviscid-burgers-characteristic-formula-and-first-crossing-time.md

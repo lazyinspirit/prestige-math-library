@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-unit-interval-indicator-has-nonintegrable-maximal-function.md

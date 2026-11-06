@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-affine-group-modulo-eight-as-a-holomorph.md

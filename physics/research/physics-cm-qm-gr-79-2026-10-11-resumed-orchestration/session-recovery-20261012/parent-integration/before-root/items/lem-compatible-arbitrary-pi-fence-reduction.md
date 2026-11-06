@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compatible-arbitrary-pi-fence-reduction.md

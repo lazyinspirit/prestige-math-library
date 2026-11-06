@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-block-bimodule-has-a-diagonal-vertex.md

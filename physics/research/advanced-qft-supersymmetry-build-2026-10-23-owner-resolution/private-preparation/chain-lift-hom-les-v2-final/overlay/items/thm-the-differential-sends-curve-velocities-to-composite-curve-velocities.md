@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-differential-sends-curve-velocities-to-composite-curve-velocities.md

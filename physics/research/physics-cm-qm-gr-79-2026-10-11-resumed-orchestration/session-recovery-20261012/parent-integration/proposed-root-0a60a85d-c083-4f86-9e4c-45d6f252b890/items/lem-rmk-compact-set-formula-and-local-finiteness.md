@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rmk-compact-set-formula-and-local-finiteness.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-closure-properties-of-measurable-functions-used-by-the-integral.md

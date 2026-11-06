@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-schur-covering-groups-are-unique-for-all-finite-groups.md

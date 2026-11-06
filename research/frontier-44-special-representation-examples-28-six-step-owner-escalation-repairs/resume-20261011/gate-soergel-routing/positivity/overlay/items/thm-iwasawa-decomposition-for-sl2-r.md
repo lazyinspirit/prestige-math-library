@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-iwasawa-decomposition-for-sl2-r.md

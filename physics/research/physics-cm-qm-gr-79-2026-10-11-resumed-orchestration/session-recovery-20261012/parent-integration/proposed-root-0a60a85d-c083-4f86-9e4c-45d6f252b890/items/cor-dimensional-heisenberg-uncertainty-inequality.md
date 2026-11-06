@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-dimensional-heisenberg-uncertainty-inequality.md

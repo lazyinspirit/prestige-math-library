@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-killing-fields-restrict-to-jacobi-fields-along-geodesics.md

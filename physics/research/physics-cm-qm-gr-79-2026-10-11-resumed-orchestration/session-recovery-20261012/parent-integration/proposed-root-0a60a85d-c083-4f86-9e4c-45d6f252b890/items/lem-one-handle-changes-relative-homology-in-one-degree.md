@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-one-handle-changes-relative-homology-in-one-degree.md

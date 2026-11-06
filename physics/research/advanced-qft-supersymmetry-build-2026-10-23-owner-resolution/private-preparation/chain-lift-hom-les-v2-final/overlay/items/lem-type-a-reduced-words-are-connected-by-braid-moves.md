@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-type-a-reduced-words-are-connected-by-braid-moves.md

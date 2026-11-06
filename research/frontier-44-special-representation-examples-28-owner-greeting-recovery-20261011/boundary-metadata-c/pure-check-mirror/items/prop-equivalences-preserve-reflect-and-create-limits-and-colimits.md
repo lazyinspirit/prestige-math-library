@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-equivalences-preserve-reflect-and-create-limits-and-colimits.md

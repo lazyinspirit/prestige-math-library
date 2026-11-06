@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex.md

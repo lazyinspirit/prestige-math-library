@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-intermediate-models-and-complete-subalgebras.md

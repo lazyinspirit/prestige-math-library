@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-an-object-is-projective-exactly-when-hom-out-of-it-is-exact.md

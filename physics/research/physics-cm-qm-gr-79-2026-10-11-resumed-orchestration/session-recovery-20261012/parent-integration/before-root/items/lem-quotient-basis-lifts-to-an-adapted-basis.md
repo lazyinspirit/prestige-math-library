@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quotient-basis-lifts-to-an-adapted-basis.md

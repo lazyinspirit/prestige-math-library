@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fourier-inversion-at-lebesgue-points-under-summability.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-vector-spaces-over-a-field-as-an-abelian-category.md

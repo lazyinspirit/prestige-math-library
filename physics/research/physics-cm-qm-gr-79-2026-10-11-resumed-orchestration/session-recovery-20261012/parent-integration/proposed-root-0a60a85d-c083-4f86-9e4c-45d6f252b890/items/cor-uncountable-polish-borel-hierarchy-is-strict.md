@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-uncountable-polish-borel-hierarchy-is-strict.md

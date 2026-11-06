@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-two-submanifolds-with-nonempty-intersection-are-transverse.md

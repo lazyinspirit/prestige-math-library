@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-invariant-polynomial-on-a-matrix-lie-algebra.md

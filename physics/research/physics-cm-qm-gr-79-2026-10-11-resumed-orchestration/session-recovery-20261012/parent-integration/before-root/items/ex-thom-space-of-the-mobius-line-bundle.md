@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-thom-space-of-the-mobius-line-bundle.md

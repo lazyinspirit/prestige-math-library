@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-full-subcategory-limit-can-differ-from-ambient-limit.md

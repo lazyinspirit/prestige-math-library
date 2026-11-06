@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-quasi-isomorphism-with-no-homotopy-inverse.md

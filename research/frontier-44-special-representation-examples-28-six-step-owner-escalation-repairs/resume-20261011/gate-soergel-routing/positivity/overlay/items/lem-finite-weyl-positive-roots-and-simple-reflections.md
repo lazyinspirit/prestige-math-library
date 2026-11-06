@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-weyl-positive-roots-and-simple-reflections.md

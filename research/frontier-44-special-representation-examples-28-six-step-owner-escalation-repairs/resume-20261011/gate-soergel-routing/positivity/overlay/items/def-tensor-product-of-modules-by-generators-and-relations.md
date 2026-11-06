@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-tensor-product-of-modules-by-generators-and-relations.md

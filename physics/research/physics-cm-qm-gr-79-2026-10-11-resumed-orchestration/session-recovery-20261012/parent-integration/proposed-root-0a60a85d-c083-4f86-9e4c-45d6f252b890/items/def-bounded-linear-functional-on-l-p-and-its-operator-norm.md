@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-bounded-linear-functional-on-l-p-and-its-operator-norm.md

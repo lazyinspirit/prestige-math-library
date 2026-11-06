@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-normal-second-derivative-recovered-from-the-elliptic-equation.md

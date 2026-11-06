@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-quasisimple-subnormal-dichotomy.md

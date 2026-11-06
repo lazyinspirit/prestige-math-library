@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-preferred-lift-of-a-half-twist-shifts-the-bigrading.md

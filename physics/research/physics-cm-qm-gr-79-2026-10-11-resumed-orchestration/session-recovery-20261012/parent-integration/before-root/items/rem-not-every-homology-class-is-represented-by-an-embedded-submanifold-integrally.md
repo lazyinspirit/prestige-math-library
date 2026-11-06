@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-not-every-homology-class-is-represented-by-an-embedded-submanifold-integrally.md

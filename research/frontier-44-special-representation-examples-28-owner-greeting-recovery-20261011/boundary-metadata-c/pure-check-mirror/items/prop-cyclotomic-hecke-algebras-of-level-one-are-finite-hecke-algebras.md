@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-cyclotomic-hecke-algebras-of-level-one-are-finite-hecke-algebras.md

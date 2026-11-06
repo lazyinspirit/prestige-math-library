@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-lazy-walk-lengths-within-root-t-have-close-endpoint-laws.md

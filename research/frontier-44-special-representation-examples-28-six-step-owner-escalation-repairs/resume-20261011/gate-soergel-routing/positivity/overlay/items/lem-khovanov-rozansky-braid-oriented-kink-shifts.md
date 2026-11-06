@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-khovanov-rozansky-braid-oriented-kink-shifts.md

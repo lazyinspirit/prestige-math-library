@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-generic-and-exceptional-height-directions-on-a-torus.md

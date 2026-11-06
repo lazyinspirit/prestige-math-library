@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-involutions-of-four-and-their-cycle-decomposition.md

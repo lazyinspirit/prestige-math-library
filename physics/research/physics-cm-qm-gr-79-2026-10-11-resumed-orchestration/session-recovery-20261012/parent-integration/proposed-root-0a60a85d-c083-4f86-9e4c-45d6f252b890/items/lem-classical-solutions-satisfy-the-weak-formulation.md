@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-solutions-satisfy-the-weak-formulation.md

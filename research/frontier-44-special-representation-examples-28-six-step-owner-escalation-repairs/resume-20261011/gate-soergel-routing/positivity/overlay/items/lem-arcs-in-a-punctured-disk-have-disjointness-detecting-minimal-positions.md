@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions.md

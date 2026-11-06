@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-covering-basepoint-change-conjugates-subgroup.md

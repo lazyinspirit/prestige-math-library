@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-locally-constant-functions-form-a-sheaf.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-relative-algebraic-closure-of-r-in-c.md

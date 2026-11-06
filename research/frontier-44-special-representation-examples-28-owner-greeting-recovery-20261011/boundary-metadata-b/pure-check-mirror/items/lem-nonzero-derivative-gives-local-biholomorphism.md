@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonzero-derivative-gives-local-biholomorphism.md

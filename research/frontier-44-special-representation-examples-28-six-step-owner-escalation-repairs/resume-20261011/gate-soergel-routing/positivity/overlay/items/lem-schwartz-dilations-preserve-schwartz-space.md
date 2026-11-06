@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-schwartz-dilations-preserve-schwartz-space.md

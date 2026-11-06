@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-null-homotopy-versus-short-loop-shrinkability.md

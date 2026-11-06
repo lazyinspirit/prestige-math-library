@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-angular-form-generates-the-first-de-rham-cohomology-of-the-circle.md

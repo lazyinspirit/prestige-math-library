@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-sortable-element-skip-roots-and-cone.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-noetherian-local-domain-dimension-zero-iff-field.md

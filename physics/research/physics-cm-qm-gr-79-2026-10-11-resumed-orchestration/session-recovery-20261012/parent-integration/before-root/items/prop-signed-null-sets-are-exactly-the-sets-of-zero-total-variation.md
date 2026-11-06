@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation.md

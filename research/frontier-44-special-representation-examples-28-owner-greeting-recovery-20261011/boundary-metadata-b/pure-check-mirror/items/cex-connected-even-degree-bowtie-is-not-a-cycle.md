@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-connected-even-degree-bowtie-is-not-a-cycle.md

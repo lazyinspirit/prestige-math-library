@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-schur-multiplier-of-a-cyclic-group-is-trivial.md

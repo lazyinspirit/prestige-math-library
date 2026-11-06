@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-disk-bundle-of-a-smooth-vector-bundle-is-a-compact-manifold-with-boundary.md

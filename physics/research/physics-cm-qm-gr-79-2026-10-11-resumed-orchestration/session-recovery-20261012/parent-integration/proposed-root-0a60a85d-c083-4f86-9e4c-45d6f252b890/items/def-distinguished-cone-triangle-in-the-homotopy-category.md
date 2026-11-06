@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-distinguished-cone-triangle-in-the-homotopy-category.md

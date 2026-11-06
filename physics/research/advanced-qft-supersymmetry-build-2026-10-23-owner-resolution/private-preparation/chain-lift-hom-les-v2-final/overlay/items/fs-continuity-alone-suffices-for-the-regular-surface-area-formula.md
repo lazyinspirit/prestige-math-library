@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-continuity-alone-suffices-for-the-regular-surface-area-formula.md

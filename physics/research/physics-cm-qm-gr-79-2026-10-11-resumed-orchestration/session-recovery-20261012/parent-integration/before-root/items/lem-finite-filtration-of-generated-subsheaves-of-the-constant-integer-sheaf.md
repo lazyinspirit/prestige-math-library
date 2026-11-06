@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-filtration-of-generated-subsheaves-of-the-constant-integer-sheaf.md

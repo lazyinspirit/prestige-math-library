@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-rational-half-rotation-has-a-nonconstant-ergodic-average.md

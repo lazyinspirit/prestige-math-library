@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relator-expressions-give-controlled-singular-planar-diagrams.md

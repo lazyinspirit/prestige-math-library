@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-polynomial-algebras-over-fields-are-integrally-closed.md

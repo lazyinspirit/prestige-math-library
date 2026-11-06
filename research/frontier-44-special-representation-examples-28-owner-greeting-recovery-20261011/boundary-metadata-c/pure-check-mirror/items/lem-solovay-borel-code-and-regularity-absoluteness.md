@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-solovay-borel-code-and-regularity-absoluteness.md

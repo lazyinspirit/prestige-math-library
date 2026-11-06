@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-distance-to-subspace-by-annihilating-functionals.md

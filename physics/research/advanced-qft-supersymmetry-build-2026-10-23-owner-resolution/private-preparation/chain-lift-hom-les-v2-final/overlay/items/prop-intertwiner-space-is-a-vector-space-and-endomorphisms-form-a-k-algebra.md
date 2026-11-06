@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-intertwiner-space-is-a-vector-space-and-endomorphisms-form-a-k-algebra.md

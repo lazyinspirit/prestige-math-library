@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form.md

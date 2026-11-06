@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-simple-continued-fractions-parametrise-the-irrationals.md

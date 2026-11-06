@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-d-four-galois-correspondence-for-x-four-minus-two.md

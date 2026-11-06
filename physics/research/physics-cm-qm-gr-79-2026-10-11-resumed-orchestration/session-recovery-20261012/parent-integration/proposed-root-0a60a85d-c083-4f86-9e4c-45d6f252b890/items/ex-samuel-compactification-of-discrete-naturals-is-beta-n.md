@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-samuel-compactification-of-discrete-naturals-is-beta-n.md

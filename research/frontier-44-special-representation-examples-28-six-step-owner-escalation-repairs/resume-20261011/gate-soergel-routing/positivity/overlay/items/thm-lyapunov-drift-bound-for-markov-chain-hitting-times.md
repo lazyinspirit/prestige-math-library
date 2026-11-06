@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lyapunov-drift-bound-for-markov-chain-hitting-times.md

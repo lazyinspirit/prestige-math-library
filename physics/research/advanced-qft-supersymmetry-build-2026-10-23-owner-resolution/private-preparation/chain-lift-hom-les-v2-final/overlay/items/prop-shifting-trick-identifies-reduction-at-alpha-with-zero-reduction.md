@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-shifting-trick-identifies-reduction-at-alpha-with-zero-reduction.md

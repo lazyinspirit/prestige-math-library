@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-pullback-is-a-morphism-of-de-rham-complexes.md

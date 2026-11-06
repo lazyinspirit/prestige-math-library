@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dyadic-square-function-of-two-separated-frequency-packets.md

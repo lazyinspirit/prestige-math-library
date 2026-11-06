@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quasi-finite-at-a-prime-for-finite-type-algebras.md

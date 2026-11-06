@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-positive-functionals-on-compact-metric-spaces-have-probability-representations.md

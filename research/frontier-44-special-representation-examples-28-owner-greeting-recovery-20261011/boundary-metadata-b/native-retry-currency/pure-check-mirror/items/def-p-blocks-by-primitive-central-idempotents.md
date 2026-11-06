@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-p-blocks-by-primitive-central-idempotents.md

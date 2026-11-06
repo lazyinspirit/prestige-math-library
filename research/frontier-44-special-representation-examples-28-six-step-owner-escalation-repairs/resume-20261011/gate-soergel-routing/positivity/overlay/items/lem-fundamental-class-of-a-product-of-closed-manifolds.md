@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fundamental-class-of-a-product-of-closed-manifolds.md

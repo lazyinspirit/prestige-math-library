@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-norm-and-trace-in-a-finite-field-extension.md

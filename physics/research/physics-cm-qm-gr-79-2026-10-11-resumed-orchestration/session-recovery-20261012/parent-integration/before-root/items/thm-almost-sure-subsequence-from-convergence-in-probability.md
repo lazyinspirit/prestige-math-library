@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-almost-sure-subsequence-from-convergence-in-probability.md

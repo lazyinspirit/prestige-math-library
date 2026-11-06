@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-first-and-second-moments-of-the-heat-kernel.md

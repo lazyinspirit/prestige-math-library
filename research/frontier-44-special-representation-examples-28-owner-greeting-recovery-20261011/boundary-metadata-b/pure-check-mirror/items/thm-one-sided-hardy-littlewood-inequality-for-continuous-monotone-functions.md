@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-one-sided-hardy-littlewood-inequality-for-continuous-monotone-functions.md

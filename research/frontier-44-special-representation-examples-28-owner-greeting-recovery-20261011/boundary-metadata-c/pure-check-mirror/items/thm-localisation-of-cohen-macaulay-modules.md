@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-localisation-of-cohen-macaulay-modules.md

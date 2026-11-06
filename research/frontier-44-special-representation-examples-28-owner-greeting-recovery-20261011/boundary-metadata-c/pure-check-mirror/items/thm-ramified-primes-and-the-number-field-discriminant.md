@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ramified-primes-and-the-number-field-discriminant.md

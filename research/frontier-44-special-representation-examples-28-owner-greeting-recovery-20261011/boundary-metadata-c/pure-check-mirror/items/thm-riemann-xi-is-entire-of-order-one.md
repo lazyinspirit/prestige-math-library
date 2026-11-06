@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-riemann-xi-is-entire-of-order-one.md

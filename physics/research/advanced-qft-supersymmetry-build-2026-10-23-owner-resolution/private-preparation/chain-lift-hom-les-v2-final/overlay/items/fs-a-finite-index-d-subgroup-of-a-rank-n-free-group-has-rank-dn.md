@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-finite-index-d-subgroup-of-a-rank-n-free-group-has-rank-dn.md

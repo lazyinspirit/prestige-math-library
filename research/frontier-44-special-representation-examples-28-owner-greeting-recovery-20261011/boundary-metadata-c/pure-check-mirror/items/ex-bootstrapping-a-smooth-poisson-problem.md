@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-bootstrapping-a-smooth-poisson-problem.md

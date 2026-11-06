@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy.md

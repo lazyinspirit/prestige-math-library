@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-lebesgue-measurable-set-with-empty-interior-is-lebesgue-null.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-profile-moment-generators-and-shifted-character-basis.md

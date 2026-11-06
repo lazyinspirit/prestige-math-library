@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hochschild-chains-are-bar-tensor-chains.md

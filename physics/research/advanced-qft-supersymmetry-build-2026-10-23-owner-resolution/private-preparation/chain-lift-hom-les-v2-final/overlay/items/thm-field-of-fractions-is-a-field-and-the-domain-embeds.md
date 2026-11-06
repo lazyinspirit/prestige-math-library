@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-field-of-fractions-is-a-field-and-the-domain-embeds.md

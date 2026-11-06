@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-recursive-sortable-projection-and-cambrian-congruence.md

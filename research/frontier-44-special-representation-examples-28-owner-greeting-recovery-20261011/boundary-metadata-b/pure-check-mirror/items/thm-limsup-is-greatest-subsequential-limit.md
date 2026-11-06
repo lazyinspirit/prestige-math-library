@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-limsup-is-greatest-subsequential-limit.md

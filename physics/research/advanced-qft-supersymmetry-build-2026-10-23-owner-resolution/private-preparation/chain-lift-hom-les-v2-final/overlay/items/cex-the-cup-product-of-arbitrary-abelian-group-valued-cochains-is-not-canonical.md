@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-cup-product-of-arbitrary-abelian-group-valued-cochains-is-not-canonical.md

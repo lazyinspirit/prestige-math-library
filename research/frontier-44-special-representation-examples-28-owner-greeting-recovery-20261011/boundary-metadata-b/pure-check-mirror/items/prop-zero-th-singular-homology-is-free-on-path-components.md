@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-zero-th-singular-homology-is-free-on-path-components.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-uniform-finite-order-bounds-for-pointwise-bounded-distributions.md

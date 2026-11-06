@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-degree-invertible-sheaf-proper-dimension-one.md

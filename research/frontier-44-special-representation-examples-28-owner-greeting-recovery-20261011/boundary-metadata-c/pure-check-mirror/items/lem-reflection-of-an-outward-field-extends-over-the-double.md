@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-reflection-of-an-outward-field-extends-over-the-double.md

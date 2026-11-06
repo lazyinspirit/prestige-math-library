@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-every-divisor-is-a-subgroup-order-in-a-cyclic-group.md

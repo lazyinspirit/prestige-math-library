@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rank-two-type-a-soergel-bimodule-decompositions.md

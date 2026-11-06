@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-finite-dimensional-algebra-separates-its-simple-modules.md

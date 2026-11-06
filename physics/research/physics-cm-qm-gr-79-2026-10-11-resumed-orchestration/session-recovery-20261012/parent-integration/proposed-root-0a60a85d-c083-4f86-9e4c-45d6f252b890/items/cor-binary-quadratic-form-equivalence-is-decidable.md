@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-binary-quadratic-form-equivalence-is-decidable.md

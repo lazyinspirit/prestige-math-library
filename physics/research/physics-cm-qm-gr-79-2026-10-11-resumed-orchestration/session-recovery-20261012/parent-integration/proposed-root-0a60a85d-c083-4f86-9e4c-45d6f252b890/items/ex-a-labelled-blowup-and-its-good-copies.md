@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-labelled-blowup-and-its-good-copies.md

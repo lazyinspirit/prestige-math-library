@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cg-parabolic-quotient-interval-eulerian-claim-fails.md

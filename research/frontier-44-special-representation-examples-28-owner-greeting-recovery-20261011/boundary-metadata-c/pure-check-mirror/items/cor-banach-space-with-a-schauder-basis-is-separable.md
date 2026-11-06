@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-banach-space-with-a-schauder-basis-is-separable.md

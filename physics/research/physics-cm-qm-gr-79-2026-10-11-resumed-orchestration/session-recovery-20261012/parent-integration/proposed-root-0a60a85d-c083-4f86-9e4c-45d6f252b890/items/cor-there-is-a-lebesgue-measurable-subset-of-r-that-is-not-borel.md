@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-there-is-a-lebesgue-measurable-subset-of-r-that-is-not-borel.md

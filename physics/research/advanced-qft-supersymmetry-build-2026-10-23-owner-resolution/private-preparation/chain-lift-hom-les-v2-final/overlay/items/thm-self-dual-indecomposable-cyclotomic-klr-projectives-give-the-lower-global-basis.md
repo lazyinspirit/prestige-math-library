@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-self-dual-indecomposable-cyclotomic-klr-projectives-give-the-lower-global-basis.md

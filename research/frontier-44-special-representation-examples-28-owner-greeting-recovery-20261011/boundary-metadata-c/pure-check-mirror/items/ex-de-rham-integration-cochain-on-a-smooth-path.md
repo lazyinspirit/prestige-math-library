@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-de-rham-integration-cochain-on-a-smooth-path.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orthogonal-complement-of-an-eigenspace-is-invariant.md

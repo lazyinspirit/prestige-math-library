@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-lefschetz-numbers-of-the-two-lifts-sum-to-twice-the-base-lefschetz-number.md

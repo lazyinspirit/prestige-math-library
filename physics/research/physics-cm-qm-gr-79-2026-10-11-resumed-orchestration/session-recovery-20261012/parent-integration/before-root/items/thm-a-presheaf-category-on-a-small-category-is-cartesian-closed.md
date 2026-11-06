@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-presheaf-category-on-a-small-category-is-cartesian-closed.md

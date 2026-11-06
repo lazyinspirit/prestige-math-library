@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-arith-picard-representation-by-generic-quotient-and-translates.md

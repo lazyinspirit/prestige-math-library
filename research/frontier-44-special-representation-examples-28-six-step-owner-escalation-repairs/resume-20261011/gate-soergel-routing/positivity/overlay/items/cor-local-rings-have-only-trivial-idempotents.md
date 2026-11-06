@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-local-rings-have-only-trivial-idempotents.md

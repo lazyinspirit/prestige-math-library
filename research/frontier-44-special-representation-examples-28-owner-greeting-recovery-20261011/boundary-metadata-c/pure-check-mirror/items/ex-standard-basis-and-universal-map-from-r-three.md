@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-standard-basis-and-universal-map-from-r-three.md

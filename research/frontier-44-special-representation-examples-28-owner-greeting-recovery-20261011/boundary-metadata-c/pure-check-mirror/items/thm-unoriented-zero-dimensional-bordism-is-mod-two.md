@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-unoriented-zero-dimensional-bordism-is-mod-two.md

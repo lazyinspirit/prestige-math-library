@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-coordinate-direction-form-of-the-slobodeckij-seminorm.md

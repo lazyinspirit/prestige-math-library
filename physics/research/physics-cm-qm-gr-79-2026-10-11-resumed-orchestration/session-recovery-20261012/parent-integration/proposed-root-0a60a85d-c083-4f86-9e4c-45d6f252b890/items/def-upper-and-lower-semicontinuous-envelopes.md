@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-upper-and-lower-semicontinuous-envelopes.md

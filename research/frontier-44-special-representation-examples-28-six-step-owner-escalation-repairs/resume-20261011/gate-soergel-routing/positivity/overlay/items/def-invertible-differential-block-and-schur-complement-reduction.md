@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-invertible-differential-block-and-schur-complement-reduction.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-isbells-argument-that-isomorphic-objects-cannot-simply-be-identified.md

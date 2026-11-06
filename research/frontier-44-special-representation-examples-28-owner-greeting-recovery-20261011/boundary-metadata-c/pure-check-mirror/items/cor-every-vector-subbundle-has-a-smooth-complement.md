@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-every-vector-subbundle-has-a-smooth-complement.md

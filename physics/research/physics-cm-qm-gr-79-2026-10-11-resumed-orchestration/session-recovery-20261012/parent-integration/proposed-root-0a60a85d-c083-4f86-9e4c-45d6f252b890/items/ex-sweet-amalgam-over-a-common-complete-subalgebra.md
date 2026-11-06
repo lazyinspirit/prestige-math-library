@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sweet-amalgam-over-a-common-complete-subalgebra.md

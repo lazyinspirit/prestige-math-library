@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hilbert-series-of-a-polynomial-ring.md

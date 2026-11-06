@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-euler-lagrange-is-necessary-not-sufficient-without-convexity.md

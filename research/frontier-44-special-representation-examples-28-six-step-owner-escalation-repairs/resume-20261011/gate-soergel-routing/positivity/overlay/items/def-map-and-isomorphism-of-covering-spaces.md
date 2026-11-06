@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-map-and-isomorphism-of-covering-spaces.md

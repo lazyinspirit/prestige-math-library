@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cg-a-tilde-2-nerve-perimeter-two-pi-and-vanishing-gram-determinant.md

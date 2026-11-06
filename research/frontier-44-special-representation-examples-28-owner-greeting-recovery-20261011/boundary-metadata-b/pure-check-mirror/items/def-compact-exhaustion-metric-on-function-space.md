@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-compact-exhaustion-metric-on-function-space.md

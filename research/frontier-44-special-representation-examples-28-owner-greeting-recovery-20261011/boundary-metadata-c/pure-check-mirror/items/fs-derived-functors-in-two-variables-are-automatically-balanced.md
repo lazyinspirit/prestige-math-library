@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-derived-functors-in-two-variables-are-automatically-balanced.md

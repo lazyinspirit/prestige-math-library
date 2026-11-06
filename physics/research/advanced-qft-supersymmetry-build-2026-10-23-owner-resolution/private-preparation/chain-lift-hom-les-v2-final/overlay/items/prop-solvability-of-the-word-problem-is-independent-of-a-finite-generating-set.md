@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-solvability-of-the-word-problem-is-independent-of-a-finite-generating-set.md

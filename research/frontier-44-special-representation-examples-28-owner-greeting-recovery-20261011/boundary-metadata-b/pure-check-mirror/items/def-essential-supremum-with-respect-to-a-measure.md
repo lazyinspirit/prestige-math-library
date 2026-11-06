@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-essential-supremum-with-respect-to-a-measure.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-elliptic-kernel-and-cokernel-are-finite-dimensional.md

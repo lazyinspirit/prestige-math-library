@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-lie-bracket-is-c-infinity-linear-in-each-vector-field.md

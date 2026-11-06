@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-connected-cw-pair-has-a-model-without-low-relative-cells.md

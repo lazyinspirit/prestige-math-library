@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-subgroup-of-an-infinite-group-equinumerous-with-it.md

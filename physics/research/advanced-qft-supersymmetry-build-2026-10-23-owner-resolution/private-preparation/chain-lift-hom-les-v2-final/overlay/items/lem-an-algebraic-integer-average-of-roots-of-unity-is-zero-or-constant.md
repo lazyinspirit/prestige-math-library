@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-an-algebraic-integer-average-of-roots-of-unity-is-zero-or-constant.md

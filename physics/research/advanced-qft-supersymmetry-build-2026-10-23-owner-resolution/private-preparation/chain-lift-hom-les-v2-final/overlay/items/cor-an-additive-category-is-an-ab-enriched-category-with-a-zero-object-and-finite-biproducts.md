@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-an-additive-category-is-an-ab-enriched-category-with-a-zero-object-and-finite-biproducts.md

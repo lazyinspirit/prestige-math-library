@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-solovay-hereditarily-ordinal-sequence-definable-model.md

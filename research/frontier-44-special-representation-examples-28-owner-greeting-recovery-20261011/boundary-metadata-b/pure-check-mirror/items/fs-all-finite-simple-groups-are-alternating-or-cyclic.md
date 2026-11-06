@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-all-finite-simple-groups-are-alternating-or-cyclic.md

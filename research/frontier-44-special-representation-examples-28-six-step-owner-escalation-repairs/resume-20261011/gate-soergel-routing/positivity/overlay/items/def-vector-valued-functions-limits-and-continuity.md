@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-vector-valued-functions-limits-and-continuity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-orientation-reversal-negates-pontryagin-numbers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-holonomy-is-a-germ-not-a-globally-defined-return-map.md

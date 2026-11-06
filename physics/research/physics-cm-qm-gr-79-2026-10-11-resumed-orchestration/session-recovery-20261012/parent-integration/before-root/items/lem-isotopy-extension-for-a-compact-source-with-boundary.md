@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-isotopy-extension-for-a-compact-source-with-boundary.md

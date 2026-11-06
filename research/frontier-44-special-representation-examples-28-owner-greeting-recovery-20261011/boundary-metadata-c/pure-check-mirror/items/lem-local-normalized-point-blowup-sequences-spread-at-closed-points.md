@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-normalized-point-blowup-sequences-spread-at-closed-points.md

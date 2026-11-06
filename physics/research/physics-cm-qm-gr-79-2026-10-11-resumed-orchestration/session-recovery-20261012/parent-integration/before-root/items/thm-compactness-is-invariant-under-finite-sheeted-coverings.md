@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-compactness-is-invariant-under-finite-sheeted-coverings.md

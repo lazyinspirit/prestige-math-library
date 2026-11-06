@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-distinct-cyclotomic-shears-give-integrable-based-sl-two-chains.md

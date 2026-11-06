@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-chi-zero-and-chi-one-wide-edge-morphisms.md

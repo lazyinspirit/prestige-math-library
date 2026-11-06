@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-euler-characteristic-of-a-finitely-triangulated-compact-surface.md

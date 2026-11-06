@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-relative-homology-is-not-the-homology-of-the-set-difference.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-high-normal-stiefel-whitney-classes-obstruct-low-codimension-immersions.md

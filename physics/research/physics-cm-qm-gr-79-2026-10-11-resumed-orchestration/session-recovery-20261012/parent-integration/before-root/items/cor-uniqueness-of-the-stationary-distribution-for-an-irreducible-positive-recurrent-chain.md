@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-uniqueness-of-the-stationary-distribution-for-an-irreducible-positive-recurrent-chain.md

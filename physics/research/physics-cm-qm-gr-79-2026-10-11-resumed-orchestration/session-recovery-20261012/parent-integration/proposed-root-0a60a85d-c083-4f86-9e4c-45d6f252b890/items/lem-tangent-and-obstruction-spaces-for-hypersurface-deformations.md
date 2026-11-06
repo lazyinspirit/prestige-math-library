@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tangent-and-obstruction-spaces-for-hypersurface-deformations.md

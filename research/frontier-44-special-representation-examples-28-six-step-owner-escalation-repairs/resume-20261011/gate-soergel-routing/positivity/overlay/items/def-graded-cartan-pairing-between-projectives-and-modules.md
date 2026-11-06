@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-graded-cartan-pairing-between-projectives-and-modules.md

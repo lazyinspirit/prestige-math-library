@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-nilpotent-lefschetz-filtration-is-canonical-and-self-dual.md

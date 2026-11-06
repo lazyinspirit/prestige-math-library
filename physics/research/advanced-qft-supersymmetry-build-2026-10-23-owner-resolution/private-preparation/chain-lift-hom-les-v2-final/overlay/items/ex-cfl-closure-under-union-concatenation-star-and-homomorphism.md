@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cfl-closure-under-union-concatenation-star-and-homomorphism.md

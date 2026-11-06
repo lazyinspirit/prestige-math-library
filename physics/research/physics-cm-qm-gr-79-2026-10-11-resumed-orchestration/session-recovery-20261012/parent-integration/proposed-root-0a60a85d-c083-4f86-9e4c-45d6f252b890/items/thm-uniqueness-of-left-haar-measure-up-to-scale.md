@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-uniqueness-of-left-haar-measure-up-to-scale.md

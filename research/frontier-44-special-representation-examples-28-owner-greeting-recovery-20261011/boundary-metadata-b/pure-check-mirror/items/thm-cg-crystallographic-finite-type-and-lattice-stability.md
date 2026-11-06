@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-crystallographic-finite-type-and-lattice-stability.md

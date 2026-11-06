@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-vitali-covering-theorem-needs-a-fine-cover.md

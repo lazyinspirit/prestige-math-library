@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-imaginary-root-spaces-need-not-have-multiplicity-one.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-standard-intertwining-operator-for-sl2-r.md

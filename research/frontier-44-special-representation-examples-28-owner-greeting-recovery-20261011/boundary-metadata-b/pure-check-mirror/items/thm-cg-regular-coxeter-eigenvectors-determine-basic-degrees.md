@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-regular-coxeter-eigenvectors-determine-basic-degrees.md

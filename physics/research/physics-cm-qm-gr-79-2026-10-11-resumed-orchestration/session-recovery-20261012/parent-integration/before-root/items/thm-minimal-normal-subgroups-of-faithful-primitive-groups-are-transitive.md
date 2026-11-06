@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive.md

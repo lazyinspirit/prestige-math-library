@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-complex-logarithms-principal-logarithm-and-complex-powers.md

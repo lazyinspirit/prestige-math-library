@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-power-maps-on-the-circle-have-their-exponent-as-degree.md

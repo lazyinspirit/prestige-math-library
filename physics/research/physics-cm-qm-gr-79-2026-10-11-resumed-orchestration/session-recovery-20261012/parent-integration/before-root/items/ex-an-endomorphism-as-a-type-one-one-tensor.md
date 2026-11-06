@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-endomorphism-as-a-type-one-one-tensor.md

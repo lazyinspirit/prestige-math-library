@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-dimensional-laws-of-a-markov-chain.md

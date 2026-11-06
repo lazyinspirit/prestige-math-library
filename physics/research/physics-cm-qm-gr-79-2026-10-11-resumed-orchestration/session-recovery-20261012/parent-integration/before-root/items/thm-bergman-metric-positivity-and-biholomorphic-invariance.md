@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bergman-metric-positivity-and-biholomorphic-invariance.md

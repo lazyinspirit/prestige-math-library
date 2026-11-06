@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-fock-e-and-f-actions-on-shape-two-one-at-e-three.md

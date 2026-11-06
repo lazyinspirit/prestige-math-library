@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-any-two-atlases-on-the-same-topological-manifold-have-a-union-atlas.md

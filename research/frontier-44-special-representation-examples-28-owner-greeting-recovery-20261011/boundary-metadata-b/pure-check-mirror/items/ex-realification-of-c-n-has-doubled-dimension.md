@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-realification-of-c-n-has-doubled-dimension.md

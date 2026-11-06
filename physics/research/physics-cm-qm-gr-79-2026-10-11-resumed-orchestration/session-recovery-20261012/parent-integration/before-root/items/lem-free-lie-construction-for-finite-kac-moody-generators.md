@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-free-lie-construction-for-finite-kac-moody-generators.md

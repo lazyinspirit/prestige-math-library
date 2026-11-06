@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-word-length-is-well-defined-and-satisfies-the-length-laws.md

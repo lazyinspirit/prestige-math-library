@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-factor-images-intersect-in-the-amalgamated-subgroup.md

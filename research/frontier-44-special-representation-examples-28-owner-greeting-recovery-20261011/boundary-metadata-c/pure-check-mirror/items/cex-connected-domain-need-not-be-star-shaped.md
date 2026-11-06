@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-connected-domain-need-not-be-star-shaped.md

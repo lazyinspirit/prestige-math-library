@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-one-sided-and-two-sided-exactness-by-short-exact-sequences.md

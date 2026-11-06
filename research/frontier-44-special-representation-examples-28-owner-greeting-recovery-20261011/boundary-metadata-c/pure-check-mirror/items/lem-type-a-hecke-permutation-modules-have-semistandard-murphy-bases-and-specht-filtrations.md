@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-type-a-hecke-permutation-modules-have-semistandard-murphy-bases-and-specht-filtrations.md

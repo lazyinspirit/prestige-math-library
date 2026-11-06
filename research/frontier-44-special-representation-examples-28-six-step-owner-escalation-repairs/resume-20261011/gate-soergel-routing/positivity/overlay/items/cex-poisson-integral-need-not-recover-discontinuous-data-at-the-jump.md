@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-poisson-integral-need-not-recover-discontinuous-data-at-the-jump.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-bruhat-decomposition-for-split-reductive-group.md

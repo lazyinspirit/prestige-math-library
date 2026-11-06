@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lower-central-generators-and-weighted-coordinate-length.md

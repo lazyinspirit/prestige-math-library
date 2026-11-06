@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-infinite-dimensional-weak-topology-is-not-first-countable.md

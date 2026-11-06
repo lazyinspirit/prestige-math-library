@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-action-map-fibres-and-stabilizer-subscheme.md

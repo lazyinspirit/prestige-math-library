@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-ck-euclidean-maps-and-diffeomorphisms.md

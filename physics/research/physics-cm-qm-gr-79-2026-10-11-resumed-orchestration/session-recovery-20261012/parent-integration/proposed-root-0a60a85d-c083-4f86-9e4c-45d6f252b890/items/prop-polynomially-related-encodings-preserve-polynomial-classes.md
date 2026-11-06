@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-polynomially-related-encodings-preserve-polynomial-classes.md

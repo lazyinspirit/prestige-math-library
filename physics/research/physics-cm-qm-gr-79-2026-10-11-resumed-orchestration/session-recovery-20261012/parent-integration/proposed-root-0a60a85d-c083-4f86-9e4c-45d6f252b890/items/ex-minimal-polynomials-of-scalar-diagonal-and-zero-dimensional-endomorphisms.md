@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-minimal-polynomials-of-scalar-diagonal-and-zero-dimensional-endomorphisms.md

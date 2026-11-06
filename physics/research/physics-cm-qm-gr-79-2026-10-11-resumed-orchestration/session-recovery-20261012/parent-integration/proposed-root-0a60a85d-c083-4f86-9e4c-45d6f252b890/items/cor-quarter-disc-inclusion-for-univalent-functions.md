@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-quarter-disc-inclusion-for-univalent-functions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-coordinate-map-for-a-finite-dimensional-normed-space.md

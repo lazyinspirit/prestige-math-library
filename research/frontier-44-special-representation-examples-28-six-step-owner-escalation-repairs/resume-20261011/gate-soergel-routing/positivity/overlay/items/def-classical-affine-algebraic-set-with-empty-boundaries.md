@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-classical-affine-algebraic-set-with-empty-boundaries.md

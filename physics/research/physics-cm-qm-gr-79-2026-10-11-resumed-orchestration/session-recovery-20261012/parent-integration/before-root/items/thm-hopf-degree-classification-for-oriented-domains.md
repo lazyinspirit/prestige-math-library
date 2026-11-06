@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hopf-degree-classification-for-oriented-domains.md

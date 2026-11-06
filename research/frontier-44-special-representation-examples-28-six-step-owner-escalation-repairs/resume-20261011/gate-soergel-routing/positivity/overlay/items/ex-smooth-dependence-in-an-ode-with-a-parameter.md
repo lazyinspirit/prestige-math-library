@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-smooth-dependence-in-an-ode-with-a-parameter.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pushforward-qc-under-qcqs-morphism.md

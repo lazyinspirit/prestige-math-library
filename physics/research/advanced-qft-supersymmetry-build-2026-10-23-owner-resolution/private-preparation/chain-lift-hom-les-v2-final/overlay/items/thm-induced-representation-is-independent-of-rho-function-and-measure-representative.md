@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-induced-representation-is-independent-of-rho-function-and-measure-representative.md

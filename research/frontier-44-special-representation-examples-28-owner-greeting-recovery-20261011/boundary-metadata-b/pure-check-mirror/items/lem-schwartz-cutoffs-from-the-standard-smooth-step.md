@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-schwartz-cutoffs-from-the-standard-smooth-step.md

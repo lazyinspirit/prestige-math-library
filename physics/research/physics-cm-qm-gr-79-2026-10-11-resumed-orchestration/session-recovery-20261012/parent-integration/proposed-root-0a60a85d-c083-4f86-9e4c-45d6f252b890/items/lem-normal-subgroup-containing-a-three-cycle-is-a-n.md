@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-subgroup-containing-a-three-cycle-is-a-n.md

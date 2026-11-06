@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-conjugate-gradients-can-terminate-at-a-relative-grade-smaller-than-the-dimension.md

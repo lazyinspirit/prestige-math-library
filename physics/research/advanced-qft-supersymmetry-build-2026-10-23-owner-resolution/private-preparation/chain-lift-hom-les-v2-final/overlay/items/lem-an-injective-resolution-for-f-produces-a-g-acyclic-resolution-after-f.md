@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-an-injective-resolution-for-f-produces-a-g-acyclic-resolution-after-f.md

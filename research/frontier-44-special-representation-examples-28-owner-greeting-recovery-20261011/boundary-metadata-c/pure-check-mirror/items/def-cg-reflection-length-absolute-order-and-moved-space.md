@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cg-reflection-length-absolute-order-and-moved-space.md

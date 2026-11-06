@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-eigenpair-residual-and-normwise-backward-error.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-holomorphic-kam-domain-and-diophantine-labels.md

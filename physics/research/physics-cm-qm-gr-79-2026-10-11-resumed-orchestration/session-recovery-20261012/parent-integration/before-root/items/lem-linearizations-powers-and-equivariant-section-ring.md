@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-linearizations-powers-and-equivariant-section-ring.md

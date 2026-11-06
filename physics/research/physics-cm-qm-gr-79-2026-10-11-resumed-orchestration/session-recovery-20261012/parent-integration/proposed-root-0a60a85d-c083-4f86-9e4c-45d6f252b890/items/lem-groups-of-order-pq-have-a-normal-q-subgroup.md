@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-groups-of-order-pq-have-a-normal-q-subgroup.md

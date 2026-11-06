@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hilbert-transform-has-signum-fourier-multiplier.md

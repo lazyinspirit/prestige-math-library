@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hypersurface-germs-have-pure-codimension-one.md

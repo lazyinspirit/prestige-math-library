@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-weierstrass-preparation-is-unique-without-the-unit-condition.md

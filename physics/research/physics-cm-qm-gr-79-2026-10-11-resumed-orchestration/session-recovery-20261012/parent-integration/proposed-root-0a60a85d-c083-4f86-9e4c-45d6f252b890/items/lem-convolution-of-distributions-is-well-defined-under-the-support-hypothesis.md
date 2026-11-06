@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-convolution-of-distributions-is-well-defined-under-the-support-hypothesis.md

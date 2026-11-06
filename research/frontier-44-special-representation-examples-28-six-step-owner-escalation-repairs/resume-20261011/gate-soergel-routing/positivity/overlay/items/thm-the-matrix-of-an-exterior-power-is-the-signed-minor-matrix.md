@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-matrix-of-an-exterior-power-is-the-signed-minor-matrix.md

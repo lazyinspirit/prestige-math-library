@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-hh-free-hopf-module-over-polynomial-hopf-algebra.md

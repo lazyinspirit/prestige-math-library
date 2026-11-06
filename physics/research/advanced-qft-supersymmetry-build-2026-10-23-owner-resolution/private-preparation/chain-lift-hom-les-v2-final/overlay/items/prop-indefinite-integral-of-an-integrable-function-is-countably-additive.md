@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-indefinite-integral-of-an-integrable-function-is-countably-additive.md

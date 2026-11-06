@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-model-functions-solve-the-constant-curvature-jacobi-equation.md

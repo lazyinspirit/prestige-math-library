@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-five-algebraic-proofs-of-bernoulli-and-rational-forms.md

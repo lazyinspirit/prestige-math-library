@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free.md

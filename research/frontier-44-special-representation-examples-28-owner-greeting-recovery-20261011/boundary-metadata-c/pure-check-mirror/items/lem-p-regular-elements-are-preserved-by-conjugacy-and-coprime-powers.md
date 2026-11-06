@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-p-regular-elements-are-preserved-by-conjugacy-and-coprime-powers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-nowhere-zero-vector-field-on-an-odd-sphere.md

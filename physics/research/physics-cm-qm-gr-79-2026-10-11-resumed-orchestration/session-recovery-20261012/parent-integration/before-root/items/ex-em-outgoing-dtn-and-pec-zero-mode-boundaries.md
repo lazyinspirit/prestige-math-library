@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-em-outgoing-dtn-and-pec-zero-mode-boundaries.md

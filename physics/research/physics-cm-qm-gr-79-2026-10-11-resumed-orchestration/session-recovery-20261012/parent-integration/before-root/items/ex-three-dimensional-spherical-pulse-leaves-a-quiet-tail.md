@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail.md

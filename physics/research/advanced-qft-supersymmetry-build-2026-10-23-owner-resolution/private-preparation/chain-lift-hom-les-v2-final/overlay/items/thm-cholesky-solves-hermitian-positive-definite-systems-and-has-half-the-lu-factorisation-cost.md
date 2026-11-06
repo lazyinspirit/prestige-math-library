@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-degree-zero-group-cohomology-and-homology-are-invariants-and-coinvariants.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-cg-artin-positive-lift-is-not-a-homomorphism.md

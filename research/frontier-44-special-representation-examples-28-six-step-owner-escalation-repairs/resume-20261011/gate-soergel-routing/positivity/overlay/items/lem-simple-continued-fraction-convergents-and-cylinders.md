@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-simple-continued-fraction-convergents-and-cylinders.md

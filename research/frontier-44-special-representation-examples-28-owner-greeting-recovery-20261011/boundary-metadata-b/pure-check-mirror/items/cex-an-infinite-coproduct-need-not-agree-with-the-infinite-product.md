@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-infinite-coproduct-need-not-agree-with-the-infinite-product.md

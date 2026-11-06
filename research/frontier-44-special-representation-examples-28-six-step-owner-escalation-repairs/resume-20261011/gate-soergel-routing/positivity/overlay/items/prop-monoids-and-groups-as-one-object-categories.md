@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-monoids-and-groups-as-one-object-categories.md

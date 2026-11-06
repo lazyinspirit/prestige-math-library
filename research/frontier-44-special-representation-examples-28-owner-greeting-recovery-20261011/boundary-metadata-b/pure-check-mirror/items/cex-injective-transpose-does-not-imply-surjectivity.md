@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-injective-transpose-does-not-imply-surjectivity.md

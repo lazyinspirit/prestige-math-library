@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-unbounded-integrand-stieltjes-integrable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-irrational-real-action-on-the-torus-that-is-free-but-not-proper.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-base-group-embeds-in-its-hnn-extension.md

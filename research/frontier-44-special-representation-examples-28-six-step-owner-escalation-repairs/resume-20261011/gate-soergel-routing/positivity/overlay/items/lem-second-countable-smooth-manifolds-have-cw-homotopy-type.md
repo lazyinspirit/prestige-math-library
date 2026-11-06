@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-second-countable-smooth-manifolds-have-cw-homotopy-type.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cutoff-commutator-for-local-w-two-p-estimates.md

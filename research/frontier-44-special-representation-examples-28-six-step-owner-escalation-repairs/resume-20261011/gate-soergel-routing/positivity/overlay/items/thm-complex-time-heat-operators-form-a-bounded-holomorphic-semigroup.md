@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-time-heat-operators-form-a-bounded-holomorphic-semigroup.md

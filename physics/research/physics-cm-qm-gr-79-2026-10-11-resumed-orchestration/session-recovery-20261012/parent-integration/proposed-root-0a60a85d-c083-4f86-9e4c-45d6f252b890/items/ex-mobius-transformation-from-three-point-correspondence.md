@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-mobius-transformation-from-three-point-correspondence.md

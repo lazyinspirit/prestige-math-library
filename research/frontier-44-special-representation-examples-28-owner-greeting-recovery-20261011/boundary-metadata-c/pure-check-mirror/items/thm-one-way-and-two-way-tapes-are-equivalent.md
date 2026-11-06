@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-one-way-and-two-way-tapes-are-equivalent.md

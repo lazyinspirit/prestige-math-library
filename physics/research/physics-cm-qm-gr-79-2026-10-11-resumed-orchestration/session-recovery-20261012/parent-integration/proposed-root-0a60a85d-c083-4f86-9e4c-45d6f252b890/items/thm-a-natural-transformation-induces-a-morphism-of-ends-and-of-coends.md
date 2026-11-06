@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-natural-transformation-induces-a-morphism-of-ends-and-of-coends.md

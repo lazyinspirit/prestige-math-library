@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-socle-of-a-finite-solvable-primitive-group.md

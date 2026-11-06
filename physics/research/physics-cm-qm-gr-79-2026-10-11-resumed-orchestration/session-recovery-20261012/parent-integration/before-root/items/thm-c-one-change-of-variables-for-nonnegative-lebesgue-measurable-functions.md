@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.md

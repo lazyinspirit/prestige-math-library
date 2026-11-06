@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-parity-of-transposition-factorisations-is-well-defined.md

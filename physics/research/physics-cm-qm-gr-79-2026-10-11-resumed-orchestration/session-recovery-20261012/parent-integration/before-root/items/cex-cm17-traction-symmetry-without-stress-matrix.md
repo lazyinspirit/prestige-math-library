@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm17-traction-symmetry-without-stress-matrix.md

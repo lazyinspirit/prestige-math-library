@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-isoperimetric-integral-constraint-and-its-multiplier.md

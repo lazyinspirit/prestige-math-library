@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-canonical-eilenberg-watts-comparison-is-balanced-and-natural.md

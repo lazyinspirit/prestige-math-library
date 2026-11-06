@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-positive-characteristic-top-differentials-map-to-blown-up-canonical-module.md

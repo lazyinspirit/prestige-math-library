@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-positive-majorant-system-dominates-the-formal-cauchy-recursion.md

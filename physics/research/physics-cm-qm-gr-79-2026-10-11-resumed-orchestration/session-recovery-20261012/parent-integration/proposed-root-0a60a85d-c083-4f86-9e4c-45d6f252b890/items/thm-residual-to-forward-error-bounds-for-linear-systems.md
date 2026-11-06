@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-residual-to-forward-error-bounds-for-linear-systems.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-lucky-arnoldi-breakdown-is-equivalent-to-krylov-invariance.md

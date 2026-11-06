@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-rational-map-singular-curve-not-extend-uniquely.md

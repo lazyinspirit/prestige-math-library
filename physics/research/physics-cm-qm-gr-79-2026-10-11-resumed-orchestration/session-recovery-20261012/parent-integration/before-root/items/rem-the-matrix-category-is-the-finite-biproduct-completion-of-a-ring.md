@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-matrix-category-is-the-finite-biproduct-completion-of-a-ring.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-brownian-motion-has-a-jointly-measurable-continuous-version.md

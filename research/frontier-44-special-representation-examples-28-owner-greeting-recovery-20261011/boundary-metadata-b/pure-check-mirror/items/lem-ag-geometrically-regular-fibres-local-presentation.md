@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-ag-geometrically-regular-fibres-local-presentation.md

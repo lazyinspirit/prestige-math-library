@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-shift-operators-on-classical-sequence-spaces.md

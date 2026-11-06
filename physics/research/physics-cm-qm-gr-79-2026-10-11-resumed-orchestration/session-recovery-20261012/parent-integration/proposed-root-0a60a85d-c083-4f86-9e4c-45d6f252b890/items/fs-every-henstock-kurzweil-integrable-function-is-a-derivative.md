@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-henstock-kurzweil-integrable-function-is-a-derivative.md

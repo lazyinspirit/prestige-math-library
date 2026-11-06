@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pullback-of-a-target-germ-by-a-smooth-map-is-a-well-defined-source-germ.md

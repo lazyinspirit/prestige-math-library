@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-uncountable-almost-disjoint-family-on-natural-numbers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-point-pushing-homomorphism-for-a-puncture.md

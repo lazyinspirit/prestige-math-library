@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-blockade-order-never-matters-for-x-sparsity.md

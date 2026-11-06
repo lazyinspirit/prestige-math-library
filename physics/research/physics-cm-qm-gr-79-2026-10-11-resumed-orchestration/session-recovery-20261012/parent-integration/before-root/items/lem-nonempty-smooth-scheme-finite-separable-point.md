@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonempty-smooth-scheme-finite-separable-point.md

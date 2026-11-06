@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-borel-sigma-algebra-on-the-extended-real-line.md

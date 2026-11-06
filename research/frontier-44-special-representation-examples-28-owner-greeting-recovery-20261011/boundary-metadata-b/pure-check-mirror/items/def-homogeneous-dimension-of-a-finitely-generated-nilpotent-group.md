@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-homogeneous-dimension-of-a-finitely-generated-nilpotent-group.md

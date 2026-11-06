@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-model-jacobi-fields-in-positive-zero-and-negative-curvature.md

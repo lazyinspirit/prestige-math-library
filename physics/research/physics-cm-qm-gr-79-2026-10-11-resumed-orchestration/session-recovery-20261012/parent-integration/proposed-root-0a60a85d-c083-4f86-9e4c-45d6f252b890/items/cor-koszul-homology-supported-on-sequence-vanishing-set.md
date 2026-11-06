@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-koszul-homology-supported-on-sequence-vanishing-set.md

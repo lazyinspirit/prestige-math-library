@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-galois-group-of-a-compositum-as-a-fibre-product.md

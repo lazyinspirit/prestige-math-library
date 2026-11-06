@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-adaptive-empirical-bayes-credible-ball-conservative-coverage-on-polished-tails.md

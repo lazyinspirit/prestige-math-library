@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-category-with-finite-products-and-finite-coproducts-has-biproducts.md

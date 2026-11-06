@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cm-compact-continuation-for-locally-lipschitz-odes.md

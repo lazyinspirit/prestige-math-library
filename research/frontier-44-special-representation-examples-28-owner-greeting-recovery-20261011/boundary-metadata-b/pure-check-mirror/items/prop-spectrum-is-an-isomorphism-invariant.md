@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-spectrum-is-an-isomorphism-invariant.md

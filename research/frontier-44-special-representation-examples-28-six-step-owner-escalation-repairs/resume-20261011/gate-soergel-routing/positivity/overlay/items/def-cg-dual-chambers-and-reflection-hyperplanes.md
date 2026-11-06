@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cg-dual-chambers-and-reflection-hyperplanes.md

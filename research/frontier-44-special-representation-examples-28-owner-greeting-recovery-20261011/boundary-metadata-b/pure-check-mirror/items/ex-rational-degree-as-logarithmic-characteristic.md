@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-rational-degree-as-logarithmic-characteristic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-metrizable-cech-complete-iff-completely-metrizable.md

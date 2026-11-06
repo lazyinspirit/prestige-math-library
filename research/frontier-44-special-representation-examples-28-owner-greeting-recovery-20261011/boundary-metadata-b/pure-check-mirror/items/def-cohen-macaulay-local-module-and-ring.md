@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cohen-macaulay-local-module-and-ring.md

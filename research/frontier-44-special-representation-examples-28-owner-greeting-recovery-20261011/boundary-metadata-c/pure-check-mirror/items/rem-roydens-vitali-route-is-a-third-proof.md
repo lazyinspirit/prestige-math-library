@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-roydens-vitali-route-is-a-third-proof.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-collapse-after-regular-preimage-is-homotopic-to-the-original-map.md

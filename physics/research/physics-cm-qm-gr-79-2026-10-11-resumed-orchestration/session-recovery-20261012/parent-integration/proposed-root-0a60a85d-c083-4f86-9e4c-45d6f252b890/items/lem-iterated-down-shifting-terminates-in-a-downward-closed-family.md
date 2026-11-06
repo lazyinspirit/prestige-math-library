@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-iterated-down-shifting-terminates-in-a-downward-closed-family.md

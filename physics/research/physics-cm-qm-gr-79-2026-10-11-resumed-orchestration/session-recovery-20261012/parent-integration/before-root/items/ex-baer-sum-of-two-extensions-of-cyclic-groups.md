@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-baer-sum-of-two-extensions-of-cyclic-groups.md

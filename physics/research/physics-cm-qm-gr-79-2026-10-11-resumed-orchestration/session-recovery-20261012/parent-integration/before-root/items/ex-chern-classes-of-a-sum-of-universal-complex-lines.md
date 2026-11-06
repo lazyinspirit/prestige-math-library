@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-chern-classes-of-a-sum-of-universal-complex-lines.md

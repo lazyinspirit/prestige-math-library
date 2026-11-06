@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-nonzero-element-is-a-unit-or-a-zero-divisor.md

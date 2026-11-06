@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-measurable-direct-integral-of-unitary-representations-is-strongly-continuous.md

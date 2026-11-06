@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-principal-ultrafilter-and-ultrafilter-flattening-maps-are-natural.md

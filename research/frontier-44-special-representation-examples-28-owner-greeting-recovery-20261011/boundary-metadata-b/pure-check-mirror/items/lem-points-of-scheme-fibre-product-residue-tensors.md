@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-points-of-scheme-fibre-product-residue-tensors.md

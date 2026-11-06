@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-folner-criterion-for-locally-compact-groups.md

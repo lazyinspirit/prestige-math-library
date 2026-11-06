@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup.md

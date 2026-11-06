@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cech-computes-qc-cohomology-separated-scheme-affine-cover.md

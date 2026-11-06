@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-proper-pushforward-of-cycles-well-defined.md

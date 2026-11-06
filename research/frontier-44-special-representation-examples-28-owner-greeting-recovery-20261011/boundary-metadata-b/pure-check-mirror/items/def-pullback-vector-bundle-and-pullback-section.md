@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-pullback-vector-bundle-and-pullback-section.md

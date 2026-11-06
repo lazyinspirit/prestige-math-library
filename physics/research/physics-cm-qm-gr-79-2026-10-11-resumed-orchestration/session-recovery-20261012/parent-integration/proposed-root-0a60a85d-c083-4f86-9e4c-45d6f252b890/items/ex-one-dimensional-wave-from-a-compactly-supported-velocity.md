@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-dimensional-wave-from-a-compactly-supported-velocity.md

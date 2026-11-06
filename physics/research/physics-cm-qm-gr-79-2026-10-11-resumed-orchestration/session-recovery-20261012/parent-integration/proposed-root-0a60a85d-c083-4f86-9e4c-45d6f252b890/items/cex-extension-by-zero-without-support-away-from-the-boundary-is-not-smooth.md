@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-extension-by-zero-without-support-away-from-the-boundary-is-not-smooth.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-lefschetz-number-of-the-identity-is-the-euler-characteristic.md

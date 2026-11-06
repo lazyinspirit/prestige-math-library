@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-type-a-hecke-standard-basis-for-soergel-comparison.md

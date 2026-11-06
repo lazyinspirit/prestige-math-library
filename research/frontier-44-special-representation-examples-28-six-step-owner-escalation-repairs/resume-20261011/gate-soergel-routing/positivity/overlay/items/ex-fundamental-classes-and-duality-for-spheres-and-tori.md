@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-fundamental-classes-and-duality-for-spheres-and-tori.md

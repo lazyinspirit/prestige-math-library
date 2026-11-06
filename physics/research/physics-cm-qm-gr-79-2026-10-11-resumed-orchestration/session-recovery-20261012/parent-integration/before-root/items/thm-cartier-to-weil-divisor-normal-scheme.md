@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cartier-to-weil-divisor-normal-scheme.md

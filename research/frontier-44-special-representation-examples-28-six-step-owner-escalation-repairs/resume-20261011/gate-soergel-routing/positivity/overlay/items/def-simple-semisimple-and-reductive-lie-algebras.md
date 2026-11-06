@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-simple-semisimple-and-reductive-lie-algebras.md

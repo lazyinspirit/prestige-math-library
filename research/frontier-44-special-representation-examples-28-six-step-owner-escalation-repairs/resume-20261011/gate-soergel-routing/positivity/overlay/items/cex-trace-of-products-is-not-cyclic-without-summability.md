@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-trace-of-products-is-not-cyclic-without-summability.md

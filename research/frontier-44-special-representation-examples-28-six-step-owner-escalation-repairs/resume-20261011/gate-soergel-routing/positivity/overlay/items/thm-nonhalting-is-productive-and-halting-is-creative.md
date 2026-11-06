@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nonhalting-is-productive-and-halting-is-creative.md

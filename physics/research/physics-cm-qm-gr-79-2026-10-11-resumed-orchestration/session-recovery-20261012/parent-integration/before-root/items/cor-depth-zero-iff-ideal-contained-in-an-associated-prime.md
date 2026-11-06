@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-depth-zero-iff-ideal-contained-in-an-associated-prime.md

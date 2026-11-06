@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-h-cobordism-theorem-when-the-whitehead-group-vanishes.md

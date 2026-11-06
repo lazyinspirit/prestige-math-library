@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-no-large-epsilon-sparse-subgraph-bounds-k-stable-sets.md

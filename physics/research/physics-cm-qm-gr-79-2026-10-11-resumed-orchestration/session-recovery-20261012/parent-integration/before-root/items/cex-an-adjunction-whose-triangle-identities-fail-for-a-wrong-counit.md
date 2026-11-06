@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-adjunction-whose-triangle-identities-fail-for-a-wrong-counit.md

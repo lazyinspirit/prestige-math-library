@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-euclidean-closed-balls-and-spheres-are-compact.md

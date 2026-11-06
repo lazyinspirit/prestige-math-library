@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-crystal-graph-of-b-two-lambda-one.md

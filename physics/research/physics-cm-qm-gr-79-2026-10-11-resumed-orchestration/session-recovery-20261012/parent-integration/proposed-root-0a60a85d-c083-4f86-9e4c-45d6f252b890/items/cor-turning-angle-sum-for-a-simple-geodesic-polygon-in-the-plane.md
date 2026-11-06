@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-turning-angle-sum-for-a-simple-geodesic-polygon-in-the-plane.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-ordinary-trace-on-a-p-singular-unipotent-element.md

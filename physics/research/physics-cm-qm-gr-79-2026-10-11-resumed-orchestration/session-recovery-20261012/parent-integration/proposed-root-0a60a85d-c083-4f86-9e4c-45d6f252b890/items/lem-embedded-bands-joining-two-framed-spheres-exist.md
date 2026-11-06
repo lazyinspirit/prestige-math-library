@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-embedded-bands-joining-two-framed-spheres-exist.md

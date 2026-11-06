@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-gr-sobolev-embedding-needs-s-minus-m-above-three-halves.md

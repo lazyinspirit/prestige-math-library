@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-conjugate-transpose-kernels-give-adjoints.md

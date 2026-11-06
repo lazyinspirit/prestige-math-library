@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-approximate-unit-and-proper-c-star-morphism.md

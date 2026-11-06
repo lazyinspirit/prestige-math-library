@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-quadratic-algebraic-integers-and-one-half.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-first-orthogonality-relation-for-irreducible-complex-characters.md

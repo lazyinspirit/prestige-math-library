@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-acceptable-numberings-are-computably-intertranslatable.md

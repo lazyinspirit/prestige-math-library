@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-uniform-spaces-are-totally-bounded.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-lower-median-of-odd-empirical-sample-is-middle-order-statistic.md

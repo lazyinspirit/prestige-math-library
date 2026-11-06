@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boundary-spur-or-at-most-three-shell-from-curvature.md

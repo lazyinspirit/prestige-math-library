@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-weighted-limits-over-a-representable-weight-are-evaluation.md

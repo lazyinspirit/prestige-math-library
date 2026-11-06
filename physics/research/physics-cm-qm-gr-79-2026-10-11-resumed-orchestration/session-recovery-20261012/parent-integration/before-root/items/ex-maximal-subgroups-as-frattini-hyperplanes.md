@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-maximal-subgroups-as-frattini-hyperplanes.md

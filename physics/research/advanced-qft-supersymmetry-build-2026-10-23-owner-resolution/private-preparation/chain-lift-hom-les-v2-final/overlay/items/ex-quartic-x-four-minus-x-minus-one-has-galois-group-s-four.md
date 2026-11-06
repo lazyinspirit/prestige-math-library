@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-quartic-x-four-minus-x-minus-one-has-galois-group-s-four.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-metrizable-spaces-are-collectionwise-normal.md

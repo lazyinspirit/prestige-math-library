@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-reduced-finitely-generated-k-algebra-interface.md

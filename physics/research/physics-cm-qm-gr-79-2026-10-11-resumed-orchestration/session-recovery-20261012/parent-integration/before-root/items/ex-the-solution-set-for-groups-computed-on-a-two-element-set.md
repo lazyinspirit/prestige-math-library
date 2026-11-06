@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-solution-set-for-groups-computed-on-a-two-element-set.md

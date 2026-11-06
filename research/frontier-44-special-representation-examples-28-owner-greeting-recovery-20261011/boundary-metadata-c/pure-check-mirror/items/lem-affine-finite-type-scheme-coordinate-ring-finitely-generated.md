@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-affine-finite-type-scheme-coordinate-ring-finitely-generated.md

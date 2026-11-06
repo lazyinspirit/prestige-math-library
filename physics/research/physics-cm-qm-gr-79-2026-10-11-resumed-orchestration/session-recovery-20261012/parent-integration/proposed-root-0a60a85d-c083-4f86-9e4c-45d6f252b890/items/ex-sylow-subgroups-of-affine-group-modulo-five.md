@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sylow-subgroups-of-affine-group-modulo-five.md

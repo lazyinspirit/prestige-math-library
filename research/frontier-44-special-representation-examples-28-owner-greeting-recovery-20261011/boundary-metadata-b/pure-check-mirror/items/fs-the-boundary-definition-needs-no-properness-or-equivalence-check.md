@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-boundary-definition-needs-no-properness-or-equivalence-check.md

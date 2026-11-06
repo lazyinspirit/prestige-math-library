@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra.md

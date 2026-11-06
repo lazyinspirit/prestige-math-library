@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-every-face-of-an-elementary-solid-region-is-outward-oriented.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-ext-of-locally-free-sheaf-via-cohomology.md

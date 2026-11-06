@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-jordan-holder-theorem-in-an-abelian-category.md

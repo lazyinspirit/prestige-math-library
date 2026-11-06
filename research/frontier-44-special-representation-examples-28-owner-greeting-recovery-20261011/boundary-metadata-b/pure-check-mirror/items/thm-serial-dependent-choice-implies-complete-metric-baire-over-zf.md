@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-serial-dependent-choice-implies-complete-metric-baire-over-zf.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux.md

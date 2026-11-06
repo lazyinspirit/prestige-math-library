@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-sine-and-cosine-subtraction-formulas.md

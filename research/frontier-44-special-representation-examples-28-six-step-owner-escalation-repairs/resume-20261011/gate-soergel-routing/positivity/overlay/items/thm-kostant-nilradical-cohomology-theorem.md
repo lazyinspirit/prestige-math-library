@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-kostant-nilradical-cohomology-theorem.md

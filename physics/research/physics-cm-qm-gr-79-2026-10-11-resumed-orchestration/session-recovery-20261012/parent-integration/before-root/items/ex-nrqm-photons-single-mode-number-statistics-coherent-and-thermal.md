@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-photons-single-mode-number-statistics-coherent-and-thermal.md

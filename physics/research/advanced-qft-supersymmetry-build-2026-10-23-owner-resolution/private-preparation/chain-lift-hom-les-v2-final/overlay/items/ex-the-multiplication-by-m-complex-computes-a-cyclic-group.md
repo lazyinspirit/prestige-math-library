@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-multiplication-by-m-complex-computes-a-cyclic-group.md

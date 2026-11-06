@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-an-additive-functor-preserves-finite-biproducts.md

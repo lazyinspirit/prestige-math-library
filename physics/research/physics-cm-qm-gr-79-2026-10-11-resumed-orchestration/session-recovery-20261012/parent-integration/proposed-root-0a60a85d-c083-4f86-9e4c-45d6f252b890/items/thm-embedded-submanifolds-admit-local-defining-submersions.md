@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-embedded-submanifolds-admit-local-defining-submersions.md

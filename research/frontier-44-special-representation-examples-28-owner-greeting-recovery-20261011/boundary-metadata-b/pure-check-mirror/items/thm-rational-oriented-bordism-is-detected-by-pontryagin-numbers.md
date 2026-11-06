@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rational-oriented-bordism-is-detected-by-pontryagin-numbers.md

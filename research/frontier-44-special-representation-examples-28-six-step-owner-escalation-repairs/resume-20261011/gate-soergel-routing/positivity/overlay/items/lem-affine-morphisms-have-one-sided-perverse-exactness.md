@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-affine-morphisms-have-one-sided-perverse-exactness.md

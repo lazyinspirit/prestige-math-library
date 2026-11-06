@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-fundamental-weights-for-a-chosen-simple-root-system.md

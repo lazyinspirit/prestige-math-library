@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-modular-partition-with-a-prime-quotient-is-unique.md

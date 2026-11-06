@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property.md

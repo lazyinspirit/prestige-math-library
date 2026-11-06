@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-lkb-small-end-neighbourhoods-stabilize-equivariantly.md

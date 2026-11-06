@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cyclotomic-klr-functors-define-an-integrable-quantum-action-on-k-zero-and-g-zero.md

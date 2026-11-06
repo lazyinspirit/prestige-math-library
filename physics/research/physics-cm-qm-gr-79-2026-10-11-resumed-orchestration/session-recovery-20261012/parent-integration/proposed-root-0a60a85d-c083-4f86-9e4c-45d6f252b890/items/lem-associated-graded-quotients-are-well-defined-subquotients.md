@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-associated-graded-quotients-are-well-defined-subquotients.md

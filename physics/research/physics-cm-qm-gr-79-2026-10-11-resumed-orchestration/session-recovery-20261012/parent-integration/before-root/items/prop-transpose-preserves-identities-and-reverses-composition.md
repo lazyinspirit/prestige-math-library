@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-transpose-preserves-identities-and-reverses-composition.md

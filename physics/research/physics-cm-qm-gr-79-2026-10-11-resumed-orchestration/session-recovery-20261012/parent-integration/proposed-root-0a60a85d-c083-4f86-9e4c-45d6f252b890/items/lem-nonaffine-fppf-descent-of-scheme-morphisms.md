@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonaffine-fppf-descent-of-scheme-morphisms.md

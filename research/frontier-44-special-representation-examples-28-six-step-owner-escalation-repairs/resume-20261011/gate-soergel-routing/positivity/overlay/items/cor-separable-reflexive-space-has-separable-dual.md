@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-separable-reflexive-space-has-separable-dual.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-components-of-the-frame-bundle-of-a-connected-manifold.md

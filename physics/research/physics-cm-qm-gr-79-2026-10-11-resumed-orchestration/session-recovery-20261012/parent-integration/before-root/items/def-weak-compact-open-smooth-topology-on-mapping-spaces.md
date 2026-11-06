@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-weak-compact-open-smooth-topology-on-mapping-spaces.md

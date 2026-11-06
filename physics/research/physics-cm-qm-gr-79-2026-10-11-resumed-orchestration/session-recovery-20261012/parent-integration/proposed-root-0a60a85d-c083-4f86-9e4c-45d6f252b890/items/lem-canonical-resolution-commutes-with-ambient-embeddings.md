@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-canonical-resolution-commutes-with-ambient-embeddings.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-domains-and-ranges-of-partial-computable-functions-are-ce.md

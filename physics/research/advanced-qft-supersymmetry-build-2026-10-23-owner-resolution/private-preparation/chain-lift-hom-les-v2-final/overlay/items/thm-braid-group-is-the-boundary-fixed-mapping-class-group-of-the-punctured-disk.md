@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk.md

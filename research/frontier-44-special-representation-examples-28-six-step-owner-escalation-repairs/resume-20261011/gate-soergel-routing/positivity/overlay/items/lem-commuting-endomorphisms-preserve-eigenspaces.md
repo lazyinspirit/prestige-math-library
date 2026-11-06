@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-commuting-endomorphisms-preserve-eigenspaces.md

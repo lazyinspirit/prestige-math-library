@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-shifted-adic-koszul-filtration-euler-comparison.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-riemann-stieltjes-existence-finitely-discontinuous.md

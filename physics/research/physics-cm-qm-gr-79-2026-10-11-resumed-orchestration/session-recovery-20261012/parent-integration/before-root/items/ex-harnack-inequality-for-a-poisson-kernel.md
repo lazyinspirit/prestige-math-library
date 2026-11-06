@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-harnack-inequality-for-a-poisson-kernel.md

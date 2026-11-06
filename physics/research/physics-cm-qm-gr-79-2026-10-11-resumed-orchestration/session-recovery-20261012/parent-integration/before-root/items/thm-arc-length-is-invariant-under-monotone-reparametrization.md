@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-arc-length-is-invariant-under-monotone-reparametrization.md

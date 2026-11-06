@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics.md

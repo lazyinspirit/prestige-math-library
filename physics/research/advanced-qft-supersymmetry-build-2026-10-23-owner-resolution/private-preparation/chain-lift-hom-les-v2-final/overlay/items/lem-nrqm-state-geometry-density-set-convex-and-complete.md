@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-nrqm-state-geometry-density-set-convex-and-complete.md

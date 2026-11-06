@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cauchy-estimates-propagate-to-holomorphic-hulls.md

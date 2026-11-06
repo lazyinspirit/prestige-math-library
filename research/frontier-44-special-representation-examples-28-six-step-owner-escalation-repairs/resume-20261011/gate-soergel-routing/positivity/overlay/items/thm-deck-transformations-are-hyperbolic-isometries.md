@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-deck-transformations-are-hyperbolic-isometries.md

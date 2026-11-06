@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-commutator-pairings-of-the-dihedral-and-quaternion-groups-of-order-eight.md

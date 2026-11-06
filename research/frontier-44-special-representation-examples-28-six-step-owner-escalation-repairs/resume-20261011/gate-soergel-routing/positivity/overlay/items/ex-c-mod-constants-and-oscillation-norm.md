@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-c-mod-constants-and-oscillation-norm.md

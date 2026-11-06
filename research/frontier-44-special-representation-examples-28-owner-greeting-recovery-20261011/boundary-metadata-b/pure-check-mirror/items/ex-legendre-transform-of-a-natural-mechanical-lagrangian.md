@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-legendre-transform-of-a-natural-mechanical-lagrangian.md

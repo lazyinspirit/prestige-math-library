@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-associated-primes-of-cohen-macaulay-modules.md

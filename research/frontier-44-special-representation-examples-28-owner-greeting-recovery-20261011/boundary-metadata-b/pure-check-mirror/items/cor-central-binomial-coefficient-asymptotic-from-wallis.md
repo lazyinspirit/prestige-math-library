@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-central-binomial-coefficient-asymptotic-from-wallis.md

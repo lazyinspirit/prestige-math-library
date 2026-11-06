@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-verma-filtered-objects-are-acyclic-for-n-minus-coinvariants.md

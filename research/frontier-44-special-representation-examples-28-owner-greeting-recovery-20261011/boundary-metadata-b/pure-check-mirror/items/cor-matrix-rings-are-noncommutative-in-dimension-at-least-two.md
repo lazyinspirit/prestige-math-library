@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-matrix-rings-are-noncommutative-in-dimension-at-least-two.md

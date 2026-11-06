@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-local-graph-flux-from-fubini-and-the-fundamental-theorem.md

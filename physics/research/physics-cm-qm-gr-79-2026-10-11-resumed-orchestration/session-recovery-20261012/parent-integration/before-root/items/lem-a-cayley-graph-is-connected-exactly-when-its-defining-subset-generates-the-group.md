@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-cayley-graph-is-connected-exactly-when-its-defining-subset-generates-the-group.md

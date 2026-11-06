@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-uniform-convergence-does-not-control-derivatives.md

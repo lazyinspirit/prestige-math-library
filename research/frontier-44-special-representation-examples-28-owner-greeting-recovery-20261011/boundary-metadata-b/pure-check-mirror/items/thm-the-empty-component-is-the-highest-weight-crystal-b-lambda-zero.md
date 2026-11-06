@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero.md

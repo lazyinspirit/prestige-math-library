@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-maximal-integral-manifolds-partition-the-manifold.md

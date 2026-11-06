@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-geometric-convergence-to-a-broken-morse-trajectory.md

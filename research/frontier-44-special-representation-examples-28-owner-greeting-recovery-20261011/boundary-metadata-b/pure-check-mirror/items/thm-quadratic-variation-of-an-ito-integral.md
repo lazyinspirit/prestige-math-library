@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quadratic-variation-of-an-ito-integral.md

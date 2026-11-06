@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-self-dual-indecomposable-klr-projectives-give-the-negative-half-lower-global-basis.md

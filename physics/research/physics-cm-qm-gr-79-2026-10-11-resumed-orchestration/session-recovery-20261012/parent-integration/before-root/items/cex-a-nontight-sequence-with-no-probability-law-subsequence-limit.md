@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-nontight-sequence-with-no-probability-law-subsequence-limit.md

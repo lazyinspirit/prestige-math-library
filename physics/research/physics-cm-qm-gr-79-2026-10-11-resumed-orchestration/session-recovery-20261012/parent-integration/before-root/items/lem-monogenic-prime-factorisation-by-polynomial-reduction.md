@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-monogenic-prime-factorisation-by-polynomial-reduction.md

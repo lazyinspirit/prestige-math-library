@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-monodromy-corollary-agrees-with-the-earlier-simply-connected-logarithm-theorems.md

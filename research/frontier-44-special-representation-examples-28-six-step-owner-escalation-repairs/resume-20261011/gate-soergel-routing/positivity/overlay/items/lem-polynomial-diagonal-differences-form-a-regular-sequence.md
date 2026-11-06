@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-polynomial-diagonal-differences-form-a-regular-sequence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-truncation-functors-and-cohomology-of-a-t-structure.md

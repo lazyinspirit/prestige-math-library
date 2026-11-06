@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-convolution-is-measurable-for-every-lebesgue-representative.md

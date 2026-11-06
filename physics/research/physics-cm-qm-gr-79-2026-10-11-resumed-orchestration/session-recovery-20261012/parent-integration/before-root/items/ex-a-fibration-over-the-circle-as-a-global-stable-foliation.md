@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-fibration-over-the-circle-as-a-global-stable-foliation.md

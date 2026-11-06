@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-cyclotomic-hecke-blocks-inherit-a-nontrivial-z-grading.md

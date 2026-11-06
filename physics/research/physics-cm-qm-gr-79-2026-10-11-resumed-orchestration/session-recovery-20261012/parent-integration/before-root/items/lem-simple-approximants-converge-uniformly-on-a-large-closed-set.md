@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simple-approximants-converge-uniformly-on-a-large-closed-set.md

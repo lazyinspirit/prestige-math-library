@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonaffine-subgroup-scheme-stabilizer-of-line.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-bass-dimension-of-the-discrete-heisenberg-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-laplace-fundamental-kernel-is-locally-integrable.md

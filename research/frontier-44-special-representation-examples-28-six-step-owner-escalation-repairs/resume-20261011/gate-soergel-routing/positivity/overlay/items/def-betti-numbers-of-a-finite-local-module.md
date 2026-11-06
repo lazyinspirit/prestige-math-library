@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-betti-numbers-of-a-finite-local-module.md

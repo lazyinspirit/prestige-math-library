@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-symmetric-group-conjugation-to-inverse-within-the-preceding-group.md

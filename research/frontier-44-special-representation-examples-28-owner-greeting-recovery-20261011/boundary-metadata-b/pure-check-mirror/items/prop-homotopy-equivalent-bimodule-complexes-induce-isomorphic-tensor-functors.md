@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-h-one-regular-local-implies-koszul-regular.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complex-l-one-functionals-on-finite-measure-spaces-have-bounded-densities.md

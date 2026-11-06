@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-simple-reflections-and-the-kac-moody-weyl-group.md

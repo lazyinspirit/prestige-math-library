@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-mutual-independence-under-subfamilies-and-complements.md

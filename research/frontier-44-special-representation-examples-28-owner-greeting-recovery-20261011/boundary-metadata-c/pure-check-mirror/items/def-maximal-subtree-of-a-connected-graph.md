@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-maximal-subtree-of-a-connected-graph.md

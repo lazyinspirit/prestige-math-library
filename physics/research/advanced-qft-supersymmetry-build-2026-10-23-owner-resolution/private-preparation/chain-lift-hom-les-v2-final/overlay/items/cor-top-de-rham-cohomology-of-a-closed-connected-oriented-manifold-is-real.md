@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-top-de-rham-cohomology-of-a-closed-connected-oriented-manifold-is-real.md

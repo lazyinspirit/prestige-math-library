@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-torsion-and-uniqueness-of-plane-cubic-group-law.md

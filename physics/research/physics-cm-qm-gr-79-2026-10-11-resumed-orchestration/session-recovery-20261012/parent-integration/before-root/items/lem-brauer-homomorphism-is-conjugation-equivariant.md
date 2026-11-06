@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brauer-homomorphism-is-conjugation-equivariant.md

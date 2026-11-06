@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-ordinary-acyclicity-forgets-basis-and-group-ring-torsion.md

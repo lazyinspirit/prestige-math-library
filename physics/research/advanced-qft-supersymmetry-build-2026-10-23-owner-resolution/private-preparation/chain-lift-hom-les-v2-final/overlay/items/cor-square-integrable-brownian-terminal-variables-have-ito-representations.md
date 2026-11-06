@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-square-integrable-brownian-terminal-variables-have-ito-representations.md

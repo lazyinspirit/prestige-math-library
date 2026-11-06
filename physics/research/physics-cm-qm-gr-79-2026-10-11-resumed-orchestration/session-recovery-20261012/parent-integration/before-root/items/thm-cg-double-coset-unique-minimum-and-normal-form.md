@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cg-double-coset-unique-minimum-and-normal-form.md

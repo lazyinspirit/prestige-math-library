@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-christoffel-symbols-of-an-affine-connection.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-integral-of-brownian-motion-against-itself-preview.md

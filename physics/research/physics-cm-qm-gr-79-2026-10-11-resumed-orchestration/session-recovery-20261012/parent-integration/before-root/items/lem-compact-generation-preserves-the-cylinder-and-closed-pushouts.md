@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-generation-preserves-the-cylinder-and-closed-pushouts.md

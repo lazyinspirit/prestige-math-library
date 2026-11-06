@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-terminal-reachability-and-residual-game-positions.md

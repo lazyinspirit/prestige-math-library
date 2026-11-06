@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-relative-sequential-compactness-for-weak-convergence.md

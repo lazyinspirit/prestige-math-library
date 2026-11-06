@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-translated-tent-functions-converge-in-the-compact-open-topology.md

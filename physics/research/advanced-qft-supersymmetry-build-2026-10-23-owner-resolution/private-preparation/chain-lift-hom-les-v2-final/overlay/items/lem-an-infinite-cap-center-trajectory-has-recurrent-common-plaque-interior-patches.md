@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-an-infinite-cap-center-trajectory-has-recurrent-common-plaque-interior-patches.md

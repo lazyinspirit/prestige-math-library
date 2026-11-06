@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-the-bar-lattice-and-integral-lattice-of-a-based-module.md

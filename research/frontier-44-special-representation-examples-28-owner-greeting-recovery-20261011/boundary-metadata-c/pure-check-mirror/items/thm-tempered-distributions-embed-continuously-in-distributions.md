@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-tempered-distributions-embed-continuously-in-distributions.md

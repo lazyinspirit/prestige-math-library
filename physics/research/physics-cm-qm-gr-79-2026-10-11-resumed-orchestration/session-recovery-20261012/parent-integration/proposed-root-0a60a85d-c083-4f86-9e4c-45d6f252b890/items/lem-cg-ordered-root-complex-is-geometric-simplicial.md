@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-ordered-root-complex-is-geometric-simplicial.md

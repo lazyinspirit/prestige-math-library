@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-localisation-spectrum-map-homeomorphism-onto-image.md

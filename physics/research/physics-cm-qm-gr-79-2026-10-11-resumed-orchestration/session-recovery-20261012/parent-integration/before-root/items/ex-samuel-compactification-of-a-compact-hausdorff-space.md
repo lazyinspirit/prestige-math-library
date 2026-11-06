@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-samuel-compactification-of-a-compact-hausdorff-space.md

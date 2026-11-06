@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sharp-frequency-cutoffs-do-not-have-uniform-lone-kernels.md

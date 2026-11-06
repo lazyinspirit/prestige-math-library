@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-quotient-of-a-henselian-local-ring-is-henselian.md

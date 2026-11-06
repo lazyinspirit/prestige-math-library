@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-short-exact-sequence-with-acyclic-middle-identifies-neighbouring-homology.md

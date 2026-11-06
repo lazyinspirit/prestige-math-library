@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-lefschetz-number-of-a-finite-cw-self-map.md

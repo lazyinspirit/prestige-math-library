@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-signed-exterior-angle-at-a-piecewise-smooth-corner.md

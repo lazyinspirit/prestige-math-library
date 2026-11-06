@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-nrqm-framework-assumption-classes-and-scope.md

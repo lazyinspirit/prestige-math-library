@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-absolute-value-and-singular-values-of-a-compact-operator.md

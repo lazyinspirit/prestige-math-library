@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-lie-bracket-of-left-invariant-fields-is-left-invariant.md

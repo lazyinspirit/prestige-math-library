@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-gregory-leibniz-series-for-pi-from-a-finite-remainder.md

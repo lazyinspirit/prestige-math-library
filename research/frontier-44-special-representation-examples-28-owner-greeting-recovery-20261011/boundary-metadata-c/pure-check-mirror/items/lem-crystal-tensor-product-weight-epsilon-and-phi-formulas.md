@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-crystal-tensor-product-weight-epsilon-and-phi-formulas.md

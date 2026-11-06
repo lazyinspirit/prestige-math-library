@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-qc-one-qubit-gate-alphabet-and-rotations.md

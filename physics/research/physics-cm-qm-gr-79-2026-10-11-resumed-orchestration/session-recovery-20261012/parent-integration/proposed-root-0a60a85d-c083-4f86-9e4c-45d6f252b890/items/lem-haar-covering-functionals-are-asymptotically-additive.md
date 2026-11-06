@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-haar-covering-functionals-are-asymptotically-additive.md

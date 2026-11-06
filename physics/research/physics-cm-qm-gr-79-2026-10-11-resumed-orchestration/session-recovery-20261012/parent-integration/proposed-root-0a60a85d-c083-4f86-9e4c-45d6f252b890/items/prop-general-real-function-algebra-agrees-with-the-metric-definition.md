@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-general-real-function-algebra-agrees-with-the-metric-definition.md

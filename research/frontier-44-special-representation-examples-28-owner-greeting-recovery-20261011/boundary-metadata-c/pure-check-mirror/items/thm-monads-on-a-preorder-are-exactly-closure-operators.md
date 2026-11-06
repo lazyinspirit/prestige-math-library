@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-monads-on-a-preorder-are-exactly-closure-operators.md

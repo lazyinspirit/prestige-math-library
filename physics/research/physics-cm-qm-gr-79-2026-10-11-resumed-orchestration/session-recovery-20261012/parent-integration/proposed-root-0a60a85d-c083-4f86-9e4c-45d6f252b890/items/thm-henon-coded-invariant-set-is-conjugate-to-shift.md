@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-henon-coded-invariant-set-is-conjugate-to-shift.md

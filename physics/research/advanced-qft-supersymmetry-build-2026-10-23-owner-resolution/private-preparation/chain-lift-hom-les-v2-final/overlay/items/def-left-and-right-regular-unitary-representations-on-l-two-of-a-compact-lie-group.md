@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group.md

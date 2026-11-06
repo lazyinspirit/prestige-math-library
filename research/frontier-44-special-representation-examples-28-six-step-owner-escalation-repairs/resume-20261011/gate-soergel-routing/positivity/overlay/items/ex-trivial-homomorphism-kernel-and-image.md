@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-trivial-homomorphism-kernel-and-image.md

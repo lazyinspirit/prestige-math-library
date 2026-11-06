@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-radical-is-characteristic-and-the-radical-quotient-has-zero-radical.md

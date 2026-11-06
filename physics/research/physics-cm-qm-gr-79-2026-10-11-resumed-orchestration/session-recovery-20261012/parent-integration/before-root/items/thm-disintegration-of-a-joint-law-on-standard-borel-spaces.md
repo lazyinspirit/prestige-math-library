@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-disintegration-of-a-joint-law-on-standard-borel-spaces.md

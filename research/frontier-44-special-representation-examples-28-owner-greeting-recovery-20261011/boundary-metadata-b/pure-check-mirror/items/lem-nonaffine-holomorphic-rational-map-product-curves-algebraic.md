@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonaffine-holomorphic-rational-map-product-curves-algebraic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hecke-jucys-murphy-elements-through-rank-four.md

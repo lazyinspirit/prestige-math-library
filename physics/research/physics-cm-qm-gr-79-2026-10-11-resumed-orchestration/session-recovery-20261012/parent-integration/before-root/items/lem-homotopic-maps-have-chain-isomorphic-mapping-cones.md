@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-homotopic-maps-have-chain-isomorphic-mapping-cones.md

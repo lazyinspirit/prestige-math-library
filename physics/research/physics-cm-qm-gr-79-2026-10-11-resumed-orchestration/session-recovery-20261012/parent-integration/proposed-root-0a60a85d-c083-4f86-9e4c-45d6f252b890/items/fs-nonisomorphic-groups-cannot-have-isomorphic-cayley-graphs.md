@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-nonisomorphic-groups-cannot-have-isomorphic-cayley-graphs.md

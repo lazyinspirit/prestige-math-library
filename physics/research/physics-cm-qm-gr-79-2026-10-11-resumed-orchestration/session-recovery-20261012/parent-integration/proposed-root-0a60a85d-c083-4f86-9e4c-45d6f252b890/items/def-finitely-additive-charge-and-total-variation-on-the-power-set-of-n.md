@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-finitely-additive-charge-and-total-variation-on-the-power-set-of-n.md

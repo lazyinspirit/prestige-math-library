@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-projective-embedding-dualizing-complex-existence.md

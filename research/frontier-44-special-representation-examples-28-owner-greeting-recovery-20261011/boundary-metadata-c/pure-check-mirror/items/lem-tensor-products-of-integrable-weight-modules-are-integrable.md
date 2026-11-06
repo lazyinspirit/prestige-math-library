@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-tensor-products-of-integrable-weight-modules-are-integrable.md

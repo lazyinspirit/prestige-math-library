@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cayley-transform-of-a-self-adjoint-operator.md

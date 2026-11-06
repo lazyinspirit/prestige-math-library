@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-first-nonzero-homotopy-group-of-a-sphere.md

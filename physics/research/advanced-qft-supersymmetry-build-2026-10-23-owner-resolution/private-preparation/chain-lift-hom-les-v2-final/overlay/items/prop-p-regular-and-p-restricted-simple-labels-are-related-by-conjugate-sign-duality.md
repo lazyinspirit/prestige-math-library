@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality.md

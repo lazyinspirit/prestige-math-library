@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-arc-length-function-is-continuous-and-nondecreasing.md

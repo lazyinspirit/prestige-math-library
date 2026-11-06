@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-localisation-of-hom-for-finitely-presented-modules.md

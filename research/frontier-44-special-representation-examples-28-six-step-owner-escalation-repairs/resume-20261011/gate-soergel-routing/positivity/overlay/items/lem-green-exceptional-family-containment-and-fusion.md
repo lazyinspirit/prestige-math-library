@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-green-exceptional-family-containment-and-fusion.md

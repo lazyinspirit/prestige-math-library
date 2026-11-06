@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-surgery-on-a-normal-map-preserves-its-normal-bordism-class.md

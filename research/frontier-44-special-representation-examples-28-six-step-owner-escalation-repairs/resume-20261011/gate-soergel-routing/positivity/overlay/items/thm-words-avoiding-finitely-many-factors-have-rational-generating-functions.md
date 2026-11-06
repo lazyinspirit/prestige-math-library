@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-words-avoiding-finitely-many-factors-have-rational-generating-functions.md

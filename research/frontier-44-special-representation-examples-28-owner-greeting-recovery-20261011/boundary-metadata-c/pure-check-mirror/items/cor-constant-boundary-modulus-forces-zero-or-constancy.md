@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-constant-boundary-modulus-forces-zero-or-constancy.md

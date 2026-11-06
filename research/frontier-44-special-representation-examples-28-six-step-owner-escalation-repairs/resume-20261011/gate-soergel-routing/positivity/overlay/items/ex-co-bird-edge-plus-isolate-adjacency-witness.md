@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-co-bird-edge-plus-isolate-adjacency-witness.md

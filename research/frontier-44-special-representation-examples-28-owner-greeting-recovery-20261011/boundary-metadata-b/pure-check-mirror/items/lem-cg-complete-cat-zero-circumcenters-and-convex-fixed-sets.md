@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets.md

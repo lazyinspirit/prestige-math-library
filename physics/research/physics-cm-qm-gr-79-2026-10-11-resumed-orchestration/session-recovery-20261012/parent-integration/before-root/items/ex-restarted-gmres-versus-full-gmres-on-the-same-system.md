@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-restarted-gmres-versus-full-gmres-on-the-same-system.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-em-parameter-preserving-smooth-extension-on-a-smooth-domain.md

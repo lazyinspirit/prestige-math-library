@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-weakly-contractible-cw-complex-is-contractible.md

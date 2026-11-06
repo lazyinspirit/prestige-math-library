@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-average-cluster-size-does-not-determine-unequal-size-design-effect.md

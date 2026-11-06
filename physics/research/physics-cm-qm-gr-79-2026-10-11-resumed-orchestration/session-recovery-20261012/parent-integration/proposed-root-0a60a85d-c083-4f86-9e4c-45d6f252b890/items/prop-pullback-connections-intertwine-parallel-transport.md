@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-pullback-connections-intertwine-parallel-transport.md

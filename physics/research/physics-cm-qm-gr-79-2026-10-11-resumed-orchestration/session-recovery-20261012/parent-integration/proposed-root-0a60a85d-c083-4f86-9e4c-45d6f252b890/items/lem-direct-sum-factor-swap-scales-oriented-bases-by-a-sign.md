@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dirac-comb-of-a-full-rank-lattice-transforms-to-the-dual-comb.md

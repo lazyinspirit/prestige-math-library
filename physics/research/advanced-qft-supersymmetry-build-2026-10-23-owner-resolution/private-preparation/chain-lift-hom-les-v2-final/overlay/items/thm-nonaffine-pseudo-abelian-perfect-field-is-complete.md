@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-nonaffine-pseudo-abelian-perfect-field-is-complete.md

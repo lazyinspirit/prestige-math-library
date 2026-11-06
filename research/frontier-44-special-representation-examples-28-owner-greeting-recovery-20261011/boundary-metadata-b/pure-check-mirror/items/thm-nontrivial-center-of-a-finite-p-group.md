@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nontrivial-center-of-a-finite-p-group.md

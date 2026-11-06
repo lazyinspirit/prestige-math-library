@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-orientation-reversed-complex-projective-plane-has-signature-minus-one.md

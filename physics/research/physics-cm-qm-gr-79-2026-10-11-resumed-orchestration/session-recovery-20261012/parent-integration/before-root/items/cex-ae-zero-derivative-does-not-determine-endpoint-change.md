@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-ae-zero-derivative-does-not-determine-endpoint-change.md

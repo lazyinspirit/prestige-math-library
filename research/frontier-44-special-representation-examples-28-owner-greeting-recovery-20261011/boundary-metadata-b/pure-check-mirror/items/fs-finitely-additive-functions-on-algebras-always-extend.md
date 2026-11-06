@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-finitely-additive-functions-on-algebras-always-extend.md

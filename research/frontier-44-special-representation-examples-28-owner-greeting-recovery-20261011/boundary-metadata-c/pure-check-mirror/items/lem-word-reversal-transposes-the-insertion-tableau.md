@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-word-reversal-transposes-the-insertion-tableau.md

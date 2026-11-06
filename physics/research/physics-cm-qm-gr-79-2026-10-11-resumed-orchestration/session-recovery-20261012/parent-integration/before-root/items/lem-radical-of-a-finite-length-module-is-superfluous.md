@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-radical-of-a-finite-length-module-is-superfluous.md

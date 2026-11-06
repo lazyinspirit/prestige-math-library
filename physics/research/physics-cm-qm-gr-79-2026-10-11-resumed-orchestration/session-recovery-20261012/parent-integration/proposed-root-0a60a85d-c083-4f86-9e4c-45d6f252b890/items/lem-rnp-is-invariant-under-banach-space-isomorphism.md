@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rnp-is-invariant-under-banach-space-isomorphism.md

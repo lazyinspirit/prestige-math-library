@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complex-sine-is-unbounded-on-the-imaginary-axis.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-mod-two-intersection-number-is-homotopy-invariant.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-approximations-turning-point-connection.md

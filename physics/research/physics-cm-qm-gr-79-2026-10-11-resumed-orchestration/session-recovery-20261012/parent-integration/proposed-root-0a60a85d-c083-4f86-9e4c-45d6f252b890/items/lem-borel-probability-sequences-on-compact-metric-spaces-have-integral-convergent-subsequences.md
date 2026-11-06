@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-borel-probability-sequences-on-compact-metric-spaces-have-integral-convergent-subsequences.md

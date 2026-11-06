@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-self-intersection-of-the-zero-section-in-an-oriented-plane-bundle.md

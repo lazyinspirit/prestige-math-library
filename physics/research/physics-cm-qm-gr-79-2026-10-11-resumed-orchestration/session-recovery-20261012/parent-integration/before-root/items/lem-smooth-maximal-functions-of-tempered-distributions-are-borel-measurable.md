@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-maximal-functions-of-tempered-distributions-are-borel-measurable.md

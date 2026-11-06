@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-tableau-stabilizers-transform-by-conjugation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-whole-space-maximum-principle-under-gaussian-growth.md

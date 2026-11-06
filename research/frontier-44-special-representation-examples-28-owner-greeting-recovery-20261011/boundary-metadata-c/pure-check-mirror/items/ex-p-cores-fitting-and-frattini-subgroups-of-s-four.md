@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-p-cores-fitting-and-frattini-subgroups-of-s-four.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-line-integrals-under-reversal-and-concatenation.md

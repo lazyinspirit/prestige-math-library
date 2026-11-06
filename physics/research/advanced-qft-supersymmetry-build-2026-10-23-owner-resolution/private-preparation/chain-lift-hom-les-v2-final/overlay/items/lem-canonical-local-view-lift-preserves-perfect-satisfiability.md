@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-canonical-local-view-lift-preserves-perfect-satisfiability.md

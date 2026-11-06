@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-open-connected-subsets-of-rn-are-polygonally-connected.md

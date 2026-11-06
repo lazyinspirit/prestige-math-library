@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-extensions-of-amenable-groups-are-amenable.md

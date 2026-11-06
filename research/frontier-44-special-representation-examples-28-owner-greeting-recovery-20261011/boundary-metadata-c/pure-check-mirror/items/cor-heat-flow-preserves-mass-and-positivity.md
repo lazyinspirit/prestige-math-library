@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-heat-flow-preserves-mass-and-positivity.md

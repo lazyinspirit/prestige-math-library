@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations.md

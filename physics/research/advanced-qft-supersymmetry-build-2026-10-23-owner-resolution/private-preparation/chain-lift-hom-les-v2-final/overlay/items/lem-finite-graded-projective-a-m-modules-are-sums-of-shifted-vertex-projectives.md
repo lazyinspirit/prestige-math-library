@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-graded-projective-a-m-modules-are-sums-of-shifted-vertex-projectives.md

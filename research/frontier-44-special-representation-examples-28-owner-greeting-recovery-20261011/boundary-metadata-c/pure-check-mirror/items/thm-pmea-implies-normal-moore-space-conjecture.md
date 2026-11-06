@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-pmea-implies-normal-moore-space-conjecture.md

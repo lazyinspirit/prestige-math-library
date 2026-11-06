@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-equivalent-metrics-share-cauchy-sequences.md

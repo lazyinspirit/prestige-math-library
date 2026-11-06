@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-kernel-of-the-unit-logarithm-is-the-roots-of-unity.md

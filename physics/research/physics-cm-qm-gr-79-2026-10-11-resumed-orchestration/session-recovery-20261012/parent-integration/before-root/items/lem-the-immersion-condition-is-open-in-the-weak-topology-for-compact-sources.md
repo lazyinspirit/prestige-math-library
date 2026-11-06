@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-immersion-condition-is-open-in-the-weak-topology-for-compact-sources.md

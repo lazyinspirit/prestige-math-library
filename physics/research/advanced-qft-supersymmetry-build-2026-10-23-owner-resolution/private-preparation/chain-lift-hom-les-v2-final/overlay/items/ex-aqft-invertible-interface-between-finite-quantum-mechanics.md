@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-aqft-invertible-interface-between-finite-quantum-mechanics.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-underlying-quotient-graph-does-not-determine-the-group.md

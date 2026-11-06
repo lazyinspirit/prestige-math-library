@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs.md

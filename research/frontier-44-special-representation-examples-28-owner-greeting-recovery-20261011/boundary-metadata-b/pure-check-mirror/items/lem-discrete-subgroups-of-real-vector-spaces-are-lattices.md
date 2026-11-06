@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-discrete-subgroups-of-real-vector-spaces-are-lattices.md

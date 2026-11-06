@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-level-one-charge-zero-crystal-through-rank-four-at-e-three.md

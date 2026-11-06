@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-moore-penrose-image-and-kernel-identities.md

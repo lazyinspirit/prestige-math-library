@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-bounded-derived-localizations-embed-fully-faithfully.md

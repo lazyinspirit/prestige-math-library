@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-normal-function-fixed-points-at-omega-one.md

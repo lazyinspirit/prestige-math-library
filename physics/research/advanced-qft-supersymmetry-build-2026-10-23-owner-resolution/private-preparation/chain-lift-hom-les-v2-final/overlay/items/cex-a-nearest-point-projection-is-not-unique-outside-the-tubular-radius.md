@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-nearest-point-projection-is-not-unique-outside-the-tubular-radius.md

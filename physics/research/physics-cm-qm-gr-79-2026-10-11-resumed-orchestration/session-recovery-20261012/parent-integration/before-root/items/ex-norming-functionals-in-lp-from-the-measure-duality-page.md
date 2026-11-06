@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-norming-functionals-in-lp-from-the-measure-duality-page.md

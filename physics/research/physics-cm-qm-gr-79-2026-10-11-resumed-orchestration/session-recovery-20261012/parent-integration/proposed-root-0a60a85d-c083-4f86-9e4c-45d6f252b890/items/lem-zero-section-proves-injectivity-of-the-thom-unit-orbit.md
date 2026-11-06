@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zero-section-proves-injectivity-of-the-thom-unit-orbit.md

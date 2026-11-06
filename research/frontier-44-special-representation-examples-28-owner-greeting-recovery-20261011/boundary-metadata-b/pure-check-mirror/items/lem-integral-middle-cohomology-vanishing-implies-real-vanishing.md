@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-middle-cohomology-vanishing-implies-real-vanishing.md

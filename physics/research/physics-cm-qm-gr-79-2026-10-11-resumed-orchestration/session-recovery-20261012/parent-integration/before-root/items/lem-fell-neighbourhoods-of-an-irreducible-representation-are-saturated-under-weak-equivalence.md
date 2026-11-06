@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fell-neighbourhoods-of-an-irreducible-representation-are-saturated-under-weak-equivalence.md

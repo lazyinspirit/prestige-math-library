@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-upper-and-lower-central-series-of-the-dihedral-group-of-order-eight.md

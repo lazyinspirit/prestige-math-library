@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-closed-balls-in-a-locally-compact-metric-space.md

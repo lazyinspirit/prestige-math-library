@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-one-corrupted-block-is-rejected-by-the-geometric-median.md

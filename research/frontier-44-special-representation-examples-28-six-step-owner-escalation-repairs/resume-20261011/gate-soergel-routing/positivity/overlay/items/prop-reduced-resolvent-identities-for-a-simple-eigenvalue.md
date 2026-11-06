@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-reduced-resolvent-identities-for-a-simple-eigenvalue.md

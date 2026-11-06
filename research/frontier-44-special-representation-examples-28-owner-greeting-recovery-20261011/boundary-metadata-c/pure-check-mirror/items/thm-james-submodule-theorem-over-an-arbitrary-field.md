@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-james-submodule-theorem-over-an-arbitrary-field.md

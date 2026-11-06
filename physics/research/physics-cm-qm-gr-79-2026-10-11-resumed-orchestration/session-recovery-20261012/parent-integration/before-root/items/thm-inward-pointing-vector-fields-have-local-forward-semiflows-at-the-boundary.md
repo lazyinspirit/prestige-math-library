@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-inward-pointing-vector-fields-have-local-forward-semiflows-at-the-boundary.md

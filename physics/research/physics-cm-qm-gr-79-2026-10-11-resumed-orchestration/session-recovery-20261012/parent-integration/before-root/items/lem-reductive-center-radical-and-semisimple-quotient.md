@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reductive-center-radical-and-semisimple-quotient.md

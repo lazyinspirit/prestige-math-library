@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set.md

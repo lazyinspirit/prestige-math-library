@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-quiver-exact-sequence-correspondence-is-smooth-and-proper.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-simultaneous-triangularisation-of-commuting-operators.md

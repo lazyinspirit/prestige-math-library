@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-composite-of-a-quotient-and-a-subobject-inclusion-is-the-canonical-factorisation.md

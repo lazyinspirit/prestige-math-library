@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-initial-subsequences-of-a-regular-sequence-are-regular.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-general-mixed-tensor-field-has-a-pullback-by-every-smooth-map.md

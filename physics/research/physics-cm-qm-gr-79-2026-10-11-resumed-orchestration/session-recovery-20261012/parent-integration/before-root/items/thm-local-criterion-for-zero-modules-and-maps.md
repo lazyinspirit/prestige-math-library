@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-local-criterion-for-zero-modules-and-maps.md

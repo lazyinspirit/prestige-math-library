@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-poincare-without-mean-trace-or-zero-set-normalisation-fails.md

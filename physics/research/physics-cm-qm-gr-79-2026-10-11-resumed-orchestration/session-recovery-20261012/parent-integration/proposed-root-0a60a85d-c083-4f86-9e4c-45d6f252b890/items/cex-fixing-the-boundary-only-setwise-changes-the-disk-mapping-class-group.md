@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-fixing-the-boundary-only-setwise-changes-the-disk-mapping-class-group.md

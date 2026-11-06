@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-kolmogorov-analytic-partial-sum-maximal-function.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-path-and-antipath-free-graphs-have-the-strong-erdos-hajnal-property.md

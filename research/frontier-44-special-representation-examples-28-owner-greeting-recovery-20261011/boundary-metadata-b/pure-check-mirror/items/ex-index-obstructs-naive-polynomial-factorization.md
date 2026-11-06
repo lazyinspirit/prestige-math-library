@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-index-obstructs-naive-polynomial-factorization.md

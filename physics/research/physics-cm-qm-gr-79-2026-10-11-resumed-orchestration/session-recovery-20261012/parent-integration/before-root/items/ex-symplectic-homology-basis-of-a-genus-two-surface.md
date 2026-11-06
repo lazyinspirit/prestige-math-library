@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-symplectic-homology-basis-of-a-genus-two-surface.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-twisted-arrow-category-is-the-category-of-elements-of-the-hom-bifunctor.md

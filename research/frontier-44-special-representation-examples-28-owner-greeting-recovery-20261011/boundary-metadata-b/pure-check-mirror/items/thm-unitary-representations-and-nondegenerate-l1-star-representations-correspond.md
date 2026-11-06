@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-unitary-representations-and-nondegenerate-l1-star-representations-correspond.md

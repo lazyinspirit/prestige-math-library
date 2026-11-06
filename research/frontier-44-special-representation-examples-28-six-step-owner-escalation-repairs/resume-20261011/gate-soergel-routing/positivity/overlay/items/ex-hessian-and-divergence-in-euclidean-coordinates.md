@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hessian-and-divergence-in-euclidean-coordinates.md

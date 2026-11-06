@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-group-acting-freely-without-inversions-on-a-tree-is-free.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps.md

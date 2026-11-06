@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-bijective-smooth-map-with-nonsmooth-inverse.md

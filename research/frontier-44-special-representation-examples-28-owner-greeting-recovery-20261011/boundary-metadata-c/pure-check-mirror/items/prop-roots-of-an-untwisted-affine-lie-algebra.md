@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-roots-of-an-untwisted-affine-lie-algebra.md

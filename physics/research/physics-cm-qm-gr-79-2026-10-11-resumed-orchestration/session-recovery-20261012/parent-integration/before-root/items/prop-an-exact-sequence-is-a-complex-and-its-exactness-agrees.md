@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-an-exact-sequence-is-a-complex-and-its-exactness-agrees.md

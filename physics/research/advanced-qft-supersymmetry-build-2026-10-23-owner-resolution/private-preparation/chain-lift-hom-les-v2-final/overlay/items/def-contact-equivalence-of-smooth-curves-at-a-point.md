@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-contact-equivalence-of-smooth-curves-at-a-point.md

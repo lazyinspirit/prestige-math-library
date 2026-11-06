@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-additive-constant-in-an-entropy-flux-does-not-change-the-entropy-inequality.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-left-right-and-bi-invariant-borel-measure-on-a-lie-group.md

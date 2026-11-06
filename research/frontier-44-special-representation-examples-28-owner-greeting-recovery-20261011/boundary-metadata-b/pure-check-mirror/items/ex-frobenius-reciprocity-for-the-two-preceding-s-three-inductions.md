@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-frobenius-reciprocity-for-the-two-preceding-s-three-inductions.md

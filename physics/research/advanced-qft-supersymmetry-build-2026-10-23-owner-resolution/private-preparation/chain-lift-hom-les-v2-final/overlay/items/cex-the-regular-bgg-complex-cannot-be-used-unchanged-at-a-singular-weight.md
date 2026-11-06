@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-regular-bgg-complex-cannot-be-used-unchanged-at-a-singular-weight.md

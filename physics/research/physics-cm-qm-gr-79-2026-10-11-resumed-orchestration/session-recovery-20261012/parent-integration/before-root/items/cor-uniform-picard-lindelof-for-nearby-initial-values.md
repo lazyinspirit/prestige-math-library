@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-uniform-picard-lindelof-for-nearby-initial-values.md

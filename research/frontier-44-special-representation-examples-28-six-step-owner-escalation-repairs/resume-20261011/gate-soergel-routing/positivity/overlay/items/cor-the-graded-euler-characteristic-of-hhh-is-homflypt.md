@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-graded-euler-characteristic-of-hhh-is-homflypt.md

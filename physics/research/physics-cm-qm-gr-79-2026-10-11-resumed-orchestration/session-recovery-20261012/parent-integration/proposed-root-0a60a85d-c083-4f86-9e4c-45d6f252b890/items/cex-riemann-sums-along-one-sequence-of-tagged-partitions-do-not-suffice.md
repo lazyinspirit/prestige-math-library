@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-riemann-sums-along-one-sequence-of-tagged-partitions-do-not-suffice.md

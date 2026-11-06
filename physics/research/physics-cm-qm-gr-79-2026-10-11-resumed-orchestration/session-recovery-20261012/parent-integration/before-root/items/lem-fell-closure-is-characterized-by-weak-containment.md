@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fell-closure-is-characterized-by-weak-containment.md

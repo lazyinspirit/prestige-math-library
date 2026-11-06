@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-top-exterior-power-detects-subspace-stabilizers.md

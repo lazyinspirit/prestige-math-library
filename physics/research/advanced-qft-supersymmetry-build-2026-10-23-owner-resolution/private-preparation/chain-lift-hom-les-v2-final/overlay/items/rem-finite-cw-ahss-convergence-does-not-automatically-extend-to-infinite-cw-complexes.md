@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-finite-cw-ahss-convergence-does-not-automatically-extend-to-infinite-cw-complexes.md

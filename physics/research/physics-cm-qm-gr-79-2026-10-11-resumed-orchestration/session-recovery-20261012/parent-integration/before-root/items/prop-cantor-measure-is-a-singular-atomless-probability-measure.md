@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cantor-measure-is-a-singular-atomless-probability-measure.md

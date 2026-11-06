@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-fourteen-triangulations-of-a-convex-hexagon.md

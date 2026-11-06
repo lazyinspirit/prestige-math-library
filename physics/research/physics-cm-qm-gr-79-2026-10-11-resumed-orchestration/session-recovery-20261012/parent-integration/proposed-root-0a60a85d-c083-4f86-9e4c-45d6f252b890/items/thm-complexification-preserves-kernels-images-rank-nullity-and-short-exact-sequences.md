@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complexification-preserves-kernels-images-rank-nullity-and-short-exact-sequences.md

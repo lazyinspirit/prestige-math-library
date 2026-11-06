@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-vector-valued-continuous-curve-space-is-complete.md

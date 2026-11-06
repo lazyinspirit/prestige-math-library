@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-haar-measure-on-a-compact-group-is-only-left-invariant-not-right-invariant.md

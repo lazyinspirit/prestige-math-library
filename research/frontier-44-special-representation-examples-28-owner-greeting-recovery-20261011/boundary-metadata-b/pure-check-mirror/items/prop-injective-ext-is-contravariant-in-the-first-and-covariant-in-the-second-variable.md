@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-injective-ext-is-contravariant-in-the-first-and-covariant-in-the-second-variable.md

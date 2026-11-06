@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-comparison-of-the-identity-is-homotopic-to-the-identity.md

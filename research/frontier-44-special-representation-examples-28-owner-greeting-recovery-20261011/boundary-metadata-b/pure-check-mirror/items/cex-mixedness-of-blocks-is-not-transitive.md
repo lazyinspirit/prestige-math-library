@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-mixedness-of-blocks-is-not-transitive.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-elementary-symmetric-jucys-evaluation-is-a-cycle-count-class-sum.md

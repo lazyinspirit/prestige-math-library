@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times.md

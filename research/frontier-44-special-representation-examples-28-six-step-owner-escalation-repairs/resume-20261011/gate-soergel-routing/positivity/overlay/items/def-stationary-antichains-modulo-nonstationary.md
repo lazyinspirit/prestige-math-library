@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-stationary-antichains-modulo-nonstationary.md

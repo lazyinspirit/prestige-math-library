@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-arbitrary-ltwo-boundary-data-need-not-have-an-h-one-lifting.md

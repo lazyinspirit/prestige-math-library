@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-zero-complex-derivative-on-a-domain-implies-constant.md

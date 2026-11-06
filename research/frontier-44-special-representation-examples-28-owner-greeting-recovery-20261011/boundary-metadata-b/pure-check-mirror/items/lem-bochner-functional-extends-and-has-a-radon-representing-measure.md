@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bochner-functional-extends-and-has-a-radon-representing-measure.md

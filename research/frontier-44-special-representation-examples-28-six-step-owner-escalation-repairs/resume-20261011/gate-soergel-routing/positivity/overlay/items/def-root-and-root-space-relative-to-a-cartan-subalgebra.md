@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-root-and-root-space-relative-to-a-cartan-subalgebra.md

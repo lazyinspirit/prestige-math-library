@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-de-rham-map-is-an-isomorphism-on-convex-coordinate-domains.md

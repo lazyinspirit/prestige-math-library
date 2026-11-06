@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation.md

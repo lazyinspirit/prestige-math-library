@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement.md

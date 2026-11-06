@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rephasing-changes-the-factor-set-by-a-coboundary.md

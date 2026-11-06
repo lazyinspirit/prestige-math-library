@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-pointwise-limit-of-integrable-functions-can-be-nonintegrable.md

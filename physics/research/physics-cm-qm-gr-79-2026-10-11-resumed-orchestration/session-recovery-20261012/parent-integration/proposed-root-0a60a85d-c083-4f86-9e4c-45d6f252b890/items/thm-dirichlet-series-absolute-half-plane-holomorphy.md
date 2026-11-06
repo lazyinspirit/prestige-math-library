@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dirichlet-series-absolute-half-plane-holomorphy.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dimension-one-smooth-connected-group-is-ga-or-gm.md

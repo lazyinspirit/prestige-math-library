@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-strong-erdos-hajnal-property-implies-erdos-hajnal-property.md

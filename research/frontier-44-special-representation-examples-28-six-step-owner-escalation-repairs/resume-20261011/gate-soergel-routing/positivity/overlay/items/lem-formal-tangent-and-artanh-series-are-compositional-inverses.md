@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-formal-tangent-and-artanh-series-are-compositional-inverses.md

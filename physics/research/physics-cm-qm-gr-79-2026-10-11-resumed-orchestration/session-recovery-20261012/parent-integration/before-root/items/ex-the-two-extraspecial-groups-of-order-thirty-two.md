@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-two-extraspecial-groups-of-order-thirty-two.md

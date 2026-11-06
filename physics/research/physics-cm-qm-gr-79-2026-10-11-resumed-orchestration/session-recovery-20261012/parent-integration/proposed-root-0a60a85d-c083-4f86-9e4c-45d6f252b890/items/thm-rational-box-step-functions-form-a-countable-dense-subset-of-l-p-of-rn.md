@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-standard-projective-opens-are-affine-spaces.md

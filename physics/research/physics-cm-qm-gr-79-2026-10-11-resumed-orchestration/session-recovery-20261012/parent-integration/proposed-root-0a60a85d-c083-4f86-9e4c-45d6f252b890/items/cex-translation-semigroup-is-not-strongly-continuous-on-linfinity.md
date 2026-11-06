@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-translation-semigroup-is-not-strongly-continuous-on-linfinity.md

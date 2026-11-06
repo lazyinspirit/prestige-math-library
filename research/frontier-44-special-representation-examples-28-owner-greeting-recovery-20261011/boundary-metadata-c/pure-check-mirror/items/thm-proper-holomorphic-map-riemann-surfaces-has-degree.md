@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-proper-holomorphic-map-riemann-surfaces-has-degree.md

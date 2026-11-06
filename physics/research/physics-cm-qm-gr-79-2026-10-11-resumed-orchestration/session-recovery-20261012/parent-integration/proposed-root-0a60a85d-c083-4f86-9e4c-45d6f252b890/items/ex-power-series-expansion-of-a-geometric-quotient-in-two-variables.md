@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-power-series-expansion-of-a-geometric-quotient-in-two-variables.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-finite-type-schemes-have-schematically-dense-rational-points.md

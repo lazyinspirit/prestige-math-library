@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-nc-one-is-contained-in-l-and-l-in-nc-two.md

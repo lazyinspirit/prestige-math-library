@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain.md

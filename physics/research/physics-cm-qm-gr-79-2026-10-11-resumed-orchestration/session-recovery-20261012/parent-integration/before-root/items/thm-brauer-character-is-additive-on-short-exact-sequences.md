@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-brauer-character-is-additive-on-short-exact-sequences.md

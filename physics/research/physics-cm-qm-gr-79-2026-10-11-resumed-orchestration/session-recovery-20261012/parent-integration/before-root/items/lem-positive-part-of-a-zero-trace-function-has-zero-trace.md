@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-part-of-a-zero-trace-function-has-zero-trace.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-wronskian-of-two-jacobi-fields-is-constant.md

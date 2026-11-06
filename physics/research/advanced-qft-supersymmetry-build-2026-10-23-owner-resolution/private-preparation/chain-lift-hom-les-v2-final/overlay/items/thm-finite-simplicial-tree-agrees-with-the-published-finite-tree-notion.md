@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-finite-simplicial-tree-agrees-with-the-published-finite-tree-notion.md

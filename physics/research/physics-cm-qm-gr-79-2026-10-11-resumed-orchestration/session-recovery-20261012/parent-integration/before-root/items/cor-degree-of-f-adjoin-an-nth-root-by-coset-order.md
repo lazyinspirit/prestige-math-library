@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-degree-of-f-adjoin-an-nth-root-by-coset-order.md

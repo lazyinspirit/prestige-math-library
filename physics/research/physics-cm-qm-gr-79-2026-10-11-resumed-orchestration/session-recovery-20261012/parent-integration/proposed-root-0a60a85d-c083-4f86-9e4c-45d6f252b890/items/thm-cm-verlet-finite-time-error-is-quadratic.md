@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cm-verlet-finite-time-error-is-quadratic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hamilton-jacobi-primitive-of-a-burgers-solution.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-exotic-smooth-structure-and-exotic-sphere.md

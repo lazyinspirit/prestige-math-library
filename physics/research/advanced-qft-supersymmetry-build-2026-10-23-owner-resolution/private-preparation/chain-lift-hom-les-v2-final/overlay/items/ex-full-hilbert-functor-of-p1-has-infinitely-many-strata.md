@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-full-hilbert-functor-of-p1-has-infinitely-many-strata.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hh-classical-tensor-centralizer-by-polarization.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-anticonnected-block-contraction-turns-an-upside-down-comb-into-a-pure-blockade.md

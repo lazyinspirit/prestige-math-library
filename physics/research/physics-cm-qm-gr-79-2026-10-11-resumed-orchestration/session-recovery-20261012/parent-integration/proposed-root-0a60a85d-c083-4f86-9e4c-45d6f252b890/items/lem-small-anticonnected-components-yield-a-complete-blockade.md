@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-small-anticonnected-components-yield-a-complete-blockade.md

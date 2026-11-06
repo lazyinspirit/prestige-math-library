@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-every-p-restricted-partition-is-reached-by-cogood-node-additions.md

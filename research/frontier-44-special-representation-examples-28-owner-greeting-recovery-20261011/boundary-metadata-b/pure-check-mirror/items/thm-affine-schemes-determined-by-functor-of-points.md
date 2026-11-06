@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-affine-schemes-determined-by-functor-of-points.md

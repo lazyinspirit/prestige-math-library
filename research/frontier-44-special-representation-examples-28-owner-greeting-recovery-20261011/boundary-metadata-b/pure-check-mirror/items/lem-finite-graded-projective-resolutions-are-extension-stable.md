@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-graded-projective-resolutions-are-extension-stable.md

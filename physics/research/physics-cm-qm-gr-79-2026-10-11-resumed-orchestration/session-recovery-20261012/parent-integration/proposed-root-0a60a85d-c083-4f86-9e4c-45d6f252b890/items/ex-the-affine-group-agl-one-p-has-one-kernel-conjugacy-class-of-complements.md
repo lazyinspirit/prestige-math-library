@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-affine-group-agl-one-p-has-one-kernel-conjugacy-class-of-complements.md

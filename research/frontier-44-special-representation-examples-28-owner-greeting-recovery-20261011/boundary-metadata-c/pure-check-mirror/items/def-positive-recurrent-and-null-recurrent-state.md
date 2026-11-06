@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-positive-recurrent-and-null-recurrent-state.md

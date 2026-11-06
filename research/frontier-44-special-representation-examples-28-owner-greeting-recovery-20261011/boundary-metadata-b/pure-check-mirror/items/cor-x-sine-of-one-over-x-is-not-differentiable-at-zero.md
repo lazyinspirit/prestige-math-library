@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-x-sine-of-one-over-x-is-not-differentiable-at-zero.md

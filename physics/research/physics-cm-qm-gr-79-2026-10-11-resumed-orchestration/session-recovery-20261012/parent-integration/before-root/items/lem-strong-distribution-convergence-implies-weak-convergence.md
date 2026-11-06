@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-strong-distribution-convergence-implies-weak-convergence.md

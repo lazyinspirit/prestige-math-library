@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-second-cohomology-classifies-all-nonabelian-extensions.md

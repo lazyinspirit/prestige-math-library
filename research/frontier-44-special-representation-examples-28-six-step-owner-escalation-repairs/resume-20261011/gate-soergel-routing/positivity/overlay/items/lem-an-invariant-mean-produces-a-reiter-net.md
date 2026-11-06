@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-an-invariant-mean-produces-a-reiter-net.md

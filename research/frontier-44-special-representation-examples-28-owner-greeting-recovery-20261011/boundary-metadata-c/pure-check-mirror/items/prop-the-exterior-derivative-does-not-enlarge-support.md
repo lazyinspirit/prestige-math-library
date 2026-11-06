@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-exterior-derivative-does-not-enlarge-support.md

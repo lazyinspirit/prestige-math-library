@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-caratheodory-extension-compares-with-other-extensions.md

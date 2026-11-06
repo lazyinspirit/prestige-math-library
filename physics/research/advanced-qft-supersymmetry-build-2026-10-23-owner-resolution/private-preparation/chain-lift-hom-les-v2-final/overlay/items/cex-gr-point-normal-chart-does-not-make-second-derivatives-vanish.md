@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-gr-point-normal-chart-does-not-make-second-derivatives-vanish.md

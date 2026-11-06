@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-z-to-the-n-is-normal-on-the-disc-but-not-on-the-plane.md

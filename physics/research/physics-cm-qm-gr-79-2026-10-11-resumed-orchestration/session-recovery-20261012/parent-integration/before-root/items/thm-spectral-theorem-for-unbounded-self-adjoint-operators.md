@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-spectral-theorem-for-unbounded-self-adjoint-operators.md

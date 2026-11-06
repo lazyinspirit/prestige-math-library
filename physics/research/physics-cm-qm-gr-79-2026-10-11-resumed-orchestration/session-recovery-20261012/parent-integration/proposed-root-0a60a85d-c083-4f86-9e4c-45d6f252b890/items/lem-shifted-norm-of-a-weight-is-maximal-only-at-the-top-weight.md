@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-shifted-norm-of-a-weight-is-maximal-only-at-the-top-weight.md

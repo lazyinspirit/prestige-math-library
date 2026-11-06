@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-alphabet-homomorphism-and-induced-word-map.md

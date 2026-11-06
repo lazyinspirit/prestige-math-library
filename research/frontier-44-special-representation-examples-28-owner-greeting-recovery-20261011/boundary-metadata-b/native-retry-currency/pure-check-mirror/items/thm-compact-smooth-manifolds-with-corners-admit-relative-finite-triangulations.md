@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-maximal-ideal-and-residue-field-of-zp.md

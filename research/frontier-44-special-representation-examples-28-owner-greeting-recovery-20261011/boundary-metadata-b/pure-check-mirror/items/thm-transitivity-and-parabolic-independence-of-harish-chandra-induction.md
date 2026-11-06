@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-transitivity-and-parabolic-independence-of-harish-chandra-induction.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-projective-hodge-perverse-package-closes-under-defect-and-image-dimension-induction.md

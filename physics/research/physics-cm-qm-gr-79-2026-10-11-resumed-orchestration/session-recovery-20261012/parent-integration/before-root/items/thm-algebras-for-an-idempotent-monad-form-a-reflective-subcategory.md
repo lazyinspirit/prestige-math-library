@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-algebras-for-an-idempotent-monad-form-a-reflective-subcategory.md

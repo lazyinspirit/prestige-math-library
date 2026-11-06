@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lie-algebra-tangent-space-and-functoriality.md

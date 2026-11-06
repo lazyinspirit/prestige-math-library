@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-spectral-sequence-belongs-homological-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-comparison-of-the-three-function-space-topologies.md

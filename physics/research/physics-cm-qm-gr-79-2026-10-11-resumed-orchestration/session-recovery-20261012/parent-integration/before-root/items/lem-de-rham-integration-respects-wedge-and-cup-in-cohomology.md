@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-de-rham-integration-respects-wedge-and-cup-in-cohomology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-jordan-chevalley-parts-agree-under-the-adjoint-representation.md

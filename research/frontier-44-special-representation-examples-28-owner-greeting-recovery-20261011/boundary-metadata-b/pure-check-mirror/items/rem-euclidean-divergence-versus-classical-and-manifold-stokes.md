@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-euclidean-divergence-versus-classical-and-manifold-stokes.md

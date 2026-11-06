@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-choosing-x-for-the-classical-erdos-hajnal-bound.md

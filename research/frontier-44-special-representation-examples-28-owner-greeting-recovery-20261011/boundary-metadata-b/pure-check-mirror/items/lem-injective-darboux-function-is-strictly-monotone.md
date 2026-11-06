@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-injective-darboux-function-is-strictly-monotone.md

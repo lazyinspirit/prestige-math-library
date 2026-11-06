@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-conjugate-difference-quotient-characterizes-antiholomorphic-maps.md

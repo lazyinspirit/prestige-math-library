@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-first-homotopy-group-of-a-wedge-of-higher-spheres-has-its-cell-basis.md

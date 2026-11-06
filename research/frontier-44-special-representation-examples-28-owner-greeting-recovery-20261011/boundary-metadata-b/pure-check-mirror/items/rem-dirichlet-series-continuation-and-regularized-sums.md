@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-dirichlet-series-continuation-and-regularized-sums.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-frobenius-inner-product-on-matrix-space.md

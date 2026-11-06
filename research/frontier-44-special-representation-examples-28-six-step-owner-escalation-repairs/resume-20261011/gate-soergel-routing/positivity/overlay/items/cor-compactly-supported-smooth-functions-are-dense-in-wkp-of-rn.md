@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn.md

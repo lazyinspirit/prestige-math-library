@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-isomorphism-invariance-of-satisfaction.md

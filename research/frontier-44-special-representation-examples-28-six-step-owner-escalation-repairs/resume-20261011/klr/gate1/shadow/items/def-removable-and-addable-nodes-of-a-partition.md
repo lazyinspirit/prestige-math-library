@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-removable-and-addable-nodes-of-a-partition.md

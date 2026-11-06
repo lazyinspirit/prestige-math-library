@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-jacobi-symbol-on-units-is-a-homomorphism.md

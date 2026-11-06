@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-tangent-space-of-the-sphere-from-curve-velocities.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry.md

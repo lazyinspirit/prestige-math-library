@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-grand-maximal-function-controls-admissible-radial-and-nontangential-maximal-functions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fixed-residue-node-cubes-realize-fock-i-strings-and-crystal-lattices.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-skorokhod-representation-does-not-couple-the-original-variables.md

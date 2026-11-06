@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-matrix-chapman-kolmogorov-equations.md

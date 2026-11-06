@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-normal-line-of-an-oriented-hypersurface-is-trivial.md

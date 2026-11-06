@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-morse-critical-points-have-uniform-hessian-gaps.md

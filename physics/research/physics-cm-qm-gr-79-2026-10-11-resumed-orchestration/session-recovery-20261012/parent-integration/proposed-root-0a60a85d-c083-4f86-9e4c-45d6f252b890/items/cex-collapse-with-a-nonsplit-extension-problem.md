@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-collapse-with-a-nonsplit-extension-problem.md

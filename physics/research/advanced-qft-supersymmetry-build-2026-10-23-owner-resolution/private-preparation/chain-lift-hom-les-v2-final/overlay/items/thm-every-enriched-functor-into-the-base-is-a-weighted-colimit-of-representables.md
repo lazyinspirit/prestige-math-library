@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-enriched-functor-into-the-base-is-a-weighted-colimit-of-representables.md

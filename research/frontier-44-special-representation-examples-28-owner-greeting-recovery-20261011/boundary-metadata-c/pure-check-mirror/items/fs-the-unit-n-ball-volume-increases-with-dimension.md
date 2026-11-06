@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-unit-n-ball-volume-increases-with-dimension.md

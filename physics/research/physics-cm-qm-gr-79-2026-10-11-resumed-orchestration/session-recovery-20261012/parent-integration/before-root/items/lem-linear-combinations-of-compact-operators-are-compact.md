@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-linear-combinations-of-compact-operators-are-compact.md

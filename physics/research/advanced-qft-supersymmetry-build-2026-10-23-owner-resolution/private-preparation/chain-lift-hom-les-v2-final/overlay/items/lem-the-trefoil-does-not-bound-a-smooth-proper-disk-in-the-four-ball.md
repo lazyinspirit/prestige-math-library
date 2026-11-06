@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-trefoil-does-not-bound-a-smooth-proper-disk-in-the-four-ball.md

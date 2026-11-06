@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-continued-fraction-algorithm-for-real-numbers.md

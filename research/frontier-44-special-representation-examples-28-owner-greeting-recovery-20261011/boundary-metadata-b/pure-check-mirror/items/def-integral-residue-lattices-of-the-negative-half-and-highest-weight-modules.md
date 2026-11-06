@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-integral-residue-lattices-of-the-negative-half-and-highest-weight-modules.md

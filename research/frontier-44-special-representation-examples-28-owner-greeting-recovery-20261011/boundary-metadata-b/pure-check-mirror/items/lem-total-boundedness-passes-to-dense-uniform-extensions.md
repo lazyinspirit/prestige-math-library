@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-total-boundedness-passes-to-dense-uniform-extensions.md

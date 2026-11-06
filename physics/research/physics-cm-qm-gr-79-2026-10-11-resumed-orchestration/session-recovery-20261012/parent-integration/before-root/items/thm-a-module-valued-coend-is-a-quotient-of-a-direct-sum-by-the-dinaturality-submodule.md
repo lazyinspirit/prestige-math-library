@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-module-valued-coend-is-a-quotient-of-a-direct-sum-by-the-dinaturality-submodule.md

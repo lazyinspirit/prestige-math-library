@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-standard-costandard-hom-and-ext-vanishing.md

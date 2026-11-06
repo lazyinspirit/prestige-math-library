@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-local-nilpotence-of-only-the-ei-does-not-imply-integrability.md

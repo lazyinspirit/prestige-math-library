@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer.md

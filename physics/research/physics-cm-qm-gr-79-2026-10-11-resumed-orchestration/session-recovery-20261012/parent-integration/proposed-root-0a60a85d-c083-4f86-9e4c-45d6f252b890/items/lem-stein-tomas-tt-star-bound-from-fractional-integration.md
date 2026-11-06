@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stein-tomas-tt-star-bound-from-fractional-integration.md

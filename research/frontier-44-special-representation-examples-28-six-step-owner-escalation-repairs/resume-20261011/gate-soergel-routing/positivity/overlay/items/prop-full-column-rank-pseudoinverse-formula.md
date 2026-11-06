@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-full-column-rank-pseudoinverse-formula.md

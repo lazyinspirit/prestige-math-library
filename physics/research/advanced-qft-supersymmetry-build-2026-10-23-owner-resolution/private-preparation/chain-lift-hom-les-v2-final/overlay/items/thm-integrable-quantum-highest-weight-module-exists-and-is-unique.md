@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-integrable-quantum-highest-weight-module-exists-and-is-unique.md

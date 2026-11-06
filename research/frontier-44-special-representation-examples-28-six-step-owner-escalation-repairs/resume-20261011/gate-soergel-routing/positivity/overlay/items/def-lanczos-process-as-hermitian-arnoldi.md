@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lanczos-process-as-hermitian-arnoldi.md

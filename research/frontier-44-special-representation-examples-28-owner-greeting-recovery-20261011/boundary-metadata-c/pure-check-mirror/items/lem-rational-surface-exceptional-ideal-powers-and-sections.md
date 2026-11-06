@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-surface-exceptional-ideal-powers-and-sections.md

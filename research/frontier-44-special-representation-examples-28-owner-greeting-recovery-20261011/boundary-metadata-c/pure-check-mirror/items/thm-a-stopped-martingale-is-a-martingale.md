@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-stopped-martingale-is-a-martingale.md

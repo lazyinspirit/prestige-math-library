@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-reduced-syllable-word-in-a-family-of-groups.md

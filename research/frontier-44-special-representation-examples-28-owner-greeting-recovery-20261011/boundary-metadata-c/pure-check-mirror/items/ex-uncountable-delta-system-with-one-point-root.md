@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-uncountable-delta-system-with-one-point-root.md

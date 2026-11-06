@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-acyclic-noncontractible-complex-from-a-nonsplit-extension.md

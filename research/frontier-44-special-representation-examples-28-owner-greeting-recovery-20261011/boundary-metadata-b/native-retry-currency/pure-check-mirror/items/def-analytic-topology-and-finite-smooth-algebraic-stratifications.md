@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-analytic-topology-and-finite-smooth-algebraic-stratifications.md

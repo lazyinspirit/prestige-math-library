@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-additive-functors-and-natural-transformations-form-a-preadditive-category.md

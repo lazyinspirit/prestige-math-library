@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-effective-dimension-is-liminf-prefix-complexity-rate.md

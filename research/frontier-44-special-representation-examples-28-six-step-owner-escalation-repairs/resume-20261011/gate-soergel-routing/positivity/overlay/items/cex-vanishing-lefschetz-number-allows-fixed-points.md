@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-vanishing-lefschetz-number-allows-fixed-points.md

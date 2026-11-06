@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form.md

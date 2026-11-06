@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-density-inversion-from-an-integrable-characteristic-function.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-uniform-empirical-cdf-converges-to-brownian-bridge.md

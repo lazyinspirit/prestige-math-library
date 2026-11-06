@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-finite-dimensional-does-not-imply-finite-or-locally-finite.md

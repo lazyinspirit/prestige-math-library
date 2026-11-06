@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ring-of-integers-of-a-quadratic-field.md

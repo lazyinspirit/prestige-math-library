@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-singular-chain-cross-product-boundary-formula.md

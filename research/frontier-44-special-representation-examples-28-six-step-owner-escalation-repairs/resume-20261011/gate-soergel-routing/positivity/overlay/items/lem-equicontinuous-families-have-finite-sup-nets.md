@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-equicontinuous-families-have-finite-sup-nets.md

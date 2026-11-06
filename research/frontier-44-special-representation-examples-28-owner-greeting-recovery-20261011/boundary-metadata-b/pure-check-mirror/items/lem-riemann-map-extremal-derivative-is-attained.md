@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-riemann-map-extremal-derivative-is-attained.md

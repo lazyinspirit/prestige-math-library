@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-stokes-on-two-patches-spanning-the-same-circle.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-h-cobordisms-admit-adapted-ordered-handle-decompositions.md

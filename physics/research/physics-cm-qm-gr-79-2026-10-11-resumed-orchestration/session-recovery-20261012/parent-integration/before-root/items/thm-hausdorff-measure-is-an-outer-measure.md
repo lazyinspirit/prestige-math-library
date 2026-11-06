@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hausdorff-measure-is-an-outer-measure.md

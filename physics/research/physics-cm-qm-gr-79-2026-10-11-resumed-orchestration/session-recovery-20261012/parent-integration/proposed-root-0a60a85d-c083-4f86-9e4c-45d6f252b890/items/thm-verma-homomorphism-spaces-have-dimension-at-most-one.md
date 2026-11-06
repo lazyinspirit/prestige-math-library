@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-verma-homomorphism-spaces-have-dimension-at-most-one.md

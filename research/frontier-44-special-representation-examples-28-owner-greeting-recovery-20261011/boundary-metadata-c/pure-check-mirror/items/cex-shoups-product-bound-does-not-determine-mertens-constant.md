@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-shoups-product-bound-does-not-determine-mertens-constant.md

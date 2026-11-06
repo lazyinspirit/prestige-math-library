@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-prime-is-a-sum-of-four-squares.md

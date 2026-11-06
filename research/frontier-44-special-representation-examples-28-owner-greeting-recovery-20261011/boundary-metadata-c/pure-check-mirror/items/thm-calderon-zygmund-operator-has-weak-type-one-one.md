@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-calderon-zygmund-operator-has-weak-type-one-one.md

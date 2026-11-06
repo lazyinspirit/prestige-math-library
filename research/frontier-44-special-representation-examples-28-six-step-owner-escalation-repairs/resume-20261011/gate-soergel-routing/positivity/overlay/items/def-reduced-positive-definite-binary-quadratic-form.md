@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-reduced-positive-definite-binary-quadratic-form.md

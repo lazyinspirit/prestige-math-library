@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-elementary-and-hyperelementary-subgroups-are-subgroup-closed.md

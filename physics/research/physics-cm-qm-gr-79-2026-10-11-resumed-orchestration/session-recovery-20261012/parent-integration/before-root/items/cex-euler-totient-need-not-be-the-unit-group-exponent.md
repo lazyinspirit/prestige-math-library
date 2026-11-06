@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-euler-totient-need-not-be-the-unit-group-exponent.md

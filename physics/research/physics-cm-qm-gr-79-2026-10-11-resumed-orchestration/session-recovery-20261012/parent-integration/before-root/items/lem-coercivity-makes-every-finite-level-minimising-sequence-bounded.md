@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coercivity-makes-every-finite-level-minimising-sequence-bounded.md

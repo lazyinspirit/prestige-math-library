@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-doubling-map-preserves-lebesgue-measure.md

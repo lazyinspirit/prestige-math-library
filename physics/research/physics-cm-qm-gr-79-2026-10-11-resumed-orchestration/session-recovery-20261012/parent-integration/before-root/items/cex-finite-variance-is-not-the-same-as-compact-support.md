@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-finite-variance-is-not-the-same-as-compact-support.md

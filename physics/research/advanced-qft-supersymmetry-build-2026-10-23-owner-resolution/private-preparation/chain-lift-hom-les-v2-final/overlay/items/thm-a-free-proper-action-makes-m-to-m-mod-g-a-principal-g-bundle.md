@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-free-proper-action-makes-m-to-m-mod-g-a-principal-g-bundle.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-an-absolutely-continuous-function-after-a-monotone-lipschitz-function-is-absolutely-continuous.md

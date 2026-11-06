@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-progressive-products-and-true-cofinality-transfers.md

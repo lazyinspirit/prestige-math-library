@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kac-moody-relation-module-embeds-in-verma-modules-and-obeys-the-casimir-constraint.md

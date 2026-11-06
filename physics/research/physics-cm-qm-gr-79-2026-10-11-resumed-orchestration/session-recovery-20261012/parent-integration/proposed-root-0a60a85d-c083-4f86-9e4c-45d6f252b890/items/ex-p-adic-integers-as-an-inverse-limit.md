@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-p-adic-integers-as-an-inverse-limit.md

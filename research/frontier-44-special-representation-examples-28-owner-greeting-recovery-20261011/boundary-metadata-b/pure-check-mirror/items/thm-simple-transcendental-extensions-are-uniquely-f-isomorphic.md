@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-transcendental-extensions-are-uniquely-f-isomorphic.md

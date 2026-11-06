@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-spherical-mean-value-property-for-harmonic-functions.md

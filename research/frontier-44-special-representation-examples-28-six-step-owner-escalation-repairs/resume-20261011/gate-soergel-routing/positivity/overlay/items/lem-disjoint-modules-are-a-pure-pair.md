@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-disjoint-modules-are-a-pure-pair.md

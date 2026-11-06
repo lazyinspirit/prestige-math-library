@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-fock-pairing-matches-projective-simple-and-standard-costandard-pairings.md

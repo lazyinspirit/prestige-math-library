@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-barsotti-chevalley-perfect-field-group-variety.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-integral-divided-power-tensor-action-surjects-onto-type-a-q-schur-algebra.md

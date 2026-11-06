@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-alternating-group-is-simple-for-n-at-least-five.md

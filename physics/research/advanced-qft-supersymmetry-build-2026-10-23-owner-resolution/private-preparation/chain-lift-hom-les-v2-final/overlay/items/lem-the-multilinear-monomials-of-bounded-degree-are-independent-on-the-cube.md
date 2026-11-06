@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-multilinear-monomials-of-bounded-degree-are-independent-on-the-cube.md

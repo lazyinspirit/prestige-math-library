@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-chernoff-bound-for-independent-random-signs.md

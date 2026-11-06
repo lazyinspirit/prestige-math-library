@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-ordinary-traces-on-p-singular-elements-do-not-define-brauer-characters.md

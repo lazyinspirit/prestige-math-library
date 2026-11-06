@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-affine-algebraic-set-finite-irreducible-components.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-ordered-pairs-lie-in-the-double-power-set.md

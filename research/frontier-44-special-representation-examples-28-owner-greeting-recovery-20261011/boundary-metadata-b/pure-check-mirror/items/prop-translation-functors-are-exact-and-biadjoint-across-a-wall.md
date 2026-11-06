@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-translation-functors-are-exact-and-biadjoint-across-a-wall.md

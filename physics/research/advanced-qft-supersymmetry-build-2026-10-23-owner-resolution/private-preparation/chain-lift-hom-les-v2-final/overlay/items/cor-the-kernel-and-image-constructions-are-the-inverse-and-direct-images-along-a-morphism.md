@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-kernel-and-image-constructions-are-the-inverse-and-direct-images-along-a-morphism.md

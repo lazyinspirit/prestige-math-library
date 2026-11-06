@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-frattini-image-under-a-nonsurjective-homomorphism.md

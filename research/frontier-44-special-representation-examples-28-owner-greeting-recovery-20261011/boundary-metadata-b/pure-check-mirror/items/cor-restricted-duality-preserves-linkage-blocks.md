@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-restricted-duality-preserves-linkage-blocks.md

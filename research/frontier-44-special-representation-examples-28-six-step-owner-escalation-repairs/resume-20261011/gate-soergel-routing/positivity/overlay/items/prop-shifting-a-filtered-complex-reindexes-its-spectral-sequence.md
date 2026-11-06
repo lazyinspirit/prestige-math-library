@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-shifting-a-filtered-complex-reindexes-its-spectral-sequence.md

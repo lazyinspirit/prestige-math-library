@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-positive-circle-measures-have-lebesgue-decomposition-under-countable-choice.md

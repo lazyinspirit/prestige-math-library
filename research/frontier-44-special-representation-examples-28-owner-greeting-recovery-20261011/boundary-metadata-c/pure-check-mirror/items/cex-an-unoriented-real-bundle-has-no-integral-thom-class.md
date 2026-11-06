@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-unoriented-real-bundle-has-no-integral-thom-class.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-global-dimension-zero-characterises-semisimple-module-categories.md

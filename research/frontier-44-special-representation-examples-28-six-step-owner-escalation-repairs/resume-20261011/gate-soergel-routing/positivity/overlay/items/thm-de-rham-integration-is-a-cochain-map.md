@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-de-rham-integration-is-a-cochain-map.md

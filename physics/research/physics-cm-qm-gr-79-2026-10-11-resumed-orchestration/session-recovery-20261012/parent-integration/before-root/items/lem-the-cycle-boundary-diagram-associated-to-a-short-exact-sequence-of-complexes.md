@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes.md

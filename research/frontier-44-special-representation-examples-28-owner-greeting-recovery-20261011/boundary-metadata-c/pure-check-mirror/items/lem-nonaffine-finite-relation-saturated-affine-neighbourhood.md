@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonaffine-finite-relation-saturated-affine-neighbourhood.md

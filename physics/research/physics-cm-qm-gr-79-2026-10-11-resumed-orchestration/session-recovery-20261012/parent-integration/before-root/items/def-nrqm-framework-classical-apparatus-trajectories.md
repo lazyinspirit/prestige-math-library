@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-framework-classical-apparatus-trajectories.md

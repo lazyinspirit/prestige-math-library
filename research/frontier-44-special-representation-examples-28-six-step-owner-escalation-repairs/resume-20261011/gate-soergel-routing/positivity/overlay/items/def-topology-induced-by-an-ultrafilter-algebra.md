@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-topology-induced-by-an-ultrafilter-algebra.md

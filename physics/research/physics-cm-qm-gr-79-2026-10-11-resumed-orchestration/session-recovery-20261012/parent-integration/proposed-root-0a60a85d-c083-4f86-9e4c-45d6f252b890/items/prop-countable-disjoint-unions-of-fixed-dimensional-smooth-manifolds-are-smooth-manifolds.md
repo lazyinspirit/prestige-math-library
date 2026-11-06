@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds.md

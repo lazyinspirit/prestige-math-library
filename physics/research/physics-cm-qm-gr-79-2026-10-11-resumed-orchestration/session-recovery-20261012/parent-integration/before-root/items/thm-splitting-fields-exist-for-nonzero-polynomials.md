@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-splitting-fields-exist-for-nonzero-polynomials.md

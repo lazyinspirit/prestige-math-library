@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-realization-of-whitehead-torsion-by-h-cobordisms.md

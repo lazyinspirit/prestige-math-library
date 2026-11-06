@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes.md

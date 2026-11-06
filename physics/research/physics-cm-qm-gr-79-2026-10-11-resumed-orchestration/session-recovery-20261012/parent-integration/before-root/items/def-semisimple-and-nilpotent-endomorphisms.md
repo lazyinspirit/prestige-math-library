@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-semisimple-and-nilpotent-endomorphisms.md

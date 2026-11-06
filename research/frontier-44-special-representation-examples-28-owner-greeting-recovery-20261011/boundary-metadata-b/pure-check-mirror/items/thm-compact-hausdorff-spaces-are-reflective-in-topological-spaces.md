@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-hausdorff-spaces-are-reflective-in-topological-spaces.md

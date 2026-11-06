@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-degree-and-parity-criteria-for-serre-collapse.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-separation-of-disjoint-convex-sets-one-open.md

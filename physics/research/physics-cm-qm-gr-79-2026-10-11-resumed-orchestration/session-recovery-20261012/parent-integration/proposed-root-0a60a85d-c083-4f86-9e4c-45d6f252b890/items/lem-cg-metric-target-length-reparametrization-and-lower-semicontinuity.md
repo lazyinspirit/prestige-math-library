@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity.md

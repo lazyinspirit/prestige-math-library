@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set.md

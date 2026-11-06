@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-strict-linear-alternative-for-gcm-trichotomy.md

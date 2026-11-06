@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-distributional-derivatives-commute-with-convolution-against-test-functions.md

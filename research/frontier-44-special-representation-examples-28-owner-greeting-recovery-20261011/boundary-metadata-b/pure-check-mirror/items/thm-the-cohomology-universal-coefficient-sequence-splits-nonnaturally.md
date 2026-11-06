@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally.md

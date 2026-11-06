@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-commutator-of-vector-field-derivations-is-a-derivation.md

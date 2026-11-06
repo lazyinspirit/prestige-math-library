@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences.md

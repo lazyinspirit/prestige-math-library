@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-prime-spectrum-of-a-localisation-bijection.md

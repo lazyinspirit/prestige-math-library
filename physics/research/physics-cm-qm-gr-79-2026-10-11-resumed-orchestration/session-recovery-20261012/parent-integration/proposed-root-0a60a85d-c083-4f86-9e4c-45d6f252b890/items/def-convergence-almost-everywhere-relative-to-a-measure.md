@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-convergence-almost-everywhere-relative-to-a-measure.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-geometric-multiplicity-determines-jordan-block-sizes.md

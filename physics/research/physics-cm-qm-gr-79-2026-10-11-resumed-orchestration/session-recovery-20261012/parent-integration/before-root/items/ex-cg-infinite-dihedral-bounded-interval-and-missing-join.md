@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-infinite-dihedral-bounded-interval-and-missing-join.md

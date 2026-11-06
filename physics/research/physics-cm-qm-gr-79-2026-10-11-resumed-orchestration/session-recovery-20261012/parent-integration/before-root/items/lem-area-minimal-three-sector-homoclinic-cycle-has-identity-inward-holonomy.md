@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-area-minimal-three-sector-homoclinic-cycle-has-identity-inward-holonomy.md

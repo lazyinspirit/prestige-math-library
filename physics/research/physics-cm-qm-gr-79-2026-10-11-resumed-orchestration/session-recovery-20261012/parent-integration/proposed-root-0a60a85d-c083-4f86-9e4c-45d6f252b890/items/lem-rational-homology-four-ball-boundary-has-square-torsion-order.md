@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rational-homology-four-ball-boundary-has-square-torsion-order.md

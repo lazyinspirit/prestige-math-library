@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-symmetries-free-flow-multiplier-form.md

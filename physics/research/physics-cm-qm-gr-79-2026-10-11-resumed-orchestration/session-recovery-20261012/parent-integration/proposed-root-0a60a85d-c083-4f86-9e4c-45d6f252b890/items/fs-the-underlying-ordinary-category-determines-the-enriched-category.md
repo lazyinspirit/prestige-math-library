@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-underlying-ordinary-category-determines-the-enriched-category.md

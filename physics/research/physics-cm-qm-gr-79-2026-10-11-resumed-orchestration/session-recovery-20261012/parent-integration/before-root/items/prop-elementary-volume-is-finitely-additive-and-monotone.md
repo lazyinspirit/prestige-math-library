@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-elementary-volume-is-finitely-additive-and-monotone.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-identical-particles-occupation-number-basis.md

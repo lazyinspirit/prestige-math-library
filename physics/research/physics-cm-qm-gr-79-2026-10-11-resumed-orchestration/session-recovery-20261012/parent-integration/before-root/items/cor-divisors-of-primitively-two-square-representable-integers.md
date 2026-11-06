@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-divisors-of-primitively-two-square-representable-integers.md

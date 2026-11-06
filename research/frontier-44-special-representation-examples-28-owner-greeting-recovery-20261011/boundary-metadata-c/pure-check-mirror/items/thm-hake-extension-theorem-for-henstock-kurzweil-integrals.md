@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hake-extension-theorem-for-henstock-kurzweil-integrals.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-same-trace-can-have-different-path-lengths.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-dini-derivatives-exist-are-ordered-and-detect-differentiability.md

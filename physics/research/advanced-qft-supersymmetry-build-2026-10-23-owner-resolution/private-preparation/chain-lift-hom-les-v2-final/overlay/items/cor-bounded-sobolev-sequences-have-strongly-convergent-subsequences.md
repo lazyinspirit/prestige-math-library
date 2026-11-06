@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-bounded-sobolev-sequences-have-strongly-convergent-subsequences.md

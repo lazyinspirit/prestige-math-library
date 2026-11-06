@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-isometric-proper-and-cobounded-actions-on-metric-spaces.md

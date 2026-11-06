@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-halbeisen-shelah-no-powerset-sequence-injection.md

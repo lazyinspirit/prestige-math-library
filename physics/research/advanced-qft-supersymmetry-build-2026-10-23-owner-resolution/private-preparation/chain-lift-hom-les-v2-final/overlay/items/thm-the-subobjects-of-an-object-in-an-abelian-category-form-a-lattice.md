@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-subobjects-of-an-object-in-an-abelian-category-form-a-lattice.md

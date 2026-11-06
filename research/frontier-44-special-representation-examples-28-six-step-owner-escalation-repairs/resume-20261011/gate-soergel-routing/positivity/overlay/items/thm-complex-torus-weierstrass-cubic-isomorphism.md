@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-torus-weierstrass-cubic-isomorphism.md

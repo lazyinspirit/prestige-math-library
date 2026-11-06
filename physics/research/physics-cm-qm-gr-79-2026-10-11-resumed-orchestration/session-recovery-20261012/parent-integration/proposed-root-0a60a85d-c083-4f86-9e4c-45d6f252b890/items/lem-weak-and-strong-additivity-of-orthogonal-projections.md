@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-and-strong-additivity-of-orthogonal-projections.md

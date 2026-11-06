@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-morse-complex-is-chain-homotopy-equivalent-to-the-handle-cellular-complex.md

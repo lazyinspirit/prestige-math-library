@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra.md

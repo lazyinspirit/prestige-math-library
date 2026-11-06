@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-two-morphisms-agreeing-on-every-member-need-not-be-equal.md

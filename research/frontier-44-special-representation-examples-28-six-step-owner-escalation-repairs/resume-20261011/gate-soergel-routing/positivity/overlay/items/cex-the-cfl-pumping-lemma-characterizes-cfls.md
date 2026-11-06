@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-cfl-pumping-lemma-characterizes-cfls.md

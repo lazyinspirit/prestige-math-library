@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-surgery-below-the-middle-dimension-improves-connectivity.md

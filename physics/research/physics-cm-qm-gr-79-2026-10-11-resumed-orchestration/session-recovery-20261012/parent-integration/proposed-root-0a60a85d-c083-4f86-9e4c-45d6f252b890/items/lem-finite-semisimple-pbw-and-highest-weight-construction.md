@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-semisimple-pbw-and-highest-weight-construction.md

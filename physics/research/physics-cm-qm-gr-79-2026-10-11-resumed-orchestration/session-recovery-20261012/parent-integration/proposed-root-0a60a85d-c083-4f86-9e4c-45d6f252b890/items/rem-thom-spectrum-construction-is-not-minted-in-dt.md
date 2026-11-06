@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-thom-spectrum-construction-is-not-minted-in-dt.md

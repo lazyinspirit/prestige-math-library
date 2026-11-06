@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-building-a-jordan-string-basis-for-a-nilpotent-operator.md

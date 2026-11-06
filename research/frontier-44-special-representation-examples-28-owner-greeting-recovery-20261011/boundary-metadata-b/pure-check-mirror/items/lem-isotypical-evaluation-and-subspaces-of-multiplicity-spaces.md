@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cumulative-hierarchy-transitivity-and-growth.md

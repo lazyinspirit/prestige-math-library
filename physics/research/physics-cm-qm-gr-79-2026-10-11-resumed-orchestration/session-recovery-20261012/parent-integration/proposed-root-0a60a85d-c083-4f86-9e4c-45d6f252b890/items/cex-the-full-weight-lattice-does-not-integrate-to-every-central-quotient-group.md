@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-full-weight-lattice-does-not-integrate-to-every-central-quotient-group.md

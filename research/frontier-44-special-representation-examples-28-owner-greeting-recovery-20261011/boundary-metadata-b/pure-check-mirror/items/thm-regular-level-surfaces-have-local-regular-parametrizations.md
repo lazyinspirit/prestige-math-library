@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-regular-level-surfaces-have-local-regular-parametrizations.md

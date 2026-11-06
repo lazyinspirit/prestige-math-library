@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-groups-of-order-p-cubed-need-not-be-abelian.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-smoothness-of-a-tensor-field-is-equivalent-to-smooth-coordinate-components.md

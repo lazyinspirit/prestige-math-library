@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-specializing-burau-at-t-equals-one-recovers-permutation-data.md

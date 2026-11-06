@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-minimal-numerical-serre-kernel-obeys-the-quantum-casimir-constraint.md

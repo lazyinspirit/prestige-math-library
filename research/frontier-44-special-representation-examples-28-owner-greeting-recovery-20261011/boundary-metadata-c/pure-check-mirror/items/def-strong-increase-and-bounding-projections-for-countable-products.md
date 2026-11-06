@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-strong-increase-and-bounding-projections-for-countable-products.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-casimir-operator-is-basis-independent-and-intertwining.md

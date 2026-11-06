@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-noncharacteristic-first-order-cauchy-surface.md

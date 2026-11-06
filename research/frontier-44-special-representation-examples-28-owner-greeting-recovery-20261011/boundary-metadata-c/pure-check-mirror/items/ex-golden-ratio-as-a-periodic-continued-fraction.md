@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-golden-ratio-as-a-periodic-continued-fraction.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-open-source-morphisms-equal-on-dense-open.md

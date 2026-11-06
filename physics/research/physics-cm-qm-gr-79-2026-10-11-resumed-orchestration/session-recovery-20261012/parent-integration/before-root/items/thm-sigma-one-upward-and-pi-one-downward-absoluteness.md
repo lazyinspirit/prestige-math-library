@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sigma-one-upward-and-pi-one-downward-absoluteness.md

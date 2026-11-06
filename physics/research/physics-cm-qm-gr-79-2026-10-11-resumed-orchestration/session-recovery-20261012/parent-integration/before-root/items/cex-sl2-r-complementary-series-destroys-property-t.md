@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sl2-r-complementary-series-destroys-property-t.md

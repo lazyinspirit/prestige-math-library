@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-root-systems-of-the-classical-complex-lie-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-identical-distribution-without-independence-can-defeat-the-mean-law.md

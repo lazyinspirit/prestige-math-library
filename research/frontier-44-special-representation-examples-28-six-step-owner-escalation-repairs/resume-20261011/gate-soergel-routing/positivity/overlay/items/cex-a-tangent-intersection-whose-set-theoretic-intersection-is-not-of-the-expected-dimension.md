@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-tangent-intersection-whose-set-theoretic-intersection-is-not-of-the-expected-dimension.md

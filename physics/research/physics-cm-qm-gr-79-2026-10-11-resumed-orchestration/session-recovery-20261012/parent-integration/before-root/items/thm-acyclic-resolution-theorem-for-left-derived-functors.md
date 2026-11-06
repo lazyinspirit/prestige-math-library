@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-acyclic-resolution-theorem-for-left-derived-functors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-complete-metrizability-is-the-topological-shadow.md

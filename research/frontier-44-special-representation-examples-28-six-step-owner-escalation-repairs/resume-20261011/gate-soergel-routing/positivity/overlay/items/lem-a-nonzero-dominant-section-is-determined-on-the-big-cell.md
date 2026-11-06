@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-nonzero-dominant-section-is-determined-on-the-big-cell.md

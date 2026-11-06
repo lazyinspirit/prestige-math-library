@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-absolute-polar-in-a-normed-dual-pair.md

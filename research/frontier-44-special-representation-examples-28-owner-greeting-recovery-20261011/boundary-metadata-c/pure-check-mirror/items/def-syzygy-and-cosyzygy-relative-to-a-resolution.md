@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-syzygy-and-cosyzygy-relative-to-a-resolution.md

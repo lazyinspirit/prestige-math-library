@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-constant-functions-are-equicontinuous-not-pointwise-bounded.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-relative-isotopy-extension-for-disk-arcs-with-puncture-endpoints.md

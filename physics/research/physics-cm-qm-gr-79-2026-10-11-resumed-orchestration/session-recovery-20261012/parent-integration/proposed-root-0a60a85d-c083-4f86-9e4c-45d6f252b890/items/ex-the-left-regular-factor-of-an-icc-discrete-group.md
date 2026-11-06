@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-left-regular-factor-of-an-icc-discrete-group.md

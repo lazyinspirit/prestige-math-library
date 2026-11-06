@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-half-open-boxes-generate-the-borel-sigma-algebra-on-rn.md

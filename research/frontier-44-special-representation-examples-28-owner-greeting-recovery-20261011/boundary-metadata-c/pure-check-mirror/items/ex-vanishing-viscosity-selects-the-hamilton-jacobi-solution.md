@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-vanishing-viscosity-selects-the-hamilton-jacobi-solution.md

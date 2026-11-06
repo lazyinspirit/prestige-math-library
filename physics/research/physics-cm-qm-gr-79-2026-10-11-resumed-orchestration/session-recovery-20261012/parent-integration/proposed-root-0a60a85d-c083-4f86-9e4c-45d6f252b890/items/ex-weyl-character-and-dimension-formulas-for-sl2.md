@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weyl-character-and-dimension-formulas-for-sl2.md

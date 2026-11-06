@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sr-kinetic-energy-is-observer-dependent.md

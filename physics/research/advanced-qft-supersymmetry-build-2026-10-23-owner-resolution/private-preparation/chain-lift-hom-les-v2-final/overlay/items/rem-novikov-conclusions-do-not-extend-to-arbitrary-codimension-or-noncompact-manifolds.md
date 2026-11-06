@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-novikov-conclusions-do-not-extend-to-arbitrary-codimension-or-noncompact-manifolds.md

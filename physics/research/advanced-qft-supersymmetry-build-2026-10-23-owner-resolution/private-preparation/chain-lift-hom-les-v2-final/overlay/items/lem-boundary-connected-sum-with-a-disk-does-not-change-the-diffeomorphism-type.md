@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type.md

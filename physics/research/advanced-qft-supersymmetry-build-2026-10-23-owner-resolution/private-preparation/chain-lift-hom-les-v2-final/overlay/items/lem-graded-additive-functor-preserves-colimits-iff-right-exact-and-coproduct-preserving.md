@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-graded-additive-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving.md

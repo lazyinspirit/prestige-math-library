@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fejer-means-converge-at-lebesgue-points.md

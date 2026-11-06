@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-closed-manifold-with-formally-plausible-rank-data-needs-positive-codimension.md

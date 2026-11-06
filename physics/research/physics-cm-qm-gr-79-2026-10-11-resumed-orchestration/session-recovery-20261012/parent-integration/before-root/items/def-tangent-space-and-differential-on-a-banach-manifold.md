@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-tangent-space-and-differential-on-a-banach-manifold.md

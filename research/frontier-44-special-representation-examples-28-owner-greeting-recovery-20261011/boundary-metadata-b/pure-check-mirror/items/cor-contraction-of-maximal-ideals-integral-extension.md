@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-contraction-of-maximal-ideals-integral-extension.md

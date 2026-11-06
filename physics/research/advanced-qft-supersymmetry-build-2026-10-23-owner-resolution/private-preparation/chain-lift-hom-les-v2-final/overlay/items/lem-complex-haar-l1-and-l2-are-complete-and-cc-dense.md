@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complex-haar-l1-and-l2-are-complete-and-cc-dense.md

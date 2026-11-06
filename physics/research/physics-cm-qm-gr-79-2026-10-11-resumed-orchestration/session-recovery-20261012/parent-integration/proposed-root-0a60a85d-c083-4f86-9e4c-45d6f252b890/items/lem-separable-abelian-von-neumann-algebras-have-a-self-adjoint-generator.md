@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-separable-abelian-von-neumann-algebras-have-a-self-adjoint-generator.md

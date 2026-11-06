@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ping-pong-for-hyperbolic-tree-automorphisms.md

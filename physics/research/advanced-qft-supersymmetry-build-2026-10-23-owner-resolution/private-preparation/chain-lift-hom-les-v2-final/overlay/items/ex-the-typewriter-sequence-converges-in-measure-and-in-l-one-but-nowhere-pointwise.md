@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-typewriter-sequence-converges-in-measure-and-in-l-one-but-nowhere-pointwise.md

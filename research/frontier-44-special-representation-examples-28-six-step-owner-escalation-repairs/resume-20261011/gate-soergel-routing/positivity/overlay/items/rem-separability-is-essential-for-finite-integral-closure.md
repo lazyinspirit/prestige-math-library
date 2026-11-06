@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-separability-is-essential-for-finite-integral-closure.md

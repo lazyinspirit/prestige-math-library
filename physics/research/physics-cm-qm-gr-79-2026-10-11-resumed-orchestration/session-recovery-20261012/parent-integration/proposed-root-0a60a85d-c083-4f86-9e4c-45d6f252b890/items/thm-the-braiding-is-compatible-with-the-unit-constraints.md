@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-braiding-is-compatible-with-the-unit-constraints.md

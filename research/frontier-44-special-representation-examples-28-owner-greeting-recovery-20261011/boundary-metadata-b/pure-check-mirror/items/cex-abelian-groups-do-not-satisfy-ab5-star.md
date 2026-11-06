@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-abelian-groups-do-not-satisfy-ab5-star.md

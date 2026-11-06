@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-the-affine-hecke-algebra-action-on-finite-tensor-powers-of-the-vector-representation.md

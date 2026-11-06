@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-hawaiian-earring-is-not-a-cw-complex-with-its-circle-cells.md

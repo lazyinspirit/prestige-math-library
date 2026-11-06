@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bimodule-tensor-totalization-respects-differentials-and-homotopies.md

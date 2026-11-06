@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-convolution-of-a-tempered-distribution-with-a-schwartz-function.md

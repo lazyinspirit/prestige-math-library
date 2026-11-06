@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology.md

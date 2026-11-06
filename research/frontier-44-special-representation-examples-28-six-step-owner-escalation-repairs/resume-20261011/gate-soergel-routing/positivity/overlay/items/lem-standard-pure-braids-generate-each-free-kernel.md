@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-standard-pure-braids-generate-each-free-kernel.md

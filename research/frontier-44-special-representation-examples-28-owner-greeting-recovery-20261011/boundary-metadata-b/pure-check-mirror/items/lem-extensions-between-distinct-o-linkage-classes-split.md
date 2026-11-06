@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-extensions-between-distinct-o-linkage-classes-split.md

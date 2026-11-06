@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-bird-graph-and-co-bird-graph-by-adjacency.md

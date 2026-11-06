@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-finite-minimal-walk-and-its-lower-trace.md

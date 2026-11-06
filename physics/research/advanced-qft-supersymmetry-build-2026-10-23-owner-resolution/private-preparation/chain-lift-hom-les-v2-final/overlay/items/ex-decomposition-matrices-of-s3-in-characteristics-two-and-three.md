@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-decomposition-matrices-of-s3-in-characteristics-two-and-three.md

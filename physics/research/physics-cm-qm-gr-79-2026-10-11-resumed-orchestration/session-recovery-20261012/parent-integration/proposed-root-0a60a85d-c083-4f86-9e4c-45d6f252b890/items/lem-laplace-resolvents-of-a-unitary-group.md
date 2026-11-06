@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-laplace-resolvents-of-a-unitary-group.md

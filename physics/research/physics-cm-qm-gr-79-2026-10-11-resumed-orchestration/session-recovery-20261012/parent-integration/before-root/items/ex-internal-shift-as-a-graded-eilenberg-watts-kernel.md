@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-internal-shift-as-a-graded-eilenberg-watts-kernel.md

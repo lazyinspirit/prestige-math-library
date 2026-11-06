@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cardinal-functions-of-a-one-point-compactification.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-open-euclidean-ball-is-polygonally-connected.md

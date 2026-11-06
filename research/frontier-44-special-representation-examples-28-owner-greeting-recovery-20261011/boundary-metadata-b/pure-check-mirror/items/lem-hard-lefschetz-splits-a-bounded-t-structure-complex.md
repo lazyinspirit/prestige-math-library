@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hard-lefschetz-splits-a-bounded-t-structure-complex.md

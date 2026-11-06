@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-splitting-the-theta-mellin-integral-isolates-the-two-polar-terms.md

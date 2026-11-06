@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuous-homomorphisms-between-lie-groups-are-smooth.md

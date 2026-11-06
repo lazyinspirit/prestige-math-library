@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-bezout-uniqueness-low-degree-interpolation.md

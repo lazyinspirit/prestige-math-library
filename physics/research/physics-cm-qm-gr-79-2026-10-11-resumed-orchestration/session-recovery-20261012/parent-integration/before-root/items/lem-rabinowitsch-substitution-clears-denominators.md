@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rabinowitsch-substitution-clears-denominators.md

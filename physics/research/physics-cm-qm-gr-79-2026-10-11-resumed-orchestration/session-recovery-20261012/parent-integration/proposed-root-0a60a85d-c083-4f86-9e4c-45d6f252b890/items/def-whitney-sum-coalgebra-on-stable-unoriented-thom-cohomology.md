@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-whitney-sum-coalgebra-on-stable-unoriented-thom-cohomology.md

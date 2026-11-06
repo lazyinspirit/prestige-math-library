@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-row-echelon-reduced-row-echelon-and-pivots.md

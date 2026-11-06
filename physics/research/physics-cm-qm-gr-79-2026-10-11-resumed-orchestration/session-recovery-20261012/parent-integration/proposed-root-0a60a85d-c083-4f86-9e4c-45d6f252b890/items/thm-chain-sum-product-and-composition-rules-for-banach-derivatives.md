@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chain-sum-product-and-composition-rules-for-banach-derivatives.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame.md

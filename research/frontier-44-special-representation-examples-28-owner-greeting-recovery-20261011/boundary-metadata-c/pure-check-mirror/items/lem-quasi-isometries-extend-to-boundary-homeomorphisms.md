@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quasi-isometries-extend-to-boundary-homeomorphisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-convex-functions-have-convex-sublevel-sets.md

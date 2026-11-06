@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-complementary-form-loses-positivity-beyond-the-unitary-interval.md

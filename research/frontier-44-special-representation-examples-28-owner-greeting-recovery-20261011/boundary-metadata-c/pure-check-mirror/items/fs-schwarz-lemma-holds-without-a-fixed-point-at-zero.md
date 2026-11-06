@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-schwarz-lemma-holds-without-a-fixed-point-at-zero.md

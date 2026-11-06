@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular.md

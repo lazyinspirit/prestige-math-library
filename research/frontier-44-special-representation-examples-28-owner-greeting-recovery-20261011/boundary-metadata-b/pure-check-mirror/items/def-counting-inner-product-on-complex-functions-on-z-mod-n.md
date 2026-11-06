@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-counting-inner-product-on-complex-functions-on-z-mod-n.md

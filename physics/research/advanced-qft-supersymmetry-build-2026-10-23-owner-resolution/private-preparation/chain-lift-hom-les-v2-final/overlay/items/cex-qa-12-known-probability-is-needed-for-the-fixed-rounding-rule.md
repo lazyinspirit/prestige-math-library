@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-qa-12-known-probability-is-needed-for-the-fixed-rounding-rule.md

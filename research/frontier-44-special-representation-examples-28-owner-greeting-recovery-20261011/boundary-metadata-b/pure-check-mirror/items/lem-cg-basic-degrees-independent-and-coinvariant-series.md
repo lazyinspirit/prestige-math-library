@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-basic-degrees-independent-and-coinvariant-series.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-many-extensions-from-a-codimension-one-subspace.md

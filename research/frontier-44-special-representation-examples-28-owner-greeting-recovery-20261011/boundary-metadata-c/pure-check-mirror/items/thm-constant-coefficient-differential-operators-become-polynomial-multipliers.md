@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-constant-coefficient-differential-operators-become-polynomial-multipliers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-compact-remainder-estimate-forces-closed-range.md

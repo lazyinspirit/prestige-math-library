@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-analytic-families-of-well-founded-trees-have-bounded-rank.md

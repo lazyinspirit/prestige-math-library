@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-negative-expected-dimension-generic-intersections-are-empty.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-two-descriptions-of-the-subfield-lattice-of-a-finite-field.md

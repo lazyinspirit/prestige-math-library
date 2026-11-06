@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-triangular-and-diagonal-matrices-over-a-commutative-ring.md

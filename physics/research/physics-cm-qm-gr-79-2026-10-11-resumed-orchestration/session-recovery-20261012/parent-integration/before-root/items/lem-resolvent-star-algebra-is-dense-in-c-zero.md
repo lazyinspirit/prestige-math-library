@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-resolvent-star-algebra-is-dense-in-c-zero.md

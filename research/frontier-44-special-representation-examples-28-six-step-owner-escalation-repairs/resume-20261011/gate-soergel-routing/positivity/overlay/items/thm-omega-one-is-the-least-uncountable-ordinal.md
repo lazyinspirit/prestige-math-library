@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-omega-one-is-the-least-uncountable-ordinal.md

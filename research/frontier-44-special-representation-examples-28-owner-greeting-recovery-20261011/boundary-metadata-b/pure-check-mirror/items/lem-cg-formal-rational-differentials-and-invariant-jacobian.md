@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-formal-rational-differentials-and-invariant-jacobian.md

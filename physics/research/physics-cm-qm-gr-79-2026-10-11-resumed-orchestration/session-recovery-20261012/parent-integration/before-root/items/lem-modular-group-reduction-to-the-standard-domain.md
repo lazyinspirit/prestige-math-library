@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-modular-group-reduction-to-the-standard-domain.md

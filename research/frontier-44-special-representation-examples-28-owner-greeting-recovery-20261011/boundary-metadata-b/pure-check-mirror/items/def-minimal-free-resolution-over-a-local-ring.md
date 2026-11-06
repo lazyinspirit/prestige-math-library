@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-minimal-free-resolution-over-a-local-ring.md

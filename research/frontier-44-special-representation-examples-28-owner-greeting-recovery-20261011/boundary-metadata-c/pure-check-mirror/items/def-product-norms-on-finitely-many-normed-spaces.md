@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-product-norms-on-finitely-many-normed-spaces.md

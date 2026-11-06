@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-whitehead-theorem-fails-without-cw-type.md

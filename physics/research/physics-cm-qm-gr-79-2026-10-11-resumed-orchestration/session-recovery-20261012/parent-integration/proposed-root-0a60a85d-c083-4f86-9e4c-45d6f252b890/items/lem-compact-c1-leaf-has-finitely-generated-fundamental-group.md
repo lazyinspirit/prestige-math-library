@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-c1-leaf-has-finitely-generated-fundamental-group.md

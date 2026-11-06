@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy.md

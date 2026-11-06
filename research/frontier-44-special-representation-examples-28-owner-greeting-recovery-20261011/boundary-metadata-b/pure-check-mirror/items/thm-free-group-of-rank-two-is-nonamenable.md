@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-free-group-of-rank-two-is-nonamenable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-cut-time-does-not-exceed-first-conjugate-time.md

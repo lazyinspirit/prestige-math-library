@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-zp-is-compact-hausdorff-totally-disconnected-and-complete.md

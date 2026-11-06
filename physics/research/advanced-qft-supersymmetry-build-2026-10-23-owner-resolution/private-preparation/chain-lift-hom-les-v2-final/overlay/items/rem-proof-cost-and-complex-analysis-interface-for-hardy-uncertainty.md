@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-proof-cost-and-complex-analysis-interface-for-hardy-uncertainty.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quadratic-variation-along-a-partition-sequence.md

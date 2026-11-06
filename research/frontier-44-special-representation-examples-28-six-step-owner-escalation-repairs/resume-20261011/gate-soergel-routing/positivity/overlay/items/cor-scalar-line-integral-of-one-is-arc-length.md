@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-scalar-line-integral-of-one-is-arc-length.md

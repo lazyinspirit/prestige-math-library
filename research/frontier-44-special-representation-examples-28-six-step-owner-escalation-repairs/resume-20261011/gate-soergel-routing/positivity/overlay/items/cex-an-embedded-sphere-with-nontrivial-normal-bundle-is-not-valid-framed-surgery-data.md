@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-embedded-sphere-with-nontrivial-normal-bundle-is-not-valid-framed-surgery-data.md

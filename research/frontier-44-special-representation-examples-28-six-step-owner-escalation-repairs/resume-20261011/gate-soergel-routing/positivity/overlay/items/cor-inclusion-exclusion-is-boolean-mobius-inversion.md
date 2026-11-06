@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-inclusion-exclusion-is-boolean-mobius-inversion.md

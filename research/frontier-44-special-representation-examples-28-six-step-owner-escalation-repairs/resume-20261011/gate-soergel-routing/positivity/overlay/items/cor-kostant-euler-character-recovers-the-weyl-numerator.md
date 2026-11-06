@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-kostant-euler-character-recovers-the-weyl-numerator.md

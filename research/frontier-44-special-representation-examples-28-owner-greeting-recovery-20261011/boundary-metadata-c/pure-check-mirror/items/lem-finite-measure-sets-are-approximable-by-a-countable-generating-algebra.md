@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-measure-sets-are-approximable-by-a-countable-generating-algebra.md

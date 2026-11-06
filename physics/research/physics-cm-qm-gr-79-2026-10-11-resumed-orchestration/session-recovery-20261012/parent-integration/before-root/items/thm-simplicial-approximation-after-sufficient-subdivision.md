@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-simplicial-approximation-after-sufficient-subdivision.md

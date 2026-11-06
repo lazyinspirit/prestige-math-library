@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-plane-exterior-of-a-closed-disc-is-path-connected.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-independent-series-probability-and-almost-sure-convergence-agree.md

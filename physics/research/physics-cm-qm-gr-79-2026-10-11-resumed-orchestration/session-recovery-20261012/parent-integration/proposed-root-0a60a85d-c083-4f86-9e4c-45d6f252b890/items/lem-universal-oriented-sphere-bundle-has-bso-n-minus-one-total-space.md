@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-universal-oriented-sphere-bundle-has-bso-n-minus-one-total-space.md

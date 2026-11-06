@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-a2-davis-complex-hexagon-and-boundary-circle.md

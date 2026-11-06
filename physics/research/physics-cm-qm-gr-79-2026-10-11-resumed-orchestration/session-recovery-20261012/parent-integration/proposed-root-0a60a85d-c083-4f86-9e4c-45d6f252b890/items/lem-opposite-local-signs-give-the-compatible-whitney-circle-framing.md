@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-opposite-local-signs-give-the-compatible-whitney-circle-framing.md

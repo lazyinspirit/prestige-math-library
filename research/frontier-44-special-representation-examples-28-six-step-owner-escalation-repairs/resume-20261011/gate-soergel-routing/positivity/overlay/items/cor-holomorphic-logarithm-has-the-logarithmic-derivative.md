@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-holomorphic-logarithm-has-the-logarithmic-derivative.md

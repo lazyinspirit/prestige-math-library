@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-orthogonal-wall-form-and-subspace-restriction.md

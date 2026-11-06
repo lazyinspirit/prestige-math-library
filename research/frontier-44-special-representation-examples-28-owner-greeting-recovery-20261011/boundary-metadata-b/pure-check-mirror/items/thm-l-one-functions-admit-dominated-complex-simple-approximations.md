@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-l-one-functions-admit-dominated-complex-simple-approximations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-flag-variety-bruhat-cell-decomposition.md

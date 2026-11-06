@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition.md

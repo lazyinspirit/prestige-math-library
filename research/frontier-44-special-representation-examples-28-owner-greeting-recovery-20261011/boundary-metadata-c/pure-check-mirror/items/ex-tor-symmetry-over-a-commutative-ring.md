@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-tor-symmetry-over-a-commutative-ring.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-lebesgue-measurable-sets-have-small-open-excess.md

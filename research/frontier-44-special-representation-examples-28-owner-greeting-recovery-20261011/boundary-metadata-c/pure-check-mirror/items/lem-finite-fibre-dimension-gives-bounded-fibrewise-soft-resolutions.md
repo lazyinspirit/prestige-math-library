@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-fibre-dimension-gives-bounded-fibrewise-soft-resolutions.md

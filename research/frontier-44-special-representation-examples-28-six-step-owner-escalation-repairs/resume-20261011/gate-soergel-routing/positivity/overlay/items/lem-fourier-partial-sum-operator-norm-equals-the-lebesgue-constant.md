@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant.md

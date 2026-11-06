@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-gelfand-transform-of-l-one-of-an-lca-group.md

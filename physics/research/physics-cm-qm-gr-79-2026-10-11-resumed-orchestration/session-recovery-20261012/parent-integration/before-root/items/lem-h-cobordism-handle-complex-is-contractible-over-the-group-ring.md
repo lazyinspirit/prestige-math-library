@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-h-cobordism-handle-complex-is-contractible-over-the-group-ring.md

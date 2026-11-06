@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-discrete-embedded-submanifold-is-closed-locally-and-countable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-why-the-five-lemma-asks-for-isomorphisms-in-the-middle.md

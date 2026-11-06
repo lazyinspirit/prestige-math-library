@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-pointwise-supremum-of-an-arbitrary-family-of-subharmonic-functions-is-subharmonic.md

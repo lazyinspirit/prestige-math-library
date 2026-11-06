@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-half-space-extensions-have-the-same-derivatives-on-the-half-space.md

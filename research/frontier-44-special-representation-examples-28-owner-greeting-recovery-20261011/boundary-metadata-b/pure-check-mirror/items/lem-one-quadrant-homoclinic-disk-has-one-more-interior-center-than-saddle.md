@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-one-quadrant-homoclinic-disk-has-one-more-interior-center-than-saddle.md

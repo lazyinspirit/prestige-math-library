@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-point-blowup-of-integral-curve-is-finite.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-garding-inequality-for-a-divergence-form-elliptic-operator.md

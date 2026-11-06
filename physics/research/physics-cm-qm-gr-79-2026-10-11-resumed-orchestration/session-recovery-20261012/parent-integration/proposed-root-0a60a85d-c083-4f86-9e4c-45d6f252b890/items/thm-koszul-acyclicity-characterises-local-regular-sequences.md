@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-koszul-acyclicity-characterises-local-regular-sequences.md

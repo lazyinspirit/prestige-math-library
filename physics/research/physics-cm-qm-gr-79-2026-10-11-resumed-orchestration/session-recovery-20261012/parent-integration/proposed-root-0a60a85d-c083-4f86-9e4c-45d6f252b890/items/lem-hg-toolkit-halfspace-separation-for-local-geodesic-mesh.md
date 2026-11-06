@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hg-toolkit-halfspace-separation-for-local-geodesic-mesh.md

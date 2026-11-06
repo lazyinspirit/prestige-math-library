@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms.md

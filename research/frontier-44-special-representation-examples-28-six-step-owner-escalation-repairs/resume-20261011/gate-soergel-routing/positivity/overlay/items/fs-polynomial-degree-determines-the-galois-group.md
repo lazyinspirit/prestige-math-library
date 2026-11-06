@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-polynomial-degree-determines-the-galois-group.md

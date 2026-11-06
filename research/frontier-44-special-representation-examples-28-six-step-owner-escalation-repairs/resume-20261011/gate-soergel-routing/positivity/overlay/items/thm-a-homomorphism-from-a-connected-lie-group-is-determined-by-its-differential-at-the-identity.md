@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-homomorphism-from-a-connected-lie-group-is-determined-by-its-differential-at-the-identity.md

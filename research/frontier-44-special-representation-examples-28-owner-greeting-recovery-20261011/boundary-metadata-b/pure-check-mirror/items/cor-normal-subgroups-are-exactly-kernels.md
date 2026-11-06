@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-normal-subgroups-are-exactly-kernels.md

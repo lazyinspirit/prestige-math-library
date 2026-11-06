@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-quasi-isometry-group-of-the-integers-contains-the-multiplicative-group-of-nonzero-reals.md

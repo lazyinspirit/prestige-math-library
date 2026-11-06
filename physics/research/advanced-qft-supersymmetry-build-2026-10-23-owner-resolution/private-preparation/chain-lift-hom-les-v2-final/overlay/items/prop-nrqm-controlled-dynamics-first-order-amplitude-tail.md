@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-nrqm-controlled-dynamics-first-order-amplitude-tail.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-gr-subluminal-planar-profile-not-a-vacuum-wave.md

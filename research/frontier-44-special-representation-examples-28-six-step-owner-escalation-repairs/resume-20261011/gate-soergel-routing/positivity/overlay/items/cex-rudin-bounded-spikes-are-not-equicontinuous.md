@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-rudin-bounded-spikes-are-not-equicontinuous.md

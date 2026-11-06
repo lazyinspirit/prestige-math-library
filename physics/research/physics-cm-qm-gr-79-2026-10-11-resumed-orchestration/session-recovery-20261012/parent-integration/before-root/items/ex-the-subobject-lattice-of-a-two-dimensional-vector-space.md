@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-subobject-lattice-of-a-two-dimensional-vector-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-monoids-and-rings-are-monadic-over-sets.md

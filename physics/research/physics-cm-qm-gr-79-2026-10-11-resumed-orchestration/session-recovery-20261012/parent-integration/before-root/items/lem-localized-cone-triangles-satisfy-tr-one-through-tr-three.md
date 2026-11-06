@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-localized-cone-triangles-satisfy-tr-one-through-tr-three.md

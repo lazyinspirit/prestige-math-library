@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nfa-constructions-for-union-concatenation-and-star.md

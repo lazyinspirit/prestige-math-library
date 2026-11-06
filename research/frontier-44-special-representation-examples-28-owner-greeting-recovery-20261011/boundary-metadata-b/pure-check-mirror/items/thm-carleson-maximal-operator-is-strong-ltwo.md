@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-carleson-maximal-operator-is-strong-ltwo.md

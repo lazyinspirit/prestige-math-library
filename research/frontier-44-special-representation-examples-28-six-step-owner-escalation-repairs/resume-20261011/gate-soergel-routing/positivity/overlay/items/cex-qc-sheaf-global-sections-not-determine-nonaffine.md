@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-qc-sheaf-global-sections-not-determine-nonaffine.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-irreducible-quintic-over-q-is-insoluble-by-radicals.md

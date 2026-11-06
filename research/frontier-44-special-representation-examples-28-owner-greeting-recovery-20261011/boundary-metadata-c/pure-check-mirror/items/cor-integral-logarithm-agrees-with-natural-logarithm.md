@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-integral-logarithm-agrees-with-natural-logarithm.md

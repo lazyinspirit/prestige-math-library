@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands.md

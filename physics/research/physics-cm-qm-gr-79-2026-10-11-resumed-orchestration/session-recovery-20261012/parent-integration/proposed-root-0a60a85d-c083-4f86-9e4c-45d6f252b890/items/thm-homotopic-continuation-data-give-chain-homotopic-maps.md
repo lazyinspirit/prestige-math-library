@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-homotopic-continuation-data-give-chain-homotopic-maps.md

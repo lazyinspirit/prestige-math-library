@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-curve-contact-classes-are-canonically-isomorphic-to-derivation-tangent-vectors.md

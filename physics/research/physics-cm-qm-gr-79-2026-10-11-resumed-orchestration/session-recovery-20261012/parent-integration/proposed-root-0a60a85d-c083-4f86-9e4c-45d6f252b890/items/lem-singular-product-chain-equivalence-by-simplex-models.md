@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-singular-product-chain-equivalence-by-simplex-models.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-characteristic-class-vanishing-is-only-necessary-for-embedding.md

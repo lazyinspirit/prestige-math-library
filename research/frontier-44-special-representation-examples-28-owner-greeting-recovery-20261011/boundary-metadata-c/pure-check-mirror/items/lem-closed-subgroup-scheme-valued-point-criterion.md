@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-closed-subgroup-scheme-valued-point-criterion.md

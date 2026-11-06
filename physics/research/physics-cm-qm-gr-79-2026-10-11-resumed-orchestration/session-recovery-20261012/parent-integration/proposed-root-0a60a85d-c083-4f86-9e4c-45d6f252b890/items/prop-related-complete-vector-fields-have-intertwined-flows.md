@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-related-complete-vector-fields-have-intertwined-flows.md

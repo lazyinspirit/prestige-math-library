@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-determinantal-grade-sufficient-exact-free-complex.md

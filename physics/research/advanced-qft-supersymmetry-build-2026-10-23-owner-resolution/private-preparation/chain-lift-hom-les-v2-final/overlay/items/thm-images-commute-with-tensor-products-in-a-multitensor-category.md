@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-images-commute-with-tensor-products-in-a-multitensor-category.md

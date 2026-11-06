@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-expected-exit-time-solves-the-poisson-equation.md

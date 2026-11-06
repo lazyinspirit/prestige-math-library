@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-solid-between-continuous-graphs-over-a-jordan-base.md

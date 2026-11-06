@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-jacobi-field-is-induced-by-a-geodesic-variation.md

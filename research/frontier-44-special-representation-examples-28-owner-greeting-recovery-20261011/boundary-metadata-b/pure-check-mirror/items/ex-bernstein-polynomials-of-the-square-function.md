@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-bernstein-polynomials-of-the-square-function.md

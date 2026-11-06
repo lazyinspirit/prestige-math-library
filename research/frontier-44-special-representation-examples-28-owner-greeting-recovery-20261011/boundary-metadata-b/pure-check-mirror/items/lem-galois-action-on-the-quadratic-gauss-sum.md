@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-galois-action-on-the-quadratic-gauss-sum.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor.md

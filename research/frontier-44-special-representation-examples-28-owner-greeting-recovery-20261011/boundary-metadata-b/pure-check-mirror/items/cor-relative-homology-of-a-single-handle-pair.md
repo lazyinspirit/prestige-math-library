@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-relative-homology-of-a-single-handle-pair.md

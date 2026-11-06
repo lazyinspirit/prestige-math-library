@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-f-n-and-its-coordinate-subspaces.md

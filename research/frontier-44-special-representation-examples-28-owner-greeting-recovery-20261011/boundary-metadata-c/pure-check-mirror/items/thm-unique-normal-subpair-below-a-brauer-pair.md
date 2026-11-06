@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-unique-normal-subpair-below-a-brauer-pair.md

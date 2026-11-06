@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-squared-distance-to-a-circle-and-its-medial-axis.md

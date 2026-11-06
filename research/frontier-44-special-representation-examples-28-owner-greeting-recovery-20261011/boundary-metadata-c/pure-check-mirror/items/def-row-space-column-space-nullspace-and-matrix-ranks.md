@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-row-space-column-space-nullspace-and-matrix-ranks.md

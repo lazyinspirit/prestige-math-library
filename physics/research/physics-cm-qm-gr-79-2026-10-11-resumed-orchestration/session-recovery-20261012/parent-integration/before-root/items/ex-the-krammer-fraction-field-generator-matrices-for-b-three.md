@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-krammer-fraction-field-generator-matrices-for-b-three.md

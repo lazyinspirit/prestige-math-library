@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-connecting-map-for-a-short-exact-sequence-of-two-term-complexes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonzero-positive-compact-self-adjoint-operators-have-positive-finite-dimensional-eigenspaces.md

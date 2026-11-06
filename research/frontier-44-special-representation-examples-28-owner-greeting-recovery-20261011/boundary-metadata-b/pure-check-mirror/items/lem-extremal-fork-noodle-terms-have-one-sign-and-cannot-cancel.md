@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-extremal-fork-noodle-terms-have-one-sign-and-cannot-cancel.md

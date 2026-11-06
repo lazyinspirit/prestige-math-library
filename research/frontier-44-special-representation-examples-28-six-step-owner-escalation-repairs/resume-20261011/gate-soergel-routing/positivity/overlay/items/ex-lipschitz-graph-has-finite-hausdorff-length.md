@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-lipschitz-graph-has-finite-hausdorff-length.md

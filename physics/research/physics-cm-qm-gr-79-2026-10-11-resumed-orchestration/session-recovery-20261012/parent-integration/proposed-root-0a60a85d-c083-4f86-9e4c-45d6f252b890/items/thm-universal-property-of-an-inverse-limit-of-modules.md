@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-universal-property-of-an-inverse-limit-of-modules.md

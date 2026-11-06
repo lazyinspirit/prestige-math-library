@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-factor-set-is-a-normalized-two-cocycle.md

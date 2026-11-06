@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-invariant-factor-data-for-a-finite-abelian-group.md

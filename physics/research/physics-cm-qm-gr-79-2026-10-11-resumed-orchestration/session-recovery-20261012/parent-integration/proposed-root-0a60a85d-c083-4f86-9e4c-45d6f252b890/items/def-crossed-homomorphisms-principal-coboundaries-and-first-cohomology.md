@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-crossed-homomorphisms-principal-coboundaries-and-first-cohomology.md

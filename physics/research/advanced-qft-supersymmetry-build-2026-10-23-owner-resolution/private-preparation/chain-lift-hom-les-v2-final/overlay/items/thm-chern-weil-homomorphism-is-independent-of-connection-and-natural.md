@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-chern-weil-homomorphism-is-independent-of-connection-and-natural.md

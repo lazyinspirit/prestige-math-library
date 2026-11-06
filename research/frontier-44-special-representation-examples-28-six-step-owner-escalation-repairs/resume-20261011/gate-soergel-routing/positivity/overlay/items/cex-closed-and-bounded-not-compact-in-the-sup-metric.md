@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-closed-and-bounded-not-compact-in-the-sup-metric.md

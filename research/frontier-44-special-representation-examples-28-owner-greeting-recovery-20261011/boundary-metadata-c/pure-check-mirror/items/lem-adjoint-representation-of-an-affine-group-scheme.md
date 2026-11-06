@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-adjoint-representation-of-an-affine-group-scheme.md

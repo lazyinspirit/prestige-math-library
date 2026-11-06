@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sign-and-positive-negative-parts-of-a-self-adjoint-operator.md

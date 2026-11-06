@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-complex-line-integral-over-a-rectifiable-path.md

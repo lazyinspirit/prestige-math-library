@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hasse-minkowski-for-ternary-forms-over-q.md

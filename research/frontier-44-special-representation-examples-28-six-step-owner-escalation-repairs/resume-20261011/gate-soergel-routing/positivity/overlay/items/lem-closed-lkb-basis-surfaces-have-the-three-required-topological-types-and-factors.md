@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-closed-lkb-basis-surfaces-have-the-three-required-topological-types-and-factors.md

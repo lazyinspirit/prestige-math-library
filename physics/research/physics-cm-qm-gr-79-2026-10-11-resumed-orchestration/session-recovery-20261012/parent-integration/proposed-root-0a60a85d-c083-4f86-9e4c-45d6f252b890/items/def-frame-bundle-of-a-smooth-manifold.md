@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-frame-bundle-of-a-smooth-manifold.md

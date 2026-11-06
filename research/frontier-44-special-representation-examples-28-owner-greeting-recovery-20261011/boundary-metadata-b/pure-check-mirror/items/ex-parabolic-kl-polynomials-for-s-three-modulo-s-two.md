@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-parabolic-kl-polynomials-for-s-three-modulo-s-two.md

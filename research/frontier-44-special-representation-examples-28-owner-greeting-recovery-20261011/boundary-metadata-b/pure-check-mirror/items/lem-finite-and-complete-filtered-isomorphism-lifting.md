@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-and-complete-filtered-isomorphism-lifting.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-images-and-preimages-under-a-relation-and-set-operations.md

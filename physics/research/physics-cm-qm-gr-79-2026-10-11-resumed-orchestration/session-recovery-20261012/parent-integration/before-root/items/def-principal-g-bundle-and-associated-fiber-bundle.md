@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-principal-g-bundle-and-associated-fiber-bundle.md

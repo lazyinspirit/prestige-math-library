@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-general-hecke-residue-branching-endpoints-from-normalized-schur-cells.md

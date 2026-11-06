@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ag-standard-smooth-regular-geometric-fibres.md

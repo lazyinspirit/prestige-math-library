@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels.md

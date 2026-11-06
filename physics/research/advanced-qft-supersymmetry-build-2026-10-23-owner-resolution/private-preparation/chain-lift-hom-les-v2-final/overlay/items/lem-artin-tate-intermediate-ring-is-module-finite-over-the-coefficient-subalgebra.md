@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-artin-tate-intermediate-ring-is-module-finite-over-the-coefficient-subalgebra.md

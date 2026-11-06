@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-good-node-path-from-empty-to-a-p-restricted-partition.md

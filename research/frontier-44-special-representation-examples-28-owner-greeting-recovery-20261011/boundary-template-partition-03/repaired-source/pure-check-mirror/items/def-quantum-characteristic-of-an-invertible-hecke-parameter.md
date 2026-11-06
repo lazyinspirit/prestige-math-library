@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quantum-characteristic-of-an-invertible-hecke-parameter.md

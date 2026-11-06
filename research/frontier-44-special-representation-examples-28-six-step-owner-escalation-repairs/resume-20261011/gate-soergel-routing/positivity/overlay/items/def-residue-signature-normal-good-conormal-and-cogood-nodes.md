@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-residue-signature-normal-good-conormal-and-cogood-nodes.md

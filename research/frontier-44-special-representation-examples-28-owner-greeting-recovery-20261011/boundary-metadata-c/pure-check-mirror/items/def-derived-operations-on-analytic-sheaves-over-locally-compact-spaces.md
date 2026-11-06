@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces.md

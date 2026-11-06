@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer.md

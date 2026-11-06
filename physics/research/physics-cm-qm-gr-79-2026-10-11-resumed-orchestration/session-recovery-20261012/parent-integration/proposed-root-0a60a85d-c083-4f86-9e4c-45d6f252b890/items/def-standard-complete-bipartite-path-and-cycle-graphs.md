@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-standard-complete-bipartite-path-and-cycle-graphs.md

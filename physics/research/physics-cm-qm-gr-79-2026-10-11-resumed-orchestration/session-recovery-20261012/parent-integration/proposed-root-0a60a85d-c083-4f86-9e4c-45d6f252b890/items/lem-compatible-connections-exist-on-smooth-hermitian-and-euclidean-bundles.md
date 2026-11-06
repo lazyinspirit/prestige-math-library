@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compatible-connections-exist-on-smooth-hermitian-and-euclidean-bundles.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-discriminant-square-mod-four-n-criterion-for-primitive-representation.md

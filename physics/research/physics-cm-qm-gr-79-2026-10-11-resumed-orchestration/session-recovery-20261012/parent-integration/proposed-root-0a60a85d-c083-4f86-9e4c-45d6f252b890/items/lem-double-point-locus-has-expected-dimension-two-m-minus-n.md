@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-double-point-locus-has-expected-dimension-two-m-minus-n.md

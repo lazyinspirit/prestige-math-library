@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-pythagorean-parallelogram-and-polarisation-identities.md

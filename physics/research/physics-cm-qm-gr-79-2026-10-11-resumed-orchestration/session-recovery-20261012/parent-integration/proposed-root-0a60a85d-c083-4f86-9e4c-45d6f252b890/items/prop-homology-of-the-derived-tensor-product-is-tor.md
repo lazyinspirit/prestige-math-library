@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-homology-of-the-derived-tensor-product-is-tor.md

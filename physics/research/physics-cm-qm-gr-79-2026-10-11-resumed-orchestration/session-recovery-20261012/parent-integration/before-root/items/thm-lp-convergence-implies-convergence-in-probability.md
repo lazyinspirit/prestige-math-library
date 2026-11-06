@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lp-convergence-implies-convergence-in-probability.md

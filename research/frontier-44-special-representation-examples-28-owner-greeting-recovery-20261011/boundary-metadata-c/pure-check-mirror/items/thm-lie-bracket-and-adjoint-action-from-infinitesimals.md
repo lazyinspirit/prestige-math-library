@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lie-bracket-and-adjoint-action-from-infinitesimals.md

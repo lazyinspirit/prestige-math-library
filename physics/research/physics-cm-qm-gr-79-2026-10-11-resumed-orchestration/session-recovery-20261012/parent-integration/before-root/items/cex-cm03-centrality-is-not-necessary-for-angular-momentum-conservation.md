@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm03-centrality-is-not-necessary-for-angular-momentum-conservation.md

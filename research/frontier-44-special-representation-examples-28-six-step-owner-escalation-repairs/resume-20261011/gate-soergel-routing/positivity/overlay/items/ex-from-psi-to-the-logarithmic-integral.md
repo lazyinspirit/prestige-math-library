@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-from-psi-to-the-logarithmic-integral.md

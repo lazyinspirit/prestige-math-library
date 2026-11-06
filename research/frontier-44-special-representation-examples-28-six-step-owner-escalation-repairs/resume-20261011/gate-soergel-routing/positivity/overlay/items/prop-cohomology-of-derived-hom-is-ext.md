@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-cohomology-of-derived-hom-is-ext.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-order-of-automorphism-group-of-elementary-abelian-rank-two.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-h-two-classifies-extensions-with-arbitrary-nonabelian-kernel.md

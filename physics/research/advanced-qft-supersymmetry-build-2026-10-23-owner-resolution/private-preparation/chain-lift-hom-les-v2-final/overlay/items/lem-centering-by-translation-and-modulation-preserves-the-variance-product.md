@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-centering-by-translation-and-modulation-preserves-the-variance-product.md

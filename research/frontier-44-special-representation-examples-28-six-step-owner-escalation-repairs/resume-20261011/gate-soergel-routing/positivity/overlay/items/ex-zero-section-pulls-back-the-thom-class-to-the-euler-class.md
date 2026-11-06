@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-zero-section-pulls-back-the-thom-class-to-the-euler-class.md

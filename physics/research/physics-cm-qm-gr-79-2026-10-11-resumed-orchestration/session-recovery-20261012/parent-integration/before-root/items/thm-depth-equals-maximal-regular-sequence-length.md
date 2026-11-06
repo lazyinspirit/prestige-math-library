@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-depth-equals-maximal-regular-sequence-length.md

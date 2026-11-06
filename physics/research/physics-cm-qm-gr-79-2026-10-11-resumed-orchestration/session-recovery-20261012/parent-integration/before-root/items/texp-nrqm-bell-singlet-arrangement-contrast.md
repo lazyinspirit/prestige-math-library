@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/texp-nrqm-bell-singlet-arrangement-contrast.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-relative-automorphism-group-and-separable-degree-bound.md

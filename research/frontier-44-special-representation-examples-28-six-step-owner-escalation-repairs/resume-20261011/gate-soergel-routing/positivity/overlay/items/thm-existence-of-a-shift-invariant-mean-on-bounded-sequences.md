@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-existence-of-a-shift-invariant-mean-on-bounded-sequences.md

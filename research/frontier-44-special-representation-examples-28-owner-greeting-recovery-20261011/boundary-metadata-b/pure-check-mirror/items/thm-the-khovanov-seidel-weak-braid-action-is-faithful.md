@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-khovanov-seidel-weak-braid-action-is-faithful.md

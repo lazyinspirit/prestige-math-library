@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-av7-integral-closure-elementary-etale-base-change.md

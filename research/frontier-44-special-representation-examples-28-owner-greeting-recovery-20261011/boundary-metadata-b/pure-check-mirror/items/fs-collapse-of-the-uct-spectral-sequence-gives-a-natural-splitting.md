@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-collapse-of-the-uct-spectral-sequence-gives-a-natural-splitting.md

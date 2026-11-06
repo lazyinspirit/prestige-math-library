@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-vitali-covering-theorem-holds-for-arbitrary-covers.md

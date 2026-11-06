@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-iid-strong-law-fails-at-infinite-absolute-mean.md

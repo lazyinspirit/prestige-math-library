@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-arith-theta-extension-splitting-and-isotropic-descent.md

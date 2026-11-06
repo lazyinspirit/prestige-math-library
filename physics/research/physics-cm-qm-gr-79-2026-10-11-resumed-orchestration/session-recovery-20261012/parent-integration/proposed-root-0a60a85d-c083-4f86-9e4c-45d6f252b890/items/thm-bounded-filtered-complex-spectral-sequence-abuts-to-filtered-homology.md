@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology.md

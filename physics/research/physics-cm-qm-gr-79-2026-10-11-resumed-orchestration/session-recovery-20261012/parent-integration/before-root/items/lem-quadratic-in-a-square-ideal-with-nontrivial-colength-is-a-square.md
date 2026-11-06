@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quadratic-in-a-square-ideal-with-nontrivial-colength-is-a-square.md

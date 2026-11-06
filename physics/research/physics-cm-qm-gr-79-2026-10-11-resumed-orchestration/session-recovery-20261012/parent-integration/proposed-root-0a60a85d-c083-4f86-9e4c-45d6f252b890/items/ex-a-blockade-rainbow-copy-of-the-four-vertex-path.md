@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-blockade-rainbow-copy-of-the-four-vertex-path.md

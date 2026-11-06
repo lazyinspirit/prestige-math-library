@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-kronecker-coefficient-and-internal-tensor-product.md

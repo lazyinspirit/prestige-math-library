@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-order-and-scalar-rules-for-the-nonnegative-integral.md

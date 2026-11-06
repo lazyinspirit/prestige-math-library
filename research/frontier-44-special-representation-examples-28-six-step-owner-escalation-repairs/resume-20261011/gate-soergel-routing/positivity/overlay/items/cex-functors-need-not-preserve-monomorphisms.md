@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-functors-need-not-preserve-monomorphisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-induced-word-map-has-the-free-extension-property.md

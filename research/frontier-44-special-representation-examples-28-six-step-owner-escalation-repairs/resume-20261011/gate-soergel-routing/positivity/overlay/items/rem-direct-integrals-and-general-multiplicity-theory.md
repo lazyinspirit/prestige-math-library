@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-direct-integrals-and-general-multiplicity-theory.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-affine-simple-root-alpha-zero-is-delta-minus-the-highest-root.md

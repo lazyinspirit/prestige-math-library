@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gr-flat-minkowski-model-and-inertial-charts.md

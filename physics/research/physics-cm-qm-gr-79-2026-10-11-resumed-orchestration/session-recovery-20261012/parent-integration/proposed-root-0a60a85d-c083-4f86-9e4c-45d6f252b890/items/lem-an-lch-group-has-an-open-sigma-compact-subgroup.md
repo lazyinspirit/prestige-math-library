@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-lch-group-has-an-open-sigma-compact-subgroup.md

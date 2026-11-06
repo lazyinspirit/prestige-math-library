@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence.md

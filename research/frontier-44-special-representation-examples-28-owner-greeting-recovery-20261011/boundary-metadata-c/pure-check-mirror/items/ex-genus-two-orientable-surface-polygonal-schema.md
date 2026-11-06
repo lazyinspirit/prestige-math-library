@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-genus-two-orientable-surface-polygonal-schema.md

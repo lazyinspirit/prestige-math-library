@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-symmetries-translation-invariance-and-momentum-conservation.md

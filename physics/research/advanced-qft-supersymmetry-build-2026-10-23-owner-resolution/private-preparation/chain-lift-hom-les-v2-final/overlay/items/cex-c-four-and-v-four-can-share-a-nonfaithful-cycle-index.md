@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-c-four-and-v-four-can-share-a-nonfaithful-cycle-index.md

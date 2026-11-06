@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-parabolic-kazhdan-lusztig-character-formula.md

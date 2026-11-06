@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-minkowski-two-entry-vectors-equality-and-strict.md

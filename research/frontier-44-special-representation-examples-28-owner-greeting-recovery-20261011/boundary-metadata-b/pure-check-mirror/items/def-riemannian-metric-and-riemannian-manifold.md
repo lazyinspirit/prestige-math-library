@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-riemannian-metric-and-riemannian-manifold.md

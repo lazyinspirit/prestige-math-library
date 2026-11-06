@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-logarithmic-caccioppoli-estimate-for-positive-supersolutions.md

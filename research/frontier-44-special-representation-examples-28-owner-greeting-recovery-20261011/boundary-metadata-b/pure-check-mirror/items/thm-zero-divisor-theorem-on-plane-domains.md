@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-zero-divisor-theorem-on-plane-domains.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-log-modulus-is-harmonic-on-the-punctured-plane.md

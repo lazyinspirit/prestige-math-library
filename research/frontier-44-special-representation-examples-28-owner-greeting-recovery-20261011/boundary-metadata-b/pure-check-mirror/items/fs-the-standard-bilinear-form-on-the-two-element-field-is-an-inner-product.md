@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-standard-bilinear-form-on-the-two-element-field-is-an-inner-product.md

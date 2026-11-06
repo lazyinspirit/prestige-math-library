@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-comonads-on-a-preorder-are-interior-operators.md

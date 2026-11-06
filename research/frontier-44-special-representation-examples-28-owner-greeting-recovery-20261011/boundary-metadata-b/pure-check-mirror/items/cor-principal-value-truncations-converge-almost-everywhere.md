@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-principal-value-truncations-converge-almost-everywhere.md

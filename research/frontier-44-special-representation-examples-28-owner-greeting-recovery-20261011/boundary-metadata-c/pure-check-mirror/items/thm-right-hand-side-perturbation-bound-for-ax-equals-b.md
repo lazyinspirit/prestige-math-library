@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-right-hand-side-perturbation-bound-for-ax-equals-b.md

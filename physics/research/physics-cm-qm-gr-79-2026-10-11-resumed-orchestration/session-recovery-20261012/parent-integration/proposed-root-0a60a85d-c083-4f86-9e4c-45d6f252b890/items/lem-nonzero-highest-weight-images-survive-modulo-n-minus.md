@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonzero-highest-weight-images-survive-modulo-n-minus.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-t1-product-theorem-iff-ac.md

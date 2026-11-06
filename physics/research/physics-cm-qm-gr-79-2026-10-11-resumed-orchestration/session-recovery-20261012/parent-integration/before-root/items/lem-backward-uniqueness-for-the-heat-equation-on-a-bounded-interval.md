@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-backward-uniqueness-for-the-heat-equation-on-a-bounded-interval.md

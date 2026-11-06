@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fibre-regular-sequence-locus-open-cm-equidimensional.md

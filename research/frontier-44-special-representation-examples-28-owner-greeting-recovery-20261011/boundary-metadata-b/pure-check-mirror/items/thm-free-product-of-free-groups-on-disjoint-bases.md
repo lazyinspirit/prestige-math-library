@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-free-product-of-free-groups-on-disjoint-bases.md

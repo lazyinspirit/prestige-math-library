@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-feferman-tail-flip-turns-a-generic-real-into-its-complement-modulo-finite.md

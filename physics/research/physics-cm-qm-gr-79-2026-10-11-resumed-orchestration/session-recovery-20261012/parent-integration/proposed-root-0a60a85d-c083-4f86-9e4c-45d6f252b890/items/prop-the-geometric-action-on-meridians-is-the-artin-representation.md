@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-geometric-action-on-meridians-is-the-artin-representation.md

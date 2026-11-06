@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-center-of-b-n-is-generated-by-the-full-twist-for-n-greater-than-two.md

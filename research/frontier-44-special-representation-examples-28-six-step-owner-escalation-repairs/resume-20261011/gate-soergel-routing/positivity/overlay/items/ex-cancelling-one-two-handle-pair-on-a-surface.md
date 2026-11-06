@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cancelling-one-two-handle-pair-on-a-surface.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-range-of-identity-minus-compact-is-closed.md

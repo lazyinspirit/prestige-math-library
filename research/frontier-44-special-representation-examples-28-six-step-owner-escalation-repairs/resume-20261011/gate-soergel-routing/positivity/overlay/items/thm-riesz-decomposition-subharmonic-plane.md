@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-riesz-decomposition-subharmonic-plane.md

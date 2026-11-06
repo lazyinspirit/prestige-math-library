@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-boundary-maximum-modulus-principle-on-unbounded-domains.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-first-isomorphism-factorization-for-lie-group-homomorphisms.md

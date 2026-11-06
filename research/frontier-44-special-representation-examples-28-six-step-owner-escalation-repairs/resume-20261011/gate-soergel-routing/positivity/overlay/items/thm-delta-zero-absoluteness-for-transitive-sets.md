@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-delta-zero-absoluteness-for-transitive-sets.md

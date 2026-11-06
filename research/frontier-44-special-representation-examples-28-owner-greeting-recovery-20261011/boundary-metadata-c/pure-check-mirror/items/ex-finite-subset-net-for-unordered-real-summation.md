@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-finite-subset-net-for-unordered-real-summation.md

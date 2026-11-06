@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-arith-homogeneous-bundle-vanishing-and-mumford-surjectivity.md

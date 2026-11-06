@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-adjoint-is-a-smooth-lie-group-representation.md

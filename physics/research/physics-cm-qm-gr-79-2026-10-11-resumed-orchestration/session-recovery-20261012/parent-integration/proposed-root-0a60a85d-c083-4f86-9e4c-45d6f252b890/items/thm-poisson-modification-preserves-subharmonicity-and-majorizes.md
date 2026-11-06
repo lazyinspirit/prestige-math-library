@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poisson-modification-preserves-subharmonicity-and-majorizes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-square-root-rescaling-in-lemma-four-four.md

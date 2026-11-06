@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-basic-cohen-model-has-an-infinite-dedekind-finite-set-of-reals.md

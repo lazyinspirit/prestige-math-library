@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fractional-sobolev-inequality-on-euclidean-space.md

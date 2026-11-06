@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lebesgue-measure-and-the-lebesgue-sigma-algebra.md

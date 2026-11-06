@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-dirichlet-energy-with-affine-boundary-data.md

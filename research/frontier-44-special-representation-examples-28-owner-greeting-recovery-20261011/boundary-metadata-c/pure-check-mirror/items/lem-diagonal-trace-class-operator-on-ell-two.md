@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-diagonal-trace-class-operator-on-ell-two.md

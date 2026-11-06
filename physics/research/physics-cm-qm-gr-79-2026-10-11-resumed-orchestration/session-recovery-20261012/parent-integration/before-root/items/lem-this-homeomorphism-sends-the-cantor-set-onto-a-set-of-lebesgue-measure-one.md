@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-this-homeomorphism-sends-the-cantor-set-onto-a-set-of-lebesgue-measure-one.md

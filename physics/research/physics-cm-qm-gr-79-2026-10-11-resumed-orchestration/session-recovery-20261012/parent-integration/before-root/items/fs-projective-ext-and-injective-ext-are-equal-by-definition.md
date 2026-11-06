@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-projective-ext-and-injective-ext-are-equal-by-definition.md

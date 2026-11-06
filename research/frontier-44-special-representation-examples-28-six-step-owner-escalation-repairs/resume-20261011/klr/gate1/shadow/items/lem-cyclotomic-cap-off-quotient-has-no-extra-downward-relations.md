@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-cap-off-quotient-has-no-extra-downward-relations.md

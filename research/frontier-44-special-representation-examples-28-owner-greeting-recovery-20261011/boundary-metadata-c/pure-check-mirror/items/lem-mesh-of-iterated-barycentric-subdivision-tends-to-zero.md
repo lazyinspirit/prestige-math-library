@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-mesh-of-iterated-barycentric-subdivision-tends-to-zero.md

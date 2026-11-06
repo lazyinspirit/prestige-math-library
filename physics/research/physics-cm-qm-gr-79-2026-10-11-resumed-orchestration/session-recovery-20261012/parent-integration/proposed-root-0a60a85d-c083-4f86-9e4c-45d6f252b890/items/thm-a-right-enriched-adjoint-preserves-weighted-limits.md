@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-right-enriched-adjoint-preserves-weighted-limits.md

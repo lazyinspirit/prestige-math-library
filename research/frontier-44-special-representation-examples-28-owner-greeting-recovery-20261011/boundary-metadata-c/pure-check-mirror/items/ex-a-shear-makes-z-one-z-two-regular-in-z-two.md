@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-shear-makes-z-one-z-two-regular-in-z-two.md

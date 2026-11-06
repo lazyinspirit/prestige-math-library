@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lc-supercompactness-closed-embedding-characterization.md

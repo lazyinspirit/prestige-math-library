@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-localisation-and-flat-base-change-of-regular-sequences.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-algebraic-and-geometric-multiplicity-of-an-eigenvalue.md

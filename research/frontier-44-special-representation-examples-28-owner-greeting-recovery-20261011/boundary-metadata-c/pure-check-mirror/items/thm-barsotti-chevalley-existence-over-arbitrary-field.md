@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-barsotti-chevalley-existence-over-arbitrary-field.md

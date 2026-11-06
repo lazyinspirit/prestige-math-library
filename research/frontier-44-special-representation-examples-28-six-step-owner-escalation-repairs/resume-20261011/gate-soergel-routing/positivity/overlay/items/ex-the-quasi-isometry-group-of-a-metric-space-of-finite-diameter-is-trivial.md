@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-quasi-isometry-group-of-a-metric-space-of-finite-diameter-is-trivial.md

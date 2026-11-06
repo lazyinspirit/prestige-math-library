@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-unit-and-counit-of-the-free-group-adjunction.md

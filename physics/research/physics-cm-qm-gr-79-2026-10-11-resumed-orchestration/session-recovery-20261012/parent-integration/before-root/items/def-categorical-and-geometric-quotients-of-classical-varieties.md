@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-categorical-and-geometric-quotients-of-classical-varieties.md

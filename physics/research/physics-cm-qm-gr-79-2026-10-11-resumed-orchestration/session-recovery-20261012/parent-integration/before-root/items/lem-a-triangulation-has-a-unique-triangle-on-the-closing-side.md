@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-triangulation-has-a-unique-triangle-on-the-closing-side.md

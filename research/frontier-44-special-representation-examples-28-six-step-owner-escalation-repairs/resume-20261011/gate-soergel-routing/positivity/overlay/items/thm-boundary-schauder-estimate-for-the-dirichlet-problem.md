@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-boundary-schauder-estimate-for-the-dirichlet-problem.md

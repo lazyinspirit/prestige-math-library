@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-uniform-completion-universal-property-and-uniqueness.md

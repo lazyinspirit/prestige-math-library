@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-schur-multiplier-is-defined-as-h-two-cohomology-with-complex-units.md

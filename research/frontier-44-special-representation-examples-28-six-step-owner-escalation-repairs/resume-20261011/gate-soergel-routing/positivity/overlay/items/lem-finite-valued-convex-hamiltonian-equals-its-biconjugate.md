@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-valued-convex-hamiltonian-equals-its-biconjugate.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-convex-cell-complexes-admit-compatible-triangulations.md

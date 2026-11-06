@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-many-one-reductions-transfer-decidability-and-recognizability.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-holomorphic-difference-quotient-is-holomorphic-in-each-variable.md

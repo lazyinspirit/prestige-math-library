@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-family-natural-in-the-parameter-factors-through-the-parametrised-end.md

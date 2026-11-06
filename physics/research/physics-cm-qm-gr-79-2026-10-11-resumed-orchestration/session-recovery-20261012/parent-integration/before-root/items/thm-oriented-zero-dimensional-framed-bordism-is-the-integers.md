@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-oriented-zero-dimensional-framed-bordism-is-the-integers.md

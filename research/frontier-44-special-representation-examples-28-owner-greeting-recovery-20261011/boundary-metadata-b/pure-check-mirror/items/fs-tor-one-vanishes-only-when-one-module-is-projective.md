@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-tor-one-vanishes-only-when-one-module-is-projective.md

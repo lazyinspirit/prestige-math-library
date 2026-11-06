@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-zero-torsion-is-realized-by-elementary-expansions-collapses-and-cellular-basis-moves.md

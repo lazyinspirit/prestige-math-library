@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-lindeberg-condition-implies-feller-negligibility.md

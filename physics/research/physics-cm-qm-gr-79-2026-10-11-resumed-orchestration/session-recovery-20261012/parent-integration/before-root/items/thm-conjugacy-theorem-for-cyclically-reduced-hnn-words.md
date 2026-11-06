@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conjugacy-theorem-for-cyclically-reduced-hnn-words.md

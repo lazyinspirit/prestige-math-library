@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-block-relative-trace-characterizes-diagonal-projectivity.md

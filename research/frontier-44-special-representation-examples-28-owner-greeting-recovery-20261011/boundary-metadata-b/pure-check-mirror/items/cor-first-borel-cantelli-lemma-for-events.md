@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-first-borel-cantelli-lemma-for-events.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-word-problem-for-a-fixed-finite-presentation.md

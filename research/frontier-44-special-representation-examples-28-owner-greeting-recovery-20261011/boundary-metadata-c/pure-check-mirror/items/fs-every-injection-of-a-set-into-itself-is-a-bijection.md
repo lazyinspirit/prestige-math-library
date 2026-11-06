@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-injection-of-a-set-into-itself-is-a-bijection.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-discriminant-is-the-norm-of-the-different.md

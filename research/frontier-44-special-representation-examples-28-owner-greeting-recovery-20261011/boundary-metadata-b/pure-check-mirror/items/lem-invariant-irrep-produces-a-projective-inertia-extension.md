@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-invariant-irrep-produces-a-projective-inertia-extension.md

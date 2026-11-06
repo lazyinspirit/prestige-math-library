@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-real-hp-is-quasi-banach-below-one.md

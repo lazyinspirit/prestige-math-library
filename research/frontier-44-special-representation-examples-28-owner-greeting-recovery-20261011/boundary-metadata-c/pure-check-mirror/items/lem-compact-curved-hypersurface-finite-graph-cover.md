@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-curved-hypersurface-finite-graph-cover.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-intersection-of-coordinate-spheres-as-a-transverse-level-set.md

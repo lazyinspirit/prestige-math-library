@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-diagonal-ramsey-lower-bound-by-the-union-bound.md

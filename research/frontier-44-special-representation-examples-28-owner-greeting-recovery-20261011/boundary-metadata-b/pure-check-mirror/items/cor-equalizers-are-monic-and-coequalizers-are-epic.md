@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-equalizers-are-monic-and-coequalizers-are-epic.md

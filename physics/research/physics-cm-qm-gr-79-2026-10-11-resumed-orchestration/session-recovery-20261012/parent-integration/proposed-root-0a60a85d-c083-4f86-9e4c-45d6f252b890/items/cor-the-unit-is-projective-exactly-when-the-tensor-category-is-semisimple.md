@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-unit-is-projective-exactly-when-the-tensor-category-is-semisimple.md

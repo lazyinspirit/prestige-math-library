@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-triangular-decomposition-of-a-quantized-enveloping-algebra.md

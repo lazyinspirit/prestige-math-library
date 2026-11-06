@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sr-causal-vectors-are-not-closed-under-addition.md

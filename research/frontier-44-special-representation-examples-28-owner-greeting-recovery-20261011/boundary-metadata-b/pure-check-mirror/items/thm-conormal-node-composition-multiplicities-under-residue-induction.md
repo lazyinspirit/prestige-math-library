@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-conormal-node-composition-multiplicities-under-residue-induction.md

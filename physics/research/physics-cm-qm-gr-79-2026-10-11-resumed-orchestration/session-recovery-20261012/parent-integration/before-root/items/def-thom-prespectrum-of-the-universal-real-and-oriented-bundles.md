@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-thom-prespectrum-of-the-universal-real-and-oriented-bundles.md

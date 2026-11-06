@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-two-point-outer-measure-need-not-be-regular.md

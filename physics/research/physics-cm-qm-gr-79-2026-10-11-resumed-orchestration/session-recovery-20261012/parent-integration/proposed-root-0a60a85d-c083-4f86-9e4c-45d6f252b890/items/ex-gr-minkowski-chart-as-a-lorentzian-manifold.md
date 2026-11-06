@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-minkowski-chart-as-a-lorentzian-manifold.md

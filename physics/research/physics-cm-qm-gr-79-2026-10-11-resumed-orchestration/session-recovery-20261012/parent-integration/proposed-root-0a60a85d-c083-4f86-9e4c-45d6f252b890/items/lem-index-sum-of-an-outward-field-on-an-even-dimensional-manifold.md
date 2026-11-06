@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-index-sum-of-an-outward-field-on-an-even-dimensional-manifold.md

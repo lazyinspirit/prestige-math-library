@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-p-residual-is-generated-by-p-prime-elements-and-idempotent.md

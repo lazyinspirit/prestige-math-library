@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-stiefel-whitney-classes-of-the-tangent-bundle-of-real-projective-space.md

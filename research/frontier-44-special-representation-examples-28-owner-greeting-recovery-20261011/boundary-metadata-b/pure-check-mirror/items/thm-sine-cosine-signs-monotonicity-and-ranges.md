@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-sine-cosine-signs-monotonicity-and-ranges.md

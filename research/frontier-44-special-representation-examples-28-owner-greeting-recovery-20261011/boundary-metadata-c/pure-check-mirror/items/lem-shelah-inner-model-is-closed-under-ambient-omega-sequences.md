@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-shelah-inner-model-is-closed-under-ambient-omega-sequences.md

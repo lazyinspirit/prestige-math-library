@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-analytic-elliptic-cauchy-solutions-lack-smooth-continuous-dependence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-regular-bijection-not-isomorphism-cusp.md

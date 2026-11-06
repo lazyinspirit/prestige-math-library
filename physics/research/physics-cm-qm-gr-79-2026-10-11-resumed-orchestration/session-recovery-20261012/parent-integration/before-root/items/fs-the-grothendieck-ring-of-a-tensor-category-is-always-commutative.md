@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-grothendieck-ring-of-a-tensor-category-is-always-commutative.md

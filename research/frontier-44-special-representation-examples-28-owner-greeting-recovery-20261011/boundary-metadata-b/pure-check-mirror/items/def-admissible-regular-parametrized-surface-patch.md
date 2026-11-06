@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-admissible-regular-parametrized-surface-patch.md

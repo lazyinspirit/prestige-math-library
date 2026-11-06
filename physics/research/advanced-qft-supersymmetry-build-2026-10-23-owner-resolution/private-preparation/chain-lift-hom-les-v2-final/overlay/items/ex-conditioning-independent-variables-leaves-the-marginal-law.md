@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-conditioning-independent-variables-leaves-the-marginal-law.md

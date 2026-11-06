@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-square-matrix-invertible-iff-determinant-is-a-unit.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-holomorphic-functional-calculus-is-contour-independent.md

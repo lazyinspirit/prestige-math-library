@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-whitehead-group-construction-remains-at-owned.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cell-attachment-by-a-characteristic-map.md

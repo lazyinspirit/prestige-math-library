@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-serre-finiteness-transfer-for-simply-connected-base-and-fiber.md

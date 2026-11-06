@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-short-exact-sequences-of-filtered-complexes-give-compatible-exact-couples.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cuspidal-support-and-harish-chandra-series.md

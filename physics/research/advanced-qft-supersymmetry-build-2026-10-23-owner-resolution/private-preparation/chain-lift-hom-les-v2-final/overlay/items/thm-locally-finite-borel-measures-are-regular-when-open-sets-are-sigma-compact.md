@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact.md

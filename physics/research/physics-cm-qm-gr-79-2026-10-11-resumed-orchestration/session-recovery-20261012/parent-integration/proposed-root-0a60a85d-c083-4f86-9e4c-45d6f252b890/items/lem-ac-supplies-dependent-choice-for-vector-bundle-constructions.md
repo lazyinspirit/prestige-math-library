@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ac-supplies-dependent-choice-for-vector-bundle-constructions.md

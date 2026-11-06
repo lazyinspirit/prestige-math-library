@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-translation-length-is-conjugacy-invariant-and-homogeneous.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-reduction-mod-p-of-an-ordinary-character-is-always-irreducible.md

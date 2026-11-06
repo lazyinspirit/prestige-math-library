@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complex-sesquilinear-coercivity-differs-from-bilinear-positivity.md

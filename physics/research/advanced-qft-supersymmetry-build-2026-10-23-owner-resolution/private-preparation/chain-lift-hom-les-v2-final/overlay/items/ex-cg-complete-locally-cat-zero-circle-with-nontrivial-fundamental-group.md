@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cg-complete-locally-cat-zero-circle-with-nontrivial-fundamental-group.md

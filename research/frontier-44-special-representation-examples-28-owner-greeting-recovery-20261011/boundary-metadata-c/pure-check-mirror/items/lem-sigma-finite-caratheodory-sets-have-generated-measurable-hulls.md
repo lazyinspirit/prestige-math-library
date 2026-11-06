@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-sigma-finite-caratheodory-sets-have-generated-measurable-hulls.md

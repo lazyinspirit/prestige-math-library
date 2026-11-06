@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-unbounded-punctured-harmonic-singularity-is-not-removable.md

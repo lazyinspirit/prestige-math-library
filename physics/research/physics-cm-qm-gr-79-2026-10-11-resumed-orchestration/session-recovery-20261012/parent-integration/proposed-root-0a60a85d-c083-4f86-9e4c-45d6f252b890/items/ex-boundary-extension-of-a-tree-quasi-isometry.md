@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-boundary-extension-of-a-tree-quasi-isometry.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-isotopic-embeddings-have-diffeomorphic-complements.md

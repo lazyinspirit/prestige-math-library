@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-uniformizable-spaces-are-completely-regular.md

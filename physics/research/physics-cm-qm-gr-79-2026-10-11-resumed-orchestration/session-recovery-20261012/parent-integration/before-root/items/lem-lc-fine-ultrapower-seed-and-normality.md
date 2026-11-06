@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lc-fine-ultrapower-seed-and-normality.md

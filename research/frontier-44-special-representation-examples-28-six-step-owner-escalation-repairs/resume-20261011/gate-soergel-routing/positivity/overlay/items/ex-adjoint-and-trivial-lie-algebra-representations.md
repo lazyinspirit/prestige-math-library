@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-adjoint-and-trivial-lie-algebra-representations.md

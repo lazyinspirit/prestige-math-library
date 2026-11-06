@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-internal-hom-is-continuous-in-each-variable.md

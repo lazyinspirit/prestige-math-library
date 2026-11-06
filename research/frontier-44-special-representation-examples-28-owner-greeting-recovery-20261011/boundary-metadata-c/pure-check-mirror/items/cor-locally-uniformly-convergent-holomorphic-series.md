@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-locally-uniformly-convergent-holomorphic-series.md

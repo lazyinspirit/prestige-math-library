@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-elementwise-formula-for-the-connecting-map-in-module-categories.md

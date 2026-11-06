@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-torsion-free-abelian-groups-do-not-form-an-abelian-category.md

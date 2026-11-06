@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-chevalley-line-stabilizer-of-an-algebraic-subgroup.md

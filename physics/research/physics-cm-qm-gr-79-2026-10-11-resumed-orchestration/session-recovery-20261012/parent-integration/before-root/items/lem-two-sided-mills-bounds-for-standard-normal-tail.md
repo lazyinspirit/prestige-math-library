@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-two-sided-mills-bounds-for-standard-normal-tail.md

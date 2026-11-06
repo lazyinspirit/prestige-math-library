@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rigidity-of-alternating-multilinear-matrix-functions.md

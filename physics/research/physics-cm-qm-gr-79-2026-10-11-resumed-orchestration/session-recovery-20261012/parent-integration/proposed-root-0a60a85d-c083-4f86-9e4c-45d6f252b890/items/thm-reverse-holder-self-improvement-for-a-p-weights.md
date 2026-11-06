@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-reverse-holder-self-improvement-for-a-p-weights.md

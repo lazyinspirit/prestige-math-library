@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-colimits-in-grp-are-computed-on-underlying-sets.md

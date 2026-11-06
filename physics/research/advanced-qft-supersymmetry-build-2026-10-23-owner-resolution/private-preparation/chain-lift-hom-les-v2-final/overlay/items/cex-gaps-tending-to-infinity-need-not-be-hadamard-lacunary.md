@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-gaps-tending-to-infinity-need-not-be-hadamard-lacunary.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-truncation-iteration-for-a-recursive-specification.md

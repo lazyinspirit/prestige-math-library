@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-induced-orientation-on-a-hypersurface-from-a-coorientation.md

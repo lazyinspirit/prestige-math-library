@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-small-dowker-ladder-shrinking-obstruction.md

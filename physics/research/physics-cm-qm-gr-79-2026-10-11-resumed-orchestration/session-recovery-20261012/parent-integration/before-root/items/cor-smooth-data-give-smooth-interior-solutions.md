@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-smooth-data-give-smooth-interior-solutions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-colour-ramsey-arrow-recursion.md

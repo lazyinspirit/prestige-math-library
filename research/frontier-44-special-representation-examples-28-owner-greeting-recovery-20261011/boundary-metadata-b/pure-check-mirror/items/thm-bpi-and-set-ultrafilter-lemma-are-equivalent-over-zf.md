@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-bpi-and-set-ultrafilter-lemma-are-equivalent-over-zf.md

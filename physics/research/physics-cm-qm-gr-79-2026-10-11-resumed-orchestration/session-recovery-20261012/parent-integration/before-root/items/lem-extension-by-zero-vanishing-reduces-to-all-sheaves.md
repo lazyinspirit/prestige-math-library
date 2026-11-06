@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-extension-by-zero-vanishing-reduces-to-all-sheaves.md

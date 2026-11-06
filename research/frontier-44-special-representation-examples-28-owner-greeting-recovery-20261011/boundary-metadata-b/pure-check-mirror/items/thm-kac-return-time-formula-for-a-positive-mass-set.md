@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-kac-return-time-formula-for-a-positive-mass-set.md

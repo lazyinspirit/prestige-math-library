@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-row-and-column-stabilizers-of-a-tableau.md

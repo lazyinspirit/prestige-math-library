@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-rotation-index-of-a-regular-closed-plane-curve.md

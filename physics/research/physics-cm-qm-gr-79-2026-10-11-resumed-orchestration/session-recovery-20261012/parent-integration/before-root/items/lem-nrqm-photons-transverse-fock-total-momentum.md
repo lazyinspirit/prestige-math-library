@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-photons-transverse-fock-total-momentum.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rees-module-finiteness-and-stable-filtrations.md

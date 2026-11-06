@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-brownian-positive-occupation-proportion-has-the-arcsine-law.md

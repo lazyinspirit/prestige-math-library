@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-product-rule-for-bounded-sobolev-functions.md

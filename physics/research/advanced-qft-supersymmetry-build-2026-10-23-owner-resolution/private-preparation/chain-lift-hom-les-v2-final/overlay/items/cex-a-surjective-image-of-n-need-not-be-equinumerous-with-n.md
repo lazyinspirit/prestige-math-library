@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-surjective-image-of-n-need-not-be-equinumerous-with-n.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-l-one-convolution-is-bilinear-commutative-and-associative.md

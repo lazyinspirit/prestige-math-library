@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle.md

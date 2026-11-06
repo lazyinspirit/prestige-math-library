@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive.md

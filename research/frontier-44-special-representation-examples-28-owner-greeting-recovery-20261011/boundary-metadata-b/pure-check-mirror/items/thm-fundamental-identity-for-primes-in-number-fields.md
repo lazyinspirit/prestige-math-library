@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fundamental-identity-for-primes-in-number-fields.md

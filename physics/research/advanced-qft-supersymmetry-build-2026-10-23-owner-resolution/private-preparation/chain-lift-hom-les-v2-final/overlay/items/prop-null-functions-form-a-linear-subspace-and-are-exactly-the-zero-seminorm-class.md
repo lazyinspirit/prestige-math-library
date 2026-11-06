@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class.md

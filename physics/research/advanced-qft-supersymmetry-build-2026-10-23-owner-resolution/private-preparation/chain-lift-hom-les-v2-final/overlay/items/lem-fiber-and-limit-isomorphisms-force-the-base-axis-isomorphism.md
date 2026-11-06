@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fiber-and-limit-isomorphisms-force-the-base-axis-isomorphism.md

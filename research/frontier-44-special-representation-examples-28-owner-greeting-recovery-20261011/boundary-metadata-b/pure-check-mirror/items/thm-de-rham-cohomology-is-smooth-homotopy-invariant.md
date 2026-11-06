@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-de-rham-cohomology-is-smooth-homotopy-invariant.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normalized-surface-point-blowup-resolution-descends-from-completion.md

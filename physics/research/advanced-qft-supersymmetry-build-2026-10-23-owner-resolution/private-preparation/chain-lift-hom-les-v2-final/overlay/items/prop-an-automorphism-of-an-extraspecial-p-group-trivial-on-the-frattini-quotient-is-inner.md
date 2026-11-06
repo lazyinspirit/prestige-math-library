@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-an-automorphism-of-an-extraspecial-p-group-trivial-on-the-frattini-quotient-is-inner.md

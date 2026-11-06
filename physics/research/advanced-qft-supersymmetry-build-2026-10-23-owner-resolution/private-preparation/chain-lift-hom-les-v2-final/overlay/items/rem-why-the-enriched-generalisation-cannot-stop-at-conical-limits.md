@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-why-the-enriched-generalisation-cannot-stop-at-conical-limits.md

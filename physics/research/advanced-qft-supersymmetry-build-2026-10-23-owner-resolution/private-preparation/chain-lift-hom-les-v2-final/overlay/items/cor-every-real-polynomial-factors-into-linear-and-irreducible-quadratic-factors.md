@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-every-real-polynomial-factors-into-linear-and-irreducible-quadratic-factors.md

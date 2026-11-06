@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-euler-characteristic-is-multiplicative-under-the-finite-kunneth-hypotheses.md

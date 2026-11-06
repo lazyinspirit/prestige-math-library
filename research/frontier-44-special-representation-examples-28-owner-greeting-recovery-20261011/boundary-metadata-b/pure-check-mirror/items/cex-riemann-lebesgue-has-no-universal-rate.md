@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-riemann-lebesgue-has-no-universal-rate.md

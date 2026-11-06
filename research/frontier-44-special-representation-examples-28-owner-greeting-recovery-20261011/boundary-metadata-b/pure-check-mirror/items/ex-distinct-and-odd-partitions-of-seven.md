@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-distinct-and-odd-partitions-of-seven.md

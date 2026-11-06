@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-aleph-and-beth-hierarchies-are-well-defined.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finitely-generated-fi-modules-have-eventual-character-polynomials.md

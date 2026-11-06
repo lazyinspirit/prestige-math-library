@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-brunner-ordered-lauchli-permutation-models.md

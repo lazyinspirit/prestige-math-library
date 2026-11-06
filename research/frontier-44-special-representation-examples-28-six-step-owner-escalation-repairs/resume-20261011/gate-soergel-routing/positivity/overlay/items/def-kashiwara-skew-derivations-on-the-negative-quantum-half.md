@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-kashiwara-skew-derivations-on-the-negative-quantum-half.md

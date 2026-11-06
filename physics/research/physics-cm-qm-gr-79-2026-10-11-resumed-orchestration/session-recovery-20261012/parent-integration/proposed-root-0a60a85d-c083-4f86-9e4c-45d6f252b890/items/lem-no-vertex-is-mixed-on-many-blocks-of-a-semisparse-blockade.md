@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-no-vertex-is-mixed-on-many-blocks-of-a-semisparse-blockade.md

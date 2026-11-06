@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-orientation-of-a-finite-dimensional-real-vector-space.md

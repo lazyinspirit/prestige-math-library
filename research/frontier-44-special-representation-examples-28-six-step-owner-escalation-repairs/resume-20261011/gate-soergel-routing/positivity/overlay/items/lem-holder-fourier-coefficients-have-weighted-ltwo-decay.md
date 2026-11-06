@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-holder-fourier-coefficients-have-weighted-ltwo-decay.md

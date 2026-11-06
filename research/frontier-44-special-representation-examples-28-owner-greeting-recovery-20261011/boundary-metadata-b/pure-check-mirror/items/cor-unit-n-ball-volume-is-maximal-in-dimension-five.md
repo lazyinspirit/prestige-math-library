@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-unit-n-ball-volume-is-maximal-in-dimension-five.md

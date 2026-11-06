@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-support-moser-stability-on-a-noncompact-manifold.md

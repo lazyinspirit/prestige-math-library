@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-tiny-residual-does-not-force-a-small-forward-error.md

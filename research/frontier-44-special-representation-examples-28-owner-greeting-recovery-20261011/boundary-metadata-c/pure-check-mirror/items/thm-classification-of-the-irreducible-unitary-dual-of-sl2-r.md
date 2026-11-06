@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-classification-of-the-irreducible-unitary-dual-of-sl2-r.md

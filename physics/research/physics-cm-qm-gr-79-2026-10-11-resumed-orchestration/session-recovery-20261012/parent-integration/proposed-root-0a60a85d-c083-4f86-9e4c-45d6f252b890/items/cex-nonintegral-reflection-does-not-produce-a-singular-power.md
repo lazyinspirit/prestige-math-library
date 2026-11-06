@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonintegral-reflection-does-not-produce-a-singular-power.md

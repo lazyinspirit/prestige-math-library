@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-subcomplex-is-the-kernel-of-its-quotient-map.md

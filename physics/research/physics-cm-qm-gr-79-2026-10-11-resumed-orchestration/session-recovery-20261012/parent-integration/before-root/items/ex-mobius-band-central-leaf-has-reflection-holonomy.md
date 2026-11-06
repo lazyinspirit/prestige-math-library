@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-mobius-band-central-leaf-has-reflection-holonomy.md

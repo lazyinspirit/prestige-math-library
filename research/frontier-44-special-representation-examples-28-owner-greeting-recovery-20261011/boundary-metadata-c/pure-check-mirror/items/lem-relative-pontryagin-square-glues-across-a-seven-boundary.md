@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-pontryagin-square-glues-across-a-seven-boundary.md

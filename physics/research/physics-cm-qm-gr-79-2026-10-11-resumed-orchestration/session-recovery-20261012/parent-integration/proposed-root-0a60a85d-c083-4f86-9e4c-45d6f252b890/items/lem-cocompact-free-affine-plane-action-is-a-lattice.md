@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cocompact-free-affine-plane-action-is-a-lattice.md

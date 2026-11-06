@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-regular-and-nonregular-three-sheeted-wedge-coverings.md

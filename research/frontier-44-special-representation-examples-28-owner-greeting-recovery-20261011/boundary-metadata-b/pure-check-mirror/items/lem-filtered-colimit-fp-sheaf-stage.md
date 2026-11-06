@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-filtered-colimit-fp-sheaf-stage.md

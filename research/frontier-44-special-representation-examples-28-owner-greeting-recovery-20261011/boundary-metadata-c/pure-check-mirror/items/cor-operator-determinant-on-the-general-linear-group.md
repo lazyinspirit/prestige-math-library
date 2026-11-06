@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-operator-determinant-on-the-general-linear-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-closed-subset-does-not-determine-closed-subscheme.md

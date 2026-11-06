@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-admissible-square-action-has-a-distinct-leading-monomial.md

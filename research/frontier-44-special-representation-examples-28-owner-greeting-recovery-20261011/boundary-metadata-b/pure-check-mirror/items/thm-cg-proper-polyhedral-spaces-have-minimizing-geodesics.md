@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics.md

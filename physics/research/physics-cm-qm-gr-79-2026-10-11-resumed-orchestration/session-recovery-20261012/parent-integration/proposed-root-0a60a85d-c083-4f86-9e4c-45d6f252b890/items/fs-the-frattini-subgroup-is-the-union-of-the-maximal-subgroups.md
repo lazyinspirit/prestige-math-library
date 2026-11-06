@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-frattini-subgroup-is-the-union-of-the-maximal-subgroups.md

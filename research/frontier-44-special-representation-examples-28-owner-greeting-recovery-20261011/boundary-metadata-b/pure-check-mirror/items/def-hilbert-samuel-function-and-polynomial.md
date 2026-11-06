@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-hilbert-samuel-function-and-polynomial.md

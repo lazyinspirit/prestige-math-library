@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-polytabloid-specht-module-over-an-arbitrary-field.md

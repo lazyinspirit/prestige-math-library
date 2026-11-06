@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-complex-trigonometric-and-hyperbolic-functions.md

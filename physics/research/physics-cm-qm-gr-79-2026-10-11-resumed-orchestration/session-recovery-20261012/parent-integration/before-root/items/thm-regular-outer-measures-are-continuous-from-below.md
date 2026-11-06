@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-regular-outer-measures-are-continuous-from-below.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-domain-classes-for-the-mean-zero-poincare-inequality.md

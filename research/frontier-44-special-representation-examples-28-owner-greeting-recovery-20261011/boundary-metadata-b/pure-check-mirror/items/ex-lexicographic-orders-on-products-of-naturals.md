@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-lexicographic-orders-on-products-of-naturals.md

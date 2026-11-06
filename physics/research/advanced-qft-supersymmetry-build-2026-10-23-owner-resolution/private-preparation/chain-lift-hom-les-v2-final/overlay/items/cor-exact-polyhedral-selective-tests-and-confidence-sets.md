@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-exact-polyhedral-selective-tests-and-confidence-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-preadditive-category-with-a-zero-object-has-zero-morphisms-in-the-published-sense.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-affine-scheme-isomorphism-ring-isomorphism.md

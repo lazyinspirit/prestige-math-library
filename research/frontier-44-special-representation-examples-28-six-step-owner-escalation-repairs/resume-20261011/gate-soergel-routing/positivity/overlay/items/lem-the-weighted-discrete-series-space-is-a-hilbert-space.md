@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-weighted-discrete-series-space-is-a-hilbert-space.md

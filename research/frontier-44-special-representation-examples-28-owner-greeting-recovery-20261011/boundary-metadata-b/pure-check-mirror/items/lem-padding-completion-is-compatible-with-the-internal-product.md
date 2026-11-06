@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-padding-completion-is-compatible-with-the-internal-product.md

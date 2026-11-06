@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unit-interval-functions-extend-over-evaluation-closure.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-regularity-notions-and-permutation-invariance-local.md

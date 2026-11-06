@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-finite-values-and-finite-additivity-force-finite-total-variation.md

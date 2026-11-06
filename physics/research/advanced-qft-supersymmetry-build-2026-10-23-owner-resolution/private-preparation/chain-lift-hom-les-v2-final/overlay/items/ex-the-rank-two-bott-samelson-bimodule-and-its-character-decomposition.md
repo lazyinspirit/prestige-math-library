@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-rank-two-bott-samelson-bimodule-and-its-character-decomposition.md

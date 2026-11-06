@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-finite-p-group-has-only-the-trivial-simple-module-in-characteristic-p.md

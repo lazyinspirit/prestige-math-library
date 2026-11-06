@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-sharp-degree-thresholds-wait-for-duality.md

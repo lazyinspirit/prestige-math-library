@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-restriction-coproduct-on-the-graded-symmetric-group-character-ring.md

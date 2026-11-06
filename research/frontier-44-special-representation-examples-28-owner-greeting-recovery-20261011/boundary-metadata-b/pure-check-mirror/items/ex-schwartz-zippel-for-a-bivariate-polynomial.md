@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-schwartz-zippel-for-a-bivariate-polynomial.md

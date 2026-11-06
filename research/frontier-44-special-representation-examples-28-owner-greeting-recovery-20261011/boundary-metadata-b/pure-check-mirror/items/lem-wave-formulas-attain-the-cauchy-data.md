@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-wave-formulas-attain-the-cauchy-data.md

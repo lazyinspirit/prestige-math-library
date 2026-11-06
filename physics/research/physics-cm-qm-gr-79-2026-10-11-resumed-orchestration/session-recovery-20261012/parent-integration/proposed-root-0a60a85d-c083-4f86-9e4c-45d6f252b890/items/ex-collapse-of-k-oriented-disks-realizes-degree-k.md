@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-collapse-of-k-oriented-disks-realizes-degree-k.md

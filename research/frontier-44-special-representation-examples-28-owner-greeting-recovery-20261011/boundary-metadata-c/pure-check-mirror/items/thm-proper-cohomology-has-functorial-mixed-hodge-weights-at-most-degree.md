@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-proper-cohomology-has-functorial-mixed-hodge-weights-at-most-degree.md

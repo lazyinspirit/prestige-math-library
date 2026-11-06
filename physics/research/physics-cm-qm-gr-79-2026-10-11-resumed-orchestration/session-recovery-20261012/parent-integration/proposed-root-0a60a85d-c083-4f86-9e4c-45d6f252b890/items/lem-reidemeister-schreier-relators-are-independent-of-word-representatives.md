@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reidemeister-schreier-relators-are-independent-of-word-representatives.md

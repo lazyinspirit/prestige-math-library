@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-norm-recovered-from-the-dual-unit-ball.md

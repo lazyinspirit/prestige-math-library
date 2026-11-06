@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-countable-levels-do-not-suffice-for-konig.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-c-prime-one-sixth-presentations-define-hyperbolic-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-edge-maps-of-a-bounded-skeletal-ahss.md

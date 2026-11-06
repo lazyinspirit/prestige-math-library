@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quantified-boolean-formula-and-tqbf.md

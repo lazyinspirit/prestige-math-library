@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-left-and-right-global-dimension-are-equal-by-definition.md

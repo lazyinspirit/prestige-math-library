@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-unitary-induction-from-the-trivial-subgroup.md

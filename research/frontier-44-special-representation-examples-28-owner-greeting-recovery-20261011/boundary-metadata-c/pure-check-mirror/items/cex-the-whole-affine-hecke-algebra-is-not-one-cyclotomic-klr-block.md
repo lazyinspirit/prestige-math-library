@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-whole-affine-hecke-algebra-is-not-one-cyclotomic-klr-block.md

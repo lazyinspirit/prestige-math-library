@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-c-r-and-smooth-maps-between-smooth-manifolds.md

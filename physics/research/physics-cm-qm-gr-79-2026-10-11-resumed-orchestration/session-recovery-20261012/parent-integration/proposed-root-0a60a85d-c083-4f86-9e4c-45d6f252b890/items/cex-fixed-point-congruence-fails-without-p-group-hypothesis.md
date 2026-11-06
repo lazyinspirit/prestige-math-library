@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-fixed-point-congruence-fails-without-p-group-hypothesis.md

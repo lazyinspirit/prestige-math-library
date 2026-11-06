@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-dirichlet-density-does-not-mean-integer-natural-density.md

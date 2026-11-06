@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-smoothly-homotopic-maps-induce-the-same-de-rham-map.md

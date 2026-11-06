@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fraction-field-coefficients-of-an-integral-lkb-class-are-laurent-polynomials.md

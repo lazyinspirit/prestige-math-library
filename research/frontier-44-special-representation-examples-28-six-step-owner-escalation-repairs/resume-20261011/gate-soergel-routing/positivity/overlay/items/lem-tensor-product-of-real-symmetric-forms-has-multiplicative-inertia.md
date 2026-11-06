@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-tensor-product-of-real-symmetric-forms-has-multiplicative-inertia.md

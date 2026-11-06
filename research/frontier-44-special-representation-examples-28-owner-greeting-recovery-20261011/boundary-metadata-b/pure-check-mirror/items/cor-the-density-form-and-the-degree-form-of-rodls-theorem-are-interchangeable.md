@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-density-form-and-the-degree-form-of-rodls-theorem-are-interchangeable.md

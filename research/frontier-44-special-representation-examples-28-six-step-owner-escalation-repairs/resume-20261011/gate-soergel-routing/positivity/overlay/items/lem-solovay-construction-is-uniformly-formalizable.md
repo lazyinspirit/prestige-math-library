@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-solovay-construction-is-uniformly-formalizable.md

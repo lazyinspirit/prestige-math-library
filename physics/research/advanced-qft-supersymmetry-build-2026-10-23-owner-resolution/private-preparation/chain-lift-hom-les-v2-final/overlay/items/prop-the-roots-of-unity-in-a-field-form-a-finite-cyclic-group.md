@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-roots-of-unity-in-a-field-form-a-finite-cyclic-group.md

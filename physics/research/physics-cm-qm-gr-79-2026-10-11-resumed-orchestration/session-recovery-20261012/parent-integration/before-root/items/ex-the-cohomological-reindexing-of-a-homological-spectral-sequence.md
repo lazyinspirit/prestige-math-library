@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-cohomological-reindexing-of-a-homological-spectral-sequence.md

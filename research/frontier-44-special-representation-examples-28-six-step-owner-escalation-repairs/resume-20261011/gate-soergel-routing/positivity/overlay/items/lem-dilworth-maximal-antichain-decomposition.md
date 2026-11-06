@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-dilworth-maximal-antichain-decomposition.md

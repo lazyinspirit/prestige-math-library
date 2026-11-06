@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-product-of-two-noetherian-rings-is-noetherian.md

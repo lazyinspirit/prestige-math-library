@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-ito-integral-for-square-integrable-predictable-processes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hg-toolkit-proper-ray-compactness-and-sequence-comparison.md

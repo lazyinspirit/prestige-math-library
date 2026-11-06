@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quasi-isometry-group-of-a-metric-space.md

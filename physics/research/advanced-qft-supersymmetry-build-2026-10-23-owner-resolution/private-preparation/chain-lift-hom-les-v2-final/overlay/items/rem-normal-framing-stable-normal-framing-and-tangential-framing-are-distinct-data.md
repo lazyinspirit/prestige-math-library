@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-normal-framing-stable-normal-framing-and-tangential-framing-are-distinct-data.md

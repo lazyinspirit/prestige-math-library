@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-global-reeb-stability-for-transversely-oriented-codimension-one-foliations.md

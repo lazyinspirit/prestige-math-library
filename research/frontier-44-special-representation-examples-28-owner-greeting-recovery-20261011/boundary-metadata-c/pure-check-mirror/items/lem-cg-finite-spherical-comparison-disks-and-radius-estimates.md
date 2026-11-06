@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-finite-spherical-comparison-disks-and-radius-estimates.md

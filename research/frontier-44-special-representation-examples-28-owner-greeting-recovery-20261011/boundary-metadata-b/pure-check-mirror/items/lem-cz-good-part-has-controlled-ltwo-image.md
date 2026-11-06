@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cz-good-part-has-controlled-ltwo-image.md

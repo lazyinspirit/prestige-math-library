@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-direct-integral-of-a-constant-hilbert-field.md

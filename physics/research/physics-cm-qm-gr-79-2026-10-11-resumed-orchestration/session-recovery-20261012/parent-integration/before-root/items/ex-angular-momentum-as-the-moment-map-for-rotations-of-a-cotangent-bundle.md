@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle.md

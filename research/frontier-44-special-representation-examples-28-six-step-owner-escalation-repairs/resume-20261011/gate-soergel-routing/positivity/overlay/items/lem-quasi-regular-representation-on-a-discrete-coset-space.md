@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quasi-regular-representation-on-a-discrete-coset-space.md

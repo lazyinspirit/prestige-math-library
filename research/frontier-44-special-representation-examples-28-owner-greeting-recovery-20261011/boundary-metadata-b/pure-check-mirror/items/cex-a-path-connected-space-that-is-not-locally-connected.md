@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-path-connected-space-that-is-not-locally-connected.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-surface-complete-equicharacteristic-finite-integral-closure.md

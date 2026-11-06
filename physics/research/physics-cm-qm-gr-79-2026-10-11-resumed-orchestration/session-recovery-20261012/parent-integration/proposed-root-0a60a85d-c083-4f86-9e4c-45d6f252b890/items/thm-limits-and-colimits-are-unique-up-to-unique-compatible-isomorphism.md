@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism.md

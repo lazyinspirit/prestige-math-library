@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-half-plane-bergman-kernel-by-mobius-transport.md

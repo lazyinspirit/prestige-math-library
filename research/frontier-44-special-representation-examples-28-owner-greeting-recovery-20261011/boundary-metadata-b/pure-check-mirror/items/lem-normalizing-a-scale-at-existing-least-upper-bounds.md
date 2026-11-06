@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-normalizing-a-scale-at-existing-least-upper-bounds.md

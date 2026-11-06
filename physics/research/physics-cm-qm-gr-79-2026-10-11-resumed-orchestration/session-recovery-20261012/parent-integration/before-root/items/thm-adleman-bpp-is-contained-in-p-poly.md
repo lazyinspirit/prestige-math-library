@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-adleman-bpp-is-contained-in-p-poly.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-serial-relation-successor-sets-are-open-dense.md

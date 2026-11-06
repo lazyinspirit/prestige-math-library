@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cographs-are-exactly-the-p-four-free-graphs.md

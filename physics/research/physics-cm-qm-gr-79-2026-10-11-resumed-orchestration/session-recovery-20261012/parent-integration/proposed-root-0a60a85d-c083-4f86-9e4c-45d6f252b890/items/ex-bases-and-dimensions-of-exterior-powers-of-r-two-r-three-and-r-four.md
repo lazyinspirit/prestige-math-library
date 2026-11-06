@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-bases-and-dimensions-of-exterior-powers-of-r-two-r-three-and-r-four.md

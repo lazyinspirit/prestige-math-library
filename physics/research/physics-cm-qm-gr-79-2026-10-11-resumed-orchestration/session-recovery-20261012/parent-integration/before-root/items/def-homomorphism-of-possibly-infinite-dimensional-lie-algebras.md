@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-homomorphism-of-possibly-infinite-dimensional-lie-algebras.md

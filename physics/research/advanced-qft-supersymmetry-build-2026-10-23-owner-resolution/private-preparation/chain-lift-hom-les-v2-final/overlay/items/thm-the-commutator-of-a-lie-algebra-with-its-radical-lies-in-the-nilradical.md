@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-commutator-of-a-lie-algebra-with-its-radical-lies-in-the-nilradical.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-harish-chandra-projection-computes-highest-weight-scalars.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-pushforward-qc-needs-quasi-separated.md

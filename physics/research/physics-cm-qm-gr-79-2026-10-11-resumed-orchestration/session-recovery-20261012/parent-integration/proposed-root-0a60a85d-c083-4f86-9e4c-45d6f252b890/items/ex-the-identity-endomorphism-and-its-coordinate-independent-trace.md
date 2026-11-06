@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-identity-endomorphism-and-its-coordinate-independent-trace.md

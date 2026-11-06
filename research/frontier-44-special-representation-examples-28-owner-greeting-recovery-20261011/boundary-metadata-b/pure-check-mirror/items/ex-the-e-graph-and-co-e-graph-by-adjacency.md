@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-e-graph-and-co-e-graph-by-adjacency.md

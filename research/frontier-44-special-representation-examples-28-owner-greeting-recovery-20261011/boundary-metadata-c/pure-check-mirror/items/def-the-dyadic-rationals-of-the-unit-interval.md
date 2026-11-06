@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-the-dyadic-rationals-of-the-unit-interval.md

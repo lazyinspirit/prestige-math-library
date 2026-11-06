@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-horseshoe-kernel-fits-a-short-exact-sequence.md

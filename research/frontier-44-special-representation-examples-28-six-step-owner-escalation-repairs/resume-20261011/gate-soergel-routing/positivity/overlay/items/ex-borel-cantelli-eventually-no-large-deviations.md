@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-borel-cantelli-eventually-no-large-deviations.md

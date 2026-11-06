@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-characteristic-class-constructions-and-normalizations-are-at-owned.md

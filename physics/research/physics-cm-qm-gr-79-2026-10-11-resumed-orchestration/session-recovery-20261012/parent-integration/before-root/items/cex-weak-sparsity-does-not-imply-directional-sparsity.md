@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-weak-sparsity-does-not-imply-directional-sparsity.md

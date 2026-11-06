@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-co-bird-free-edge-plus-isolate-witness-obstruction.md

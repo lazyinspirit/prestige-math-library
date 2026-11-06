@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-uct-as-a-two-column-spectral-sequence-over-the-integers.md

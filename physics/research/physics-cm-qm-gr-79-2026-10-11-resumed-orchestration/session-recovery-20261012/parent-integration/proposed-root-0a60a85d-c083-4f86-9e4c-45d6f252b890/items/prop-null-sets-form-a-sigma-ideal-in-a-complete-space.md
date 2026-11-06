@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-null-sets-form-a-sigma-ideal-in-a-complete-space.md

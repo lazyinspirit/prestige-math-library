@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-inward-pointing-field-with-no-negative-time-flow-in-the-half-line.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-catastrophic-cancellation-and-a-stable-reformulation.md

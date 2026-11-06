@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-affine-finite-field-hashes-are-pairwise-independent.md

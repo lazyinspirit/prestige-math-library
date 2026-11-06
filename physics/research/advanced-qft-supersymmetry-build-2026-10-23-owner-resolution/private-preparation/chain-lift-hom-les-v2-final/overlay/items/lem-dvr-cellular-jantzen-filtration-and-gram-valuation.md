@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dvr-cellular-jantzen-filtration-and-gram-valuation.md

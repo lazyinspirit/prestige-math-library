@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-sigma-k-equals-pi-k-implies-ph-collapse.md

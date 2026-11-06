@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic.md

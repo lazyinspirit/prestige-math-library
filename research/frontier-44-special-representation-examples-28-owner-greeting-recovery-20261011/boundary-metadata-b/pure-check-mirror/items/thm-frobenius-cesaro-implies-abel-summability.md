@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-frobenius-cesaro-implies-abel-summability.md

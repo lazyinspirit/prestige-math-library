@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-curvilinear-triangulation-induces-a-finite-cw-structure.md

@@ -6,7 +6,7 @@ import { TRACKS } from './music.mjs';
 import { GraphStore } from './graph-store.mjs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
-import { REPO, katexCandidates } from '../tools/paths.mjs';
+import { REPO, katexCandidates } from './runtime-paths.mjs';
 
 const port = Number(process.env.PORT ?? 8080);
 const store = await new GraphStore(process.env.GALAXY_CONTENT_DIR ?? REPO).start();

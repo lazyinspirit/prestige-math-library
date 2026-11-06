@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-affine-a-one-double-edge-serre-cancellation-on-partitions.md

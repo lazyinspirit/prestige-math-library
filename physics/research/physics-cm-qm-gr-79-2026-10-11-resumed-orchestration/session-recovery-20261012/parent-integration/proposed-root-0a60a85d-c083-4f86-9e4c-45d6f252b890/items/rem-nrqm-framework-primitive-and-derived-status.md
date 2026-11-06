@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-nrqm-framework-primitive-and-derived-status.md

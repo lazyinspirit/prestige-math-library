@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-bessel-is-strict-for-a-proper-orthonormal-set.md

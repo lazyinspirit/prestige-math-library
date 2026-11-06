@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-modular-decomposition-of-a-blown-up-five-cycle.md

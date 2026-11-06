@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-outward-unit-normal-at-a-boundary-point-of-a-compact-solid.md

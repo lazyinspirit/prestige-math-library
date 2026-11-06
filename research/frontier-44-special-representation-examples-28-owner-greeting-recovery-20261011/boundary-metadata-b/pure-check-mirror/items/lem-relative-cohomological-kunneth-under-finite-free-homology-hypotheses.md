@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses.md

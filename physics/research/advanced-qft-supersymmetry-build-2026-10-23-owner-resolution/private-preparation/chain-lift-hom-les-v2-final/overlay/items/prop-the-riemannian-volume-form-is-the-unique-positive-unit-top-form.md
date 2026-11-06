@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-riemannian-volume-form-is-the-unique-positive-unit-top-form.md

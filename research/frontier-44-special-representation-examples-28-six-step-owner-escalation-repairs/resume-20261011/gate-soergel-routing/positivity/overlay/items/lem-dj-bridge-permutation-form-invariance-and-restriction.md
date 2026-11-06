@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-dj-bridge-permutation-form-invariance-and-restriction.md

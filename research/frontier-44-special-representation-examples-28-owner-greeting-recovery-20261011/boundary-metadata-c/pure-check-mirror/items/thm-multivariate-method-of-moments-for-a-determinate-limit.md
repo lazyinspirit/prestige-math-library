@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-multivariate-method-of-moments-for-a-determinate-limit.md

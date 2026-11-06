@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-graded-dual-numbers-cartan-polynomial.md

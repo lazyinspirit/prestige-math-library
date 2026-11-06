@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximal-tori-exist-in-compact-lie-groups.md

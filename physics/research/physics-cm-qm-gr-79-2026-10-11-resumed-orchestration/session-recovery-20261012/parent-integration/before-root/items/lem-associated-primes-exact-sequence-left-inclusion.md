@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-associated-primes-exact-sequence-left-inclusion.md

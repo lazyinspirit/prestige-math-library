@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-harmonic-conjugates-differ-by-a-real-constant.md

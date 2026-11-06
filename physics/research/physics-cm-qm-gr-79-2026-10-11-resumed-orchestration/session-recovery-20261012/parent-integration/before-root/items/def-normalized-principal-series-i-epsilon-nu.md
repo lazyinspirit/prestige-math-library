@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-normalized-principal-series-i-epsilon-nu.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hodge-star-in-dimensions-two-three-and-four.md

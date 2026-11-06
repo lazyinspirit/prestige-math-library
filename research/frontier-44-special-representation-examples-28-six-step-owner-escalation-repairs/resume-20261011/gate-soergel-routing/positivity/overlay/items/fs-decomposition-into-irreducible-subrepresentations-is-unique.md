@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-decomposition-into-irreducible-subrepresentations-is-unique.md

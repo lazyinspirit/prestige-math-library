@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuity-into-an-inverse-limit-is-coordinatewise.md

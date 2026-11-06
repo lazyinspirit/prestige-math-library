@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-p-four-free-pattern-graphs-have-square-root-homogeneous-sets.md

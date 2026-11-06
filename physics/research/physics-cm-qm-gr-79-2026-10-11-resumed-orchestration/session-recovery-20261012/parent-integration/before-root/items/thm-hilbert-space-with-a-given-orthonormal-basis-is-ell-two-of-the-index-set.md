@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set.md

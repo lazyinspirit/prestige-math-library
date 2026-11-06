@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-naturality-normalization-and-whitney-sum-for-chern-classes.md

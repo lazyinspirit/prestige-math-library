@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-components-of-a-topological-manifold-are-open-and-at-most-countable.md

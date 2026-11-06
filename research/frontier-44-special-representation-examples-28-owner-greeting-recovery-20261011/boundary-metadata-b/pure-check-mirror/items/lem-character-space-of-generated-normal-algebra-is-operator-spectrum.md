@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-character-space-of-generated-normal-algebra-is-operator-spectrum.md

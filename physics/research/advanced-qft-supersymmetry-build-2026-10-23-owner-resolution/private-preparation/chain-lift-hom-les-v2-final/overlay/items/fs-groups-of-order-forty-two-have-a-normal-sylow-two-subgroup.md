@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-groups-of-order-forty-two-have-a-normal-sylow-two-subgroup.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-immersion-koszul-ext-sheaf.md

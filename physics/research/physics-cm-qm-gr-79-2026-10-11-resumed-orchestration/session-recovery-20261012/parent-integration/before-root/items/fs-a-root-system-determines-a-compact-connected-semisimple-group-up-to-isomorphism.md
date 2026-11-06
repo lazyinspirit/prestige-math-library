@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-root-system-determines-a-compact-connected-semisimple-group-up-to-isomorphism.md

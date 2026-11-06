@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-whitney-type-ball-cover-of-a-proper-open-set.md

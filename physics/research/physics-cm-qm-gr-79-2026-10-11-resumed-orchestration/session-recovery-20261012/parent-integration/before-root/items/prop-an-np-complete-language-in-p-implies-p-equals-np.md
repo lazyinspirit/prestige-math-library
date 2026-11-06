@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-an-np-complete-language-in-p-implies-p-equals-np.md

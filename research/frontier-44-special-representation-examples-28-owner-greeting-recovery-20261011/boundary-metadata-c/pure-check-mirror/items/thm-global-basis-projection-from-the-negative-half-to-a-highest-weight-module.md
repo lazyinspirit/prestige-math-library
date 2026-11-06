@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-global-basis-projection-from-the-negative-half-to-a-highest-weight-module.md

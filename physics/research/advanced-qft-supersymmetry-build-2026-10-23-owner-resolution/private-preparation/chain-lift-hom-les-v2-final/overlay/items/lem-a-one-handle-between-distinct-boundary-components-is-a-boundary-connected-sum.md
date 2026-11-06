@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-one-handle-between-distinct-boundary-components-is-a-boundary-connected-sum.md

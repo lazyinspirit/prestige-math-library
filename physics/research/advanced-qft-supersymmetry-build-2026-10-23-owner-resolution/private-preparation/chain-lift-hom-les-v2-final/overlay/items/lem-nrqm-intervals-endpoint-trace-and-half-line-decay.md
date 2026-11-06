@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-nrqm-intervals-endpoint-trace-and-half-line-decay.md

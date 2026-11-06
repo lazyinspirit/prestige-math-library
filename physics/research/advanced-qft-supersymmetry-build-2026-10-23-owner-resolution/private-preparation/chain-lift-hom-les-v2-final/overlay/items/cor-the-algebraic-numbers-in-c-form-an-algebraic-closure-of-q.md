@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-algebraic-numbers-in-c-form-an-algebraic-closure-of-q.md

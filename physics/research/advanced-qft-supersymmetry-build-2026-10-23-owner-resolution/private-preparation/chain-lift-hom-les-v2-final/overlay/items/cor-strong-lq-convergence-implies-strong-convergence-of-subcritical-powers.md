@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-strong-lq-convergence-implies-strong-convergence-of-subcritical-powers.md

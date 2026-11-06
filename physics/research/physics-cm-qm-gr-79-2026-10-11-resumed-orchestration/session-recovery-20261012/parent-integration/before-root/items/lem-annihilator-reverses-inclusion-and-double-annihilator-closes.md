@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-annihilator-reverses-inclusion-and-double-annihilator-closes.md

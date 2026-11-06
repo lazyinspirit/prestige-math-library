@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-plane-star-shaped-and-convex-dictionary.md

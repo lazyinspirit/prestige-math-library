@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-two-large-anticonnected-components-give-a-complete-two-blockade.md

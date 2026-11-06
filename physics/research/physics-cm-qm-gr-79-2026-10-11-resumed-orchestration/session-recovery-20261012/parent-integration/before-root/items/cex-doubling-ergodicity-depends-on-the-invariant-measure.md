@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-doubling-ergodicity-depends-on-the-invariant-measure.md

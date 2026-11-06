@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-riemann-zeta-continuation-to-the-right-half-plane.md

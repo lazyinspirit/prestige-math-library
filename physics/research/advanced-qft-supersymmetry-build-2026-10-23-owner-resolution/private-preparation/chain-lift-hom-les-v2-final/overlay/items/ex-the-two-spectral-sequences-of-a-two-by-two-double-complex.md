@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-two-spectral-sequences-of-a-two-by-two-double-complex.md

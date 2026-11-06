@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fitting-subgroup-is-largest-normal-nilpotent-subgroup.md

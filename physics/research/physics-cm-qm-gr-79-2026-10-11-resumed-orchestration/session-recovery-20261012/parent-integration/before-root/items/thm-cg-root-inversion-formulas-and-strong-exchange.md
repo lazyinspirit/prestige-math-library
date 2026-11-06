@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cg-root-inversion-formulas-and-strong-exchange.md

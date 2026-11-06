@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simple-reflections-preserve-weight-multiplicities.md

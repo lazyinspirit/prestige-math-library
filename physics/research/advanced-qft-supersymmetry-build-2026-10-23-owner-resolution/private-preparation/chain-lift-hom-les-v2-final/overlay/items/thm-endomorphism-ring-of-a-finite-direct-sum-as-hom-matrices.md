@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-endomorphism-ring-of-a-finite-direct-sum-as-hom-matrices.md

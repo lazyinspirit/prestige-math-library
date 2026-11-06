@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-zero-cocycles-in-the-hom-complex-are-chain-maps.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-savitch-stores-the-whole-configuration-graph.md

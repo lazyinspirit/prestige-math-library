@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gradient-flow-on-the-torus-morse-function.md

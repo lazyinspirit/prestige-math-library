@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-seven-generators-of-the-borel-sigma-algebra-on-r.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-conjugacy-in-a-free-group-by-cyclic-reduction.md

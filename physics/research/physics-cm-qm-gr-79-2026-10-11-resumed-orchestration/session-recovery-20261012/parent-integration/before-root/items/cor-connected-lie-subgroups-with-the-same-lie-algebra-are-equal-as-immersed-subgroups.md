@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-connected-lie-subgroups-with-the-same-lie-algebra-are-equal-as-immersed-subgroups.md

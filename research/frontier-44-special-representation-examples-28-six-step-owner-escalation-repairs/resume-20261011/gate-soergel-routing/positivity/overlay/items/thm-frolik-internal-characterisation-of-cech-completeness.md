@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-frolik-internal-characterisation-of-cech-completeness.md

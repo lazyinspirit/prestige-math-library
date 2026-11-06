@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-fitting-subgroup-contains-its-centralizer-in-a-finite-solvable-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-zf-countable-family-of-pairs-without-choice.md

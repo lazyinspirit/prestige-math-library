@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-discrete-sequence-spaces-are-complete-in-zf.md

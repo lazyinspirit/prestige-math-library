@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-group-actions-and-group-ring-modules-correspond.md

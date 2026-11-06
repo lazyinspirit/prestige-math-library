@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-prime-spectrum-set-of-a-product-ring.md

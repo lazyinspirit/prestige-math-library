@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-reflexivity-of-lp-for-one-less-p-less-infinity.md

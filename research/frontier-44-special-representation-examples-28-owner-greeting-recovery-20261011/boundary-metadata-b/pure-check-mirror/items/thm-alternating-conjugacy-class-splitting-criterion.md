@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-alternating-conjugacy-class-splitting-criterion.md

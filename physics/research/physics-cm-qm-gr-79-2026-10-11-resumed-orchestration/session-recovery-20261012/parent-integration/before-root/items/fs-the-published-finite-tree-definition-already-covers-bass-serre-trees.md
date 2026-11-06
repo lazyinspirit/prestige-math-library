@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-published-finite-tree-definition-already-covers-bass-serre-trees.md

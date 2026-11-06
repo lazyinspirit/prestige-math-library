@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-propagation-for-scalar-conservation-laws.md

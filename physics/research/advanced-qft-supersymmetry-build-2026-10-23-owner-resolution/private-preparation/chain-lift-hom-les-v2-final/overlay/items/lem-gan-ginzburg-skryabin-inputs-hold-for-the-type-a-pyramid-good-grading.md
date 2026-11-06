@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-gan-ginzburg-skryabin-inputs-hold-for-the-type-a-pyramid-good-grading.md

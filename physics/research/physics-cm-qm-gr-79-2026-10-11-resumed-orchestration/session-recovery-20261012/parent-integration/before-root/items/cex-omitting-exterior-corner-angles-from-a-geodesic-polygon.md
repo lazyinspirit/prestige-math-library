@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-omitting-exterior-corner-angles-from-a-geodesic-polygon.md

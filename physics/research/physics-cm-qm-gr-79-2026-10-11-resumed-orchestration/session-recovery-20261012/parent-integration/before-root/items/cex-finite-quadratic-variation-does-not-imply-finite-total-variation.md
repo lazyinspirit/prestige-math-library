@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-finite-quadratic-variation-does-not-imply-finite-total-variation.md

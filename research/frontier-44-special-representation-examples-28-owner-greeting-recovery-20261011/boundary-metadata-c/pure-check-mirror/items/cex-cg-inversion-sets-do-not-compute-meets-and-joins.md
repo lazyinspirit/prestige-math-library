@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-cg-inversion-sets-do-not-compute-meets-and-joins.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-shift-operator-and-future-coordinate-sigma-algebra.md

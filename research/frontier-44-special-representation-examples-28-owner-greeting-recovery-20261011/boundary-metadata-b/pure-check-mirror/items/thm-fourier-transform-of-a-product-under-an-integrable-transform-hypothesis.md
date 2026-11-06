@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fourier-transform-of-a-product-under-an-integrable-transform-hypothesis.md

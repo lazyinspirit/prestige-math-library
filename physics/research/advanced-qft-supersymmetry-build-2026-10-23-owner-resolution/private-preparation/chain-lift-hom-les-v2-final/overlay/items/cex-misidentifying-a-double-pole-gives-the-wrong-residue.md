@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-misidentifying-a-double-pole-gives-the-wrong-residue.md

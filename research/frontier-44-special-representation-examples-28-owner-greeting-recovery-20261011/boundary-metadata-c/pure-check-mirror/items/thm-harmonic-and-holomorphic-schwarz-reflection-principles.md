@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-harmonic-and-holomorphic-schwarz-reflection-principles.md

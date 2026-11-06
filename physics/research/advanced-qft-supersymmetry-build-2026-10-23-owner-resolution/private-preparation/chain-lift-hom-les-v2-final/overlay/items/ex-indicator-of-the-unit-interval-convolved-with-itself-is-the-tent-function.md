@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-indicator-of-the-unit-interval-convolved-with-itself-is-the-tent-function.md

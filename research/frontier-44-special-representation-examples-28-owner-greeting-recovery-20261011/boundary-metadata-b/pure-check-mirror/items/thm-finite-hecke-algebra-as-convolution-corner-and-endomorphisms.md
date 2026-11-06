@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-hecke-algebra-as-convolution-corner-and-endomorphisms.md

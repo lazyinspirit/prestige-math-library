@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-weighted-norm-of-an-interval-indicator.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-charpit-flow-preserves-the-pde-constraint.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-box-step-functions-are-dense-in-l-p-of-rn.md

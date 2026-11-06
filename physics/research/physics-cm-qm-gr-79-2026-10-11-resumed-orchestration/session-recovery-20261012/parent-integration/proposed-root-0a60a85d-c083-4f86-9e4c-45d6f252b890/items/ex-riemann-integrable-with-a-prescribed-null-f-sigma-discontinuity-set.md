@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-riemann-integrable-with-a-prescribed-null-f-sigma-discontinuity-set.md

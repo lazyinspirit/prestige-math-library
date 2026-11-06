@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rsk-union-bound-localizes-plancherel-profiles.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-monoidal-category-equivalent-to-a-strict-one-satisfies-coherence.md

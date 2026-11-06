@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-margulis-family-is-constant-degree-and-neighbor-computable.md

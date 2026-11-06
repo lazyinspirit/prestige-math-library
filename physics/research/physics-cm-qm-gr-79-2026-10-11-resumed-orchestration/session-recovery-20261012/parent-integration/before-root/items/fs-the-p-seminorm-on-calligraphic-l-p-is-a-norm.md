@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-p-seminorm-on-calligraphic-l-p-is-a-norm.md

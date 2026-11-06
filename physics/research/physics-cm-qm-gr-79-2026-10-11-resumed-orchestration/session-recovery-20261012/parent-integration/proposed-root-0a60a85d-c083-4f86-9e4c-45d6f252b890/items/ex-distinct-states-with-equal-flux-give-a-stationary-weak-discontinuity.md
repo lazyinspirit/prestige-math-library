@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-distinct-states-with-equal-flux-give-a-stationary-weak-discontinuity.md

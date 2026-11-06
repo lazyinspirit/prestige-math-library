@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-dimension-of-the-kth-exterior-power-is-binomial.md

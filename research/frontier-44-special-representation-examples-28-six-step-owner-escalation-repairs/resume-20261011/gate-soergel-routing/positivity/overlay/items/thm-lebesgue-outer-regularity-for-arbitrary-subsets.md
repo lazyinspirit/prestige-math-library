@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lebesgue-outer-regularity-for-arbitrary-subsets.md

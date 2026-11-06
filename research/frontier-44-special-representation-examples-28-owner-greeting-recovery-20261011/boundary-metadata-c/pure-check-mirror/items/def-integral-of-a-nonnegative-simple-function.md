@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-integral-of-a-nonnegative-simple-function.md

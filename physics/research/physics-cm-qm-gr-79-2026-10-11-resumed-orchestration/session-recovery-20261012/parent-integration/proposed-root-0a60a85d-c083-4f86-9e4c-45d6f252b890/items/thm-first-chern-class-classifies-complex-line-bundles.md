@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-first-chern-class-classifies-complex-line-bundles.md

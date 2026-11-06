@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension.md

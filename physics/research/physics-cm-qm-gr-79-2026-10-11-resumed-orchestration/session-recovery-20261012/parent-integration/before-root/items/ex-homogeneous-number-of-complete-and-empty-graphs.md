@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-homogeneous-number-of-complete-and-empty-graphs.md

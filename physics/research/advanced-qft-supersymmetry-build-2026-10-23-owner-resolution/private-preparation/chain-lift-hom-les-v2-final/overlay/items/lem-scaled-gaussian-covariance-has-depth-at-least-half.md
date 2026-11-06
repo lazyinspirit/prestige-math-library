@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-scaled-gaussian-covariance-has-depth-at-least-half.md

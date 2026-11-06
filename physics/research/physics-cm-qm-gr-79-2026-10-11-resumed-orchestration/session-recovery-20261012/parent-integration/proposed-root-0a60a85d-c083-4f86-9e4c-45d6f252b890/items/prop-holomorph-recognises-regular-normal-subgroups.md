@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-holomorph-recognises-regular-normal-subgroups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cm-quaternion-lift-of-a-prescribed-body-angular-velocity.md

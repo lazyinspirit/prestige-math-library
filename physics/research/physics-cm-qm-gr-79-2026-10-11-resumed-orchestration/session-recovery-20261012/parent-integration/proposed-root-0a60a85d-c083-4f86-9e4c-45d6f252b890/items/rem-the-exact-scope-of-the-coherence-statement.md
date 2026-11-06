@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-exact-scope-of-the-coherence-statement.md

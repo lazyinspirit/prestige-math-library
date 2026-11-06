@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations.md

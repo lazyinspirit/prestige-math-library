@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-sobolev-algebra-above-the-critical-index.md

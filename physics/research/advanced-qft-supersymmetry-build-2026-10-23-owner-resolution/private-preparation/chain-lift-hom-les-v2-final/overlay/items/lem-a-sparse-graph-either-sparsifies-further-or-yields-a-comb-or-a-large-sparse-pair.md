@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-sparse-graph-either-sparsifies-further-or-yields-a-comb-or-a-large-sparse-pair.md

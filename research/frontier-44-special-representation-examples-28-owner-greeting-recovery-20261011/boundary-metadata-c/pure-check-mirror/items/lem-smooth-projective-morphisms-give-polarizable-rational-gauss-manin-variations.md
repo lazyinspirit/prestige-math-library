@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-projective-morphisms-give-polarizable-rational-gauss-manin-variations.md

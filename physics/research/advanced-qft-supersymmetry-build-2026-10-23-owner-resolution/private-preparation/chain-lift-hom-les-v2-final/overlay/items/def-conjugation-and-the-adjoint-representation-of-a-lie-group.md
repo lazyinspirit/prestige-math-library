@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-conjugation-and-the-adjoint-representation-of-a-lie-group.md

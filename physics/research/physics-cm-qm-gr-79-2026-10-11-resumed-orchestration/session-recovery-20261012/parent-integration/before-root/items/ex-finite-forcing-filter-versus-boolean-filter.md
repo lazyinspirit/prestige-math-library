@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finite-forcing-filter-versus-boolean-filter.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-self-adjointness-cannot-be-dropped-from-the-order-calculus.md

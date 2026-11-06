@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-complex-stratified-morse-data-have-tangential-normal-product-and-link-description.md

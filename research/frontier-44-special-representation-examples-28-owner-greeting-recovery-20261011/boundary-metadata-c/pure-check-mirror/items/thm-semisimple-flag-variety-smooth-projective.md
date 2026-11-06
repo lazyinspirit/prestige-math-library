@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-semisimple-flag-variety-smooth-projective.md

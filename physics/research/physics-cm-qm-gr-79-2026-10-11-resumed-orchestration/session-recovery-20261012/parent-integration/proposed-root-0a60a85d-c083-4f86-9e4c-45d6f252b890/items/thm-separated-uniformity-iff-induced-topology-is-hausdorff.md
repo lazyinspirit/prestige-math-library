@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-separated-uniformity-iff-induced-topology-is-hausdorff.md

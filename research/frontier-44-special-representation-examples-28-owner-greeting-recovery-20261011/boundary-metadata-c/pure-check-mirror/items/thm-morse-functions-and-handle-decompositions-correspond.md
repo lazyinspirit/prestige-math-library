@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-morse-functions-and-handle-decompositions-correspond.md

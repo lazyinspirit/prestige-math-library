@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-linear-bijection-need-not-preserve-jordan-content.md

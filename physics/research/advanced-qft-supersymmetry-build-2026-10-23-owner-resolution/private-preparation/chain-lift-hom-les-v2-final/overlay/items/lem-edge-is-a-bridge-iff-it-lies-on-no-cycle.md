@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-edge-is-a-bridge-iff-it-lies-on-no-cycle.md

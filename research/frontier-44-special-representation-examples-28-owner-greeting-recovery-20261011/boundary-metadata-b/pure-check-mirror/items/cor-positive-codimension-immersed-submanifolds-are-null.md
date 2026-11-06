@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-positive-codimension-immersed-submanifolds-are-null.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-degree-of-a-proper-map-is-the-number-of-points-in-a-regular-fibre.md

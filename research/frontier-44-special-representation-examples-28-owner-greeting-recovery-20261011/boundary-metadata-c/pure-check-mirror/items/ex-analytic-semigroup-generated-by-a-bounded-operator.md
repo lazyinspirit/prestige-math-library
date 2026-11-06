@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-analytic-semigroup-generated-by-a-bounded-operator.md

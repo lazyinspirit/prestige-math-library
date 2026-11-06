@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-zariski-main-open-immersion-factorization-classical.md

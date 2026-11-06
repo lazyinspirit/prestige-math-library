@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-locally-integrable-function-can-fail-to-differentiate-on-a-null-set.md

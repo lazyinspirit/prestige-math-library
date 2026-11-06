@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-monotone-paths-weakly-below-the-diagonal-are-half-of-all-monotone-paths.md

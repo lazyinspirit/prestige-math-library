@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-c-c-of-rn-is-dense-in-l-infinity-of-rn.md

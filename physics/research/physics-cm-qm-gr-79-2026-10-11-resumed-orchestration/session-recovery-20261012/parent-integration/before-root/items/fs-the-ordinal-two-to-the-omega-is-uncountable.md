@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-ordinal-two-to-the-omega-is-uncountable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-projective-object-has-a-length-zero-projective-resolution.md

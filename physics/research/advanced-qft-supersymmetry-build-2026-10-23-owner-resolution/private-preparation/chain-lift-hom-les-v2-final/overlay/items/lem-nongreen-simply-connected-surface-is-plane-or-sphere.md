@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-nongreen-simply-connected-surface-is-plane-or-sphere.md

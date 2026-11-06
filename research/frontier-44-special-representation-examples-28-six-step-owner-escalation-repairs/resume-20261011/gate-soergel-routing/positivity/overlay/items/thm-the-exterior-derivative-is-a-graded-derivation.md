@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-exterior-derivative-is-a-graded-derivation.md

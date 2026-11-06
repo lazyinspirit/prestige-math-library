@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-derivative-is-independent-of-lp-representatives.md

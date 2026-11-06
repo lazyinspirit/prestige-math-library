@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-root-complex-convex-cones-and-facet-induction.md

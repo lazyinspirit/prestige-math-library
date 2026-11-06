@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-localisation-of-a-graded-ring-at-a-homogeneous-element.md

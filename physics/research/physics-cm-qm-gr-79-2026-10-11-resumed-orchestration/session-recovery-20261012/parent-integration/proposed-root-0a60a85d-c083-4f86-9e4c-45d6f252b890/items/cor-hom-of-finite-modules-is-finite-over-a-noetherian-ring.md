@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-hom-of-finite-modules-is-finite-over-a-noetherian-ring.md

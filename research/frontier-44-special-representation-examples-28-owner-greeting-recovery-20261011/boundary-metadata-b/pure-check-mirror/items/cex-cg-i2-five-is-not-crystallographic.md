@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-cg-i2-five-is-not-crystallographic.md

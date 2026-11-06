@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-quiver-full-flag-pushforwards-are-semisimple-in-characteristic-zero.md

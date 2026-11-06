@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-monic-polynomial-capacity-lower-bound.md

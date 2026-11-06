@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames.md

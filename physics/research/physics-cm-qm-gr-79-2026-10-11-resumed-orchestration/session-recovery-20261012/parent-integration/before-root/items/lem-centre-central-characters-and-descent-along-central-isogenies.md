@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-centre-central-characters-and-descent-along-central-isogenies.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-wallis-integrals-recurrence-and-squeeze.md

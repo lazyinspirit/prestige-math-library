@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cap-duality-for-open-subsets-of-euclidean-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-orientation-reversal-preserves-area-and-negates-flux.md

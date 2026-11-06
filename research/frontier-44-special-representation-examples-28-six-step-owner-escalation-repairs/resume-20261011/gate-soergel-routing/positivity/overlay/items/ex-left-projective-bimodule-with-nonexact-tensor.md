@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-left-projective-bimodule-with-nonexact-tensor.md

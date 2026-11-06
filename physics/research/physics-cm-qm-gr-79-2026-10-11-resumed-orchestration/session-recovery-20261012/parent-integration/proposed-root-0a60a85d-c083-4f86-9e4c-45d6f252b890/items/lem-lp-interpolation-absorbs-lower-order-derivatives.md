@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lp-interpolation-absorbs-lower-order-derivatives.md

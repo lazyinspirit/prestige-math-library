@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-no-claim-of-resolution-in-positive-characteristic.md

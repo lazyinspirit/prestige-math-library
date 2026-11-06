@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-eigenbasis-expansion-in-the-form-norm.md

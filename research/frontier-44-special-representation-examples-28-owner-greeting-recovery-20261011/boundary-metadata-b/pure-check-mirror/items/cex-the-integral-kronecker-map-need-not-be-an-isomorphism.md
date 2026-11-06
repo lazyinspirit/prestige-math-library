@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-integral-kronecker-map-need-not-be-an-isomorphism.md

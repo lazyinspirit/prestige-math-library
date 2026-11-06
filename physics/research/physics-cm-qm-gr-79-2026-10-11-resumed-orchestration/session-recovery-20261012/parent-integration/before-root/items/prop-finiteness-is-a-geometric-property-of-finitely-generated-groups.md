@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-finiteness-is-a-geometric-property-of-finitely-generated-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-global-bases-specialize-to-integral-weight-bases.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-singular-cochain-is-a-finite-linear-combination-of-singular-simplices.md

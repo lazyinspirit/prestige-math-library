@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-generalized-jm-primary-idempotents-and-residue-summand-functors.md

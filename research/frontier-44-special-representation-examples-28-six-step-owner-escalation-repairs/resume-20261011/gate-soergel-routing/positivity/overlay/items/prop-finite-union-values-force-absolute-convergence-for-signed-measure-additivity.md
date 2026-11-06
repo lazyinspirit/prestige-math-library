@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-finite-union-values-force-absolute-convergence-for-signed-measure-additivity.md

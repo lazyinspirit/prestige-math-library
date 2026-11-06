@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf.md

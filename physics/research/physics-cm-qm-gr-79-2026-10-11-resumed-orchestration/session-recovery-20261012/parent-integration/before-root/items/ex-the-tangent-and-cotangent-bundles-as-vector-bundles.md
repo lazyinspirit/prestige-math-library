@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-tangent-and-cotangent-bundles-as-vector-bundles.md

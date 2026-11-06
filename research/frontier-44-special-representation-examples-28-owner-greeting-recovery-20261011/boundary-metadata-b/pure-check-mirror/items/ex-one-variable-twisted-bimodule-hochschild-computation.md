@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-one-variable-twisted-bimodule-hochschild-computation.md

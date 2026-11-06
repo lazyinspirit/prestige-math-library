@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-ltwo-atoms-have-uniform-hone-quasinorm.md

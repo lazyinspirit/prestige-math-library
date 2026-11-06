@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-integration-of-top-forms-by-finite-parametrizations.md

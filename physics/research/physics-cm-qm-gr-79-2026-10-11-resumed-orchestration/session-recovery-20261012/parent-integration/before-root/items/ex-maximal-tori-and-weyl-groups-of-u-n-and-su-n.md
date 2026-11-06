@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-maximal-tori-and-weyl-groups-of-u-n-and-su-n.md

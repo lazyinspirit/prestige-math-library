@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds.md

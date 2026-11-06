@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-cellularity-does-not-make-every-cell-module-simple.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-diagonal-operator-on-ell-p-is-compact-iff-diagonal-tends-to-zero.md

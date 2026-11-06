@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cartesian-closed-preorders-have-relative-implications.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-proper-module-of-a-connected-graph-has-a-complete-neighbour.md

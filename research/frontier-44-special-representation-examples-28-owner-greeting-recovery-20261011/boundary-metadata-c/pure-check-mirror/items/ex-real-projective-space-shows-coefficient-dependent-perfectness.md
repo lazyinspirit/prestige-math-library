@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-real-projective-space-shows-coefficient-dependent-perfectness.md

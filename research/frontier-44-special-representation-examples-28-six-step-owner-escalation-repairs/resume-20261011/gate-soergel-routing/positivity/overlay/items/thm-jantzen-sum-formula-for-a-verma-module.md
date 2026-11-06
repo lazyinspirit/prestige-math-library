@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-jantzen-sum-formula-for-a-verma-module.md

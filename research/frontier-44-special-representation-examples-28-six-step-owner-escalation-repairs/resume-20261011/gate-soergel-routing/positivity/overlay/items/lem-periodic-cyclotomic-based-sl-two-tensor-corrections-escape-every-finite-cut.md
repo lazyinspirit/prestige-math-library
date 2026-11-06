@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-periodic-cyclotomic-based-sl-two-tensor-corrections-escape-every-finite-cut.md

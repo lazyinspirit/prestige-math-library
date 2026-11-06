@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-three-connected-graph-has-a-contractible-edge.md

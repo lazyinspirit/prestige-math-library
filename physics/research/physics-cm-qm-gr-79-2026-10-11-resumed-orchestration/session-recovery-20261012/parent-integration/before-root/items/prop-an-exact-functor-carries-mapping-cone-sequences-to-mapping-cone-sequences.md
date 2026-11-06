@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-an-exact-functor-carries-mapping-cone-sequences-to-mapping-cone-sequences.md

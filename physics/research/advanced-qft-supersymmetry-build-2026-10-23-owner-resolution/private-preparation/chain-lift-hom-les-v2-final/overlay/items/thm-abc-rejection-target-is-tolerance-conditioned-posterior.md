@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-abc-rejection-target-is-tolerance-conditioned-posterior.md

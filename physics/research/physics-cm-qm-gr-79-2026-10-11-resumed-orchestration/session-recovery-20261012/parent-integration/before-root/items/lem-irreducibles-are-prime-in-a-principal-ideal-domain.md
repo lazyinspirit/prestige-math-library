@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-irreducibles-are-prime-in-a-principal-ideal-domain.md

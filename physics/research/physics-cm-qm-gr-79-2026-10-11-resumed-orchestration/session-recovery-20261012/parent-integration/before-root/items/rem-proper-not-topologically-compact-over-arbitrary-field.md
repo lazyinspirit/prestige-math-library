@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-proper-not-topologically-compact-over-arbitrary-field.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-pi-is-the-first-positive-sine-zero.md

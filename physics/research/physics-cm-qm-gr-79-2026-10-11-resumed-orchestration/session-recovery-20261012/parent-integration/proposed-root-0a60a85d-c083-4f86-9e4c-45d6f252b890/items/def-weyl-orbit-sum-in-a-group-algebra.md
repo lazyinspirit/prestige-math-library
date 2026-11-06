@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-weyl-orbit-sum-in-a-group-algebra.md

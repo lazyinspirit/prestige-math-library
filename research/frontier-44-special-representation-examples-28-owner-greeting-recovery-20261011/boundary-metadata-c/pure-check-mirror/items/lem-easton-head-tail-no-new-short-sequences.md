@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-easton-head-tail-no-new-short-sequences.md

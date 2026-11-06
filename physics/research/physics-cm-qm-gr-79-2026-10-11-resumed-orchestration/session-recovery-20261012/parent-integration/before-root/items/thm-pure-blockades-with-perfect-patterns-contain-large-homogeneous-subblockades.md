@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pure-blockades-with-perfect-patterns-contain-large-homogeneous-subblockades.md

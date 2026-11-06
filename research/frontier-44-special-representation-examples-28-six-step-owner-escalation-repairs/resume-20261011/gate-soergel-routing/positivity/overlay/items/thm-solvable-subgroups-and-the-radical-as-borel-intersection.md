@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-solvable-subgroups-and-the-radical-as-borel-intersection.md

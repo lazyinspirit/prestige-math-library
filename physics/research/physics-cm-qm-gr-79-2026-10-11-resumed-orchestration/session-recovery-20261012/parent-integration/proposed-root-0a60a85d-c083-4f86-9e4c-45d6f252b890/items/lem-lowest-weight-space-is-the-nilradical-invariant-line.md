@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lowest-weight-space-is-the-nilradical-invariant-line.md

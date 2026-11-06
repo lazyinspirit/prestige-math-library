@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions.md

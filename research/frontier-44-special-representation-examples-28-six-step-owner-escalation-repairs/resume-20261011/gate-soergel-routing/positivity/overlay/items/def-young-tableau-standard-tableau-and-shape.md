@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-young-tableau-standard-tableau-and-shape.md

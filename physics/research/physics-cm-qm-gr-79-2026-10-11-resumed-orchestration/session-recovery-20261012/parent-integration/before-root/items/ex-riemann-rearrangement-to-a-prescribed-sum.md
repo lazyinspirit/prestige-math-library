@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-riemann-rearrangement-to-a-prescribed-sum.md

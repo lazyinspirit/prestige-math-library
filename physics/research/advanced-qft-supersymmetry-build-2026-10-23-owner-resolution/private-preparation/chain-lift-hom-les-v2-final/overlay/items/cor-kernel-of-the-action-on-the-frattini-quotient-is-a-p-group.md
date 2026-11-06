@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-kernel-of-the-action-on-the-frattini-quotient-is-a-p-group.md

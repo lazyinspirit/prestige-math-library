@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-step-by-step-interpreter-for-machine-codes.md

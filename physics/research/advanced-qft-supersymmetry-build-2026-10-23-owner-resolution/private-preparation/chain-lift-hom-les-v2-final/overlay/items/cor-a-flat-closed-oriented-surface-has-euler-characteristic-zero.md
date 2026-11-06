@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero.md

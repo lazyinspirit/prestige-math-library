@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-exponential-map-of-a-lie-group-is-a-group-homomorphism.md

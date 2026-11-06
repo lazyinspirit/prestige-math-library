@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-finite-cofinite-set-function-is-not-a-premeasure.md

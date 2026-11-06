@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-closed-subset-of-a-compact-space-is-compact.md

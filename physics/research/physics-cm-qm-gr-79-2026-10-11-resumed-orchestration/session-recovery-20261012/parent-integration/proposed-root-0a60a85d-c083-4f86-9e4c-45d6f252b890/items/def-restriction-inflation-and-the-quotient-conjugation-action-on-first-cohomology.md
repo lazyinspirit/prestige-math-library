@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology.md

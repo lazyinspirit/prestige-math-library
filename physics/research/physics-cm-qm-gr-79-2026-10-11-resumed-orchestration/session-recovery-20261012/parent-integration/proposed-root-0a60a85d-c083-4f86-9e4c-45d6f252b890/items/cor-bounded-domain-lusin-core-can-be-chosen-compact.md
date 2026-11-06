@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-bounded-domain-lusin-core-can-be-chosen-compact.md

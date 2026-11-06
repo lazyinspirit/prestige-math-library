@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-general-modular-decomposition-numbers-are-not-determined-by-triangularity.md

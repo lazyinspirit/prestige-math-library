@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-two-sided-projective-khovanov-seidel-bimodule-functors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-l-two-operator-conventions-for-weak-mixing.md

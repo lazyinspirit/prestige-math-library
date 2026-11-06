@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-two-ext-long-exact-sequences-agree-under-balance.md

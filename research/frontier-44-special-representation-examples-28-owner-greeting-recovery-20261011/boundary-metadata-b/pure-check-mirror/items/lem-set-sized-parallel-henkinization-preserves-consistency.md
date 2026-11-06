@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-set-sized-parallel-henkinization-preserves-consistency.md

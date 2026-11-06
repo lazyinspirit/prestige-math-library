@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-generic-irreducibility-and-the-exceptional-parameter-lattice.md

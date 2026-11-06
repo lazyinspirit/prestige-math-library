@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-schubert-cells-in-real-and-complex-grassmannians.md

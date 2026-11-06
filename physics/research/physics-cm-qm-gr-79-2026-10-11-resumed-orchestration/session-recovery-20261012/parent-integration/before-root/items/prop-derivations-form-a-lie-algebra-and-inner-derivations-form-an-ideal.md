@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal.md

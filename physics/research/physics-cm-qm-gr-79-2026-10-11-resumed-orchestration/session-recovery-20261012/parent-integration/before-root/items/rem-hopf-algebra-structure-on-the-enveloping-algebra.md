@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-hopf-algebra-structure-on-the-enveloping-algebra.md

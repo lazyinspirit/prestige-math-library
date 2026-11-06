@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-caratheodory-domain-is-the-completion-under-sigma-finiteness.md

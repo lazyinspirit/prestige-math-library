@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-diagonalisability-requires-distinct-characteristic-roots.md

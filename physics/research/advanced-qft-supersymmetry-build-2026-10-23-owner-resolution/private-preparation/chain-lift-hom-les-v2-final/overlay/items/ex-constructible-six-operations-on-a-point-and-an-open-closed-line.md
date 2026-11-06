@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-constructible-six-operations-on-a-point-and-an-open-closed-line.md

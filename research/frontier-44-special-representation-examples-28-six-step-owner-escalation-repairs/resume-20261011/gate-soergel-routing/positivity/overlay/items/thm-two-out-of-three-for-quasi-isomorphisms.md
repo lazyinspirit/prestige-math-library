@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-two-out-of-three-for-quasi-isomorphisms.md

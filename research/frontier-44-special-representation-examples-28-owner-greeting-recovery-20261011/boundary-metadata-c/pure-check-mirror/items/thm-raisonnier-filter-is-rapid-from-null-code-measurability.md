@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-raisonnier-filter-is-rapid-from-null-code-measurability.md

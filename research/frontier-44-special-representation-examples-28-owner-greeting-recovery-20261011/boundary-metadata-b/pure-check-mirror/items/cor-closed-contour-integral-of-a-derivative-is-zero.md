@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-closed-contour-integral-of-a-derivative-is-zero.md

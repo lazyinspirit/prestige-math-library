@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-self-dual-shift-normalization-for-a-cyclotomic-projective.md

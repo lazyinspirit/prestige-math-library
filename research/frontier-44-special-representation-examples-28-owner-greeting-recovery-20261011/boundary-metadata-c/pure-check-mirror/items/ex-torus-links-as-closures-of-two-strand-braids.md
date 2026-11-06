@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-torus-links-as-closures-of-two-strand-braids.md

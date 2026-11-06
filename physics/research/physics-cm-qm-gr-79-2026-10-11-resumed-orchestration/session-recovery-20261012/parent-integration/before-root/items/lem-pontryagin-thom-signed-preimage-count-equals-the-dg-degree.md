@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pontryagin-thom-signed-preimage-count-equals-the-dg-degree.md

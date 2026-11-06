@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fibrewise-exact-flat-complex-lifts-noetherian-target.md

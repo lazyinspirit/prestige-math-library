@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-quasilinear-characteristics-can-cross-before-the-lifted-ode-blows-up.md

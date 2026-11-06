@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-henselian-pair-and-henselian-local-ring.md

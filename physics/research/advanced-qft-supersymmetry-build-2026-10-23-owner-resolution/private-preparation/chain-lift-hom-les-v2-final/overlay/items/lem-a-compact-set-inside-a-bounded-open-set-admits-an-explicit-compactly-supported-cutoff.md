@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff.md

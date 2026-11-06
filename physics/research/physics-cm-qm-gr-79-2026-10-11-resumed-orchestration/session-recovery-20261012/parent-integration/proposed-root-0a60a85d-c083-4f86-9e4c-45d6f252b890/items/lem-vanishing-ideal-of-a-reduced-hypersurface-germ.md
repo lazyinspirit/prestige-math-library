@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-vanishing-ideal-of-a-reduced-hypersurface-germ.md

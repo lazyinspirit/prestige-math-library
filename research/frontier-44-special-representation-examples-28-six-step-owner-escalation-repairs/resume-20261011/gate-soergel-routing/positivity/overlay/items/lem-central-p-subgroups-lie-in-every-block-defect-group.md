@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-central-p-subgroups-lie-in-every-block-defect-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-kac-moody-chamber-boundary-stabilizers.md

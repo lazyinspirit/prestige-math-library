@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-sparse-p-five-free-graph-with-an-anticomplete-two-blockade.md

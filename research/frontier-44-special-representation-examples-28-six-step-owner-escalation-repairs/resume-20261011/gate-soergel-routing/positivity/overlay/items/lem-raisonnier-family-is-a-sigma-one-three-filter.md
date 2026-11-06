@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-raisonnier-family-is-a-sigma-one-three-filter.md

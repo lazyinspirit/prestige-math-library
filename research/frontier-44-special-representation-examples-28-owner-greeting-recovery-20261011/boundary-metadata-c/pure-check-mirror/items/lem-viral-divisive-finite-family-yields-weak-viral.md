@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-viral-divisive-finite-family-yields-weak-viral.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-sine-period-arc-length-as-a-complete-elliptic-integral.md

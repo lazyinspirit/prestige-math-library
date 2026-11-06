@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-koszul-homology-of-a-zero-divisor.md

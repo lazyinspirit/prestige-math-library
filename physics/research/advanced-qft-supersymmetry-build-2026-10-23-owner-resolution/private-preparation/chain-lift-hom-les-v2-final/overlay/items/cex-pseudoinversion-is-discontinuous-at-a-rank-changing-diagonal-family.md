@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-pseudoinversion-is-discontinuous-at-a-rank-changing-diagonal-family.md

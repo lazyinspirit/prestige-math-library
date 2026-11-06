@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-surface-area-is-the-supremum-of-inscribed-polyhedral-areas.md

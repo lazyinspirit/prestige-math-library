@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-stabilizer-action-on-an-imprimitivity-fiber-is-unitary.md

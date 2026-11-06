@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-bigraded-matrix-factorization-with-potential.md

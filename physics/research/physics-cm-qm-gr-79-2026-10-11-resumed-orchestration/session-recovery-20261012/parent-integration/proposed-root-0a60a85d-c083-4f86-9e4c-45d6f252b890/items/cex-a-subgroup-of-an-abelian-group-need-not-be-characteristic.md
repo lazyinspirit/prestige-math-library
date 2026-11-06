@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-subgroup-of-an-abelian-group-need-not-be-characteristic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram.md

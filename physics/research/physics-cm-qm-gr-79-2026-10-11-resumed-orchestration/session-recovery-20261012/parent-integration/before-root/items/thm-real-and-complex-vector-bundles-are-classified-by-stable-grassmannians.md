@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians.md

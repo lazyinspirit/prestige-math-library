@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-klr-maximal-tail-restriction-and-induction-have-a-unique-simple-head.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-control-of-fusion-in-a-sylow-p-subgroup.md

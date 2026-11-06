@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-q-integer-q-factorial-and-q-multinomial.md

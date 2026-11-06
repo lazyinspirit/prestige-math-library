@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sr-boost-time-length-and-velocity-formulas.md

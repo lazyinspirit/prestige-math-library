@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-wild-arc-drawing-is-not-a-plane-graph.md

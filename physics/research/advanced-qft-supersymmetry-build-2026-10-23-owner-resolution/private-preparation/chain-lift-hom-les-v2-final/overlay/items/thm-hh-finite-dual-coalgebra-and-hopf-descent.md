@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hh-finite-dual-coalgebra-and-hopf-descent.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-prime-containing-an-ideal-avoiding-an-element.md

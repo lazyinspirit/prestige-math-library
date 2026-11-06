@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-logarithmic-ramsey-bound-is-not-an-erdos-hajnal-bound.md

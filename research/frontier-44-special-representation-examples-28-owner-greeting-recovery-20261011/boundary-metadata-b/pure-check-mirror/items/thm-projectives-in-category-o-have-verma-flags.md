@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-projectives-in-category-o-have-verma-flags.md

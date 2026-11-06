@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-frobenius-elements-above-a-prime-are-conjugate.md

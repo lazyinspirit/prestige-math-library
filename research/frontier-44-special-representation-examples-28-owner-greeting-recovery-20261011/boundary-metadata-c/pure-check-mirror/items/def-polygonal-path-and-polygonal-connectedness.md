@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-polygonal-path-and-polygonal-connectedness.md

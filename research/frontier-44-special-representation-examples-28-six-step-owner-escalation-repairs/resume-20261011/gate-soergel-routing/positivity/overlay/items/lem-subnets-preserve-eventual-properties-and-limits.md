@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-subnets-preserve-eventual-properties-and-limits.md

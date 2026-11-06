@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-x-times-dirichlet-is-continuous-exactly-at-zero.md

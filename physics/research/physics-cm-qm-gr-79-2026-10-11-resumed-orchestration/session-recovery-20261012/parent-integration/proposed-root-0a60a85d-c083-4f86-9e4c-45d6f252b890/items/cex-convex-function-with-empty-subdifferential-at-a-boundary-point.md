@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-convex-function-with-empty-subdifferential-at-a-boundary-point.md

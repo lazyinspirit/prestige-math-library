@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-lipschitz-ode-uniqueness-and-stability-estimate.md

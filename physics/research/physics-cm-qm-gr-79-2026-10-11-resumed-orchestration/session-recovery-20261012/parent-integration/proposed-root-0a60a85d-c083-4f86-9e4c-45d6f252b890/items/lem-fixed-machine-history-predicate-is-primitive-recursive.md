@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fixed-machine-history-predicate-is-primitive-recursive.md

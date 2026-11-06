@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point.md

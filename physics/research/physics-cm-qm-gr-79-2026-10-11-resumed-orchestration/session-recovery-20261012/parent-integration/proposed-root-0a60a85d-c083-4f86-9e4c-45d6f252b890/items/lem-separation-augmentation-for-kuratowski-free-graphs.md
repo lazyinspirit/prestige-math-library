@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-separation-augmentation-for-kuratowski-free-graphs.md

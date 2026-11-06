@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-inverting-a-quasi-isomorphism-by-a-reversed-roof.md

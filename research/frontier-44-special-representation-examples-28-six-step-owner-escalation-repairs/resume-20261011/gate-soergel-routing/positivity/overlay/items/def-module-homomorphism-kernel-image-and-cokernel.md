@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-module-homomorphism-kernel-image-and-cokernel.md

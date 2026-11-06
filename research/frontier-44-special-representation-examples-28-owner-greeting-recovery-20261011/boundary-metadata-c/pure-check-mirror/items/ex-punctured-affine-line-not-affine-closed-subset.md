@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-punctured-affine-line-not-affine-closed-subset.md

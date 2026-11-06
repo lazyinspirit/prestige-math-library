@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-homological-atiyah-hirzebruch-spectral-sequence.md

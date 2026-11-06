@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-noetherian-flatness-by-fibres-finite-target-module.md

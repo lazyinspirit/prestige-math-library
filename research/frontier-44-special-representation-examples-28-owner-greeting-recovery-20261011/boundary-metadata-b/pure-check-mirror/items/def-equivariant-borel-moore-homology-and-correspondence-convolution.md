@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-equivariant-borel-moore-homology-and-correspondence-convolution.md

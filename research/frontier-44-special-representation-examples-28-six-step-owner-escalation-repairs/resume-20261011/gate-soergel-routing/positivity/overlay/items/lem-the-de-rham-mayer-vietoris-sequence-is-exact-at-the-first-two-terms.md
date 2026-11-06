@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-de-rham-mayer-vietoris-sequence-is-exact-at-the-first-two-terms.md

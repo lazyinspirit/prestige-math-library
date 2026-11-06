@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-functor-between-additive-categories-preserving-finite-products-is-additive.md

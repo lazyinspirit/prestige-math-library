@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-cartesian-monoidal-structure-on-sets-computed.md

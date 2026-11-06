@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/op-periodic-three-dimensional-navier-stokes-global-regularity.md

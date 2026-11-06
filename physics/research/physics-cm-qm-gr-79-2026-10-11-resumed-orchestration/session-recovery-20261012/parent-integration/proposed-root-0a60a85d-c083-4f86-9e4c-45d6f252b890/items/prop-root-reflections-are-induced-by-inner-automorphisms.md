@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-root-reflections-are-induced-by-inner-automorphisms.md

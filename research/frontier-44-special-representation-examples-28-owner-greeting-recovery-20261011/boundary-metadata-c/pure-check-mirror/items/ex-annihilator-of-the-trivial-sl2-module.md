@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-annihilator-of-the-trivial-sl2-module.md

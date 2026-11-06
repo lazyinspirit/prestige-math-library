@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-naturality-of-the-singular-cohomology-pair-sequence.md

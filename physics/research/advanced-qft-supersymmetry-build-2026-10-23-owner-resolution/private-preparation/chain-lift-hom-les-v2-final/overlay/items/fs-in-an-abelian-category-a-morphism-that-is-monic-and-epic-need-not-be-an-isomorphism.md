@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-in-an-abelian-category-a-morphism-that-is-monic-and-epic-need-not-be-an-isomorphism.md

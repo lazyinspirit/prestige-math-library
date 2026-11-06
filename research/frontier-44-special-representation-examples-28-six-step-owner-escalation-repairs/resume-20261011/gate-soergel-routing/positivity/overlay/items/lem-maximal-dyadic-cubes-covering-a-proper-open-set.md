@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-maximal-dyadic-cubes-covering-a-proper-open-set.md

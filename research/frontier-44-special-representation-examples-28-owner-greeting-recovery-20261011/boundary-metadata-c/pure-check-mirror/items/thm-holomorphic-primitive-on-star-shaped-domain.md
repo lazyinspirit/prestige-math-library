@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-holomorphic-primitive-on-star-shaped-domain.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-oracle-machine-reads-the-infinite-oracle-at-once.md

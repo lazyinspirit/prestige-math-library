@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-hecke-polynomial-spectra-and-central-content-sectors.md

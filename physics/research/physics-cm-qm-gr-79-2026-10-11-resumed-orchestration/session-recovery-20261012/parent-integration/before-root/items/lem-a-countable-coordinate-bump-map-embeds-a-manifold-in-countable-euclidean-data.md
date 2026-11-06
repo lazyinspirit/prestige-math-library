@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-countable-coordinate-bump-map-embeds-a-manifold-in-countable-euclidean-data.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-subgroup-of-a-normal-subgroup-is-normal.md

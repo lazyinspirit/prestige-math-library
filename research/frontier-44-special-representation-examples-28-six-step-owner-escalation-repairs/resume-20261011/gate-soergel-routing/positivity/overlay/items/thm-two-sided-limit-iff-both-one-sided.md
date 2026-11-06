@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-two-sided-limit-iff-both-one-sided.md

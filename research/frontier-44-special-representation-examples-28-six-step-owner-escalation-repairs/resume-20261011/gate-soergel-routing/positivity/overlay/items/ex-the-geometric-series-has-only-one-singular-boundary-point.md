@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-geometric-series-has-only-one-singular-boundary-point.md

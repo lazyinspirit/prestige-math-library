@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-totient-of-a-gcd-and-of-a-least-common-multiple.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-series-and-absolute-convergence-in-a-normed-space.md

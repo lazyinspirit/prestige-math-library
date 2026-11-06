@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-triangulated-k-zero-of-khovanov-seidel-projectives.md

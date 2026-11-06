@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-affine-algebraic-action-embeds-equivariantly-in-finite-dimensional-module.md

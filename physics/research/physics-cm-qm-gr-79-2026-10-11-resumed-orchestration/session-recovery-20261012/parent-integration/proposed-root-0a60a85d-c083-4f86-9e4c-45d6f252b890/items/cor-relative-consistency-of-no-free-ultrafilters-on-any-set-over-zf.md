@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-relative-consistency-of-no-free-ultrafilters-on-any-set-over-zf.md

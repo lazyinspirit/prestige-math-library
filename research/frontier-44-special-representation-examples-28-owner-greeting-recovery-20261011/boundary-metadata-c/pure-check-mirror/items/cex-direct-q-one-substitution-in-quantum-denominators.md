@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-direct-q-one-substitution-in-quantum-denominators.md

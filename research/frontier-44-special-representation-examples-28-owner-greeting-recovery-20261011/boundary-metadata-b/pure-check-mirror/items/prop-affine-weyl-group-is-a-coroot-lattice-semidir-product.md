@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-affine-weyl-group-is-a-coroot-lattice-semidir-product.md

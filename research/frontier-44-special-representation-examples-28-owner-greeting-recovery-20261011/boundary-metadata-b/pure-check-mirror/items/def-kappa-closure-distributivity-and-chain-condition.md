@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-kappa-closure-distributivity-and-chain-condition.md

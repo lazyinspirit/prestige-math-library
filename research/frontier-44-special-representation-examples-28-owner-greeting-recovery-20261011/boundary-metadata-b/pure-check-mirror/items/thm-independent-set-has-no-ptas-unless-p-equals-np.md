@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-independent-set-has-no-ptas-unless-p-equals-np.md

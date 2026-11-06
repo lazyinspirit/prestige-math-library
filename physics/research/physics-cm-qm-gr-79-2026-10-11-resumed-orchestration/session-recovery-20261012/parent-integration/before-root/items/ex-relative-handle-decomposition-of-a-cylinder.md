@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-relative-handle-decomposition-of-a-cylinder.md

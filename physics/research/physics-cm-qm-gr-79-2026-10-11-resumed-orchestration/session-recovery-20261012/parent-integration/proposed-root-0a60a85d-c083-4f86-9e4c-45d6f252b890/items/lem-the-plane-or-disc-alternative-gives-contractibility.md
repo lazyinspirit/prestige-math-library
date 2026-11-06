@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-plane-or-disc-alternative-gives-contractibility.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-sequence-construction-of-a-combinatorial-class.md

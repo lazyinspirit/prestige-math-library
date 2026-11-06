@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-shapiro-lemma-and-induced-modules-are-acyclic.md

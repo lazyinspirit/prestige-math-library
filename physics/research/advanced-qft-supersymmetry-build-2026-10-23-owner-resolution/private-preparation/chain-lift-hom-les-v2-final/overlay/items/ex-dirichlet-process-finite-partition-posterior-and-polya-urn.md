@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-dirichlet-process-finite-partition-posterior-and-polya-urn.md

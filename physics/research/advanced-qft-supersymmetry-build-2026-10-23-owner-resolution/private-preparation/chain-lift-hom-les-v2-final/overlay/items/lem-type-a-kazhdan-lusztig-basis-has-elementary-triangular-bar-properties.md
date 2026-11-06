@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties.md

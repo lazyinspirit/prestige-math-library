@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-positive-radical-and-affine-gram-exclusions.md

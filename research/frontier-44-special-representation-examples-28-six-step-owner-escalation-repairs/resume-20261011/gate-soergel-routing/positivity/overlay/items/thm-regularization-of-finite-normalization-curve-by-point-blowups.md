@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-regularization-of-finite-normalization-curve-by-point-blowups.md

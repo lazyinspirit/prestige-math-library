@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-complementation-preserves-disjoint-regular-pairs.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-forest-and-complement-free-graphs-have-the-erdos-hajnal-property.md

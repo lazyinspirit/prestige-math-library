@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension.md

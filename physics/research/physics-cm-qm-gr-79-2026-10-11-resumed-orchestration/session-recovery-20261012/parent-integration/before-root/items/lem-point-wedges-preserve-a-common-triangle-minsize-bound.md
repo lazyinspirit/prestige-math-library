@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-point-wedges-preserve-a-common-triangle-minsize-bound.md

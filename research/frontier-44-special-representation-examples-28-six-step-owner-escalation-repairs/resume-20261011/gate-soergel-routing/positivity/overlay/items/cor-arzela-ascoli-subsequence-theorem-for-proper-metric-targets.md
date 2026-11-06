@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-enough-injectives-gives-injective-resolutions.md

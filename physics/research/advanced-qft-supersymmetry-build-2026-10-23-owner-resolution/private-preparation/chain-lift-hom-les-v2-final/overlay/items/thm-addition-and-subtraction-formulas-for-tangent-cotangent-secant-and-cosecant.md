@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-addition-and-subtraction-formulas-for-tangent-cotangent-secant-and-cosecant.md

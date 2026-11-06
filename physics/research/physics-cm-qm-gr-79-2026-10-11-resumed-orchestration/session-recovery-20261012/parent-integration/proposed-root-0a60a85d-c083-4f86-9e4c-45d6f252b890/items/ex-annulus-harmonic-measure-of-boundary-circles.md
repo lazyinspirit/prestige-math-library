@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-annulus-harmonic-measure-of-boundary-circles.md

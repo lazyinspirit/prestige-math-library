@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-l1-group-algebra-has-a-unit-iff-g-is-discrete.md

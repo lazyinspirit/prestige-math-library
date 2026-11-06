@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-relative-homology-vanishes-exactly-for-quasi-isomorphisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-faithful-flatness-detected-by-nonzero-modules-and-fibres.md

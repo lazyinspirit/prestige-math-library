@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-countable-decreasing-family-has-a-pseudointersection.md

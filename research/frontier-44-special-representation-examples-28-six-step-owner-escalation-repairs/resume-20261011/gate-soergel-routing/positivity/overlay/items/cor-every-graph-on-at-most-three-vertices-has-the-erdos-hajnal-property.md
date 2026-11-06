@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property.md

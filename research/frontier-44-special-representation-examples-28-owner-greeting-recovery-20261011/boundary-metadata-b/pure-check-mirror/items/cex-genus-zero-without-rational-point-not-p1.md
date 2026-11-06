@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-genus-zero-without-rational-point-not-p1.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-projective-hom-pairing-is-additive-and-graded-sesquilinear.md

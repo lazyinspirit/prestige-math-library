@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rudin-box-space-is-collectionwise-normal.md

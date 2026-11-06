@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonsingular-complex-algebraic-curve-holomorphic-charts.md

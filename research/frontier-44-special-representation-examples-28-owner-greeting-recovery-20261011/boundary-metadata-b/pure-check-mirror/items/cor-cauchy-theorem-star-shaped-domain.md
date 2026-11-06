@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-cauchy-theorem-star-shaped-domain.md

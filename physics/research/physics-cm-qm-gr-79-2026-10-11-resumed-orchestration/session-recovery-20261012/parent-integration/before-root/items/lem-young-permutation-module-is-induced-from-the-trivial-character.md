@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-young-permutation-module-is-induced-from-the-trivial-character.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-products-and-opposites-of-symplectic-manifolds.md

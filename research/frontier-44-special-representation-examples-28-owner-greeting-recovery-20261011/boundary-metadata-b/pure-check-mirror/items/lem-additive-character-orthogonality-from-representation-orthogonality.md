@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-additive-character-orthogonality-from-representation-orthogonality.md

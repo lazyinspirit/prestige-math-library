@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-stable-homotopy-colimit-is-independent-of-the-chosen-cofinal-tail.md

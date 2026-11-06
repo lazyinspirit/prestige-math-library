@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-uniform-moving-support-invalidates-naive-cramer-rao-bound.md

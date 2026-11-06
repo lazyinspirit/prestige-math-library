@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-exactness-of-kernel-and-cokernel-sequences-under-endpoint-hypotheses.md

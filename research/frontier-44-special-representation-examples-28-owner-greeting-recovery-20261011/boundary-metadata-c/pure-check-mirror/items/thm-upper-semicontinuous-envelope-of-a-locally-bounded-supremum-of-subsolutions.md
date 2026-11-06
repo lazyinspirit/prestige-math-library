@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-upper-semicontinuous-envelope-of-a-locally-bounded-supremum-of-subsolutions.md

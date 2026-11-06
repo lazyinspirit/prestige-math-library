@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-wave-tails-in-one-and-even-spatial-dimensions.md

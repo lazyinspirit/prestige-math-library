@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-state-elimination-has-a-unique-output-expression.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-pointwise-closure-preserves-equicontinuity.md

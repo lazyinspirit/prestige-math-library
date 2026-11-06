@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-complex-flag-splitting-over-smooth-bases-with-injective-real-pullback.md

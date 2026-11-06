@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-higher-dimensional-spheres-are-simply-connected.md

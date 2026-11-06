@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fractional-boundary-norm-is-independent-of-atlas.md

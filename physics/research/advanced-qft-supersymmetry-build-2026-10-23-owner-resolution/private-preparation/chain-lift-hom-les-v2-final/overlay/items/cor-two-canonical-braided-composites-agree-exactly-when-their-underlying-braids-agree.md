@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-two-canonical-braided-composites-agree-exactly-when-their-underlying-braids-agree.md

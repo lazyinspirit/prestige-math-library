@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-faithful-essential-pure-state-orbits-obstruct-countable-separation.md

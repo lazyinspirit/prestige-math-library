@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-skeletal-filtration-for-generalized-cohomology.md

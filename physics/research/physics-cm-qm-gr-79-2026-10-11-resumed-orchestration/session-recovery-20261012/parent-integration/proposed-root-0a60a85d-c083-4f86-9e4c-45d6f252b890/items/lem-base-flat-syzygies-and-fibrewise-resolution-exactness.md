@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-base-flat-syzygies-and-fibrewise-resolution-exactness.md

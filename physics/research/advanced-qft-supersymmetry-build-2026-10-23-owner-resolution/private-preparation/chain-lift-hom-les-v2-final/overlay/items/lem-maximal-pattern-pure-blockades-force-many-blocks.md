@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-maximal-pattern-pure-blockades-force-many-blocks.md

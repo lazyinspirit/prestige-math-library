@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-elements-form-a-connected-dense-open-subset.md

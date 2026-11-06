@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-ribbon-evaluation-of-an-x-colored-closed-braid.md

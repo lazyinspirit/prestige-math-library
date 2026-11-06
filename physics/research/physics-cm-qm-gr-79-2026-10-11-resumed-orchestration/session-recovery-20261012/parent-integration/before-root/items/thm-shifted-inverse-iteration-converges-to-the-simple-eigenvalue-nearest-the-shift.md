@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-shifted-inverse-iteration-converges-to-the-simple-eigenvalue-nearest-the-shift.md

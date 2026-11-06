@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-derived-functors-commute-with-finite-biproducts.md

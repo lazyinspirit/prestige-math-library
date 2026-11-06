@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-surface-area-and-scalar-integrals-are-reparametrization-invariant.md

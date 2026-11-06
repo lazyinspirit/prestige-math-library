@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-open-mapping-theorem-for-scalar-holomorphic-functions-in-several-variables.md

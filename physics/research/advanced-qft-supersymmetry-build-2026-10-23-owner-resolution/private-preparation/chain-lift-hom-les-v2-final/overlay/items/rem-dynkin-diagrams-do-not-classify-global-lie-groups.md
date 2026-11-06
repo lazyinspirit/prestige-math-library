@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-dynkin-diagrams-do-not-classify-global-lie-groups.md

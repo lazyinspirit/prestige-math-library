@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-c-four-shows-divisibility-of-irreducible-degrees-by-the-group-order-is-not-an-equivalence.md

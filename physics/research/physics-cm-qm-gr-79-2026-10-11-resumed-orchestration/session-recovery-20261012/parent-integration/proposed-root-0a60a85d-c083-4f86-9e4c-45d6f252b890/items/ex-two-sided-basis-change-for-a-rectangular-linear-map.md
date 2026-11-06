@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-sided-basis-change-for-a-rectangular-linear-map.md

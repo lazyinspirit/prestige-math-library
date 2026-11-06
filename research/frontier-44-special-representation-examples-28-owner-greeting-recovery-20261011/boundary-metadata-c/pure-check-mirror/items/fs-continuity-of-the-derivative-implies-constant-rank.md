@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-continuity-of-the-derivative-implies-constant-rank.md

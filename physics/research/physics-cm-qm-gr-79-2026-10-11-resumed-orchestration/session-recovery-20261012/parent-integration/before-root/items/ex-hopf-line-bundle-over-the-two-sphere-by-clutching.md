@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hopf-line-bundle-over-the-two-sphere-by-clutching.md

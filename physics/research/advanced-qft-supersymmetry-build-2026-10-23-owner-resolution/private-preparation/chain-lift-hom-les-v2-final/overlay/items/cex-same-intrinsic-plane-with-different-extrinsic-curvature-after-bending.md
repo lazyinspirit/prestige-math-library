@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-same-intrinsic-plane-with-different-extrinsic-curvature-after-bending.md

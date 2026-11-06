@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-serre-quotient-has-weyl-symmetry-and-no-residual-kac-moody-kernel.md

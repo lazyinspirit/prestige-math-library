@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rodl-initialization-removes-the-constant-scale-restriction-in-the-property-star-four-outcome-theorem.md

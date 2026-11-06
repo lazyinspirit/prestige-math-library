@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-odd-closed-walk-contains-an-odd-cycle.md

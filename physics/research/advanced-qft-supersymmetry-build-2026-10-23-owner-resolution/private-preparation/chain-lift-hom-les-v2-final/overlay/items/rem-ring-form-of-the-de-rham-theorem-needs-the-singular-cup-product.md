@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-ring-form-of-the-de-rham-theorem-needs-the-singular-cup-product.md

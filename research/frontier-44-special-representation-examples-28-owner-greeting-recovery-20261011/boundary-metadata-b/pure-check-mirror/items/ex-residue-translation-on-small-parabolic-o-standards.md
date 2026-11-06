@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-residue-translation-on-small-parabolic-o-standards.md

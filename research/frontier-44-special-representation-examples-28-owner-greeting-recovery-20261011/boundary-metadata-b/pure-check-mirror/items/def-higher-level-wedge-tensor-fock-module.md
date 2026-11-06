@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-higher-level-wedge-tensor-fock-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-separable-degree-of-a-simple-extension-counts-distinct-roots.md

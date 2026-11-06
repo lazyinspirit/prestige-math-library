@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induced-outer-measure-agrees-with-premeasure.md

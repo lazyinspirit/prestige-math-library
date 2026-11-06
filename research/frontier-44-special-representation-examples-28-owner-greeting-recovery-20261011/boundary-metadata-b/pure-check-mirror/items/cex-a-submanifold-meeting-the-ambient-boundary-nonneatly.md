@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-submanifold-meeting-the-ambient-boundary-nonneatly.md

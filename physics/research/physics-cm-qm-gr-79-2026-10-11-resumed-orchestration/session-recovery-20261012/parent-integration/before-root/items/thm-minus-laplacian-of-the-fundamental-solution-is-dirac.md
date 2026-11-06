@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-minus-laplacian-of-the-fundamental-solution-is-dirac.md

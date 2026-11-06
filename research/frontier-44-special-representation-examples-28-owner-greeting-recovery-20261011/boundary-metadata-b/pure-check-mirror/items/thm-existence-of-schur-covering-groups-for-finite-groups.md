@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-existence-of-schur-covering-groups-for-finite-groups.md

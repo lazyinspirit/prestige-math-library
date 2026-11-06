@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-tangent-space-at-a-boundary-point-has-dimension-n-minus-one.md

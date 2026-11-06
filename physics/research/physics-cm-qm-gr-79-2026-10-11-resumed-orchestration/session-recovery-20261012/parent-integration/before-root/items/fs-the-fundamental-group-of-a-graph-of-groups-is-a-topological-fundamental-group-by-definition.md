@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-fundamental-group-of-a-graph-of-groups-is-a-topological-fundamental-group-by-definition.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-binary-trees-and-triangulations-here-are-combinatorial-objects.md

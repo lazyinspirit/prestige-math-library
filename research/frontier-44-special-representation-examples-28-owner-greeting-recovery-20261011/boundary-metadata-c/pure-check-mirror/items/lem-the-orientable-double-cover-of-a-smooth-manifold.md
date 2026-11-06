@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-orientable-double-cover-of-a-smooth-manifold.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-total-gaussian-curvature-is-independent-of-the-riemannian-metric.md

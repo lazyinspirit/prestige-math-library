@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-prime-number-theorem-arithmetic-progressions.md

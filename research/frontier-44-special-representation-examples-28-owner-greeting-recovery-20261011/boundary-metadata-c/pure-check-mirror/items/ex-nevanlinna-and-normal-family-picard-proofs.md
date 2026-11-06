@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-nevanlinna-and-normal-family-picard-proofs.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-algebraic-multiplicity-for-compact-operators.md

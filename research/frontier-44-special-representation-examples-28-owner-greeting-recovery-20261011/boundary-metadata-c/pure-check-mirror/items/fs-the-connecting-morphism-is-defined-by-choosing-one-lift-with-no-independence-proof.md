@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-connecting-morphism-is-defined-by-choosing-one-lift-with-no-independence-proof.md

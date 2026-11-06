@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-the-universal-properties-of-kleisli-and-eilenberg-moore-are-schematic.md

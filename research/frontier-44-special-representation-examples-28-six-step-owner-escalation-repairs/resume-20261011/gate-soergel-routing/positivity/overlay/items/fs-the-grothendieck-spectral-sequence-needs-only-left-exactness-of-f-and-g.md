@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-grothendieck-spectral-sequence-needs-only-left-exactness-of-f-and-g.md

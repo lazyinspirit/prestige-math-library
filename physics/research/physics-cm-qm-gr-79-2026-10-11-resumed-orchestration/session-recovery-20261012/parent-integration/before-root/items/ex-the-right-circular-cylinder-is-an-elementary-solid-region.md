@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-right-circular-cylinder-is-an-elementary-solid-region.md

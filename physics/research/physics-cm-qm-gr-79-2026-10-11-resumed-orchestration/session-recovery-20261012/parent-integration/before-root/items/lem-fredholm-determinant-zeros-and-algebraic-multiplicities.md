@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fredholm-determinant-zeros-and-algebraic-multiplicities.md

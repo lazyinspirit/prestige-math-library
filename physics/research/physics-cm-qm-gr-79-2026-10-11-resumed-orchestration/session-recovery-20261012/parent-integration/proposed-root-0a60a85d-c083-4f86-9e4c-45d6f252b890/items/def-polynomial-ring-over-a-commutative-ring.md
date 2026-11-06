@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-polynomial-ring-over-a-commutative-ring.md

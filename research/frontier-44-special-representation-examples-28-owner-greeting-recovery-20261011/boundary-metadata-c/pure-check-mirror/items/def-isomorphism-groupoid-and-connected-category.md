@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-isomorphism-groupoid-and-connected-category.md

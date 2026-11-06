@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three.md

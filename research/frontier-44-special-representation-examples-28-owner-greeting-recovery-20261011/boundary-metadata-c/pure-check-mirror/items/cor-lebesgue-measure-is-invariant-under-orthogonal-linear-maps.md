@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps.md

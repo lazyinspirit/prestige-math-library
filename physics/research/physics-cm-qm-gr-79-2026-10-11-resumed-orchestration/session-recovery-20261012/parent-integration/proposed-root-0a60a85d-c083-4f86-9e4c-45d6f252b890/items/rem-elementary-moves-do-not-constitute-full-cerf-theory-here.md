@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-elementary-moves-do-not-constitute-full-cerf-theory-here.md

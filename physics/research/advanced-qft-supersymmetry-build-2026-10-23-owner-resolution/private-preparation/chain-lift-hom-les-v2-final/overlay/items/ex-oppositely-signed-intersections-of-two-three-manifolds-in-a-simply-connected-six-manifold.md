@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-oppositely-signed-intersections-of-two-three-manifolds-in-a-simply-connected-six-manifold.md

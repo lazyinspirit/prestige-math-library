@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-subobject-lattice-of-an-abelian-category-is-distributive.md

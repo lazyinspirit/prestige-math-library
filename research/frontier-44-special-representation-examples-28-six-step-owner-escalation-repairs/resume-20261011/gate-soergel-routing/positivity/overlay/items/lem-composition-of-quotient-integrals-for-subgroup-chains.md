@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-composition-of-quotient-integrals-for-subgroup-chains.md

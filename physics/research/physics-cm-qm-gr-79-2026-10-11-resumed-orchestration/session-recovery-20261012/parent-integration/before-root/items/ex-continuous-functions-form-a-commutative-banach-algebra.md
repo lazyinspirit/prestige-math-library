@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-continuous-functions-form-a-commutative-banach-algebra.md

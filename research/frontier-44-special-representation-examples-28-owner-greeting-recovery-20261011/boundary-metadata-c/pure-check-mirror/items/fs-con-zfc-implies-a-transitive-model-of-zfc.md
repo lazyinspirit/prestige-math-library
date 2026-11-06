@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-con-zfc-implies-a-transitive-model-of-zfc.md

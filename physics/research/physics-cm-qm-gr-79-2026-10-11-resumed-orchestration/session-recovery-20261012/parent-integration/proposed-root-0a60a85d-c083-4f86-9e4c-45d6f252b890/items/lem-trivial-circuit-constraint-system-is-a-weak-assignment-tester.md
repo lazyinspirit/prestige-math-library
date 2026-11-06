@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-trivial-circuit-constraint-system-is-a-weak-assignment-tester.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-structure-sheaf-euler-characteristic-is-one-minus-genus.md

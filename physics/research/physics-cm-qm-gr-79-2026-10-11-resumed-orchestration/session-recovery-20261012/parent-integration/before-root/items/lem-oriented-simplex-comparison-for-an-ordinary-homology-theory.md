@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-oriented-simplex-comparison-for-an-ordinary-homology-theory.md

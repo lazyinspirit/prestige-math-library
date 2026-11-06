@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-interference-ideal-flat-two-path-screen-distribution.md

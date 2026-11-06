@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-random-signed-dyadic-sums-have-uniform-mihlin-bounds.md

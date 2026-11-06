@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-dehn-reduction-is-the-same-as-free-reduction.md

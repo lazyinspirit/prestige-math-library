@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-classical-euler-lagrange-equation-under-regularity.md

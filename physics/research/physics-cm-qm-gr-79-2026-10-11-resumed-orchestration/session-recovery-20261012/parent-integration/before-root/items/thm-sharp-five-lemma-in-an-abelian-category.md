@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sharp-five-lemma-in-an-abelian-category.md

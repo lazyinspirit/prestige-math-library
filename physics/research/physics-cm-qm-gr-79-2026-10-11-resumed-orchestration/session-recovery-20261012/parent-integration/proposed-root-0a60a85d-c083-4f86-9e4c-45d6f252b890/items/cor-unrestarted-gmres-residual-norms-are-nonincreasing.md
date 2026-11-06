@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-unrestarted-gmres-residual-norms-are-nonincreasing.md

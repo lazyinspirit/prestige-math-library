@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cm-smooth-dependence-and-the-variational-equation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-strong-erdos-hajnal-property-for-a-hereditary-class.md

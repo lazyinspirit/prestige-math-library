@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients.md

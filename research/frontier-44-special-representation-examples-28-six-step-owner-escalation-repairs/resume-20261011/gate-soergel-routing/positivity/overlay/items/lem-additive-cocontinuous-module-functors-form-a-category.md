@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-additive-cocontinuous-module-functors-form-a-category.md

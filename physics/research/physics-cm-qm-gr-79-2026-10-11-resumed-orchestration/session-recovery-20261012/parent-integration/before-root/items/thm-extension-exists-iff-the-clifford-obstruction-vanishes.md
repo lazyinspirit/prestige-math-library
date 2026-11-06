@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-extension-exists-iff-the-clifford-obstruction-vanishes.md

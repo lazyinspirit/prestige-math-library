@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-symmetric-polynomials-in-jucys-murphy-elements-give-the-center.md

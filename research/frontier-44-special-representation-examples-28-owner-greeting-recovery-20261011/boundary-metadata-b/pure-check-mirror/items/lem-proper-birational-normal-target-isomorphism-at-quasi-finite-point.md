@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-proper-birational-normal-target-isomorphism-at-quasi-finite-point.md

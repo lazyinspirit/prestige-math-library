@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-coordinate-projections-and-inclusions-on-product-banach-spaces.md

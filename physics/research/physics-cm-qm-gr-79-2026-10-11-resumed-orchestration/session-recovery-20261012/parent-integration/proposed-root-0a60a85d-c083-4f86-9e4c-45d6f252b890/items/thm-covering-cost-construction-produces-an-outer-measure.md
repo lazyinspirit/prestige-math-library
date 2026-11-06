@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-covering-cost-construction-produces-an-outer-measure.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-associated-graded-variety-of-a-two-sided-ideal.md

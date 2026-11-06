@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-open-mapping-theorem-via-argument-principle.md

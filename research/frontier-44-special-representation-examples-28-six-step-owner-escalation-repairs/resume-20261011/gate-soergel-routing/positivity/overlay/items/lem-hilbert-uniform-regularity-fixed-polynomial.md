@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hilbert-uniform-regularity-fixed-polynomial.md

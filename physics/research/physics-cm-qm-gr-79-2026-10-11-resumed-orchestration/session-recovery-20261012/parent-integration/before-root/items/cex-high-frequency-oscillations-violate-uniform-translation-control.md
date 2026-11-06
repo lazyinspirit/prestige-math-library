@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-high-frequency-oscillations-violate-uniform-translation-control.md

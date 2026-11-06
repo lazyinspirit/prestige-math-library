@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-faithfully-flat-descent-of-finite-generation.md

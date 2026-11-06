@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta.md

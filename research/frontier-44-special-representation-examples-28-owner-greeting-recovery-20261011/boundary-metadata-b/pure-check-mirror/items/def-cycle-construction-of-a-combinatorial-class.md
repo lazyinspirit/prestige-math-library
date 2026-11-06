@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cycle-construction-of-a-combinatorial-class.md

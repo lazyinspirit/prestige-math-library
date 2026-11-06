@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reversal-is-an-involution-and-reverses-concatenation.md

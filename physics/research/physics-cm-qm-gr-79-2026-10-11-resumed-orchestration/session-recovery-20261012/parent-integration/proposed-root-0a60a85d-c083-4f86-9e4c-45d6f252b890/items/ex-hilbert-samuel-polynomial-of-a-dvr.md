@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hilbert-samuel-polynomial-of-a-dvr.md

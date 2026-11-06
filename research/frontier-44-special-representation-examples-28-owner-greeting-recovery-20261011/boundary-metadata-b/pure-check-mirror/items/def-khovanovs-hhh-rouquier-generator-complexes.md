@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-khovanovs-hhh-rouquier-generator-complexes.md

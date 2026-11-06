@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quantitative-univalence-from-controlled-derivative.md

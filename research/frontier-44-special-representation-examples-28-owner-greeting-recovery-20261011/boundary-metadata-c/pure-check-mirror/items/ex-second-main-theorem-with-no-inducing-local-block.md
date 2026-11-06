@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-second-main-theorem-with-no-inducing-local-block.md

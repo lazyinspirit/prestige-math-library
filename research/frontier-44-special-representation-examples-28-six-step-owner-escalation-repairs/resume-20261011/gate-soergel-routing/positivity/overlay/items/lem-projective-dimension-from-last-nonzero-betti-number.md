@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-projective-dimension-from-last-nonzero-betti-number.md

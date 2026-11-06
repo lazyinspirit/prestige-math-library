@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-zeta-two-from-tonelli-and-the-geometric-series.md

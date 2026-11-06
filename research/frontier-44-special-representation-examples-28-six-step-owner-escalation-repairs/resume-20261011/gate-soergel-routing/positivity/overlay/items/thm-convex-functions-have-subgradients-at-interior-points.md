@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-convex-functions-have-subgradients-at-interior-points.md

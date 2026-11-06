@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-hopfs-formula-is-obviously-independent-of-the-presentation.md

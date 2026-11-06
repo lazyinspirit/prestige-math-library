@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-extreme-points-of-the-dual-ball-of-c-of-k.md

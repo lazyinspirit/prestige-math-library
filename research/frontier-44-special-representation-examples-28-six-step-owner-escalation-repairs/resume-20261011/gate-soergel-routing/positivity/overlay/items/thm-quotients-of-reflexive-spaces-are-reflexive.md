@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quotients-of-reflexive-spaces-are-reflexive.md

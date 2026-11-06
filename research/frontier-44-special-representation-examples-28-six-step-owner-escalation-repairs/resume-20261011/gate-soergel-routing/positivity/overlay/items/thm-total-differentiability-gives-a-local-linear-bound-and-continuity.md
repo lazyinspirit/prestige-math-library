@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-total-differentiability-gives-a-local-linear-bound-and-continuity.md

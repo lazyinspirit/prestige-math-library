@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pcp-verifier-reduces-to-gap-max-three-sat.md

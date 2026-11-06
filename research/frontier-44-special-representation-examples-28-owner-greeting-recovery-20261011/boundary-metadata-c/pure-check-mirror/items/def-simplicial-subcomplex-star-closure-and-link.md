@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-simplicial-subcomplex-star-closure-and-link.md

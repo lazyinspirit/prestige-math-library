@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-mittag-leffler-function-with-double-poles-at-the-integers.md

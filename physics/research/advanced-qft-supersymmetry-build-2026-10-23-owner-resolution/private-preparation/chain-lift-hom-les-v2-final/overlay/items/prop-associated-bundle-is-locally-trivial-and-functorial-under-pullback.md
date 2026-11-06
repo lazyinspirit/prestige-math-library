@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-associated-bundle-is-locally-trivial-and-functorial-under-pullback.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-pullback-over-an-evenly-covered-open-set-is-trivial.md

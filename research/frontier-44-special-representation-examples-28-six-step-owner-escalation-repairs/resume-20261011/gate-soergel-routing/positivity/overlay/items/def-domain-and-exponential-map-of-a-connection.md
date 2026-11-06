@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-domain-and-exponential-map-of-a-connection.md

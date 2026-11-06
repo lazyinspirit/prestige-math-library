@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-zero-th-simplicial-homology-is-free-on-connected-components.md

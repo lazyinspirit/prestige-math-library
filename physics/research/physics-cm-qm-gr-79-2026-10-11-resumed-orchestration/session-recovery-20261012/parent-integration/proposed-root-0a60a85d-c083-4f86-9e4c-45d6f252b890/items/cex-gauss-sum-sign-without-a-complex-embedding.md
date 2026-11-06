@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gauss-sum-sign-without-a-complex-embedding.md

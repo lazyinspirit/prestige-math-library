@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-natural-and-usual-augmented-brownian-filtrations.md

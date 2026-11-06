@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes.md

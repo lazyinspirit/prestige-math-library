@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-blowup-intersection-matrix-at-smooth-point.md

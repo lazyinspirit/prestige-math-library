@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-erdos-ko-rado-without-the-ground-set-bound.md

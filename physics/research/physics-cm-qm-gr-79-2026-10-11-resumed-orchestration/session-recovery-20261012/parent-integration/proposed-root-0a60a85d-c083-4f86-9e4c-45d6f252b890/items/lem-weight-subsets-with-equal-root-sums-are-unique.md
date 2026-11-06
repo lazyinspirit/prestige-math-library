@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weight-subsets-with-equal-root-sums-are-unique.md

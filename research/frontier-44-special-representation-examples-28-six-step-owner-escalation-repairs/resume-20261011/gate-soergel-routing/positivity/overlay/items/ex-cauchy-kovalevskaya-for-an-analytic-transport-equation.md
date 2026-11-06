@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cauchy-kovalevskaya-for-an-analytic-transport-equation.md

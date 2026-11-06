@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-balanced-triple-linear-algebra-over-the-projective-line.md

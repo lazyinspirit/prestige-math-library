@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-bounded-c-one-domain-boundary-charts-and-outward-normal.md

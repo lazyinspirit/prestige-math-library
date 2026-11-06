@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-plane-trees-satisfy-t-equals-z-over-one-minus-t.md

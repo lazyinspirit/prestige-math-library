@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-contraction-is-independent-of-the-basis-formula.md

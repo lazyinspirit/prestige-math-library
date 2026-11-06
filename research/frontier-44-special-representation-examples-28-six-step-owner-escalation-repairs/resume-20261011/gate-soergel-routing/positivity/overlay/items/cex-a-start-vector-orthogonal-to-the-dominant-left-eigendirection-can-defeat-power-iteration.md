@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-start-vector-orthogonal-to-the-dominant-left-eigendirection-can-defeat-power-iteration.md

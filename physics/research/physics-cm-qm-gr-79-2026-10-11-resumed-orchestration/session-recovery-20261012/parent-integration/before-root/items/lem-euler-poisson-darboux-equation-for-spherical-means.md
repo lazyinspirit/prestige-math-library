@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euler-poisson-darboux-equation-for-spherical-means.md

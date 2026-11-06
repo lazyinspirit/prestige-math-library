@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-complete-and-complete-bipartite-graphs-k5-and-k33.md

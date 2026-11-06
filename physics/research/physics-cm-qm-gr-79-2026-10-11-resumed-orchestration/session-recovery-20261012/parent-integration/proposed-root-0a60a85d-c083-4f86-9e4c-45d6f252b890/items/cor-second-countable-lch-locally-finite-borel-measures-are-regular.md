@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-second-countable-lch-locally-finite-borel-measures-are-regular.md

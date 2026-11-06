@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cauchy-integral-formula-exponential-over-z-minus-one.md

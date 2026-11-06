@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-complex-lp-and-euclidean-test-function-conventions.md

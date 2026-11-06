@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-exterior-derivative-is-c-infinity-linear.md

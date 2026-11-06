@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cobounded-proper-geodesic-actions-produce-finite-generating-sets.md

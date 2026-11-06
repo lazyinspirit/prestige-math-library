@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-self-transverse-immersion-and-double-point-locus.md

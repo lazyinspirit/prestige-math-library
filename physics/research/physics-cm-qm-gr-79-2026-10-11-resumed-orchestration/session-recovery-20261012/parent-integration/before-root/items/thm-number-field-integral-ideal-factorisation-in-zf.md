@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-number-field-integral-ideal-factorisation-in-zf.md

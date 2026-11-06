@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-an-arbitrary-pointwise-sum-of-smooth-functions-is-smooth.md

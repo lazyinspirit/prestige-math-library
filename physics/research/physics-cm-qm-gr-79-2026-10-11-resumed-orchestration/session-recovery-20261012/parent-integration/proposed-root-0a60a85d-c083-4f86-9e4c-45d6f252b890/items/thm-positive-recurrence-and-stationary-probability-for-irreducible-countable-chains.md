@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains.md

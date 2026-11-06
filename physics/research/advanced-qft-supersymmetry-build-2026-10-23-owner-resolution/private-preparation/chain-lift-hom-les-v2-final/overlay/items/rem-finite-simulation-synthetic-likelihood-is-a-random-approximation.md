@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-finite-simulation-synthetic-likelihood-is-a-random-approximation.md

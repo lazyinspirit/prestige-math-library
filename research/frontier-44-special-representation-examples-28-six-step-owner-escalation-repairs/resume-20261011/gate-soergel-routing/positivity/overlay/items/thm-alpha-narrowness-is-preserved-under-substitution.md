@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-alpha-narrowness-is-preserved-under-substitution.md

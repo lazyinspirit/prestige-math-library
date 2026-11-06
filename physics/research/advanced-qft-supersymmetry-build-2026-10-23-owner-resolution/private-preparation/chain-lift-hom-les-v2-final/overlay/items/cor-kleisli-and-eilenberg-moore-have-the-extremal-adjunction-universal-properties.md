@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-kleisli-and-eilenberg-moore-have-the-extremal-adjunction-universal-properties.md

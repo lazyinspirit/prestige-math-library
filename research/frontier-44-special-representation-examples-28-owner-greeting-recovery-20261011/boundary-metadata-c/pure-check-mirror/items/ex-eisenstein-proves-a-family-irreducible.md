@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-eisenstein-proves-a-family-irreducible.md

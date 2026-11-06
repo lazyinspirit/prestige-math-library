@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-omega-one-tree-has-a-cofinal-branch.md

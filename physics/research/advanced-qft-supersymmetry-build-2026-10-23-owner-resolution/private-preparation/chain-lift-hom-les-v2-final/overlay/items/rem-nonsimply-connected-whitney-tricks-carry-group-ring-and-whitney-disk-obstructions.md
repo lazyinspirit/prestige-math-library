@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-nonsimply-connected-whitney-tricks-carry-group-ring-and-whitney-disk-obstructions.md

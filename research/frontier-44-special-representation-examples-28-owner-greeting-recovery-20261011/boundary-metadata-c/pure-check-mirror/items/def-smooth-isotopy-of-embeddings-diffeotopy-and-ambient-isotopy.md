@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy.md

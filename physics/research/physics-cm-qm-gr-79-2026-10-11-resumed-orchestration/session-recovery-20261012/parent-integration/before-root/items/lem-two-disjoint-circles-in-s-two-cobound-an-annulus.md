@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-two-disjoint-circles-in-s-two-cobound-an-annulus.md

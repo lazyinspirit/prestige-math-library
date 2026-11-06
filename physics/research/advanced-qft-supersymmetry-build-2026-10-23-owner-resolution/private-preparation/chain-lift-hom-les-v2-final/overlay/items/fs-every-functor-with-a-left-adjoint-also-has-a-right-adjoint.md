@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-functor-with-a-left-adjoint-also-has-a-right-adjoint.md

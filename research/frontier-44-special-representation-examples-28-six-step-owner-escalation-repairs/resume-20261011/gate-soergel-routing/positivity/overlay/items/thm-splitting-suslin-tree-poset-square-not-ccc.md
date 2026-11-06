@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-splitting-suslin-tree-poset-square-not-ccc.md

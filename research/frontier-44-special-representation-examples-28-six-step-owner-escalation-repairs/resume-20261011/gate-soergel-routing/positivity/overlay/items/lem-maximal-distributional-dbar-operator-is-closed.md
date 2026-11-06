@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-maximal-distributional-dbar-operator-is-closed.md

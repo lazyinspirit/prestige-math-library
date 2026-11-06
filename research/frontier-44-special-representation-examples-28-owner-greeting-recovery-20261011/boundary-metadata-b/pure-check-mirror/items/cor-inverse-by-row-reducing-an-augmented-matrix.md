@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-inverse-by-row-reducing-an-augmented-matrix.md

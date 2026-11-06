@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-proper-embedding-of-an-n-manifold-lands-in-r-n.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-countable-subsets-of-rn-are-lebesgue-null.md

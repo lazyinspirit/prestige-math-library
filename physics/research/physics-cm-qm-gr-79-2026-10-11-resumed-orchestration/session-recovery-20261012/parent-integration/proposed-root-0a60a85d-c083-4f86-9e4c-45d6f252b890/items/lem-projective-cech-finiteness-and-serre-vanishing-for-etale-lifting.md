@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-cech-finiteness-and-serre-vanishing-for-etale-lifting.md

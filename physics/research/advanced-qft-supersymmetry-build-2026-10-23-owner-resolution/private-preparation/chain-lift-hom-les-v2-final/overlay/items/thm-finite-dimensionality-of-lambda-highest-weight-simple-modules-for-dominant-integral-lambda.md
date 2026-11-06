@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda.md

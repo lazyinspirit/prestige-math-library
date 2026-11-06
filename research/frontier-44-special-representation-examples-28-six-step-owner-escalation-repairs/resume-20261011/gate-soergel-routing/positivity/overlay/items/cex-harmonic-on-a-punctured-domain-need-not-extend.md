@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-harmonic-on-a-punctured-domain-need-not-extend.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-blakers-massey-connectivity-for-a-homotopy-pushout.md

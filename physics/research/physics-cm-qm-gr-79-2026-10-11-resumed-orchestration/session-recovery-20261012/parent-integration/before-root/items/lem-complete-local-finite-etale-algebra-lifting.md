@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-complete-local-finite-etale-algebra-lifting.md

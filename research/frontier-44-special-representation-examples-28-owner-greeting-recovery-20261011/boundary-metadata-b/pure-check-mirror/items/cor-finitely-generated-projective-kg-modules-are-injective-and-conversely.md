@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-finitely-generated-projective-kg-modules-are-injective-and-conversely.md

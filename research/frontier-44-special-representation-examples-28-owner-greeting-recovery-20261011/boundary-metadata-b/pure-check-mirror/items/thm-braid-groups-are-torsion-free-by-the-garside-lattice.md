@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-braid-groups-are-torsion-free-by-the-garside-lattice.md

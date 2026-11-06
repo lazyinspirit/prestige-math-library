@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-mazur-weak-and-norm-closure-of-convex-sets.md

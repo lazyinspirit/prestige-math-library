@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-smc-zero-residual-fraction-can-have-random-offspring.md

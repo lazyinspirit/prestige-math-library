@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-classical-morphisms-glue-on-open-cover.md

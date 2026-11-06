@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-homology-of-a-product-of-spheres-by-kunneth.md

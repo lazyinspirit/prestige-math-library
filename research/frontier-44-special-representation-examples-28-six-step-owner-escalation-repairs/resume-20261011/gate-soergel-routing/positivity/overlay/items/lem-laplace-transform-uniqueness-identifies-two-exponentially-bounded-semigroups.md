@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-laplace-transform-uniqueness-identifies-two-exponentially-bounded-semigroups.md

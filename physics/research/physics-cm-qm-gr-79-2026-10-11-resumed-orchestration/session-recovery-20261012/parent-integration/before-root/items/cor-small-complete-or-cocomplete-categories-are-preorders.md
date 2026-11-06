@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-small-complete-or-cocomplete-categories-are-preorders.md

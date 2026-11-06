@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quiver-flag-convolution-generators-satisfy-the-signed-klr-relations.md

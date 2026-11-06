@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-instantaneous-smoothing-of-lp-heat-flow.md

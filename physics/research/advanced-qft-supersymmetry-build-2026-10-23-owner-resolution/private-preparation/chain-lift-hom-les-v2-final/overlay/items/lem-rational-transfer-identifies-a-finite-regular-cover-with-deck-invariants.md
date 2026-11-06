@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rational-transfer-identifies-a-finite-regular-cover-with-deck-invariants.md

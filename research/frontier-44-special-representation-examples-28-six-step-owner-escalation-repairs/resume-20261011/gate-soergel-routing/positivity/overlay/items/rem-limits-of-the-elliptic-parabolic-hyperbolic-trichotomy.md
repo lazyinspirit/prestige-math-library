@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy.md

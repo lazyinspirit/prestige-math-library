@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-isomorphic-lie-algebras-determine-isomorphic-connected-lie-groups.md

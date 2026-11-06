@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention.md

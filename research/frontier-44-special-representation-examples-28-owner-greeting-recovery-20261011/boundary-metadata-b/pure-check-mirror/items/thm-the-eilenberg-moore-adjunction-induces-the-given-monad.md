@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-eilenberg-moore-adjunction-induces-the-given-monad.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-row-operations-on-a-singular-matrix-over-z-mod-six.md

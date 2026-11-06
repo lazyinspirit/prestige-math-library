@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-total-winding-homomorphism-of-the-punctured-disk.md

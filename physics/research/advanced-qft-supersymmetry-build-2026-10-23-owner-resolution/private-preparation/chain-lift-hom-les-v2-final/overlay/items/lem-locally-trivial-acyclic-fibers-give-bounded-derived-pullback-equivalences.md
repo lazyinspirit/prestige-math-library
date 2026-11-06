@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences.md

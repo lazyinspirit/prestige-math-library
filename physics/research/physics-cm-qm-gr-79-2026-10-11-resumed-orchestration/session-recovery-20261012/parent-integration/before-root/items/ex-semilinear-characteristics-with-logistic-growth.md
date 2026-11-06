@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-semilinear-characteristics-with-logistic-growth.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-jordan-chevalley-decomposition-from-jordan-blocks.md

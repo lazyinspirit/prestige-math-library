@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-free-kernel-words-for-three-strand-braid-combing.md

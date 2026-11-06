@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-stokes-gives-zero-circulation-for-a-curl-free-field.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-de-rham-cohomology-class-of-a-form-is-defined-without-closedness.md

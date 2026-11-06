@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-characteristic-class-construction-is-cited-not-rebuilt.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-convex-function-bound-on-an-interior-cube.md

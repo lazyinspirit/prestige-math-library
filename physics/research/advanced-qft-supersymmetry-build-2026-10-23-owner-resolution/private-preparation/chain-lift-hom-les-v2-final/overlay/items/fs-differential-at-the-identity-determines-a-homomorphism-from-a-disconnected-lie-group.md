@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-differential-at-the-identity-determines-a-homomorphism-from-a-disconnected-lie-group.md

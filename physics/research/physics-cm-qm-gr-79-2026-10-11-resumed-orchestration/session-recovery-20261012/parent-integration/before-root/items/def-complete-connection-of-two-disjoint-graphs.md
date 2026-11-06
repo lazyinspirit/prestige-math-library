@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-complete-connection-of-two-disjoint-graphs.md

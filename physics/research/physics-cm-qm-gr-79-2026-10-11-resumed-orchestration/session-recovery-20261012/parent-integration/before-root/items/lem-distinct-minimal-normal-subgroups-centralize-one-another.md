@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-distinct-minimal-normal-subgroups-centralize-one-another.md

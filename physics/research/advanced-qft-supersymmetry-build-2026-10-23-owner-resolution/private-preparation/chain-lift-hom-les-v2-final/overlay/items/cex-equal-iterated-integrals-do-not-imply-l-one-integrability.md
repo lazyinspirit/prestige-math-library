@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-equal-iterated-integrals-do-not-imply-l-one-integrability.md

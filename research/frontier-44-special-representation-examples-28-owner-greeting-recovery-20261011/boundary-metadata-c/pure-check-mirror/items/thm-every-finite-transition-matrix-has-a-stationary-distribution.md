@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-finite-transition-matrix-has-a-stationary-distribution.md

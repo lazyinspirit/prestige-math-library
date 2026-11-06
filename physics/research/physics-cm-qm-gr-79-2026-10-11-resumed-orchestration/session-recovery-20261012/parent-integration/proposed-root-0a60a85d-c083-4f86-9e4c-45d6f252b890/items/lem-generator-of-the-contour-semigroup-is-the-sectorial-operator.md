@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-generator-of-the-contour-semigroup-is-the-sectorial-operator.md

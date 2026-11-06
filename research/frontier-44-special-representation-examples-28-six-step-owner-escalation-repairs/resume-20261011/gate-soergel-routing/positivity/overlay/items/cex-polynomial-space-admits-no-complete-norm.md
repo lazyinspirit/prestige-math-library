@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-polynomial-space-admits-no-complete-norm.md

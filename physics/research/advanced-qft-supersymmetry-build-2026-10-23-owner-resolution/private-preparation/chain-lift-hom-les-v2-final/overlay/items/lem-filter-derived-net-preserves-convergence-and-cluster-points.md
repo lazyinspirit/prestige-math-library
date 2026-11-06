@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-filter-derived-net-preserves-convergence-and-cluster-points.md

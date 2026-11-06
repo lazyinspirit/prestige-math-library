@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-aleph-one-is-at-most-the-continuum.md

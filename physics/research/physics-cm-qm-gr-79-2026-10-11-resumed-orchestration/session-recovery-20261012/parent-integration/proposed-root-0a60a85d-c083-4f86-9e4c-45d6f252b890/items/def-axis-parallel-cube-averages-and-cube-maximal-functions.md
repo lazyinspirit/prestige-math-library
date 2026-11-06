@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-axis-parallel-cube-averages-and-cube-maximal-functions.md

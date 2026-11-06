@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-logarithm-not-uniformly-continuous-on-positive-reals.md

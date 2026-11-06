@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-permutation-representation-on-left-cosets-g-mod-h.md

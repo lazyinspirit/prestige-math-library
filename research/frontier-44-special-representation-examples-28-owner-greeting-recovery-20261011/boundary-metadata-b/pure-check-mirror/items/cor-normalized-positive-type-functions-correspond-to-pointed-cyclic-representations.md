@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-normalized-positive-type-functions-correspond-to-pointed-cyclic-representations.md

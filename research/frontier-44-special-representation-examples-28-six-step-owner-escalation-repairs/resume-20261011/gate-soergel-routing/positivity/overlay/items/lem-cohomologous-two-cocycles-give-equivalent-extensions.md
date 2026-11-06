@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cohomologous-two-cocycles-give-equivalent-extensions.md

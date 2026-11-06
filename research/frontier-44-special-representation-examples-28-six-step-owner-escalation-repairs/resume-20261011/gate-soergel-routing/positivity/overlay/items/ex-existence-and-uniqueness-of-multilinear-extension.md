@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-existence-and-uniqueness-of-multilinear-extension.md

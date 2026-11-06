@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-open-and-pointwise-topologies-agree-on-an-equicontinuous-family.md

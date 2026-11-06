@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-parallel-transport-depends-only-on-the-endpoints-of-a-curve.md

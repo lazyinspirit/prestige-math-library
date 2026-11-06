@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-riemannian-volume-form-exists-on-every-riemannian-manifold.md

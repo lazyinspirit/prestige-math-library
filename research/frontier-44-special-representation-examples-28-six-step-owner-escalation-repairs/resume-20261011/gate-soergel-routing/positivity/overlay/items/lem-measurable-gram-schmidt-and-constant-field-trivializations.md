@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-measurable-gram-schmidt-and-constant-field-trivializations.md

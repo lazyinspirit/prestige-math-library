@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-e-quotient-controls-hooks-divisible-by-e.md

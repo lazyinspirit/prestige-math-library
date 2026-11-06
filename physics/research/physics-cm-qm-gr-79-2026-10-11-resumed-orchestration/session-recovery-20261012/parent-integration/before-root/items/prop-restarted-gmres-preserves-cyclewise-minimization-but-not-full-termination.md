@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-restarted-gmres-preserves-cyclewise-minimization-but-not-full-termination.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-normal-operators-are-diagonalisable-over-the-base-field.md

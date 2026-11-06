@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-higher-homotopy-groups-are-iterated-loop-components.md

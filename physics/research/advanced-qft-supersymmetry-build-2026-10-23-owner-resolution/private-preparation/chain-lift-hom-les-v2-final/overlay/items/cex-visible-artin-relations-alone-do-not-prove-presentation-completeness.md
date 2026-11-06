@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-visible-artin-relations-alone-do-not-prove-presentation-completeness.md

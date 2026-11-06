@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-euler-class-by-zero-section-pullback-of-the-thom-class.md

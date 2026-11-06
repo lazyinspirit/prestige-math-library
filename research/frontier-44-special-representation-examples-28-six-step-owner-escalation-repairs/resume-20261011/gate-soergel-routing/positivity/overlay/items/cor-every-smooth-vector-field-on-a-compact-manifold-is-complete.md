@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-every-smooth-vector-field-on-a-compact-manifold-is-complete.md

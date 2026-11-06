@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-e-to-one-over-z-shows-essential-singularities-break-the-argument-principle.md

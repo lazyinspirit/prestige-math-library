@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-sectorial-form-angle-controls-the-numerical-range-of-its-operator.md

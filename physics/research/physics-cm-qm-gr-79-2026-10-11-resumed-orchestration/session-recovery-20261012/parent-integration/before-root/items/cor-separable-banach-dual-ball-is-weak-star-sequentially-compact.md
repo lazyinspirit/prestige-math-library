@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-separable-banach-dual-ball-is-weak-star-sequentially-compact.md

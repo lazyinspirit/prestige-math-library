@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-diagram-lemmas-hold-in-the-opposite-category.md

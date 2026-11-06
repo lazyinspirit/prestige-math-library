@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-simply-connected-complete-nonpositively-curved-manifolds-have-unique-geodesics-between-points.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-relative-connecting-map-is-independent-of-lift-and-representative.md

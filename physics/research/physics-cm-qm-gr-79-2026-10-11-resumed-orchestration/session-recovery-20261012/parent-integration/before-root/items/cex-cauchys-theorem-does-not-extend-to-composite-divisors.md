@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cauchys-theorem-does-not-extend-to-composite-divisors.md

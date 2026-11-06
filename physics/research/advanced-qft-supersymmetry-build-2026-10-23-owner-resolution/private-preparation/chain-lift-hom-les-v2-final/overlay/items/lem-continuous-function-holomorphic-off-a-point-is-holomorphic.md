@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-continuous-function-holomorphic-off-a-point-is-holomorphic.md

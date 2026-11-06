@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-strict-and-mod-null-invariant-sigma-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-first-moment-threshold-one-is-not-enough.md

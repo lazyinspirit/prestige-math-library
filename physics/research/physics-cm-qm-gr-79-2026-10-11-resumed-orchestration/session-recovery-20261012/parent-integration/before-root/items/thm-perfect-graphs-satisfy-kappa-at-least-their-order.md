@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-perfect-graphs-satisfy-kappa-at-least-their-order.md

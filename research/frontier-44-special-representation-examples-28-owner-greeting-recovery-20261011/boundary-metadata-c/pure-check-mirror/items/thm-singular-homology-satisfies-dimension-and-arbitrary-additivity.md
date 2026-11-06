@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-singular-homology-satisfies-dimension-and-arbitrary-additivity.md

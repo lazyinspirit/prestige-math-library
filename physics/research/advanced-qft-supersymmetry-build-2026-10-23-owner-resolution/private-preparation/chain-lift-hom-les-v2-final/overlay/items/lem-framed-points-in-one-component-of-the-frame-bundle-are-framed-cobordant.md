@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-framed-points-in-one-component-of-the-frame-bundle-are-framed-cobordant.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finitely-many-number-field-ideals-of-bounded-norm.md

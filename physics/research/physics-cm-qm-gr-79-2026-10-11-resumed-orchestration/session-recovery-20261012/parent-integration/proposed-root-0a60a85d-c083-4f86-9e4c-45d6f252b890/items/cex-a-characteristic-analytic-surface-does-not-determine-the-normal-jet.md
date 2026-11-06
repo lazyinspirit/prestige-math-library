@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-characteristic-analytic-surface-does-not-determine-the-normal-jet.md

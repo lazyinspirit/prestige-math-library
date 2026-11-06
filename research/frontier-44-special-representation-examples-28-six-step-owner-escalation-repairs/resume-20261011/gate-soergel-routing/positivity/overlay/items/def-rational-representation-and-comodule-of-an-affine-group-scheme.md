@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-rational-representation-and-comodule-of-an-affine-group-scheme.md

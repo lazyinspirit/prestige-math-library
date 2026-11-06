@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-cyclotomic-polynomial-is-irreducible-over-every-field.md

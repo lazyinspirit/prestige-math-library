@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-dvoretzky-rogers-finite-block-estimate.md

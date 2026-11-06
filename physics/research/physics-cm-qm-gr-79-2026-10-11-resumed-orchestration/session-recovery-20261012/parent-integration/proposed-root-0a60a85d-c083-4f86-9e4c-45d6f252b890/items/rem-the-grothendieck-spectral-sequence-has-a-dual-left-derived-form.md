@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-grothendieck-spectral-sequence-has-a-dual-left-derived-form.md

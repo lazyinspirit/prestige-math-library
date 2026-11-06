@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-discontinuous-logarithmic-functional-equation.md

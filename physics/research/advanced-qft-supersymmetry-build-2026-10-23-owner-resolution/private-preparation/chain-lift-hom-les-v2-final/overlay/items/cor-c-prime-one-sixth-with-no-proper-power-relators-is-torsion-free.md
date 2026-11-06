@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm-math-evidence-confidence-coverage-is-not-posterior.md

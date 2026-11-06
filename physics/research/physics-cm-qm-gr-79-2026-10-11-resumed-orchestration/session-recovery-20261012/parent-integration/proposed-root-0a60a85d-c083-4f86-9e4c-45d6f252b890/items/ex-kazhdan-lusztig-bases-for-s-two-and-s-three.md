@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-kazhdan-lusztig-bases-for-s-two-and-s-three.md

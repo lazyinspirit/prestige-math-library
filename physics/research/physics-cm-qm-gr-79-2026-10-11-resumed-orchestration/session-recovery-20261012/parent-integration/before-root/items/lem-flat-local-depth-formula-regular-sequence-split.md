@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-flat-local-depth-formula-regular-sequence-split.md

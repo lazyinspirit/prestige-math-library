@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-process-law-on-cylinder-space-is-determined-by-finite-dimensional-distributions.md

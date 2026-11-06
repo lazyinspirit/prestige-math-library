@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-generated-sigma-algebra-comparison-criterion.md

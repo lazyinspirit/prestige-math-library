@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-stone-cech-compactification-maps-onto-samuel-compactification.md

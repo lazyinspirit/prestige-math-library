@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-naturality-of-the-grothendieck-spectral-sequence.md

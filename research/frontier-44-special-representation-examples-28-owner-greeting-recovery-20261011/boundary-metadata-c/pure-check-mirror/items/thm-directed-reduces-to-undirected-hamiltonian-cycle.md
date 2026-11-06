@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-directed-reduces-to-undirected-hamiltonian-cycle.md

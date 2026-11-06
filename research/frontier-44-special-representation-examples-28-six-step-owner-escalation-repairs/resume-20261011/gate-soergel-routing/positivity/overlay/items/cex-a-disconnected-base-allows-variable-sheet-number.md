@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-disconnected-base-allows-variable-sheet-number.md

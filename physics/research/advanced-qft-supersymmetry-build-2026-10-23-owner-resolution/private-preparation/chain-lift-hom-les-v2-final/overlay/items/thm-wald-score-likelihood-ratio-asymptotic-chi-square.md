@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-wald-score-likelihood-ratio-asymptotic-chi-square.md

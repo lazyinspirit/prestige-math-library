@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-factor-set-is-independent-of-the-section-as-a-function.md

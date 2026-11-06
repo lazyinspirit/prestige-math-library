@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-complex-time-heat-kernel-on-a-proper-sector.md

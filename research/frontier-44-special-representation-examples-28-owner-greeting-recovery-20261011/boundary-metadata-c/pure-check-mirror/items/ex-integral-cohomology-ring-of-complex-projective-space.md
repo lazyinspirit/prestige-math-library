@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-integral-cohomology-ring-of-complex-projective-space.md

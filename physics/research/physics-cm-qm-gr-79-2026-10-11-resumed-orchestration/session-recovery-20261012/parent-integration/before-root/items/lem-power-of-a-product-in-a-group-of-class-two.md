@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-power-of-a-product-in-a-group-of-class-two.md

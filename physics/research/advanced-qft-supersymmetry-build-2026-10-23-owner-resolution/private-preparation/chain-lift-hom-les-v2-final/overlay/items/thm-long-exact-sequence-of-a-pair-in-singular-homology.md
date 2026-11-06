@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-long-exact-sequence-of-a-pair-in-singular-homology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-compact-riemannian-manifolds-are-geodesically-complete.md

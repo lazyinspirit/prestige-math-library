@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-star-antiautomorphism-of-the-type-a-hecke-algebra.md

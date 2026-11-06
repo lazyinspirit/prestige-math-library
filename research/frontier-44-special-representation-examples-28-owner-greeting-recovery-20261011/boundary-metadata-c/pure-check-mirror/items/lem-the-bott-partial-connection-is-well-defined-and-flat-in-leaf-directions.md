@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-bott-partial-connection-is-well-defined-and-flat-in-leaf-directions.md

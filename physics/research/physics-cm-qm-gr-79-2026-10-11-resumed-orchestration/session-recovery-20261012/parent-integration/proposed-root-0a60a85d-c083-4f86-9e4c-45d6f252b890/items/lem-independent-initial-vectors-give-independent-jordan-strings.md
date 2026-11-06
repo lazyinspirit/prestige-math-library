@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-independent-initial-vectors-give-independent-jordan-strings.md

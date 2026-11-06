@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-factor-set-model-agrees-with-derived-second-group-cohomology.md

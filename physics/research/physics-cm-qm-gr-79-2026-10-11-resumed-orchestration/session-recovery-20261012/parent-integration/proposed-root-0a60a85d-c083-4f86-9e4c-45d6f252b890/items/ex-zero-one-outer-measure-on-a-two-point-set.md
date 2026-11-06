@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-zero-one-outer-measure-on-a-two-point-set.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-picard-iteration-for-y-prime-equals-y.md

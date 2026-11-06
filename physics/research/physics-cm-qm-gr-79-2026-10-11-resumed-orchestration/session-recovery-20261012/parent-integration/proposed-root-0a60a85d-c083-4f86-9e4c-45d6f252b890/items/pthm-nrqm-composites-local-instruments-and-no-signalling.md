@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-composites-local-instruments-and-no-signalling.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-e-overlap-classes-form-an-anticonnected-partition.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spectral-measure-of-a-representation-of-an-abelian-lch-group.md

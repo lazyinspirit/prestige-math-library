@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-projective-indecomposable-modules-have-trivial-vertex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-composites-finite-partial-trace-and-schmidt.md

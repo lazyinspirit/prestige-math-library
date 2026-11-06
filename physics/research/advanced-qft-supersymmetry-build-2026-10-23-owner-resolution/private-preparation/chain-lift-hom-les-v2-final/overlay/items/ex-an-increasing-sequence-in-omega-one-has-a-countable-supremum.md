@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-an-increasing-sequence-in-omega-one-has-a-countable-supremum.md

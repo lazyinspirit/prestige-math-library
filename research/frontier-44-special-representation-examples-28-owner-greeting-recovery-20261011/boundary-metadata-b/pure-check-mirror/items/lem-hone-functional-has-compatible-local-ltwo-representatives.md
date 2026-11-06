@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hone-functional-has-compatible-local-ltwo-representatives.md

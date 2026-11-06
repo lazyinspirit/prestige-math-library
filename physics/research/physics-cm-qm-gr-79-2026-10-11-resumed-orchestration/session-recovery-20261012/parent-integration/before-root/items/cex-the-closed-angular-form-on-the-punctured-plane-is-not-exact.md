@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-closed-angular-form-on-the-punctured-plane-is-not-exact.md

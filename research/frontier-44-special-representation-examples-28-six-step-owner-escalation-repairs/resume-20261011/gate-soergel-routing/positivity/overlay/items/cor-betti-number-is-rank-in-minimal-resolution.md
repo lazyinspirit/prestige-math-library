@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-betti-number-is-rank-in-minimal-resolution.md

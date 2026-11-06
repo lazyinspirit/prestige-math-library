@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-kernel-of-a-complex-character-agrees-with-the-representation-kernel.md

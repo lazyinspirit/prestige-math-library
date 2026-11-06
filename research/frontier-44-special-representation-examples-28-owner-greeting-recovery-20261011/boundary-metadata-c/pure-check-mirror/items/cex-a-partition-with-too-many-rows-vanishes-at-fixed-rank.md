@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-partition-with-too-many-rows-vanishes-at-fixed-rank.md

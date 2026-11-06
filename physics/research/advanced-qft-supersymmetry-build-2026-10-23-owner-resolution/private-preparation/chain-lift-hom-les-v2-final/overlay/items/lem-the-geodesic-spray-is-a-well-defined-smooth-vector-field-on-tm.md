@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-geodesic-spray-is-a-well-defined-smooth-vector-field-on-tm.md

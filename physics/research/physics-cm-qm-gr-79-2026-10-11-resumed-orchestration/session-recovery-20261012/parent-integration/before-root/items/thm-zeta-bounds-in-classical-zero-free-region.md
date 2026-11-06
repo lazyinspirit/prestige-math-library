@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-zeta-bounds-in-classical-zero-free-region.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-p-elementary-and-p-hyperelementary-finite-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-what-the-library-does-and-does-not-prove-about-cfsg.md

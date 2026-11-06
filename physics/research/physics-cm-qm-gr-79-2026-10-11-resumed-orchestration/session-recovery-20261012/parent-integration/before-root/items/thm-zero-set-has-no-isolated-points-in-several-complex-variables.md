@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-zero-set-has-no-isolated-points-in-several-complex-variables.md

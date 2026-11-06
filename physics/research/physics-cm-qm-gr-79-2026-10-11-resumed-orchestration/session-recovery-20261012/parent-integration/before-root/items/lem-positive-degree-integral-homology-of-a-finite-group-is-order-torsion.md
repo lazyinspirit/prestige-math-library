@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-degree-integral-homology-of-a-finite-group-is-order-torsion.md

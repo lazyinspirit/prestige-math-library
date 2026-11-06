@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-galerkin-orthogonality-for-a-krylov-galerkin-iterate.md

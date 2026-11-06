@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reduced-prepared-hypersurface-remains-reduced-near-germ.md

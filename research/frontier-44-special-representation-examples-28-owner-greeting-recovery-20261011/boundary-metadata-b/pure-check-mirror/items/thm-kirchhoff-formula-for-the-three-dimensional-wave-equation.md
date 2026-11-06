@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-kirchhoff-formula-for-the-three-dimensional-wave-equation.md

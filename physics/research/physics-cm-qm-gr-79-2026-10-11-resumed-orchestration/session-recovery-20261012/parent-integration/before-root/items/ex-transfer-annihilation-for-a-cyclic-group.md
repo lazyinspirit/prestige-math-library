@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-transfer-annihilation-for-a-cyclic-group.md

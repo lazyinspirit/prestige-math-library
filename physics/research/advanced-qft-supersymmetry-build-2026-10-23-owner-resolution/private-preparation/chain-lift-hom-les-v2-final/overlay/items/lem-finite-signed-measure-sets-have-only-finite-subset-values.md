@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-signed-measure-sets-have-only-finite-subset-values.md

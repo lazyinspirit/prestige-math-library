@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nested-pinched-center-frontier-has-a-strict-inner-disk-search.md

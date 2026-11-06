@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-hecke-trace-construction-is-an-oriented-link-invariant.md

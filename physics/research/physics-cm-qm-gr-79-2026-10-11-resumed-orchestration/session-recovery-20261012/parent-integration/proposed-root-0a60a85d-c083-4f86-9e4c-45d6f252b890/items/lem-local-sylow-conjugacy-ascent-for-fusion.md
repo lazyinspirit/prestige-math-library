@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-sylow-conjugacy-ascent-for-fusion.md

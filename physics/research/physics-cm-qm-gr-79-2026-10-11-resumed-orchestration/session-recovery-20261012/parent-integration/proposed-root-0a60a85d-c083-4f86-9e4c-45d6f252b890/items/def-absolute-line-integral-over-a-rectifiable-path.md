@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-absolute-line-integral-over-a-rectifiable-path.md

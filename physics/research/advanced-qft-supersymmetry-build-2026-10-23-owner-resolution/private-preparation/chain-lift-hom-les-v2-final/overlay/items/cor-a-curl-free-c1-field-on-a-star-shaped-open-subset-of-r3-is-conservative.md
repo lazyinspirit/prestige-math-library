@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-curl-free-c1-field-on-a-star-shaped-open-subset-of-r3-is-conservative.md

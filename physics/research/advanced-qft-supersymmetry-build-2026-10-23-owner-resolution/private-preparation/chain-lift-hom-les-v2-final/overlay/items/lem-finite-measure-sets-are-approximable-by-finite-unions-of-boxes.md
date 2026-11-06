@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-measure-sets-are-approximable-by-finite-unions-of-boxes.md

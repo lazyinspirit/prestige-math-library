@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-exactly-one-symbol-constraints-have-polynomial-size.md

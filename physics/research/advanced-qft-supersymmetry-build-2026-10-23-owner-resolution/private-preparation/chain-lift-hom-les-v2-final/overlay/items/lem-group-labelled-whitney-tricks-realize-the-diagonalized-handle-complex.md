@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-group-labelled-whitney-tricks-realize-the-diagonalized-handle-complex.md

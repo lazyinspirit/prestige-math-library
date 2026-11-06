@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-invariant-polynomials-of-the-hyperbolic-gm-action-on-the-plane.md

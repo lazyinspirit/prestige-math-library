@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-graded-bimodule-tensor-hom-adjunction.md

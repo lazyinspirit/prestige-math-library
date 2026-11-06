@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cm-hamilton-jacobi-characteristics-from-a-complete-integral.md

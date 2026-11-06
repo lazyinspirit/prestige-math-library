@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-dimensional-graded-algebras-have-graded-projective-covers.md

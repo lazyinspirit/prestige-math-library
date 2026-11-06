@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-tubular-neighborhoods-preserve-a-chain-of-submersions.md

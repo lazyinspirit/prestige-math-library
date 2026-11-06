@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-iterated-sparse-restriction-reaches-the-target-sparsity-threshold.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-composition-factors-do-not-determine-the-extension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-left-derived-functors-form-a-homological-delta-functor.md

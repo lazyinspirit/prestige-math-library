@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-tensor-double-complex-of-two-projective-resolutions.md

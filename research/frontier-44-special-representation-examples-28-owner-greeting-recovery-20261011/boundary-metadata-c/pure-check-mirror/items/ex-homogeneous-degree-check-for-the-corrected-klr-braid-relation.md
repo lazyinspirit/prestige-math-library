@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-homogeneous-degree-check-for-the-corrected-klr-braid-relation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-characteristic-solution-satisfies-the-quasilinear-pde.md

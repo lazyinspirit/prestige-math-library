@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-boone-base-groups-and-associated-free-bases.md

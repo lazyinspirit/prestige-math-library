@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-finite-thom-detector-is-a-homotopy-isomorphism-through-2r-minus-2.md

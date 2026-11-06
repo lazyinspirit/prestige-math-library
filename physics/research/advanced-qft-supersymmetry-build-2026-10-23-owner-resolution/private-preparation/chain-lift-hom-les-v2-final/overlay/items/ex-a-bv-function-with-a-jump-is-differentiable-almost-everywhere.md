@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-bv-function-with-a-jump-is-differentiable-almost-everywhere.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-critical-sobolev-embedding-into-every-finite-lq.md

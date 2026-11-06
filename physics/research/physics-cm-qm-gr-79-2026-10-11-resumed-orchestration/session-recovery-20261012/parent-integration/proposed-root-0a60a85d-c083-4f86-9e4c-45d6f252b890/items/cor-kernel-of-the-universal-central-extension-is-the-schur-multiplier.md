@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-kernel-of-the-universal-central-extension-is-the-schur-multiplier.md

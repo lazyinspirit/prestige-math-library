@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-differentials-generating-a-free-direct-summand-are-nonzerodivisors.md

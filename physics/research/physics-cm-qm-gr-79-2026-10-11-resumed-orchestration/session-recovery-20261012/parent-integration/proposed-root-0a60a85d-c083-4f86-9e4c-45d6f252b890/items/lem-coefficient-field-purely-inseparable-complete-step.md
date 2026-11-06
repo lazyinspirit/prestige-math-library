@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coefficient-field-purely-inseparable-complete-step.md

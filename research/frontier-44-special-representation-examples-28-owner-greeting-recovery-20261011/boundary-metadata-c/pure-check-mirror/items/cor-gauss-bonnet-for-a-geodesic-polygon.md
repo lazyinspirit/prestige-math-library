@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-gauss-bonnet-for-a-geodesic-polygon.md

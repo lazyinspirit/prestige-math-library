@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-classical-parabolic-solution-at-time-zero-needs-the-compatibility-ax-plus-f-zero.md

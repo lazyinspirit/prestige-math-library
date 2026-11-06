@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-twist-quasi-coherent-sheaf-projective.md

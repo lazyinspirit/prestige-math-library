@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-poisson-commuting-functions-with-dependent-differentials-do-not-give-liouville-arnold-coordinates.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-completion-universal-property-for-bounded-linear-maps.md

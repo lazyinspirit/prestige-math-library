@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-every-manifold-has-a-compact-exhaustion.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-efficient-prime-field-for-a-polynomial-soundness-budget.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-symplectic-manifolds-have-no-local-invariants-beyond-dimension.md

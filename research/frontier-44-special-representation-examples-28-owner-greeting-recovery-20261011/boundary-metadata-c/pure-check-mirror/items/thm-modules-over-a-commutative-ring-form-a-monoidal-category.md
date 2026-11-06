@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-modules-over-a-commutative-ring-form-a-monoidal-category.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-euler-characteristic-is-defined-by-choosing-any-triangulation-without-proving-independence.md

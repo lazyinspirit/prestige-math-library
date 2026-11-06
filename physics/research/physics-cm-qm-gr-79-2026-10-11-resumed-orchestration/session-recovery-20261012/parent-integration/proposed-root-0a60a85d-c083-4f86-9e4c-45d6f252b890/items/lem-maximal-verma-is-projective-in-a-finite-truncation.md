@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-maximal-verma-is-projective-in-a-finite-truncation.md

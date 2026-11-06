@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-projective-linear-action-and-iwasawas-hypotheses.md

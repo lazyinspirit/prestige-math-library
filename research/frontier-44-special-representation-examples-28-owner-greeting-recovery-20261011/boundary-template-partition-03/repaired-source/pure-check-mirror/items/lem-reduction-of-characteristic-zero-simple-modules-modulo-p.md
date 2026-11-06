@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-reduction-of-characteristic-zero-simple-modules-modulo-p.md

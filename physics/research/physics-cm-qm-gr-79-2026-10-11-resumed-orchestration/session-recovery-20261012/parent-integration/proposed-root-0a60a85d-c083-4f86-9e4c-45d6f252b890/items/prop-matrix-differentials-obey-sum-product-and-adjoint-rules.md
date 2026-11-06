@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-matrix-differentials-obey-sum-product-and-adjoint-rules.md

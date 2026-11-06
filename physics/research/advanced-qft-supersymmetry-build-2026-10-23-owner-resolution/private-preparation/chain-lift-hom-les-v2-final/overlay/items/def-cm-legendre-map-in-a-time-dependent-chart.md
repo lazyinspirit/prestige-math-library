@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-cm-legendre-map-in-a-time-dependent-chart.md

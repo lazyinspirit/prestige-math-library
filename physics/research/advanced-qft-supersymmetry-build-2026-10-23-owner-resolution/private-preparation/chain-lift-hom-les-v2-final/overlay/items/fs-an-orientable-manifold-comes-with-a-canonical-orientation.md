@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-an-orientable-manifold-comes-with-a-canonical-orientation.md

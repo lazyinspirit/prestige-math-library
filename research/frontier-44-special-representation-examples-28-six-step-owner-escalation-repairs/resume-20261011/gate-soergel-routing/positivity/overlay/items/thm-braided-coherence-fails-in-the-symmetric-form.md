@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-braided-coherence-fails-in-the-symmetric-form.md

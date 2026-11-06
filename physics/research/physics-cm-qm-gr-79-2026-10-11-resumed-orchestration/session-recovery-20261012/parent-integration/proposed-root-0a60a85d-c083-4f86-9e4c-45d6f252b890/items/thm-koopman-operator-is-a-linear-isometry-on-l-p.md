@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-koopman-operator-is-a-linear-isometry-on-l-p.md

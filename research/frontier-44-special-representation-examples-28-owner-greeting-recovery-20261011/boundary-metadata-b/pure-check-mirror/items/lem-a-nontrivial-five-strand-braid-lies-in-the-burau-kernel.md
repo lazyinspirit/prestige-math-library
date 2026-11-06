@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-nontrivial-five-strand-braid-lies-in-the-burau-kernel.md

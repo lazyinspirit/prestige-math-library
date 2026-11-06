@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hh-minimal-representatives-for-s2-in-s3.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cyclic-decomposition-of-finite-abelian-p-groups.md

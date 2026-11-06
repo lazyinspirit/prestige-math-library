@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-morrey-rellich-compactness-for-p-greater-than-n.md

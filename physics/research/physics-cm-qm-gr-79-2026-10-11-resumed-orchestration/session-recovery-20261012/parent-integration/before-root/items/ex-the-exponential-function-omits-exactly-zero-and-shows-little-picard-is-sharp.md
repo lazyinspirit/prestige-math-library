@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-exponential-function-omits-exactly-zero-and-shows-little-picard-is-sharp.md

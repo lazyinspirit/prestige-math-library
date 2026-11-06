@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term.md

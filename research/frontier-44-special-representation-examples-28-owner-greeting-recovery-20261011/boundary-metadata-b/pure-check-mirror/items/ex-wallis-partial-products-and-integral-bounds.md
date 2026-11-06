@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-wallis-partial-products-and-integral-bounds.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-positive-artin-relations-preserve-homogeneous-length.md

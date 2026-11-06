@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-weak-sparsity-is-a-bound-on-the-edge-density.md

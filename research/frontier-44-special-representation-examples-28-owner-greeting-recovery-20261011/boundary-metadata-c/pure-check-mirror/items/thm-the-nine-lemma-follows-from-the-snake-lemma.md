@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-nine-lemma-follows-from-the-snake-lemma.md

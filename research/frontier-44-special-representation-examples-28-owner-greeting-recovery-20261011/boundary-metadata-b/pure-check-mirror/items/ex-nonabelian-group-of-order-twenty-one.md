@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-nonabelian-group-of-order-twenty-one.md

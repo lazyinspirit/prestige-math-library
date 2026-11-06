@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-parabolic-kl-polynomials-give-the-dual-canonical-transition-matrix.md

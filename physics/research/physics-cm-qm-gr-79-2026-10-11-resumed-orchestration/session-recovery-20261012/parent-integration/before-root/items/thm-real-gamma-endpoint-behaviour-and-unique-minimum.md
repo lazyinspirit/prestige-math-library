@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-real-gamma-endpoint-behaviour-and-unique-minimum.md

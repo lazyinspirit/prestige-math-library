@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-prime-sets-of-a-field-and-the-integers.md

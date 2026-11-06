@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-rational-square-root-two-as-a-simple-extension.md

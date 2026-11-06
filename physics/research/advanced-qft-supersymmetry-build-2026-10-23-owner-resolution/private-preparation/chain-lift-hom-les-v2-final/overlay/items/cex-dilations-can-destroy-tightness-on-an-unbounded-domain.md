@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-dilations-can-destroy-tightness-on-an-unbounded-domain.md

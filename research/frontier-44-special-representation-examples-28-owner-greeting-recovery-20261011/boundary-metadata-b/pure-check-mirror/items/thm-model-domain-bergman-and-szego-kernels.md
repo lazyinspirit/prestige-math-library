@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-model-domain-bergman-and-szego-kernels.md

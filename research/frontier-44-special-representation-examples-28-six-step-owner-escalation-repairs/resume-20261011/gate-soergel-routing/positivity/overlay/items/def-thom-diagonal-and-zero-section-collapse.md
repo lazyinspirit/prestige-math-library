@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-thom-diagonal-and-zero-section-collapse.md

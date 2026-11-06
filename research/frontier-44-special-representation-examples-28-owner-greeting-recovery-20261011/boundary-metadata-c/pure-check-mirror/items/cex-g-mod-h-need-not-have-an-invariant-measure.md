@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-g-mod-h-need-not-have-an-invariant-measure.md

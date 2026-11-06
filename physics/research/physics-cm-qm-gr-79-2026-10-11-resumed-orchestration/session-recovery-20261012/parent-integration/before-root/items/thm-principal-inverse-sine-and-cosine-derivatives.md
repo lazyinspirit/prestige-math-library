@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-principal-inverse-sine-and-cosine-derivatives.md

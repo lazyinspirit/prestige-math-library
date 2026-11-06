@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-serre-duality-projective-space-coherent-sheaves.md

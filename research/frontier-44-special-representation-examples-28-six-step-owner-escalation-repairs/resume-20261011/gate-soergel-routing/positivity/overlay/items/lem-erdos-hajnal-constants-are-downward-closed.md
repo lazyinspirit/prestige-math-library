@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-erdos-hajnal-constants-are-downward-closed.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-equal-plane-face-boundaries-force-a-cycle.md

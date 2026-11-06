@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-hh-hecke-symmetry-and-ordered-basis-operator.md

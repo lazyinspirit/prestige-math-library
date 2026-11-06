@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-double-point-dimension-count-for-surfaces-in-four-and-five-space.md

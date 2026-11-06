@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-doubled-spanning-tree-is-a-two-approximation-for-metric-tsp.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-picard-operator-is-a-short-time-contraction.md

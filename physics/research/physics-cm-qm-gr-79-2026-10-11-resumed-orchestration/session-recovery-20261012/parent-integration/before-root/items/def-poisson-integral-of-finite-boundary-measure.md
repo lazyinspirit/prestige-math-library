@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-poisson-integral-of-finite-boundary-measure.md

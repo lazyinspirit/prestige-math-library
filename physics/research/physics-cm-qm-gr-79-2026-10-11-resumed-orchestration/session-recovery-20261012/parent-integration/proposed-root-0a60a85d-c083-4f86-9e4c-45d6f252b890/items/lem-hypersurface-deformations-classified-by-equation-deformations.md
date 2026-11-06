@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hypersurface-deformations-classified-by-equation-deformations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-osgood-uniqueness-criterion-for-first-order-odes.md

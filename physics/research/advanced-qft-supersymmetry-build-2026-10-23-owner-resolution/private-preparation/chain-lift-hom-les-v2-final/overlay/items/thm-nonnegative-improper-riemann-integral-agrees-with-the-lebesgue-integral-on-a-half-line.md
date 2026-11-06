@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line.md

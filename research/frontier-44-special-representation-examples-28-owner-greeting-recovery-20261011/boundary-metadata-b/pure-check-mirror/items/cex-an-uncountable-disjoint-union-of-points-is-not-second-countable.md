@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-uncountable-disjoint-union-of-points-is-not-second-countable.md

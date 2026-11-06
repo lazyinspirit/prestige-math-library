@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-degenerate-ariki-decomposition-numbers-in-small-rank.md

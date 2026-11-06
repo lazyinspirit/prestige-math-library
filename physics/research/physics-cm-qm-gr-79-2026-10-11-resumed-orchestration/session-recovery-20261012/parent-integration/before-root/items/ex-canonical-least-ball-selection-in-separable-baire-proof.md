@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-canonical-least-ball-selection-in-separable-baire-proof.md

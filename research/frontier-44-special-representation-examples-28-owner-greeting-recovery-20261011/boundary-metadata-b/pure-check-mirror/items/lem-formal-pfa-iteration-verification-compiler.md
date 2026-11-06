@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-formal-pfa-iteration-verification-compiler.md

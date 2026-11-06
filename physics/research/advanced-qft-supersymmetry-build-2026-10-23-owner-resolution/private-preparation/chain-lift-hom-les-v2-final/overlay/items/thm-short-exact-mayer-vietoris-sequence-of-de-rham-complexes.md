@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-short-exact-mayer-vietoris-sequence-of-de-rham-complexes.md

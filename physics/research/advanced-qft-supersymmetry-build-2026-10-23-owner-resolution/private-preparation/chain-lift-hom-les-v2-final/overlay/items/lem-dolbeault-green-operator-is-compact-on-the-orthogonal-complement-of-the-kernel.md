@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dolbeault-green-operator-is-compact-on-the-orthogonal-complement-of-the-kernel.md

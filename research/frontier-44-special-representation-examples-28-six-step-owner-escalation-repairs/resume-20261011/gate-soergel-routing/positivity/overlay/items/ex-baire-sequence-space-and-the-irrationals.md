@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-baire-sequence-space-and-the-irrationals.md

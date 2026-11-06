@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-weak-harnack-inequality-for-nonnegative-supersolutions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-principal-parts-sheaf-line-bundle-curve.md

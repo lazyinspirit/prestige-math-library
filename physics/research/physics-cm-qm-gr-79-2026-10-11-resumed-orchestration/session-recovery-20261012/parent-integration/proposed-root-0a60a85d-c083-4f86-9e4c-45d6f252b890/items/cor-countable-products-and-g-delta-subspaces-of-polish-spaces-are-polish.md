@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish.md

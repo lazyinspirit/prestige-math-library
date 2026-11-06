@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm-oscillator-boundary-value-nonuniqueness-check.md

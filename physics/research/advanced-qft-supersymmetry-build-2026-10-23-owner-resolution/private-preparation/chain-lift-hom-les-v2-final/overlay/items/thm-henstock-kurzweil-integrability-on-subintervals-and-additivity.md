@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-henstock-kurzweil-integrability-on-subintervals-and-additivity.md

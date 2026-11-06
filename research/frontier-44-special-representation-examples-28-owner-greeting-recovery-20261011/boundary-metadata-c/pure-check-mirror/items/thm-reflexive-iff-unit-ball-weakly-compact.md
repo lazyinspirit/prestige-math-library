@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-reflexive-iff-unit-ball-weakly-compact.md

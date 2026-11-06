@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-choice-strength-of-runge-and-mittag-leffler.md

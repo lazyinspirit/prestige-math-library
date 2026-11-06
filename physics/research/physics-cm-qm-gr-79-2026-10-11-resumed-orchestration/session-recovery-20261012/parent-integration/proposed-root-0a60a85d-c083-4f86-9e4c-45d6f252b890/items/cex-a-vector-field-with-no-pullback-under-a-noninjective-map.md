@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-vector-field-with-no-pullback-under-a-noninjective-map.md

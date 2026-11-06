@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality.md

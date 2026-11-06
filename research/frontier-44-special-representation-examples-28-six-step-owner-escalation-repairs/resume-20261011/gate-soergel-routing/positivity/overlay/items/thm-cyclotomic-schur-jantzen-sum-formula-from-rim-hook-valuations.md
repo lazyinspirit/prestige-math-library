@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cyclotomic-schur-jantzen-sum-formula-from-rim-hook-valuations.md

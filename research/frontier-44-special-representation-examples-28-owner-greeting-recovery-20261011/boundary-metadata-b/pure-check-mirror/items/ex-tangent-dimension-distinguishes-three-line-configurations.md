@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-tangent-dimension-distinguishes-three-line-configurations.md

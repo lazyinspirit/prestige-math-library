@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-normalized-comparison-maps-around-a-relation-loop.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-standard-cone-triangle-in-the-homotopy-category.md

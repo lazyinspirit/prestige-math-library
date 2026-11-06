@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-ext-groups-of-the-cotangent-complex.md

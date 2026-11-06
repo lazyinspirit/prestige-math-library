@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-propagation-speed-for-the-wave-equation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-flat-deformations-form-a-zariski-sheaf-of-groupoids.md

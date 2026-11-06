@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-basic-cohen-generic-reals-form-a-symmetric-set.md

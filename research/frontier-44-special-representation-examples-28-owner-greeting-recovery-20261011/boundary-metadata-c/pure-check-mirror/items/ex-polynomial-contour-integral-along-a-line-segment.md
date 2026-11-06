@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-polynomial-contour-integral-along-a-line-segment.md

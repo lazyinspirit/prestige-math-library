@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-banach-alaoglu-versus-sequential-alaoglu.md

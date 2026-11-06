@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic.md

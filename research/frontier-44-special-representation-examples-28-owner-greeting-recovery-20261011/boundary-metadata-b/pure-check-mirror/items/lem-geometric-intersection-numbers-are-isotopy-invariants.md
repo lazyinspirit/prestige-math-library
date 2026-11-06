@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-geometric-intersection-numbers-are-isotopy-invariants.md

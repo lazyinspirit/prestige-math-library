@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-scalar-and-vector-line-integral-estimates.md

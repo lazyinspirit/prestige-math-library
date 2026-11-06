@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-localization-is-flat-and-has-vanishing-positive-tor.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-rational-function-no-poles-codimension-one-regular.md

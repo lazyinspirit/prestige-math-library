@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-real-l-two-kernel-operator-is-bounded-and-rank-one-compatible.md

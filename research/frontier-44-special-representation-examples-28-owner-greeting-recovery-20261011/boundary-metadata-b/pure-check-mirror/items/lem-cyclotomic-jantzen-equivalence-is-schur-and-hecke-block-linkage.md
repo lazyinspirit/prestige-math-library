@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-jantzen-equivalence-is-schur-and-hecke-block-linkage.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-qg-tensor-product-bar-is-triangular-and-compatible-with-fock-truncations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-class-of-an-extension-in-derived-ext-one.md

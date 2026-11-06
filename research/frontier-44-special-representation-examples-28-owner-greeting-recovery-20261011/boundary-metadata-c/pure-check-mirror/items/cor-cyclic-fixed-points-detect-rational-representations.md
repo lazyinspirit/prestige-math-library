@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-cyclic-fixed-points-detect-rational-representations.md

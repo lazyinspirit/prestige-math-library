@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-interference-two-path-preparation-and-detection-model.md

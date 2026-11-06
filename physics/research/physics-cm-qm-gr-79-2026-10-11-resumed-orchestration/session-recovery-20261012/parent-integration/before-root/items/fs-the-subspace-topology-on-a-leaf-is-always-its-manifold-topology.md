@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-subspace-topology-on-a-leaf-is-always-its-manifold-topology.md

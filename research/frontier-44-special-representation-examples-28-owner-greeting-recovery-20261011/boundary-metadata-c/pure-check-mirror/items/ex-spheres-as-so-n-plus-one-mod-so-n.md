@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-spheres-as-so-n-plus-one-mod-so-n.md

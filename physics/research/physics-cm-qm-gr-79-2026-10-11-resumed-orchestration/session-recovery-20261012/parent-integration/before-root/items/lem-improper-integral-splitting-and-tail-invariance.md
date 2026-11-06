@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-improper-integral-splitting-and-tail-invariance.md

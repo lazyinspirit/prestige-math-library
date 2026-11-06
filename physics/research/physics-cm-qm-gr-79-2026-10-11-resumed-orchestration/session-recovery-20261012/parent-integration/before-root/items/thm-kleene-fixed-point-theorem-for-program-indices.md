@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kleene-fixed-point-theorem-for-program-indices.md

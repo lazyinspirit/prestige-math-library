@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-pullback-cartier-divisor-line-bundle.md

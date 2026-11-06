@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-three-term-zero-composite-diagram-that-is-not-distinguished.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonzero-finite-dimensional-complex-invariant-subspaces-have-unitary-eigenvectors.md

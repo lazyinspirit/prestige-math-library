@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-kostant-multiplicity-in-the-sl3-adjoint-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-maximal-algebraically-independent-subset-is-a-transcendence-basis.md

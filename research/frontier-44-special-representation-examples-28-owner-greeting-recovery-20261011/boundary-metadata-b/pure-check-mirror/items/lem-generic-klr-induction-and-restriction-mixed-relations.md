@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-generic-klr-induction-and-restriction-mixed-relations.md

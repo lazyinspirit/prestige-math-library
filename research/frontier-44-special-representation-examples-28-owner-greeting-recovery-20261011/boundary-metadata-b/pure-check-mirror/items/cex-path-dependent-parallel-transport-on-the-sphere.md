@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-path-dependent-parallel-transport-on-the-sphere.md

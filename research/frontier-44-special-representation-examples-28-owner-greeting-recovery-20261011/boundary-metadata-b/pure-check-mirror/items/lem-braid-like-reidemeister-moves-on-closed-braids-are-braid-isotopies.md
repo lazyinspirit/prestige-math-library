@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-braid-like-reidemeister-moves-on-closed-braids-are-braid-isotopies.md

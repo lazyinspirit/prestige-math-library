@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-removability-of-a-puncture-in-several-complex-variables.md

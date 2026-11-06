@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-egorov-for-the-powers-x-to-the-k-on-the-unit-interval.md

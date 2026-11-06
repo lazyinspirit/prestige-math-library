@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-pullback-of-a-compactly-supported-form-is-always-compactly-supported.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-four-square-representations-of-a-prime-are-essentially-unique.md

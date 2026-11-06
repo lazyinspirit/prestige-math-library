@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-galois-subgroup-corresponds-to-a-normal-subextension.md

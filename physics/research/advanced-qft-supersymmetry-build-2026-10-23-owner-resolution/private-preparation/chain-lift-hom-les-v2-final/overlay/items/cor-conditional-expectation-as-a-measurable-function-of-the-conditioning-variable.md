@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable.md

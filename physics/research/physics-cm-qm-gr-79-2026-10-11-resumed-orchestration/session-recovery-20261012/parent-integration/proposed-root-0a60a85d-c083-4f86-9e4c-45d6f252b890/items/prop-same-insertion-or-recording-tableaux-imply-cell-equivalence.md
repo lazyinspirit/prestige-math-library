@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-same-insertion-or-recording-tableaux-imply-cell-equivalence.md

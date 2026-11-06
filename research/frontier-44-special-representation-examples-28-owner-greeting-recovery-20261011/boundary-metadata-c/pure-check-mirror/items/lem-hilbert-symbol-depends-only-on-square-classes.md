@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hilbert-symbol-depends-only-on-square-classes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-attaching-a-smooth-handle-with-corner-rounding.md

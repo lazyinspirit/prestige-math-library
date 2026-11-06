@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nrqm-symmetries-nonconstant-potential-breaks-translation.md

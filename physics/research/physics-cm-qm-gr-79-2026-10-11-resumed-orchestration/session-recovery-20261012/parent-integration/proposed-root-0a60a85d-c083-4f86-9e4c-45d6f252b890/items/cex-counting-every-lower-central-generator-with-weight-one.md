@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-counting-every-lower-central-generator-with-weight-one.md

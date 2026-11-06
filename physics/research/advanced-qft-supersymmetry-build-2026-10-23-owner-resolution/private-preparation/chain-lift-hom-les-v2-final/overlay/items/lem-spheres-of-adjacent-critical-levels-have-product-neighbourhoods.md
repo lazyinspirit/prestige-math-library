@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-spheres-of-adjacent-critical-levels-have-product-neighbourhoods.md

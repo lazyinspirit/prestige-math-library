@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-number-theoretic-and-poset-mobius-agree.md

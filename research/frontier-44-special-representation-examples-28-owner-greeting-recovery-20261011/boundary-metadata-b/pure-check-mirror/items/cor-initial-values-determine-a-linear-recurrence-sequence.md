@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-initial-values-determine-a-linear-recurrence-sequence.md

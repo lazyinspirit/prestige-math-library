@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-abstract-group-action-is-not-algebraic-action.md

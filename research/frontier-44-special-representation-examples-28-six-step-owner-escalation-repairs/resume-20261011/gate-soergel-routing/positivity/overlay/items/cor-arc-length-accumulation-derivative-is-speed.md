@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-arc-length-accumulation-derivative-is-speed.md

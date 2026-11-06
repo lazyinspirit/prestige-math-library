@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-euler-class-of-the-universal-oriented-two-plane.md

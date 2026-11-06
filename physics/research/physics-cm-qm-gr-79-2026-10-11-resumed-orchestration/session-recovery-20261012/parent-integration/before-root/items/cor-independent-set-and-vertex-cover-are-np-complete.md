@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-independent-set-and-vertex-cover-are-np-complete.md

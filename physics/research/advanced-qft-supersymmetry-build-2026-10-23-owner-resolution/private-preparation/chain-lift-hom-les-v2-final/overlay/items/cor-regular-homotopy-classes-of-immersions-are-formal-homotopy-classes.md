@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes.md

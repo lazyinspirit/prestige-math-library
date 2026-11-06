@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-dominance-is-defined-without-choosing-positive-roots.md

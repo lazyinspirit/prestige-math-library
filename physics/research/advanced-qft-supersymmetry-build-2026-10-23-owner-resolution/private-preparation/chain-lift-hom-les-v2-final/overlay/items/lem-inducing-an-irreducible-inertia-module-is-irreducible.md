@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-inducing-an-irreducible-inertia-module-is-irreducible.md

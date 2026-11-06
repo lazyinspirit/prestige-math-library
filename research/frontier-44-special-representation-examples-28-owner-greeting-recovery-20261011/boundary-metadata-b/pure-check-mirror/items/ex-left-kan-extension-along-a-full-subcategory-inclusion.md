@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-left-kan-extension-along-a-full-subcategory-inclusion.md

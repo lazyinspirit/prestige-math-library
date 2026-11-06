@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-c-star-state-gns-purity-and-polish-state-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-general-linear-stiefel-perverse-normalization-is-exact-and-conservative.md

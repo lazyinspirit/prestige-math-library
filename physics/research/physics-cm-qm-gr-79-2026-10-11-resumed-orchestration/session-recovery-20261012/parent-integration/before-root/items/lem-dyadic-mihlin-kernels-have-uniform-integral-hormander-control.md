@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dyadic-mihlin-kernels-have-uniform-integral-hormander-control.md

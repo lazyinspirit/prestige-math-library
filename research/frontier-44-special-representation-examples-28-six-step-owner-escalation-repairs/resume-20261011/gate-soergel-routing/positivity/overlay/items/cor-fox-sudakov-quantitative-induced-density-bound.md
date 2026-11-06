@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-fox-sudakov-quantitative-induced-density-bound.md

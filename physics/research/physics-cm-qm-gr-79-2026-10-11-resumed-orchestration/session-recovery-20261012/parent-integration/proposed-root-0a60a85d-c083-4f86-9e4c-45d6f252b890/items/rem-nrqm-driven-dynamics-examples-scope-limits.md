@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-nrqm-driven-dynamics-examples-scope-limits.md

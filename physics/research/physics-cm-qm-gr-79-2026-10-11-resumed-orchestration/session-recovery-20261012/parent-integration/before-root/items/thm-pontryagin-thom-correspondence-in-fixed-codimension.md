@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pontryagin-thom-correspondence-in-fixed-codimension.md

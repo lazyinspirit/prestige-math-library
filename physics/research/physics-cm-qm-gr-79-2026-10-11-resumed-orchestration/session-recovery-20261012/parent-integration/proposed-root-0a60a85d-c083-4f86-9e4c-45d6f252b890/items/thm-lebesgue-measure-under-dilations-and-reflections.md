@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lebesgue-measure-under-dilations-and-reflections.md

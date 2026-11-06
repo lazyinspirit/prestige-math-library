@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-inverse-and-shifted-inverse-iteration.md

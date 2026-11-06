@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-components-distance-and-girth-in-a-disconnected-graph.md

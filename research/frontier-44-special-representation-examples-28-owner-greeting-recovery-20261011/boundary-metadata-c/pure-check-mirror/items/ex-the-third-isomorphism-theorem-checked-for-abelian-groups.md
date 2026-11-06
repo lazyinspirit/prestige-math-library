@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-third-isomorphism-theorem-checked-for-abelian-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-projective-dualizing-complex-trace-and-embedding-independence.md

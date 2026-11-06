@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-sr-observed-energy-momentum-and-kinetic-energy.md

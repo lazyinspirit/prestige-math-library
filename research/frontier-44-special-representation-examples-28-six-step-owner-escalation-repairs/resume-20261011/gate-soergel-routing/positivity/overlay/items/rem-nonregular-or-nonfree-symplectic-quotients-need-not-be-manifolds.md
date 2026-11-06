@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-nonregular-or-nonfree-symplectic-quotients-need-not-be-manifolds.md

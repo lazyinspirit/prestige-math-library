@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character.md

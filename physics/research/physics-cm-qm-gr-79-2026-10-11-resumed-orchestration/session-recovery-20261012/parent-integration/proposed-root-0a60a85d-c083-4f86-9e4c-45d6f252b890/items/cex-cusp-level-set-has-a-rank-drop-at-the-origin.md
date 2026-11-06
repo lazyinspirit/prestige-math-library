@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cusp-level-set-has-a-rank-drop-at-the-origin.md

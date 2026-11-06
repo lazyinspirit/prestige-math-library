@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-suspension-isomorphism-in-reduced-singular-homology.md

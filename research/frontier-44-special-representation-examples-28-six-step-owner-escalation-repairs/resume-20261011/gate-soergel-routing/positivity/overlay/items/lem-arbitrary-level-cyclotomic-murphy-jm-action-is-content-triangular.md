@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-arbitrary-level-cyclotomic-murphy-jm-action-is-content-triangular.md

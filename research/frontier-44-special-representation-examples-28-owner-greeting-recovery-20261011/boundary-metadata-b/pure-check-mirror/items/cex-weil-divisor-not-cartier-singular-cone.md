@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-weil-divisor-not-cartier-singular-cone.md

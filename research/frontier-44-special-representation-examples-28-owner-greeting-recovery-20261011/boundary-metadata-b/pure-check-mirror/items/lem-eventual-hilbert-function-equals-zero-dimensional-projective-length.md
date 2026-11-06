@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-eventual-hilbert-function-equals-zero-dimensional-projective-length.md

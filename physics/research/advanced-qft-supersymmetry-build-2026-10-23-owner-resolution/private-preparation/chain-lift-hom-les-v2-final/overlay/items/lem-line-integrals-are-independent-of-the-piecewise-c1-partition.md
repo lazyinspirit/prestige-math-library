@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-line-integrals-are-independent-of-the-piecewise-c1-partition.md

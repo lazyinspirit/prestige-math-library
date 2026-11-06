@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-tube-lemma-for-a-compact-metric-factor.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-weil-divisor-normal-noetherian-scheme.md

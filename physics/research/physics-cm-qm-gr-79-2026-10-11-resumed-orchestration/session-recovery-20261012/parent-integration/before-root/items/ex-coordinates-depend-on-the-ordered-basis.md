@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-coordinates-depend-on-the-ordered-basis.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cellular-approximation-for-maps-of-cw-pairs.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hh-hecke-specialization-at-v-equals-one.md

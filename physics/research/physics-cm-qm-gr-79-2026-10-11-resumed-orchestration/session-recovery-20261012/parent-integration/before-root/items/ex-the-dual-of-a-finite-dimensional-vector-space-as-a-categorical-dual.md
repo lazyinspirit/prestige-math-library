@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-dual-of-a-finite-dimensional-vector-space-as-a-categorical-dual.md

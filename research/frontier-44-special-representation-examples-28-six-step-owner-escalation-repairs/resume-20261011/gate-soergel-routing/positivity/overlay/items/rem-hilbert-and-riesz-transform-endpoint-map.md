@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-hilbert-and-riesz-transform-endpoint-map.md

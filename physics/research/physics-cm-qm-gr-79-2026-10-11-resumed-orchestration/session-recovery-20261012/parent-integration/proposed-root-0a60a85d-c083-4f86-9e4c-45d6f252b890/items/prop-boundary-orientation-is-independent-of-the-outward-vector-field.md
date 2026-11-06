@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-boundary-orientation-is-independent-of-the-outward-vector-field.md

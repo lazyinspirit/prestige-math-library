@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-family-xy-equals-t-flat-not-smooth-at-node.md

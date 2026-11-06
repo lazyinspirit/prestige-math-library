@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-module-valued-coend-computed-as-a-quotient-of-a-direct-sum.md

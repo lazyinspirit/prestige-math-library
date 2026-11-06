@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-uniformisers-and-dvr-ideal-arithmetic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-blocks-from-different-mixed-block-classes-form-pure-pairs.md

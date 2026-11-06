@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-root-groups-and-bruhat-cells-for-sl2.md

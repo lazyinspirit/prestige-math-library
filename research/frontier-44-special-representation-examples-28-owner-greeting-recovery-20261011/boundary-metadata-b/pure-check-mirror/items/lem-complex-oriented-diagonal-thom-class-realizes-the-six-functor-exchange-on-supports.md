@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-complex-oriented-diagonal-thom-class-realizes-the-six-functor-exchange-on-supports.md

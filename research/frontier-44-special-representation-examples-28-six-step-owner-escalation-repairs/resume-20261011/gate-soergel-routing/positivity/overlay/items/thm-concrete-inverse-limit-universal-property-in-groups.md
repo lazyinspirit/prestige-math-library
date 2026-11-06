@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-concrete-inverse-limit-universal-property-in-groups.md

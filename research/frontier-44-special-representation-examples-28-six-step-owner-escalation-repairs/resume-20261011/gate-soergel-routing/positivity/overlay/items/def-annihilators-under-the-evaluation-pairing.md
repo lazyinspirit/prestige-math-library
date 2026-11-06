@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-annihilators-under-the-evaluation-pairing.md

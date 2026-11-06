@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cohomology-of-a-finite-cw-complex-vanishes-above-its-dimension.md

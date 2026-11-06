@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-product-of-two-subgroups-not-a-subgroup.md

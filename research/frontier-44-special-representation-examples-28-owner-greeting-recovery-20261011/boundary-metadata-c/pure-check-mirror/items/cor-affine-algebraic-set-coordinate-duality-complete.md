@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-affine-algebraic-set-coordinate-duality-complete.md

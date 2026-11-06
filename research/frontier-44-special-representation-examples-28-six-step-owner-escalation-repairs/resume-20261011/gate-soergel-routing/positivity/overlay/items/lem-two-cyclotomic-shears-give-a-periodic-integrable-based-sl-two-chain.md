@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-cyclotomic-shears-give-a-periodic-integrable-based-sl-two-chain.md

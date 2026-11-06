@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures.md

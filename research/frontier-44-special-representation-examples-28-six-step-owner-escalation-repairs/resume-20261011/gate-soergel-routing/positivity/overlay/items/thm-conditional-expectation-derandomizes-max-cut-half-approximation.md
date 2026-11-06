@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-conditional-expectation-derandomizes-max-cut-half-approximation.md

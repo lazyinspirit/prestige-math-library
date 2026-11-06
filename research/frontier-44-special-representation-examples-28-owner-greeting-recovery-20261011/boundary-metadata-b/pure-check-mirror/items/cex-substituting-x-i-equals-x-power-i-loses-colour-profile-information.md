@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information.md

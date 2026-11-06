@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fourier-maximal-weak-bound-closes-almost-everywhere-convergence.md

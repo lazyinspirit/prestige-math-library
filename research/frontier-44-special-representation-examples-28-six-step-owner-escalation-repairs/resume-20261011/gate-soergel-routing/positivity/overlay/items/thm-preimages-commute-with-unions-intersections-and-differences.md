@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-preimages-commute-with-unions-intersections-and-differences.md

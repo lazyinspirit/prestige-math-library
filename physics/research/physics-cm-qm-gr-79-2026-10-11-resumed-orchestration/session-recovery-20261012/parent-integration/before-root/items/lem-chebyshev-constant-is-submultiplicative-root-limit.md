@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-chebyshev-constant-is-submultiplicative-root-limit.md

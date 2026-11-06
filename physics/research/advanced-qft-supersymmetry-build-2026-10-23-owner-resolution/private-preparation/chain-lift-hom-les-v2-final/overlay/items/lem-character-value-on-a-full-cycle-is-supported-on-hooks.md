@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-character-value-on-a-full-cycle-is-supported-on-hooks.md

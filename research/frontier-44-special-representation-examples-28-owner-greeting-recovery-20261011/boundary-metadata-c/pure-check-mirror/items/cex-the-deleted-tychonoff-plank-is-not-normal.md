@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-deleted-tychonoff-plank-is-not-normal.md

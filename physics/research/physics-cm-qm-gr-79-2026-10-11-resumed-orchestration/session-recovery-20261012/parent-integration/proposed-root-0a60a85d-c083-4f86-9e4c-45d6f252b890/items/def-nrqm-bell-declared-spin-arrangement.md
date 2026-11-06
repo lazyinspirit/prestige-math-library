@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-bell-declared-spin-arrangement.md

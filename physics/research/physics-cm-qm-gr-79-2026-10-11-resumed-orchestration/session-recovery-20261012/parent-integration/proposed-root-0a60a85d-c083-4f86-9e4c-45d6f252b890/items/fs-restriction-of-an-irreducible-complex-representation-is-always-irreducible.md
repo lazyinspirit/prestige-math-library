@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-restriction-of-an-irreducible-complex-representation-is-always-irreducible.md

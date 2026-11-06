@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-three-catalan-families-matched-at-semilength-three.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-change-of-rings-for-extension-of-scalars.md

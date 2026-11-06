@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zero-set-propagation-for-a-nonnegative-holder-weak-solution.md

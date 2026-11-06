@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-holomorphic-and-meromorphic-map-of-riemann-surfaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-connection-on-a-riemannian-vector-bundle-is-metric-compatible.md

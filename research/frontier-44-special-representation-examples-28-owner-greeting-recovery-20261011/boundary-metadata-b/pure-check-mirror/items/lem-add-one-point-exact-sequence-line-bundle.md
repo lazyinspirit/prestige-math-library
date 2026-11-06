@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-add-one-point-exact-sequence-line-bundle.md

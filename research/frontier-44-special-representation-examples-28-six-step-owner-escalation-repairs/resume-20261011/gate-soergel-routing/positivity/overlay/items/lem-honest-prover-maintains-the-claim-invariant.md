@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-honest-prover-maintains-the-claim-invariant.md

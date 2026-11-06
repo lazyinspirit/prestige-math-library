@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-inverse-of-bijective-group-homomorphism.md

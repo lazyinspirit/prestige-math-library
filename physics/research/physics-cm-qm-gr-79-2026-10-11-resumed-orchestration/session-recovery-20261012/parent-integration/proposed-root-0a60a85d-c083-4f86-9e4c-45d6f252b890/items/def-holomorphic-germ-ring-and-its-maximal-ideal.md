@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-holomorphic-germ-ring-and-its-maximal-ideal.md

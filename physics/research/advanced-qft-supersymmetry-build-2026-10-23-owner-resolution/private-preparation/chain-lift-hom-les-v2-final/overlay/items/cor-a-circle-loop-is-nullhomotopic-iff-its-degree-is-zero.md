@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-circle-loop-is-nullhomotopic-iff-its-degree-is-zero.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-measurable-hilbert-field-from-a-countable-fundamental-family.md

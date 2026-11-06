@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-unparametrized-trajectory-space-is-a-smooth-manifold.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lagrange-multipliers-for-regular-level-set-constraints.md

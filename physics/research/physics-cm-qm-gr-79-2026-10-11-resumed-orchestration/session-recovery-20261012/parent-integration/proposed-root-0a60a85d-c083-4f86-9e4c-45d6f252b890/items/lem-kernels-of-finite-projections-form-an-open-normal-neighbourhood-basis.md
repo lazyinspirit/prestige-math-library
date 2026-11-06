@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis.md

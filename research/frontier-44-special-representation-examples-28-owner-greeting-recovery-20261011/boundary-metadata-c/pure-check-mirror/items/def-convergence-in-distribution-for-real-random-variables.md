@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-convergence-in-distribution-for-real-random-variables.md

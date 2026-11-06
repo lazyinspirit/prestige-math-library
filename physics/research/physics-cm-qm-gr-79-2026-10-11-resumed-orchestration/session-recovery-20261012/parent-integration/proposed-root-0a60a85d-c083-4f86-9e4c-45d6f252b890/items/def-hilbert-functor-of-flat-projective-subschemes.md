@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hilbert-functor-of-flat-projective-subschemes.md

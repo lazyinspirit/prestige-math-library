@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-small-dowker-coloring-gives-ad-guessing.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-inward-outward-and-boundary-tangent-vectors.md

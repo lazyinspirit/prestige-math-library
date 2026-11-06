@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-relative-hard-lefschetz-and-perverse-splitting-for-projective-algebraic-maps.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-type-a-diagrammatic-relations-hold-for-soergel-bimodules.md

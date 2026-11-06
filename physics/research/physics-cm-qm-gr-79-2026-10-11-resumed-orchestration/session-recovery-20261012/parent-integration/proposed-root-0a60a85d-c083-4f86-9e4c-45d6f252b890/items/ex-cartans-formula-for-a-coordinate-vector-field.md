@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cartans-formula-for-a-coordinate-vector-field.md

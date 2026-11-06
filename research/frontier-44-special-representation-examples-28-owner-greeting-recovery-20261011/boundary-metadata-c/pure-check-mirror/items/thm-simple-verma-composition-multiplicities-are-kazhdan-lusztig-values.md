@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-verma-composition-multiplicities-are-kazhdan-lusztig-values.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hilbert-schmidt-norm-is-basis-independent.md

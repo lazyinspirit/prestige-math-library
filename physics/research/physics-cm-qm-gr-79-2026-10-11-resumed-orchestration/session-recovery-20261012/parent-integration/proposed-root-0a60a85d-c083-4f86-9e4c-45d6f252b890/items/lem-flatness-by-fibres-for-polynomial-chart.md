@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-flatness-by-fibres-for-polynomial-chart.md

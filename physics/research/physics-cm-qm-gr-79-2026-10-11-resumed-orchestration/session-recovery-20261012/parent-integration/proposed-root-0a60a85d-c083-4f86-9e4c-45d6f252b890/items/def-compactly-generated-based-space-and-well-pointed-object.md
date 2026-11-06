@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-compactly-generated-based-space-and-well-pointed-object.md

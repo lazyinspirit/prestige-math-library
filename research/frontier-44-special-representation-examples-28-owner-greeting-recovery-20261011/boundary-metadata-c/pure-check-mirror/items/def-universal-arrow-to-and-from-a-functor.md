@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-universal-arrow-to-and-from-a-functor.md

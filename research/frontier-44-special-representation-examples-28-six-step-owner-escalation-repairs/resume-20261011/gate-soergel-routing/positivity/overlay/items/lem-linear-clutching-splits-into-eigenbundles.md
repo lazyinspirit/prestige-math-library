@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-linear-clutching-splits-into-eigenbundles.md

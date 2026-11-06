@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-geodesic-segments-have-isometric-ultralimits.md

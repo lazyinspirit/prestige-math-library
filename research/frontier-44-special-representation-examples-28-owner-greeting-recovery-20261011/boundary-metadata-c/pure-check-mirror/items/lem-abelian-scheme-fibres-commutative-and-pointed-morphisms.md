@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-abelian-scheme-fibres-commutative-and-pointed-morphisms.md

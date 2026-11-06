@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fraction-field-of-the-integers-is-the-rationals.md

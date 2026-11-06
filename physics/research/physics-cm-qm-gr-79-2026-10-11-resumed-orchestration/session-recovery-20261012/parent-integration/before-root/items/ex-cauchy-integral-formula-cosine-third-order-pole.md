@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cauchy-integral-formula-cosine-third-order-pole.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-translation-invariant-test-function-operators-are-convolutions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-heat-equation-has-infinite-propagation-in-the-positive-kernel-class.md

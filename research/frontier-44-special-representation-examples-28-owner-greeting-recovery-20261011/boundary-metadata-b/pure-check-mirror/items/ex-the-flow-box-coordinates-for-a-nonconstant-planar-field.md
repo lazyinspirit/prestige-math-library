@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-flow-box-coordinates-for-a-nonconstant-planar-field.md

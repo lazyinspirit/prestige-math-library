@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-unit-ball-family-is-normal-on-any-domain.md

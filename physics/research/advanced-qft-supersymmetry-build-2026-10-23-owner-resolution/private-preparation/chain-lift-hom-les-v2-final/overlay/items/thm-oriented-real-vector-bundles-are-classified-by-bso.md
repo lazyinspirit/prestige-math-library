@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-oriented-real-vector-bundles-are-classified-by-bso.md

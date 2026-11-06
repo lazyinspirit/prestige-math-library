@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-an-exact-k-linear-strong-monoidal-functor-out-of-a-tensor-category-is-faithful.md

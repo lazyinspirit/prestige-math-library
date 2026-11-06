@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-any-adjoint-between-additive-categories-is-additive.md

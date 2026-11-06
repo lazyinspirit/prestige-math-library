@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-normalized-riemann-map-for-a-sector-with-branch-choice.md

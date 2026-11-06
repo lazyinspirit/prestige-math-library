@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-c-star-algebra-generated-by-a-normal-operator.md

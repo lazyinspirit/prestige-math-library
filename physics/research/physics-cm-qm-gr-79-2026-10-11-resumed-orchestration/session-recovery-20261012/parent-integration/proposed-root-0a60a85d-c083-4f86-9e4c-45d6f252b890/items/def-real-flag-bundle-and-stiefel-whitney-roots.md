@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-real-flag-bundle-and-stiefel-whitney-roots.md

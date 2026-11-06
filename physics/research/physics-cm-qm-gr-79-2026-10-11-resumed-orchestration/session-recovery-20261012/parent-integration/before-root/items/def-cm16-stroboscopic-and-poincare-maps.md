@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm16-stroboscopic-and-poincare-maps.md

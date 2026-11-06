@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-surface-complete-equicharacteristic-formal-fibres.md

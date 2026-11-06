@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-bernstein-set-is-not-lebesgue-measurable.md

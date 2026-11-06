@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-lc-fine-ultrafilters-strong-compactness-and-supercompactness.md

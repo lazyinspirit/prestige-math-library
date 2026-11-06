@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-paradoxical-decomposition-means-a-set-theoretic-partition-without-group-translates.md

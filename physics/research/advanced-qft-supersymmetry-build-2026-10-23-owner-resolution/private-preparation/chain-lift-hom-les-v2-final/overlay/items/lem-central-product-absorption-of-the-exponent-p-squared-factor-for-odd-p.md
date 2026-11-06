@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-central-product-absorption-of-the-exponent-p-squared-factor-for-odd-p.md

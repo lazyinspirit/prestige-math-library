@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-regular-module-decomposes-into-projective-indecomposables.md

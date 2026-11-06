@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-good-reduction-and-abelian-scheme-model.md

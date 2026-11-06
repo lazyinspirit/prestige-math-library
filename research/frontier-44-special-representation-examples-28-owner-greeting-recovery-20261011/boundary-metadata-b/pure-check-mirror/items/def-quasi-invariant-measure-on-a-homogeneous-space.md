@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quasi-invariant-measure-on-a-homogeneous-space.md

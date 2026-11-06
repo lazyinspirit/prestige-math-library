@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-fejer-means-need-not-converge-uniformly-for-discontinuous-data.md

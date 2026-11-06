@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-poisson-integral-solves-the-disc-dirichlet-problem.md

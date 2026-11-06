@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-m0w-finite-projection-and-tail-bvm-criterion.md

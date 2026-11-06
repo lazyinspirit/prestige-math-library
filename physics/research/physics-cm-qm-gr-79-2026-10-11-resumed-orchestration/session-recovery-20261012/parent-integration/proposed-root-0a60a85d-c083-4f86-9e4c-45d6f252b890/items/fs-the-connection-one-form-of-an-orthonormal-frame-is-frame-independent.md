@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-connection-one-form-of-an-orthonormal-frame-is-frame-independent.md

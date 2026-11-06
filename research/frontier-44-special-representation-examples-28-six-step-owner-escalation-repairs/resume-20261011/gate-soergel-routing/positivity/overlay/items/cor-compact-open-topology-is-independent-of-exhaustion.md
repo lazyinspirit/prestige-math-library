@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-compact-open-topology-is-independent-of-exhaustion.md

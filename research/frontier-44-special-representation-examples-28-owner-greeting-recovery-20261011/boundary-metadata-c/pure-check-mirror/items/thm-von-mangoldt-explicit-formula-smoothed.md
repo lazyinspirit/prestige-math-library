@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-von-mangoldt-explicit-formula-smoothed.md

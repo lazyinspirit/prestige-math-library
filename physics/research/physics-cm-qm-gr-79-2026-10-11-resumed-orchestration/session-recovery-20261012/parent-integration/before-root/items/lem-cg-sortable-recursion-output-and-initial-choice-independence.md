@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-sortable-recursion-output-and-initial-choice-independence.md

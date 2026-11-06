@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-abel-and-cesaro-summability-of-a-series.md

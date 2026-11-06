@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-free-product-of-infinite-cyclic-groups-is-free.md

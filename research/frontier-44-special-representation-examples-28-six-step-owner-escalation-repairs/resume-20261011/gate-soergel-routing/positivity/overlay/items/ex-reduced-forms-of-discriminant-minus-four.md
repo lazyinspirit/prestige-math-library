@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-reduced-forms-of-discriminant-minus-four.md

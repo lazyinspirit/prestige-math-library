@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-associated-primes-empty-iff-module-zero-noetherian.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c-star-algebras-and-closed-ideals-have-positive-contractive-approximate-units.md

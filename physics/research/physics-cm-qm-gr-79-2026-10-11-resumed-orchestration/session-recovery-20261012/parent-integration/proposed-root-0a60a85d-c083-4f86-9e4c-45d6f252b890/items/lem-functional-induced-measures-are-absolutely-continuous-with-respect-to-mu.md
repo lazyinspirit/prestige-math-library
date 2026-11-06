@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu.md

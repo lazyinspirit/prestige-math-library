@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-ideal-x-y-in-a-bivariate-polynomial-ring-is-not-principal.md

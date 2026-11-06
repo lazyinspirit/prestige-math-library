@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-topological-sums-of-cech-complete-spaces.md

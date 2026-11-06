@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-surface-local-rings-propagate-by-point-sequence-spreading.md

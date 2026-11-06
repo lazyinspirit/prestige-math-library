@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-nonnegative-improper-multiple-integral-by-exhaustion.md

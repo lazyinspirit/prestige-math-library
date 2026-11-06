@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-zero-set-ultrafilters-and-stone-cech-points.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonuniqueness-of-a-tr-three-completion.md

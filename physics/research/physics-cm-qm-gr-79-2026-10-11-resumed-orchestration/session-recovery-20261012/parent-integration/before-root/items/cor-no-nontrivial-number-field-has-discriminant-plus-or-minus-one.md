@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-topological-isomorphism-of-normed-spaces.md

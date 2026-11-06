@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-strictly-upper-triangular-matrices-form-a-nilpotent-lie-algebra.md

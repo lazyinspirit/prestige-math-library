@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-etale-fundamental-group-and-fibre-functor.md

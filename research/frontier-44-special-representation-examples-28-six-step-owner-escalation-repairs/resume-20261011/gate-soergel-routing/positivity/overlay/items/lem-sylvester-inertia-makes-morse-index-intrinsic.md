@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-sylvester-inertia-makes-morse-index-intrinsic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-interval-homotopy-operator-is-coordinate-independent.md

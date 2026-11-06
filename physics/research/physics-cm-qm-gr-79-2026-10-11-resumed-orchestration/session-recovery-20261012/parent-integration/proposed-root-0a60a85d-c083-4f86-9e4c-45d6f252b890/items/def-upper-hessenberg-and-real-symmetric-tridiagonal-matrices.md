@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices.md

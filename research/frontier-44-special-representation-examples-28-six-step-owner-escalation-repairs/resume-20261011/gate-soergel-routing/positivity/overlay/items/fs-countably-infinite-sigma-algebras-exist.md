@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-countably-infinite-sigma-algebras-exist.md

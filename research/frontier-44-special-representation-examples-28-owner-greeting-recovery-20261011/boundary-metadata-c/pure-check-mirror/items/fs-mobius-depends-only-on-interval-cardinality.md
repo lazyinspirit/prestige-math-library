@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-mobius-depends-only-on-interval-cardinality.md

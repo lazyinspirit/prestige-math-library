@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-degree-zero-invariants-and-coinvariants.md

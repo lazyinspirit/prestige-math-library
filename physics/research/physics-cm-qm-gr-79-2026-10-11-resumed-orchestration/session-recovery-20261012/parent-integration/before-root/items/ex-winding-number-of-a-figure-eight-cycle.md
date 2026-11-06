@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-winding-number-of-a-figure-eight-cycle.md

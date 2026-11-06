@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-annihilator-ideal-of-a-lie-algebra-module.md

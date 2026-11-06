@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment.md

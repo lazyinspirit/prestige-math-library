@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-feferman-levy-real-layer-ground-cardinality-bound.md

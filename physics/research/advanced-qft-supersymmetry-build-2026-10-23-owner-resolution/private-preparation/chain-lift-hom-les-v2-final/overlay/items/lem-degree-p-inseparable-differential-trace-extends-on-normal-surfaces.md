@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-degree-p-inseparable-differential-trace-extends-on-normal-surfaces.md

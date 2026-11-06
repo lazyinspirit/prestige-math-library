@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-convex-set-and-closure-have-same-interior-and-boundary.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-geometric-series-reexpanded-about-an-arbitrary-complex-point.md

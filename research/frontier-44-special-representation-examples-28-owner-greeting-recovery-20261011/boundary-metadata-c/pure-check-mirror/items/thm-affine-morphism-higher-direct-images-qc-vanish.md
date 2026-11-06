@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-affine-morphism-higher-direct-images-qc-vanish.md

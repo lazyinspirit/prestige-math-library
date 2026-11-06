@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-interior-of-an-attached-cell-embeds-openly-in-its-closure.md

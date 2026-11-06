@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-injectivity-radius-at-each-point-is-positive.md

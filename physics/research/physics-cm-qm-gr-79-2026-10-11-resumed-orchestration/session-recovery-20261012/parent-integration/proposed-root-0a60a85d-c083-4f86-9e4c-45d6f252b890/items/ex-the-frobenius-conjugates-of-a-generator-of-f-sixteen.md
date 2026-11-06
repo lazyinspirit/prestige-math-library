@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-frobenius-conjugates-of-a-generator-of-f-sixteen.md

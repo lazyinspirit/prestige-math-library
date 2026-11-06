@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-uniform-convergence-of-complex-valued-functions.md

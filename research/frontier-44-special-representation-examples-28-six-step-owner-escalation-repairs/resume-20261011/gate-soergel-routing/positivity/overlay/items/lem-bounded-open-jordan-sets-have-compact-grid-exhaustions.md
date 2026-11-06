@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-open-jordan-sets-have-compact-grid-exhaustions.md

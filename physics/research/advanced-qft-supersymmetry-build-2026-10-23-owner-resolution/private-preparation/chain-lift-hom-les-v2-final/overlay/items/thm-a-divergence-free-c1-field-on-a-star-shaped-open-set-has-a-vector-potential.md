@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-divergence-free-c1-field-on-a-star-shaped-open-set-has-a-vector-potential.md

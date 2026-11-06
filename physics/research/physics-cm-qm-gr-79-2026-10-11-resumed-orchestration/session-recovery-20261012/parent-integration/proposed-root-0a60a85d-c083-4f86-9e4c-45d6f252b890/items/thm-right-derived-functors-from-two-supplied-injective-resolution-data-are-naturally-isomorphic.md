@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-internal-hom-module-over-a-commutative-ring.md

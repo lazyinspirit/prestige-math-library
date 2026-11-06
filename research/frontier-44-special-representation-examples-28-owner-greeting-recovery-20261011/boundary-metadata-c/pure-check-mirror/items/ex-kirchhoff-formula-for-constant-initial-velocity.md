@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-kirchhoff-formula-for-constant-initial-velocity.md

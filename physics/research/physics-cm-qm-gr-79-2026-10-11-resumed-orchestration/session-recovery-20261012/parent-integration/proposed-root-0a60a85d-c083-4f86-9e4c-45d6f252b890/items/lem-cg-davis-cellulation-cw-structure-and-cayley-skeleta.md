@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-substitution-with-riemann-integrable-inner-derivative.md

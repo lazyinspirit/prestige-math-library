@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-wiener-lemma-is-developed-on-the-fourier-analysis-track.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-reflection-form-invariance-and-rank-two-orders.md

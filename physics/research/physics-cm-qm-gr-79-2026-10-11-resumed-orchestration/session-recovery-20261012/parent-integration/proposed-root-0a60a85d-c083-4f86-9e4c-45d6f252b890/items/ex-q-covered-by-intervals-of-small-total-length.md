@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-q-covered-by-intervals-of-small-total-length.md

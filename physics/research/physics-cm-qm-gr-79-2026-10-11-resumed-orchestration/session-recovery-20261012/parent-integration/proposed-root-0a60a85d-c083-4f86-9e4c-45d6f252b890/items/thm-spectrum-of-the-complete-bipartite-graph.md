@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-spectrum-of-the-complete-bipartite-graph.md

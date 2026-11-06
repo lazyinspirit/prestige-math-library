@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-integration-by-parts-needs-no-integrability-hypothesis.md

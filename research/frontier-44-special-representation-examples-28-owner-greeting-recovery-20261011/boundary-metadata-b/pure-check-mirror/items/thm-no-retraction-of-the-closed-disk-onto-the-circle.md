@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-no-retraction-of-the-closed-disk-onto-the-circle.md

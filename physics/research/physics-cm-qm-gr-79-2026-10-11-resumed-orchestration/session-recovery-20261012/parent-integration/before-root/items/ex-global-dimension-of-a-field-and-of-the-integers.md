@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-global-dimension-of-a-field-and-of-the-integers.md

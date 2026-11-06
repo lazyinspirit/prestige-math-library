@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-signature-theorem-imposes-pontryagin-number-congruences.md

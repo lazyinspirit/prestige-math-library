@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-one-dimensional-trace-truncation-compatibility.md

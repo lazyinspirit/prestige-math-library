@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-simple-dichotomy-for-omega-one-generated-ideals.md

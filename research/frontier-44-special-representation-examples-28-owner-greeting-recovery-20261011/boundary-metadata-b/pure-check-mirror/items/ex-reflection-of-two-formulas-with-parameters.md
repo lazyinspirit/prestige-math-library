@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-reflection-of-two-formulas-with-parameters.md

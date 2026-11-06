@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-character-field-is-the-stabilizer-fixed-field.md

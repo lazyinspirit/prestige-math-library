@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-group-acting-freely-on-a-positive-even-sphere-has-at-most-two-elements.md

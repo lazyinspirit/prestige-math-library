@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components.md

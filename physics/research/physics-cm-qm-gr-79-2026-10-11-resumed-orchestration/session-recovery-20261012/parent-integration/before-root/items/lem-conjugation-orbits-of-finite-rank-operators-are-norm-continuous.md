@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-conjugation-orbits-of-finite-rank-operators-are-norm-continuous.md

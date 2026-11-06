@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-rouquier-canonical-comparisons-between-standard-graph-tensors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-observables-framework-observable-and-outcome-law.md

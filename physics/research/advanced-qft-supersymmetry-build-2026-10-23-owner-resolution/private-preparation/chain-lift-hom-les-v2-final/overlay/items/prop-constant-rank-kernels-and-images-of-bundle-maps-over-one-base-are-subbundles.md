@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles.md

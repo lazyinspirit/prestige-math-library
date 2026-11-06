@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-canonical-morse-homology-of-a-closed-manifold.md

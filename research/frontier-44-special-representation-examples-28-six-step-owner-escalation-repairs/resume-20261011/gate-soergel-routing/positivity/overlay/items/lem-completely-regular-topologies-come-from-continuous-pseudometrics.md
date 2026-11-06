@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-completely-regular-topologies-come-from-continuous-pseudometrics.md

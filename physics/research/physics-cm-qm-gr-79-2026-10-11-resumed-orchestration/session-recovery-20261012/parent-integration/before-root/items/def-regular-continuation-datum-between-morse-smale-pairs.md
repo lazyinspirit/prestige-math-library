@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-regular-continuation-datum-between-morse-smale-pairs.md

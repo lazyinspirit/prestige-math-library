@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-largest-entry-of-a-standard-tableau-is-removable.md

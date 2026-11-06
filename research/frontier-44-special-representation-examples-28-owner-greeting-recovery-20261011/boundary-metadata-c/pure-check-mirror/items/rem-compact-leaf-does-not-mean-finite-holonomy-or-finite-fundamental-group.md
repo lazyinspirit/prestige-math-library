@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-compact-leaf-does-not-mean-finite-holonomy-or-finite-fundamental-group.md

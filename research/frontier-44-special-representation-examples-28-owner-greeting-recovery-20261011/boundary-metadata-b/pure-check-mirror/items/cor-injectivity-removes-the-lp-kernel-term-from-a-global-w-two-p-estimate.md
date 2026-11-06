@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-injectivity-removes-the-lp-kernel-term-from-a-global-w-two-p-estimate.md

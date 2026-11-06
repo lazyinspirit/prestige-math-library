@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-weak-tilted-tests-do-not-imply-almost-sure-consistency.md

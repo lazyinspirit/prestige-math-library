@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pvm-multiplicity-model-over-a-standard-borel-space.md

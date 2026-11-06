@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-gelfand-kolmogorov-recovers-beta-x-not-x.md

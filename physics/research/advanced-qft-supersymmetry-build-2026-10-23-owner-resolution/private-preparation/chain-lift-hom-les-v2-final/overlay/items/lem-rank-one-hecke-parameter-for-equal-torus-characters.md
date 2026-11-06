@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rank-one-hecke-parameter-for-equal-torus-characters.md

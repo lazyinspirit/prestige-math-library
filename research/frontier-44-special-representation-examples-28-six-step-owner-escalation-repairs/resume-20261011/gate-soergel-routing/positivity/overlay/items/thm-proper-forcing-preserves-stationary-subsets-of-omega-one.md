@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-proper-forcing-preserves-stationary-subsets-of-omega-one.md

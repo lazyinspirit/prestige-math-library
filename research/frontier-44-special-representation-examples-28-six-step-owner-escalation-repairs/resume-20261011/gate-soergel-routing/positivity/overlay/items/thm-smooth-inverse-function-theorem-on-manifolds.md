@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-smooth-inverse-function-theorem-on-manifolds.md

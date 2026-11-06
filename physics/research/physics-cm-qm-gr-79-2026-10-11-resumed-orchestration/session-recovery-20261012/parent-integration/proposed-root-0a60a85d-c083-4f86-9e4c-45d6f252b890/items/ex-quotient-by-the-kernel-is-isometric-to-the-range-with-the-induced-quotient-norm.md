@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-quotient-by-the-kernel-is-isometric-to-the-range-with-the-induced-quotient-norm.md

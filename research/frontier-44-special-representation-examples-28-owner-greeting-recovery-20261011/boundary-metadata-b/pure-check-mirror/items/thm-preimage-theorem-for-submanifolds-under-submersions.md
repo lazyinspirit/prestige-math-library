@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-preimage-theorem-for-submanifolds-under-submersions.md

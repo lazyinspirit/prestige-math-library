@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-henstock-kurzweil-integral-on-a-noncompact-interval.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-implicit-function-theorem-for-banach-spaces.md

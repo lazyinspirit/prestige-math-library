@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ordered-monomial-pbw-basis-for-the-shifted-yangian.md

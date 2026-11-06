@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-infinitesimal-generator-of-a-symplectic-action-is-symplectic.md

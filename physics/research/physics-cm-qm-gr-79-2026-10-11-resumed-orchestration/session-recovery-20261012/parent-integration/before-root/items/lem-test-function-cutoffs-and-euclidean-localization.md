@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-test-function-cutoffs-and-euclidean-localization.md

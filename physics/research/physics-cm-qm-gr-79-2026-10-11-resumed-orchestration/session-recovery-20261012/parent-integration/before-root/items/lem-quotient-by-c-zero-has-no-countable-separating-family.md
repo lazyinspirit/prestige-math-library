@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quotient-by-c-zero-has-no-countable-separating-family.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-broken-trajectories-in-an-index-two-torus-moduli-space.md

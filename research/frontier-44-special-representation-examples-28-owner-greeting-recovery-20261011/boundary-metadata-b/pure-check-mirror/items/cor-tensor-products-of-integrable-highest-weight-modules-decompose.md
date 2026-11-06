@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-tensor-products-of-integrable-highest-weight-modules-decompose.md

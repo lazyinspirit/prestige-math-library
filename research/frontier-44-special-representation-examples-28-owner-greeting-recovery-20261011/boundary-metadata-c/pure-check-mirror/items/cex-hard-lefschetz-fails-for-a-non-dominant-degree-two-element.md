@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-hard-lefschetz-fails-for-a-non-dominant-degree-two-element.md

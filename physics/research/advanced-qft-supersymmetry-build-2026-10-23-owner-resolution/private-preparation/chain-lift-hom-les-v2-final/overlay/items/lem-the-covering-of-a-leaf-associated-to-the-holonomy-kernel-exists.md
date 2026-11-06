@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-covering-of-a-leaf-associated-to-the-holonomy-kernel-exists.md

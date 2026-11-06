@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-equal-color-quiver-flag-correspondence-is-nilhecke.md

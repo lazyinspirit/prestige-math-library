@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-weakly-sparse-set-has-a-large-sparse-subset.md

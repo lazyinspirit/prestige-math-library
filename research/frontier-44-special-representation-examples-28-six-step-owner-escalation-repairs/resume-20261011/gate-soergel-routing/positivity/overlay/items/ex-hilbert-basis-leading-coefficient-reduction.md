@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hilbert-basis-leading-coefficient-reduction.md

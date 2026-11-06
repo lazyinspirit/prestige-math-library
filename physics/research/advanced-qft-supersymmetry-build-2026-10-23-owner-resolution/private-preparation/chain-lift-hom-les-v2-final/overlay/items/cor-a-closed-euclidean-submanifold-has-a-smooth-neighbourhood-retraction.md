@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction.md

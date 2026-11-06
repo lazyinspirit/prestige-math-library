@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-continuous-complex-derivative-gives-c1-components.md

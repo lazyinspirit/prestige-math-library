@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-concatenation-test-enforces-a-shared-prefix.md

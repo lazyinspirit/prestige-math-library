@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-square-function-from-the-complex-difference-quotient.md

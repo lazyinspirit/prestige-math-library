@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-sr-rest-frame-of-a-timelike-displacement-worked.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lebesgue-measure-of-a-box-of-every-kind.md

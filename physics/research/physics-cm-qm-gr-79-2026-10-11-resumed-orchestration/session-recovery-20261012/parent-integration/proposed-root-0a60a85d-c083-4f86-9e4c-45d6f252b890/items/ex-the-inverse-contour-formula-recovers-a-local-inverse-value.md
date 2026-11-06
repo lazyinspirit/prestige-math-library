@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-inverse-contour-formula-recovers-a-local-inverse-value.md

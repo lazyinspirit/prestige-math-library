@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-riemann-stieltjes-and-parametric-contour-integrals-agree.md

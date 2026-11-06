@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-symmetric-groups-up-to-four-are-solvable.md

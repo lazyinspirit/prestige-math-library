@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-normalized-compactly-supported-top-form-on-euclidean-space.md

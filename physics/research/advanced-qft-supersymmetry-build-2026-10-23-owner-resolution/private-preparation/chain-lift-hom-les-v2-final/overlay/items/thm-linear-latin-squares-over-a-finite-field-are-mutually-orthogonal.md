@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-linear-latin-squares-over-a-finite-field-are-mutually-orthogonal.md

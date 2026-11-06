@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-bounded-measurable-nondivergence-coefficients-do-not-give-schauder-estimates.md

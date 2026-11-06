@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure.md

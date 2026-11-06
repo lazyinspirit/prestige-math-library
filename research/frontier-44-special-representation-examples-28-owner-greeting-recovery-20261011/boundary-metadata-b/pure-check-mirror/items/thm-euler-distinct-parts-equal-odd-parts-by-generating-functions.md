@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-euler-distinct-parts-equal-odd-parts-by-generating-functions.md

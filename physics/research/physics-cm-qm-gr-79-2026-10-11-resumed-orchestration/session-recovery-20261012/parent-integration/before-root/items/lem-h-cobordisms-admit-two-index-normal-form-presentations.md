@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-h-cobordisms-admit-two-index-normal-form-presentations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-finite-beth-iteration-above-a-cardinal.md

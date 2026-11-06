@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-same-sample-control-coefficient-remainder-is-op-one-over-n.md

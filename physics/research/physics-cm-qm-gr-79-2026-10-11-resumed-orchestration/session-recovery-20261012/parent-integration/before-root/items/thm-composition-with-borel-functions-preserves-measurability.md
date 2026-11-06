@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-composition-with-borel-functions-preserves-measurability.md

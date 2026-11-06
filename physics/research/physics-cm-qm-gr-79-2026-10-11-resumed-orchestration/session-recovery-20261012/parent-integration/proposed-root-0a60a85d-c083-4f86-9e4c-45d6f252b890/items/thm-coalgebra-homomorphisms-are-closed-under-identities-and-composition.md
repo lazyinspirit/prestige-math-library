@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-coalgebra-homomorphisms-are-closed-under-identities-and-composition.md

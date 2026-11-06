@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-map-homotopic-to-a-homotopy-equivalence-is-a-homotopy-equivalence.md

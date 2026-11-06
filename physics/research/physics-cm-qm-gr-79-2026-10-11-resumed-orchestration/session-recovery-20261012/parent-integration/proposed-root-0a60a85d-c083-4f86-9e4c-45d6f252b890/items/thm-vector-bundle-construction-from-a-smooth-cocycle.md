@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-vector-bundle-construction-from-a-smooth-cocycle.md

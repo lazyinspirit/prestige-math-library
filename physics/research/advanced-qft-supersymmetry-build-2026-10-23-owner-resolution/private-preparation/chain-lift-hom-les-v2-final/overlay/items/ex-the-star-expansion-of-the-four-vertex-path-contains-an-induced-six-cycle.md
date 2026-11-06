@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-star-expansion-of-the-four-vertex-path-contains-an-induced-six-cycle.md

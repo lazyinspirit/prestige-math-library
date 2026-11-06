@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-conjugacy-problem-for-a-finitely-generated-group.md

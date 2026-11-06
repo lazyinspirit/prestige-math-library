@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-derivatives-have-no-removable-or-jump-discontinuities.md

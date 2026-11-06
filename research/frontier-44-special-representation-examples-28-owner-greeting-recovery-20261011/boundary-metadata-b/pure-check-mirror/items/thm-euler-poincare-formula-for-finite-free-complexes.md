@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-euler-poincare-formula-for-finite-free-complexes.md

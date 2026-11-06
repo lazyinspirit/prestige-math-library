@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-interval-the-cantor-set-and-the-hilbert-cube-are-compact.md

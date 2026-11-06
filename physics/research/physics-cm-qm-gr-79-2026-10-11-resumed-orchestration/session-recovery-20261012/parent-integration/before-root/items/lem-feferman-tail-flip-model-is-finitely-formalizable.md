@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-feferman-tail-flip-model-is-finitely-formalizable.md

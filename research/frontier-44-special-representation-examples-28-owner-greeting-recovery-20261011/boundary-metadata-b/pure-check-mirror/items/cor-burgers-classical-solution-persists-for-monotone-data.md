@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-burgers-classical-solution-persists-for-monotone-data.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-polynomial-ring-on-a-finite-family-agrees-with-the-iterated-construction.md

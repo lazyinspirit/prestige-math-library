@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poincare-inequality-with-a-positive-measure-zero-set.md

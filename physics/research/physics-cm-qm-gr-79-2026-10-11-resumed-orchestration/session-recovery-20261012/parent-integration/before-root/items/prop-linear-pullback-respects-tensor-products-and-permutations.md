@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-linear-pullback-respects-tensor-products-and-permutations.md

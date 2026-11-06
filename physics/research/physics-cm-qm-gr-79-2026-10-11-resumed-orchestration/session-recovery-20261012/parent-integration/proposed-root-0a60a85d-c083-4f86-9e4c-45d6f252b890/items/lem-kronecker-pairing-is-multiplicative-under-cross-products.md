@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kronecker-pairing-is-multiplicative-under-cross-products.md

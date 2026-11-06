@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-permuting-meridian-conjugacy-classes-without-fixing-the-boundary-word-is-not-artin.md

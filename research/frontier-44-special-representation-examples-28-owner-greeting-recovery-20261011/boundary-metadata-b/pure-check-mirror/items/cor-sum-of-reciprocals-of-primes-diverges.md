@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-sum-of-reciprocals-of-primes-diverges.md

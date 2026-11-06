@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-modular-block-central-characters-correspond-to-blocks.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-stability-and-rank-cutoff-under-adding-a-trivial-summand.md

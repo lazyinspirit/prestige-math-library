@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-pattern-inside-an-extension-set-produces-the-substitution.md

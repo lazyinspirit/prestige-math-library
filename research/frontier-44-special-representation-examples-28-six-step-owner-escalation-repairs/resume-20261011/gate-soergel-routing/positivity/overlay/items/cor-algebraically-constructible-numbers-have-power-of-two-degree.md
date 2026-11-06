@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-algebraically-constructible-numbers-have-power-of-two-degree.md

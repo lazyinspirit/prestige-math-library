@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-garside-half-twist-and-simple-positive-braid.md

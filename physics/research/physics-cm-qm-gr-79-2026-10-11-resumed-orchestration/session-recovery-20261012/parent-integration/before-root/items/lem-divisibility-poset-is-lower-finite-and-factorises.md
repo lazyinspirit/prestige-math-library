@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-divisibility-poset-is-lower-finite-and-factorises.md

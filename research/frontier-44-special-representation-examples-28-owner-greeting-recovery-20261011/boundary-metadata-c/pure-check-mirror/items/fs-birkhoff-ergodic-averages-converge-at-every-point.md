@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-birkhoff-ergodic-averages-converge-at-every-point.md

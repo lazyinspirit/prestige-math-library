@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-framed-oriented-tangles-have-the-ribbon-generator-and-relation-presentation.md

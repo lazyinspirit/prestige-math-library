@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-nrqm-identical-particles-examples-scope-limits.md

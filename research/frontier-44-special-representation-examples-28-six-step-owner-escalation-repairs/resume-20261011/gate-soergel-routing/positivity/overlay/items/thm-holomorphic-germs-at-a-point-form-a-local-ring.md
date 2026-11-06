@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-holomorphic-germs-at-a-point-form-a-local-ring.md

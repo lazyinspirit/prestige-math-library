@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-multiple-choice-equivalent-to-choice-in-zf.md

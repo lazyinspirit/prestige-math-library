@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-kolmogorov-continuity-criterion-one-parameter.md

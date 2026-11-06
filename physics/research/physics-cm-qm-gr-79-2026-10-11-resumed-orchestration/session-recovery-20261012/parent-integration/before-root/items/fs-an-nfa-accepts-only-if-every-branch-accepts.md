@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-nfa-accepts-only-if-every-branch-accepts.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-klr-one-step-simple-restriction-induction-and-first-dot-index.md

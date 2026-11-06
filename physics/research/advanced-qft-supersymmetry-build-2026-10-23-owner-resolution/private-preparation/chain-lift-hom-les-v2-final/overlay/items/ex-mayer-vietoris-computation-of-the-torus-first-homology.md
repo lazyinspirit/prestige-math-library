@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-mayer-vietoris-computation-of-the-torus-first-homology.md

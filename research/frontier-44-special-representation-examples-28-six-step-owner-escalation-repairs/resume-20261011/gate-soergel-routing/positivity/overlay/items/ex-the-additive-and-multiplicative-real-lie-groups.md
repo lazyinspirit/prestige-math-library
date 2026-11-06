@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-additive-and-multiplicative-real-lie-groups.md

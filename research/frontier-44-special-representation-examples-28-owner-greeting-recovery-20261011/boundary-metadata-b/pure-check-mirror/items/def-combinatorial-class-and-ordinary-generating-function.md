@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-combinatorial-class-and-ordinary-generating-function.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-exponential-contour-integral-by-riemann-sum-and-parametrization.md

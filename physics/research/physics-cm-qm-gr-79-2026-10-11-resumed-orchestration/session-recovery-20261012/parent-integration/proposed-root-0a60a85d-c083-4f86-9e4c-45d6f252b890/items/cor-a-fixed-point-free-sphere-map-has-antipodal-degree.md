@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-fixed-point-free-sphere-map-has-antipodal-degree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-samuel-map-need-not-preserve-the-original-uniformity.md

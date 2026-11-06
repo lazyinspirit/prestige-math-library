@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-normalizer-condition-for-finite-nilpotent-groups.md

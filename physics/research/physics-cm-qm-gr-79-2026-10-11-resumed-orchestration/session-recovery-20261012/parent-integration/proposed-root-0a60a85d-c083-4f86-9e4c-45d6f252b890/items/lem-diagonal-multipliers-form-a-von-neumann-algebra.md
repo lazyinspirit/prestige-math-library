@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-diagonal-multipliers-form-a-von-neumann-algebra.md

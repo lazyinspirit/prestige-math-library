@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-signature-is-independent-of-basis-and-field-extension-from-rationals-to-reals.md

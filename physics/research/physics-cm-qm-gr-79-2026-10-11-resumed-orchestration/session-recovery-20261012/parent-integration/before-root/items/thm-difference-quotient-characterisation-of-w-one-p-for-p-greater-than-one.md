@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one.md

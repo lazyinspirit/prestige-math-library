@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-counting-functional-on-a-discrete-lch-space.md

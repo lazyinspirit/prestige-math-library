@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts.md

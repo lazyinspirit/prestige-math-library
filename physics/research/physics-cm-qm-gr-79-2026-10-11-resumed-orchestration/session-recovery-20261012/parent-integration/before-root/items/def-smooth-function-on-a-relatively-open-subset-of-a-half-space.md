@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-smooth-function-on-a-relatively-open-subset-of-a-half-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-precompact-trajectory-tail-limit-sets-are-nonempty-compact-connected-and-flow-invariant.md

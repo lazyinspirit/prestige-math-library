@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hh-coefficient-extension-and-finite-tensor-separation.md

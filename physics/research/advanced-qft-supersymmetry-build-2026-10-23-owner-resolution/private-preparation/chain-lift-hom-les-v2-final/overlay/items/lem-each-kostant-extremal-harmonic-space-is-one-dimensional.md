@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-each-kostant-extremal-harmonic-space-is-one-dimensional.md

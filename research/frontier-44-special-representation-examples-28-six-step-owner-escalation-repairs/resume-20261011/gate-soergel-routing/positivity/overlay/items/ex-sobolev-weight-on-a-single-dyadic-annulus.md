@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-sobolev-weight-on-a-single-dyadic-annulus.md

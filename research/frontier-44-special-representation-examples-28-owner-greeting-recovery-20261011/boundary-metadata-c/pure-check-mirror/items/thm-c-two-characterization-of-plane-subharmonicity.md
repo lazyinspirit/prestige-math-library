@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-c-two-characterization-of-plane-subharmonicity.md

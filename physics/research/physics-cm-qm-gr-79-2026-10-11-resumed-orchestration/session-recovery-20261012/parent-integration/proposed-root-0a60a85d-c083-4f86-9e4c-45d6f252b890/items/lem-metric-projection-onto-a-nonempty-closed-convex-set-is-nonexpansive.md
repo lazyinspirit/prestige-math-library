@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-metric-projection-onto-a-nonempty-closed-convex-set-is-nonexpansive.md

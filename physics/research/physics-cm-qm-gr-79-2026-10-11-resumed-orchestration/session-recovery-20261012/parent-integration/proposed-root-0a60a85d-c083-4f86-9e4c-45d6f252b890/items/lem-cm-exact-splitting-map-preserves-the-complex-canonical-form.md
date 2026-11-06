@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-exact-splitting-map-preserves-the-complex-canonical-form.md

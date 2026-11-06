@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-decidable-iff-language-and-complement-are-recognizable.md

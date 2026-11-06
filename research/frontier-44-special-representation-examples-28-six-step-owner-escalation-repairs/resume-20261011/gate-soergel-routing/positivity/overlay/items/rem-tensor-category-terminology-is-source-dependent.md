@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-tensor-category-terminology-is-source-dependent.md

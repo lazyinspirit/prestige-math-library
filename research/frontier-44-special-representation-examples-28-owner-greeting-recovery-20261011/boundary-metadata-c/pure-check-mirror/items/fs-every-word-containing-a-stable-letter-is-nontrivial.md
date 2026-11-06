@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-word-containing-a-stable-letter-is-nontrivial.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-the-image-preimage-adjunctions-explain-the-published-preservation-laws.md

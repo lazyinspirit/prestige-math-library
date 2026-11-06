@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-acyclic-rows-and-columns-of-cech-double-complex.md

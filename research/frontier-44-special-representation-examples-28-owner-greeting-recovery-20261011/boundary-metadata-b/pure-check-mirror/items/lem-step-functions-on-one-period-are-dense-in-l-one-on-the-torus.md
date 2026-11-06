@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-step-functions-on-one-period-are-dense-in-l-one-on-the-torus.md

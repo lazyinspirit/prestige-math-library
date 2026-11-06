@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-higher-level-schur-weyl-double-centralizer.md

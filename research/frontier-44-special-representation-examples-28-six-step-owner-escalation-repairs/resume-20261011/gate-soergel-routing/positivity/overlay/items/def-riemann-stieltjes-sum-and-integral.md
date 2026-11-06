@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-riemann-stieltjes-sum-and-integral.md

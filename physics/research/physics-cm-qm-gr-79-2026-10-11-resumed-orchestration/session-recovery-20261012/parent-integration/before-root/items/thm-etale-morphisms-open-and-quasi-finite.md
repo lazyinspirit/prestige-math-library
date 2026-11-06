@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-etale-morphisms-open-and-quasi-finite.md

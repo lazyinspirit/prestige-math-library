@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-opposite-root-spaces-pair-nondegenerately.md

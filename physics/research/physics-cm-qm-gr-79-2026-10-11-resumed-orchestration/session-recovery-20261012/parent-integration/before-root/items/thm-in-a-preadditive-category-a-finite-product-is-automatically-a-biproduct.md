@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-in-a-preadditive-category-a-finite-product-is-automatically-a-biproduct.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-gaussian-kernels-form-an-approximate-identity.md

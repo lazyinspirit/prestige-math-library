@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-disk-bundle-sphere-bundle-and-thom-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lc-strong-compactness-fine-measures-and-logic.md

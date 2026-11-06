@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-positive-characteristic-decomposition-polynomials-factor-through-adjustment.md

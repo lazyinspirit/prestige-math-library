@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-borel-products-of-euclidean-spaces-are-euclidean-borel.md

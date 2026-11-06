@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann.md

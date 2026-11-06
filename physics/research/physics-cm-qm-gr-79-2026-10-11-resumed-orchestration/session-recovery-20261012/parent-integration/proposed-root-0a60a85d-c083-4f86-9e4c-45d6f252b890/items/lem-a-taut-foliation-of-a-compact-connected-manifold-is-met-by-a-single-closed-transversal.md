@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-taut-foliation-of-a-compact-connected-manifold-is-met-by-a-single-closed-transversal.md

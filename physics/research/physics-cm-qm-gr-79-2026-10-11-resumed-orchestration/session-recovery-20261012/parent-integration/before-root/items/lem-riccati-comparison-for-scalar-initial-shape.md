@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-riccati-comparison-for-scalar-initial-shape.md

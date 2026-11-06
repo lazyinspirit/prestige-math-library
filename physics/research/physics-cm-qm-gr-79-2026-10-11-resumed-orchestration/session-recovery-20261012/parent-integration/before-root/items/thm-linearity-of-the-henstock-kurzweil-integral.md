@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-linearity-of-the-henstock-kurzweil-integral.md

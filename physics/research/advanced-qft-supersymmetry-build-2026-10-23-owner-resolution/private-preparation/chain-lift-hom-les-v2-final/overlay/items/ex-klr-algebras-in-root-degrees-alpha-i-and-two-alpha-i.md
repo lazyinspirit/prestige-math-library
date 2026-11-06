@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-klr-algebras-in-root-degrees-alpha-i-and-two-alpha-i.md

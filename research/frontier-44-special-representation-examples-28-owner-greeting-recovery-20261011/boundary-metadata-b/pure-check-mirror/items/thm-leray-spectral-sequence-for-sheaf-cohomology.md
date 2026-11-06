@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-leray-spectral-sequence-for-sheaf-cohomology.md

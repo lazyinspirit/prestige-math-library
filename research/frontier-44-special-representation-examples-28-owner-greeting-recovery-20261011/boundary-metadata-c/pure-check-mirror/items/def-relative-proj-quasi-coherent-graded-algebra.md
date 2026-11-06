@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-relative-proj-quasi-coherent-graded-algebra.md

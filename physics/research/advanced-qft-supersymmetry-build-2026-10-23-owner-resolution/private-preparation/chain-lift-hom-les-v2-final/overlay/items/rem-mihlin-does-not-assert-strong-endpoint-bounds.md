@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-mihlin-does-not-assert-strong-endpoint-bounds.md

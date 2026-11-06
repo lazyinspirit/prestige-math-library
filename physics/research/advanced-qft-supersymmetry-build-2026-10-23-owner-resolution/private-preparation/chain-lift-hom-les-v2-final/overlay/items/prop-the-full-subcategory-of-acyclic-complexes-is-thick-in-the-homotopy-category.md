@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-full-subcategory-of-acyclic-complexes-is-thick-in-the-homotopy-category.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bochner-density-defines-an-absolutely-continuous-vector-measure.md

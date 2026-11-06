@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-m-over-m-plus-n-has-noncommuting-iterated-limits.md

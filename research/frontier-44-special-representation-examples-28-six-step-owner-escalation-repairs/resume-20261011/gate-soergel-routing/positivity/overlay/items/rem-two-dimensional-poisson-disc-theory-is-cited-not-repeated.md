@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-two-dimensional-poisson-disc-theory-is-cited-not-repeated.md

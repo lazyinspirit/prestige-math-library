@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lipschitz-stability-of-strongly-monotone-variational-inequalities.md

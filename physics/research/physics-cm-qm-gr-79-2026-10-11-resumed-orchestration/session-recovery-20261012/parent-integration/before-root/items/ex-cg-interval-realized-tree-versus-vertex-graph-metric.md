@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-interval-realized-tree-versus-vertex-graph-metric.md

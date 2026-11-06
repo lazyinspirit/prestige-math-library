@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-collectionwise-normal-moore-spaces-are-screenable.md

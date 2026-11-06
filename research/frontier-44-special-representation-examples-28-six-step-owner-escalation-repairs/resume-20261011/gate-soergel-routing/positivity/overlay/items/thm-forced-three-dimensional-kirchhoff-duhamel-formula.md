@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-forced-three-dimensional-kirchhoff-duhamel-formula.md

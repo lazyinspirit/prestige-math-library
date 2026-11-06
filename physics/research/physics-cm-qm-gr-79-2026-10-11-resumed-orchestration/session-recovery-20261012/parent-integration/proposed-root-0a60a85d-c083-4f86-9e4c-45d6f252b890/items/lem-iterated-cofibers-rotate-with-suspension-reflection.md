@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-iterated-cofibers-rotate-with-suspension-reflection.md

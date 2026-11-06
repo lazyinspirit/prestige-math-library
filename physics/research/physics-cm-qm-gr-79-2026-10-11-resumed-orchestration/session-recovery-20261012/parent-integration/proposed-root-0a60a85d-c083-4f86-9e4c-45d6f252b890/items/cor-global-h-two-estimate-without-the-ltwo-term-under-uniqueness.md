@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-global-h-two-estimate-without-the-ltwo-term-under-uniqueness.md

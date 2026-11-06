@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-no-retraction-from-a-disk-onto-its-boundary.md

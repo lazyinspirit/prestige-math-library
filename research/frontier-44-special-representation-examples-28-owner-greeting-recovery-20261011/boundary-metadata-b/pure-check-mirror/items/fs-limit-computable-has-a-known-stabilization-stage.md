@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-limit-computable-has-a-known-stabilization-stage.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-clebsch-gordan-decomposition-for-sl2.md

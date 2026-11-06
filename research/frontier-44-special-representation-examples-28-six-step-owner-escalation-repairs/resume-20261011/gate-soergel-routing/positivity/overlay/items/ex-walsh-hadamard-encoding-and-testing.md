@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-walsh-hadamard-encoding-and-testing.md

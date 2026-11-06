@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle.md

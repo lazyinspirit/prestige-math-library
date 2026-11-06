@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-bounded-projective-homotopy-category-for-a-m.md

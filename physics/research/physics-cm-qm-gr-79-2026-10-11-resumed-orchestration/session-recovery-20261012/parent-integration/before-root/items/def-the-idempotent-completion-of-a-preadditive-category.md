@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-the-idempotent-completion-of-a-preadditive-category.md

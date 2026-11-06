@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ku-representability-and-skeletal-postnikov-d-three-comparison.md

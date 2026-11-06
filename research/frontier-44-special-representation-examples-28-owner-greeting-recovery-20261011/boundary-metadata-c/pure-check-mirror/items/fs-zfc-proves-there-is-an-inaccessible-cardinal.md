@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-zfc-proves-there-is-an-inaccessible-cardinal.md

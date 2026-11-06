@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-c-soft-field-sheaves-are-compact-support-acyclic.md

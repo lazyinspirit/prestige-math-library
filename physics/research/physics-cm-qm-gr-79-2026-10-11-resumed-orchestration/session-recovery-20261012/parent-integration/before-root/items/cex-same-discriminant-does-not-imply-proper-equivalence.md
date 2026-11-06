@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-same-discriminant-does-not-imply-proper-equivalence.md

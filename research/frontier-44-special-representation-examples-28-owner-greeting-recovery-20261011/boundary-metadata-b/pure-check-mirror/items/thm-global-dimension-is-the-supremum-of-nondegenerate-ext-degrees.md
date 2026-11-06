@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-global-dimension-is-the-supremum-of-nondegenerate-ext-degrees.md

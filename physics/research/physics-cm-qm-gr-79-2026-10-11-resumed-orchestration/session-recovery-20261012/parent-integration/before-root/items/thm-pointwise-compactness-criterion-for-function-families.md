@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pointwise-compactness-criterion-for-function-families.md

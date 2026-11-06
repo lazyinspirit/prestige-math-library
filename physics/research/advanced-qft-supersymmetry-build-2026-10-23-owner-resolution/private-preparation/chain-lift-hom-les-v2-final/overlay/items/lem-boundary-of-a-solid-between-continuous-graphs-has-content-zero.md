@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-boundary-of-a-solid-between-continuous-graphs-has-content-zero.md

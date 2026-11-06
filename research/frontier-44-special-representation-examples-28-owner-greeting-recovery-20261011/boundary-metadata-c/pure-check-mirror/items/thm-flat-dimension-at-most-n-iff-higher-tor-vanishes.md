@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-flat-dimension-at-most-n-iff-higher-tor-vanishes.md

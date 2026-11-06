@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-s-rational-map-descends-along-faithfully-flat-smooth-maps.md

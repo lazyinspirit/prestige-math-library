@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-cohomologous-symplectic-forms-on-a-noncompact-manifold-are-always-isotopic.md

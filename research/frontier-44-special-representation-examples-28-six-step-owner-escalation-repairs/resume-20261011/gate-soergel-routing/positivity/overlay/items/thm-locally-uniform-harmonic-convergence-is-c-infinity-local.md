@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-locally-uniform-harmonic-convergence-is-c-infinity-local.md

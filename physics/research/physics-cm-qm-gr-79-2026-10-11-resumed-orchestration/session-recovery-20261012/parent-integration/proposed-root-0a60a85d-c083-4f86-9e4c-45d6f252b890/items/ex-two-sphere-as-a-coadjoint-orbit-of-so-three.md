@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-sphere-as-a-coadjoint-orbit-of-so-three.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-real-and-imaginary-parts-of-holomorphic-monomials.md

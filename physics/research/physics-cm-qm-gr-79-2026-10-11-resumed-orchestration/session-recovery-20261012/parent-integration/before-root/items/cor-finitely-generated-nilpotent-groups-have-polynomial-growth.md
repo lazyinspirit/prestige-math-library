@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finitely-generated-nilpotent-groups-have-polynomial-growth.md

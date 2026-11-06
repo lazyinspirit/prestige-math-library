@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-square-roots-modulo-a-composite-by-crt.md

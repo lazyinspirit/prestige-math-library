@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cantor-measure-is-concentrated-on-the-cantor-set.md

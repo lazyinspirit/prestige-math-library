@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-pe03-ideal-gas-llf-branch-preserves-positivity.md

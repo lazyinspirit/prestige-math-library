@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-closed-disk-is-a-manifold-with-boundary.md

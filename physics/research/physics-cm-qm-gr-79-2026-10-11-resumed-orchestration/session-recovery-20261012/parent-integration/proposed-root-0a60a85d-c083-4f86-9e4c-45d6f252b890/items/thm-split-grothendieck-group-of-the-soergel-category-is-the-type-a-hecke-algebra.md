@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-split-grothendieck-group-of-the-soergel-category-is-the-type-a-hecke-algebra.md

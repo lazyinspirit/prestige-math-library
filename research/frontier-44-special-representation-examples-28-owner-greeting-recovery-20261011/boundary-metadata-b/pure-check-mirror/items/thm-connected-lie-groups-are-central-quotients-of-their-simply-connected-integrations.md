@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations.md

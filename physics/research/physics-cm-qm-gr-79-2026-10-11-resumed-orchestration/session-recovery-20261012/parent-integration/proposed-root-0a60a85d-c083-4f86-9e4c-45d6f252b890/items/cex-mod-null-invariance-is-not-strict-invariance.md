@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-mod-null-invariance-is-not-strict-invariance.md

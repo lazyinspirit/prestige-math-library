@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/pthm-qftx-n2-monopole-condensation-after-n1-perturbation.md

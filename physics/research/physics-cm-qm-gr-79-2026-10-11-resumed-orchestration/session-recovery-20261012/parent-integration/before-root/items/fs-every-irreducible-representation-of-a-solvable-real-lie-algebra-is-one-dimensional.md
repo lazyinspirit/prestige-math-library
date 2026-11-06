@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-irreducible-representation-of-a-solvable-real-lie-algebra-is-one-dimensional.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-block-lu-factorisation-via-an-invertible-leading-block.md

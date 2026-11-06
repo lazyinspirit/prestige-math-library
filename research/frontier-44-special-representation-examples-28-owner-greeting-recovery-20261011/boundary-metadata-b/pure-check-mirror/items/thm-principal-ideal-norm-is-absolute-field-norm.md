@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-principal-ideal-norm-is-absolute-field-norm.md

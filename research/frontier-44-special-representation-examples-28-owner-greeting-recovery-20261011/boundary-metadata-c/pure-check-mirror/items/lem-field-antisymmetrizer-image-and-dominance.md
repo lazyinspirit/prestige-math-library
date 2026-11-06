@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-field-antisymmetrizer-image-and-dominance.md

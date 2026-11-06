@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-pattern-inventory-of-square-colourings-by-number-of-red-vertices.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-single-cell-layer-has-compatible-homotopy-and-homology-bases.md

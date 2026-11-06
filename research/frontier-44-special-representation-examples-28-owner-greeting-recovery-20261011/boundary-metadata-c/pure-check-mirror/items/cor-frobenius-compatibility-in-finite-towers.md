@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-frobenius-compatibility-in-finite-towers.md

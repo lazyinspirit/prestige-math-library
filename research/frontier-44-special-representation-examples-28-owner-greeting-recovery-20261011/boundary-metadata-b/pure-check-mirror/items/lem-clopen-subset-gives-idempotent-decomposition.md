@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-clopen-subset-gives-idempotent-decomposition.md

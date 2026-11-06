@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-decreasing-limit-theorem-for-plane-subharmonic-functions.md

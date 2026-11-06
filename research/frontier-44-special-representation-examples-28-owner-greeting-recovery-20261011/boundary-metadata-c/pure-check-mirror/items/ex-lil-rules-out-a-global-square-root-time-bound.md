@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-lil-rules-out-a-global-square-root-time-bound.md

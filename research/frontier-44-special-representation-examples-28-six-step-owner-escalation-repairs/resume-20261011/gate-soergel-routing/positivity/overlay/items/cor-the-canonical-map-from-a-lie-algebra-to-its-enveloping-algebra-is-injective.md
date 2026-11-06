@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-basic-bochner-kodaira-morrey-estimate-cn.md

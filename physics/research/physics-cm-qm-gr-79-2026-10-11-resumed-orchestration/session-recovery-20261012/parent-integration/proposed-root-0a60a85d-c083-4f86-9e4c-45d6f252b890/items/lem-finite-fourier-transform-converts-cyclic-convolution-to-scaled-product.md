@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product.md

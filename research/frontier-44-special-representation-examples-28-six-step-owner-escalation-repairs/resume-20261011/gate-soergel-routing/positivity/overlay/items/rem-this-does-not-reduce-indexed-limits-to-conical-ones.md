@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-this-does-not-reduce-indexed-limits-to-conical-ones.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kostant-harmonics-give-an-invariant-polynomial-complement.md

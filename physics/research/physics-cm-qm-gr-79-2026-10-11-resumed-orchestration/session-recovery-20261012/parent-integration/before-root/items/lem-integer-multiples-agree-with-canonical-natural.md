@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-integer-multiples-agree-with-canonical-natural.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lower-global-basis-of-a-quantum-highest-weight-module.md

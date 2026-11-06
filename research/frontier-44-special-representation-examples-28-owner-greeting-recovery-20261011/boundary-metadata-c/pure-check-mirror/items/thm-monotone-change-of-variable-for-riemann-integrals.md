@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-monotone-change-of-variable-for-riemann-integrals.md

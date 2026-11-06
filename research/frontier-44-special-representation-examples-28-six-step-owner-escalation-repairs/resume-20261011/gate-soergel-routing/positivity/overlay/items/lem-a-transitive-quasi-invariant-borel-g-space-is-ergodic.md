@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-transitive-quasi-invariant-borel-g-space-is-ergodic.md

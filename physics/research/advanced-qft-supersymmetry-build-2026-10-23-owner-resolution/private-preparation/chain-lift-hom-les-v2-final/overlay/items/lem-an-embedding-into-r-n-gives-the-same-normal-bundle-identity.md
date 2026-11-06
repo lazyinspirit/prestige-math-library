@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity.md

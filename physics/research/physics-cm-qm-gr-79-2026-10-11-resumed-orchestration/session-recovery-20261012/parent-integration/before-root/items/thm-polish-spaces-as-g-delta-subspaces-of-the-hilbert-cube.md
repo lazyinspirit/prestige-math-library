@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-polish-spaces-as-g-delta-subspaces-of-the-hilbert-cube.md

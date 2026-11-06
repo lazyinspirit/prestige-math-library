@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-reflexive-approximation-property-implies-metric-approximation-property.md

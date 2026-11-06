@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm-hamilton-jacobi-equation-and-complete-integral.md

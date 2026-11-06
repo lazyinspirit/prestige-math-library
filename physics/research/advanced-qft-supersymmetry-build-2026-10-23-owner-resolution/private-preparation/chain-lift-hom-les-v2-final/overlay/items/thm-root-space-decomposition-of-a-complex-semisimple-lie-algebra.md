@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra.md

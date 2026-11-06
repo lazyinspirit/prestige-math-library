@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-adjoints-of-shifts-multiplication-and-integral-operators.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-radical-and-nilradical-of-the-affine-lie-algebra.md

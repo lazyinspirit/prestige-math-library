@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus.md

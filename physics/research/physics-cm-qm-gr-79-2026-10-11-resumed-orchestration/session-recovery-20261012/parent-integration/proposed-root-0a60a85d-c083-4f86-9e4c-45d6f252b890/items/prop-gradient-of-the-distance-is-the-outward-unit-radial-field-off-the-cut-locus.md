@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-gradient-of-the-distance-is-the-outward-unit-radial-field-off-the-cut-locus.md

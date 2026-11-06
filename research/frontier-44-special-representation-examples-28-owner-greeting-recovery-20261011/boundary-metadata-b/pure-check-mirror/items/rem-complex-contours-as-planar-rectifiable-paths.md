@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-complex-contours-as-planar-rectifiable-paths.md

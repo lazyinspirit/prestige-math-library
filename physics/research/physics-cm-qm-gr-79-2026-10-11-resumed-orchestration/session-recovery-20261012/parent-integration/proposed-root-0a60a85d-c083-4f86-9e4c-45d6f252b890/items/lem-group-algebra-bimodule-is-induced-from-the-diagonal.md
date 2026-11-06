@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-group-algebra-bimodule-is-induced-from-the-diagonal.md

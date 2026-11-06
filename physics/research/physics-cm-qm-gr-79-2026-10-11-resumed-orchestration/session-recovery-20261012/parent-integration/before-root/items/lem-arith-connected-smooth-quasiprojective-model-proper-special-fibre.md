@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-arith-connected-smooth-quasiprojective-model-proper-special-fibre.md

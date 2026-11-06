@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-easton-class-generic-model-satisfies-zfc.md

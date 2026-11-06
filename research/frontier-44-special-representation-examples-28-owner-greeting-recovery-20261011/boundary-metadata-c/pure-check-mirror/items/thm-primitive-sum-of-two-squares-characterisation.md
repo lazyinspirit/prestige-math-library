@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-primitive-sum-of-two-squares-characterisation.md

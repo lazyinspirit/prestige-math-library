@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-psl-two-seven-is-simple-of-order-168.md

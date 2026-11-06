@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-bruhat-increasing-chain-and-local-descent-replacement.md

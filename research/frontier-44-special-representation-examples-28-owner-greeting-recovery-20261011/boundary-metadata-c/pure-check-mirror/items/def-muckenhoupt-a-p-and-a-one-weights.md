@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-muckenhoupt-a-p-and-a-one-weights.md

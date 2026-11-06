@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-irreducible-curve-with-arbitrary-embedding-dimension.md

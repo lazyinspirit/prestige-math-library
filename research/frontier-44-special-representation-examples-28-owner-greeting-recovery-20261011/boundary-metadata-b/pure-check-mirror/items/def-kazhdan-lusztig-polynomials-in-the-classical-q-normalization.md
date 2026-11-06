@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization.md

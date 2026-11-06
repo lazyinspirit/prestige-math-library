@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-annulus-needs-a-pole-in-each-bounded-complementary-component.md

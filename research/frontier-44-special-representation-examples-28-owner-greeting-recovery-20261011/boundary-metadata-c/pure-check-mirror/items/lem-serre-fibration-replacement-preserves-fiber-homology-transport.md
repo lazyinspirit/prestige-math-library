@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-serre-fibration-replacement-preserves-fiber-homology-transport.md

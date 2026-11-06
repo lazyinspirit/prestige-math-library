@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-dimensional-subspaces-are-complemented.md

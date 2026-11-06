@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-autonomous-dynamics-flow-calculus.md

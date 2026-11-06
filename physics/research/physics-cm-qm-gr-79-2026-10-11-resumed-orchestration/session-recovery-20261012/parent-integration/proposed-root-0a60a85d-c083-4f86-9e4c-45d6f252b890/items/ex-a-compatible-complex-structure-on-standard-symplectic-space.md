@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-compatible-complex-structure-on-standard-symplectic-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-abel-limit-theorem-for-complex-series-in-stolz-regions.md

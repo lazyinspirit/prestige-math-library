@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-center-has-finite-dimensional-image-on-an-o-object.md

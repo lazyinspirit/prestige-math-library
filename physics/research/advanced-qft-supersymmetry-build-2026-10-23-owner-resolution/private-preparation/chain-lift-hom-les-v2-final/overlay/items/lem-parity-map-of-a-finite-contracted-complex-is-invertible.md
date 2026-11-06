@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-parity-map-of-a-finite-contracted-complex-is-invertible.md

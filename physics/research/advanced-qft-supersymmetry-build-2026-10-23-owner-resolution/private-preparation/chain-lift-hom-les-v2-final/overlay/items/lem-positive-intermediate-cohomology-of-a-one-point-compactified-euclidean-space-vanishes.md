@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-positive-intermediate-cohomology-of-a-one-point-compactified-euclidean-space-vanishes.md

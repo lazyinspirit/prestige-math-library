@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-spectrum-of-a-compact-operator-is-countable-with-only-zero-as-possible-accumulation.md

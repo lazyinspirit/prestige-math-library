@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-antidiagonal-subgroup-of-a-central-product-is-a-central-normal-subgroup.md

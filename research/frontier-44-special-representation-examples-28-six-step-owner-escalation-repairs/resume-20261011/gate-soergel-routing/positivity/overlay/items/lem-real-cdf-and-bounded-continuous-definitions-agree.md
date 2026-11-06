@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-real-cdf-and-bounded-continuous-definitions-agree.md

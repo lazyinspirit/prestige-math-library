@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fundamental-groups-from-different-maximal-trees-are-isomorphic.md

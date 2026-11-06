@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-trace-form-of-a-faithful-representation-of-a-semisimple-lie-algebra-is-nondegenerate.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-continuity-of-zeros-locally-uniform-convergence.md

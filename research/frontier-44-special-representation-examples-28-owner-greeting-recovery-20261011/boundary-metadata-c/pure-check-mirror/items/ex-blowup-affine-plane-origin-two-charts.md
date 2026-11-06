@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-blowup-affine-plane-origin-two-charts.md

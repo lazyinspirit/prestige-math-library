@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-framing-obstruction-lives-in-the-normal-bundle-of-the-surgery-sphere.md

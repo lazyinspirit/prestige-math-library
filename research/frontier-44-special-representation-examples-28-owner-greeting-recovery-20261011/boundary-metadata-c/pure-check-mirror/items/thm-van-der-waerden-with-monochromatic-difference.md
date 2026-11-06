@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-van-der-waerden-with-monochromatic-difference.md

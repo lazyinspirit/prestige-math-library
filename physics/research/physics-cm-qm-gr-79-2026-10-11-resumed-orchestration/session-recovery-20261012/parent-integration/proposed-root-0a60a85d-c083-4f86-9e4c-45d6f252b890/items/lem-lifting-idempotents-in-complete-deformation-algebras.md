@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lifting-idempotents-in-complete-deformation-algebras.md

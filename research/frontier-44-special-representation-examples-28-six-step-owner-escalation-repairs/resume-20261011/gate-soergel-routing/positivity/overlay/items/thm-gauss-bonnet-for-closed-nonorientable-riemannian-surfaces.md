@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-gauss-bonnet-for-closed-nonorientable-riemannian-surfaces.md

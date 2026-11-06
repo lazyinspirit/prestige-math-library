@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-em-exterior-outgoing-scalar-uniqueness.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-littlewood-richardson-coefficients-have-conjugation-symmetry.md

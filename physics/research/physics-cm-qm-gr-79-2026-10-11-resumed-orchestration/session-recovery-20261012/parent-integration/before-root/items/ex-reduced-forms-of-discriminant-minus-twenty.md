@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-reduced-forms-of-discriminant-minus-twenty.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-conditioning-a-known-variable-and-an-independent-variable.md

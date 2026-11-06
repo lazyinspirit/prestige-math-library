@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-one-parameter-subgroup-of-a-lie-group.md

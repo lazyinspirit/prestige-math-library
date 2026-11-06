@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-polar-coordinates-formula-for-lebesgue-measure.md

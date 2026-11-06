@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-holomorphic-roots-homologically-simply-connected-domains.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-compact-kahler-manifold-and-hodge-polarization-conventions.md

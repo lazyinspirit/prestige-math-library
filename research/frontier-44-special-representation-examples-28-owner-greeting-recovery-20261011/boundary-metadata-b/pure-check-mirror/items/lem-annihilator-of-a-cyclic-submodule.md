@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-annihilator-of-a-cyclic-submodule.md

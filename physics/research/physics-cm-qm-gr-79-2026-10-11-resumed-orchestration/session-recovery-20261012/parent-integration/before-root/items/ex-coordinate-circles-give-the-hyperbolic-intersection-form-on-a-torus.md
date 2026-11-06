@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-coordinate-circles-give-the-hyperbolic-intersection-form-on-a-torus.md

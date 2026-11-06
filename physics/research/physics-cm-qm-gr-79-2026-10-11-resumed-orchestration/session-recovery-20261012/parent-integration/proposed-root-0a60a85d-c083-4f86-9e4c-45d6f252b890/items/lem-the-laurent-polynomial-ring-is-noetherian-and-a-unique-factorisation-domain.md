@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-laurent-polynomial-ring-is-noetherian-and-a-unique-factorisation-domain.md

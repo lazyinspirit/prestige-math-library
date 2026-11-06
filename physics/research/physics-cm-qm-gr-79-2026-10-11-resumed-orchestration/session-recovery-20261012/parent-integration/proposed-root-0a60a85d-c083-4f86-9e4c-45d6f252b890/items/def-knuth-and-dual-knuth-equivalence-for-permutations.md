@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-knuth-and-dual-knuth-equivalence-for-permutations.md

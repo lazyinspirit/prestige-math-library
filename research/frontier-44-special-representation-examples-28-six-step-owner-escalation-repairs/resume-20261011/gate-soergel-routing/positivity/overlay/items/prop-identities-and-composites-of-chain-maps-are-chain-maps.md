@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-identities-and-composites-of-chain-maps-are-chain-maps.md

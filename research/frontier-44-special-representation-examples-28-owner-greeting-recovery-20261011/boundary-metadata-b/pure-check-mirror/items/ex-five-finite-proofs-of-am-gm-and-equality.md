@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-five-finite-proofs-of-am-gm-and-equality.md

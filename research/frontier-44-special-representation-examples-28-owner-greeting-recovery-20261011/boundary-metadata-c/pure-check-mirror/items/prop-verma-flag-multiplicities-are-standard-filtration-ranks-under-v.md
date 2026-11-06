@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-verma-flag-multiplicities-are-standard-filtration-ranks-under-v.md

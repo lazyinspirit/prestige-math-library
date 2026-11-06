@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-contiguous-simplicial-maps-have-homotopic-realizations.md

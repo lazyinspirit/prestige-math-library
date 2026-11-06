@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-outer-induction-product-for-symmetric-group-characters.md

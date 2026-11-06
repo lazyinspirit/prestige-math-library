@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-real-quarter-turn-has-rational-form-but-no-real-jordan-form.md

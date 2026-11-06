@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-factorial-gap-series-has-the-unit-circle-as-natural-boundary.md

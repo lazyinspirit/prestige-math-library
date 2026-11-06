@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-graph-of-continuous-function-on-a-compact-set-has-content-zero.md

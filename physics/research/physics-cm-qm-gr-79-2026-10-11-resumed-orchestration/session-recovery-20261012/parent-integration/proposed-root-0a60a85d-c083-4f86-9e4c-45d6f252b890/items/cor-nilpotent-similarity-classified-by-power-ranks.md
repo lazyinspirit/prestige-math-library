@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-nilpotent-similarity-classified-by-power-ranks.md

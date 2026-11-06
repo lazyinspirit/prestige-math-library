@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-deligne-product-of-finite-vector-space-categories.md

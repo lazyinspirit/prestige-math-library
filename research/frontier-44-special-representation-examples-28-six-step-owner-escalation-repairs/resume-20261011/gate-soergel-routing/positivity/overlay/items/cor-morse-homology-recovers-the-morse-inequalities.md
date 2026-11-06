@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-morse-homology-recovers-the-morse-inequalities.md

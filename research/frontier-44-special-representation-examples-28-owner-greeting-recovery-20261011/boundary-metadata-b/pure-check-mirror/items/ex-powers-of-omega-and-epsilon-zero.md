@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-powers-of-omega-and-epsilon-zero.md

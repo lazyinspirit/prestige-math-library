@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-closed-constant-rank-one-forms-define-integrable-hyperplane-fields.md

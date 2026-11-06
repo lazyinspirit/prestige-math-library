@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-number-of-square-roots-of-a-unit-modulo-n.md

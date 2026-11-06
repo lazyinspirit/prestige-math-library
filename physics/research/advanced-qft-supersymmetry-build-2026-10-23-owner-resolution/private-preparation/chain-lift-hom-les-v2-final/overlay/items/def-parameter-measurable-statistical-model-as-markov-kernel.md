@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-parameter-measurable-statistical-model-as-markov-kernel.md

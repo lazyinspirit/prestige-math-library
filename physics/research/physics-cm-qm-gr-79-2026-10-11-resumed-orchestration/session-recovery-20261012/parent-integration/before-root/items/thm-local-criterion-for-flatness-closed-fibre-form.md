@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-local-criterion-for-flatness-closed-fibre-form.md

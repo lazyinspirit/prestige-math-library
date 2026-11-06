@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-garding-estimate-for-the-dolbeault-laplacian-on-a-compact-riemann-surface.md

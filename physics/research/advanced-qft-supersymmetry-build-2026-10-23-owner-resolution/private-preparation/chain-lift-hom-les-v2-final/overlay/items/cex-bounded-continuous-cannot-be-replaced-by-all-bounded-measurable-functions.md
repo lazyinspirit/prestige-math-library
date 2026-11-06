@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-bounded-continuous-cannot-be-replaced-by-all-bounded-measurable-functions.md

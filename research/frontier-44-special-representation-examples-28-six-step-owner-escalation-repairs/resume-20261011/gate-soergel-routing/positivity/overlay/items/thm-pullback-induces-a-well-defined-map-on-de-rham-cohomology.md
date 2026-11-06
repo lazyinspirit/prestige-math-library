@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-pullback-induces-a-well-defined-map-on-de-rham-cohomology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induction-is-invariant-under-conjugation-of-subgroup-and-representation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-deck-group-of-the-holonomy-cover-is-the-holonomy-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-frobenius-in-a-small-cyclotomic-field.md

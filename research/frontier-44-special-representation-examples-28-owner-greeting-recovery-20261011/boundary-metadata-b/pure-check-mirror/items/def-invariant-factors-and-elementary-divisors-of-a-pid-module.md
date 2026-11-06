@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-invariant-factors-and-elementary-divisors-of-a-pid-module.md

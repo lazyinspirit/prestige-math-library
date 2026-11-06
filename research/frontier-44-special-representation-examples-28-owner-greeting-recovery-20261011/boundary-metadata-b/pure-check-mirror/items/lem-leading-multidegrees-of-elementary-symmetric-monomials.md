@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-leading-multidegrees-of-elementary-symmetric-monomials.md

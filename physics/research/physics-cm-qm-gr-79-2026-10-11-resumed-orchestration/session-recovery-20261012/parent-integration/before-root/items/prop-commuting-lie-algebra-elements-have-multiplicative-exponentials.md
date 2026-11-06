@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-commuting-lie-algebra-elements-have-multiplicative-exponentials.md

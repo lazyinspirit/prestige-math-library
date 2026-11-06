@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-abelian-category-is-equivalent-to-a-category-of-modules.md

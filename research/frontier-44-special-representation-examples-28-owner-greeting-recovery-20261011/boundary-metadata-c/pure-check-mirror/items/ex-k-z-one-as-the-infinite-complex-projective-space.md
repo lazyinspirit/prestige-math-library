@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-k-z-one-as-the-infinite-complex-projective-space.md

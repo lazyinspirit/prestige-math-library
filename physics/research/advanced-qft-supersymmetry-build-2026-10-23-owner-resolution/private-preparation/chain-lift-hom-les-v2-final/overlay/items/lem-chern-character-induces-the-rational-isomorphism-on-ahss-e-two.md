@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-chern-character-induces-the-rational-isomorphism-on-ahss-e-two.md

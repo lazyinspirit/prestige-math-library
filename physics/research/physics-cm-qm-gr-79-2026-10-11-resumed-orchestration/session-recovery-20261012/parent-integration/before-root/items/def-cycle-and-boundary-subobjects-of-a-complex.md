@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cycle-and-boundary-subobjects-of-a-complex.md

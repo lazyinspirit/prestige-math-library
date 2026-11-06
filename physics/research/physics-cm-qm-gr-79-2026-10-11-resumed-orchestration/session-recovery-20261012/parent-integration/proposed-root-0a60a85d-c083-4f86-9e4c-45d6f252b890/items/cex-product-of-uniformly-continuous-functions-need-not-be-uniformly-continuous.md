@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-product-of-uniformly-continuous-functions-need-not-be-uniformly-continuous.md

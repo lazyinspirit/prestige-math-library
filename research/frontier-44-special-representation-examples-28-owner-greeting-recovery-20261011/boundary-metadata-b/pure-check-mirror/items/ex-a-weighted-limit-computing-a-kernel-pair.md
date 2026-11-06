@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-weighted-limit-computing-a-kernel-pair.md

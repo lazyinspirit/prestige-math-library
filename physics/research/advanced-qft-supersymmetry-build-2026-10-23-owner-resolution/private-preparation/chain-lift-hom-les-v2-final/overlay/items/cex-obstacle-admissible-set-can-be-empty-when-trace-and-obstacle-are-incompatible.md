@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-obstacle-admissible-set-can-be-empty-when-trace-and-obstacle-are-incompatible.md

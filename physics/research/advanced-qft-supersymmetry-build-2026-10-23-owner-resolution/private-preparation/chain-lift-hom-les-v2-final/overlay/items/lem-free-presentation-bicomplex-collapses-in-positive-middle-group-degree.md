@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-free-presentation-bicomplex-collapses-in-positive-middle-group-degree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-conjugate-dirichlet-kernel-and-principal-value-formula.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-logarithmic-derivative-of-the-radial-volume-jacobian-is-the-distance-laplacian.md

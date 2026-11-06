@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-homogeneous-polynomial-zero-locus-well-defined.md

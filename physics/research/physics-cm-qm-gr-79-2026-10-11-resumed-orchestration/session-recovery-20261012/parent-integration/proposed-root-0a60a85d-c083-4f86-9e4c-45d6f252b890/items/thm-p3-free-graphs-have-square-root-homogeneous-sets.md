@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-p3-free-graphs-have-square-root-homogeneous-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-right-trivialized-differential-of-the-lie-group-exponential.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-constant-singleton-weight-recovers-an-ordinary-limit.md

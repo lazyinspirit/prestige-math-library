@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-punctured-disk-fundamental-group-is-free-on-standard-meridians.md

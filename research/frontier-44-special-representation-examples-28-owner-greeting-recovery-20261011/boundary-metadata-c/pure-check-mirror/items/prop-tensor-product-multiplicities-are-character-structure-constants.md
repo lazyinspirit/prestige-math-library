@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-tensor-product-multiplicities-are-character-structure-constants.md

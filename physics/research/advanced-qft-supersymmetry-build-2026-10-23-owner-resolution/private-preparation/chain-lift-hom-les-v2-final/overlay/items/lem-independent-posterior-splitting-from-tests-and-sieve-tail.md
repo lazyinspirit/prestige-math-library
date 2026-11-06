@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-independent-posterior-splitting-from-tests-and-sieve-tail.md

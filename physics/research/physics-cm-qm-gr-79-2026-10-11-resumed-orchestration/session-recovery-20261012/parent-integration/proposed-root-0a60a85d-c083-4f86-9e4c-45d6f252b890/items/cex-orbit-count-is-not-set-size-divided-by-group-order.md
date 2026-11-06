@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-orbit-count-is-not-set-size-divided-by-group-order.md

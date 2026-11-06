@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sequential-convergence-of-smooth-multipliers-and-distributions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-low-degree-transgression-for-a-group-extension.md

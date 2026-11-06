@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-em-support-losing-candidate-violates-finite-kl-condition.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-existence-of-a-smooth-inhomogeneous-dyadic-frequency-partition.md

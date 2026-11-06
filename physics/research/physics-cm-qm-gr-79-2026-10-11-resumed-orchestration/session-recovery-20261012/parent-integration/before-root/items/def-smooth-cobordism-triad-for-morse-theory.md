@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-smooth-cobordism-triad-for-morse-theory.md

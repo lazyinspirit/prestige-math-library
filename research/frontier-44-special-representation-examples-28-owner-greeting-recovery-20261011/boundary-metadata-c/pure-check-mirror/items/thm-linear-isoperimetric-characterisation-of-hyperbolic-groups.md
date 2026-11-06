@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-linear-isoperimetric-characterisation-of-hyperbolic-groups.md

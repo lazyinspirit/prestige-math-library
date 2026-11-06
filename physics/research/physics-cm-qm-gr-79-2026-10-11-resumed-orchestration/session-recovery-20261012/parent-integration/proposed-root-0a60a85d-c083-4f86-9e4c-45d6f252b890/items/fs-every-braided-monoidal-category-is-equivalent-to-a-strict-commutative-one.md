@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-braided-monoidal-category-is-equivalent-to-a-strict-commutative-one.md

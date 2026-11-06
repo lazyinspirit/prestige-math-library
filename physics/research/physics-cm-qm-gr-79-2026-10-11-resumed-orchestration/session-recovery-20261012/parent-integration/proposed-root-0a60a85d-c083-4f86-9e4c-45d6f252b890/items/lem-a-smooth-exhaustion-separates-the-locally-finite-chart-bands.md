@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-smooth-exhaustion-separates-the-locally-finite-chart-bands.md

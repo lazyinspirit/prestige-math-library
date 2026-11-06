@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-mollifier-family-generated-by-a-unit-mass-smooth-bump.md

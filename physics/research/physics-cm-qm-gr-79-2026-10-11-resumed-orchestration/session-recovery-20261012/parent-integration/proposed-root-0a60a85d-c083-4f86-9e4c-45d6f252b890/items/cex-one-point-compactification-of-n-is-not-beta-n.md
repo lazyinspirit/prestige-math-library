@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-one-point-compactification-of-n-is-not-beta-n.md

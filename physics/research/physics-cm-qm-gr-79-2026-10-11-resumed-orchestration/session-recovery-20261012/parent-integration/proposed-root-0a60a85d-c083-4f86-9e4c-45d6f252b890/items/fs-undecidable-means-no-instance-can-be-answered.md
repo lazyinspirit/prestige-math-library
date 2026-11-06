@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-undecidable-means-no-instance-can-be-answered.md

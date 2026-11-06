@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-strong-transcendence-descends-to-minimal-prime-quotients.md

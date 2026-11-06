@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-extensions-of-multiplicative-type-groups-by-vector-groups-split.md

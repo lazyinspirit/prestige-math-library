@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-relation-on-a-three-element-set-with-its-domain-range-inverse-and-composites.md

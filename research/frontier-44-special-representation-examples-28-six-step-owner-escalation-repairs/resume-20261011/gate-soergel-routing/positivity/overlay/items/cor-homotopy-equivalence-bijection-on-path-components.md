@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-homotopy-equivalence-bijection-on-path-components.md

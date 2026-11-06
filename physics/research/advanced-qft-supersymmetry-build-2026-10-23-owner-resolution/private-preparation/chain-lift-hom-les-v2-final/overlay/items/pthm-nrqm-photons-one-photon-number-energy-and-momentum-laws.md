@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/pthm-nrqm-photons-one-photon-number-energy-and-momentum-laws.md

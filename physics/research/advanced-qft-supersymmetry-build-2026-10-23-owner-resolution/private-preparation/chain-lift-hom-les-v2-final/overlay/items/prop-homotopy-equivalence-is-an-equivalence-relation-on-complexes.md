@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-homotopy-equivalence-is-an-equivalence-relation-on-complexes.md

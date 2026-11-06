@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-adapted-descending-field-near-a-compact-morse-band.md

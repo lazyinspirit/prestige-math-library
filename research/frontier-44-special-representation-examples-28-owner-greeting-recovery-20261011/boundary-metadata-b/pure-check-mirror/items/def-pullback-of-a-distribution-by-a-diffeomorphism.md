@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-pullback-of-a-distribution-by-a-diffeomorphism.md

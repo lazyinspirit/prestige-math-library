@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-arith-hilbert-divisor-charts-and-picard-diagonal.md

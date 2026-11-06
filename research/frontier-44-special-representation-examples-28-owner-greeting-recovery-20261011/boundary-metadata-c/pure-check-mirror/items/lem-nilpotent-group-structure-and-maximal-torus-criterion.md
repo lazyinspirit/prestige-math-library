@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nilpotent-group-structure-and-maximal-torus-criterion.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-uniform-word-problem-for-finite-presentations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-chain-rule-for-radon-nikodym-derivatives-on-zero-one.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-conjugacy-is-a-property-of-two-points-independent-of-the-geodesic-between-them.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-projective-covers-in-o-are-indecomposable-and-unique.md

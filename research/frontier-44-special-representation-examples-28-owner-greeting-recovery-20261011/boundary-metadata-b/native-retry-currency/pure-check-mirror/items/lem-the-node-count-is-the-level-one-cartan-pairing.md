@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-node-count-is-the-level-one-cartan-pairing.md

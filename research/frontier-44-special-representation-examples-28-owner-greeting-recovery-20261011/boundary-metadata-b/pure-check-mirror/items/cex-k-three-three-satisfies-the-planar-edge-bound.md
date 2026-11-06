@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-k-three-three-satisfies-the-planar-edge-bound.md

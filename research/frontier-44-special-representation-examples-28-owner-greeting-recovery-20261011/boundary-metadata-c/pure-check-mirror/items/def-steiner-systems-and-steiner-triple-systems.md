@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-steiner-systems-and-steiner-triple-systems.md

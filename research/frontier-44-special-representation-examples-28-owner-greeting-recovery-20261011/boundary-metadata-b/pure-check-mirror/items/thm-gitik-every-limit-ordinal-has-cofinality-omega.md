@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-gitik-every-limit-ordinal-has-cofinality-omega.md

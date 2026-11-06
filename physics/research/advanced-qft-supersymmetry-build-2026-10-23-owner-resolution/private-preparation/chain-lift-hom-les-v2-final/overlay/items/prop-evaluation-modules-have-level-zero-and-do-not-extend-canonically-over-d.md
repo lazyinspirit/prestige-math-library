@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-evaluation-modules-have-level-zero-and-do-not-extend-canonically-over-d.md

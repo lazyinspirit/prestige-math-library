@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-alternating-top-forms-are-determined-by-one-ordered-basis.md

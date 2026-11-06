@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hom-from-projectives-counts-simple-composition-factors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-absolute-value-and-powers-of-a-martingale-are-submartingales.md

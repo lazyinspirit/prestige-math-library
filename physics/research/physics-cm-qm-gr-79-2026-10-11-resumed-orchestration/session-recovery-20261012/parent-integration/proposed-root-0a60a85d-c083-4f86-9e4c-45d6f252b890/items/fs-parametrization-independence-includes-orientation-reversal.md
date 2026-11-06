@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-parametrization-independence-includes-orientation-reversal.md

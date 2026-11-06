@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-primitivity-is-equivalent-to-maximality-of-a-point-stabilizer.md

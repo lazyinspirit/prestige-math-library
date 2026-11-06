@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-stable-thom-detector-coordinates-commute-with-suspension.md

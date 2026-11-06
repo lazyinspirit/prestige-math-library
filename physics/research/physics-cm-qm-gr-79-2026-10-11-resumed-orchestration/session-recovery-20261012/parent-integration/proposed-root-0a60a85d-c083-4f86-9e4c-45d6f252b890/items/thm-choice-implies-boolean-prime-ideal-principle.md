@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-choice-implies-boolean-prime-ideal-principle.md

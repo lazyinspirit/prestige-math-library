@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-enough-projectives-selects-a-projective-resolution-functor-on-all-objects.md

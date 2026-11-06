@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-congruence-diagonalization-and-inertia-of-a-real-quadratic-form.md

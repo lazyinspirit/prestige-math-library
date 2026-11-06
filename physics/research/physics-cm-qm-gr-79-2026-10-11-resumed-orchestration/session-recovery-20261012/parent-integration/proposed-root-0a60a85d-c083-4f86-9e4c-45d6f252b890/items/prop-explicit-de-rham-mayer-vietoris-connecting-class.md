@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-explicit-de-rham-mayer-vietoris-connecting-class.md

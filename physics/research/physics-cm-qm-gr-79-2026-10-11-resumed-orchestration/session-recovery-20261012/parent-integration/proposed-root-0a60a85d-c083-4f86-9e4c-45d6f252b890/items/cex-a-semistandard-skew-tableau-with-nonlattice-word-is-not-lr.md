@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-semistandard-skew-tableau-with-nonlattice-word-is-not-lr.md

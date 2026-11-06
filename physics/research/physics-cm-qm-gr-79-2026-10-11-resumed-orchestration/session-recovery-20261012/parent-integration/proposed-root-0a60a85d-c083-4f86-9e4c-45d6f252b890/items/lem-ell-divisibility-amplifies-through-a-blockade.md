@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ell-divisibility-amplifies-through-a-blockade.md

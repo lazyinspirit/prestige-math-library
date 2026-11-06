@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-l-genus-is-an-oriented-rational-bordism-ring-homomorphism.md

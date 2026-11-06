@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-solvable-iff-composition-factors-have-prime-order.md

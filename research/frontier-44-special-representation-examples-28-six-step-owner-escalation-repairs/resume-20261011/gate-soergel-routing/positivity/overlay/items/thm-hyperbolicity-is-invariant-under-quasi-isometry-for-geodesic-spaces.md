@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces.md

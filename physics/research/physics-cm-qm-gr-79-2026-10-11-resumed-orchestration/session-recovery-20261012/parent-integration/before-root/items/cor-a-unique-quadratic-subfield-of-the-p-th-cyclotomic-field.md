@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-unique-quadratic-subfield-of-the-p-th-cyclotomic-field.md

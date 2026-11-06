@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normalized-two-cocycles-and-coboundaries-form-groups.md

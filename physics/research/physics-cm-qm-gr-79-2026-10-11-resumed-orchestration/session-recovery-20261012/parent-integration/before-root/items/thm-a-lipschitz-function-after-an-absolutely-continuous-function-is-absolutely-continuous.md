@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous.md

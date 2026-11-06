@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-graphs-of-linear-maps-and-lagrangian-relations.md

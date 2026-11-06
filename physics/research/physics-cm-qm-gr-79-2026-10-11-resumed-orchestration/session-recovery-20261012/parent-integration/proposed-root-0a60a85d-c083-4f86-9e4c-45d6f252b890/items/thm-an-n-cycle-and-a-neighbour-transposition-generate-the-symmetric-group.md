@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-an-n-cycle-and-a-neighbour-transposition-generate-the-symmetric-group.md

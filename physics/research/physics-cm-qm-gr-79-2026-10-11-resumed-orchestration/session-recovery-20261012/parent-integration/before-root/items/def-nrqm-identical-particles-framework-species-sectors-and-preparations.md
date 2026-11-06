@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-identical-particles-framework-species-sectors-and-preparations.md

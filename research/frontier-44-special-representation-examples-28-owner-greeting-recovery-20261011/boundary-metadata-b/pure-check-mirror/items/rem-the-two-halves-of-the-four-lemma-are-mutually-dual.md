@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-the-two-halves-of-the-four-lemma-are-mutually-dual.md

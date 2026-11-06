@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-x-squared-is-not-uniformly-continuous-on-r.md

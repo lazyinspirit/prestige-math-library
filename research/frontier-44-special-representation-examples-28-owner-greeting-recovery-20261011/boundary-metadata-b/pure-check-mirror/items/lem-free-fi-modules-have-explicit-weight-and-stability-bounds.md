@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-free-fi-modules-have-explicit-weight-and-stability-bounds.md

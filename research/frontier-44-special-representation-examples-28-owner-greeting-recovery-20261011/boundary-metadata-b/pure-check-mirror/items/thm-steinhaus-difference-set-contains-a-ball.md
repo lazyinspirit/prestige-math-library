@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-steinhaus-difference-set-contains-a-ball.md

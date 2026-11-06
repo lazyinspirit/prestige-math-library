@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hilbert-samuel-multiplicity-of-a-plane-curve.md

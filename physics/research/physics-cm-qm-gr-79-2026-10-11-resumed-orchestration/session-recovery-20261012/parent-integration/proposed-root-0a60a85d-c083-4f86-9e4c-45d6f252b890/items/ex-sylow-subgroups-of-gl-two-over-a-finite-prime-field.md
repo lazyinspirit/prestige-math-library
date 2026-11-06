@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sylow-subgroups-of-gl-two-over-a-finite-prime-field.md

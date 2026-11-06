@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-doubly-transitive-actions-are-exactly-the-rank-two-transitive-actions.md

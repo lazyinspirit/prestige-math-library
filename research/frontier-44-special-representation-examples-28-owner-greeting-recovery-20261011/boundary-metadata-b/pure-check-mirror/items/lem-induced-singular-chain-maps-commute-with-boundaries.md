@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-induced-singular-chain-maps-commute-with-boundaries.md

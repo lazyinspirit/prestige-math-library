@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-reduction-of-positive-definite-binary-quadratic-forms.md

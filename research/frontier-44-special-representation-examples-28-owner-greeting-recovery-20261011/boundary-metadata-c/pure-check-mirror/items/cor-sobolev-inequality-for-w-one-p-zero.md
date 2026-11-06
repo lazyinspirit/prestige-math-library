@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-sobolev-inequality-for-w-one-p-zero.md

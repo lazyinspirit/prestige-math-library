@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sr-rigid-rotation-simultaneity-holonomy.md

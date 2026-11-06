@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-conformal-maps-preserve-euclidean-lengths.md

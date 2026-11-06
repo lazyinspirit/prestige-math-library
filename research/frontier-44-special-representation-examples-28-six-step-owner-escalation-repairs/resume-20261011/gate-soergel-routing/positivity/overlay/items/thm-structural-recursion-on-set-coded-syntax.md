@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-structural-recursion-on-set-coded-syntax.md

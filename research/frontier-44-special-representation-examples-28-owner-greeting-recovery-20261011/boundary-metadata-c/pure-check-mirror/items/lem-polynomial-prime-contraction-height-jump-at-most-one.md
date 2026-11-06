@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-polynomial-prime-contraction-height-jump-at-most-one.md

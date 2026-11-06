@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-schurs-lemma-for-irreducible-lie-algebra-representations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-oriented-similarities-are-nonzero-complex-multiplications.md

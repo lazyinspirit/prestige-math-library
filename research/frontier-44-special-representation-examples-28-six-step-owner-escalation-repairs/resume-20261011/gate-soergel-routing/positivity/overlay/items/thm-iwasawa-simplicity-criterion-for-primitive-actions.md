@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-iwasawa-simplicity-criterion-for-primitive-actions.md

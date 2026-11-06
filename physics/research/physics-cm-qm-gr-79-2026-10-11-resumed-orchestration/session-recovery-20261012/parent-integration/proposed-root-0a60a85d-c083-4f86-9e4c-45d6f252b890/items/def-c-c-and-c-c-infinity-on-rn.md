@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-c-c-and-c-c-infinity-on-rn.md

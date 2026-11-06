@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-evaluation-on-the-regular-module-has-a-commuting-right-action.md

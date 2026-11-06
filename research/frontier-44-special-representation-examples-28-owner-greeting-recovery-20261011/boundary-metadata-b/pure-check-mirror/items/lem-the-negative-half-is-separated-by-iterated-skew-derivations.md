@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-negative-half-is-separated-by-iterated-skew-derivations.md

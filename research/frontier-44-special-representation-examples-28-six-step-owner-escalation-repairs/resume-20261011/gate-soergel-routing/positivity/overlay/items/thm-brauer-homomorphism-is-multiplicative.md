@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-brauer-homomorphism-is-multiplicative.md

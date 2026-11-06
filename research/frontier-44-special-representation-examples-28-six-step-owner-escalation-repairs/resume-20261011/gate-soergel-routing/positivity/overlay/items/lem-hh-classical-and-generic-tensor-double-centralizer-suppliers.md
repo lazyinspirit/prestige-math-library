@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hh-classical-and-generic-tensor-double-centralizer-suppliers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-test-supermartingale-supremum-threshold-need-not-be-attained.md

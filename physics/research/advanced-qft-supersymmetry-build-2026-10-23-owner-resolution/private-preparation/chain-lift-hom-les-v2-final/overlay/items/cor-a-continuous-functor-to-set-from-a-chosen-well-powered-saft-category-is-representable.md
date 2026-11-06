@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-continuous-functor-to-set-from-a-chosen-well-powered-saft-category-is-representable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-standard-bilinear-form-on-a-coordinate-space.md

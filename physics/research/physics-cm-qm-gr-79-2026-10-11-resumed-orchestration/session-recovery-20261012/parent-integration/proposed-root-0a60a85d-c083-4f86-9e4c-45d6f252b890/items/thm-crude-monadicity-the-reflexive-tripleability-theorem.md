@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-crude-monadicity-the-reflexive-tripleability-theorem.md

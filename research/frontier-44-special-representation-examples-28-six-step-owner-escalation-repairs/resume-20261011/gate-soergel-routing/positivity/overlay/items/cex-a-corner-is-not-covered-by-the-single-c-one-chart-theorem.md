@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-corner-is-not-covered-by-the-single-c-one-chart-theorem.md

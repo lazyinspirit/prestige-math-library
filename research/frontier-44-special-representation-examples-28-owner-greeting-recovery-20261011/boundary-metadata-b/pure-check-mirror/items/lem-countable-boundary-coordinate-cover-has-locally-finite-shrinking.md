@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-countable-boundary-coordinate-cover-has-locally-finite-shrinking.md

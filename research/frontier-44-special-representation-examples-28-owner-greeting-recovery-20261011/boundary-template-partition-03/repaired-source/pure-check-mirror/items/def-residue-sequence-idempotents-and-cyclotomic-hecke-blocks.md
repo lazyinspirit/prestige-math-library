@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-residue-sequence-idempotents-and-cyclotomic-hecke-blocks.md

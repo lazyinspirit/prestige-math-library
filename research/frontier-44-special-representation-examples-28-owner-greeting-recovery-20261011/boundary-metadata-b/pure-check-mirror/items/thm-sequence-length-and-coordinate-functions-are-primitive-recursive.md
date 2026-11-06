@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-sequence-length-and-coordinate-functions-are-primitive-recursive.md

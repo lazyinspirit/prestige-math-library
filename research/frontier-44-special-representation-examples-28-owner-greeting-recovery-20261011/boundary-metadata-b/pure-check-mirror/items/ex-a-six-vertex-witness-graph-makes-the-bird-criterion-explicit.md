@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit.md

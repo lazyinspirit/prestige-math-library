@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-cycle-integral-of-a-derivative-vanishes.md

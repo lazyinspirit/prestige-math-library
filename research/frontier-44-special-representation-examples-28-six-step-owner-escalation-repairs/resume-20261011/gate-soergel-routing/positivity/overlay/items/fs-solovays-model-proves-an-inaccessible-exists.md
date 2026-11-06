@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-solovays-model-proves-an-inaccessible-exists.md

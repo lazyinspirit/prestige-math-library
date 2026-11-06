@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-triangular-fixed-tabloid-reconstruction-of-the-character-table.md

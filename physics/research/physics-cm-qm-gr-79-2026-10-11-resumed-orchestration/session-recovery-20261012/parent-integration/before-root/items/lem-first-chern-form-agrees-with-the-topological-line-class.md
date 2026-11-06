@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-first-chern-form-agrees-with-the-topological-line-class.md

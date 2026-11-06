@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-x-fifth-minus-six-x-plus-three-is-not-solvable-by-radicals.md

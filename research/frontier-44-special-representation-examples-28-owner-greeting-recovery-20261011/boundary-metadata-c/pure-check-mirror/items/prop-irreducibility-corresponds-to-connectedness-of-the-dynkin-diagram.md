@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram.md

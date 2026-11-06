@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-vertex-and-edge-connectivity-always-agree.md

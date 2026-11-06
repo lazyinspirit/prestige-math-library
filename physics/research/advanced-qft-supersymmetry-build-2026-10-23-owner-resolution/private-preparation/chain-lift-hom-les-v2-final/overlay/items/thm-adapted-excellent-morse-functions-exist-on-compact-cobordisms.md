@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-zero-section-and-cotangent-fibres-as-lagrangians.md

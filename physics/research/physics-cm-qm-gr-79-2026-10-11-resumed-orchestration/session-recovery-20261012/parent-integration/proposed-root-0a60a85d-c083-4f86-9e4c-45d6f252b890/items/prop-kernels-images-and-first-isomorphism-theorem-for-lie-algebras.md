@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-adjoint-of-a-three-by-two-complex-matrix.md

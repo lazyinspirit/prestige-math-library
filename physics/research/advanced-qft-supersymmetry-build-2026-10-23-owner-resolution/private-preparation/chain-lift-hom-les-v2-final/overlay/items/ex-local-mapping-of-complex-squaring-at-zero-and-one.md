@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-local-mapping-of-complex-squaring-at-zero-and-one.md

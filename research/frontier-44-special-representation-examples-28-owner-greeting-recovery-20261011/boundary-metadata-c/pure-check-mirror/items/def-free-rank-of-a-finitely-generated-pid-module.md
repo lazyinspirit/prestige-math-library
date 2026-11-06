@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-free-rank-of-a-finitely-generated-pid-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one.md

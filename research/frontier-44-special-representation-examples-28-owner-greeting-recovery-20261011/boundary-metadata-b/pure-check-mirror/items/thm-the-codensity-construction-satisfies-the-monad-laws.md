@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-codensity-construction-satisfies-the-monad-laws.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-von-neumann-mean-convergence-implies-birkhoff-pointwise-convergence.md

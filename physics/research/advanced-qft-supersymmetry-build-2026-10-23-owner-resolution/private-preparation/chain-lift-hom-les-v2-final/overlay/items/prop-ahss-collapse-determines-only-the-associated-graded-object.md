@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-ahss-collapse-determines-only-the-associated-graded-object.md

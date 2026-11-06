@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chern-connection-of-a-hermitian-holomorphic-line-bundle.md

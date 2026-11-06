@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-family-of-maps-and-evaluation-map.md

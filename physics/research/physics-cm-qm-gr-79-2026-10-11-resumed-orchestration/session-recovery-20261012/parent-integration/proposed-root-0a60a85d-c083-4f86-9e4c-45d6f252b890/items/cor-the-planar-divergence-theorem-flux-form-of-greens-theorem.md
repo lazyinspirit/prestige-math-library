@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-planar-divergence-theorem-flux-form-of-greens-theorem.md

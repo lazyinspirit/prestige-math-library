@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-bounded-discontinuous-derivative-that-is-riemann-integrable.md

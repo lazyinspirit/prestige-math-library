@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-morse-homology-of-a-morse-smale-pair.md

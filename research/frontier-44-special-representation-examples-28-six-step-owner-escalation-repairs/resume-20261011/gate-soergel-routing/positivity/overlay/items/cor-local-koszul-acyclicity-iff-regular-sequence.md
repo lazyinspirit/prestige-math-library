@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-local-koszul-acyclicity-iff-regular-sequence.md

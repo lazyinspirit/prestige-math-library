@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-hh-canonical-r-matrix-for-the-double-of-cyclic-two-group.md

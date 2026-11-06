@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-unique-sequential-limits-imply-hausdorff.md

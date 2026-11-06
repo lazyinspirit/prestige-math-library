@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-parameter-sequence-fails-in-a-non-cm-ring.md

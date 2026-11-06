@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-euclidean-immersion-normal-form-and-local-embedding.md

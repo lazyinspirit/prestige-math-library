@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclic-permutations-of-a-cyclically-britton-reduced-hnn-word-are-conjugate.md

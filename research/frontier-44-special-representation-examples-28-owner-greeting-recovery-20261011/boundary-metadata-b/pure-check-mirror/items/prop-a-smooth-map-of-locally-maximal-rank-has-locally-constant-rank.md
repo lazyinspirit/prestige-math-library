@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-smooth-map-of-locally-maximal-rank-has-locally-constant-rank.md

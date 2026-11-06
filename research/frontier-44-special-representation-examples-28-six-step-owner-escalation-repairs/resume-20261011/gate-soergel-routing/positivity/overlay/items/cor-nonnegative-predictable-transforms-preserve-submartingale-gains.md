@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-nonnegative-predictable-transforms-preserve-submartingale-gains.md

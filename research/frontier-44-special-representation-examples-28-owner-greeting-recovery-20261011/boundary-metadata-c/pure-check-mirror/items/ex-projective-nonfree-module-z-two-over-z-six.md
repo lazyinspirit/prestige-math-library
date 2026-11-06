@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-projective-nonfree-module-z-two-over-z-six.md

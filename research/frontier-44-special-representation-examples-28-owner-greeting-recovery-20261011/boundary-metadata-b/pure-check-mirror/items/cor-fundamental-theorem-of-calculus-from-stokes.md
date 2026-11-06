@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-fundamental-theorem-of-calculus-from-stokes.md

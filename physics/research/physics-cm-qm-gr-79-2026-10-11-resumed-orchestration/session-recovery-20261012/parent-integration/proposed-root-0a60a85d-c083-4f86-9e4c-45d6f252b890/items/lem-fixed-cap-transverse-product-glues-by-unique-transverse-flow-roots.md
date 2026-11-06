@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fixed-cap-transverse-product-glues-by-unique-transverse-flow-roots.md

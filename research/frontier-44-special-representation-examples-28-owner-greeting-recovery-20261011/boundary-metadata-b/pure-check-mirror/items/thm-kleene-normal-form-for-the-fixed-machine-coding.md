@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-kleene-normal-form-for-the-fixed-machine-coding.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-halpern-lauchli-and-the-basic-cohen-bpi-model.md

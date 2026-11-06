@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-two-term-tensor-complex-koszul-signs.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-spectral-theorem-for-bounded-normal-operators-pvm-form.md

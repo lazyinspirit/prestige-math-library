@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-high-relative-cells-do-not-change-lower-homotopy.md

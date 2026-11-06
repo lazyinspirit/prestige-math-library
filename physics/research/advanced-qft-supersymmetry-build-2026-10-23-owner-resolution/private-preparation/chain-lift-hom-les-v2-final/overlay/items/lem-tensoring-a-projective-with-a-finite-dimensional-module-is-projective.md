@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-tensoring-a-projective-with-a-finite-dimensional-module-is-projective.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t.md

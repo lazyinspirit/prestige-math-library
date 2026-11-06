@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-differentiable-convex-functions-and-monotone-derivatives.md

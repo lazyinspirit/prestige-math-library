@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-local-isometry-from-a-complete-connected-manifold-has-geodesically-complete-target-image.md

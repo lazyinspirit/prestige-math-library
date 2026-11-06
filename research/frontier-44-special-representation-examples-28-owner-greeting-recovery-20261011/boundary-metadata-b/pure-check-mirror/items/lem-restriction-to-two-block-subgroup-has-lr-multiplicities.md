@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-restriction-to-two-block-subgroup-has-lr-multiplicities.md

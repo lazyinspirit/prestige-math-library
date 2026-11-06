@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-constructible-hierarchy-and-constructible-rank.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simple-khovanov-seidel-modules-have-explicit-finite-projective-resolutions.md

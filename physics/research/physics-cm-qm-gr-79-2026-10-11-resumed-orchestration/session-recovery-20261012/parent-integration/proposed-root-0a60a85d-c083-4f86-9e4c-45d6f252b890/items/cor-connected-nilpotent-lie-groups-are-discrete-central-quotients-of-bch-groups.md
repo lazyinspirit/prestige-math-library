@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-connected-nilpotent-lie-groups-are-discrete-central-quotients-of-bch-groups.md

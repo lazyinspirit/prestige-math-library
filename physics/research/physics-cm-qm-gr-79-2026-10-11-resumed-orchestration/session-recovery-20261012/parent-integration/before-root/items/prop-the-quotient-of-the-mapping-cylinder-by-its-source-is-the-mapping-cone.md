@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-quotient-of-the-mapping-cylinder-by-its-source-is-the-mapping-cone.md

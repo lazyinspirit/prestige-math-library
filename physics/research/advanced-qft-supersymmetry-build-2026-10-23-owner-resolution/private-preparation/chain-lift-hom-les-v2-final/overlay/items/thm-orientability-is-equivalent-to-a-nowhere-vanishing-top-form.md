@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-orientability-is-equivalent-to-a-nowhere-vanishing-top-form.md

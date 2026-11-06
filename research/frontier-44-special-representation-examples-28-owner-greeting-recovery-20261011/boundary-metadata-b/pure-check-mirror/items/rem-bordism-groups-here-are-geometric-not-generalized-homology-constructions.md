@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-bordism-groups-here-are-geometric-not-generalized-homology-constructions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-no-property-star-outcome-forces-a-small-structural-block-partition.md

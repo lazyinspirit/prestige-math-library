@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-triangle-is-distinguished-whenever-the-three-composites-vanish.md

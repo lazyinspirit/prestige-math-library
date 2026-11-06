@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cellular-boundary-coefficient-equals-the-morse-trajectory-count.md

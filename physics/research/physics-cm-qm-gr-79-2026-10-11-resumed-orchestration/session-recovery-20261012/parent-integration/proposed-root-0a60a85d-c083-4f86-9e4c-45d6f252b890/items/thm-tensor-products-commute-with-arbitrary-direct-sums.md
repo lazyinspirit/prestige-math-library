@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tensor-products-commute-with-arbitrary-direct-sums.md

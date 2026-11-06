@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-trace-dual-and-codifferent-of-a-number-field.md

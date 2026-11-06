@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-denominator-quotient-has-only-imaginary-cone-support.md

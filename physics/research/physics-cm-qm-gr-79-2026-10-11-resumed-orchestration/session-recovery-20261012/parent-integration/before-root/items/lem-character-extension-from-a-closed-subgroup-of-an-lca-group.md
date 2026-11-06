@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-character-extension-from-a-closed-subgroup-of-an-lca-group.md

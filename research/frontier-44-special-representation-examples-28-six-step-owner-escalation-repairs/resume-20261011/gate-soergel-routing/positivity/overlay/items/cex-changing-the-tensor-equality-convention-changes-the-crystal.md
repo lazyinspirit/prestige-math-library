@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-changing-the-tensor-equality-convention-changes-the-crystal.md

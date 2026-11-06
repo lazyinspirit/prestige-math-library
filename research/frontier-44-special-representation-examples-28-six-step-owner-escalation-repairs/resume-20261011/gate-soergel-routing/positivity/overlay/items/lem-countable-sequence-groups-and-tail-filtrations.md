@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-countable-sequence-groups-and-tail-filtrations.md

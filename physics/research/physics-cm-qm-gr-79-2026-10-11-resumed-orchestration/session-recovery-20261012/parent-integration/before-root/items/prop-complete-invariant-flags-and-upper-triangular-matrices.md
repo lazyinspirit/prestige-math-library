@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-complete-invariant-flags-and-upper-triangular-matrices.md

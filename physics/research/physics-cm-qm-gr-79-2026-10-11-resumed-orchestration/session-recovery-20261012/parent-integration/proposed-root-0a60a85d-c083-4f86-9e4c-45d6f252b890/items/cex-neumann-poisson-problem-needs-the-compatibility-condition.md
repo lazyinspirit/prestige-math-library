@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-neumann-poisson-problem-needs-the-compatibility-condition.md

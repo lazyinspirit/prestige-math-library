@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induced-copies-counted-by-extending-a-deleted-vertex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-polynomial-tail-truth-has-conservative-empirical-bayes-coverage.md

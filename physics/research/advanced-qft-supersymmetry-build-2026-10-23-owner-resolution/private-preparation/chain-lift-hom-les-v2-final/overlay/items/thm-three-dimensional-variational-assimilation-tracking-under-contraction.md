@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-three-dimensional-variational-assimilation-tracking-under-contraction.md

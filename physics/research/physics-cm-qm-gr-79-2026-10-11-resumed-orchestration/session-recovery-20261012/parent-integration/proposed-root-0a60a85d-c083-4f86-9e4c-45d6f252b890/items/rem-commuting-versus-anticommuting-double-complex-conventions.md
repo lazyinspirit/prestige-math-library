@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-commuting-versus-anticommuting-double-complex-conventions.md

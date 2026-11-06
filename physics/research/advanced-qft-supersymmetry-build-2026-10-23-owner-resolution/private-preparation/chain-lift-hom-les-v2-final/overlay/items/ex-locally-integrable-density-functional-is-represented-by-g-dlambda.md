@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-locally-integrable-density-functional-is-represented-by-g-dlambda.md

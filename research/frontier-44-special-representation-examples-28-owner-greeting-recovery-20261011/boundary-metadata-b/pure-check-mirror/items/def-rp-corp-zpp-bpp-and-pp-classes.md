@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-rp-corp-zpp-bpp-and-pp-classes.md

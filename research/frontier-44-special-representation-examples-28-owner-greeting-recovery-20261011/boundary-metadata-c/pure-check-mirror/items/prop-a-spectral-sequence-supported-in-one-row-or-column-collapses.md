@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-spectral-sequence-supported-in-one-row-or-column-collapses.md

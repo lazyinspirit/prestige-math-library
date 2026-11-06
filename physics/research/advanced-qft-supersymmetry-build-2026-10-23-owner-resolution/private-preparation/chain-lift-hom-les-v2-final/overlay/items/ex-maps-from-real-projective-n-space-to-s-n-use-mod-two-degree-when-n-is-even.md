@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-maps-from-real-projective-n-space-to-s-n-use-mod-two-degree-when-n-is-even.md

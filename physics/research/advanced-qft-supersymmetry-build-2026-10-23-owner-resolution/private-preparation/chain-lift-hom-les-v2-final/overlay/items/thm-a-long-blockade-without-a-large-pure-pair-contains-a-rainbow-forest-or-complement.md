@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-long-blockade-without-a-large-pure-pair-contains-a-rainbow-forest-or-complement.md

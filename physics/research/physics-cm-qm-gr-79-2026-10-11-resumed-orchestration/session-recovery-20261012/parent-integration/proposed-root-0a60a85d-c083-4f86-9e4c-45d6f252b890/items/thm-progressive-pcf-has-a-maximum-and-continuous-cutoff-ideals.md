@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-progressive-pcf-has-a-maximum-and-continuous-cutoff-ideals.md

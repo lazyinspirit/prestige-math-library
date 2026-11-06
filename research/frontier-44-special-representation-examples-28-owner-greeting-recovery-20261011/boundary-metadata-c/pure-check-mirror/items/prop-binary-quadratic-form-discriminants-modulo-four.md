@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-binary-quadratic-form-discriminants-modulo-four.md

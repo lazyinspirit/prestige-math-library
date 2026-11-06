@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuous-maps-preserve-convergence-in-probability.md

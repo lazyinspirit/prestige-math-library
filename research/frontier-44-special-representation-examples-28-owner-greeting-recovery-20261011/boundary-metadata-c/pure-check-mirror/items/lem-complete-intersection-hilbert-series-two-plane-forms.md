@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-complete-intersection-hilbert-series-two-plane-forms.md

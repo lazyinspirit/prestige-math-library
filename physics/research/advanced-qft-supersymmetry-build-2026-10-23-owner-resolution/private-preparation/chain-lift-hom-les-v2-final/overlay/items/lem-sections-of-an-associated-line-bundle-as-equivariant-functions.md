@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-sections-of-an-associated-line-bundle-as-equivariant-functions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-locally-integrable-weakly-harmonic-functions-are-smooth.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-gap-problem-and-gap-preserving-reduction.md

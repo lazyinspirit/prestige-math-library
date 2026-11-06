@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-centered-convergent-series-have-summable-variances.md

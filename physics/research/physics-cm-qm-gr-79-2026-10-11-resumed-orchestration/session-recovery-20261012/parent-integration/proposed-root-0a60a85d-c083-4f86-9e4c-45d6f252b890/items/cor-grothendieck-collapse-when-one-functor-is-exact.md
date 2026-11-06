@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-grothendieck-collapse-when-one-functor-is-exact.md

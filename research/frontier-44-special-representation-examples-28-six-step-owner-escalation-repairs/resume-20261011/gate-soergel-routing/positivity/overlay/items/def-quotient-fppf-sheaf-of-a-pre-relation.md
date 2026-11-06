@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quotient-fppf-sheaf-of-a-pre-relation.md

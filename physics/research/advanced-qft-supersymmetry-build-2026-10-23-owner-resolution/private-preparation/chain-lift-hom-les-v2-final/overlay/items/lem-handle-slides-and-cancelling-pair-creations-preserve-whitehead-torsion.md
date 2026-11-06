@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-handle-slides-and-cancelling-pair-creations-preserve-whitehead-torsion.md

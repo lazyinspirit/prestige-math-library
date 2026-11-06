@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-strictification-gives-equivalence-and-never-isomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-samuel-compactification-agrees-with-completion-for-totally-bounded-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-closure-depends-only-on-the-braid-isotopy-class.md

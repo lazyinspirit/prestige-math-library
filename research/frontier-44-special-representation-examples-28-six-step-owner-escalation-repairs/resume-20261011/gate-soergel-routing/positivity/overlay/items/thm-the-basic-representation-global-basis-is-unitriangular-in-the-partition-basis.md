@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-basic-representation-global-basis-is-unitriangular-in-the-partition-basis.md

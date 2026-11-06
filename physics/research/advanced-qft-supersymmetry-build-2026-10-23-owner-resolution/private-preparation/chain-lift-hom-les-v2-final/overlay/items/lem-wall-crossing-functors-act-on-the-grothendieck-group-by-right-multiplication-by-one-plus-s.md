@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-wall-crossing-functors-act-on-the-grothendieck-group-by-right-multiplication-by-one-plus-s.md

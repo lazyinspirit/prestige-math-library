@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-time-inhomogeneous-chain-cannot-be-encoded-by-one-kernel-without-enlarging-state.md

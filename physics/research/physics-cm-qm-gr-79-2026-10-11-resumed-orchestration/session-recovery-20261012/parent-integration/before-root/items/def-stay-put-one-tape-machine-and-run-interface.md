@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-stay-put-one-tape-machine-and-run-interface.md

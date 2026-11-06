@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-root-space-decomposition-relative-to-a-cartan-subalgebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-averaging-makes-a-finite-dimensional-representation-unitary.md

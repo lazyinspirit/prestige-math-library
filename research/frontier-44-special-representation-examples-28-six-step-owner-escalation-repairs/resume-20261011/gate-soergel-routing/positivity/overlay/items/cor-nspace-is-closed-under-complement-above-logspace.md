@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-nspace-is-closed-under-complement-above-logspace.md

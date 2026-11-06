@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dolbeault-cohomology-polydisc-vanishes-positive-q.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-linear-congruence-solvability-and-solution-count.md

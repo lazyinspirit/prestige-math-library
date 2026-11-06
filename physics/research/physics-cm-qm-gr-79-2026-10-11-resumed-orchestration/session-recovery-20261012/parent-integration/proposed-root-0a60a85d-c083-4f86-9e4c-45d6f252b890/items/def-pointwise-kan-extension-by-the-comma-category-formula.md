@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-pointwise-kan-extension-by-the-comma-category-formula.md

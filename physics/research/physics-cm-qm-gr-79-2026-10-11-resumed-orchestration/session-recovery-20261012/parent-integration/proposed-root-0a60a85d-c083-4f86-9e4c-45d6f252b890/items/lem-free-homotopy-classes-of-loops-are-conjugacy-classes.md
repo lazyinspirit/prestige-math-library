@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-free-homotopy-classes-of-loops-are-conjugacy-classes.md

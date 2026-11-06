@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-purely-inseparable-extensions-have-prime-power-degree.md

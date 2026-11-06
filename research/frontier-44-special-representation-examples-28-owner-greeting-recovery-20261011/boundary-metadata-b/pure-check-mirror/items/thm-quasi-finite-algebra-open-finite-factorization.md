@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quasi-finite-algebra-open-finite-factorization.md

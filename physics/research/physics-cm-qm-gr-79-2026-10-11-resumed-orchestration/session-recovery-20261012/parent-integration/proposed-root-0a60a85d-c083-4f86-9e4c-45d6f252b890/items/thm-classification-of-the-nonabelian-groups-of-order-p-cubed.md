@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-classification-of-the-nonabelian-groups-of-order-p-cubed.md

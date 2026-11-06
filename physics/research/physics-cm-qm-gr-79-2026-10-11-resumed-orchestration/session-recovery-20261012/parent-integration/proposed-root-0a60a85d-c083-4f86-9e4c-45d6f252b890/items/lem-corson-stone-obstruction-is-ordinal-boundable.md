@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-corson-stone-obstruction-is-ordinal-boundable.md

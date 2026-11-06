@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-weyl-stabilizer-controls-principal-series-endomorphisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-pullback-of-an-epimorphism-is-an-epimorphism.md

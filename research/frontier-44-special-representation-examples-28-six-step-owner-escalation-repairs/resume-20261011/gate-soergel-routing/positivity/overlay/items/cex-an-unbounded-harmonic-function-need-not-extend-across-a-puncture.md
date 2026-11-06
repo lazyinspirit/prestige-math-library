@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-unbounded-harmonic-function-need-not-extend-across-a-puncture.md

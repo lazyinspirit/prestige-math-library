@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-holomorphic-function-on-an-annulus-with-nonzero-closed-contour-integral.md

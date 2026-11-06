@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals.md

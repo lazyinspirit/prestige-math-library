@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-max-three-sat-has-no-ptas-unless-p-equals-np.md

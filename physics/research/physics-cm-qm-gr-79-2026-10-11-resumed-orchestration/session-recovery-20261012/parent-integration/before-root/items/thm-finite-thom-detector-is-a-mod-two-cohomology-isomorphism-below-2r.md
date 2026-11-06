@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-thom-detector-is-a-mod-two-cohomology-isomorphism-below-2r.md

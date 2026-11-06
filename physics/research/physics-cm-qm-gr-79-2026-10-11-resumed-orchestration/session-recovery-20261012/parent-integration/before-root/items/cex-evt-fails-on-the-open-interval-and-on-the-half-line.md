@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-evt-fails-on-the-open-interval-and-on-the-half-line.md

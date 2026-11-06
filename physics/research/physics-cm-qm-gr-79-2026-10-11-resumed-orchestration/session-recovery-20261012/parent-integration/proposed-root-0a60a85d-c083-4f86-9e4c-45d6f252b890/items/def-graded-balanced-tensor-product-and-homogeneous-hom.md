@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-graded-balanced-tensor-product-and-homogeneous-hom.md

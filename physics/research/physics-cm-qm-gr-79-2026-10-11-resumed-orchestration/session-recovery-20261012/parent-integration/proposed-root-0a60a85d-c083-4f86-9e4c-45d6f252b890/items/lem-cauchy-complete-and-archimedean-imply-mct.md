@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cauchy-complete-and-archimedean-imply-mct.md

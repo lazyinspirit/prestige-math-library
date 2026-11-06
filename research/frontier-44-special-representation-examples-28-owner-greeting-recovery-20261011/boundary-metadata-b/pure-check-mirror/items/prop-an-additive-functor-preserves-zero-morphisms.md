@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-an-additive-functor-preserves-zero-morphisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-galois-action-on-primes-above-a-prime-is-transitive.md

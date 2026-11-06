@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system.md

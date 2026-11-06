@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-finitely-generated-group-with-a-word-metric-is-a-quasi-geodesic-space.md

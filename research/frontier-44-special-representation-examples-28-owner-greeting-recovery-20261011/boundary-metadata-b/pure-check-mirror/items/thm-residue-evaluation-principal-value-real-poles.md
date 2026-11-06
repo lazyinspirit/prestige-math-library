@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-residue-evaluation-principal-value-real-poles.md

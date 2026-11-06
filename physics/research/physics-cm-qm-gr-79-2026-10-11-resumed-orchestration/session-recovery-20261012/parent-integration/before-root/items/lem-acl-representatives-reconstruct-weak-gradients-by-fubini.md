@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-acl-representatives-reconstruct-weak-gradients-by-fubini.md

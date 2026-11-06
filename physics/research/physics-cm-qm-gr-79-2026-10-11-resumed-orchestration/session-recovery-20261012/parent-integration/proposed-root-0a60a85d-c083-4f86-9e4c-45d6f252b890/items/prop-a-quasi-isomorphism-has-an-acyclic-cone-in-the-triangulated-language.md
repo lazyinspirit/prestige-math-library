@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-quasi-isomorphism-has-an-acyclic-cone-in-the-triangulated-language.md

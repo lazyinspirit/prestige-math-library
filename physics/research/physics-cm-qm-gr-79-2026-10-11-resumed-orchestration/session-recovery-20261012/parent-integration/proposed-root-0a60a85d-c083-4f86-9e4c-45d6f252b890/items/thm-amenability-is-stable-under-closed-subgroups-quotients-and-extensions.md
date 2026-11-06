@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-amenability-is-stable-under-closed-subgroups-quotients-and-extensions.md

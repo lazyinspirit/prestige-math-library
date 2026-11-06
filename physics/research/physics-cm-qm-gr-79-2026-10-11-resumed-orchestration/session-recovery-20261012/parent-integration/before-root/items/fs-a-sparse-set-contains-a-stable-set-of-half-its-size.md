@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-sparse-set-contains-a-stable-set-of-half-its-size.md

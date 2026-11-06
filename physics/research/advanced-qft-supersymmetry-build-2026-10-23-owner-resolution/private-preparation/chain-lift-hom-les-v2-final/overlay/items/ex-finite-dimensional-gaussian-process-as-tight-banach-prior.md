@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-finite-dimensional-gaussian-process-as-tight-banach-prior.md

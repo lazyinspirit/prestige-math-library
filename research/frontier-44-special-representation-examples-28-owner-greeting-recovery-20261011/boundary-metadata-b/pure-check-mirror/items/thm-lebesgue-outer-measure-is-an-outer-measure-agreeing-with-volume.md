@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume.md

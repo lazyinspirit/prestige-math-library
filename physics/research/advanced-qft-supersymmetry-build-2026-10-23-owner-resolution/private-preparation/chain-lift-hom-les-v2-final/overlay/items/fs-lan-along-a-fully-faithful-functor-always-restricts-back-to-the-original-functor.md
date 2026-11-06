@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-lan-along-a-fully-faithful-functor-always-restricts-back-to-the-original-functor.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coercivity-of-the-adjoint-makes-the-form-operator-range-dense.md

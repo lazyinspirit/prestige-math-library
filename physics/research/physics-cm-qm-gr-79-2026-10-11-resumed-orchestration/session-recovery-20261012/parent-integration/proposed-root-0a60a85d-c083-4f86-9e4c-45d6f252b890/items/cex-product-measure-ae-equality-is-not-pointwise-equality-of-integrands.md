@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-product-measure-ae-equality-is-not-pointwise-equality-of-integrands.md

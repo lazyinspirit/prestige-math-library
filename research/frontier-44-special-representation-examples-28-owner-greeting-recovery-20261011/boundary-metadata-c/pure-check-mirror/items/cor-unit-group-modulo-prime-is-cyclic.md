@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-unit-group-modulo-prime-is-cyclic.md

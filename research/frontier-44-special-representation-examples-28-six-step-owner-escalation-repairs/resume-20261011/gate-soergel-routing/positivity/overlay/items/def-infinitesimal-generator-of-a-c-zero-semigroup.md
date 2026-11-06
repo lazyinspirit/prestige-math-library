@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-infinitesimal-generator-of-a-c-zero-semigroup.md

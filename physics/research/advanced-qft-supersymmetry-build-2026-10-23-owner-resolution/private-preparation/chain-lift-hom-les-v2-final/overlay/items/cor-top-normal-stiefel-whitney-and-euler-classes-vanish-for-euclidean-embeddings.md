@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-top-normal-stiefel-whitney-and-euler-classes-vanish-for-euclidean-embeddings.md

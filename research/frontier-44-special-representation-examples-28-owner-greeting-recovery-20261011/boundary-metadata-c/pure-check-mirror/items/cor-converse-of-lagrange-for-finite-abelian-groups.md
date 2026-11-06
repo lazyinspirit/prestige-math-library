@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-converse-of-lagrange-for-finite-abelian-groups.md

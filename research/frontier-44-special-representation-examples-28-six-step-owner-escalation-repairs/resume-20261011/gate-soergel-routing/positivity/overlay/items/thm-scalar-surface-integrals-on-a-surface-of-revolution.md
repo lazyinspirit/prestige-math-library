@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-scalar-surface-integrals-on-a-surface-of-revolution.md

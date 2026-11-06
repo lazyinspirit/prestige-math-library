@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-irreducibles-of-symmetric-groups-are-specht-modules.md

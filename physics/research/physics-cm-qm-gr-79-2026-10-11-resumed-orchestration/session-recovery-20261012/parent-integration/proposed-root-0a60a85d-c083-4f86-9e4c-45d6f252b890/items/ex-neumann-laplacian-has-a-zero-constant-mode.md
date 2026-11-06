@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-neumann-laplacian-has-a-zero-constant-mode.md

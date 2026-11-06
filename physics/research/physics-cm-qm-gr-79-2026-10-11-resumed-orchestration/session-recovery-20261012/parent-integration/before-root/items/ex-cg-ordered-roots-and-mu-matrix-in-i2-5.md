@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-ordered-roots-and-mu-matrix-in-i2-5.md

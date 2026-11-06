@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-bijection-of-hom-sets-that-does-not-exhibit-a-cotensor.md

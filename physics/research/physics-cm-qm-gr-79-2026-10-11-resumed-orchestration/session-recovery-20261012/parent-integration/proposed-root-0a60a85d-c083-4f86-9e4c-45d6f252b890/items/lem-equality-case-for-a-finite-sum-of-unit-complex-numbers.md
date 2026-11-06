@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-equality-case-for-a-finite-sum-of-unit-complex-numbers.md

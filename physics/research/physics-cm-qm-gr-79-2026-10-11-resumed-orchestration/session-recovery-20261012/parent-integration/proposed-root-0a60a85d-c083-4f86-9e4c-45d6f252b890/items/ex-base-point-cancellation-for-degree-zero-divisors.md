@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-base-point-cancellation-for-degree-zero-divisors.md

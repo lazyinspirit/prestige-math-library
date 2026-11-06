@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cochain-complex-hom-from-a-chain-complex.md

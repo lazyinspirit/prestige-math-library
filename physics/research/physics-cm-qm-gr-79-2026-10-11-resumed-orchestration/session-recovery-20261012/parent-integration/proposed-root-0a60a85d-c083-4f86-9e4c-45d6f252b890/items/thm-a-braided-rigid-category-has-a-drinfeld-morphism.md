@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-braided-rigid-category-has-a-drinfeld-morphism.md

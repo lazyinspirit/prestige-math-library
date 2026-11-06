@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-highest-weights-can-have-the-same-primitive-ideal.md

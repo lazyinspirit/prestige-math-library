@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-half-dimensional-submanifold-is-lagrangian.md

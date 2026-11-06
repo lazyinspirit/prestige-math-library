@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-subharmonic-and-superharmonic-functions-in-rn.md

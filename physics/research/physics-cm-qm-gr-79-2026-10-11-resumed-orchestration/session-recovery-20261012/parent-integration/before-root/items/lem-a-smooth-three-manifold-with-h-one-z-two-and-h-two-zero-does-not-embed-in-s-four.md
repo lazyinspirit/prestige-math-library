@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-smooth-three-manifold-with-h-one-z-two-and-h-two-zero-does-not-embed-in-s-four.md

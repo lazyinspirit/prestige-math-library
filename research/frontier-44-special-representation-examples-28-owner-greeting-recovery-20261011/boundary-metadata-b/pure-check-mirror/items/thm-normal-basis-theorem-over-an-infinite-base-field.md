@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-normal-basis-theorem-over-an-infinite-base-field.md

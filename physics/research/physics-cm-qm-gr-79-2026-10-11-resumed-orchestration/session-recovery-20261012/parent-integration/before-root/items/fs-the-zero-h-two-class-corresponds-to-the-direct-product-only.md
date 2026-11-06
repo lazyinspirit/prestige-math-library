@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-zero-h-two-class-corresponds-to-the-direct-product-only.md

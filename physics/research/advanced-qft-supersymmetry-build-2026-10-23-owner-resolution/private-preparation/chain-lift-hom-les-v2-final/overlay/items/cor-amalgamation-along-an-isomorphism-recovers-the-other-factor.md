@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-amalgamation-along-an-isomorphism-recovers-the-other-factor.md

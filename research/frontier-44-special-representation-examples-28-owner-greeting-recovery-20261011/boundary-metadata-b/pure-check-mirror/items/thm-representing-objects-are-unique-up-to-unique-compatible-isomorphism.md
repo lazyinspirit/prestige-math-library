@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism.md

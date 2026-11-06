@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nonnegative-improper-multiple-integral-by-exhaustion.md

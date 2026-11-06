@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-parabolic-o-grothendieck-group-is-the-integral-fock-module.md

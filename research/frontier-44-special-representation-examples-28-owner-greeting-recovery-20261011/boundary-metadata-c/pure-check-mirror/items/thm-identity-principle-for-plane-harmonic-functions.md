@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-identity-principle-for-plane-harmonic-functions.md

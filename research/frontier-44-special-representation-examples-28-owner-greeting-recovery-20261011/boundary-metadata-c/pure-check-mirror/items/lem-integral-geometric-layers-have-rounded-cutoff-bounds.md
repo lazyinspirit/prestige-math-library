@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-geometric-layers-have-rounded-cutoff-bounds.md

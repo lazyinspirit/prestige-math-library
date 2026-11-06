@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-homological-gaussian-elimination-preserves-homotopy-type-and-homology.md

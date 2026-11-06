@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-parabolic-subgroup-of-an-affine-algebraic-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-primary-obstruction-to-a-nowhere-zero-section-of-a-sphere-fibration.md

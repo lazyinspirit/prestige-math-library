@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-polynomial-subexponential-exponential-and-intermediate-growth.md

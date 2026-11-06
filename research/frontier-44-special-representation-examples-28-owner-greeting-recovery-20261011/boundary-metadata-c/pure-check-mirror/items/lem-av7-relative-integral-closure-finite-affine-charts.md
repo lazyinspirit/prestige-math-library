@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-av7-relative-integral-closure-finite-affine-charts.md

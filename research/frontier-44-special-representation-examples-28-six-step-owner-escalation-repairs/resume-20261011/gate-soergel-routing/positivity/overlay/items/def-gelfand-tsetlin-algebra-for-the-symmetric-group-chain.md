@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-gelfand-tsetlin-algebra-for-the-symmetric-group-chain.md

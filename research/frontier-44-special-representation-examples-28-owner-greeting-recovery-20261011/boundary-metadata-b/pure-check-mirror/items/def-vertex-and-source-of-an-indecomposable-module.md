@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-vertex-and-source-of-an-indecomposable-module.md

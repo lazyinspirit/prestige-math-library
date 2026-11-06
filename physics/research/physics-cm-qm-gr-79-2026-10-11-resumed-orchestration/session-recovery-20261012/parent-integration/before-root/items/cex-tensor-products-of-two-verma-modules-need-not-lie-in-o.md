@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-tensor-products-of-two-verma-modules-need-not-lie-in-o.md

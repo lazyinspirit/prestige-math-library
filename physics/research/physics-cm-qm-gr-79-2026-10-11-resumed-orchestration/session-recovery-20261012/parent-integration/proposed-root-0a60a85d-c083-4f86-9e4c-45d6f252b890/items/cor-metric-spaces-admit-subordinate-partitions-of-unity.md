@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-metric-spaces-admit-subordinate-partitions-of-unity.md

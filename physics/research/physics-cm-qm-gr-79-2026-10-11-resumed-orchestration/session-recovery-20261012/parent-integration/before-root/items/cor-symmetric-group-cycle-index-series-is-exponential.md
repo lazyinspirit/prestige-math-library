@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-symmetric-group-cycle-index-series-is-exponential.md

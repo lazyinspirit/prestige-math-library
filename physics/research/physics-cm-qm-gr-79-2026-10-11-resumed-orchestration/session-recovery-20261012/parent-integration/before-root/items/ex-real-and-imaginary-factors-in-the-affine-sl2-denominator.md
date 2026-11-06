@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-real-and-imaginary-factors-in-the-affine-sl2-denominator.md

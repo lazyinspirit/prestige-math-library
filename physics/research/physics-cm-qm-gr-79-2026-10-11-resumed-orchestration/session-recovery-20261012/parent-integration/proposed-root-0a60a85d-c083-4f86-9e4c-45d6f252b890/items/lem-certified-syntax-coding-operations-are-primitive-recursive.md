@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-certified-syntax-coding-operations-are-primitive-recursive.md

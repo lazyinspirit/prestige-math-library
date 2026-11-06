@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-classical-dominant-rational-maps-function-field-embeddings.md

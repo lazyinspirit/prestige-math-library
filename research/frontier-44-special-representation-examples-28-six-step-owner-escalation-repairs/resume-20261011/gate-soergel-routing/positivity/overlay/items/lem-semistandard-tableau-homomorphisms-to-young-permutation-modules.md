@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-semistandard-tableau-homomorphisms-to-young-permutation-modules.md

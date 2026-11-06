@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-dj-bridge-specialization-and-composition-multiplicity-dictionary.md

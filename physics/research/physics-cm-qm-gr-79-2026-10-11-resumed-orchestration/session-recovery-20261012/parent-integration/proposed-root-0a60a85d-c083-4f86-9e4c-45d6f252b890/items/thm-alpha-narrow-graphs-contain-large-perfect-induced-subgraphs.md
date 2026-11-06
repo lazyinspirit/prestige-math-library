@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-alpha-narrow-graphs-contain-large-perfect-induced-subgraphs.md

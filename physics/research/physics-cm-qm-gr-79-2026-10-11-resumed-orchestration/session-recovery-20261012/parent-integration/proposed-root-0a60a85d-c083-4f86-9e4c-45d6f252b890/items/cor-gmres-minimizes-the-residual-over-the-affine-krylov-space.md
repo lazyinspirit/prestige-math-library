@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-gmres-minimizes-the-residual-over-the-affine-krylov-space.md

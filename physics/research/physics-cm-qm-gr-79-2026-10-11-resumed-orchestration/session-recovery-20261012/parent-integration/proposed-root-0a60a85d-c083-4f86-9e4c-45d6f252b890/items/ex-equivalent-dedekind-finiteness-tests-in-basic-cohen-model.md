@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-equivalent-dedekind-finiteness-tests-in-basic-cohen-model.md

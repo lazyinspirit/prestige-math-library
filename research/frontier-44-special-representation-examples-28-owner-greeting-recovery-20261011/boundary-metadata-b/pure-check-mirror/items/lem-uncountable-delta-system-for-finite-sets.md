@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-uncountable-delta-system-for-finite-sets.md

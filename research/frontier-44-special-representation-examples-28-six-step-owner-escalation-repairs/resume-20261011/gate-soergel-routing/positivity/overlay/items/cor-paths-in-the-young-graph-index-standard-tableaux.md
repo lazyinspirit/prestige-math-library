@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-paths-in-the-young-graph-index-standard-tableaux.md

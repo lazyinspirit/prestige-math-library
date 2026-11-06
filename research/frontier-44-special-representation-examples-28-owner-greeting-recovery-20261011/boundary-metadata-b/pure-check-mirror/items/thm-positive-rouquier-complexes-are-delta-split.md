@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-positive-rouquier-complexes-are-delta-split.md

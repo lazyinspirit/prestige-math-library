@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nat-finite-sum-laws-and-the-canonical-embedding.md

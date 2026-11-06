@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-pi-three-so-three-generated-by-the-quaternion-double-cover.md

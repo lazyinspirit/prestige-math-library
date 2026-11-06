@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hyperbolic-groups-admit-finite-dehn-presentations.md

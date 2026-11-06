@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-closure-of-ball-smaller-than-closed-ball.md

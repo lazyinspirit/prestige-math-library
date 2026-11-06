@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fi-modules-over-a-noetherian-q-algebra-form-a-noetherian-category.md

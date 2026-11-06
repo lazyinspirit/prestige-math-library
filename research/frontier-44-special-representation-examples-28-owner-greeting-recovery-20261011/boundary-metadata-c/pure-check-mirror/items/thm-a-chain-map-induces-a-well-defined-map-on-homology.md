@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-chain-map-induces-a-well-defined-map-on-homology.md

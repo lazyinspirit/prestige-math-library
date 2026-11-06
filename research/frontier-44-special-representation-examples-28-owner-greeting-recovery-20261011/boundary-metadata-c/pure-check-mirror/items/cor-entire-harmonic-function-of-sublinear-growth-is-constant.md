@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-entire-harmonic-function-of-sublinear-growth-is-constant.md

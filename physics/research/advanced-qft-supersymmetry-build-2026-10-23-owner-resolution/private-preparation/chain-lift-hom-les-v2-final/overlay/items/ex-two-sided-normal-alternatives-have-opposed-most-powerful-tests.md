@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-two-sided-normal-alternatives-have-opposed-most-powerful-tests.md

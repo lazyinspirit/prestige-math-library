@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gitik-strongly-compact-filter-system-and-class-forcing.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-scale-tail-suprema-have-prescribed-cofinality.md

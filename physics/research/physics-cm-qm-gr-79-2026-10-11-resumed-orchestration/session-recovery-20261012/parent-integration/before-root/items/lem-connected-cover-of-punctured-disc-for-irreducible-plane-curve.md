@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-connected-cover-of-punctured-disc-for-irreducible-plane-curve.md

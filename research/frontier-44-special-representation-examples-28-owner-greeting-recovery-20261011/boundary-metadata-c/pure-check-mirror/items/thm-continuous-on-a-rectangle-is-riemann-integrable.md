@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-continuous-on-a-rectangle-is-riemann-integrable.md

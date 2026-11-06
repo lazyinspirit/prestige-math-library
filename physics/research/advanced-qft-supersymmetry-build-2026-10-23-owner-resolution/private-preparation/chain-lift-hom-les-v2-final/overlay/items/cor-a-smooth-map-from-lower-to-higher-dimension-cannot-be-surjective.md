@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-smooth-map-from-lower-to-higher-dimension-cannot-be-surjective.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions.md

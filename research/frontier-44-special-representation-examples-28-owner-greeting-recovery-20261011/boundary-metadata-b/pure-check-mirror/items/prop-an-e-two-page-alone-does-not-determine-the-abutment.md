@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-an-e-two-page-alone-does-not-determine-the-abutment.md

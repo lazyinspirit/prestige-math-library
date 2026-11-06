@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unit-and-counit-of-the-free-vector-space-adjunction.md

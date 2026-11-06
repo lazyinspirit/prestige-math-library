@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-calderon-zygmund-strong-lone-bound-fails.md

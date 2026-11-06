@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-reverse-fatou-lemma-under-an-integrable-majorant.md

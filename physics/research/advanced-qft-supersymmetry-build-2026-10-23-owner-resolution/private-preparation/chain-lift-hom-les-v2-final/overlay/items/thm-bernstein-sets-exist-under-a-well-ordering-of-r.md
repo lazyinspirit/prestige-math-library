@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-bernstein-sets-exist-under-a-well-ordering-of-r.md

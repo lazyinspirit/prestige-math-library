@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclic-type-a-cyclotomic-klr-regular-hom-norm-gives-total-dimension.md

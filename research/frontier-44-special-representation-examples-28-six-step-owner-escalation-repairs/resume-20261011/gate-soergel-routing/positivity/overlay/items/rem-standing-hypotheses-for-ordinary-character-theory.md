@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-standing-hypotheses-for-ordinary-character-theory.md

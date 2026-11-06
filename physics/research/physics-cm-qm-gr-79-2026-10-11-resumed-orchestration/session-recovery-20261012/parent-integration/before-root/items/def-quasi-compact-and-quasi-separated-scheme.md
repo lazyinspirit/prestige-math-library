@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quasi-compact-and-quasi-separated-scheme.md

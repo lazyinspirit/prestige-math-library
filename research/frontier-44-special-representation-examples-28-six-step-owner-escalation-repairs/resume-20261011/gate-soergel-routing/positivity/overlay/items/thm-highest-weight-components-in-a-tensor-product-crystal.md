@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-highest-weight-components-in-a-tensor-product-crystal.md

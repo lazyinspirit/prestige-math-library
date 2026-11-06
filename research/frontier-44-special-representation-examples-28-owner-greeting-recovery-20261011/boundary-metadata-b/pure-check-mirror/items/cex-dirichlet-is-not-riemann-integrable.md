@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-dirichlet-is-not-riemann-integrable.md

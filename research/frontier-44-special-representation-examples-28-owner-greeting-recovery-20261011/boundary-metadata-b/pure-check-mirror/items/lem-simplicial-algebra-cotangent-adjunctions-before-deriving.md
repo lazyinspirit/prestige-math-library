@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-simplicial-algebra-cotangent-adjunctions-before-deriving.md

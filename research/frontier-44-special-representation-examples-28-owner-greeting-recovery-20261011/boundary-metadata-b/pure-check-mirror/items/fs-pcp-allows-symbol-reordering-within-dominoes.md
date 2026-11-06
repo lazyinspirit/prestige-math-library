@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-pcp-allows-symbol-reordering-within-dominoes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable.md

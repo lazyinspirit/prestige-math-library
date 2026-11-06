@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-specialisation-poset-of-a-small-spectrum.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-point-filters-are-dense-in-the-minimal-cauchy-filter-space.md

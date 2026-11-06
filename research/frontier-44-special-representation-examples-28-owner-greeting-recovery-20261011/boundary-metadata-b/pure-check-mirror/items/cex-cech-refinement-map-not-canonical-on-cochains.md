@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-cech-refinement-map-not-canonical-on-cochains.md

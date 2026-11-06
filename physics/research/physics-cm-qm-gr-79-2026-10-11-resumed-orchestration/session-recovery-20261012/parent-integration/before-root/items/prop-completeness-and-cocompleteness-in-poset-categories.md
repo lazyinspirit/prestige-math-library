@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-completeness-and-cocompleteness-in-poset-categories.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-atom-free-socks-model-has-countable-pairs-without-choice.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-equicontinuous-families-into-a-compact-metric-target.md

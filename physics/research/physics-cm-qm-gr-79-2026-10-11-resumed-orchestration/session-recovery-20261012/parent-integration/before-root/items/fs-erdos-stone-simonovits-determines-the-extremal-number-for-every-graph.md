@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-erdos-stone-simonovits-determines-the-extremal-number-for-every-graph.md

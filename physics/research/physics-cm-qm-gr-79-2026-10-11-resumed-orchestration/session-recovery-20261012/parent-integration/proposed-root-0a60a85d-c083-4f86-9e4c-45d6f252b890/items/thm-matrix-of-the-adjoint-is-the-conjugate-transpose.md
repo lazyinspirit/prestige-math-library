@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-matrix-of-the-adjoint-is-the-conjugate-transpose.md

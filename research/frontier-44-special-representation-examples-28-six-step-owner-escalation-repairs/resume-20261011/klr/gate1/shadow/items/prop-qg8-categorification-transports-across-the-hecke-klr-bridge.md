@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-qg8-categorification-transports-across-the-hecke-klr-bridge.md

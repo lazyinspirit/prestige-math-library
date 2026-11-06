@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-signature-of-a-closed-oriented-four-k-manifold.md

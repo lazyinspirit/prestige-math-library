@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-trivial-principal-bundle-corresponds-to-a-nullhomotopic-classifying-map.md

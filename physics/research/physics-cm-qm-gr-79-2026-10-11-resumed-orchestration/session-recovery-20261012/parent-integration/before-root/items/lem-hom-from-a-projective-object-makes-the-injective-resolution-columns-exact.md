@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hom-from-a-projective-object-makes-the-injective-resolution-columns-exact.md

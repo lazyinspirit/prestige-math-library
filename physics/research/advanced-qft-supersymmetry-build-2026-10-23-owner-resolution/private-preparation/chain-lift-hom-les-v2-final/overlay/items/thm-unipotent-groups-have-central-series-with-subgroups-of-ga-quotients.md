@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-unipotent-groups-have-central-series-with-subgroups-of-ga-quotients.md

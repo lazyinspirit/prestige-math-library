@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-positive-right-derived-functors-are-effaceable-by-injectives.md

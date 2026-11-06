@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-property-star-and-leaf-reducibility-yield-five-comb-outcomes.md

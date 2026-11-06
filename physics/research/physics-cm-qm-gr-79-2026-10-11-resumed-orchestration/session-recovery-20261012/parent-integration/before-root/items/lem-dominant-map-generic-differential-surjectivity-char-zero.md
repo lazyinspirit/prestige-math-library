@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dominant-map-generic-differential-surjectivity-char-zero.md

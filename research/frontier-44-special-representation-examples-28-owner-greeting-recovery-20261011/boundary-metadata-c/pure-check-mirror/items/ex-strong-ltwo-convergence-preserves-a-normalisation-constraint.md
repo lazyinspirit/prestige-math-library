@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-strong-ltwo-convergence-preserves-a-normalisation-constraint.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-solvable-iff-it-has-an-abelian-factor-series.md

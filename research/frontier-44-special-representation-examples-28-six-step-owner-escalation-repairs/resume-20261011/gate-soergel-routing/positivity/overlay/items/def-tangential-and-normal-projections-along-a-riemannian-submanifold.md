@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-tangential-and-normal-projections-along-a-riemannian-submanifold.md

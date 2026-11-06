@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-free-fi-module-generated-by-an-sm-module.md

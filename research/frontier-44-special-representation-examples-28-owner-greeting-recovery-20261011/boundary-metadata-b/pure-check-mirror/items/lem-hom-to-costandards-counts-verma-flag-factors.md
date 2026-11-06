@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hom-to-costandards-counts-verma-flag-factors.md

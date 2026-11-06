@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-characteristic-period-annulus-has-an-orbit-or-polycycle-frontier.md

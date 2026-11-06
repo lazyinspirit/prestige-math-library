@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-all-real-sets-measurable-gives-an-inaccessible-inner-model.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-chordal-distance-formula-from-complex-coordinates.md

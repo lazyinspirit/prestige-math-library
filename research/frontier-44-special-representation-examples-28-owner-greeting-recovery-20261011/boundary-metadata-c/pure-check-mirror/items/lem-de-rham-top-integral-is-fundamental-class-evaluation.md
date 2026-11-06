@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-de-rham-top-integral-is-fundamental-class-evaluation.md

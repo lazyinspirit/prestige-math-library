@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-analytic-quasiconformality-implies-quadrilateral-modulus-bounds.md

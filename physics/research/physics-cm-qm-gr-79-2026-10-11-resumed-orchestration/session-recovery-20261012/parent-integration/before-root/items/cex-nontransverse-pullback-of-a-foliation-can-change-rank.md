@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nontransverse-pullback-of-a-foliation-can-change-rank.md

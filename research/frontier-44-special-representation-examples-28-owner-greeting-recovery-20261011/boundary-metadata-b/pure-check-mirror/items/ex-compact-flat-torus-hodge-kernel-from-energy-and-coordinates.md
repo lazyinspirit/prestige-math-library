@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-compact-flat-torus-hodge-kernel-from-energy-and-coordinates.md

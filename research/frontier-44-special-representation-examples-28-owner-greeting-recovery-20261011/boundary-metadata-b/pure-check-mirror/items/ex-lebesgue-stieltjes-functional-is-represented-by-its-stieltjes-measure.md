@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-lebesgue-stieltjes-functional-is-represented-by-its-stieltjes-measure.md

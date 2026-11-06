@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-signature-and-l-genus-agree-on-products-of-complex-projective-spaces.md

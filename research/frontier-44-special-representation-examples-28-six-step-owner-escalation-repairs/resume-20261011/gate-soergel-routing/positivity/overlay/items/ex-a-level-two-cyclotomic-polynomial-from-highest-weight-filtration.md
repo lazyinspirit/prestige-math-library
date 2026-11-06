@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-level-two-cyclotomic-polynomial-from-highest-weight-filtration.md

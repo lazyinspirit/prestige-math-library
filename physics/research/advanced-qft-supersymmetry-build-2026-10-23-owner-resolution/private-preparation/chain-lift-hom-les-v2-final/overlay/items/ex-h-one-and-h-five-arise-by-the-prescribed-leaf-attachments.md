@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-h-one-and-h-five-arise-by-the-prescribed-leaf-attachments.md

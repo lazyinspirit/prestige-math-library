@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-geodesic-triangulation-of-a-compact-riemannian-surface.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-positive-measure-compact-set-can-miss-part-of-every-interval.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-serre-filtration-of-the-total-space-over-base-skeleta.md

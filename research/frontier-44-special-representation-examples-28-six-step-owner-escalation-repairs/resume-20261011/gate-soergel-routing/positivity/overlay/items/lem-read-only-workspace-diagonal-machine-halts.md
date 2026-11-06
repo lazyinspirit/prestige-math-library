@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-read-only-workspace-diagonal-machine-halts.md

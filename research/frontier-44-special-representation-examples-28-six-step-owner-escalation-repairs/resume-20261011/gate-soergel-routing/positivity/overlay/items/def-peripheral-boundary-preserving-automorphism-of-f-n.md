@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-peripheral-boundary-preserving-automorphism-of-f-n.md

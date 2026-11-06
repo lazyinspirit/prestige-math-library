@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-annihilator-ideal-of-a-distribution-is-frame-independent.md

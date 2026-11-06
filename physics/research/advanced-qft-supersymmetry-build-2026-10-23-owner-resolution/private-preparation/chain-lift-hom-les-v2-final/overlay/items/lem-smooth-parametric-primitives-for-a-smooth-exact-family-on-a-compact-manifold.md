@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-smooth-parametric-primitives-for-a-smooth-exact-family-on-a-compact-manifold.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-angular-momentum-as-a-cotangent-lift-hamiltonian.md

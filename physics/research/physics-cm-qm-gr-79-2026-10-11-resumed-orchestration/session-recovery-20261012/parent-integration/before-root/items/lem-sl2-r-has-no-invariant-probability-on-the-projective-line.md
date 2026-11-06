@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sl2-r-has-no-invariant-probability-on-the-projective-line.md

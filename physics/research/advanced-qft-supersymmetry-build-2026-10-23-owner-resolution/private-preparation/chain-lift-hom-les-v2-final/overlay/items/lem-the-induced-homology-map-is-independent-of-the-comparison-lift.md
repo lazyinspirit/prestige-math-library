@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-induced-homology-map-is-independent-of-the-comparison-lift.md

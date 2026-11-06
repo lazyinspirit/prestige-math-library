@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-counit-of-a-reflection-is-an-isomorphism.md

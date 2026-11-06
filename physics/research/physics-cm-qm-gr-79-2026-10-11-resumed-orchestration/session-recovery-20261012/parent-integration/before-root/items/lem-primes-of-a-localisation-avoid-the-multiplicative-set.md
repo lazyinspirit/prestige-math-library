@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-primes-of-a-localisation-avoid-the-multiplicative-set.md

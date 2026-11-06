@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-three-term-rouquier-braid-equivalence-in-type-a-two.md

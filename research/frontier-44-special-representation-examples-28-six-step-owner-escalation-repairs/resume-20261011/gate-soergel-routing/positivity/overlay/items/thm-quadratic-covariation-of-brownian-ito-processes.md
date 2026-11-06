@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quadratic-covariation-of-brownian-ito-processes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-normal-holomorphic-families-are-locally-bounded.md

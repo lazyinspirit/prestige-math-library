@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-mapping-cylinder-of-an-inclusion-of-two-term-complexes.md

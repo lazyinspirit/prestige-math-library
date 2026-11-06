@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-frechet-urysohn-and-sequential-spaces.md

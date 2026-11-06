@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-real-form-of-a-complex-lie-algebra.md

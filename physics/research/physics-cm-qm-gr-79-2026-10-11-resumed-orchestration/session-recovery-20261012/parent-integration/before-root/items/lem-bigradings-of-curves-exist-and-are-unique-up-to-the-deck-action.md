@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bigradings-of-curves-exist-and-are-unique-up-to-the-deck-action.md

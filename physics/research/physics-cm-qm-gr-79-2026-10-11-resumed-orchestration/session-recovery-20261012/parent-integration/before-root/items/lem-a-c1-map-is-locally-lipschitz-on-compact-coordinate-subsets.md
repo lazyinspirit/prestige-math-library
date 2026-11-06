@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets.md

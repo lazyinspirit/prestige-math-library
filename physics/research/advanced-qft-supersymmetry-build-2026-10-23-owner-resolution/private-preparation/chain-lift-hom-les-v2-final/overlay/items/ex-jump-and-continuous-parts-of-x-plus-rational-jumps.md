@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-jump-and-continuous-parts-of-x-plus-rational-jumps.md

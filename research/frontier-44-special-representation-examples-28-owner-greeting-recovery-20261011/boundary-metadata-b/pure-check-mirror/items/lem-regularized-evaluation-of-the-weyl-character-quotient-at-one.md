@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-regularized-evaluation-of-the-weyl-character-quotient-at-one.md

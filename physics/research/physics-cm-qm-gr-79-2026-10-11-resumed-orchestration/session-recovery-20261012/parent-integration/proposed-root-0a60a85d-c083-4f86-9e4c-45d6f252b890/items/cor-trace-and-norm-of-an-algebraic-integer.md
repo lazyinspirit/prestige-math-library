@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-trace-and-norm-of-an-algebraic-integer.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quadratic-subfield-of-a-prime-cyclotomic-field.md

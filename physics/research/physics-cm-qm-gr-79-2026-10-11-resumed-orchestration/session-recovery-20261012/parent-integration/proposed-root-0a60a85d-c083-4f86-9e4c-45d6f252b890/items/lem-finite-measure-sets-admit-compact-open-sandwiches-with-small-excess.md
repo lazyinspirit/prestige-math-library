@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-measure-sets-admit-compact-open-sandwiches-with-small-excess.md

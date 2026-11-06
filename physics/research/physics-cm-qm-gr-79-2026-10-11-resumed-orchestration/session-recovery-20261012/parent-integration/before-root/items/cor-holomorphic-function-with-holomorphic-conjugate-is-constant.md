@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-holomorphic-function-with-holomorphic-conjugate-is-constant.md

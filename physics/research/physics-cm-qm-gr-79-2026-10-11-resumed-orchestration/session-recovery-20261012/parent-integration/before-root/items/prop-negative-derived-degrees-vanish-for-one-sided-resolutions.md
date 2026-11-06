@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-negative-derived-degrees-vanish-for-one-sided-resolutions.md

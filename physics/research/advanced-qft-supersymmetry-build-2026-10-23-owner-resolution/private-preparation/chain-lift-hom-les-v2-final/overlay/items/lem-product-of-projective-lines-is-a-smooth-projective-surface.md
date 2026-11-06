@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-product-of-projective-lines-is-a-smooth-projective-surface.md

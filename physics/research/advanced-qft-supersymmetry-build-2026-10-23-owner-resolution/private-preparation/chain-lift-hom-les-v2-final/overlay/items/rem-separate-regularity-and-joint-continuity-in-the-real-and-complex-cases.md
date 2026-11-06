@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-separate-regularity-and-joint-continuity-in-the-real-and-complex-cases.md

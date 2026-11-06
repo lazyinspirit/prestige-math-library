@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-three-point-outer-measure-has-only-trivial-caratheodory-sets.md

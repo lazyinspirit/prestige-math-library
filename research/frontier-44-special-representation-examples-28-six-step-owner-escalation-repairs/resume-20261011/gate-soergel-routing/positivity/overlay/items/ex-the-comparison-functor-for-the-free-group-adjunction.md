@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-comparison-functor-for-the-free-group-adjunction.md

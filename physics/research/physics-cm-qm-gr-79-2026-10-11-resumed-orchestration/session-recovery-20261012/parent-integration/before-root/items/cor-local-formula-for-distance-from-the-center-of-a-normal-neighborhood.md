@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-local-formula-for-distance-from-the-center-of-a-normal-neighborhood.md

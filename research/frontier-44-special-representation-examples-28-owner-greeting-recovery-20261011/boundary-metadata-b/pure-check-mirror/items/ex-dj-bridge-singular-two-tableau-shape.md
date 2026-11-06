@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-dj-bridge-singular-two-tableau-shape.md

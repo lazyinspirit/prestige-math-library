@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-presheaf-bounded-continuous-functions-not-sheaf.md

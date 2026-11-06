@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-haar-normalisations-on-a-finite-abelian-group-and-its-dual.md

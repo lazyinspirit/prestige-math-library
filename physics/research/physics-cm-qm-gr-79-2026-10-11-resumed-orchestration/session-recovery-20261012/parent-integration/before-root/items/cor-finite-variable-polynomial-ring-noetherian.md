@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-variable-polynomial-ring-noetherian.md

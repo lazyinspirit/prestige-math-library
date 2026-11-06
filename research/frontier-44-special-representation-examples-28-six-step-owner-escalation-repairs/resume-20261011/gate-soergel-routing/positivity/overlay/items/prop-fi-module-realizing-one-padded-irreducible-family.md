@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-fi-module-realizing-one-padded-irreducible-family.md

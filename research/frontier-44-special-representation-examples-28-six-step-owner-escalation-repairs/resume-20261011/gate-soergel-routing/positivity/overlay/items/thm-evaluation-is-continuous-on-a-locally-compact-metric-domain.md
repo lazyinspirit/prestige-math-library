@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-evaluation-is-continuous-on-a-locally-compact-metric-domain.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-higher-hochschild-cohomology-vanishes-for-linearly-reductive-groups.md

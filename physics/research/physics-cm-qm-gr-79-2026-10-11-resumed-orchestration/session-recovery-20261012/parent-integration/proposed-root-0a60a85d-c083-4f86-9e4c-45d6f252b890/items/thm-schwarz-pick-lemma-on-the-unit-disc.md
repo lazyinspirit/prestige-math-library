@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-schwarz-pick-lemma-on-the-unit-disc.md

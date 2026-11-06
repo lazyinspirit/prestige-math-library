@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-eventual-products-below-aleph-omega-have-a-continuous-long-chain.md

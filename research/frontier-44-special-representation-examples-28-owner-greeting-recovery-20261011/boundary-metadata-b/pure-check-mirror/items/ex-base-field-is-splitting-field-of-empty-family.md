@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-base-field-is-splitting-field-of-empty-family.md

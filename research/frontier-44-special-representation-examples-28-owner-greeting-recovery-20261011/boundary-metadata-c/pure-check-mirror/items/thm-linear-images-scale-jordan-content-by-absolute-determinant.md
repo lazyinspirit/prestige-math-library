@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-linear-images-scale-jordan-content-by-absolute-determinant.md

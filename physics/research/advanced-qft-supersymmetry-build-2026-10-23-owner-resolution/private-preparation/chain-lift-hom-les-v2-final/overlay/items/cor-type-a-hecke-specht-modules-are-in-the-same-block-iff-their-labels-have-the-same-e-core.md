@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-type-a-hecke-specht-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core.md

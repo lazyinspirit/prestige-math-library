@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-trivial-amalgamation-is-the-free-product.md

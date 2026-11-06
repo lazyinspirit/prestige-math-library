@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-whitney-circle-for-a-pair-of-intersection-points.md

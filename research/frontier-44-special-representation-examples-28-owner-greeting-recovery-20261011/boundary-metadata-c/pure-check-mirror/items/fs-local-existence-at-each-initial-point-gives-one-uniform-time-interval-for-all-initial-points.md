@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-local-existence-at-each-initial-point-gives-one-uniform-time-interval-for-all-initial-points.md

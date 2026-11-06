@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-boundaries-have-zero-stiefel-whitney-numbers.md

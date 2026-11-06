@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-duhamel-principle-for-the-whole-space-heat-equation.md

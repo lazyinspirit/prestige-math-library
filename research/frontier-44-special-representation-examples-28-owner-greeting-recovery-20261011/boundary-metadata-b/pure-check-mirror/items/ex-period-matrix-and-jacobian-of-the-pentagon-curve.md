@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-period-matrix-and-jacobian-of-the-pentagon-curve.md

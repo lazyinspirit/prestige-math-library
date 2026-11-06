@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-preadditive-category-with-a-zero-object-has-binary-biproducts.md

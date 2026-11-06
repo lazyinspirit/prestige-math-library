@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-greens-first-identity-for-glued-elementary-solid-regions.md

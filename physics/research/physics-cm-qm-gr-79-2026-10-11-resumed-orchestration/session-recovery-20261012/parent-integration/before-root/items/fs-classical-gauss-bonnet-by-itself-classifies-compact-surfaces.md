@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-classical-gauss-bonnet-by-itself-classifies-compact-surfaces.md

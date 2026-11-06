@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-nilpotent-central-fiber-is-a-reduced-integral-domain.md

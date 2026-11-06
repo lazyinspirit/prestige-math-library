@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-closed-oriented-pid-manifolds-have-finitely-generated-homology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-homology-effect-of-surgery-away-from-the-middle-dimensions.md

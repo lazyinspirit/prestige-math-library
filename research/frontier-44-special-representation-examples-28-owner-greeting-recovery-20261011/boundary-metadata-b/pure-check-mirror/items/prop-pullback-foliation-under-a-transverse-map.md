@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-pullback-foliation-under-a-transverse-map.md

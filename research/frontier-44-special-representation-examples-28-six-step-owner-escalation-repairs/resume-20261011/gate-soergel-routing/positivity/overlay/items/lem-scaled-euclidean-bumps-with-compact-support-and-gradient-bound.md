@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound.md

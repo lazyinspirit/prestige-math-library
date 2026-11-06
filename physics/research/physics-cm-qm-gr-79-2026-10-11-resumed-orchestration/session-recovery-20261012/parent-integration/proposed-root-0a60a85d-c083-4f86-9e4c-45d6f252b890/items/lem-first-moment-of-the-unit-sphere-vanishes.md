@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-first-moment-of-the-unit-sphere-vanishes.md

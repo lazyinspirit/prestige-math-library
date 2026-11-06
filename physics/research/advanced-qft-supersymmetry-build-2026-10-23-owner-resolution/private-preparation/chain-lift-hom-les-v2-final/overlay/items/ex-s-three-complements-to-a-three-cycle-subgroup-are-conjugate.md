@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-s-three-complements-to-a-three-cycle-subgroup-are-conjugate.md

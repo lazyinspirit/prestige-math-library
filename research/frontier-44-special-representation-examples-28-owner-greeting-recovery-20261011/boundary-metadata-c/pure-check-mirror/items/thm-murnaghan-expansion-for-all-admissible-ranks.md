@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-murnaghan-expansion-for-all-admissible-ranks.md

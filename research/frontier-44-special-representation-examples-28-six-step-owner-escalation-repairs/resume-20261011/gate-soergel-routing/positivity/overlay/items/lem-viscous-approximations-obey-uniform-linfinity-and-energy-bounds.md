@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds.md

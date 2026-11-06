@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quantum-highest-weight-modules-deform-the-classical-weight-character.md

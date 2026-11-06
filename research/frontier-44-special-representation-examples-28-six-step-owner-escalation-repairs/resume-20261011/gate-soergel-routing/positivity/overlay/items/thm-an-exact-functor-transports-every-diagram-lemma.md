@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-an-exact-functor-transports-every-diagram-lemma.md

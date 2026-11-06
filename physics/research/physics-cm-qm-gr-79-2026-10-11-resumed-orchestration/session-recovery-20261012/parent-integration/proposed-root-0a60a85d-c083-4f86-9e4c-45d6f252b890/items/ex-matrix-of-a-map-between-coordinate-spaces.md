@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-matrix-of-a-map-between-coordinate-spaces.md

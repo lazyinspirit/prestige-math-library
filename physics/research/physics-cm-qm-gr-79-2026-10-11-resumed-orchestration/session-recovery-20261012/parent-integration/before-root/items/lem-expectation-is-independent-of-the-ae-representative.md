@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-expectation-is-independent-of-the-ae-representative.md

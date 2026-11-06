@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-complex-polynomial-growth-and-minimum-modulus.md

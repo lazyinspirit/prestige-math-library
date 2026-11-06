@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-schrodinger-weyl-system-is-regular-and-irreducible.md

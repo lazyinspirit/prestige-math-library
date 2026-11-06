@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages.md

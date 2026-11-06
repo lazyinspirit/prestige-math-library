@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces.md

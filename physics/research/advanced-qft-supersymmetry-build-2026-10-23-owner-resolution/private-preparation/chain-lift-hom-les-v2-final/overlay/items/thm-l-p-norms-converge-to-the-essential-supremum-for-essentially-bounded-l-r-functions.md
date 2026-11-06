@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-l-p-norms-converge-to-the-essential-supremum-for-essentially-bounded-l-r-functions.md

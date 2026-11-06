@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lc-los-schema-for-universe-ultrapowers.md

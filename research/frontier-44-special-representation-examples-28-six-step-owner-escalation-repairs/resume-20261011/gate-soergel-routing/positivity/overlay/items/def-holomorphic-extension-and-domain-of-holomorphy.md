@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-holomorphic-extension-and-domain-of-holomorphy.md

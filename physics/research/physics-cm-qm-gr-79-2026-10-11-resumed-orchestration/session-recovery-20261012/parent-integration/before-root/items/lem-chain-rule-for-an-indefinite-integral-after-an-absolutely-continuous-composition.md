@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-chain-rule-for-an-indefinite-integral-after-an-absolutely-continuous-composition.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-markov-trace-of-an-inverse-hecke-generator.md

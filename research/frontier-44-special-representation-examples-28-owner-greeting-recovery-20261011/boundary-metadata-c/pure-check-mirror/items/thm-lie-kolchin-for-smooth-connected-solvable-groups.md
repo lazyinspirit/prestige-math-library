@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lie-kolchin-for-smooth-connected-solvable-groups.md

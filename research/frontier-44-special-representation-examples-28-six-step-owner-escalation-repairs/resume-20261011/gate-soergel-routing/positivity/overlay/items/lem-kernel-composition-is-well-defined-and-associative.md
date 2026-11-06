@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-kernel-composition-is-well-defined-and-associative.md

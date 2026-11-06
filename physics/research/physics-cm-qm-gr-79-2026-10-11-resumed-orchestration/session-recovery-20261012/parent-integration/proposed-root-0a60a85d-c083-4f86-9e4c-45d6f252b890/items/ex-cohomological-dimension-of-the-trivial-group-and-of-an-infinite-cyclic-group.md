@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cohomological-dimension-of-the-trivial-group-and-of-an-infinite-cyclic-group.md

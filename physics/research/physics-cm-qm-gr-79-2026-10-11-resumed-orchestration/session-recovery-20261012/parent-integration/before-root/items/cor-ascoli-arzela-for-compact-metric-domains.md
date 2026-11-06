@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ascoli-arzela-for-compact-metric-domains.md

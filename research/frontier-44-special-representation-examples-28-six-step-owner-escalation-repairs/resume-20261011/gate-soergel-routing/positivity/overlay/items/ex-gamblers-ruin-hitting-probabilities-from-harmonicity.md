@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-gamblers-ruin-hitting-probabilities-from-harmonicity.md

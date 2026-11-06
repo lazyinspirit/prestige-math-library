@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-h-minus-one-as-the-dual-of-h-one-zero.md

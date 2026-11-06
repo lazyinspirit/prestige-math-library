@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-higher-level-wedge-tensor-fock-module-has-the-column-monomial-basis.md

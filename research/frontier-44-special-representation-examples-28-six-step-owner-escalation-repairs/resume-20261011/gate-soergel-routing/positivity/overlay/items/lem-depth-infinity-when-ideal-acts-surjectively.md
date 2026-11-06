@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-depth-infinity-when-ideal-acts-surjectively.md

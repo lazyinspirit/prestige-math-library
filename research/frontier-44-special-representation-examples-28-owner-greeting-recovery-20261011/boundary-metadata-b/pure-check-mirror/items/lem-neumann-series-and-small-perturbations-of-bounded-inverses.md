@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-neumann-series-and-small-perturbations-of-bounded-inverses.md

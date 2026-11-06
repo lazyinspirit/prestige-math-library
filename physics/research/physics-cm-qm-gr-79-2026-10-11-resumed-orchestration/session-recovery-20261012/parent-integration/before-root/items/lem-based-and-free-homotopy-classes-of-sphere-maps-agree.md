@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-based-and-free-homotopy-classes-of-sphere-maps-agree.md

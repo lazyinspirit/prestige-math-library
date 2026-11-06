@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dominated-positive-type-functions-give-positive-commutant-contractions.md

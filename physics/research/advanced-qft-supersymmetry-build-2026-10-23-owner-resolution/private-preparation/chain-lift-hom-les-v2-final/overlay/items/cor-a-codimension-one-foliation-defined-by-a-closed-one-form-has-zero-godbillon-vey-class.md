@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-codimension-one-foliation-defined-by-a-closed-one-form-has-zero-godbillon-vey-class.md

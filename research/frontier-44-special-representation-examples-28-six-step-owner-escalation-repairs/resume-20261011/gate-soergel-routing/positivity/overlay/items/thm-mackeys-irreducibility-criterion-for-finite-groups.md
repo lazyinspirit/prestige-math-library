@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-mackeys-irreducibility-criterion-for-finite-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-groups-containing-a-rank-two-free-subgroup-are-nonamenable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-borel-sets-are-caratheodory-measurable-for-metric-outer-measures.md

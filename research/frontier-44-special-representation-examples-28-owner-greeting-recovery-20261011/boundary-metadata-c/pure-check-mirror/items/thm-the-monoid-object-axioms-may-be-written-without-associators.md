@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-monoid-object-axioms-may-be-written-without-associators.md

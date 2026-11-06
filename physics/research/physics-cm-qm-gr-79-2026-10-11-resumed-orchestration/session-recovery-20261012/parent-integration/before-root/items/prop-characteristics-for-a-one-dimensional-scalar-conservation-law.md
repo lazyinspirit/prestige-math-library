@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-characteristics-for-a-one-dimensional-scalar-conservation-law.md

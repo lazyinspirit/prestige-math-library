@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-graded-module-and-projective-grothendieck-groups-for-klr-towers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-adjoint-and-ad-for-a-matrix-lie-group.md

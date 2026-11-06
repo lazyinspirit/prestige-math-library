@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-convergence-in-probability-implies-convergence-in-distribution.md

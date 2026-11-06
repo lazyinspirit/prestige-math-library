@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-dimensional-commutative-algebras-decompose-into-local-factors.md

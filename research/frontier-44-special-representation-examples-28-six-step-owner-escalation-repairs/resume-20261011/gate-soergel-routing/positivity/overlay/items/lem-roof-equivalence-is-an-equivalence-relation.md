@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-roof-equivalence-is-an-equivalence-relation.md

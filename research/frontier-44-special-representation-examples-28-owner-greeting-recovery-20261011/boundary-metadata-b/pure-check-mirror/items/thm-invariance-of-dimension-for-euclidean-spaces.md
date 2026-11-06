@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-invariance-of-dimension-for-euclidean-spaces.md

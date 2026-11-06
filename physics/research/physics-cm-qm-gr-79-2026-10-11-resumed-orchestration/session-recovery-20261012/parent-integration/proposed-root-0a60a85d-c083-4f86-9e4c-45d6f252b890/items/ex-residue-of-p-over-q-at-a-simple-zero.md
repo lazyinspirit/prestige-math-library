@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-residue-of-p-over-q-at-a-simple-zero.md

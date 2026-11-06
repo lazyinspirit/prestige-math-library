@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism.md

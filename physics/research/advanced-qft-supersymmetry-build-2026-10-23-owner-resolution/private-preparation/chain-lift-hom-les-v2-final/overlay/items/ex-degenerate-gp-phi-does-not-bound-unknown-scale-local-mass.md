@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-degenerate-gp-phi-does-not-bound-unknown-scale-local-mass.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-locally-bounded-separately-holomorphic-functions-are-locally-lipschitz.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cantor-diagonal-misses-every-listed-binary-sequence.md

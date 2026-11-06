@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-power-sums-diagonalize-the-internal-product.md

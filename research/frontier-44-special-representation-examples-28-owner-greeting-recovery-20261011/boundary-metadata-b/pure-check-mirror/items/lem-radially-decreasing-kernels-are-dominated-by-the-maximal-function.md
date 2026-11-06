@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-radially-decreasing-kernels-are-dominated-by-the-maximal-function.md

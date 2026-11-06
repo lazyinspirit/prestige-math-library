@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-solution-of-a-degree-zero-divisor-and-logarithmic-derivative-identity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-modules-over-noetherian-rings-are-noetherian.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-compact-local-cat-one-short-circle-criterion.md

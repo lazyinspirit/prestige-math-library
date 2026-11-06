@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-markovs-closed-braid-equivalence-theorem.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-trace-form-is-nondegenerate-iff-separable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-standard-semantic-machine-properties-are-undecidable.md

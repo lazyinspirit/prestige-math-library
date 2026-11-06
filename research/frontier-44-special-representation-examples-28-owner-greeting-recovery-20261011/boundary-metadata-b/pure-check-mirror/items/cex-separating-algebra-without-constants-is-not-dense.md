@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-separating-algebra-without-constants-is-not-dense.md

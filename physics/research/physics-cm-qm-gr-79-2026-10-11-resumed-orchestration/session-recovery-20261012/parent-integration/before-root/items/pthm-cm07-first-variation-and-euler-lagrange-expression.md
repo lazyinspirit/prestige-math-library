@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-cm07-first-variation-and-euler-lagrange-expression.md

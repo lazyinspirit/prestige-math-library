@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-boundary-subobject-factors-through-the-cycle-subobject.md

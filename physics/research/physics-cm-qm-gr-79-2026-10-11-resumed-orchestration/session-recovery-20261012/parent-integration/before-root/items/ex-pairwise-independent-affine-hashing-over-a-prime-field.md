@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-pairwise-independent-affine-hashing-over-a-prime-field.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-absolute-and-unconditional-convergence-agree-universally-iff-finite-dimensional.md

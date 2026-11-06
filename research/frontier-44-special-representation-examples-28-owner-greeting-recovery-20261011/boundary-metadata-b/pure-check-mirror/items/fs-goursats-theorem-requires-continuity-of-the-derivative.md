@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-goursats-theorem-requires-continuity-of-the-derivative.md

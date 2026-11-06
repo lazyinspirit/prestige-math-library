@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-exact-couple-and-subquotient-constructions-of-the-filtered-complex-spectral-sequence-agree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-image-of-a-lower-dimensional-c1-manifold-is-null.md

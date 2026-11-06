@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-bishop-gromov-volume-ratio-is-nondecreasing-under-a-ricci-lower-bound.md

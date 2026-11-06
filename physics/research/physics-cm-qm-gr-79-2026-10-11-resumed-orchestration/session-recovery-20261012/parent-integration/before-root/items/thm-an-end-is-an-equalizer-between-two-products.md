@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-an-end-is-an-equalizer-between-two-products.md

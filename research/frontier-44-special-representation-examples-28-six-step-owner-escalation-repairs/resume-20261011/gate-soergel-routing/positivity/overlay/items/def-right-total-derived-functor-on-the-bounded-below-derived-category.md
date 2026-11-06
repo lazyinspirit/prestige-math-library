@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-right-total-derived-functor-on-the-bounded-below-derived-category.md

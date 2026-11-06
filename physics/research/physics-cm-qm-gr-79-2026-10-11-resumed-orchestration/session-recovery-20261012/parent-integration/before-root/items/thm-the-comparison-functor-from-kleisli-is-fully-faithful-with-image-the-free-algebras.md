@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-comparison-functor-from-kleisli-is-fully-faithful-with-image-the-free-algebras.md

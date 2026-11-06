@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-admissible-cycle-around-a-compact-plane-set.md

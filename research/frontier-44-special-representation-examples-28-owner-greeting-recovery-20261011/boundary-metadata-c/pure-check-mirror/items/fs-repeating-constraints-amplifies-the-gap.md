@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-repeating-constraints-amplifies-the-gap.md

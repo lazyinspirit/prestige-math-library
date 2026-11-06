@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-intermediate-cohomology-o-d-projective-space-vanishes.md

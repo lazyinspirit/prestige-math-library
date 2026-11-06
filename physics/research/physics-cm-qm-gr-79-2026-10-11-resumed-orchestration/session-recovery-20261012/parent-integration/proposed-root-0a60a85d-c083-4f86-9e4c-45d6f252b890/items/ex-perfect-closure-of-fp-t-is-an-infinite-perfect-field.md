@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-perfect-closure-of-fp-t-is-an-infinite-perfect-field.md

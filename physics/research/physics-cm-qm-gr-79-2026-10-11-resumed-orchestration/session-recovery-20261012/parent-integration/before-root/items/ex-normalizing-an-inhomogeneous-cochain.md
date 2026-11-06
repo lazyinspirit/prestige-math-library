@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-normalizing-an-inhomogeneous-cochain.md

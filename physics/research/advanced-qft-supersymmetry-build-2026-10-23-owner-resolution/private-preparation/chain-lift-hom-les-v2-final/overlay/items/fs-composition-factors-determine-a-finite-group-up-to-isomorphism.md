@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-composition-factors-determine-a-finite-group-up-to-isomorphism.md

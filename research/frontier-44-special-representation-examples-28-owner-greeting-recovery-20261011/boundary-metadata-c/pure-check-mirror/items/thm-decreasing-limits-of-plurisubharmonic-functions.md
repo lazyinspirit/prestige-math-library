@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-decreasing-limits-of-plurisubharmonic-functions.md

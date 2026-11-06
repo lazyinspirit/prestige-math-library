@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lipschitz-curves-and-dominated-interval-vector-measures.md

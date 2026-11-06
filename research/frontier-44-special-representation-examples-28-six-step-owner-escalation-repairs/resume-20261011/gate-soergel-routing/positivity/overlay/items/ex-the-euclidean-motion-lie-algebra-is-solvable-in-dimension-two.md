@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-euclidean-motion-lie-algebra-is-solvable-in-dimension-two.md

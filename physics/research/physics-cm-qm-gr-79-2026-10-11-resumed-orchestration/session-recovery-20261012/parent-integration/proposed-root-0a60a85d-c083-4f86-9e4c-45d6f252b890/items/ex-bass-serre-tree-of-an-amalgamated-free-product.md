@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-bass-serre-tree-of-an-amalgamated-free-product.md

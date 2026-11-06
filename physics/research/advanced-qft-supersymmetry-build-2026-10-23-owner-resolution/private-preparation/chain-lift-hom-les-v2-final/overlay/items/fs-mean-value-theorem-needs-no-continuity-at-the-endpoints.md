@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-mean-value-theorem-needs-no-continuity-at-the-endpoints.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-corestriction-is-independent-of-the-coset-representatives.md

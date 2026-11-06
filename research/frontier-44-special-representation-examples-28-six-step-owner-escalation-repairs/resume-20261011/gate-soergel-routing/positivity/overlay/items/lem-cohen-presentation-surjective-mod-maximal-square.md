@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cohen-presentation-surjective-mod-maximal-square.md

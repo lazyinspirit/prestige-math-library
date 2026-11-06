@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hook-lengths-for-row-column-and-hook-shapes.md

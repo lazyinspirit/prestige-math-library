@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cell-trading-reduces-a-finite-relative-equivalence-to-two-high-cell-degrees.md

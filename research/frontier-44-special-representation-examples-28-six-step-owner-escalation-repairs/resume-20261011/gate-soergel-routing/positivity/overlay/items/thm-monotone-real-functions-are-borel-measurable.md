@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-monotone-real-functions-are-borel-measurable.md

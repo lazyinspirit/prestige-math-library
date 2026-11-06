@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-canonical-zero-extension-of-an-overlap-cochain.md

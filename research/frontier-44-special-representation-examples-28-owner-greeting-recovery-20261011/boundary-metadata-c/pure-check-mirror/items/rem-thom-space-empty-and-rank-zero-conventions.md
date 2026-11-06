@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-thom-space-empty-and-rank-zero-conventions.md

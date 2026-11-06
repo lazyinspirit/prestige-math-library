@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-product-of-two-unions-is-larger-than-the-union-of-the-two-products.md

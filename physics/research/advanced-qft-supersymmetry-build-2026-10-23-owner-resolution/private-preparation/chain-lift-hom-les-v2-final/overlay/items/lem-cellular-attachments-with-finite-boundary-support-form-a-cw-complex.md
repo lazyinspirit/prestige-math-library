@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex.md

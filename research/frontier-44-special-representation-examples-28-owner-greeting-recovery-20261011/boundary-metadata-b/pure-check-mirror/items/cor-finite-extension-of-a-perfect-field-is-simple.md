@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-extension-of-a-perfect-field-is-simple.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-five-term-exact-sequence-of-a-first-quadrant-homological-spectral-sequence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible.md

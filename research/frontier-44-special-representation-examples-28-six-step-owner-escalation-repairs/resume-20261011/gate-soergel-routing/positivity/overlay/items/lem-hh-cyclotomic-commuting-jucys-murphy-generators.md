@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hh-cyclotomic-commuting-jucys-murphy-generators.md

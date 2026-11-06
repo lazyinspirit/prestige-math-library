@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-borel-null-sections-have-uniform-open-hulls.md

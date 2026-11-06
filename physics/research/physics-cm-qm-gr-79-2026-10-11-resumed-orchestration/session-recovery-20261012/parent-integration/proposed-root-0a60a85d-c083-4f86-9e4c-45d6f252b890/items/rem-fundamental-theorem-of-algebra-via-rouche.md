@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-fundamental-theorem-of-algebra-via-rouche.md

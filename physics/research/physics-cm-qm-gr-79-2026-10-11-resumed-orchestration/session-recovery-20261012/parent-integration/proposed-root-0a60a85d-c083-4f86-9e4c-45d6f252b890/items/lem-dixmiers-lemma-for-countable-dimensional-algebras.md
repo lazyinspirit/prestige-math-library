@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dixmiers-lemma-for-countable-dimensional-algebras.md

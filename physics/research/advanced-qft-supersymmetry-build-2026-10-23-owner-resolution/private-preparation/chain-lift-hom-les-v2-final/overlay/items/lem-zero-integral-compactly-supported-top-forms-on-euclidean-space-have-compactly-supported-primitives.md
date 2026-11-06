@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-zero-integral-compactly-supported-top-forms-on-euclidean-space-have-compactly-supported-primitives.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hyperbolic-groups-have-bounded-orders-of-finite-subgroups.md

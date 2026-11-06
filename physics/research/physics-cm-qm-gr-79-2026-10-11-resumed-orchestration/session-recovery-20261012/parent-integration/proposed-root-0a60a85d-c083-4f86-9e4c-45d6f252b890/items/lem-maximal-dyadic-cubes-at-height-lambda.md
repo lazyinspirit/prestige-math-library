@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-maximal-dyadic-cubes-at-height-lambda.md

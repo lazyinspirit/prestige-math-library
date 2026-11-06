@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-lexicographic-order-on-integer-pairs-is-not-a-well-order.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-principal-crossed-homomorphism-for-abelian-coefficients.md

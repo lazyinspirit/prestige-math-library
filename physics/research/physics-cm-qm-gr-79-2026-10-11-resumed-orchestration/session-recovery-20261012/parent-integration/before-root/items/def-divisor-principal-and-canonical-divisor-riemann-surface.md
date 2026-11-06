@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-divisor-principal-and-canonical-divisor-riemann-surface.md

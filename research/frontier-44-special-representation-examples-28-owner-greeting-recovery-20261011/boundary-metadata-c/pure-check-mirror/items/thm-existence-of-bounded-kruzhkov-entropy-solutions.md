@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-existence-of-bounded-kruzhkov-entropy-solutions.md

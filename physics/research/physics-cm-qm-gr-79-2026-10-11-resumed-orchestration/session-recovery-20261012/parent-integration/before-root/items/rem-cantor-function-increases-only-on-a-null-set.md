@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-cantor-function-increases-only-on-a-null-set.md

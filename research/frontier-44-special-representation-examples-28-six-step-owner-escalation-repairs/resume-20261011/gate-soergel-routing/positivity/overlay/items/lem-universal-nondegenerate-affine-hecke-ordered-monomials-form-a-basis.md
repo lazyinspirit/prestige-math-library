@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-universal-nondegenerate-affine-hecke-ordered-monomials-form-a-basis.md

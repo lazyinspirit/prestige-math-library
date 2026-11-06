@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-tori-are-compact-hausdorff-character-spaces.md

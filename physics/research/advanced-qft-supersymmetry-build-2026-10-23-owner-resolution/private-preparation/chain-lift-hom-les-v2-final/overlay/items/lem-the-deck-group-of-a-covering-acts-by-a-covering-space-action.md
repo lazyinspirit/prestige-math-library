@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-deck-group-of-a-covering-acts-by-a-covering-space-action.md

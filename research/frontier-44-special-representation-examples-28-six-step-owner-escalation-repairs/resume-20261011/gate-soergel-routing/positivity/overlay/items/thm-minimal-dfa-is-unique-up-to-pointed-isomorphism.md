@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-minimal-dfa-is-unique-up-to-pointed-isomorphism.md

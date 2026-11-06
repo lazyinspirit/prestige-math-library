@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-sections-near-a-compact-set-are-sections-on-that-set.md

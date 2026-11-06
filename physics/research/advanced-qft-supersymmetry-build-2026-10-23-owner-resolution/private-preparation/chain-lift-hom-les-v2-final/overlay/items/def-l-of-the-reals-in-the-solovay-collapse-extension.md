@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-l-of-the-reals-in-the-solovay-collapse-extension.md

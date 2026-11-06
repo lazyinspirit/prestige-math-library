@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-degenerate-affine-hecke-relations-on-two-tensor-factors.md

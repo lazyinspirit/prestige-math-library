@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-existence-of-regular-conditional-distributions-for-standard-borel-targets.md

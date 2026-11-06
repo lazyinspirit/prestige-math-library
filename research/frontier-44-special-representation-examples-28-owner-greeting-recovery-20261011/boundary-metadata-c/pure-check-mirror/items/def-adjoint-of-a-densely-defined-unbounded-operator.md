@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-adjoint-of-a-densely-defined-unbounded-operator.md

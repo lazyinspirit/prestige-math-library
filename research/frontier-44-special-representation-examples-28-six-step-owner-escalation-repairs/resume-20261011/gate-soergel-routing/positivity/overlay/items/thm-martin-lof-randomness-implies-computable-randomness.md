@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-martin-lof-randomness-implies-computable-randomness.md

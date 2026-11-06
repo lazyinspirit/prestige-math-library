@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-graded-krull-schmidt-for-finite-dimensional-graded-modules.md

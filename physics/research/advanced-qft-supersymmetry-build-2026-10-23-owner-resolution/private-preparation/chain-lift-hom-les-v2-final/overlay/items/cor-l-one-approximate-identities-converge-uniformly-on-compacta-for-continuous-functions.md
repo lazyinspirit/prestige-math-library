@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions.md

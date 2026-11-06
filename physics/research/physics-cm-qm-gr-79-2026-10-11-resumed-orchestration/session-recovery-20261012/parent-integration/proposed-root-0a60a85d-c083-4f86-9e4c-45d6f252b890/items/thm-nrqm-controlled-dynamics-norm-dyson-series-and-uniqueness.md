@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness.md

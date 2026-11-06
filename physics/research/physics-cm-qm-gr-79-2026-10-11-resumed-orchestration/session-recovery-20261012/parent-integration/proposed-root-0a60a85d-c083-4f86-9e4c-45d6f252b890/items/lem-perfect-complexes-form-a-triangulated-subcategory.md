@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-perfect-complexes-form-a-triangulated-subcategory.md

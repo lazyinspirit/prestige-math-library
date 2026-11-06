@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-homotopy-equivalent-annulus-and-circle-have-isomorphic-de-rham-rings.md

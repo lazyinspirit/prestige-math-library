@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-dirichlet-character-chebyshev-laplace-transform.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-flat-finite-type-not-open-without-presentation-warning.md

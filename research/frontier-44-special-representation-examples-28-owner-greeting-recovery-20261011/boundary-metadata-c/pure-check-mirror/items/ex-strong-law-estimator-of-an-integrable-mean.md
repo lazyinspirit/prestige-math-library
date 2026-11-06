@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-strong-law-estimator-of-an-integrable-mean.md

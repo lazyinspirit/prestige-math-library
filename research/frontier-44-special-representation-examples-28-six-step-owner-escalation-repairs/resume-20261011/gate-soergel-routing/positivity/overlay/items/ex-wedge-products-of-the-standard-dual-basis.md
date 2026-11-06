@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-wedge-products-of-the-standard-dual-basis.md

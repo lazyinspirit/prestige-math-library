@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-irreducible-multiplicity-data-is-not-canonical-outside-type-i.md

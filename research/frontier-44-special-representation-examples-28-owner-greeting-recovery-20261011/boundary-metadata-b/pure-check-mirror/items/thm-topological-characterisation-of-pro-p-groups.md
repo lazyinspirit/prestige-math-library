@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-topological-characterisation-of-pro-p-groups.md

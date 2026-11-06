@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-equal-finitely-many-moments-do-not-determine-a-law.md

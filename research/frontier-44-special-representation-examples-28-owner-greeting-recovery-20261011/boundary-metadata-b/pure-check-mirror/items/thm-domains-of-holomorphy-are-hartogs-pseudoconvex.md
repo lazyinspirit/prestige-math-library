@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-domains-of-holomorphy-are-hartogs-pseudoconvex.md

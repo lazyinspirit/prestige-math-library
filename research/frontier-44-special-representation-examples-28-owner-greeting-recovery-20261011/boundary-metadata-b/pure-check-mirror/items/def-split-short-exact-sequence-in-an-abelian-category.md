@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-split-short-exact-sequence-in-an-abelian-category.md

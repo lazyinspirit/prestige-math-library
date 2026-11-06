@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-coordinate-column-and-matrix-of-a-linear-map.md

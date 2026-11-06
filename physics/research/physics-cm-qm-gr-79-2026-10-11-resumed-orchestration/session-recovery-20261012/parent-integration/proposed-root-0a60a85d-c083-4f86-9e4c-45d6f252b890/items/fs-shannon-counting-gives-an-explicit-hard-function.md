@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-shannon-counting-gives-an-explicit-hard-function.md

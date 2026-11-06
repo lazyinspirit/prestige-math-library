@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-coordinate-projections-from-an-inverse-limit.md

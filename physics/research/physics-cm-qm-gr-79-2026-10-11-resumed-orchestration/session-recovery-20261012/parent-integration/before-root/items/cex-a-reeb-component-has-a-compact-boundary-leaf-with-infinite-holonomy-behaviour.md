@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-reeb-component-has-a-compact-boundary-leaf-with-infinite-holonomy-behaviour.md

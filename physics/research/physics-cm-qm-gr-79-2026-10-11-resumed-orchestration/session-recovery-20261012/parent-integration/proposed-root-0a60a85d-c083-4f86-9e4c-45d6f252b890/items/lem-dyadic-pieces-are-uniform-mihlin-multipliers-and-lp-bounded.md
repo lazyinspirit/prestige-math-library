@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dyadic-pieces-are-uniform-mihlin-multipliers-and-lp-bounded.md

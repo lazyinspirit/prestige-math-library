@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-bpi-choice-boundary-and-forcing-conventions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-balancing-density-and-size-levels-in-the-carleson-sum.md

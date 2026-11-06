@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tail-filter-preserves-net-convergence-and-cluster-points.md

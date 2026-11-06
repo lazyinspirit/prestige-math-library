@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-extension-of-a-bounded-map-from-a-dense-subspace.md

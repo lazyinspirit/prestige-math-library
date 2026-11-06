@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-classical-solutions-are-viscosity-solutions.md

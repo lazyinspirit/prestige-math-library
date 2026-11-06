@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-nonconvex-gradient-energy-can-lose-weak-lower-semicontinuity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-last-lower-central-term-has-exact-weighted-distortion.md

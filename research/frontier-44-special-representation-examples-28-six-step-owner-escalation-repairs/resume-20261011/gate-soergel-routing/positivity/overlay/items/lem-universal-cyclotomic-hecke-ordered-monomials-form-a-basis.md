@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-universal-cyclotomic-hecke-ordered-monomials-form-a-basis.md

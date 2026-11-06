@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-gaussian-process-extrapolation-retains-independent-index-uncertainty.md

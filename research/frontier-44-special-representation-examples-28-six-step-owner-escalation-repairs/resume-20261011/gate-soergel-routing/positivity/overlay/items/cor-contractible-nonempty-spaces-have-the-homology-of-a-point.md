@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-contractible-nonempty-spaces-have-the-homology-of-a-point.md

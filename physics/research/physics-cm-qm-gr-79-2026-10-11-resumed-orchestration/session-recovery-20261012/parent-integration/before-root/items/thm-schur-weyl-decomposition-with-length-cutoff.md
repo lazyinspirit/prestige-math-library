@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-schur-weyl-decomposition-with-length-cutoff.md

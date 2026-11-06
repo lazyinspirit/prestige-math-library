@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-brownian-last-zero-before-a-fixed-time-has-the-arcsine-law.md

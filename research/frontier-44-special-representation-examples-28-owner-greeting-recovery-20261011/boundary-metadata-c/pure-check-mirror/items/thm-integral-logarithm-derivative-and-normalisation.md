@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-integral-logarithm-derivative-and-normalisation.md

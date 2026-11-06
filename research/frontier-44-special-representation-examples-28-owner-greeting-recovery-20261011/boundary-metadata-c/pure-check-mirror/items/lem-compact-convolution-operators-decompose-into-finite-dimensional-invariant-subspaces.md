@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-convolution-operators-decompose-into-finite-dimensional-invariant-subspaces.md

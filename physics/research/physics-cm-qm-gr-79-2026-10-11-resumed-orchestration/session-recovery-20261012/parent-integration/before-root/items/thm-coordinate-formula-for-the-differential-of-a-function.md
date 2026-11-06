@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-coordinate-formula-for-the-differential-of-a-function.md

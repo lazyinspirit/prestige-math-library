@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-elementary-etale-neighbourhood-finite-decomposition.md

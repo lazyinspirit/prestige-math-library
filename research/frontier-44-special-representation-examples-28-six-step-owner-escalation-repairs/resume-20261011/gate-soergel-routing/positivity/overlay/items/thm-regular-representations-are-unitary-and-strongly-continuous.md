@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-regular-representations-are-unitary-and-strongly-continuous.md

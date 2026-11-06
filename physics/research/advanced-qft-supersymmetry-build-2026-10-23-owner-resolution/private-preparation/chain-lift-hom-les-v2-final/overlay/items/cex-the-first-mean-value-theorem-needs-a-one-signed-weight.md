@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-first-mean-value-theorem-needs-a-one-signed-weight.md

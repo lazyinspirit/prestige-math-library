@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-locally-square-integrable-predictable-brownian-integrand.md

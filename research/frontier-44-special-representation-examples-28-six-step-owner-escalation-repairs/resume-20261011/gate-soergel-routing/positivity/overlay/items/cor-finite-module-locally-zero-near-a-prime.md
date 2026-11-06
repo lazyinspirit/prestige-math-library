@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-module-locally-zero-near-a-prime.md

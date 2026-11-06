@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-alpha-narrow-graphs-have-large-cliques-or-stable-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-hausdorff-space-has-a-unique-compatible-uniformity.md

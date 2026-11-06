@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-riemann-lebesgue-comparison-for-distribution-test-integrands.md

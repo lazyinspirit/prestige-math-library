@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-biquadratic-extension-has-four-embeddings.md

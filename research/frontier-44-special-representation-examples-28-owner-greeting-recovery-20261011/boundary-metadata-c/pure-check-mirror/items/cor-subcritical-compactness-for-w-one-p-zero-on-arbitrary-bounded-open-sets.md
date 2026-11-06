@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-subcritical-compactness-for-w-one-p-zero-on-arbitrary-bounded-open-sets.md

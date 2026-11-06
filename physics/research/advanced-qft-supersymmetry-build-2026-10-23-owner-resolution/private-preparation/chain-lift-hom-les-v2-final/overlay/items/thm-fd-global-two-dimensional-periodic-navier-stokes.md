@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-fd-global-two-dimensional-periodic-navier-stokes.md

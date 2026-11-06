@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-qftx-n1-su2-fundamental-matter-covariant-derivative.md

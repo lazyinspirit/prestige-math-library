@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-group-rings-have-invariant-basis-number-via-augmentation.md

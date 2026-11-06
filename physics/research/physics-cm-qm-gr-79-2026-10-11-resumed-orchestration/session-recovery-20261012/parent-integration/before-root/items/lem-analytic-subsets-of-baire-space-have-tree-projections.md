@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-analytic-subsets-of-baire-space-have-tree-projections.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-duality-induces-an-anti-involution-on-the-grothendieck-ring.md

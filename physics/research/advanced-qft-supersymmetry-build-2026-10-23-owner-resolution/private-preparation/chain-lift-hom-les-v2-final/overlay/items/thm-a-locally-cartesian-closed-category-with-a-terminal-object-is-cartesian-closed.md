@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-locally-cartesian-closed-category-with-a-terminal-object-is-cartesian-closed.md

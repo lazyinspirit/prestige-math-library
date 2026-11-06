@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-ftc-integral-function-differentiable-almost-everywhere.md

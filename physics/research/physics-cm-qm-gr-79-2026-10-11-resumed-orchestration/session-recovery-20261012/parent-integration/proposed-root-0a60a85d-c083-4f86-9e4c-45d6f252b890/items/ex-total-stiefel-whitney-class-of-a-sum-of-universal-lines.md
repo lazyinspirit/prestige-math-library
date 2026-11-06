@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-total-stiefel-whitney-class-of-a-sum-of-universal-lines.md

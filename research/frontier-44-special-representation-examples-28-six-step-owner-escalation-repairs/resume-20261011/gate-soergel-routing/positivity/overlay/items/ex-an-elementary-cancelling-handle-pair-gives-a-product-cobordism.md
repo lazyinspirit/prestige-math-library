@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-an-elementary-cancelling-handle-pair-gives-a-product-cobordism.md

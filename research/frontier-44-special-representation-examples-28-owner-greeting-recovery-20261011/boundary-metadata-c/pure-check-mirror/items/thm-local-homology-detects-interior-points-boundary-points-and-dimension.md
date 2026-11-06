@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-local-homology-detects-interior-points-boundary-points-and-dimension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-finite-type-algebra-over-a-principal-ideal-domain-is-noetherian.md

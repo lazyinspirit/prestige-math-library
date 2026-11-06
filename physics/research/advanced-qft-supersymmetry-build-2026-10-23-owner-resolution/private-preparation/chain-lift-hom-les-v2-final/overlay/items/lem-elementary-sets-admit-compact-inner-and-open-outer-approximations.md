@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-elementary-sets-admit-compact-inner-and-open-outer-approximations.md

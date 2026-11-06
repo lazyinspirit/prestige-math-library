@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-finite-group-is-abelian-iff-all-its-irreducible-complex-characters-have-degree-one.md

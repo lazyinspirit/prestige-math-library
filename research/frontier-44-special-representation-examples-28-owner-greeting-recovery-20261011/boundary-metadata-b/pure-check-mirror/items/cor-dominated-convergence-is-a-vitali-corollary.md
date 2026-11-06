@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-dominated-convergence-is-a-vitali-corollary.md

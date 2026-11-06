@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-pointwise-boundedness-without-a-uniform-bound-on-an-incomplete-domain.md

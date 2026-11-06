@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-target-inclusion-in-a-cellular-mapping-cylinder-is-simple.md

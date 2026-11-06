@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-surface-riemann-roch-hodge-index-conventions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-derivatives-of-harmonic-functions-are-harmonic.md

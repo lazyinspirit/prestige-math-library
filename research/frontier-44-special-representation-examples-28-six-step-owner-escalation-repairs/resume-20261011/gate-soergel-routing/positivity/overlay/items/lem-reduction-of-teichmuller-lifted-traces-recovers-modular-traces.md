@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-reduction-of-teichmuller-lifted-traces-recovers-modular-traces.md

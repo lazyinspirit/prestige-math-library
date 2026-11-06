@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-unbounded-adjoint-is-well-defined-and-closed.md

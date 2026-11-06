@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-eventual-domination-bounding-and-dominating-numbers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-convex-functions-have-countable-supporting-line-representations.md

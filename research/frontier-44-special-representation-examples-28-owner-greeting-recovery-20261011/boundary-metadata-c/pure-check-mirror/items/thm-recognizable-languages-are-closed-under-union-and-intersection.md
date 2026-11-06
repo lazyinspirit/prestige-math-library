@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-recognizable-languages-are-closed-under-union-and-intersection.md

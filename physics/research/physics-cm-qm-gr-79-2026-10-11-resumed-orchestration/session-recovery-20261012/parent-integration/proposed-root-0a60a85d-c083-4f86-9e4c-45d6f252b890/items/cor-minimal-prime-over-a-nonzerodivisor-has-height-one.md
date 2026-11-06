@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-minimal-prime-over-a-nonzerodivisor-has-height-one.md

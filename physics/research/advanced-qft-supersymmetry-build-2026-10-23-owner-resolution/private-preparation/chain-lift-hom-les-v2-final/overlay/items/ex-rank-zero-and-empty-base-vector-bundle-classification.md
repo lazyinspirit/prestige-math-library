@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-rank-zero-and-empty-base-vector-bundle-classification.md

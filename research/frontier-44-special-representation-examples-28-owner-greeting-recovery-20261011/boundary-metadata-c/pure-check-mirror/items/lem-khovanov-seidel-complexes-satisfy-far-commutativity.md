@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-khovanov-seidel-complexes-satisfy-far-commutativity.md

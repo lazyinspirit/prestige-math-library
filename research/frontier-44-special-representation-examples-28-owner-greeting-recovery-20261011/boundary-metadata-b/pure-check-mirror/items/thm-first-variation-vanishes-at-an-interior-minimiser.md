@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-first-variation-vanishes-at-an-interior-minimiser.md

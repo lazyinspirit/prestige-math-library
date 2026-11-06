@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-block-defect-is-an-intersection-of-two-sylow-subgroups.md

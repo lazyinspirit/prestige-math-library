@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-specializing-a-quantum-highest-weight-lattice-at-q-one.md

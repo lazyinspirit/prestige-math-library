@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-integrable-real-and-complex-functions-and-their-integrals.md

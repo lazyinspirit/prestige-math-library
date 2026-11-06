@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-row-gap-reduction-and-conditional-k-stability.md

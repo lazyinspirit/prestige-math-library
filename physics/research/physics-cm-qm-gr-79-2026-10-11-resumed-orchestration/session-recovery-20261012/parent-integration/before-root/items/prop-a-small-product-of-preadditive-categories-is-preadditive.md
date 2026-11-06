@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-small-product-of-preadditive-categories-is-preadditive.md

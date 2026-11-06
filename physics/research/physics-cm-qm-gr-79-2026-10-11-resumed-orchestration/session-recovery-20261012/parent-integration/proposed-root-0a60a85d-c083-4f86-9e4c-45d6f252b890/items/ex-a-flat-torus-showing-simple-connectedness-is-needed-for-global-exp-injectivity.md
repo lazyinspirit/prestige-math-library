@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity.md

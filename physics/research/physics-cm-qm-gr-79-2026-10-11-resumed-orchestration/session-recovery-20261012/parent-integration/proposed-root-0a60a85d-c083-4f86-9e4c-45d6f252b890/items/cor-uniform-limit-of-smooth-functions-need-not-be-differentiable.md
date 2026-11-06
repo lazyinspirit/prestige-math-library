@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-uniform-limit-of-smooth-functions-need-not-be-differentiable.md

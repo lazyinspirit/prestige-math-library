@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-white-noise-is-borel-gaussian-on-negative-sobolev-space.md

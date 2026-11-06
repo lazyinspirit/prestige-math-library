@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quotient-blockade-by-mixed-block-reachability.md

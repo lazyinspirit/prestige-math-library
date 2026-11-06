@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-type-a-modular-root-interval-essential-subset-basis-and-count.md

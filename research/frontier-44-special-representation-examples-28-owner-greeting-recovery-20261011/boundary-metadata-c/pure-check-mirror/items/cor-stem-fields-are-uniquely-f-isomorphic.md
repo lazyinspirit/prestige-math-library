@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-stem-fields-are-uniquely-f-isomorphic.md

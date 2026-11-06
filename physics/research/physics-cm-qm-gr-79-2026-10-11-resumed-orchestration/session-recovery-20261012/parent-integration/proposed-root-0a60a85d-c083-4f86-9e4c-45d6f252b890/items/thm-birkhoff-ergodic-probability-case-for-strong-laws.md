@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-birkhoff-ergodic-probability-case-for-strong-laws.md

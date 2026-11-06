@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold.md

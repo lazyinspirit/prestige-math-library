@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-exact-global-stabilization-threshold-for-a-fixed-kronecker-product.md

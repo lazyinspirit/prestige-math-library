@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-rodls-theorem-with-an-explicit-constant-for-p-three-free-graphs.md

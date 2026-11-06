@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-coend-is-a-colimit-over-the-twisted-arrow-category-under-this-pages-convention.md

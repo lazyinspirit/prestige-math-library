@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-weyl-anti-invariants-are-divisible-by-the-discriminant.md

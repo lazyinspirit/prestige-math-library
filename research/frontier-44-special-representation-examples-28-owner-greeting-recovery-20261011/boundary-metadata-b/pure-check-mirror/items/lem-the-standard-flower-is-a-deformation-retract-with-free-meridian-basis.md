@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-standard-flower-is-a-deformation-retract-with-free-meridian-basis.md

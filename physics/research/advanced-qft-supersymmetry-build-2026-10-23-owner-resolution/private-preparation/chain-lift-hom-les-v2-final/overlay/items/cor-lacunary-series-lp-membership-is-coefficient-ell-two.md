@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-lacunary-series-lp-membership-is-coefficient-ell-two.md

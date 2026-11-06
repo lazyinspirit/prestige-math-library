@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-relative-cup-products-are-natural-and-compatible-with-connectors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-equivalent-categories-need-not-be-isomorphic.md

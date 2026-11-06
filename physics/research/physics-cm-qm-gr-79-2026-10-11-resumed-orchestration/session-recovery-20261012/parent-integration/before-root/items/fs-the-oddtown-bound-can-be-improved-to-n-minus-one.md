@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-oddtown-bound-can-be-improved-to-n-minus-one.md

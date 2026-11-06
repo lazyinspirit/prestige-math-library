@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls.md

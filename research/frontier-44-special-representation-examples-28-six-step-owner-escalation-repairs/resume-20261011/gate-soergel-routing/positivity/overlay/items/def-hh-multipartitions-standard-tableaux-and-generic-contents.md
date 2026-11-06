@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-hh-multipartitions-standard-tableaux-and-generic-contents.md

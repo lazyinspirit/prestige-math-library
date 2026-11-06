@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-level-one-global-basis-transition-polynomials-in-the-symmetric-group-convention.md

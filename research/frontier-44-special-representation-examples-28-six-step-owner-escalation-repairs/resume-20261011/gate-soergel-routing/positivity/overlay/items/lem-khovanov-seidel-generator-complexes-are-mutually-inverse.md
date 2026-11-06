@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-khovanov-seidel-generator-complexes-are-mutually-inverse.md

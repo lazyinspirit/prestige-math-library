@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-rank-one-haar-average-is-a-nonzero-compact-intertwiner.md

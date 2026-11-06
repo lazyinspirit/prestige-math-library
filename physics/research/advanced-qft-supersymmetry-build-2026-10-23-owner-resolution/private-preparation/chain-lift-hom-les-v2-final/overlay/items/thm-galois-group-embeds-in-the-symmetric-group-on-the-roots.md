@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-galois-group-embeds-in-the-symmetric-group-on-the-roots.md

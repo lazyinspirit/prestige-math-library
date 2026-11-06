@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-blowup-regular-surface-closed-point-regular.md

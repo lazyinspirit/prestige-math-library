@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-bar-complex-is-a-free-resolution-of-the-trivial-module.md

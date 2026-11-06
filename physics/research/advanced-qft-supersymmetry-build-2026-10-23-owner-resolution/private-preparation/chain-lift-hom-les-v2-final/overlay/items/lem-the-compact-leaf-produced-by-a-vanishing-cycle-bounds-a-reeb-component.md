@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-compact-leaf-produced-by-a-vanishing-cycle-bounds-a-reeb-component.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-l-p-norm-recovery-by-unit-l-q-pairings.md

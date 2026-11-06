@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-equivariant-map-and-equivariant-vector-bundle.md

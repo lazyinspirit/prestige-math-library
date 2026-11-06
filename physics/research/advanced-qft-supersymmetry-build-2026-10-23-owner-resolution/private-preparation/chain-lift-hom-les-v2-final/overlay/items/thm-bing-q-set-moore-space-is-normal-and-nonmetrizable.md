@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-bing-q-set-moore-space-is-normal-and-nonmetrizable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-morphisms-equal-on-dense-open-reduced-source.md

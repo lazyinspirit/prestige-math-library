@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-interior-w-two-p-regularity-for-the-laplacian.md

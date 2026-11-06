@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution.md

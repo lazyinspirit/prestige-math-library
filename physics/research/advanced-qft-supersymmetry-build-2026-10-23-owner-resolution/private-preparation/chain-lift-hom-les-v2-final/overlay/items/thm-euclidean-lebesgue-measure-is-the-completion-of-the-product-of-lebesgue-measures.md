@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures.md

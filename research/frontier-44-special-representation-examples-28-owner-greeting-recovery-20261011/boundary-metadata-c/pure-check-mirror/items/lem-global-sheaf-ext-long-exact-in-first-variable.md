@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-global-sheaf-ext-long-exact-in-first-variable.md

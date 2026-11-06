@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-finite-characteristic-circuit-has-c2-regular-port-traces.md

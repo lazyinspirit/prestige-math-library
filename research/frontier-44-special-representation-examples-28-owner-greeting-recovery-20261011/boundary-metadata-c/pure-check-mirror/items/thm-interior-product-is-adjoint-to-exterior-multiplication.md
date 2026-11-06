@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-interior-product-is-adjoint-to-exterior-multiplication.md

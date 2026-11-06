@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-prefix-automaton-for-a-finite-forbidden-factor-set.md

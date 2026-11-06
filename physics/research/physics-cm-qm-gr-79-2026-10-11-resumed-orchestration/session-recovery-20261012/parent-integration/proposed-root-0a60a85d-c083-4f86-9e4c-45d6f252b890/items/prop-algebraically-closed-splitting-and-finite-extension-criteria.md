@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-algebraically-closed-splitting-and-finite-extension-criteria.md

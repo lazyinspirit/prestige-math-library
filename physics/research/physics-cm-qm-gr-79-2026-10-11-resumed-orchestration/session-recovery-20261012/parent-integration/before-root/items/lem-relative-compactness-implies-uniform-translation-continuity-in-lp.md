@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-compactness-implies-uniform-translation-continuity-in-lp.md

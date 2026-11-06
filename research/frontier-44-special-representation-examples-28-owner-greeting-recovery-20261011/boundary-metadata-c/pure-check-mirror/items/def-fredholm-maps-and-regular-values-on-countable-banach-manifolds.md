@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-fredholm-maps-and-regular-values-on-countable-banach-manifolds.md

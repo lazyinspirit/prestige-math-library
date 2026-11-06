@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonempty-countable-set-has-a-padded-enumeration.md

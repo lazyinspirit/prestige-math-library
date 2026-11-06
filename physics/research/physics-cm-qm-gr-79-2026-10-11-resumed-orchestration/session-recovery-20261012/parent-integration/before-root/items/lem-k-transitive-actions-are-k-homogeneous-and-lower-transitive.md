@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-k-transitive-actions-are-k-homogeneous-and-lower-transitive.md

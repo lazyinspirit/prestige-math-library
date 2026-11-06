@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-identity-theorem-for-real-analytic-functions-on-an-interval.md

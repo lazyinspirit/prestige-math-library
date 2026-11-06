@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-cp-squared-extension-as-a-nonzero-two-cocycle.md

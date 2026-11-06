@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-linear-isomorphism-and-invertible-linear-map.md

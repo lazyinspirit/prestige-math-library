@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-tangent-basis-change-between-cartesian-and-polar-coordinates.md

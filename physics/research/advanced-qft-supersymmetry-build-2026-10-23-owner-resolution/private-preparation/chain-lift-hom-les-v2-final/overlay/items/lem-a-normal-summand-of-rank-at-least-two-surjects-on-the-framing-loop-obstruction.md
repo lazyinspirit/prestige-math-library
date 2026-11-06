@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-normal-summand-of-rank-at-least-two-surjects-on-the-framing-loop-obstruction.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-absolute-value-is-not-differentiable-at-zero.md

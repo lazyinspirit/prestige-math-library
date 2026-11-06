@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-sc-toolkit-cyclically-dehn-reduced-word.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-verma-irreducibility-criterion-from-shapovalov-determinants.md

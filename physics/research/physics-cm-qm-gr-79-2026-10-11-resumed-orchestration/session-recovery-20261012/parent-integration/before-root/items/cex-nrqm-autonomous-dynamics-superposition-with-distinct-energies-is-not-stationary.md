@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nrqm-autonomous-dynamics-superposition-with-distinct-energies-is-not-stationary.md

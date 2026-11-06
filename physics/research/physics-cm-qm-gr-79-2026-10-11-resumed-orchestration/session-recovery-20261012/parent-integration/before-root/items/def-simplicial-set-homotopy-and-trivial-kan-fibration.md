@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-simplicial-set-homotopy-and-trivial-kan-fibration.md

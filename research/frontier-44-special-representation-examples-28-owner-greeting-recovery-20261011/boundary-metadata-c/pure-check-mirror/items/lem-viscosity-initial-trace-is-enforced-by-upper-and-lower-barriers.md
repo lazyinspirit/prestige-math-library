@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-viscosity-initial-trace-is-enforced-by-upper-and-lower-barriers.md

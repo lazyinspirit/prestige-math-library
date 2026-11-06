@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-coordinate-functionals-of-a-schauder-basis-are-bounded.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-hardy-littlewood-sobolev-strong-p-equals-one-endpoint.md

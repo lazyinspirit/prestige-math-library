@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-sigma-compactness-and-lindelof-in-the-line-and-the-rationals.md

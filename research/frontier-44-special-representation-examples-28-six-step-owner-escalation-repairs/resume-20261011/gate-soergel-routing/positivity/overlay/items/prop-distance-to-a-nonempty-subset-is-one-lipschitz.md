@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-distance-to-a-nonempty-subset-is-one-lipschitz.md

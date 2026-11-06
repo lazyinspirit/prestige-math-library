@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-why-completeness-alone-is-not-enough-for-an-adjoint.md

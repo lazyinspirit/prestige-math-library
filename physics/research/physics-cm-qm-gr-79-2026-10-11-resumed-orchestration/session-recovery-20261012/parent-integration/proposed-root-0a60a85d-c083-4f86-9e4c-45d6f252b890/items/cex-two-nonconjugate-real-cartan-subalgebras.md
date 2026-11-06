@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-two-nonconjugate-real-cartan-subalgebras.md

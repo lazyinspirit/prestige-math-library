@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-closure-of-a-radical-extension-is-radical.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-closedness-is-needed-for-hopf-degree-classification.md

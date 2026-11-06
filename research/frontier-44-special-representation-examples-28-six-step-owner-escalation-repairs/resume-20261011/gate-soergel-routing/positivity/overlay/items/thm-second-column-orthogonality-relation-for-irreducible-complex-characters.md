@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-second-column-orthogonality-relation-for-irreducible-complex-characters.md

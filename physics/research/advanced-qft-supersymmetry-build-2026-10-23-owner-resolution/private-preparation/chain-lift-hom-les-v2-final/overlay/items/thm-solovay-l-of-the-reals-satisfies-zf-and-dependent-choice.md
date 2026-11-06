@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-solovay-l-of-the-reals-satisfies-zf-and-dependent-choice.md

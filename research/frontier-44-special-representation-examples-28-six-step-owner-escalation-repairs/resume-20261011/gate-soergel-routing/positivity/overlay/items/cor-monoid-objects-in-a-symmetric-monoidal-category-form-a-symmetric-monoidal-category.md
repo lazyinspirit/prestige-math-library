@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-monoid-objects-in-a-symmetric-monoidal-category-form-a-symmetric-monoidal-category.md

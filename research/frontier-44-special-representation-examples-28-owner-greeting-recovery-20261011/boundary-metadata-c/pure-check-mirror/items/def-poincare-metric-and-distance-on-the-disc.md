@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-poincare-metric-and-distance-on-the-disc.md

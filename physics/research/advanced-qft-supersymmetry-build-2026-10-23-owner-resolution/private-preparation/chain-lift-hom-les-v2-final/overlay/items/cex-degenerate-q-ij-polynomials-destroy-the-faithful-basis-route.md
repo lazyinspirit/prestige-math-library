@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-degenerate-q-ij-polynomials-destroy-the-faithful-basis-route.md

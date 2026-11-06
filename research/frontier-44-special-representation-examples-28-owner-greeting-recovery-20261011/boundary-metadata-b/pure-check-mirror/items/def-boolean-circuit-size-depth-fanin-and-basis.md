@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-boolean-circuit-size-depth-fanin-and-basis.md

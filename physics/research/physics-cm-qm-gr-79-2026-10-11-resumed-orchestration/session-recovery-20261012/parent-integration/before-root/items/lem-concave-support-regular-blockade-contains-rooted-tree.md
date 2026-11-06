@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-concave-support-regular-blockade-contains-rooted-tree.md

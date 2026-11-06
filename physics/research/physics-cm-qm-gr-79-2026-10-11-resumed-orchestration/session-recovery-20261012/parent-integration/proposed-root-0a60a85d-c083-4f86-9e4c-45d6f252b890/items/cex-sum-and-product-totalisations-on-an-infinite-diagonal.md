@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sum-and-product-totalisations-on-an-infinite-diagonal.md

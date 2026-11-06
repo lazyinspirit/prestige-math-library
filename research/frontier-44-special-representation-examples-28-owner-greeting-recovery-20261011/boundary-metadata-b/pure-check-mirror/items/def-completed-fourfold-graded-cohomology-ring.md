@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-completed-fourfold-graded-cohomology-ring.md

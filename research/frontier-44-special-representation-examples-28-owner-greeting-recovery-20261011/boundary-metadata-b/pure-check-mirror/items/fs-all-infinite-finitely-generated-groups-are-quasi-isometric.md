@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-all-infinite-finitely-generated-groups-are-quasi-isometric.md

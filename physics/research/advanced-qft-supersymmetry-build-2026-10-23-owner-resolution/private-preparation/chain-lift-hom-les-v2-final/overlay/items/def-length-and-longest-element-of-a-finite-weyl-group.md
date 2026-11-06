@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-length-and-longest-element-of-a-finite-weyl-group.md

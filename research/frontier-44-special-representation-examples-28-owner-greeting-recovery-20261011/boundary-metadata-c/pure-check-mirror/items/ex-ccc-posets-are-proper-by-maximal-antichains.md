@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-ccc-posets-are-proper-by-maximal-antichains.md

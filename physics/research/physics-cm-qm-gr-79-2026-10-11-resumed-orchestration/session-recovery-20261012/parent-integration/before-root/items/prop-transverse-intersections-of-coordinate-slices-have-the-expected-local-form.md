@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-transverse-intersections-of-coordinate-slices-have-the-expected-local-form.md

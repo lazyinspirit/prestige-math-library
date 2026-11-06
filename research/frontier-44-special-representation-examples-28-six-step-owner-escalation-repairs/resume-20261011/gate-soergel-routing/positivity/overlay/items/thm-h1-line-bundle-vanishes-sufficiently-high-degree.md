@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-h1-line-bundle-vanishes-sufficiently-high-degree.md

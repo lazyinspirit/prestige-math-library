@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-unbounded-complex-of-projectives-that-is-not-k-projective.md

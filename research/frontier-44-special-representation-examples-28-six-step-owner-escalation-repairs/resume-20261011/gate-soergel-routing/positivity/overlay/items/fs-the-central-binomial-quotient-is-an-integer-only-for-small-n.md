@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-central-binomial-quotient-is-an-integer-only-for-small-n.md

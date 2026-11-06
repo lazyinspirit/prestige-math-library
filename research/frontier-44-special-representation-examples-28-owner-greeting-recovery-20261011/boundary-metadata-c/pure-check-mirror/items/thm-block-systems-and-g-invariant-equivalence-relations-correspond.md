@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-block-systems-and-g-invariant-equivalence-relations-correspond.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-mixed-chain-collapses-to-one-quotient-block.md

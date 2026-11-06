@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-zero-iterated-integrals-without-a-double-integral.md

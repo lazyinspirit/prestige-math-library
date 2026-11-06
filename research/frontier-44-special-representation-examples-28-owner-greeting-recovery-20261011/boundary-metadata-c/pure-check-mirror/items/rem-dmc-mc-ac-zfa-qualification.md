@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-dmc-mc-ac-zfa-qualification.md

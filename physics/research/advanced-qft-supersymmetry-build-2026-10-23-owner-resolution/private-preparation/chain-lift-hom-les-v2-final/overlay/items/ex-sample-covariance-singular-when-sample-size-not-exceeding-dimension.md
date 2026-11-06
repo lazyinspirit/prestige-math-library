@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-sample-covariance-singular-when-sample-size-not-exceeding-dimension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-smooth-map-between-manifolds-with-boundary.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cyclic-subspace-vector-and-vector-annihilator.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-restriction-of-injective-group-modules-is-injective.md

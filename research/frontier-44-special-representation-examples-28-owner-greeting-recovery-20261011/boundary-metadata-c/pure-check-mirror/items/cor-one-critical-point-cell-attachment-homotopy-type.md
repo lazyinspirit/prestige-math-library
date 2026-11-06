@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-one-critical-point-cell-attachment-homotopy-type.md

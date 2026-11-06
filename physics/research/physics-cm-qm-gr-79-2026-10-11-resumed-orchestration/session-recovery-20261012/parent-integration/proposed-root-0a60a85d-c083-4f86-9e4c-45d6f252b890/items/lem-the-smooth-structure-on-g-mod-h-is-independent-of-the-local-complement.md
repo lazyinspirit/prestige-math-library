@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-smooth-structure-on-g-mod-h-is-independent-of-the-local-complement.md

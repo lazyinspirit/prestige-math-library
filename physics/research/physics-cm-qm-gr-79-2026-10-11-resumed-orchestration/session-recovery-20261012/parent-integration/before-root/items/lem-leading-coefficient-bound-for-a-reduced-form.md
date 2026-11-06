@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-leading-coefficient-bound-for-a-reduced-form.md

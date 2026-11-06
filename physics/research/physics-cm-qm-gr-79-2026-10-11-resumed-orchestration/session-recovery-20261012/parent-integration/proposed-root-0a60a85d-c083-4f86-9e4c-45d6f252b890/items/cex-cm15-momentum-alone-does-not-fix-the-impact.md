@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm15-momentum-alone-does-not-fix-the-impact.md

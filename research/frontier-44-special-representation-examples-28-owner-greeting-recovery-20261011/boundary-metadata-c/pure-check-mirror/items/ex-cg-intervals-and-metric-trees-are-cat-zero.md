@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-intervals-and-metric-trees-are-cat-zero.md

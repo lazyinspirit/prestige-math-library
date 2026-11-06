@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-ordinary-element-as-the-member-from-the-integers.md

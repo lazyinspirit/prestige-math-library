@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-zp-is-not-the-integral-closure-of-z-in-qp.md

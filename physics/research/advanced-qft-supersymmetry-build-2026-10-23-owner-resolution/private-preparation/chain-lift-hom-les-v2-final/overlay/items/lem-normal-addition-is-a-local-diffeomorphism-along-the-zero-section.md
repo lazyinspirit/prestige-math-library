@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-relative-consistency-of-halpern-lauchli-bpi-without-choice.md

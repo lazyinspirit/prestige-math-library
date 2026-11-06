@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fully-faithful-split-essentially-surjective-characterises-equivalence.md

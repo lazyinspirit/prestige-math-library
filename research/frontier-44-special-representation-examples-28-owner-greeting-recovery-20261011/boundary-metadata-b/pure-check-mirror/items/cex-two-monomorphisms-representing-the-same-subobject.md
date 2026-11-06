@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-two-monomorphisms-representing-the-same-subobject.md

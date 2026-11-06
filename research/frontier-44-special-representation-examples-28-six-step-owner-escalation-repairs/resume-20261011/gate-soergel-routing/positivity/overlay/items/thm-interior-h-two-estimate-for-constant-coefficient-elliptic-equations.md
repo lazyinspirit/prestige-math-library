@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-interior-h-two-estimate-for-constant-coefficient-elliptic-equations.md

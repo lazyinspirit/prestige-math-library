@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism.md

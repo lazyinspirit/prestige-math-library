@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-group-algebra-is-semisimple-when-char-k-does-not-divide-group-order.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-annihilating-polynomial-need-not-be-minimal.md

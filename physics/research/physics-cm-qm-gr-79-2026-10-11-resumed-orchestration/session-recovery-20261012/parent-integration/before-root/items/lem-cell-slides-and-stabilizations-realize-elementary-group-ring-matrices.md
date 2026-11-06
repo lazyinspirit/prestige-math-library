@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cell-slides-and-stabilizations-realize-elementary-group-ring-matrices.md

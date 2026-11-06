@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-order-p-actions-on-a-cyclic-q-group.md

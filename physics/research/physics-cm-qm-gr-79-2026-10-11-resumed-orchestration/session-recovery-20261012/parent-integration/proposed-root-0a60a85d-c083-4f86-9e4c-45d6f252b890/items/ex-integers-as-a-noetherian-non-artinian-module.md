@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-integers-as-a-noetherian-non-artinian-module.md

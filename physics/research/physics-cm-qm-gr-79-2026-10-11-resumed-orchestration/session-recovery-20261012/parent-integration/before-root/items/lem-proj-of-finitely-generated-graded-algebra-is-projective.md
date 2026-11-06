@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-proj-of-finitely-generated-graded-algebra-is-projective.md

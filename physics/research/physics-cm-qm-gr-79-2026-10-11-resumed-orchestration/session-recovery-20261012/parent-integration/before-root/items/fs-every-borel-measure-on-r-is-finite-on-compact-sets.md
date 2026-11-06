@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-borel-measure-on-r-is-finite-on-compact-sets.md

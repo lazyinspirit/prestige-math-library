@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global.md

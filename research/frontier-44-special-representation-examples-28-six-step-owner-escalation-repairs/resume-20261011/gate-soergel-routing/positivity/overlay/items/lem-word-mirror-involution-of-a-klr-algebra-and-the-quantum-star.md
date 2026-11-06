@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-word-mirror-involution-of-a-klr-algebra-and-the-quantum-star.md

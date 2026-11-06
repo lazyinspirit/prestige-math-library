@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-torsion-and-primary-components-are-submodules-over-a-domain.md

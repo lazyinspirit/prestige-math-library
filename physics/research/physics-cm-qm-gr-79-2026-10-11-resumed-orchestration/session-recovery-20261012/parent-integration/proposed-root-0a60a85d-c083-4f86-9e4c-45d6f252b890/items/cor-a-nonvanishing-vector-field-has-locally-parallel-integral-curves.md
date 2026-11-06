@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-nonvanishing-vector-field-has-locally-parallel-integral-curves.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-integral-cohomology-detects-adjacent-homology-torsion.md

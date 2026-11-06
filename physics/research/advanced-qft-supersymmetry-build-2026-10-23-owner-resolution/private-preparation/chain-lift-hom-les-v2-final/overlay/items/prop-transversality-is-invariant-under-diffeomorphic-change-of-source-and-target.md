@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-transversality-is-invariant-under-diffeomorphic-change-of-source-and-target.md

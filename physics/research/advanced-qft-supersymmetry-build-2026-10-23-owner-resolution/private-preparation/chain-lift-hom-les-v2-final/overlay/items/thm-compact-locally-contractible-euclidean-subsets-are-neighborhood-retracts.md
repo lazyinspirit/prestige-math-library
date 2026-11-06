@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-compact-locally-contractible-euclidean-subsets-are-neighborhood-retracts.md

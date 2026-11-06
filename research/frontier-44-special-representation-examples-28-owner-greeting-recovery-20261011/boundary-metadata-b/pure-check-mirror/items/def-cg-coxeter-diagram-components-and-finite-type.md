@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cg-coxeter-diagram-components-and-finite-type.md

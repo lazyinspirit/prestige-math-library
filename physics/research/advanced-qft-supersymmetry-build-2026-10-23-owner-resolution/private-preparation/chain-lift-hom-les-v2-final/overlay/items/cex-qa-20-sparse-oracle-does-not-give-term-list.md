@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-qa-20-sparse-oracle-does-not-give-term-list.md

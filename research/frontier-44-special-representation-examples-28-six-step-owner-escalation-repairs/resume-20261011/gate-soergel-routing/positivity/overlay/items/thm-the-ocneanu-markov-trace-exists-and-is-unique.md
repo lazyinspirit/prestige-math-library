@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-ocneanu-markov-trace-exists-and-is-unique.md

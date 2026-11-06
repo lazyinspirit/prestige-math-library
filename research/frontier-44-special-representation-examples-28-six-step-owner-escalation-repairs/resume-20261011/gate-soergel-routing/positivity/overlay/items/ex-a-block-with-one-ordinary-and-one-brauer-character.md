@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-block-with-one-ordinary-and-one-brauer-character.md

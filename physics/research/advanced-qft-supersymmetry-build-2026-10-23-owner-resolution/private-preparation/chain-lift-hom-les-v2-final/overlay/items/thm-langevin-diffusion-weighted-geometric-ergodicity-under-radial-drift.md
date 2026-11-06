@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-langevin-diffusion-weighted-geometric-ergodicity-under-radial-drift.md

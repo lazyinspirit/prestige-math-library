@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-simple-eigenvalue-condition-number-is-norm-x-norm-y-over-y-star-x.md

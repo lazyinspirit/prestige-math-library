@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-bott-partial-connection-on-the-normal-bundle-of-a-foliation.md

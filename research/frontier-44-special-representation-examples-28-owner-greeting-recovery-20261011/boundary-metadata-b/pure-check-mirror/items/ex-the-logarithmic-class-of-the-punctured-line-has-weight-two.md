@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-logarithmic-class-of-the-punctured-line-has-weight-two.md

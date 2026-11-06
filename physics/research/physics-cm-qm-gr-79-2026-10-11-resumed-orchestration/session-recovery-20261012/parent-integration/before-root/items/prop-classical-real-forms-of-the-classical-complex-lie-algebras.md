@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-classical-real-forms-of-the-classical-complex-lie-algebras.md

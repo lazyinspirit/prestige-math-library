@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-the-lusztig-kashiwara-bilinear-form-on-the-negative-quantum-half.md

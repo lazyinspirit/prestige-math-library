@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-mean-value-theorem-bounds-the-square-root-increment.md

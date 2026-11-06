@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-compatible-almost-complex-structures-and-kahler-geometry.md

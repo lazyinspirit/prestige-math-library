@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-spherical-cap-and-dual-slab-scales.md

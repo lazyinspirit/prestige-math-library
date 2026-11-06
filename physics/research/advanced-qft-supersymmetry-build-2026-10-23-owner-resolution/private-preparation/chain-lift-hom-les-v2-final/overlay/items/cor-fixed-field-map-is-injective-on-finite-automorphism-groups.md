@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-fixed-field-map-is-injective-on-finite-automorphism-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-tail-swap-involution-on-an-intersecting-pair.md

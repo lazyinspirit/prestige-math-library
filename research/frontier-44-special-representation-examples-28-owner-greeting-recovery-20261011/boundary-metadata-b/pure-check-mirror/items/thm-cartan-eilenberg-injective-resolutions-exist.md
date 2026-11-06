@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cartan-eilenberg-injective-resolutions-exist.md

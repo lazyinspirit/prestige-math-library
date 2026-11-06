@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-minimal-complexes-and-perverse-truncations-in-the-type-a-soergel-category.md

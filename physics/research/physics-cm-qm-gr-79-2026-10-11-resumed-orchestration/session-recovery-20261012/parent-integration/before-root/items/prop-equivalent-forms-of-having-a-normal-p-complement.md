@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-equivalent-forms-of-having-a-normal-p-complement.md

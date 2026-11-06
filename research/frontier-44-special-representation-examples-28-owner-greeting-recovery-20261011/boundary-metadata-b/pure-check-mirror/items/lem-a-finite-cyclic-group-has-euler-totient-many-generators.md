@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-finite-cyclic-group-has-euler-totient-many-generators.md

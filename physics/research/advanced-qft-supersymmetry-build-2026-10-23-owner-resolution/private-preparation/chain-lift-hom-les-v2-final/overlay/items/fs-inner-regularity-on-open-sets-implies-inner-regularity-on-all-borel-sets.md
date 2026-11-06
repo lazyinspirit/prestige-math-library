@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-inner-regularity-on-open-sets-implies-inner-regularity-on-all-borel-sets.md

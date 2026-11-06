@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval.md

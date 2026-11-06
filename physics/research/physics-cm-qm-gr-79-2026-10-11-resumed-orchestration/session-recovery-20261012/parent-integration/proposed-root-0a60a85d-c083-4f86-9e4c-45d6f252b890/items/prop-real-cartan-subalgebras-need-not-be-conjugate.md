@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-real-cartan-subalgebras-need-not-be-conjugate.md

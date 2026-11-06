@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-characteristic-initial-data-for-a-fully-nonlinear-equation.md

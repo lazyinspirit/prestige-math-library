@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-distance-function-is-smooth-on-all-of-m-times-m.md

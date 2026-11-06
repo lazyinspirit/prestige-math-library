@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-weak-beltrami-factorization-in-holder-coordinates.md

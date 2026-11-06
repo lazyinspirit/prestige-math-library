@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-wedge-with-a-closed-form-preserves-exactness-classes.md

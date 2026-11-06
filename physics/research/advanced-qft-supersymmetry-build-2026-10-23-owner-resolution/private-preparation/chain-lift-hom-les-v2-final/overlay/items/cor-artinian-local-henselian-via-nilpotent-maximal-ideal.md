@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-artinian-local-henselian-via-nilpotent-maximal-ideal.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-substitution-rule-for-ordinary-generating-functions.md

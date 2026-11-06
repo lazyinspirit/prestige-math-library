@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-nonsplit-short-exact-sequence-of-integers-mod-two.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution.md

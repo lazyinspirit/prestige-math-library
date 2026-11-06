@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-walsh-hadamard-code-has-distance-one-half.md

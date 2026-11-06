@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-convex-subsets-have-trivial-fundamental-group.md

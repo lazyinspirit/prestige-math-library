@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-c-infinity-up-to-boundary-density-is-domain-sensitive.md

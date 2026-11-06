@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nondeterministic-and-deterministic-recognizability-agree.md

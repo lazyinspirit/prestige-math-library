@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-orientations-and-positive-basis-classes-agree-in-positive-dimension.md

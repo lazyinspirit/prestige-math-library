@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-almost-sure-convergence-need-not-imply-lp-convergence.md

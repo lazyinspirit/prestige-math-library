@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-support-dichotomy-for-free-wave-fundamental-solutions.md

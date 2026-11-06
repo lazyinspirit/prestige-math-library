@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-extremal-length-of-rectangle-and-annulus.md

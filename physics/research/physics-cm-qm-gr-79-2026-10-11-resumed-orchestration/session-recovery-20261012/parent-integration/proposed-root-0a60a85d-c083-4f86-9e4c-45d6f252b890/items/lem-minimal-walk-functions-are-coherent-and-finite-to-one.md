@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-minimal-walk-functions-are-coherent-and-finite-to-one.md

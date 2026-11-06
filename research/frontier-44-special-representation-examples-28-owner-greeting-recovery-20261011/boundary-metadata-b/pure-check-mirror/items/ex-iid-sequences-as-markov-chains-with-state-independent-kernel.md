@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-iid-sequences-as-markov-chains-with-state-independent-kernel.md

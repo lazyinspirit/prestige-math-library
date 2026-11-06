@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-boundary-restriction-image-is-lagrangian.md

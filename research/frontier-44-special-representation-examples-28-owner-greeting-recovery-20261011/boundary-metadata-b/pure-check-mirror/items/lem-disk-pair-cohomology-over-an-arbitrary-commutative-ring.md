@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring.md

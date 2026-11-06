@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hall-malcev-powers-in-the-last-central-term-have-short-words.md

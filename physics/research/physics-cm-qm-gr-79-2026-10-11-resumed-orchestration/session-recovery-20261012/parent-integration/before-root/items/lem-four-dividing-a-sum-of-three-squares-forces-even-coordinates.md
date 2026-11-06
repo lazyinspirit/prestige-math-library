@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-four-dividing-a-sum-of-three-squares-forces-even-coordinates.md

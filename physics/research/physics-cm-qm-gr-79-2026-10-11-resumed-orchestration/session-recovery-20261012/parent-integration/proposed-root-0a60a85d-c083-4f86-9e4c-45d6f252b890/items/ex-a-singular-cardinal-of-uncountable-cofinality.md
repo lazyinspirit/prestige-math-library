@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-singular-cardinal-of-uncountable-cofinality.md

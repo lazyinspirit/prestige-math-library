@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-listed-infinite-sigma-algebra-has-a-disjoint-sequence.md

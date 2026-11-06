@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-distribution-with-zero-derivatives-on-a-connected-open-set-is-constant.md

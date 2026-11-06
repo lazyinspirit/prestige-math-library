@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-squaring-on-units-is-not-a-homomorphism-nonabelian-warning.md

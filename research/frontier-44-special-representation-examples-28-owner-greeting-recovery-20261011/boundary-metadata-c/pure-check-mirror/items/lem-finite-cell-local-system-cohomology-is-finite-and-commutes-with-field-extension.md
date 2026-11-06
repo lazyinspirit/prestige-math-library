@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-cell-local-system-cohomology-is-finite-and-commutes-with-field-extension.md

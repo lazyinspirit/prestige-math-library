@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces.md

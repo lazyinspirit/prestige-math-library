@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-separable-hilbert-space-has-a-countable-orthonormal-basis.md

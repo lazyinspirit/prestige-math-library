@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-weak-convergence-of-gaussian-laws-by-parameters.md

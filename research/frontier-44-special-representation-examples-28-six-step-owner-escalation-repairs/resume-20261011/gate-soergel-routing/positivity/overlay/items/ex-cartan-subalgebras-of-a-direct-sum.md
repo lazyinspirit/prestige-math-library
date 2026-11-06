@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cartan-subalgebras-of-a-direct-sum.md

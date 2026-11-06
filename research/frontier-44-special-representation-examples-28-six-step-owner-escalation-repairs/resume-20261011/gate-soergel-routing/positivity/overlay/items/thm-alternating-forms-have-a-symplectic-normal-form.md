@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-alternating-forms-have-a-symplectic-normal-form.md

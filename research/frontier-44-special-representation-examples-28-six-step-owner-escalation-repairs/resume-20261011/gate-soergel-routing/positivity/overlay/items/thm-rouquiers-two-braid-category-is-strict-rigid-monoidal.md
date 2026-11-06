@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rouquiers-two-braid-category-is-strict-rigid-monoidal.md

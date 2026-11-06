@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-distance-hessian-and-laplacian-in-space-forms.md

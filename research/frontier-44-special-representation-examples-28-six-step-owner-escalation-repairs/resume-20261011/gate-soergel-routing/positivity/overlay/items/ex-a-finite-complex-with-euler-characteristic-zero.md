@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-finite-complex-with-euler-characteristic-zero.md

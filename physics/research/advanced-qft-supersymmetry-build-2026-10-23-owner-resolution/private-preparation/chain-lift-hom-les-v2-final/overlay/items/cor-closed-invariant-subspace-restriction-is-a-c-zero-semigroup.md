@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-closed-invariant-subspace-restriction-is-a-c-zero-semigroup.md

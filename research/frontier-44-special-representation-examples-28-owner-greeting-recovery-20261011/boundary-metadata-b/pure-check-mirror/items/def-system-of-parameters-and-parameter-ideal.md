@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-system-of-parameters-and-parameter-ideal.md

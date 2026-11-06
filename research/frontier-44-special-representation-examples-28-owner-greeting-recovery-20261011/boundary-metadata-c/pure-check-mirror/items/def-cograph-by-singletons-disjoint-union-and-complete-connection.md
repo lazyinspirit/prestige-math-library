@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cograph-by-singletons-disjoint-union-and-complete-connection.md

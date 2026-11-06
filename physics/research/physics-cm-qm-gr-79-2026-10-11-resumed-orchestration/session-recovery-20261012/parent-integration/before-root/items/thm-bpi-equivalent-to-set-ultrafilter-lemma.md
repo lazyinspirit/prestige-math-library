@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bpi-equivalent-to-set-ultrafilter-lemma.md

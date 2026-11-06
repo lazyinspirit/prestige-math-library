@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-interior-estimates-cannot-use-distance-zero-to-the-boundary.md

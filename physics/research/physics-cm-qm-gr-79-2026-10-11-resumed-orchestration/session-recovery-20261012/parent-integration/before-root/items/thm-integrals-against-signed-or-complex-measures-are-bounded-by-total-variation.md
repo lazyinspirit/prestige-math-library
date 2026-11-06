@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation.md

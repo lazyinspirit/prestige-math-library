@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-morrey-endpoint-p-equals-n-fails.md

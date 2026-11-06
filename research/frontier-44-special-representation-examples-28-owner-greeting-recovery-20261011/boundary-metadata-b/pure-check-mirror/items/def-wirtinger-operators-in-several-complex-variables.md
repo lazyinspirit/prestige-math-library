@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-wirtinger-operators-in-several-complex-variables.md

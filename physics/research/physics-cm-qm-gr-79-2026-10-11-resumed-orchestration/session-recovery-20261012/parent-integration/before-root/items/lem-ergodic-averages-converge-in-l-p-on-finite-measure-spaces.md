@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ergodic-averages-converge-in-l-p-on-finite-measure-spaces.md

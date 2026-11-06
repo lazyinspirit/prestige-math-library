@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-sharpp-is-closed-under-sum-and-product.md

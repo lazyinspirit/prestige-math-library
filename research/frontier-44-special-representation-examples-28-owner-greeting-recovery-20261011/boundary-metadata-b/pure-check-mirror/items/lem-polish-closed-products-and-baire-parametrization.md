@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-polish-closed-products-and-baire-parametrization.md

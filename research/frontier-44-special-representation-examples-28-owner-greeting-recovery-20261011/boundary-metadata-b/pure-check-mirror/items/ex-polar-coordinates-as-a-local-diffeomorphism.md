@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-polar-coordinates-as-a-local-diffeomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cell-form-is-associative-and-its-radical-is-a-submodule.md

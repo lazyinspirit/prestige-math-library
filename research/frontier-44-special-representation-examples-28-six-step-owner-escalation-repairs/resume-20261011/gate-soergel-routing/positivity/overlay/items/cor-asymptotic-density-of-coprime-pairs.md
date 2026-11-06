@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-asymptotic-density-of-coprime-pairs.md

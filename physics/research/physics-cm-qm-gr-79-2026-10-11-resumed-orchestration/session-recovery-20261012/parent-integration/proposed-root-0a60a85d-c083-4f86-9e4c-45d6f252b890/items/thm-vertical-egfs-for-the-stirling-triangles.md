@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-vertical-egfs-for-the-stirling-triangles.md

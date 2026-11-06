@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-conditioning-does-not-preserve-strict-inequalities.md

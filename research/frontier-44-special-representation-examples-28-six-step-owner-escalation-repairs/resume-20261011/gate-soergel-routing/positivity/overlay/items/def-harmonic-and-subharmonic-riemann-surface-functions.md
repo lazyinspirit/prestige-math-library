@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-harmonic-and-subharmonic-riemann-surface-functions.md

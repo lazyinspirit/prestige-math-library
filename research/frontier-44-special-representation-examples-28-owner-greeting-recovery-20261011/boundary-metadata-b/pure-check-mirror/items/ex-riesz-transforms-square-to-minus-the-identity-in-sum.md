@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-riesz-transforms-square-to-minus-the-identity-in-sum.md

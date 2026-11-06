@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-weakly-initial-object-and-jointly-weakly-initial-set.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-degenerate-cyclotomic-hecke-center-is-the-symmetric-polynomial-image.md

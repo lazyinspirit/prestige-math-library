@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-rank-deficient-matrix-has-an-affine-family-of-least-squares-minimisers.md

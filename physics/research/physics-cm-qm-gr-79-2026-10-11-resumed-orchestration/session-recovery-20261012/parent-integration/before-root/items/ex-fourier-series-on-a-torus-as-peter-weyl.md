@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fourier-series-on-a-torus-as-peter-weyl.md

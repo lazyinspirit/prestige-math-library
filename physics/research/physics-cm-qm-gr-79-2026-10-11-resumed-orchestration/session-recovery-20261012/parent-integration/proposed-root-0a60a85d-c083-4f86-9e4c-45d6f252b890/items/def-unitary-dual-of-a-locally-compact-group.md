@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unitary-dual-of-a-locally-compact-group.md

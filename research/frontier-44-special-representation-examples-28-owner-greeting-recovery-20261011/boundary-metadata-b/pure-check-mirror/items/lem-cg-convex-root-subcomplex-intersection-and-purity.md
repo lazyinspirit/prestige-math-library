@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-convex-root-subcomplex-intersection-and-purity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-every-integer-above-one-has-a-prime-divisor.md

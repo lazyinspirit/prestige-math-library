@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-cg-interval-partition-with-nonmonotone-endpoints-is-not-a-congruence.md

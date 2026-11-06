@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-bar-differential-is-group-equivariant-and-squares-to-zero.md

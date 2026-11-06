@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-leafwise-positive-closed-two-form-calibrates-a-taut-foliation.md

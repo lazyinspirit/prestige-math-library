@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-eilenberg-moore-creates-base-colimits-preserved-by-the-monad-and-its-square.md

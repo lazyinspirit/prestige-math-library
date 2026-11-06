@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-pontryagin-thom-map-of-a-framed-submanifold.md

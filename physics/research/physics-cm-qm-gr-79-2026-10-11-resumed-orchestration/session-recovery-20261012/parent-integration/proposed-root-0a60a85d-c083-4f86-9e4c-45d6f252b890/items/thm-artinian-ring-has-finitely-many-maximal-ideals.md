@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-artinian-ring-has-finitely-many-maximal-ideals.md

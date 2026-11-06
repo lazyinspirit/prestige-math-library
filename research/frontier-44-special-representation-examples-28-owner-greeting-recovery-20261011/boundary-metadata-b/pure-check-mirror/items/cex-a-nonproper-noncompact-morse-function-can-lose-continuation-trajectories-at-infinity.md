@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-nonproper-noncompact-morse-function-can-lose-continuation-trajectories-at-infinity.md

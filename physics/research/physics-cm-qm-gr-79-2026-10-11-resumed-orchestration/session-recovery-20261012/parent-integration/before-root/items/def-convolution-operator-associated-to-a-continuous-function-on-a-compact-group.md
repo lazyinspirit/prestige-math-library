@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group.md

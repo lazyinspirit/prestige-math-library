@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-stably-trivial-bundles-over-spheres-below-the-rank-are-trivial.md

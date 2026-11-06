@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-abel-dini-pair-for-the-harmonic-series.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-critical-points-and-values-of-a-height-function-on-a-sphere.md

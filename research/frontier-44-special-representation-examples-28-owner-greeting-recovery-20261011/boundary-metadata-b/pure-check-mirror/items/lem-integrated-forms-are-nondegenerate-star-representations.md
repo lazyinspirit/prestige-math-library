@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-integrated-forms-are-nondegenerate-star-representations.md

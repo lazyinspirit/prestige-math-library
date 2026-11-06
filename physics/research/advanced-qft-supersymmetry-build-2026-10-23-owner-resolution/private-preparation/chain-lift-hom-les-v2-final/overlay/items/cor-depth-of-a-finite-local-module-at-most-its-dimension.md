@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-depth-of-a-finite-local-module-at-most-its-dimension.md

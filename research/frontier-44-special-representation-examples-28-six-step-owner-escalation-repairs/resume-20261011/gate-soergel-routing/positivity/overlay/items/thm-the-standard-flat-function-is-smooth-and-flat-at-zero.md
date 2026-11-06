@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-standard-flat-function-is-smooth-and-flat-at-zero.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-poisson-integral-of-a-singular-circle-measure-has-zero-nontangential-limit.md

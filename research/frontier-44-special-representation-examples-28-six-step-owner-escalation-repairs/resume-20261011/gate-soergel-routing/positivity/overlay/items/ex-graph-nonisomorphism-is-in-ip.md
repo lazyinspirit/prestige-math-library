@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-graph-nonisomorphism-is-in-ip.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex.md

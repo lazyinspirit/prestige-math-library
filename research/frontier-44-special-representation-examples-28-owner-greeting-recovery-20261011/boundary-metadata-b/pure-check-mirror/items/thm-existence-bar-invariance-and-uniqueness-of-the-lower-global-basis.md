@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-existence-bar-invariance-and-uniqueness-of-the-lower-global-basis.md

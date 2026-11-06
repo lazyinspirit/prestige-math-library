@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-second-moment-bound-for-a-nonempty-random-subset.md

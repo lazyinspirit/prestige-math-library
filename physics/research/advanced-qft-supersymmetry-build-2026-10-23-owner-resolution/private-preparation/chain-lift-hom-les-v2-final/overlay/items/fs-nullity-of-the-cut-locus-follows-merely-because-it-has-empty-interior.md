@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-nullity-of-the-cut-locus-follows-merely-because-it-has-empty-interior.md

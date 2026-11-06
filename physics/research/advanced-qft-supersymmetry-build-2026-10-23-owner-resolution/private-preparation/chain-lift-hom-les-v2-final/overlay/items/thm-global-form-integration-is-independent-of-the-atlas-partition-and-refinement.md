@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement.md

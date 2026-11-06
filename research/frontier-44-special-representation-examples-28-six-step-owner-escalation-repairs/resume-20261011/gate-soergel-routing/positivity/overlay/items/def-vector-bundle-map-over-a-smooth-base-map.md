@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-vector-bundle-map-over-a-smooth-base-map.md

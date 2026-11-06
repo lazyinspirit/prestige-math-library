@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-subset-closed-under-scaling-but-not-addition.md

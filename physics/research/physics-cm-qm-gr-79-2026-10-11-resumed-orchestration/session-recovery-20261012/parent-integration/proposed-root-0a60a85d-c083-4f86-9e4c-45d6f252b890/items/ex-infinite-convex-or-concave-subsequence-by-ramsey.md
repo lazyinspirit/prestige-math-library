@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-infinite-convex-or-concave-subsequence-by-ramsey.md

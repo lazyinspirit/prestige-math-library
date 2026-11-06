@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded.md

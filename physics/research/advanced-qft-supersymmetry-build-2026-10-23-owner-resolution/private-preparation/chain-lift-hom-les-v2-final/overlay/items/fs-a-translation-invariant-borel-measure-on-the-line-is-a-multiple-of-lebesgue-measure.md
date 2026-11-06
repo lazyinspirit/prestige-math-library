@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-translation-invariant-borel-measure-on-the-line-is-a-multiple-of-lebesgue-measure.md

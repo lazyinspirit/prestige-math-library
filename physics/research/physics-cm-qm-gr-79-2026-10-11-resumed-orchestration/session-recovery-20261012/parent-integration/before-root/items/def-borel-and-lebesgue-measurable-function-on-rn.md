@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-borel-and-lebesgue-measurable-function-on-rn.md

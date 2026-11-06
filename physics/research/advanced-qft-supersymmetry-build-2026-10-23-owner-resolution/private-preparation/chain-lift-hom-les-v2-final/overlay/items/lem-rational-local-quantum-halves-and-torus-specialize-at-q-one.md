@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rational-local-quantum-halves-and-torus-specialize-at-q-one.md

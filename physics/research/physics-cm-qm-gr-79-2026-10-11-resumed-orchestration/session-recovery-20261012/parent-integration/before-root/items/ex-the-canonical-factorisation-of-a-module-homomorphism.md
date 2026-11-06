@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-canonical-factorisation-of-a-module-homomorphism.md

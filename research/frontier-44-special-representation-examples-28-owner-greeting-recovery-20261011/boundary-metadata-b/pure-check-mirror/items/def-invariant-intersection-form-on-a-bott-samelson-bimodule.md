@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-invariant-intersection-form-on-a-bott-samelson-bimodule.md

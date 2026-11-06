@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cg-uniform-energy-decrement-and-short-class-closedness.md

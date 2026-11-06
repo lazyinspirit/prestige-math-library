@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-laplace-fundamental-solution-with-positive-minus-laplacian-sign.md

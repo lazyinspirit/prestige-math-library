@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-local-frame-formula-for-covariant-differentiation-along-a-curve.md

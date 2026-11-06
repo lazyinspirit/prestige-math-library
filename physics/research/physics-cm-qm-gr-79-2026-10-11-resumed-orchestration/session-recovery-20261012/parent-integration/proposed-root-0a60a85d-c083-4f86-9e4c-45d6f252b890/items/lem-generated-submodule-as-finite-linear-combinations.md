@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-generated-submodule-as-finite-linear-combinations.md

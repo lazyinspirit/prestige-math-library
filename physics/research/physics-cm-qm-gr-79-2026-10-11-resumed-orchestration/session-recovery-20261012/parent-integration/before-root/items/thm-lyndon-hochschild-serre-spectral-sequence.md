@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lyndon-hochschild-serre-spectral-sequence.md

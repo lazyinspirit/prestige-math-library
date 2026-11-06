@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-heat-flow-is-order-preserving-and-lp-contractive.md

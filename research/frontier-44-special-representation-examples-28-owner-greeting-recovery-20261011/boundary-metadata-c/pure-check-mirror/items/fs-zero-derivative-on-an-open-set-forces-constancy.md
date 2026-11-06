@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-zero-derivative-on-an-open-set-forces-constancy.md

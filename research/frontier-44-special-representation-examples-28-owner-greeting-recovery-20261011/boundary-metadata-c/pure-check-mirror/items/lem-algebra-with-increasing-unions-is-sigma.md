@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-algebra-with-increasing-unions-is-sigma.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-symplectic-manifolds-have-a-canonical-orientation-and-volume-form.md

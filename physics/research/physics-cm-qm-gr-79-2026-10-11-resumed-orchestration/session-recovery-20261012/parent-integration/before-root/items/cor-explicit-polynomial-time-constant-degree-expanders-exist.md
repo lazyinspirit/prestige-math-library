@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-explicit-polynomial-time-constant-degree-expanders-exist.md

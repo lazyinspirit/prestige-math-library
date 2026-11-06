@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components.md

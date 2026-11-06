@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-ultrafilter-selects-a-cell-of-a-finite-partition.md

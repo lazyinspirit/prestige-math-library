@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-block-interchanges-transport-arbitrary-braid-boxes.md

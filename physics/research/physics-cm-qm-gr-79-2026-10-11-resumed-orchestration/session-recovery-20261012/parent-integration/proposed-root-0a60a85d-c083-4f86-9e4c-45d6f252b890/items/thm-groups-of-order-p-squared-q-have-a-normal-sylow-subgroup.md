@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-groups-of-order-p-squared-q-have-a-normal-sylow-subgroup.md

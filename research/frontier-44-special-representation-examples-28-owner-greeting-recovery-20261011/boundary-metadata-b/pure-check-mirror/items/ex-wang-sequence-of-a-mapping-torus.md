@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-wang-sequence-of-a-mapping-torus.md

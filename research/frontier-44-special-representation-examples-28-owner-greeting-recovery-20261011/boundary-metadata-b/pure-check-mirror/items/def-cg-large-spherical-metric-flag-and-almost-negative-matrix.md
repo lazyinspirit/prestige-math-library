@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cg-large-spherical-metric-flag-and-almost-negative-matrix.md

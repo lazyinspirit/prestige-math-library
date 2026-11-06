@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-rayleigh-quotient-iteration-on-a-two-by-two-symmetric-matrix.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-modification-of-proper-integral-dvr-scheme.md

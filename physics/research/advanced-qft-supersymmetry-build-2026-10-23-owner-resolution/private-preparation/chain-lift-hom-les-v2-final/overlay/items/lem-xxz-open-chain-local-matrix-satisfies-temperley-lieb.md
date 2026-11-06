@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-xxz-open-chain-local-matrix-satisfies-temperley-lieb.md

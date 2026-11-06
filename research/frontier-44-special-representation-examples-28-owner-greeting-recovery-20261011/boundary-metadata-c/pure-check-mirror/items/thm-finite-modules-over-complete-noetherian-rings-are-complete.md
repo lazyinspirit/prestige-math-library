@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-modules-over-complete-noetherian-rings-are-complete.md

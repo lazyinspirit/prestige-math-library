@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-continuity-almost-everywhere-differentiability-and-an-integrable-derivative-imply-newton-leibniz.md

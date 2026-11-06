@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals.md

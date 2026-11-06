@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-inverse-derivative-of-a-two-by-two-matrix.md

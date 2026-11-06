@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-blass-finite-modification-classes-and-parameter-hod-model.md

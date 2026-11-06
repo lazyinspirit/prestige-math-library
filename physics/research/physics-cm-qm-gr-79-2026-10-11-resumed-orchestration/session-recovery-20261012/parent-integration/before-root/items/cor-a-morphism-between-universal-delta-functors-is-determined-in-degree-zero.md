@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-multiple-traversal-has-the-same-circle-trace-but-greater-length.md

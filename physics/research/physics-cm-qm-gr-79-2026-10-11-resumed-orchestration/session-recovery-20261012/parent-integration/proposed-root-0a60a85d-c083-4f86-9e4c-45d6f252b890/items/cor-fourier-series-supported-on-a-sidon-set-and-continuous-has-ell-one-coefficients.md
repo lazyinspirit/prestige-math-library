@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-fourier-series-supported-on-a-sidon-set-and-continuous-has-ell-one-coefficients.md

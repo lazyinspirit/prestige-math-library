@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-magnetic-and-detection-preparation-spread-versus-error.md

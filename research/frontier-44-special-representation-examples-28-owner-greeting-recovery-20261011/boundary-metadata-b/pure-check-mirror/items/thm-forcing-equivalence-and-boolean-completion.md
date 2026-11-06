@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-forcing-equivalence-and-boolean-completion.md

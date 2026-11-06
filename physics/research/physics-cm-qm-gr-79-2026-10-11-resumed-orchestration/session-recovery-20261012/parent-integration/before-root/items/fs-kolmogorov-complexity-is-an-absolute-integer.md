@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-kolmogorov-complexity-is-an-absolute-integer.md

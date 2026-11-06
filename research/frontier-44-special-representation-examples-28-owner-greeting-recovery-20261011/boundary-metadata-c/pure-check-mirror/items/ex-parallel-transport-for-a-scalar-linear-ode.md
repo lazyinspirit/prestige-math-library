@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-parallel-transport-for-a-scalar-linear-ode.md

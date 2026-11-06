@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-envelopes-are-the-least-semicontinuous-majorants.md

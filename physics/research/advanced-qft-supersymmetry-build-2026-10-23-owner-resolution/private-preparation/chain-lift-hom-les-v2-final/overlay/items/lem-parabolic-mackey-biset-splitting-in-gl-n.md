@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-parabolic-mackey-biset-splitting-in-gl-n.md

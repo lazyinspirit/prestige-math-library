@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-metastable-embedding-for-maps-from-a-compact-manifold.md

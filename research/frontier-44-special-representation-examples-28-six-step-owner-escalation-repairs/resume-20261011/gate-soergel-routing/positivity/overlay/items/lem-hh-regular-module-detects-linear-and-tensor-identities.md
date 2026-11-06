@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hh-regular-module-detects-linear-and-tensor-identities.md

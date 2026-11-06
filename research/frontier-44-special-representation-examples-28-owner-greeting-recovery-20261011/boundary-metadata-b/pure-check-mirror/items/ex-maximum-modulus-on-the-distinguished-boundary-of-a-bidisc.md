@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-maximum-modulus-on-the-distinguished-boundary-of-a-bidisc.md

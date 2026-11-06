@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-global-w-two-p-estimate-for-the-laplacian-on-rn.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-casimir-comparison-on-a-weight-vector.md

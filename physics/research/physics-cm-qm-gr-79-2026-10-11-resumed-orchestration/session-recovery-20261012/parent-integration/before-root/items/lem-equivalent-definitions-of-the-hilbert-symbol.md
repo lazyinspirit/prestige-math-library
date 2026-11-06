@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-equivalent-definitions-of-the-hilbert-symbol.md

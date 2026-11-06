@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cover-small-singular-chains-compute-singular-homology.md

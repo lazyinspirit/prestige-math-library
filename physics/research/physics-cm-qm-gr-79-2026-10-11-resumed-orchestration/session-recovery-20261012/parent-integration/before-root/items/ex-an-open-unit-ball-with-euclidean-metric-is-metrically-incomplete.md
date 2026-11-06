@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-open-unit-ball-with-euclidean-metric-is-metrically-incomplete.md

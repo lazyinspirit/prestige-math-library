@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-orientation-reversing-homeomorphism-is-quasiconformal.md

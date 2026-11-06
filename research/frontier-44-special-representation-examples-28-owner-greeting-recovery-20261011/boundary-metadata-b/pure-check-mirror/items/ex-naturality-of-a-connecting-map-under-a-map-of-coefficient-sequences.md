@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-naturality-of-a-connecting-map-under-a-map-of-coefficient-sequences.md

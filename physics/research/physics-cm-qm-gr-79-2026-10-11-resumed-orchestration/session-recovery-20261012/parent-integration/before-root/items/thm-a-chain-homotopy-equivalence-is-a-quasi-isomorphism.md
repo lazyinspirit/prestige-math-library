@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism.md

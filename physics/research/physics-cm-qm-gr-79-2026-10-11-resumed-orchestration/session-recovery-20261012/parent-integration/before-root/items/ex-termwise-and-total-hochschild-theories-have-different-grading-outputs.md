@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-termwise-and-total-hochschild-theories-have-different-grading-outputs.md

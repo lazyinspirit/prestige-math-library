@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-basic-pseudointersection-and-tower-bounds.md

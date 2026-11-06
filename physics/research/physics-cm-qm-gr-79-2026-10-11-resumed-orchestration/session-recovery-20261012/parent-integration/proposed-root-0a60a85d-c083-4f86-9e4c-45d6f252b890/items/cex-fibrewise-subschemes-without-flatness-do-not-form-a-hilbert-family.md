@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-fibrewise-subschemes-without-flatness-do-not-form-a-hilbert-family.md

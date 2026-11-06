@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lambda-system-with-finite-intersections-is-sigma.md

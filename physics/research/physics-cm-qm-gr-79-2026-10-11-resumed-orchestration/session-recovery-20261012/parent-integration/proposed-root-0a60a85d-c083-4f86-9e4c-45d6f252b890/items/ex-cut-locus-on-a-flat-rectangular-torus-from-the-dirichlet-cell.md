@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cut-locus-on-a-flat-rectangular-torus-from-the-dirichlet-cell.md

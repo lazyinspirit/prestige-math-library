@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-natural-neumann-condition-from-a-free-endpoint.md

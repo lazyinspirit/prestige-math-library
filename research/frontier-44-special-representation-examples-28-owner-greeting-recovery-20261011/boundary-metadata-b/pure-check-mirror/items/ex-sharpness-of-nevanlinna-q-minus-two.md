@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-sharpness-of-nevanlinna-q-minus-two.md

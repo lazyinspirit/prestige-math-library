@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-complex-topological-k-zero-by-grothendieck-completion.md

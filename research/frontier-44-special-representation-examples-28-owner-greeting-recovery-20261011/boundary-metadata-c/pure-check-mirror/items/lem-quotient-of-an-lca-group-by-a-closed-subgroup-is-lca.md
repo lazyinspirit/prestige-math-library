@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quotient-of-an-lca-group-by-a-closed-subgroup-is-lca.md

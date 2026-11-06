@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-class-sum-of-a-conjugacy-class-in-k-g.md

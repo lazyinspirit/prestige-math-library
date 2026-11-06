@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuous-irreducible-unitary-representations-of-compact-groups-are-finite-dimensional.md

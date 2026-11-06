@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-integral-closure-in-a-finite-separable-extension.md

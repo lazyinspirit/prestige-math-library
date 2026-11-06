@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-self-adjoint-extension-exists-iff-deficiency-indices-agree.md

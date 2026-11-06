@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-calderon-reproducing-formula-for-the-hardy-decomposition.md

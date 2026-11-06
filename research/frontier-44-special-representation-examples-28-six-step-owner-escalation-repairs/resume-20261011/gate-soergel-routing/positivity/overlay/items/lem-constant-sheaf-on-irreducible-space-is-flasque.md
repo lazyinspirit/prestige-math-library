@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-constant-sheaf-on-irreducible-space-is-flasque.md

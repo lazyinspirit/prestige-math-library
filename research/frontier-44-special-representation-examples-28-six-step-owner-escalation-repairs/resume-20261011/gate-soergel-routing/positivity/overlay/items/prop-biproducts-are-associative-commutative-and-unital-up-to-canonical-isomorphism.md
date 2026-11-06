@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism.md

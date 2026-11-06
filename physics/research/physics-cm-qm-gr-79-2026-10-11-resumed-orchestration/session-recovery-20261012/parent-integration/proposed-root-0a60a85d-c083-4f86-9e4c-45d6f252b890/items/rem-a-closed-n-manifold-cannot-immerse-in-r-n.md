@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-a-closed-n-manifold-cannot-immerse-in-r-n.md

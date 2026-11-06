@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-functions-of-disjoint-independent-coordinate-blocks.md

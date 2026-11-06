@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-graded-grothendieck-group-of-a-m-is-free-on-the-shifted-vertex-projectives.md

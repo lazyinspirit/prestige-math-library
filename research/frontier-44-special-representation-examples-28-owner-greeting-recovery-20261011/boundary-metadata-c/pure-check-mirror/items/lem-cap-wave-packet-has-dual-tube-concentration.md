@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cap-wave-packet-has-dual-tube-concentration.md

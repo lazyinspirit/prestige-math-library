@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-conjugate-point-at-which-there-are-many-geodesics.md

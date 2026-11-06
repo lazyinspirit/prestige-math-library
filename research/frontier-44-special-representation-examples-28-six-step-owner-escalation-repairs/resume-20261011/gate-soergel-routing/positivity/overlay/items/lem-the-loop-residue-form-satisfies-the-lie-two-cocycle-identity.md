@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-loop-residue-form-satisfies-the-lie-two-cocycle-identity.md

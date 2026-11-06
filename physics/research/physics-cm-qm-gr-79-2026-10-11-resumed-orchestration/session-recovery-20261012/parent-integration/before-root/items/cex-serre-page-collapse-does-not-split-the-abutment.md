@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-serre-page-collapse-does-not-split-the-abutment.md

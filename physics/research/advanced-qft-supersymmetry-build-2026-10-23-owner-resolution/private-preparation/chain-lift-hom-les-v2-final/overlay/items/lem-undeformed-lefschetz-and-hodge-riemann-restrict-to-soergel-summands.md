@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-undeformed-lefschetz-and-hodge-riemann-restrict-to-soergel-summands.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-stone-cech-compactification-is-unique-over-x.md

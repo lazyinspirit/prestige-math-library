@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-triangular-fixed-tabloid-reconstruction-of-the-character-table.md

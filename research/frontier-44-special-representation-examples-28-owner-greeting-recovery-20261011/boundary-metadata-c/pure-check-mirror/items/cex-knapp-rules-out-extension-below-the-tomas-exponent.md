@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-knapp-rules-out-extension-below-the-tomas-exponent.md

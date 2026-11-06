@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-additive-characters-are-one-dimensional-complex-representations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rouquier-complexes-satisfy-far-commutativity.md

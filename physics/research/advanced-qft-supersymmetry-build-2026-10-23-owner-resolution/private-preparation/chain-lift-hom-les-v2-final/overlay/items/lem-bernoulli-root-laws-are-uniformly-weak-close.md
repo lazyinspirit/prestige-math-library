@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-bernoulli-root-laws-are-uniformly-weak-close.md

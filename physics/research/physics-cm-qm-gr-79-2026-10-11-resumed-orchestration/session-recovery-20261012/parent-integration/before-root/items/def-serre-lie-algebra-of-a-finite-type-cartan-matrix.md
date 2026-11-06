@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-serre-lie-algebra-of-a-finite-type-cartan-matrix.md

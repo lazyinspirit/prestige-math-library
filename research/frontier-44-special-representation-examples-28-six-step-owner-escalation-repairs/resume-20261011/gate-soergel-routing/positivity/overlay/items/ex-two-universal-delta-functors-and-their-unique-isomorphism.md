@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-two-universal-delta-functors-and-their-unique-isomorphism.md

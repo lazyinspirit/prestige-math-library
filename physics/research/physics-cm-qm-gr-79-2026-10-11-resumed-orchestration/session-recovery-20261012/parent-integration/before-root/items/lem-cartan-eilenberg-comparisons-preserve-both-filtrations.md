@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cartan-eilenberg-comparisons-preserve-both-filtrations.md

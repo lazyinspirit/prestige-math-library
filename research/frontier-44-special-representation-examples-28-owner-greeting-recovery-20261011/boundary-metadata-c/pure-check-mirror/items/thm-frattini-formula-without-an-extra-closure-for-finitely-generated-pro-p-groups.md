@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-frattini-formula-without-an-extra-closure-for-finitely-generated-pro-p-groups.md

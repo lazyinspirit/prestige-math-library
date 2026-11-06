@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-morphism-of-chain-maps-induces-a-chain-map-of-cones.md

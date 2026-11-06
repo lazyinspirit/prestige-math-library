@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-mobius-transformations-biholomorphic-sphere.md

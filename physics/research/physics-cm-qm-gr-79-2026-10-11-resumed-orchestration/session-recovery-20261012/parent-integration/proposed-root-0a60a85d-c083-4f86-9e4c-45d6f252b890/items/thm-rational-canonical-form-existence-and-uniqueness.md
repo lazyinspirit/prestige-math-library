@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rational-canonical-form-existence-and-uniqueness.md

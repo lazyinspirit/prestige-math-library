@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-hom-spaces-in-category-o-are-finite-dimensional.md

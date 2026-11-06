@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-sign-duality-and-ringel-duality-match-fock-space-involutions.md

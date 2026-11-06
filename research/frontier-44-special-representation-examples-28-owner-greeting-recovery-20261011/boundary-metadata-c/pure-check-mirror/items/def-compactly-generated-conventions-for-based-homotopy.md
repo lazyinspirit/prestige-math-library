@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-compactly-generated-conventions-for-based-homotopy.md

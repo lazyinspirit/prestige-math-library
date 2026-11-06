@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-local-ode-solution-exists-on-the-whole-domain-of-the-vector-field.md

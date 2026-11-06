@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cardinality-of-the-borel-sigma-algebra-on-rn.md

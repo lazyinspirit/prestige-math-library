@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-preserving-binary-products-and-equalizers-does-not-imply-continuity.md

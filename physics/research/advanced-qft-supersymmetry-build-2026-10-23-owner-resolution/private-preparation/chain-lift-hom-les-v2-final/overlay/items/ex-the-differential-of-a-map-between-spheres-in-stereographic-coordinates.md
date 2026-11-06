@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-differential-of-a-map-between-spheres-in-stereographic-coordinates.md

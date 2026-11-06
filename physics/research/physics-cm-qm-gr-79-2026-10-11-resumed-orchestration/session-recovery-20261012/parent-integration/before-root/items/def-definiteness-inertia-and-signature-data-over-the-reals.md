@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-definiteness-inertia-and-signature-data-over-the-reals.md

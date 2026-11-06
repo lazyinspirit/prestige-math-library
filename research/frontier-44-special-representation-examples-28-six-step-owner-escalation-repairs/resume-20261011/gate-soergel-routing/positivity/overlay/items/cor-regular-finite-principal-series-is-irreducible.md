@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-regular-finite-principal-series-is-irreducible.md

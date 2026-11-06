@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-blaschke-product-with-zeros-accumulating-at-one.md

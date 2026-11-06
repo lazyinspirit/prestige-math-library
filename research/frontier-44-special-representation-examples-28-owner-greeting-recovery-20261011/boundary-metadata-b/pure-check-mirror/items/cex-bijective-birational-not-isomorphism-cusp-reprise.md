@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-bijective-birational-not-isomorphism-cusp-reprise.md

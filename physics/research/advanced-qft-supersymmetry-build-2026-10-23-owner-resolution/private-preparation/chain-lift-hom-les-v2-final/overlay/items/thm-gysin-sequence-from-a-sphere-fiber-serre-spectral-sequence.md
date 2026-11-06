@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-gysin-sequence-from-a-sphere-fiber-serre-spectral-sequence.md

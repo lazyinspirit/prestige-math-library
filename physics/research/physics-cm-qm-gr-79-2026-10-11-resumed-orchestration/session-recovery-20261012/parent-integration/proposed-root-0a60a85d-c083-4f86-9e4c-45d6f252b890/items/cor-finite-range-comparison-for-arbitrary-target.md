@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-range-comparison-for-arbitrary-target.md

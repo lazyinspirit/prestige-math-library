@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-leibniz-determinant-is-alternating-multilinear-and-normalized.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-initial-and-terminal-objects-are-unique-up-to-unique-isomorphism.md

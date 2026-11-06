@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-two-relative-cell-layers-have-free-group-ring-homotopy-bases.md

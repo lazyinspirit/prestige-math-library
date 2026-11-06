@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cfg-intersection-emptiness-is-undecidable.md

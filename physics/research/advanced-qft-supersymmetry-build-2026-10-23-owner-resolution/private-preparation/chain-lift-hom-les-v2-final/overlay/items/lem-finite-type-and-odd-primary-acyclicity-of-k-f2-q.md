@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-type-and-odd-primary-acyclicity-of-k-f2-q.md

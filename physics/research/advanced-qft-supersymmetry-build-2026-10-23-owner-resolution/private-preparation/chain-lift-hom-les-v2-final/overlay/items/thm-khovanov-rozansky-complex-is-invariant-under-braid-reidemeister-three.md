@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-khovanov-rozansky-complex-is-invariant-under-braid-reidemeister-three.md

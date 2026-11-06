@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-moser-isotopy-for-area-forms-on-a-compact-surface.md

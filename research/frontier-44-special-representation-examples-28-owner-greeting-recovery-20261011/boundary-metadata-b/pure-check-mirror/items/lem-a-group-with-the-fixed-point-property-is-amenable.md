@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-group-with-the-fixed-point-property-is-amenable.md

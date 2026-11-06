@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-trace-of-a-square-matrix-over-a-commutative-ring.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-littlewood-paley-reproducing-formula-in-tempered-distributions.md

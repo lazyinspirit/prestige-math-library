@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dual-ball-as-a-closed-subset-of-a-product.md

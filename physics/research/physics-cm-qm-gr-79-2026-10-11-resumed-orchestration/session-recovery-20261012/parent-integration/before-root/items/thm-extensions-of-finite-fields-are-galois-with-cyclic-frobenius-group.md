@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group.md

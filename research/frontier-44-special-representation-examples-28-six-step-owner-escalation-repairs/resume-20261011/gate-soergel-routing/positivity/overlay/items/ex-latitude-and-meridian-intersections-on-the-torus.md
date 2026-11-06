@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-latitude-and-meridian-intersections-on-the-torus.md

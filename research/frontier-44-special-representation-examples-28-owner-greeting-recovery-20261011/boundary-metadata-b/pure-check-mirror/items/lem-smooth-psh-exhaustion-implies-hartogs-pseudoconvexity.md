@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-psh-exhaustion-implies-hartogs-pseudoconvexity.md

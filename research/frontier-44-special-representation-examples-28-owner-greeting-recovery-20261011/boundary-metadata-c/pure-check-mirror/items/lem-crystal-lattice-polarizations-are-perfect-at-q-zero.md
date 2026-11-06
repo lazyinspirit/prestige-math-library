@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-crystal-lattice-polarizations-are-perfect-at-q-zero.md

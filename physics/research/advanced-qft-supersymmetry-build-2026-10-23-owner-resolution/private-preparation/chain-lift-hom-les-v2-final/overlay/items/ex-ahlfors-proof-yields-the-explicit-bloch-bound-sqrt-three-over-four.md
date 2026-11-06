@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-ahlfors-proof-yields-the-explicit-bloch-bound-sqrt-three-over-four.md

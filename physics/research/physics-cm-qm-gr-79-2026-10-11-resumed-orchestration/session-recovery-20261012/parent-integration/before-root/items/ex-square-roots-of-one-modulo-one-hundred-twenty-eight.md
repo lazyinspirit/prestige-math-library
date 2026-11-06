@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-square-roots-of-one-modulo-one-hundred-twenty-eight.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-oriented-grassmannian-and-tautological-oriented-bundle.md

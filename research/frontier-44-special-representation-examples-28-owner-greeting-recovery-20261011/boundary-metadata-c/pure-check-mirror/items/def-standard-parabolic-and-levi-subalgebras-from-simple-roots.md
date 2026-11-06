@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-standard-parabolic-and-levi-subalgebras-from-simple-roots.md

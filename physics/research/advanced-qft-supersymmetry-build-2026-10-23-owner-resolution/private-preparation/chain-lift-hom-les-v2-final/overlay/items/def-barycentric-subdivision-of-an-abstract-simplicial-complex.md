@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-barycentric-subdivision-of-an-abstract-simplicial-complex.md

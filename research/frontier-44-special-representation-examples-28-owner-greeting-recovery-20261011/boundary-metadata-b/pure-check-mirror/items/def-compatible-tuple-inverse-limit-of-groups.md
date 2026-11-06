@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-compatible-tuple-inverse-limit-of-groups.md

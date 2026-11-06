@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-gaussian-elimination-produces-a-pivot-permutation.md

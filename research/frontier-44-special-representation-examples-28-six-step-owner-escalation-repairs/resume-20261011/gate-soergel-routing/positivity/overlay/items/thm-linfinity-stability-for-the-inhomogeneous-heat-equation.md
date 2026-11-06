@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-linfinity-stability-for-the-inhomogeneous-heat-equation.md

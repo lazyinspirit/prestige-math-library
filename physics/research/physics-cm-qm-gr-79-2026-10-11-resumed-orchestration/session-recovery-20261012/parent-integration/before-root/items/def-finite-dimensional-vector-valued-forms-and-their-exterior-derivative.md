@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative.md

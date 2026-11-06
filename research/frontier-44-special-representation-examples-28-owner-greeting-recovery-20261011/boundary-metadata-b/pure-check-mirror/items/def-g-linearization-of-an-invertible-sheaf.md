@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-g-linearization-of-an-invertible-sheaf.md

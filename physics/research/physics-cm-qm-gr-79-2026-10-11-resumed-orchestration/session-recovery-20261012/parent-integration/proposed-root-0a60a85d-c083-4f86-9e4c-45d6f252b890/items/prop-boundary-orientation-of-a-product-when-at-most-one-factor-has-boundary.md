@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary.md

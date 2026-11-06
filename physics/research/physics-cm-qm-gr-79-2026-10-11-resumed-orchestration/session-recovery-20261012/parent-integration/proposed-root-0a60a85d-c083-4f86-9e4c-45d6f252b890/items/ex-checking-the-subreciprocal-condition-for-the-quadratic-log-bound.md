@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-checking-the-subreciprocal-condition-for-the-quadratic-log-bound.md

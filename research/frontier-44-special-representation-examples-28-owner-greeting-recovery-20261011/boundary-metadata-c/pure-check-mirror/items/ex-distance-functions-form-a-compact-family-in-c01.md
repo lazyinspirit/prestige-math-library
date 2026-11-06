@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-distance-functions-form-a-compact-family-in-c01.md

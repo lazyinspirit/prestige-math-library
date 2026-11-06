@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-support-and-compactly-supported-riemann-integral-in-rn.md

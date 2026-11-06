@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-lie-algebras-of-alpha-p-mu-p-and-gl-n.md

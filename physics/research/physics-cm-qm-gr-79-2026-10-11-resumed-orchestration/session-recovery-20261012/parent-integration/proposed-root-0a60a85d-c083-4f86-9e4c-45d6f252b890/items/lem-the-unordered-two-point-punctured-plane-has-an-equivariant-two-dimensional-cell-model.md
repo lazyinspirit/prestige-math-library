@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-unordered-two-point-punctured-plane-has-an-equivariant-two-dimensional-cell-model.md

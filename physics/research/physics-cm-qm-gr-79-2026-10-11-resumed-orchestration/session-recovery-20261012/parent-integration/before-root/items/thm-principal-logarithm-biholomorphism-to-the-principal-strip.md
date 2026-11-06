@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-principal-logarithm-biholomorphism-to-the-principal-strip.md

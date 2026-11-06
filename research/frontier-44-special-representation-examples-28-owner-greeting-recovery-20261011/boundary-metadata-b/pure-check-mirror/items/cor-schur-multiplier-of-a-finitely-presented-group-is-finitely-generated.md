@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-schur-multiplier-of-a-finitely-presented-group-is-finitely-generated.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-q-binomial-expansion-for-q-commuting-elements.md

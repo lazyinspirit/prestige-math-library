@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-base-change-of-a-zero-dimensional-projective-quotient.md

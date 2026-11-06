@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-equivalent-characterisations-of-an-idempotent-monad.md

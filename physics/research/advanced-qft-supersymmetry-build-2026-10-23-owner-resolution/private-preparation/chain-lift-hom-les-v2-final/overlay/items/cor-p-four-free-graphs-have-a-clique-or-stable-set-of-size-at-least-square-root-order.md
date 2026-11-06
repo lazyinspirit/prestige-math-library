@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order.md

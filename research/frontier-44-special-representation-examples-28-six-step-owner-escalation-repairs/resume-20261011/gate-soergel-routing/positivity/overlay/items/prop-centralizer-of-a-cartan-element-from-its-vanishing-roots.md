@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-centralizer-of-a-cartan-element-from-its-vanishing-roots.md

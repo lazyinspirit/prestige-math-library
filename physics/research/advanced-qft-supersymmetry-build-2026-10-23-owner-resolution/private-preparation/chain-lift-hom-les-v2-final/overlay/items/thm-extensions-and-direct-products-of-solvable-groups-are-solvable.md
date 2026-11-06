@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-extensions-and-direct-products-of-solvable-groups-are-solvable.md

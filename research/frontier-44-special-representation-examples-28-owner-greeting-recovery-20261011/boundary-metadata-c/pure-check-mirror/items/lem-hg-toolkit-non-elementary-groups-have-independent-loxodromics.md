@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hg-toolkit-non-elementary-groups-have-independent-loxodromics.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-uniform-integrability-characterizes-l1-convergence-under-probability-convergence.md

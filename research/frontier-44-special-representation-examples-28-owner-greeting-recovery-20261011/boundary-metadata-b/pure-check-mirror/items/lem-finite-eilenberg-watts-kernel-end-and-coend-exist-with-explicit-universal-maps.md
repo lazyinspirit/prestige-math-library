@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-pcp-theorem-np-equals-pcp-log-n-o-one.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-weyl-coinvariant-algebra-is-the-graded-regular-representation.md

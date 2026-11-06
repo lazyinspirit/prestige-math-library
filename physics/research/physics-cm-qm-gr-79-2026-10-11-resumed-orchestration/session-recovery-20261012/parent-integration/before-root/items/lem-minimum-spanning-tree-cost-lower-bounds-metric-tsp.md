@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-minimum-spanning-tree-cost-lower-bounds-metric-tsp.md

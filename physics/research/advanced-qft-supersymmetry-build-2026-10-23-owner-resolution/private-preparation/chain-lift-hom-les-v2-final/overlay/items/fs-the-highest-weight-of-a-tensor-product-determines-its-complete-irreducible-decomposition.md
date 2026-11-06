@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-highest-weight-of-a-tensor-product-determines-its-complete-irreducible-decomposition.md

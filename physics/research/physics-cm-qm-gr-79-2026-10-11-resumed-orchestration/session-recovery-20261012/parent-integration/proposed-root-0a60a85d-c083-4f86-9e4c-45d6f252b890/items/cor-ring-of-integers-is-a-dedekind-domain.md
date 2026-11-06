@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ring-of-integers-is-a-dedekind-domain.md

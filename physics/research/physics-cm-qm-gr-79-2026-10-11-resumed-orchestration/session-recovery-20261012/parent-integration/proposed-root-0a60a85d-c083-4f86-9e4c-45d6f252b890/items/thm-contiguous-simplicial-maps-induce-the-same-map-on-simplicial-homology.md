@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-contiguous-simplicial-maps-induce-the-same-map-on-simplicial-homology.md

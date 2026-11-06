@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-generation-is-equivalent-to-uniform-representation-stability.md

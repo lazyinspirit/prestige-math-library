@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-relative-separation-of-a-ball-and-an-exterior-point.md

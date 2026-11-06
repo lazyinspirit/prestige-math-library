@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes.md

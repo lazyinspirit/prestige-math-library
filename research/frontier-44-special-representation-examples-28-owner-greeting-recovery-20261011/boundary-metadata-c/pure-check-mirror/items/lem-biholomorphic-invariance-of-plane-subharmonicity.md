@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-biholomorphic-invariance-of-plane-subharmonicity.md

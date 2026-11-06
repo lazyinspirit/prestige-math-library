@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lower-central-series-and-nilpotent-lie-algebra.md

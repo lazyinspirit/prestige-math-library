@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cancelling-a-generator-with-its-inverse-categorical-twist.md

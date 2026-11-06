@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-normal-node-composition-multiplicities-under-residue-restriction.md

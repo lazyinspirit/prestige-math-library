@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-continuity-alone-does-not-imply-finite-quadratic-variation.md

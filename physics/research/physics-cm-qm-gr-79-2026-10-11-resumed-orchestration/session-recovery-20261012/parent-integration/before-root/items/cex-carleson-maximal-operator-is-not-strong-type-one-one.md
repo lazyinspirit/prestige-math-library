@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-carleson-maximal-operator-is-not-strong-type-one-one.md

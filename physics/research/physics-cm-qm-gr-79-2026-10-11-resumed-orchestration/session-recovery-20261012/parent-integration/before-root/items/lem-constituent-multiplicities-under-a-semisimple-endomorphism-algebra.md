@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-constituent-multiplicities-under-a-semisimple-endomorphism-algebra.md

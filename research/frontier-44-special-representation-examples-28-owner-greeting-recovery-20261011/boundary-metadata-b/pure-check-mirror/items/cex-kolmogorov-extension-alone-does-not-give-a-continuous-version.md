@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-kolmogorov-extension-alone-does-not-give-a-continuous-version.md

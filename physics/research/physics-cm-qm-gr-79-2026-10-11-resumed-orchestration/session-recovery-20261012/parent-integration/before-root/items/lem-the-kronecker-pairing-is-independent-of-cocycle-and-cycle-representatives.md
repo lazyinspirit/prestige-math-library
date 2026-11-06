@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives.md

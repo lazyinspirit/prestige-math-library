@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-cone-triangle-of-a-null-homotopic-map-splits-in-the-homotopy-category.md

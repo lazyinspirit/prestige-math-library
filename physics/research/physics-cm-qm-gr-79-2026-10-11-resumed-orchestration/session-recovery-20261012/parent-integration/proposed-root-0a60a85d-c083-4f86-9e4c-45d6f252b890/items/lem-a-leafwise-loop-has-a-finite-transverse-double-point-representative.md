@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-leafwise-loop-has-a-finite-transverse-double-point-representative.md

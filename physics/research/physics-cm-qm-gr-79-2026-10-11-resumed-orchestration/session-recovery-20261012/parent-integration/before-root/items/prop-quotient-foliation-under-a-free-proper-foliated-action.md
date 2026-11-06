@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-quotient-foliation-under-a-free-proper-foliated-action.md

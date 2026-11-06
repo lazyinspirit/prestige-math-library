@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-bocksteins-are-natural-and-commute-with-suspension.md

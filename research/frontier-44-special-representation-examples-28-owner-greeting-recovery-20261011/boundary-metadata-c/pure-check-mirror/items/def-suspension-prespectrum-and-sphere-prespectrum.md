@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-suspension-prespectrum-and-sphere-prespectrum.md

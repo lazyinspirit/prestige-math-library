@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-kl-multiplicity-matrix-for-the-sl-three-principal-block.md

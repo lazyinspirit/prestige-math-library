@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-defect-groups-are-maximal-brauer-support.md

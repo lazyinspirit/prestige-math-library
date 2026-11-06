@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-some-turing-reductions-are-not-truth-table-reductions.md

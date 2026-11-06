@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries.md

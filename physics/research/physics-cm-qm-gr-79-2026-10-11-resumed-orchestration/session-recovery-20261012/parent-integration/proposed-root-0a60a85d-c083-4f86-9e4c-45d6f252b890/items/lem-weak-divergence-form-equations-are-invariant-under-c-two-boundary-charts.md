@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts.md

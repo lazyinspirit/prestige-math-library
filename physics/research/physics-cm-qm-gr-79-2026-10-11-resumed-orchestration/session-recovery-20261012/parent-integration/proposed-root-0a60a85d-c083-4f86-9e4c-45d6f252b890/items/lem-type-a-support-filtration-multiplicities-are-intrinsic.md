@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-type-a-support-filtration-multiplicities-are-intrinsic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-canonical-bases-do-not-solve-arbitrary-positive-characteristic-decomposition-numbers.md

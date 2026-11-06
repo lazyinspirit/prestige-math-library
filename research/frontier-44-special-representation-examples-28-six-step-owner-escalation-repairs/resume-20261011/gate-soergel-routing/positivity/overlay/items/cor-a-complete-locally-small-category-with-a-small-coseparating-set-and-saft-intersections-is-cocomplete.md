@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-complete-locally-small-category-with-a-small-coseparating-set-and-saft-intersections-is-cocomplete.md

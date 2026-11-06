@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-bott-samelson-bimodule-of-a-word.md

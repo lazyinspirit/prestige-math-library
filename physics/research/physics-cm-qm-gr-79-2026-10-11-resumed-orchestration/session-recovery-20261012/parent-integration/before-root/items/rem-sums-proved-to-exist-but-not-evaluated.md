@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-sums-proved-to-exist-but-not-evaluated.md

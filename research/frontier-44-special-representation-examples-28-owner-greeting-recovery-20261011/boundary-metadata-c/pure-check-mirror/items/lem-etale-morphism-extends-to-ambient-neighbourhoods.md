@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-etale-morphism-extends-to-ambient-neighbourhoods.md

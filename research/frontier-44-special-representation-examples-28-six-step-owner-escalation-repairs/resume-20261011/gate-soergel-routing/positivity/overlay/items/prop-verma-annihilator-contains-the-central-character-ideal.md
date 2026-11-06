@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-verma-annihilator-contains-the-central-character-ideal.md

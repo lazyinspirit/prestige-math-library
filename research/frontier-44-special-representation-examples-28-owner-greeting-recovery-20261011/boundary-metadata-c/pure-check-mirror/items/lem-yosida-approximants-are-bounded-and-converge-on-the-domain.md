@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-yosida-approximants-are-bounded-and-converge-on-the-domain.md

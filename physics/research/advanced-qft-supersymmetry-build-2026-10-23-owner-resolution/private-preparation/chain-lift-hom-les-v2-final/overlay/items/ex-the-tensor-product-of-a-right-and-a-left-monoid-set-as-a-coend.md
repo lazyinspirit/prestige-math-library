@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-tensor-product-of-a-right-and-a-left-monoid-set-as-a-coend.md

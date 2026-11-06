@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ribbon-evaluation-is-an-invariant-of-framed-colored-links.md

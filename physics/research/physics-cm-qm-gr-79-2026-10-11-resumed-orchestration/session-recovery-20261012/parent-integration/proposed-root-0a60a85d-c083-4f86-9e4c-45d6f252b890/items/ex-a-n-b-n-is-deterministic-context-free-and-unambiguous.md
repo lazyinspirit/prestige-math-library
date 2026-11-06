@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-n-b-n-is-deterministic-context-free-and-unambiguous.md

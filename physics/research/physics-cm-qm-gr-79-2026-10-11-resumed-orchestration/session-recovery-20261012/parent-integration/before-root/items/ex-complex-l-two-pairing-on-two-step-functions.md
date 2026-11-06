@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complex-l-two-pairing-on-two-step-functions.md

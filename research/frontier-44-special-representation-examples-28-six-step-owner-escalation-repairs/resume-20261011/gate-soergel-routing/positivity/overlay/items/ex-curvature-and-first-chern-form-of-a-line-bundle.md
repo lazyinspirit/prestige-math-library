@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-curvature-and-first-chern-form-of-a-line-bundle.md

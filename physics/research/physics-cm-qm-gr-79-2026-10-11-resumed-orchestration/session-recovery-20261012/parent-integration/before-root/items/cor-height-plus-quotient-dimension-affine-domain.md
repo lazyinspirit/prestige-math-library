@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-height-plus-quotient-dimension-affine-domain.md

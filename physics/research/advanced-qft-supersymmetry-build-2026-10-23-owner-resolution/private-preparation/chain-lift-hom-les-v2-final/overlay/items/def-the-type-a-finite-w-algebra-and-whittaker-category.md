@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-the-type-a-finite-w-algebra-and-whittaker-category.md

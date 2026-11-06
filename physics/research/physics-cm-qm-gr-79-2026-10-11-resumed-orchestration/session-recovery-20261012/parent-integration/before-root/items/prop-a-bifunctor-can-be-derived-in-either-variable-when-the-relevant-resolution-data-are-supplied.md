@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied.md

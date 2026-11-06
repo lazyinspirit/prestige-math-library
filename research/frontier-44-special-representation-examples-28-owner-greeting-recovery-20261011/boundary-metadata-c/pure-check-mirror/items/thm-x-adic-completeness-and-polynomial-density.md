@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-x-adic-completeness-and-polynomial-density.md

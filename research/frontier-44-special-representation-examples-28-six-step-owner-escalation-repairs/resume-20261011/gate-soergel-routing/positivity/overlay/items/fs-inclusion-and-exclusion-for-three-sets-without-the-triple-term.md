@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-inclusion-and-exclusion-for-three-sets-without-the-triple-term.md

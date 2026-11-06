@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-graph-deletion-contraction-minor-and-subdivision.md

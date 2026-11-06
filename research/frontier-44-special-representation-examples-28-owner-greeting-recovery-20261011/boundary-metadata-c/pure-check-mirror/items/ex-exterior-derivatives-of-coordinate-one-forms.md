@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-exterior-derivatives-of-coordinate-one-forms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-lie-algebra-of-a-semisimple-group-in-characteristic-zero-is-semisimple.md

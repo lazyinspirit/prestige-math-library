@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-infinite-dimensional-vector-space-has-no-dual-object.md

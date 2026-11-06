@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-tori-correspond-to-torsion-free-character-lattices.md

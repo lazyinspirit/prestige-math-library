@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-pid-polynomial-ring-kunneth-tor-class.md

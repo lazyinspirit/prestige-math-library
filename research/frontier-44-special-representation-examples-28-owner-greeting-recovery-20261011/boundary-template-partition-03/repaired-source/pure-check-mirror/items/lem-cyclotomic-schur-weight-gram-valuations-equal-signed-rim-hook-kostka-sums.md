@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-schur-weight-gram-valuations-equal-signed-rim-hook-kostka-sums.md

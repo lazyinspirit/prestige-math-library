@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-lipschitz-maps-do-not-increase-hausdorff-dimension.md

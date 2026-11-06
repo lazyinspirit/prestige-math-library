@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group.md

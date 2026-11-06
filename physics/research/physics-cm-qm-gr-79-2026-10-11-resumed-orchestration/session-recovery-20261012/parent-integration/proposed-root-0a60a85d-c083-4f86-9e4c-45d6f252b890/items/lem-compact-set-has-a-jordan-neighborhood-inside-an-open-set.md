@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set.md

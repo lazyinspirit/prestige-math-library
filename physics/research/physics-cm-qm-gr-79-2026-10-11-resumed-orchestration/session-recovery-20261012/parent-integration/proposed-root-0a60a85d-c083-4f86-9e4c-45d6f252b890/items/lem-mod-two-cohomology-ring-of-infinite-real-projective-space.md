@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-mod-two-cohomology-ring-of-infinite-real-projective-space.md

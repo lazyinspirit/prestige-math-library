@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-locally-finite-and-finite-dimensional-simplicial-complex.md

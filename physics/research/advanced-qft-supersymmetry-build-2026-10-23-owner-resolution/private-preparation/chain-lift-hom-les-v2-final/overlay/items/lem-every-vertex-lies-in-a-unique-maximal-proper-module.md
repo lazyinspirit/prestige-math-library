@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-every-vertex-lies-in-a-unique-maximal-proper-module.md

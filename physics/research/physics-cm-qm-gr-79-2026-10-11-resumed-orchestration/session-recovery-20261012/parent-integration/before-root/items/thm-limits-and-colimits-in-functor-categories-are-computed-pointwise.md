@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-limits-and-colimits-in-functor-categories-are-computed-pointwise.md

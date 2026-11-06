@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-gch-on-alephs-is-a-choice-free-formulation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-killing-length-of-a-root-is-nonzero.md

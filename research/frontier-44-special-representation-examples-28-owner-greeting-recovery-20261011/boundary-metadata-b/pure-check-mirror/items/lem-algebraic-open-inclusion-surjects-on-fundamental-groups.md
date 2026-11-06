@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-algebraic-open-inclusion-surjects-on-fundamental-groups.md

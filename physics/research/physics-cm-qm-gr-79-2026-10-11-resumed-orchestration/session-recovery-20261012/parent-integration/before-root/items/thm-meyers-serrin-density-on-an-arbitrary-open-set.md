@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-meyers-serrin-density-on-an-arbitrary-open-set.md

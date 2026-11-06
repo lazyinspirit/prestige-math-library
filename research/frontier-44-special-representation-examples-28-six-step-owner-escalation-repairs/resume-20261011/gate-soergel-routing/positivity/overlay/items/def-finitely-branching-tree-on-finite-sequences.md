@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-finitely-branching-tree-on-finite-sequences.md

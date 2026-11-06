@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-properness-survives-a-controlled-locally-finite-perturbation.md

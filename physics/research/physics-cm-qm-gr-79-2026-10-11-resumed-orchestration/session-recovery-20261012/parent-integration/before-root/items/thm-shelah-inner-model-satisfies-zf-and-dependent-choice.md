@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-shelah-inner-model-satisfies-zf-and-dependent-choice.md

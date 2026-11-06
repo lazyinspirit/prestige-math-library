@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-labelled-directed-graph-and-labelled-graph-isomorphism.md

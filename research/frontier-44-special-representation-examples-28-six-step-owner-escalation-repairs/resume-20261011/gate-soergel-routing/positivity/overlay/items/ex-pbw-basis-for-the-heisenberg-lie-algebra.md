@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-pbw-basis-for-the-heisenberg-lie-algebra.md

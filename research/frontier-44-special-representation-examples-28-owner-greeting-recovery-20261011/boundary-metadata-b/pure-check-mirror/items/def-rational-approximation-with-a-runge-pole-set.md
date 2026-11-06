@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-rational-approximation-with-a-runge-pole-set.md

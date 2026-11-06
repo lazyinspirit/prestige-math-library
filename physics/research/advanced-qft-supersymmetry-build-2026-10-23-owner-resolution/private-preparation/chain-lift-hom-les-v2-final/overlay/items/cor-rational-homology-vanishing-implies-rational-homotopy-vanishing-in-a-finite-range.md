@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-rational-homology-vanishing-implies-rational-homotopy-vanishing-in-a-finite-range.md

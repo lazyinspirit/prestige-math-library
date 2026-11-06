@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-exterior-power-bundle-of-the-cotangent-bundle.md

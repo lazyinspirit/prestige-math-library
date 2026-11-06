@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r.md

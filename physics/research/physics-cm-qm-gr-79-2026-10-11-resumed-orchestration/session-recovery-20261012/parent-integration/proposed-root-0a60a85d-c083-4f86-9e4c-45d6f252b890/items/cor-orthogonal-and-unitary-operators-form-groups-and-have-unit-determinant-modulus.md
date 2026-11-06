@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus.md

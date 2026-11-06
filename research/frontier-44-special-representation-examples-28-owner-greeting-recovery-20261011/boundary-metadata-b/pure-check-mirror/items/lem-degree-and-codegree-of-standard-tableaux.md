@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-degree-and-codegree-of-standard-tableaux.md

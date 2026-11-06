@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-converse-mean-value-property-for-plane-functions.md

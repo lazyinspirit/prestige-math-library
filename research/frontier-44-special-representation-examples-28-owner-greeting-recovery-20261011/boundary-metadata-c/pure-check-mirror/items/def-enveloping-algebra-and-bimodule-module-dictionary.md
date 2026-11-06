@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-enveloping-algebra-and-bimodule-module-dictionary.md

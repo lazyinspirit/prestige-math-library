@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected.md

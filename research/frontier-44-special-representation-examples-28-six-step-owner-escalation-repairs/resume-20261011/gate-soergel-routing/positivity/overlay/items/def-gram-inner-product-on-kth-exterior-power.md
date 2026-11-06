@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-gram-inner-product-on-kth-exterior-power.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic.md

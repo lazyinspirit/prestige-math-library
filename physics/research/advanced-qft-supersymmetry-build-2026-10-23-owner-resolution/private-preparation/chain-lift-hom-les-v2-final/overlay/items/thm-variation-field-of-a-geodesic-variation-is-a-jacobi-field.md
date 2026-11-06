@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-variation-field-of-a-geodesic-variation-is-a-jacobi-field.md

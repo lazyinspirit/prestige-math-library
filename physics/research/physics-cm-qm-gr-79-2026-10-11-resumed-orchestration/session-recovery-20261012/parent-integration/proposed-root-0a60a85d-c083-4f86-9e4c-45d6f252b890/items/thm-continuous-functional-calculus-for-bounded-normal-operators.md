@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuous-functional-calculus-for-bounded-normal-operators.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-poincare-recurrence-for-finite-volume-hamiltonian-invariant-regions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-xy-sine-one-over-radius-squared-has-unbounded-partial-derivatives.md

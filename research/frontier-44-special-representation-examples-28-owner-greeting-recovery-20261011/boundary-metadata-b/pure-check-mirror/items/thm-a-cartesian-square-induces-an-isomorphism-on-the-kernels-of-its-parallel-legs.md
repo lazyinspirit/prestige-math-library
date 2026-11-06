@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-cartesian-square-induces-an-isomorphism-on-the-kernels-of-its-parallel-legs.md

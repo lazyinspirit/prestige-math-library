@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-ninja-yoneda-lemma-in-coend-form.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-trace-is-surjective-for-finite-separable-extensions.md

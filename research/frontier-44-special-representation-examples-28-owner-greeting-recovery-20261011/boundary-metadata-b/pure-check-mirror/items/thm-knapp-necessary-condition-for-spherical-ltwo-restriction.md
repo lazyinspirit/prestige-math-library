@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-knapp-necessary-condition-for-spherical-ltwo-restriction.md

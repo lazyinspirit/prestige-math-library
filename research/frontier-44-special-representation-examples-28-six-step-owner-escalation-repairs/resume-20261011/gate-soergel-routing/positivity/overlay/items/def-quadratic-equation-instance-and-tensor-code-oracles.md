@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quadratic-equation-instance-and-tensor-code-oracles.md

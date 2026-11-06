@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-pbw-symmetrization-is-an-algebra-isomorphism-for-a-nonabelian-lie-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kostant-harmonic-decomposition-of-the-symmetric-algebra.md

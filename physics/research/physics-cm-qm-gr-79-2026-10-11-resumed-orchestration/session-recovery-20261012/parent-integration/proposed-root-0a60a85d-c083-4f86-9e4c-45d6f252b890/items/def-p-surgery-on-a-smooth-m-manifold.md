@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-p-surgery-on-a-smooth-m-manifold.md

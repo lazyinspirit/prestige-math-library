@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-semifinite-and-zero-infinity-decomposition.md

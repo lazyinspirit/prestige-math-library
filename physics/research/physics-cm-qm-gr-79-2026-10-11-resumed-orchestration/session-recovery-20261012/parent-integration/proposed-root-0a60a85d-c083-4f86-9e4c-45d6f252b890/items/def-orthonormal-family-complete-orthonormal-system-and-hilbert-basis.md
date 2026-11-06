@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis.md

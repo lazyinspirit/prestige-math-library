@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-discriminant-detects-etaleness-of-finite-free-algebra.md

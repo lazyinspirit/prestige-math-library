@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unweighted-good-lambda-local-estimate-for-maximal-truncations.md

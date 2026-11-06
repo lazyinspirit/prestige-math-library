@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rank-one-torsion-free-surface-module-principalized-by-an-ideal-blowup.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-perfect-tree-splitting-of-a-new-real-name.md

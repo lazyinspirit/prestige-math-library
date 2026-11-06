@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-nonconstructive-expanders-suffice-for-uniform-reductions.md

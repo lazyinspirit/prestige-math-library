@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-constant-term-of-a-cyclotomic-polynomial.md

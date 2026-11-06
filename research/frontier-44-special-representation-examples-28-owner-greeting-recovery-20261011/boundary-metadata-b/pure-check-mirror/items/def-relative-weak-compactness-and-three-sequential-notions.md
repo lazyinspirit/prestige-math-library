@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-relative-weak-compactness-and-three-sequential-notions.md

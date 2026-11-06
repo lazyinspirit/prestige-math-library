@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-smooth-functions-are-weakly-dense-in-distributions.md

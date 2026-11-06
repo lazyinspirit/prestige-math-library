@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cyclotomic-klr-dot-annihilators-and-finite-root-strings.md

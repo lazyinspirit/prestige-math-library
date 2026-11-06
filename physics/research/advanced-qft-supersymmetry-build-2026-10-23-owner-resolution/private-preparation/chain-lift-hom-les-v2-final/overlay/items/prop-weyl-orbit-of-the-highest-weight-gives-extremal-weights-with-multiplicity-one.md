@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one.md

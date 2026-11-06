@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-homotopy-excision-for-a-single-relative-cell-layer.md

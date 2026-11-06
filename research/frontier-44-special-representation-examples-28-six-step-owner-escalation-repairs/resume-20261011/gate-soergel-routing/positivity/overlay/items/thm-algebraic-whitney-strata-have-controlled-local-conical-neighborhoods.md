@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-algebraic-whitney-strata-have-controlled-local-conical-neighborhoods.md

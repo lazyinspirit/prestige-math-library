@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-euler-class-of-an-oriented-even-rank-normal-bundle-controls-self-intersection.md

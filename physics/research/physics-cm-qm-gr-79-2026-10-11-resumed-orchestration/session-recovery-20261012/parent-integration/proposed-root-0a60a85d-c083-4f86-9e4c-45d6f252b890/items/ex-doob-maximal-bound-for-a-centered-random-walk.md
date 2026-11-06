@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-doob-maximal-bound-for-a-centered-random-walk.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-reflexive-pair-whose-coequalizer-is-not-preserved.md

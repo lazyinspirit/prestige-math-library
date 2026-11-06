@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-quadratics-can-have-four-roots-over-composite-residue-rings.md

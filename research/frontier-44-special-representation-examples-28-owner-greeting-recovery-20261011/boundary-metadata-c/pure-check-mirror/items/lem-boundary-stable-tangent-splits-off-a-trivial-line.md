@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-boundary-stable-tangent-splits-off-a-trivial-line.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-every-graph-walk-contains-a-path-between-its-endpoints.md

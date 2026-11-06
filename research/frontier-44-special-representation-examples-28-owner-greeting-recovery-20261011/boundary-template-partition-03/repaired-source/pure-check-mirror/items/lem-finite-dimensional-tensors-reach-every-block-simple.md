@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-dimensional-tensors-reach-every-block-simple.md

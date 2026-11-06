@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-invariant-forms-on-soergel-bimodules-are-unique-up-to-scalar-and-nondegenerate.md

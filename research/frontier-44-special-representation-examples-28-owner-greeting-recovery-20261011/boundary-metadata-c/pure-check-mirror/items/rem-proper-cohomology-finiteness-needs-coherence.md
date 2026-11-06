@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-proper-cohomology-finiteness-needs-coherence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem.md

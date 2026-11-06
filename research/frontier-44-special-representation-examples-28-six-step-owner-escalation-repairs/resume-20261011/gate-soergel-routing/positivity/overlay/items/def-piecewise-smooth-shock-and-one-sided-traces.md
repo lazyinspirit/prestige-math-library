@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-piecewise-smooth-shock-and-one-sided-traces.md

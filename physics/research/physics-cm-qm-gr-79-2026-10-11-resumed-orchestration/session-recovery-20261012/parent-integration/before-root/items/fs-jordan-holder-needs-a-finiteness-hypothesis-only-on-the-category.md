@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-jordan-holder-needs-a-finiteness-hypothesis-only-on-the-category.md

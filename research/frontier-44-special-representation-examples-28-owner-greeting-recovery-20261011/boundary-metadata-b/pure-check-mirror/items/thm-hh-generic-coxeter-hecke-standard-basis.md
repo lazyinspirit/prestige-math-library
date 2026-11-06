@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hh-generic-coxeter-hecke-standard-basis.md

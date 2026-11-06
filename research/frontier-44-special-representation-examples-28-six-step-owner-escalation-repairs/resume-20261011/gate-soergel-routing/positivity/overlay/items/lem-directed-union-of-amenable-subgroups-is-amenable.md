@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-directed-union-of-amenable-subgroups-is-amenable.md

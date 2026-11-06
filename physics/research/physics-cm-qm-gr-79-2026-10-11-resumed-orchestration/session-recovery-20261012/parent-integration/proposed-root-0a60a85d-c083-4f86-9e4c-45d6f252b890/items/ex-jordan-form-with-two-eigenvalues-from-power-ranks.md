@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-jordan-form-with-two-eigenvalues-from-power-ranks.md

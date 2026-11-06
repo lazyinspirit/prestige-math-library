@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-injective-holomorphic-derivative-nonzero.md

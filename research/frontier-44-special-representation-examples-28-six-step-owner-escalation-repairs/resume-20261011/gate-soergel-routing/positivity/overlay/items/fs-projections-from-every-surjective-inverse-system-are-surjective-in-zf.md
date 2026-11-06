@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-projections-from-every-surjective-inverse-system-are-surjective-in-zf.md

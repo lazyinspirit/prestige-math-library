@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-first-group-cohomology-via-inhomogeneous-one-cocycles.md

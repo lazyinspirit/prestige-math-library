@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-countable-dense-set-has-zero-hausdorff-dimension.md

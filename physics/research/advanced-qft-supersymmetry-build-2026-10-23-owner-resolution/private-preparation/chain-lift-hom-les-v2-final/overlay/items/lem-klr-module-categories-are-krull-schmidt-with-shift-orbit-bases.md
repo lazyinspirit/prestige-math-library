@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-klr-module-categories-are-krull-schmidt-with-shift-orbit-bases.md

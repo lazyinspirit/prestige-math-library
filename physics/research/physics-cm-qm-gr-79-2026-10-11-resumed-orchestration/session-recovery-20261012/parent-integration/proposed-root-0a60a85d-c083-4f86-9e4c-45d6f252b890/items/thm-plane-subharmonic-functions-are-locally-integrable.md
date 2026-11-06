@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-plane-subharmonic-functions-are-locally-integrable.md

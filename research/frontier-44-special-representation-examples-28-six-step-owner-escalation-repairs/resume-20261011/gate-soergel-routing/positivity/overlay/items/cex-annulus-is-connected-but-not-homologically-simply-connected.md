@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-annulus-is-connected-but-not-homologically-simply-connected.md

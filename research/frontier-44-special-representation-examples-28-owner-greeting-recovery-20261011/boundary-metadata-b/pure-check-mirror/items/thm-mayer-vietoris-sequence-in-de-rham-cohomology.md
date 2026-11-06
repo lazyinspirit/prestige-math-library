@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-mayer-vietoris-sequence-in-de-rham-cohomology.md

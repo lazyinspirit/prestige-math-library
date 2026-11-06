@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-distinct-polynomials-can-induce-the-same-finite-field-function.md

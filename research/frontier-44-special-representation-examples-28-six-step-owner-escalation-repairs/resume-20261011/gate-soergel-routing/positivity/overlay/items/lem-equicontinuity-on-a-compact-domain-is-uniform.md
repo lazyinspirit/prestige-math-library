@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-equicontinuity-on-a-compact-domain-is-uniform.md

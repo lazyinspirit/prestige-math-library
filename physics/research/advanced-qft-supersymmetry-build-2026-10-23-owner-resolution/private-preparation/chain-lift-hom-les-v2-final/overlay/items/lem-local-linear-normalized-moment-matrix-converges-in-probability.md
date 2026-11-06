@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-local-linear-normalized-moment-matrix-converges-in-probability.md

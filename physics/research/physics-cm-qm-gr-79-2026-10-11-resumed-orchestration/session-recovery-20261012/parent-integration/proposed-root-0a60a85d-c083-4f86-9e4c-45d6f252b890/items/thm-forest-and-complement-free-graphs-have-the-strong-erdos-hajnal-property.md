@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-forest-and-complement-free-graphs-have-the-strong-erdos-hajnal-property.md

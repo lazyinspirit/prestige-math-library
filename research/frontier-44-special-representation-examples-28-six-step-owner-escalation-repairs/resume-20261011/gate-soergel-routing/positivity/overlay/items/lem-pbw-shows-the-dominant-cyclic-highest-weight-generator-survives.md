@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives.md

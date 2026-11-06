@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-schubert-cells-give-the-stable-grassmannian-cw-structure.md

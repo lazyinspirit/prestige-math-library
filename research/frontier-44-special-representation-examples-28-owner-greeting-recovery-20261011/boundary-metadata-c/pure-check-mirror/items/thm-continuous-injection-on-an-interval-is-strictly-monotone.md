@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-continuous-injection-on-an-interval-is-strictly-monotone.md

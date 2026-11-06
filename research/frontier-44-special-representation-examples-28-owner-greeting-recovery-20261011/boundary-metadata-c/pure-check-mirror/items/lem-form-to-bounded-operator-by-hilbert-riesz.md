@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-form-to-bounded-operator-by-hilbert-riesz.md

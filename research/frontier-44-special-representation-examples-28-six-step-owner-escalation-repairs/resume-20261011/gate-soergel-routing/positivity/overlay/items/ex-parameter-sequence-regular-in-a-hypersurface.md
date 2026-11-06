@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-parameter-sequence-regular-in-a-hypersurface.md

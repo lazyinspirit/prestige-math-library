@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-degreewise-split-short-exact-sequence-of-complexes-has-zero-connecting-map.md

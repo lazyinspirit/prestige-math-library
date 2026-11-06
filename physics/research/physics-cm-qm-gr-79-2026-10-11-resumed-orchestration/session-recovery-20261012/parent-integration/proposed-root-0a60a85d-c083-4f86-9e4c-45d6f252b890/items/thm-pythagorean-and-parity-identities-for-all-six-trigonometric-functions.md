@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-boundary-product-function-on-a-collared-cobordism.md

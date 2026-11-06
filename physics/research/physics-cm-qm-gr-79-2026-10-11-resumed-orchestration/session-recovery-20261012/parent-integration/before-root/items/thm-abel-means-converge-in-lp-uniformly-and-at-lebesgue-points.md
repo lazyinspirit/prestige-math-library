@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-abel-means-converge-in-lp-uniformly-and-at-lebesgue-points.md

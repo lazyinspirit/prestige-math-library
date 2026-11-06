@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-self-adjoint-idempotents-are-exactly-orthogonal-projections.md

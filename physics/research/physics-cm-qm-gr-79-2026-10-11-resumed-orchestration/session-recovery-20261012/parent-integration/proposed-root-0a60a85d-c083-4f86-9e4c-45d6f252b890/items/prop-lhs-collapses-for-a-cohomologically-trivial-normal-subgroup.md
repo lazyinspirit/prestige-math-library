@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-lhs-collapses-for-a-cohomologically-trivial-normal-subgroup.md

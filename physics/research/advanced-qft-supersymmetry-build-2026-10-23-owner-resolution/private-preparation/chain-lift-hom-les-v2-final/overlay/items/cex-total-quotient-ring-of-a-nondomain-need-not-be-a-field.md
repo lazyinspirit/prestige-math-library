@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-total-quotient-ring-of-a-nondomain-need-not-be-a-field.md

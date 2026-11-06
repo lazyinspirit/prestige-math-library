@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-coordinate-reading-sequence-has-subnets-but-no-convergent-subsequence.md

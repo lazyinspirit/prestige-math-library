@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-uniqueness-of-the-scalar-laplace-transform-in-the-exponential-growth-class.md

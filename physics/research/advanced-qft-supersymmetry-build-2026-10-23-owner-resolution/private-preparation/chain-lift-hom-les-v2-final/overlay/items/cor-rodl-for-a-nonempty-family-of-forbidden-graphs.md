@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-rodl-for-a-nonempty-family-of-forbidden-graphs.md

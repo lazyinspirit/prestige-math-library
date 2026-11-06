@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-continuous-nowhere-differentiable-singular-one-simplex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-dynkin-diagram-duality-of-b-n-and-c-n.md

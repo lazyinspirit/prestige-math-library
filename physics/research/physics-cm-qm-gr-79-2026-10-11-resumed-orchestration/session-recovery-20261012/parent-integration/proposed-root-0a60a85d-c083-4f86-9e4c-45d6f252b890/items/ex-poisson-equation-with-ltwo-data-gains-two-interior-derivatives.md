@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-poisson-equation-with-ltwo-data-gains-two-interior-derivatives.md

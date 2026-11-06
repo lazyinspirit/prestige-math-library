@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-killing-form-is-nondegenerate-on-every-reductive-lie-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-l-one-l-infinity-and-l-two-bounds-interpolate-to-l-p-l-p-prime.md

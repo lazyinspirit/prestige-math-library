@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-naturality-and-uniqueness-of-thom-classes.md

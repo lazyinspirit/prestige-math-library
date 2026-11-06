@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-smooth-orientation-sign-is-the-local-integral-homology-multiplier.md

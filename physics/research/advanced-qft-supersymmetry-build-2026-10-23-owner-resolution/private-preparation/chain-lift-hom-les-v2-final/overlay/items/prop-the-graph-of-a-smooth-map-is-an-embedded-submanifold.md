@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold.md

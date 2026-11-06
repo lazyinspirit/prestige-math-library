@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-hausdorff-total-disconnectedness-and-total-separatedness-agree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complete-metric-baire-principle-implies-dependent-choice-over-zf.md

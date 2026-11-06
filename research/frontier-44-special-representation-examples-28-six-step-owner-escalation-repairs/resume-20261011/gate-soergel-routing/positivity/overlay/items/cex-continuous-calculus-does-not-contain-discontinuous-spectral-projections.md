@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-continuous-calculus-does-not-contain-discontinuous-spectral-projections.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-countable-local-bases-can-be-open-and-decreasing.md

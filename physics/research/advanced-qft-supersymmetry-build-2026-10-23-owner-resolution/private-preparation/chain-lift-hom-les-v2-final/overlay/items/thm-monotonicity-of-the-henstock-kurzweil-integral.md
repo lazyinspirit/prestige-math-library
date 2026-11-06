@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-monotonicity-of-the-henstock-kurzweil-integral.md

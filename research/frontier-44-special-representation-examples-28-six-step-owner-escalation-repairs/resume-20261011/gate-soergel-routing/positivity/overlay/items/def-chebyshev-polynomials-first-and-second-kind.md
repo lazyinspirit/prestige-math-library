@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-chebyshev-polynomials-first-and-second-kind.md

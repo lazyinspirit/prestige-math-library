@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-markov-chain-law-is-determined-by-initial-law-and-kernel.md

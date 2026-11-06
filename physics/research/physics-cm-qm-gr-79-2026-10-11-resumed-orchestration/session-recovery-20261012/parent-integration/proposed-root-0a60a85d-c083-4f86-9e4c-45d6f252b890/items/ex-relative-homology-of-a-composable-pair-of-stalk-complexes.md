@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-relative-homology-of-a-composable-pair-of-stalk-complexes.md

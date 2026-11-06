@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-parseval-and-fourier-inversion-for-compact-groups.md

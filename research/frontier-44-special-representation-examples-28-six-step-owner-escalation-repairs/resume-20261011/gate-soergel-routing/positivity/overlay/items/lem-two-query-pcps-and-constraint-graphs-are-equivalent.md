@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-query-pcps-and-constraint-graphs-are-equivalent.md

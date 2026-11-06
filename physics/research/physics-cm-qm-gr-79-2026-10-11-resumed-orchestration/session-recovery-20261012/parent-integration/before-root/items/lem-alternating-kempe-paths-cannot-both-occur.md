@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-alternating-kempe-paths-cannot-both-occur.md

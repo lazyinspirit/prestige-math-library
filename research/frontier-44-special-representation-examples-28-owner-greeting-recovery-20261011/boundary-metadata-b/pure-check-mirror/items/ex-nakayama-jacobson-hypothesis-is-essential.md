@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-nakayama-jacobson-hypothesis-is-essential.md

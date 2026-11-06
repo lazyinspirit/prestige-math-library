@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-metric-compatible-connection-on-a-riemannian-vector-bundle.md

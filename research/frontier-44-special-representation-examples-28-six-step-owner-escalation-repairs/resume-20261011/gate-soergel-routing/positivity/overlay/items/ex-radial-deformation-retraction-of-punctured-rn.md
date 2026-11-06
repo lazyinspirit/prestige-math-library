@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-radial-deformation-retraction-of-punctured-rn.md

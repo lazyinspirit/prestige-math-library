@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-coinvariant-algebra-is-a-gorenstein-algebra-with-one-dimensional-socle.md

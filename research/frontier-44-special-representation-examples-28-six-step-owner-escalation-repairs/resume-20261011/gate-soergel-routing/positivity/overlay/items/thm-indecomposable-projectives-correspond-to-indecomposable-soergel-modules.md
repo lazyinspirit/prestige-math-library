@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-indecomposable-projectives-correspond-to-indecomposable-soergel-modules.md

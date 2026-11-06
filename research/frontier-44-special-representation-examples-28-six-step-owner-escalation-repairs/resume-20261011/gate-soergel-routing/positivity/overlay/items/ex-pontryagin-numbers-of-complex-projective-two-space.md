@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-pontryagin-numbers-of-complex-projective-two-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-integrability-is-necessary-for-an-iid-finite-mean-strong-law.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-hartogs-number-of-the-naturals-is-a-limit-ordinal.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-nontrivial-finite-p-group-is-cyclic-iff-generator-rank-one.md

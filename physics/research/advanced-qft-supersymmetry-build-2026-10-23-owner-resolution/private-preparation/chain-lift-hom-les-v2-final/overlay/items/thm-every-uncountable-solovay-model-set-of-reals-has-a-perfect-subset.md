@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-uncountable-solovay-model-set-of-reals-has-a-perfect-subset.md

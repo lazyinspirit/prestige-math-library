@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nontrivial-limitwise-nullhomotopy-class-forces-compact-boundary-leaf.md

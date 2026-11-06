@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-c-zero-semigroup-is-uniformly-bounded-on-every-compact-time-interval.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-exterior-power-transition-laws-define-a-smooth-vector-bundle.md

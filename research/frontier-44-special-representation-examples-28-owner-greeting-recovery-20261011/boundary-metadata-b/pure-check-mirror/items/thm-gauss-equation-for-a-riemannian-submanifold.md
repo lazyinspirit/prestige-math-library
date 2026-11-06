@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-gauss-equation-for-a-riemannian-submanifold.md

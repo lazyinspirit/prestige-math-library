@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-normal-form-for-fundamental-groups-of-graphs-of-groups.md

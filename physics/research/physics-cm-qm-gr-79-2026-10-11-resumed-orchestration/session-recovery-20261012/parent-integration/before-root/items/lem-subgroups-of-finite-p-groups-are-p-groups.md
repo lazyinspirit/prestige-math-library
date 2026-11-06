@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-subgroups-of-finite-p-groups-are-p-groups.md

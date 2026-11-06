@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-levi-factors-are-noncanonical-but-unique-up-to-inner-unipotent-conjugacy.md

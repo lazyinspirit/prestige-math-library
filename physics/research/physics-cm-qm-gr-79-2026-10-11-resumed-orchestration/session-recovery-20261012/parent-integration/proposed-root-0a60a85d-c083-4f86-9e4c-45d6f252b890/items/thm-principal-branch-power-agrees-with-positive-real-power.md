@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-principal-branch-power-agrees-with-positive-real-power.md

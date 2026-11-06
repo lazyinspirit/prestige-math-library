@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-l-p-includes-into-l-r-on-every-measure-space-when-p-less-r.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-g-mod-h-is-a-quotient-lie-group-for-every-closed-subgroup-h.md

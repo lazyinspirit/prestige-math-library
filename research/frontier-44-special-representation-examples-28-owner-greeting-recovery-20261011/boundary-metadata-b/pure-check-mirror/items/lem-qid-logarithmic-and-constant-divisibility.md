@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-qid-logarithmic-and-constant-divisibility.md

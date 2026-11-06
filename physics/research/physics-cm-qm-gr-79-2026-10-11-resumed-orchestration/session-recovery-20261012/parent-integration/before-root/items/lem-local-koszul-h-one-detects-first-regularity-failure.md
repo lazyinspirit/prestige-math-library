@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-koszul-h-one-detects-first-regularity-failure.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm-quaternion-lift-of-a-varying-rate-about-a-fixed-axis.md

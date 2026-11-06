@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-contravariant-hom-need-not-be-right-exact.md

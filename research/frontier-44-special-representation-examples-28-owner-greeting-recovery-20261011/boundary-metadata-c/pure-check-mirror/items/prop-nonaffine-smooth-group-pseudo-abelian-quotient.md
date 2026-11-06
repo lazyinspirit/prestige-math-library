@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-nonaffine-smooth-group-pseudo-abelian-quotient.md

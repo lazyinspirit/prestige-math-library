@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups.md

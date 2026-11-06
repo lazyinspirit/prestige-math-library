@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-lax-monoidal-functor-induces-a-change-of-base-on-enriched-categories.md

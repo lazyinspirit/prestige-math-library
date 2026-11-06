@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-monoidal-functor-means-different-things-in-different-sources.md

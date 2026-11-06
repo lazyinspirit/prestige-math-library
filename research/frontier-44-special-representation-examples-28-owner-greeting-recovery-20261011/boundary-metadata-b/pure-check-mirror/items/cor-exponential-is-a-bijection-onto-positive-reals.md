@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-exponential-is-a-bijection-onto-positive-reals.md

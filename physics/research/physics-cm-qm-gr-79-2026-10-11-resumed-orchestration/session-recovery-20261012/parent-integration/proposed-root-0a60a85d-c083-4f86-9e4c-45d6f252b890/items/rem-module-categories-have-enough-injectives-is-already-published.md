@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-module-categories-have-enough-injectives-is-already-published.md

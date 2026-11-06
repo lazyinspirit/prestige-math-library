@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-koszul-betti-numbers-over-a-local-ring.md

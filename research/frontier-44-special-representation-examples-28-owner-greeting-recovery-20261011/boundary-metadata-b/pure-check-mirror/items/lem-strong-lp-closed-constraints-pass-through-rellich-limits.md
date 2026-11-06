@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-strong-lp-closed-constraints-pass-through-rellich-limits.md

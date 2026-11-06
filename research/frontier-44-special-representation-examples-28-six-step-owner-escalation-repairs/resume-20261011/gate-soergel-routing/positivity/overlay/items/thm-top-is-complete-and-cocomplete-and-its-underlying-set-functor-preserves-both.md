@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both.md

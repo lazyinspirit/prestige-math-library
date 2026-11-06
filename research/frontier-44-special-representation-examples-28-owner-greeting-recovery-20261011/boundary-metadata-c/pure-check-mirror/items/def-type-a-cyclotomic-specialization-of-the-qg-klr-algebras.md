@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-type-a-cyclotomic-specialization-of-the-qg-klr-algebras.md

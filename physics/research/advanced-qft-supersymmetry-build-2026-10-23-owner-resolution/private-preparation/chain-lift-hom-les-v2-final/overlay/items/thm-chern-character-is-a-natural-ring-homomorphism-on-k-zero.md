@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-chern-character-is-a-natural-ring-homomorphism-on-k-zero.md

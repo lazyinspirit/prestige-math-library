@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-charge-reversal-and-fock-involution-in-a-small-example.md

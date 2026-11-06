@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-lower-central-series-terms-are-characteristic-ideals.md

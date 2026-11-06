@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-kolmogorov-zero-one-law-from-reverse-martingales.md

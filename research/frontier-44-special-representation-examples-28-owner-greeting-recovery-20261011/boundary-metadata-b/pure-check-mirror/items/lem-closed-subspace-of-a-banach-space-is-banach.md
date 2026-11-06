@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-closed-subspace-of-a-banach-space-is-banach.md

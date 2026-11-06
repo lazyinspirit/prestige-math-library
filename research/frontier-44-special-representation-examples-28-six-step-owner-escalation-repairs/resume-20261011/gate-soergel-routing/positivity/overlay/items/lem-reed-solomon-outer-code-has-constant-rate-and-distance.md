@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-reed-solomon-outer-code-has-constant-rate-and-distance.md

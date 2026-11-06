@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-measurable-field-of-von-neumann-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-curves-and-geometric-intersection-numbers-on-the-marked-disk.md

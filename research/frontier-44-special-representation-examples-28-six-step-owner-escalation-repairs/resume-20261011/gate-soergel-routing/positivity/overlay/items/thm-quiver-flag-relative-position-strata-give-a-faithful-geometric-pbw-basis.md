@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quiver-flag-relative-position-strata-give-a-faithful-geometric-pbw-basis.md

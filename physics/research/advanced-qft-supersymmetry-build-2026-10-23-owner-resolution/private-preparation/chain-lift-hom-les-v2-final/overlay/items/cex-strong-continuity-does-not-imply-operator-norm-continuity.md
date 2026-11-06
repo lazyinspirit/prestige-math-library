@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-strong-continuity-does-not-imply-operator-norm-continuity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-sr-verbal-postulate-reconstruction-obligations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-graph-of-a-one-form-is-lagrangian-iff-the-one-form-is-closed.md

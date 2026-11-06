@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-compact-surface-metric-extends-across-its-boundary.md

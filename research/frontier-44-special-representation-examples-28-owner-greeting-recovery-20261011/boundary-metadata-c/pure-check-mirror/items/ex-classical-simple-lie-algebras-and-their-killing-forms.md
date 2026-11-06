@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-classical-simple-lie-algebras-and-their-killing-forms.md

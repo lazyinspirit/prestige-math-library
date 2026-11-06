@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cocountable-ultrafilter-on-uncountable-set.md

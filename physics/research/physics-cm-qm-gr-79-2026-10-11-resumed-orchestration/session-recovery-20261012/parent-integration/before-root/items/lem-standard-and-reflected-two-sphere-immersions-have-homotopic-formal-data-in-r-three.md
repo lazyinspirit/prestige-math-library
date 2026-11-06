@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three.md

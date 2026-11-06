@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pure-blockades-with-cograph-patterns-have-additive-kappa.md

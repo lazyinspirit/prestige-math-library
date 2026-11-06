@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-wkp-zero-as-a-sobolev-closure.md

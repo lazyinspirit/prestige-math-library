@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orthogonal-projection-is-linear-self-adjoint-contractive.md

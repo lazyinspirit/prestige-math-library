@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-geodesics-have-constant-speed-for-a-metric-compatible-connection.md

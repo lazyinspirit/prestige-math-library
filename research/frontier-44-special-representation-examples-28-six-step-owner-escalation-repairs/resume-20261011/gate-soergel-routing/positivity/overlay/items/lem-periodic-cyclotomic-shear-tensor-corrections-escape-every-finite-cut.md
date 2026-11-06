@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-periodic-cyclotomic-shear-tensor-corrections-escape-every-finite-cut.md

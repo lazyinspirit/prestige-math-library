@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-finite-rank-operators-are-norm-dense-in-compact-hilbert-space-operators.md

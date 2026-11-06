@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-positive-characteristic-failure-of-lies-theorem.md

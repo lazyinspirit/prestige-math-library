@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-co-bird-free-complete-nonedge-pairs-are-pure-to-induced-e-graphs.md

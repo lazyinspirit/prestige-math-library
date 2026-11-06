@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cellular-boundary-matrix-of-a-closed-orientable-surface.md

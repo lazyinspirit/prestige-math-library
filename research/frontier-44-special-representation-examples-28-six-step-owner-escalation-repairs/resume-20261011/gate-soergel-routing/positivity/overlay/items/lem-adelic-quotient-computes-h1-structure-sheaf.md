@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-adelic-quotient-computes-h1-structure-sheaf.md

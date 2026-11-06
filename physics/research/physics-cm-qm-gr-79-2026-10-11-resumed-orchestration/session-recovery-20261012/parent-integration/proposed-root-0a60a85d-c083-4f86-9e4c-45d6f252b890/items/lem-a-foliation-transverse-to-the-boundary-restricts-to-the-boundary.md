@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-foliation-transverse-to-the-boundary-restricts-to-the-boundary.md

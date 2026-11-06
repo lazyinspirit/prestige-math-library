@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-plane-curve-geometric-genus-delta-correction.md

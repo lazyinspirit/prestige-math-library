@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-local-geodesic-constant-in-a-cayley-graph.md

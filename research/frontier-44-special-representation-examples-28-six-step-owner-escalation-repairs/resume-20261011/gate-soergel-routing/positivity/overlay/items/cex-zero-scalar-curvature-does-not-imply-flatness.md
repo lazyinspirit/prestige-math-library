@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-zero-scalar-curvature-does-not-imply-flatness.md

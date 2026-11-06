@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quasiconformal-local-jacobian-energy-bound.md

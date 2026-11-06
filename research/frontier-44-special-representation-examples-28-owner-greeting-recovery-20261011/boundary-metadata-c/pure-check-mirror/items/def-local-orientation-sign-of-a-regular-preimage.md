@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-local-orientation-sign-of-a-regular-preimage.md

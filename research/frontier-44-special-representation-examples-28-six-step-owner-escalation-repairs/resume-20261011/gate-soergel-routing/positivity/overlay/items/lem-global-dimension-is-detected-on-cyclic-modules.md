@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-global-dimension-is-detected-on-cyclic-modules.md

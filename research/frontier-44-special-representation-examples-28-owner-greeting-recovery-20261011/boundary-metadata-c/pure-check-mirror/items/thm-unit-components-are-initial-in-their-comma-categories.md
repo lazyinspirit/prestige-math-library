@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-unit-components-are-initial-in-their-comma-categories.md

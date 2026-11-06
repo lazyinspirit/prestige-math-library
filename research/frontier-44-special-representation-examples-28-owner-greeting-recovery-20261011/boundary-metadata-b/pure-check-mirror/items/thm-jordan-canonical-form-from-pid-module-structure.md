@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-jordan-canonical-form-from-pid-module-structure.md

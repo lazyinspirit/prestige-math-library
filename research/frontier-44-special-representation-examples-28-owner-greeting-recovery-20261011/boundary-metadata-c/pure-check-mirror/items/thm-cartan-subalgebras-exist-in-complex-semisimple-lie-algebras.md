@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras.md

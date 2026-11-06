@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-type-a-affine-presentations-and-charged-cyclotomic-quotients.md

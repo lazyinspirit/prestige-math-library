@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-every-oriented-link-admits-a-regular-projection.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-an-extraspecial-p-group-has-a-complement-to-its-centre.md

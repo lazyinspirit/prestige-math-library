@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence.md

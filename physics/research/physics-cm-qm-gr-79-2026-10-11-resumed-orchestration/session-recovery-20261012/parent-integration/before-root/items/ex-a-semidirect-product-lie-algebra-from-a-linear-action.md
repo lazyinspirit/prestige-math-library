@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-semidirect-product-lie-algebra-from-a-linear-action.md

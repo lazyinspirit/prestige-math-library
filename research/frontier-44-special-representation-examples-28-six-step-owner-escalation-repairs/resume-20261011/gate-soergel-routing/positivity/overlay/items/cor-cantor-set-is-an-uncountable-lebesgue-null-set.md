@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-cantor-set-is-an-uncountable-lebesgue-null-set.md

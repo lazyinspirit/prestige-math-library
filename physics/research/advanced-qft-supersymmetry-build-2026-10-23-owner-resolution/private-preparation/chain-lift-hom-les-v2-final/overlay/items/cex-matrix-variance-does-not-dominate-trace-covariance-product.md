@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-matrix-variance-does-not-dominate-trace-covariance-product.md

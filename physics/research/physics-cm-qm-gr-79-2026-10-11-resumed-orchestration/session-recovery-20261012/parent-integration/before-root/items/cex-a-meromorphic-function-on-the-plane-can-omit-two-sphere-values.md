@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-meromorphic-function-on-the-plane-can-omit-two-sphere-values.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-contraction-recovers-primary-component-after-localising-away-from-radical.md

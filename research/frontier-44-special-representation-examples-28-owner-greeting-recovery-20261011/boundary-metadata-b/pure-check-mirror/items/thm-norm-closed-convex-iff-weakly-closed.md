@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-norm-closed-convex-iff-weakly-closed.md

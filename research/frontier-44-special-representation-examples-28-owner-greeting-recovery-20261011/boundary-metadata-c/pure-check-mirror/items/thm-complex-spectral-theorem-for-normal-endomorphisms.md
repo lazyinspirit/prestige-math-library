@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-spectral-theorem-for-normal-endomorphisms.md

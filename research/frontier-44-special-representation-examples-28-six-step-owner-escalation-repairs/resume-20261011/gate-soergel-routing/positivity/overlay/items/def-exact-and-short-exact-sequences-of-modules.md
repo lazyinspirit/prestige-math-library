@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-exact-and-short-exact-sequences-of-modules.md

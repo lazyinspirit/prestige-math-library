@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-grothendieck-group-of-an-essentially-small-abelian-category.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-arc-and-wide-edge-khovanov-rozansky-factorizations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rudin-bounded-cofinality-hull-transfer.md

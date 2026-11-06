@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-submartingale-doob-decomposition-has-increasing-compensator.md

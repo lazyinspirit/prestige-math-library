@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-covering-spaces-are-stable-under-restriction-finite-products-and-pullback.md

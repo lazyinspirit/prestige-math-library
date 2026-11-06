@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-extension-problem-of-a-convergent-spectral-sequence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-pointed-metric-group-is-modular-iff-radical-trivial.md

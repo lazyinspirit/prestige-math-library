@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kernel-subgroup-in-a-group-extension-is-normal-and-the-quotient-is-the-base.md

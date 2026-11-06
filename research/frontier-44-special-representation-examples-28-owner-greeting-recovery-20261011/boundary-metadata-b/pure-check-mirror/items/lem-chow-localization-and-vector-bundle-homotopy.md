@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-chow-localization-and-vector-bundle-homotopy.md

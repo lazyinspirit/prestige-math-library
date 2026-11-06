@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence.md

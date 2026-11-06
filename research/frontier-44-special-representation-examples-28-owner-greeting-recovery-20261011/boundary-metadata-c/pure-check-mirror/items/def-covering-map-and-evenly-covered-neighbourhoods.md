@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-covering-map-and-evenly-covered-neighbourhoods.md

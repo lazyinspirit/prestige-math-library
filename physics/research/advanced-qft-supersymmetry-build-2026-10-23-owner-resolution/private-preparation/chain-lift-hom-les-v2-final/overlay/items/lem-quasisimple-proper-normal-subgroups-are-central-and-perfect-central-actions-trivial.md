@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-quasisimple-proper-normal-subgroups-are-central-and-perfect-central-actions-trivial.md

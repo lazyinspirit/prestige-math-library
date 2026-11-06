@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-identical-e-two-pages-with-different-later-differentials.md

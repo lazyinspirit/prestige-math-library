@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-dual-pairing-between-opposite-principal-series-parameters.md

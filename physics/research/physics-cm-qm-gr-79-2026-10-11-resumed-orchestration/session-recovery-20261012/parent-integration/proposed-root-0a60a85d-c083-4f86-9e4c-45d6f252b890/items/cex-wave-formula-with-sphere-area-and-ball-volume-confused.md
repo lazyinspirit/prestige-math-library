@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-wave-formula-with-sphere-area-and-ball-volume-confused.md

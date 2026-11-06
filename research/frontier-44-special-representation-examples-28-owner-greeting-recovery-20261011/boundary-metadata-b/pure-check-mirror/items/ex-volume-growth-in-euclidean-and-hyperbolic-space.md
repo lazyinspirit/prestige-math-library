@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-volume-growth-in-euclidean-and-hyperbolic-space.md

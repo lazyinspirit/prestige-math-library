@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-increasing-unions-of-monotone-classes-are-monotone-classes.md

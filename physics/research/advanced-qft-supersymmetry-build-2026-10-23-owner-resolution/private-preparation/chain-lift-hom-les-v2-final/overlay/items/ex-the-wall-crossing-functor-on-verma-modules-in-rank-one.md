@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-wall-crossing-functor-on-verma-modules-in-rank-one.md

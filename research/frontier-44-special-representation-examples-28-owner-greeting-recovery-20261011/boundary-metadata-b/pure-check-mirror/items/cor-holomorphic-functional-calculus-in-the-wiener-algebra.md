@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-holomorphic-functional-calculus-in-the-wiener-algebra.md

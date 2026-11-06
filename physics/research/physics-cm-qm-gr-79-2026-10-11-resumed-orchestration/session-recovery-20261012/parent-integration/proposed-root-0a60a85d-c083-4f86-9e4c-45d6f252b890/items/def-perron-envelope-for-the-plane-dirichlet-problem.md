@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-perron-envelope-for-the-plane-dirichlet-problem.md

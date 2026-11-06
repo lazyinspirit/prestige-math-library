@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-co-e-free-external-purity-survives-h-five-overlap-quotients.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-first-quadrant-filtered-complex-spectral-sequence-converges-to-filtered-homology.md

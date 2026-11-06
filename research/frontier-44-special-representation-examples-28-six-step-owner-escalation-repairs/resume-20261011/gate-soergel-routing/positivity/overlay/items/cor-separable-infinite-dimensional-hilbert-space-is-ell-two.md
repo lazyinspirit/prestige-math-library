@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-separable-infinite-dimensional-hilbert-space-is-ell-two.md

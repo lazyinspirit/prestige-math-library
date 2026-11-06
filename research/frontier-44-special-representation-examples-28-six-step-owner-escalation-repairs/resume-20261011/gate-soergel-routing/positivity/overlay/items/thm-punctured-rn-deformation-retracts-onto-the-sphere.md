@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-punctured-rn-deformation-retracts-onto-the-sphere.md

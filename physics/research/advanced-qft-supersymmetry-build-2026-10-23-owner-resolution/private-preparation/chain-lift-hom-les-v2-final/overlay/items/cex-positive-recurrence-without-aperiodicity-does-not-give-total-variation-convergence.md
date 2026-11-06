@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-positive-recurrence-without-aperiodicity-does-not-give-total-variation-convergence.md

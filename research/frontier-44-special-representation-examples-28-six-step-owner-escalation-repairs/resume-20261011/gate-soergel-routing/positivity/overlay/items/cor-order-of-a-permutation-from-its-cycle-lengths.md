@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-order-of-a-permutation-from-its-cycle-lengths.md

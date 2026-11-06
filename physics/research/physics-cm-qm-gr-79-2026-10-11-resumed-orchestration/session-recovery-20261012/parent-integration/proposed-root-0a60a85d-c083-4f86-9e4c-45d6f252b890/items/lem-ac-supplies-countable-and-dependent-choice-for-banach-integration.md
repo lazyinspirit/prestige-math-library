@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ac-supplies-countable-and-dependent-choice-for-banach-integration.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-power-congruence-solution-count-modulo-a-prime.md

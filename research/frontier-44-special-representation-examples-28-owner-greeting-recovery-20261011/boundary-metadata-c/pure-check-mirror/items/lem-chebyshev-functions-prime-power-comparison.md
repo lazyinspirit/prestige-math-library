@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-chebyshev-functions-prime-power-comparison.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-inconsistent-system-detected-by-a-pivot.md

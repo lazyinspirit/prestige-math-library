@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-dj-bridge-untwisted-conjugation-changes-the-module.md

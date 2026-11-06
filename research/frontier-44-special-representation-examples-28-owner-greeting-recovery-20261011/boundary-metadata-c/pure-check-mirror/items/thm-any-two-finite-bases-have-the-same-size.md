@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-any-two-finite-bases-have-the-same-size.md

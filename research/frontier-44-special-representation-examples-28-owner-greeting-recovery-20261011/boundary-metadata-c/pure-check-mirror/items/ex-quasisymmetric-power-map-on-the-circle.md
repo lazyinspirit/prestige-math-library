@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-quasisymmetric-power-map-on-the-circle.md

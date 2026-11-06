@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-one-densities-form-a-one-dimensional-vector-space.md

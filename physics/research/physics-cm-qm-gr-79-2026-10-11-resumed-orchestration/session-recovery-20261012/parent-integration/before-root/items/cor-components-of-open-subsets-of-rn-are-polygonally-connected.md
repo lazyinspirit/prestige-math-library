@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-components-of-open-subsets-of-rn-are-polygonally-connected.md

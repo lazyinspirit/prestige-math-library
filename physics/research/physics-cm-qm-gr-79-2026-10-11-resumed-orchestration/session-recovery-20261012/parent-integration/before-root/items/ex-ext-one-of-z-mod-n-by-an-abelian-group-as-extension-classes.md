@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-ext-one-of-z-mod-n-by-an-abelian-group-as-extension-classes.md

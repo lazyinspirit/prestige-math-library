@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-strong-maximum-principle-needs-connectedness.md

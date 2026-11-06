@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-gauss-bonnet-for-a-surface-with-boundary-has-no-boundary-term.md

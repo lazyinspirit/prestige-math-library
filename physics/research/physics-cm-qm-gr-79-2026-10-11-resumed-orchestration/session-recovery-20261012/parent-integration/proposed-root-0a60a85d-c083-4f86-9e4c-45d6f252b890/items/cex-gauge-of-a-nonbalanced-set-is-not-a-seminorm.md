@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gauge-of-a-nonbalanced-set-is-not-a-seminorm.md

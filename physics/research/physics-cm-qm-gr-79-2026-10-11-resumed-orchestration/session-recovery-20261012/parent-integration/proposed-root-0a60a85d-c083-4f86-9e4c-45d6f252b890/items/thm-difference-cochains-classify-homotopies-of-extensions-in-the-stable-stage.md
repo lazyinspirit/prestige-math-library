@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-difference-cochains-classify-homotopies-of-extensions-in-the-stable-stage.md

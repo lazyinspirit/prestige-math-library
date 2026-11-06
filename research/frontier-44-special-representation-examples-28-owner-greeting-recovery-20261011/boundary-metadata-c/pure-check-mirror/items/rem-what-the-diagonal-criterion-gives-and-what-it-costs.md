@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-what-the-diagonal-criterion-gives-and-what-it-costs.md

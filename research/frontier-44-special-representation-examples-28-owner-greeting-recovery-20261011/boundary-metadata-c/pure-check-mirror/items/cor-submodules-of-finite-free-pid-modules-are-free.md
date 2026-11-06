@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-submodules-of-finite-free-pid-modules-are-free.md

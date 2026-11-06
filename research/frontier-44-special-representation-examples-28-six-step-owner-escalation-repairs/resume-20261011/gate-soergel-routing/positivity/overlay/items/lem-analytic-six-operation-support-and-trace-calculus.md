@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-analytic-six-operation-support-and-trace-calculus.md

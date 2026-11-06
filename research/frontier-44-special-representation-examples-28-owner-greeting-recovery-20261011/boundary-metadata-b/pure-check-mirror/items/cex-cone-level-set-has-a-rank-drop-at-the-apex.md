@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-cone-level-set-has-a-rank-drop-at-the-apex.md

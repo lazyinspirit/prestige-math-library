@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-null-homology-is-equivalent-to-global-harmonic-conjugates.md

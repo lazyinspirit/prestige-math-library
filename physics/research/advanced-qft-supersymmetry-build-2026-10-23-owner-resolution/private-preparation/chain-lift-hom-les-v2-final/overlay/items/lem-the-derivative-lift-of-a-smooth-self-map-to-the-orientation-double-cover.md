@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-derivative-lift-of-a-smooth-self-map-to-the-orientation-double-cover.md

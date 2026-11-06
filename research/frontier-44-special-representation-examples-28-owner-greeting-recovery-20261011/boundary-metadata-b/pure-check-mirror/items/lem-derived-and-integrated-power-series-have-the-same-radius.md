@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-derived-and-integrated-power-series-have-the-same-radius.md

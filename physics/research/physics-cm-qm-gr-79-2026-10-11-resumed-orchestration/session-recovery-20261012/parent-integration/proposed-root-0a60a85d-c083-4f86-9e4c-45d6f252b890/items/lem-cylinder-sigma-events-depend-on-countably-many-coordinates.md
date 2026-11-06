@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cylinder-sigma-events-depend-on-countably-many-coordinates.md

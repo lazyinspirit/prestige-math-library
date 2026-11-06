@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-filtered-colimits-commute-with-sheaf-cohomology-on-noetherian-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-boundary-convergent-power-series-no-larger-holomorphic-disc.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-nonabelian-group-of-order-p-cubed-is-extraspecial.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonzero-number-field-ideal-has-finite-quotient.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-artin-tate-finite-intermediate-algebra.md

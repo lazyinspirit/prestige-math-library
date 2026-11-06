@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-indefinite-form-admits-faithful-reflection-representation.md

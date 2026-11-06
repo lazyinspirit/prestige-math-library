@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-curvature-is-obtained-by-commuting-two-covariant-derivatives-without-a-bracket-correction.md

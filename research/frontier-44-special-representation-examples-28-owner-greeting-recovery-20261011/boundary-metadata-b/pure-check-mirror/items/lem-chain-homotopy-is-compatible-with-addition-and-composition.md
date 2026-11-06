@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-chain-homotopy-is-compatible-with-addition-and-composition.md

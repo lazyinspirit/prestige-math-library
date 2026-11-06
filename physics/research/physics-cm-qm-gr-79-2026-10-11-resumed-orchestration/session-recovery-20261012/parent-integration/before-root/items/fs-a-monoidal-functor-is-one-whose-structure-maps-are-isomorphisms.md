@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-monoidal-functor-is-one-whose-structure-maps-are-isomorphisms.md

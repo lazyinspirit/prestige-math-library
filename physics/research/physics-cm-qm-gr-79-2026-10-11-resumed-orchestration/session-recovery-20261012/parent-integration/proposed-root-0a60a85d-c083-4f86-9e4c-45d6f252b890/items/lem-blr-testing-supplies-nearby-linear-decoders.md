@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-blr-testing-supplies-nearby-linear-decoders.md

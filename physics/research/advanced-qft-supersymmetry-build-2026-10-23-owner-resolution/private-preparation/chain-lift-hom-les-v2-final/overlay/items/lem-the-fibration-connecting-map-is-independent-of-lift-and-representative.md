@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-fibration-connecting-map-is-independent-of-lift-and-representative.md

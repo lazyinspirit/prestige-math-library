@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-upper-and-lower-global-bases-are-dual-and-crystal-compatible.md

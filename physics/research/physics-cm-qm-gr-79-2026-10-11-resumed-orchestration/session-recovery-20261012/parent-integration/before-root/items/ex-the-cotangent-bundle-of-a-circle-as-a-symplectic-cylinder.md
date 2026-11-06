@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-cotangent-bundle-of-a-circle-as-a-symplectic-cylinder.md

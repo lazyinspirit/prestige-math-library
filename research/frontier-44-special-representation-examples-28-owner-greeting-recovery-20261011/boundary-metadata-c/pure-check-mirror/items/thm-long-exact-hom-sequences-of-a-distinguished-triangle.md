@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-long-exact-hom-sequences-of-a-distinguished-triangle.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-closed-immersion-preserves-sheaf-cohomology.md

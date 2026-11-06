@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-primitive-ideal-of-an-enveloping-algebra.md

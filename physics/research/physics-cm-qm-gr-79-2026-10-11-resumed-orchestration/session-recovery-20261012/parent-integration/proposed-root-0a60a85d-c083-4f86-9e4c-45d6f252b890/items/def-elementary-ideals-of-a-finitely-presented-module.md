@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-elementary-ideals-of-a-finitely-presented-module.md

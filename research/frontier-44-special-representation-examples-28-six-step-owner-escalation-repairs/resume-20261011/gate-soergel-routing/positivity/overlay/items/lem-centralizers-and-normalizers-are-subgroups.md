@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-centralizers-and-normalizers-are-subgroups.md

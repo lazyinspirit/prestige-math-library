@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-coimage-projection-is-epic-and-the-image-inclusion-is-monic.md

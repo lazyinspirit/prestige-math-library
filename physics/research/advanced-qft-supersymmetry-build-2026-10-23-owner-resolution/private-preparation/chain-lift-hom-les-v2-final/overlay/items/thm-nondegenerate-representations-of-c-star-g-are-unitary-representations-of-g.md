@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-nondegenerate-representations-of-c-star-g-are-unitary-representations-of-g.md

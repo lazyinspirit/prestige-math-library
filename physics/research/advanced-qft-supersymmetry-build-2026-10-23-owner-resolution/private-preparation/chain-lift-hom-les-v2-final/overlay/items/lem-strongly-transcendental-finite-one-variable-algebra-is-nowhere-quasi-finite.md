@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-strongly-transcendental-finite-one-variable-algebra-is-nowhere-quasi-finite.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-square-of-a-martingale-minus-quadratic-compensator.md

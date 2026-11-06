@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-zero-ideal-prime-not-maximal-in-z.md

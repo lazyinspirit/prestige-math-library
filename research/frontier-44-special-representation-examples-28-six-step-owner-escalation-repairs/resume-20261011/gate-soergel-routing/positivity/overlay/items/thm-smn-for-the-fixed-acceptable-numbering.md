@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-smn-for-the-fixed-acceptable-numbering.md

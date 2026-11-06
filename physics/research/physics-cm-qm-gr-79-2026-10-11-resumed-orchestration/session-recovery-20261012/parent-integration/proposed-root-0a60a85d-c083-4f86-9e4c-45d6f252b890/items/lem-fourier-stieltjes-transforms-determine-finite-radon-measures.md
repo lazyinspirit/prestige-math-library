@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fourier-stieltjes-transforms-determine-finite-radon-measures.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-positive-and-negative-khovanov-rozansky-crossing-complexes.md

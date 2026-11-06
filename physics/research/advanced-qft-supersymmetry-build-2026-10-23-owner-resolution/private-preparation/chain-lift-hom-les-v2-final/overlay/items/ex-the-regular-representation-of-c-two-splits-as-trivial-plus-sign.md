@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-regular-representation-of-c-two-splits-as-trivial-plus-sign.md

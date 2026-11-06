@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-countable-partitions-can-be-strictly-better-than-finite-ones-for-a-complex-measure.md

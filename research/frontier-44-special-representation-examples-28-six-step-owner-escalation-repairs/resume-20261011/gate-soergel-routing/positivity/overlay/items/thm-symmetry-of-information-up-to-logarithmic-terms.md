@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-symmetry-of-information-up-to-logarithmic-terms.md

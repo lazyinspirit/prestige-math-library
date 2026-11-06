@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-simple-positive-braids-are-indexed-by-permutations.md

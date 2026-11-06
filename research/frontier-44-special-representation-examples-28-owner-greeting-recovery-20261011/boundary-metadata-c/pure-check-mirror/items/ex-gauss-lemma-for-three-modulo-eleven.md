@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-gauss-lemma-for-three-modulo-eleven.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-piecewise-smooth-coefficient-produces-limited-regularity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-semiadditive-category-is-preadditive-exactly-when-every-morphism-has-an-additive-inverse.md

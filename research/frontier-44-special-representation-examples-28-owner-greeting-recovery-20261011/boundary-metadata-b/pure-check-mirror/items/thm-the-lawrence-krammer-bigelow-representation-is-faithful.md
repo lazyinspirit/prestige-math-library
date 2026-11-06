@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-lawrence-krammer-bigelow-representation-is-faithful.md

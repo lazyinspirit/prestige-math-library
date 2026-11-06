@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-symplectic-manifolds-can-have-odd-dimension.md

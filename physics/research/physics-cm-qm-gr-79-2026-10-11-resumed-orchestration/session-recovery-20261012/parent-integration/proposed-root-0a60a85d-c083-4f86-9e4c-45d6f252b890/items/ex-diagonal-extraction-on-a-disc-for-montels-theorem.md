@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-diagonal-extraction-on-a-disc-for-montels-theorem.md

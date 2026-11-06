@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-tensor-and-direct-sum-models-of-complexification-agree.md

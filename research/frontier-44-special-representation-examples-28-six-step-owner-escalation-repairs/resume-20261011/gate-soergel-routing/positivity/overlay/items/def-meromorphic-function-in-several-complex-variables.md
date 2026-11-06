@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-meromorphic-function-in-several-complex-variables.md

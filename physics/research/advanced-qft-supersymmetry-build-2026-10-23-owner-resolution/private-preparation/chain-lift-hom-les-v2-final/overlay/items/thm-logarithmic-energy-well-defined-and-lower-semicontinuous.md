@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-logarithmic-energy-well-defined-and-lower-semicontinuous.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-symmetric-matrices-are-congruent-to-diagonal-matrices.md

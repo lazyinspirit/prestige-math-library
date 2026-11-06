@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-z-over-n-shows-why-hurwitz-needs-the-or-constant-clause.md

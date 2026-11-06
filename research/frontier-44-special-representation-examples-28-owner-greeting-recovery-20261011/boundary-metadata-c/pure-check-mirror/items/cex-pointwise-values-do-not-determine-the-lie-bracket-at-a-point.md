@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-pointwise-values-do-not-determine-the-lie-bracket-at-a-point.md

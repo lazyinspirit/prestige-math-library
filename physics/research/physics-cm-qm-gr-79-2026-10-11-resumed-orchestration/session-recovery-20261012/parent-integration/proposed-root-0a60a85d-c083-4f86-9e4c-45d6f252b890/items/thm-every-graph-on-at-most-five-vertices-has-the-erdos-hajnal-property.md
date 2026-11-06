@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property.md

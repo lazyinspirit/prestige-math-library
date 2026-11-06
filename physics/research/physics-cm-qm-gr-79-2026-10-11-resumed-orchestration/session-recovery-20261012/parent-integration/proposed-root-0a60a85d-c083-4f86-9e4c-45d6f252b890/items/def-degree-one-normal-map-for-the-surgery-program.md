@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-degree-one-normal-map-for-the-surgery-program.md

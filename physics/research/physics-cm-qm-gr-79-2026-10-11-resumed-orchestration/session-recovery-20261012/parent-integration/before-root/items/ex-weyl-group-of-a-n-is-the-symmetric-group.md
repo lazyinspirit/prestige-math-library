@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weyl-group-of-a-n-is-the-symmetric-group.md

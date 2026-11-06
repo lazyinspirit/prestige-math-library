@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-convergence-of-the-baker-campbell-hausdorff-series.md

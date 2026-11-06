@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-strip-to-disc-biholomorphism-by-exponential-and-cayley.md

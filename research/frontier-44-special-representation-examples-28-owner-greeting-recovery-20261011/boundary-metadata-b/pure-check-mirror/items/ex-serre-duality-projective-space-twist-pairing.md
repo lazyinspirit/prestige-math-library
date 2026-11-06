@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-serre-duality-projective-space-twist-pairing.md

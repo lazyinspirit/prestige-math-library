@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-oriented-grassmannian-has-two-lifted-schubert-cells.md

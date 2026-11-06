@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law.md

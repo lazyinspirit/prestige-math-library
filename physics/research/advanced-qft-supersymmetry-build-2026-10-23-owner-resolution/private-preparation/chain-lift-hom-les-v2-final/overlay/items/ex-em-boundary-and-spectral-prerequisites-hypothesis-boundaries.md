@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-em-boundary-and-spectral-prerequisites-hypothesis-boundaries.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-separable-group-c-star-representations-disintegrate-over-a-commuting-diagonal-algebra.md

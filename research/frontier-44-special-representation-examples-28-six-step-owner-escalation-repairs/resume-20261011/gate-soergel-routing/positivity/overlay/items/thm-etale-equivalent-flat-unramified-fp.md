@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-etale-equivalent-flat-unramified-fp.md

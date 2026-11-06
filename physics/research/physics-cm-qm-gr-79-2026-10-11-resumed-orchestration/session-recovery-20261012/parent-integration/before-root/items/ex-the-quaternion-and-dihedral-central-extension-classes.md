@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-quaternion-and-dihedral-central-extension-classes.md

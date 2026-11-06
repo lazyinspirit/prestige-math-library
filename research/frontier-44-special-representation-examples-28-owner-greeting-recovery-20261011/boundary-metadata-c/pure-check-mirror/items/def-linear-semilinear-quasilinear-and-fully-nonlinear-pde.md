@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-linear-semilinear-quasilinear-and-fully-nonlinear-pde.md

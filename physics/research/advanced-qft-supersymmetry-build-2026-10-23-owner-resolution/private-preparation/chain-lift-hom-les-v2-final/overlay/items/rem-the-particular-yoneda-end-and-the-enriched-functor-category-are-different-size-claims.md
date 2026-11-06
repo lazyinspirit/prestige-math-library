@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-particular-yoneda-end-and-the-enriched-functor-category-are-different-size-claims.md

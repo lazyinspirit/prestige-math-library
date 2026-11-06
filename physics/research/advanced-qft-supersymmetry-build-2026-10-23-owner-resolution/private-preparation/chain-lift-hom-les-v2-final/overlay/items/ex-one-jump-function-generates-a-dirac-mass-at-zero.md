@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-one-jump-function-generates-a-dirac-mass-at-zero.md

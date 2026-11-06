@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-borels-binary-normality-exception-is-uncountable-and-null.md

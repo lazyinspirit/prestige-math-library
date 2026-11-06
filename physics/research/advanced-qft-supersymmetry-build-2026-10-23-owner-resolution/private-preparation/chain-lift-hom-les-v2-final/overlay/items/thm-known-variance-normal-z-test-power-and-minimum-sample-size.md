@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-known-variance-normal-z-test-power-and-minimum-sample-size.md

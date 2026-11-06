@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding.md

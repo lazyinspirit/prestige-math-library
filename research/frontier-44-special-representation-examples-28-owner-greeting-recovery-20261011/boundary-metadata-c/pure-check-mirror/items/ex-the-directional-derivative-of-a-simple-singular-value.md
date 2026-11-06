@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-directional-derivative-of-a-simple-singular-value.md

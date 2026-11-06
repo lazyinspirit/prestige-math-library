@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-metric-spaces-have-sigma-discrete-open-bases.md

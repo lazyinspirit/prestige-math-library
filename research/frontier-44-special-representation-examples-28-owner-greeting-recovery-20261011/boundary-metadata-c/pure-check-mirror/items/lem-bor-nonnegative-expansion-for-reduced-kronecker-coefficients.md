@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bor-nonnegative-expansion-for-reduced-kronecker-coefficients.md

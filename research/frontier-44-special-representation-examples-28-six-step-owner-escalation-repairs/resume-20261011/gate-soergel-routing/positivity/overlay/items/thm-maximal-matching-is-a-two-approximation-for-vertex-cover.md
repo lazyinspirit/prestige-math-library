@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-maximal-matching-is-a-two-approximation-for-vertex-cover.md

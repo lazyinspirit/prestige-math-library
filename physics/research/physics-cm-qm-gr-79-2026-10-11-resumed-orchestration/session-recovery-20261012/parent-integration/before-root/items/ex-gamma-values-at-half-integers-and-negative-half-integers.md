@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gamma-values-at-half-integers-and-negative-half-integers.md

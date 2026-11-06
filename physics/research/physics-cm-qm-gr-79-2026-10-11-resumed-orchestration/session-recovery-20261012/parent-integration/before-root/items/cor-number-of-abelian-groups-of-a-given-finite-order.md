@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-number-of-abelian-groups-of-a-given-finite-order.md

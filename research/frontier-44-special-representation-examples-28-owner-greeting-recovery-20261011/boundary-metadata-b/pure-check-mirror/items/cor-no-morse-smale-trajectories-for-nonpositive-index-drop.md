@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-no-morse-smale-trajectories-for-nonpositive-index-drop.md

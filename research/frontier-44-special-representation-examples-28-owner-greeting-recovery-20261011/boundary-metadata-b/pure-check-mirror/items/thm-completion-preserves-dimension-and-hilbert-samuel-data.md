@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-completion-preserves-dimension-and-hilbert-samuel-data.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-graded-decomposition-numbers-equal-canonical-basis-coefficients-in-characteristic-zero.md

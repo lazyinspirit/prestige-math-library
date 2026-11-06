@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-sampled-polynomial-inner-product-on-degree-at-most-three.md

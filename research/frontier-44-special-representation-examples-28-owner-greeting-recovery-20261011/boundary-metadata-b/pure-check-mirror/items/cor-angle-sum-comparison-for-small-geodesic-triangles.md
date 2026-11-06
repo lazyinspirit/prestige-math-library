@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-angle-sum-comparison-for-small-geodesic-triangles.md

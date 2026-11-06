@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-classical-solutions-satisfy-the-weak-conservation-law.md

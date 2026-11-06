@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-stable-pontryagin-thom-identifies-framed-bordism-with-stable-stems.md

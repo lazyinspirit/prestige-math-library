@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reduced-burau-detects-every-power-of-delta-to-the-fourth-in-b-three.md

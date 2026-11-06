@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-absolutely-continuous-upper-quantile-exact-tail-mass.md

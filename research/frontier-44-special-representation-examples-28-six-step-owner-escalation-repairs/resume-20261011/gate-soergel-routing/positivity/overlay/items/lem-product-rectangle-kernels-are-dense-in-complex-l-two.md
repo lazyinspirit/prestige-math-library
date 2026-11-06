@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-product-rectangle-kernels-are-dense-in-complex-l-two.md

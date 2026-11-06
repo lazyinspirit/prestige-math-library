@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-groups-have-discrete-duals-and-discrete-groups-have-compact-duals.md

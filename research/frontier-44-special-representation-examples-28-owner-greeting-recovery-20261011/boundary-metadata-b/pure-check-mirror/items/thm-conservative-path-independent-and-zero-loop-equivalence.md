@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-conservative-path-independent-and-zero-loop-equivalence.md

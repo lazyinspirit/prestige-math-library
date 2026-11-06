@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-four-has-a-normal-klein-four-subgroup-and-four-conjugacy-classes.md

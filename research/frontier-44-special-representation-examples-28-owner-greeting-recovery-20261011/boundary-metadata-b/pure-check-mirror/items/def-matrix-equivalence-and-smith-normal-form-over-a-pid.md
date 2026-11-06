@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-matrix-equivalence-and-smith-normal-form-over-a-pid.md

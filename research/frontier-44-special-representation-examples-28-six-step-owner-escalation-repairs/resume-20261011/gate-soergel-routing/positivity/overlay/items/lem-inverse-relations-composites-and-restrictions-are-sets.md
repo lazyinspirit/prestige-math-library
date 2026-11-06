@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-inverse-relations-composites-and-restrictions-are-sets.md

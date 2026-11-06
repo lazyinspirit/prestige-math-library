@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-conditioning-on-trivial-and-full-sigma-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-projective-span-homotopy-pushout-mapping-property.md

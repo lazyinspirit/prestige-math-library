@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-locally-compact-hausdorff-space-is-completely-regular.md

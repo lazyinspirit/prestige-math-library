@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-symmetric-group-level-one-residue-and-partition-label-convention.md

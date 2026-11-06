@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector.md

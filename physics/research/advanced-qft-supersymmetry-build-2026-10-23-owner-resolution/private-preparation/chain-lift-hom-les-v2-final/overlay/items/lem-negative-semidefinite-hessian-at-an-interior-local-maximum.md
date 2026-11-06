@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-negative-semidefinite-hessian-at-an-interior-local-maximum.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-unsigned-bruhat-edge-sums-need-not-square-to-zero.md

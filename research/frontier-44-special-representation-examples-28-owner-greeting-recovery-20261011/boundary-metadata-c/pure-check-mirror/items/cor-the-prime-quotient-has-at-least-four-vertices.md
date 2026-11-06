@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-prime-quotient-has-at-least-four-vertices.md

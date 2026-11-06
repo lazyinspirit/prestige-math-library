@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hh-colored-permutation-rsk-and-tableau-square-count.md

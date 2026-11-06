@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hnn-extension-realising-two-conjugate-subgroups.md

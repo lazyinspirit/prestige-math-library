@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-morphisms-from-a-homotopically-projective-complex-need-no-roof.md

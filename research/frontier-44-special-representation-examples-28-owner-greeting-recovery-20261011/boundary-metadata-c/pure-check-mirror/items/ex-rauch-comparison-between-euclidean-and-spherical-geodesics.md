@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-rauch-comparison-between-euclidean-and-spherical-geodesics.md

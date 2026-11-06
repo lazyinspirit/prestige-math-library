@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-intervals-and-euclidean-spaces-are-contractible.md

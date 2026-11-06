@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-punctured-domains-and-truncated-cones-with-explicit-faces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-contiguous-maps-of-a-subdivided-interval.md

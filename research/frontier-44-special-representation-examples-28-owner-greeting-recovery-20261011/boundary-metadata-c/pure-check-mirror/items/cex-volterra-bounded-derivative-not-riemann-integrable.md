@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-volterra-bounded-derivative-not-riemann-integrable.md

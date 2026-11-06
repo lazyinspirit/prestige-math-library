@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-group-actions-correspond-to-homomorphisms.md

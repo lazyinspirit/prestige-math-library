@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hyperbolicity-is-transported-by-a-quasi-isometry.md

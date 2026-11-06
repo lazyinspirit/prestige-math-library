@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-dirichlet-convolution-preserves-multiplicativity.md

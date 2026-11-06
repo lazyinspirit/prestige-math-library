@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-divergence-theorem-for-an-elementary-solid-region.md

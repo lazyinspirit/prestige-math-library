@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-uncountable-cantor-cube-uniformizable-not-first-countable.md

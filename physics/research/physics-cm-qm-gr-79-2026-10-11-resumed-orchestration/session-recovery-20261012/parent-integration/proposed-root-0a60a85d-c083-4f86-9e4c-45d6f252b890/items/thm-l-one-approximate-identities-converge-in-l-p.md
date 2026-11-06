@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-l-one-approximate-identities-converge-in-l-p.md

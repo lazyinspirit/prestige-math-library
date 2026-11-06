@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-decomposition-into-irreducible-summands-need-not-be-unique.md

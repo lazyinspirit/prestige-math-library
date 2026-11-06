@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-classification-of-laplace-heat-and-wave-equations.md

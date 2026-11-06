@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-generator-separator-and-the-three-inequivalent-looking-definitions.md

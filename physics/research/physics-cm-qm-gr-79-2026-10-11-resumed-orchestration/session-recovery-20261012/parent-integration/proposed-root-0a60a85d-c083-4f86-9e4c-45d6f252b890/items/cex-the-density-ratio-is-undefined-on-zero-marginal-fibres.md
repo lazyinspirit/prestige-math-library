@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-density-ratio-is-undefined-on-zero-marginal-fibres.md

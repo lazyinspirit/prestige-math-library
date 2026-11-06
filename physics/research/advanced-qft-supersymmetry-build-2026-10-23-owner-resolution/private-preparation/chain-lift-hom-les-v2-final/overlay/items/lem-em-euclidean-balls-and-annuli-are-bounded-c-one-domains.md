@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-em-euclidean-balls-and-annuli-are-bounded-c-one-domains.md

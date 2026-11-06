@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-integrable-simple-functions-are-dense-in-l-one.md

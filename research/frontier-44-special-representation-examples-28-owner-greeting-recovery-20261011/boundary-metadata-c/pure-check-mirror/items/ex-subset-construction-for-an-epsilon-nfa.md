@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-subset-construction-for-an-epsilon-nfa.md

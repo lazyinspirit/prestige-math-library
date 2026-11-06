@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-same-finite-quotients-do-not-trivially-identify-abstract-groups.md

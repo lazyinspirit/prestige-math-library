@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group.md

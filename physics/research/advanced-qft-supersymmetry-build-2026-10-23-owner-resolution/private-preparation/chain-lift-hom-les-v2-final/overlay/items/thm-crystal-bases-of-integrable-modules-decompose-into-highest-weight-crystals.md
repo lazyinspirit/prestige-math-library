@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-crystal-bases-of-integrable-modules-decompose-into-highest-weight-crystals.md

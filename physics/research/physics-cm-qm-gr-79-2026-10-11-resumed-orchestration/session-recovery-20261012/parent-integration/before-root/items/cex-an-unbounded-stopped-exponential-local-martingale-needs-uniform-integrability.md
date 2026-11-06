@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-unbounded-stopped-exponential-local-martingale-needs-uniform-integrability.md

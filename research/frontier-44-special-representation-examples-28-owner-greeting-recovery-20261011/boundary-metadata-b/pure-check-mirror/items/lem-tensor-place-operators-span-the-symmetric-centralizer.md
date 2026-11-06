@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-tensor-place-operators-span-the-symmetric-centralizer.md

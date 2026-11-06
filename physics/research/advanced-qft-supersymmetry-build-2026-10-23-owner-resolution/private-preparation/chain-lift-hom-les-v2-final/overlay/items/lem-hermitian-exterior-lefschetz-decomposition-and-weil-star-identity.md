@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-hermitian-exterior-lefschetz-decomposition-and-weil-star-identity.md

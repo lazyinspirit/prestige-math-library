@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-regular-values-have-null-complement-and-are-dense.md

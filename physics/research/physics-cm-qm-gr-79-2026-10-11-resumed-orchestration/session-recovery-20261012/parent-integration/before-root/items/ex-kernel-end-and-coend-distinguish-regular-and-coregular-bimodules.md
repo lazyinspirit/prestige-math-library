@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-kernel-end-and-coend-distinguish-regular-and-coregular-bimodules.md

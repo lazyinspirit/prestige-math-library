@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules.md

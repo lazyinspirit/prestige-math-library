@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-parametric-immersion-extension-on-a-disk.md

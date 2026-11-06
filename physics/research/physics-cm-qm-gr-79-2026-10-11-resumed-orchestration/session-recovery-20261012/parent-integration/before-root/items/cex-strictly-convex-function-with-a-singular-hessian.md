@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-strictly-convex-function-with-a-singular-hessian.md

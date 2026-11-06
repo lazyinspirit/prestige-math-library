@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-handle-decomposition-relative-to-the-incoming-boundary.md

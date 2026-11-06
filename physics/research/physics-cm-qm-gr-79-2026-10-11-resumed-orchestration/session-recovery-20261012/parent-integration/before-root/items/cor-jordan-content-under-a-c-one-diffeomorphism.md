@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-jordan-content-under-a-c-one-diffeomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-adjoints-are-unique-up-to-unique-natural-isomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-critical-point-free-noncompact-band-need-not-be-a-global-product.md

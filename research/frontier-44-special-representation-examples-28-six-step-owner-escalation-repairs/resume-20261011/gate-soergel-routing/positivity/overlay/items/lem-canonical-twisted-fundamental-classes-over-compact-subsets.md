@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-canonical-twisted-fundamental-classes-over-compact-subsets.md

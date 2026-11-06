@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-quiver-full-flag-incidence-varieties-and-geometric-klr-generators.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-truncated-centering-weak-law-with-infinite-mean.md

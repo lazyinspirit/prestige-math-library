@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-resolvent-and-spectrum-of-a-closed-unbounded-operator.md

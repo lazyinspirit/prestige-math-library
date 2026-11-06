@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-mobius-and-trivial-real-lines-over-the-circle.md

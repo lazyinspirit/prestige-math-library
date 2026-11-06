@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-coordinate-projection-onto-a-subspace-of-c-three.md

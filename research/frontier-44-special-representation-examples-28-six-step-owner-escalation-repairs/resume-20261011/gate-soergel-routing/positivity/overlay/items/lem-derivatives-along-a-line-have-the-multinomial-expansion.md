@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-derivatives-along-a-line-have-the-multinomial-expansion.md

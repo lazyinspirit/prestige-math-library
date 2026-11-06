@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-zariski-braid-combing-words-alpha-and-x.md

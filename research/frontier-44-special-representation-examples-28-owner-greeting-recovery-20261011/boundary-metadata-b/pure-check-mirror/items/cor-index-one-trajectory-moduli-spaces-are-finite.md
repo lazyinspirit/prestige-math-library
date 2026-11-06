@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-index-one-trajectory-moduli-spaces-are-finite.md

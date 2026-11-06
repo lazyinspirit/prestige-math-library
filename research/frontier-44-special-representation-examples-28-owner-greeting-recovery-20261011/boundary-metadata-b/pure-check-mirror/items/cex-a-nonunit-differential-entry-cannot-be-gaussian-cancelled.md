@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-nonunit-differential-entry-cannot-be-gaussian-cancelled.md

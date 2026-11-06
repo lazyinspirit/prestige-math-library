@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-smoothness-into-an-embedded-submanifold-is-an-initial-property.md

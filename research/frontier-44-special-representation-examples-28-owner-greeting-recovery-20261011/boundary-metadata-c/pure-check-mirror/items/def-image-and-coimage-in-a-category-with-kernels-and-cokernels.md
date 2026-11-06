@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-image-and-coimage-in-a-category-with-kernels-and-cokernels.md

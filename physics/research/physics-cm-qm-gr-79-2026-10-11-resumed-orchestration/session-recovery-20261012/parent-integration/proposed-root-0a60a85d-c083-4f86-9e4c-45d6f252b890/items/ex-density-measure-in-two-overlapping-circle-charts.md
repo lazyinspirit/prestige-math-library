@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-density-measure-in-two-overlapping-circle-charts.md

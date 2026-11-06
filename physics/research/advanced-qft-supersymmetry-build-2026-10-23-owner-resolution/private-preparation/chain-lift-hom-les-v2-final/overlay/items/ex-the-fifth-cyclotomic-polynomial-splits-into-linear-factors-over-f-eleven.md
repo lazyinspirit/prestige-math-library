@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-fifth-cyclotomic-polynomial-splits-into-linear-factors-over-f-eleven.md

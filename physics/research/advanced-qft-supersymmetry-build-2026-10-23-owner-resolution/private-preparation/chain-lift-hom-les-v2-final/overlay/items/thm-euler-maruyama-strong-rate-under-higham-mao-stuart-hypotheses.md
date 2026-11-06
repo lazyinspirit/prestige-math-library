@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-two-open-set-de-rham-mayer-vietoris-cochain-maps.md

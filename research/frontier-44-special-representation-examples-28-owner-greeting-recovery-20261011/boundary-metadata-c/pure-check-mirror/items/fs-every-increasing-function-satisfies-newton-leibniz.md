@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-increasing-function-satisfies-newton-leibniz.md

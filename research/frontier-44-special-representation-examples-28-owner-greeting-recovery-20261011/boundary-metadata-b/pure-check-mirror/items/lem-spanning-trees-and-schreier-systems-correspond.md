@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-spanning-trees-and-schreier-systems-correspond.md

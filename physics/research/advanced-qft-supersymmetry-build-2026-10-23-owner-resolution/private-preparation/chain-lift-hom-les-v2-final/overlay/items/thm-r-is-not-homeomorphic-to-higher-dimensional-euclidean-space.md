@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-r-is-not-homeomorphic-to-higher-dimensional-euclidean-space.md

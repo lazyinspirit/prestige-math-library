@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-functions-are-equal-exactly-when-they-agree-at-every-point.md

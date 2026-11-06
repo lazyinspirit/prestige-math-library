@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-normal-finite-type-surface-resolution-globalizes-from-complete-local-points.md

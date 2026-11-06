@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-riemann-zeta-is-given-by-its-dirichlet-series-for-all-s-not-one.md

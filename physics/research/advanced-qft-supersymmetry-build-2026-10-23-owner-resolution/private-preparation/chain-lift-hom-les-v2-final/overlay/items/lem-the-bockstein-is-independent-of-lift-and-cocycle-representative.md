@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-bockstein-is-independent-of-lift-and-cocycle-representative.md

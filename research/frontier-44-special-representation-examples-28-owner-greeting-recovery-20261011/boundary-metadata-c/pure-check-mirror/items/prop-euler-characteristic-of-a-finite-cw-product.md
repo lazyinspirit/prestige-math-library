@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-euler-characteristic-of-a-finite-cw-product.md

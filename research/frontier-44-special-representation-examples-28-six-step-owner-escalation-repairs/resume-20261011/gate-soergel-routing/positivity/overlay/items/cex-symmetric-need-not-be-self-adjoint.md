@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-symmetric-need-not-be-self-adjoint.md

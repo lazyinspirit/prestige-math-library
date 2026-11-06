@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-cauchy-kovalevskaya-is-an-analytic-not-smooth-well-posedness-theorem.md

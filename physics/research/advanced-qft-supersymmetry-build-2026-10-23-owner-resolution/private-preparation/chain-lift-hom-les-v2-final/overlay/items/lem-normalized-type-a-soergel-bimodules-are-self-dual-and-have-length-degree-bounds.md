@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-normalized-type-a-soergel-bimodules-are-self-dual-and-have-length-degree-bounds.md

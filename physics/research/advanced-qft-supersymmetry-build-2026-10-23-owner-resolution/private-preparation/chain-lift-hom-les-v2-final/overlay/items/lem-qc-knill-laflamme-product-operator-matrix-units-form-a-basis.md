@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-qc-knill-laflamme-product-operator-matrix-units-form-a-basis.md

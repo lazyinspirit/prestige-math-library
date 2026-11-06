@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-adjunct-and-transposition-under-an-adjunction.md

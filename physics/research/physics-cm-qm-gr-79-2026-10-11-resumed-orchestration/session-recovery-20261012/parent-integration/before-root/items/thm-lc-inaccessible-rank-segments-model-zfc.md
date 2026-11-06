@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lc-inaccessible-rank-segments-model-zfc.md

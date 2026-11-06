@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-c2-surfaces-admit-finite-cellulations-relative-to-a-finite-embedded-graph.md

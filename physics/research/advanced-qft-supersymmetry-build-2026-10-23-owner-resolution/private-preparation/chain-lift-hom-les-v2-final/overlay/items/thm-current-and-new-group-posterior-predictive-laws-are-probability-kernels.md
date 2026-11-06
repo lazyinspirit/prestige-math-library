@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-current-and-new-group-posterior-predictive-laws-are-probability-kernels.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sr-reverse-cauchy-schwarz-fails-outside-the-cone-pair.md

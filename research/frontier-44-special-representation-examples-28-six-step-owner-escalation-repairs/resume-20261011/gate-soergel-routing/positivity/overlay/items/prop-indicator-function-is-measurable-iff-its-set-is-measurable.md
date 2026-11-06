@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-indicator-function-is-measurable-iff-its-set-is-measurable.md

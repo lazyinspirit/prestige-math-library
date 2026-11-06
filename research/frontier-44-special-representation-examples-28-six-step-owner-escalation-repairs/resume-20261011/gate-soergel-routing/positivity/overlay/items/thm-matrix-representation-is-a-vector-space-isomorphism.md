@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-matrix-representation-is-a-vector-space-isomorphism.md

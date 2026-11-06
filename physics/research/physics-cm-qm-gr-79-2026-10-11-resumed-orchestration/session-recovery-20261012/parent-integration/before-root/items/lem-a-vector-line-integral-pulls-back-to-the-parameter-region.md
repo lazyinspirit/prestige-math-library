@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-vector-line-integral-pulls-back-to-the-parameter-region.md

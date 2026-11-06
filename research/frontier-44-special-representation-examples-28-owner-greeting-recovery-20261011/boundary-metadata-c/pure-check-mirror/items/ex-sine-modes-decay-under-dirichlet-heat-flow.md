@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-sine-modes-decay-under-dirichlet-heat-flow.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-degree-one-kostant-classes-correspond-to-simple-reflections.md

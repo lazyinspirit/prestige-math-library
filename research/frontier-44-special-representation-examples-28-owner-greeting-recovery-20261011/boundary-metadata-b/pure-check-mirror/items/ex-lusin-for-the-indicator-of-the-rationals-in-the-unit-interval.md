@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-lusin-for-the-indicator-of-the-rationals-in-the-unit-interval.md

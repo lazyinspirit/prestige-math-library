@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-murnaghan-stability-for-alpha-beta-two.md

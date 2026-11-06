@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cyclotomic-polynomials-are-irreducible-over-the-rationals.md

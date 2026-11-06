@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-products-of-complex-projective-spaces-span-rational-oriented-bordism.md

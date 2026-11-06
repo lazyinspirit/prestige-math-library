@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-analytic-duhamel-cancellation-removes-the-generator-singularity.md

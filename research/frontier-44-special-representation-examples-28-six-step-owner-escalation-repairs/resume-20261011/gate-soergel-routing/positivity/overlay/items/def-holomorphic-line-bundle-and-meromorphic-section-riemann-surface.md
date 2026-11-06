@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima.md

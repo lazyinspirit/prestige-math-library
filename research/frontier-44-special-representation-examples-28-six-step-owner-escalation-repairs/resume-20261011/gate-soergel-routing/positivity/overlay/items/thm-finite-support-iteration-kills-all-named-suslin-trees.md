@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-support-iteration-kills-all-named-suslin-trees.md

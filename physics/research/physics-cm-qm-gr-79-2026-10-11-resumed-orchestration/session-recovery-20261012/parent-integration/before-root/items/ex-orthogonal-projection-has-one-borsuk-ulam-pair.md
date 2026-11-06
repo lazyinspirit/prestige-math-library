@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-orthogonal-projection-has-one-borsuk-ulam-pair.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-quantum-highest-weight-modules-identify-with-normalized-q-schur-weyl-cells.md

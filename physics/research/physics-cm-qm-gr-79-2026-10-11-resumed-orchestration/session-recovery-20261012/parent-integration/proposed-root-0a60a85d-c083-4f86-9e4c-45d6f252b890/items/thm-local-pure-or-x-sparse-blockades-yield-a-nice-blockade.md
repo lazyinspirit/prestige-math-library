@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-local-pure-or-x-sparse-blockades-yield-a-nice-blockade.md

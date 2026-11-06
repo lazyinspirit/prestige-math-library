@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-associated-primes-exact-sequence-right-bound.md

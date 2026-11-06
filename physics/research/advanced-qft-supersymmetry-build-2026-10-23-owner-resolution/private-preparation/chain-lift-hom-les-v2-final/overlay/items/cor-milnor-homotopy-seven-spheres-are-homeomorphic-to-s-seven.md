@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-milnor-homotopy-seven-spheres-are-homeomorphic-to-s-seven.md

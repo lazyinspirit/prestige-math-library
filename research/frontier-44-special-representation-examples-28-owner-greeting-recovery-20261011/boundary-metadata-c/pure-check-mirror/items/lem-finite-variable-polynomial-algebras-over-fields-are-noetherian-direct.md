@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct.md

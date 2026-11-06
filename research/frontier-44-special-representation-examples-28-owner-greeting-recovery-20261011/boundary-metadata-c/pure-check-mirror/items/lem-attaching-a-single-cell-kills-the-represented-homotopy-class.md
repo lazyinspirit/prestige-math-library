@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-attaching-a-single-cell-kills-the-represented-homotopy-class.md

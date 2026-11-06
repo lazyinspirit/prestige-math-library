@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-weak-derivative-of-a-locally-integrable-function.md

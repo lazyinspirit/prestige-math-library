@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-indicator-of-the-rationals-has-zero-essential-supremum-but-pointwise-supremum-one.md

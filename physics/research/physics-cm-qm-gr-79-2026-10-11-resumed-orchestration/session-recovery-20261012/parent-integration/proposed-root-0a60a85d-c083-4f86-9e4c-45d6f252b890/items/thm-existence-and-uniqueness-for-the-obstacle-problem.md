@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-existence-and-uniqueness-for-the-obstacle-problem.md

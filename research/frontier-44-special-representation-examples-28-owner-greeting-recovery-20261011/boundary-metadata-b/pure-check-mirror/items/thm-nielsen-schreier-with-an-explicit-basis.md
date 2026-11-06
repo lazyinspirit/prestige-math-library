@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nielsen-schreier-with-an-explicit-basis.md

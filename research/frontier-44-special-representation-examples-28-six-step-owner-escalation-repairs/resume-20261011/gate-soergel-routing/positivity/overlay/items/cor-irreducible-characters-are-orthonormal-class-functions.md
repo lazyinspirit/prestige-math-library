@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-irreducible-characters-are-orthonormal-class-functions.md

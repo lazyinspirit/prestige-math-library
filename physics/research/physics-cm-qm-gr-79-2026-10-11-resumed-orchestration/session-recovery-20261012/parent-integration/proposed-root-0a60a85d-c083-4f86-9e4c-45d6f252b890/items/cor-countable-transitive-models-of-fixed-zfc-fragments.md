@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-countable-transitive-models-of-fixed-zfc-fragments.md

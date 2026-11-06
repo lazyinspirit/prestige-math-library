@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-p-primary-component-of-a-finite-abelian-group.md

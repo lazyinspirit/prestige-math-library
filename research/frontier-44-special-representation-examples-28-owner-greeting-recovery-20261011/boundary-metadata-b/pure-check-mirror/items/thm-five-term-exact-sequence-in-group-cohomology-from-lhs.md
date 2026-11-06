@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-five-term-exact-sequence-in-group-cohomology-from-lhs.md

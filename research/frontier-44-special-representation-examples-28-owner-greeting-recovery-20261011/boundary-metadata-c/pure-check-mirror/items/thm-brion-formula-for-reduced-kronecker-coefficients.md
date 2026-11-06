@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-brion-formula-for-reduced-kronecker-coefficients.md

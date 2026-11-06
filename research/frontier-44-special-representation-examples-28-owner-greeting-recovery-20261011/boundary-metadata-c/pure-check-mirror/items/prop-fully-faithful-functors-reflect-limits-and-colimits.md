@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-fully-faithful-functors-reflect-limits-and-colimits.md

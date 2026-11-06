@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-underlying-ordinary-category-is-an-instance-of-change-of-base.md

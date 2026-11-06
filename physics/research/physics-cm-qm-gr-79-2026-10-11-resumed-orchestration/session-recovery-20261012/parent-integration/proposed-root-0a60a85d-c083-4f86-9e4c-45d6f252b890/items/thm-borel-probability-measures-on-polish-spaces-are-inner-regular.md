@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-borel-probability-measures-on-polish-spaces-are-inner-regular.md

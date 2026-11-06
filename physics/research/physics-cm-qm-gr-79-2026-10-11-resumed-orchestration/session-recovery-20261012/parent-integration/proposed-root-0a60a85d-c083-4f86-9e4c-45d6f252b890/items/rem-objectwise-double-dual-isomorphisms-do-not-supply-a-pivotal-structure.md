@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-objectwise-double-dual-isomorphisms-do-not-supply-a-pivotal-structure.md

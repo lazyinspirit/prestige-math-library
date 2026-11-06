@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-finite-type-finite-presentation-module-sheaf.md

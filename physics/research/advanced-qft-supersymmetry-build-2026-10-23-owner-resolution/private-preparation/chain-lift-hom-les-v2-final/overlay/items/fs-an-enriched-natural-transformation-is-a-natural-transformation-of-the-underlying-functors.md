@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-an-enriched-natural-transformation-is-a-natural-transformation-of-the-underlying-functors.md

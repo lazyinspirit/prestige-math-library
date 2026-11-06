@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-kunneth-theorem-for-free-complexes-over-a-pid.md

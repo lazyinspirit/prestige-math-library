@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-direct-sum-and-product-totalisations-are-always-isomorphic.md

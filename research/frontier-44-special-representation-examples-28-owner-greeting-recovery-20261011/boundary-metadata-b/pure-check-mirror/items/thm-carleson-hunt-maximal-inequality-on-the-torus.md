@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-carleson-hunt-maximal-inequality-on-the-torus.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-degree-map-on-the-circle-is-a-homomorphism.md

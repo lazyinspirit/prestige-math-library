@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-unreduced-type-a-soergel-bimodules-and-the-trivial-polynomial-factor.md

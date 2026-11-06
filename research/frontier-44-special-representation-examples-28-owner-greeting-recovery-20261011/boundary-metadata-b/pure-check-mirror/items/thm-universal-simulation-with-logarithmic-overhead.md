@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-universal-simulation-with-logarithmic-overhead.md

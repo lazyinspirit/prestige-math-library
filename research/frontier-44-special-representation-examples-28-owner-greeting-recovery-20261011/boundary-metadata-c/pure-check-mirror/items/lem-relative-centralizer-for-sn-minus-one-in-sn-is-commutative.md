@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-centralizer-for-sn-minus-one-in-sn-is-commutative.md

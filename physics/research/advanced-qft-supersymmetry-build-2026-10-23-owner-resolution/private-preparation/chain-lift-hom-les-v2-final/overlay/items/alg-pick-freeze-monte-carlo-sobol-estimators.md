@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/alg-pick-freeze-monte-carlo-sobol-estimators.md

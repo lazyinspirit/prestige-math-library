@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-obstructions-lie-in-ext-two-cotangent-complex.md

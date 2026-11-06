@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-piecewise-function-exp-minus-one-over-t-is-analytic-at-zero.md

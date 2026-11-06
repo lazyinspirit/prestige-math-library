@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-proper-morse-slabs-give-complete-connecting-trajectories.md

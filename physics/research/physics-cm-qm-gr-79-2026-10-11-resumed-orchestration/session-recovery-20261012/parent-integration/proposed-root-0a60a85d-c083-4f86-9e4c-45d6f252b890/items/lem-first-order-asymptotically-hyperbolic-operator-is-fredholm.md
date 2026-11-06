@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-first-order-asymptotically-hyperbolic-operator-is-fredholm.md

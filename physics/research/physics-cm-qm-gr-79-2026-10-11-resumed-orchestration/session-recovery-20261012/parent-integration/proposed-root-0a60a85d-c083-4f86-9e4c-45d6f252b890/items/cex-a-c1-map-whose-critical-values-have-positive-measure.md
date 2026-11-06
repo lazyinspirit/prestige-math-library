@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-c1-map-whose-critical-values-have-positive-measure.md

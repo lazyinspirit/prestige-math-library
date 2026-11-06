@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-normalised-cube-indicator-is-not-a-hone-atom.md

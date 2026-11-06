@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-flasque-kernel-lifts-quotient-sections.md

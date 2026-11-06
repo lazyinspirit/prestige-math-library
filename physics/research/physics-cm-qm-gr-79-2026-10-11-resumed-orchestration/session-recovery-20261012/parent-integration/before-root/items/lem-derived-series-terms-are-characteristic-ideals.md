@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-derived-series-terms-are-characteristic-ideals.md

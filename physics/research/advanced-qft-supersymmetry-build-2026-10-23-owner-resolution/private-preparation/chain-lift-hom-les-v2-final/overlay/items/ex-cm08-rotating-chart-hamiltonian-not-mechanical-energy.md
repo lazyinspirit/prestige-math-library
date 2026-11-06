@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cm08-rotating-chart-hamiltonian-not-mechanical-energy.md

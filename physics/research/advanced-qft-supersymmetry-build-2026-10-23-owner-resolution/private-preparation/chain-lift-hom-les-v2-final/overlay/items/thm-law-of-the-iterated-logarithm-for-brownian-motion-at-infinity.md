@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity.md

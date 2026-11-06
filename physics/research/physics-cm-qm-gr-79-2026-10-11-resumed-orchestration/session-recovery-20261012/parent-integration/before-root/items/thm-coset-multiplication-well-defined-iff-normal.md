@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-coset-multiplication-well-defined-iff-normal.md

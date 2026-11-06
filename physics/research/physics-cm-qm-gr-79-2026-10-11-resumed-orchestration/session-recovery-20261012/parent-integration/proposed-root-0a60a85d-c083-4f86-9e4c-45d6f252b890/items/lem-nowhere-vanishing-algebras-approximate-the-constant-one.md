@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nowhere-vanishing-algebras-approximate-the-constant-one.md

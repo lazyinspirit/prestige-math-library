@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-augmentation-and-reduced-simplicial-homology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-taking-out-an-unbounded-factor-needs-integrability.md

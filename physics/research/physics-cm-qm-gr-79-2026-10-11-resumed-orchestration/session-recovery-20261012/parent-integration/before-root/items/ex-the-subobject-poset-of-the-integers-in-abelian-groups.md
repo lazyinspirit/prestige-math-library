@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-subobject-poset-of-the-integers-in-abelian-groups.md

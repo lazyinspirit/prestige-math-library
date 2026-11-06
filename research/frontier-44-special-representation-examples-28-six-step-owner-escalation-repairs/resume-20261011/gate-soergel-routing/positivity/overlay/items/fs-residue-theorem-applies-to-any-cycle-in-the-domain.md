@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-residue-theorem-applies-to-any-cycle-in-the-domain.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-harish-chandra-adjunction-for-finite-gl-n.md

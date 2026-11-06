@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-tautological-degree-one-class-is-well-defined-and-fiber-generating.md

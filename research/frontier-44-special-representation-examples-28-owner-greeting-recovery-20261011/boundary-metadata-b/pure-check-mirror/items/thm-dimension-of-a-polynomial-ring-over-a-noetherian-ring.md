@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring.md

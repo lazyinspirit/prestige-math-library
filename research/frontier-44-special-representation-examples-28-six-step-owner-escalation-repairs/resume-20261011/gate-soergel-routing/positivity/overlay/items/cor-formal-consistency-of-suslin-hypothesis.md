@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-formal-consistency-of-suslin-hypothesis.md

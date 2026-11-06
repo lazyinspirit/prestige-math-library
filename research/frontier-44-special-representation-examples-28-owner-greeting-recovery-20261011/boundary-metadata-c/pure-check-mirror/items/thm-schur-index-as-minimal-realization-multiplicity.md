@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-schur-index-as-minimal-realization-multiplicity.md

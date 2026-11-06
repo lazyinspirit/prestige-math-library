@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-fubini-term-by-term-differentiation-for-series-of-increasing-functions.md

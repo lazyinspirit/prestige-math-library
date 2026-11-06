@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dirichlet-kernel-at-zero-and-away-from-zero.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-projective-line-two-affine-cover-and-twisting-sheaf.md

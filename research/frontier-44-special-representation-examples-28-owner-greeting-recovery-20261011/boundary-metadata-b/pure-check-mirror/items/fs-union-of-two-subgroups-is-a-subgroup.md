@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-union-of-two-subgroups-is-a-subgroup.md

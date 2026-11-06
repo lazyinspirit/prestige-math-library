@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-sigma-n-pi-n-and-delta-n-sets.md

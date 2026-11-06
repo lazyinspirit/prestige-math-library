@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-two-homogeneous-need-not-be-two-transitive.md

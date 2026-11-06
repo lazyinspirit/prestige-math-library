@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-definition-of-a-derived-map-may-depend-on-the-chosen-comparison-lift.md

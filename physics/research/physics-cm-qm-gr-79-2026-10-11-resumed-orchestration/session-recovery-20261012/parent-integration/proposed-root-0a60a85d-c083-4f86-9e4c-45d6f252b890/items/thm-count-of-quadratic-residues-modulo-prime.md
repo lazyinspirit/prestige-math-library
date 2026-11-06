@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-count-of-quadratic-residues-modulo-prime.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-unitary-equivalence-classified-by-measure-class-and-multiplicity.md

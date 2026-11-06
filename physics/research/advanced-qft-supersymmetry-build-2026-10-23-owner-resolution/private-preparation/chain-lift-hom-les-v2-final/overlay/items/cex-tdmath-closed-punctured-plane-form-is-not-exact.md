@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-tdmath-closed-punctured-plane-form-is-not-exact.md

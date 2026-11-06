@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-distinct-subspaces-of-the-dual-can-have-the-same-preannihilator.md

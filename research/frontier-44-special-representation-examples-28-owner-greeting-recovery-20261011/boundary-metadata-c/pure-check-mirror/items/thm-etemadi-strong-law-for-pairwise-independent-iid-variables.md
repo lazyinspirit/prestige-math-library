@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-etemadi-strong-law-for-pairwise-independent-iid-variables.md

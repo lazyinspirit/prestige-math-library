@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-elliptic-curve-as-nonaffine-algebraic-group.md

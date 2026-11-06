@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-adjacency-matrix-of-a-finite-simple-graph.md

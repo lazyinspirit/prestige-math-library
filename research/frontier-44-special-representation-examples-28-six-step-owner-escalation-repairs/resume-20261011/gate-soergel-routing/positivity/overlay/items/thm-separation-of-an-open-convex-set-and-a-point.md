@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-separation-of-an-open-convex-set-and-a-point.md

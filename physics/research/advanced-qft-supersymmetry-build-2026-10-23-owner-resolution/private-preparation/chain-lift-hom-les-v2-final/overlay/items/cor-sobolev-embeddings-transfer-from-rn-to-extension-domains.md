@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-sobolev-embeddings-transfer-from-rn-to-extension-domains.md

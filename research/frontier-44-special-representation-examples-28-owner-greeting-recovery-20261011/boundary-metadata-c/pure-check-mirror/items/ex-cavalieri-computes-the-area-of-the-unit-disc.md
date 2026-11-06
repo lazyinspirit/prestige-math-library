@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cavalieri-computes-the-area-of-the-unit-disc.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sign-reversing-involution-on-intersecting-path-systems.md

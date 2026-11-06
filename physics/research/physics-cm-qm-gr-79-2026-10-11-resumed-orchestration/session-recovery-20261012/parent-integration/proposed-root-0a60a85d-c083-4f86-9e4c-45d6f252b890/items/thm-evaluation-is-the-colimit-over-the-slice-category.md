@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-evaluation-is-the-colimit-over-the-slice-category.md

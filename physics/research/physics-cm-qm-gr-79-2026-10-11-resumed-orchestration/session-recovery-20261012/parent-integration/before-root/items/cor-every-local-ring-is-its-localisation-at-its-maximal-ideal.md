@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-local-ring-is-its-localisation-at-its-maximal-ideal.md

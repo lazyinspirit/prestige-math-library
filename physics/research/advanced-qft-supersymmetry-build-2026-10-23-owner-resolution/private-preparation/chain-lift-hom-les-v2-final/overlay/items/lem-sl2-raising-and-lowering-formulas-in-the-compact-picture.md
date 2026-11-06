@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-sl2-raising-and-lowering-formulas-in-the-compact-picture.md

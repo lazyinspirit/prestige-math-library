@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-localization-identifies-a-quasi-isomorphism-with-an-identity-morphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cyclotomic-klr-terminal-dot-caps-have-the-prefix-residue-formula.md

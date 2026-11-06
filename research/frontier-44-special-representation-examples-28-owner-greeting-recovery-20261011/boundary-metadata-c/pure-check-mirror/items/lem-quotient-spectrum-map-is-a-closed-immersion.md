@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quotient-spectrum-map-is-a-closed-immersion.md

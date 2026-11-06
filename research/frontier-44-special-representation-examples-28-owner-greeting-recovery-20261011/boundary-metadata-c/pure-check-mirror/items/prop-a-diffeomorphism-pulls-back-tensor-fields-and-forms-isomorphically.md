@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-diffeomorphism-pulls-back-tensor-fields-and-forms-isomorphically.md

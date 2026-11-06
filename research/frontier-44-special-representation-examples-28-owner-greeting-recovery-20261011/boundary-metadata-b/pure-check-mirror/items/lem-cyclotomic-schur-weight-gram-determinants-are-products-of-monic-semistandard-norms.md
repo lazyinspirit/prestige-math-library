@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-schur-weight-gram-determinants-are-products-of-monic-semistandard-norms.md

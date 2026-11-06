@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-subsequence-characterization-of-convergence-in-probability.md

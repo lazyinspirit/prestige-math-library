@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-stable-general-linear-group-and-elementary-subgroup-of-a-ring.md

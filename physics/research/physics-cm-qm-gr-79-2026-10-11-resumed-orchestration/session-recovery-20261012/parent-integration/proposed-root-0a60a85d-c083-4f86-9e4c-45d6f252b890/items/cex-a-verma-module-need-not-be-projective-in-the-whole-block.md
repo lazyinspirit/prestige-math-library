@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-verma-module-need-not-be-projective-in-the-whole-block.md

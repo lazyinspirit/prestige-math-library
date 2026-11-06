@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-canonical-process-realizes-consistent-finite-dimensional-laws.md

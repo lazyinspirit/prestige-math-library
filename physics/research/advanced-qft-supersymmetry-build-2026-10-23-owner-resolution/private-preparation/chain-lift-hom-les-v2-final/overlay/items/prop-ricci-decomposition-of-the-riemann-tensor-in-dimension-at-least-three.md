@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-ricci-decomposition-of-the-riemann-tensor-in-dimension-at-least-three.md

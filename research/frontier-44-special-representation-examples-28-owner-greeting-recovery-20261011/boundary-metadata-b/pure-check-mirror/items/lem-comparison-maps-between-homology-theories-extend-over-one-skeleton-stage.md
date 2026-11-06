@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-comparison-maps-between-homology-theories-extend-over-one-skeleton-stage.md

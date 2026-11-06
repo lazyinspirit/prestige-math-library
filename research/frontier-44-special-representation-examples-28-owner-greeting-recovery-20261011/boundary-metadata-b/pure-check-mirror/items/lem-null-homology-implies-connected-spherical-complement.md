@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-null-homology-implies-connected-spherical-complement.md

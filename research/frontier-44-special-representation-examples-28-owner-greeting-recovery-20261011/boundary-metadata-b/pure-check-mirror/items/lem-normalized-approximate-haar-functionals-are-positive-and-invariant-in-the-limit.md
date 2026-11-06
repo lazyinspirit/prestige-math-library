@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-normalized-approximate-haar-functionals-are-positive-and-invariant-in-the-limit.md

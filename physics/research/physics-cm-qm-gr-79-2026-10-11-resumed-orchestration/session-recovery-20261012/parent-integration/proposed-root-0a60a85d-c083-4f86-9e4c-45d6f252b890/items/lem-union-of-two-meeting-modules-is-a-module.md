@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-union-of-two-meeting-modules-is-a-module.md

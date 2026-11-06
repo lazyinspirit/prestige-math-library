@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-vector-bundle-chow-homotopy-invariance.md

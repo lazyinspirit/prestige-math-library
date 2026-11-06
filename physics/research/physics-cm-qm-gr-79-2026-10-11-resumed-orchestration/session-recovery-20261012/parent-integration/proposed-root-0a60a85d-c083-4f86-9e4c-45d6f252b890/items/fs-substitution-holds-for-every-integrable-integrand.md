@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-substitution-holds-for-every-integrable-integrand.md

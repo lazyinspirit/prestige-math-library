@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lies-criterion-for-solvability-by-the-derived-algebra.md

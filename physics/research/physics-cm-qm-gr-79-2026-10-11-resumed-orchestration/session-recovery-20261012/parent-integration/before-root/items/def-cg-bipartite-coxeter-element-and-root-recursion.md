@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-bipartite-coxeter-element-and-root-recursion.md

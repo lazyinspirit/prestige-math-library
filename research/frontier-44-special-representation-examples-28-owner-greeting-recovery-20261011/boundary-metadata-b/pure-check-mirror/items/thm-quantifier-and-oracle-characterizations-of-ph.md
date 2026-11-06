@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quantifier-and-oracle-characterizations-of-ph.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-sectorial-nonselfadjoint-multiplication-generator.md

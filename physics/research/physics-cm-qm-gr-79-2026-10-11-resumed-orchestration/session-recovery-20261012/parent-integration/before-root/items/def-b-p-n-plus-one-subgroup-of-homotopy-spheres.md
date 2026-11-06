@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-b-p-n-plus-one-subgroup-of-homotopy-spheres.md

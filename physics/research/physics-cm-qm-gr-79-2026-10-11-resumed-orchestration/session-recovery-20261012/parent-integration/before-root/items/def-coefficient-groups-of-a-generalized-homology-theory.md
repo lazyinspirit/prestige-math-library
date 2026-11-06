@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-coefficient-groups-of-a-generalized-homology-theory.md

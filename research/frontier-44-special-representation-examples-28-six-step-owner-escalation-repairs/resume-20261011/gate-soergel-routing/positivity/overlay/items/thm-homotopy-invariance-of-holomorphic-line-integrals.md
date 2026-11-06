@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-homotopy-invariance-of-holomorphic-line-integrals.md

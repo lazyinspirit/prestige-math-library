@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-one-segment-graph-of-groups-is-an-amalgamated-free-product.md

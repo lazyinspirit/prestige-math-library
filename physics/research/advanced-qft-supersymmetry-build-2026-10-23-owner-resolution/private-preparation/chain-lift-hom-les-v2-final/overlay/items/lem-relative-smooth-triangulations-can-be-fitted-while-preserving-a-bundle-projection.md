@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-relative-smooth-triangulations-can-be-fitted-while-preserving-a-bundle-projection.md

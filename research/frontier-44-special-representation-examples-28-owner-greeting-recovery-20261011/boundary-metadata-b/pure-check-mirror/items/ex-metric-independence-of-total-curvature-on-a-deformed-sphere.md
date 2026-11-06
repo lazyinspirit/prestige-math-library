@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-metric-independence-of-total-curvature-on-a-deformed-sphere.md

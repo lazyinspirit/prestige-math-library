@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-quantum-integers-factorials-and-divided-powers-at-q-i.md

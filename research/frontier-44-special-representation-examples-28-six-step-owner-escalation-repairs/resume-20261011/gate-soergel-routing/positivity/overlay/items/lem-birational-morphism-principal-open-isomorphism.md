@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-birational-morphism-principal-open-isomorphism.md

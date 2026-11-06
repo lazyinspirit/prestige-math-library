@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-an-acyclic-resolution-that-is-not-an-injective-resolution.md

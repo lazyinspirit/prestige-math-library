@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-z-n-acting-geometrically-on-euclidean-n-space.md

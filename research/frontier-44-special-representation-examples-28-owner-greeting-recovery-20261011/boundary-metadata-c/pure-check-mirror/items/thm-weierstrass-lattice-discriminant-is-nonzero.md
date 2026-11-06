@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-weierstrass-lattice-discriminant-is-nonzero.md

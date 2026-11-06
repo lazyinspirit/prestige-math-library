@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-module-radical-socle-head-and-loewy-series.md

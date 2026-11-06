@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-augmentation-ideal-of-a-finite-p-group-algebra-is-nilpotent.md

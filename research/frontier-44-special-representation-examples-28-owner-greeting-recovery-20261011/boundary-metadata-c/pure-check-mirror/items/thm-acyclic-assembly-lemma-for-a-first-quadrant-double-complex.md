@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-acyclic-assembly-lemma-for-a-first-quadrant-double-complex.md

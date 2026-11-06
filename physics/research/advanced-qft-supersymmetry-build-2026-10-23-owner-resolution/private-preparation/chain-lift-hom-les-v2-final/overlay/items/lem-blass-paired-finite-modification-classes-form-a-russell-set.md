@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-blass-paired-finite-modification-classes-form-a-russell-set.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-l2-best-prediction-by-conditional-expectation.md

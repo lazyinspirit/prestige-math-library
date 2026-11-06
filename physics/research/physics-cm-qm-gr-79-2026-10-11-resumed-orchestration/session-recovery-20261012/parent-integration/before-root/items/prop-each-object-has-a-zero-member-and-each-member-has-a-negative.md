@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-each-object-has-a-zero-member-and-each-member-has-a-negative.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-basic-properties-of-the-holomorphic-hull.md

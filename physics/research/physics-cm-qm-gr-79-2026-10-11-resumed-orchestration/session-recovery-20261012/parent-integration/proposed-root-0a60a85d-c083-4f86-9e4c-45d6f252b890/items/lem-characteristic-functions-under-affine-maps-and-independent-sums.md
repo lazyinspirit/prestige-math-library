@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-functions-under-affine-maps-and-independent-sums.md

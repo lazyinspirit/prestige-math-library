@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-zf-does-not-prove-urysohn-lemma.md

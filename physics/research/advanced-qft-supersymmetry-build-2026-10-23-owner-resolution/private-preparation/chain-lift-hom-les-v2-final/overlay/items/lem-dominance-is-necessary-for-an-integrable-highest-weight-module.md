@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dominance-is-necessary-for-an-integrable-highest-weight-module.md

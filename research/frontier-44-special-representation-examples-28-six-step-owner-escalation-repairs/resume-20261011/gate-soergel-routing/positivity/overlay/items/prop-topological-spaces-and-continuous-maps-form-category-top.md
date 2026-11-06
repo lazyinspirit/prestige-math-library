@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-topological-spaces-and-continuous-maps-form-category-top.md

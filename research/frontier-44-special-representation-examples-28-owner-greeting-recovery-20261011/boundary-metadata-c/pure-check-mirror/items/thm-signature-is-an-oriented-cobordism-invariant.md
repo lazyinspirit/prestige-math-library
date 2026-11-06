@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-signature-is-an-oriented-cobordism-invariant.md

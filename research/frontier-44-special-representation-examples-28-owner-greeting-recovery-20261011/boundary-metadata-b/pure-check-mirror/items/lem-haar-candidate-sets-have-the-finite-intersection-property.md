@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-haar-candidate-sets-have-the-finite-intersection-property.md

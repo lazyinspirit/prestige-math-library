@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-family-hyperbolas-degenerate-fibre.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-domain-hypotheses-for-closed-versus-exact.md

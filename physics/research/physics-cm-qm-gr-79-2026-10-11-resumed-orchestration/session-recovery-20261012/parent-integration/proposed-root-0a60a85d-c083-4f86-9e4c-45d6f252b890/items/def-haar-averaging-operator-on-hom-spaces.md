@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-haar-averaging-operator-on-hom-spaces.md

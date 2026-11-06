@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-cellular-cyclic-squares-cartan-and-basis-action.md

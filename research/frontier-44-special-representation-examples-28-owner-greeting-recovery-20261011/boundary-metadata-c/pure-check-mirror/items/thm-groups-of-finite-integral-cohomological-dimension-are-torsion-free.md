@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-groups-of-finite-integral-cohomological-dimension-are-torsion-free.md

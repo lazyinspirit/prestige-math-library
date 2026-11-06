@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree.md

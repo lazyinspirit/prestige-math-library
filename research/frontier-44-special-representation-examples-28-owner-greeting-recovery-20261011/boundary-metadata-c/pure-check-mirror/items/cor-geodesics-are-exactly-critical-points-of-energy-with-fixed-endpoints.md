@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-geodesics-are-exactly-critical-points-of-energy-with-fixed-endpoints.md

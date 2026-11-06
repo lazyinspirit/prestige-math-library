@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-maximal-plane-and-maximally-planar-graph.md

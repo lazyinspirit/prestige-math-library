@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-unit-loop-in-real-line-mod-integers-is-essential.md

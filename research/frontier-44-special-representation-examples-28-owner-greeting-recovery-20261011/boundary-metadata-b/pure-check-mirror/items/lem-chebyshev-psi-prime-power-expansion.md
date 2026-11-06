@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-chebyshev-psi-prime-power-expansion.md

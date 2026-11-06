@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-projective-cover-of-the-trivial-module-for-a-p-group.md

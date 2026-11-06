@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields.md

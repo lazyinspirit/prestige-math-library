@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-chain-homotopic-maps-induce-the-same-map-on-homology.md

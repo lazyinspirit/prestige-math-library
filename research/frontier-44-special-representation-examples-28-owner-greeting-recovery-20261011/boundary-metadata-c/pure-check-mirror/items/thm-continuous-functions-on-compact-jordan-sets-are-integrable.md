@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-continuous-functions-on-compact-jordan-sets-are-integrable.md

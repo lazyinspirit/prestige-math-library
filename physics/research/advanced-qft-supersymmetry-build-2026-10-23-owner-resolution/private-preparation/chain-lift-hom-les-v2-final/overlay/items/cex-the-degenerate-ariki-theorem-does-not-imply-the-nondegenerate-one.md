@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-the-degenerate-ariki-theorem-does-not-imply-the-nondegenerate-one.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weyl-equidistribution-for-square-root-two-initial-terms.md

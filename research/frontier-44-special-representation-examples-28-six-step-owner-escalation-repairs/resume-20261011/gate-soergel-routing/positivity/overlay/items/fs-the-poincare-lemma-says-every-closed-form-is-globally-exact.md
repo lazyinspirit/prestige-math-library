@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-poincare-lemma-says-every-closed-form-is-globally-exact.md

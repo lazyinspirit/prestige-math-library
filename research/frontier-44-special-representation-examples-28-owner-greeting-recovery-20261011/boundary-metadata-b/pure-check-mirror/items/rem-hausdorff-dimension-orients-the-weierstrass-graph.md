@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-hausdorff-dimension-orients-the-weierstrass-graph.md

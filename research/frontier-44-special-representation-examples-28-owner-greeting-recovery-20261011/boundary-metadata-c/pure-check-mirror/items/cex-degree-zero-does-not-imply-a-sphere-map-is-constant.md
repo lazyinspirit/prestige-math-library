@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-degree-zero-does-not-imply-a-sphere-map-is-constant.md

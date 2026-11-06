@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-h-five-overlap-blockade-and-iterated-mixed-quotients.md

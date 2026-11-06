@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ford-fulkerson-integral-max-flow-min-cut.md

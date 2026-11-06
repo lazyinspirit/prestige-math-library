@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-complex-group-algebra-of-z-mod-three-is-c-times-c-times-c.md

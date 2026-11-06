@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hermite-orthogonality-and-monomial-expansion.md

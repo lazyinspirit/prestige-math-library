@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-affine-connection-is-the-levi-civita-connection-of-a-riemannian-metric.md

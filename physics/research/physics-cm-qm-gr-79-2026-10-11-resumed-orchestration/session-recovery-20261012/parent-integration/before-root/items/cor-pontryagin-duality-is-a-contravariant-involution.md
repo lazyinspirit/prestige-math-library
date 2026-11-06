@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-pontryagin-duality-is-a-contravariant-involution.md

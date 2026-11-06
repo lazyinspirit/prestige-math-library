@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-based-handle-chain-complex-over-the-fundamental-group-ring.md

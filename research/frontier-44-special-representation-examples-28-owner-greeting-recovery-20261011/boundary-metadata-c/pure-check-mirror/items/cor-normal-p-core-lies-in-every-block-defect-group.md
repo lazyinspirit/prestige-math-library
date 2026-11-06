@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-normal-p-core-lies-in-every-block-defect-group.md

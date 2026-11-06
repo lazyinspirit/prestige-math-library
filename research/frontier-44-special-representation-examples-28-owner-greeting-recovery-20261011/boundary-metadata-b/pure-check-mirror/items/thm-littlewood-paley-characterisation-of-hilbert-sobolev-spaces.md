@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-littlewood-paley-characterisation-of-hilbert-sobolev-spaces.md

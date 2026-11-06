@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-bad-cover-circle-cech-misses-h1.md

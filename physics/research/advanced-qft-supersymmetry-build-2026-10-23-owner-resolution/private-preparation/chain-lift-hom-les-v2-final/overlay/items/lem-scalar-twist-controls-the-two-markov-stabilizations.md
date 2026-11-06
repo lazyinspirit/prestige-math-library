@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-scalar-twist-controls-the-two-markov-stabilizations.md

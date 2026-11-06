@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-realization-of-a-generalized-cartan-matrix.md

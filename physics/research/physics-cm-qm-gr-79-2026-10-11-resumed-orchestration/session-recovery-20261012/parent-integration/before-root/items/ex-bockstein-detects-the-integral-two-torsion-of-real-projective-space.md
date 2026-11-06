@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-bockstein-detects-the-integral-two-torsion-of-real-projective-space.md

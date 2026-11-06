@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-coprime-conjugacy-class-size-forces-zero-character-or-scalar-action.md

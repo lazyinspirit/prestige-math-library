@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-skeletal-telescope-projects-by-a-homotopy-equivalence-of-pairs.md

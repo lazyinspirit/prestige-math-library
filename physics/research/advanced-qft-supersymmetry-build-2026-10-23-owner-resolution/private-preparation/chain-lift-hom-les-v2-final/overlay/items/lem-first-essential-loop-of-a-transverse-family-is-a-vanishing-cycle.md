@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-first-essential-loop-of-a-transverse-family-is-a-vanishing-cycle.md

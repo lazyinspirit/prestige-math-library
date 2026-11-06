@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-character-and-cocharacter-lattices-of-a-torus.md

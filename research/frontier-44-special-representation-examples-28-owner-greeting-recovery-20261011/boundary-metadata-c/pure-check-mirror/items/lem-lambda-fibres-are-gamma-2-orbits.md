@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-lambda-fibres-are-gamma-2-orbits.md

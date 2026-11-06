@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rank-one-summand-of-a-finite-projective-dedekind-module.md

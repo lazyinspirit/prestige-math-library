@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality.md

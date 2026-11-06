@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-index-is-additive-under-a-transverse-perturbation.md

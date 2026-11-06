@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-connected-subsets-of-rn-are-polygonally-connected.md

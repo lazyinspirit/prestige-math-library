@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-koszul-complex-of-a-sequence-with-coefficients.md

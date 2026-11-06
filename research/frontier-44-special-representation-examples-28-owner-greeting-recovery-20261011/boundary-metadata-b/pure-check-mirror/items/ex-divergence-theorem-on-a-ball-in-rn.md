@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-divergence-theorem-on-a-ball-in-rn.md

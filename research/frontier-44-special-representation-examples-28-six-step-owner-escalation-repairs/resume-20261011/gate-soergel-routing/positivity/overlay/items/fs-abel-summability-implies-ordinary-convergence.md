@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-abel-summability-implies-ordinary-convergence.md

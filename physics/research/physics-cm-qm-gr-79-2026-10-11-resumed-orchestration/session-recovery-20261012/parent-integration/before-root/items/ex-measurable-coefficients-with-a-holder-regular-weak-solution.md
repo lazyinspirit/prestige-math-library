@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-measurable-coefficients-with-a-holder-regular-weak-solution.md

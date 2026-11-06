@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-coinvariant-algebra-of-s-two-and-s-three-as-graded-regular-representations.md

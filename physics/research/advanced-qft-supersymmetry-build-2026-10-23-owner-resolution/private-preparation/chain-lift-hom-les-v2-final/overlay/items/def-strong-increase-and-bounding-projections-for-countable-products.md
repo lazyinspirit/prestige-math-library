@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-strong-increase-and-bounding-projections-for-countable-products.md

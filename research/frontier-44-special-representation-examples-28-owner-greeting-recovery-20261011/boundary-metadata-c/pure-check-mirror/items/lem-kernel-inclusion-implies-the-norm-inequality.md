@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-kernel-inclusion-implies-the-norm-inequality.md

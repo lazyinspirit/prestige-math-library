@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-four-dividing-n-forces-a-nonprimitive-two-square-representation.md

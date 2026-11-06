@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations.md

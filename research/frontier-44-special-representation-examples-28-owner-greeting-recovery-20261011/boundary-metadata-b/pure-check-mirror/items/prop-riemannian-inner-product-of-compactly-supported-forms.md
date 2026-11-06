@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-riemannian-inner-product-of-compactly-supported-forms.md

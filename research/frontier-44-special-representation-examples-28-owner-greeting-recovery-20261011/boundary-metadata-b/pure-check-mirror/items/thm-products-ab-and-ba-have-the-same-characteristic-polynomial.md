@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-products-ab-and-ba-have-the-same-characteristic-polynomial.md

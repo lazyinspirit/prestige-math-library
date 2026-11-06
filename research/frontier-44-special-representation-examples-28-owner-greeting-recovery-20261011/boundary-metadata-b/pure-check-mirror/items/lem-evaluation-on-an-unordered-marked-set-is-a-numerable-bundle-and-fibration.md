@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-evaluation-on-an-unordered-marked-set-is-a-numerable-bundle-and-fibration.md

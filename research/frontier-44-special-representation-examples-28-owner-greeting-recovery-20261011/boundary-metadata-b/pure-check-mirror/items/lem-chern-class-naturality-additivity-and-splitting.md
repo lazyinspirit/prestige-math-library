@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-chern-class-naturality-additivity-and-splitting.md

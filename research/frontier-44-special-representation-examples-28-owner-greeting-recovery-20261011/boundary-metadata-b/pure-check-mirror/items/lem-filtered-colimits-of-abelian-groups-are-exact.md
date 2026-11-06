@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-filtered-colimits-of-abelian-groups-are-exact.md

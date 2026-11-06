@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-real-basis-complexifies-to-a-complex-basis.md

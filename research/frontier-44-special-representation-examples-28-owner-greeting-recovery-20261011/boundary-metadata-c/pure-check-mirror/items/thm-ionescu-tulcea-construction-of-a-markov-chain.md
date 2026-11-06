@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ionescu-tulcea-construction-of-a-markov-chain.md

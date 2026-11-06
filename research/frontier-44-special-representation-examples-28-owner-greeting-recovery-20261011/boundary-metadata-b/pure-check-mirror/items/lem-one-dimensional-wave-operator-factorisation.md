@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-one-dimensional-wave-operator-factorisation.md

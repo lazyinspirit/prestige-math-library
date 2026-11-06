@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-four-dimensional-boundary-case-is-outside-the-smooth-h-cobordism-theorem.md

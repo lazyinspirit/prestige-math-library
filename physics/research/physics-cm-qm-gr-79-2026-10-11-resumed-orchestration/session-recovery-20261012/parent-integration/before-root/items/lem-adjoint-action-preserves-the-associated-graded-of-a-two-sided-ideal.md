@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-adjoint-action-preserves-the-associated-graded-of-a-two-sided-ideal.md

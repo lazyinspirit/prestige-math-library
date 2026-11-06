@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-level-one-rank-two-cyclotomic-klr-algebra-at-e-three.md

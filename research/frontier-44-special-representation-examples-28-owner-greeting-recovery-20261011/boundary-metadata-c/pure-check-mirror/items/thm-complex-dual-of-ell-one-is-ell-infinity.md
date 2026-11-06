@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-dual-of-ell-one-is-ell-infinity.md

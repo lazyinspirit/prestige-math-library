@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-maximum-modulus-bound-for-a-polynomial-on-the-unit-disc.md

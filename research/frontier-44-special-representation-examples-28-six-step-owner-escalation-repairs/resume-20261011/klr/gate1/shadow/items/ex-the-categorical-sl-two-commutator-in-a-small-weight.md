@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-categorical-sl-two-commutator-in-a-small-weight.md

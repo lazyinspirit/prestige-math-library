@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-divergence-is-well-defined-and-has-the-coordinate-formula.md

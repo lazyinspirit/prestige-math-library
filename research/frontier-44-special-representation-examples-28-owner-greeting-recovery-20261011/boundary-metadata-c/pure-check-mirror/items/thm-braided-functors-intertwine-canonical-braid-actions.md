@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-braided-functors-intertwine-canonical-braid-actions.md

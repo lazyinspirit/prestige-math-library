@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-polynomial-glr-highest-weights-as-partitions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action.md

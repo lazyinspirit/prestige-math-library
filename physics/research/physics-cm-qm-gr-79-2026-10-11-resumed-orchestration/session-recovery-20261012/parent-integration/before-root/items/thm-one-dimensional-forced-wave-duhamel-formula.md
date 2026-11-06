@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-one-dimensional-forced-wave-duhamel-formula.md

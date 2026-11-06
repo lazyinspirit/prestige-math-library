@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-positive-type-functions-define-a-pre-hilbert-form.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-semilinear-galois-action-on-a-scalar-extended-algebra.md

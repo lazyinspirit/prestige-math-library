@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonnegative-integrable-with-zero-integral-need-not-vanish.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-heisenberg-group-at-the-prime-two-is-the-dihedral-group-of-order-eight.md

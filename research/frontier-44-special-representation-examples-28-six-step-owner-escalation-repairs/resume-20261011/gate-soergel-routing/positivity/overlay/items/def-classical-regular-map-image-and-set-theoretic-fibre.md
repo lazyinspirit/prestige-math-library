@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-classical-regular-map-image-and-set-theoretic-fibre.md

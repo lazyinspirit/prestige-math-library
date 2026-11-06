@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-reflective-subcategory-of-a-complete-category-is-complete.md

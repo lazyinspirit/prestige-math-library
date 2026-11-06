@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-free-monoid-monad-and-its-algebras-are-monoids.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-duality-extends-from-two-open-sets-to-finite-unions-of-coordinate-balls.md

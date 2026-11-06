@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-symmetric-algebra-has-an-ordered-commutative-monomial-basis.md

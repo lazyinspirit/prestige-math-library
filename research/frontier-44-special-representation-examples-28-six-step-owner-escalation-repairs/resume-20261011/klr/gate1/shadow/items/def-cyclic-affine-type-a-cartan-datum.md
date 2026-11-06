@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cyclic-affine-type-a-cartan-datum.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-differentiation-of-a-pulled-back-form-along-a-time-dependent-flow.md

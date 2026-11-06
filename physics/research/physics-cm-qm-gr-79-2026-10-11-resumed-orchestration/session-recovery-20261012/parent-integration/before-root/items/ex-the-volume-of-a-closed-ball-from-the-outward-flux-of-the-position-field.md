@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-volume-of-a-closed-ball-from-the-outward-flux-of-the-position-field.md

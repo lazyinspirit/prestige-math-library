@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ends-and-coends-are-unique-up-to-unique-isomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-relative-whitney-approximation-for-euclidean-valued-maps.md

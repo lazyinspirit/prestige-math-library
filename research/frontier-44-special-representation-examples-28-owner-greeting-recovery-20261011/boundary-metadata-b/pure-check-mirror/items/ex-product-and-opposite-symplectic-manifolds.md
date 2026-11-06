@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-product-and-opposite-symplectic-manifolds.md

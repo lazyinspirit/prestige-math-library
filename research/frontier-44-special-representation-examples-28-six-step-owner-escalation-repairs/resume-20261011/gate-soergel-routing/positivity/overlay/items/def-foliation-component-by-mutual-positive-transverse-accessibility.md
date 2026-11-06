@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-foliation-component-by-mutual-positive-transverse-accessibility.md

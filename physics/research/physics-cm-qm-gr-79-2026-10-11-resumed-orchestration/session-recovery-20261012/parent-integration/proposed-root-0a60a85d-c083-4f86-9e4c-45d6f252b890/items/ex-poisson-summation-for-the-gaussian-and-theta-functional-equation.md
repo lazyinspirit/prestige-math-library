@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-poisson-summation-for-the-gaussian-and-theta-functional-equation.md

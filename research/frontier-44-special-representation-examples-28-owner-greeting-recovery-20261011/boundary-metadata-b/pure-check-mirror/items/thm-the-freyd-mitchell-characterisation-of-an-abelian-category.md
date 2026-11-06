@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-freyd-mitchell-characterisation-of-an-abelian-category.md

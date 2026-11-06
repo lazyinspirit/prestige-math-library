@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-elementary-tensor-formulas-descend-exactly-when-balanced.md

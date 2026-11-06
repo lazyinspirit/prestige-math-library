@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex.md

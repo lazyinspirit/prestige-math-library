@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-cyclic-cubic-field-inside-the-seventh-cyclotomic-field.md

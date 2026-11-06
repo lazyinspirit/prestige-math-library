@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-sobolev-poincare-on-bounded-connected-extension-domains.md

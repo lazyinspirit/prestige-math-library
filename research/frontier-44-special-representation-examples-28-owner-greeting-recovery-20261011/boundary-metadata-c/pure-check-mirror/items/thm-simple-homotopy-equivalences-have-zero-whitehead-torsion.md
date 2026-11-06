@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-homotopy-equivalences-have-zero-whitehead-torsion.md

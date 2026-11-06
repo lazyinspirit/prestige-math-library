@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-generalized-pell-solutions-need-not-all-be-convergents.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-method-of-continuity-for-a-constant-coefficient-path.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-equality-cases-as-diagnostics-for-all-comparison-signs.md

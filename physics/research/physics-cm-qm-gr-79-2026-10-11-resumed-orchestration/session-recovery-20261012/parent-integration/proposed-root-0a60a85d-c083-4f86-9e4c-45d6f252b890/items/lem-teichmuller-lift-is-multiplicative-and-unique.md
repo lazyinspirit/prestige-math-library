@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-teichmuller-lift-is-multiplicative-and-unique.md

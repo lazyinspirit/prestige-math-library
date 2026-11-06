@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-compact-hausdorff-and-ultrafilter-algebra-constructions-are-inverse.md

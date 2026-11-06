@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells.md

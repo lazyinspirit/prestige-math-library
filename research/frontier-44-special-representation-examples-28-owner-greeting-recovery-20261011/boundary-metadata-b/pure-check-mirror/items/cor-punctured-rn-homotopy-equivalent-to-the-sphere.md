@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-punctured-rn-homotopy-equivalent-to-the-sphere.md

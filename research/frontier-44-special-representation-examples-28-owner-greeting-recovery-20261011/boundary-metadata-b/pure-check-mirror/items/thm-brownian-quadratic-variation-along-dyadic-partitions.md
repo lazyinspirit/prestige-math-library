@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-brownian-quadratic-variation-along-dyadic-partitions.md

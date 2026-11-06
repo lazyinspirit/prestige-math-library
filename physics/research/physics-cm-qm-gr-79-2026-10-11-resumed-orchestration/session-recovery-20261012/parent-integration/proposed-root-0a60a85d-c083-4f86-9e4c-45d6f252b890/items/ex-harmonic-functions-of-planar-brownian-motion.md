@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-harmonic-functions-of-planar-brownian-motion.md

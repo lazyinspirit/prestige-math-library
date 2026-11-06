@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-iwasawa-criterion-for-faithful-finite-actions.md

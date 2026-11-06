@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-holomorphic-hull-of-a-product-torus-in-the-bidisc-is-the-polydisc.md

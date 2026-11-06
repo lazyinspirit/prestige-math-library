@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-identical-one-step-marginals-do-not-determine-a-markov-chain.md

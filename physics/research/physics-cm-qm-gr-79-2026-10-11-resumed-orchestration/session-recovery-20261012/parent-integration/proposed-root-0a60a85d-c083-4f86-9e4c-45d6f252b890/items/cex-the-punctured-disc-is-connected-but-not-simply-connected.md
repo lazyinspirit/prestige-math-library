@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-punctured-disc-is-connected-but-not-simply-connected.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-derived-functors-are-well-defined-relative-to-supplied-resolution-data.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-basic-level-one-weight-of-affine-sl2.md

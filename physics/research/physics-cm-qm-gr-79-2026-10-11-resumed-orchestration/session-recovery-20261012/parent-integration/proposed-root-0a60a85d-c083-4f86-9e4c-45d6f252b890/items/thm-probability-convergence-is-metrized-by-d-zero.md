@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-probability-convergence-is-metrized-by-d-zero.md

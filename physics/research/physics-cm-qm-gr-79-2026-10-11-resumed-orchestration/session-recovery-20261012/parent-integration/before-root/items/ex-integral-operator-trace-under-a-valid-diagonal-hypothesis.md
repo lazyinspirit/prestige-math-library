@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-integral-operator-trace-under-a-valid-diagonal-hypothesis.md

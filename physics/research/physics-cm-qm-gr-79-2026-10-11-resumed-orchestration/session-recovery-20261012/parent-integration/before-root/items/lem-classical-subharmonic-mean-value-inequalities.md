@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-subharmonic-mean-value-inequalities.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-stokes-integrand-identity-on-a-c2-patch.md

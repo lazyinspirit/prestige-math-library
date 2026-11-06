@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-homological-ahss-exact-couple-from-the-skeletal-filtration.md

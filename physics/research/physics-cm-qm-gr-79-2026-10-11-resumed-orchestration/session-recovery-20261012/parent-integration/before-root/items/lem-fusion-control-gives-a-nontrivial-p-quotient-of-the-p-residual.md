@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fusion-control-gives-a-nontrivial-p-quotient-of-the-p-residual.md

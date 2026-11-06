@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-ritz-pair-and-its-residual-from-a-small-arnoldi-run.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-mapping-cylinder-factorization-is-a-model-category-factorization.md

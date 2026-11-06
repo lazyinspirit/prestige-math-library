@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-lower-positive-sectional-curvature-forces-conjugate-points.md

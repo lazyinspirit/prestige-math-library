@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rank-matrices-determine-the-pivot-permutation.md

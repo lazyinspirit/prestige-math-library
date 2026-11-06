@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-divided-powers-and-lusztig-form-in-quantized-sl-two.md

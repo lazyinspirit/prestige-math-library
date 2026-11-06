@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold.md

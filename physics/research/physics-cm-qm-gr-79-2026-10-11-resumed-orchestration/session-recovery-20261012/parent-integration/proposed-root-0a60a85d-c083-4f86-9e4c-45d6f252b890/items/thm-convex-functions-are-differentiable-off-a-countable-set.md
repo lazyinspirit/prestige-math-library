@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-convex-functions-are-differentiable-off-a-countable-set.md

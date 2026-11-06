@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lca-lone-convolution-is-a-commutative-banach-star-algebra.md

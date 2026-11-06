@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-arctangent-generates-a-borel-probability-measure.md

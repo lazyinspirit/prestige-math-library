@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra.md

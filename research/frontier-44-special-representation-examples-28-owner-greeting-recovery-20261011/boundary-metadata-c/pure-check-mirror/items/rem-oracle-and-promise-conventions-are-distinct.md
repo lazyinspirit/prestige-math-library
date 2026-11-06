@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-oracle-and-promise-conventions-are-distinct.md

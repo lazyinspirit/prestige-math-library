@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-coinvariant-algebra-of-s-three-as-the-longest-soergel-bimodule.md

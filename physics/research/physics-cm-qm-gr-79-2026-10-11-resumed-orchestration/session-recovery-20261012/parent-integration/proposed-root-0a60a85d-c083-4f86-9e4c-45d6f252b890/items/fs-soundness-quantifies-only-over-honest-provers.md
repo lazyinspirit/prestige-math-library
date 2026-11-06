@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-soundness-quantifies-only-over-honest-provers.md

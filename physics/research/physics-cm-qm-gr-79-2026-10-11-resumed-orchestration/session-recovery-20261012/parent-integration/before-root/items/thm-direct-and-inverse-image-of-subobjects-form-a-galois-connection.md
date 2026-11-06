@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-direct-and-inverse-image-of-subobjects-form-a-galois-connection.md

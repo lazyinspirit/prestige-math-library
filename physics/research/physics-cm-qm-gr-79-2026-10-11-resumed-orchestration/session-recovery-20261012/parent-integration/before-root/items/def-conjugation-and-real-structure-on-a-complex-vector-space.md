@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-conjugation-and-real-structure-on-a-complex-vector-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-convolution-with-a-test-function-is-smooth.md

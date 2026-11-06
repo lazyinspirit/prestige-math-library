@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-tangent-space-of-the-boundary-is-the-boundary-tangent-hyperplane.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-mollifying-the-unit-interval-indicator-at-two-scales.md

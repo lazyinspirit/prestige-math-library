@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-closed-immersion-derived-coinduction-adjunction.md

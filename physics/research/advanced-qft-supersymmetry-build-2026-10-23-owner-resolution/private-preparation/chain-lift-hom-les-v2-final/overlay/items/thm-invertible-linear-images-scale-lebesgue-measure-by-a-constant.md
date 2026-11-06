@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-invertible-linear-images-scale-lebesgue-measure-by-a-constant.md

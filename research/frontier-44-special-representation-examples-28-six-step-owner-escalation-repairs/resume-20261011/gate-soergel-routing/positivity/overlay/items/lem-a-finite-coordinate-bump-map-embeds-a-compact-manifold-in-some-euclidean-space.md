@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-finite-coordinate-bump-map-embeds-a-compact-manifold-in-some-euclidean-space.md

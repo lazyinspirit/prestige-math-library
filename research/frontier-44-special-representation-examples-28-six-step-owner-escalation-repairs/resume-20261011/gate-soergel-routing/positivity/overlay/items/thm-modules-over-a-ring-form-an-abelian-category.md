@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-modules-over-a-ring-form-an-abelian-category.md

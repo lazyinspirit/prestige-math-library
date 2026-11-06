@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-short-exact-sequences-of-vector-bundles-split-over-the-base.md

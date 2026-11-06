@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-ackermann-is-total-computable-but-not-primitive-recursive.md

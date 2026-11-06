@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-star-expansion-four-family-of-a-forest-has-the-erdos-hajnal-property.md

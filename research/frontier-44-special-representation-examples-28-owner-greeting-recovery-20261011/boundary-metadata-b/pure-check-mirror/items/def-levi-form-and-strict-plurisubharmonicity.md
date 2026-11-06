@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-levi-form-and-strict-plurisubharmonicity.md

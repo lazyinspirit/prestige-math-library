@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cohomology-over-a-field-is-dual-to-homology-for-finite-dimensional-complexes.md

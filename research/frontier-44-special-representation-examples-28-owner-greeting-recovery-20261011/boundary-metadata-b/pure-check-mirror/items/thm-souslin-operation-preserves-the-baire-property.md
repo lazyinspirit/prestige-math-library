@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-souslin-operation-preserves-the-baire-property.md

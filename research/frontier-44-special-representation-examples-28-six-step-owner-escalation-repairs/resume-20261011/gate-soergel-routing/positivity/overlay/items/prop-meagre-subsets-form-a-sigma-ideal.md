@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-meagre-subsets-form-a-sigma-ideal.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-semisimple-minimal-parabolic-root-subgroup.md

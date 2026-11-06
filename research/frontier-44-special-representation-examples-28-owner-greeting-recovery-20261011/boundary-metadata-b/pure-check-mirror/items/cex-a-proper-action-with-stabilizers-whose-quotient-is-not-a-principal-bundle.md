@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-proper-action-with-stabilizers-whose-quotient-is-not-a-principal-bundle.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-q-one-toral-specialization-identifies-the-classical-cartan-generators.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-descent-set-major-index-excedance-and-fixed-point.md

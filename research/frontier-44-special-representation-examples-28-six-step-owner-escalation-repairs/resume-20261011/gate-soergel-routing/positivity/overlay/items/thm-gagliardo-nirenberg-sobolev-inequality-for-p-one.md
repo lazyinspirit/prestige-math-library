@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-gagliardo-nirenberg-sobolev-inequality-for-p-one.md

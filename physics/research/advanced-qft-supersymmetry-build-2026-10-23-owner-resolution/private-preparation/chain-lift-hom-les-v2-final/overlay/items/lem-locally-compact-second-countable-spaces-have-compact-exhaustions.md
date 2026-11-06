@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-locally-compact-second-countable-spaces-have-compact-exhaustions.md

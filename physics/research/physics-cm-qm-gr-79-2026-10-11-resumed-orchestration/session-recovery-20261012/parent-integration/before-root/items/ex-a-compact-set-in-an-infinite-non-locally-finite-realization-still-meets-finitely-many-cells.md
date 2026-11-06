@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-compact-set-in-an-infinite-non-locally-finite-realization-still-meets-finitely-many-cells.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-catalan-numbers-satisfy-a-constant-coefficient-linear-recurrence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-volume-of-a-closed-three-ball-cavalieri-proof.md

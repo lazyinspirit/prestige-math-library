@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-relative-derived-subdivision-of-a-finite-simplicial-pair.md

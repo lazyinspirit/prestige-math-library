@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-optional-stopping-requires-a-passage-to-the-limit-hypothesis.md

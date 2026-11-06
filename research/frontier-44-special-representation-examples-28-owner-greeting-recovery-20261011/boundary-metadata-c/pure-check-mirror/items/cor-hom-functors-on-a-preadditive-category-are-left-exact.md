@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-hom-functors-on-a-preadditive-category-are-left-exact.md

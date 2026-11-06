@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-b-stable-generators-and-weight-flags-in-category-o.md

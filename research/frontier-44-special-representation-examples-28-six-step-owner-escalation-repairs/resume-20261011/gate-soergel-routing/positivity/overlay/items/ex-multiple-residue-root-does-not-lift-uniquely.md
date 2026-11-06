@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-multiple-residue-root-does-not-lift-uniquely.md

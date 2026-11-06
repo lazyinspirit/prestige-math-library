@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-connection-is-c-infinity-linear-in-the-section-being-differentiated.md

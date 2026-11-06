@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-multiplicative-dirichlet-series-euler-product.md

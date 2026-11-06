@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model.md

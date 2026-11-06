@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-heat-operator-family-is-an-analytic-semigroup-in-the-later-abstract-language.md

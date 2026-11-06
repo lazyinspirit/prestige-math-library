@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-mobius-line-bundle-from-a-transition-function.md

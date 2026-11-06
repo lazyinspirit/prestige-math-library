@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-riemannian-length-is-independent-of-piecewise-c-one-subdivision.md

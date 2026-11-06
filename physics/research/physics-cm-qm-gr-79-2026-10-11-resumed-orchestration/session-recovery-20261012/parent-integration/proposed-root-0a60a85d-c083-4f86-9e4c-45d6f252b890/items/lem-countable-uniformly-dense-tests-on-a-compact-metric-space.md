@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-countable-uniformly-dense-tests-on-a-compact-metric-space.md

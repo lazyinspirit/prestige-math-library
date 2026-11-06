@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-minimal-positive-rouquier-complexes-carry-the-induced-hodge-riemann-signs.md

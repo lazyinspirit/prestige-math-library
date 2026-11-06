@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-stone-duality-for-a-power-set-algebra.md

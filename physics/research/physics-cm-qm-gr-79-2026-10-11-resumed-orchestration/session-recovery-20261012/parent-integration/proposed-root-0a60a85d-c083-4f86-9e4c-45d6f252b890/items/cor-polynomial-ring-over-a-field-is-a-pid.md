@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-polynomial-ring-over-a-field-is-a-pid.md

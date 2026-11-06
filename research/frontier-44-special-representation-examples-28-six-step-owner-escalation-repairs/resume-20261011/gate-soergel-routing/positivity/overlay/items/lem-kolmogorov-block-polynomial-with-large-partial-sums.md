@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-kolmogorov-block-polynomial-with-large-partial-sums.md

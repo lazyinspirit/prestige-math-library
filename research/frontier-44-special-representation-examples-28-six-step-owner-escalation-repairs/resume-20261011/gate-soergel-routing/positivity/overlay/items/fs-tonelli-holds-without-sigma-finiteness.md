@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-tonelli-holds-without-sigma-finiteness.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-cokleisli-adjunction-induces-the-given-comonad.md

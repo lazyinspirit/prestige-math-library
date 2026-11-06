@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-major-index-equals-inversion-number-pointwise.md

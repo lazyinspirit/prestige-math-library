@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-four-tooth-comb-with-a-special-vertex-triggers-property-star.md

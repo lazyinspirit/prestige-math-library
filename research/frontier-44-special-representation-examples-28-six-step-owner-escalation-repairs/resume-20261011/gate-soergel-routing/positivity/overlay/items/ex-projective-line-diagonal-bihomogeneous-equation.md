@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-projective-line-diagonal-bihomogeneous-equation.md

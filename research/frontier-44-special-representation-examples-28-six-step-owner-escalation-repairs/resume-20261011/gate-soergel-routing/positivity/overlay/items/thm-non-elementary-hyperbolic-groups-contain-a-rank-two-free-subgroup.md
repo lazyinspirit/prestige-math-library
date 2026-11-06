@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-non-elementary-hyperbolic-groups-contain-a-rank-two-free-subgroup.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-augmented-characteristic-system-for-a-quasilinear-pde.md

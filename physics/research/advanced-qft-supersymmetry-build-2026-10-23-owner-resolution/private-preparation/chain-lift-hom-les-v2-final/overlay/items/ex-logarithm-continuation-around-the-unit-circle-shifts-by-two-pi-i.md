@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-logarithm-continuation-around-the-unit-circle-shifts-by-two-pi-i.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-power-series-coefficients-are-determined-by-real-values.md

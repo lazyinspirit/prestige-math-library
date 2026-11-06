@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-an-everywhere-invertible-complex-jacobian-forces-global-injectivity.md

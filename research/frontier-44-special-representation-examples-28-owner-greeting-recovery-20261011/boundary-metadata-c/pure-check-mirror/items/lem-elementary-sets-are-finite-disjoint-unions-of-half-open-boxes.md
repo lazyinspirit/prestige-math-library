@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-elementary-sets-are-finite-disjoint-unions-of-half-open-boxes.md

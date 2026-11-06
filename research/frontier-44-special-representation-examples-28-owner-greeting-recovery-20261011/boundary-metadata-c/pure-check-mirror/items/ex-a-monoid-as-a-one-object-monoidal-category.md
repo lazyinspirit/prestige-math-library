@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-monoid-as-a-one-object-monoidal-category.md

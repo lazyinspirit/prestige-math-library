@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-reverse-martingale-and-the-tail-sigma-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induction-from-the-inertia-group-recovers-the-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chevalley-centralizer-radical-and-reductive-centralizers.md

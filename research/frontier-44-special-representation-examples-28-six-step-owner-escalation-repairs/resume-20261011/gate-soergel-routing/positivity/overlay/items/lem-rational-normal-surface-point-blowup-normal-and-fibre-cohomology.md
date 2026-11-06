@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-normal-surface-point-blowup-normal-and-fibre-cohomology.md

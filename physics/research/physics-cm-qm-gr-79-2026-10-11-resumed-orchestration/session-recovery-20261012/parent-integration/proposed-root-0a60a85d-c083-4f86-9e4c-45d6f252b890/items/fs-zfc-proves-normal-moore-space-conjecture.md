@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-zfc-proves-normal-moore-space-conjecture.md

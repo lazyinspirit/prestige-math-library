@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euler-class-of-a-rouquier-complex-is-homotopy-invariant-and-multiplicative.md

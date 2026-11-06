@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-poincare-constant-and-first-dirichlet-eigenvalue.md

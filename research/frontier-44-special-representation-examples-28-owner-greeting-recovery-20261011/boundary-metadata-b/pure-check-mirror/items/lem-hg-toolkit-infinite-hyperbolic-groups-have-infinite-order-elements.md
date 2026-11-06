@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hg-toolkit-infinite-hyperbolic-groups-have-infinite-order-elements.md

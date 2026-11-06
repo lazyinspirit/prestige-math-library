@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-riesz-schauder-spectrum-of-a-compact-operator.md

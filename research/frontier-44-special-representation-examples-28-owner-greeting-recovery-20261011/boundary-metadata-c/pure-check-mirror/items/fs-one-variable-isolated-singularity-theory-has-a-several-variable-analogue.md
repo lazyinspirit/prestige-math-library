@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-one-variable-isolated-singularity-theory-has-a-several-variable-analogue.md

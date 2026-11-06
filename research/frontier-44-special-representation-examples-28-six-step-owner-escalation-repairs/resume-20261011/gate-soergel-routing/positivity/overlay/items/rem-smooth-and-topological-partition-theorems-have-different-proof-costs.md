@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-smooth-and-topological-partition-theorems-have-different-proof-costs.md

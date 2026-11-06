@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects.md

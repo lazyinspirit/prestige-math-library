@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-pid-module-classification-agrees-with-finite-abelian-group-classification.md

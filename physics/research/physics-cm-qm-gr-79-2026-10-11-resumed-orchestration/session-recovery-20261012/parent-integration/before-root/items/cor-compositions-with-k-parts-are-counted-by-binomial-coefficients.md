@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-compositions-with-k-parts-are-counted-by-binomial-coefficients.md

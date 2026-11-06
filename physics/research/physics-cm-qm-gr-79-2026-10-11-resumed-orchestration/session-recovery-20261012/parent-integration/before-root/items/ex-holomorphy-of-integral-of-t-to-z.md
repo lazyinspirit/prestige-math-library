@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-holomorphy-of-integral-of-t-to-z.md

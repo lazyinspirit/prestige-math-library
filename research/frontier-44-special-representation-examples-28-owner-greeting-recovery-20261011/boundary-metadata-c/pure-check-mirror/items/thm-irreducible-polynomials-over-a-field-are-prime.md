@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-irreducible-polynomials-over-a-field-are-prime.md

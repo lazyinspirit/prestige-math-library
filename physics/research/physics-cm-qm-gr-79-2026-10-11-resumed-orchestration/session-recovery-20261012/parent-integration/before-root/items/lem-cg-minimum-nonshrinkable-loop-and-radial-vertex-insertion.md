@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-minimum-nonshrinkable-loop-and-radial-vertex-insertion.md

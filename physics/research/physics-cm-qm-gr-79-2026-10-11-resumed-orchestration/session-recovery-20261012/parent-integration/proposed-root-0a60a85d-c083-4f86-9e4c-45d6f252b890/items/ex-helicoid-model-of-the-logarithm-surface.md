@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-helicoid-model-of-the-logarithm-surface.md

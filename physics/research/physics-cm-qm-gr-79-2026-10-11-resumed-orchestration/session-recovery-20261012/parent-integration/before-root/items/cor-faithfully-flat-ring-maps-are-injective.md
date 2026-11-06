@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-faithfully-flat-ring-maps-are-injective.md

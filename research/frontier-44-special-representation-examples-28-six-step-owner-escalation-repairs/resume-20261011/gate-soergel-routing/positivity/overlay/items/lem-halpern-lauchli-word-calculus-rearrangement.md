@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-halpern-lauchli-word-calculus-rearrangement.md

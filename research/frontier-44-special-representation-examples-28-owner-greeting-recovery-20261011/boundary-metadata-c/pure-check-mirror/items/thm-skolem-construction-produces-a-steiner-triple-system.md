@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-skolem-construction-produces-a-steiner-triple-system.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-rooted-stable-tooth-comb-with-two-teeth.md

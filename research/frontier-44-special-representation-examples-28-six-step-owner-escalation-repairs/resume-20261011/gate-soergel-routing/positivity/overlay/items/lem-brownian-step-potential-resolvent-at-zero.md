@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-brownian-step-potential-resolvent-at-zero.md

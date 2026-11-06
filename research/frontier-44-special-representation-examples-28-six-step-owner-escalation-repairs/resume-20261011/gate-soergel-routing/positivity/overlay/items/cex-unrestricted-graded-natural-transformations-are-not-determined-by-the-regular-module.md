@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-unrestricted-graded-natural-transformations-are-not-determined-by-the-regular-module.md

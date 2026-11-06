@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-generic-irreducibility-and-the-exceptional-parameter-lattice.md

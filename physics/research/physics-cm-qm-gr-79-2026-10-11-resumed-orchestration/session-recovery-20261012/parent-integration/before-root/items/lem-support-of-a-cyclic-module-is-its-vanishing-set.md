@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-support-of-a-cyclic-module-is-its-vanishing-set.md

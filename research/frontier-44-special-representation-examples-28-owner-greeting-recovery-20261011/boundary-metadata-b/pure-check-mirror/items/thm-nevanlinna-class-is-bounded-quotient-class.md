@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nevanlinna-class-is-bounded-quotient-class.md

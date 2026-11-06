@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique.md

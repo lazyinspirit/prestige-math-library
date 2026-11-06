@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-birth-and-death-chain-recurrence-criterion.md

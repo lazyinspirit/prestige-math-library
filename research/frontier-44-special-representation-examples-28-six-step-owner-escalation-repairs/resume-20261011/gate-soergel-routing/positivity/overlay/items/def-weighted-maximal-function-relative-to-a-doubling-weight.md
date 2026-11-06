@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-weighted-maximal-function-relative-to-a-doubling-weight.md

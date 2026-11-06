@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-faithful-irreducible-character-is-induced-from-a-proper-inertia-subgroup.md

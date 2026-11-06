@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-walds-equation-for-a-bounded-stopping-time.md

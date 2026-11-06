@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-normal-surface-trace-cokernel-dualizes-h1-and-bounds-it.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-degree-zero-natural-transformation-between-delta-functors-always-extends.md

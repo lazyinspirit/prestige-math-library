@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-countable-elementary-submodels-and-transitive-collapses.md

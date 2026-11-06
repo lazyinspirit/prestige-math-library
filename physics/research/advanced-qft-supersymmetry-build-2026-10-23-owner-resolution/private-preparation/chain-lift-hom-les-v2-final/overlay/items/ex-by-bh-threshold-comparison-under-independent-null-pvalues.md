@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-by-bh-threshold-comparison-under-independent-null-pvalues.md

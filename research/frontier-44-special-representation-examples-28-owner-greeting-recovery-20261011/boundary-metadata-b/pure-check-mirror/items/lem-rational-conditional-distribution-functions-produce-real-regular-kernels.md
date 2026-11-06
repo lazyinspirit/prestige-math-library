@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-conditional-distribution-functions-produce-real-regular-kernels.md

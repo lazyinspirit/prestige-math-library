@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-restriction-and-extension-of-scalars-on-graded-module-categories.md

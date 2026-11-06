@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-five-and-symmetric-groups-from-degree-five-are-not-solvable.md

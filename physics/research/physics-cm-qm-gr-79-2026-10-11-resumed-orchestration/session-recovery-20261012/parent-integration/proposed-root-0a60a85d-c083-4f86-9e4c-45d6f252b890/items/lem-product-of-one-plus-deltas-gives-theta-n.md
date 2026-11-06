@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-product-of-one-plus-deltas-gives-theta-n.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-compact-riemann-surface-has-meromorphic-function.md

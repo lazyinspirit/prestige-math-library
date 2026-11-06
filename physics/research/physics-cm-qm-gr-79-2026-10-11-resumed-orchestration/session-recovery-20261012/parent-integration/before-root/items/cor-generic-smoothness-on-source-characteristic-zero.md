@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-generic-smoothness-on-source-characteristic-zero.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-transitivity-of-induction-for-finite-groups.md

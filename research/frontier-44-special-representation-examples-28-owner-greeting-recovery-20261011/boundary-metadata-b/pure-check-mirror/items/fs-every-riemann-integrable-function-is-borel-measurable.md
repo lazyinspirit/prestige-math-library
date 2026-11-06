@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-riemann-integrable-function-is-borel-measurable.md

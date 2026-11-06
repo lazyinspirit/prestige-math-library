@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonsquare-tangent-conic-rational-surface-blowups-terminate.md

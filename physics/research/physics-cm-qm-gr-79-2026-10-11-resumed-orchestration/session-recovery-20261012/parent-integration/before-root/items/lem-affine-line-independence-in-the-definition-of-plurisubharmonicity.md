@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-affine-line-independence-in-the-definition-of-plurisubharmonicity.md

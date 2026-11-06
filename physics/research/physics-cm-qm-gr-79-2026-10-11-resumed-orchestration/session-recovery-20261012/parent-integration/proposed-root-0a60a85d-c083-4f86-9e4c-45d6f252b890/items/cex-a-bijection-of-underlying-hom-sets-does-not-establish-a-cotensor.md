@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-bijection-of-underlying-hom-sets-does-not-establish-a-cotensor.md

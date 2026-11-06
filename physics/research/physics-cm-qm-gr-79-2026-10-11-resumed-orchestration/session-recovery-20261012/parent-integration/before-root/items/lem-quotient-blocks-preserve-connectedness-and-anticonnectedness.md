@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quotient-blocks-preserve-connectedness-and-anticonnectedness.md

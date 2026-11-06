@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-g-delta-and-f-sigma-in-a-topological-space.md

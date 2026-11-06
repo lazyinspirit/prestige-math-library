@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-bmo-functions-need-not-be-globally-integrable.md

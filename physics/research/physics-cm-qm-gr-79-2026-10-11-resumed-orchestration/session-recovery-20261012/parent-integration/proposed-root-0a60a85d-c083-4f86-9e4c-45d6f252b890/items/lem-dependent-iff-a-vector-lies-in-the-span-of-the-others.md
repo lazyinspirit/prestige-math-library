@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dependent-iff-a-vector-lies-in-the-span-of-the-others.md

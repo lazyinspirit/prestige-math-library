@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-q-zeta-three-cuberoot-two-cuberoot-three-is-a-kummer-extension.md

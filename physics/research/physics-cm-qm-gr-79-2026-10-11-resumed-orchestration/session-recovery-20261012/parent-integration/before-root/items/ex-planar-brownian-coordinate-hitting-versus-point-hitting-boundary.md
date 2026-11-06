@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-planar-brownian-coordinate-hitting-versus-point-hitting-boundary.md

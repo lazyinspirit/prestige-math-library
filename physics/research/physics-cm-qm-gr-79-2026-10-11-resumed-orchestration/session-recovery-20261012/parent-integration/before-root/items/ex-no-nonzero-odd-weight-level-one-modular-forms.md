@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-no-nonzero-odd-weight-level-one-modular-forms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-reduced-powers-satisfy-naturality-instability-cartan-and-adem-relations.md

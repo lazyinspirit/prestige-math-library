@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-sphere-eversion-cannot-be-an-isotopy-through-embeddings.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions.md

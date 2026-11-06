@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-transpose-is-bounded-and-has-the-same-norm.md

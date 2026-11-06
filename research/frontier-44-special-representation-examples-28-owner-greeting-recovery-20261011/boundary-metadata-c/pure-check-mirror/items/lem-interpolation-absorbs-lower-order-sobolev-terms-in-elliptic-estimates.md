@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates.md

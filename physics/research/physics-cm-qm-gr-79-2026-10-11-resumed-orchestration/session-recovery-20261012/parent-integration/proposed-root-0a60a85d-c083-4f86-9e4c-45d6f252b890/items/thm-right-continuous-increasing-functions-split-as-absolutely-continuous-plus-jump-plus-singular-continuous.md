@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-right-continuous-increasing-functions-split-as-absolutely-continuous-plus-jump-plus-singular-continuous.md

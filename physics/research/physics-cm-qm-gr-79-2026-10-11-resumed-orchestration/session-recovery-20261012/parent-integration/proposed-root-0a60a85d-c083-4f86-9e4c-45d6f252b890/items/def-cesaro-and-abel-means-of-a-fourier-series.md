@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cesaro-and-abel-means-of-a-fourier-series.md

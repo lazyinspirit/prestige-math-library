@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-enveloping-quotient-kernels-and-augmentation-intersections.md

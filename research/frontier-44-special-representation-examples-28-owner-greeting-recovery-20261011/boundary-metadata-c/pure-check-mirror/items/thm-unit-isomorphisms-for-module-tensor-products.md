@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-unit-isomorphisms-for-module-tensor-products.md

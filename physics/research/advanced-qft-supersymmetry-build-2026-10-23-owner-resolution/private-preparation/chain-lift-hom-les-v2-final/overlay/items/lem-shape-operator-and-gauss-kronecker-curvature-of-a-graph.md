@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-shape-operator-and-gauss-kronecker-curvature-of-a-graph.md

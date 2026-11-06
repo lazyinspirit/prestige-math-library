@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-sine-over-x-is-only-conditionally-convergent.md

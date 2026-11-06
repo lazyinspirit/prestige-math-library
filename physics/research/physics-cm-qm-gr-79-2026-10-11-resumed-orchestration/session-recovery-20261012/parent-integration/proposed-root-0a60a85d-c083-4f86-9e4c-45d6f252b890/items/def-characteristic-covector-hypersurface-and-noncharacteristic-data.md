@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-characteristic-covector-hypersurface-and-noncharacteristic-data.md

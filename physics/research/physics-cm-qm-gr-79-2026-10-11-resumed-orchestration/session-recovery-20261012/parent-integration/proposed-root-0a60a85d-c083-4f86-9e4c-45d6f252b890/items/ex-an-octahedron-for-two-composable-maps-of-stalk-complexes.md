@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-octahedron-for-two-composable-maps-of-stalk-complexes.md

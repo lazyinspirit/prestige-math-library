@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-smoothed-versus-sharp-explicit-formula.md

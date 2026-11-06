@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-trivial-action-on-standard-meridians-fixes-the-stem-arc-system-up-to-isotopy.md

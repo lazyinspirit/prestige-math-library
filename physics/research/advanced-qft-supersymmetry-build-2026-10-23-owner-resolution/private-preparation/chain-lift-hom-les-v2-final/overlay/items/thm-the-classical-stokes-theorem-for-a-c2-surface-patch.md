@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-classical-stokes-theorem-for-a-c2-surface-patch.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy.md

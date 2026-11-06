@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-biproduct-of-two-abelian-groups-computed-as-a-matrix-calculus.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-alphabet-reduction-controls-size-and-degree.md

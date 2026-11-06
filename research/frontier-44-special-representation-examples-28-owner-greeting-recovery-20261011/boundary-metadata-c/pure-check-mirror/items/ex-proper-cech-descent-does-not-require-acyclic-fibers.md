@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-proper-cech-descent-does-not-require-acyclic-fibers.md

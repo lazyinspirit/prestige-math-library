@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-hh-coxeter-matrix-word-group-and-length.md

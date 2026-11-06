@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-compact-cw-images-have-finite-cell-support-without-choice.md

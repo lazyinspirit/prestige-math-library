@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-a-category-with-enough-projectives-and-with-enough-injectives.md

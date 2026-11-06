@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-an-extraspecial-p-group-has-no-complement-to-its-centre.md

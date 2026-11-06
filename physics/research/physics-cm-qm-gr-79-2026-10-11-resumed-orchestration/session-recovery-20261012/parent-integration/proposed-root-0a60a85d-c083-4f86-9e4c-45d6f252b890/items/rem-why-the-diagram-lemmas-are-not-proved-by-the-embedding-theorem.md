@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-why-the-diagram-lemmas-are-not-proved-by-the-embedding-theorem.md

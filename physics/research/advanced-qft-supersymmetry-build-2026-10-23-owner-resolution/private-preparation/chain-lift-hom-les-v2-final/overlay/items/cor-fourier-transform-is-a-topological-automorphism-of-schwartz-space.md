@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space.md

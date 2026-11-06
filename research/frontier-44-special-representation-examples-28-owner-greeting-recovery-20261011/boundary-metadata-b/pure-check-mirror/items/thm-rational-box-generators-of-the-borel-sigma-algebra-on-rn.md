@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn.md

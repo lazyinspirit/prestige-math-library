@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-pfa-implies-the-simple-ideal-dichotomy.md

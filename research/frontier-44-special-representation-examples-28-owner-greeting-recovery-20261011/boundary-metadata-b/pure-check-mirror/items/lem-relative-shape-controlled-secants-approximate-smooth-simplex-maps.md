@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps.md

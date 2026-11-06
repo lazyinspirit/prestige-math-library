@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-tubular-charts-realize-a-prescribed-normal-identification.md

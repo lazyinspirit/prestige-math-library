@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-zariski-topology-cofinite-on-affine-line.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-multivariable-geometric-series-on-a-distinguished-boundary.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-higher-order-boundary-regularity-for-dirichlet-problems.md

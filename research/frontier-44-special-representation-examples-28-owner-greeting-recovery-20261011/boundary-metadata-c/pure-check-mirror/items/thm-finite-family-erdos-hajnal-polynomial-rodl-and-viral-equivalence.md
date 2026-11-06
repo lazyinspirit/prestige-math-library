@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence.md

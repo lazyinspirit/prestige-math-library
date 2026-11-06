@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-affine-slice-simplex-and-wall-reflections.md

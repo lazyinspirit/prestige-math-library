@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-s-four-as-the-holomorph-of-the-klein-four-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-fundamental-sl2-modules-in-characteristic-p.md

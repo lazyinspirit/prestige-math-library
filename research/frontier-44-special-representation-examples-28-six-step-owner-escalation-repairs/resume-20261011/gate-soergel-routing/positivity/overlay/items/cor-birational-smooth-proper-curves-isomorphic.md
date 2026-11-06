@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-birational-smooth-proper-curves-isomorphic.md

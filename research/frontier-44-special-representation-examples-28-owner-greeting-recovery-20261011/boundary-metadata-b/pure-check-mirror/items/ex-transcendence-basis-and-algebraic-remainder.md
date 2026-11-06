@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-transcendence-basis-and-algebraic-remainder.md

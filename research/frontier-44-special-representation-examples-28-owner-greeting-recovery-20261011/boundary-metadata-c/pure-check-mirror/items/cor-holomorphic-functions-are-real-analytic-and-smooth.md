@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-holomorphic-functions-are-real-analytic-and-smooth.md

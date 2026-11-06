@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-closed-subspace-of-a-compact-space-is-compact.md

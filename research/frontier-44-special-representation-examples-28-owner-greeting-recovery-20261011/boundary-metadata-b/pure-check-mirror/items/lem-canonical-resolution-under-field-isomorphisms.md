@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-canonical-resolution-under-field-isomorphisms.md

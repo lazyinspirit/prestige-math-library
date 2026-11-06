@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-generic-translations-of-a-map-to-euclidean-space-are-transverse.md

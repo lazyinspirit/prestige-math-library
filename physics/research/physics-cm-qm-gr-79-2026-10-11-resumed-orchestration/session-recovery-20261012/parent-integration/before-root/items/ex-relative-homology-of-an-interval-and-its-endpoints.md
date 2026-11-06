@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-relative-homology-of-an-interval-and-its-endpoints.md

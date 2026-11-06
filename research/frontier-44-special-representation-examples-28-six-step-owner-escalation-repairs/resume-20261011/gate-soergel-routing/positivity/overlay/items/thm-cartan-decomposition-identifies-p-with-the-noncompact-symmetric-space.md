@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cartan-decomposition-identifies-p-with-the-noncompact-symmetric-space.md

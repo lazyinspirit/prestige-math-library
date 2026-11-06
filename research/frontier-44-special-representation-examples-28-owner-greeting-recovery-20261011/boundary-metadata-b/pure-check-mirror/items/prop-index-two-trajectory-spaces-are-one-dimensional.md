@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-index-two-trajectory-spaces-are-one-dimensional.md

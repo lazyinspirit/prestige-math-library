@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-transverse-orientability-is-load-bearing-in-the-global-codimension-one-form.md

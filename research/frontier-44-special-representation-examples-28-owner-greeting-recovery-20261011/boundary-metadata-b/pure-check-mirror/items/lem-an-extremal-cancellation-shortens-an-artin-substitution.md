@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-an-extremal-cancellation-shortens-an-artin-substitution.md

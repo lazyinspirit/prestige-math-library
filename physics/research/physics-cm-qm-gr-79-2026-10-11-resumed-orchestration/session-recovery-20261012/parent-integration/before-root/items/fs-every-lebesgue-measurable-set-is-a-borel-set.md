@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-lebesgue-measurable-set-is-a-borel-set.md

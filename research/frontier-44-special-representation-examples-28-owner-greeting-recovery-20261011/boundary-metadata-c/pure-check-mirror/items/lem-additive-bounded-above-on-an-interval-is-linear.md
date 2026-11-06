@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-additive-bounded-above-on-an-interval-is-linear.md

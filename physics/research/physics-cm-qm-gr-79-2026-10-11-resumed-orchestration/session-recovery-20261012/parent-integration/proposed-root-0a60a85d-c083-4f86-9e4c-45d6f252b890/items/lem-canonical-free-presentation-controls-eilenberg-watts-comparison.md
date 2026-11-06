@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-canonical-free-presentation-controls-eilenberg-watts-comparison.md

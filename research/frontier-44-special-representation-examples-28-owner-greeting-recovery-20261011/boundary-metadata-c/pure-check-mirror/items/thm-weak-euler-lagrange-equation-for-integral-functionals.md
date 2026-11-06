@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-weak-euler-lagrange-equation-for-integral-functionals.md

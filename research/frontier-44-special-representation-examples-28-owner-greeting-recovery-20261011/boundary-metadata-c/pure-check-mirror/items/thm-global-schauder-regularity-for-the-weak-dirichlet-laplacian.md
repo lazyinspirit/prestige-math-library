@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian.md

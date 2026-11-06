@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-density-of-elementary-predictable-processes-in-predictable-l2.md

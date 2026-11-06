@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-expander-walk-hits-dense-bad-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-non-noetherian-subalgebra-of-a-polynomial-ring.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-derived-subgroup-is-characteristic-and-abelianization-is-universal.md

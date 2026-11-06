@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-abelian-scheme-universal-structure-sheaf-sections.md

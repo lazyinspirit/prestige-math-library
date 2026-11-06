@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-complete-and-totally-bounded-uniform-spaces-are-compact.md

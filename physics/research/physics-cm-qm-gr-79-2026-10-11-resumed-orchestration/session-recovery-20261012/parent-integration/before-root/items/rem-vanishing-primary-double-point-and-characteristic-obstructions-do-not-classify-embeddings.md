@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-vanishing-primary-double-point-and-characteristic-obstructions-do-not-classify-embeddings.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-grassmannian-lines-in-projective-three-space.md

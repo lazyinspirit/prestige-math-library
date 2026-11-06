@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-q-schur-weyl-weight-space-gram-determinant-hook-product.md

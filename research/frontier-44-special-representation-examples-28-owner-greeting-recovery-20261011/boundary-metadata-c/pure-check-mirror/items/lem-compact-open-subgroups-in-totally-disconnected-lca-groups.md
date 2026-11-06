@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-open-subgroups-in-totally-disconnected-lca-groups.md

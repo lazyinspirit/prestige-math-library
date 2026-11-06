@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-an-extension-induces-a-well-defined-outer-action-on-the-kernel.md

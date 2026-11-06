@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical.md

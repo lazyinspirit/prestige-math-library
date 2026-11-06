@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-hilbert-operators-form-a-c-star-algebra.md

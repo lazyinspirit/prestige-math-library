@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lc-weakly-compact-stationary-reflection-and-mahlo.md

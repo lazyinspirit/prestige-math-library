@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-symmetrization-does-not-preserve-products-in-sl-two.md

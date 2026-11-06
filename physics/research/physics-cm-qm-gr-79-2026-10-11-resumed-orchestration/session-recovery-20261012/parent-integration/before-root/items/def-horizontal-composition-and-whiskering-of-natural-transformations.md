@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-horizontal-composition-and-whiskering-of-natural-transformations.md

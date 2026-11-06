@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gcd-and-lcm-as-subgroups-of-z.md

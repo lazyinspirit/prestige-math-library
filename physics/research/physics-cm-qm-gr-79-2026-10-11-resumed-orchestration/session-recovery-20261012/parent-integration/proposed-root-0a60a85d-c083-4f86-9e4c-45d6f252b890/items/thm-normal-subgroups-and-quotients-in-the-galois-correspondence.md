@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-normal-subgroups-and-quotients-in-the-galois-correspondence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-residue-pairing-for-line-bundle-cohomology.md

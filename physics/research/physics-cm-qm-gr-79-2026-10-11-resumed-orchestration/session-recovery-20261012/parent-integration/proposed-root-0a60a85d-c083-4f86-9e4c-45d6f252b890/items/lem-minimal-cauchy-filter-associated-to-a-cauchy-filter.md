@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-minimal-cauchy-filter-associated-to-a-cauchy-filter.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-l-and-s-space-existence-is-asymmetric.md

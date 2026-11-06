@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-soergel-character-grading-alone-does-not-prove-category-o-koszulity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-normal-push-off-count-for-an-even-dimensional-euclidean-immersion.md

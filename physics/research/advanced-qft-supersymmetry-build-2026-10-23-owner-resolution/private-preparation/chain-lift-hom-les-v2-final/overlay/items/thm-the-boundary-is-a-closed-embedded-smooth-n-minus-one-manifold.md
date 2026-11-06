@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold.md

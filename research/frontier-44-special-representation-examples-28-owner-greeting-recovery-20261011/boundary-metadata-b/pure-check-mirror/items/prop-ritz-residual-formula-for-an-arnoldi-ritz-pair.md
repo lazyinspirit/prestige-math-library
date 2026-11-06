@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-ritz-residual-formula-for-an-arnoldi-ritz-pair.md

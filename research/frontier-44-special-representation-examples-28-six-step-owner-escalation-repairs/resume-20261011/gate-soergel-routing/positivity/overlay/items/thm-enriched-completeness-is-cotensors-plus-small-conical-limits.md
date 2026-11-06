@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-enriched-completeness-is-cotensors-plus-small-conical-limits.md

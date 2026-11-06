@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-large-almost-pure-pair-hypotheses-yield-a-complete-or-anticomplete-blockade.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-heat-kernel-normalisation-scaling-and-derivatives.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-direct-integral-of-a-measurable-hilbert-field.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-loop-space-of-bg-recovers-g-up-to-homotopy.md

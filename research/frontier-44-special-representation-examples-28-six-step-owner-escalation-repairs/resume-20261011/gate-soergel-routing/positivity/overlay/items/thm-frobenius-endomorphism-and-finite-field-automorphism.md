@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-frobenius-endomorphism-and-finite-field-automorphism.md

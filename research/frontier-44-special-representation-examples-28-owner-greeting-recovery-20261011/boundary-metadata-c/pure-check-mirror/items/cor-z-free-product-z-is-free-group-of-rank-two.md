@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-z-free-product-z-is-free-group-of-rank-two.md

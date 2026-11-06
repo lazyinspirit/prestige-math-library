@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-graded-specht-classes-form-a-basis-of-the-module-grothendieck-group.md

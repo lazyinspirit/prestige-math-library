@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-logspace-machines-have-polynomially-many-configurations.md

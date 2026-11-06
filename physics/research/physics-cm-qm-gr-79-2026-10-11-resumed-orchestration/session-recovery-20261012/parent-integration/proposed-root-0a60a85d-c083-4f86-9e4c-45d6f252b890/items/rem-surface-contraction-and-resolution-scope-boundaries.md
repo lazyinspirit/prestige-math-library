@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-surface-contraction-and-resolution-scope-boundaries.md

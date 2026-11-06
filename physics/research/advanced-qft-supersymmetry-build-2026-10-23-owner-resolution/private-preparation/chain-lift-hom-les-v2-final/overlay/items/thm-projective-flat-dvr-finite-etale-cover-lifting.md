@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-projective-flat-dvr-finite-etale-cover-lifting.md

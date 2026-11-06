@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-graph-has-an-even-number-of-odd-degree-vertices.md

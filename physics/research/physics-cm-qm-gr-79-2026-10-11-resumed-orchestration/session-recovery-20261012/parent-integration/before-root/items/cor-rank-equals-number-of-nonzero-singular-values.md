@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-rank-equals-number-of-nonzero-singular-values.md

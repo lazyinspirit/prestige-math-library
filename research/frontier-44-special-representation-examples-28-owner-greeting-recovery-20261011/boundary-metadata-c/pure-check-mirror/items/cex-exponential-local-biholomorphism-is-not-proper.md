@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-exponential-local-biholomorphism-is-not-proper.md

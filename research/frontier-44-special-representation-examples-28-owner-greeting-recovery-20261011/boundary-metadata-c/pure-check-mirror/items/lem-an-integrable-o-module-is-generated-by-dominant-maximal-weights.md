@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-an-integrable-o-module-is-generated-by-dominant-maximal-weights.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-middle-handle-intersection-matrix-of-an-h-cobordism.md

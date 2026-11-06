@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-almost-sure-convergence-implies-convergence-in-probability.md

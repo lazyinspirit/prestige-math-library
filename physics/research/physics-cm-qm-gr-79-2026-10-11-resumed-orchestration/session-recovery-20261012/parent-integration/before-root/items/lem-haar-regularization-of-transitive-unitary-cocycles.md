@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-haar-regularization-of-transitive-unitary-cocycles.md

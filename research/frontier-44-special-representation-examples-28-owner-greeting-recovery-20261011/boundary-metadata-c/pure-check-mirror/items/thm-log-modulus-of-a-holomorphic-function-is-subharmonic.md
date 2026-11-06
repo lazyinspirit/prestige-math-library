@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-log-modulus-of-a-holomorphic-function-is-subharmonic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-weight-module-with-unbounded-upward-support-is-not-in-o.md

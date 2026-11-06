@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-concatenated-code-multiplies-rate-and-distance.md

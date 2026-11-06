@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-yoneda-lemma-requires-a-small-category.md

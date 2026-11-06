@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-four-vertex-graph-with-the-erdos-hajnal-property-by-substitution.md

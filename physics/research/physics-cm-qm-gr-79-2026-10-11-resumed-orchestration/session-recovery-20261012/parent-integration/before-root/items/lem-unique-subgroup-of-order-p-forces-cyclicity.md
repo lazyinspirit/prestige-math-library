@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unique-subgroup-of-order-p-forces-cyclicity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ramsey-recursion-and-diagonal-upper-bound.md

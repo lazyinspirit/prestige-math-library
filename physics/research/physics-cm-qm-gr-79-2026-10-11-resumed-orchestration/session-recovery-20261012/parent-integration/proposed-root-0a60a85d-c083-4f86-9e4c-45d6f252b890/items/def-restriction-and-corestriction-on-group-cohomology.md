@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-restriction-and-corestriction-on-group-cohomology.md

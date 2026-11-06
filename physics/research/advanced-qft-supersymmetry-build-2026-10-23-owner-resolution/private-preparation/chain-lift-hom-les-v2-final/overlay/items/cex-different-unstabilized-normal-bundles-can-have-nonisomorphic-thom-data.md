@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-different-unstabilized-normal-bundles-can-have-nonisomorphic-thom-data.md

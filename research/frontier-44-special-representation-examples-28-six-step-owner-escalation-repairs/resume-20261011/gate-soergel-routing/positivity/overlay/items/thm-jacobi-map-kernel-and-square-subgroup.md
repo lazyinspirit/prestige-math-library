@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-jacobi-map-kernel-and-square-subgroup.md

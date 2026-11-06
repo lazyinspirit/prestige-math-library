@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-momentum-operator-under-the-fourier-transform.md

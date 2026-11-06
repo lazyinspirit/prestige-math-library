@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-abelian-sheaves-admit-bounded-above-flat-resolutions.md

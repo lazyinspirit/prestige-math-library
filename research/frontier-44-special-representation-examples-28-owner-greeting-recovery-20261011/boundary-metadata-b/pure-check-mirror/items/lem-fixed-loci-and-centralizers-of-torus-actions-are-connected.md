@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fixed-loci-and-centralizers-of-torus-actions-are-connected.md

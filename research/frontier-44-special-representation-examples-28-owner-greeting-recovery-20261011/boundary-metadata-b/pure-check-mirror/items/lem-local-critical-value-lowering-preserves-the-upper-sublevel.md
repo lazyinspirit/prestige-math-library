@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-critical-value-lowering-preserves-the-upper-sublevel.md

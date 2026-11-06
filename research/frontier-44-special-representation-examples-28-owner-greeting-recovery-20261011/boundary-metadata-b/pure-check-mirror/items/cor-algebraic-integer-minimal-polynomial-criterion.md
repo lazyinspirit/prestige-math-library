@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-algebraic-integer-minimal-polynomial-criterion.md

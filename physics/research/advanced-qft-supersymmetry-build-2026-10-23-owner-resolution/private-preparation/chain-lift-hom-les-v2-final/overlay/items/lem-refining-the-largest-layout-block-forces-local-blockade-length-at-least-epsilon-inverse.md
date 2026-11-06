@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-refining-the-largest-layout-block-forces-local-blockade-length-at-least-epsilon-inverse.md

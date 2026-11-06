@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lipschitz-characterisation-within-absolutely-continuous-functions.md

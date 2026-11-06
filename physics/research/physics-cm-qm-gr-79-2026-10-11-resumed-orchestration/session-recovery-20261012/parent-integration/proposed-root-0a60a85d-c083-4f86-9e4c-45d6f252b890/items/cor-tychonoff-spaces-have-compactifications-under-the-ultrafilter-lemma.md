@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma.md

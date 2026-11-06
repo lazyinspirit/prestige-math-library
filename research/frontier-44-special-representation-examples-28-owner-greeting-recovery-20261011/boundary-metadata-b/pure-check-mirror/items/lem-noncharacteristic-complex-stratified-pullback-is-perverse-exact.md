@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-noncharacteristic-complex-stratified-pullback-is-perverse-exact.md

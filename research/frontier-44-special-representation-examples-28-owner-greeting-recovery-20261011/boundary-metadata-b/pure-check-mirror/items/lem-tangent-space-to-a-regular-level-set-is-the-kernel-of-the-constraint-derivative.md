@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-tangent-space-to-a-regular-level-set-is-the-kernel-of-the-constraint-derivative.md

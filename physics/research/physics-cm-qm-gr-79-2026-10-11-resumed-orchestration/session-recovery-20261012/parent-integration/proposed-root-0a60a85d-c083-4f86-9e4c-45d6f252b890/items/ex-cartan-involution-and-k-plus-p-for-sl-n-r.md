@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cartan-involution-and-k-plus-p-for-sl-n-r.md

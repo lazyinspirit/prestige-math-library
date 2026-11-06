@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nonzero-commutative-rings-have-invariant-basis-number.md

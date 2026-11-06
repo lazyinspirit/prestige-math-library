@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sobolev-embedding-on-an-unbounded-domain-needs-the-full-norm-or-decay.md

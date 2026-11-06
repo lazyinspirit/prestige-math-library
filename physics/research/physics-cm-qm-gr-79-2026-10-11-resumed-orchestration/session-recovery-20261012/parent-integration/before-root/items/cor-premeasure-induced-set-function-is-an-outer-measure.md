@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-premeasure-induced-set-function-is-an-outer-measure.md

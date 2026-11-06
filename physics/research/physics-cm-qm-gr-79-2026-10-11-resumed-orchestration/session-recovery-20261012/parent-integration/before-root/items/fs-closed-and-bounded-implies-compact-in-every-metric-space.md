@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-closed-and-bounded-implies-compact-in-every-metric-space.md

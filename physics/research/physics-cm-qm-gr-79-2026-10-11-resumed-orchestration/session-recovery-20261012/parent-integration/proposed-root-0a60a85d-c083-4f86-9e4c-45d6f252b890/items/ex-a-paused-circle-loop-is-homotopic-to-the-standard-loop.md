@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-paused-circle-loop-is-homotopic-to-the-standard-loop.md

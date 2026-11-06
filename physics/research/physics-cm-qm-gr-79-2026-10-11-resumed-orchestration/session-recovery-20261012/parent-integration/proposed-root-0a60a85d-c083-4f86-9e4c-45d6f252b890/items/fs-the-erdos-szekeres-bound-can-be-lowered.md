@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-erdos-szekeres-bound-can-be-lowered.md

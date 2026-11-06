@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces.md

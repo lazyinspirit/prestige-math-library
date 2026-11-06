@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-symplectic-vector-spaces-have-even-dimension.md

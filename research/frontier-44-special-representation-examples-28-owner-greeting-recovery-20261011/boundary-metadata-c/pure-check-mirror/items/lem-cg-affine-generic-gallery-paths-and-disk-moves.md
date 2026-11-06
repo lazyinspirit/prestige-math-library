@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-affine-generic-gallery-paths-and-disk-moves.md

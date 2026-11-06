@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-riemannian-manifold-has-finite-distance-between-points-in-different-components.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-orthogonal-projection-onto-a-plane-and-nearest-point.md

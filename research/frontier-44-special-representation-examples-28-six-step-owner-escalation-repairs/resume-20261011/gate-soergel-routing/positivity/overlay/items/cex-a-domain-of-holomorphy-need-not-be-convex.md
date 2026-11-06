@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-domain-of-holomorphy-need-not-be-convex.md

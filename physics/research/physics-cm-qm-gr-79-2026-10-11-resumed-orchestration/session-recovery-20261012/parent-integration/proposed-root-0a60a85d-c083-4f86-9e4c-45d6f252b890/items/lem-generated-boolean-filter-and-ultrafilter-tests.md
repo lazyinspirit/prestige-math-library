@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-generated-boolean-filter-and-ultrafilter-tests.md

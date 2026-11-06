@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-hh-coideal-with-nonzero-counit-does-not-give-quotient-map.md

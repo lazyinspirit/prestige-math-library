@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-poisson-kernel-concentrates-at-a-boundary-point.md

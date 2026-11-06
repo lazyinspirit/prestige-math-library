@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-step-integrator-evaluates-at-the-jump.md

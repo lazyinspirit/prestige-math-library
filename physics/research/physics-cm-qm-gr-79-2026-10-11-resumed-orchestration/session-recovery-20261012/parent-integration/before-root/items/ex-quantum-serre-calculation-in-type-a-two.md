@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-quantum-serre-calculation-in-type-a-two.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice.md

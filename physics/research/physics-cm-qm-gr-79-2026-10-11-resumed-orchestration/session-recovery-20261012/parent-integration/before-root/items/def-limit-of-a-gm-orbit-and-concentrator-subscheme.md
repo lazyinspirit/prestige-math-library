@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-limit-of-a-gm-orbit-and-concentrator-subscheme.md

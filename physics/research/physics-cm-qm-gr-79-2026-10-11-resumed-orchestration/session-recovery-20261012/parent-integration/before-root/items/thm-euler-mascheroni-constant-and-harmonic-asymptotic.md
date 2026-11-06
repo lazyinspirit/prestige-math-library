@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-euler-mascheroni-constant-and-harmonic-asymptotic.md

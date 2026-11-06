@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fejer-kernel-is-a-positive-approximate-identity.md

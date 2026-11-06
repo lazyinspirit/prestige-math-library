@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-two-cw-structures-on-the-circle-have-the-same-euler-characteristic.md

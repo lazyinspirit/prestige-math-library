@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-perfectness-is-equivalent-to-vanishing-morse-correction-polynomial.md

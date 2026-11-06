@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-proper-birational-normal-curve-isomorphism-off-finite-set.md

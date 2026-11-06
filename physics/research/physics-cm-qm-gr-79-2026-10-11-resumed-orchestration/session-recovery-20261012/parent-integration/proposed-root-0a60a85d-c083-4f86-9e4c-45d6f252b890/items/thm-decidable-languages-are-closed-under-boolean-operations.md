@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-decidable-languages-are-closed-under-boolean-operations.md

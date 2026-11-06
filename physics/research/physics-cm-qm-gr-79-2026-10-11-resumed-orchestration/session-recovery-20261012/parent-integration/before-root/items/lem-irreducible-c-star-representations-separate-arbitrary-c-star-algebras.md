@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-irreducible-c-star-representations-separate-arbitrary-c-star-algebras.md

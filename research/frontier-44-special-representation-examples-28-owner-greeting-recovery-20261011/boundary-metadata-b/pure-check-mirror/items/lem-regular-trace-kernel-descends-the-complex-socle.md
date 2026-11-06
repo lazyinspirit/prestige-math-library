@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-regular-trace-kernel-descends-the-complex-socle.md

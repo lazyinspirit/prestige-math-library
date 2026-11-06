@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-plus-and-minus-type-of-an-extraspecial-p-group.md

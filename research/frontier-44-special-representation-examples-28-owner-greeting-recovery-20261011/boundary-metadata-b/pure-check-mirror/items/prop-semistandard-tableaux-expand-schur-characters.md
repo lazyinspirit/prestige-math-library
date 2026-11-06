@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-semistandard-tableaux-expand-schur-characters.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-short-exact-sequence-to-s-n-does-not-prove-b-n-torsion-free.md

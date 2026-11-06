@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators.md

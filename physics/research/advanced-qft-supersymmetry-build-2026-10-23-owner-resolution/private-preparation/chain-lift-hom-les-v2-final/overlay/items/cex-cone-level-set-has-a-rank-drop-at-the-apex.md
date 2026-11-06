@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-cone-level-set-has-a-rank-drop-at-the-apex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-weighted-maximal-function-is-weak-type-one-one.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-primitive-subspaces-hard-lefschetz-and-hodge-riemann-signs.md

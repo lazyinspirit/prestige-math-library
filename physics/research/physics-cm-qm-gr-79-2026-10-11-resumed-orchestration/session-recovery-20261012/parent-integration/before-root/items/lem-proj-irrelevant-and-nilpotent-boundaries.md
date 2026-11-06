@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-proj-irrelevant-and-nilpotent-boundaries.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-roots-and-root-groups-of-a-split-reductive-group.md

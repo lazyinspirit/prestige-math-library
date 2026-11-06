@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-nonfree-action-with-three-orbits-on-four-points.md

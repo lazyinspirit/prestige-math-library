@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-boundedness-does-not-replace-pointwise-relative-compactness.md

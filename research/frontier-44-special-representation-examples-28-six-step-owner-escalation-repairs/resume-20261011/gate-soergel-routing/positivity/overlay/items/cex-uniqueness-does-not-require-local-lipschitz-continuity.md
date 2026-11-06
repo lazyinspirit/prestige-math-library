@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-uniqueness-does-not-require-local-lipschitz-continuity.md

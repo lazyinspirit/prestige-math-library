@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces.md

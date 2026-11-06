@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finite-right-exact-functor-needs-no-infinite-coproduct-hypothesis.md

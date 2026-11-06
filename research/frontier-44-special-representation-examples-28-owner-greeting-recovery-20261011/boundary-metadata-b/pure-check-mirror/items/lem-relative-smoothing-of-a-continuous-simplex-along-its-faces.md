@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-smoothing-of-a-continuous-simplex-along-its-faces.md

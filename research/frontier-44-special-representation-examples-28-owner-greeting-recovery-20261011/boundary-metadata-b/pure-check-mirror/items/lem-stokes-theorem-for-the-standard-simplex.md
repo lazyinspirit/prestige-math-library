@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-stokes-theorem-for-the-standard-simplex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-jump-across-a-hypersurface-is-not-in-w-one-p.md

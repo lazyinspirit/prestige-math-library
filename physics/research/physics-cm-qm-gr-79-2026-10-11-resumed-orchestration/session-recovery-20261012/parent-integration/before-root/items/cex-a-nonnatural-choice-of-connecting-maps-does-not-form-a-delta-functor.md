@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-nonnatural-choice-of-connecting-maps-does-not-form-a-delta-functor.md

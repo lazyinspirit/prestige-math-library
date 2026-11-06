@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-holomorphic-and-antiholomorphic-discrete-series-models.md

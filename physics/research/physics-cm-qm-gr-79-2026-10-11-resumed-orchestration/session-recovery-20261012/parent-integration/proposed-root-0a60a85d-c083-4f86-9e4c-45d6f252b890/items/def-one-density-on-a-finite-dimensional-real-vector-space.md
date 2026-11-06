@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-one-density-on-a-finite-dimensional-real-vector-space.md

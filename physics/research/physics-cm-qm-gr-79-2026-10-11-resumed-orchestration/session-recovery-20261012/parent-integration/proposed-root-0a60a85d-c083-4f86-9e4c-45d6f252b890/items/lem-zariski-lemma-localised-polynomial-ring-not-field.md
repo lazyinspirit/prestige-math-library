@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zariski-lemma-localised-polynomial-ring-not-field.md

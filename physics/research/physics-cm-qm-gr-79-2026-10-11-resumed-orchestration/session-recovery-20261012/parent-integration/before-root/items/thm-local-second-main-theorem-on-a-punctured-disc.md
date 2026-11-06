@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-local-second-main-theorem-on-a-punctured-disc.md

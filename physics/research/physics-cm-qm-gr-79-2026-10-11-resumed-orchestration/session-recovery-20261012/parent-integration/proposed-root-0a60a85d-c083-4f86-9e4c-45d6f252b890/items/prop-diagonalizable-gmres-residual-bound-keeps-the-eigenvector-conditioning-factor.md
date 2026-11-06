@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-diagonalizable-gmres-residual-bound-keeps-the-eigenvector-conditioning-factor.md

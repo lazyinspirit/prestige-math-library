@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-endpoint-interpolation-simple-analytic-families.md

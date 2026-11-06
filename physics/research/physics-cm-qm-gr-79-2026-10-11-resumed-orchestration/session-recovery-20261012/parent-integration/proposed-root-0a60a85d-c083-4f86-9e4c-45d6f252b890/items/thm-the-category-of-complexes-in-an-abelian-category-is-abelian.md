@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-category-of-complexes-in-an-abelian-category-is-abelian.md

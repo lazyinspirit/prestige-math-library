@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-stone-cech-of-a-finite-discrete-space.md

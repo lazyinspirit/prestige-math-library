@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unstable-orientations-induce-trajectory-moduli-orientations.md

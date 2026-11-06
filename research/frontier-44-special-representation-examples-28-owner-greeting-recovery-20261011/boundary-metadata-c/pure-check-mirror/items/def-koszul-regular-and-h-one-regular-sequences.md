@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-koszul-regular-and-h-one-regular-sequences.md

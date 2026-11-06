@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-continuous-partials-and-cauchy-riemann-imply-holomorphic.md

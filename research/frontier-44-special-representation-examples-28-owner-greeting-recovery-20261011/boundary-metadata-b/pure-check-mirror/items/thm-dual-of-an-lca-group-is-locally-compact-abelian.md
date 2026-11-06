@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-dual-of-an-lca-group-is-locally-compact-abelian.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-polynomial-division-fails-for-a-nonunit-leading-coefficient.md

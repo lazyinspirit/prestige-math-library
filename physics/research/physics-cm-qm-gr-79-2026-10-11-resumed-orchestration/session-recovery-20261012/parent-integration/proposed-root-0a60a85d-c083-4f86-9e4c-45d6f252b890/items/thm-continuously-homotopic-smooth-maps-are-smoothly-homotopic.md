@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic.md

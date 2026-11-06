@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-transfer-homomorphism-for-a-finite-index-subgroup.md

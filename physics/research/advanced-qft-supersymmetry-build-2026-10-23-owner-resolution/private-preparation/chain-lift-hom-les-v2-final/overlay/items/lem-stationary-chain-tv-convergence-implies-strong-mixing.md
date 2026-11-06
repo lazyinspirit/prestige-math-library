@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-stationary-chain-tv-convergence-implies-strong-mixing.md

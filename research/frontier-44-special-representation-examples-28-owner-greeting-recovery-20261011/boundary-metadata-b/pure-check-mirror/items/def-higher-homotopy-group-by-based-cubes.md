@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-higher-homotopy-group-by-based-cubes.md

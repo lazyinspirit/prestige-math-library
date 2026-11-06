@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-complex-analytic-functions-have-local-primitives.md

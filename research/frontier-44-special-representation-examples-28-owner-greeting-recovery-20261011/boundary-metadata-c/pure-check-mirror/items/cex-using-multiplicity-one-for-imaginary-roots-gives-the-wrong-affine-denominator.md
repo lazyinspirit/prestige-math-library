@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-using-multiplicity-one-for-imaginary-roots-gives-the-wrong-affine-denominator.md

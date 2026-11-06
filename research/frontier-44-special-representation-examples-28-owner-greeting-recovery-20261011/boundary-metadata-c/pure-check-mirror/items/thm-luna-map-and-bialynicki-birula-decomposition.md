@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-luna-map-and-bialynicki-birula-decomposition.md

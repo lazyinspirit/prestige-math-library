@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-greedy-sorting-word-and-rank-two-alignment.md

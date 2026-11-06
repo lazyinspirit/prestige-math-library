@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-weak-and-norm-topologies-differ-on-ell-one-despite-identical-convergent-sequences.md

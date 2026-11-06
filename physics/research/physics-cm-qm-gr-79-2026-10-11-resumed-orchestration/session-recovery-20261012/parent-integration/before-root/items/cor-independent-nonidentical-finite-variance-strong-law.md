@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-independent-nonidentical-finite-variance-strong-law.md

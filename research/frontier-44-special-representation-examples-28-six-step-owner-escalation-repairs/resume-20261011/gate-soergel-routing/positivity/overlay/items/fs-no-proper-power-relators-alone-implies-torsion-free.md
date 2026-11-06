@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-no-proper-power-relators-alone-implies-torsion-free.md

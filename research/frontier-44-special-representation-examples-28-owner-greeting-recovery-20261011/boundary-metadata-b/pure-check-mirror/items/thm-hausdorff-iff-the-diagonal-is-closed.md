@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hausdorff-iff-the-diagonal-is-closed.md

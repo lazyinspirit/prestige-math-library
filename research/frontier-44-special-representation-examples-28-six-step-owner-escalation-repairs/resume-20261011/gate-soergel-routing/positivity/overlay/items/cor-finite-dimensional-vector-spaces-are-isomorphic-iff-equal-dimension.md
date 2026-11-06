@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension.md

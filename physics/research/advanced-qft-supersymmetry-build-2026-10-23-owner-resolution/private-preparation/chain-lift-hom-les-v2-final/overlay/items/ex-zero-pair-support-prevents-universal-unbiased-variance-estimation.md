@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-zero-pair-support-prevents-universal-unbiased-variance-estimation.md

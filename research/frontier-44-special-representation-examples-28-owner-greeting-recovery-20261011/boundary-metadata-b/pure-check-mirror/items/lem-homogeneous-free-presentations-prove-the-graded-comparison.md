@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-homogeneous-free-presentations-prove-the-graded-comparison.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-kolmogorov-strong-law-for-independent-uniformly-bounded-variances.md

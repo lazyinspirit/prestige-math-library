@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-relative-homology-connecting-homomorphism-on-cycles.md

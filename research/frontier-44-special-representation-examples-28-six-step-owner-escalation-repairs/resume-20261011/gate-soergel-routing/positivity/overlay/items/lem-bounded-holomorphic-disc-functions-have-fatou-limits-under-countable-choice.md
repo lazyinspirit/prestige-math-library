@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice.md

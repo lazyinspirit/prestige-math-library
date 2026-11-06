@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-transpose-lower-bound-gives-image-ball-density.md

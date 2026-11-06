@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-quadratic-form-of-a-self-adjoint-operator-attains-the-norm.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-defect-and-brauer-pairs-for-a4-in-characteristic-three.md

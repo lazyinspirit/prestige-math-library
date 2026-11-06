@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-derived-composition-isomorphism-under-total-acyclicity.md

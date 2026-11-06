@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-generic-extensions-satisfy-zf-and-zfc.md

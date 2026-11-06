@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-stars-and-bars-holds-for-every-number-of-parts.md

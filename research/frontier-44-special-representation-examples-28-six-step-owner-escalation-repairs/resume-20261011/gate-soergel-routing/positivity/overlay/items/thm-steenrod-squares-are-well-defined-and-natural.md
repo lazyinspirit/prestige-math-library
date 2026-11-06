@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-steenrod-squares-are-well-defined-and-natural.md

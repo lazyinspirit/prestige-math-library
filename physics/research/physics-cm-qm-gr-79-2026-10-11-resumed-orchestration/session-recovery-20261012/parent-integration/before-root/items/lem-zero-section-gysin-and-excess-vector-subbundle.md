@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zero-section-gysin-and-excess-vector-subbundle.md

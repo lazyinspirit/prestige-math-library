@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pontryagin-dual-of-an-lca-quotient-is-the-annihilator.md

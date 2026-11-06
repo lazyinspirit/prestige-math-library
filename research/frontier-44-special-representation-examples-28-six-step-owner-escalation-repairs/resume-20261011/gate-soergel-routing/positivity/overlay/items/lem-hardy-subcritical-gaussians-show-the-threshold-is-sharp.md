@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hardy-subcritical-gaussians-show-the-threshold-is-sharp.md

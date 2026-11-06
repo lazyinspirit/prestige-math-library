@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-subobject-first-completed-finite-quiver-hall-algebra-and-tori.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-bezout-needs-projective-algebraic-closure-multiplicity.md

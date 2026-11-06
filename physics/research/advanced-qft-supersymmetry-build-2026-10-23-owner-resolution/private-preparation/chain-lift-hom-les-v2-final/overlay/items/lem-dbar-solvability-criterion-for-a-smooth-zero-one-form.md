@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-dbar-solvability-criterion-for-a-smooth-zero-one-form.md

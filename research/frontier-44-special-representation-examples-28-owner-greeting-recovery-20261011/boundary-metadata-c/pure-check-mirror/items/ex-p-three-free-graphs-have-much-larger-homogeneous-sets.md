@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-p-three-free-graphs-have-much-larger-homogeneous-sets.md

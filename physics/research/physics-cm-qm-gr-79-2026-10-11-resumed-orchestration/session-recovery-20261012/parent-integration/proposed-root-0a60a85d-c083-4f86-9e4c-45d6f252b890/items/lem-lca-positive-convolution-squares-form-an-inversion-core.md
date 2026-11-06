@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lca-positive-convolution-squares-form-an-inversion-core.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-product-to-sum-and-sum-to-product-identities.md

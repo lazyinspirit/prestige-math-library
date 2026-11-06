@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-metrizability-and-first-countability-are-hereditary.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-smooth-proper-curve-finite-map-projective-line.md

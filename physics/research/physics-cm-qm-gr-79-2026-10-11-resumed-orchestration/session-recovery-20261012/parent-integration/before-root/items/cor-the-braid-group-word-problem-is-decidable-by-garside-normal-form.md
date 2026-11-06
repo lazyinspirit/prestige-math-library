@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-braid-group-word-problem-is-decidable-by-garside-normal-form.md

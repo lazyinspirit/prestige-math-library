@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-light-leaf-maps-form-bases-of-type-a-soergel-homs-to-the-unit.md

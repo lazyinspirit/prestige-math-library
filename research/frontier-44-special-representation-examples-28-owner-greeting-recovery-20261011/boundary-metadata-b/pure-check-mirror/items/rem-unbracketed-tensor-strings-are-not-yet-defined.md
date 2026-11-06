@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-unbracketed-tensor-strings-are-not-yet-defined.md

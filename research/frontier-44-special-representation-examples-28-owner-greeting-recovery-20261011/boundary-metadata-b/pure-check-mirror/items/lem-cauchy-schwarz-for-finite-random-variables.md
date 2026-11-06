@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cauchy-schwarz-for-finite-random-variables.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kuratowski-distance-map-is-an-isometry.md

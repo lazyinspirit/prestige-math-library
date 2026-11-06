@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-complete-and-empty-hereditary-classes-have-constant-one.md

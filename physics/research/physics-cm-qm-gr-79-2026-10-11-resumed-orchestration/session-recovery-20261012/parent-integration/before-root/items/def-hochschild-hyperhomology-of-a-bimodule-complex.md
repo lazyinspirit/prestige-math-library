@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hochschild-hyperhomology-of-a-bimodule-complex.md

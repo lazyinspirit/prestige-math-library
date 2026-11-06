@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-feferman-model-has-no-free-ultrafilter-on-omega.md

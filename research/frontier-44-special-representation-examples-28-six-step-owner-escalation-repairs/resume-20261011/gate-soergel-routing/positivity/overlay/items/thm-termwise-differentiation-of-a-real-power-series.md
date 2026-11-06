@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-termwise-differentiation-of-a-real-power-series.md

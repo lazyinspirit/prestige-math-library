@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-two-sided-bar-complex-is-an-enveloping-projective-resolution.md

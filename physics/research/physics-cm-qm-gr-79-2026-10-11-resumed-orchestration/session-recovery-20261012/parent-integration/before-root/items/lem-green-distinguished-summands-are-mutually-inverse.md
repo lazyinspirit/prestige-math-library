@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-green-distinguished-summands-are-mutually-inverse.md

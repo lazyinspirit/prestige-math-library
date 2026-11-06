@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace.md

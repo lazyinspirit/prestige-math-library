@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-symplectic-manifold-admits-a-compatible-almost-complex-structure.md

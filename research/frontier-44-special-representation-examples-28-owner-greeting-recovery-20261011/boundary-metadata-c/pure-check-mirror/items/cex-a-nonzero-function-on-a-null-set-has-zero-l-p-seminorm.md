@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-nonzero-function-on-a-null-set-has-zero-l-p-seminorm.md

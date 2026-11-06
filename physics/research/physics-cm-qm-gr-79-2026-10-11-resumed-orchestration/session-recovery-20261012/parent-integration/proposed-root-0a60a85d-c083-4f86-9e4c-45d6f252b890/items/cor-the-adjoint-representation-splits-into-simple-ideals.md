@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-adjoint-representation-splits-into-simple-ideals.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-meromorphic-continuation-and-intertwining-identity-for-a-nu.md

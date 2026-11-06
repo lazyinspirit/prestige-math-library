@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-np-is-contained-in-pspace-and-pspace-in-exp.md

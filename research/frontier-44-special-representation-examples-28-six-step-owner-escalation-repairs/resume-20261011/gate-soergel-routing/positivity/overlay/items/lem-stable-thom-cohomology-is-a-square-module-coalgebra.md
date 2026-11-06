@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-stable-thom-cohomology-is-a-square-module-coalgebra.md

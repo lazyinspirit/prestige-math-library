@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-five-vertex-path-has-the-polynomial-rodl-property.md

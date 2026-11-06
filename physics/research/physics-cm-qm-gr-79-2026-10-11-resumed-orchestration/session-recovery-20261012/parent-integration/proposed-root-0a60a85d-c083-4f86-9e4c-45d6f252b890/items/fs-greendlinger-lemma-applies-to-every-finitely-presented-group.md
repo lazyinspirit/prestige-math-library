@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-greendlinger-lemma-applies-to-every-finitely-presented-group.md

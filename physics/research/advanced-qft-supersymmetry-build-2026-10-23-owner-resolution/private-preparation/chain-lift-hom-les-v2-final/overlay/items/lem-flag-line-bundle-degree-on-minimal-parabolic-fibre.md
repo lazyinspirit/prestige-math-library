@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-flag-line-bundle-degree-on-minimal-parabolic-fibre.md

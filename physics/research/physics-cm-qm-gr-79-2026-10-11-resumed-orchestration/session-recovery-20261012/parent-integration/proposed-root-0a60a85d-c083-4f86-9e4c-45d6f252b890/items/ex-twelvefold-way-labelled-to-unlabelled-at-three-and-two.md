@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-twelvefold-way-labelled-to-unlabelled-at-three-and-two.md

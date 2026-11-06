@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-measurable-essentially-bounded-operator-fields-act-decomposably.md

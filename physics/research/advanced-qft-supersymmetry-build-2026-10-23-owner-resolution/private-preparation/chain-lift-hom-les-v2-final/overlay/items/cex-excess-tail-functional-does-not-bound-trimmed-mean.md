@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-excess-tail-functional-does-not-bound-trimmed-mean.md

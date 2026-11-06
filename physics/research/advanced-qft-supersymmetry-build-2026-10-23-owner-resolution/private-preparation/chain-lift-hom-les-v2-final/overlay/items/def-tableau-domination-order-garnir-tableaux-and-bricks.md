@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-tableau-domination-order-garnir-tableaux-and-bricks.md

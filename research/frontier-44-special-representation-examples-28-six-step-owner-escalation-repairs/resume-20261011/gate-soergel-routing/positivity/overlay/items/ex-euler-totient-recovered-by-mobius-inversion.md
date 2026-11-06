@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-euler-totient-recovered-by-mobius-inversion.md

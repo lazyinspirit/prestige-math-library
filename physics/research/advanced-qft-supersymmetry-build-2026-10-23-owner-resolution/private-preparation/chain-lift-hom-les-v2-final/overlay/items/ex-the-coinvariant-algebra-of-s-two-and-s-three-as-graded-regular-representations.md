@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-coinvariant-algebra-of-s-two-and-s-three-as-graded-regular-representations.md

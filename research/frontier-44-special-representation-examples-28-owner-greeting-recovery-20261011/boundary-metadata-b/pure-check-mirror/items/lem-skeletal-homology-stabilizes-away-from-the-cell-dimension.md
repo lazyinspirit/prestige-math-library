@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-skeletal-homology-stabilizes-away-from-the-cell-dimension.md

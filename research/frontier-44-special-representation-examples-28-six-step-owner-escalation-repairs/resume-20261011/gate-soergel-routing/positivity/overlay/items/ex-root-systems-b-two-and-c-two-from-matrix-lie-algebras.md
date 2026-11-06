@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras.md

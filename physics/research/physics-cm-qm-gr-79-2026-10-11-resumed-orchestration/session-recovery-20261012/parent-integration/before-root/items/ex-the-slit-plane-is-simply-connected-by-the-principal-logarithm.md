@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-slit-plane-is-simply-connected-by-the-principal-logarithm.md

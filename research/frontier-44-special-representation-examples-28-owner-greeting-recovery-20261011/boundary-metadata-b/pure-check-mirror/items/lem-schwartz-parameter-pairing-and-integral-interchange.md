@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-schwartz-parameter-pairing-and-integral-interchange.md

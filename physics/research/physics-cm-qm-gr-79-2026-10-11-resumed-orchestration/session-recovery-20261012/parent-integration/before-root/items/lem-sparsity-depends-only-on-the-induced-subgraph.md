@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sparsity-depends-only-on-the-induced-subgraph.md

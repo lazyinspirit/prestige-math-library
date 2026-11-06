@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hilbert-transform-of-the-poisson-kernel.md

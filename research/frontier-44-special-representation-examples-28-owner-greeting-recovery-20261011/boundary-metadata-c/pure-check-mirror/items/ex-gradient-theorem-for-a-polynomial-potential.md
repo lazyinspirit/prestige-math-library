@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-gradient-theorem-for-a-polynomial-potential.md

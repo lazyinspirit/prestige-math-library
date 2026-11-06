@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cyclotomic-klr-quotients-in-ranks-zero-one-and-two.md

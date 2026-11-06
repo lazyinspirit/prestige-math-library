@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fredholm-determinant-trace-norm-continuity-and-growth.md

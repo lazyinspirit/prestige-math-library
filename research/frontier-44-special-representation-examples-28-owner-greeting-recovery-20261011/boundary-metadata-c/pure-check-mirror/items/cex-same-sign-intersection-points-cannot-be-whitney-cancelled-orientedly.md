@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-same-sign-intersection-points-cannot-be-whitney-cancelled-orientedly.md

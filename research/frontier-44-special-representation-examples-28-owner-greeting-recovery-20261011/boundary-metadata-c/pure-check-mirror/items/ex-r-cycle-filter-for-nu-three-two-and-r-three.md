@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-r-cycle-filter-for-nu-three-two-and-r-three.md

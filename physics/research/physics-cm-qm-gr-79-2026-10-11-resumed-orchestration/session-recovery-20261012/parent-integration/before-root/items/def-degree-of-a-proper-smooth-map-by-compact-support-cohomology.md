@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-degree-of-a-proper-smooth-map-by-compact-support-cohomology.md

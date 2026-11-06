@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-averaging-a-form-for-a-circle-representation.md

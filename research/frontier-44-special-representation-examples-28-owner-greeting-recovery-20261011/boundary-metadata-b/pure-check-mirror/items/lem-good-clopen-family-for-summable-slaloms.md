@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-good-clopen-family-for-summable-slaloms.md

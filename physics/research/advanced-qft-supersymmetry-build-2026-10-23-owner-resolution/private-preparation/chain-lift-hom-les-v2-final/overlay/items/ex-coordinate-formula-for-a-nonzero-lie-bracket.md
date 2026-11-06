@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-coordinate-formula-for-a-nonzero-lie-bracket.md

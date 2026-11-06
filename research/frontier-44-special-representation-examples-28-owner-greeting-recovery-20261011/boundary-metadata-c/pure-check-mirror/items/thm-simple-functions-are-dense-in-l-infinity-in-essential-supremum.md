@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-functions-are-dense-in-l-infinity-in-essential-supremum.md

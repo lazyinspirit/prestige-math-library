@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-symmetric-forcing-system-and-hereditarily-symmetric-names.md

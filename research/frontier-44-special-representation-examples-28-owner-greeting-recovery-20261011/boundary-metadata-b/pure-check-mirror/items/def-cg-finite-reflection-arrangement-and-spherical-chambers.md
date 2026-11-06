@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cg-finite-reflection-arrangement-and-spherical-chambers.md

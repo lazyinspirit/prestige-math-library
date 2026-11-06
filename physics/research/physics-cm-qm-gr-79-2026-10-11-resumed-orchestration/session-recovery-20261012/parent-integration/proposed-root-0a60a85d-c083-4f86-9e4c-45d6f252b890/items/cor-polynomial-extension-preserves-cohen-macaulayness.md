@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-polynomial-extension-preserves-cohen-macaulayness.md

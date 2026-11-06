@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-delta-one-minus-delta-minus-one-has-the-obvious-hahn-and-jordan-decomposition.md

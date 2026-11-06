@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-poisson-jensen-inequality-hardy-functions.md

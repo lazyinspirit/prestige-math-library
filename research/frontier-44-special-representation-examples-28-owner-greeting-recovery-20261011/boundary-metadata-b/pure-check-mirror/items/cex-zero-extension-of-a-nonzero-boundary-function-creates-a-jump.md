@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-zero-extension-of-a-nonzero-boundary-function-creates-a-jump.md

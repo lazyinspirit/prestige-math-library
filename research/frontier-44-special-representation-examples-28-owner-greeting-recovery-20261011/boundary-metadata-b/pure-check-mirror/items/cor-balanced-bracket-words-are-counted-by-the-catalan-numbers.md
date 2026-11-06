@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-balanced-bracket-words-are-counted-by-the-catalan-numbers.md

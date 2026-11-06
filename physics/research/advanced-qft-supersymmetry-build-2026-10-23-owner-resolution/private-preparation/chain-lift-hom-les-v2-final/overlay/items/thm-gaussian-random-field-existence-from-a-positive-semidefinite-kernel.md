@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-gaussian-random-field-existence-from-a-positive-semidefinite-kernel.md

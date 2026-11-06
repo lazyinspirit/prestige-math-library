@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-simplicial-augmentation-is-a-chain-map.md

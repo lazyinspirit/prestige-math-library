@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-highest-weight-lambda-gives-a-finite-dimensional-simple-module.md

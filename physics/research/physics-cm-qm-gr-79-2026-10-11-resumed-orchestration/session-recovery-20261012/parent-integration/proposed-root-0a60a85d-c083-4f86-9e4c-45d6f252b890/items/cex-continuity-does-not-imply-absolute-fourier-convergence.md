@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-continuity-does-not-imply-absolute-fourier-convergence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-real-stone-weierstrass-nowhere-vanishing-form.md

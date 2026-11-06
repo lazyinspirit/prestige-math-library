@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coprime-primitive-two-square-products-remain-primitive.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sr-reverse-cauchy-schwarz-for-future-timelike-vectors.md

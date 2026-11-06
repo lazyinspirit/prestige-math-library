@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-pullback-connection-is-well-defined-and-functorial.md

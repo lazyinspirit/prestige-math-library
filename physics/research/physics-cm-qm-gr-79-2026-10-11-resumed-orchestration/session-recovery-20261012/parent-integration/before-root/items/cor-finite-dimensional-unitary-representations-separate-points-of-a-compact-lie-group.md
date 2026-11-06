@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-dimensional-unitary-representations-separate-points-of-a-compact-lie-group.md

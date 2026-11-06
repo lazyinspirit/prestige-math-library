@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-degenerate-bar-chains-form-a-contractible-subcomplex.md

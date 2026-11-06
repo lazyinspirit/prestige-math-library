@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-connected-sum-of-oriented-homotopy-spheres-is-a-homotopy-sphere.md

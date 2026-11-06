@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-laplacian-kernel-dimension-counts-components.md

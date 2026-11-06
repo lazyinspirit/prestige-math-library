@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-restricted-regular-representation-is-weakly-contained-in-subgroup-regular-representation.md

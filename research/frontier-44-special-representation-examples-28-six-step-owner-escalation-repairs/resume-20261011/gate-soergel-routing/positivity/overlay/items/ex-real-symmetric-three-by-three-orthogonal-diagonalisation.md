@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-real-symmetric-three-by-three-orthogonal-diagonalisation.md

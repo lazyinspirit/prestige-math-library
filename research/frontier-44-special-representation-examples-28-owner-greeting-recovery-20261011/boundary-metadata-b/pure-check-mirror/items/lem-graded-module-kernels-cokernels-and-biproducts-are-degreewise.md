@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise.md

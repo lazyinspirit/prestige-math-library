@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-upper-boundary-of-the-surgery-trace-is-the-surged-manifold.md

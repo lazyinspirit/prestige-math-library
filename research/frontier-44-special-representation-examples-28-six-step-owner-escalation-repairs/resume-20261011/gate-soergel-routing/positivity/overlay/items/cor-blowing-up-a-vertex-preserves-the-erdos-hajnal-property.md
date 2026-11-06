@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-blowing-up-a-vertex-preserves-the-erdos-hajnal-property.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-positive-measure-subsets-of-haar-measure-contain-finite-positive-measure-subsets.md

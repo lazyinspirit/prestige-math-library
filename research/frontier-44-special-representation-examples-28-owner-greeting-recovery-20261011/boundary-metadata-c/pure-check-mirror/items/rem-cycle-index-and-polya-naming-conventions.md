@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-cycle-index-and-polya-naming-conventions.md

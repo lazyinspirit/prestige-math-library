@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-set-of-positive-finite-measure-fills-most-of-a-dyadic-cube.md

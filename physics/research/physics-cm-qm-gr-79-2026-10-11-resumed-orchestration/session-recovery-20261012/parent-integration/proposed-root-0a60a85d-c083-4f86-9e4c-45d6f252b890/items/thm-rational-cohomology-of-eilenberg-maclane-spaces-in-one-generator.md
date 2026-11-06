@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rational-cohomology-of-eilenberg-maclane-spaces-in-one-generator.md

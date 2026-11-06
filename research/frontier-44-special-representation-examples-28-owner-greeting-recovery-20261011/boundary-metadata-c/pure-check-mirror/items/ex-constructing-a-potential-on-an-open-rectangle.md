@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-constructing-a-potential-on-an-open-rectangle.md

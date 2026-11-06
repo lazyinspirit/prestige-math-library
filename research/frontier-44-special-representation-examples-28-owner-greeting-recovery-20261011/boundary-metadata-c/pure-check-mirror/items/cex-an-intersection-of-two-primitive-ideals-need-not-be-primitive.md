@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-intersection-of-two-primitive-ideals-need-not-be-primitive.md

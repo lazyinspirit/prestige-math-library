@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-noncompact-leaf-of-a-compact-c2-foliation-meets-a-positive-closed-transversal.md

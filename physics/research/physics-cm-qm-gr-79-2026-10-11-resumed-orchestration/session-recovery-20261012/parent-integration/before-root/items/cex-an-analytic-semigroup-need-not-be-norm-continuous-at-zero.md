@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-analytic-semigroup-need-not-be-norm-continuous-at-zero.md

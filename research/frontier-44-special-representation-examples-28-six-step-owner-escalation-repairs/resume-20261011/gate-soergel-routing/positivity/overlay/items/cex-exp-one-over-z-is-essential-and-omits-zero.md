@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-exp-one-over-z-is-essential-and-omits-zero.md

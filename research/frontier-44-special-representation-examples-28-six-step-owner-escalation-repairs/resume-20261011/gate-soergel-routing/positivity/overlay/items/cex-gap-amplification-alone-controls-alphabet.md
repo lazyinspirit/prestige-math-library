@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-gap-amplification-alone-controls-alphabet.md

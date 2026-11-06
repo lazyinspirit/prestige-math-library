@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-the-level-one-vector-representation-its-affinization-and-energy-function.md

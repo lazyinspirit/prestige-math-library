@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-writing-e-two-double-arrow-h-is-a-complete-convergence-proof.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-the-symmetric-and-braided-coherence-theorems-compare-s-n-with-b-n.md

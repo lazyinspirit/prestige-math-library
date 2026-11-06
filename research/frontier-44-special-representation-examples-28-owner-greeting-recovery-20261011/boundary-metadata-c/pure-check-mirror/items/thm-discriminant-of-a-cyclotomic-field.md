@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-discriminant-of-a-cyclotomic-field.md

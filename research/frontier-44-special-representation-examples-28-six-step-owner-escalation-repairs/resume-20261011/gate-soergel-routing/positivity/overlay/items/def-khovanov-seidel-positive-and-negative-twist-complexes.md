@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-khovanov-seidel-positive-and-negative-twist-complexes.md

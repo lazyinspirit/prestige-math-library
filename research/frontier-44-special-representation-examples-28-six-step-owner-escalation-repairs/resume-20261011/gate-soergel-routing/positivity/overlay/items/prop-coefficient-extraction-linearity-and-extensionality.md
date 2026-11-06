@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-coefficient-extraction-linearity-and-extensionality.md

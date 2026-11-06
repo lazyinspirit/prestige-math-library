@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-holomorphic-function-on-a-domain-continues-past-its-boundary.md

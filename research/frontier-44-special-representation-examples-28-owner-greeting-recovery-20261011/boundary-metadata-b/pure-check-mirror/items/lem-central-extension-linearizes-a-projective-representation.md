@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-central-extension-linearizes-a-projective-representation.md

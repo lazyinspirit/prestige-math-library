@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-transverse-preimage-carries-a-pulled-back-normal-structure.md

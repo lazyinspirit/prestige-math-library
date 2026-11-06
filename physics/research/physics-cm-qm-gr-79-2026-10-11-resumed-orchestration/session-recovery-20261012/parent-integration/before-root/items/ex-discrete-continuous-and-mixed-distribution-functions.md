@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-discrete-continuous-and-mixed-distribution-functions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-all-sets-of-reals-in-solovay-l-of-the-reals-have-regularity.md

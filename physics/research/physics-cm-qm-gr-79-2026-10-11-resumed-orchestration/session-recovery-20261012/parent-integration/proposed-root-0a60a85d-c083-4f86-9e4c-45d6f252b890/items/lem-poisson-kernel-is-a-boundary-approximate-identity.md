@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-poisson-kernel-is-a-boundary-approximate-identity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-products-preserve-t0-t1-and-hausdorff.md

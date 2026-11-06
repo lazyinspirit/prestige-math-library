@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-endpoints-in-a-short-exact-sequence.md

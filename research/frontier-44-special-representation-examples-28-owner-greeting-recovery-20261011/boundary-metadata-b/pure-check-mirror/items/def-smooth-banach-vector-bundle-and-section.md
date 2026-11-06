@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-banach-vector-bundle-and-section.md

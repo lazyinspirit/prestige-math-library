@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-abel-ruffini-for-the-general-polynomial.md

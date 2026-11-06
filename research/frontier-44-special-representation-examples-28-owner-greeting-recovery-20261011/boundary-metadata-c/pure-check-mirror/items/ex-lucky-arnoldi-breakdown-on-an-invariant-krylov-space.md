@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-lucky-arnoldi-breakdown-on-an-invariant-krylov-space.md

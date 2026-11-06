@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-expander-walk-violated-edge-collision-bound.md

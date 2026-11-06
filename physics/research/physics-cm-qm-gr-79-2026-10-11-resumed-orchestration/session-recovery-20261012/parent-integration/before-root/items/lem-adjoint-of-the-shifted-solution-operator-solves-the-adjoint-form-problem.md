@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-adjoint-of-the-shifted-solution-operator-solves-the-adjoint-form-problem.md

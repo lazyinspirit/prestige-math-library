@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-eilenberg-maclane-spaces-represent-singular-cohomology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-countably-exceptional-differentiability-and-integrable-derivative-imply-absolute-continuity.md

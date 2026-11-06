@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quasi-isometry-invariant-and-geometric-property-of-a-finitely-generated-group.md

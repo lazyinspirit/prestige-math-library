@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-brauer-pair-order-is-independent-of-the-normal-chain.md

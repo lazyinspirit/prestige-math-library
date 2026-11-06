@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue.md

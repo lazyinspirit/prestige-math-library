@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-compact-support-and-softness-on-a-finite-discrete-space.md

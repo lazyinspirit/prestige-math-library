@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-pontryagin-thom-map-of-the-standard-framed-equator.md

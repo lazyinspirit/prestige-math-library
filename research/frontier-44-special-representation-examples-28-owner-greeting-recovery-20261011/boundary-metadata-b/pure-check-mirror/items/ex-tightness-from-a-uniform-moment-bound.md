@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-tightness-from-a-uniform-moment-bound.md

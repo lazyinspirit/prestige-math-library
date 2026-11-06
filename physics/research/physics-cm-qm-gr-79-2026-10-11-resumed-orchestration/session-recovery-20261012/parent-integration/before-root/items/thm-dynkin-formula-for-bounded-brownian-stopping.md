@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dynkin-formula-for-bounded-brownian-stopping.md

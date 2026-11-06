@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-free-monoid-universal-property-as-a-representation.md

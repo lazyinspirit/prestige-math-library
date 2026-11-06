@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-cylinder-shift-has-no-global-generating-function.md

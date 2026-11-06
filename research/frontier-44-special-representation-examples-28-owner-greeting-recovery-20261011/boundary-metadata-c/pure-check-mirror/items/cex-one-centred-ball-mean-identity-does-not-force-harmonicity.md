@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-one-centred-ball-mean-identity-does-not-force-harmonicity.md

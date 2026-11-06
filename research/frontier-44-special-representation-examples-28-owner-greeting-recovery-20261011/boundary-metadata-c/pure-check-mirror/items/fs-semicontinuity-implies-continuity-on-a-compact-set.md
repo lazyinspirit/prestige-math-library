@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-semicontinuity-implies-continuity-on-a-compact-set.md

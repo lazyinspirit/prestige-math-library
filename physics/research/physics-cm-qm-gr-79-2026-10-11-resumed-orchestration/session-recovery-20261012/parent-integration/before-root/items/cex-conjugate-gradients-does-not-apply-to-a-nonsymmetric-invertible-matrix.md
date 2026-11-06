@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-conjugate-gradients-does-not-apply-to-a-nonsymmetric-invertible-matrix.md

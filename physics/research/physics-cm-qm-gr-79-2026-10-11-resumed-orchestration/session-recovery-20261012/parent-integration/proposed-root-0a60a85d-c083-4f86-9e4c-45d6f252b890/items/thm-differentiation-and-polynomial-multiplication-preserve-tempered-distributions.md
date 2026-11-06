@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-differentiation-and-polynomial-multiplication-preserve-tempered-distributions.md

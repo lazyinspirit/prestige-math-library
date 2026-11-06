@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-mollification-after-zero-extension-does-not-preserve-boundary-values.md

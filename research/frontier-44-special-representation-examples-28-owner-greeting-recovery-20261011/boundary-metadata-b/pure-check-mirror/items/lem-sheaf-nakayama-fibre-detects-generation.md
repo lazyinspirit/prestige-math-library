@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-sheaf-nakayama-fibre-detects-generation.md

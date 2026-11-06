@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-unit-and-counit-determine-an-adjunction-without-the-triangle-identities.md

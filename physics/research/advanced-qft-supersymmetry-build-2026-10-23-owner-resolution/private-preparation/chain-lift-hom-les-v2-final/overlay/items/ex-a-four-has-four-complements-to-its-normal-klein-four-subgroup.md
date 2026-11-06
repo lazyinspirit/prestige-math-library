@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-four-has-four-complements-to-its-normal-klein-four-subgroup.md

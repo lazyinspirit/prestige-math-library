@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-group-homomorphism-injective-iff-trivial-kernel.md

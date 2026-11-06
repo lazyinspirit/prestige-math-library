@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-measurability-of-all-real-sets-equiconsistent-with-an-inaccessible.md

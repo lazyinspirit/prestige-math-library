@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-k-theory-of-a-point-and-the-empty-space.md

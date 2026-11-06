@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-bergman-versus-szego-normalization-on-the-disc.md

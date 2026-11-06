@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-borel-functional-calculus-for-a-bounded-normal-operator.md

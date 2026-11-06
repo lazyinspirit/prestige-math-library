@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-contractible-iff-identity-nullhomotopic.md

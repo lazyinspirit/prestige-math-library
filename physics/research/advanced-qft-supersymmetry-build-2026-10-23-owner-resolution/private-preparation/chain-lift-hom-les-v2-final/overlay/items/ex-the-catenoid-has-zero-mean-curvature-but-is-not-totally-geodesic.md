@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-catenoid-has-zero-mean-curvature-but-is-not-totally-geodesic.md

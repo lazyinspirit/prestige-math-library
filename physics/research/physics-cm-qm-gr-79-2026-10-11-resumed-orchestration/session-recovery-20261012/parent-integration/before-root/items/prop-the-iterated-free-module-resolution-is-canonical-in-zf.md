@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-iterated-free-module-resolution-is-canonical-in-zf.md

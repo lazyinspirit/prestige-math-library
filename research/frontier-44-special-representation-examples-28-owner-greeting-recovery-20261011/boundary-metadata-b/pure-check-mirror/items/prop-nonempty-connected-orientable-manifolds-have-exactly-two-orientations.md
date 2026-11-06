@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-nonempty-connected-orientable-manifolds-have-exactly-two-orientations.md

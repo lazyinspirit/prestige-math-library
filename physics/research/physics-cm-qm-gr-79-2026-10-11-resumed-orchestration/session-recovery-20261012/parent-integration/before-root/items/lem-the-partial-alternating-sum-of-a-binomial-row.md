@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-partial-alternating-sum-of-a-binomial-row.md

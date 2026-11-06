@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-summable-exceptional-measures-in-the-kolmogorov-induction.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-time-dependent-pullback-differentiation-for-a-translation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gauss-frame-map-of-an-immersion-into-euclidean-space.md

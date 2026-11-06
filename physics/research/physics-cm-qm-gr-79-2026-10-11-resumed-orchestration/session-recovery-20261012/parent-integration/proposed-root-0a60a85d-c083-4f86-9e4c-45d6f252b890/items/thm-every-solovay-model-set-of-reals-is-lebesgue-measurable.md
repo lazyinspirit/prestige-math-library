@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-solovay-model-set-of-reals-is-lebesgue-measurable.md

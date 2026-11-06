@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hausdorff-young-for-periodic-fourier-coefficients.md

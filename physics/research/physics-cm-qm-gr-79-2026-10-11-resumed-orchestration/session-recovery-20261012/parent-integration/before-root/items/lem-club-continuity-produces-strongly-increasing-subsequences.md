@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-club-continuity-produces-strongly-increasing-subsequences.md

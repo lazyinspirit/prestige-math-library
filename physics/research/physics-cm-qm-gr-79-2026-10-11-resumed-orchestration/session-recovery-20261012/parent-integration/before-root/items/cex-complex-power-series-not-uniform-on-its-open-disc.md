@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-complex-power-series-not-uniform-on-its-open-disc.md

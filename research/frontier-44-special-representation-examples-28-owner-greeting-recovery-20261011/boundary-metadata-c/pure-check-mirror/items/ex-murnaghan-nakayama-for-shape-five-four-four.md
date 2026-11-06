@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-murnaghan-nakayama-for-shape-five-four-four.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-euclidean-linear-maps-have-matrices-and-are-bounded.md

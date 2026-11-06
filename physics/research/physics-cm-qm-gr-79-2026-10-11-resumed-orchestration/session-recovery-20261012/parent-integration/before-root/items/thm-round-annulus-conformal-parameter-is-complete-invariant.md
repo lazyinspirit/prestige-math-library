@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-round-annulus-conformal-parameter-is-complete-invariant.md

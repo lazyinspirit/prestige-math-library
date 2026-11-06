@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-canonical-inclusion-and-projection-for-a-mapping-cone.md

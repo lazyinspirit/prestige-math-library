@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pa-uniform-bounded-truth-proof-certificates.md

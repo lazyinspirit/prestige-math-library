@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval.md

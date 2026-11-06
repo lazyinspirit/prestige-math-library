@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-basic-algebra-and-order-properties-of-conditional-expectation.md

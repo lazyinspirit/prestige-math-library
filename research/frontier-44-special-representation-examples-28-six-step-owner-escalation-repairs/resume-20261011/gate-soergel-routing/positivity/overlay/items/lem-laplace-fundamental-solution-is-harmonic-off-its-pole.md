@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-laplace-fundamental-solution-is-harmonic-off-its-pole.md

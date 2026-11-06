@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-finite-reflection-invariant-set-of-vectors-is-a-crystallographic-root-system.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative.md

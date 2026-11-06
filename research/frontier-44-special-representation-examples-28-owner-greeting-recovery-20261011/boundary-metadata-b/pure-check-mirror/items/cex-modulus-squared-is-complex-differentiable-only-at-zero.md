@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-modulus-squared-is-complex-differentiable-only-at-zero.md

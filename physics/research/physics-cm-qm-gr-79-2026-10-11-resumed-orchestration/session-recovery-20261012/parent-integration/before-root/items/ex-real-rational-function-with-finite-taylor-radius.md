@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-real-rational-function-with-finite-taylor-radius.md

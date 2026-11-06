@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-degree-drop-by-one-is-enough-for-rational-real-integral-convergence.md

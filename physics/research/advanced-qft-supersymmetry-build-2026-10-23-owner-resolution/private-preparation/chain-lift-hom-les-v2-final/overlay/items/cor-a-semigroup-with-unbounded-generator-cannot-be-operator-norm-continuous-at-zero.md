@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-semigroup-with-unbounded-generator-cannot-be-operator-norm-continuous-at-zero.md

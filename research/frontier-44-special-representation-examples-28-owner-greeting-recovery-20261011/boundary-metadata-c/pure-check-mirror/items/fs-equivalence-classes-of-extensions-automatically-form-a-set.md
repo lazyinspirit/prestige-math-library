@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-equivalence-classes-of-extensions-automatically-form-a-set.md

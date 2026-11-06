@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-quotient-dfa-is-well-defined-and-equivalent.md

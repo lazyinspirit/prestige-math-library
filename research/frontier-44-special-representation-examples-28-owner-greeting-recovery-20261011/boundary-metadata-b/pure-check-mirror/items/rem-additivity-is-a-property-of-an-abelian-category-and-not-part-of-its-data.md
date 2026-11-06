@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-additivity-is-a-property-of-an-abelian-category-and-not-part-of-its-data.md

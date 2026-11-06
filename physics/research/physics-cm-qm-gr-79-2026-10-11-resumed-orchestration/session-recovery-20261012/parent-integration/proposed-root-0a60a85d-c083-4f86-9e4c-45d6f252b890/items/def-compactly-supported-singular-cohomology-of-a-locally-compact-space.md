@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-compactly-supported-singular-cohomology-of-a-locally-compact-space.md

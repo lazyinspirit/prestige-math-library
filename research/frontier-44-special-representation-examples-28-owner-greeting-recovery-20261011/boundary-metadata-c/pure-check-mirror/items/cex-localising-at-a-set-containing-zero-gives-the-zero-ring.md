@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-localising-at-a-set-containing-zero-gives-the-zero-ring.md

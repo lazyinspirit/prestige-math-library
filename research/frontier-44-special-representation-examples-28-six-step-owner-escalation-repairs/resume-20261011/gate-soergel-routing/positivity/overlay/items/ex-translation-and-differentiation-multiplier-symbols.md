@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-translation-and-differentiation-multiplier-symbols.md

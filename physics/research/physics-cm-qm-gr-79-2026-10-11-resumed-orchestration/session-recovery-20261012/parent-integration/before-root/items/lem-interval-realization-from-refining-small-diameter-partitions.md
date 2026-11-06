@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-interval-realization-from-refining-small-diameter-partitions.md

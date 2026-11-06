@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-basic-bull-free-hole-with-an-anticomplete-outside-vertex.md

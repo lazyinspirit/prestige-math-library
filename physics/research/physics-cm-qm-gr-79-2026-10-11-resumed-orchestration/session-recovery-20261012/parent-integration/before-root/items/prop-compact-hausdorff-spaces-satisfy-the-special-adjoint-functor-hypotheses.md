@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-compact-hausdorff-spaces-satisfy-the-special-adjoint-functor-hypotheses.md

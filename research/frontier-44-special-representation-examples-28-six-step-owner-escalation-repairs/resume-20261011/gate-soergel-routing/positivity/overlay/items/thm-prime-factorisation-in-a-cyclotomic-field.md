@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-prime-factorisation-in-a-cyclotomic-field.md

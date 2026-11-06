@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-reducing-a-large-binary-quadratic-form.md

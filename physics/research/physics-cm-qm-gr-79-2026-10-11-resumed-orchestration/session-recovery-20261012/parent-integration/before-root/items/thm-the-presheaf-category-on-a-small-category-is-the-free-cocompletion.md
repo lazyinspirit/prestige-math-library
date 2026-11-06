@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-presheaf-category-on-a-small-category-is-the-free-cocompletion.md

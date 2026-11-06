@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-lorentz-orthogonality-and-orthogonal-complement.md

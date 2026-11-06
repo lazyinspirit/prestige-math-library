@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-module-endofunctor-category-is-strict-monoidal.md

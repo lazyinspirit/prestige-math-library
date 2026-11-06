@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-h-five-overlap-quotient-iteration-terminates-at-a-pure-blockade.md

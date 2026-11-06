@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error.md

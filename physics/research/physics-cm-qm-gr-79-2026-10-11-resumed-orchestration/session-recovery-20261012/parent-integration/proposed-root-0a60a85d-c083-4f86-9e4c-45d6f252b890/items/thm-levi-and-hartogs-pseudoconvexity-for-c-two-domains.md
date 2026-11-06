@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-levi-and-hartogs-pseudoconvexity-for-c-two-domains.md

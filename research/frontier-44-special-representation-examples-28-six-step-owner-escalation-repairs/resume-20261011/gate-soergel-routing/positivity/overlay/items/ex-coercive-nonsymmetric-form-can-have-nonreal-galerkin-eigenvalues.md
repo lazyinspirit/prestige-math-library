@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-coercive-nonsymmetric-form-can-have-nonreal-galerkin-eigenvalues.md

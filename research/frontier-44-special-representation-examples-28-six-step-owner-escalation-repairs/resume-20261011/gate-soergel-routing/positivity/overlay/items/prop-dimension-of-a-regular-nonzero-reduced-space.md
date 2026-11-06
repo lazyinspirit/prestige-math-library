@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-dimension-of-a-regular-nonzero-reduced-space.md

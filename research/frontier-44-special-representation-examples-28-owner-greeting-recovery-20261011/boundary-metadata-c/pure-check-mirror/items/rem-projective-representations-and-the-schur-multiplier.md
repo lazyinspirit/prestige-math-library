@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-projective-representations-and-the-schur-multiplier.md

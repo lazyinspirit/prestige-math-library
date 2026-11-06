@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-ext-balance-isomorphism-is-natural-in-both-variables.md

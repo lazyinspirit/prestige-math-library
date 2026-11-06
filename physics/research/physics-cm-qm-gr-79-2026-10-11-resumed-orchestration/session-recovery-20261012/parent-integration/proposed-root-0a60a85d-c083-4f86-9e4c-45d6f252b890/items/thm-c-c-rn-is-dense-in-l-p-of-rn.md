@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-c-c-rn-is-dense-in-l-p-of-rn.md

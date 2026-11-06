@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-contraction-torsion-is-independent-of-the-contracting-homotopy.md

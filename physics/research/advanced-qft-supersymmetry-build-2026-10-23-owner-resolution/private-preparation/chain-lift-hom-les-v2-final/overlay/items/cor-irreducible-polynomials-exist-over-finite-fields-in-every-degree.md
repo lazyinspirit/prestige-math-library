@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree.md

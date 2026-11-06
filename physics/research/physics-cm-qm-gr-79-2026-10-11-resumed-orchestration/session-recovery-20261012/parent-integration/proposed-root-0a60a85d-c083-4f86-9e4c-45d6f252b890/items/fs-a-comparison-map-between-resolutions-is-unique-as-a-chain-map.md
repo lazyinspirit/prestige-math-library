@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-comparison-map-between-resolutions-is-unique-as-a-chain-map.md

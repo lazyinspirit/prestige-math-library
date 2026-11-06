@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-integral-affine-charts-have-canonical-common-function-field.md

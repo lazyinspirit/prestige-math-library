@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-laplacian-is-positive-semidefinite-and-annihilates-ones.md

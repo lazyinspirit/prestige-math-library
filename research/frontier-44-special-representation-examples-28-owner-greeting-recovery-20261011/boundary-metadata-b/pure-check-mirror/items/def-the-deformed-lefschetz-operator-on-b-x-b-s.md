@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-the-deformed-lefschetz-operator-on-b-x-b-s.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-rank-one-tensor-strings-have-the-crystal-limit-rule.md

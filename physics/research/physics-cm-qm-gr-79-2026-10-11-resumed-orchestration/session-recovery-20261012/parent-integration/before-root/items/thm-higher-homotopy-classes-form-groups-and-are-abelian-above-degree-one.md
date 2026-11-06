@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one.md

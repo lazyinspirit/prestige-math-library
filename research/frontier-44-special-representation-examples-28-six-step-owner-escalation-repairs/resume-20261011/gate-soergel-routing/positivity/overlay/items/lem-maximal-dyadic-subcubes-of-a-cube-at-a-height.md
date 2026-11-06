@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-maximal-dyadic-subcubes-of-a-cube-at-a-height.md

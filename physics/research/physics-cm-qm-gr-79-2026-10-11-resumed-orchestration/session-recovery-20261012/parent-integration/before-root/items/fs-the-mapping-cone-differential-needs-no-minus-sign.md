@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-mapping-cone-differential-needs-no-minus-sign.md

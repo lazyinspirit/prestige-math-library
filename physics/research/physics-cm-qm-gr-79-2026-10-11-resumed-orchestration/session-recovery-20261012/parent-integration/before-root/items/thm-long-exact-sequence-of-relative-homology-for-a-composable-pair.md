@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-long-exact-sequence-of-relative-homology-for-a-composable-pair.md

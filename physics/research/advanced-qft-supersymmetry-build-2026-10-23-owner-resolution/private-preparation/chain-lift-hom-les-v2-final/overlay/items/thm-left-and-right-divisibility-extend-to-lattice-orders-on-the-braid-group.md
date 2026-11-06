@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-left-and-right-divisibility-extend-to-lattice-orders-on-the-braid-group.md

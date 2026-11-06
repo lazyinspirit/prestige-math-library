@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lewy-stampacchia-bounds-in-the-sourced-obstacle-regularity-class.md

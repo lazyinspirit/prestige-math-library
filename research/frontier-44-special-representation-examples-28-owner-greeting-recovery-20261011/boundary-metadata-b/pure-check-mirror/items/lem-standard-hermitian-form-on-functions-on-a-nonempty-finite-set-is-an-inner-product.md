@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product.md

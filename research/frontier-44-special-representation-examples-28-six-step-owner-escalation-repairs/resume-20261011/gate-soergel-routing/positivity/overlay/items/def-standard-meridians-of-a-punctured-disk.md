@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-standard-meridians-of-a-punctured-disk.md

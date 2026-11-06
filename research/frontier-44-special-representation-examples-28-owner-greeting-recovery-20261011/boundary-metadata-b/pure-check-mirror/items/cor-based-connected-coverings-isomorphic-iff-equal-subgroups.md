@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-based-connected-coverings-isomorphic-iff-equal-subgroups.md

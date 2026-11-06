@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unitriangular-group-of-order-p-cubed-is-an-m-group.md

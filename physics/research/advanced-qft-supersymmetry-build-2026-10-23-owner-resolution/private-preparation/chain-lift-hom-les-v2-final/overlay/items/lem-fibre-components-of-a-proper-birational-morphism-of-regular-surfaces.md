@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces.md

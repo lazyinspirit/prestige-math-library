@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-unipotent-invariants-are-exact-over-c.md

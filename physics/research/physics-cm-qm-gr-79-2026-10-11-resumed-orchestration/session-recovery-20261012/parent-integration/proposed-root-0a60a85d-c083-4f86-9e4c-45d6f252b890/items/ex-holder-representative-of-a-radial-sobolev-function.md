@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-holder-representative-of-a-radial-sobolev-function.md

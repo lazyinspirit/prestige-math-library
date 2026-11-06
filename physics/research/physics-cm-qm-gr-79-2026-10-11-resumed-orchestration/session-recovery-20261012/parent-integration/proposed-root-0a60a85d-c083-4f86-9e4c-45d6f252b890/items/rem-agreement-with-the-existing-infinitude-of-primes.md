@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-agreement-with-the-existing-infinitude-of-primes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom.md

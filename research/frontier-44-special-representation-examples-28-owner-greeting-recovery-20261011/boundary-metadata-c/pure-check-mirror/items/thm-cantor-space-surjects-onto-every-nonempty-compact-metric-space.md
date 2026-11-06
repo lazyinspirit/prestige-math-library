@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-central-character-cuts-of-a-typed-module-are-typed.md

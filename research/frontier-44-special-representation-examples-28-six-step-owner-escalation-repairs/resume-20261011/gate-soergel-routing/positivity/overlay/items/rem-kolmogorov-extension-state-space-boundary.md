@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-kolmogorov-extension-state-space-boundary.md

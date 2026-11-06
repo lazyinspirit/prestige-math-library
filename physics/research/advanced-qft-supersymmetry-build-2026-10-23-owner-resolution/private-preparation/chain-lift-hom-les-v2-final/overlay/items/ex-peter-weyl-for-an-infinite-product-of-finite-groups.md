@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-peter-weyl-for-an-infinite-product-of-finite-groups.md

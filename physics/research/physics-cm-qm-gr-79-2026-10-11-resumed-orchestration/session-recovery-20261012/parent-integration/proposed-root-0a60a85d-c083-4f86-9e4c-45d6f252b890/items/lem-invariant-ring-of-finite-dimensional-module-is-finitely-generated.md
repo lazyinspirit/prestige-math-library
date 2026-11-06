@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-invariant-ring-of-finite-dimensional-module-is-finitely-generated.md

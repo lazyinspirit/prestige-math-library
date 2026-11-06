@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-matrix-polynomial-substitution-is-a-ring-homomorphism.md

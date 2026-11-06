@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-cartan-subalgebra-of-an-arbitrary-lie-algebra-means-a-maximal-abelian-subalgebra.md

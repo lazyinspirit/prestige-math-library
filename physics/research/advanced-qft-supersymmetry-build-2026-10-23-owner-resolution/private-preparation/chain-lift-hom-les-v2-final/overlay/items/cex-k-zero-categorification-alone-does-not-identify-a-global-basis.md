@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-k-zero-categorification-alone-does-not-identify-a-global-basis.md

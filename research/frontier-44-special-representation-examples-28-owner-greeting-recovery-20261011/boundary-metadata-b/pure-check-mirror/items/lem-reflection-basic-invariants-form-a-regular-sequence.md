@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-reflection-basic-invariants-form-a-regular-sequence.md

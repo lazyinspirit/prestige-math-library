@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-polynomial-diagonal-bimodule-hochschild-homology.md

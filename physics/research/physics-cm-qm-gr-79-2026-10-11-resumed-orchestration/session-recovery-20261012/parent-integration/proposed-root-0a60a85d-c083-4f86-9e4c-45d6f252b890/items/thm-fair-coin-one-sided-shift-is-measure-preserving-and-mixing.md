@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fair-coin-one-sided-shift-is-measure-preserving-and-mixing.md

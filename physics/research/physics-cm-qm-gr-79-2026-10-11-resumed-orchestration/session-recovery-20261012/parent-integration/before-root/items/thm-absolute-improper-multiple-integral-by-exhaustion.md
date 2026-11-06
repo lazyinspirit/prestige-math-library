@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-absolute-improper-multiple-integral-by-exhaustion.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-primitive-ideals-of-usl2-at-a-generic-central-character.md

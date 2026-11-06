@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-coordinate-formula-for-the-curvature-tensor.md

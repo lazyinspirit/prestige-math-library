@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-ad-implies-perfect-set-property-for-sequence-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-periodic-continuous-functions-are-determined-by-their-fourier-coefficients.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric.md

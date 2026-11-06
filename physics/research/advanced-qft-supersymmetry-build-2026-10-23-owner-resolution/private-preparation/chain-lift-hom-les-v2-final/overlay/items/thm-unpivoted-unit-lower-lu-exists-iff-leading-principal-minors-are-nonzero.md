@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero.md

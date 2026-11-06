@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-universal-pcf-sequences-have-strong-increase-and-exact-bounds.md

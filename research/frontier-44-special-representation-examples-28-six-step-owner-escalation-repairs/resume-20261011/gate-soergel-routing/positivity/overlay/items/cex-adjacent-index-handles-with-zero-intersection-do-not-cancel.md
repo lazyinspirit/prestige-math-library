@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-adjacent-index-handles-with-zero-intersection-do-not-cancel.md

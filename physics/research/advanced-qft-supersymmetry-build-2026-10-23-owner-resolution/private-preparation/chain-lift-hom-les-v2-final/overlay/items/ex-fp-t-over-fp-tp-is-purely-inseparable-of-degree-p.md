@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-fp-t-over-fp-tp-is-purely-inseparable-of-degree-p.md

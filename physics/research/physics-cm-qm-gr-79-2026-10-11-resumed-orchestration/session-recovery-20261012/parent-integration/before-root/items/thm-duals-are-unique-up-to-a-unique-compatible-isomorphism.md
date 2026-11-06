@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-duals-are-unique-up-to-a-unique-compatible-isomorphism.md

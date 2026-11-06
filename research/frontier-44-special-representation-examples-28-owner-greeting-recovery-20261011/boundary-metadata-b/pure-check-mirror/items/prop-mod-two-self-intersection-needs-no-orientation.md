@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-mod-two-self-intersection-needs-no-orientation.md

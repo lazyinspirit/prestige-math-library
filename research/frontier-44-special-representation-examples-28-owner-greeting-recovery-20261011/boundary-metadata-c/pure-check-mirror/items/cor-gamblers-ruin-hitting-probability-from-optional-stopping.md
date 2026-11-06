@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-gamblers-ruin-hitting-probability-from-optional-stopping.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-subspace-iteration-and-the-dominant-invariant-subspace.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-complex-differentiability-holomorphic-and-entire.md

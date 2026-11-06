@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-wedge-and-interior-product-satisfy-the-graded-anticommutation-identity.md

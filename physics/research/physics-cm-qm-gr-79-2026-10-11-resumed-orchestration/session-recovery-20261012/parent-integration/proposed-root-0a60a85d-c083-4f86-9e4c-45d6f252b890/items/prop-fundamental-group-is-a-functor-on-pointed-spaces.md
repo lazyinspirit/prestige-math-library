@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-fundamental-group-is-a-functor-on-pointed-spaces.md

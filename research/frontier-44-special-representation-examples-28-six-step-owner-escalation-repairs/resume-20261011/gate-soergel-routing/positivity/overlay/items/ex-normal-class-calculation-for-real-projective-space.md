@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-normal-class-calculation-for-real-projective-space.md

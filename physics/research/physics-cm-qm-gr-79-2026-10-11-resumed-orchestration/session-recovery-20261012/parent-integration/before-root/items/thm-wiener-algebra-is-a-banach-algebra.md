@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-wiener-algebra-is-a-banach-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cantor-set-is-perfect-and-totally-disconnected.md

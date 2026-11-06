@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-isotypic-projections-for-a-finite-group-as-a-compact-group.md

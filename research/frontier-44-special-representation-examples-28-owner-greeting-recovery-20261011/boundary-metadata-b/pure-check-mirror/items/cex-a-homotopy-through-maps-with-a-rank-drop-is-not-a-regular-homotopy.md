@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-homotopy-through-maps-with-a-rank-drop-is-not-a-regular-homotopy.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold.md

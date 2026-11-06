@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-zero-derivative-on-a-disconnected-open-set-without-constancy.md

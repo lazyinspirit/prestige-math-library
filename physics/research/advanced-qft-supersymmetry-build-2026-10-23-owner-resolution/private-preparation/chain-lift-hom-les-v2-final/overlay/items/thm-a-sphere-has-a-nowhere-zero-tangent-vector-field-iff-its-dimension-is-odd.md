@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-a-sphere-has-a-nowhere-zero-tangent-vector-field-iff-its-dimension-is-odd.md

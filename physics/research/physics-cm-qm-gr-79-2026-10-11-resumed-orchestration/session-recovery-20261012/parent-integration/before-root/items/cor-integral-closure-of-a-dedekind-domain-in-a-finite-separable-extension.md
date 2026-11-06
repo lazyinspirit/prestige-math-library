@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-integral-closure-of-a-dedekind-domain-in-a-finite-separable-extension.md

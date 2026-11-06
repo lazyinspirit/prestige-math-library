@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-atomless-generics-are-not-ground-model-elements.md

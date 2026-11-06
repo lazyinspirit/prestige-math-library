@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-the-fock-convention-dictionary-for-finite-type-a-quantum-modules.md

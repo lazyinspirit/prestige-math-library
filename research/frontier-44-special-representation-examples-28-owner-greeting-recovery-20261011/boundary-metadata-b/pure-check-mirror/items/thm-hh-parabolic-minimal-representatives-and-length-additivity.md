@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hh-parabolic-minimal-representatives-and-length-additivity.md

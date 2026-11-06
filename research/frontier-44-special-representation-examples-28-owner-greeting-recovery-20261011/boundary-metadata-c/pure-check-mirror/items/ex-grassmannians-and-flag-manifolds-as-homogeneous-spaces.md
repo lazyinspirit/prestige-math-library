@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-grassmannians-and-flag-manifolds-as-homogeneous-spaces.md

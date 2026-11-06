@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-ag-standard-smooth-fibre-regular-parameters.md

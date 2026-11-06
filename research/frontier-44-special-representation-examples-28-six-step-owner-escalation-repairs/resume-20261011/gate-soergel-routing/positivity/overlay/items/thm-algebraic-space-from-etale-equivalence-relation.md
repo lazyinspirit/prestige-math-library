@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-algebraic-space-from-etale-equivalence-relation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonempty-fixed-vertex-set-of-a-tree-automorphism-is-a-subtree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-complex-numbers-are-a-quadratic-real-extension.md

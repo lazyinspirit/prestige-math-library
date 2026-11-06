@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-root-height-completion-for-weightwise-quasi-r-intertwiners.md

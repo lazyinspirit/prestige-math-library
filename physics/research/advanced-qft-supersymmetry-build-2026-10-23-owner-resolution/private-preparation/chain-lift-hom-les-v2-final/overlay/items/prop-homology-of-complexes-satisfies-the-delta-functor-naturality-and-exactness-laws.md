@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws.md

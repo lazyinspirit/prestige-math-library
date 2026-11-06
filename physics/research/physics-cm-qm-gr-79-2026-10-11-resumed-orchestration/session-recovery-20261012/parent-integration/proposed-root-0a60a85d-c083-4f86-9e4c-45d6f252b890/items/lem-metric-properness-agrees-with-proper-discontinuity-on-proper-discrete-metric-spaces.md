@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-metric-properness-agrees-with-proper-discontinuity-on-proper-discrete-metric-spaces.md

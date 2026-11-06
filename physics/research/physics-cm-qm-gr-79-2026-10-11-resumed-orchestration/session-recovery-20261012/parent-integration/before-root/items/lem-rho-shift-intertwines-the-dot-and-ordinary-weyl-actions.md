@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-property-t-is-uniform-spectral-gap-for-representations.md

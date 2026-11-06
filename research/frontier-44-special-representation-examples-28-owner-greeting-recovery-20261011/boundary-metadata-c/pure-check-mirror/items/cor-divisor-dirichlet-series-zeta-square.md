@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-divisor-dirichlet-series-zeta-square.md

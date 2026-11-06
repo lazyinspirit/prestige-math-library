@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hyperbolic-geodesic-triangle-area-defect.md

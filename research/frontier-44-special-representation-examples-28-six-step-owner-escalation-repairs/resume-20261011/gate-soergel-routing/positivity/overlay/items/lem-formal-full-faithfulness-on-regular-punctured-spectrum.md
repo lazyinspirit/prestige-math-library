@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-formal-full-faithfulness-on-regular-punctured-spectrum.md

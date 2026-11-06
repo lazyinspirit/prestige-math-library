@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-localization-functor-sends-quasi-isomorphisms-to-isomorphisms.md

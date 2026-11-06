@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-axiom-of-determinacy-for-natural-number-games.md

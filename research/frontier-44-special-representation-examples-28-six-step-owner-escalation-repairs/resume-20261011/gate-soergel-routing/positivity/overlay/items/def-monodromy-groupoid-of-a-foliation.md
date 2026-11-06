@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-monodromy-groupoid-of-a-foliation.md

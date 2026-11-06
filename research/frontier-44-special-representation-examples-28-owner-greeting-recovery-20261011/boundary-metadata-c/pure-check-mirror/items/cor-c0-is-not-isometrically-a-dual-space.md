@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-c0-is-not-isometrically-a-dual-space.md

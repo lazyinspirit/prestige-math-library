@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-oriented-two-plane-bundles-over-s-two-by-winding-number.md

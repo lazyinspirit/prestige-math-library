@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-sum-of-all-proper-submodules-of-a-verma-module-is-proper.md

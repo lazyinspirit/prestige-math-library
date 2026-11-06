@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-smooth-interior-data-do-not-repair-incompatible-dirichlet-corner-values.md

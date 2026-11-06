@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-class-function-and-the-space-of-complex-class-functions.md

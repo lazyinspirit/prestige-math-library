@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-roots-of-x-q-minus-x-form-a-field.md

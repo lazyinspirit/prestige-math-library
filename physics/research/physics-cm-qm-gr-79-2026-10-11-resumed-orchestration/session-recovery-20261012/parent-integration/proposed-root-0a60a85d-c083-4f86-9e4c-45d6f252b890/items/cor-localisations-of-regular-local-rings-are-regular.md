@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-localisations-of-regular-local-rings-are-regular.md

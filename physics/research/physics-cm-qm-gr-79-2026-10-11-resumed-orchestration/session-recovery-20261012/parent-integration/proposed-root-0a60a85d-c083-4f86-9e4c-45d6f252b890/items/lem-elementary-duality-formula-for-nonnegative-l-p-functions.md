@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-elementary-duality-formula-for-nonnegative-l-p-functions.md

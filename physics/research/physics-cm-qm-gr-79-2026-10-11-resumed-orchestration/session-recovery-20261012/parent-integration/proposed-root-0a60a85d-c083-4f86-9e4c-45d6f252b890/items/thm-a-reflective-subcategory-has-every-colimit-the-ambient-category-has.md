@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-reflective-subcategory-has-every-colimit-the-ambient-category-has.md

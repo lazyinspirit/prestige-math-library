@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-two-decidable-cfls-have-decidable-intersection-emptiness.md

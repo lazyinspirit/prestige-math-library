@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-equivalent-event-tests-for-a-discrete-stopping-time.md

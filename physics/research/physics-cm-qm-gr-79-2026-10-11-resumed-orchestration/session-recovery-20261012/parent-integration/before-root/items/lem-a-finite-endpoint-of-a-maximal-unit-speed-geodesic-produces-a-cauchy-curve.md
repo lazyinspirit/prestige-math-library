@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-finite-endpoint-of-a-maximal-unit-speed-geodesic-produces-a-cauchy-curve.md

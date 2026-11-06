@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-l-one-convergence-has-an-almost-everywhere-convergent-subsequence.md

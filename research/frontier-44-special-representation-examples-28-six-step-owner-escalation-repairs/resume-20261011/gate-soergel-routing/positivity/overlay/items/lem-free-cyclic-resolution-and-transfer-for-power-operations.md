@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-free-cyclic-resolution-and-transfer-for-power-operations.md

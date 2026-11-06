@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-godbillon-vey-form-is-independent-of-the-choice-of-eta-up-to-an-exact-form.md

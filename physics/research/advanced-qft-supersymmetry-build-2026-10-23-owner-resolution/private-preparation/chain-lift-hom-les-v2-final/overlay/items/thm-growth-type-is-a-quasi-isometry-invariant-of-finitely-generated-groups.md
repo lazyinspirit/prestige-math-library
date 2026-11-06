@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-growth-type-is-a-quasi-isometry-invariant-of-finitely-generated-groups.md

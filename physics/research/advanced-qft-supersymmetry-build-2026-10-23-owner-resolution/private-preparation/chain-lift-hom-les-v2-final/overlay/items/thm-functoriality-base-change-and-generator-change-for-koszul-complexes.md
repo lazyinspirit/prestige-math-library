@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-functoriality-base-change-and-generator-change-for-koszul-complexes.md

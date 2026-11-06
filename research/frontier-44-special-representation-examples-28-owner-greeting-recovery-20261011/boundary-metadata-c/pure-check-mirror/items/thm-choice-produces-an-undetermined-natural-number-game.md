@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-choice-produces-an-undetermined-natural-number-game.md

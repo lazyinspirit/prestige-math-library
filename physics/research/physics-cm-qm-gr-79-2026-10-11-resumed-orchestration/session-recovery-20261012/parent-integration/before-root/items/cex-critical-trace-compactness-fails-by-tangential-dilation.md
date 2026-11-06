@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-critical-trace-compactness-fails-by-tangential-dilation.md

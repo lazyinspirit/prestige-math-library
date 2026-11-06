@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-two-open-cover-small-chains-are-the-sum-of-the-two-singular-subcomplexes.md

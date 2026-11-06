@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-derived-and-lower-central-series-of-a-filiform-lie-algebra.md

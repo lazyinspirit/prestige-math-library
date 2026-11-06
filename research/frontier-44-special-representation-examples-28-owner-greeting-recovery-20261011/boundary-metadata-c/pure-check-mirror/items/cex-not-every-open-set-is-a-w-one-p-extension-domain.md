@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-not-every-open-set-is-a-w-one-p-extension-domain.md

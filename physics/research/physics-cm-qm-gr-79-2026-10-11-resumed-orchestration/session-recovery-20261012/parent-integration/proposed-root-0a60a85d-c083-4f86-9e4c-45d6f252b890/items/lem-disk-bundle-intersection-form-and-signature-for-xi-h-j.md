@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-disk-bundle-intersection-form-and-signature-for-xi-h-j.md

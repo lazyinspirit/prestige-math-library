@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-e-core-is-independent-of-the-rim-hook-removal-order.md

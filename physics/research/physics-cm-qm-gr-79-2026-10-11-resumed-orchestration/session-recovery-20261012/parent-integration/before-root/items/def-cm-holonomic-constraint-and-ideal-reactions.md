@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm-holonomic-constraint-and-ideal-reactions.md

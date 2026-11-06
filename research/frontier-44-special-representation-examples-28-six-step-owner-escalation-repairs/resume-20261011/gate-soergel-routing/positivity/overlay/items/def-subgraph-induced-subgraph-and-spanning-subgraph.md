@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-subgraph-induced-subgraph-and-spanning-subgraph.md

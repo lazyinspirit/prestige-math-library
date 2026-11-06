@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-unrestricted-diagonalization-respects-any-bound.md

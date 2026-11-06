@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-small-forcing-does-not-create-measurable-cardinals.md

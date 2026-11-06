@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form.md

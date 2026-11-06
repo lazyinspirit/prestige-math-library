@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-homogeneous-polynomial-becomes-hyperplane-section.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-projective-models-for-simplicial-and-variable-module-diagrams.md

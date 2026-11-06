@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-tangent-space-of-an-n-manifold-has-dimension-n.md

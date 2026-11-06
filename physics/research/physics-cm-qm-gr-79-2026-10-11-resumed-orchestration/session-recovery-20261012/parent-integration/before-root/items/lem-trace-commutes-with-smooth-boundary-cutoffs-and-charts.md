@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts.md

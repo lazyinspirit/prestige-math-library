@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-directed-st-connectivity-is-nl-complete.md

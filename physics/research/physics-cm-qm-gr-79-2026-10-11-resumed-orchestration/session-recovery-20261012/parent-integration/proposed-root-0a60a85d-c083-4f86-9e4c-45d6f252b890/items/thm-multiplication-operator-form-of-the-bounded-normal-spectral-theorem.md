@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-limits-of-discrete-series-for-sl2-r.md

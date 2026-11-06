@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-shortest-acceptance-and-clocked-all-branch-halting.md

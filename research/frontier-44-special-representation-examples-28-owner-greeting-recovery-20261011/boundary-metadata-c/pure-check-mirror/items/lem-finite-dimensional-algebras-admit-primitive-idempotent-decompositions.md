@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-dimensional-algebras-admit-primitive-idempotent-decompositions.md

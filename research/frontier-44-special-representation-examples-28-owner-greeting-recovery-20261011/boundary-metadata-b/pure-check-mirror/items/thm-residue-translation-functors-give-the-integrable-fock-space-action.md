@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-residue-translation-functors-give-the-integrable-fock-space-action.md

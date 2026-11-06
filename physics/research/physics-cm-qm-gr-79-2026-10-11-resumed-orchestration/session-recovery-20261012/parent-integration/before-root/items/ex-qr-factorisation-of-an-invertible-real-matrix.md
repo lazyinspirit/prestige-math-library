@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-qr-factorisation-of-an-invertible-real-matrix.md

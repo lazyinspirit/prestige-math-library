@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-partial-sums-of-independent-centered-variables-are-a-martingale.md

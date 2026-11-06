@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-l-one-not-subset-l-two-on-the-line.md

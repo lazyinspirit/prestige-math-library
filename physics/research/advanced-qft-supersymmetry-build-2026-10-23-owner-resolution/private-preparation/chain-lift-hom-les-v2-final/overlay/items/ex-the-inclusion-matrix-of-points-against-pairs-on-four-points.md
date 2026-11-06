@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-inclusion-matrix-of-points-against-pairs-on-four-points.md

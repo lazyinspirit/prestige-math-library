@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-countable-union-and-omega-one-regularity-fail-in-the-feferman-levy-model.md

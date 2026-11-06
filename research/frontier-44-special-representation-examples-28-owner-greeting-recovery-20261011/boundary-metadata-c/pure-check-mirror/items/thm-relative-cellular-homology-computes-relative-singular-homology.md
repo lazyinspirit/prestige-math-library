@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-relative-cellular-homology-computes-relative-singular-homology.md

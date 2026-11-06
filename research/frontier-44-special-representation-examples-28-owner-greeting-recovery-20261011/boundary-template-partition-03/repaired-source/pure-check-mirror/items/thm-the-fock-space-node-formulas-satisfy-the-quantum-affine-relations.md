@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-fock-space-node-formulas-satisfy-the-quantum-affine-relations.md

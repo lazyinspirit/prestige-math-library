@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-degree-of-a-map-between-oriented-closed-manifolds.md

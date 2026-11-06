@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-polynomial-ring-noetherian-implies-coefficient-ring-noetherian.md

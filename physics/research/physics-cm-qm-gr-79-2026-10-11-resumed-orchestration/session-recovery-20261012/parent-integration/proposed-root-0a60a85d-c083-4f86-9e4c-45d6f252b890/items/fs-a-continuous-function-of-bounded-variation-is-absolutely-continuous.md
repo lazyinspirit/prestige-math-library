@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-continuous-function-of-bounded-variation-is-absolutely-continuous.md

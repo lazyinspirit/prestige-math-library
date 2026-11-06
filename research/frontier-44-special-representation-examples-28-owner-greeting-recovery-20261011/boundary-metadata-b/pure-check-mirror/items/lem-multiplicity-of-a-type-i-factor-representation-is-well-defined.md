@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-multiplicity-of-a-type-i-factor-representation-is-well-defined.md

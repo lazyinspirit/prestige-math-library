@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-each-factor-is-a-retract-of-a-free-product.md

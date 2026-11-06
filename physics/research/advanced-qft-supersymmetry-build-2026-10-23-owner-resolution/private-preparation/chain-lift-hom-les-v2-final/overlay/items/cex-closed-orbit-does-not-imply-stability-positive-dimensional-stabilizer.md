@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-closed-orbit-does-not-imply-stability-positive-dimensional-stabilizer.md

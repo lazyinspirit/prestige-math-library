@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-reversing-the-timelike-field-reverses-future.md

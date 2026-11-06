@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-weakly-measurable-need-not-be-strongly-measurable.md

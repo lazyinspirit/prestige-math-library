@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity.md

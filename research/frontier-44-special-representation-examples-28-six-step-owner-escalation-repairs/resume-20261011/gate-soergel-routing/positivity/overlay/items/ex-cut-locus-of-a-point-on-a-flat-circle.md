@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cut-locus-of-a-point-on-a-flat-circle.md

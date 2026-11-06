@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-local-gauss-bonnet-for-a-frameable-disk-region.md

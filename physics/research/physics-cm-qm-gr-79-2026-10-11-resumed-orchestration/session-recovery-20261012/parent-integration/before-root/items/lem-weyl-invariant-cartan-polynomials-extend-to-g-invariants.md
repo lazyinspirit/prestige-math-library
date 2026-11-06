@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants.md

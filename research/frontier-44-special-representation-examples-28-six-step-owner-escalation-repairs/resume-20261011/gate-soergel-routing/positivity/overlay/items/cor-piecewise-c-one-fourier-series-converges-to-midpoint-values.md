@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-piecewise-c-one-fourier-series-converges-to-midpoint-values.md

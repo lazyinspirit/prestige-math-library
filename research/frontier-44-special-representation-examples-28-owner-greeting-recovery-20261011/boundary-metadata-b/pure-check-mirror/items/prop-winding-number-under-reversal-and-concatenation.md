@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-winding-number-under-reversal-and-concatenation.md

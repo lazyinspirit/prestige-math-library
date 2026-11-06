@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/research/advanced-qft-supersymmetry-build-2026-10-23-owner-resolution/private-preparation/chain-lift-hom-les-v2-final/chain-lift-scientific-v2.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-solution-count-trichotomy-fails-over-a-finite-field.md

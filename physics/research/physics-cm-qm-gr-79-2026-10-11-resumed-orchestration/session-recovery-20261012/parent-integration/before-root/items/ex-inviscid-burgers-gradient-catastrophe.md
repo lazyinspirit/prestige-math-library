@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-inviscid-burgers-gradient-catastrophe.md

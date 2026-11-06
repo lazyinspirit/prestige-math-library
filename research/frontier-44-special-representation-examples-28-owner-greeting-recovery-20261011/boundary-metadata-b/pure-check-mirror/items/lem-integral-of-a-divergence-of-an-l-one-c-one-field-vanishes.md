@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-of-a-divergence-of-an-l-one-c-one-field-vanishes.md

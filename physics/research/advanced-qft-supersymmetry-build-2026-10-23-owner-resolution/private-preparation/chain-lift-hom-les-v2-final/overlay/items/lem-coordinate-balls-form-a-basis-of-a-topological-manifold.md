@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-coordinate-balls-form-a-basis-of-a-topological-manifold.md

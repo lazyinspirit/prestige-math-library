@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-tonelli-fails-without-sigma-finiteness-on-the-diagonal.md

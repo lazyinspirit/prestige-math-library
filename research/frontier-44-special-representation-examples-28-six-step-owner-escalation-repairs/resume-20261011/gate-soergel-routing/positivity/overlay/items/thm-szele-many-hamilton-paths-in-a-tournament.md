@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-szele-many-hamilton-paths-in-a-tournament.md

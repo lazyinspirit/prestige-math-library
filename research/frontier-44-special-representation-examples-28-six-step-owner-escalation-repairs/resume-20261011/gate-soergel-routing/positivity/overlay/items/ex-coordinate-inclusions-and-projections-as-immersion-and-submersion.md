@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-coordinate-inclusions-and-projections-as-immersion-and-submersion.md

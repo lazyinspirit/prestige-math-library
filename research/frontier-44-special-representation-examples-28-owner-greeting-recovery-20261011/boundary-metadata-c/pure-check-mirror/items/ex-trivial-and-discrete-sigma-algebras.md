@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-trivial-and-discrete-sigma-algebras.md

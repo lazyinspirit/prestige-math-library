@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-jucys-murphy-symmetric-polynomials-span-the-center.md

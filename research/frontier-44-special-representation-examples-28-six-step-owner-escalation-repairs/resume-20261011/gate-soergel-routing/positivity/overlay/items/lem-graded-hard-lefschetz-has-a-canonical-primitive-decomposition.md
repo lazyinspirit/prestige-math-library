@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition.md

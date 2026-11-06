@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-five-cycle-has-the-erdos-hajnal-property.md

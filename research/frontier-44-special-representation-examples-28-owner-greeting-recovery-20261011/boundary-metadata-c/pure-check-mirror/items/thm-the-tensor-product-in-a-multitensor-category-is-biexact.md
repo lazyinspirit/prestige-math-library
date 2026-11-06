@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-tensor-product-in-a-multitensor-category-is-biexact.md

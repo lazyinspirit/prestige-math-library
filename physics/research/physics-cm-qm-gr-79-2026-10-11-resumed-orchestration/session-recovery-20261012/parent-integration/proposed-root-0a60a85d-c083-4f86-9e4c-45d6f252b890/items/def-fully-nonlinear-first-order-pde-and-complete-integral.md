@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-fully-nonlinear-first-order-pde-and-complete-integral.md

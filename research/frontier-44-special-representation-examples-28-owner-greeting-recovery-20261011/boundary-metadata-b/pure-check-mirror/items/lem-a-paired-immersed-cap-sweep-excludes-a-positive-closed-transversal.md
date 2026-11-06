@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-paired-immersed-cap-sweep-excludes-a-positive-closed-transversal.md

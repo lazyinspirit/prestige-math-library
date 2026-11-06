@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-radix-two-recursion-does-not-directly-apply-to-odd-length.md

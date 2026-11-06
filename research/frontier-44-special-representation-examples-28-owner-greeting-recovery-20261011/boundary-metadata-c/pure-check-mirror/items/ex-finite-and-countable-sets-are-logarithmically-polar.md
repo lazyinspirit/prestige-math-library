@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-finite-and-countable-sets-are-logarithmically-polar.md

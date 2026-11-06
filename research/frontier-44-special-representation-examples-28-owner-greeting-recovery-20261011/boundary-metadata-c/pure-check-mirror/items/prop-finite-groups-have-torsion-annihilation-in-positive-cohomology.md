@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-finite-groups-have-torsion-annihilation-in-positive-cohomology.md

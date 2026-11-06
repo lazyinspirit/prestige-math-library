@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-abelian-group-cyclic-iff-one-invariant-factor.md

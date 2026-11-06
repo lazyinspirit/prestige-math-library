@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-qftx-periodic-su2-product-kernel-and-center-line-sign.md

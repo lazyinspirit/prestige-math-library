@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-chebyshev-theta-prime-number-theorem-error.md

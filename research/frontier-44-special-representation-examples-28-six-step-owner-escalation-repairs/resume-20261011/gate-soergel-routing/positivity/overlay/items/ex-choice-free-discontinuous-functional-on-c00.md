@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-choice-free-discontinuous-functional-on-c00.md

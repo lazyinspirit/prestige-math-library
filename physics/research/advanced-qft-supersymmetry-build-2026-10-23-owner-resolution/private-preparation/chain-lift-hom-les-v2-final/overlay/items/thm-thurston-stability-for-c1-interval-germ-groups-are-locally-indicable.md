@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-thurston-stability-for-c1-interval-germ-groups-are-locally-indicable.md

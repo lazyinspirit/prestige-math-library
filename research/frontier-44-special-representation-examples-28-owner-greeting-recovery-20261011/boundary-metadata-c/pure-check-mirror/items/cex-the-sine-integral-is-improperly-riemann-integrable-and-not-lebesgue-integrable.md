@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-sine-integral-is-improperly-riemann-integrable-and-not-lebesgue-integrable.md

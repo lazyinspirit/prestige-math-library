@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-kac-moody-kostant-multiplicity-formula.md

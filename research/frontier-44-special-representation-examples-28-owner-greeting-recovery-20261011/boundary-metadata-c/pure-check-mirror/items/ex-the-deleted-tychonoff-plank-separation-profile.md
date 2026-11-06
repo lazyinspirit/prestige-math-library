@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-deleted-tychonoff-plank-separation-profile.md

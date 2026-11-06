@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-calderon-zygmund-decomposition-of-an-interval-indicator.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-parameter-power-series-subring-makes-ring-finite.md

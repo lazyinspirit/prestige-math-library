@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-well-founded-pointed-graphs-have-unique-decorations.md

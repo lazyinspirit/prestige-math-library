@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-value-functions-and-hamilton-jacobi-bellman-equations.md

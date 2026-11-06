@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-first-cohomology-via-crossed-homomorphisms.md

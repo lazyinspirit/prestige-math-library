@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-symmetric-polynomial-values-on-roots-lie-in-the-base-field.md

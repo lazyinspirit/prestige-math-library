@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gap-three-sat-reduces-to-gap-independent-set.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-hg-toolkit-hyperbolic-group-and-stable-length.md

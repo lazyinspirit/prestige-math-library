@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-particular-point-topology-in-the-separation-hierarchy.md

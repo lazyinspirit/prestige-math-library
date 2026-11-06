@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy.md

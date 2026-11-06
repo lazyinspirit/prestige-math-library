@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-proper-smooth-function-and-compact-morse-slab.md

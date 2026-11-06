@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-an-interval-has-nonzero-euler-characteristic-despite-being-odd-dimensional.md

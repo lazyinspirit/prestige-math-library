@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence.md

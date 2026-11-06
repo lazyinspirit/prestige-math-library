@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold.md

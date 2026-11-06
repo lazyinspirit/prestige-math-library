@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-equivalence-i-epsilon-nu-is-i-epsilon-minus-nu.md

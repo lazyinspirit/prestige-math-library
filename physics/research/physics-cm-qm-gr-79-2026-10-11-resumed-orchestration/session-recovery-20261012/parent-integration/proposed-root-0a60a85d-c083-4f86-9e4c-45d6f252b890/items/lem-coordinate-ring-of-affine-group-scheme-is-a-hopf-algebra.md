@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coordinate-ring-of-affine-group-scheme-is-a-hopf-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hilbert-schmidt-operators-form-a-two-sided-ideal.md

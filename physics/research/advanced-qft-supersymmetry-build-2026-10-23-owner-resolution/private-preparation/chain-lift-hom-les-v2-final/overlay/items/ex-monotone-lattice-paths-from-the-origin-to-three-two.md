@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-monotone-lattice-paths-from-the-origin-to-three-two.md

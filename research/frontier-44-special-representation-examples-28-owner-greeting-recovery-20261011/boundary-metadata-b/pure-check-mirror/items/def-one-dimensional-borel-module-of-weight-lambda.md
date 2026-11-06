@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-one-dimensional-borel-module-of-weight-lambda.md

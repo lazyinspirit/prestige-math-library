@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-sine-coefficient-decay-by-integration-by-parts.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gr-periodic-symmetric-hyperbolic-system.md

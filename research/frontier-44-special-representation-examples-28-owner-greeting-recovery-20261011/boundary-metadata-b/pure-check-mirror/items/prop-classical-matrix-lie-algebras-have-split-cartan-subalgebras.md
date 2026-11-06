@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras.md

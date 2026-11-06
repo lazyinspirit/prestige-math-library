@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-oriented-smooth-manifold-and-oriented-chart.md

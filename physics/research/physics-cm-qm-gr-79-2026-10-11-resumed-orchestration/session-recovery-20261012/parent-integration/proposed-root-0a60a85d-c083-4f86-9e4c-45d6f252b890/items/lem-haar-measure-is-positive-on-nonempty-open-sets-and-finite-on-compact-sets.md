@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets.md

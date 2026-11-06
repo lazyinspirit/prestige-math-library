@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-first-layer-relations-in-a-closed-moy-resolution-form-a-regular-sequence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-root-datum-of-a-compact-connected-lie-group.md

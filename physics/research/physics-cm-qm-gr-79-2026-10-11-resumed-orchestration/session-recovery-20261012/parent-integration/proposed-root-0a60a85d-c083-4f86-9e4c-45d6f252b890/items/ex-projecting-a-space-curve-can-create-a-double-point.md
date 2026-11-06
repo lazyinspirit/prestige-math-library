@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-projecting-a-space-curve-can-create-a-double-point.md

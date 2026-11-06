@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-belt-sphere-complements-in-low-handle-levels-preserve-the-fundamental-group.md

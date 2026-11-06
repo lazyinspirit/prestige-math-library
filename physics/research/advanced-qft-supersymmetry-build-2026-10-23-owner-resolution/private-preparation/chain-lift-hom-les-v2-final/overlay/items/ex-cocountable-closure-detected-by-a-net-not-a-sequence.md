@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cocountable-closure-detected-by-a-net-not-a-sequence.md

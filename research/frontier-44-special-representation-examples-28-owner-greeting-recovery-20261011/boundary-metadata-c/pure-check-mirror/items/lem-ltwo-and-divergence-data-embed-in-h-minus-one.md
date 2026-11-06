@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-ltwo-and-divergence-data-embed-in-h-minus-one.md

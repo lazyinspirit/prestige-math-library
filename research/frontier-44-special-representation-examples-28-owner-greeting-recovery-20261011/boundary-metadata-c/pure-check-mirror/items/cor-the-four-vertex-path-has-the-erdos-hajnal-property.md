@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-four-vertex-path-has-the-erdos-hajnal-property.md

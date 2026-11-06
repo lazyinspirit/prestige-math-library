@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-zero-simplex-augmentation-and-reduced-singular-homology.md

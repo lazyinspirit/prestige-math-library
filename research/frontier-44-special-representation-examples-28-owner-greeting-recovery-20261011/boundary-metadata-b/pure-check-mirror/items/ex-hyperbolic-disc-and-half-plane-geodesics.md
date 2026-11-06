@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hyperbolic-disc-and-half-plane-geodesics.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finiteness-cohomology-compact-riemann-surface.md

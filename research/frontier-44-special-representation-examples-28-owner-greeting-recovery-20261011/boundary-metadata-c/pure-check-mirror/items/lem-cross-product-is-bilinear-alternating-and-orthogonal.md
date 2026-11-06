@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cross-product-is-bilinear-alternating-and-orthogonal.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential.md

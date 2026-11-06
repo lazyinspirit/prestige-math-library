@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-monad-morphisms-on-a-fixed-category-form-a-category.md

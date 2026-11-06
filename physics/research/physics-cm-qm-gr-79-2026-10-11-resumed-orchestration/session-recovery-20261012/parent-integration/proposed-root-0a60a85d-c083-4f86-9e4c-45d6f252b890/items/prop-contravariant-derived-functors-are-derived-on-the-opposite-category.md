@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-contravariant-derived-functors-are-derived-on-the-opposite-category.md

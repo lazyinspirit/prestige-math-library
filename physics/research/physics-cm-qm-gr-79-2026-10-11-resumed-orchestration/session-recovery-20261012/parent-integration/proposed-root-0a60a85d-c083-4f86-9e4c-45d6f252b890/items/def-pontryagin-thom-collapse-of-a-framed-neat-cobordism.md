@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-pontryagin-thom-collapse-of-a-framed-neat-cobordism.md

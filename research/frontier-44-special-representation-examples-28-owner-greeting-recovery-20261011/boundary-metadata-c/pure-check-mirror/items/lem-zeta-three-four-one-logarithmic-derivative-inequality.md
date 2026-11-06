@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-zeta-three-four-one-logarithmic-derivative-inequality.md

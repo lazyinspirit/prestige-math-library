@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-strong-linkage-principle-for-verma-modules.md

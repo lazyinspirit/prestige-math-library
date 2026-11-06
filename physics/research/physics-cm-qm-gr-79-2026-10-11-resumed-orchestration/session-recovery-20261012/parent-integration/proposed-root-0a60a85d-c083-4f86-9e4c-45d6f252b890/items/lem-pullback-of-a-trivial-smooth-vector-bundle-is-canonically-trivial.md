@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pullback-of-a-trivial-smooth-vector-bundle-is-canonically-trivial.md

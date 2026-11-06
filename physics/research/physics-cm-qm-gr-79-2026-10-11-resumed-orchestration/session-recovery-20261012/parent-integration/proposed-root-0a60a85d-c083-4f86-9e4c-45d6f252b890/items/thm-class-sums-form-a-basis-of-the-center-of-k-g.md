@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-class-sums-form-a-basis-of-the-center-of-k-g.md

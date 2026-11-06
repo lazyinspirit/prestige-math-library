@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-brownian-transition-density-and-semigroup-convolution.md

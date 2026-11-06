@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-measurable-fields-of-nonempty-compact-sets-have-measurable-dense-selections.md

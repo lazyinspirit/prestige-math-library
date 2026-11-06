@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-shifting-trick-for-a-nonzero-coadjoint-orbit.md

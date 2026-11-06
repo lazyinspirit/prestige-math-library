@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-edgewise-riemann-integral-around-complex-triangle.md

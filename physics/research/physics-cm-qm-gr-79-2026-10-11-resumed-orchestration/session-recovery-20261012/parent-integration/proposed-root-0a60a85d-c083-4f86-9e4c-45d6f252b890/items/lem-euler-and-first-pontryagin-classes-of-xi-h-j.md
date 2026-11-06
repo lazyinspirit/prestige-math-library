@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euler-and-first-pontryagin-classes-of-xi-h-j.md

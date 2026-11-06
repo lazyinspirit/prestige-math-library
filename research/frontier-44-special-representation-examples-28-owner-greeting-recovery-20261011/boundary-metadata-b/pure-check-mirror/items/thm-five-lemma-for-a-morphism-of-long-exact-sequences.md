@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-five-lemma-for-a-morphism-of-long-exact-sequences.md

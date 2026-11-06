@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-singular-homology-is-invariant-under-deformation-retracts.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-stable-letter-word-that-is-not-britton-reduced.md

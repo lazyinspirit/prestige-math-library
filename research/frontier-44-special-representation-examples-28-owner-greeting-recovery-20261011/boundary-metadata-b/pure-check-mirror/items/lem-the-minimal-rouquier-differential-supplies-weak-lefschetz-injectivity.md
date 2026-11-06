@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-minimal-rouquier-differential-supplies-weak-lefschetz-injectivity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-trees-and-bodies-on-discrete-alphabets.md

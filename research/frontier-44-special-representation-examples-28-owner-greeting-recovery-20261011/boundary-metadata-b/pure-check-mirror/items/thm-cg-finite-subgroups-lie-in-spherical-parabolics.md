@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-finite-subgroups-lie-in-spherical-parabolics.md

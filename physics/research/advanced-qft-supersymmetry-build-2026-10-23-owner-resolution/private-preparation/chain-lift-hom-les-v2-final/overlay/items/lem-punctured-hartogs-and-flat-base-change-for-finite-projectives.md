@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-punctured-hartogs-and-flat-base-change-for-finite-projectives.md

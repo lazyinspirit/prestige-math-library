@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-seventh-cyclotomic-polynomial-factors-into-two-cubics-over-f-two.md

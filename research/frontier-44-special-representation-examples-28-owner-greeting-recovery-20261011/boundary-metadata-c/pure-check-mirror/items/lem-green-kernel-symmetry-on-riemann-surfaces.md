@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-green-kernel-symmetry-on-riemann-surfaces.md

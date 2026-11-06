@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-same-cardinality-without-a-canonical-bijection.md

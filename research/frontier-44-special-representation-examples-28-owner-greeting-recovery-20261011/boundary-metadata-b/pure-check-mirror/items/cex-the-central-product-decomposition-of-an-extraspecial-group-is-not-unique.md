@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-central-product-decomposition-of-an-extraspecial-group-is-not-unique.md

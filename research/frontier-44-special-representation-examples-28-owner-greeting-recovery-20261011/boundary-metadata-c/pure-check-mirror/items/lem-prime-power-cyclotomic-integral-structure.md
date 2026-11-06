@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-prime-power-cyclotomic-integral-structure.md

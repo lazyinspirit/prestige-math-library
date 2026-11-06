@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-endomorphisms-of-the-antidominant-projective-are-the-coinvariant-algebra.md

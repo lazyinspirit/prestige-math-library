@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-adjunction-induces-a-comonad-on-the-other-side.md

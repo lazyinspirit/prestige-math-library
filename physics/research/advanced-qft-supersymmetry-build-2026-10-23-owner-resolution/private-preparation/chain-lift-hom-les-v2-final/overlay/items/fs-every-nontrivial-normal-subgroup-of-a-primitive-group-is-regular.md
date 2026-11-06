@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-nontrivial-normal-subgroup-of-a-primitive-group-is-regular.md

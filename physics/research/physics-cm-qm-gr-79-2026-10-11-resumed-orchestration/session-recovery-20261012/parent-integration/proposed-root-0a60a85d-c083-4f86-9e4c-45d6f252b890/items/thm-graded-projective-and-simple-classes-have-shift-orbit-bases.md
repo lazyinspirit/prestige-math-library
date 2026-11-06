@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-graded-projective-and-simple-classes-have-shift-orbit-bases.md

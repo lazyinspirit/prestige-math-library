@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-klr-projective-grothendieck-group-satisfies-the-negative-quantum-serre-relations.md

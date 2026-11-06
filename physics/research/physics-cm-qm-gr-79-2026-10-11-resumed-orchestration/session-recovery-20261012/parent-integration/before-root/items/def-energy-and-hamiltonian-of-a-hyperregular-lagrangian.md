@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-energy-and-hamiltonian-of-a-hyperregular-lagrangian.md

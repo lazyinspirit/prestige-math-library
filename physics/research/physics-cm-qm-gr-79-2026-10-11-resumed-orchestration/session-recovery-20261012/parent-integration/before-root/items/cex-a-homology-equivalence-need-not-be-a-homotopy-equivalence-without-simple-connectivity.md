@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-homology-equivalence-need-not-be-a-homotopy-equivalence-without-simple-connectivity.md

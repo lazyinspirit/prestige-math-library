@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-proper-flat-fp-cohomology-perfect-complex.md

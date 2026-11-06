@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rasiowa-sikorski-with-explicit-choice.md

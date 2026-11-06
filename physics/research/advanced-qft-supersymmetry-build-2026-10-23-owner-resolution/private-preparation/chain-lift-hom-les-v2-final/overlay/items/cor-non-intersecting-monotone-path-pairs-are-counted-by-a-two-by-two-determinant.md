@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-non-intersecting-monotone-path-pairs-are-counted-by-a-two-by-two-determinant.md

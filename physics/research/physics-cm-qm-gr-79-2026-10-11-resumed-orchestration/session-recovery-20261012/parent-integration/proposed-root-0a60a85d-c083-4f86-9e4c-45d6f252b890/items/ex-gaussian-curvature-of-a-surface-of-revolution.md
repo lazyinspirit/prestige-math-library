@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gaussian-curvature-of-a-surface-of-revolution.md

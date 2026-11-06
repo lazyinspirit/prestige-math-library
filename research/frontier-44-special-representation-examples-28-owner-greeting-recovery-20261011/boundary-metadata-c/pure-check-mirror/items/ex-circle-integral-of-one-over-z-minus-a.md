@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-circle-integral-of-one-over-z-minus-a.md

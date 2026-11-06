@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-onto-functions-from-a-five-set-to-a-three-set-counted-both-ways.md

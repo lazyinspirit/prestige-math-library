@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-one-regular-system-of-parameters-implies-cohen-macaulay.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-large-metric-flag-short-loop-radial-contradiction.md

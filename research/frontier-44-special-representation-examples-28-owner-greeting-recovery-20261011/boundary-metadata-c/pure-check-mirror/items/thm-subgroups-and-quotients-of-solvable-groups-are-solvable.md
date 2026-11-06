@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-subgroups-and-quotients-of-solvable-groups-are-solvable.md

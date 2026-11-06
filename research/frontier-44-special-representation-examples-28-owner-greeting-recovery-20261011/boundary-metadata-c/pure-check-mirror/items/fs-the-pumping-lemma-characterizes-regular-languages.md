@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-pumping-lemma-characterizes-regular-languages.md

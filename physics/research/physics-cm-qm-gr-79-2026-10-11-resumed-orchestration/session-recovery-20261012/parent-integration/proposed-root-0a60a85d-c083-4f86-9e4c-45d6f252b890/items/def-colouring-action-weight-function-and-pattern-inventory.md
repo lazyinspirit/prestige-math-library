@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-colouring-action-weight-function-and-pattern-inventory.md

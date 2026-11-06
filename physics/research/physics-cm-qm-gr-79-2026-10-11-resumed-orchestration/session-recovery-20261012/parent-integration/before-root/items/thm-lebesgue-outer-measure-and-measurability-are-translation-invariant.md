@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lebesgue-outer-measure-and-measurability-are-translation-invariant.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-given-ultrafilter-on-a-compact-hausdorff-space-has-a-unique-limit.md

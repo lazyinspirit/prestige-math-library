@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-round-metric-on-the-sphere-as-an-induced-metric.md

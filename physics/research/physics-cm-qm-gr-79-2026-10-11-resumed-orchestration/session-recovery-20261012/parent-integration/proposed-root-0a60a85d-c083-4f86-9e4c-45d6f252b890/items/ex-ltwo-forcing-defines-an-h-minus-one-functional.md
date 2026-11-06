@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-ltwo-forcing-defines-an-h-minus-one-functional.md

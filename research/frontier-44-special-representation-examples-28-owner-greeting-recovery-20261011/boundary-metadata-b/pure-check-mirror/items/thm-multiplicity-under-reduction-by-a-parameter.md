@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-multiplicity-under-reduction-by-a-parameter.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hall-malcev-torsion-is-a-finite-characteristic-subgroup.md

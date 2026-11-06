@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-dolbeault-cohomology-of-a-compact-riemann-surface-is-finite-dimensional.md

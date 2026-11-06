@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-divergence-and-curl-of-a-c1-vector-field.md

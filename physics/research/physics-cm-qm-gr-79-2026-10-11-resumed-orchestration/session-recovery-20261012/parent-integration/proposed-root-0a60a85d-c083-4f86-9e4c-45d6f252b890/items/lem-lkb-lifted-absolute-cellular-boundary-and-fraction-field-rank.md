@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-zero-times-infinity-convention-for-pointwise-products.md

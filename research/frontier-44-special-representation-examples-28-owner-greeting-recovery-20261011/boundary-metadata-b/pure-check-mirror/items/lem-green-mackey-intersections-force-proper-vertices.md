@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-green-mackey-intersections-force-proper-vertices.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-identity-relative-boundary-matrix-allows-cell-cancellation.md

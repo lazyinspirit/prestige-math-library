@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fourier-transform-maps-schwartz-space-continuously-to-itself.md

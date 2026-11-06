@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-short-exact-sequence-is-a-kernel-cokernel-pair.md

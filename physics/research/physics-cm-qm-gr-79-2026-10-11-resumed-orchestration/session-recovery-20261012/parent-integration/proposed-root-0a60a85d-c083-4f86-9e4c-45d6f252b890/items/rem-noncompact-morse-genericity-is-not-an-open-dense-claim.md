@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-noncompact-morse-genericity-is-not-an-open-dense-claim.md

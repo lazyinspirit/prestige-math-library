@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-preorders-as-categories-and-monotone-maps-as-functors.md

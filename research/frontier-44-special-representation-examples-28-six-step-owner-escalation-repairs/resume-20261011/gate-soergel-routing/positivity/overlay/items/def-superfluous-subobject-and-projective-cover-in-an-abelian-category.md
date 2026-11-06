@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-superfluous-subobject-and-projective-cover-in-an-abelian-category.md

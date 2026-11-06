@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-sr-reverse-triangle-and-future-cone-convexity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-gamma-recurrence-and-factorial-values-do-not-characterize-gamma.md

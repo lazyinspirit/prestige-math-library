@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-subset-construction-can-require-exponentially-many-states.md

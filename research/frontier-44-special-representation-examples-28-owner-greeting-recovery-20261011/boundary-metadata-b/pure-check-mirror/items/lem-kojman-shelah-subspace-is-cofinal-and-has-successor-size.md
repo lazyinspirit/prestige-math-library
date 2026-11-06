@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-kojman-shelah-subspace-is-cofinal-and-has-successor-size.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma.md

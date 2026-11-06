@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-representable-second-proof-of-rapl-under-local-smallness.md

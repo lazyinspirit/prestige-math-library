@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-next-page-is-the-homology-of-the-current-page.md

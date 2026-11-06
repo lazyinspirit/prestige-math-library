@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-planar-facial-graph-isomorphism-extension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-read-only-workspace-simulates-in-all-tapes-space.md

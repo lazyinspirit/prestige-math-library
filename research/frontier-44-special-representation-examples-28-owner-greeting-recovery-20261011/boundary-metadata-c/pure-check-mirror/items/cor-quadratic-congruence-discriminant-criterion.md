@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-quadratic-congruence-discriminant-criterion.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-separation-of-regular-curve-components-by-point-blowups.md

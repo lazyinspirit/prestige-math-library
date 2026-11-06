@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-borel-functional-calculus-for-bounded-normal-operators.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-an-adjunction-restricts-to-an-equivalence-on-its-fixed-subcategories.md

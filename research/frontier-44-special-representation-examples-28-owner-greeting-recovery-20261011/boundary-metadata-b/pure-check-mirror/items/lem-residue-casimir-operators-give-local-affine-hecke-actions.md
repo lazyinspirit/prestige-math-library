@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-residue-casimir-operators-give-local-affine-hecke-actions.md

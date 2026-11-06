@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-extra-sqrt-m-after-standard-error-studentization-diverges.md

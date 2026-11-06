@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-x-cubed-minus-two-over-q-omega-is-cyclic.md

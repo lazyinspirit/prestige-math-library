@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-kac-moody-denominator-product-with-root-multiplicities.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-large-epsilon-restricted-induced-subgraph-gives-a-polynomial-clique-or-stable-set.md

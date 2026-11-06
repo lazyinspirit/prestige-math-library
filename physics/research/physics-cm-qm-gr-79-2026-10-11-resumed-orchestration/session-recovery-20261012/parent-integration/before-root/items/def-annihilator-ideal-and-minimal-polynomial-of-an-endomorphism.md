@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-the-categorical-trace-of-a-morphism-into-the-double-dual.md

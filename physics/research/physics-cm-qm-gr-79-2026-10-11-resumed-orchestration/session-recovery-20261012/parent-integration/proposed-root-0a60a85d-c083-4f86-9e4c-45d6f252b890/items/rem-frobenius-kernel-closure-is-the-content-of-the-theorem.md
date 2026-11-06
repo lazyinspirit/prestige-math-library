@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-frobenius-kernel-closure-is-the-content-of-the-theorem.md

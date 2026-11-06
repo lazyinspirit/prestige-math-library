@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-quadratic-forms-diagonalize-in-characteristic-not-two.md

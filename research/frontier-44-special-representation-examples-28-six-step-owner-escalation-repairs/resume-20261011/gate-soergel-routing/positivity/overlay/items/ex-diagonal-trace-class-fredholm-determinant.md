@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-diagonal-trace-class-fredholm-determinant.md

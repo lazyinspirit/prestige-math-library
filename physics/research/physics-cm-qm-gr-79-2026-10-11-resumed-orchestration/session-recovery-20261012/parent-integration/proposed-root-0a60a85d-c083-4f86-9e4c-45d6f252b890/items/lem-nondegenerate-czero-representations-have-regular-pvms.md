@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nondegenerate-czero-representations-have-regular-pvms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-kazhdan-pair-and-kazhdan-constant.md

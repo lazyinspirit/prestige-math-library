@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint.md

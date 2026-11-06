@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component.md

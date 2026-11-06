@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-consistent-family-of-finite-dimensional-distributions.md

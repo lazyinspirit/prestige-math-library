@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-isomorphic-middle-groups-do-not-determine-equivalent-extensions.md

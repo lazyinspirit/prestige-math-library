@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-canonical-double-dual-map-for-polynomial-space-is-not-surjective.md

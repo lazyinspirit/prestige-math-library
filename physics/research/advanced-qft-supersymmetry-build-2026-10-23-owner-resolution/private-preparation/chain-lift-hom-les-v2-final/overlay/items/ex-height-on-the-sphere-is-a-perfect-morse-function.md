@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-height-on-the-sphere-is-a-perfect-morse-function.md

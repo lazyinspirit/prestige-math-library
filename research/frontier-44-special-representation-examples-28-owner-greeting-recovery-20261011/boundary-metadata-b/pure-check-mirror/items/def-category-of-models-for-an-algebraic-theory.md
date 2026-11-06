@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-category-of-models-for-an-algebraic-theory.md

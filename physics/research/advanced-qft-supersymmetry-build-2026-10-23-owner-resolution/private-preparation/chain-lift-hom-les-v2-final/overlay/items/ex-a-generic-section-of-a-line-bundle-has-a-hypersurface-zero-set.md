@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-a-generic-section-of-a-line-bundle-has-a-hypersurface-zero-set.md

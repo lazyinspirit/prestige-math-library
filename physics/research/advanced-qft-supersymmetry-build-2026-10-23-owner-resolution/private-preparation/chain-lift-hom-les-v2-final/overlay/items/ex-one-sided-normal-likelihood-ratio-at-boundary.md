@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-one-sided-normal-likelihood-ratio-at-boundary.md

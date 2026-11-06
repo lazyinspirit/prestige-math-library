@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-pullback-bundle-is-the-set-theoretic-inverse-image-of-the-total-space.md

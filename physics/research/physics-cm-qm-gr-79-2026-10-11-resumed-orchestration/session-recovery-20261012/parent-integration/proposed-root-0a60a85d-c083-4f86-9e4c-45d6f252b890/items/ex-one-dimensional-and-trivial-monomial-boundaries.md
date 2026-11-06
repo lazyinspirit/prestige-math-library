@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-dimensional-and-trivial-monomial-boundaries.md

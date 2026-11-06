@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-handle-slides-reduce-a-unimodular-middle-handle-matrix-to-the-identity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-open-star-criterion-produces-a-simplicial-map.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-complete-connected-riemannian-manifolds-are-proper-length-spaces.md

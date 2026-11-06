@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-parabolic-hecke-modules-have-standard-bases-actions-and-compatible-bars.md

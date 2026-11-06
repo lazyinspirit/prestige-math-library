@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-product-rectangle-kernels-are-dense-in-product-l-two.md

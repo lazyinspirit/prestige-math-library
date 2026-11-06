@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-cylinder-deformation-retracts-onto-an-end.md

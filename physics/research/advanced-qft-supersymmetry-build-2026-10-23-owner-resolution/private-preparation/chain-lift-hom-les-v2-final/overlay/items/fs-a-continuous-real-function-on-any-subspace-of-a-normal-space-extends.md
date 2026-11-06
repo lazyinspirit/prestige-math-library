@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-a-continuous-real-function-on-any-subspace-of-a-normal-space-extends.md

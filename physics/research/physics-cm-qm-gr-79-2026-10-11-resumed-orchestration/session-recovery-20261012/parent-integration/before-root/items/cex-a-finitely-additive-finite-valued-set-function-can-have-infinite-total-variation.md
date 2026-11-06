@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-finitely-additive-finite-valued-set-function-can-have-infinite-total-variation.md

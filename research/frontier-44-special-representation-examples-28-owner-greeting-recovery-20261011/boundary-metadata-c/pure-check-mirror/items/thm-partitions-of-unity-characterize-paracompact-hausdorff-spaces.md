@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-partitions-of-unity-characterize-paracompact-hausdorff-spaces.md

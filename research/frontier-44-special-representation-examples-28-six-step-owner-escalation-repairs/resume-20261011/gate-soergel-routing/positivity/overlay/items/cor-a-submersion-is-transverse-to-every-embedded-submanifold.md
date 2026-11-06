@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-submersion-is-transverse-to-every-embedded-submanifold.md

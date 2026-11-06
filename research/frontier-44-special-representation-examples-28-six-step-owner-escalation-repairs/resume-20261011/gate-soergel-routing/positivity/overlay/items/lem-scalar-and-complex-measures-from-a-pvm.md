@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-scalar-and-complex-measures-from-a-pvm.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-normal-surface-modification-and-normalized-point-blowup.md

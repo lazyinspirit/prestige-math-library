@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-colimit-of-an-increasing-chain-of-sets.md

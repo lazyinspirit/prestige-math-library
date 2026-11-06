@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-coarse-lipschitz-map-between-finitely-generated-groups-with-word-metrics-is-lipschitz.md

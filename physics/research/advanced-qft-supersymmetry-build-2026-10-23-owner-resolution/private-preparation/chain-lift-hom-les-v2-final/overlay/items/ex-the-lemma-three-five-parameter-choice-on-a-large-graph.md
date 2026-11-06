@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-the-lemma-three-five-parameter-choice-on-a-large-graph.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-convex-function-on-closed-convex-set-discontinuous-at-the-boundary.md

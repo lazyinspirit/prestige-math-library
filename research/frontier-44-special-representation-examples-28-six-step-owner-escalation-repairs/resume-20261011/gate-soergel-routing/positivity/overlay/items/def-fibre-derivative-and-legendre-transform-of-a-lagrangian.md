@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-fibre-derivative-and-legendre-transform-of-a-lagrangian.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-divided-power-klr-idempotents-and-projectives.md

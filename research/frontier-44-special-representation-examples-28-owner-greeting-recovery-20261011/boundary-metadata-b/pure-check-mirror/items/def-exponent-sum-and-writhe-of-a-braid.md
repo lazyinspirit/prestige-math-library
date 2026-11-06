@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-exponent-sum-and-writhe-of-a-braid.md

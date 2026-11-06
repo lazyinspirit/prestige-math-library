@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-kolmogorov-extension-for-standard-borel-coordinate-spaces.md

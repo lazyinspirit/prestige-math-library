@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-multiplication-by-n-on-abelian-scheme.md

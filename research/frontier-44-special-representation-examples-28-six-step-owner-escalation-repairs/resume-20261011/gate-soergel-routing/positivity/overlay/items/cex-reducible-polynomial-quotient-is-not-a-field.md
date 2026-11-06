@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-reducible-polynomial-quotient-is-not-a-field.md

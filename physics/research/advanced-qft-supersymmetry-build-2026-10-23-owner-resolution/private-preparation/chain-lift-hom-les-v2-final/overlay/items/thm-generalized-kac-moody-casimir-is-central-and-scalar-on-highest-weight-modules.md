@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-generalized-kac-moody-casimir-is-central-and-scalar-on-highest-weight-modules.md

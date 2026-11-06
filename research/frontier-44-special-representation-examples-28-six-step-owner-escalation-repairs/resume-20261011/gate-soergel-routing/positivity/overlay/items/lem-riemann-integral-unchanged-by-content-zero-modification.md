@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-riemann-integral-unchanged-by-content-zero-modification.md

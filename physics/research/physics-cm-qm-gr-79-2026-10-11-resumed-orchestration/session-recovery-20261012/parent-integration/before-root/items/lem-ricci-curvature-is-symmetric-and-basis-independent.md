@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ricci-curvature-is-symmetric-and-basis-independent.md

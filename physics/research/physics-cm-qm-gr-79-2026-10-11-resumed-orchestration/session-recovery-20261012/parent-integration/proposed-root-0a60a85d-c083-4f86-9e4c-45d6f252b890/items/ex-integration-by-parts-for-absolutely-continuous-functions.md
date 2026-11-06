@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-integration-by-parts-for-absolutely-continuous-functions.md

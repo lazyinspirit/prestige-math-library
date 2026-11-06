@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-intersection-pairing-on-blowup-of-p2.md

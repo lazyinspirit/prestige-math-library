@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-verma-sign-sum-over-bruhat-intervals.md

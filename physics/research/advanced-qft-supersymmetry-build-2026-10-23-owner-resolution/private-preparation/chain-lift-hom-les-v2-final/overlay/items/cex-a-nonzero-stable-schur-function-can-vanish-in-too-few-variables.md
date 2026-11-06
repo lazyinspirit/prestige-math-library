@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-a-nonzero-stable-schur-function-can-vanish-in-too-few-variables.md

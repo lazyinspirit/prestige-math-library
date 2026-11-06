@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-sigma-series-cauchy-adjoint-and-reproducing-kernel-identities.md

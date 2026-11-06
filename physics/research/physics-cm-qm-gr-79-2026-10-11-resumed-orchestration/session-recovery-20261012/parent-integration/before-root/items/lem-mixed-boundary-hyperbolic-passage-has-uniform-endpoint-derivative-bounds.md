@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-mixed-boundary-hyperbolic-passage-has-uniform-endpoint-derivative-bounds.md

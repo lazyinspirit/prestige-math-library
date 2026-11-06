@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-shifted-qr-preserves-upper-hessenberg-form.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-dot-action-facets-and-single-wall-translation-data.md

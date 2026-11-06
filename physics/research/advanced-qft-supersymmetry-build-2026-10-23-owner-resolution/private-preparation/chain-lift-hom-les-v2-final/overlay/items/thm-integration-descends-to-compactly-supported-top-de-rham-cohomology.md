@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-integration-descends-to-compactly-supported-top-de-rham-cohomology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-distributional-weak-solutions-are-not-unique.md

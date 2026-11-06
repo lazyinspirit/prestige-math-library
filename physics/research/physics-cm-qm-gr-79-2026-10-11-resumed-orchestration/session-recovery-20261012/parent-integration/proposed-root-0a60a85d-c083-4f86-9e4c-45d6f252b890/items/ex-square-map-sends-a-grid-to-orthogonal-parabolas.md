@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-square-map-sends-a-grid-to-orthogonal-parabolas.md

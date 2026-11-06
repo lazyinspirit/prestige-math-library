@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonnegative-improper-integral-bounded-primitive-criterion.md

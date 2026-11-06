@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-equivalence-between-simply-connected-real-lie-groups-and-finite-dimensional-real-lie-algebras.md

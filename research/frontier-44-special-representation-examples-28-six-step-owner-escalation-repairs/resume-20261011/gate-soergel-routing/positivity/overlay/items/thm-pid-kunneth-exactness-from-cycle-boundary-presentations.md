@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-pid-kunneth-exactness-from-cycle-boundary-presentations.md

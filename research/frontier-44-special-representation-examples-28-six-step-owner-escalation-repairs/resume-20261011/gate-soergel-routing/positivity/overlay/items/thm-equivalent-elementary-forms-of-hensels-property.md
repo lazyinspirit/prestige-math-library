@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-equivalent-elementary-forms-of-hensels-property.md

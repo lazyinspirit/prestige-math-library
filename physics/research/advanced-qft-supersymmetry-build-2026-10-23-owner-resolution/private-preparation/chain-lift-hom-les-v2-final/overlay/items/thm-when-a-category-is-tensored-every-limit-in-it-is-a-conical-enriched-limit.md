@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-when-a-category-is-tensored-every-limit-in-it-is-a-conical-enriched-limit.md

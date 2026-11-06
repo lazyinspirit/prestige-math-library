@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-diagonal-class-expansion-gives-the-alternating-trace.md

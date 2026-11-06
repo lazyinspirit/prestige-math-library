@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-chasing-rule-a-zero-arrow-is-detected-by-members.md

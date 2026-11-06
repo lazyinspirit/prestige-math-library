@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-bilinear-right-exact-functors-are-determined-by-the-pair-of-regular-modules.md

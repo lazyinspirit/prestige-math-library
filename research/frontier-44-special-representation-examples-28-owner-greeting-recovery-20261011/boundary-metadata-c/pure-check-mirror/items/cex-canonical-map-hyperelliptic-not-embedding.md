@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-canonical-map-hyperelliptic-not-embedding.md

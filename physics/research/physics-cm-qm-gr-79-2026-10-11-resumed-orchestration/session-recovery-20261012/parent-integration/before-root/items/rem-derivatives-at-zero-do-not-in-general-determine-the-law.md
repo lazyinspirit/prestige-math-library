@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-derivatives-at-zero-do-not-in-general-determine-the-law.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cg-noncrossing-finite-lattice-and-conjugacy-independence.md

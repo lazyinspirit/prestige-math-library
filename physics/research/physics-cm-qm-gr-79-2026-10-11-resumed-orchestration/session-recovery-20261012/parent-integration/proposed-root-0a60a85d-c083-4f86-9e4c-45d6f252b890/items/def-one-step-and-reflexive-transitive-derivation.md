@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-one-step-and-reflexive-transitive-derivation.md

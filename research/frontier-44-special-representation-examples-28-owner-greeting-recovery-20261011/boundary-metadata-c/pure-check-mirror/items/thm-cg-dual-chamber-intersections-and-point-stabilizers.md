@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-dual-chamber-intersections-and-point-stabilizers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-the-rank-two-longest-type-a-soergel-bimodule.md

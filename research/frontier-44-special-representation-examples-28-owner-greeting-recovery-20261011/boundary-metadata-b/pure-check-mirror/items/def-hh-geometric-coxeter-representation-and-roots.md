@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-hh-geometric-coxeter-representation-and-roots.md

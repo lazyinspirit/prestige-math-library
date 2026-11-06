@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-geometric-power-series-and-an-interior-reexpansion.md

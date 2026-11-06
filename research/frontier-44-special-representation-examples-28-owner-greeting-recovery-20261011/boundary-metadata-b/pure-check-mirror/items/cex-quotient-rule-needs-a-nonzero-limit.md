@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-quotient-rule-needs-a-nonzero-limit.md

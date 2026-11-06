@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-circle-maximal-function-and-nontangential-region.md

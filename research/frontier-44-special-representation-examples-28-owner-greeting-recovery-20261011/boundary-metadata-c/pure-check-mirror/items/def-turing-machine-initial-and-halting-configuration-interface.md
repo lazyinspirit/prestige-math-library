@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-turing-machine-initial-and-halting-configuration-interface.md

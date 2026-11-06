@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-binary-digit-changes-do-not-alter-zero-one-measure.md

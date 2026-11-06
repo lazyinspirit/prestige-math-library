@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-pullback-order-of-meromorphic-differentials-under-branched-maps.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-collisions-destroy-freeness-of-coordinate-permutation.md

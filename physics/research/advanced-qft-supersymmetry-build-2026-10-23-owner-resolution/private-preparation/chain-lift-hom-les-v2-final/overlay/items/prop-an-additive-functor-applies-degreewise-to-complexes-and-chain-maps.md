@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps.md

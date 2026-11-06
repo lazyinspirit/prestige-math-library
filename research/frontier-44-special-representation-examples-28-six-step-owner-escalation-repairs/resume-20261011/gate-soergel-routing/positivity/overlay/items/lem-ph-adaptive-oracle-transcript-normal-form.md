@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-ph-adaptive-oracle-transcript-normal-form.md

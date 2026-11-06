@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-e-graph-has-the-erdos-hajnal-property.md

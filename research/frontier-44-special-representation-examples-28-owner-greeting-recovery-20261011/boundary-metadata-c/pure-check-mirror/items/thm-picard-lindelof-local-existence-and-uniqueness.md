@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-picard-lindelof-local-existence-and-uniqueness.md

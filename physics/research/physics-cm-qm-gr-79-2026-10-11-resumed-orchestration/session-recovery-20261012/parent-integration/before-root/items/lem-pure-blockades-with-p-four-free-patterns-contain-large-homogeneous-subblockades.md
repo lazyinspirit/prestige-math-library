@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pure-blockades-with-p-four-free-patterns-contain-large-homogeneous-subblockades.md

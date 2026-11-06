@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux.md

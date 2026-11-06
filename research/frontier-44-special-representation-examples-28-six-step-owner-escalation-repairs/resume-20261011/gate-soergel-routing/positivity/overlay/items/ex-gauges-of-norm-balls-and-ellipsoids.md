@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-gauges-of-norm-balls-and-ellipsoids.md

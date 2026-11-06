@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-the-p-functional-is-not-a-norm-for-zero-less-p-less-one.md

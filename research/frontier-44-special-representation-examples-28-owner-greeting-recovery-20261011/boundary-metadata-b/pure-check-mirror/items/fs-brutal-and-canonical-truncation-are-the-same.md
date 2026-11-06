@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-brutal-and-canonical-truncation-are-the-same.md

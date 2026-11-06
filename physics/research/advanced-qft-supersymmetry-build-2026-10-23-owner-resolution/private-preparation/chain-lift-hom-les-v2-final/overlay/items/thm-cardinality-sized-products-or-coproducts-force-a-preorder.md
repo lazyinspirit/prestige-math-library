@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cardinality-sized-products-or-coproducts-force-a-preorder.md

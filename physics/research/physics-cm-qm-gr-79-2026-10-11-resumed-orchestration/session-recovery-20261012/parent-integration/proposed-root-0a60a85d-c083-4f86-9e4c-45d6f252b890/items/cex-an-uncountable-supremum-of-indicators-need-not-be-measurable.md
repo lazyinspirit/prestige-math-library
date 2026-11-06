@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-uncountable-supremum-of-indicators-need-not-be-measurable.md

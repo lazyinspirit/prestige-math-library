@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-coordinate-criterion-for-a-riemannian-metric.md

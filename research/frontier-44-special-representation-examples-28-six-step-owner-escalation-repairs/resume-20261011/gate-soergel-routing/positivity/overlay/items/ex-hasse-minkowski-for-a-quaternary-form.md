@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hasse-minkowski-for-a-quaternary-form.md

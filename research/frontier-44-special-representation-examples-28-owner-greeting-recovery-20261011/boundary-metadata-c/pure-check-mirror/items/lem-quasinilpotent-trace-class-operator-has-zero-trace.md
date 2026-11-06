@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quasinilpotent-trace-class-operator-has-zero-trace.md

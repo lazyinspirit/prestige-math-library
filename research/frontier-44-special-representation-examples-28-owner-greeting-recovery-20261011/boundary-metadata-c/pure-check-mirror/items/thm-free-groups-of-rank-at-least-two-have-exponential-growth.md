@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-free-groups-of-rank-at-least-two-have-exponential-growth.md

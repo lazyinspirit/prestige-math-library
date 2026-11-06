@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-uniqueness-of-the-normalized-riemann-map.md

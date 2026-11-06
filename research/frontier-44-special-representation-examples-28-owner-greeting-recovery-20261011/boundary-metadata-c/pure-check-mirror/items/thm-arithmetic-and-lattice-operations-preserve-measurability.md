@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-arithmetic-and-lattice-operations-preserve-measurability.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-open-sets-induced-by-an-ultrafilter-algebra-form-a-topology.md

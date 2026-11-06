@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-relative-consistency-of-no-free-ultrafilter-on-omega-over-zf.md

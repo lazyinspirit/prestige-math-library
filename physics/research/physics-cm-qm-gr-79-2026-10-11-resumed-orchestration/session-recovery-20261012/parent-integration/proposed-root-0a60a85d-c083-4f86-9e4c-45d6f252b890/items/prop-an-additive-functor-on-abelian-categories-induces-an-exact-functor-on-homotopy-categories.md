@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-an-additive-functor-on-abelian-categories-induces-an-exact-functor-on-homotopy-categories.md

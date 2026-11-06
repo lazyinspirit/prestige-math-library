@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cyclic-shift-is-an-action-of-the-integers-modulo-the-length.md

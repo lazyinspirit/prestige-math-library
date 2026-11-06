@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-rankine-hugoniot-alone-does-not-give-uniqueness.md

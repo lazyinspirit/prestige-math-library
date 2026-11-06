@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-energy-identity-on-a-truncated-wave-cone.md

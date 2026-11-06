@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ma-products-of-ccc-spaces-are-ccc.md

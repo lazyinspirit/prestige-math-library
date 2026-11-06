@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lusztig-canonical-and-kashiwara-global-bases-agree-in-symmetric-type.md

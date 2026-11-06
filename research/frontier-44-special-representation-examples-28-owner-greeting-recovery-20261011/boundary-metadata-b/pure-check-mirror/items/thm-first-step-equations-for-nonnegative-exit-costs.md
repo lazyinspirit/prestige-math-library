@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-first-step-equations-for-nonnegative-exit-costs.md

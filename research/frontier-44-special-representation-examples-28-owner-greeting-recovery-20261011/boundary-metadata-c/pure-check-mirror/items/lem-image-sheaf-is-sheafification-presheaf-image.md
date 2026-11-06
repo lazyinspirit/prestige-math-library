@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-image-sheaf-is-sheafification-presheaf-image.md

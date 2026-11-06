@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences.md

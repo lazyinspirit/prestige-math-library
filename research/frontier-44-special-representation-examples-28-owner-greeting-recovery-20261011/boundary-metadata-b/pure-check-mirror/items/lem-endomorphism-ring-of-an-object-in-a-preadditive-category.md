@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-endomorphism-ring-of-an-object-in-a-preadditive-category.md

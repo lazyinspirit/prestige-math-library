@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-minuscule-weights-are-the-weyl-orbit.md

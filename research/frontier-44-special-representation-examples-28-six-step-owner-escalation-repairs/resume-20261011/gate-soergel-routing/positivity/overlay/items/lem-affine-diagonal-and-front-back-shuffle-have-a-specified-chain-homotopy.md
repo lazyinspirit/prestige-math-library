@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-affine-diagonal-and-front-back-shuffle-have-a-specified-chain-homotopy.md

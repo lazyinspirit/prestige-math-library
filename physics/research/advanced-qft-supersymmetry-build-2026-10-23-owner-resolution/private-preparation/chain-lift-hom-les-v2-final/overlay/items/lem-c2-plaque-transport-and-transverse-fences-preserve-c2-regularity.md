@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-c2-plaque-transport-and-transverse-fences-preserve-c2-regularity.md

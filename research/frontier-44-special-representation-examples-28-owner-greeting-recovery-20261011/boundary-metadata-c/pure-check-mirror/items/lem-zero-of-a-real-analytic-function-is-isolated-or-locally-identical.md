@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-zero-of-a-real-analytic-function-is-isolated-or-locally-identical.md

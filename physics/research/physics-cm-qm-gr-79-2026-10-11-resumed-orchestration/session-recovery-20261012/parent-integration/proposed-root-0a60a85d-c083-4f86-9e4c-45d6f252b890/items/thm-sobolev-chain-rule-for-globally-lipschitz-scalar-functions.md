@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions.md

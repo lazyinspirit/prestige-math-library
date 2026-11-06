@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-fredholm-index-is-stable-under-compact-perturbations.md

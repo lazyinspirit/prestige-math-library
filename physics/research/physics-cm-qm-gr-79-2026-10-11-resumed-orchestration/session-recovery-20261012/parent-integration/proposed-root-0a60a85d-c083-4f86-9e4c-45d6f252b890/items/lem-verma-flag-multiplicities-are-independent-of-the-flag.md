@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-verma-flag-multiplicities-are-independent-of-the-flag.md

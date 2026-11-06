@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-null-meagre-ideal-transfer-cantor-real.md

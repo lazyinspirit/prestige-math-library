@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-cauchy-implies-convergent-in-every-metric-space.md

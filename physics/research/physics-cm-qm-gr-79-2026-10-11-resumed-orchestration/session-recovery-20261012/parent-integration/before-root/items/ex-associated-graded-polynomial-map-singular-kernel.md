@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-associated-graded-polynomial-map-singular-kernel.md

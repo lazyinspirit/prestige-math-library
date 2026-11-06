@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-kernel-range-orthogonality-for-hilbert-adjoints.md

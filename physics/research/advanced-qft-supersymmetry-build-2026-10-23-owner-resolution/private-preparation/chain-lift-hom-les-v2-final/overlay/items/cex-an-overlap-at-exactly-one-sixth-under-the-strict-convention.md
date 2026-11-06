@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-an-overlap-at-exactly-one-sixth-under-the-strict-convention.md

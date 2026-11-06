@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hitting-probability-is-the-minimal-nonnegative-harmonic-extension.md

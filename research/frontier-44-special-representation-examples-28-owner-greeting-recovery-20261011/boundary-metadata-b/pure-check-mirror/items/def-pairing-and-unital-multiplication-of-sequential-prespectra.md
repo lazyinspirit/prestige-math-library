@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-pairing-and-unital-multiplication-of-sequential-prespectra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-all-real-forms-of-a-complex-semisimple-lie-algebra-are-isomorphic.md

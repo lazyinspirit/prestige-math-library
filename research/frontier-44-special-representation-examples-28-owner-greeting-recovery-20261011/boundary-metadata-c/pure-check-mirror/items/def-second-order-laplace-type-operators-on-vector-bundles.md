@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-second-order-laplace-type-operators-on-vector-bundles.md

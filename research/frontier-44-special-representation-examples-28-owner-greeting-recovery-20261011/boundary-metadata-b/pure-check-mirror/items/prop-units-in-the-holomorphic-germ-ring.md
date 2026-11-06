@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-units-in-the-holomorphic-germ-ring.md

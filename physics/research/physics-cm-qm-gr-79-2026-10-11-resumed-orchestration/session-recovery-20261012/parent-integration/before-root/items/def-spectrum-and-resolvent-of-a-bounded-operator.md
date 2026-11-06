@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-spectrum-and-resolvent-of-a-bounded-operator.md

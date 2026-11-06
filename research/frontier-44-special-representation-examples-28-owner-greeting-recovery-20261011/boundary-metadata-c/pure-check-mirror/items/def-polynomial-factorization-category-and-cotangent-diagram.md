@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-polynomial-factorization-category-and-cotangent-diagram.md

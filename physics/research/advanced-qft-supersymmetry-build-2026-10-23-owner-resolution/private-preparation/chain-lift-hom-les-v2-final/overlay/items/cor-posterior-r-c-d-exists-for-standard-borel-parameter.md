@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-posterior-r-c-d-exists-for-standard-borel-parameter.md

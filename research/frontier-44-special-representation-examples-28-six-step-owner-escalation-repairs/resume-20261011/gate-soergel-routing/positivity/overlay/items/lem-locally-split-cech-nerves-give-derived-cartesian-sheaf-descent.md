@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent.md

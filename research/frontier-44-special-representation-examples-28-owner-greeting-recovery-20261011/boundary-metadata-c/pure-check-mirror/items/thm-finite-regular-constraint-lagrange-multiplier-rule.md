@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-regular-constraint-lagrange-multiplier-rule.md

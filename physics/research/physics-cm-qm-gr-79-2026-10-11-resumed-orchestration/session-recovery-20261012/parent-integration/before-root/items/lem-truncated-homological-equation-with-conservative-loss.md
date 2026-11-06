@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-truncated-homological-equation-with-conservative-loss.md

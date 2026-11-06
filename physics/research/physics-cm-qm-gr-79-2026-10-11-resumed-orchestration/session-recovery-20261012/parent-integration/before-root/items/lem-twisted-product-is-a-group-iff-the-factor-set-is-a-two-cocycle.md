@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-twisted-product-is-a-group-iff-the-factor-set-is-a-two-cocycle.md

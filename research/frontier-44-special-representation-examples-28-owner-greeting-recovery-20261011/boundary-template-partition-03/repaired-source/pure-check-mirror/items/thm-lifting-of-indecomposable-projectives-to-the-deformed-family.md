@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-lifting-of-indecomposable-projectives-to-the-deformed-family.md

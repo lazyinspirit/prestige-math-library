@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-weak-global-dimension-is-at-most-corresponding-global-dimension.md

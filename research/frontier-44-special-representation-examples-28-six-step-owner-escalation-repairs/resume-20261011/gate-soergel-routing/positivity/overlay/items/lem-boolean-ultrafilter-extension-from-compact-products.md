@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-boolean-ultrafilter-extension-from-compact-products.md

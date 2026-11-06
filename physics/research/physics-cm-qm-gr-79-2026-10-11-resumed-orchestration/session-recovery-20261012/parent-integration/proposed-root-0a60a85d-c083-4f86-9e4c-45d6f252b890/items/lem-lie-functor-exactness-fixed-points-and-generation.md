@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lie-functor-exactness-fixed-points-and-generation.md

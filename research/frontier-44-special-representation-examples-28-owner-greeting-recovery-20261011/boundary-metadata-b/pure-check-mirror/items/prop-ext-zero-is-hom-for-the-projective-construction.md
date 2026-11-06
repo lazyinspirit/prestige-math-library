@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-ext-zero-is-hom-for-the-projective-construction.md

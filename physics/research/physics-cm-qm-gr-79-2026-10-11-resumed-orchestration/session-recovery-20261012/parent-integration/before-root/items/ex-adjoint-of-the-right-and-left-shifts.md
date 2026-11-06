@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-adjoint-of-the-right-and-left-shifts.md

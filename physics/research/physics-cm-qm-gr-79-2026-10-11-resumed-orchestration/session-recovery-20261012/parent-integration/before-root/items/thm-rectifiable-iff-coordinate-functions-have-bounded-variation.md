@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rectifiable-iff-coordinate-functions-have-bounded-variation.md

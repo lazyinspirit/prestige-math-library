@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cubic-x-cubed-minus-three-x-plus-one-has-galois-group-a-three.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lusin-area-function-for-a-fixed-admissible-kernel.md

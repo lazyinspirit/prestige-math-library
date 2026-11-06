@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-intersection-of-a-nonempty-set-is-a-set.md

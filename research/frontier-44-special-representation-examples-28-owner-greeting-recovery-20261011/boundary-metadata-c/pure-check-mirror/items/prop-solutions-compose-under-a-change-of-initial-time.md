@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-solutions-compose-under-a-change-of-initial-time.md

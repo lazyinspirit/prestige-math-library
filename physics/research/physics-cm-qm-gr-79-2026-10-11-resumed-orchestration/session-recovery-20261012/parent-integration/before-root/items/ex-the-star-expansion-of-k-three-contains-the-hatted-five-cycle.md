@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-star-expansion-of-k-three-contains-the-hatted-five-cycle.md

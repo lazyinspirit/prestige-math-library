@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-connection-one-form-rotation-law-on-an-oriented-surface.md

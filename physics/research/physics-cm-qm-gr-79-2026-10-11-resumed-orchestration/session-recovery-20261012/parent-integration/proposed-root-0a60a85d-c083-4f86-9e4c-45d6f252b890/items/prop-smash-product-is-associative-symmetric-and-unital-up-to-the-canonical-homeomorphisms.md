@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-smash-product-is-associative-symmetric-and-unital-up-to-the-canonical-homeomorphisms.md

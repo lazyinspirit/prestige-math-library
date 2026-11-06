@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-galois-descent-for-multiplicative-hopf-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-square-map-of-an-extraspecial-two-group.md

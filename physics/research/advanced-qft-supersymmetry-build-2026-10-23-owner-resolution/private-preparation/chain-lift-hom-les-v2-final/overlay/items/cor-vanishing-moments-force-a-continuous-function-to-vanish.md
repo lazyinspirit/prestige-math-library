@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-vanishing-moments-force-a-continuous-function-to-vanish.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cokleisli-and-coeilenberg-moore-have-the-dual-extremal-universal-properties.md

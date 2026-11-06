@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-artin-right-complements-satisfy-the-cube-condition.md

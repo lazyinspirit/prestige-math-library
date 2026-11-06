@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-setwise-puncture-preservation-does-not-define-the-pure-mapping-class-group.md

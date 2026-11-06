@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-global-sphere-degree-is-the-sum-of-local-degrees.md

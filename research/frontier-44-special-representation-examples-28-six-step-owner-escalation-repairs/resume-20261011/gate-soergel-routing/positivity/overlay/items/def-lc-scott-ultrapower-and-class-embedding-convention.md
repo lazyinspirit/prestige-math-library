@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lc-scott-ultrapower-and-class-embedding-convention.md

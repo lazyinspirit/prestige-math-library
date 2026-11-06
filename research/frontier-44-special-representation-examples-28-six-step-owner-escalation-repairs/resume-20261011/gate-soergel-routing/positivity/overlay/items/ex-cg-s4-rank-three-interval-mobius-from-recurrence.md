@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-s4-rank-three-interval-mobius-from-recurrence.md

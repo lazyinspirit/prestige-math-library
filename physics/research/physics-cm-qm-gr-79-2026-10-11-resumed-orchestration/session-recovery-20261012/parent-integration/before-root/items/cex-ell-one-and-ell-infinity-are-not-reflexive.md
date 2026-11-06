@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-ell-one-and-ell-infinity-are-not-reflexive.md

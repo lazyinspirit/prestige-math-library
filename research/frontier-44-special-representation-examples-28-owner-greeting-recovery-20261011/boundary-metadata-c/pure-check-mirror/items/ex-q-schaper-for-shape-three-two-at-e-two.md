@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-q-schaper-for-shape-three-two-at-e-two.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-gaussian-square-is-the-plane-gaussian-integral.md

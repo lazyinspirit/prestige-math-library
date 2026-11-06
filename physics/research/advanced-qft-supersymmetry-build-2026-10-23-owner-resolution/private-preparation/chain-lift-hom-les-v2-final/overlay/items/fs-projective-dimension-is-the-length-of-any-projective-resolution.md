@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-projective-dimension-is-the-length-of-any-projective-resolution.md

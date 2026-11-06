@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-injective-c-one-images-of-compact-jordan-sets-are-jordan.md

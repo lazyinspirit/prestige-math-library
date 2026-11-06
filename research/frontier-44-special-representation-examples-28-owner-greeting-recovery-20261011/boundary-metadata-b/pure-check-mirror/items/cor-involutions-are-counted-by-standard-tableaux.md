@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-involutions-are-counted-by-standard-tableaux.md

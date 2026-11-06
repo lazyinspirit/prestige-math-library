@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-meromorphic-function-equals-the-naive-sum-of-its-principal-parts.md

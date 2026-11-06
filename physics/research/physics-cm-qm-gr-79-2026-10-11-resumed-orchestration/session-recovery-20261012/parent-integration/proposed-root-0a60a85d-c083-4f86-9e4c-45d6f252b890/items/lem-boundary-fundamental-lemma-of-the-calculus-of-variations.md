@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boundary-fundamental-lemma-of-the-calculus-of-variations.md

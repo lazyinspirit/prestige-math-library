@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-profinite-group-is-pro-p-for-some-prime.md

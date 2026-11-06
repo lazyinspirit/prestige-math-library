@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-abelian-subgroups-of-hyperbolic-groups-are-virtually-cyclic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-exhaustion-and-dirichlet-on-riemann-surfaces.md

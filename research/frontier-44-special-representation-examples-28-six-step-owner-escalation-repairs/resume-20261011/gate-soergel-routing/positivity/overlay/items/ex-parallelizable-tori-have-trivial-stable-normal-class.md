@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-parallelizable-tori-have-trivial-stable-normal-class.md

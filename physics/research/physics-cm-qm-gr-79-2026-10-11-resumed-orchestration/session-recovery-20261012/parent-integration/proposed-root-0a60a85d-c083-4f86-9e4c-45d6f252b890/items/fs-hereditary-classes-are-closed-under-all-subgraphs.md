@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-hereditary-classes-are-closed-under-all-subgraphs.md

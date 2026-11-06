@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-optional-stopping-with-integrable-time-and-bounded-increments.md

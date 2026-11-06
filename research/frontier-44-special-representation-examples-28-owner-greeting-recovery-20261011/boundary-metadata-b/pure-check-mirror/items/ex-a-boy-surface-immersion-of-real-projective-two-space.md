@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-boy-surface-immersion-of-real-projective-two-space.md

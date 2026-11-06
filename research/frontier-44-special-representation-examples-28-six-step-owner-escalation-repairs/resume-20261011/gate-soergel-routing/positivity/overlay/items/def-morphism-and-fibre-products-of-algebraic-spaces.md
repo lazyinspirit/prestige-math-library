@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-morphism-and-fibre-products-of-algebraic-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-l-one-half-with-its-p-functional-is-a-normed-space.md

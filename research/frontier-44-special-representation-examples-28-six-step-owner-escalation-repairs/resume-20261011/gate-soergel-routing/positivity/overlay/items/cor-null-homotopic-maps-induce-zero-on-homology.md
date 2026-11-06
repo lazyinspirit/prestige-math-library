@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-null-homotopic-maps-induce-zero-on-homology.md

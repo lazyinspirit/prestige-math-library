@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-rational-homotopy-isomorphisms-and-an-endpoint-surjection-give-homology-isomorphisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-cylinder-as-the-preimage-of-a-circle-under-projection.md

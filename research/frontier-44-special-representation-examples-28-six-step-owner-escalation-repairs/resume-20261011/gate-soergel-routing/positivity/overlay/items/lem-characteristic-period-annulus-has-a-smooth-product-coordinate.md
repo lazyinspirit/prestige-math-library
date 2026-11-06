@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-characteristic-period-annulus-has-a-smooth-product-coordinate.md

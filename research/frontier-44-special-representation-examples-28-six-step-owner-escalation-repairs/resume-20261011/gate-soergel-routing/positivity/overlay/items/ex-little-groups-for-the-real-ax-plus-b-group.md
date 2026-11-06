@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-little-groups-for-the-real-ax-plus-b-group.md

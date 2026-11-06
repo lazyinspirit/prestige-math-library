@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-increasing-unions-of-sigma-algebras-are-sigma-algebras.md

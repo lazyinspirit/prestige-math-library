@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-relative-morse-homology-of-a-single-handle-cobordism.md

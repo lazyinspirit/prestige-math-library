@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-finite-type-kac-moody-algebras-recover-the-dg-semisimple-algebras.md

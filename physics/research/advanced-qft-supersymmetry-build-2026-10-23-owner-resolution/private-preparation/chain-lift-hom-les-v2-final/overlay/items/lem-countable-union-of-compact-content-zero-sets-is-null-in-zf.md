@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-countable-union-of-compact-content-zero-sets-is-null-in-zf.md

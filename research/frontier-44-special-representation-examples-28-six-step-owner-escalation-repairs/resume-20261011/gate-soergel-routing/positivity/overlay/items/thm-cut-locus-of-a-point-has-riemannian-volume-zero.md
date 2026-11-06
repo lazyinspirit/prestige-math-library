@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cut-locus-of-a-point-has-riemannian-volume-zero.md

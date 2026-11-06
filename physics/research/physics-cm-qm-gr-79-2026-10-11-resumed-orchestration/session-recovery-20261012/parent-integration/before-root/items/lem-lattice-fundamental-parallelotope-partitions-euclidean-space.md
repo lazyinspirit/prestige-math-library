@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lattice-fundamental-parallelotope-partitions-euclidean-space.md

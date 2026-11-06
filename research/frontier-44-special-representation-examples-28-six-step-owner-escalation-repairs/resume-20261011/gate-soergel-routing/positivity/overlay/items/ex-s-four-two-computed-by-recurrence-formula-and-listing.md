@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-s-four-two-computed-by-recurrence-formula-and-listing.md

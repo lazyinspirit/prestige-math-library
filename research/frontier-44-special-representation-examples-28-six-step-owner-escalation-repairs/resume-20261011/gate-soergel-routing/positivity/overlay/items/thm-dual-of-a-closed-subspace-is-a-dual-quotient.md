@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-dual-of-a-closed-subspace-is-a-dual-quotient.md

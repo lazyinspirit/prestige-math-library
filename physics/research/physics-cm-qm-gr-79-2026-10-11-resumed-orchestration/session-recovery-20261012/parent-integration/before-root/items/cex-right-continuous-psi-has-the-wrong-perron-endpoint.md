@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-right-continuous-psi-has-the-wrong-perron-endpoint.md

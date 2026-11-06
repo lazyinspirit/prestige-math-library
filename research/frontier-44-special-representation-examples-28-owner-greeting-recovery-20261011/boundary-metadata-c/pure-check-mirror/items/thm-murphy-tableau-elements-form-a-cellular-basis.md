@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-murphy-tableau-elements-form-a-cellular-basis.md

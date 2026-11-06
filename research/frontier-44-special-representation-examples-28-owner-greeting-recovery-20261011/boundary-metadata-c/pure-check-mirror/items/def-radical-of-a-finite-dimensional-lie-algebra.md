@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-radical-of-a-finite-dimensional-lie-algebra.md

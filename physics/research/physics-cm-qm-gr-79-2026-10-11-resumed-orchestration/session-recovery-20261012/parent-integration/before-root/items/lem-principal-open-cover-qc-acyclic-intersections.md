@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-principal-open-cover-qc-acyclic-intersections.md

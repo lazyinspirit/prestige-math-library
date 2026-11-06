@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction.md

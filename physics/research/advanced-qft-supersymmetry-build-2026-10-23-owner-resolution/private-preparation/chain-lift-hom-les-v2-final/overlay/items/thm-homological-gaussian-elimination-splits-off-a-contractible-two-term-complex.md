@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sphere-endomorphisms-act-by-the-same-integer-in-every-ordinary-theory.md

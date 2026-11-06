@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-strictly-convex-functions-on-rn-have-at-most-one-minimizer.md

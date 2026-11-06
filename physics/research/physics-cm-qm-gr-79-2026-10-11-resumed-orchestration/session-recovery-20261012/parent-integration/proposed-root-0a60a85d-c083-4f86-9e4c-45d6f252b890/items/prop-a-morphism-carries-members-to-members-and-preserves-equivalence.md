@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-morphism-carries-members-to-members-and-preserves-equivalence.md

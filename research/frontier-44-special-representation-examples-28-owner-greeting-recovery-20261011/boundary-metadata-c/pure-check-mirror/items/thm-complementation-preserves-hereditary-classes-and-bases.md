@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-complementation-preserves-hereditary-classes-and-bases.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonabelian-first-cohomology-classifies-complements-as-a-pointed-set.md

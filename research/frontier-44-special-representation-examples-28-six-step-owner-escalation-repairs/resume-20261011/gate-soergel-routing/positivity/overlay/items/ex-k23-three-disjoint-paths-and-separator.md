@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-k23-three-disjoint-paths-and-separator.md

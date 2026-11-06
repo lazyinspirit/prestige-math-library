@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cfl-closure-under-union-concatenation-star-and-homomorphism.md

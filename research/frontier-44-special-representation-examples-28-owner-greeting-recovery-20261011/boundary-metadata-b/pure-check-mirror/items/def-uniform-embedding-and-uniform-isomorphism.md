@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-uniform-embedding-and-uniform-isomorphism.md

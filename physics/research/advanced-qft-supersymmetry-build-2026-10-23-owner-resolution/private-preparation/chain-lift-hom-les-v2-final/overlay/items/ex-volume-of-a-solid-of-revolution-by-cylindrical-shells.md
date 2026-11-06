@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-volume-of-a-solid-of-revolution-by-cylindrical-shells.md

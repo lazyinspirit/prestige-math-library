@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-minimal-parabolic-polynomial-flag-model-realizes-the-graded-diagram-relations.md

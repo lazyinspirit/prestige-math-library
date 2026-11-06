@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-method-of-continuity-for-a-uniformly-estimated-family-of-bounded-operators.md

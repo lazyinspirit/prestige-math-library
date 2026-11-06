@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-only-proper-nontrivial-normal-subgroup-of-s-n.md

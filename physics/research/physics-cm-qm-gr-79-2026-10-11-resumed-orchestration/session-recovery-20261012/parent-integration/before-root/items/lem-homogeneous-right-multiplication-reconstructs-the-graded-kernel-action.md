@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-homogeneous-right-multiplication-reconstructs-the-graded-kernel-action.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-folner-sequences-exist-for-every-uncountable-amenable-group.md

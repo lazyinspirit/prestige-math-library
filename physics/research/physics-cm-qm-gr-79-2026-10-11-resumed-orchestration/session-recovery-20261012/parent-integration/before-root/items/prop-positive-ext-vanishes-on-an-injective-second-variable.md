@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-positive-ext-vanishes-on-an-injective-second-variable.md

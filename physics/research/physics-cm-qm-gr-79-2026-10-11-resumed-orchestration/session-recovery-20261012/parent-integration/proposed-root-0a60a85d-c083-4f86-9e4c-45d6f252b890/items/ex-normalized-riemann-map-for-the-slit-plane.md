@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-normalized-riemann-map-for-the-slit-plane.md

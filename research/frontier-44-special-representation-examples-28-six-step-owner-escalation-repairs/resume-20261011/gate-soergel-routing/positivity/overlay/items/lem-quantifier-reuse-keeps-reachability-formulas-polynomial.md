@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quantifier-reuse-keeps-reachability-formulas-polynomial.md

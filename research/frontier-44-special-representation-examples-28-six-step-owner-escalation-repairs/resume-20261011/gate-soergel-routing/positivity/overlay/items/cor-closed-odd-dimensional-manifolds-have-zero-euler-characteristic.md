@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic.md

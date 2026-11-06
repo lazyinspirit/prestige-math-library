@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-transition-matrix-and-n-step-transition-probabilities.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-tor-one-of-r-mod-i-and-m-is-always-the-i-torsion-submodule-of-m.md

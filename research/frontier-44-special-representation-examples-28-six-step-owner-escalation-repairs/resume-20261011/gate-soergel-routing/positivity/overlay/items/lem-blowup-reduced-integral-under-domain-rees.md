@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-blowup-reduced-integral-under-domain-rees.md

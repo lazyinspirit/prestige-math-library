@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-residue-cocycle-depends-on-invariant-form-normalization.md

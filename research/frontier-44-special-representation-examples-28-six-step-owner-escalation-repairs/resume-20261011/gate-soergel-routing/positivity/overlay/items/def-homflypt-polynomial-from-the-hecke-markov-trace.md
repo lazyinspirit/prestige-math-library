@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-homflypt-polynomial-from-the-hecke-markov-trace.md

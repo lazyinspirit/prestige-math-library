@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ordinal-multiplication-associative-and-left-distributive.md

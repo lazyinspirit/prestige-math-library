@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-converse-of-lagrange-for-finite-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hh-ariki-koike-basis-and-generic-splitness.md

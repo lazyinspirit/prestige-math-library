@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-cube-root-of-two-is-not-algebraically-constructible.md

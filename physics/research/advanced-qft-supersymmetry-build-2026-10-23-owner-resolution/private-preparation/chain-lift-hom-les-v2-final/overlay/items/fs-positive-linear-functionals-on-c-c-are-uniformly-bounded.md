@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-positive-linear-functionals-on-c-c-are-uniformly-bounded.md

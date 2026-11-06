@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-ext-can-be-computed-from-any-projective-resolution-of-the-first-variable.md

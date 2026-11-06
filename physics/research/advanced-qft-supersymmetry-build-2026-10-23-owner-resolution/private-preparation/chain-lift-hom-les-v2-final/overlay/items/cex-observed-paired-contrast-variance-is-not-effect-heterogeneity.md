@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-observed-paired-contrast-variance-is-not-effect-heterogeneity.md

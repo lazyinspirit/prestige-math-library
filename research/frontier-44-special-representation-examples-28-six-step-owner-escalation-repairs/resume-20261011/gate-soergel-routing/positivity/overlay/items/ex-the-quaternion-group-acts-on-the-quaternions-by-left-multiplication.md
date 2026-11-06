@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-quaternion-group-acts-on-the-quaternions-by-left-multiplication.md

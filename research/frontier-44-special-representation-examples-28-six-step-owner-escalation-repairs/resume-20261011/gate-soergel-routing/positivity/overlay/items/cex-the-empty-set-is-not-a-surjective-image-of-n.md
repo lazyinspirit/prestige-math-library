@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-empty-set-is-not-a-surjective-image-of-n.md

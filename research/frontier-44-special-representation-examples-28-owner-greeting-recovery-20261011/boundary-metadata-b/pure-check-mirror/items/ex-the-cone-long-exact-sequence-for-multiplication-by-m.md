@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-cone-long-exact-sequence-for-multiplication-by-m.md

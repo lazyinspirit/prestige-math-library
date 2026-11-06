@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-multiplicative-group-of-a-finite-field-is-cyclic.md

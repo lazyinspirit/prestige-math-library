@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-exceptional-fiber-line-bundle-euler-characteristic.md

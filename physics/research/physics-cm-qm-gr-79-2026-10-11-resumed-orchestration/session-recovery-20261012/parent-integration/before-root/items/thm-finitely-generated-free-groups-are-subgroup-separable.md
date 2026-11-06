@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finitely-generated-free-groups-are-subgroup-separable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-local-uniform-convergence-dictionary-on-plane-domains.md

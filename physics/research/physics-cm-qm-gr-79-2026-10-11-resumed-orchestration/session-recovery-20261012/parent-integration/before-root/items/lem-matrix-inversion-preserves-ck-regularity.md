@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-matrix-inversion-preserves-ck-regularity.md

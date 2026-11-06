@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-power-sums-are-orthogonal-for-the-hall-inner-product.md

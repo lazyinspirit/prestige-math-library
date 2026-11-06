@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-principal-value-one-over-x-squared-diverges.md

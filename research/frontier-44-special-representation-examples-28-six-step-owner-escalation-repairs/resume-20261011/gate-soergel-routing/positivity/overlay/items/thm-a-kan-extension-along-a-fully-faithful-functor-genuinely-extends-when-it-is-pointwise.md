@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-kan-extension-along-a-fully-faithful-functor-genuinely-extends-when-it-is-pointwise.md

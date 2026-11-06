@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-product-of-two-infinite-groups-need-not-be-hyperbolic.md

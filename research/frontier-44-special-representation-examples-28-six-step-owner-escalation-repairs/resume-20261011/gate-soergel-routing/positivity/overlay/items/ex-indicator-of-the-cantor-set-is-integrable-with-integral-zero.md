@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-indicator-of-the-cantor-set-is-integrable-with-integral-zero.md

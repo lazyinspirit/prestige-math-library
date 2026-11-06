@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-oracle-machine-reads-the-infinite-oracle-at-once.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-first-resolvent-estimate-does-not-give-hille-yosida-bound.md

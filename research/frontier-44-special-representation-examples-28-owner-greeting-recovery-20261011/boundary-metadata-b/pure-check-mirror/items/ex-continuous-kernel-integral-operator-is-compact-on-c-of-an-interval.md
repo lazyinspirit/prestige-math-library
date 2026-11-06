@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-center-is-a-polynomial-algebra-of-rank-many-generators.md

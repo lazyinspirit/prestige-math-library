@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-condition-number-depends-on-the-chosen-norm-and-scaling.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-semicontinuous-function-almost-everywhere-equal-to-no-riemann-integrable-function.md

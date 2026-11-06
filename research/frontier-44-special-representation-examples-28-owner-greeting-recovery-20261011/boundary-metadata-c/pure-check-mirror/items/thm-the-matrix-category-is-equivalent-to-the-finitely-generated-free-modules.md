@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-matrix-category-is-equivalent-to-the-finitely-generated-free-modules.md

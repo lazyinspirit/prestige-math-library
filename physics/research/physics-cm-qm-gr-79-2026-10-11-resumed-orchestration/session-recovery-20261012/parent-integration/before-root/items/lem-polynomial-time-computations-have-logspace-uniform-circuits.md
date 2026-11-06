@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-polynomial-time-computations-have-logspace-uniform-circuits.md

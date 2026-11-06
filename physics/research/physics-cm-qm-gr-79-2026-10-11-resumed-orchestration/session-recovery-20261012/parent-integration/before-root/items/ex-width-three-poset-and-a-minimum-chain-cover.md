@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-width-three-poset-and-a-minimum-chain-cover.md

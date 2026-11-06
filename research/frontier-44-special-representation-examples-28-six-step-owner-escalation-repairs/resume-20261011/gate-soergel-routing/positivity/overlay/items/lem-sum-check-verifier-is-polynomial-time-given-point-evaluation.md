@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-sum-check-verifier-is-polynomial-time-given-point-evaluation.md

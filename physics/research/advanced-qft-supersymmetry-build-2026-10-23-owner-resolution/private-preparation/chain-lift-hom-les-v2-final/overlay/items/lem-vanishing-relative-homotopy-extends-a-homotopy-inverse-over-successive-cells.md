@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-vanishing-relative-homotopy-extends-a-homotopy-inverse-over-successive-cells.md

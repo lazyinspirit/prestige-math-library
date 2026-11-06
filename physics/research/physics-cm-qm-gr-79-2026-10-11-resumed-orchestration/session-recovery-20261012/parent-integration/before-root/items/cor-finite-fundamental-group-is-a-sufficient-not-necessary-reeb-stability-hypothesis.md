@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-fundamental-group-is-a-sufficient-not-necessary-reeb-stability-hypothesis.md

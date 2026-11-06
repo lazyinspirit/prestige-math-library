@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-square-root-continuation-around-the-origin-changes-sign.md

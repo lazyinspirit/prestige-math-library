@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-quantum-highest-weight-serre-quotient-is-integrable.md

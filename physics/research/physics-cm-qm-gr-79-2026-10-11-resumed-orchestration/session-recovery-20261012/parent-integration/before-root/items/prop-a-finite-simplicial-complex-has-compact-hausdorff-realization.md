@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-finite-simplicial-complex-has-compact-hausdorff-realization.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-class-of-extensions-is-a-set-whenever-derived-ext-one-is-a-set.md

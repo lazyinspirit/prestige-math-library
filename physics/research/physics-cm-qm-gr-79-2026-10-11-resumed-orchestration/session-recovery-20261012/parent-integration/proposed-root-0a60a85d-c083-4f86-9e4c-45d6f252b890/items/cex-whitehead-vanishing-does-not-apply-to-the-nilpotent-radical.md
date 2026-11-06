@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-whitehead-vanishing-does-not-apply-to-the-nilpotent-radical.md

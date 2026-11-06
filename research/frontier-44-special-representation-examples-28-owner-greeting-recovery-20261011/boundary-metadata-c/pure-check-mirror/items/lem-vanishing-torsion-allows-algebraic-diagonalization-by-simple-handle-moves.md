@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-vanishing-torsion-allows-algebraic-diagonalization-by-simple-handle-moves.md

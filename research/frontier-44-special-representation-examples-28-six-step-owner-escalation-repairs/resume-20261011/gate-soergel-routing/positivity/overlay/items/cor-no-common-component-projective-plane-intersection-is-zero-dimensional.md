@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-no-common-component-projective-plane-intersection-is-zero-dimensional.md

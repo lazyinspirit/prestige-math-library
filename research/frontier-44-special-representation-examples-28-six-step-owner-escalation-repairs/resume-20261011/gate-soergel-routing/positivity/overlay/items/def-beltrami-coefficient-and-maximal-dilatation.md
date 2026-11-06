@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-beltrami-coefficient-and-maximal-dilatation.md

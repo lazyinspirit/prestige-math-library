@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-wave-packet-model-dominates-the-linearised-carleson-operator.md

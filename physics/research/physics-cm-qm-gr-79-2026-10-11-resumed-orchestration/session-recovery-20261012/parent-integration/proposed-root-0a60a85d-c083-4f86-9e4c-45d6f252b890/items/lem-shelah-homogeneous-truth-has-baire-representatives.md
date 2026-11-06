@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-shelah-homogeneous-truth-has-baire-representatives.md

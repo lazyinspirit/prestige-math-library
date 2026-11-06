@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-homology-of-good-pairs-is-reduced-homology-of-the-quotient.md

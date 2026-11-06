@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-ext-is-defined-before-choosing-or-supplying-resolutions.md

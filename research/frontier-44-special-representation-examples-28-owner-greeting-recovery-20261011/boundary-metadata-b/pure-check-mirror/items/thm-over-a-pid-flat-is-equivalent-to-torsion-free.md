@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-over-a-pid-flat-is-equivalent-to-torsion-free.md

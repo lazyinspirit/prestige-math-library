@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-klr-partial-frobenius-caps-satisfy-two-color-terminal-contractions.md

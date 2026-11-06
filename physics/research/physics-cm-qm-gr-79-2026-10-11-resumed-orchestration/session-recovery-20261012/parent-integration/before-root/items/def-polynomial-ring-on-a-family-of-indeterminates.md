@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-polynomial-ring-on-a-family-of-indeterminates.md

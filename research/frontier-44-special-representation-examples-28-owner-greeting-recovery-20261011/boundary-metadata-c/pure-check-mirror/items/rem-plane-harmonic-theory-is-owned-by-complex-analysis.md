@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-plane-harmonic-theory-is-owned-by-complex-analysis.md

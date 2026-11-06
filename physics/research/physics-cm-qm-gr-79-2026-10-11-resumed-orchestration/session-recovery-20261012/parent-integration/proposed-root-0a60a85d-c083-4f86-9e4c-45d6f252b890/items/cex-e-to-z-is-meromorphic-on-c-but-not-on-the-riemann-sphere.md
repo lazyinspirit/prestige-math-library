@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-e-to-z-is-meromorphic-on-c-but-not-on-the-riemann-sphere.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-completed-fourfold-graded-cohomology-ring-laws-and-naturality.md

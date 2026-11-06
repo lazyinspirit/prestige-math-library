@@ -4,7 +4,7 @@ import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import { downstreamCounts } from './dependency-counts.mjs';
 import { mathematicalItems } from './math-boundary.mjs';
-import { REPO, yamlCandidates } from '../tools/paths.mjs';
+import { REPO, yamlCandidates } from './runtime-paths.mjs';
 
 const require = createRequire(import.meta.url);
 let parse;

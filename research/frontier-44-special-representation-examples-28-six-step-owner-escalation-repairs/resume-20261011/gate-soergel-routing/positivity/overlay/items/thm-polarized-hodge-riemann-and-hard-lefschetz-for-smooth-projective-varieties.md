@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-polarized-hodge-riemann-and-hard-lefschetz-for-smooth-projective-varieties.md

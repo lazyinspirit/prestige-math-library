@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating.md

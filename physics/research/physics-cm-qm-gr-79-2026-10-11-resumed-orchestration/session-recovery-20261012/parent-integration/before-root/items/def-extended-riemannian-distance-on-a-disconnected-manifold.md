@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-extended-riemannian-distance-on-a-disconnected-manifold.md

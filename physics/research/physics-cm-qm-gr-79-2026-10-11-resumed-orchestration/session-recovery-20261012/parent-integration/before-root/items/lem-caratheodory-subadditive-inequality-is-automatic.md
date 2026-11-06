@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-caratheodory-subadditive-inequality-is-automatic.md

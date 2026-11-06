@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-configuration-loop-traces-a-geometric-braid.md

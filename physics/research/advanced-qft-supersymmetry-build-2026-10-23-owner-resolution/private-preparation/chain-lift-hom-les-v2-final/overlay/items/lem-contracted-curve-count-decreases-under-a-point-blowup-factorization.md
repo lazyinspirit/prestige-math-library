@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-contracted-curve-count-decreases-under-a-point-blowup-factorization.md

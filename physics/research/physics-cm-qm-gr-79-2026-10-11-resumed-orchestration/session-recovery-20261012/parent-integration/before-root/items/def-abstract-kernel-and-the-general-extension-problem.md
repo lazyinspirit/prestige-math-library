@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-abstract-kernel-and-the-general-extension-problem.md

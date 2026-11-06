@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-uncountable-bernoulli-coordinate-process.md

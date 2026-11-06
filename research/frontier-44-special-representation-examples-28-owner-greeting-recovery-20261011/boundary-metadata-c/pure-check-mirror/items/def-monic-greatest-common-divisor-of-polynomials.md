@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-monic-greatest-common-divisor-of-polynomials.md

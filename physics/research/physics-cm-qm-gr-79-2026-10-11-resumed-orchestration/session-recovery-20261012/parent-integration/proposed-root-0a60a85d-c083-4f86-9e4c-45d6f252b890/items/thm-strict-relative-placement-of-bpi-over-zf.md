@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-strict-relative-placement-of-bpi-over-zf.md

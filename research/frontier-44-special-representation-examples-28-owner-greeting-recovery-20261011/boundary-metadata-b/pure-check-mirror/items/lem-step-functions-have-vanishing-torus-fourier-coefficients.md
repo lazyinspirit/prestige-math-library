@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-step-functions-have-vanishing-torus-fourier-coefficients.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-almost-every-point-is-a-lebesgue-point.md

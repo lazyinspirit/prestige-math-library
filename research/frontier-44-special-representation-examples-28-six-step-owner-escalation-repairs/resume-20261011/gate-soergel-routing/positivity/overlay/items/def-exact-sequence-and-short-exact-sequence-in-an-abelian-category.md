@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-exact-sequence-and-short-exact-sequence-in-an-abelian-category.md

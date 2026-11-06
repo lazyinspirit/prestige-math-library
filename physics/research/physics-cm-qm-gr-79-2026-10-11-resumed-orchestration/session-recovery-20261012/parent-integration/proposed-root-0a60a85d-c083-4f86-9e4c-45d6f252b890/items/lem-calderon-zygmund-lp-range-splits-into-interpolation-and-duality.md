@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-calderon-zygmund-lp-range-splits-into-interpolation-and-duality.md

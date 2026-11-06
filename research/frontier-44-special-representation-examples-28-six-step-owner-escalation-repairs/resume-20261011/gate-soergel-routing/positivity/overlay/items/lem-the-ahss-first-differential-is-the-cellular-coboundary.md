@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-ahss-first-differential-is-the-cellular-coboundary.md

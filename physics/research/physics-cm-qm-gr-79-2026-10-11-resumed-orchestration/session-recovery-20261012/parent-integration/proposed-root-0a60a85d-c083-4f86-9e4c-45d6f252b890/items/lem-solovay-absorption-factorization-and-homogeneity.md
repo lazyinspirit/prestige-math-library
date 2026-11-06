@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-solovay-absorption-factorization-and-homogeneity.md

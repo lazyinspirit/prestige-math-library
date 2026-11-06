@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-adjoining-one-root-reduces-the-unsplit-degree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-ramified-frobenius-has-no-canonical-lift.md

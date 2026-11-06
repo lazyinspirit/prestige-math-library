@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-generic-freeness-finite-type-algebra-module.md

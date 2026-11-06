@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ordered-arithmetization-evaluates-to-the-truth-value.md

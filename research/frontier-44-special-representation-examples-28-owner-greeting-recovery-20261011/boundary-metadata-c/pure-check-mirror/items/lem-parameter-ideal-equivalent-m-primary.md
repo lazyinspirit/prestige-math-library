@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-parameter-ideal-equivalent-m-primary.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-gr-chart-tetrad-congruence-and-observer-distinctions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-essential-uniqueness-of-type-i-irreducible-disintegration.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema.md

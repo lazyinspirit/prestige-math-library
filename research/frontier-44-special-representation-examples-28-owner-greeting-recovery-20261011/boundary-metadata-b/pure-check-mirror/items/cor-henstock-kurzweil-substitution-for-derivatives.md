@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-henstock-kurzweil-substitution-for-derivatives.md

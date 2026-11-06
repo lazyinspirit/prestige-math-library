@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-virtual-weyl-combinations-detect-q-schur-block-separation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-labelled-classes-and-basic-labelled-constructions.md

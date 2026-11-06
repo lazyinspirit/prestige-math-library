@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-integrated-semigroup-orbits-belong-to-the-generator-domain.md

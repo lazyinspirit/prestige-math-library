@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-flat-and-faithfully-flat-modules-and-ring-maps.md

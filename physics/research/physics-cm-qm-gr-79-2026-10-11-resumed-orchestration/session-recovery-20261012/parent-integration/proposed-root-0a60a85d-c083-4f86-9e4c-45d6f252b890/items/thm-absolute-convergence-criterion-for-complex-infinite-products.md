@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-absolute-convergence-criterion-for-complex-infinite-products.md

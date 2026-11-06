@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-normalized-and-unnormalized-bar-complexes-are-chain-homotopy-equivalent.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-maximal-diagonalizable-subgroups-of-trigonalizable-groups-are-conjugate.md

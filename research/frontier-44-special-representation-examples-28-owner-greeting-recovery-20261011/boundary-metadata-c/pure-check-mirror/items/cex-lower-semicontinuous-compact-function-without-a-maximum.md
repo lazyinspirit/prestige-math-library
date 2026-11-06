@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-lower-semicontinuous-compact-function-without-a-maximum.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-related-vector-fields-have-related-lie-brackets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-constant-coefficients-do-not-compute-a-nontrivial-monodromy-system.md

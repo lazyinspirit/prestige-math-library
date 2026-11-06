@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-interior-w-two-p-estimate-for-uniformly-elliptic-equations.md

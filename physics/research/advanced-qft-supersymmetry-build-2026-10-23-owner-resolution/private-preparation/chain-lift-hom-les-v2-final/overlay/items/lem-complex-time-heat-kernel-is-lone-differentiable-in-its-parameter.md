@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-complex-time-heat-kernel-is-lone-differentiable-in-its-parameter.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-euler-formula-on-a-tree-cycle-and-k-four.md

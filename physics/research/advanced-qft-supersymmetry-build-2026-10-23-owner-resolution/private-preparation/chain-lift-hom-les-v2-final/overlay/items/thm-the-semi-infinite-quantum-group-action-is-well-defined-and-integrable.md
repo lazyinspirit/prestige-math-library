@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-the-semi-infinite-quantum-group-action-is-well-defined-and-integrable.md

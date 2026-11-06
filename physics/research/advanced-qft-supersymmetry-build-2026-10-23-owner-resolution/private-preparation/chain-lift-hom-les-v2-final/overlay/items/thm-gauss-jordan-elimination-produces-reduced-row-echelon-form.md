@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-gauss-jordan-elimination-produces-reduced-row-echelon-form.md

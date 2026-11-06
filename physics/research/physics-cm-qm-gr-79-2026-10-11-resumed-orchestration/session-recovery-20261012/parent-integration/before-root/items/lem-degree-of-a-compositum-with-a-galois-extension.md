@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-degree-of-a-compositum-with-a-galois-extension.md

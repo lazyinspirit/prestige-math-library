@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-hh-infinite-dimensional-tensor-dual-identification-fails.md

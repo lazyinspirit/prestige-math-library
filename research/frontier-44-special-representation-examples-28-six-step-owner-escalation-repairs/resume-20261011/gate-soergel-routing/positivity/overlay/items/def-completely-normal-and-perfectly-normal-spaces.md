@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-completely-normal-and-perfectly-normal-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-bonnet-myers-fundamental-group-is-finite.md

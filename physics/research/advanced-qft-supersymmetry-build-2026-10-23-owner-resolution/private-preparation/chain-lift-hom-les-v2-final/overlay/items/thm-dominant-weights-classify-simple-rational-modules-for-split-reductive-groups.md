@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-dominant-weights-classify-simple-rational-modules-for-split-reductive-groups.md

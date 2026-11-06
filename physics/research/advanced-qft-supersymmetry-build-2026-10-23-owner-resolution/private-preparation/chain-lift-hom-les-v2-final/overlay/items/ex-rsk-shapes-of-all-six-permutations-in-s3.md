@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-rsk-shapes-of-all-six-permutations-in-s3.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-existence-theorem-for-complex-semisimple-lie-algebras.md

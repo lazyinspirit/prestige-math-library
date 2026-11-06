@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-upper-triangular-matrices-form-a-solvable-nonnilpotent-lie-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-protocol-value-is-computable-in-polynomial-space.md

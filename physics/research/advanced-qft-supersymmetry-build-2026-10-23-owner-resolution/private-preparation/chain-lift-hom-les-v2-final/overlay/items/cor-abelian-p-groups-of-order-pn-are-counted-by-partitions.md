@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-abelian-p-groups-of-order-pn-are-counted-by-partitions.md

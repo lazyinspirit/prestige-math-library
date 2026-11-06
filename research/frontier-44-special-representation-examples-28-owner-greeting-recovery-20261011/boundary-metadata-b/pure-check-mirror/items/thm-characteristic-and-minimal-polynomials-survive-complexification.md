@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-characteristic-and-minimal-polynomials-survive-complexification.md

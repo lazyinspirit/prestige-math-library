@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-gitik-every-uncountable-cardinal-is-singular.md

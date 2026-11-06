@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-binary-necklaces-of-length-six-in-two-colours.md

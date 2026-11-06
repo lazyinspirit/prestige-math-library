@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-localisation-is-unique-up-to-unique-isomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-de-rham-map-on-cohomology-is-well-defined.md

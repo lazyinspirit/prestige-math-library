@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-the-higher-level-schur-weyl-projective-generator-and-schur-functor.md

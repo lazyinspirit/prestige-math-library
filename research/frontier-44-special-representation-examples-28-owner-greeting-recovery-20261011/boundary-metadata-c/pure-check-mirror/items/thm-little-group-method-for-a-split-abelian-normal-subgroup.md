@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-little-group-method-for-a-split-abelian-normal-subgroup.md

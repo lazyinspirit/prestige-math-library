@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-trace-can-be-defined-for-an-endomorphism-in-any-monoidal-category.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-divides-a-product-without-dividing-a-factor.md

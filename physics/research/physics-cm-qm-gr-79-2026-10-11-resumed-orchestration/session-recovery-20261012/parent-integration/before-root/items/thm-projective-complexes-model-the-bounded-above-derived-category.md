@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-projective-complexes-model-the-bounded-above-derived-category.md

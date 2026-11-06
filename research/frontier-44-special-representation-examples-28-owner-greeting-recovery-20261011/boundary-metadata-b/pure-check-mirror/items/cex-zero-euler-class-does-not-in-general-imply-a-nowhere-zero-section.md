@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-zero-euler-class-does-not-in-general-imply-a-nowhere-zero-section.md

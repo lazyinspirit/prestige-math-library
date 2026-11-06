@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-foliation-is-taut-if-and-only-if-it-has-no-dead-end-component.md

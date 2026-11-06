@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nonconvex-riemann-data-can-require-a-composite-rarefaction-shock-wave.md

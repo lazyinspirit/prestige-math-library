@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-shapovalov-form-is-not-positive-definite-in-general.md

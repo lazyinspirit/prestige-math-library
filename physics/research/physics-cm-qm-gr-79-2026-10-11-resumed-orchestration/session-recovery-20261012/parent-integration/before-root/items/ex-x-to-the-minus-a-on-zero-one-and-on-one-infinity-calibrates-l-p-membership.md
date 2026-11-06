@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership.md

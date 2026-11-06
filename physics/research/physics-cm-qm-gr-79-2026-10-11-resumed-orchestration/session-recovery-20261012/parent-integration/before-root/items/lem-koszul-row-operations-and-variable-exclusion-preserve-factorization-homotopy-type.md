@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-koszul-row-operations-and-variable-exclusion-preserve-factorization-homotopy-type.md

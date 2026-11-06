@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-dualizing-real-chain-complexes-requires-an-exactness-argument.md

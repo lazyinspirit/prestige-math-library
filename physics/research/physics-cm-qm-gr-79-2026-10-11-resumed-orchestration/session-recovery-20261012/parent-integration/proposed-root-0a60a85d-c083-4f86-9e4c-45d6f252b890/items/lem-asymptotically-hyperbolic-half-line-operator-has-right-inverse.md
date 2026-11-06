@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-asymptotically-hyperbolic-half-line-operator-has-right-inverse.md

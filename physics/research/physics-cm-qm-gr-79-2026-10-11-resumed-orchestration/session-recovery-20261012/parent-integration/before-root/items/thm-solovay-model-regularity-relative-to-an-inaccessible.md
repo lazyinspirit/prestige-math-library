@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-solovay-model-regularity-relative-to-an-inaccessible.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-vertical-composition-of-natural-transformations-is-natural.md

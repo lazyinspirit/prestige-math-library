@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-blass-ultrafilter-free-model-is-finitely-formalizable.md

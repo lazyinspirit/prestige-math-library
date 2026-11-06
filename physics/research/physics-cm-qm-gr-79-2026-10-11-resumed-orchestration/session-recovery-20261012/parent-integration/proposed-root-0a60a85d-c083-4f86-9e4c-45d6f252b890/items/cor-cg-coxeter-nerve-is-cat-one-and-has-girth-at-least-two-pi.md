@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cg-coxeter-nerve-is-cat-one-and-has-girth-at-least-two-pi.md

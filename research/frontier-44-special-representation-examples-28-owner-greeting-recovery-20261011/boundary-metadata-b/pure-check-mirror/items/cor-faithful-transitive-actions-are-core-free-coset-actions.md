@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-faithful-transitive-actions-are-core-free-coset-actions.md

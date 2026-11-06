@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complex-polynomials-and-rational-functions-are-holomorphic.md

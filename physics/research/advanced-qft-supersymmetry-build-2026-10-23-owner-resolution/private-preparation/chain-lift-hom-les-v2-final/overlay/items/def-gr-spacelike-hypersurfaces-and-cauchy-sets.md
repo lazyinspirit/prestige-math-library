@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-gr-spacelike-hypersurfaces-and-cauchy-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-projection-onto-a-finite-dimensional-subspace-by-a-gram-matrix.md

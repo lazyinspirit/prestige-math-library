@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-orbit-polynomial-has-invariant-coefficients.md

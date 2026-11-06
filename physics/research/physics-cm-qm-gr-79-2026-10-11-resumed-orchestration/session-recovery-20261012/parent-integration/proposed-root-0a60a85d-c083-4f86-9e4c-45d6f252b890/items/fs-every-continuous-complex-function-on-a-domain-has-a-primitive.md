@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-continuous-complex-function-on-a-domain-has-a-primitive.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-cg-reflection-matrices-in-positive-lorentzian-and-radical-planes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-non-noetherian-ring-with-a-strict-chain-of-principal-ideals.md

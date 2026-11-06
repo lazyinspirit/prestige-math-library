@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-naturality-orientation-sign-and-whitney-product-for-euler-classes.md

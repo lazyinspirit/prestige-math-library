@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-union-of-two-compatible-smooth-atlases-is-a-smooth-atlas.md

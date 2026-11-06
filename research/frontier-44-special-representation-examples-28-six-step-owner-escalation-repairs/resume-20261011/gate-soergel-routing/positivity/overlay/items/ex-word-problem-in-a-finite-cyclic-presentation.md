@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-word-problem-in-a-finite-cyclic-presentation.md

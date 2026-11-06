@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-expectation-of-products-of-independent-random-variables.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-determinant-is-a-polynomial-in-the-matrix-entries.md

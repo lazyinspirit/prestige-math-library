@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-radius-does-not-determine-boundary-convergence-of-a-complex-power-series.md

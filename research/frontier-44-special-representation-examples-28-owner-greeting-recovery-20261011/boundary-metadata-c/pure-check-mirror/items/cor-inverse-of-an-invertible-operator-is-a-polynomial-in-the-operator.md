@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator.md

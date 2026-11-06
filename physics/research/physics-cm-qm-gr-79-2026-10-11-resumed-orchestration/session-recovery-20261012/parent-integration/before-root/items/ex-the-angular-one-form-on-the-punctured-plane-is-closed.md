@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-angular-one-form-on-the-punctured-plane-is-closed.md

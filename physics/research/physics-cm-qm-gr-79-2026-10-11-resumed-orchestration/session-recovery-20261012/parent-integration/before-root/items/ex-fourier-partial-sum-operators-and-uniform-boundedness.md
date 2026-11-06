@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fourier-partial-sum-operators-and-uniform-boundedness.md

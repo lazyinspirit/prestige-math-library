@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-path-homotopy-through-straight-segments-in-a-convex-set.md

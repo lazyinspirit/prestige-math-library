@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-interior-sphere-barrier-for-the-laplacian.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gaussian-fourier-summability-kernel-is-an-approximate-identity.md

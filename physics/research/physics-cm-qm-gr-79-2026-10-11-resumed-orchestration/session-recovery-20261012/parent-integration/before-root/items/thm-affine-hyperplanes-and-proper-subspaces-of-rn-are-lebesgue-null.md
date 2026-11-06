@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-jones-specialization-of-a-two-strand-closure.md

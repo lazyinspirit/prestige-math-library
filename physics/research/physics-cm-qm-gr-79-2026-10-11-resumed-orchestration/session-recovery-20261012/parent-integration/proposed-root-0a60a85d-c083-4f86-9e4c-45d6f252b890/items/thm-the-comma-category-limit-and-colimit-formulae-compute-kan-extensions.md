@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions.md

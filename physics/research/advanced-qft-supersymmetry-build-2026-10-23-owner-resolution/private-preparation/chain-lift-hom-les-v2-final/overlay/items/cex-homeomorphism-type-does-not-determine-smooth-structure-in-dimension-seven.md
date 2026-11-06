@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-homeomorphism-type-does-not-determine-smooth-structure-in-dimension-seven.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence.md

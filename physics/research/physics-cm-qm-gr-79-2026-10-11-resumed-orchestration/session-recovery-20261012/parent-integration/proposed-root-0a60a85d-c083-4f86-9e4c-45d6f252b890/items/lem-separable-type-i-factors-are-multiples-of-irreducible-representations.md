@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-separable-type-i-factors-are-multiples-of-irreducible-representations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-bounded-predictable-transforms-preserve-martingales.md

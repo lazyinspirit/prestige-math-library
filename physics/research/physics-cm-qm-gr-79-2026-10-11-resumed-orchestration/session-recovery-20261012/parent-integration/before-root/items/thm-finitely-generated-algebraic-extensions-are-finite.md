@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finitely-generated-algebraic-extensions-are-finite.md

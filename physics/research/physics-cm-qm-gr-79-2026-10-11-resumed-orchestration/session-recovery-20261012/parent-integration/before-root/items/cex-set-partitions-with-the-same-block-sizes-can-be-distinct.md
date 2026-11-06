@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-set-partitions-with-the-same-block-sizes-can-be-distinct.md

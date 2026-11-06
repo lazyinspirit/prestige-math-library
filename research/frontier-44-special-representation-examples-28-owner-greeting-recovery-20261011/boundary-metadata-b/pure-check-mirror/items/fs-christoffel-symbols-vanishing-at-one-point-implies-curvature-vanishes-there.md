@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-christoffel-symbols-vanishing-at-one-point-implies-curvature-vanishes-there.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-embedded-component-varies-but-radical-does-not.md

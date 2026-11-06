@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-ultrafilter-algebra-structure-on-a-finite-discrete-space.md

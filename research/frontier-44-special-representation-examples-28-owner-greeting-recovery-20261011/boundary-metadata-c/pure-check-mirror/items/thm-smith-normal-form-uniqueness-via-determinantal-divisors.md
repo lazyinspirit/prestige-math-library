@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-smith-normal-form-uniqueness-via-determinantal-divisors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-counting-induced-three-vertex-paths-by-extensions.md

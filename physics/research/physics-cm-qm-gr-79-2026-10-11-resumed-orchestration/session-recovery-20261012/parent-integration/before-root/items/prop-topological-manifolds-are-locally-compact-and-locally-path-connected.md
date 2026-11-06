@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-topological-manifolds-are-locally-compact-and-locally-path-connected.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-positive-root-pairings-of-a-dominant-integral-weight.md

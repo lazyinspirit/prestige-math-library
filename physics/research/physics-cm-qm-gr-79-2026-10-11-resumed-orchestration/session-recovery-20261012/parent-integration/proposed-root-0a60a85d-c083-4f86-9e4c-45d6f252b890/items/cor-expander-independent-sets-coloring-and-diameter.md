@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-expander-independent-sets-coloring-and-diameter.md

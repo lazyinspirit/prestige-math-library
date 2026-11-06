@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-highest-weight-tensor-maps-and-their-adjunction.md

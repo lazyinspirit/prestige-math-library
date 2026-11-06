@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-coordinate-evaluations-converge-weak-star-to-zero-in-ell-one-star.md

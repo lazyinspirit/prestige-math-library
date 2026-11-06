@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fair-coin-cylinder-content-is-a-premeasure.md

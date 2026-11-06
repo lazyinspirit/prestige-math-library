@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-z-five-plus-three-z-plus-one-has-four-zeros-in-the-annulus-one-to-two.md

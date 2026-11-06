@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-filtered-vector-spaces-fail-the-coimage-image-axiom.md

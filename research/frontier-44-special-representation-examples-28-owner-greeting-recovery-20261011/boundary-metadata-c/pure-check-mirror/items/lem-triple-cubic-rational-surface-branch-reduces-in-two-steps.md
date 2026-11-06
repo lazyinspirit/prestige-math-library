@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-triple-cubic-rational-surface-branch-reduces-in-two-steps.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-invariant-subspace-need-not-reduce-an-operator.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-dehn-replacement-strictly-shortens-a-word.md

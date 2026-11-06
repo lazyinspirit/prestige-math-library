@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-riemann-extension-across-a-coordinate-hyperplane.md

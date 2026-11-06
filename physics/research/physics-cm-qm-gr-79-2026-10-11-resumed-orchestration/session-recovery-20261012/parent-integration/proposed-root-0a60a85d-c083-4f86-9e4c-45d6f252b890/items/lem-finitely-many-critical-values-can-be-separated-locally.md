@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finitely-many-critical-values-can-be-separated-locally.md

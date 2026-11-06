@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-a-closed-oriented-manifold-has-no-top-form-with-nonzero-integral-that-is-exact.md

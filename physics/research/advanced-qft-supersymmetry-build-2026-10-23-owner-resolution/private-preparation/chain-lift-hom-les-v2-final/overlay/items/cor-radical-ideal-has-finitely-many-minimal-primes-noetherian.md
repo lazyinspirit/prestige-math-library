@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-radical-ideal-has-finitely-many-minimal-primes-noetherian.md

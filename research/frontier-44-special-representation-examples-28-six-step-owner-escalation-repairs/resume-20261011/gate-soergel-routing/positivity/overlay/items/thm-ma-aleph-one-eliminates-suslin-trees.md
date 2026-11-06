@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ma-aleph-one-eliminates-suslin-trees.md

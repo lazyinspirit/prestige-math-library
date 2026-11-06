@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-feferman-levy-reals-are-a-countable-union-of-countable-sets.md

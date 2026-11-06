@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-koszul-formula-is-necessary-for-a-levi-civita-connection.md

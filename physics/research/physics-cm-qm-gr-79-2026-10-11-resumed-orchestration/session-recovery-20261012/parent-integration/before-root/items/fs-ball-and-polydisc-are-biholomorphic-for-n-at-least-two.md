@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-ball-and-polydisc-are-biholomorphic-for-n-at-least-two.md

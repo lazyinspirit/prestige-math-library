@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-sortable-projection-greatest-element-and-interval-fibers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cg-sortable-meet-join-closure-and-cambrian-quotient.md

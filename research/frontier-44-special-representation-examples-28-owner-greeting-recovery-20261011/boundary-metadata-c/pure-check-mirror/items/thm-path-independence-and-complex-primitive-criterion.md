@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-path-independence-and-complex-primitive-criterion.md

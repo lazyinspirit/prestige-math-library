@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-chosen-family-of-ends-assembles-into-a-functor-of-the-parameters.md

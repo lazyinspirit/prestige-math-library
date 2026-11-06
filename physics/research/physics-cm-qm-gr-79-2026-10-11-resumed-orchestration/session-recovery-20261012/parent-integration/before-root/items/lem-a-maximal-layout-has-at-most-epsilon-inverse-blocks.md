@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-maximal-layout-has-at-most-epsilon-inverse-blocks.md

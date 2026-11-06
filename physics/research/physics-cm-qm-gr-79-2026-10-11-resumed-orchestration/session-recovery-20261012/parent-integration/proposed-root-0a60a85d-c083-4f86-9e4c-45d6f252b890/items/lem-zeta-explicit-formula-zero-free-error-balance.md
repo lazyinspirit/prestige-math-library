@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zeta-explicit-formula-zero-free-error-balance.md

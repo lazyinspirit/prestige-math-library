@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-unit-object-of-a-multitensor-category-is-semisimple.md

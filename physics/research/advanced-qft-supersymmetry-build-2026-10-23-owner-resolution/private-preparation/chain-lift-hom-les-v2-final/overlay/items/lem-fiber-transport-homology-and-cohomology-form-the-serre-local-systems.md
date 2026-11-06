@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems.md

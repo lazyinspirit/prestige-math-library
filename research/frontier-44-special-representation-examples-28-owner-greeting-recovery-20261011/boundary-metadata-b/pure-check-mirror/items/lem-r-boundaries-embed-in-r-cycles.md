@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-r-boundaries-embed-in-r-cycles.md

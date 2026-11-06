@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-abelian-category-with-no-nonzero-projective-object.md

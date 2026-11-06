@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-brownian-paths-are-locally-holder-of-every-order-below-one-half.md

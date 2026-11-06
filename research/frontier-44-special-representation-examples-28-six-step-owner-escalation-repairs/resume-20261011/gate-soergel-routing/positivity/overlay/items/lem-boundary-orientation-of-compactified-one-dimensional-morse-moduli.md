@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-boundary-orientation-of-compactified-one-dimensional-morse-moduli.md

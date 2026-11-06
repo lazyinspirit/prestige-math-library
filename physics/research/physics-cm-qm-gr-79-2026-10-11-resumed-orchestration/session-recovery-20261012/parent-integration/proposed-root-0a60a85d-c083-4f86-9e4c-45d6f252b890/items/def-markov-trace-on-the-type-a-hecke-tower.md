@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-markov-trace-on-the-type-a-hecke-tower.md

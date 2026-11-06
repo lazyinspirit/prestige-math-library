@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-von-mangoldt-explicit-formula-residues.md

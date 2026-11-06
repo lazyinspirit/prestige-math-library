@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-diagonal-ramsey-counting-lower-bound.md

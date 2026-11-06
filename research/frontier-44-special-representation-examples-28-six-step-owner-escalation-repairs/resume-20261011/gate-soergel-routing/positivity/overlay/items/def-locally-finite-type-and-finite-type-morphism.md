@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-locally-finite-type-and-finite-type-morphism.md

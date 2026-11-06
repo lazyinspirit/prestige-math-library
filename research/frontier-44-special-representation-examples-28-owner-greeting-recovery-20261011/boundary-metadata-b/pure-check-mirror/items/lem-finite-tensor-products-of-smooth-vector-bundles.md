@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-tensor-products-of-smooth-vector-bundles.md

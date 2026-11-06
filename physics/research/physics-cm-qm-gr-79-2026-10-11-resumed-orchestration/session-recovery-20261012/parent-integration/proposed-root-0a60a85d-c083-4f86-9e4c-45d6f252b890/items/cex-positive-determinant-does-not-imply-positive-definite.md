@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-positive-determinant-does-not-imply-positive-definite.md

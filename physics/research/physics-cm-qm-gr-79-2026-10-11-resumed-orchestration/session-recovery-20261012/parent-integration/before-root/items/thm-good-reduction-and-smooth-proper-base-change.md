@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-good-reduction-and-smooth-proper-base-change.md

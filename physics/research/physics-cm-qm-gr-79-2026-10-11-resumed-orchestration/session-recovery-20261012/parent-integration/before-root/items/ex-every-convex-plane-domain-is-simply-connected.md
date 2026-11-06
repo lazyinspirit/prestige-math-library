@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-every-convex-plane-domain-is-simply-connected.md

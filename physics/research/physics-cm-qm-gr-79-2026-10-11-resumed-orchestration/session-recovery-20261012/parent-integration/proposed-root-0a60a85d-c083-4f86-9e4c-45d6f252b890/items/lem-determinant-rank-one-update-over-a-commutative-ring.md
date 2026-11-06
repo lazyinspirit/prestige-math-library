@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-determinant-rank-one-update-over-a-commutative-ring.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-induced-module-decomposes-over-a-left-transversal.md

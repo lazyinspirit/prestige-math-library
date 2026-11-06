@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-how-much-of-the-theory-needs-symmetry-closedness-and-completeness.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-restriction-from-continuous-to-smooth-singular-cochains.md

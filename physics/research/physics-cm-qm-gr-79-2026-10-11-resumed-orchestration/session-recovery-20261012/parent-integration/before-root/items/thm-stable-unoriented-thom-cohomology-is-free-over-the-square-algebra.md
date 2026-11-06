@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-stable-unoriented-thom-cohomology-is-free-over-the-square-algebra.md

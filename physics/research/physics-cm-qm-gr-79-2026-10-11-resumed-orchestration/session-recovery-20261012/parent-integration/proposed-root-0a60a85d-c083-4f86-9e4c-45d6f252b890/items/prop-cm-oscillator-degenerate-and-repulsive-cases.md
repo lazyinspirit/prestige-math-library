@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-oscillator-degenerate-and-repulsive-cases.md

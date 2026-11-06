@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-roof-squares-and-composable-pairs-can-be-cleared.md

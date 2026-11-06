@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-piecewise-c1-paths-have-additive-speed-integral-length.md

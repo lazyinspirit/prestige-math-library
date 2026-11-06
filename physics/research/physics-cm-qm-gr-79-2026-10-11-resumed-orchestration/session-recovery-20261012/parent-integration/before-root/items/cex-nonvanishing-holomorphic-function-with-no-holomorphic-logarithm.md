@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonvanishing-holomorphic-function-with-no-holomorphic-logarithm.md

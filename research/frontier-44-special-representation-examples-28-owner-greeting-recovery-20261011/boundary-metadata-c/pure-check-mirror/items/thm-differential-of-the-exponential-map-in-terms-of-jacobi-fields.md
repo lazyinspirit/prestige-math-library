@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-differential-of-the-exponential-map-in-terms-of-jacobi-fields.md

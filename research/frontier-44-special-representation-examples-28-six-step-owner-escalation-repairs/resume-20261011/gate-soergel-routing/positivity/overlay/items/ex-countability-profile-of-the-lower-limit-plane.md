@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-countability-profile-of-the-lower-limit-plane.md

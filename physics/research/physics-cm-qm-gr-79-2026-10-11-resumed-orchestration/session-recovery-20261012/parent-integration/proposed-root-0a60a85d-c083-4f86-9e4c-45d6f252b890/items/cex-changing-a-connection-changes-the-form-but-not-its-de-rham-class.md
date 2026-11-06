@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-changing-a-connection-changes-the-form-but-not-its-de-rham-class.md

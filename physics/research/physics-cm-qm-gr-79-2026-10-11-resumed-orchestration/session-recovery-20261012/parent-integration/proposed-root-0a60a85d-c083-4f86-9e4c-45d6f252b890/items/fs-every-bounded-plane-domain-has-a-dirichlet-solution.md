@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-bounded-plane-domain-has-a-dirichlet-solution.md

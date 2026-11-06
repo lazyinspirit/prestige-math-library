@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nonzero-square-zero-matrix-is-not-similar-to-a-diagonal-matrix.md

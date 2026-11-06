@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-hopf-rinow-on-a-flat-cylinder.md

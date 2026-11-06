@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-reduction-of-an-og-lattice-is-a-finite-dimensional-kg-module.md

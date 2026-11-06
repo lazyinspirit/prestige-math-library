@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boolean-cube-fourier-inversion-and-parseval.md

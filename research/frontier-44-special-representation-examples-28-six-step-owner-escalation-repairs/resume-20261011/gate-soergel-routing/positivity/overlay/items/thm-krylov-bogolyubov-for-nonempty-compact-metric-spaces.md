@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-krylov-bogolyubov-for-nonempty-compact-metric-spaces.md

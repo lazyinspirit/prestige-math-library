@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-complete-reducibility-for-compact-lie-groups.md

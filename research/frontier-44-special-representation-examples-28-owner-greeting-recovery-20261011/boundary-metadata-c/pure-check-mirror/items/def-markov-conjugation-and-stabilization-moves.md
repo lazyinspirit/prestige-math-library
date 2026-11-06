@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-markov-conjugation-and-stabilization-moves.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-bounded-open-set-with-nonnull-boundary.md

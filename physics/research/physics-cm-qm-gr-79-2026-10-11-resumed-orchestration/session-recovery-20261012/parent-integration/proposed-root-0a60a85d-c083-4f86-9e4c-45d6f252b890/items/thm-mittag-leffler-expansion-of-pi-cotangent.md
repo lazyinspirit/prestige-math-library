@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-mittag-leffler-expansion-of-pi-cotangent.md

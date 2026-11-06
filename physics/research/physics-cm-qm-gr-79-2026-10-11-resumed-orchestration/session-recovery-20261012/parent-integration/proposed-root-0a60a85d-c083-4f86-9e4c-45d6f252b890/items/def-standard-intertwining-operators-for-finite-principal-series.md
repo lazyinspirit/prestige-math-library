@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-standard-intertwining-operators-for-finite-principal-series.md

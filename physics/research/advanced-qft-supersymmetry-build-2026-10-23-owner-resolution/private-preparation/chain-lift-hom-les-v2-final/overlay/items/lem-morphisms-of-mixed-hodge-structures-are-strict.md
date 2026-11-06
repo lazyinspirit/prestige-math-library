@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-morphisms-of-mixed-hodge-structures-are-strict.md

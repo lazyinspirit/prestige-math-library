@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cyclotomic-klr-diagram-duality-and-graded-module-duals.md

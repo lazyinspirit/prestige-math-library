@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-acyclic-direct-image-cohomology-comparison.md

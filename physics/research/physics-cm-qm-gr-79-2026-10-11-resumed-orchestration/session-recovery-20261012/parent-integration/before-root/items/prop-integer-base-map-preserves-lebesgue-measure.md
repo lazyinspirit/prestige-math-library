@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-integer-base-map-preserves-lebesgue-measure.md

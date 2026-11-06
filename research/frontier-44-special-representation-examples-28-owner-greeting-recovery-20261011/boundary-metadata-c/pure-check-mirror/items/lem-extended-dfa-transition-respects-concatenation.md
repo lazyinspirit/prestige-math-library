@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-extended-dfa-transition-respects-concatenation.md

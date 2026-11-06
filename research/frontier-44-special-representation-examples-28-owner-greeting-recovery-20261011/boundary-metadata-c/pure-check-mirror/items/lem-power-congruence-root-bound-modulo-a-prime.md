@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-power-congruence-root-bound-modulo-a-prime.md

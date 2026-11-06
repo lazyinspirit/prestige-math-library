@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-uniformly-approximable-real-valued-map-is-continuous.md

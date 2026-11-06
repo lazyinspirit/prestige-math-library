@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-naive-inversion-is-not-the-l1-involution-for-a-nonunimodular-group.md

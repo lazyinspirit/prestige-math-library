@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-noether-finiteness-theorem-for-invariants.md

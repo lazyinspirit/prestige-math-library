@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-noether-isomorphism-theorems-recovered-from-the-nine-lemma.md

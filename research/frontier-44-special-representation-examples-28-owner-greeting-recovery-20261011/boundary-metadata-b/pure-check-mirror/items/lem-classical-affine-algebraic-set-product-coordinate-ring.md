@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-classical-affine-algebraic-set-product-coordinate-ring.md

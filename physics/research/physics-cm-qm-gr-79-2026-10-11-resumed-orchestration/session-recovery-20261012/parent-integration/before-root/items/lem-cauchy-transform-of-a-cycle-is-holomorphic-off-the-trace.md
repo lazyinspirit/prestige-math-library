@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cauchy-transform-of-a-cycle-is-holomorphic-off-the-trace.md

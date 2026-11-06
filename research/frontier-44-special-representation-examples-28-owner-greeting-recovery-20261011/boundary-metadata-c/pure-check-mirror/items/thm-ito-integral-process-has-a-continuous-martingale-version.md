@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ito-integral-process-has-a-continuous-martingale-version.md

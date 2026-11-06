@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-cg-cone-cat-equivalence-and-polyhedral-link-criterion.md

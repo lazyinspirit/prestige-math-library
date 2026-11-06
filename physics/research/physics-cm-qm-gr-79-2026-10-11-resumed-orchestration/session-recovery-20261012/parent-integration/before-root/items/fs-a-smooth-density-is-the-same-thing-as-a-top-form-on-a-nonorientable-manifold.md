@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-smooth-density-is-the-same-thing-as-a-top-form-on-a-nonorientable-manifold.md

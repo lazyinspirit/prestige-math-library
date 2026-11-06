@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-distance-is-an-equivalence-relation-compatible-with-composition.md

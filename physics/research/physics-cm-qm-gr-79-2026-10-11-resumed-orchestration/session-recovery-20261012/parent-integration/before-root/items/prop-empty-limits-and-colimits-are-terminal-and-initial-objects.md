@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-empty-limits-and-colimits-are-terminal-and-initial-objects.md

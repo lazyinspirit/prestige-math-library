@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-weighted-drift-minorization-gives-contraction-and-invariant-law.md

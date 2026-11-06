@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-quotient-by-a-borel-subgroup-is-complete.md

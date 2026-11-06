@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-split-inert-ramified-and-unramified-prime.md

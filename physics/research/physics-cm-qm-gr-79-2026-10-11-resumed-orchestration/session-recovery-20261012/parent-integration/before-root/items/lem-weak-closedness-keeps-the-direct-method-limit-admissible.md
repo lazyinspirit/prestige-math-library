@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-closedness-keeps-the-direct-method-limit-admissible.md

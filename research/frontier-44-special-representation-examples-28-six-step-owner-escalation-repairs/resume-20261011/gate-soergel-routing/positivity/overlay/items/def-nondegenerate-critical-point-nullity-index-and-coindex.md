@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-nondegenerate-critical-point-nullity-index-and-coindex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-enriched-naturality-is-strictly-stronger-than-ordinary-naturality.md

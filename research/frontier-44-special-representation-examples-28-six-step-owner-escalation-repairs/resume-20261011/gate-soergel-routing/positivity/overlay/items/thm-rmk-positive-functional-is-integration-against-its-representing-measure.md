@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rmk-positive-functional-is-integration-against-its-representing-measure.md

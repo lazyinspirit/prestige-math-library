@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-conditionally-convergent-euler-product-rearrangement.md

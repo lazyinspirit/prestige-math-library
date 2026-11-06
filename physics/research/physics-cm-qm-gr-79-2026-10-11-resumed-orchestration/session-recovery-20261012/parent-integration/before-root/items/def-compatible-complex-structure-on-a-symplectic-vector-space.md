@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-compatible-complex-structure-on-a-symplectic-vector-space.md

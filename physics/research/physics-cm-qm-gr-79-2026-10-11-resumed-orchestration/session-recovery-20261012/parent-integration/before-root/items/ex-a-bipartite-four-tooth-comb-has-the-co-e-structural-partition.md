@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-bipartite-four-tooth-comb-has-the-co-e-structural-partition.md

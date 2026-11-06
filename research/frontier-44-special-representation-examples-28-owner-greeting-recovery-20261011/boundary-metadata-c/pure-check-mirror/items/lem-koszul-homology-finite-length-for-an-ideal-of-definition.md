@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-koszul-homology-finite-length-for-an-ideal-of-definition.md

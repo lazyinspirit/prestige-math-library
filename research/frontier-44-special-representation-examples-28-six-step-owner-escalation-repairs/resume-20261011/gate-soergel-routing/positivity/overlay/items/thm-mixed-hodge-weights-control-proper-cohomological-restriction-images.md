@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-mixed-hodge-weights-control-proper-cohomological-restriction-images.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-highest-weight-classification-for-a-compact-connected-lie-group.md

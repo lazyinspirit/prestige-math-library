@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-enflo-symmetry-averaging-and-block-assembly.md

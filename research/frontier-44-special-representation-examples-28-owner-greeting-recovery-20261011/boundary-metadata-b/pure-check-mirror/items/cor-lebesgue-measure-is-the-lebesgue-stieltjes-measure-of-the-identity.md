@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity.md

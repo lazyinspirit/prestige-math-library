@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-standard-and-costandard-objects-in-category-o.md

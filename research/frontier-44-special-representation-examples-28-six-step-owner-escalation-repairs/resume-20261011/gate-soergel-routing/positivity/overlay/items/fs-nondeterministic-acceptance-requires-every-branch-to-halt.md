@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-nondeterministic-acceptance-requires-every-branch-to-halt.md

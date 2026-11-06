@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-base-three-cylinder-intervals-and-preimages.md

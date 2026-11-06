@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-first-supplement-via-cyclotomic-frobenius.md

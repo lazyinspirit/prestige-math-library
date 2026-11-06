@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cousins-lemma-gives-heine-borel-on-an-interval.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weighted-norm-invariance-for-a-mobius-transformation.md

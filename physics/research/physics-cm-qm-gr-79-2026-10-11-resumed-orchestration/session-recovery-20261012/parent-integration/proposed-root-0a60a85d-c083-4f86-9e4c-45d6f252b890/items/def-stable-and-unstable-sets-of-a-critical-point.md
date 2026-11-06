@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-stable-and-unstable-sets-of-a-critical-point.md

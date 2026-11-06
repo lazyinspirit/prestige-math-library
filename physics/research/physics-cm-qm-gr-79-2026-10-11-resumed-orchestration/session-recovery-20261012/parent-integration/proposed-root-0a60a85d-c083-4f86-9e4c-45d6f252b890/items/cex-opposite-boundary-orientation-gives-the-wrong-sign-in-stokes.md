@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-opposite-boundary-orientation-gives-the-wrong-sign-in-stokes.md

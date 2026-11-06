@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-lie-derivative-and-interior-product-commute-for-all-vector-fields.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-breaking-length-is-bounded-by-index-drop.md

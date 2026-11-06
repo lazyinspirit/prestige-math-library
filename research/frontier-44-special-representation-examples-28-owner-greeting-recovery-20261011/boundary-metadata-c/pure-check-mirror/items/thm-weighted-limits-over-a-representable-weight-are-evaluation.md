@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-weighted-limits-over-a-representable-weight-are-evaluation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-agreement-with-c2-holomorphic-components-are-harmonic.md

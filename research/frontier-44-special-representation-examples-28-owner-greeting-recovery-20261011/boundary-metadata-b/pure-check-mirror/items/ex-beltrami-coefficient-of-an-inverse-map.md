@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-beltrami-coefficient-of-an-inverse-map.md

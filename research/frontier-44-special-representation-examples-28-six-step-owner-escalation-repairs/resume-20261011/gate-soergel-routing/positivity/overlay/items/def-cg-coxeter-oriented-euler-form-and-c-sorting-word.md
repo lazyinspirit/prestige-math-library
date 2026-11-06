@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cg-coxeter-oriented-euler-form-and-c-sorting-word.md

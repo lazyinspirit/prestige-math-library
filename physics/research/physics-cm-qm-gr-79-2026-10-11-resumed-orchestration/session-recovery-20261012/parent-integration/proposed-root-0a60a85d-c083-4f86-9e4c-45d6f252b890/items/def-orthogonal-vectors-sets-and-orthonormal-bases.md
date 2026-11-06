@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-orthogonal-vectors-sets-and-orthonormal-bases.md

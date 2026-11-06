@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-numerical-equivalence-and-neron-severi-space.md

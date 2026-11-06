@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-yang-baxter-operator-gives-braid-group-representations.md

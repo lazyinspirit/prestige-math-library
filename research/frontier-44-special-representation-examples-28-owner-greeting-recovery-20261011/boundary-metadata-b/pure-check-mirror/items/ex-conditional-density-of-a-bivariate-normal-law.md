@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-conditional-density-of-a-bivariate-normal-law.md

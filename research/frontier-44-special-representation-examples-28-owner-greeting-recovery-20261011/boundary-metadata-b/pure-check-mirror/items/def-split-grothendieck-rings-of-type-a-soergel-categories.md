@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-split-grothendieck-rings-of-type-a-soergel-categories.md

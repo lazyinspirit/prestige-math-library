@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-abel-limit-along-a-nonradial-stolz-approach.md

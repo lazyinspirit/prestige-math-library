@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-differentiable-function-with-discontinuous-derivative.md

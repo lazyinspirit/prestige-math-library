@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-transfinite-description-of-generated-sigma-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-residue-field-of-a-localisation-at-a-prime.md

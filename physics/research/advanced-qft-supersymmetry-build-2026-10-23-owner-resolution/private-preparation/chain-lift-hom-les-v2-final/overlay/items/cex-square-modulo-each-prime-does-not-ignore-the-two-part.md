@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-square-modulo-each-prime-does-not-ignore-the-two-part.md

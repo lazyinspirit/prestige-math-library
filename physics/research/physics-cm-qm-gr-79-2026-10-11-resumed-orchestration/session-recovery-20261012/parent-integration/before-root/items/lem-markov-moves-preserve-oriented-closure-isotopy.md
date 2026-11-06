@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-markov-moves-preserve-oriented-closure-isotopy.md

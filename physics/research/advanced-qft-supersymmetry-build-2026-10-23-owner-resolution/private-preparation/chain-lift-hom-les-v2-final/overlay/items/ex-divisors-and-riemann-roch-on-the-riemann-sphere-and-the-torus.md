@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-divisors-and-riemann-roch-on-the-riemann-sphere-and-the-torus.md

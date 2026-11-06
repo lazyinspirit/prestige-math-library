@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-first-stiefel-whitney-class-classifies-orientability.md

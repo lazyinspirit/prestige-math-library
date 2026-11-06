@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup.md

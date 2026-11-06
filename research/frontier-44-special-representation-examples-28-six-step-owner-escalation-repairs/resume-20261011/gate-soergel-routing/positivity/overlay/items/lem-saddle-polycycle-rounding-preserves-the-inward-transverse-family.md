@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-saddle-polycycle-rounding-preserves-the-inward-transverse-family.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nakayama-kernels-give-well-defined-adjoint-functors.md

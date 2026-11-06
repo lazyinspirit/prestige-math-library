@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-weak-law-for-independent-nonidentical-variables.md

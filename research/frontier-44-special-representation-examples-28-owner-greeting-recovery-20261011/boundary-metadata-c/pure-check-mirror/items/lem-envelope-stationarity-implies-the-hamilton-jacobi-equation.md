@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-envelope-stationarity-implies-the-hamilton-jacobi-equation.md

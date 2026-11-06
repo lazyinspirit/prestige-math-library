@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-vertex-and-edge-covers-and-covering-numbers.md

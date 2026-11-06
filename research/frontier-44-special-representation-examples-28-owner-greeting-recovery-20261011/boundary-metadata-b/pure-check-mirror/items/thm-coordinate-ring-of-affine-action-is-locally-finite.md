@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-coordinate-ring-of-affine-action-is-locally-finite.md

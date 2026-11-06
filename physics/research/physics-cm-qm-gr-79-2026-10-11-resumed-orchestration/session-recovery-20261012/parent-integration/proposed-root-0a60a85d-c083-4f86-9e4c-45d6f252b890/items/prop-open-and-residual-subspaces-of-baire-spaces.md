@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-open-and-residual-subspaces-of-baire-spaces.md

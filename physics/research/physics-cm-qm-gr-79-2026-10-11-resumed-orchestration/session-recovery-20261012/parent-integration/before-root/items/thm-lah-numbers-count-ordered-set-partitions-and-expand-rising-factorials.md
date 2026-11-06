@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lah-numbers-count-ordered-set-partitions-and-expand-rising-factorials.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-semantic-generic-extension-theorem-for-countable-transitive-models.md

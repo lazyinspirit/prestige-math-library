@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-wave-equation-cauchy-data-and-wave-speed.md

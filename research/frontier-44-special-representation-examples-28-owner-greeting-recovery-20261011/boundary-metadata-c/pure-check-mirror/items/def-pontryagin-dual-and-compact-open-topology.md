@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-pontryagin-dual-and-compact-open-topology.md

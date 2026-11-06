@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dodd-jensen-covering-supplies-fleissner-hyp-data.md

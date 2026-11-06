@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-top-highest-weight-summand-in-a-tensor-product.md

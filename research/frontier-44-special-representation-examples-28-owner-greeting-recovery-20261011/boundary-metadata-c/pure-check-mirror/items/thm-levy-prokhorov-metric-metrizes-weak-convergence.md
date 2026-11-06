@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-levy-prokhorov-metric-metrizes-weak-convergence.md

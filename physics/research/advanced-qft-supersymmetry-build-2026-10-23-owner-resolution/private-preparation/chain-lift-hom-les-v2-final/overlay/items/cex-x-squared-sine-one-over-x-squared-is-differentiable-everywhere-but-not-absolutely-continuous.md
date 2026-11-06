@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-x-squared-sine-one-over-x-squared-is-differentiable-everywhere-but-not-absolutely-continuous.md

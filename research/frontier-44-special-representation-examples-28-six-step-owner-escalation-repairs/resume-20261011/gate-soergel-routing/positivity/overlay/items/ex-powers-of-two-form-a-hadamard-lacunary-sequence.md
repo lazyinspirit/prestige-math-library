@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-powers-of-two-form-a-hadamard-lacunary-sequence.md

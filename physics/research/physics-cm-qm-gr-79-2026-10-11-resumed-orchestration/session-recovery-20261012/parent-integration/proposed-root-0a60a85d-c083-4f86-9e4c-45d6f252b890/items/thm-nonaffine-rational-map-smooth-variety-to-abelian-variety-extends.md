@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonaffine-rational-map-smooth-variety-to-abelian-variety-extends.md

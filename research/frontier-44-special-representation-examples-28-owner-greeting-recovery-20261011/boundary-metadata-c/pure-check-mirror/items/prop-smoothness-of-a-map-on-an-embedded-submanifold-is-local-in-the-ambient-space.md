@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-smoothness-of-a-map-on-an-embedded-submanifold-is-local-in-the-ambient-space.md

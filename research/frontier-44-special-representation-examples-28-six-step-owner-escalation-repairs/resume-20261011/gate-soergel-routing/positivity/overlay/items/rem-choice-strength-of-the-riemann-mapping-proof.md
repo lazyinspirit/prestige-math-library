@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-choice-strength-of-the-riemann-mapping-proof.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-differentiable-with-unbounded-derivative-is-not-lipschitz.md

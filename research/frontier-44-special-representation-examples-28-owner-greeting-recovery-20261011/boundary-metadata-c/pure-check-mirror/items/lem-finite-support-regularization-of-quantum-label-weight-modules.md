@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-support-regularization-of-quantum-label-weight-modules.md

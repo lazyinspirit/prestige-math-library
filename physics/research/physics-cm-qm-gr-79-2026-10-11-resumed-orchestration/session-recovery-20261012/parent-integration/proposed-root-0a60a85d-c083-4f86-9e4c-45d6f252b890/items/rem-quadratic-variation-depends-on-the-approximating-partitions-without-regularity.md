@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-quadratic-variation-depends-on-the-approximating-partitions-without-regularity.md

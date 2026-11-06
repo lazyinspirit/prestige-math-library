@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chain-condition-preserves-cofinalities-and-cardinals.md

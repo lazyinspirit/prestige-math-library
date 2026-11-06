@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-middle-dimensional-surgery-can-change-an-intersection-form.md

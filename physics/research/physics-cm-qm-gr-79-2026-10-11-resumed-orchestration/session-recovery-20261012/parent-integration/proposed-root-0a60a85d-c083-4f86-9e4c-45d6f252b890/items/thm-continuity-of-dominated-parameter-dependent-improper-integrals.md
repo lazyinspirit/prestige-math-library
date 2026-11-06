@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuity-of-dominated-parameter-dependent-improper-integrals.md

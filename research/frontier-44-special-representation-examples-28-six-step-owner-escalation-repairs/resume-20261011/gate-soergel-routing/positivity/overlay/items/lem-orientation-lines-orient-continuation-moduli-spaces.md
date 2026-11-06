@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-orientation-lines-orient-continuation-moduli-spaces.md

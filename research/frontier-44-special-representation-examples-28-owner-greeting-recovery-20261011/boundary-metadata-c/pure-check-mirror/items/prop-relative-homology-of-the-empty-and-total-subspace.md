@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-relative-homology-of-the-empty-and-total-subspace.md

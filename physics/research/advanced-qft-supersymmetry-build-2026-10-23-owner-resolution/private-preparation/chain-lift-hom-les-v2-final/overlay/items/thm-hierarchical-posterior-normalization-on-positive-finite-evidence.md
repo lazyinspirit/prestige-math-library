@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hierarchical-posterior-normalization-on-positive-finite-evidence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-frechet-kolmogorov-compactness-criterion-in-lp.md

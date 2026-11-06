@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-description-machine-and-plain-kolmogorov-complexity.md

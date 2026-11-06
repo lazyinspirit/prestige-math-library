@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-flow-reparametrization-realizes-a-level-isotopy.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-smooth-partitions-subordinate-to-a-countable-coordinate-cover.md

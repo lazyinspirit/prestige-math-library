@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-polynomially-related-encodings-preserve-polynomial-size.md

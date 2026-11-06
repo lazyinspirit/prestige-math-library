@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-symmetric-polynomials-as-a-noether-invariant-ring.md

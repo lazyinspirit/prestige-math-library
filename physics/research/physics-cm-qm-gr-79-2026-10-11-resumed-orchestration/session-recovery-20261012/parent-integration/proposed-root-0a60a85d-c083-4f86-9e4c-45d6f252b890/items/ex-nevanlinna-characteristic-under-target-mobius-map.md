@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nevanlinna-characteristic-under-target-mobius-map.md

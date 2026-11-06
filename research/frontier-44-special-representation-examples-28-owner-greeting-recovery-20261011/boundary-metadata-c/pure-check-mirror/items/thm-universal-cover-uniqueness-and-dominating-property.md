@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-universal-cover-uniqueness-and-dominating-property.md

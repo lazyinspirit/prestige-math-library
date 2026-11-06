@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-mobius-band-is-nonorientable-with-oriented-circle-boundary.md

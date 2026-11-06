@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-coalgebra-for-a-comonad-and-coalgebra-homomorphism.md

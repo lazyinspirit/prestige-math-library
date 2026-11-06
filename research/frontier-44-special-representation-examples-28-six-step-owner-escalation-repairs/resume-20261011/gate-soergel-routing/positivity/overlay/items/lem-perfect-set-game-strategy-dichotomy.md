@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-perfect-set-game-strategy-dichotomy.md

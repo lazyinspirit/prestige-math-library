@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-pair-count-normalized-sample-acvf-not-positive-semidefinite.md

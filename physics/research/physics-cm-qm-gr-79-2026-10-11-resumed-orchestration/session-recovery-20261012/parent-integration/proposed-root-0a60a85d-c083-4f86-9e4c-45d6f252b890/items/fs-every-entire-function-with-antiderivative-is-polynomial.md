@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-entire-function-with-antiderivative-is-polynomial.md

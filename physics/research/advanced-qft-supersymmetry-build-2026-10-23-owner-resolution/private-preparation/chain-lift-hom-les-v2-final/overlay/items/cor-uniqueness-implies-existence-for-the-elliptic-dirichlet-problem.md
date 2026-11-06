@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-uniqueness-implies-existence-for-the-elliptic-dirichlet-problem.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-sr-total-four-momentum-and-invariant-mass.md

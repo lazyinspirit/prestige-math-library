@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-ks-weak-actions-do-not-supply-pentagon-coherence-data.md

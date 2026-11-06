@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-orientation-local-system-on-a-manifold-with-boundary.md

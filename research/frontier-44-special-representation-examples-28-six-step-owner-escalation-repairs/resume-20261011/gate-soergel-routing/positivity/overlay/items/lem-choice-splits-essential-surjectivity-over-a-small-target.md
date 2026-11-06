@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-choice-splits-essential-surjectivity-over-a-small-target.md

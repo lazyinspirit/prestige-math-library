@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-unshifted-qr-is-orthonormalised-simultaneous-iteration-and-preserves-unitary-similarity.md

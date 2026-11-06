@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-top-square-formula-does-not-define-all-lower-squares.md

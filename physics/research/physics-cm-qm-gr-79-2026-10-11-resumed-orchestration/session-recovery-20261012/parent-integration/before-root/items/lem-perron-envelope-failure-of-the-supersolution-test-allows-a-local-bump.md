@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-perron-envelope-failure-of-the-supersolution-test-allows-a-local-bump.md

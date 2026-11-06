@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-coercive-sectorial-form-resolvents-define-a-closed-m-sectorial-operator.md

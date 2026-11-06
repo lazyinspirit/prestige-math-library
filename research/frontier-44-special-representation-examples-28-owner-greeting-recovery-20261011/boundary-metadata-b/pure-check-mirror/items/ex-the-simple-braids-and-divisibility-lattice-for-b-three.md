@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-simple-braids-and-divisibility-lattice-for-b-three.md

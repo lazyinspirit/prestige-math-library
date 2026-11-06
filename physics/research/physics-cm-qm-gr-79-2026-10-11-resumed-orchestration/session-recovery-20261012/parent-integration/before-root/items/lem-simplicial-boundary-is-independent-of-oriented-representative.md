@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simplicial-boundary-is-independent-of-oriented-representative.md

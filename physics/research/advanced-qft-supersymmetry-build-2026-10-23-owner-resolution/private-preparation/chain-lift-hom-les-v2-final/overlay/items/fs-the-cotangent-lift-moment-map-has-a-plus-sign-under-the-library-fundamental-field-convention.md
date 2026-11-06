@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-cotangent-lift-moment-map-has-a-plus-sign-under-the-library-fundamental-field-convention.md

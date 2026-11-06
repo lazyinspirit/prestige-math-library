@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-noetherian-ring-has-noetherian-spectrum.md

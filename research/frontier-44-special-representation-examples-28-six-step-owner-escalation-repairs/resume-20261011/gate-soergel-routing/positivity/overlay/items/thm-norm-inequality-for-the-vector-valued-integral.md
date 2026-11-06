@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-norm-inequality-for-the-vector-valued-integral.md

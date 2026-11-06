@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-tangent-plane-is-invariant-under-regular-reparametrization.md

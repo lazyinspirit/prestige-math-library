@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-recurrence-is-not-a-property-shared-by-different-communicating-classes.md

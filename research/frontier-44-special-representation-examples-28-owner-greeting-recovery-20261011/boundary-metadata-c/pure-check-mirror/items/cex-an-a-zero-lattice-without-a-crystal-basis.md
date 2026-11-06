@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-a-zero-lattice-without-a-crystal-basis.md

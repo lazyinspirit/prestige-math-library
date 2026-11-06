@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps.md

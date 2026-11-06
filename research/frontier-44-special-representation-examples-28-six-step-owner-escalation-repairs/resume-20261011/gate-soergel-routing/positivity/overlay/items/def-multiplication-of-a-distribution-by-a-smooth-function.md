@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-multiplication-of-a-distribution-by-a-smooth-function.md

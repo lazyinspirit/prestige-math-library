@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-intersection-of-cyclotomic-extensions-larger-than-the-gcd-case.md

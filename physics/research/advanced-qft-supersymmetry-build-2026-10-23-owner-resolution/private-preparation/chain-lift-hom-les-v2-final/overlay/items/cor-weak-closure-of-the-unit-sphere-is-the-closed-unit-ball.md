@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-weak-closure-of-the-unit-sphere-is-the-closed-unit-ball.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative.md

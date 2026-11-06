@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-constant-modulus-holomorphic-function-is-constant.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-contracting-homotopy-for-the-two-term-identity-complex.md

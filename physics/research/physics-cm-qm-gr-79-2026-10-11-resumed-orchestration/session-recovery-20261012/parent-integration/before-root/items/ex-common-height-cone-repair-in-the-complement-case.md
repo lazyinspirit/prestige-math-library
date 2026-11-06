@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-common-height-cone-repair-in-the-complement-case.md

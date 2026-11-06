@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-luzin-property-n-implies-absolute-continuity.md

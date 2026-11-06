@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-disc-hardy-traces-and-szego-reproducing.md

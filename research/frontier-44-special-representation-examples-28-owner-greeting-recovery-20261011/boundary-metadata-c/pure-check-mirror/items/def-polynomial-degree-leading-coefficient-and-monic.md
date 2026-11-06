@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-polynomial-degree-leading-coefficient-and-monic.md

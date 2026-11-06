@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-fibration-need-not-be-a-locally-trivial-bundle.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-two-map-intersection-as-a-diagonal-preimage.md

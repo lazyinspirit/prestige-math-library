@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relator-disks-give-area-controlled-coarse-fillings.md

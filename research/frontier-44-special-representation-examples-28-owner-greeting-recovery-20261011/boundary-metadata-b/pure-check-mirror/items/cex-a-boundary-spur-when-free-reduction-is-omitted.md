@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-boundary-spur-when-free-reduction-is-omitted.md

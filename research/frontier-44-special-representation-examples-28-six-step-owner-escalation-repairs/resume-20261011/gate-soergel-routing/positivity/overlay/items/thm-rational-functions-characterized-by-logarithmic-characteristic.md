@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rational-functions-characterized-by-logarithmic-characteristic.md

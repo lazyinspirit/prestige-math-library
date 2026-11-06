@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-durfee-square-decomposition-of-five-three-three-two-one.md

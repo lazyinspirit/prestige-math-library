@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-smooth-partition-of-unity-on-a-manifold-with-boundary.md

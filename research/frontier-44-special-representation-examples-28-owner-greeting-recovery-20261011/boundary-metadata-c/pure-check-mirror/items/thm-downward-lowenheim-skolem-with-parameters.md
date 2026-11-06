@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-downward-lowenheim-skolem-with-parameters.md

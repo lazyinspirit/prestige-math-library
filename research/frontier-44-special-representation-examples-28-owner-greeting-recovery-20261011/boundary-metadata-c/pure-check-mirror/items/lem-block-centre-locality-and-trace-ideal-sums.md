@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-block-centre-locality-and-trace-ideal-sums.md

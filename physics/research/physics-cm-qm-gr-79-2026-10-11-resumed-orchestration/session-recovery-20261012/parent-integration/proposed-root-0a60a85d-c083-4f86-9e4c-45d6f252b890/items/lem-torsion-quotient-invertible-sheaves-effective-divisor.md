@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-torsion-quotient-invertible-sheaves-effective-divisor.md

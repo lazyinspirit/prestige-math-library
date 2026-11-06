@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-increasing-reparametrization-of-finitely-many-critical-levels.md

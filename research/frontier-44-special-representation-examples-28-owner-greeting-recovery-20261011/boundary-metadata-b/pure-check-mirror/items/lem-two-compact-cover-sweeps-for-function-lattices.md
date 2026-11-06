@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-compact-cover-sweeps-for-function-lattices.md

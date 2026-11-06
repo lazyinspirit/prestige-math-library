@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-one-fixed-number-of-barycentric-subdivisions-makes-every-singular-simplex-cover-small.md

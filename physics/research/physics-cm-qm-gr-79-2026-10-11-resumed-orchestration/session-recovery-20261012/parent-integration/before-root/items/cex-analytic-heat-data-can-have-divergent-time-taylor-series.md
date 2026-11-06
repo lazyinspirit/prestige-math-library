@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-analytic-heat-data-can-have-divergent-time-taylor-series.md

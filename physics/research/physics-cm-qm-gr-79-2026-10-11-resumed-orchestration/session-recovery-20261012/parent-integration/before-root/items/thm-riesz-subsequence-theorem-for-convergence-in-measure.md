@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-riesz-subsequence-theorem-for-convergence-in-measure.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unit-interval-function-family-separates-points-from-closed-sets.md

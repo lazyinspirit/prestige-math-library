@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-timelike-fields-define-equal-or-opposite-future-cones.md

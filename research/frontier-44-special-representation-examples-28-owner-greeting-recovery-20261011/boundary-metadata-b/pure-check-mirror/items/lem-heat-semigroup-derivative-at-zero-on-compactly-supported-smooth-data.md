@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-heat-semigroup-derivative-at-zero-on-compactly-supported-smooth-data.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-constructible-levels-transitivity-ordinals-and-rank.md

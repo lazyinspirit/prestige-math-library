@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-taboo-winning-positions-need-not-contain-their-children.md

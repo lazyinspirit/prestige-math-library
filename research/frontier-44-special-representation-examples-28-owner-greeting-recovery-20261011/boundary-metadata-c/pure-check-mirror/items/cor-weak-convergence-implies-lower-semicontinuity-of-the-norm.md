@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-weak-convergence-implies-lower-semicontinuity-of-the-norm.md

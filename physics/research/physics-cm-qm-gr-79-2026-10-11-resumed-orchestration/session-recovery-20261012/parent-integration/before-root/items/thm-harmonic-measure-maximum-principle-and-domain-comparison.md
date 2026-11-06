@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-harmonic-measure-maximum-principle-and-domain-comparison.md

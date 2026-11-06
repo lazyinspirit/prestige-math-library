@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive.md

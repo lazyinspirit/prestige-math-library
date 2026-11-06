@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-whitney-stratifications-admit-compatible-control-data.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-entropy-solution-orbits-are-strongly-continuous-in-lone.md

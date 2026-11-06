@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-halpern-lauchli-finite-word-calculus.md

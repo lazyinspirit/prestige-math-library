@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-split-minimal-polynomial-always-gives-diagonalisability.md

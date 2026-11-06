@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-caratheodory-also-constructs-the-product-measure.md

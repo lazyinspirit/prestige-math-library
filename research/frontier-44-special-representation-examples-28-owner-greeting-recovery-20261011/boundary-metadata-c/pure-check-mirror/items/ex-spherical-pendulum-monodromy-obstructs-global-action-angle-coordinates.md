@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-spherical-pendulum-monodromy-obstructs-global-action-angle-coordinates.md

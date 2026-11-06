@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-local-gch-at-omega-and-its-power-set.md

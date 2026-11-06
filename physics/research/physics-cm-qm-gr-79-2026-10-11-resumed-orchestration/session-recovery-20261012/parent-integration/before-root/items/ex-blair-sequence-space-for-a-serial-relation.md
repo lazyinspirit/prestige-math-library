@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-blair-sequence-space-for-a-serial-relation.md

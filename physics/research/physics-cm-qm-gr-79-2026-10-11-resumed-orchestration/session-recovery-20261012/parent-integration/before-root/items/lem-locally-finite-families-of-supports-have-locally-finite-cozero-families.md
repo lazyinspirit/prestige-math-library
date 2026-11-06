@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-locally-finite-families-of-supports-have-locally-finite-cozero-families.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-first-return-map-is-a-local-c1-diffeomorphism.md

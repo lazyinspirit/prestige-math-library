@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-bird-theorem-properly-extends-the-bull-case.md

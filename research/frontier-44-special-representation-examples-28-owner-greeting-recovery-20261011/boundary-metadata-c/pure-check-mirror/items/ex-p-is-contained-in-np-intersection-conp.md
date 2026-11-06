@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-p-is-contained-in-np-intersection-conp.md

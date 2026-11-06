@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-cg-rank-two-inversion-set-violating-closure.md

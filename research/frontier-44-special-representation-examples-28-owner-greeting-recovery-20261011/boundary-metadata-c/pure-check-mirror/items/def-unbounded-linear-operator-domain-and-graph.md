@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-unbounded-linear-operator-domain-and-graph.md

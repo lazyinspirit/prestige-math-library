@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-extend-a-partial-comparison-map-by-one-degree.md

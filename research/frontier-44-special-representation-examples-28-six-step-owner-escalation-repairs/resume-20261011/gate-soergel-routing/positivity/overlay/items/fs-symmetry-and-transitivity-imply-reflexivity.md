@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-symmetry-and-transitivity-imply-reflexivity.md

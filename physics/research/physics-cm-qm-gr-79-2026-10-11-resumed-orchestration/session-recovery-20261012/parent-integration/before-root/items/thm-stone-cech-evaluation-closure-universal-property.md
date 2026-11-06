@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-stone-cech-evaluation-closure-universal-property.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-decategorifying-a-khovanov-seidel-generator.md

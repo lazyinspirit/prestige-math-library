@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-stokes-theorem-for-smooth-singular-chains.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-quotient-is-independent-of-the-representing-monomorphism.md

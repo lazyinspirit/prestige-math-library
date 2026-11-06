@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-hh-type-a-tensor-operator-is-a-hecke-symmetry.md

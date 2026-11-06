@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-spectral-multiplicity-model-for-separable-abelian-von-neumann-algebras.md

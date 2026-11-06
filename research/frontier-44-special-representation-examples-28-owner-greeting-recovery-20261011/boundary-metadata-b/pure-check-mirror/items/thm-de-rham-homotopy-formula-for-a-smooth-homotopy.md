@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-de-rham-homotopy-formula-for-a-smooth-homotopy.md

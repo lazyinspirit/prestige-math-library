@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-rank-of-a-general-inclusion-matrix-is-not-established-here.md

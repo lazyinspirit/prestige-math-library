@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cardinality-of-a-small-category-and-kappa-small-diagram.md

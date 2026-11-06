@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-stone-cech-of-compact-hausdorff-space-is-itself.md

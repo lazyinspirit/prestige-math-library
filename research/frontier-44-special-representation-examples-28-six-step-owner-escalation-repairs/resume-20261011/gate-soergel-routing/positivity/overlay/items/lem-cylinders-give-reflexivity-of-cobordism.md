@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cylinders-give-reflexivity-of-cobordism.md

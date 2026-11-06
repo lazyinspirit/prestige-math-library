@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-one-existing-iterated-integral-does-not-give-riemann-integrability.md

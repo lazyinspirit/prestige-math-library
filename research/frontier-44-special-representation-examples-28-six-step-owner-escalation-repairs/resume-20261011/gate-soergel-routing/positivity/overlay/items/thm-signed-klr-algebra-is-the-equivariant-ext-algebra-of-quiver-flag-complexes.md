@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-signed-klr-algebra-is-the-equivariant-ext-algebra-of-quiver-flag-complexes.md

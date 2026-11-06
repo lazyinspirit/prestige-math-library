@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-sections-of-a-distribution-form-a-locally-free-module.md

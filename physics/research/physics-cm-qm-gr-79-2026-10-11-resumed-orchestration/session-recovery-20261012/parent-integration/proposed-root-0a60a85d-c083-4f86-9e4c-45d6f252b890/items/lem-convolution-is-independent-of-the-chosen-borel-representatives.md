@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-convolution-is-independent-of-the-chosen-borel-representatives.md

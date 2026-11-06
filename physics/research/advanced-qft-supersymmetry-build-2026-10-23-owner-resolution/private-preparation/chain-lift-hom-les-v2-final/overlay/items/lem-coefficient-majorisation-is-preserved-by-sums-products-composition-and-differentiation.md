@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation.md

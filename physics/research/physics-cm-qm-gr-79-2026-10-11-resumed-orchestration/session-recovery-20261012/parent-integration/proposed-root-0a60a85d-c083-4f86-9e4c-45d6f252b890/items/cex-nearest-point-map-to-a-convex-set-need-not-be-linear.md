@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nearest-point-map-to-a-convex-set-need-not-be-linear.md

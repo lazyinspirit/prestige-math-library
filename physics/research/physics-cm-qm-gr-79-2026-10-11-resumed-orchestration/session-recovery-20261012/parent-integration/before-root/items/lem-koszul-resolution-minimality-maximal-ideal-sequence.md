@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-koszul-resolution-minimality-maximal-ideal-sequence.md

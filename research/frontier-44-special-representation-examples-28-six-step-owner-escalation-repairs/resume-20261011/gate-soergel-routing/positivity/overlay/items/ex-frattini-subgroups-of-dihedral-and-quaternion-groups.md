@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-frattini-subgroups-of-dihedral-and-quaternion-groups.md

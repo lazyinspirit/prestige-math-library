@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-chinese-remainder-theorem-for-comaximal-ideals.md

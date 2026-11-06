@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-characteristic-function-of-a-gaussian-law.md

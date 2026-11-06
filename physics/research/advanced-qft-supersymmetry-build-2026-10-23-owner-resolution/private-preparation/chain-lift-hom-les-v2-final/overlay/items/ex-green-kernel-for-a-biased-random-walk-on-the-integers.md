@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-green-kernel-for-a-biased-random-walk-on-the-integers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-normalized-set-theoretic-section-and-factor-set.md

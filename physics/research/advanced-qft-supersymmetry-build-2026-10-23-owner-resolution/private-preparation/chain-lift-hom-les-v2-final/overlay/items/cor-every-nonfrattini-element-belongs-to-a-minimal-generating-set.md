@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-every-nonfrattini-element-belongs-to-a-minimal-generating-set.md

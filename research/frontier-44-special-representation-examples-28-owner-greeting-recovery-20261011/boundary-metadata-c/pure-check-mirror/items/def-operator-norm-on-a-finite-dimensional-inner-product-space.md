@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-operator-norm-on-a-finite-dimensional-inner-product-space.md

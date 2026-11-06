@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-leaf-deletion-preserves-virality-of-a-finite-family.md

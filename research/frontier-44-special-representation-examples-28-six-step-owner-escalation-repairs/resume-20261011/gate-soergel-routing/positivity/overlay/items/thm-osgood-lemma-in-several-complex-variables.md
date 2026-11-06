@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-osgood-lemma-in-several-complex-variables.md

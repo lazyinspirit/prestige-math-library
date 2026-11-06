@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximal-brauer-pairs-exist-and-are-conjugate.md

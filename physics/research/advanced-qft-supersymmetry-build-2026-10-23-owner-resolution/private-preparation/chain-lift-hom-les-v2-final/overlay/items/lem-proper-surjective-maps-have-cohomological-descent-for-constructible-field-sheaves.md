@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves.md

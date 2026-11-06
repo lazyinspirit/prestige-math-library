@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-winding-number-classifies-loops-in-the-punctured-plane.md

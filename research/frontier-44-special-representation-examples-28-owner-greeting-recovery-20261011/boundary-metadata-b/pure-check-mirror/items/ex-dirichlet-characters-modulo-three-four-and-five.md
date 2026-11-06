@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-dirichlet-characters-modulo-three-four-and-five.md

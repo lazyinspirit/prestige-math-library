@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-every-vector-field-along-a-geodesic-is-a-jacobi-field.md

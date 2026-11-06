@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-minimum-maximum-and-bounded-shifts-of-stopping-times.md

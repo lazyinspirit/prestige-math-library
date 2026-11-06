@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-differential-ideal-in-the-algebra-of-forms.md

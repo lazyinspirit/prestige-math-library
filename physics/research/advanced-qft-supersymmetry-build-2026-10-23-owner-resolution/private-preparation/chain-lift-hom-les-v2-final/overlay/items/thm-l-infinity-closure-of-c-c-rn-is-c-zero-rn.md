@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-l-infinity-closure-of-c-c-rn-is-c-zero-rn.md

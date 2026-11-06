@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cantor-function-maps-a-null-set-onto-the-unit-interval.md

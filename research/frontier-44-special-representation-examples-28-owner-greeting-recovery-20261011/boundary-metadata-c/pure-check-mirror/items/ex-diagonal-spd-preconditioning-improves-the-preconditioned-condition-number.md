@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-diagonal-spd-preconditioning-improves-the-preconditioned-condition-number.md

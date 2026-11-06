@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-controlled-dynamics-resolvent-tail-short-range-completeness.md

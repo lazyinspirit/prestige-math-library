@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-derivation-of-a-semisimple-lie-algebra-is-inner.md

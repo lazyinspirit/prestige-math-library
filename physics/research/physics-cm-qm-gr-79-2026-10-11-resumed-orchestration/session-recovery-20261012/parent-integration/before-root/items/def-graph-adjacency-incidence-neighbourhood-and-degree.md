@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-graph-adjacency-incidence-neighbourhood-and-degree.md

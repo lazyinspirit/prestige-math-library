@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-riesz-subsequence-can-be-chosen-almost-uniformly-on-a-finite-measure-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-corestriction-after-bar-transfer-is-index-multiplication-on-homology.md

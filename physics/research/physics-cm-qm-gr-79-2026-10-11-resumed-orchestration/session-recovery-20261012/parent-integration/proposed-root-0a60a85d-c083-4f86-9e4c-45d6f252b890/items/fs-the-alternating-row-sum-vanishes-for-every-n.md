@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-alternating-row-sum-vanishes-for-every-n.md

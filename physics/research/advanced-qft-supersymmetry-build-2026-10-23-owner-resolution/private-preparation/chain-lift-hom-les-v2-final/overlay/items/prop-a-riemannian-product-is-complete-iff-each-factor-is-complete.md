@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-a-riemannian-product-is-complete-iff-each-factor-is-complete.md

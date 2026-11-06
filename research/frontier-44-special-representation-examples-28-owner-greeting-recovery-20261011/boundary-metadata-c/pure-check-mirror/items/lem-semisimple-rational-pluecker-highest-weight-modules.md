@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-semisimple-rational-pluecker-highest-weight-modules.md

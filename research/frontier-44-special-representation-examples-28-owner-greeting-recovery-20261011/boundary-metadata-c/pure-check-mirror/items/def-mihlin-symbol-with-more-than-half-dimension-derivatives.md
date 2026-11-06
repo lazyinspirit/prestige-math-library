@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-mihlin-symbol-with-more-than-half-dimension-derivatives.md

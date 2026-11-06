@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-wall-crossing-compositions-produce-the-projective-with-the-top-standard-label.md

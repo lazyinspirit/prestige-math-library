@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-borel-weil-bott-on-p1-for-sl2.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-symmetry-and-associativity-over-a-commutative-ring.md

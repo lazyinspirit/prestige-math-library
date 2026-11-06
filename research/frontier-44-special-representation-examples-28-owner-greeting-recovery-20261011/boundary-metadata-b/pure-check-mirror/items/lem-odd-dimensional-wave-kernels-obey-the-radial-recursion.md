@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-odd-dimensional-wave-kernels-obey-the-radial-recursion.md

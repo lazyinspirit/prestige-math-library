@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-saddle-omega-graph-is-strongly-connected.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-lc-boolean-generic-zfc-and-ordinals.md

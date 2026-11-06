@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-whitney-decomposition-of-proper-open-subsets-of-euclidean-space.md

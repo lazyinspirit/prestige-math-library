@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-integrable-based-sl-two-tensor-triples-need-not-be-balanced.md

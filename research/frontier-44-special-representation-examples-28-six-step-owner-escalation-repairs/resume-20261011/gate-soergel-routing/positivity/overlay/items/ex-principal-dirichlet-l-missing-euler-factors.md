@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-principal-dirichlet-l-missing-euler-factors.md

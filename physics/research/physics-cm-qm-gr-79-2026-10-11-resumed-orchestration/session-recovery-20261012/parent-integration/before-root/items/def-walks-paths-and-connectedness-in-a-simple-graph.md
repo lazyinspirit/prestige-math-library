@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-walks-paths-and-connectedness-in-a-simple-graph.md

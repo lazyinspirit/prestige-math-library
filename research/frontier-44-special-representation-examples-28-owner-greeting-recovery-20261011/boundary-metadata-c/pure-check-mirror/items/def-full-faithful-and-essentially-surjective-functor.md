@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-full-faithful-and-essentially-surjective-functor.md

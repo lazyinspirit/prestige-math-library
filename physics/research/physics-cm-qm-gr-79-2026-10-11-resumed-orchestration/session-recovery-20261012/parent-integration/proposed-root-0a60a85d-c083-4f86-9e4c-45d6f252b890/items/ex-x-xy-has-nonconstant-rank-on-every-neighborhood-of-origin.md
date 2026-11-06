@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-xy-has-nonconstant-rank-on-every-neighborhood-of-origin.md

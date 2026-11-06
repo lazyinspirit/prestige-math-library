@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-h-plus-and-h-minus-for-two-special-vertices.md

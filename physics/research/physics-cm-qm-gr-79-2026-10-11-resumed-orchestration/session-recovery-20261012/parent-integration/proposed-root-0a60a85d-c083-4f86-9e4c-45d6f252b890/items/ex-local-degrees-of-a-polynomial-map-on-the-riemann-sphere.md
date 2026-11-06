@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-local-degrees-of-a-polynomial-map-on-the-riemann-sphere.md

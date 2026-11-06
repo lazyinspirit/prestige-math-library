@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gauss-bonnet-for-compact-oriented-surfaces-with-boundary-and-corners.md

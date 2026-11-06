@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-six-abelian-groups-of-order-three-hundred-sixty.md

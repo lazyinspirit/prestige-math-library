@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-first-return-decomposition-of-a-nonempty-dyck-path.md

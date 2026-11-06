@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-total-ramification-in-a-prime-power-cyclotomic-field.md

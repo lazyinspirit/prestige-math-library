@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-h-one-riemannian-curves-and-half-energy.md

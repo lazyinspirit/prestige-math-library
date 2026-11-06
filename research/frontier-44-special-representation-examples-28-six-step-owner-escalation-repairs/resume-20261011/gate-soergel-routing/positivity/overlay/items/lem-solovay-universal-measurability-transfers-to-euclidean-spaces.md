@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-solovay-universal-measurability-transfers-to-euclidean-spaces.md

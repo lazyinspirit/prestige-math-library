@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-lexicographic-chain-shelling-and-mobius-cancellation.md

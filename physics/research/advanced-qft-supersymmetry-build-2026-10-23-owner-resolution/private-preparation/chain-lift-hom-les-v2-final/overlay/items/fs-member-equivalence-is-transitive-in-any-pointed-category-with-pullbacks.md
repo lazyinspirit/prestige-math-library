@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-member-equivalence-is-transitive-in-any-pointed-category-with-pullbacks.md

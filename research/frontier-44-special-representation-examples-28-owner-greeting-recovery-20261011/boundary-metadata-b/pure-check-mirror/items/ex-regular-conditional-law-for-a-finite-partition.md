@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-regular-conditional-law-for-a-finite-partition.md

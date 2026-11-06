@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-pointwise-finite-dimensionality-does-not-imply-fi-finite-generation.md

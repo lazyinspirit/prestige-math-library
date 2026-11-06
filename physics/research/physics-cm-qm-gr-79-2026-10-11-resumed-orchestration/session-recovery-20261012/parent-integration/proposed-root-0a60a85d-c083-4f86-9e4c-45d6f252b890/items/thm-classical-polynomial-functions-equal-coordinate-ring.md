@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-classical-polynomial-functions-equal-coordinate-ring.md

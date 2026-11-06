@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-c1-paths-have-length-equal-to-the-integral-of-speed.md

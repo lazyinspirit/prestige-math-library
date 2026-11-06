@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-quotient-of-a-tree-can-have-cycles.md

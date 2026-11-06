@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-private-coin-public-coin-and-arthur-merlin-protocol.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-hecke-trace-bilinear-form-and-its-values-on-the-kazhdan-lusztig-basis.md

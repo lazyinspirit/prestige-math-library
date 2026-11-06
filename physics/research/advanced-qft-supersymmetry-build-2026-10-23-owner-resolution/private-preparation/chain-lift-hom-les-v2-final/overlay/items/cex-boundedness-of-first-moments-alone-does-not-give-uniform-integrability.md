@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-boundedness-of-first-moments-alone-does-not-give-uniform-integrability.md

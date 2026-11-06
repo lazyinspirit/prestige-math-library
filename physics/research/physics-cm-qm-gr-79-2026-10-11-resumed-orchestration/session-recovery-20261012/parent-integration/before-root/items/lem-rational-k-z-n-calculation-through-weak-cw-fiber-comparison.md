@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rational-k-z-n-calculation-through-weak-cw-fiber-comparison.md

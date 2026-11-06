@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-arity-boolean-csp-to-binary-constraint-graph.md

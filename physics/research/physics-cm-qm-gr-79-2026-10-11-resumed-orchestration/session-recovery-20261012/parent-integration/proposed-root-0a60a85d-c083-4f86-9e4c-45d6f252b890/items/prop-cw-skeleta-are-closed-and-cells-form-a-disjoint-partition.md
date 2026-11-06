@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cw-skeleta-are-closed-and-cells-form-a-disjoint-partition.md

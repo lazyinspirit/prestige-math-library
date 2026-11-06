@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-whole-semidirect-product-conjugacy-is-the-equivalence-relation-behind-first-cohomology.md

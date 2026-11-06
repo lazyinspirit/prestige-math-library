@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-koszul-coherence-for-derived-sheaf-tensor.md

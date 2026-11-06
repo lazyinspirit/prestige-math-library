@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-outer-pieri-rules-for-trivial-and-sign-factors.md

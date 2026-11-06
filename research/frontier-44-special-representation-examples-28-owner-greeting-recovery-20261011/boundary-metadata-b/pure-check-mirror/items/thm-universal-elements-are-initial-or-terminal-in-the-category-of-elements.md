@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-universal-elements-are-initial-or-terminal-in-the-category-of-elements.md

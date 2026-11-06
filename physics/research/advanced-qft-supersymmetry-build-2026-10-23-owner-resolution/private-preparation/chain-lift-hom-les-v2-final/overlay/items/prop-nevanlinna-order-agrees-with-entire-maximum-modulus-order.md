@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-nevanlinna-order-agrees-with-entire-maximum-modulus-order.md

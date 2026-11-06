@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-c1-germ-of-a-local-diffeomorphism-at-a-point.md

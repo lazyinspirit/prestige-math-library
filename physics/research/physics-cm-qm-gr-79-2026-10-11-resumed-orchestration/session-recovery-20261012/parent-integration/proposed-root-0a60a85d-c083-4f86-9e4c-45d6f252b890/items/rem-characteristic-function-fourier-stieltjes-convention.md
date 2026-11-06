@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-characteristic-function-fourier-stieltjes-convention.md

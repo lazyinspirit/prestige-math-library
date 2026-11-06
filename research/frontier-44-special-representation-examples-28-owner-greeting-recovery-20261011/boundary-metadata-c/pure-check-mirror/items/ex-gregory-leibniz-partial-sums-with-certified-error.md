@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-gregory-leibniz-partial-sums-with-certified-error.md

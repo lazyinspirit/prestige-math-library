@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-exterior-dirichlet-uniqueness-needs-growth-or-decay-control.md

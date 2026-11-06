@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-second-generation-cfsg-proof-is-complete-as-of-2026.md

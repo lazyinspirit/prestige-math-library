@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-transitive-p-group-permutation-modules-have-point-stabilizer-vertices.md

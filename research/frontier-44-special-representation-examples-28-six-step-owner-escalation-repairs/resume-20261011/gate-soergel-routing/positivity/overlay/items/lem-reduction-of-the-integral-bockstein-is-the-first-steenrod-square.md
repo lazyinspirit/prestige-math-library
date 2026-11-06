@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-reduction-of-the-integral-bockstein-is-the-first-steenrod-square.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-left-unitor-of-a-tensor-product-is-determined.md

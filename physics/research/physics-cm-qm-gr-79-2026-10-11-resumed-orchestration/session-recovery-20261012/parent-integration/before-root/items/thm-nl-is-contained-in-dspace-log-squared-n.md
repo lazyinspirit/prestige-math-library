@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nl-is-contained-in-dspace-log-squared-n.md

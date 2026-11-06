@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-type-kac-moody-roots-descend-to-simple-roots.md

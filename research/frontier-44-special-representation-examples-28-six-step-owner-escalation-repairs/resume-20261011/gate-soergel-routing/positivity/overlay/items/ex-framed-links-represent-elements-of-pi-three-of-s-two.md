@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-framed-links-represent-elements-of-pi-three-of-s-two.md

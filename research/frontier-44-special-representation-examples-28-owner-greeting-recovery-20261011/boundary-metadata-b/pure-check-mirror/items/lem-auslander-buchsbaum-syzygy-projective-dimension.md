@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-auslander-buchsbaum-syzygy-projective-dimension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-integral-geometric-layers-of-a-decreasing-block-partition.md

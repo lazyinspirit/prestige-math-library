@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-groups-acting-geometrically-on-the-same-space-are-quasi-isometric.md

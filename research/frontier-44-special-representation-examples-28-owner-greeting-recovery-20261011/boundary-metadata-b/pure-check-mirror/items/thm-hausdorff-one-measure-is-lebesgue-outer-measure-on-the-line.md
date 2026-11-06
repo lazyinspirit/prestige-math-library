@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-hausdorff-one-measure-is-lebesgue-outer-measure-on-the-line.md

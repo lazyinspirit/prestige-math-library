@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-normalizing-a-locally-finite-positive-smooth-family.md

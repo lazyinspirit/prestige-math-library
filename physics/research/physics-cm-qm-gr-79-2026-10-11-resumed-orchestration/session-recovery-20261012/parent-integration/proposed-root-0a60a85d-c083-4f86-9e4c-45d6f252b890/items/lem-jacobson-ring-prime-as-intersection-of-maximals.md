@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-jacobson-ring-prime-as-intersection-of-maximals.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-path-and-antipath-free-graphs-have-the-erdos-hajnal-property.md

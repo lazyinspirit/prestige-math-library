@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-topological-domain-equicontinuity-agrees-with-metric-equicontinuity.md

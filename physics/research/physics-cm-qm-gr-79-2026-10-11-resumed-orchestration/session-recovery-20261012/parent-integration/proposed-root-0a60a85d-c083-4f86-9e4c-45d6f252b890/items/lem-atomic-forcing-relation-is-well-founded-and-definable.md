@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-atomic-forcing-relation-is-well-founded-and-definable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases.md

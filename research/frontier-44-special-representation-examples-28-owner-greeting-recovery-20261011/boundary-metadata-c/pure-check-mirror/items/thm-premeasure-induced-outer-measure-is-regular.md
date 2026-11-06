@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-premeasure-induced-outer-measure-is-regular.md

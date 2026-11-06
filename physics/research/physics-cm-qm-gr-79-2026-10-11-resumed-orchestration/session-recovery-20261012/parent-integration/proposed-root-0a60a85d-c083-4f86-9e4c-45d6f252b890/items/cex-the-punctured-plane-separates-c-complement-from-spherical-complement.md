@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-punctured-plane-separates-c-complement-from-spherical-complement.md

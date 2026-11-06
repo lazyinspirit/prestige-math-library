@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-excision-fails-without-the-closure-inside-interior-hypothesis.md

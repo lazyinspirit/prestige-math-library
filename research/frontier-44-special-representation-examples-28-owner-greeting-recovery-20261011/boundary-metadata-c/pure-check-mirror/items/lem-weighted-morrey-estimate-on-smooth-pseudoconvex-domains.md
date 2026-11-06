@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-weighted-morrey-estimate-on-smooth-pseudoconvex-domains.md

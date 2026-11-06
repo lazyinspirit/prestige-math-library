@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finding-pieces-and-checking-c-prime-one-sixth.md

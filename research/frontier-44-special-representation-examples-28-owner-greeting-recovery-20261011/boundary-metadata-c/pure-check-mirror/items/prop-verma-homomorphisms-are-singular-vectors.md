@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-verma-homomorphisms-are-singular-vectors.md

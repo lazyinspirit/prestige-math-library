@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative.md

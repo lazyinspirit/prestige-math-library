@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-collectionwise-normal-moore-spaces-are-metrizable.md

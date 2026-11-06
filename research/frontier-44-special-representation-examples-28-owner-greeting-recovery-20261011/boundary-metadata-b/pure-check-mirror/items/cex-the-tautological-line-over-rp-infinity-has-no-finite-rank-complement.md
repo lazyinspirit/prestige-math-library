@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-tautological-line-over-rp-infinity-has-no-finite-rank-complement.md

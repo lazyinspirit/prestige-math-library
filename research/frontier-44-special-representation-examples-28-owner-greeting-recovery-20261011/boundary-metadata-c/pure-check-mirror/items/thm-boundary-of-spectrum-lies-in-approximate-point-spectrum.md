@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-boundary-of-spectrum-lies-in-approximate-point-spectrum.md

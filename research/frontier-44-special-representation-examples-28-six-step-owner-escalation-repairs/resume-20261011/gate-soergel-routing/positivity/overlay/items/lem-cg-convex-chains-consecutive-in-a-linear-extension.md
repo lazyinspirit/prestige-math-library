@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-convex-chains-consecutive-in-a-linear-extension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-complete-splitting-in-a-cyclotomic-field.md

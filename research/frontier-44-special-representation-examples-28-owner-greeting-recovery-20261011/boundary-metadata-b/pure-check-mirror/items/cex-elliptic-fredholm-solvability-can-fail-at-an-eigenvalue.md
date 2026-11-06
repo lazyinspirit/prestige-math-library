@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-elliptic-fredholm-solvability-can-fail-at-an-eigenvalue.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-k-five-and-k-three-three-are-nonplanar.md

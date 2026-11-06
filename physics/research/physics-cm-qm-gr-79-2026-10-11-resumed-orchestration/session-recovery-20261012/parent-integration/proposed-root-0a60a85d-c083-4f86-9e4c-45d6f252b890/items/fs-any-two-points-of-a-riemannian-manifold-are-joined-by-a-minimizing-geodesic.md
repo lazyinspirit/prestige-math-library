@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-any-two-points-of-a-riemannian-manifold-are-joined-by-a-minimizing-geodesic.md

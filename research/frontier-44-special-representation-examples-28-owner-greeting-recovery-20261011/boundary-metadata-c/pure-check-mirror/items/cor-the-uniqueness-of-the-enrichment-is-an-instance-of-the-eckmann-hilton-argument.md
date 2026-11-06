@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-uniqueness-of-the-enrichment-is-an-instance-of-the-eckmann-hilton-argument.md

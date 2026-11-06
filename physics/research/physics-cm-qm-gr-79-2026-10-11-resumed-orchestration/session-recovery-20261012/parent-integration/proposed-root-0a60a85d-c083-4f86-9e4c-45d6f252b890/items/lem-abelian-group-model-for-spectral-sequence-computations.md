@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-abelian-group-model-for-spectral-sequence-computations.md

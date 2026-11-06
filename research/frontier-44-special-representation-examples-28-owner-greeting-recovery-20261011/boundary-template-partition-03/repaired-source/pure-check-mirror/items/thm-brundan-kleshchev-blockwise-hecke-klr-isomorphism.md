@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-brundan-kleshchev-blockwise-hecke-klr-isomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-maximum-modulus-principle-without-connectedness.md

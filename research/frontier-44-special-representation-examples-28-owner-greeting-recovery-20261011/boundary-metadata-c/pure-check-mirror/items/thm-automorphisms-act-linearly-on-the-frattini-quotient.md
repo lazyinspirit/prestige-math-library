@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-automorphisms-act-linearly-on-the-frattini-quotient.md

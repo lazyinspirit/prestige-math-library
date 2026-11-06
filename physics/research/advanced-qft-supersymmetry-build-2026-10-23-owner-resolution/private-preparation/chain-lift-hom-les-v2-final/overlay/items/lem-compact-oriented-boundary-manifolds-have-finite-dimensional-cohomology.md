@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-compact-oriented-boundary-manifolds-have-finite-dimensional-cohomology.md

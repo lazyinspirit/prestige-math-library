@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stationary-phase-for-a-nondegenerate-compactly-supported-phase.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite.md

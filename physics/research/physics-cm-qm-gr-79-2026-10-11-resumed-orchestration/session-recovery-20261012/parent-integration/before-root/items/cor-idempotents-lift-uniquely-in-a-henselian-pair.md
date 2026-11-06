@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-idempotents-lift-uniquely-in-a-henselian-pair.md

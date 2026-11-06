@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-lc-inaccessible-and-mahlo-cardinals.md

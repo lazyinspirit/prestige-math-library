@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-inverse-hyperbolic-logarithm-formulas.md

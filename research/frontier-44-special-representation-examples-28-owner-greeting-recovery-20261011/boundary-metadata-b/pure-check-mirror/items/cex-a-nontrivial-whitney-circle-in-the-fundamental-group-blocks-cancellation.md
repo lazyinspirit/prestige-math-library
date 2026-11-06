@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-nontrivial-whitney-circle-in-the-fundamental-group-blocks-cancellation.md

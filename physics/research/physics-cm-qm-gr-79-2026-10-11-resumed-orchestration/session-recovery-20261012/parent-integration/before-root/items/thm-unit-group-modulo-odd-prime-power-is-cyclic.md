@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-unit-group-modulo-odd-prime-power-is-cyclic.md

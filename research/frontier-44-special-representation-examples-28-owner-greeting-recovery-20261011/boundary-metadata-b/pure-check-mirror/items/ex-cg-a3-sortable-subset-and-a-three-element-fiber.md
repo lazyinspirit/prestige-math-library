@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-a3-sortable-subset-and-a-three-element-fiber.md

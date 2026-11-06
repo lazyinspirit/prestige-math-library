@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-hessian-of-a-function-at-a-critical-point.md

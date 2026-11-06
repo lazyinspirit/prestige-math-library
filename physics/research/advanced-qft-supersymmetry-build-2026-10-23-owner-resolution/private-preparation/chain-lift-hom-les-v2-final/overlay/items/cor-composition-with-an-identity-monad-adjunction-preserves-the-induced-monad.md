@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-composition-with-an-identity-monad-adjunction-preserves-the-induced-monad.md

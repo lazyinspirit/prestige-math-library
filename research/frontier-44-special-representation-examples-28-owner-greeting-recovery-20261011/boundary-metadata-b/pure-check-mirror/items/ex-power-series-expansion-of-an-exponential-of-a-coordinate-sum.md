@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-power-series-expansion-of-an-exponential-of-a-coordinate-sum.md

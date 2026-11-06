@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-zero-residue-does-not-force-a-removable-singularity.md

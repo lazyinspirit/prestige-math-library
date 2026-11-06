@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-infinite-binary-product-ring-is-not-noetherian.md

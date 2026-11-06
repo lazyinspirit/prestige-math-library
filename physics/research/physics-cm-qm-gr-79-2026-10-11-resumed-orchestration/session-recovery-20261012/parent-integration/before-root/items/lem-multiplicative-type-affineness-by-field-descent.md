@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-multiplicative-type-affineness-by-field-descent.md

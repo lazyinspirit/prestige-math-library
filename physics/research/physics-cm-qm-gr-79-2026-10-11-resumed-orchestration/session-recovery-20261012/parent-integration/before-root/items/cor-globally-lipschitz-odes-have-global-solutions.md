@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-globally-lipschitz-odes-have-global-solutions.md

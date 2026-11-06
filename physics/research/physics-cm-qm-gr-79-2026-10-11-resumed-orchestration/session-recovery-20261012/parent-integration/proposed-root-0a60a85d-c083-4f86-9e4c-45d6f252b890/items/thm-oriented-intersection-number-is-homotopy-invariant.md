@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-oriented-intersection-number-is-homotopy-invariant.md

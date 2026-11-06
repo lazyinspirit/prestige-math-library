@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-fixed-lag-smoothing-bias-from-delayed-information.md

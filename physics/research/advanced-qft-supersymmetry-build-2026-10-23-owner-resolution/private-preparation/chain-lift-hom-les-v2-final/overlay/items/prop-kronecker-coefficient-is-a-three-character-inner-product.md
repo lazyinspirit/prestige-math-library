@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-kronecker-coefficient-is-a-three-character-inner-product.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-class-map-and-wall-crossing-action-on-the-grothendieck-group-in-rank-two.md

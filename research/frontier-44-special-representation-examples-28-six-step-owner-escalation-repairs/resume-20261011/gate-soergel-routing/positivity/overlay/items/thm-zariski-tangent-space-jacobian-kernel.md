@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-zariski-tangent-space-jacobian-kernel.md

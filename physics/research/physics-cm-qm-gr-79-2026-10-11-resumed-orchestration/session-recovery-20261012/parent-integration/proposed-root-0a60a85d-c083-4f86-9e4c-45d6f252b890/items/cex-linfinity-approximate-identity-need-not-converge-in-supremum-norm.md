@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-linfinity-approximate-identity-need-not-converge-in-supremum-norm.md

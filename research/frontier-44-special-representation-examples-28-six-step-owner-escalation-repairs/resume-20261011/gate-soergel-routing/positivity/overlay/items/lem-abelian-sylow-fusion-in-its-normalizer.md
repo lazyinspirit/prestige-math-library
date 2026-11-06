@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-abelian-sylow-fusion-in-its-normalizer.md

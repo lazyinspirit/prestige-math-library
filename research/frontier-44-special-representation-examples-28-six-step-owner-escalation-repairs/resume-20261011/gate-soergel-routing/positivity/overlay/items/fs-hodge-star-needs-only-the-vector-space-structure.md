@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-hodge-star-needs-only-the-vector-space-structure.md

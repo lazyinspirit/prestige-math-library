@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-five-lemma-needs-only-that-the-two-middle-maps-are-monic.md

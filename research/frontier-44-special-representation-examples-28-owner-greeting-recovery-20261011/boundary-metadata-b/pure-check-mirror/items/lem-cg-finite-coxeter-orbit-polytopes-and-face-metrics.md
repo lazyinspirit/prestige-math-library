@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics.md

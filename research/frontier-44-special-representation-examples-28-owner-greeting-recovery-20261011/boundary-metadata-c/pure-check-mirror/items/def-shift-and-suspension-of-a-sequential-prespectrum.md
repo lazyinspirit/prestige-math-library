@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-shift-and-suspension-of-a-sequential-prespectrum.md

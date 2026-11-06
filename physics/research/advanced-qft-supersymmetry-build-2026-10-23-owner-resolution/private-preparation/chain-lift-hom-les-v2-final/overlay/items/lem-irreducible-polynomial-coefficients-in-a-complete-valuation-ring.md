@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-irreducible-polynomial-coefficients-in-a-complete-valuation-ring.md

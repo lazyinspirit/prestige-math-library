@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-kunneth-cross-product-map-is-well-defined-and-natural.md

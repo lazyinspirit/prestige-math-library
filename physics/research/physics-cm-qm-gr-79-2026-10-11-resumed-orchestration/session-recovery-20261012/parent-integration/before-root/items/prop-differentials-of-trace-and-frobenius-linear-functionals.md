@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-differentials-of-trace-and-frobenius-linear-functionals.md

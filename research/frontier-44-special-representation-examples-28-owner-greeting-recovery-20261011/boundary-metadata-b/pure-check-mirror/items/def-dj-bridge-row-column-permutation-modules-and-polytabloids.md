@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-dj-bridge-row-column-permutation-modules-and-polytabloids.md

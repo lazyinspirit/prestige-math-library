@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-oriented-unit-normal-and-flux-of-a-surface-patch.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-homology-functor-is-exact-on-short-exact-sequences-of-complexes.md

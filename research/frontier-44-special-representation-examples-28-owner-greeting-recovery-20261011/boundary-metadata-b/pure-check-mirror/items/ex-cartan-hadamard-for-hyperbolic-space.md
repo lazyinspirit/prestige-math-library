@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-cartan-hadamard-for-hyperbolic-space.md

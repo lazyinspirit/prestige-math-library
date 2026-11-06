@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero.md

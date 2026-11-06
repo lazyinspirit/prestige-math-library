@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-image-of-a-lie-group-homomorphism-is-always-embedded.md

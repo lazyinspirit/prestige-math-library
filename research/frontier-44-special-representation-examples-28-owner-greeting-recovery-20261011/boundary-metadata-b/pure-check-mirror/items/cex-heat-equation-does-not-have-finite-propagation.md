@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-heat-equation-does-not-have-finite-propagation.md

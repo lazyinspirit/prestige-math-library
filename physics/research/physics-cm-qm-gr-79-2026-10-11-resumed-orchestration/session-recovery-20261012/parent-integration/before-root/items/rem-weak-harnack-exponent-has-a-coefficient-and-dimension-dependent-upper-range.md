@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-weak-harnack-exponent-has-a-coefficient-and-dimension-dependent-upper-range.md

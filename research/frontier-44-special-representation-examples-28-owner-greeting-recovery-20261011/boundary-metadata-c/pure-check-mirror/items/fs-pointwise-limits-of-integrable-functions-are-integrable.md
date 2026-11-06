@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-pointwise-limits-of-integrable-functions-are-integrable.md

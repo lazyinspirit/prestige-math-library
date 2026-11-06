@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-real-invertible-matrix-with-no-real-logarithm.md

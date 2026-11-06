@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-forward-and-backward-wave-cones-domain-of-dependence-and-influence.md

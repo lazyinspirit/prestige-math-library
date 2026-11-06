@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-necklaces-over-an-m-letter-alphabet.md

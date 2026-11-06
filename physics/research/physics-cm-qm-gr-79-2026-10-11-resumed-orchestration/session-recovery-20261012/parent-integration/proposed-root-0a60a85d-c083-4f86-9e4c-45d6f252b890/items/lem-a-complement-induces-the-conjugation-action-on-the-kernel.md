@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-complement-induces-the-conjugation-action-on-the-kernel.md

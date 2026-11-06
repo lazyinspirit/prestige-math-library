@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nowhere-separable-suslin-line-nested-interval-tree.md

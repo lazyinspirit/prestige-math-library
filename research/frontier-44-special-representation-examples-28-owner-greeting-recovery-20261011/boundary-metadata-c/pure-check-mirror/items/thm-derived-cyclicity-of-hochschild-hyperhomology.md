@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-derived-cyclicity-of-hochschild-hyperhomology.md

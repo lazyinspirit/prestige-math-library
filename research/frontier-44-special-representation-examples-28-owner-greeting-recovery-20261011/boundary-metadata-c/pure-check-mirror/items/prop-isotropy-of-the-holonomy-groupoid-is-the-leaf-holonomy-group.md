@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-isotropy-of-the-holonomy-groupoid-is-the-leaf-holonomy-group.md

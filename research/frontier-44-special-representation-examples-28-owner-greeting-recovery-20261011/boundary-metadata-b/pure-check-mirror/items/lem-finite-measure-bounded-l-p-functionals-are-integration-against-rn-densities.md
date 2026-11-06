@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-measure-bounded-l-p-functionals-are-integration-against-rn-densities.md

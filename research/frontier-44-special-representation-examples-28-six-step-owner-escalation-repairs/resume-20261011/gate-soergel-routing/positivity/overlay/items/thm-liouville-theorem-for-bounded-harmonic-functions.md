@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-liouville-theorem-for-bounded-harmonic-functions.md

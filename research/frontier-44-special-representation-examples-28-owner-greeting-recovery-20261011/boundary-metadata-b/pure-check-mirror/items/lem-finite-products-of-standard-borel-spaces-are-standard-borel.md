@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-products-of-standard-borel-spaces-are-standard-borel.md

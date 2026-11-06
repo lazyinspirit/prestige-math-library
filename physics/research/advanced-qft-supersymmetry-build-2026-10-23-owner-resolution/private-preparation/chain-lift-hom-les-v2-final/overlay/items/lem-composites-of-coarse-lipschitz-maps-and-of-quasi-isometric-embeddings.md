@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-composites-of-coarse-lipschitz-maps-and-of-quasi-isometric-embeddings.md

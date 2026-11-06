@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-arith-dual-isogeny-kernel-and-abelian-biduality.md

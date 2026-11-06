@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-almost-sure-convergence-does-not-imply-convergence-of-expectations.md

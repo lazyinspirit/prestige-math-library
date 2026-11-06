@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gluing-lemma-for-plane-subharmonic-functions.md

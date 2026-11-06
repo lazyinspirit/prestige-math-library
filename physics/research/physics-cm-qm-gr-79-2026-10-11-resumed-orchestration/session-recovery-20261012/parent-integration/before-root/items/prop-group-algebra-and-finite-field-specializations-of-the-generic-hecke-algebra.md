@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra.md

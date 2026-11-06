@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cex-bar-invariance-and-mod-q-congruence-without-balancedness.md

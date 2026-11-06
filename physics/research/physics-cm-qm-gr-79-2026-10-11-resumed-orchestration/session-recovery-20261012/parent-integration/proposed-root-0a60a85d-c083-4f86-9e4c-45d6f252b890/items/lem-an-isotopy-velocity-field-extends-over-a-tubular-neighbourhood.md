@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/rem-cylinder-sigma-algebra-versus-full-product-power-set.md

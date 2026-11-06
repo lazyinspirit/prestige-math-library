@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-holomorphic-differentials-form-a-g-dimensional-space.md

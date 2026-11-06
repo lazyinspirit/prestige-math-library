@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-the-whittaker-functor-from-the-relevant-parabolic-o-summand.md

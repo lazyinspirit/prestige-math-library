@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-finite-type-not-finite-presentation-nonnoetherian-base.md

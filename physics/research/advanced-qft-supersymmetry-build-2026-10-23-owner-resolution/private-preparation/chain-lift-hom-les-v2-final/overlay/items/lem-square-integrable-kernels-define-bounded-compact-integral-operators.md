@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-square-integrable-kernels-define-bounded-compact-integral-operators.md

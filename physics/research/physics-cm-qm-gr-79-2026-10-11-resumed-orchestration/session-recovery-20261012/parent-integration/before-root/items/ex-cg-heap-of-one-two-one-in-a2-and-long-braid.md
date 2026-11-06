@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-heap-of-one-two-one-in-a2-and-long-braid.md

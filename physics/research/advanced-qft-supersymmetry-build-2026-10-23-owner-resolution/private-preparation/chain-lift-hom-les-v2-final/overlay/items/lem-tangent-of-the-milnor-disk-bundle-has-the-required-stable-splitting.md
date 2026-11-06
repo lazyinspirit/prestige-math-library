@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-tangent-of-the-milnor-disk-bundle-has-the-required-stable-splitting.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hnn-word-pin-and-britton-reduced-word.md

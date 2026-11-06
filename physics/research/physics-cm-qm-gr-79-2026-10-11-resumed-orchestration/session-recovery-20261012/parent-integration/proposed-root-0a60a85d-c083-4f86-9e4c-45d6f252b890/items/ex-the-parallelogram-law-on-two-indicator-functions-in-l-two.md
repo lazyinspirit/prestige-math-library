@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-parallelogram-law-on-two-indicator-functions-in-l-two.md

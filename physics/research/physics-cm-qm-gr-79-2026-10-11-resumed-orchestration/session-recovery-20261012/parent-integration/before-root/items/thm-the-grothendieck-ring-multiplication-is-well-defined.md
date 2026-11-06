@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-grothendieck-ring-multiplication-is-well-defined.md

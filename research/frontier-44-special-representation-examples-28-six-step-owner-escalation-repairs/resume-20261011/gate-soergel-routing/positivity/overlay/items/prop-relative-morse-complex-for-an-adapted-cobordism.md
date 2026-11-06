@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-relative-morse-complex-for-an-adapted-cobordism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rescaled-pulse-map-is-c-one-close-to-kick.md

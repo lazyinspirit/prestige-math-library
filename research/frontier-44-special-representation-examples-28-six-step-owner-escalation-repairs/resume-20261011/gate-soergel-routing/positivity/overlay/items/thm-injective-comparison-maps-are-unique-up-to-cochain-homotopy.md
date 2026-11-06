@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy.md

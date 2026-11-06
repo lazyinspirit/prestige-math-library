@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-formal-characters-are-additive-and-multiplicative.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-compact-connected-one-dimensional-manifold-without-boundary-is-a-circle.md

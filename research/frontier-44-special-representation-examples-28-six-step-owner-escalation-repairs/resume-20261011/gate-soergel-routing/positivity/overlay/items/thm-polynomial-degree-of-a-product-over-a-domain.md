@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-polynomial-degree-of-a-product-over-a-domain.md

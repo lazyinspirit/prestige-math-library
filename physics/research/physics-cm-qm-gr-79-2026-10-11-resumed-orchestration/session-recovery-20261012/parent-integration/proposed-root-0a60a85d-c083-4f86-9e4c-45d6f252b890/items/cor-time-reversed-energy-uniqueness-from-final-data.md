@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-time-reversed-energy-uniqueness-from-final-data.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-isotopy-extension-needs-compact-source-or-proper-support-control.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-negative-half-reversal-preserves-integral-and-crystal-lattices.md

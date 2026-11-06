@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-noncylinder-path-functional-may-fail-measurability.md

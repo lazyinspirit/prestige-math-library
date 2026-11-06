@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-coset-multiplication-by-a-nonnormal-subgroup.md

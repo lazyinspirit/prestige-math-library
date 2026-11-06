@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-upper-unitriangular-coordinate-ring-is-coconnected.md

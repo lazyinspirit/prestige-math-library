@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ado-faithful-representation-with-nilpotent-nilradical-action.md

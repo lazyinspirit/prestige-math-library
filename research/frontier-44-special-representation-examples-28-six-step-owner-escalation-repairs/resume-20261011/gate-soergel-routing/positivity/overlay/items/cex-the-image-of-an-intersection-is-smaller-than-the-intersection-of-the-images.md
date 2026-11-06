@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-image-of-an-intersection-is-smaller-than-the-intersection-of-the-images.md

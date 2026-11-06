@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-commuting-p-and-p-prime-parts-of-a-finite-group-element.md

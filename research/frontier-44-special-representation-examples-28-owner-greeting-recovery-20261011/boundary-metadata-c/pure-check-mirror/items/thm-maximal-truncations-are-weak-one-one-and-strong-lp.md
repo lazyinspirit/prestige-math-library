@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-maximal-truncations-are-weak-one-one-and-strong-lp.md

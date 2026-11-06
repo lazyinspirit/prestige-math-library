@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-e-graph-theorem-properly-extends-the-p-five-case.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-finitely-generated-modules-over-noetherian-rings-are-noetherian.md

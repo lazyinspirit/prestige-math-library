@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-contour-integral-commutes-with-bounded-linear-maps.md

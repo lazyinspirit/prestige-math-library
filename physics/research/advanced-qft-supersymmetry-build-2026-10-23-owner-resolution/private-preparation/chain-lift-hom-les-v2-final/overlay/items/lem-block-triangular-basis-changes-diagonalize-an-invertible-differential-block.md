@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block.md

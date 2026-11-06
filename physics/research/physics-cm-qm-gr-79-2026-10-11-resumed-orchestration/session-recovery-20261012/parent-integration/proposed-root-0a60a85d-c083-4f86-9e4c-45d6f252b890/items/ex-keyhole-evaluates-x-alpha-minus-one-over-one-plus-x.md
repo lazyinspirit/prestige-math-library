@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x.md

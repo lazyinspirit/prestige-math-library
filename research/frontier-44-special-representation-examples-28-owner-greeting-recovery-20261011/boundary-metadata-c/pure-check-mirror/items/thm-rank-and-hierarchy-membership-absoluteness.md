@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-rank-and-hierarchy-membership-absoluteness.md

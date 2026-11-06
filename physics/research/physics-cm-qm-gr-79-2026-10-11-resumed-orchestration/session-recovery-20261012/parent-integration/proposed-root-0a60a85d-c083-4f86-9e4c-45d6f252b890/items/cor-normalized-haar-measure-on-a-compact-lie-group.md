@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-normalized-haar-measure-on-a-compact-lie-group.md

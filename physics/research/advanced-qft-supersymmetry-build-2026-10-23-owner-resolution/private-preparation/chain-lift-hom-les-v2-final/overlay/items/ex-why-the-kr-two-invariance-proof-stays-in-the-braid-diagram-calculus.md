@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-why-the-kr-two-invariance-proof-stays-in-the-braid-diagram-calculus.md

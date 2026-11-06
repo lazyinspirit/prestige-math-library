@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-integral-quasicoherent-algebra-finite-subalgebra-filtration.md

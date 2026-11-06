@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-trace-of-ab-equals-trace-of-ba.md

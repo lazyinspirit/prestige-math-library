@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reverse-triangle-inequality-in-a-normed-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-continuous-characters-of-the-real-line-are-exponentials.md

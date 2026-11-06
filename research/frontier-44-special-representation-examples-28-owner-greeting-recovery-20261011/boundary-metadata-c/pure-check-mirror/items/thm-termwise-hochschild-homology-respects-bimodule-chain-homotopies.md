@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-termwise-hochschild-homology-respects-bimodule-chain-homotopies.md

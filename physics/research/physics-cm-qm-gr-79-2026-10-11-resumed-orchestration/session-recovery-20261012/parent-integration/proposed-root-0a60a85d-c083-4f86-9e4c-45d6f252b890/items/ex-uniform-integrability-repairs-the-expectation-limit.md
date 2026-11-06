@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-uniform-integrability-repairs-the-expectation-limit.md

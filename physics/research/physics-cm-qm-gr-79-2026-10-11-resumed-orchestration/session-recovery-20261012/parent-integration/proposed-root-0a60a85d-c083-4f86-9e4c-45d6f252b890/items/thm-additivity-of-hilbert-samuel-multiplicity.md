@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-additivity-of-hilbert-samuel-multiplicity.md

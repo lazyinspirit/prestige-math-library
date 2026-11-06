@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-heisenberg-group-of-order-p-cubed.md

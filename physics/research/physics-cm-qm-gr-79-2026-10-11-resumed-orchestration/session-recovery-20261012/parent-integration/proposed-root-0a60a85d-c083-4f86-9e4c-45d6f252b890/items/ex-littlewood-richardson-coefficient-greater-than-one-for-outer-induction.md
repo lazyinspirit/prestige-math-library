@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-littlewood-richardson-coefficient-greater-than-one-for-outer-induction.md

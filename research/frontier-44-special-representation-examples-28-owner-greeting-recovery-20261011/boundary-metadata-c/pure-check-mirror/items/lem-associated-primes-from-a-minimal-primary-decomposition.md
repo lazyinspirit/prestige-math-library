@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-associated-primes-from-a-minimal-primary-decomposition.md

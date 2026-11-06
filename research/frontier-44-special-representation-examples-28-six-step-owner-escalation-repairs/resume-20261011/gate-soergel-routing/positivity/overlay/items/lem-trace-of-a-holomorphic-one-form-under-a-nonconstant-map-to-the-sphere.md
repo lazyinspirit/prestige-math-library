@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-trace-of-a-holomorphic-one-form-under-a-nonconstant-map-to-the-sphere.md

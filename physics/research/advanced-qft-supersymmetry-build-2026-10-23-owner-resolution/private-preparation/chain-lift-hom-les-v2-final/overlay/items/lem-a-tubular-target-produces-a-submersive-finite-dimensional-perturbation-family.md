@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family.md

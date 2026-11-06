@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chart-gluing-defines-a-countably-additive-borel-density-measure.md

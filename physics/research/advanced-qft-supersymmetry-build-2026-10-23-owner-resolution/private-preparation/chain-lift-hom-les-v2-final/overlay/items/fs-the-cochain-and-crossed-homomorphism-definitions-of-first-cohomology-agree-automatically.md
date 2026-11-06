@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/fs-the-cochain-and-crossed-homomorphism-definitions-of-first-cohomology-agree-automatically.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-curl-free-c1-field-on-an-open-subset-of-r3-that-is-not-conservative.md

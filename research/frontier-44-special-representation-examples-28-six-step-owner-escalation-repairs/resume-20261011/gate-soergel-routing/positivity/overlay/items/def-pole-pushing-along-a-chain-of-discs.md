@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-pole-pushing-along-a-chain-of-discs.md

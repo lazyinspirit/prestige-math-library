@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-proper-pushforward-ext-is-equivariant-borel-moore-homology-of-the-fiber-product.md

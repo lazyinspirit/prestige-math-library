@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-linear-relator-area-implies-slim-geodesic-triangles.md

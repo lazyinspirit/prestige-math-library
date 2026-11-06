@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-differentiation-under-the-integral-sign-on-a-compact-rectangle.md

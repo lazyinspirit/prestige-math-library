@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-product-ring-coordinate-ideal-and-quotient.md

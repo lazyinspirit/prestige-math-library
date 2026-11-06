@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-ill-founded-trees-are-analytic-non-borel.md

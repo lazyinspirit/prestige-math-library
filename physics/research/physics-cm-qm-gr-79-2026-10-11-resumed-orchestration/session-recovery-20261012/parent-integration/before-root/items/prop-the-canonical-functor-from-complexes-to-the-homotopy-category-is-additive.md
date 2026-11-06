@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-canonical-functor-from-complexes-to-the-homotopy-category-is-additive.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-moved-space-intersection-is-not-a-meet-in-a3.md

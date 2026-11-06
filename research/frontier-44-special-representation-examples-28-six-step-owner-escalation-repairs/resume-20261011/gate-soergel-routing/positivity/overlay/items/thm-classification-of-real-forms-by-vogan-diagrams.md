@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-classification-of-real-forms-by-vogan-diagrams.md

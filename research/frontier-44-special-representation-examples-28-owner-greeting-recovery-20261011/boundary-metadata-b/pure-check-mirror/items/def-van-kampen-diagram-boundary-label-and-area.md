@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-van-kampen-diagram-boundary-label-and-area.md

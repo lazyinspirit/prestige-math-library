@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-lone-function-with-nonzero-integral-is-not-in-real-hone.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants.md

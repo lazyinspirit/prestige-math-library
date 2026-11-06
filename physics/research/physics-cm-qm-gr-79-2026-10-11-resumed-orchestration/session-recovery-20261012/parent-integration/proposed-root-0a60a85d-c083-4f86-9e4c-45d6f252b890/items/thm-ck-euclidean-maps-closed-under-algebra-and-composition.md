@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ck-euclidean-maps-closed-under-algebra-and-composition.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-cup-and-cap-products-with-local-coefficient-pairings.md

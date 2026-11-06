@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-simple-spectral-projector-is-scale-invariant.md

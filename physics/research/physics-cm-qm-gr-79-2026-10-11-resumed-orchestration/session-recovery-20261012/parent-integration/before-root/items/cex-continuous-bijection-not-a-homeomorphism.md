@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-continuous-bijection-not-a-homeomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-twisting-sheaf-invertible-standard-graded.md

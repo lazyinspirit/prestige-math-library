@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-abelian-lie-algebras-are-nilpotent-of-class-one.md

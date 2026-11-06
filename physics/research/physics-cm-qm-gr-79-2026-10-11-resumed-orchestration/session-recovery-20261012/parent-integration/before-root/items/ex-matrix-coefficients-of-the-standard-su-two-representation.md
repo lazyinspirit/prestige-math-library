@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-matrix-coefficients-of-the-standard-su-two-representation.md

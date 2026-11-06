@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-minimum-tangent-dimension-and-homogeneous-regularity.md

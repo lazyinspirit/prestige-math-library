@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-boone-hnn-tower-and-auxiliary-subgroups.md

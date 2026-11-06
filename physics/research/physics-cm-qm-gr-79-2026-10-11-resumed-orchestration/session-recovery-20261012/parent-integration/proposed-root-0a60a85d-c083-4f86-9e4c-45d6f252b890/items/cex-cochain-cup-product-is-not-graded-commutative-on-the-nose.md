@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cochain-cup-product-is-not-graded-commutative-on-the-nose.md

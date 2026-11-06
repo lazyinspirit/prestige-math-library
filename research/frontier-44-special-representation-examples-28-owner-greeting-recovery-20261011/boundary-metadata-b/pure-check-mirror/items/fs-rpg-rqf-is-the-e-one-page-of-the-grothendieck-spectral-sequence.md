@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-rpg-rqf-is-the-e-one-page-of-the-grothendieck-spectral-sequence.md

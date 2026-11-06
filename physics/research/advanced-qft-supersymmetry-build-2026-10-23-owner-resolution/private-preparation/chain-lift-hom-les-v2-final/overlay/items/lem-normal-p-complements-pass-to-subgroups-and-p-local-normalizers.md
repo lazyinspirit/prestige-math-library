@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-normal-p-complements-pass-to-subgroups-and-p-local-normalizers.md

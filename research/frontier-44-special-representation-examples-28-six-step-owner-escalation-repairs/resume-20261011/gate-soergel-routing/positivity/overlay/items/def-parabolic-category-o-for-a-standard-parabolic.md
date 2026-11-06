@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-parabolic-category-o-for-a-standard-parabolic.md

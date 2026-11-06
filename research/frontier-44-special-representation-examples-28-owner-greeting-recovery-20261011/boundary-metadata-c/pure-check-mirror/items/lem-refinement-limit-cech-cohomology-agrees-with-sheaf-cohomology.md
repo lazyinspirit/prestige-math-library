@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-refinement-limit-cech-cohomology-agrees-with-sheaf-cohomology.md

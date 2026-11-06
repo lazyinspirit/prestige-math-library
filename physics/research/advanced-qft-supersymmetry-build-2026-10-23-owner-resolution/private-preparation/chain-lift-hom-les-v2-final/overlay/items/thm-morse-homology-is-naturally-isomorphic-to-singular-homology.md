@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-morse-homology-is-naturally-isomorphic-to-singular-homology.md

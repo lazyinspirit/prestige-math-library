@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-differentiation-on-polynomials-is-unbounded-in-the-supremum-norm.md

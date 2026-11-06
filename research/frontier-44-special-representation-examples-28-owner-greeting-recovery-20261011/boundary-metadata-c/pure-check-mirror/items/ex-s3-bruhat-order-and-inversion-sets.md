@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-s3-bruhat-order-and-inversion-sets.md

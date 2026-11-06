@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-backward-ill-posed-does-not-mean-universal-nonexistence.md

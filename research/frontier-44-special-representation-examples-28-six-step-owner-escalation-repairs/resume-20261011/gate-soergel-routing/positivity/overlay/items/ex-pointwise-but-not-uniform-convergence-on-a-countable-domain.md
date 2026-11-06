@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-pointwise-but-not-uniform-convergence-on-a-countable-domain.md

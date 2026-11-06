@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-nakayama-lemma-for-finite-dimensional-algebras.md

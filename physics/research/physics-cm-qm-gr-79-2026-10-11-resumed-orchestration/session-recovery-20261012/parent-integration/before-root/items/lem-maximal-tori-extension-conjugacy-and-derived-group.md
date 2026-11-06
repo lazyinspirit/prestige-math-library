@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-maximal-tori-extension-conjugacy-and-derived-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-two-row-hypercohomology-spectral-sequence.md

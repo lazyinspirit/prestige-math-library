@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-local-system-of-r-modules-and-its-pullback.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-adjunction-formula-for-effective-divisors-on-smooth-surfaces.md

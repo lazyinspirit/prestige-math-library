@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-naturality-of-the-adjunction-bijection-is-transposition-of-squares.md

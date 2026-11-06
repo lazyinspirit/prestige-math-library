@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-homology-and-cohomology-with-local-coefficients.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-gibbs-overshoot-at-a-piecewise-c-one-jump.md

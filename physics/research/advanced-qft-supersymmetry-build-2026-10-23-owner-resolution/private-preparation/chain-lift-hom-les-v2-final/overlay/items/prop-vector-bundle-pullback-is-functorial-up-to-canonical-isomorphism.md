@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism.md

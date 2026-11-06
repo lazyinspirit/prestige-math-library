@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-induced-connection-on-exterior-powers-is-a-degree-zero-derivation.md

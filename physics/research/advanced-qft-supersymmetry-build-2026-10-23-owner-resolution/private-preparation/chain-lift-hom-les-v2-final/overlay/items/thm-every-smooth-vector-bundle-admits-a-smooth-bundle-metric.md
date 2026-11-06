@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric.md

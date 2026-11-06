@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-special-vertex-local-structural-partition-criterion-implies-property-star.md

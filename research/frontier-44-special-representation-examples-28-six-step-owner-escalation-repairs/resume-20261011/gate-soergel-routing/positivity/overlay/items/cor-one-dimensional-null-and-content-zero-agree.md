@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-one-dimensional-null-and-content-zero-agree.md

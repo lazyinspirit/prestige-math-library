@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-orientability-and-euler-characteristic-determine-a-compact-connected-surface.md

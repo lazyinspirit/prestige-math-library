@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-extension-of-scalars-of-coordinate-modules.md

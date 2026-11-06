@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-first-variation-of-volume-for-a-normal-variation.md

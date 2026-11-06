@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-generic-target-smoothness-needs-smooth-source.md

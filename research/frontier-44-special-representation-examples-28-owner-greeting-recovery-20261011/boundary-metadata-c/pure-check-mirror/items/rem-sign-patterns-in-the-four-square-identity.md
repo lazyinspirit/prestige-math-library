@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/rem-sign-patterns-in-the-four-square-identity.md

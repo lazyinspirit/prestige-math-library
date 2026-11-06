@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function.md

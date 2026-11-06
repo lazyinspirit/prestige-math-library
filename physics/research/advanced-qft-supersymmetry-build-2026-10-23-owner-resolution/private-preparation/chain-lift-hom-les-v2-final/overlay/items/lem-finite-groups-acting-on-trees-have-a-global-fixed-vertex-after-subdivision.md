@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-finite-groups-acting-on-trees-have-a-global-fixed-vertex-after-subdivision.md

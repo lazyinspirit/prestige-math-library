@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-lambda-term-beta-reduction-and-represented-function.md

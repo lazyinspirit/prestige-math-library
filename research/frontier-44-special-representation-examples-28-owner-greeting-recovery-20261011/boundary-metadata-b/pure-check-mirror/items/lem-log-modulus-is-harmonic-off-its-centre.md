@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-log-modulus-is-harmonic-off-its-centre.md

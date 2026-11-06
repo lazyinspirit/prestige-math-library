@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-riemann-integrable-function-has-borel-darboux-envelopes.md

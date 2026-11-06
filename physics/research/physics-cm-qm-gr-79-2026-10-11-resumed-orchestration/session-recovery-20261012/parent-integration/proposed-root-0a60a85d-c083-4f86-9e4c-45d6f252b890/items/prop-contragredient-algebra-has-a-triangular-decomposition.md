@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-contragredient-algebra-has-a-triangular-decomposition.md

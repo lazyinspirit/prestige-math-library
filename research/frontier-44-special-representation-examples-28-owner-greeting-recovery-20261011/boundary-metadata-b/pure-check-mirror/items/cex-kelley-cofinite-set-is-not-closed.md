@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-kelley-cofinite-set-is-not-closed.md

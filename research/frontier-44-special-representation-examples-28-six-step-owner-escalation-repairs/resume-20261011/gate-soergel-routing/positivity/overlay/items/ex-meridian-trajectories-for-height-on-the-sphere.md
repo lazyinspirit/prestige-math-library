@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-meridian-trajectories-for-height-on-the-sphere.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-immersion-and-embedding-for-manifolds-with-boundary.md

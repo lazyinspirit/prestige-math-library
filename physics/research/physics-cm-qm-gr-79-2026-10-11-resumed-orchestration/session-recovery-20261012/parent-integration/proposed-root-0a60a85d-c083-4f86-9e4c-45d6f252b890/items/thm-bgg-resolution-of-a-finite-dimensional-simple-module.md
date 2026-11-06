@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bgg-resolution-of-a-finite-dimensional-simple-module.md

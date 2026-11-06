@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-normal-and-conormal-bundles-of-an-embedded-submanifold.md

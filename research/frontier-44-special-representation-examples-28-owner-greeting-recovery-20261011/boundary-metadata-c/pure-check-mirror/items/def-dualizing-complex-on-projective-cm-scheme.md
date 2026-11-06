@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-dualizing-complex-on-projective-cm-scheme.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-logarithm-differentiable-functional-equation-characterisation.md

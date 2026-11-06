@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-milnor-lambda-candidate-from-a-filling.md

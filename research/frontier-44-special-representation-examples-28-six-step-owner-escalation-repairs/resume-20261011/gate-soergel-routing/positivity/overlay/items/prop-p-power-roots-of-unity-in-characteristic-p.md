@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-p-power-roots-of-unity-in-characteristic-p.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-function-with-a-primitive-that-is-not-integrable.md

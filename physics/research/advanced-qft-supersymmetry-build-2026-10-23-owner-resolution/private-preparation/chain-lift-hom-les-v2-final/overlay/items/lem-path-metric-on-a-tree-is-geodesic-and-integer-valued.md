@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-path-metric-on-a-tree-is-geodesic-and-integer-valued.md

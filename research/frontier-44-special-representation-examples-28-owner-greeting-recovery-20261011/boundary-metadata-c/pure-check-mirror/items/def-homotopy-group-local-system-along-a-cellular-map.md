@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-homotopy-group-local-system-along-a-cellular-map.md

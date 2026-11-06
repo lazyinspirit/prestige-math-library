@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hh-hopf-quotient-kernel-and-tensor-product-constructions.md

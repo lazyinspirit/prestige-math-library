@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kam-parameter-sequences-satisfy-all-step-hypotheses.md

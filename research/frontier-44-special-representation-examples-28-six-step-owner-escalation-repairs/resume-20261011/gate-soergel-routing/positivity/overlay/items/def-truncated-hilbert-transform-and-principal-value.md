@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-truncated-hilbert-transform-and-principal-value.md

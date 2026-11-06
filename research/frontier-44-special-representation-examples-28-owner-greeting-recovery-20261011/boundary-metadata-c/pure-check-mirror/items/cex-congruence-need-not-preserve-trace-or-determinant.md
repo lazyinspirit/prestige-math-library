@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-congruence-need-not-preserve-trace-or-determinant.md

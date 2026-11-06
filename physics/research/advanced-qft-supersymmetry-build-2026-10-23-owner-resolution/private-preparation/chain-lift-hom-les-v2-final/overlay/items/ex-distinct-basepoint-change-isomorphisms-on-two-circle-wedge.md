@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge.md

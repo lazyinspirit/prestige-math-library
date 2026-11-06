@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-right-derived-map-relative-to-resolution-data.md

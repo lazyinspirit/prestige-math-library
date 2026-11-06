@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-intersection-with-a-cartier-divisor-and-first-chern-class.md

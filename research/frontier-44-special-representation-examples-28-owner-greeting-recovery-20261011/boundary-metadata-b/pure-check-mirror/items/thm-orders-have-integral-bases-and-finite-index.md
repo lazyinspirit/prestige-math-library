@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-orders-have-integral-bases-and-finite-index.md

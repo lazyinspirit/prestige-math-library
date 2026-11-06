@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cut-surface-and-boundary-jumps-of-primitives.md

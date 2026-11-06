@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-heat-comparison-preserves-an-interval-of-values.md

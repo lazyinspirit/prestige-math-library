@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-bell-numbers-count-ordered-set-partitions.md

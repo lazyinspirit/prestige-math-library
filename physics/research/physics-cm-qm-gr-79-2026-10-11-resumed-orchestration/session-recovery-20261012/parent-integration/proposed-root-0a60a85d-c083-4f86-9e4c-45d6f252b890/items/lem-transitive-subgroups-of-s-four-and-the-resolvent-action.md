@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-transitive-subgroups-of-s-four-and-the-resolvent-action.md

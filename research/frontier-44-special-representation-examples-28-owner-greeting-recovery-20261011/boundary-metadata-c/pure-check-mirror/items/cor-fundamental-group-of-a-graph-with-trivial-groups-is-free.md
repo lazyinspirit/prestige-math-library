@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-fundamental-group-of-a-graph-with-trivial-groups-is-free.md

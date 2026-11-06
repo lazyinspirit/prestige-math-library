@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-equivalence-is-an-isomorphism-of-categories.md

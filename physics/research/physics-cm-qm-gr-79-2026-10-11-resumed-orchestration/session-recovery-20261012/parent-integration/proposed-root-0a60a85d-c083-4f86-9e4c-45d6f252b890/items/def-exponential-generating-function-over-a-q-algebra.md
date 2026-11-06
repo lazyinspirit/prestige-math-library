@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-exponential-generating-function-over-a-q-algebra.md

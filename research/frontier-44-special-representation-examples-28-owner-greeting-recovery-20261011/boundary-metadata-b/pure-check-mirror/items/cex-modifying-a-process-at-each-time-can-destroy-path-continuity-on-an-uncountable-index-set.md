@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-modifying-a-process-at-each-time-can-destroy-path-continuity-on-an-uncountable-index-set.md

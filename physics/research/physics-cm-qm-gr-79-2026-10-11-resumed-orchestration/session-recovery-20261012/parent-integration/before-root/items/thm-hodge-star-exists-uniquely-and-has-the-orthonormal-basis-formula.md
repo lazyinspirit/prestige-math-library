@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hodge-star-exists-uniquely-and-has-the-orthonormal-basis-formula.md

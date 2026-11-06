@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-measurable-density-chart-integrals-agree-on-overlaps.md

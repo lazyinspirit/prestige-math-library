@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-universality-removes-the-need-for-supplied-resolution-data.md

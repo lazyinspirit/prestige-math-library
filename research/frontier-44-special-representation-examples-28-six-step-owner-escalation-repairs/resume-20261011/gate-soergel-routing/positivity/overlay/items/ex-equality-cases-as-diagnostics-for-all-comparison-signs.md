@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-equality-cases-as-diagnostics-for-all-comparison-signs.md

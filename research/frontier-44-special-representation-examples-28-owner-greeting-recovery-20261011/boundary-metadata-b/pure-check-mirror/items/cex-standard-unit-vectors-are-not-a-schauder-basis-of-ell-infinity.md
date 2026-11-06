@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-standard-unit-vectors-are-not-a-schauder-basis-of-ell-infinity.md

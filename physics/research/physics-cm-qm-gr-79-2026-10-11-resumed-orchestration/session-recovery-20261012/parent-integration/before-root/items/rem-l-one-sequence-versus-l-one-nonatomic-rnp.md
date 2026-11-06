@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-l-one-sequence-versus-l-one-nonatomic-rnp.md

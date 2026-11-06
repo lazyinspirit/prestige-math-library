@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-first-quadrant-spectral-sequence-transfer-modulo-a-serre-class.md

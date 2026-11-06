@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-right-invariant-fields-identify-t-e-g-with-the-same-bracket-as-left-invariant-fields.md

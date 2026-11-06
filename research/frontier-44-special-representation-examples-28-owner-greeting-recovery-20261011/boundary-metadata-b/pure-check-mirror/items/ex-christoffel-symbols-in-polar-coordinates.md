@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-christoffel-symbols-in-polar-coordinates.md

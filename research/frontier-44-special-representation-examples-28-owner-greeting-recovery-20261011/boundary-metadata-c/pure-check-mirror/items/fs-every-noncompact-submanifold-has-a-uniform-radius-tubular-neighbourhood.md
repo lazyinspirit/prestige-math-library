@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-noncompact-submanifold-has-a-uniform-radius-tubular-neighbourhood.md

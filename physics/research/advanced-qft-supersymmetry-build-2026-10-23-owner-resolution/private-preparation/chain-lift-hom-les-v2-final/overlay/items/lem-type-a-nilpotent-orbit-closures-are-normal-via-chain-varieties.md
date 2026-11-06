@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-type-a-nilpotent-orbit-closures-are-normal-via-chain-varieties.md

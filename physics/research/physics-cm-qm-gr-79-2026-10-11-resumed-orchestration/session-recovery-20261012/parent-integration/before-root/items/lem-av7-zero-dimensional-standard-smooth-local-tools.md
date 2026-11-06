@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-av7-zero-dimensional-standard-smooth-local-tools.md

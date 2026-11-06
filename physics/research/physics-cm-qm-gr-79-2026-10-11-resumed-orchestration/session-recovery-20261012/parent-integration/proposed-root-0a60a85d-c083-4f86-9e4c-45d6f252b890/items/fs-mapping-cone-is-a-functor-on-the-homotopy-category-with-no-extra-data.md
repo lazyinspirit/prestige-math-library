@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-mapping-cone-is-a-functor-on-the-homotopy-category-with-no-extra-data.md

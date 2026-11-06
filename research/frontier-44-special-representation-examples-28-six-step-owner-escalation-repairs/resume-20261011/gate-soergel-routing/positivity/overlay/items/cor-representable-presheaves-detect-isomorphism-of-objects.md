@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-representable-presheaves-detect-isomorphism-of-objects.md

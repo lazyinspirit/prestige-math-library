@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-simple-functions-satisfy-lusins-theorem-on-a-finite-measure-set.md

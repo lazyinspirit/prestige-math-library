@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product.md

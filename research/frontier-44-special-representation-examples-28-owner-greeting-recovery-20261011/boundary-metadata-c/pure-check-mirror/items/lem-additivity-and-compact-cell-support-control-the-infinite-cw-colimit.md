@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-additivity-and-compact-cell-support-control-the-infinite-cw-colimit.md

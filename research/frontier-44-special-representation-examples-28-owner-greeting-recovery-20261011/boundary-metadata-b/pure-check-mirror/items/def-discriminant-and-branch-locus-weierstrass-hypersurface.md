@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-discriminant-and-branch-locus-weierstrass-hypersurface.md

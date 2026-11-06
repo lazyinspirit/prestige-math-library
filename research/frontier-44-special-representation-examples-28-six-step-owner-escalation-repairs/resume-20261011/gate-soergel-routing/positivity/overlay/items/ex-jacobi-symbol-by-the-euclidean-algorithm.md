@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-jacobi-symbol-by-the-euclidean-algorithm.md

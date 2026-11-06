@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-mackey-support-for-homs-between-finite-principal-series.md

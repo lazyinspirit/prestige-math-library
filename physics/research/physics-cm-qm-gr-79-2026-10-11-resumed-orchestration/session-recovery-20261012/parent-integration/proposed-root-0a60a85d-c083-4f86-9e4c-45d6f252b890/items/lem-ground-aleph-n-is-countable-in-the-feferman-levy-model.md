@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ground-aleph-n-is-countable-in-the-feferman-levy-model.md

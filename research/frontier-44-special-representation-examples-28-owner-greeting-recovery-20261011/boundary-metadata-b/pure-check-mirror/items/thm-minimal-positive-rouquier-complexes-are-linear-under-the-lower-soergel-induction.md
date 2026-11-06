@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-minimal-positive-rouquier-complexes-are-linear-under-the-lower-soergel-induction.md

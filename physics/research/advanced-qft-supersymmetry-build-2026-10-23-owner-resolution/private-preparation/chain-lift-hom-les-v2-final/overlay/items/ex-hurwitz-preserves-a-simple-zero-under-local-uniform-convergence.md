@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/ex-hurwitz-preserves-a-simple-zero-under-local-uniform-convergence.md

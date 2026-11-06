@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-fitting-and-frattini-subgroups-of-s-three.md

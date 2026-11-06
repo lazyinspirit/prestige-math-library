@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/def-killing-form-of-a-finite-dimensional-lie-algebra.md

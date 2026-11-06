@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-koszul-complex-invariant-under-invertible-generator-change.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/prop-specht-constituents-of-an-fi-module-have-bounded-first-row.md

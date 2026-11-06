@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-symmetric-transitive-relation-that-is-not-reflexive.md

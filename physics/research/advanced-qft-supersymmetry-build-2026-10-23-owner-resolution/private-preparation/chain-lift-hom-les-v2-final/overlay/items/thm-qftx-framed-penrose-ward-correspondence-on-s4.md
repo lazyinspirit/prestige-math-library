@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-qftx-framed-penrose-ward-correspondence-on-s4.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-c-zero-is-not-complemented-in-ell-infinity.md

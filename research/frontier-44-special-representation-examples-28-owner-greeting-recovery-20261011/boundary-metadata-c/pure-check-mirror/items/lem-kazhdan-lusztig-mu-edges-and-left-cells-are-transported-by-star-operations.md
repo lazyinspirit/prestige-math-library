@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations.md

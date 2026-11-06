@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-quotient-of-a-tree-by-a-group-action-is-always-a-tree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-first-steenrod-square-is-the-mod-two-bockstein.md

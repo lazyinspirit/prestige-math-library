@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces.md

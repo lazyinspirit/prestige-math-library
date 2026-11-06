@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-pullback-is-functorial-up-to-canonical-bundle-isomorphism.md

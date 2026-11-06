@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-double-bar-comparison-for-cyclic-bimodule-tensor-products.md

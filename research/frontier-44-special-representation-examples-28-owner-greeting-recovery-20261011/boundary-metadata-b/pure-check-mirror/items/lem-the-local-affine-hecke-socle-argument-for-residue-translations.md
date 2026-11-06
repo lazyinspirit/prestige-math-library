@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-local-affine-hecke-socle-argument-for-residue-translations.md

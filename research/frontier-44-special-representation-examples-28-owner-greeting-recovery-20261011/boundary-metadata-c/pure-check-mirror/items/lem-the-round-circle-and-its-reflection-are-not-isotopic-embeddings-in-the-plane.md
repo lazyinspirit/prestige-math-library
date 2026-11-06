@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-round-circle-and-its-reflection-are-not-isotopic-embeddings-in-the-plane.md

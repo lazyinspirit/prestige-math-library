@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-anti-excedances-become-descents-under-foata-fundamental-transformation.md

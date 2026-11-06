@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-stieltjes-interval-set-function-is-a-premeasure.md

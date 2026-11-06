@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-commutant-of-a-cyclic-endomorphism-is-polynomial.md

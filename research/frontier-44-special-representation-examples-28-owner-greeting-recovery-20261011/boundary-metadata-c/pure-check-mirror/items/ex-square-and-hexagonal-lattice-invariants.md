@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-square-and-hexagonal-lattice-invariants.md

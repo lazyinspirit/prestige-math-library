@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-elementary-and-complete-families-freely-generate-the-stable-ring.md

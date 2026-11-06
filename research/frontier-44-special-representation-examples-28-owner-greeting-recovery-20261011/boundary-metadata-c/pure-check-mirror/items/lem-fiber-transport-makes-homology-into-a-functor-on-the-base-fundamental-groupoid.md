@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-fiber-transport-makes-homology-into-a-functor-on-the-base-fundamental-groupoid.md

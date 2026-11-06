@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image.md

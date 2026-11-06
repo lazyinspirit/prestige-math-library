@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications.md

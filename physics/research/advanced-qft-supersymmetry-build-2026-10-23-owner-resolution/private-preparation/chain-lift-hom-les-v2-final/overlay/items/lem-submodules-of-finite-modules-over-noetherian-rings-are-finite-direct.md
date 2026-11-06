@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct.md

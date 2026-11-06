@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/thm-hh-finite-integrals-are-one-dimensional-and-antipode-is-bijective.md

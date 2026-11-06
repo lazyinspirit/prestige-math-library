@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-mayer-vietoris-connector-is-independent-of-small-chain-decomposition.md

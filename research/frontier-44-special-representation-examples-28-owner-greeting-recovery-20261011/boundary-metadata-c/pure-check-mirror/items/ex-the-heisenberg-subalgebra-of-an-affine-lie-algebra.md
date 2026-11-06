@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-heisenberg-subalgebra-of-an-affine-lie-algebra.md

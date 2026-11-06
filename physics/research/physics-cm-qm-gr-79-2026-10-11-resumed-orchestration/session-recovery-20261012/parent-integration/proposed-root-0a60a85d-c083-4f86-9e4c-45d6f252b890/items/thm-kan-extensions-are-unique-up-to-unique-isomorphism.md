@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kan-extensions-are-unique-up-to-unique-isomorphism.md

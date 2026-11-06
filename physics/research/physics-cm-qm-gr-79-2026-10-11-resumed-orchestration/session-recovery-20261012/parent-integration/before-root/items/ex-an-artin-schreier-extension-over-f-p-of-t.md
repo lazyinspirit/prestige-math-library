@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-artin-schreier-extension-over-f-p-of-t.md

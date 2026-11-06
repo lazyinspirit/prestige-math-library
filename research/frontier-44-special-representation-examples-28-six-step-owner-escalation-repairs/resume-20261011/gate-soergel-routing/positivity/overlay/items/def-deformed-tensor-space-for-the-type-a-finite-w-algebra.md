@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-deformed-tensor-space-for-the-type-a-finite-w-algebra.md

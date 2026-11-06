@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-arens-space-is-sequential-not-frechet-urysohn.md

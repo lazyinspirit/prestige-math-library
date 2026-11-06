@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-stiefel-whitney-number-of-real-projective-space.md

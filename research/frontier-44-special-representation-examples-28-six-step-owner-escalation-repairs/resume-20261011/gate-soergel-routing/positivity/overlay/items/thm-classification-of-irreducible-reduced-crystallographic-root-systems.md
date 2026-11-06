@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-classification-of-irreducible-reduced-crystallographic-root-systems.md

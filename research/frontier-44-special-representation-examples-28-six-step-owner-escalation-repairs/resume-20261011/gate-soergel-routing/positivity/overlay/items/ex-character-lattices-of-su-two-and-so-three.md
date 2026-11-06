@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-character-lattices-of-su-two-and-so-three.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-variance-logarithmic-rate-for-iid-sums.md

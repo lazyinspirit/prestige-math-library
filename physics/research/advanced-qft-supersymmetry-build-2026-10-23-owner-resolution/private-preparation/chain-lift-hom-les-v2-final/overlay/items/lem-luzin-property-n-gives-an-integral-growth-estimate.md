@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-luzin-property-n-gives-an-integral-growth-estimate.md

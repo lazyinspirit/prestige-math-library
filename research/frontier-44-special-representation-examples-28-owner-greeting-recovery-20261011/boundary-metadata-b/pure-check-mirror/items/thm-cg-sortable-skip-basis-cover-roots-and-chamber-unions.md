@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-sortable-skip-basis-cover-roots-and-chamber-unions.md

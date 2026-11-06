@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-brauer-characters-are-class-functions-on-p-regular-elements.md

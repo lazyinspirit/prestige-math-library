@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cotangent-space-and-cotangent-bundle-as-a-disjoint-union.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-small-dowker-conditional-aleph-one-constructions.md

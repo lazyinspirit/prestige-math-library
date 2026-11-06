@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-frobenius-groups-and-fixed-point-free-actions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-generation-is-detected-modulo-the-frattini-subgroup.md

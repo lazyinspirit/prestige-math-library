@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/cor-classifying-space-of-a-discrete-group-is-a-k-g-one.md

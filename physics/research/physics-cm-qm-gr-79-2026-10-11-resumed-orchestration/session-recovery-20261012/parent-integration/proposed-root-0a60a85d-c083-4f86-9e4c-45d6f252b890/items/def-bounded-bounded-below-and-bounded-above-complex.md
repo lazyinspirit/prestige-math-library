@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-bounded-bounded-below-and-bounded-above-complex.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/def-exterior-derivative-by-the-invariant-vector-field-formula.md

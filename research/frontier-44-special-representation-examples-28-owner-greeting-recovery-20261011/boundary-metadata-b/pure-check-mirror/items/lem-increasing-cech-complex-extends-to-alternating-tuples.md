@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-increasing-cech-complex-extends-to-alternating-tuples.md

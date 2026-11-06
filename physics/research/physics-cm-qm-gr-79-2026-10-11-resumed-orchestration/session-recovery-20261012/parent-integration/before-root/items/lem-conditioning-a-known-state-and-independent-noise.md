@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-conditioning-a-known-state-and-independent-noise.md

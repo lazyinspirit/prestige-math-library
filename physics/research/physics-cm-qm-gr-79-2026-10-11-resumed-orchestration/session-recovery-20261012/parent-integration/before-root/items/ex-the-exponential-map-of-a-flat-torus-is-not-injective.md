@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-exponential-map-of-a-flat-torus-is-not-injective.md

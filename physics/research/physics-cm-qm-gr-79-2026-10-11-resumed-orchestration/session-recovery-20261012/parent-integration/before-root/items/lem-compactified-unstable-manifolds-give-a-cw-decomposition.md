@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compactified-unstable-manifolds-give-a-cw-decomposition.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-five-as-the-smallest-nonabelian-simple-group.md

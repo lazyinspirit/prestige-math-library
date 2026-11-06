@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/fs-continuous-image-of-a-closed-set-is-closed.md

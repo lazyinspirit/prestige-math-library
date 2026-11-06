@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-antisymmetrizer-image-on-its-tabloid-module-is-one-dimensional.md

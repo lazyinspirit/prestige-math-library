@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-every-integrable-weight-is-weyl-conjugate-toward-the-dominant-chamber.md

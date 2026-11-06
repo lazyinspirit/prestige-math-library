@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-truncated-centering-criterion-for-an-iid-weak-law.md

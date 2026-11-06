@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-associated-primes-of-a-cyclic-module-are-primes-of-element-annihilators-modulo-ideal.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-cyclotomic-klr-induction-restriction-bimodules-have-compatible-frobenius-dual-bases.md

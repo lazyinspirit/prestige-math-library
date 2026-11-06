@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-large-sparse-pair-hypotheses-yield-x-sparse-blockades.md

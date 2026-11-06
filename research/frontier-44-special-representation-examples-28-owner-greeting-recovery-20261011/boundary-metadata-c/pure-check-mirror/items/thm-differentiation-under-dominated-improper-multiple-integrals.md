@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-differentiation-under-dominated-improper-multiple-integrals.md

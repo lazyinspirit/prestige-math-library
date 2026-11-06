@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-minimisers-are-classical-when-elliptic-regularity-applies.md

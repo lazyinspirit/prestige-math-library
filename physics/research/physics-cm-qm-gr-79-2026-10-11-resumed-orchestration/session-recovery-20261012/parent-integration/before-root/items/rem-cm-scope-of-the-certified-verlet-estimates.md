@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-cm-scope-of-the-certified-verlet-estimates.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-normal-model-map-restricts-to-a-diffeomorphism-onto-a-saturated-neighbourhood.md

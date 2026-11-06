@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hilbert-direct-sum-of-unitary-representations.md

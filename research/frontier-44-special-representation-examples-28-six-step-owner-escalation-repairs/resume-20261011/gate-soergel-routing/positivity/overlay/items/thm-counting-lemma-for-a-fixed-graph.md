@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-counting-lemma-for-a-fixed-graph.md

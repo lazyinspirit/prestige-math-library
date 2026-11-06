@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hirsch-length-and-growth-degree-need-not-agree.md

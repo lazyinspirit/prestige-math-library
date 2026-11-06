@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library-aqft-20261023/physics/items/lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field.md

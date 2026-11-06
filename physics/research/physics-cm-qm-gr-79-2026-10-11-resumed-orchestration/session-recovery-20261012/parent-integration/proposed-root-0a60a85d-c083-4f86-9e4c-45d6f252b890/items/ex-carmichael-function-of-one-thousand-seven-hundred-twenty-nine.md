@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-carmichael-function-of-one-thousand-seven-hundred-twenty-nine.md

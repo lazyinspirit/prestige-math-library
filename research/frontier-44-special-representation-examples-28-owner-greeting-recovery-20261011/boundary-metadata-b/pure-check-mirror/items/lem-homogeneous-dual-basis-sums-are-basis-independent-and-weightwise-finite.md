@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/lem-homogeneous-dual-basis-sums-are-basis-independent-and-weightwise-finite.md

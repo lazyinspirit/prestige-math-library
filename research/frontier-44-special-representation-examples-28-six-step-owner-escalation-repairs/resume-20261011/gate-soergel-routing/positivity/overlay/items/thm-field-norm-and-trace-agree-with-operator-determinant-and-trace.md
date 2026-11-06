@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-field-norm-and-trace-agree-with-operator-determinant-and-trace.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-speed-of-dependence-for-lipschitz-hamiltonians.md

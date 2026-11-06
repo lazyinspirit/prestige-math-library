@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/ex-annihilator-colon-ideals-in-a-cyclic-module.md

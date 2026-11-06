@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/thm-conical-limits-do-not-suffice-in-the-enriched-setting.md

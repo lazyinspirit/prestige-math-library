@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-neighbourhood-indexed-net-converging-to-a-closure-point.md

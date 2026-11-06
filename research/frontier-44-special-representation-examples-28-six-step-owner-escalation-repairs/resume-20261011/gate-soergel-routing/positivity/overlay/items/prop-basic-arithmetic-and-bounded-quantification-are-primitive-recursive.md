@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/items/prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive.md

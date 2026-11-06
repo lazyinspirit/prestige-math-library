@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kks-form-is-independent-of-lie-algebra-representatives.md
