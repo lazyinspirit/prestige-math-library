@@ -1,11 +1,17 @@
 ---
 id: lem-smooth-strip-compactness-away-from-energy-concentration
 kind: lemma
-title: "Smooth strip convergence outside finitely many energy concentration points"
-status: draft
+title: Smooth strip convergence outside finitely many energy concentration points
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-interior-energy-regularity-for-smooth-almost-complex-strips, lem-boundary-energy-regularity-for-totally-real-strips, lem-local-sobolev-bootstrap-for-almost-complex-strips, thm-euclidean-inverse-function-theorem, thm-higher-regularity-of-local-inverses]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-interior-energy-regularity-for-smooth-almost-complex-strips
+- lem-boundary-energy-regularity-for-totally-real-strips
+- lem-local-sobolev-bootstrap-for-almost-complex-strips
+- thm-euclidean-inverse-function-theorem
+- thm-higher-regularity-of-local-inverses
 dependency_level: 3
 justified_by: []
 aliases: []
@@ -13,12 +19,39 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: gpt-6-luna
+    verdict: pass
+    date: 2026-11-06
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, compactness away from bubbling points"
-      url: "https://bookstore.ams.org/coll-52"
-    - title: "Ozsvath and Szabo, Holomorphic disks and topological invariants for closed three-manifolds, §§3.4 and 3.8"
-      url: "https://arxiv.org/pdf/math/0101206"
+  - title: Aleksey Zinger, Notes on J-Holomorphic Maps
+    url: https://arxiv.org/pdf/1706.00331v1
+    locator: 'Section 5.2, Lemma 5.4 and its proof, printed pp.42–43: autonomous closed-source convergence away
+      from finitely many concentration points. The noncompact strip, varying coefficients, explicit Countable Choice
+      and one-sided boundary versions are proved locally below.'
+  - title: Urs Frauenfelder and Kai Zehmisch, Gromov compactness for holomorphic discs with totally real boundary
+      conditions
+    url: https://arxiv.org/pdf/1403.6139v2
+    locator: 'Section 2.5, printed p.6: autonomous upper-half-plane convergence modulo bubbling, citing the standard
+      compactness arguments after its boundary analytic preparation. The exact strip subsequence and derivative
+      argument is reconstructed locally below.'
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-interior-energy-regularity-for-smooth-almost-complex-strips: mathematical-premise
+  lem-boundary-energy-regularity-for-totally-real-strips: mathematical-premise
+  lem-local-sobolev-bootstrap-for-almost-complex-strips: mathematical-premise
+  thm-euclidean-inverse-function-theorem: mathematical-premise
+  thm-higher-regularity-of-local-inverses: mathematical-premise
 ---
 
 ## Statement

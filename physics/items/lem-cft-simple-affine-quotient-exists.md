@@ -1,0 +1,127 @@
+---
+id: lem-cft-simple-affine-quotient-exists
+kind: lemma
+title: Existence and structure of the simple affine VOA quotient
+status: published
+origin: pipeline
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+dependency_level: 2
+domain: mathematics
+library: mathematics
+deps:
+  - def-cft-simple-affine-voa
+  - def-loop-algebra-of-a-simple-lie-algebra
+  - def-untwisted-affine-central-extension
+  - def-universal-affine-vacuum-module
+  - thm-universal-affine-vertex-algebra
+  - lem-affine-vacuum-module-pbw-basis
+  - lem-affine-translation-derivation
+  - def-degree-derivation-and-full-untwisted-affine-algebra
+  - def-sugawara-modes
+  - lem-sugawara-modes-act-on-currents
+  - thm-sugawara-modes-satisfy-virasoro
+  - def-dual-coxeter-number-for-normalized-form
+  - thm-loop-and-affine-gcm-presentations-are-isomorphic
+  - thm-kac-moody-verma-module-has-a-unique-simple-quotient
+  - def-conformal-vertex-algebra
+  - def-cft-affine-fundamental-weight-lambda-zero
+  - lem-affine-vacuum-character-at-level-k
+  - lem-affine-vacuum-module-is-restricted
+  - def-formal-distribution-on-a-vector-space
+  - def-vertex-algebra-module
+  - def-vertex-algebra-state-field
+  - lem-state-field-reconstruction-from-local-generators
+dependency_roles:
+  def-cft-simple-affine-voa: mathematical-premise
+  def-loop-algebra-of-a-simple-lie-algebra: mathematical-premise
+  def-untwisted-affine-central-extension: mathematical-premise
+  def-universal-affine-vacuum-module: mathematical-premise
+  thm-universal-affine-vertex-algebra: mathematical-premise
+  lem-affine-vacuum-module-pbw-basis: mathematical-premise
+  lem-affine-translation-derivation: mathematical-premise
+  def-degree-derivation-and-full-untwisted-affine-algebra: mathematical-premise
+  def-sugawara-modes: mathematical-premise
+  lem-sugawara-modes-act-on-currents: mathematical-premise
+  thm-sugawara-modes-satisfy-virasoro: mathematical-premise
+  def-dual-coxeter-number-for-normalized-form: mathematical-premise
+  thm-loop-and-affine-gcm-presentations-are-isomorphic: mathematical-premise
+  thm-kac-moody-verma-module-has-a-unique-simple-quotient: mathematical-premise
+  def-conformal-vertex-algebra: mathematical-premise
+  def-cft-affine-fundamental-weight-lambda-zero: mathematical-premise
+  lem-affine-vacuum-character-at-level-k: mathematical-premise
+  lem-affine-vacuum-module-is-restricted: mathematical-premise
+  def-formal-distribution-on-a-vector-space: mathematical-premise
+  def-vertex-algebra-module: mathematical-premise
+  def-vertex-algebra-state-field: mathematical-premise
+  lem-state-field-reconstruction-from-local-generators: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+  judge:
+    model: gpt-6-luna
+    verdict: pass
+    date: 2026-11-06
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
+sources:
+  references:
+    - title: Tomoyuki Arakawa and Anne Moreau, Arc spaces and vertex algebras
+      url: https://www.imo.universite-paris-saclay.fr/~anne.moreau/Arc_space-vertex_algebras-BOOK_version.pdf
+      locator: "§2.5, the n-th product and normal-order identity; §3.1, Proposition 3.1; §11.1, Theorem 11.1, printed pp. 46–47, 65–68 and 217–218."
+    - title: Chongying Dong, Haisheng Li, and Geoffrey Mason, Regularity of Rational Vertex Operator Algebras
+      url: https://arxiv.org/pdf/q-alg/9508018v1
+      locator: "§2, Example (2), and §3, Theorem 3.7, printed pp. 5 and 7–8."
+---
+
+## Statement
+
+For a finite-dimensional complex simple Lie algebra $\mathfrak g$ with long roots normalized to squared length $2$ and a positive integer $\ell$, the universal affine vertex algebra $V^\ell(\mathfrak g)$ has a unique maximal proper vertex-algebra ideal $J_\ell$. The quotient $V^\ell(\mathfrak g)/J_\ell$ is a simple conformal vertex algebra of CFT type with its noncritical Sugawara conformal vector, and its full untwisted affine Kac–Moody action is the irreducible highest-weight module of highest weight $\ell\Lambda_0$.
+
+## Statement references
+
+[[def-cft-simple-affine-voa]]
+
+[[thm-universal-affine-vertex-algebra]]
+
+[[thm-kac-moody-verma-module-has-a-unique-simple-quotient]]
+
+## Facts & Assumptions
+
+**Given:** A finite-dimensional complex simple $\mathfrak g$, its long-root-normalized invariant form, and $\ell\in\mathbb Z_{>0}$.
+
+[F1] [[def-cft-simple-affine-voa]] names $L_\ell(\mathfrak g)$ as the quotient by its unique maximal proper ideal; this lemma proves that this defining quotient exists and has the claimed structure. [[thm-universal-affine-vertex-algebra]] supplies the state-field map on $V^\ell(\mathfrak g)$, generated by the currents $J^x(z)=\sum_{n\in\mathbb Z}x_nz^{-n-1}$.
+
+[F2] [[lem-affine-vacuum-module-pbw-basis]] gives the basis of ordered negative-current monomials on $\mathbf1$; their degree is the sum of the positive integers in their mode indices.
+
+[F3] [[def-degree-derivation-and-full-untwisted-affine-algebra]] extends the central current algebra by $d$ with $[d,x_n]=n x_n$. [[def-cft-affine-fundamental-weight-lambda-zero]] defines $\Lambda_0$ by $\Lambda_0|_{\mathfrak h}=0$, $\Lambda_0(c)=1$, and $\Lambda_0(d)=0$.
+
+[F4] [[def-sugawara-modes]] and [[thm-sugawara-modes-satisfy-virasoro]] define the local Sugawara modes at $\ell+h^\vee\ne0$ and prove their Virasoro bracket on restricted modules. [[lem-sugawara-modes-act-on-currents]] gives $[L_m,x_n]=-n x_{m+n}$, and [[lem-affine-translation-derivation]] gives $[T,x_n]=-n x_{n-1}$.
+
+[F5] [[thm-loop-and-affine-gcm-presentations-are-isomorphic]] identifies the full current algebra plus degree derivation with the untwisted affine Kac–Moody algebra; [[thm-kac-moody-verma-module-has-a-unique-simple-quotient]] gives the unique simple highest-weight quotient.
+
+[F6] [[def-conformal-vertex-algebra]] requires a Virasoro conformal vector with $L_{-1}=T$, nonnegative integer grading, finite-dimensional graded pieces, and vacuum grade $0$ only.
+
+[F7] [[def-universal-affine-vacuum-module]] uses the inducing character specified by [[lem-affine-vacuum-character-at-level-k]]: $\mathfrak g[t]$ kills $\mathbf1$ and $c$ acts as $\ell$.
+
+[F8] [[lem-affine-vacuum-module-is-restricted]] proves that every fixed vector of $V^\ell(\mathfrak g)$ is killed by all sufficiently large positive current modes.
+
+[F9] [[def-vertex-algebra-state-field]] supplies vacuum/creation, so $v_{(-1)}\mathbf1=v$; [[lem-state-field-reconstruction-from-local-generators]] proves that the state-field map respects field $n$th products; [[def-formal-distribution-on-a-vector-space]] defines those products by the two formal-residue expansions.
+
+[F10] [[def-vertex-algebra-module]] supplies the module Jacobi identity and mode stability. Its residue coefficient formula for modes of an $n$th product is the finite-sum identity used in step 4.1.
+
+## Proof
+
+1.1 By [F2], $V^\ell(\mathfrak g)$ is spanned by PBW monomials $x^1_{-n_1}\cdots x^r_{-n_r}\mathbf1$ with every $n_i\ge1$. Give such a monomial degree $n_1+\cdots+n_r$. The empty monomial is the unique degree-zero basis vector, and each fixed degree has finitely many monomials because $\mathfrak g$ is finite dimensional and there are finitely many ordered compositions of that degree. Thus $V^\ell=\bigoplus_{n\ge0}V_n$ with $V_0=\mathbb C\mathbf1$ and finite-dimensional $V_n$. To extend the induced module to the full affine algebra, use the derivation $D(x_n)=nx_n$, $D(c)=0$ from [F3]. For $n\ge0$, $D(x_n)=nx_n\in\mathfrak g[t]$, so $D$ preserves $\mathfrak p=\mathfrak g[t]\oplus\mathbb Cc$. Extend $D$ to the tensor algebra by the Leibniz rule; it preserves every relation $xy-yx-[x,y]$ because $D$ is a Lie derivation, so it descends to a derivation $D_U$ of $U(\overline{L\mathfrak g})$. By [F7], the vacuum character $\chi_\ell$ is zero on $\mathfrak g[t]$ and has $\chi_\ell(c)=\ell$. Thus $\chi_\ell(D_U(a))=0$ for each generator of $U(\mathfrak p)$, and the derivation and character rules give it for every $a\in U(\mathfrak p)$. The formula $d(u\otimes1):=D_U(u)\otimes1$ respects $ua\otimes1=u\otimes\chi_\ell(a)$, since the difference is $u\otimes\chi_\ell(D_U(a))=0$; hence it is well-defined. It has $d\mathbf1=0$ and $[d,x_n]=nx_n$. On the PBW monomial above, $d$ acts by $-(n_1+\cdots+n_r)$, so the full affine Cartan acts on $\mathbf1$ by $c\mapsto\ell$, $d\mapsto0$, and $\mathfrak h\mapsto0$. The action of $\mathfrak g[t]$ kills $\mathbf1$ by [F7], so under the loop/GCM identification in [F5] it is an affine highest vector of weight $\ell\Lambda_0$ by [F3]. [F1, F2, F3, F5, F7, given, algebra]
+
+2.1 Put $q=\ell+h^\vee$, which is nonzero because $\ell>0$ and the normalized dual Coxeter number is positive. For currents $A(z)=J^{x_a}(z)$ and $B(z)=J^{x^a}(z)$, the state-field product identity [F9] and the residue definition in [F9] give $Y(x_a(-1)x^a(-1)\mathbf1,z)=\operatorname{Res}_x\!\left(\iota_{x,z}(x-z)^{-1}A(x)B(z)-\iota_{z,x}(x-z)^{-1}B(z)A(x)\right)$. Expanding the first binomial as $\sum_{j\ge0}z^jx^{-j-1}$ selects precisely the negative modes of $A$, while the second expansion $-\sum_{j\ge0}x^jz^{-j-1}$, with its preceding minus sign, selects the nonnegative modes of $A$ to the right of $B$. Thus this field is $:J^{x_a}(z)J^{x^a}(z):$ in the stated normal-order convention. The Sugawara state $\omega=\frac1{2q}\sum_a x_a(-1)x^a(-1)\mathbf1$ therefore has exactly the field whose coefficients are the $L_m$ of [F4]. Restrictedness follows from [F8], so [F4] gives the Virasoro relations. At mode $m=-1$, [F4] says $[L_{-1},x_n]=-n x_{n-1}$, the same commutator as $T$ in [F3]. Both operators kill $\mathbf1$, and the negative-current PBW monomials span; induction on their length gives $L_{-1}=T$. Similarly $L_0\mathbf1=0$ from normal ordering and $[L_0,x_{-n}]=n x_{-n}$, so $L_0$ acts by the PBW degree from step 1.1. This is a CFT-type conformal structure in the sense of [F6]. [F1, F2, F3, F4, F6, F8, F9, step 1.1, given, algebra]
+
+3.1 Every vertex-algebra ideal is $L_0$-invariant and therefore graded: a vector has only finitely many homogeneous components, and polynomial interpolation in its distinct integer $L_0$-eigenvalues extracts each component while staying in the ideal. A proper ideal has zero intersection with $V_0$: if it contains a nonzero scalar multiple of $\mathbf1$, it contains $\mathbf1$, and then $\mathbf1_{(-1)}v=v$ for every $v\in V$ by the vacuum-field axiom, forcing the ideal to be all of $V$. The sum of all proper ideals, interpreted as finite sums of their elements, is again an ideal and still has zero degree-zero component, hence is proper. Call this sum $J_\ell$. It contains every proper ideal, so it is the unique maximal proper ideal. The quotient has no proper nonzero ideal and is simple; its inherited grading has nonnegative degrees, finite-dimensional pieces, and degree-zero space $\mathbb C\mathbf1$. [F6, F9, step 1.1, step 2.1, algebra]
+
+4.1 The ideal $J_\ell$ is stable under every current mode because currents are vertex states. Conversely, let $U\subseteq V^\ell$ be stable under every current mode. For states $a,b$, the module Jacobi residue formula [F10] gives $((a_{(r)}b)^M)_{(m)}v=\sum_{j\ge0}(-1)^j\binom rj a^M_{(r-j)}b^M_{(m+j)}v-(-1)^r\sum_{j\ge0}(-1)^j\binom rj b^M_{(m+r-j)}a^M_{(j)}v$. For fixed $v$, both sums are finite by lower truncation of the rightmost field in each term. Each PBW state is built recursively as $a_{(-n)}b$ with $a$ a current state and $n\ge1$; induction on PBW length therefore shows every mode of every state preserves $U$, so $U$ is a vertex ideal. Hence the simple quotient in step 3.1 is simple for the full affine current action and, with the $d$-action from step 1.1, for the full affine algebra. Its vacuum is a highest vector of weight $\ell\Lambda_0$ by step 1.1. By [F5], the unique simple highest-weight module of that weight is the quotient. This proves the affine-module identification in the Statement. [F1, F2, F5, F10, step 1.1, step 3.1, algebra] ∎

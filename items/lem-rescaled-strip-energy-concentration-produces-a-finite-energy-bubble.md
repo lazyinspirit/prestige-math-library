@@ -1,11 +1,16 @@
 ---
 id: lem-rescaled-strip-energy-concentration-produces-a-finite-energy-bubble
 kind: lemma
-title: "Derivative concentration produces a finite-energy plane or half-plane bubble"
-status: draft
+title: Derivative concentration produces a finite-energy plane or half-plane bubble
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-interior-energy-regularity-for-smooth-almost-complex-strips, lem-boundary-energy-regularity-for-totally-real-strips, lem-local-sobolev-bootstrap-for-almost-complex-strips, lem-smooth-strip-compactness-away-from-energy-concentration]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-interior-energy-regularity-for-smooth-almost-complex-strips
+- lem-boundary-energy-regularity-for-totally-real-strips
+- lem-local-sobolev-bootstrap-for-almost-complex-strips
+- lem-smooth-strip-compactness-away-from-energy-concentration
 dependency_level: 4
 justified_by: []
 aliases: []
@@ -15,15 +20,32 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, rescaling near a bubbling point"
-      url: "https://bookstore.ams.org/coll-52"
-    - title: "Ozsvath and Szabo, Holomorphic disks and topological invariants for closed three-manifolds, §10"
-      url: "https://arxiv.org/pdf/math/0101206"
+  - title: Aleksey Zinger, Notes on J-Holomorphic Maps
+    url: https://arxiv.org/pdf/1706.00331v1
+    locator: §§4–5, especially Corollary 5.3 and Proposition 5.5; interior normalized blowup, finite-energy limits and energy quantum. The source-dependent coefficient and physical-boundary extensions are proved locally below.
+  - title: Urs Frauenfelder and Kai Zehmisch, Gromov compactness for holomorphic discs with totally real boundary conditions
+    url: https://arxiv.org/pdf/1403.6139v2
+    locator: §§1–3, especially §§2.2–2.5 and Lemma 3.3; compact-image totally real boundary blowup and soft rescaling, not inhomogeneous Floer strips.
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-interior-energy-regularity-for-smooth-almost-complex-strips: mathematical-premise
+  lem-boundary-energy-regularity-for-totally-real-strips: mathematical-premise
+  lem-local-sobolev-bootstrap-for-almost-complex-strips: mathematical-premise
+  lem-smooth-strip-compactness-away-from-energy-concentration: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
 
-Assume Countable Choice. Use a compact target $(X,g)$, fixed compact totally real boundary submanifolds, and smooth strip equations $J_n$ with uniform bounds of every order, fixed boundary complex structures, and local $C^\infty$ convergence to $J_\infty$. Let smooth solutions $u_n$ have energies at most $E_0$. Suppose $p_n\to p$ in the strip, including its boundary, and $|du_n(p_n)|_g\to\infty$.
+Assume Countable Choice. Use a compact target $(X,g)$, fixed compact totally real boundary submanifolds, and smooth strip equations $J_n$ with uniform bounds of every order, fixed boundary complex structures, and local $C^\infty$ convergence to $J_\infty$. Let $u_n:\mathbb R\times[0,1]\to X$ be smooth solutions of $(u_n)_s+J_n(s,t,u_n)(u_n)_t=0$, with $u_n(s,j)\in L_j$ for $j=0,1$, where $L_j$ is the fixed boundary submanifold at edge $j$. Suppose their energies are at most $E_0$. Suppose $p_n\to p$ in the strip, including its boundary, and $|du_n(p_n)|_g\to\infty$.
 
 After taking a subsequence, translations and positive conformal dilations about points tending to $p$ give a nonconstant smooth map $v$ on either $\mathbb C$ or the closed upper half-plane, satisfying the autonomous equation $v_s+J_\infty(p,v)v_t=0$, with energy at most $E_0$. In the half-plane case its real-axis boundary lies in the boundary submanifold at $p$. Its derivative has norm one at some finite point, and its derivative norm is at most two everywhere. There is a constant $\hbar>0$ depending only on the uniform geometric data, independent of the sequence, such that $E(v)\ge\hbar$.
 
@@ -52,3 +74,7 @@ At the upper strip edge an orientation-preserving half-plane coordinate is used.
 4.1 Let $v$ be the limit. The equation and boundary condition pass to the limit. Its derivative norm is one at zero in the plane-center case, and at $ih$ in the bounded-height case: convergence is $C^1$ on a fixed compact neighborhood of those moving points. Its derivative norm is at most two by the same convergence, so it is nonconstant. A translation and dilation of a two-dimensional source preserves Dirichlet energy, since the squared derivative scaling cancels the area scaling. Therefore every compact-region energy of the rescaled maps is at most $E_0$, and passage to the smooth limit followed by exhaustion gives $E(v)\le E_0$. [step 2.1, step 3.1, algebra]
 
 5.1 Finally choose fixed constants $r_*>0$, $\varepsilon_*>0$, and $C_*>0$ giving the interior center and boundary half-radius supremum estimates of [F1] in the metric $g$, uniformly for every possible autonomous limit $J_*$. This is possible from the uniform coefficient bounds and the two fixed boundary structures; decrease $r_*$ below $1/4$ if necessary. If a derivative-norm-one point of $v$ in the plane, or in the half-plane at height at least $r_*/4$, is considered, apply the interior estimate on a radius-$r_*/8$ disk about it. If its half-plane height is below $r_*/4$, apply the boundary supremum estimate on the radius-$r_*$ half-disk centered at its boundary foot. If total energy is at least $\varepsilon_*$ there is already a positive lower bound. Otherwise the relevant small-energy estimate gives $$1\le\frac{64C_*}{r_*^2}E(v).$$ Consequently $$\hbar=\min\{\varepsilon_*,r_*^2/(64C_*)\}>0$$ is a uniform lower bound for the energy of this nonconstant bubble. This proves exactly the asserted plane or half-plane result, without filling its point at infinity. [F1, step 4.1, construct, algebra] ∎
+
+## Source history
+
+The former metadata cited McDuff–Salamon's book and Ozsváth–Szabó §10. Their complete cited ranges were not read in this repair; neither is used as source-coverage evidence. The current precise alternate references above were actually read, while every analytic implication still uses the stated local suppliers.

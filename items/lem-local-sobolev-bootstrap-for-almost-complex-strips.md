@@ -1,11 +1,13 @@
 ---
 id: lem-local-sobolev-bootstrap-for-almost-complex-strips
 kind: lemma
-title: "Local higher derivative bounds for almost complex maps with bounded first derivative"
-status: draft
+title: Local higher derivative bounds for almost complex maps with bounded first derivative
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, def-sobolev-space-wkp-and-its-norm]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- def-sobolev-space-wkp-and-its-norm
 dependency_level: 0
 justified_by: []
 aliases: []
@@ -15,8 +17,24 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, elliptic regularity for the Cauchy–Riemann equation"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Chris Wendl, Lectures on Holomorphic Curves in Symplectic and Contact Geometry,
+      version 3.2
+    url: https://arxiv.org/pdf/1011.1690
+    locator: 'Printed pp. 48–54, Theorem 2.62 and Proposition 2.64: local elliptic bootstrapping
+      context. The explicit H1/H2 estimates, real-boundary absorption and smooth-solution
+      Sobolev induction are proved locally below.'
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-sobolev-space-wkp-and-its-norm: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-05
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
@@ -35,7 +53,7 @@ The constants depend only on $m,M,\rho,k$ and finitely many of the indicated coe
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice and the domain, coefficient data, compact coordinate set, smooth solution, first-derivative bound, and principal coefficient smallness in the statement. The $H^k$ norms are the sums of squared $L^2$ norms of weak derivatives through order $k$, with the convention of [[def-sobolev-space-wkp-and-its-norm]]; for these smooth maps they are ordinary derivative norms.
+**Given:** Countable Choice and the domain, coefficient data, compact coordinate set, smooth solution, first-derivative bound, and principal coefficient smallness in the statement. The $H^k$ norms are the square roots of the sums of squared $L^2$ norms of weak derivatives through order $k$, with the convention of [[def-sobolev-space-wkp-and-its-norm]]; for these smooth maps they are ordinary derivative norms.
 
 
 
@@ -50,3 +68,7 @@ The constants depend only on $m,M,\rho,k$ and finitely many of the indicated coe
 3.1 For the general induction assume the local $H^k$ bound, $k\ge3$, on a slightly larger patch. Differentiating $k$ times in $s$ gives $$D_0(\partial_s^k u)=(i-J)\partial_t\partial_s^k u+F_k.$$ Repeated chain and product rules express $F_k$ as finitely many products of bounded coefficient derivatives and derivatives of $u$ of orders at most $k$, with sum of their orders at most $k+1$; the sole order-$k+1$ term was separated as the principal term. For $k=3$, the only product not directly bounded by the $C^1$ bound times an $H^3$ norm has two second derivatives, which are $L^4$ by step 1.1 applied to the $H^3$ bound. Their product is $L^2$. For $k\ge4$, derivatives of orders at most $k-2$ are locally bounded by step 1.1. A factor of order $k$ can only be accompanied by total derivative order at most one, and a factor of order $k-1$ by total order at most two; in either case put that high-order factor in $L^2$ and the remaining factors in $L^\infty$. There cannot be two factors of order $k-1$, since $2k-2>k+1$ for $k\ge4$. If all factors have orders at most $k-2$, they are bounded and their product is $L^2$ on the finite patch. This controls every term of $F_k$. Step 1.2 now bounds the derivatives of $\partial_s^k u$, with real boundary values retained. To recover an order-$k+1$ derivative with at least two $t$ derivatives, differentiate $u_t=Ju_s$ $k$ times. Its principal term has one fewer $t$ derivative than the derivative on the left, and all other terms are controlled by the same product argument using derivatives through order $k$. Induction on the number of $t$ derivatives bounds them all. This completes the Sobolev induction. [step 1.1, step 1.2, step 2.1, algebra]
 
 4.1 For each requested derivative order $j$, obtain the $H^{j+2}$ bound on a slightly larger patch from the preceding Sobolev induction. Multiply each $D^ju$ by a cutoff and use the $H^2\to L^\infty$ estimate of step 1.1, including its explicit half-plane extension when needed. This bounds $\sup|D^ju|$ on the desired smaller patch. For any fixed $k$ only finitely many nested radii and coefficient derivatives are used; their constants depend solely on the data stated. All differentiations are of given smooth solutions, so no weak regularity or hidden choice-dependent elliptic theorem has been invoked. [step 1.1, step 2.1, step 3.1, algebra] ∎
+
+## Remarks
+
+The earlier bibliography named Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, elliptic regularity for the Cauchy–Riemann equation (https://bookstore.ams.org/coll-52). The cited book full text was not available in this review; no reading of that edition is asserted. The current reference records the actually read alternate context, while the complete local proof above carries the stated claim.

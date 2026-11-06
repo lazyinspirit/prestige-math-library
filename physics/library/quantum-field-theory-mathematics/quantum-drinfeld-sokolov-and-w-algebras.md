@@ -1,0 +1,78 @@
+---
+page: quantum-drinfeld-sokolov-and-w-algebras
+title: Quantum Drinfeld Sokolov And W Algebras
+status: published
+library: mathematics
+items:
+  - def-cft-finite-dimensional-simple-lie-algebra
+  - lem-cft-affine-off-critical-shapovalov-and-linkage
+  - lem-cft-wzw-integrable-affine-highest-weight-modules-exist-positive-energy
+  - def-cft-fixed-coordinate-sphere-virasoro-block-family
+  - lem-cft-virasoro-verma-module-has-unique-simple-quotient
+  - def-cft-nilpotent-element-in-simple-lie-algebra
+  - lem-cft-root-system-of-simple-lie-algebra-is-irreducible
+  - lem-cft-affine-admissible-bgg-resolution
+  - def-cft-wzw-insertion-data
+  - lem-cft-sphere-stress-tensor-ward-identity
+  - def-cft-root-data-for-principal-w-levels
+  - thm-cft-jacobson-morozov-for-nilpotent-elements
+  - lem-cft-affine-finite-polarization-determinant
+  - def-cft-wzw-sphere-current-coinvariants
+  - lem-cft-pairwise-casimirs-satisfy-infinitesimal-braid-relations
+  - def-cft-wzw-unordered-label-fiber
+  - def-cft-principal-admissible-level
+  - def-cft-w-algebra-good-grading
+  - def-cft-slodowy-slice
+  - lem-cft-affine-admissible-wakimoto-resolution
+  - lem-cft-wzw-sphere-current-ward-identity
+  - def-cft-affine-w-algebra-via-brst
+  - lem-cft-principal-level-affine-admissibility
+  - lem-cft-principal-gauge-torsor-and-equivariant-constraint-acyclicity
+  - thm-cft-affine-w-brst-pbw
+  - lem-cft-affine-zhu-quotient-and-integrable-descent
+  - lem-cft-equivariant-arc-module-classical-brst-exactness
+  - lem-cft-affine-integral-root-and-module-transports
+  - lem-cft-principal-quotient-li-tail-regularity-and-strictness
+  - lem-cft-principal-whittaker-universal-equivalence
+  - lem-cft-admissible-sl2-vacuum-null-polynomial
+  - lem-cft-harish-chandra-bimodule-principal-reduction-exact-and-strict
+  - lem-cft-finite-whittaker-coinvariants-exact
+  - lem-cft-affine-parabolic-simple-levi-restriction
+  - lem-cft-principal-voa-zhu-brst-quotient-comparison
+  - lem-cft-admissible-affine-rank-one-c2-symbol
+  - thm-cft-principal-admissible-affine-module-classification
+  - lem-cft-principal-minus-ds-verma-and-induced-k-complex
+  - lem-cft-principal-spectral-flow-contragredient-phase-bridge
+  - lem-cft-principal-admissible-affine-nilcone-and-nonzero-reduction
+  - lem-cft-principal-central-reduction-characters-and-semisimplicity
+  - thm-cft-wzw-knizhnik-zamolodchikov-equations
+  - thm-cft-bpz-equation-from-level-two-null-vector
+  - lem-cft-principal-minus-ds-dual-verma-cyclic-filtration
+  - thm-cft-kz-flatness-and-braid-monodromy
+  - lem-cft-principal-minus-ds-exactness-and-minimal-series-extensions
+  - lem-cft-principal-w-arbitrary-admissible-semisimplicity
+requires:
+  - affine-lie-algebras-and-loop-central-extensions
+  - affine-reflections-coroot-translations-and-alcoves
+  - artinian-rings-and-length
+  - canonical-roots-signs-and-faithful-reflections
+  - cartan-subalgebras-and-root-space-decompositions
+  - integrable-highest-weight-kac-moody-modules
+  - inverse-limits-and-noetherian-completion
+  - lie-algebra-cohomology-and-kostants-nilradical-theorem
+  - projective-functors-and-the-soergel-functor-in-category-o
+  - lie-algebra-representations-enveloping-algebras-and-pbw
+  - qftx-kz-chiral-interface
+  - zhu-rationality-and-modular-interfaces
+  - highest-weight-theory-for-complex-semisimple-lie-algebras
+  - kac-moody-algebras-from-generalized-cartan-matrices
+  - punctured-disks-mapping-classes-and-point-pushing
+  - harish-chandra-isomorphism-casimir-and-central-characters
+  - riemann-curvature-and-riemannian-submanifolds
+  - pointed-curves-chiral-algebras-and-coinvariants
+  - cft-worldsheet-moduli-sewing-and-higher-genus
+  - vertex-modules-intertwiners-and-fusion
+order: 1085
+companion: quantum-drinfeld-sokolov-and-w-algebras-examples
+page_layout: compact-v1
+---

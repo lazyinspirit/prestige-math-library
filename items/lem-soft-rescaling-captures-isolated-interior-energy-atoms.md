@@ -1,12 +1,17 @@
 ---
 id: lem-soft-rescaling-captures-isolated-interior-energy-atoms
 kind: lemma
-title: "Soft rescaling captures an isolated interior energy atom"
-status: draft
+title: Soft rescaling captures an isolated interior energy atom
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-smooth-strip-compactness-away-from-energy-concentration, lem-rescaled-strip-energy-concentration-produces-a-finite-energy-bubble, lem-finite-energy-almost-complex-puncture-removability, lem-small-local-energy-cylinder-neck-collapse]
-dependency_level: 6
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-smooth-strip-compactness-away-from-energy-concentration
+- lem-rescaled-strip-energy-concentration-produces-a-finite-energy-bubble
+- lem-finite-energy-almost-complex-puncture-removability
+- lem-small-local-energy-cylinder-neck-collapse
+dependency_level: 5
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -15,9 +20,24 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Aleksey Zinger, Notes on J-Holomorphic Maps"
-      url: "https://arxiv.org/abs/1706.00331"
-      locator: "Complete proofs of Lemma 5.2, Corollary 5.3 and Proposition 5.5, printed pages 39–46, read in full"
+  - title: Aleksey Zinger, Notes on J-Holomorphic Maps
+    url: https://arxiv.org/pdf/1706.00331v1
+    locator: Complete proofs of Lemma 5.2, Corollary 5.3 and Proposition 5.5, printed pages 39–46, read in full
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-smooth-strip-compactness-away-from-energy-concentration: mathematical-premise
+  lem-rescaled-strip-energy-concentration-produces-a-finite-energy-bubble: mathematical-premise
+  lem-finite-energy-almost-complex-puncture-removability: mathematical-premise
+  lem-small-local-energy-cylinder-neck-collapse: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-05
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
@@ -26,12 +46,12 @@ Assume Countable Choice. Fix compact $(X,g)$ and smooth almost complex families 
 
 There is a uniform constant $h>0$ depending only on these geometric bounds such that $m\ge h$ and, after a subsequence, there are centers $z_n\to0$, scales $\rho_n\to0$, an autonomous $J_\infty(0,\cdot)$-holomorphic sphere $v$, a finite set $Z\subset\mathbb C$, and positive masses $m_z$ for $z\in Z$, satisfying:
 
-- $v_n(w)=u_n(z_n+\rho_n w)$ converges smoothly locally on $\mathbb C\setminus Z$ to $v$;
+- $v_n(w)=u_n(z_n+\rho_n w)$, with $E_g(v_n;B_1)=m-h/2$, converges smoothly locally on $\mathbb C\setminus Z$ to $v$, which may be constant;
 - $\lim_{R\to\infty}\lim_n E_g(v_n;B_R)=m=E_g(v)+\sum_{z\in Z}m_z$, and $v(\infty)=u(0)$;
 - each $m_z$ is the energy atom of $v_n$ at $z$, and $h\le m_z\le m-h$;
 - if $v$ is constant, then $|Z|\ge2$.
 
-The constant $h$ can be chosen uniformly for subsequent rescalings of these data. A constant sphere therefore has at least three attachment points when infinity is included. This is a single actual rescaling step, not an assumed compactification theorem.
+The separate gradient-normalized rescaling used to prove $m\ge h$ has derivative norm one at its normalization point and norm at most two on its expanding domains; that normalization is not asserted for $v$. The constant $h$ can be chosen uniformly for subsequent rescalings of these data. A constant sphere therefore has at least three attachment points when infinity is included. This is a single actual rescaling step, not an assumed compactification theorem.
 
 ## Statement references
 

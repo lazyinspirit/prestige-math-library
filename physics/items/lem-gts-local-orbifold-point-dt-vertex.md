@@ -1,0 +1,172 @@
+---
+id: lem-gts-local-orbifold-point-dt-vertex
+kind: lemma
+title: Colored orbifold point vertex and central DT extraction
+status: published
+origin: pipeline
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+domain: mathematics
+library: physics
+category: string-theory
+axiom_use: ZF + AC
+deps:
+  - def-gts-local-p1p1-dt-and-analytic-wall-crossing-data
+  - lem-gts-symmetric-obstruction-virtual-class-is-aluffi-class
+  - def-gts-perfect-obstruction-theory-and-intrinsic-normal-cone
+  - def-axiom-of-choice
+dependency_roles:
+  def-gts-local-p1p1-dt-and-analytic-wall-crossing-data: mathematical-premise
+  lem-gts-symmetric-obstruction-virtual-class-is-aluffi-class: mathematical-premise
+  def-gts-perfect-obstruction-theory-and-intrinsic-normal-cone: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: Bridgeland, Del Monte and Giovenzana, Invariant Stability Conditions on Certain Calabi-Yau Threefolds
+      url: https://arxiv.org/pdf/2412.08531v1
+      locator: "Section4.3 displays the source vertex product; the signs, interlacing product and Hall extraction are reconstructed below. No full-text reading of its cited Bryan–Cadman–Young proof is claimed."
+verification:
+  precheck: pending
+  judge:
+    model: gpt-6-luna
+    verdict: pass
+    date: 2026-11-06
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
+dependency_level: 6
+---
+
+## Statement
+
+Assume the Axiom of Choice. Let $Y=Tot_{(P1)}(O(−1)⊕O(−1))$, let $H=Z2$ act by −1 on both fibers, and use the GIVEN source Behrend-weighted Poisson DT integration and two character-framing conventions of [[def-gts-local-p1p1-dt-and-analytic-wall-crossing-data]]. Let δ0,δ1 denote the two character classes of a point on the fixed zero section. The raw weighted trivial-character framed partition function is
+$$Z_{\chi_0}(q_0,q_1)=\prod_{m\ge1}(1-(-q_0)^m q_1^{m-1})^{-2m}(1-(-q_0)^m q_1^{m+1})^{-2m}(1-(-q_0)^m q_1^m)^{-4m},$$
+and the other framing exchanges the characters and its corresponding raw sign. In the unframed source normalization, the positive central BPS invariants are $Ω((n+1)δ0+nδ1)=Ω(nδ0+(n+1)δ1)=−2$ for $n≥0$ and $Ω(n(δ0+δ1))=−4$ for $n≥1$, with all other nonzero positive pairs zero. The proof constructs the cyclic critical charts, proves their Behrend signs and colored product, and derives framed-to-unframed extraction from the GIVEN map; it does not assert existence of a general weighted DT theory.
+
+## Facts & Assumptions
+
+**Given:** Work with $R=C[x,y,z]$, $t=xyz$, $T0=\{(t1,t2,t3)∈(C*)³:t1t2t3=1\}$, and the Z² grading deg $x=e1$, deg $y=e2$, deg $z=−e1−e2$. For a finite order ideal $π⊂N³$ let Iπ be its monomial ideal, $V=R/Iπ$ of length n, and $l_w=\operatorname{dim} V_w$. In the colored case n0,n1 are the dimensions of the two character subspaces. The category, two characters, and actual weighted integration datum are those of the Statement, including its framing module and the definition $H=−\sum barΩ x^γ$ with $barΩ(γ)=\sum _{(k|γ)}Ω(γ/k)/k²$. Raw framing variables and oriented unframed variables are related as stated in the data definition; no desired numerical Ω value is an assumption.
+
+[F1] [[def-gts-local-p1p1-dt-and-analytic-wall-crossing-data]] fixes the actual weighted map domain/codomain, Poisson and framing compatibility, smooth-atlas sign and multicover normalization. Its existence is GIVEN for this package, not deduced from unweighted Euler integration.
+
+[F2] [[lem-gts-symmetric-obstruction-virtual-class-is-aluffi-class]] proves locally that the gradient normal cone is a conic Lagrangian sum of conormals with its actual multiplicities and canonical cycle $\sum (−1)^{\dim Z} m_Z[Z]$. Its proof gives the extended Rees graph specialization and Nash kernel/quotient Gysin calculation. We reconstruct the required LOCAL relative index below; no unproved proper Euler theorem or general critical-Milnor identity is used.
+
+[F3] [[def-gts-perfect-obstruction-theory-and-intrinsic-normal-cone]] fixes the normal cone and canonical-cycle setup, and [[def-axiom-of-choice]] is the actual ambient premise inherited by the cone interfaces.
+
+## Proof
+
+1.1 The entire T0-fixed Hilbert deformation is rigid. For each $w∈Z²$ there is a unique nonnegative monomial $m_w$ of weight w with at least one exponent zero. Every monomial of that weight is $m_w t^a$ for $a≥0$, so $R_w=m_w$ C[t]. [F1, F2, F3, given, algebra]
+
+2.1 In a T0-equivariant flat family over a local Artin C-algebra S, its weight-w quotient is free of rank $l_w$ and cyclic as S[t]-module, generated by $m_w$ acting on the framing vector. Indeed it is a quotient of the free cyclic module $R_w⊗S$ and Nakayama's lemma lifts the basis $1,t,…,t^{(l_w−1)}$ from the monomial special fiber. Its annihilator is a unique monic polynomial of degree $l_w$; the coefficients can be read from the multiplication matrix of t in that basis. [F1, F2, F3, step 1.1, algebra]
+
+3.1 Let A,B,C denote the commuting multiplication maps x,y,z of this graded quotient. On $V_w$, $t=ABC$. Rectangular trace cyclicity gives $Tr(t^k|V_w)=Tr(t^k|V_{(w+e1)})$,   $k≥1$. [F1, F2, F3, step 2.1, algebra]
+
+4.1 For clarity factor $t^k|V_w$ as A·(BC $t^{(k−1)}$), where $A:V_{(w−e1)}→V_w$; the reversed composition is $t^k$ on the neighboring weight because all three maps commute. The same identity holds with either sign of the displacement wherever one of the spaces is zero, by the same rectangular trace identity. Thus the trace is constant along every e1-chain of weights. Its support is finite, so it is zero. The argument works over S and for every k; it is not merely a calculation on the reduced special fiber. [F1, F2, F3, step 3.1, algebra]
+
+5.1 Newton's identities over the characteristic-zero algebra S now give $\operatorname{det}(λ−t|V_w)=λ^{(l_w)}$. [F1, F2, F3, step 4.1, algebra]
+
+6.1 For a free cyclic S[t]-module with the above basis, this characteristic polynomial is its monic defining relation. Therefore its defining relation is exactly $t^{(l_w)}$, with no infinitesimal correction. Since this fixes the kernel separately in EVERY weight and the ideal is homogeneous, the entire deformed ideal is $Iπ⊗S$. The T0-fixed Hilbert functor at Iπ is consequently the reduced isolated point, not a nonreduced fixed scheme. In particular $\operatorname{Hom}_R(Iπ,R/Iπ)^T0=0$. [F1, F2, F3, step 5.1, algebra]
+
+7.1 This trace argument also explains why the extra invariant monomials $(xyz)^a$ cannot be used to infer fixed tangent directions: commutativity and cyclicity force all their possible coefficient deformations to vanish. [F1, F2, F3, step 6.1, algebra]
+
+8.1 Parity of the fixed cyclic-matrix ambient tangent. The smooth cyclic-matrix chart is $U=(End(V)^{3}×V)^{\mathrm{cyclic}}$ /GL(V),     $f=Tr$ A[B,C]. [F1, F2, F3, step 7.1, algebra]
+
+9.1 The cyclic condition makes the action free: an automorphism commuting with A,B,C and fixing the cyclic vector fixes its spanning words and is the identity. Thus U is smooth of dimension $3n²+n−n²=2n²+n$. The critical equations are $[A,B]=[B,C]=[C,A]=0$; differentiation with respect to the framing vector contributes none. Their quotient is $Hilb_n(C³)$. T0 acts on U preserving f. [F1, F2, F3, step 8.1, algebra]
+
+10.1 At the monomial point, the tangent character of U is $End(V)⊗(t1+t2+t3−1)+V$, [F1, F2, F3, step 9.1, algebra]
+
+11.1 where the final V is the framing and the −End(V) is the infinitesimal gauge action. Hence the fixed ambient tangent dimension is $m0=\sum _{(w,j=1..3)} l_w l_{(w+ej)}−\sum _w l_w²+l_0$.               (A) [F1, F2, F3, step 10.1, algebra]
+
+12.1 We prove m0 even for every finite order ideal π, by adding its boxes in any order consistent with divisibility. Suppose an addable box is $x^i y^j z^k$, with w its weight and $h=\operatorname{min}(i,j,k)$. Before addition the six neighboring weight multiplicities are $l_{(w+e1)}=\operatorname{min}(i+1,j,k)$,       $l_{(w−e1)}=\operatorname{min}(i,j+1,k+1)$,     $l_{(w+e2)}=\operatorname{min}(i,j+1,k)$,       $l_{(w−e2)}=\operatorname{min}(i+1,j,k+1)$,     $l_{(w+e3)}=\operatorname{min}(i,j,k+1)$,       $l_{(w−e3)}=\operatorname{min}(i+1,j+1,k)$. [F1, F2, F3, step 11.1, algebra]
+
+13.1 For example $x^{(i+1)}y^jz^k$ is outside the old ideal π because it is a multiple of the new box; dividing it by xyz, when possible, is a proper divisor of the new box and hence inside. Its diagonal string therefore has exactly min(i+1,j,k) old boxes. The other five identities follow in the same way, including boundary exponents zero. [F1, F2, F3, step 12.1, algebra]
+
+14.1 Let m be the number of i,j,k attaining h. The sum of the displayed six minima is $6h+2^{(3−m)}−1$. [F1, F2, F3, step 13.1, algebra]
+
+15.1 Indeed a minimum increases from h to h+1 exactly when the nonempty proper subset of coordinates being incremented contains every minimal coordinate; there are $2^{(3−m)}−1$ such subsets. This sum is odd for $m=1$ or2 and even for $m=3$. The new box has $w=0$ exactly in the latter case $i=j=k$. [F1, F2, F3, step 14.1, algebra]
+
+16.1 Adding the box increases (A) by the neighbor sum minus $(2l_w+1)$ plus $δ_{(w,0)}$. This is even in all three cases. Starting from the empty partition, m0 is therefore even. [F1, F2, F3, step 15.1, algebra]
+
+17.1 Equivariant minimal chart. The Hessian of the T0-invariant f pairs opposite weights. All its nonzero-weight nondegenerate pairs have even rank. By the rigidity calculation its kernel has NO invariant tangent direction, so on the weight-zero ambient tangent space it is nondegenerate and has rank m0, also even by the parity calculation. Thus the total Hessian rank is even. Its kernel dimension is consequently [F1, F2, F3, step 16.1, algebra]
+
+18.1 dim ker Hess(f) ≡ dim U ≡ n mod2. [F1, F2, F3, step 17.1, algebra]
+
+19.1 Choose a T0-invariant complement v to the kernel coordinates u. The implicit-function theorem applied to $∂_v$ f gives a unique equivariant solution $v=φ(u)$; shift by it. Then $f=g(u)+\tfrac12v^t$ H(u,v)v with H analytic symmetric and $H(0,0)=H0$ nonsingular. The convergent matrix square-root series $S=(H0^{(−1)}H)^{(1/2)}$, near the identity, is H0-self-adjoint and satisfies $S^t$ H0 $S=H$. Thus $v'=S(u,v)v$ is an equivariant analytic coordinate change and splits $f=g(u)+\tfrac12v'^tH0v'$ exactly. Equivariance follows because the square-root power series commutes with conjugation and H0 is invariant. This proves the parameter-dependent equivariant Morse step directly. The minimal critical chart has tangent ker Hess(f), no fixed tangent, and dimension congruent to n. For completeness, linearize a compact torus action by choosing a local holomorphic coordinate h with derivative identity and replacing it by $F(z)=\int _Kρ(k)^{(−1)}h(kz)dk$, where ρ is the tangent action; F has derivative identity and is equivariant, so its local holomorphic inverse gives linear coordinates. The fixed ambient germ is therefore an isolated point. [F1, F2, F3, step 18.1, algebra]
+
+20.1 Local Nash and Thom index. For a smooth critical chart $X=Crit(f)$ in U, the complex $[T_U|X→Ω_U|X]$ with differential Hess(f) is its actual symmetric POT: the map in degree−1 sends the coordinate tangent basis to the generators ∂f of I/I², is surjective there, and gives the cotangent truncation with $h0=Ω_X$; Hessian symmetry gives its symmetric structure. Thus F2 applies to these charts. We use the following direct local index argument. We prove the needed special case directly. The actual local supplier `lem-gts-symmetric-obstruction-virtual-class-is-aluffi-class`, steps 11–15 and21–25, proves that the normal cone of an almost-closed one-form is a conic Lagrangian cycle and is the sum of its conormal components with their actual generic multiplicities; for df the same cone is the zero fiber of the extended Rees family M[t,I/t], whose nonzero fibers are $graphs(t^{(−1)}df)$. Its canonical cycle is $\sum _Z(−1)^{\dim Z} m_Z[Z]$, and ν is its local Euler obstruction. We use precisely these actual local conclusions, not the separate unproved proper Euler-index theorem. [F1, F2, F3, step 19.1, algebra]
+
+21.1 Suppose f is holomorphic on a smooth m-dimensional ambient germ U, invariant under a compact circle acting linearly in invariant local coordinates, with NO zero ambient weights. Let $p=0$. Let $w=\sum $ i $a_j z_j∂_{(z_j)}$ be its holomorphic circle-generator vector field, $a_j$ nonzero integers. Choose an invariant Hermitian metric and a small invariant ball transverse to the strata of the analytic cone supports. The field w is tangent to its boundary sphere, vanishes only at p, and is tangent to every circle-invariant support stratum. Choose a radial stratified field v pointing strictly outward on that boundary, as in the defining local Nash obstruction; its lift to every Nash tangent bundle is nonzero there. The boundary homotopy [F1, F2, F3, step 20.1, algebra]
+
+22.1 (1−s)v+s w,   $0≤s≤1$, [F1, F2, F3, step 21.1, algebra]
+
+23.1 is nonzero: for $s<1$ its outward component is positive, and at $s=1$ w has no zero away from p. Both fields lift to the Nash tangent bundle, since w preserves the support and hence lies in its smooth tangent spaces and their limits. Thus the local obstruction defining $Eu_Z(p)$ is exactly the localized top Chern index of the Nash tangent bundle with the boundary section w. One may construct v by the defining radial extension on a finite local stratification, extending controlled tangent fields with a partition of unity; the transversality of the chosen sphere supplies its positive outward component. [F1, F2, F3, step 22.1, algebra]
+
+24.1 Now let $w^{\flat}$ be the complex covector obtained by Hermitian duality. Its projection to the Nash cotangent quotient $Q_Z$ is the Hermitian dual of the Nash tangent section w. Hermitian duality is ANTI-complex-linear on rank dim Z and has real orientation sign $(−1)^{\dim Z}$. Consequently the localized Euler index of this projected cotangent section is $(−1)^{\dim Z} Eu_Z(p)$. [F1, F2, F3, step 23.1, algebra]
+
+25.1 The topological Thom/excess calculation for the conormal kernel bundle therefore identifies the local intersection of $graph(w^{\flat})$ with its conormal cycle with that number. This is the local version of the actual supplier's Nash kernel/Gysin calculation: pull back to the Nash modification, intersect the kernel subbundle with the graph, and take the Euler class of its quotient $Q_Z$. It is a direct relative Thom-class calculation on a small ball, so no proper pushforward-to-a-point or global CSM Euler theorem is being imported. In particular, summing the conormal components with multiplicities gives $local_{intersection}(C_{(Crit f/U)}, graph(εw^{\flat})) = ν_{(Crit f)}(p)$,  $ε≠0$ small. (D) [F1, F2, F3, step 24.1, algebra]
+
+26.1 The local argument remains valid in this holomorphic Morse chart: use the analytic extended Rees algebra of the finitely generated gradient ideal, whose nonzero fibers are the stated graphs and whose zero fiber is its associated-graded normal cone. Its Lagrangian/conormal description follows either from the same closed symplectic-form limit argument or from the actual local almost-closed-form calculation. The canonical signed normal-cone cycle and its Nash Euler obstruction are intrinsic under the analytic coordinate changes and cancellation of nonsingular quadratic variables; product-embedding comparison adds a vector-bundle cone factor exactly as in the actual supplier. Thus no assertion about arbitrary nonproper analytic spaces is being imported from that supplier’s algebraic Statement. [F1, F2, F3, step 25.1, algebra]
+
+27.1 All intersections are supported at p. Indeed at a smooth point of a support Z the conormal annihilates w, and the same holds by closure; $w^{\flat}(w)=||w||²$ is nonzero off p. This also makes the local intersection proper in the necessary relative sense. [F1, F2, F3, step 26.1, algebra]
+
+28.1 Specialize the explicit extended Rees graph family to its cone. For $t≠0$ the graph intersection equation is $df=t$ ε $w^{\flat}$. [F1, F2, F3, step 27.1, algebra]
+
+29.1 Contract with w. Invariance gives $df(w)=0$, whereas $w^{\flat}(w)=||w||²$. Thus this equation has no solution off p, uniformly as t tends to0. The same argument applies during the homotopy s $df=t$ ε $w^{\flat}$, $0≤s≤1$. The local oriented intersection number is therefore the degree of the nonsingular ANTI-complex-linear map −t ε $w^{\flat}$ at p, namely $(−1)^m$. Conservation under Rees specialization identifies it with the left side of (D). Explicitly, cap the Rees fundamental cycle with the relative Thom class of the graph inside the fixed small ball; there is no boundary intersection by the contraction argument, so the cobordism between nearby and special fibers preserves the local cap degree. The special-fiber cycle has exactly the normal-cone multiplicities, as established by the extended Rees construction. This is conservation of local intersection number, not an assertion that the possibly nonreduced cone is a smooth family. [F1, F2, F3, step 28.1, algebra]
+
+30.1 We have proved the specialized identity $ν_{(Crit f)}(p)=(−1)^m$                                      (E) [F1, F2, F3, step 29.1, algebra]
+
+31.1 whenever the invariant ambient circle action has an isolated fixed point. This does NOT require the original, larger cyclic-matrix ambient fixed locus to be isolated. [F1, F2, F3, step 30.1, algebra]
+
+32.1 Apply (E) to the equivariant minimal critical chart from the preceding calculation. Its Hessian-removed rank is even, and its ambient dimension has parity n; hence $ν(Iπ)=(−1)^n$ for the ordinary three-variable Hilbert scheme. For the colored chart its parity is n0, giving $ν(Iπ)=(−1)^n0$. This proves the required Behrend signs directly by the local index calculation. [F1, F2, F3, step 31.1, algebra]
+
+33.1 Colored vertex product. Color a box $x^i y^j z^k$ by j+k modulo2; these are the characters for the action $(x,y,z)→(x,−y,−z)$. Put $q_d=q0$ for d even and $q_d=q1$ for d odd. Slicing a three-dimensional partition by $d=j−k$ gives interlacing ordinary partitions $λ_d$, eventually empty in both directions. Every box in slice d has color d modulo2. Its generating weight is therefore $\prod _d q_d^{(|λ_d|)}$. [F1, F2, F3, step 32.1, algebra]
+
+34.1 The only identity required to sum these slices is the one-variable interlacing identity. If ν/λ and ν/μ are horizontal strips, put [F1, F2, F3, step 33.1, algebra]
+
+35.1 $k=ν1−\operatorname{max}(λ1,μ1)$,     $κ_i=\operatorname{min}(λ_i,μ_i)+\operatorname{max}(λ_{(i+1)},μ_{(i+1)})−ν_{(i+1)}$. [F1, F2, F3, step 34.1, algebra]
+
+36.1 Then $k≥0$, and κ is interlaced below both λ and μ; conversely these formulas reconstruct ν from such a κ and k. The bounds on $κ_i$ are exactly $\operatorname{max}(λ_{(i+1)},μ_{(i+1)})≤κ_i≤\operatorname{min}(λ_i,μ_i)$. The size relation is $|ν|=|λ|+|μ|−|κ|+k$. Summing $(xy)^k$ proves $\sum _ν x^{(|ν|−|λ|)} y^{(|ν|−|μ|)}$       $= (1−xy)^{(−1)} \sum _κ x^{(|μ|−|κ|)} y^{(|λ|−|κ|)}$. [F1, F2, F3, step 35.1, algebra]
+
+37.1 Equivalently the horizontal-strip adding/removing operators commute with scalar factor $(1−xy)^−1$. This is a proved interlacing bijection, rather than a quoted Schur/Cauchy evaluation. [F1, F2, F3, step 36.1, algebra]
+
+38.1 Encode the negative-side additions by $x_i=\prod _{(d=−i+1)}^{0} q_d$, $i≥1$, and the positive-side removals by $y_j=\prod _{(d=1)}^{(j−1)}q_d$, $j≥1$. Commuting all additions past removals, with empty partitions at both ends, gives the vertex product $Z_{col}(q0,q1)=\prod _{(i,j≥1)}(1−\prod _{(d=−i+1)}^{(j−1)}q_d)^{(−1)}$. [F1, F2, F3, step 37.1, algebra]
+
+39.1 The infinite product is formal: the total degree of a factor's monomial is i+j−1, so only finitely many pairs contribute in any bounded degree. [F1, F2, F3, step 38.1, algebra]
+
+40.1 For an odd interval length 2m−1, $i+j=2m$. There are m pairs with both i,j odd; their monomial is $q0^m q1^{(m−1)}$. There are m−1 pairs with both even; their monomial is $q0^{(m−1)}q1^m$. For an even length 2m there are 2m pairs and the monomial is $q0^m q1^m$. Relabeling m−1 in the second case proves exactly $Z_{col} = \prod _{(m≥1)}$        $(1−q0^m q1^{(m−1)})^{(−m)}$        $(1−q0^m q1^{(m+1)})^{(−m)}$        $(1−q0^m q1^m)^{(−2m)}$.                                 (C) [F1, F2, F3, step 39.1, algebra]
+
+41.1 Setting $q0=q1=q$ gives $\prod _{(m≥1)}(1−q^m)^−m$, so this also proves the ordinary three-dimensional partition product as a special case. [F1, F2, F3, step 40.1, algebra]
+
+42.1 For the orbifold conifold there are two base torus fixed points; finite torus-fixed zero-dimensional quotients decompose into their two disjoint local summands. For completeness Euler localization here is elementary: embed the finite-type equivariant Hilbert presentation in a projective diagonal torus representation using its finite monomial Grassmannian charts. Stratify by the set of nonzero homogeneous coordinates. Each ambient stratum is a torus; its acting image subtorus splits off by an integral change of character basis. An invariant constructible subset and its invariant Behrend function are pulled back from that quotient. Every positive-dimensional acting torus has Euler characteristic zero, so only fixed strata survive. Thus compactly supported weighted Euler localization gives $Z_col²$. This squares all three exponents in (C), exactly the −2m,−2m,−4m product needed for the central ray. [F1, F2, F3, step 41.1, algebra]
+
+43.1 The colored critical chart has ambient dimension 4n0n1+n0: one even-coordinate loop on each character space, two odd-coordinate arrows in each direction, and a framing vector in the trivial space, minus the gauge dimension. Its parity is n0. The CY torus weight already determines color, since j+k≡j−k modulo2. Thus the fixed-deformation argument in the rigidity calculation and the even fixed-ambient-dimension calculation in the parity calculation apply unchanged to the colored chart. By the local index proof just given, its Behrend sign is $(−1)^n0$. The weighted product is accordingly $Z_{col}(−q0,q1)²$, with any further source sign variable convention stated explicitly rather than inferred by suppressing signs. [F1, F2, F3, step 42.1, algebra]
+
+44.1 The Hall identity itself. Let C be the category of compact zero-dimensional H-equivariant sheaves on the conifold, $H=Z2$, and add one framing generator of character χ0. An object with one framing is a pair $(F,s:O⊗χ0→F)$. It has a unique image subobject Im s generated by its framing and a quotient F/Im s with zero framing. This gives the factorization of its stack by a CYCLIC framed subobject followed by an unframed quotient. The opposite factorization takes the whole underlying F as unframed subobject followed by the bare framing. The equality follows as an equality of stack functions, by stratifying finite-dimensional presentation spaces by the rank/dimension vector of Im s; those strata are locally closed matrix-incidence conditions. Thus no wall-crossing formula for numerical invariants is assumed merely because it is wanted. [F1, F2, F3, step 43.1, algebra]
+
+45.1 Choose a basis of the one-dimensional framing, so its bare object has no remaining GL1 automorphism (equivalently multiply its unbased stack class by L−1). All framed stack functions use this same normalization. Writing a for the unframed Hall element and b for this normalized bare framing, this identity is a $b=b_{cyc}$ a,      hence $b_{cyc}=a$ b $a^{(−1)}$. [F1, F2, F3, step 44.1, algebra]
+
+46.1 This convention is fixed by the subobject-first order. Bounded total-degree truncations make all products finite; their compatible limit is the claimed completed identity. [F1, F2, F3, step 45.1, algebra]
+
+47.1 The unframed Euler form in C is ZERO. Locally the orbifold three-coordinate quiver has one loop at each character and two arrows in each direction between characters, so its skew form is zero. Globally objects supported at distinct points have no Ext, and the same balanced local form applies at a fixed point or a free orbit. With a framing arrow $∞→0$ the extended skew form satisfies $<γ,∞\ge n0(γ)$. Under the given integration interface F1 the conjugation identity becomes [F1, F2, F3, step 46.1, algebra]
+
+48.1 $I(b_{cyc})=\operatorname{exp}(ad H)x^∞$,     $H=−\sum  barΩ(γ)x^γ$. [F1, F2, F3, step 47.1, algebra]
+
+49.1 Because all unframed monomials commute in the Poisson Lie algebra, repeated adjoint action on $x^∞$ is multiplication by the successive powers of $−\sum $ n0(γ) $barΩ(γ)x^γ$. Therefore [F1, F2, F3, step 48.1, algebra]
+
+50.1 $I(b_{cyc})/x^∞ = \operatorname{exp}(−\sum  n0(γ) barΩ(γ)x^γ)$                 $= \prod _{(γ>0)}(1−x^γ)^(n0(γ) Ω(γ))$.                 (1) [F1, F2, F3, step 49.1, algebra]
+
+51.1 The last equality is an explicit formal series calculation: substitute the multicover sum, write $γ=kη$, and use $n0(γ)=kn0(η)$ to obtain $−\sum _{(η,k)}$ n0(η) $Ω(η)x^{(kη)}/k$. No tensor-flatness or multiplication-injection assertion enters this calculation. Character χ1 framing gives the identical formula with n1(γ) instead of n0(γ). [F1, F2, F3, step 50.1, algebra]
+
+52.1 Inserting the computed products. The colored-partition calculation above gives, after the framing variable sign is fixed by F1, $Z_0=\prod _{(m≥1)}$        $(1−x0^m x1^{(m−1)})^{(−2m)}$        $(1−x0^m x1^{(m+1)})^{(−2m)}$        $(1−x0^m x1^m)^{(−4m)}$.                                  (2) [F1, F2, F3, step 51.1, algebra]
+
+53.1 For χ1 framing, exchange x0 and x1. Both given framing conventions are needed: a single χ0 framing cannot detect the pure χ1 class (0,1), since its Euler pairing with that framing is zero. This invisible class must not be inferred from one product alone. [F1, F2, F3, step 52.1, algebra]
+
+54.1 Formal product exponents are unique. At each total degree, subtract the already-known contributions of proper multiples from the logarithmic coefficient; the remaining primitive exponent is determined, and induction determines every exponent. Applying this to (1)/(2) and their exchanged version proves $Ω((n+1)δ0+nδ1)=Ω(nδ0+(n+1)δ1)=−2$,  $n≥0$,     $Ω(n(δ0+δ1))=−4$,                            $n≥1$,     $Ω(sδ0+tδ1)=0$ for every other nonzero pair $s,t≥0$. [F1, F2, F3, step 53.1, algebra]
+
+55.1 Here $δ0=γ1+γ2$, $δ1=γ3+γ4$. The negative-class extension uses the shift symmetry of the source oriented 3CY DT normalization; it is not a sign change in the Behrend weight. This is exactly the CENTRAL part of the assigned target's spectrum. [F1, F2, F3, step 54.1, algebra] ∎

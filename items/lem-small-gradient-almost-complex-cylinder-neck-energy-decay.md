@@ -1,11 +1,14 @@
 ---
 id: lem-small-gradient-almost-complex-cylinder-neck-energy-decay
 kind: lemma
-title: "Exponential energy decay on small-gradient almost complex cylinder necks"
-status: draft
+title: Exponential energy decay on small-gradient almost complex cylinder necks
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-interior-energy-regularity-for-smooth-almost-complex-strips, thm-fourier-basis-and-parseval-on-the-n-torus]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-interior-energy-regularity-for-smooth-almost-complex-strips
+- thm-fourier-basis-and-parseval-on-the-n-torus
 dependency_level: 2
 justified_by: []
 aliases: []
@@ -15,8 +18,24 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, neck estimates"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Aleksey Zinger, Notes on J-Holomorphic Maps
+    url: https://arxiv.org/pdf/1706.00331v1
+    locator: 'Section 4.4, Proposition 4.16, Corollary 4.17 and Lemma 4.18, printed pp.34–36: autonomous closed-cylinder
+      energy/diameter decay and periodic Poincare context. The source-dependent small-gradient ODE estimate and
+      fixed embedding argument are proved locally below; no boundary-neck conclusion is attributed to this source.'
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-interior-energy-regularity-for-smooth-almost-complex-strips: mathematical-premise
+  thm-fourier-basis-and-parseval-on-the-n-torus: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement

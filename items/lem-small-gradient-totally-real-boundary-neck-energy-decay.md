@@ -1,11 +1,16 @@
 ---
 id: lem-small-gradient-totally-real-boundary-neck-energy-decay
 kind: lemma
-title: "Exponential energy decay on totally real boundary necks"
-status: draft
+title: Exponential energy decay on totally real boundary necks
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-interior-energy-regularity-for-smooth-almost-complex-strips, thm-fourier-basis-and-parseval-on-the-n-torus, thm-euclidean-inverse-function-theorem, thm-higher-regularity-of-local-inverses]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-interior-energy-regularity-for-smooth-almost-complex-strips
+- thm-fourier-basis-and-parseval-on-the-n-torus
+- thm-euclidean-inverse-function-theorem
+- thm-higher-regularity-of-local-inverses
 dependency_level: 2
 justified_by: []
 aliases: []
@@ -15,8 +20,27 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, boundary neck estimates"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Urs Frauenfelder and Kai Zehmisch, Gromov compactness for holomorphic discs with totally real boundary
+      conditions
+    url: https://arxiv.org/pdf/1403.6139v2
+    locator: 'Sections 2.1–2.3 and 3.1, Lemma 3.1, printed pp.4–9: totally real short-arc isoperimetry and boundary-annulus
+      concentration/distance estimates. The source treats autonomous maps in its bounded-image/height setting; the
+      fixed-J_b source-dependent C1 doubling and precise strip estimate are proved locally below.'
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-interior-energy-regularity-for-smooth-almost-complex-strips: mathematical-premise
+  thm-fourier-basis-and-parseval-on-the-n-torus: mathematical-premise
+  thm-euclidean-inverse-function-theorem: mathematical-premise
+  thm-higher-regularity-of-local-inverses: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement

@@ -1,11 +1,13 @@
 ---
 id: lem-heinz-half-disk-boundary-mean-value-estimate
 kind: lemma
-title: "A half-disk small-energy estimate with a nonlinear normal derivative bound"
-status: draft
+title: A half-disk small-energy estimate with a nonlinear normal derivative bound
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-classical-subharmonic-mean-value-inequalities]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-classical-subharmonic-mean-value-inequalities
 dependency_level: 0
 justified_by: []
 aliases: []
@@ -15,8 +17,25 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, mean value inequalities"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Urs Frauenfelder and Kai Zehmisch, Gromov compactness for holomorphic discs
+      with totally real boundary conditions, v2
+    url: https://arxiv.org/pdf/1403.6139v2
+    locator: Section 2.2, printed p. 5, small-energy map mean-value estimate with totally
+      real boundary, supplies geometric context. The scalar nonlinear normal-derivative
+      estimate, reflected measure atom and explicit constants are proved locally below;
+      no identical scalar theorem or proof is imported from this reference.
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-classical-subharmonic-mean-value-inequalities: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-05
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
@@ -52,3 +71,7 @@ No condition on the normal derivative at the curved edge is required. This is a 
 3.1 Apply step 1.2 to $F$ on a radius $0<\rho\le\ell$ about $z_0$; the endpoint radius follows by continuity if needed. The average of $|z-z_0|^2$ is $\rho^2/2$, and $\bigl||t|-|t_0|\bigr|\le\rho$ there. Hence $$M\le\frac1{\pi\rho^2}\int_{B_\rho(z_0)}\widehat e+M(2AM+B/2)\rho^2+M(8c\sqrt M+4d)\rho.$$ Choose $$\rho=\min\left\{\ell,\ \frac1{4\sqrt{AM}},\ \frac1{64c\sqrt M}\right\},$$ interpreting a term with zero denominator as $+\infty$. The two nonlinear error terms are at most $M/8$ each. The remaining terms satisfy $MB\rho^2/2\le MBr^2/8\le M/32$ and $4Md\rho\le2Mdr\le M/8$, because $\ell\le r/2$. Their sum is $13M/32<M/2$. Thus $$\int_{B_\rho(z_0)}\widehat e\ge\frac\pi2M\rho^2.$$ [step 1.2, step 2.1, given, construct, algebra]
 
 4.1 If $\rho<\ell$, one of the nonlinear terms determines the minimum, so $M\rho^2$ equals $1/(16A)$ or $1/(4096c^2)$, or their common minimum when both are present. In all cases $M\rho^2\ge1/H$. Step 3.1 would give $2E\ge\pi/(2H)$, contradicting $E<\pi/(8H)$. Therefore $\rho=\ell$. Step 3.1 then gives $M\ell^2\le4E/\pi$, and the center comparison in step 2.1 proves $e(0,0)\le16E/(\pi r^2)$. If both nonlinear coefficients vanish, the minimum defining $\rho$ is already $\ell$; the same argument applies. The proof never uses a normal derivative at the curved edge, where the maximizing weight vanishes. [step 2.1, step 3.1, given, cases, algebra] ∎
+
+## Remarks
+
+The earlier bibliography named Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, mean value inequalities (https://bookstore.ams.org/coll-52). That cited book edition was not available in this review; no reading of it is asserted. The current reference records the actually read geometric context, while the complete scalar/local differential proof above supplies the stated assertion.

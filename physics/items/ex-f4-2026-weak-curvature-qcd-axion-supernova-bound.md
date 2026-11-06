@@ -2,7 +2,7 @@
 id: ex-f4-2026-weak-curvature-qcd-axion-supernova-bound
 kind: example
 title: "A 2026 weak-curvature F-theory QCD-axion ensemble constraint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
 dependency_level: 4
@@ -38,6 +38,12 @@ sources:
       locator: "Abstract; Introduction and Methodology, pp. 1–3; Results and Discussion, pp. 3–5; Table I and Fig. 3."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-05
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Example

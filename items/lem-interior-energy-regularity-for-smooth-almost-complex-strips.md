@@ -1,11 +1,13 @@
 ---
 id: lem-interior-energy-regularity-for-smooth-almost-complex-strips
 kind: lemma
-title: "Interior small-energy gradient control for almost complex maps"
-status: draft
+title: Interior small-energy gradient control for almost complex maps
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-heinz-small-energy-mean-value-estimate]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-heinz-small-energy-mean-value-estimate
 dependency_level: 1
 justified_by: []
 aliases: []
@@ -15,8 +17,25 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, §4.3"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Urs Frauenfelder and Kai Zehmisch, Gromov compactness for holomorphic discs
+      with totally real boundary conditions, v2
+    url: https://arxiv.org/pdf/1403.6139v2
+    locator: Section 2.2, printed p. 5, mean-value control for holomorphic-map energy
+      supplies context. The source-dependent almost-complex tension identity, differential
+      inequality and explicit gradient constant are proved locally below; they are not
+      imported from a boundary-only formula.
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-heinz-small-energy-mean-value-estimate: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-05
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
@@ -37,7 +56,7 @@ These are interior estimates for smooth actual solutions. No boundary estimate o
 
 **Given:** Countable Choice, the compact target, family, uniform bounds, and smooth solution in the statement.
 
-[F1] If a nonnegative $C^2$ density satisfies $\Delta e\ge-ae^2-be$ on a disk, $br^2\le1$, and $a\int e<3\pi/64$, then its center value is at most $16/(3\pi r^2)$ times that integral, by [[lem-heinz-small-energy-mean-value-estimate]].
+[F1] If a nonnegative density, $C^2$ on a neighborhood of the closed disk, satisfies $\Delta e\ge-ae^2-be$ on a disk, $br^2\le1$, and $a\int e<3\pi/64$, then its center value is at most $16/(3\pi r^2)$ times that integral, by [[lem-heinz-small-energy-mean-value-estimate]].
 
 ## Proof
 
@@ -48,3 +67,7 @@ These are interior estimates for smooth actual solutions. No boundary estimate o
 3.1 The needed energy identity follows by metric compatibility and commuting covariant derivatives. For source indices $\alpha,\beta\in\{s,t\}$, first differentiate $e=\frac12\sum_\alpha\langle u_\alpha,u_\alpha\rangle$ twice to obtain $\Delta e=H^2+\sum_{\alpha,\beta}\langle\nabla_\beta\nabla_\beta u_\alpha,u_\alpha\rangle$. Torsion-freeness replaces $\nabla_\beta u_\alpha$ by $\nabla_\alpha u_\beta$, and commuting the remaining derivatives replaces their sum by $\nabla_\alpha\tau$ plus curvature terms $R^X(u_\beta,u_\alpha)u_\beta$, with a sign determined by the curvature convention and irrelevant to the estimate. Compactness bounds their absolute contribution by $c_1P^4$. Thus $$\Delta e\ge H^2-|\nabla\tau|P-c_1P^4.$$ Using step 2.1 and $P^3\le(P^4+P^2)/2$, this is bounded below by $H^2-c_2(P^4+P^2)-c_3(P^2+P)H$. Finally $c_3(P^2+P)H\le H^2/2+c_4(P^4+P^2)$ by the elementary square inequality. Discard the remaining nonnegative $H^2/2$ and use $P^2=2e$ to obtain $\Delta e\ge-ae^2-be$ for uniform $a,b\ge0$. [step 1.1, step 2.1, algebra]
 
 4.1 Set $r_0=1/\sqrt{\max\{b,1\}}$ and $\varepsilon_0=3\pi/(128\max\{a,1\})$. Then $r\le r_0$ implies $br^2\le1$, and $\int e<\varepsilon_0$ implies $a\int e<3\pi/64$. Smoothness makes $e$ a nonnegative $C^2$ function on a neighborhood of the closed disk. Apply [F1] to step 3.1 and multiply its conclusion by two, since $|du(z)|^2=2e(z)$. This proves the gradient bound, with constants independent of the chosen solution and disk. [F1, step 3.1, algebra] ∎
+
+## Remarks
+
+The earlier bibliography named Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, §4.3 (https://bookstore.ams.org/coll-52). That cited book edition was not available in this review; no reading of it is asserted. The current reference records the actually read geometric context, while the complete scalar/local differential proof above supplies the stated assertion.

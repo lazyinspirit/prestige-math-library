@@ -1,0 +1,110 @@
+---
+page: gts-bridgeland-stability-dt-frontiers
+title: Bridgeland Stability and DT Frontiers
+status: published
+library: physics
+page_layout: compact-v1
+requires:
+  - prime-spectra-and-radicals
+  - sublevel-deformation-and-the-handle-attachment-theorem
+  - surface-riemann-roch-and-the-hodge-index-theorem
+  - the-serre-spectral-sequence-and-applications
+  - maschkes-theorem-and-complete-reducibility
+  - morse-critical-points-hessians-and-indices
+  - the-seifert-van-kampen-theorem
+  - gts-calabi-yau-metrics-holonomy
+  - gts-stable-curves-algebraic-enumerative-theory
+  - gts-complex-kahler-hodge
+  - gts-classical-deformation-cotangent-theory
+  - gts-analytic-deformations-periods-degenerations
+items:
+  - def-gts-bridgeland-stability-condition-with-support-property
+  - def-gts-local-cy-threefold-total-space-of-canonical-line-bundle
+  - def-gts-quiver-jacobian-king-theta-stability-data
+  - def-gts-gamma-bmt-and-brill-noether-data
+  - lem-gts-three-dimensional-perfect-residue-field-complex-forces-regularity
+  - lem-gts-curve-nef-ample-perturbation-by-nakai-construction
+  - lem-gts-surface-derived-mckay-in-characteristic-zero
+  - lem-gts-homogeneous-representations-preserve-slope-semistability
+  - lem-gts-polygraph-common-ideal-basis-and-alternating-power-freeness
+  - lem-gts-regular-base-finite-length-perfect-complex-acyclicity
+  - lem-gts-surface-hilbert-smoothness-semismallness-and-canonical-line
+  - lem-gts-classical-and-nonhyperelliptic-curve-brill-noether-bounds
+  - lem-gts-canonical-codimension-two-surface-has-nonzero-first-jet
+  - lem-gts-canonical-curve-section-ring-generation-by-inner-projection
+  - lem-gts-ample-divisor-relative-handles-and-integral-restriction
+  - lem-gts-rational-slope-tilt-heart-noetherianity
+  - def-gts-motivic-hall-scattering-data
+  - def-gts-local-p1p1-dt-and-analytic-wall-crossing-data
+  - thm-gts-local-structure-of-stability-condition-space
+  - lem-gts-finite-group-induction-of-invariant-stability
+  - lem-gts-analytic-wall-factorization-and-component-propagation
+  - lem-gts-log-adjoint-vanishing-on-snc-pairs
+  - lem-gts-projective-cy-threefold-derived-mckay-correspondence
+  - lem-gts-projective-cy-threefold-flop-from-perverse-point-quotients
+  - lem-gts-ordinary-slope-semistable-restriction-to-high-degree-surfaces
+  - lem-gts-isospectral-cm-implies-all-n-surface-kernel-equivalence
+  - lem-gts-nested-planar-hilbert-smoothness-canonical-and-fiber-bounds
+  - lem-gts-canonical-doublecut-first-jet-smoothness
+  - lem-gts-canonical-curve-section-ring-lifting-on-k3-and-fano-ladders
+  - lem-gts-weighted-degree-one-del-pezzo-double-plane-k3-ladder
+  - lem-gts-tilt-derived-dual-truncation-and-finite-saturation
+  - def-gts-strict-calabi-yau-manifold-conventions
+  - lem-gts-hall-hn-and-regular-potential-integration
+  - lem-gts-nef-big-cy-threefold-semiampleness
+  - thm-gts-ordinary-sheaf-bogomolov-gieseker-inequality
+  - lem-gts-finite-etale-stability-lifting-and-hilbert-norm-intertwining
+  - thm-gts-all-n-isospectral-hilbert-cohen-macaulay-and-finite-flat
+  - lem-gts-ordered-elliptic-product-stability-and-diagonal-symmetry
+  - lem-gts-picard-one-fano-index-divisor-is-integral-generator
+  - lem-gts-three-dimensional-subadjoint-cubic-nonvanishing
+  - lem-gts-low-dimensional-nonvanishing-from-subadjoint-resolution-data
+  - lem-gts-isolated-lc-center-snc-vanishing-and-nonvanishing
+  - lem-gts-projective-minus-one-contraction-and-crepant-canonical-surface-resolution
+  - lem-gts-weak-del-pezzo-anticanonical-generation-and-degree-one-pencil
+  - lem-gts-weak-quadric-and-plane-polarization-generation
+  - lem-gts-k3-ample-linear-system-serre-instability-criterion
+  - lem-gts-bg-zero-denominator-gives-tilt-hn-duality-and-second-heart
+  - thm-gts-quiver-stability-scattering-diagram
+  - lem-gts-local-orbifold-point-dt-vertex
+  - lem-gts-finite-directed-flops-between-smooth-crepant-threefold-resolutions
+  - lem-gts-cynk-hulek-local-clusters-and-equivariant-derived-induction
+  - lem-gts-isotrivial-fibre-stability-restriction-from-torsion-invariance
+  - thm-gts-all-n-surface-hilbert-symmetric-group-kernel-equivalence
+  - lem-gts-smooth-surface-tilt-heart-hn-discriminant-and-line-transport
+  - lem-gts-unique-lc-place-residue-pushforward-and-subadjoint-discriminant-effectivity
+  - lem-gts-fixed-resolution-tiebreak-to-one-log-canonical-place
+  - lem-gts-primitive-fano-threefold-generation-from-canonical-k3-section
+  - lem-gts-rational-tilt-discriminant-and-numerical-support
+  - lem-gts-exact-numerical-wall-line-transport
+  - lem-gts-rational-gamma-bmt-gives-geometric-stability
+  - lem-gts-compact-adjoint-induced-stability
+  - lem-gts-ramified-finite-map-induced-stability
+  - lem-gts-symmetric-root-graph-filtration
+  - lem-gts-rational-elliptic-product-parameters-and-support
+  - lem-gts-elliptic-product-isogeny-and-restriction-order
+  - lem-gts-projective-space-bayer-restriction-stability
+  - lem-gts-skyscraper-semistable-phase-amplitude
+  - thm-gts-smooth-projective-variety-stability-by-embedding
+  - thm-gts-stability-under-specified-smooth-cy3-orbifolding
+  - thm-gts-invariant-stability-and-dt-data-for-local-p1p1
+  - lem-gts-special-product-charge-uniqueness-and-block-permutation-invariance
+  - lem-gts-k3-and-del-pezzo-curve-brill-noether-bounds
+  - lem-gts-curvette-extraction-and-effective-cyclic-different
+  - lem-gts-effective-integral-divisor-restriction-from-tilt-duality
+  - lem-gts-closed-vertical-bn-endpoint-and-gamma-boundary
+  - lem-gts-named-enriques-bielliptic-hilbert-strict-covers
+  - lem-gts-codimension-two-subadjunction-by-marked-rational-curves
+  - lem-gts-small-slope-counterexample-and-integral-restriction-hn-certificate
+  - lem-gts-full-gamma-bmt-propagation-from-vertical-boundary
+  - thm-gts-stability-on-listed-higher-dimensional-cy-examples
+  - lem-gts-canonical-fundamental-cut-and-terminal-fourfold-first-divisor-protocol
+  - lem-gts-very-general-k3-sections-of-the-fano-ladder-have-picard-rank-one
+  - lem-gts-smooth-curve-brill-noether-gap-gives-strict-threefold-bg
+  - lem-gts-fano-fundamental-smooth-ladders-and-high-degree-embeddings
+  - lem-gts-nonprimitive-fano-anticanonical-k3-bridges
+  - lem-gts-named-weighted-fano-and-cyclic-smooth-brill-noether-gaps
+  - thm-gts-bmt-and-stability-on-named-polarized-cy3-families
+order: 1040
+companion: gts-bridgeland-stability-dt-frontiers-examples
+---

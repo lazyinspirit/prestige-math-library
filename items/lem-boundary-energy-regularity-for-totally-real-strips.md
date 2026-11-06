@@ -1,11 +1,14 @@
 ---
 id: lem-boundary-energy-regularity-for-totally-real-strips
 kind: lemma
-title: "Boundary small-energy gradient control along a compact totally real submanifold"
-status: draft
+title: Boundary small-energy gradient control along a compact totally real submanifold
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-interior-energy-regularity-for-smooth-almost-complex-strips, lem-heinz-half-disk-boundary-mean-value-estimate]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-interior-energy-regularity-for-smooth-almost-complex-strips
+- lem-heinz-half-disk-boundary-mean-value-estimate
 dependency_level: 2
 justified_by: []
 aliases: []
@@ -15,8 +18,25 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, mean value inequalities with totally real boundary conditions"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Urs Frauenfelder and Kai Zehmisch, Gromov compactness for holomorphic discs with totally real boundary
+      conditions
+    url: https://arxiv.org/pdf/1403.6139v2
+    locator: 'Sections 2.1–2.2, printed pp.4–5: adapted metric and totally real boundary mean-value context. The
+      source treats autonomous J and cites earlier mean-value proofs; the stated source-dependent family, constants
+      and boundary-density identity are proved locally below.'
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-interior-energy-regularity-for-smooth-almost-complex-strips: mathematical-premise
+  lem-heinz-half-disk-boundary-mean-value-estimate: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
@@ -47,6 +67,6 @@ where $e_g=(|u_s|_g^2+|u_t|_g^2)/2$. Uniformly equivalent estimates with constan
 
 3.1 Differentiate the actual density in the normal coordinate $t$. The product rule gives $$\nabla_tu_t=(\partial_tJ+\nabla_{u_t}J)v+J\nabla_tu_s.$$ Since $J_b$ is orthogonal on every ambient vector along $L$, the two terms containing $\nabla_tu_s$ in $(e_g)_t$ combine to $2\langle\nabla_tu_s,v\rangle$. The tangential component of $\nabla_su_s$ lies in $TL$ and contributes zero after application of $J_b$ and pairing with $v$. Its normal component is the second fundamental form $\mathrm{II}_L(v,v)$. Thus the exact boundary identity is $$ (e_g)_t=2\langle J_b\mathrm{II}_L(v,v),v\rangle+\langle(\partial_tJ+\nabla_{J_bv}J)v,J_bv\rangle.$$ The second fundamental form is uniformly bounded because $L$ is compact, and the family derivatives are uniformly bounded. Since $|J_bv|=|v|$ and $e_g=|v|^2$ here, this proves $|(e_g)_t|\le c e_g^{3/2}+de_g$ for some constants $c,d\ge0$ depending only on the specified data. No uncontrolled tangential second derivative remains. [step 1.1, step 2.1, algebra]
 
-4.1 Apply [F1] with the fixed metric $g$ of step 1.1. Uniform $C^2$ bounds persist for this metric because on the compact target it and its connections differ from the fixed background data by bounded smooth tensors. We obtain $\Delta e_g\ge-Ae_g^2-Be_g$ throughout the half-disk. Choose $$r_0=\min\left\{\frac1{2\sqrt{\max\{B,1\}}},\frac1{16\max\{d,1\}}\right\},\qquad \varepsilon_0=\frac{\pi}{8\max\{16A,4096c^2,1\}}.$$ Steps 3.1 and 4.1 verify all differential and size hypotheses of [F2]. Its conclusion and $|du|^2=2e_g$ prove the claimed boundary-center inequality. [F1, F2, step 1.1, step 3.1, algebra]
+4.1 Apply [F1] with the fixed metric $g$ of step 1.1. Uniform $C^2$ bounds persist for this metric because on the compact target it and its connections differ from the fixed background data by bounded smooth tensors. We obtain $\Delta e_g\ge-Ae_g^2-Be_g$ throughout the half-disk. Choose $$r_0=\min\left\{\frac1{2\sqrt{\max\{B,1\}}},\frac1{16\max\{d,1\}}\right\},\qquad \varepsilon_0=\frac{\pi}{8\max\{16A,4096c^2,1\}}.$$ Step 3.1 and the preceding interior inequality verify all differential and size hypotheses of [F2]. Its conclusion and $|du|^2=2e_g$ prove the claimed boundary-center inequality. [F1, F2, step 1.1, step 3.1, algebra]
 
 5.1 For completeness the stronger maximum assertion follows from the proved weighted maximum in [F2], not from an assumption of smooth reflection. In that proof the even reflected density $\widehat e$ has a maximum of $(r-|z|)^2\widehat e(z)$ at $z_0$, with $M=\widehat e(z_0)$ and $\ell=(r-|z_0|)/2$. Its small-energy argument proves $M\ell^2\le4E/\pi$. Consequently $(r-|z|)^2\widehat e(z)\le4M\ell^2\le16E/\pi$ for every $z$ in the full disk. On $|z|\le r/2$, this gives $e_g(z)\le64E/(\pi r^2)$ and hence the asserted bound for $|du|^2$. Finally compactness of $X$ supplies uniform positive comparison constants between $g$ and $g_0$ on all tangent spaces; applying these both to the energy integral and the pointwise derivative yields the corresponding $g_0$ estimates. All arguments are global in the target. [F2, step 1.1, step 4.1, algebra] ∎

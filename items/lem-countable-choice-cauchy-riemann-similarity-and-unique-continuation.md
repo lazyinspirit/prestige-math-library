@@ -1,27 +1,50 @@
 ---
 id: lem-countable-choice-cauchy-riemann-similarity-and-unique-continuation
 kind: lemma
-title: "Cauchy–Riemann similarity and unique continuation under countable choice"
-status: draft
+title: Cauchy–Riemann similarity and unique continuation under countable choice
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
 deps:
-  - def-countable-choice
-  - thm-plancherel
-  - thm-mihlin-fourier-multiplier-theorem
-  - thm-weyl-lemma-for-the-laplacian
-  - thm-fourier-basis-and-parseval-on-the-n-torus
-  - cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn
-  - lem-countable-choice-planar-morrey-estimate
+- def-countable-choice
+- thm-plancherel
+- thm-mihlin-fourier-multiplier-theorem
+- thm-weyl-lemma-for-the-laplacian
+- thm-fourier-basis-and-parseval-on-the-n-torus
+- cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn
+- lem-countable-choice-planar-morrey-estimate
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: gpt-6-luna
+    verdict: pass
+    date: 2026-11-06
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 sources:
   references:
-    - title: "Chris Wendl, Lectures on Holomorphic Curves in Symplectic and Contact Geometry, version3.2"
-      url: "https://arxiv.org/pdf/1011.1690"
-      locator: "Full Proposition2.70 throughTheorem2.78 and Proposition2.82 proofs, printed53–58; explicit Cauchy transform and CC proof supplied locally"
+  - title: Chris Wendl, Lectures on Holomorphic Curves in Symplectic and Contact Geometry, version3.2
+    url: https://arxiv.org/pdf/1011.1690
+    locator: Full Proposition2.70 throughTheorem2.78 and Proposition2.82 proofs, printed53–58; explicit Cauchy transform and
+      CC proof supplied locally
+domain: mathematics
+library: physics
+dependency_level: 1
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  thm-plancherel: mathematical-premise
+  thm-mihlin-fourier-multiplier-theorem: mathematical-premise
+  thm-weyl-lemma-for-the-laplacian: mathematical-premise
+  thm-fourier-basis-and-parseval-on-the-n-torus: mathematical-premise
+  cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn: mathematical-premise
+  lem-countable-choice-planar-morrey-estimate: mathematical-premise
 ---
 
 ## Statement
@@ -44,7 +67,7 @@ If two smooth maps solve the same equation $u_s+J(s,t,u)u_t=0$ for a smooth almo
 
 [F1] [[thm-plancherel]] gives the $L^2$ Fourier isometry under countable choice. [[thm-mihlin-fourier-multiplier-theorem]] gives $L^q$ boundedness, agreeing with the $L^2$ multiplier action, of smooth homogeneous degree-zero symbols with bounded derivatives on the unit circle, for $1<q<\infty$.
 
-[F2] [[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]] supplies cutoff and mollifier approximations. [[lem-countable-choice-planar-morrey-estimate]] gives continuous locally bounded representatives of $W^{1,p}$ functions for $p>2$.
+[F2] [[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn|Compactly supported smooth functions are dense in $W^{k,p}(R^n)$]] supplies cutoff and mollifier approximations. [[lem-countable-choice-planar-morrey-estimate]] gives continuous locally bounded representatives of $W^{1,p}$ functions for $p>2$.
 
 [F3] [[thm-weyl-lemma-for-the-laplacian]] makes every distributional harmonic function smooth under countable choice. [[thm-fourier-basis-and-parseval-on-the-n-torus]] supplies complete complex Fourier series on circles under that same axiom.
 

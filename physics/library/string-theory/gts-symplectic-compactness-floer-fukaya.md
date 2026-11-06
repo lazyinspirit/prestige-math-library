@@ -1,0 +1,85 @@
+---
+page: gts-symplectic-compactness-floer-fukaya
+title: Analytic Compactness, Transversality, Floer and Fukaya Operations
+status: published
+library: physics
+companion: gts-symplectic-compactness-floer-fukaya-frontiers
+requires:
+  - calderon-zygmund-decomposition-and-singular-integrals
+  - complex-algebraic-stratified-topology
+  - morse-homology-continuation-and-comparison
+  - periods-jacobians-and-abel-jacobi-theory
+  - chern-and-pontryagin-classes-by-splitting-and-complexification
+  - chern-weil-theory-and-characteristic-forms
+  - compact-laplace-type-operators-and-hodge-representatives
+  - singular-cohomology-and-coefficient-theorems
+  - spin-geometry-dirac-and-index-theory
+  - vector-field-index-euler-characteristic-and-poincare-hopf
+  - compact-operators-and-riesz-schauder-theory
+  - orthonormal-bases-parseval-and-fourier-series
+  - smooth-approximation-and-sobolev-extension
+  - the-exterior-derivative-and-cartan-calculus
+  - the-inverse-function-theorem-completed
+  - weak-derivatives-and-sobolev-spaces
+  - harmonic-functions-and-mean-values-in-rn
+  - interior-and-boundary-sobolev-elliptic-regularity
+  - maximum-principles-harnack-and-liouville-in-rn
+  - the-baire-principles-of-functional-analysis
+  - complete-metrizability-and-baire
+  - gts-symplectic-floer-fukaya-foundations
+items:
+  - lem-countable-choice-lp-regularity-for-small-strip-cauchy-riemann-coefficients
+  - lem-countable-choice-planar-morrey-estimate
+  - lem-heinz-half-disk-boundary-mean-value-estimate
+  - lem-heinz-small-energy-mean-value-estimate
+  - lem-local-sobolev-bootstrap-for-almost-complex-strips
+  - lem-gts-tame-holomorphic-area-quantum-independent-of-domain
+  - lem-gts-ordered-real-disk-domain-compactification-and-face-orientations
+  - def-gts-stable-map-and-gromov-convergence
+  - def-gts-lagrangian-chord-cappings-and-action
+  - lem-continuous-weak-almost-complex-strip-solutions-are-smooth
+  - lem-interior-energy-regularity-for-smooth-almost-complex-strips
+  - lem-countable-choice-cauchy-riemann-similarity-and-unique-continuation
+  - lem-gts-tame-transverse-strip-coercivity-and-weighted-inverse
+  - lem-boundary-energy-regularity-for-totally-real-strips
+  - lem-small-gradient-almost-complex-cylinder-neck-energy-decay
+  - lem-small-gradient-totally-real-boundary-neck-energy-decay
+  - lem-gts-positive-energy-gap-on-a-fixed-closed-domain
+  - lem-gts-closed-surface-real-cauchy-riemann-fredholm-index-and-adjoint
+  - lem-gts-rational-filtered-curved-transfer-to-singular-chains
+  - def-gts-rational-capped-hamiltonian-floer-module
+  - lem-finite-energy-almost-complex-puncture-removability
+  - lem-small-local-energy-cylinder-neck-collapse
+  - lem-smooth-strip-compactness-away-from-energy-concentration
+  - lem-gts-transverse-strip-local-action-neck-and-end-estimates
+  - lem-gts-bordered-cauchy-riemann-fredholm-and-evaluation-obstructions
+  - def-gts-capped-weighted-label-changing-corner-data
+  - lem-gts-spectral-cut-corner-fredholm-and-weighted-configuration
+  - lem-gts-weighted-nodal-cauchy-riemann-gluing-and-linear-kernel-continuity
+  - thm-gts-hamiltonian-floer-differential-and-continuation-invariance
+  - lem-gts-filtered-finite-matrix-completion-extension
+  - lem-rescaled-strip-energy-concentration-produces-a-finite-energy-bubble
+  - lem-soft-rescaling-captures-isolated-interior-energy-atoms
+  - thm-countable-choice-interior-gromov-bubble-tree-compactness
+  - lem-soft-rescaling-captures-isolated-totally-real-boundary-energy-atoms
+  - thm-gts-fixed-source-interior-gromov-compactness-with-sphere-bubbling
+  - thm-countable-choice-totally-real-boundary-gromov-bubble-tree-compactness
+  - lem-gts-local-domain-slices-and-compact-simple-curve-exhaustion
+  - lem-gts-geometrically-tame-disk-compactness-and-real-nodal-atlas
+  - thm-gts-fredholm-and-generic-transversality-for-simple-curves
+  - thm-gts-boundary-disc-compactness-and-strip-breaking
+  - thm-gts-r4-04b-lagrangian-floer-strip-breaking-and-bubbling-contract
+  - def-gts-r4-06c-pardon-implicit-atlas-specialization-to-floer-cylinder-moduli
+  - lem-gts-relative-spin-disk-determinants-and-boundary-sign
+  - thm-gts-r4-05b-wendl-generic-one-parameter-regularity-for-somewhere-injective-curves
+  - thm-gts-r4-08b-general-virtual-hamiltonian-floer-differential-and-continuation
+  - thm-gts-rational-collared-disk-virtual-correspondences
+  - def-gts-lagrangian-branes-and-filtered-curved-a-infinity-fukaya-operations
+  - thm-gts-a-infinity-identities-bounding-cochains-and-unobstructed-fukaya-objects
+  - def-gts-r4-09b-multi-object-fukaya-category-of-branes-and-polygon-morphisms
+  - def-gts-r4-10b-weak-versus-strict-bounding-cochains
+  - thm-gts-r4-10c-exact-regular-polygon-count-a-infinity-branch
+  - lem-countable-choice-genus-zero-riemann-surface-is-the-sphere
+page_layout: compact-v1
+order: 1035
+---

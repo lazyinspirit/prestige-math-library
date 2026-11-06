@@ -1,11 +1,16 @@
 ---
 id: lem-small-local-energy-cylinder-neck-collapse
 kind: lemma
-title: "Small local energy forces cylinder neck collapse"
-status: draft
+title: Small local energy forces cylinder neck collapse
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-interior-energy-regularity-for-smooth-almost-complex-strips, lem-boundary-energy-regularity-for-totally-real-strips, lem-small-gradient-almost-complex-cylinder-neck-energy-decay, lem-small-gradient-totally-real-boundary-neck-energy-decay]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-interior-energy-regularity-for-smooth-almost-complex-strips
+- lem-boundary-energy-regularity-for-totally-real-strips
+- lem-small-gradient-almost-complex-cylinder-neck-energy-decay
+- lem-small-gradient-totally-real-boundary-neck-energy-decay
 dependency_level: 3
 justified_by: []
 aliases: []
@@ -15,8 +20,32 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, no-neck estimates"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Aleksey Zinger, Notes on J-Holomorphic Maps
+    url: https://arxiv.org/pdf/1706.00331v1
+    locator: 'Section 4.4, Corollary 4.17 and Lemma 4.19, printed pp.35–36: autonomous compact-target closed-cylinder
+      energy and diameter bounds. The local-energy-with-buffer and source-variation hypotheses here are handled
+      by the explicit local suppliers below.'
+  - title: Urs Frauenfelder and Kai Zehmisch, Gromov compactness for holomorphic discs with totally real boundary
+      conditions
+    url: https://arxiv.org/pdf/1403.6139v2
+    locator: 'Section 3.1, Lemma 3.1, printed pp.7–9: boundary-annulus concentration and distance-energy estimates
+      under its bounded-image/height hypotheses. The same-L reflected strip formulation, buffers and source-dependent
+      bounds here are proved locally below; no two-label strip result is imported.'
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-interior-energy-regularity-for-smooth-almost-complex-strips: mathematical-premise
+  lem-boundary-energy-regularity-for-totally-real-strips: mathematical-premise
+  lem-small-gradient-almost-complex-cylinder-neck-energy-decay: mathematical-premise
+  lem-small-gradient-totally-real-boundary-neck-energy-decay: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-04
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement

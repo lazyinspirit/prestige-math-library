@@ -1,0 +1,59 @@
+---
+page: cft-worldsheet-moduli-sewing-and-higher-genus
+title: CFT Worldsheet Moduli Sewing And Higher Genus
+status: published
+library: mathematics
+page_layout: compact-v1
+requires:
+  - hodge-theory-on-compact-riemann-surfaces
+  - inverse-and-implicit-function-theorems
+  - picard-lindelof-and-first-order-odes
+  - smooth-partitions-of-unity-and-exhaustions
+  - connections-levi-civita-and-parallel-transport
+  - qftx-gaga-local-coherent-acyclicity
+  - vertex-modules-intertwiners-and-fusion
+  - pointed-curves-chiral-algebras-and-coinvariants
+  - cft-free-field-oscillators-screenings-and-lattice-models
+items:
+  - def-cft-contragredient-generalized-module
+  - def-cft-pointed-analytic-worldsheet
+  - def-cft-pseudotrace
+  - lem-cft-dual-fusion-product-uniqueness
+  - lem-cft-formal-coordinate-action-virasoro-commutators
+  - def-cft-zhu-algebra
+  - lem-cft-finite-holomorphic-bundles-polydisc-first-cohomology-zero
+  - lem-cft-formal-coordinate-change-action
+  - lem-cft-pointed-worldsheet-family-stable-under-restriction-and-base-change
+  - def-cft-plumbing-and-sewing-parameter
+  - lem-cft-pseudotrace-basis-independent
+  - lem-cft-c2-cofinite-modules-finitely-generated
+  - lem-cft-cyclic-weak-module-difference-one-spanning
+  - lem-cft-zhu-zero-mode-identities-on-singular-vectors
+  - lem-cft-smooth-family-positive-pole-cohomology-and-lifting
+  - lem-cft-state-field-and-residue-coordinate-covariance
+  - lem-cft-plumbing-local-smoothing-node
+  - thm-cft-finitely-generated-weak-joint-modules-grading-restricted
+  - lem-cft-holomorphic-euler-systems-converge-with-parameters
+  - def-cft-voa-conformal-block-and-dual-fusion-product
+  - lem-cft-disjoint-plumbing-order-independence
+  - lem-cft-plumbing-proper-analytic-family
+  - lem-cft-universal-top-window-controls-weak-joint-modules
+  - lem-cft-fixed-curve-partial-coinvariants-finite
+  - thm-cft-contragredient-generalized-module
+  - lem-cft-fixed-curve-strong-residue-and-vacuum-propagation
+  - lem-cft-smooth-family-coinvariant-finiteness-and-virasoro-matrices
+  - lem-cft-plumbing-positive-pole-base-change-and-logarithmic-lifts
+  - thm-cft-conformal-block-sheaves-locally-free
+  - thm-cft-dual-fusion-product-existence
+  - thm-cft-contragredient-double-dual-isomorphism
+  - thm-cft-dual-fusion-hom-sheaf-finite-locally-free
+  - thm-cft-segal-sewing-convergence
+  - thm-cft-dual-fusion-hom-block-identification
+  - thm-cft-c2-cofinite-pseudo-sewing-convergence
+  - lem-cft-cylinder-sewing-coefficient-inverse
+  - thm-cft-dual-fusion-product-sewing-factorization
+  - thm-cft-c2-cofinite-analytic-sewing-convergence
+  - thm-cft-c2-cofinite-sewing-factorization
+order: 1075
+companion: cft-worldsheet-moduli-sewing-and-higher-genus-examples
+---

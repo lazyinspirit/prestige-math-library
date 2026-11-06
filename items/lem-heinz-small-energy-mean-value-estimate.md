@@ -1,11 +1,13 @@
 ---
 id: lem-heinz-small-energy-mean-value-estimate
 kind: lemma
-title: "A Heinz mean value estimate from small scalar energy"
-status: draft
+title: A Heinz mean value estimate from small scalar energy
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-classical-subharmonic-mean-value-inequalities]
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-classical-subharmonic-mean-value-inequalities
 dependency_level: 0
 justified_by: []
 aliases: []
@@ -15,8 +17,25 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, §4.3, mean value inequality"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Urs Frauenfelder and Kai Zehmisch, Gromov compactness for holomorphic discs
+      with totally real boundary conditions, v2
+    url: https://arxiv.org/pdf/1403.6139v2
+    locator: Section 2.2, printed p. 5, small-energy holomorphic-map mean-value inequality
+      supplies context. The scalar differential-inequality statement with linear term
+      and its explicit constants are established locally below, not attributed as an
+      exact Frauenfelder–Zehmisch theorem.
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-classical-subharmonic-mean-value-inequalities: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-05
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
@@ -46,3 +65,7 @@ The small-energy condition is automatic when $a=0$. Translation gives the identi
 3.1 If $qd^2\le1$, including $q=0$, choose $\rho=d$ in step 2.1. It gives $3M/4\le E/(\pi d^2)$, hence $Md^2\le4E/(3\pi)$. The center comparison from step 1.1 then proves $e(0)\le16E/(3\pi r^2)$. [step 1.1, step 2.1, cases, algebra]
 
 4.1 It remains to exclude $qd^2>1$. Since $d\le r/2$ and $br^2\le1$, we have $bd^2\le1/4$. Thus $8aMd^2>1-2bd^2\ge1/2$, so $a>0$ and $M>1/(16ad^2)$. Consequently $b/M\le16abd^2\le4a$, and $q/M=8a+2b/M\le16a$. Choose $\rho=q^{-1/2}<d$ in step 2.1. It yields $$E\ge\int_{B_\rho(z_0)}e\ge\frac{3\pi M}{4q}\ge\frac{3\pi}{64a},$$ contradicting the assumed strict inequality $aE<3\pi/64$. Therefore the case of step 3.1 always holds. The zero-center case in step 1.1 and the same calculation after translation prove every asserted clause. [step 1.1, step 2.1, step 3.1, given, cases, algebra] ∎
+
+## Remarks
+
+The earlier bibliography named Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, §4.3, mean value inequality (https://bookstore.ams.org/coll-52). That cited book edition was not available in this review; no reading of it is asserted. The current reference records the actually read geometric context, while the complete scalar/local differential proof above supplies the stated assertion.

@@ -1,12 +1,17 @@
 ---
 id: lem-continuous-weak-almost-complex-strip-solutions-are-smooth
 kind: lemma
-title: "Smoothness of continuous weak almost complex strip solutions"
-status: draft
+title: Smoothness of continuous weak almost complex strip solutions
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-countable-choice-lp-regularity-for-small-strip-cauchy-riemann-coefficients, lem-countable-choice-planar-morrey-estimate, thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one, lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative]
-dependency_level: 4
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-countable-choice-lp-regularity-for-small-strip-cauchy-riemann-coefficients
+- lem-countable-choice-planar-morrey-estimate
+- thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one
+- lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative
+dependency_level: 1
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -15,8 +20,28 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, elliptic regularity"
-      url: "https://bookstore.ams.org/coll-52"
+  - title: Chris Wendl, Lectures on Holomorphic Curves in Symplectic and Contact Geometry,
+      version 3.2
+    url: https://arxiv.org/pdf/1011.1690
+    locator: 'Printed pp. 48–54, Proposition 2.64 and Theorem 2.73: difference-quotient
+      weak regularity context. The continuous W1,2 principal perturbation and totally-real-boundary
+      Countable Choice argument are proved locally below, not imported from a stronger-choice
+      compactness argument.'
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-countable-choice-lp-regularity-for-small-strip-cauchy-riemann-coefficients: mathematical-premise
+  lem-countable-choice-planar-morrey-estimate: mathematical-premise
+  thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one: mathematical-premise
+  lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-05
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
@@ -56,3 +81,7 @@ weakly. In the half-disk case assume continuity and local $W^{1,2}$ also up to t
 7.1 Recover the other derivatives from $u_t=Ju_s$. For a derivative of total order $k+1$ with $b\ge2$ normal derivatives, apply $\partial_s^{k+1-b}\partial_t^{b-1}$ to this equation. The term in which no derivative hits $J$ is $J\partial_s^{k+2-b}\partial_t^{b-1}u$, already known by induction on $b$. In every other product, derivatives of $u$ have order at most $k$, and differentiated coefficient factors have order at most $k$. If a factor has order $k$, it is the only such factor and all others are bounded; otherwise all factors are bounded. Thus all these terms lie in $L^4$ on a bounded smaller patch. For precision, first differentiate the equation only $k-1$ times, by $\partial_s^{k+1-b}\partial_t^{b-2}$, and then take one more weak $t$ derivative. The highest differentiated $u_s$ factor has a known weak $t$ derivative by the induction on $b$; its coefficient $J$ is $C^1$, so the ordinary first-order weak product rule applies. All other factors have the bounded or $L^4$ derivatives just described. This justifies the displayed expansion without multiplying an undefined high-order distribution by a nonsmooth coefficient, and proves the desired derivative exists in $L^4$. Induction on $b$ proves $u\in W^{k+1,4}$. [step 2.1, step 5.1, step 6.1, algebra]
 
 8.1 Starting with step 4.1, steps 5.1 through 7.1 prove local $W^{k,4}$ for every finite $k$, using nested patches inside the original coordinate neighborhood. To obtain a fixed neighborhood for any specified order, choose its finitely many nested patches between that neighborhood and a larger one; no uniform positive loss after infinitely many inductions is needed. Applying [F3] to each derivative then gives classical derivatives of every order, with their continuous extensions to the straight boundary and the usual tangential boundary derivatives. The given continuous representative agrees with each Sobolev representative. The equation therefore holds classically and $u$ is smooth as asserted. This conclusion requires the initial continuity premise and does not establish it at any puncture. [F3, step 4.1, step 5.1, step 6.1, step 7.1, construct] ∎
+
+## Remarks
+
+The earlier bibliography named Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, elliptic regularity (https://bookstore.ams.org/coll-52). The cited book full text was not available in this review; no reading of that edition is asserted. The current reference records the actually read alternate context, while the complete local proof above carries the stated claim.

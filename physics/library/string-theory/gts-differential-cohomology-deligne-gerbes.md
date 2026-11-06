@@ -1,0 +1,77 @@
+---
+page: gts-differential-cohomology-deligne-gerbes
+title: Differential Cohomology, Deligne Cohomology and Gerbes
+category: string-theory
+library: physics
+status: published
+page_layout: compact-v1
+requires:
+  - derived-categories
+  - grothendieck-spectral-sequences-and-computations
+  - kunneth-exactness-and-splittings-over-principal-ideal-domains
+  - long-exact-sequences-in-homology
+  - the-diagram-lemmas-in-an-abelian-category
+  - universal-coefficients-and-kunneth-theorems
+  - chern-weil-theory-and-characteristic-forms
+  - cup-cap-cross-products-and-cohomology-rings
+  - relative-homology-excision-and-mayer-vietoris
+  - sheaf-cohomology-cech-cohomology-and-comparison
+  - singular-chains-and-singular-homology
+  - singular-cohomology-and-coefficient-theorems
+  - countability-and-uncountability
+  - relations-functions-and-quotients
+  - the-de-rham-complex-homotopy-and-mayer-vietoris
+  - the-de-rham-theorem-and-degree
+  - free-modules-and-exact-sequences
+  - smooth-manifolds-and-smooth-maps
+  - tensor-fields-exterior-algebra-and-differential-forms
+  - chain-complexes-and-homology
+  - singular-cochains-mayer-vietoris-and-smooth-singular-comparison
+  - presheaves-sheaves-stalks-and-sheafification
+  - gauge-groups-and-representation-theory-interfaces
+  - lie-subgroups-actions-and-homogeneous-spaces
+  - qftx-gauge-geometry
+  - connections-levi-civita-and-parallel-transport
+  - riemann-curvature-and-riemannian-submanifolds
+  - whitney-embedding-tubular-neighbourhoods-and-approximation
+  - topological-vector-bundles-and-grassmannian-classification
+  - local-coefficients-twisted-homology-and-duality
+  - smooth-partitions-of-unity-and-exhaustions
+  - geodesics-the-exponential-map-completeness-and-hopf-rinow
+  - leray-hirsch-thom-isomorphism-and-gysin-sequences
+  - thom-spaces-normal-data-and-collapse-maps
+items:
+  - def-gts-smooth-integral-singular-chain-complex
+  - lem-gts-basic-forms-descend-along-surjective-submersions
+  - def-gts-degree-zero-differential-cohomology
+  - def-gts-finite-classifying-approximation-input
+  - lem-gts-good-cover-integral-cech-singular-comparison
+  - def-gts-good-cover-singular-cech-comparison-input
+  - lem-gts-smooth-integral-chains-compute-singular-homology
+  - def-gts-cheegersimons-differential-character
+  - def-gts-smooth-deligne-cohomology-model
+  - lem-gts-differential-character-structure-maps-well-defined
+  - lem-gts-integral-period-forms-lift-to-characters
+  - lem-gts-differential-character-homotopy-formula
+  - def-gts-character-diagram-geometric-input
+  - thm-gts-exact-sequences-for-ordinary-differential-cohomology
+  - def-gts-u-1-bundle-gerbe-with-connection-and-curving
+  - lem-gts-deligne-exponential-model-equivalence
+  - lem-gts-deligne-exact-sequences
+  - thm-gts-dixmierdouady-class-and-gerbe-classification
+  - def-gts-higher-u-1-bundles-with-connection-via-deligne-hypercocycles
+  - def-gts-ordinary-differential-cohomology-orientation
+  - lem-gts-deligne-character-comparison
+  - lem-gts-gerbe-curvature-descends
+  - def-gts-character-functor-and-character-diagram
+  - def-gts-deligne-cup-product-input
+  - lem-gts-general-refinement-ambiguity
+  - thm-gts-differential-refinement-of-an-integral-characteristic-class
+  - thm-gts-character-diagram-uniqueness-for-ordinary-differential-cohomology
+  - thm-gts-product-on-ordinary-differential-cohomology
+  - def-gts-general-group-characteristic-refinement-data
+  - def-gts-oriented-submersion-chain-transfer-data
+  - thm-gts-integration-in-ordinary-differential-cohomology
+order: 1027
+companion: gts-differential-cohomology-deligne-gerbes-examples
+---

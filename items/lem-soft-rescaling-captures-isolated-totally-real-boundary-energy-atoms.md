@@ -1,12 +1,18 @@
 ---
 id: lem-soft-rescaling-captures-isolated-totally-real-boundary-energy-atoms
 kind: lemma
-title: "Soft rescaling captures an isolated totally real boundary energy atom"
-status: draft
+title: Soft rescaling captures an isolated totally real boundary energy atom
+status: published
 origin: pipeline
-pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-deps: [def-countable-choice, lem-smooth-strip-compactness-away-from-energy-concentration, lem-rescaled-strip-energy-concentration-produces-a-finite-energy-bubble, lem-finite-energy-almost-complex-puncture-removability, lem-small-local-energy-cylinder-neck-collapse, lem-soft-rescaling-captures-isolated-interior-energy-atoms]
-dependency_level: 7
+pipeline_run: conformal-field-theory-string-theory-all-97-2026-10-26
+deps:
+- def-countable-choice
+- lem-smooth-strip-compactness-away-from-energy-concentration
+- lem-rescaled-strip-energy-concentration-produces-a-finite-energy-bubble
+- lem-finite-energy-almost-complex-puncture-removability
+- lem-small-local-energy-cylinder-neck-collapse
+- lem-soft-rescaling-captures-isolated-interior-energy-atoms
+dependency_level: 6
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -15,14 +21,30 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Aleksey Zinger, Notes on J-Holomorphic Maps"
-      url: "https://arxiv.org/abs/1706.00331"
-      locator: "Interior soft-rescaling proof on printed pages 39–46 read in full; boundary adaptation is proved locally below"
+  - title: Aleksey Zinger, Notes on J-Holomorphic Maps
+    url: https://arxiv.org/pdf/1706.00331v1
+    locator: Interior soft-rescaling proof on printed pages 39–46 read in full; boundary adaptation is proved locally below
+domain: mathematics
+library: physics
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-smooth-strip-compactness-away-from-energy-concentration: mathematical-premise
+  lem-rescaled-strip-energy-concentration-produces-a-finite-energy-bubble: mathematical-premise
+  lem-finite-energy-almost-complex-puncture-removability: mathematical-premise
+  lem-small-local-energy-cylinder-neck-collapse: mathematical-premise
+  lem-soft-rescaling-captures-isolated-interior-energy-atoms: mathematical-premise
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-11-05
+    scope: Delegated native content review and accepted repair/consumer chain for this item in conformal-field-theory-string-theory-step3-fresh-2026-11-04; source-reading limits remain those recorded in the review packets. No personal owner audit or new review is claimed.
+    delegated_by: /root (workflow orchestrator under owner authorization)
 ---
 
 ## Statement
 
-Assume Countable Choice. Let $(X,g)$ be compact and $L\subset X$ a fixed compact totally real submanifold. On the closed upper half-disk let smooth almost complex families $J_n(z,x)$ converge smoothly locally to $J_\infty$, with uniform coefficient bounds, and suppose $J_n(s,x)=J_b(x)$ for real $s$ and $x\in L$, independent of $n,s$. Let smooth solutions $u_n:B_1^+\to X$, smooth up to the straight boundary with values there on $L$, have uniformly bounded energy and converge smoothly locally off $0$, including boundary points, to a solution $u$ smoothly filled at $0$. Suppose concentric half-disk energies have limits with positive atom mass $m$ at $0$.
+Assume Countable Choice. Let $(X,g)$ be compact and $L\subset X$ a fixed compact totally real submanifold. On the closed upper half-disk let smooth almost complex families $J_n(z,x)$ converge smoothly locally to $J_\infty$, with uniform coefficient bounds, and suppose $J_n(s,x)=J_b(x)$ for real $s$ and $x\in L$, independent of $n,s$. Let smooth solutions $u_n:B_1^+\to X$ of $(u_n)_s+J_n(z,u_n)(u_n)_t=0$, smooth up to the straight boundary with values there on $L$, have uniformly bounded energy and converge smoothly locally off $0$, including boundary points, to a solution $u$ smoothly filled at $0$. Suppose concentric half-disk energies have limits with positive atom mass $m$ at $0$.
 
 There is a uniform $h>0$ such that $m\ge h$ and, after a subsequence, real centers $a_n\to0$, positive scales $\rho_n\to0$, an autonomous $J_\infty(0,x)$-holomorphic disk $v$ with boundary on $L$, and finitely many child atoms $Z\subset\overline{\mathbb H}$ have these properties. The rescaled maps $v_n(w)=u_n(a_n+\rho_nw)$ converge smoothly locally off $Z$ to $v$, on the upper half-plane including its straight boundary. Moreover
 $$\lim_{R\to\infty}\lim_nE_g(v_n;B_R^+)=m=E_g(v)+\sum_{z\in Z}m_z,\qquad v(\infty)=u(0).$$
