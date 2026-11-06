@@ -172,7 +172,7 @@ The valuation table is supplementary source context and is not used in the geome
 
 The parallel edges in $\widetilde A_1$ represent total intersection number two; the cycle in $\widetilde A_2$ represents one intersection for each pair. These diagrams visualize the two ambiguous graph cases only; the proof uses intersection numbers and local equations, not the diagrams.
 
-~~~tikzpicture
+```tikz
 \begin{tikzpicture}[scale=0.8, every node/.style={circle,draw,inner sep=2pt}]
 \node (a) at (0,0) {$\alpha_0$};
 \node (b) at (2,0) {$\alpha_1$};
@@ -188,7 +188,7 @@ The parallel edges in $\widetilde A_1$ represent total intersection number two; 
 \draw (a)--(b)--(c)--(a);
 \node at (1,-0.6) {$\widetilde A_2$};
 \end{tikzpicture}
-~~~
+```
 
 The affine Dynkin graph specifies the geometric reducible-fiber configuration together with its primitive multiplicities. The theorem does not infer a gauge group from Kodaira type without the additional function-field monodromy test.
 

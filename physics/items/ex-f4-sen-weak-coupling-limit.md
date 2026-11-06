@@ -88,7 +88,7 @@ The limit is formal and source-specific: at $C=0$ the Weierstrass discriminant s
 
 The commutative diagram records only the explicitly checked double-cover maps: $p$ is projection, $\sigma$ is the deck involution, and both routes from $\widetilde U$ to $U$ agree because $p\circ\sigma=p$. It is a visual summary; the proof above establishes the fiber count, branch locus and identity without relying on the diagram.
 
-```latex
+```tikzcd
 \begin{tikzcd}
 \widetilde U \arrow[r,"\sigma"] \arrow[d,"p"'] & \widetilde U \arrow[d,"p"] \\
 U \arrow[r,"\mathrm{id}_U"'] & U

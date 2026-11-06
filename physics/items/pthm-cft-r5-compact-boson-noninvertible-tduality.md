@@ -137,7 +137,7 @@ Argurio et al. §§3.1 and 4.2 give the two-step construction and charge action,
 
 The following string diagram is shorthand for the rational fusion rule: two oppositely oriented gauging lines fuse to the direct sum of the $pq$ group lines. The upward output denotes the direct-sum object; the vertex denotes fusion. It records the stated orientation and direct-sum channel convention only, and no proof step depends on it.
 
-```latex
+```tikz
 \begin{tikzpicture}[baseline=(current bounding box.center),scale=0.9]
   \draw (-0.5,0) -- (-0.5,0.32);
   \draw (0.5,0) -- (0.5,0.32);

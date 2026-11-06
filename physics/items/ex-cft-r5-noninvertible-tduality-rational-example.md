@@ -103,7 +103,7 @@ The projection $P$ annihilates the genuine field $V_{1,0}$, and the charge actio
 
 The normalization is the finite-group gauging convention, not the undetermined absolute proportionality coefficient of the irrational continuous-gauging construction. The diagram below records the stated rational fusion channel; the two incoming labels specify orientation and the direct-sum output has two simple channels. It is explanatory only; the proof above uses the explicit group action and projector.
 
-```latex
+```tikz
 \begin{tikzpicture}[baseline=(current bounding box.center),scale=0.9]
   \draw (-0.5,0) -- (-0.5,0.32);
   \draw (0.5,0) -- (0.5,0.32);

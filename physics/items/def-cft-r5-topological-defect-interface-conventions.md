@@ -59,7 +59,7 @@ An interface $I_R:C_R\to C_{1/R}$ and an endodefect of $C_R$ are different objec
 
 $$C_R \xrightarrow{I_R} C_{1/R} \xrightarrow{U_{1/R\to R}} C_R.$$
 
-```latex
+```tikzcd
 \begin{tikzcd}[column sep=large]
 C_R \arrow[r,"I_R"] & C_{1/R} \arrow[r,"U_{1/R\to R}"] & C_R
 \end{tikzcd}
