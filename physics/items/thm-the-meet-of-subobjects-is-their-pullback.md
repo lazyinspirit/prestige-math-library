@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-meet-of-subobjects-is-their-pullback.json
+  precheck: pass
 id: thm-the-meet-of-subobjects-is-their-pullback
 kind: theorem
 title: "The meet of two subobjects is their pullback"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
 sources:
   scraped: []
   references:
@@ -48,8 +44,19 @@ of $b$ and $c$.
 
 **Proof technique:** direct.
 
-1.1 Form a pullback square ```tikzcd P \arrow[r, "q"] \arrow[d, "p"'] & C \arrow[d, "c"] \\ B \arrow[r, "b"'] & A. ``` By [L2], the pullback leg $p$ is monic, so the composite $m:=bp=cq:P\to A$ is monic as well. Because $m$ factors through both $b$ and $c$, it is a lower bound of the two subobjects. [L1, L2, L3]
+1.1 Form the pullback of $b:B\to A$ and $c:C\to A$, with projections $p:P\to B$ and $q:P\to C$ satisfying $bp=cq$ (illustrated in Remarks). By [L2], the pullback leg $p$ is monic, so the composite $m:=bp=cq:P\to A$ is monic as well. Because $m$ factors through both $b$ and $c$, it is a lower bound of the two subobjects. [L1, L2, L3]
 
 1.2 Let $n:N\rightarrowtail A$ be any lower bound. Then $n=b u=c v$ for some $u:N\to B$ and $v:N\to C$. By the pullback universal property [L1], there is a unique $w:N\to P$ with $pw=u$ and $qw=v$. Therefore $m w=b u=n$, so $n$ factors through $m$. Hence $n\le m$. [L1, L3, construct]
 
 2.1 Steps 1.1 and 1.2 show that $m$ is a lower bound above every other lower bound. By [L3], the pullback subobject is exactly $B\wedge C$. [L3, step 1.1, step 1.2] ∎
+
+## Remarks
+
+The pullback square used in step 1.1 is
+
+```tikzcd
+P \arrow[r, "q"] \arrow[d, "p"'] & C \arrow[d, "c"] \\
+B \arrow[r, "b"'] & A
+```
+
+Its commutativity is $bp=cq$, and the monomorphism representing the meet is $m=bp=cq:P\to A$.

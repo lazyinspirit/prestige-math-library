@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-projective-map-line-bundle-data-equivalence.json
+  precheck: pass
 id: thm-projective-map-line-bundle-data-equivalence
 kind: theorem
 title: "Maps to projective space equal generating line-bundle data"
@@ -16,13 +19,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Constructions of Schemes, Sections 27.8-27.21"
@@ -87,4 +83,4 @@ with its unit section.
 
 2.3 Naturality. For a morphism $g:X'\to X$ the data of $\varphi\circ g$ are the pullbacks along $g$ of the data of $\varphi$, and $\Phi$ is compatible with this operation because the universal property [F2] is: the morphism associated to the pulled-back data is $\Phi(L;s)\circ g$, by uniqueness in [F2]. The same uniqueness gives compatibility with base change $S'\to S$. [F2, step 1.1, step 1.2]
 
-3.1 Conclusion. Step 1.1 attaches generating line-bundle data to every morphism, step 1.2 produces a morphism from data, steps 2.1 and 2.2 show the two operations are mutually inverse on isomorphism classes, step 2.3 gives naturality, and step 1.3 covers $n=0$. The Axiom of Choice [A1] is inherited from the projective-space and sheaf constructions; no choice is made here. [A1, step 1.2, step 2.1, step 2.2, step 2.3, step 1.3] \qed 
+3.1 Conclusion. Step 1.1 attaches generating line-bundle data to every morphism, step 1.2 produces a morphism from data, steps 2.1 and 2.2 show the two operations are mutually inverse on isomorphism classes, step 2.3 gives naturality, and step 1.3 covers $n=0$. The Axiom of Choice [A1] is inherited from the projective-space and sheaf constructions; no choice is made here. [A1, step 1.2, step 2.1, step 2.2, step 2.3, step 1.3] ∎ 

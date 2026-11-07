@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-minkowski-inequality-for-integrals.json
+  precheck: pass
 id: thm-minkowski-inequality-for-integrals
 kind: theorem
 title: "Minkowski's inequality for integrals, including $p = \\infty$"
@@ -10,9 +13,6 @@ provenance:
   proof: ai-altered
 deps: [thm-holder-inequality-for-integrals, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, thm-holder-finite-real-exponents]
 proof_strategy: "For 1 < p < infinity, first use the two-term finite Holder inequality to show |f + g|^p is integrable, then apply the standard Holder step to |f + g| |f + g|^(p - 1). The cases p = 1 and p = infinity are handled directly from subadditivity of absolute value and the essential-supremum bound."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -49,7 +49,7 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 ## Proof
 
-**Proof technique:** For $1 < p < infinity$, first use the two-term finite Holder inequality to show $|f + g|^p$ is integrable, then apply the standard Holder step to $|f + g| |f + g|^{p - 1}$. The cases $p = 1$ and $p = \infty$ are handled directly from subadditivity of absolute value and the essential-supremum bound.
+**Proof technique:** For p strictly between one and infinity, first use the two-term finite Holder inequality to show integrability of the pth power of the absolute value of f + g, then apply the standard Holder step to the product of the absolute value of f + g and its (p − 1)st power. The cases p = 1 and p = ∞ are handled directly from subadditivity of absolute value and the essential-supremum bound.
 
 1.1 If $p=1$, then $|f+g|\le|f|+|g|$ pointwise, so [L4, L5, given] $$\|f+g\|_1=\int|f+g|\,d\mu\le\int|f|\,d\mu+\int|g|\,d\mu=\|f\|_1+\|g\|_1.$$ [L4, L5, given]
 

@@ -22,7 +22,7 @@ deps:
 - def-nonnegative-lebesgue-integral
 - thm-linear-change-of-variables-for-lebesgue-measure
 - thm-sylvesters-law-of-inertia
-- thm-integration-by-parts-for-absolutely-continuous-functions
+- thm-integration-by-parts-with-interior-derivatives
 - thm-differentiation-under-the-integral-sign
 - thm-multivariable-taylor-formula-with-lagrange-remainder
 - thm-newton-leibniz-with-interior-derivative
@@ -52,7 +52,7 @@ Let $d\ge1$, $a\in C_c^\infty(\mathbb R^d)$, $\varphi\in C^\infty(\mathbb R^d;\m
 
 **Given:** $d\ge1$, a real phase $\varphi\in C^\infty(\mathbb R^d;\mathbb R)$, an amplitude $a\in C_c^\infty(\mathbb R^d;\mathbb C)$, $I(\lambda)=\int e^{2\pi i\lambda\varphi(x)}a(x)\,dx$.
 
-[F1] Divergence and integration by parts: for a compactly supported smooth vector field $v$ one has $\int_{\mathbb R^d}\nabla\cdot v\,dx=0$ (integrate the last coordinate first and apply the one-dimensional fundamental theorem across the compact support, using Fubini); hence for smooth $h$ and any $j$, $\int(\partial_j\psi)h\,dx=-\int\psi\,\partial_jh\,dx$. ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], [[thm-newton-leibniz-with-interior-derivative]], [[cor-newton-leibniz-with-finitely-many-exceptional-points]], [[thm-algebra-of-derivatives]])
+[F1] Divergence and integration by parts: for a compactly supported smooth vector field $v$ one has $\int_{\mathbb R^d}\nabla\cdot v\,dx=0$ (integrate the last coordinate first and apply the one-dimensional fundamental theorem across the compact support, using Fubini); and apply the real smooth integration-by-parts identity componentwise to complex factors; hence for smooth $h$ and any $j$, $\int(\partial_j\psi)h\,dx=-\int\psi\,\partial_jh\,dx$. ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], [[thm-newton-leibniz-with-interior-derivative]], [[cor-newton-leibniz-with-finitely-many-exceptional-points]], [[thm-algebra-of-derivatives]], [[thm-integration-by-parts-with-interior-derivatives]])
 
 [F2] Taylor with Lagrange remainder near the stationary point: since $\nabla\varphi(x_0)=0$, on a sufficiently small ball $B(x_0,\eta)$ one has $\varphi(x)=\varphi(x_0)+\tfrac12\langle Q(x-x_0),x-x_0\rangle+R(x)$ with $Q=D^2\varphi(x_0)$ and $|R(x)|\le C_3|x-x_0|^3$, $|\nabla R(x)|\le C_3|x-x_0|^2$; consequently $\nabla\varphi(x)=Q(x-x_0)+\nabla R(x)$ and, $Q$ being invertible with smallest singular value $\mu>0$, $|\nabla\varphi(x)|\ge\tfrac\mu2|x-x_0|$ for $|x-x_0|$ small. ([[thm-multivariable-taylor-formula-with-lagrange-remainder]], [[cor-second-order-taylor-expansion-with-the-hessian]], [[def-multivariable-taylor-polynomial]])
 

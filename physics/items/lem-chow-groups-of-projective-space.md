@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-chow-groups-of-projective-space.json
+  precheck: pass
 id: lem-chow-groups-of-projective-space
 kind: lemma
 title: "Chow groups of projective space"
@@ -24,8 +27,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "The Stacks Project, Chow Homology and Chern Classes, Sections 42.19 and 42.32 (localization and homotopy invariance)"
@@ -72,7 +73,7 @@ suffice for rational points.
 
 ## Proof
 
-**Proof technique:** direct; use localization and homotopy invariance for the affine and projective decompositions, and the cap operation of $\mathcal O(1)$ followed by degree for independence.
+**Proof technique:** direct; use localization and homotopy invariance for the affine and projective decompositions, and the cap operation of the twisting sheaf O(1) followed by degree for independence.
 
 1.1 Affine space. Applying homotopy invariance [L1] successively in the $n$ coordinates gives $A_d(\mathbb A^n_k)\cong A_{d-n}(\operatorname{Spec}k)$, which is $\mathbb Z$ for $d=n$ and $0$ otherwise; the top class is $[\mathbb A^n]$ and for $n=1$ every closed point is the principal divisor of its monic irreducible polynomial in $k[t]$, which is linear precisely for a rational point. [L1, L4, given, algebra]
 

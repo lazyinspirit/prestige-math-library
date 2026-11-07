@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-temperley-lieb-generators-satisfy-local-relations.json
+  precheck: pass
 id: lem-temperley-lieb-generators-satisfy-local-relations
 kind: lemma
 title: "The elementary diagram generators satisfy the local Temperley–Lieb relations"
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-18
 sources:
   references:
     - title: "David Ridout and Yvan Saint-Aubin, Standard Modules, Induction and the Structure of the Temperley-Lieb Algebra, §2"
@@ -68,3 +66,71 @@ $$\pi_n:P_n(R,\delta)\longrightarrow\mathrm{TL}_n(R,\delta).$$
 ## Remarks
 
 The three-strand calculation only follows connected paths and cycles in the finite stacked graph. It makes no appeal to a drawing as a proof and uses no invertibility assumption on $\delta$.
+
+The following local panels illustrate steps 1.1 and 1.2. Factors are read from top to bottom; strands outside the displayed positions are vertical and omitted. The dots at intermediate levels mark glued boundary points, not crossings.
+
+On positions $i,i+1$, the two middle arcs in $d_i^2$ form one closed cycle. Removing that cycle contributes the scalar $\delta$ and leaves the exterior cap and cup of $d_i$.
+
+```tikz
+\begin{tikzpicture}[scale=1.1, line width=0.9pt, every node/.style={scale=1.15}]
+  \node at (0.5,5) {$d_i^2$};
+  \node[above] at (0,4) {$i$};
+  \node[above] at (1,4) {$i+1$};
+  \draw (0,4) .. controls (0,3.3) and (1,3.3) .. (1,4);
+  \draw (0,2) .. controls (0,2.7) and (1,2.7) .. (1,2);
+  \draw (0,2) .. controls (0,1.3) and (1,1.3) .. (1,2);
+  \draw (0,0) .. controls (0,0.7) and (1,0.7) .. (1,0);
+  \foreach \y in {0,2,4} {
+    \fill (0,\y) circle (1.6pt);
+    \fill (1,\y) circle (1.6pt);
+  }
+  \node[left] at (-0.2,3) {$d_i$};
+  \node[left] at (-0.2,1) {$d_i$};
+  \draw[->] (1.7,2) -- (3.7,2);
+  \node[above] at (2.7,2) {one loop};
+  \node at (5,5) {$\delta d_i$};
+  \node at (4,2) {$\delta$};
+  \draw (4.5,4) .. controls (4.5,3.3) and (5.5,3.3) .. (5.5,4);
+  \draw (4.5,0) .. controls (4.5,0.7) and (5.5,0.7) .. (5.5,0);
+  \foreach \x in {4.5,5.5} {
+    \fill (\x,4) circle (1.6pt);
+    \fill (\x,0) circle (1.6pt);
+  }
+\end{tikzpicture}
+```
+
+On positions $i,i+1,i+2$, the three-factor stack has no closed cycle: besides the exterior cap and cup, one path joins the rightmost exterior endpoints through all six interface points. The right panel shows the same exterior matching straightened to $d_i$. Reflection across the middle position gives the other adjacent triple relation. The distant relation in step 1.3 instead acts on disjoint pairs of positions.
+
+```tikz
+\begin{tikzpicture}[scale=1.1, line width=0.9pt, every node/.style={scale=1.15}]
+  \node at (1,7) {$d_i d_{i+1}d_i$};
+  \node[above] at (0,6) {$i$};
+  \node[above] at (1,6) {$i+1$};
+  \node[above] at (2,6) {$i+2$};
+  \draw (0,6) .. controls (0,5.3) and (1,5.3) .. (1,6);
+  \draw (0,4) .. controls (0,5) and (1,5) .. (1,4);
+  \draw (2,6) -- (2,4);
+  \draw (1,4) .. controls (1,3.3) and (2,3.3) .. (2,4);
+  \draw (1,2) .. controls (1,2.7) and (2,2.7) .. (2,2);
+  \draw (0,4) -- (0,2);
+  \draw (0,2) .. controls (0,1.3) and (1,1.3) .. (1,2);
+  \draw (0,0) .. controls (0,0.7) and (1,0.7) .. (1,0);
+  \draw (2,2) -- (2,0);
+  \foreach \y in {0,2,4,6} {
+    \foreach \x in {0,1,2} { \fill (\x,\y) circle (1.6pt); }
+  }
+  \node[left] at (-0.2,5) {$d_i$};
+  \node[left] at (-0.2,3) {$d_{i+1}$};
+  \node[left] at (-0.2,1) {$d_i$};
+  \draw[->] (2.7,3) -- (5.1,3);
+  \node[above] at (3.9,3) {no loops};
+  \node at (6.7,7) {$d_i$};
+  \draw (5.7,6) .. controls (5.7,5.3) and (6.7,5.3) .. (6.7,6);
+  \draw (5.7,0) .. controls (5.7,0.7) and (6.7,0.7) .. (6.7,0);
+  \draw (7.7,6) -- (7.7,0);
+  \foreach \x in {5.7,6.7,7.7} {
+    \fill (\x,6) circle (1.6pt);
+    \fill (\x,0) circle (1.6pt);
+  }
+\end{tikzpicture}
+```

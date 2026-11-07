@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-hh-fundamental-theorem-of-hopf-modules.json
+  precheck: pass
 id: thm-hh-fundamental-theorem-of-hopf-modules
 kind: theorem
 title: "The fundamental theorem of right-right Hopf modules"
@@ -19,8 +22,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Hans-Juergen Schneider, Lectures on Hopf Algebras, notes by Sonia Natale, Trabajos de Matematica 31/95"
@@ -72,3 +73,14 @@ where $P(m)=\sum m_0S(m_1)$. No bijectivity assumption on $S$ is used.
 2.2 The map $\alpha$ is right $H$-linear: $\alpha((n\otimes h)g)=n(hg)=(nh)g=\alpha(n\otimes h)g$. It is right $H$-colinear because $(\alpha\otimes\operatorname{id})\rho(n\otimes h)=\sum nh_1\otimes h_2=\rho(nh)$, where the final equality is compatibility and $\rho(n)=n\otimes1_H$. These equalities hold on pure tensors and therefore on the full tensor product. [F1, F4, step 1.1, algebra]
 
 3.1 Steps 1.3 and 2.1 show that $\alpha$ and $\beta$ are inverse linear maps. Since $\alpha$ preserves action and coaction by step 2.2, its inverse preserves them too: apply $\alpha^{-1}$ to the action identity, and apply $\alpha^{-1}\otimes\operatorname{id}_H$ to the coaction identity. Thus both maps are Hopf-module morphisms and $\alpha$ is the asserted isomorphism. The proof uses $S$ but nowhere uses $S^{-1}$. [step 1.3, step 2.1, step 2.2, algebra] ∎
+
+
+## Remarks
+
+The isomorphism and its inverse can be displayed as follows; the left object has the free right-right Hopf-module structure of [F4].
+
+```tikzcd
+M^{\mathrm{co}H}\otimes H \arrow[r, shift left=1.2ex, "\alpha"] & M \arrow[l, shift left=1.2ex, "\beta"]
+```
+
+Here $\alpha(n\otimes h)=nh$ and $\beta=(P\otimes\operatorname{id}_H)\rho$, with $P:M\to M^{\operatorname{co}H}$ given by $P(m)=\sum m_0S(m_1)$. Thus $\beta(m)=\sum P(m_0)\otimes m_1$. The inverse identities are $\beta\alpha=\operatorname{id}_{M^{\operatorname{co}H}\otimes H}$ and $\alpha\beta=\operatorname{id}_M$, proved in steps 2.1 and 1.3 respectively. Both arrows preserve the action and coaction by steps 2.2 and 3.1; the proof above is independent of the picture.

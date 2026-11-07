@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rational-hurewicz-for-arbitrary-wedges-of-high-dimensional-spheres.json
+  precheck: pass
 id: lem-rational-hurewicz-for-arbitrary-wedges-of-high-dimensional-spheres
 kind: lemma
 title: "Rational Hurewicz for arbitrary wedges of high-dimensional spheres"
@@ -28,13 +31,12 @@ sources:
     - title: "Milnor and Stasheff, Characteristic Classes"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
       locator: "Theorem 18.3 and preceding discussion, printed pp.207–208; finite-complex comparison only, not a proof supplier for the arbitrary-CW theorem"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
 
-Assume AC. Let W be the CW wedge of any set of spheres of dimensions at least c≥2. For 1≤i≤2c−2, π_i(W)⊗Q and H_i(W;Q) are the direct sum of Q indexed by spheres of dimension i, and actual Hurewicz identifies their orientation generators.
+Assume AC. Let $W$ be the CW wedge of any set of spheres of dimensions at least $c\ge2$. For $1\le i\le2c-2$, $\pi_i(W)\otimes\mathbb{Q}$ and $H_i(W;\mathbb{Q})$ are the direct sum of $\mathbb{Q}$ indexed by spheres of dimension $i$, and actual Hurewicz identifies their orientation generators.
 
 ## Facts & Assumptions
 
@@ -52,8 +54,8 @@ Assume AC. Let W be the CW wedge of any set of spheres of dimensions at least c�
 
 **Proof technique:** direct.
 
-1.1 Let P be the finite product of the spheres. Their CW structures have a vertex and a top cell. Products of their characteristic disks give the finite product CW structure: each product disk is a disk of the sum dimension, with boundary mapping into the union of products of lower faces; an explicit radial disk homeomorphism or a finite subdivision gives its characteristic map. The weak CW topology agrees with the ordinary product because the spaces are finite compact Hausdorff CW complexes. W embeds as the subcomplex with at most one nonvertex coordinate. Every relative cell of (P,W) has at least two top factors, and hence dimension at least 2c. The published high-relative-cells lemma makes π_i(W)→π_i(P) an isomorphism for i<2c−1. Based cube maps into a finite product are exactly tuples of based cube maps; homotopies and concatenations are coordinatewise, so π_i(P)=∏π_i(S^{m_t}). The rational sphere lemma gives the displayed rational groups: for m_t>i connectivity suffices, while for m_t≤i we have i≤2c−2≤2m_t−2. [given, F1, F2, F4]
+1.1 Let $P$ be the finite product of the spheres. Their CW structures have a vertex and a top cell. Products of their characteristic disks give the finite product CW structure: each product disk is a disk of the sum dimension, with boundary mapping into the union of products of lower faces; an explicit radial disk homeomorphism or a finite subdivision gives its characteristic map. The weak CW topology agrees with the ordinary product because the spaces are finite compact Hausdorff CW complexes. $W$ embeds as the subcomplex with at most one nonvertex coordinate. Every relative cell of $(P,W)$ has at least two top factors, and hence dimension at least $2c$. The published high-relative-cells lemma makes $\pi_i(W)\to\pi_i(P)$ an isomorphism for $i<2c-1$. Based cube maps into a finite product are exactly tuples of based cube maps; homotopies and concatenations are coordinatewise, so $\pi_i(P)=\prod\pi_i(S^{m_t})$. The rational sphere lemma gives the displayed rational groups: for $m_t>i$ connectivity suffices, while for $m_t\le i$ we have $i\le2c-2\le2m_t-2$. [given, F1, F2, F4]
 
-2.1 The cellular complex of W has one zero-cell and one top cell for each sphere, with zero differentials. Sphere inclusions therefore identify its positive homology with the corresponding direct sums. Naturality of Hurewicz on those inclusions and the degree-m orientation generator calculation in the rational sphere lemma show that the displayed isomorphism is the actual Hurewicz map. [step 1.1, F3]
+2.1 The cellular complex of $W$ has one zero-cell and one top cell for each sphere, with zero differentials. Sphere inclusions therefore identify its positive homology with the corresponding direct sums. Naturality of Hurewicz on those inclusions and the degree-$m$ orientation generator calculation in the rational sphere lemma show that the displayed isomorphism is the actual Hurewicz map. [step 1.1, F3]
 
-3.1 Every sphere representative and disk homotopy has finite cell support. Its image is therefore contained in a finite subwedge, obtained by including all spheres whose top cells meet that support. A class in π_i(W) is thus represented in a finite subwedge; equality of two such classes is witnessed in a larger finite subwedge by the finite support of a homotopy. This is exactly the filtered-colimit description of π_i(W). The finite-wedge comparisons above are natural under adding factors: the corresponding map on finite products inserts constant coordinates. Thus that colimit is the direct sum of the individual sphere homotopy groups in this range. Row 1 rationalizes it to their rational direct sum. Cellular homology of the infinite wedge uses finite chains and gives the same direct sum without any finite-type assumption. Naturality of Hurewicz retains the generator identification. [step 2.1, F2, F3, F4] ∎
+3.1 Every sphere representative and disk homotopy has finite cell support. Its image is therefore contained in a finite subwedge, obtained by including all spheres whose top cells meet that support. A class in $\pi_i(W)$ is thus represented in a finite subwedge; equality of two such classes is witnessed in a larger finite subwedge by the finite support of a homotopy. This is exactly the filtered-colimit description of $\pi_i(W)$. The finite-wedge comparisons above are natural under adding factors: the corresponding map on finite products inserts constant coordinates. Thus that colimit is the direct sum of the individual sphere homotopy groups in this range. Row 1 rationalizes it to their rational direct sum. Cellular homology of the infinite wedge uses finite chains and gives the same direct sum without any finite-type assumption. Naturality of Hurewicz retains the generator identification. [step 2.1, F2, F3, F4] ∎

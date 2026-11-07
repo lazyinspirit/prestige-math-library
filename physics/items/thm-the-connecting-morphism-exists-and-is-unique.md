@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-the-connecting-morphism-exists-and-is-unique.json
+  precheck: pass
 id: thm-the-connecting-morphism-exists-and-is-unique
 kind: theorem
 title: "The connecting morphism exists and is unique"
@@ -18,9 +21,6 @@ deps: [def-snake-data,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -71,17 +71,9 @@ $$\iota \delta \pi = \iota' g \pi'.$$
 
 **Proof technique:** direct.
 
-1.1 Because the top row is short exact, [L1] says that $p$ is epic and $i=\ker(p)$. Form the pullback of $p$ along $k_h$:
+1.1 Because the top row is short exact, [L1] says that $p$ is epic and $i=\ker(p)$. Form the pullback of $p$ along $k_h$, with projections $\pi':P\to B$ and $\pi:P\to K$ satisfying $p\pi'=k_h\pi$ (illustrated in Remarks). By [L2], the map $\pi$ is epic. The induced map on kernels identifies $\ker(\pi)$ with $\ker(p)$, so after transporting along $i=\ker(p)$ we obtain a kernel $j:A \to P$ of $\pi$ satisfying $\pi' j = i$. [L1, L2, construct]
 
-```tikzcd P \arrow[r, "\pi'"] \arrow[d, "\pi"'] & B \arrow[d, "p"] \\ K \arrow[r, "k_h"'] & C. ```
-
-By [L2], the map $\pi$ is epic. The induced map on kernels identifies $\ker(\pi)$ with $\ker(p)$, so after transporting along $i=\ker(p)$ we obtain a kernel $j:A \to P$ of $\pi$ satisfying $\pi' j = i$. [L1, L2, construct]
-
-1.2 Form the pushout of $q_f$ and $i'$:
-
-```tikzcd A' \arrow[r, "i'"] \arrow[d, "q_f"'] & B' \arrow[d, "\iota'"] \\ Q \arrow[r, "\iota"'] & R. ```
-
-Since $i'$ is monic by [L1], [L3] makes $\iota$ monic. [L1, L3, construct]
+1.2 Form the pushout of $q_f$ and $i'$, with coprojections $\iota:Q\to R$ and $\iota':B'\to R$ satisfying $\iota q_f=\iota'i'$ (illustrated in Remarks). Since $i'$ is monic by [L1], [L3] makes $\iota$ monic. [L1, L3, construct]
 
 2.1 Step 1.1 gives $j=\ker(\pi)$ and makes $\pi$ epic. By [L4], the sequence $$0 \to A \xrightarrow{j} P \xrightarrow{\pi} K \to 0$$ is therefore short exact. Applying [L1] to this new short exact sequence shows that $\pi$ is also a cokernel of $j$. [L1, L4, step 1.1]
 
@@ -92,3 +84,21 @@ Since $i'$ is monic by [L1], [L3] makes $\iota$ monic. [L1, L3, construct]
 4.1 Composing with the pushout coprojection gives $$\iota \delta \pi = \iota q_f a = \iota' i' a = \iota' g \pi',$$ which is the required relation. If $\delta_1$ and $\delta_2$ both satisfy that relation, then $$\iota \delta_1 \pi = \iota \delta_2 \pi.$$ Since $\pi$ is epic by step 1.1 and $\iota$ is monic by step 1.2, this forces $\delta_1=\delta_2$. [step 1.1, step 1.2, step 3.1, algebra]
 
 5.1 Hence the connecting morphism exists and is unique. [step 3.1, step 4.1] ∎
+
+## Remarks
+
+The pullback used in step 1.1 is the following commutative square, with $P=B\times_C K$ and $p\pi'=k_h\pi$:
+
+```tikzcd
+P \arrow[r, "\pi'"] \arrow[d, "\pi"'] & B \arrow[d, "p"] \\
+K \arrow[r, "k_h"] & C\vphantom{g_j}
+```
+
+The pushout used in step 1.2 is the following commutative square, with $R=Q\amalg_{A'}B'$ and $\iota q_f=\iota'i'$:
+
+```tikzcd
+A' \arrow[r, "i'"] \arrow[d, "q_f"'] & B' \arrow[d, "\iota'"] \\
+Q \arrow[r, "\iota"] & R\vphantom{g_j}
+```
+
+The proof constructs $\delta$ through $\delta\pi=q_fa$, where $a:P\to A'$ satisfies $i'a=g\pi'$. Both squares illustrate the constructions; the proof establishes the connecting relation and uniqueness independently of the figures.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-a-finite-dimensional-nilpotent-lie-algebra-has-a-codimension-one-ideal-containing-any-given-proper-subalgebra.json
+  precheck: pass
 id: cor-a-finite-dimensional-nilpotent-lie-algebra-has-a-codimension-one-ideal-containing-any-given-proper-subalgebra
 kind: corollary
 title: Codimension-one ideals in nilpotent Lie algebras
@@ -11,12 +14,6 @@ proof_strategy: induction
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-14
 sources:
   references:
     - title: "Milne, Lie Algebras, Propositions 2.5–2.6"
@@ -44,7 +41,7 @@ $\mathfrak g$ of codimension one.
 
 ## Proof
 
-**Proof technique:** induction on $\dim\mathfrak g$.
+**Proof technique:** induction on the dimension of the Lie algebra.
 
 1.1 If $\dim\mathfrak g=1$, the only proper subalgebra is $0$, which is itself an ideal of codimension one. The case $\mathfrak g=0$ has no proper subalgebra and is vacuous. [base, given]
 

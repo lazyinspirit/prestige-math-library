@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-planar-piecewise-analytic-region-triangulation.json
+  precheck: pass
 id: lem-planar-piecewise-analytic-region-triangulation
 kind: lemma
 title: Slab triangulation of a compact plane region bounded by finitely many piecewise real-analytic curves
@@ -22,9 +25,7 @@ sources:
     - title: "Guillaume Valette, On subanalytic geometry (2025)"
       url: "https://arxiv.org/pdf/2507.23622"
       locator: "Definition 1.2.1 and Theorem 1.2.3, printed pp. 14–15, describe analytic cylindrical cells; Proposition 1.8.4, printed p. 38, gives convergent Puiseux expansions for one-variable globally subanalytic functions. This corroborates endpoint Puiseux behavior; the finite graph construction and rectifiability are proved locally below."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -160,3 +161,68 @@ printed p. 38, gives Puiseux endpoint expansions for one-variable globally
 subanalytic functions. It does not assert the face-to-face graph-bounded
 triangulation here; steps 1.3 and 5.1–10.1 establish that construction and its
 endpoint regularity directly from the input analytic arcs.
+
+
+## Remarks
+
+The picture illustrates steps 6.2 and 7.1 for the particular nonpinched band
+$C=\{(x,y):0\le y\le2,\ a(y)\le x\le a(y)+1\}$, where
+$a(y)=y(2-y)/6$. Thus $F(s,y)=(s+a(y),y)$ is exactly the inverse of
+$\Phi:C\to Q=[0,1]\times[0,2]$. The wall marks are $s=1/3$ on top and
+$s=2/3$ on bottom, in addition to the corners; $q=(1/2,1)$, $\ell=(0,1)$
+and $r=(1,1)$. The right-hand fan is the image under $F$ of the left-hand
+fan. In general these pulled-back spokes are curved analytic arcs, as drawn
+here, rather than straight diagonals. This is one band, not a depiction of
+all possible components or pinches of $R$; step 8.1 treats pinched bands.
+
+```tikz
+\begin{tikzpicture}[x=3cm,y=1.2cm,line width=0.8pt,>=stealth,every node/.style={font=\large}]
+\begin{scope}
+\draw (0,0)--(1,0)--(1,2)--(0,2)--(0,0);
+\draw (0,1)--(1,1);
+\draw (.5,1)--(0,0);
+\draw (.5,1)--(0,2);
+\draw (.5,1)--(1,0);
+\draw (.5,1)--(1,2);
+\draw (.5,1)--(1/3,2);
+\draw (.5,1)--(2/3,0);
+\fill (0,0) circle (0.65pt) (1,0) circle (0.65pt) (0,2) circle (0.65pt) (1,2) circle (0.65pt) (1/3,2) circle (0.65pt) (2/3,0) circle (0.65pt) (0,1) circle (0.65pt) (1,1) circle (0.65pt) (.5,1) circle (0.65pt);
+\node[above] at (.7,2.5) {$Q$};
+\node[left] at (0,1) {$\ell$};
+\node[right] at (1,1) {$r$};
+\node[below] at (2/3,0) {$2/3$};
+\node[above] at (1/3,2) {$1/3$};
+\end{scope}
+\draw[->] (1.25,1.45)--(1.95,1.45) node[midway,above] {$F=\Phi^{-1}$};
+\begin{scope}[xshift=6.9cm]
+\draw plot[domain=0:2,samples=45] ({\x*(2-\x)/6},\x);
+\draw plot[domain=0:2,samples=45] ({1+\x*(2-\x)/6},\x);
+\draw (0,0)--(1,0);
+\draw (0,2)--(1,2);
+\draw (1/6,1)--(7/6,1);
+\draw plot[domain=0:1,samples=30] ({.5*\x+\x*(2-\x)/6},\x);
+\draw plot[domain=0:1,samples=30] ({1-.5*\x+\x*(2-\x)/6},\x);
+\draw plot[domain=0:1,samples=30] ({2/3-\x/6+\x*(2-\x)/6},\x);
+\draw plot[domain=1:2,samples=30] ({1-.5*\x+\x*(2-\x)/6},\x);
+\draw plot[domain=1:2,samples=30] ({.5*\x+\x*(2-\x)/6},\x);
+\draw plot[domain=1:2,samples=30] ({2/3-\x/6+\x*(2-\x)/6},\x);
+\fill (0,0) circle (0.65pt) (1,0) circle (0.65pt) (0,2) circle (0.65pt) (1,2) circle (0.65pt) (1/3,2) circle (0.65pt) (2/3,0) circle (0.65pt) (1/6,1) circle (0.65pt) (7/6,1) circle (0.65pt) (2/3,1) circle (0.65pt);
+\node[above] at (.3,2.5) {$C$};
+\node[left] at (.08,.3) {$a$};
+\node[right] at (1.08,1.7) {$a+1$};
+\node[below] at (.5,-.4) {wall $y=0$};
+\node[above] at (.7,2.9) {wall $y=2$};
+\end{scope}
+\end{tikzpicture}
+```
+
+The interior vertices are $q$ on the left and $F(q)$ on the right.
+Each panel has eight triangular faces, nine vertices and sixteen edges
+(counting subdivided boundary sides separately). The horizontal edges through
+$q$ map to horizontal edges through $F(q)$; the other six spokes become the
+shown analytic graphs. Since $F$ is a homeomorphism, their images have exactly
+the same incidences and meet face to face. Give each face its positive boundary
+orientation: along a shared edge the two face contours run in opposite
+directions, so internal edges cancel in their sum. The remaining contour is
+bottom to the right, right graph upwards, top to the left and left graph
+downwards, as in the Statement. The rigorous proof is independent of the picture.

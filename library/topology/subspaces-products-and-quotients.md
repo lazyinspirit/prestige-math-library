@@ -2,21 +2,35 @@
 page: subspaces-products-and-quotients
 title: "Subspaces, Products, and Quotients"
 status: published
-items: [thm-subspace-closure-and-interior, def-hereditary-property,
-        cor-metrizability-and-first-countability-are-hereditary,
-        def-initial-and-final-topology, thm-initial-and-final-characteristic-properties,
-        def-product-topology, thm-product-universal-property, thm-box-finer-than-product,
-        thm-product-of-subspaces-and-closures, lem-product-topology-on-rn,
-        def-disjoint-union-topology, thm-coproduct-universal-property,
-        def-quotient-topology, thm-quotient-universal-property,
-        lem-open-or-closed-surjection-is-quotient, thm-quotient-canonical-factorisation,
-        def-adjunction-cone-suspension, def-hausdorff-space,
-        rem-constructions-this-page-stops-short-of]
-examples: [fs-product-topology-equals-box-topology,
-           fs-arbitrary-product-of-open-sets-is-open,
-           fs-projections-are-closed-maps,
-           fs-quotient-map-is-open,
-           fs-quotient-of-a-hausdorff-space-is-hausdorff]
+items:
+  - thm-subspace-closure-and-interior
+  - def-hereditary-property
+  - cor-metrizability-and-first-countability-are-hereditary
+  - def-initial-and-final-topology
+  - thm-initial-and-final-characteristic-properties
+  - def-product-topology
+  - thm-product-universal-property
+  - thm-box-finer-than-product
+  - thm-product-of-subspaces-and-closures
+  - lem-product-topology-on-rn
+  - def-disjoint-union-topology
+  - thm-coproduct-universal-property
+  - def-quotient-topology
+  - thm-quotient-universal-property
+  - lem-open-or-closed-surjection-is-quotient
+  - thm-quotient-canonical-factorisation
+  - def-adjunction-cone-suspension
+  - def-hausdorff-space
+  - rem-constructions-this-page-stops-short-of
+  - ex-circle-as-r-mod-z
+  - ex-torus-as-a-quotient-of-the-square
+  - ex-cylinder-and-mobius-band-as-quotients
+examples:
+  - fs-product-topology-equals-box-topology
+  - fs-arbitrary-product-of-open-sets-is-open
+  - fs-projections-are-closed-maps
+  - fs-quotient-map-is-open
+  - fs-quotient-of-a-hausdorff-space-is-hausdorff
 ---
 Subspaces, products, disjoint unions and quotients are organised through initial
 and final topologies. Their characteristic properties turn continuity into

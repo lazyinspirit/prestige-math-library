@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-tensor-product-basis-from-bases.json
+  precheck: pass
 id: thm-tensor-product-basis-from-bases
 kind: theorem
 title: "The elementary tensors of two bases form the product basis of the tensor product"
@@ -12,13 +15,6 @@ aliases: []
 landmark: true
 short: "Product basis of a tensor product"
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-15
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -60,3 +56,18 @@ Equivalently, the canonical map $R^{(I\times J)}\to M\otimes_RN$ sending the sta
 3.2 If $I=\varnothing$ or $J=\varnothing$, then $I\times J=\varnothing$, the corresponding factor and the target free module are zero by [L3], and step 2.1 is the unique isomorphism between zero modules. [step 2.1, L3]
 
 4.1 This proves the product-basis assertion in all cases. [step 3.1, step 3.2] ∎
+
+## Remarks
+
+The triangle illustrates the free extension of the product-indexed family. Write $u_{(i,j)}$ for the standard vector of $R^{(I\times J)}$, and let $\iota(i,j)=u_{(i,j)}$ and $b(i,j)=e_i\otimes f_j$. The diagonal is a set map; $\Phi$ is the module isomorphism of the statement.
+
+```tikzcd
+I\times J \arrow[r, "\iota"] \arrow[dr, "b"'] & R^{(I\times J)} \arrow[d, "\Phi", "\cong"'] \\
+& M\otimes_R N
+```
+
+The triangle commutes because $\Phi(u_{(i,j)})=e_i\otimes f_j$, as traced in proof step 3.1. More generally, for every finitely supported coefficient family $(c_{ij})_{(i,j)\in I\times J}$,
+
+$$\Phi\left(\sum_{(i,j)\in I\times J}c_{ij}u_{(i,j)}\right)=\sum_{(i,j)\in I\times J}c_{ij}(e_i\otimes f_j).$$
+
+These sums are finite even when $I$ and $J$ are infinite. If either index set is empty, the top-left set is empty and both module vertices are zero, as in step 3.2. The given bases suffice; no further choice of basis is involved. The proof above is independent of the illustration.

@@ -20,7 +20,7 @@ verification:
     delegated_by: owner
 sources:
   references:
-    - title: "Terence Tao, An Introduction to Measure Theory, Theorem 1.7.18"
+    - title: "Terence Tao, An Introduction to Measure Theory, Theorem 1.7.15"
       url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 2.37"
       url: "https://djvu.online/file/NPF4BEtSuqdFA"

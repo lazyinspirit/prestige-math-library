@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-nilpotent-jordan-string-basis.json
+  precheck: pass
 id: thm-nilpotent-jordan-string-basis
 kind: theorem
 title: "Every finite-dimensional nilpotent endomorphism has a basis of Jordan strings"
@@ -11,9 +14,6 @@ deps: [def-nilpotent-endomorphism, lem-independent-initial-vectors-give-independ
 aliases: []
 landmark: true
 proof_strategy: induction
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -38,7 +38,7 @@ Every nilpotent endomorphism $N$ of a finite-dimensional vector space $V$ has an
 
 ## Proof
 
-**Proof technique:** induction on $\dim\operatorname{im}N$.
+**Proof technique:** induction on the dimension of the image of N.
 
 1.1 If $\operatorname{im}N=0$, extend the empty independent set to a basis of $V$ by [L3]; every basis vector is then a length-one Jordan string. This includes $V=0$. [base, L3]
 

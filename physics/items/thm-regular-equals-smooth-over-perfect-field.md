@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-regular-equals-smooth-over-perfect-field.json
+  precheck: pass
 id: thm-regular-equals-smooth-over-perfect-field
 kind: theorem
 title: "Regular equals smooth over a perfect field"
@@ -27,13 +30,6 @@ deps:
   - thm-ag-geometric-regularity-perfect-base
   - thm-ag-standard-smooth-geometric-regularity
   - thm-stalk-structure-sheaf-prime-localization
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Varieties Lemma 33.12.3 (tag 038V), affine chart criterion for geometric regularity"
@@ -118,7 +114,9 @@ Choice.
 
 6.1 Regular implies smooth. At each point of $X$, take a chart from step 1.1. The local standard-smooth presentations supplied by step 5.1 make the morphism smooth at that point under [F15]. This proves the forward implication at all points, including nonclosed points. [F15, step 1.1, step 5.1]
 
-7.1 Boundary and nilpotent checks. For $X=\operatorname{Spec}k$, the local ring is $k$, with maximal ideal zero and both dimension and embedding dimension zero, so it is regular by [F19]. The map $k\to k$ has the standard smooth presentation with $n=c=0$ and $g=1$ by [F17], so $X$ is smooth. For $D_k=\operatorname{Spec}(k[\epsilon]/(\epsilon^2))$, the unique prime is $(\epsilon)$ because every prime contains the nilpotent $\epsilon$ and an element with nonzero constant term is a unit. The ring is two-dimensional over $k$, hence Noetherian; its local dimension is zero, whereas $(\epsilon)/(\epsilon)^2$ is one-dimensional, so its embedding dimension is one and [F19] shows it is not regular. Consequently it is not geometrically regular, since [F12] includes the extension $K=k$. By [F14] its structure map is not locally standard smooth, and [F15] says it is not smooth. Thus nilpotents are retained, and the theorem does not silently replace $D_k$ by its reduced point. Step 6.1 proves regular $\Rightarrow$ smooth, while step 3.2 proves smooth $\Rightarrow$ regular. AC is used only through the stated suppliers [F13]–[F15]; the proof treats one chart or point at a time, and no DC is invoked. [F12, F13, F14, F15, F17, F18, F19, step 6.1, step 3.2, given, algebra] $\square$ ## Source qualification
+7.1 Boundary and nilpotent checks. For $X=\operatorname{Spec}k$, the local ring is $k$, with maximal ideal zero and both dimension and embedding dimension zero, so it is regular by [F19]. The map $k\to k$ has the standard smooth presentation with $n=c=0$ and $g=1$ by [F17], so $X$ is smooth. For $D_k=\operatorname{Spec}(k[\epsilon]/(\epsilon^2))$, the unique prime is $(\epsilon)$ because every prime contains the nilpotent $\epsilon$ and an element with nonzero constant term is a unit. The ring is two-dimensional over $k$, hence Noetherian; its local dimension is zero, whereas $(\epsilon)/(\epsilon)^2$ is one-dimensional, so its embedding dimension is one and [F19] shows it is not regular. Consequently it is not geometrically regular, since [F12] includes the extension $K=k$. By [F14] its structure map is not locally standard smooth, and [F15] says it is not smooth. Thus nilpotents are retained, and the theorem does not silently replace $D_k$ by its reduced point. Step 6.1 proves regular $\Rightarrow$ smooth, while step 3.2 proves smooth $\Rightarrow$ regular. AC is used only through the stated suppliers [F13]–[F15]; the proof treats one chart or point at a time, and no DC is invoked. [F12, F13, F14, F15, F17, F18, F19, step 6.1, step 3.2, given, algebra] ∎
+
+## Source qualification
 
 Stacks Project Lemma 33.12.3 (tag 038V), lines 23–38, gives the affine-chart characterization of geometric regularity and its finite purely inseparable field tests. Lemma 33.12.6 (tag 038X), lines 23–28, proves that geometric regularity at a point is equivalent to smoothness there for a locally finite-type scheme. The latter statement does not assume perfectness; perfectness enters this item through the regular-algebra scalar-extension theorem. Stacks Algebra Lemma 10.166.1 (tag 0381), lines 22–36, gives the finitely-generated-field versus finite-purely-inseparable test. The stronger arbitrary-field scalar-extension assertion used here is supplied by the fully proved library item [[thm-ag-geometric-regularity-perfect-base]] via [[lem-ag-geometric-regularity-field-tests]].
 

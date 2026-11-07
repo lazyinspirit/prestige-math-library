@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-temperley-lieb-general-theta-net-evaluation.json
+  precheck: pass
 id: lem-temperley-lieb-general-theta-net-evaluation
 kind: lemma
 title: "General Temperley–Lieb theta-net evaluation and its root domain"
@@ -112,3 +115,24 @@ These identities specialize to every complex $q\ne0$ for which $[j]\ne0$ for $1\
 ## Remarks
 
 Chen's Theorem 3.2.3 explicitly states the theta formula and refers to Kauffman–Lins, Chapter 6, for a proof. The finite projector contraction and geometric-series summation above supply an independent local proof. The generic proof temporarily inverts the nonzero polynomials $Z_{a,j}$; root specialization uses only the final identity in the JW localization. It does not specialize those intermediate norm denominators or normalize a forbidden-level vertex by a vanishing theta value.
+
+
+The bundled theta schematic below depicts the closure of $\beta\alpha$: the two vertices are the specified cup/cap vertices, and each curve denotes a bundle rather than a single strand. At either vertex the pairwise connections have sizes $m$ between $r,s$, $n$ between $s,t$, and $p$ between $t,r$. Thus the three arm sizes are $r=m+p$, $s=m+n$, and $t=n+p$. A zero-sized bundle is omitted in the actual diagram.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw (-2,0) .. controls (-2,1.7) and (2,1.7) .. (2,0);
+  \draw (-2,0) -- (2,0);
+  \draw (-2,0) .. controls (-2,-1.7) and (2,-1.7) .. (2,0);
+  \node[draw,fill=white,minimum width=0.65cm,minimum height=0.45cm] at (0,1.275) {$p_r$};
+  \node[draw,fill=white,minimum width=0.65cm,minimum height=0.45cm] at (0,0) {$p_t$};
+  \node[draw,fill=white,minimum width=0.65cm,minimum height=0.45cm] at (0,-1.275) {$p_s$};
+  \fill (-2,0) circle (2pt);
+  \fill (2,0) circle (2pt);
+  \node[above] at (0,1.6) {$r=m+p$};
+  \node[above] at (1,0.1) {$t=n+p$};
+  \node[below] at (0,-1.6) {$s=m+n$};
+\end{tikzpicture}
+```
+
+Here $\alpha:t\to r+s$ and $\beta:r+s\to t$ use $A=1_p\otimes W_m\otimes1_n$ and its reflected cap map $B$, as defined in the Statement. The trace joins their $t$ boundaries; idempotence leaves one projector on each of the three edges, giving $\operatorname{Tr}_t(\beta\alpha)=\Theta(m,n,p)$. The boxes retain identity coefficient one, without vertex or trace normalization. At specialization they are used only in the stated unit-denominator range; no higher root projector is depicted. This schematic explains the construction; the finite contraction proof above is independent of it.

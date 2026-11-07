@@ -5,7 +5,6 @@ status: published
 items: []
 examples:
   - ex-jacobi-fields-in-euclidean-space
-  - ex-jacobi-fields-in-constant-sectional-curvature
   - ex-conjugate-antipodes-on-the-round-sphere
   - ex-no-conjugate-points-in-nonpositive-constant-curvature
   - ex-killing-jacobi-fields-from-rotations

@@ -3,8 +3,11 @@ id: thm-number-field-finite-weak-approximation-in-zf
 kind: theorem
 title: "Finite weak approximation in a number field in ZF"
 status: draft
-origin: session
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 1
 deps: [lem-number-field-completion-tensor-and-norm-in-zf, thm-ring-of-integers-free-of-rank-degree, thm-number-field-integral-ideal-factorisation-in-zf, thm-discriminant-as-an-embedding-determinant, thm-chinese-remainder-theorem-for-comaximal-ideals]
+justified_by: []
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -41,7 +44,7 @@ The same density holds with $x\ne0$ required, and with $K^r$ in the correspondin
 
 [F3] [[thm-discriminant-as-an-embedding-determinant]] says that the matrix of all complex embeddings on a rational basis is invertible. Replacing each conjugate pair of rows by real and imaginary parts multiplies its determinant by a nonzero scalar, so the images of this basis form a real basis in $H=\mathbb R^{r_1}\times\mathbb C^{r_2}\cong\mathbb R^n$.
 
-[F4] [[thm-number-field-integral-ideal-factorisation-in-zf]] supplies the DVR valuations and finite factorisation of nonzero ideals. Distinct nonzero primes are maximal, hence comaximal; their positive powers remain comaximal, as follows by expanding $(a+b)^{s+t-1}=1$ when $a+b=1$ with $a,b$ in the respective primes.
+[F4] [[thm-number-field-integral-ideal-factorisation-in-zf]] supplies finite factorisation of nonzero ideals. The DVR valuations are supplied by [F1]. Distinct nonzero primes are maximal, hence comaximal; their positive powers remain comaximal, as follows by expanding $(a+b)^{s+t-1}=1$ when $a+b=1$ with $a,b$ in the respective primes.
 
 [F5] [[thm-chinese-remainder-theorem-for-comaximal-ideals]] supplies a simultaneous representative for any finite list of residues modulo pairwise comaximal ideals.
 
@@ -53,11 +56,11 @@ The same density holds with $x\ne0$ required, and with $K^r$ in the correspondin
 
 1.2 Let $T$ be the finite set of selected finite primes. For each $P\in T$, [F1] supplies $b_P\in K$ with $\operatorname{ord}_P(b_P-a_P)\ge N_P$. There are only finitely many such choices. Clear the rational coordinates of this finite list in the basis of [F2], obtaining a positive integer $D$ such that $Db_P\in R$ for all $P\in T$. For each $P$ put $t_P=\max(1,N_P+\operatorname{ord}_P D)$. By [F4] and [F5] there exists $b\in R$ with $b\equiv Db_P\pmod{P^{t_P}}$ for every $P\in T$. If $T$ is empty take $D=1$, $b=0$. [F1, F2, F4, F5, given]
 
-2.1 Let $q_1,\ldots,q_s$ be the distinct rational primes below the members of $T$. Choose one positive integer $M$ at least every $t_P$ and put $m=\prod_{i=1}^s q_i^M$, with empty product $1$. Since $\operatorname{ord}_P(q_i)\ge1$ when $P\mid q_i$, we have $\operatorname{ord}_P(m)\ge t_P$. Choose a rational prime $\ell$ different from all $q_i$: a prime divisor of $1+\prod_i q_i$ works, with $\ell=2$ if $s=0$. For every $c\in R$ and $j\ge0$, $\operatorname{ord}_P(m\ell^{-j}c)\ge t_P$ at each selected $P$. Consequently $$x=\frac{b+m\ell^{-j}c}{D}$$ satisfies $\operatorname{ord}_P(x-b_P)\ge t_P-\operatorname{ord}_P D\ge N_P$, and then the nonarchimedean triangle inequality gives $\operatorname{ord}_P(x-a_P)\ge N_P$. [F4, step 1.2, algebra]
+2.1 Let $q_1,\ldots,q_s$ be the distinct rational primes below the members of $T$. Choose one positive integer $M$ at least every $t_P$ and put $m=\prod_{i=1}^s q_i^M$, with empty product $1$. Since $\operatorname{ord}_P(q_i)\ge1$ when $P\mid q_i$, we have $\operatorname{ord}_P(m)\ge t_P$. Choose a rational prime $\ell$ different from all $q_i$: a prime divisor of $1+\prod_i q_i$ works, with $\ell=2$ if $s=0$. For every $c\in R$ and $j\ge0$, $\operatorname{ord}_P(m\ell^{-j}c)\ge t_P$ at each selected $P$. Consequently $$x=\frac{b+m\ell^{-j}c}{D}$$ satisfies $\operatorname{ord}_P(x-b_P)\ge t_P-\operatorname{ord}_P D\ge N_P$, and then the nonarchimedean triangle inequality gives $\operatorname{ord}_P(x-a_P)\ge N_P$. [F1, F4, step 1.2, algebra]
 
 3.1 Extend the selected archimedean target list to all coordinates of $H$ by assigning zero to the omitted coordinates, obtaining $a\in H$. Apply the grid in step 1.1 to the target $Da-\Sigma(b)$, with error less than $D\min_v\varepsilon_v$ over the selected archimedean places. It yields $j$ and $c\in R$ for which the $x$ of step 2.1 satisfies the required archimedean bounds: each real absolute value and each complex modulus is bounded by the full Euclidean error divided by $D$. If there are no selected archimedean places take $c=0$, $j=0$. Together with step 2.1 this proves existence and diagonal density. Empty $V$ is included, since any $x\in K$ then works. [step 1.1, step 2.1, algebra]
 
-4.1 To require $x\ne0$, first obtain $x$ with stricter finite bounds $N_P+1$ and stricter archimedean bounds $\varepsilon_v/2$. Choose a nonzero integer $m_0$ with $\operatorname{ord}_P(m_0)\ge N_P+1$ for all selected $P$, by the rational-prime product construction of step 2.1, and choose $\ell$ avoiding those primes. The nonzero rational numbers $\delta_j=m_0\ell^{-j}$ have fixed sufficiently large orders at the selected finite primes and tend to zero at all archimedean coordinates. For some $j$ they satisfy $|\delta_j|<\varepsilon_v/2$ at all selected archimedean places. At most one of $x+\delta_j$ and $x+\delta_{j+1}$ is zero; both still satisfy the original inequalities, and choosing a nonzero one gives the asserted strengthening. For a finite vector dimension $r$, apply the proved scalar assertion to each of the finitely many coordinate target lists, using product neighborhoods. All remaining choices and witnesses above are finite, while the grid and perturbation indices can always be the least eligible natural numbers. Thus the entire result holds in ZF. [step 2.1, step 3.1, algebra] ∎
+4.1 To require $x\ne0$, first obtain $x$ with stricter finite bounds $N_P+1$ and stricter archimedean bounds $\varepsilon_v/2$. Choose a nonzero integer $m_0$ with $\operatorname{ord}_P(m_0)\ge N_P+1$ for all selected $P$, by the rational-prime product construction of step 2.1, and choose $\ell$ avoiding those primes. For the valuations supplied by [F1], the nonzero rational numbers $\delta_j=m_0\ell^{-j}$ have fixed sufficiently large orders at the selected finite primes and tend to zero at all archimedean coordinates. For some $j$ they satisfy $|\delta_j|<\varepsilon_v/2$ at all selected archimedean places. At most one of $x+\delta_j$ and $x+\delta_{j+1}$ is zero; both still satisfy the original inequalities, and choosing a nonzero one gives the asserted strengthening. For a finite vector dimension $r$, apply the proved scalar assertion to each of the finitely many coordinate target lists, using product neighborhoods. All remaining choices and witnesses above are finite, while the grid and perturbation indices can always be the least eligible natural numbers. Thus the entire result holds in ZF. [F1, step 2.1, step 3.1, algebra] ∎
 
 ## Source notes
 

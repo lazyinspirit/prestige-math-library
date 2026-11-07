@@ -11,17 +11,15 @@ deps:
   - def-scheme-theoretic-fibre
   - def-finite-morphism-schemes
   - cor-base-change-finite-type-and-products
+  - thm-hilbert-basis-theorem
+  - thm-noetherian-ring-ideal-characterisations
+  - cor-noether-normalisation-module-finiteness
+  - lem-determinant-trick-for-nakayama
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
+verification: {}
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes, §29.21 Definition 29.21.1 and Lemmas 29.21.3, 29.21.5–7, 29.21.10"
@@ -60,14 +58,36 @@ $X_s\to\operatorname{Spec}\kappa(s)$ is finite.
 
 [F6] Arbitrary base change preserves finite-type morphisms ([[cor-base-change-finite-type-and-products]]).
 
+[F7] A polynomial algebra over a field is Noetherian by Hilbert's basis
+theorem. Its quotients and localizations have finitely generated ideals:
+lift an ideal to the polynomial ring for a quotient, and contract it then
+localize for a localization. Only Noetherian-to-finite-generation and its
+choice-free converse are used, not the maximal-condition implication.
+[[thm-hilbert-basis-theorem]]
+[[thm-noetherian-ring-ideal-characterisations]]
+
+[F8] A nonzero finite-type field algebra is module-finite over an injected
+polynomial subring. If a finite module $M$ satisfies $IM=M$, the determinant
+trick gives $(1-a)M=0$ for some $a\in I$, without a choice assumption.
+[[cor-noether-normalisation-module-finiteness]]
+[[lem-determinant-trick-for-nakayama]]
+
 ## Proof
 
-**Proof technique:** direct.
+**Proof technique:** direct; prove the finite local fibre criterion and
+the finite disjoint affine decomposition, retaining the unconditional
+axiom scope of the Statement.
 
-1.1 Fix $x\in X$ and $s=f(x)$. If (1) holds, take compatible affine neighbourhoods $U=\operatorname{Spec}B$ and $V=\operatorname{Spec}A$ from [F1], with $f(U)\subseteq V$, and let $\mathfrak q$ and $\mathfrak p=\mathfrak q\cap A$ correspond to $x$ and $s$. The local ring of $X_s$ at $x$ is $B_{\mathfrak q}/\mathfrak pB_{\mathfrak q}$ by [F1] and [F4]. The witnessing map is finite type, so [F2] says this local fibre algebra is finite-dimensional over $\kappa(s)$. For the reverse implication, choose a compatible affine pair witnessing that $f$ is locally of finite type, as provided by [F3]. Its fibre chart $U_s=U\times_V\operatorname{Spec}\kappa(s)$ is open in $X_s$, so isolatedness restricts to $U_s$. The same local-ring identification and the same criterion then apply. Stacks Commutative Algebra tag 00PK, whose proof reduces to tag 00PJ proves that finite-dimensionality of this local fibre algebra is equivalent to $x$ being isolated in $X_s$. Its equivalent residue-field condition, and directly the quotient map from the finite-dimensional local algebra to $\kappa(x)=B_{\mathfrak q}/\mathfrak qB_{\mathfrak q}$, give that $\kappa(x)/\kappa(s)$ is finite. Thus (1) and (2) are equivalent pointwise; the same scheme-level isolated-point and residue-field arguments are recorded in Stacks Morphisms tag 01TC. [F1, F2, F3, F4, given, algebra]
+1.1 We first record a choice-free existence fact used only for finite-type field algebras. A nonzero finite-type $k$-algebra $T$ has a maximal ideal. By [F8] it is module-finite over an injected polynomial ring $R=k[z_1,\ldots,z_d]$. Localize at the explicit maximal ideal $\mathfrak m=(z_1,\ldots,z_d)$. The injection $R_{\mathfrak m}\hookrightarrow T_{\mathfrak m}$ shows the latter is nonzero and finite as an $R_{\mathfrak m}$-module. If $\mathfrak mT_{\mathfrak m}=T_{\mathfrak m}$, the determinant trick in [F8] gives $(1-a)T_{\mathfrak m}=0$ with $a\in\mathfrak mR_{\mathfrak m}$; $1-a$ is a unit in this localization, a contradiction. Hence $T/\mathfrak mT$ is a nonzero finite-dimensional $k$-algebra. Among its proper ideals choose one of maximum vector-space dimension; such a dimension is a largest member of a nonempty finite subset of the natural numbers. That ideal is maximal, and its inverse image in $T$ is maximal. Only finitely many choices and finite-dimensional linear algebra occur. [F8, given, construct, algebra]
 
-1.2 Suppose the fibre morphism $X_s\to\operatorname{Spec}\kappa(s)$ is finite. By [F5], $X_s=\operatorname{Spec}C$ with $C$ finite-dimensional over $\kappa(s)$. Such a ring is Artinian and is a finite product of local Artinian rings. Its spectrum is therefore a finite discrete space, and each residue field is a quotient of a finite-dimensional $\kappa(s)$-vector space. Hence every point of this fibre is isolated and has finite residue extension. The argument includes nilpotents; for example, $\kappa(s)[\epsilon]/(\epsilon^2)$ has one isolated point with residue field $\kappa(s)$. If $X_s$ is empty then $C=0$ and the pointwise conclusions are vacuous. Thus (3) implies (2). [F4, F5, algebra]
+2.1 For a finite-type $k$-algebra $A$, its nilradical is the intersection of its prime ideals without requiring the general prime-ideal theorem. Indeed, if $a$ is not nilpotent, the nonzero finite-type algebra $A[a^{-1}]$ has a maximal ideal by step 1.1; its contraction is prime and avoids $a$. The reverse inclusion, that every prime contains each nilpotent, follows by taking a power. By [F7] the nilradical is finitely generated, say by $a_i$ with $a_i^{n_i}=0$, and is nilpotent: every monomial of degree $\sum_i n_i$ in the $a_i$ contains a vanishing power. Thus if $A$ has just one prime, its maximal ideal is nilpotent. The zero ring is excluded only while a prime is being considered. [F7, algebra, step 1.1]
 
-2.1 Assume (1). By step 1.1 every point of each fibre is isolated, so each fibre is zero-dimensional. Fix $s\in S$. The base change $X_s\to\operatorname{Spec}\kappa(s)$ is finite type by [F6], and it is quasi-compact because $f$ is finite type by [F3] and quasi-compactness survives base change by [F6]. Let $W=\operatorname{Spec}D$ be any affine open of $X_s$. Its finite-type $\kappa(s)$-algebra $D$ has dimension zero. As in the complete proof at Stacks Varieties tag 06LH, Noether normalization makes $D$ finite-dimensional over $\kappa(s)$; therefore $D$ is Artinian and decomposes into finitely many local Artinian factors. Each such factor gives an open singleton in $W$, hence in $X_s$. These singleton opens cover $X_s$. Quasi-compactness gives a finite subcover, so $X_s$ is a finite disjoint union of spectra of finite-dimensional local Artinian $\kappa(s)$-algebras. Their finite product is a finite-dimensional coordinate algebra, and [F5] says the resulting morphism to $\operatorname{Spec}\kappa(s)$ is finite. The empty fibre is $\operatorname{Spec}(0)$ and is finite as well. This proves (1) implies (3), including the one-point case $\operatorname{Spec}\kappa(s)$. [F3, F4, F5, F6, step 1.1, algebra]
+3.1 Let $D$ be a finite-type $k$-algebra and $\mathfrak q\in\operatorname{Spec}D$. Suppose $D_{\mathfrak q}$ is finite-dimensional over $k$. Its residue field is finite-dimensional. The domain $D/\mathfrak q$ injects into that field, hence is itself finite-dimensional; multiplication by a nonzero element is an injective endomorphism of a finite-dimensional space and is surjective, so this domain is a field. Thus $\mathfrak q$ is maximal. Every prime quotient of the finite-dimensional algebra $D_{\mathfrak q}$ is similarly a field, so its only prime is its unique maximal ideal $\mathfrak qD_{\mathfrak q}$. By step 2.1 this ideal is nilpotent. Since $D$ is Noetherian by [F7], choose generators of $\mathfrak q^N$ for a power that becomes zero in $D_{\mathfrak q}$. Each is annihilated by some element outside $\mathfrak q$; their finite product $s\notin\mathfrak q$ kills all of $\mathfrak q^N$. Every prime of $D_s$ contains $\mathfrak qD_s$, since its $N$th power vanishes, and maximality of $\mathfrak q$ leaves precisely that one prime. Consequently $D(s)=\{\mathfrak q\}$ in $\operatorname{Spec}D$. This proves isolatedness and finite residue field from finite-dimensionality of the local algebra. [F7, algebra, step 2.1]
 
-3.1 Step 1.1 proves (1)$\Longleftrightarrow$(2), step 2.1 proves (1)$\Longrightarrow$(3), and step 1.2 proves (3)$\Longrightarrow$(2). These three implications give all directions among the stated conditions. The proof makes no AC assumption: for each fixed fibre its quasi-compactness supplies a finite subcover, and no family of choices is assembled. [step 1.1, step 1.2, step 2.1, algebra] ∎
+3.2 Conversely suppose $\mathfrak q$ is isolated and its residue field is finite over $k$. Choose a principal neighbourhood $D(s)=\{\mathfrak q\}$. The finite-type algebra $A=D_s$ has just that prime. It is local: if an element outside that prime were not a unit, its nonzero finite-type quotient would have a maximal ideal by step 1.1, yielding a second prime. Thus $A=D_{\mathfrak q}$. By step 2.1 its maximal ideal $\mathfrak n$ is nilpotent. All powers of $\mathfrak n$ are finitely generated by [F7], so the quotients $\mathfrak n^i/\mathfrak n^{i+1}$ are finite-dimensional over $A/\mathfrak n=\kappa(\mathfrak q)$: the images of finite ideal generators span them. This residue field is finite over $k$ by hypothesis. The finite filtration by the powers ending at $\mathfrak n^N=0$ proves that $A=D_{\mathfrak q}$ is finite-dimensional over $k$. This proves the reverse local criterion, including nilpotents. [F7, algebra, step 1.1, step 2.1]
+
+4.1 For $x\in X_s$, a compatible finite-type affine chart has fibre algebra $D=B\otimes_A\kappa(s)$ and its local ring at $x$ is $B_{\mathfrak q}/\mathfrak pB_{\mathfrak q}$ by [F1], [F2] and [F4]. Steps 3.1–3.2 identify finite-dimensionality of this ring with isolatedness and finite residue extension in that affine fibre chart, hence in $X_s$. This is an open-local assertion. Definitions [F1]–[F3] therefore give (1)$\Longleftrightarrow$(2). If these hold, every point of $X_s$ has a singleton principal affine neighbourhood whose coordinate ring is its finite-dimensional local ring, by step 3.2. Those opens cover the fibre. Its quasi-compactness follows from finite type and [F6], so finitely many suffice. They are disjoint singleton opens, and their finite disjoint union is the spectrum of the finite product of their finite-dimensional algebras. Thus $X_s$ is affine finite-dimensional over $\kappa(s)$, proving (3) by [F5]. No separation hypothesis is used in this disjoint open cover. [F1, F2, F3, F4, F5, F6, algebra, step 3.1, step 3.2]
+
+4.2 Conversely assume (3). Write $X_s=\operatorname{Spec}D$ with $D$ finite-dimensional over $\kappa(s)$ by [F5]. Every localization $D_{\mathfrak q}$ is still finite-dimensional. To see this explicitly, for each inverted element $b\notin\mathfrak q$ take a polynomial relation $b^r g(b)=0$ with $g(0)\ne0$; one exists by finite-dimensional linear dependence and removal of the largest power of the variable. After inverting $b$ one has $g(b)=0$, so $b^{-1}$ is a polynomial in $b$ using the nonzero constant coefficient. Hence the localization map $D\to D_{\mathfrak q}$ is surjective and its target is finite-dimensional. Step 3.1 gives isolatedness and finite residue extension for each point, proving (2). An empty fibre is $\operatorname{Spec}(0)$ and is finite; its pointwise conditions are vacuous. [F4, F5, algebra, step 3.1]
+
+5.1 Step 4.1 proves (1)$\Longleftrightarrow$(2) and (1)$\Longrightarrow$(3); step 4.2 proves (3)$\Longrightarrow$(2). These give all claimed equivalences. The Noetherian and normalization suppliers in [F7]–[F8] use only their choice-free finite-generation implications and finite selections; step 1.1 explicitly replaces a general maximal-ideal existence appeal. No choice principle or external Stacks proof is an input. [F7, F8, algebra, step 4.1, step 4.2] ∎

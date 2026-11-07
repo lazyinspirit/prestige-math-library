@@ -46,7 +46,7 @@ The products are finite monoid products ([[def-monoid-finite-product]]).
 
 [L4] Finite products have empty value $1$ and satisfy $P_{k+1}=P_kn_k$ ([[def-monoid-finite-product]], [[thm-generalised-associativity]]).
 
-[L5] Coprime integers have gcd $1$, whose only positive divisors are $1$ ([[def-coprime]], [[def-common-divisor-and-gcd]]).
+[L5] Coprime integers have gcd $1$. For a pair of positive integers, the gcd is the greatest of their common divisors, so every common divisor is at most the gcd ([[def-coprime]], [[def-common-divisor-and-gcd]]).
 
 [L6] Induction proves a statement at every natural number from its base case and successor implication ([[thm-induction-principle]]).
 
@@ -54,7 +54,7 @@ The products are finite monoid products ([[def-monoid-finite-product]]).
 
 **Proof technique:** induction.
 
-1.1 Fix $k\le j<r$. If $\gcd(P_k,n_j)>1$, [L2] supplies a prime $q$ dividing this gcd. Then $q\mid P_k$, so [L1] gives an $i<k\le j$ with $q\mid n_i$; also $q\mid n_j$, contradicting $\gcd(n_i,n_j)=1$ because $i\ne j$ and the positive prime $q>1$ would divide that gcd. Hence $\gcd(P_k,n_j)=1$. [L1, L2, L5]
+1.1 Fix $k\le j<r$. If $\gcd(P_k,n_j)>1$, [L2] supplies a prime $q$ dividing this gcd. Then $q\mid P_k$, so [L1] gives an $i<k\le j$ with $q\mid n_i$; also $q\mid n_j$. Since $n_i$ and $n_j$ are positive and $i\ne j$, [L5] bounds their common divisor $q$ by $\gcd(n_i,n_j)=1$, contradicting $q>1$. Hence $\gcd(P_k,n_j)=1$. [L1, L2, L5]
 
 1.2 At $k=0$, $P_0=1$ divides $M$. [base, L4]
 

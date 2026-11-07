@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-koszul-structure-of-the-abelian-sheaf-tensor-product.json
+  precheck: pass
 id: "lem-koszul-structure-of-the-abelian-sheaf-tensor-product"
 kind: "lemma"
 title: "Associator, symmetry and unitors of the abelian sheaf tensor product"
@@ -17,8 +20,7 @@ sources:
     - title: "The Stacks Project, Sheaves on Spaces"
       url: https://stacks.math.columbia.edu/download/sheaves.pdf
       locator: "Section 17: sheafification, stalks and the universal property"
-verification:
-  audited: 2026-09-27
+
 ---
 
 ## Statement
@@ -133,3 +135,75 @@ $\mathbb Z_X$ be the constant sheaf with value $\mathbb Z$
 4.1 Every coherence identity of clause 3 compares two morphisms of cochain complexes between the same total complexes. A morphism of complexes is determined by its components on the summands [F13], and by [F10] each component out of a sheaf tensor product is determined by its values on pure sections, so it suffices to evaluate both sides on pure tensors, where the identities reduce to the sheaf-level ones of [step 3.1] combined with the sign computation of [step 1.2]: the reassociation identities hold because both sides reassociate a pure tensor in the same way, the triangle identities multiply by the scalar of the unit as in [F4], and the hexagon identities acquire the Koszul signs of [step 1.2], which are multiplicative and cancel in the same way on both routes. For the shift statement, $\mathbb Z_X[-p]$ has its single nonzero term $\mathbb Z_X$ in degree $p$ and $\mathbb Z_X[-q]$ its single nonzero term in degree $q$ [F15]; hence $\operatorname{Tot}(\mathbb Z_X[-p]\otimes_{\mathbb Z}\mathbb Z_X[-q])$ has the single nonzero term $\mathbb Z_X\otimes_{\mathbb Z}\mathbb Z_X$ in degree $p+q$, where $S$ acts as $(-1)^{pq}$ times the exchange of the two factors, and under the unit identification $\mathbb Z_X\otimes_{\mathbb Z}\mathbb Z_X\cong\mathbb Z_X$ of [F4] that is multiplication by $(-1)^{pq}$. [F4, F10, F13, F15, step 1.2, step 3.1]
 
 5.1 Clause 1 is [step 1.1]; clause 2 is [step 2.1] together with [step 3.1] and the symmetry and left unitor of [F4] together with $\rho:=\lambda\circ\sigma$; clause 3 is [step 3.2], [step 1.2], [step 1.3] and [step 4.1]. No choice principle is used anywhere. ∎ [F4, step 1.1, step 2.1, step 3.1, step 3.2, step 1.2, step 1.3, step 4.1]
+
+
+## Remarks
+
+The following coherence diagrams illustrate clause 2. Write $F,G,H,K$ for
+abelian sheaves on $X$, write $I=\mathbb Z_X$, and abbreviate
+$F\otimes_{\mathbb Z}G$ by $FG$, keeping all parentheses. In arrow labels,
+$1$ denotes the identity of the indicated factor. The pentagon compares two
+reassociations of $((FG)H)K$ into $F(G(HK))$:
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm, every node/.style={font=\small}]
+\node (a) at (0,0) {$((FG)H)K$};
+\node (b) at (5,0) {$(FG)(HK)$};
+\node (c) at (6,-3) {$F(G(HK))$};
+\node (d) at (2,-4) {$F((GH)K)$};
+\node (e) at (-1,-2.5) {$(F(GH))K$};
+\draw[->] (a) -- node[above] {$\alpha_{FG,H,K}$} (b);
+\draw[->] (b) -- node[right] {$\alpha_{F,G,HK}$} (c);
+\draw[->] (a) -- node[left] {$\alpha_{F,G,H}\otimes 1$} (e);
+\draw[->] (e) -- node[below left] {$\alpha_{F,GH,K}$} (d);
+\draw[->] (d) -- node[below right] {$1\otimes\alpha_{G,H,K}$} (c);
+\end{tikzpicture}
+```
+
+Each route sends $((f\otimes g)\otimes h)\otimes k$ to
+$f\otimes(g\otimes(h\otimes k))$ on stalks. The unit triangle is:
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm, every node/.style={font=\small}]
+\node (a) at (0,0) {$(FI)G$};
+\node (b) at (5,0) {$F(IG)$};
+\node (c) at (2.5,-2) {$FG$};
+\draw[->] (a) -- node[above] {$\alpha_{F,I,G}$} (b);
+\draw[->] (a) -- node[below left] {$\rho_F\otimes 1$} (c);
+\draw[->] (b) -- node[below right] {$1\otimes\lambda_G$} (c);
+\end{tikzpicture}
+```
+
+Both routes send $(f\otimes n)\otimes g$ to $nf\otimes g=f\otimes ng$
+on stalks. One hexagon compares swapping $F$ past $GH$ with two successive
+factor swaps (the inverse associators fix the direction of reassociation):
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm, every node/.style={font=\small}]
+\node (a) at (0,0) {$F(GH)$};
+\node (b) at (5,0) {$(GH)F$};
+\node (c) at (6,-2) {$G(HF)$};
+\node (d) at (5,-4) {$G(FH)$};
+\node (e) at (0,-4) {$(GF)H$};
+\node (f) at (-1,-2) {$(FG)H$};
+\draw[->] (a) -- node[above] {$\sigma_{F,GH}$} (b);
+\draw[->] (b) -- node[right] {$\alpha_{G,H,F}$} (c);
+\draw[->] (a) -- node[left] {$\alpha^{-1}_{F,G,H}$} (f);
+\draw[->] (f) -- node[left] {$\sigma_{F,G}\otimes 1$} (e);
+\draw[->] (e) -- node[below] {$\alpha_{G,F,H}$} (d);
+\draw[->] (d) -- node[right] {$1\otimes\sigma_{F,H}$} (c);
+\end{tikzpicture}
+```
+
+Both routes send $f\otimes(g\otimes h)$ to $g\otimes(h\otimes f)$.
+The opposite block-swap hexagon follows by reversing these isomorphisms and
+using $\sigma_{G,F}\sigma_{F,G}=1_{FG}$. For clause 3, read juxtaposition as
+the tensor-product total complex, replace $\alpha,\sigma,\lambda,\rho$
+by $A,S,\Lambda,\mathrm P$, and take the unit $I=\mathbb Z_X[0]$.
+On homogeneous elements of degrees $i,j,k$, the two hexagon routes have
+signs $(-1)^{i(j+k)}$ and $(-1)^{ij}(-1)^{ik}$, which agree; reversing the
+block swap similarly gives $(-1)^{(i+j)k}=(-1)^{ik}(-1)^{jk}$.
+Associators carry no sign, the unit has degree zero, and two successive
+symmetries have sign $(-1)^{ij+ji}=1$. These are illustrations of the
+identities checked in proof steps 3.1 and 4.1; the proof is independent of
+the diagrams.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-finite-plane-graph-ear-and-face-facts.json
+  precheck: pass
 id: lem-finite-plane-graph-ear-and-face-facts
 kind: lemma
 title: "Finite plane graph ear and face facts"
@@ -11,13 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
 sources:
   scraped: []
   references:
@@ -152,3 +148,35 @@ edges, so it does not use or anticipate that later result. The crosscut claim
 of step 1.3 covers both components of the complement of $J$, which is what
 allows step 2.1 to split the unbounded face as well; no disk-closure,
 local-flatness or Schönflies assertion is used anywhere above.
+
+
+The bounded-face instance of the crosscut construction in steps 1.3 and 2.1
+is illustrated below. The polygon $J=J_1\cup J_2$ surrounds the original
+face $V$; the polygonal ear $P$ joins distinct boundary vertices $p,q$ and has
+one new internal vertex $r$. Its interior misses $J$. The two new regions
+are $Y_1,Y_2$, with frontiers $D_1=J_1\cup P$ and $D_2=J_2\cup P$;
+the exterior $W$ keeps frontier $J$. Here the ear has two edges, so it adds
+one vertex, two edges and one face, leaving $V-E+F$ unchanged (with $V$
+in this count denoting the number of vertices). This bounded example does
+not depict the unbounded-face case or assert any shape for a general Jordan
+boundary. The proof above is independent of the illustration.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+\draw[thick] (-2,0) -- (-2,1.4) -- (2,1.4) -- (2,0);
+\draw[thick] (-2,0) -- (-2,-1.4) -- (2,-1.4) -- (2,0);
+\draw[very thick] (-2,0) -- (0,0.2) -- (2,0);
+\fill (-2,0) circle (2pt);
+\fill (2,0) circle (2pt);
+\fill (0,0.2) circle (2pt);
+\node[left] at (-2,0) {$p$};
+\node[right] at (2,0) {$q$};
+\node[above] at (0,0.2) {$r$};
+\node[above] at (0,1.4) {$J_1$};
+\node[below] at (0,-1.4) {$J_2$};
+\node at (-0.8,0.85) {$Y_1$};
+\node at (-0.8,-0.75) {$Y_2$};
+\node[below] at (0.9,0.11) {$P$};
+\node at (2.7,0.9) {$W$};
+\end{tikzpicture}
+```

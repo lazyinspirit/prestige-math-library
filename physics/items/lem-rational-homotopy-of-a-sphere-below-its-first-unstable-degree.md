@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-rational-homotopy-of-a-sphere-below-its-first-unstable-degree.json
+  precheck: pass
 id: lem-rational-homotopy-of-a-sphere-below-its-first-unstable-degree
 kind: lemma
 title: "Rational sphere homotopy below the first unstable degree"
@@ -34,13 +37,12 @@ sources:
     - title: "Allen Hatcher, Spectral Sequences, Chapter 1"
       url: "https://pi.math.cornell.edu/~hatcher/SSAT/SSch1.pdf"
       locator: "§1.2 Theorem 1.21 and its proof, printed pp.32–33; comparison with the rational sphere calculation, while the stated torsion-only range is proved locally"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
 
-Assume AC. For m≥2 and 1≤i≤2m−2, π_i(S^m)⊗Q is Q if i=m and zero otherwise. Hurewicz after tensoring with Q is an isomorphism in all these degrees; in degree m its integral version is the standard orientation-generator isomorphism; no finiteness of the torsion groups is asserted.
+Assume AC. For $m\ge2$ and $1\le i\le2m-2$, $\pi_i(S^m)\otimes\mathbb Q$ is $\mathbb Q$ if $i=m$ and zero otherwise. Hurewicz after tensoring with $\mathbb Q$ is an isomorphism in all these degrees; in degree $m$ its integral version is the standard orientation-generator isomorphism; no finiteness of the torsion groups is asserted.
 
 ## Facts & Assumptions
 
@@ -60,8 +62,8 @@ Assume AC. For m≥2 and 1≤i≤2m−2, π_i(S^m)⊗Q is Q if i=m and zero othe
 
 **Proof technique:** direct.
 
-1.1 Give $S^m$ its CW structure with a basepoint vertex and one $m$-cell. The high-relative-cells lemma applied to $(S^m,*)$ makes it $(m-1)$-connected, so the absolute first-Hurewicz theorem applies in degree $m$. Represent the integral orientation class of S^m by a based map f:S^m→K(Z,m). Universal evaluation and first Hurewicz make its degree-m homotopy map an isomorphism. Let F be its strict homotopy fiber. The exact sequence shows F is m-connected. The locally rederived rational cohomology calculation in the rational $K(\mathbb Z,n)$ calculation gives H^a(K(Z,m);Q)=0 for 0<a<2m, a≠m. Its full algebraic-dual identification with homology implies H_a(K(Z,m);Q)=0 in those degrees: a nonzero vector would have a nonzero detecting functional under AC. H_m(K(Z,m);Q)=Q also follows directly from integral first Hurewicz and the rationalization lemma. No finite-dimensional hypothesis is being inferred without proof. In particular H_{d+1}(K(Z,m);Q)=0 for m+1≤d≤2m−2. [given, F1, F2]
+1.1 Give $S^m$ its CW structure with a basepoint vertex and one $m$-cell. The high-relative-cells lemma applied to $(S^m,*)$ makes it $(m-1)$-connected, so the absolute first-Hurewicz theorem applies in degree $m$. Represent the integral orientation class of $S^m$ by a based map $f:S^m\to K(\mathbb Z,m)$. Universal evaluation and first Hurewicz make its degree-$m$ homotopy map an isomorphism. Let $F$ be its strict homotopy fiber. The exact sequence shows $F$ is $m$-connected. The locally rederived rational cohomology calculation in the rational $K(\mathbb Z,n)$ calculation gives $H^a(K(\mathbb Z,m);\mathbb Q)=0$ for $0<a<2m$, $a\ne m$. Its full algebraic-dual identification with homology implies $H_a(K(\mathbb Z,m);\mathbb Q)=0$ in those degrees: a nonzero vector would have a nonzero detecting functional under AC. $H_m(K(\mathbb Z,m);\mathbb Q)=\mathbb Q$ also follows directly from integral first Hurewicz and the rationalization lemma. No finite-dimensional hypothesis is being inferred without proof. In particular $H_{d+1}(K(\mathbb Z,m);\mathbb Q)=0$ for $m+1\le d\le2m-2$. [given, F1, F2]
 
-2.1 A weak CW approximation of F and integral first Hurewicz give H_b(F;Q)=0 for 0<b≤m. We prove the same for every m+1≤b≤2m−2 by induction. Suppose all lower positive fiber groups vanish, and consider E^2_{0,b}=H_b(F;Q) in the rational Serre sequence of F→E_f≃S^m→K(Z,m). There are no outgoing differentials from column zero. An incoming d_r, r≥2, has source (r,b−r+1). If b−r+1 is positive, the source is zero by lower fiber vanishing and the rationalization lemma; if it is negative there is no source. The remaining case r=b+1 has source H_{b+1}(K(Z,m);Q), which is zero by the preceding paragraph. Thus E^∞_{0,b}=H_b(F;Q). Strong convergence makes this the bottom filtration subgroup of H_b(E_f;Q)=H_b(S^m;Q)=0, so the fiber group is zero. This completes the induction. [step 1.1, F3, F5]
+2.1 A weak CW approximation of $F$ and integral first Hurewicz give $H_b(F;\mathbb Q)=0$ for $0<b\le m$. We prove the same for every $m+1\le b\le2m-2$ by induction. Suppose all lower positive fiber groups vanish, and consider $E^2_{0,b}=H_b(F;\mathbb Q)$ in the rational Serre sequence of $F\to E_f\simeq S^m\to K(\mathbb Z,m)$. There are no outgoing differentials from column zero. An incoming $d_r$, $r\ge2$, has source $(r,b-r+1)$. If $b-r+1$ is positive, the source is zero by lower fiber vanishing and the rationalization lemma; if it is negative there is no source. The remaining case $r=b+1$ has source $H_{b+1}(K(\mathbb Z,m);\mathbb Q)$, which is zero by the preceding paragraph. Thus $E^\infty_{0,b}=H_b(F;\mathbb Q)$. Strong convergence makes this the bottom filtration subgroup of $H_b(E_f;\mathbb Q)=H_b(S^m;\mathbb Q)=0$, so the fiber group is zero. This completes the induction. [step 1.1, F3, F5]
 
-3.1 Apply the rational homology-vanishing corollary to F through degree 2m−2. Its positive rational homotopy groups vanish there. For i>m, the fiber exact sequence identifies π_i(F) with π_i(S^m), since K(Z,m) has zero groups in degrees i and i+1. Hence these sphere groups rationally vanish. Degrees below m vanish by connectivity, and degree m is the integral orientation generator by first Hurewicz. For m=2 the interval m+1≤b≤2m−2 is empty and the assertion is exactly first Hurewicz. In every other stated degree both the rationalized homotopy group and rational homology group are zero, so the rationalized Hurewicz map is their isomorphism. We assert torsion, not finiteness, of these homotopy groups. [step 2.1, F1, F4] ∎
+3.1 Apply the rational homology-vanishing corollary to $F$ through degree $2m-2$. Its positive rational homotopy groups vanish there. For $i>m$, the fiber exact sequence identifies $\pi_i(F)$ with $\pi_i(S^m)$, since $K(\mathbb Z,m)$ has zero groups in degrees $i$ and $i+1$. Hence these sphere groups rationally vanish. Degrees below $m$ vanish by connectivity, and degree $m$ is the integral orientation generator by first Hurewicz. For $m=2$ the interval $m+1\le b\le2m-2$ is empty and the assertion is exactly first Hurewicz. In every other stated degree both the rationalized homotopy group and rational homology group are zero, so the rationalized Hurewicz map is their isomorphism. We assert torsion, not finiteness, of these homotopy groups. [step 2.1, F1, F4] ∎

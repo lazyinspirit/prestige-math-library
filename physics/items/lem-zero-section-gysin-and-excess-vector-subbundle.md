@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-zero-section-gysin-and-excess-vector-subbundle.json
+  precheck: pass
 id: lem-zero-section-gysin-and-excess-vector-subbundle
 kind: lemma
 title: "Zero-section Gysin and excess intersection for vector subbundles"
@@ -17,8 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "The Stacks Project, Chow Homology and Chern Classes, Lemma 42.44.2 and Lemma 42.36.3 (tags 0FA8, 02TX)"
@@ -52,7 +53,7 @@ compatibility hold after every base change.
 
 ## Proof
 
-**Proof technique:** direct; pull the identity back along the bijection $p^*$, where it becomes the regular-section formula for the universal quotient section.
+**Proof technique:** direct; pull the identity back along the pullback bijection, where it becomes the regular-section formula for the universal quotient section.
 
 1.1 Compatibility. Since $p^*$ is bijective with inverse $s_N^!$ by [L1], the displayed identities are equivalent after applying $p^*$ to the corresponding identities of bivariant operations: proper, flat and divisor compatibility of $s_N^!$ follows by applying $p^*$ and the corresponding push-pull or Cartier identities to each equality; all constructions are stable under base change by [L1] and [L2]. [L1, L2, given, algebra]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu.json
+  precheck: pass
 id: lem-functional-induced-measures-are-absolutely-continuous-with-respect-to-mu
 kind: lemma
 title: "The measure defined by a bounded $L^p$ functional is absolutely continuous with respect to $\\mu$"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-generated
 deps: [lem-bounded-functionals-on-finite-l-p-define-finite-signed-or-complex-measures, def-bounded-linear-functional-on-l-p-and-its-operator-norm, def-l-p-space-as-a-quotient-by-null-functions]
 proof_strategy: "If $\\mu(E)=0$, then $\\mathbf 1_E$ is the zero class in $L^p$, so the induced set function must vanish on $E$."
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 6.15"
@@ -39,7 +39,7 @@ Then $\nu \ll \mu$.
 
 ## Proof
 
-**Proof technique:** If $\mu(E)=0$, then $\mathbf 1_E$ is the zero class in $L^p$, so the induced set function must vanish on $E$.
+**Proof technique:** The indicator of a null set represents the zero class, so the induced set function vanishes on that set.
 
 1.1 Let $E \in \mathcal A$ with $\mu(E)=0$. Then $\mathbf 1_E=0$ almost [L2, given] everywhere, so [L2] gives $$[\mathbf 1_E]=[0]\quad\text{in }L^p(\mu).$$ [L2, given]
 

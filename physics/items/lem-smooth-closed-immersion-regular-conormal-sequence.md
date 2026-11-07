@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-smooth-closed-immersion-regular-conormal-sequence.json
+  precheck: pass
 id: lem-smooth-closed-immersion-regular-conormal-sequence
 kind: lemma
 title: Smooth closed immersion is regular with exact conormal sequence
@@ -28,9 +31,7 @@ sources:
     - title: "Ravi Vakil, Foundations of Algebraic Geometry, Classes 53-54"
       url: https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf
       locator: "Class 53 §§2-4; Class 54 §11"
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -78,7 +79,7 @@ $\mathcal Q\to i^*\Omega^1_{Y/S}\to\Omega^1_{X/S}\to0$.
 
 ## Proof
 
-**Proof technique:** compute the local codimension at every scheme point, obtain a regular sequence from the regular-quotient criterion, identify its conormal basis using Koszul $H_1$, and prove left exactness of the conormal sequence by the ranks of smooth differential modules.
+**Proof technique:** compute the local codimension at every scheme point, obtain a regular sequence from the regular-quotient criterion, identify its conormal basis using first Koszul homology, and prove left exactness of the conormal sequence by the ranks of smooth differential modules.
 
 1.1 Fix any point $x\in X$, including a nonclosed point. Put $R=\mathcal O_{\mathbb P^N,x}$, $I=\mathcal I_x$, and $S=R/I=\mathcal O_{X,x}$. The closed immersion identifies the residue fields of $R$ and $S$ with the same $\kappa(x)$; write $t=\operatorname{trdeg}_k\kappa(x)$. By [F3], $R$ and $S$ are regular local rings. The local scheme dimensions of $\mathbb P^N_k$ and $X$ at $x$ are $N$ and $n$, so [F4] gives $\dim R=N-t$ and $\dim S=n-t$. Thus $\dim R-\dim S=N-n=c$ at every $x$, although the individual local-ring dimensions equal $N,n$ only when $t=0$. [F3, F4, given]
 

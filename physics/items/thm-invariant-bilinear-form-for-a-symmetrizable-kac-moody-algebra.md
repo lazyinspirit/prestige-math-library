@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra.json
+  precheck: pass
 id: thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra
 kind: theorem
 title: "Invariant bilinear form for a symmetrizable kac moody algebra"
@@ -8,12 +11,6 @@ deps: ["def-symmetrizable-generalized-cartan-matrix", "prop-kac-moody-root-space
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   references:
     - title: "Kleshchev, Lectures on Infinite Dimensional Lie Algebras — Lemma 2.2.1 and Theorem 2.2.3, pp.28–32; complete height induction and zero-height invariance"
@@ -27,13 +24,13 @@ Let $A$ be symmetrizable with $D=\operatorname{diag}(d_i)>0$ and $DA$ symmetric.
 
 ## Facts & Assumptions
 
-**Given:** A finite symmetrizable GCM, positive d_i and a finite Cartan complement.
+**Given:** A finite symmetrizable GCM, positive $d_i$ and a finite Cartan complement.
 
-[F1] Symmetry means d_i a_ij=d_j a_ji. ([[def-symmetrizable-generalized-cartan-matrix]]).
+[F1] Symmetry means $d_i a_{ij}=d_j a_{ji}$. ([[def-symmetrizable-generalized-cartan-matrix]]).
 
 [F2] The grading has finite root spaces and simple one-dimensional spaces. ([[prop-kac-moody-root-spaces-are-finite-dimensional]]).
 
-[F3] A positive vector commuting with every f_i is zero; a negative vector commuting with every e_i is zero. ([[lem-kac-moody-opposite-simple-centralizer-vanishes]]).
+[F3] A positive vector commuting with every $f_i$ is zero; a negative vector commuting with every $e_i$ is zero. ([[lem-kac-moody-opposite-simple-centralizer-vanishes]]).
 
 ## Proof
 

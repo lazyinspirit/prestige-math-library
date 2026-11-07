@@ -1,0 +1,60 @@
+---
+page: function-field-arithmetic-dynamics-and-isotriviality
+title: Function-Field Arithmetic Dynamics and Isotriviality
+status: draft
+items:
+  - lem-rational-function-field-has-exact-constant-field
+  - def-rational-map-on-projective-line-degree
+  - lem-binary-form-resultant-bezout-identities
+  - def-fixed-point-multiplier-rational-map
+  - lem-rational-function-degree-on-projective-line
+  - def-one-variable-function-field-with-constant-field
+  - def-isotrivial-rational-map-over-function-field
+  - lem-projective-function-field-height-extension-invariance
+  - lem-function-field-pole-height-invariant-under-finite-extension
+  - lem-fixed-point-multiplier-invariant-under-mobius-conjugacy
+  - def-function-field-height-on-projective-line
+  - thm-function-field-projective-height-well-defined
+  - def-dynamical-canonical-height-over-function-field
+  - lem-projective-height-scales-over-finite-function-field-extension
+  - op-positive-height-gap-under-only-k-nonisotriviality
+  - thm-function-field-dynamical-height-growth-and-functional-equation
+  - lem-completion-of-algebraically-closed-valued-field-is-algebraically-closed
+  - def-good-and-potential-good-reduction-rational-map
+  - lem-binary-map-resultant-linear-conjugacy
+  - lem-local-homogeneous-dynamical-height-and-filled-julia-set
+  - def-berkovich-projective-line-by-polynomial-seminorms
+  - lem-berkovich-projective-line-compactness-and-classical-density
+  - lem-berkovich-disc-nested-balls-and-hsia-kernel
+  - def-local-dynamical-green-function
+  - lem-berkovich-dynamical-green-kernel-continuous-extension
+  - lem-rational-map-continuous-action-on-berkovich-projective-line
+  - lem-local-dynamical-green-conjugacy-and-good-reduction
+  - lem-binary-sylvester-resultant-linear-factor-product
+  - lem-dynamical-green-pullback-at-classical-points
+  - lem-rational-map-has-two-distinct-periodic-points
+  - lem-rational-map-two-preperiodic-points-and-normalized-lift
+  - lem-function-field-green-kernel-height-sum
+  - lem-potential-good-reduction-valued-extension-and-completion-descent
+  - lem-finite-extension-normal-curve-model-and-place-restriction
+  - lem-preperiodic-basis-local-good-conjugacies-force-constant-coefficients
+  - lem-positive-berkovich-green-diagonal-gives-finite-local-covers
+  - lem-finite-local-green-covers-imply-small-height-finiteness
+  - thm-isotriviality-iff-potential-good-reduction
+  - lem-nonnegative-dynamical-green-kernel-has-zero-preperiodic-pair
+  - lem-nonnegative-green-kernel-zero-slice-infima-force-good-conjugacy
+  - lem-berkovich-kernel-under-complete-algebraically-closed-extension
+  - lem-dynamical-diagonal-positivity-reduces-to-countable-coefficients
+  - lem-berkovich-rooted-tree-finite-retractions-and-laplacian
+  - lem-homogeneous-polynomial-pair-has-finite-tree-probability-potential
+  - lem-dynamical-potential-is-potential-of-a-probability-measure
+  - lem-positive-berkovich-potentials-determined-by-classical-values
+  - lem-berkovich-log-kernel-positive-energy-and-uniqueness
+  - lem-dynamical-probability-invariance-and-green-normalization
+  - thm-genuinely-bad-reduction-has-strictly-positive-berkovich-green-diagonal
+  - thm-positive-height-gap-for-nonisotrivial-rational-map-over-function-field
+  - cor-zero-height-preperiodic-for-nonisotrivial-rational-map-over-function-field
+examples: []
+requires:
+  - global-fields-and-function-fields
+---

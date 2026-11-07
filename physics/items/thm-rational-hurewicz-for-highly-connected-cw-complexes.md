@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-rational-hurewicz-for-highly-connected-cw-complexes.json
+  precheck: pass
 id: thm-rational-hurewicz-for-highly-connected-cw-complexes
 kind: theorem
 title: "Rational Hurewicz for highly connected CW complexes"
@@ -29,17 +32,12 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "§4.2 Theorem 4.32, printed pp.366–369, ordinary Hurewicz; arbitrary-CW rational range derived in local rows 1–10"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
 
-Assume AC. If a based CW complex X is (c−1)-connected with c≥2, the natural actual rationalized Hurewicz map π_i(X)⊗_Z Q→H_i(X;Q) is an isomorphism for c≤i≤2c−2. Lower positive rational homology vanishes. No finite-type, countability or finite-CW hypothesis is imposed, and no injectivity at 2c−1 is claimed.
+Assume AC. If a based CW complex $X$ is $(c-1)$-connected with $c\ge2$, the natural actual rationalized Hurewicz map $\pi_i(X)\otimes_{\mathbb Z}\mathbb Q\to H_i(X;\mathbb Q)$ is an isomorphism for $c\le i\le2c-2$. Lower positive rational homology vanishes. No finite-type, countability or finite-CW hypothesis is imposed, and no injectivity at $2c-1$ is claimed.
 
 ## Facts & Assumptions
 
@@ -57,10 +55,10 @@ Assume AC. If a based CW complex X is (c−1)-connected with c≥2, the natural 
 
 **Proof technique:** direct.
 
-1.1 For c=2 there is just i=2, so integral first Hurewicz and the rationalization lemma prove the theorem. Assume c≥3 and put D=2c−2. Choose a vertex v∈X as basepoint. For each j=c,...,D+1, choose a rational basis of V_j=π_j(X,v)⊗Q. Every basis vector is a fraction a/s by the rationalization lemma, with a∈π_j(X,v) and positive integer s. For each vector choose such a numerator and a based sphere map representing it. Replacing each basis vector by its numerator only rescales that vector by a nonzero rational number, so the chosen numerators still form a basis. AC makes these simultaneous choices for set-sized families. [given, F1, F4]
+1.1 For $c=2$ there is just $i=2$, so integral first Hurewicz and the rationalization lemma prove the theorem. Assume $c\ge3$ and put $D=2c-2$. Choose a vertex $v\in X$ as basepoint. For each $j=c,\ldots,D+1$, choose a rational basis of $V_j=\pi_j(X,v)\otimes\mathbb Q$. Every basis vector is a fraction $a/s$ by the rationalization lemma, with $a\in\pi_j(X,v)$ and positive integer $s$. For each vector choose such a numerator and a based sphere map representing it. Replacing each basis vector by its numerator only rescales that vector by a nonzero rational number, so the chosen numerators still form a basis. AC makes these simultaneous choices for set-sized families. [given, F1, F4]
 
-2.1 Let W be the CW wedge of all these spheres, and define f:W→X by the chosen representatives. The wedge weak topology makes f continuous, because its restriction to every sphere is continuous and the maps agree at the vertex. Both W and X are 2-connected; W has no positive cells below c, and the high-relative-cells lemma applied to (W,{vertex}) supplies that connectivity. The wedge Hurewicz lemma shows that, for i≤D, the rational π_i(W) consists exactly of the independent sphere generators in dimension i. Their images are the chosen basis of V_i. Below c both groups are zero. Thus π_i(f)⊗Q is an isomorphism for 2≤i≤D. In degree D+1 no decomposition of the full wedge homotopy group is asserted: the sphere generators chosen in that degree already span V_{D+1}, so π_{D+1}(f)⊗Q is surjective. [step 1.1, F1, F2]
+2.1 Let $W$ be the CW wedge of all these spheres, and define $f:W\to X$ by the chosen representatives. The wedge weak topology makes $f$ continuous, because its restriction to every sphere is continuous and the maps agree at the vertex. Both $W$ and $X$ are 2-connected; $W$ has no positive cells below $c$, and the high-relative-cells lemma applied to $(W,\{\mathrm{vertex}\})$ supplies that connectivity. The wedge Hurewicz lemma shows that, for $i\le D$, the rational $\pi_i(W)$ consists exactly of the independent sphere generators in dimension $i$. Their images are the chosen basis of $V_i$. Below $c$ both groups are zero. Thus $\pi_i(f)\otimes\mathbb Q$ is an isomorphism for $2\le i\le D$. In degree $D+1$ no decomposition of the full wedge homotopy group is asserted: the sphere generators chosen in that degree already span $V_{D+1}$, so $\pi_{D+1}(f)\otimes\mathbb Q$ is surjective. [step 1.1, F1, F2]
 
-3.1 The rational homotopy-to-homology comparison gives H_i(f;Q) an isomorphism through D. By the wedge Hurewicz lemma the Hurewicz map on W is an isomorphism in that same range. For each c≤i≤D the naturality square π_i(W)⊗Q --π_i(f)⊗Q--> π_i(X)⊗Q | h_W | h_X v v H_i(W;Q) ----H_i(f;Q)----> H_i(X;Q) commutes. The left, upper and lower arrows are isomorphisms, so h_X is an isomorphism. This proves the specified map, not merely equality of dimensions of two vector spaces. [step 2.1, F2]
+3.1 The rational homotopy-to-homology comparison gives $H_i(f;\mathbb Q)$ an isomorphism through $D$. By the wedge Hurewicz lemma the Hurewicz map on $W$ is an isomorphism in that same range. For each $c\le i\le D$ the naturality square $$\begin{array}{ccc}\pi_i(W)\otimes\mathbb Q & \xrightarrow{\pi_i(f)\otimes\mathbb Q} & \pi_i(X)\otimes\mathbb Q \\ {\scriptstyle h_W}\downarrow & & \downarrow{\scriptstyle h_X} \\ H_i(W;\mathbb Q) & \xrightarrow{H_i(f;\mathbb Q)} & H_i(X;\mathbb Q)\end{array}$$ commutes. The left, upper and lower arrows are isomorphisms, so $h_X$ is an isomorphism. This proves the specified map, not merely equality of dimensions of two vector spaces. [step 2.1, F2]
 
-4.1 For a different basepoint x∈X choose a path from v to x. Published basepoint transport is an isomorphism, and the moving-basepoint homotopy of its sphere representative leaves its singular homology pushforward unchanged. Hence the same statement holds at every basepoint and has the usual naturality under based continuous maps. Connectivity and first integral Hurewicz give lower homology vanishing. The empty space is excluded by connectivity; a point and zero rational homotopy groups give empty sphere families and are included. The argument never identifies an infinite-dimensional space with its double dual, interchanges an infinite spectral-sequence limit, or assumes finite generation of any homotopy group. The finite range ends at D=2c−2 throughout. [step 3.1, F3, F4] ∎
+4.1 For a different basepoint $x\in X$ choose a path from $v$ to $x$. Published basepoint transport is an isomorphism, and the moving-basepoint homotopy of its sphere representative leaves its singular homology pushforward unchanged. Hence the same statement holds at every basepoint and has the usual naturality under based continuous maps. Connectivity and first integral Hurewicz give lower homology vanishing. The empty space is excluded by connectivity; a point and zero rational homotopy groups give empty sphere families and are included. The argument never identifies an infinite-dimensional space with its double dual, interchanges an infinite spectral-sequence limit, or assumes finite generation of any homotopy group. The finite range ends at $D=2c-2$ throughout. [step 3.1, F3, F4] ∎

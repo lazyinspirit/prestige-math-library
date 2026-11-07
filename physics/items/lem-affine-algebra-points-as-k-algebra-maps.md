@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-affine-algebra-points-as-k-algebra-maps.json
+  precheck: pass
 id: lem-affine-algebra-points-as-k-algebra-maps
 kind: lemma
-title: "k-points of k[x_1, ..., x_n]/I are exactly k-algebra maps to k"
+title: '$k$-points of $k[x_1, \ldots, x_n]/I$ are exactly $k$-algebra maps to $k$'
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:

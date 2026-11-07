@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-isomorphisms-extend-to-splitting-fields.json
+  precheck: pass
 id: thm-isomorphisms-extend-to-splitting-fields
 kind: theorem
 title: 'A base-field isomorphism extends to an isomorphism between splitting fields of corresponding polynomials'
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: induction
-verification:
-  precheck: pass
-  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -47,7 +47,7 @@ Let $\sigma:F\to F'$ be a field isomorphism, let $0\ne f\in F[x]$, and put $f'=\
 
 ## Proof
 
-**Proof technique:** strong induction on $n=\deg f$.
+**Proof technique:** strong induction on the degree of the polynomial.
 
 1.1 Let $P(n)$ assert the theorem for every such datum of degree $n$. If $n=0$, both root sets are empty, so $E=F$ and $E'=F'$; the required extension is $\sigma$. [F6, base]
 

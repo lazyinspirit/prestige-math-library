@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/cor-the-long-exact-homology-sequence-is-natural.json
+  precheck: pass
 id: cor-the-long-exact-homology-sequence-is-natural
 kind: corollary
 title: "The long exact homology sequence is natural"
@@ -11,13 +14,6 @@ deps: [thm-long-exact-sequence-in-homology,
        thm-naturality-of-the-homology-connecting-morphism,
        thm-a-chain-map-induces-a-well-defined-map-on-homology]
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -49,3 +45,15 @@ associated long exact homology sequences.
 
 2.1 The only nonformal squares are the connecting ones, and they commute by [L2]. Therefore every square in the long exact ladder commutes. [L2, step 1.1, algebra] ∎
 
+## Remarks
+
+Write the two short exact sequences as $0\to A_\bullet\xrightarrow{i}B_\bullet\xrightarrow{p}C_\bullet\to0$ and $0\to A'_\bullet\xrightarrow{i'}B'_\bullet\xrightarrow{p'}C'_\bullet\to0$, with vertical chain maps $a:A_\bullet\to A'_\bullet$, $b:B_\bullet\to B'_\bullet$, and $c:C_\bullet\to C'_\bullet$. For every integer $n$, the associated long exact ladder contains the following commutative portion; the rows continue in both directions.
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large, font=\Large, every label/.append style={font=\normalsize}]
+H_n(A) \arrow[r, "H_n(i)"] \arrow[d, "H_n(a)"'] & H_n(B) \arrow[r, "H_n(p)"] \arrow[d, "H_n(b)"] & H_n(C) \arrow[r, "\partial_n"] \arrow[d, "H_n(c)"] & H_{n-1}(A) \arrow[d, "H_{n-1}(a)"] \\
+H_n(A') \arrow[r, "H_n(i')"'] & H_n(B') \arrow[r, "H_n(p')"'] & H_n(C') \arrow[r, "\partial'_n"'] & H_{n-1}(A')
+\end{tikzcd}
+```
+
+The first two squares express the chain-map compatibilities $bi=i'a$ and $cp=p'b$ after passing to homology. The third is the connecting-map identity $H_{n-1}(a)\partial_n=\partial'_n H_n(c)$ from [L2], with the same connecting-map convention as the long exact sequence. The proof above is independent of this illustration.

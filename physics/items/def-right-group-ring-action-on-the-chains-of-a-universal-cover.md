@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/def-right-group-ring-action-on-the-chains-of-a-universal-cover.json
+  precheck: n/a
 id: def-right-group-ring-action-on-the-chains-of-a-universal-cover
 kind: definition
 title: Right action on universal-cover chains
@@ -6,12 +9,6 @@ status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-universal-covering-space, thm-universal-cover-existence, thm-deck-group-of-a-universal-cover-is-the-fundamental-group, def-group-ring, thm-group-ring-is-a-unital-algebra-with-basis-g]
-verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
 sources:
   references:
     - title: Davis and Kirk, Lecture Notes in Algebraic Topology, Chapter 5 §1, pp.95–97
@@ -33,7 +30,7 @@ $g c$ for the induced **left** deck action on a singular or cellular chain.
 
 The **right group-ring action** on universal-cover chains is
 $$c\cdot g:=g^{-1}c\qquad(g\in\pi),$$
-extended additively and $R$-linearly to [[def-group-ring|$R[\pi]$]]. It is a
+extended additively and $R$-linearly to [[def-group-ring|$R\lbrack\pi\rbrack$]]. It is a
 right action because
 $$(c\cdot g)\cdot h=h^{-1}(g^{-1}c)=(gh)^{-1}c=c\cdot(gh),\qquad c\cdot1=c.$$
 Here the multiplication $[g][h]=[gh]$ and the unit $[1]$ are those constructed

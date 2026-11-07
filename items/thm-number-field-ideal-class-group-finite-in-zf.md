@@ -3,11 +3,14 @@ id: thm-number-field-ideal-class-group-finite-in-zf
 kind: theorem
 title: "The ideal class group of a number field is finite in ZF"
 status: draft
-origin: session
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 1
 deps: [lem-axis-box-lattice-point-in-zf, thm-number-field-integral-ideal-factorisation-in-zf, thm-ring-of-integers-and-ideals-are-full-lattices, thm-ring-of-integers-free-of-rank-degree, thm-principal-ideal-norm-is-absolute-field-norm, thm-ideal-norm-is-multiplicative, lem-finitely-many-number-field-ideals-of-bounded-norm, def-minkowski-embedding-of-a-number-field, def-field-norm-and-trace]
 provenance:
   statement: literature-derived
   proof: ai-altered
+justified_by: []
 proof_strategy: direct
 sources:
   references:
@@ -23,7 +26,7 @@ In ZF, for every number field $K$, all nonzero fractional ideals of $R=\mathcal 
 
 **Given:** $K,R,n,r,s,D$ as in the statement; Minkowski coordinates are the real embeddings and the real and imaginary parts of one embedding from each complex-conjugate pair.
 
-[F1] Nonzero integral ideals admit unique finite prime factorisation in ZF, and equality of such ideals can be tested at all maximal localizations, whose nonzero ideals are powers of their maximal ideal ([[thm-number-field-integral-ideal-factorisation-in-zf]]).
+[F1] Nonzero integral ideals admit unique finite prime factorisation in ZF ([[thm-number-field-integral-ideal-factorisation-in-zf]]).
 
 [F2] $R$ and its nonzero fractional ideals have full Minkowski lattices with explicit finite bases, and $R$ has an integral basis ([[thm-ring-of-integers-and-ideals-are-full-lattices]], [[thm-ring-of-integers-free-of-rank-degree]]).
 
@@ -37,7 +40,7 @@ In ZF, for every number field $K$, all nonzero fractional ideals of $R=\mathcal 
 
 ## Proof
 
-1.1 Fix one integral basis of $R$ and use its finite integer coordinates to give every element of $R$ a natural-number code. Fix a nonzero prime $\mathfrak p$ and a nonzero $a\in\mathfrak p$, for example its least-coded nonzero element. Factor $(a)=\mathfrak p^eQ$ with $e\ge1$ and $Q$ a product of the other prime powers. The inequality $e\ge1$ follows either by localization at $\mathfrak p$ or by primality applied to the product and maximality of distinct prime factors. Then $J=a^{-1}\mathfrak p^{e-1}Q$ is a fractional ideal and $\mathfrak pJ=R$. Thus every nonzero prime ideal is invertible, and [F1] makes every nonzero integral ideal invertible. If $I$ is fractional, choose $0\ne d\in R$ with $dI\subseteq R$; then $I=d^{-1}(dI)$ is invertible too. An inverse is unique: $IJ=IH=R$ implies $J=J(IH)=(JI)H=H$. Products are commutative and associative directly from finite sums of products, so fractional ideals form an abelian group; its principal ideals are a subgroup. [F1, F2, given, algebra]
+1.1 Fix one integral basis of $R$ and use its finite integer coordinates to give every element of $R$ a natural-number code. Fix a nonzero prime $\mathfrak p$ and a nonzero $a\in\mathfrak p$, for example its least-coded nonzero element. Factor $(a)=\mathfrak p^eQ$ with $e\ge1$ and $Q$ a product of the other prime powers. The inequality $e\ge1$ follows by primality applied to the product and maximality of distinct prime factors. Then $J=a^{-1}\mathfrak p^{e-1}Q$ is a fractional ideal and $\mathfrak pJ=R$. Thus every nonzero prime ideal is invertible, and [F1] makes every nonzero integral ideal invertible. If $I$ is fractional, choose $0\ne d\in R$ with $dI\subseteq R$; then $I=d^{-1}(dI)$ is invertible too. An inverse is unique: $IJ=IH=R$ implies $J=J(IH)=(JI)H=H$. Products are commutative and associative directly from finite sums of products, so fractional ideals form an abelian group; its principal ideals are a subgroup. [F1, F2, given, algebra]
 
 1.2 For completeness the covolume of an integral ideal $I$ is $N(I)D$. In the fixed basis of $R$, its full integral basis gives a nonsingular integer matrix $A$, and its index is $[\mathbb Z^n:A\mathbb Z^n]=|\det A|$. This index identity uses a finite induction: project the subgroup onto the first coordinate, whose image is $d\mathbb Z$ with $d>0$; a lift with first coordinate $d$, together with an inductive basis of the kernel, gives a block triangular matrix. Cosets are represented uniquely by first-coordinate residues $0,\ldots,d-1$ and representatives for the kernel in the remaining coordinates. Both the index and the absolute determinant are therefore $d$ times their respective kernel values; the base case has value one. Changing between two integer bases has determinant $\pm1$, since the transition and its inverse are integer matrices. The index is by definition $N(I)$ and determinants multiply under basis changes, proving the covolume identity. [F2, algebra]
 

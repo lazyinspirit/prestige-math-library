@@ -3,11 +3,14 @@ id: thm-number-field-s-unit-structure-in-zf
 kind: theorem
 title: "Dirichlet and S-unit structure theorems in ZF"
 status: draft
-origin: session
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 2
 deps: [thm-number-field-ideal-class-group-finite-in-zf, lem-axis-box-lattice-point-in-zf, thm-number-field-integral-ideal-factorisation-in-zf, thm-ring-of-integers-and-ideals-are-full-lattices, thm-ring-of-integers-free-of-rank-degree, thm-principal-ideal-norm-is-absolute-field-norm, lem-finitely-many-number-field-ideals-of-bounded-norm, lem-discrete-subgroups-of-real-vector-spaces-are-lattices, def-minkowski-embedding-of-a-number-field, def-field-norm-and-trace]
 provenance:
   statement: literature-derived
   proof: ai-altered
+justified_by: []
 proof_strategy: direct
 sources:
   references:
@@ -59,4 +62,4 @@ has kernel $\mu(K)$ on $R^\times$ and image a full lattice in $H=\{x\in\mathbb R
 
 5.1 List $S=\{\mathfrak p_1,\ldots,\mathfrak p_t\}$, with the empty list allowed. The valuation homomorphism $v:U_S\to\mathbb Z^t$ has kernel $R^\times$ by step 1.1. For the integer $h$ in [F1], choose generators $\pi_i$ of the integral principal ideals $\mathfrak p_i^h$; these are finite choices and may again use least codes. Then $\pi_i\in U_S$ and $v(\pi_i)=h e_i$. The image $\Gamma$ therefore contains $h\mathbb Z^t$ and is contained in $\mathbb Z^t$. It meets bounded subsets of $\mathbb R^t$ finitely, so [F6] gives it a real-linearly independent integer basis; since it contains the real spanning set $h e_i$, that basis has exactly $t$ members. Lift those finitely many basis vectors to $a_1,\ldots,a_t\in U_S$. Their powers split $v$ just as in step 4.1, yielding $U_S\cong R^\times\times\mathbb Z^t\cong\mu(K)\times\mathbb Z^{m-1+t}$. [F1, F6, step 1.1, step 4.1, algebra]
 
-6.1 Squaring in a finite cyclic group of even order has a quotient of order two, because the exponent residues modulo $M$ have exactly the two parity classes modulo the subgroup of doubles. Each infinite cyclic factor also has quotient of order two. The decomposition in step 5.1 therefore gives $U_S/U_S^2\cong(\mathbb Z/2\mathbb Z)^{m+t}$ and the asserted dimension. Every auxiliary list was finite; the uncountable quantifier in step 2.2 was used pointwise. The only coding fixed globally was a single integral basis of the given field, extended to rational coordinates when coding $K$ is desired. Thus the conclusions hold in ZF without a choice axiom. [step 3.2, step 5.1, algebra] ∎
+6.1 Squaring in a finite cyclic group of even order has a quotient of order two, because the exponent residues modulo $M$ have exactly the two parity classes modulo the subgroup of doubles. Each infinite cyclic factor also has quotient of order two. Using the finite class-group bound [F1] in step 5.1, the decomposition therefore gives $U_S/U_S^2\cong(\mathbb Z/2\mathbb Z)^{m+t}$ and the asserted dimension. Every auxiliary list was finite; the uncountable quantifier in step 2.2 was used pointwise. The only coding fixed globally was a single integral basis of the given field, extended to rational coordinates when coding $K$ is desired. Thus the conclusions hold in ZF without a choice axiom. [F1, step 3.2, step 5.1, algebra] ∎

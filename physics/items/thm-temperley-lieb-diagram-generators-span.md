@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-temperley-lieb-diagram-generators-span.json
+  precheck: pass
 id: thm-temperley-lieb-diagram-generators-span
 kind: theorem
 title: "Elementary cup-cap diagrams generate every finite planar pairing endomorphism diagram"
@@ -52,3 +55,78 @@ For every $n\ge0$, each basis diagram in $\mathcal D(n,n)$ is a finite product o
 ## Remarks
 
 The procedure is deterministic if, at each stage, the leftmost eligible cap island is processed first. The cap/through exchange and island products are algebraic connectivity checks; the diagrams only illustrate them.
+
+
+For the top exchange in step 2.1, take $n=3$, $i=2$, and the flat diagram $D=d_1$. The dashed line is the glued interface in $d_2D$, with the left factor above the right. Tracing the stack gives the matching at right: the top pattern changes from $CT$ to $TC$, while the bottom cup stays at $(1,2)$. The long path joins top point $1$ to bottom point $3$; there is no closed component. Reflecting this picture vertically gives the bottom exchange by right multiplication.
+
+```tikz
+\begin{tikzpicture}[scale=0.8]
+  \draw[dashed] (-0.3,2) -- (2.3,2);
+  \foreach \x/\lab in {0/1,1/2,2/3} {
+    \fill (\x,4) circle (1.6pt);
+    \fill (\x,2) circle (1.6pt);
+    \fill (\x,0) circle (1.6pt);
+    \node[above] at (\x,4.05) {\lab};
+    \node[below] at (\x,-0.05) {\lab};
+  }
+  \draw (0,4) -- (0,2);
+  \draw (1,4) .. controls (1,3.2) and (2,3.2) .. (2,4);
+  \draw (1,2) .. controls (1,2.8) and (2,2.8) .. (2,2);
+  \draw (0,2) .. controls (0,1.2) and (1,1.2) .. (1,2);
+  \draw (2,2) -- (2,0);
+  \draw (0,0) .. controls (0,0.8) and (1,0.8) .. (1,0);
+  \node[left] at (-0.4,3) {$d_2$};
+  \node[left] at (-0.4,1) {$D=d_1$};
+  \draw[->] (2.8,2) -- (4,2);
+  \node[above] at (3.4,2.1) {trace};
+  \foreach \x in {5,6,7} {
+    \fill (\x,4) circle (1.6pt);
+    \fill (\x,0) circle (1.6pt);
+  }
+  \node[above] at (5,4.05) {$1$};
+  \node[above] at (6,4.05) {$2$};
+  \node[above] at (7,4.05) {$3$};
+  \node[below] at (5,-0.05) {$1$};
+  \node[below] at (6,-0.05) {$2$};
+  \node[below] at (7,-0.05) {$3$};
+  \draw (6,4) .. controls (6,3.2) and (7,3.2) .. (7,4);
+  \draw (5,0) .. controls (5,0.8) and (6,0.8) .. (6,0);
+  \draw (5,4) .. controls (5,2) and (7,2) .. (7,0);
+  \node at (6,-0.8) {$d_2d_1$};
+\end{tikzpicture}
+```
+
+The next picture is the $q=2$, $i=1$ cap-island operation of step 3.1 in $\mathcal D(4,4)$. Left multiplication by $d_2$ changes the two adjacent top caps of $d_1d_3$ into the outer cap $(1,4)$ and the interior cap $(2,3)$; the bottom cups are unchanged. At the glued interface the cup of $d_2$ joins the two distinct old cap paths, so no loop factor occurs. These examples illustrate the algebraic path checks; the rigorous proof above is independent of the figures.
+
+```tikz
+\begin{tikzpicture}[scale=0.85]
+  \foreach \x in {0,1,2,3} {
+    \fill (\x,2) circle (1.6pt);
+    \fill (\x,0) circle (1.6pt);
+  }
+  \draw (0,2) .. controls (0,1.4) and (1,1.4) .. (1,2);
+  \draw (2,2) .. controls (2,1.4) and (3,1.4) .. (3,2);
+  \draw (0,0) .. controls (0,0.6) and (1,0.6) .. (1,0);
+  \draw (2,0) .. controls (2,0.6) and (3,0.6) .. (3,0);
+  \node at (1.5,-0.6) {$d_1d_3$};
+  \draw[->] (3.5,1) -- (5.2,1);
+  \node[above] at (4.35,1.1) {$d_2\cdot(-)$};
+  \foreach \x in {6,7,8,9} {
+    \fill (\x,2) circle (1.6pt);
+    \fill (\x,0) circle (1.6pt);
+  }
+  \draw (6,2) .. controls (6,0.6) and (9,0.6) .. (9,2);
+  \draw (7,2) .. controls (7,1.6) and (8,1.6) .. (8,2);
+  \draw (6,0) .. controls (6,0.4) and (7,0.4) .. (7,0);
+  \draw (8,0) .. controls (8,0.4) and (9,0.4) .. (9,0);
+  \node at (7.5,-0.6) {$d_2d_1d_3$};
+  \node[above] at (0,2.05) {$1$};
+  \node[above] at (1,2.05) {$2$};
+  \node[above] at (2,2.05) {$3$};
+  \node[above] at (3,2.05) {$4$};
+  \node[above] at (6,2.05) {$1$};
+  \node[above] at (7,2.05) {$2$};
+  \node[above] at (8,2.05) {$3$};
+  \node[above] at (9,2.05) {$4$};
+\end{tikzpicture}
+```

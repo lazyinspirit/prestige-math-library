@@ -1,7 +1,9 @@
 ---
 id: thm-gr-constraint-equations-in-normal-frame
 kind: theorem
-title: "Gauss-Codazzi decomposition in Gaussian normal coordinates and the constraint equations in terms of the induced metric and second fundamental form"
+title: "Gauss-Codazzi decomposition in Gaussian normal coordinates and the
+  constraint equations in terms of the induced metric and second fundamental
+  form"
 status: published
 origin: session
 domain: mathematics
@@ -10,7 +12,21 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [thm-gr-curvature-algebraic-symmetries, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-christoffel-symbols-of-an-affine-connection, def-gr-tensor-fields-and-components, def-gr-inverse-metric-and-musical-isomorphisms, def-embedded-submanifold-and-slice-chart, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps:
+  [
+    thm-gr-curvature-algebraic-symmetries,
+    thm-gr-curvature-tensoriality-and-coordinate-formula,
+    def-gr-spacelike-hypersurfaces-and-cauchy-sets,
+    lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form,
+    def-gr-curvature-tensor-and-derived-tensors,
+    def-gr-metric-selected-connection,
+    thm-gr-nondegenerate-levi-civita-and-tensor-derivative,
+    def-christoffel-symbols-of-an-affine-connection,
+    def-gr-tensor-fields-and-components,
+    def-gr-inverse-metric-and-musical-isomorphisms,
+    def-embedded-submanifold-and-slice-chart,
+    def-c-r-and-smooth-maps-between-smooth-manifolds
+  ]
 dependency_roles:
   thm-gr-curvature-algebraic-symmetries: mathematical-premise
   thm-gr-curvature-tensoriality-and-coordinate-formula: mathematical-premise
@@ -26,12 +42,29 @@ dependency_roles:
   def-c-r-and-smooth-maps-between-smooth-manifolds: mathematical-premise
 sources:
   references:
-    - title: "E. Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, arXiv:gr-qc/0703035 (2007), Sections 2.5 (Gauss-Codazzi relations: Gauss, Codazzi-Mainardi and Ricci equations), 4.2-4.3 (the Hamiltonian and momentum constraint equations (4.65)-(4.66) and the extrinsic curvature of a slice) and 10.3.2 (Propagation of the constraints)"
+    - title: "E. Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity,
+        arXiv:gr-qc/0703035 (2007), Sections 2.5 (Gauss-Codazzi relations:
+        Gauss, Codazzi-Mainardi and Ricci equations), 4.2-4.3 (the Hamiltonian
+        and momentum constraint equations (4.65)-(4.66) and the extrinsic
+        curvature of a slice) and 10.3.2 (Propagation of the constraints)"
       url: "https://arxiv.org/pdf/gr-qc/0703035"
-    - title: "H. Friedrich and A. D. Rendall, The Cauchy Problem for the Einstein Equations, Living Reviews in Relativity 3 (2000), article 1 (arXiv:gr-qc/0002074), Section 2.4 (The Evolution Equations): the splitting of the field equations into evolution and constraint parts, gauge source functions and the harmonically reduced field equations (2.39), and the subsidiary system obtained from their divergence"
+    - title: "H. Friedrich and A. D. Rendall, The Cauchy Problem for the Einstein
+        Equations, Living Reviews in Relativity 3 (2000), article 1
+        (arXiv:gr-qc/0002074), Section 2.4 (The Evolution Equations): the
+        splitting of the field equations into evolution and constraint parts,
+        gauge source functions and the harmonically reduced field equations
+        (2.39), and the subsidiary system obtained from their divergence"
       url: "https://arxiv.org/pdf/gr-qc/0002074"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-21
+    scope: Complete current Statement, Facts and proof reviewed by delegated
+      same-owner reviewer; exact reading limits and source bindings in
+      research/physics-non-fluid-129-2026-10-21-r2-owner-step2-gr32-supplier/report.json.
+    delegated_by: /root
 ---
 
 ## Statement

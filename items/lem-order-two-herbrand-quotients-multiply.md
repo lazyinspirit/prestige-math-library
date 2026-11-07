@@ -3,11 +3,14 @@ id: lem-order-two-herbrand-quotients-multiply
 kind: lemma
 title: Multiplication of order-two Herbrand quotients
 status: draft
-origin: session
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 0
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: []
+justified_by: []
 proof_strategy: direct
 sources:
   references:

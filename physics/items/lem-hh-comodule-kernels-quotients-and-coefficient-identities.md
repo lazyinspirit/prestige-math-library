@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-hh-comodule-kernels-quotients-and-coefficient-identities.json
+  precheck: pass
 id: lem-hh-comodule-kernels-quotients-and-coefficient-identities
 kind: lemma
 title: "Kernels, images, quotients, and matrix coefficients of comodules"
@@ -77,3 +80,21 @@ Conversely, any $n^2$ elements $c_{ij}\in C$ satisfying these two identities def
 5.1 The map $\widetilde f:M/K\to I$, $m+K\mapsto f(m)$, is the same induced map as $\bar f$ with codomain restricted to $I$. It is injective by the definition of $K$ and onto by the definition of $I$, hence is a vector-space isomorphism. The quotient and image coaction formulas in steps 3.2 and 4.1 give $\rho_I\widetilde f=(\widetilde f\otimes\operatorname{id})\bar\rho$. Since $\widetilde f$ and its tensor map are isomorphisms, composing this identity with their inverses shows $\widetilde f^{-1}$ is also a comodule map. [step 3.2, step 4.1, F5, F6, F7, algebra]
 
 6.1 Step 1.1 establishes the regular comodule; steps 1.2, 2.1, and 3.1 prove both directions of the finite coefficient-matrix characterization. Steps 1.3, 2.2, 3.2, 4.1, and 5.1 establish the kernel, image, quotient, and first-isomorphism claims under AC. [step 1.1, step 1.2, step 2.1, step 3.1, step 1.3, step 2.2, step 3.2, step 4.1, step 5.1] ∎
+
+## Remarks
+
+Under the AC assumption above, put $K=\ker f$ and $I=\operatorname{im}f$. The kernel inclusion $i$, quotient map $q$, image inclusion $j$, and induced isomorphism $\widetilde f(m+K)=f(m)$ fit into the commutative factorization below. In particular, $j\widetilde f q=f$ and $qi=0$.
+
+```tikzcd
+K \arrow[r, hook, "i"] & M \arrow[r, "f"] \arrow[d, two heads, "q"'] & N \\
+& M/K \arrow[r, "\widetilde f"', "\sim"] & I \arrow[u, hook, "j"']
+```
+
+Each object carries the coaction constructed in the proof: $\rho_K$, $\rho_M$, $\bar\rho$ on $M/K$, $\rho_I$, and $\rho_N$, respectively. Every arrow in the factorization is a comodule map; for example, the square for $f$ is
+
+```tikzcd
+M \arrow[r, "f"] \arrow[d, "\rho_M"'] & N \arrow[d, "\rho_N"] \\
+M\otimes C \arrow[r, "f\otimes\mathrm{id}_C"'] & N\otimes C
+```
+
+Its two composites are $\rho_N f=(f\otimes\operatorname{id}_C)\rho_M$. The analogous equation holds for each of $i,q,\widetilde f,j$ with its corresponding source and target coactions. These diagrams illustrate the kernel/image/quotient construction; the coefficient identities and all proofs remain independent of them.

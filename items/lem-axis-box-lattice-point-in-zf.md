@@ -3,8 +3,11 @@ id: lem-axis-box-lattice-point-in-zf
 kind: lemma
 title: "Axis-box lattice-point theorem in ZF"
 status: draft
-origin: session
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 0
 deps: [thm-linear-images-scale-jordan-content-by-absolute-determinant, def-jordan-inner-and-outer-content, thm-jordan-boundary-criterion]
+justified_by: []
 provenance:
   statement: literature-derived
   proof: ai-altered

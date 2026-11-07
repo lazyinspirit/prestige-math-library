@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-ag-separable-residue-cotangent-sequence.json
+  precheck: pass
 id: "lem-ag-separable-residue-cotangent-sequence"
 kind: "lemma"
 title: "Separable residue and the cotangent sequence of a local algebra"
@@ -15,8 +18,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §§22.2.18 and 22.3.9, pp.582–583, 590"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
-verification:
-  precheck: pass
+
 ---
 
 ## Statement
@@ -66,3 +68,34 @@ is a finite separable extension of $k$.
 4.1 Conclusion. By [F1] the derivation of step 3.1 corresponds to an $R$-linear map $\Omega_{R/k}\to\mathfrak m/\mathfrak m^{2}$, which factors through $\Omega_{R/k}\otimes_R\kappa\to\mathfrak m/\mathfrak m^{2}$ because the target is annihilated by $\mathfrak m$, giving a $\kappa$-linear $\theta$ with $\theta(1\otimes\mathrm{d}x)=x\bmod\mathfrak m^{2}$ for $x\in\mathfrak m$. The first map of step 2.1 sends the class of $x\in\mathfrak m$ to $1\otimes\mathrm{d}x$, so $\theta$ is a left inverse of it and that map is injective; with step 2.1, the displayed sequence is exact. [step 2.1, step 3.1, F1]
 
 5.1 Finite separable residue concluded. By step 1.3 the hypothesis of the final clause gives $\Omega_{\kappa/k}=0$, so the exact sequence of step 4.1 reads $0\to\mathfrak m/\mathfrak m^{2}\to\Omega_{R/k}\otimes_R\kappa\to0$, that is, $\mathfrak m/\mathfrak m^{2}\cong\Omega_{R/k}\otimes_R\kappa$ via the first map. [step 1.3, step 4.1] ∎
+
+
+## Remarks
+
+Under the hypotheses of the statement, the curved arrow records the
+$\kappa$-linear left inverse constructed in steps 3.1–4.1. It depends on the
+chosen section $s\colon\kappa\to R/\mathfrak m^2$; the forward maps are canonical.
+
+```tikz
+\begin{tikzpicture}[>=stealth, every node/.style={font=\large}]
+\node (zeroL) at (0,0) {$0$};
+\node (C) at (2,0) {$\mathfrak m/\mathfrak m^2$};
+\node (E) at (6,0) {$\Omega_{R/k}\otimes_R\kappa$};
+\node (F) at (10,0) {$\Omega_{\kappa/k}$};
+\node (zeroR) at (12,0) {$0$};
+\draw[->] (zeroL) -- (C);
+\draw[->] (C) -- node[above] {$i$} (E);
+\draw[->] (E) -- node[above] {$q$} (F);
+\draw[->] (F) -- (zeroR);
+\draw[->] (E) to[bend left=35] node[below] {$\theta$} (C);
+\node at (4,-1.7) {$\theta\circ i=\mathrm{id}_{\mathfrak m/\mathfrak m^2}$};
+\end{tikzpicture}
+```
+
+The top row is exact: $i([x])=\mathrm{d}x\otimes1$ and
+$q(\mathrm{d}r\otimes\lambda)=\lambda\,\mathrm{d}(r\bmod\mathfrak m)$ for
+$x\in\mathfrak m$, $r\in R$ and $\lambda\in\kappa$. Thus $q\circ i=0$, while
+$\theta\circ i=\mathrm{id}$ gives injectivity of $i$. Only with the additional
+finite separable hypothesis does $\Omega_{\kappa/k}=0$, making $i$ an
+isomorphism with inverse $\theta$, as in step 5.1. The proof above is independent
+of this illustration.

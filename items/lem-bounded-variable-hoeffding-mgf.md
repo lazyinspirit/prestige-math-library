@@ -39,6 +39,12 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-19
+    scope: complete-proof-and-used-supplier-audit
+    delegated_by: /root
   judge:
     model: "gpt-6-luna"
     verdict: pass

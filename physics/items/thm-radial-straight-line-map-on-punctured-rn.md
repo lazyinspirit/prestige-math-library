@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-radial-straight-line-map-on-punctured-rn.json
+  precheck: pass
 id: thm-radial-straight-line-map-on-punctured-rn
 kind: theorem
 title: "For $n\\ge1$, the map $H(x,t)=((1-t)+t/\\lVert x\\rVert_2)x$ is continuous on $(\\mathbb{R}^n\\setminus\\{0\\})\\times[0,1]$, starts at $x$, ends at radial normalisation, fixes the unit sphere, and never reaches $0$"
@@ -11,14 +14,6 @@ deps: [lem-radial-normalisation-is-continuous, thm-product-universal-property, t
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: claude-sonnet-5
-    verdict: certify
-    date: 2026-08-06
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -62,3 +57,30 @@ Then $H$ is continuous, $H(x,0)=x$, $H(x,1)=x/\lVert x\rVert_2$, $H(s,t)=s$ for 
 2.1 Since $c(x,t)>0$ and $x\ne0$, $H(x,t)\ne0$. Hence $H$ takes values in $P$, and [L5] makes it continuous as a map $P\times[0,1]\to P$. [step 1.1, step 1.2, L5]
 
 3.1 These identities and step 2.1 prove the statement. [step 2.1, step 1.3] ∎
+
+## Remarks
+
+The planar illustration shows both directions of radial motion: an exterior point $x$ moves inward and an interior nonzero point $y$ moves outward. Write $\rho(z)=z/\lVert z\rVert_2$. The arrows trace $H(z,t)=(1-t)z+t\rho(z)$ from $t=0$ to $t=1$; both endpoints are included. The hollow origin is excluded from $P$. Every unit-sphere point is fixed, with $s$ marking one example. This is the $n=2$ picture; for $n=1$ the sphere is the two-point set $S^0$, and for all $n\ge1$ the same motion takes place along each positive ray. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=2.1]
+\draw (0,0) circle (1);
+\draw[densely dotted] (0,0) -- (30:2.2);
+\draw[densely dotted] (0,0) -- (-0.6,-0.8);
+\draw[blue,very thick,->] (30:2.2) -- (30:1);
+\draw[blue,very thick,->] (-0.3,-0.4) -- (-0.6,-0.8);
+\fill (30:2.2) circle (0.025);
+\fill (30:1) circle (0.025);
+\fill (-0.3,-0.4) circle (0.025);
+\fill (-0.6,-0.8) circle (0.025);
+\fill (0,1) circle (0.025);
+\draw[fill=white] (0,0) circle (0.035);
+\node[below right] at (0,0) {$0\notin P$};
+\node[above right] at (30:2.2) {$x$};
+\node[right] at (0.9,0.4) {$\rho(x)$};
+\node[left] at (-0.3,-0.4) {$y$};
+\node[below left] at (-0.6,-0.8) {$\rho(y)$};
+\node[above] at (0,1) {$H(s,t)=s$};
+\node[above left] at (-0.707,0.707) {$S^1$};
+\end{tikzpicture}
+```

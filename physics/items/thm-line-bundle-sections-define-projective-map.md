@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-line-bundle-sections-define-projective-map.json
+  precheck: pass
 id: thm-line-bundle-sections-define-projective-map
 kind: theorem
 title: "Generating line-bundle sections define a morphism to projective space"
@@ -24,9 +27,7 @@ sources:
       url: https://stacks.math.columbia.edu/download/constructions.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -85,4 +86,29 @@ immersion is made.
 
 5.1 Uniqueness. Let $\psi:X\to\mathbb P^n_S$ be an $S$-morphism with $\psi^*\mathcal O(1)\cong L$ carrying the coordinate sections to $s_0,\dots,s_n$. Then $\psi^{-1}(D_+(x_i))=X_{s_i}$: a point maps into $D_+(x_i)$ exactly when the pullback of the coordinate $x_i$ does not vanish there, and that pullback is $s_i$. On $X_{s_i}$ the coordinates satisfy $x^{(i)}_j\circ\psi=\psi^*(x_j)/\psi^*(x_i)=s_j/s_i$, which agrees with $\varphi$ by step 2.1; hence $\psi=\varphi$ on each $X_{s_i}$, and since these cover $X$, $\psi=\varphi$ by [F5]. [F1, F5, step 2.1, step 4.1]
 
-6.1 Conclusion. Steps 1.1 to 3.1 construct the $S$-morphism with $\varphi^{-1}(D_+(x_i))=X_{s_i}$, step 4.1 identifies $\varphi^*\mathcal O(1)$ with $L$ compatibly with the given sections, and step 5.1 proves uniqueness. Nothing in the construction asserts injectivity or immersion: two distinct points may have proportional tuples, and $\varphi$ is an immersion only under additional hypotheses. If some $s_i=0$ then $X_{s_i}=\varnothing$ and the corresponding local piece is empty, which the gluing of step 3.1 allows; if all $s_i=0$ the hypothesis that they generate $L$ fails unless $X=\varnothing$, and then the construction is vacuous. The Axiom of Choice [A1] is inherited from the projective-space and associated-sheaf constructions; no choice is made here. [A1, step 3.1, step 4.1, step 5.1, cases: vanishing sections and empty X] \qed 
+6.1 Conclusion. Steps 1.1 to 3.1 construct the $S$-morphism with $\varphi^{-1}(D_+(x_i))=X_{s_i}$, step 4.1 identifies $\varphi^*\mathcal O(1)$ with $L$ compatibly with the given sections, and step 5.1 proves uniqueness. Nothing in the construction asserts injectivity or immersion: two distinct points may have proportional tuples, and $\varphi$ is an immersion only under additional hypotheses. If some $s_i=0$ then $X_{s_i}=\varnothing$ and the corresponding local piece is empty, which the gluing of step 3.1 allows; if all $s_i=0$ the hypothesis that they generate $L$ fails unless $X=\varnothing$, and then the construction is vacuous. The Axiom of Choice [A1] is inherited from the projective-space and associated-sheaf constructions; no choice is made here. [A1, step 3.1, step 4.1, step 5.1, cases: vanishing sections and empty X] ∎ 
+
+## Remarks
+
+The diagram displays how the chart maps fit together. For distinct indices
+$i,j$, write $X_{ij}=X_{s_i}\cap X_{s_j}$ and $U_{ij}=U_i\cap U_j$.
+The horizontal arrows are open inclusions; the vertical arrows are the
+constructed morphisms, with $\varphi_{ij}$ their common restriction to the
+overlap. The open sets $X_{s_i}$ cover $X$.
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=huge, cells={nodes={font=\Large}}, every label/.append style={font=\large}]
+X_{ij} \arrow[r, hook] \arrow[d, "\varphi_{ij}"'] & X_{s_i} \arrow[r, hook] \arrow[d, "\varphi_i"] & X \arrow[d, "\varphi"] \\
+U_{ij} \arrow[r, hook] & U_i \arrow[r, hook] & \mathbb P^n_S
+\end{tikzcd}
+```
+
+Both squares commute by steps 2.1 and 3.1. The same diagram with $i,j$
+interchanged describes the other chart. On $X_{ij}$ the change of coordinates
+is exactly
+$$x^{(j)}_\ell\circ\varphi_j=\frac{s_\ell/s_i}{s_j/s_i}=\frac{s_\ell}{s_j}\quad(\ell\ne i,j),\qquad x^{(j)}_i\circ\varphi_j=\frac{1}{s_j/s_i}=\frac{s_i}{s_j}.$$
+The denominator is invertible on this overlap. Likewise the frame relation
+$e_j=x^{(i)}_je_i$ pulls back to $s_j=(s_j/s_i)s_i$, so the local
+identifications $\varphi^*\mathcal O(1)\cong L$ agree, as checked in step 4.1.
+The diagram asserts no immersion property for a vertical arrow. The proof
+above is independent of the illustration.

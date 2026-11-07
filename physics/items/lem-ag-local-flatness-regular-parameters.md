@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-ag-local-flatness-regular-parameters.json
+  precheck: pass
 id: "lem-ag-local-flatness-regular-parameters"
 kind: "lemma"
 title: "Local flatness criterion by regular parameters"
@@ -15,8 +18,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §25.6.2–3, pp.678–679"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
-verification:
-  audited: 2026-09-27
+
 ---
 
 ## Statement
@@ -91,3 +93,18 @@ $S$, then $S$ is flat over $R$.
 6.1 Since $I\subseteq R$ was an arbitrary finitely generated ideal and $I\otimes_RM\to M$ is injective, [F2] shows that $M$ is flat over $R$. This proves the first assertion. [step 5.1, F2]
 
 7.1 The regular-parameter case. Let $x_1,\dots,x_d$ be a regular system of parameters of $R$ and let $\overline x_1,\dots,\overline x_d\in S$ be their images, extending to a regular system of parameters $y_1,\dots,y_e$ of $S$. By [F19] the tuple $(y_1,\dots,y_e)$ is $S$-regular, hence so is its initial segment $\overline x_1,\dots,\overline x_d$. By [F16] the Koszul complex $K_R(x_1,\dots,x_d;R)$ is a free resolution of $\kappa=R/\mathfrak m$, and tensoring its defining formulas, [F17], with $- \otimes_RS$ replaces each $x_i$ by $\overline x_i$ and reproduces the Koszul complex $K_S(\overline x_1,\dots,\overline x_d;S)$ of [F17] term by term, so $K_R(x)\otimes_RS\cong K_S(\overline x;S)$ as complexes. Therefore, using [F10] for the right-resolution construction and [F12] (available by step 1.1) to identify it with the balanced Tor of [F11], $\operatorname{Tor}_1^R(\kappa,S)=H_1(K_R(x)\otimes_RS)=H_1(K_S(\overline x;S))=0$ by [F18], as $\overline x$ is an $S$-regular sequence. The module $S$ is a finite $S$-module, so the first assertion of this lemma, applied to $M=S$, gives that $S$ is flat over $R$. [step 1.1, step 6.1, F10, F11, F12, F16, F17, F18, F19] ∎
+
+## Remarks
+
+For the chase in step 4.1, fix $n$ and abbreviate $J=\mathfrak m^n$, $A=(I\cap J)\otimes_R M$, $B=(I\otimes_R M)\oplus(J\otimes_R M)$ and $C=(I+J)\otimes_R M$. For an ideal $L$, write $\mu_L:L\otimes_R M\to M$ for multiplication. The following diagram displays the right-exact tensor row and its compatibility with multiplication:
+
+```tikzcd
+\begin{tikzcd}[column sep=large, row sep=large]
+A \arrow[r,"\alpha"] \arrow[d,"\mu_{I\cap J}"'] & B \arrow[r,"\beta"] \arrow[d,"\mu_I\oplus\mu_J"] & C \arrow[r] \arrow[d,"\mu_{I+J}"] & 0 \\
+M \arrow[r,"\delta"'] & M\oplus M \arrow[r,"\sigma"'] & M \arrow[r] & 0
+\end{tikzcd}
+```
+
+Here $\alpha(x)=(i(x),-j(x))$, where $i:A\to I\otimes_R M$ and $j:A\to J\otimes_R M$ are induced by the ideal inclusions; $\beta$ is induced by addition into $I+J$. The lower maps are $\delta(m)=(m,-m)$ and $\sigma(u,v)=u+v$. Both squares commute: multiplication agrees with each ideal inclusion, and multiplication after addition equals the sum of the two multiplication maps. The top row is exact by [F20]; no injectivity of $\alpha$ is asserted.
+
+For $k\in K$ as in step 4.1, $\mu_{I+J}\beta(k,0)=\mu_I(k)=0$. The injectivity of $\mu_{I+J}$ from step 3.1 gives $\beta(k,0)=0$, so exactness lifts $(k,0)$ to some $x\in A$. Thus $i(x)=k$ and $j(x)=0$, and $\mu_{I\cap J}(x)=\mu_Jj(x)=0$. The diagram illustrates this lift and its sign convention; the rigorous proof above is independent of the figure.

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain.json
+  precheck: pass
 id: thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain
 kind: theorem
 title: "Compactness of $W^{1,p}(\\Omega)\\hookrightarrow L^p(\\Omega)$ on bounded extension domains"
@@ -13,11 +16,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)"
@@ -52,15 +50,15 @@ converging in $L^p(\Omega)$. Every bounded $C^1$ domain is an example.
 
 [F4] *Translation estimate and automatic tails.* Under the Axiom of Choice, $\|\tau_hv-v\|_{L^p(\mathbb R^n)}\le|h|\,\||Dv|\|_{L^p(\mathbb R^n)}$; a family supported in one fixed bounded set has vanishing tails. ([[lem-translation-estimate-for-w-one-p-functions]], [[lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic]])
 
-[F5] *The Fr\'echet--Kolmogorov criterion.* A bounded family in $L^p(\mathbb R^n)$ with vanishing tails and uniform translation control has an $L^p(\mathbb R^n)$-convergent subsequence. ([[thm-frechet-kolmogorov-compactness-criterion-in-lp]], [[def-countable-choice]], [[def-dependent-choice]])
+[F5] *The Fréchet–Kolmogorov criterion.* A bounded family in $L^p(\mathbb R^n)$ with vanishing tails and uniform translation control has an $L^p(\mathbb R^n)$-convergent subsequence. ([[thm-frechet-kolmogorov-compactness-criterion-in-lp]], [[def-countable-choice]], [[def-dependent-choice]])
 
 [F6] *Restriction and norms.* $\|g|_\Omega\|_{L^p(\Omega)}\le\|g\|_{L^p(\mathbb R^n)}$; and $(Eu_j)|_\Omega=u_j$ almost everywhere. ([[def-sobolev-space-wkp-and-its-norm]], [[def-l-p-space-as-a-quotient-by-null-functions]])
 
-[F7] *Bounded $C^1$ domains are extension domains.* ([[thm-extension-theorem-for-bounded-smooth-domains]])
+[F7] *Bounded $C^1$ domains are extension domains.* ([[thm-extension-theorem-for-bounded-smooth-domains|Bounded $C^k$ domains admit integer-order Sobolev extension]])
 
 ## Proof
 
-**Proof technique:** Extend, multiply by a fixed cutoff, apply the Fr\'echet--Kolmogorov criterion to the products, and restrict to $\Omega$.
+**Proof technique:** Extend, multiply by a fixed cutoff, apply the Fréchet–Kolmogorov criterion to the products, and restrict to the domain.
 
 1.1 Fix $E$ as in [F1] and $\eta$ as in [F2], and put $v_j:=\eta\,Eu_j$. By [F3] each $v_j$ lies in $W^{1,p}(\mathbb R^n)$ and is supported in the fixed bounded set $\operatorname{supp}\eta$; moreover $\|v_j\|_{W^{1,p}(\mathbb R^n)}\le C_\eta\|Eu_j\|_{W^{1,p}(\mathbb R^n)}\le C_\eta\|E\|M$, and $v_j=(Eu_j)|_\Omega=u_j$ almost everywhere on $\Omega$ because $\eta=1$ there. [F1, F2, F3, F6, given]
 

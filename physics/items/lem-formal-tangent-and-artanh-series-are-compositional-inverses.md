@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-formal-tangent-and-artanh-series-are-compositional-inverses.json
+  precheck: pass
 id: lem-formal-tangent-and-artanh-series-are-compositional-inverses
 kind: lemma
 title: "The formal hyperbolic tangent and artanh series are inverse, with the artanh derivative"
@@ -34,12 +37,7 @@ sources:
     - title: "John Milnor and James Stasheff, Characteristic Classes (re-typeset scan; original pagination)"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
       locator: "section 19, original p. 226: the coefficient computation uses the substitution u = tanh z"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+
 ---
 
 ## Statement
@@ -73,7 +71,7 @@ $Q(x)=1+x^2/3-x^4/45+O(x^6)$.
 
 ## Proof
 
-**Proof technique:** direct; exponentiate $A$, compare the defining quotient of $T$, then differentiate and expand.
+**Proof technique:** direct; exponentiate A, compare the defining quotient of T, then differentiate and expand.
 
 1.1 The identity $A(z)=\tfrac12(\log(1+z)-\log(1-z))$ holds by [F1]. [given, F1]
 

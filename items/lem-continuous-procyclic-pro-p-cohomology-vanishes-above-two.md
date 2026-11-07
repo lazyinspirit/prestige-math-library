@@ -1,0 +1,56 @@
+---
+id: lem-continuous-procyclic-pro-p-cohomology-vanishes-above-two
+kind: lemma
+title: Continuous procyclic pro-p cohomology vanishes above degree two
+status: draft
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 1
+deps:
+  - def-p-adic-integers-as-compatible-residue-classes
+  - thm-continuous-profinite-cohomology-as-direct-limit-of-finite-quotients
+  - lem-continuous-profinite-cochains-commute-with-directed-colimits
+  - def-continuous-cohomology-of-a-profinite-group-with-discrete-module
+  - def-axiom-of-choice
+  - def-dependent-choice
+proof_strategy: direct
+axiom_use: AC and DC are explicit for the supplied ordinary/continuous cohomology convention and compact-cochain exact sequences. No number-field or global class-formation theorem is used.
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: J. S. Milne, Class Field Theory, version4.03
+      url: https://www.jmilne.org/math/CourseNotes/CFT.pdf
+      locator: Finite cyclic periodic cohomology; the inflation-chain comparison and arbitrary discrete coefficient reduction are constructed explicitly here
+---
+
+## Statement
+
+Assume AC and DC, using normalized continuous cochains, or the supplied derived convention with its resolution data. Let $\ell$ be prime and let $\Gamma=\mathbb Z_\ell$ with its usual profinite topology. For every discrete abelian group $M$ with continuous $\Gamma$-action,
+$$H^r_{\mathrm{cts}}(\Gamma,M)=0\qquad(r\ge3).$$
+If $M$ is torsion, then the same holds for every $r\ge2$. No torsion, finite-generation or divisibility hypothesis is imposed in the first assertion.
+
+## Facts & Assumptions
+
+**Given:** Exactly the prime, group, discrete module and explicit choice/cohomology hypotheses in the Statement.
+
+[F1] The group $\mathbb Z_\ell$ is the compatible-residue inverse limit of its finite cyclic quotients $C_{\ell^a}$. Its open subgroups $\ell^a\mathbb Z_\ell$ are cofinal among open normal subgroups. [[def-p-adic-integers-as-compatible-residue-classes]]
+
+[F2] Continuous cohomology is the direct limit of the actual fixed-module finite-quotient cohomologies, with inflation and coefficient inclusion as the transition maps. It commutes with directed coefficient colimits. [[thm-continuous-profinite-cohomology-as-direct-limit-of-finite-quotients]] [[lem-continuous-profinite-cochains-commute-with-directed-colimits]]
+
+[F3] Continuous cohomology uses the normalized continuous cochain complex. For a short exact sequence of discrete modules its long exact cohomology sequence follows by lifting the finite image of any continuous cochain on the compact group. Under the stated AC, finitely many preimages on its clopen fibres give such a lift. [[def-continuous-cohomology-of-a-profinite-group-with-discrete-module]]
+
+[A1] AC and DC are explicit. [[def-axiom-of-choice]] [[def-dependent-choice]]
+
+## Proof
+
+1.1 For $C_n=\langle\sigma\rangle$, the free periodic resolution has maps alternately $\sigma-1$ and $N_n=1+\sigma+\cdots+\sigma^{n-1}$. Exactness is a finite coefficient calculation: the kernel of $\sigma-1$ in $\mathbb Z[C_n]$ is $\mathbb ZN_n$, and an element in the kernel of multiplication by $N_n$ has coefficient sum zero and is $(\sigma-1)$ times an element obtained from its successive partial sums. The augmentation has that same kernel. Thus this is a genuine free resolution in all nonnegative degrees. For the quotient $C_{nq}\to C_n$ and a module whose action factors through $C_n$, a map from the source resolution to the target resolution is the quotient on group rings multiplied in degree $2j$ and $2j+1$ by $q^j$. It is a chain map because $\sigma-1$ has the same image and $N_{nq}$ maps to $qN_n$; degree zero lifts the identity augmentation. Consequently inflation on degree $r$ is represented by multiplication by $q^{\lfloor r/2\rfloor}$ on this periodic cochain complex. This proves the needed comparison, rather than assuming that higher-degree inflation is the degree-one map. [given, construct, algebra]
+
+1.2 If a finite $\Gamma$-module $T$ has $\ell$-power exponent $\ell^b$, choose a quotient $C_{\ell^a}$ through which its action factors. In degrees $r\ge2$, inflation to $C_{\ell^{a+b}}$ is zero by step 1.1, since its cochain representative is multiplied by a positive power of $\ell^b$. Therefore [F2] gives $H^r(\Gamma,T)=0$ for $r\ge2$. A finite torsion module splits by the integer Bezout projections into its $\ell$-primary part and its prime-to-$\ell$ part. On the latter, the order of any finite quotient is invertible, so finite-group invariants are exact by averaging a preimage over that finite group; its positive cohomology is zero. This proves the assertion for every finite module. [F1, F2, step 1.1, construct, algebra]
+
+1.3 For a discrete torsion module $T$, each finite list of elements has a finite union of finite $\Gamma$-orbits: orbit maps from the compact group to the discrete module have finite image. The subgroup generated by that union is finite, since it is generated by finitely many elements of finite orders. These subgroups are stable and directed by taking sums, with union $T$. Step 1.2 and [F2] therefore give $H^r(\Gamma,T)=0$ for $r\ge2$. This also includes the zero module. [A1, F1, F2, step 1.2, construct, algebra]
+
+2.1 A discrete rational vector space $V$ has zero positive continuous cohomology. For each finite quotient in [F2], its fixed coefficient space is again rational, and finite-group averaging makes invariants exact, so that finite cohomology is zero. Now let $N$ be torsion-free. Its rationalization is the group of fractions, and $N\to V=N\otimes\mathbb Q$ is injective: a fraction of an element is zero only if some nonzero integer kills it. The quotient $D=V/N$ is torsion, because every fraction has an integer multiple in $N$. All actions remain discrete and continuous, since each fraction has the open stabilizer of its numerator. Apply [F3] to $0\to N\to V\to D\to0$. For $r\ge2$ it gives $H^r(\Gamma,N)\cong H^{r-1}(\Gamma,D)$, which is zero for $r\ge3$ by step 1.3. No finite-dimensionality of $V$ is used by averaging. [F2, F3, step 1.3, construct, algebra]
+
+2.2 For arbitrary $M$, its torsion subgroup $T$ is stable and $N=M/T$ is torsion-free: if a nonzero multiple of a class is torsion, another integer multiple kills its representative, so the class was already zero. The exact sequence $0\to T\to M\to N\to0$ and [F3] now give $H^r(\Gamma,M)=0$ for $r\ge3$ from steps 1.3 and 2.1. The stronger torsion assertion is step 1.3 itself. All choices and cohomology comparisons retain exactly the public AC/DC scope. [F3, step 1.3, step 2.1, construct, algebra] ∎

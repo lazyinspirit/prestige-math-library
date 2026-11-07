@@ -3,11 +3,14 @@ id: thm-quadratic-hasse-norm-principle-in-zf
 kind: theorem
 title: Quadratic Hasse norm principle in ZF
 status: draft
-origin: session
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 4
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [lem-quadratic-idelic-first-inequality-in-zf, lem-order-two-herbrand-quotients-multiply, lem-local-quadratic-norm-and-square-class-preparations, thm-number-field-ideal-class-group-finite-in-zf, thm-number-field-s-unit-structure-in-zf, lem-number-field-completion-tensor-and-norm-in-zf, thm-kummer-pairing-is-perfect]
+justified_by: []
 proof_strategy: direct
 sources:
   references:

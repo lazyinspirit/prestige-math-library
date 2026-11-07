@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class.json
+  precheck: pass
 id: prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class
 kind: proposition
 title: "Null functions form a linear subspace and are exactly the zero-seminorm class"
@@ -9,9 +12,6 @@ provenance:
   proof: ai-altered
 deps: [def-null-subspace-of-almost-everywhere-zero-functions, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-linear-subspace, thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one, thm-finite-and-countable-subadditivity-of-measures]
 proof_strategy: "Use countable-union stability of null sets for addition and scalar multiplication. For 1 <= p < infinity, the p-seminorm vanishes exactly when the integral of |f|^p is zero; for p = infinity, vanishing means the essential supremum is zero."
-verification:
-  audited: 2026-08-31
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -54,11 +54,11 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 ## Proof
 
-**Proof technique:** Use countable-union stability of null sets for addition and scalar multiplication. For $1 \le p < infinity$, the $p$-seminorm vanishes exactly when the integral of $|f|^p$ is zero; for $p = infinity$, vanishing means the essential supremum is zero.
+**Proof technique:** Use countable-union stability of null sets for addition and scalar multiplication. For 1 ≤ p < ∞, the p-seminorm vanishes exactly when the integral of |f| raised to the power p is zero; for p = ∞, vanishing means the essential supremum is zero.
 
 1.1 Fix $1\le p<\infty$. If $f,g\in\mathcal N_p(\mu)$, choose measurable null sets $E_f,E_g$ outside which $f=0$ and $g=0$. Their union is null, and on its complement one has $f+g=0$ and $af=0$ for every $a\in\mathbb R$. Because $\mathcal L^p(\mu)$ is a vector space, [L4] makes $\mathcal N_p(\mu)$ a linear subspace. [L1, L2, L3, L4]
 
-1.2 If $f\in\mathcal N_p(\mu)$, then $|f|^p=0$ almost everywhere, so [L1, L5] $$\int |f|^p\,d\mu=0,$$ hence $\|f\|_p=0$. Conversely, if $\|f\|_p=0$, then the same theorem [L5] forces $|f|^p=0$ almost everywhere and therefore $f=0$ almost everywhere.
+1.2 If $f\in\mathcal N_p(\mu)$, then $|f|^p=0$ almost everywhere, so [L1, L5] $$\int |f|^p\,d\mu=0,$$ hence $\|f\|_p=0$. Conversely, if $\|f\|_p=0$, then the same theorem [L5] forces $|f|^p=0$ almost everywhere and therefore $f=0$ almost everywhere. [L1, L5]
 
 1.3 If $f\in\mathcal N_\infty(\mu)$, then $0$ is an essential bound for $|f|$, so $\|f\|_\infty=0$. Conversely, if $\|f\|_\infty=0$, then [L6] gives $|f|\le0$ almost everywhere, hence $f=0$ almost everywhere. [L1, L6]
 

@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-differentials-commute-base-change-schemes.json
+  precheck: pass
 id: "lem-differentials-commute-base-change-schemes"
 kind: "lemma"
 title: "Relative differentials commute with scheme base change"
@@ -15,8 +18,7 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01UY"
     - title: "Vakil 22.2.K, p.583"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
-verification:
-  audited: 2026-09-27
+
 ---
 
 ## Statement
@@ -60,3 +62,18 @@ is imposed on $S'\to S$ or on $X\to S$.
 3.1 $\gamma$ is an isomorphism. Every point $x'\in X'$ lies in a chart $U'$ as in step 2.1, on which $\gamma|_{U'}$ is the isomorphism of [F1]; a morphism of sheaves whose restriction to each member of an open cover is an isomorphism is an isomorphism (equivalently, its stalk maps are isomorphisms), and forming stalks of the sheaves attached to $B'$-modules at points of $U'$ is compatible with the identifications of step 2.1. Hence $\gamma$ is an isomorphism of $\mathcal O_{X'}$-modules, with the asserted description on generators. [F1, step 2.1]
 
 4.1 Naturality and hypotheses. The map $\gamma$ was produced from the universal properties of [F4] and the adjunction [F5] applied to the given morphisms $S'\to S$ and $X\to S$; replacing the base-change data by a morphism of squares replaces $\gamma$ by the corresponding pullback of $\gamma$, and on affine charts this is the naturality statement of [F1]. Only the existence of the fibre product and the affine descriptions of $\Omega$ were used, so no flatness, finiteness, separatedness or tor-independence hypothesis enters. [F1, F4, F5, step 2.1, step 3.1] ∎
+
+## Remarks
+
+Writing $f\colon X\to S$, $h\colon S'\to S$ and $f'\colon X'\to S'$ for the
+structure maps, the base-change geometry is the Cartesian square below.
+Its commutativity is $f\circ g=h\circ f'$; both routes from $X'$ have target
+$S$. The top projection $g$ is the map along which the differential sheaf is
+pulled back, giving the isomorphism $\gamma\colon g^*\Omega_{X/S}\to\Omega_{X'/S'}$
+constructed in step 1.1. The square illustrates the given fibre product;
+the proof of the differential isomorphism remains independent of the figure.
+
+```tikzcd
+X'=X\times_S S' \arrow[r, "g"] \arrow[d, "f'"'] & X \arrow[d, "f"] \\
+S' \arrow[r, "h"'] & S
+```

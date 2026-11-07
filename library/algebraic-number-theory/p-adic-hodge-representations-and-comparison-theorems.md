@@ -1,0 +1,9 @@
+---
+page: p-adic-hodge-representations-and-comparison-theorems
+title: p-adic Hodge Representations and Comparison Theorems
+status: draft
+items: ["def-p-typical-witt-vectors-of-a-perfect-field","def-p-typical-witt-vectors-of-a-perfect-ring","def-regular-period-ring","thm-sheaves-on-a-grothendieck-site-have-enough-injectives","def-smooth-proper-model-over-a-p-adic-dvr","def-local-p-adic-galois-representation","def-local-p-adic-cyclotomic-character","def-p-adic-etale-and-crystalline-cohomology","lem-p-adic-etale-cohomology-is-a-continuous-finite-dimensional-representation","lem-local-p-adic-cyclotomic-character-is-continuous","def-p-adic-period-rings","lem-p-adic-period-ring-comparison-embedding-is-injective","thm-p-adic-period-rings-have-invariants-and-regularity","def-hodge-tate-p-adic-galois-representation","def-de-rham-p-adic-galois-representation","def-semistaable-representation-and-filtered-phi-n-module","def-crystalline-p-adic-galois-representation","thm-faltings-hodge-tate-decomposition-for-smooth-proper-varieties","thm-good-reduction-etale-cohomology-is-crystalline","thm-colmez-fontaine-weakly-admissible-is-admissible","thm-potentially-semistaable-representation-theorem","lem-witt-ghost-congruence-criterion","lem-integral-p-typical-witt-coordinate-operations","lem-witt-frobenius-and-verschiebung-coordinate-identities","lem-perfect-base-witt-frobenius-and-p-adic-completeness","lem-perfect-base-witt-teichmuller-expansions-and-units","lem-perfect-field-witt-ring-is-a-complete-discrete-valuation-ring","lem-witt-vectors-of-the-prime-field-are-p-adic-integers","lem-finite-field-witt-ring-is-unramified-of-residue-degree","lem-fontaine-map-from-finite-witt-ghost-congruences","lem-cyclotomic-tilt-valuation-and-fontaine-principal-kernel"]
+examples: []
+requires:
+- galois-representations-and-frobenius
+---

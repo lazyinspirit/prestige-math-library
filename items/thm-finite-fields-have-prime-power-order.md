@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-finite-field-and-its-order, thm-prime-subfield-classification, def-extension-degree-and-finite-extension, cor-every-spanning-set-contains-a-basis, thm-unique-coordinates-with-respect-to-an-ordered-basis, thm-cardinality-of-a-set-of-functions, def-nat-power, cor-euclids-lemma-for-finite-products]
+deps: [def-finite-field-and-its-order, thm-prime-subfield-classification, def-extension-degree-and-finite-extension, thm-unique-coordinates-with-respect-to-an-ordered-basis, thm-cardinality-of-a-set-of-functions, def-nat-power, cor-euclids-lemma-for-finite-products]
 justified_by: []
 aliases: []
 landmark: true
@@ -41,8 +41,6 @@ Here $p=\operatorname{char}F$ and $n=[F:\mathbb F_p]$.
 
 [L3] Extension degree is the size of a finite basis ([[def-extension-degree-and-finite-extension]]).
 
-[L4] Assuming the Axiom of Choice, if $S\subseteq V$ spans $V$ then there is a basis $B$ of $V$ with $B\subseteq S$ ([[cor-every-spanning-set-contains-a-basis]]).
-
 [L5] Coordinates with respect to a finite ordered basis are unique ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]).
 
 [L6] The set of functions from an $n$-element set to a $p$-element set has cardinality $p^n$ ([[thm-cardinality-of-a-set-of-functions]], [[def-nat-power]]).
@@ -55,7 +53,7 @@ Here $p=\operatorname{char}F$ and $n=[F:\mathbb F_p]$.
 
 1.1 The characteristic cannot be zero, because the distinct integer multiples of $1_F$ would give infinitely many elements. Hence it is a unique prime $p$, and [L2] identifies the prime subfield with $\mathbb F_p$. [given, L2]
 
-1.2 The finite set $F$ spans itself over $\mathbb F_p$, so [L4] supplies a finite basis. Its size $n$ is positive because $F$ is not the zero vector space. [given, L3, L4]
+1.2 Enumerate the finite set $F$ as $a_1,\ldots,a_N$. Starting with the empty list, inspect these elements in order and append $a_i$ exactly when it is outside the span of the previously appended elements. Inductively the retained list is linearly independent, and its span after step $i$ contains $a_1,\ldots,a_i$: if $a_i$ is not appended it already lies in that span. After the finitely many steps the list spans $F$, so it is a finite basis over $\mathbb F_p$. Its length $n$ is positive because $1_F\ne0$, and [L3] identifies $n$ with $[F:\mathbb F_p]$. This finite construction uses no Axiom of Choice. [given, L2, L3, construct, algebra]
 
 2.1 By [L5], taking coordinates is a bijection from $F$ to the functions from an $n$-element basis index set to $\mathbb F_p$. Thus [L6] gives $|F|=p^n$. [step 1.2, L1, L5, L6]
 

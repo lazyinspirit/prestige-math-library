@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-composition-operator-norm-inequality.json
+  precheck: pass
 id: lem-composition-operator-norm-inequality
 kind: lemma
-title: "Composition satisfies \\|ST\\|\\le\\|S\\|\\,\\|T\\|"
+title: "Composition satisfies $\\|ST\\|\\le\\|S\\|\\,\\|T\\|$"
 status: published
 origin: session
 provenance:
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -38,7 +38,7 @@ $$\|ST\| \le \|S\|\,\|T\|.$$
 
 [L1] The operator norm is the unit-ball supremum and satisfies $\|Tu\| \le \|T\|\,\|u\|$ for every vector $u$ ([[def-operator-norm]]).
 
-[L2] Bounded linear operators compose to a linear map, and $\mathcal B(X,Y)$ denotes the bounded ones ([[def-space-of-bounded-linear-operators]]).
+[L2] Bounded linear operators compose to a linear map, and $\mathcal B(X,Y)$ denotes the bounded ones ([[def-space-of-bounded-linear-operators|The spaces $\mathcal B(X,Y)$ and $\mathcal B(X)$ of bounded linear operators]]).
 
 ## Proof
 

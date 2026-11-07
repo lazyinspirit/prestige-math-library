@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.json
+  precheck: pass
 id: thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions
 kind: theorem
-title: "A C^1 diffeomorphism satisfies the change-of-variables formula for nonnegative Lebesgue measurable functions"
+title: "A $C^1$ diffeomorphism satisfies the change-of-variables formula for nonnegative Lebesgue measurable functions"
 status: published
 origin: session
 provenance:
@@ -9,8 +12,6 @@ provenance:
   proof: ai-generated
 deps: [lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands, lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets, lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets, thm-monotone-convergence-for-the-integral, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-measure-uniqueness-on-a-sigma-finite-pi-system, cor-additivity-of-the-nonnegative-lebesgue-integral, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, def-countable-choice]
 proof_strategy: direct
-verification:
-  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.json
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 2.47"

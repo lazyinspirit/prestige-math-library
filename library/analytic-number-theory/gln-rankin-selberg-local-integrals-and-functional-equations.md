@@ -1,0 +1,10 @@
+---
+page: gln-rankin-selberg-local-integrals-and-functional-equations
+title: "GL(n+1) × GL(n) Rankin–Selberg Local Integrals and Functional Equations"
+status: draft
+items: ["lem-archimedean-tate-zeta-integral-and-fourier-functional-equation","thm-murase-sugano-local-class-one-shintani-function-dimension-one","def-gln-generic-whittaker-model","def-local-rankin-selberg-integral-for-gln-times-glm","thm-global-whittaker-genericity-localizes-to-every-place","thm-local-whittaker-multiplicity-one-for-gln","def-unramified-satake-parameter-for-gln","thm-global-whittaker-functional-factorizes-for-cuspidal-gln","thm-jacquet-archimedean-local-equal-rank-rankin-selberg-functional-equation","thm-jacquet-archimedean-local-rankin-selberg-functional-equation-and-test-vectors","thm-jpss-nonarchimedean-local-rankin-selberg-functional-equation","thm-liu-su-sun-principal-series-rankin-selberg-local-functional-equation","lem-restricted-product-integral-with-summable-absolute-tails","lem-number-field-polynomial-shell-tails-are-summable","lem-reciprocal-rapid-mellin-transforms-are-entire","thm-cogdell-global-adjacent-rank-eulerian-integral","thm-cogdell-global-equal-rank-eulerian-integral","thm-jpss-local-rankin-selberg-multiplicativity-for-induced-representations","thm-kurinczuk-matringe-cuspidal-local-rankin-selberg-test-vector","thm-li-liu-su-sun-principal-series-adjacent-rank-local-identity","thm-unramified-rankin-selberg-euler-factor-for-adjacent-ranks","thm-unramified-rankin-selberg-euler-factor-for-equal-ranks","thm-cogdell-global-adjacent-rank-analytic-continuation-and-functional-equation","thm-cogdell-global-same-rank-rankin-selberg-analytic-continuation-and-functional-equation","thm-jpss-local-square-integrable-rankin-selberg-factor","thm-murase-sugano-shintani-global-rankin-selberg-integral","thm-jpss-local-rankin-selberg-factor-via-langlands-classification","lem-nonarchimedean-tate-zeta-integral-and-fourier-functional-equation"]
+examples: []
+requires:
+  - gln-automorphic-representations-and-rankin-selberg-foundations
+  - local-gln-whittaker-uniqueness-and-equivariant-distributions
+---

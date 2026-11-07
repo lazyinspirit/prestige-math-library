@@ -3,11 +3,14 @@ id: lem-local-quadratic-norm-and-square-class-preparations
 kind: lemma
 title: Local quadratic norm and square-class preparations
 status: draft
-origin: session
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 1
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [lem-order-two-herbrand-quotients-multiply, thm-quadratic-local-norm-group-has-index-two, lem-number-field-completion-tensor-and-norm-in-zf]
+deps: [lem-order-two-herbrand-quotients-multiply, lem-number-field-completion-tensor-and-norm-in-zf]
+justified_by: []
 proof_strategy: direct
 sources:
   references:
@@ -23,8 +26,6 @@ For a finite extension $K/\mathbb Q_p$ of degree $d$, write $U_K$ for the unit g
 
 [[lem-order-two-herbrand-quotients-multiply]]
 
-[[thm-quadratic-local-norm-group-has-index-two]]
-
 [[lem-number-field-completion-tensor-and-norm-in-zf]]
 
 ## Facts & Assumptions
@@ -33,13 +34,11 @@ For a finite extension $K/\mathbb Q_p$ of degree $d$, write $U_K$ for the unit g
 
 [F1] The order-two quotient $h$ multiplies in exact sequences and is unchanged by finite-index equivariant inclusions. [[lem-order-two-herbrand-quotients-multiply]]
 
-[F2] Rings of integers of finite extensions of $\mathbb Q_p$ are full $\mathbb Z_p$-lattices, and logarithm identifies $1+p^n\mathcal O_K$ with $p^n\mathcal O_K$ for $n\ge2$, equivariantly for field automorphisms. These facts and their power-series proofs are supplied in [[thm-quadratic-local-norm-group-has-index-two]].
-
 [F3] Number-field completions and their norm maps have the finite tensor and determinant descriptions proved in [[lem-number-field-completion-tensor-and-norm-in-zf]].
 
 ## Proof
 
-1.1 Regard the groups $U_K$ and $\mathcal O_K$ as modules with trivial involution. Then $T_0(\mathcal O_K)=\mathcal O_K/2\mathcal O_K$ and $T_1(\mathcal O_K)=0$. By [F1] and [F2], $h(U_K)=|\mathcal O_K/2\mathcal O_K|$. On $U_K$, $T_1$ consists of the two elements $1,-1$, so $$|U_K/U_K^2|=2|\mathcal O_K/2\mathcal O_K|.$$ The latter ring has order $1$ if $p\ne2$ and $2^d$ if $p=2$, by its rank-$d$ integral lattice. Splitting the valuation gives one additional factor $2$ for $K^\times/K^{\times2}$. Finally a sufficiently small principal unit has half its logarithm still in the exponential domain, so is a square. For example $1+p^4\mathcal O_K\subseteq K^{\times2}$. Thus squares are open. [F1, F2, construct, algebra]
+1.1 First prove the required local integral lattice and logarithm facts. For a finite extension $M/\mathbb Q_p$, choose an integral $\mathbb Q_p$-basis and let $A$ be its $\mathbb Z_p$-span. If $x,y$ are integral then $\operatorname{Tr}_{M/\mathbb Q_p}(xy)$ is an integral element of $\mathbb Q_p$, hence belongs to $\mathbb Z_p$. The trace pairing is nondegenerate, since for $x\ne0$ its value on $x^{-1}$ is $[M:\mathbb Q_p]\ne0$. Its dual lattice $A^*$ is full and $A\subseteq\mathcal O_M\subseteq A^*$. The quotient $A^*/A$ is finite, so $\mathcal O_M$ is a finitely generated torsion-free $\mathbb Z_p$-module of full rank and hence free of rank $[M:\mathbb Q_p]$. For $n\ge2$, the series $\log(1+x)=\sum_{j\ge1}(-1)^{j+1}x^j/j$ and $\exp(x)=\sum_{j\ge0}x^j/j!$ converge on $p^n\mathcal O_M$: the term valuations are at least $nj-v_p(j)$ and $nj-j/(p-1)$, respectively. Their formal inverse identities and the estimates give mutually inverse isomorphisms $1+p^n\mathcal O_M\simeq p^n\mathcal O_M$. Reduction modulo $p^n$ makes the former subgroup finite index in $U_M$. Now regard the groups $U_K$ and $\mathcal O_K$ as modules with trivial involution. Then $T_0(\mathcal O_K)=\mathcal O_K/2\mathcal O_K$ and $T_1(\mathcal O_K)=0$. By [F1] and the preceding lattice and logarithm construction, $h(U_K)=|\mathcal O_K/2\mathcal O_K|$. On $U_K$, $T_1$ consists of the two elements $1,-1$, so $$|U_K/U_K^2|=2|\mathcal O_K/2\mathcal O_K|.$$ The latter ring has order $1$ if $p\ne2$ and $2^d$ if $p=2$, by its rank-$d$ integral lattice. Splitting the valuation gives one additional factor $2$ for $K^\times/K^{\times2}$. Finally a sufficiently small principal unit has half its logarithm still in the exponential domain, so is a square. For example $1+p^4\mathcal O_K\subseteq K^{\times2}$. Thus squares are open. [F1, given, construct, algebra]
 
 1.2 The multiplicative group of a finite field is cyclic. Here is the finite argument needed below. In a finite abelian group, the largest order $m$ of an element is divisible by every element order: otherwise combining the appropriate prime-power parts of two elements would produce order greater than $m$. The resulting exponent $m$ annihilates every element. For a finite subgroup of a field's multiplicative group, the root bound for $X^m-1$ therefore gives group order at most $m$; the cyclic subgroup of order $m$ gives the reverse inequality, so it is the whole group. If $l/k$ is a quadratic extension of finite fields, with $|k|=q$, its norm $x\mapsto x^{q+1}$ is consequently onto $k^\times$. Its trace $x\mapsto x+x^q$ is a nonzero $k$-linear map onto $k$: if it vanished identically, every $x\in l$ would satisfy $x^q=-x$, a polynomial with at most $q$ roots. [given, construct, algebra]
 

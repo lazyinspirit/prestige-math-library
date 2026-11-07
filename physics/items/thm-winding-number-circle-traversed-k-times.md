@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-winding-number-circle-traversed-k-times.json
+  precheck: pass
 id: thm-winding-number-circle-traversed-k-times
 kind: theorem
 title: "A circle traversed $k$ times has winding number $k$ inside and $0$ outside"
@@ -12,13 +15,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-25
 sources:
   scraped: []
   references:
@@ -101,3 +97,32 @@ off the trace.
 3.1 By [L3] the index is constant on the component of $\mathbb C\setminus\gamma_k^\ast$ containing $D$, and $D$ is a connected subset of that complement containing $a$, so by [L15] it lies in one component; hence $n(\gamma_k,z)=n(\gamma_k,a)=k$ for every $z\in D$, that is for $|z-a|<r$. [step 2.1, step 2.2, L3, L15]
 
 4.1 By [L4] the index vanishes on that unique unbounded component, so $n(\gamma_k,z)=0$ for every $z\in E$ by step 2.3, while step 3.1 gives the value $k$ on $|z-a|<r$; when $k=0$ both regions still lie off the single-point trace of step 1.3 and both values are $0$. [step 3.1, step 2.3, L4] ∎
+
+## Remarks
+
+The arrows indicate traversal direction; the same circle is traversed $|k|$ times. For $k>0$ the direction is counterclockwise, and for $k<0$ it is clockwise. In the first two panels, $n$ abbreviates $n(\gamma_k,z)$ in the indicated regions; the index is undefined on the circle itself. The third panel shows the single-point trace when $k=0$, rather than a circle: the index is $0$ at every other point, since the contour is constant. The proof above is independent of this illustration.
+
+```tikz
+\begin{tikzpicture}[scale=0.95]
+\draw (0,0) circle (1.1);
+\draw[->,thick] (0.997,0.465) arc (25:100:1.1);
+\fill (0,0) circle (1.4pt);
+\node[below left] at (0,0) {$a$};
+\draw[dashed] (0,0) -- (0.901,-0.631) node[midway,below] {$r$};
+\node at (0,0.5) {$n=k$};
+\node at (0,1.65) {$k>0$};
+\node at (0,-1.65) {$n=0$};
+\draw (4,0) circle (1.1);
+\draw[->,thick] (4,1.1) arc (90:15:1.1);
+\fill (4,0) circle (1.4pt);
+\node[below left] at (4,0) {$a$};
+\node at (4,0.5) {$n=k$};
+\node at (4,1.65) {$k<0$};
+\node at (4,-1.65) {$n=0$};
+\node at (8,1.65) {$k=0$};
+\fill (8.6,0) circle (2pt);
+\node[below] at (8.6,0) {$a+r$};
+\node at (8,0.7) {$\gamma_0(t)=a+r$};
+\node at (8,-1.65) {$n=0\quad(z\ne a+r)$};
+\end{tikzpicture}
+```

@@ -1,0 +1,86 @@
+---
+id: lem-galois-number-field-idele-class-first-cohomology-vanishes
+kind: lemma
+title: "First cohomology of Galois number-field idele classes vanishes"
+status: draft
+origin: pipeline
+pipeline_run: number-theory-all-141-2026-10-25
+dependency_level: 18
+deps:
+  - def-axiom-of-choice
+  - def-countable-choice
+  - def-dependent-choice
+  - def-idele-class-group-of-a-global-field
+  - def-global-idele-class-module-for-galois-group
+  - lem-global-idele-class-module-fixed-points
+  - lem-cyclic-number-field-idele-class-herbrand-quotient
+  - thm-number-field-first-norm-index-inequality
+  - thm-number-field-second-norm-index-inequality
+  - thm-degree-one-inflation-restriction-exact-sequence
+  - thm-restriction-corestriction-composite-is-multiplication-by-the-index
+  - thm-continuous-profinite-cohomology-as-direct-limit-of-finite-quotients
+  - thm-sylow-first-theorem
+  - lem-proper-subgroup-of-a-finite-p-group-is-properly-normalized-local
+proof_strategy: direct
+axiom_use: >-
+  The original AC, Countable Choice and DC hypotheses of the idele-class,
+  cyclic Herbrand-quotient and norm-index suppliers are retained. The finite
+  subgroup reductions introduce no new choice principle. No global Brauer
+  reciprocity, global Artin map or class-formation conclusion is assumed.
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "J. S. Milne, Class Field Theory, version 4.03"
+      url: "https://www.jmilne.org/math/CourseNotes/CFT.pdf"
+      locator: "VII Theorem5.1(b), Lemmas5.2–5.4, printed pp.212–213; used for localization injectivity in Theorem7.1, printed pp.219–220. This proof isolates H1-vanishing and supplies its subgroup reductions."
+verification: {}
+---
+
+## Statement
+
+Assume AC, Countable Choice, and Dependent Choice, and use the supplied finite-group and continuous-cohomology conventions. Let $L/K$ be a finite Galois extension of number fields with group $G$, and let $C_L=\mathbb A_L^\times/L^\times$ with its natural $G$-action. Then
+$$H^1(G,C_L)=0.$$
+Moreover, for a number field $F$ with separable closure $F_s$, let $C_F^{\mathrm{disc}}$ be the direct-limit idele-class module over the finite extensions in $F_s$. For every open subgroup $U\le G_F=\operatorname{Gal}(F_s/F)$,
+$$H^1_{\mathrm{cts}}(U,C_F^{\mathrm{disc}})=0.$$
+
+## Statement references
+
+[[def-idele-class-group-of-a-global-field]]
+
+[[def-global-idele-class-module-for-galois-group]]
+
+[[thm-number-field-second-norm-index-inequality]]
+
+## Facts & Assumptions
+
+**Given:** Exactly the fields, group actions and AC/CC/DC hypotheses of the Statement.
+
+[F1] For finite Galois $L/K$, the natural map $C_K\to C_L^G$ is an isomorphism. The direct-limit module satisfies $(C_F^{\mathrm{disc}})^{G_E}=C_E$ for every finite intermediate field $E$. [[lem-global-idele-class-module-fixed-points]] [[def-global-idele-class-module-for-galois-group]]
+
+[F2] For a cyclic degree-$n$ number-field extension, the finite Tate groups satisfy $|\widehat H^0(G,C_L)|/|\widehat H^{-1}(G,C_L)|=n$. [[lem-cyclic-number-field-idele-class-herbrand-quotient]]
+
+[F3] The first norm-index inequality gives $[C_K:N_{L/K}C_L]\ge n$ for a cyclic degree-$n$ extension. The second norm-index theorem says this index divides $n$ for every finite Galois extension. [[thm-number-field-first-norm-index-inequality]] [[thm-number-field-second-norm-index-inequality]]
+
+[F4] Degree-one inflation–restriction gives $0\to H^1(P/H,A^H)\to H^1(P,A)\to H^1(H,A)^{P/H}$ when $H\trianglelefteq P$. Corestriction after restriction to a finite-index subgroup is multiplication by its index. [[thm-degree-one-inflation-restriction-exact-sequence]] [[thm-restriction-corestriction-composite-is-multiplication-by-the-index]]
+
+[F5] Every finite group has Sylow subgroups. A proper subgroup of a finite $p$-group is properly contained in its normalizer. [[thm-sylow-first-theorem]] [[lem-proper-subgroup-of-a-finite-p-group-is-properly-normalized-local]]
+
+[F6] Continuous cohomology of a discrete profinite module is the filtered colimit of its finite-quotient cohomology with the corresponding fixed coefficients, under the stipulated compactness/AC and cohomology hypotheses. [[thm-continuous-profinite-cohomology-as-direct-limit-of-finite-quotients]]
+
+[A1] AC/CC/DC satisfy the literal hypotheses of [F1]–[F4] and [F6]. No global class-formation, global Brauer invariant sum or Artin reciprocity theorem is an input. [[def-axiom-of-choice]] [[def-countable-choice]] [[def-dependent-choice]]
+
+## Proof
+
+**Proof technique:** prove the cyclic prime-order case from the two norm inequalities and the Herbrand quotient, then use inflation–restriction and Sylow corestriction.
+
+**Given:** The original data and preceding conventions.
+
+1.1 Suppose first that $G$ is cyclic of prime order $p$. By [F1], its zeroth Tate group is $C_K/N_{L/K}C_L$. The two inequalities in [F3] make its order exactly $p$. The Herbrand quotient in [F2] therefore forces $|\widehat H^{-1}(G,C_L)|=1$. For a cyclic group generated by $\sigma$, a one-cocycle is determined by $m=f(\sigma)$, with $N m=0$, where $N=1+\sigma+\cdots+\sigma^{p-1}$; conversely the formula $f(\sigma^j)=\sum_{i<j}\sigma^im$ defines a cocycle whenever $Nm=0$. Principal cocycles have $m=(\sigma-1)b$. Thus $H^1(G,C_L)=\ker N/(\sigma-1)C_L=\widehat H^{-1}(G,C_L)=0$. Here the multiplicative idele-class group is written additively only in this elementary cocycle formula. [F1, F2, F3, A1, given, algebra]
+
+2.1 Suppose next that $G=P$ is a finite $p$-group. Induct on $|P|$, with the trivial group immediate and order $p$ covered by step 1.1. A maximal proper subgroup $H$ exists because $P$ is finite. Its normalizer properly contains it by [F5], so maximality forces $H\trianglelefteq P$. The quotient has no nontrivial proper subgroup and is a $p$-group, hence has order $p$: otherwise a power of a nonidentity element would generate a proper subgroup of order $p$. Put $M=L^H$. Induction gives $H^1(H,C_L)=0$. By [F1] its fixed coefficient group $C_L^H$ is canonically $C_M$, equivariantly for $P/H$ because the identification is induced by extension of ideles. Step 1.1 applied to $M/K$ gives $H^1(P/H,C_M)=0$. The exact sequence [F4] now gives $H^1(P,C_L)=0$. [F1, F4, F5, step 1.1, construct, algebra]
+
+3.1 Let $G$ be arbitrary and nontrivial. For every prime $p\mid|G|$, choose a Sylow subgroup $P_p$ and put $d_p=[G:P_p]$. The finite extension $L/L^{P_p}$ has $p$-group Galois group, so step 2.1 gives $H^1(P_p,C_L)=0$. Restriction of any $x\in H^1(G,C_L)$ to $P_p$ is therefore zero, and [F4] implies $d_px=0$. The greatest common divisor of the finitely many integers $d_p=|G|/p^{v_p(|G|)}$ is one. An integer Bezout combination of these equalities gives $x=0$. For $G=1$ a one-cocycle is already zero. This proves the finite-level assertion without assuming finiteness of $H^1(G,C_L)$. [F4, F5, step 2.1, construct, algebra]
+
+4.1 For the continuous assertion, write $U=G_M$ for the finite field fixed by $U$. Its open normal subgroups are $G_E$ with $E/M$ finite Galois inside $F_s$. By [F1], the corresponding fixed coefficient group is $C_E$. Formula [F6] identifies $H^1_{\mathrm{cts}}(G_M,C_F^{\mathrm{disc}})$ with the filtered colimit of $H^1(\operatorname{Gal}(E/M),C_E)$ over those extensions. Every term is zero by step 3.1, so the colimit is zero. Both assertions retain exactly [A1], and no global reciprocity or global Brauer theorem has been used. [F1, F6, A1, step 3.1, algebra] ∎

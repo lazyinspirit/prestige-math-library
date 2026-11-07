@@ -8,7 +8,7 @@ pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-integer-order-bessel-series]
+deps: [def-integer-order-bessel-series, thm-ratio-test, thm-weierstrass-m-test-for-complex-function-series]
 justified_by: []
 forward_refs: []
 aliases: []
@@ -52,9 +52,11 @@ locally uniformly.
 
 [F1] [[def-integer-order-bessel-series]]: the terms are $a_k^J=(-1)^k(z/2)^{2k+n}/(k!(k+n)!)$ and $a_k^I=(z/2)^{2k+n}/(k!(k+n)!)$.
 
+[F2] A positive real series with term ratio tending below one converges, and the Weierstrass $M$-test gives uniform convergence under a summable majorant. [[thm-ratio-test]] [[thm-weierstrass-m-test-for-complex-function-series]]
+
 ## Proof
 1.1 For $z\ne0$, every term is nonzero, and cancellation of the factorials gives $|a_{k+1}|/|a_k|=|z|^2/[4(k+1)(k+n+1)]$. This ratio decreases to $0$. At $z=0$, the series have only the possible order-zero constant term, so every tail after $k=0$ is zero without using a quotient. [given, F1, algebra]
 
 2.1 For $z\ne0$ and $k\ge K+1$ the ratios are at most $q$, so $\sum_{k=K+1}^{\infty}|a_k|\le |a_{K+1}|\sum_{j=0}^{\infty}q^j =|a_{K+1}|/(1-q)$. At $z=0$ the same tail bound holds because the tail is zero. On each disk $|z|\le R$, put $q_R=R^2/[4(K+2)(K+n+2)]$. For sufficiently large $K$, $q_R<1$ and the nonzero-argument tail is bounded uniformly by $\sup_{|z|\le R}|a_{K+1}(z)|/(1-q_R)$; at $z=0$ it is zero. Thus the series converge uniformly on every disk. [step 1.1, algebra]
 
-3.1 For derivative order $d\in\{1,2\}$, put $m=2k+n$. When $m\ge d$, the absolute value of the formal derivative term on $|z|\le R$ is at most $b_k=m(m-1)\cdots(m-d+1)R^{m-d}/(2^m k!(k+n)!)$. For $R>0$ the ratio $b_{k+1}/b_k$ equals $R^2/[4(k+1)(k+n+1)]$ times a factor tending to $1$, so it tends to $0$. The ratio test makes $\sum b_k$ finite; the Weierstrass test then gives uniform convergence of each formal derivative series on the disk. The finitely many terms with $m<d$ have zero derivative, and a disk of radius $R=0$ is immediate. [step 1.1, algebra] ∎
+3.1 For derivative order $d\in\{1,2\}$, put $m=2k+n$. When $m\ge d$, the absolute value of the formal derivative term on $|z|\le R$ is at most $b_k=m(m-1)\cdots(m-d+1)R^{m-d}/(2^m k!(k+n)!)$. For $R>0$ the ratio $b_{k+1}/b_k$ equals $R^2/[4(k+1)(k+n+1)]$ times a factor tending to $1$, so it tends to $0$. The ratio test makes $\sum b_k$ finite; the Weierstrass test then gives uniform convergence of each formal derivative series on the disk. The finitely many terms with $m<d$ have zero derivative, and a disk of radius $R=0$ is immediate. [F2, step 1.1, algebra] ∎

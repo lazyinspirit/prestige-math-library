@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-smooth-immersion-normal-sequence-and-deformation-charts.json
+  precheck: pass
 id: lem-smooth-immersion-normal-sequence-and-deformation-charts
 kind: lemma
 title: "Smooth immersions, their conormal sequence, deformation charts and smooth sections"
@@ -43,8 +46,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pass
 sources:
   references:
     - title: "The Stacks Project, Algebra: smooth ring maps, the conormal sequence, Koszul regular sequences and standard smooth presentations"
@@ -123,3 +124,70 @@ base change on $T$, including singular bases.
 7.1 Quasi-projectivity of the blowup. Assume now that $Y$ is quasi-projective over $k$. Then $Y\times\mathbb P^1_k$ is quasi-projective: $Y$ is a quasi-compact locally closed subscheme of some projective space, and the Segre embedding [F10] realizes the product of projective spaces as a closed subscheme of a projective space, so the product immerses quasi-compactly. Let $Z=Y\times\mathbb P^1_k$ and let $L$ be very ample on $Z$, hence ample [F10]. The ideal sheaf $\mathcal J$ of $X\times\{\infty\}$ is coherent, so by [F10] the twist $\mathcal J\otimes L^{\otimes\nu}$ is globally generated for some $\nu\ge1$; the graded algebra $\bigoplus_{q\ge0}\mathcal J^q\otimes L^{\nu q}$ has the same relative Proj as $\bigoplus_{q\ge0}\mathcal J^q$, since a trivialization of $L$ identifies their Proj charts and changing the trivialization rescales degree $q$ by the $q$-th power of a unit. A finite set of generators of $\mathcal J\otimes L^\nu$ therefore gives a graded surjection from $\mathcal O_Z[T_0,\dots,T_r]$ onto this twisted Rees algebra. Its relative Proj is a closed subscheme of $\mathbb P^r_Z$, by the same homogeneous-quotient chart calculation as [F9], and a projective bundle over the quasi-projective $Z$ is quasi-projective, so the blowup is quasi-projective over $k$. [F9, F10, step 6.1, algebra]
 
 8.1 Sections of smooth morphisms. Let $s:T\to P$ be a section of a smooth morphism $P\to T$ of constant relative dimension $r$, with $T$ locally Noetherian. Near a point $t\in T$, [F8] factors $P\to T$ Zariski locally as an étale morphism $P'\to\mathbb A^r_T=\operatorname{Spec}\mathcal O_T[x_1,\dots,x_r]$ followed by the projection, after shrinking around $s(t)$ and $t$; by [F7] the étale morphism is flat. The composite $T\to P'\to\mathbb A^r_T$ is the graph of the $T$-point with coordinates $c_i=s^*(x_i)$. This graph is cut out by the regular sequence $x_1-c_1,\dots,x_r-c_r$: after quotienting by the first $i$ terms, the next element is a monic linear polynomial in a new variable and hence a nonzerodivisor over any base ring. Pulling the graph back along the flat étale map $P'\to\mathbb A^r_T$ gives a regular immersion $Q=T\times_{\mathbb A^r_T}P'\hookrightarrow P'$ of codimension $r$, and $Q\to T$ is étale. The section factors through a section $T\to Q$ of this étale morphism. By [F8], after shrinking near the chosen point, this section is described by a standard étale chart $\operatorname{Spec}((A[z]/(P))_g)\to\operatorname{Spec}A$ with $z\mapsto a$, $P(a)=0$ and $P'(a)$ a unit. Factoring $P(z)=(z-a)Q_0(z)$ gives $Q_0(a)=P'(a)$; after restricting to the open neighborhood where $Q_0$ is invertible, the equation $P(z)=0$ forces $z=a$, so the section is an open immersion there. Hence near its image in $P'$, the pulled-back regular equations cut out $s(T)$, proving that $s$ is a regular immersion of codimension $r$. These equations remain regular after every base change $T'\to T$, since the section of the smooth base change $P\times_TT'\to T'$ is again locally obtained by this graph construction, including when $T'$ is singular. The normal bundle also commutes with base change: for a section of a smooth morphism, the conormal bundle identifies with $s^*\Omega^1_{P/T}$, and this relative differential bundle pulls back to $s'^*\Omega^1_{(P\times_TT')/T'}$. Hence the codimension and normal bundle are preserved by arbitrary base change on $T$. [F7, F8, algebra] ∎
+
+## Remarks
+
+The two exact sequences in step 4.1 are sequences of locally free
+$\mathcal O_X$-modules. Write $\alpha([f])=1\otimes df$ and let $\beta$ be
+restriction of differentials to $X$. Their ranks are respectively $d,m,n$, with $d=m-n$:
+
+```tikz
+\begin{tikzcd}[column sep=large, row sep=large, every cell/.append style={font=\large}]
+0 \arrow[r] & \mathcal I/\mathcal I^2 \arrow[r, "\alpha"] & i^*\Omega^1_{Y/k} \arrow[r, "\beta"] & \Omega^1_{X/k} \arrow[r] & 0
+\end{tikzcd}
+```
+
+Applying $\mathcal Hom_{\mathcal O_X}(-,\mathcal O_X)$ reverses the order;
+$T_X=(\Omega^1_{X/k})^\vee$ and
+$N_{X/Y}=(\mathcal I/\mathcal I^2)^\vee$. There is no identification of a
+bundle with its own dual in these pictures. The dual ranks are $n,m,d$:
+
+```tikz
+\begin{tikzcd}[column sep=large, row sep=large, every cell/.append style={font=\large}]
+0 \arrow[r] & T_X \arrow[r, "\beta^\vee"] & i^*T_Y \arrow[r, "\alpha^\vee"] & N_{X/Y} \arrow[r] & 0
+\end{tikzcd}
+```
+
+For the coordinate model of step 5.1, put $X_U=X\cap U$ and use coordinates
+$(z_1,\ldots,z_d,v_1,\ldots,v_n)$ on $\mathbb A^m_k$.
+The étale map $\varphi$ pulls $z_j$ back to $f_j$ and $v_a$ back to $u_a$.
+The following square is Cartesian: its bottom inclusion is cut out by
+$z_1=\cdots=z_d=0$.
+
+```tikz
+\begin{tikzcd}[column sep=large, row sep=large, every cell/.append style={font=\large}]
+X_U \arrow[r, hook] \arrow[d, "\varphi|_{X_U}"'] & U \arrow[d, "\varphi", "\mathrm{etale}"'] \\
+\mathbb A^n_k \arrow[r, hook] & \mathbb A^m_k
+\end{tikzcd}
+```
+
+To see how this model controls the deformation blowup, restrict to the
+chart $\mathbb A^1_t\subset\mathbb P^1_k$ on which $t=0$ is $\infty$.
+Set $V=U\times_k\mathbb A^1_t$, $M=\mathbb A^m_k\times_k\mathbb A^1_t$,
+$C=X_U\times_k\{0\}$ and $C_0=\mathbb A^n_k\times_k\{0\}$.
+Thus $C_0\subset M$ has ideal $(z_1,\ldots,z_d,t)$, whose inverse image
+under $\psi=\varphi\times\operatorname{id}$ is the ideal
+$(f_1,\ldots,f_d,t)$ of $C$. Write $B_V=\operatorname{Bl}_C V$ and
+$B_M=\operatorname{Bl}_{C_0}M$. Step 6.1 and flat base change give the
+Cartesian square
+
+```tikz
+\begin{tikzcd}[column sep=large, row sep=large, every cell/.append style={font=\large}]
+B_V \arrow[r] \arrow[d, "\pi_V"'] & B_M \arrow[d, "\pi_M"] \\
+V \arrow[r, "\psi", "\mathrm{etale}\ (\mathrm{hence\ flat})"'] & M
+\end{tikzcd}
+```
+
+The vertical arrows are the blowup morphisms; the top arrow is the base
+change of $\psi$, so is étale. This identifies $B_V$ with
+$V\times_M B_M$, rather than identifying the global blowup with the model.
+The $d+1$ model charts are the $t$-chart with coordinates
+$(z_1/t,\ldots,z_d/t,t,v_1,\ldots,v_n)$ and, for each $1\le j\le d$, the
+$z_j$-chart with coordinates
+$(z_j,(z_l/z_j)_{l\ne j},t/z_j,v_1,\ldots,v_n)$; each has $m+1$ coordinates.
+All affine spaces and products in these pictures are over the given field
+$k$; no assumption that $x$ is $k$-rational is made. The bundle ranks are
+those over $\mathcal O_X$, or dimensions after tensoring with $\kappa(x)$,
+not the local-ring dimensions $m-\operatorname{trdeg}_k\kappa(x)$ and
+$n-\operatorname{trdeg}_k\kappa(x)$ of step 1.1. These diagrams illustrate
+steps 4.1, 5.1 and 6.1; the proof above remains independent of them.

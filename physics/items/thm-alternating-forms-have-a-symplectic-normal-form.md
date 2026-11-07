@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-alternating-forms-have-a-symplectic-normal-form.json
+  precheck: pass
 id: thm-alternating-forms-have-a-symplectic-normal-form
 kind: theorem
 title: 'Every alternating form on a finite-dimensional space has a basis of symplectic pairs followed by a basis of its radical; in particular its rank is even'
@@ -11,9 +14,6 @@ deps: [def-bilinear-symmetric-skew-and-alternating-forms, thm-symmetric-alternat
 aliases: []
 landmark: true
 proof_strategy: induction
-verification:
-  precheck: pass
-  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -42,7 +42,7 @@ such that $B(e_i,f_i)=1$, $B(f_i,e_i)=-1$, every other pairing of distinct liste
 
 ## Proof
 
-**Proof technique:** induction on $n=\dim V$.
+**Proof technique:** induction on 𝑛 = dim 𝑉.
 
 1.1 If $n=0$, the empty basis has the asserted form. If $B=0$, any basis of $V=\operatorname{rad}B$ works with $r=0$. [base, L2, L3]
 

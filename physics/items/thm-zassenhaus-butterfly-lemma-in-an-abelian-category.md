@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-zassenhaus-butterfly-lemma-in-an-abelian-category.json
+  precheck: pass
 id: thm-zassenhaus-butterfly-lemma-in-an-abelian-category
 kind: theorem
 title: "Zassenhaus butterfly lemma in an abelian category"
@@ -12,9 +15,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -49,3 +49,15 @@ $$\frac{A_0\vee(A_1\wedge B_1)}{A_0\vee(A_1\wedge B_0)}\;\cong\;\frac{(A_1\wedge
 1.2 Similarly, since $V\le M$, the second isomorphism theorem [L2] applied to $M$ and $B_0$ inside $M\vee B_0$ gives $$ \frac{M\vee B_0}{V\vee B_0}\cong \frac{M}{M\wedge(V\vee B_0)}. $$ Again modularity yields $$ M\wedge(V\vee B_0)=V\vee(M\wedge B_0)=V\vee U. $$ So the right quotient is also canonically isomorphic to $M/(V\vee U)$. [L1, L2, construct]
 
 2.1 The two quotients in steps 1.1 and 1.2 are canonically isomorphic to the same quotient of $M$, hence to each other. The nested-quotient compatibility of [L3] identifies these isomorphisms with the displayed butterfly quotient comparison. [L3, step 1.1, step 1.2] ∎
+
+
+## Remarks
+
+The butterfly comparison is induced by the two inclusions of the common meet. With $M=A_1\wedge B_1$, $U=A_1\wedge B_0$, $V=A_0\wedge B_1$, and $S=U\vee V$, it is pictured by the following commuting squares.
+
+```tikzcd
+A_0\vee M \arrow[d, "q_L"'] & M \arrow[l, hook', "i_L"'] \arrow[r, hook, "i_R"] \arrow[d, "p"] & M\vee B_0 \arrow[d, "q_R"] \\
+\frac{A_0\vee M}{A_0\vee U} & M/S \arrow[l, "\alpha"', "\sim"] \arrow[r, "\beta", "\sim"'] & \frac{M\vee B_0}{V\vee B_0}
+```
+
+Here $i_L$ and $i_R$ are the canonical inclusions, and $q_L$, $p$, and $q_R$ are the quotient maps by $A_0\vee U$, $S$, and $V\vee B_0$, respectively. Steps 1.1 and 1.2 identify the kernels of $q_L i_L$ and $q_R i_R$ with $S$. Both composites are epimorphisms, so they induce the isomorphisms $\alpha$ and $\beta$ characterized by $\alpha p=q_L i_L$ and $\beta p=q_R i_R$. The displayed isomorphism in the statement is $\beta\alpha^{-1}$. The proof above is independent of this illustration.

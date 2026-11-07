@@ -1,7 +1,10 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-finite-dimensional-representations-of-sl-two.json
+  precheck: pass
 id: thm-finite-dimensional-representations-of-sl-two
 kind: theorem
-title: Finite-dimensional representations of sl_2
+title: Finite-dimensional representations of $\mathfrak{sl}_2$
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -9,12 +12,6 @@ deps: [def-special-linear-lie-algebra-sl-two, def-representation-of-a-lie-algebr
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I, Lectures 19–24"
@@ -27,7 +24,7 @@ proof_strategy: direct
 ## Statement
 
 Let $\mathfrak{sl}_2$ be the three-dimensional Lie algebra of
-[[def-special-linear-lie-algebra-sl-two]] with its basis $(e,f,h)$, and let
+[[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]] with its basis $(e,f,h)$, and let
 $V$ be a finite-dimensional module over it
 ([[def-representation-of-a-lie-algebra]]).
 
@@ -42,7 +39,7 @@ diagonalisably on $V$ with integer eigenvalues.
 
 **Given:** The Lie algebra $\mathfrak{sl}_2=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ with $[h,e]=2e$, $[h,f]=-2f$, $[e,f]=h$, and a finite-dimensional module $V$.
 
-[L1] The bracket relations and the three-dimensionality of $\mathfrak{sl}_2$ are those of [[def-special-linear-lie-algebra-sl-two]]; in particular a module is a bilinear action with $xy\,v-yx\,v=[x,y]v$ ([[def-representation-of-a-lie-algebra]]).
+[L1] The bracket relations and the three-dimensionality of $\mathfrak{sl}_2$ are those of [[def-special-linear-lie-algebra-sl-two|The special linear Lie algebra $\mathfrak{sl}_2$]]; in particular a module is a bilinear action with $xy\,v-yx\,v=[x,y]v$ ([[def-representation-of-a-lie-algebra]]).
 
 [L2] Every endomorphism of a nonzero finite-dimensional complex vector space has an eigenvalue ([[cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue]]); commuting operators preserve each other's eigenspaces ([[lem-commuting-endomorphisms-preserve-eigenspaces]]).
 

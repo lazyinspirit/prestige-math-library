@@ -19,7 +19,7 @@ forward_refs: [fs-euclids-product-of-primes-plus-one-is-prime, ex-arbitrarily-lo
 aliases: [thm-infinitude-of-primes]
 landmark: true
 short: "there are infinitely many primes"
-proof_strategy: contradiction
+proof_strategy: direct
 verification:
   audited: 2026-07-28
   precheck: pass
@@ -79,27 +79,23 @@ produced by the proof is a prime divisor of $2$.
 
 ## Proof
 
-**Proof technique:** contradiction.
+**Proof technique:** direct.
 
 1.1 $0 < 1$ in $\mathbb{Z}$, since $1 = \iota(1)$ is nonnegative and differs from $0 = \iota(0)$ by injectivity of $\iota$; adding $1$ gives $1 < 1 + 1$. [L9]
 
 1.2 Fix $n \in \mathbb{N}$ and a list $p : n \to \mathbb{Z}$ of primes, and put $\Pi := \prod_{i<n} p_i$ and $N := \Pi + 1$. [L1, choose]
 
-1.3 Suppose, for contradiction, that $P$ is finite: fix $m \in \mathbb{N}$ and a bijection $g : P \to m$. [assume-contra, L11, choose]
-
 2.1 $\Pi \ge 1$ by [L3], so $N = \Pi + 1 \ge 1 + 1 > 1$ by compatibility of the order with addition. [step 1.1, step 1.2, L3, L9]
 
-2.2 Suppose, for contradiction, that $q = p_j$ for some $j < n$. Since $j < n$ we have $\sigma(j) \le n$, so $n = \sigma(j) + c$ for some $c \in \mathbb{N}$. [assume-contra, step 1.2, L10]
+3.1 By [L4] choose a prime $q$ with $q \mid N$. [step 2.1, L4, choose]
 
-2.3 Define $f : m \to \mathbb{Z}$ by letting $f(i)$ be the unique $x \in P$ with $g(x) = i$; such an $x$ exists because $g$ is surjective and is unique because $g$ is injective. Then $f$ is a list of primes of length $m$, and $f(g(x)) = x$ for every $x \in P$. [step 1.3, L11, construct]
+4.1 If $q = p_j$ for some $j < n$, then $\sigma(j) \le n$, so $n = \sigma(j) + c$ for some $c \in \mathbb{N}$. [step 1.2, step 3.1, L10, algebra]
 
-3.1 By [L4] there is a prime $q$ with $q \mid N$. [step 2.1, L4, choose]
+5.1 The splitting law then gives $\Pi = \bigl(\prod_{i<\sigma(j)} p_i\bigr) \cdot \bigl(\prod_{l<c} p_{\sigma(j)+l}\bigr)$, and $\prod_{i<\sigma(j)} p_i = \bigl(\prod_{i<j} p_i\bigr) p_j$; by associativity and commutativity $\Pi = p_j \cdot B$ where $B := \bigl(\prod_{i<j} p_i\bigr)\bigl(\prod_{l<c} p_{\sigma(j)+l}\bigr)$. Hence $p_j \mid \Pi$, that is $q \mid \Pi$. [step 4.1, L1, L2, L7, L8]
 
-3.2 The splitting law then gives $\Pi = \bigl(\prod_{i<\sigma(j)} p_i\bigr) \cdot \bigl(\prod_{l<c} p_{\sigma(j)+l}\bigr)$, and $\prod_{i<\sigma(j)} p_i = \bigl(\prod_{i<j} p_i\bigr) p_j$; by associativity and commutativity $\Pi = p_j \cdot B$ where $B := \bigl(\prod_{i<j} p_i\bigr)\bigl(\prod_{l<c} p_{\sigma(j)+l}\bigr)$. Hence $p_j \mid \Pi$, that is $q \mid \Pi$. [step 2.2, L1, L2, L7, L8]
+6.1 So $q \mid N$ and $q \mid \Pi$, whence $q \mid N - \Pi = 1$ by linearity, forcing $q = 1$ or $q = -1$ and contradicting $q > 1 > 0 > -1$. Therefore $q \ne p_i$ for every $i < n$, which is clause 1. [step 1.1, step 1.2, step 3.1, step 5.1, L5, L6, L7, L8, L9, algebra]
 
-4.1 So $q \mid N$ and $q \mid \Pi$, whence $q \mid N - \Pi = 1$ by linearity, forcing $q = 1$ or $q = -1$ and contradicting $q > 1 > 0 > -1$. Therefore $q \ne p_i$ for every $i < n$, which is clause 1. [step 1.1, step 1.2, step 3.1, step 3.2, L5, L6, L7, L8, L9]
-
-5.1 Clause 1 applied to $f$ supplies a prime $q_0$ with $q_0 \ne f(i)$ for every $i < m$. But $q_0 \in P$, so $g(q_0) < m$ and $f(g(q_0)) = q_0$, a contradiction. Hence no such $m$ and $g$ exist and $P$ is not finite, which is clause 2. [step 4.1, step 1.3, step 2.3, L10, L11, discharge-contradiction] ∎
+7.1 If $P$ is finite, fix $m \in \mathbb{N}$ and a bijection $g : P \to m$. Define $f : m \to \mathbb{Z}$ by letting $f(i)$ be the unique $x \in P$ with $g(x) = i$; existence and uniqueness follow from bijectivity. Then $f$ is a list of primes of length $m$, and $f(g(x)) = x$ for every $x \in P$. Clause 1 applied to $f$ supplies a prime $q_0$ with $q_0 \ne f(i)$ for every $i < m$. But $q_0 \in P$, so $g(q_0) < m$ and $f(g(q_0)) = q_0$, a contradiction. Hence no such $m$ and $g$ exist and $P$ is not finite, which is clause 2. [step 6.1, L10, L11, algebra] ∎
 
 ## Remarks
 

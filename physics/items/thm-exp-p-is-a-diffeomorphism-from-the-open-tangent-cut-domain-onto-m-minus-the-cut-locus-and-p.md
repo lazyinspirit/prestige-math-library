@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p.json
+  precheck: pass
 id: thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p
 kind: theorem
 title: The exponential map is a diffeomorphism on the open tangent cut domain
@@ -49,9 +52,7 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Lecture 23, sections 23.2-23.3, printed pp.163-172: the cut locus, the cut time, and the domain on which exp_p is a diffeomorphism."
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -128,10 +129,48 @@ Riemannian manifold
 
 2.1 The exponential map is a diffeomorphism onto the target. [F7, F8, F9, given, step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 1.6] By steps 1.3 and 1.5 the restriction $\exp_p|_{D_p}$ is injective and every point of $M\setminus(\{p\}\cup\operatorname{Cut}(p))$ is attained, while by step 1.4 no point outside that set is attained; hence $\exp_p|_{D_p}$ is a bijection from $D_p$ onto $M\setminus(\{p\}\cup\operatorname{Cut}(p))$. The map is smooth: $D_p$ is open in $T_pM$ (step 1.1) and contained in $T_pM=\mathcal E_p$ [F7], on which $\exp_p$ is smooth [F8], so the restriction is smooth on the open submanifold $D_p$ [F9]. By step 1.2 the map is a local diffeomorphism at every point of $D_p$, and by step 1.6 the target is an open submanifold of $M$. A bijection that is a local diffeomorphism is a diffeomorphism onto its target: around each point of the target the global inverse agrees with a smooth local inverse provided by the local-diffeomorphism property, so the inverse is smooth [F9]. Therefore $\exp_p|_{D_p}:D_p\to M\setminus(\{p\}\cup\operatorname{Cut}(p))$ is a diffeomorphism onto it. [F7, F8, F9, given, step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 1.6]
 
-3.1 Boundary and choice audit. [A1, F1, F6, F7, F11, F13, given, step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 2.1] In dimension zero $S_pM=\varnothing$ by [F1], so $D_p=\varnothing$; by the surjectivity of step 1.5 every point of the target would then be $\exp_p(w)$ for some $w\in D_p$, and there is no such $w$, so the target is empty as well and the assertion is the diffeomorphism between two empty manifolds. The empty manifold has no point $p$. In dimension one the unit sphere has exactly two points and every step applies verbatim. The two endpoints of the domain are excluded by construction: $t>0$ removes the zero vector and the base point, and $t<c_p(v)$ excludes the cut instant; correspondingly $p\notin\operatorname{Cut}(p)$ and $\exp_p(D_p)\cap\operatorname{Cut}(p)=\varnothing$ are the content of step 1.4, while step 1.5 shows that equality $t=c_p(v)$ is exactly what would force $q\in\operatorname{Cut}(p)$. The case $c_p(v)=+\infty$ needs no separate treatment: it is covered in step 1.1 by the second case of the openness argument, and in steps 1.2, 1.3, 1.4 the hypothesis $t<c_p(v)$ is then automatic for every $t>0$. All directions above are unit vectors, so every radial geodesic is nonconstant and the degenerate time $t=0$ never occurs. Completeness enters only through the global exponential domain and the existence of minimizing geodesics [F7] and through the cut-time theory [F6]; no compactness of $M$ is assumed. The choice audit: $\mathrm{AC}_\omega$ of [A1] is spent exactly once in this proof, in step 1.1, through the direction of [F13] that converts sequential closedness of the complement of $D_p$ into closedness and hence makes $D_p$ open; the remaining steps use only the inherited suppliers. [A1, F1, F6, F7, F11, F13, given, step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 2.1]
-
-$\square$
+3.1 Boundary and choice audit. [A1, F1, F6, F7, F11, F13, given, step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 2.1] In dimension zero $S_pM=\varnothing$ by [F1], so $D_p=\varnothing$; by the surjectivity of step 1.5 every point of the target would then be $\exp_p(w)$ for some $w\in D_p$, and there is no such $w$, so the target is empty as well and the assertion is the diffeomorphism between two empty manifolds. The empty manifold has no point $p$. In dimension one the unit sphere has exactly two points and every step applies verbatim. The two endpoints of the domain are excluded by construction: $t>0$ removes the zero vector and the base point, and $t<c_p(v)$ excludes the cut instant; correspondingly $p\notin\operatorname{Cut}(p)$ and $\exp_p(D_p)\cap\operatorname{Cut}(p)=\varnothing$ are the content of step 1.4, while step 1.5 shows that equality $t=c_p(v)$ is exactly what would force $q\in\operatorname{Cut}(p)$. The case $c_p(v)=+\infty$ needs no separate treatment: it is covered in step 1.1 by the second case of the openness argument, and in steps 1.2, 1.3, 1.4 the hypothesis $t<c_p(v)$ is then automatic for every $t>0$. All directions above are unit vectors, so every radial geodesic is nonconstant and the degenerate time $t=0$ never occurs. Completeness enters only through the global exponential domain and the existence of minimizing geodesics [F7] and through the cut-time theory [F6]; no compactness of $M$ is assumed. The choice audit: $\mathrm{AC}_\omega$ of [A1] is spent exactly once in this proof, in step 1.1, through the direction of [F13] that converts sequential closedness of the complement of $D_p$ into closedness and hence makes $D_p$ open; the remaining steps use only the inherited suppliers. [A1, F1, F6, F7, F11, F13, given, step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 2.1] ∎
 
 ## Source locator
 
 Lee, *Riemannian Manifolds: An Introduction to Curvature*, Chapter 10, printed pp.173-190, describes the domain on which the exponential map is a diffeomorphism and its relation to the cut locus; Datar, *Lectures on Riemannian Geometry*, Lecture 23, sections 23.2-23.3, printed pp.163-172, gives the cut time and cut locus. The diffeomorphism statement is proved above from the pair's own cut-point characterization, the continuity of the cut time and the closedness of the cut locus; no source text is quoted.
+
+## Remarks
+
+The schematic separates the global diffeomorphism from a single radial
+interval. In the lower row, fix a unit direction $v$ with finite cut time
+$c:=c_p(v)$, if such a direction exists, and take $0<t<c$.
+Open circles mark excluded endpoints; the marked interior points correspond
+under the exponential map.
+
+```tikz
+\begin{tikzpicture}[>=stealth,scale=1.3,every node/.style={font=\large}]
+\node (D) at (0,2.6) {$D_p\subset T_pM$};
+\node (U) at (7.2,2.6) {$M\setminus(\{p\}\cup\mathrm{Cut}(p))$};
+\draw[->] (D) -- node[above] {$\exp_p|_{D_p}$} node[below] {diffeomorphism} (U);
+\draw[thick] (0,0) -- (3,0);
+\draw[fill=white] (0,0) circle (0.055);
+\draw[fill=white] (3,0) circle (0.055);
+\node[below] at (0,-0.12) {$0$};
+\node[below] at (3,-0.12) {$cv$};
+\fill (1.35,0) circle (0.045);
+\node[above] at (1.35,0.12) {$w=tv$};
+\node at (1.5,-0.85) {$\{sv:0<s<c\}\subset D_p$};
+\draw[thick] (5.7,0) .. controls (6.5,0.9) and (7.9,-0.9) .. (8.7,0);
+\draw[fill=white] (5.7,0) circle (0.055);
+\draw[fill=white] (8.7,0) circle (0.055);
+\node[below] at (5.7,-0.12) {$p$};
+\node[below] at (8.7,-0.12) {$\gamma_v(c)$};
+\fill (7.2,0) circle (0.045);
+\node[above] at (7.2,0.35) {$q=\gamma_v(t)$};
+\node at (7.2,-0.85) {$\gamma_v((0,c))$};
+\draw[->] (3.65,0.25) -- node[above] {$\exp_p$} (5.05,0.25);
+\end{tikzpicture}
+```
+
+Here $\gamma_v(t)=\exp_p(tv)$ and $\gamma_v(c)\in\operatorname{Cut}(p)$
+by [F1]; steps 1.3–1.5 identify the included points and exclude the endpoints.
+The curved line depicts the parameterized geodesic only, not the geometry of
+the ambient manifold or the shape of the cut locus. For $c_p(v)=+\infty$,
+the radial interval is unbounded and there is no finite cut endpoint.
+The rigorous proof above is independent of this schematic.

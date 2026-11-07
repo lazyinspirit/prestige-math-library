@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-modular-group-reduction-to-the-standard-domain.json
+  precheck: pass
 id: lem-modular-group-reduction-to-the-standard-domain
 kind: lemma
 title: "Reduction of orbits to the standard domain"
@@ -15,22 +18,6 @@ deps:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  verified:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
-    delegated_by: "owner via frontier-38-owner-30 build dispatch"
-    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
-    evidence:
-      - "research/frontier-38-owner-30-reader-21.md"
-      - "research/frontier-38-owner-30-alpha-batch-21-5a.md"
-      - "research/frontier-38-owner-30-step5-hash-21-post-5a.json"
-    content_sha256: "1ec40b746c11276a1efc708b1beaeef6a42dac2bfa82eaa4ef64b4f41b60b732"
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-03
 sources:
   references:
     - title: "J. S. Milne, Modular Functions and Modular Forms (v1.31, 2017)"
@@ -64,3 +51,32 @@ Let $\Gamma'=\langle S,T\rangle\le PSL_2(\mathbb Z)$ and $\overline D=\{\tau\in\
 1.1 Fix $N>0$ and suppose $|c\tau+d|\le N$. Since $\operatorname{Im}(c\tau+d)=cy$ and $\operatorname{Re}(c\tau+d)=cx+d$, [F1] gives $|c|y\le N$, that is $|c|\le N/y$; by [F2] only finitely many integers $c$ satisfy this. For each such $c$, [F1] gives $|cx+d|\le N$, so $-N-cx\le d\le N-cx$, and [F2] leaves only finitely many integers $d$. Hence only finitely many pairs $(c,d)$ satisfy $|c\tau+d|\le N$. [F1, F2, given, algebra]
 
 2.1 The set $V:=\{|c\tau+d|:\gamma\in\Gamma'\text{ with bottom row }(c,d)\}$ is nonempty (the identity has value $|0\cdot\tau+1|=1$) and every element is positive. Applying 1.1 with $N=1$ shows that the elements of $V$ are among the finitely many numbers $|c\tau+d|$ attached to pairs with $|c\tau+d|\le1$, together with values $>1$; hence $V$ has a least element $m>0$, realized by some $\gamma_0\in\Gamma'$. Since $\Im(\gamma\cdot\tau)=y/|c\tau+d|^2$, the point $\tau_0:=\gamma_0\cdot\tau$ of the orbit has maximal imaginary part $y/m^2$: for every $\gamma\in\Gamma'$ with bottom row $(c,d)$ one has $|c\tau+d|\ge m$, so $\Im(\gamma\cdot\tau)=y/|c\tau+d|^2\le y/m^2=\Im\tau_0$. Choose $n\in\mathbb Z$ with $|\Re\tau_0-n|\le1/2$, possible by taking $n=\lfloor\Re\tau_0+1/2\rfloor$ [F2]; then $\tau_1:=T^{-n}\cdot\tau_0$ satisfies $\Im\tau_1=\Im\tau_0$ (translation does not change the imaginary part) and $|\Re\tau_1|=|\Re\tau_0-n|\le1/2$. If $|\tau_1|<1$, then $S\tau_1\in\Gamma'\cdot\tau$ and $\Im(S\tau_1)=\Im\tau_1/|\tau_1|^2>\Im\tau_1$ by [F1] and [F3], contradicting the maximality of $\Im\tau_0=\Im\tau_1$. Hence $|\tau_1|\ge1$, and $\tau_1\in\overline D$ is the required $\Gamma'$-equivalent point. [F1, F2, F3, step 1.1, given, algebra] ∎
+
+
+## Remarks
+
+The shaded region illustrates $\overline D$; it continues upward without bound. The sample moves use $z=1/4+i/2$: $Sz=-4/5+8i/5$ raises the imaginary part because $|z|<1$, and $T(Sz)=1/5+8i/5$ translates horizontally into $\overline D$. These points illustrate the two transformations, rather than the maximal-height choice in step 2.1. No uniqueness of representatives on the boundary is asserted. The proof above is independent of the figure.
+
+```tikz
+\begin{tikzpicture}[scale=2.1,>=stealth]
+\fill[blue!12] (-.5,2.35) -- (-.5,.8660254)
+  arc[start angle=120,end angle=60,radius=1] -- (.5,2.35) -- cycle;
+\draw[->] (-1.45,0) -- (1.55,0) node[right] {$\Re\tau$};
+\draw[->] (0,0) -- (0,2.55) node[above] {$\Im\tau$};
+\draw[dashed,gray] (-1,0) arc[start angle=180,end angle=0,radius=1];
+\draw[thick] (-.5,.8660254) arc[start angle=120,end angle=60,radius=1];
+\draw[thick] (-.5,.8660254) -- (-.5,2.35);
+\draw[thick] (.5,.8660254) -- (.5,2.35);
+\draw[dotted] (-.5,0) -- (-.5,.8660254);
+\draw[dotted] (.5,0) -- (.5,.8660254);
+\node[below] at (-.5,0) {$-\frac12$};
+\node[below] at (.5,0) {$\frac12$};
+\node at (.27,2.12) {$\overline D$};
+\node[right] at (.87,.72) {$|\tau|=1$};
+\fill (.25,.5) circle (.025) node[right] {$z$};
+\fill (-.8,1.6) circle (.025) node[above left] {$Sz$};
+\fill (.2,1.6) circle (.025) node[above right] {$T(Sz)$};
+\draw[->,thick] (.25,.5) to[bend left=28] node[left] {$S$} (-.8,1.6);
+\draw[->,thick] (-.8,1.6) -- node[below] {$T$} (.2,1.6);
+\end{tikzpicture}
+```

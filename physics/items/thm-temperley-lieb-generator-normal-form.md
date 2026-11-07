@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-temperley-lieb-generator-normal-form.json
+  precheck: pass
 id: thm-temperley-lieb-generator-normal-form
 kind: theorem
 title: "Jones normal forms span and are counted by Catalan paths"
@@ -65,3 +68,39 @@ for $r=0$ it is the empty word $1$. Let $\mathcal N_n$ be the set of these forma
 ## Remarks
 
 The conditions are $1\le k_i\le j_i<n$, $j_i<j_{i+1}$, and $k_i<k_{i+1}$ for adjacent block indices. They are the exact corner conditions in the path bijection. When $n=0$ or $n=1$, only the empty normal form occurs.
+
+
+For example, take $n=4$, $(j_1,k_1)=(2,1)$ and $(j_2,k_2)=(3,2)$. The word $(u_2u_1)(u_3u_2)$ corresponds to the grid path below. The marked corners are the endpoints of the vertical runs at $x<4$; the final vertical run at $x=4$ is omitted when recovering the parameters. Replacing east by up and north by down gives the Dyck step word $UUDUDUDD$. In the right-hand picture, time is $t=x+y$ and height is $h=x-y$, as in step 1.2.
+
+```tikz
+\begin{tikzpicture}
+\begin{scope}[x=0.75cm,y=0.75cm]
+\draw[thin,gray] (0,0) grid (4,4);
+\draw[dashed] (0,0) -- (4,4);
+\node[above left] at (1.4,1.4) {$y=x$};
+\draw[->] (0,0) -- (4.6,0) node[right] {$x$};
+\draw[->] (0,0) -- (0,4.6) node[above] {$y$};
+\draw[very thick] (0,0) -- (2,0) -- (2,1) -- (3,1) -- (3,2) -- (4,2) -- (4,4);
+\fill (2,1) circle (2pt);
+\fill (3,2) circle (2pt);
+\node[above left] at (2,1) {$(2,1)$};
+\node[above left] at (3,2) {$(3,2)$};
+\node[below left] at (0,0) {$(0,0)$};
+\node[above right] at (4,4) {$(4,4)$};
+\end{scope}
+\begin{scope}[shift={(5.5cm,0cm)},x=0.5cm,y=0.75cm]
+\draw[->] (0,0) -- (8.8,0) node[right] {$t$};
+\draw[->] (0,0) -- (0,4.6) node[above] {$h$};
+\draw[very thick] (0,0) -- (1,1) -- (2,2) -- (3,1) -- (4,2) -- (5,1) -- (6,2) -- (7,1) -- (8,0);
+\fill (3,1) circle (2pt);
+\fill (5,1) circle (2pt);
+\node[below] at (3,1) {$(3,1)$};
+\node[below] at (5,1) {$(5,1)$};
+\node[below left] at (0,0) {$0$};
+\node[below] at (8,0) {$8$};
+\node at (4,3.5) {$E\mapsto U,\quad N\mapsto D$};
+\end{scope}
+\end{tikzpicture}
+```
+
+The marked points on the right are the images of the two recorded corners under $(x,y)\mapsto(x+y,x-y)$. All eight steps have nonnegative height, and the final height is zero. These pictures illustrate the bijection; the proof above is independent of them.

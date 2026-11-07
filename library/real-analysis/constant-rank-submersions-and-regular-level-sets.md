@@ -2,25 +2,27 @@
 page: constant-rank-submersions-and-regular-level-sets
 title: 'Constant Rank, Submersions, Immersions and Regular Level Sets'
 status: published
-items: [def-differential-rank-and-constant-rank,
-        def-submatrix-minors-of-a-rectangular-matrix,
-        lem-matrix-rank-detected-by-nonzero-minors,
-        thm-differential-rank-is-lower-semicontinuous,
-        def-euclidean-submersions-and-immersions,
-        def-regular-critical-points-values-and-level-sets,
-        def-tangent-space-to-a-regular-level-set,
-        lem-constant-rank-source-coordinate-map-is-locally-invertible,
-        lem-constant-rank-tail-components-ignore-kernel-coordinates,
-        thm-euclidean-constant-rank-normal-form,
-        cor-euclidean-submersion-normal-form,
-        cor-euclidean-immersion-normal-form-and-local-embedding,
-        cor-euclidean-submersions-are-open-maps,
-        thm-constant-rank-level-set-local-normal-form,
-        cor-regular-level-set-local-graph-theorem,
-        thm-curve-velocities-in-a-regular-level-set-equal-its-tangent-space,
-        lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple,
-        thm-lagrange-multipliers-for-regular-level-set-constraints,
-        cor-lagrange-multiplier-rule-for-one-regular-constraint]
+items:
+  - def-differential-rank-and-constant-rank
+  - def-submatrix-minors-of-a-rectangular-matrix
+  - lem-matrix-rank-detected-by-nonzero-minors
+  - thm-differential-rank-is-lower-semicontinuous
+  - def-euclidean-submersions-and-immersions
+  - def-regular-critical-points-values-and-level-sets
+  - def-tangent-space-to-a-regular-level-set
+  - lem-constant-rank-source-coordinate-map-is-locally-invertible
+  - lem-constant-rank-tail-components-ignore-kernel-coordinates
+  - thm-euclidean-constant-rank-normal-form
+  - cor-euclidean-submersion-normal-form
+  - cor-euclidean-immersion-normal-form-and-local-embedding
+  - cor-euclidean-submersions-are-open-maps
+  - thm-constant-rank-level-set-local-normal-form
+  - cor-regular-level-set-local-graph-theorem
+  - thm-curve-velocities-in-a-regular-level-set-equal-its-tangent-space
+  - lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple
+  - thm-lagrange-multipliers-for-regular-level-set-constraints
+  - cor-lagrange-multiplier-rule-for-one-regular-constraint
+  - ex-sphere-as-a-regular-level-set
 examples: []
 ---
 

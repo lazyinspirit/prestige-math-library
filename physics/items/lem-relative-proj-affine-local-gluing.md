@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-relative-proj-affine-local-gluing.json
+  precheck: pass
 id: lem-relative-proj-affine-local-gluing
 kind: lemma
 title: "Affine-local graded algebras glue their Proj charts"
@@ -21,9 +24,7 @@ sources:
       url: https://stacks.math.columbia.edu/download/constructions.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
-verification:
-  precheck: pass
-  audited: 2026-09-30
+
 ---
 
 ## Statement
@@ -68,7 +69,7 @@ Indeed, both algebras represent a compatible map from $B$ and $C$ in which the i
 
 ## Proof
 
-**Proof technique:** direct: compute the local model $\widetilde{B\otimes_RC}$ of $\mathcal A$ on an affine open $V=\operatorname{Spec}C$, match its projective charts with the restrictions of the charts of $\operatorname{Proj}B$, and check the cocycle conditions by locality of the localisation formulas.
+**Proof technique:** direct: compute the associated sheaf of the scalar-extended graded algebra on an affine open, match its projective charts with the restricted projective charts of the original graded algebra, and check the cocycle conditions by locality of the localisation formulas.
 
 1.1 Local graded model on $V$. Let $C=\Gamma(V,\mathcal O_U)$, so that $V=\operatorname{Spec}C$ and the inclusion is induced by $R\to C$; by [F1] the graded algebra $\mathcal A|_U$ is $\widetilde B$ for the graded $R$-algebra $B=\bigoplus_d\Gamma(U,\mathcal A_d)$, and by [F2] applied degreewise, $\Gamma(V,\mathcal A_d)=C\otimes_RB_d$ with compatible products, so that $\Gamma(V,\mathcal A)=B\otimes_RC$ as a graded $C$-algebra; write $B_C=B\otimes_RC$ with $(B_C)_d=B_d\otimes_RC$. [F1, F2, algebra]
 
@@ -80,4 +81,4 @@ Indeed, both algebras represent a compatible map from $B$ and $C$ in which the i
 
 5.1 Gluing over $S$ and triple overlaps. Let $U,U',U''$ be affine opens of $S$ and let $W\subseteq U\cap U'$ be an affine open; both restrictions $\operatorname{Proj}\Gamma(U,\mathcal A)|_W$ and $\operatorname{Proj}\Gamma(U',\mathcal A)|_W$ are identified with $\operatorname{Proj}\Gamma(W,\mathcal A)$ by step 3.1 (applied with $V=W$), and the resulting isomorphism over $W$ composes to the identity on triple overlaps $W\subseteq U\cap U'\cap U''$ by step 4.1, because all identifications are the canonical localisation isomorphisms for the graded rings of sections. Since the affine opens $W$ cover each intersection $U\cap U'$, the local isomorphisms glue; refining the local schemes to their standard affine charts and applying [F6], the local schemes $\operatorname{Proj}\Gamma(U,\mathcal A)$ therefore glue over the affine opens of $S$, and the identifications are canonical throughout. [F6, step 3.1, step 4.1, cases: triple overlap]
 
-6.1 Conclusion. Step 3.1 gives the canonical isomorphism $\operatorname{Proj}(B)|_V\cong\operatorname{Proj}\Gamma(V,\mathcal A)$ for every affine open $V\subseteq U$, step 4.1 its compatibility with inclusions, and step 5.1 the triple-overlap cocycle and the gluing conclusion. The Axiom of Choice [A1] is inherited only through the affine quasi-coherence equivalence [F1] and the associated-sheaf restriction [F2]; no additional choice is made. [A1, F1, F2, step 3.1, step 5.1] \qed 
+6.1 Conclusion. Step 3.1 gives the canonical isomorphism $\operatorname{Proj}(B)|_V\cong\operatorname{Proj}\Gamma(V,\mathcal A)$ for every affine open $V\subseteq U$, step 4.1 its compatibility with inclusions, and step 5.1 the triple-overlap cocycle and the gluing conclusion. The Axiom of Choice [A1] is inherited only through the affine quasi-coherence equivalence [F1] and the associated-sheaf restriction [F2]; no additional choice is made. [A1, F1, F2, step 3.1, step 5.1] ∎

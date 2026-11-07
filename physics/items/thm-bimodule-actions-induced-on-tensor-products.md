@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/thm-bimodule-actions-induced-on-tensor-products.json
+  precheck: pass
 id: thm-bimodule-actions-induced-on-tensor-products
 kind: theorem
 title: "A commuting outer scalar action descends to a tensor product"
@@ -11,9 +14,6 @@ deps: [def-bimodule, thm-universal-property-of-module-tensor-products, prop-elem
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -59,3 +59,25 @@ If both outer actions are present, they commute, so the tensor product is an $(S
 4.1 When a left $S$-action and a right $T$-action are both present, $s((m\otimes n)t)=(sm)\otimes(nt)=(s(m\otimes n))t$ on elementary tensors, so the actions commute. [step 3.1, step 1.2, algebra]
 
 5.1 The formulas determine every action map on generators, so uniqueness follows from [L2]. [step 2.1, step 1.2, L2] ∎
+
+## Remarks
+
+For the simultaneous outer actions, write ${}_SM_R$ and ${}_RN_T$, and put $Q=M\otimes_RN$. Fix $s\in S$ and $t\in T$. The maps $L_s:Q\to Q$ and $R_t:Q\to Q$ are additive endomorphisms given by $L_s(m\otimes n)=(sm)\otimes n$ and $R_t(m\otimes n)=m\otimes(nt)$. The following square illustrates descent, where $\tau(m,n)=m\otimes n$ and $u_{s,t}(m,n)=(sm,nt)$. The upper row is a map of sets; $\tau$ is a balanced pairing, rather than an additive homomorphism from the product group.
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=huge, cells={font=\large}, labels={font=\normalsize}, execute at end picture={\path ([yshift=-6pt]current bounding box.south west) rectangle ([yshift=6pt]current bounding box.north east);}]
+M\times N \arrow[r, "u_{s,t}"] \arrow[d, "\tau"'] & M\times N \arrow[d, "\tau"] \\
+Q \arrow[r, "L_s\circ R_t"'] & Q
+\end{tikzcd}
+```
+
+Indeed, $(s(mr))\otimes(nt)=((sm)r)\otimes(nt)=(sm)\otimes r(nt)=(sm)\otimes((rn)t)$. Together with additivity in each variable, this shows that the upper-then-right pairing respects the $R$-balance relation, so it induces the lower map on the tensor quotient. Setting $t=1_T$ or $s=1_S$ recovers the individual action maps. Both orders of applying the outer actions give $(sm)\otimes(nt)$, as in proof step 4.1:
+
+```tikzcd
+\begin{tikzcd}[row sep=large, column sep=huge, cells={font=\large}, labels={font=\normalsize}, execute at end picture={\path ([yshift=-6pt]current bounding box.south west) rectangle ([yshift=6pt]current bounding box.north east);}]
+Q \arrow[r, "R_t"] \arrow[d, "L_s"'] & Q \arrow[d, "L_s"] \\
+Q \arrow[r, "R_t"'] & Q
+\end{tikzcd}
+```
+
+Every arrow in this second square is a homomorphism of underlying abelian groups. Its commutativity is $L_s\circ R_t=R_t\circ L_s$ on all of $Q$, since elementary tensors generate $Q$. These illustrations do not replace any part of the proof.

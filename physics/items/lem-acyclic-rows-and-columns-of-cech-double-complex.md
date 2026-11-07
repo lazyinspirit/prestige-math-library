@@ -1,4 +1,7 @@
 ---
+verification:
+  repair: research/math-library-rendering-repairs-2026-10-23/receipts/lem-acyclic-rows-and-columns-of-cech-double-complex.json
+  precheck: pass
 id: "lem-acyclic-rows-and-columns-of-cech-double-complex"
 kind: "lemma"
 title: "Acyclic directions of the Čech–Godement double complex"
@@ -13,8 +16,7 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
-verification:
-  audited: 2026-09-27
+
 ---
 
 ## Statement
@@ -126,3 +128,42 @@ $w$ is a quasi-isomorphism as well ([[def-quasi-isomorphism]]).
 6.2 Assume now that $\mathcal U$ is $\mathcal F$-acyclic, and filter $\operatorname{Tot}E$ by $F^sT^n:=\bigoplus_{p\ge s,\ p+q=n}E^{p,q}$. These are subcomplexes because $h$ raises $p$ and the vertical differential keeps $p$ fixed, the filtration is decreasing and finite in each total degree, and the quotient $F^sT^\bullet/F^{s+1}T^\bullet$ is the column $s$ of $E$ with differential $(-1)^sv$ (the horizontal part leaves the quotient). By [step 5.2] that quotient has vanishing cohomology: its degree $-1$ cohomology is the kernel of the injective map $C^s(\mathcal U,\mathcal F)\to D^{s,0}$ and hence zero, while its degree $0$ cohomology is $\ker(D^{s,0}\to D^{s,1})/\operatorname{im}(C^s(\mathcal U,\mathcal F)\to D^{s,0})=0$ by the explicit $H^0$ identification of [step 5.2], and its $q>0$ cohomology is $H^q(D^{s,\bullet})=0$. Hence $\operatorname{Tot}E$ is acyclic by [step 1.3]. [step 5.2, step 1.3, step 1.4]
 
 7.1 With the total differential of [F8], an element $(x,\alpha)\in(\operatorname{Tot}D)^n\oplus C^{n+1}(\mathcal U,\mathcal F)$ of $\operatorname{Tot}E$ has differential $\bigl(dx+(-1)^{n+1}w(\alpha),\ \delta\alpha\bigr)$: the extra row sits in bidegree $(p,q)=(n+1,-1)$, so its horizontal differential enters with coefficient $1$ and its vertical differential with the coefficient $(-1)^{p}=(-1)^{n+1}$. Conjugating the second summand by the sign $(-1)^{n+1}$ turns this into the cone differential $\bigl(dx+w(\alpha),-\delta\alpha\bigr)$ of [F9] for $f=w$, so $\operatorname{Tot}E$ is isomorphic to the mapping cone of $w$; since $\operatorname{Tot}E$ is acyclic by [step 6.2], the cone criterion [F10] makes $w$ a quasi-isomorphism. This is the second half of assertion 3, and together with [step 6.1] and [step 5.2] it proves assertions 1, 2 and 3. ∎ [F8, F9, F10, step 1.4, step 6.2]
+
+
+## Remarks
+
+The following grids show the two augmentations separately. Horizontal arrows
+increase the Čech degree $p$; downward arrows increase the resolution degree
+$q$. The arrows are the **unsigned** maps, so each displayed square commutes.
+The first grid lies in $\tilde D$: its left column has degree $p=-1$, and
+$r^q=h^{-1,q}$ denotes restriction of global sections.
+
+```tikzcd
+\Gamma(X,G^0) \arrow[r,"r^0"] \arrow[d,"{\Gamma(X,d^0)}"'] & D^{0,0} \arrow[r,"h^{0,0}"] \arrow[d,"v^{0,0}"'] & D^{1,0} \arrow[d,"v^{1,0}"] \\
+\Gamma(X,G^1) \arrow[r,"r^1"'] & D^{0,1} \arrow[r,"h^{0,1}"'] & D^{1,1}
+```
+
+The second grid lies in $E$ from proof step 1.4: its top row has degree
+$q=-1$, and $w^p=C^p(\mathcal U,\varepsilon)$ is induced componentwise by the
+Godement coaugmentation.
+
+```tikzcd
+C^0(\mathcal U,\mathcal F) \arrow[r,"\delta^0"] \arrow[d,"w^0"'] & C^1(\mathcal U,\mathcal F) \arrow[d,"w^1"] \\
+D^{0,0} \arrow[r,"h^{0,0}"'] & D^{1,0}
+```
+
+For totalization, the downward arrow in column $p$ is multiplied by $(-1)^p$;
+in particular it has sign $-1$ in the extra column $p=-1$. This is the
+sign convention in the Statement, rather than a sign on the commuting grids.
+The comparison maps assemble as follows:
+
+```tikzcd
+\Gamma(X,G^\bullet) \arrow[r,"u"] & \mathrm{Tot}D & C^\bullet(\mathcal U,\mathcal F) \arrow[l,"w"']
+```
+
+Here $u$ enters column $p=0$ through $r^q$, while $w$ enters row $q=0$
+through $w^p$. The first comparison is always a quasi-isomorphism under the
+Statement's hypotheses; the second is a quasi-isomorphism when the cover is
+$\mathcal F$-acyclic. These illustrations record the constructions and
+conclusions of the Statement and proof steps 1.4, 6.1 and 7.1; the proof is
+independent of the figures.
