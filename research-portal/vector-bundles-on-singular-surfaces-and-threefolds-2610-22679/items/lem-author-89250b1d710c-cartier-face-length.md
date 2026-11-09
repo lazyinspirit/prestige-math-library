@@ -2,7 +2,7 @@
 id: lem-author-89250b1d710c-cartier-face-length
 kind: lemma
 title: Length multiplicity for one proper Cartier face
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-composition-series-and-length-of-a-module

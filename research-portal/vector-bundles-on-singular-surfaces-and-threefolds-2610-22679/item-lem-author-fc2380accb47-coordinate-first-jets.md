@@ -1,6 +1,6 @@
 ---
 title: Coordinate multiples of dual generators span all first jets
-status: draft
+status: published
 research_item: lem-author-fc2380accb47-coordinate-first-jets
 dependency_level: 1
 ---

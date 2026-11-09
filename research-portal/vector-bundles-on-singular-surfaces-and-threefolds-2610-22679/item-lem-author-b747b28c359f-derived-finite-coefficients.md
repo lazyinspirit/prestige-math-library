@@ -1,6 +1,6 @@
 ---
 title: Functorial finite coefficients for derived complexes
-status: draft
+status: published
 research_item: lem-author-b747b28c359f-derived-finite-coefficients
 dependency_level: 4
 ---

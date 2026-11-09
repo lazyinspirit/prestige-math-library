@@ -2,7 +2,7 @@
 id: lem-author-4f94f7982b0d-em-p1-model
 kind: lemma
 title: An actual non-A¹ P¹-spectrum for the supplied EM complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

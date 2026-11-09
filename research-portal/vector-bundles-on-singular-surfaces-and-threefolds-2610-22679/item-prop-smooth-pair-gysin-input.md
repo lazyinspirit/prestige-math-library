@@ -1,6 +1,6 @@
 ---
 title: Gysin purity for a smooth closed pair
-status: draft
+status: published
 research_item: prop-smooth-pair-gysin-input
 dependency_level: 14
 ---

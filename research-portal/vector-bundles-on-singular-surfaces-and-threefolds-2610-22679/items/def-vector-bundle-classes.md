@@ -2,7 +2,7 @@
 id: def-vector-bundle-classes
 kind: definition
 title: Isomorphism classes of vector bundles
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

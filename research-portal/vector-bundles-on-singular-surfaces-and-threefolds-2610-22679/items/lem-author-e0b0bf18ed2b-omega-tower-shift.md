@@ -2,7 +2,7 @@
 id: lem-author-e0b0bf18ed2b-omega-tower-shift
 kind: lemma
 title: Omega towers and the suspension index
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-e0b0bf18ed2b-spectra-tail-invariance

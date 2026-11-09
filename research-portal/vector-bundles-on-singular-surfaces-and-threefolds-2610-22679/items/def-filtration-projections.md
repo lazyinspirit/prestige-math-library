@@ -2,7 +2,7 @@
 id: def-filtration-projections
 kind: definition
 title: Graded filtration projections
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

@@ -2,7 +2,7 @@
 id: rem-adjudicate-d41ca2ed9e5e-euler-comparison-status
 kind: remark
 title: Euler-group comparison and the article's expectation
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-euler-class-group-presentation

@@ -1,6 +1,6 @@
 ---
 title: External geometric inputs for affine reduction
-status: draft
+status: published
 research_item: thm-author-89250b1d710c-smooth-local-geometry-input
 dependency_level: 0
 ---

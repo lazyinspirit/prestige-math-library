@@ -2,7 +2,7 @@
 id: lem-author-1437578267d2-supported-degrees
 kind: lemma
 title: The two supported cycle degrees on a curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-supported-higher-cycle-complex

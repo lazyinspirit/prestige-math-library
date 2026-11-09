@@ -1,6 +1,6 @@
 ---
 title: External finite-type dimension, rational-point and etale-fiber inputs
-status: draft
+status: published
 research_item: thm-author-fc2380accb47-finite-type-geometric-input
 dependency_level: 0
 ---

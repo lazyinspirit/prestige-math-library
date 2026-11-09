@@ -1,6 +1,6 @@
 ---
 title: Excision and the exact fixed-support cycle fiber
-status: draft
+status: published
 research_item: lem-author-149a02132c3b-support-fiber
 dependency_level: 16
 ---

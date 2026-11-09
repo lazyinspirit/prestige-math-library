@@ -2,7 +2,7 @@
 id: lem-adjudicate-57a7caabd963-cdp-abstract-generation
 kind: lemma
 title: Completely decomposed proper maps are abstract-blowup covers
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cdh-topology-interface

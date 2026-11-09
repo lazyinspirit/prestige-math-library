@@ -2,7 +2,7 @@
 id: thm-critical-rank-cancellation
 kind: theorem
 title: Critical-rank cancellation used in the article
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

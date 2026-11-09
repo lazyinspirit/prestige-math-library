@@ -1,6 +1,6 @@
 ---
 title: External enhanced quotient criterion and localizing nonconnective K
-status: draft
+status: published
 research_item: thm-author-50b5133c29cc-klocal-categorical-localizing-input
 dependency_level: 10
 ---

@@ -1,6 +1,6 @@
 ---
 title: External Levine–Weibel quotient cycle map with exact generators
-status: draft
+status: published
 research_item: thm-author-80f982ded420-quotient-cycle-map-input
 dependency_level: 0
 ---

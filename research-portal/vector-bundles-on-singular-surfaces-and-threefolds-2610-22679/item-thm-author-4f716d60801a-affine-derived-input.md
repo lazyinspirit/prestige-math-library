@@ -1,6 +1,6 @@
 ---
 title: External affine derived and perfect comparisons
-status: draft
+status: published
 research_item: thm-author-4f716d60801a-affine-derived-input
 dependency_level: 0
 ---

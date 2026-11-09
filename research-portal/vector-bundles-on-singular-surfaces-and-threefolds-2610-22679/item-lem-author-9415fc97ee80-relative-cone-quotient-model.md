@@ -1,6 +1,6 @@
 ---
 title: Relative cofibers and quotient complexes
-status: draft
+status: published
 research_item: lem-author-9415fc97ee80-relative-cone-quotient-model
 dependency_level: 0
 ---

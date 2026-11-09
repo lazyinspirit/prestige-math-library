@@ -2,7 +2,7 @@
 id: lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan
 kind: lemma
 title: Coefficientwise perfect Cartan on every qcqs field-scheme
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-d026a7b99ace-universal-chern-space

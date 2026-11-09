@@ -2,7 +2,7 @@
 id: lem-author-7dc5154c7a6f-cancellation-interface
 kind: lemma
 title: Local application interface for a critical-rank cancellation theorem
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-7dc5154c7a6f-module-classes

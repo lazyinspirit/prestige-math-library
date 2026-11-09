@@ -1,6 +1,6 @@
 ---
 title: Projectivity and rank of a free-summand complement
-status: draft
+status: published
 research_item: lem-author-3af31ead36fb-split-complement
 dependency_level: 1
 ---

@@ -2,7 +2,7 @@
 id: lem-author-98a750efd0cc-filtration-extension
 kind: lemma
 title: Extending a nonnegative filtration to integer indices
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-multiplicative-filtered-spectrum

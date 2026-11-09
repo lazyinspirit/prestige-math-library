@@ -2,7 +2,7 @@
 id: lem-author-b02e51f9da03-matrix-completion
 kind: lemma
 title: Matrix completion detects the actual nontrivial bundle
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b02e51f9da03-matrix-kernel

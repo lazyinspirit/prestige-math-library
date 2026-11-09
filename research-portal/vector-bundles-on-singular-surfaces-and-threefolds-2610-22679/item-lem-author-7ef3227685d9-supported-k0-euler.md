@@ -1,6 +1,6 @@
 ---
 title: Additivity of the supported coherent Euler class
-status: draft
+status: published
 research_item: lem-author-7ef3227685d9-supported-k0-euler
 dependency_level: 11
 ---

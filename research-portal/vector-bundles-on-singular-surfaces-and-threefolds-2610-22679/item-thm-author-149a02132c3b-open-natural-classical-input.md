@@ -1,6 +1,6 @@
 ---
 title: Exact arbitrary-field open-natural classical cycle interface
-status: draft
+status: published
 research_item: thm-author-149a02132c3b-open-natural-classical-input
 dependency_level: 10
 ---

@@ -2,7 +2,7 @@
 id: lem-author-80e2d7bee57f-spectral-integer-shift
 kind: lemma
 title: Homotopy groups of integer spectral shifts
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

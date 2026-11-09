@@ -1,6 +1,6 @@
 ---
 title: The normalized class detects the actual Picard-space map on smooth schemes
-status: draft
+status: published
 research_item: lem-adjudicate-6e70d30b9793-picard-map-detection
 dependency_level: 1
 ---

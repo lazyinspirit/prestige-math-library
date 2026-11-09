@@ -2,7 +2,7 @@
 id: thm-smooth-top-chern-splitting
 kind: theorem
 title: Smooth critical-rank splitting criterion
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-394a5b71198d-components

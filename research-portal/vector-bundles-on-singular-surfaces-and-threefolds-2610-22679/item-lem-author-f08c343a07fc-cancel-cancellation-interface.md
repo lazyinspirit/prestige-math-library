@@ -1,6 +1,6 @@
 ---
 title: Local application interface for a critical-rank cancellation theorem
-status: draft
+status: published
 research_item: lem-author-f08c343a07fc-cancel-cancellation-interface
 dependency_level: 13
 ---

@@ -2,7 +2,7 @@
 id: def-motivic-cohomology
 kind: definition
 title: Motivic complexes and cohomology
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

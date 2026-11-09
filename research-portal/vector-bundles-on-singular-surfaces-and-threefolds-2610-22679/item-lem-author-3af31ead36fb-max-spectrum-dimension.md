@@ -1,6 +1,6 @@
 ---
 title: Dimension of the maximal spectrum
-status: draft
+status: published
 research_item: lem-author-3af31ead36fb-max-spectrum-dimension
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Every actual motivic stage on the empty scheme is zero
-status: draft
+status: published
 research_item: lem-adjudicate-5eb16844831b-empty-motivic-stages
 dependency_level: 12
 ---

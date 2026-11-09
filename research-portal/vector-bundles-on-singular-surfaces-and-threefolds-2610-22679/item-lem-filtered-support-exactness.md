@@ -1,6 +1,6 @@
 ---
 title: Support fibers commute with graded triangles
-status: draft
+status: published
 research_item: lem-filtered-support-exactness
 dependency_level: 5
 ---

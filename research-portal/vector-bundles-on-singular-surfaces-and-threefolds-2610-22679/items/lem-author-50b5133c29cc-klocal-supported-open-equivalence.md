@@ -2,7 +2,7 @@
 id: lem-author-50b5133c29cc-klocal-supported-open-equivalence
 kind: lemma
 title: Supported perfect complexes are invariant under an open neighbourhood
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-50b5133c29cc-klocal-extension-by-zero-input

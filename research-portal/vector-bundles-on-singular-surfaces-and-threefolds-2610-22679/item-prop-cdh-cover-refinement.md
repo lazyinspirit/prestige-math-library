@@ -1,6 +1,6 @@
 ---
 title: Finite refinement for integer cdh sections
-status: draft
+status: published
 research_item: prop-cdh-cover-refinement
 dependency_level: 11
 ---

@@ -1,6 +1,6 @@
 ---
 title: A rank-two family avoids each prescribed codimension-two locus
-status: draft
+status: published
 research_item: lem-author-27d786ff4d27-fixed-locus-avoidance
 dependency_level: 14
 ---

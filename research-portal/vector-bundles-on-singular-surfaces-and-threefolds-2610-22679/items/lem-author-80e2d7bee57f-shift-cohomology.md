@@ -2,7 +2,7 @@
 id: lem-author-80e2d7bee57f-shift-cohomology
 kind: lemma
 title: Cohomology of an integer shift
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-derived-category-of-an-abelian-category

@@ -1,6 +1,6 @@
 ---
 title: Derived Nisnevich descent on a finite clopen partition
-status: draft
+status: published
 research_item: lem-author-ab0a6fc202cb-clopen-derived-descent
 dependency_level: 7
 ---

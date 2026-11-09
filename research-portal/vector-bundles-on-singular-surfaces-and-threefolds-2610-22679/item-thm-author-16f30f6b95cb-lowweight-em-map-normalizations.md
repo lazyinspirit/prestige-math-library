@@ -1,6 +1,6 @@
 ---
 title: External EM low-weight maps with fixed positive normalization
-status: draft
+status: published
 research_item: thm-author-16f30f6b95cb-lowweight-em-map-normalizations
 dependency_level: 12
 ---

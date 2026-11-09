@@ -2,7 +2,7 @@
 id: thm-author-16f30f6b95cb-supported-slice-positive-cycle-input
 kind: theorem
 title: External supported slice projection with positive generic coefficient
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

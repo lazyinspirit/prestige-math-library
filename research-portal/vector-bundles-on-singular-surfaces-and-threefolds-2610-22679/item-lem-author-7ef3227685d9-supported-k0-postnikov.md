@@ -1,6 +1,6 @@
 ---
 title: Postnikov inverse and the specified nonconnective degree-zero group
-status: draft
+status: published
 research_item: lem-author-7ef3227685d9-supported-k0-postnikov
 dependency_level: 12
 ---

@@ -1,6 +1,6 @@
 ---
 title: Tensor products multiply frame transitions
-status: draft
+status: published
 research_item: lem-author-8e1c0251ef0d-tensor-transitions
 dependency_level: 8
 ---

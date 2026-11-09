@@ -2,7 +2,7 @@
 id: def-derived-sections-on-sites
 kind: definition
 title: Derived global sections on a scheme site
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

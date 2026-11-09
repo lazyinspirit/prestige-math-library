@@ -2,7 +2,7 @@
 id: prop-finite-coefficient-cdh-comparison
 kind: proposition
 title: Finite-coefficient motivic to cdh comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

@@ -2,7 +2,7 @@
 id: lem-image-filtration-products
 kind: lemma
 title: Products and projections on image filtrations
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-multiplicative-filtered-spectrum

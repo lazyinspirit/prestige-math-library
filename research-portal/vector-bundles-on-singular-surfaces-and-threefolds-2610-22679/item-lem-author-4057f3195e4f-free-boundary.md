@@ -1,6 +1,6 @@
 ---
 title: Restriction of finite-support divisors
-status: draft
+status: published
 research_item: lem-author-4057f3195e4f-free-boundary
 dependency_level: 0
 ---

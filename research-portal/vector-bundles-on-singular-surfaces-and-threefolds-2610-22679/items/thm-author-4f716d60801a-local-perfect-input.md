@@ -2,7 +2,7 @@
 id: thm-author-4f716d60801a-local-perfect-input
 kind: theorem
 title: External local perfection and summand closure
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -1,6 +1,6 @@
 ---
 title: Proper norm and graph formulas for principal divisors
-status: draft
+status: published
 research_item: thm-adjudicate-16c74c1a77ef-principal-divisor-input
 dependency_level: 0
 ---

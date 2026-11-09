@@ -1,6 +1,6 @@
 ---
 title: Restriction of the base field for weight one
-status: draft
+status: published
 research_item: lem-author-13e6fe931c45-prime-field-restriction
 dependency_level: 9
 ---

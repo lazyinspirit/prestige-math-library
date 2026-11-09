@@ -2,7 +2,7 @@
 id: lem-author-b747b28c359f-derived-cohomology
 kind: lemma
 title: Cohomology descends to the derived category
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-derived-category-of-an-abelian-category

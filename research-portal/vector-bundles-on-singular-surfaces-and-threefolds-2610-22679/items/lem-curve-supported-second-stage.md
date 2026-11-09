@@ -2,7 +2,7 @@
 id: lem-curve-supported-second-stage
 kind: lemma
 title: Second stage with integral curve support
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-smooth-leading-cycle-normalization

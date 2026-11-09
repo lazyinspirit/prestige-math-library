@@ -1,7 +1,7 @@
 ---
 title: The second-stage projection is minus the actual second Chern map on its
   homotopy fiber
-status: draft
+status: published
 research_item: lem-author-e216acade157-actual-fiber-comparison
 dependency_level: 26
 ---

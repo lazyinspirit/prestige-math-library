@@ -1,6 +1,6 @@
 ---
 title: Admissible face restrictions and their cycle identities
-status: draft
+status: published
 research_item: lem-author-89250b1d710c-admissible-face-identities
 dependency_level: 1
 ---

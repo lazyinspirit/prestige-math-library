@@ -1,6 +1,6 @@
 ---
 title: Exact objectwise cofiber bound for the canonical source composite
-status: draft
+status: published
 research_item: thm-author-e71ff76fe904-objectwise-range-input
 dependency_level: 1
 ---

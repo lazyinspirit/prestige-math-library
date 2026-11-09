@@ -2,7 +2,7 @@
 id: lem-author-4057f3195e4f-degree-adjustment
 kind: lemma
 title: Degree-zero representatives modulo a boundary class
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

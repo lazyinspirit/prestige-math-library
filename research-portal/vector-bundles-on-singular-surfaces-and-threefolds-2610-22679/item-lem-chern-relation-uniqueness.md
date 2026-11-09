@@ -1,6 +1,6 @@
 ---
 title: Chern coefficients of the projective relation
-status: draft
+status: published
 research_item: lem-chern-relation-uniqueness
 dependency_level: 1
 ---

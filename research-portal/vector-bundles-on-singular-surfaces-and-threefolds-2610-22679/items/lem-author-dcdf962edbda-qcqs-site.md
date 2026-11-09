@@ -2,7 +2,7 @@
 id: lem-author-dcdf962edbda-qcqs-site
 kind: lemma
 title: The source qcqs cdh site
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

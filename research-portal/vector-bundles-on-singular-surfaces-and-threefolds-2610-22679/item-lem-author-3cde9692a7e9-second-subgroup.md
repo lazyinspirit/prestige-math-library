@@ -1,6 +1,6 @@
 ---
 title: Apply the actual perfect Cartan identity to the second image
-status: draft
+status: published
 research_item: lem-author-3cde9692a7e9-second-subgroup
 dependency_level: 25
 ---

@@ -1,6 +1,6 @@
 ---
 title: Isomorphism classes of vector bundles
-status: draft
+status: published
 research_item: def-vector-bundle-classes
 dependency_level: 11
 ---

@@ -1,6 +1,6 @@
 ---
 title: Finite clopen restrictions split the actual motivic image filtration
-status: draft
+status: published
 research_item: lem-author-80f982ded420-clopen-filtered-products
 dependency_level: 19
 ---

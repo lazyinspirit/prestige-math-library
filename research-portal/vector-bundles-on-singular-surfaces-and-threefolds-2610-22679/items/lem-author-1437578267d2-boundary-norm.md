@@ -2,7 +2,7 @@
 id: lem-author-1437578267d2-boundary-norm
 kind: lemma
 title: Endpoint boundaries are norm divisors
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-1437578267d2-supported-degrees

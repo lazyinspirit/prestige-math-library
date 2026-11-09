@@ -2,7 +2,7 @@
 id: lem-author-7113c087ecba-general-localization
 kind: lemma
 title: The hypercomplete derived-localization model on the actual general site
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -1,6 +1,6 @@
 ---
 title: The actual EM comparison commutes with the Picard first-Chern map
-status: draft
+status: published
 research_item: lem-adjudicate-6e70d30b9793-em-picard-square
 dependency_level: 15
 ---

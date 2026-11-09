@@ -1,6 +1,6 @@
 ---
 title: Positive supported coordinates at a smooth threefold point
-status: draft
+status: published
 research_item: lem-author-d026a7b99ace-positive-coordinates
 dependency_level: 18
 ---

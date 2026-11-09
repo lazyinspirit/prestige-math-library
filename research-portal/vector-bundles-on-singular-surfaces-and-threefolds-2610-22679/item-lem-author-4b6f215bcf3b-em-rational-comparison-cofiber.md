@@ -1,6 +1,6 @@
 ---
 title: Elmanto–Morrow rational comparison cofiber
-status: draft
+status: published
 research_item: lem-author-4b6f215bcf3b-em-rational-comparison-cofiber
 dependency_level: 9
 ---

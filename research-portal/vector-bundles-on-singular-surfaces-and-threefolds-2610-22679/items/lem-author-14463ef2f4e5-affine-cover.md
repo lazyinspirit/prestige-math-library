@@ -2,7 +2,7 @@
 id: lem-author-14463ef2f4e5-affine-cover
 kind: lemma
 title: Valuative dimension can be computed on an affine cover
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-valuative-dimension-and-boundedness

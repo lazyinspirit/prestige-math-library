@@ -2,7 +2,7 @@
 id: lem-author-98a750efd0cc-filtration-naturality
 kind: lemma
 title: Naturality of image filtrations
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-decreasing-filtered-spectrum

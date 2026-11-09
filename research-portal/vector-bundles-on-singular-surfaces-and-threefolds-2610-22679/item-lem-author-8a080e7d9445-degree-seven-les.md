@@ -1,6 +1,6 @@
 ---
 title: The support long exact sequence kills degree seven
-status: draft
+status: published
 research_item: lem-author-8a080e7d9445-degree-seven-les
 dependency_level: 15
 ---

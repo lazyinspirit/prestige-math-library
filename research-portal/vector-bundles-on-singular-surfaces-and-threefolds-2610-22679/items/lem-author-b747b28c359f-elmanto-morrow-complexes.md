@@ -2,7 +2,7 @@
 id: lem-author-b747b28c359f-elmanto-morrow-complexes
 kind: lemma
 title: Elmanto–Morrow motivic complex input
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

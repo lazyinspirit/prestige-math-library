@@ -2,7 +2,7 @@
 id: def-supported-higher-cycle-complex
 kind: definition
 title: Cycle complexes with fixed support
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

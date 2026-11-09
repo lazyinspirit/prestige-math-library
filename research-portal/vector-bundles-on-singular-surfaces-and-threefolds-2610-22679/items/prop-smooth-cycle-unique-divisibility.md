@@ -2,7 +2,7 @@
 id: prop-smooth-cycle-unique-divisibility
 kind: proposition
 title: Unique divisibility of the smooth-point subgroup
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-smooth-point-filtration

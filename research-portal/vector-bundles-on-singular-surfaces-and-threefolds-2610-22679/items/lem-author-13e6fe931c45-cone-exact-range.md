@@ -2,7 +2,7 @@
 id: lem-author-13e6fe931c45-cone-exact-range
 kind: lemma
 title: Exact range of a cofiber connectivity bound
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-13e6fe931c45-cone-low-degrees

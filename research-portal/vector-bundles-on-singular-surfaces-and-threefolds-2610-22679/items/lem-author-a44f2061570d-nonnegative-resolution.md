@@ -2,7 +2,7 @@
 id: lem-author-a44f2061570d-nonnegative-resolution
 kind: lemma
 title: Negative cohomology of a nonnegative evaluated complex
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-a44f2061570d-evaluation-homotopy

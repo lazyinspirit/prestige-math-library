@@ -2,7 +2,7 @@
 id: lem-author-a9a51f3554f8-normal-ring-product
 kind: lemma
 title: A normal noetherian ring is a finite product of normal domains
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-normal-noetherian-ring

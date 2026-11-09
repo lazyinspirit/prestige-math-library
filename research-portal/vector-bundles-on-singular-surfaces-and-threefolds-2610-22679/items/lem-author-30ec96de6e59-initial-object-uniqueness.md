@@ -2,7 +2,7 @@
 id: lem-author-30ec96de6e59-initial-object-uniqueness
 kind: lemma
 title: Uniqueness of an initial object
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

@@ -1,6 +1,6 @@
 ---
 title: Common projective complements and cancellation by free modules
-status: draft
+status: published
 research_item: lem-author-f08c343a07fc-cancel-cancellative-free-summands
 dependency_level: 2
 ---

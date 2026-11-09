@@ -2,7 +2,7 @@
 id: op-higher-dimensional-geometric-method
 kind: open-problem
 title: Extending the geometric support method to higher dimensions
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

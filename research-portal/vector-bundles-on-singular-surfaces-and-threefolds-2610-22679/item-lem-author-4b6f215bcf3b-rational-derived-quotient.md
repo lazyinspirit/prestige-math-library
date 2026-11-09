@@ -1,6 +1,6 @@
 ---
 title: Finite derived quotients of rational complexes vanish
-status: draft
+status: published
 research_item: lem-author-4b6f215bcf3b-rational-derived-quotient
 dependency_level: 2
 ---

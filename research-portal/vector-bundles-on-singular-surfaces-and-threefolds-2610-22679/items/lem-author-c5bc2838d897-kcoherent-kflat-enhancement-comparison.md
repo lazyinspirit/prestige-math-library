@@ -2,7 +2,7 @@
 id: lem-author-c5bc2838d897-kcoherent-kflat-enhancement-comparison
 kind: lemma
 title: One coherent K-flat family and its supplied perfect fibers
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-c5bc2838d897-kcoherent-kflat-sheaf-input

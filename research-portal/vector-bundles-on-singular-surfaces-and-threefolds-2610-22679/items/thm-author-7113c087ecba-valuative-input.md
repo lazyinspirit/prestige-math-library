@@ -2,7 +2,7 @@
 id: thm-author-7113c087ecba-valuative-input
 kind: theorem
 title: Exact valuation inputs for the topology comparison
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

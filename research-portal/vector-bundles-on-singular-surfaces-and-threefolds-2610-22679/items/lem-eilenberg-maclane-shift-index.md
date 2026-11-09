@@ -2,7 +2,7 @@
 id: lem-eilenberg-maclane-shift-index
 kind: lemma
 title: Complex shifts and spectral homotopy indices
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

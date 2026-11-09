@@ -1,6 +1,6 @@
 ---
 title: External singular realization comparison
-status: draft
+status: published
 research_item: thm-author-e0b0bf18ed2b-singular-realization-input
 dependency_level: 0
 ---

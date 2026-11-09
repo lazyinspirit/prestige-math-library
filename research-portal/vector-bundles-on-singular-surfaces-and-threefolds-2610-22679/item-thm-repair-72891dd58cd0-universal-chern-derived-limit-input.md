@@ -1,6 +1,6 @@
 ---
 title: Universal Chern cohomology and countable derived limits
-status: draft
+status: published
 research_item: thm-repair-72891dd58cd0-universal-chern-derived-limit-input
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-adjudicate-6cf37231df39-arbitrary-field-flag-detection
 kind: lemma
 title: Flag detection over an arbitrary field by prime-field restriction
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-ab0a6fc202cb-elmanto-morrow-projective-input

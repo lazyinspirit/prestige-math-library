@@ -2,7 +2,7 @@
 id: def-author-cf6ede58b450-site-plus-data
 kind: definition
 title: Small sites and the plus construction
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

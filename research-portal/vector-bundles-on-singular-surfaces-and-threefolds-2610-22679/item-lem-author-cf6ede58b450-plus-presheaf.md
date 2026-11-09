@@ -1,6 +1,6 @@
 ---
 title: The plus construction is a presheaf
-status: draft
+status: published
 research_item: lem-author-cf6ede58b450-plus-presheaf
 dependency_level: 2
 ---

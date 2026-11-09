@@ -2,7 +2,7 @@
 id: lem-author-58e57d689702-independent-gamma
 kind: lemma
 title: An independent full equivalence into the truncated cdh localization
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-e71ff76fe904-cdh-factorization-input

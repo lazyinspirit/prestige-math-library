@@ -2,7 +2,7 @@
 id: prop-tower-exact-couple-interface
 kind: proposition
 title: Spectral sequence of a tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-filtered-stage-exact-sequence

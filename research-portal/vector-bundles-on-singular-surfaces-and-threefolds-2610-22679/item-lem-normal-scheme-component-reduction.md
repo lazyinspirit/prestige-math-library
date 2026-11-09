@@ -1,6 +1,6 @@
 ---
 title: Normal noetherian schemes reduce to integral components
-status: draft
+status: published
 research_item: lem-normal-scheme-component-reduction
 dependency_level: 1
 ---

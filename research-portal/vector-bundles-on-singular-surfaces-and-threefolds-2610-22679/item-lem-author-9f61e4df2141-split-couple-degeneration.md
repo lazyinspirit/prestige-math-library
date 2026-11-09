@@ -1,6 +1,6 @@
 ---
 title: Degeneration of the spectral sequence of a split tower
-status: draft
+status: published
 research_item: lem-author-9f61e4df2141-split-couple-degeneration
 dependency_level: 7
 ---

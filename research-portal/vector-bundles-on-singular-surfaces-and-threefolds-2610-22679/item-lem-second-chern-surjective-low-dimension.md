@@ -1,6 +1,6 @@
 ---
 title: Second Chern surjectivity in dimensions two and three
-status: draft
+status: published
 research_item: lem-second-chern-surjective-low-dimension
 dependency_level: 28
 ---

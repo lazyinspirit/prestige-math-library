@@ -2,7 +2,7 @@
 id: thm-smooth-threefold-rank-two-classification
 kind: theorem
 title: Smooth threefold rank-two classification
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-9b282fc59773-chern-map-and-fibers

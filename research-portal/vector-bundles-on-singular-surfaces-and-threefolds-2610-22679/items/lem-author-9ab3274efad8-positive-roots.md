@@ -2,7 +2,7 @@
 id: lem-author-9ab3274efad8-positive-roots
 kind: lemma
 title: Positive roots suffice for divisibility
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-divisible-module-over-an-integral-domain

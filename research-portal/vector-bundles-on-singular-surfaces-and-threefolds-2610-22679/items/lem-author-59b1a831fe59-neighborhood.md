@@ -2,7 +2,7 @@
 id: lem-author-59b1a831fe59-neighborhood
 kind: lemma
 title: A smooth point has the exact finite-type excision pair
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

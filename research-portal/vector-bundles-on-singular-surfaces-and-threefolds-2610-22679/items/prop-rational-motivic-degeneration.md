@@ -2,7 +2,7 @@
 id: prop-rational-motivic-degeneration
 kind: proposition
 title: Rational third-edge comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-motivic-graded-spectral-sequence

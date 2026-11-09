@@ -2,7 +2,7 @@
 id: lem-author-a44f2061570d-site-derived-input
 kind: lemma
 title: Imported derived sections on a small site
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

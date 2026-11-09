@@ -2,7 +2,7 @@
 id: lem-author-9415fc97ee80-purity-shift-index
 kind: lemma
 title: Purity twists and cohomological shifts with explicit premises
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-derived-category-of-an-abelian-category

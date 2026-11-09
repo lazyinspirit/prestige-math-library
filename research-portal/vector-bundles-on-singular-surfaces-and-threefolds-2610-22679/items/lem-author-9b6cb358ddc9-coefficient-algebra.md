@@ -2,7 +2,7 @@
 id: lem-author-9b6cb358ddc9-coefficient-algebra
 kind: lemma
 title: Degree-three coefficient algebra on the lower-Chern kernel
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9b6cb358ddc9-actual-cartan

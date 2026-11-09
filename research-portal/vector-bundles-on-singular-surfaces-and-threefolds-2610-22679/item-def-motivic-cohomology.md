@@ -1,6 +1,6 @@
 ---
 title: Motivic complexes and cohomology
-status: draft
+status: published
 research_item: def-motivic-cohomology
 dependency_level: 8
 ---

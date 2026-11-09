@@ -2,7 +2,7 @@
 id: lem-author-3cde9692a7e9-local-free-test
 kind: lemma
 title: The stable free-class comparison is locally integrally acyclic
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-d026a7b99ace-universal-chern-space

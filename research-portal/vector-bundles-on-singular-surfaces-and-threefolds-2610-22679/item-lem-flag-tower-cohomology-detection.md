@@ -1,6 +1,6 @@
 ---
 title: Detection on a simultaneous flag tower
-status: draft
+status: published
 research_item: lem-flag-tower-cohomology-detection
 dependency_level: 10
 ---

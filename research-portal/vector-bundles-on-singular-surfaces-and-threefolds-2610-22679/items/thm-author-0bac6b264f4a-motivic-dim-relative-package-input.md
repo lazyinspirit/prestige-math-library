@@ -2,7 +2,7 @@
 id: thm-author-0bac6b264f4a-motivic-dim-relative-package-input
 kind: theorem
 title: External geometric properties of the actual motivic comparison fiber
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-0bac6b264f4a-motivic-dim-cdh-interface-input

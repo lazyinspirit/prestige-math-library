@@ -2,7 +2,7 @@
 id: lem-author-8e1c0251ef0d-h1-torsor-input
 kind: lemma
 title: External classification of torsors by first cohomology
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

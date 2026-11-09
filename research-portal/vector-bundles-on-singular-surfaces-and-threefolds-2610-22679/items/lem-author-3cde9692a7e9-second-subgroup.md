@@ -2,7 +2,7 @@
 id: lem-author-3cde9692a7e9-second-subgroup
 kind: lemma
 title: Apply the actual perfect Cartan identity to the second image
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9b6cb358ddc9-actual-cartan

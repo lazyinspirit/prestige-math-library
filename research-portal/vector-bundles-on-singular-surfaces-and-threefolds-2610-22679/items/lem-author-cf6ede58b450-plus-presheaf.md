@@ -2,7 +2,7 @@
 id: lem-author-cf6ede58b450-plus-presheaf
 kind: lemma
 title: The plus construction is a presheaf
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-cf6ede58b450-site-plus-data

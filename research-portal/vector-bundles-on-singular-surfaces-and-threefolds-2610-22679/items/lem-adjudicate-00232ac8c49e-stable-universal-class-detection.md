@@ -2,7 +2,7 @@
 id: lem-adjudicate-00232ac8c49e-stable-universal-class-detection
 kind: lemma
 title: Finite-rank detection of stable pointed motivic classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-repair-72891dd58cd0-universal-chern-derived-limit-input

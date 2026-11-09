@@ -2,7 +2,7 @@
 id: lem-author-0cc80c1b5792-threshold
 kind: lemma
 title: Explicit eventual-stage thresholds in every fixed homotopy degree
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

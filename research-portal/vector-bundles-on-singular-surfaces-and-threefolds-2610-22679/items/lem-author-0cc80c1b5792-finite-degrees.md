@@ -2,7 +2,7 @@
 id: lem-author-0cc80c1b5792-finite-degrees
 kind: lemma
 title: Degreewise boundedness and finite collections of eventual vanishings
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-5eb16844831b-empty-motivic-stages

@@ -2,7 +2,7 @@
 id: thm-line-bundle-first-chern-classification
 kind: theorem
 title: Line bundles and first motivic Chern class
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-motivic-weight-one

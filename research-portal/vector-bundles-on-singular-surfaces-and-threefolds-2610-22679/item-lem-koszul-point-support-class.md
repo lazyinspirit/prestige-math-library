@@ -1,6 +1,6 @@
 ---
 title: Perfect residue classes at smooth closed points
-status: draft
+status: published
 research_item: lem-koszul-point-support-class
 dependency_level: 10
 ---

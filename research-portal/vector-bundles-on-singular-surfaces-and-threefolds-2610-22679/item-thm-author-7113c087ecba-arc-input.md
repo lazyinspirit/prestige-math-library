@@ -1,6 +1,6 @@
 ---
 title: Exact hypercomplete arc descent for finite constructible coefficients
-status: draft
+status: published
 research_item: thm-author-7113c087ecba-arc-input
 dependency_level: 0
 ---

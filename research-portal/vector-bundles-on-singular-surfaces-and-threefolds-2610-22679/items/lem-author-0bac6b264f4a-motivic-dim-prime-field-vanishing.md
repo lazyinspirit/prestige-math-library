@@ -2,7 +2,7 @@
 id: lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing
 kind: lemma
 title: Combining the actual motivic and cdh outer-term bounds
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-0bac6b264f4a-motivic-dim-general-interface

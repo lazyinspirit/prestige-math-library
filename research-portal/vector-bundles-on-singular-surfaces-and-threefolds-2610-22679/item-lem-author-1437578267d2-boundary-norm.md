@@ -1,6 +1,6 @@
 ---
 title: Endpoint boundaries are norm divisors
-status: draft
+status: published
 research_item: lem-author-1437578267d2-boundary-norm
 dependency_level: 9
 ---

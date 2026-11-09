@@ -1,6 +1,6 @@
 ---
 title: Local integral chains detect global natural maps into Chern targets
-status: draft
+status: published
 research_item: lem-author-3cde9692a7e9-derived-chain-detection
 dependency_level: 20
 ---

@@ -2,7 +2,7 @@
 id: prop-cdh-representable-seminormalization
 kind: proposition
 title: Representable cdh sheaves and seminormalization
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cdh-topology-interface

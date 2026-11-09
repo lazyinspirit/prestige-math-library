@@ -2,7 +2,7 @@
 id: lem-author-2389e5bafea8-open-generic-density
 kind: lemma
 title: Open subsets containing generic points are componentwise dense
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

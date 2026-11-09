@@ -2,7 +2,7 @@
 id: lem-adjudicate-f6007757a8ac-actual-determinant-stack-map
 kind: lemma
 title: The actual graded determinant map on the current K-space
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-f6007757a8ac-waldhausen-determinant-one-type

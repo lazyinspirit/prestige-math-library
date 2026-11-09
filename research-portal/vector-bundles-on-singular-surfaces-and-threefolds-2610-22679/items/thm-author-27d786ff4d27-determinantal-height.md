@@ -2,7 +2,7 @@
 id: thm-author-27d786ff4d27-determinantal-height
 kind: theorem
 title: External maximal-minor height bound for the component-scope example
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

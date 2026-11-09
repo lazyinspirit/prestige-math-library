@@ -2,7 +2,7 @@
 id: lem-author-e0b0bf18ed2b-exactness-and-products
 kind: lemma
 title: Stable rotation and exact coherent products
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-e0b0bf18ed2b-stable-enhancement-input

@@ -2,7 +2,7 @@
 id: thm-author-fc2380accb47-finite-type-geometric-input
 kind: theorem
 title: External finite-type dimension, rational-point and etale-fiber inputs
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

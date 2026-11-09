@@ -2,7 +2,7 @@
 id: def-valuative-dimension-and-boundedness
 kind: definition
 title: Valuative dimension and degreewise bounded towers
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-scheme-over-base

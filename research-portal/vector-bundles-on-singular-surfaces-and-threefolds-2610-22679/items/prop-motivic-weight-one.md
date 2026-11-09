@@ -2,7 +2,7 @@
 id: prop-motivic-weight-one
 kind: proposition
 title: Motivic weight one
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

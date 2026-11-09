@@ -2,7 +2,7 @@
 id: lem-second-chern-additive
 kind: lemma
 title: Second Chern additivity on the second piece
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9b6cb358ddc9-actual-cartan

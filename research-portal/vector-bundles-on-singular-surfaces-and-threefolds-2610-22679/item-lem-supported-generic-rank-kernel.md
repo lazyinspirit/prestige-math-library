@@ -1,6 +1,6 @@
 ---
 title: Generic localization detects the point subgroup
-status: draft
+status: published
 research_item: lem-supported-generic-rank-kernel
 dependency_level: 20
 ---

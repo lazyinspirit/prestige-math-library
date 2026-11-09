@@ -1,6 +1,6 @@
 ---
 title: Gluing upper bounds through an actual fiber sequence
-status: draft
+status: published
 research_item: lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing
 dependency_level: 4
 ---

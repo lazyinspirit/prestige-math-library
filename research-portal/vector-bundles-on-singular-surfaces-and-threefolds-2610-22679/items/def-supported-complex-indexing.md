@@ -2,7 +2,7 @@
 id: def-supported-complex-indexing
 kind: definition
 title: Support fibers with explicit cohomological indexing
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-derived-sections-on-sites

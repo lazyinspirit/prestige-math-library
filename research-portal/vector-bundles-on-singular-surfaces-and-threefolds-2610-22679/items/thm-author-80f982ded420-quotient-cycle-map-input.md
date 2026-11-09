@@ -2,7 +2,7 @@
 id: thm-author-80f982ded420-quotient-cycle-map-input
 kind: theorem
 title: External Levine–Weibel quotient cycle map with exact generators
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

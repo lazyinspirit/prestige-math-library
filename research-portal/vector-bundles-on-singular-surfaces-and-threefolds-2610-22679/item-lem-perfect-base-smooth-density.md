@@ -1,6 +1,6 @@
 ---
 title: Smooth density and normal codimension over a perfect field
-status: draft
+status: published
 research_item: lem-perfect-base-smooth-density
 dependency_level: 2
 ---

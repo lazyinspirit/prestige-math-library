@@ -1,6 +1,6 @@
 ---
 title: Dimension-specific point images and a precise lower-component obstruction
-status: draft
+status: published
 research_item: lem-author-80f982ded420-dimension-weight-scope
 dependency_level: 22
 ---

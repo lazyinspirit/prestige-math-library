@@ -2,7 +2,7 @@
 id: cor-rank-three-zero-chern-splitting
 kind: corollary
 title: Third Chern vanishing and a trivial summand
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-rank-three-euler-k-class

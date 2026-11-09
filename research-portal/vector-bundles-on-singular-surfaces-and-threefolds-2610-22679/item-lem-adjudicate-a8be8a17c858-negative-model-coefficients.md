@@ -1,6 +1,6 @@
 ---
 title: Negative coefficients of the actual EM projective-line model
-status: draft
+status: published
 research_item: lem-adjudicate-a8be8a17c858-negative-model-coefficients
 dependency_level: 16
 ---

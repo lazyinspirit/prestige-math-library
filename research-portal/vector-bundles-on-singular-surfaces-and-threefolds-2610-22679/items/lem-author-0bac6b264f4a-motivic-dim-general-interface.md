@@ -2,7 +2,7 @@
 id: lem-author-0bac6b264f4a-motivic-dim-general-interface
 kind: lemma
 title: Prime-field evaluation and compatibility with the standing theory
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-elmanto-morrow-complexes

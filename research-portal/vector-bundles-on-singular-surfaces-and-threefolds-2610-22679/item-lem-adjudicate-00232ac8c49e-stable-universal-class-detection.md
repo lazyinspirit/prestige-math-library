@@ -1,6 +1,6 @@
 ---
 title: Finite-rank detection of stable pointed motivic classes
-status: draft
+status: published
 research_item: lem-adjudicate-00232ac8c49e-stable-universal-class-detection
 dependency_level: 18
 ---

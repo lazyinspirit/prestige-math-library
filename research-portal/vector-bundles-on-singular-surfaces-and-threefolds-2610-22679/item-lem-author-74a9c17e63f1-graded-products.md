@@ -1,6 +1,6 @@
 ---
 title: The product on graded motivic groups is the source cup product
-status: draft
+status: published
 research_item: lem-author-74a9c17e63f1-graded-products
 dependency_level: 15
 ---

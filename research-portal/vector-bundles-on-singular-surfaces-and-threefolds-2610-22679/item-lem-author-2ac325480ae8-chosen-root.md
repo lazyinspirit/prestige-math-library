@@ -1,6 +1,6 @@
 ---
 title: A chosen root trivializes the actual Tate coefficient on the slice
-status: draft
+status: published
 research_item: lem-author-2ac325480ae8-chosen-root
 dependency_level: 8
 ---

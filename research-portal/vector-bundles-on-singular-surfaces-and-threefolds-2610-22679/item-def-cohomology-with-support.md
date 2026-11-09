@@ -1,6 +1,6 @@
 ---
 title: Motivic and filtered K theory with support
-status: draft
+status: published
 research_item: def-cohomology-with-support
 dependency_level: 13
 ---

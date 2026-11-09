@@ -1,6 +1,6 @@
 ---
 title: Affine bundles and finite projective modules
-status: draft
+status: published
 research_item: lem-affine-bundle-module-interface
 dependency_level: 0
 ---

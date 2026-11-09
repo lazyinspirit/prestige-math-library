@@ -2,7 +2,7 @@
 id: lem-author-16f30f6b95cb-lowweight-weight-one-positive-picard
 kind: lemma
 title: The EM weight-one Picard normalization is positive identity
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-16f30f6b95cb-lowweight-em-map-normalizations

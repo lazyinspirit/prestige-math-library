@@ -1,6 +1,6 @@
 ---
 title: Natural unital bigraded motivic ring with negative zero extension
-status: draft
+status: published
 research_item: lem-author-79117e1d72ed-bigraded-ring
 dependency_level: 10
 ---

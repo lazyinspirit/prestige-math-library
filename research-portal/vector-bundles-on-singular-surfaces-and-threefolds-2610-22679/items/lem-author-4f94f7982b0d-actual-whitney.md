@@ -3,7 +3,7 @@ id: lem-author-4f94f7982b0d-actual-whitney
 kind: lemma
 title: Actual exact-sequence Whitney and filtered-root formula on singular qcqs
   schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4f94f7982b0d-em-p1-model

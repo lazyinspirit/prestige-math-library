@@ -2,7 +2,7 @@
 id: rem-smooth-point-filtration-notation
 kind: remark
 title: Distinguishing smooth-point and motivic filtration notation
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-smooth-point-filtration

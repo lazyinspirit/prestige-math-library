@@ -1,6 +1,6 @@
 ---
 title: Swan chartwise integrality glues on the actual quasi-affine open
-status: draft
+status: published
 research_item: lem-author-27d786ff4d27-chartwise-integrality
 dependency_level: 15
 ---

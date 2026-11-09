@@ -2,7 +2,7 @@
 id: lem-author-e71ff76fe904-prime-field-coefficients
 kind: lemma
 title: Prime-field restriction and the intrinsic étale coefficient complex
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

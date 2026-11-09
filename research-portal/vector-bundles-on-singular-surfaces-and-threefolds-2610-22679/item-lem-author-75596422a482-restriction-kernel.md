@@ -1,6 +1,6 @@
 ---
 title: The kernel of restriction is the supported subcomplex
-status: draft
+status: published
 research_item: lem-author-75596422a482-restriction-kernel
 dependency_level: 5
 ---

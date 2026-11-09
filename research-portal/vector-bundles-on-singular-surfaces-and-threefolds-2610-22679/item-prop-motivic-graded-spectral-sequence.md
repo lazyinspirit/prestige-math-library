@@ -1,6 +1,6 @@
 ---
 title: Motivic graded pieces and spectral sequence
-status: draft
+status: published
 research_item: prop-motivic-graded-spectral-sequence
 dependency_level: 18
 ---

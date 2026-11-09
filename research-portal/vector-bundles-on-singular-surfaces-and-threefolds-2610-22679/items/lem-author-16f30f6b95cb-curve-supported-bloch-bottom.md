@@ -2,7 +2,7 @@
 id: lem-author-16f30f6b95cb-curve-supported-bloch-bottom
 kind: lemma
 title: Bottom supported Bloch groups on a codimension two curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-supported-higher-cycle-complex

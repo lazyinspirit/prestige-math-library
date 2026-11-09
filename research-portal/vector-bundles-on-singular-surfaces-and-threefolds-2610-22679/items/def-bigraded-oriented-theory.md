@@ -2,7 +2,7 @@
 id: def-bigraded-oriented-theory
 kind: definition
 title: Bigraded cohomology and the projective bundle contract
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-projective-bundle-scheme

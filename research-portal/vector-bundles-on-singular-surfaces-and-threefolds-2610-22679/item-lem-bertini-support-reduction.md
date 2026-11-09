@@ -1,6 +1,6 @@
 ---
 title: Curve-and-point support reduction
-status: draft
+status: published
 research_item: lem-bertini-support-reduction
 dependency_level: 29
 ---

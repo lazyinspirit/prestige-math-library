@@ -1,6 +1,6 @@
 ---
 title: Motivic splitting principle
-status: draft
+status: published
 research_item: thm-motivic-splitting-principle
 dependency_level: 14
 ---

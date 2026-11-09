@@ -2,7 +2,7 @@
 id: thm-author-da44cda020c0-units-k1-classical-comparisons
 kind: theorem
 title: External matrix, exact and bounded-projective K-theory comparisons
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

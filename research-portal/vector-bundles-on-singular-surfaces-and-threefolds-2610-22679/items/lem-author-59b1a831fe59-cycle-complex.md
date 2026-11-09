@@ -2,7 +2,7 @@
 id: lem-author-59b1a831fe59-cycle-complex
 kind: lemma
 title: Point-supported cycles give all-weight chain purity and low-weight zero
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-59b1a831fe59-neighborhood

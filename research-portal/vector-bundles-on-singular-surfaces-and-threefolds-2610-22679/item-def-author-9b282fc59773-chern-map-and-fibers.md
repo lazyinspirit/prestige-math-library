@@ -1,6 +1,6 @@
 ---
 title: Rank-two Chern map and its fixed-invariant fibers
-status: draft
+status: published
 research_item: def-author-9b282fc59773-chern-map-and-fibers
 dependency_level: 12
 ---

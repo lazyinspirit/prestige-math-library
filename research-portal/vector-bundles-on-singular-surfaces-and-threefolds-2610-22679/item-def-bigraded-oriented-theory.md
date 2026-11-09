@@ -1,6 +1,6 @@
 ---
 title: Bigraded cohomology and the projective bundle contract
-status: draft
+status: published
 research_item: def-bigraded-oriented-theory
 dependency_level: 0
 ---

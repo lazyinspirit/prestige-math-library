@@ -2,7 +2,7 @@
 id: prop-top-motivic-torsion-free
 kind: proposition
 title: Torsion freeness of top threefold motivic cohomology
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

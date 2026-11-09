@@ -1,6 +1,6 @@
 ---
 title: External actual augmented EM and smooth slice tower comparison
-status: draft
+status: published
 research_item: thm-author-16f30f6b95cb-lowweight-augmented-slice-comparison
 dependency_level: 12
 ---

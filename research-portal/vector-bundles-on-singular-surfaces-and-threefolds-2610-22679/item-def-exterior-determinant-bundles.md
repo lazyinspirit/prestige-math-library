@@ -1,6 +1,6 @@
 ---
 title: Exterior powers and determinant of an algebraic bundle
-status: draft
+status: published
 research_item: def-exterior-determinant-bundles
 dependency_level: 0
 ---

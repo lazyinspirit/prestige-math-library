@@ -2,7 +2,7 @@
 id: lem-author-5bfbe3ebf14f-constant-sheaf-finite-local-representatives
 kind: lemma
 title: Constant-sheaf sections have finite local representatives
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-5bfbe3ebf14f-finite-generated-topology-basis

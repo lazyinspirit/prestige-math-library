@@ -2,7 +2,7 @@
 id: thm-author-394a5b71198d-murthy-module-splitting-input
 kind: theorem
 title: Murthy splitting criterion for the exterior-dual obstruction
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-394a5b71198d-exterior-dual-interface

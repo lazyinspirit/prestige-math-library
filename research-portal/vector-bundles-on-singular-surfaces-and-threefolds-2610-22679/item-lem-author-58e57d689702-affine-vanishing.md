@@ -1,6 +1,6 @@
 ---
 title: Affine Artin bound and its consequence after localization
-status: draft
+status: published
 research_item: lem-author-58e57d689702-affine-vanishing
 dependency_level: 17
 ---

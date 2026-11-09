@@ -1,6 +1,6 @@
 ---
 title: External actual motivic stagewise boundedness
-status: draft
+status: published
 research_item: thm-author-0cc80c1b5792-stage-bound-input
 dependency_level: 12
 ---

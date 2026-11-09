@@ -1,6 +1,6 @@
 ---
 title: Classical smooth critical-rank classifications
-status: draft
+status: published
 research_item: thm-smooth-critical-rank-classifications
 dependency_level: 15
 ---

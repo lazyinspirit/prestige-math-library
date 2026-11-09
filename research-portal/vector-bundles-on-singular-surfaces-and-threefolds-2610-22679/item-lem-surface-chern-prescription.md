@@ -1,6 +1,6 @@
 ---
 title: Prescribing two surface Chern classes
-status: draft
+status: published
 research_item: lem-surface-chern-prescription
 dependency_level: 29
 ---

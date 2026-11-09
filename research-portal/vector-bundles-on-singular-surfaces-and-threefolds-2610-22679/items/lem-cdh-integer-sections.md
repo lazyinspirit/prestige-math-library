@@ -2,7 +2,7 @@
 id: lem-cdh-integer-sections
 kind: lemma
 title: Integer cdh sections on seminormal schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-finite-constant-cdh-sections

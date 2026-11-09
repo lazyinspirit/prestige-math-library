@@ -2,7 +2,7 @@
 id: def-motivic-filtration
 kind: definition
 title: Motivic filtration and image groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

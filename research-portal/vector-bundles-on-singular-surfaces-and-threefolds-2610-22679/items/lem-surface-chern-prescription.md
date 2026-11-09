@@ -2,7 +2,7 @@
 id: lem-surface-chern-prescription
 kind: lemma
 title: Prescribing two surface Chern classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-line-bundle-first-chern-classification

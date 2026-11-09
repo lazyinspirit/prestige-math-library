@@ -2,7 +2,7 @@
 id: lem-author-8e1c0251ef0d-torsor-cocycle
 kind: lemma
 title: Local sections of a torsor give a cocycle
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

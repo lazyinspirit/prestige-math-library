@@ -2,7 +2,7 @@
 id: lem-author-d026a7b99ace-positive-rr-coefficient
 kind: lemma
 title: An integral P³ test fixes the supported RR coefficient as positive two
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

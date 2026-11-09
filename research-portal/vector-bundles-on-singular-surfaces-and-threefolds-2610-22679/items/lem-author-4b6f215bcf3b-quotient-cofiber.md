@@ -2,7 +2,7 @@
 id: lem-author-4b6f215bcf3b-quotient-cofiber
 kind: lemma
 title: Derived finite coefficients preserve mapping cones
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-derived-coefficient-exact-sequence

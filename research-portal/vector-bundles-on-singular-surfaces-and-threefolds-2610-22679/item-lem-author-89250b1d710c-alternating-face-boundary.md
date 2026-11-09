@@ -1,6 +1,6 @@
 ---
 title: Alternating face boundaries square to zero
-status: draft
+status: published
 research_item: lem-author-89250b1d710c-alternating-face-boundary
 dependency_level: 2
 ---

@@ -1,6 +1,6 @@
 ---
 title: Degree-zero representatives modulo a boundary class
-status: draft
+status: published
 research_item: lem-author-4057f3195e4f-degree-adjustment
 dependency_level: 0
 ---

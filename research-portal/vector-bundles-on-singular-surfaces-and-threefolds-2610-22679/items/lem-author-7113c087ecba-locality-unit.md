@@ -2,7 +2,7 @@
 id: lem-author-7113c087ecba-locality-unit
 kind: lemma
 title: The actual cdh-localization unit is an equivalence
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

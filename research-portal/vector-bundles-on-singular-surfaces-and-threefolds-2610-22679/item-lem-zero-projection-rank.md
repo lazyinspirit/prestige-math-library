@@ -1,6 +1,6 @@
 ---
 title: Zeroth projection is rank
-status: draft
+status: published
 research_item: lem-zero-projection-rank
 dependency_level: 20
 ---

@@ -2,7 +2,7 @@
 id: thm-author-fc2380accb47-normal-geometric-input
 kind: theorem
 title: External normality and perfect-field smooth-locus inputs
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

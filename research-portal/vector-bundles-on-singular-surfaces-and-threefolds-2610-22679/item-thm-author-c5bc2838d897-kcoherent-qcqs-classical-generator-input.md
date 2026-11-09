@@ -1,6 +1,6 @@
 ---
 title: External qcqs classical perfect generator
-status: draft
+status: published
 research_item: thm-author-c5bc2838d897-kcoherent-qcqs-classical-generator-input
 dependency_level: 5
 ---

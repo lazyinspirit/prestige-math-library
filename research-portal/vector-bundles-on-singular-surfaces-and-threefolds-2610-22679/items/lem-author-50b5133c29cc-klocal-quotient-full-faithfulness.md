@@ -2,7 +2,7 @@
 id: lem-author-50b5133c29cc-klocal-quotient-full-faithfulness
 kind: lemma
 title: Full faithfulness of the perfect triangulated quotient
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

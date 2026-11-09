@@ -2,7 +2,7 @@
 id: thm-author-9b282fc59773-asok-fasel-comparison-input
 kind: theorem
 title: Asok–Fasel Chern-compatible comparison and lifting input
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-9b282fc59773-chern-map-and-fibers

@@ -1,6 +1,6 @@
 ---
 title: Perfect-field cancellation removes exactly d coefficient twists
-status: draft
+status: published
 research_item: lem-author-59b1a831fe59-cancel-twists
 dependency_level: 13
 ---

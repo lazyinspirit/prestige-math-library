@@ -2,7 +2,7 @@
 id: lem-author-7ef3227685d9-supported-k0-heart
 kind: lemma
 title: Inherited bounded t structure on supported perfect complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-7ef3227685d9-supported-k0-regular-cohomology-input

@@ -2,7 +2,7 @@
 id: lem-author-1437578267d2-normalization-quotient
 kind: lemma
 title: Normalization and the curve divisor quotient
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-1437578267d2-length-orders

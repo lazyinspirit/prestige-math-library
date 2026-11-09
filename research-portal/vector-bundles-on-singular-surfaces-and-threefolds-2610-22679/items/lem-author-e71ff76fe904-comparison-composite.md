@@ -2,7 +2,7 @@
 id: lem-author-e71ff76fe904-comparison-composite
 kind: lemma
 title: The actual composite and its objectwise cofiber
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-e71ff76fe904-cdh-induced-map

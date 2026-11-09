@@ -2,7 +2,7 @@
 id: thm-author-e71ff76fe904-objectwise-range-input
 kind: theorem
 title: Exact objectwise cofiber bound for the canonical source composite
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-e71ff76fe904-cdh-factorization-input

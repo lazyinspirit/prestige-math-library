@@ -1,6 +1,6 @@
 ---
 title: The diagonal of a finite subintegral map is a cdh cover
-status: draft
+status: published
 research_item: lem-author-60d95bfb692a-subintegral-diagonal-cover
 dependency_level: 9
 ---

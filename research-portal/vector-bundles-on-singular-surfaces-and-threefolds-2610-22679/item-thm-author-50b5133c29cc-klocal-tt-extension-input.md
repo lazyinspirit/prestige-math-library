@@ -1,6 +1,6 @@
 ---
 title: External extension and morphism input for perfect complexes
-status: draft
+status: published
 research_item: thm-author-50b5133c29cc-klocal-tt-extension-input
 dependency_level: 5
 ---

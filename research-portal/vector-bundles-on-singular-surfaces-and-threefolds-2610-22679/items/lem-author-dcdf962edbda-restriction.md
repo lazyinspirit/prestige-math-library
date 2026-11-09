@@ -2,7 +2,7 @@
 id: lem-author-dcdf962edbda-restriction
 kind: lemma
 title: Prime-field restriction preserves actual comparison diagrams
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

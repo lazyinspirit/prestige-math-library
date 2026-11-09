@@ -1,6 +1,6 @@
 ---
 title: The actual exterior-dual class in affine perfect K zero
-status: draft
+status: published
 research_item: lem-author-394a5b71198d-exterior-dual-interface
 dependency_level: 13
 ---

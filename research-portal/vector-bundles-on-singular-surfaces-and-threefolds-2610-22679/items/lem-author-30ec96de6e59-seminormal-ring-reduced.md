@@ -2,7 +2,7 @@
 id: lem-author-30ec96de6e59-seminormal-ring-reduced
 kind: lemma
 title: The square-cube condition implies reducedness
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

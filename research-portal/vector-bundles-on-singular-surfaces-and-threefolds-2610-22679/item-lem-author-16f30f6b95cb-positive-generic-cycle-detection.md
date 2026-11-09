@@ -1,6 +1,6 @@
 ---
 title: Positive generic cycles determine the curve-supported homomorphism
-status: draft
+status: published
 research_item: lem-author-16f30f6b95cb-positive-generic-cycle-detection
 dependency_level: 17
 ---

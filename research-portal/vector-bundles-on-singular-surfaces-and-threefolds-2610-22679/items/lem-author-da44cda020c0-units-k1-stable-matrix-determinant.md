@@ -2,7 +2,7 @@
 id: lem-author-da44cda020c0-units-k1-stable-matrix-determinant
 kind: lemma
 title: Determinant on the stable general linear group
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

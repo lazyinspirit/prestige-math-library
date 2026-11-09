@@ -2,7 +2,7 @@
 id: lem-author-b02e51f9da03-whitney-vanishing
 kind: lemma
 title: Stable triviality forces vanishing of the actual Chern coefficients
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b02e51f9da03-trivial-chern

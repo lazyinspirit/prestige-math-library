@@ -2,7 +2,7 @@
 id: thm-author-f08c343a07fc-local-kumar-murthy-chow-input
 kind: theorem
 title: Mohan Kumar–Murthy rank-three Chow classification
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-f08c343a07fc-local-chern-interface

@@ -1,6 +1,6 @@
 ---
 title: Motivic projective bundle formula
-status: draft
+status: published
 research_item: prop-motivic-projective-bundle-formula
 dependency_level: 13
 ---

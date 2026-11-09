@@ -2,7 +2,7 @@
 id: lem-author-d026a7b99ace-positive-coordinates
 kind: lemma
 title: Positive supported coordinates at a smooth threefold point
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-smooth-point-excision-purity

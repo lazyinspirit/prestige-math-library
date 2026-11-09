@@ -2,7 +2,7 @@
 id: lem-author-50b5133c29cc-klocal-kernel
 kind: lemma
 title: The exact restriction kernel and its denominators
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

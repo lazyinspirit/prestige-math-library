@@ -2,7 +2,7 @@
 id: lem-author-58e57d689702-coefficient-trivialization
 kind: lemma
 title: Slice localization and the actual root-of-unity coefficient map
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

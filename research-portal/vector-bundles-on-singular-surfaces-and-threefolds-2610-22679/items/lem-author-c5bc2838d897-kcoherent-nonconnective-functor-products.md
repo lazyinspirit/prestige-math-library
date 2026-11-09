@@ -2,7 +2,7 @@
 id: lem-author-c5bc2838d897-kcoherent-nonconnective-functor-products
 kind: lemma
 title: Applying nonconnective K-theory to the enhanced interface
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-c5bc2838d897-kcoherent-perfect-essential-smallness

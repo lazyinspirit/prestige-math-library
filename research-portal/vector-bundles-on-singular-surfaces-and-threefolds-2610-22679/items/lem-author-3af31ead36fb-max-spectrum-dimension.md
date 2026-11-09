@@ -2,7 +2,7 @@
 id: lem-author-3af31ead36fb-max-spectrum-dimension
 kind: lemma
 title: Dimension of the maximal spectrum
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

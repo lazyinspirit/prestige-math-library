@@ -2,7 +2,7 @@
 id: lem-author-149a02132c3b-support-fiber
 kind: lemma
 title: Excision and the exact fixed-support cycle fiber
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

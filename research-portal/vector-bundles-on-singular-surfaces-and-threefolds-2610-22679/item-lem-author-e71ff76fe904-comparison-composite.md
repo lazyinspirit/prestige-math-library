@@ -1,6 +1,6 @@
 ---
 title: The actual composite and its objectwise cofiber
-status: draft
+status: published
 research_item: lem-author-e71ff76fe904-comparison-composite
 dependency_level: 10
 ---

@@ -2,7 +2,7 @@
 id: def-stable-spectra-interface
 kind: definition
 title: Stable spectra and exact triangles
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-stable-homotopy-groups-of-a-sequential-prespectrum

@@ -1,6 +1,6 @@
 ---
 title: Vector bundles on singular surfaces and threefolds
-status: draft
+status: published
 ---
 
 - [Affine bundles and normal geometry](affine-foundations) — level 0

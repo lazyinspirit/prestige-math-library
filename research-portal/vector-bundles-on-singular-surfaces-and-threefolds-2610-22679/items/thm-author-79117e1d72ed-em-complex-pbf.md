@@ -2,7 +2,7 @@
 id: thm-author-79117e1d72ed-em-complex-pbf
 kind: theorem
 title: External EM projective bundle equivalence with its specified components
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-79117e1d72ed-em-multiplication-c1

@@ -2,7 +2,7 @@
 id: lem-lift-curve-supported-filtration
 kind: lemma
 title: Lifting the corrected class to the curve-supported third stage
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-point-correction-localization

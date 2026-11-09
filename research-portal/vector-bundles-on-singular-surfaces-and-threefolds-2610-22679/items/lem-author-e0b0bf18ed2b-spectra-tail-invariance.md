@@ -2,7 +2,7 @@
 id: lem-author-e0b0bf18ed2b-spectra-tail-invariance
 kind: lemma
 title: Cofinal tails and level invariance of stable groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-stable-homotopy-groups-of-a-sequential-prespectrum

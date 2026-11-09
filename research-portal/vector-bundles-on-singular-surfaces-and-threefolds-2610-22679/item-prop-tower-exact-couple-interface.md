@@ -1,6 +1,6 @@
 ---
 title: Spectral sequence of a tower
-status: draft
+status: published
 research_item: prop-tower-exact-couple-interface
 dependency_level: 6
 ---

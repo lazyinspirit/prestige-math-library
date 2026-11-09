@@ -2,7 +2,7 @@
 id: lem-author-91088613574d-cycle-reindex
 kind: lemma
 title: Cycle-complex degree translation
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

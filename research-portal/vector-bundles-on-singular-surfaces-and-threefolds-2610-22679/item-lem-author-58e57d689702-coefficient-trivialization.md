@@ -1,6 +1,6 @@
 ---
 title: Slice localization and the actual root-of-unity coefficient map
-status: draft
+status: published
 research_item: lem-author-58e57d689702-coefficient-trivialization
 dependency_level: 15
 ---

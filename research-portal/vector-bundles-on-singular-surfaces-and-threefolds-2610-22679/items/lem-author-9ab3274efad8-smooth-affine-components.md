@@ -2,7 +2,7 @@
 id: lem-author-9ab3274efad8-smooth-affine-components
 kind: lemma
 title: Connected components of a smooth affine curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-regular-equals-smooth-over-perfect-field

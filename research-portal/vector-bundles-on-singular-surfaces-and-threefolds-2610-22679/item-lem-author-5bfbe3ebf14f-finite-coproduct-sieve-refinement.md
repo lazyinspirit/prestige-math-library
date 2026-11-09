@@ -1,6 +1,6 @@
 ---
 title: Finite coproducts and refinement inside a sieve
-status: draft
+status: published
 research_item: lem-author-5bfbe3ebf14f-finite-coproduct-sieve-refinement
 dependency_level: 10
 ---

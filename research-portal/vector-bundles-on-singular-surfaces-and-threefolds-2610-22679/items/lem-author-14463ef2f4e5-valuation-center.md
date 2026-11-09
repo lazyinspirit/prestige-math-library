@@ -2,7 +2,7 @@
 id: lem-author-14463ef2f4e5-valuation-center
 kind: lemma
 title: A valuation overring has a center
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-valuative-dimension-and-boundedness

@@ -4,7 +4,7 @@ description: Develop flag detection and virtual Chern arithmetic alongside
   indexed support fibers, excision, Koszul classes and curve dévissage. Place
   the article's support definitions here and prepare the Bertini and
   exterior-Euler interfaces needed by its final geometric arguments.
-status: draft
+status: published
 dependency_level: 3
 ---
 

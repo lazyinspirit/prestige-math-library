@@ -1,6 +1,6 @@
 ---
 title: Levine–Weibel relations split on clopen pure-dimensional components
-status: draft
+status: published
 research_item: lem-author-80f982ded420-clopen-quotients
 dependency_level: 18
 ---

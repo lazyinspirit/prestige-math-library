@@ -1,6 +1,6 @@
 ---
 title: Surface existence from rank-three existence on the cylinder
-status: draft
+status: published
 research_item: lem-author-f08c343a07fc-local-surface-existence-reduction
 dependency_level: 14
 ---

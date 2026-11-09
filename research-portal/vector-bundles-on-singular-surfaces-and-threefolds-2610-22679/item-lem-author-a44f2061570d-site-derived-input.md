@@ -1,6 +1,6 @@
 ---
 title: Imported derived sections on a small site
-status: draft
+status: published
 research_item: lem-author-a44f2061570d-site-derived-input
 dependency_level: 9
 ---

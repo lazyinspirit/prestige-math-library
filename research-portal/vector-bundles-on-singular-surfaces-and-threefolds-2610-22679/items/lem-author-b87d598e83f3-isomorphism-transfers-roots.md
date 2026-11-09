@@ -2,7 +2,7 @@
 id: lem-author-b87d598e83f3-isomorphism-transfers-roots
 kind: lemma
 title: Unique divisibility is invariant under group isomorphism
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

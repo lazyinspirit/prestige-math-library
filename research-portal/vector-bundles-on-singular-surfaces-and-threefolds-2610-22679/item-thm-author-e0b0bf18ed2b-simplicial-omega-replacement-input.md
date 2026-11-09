@@ -1,6 +1,6 @@
 ---
 title: External sequential simplicial Omega replacement
-status: draft
+status: published
 research_item: thm-author-e0b0bf18ed2b-simplicial-omega-replacement-input
 dependency_level: 0
 ---

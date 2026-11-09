@@ -2,7 +2,7 @@
 id: prop-perfect-k-localization-input
 kind: proposition
 title: Perfect K theory localization and open excision
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nonconnective-k-spectrum-interface

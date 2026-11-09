@@ -1,6 +1,6 @@
 ---
 title: External degree-zero abelian dévissage
-status: draft
+status: published
 research_item: thm-author-7ef3227685d9-supported-k0-abelian-devissage-input
 dependency_level: 0
 ---

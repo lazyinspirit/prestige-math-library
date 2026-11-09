@@ -2,7 +2,7 @@
 id: cor-third-chern-isomorphism
 kind: corollary
 title: Third Chern isomorphism
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

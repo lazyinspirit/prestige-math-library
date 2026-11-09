@@ -2,7 +2,7 @@
 id: lem-author-2ac325480ae8-motivic-restriction-coefficients
 kind: lemma
 title: The restricted BEM complex and the supplied EM finite quotient
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-2ac325480ae8-bem-field-model

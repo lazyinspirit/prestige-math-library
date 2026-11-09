@@ -2,7 +2,7 @@
 id: lem-koszul-point-support-class
 kind: lemma
 title: Perfect residue classes at smooth closed points
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-perfect-complexes

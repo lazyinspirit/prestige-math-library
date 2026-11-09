@@ -2,7 +2,7 @@
 id: thm-author-3a003d7b5208-nonconnective-k-zero-input
 kind: theorem
 title: Nonconnective K theory in degree zero
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

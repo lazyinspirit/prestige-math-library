@@ -1,6 +1,6 @@
 ---
 title: Rank-three representatives with two zero Chern classes
-status: draft
+status: published
 research_item: lem-third-piece-representatives
 dependency_level: 28
 ---

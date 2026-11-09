@@ -1,6 +1,6 @@
 ---
 title: The actual first Chern map is the Picard isomorphism on an affine curve
-status: draft
+status: published
 research_item: lem-author-394a5b71198d-curve-picard
 dependency_level: 15
 ---

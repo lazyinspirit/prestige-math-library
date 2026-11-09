@@ -1,6 +1,6 @@
 ---
 title: The exact projective bundle map in every integer bidegree
-status: draft
+status: published
 research_item: lem-author-79117e1d72ed-all-bidegrees
 dependency_level: 11
 ---

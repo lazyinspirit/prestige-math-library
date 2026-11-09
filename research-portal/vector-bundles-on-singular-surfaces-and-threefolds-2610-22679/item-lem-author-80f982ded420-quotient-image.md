@@ -1,6 +1,6 @@
 ---
 title: The quotient cycle map has exactly the smooth-point image
-status: draft
+status: published
 research_item: lem-author-80f982ded420-quotient-image
 dependency_level: 21
 ---

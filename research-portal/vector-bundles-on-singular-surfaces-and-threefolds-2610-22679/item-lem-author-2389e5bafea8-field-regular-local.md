@@ -1,6 +1,6 @@
 ---
 title: Fields are regular local rings
-status: draft
+status: published
 research_item: lem-author-2389e5bafea8-field-regular-local
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-author-c8fb25136bd5-degree-zero-cycles
 kind: lemma
 title: Degree-zero Bloch cycles are ordinary cycles
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

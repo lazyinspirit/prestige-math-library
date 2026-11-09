@@ -1,6 +1,6 @@
 ---
 title: Finite valuative dimension for noetherian and finite type schemes
-status: draft
+status: published
 research_item: thm-author-14463ef2f4e5-finite-valuative-dimension
 dependency_level: 8
 ---

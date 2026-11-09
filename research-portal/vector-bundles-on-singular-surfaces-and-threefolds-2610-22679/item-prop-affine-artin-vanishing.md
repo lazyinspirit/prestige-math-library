@@ -1,6 +1,6 @@
 ---
 title: Affine étale vanishing and the actual localized evaluation
-status: draft
+status: published
 research_item: prop-affine-artin-vanishing
 dependency_level: 18
 ---

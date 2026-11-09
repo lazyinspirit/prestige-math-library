@@ -1,6 +1,6 @@
 ---
 title: The two supported cycle degrees on a curve
-status: draft
+status: published
 research_item: lem-author-1437578267d2-supported-degrees
 dependency_level: 8
 ---

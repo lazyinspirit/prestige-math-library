@@ -2,7 +2,7 @@
 id: lem-author-b747b28c359f-cochain-cohomology
 kind: lemma
 title: Cohomology of a cochain complex
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-derived-category-of-an-abelian-category

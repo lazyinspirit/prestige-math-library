@@ -1,6 +1,6 @@
 ---
 title: The reduced universal bundle calculation identifies the second projection
-status: draft
+status: published
 research_item: lem-author-e216acade157-bundle-calculation
 dependency_level: 25
 ---

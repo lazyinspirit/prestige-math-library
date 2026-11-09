@@ -2,7 +2,7 @@
 id: lem-adjudicate-6e70d30b9793-em-picard-square
 kind: lemma
 title: The actual EM comparison commutes with the Picard first-Chern map
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-6e70d30b9793-field-unit-zigzag

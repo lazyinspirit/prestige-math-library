@@ -2,7 +2,7 @@
 id: lem-author-4f716d60801a-finite-projective-model
 kind: lemma
 title: Bounded finite-projective complexes and affine chain models
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-perfect-complex-over-a-ring

@@ -1,6 +1,6 @@
 ---
 title: Unique divisibility is invariant under group isomorphism
-status: draft
+status: published
 research_item: lem-author-b87d598e83f3-isomorphism-transfers-roots
 dependency_level: 0
 ---

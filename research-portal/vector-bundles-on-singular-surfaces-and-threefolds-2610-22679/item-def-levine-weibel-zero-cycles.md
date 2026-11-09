@@ -1,6 +1,6 @@
 ---
 title: Levine–Weibel zero cycles
-status: draft
+status: published
 research_item: def-levine-weibel-zero-cycles
 dependency_level: 0
 ---

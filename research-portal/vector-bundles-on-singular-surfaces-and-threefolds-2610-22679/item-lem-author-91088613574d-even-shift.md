@@ -1,6 +1,6 @@
 ---
 title: Cohomology after an even cochain shift
-status: draft
+status: published
 research_item: lem-author-91088613574d-even-shift
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-author-0cc80c1b5792-valuative-conventions
 kind: lemma
 title: The local valuative convention matches the source convention
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-valuative-dimension-and-boundedness

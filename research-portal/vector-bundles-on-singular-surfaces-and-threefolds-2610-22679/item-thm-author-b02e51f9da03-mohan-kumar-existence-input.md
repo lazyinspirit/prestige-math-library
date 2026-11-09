@@ -1,7 +1,7 @@
 ---
 title: Mohan Kumar existence of a nontrivial stably trivial bundle on a complex
   affine fourfold
-status: draft
+status: published
 research_item: thm-author-b02e51f9da03-mohan-kumar-existence-input
 dependency_level: 3
 ---

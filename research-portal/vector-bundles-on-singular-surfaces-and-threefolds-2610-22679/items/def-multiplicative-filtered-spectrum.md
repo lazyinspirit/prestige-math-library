@@ -2,7 +2,7 @@
 id: def-multiplicative-filtered-spectrum
 kind: definition
 title: Multiplicative filtrations and graded products
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-decreasing-filtered-spectrum

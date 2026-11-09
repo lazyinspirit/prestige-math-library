@@ -2,7 +2,7 @@
 id: lem-adjudicate-1ef158934564-singular-sphere-comparison
 kind: lemma
 title: Singular sphere classes and ordered suspension
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-e0b0bf18ed2b-singular-realization-input

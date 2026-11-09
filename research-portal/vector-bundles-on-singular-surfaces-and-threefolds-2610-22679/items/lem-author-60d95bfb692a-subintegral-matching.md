@@ -2,7 +2,7 @@
 id: lem-author-60d95bfb692a-subintegral-matching
 kind: lemma
 title: Sections match across a finite subintegral cover
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-60d95bfb692a-subintegral-diagonal-cover

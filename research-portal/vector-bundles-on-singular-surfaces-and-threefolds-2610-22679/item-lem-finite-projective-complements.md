@@ -1,6 +1,6 @@
 ---
 title: Finite projective complements
-status: draft
+status: published
 research_item: lem-finite-projective-complements
 dependency_level: 1
 ---

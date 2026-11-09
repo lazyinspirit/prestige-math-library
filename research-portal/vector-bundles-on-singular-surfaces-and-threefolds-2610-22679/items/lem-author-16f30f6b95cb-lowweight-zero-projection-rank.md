@@ -2,7 +2,7 @@
 id: lem-author-16f30f6b95cb-lowweight-zero-projection-rank
 kind: lemma
 title: Weight zero is the locally constant rank function
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-16f30f6b95cb-lowweight-em-map-normalizations

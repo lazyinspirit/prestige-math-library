@@ -1,6 +1,6 @@
 ---
 title: Finite subintegral maps are cdh covers
-status: draft
+status: published
 research_item: lem-author-60d95bfb692a-finite-subintegral-cdh-cover
 dependency_level: 8
 ---

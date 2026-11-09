@@ -1,6 +1,6 @@
 ---
 title: Finite rank strata detect Elmanto-Morrow motivic cohomology
-status: draft
+status: published
 research_item: lem-author-ab0a6fc202cb-motivic-rank-restriction
 dependency_level: 9
 ---

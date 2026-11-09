@@ -2,7 +2,7 @@
 id: thm-author-0cc80c1b5792-stage-bound-input
 kind: theorem
 title: External actual motivic stagewise boundedness
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

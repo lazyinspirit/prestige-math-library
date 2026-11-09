@@ -2,7 +2,7 @@
 id: lem-unit-section-of-k-one-determinant
 kind: lemma
 title: Units split the K one determinant
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nonconnective-k-spectrum-interface

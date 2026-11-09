@@ -1,6 +1,6 @@
 ---
 title: Supported degree-seven vanishing
-status: draft
+status: published
 research_item: lem-curve-supported-degree-seven-vanishing
 dependency_level: 16
 ---

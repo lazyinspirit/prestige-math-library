@@ -1,6 +1,6 @@
 ---
 title: Cycle complexes with fixed support
-status: draft
+status: published
 research_item: def-supported-higher-cycle-complex
 dependency_level: 7
 ---

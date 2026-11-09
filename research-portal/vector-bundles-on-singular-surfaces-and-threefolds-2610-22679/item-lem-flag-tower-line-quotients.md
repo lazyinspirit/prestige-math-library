@@ -1,6 +1,6 @@
 ---
 title: Flag towers with line-bundle quotients
-status: draft
+status: published
 research_item: lem-flag-tower-line-quotients
 dependency_level: 1
 ---

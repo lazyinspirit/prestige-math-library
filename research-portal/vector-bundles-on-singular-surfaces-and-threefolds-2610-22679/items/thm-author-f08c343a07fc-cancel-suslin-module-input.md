@@ -2,7 +2,7 @@
 id: thm-author-f08c343a07fc-cancel-suslin-module-input
 kind: theorem
 title: Suslin cancellation over affine algebras
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

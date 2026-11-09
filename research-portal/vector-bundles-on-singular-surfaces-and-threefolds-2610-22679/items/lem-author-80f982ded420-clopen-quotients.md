@@ -2,7 +2,7 @@
 id: lem-author-80f982ded420-clopen-quotients
 kind: lemma
 title: Levine–Weibel relations split on clopen pure-dimensional components
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-80f982ded420-normal-point-strata

@@ -2,7 +2,7 @@
 id: lem-author-9b6cb358ddc9-actual-second-fiber
 kind: lemma
 title: Actual second-stage comparison on every qcqs field-scheme
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9b6cb358ddc9-local-chains

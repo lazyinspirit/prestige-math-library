@@ -2,7 +2,7 @@
 id: lem-author-75596422a482-quotient-inclusion
 kind: lemma
 title: Restriction modulo its kernel
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-75596422a482-restriction-kernel

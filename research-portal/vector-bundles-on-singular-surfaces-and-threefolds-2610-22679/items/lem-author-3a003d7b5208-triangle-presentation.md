@@ -2,7 +2,7 @@
 id: lem-author-3a003d7b5208-triangle-presentation
 kind: lemma
 title: Cofiber and triangle presentations of K zero
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

@@ -2,7 +2,7 @@
 id: def-author-9b282fc59773-chern-map-and-fibers
 kind: definition
 title: Rank-two Chern map and its fixed-invariant fibers
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

@@ -1,6 +1,6 @@
 ---
 title: External local perfection and summand closure
-status: draft
+status: published
 research_item: thm-author-4f716d60801a-local-perfect-input
 dependency_level: 0
 ---

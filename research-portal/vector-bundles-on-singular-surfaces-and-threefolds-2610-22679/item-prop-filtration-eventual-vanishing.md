@@ -1,6 +1,6 @@
 ---
 title: Eventual homotopy vanishing of the motivic tower
-status: draft
+status: published
 research_item: prop-filtration-eventual-vanishing
 dependency_level: 16
 ---

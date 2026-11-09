@@ -1,6 +1,6 @@
 ---
 title: Suslin cancellation over affine algebras
-status: draft
+status: published
 research_item: thm-author-f08c343a07fc-cancel-suslin-module-input
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Cohomology of an integer shift
-status: draft
+status: published
 research_item: lem-author-80e2d7bee57f-shift-cohomology
 dependency_level: 0
 ---

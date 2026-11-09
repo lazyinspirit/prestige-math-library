@@ -2,7 +2,7 @@
 id: lem-author-c5b0693f4fc3-top-torsion-characteristic-prime
 kind: lemma
 title: Characteristic-prime degree-five vanishing for singular affine threefolds
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

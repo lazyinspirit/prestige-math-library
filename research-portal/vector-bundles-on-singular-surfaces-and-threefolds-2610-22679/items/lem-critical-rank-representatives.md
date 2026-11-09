@@ -2,7 +2,7 @@
 id: lem-critical-rank-representatives
 kind: lemma
 title: Critical-rank representatives of rank-zero classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-serre-affine-splitting

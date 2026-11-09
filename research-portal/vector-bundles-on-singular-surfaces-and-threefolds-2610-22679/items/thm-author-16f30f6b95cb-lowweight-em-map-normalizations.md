@@ -2,7 +2,7 @@
 id: thm-author-16f30f6b95cb-lowweight-em-map-normalizations
 kind: theorem
 title: External EM low-weight maps with fixed positive normalization
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

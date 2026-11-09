@@ -1,6 +1,6 @@
 ---
 title: External exact extension by zero for module sheaves
-status: draft
+status: published
 research_item: thm-author-50b5133c29cc-klocal-extension-by-zero-input
 dependency_level: 1
 ---

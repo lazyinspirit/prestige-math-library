@@ -2,7 +2,7 @@
 id: lem-author-149a02132c3b-restriction-diagram
 kind: lemma
 title: A coherent comparison of the particular open restriction
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

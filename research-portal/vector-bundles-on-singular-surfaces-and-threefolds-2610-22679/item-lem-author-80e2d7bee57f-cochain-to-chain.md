@@ -1,6 +1,6 @@
 ---
 title: Reindexing cochains as chains
-status: draft
+status: published
 research_item: lem-author-80e2d7bee57f-cochain-to-chain
 dependency_level: 0
 ---

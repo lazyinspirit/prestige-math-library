@@ -1,6 +1,6 @@
 ---
 title: Every qcqs cdh generator is an arc covering family
-status: draft
+status: published
 research_item: lem-author-7113c087ecba-generators-arc
 dependency_level: 7
 ---

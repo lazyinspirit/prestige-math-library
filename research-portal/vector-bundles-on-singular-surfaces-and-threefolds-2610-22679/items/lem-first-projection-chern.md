@@ -2,7 +2,7 @@
 id: lem-first-projection-chern
 kind: lemma
 title: First projection is first Chern class
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-filtration-projections

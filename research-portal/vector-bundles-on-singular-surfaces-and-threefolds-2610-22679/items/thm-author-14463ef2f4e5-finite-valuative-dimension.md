@@ -2,7 +2,7 @@
 id: thm-author-14463ef2f4e5-finite-valuative-dimension
 kind: theorem
 title: Finite valuative dimension for noetherian and finite type schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-valuative-dimension-and-boundedness

@@ -2,7 +2,7 @@
 id: lem-author-14463ef2f4e5-noetherian-quotient
 kind: lemma
 title: Prime quotients of noetherian rings
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-14463ef2f4e5-quotient-dimension

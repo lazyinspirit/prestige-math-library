@@ -1,7 +1,7 @@
 ---
 title: A nontrivial rank-two bundle with trivial Chern classes on a smooth
   complex affine fourfold
-status: draft
+status: published
 research_item: cex-stably-trivial-fourfold-bundle
 dependency_level: 23
 ---

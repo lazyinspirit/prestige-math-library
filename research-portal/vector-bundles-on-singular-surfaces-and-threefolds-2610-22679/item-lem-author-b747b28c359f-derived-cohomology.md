@@ -1,6 +1,6 @@
 ---
 title: Cohomology descends to the derived category
-status: draft
+status: published
 research_item: lem-author-b747b28c359f-derived-cohomology
 dependency_level: 3
 ---

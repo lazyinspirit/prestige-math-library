@@ -1,6 +1,6 @@
 ---
 title: Vanishing end groups kill the middle obstruction group
-status: draft
+status: published
 research_item: lem-author-9b282fc59773-zero-obstruction-extension
 dependency_level: 0
 ---

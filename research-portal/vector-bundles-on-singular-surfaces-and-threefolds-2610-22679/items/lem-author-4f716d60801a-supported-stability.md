@@ -2,7 +2,7 @@
 id: lem-author-4f716d60801a-supported-stability
 kind: lemma
 title: Stable supported perfect subcategories and retracts
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-4f716d60801a-derived-enhancement-input

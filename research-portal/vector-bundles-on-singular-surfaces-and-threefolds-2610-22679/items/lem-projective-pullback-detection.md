@@ -2,7 +2,7 @@
 id: lem-projective-pullback-detection
 kind: lemma
 title: Projective bundle pullback detects cohomology classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bigraded-oriented-theory

@@ -1,6 +1,6 @@
 ---
 title: Finite global generation on an affine scheme
-status: draft
+status: published
 research_item: lem-affine-coherent-global-generation
 dependency_level: 0
 ---

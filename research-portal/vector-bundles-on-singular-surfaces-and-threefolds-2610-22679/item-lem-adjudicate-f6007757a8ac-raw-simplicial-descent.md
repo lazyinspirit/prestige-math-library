@@ -1,6 +1,6 @@
 ---
 title: Actual raw simplicial cycles satisfy descent without separatedness
-status: draft
+status: published
 research_item: lem-adjudicate-f6007757a8ac-raw-simplicial-descent
 dependency_level: 6
 ---

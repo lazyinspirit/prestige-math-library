@@ -2,7 +2,7 @@
 id: lem-author-27d786ff4d27-common-core-nonempty
 kind: lemma
 title: A common-core zero curve exists on a nonempty parameter open
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-27d786ff4d27-dual-global-controls

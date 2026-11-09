@@ -1,6 +1,6 @@
 ---
 title: Uniqueness of an initial object
-status: draft
+status: published
 research_item: lem-author-30ec96de6e59-initial-object-uniqueness
 dependency_level: 0
 ---

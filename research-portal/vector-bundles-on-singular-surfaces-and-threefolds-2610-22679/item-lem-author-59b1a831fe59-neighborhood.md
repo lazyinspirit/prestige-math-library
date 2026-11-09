@@ -1,6 +1,6 @@
 ---
 title: A smooth point has the exact finite-type excision pair
-status: draft
+status: published
 research_item: lem-author-59b1a831fe59-neighborhood
 dependency_level: 14
 ---

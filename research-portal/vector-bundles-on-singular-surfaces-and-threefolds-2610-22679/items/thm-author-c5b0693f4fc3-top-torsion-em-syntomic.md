@@ -2,7 +2,7 @@
 id: thm-author-c5b0693f4fc3-top-torsion-em-syntomic
 kind: theorem
 title: External EM affine syntomic filtration and actual obstruction map
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

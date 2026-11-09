@@ -1,6 +1,6 @@
 ---
 title: Mohan Kumar–Murthy rank-three Chow classification
-status: draft
+status: published
 research_item: thm-author-f08c343a07fc-local-kumar-murthy-chow-input
 dependency_level: 13
 ---

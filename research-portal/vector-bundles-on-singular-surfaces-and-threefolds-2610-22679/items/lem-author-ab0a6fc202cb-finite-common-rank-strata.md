@@ -2,7 +2,7 @@
 id: lem-author-ab0a6fc202cb-finite-common-rank-strata
 kind: lemma
 title: Finite clopen common rank strata
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-flag-tower-line-quotients

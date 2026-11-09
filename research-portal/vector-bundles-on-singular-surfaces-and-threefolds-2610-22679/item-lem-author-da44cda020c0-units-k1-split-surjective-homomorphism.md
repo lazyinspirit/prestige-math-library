@@ -1,6 +1,6 @@
 ---
 title: A right inverse makes a homomorphism surjective
-status: draft
+status: published
 research_item: lem-author-da44cda020c0-units-k1-split-surjective-homomorphism
 dependency_level: 0
 ---

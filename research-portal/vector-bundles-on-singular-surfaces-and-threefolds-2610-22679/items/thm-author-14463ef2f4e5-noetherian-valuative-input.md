@@ -2,7 +2,7 @@
 id: thm-author-14463ef2f4e5-noetherian-valuative-input
 kind: theorem
 title: Noetherian domains have equal Krull and valuative dimensions
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

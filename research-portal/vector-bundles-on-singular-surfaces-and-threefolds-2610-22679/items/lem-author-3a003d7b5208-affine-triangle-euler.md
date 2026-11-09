@@ -2,7 +2,7 @@
 id: lem-author-3a003d7b5208-affine-triangle-euler
 kind: lemma
 title: Affine perfect triangle classes and bundle Euler classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-perfect-complexes

@@ -1,6 +1,6 @@
 ---
 title: Evaluation preserves chain homotopies
-status: draft
+status: published
 research_item: lem-author-a44f2061570d-evaluation-homotopy
 dependency_level: 9
 ---

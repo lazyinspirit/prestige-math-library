@@ -2,7 +2,7 @@
 id: lem-reduced-bundle-class-identities
 kind: lemma
 title: Reduced bundle class identities
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

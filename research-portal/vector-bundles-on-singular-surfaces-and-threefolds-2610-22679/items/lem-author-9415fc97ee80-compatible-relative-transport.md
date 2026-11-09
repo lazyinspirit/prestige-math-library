@@ -2,7 +2,7 @@
 id: lem-author-9415fc97ee80-compatible-relative-transport
 kind: lemma
 title: Compatible comparisons transport relative objects and support fibers
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-supported-complex-indexing

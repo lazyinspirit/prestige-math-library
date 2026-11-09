@@ -1,7 +1,7 @@
 ---
 title: External symmetric P¹ model, orientation criterion and fundamental
   stabilization
-status: draft
+status: published
 research_item: thm-author-32887006bdff-p1-spectrum-input
 dependency_level: 0
 ---

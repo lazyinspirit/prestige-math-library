@@ -2,7 +2,7 @@
 id: lem-affine-perfect-k-zero-bridge
 kind: lemma
 title: Affine perfect K zero and bundle K zero
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nonconnective-k-spectrum-interface

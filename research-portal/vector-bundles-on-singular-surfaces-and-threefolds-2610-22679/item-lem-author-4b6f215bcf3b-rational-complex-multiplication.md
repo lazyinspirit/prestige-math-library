@@ -1,6 +1,6 @@
 ---
 title: Integer multiplication on rational complexes
-status: draft
+status: published
 research_item: lem-author-4b6f215bcf3b-rational-complex-multiplication
 dependency_level: 1
 ---

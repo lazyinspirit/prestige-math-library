@@ -1,6 +1,6 @@
 ---
 title: Matrix completion detects the actual nontrivial bundle
-status: draft
+status: published
 research_item: lem-author-b02e51f9da03-matrix-completion
 dependency_level: 2
 ---

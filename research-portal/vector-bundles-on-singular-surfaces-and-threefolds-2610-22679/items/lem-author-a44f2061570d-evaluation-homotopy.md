@@ -2,7 +2,7 @@
 id: lem-author-a44f2061570d-evaluation-homotopy
 kind: lemma
 title: Evaluation preserves chain homotopies
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-a44f2061570d-evaluation-left-exact

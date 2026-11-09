@@ -2,7 +2,7 @@
 id: thm-author-32887006bdff-non-a1-whitney-input
 kind: theorem
 title: External non-A¹ projective-relation filtered and Whitney theorem
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-32887006bdff-p1-spectrum-input

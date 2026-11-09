@@ -2,7 +2,7 @@
 id: lem-author-ab0a6fc202cb-finite-derived-products
 kind: lemma
 title: Finite derived products and motivic coefficient operations
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-derived-cohomology

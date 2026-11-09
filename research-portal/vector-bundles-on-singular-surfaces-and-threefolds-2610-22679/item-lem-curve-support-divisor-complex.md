@@ -1,6 +1,6 @@
 ---
 title: Top cycles supported on an integral curve
-status: draft
+status: published
 research_item: lem-curve-support-divisor-complex
 dependency_level: 12
 ---

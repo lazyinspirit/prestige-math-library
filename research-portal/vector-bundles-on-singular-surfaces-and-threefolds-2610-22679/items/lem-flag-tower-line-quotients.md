@@ -2,7 +2,7 @@
 id: lem-flag-tower-line-quotients
 kind: lemma
 title: Flag towers with line-bundle quotients
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-projective-bundle-represents-line-quotients

@@ -2,7 +2,7 @@
 id: lem-author-4b6f215bcf3b-rational-complex-multiplication
 kind: lemma
 title: Integer multiplication on rational complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4b6f215bcf3b-rational-module-multiplication

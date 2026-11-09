@@ -2,7 +2,7 @@
 id: lem-author-149a02132c3b-divisible-image
 kind: lemma
 title: Divisibility survives the quotient and the support image
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-149a02132c3b-normalization-surjection

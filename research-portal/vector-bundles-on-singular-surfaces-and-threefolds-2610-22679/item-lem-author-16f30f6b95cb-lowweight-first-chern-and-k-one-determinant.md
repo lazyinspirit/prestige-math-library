@@ -1,6 +1,6 @@
 ---
 title: Actual first-Chern and determinant maps of the first EM layer
-status: draft
+status: published
 research_item: lem-author-16f30f6b95cb-lowweight-first-chern-and-k-one-determinant
 dependency_level: 17
 ---

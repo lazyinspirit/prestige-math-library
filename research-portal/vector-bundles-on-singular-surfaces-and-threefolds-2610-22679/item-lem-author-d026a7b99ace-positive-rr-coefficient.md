@@ -1,6 +1,6 @@
 ---
 title: An integral P³ test fixes the supported RR coefficient as positive two
-status: draft
+status: published
 research_item: lem-author-d026a7b99ace-positive-rr-coefficient
 dependency_level: 23
 ---

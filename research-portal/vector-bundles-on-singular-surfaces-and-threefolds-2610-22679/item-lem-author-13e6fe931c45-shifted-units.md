@@ -1,6 +1,6 @@
 ---
 title: Cohomology of shifted Nisnevich units
-status: draft
+status: published
 research_item: lem-author-13e6fe931c45-shifted-units
 dependency_level: 14
 ---

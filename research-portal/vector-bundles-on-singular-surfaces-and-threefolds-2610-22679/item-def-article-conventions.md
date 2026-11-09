@@ -1,6 +1,6 @@
 ---
 title: Article scheme conventions
-status: draft
+status: published
 research_item: def-article-conventions
 dependency_level: 0
 ---

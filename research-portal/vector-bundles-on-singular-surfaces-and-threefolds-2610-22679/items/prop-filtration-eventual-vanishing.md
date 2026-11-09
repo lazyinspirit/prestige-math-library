@@ -2,7 +2,7 @@
 id: prop-filtration-eventual-vanishing
 kind: proposition
 title: Eventual homotopy vanishing of the motivic tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-5eb16844831b-empty-motivic-stages

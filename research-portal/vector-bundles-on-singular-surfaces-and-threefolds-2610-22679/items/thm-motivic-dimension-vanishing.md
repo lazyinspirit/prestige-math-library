@@ -2,7 +2,7 @@
 id: thm-motivic-dimension-vanishing
 kind: theorem
 title: Motivic dimension vanishing
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

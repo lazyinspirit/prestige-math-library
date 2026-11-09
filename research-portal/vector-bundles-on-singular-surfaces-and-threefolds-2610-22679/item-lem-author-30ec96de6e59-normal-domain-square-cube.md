@@ -1,6 +1,6 @@
 ---
 title: Square-cube roots in a normal domain
-status: draft
+status: published
 research_item: lem-author-30ec96de6e59-normal-domain-square-cube
 dependency_level: 1
 ---

@@ -1,6 +1,6 @@
 ---
 title: Length orders on an integral curve
-status: draft
+status: published
 research_item: lem-author-1437578267d2-length-orders
 dependency_level: 0
 ---

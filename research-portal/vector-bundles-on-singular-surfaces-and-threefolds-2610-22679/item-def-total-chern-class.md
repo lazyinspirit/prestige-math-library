@@ -1,6 +1,6 @@
 ---
 title: Total Chern series for actual and virtual bundles
-status: draft
+status: published
 research_item: def-total-chern-class
 dependency_level: 20
 ---

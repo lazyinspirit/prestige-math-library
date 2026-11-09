@@ -2,7 +2,7 @@
 id: lem-author-91088613574d-filtered-images
 kind: lemma
 title: Filtered equivalences preserve image filtrations
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-decreasing-filtered-spectrum

@@ -1,6 +1,6 @@
 ---
 title: External Quillen acyclicity and the actual local free-class model
-status: draft
+status: published
 research_item: thm-author-3cde9692a7e9-plus-model-input
 dependency_level: 18
 ---

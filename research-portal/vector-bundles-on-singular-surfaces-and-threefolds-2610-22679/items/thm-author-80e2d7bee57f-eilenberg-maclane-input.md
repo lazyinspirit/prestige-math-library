@@ -2,7 +2,7 @@
 id: thm-author-80e2d7bee57f-eilenberg-maclane-input
 kind: theorem
 title: Eilenberg–Mac Lane spectrum of a chain complex
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

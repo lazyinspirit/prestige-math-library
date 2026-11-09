@@ -2,7 +2,7 @@
 id: lem-author-4f716d60801a-restriction-support
 kind: lemma
 title: Restriction, stalks and cohomological support
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-4f716d60801a-derived-enhancement-input

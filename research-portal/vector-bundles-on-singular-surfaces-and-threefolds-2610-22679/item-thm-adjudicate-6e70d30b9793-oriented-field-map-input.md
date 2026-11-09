@@ -1,6 +1,6 @@
 ---
 title: Exact primary unit, Picard and smooth-purity inputs for field compatibility
-status: draft
+status: published
 research_item: thm-adjudicate-6e70d30b9793-oriented-field-map-input
 dependency_level: 0
 ---

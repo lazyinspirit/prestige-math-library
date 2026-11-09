@@ -2,7 +2,7 @@
 id: lem-author-60d95bfb692a-subintegral-diagonal-cover
 kind: lemma
 title: The diagonal of a finite subintegral map is a cdh cover
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-seminormal-scheme-interface

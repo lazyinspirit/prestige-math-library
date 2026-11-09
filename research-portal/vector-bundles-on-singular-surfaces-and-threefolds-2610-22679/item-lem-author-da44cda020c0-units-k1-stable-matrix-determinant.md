@@ -1,6 +1,6 @@
 ---
 title: Determinant on the stable general linear group
-status: draft
+status: published
 research_item: lem-author-da44cda020c0-units-k1-stable-matrix-determinant
 dependency_level: 0
 ---

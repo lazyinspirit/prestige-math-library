@@ -2,7 +2,7 @@
 id: lem-author-14463ef2f4e5-quotient-dimension
 kind: lemma
 title: Dimension decreases under quotients
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-valuative-dimension-and-boundedness

@@ -1,6 +1,6 @@
 ---
 title: The actual finite-quotient map to cdh-local motivic cohomology
-status: draft
+status: published
 research_item: lem-author-e71ff76fe904-finite-quotient-comparison
 dependency_level: 9
 ---

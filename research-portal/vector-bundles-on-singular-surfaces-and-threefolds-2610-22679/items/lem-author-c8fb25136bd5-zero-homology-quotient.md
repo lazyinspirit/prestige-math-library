@@ -2,7 +2,7 @@
 id: lem-author-c8fb25136bd5-zero-homology-quotient
 kind: lemma
 title: The degree-zero homology quotient
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

@@ -1,6 +1,6 @@
 ---
 title: Lifting the corrected class to the curve-supported third stage
-status: draft
+status: published
 research_item: lem-lift-curve-supported-filtration
 dependency_level: 31
 ---

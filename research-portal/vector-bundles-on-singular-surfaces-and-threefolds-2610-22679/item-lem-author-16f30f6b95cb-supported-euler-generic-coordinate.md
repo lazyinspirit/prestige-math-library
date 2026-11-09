@@ -1,6 +1,6 @@
 ---
 title: The actual supported Euler class has the generic length coordinate
-status: draft
+status: published
 research_item: lem-author-16f30f6b95cb-supported-euler-generic-coordinate
 dependency_level: 16
 ---

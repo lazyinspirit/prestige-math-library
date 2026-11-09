@@ -1,6 +1,6 @@
 ---
 title: Dense-open isomorphism for proper birational maps
-status: draft
+status: published
 research_item: thm-adjudicate-57a7caabd963-birational-dense-open-input
 dependency_level: 0
 ---

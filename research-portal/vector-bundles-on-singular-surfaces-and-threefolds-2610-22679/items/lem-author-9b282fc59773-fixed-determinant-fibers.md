@@ -2,7 +2,7 @@
 id: lem-author-9b282fc59773-fixed-determinant-fibers
 kind: lemma
 title: Fixed determinant isolates the actual Chern fiber
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-9b282fc59773-chern-map-and-fibers

@@ -1,6 +1,6 @@
 ---
 title: The actual big cdh slice over a field
-status: draft
+status: published
 research_item: lem-author-2ac325480ae8-slice-site
 dependency_level: 7
 ---

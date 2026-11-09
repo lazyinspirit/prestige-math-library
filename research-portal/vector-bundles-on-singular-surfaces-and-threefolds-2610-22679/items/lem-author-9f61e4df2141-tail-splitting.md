@@ -2,7 +2,7 @@
 id: lem-author-9f61e4df2141-tail-splitting
 kind: lemma
 title: Graded pieces of a direct-sum tail tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-decreasing-filtered-spectrum

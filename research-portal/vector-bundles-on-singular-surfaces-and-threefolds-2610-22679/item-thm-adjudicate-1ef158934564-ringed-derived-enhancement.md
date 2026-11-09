@@ -1,6 +1,6 @@
 ---
 title: Derived enhancements of module sheaves on ringed spaces
-status: draft
+status: published
 research_item: thm-adjudicate-1ef158934564-ringed-derived-enhancement
 dependency_level: 0
 ---

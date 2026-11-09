@@ -1,6 +1,6 @@
 ---
 title: Coordinate faces of the algebraic simplex
-status: draft
+status: published
 research_item: lem-author-89250b1d710c-face-coordinate-geometry
 dependency_level: 0
 ---

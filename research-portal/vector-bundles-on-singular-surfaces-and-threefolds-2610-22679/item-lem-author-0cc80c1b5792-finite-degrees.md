@@ -1,6 +1,6 @@
 ---
 title: Degreewise boundedness and finite collections of eventual vanishings
-status: draft
+status: published
 research_item: lem-author-0cc80c1b5792-finite-degrees
 dependency_level: 15
 ---

@@ -2,7 +2,7 @@
 id: lem-author-fc2380accb47-normal-smooth-strata
 kind: lemma
 title: Normal affine threefolds have controlled nonsmooth strata
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-fc2380accb47-normal-geometric-input

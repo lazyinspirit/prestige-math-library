@@ -1,6 +1,6 @@
 ---
 title: Cycle coefficients and face intersections are open local
-status: draft
+status: published
 research_item: lem-author-89250b1d710c-cycle-open-locality
 dependency_level: 0
 ---

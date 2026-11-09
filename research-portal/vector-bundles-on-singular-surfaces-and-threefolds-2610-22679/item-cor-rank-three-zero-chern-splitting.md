@@ -1,6 +1,6 @@
 ---
 title: Third Chern vanishing and a trivial summand
-status: draft
+status: published
 research_item: cor-rank-three-zero-chern-splitting
 dependency_level: 34
 ---

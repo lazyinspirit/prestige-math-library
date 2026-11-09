@@ -1,6 +1,6 @@
 ---
 title: Nisnevich covers and distinguished squares
-status: draft
+status: published
 research_item: def-nisnevich-covering-interface
 dependency_level: 6
 ---

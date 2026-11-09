@@ -1,7 +1,7 @@
 ---
 title: Integral oriented field coefficient comparison with actual Picard and
   support maps
-status: draft
+status: published
 research_item: thm-author-d026a7b99ace-integral-field-model
 dependency_level: 21
 ---

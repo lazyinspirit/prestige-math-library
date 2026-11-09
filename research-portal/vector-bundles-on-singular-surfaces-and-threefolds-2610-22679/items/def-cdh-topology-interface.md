@@ -2,7 +2,7 @@
 id: def-cdh-topology-interface
 kind: definition
 title: Completely decomposed proper covers and the cdh topology
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nisnevich-covering-interface

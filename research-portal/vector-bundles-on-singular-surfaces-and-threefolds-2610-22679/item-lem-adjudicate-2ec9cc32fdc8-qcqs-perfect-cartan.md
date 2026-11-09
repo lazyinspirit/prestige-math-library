@@ -1,6 +1,6 @@
 ---
 title: Coefficientwise perfect Cartan on every qcqs field-scheme
-status: draft
+status: published
 research_item: lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan
 dependency_level: 22
 ---

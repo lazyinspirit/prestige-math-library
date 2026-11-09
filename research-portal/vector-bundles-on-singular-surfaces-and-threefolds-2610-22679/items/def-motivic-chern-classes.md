@@ -2,7 +2,7 @@
 id: def-motivic-chern-classes
 kind: definition
 title: Motivic Chern classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

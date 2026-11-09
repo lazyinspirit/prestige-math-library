@@ -2,7 +2,7 @@
 id: lem-author-3af31ead36fb-iteration
 kind: lemma
 title: Iterating a conditional free-summand criterion
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-3af31ead36fb-split-complement

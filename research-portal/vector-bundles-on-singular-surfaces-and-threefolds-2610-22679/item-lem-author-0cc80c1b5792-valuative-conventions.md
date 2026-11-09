@@ -1,6 +1,6 @@
 ---
 title: The local valuative convention matches the source convention
-status: draft
+status: published
 research_item: lem-author-0cc80c1b5792-valuative-conventions
 dependency_level: 7
 ---

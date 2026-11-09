@@ -2,7 +2,7 @@
 id: lem-author-59b1a831fe59-relative-gysin
 kind: lemma
 title: The identified support fiber is the classical relative Hom before Gysin
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-59b1a831fe59-neighborhood

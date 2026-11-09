@@ -2,7 +2,7 @@
 id: lem-author-c5b0693f4fc3-top-torsion-syntomic-bound
 kind: lemma
 title: Affine characteristic-p syntomic amplitude without regularity
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-c5b0693f4fc3-top-torsion-em-syntomic

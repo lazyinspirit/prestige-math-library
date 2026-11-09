@@ -1,7 +1,7 @@
 ---
 title: External classical coefficient, derived Yoneda and effective-localization
   interface
-status: draft
+status: published
 research_item: thm-author-59b1a831fe59-classical-derived-input
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-author-fc2380accb47-coordinate-first-jets
 kind: lemma
 title: Coordinate multiples of dual generators span all first jets
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-coherent-global-generation

@@ -2,7 +2,7 @@
 id: lem-author-50b5133c29cc-klocal-enhanced-localization
 kind: lemma
 title: The actual enhanced restriction sequence and its K fiber
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

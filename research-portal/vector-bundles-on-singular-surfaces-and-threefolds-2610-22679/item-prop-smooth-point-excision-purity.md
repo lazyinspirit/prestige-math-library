@@ -1,6 +1,6 @@
 ---
 title: Excision and K theory purity at a smooth closed point
-status: draft
+status: published
 research_item: prop-smooth-point-excision-purity
 dependency_level: 15
 ---

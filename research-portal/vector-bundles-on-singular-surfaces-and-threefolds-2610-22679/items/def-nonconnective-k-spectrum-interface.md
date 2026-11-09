@@ -2,7 +2,7 @@
 id: def-nonconnective-k-spectrum-interface
 kind: definition
 title: Nonconnective K theory of perfect complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-c5bc2838d897-kcoherent-nonconnective-functor-products

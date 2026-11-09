@@ -1,6 +1,6 @@
 ---
 title: Exact valuation inputs for the topology comparison
-status: draft
+status: published
 research_item: thm-author-7113c087ecba-valuative-input
 dependency_level: 0
 ---

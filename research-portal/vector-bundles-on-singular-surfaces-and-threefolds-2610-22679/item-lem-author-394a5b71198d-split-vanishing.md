@@ -1,6 +1,6 @@
 ---
 title: A split trivial line annihilates the exterior and top Chow classes
-status: draft
+status: published
 research_item: lem-author-394a5b71198d-split-vanishing
 dependency_level: 14
 ---

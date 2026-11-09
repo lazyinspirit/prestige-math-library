@@ -2,7 +2,7 @@
 id: lem-clopen-finite-constant-maps
 kind: lemma
 title: Maps to finite disjoint unions of the base
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-scheme-over-base

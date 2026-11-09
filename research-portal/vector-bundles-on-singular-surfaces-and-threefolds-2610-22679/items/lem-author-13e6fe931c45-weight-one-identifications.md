@@ -2,7 +2,7 @@
 id: lem-author-13e6fe931c45-weight-one-identifications
 kind: lemma
 title: Low-degree consequences of a weight-one comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

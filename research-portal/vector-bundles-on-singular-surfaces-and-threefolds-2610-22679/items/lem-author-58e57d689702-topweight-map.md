@@ -2,7 +2,7 @@
 id: lem-author-58e57d689702-topweight-map
 kind: lemma
 title: The full top-weight map with its exact factorization
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-c5b0693f4fc3-top-torsion-topweight-comparison

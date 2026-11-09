@@ -2,7 +2,7 @@
 id: thm-author-4f716d60801a-derived-enhancement-input
 kind: theorem
 title: External input on derived enhancements
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

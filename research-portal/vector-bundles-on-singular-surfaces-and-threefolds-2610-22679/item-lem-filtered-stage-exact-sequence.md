@@ -1,6 +1,6 @@
 ---
 title: Stage projections, kernels and image groups
-status: draft
+status: published
 research_item: lem-filtered-stage-exact-sequence
 dependency_level: 5
 ---

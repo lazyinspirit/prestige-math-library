@@ -2,7 +2,7 @@
 id: thm-author-1437578267d2-curve-norm-input
 kind: theorem
 title: External norm-divisor identity for integral curves
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

@@ -3,7 +3,7 @@ id: lem-author-e216acade157-actual-fiber-comparison
 kind: lemma
 title: The second-stage projection is minus the actual second Chern map on its
   homotopy fiber
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-e216acade157-split-determinant-fiber

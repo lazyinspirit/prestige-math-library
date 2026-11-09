@@ -3,7 +3,7 @@ id: thm-author-59b1a831fe59-classical-derived-input
 kind: theorem
 title: External classical coefficient, derived Yoneda and effective-localization
   interface
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

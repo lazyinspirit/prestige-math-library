@@ -1,6 +1,6 @@
 ---
 title: The divisor presentation and actual Picard surjection
-status: draft
+status: published
 research_item: lem-author-149a02132c3b-normalization-surjection
 dependency_level: 17
 ---

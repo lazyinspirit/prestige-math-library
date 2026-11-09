@@ -1,6 +1,6 @@
 ---
 title: Fixed-site classical cycle comparison on every smooth ambient
-status: draft
+status: published
 research_item: thm-author-8a080e7d9445-open-natural-classical-input
 dependency_level: 10
 ---

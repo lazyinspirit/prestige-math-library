@@ -1,6 +1,6 @@
 ---
 title: Cylinder and zero section of a smooth affine surface
-status: draft
+status: published
 research_item: lem-author-f08c343a07fc-local-cylinder-geometry
 dependency_level: 0
 ---

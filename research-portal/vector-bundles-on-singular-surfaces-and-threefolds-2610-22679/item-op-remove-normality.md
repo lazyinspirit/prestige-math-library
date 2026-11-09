@@ -1,6 +1,6 @@
 ---
 title: Removing normality from the article results
-status: draft
+status: published
 research_item: op-remove-normality
 dependency_level: 21
 ---

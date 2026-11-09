@@ -2,7 +2,7 @@
 id: thm-author-27d786ff4d27-relative-jacobian-openness
 kind: theorem
 title: External relative Jacobian criterion and openness of smooth maps
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

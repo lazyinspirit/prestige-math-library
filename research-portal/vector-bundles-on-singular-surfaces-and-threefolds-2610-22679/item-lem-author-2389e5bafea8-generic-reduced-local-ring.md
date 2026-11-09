@@ -1,6 +1,6 @@
 ---
 title: Generic local rings of reduced schemes
-status: draft
+status: published
 research_item: lem-author-2389e5bafea8-generic-reduced-local-ring
 dependency_level: 0
 ---

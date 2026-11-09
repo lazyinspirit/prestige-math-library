@@ -1,7 +1,7 @@
 ---
 title: The actual supported third edge sends the positive point class to its
   residue object
-status: draft
+status: published
 research_item: lem-author-d026a7b99ace-actual-edge
 dependency_level: 22
 ---

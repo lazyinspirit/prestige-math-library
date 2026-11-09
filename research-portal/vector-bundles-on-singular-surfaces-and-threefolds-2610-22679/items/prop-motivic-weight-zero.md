@@ -2,7 +2,7 @@
 id: prop-motivic-weight-zero
 kind: proposition
 title: Motivic weight zero on all qcqs schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

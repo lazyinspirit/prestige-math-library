@@ -2,7 +2,7 @@
 id: lem-author-13e6fe931c45-shifted-units
 kind: lemma
 title: Cohomology of shifted Nisnevich units
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-derived-sections-on-sites

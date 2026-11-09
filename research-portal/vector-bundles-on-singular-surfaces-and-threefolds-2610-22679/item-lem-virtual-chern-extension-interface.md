@@ -1,6 +1,6 @@
 ---
 title: Extending a Whitney class to K zero
-status: draft
+status: published
 research_item: lem-virtual-chern-extension-interface
 dependency_level: 1
 ---

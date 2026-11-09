@@ -2,7 +2,7 @@
 id: lem-author-16f30f6b95cb-lowweight-first-chern-and-k-one-determinant
 kind: lemma
 title: Actual first-Chern and determinant maps of the first EM layer
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-16f30f6b95cb-lowweight-em-map-normalizations

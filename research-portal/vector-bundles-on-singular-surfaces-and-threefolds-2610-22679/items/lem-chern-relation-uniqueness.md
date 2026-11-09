@@ -2,7 +2,7 @@
 id: lem-chern-relation-uniqueness
 kind: lemma
 title: Chern coefficients of the projective relation
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bigraded-oriented-theory

@@ -2,7 +2,7 @@
 id: lem-author-75596422a482-face-support
 kind: lemma
 title: Face boundaries preserve closed support
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

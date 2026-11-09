@@ -2,7 +2,7 @@
 id: def-exterior-determinant-bundles
 kind: definition
 title: Exterior powers and determinant of an algebraic bundle
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-locally-free-sheaf-finite-rank

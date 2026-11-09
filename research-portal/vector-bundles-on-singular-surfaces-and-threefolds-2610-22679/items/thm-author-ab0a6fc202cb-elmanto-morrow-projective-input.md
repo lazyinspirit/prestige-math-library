@@ -2,7 +2,7 @@
 id: thm-author-ab0a6fc202cb-elmanto-morrow-projective-input
 kind: theorem
 title: External projective bundle input for the actual motivic complex
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

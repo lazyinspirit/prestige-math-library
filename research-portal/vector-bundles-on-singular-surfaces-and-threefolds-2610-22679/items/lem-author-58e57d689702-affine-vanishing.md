@@ -2,7 +2,7 @@
 id: lem-author-58e57d689702-affine-vanishing
 kind: lemma
 title: Affine Artin bound and its consequence after localization
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

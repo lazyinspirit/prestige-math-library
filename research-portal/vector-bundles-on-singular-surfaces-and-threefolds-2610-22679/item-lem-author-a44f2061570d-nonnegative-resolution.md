@@ -1,6 +1,6 @@
 ---
 title: Negative cohomology of a nonnegative evaluated complex
-status: draft
+status: published
 research_item: lem-author-a44f2061570d-nonnegative-resolution
 dependency_level: 10
 ---

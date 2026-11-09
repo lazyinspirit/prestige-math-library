@@ -1,6 +1,6 @@
 ---
 title: Supported perfect complexes are invariant under an open neighbourhood
-status: draft
+status: published
 research_item: lem-author-50b5133c29cc-klocal-supported-open-equivalence
 dependency_level: 10
 ---

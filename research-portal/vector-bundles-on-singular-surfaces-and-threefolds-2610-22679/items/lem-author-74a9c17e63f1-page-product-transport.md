@@ -2,7 +2,7 @@
 id: lem-author-74a9c17e63f1-page-product-transport
 kind: lemma
 title: Identifying all spectral-sequence pages with the source multiplicative pages
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

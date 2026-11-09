@@ -2,7 +2,7 @@
 id: lem-author-58e57d689702-evaluation-equivalence
 kind: lemma
 title: Cancellation at the required dimension-bounded evaluation objects
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

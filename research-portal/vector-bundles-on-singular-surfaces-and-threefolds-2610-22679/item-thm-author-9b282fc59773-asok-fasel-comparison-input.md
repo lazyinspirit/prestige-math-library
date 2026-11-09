@@ -1,6 +1,6 @@
 ---
 title: Asok–Fasel Chern-compatible comparison and lifting input
-status: draft
+status: published
 research_item: thm-author-9b282fc59773-asok-fasel-comparison-input
 dependency_level: 13
 ---

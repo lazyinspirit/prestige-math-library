@@ -2,7 +2,7 @@
 id: lem-author-4b6f215bcf3b-rational-derived-quotient
 kind: lemma
 title: Finite derived quotients of rational complexes vanish
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4b6f215bcf3b-rational-complex-multiplication

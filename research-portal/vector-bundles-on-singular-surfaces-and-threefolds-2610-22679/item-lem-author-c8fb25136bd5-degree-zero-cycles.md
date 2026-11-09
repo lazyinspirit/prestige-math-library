@@ -1,6 +1,6 @@
 ---
 title: Degree-zero Bloch cycles are ordinary cycles
-status: draft
+status: published
 research_item: lem-author-c8fb25136bd5-degree-zero-cycles
 dependency_level: 4
 ---

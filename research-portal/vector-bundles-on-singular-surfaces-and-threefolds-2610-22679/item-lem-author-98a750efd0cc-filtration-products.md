@@ -1,6 +1,6 @@
 ---
 title: Products of filtration images
-status: draft
+status: published
 research_item: lem-author-98a750efd0cc-filtration-products
 dependency_level: 6
 ---

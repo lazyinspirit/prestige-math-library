@@ -1,6 +1,6 @@
 ---
 title: Open subsets containing generic points are componentwise dense
-status: draft
+status: published
 research_item: lem-author-2389e5bafea8-open-generic-density
 dependency_level: 0
 ---

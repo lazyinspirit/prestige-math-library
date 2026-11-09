@@ -4,7 +4,7 @@ description: Assemble all 96 original article items, every coverage
   representative and their immediate suppliers, including published library
   references. Display all 69 intermediate prerequisites while retaining their
   earlier authoring homes, source boundaries and draft status.
-status: draft
+status: published
 dependency_level: 4
 ---
 

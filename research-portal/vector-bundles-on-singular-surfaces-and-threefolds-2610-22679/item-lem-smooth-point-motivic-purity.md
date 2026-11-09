@@ -1,6 +1,6 @@
 ---
 title: Motivic purity and lower-weight vanishing at a smooth closed point
-status: draft
+status: published
 research_item: lem-smooth-point-motivic-purity
 dependency_level: 17
 ---

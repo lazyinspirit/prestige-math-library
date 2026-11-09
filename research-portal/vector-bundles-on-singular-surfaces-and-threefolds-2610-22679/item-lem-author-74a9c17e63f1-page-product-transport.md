@@ -1,6 +1,6 @@
 ---
 title: Identifying all spectral-sequence pages with the source multiplicative pages
-status: draft
+status: published
 research_item: lem-author-74a9c17e63f1-page-product-transport
 dependency_level: 16
 ---

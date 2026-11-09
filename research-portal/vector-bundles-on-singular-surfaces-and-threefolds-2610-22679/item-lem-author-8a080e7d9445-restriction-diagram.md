@@ -1,6 +1,6 @@
 ---
 title: A coherent comparison of the particular open restriction
-status: draft
+status: published
 research_item: lem-author-8a080e7d9445-restriction-diagram
 dependency_level: 11
 ---

@@ -1,6 +1,6 @@
 ---
 title: Generic rank and point-supported classes on a curve
-status: draft
+status: published
 research_item: lem-curve-generic-rank-localization
 dependency_level: 15
 ---

@@ -1,6 +1,6 @@
 ---
 title: The field comparison preserves refined smooth Gysin and the point class
-status: draft
+status: published
 research_item: lem-adjudicate-6e70d30b9793-smooth-supported-gysin-transport
 dependency_level: 20
 ---

@@ -1,6 +1,6 @@
 ---
 title: Nonconnective K theory in degree zero
-status: draft
+status: published
 research_item: thm-author-3a003d7b5208-nonconnective-k-zero-input
 dependency_level: 0
 ---

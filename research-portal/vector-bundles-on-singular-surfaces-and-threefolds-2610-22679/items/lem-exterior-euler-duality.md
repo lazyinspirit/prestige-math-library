@@ -2,7 +2,7 @@
 id: lem-exterior-euler-duality
 kind: lemma
 title: Dual conventions for the exterior Euler class
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-exterior-determinant-bundles

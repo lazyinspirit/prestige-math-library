@@ -1,6 +1,6 @@
 ---
 title: The restricted BEM complex and the supplied EM finite quotient
-status: draft
+status: published
 research_item: lem-author-2ac325480ae8-motivic-restriction-coefficients
 dependency_level: 10
 ---

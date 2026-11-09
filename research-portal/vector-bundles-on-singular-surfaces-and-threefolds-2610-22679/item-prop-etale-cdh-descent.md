@@ -1,6 +1,6 @@
 ---
 title: Étale derived cdh locality on the actual qcqs site
-status: draft
+status: published
 research_item: prop-etale-cdh-descent
 dependency_level: 14
 ---

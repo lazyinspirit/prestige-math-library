@@ -1,6 +1,6 @@
 ---
 title: Normal dimension strata and the actual residue class model
-status: draft
+status: published
 research_item: lem-author-80f982ded420-normal-point-strata
 dependency_level: 17
 ---

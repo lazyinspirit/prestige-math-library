@@ -1,6 +1,6 @@
 ---
 title: A sheaf restricts injectively to a covering singleton
-status: draft
+status: published
 research_item: lem-author-60d95bfb692a-cover-restriction-injective
 dependency_level: 6
 ---

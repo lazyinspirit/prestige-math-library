@@ -1,6 +1,6 @@
 ---
 title: External canonical top-weight motivic-to-syntomic comparison
-status: draft
+status: published
 research_item: thm-author-c5b0693f4fc3-top-torsion-topweight-comparison
 dependency_level: 10
 ---

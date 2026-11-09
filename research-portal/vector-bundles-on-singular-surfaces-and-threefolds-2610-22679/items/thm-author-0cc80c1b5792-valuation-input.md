@@ -2,7 +2,7 @@
 id: thm-author-0cc80c1b5792-valuation-input
 kind: theorem
 title: External valuative dimension comparison on locally Noetherian schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-valuative-dimension-and-boundedness

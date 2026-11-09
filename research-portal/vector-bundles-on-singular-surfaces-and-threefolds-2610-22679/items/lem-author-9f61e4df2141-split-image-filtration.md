@@ -2,7 +2,7 @@
 id: lem-author-9f61e4df2141-split-image-filtration
 kind: lemma
 title: Image filtration for a split tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-decreasing-filtered-spectrum

@@ -1,6 +1,6 @@
 ---
 title: External norm-divisor identity for integral curves
-status: draft
+status: published
 research_item: thm-author-1437578267d2-curve-norm-input
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Eilenberg–Mac Lane spectrum of a chain complex
-status: draft
+status: published
 research_item: thm-author-80e2d7bee57f-eilenberg-maclane-input
 dependency_level: 0
 ---

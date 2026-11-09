@@ -1,6 +1,6 @@
 ---
 title: The low-dimensional quotient follows from the stage sequence
-status: draft
+status: published
 research_item: lem-author-e216acade157-low-dimensional-quotient
 dependency_level: 26
 ---

@@ -1,6 +1,6 @@
 ---
 title: The exact cdh-local-to-objectwise étale map
-status: draft
+status: published
 research_item: lem-author-e71ff76fe904-cdh-induced-map
 dependency_level: 1
 ---

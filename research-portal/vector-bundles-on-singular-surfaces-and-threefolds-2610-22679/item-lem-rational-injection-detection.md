@@ -1,6 +1,6 @@
 ---
 title: Detecting injectivity by rationalization
-status: draft
+status: published
 research_item: lem-rational-injection-detection
 dependency_level: 0
 ---

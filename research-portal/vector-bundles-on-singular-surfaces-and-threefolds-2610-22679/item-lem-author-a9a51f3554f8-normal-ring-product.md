@@ -1,6 +1,6 @@
 ---
 title: A normal noetherian ring is a finite product of normal domains
-status: draft
+status: published
 research_item: lem-author-a9a51f3554f8-normal-ring-product
 dependency_level: 0
 ---

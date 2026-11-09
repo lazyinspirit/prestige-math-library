@@ -1,6 +1,6 @@
 ---
 title: Determinants and exact sequences
-status: draft
+status: published
 research_item: lem-determinants-of-short-exact-sequences
 dependency_level: 1
 ---

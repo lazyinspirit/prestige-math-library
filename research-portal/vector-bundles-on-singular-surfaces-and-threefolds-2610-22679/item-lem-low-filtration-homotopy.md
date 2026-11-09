@@ -1,6 +1,6 @@
 ---
 title: Low-stage homotopy equals its image
-status: draft
+status: published
 research_item: lem-low-filtration-homotopy
 dependency_level: 20
 ---

@@ -2,7 +2,7 @@
 id: thm-adjudicate-16c74c1a77ef-finite-type-cycle-geometry-input
 kind: theorem
 title: Regularity and dimensions for finite-type cycle arguments
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

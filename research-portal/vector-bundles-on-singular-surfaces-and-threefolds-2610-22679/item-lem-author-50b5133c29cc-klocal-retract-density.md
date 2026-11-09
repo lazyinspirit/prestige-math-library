@@ -1,6 +1,6 @@
 ---
 title: Every open perfect complex is a retract of a restriction
-status: draft
+status: published
 research_item: lem-author-50b5133c29cc-klocal-retract-density
 dependency_level: 12
 ---

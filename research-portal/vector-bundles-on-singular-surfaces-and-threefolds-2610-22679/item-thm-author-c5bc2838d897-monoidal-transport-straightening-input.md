@@ -1,6 +1,6 @@
 ---
 title: External straightening and symmetric monoidal criteria
-status: draft
+status: published
 research_item: thm-author-c5bc2838d897-monoidal-transport-straightening-input
 dependency_level: 0
 ---

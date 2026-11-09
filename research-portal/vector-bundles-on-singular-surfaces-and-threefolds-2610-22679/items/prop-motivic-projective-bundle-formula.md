@@ -2,7 +2,7 @@
 id: prop-motivic-projective-bundle-formula
 kind: proposition
 title: Motivic projective bundle formula
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

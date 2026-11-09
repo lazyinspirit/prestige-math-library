@@ -1,6 +1,6 @@
 ---
 title: Divisibility of the Picard group of an affine curve
-status: draft
+status: published
 research_item: prop-affine-curve-picard-divisible
 dependency_level: 3
 ---

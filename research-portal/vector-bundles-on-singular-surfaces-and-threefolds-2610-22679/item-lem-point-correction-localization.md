@@ -1,6 +1,6 @@
 ---
 title: Removing isolated points from the support
-status: draft
+status: published
 research_item: lem-point-correction-localization
 dependency_level: 30
 ---

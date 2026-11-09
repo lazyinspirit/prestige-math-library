@@ -2,7 +2,7 @@
 id: lem-author-a44f2061570d-evaluation-left-exact
 kind: lemma
 title: Evaluation preserves kernels
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-a44f2061570d-kernel-sheaf

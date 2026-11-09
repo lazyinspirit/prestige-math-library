@@ -2,7 +2,7 @@
 id: thm-author-7ef3227685d9-supported-k0-regular-cohomology-input
 kind: theorem
 title: External regular perfection and the standard derived t structure
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-perfect-complexes

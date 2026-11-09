@@ -1,6 +1,6 @@
 ---
 title: Reindexing commutes with shifts
-status: draft
+status: published
 research_item: lem-author-80e2d7bee57f-chain-shift-reindex
 dependency_level: 1
 ---

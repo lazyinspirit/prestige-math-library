@@ -2,7 +2,7 @@
 id: def-etale-tate-coefficients
 kind: definition
 title: Roots of unity and étale Tate twists
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

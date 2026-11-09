@@ -2,7 +2,7 @@
 id: lem-author-fc2380accb47-simultaneous-good-parameters
 kind: lemma
 title: One nonempty parameter open gives smooth-locus avoidance and transversality
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-fc2380accb47-normal-smooth-strata

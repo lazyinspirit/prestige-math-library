@@ -1,6 +1,6 @@
 ---
 title: Stable triviality as the kernel of a right-invertible matrix
-status: draft
+status: published
 research_item: lem-author-b02e51f9da03-matrix-kernel
 dependency_level: 1
 ---

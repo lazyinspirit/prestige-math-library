@@ -2,7 +2,7 @@
 id: thm-author-2ac325480ae8-bem-field-model
 kind: theorem
 title: External canonical field restriction identifies the BEM and EM cdh models
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-0bac6b264f4a-motivic-dim-cdh-interface-input

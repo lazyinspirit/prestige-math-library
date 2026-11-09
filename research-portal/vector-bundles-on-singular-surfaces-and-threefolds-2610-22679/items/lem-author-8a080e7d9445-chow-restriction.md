@@ -2,7 +2,7 @@
 id: lem-author-8a080e7d9445-chow-restriction
 kind: lemma
 title: Actual Chow localization gives surjectivity of the motivic arrow
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-8a080e7d9445-restriction-diagram

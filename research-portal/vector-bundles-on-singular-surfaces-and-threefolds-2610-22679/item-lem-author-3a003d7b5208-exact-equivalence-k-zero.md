@@ -1,6 +1,6 @@
 ---
 title: Exact equivalences preserve triangle K zero
-status: draft
+status: published
 research_item: lem-author-3a003d7b5208-exact-equivalence-k-zero
 dependency_level: 0
 ---

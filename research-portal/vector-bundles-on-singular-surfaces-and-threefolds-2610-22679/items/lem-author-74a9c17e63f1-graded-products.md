@@ -2,7 +2,7 @@
 id: lem-author-74a9c17e63f1-graded-products
 kind: lemma
 title: The product on graded motivic groups is the source cup product
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

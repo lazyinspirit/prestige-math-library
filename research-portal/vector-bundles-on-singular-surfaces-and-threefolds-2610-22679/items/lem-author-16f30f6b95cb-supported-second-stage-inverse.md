@@ -2,7 +2,7 @@
 id: lem-author-16f30f6b95cb-supported-second-stage-inverse
 kind: lemma
 title: The supported second stage has the actual augmentation inverse
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

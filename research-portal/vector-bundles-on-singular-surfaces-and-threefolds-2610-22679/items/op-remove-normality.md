@@ -2,7 +2,7 @@
 id: op-remove-normality
 kind: open-problem
 title: Removing normality from the article results
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

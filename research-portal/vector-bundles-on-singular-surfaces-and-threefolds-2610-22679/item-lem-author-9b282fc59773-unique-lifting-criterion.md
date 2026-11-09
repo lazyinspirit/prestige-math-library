@@ -1,6 +1,6 @@
 ---
 title: Unique lifting from vanishing groups yields the Chern classification
-status: draft
+status: published
 research_item: lem-author-9b282fc59773-unique-lifting-criterion
 dependency_level: 15
 ---

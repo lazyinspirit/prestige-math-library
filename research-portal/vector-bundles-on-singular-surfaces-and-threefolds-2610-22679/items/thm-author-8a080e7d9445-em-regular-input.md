@@ -2,7 +2,7 @@
 id: thm-author-8a080e7d9445-em-regular-input
 kind: theorem
 title: Exact natural regular motivic-to-cdh comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

@@ -2,7 +2,7 @@
 id: lem-author-b87d598e83f3-unique-roots-torsion
 kind: lemma
 title: Unique divisibility excludes torsion
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

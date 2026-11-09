@@ -1,6 +1,6 @@
 ---
 title: Frames and their transition units
-status: draft
+status: published
 research_item: lem-author-8e1c0251ef0d-frame-transitions
 dependency_level: 7
 ---

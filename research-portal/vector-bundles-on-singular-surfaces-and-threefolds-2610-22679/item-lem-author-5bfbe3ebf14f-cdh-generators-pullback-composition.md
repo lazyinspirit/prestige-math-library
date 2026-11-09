@@ -1,6 +1,6 @@
 ---
 title: Pullback and composition of the cdh generating families
-status: draft
+status: published
 research_item: lem-author-5bfbe3ebf14f-cdh-generators-pullback-composition
 dependency_level: 8
 ---

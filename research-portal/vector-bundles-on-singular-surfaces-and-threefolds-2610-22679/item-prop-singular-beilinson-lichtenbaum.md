@@ -1,6 +1,6 @@
 ---
 title: Singular Beilinson–Lichtenbaum input
-status: draft
+status: published
 research_item: prop-singular-beilinson-lichtenbaum
 dependency_level: 13
 ---

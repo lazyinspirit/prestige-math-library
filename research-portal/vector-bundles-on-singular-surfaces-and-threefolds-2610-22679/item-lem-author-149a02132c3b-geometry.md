@@ -1,6 +1,6 @@
 ---
 title: The actual smooth open pair and its choice scope
-status: draft
+status: published
 research_item: lem-author-149a02132c3b-geometry
 dependency_level: 14
 ---

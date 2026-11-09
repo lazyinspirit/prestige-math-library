@@ -2,7 +2,7 @@
 id: lem-author-8e1c0251ef0d-cocycle-morphism
 kind: lemma
 title: Compatible local torsor sections determine an isomorphism
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-8e1c0251ef0d-torsor-cocycle

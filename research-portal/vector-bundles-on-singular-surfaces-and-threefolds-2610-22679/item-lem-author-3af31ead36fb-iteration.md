@@ -1,6 +1,6 @@
 ---
 title: Iterating a conditional free-summand criterion
-status: draft
+status: published
 research_item: lem-author-3af31ead36fb-iteration
 dependency_level: 2
 ---

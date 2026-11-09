@@ -2,7 +2,7 @@
 id: lem-author-3cde9692a7e9-first-class-and-coefficients
 kind: lemma
 title: First-class matching and explicit perfect Chern arithmetic
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan

@@ -1,6 +1,6 @@
 ---
 title: Pointwise regularity and smoothness over a perfect field
-status: draft
+status: published
 research_item: lem-author-2389e5bafea8-perfect-pointwise-smoothness
 dependency_level: 0
 ---

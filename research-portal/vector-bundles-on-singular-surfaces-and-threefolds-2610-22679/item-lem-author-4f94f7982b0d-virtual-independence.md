@@ -1,6 +1,6 @@
 ---
 title: Clopen rank extension and genuine representative independence
-status: draft
+status: published
 research_item: lem-author-4f94f7982b0d-virtual-independence
 dependency_level: 19
 ---

@@ -1,6 +1,6 @@
 ---
 title: Stage bounds imply completeness and finite multiplicative convergence
-status: draft
+status: published
 research_item: lem-author-74a9c17e63f1-bounded-convergence
 dependency_level: 17
 ---

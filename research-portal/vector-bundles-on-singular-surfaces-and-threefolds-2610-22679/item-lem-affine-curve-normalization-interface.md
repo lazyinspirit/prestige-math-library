@@ -1,6 +1,6 @@
 ---
 title: Normalization of an affine integral curve
-status: draft
+status: published
 research_item: lem-affine-curve-normalization-interface
 dependency_level: 0
 ---

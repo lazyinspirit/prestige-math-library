@@ -1,6 +1,6 @@
 ---
 title: The source Chern classes are the supplied projective-relation classes
-status: draft
+status: published
 research_item: lem-author-32887006bdff-relation-comparison
 dependency_level: 17
 ---

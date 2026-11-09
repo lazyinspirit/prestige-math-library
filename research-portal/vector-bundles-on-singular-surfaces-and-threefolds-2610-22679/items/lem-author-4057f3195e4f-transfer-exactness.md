@@ -2,7 +2,7 @@
 id: lem-author-4057f3195e4f-transfer-exactness
 kind: lemma
 title: Transporting an exact sequence through isomorphisms
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

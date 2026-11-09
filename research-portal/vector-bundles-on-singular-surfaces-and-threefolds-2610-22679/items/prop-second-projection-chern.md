@@ -2,7 +2,7 @@
 id: prop-second-projection-chern
 kind: proposition
 title: Second projection is minus second Chern class
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9b6cb358ddc9-actual-second-fiber

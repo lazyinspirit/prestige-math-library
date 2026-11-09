@@ -2,7 +2,7 @@
 id: lem-author-fc2380accb47-nontransverse-incidence
 kind: lemma
 title: The scheme of nontransverse zero jets has small dimension
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-fc2380accb47-coordinate-first-jets

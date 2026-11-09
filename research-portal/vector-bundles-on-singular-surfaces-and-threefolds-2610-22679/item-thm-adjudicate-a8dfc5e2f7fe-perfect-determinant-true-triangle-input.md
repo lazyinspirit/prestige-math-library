@@ -1,6 +1,6 @@
 ---
 title: "Perfect determinant with true-triangle additivity: precise external input"
-status: draft
+status: published
 research_item: thm-adjudicate-a8dfc5e2f7fe-perfect-determinant-true-triangle-input
 dependency_level: 5
 ---

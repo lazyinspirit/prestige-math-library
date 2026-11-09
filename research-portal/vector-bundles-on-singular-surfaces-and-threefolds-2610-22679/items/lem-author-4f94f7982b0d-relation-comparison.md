@@ -2,7 +2,7 @@
 id: lem-author-4f94f7982b0d-relation-comparison
 kind: lemma
 title: The source Chern classes are the supplied projective-relation classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

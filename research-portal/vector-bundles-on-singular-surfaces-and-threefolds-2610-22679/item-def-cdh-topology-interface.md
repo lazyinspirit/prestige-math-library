@@ -1,6 +1,6 @@
 ---
 title: Completely decomposed proper covers and the cdh topology
-status: draft
+status: published
 research_item: def-cdh-topology-interface
 dependency_level: 7
 ---

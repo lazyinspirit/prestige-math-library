@@ -2,7 +2,7 @@
 id: lem-author-da44cda020c0-units-k1-local-determinant-gluing
 kind: lemma
 title: Gluing compatible local determinant homomorphisms
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-da44cda020c0-units-k1-gluing-units

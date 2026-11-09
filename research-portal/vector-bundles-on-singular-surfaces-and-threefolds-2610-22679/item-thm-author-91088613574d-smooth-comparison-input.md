@@ -1,6 +1,6 @@
 ---
 title: Elmanto–Morrow smooth comparison input
-status: draft
+status: published
 research_item: thm-author-91088613574d-smooth-comparison-input
 dependency_level: 12
 ---

@@ -2,7 +2,7 @@
 id: def-support-image-groups
 kind: definition
 title: Images of support groups in global groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cohomology-with-support

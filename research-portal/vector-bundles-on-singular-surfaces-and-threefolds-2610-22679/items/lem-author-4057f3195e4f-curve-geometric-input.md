@@ -2,7 +2,7 @@
 id: lem-author-4057f3195e4f-curve-geometric-input
 kind: lemma
 title: Completion, divisors and degree on smooth curves
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

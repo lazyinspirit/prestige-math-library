@@ -1,6 +1,6 @@
 ---
 title: Local perfection implies quasi-coherent cohomology
-status: draft
+status: published
 research_item: lem-author-4f716d60801a-local-perfect-qc
 dependency_level: 2
 ---

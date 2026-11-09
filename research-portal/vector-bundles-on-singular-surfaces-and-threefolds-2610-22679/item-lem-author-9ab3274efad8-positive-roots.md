@@ -1,6 +1,6 @@
 ---
 title: Positive roots suffice for divisibility
-status: draft
+status: published
 research_item: lem-author-9ab3274efad8-positive-roots
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-author-32887006bdff-actual-orientation
 kind: lemma
 title: Actual EM orientation and projective bundle maps on that model
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-32887006bdff-em-p1-model

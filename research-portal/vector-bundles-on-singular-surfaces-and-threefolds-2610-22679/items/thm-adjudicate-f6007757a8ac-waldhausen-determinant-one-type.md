@@ -2,7 +2,7 @@
 id: thm-adjudicate-f6007757a8ac-waldhausen-determinant-one-type
 kind: theorem
 title: Exact true-triangle and Waldhausen determinant one-type input
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

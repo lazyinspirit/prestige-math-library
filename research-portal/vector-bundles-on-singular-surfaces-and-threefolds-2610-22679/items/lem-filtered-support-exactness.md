@@ -2,7 +2,7 @@
 id: lem-filtered-support-exactness
 kind: lemma
 title: Support fibers commute with graded triangles
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

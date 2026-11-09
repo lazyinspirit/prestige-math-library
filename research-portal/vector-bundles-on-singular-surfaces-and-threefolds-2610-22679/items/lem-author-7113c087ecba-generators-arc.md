@@ -2,7 +2,7 @@
 id: lem-author-7113c087ecba-generators-arc
 kind: lemma
 title: Every qcqs cdh generator is an arc covering family
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-dcdf962edbda-qcqs-site

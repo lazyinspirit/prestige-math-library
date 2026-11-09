@@ -1,6 +1,6 @@
 ---
 title: Unique divisibility of the smooth-point subgroup
-status: draft
+status: published
 research_item: prop-smooth-cycle-unique-divisibility
 dependency_level: 24
 ---

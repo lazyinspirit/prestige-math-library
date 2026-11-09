@@ -2,7 +2,7 @@
 id: lem-curve-supported-degree-six-divisible
 kind: lemma
 title: Divisibility of curve-supported top cohomology
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-149a02132c3b-geometry

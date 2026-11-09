@@ -1,6 +1,6 @@
 ---
 title: Smooth threefold rank-two classification
-status: draft
+status: published
 research_item: thm-smooth-threefold-rank-two-classification
 dependency_level: 16
 ---

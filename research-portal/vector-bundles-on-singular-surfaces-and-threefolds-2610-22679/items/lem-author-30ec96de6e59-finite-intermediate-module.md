@@ -2,7 +2,7 @@
 id: lem-author-30ec96de6e59-finite-intermediate-module
 kind: lemma
 title: Intermediate rings in finite algebras
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

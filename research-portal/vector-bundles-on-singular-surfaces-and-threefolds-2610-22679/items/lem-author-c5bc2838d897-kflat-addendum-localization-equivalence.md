@@ -2,7 +2,7 @@
 id: lem-author-c5bc2838d897-kflat-addendum-localization-equivalence
 kind: lemma
 title: K-flat roofs give the full derived localization
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-c5bc2838d897-kflat-addendum-verdier-criterion

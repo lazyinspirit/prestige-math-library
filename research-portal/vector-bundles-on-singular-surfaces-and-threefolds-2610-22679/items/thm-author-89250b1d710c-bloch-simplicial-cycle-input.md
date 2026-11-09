@@ -2,7 +2,7 @@
 id: thm-author-89250b1d710c-bloch-simplicial-cycle-input
 kind: theorem
 title: External input for simplicial Bloch cycle groups
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

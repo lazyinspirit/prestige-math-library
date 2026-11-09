@@ -1,6 +1,6 @@
 ---
 title: Integer cdh sections on seminormal schemes
-status: draft
+status: published
 research_item: lem-cdh-integer-sections
 dependency_level: 14
 ---

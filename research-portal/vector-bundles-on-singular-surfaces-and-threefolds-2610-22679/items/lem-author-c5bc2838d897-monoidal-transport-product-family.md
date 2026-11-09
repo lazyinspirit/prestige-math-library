@@ -2,7 +2,7 @@
 id: lem-author-c5bc2838d897-monoidal-transport-product-family
 kind: lemma
 title: Strong monoidal transport from a product-base cocartesian family
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-c5bc2838d897-monoidal-transport-straightening-input

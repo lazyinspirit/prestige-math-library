@@ -1,6 +1,6 @@
 ---
 title: Products and projections on image filtrations
-status: draft
+status: published
 research_item: lem-image-filtration-products
 dependency_level: 6
 ---

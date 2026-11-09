@@ -1,6 +1,6 @@
 ---
 title: Motivic dimension vanishing
-status: draft
+status: published
 research_item: thm-motivic-dimension-vanishing
 dependency_level: 13
 ---

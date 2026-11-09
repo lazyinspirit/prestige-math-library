@@ -2,7 +2,7 @@
 id: lem-fiber-sequence-homotopy-exactness
 kind: lemma
 title: Homotopy exactness of a spectral fiber sequence
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

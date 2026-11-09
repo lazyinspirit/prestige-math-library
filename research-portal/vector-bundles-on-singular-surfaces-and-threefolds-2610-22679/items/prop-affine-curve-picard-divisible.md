@@ -2,7 +2,7 @@
 id: prop-affine-curve-picard-divisible
 kind: proposition
 title: Divisibility of the Picard group of an affine curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-curve-picard-boundary

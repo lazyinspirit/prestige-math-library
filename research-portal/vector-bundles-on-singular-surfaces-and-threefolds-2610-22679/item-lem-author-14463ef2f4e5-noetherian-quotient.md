@@ -1,6 +1,6 @@
 ---
 title: Prime quotients of noetherian rings
-status: draft
+status: published
 research_item: lem-author-14463ef2f4e5-noetherian-quotient
 dependency_level: 7
 ---

@@ -2,7 +2,7 @@
 id: thm-author-2ac325480ae8-bem-finite-comparison
 kind: theorem
 title: External BEM big-site finite Beilinson–Lichtenbaum comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

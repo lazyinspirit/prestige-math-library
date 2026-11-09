@@ -1,6 +1,6 @@
 ---
 title: Connected components of a smooth affine curve
-status: draft
+status: published
 research_item: lem-author-9ab3274efad8-smooth-affine-components
 dependency_level: 0
 ---

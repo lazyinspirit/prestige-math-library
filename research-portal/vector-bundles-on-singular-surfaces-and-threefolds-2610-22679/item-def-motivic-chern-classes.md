@@ -1,6 +1,6 @@
 ---
 title: Motivic Chern classes
-status: draft
+status: published
 research_item: def-motivic-chern-classes
 dependency_level: 14
 ---

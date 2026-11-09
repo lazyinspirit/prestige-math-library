@@ -1,6 +1,6 @@
 ---
 title: Fixed determinant isolates the actual Chern fiber
-status: draft
+status: published
 research_item: lem-author-9b282fc59773-fixed-determinant-fibers
 dependency_level: 13
 ---

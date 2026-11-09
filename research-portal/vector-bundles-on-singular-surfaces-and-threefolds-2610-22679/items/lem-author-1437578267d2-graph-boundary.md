@@ -2,7 +2,7 @@
 id: lem-author-1437578267d2-graph-boundary
 kind: lemma
 title: Principal divisors are endpoint boundaries
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-1437578267d2-supported-degrees

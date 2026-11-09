@@ -1,6 +1,6 @@
 ---
 title: External BEM big-site finite Beilinson–Lichtenbaum comparison
-status: draft
+status: published
 research_item: thm-author-2ac325480ae8-bem-finite-comparison
 dependency_level: 6
 ---

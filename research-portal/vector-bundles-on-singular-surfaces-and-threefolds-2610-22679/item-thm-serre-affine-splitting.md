@@ -1,6 +1,6 @@
 ---
 title: Serre splitting above the dimension
-status: draft
+status: published
 research_item: thm-serre-affine-splitting
 dependency_level: 3
 ---

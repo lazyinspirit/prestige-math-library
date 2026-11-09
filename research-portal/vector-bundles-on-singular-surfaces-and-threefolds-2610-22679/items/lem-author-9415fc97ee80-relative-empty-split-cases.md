@@ -2,7 +2,7 @@
 id: lem-author-9415fc97ee80-relative-empty-split-cases
 kind: lemma
 title: Relative objects for empty and split pairs
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9415fc97ee80-relative-cone-quotient-model

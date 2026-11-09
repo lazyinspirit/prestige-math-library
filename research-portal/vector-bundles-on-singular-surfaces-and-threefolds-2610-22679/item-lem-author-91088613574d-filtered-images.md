@@ -1,6 +1,6 @@
 ---
 title: Filtered equivalences preserve image filtrations
-status: draft
+status: published
 research_item: lem-author-91088613574d-filtered-images
 dependency_level: 6
 ---

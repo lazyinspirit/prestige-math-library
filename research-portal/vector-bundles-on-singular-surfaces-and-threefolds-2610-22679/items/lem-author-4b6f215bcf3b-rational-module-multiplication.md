@@ -2,7 +2,7 @@
 id: lem-author-4b6f215bcf3b-rational-module-multiplication
 kind: lemma
 title: Integer multiplication on rational vector spaces
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

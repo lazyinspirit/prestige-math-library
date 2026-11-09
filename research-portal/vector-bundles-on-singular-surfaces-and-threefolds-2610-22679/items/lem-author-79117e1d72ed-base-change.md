@@ -2,7 +2,7 @@
 id: lem-author-79117e1d72ed-base-change
 kind: lemma
 title: Projective bundle closure and naturality of the actual decomposition
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-projective-bundle-scheme

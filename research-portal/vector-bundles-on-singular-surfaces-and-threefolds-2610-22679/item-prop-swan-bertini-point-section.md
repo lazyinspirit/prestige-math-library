@@ -1,6 +1,6 @@
 ---
 title: Bertini functional with finite smooth zero locus
-status: draft
+status: published
 research_item: prop-swan-bertini-point-section
 dependency_level: 12
 ---

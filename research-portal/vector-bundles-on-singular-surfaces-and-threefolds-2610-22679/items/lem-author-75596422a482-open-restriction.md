@@ -2,7 +2,7 @@
 id: lem-author-75596422a482-open-restriction
 kind: lemma
 title: Open restriction of admissible cycles
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

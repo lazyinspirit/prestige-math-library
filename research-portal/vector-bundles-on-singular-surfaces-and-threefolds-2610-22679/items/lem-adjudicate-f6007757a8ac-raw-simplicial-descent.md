@@ -2,7 +2,7 @@
 id: lem-adjudicate-f6007757a8ac-raw-simplicial-descent
 kind: lemma
 title: Actual raw simplicial cycles satisfy descent without separatedness
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

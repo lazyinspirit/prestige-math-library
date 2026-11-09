@@ -2,7 +2,7 @@
 id: lem-author-2ac325480ae8-slice-site
 kind: lemma
 title: The actual big cdh slice over a field
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

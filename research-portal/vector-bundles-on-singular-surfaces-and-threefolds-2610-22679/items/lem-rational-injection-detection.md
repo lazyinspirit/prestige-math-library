@@ -2,7 +2,7 @@
 id: lem-rational-injection-detection
 kind: lemma
 title: Detecting injectivity by rationalization
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-annihilator-and-torsion-of-a-module

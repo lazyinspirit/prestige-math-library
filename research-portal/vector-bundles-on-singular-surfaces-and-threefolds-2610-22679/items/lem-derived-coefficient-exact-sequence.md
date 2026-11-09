@@ -2,7 +2,7 @@
 id: lem-derived-coefficient-exact-sequence
 kind: lemma
 title: Derived finite coefficients and the Bockstein sequence
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-derived-category-of-an-abelian-category

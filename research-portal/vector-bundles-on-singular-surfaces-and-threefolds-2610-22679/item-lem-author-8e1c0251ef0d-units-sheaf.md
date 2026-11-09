@@ -1,6 +1,6 @@
 ---
 title: Units in a sheaf of rings form a sheaf
-status: draft
+status: published
 research_item: lem-author-8e1c0251ef0d-units-sheaf
 dependency_level: 6
 ---

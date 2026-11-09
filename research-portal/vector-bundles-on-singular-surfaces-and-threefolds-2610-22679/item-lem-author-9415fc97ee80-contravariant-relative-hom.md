@@ -1,6 +1,6 @@
 ---
 title: Contravariant Hom reverses relative cofiber triangles
-status: draft
+status: published
 research_item: lem-author-9415fc97ee80-contravariant-relative-hom
 dependency_level: 0
 ---

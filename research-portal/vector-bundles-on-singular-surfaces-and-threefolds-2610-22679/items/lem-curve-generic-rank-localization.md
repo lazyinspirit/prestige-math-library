@@ -2,7 +2,7 @@
 id: lem-curve-generic-rank-localization
 kind: lemma
 title: Generic rank and point-supported classes on a curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-supported-k-zero-devissage

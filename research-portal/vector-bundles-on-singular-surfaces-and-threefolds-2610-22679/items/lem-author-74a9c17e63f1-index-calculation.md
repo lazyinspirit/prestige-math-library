@@ -2,7 +2,7 @@
 id: lem-author-74a9c17e63f1-index-calculation
 kind: lemma
 title: Cohomological indexing of the actual graded groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

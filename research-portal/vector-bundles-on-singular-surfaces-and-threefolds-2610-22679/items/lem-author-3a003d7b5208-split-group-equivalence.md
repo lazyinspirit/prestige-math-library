@@ -2,7 +2,7 @@
 id: lem-author-3a003d7b5208-split-group-equivalence
 kind: lemma
 title: Additive equivalences preserve split K zero
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

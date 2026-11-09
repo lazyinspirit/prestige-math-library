@@ -1,6 +1,6 @@
 ---
 title: Transporting an exact sequence through isomorphisms
-status: draft
+status: published
 research_item: lem-author-4057f3195e4f-transfer-exactness
 dependency_level: 0
 ---

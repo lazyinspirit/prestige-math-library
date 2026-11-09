@@ -2,7 +2,7 @@
 id: lem-author-394a5b71198d-curve-picard
 kind: lemma
 title: The actual first Chern map is the Picard isomorphism on an affine curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-394a5b71198d-line-determinant

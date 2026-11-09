@@ -1,6 +1,6 @@
 ---
 title: Sections match across a finite subintegral cover
-status: draft
+status: published
 research_item: lem-author-60d95bfb692a-subintegral-matching
 dependency_level: 10
 ---

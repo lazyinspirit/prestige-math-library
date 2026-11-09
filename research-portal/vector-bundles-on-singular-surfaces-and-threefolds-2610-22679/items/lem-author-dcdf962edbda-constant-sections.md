@@ -2,7 +2,7 @@
 id: lem-author-dcdf962edbda-constant-sections
 kind: lemma
 title: Constant integer coefficients and exact derived evaluation
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

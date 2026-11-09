@@ -2,7 +2,7 @@
 id: lem-author-3a003d7b5208-exact-equivalence-k-zero
 kind: lemma
 title: Exact equivalences preserve triangle K zero
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

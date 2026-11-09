@@ -1,6 +1,6 @@
 ---
 title: Exact true-triangle and Waldhausen determinant one-type input
-status: draft
+status: published
 research_item: thm-adjudicate-f6007757a8ac-waldhausen-determinant-one-type
 dependency_level: 0
 ---

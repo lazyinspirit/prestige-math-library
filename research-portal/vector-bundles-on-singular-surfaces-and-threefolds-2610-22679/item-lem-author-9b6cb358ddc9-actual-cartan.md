@@ -1,6 +1,6 @@
 ---
 title: Actual perfect Cartan through degree three on all qcqs field-schemes
-status: draft
+status: published
 research_item: lem-author-9b6cb358ddc9-actual-cartan
 dependency_level: 21
 ---

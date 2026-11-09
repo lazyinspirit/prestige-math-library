@@ -1,6 +1,6 @@
 ---
 title: Elmanto–Morrow weight-one comparison input
-status: draft
+status: published
 research_item: lem-author-13e6fe931c45-weight-one-external
 dependency_level: 8
 ---

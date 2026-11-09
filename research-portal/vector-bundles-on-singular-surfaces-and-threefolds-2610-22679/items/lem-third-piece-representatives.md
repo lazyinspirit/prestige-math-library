@@ -2,7 +2,7 @@
 id: lem-third-piece-representatives
 kind: lemma
 title: Rank-three representatives with two zero Chern classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

@@ -1,6 +1,6 @@
 ---
 title: Augmented tower comparisons preserve supported graded projections
-status: draft
+status: published
 research_item: lem-author-16f30f6b95cb-augmented-filtered-support-transport
 dependency_level: 14
 ---

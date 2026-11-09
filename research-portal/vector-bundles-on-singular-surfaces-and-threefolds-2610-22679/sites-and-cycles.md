@@ -4,7 +4,7 @@ description: Define the Nisnevich, cdh and étale interfaces and distinguish
   derived sections from localization. Build the higher-cycle and curve-divisor
   chains, with precise Levine–Weibel, Milnor-K and Euler terminology for the
   article's comparisons and questions.
-status: draft
+status: published
 dependency_level: 1
 ---
 

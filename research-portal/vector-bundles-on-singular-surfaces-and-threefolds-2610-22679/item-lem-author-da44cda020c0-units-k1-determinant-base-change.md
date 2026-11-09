@@ -1,6 +1,6 @@
 ---
 title: Stable determinant commutes with ring maps
-status: draft
+status: published
 research_item: lem-author-da44cda020c0-units-k1-determinant-base-change
 dependency_level: 1
 ---

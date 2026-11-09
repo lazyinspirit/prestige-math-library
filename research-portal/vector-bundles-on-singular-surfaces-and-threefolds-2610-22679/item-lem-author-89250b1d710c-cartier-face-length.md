@@ -1,6 +1,6 @@
 ---
 title: Length multiplicity for one proper Cartier face
-status: draft
+status: published
 research_item: lem-author-89250b1d710c-cartier-face-length
 dependency_level: 0
 ---

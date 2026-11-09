@@ -1,6 +1,6 @@
 ---
 title: The actual smooth open pair and its Nisnevich square
-status: draft
+status: published
 research_item: lem-author-8a080e7d9445-geometry
 dependency_level: 7
 ---

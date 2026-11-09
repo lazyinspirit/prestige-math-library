@@ -1,6 +1,6 @@
 ---
 title: External nonconnective lax symmetric monoidal K-theory
-status: draft
+status: published
 research_item: thm-author-c5bc2838d897-kcoherent-nonconnective-multiplicative-input
 dependency_level: 4
 ---

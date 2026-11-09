@@ -2,7 +2,7 @@
 id: thm-normal-surface-classification
 kind: theorem
 title: Motivic Chern classification on normal affine surfaces
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

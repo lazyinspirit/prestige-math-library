@@ -2,7 +2,7 @@
 id: def-decreasing-filtered-spectrum
 kind: definition
 title: Decreasing spectral filtrations and associated graded
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

@@ -2,7 +2,7 @@
 id: lem-author-4f716d60801a-local-perfect-qc
 kind: lemma
 title: Local perfection implies quasi-coherent cohomology
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4f716d60801a-finite-projective-model

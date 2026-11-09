@@ -2,7 +2,7 @@
 id: lem-author-80e2d7bee57f-chain-shift-reindex
 kind: lemma
 title: Reindexing commutes with shifts
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-80e2d7bee57f-cochain-to-chain

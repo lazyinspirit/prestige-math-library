@@ -1,6 +1,6 @@
 ---
 title: The actual EM first Chern class is additive and natural
-status: draft
+status: published
 research_item: lem-author-79117e1d72ed-additive-c1
 dependency_level: 10
 ---

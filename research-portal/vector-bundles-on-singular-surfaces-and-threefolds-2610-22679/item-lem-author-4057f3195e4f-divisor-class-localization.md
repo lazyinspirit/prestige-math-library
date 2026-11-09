@@ -1,6 +1,6 @@
 ---
 title: Localization of a presented divisor class group
-status: draft
+status: published
 research_item: lem-author-4057f3195e4f-divisor-class-localization
 dependency_level: 1
 ---

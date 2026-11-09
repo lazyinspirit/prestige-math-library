@@ -1,6 +1,6 @@
 ---
 title: Characteristic-zero coefficient vanishing and torsion freeness
-status: draft
+status: published
 research_item: lem-characteristic-zero-top-torsion
 dependency_level: 11
 ---

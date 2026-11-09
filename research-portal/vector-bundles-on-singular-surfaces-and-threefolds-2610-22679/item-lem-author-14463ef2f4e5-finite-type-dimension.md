@@ -1,6 +1,6 @@
 ---
 title: Finite type algebras over fields have bounded dimension
-status: draft
+status: published
 research_item: lem-author-14463ef2f4e5-finite-type-dimension
 dependency_level: 7
 ---

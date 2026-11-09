@@ -2,7 +2,7 @@
 id: def-total-chern-class
 kind: definition
 title: Total Chern series for actual and virtual bundles
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-chern-classes

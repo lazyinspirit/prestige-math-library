@@ -2,7 +2,7 @@
 id: lem-author-79117e1d72ed-additive-c1
 kind: lemma
 title: The actual EM first Chern class is additive and natural
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

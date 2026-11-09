@@ -2,7 +2,7 @@
 id: lem-author-ab0a6fc202cb-motivic-rank-restriction
 kind: lemma
 title: Finite rank strata detect Elmanto-Morrow motivic cohomology
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-ab0a6fc202cb-finite-common-rank-strata

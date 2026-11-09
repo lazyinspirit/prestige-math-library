@@ -2,7 +2,7 @@
 id: thm-author-e0b0bf18ed2b-singular-realization-input
 kind: theorem
 title: External singular realization comparison
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

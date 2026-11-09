@@ -1,6 +1,6 @@
 ---
 title: Krishna's affine zero-cycle divisibility and kernel input
-status: draft
+status: published
 research_item: thm-author-b87d598e83f3-krishna-cycle-input
 dependency_level: 11
 ---

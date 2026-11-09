@@ -2,7 +2,7 @@
 id: lem-adjudicate-6e70d30b9793-chern-operation-transport
 kind: lemma
 title: Projective relations transport the actual universal Chern operations
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-6e70d30b9793-field-unit-zigzag

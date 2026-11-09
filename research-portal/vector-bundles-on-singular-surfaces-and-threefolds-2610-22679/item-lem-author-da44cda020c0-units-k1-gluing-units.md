@@ -1,6 +1,6 @@
 ---
 title: Compatible local units glue uniquely
-status: draft
+status: published
 research_item: lem-author-da44cda020c0-units-k1-gluing-units
 dependency_level: 0
 ---

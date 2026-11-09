@@ -1,6 +1,6 @@
 ---
 title: Relative objects for empty and split pairs
-status: draft
+status: published
 research_item: lem-author-9415fc97ee80-relative-empty-split-cases
 dependency_level: 1
 ---

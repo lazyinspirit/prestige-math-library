@@ -2,7 +2,7 @@
 id: thm-author-d026a7b99ace-supported-rr
 kind: theorem
 title: External actual supported Riemann–Roch in codimension three
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-d026a7b99ace-integral-field-model

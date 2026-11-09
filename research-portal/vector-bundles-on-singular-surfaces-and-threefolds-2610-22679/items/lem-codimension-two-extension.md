@@ -2,7 +2,7 @@
 id: lem-codimension-two-extension
 kind: lemma
 title: Functions extend across codimension two
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-normal-scheme-component-reduction

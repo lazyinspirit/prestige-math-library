@@ -1,6 +1,6 @@
 ---
 title: Primewise detection of torsion
-status: draft
+status: published
 research_item: lem-author-c5b0693f4fc3-top-torsion-primewise
 dependency_level: 0
 ---

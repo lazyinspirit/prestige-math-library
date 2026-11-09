@@ -1,6 +1,6 @@
 ---
 title: Rank and determinant on the second piece
-status: draft
+status: published
 research_item: lem-second-piece-rank-determinant
 dependency_level: 24
 ---

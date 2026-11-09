@@ -2,7 +2,7 @@
 id: thm-author-c5bc2838d897-kcoherent-kflat-sheaf-input
 kind: theorem
 title: External K-flat sheaf resolution and pullback input
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

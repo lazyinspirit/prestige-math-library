@@ -1,6 +1,6 @@
 ---
 title: Huber–Kelly representable cdh sheafification input
-status: draft
+status: published
 research_item: thm-author-60d95bfb692a-huber-kelly-representable-input
 dependency_level: 8
 ---

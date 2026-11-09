@@ -2,7 +2,7 @@
 id: lem-algebraically-closed-residue-fields
 kind: lemma
 title: Residue fields and normalization point degrees
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:cor-weak-nullstellensatz-algebraically-closed-coordinate-form

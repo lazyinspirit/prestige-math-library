@@ -1,6 +1,6 @@
 ---
 title: Finite clopen common rank strata
-status: draft
+status: published
 research_item: lem-author-ab0a6fc202cb-finite-common-rank-strata
 dependency_level: 2
 ---

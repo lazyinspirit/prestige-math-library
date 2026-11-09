@@ -1,6 +1,6 @@
 ---
 title: External actual universal-class detection on Vect and Grass
-status: draft
+status: published
 research_item: thm-author-3cde9692a7e9-universal-grass-input
 dependency_level: 17
 ---

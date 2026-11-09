@@ -2,7 +2,7 @@
 id: lem-author-89250b1d710c-face-coordinate-geometry
 kind: lemma
 title: Coordinate faces of the algebraic simplex
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

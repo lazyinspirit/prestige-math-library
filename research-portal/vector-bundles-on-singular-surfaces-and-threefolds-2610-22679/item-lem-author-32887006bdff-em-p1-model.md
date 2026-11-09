@@ -1,6 +1,6 @@
 ---
 title: An actual non-A¹ P¹-spectrum for the supplied EM complexes
-status: draft
+status: published
 research_item: lem-author-32887006bdff-em-p1-model
 dependency_level: 15
 ---

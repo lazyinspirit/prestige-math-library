@@ -2,7 +2,7 @@
 id: thm-author-4f716d60801a-affine-derived-input
 kind: theorem
 title: External affine derived and perfect comparisons
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-perfect-complex-over-a-ring

@@ -1,6 +1,6 @@
 ---
 title: Determinants detect vanishing of the rank-one exterior-dual class
-status: draft
+status: published
 research_item: lem-author-394a5b71198d-line-determinant
 dependency_level: 14
 ---

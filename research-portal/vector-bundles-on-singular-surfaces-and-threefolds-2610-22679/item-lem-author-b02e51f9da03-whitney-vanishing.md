@@ -1,6 +1,6 @@
 ---
 title: Stable triviality forces vanishing of the actual Chern coefficients
-status: draft
+status: published
 research_item: lem-author-b02e51f9da03-whitney-vanishing
 dependency_level: 22
 ---

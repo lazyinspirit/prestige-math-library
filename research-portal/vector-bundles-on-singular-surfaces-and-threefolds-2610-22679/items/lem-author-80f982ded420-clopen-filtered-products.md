@@ -2,7 +2,7 @@
 id: lem-author-80f982ded420-clopen-filtered-products
 kind: lemma
 title: Finite clopen restrictions split the actual motivic image filtration
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

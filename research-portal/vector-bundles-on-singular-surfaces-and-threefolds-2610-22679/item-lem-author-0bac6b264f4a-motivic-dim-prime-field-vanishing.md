@@ -1,6 +1,6 @@
 ---
 title: Combining the actual motivic and cdh outer-term bounds
-status: draft
+status: published
 research_item: lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing
 dependency_level: 12
 ---

@@ -1,6 +1,6 @@
 ---
 title: External affine étale vanishing at invertible primes
-status: draft
+status: published
 research_item: thm-author-c5b0693f4fc3-top-torsion-artin-affine
 dependency_level: 0
 ---

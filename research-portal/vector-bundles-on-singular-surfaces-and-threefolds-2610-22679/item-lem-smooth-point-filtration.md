@@ -1,6 +1,6 @@
 ---
 title: Smooth point classes lie in the top filtration piece
-status: draft
+status: published
 research_item: lem-smooth-point-filtration
 dependency_level: 19
 ---

@@ -2,7 +2,7 @@
 id: lem-author-14463ef2f4e5-finite-type-dimension
 kind: lemma
 title: Finite type algebras over fields have bounded dimension
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-14463ef2f4e5-quotient-dimension

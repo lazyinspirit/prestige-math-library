@@ -2,7 +2,7 @@
 id: lem-author-7ef3227685d9-supported-k0-ideal-filtration
 kind: lemma
 title: Finite ideal-power filtrations and coherent sheaves on the closed subscheme
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-7ef3227685d9-supported-k0-regular-cohomology-input

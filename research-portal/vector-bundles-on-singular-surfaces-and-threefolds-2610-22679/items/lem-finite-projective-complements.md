@@ -2,7 +2,7 @@
 id: lem-finite-projective-complements
 kind: lemma
 title: Finite projective complements
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-bundle-module-interface

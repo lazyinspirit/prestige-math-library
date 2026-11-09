@@ -2,7 +2,7 @@
 id: def-unimodular-sections
 kind: definition
 title: Unimodular elements and trivial summands
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-bundle-module-interface

@@ -1,6 +1,6 @@
 ---
 title: Constant cdh sections on the two article sites
-status: draft
+status: published
 research_item: lem-author-a279c89ed6c8-cdh-zero-site-comparison
 dependency_level: 9
 ---

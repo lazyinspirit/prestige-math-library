@@ -2,7 +2,7 @@
 id: thm-author-149a02132c3b-open-natural-classical-input
 kind: theorem
 title: Exact arbitrary-field open-natural classical cycle interface
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-2ac325480ae8-bem-field-model

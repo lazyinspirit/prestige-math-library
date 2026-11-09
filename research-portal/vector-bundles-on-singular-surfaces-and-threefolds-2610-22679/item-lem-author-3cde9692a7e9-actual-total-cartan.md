@@ -1,6 +1,6 @@
 ---
 title: The actual perfect K-space operations satisfy total Cartan
-status: draft
+status: published
 research_item: lem-author-3cde9692a7e9-actual-total-cartan
 dependency_level: 21
 ---

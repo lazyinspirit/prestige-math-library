@@ -2,7 +2,7 @@
 id: lem-author-80f982ded420-normal-point-strata
 kind: lemma
 title: Normal dimension strata and the actual residue class model
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-fc2380accb47-normal-geometric-input

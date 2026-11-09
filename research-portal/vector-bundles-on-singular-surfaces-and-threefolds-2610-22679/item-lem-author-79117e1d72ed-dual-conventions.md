@@ -1,6 +1,6 @@
 ---
 title: Quotient and line projectivizations agree after dualizing
-status: draft
+status: published
 research_item: lem-author-79117e1d72ed-dual-conventions
 dependency_level: 10
 ---

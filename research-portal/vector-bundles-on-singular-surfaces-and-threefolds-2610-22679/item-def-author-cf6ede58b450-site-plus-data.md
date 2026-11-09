@@ -1,6 +1,6 @@
 ---
 title: Small sites and the plus construction
-status: draft
+status: published
 research_item: def-author-cf6ede58b450-site-plus-data
 dependency_level: 0
 ---

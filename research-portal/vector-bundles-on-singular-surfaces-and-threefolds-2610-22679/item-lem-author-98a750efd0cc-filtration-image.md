@@ -1,6 +1,6 @@
 ---
 title: Images of filtration stages
-status: draft
+status: published
 research_item: lem-author-98a750efd0cc-filtration-image
 dependency_level: 5
 ---

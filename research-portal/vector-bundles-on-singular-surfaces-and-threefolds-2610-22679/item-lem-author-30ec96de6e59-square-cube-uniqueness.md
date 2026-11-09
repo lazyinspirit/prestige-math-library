@@ -1,6 +1,6 @@
 ---
 title: Uniqueness from squares and cubes
-status: draft
+status: published
 research_item: lem-author-30ec96de6e59-square-cube-uniqueness
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: thm-author-e71ff76fe904-cdh-factorization-input
 kind: theorem
 title: Exact cdh factorization inputs for the source étale map
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

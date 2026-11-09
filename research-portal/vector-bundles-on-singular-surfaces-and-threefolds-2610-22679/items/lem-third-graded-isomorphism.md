@@ -2,7 +2,7 @@
 id: lem-third-graded-isomorphism
 kind: lemma
 title: Third-stage graded isomorphism
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: thm-author-c5bc2838d897-kcoherent-qcqs-classical-generator-input
 kind: theorem
 title: External qcqs classical perfect generator
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-perfect-complexes

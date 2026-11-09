@@ -2,7 +2,7 @@
 id: lem-author-7113c087ecba-endomorphism-hyperdescent
 kind: lemma
 title: From constructible-category hyperdescent to the actual cohomology complex
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-7113c087ecba-arc-input

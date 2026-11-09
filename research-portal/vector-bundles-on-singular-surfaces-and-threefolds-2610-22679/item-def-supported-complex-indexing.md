@@ -1,6 +1,6 @@
 ---
 title: Support fibers with explicit cohomological indexing
-status: draft
+status: published
 research_item: def-supported-complex-indexing
 dependency_level: 12
 ---

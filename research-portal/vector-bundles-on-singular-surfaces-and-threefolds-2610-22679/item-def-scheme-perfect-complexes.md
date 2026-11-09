@@ -1,6 +1,6 @@
 ---
 title: Perfect complexes on schemes and their support
-status: draft
+status: published
 research_item: def-scheme-perfect-complexes
 dependency_level: 4
 ---

@@ -1,6 +1,6 @@
 ---
 title: The identified support fiber is the classical relative Hom before Gysin
-status: draft
+status: published
 research_item: lem-author-59b1a831fe59-relative-gysin
 dependency_level: 16
 ---

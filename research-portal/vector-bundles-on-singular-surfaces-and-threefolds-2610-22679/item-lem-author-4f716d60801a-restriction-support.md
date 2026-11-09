@@ -1,6 +1,6 @@
 ---
 title: Restriction, stalks and cohomological support
-status: draft
+status: published
 research_item: lem-author-4f716d60801a-restriction-support
 dependency_level: 1
 ---

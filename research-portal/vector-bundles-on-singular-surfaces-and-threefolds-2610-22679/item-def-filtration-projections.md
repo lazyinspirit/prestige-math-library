@@ -1,6 +1,6 @@
 ---
 title: Graded filtration projections
-status: draft
+status: published
 research_item: def-filtration-projections
 dependency_level: 19
 ---

@@ -2,7 +2,7 @@
 id: thm-author-9ab3274efad8-jacobian-input
 kind: theorem
 title: Degree-zero Picard group as points of an abelian variety
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

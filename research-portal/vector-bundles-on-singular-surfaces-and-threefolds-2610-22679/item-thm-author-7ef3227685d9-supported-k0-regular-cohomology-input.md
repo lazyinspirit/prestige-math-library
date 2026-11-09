@@ -1,6 +1,6 @@
 ---
 title: External regular perfection and the standard derived t structure
-status: draft
+status: published
 research_item: thm-author-7ef3227685d9-supported-k0-regular-cohomology-input
 dependency_level: 5
 ---

@@ -2,7 +2,7 @@
 id: lem-affine-coherent-global-generation
 kind: lemma
 title: Finite global generation on an affine scheme
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

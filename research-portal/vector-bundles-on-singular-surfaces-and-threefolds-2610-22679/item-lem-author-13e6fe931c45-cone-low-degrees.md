@@ -1,6 +1,6 @@
 ---
 title: Cofiber bounds imply low-degree cohomology isomorphisms
-status: draft
+status: published
 research_item: lem-author-13e6fe931c45-cone-low-degrees
 dependency_level: 4
 ---

@@ -1,6 +1,6 @@
 ---
 title: Prescribing three Chern classes successively
-status: draft
+status: published
 research_item: lem-threefold-chern-prescription
 dependency_level: 34
 ---

@@ -2,7 +2,7 @@
 id: lem-author-e216acade157-split-determinant-fiber
 kind: lemma
 title: The actual determinant fiber is a natural retract of the rank-zero K-space
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

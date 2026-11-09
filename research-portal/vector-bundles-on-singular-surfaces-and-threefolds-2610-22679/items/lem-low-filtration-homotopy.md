@@ -2,7 +2,7 @@
 id: lem-low-filtration-homotopy
 kind: lemma
 title: Low-stage homotopy equals its image
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

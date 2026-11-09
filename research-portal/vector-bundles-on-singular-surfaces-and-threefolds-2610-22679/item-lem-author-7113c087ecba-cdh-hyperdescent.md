@@ -1,6 +1,6 @@
 ---
 title: Restriction of hyperdescent and arbitrary abstract blowup squares
-status: draft
+status: published
 research_item: lem-author-7113c087ecba-cdh-hyperdescent
 dependency_level: 8
 ---

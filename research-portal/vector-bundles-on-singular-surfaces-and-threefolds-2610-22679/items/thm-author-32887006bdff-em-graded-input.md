@@ -2,7 +2,7 @@
 id: thm-author-32887006bdff-em-graded-input
 kind: theorem
 title: External actual EM graded algebra, Picard class and complex PBF
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

@@ -2,7 +2,7 @@
 id: thm-author-79117e1d72ed-em-multiplication-c1
 kind: theorem
 title: External EM multiplicative motivic complexes and actual Chern map
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

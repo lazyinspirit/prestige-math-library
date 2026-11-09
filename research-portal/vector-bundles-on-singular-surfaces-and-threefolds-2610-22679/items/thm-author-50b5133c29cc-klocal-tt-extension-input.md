@@ -2,7 +2,7 @@
 id: thm-author-50b5133c29cc-klocal-tt-extension-input
 kind: theorem
 title: External extension and morphism input for perfect complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-perfect-complexes

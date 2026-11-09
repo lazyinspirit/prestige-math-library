@@ -1,6 +1,6 @@
 ---
 title: Bottom supported Bloch groups on a codimension two curve
-status: draft
+status: published
 research_item: lem-author-16f30f6b95cb-curve-supported-bloch-bottom
 dependency_level: 8
 ---

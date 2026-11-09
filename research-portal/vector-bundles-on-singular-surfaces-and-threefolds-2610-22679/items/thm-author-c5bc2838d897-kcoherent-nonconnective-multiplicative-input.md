@@ -2,7 +2,7 @@
 id: thm-author-c5bc2838d897-kcoherent-nonconnective-multiplicative-input
 kind: theorem
 title: External nonconnective lax symmetric monoidal K-theory
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

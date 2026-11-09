@@ -2,7 +2,7 @@
 id: lem-author-c5bc2838d897-kcoherent-supported-tensor-ideal
 kind: lemma
 title: Support ideals, mixed products and pullback
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-c5bc2838d897-kcoherent-derived-tensor-pullback

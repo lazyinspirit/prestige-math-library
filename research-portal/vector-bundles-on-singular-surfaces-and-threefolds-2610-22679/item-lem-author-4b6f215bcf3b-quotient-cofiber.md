@@ -1,6 +1,6 @@
 ---
 title: Derived finite coefficients preserve mapping cones
-status: draft
+status: published
 research_item: lem-author-4b6f215bcf3b-quotient-cofiber
 dependency_level: 1
 ---

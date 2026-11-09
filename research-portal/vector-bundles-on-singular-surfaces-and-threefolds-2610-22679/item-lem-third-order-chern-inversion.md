@@ -1,6 +1,6 @@
 ---
 title: Formal Chern arithmetic through degree three
-status: draft
+status: published
 research_item: lem-third-order-chern-inversion
 dependency_level: 2
 ---

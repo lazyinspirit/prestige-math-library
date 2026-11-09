@@ -1,6 +1,6 @@
 ---
 title: Derived cdh localization
-status: draft
+status: published
 research_item: def-cdh-derived-localization
 dependency_level: 12
 ---

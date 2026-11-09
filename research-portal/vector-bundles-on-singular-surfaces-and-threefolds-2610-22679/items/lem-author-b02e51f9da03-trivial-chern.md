@@ -2,7 +2,7 @@
 id: lem-author-b02e51f9da03-trivial-chern
 kind: lemma
 title: The actual Chern series of a trivial bundle is the unit
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-chern-whitney-identities

@@ -2,7 +2,7 @@
 id: lem-regular-section-parameter-family
 kind: lemma
 title: Finite-dimensional families of generated bundle functionals
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-surjection-kernel-bundle

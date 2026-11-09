@@ -1,6 +1,6 @@
 ---
 title: Murthy splitting criterion for the exterior-dual obstruction
-status: draft
+status: published
 research_item: thm-author-394a5b71198d-murthy-module-splitting-input
 dependency_level: 15
 ---

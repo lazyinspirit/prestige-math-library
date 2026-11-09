@@ -2,7 +2,7 @@
 id: lem-author-16f30f6b95cb-supported-euler-generic-coordinate
 kind: lemma
 title: The actual supported Euler class has the generic length coordinate
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-supported-k-zero-devissage

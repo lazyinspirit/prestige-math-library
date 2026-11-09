@@ -2,7 +2,7 @@
 id: lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing
 kind: lemma
 title: Gluing upper bounds through an actual fiber sequence
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-the-derived-category-inherits-a-triangulated-structure

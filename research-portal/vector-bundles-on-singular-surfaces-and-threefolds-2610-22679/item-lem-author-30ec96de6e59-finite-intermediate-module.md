@@ -1,6 +1,6 @@
 ---
 title: Intermediate rings in finite algebras
-status: draft
+status: published
 research_item: lem-author-30ec96de6e59-finite-intermediate-module
 dependency_level: 0
 ---

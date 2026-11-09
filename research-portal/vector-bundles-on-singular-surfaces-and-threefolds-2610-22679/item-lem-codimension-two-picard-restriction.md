@@ -1,6 +1,6 @@
 ---
 title: Line bundles are detected off codimension two
-status: draft
+status: published
 research_item: lem-codimension-two-picard-restriction
 dependency_level: 3
 ---

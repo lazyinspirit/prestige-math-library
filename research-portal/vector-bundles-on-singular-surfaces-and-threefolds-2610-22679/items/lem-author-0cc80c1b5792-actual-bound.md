@@ -2,7 +2,7 @@
 id: lem-author-0cc80c1b5792-actual-bound
 kind: lemma
 title: The precise source stage bound and its homotopy interpretation
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

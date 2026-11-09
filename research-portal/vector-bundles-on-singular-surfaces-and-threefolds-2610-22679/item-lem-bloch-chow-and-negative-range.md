@@ -1,6 +1,6 @@
 ---
 title: Degree zero and negative homology of the cycle complex
-status: draft
+status: published
 research_item: lem-bloch-chow-and-negative-range
 dependency_level: 7
 ---

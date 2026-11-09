@@ -2,7 +2,7 @@
 id: thm-author-3af31ead36fb-serre-module-input
 kind: theorem
 title: Serre free-summand theorem for modules
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

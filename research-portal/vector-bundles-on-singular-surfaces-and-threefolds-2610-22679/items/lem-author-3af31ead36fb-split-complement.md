@@ -2,7 +2,7 @@
 id: lem-author-3af31ead36fb-split-complement
 kind: lemma
 title: Projectivity and rank of a free-summand complement
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-bundle-module-interface

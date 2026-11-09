@@ -2,7 +2,7 @@
 id: lem-author-80e2d7bee57f-cochain-to-chain
 kind: lemma
 title: Reindexing cochains as chains
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

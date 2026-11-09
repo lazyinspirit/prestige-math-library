@@ -1,6 +1,6 @@
 ---
 title: The actual enhanced restriction sequence and its K fiber
-status: draft
+status: published
 research_item: lem-author-50b5133c29cc-klocal-enhanced-localization
 dependency_level: 13
 ---

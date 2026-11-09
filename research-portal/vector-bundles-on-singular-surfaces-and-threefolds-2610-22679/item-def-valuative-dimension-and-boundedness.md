@@ -1,6 +1,6 @@
 ---
 title: Valuative dimension and degreewise bounded towers
-status: draft
+status: published
 research_item: def-valuative-dimension-and-boundedness
 dependency_level: 5
 ---

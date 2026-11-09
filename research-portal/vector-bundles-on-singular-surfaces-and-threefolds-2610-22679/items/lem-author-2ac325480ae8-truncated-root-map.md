@@ -2,7 +2,7 @@
 id: lem-author-2ac325480ae8-truncated-root-map
 kind: lemma
 title: The root map through derived sections, truncation and localization
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

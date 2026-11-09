@@ -1,6 +1,6 @@
 ---
 title: Essential smallness of perfect and supported categories
-status: draft
+status: published
 research_item: lem-author-c5bc2838d897-kcoherent-perfect-essential-smallness
 dependency_level: 6
 ---

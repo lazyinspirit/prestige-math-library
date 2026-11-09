@@ -2,7 +2,7 @@
 id: lem-characteristic-zero-top-torsion
 kind: lemma
 title: Characteristic-zero coefficient vanishing and torsion freeness
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

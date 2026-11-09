@@ -1,6 +1,6 @@
 ---
 title: Cofiber and triangle presentations of K zero
-status: draft
+status: published
 research_item: lem-author-3a003d7b5208-triangle-presentation
 dependency_level: 0
 ---

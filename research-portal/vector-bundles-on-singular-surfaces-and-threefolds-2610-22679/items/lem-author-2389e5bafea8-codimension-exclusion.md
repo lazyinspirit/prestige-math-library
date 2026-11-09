@@ -2,7 +2,7 @@
 id: lem-author-2389e5bafea8-codimension-exclusion
 kind: lemma
 title: Excluding points of codimension zero and one
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

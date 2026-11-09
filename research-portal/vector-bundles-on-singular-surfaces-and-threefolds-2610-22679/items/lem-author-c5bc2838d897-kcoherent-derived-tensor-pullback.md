@@ -2,7 +2,7 @@
 id: lem-author-c5bc2838d897-kcoherent-derived-tensor-pullback
 kind: lemma
 title: Coherent derived tensor and pullback on perfect complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-c5bc2838d897-kcoherent-kflat-enhancement-comparison

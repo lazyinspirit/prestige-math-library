@@ -2,7 +2,7 @@
 id: lem-normal-scheme-component-reduction
 kind: lemma
 title: Normal noetherian schemes reduce to integral components
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-a9a51f3554f8-normal-ring-product

@@ -1,6 +1,6 @@
 ---
 title: External EM affine syntomic filtration and actual obstruction map
-status: draft
+status: published
 research_item: thm-author-c5b0693f4fc3-top-torsion-em-syntomic
 dependency_level: 9
 ---

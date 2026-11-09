@@ -2,7 +2,7 @@
 id: lem-author-74a9c17e63f1-bounded-convergence
 kind: lemma
 title: Stage bounds imply completeness and finite multiplicative convergence
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

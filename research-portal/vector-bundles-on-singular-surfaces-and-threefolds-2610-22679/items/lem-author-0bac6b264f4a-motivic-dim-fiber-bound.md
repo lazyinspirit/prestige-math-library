@@ -2,7 +2,7 @@
 id: lem-author-0bac6b264f4a-motivic-dim-fiber-bound
 kind: lemma
 title: The global dimension bound for the specified comparison fiber
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses

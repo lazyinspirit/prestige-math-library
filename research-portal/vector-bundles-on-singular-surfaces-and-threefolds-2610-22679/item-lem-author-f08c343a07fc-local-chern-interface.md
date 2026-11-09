@@ -1,6 +1,6 @@
 ---
 title: The ordinary Chow Chern map on isomorphism classes
-status: draft
+status: published
 research_item: lem-author-f08c343a07fc-local-chern-interface
 dependency_level: 12
 ---

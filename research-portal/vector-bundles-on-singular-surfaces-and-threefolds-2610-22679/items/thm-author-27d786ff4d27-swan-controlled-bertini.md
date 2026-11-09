@@ -2,7 +2,7 @@
 id: thm-author-27d786ff4d27-swan-controlled-bertini
 kind: theorem
 title: External Swan finite controlling-family Bertini theorem
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

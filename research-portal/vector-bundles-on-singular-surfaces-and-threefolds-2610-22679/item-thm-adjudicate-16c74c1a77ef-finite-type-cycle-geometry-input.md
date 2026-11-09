@@ -1,6 +1,6 @@
 ---
 title: Regularity and dimensions for finite-type cycle arguments
-status: draft
+status: published
 research_item: thm-adjudicate-16c74c1a77ef-finite-type-cycle-geometry-input
 dependency_level: 0
 ---

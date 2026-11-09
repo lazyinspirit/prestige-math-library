@@ -2,7 +2,7 @@
 id: lem-virtual-chern-extension-interface
 kind: lemma
 title: Extending a Whitney class to K zero
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

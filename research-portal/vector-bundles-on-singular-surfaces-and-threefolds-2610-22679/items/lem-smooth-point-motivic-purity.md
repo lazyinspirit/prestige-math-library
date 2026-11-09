@@ -2,7 +2,7 @@
 id: lem-smooth-point-motivic-purity
 kind: lemma
 title: Motivic purity and lower-weight vanishing at a smooth closed point
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cohomology-with-support

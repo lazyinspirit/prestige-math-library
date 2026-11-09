@@ -2,7 +2,7 @@
 id: lem-author-b747b28c359f-cochain-maps
 kind: lemma
 title: Cohomology maps induced by cochain maps
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-cochain-cohomology

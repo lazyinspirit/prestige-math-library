@@ -1,6 +1,6 @@
 ---
 title: Smooth critical-rank splitting criterion
-status: draft
+status: published
 research_item: thm-smooth-top-chern-splitting
 dependency_level: 16
 ---

@@ -2,7 +2,7 @@
 id: thm-adjudicate-f6007757a8ac-separated-cycle-descent-input
 kind: theorem
 title: Separated raw-cycle Zariski descent input
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

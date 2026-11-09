@@ -2,7 +2,7 @@
 id: thm-author-e0b0bf18ed2b-stable-enhancement-input
 kind: theorem
 title: External stable enhancement and smash product of spectra
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

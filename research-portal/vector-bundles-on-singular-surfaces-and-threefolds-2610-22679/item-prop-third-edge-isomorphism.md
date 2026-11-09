@@ -1,6 +1,6 @@
 ---
 title: Third edge isomorphism
-status: draft
+status: published
 research_item: prop-third-edge-isomorphism
 dependency_level: 23
 ---

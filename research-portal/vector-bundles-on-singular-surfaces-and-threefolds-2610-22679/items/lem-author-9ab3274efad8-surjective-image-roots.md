@@ -2,7 +2,7 @@
 id: lem-author-9ab3274efad8-surjective-image-roots
 kind: lemma
 title: Roots descend through a surjective homomorphism
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

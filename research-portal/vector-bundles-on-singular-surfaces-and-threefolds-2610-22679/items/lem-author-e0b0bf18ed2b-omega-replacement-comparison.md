@@ -2,7 +2,7 @@
 id: lem-author-e0b0bf18ed2b-omega-replacement-comparison
 kind: lemma
 title: Omega replacement preserves sequential stable groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-e0b0bf18ed2b-spectra-tail-invariance

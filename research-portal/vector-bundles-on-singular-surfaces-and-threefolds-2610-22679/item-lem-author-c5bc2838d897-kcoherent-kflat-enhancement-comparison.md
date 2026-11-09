@@ -1,6 +1,6 @@
 ---
 title: One coherent K-flat family and its supplied perfect fibers
-status: draft
+status: published
 research_item: lem-author-c5bc2838d897-kcoherent-kflat-enhancement-comparison
 dependency_level: 5
 ---

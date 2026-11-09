@@ -2,7 +2,7 @@
 id: lem-threefold-chern-prescription
 kind: lemma
 title: Prescribing three Chern classes successively
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-line-bundle-first-chern-classification

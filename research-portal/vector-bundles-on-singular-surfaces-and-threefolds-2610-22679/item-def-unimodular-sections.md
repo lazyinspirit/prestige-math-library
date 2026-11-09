@@ -1,6 +1,6 @@
 ---
 title: Unimodular elements and trivial summands
-status: draft
+status: published
 research_item: def-unimodular-sections
 dependency_level: 1
 ---

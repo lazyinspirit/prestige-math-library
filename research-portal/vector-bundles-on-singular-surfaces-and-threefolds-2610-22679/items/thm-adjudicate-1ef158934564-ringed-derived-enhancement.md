@@ -2,7 +2,7 @@
 id: thm-adjudicate-1ef158934564-ringed-derived-enhancement
 kind: theorem
 title: Derived enhancements of module sheaves on ringed spaces
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

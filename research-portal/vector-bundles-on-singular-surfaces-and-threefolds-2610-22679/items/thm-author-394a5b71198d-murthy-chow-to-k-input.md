@@ -2,7 +2,7 @@
 id: thm-author-394a5b71198d-murthy-chow-to-k-input
 kind: theorem
 title: Murthy top Chow cycle comparison with its actual exterior-dual map
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-394a5b71198d-exterior-dual-interface

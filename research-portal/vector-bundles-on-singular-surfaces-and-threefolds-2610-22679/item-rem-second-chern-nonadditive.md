@@ -1,6 +1,6 @@
 ---
 title: Second Chern class need not be additive on the first piece
-status: draft
+status: published
 research_item: rem-second-chern-nonadditive
 dependency_level: 22
 ---

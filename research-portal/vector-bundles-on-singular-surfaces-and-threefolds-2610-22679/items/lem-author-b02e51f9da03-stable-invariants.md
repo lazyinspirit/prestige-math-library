@@ -2,7 +2,7 @@
 id: lem-author-b02e51f9da03-stable-invariants
 kind: lemma
 title: Stable triviality fixes the K-zero class and determinant
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stably-free-bundles

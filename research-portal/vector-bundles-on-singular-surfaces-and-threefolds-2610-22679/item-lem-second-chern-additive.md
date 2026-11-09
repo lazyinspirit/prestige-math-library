@@ -1,6 +1,6 @@
 ---
 title: Second Chern additivity on the second piece
-status: draft
+status: published
 research_item: lem-second-chern-additive
 dependency_level: 24
 ---

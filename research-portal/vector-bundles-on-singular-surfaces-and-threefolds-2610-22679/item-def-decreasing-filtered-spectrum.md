@@ -1,6 +1,6 @@
 ---
 title: Decreasing spectral filtrations and associated graded
-status: draft
+status: published
 research_item: def-decreasing-filtered-spectrum
 dependency_level: 4
 ---

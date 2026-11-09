@@ -1,6 +1,6 @@
 ---
 title: Whitney identities and virtual Chern arithmetic
-status: draft
+status: published
 research_item: prop-chern-whitney-identities
 dependency_level: 20
 ---

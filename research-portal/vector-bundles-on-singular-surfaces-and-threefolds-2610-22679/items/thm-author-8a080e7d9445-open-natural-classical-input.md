@@ -2,7 +2,7 @@
 id: thm-author-8a080e7d9445-open-natural-classical-input
 kind: theorem
 title: Fixed-site classical cycle comparison on every smooth ambient
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

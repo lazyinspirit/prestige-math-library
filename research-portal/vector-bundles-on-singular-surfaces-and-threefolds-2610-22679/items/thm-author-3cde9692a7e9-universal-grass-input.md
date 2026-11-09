@@ -2,7 +2,7 @@
 id: thm-author-3cde9692a7e9-universal-grass-input
 kind: theorem
 title: External actual universal-class detection on Vect and Grass
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-32887006bdff-em-p1-model

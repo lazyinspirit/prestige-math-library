@@ -2,7 +2,7 @@
 id: lem-author-75596422a482-restriction-kernel
 kind: lemma
 title: The kernel of restriction is the supported subcomplex
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

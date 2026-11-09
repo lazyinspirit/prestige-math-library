@@ -1,6 +1,6 @@
 ---
 title: From constructible-category hyperdescent to the actual cohomology complex
-status: draft
+status: published
 research_item: lem-author-7113c087ecba-endomorphism-hyperdescent
 dependency_level: 1
 ---

@@ -2,7 +2,7 @@
 id: lem-determinants-of-short-exact-sequences
 kind: lemma
 title: Determinants and exact sequences
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-exterior-determinant-bundles

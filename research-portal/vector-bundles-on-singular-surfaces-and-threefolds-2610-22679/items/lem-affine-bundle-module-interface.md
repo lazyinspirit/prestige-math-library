@@ -2,7 +2,7 @@
 id: lem-affine-bundle-module-interface
 kind: lemma
 title: Affine bundles and finite projective modules
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-affine-quasi-coherent-equivalence

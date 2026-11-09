@@ -1,6 +1,6 @@
 ---
 title: Local free chains detect natural perfect operations on every qcqs base
-status: draft
+status: published
 research_item: lem-author-9b6cb358ddc9-local-chains
 dependency_level: 19
 ---

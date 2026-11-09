@@ -2,7 +2,7 @@
 id: lem-author-89250b1d710c-cycle-open-locality
 kind: lemma
 title: Cycle coefficients and face intersections are open local
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-free-abelian-group

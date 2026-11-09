@@ -1,6 +1,6 @@
 ---
 title: Divisibility of curve-supported top cohomology
-status: draft
+status: published
 research_item: lem-curve-supported-degree-six-divisible
 dependency_level: 19
 ---

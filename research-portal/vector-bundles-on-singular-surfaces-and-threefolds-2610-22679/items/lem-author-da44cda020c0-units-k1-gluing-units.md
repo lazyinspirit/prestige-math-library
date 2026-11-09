@@ -2,7 +2,7 @@
 id: lem-author-da44cda020c0-units-k1-gluing-units
 kind: lemma
 title: Compatible local units glue uniquely
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

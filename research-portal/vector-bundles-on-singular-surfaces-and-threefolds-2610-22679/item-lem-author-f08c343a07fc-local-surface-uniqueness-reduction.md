@@ -1,6 +1,6 @@
 ---
 title: Surface uniqueness from the cylinder and cancellation
-status: draft
+status: published
 research_item: lem-author-f08c343a07fc-local-surface-uniqueness-reduction
 dependency_level: 14
 ---

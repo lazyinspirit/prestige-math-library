@@ -2,7 +2,7 @@
 id: prop-motivic-etale-comparison
 kind: proposition
 title: Prime-to-characteristic étale comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

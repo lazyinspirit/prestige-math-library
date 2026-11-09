@@ -1,6 +1,6 @@
 ---
 title: Derived finite coefficients and the Bockstein sequence
-status: draft
+status: published
 research_item: lem-derived-coefficient-exact-sequence
 dependency_level: 0
 ---

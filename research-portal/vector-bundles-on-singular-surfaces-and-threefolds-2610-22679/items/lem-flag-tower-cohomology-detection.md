@@ -2,7 +2,7 @@
 id: lem-flag-tower-cohomology-detection
 kind: lemma
 title: Detection on a simultaneous flag tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-flag-tower-line-quotients

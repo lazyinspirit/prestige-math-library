@@ -1,6 +1,6 @@
 ---
 title: Third Chern isomorphism
-status: draft
+status: published
 research_item: cor-third-chern-isomorphism
 dependency_level: 33
 ---

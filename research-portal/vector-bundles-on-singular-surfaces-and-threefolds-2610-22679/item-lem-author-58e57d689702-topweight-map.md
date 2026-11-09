@@ -1,6 +1,6 @@
 ---
 title: The full top-weight map with its exact factorization
-status: draft
+status: published
 research_item: lem-author-58e57d689702-topweight-map
 dependency_level: 11
 ---

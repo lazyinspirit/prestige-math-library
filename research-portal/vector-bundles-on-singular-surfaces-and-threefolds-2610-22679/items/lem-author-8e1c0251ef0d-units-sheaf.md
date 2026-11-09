@@ -2,7 +2,7 @@
 id: lem-author-8e1c0251ef0d-units-sheaf
 kind: lemma
 title: Units in a sheaf of rings form a sheaf
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

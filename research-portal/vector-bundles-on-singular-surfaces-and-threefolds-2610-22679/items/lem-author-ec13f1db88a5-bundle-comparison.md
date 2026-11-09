@@ -3,7 +3,7 @@ id: lem-author-ec13f1db88a5-bundle-comparison
 kind: lemma
 title: Agreement with the existing projective-relation and virtual bundle first
   classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-chern-whitney-identities

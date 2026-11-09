@@ -1,6 +1,6 @@
 ---
 title: General equicharacteristic scope and the standing filtration restriction
-status: draft
+status: published
 research_item: lem-author-0cc80c1b5792-noetherian-scope
 dependency_level: 12
 ---

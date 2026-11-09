@@ -1,6 +1,6 @@
 ---
 title: Nonconnective K theory of perfect complexes
-status: draft
+status: published
 research_item: def-nonconnective-k-spectrum-interface
 dependency_level: 9
 ---

@@ -2,7 +2,7 @@
 id: thm-author-3cde9692a7e9-plus-model-input
 kind: theorem
 title: External Quillen acyclicity and the actual local free-class model
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-d026a7b99ace-universal-chern-space

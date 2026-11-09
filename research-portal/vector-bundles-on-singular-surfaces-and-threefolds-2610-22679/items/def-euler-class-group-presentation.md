@@ -2,7 +2,7 @@
 id: def-euler-class-group-presentation
 kind: definition
 title: Euler class group presentation
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

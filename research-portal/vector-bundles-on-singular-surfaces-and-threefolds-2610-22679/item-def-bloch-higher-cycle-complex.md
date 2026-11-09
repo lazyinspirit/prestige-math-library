@@ -1,6 +1,6 @@
 ---
 title: Bloch cycle complexes and higher Chow groups
-status: draft
+status: published
 research_item: def-bloch-higher-cycle-complex
 dependency_level: 3
 ---

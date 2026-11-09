@@ -2,7 +2,7 @@
 id: lem-author-d026a7b99ace-rr-and-global-square
 kind: lemma
 title: Supported RR and the actual support-to-global application
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-d026a7b99ace-positive-coordinates

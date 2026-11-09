@@ -2,7 +2,7 @@
 id: lem-trivial-determinant-rank-two-kernel
 kind: lemma
 title: A rank-two bundle with a trivial quotient and determinant
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-surjection-kernel-bundle

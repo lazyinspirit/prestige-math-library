@@ -2,7 +2,7 @@
 id: prop-third-edge-isomorphism
 kind: proposition
 title: Third edge isomorphism
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-third-edge-map

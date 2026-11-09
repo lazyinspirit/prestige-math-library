@@ -1,6 +1,6 @@
 ---
 title: External matrix, exact and bounded-projective K-theory comparisons
-status: draft
+status: published
 research_item: thm-author-da44cda020c0-units-k1-classical-comparisons
 dependency_level: 0
 ---

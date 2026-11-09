@@ -2,7 +2,7 @@
 id: lem-author-27d786ff4d27-fixed-locus-avoidance
 kind: lemma
 title: A rank-two family avoids each prescribed codimension-two locus
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-27d786ff4d27-dual-global-controls

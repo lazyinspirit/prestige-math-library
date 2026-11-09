@@ -2,7 +2,7 @@
 id: lem-author-27d786ff4d27-chartwise-integrality
 kind: lemma
 title: Swan chartwise integrality glues on the actual quasi-affine open
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-27d786ff4d27-dual-global-controls

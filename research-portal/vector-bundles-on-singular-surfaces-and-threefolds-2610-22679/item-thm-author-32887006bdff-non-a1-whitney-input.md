@@ -1,6 +1,6 @@
 ---
 title: External non-A¹ projective-relation filtered and Whitney theorem
-status: draft
+status: published
 research_item: thm-author-32887006bdff-non-a1-whitney-input
 dependency_level: 1
 ---

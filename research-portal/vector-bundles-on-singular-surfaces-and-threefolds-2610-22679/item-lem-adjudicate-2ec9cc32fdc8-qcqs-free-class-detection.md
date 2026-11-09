@@ -1,6 +1,6 @@
 ---
 title: Free-class detection on qcqs perfect K-space models
-status: draft
+status: published
 research_item: lem-adjudicate-2ec9cc32fdc8-qcqs-free-class-detection
 dependency_level: 21
 ---

@@ -2,7 +2,7 @@
 id: def-scheme-sites-and-sheafification
 kind: definition
 title: Scheme sites and sheafification
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-scheme-over-base

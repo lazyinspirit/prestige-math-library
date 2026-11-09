@@ -2,7 +2,7 @@
 id: lem-author-8e1c0251ef0d-tensor-transitions
 kind: lemma
 title: Tensor products multiply frame transitions
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-8e1c0251ef0d-frame-transitions

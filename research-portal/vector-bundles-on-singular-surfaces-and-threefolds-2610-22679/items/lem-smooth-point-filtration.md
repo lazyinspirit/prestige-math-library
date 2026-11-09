@@ -2,7 +2,7 @@
 id: lem-smooth-point-filtration
 kind: lemma
 title: Smooth point classes lie in the top filtration piece
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

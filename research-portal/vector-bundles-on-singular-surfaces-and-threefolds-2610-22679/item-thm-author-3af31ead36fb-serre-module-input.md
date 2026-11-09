@@ -1,6 +1,6 @@
 ---
 title: Serre free-summand theorem for modules
-status: draft
+status: published
 research_item: thm-author-3af31ead36fb-serre-module-input
 dependency_level: 0
 ---

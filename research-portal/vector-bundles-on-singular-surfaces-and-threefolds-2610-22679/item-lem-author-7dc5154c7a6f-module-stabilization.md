@@ -1,6 +1,6 @@
 ---
 title: Free stabilization passes through global sections
-status: draft
+status: published
 research_item: lem-author-7dc5154c7a6f-module-stabilization
 dependency_level: 2
 ---

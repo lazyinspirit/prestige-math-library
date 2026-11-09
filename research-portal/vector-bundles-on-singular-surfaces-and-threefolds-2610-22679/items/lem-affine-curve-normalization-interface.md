@@ -2,7 +2,7 @@
 id: lem-affine-curve-normalization-interface
 kind: lemma
 title: Normalization of an affine integral curve
-status: draft
+status: published
 domain: mathematics
 proof_strategy: direct
 deps:

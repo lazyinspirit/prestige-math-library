@@ -2,7 +2,7 @@
 id: def-bloch-higher-cycle-complex
 kind: definition
 title: Bloch cycle complexes and higher Chow groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-89250b1d710c-admissible-face-identities

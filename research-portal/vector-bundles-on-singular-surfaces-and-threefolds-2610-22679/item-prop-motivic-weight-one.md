@@ -1,6 +1,6 @@
 ---
 title: Motivic weight one
-status: draft
+status: published
 research_item: prop-motivic-weight-one
 dependency_level: 16
 ---

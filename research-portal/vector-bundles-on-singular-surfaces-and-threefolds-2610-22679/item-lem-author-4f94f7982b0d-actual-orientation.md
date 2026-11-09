@@ -1,6 +1,6 @@
 ---
 title: Actual EM orientation and projective bundle maps on that model
-status: draft
+status: published
 research_item: lem-author-4f94f7982b0d-actual-orientation
 dependency_level: 16
 ---

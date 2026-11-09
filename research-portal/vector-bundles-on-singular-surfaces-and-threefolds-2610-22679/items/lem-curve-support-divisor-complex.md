@@ -2,7 +2,7 @@
 id: lem-curve-support-divisor-complex
 kind: lemma
 title: Top cycles supported on an integral curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-supported-higher-cycle-complex

@@ -2,7 +2,7 @@
 id: lem-author-cf6ede58b450-plus-separated
 kind: lemma
 title: The plus presheaf is separated
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-cf6ede58b450-site-plus-data

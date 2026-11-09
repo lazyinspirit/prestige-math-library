@@ -1,6 +1,6 @@
 ---
 title: Boundary maps vanish for a split tower
-status: draft
+status: published
 research_item: lem-author-9f61e4df2141-split-tower-boundaries
 dependency_level: 6
 ---

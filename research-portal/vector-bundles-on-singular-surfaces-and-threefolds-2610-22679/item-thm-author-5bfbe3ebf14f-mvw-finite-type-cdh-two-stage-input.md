@@ -1,6 +1,6 @@
 ---
 title: External MVW proper-cover identification and two-stage refinement
-status: draft
+status: published
 research_item: thm-author-5bfbe3ebf14f-mvw-finite-type-cdh-two-stage-input
 dependency_level: 8
 ---

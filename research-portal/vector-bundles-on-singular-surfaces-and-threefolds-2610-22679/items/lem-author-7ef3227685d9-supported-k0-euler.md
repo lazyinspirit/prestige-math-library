@@ -2,7 +2,7 @@
 id: lem-author-7ef3227685d9-supported-k0-euler
 kind: lemma
 title: Additivity of the supported coherent Euler class
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-7ef3227685d9-supported-k0-heart

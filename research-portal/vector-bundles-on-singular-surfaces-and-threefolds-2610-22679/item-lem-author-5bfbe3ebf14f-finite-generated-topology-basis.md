@@ -1,6 +1,6 @@
 ---
 title: A finite-family basis for the generated cdh topology
-status: draft
+status: published
 research_item: lem-author-5bfbe3ebf14f-finite-generated-topology-basis
 dependency_level: 9
 ---

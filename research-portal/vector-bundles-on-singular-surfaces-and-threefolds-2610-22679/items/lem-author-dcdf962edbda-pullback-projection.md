@@ -2,7 +2,7 @@
 id: lem-author-dcdf962edbda-pullback-projection
 kind: lemma
 title: Equivalence of the weight-zero pullback projection
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-dcdf962edbda-restriction

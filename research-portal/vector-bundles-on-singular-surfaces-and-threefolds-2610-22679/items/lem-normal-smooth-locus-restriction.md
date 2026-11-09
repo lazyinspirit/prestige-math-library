@@ -2,7 +2,7 @@
 id: lem-normal-smooth-locus-restriction
 kind: lemma
 title: Smooth-locus restriction properties
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

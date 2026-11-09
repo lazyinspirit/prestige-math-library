@@ -1,6 +1,6 @@
 ---
 title: The actual smooth restriction arrow gives the point-supported cycle fiber
-status: draft
+status: published
 research_item: lem-author-59b1a831fe59-actual-support
 dependency_level: 15
 ---

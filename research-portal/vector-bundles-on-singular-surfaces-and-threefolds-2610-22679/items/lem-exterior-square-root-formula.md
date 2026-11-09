@@ -2,7 +2,7 @@
 id: lem-exterior-square-root-formula
 kind: lemma
 title: Exterior-square line factors on a flag space
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

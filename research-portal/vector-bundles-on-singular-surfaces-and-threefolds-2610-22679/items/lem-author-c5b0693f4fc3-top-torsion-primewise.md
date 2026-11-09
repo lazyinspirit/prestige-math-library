@@ -2,7 +2,7 @@
 id: lem-author-c5b0693f4fc3-top-torsion-primewise
 kind: lemma
 title: Primewise detection of torsion
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-annihilator-and-torsion-of-a-module

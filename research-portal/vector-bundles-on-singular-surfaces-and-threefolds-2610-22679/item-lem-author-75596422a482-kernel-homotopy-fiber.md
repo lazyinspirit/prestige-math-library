@@ -1,6 +1,6 @@
 ---
 title: Kernel models the homotopy fiber when the cokernel is acyclic
-status: draft
+status: published
 research_item: lem-author-75596422a482-kernel-homotopy-fiber
 dependency_level: 0
 ---

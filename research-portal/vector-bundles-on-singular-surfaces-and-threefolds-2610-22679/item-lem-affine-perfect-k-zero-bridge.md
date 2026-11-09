@@ -1,6 +1,6 @@
 ---
 title: Affine perfect K zero and bundle K zero
-status: draft
+status: published
 research_item: lem-affine-perfect-k-zero-bridge
 dependency_level: 10
 ---

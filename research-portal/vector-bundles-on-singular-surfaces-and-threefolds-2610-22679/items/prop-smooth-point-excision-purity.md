@@ -2,7 +2,7 @@
 id: prop-smooth-point-excision-purity
 kind: proposition
 title: Excision and K theory purity at a smooth closed point
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cohomology-with-support

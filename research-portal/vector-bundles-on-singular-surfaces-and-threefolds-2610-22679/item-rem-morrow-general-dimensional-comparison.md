@@ -1,6 +1,6 @@
 ---
 title: Reported alternative argument in arbitrary dimension
-status: draft
+status: published
 research_item: rem-morrow-general-dimensional-comparison
 dependency_level: 9
 ---

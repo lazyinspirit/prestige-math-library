@@ -2,7 +2,7 @@
 id: thm-smooth-critical-rank-classifications
 kind: theorem
 title: Classical smooth critical-rank classifications
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-f08c343a07fc-local-chern-interface

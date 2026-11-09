@@ -2,7 +2,7 @@
 id: lem-author-a44f2061570d-kernel-sheaf
 kind: lemma
 title: Pointwise kernels of abelian sheaves
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

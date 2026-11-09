@@ -1,6 +1,6 @@
 ---
 title: Smooth-locus restriction properties
-status: draft
+status: published
 research_item: lem-normal-smooth-locus-restriction
 dependency_level: 4
 ---

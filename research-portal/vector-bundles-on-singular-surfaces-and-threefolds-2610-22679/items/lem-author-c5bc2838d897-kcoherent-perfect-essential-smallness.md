@@ -2,7 +2,7 @@
 id: lem-author-c5bc2838d897-kcoherent-perfect-essential-smallness
 kind: lemma
 title: Essential smallness of perfect and supported categories
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-c5bc2838d897-kcoherent-qcqs-classical-generator-input

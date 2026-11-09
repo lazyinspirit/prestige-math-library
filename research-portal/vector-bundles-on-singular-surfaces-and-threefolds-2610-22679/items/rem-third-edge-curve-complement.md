@@ -2,7 +2,7 @@
 id: rem-third-edge-curve-complement
 kind: remark
 title: Third edge on a curve complement
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-curve-complement-torsion-free

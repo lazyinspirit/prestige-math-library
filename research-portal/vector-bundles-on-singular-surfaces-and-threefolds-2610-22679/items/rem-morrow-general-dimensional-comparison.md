@@ -2,7 +2,7 @@
 id: rem-morrow-general-dimensional-comparison
 kind: remark
 title: Reported alternative argument in arbitrary dimension
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

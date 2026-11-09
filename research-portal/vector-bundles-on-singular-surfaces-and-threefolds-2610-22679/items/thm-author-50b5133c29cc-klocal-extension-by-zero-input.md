@@ -2,7 +2,7 @@
 id: thm-author-50b5133c29cc-klocal-extension-by-zero-input
 kind: theorem
 title: External exact extension by zero for module sheaves
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-1ef158934564-ringed-derived-enhancement

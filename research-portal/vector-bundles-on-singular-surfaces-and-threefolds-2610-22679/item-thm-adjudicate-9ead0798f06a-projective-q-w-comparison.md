@@ -1,6 +1,6 @@
 ---
 title: Full projective Quillen–Waldhausen comparison and the local free-class map
-status: draft
+status: published
 research_item: thm-adjudicate-9ead0798f06a-projective-q-w-comparison
 dependency_level: 0
 ---

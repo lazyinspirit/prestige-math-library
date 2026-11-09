@@ -2,7 +2,7 @@
 id: thm-author-7113c087ecba-arc-input
 kind: theorem
 title: Exact hypercomplete arc descent for finite constructible coefficients
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

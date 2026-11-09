@@ -1,6 +1,6 @@
 ---
 title: Support ideals, mixed products and pullback
-status: draft
+status: published
 research_item: lem-author-c5bc2838d897-kcoherent-supported-tensor-ideal
 dependency_level: 7
 ---

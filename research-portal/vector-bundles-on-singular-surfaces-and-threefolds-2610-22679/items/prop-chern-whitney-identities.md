@@ -2,7 +2,7 @@
 id: prop-chern-whitney-identities
 kind: proposition
 title: Whitney identities and virtual Chern arithmetic
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-chern-classes

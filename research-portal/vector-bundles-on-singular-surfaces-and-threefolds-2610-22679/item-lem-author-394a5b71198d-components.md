@@ -1,6 +1,6 @@
 ---
 title: Smooth affine components and gluing a trivial line
-status: draft
+status: published
 research_item: lem-author-394a5b71198d-components
 dependency_level: 4
 ---

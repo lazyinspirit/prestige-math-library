@@ -2,7 +2,7 @@
 id: def-levine-weibel-zero-cycles
 kind: definition
 title: Levine–Weibel zero cycles
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-chow-group-of-cycles-mod-rational-equivalence

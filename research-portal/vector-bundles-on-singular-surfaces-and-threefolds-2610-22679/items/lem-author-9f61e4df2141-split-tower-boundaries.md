@@ -2,7 +2,7 @@
 id: lem-author-9f61e4df2141-split-tower-boundaries
 kind: lemma
 title: Boundary maps vanish for a split tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-decreasing-filtered-spectrum

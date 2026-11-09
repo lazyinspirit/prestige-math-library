@@ -2,7 +2,7 @@
 id: lem-author-79117e1d72ed-dual-conventions
 kind: lemma
 title: Quotient and line projectivizations agree after dualizing
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-projective-bundle-scheme

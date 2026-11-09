@@ -2,7 +2,7 @@
 id: lem-author-4057f3195e4f-free-boundary
 kind: lemma
 title: Restriction of finite-support divisors
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

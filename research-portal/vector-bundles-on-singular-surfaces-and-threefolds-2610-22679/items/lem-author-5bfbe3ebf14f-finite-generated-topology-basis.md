@@ -2,7 +2,7 @@
 id: lem-author-5bfbe3ebf14f-finite-generated-topology-basis
 kind: lemma
 title: A finite-family basis for the generated cdh topology
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-5bfbe3ebf14f-finite-nisnevich-subfamily

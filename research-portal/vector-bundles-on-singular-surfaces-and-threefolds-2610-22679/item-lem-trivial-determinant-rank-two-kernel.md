@@ -1,6 +1,6 @@
 ---
 title: A rank-two bundle with a trivial quotient and determinant
-status: draft
+status: published
 research_item: lem-trivial-determinant-rank-two-kernel
 dependency_level: 2
 ---

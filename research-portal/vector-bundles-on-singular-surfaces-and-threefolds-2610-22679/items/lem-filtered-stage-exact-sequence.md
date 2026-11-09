@@ -2,7 +2,7 @@
 id: lem-filtered-stage-exact-sequence
 kind: lemma
 title: Stage projections, kernels and image groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

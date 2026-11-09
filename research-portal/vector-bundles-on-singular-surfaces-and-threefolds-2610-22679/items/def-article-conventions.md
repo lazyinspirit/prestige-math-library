@@ -2,7 +2,7 @@
 id: def-article-conventions
 kind: definition
 title: Article scheme conventions
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-scheme-over-base

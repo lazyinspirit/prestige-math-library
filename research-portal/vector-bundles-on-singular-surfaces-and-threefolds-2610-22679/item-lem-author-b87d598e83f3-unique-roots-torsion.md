@@ -1,6 +1,6 @@
 ---
 title: Unique divisibility excludes torsion
-status: draft
+status: published
 research_item: lem-author-b87d598e83f3-unique-roots-torsion
 dependency_level: 0
 ---

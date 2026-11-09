@@ -1,6 +1,6 @@
 ---
 title: Murthy top Chow cycle comparison with its actual exterior-dual map
-status: draft
+status: published
 research_item: thm-author-394a5b71198d-murthy-chow-to-k-input
 dependency_level: 14
 ---

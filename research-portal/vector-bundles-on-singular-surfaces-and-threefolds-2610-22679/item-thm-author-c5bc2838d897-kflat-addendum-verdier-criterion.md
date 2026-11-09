@@ -1,6 +1,6 @@
 ---
 title: External full-subcategory localization criterion
-status: draft
+status: published
 research_item: thm-author-c5bc2838d897-kflat-addendum-verdier-criterion
 dependency_level: 0
 ---

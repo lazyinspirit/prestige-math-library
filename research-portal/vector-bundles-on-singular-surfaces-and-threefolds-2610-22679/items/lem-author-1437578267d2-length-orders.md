@@ -2,7 +2,7 @@
 id: lem-author-1437578267d2-length-orders
 kind: lemma
 title: Length orders on an integral curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-composition-series-and-length-of-a-module

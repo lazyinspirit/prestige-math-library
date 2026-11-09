@@ -2,7 +2,7 @@
 id: thm-author-91088613574d-smooth-comparison-input
 kind: theorem
 title: Elmanto–Morrow smooth comparison input
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

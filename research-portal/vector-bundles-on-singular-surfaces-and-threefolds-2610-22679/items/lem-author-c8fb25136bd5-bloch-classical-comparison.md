@@ -2,7 +2,7 @@
 id: lem-author-c8fb25136bd5-bloch-classical-comparison
 kind: lemma
 title: Classical Chow relations and Bloch boundaries
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

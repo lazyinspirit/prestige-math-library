@@ -2,7 +2,7 @@
 id: lem-author-c5b0693f4fc3-top-torsion-bockstein
 kind: lemma
 title: Bockstein obstruction to prime torsion
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-derived-finite-coefficients

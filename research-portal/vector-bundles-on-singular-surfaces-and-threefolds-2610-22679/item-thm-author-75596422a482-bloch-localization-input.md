@@ -1,6 +1,6 @@
 ---
 title: Higher-cycle localization including nonseparated schemes
-status: draft
+status: published
 research_item: thm-author-75596422a482-bloch-localization-input
 dependency_level: 5
 ---

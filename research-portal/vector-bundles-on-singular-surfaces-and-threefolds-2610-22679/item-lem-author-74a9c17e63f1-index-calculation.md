@@ -1,6 +1,6 @@
 ---
 title: Cohomological indexing of the actual graded groups
-status: draft
+status: published
 research_item: lem-author-74a9c17e63f1-index-calculation
 dependency_level: 14
 ---

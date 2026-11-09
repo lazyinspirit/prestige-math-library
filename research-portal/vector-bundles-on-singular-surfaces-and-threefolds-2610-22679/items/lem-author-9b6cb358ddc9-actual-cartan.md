@@ -2,7 +2,7 @@
 id: lem-author-9b6cb358ddc9-actual-cartan
 kind: lemma
 title: Actual perfect Cartan through degree three on all qcqs field-schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9b6cb358ddc9-local-chains

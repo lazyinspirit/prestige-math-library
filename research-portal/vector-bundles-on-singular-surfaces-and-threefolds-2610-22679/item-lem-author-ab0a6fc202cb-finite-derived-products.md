@@ -1,6 +1,6 @@
 ---
 title: Finite derived products and motivic coefficient operations
-status: draft
+status: published
 research_item: lem-author-ab0a6fc202cb-finite-derived-products
 dependency_level: 5
 ---

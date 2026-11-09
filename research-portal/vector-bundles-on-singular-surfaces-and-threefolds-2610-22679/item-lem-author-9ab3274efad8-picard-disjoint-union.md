@@ -1,6 +1,6 @@
 ---
 title: Picard groups of finite disjoint unions
-status: draft
+status: published
 research_item: lem-author-9ab3274efad8-picard-disjoint-union
 dependency_level: 0
 ---

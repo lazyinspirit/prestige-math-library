@@ -2,7 +2,7 @@
 id: lem-author-13e6fe931c45-prime-field-restriction
 kind: lemma
 title: Restriction of the base field for weight one
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

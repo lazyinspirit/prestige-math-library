@@ -1,6 +1,6 @@
 ---
 title: Levine–Weibel cycle image with pure-dimensional and component conventions
-status: draft
+status: published
 research_item: rem-levine-weibel-cycle-image
 dependency_level: 23
 ---

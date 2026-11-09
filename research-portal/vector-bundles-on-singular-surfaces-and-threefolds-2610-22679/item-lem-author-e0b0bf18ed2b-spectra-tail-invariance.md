@@ -1,6 +1,6 @@
 ---
 title: Cofinal tails and level invariance of stable groups
-status: draft
+status: published
 research_item: lem-author-e0b0bf18ed2b-spectra-tail-invariance
 dependency_level: 0
 ---

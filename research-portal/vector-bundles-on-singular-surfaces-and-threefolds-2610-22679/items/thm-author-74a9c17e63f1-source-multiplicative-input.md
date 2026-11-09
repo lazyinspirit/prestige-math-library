@@ -2,7 +2,7 @@
 id: thm-author-74a9c17e63f1-source-multiplicative-input
 kind: theorem
 title: External actual graded algebra and multiplicative tower spectral sequence
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

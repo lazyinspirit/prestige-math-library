@@ -1,6 +1,6 @@
 ---
 title: Motivic weight zero on all qcqs schemes
-status: draft
+status: published
 research_item: prop-motivic-weight-zero
 dependency_level: 14
 ---

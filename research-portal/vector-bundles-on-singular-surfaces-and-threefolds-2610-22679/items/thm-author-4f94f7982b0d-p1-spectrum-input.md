@@ -3,7 +3,7 @@ id: thm-author-4f94f7982b0d-p1-spectrum-input
 kind: theorem
 title: External symmetric P¹ model, orientation criterion and fundamental
   stabilization
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

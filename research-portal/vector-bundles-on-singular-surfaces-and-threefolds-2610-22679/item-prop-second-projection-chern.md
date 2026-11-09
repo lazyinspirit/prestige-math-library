@@ -1,6 +1,6 @@
 ---
 title: Second projection is minus second Chern class
-status: draft
+status: published
 research_item: prop-second-projection-chern
 dependency_level: 27
 ---

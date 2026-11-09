@@ -2,7 +2,7 @@
 id: lem-author-4f716d60801a-lifted-affine-equivalence
 kind: lemma
 title: Enhanced affine perfect equivalence
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-4f716d60801a-derived-enhancement-input

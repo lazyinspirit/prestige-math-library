@@ -2,7 +2,7 @@
 id: thm-author-7ef3227685d9-supported-k0-abelian-devissage-input
 kind: theorem
 title: External degree-zero abelian dévissage
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

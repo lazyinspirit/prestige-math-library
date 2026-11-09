@@ -1,6 +1,6 @@
 ---
 title: Independent determinant and second-Chern prescription
-status: draft
+status: published
 research_item: cor-surface-determinant-prescription
 dependency_level: 31
 ---

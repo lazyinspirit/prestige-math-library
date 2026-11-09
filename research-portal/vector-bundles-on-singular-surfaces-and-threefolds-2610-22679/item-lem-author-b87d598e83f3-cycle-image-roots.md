@@ -1,6 +1,6 @@
 ---
 title: Divisibility of an image with torsion kernel
-status: draft
+status: published
 research_item: lem-author-b87d598e83f3-cycle-image-roots
 dependency_level: 2
 ---

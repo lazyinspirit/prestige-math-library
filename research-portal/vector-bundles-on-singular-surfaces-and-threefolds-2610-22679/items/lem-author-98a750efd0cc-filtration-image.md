@@ -2,7 +2,7 @@
 id: lem-author-98a750efd0cc-filtration-image
 kind: lemma
 title: Images of filtration stages
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-decreasing-filtered-spectrum

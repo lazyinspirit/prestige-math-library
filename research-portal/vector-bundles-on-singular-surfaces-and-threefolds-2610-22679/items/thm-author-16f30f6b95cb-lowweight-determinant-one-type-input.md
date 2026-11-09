@@ -2,7 +2,7 @@
 id: thm-author-16f30f6b95cb-lowweight-determinant-one-type-input
 kind: theorem
 title: External determinant and pointed one-type inputs
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-perfect-k-zero-bridge

@@ -3,7 +3,7 @@ id: thm-author-d026a7b99ace-integral-field-model
 kind: theorem
 title: Integral oriented field coefficient comparison with actual Picard and
   support maps
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-6e70d30b9793-field-unit-zigzag

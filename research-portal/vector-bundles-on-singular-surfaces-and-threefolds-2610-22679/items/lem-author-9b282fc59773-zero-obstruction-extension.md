@@ -2,7 +2,7 @@
 id: lem-author-9b282fc59773-zero-obstruction-extension
 kind: lemma
 title: Vanishing end groups kill the middle obstruction group
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

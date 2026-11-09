@@ -1,6 +1,6 @@
 ---
 title: Restriction modulo its kernel
-status: draft
+status: published
 research_item: lem-author-75596422a482-quotient-inclusion
 dependency_level: 6
 ---

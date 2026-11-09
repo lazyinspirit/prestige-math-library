@@ -1,6 +1,6 @@
 ---
 title: External K-flat sheaf resolution and pullback input
-status: draft
+status: published
 research_item: thm-author-c5bc2838d897-kcoherent-kflat-sheaf-input
 dependency_level: 0
 ---

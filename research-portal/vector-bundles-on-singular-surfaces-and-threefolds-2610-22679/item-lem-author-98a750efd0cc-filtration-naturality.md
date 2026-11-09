@@ -1,6 +1,6 @@
 ---
 title: Naturality of image filtrations
-status: draft
+status: published
 research_item: lem-author-98a750efd0cc-filtration-naturality
 dependency_level: 6
 ---

@@ -1,6 +1,6 @@
 ---
 title: Rank-two uniqueness on singular threefolds
-status: draft
+status: published
 research_item: op-rank-two-threefold-uniqueness
 dependency_level: 15
 ---

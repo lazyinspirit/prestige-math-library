@@ -2,7 +2,7 @@
 id: lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses
 kind: lemma
 title: Normalizing the comparison fiber for the dimension criterion
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-0bac6b264f4a-motivic-dim-general-interface

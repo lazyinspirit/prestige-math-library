@@ -2,7 +2,7 @@
 id: thm-author-59b1a831fe59-perfect-cancellation
 kind: theorem
 title: External perfect-field Tate cancellation
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

@@ -1,6 +1,6 @@
 ---
 title: Extending the geometric support method to higher dimensions
-status: draft
+status: published
 research_item: op-higher-dimensional-geometric-method
 dependency_level: 21
 ---

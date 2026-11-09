@@ -2,7 +2,7 @@
 id: prop-smooth-point-third-chern-factor
 kind: proposition
 title: Factor two in the supported third Chern map
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-d026a7b99ace-positive-coordinates

@@ -1,6 +1,6 @@
 ---
 title: Factor two in the supported third Chern map
-status: draft
+status: published
 research_item: prop-smooth-point-third-chern-factor
 dependency_level: 25
 ---

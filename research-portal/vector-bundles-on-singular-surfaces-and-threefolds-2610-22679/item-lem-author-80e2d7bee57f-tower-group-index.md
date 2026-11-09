@@ -1,6 +1,6 @@
 ---
 title: Reading spectrum homotopy from an Omega tower
-status: draft
+status: published
 research_item: lem-author-80e2d7bee57f-tower-group-index
 dependency_level: 2
 ---

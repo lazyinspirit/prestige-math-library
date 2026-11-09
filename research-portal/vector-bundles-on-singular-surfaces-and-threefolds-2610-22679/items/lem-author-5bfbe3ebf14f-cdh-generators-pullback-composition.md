@@ -2,7 +2,7 @@
 id: lem-author-5bfbe3ebf14f-cdh-generators-pullback-composition
 kind: lemma
 title: Pullback and composition of the cdh generating families
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cdh-topology-interface

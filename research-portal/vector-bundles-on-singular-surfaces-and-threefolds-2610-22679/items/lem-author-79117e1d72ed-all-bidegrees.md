@@ -2,7 +2,7 @@
 id: lem-author-79117e1d72ed-all-bidegrees
 kind: lemma
 title: The exact projective bundle map in every integer bidegree
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

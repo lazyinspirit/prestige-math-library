@@ -2,7 +2,7 @@
 id: lem-codimension-two-picard-restriction
 kind: lemma
 title: Line bundles are detected off codimension two
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-codimension-two-extension

@@ -2,7 +2,7 @@
 id: lem-author-4057f3195e4f-quotient-restriction
 kind: lemma
 title: Quotienting a compatible surjection
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

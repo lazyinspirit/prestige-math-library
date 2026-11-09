@@ -1,6 +1,6 @@
 ---
 title: Rank-two bundles with prescribed first two classes
-status: draft
+status: published
 research_item: cor-rank-two-threefold-existence
 dependency_level: 36
 ---

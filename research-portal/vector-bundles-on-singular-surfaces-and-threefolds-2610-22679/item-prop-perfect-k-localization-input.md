@@ -1,6 +1,6 @@
 ---
 title: Perfect K theory localization and open excision
-status: draft
+status: published
 research_item: prop-perfect-k-localization-input
 dependency_level: 14
 ---

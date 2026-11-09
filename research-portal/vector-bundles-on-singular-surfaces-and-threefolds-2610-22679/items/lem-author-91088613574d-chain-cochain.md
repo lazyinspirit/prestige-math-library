@@ -2,7 +2,7 @@
 id: lem-author-91088613574d-chain-cochain
 kind: lemma
 title: Reindexing a chain complex cohomologically
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

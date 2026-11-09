@@ -1,6 +1,6 @@
 ---
 title: Torsion freeness after removing a smooth-locus integral curve
-status: draft
+status: published
 research_item: prop-curve-complement-torsion-free
 dependency_level: 20
 ---

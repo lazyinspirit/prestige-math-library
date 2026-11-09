@@ -1,6 +1,6 @@
 ---
 title: External supported slice projection with positive generic coefficient
-status: draft
+status: published
 research_item: thm-author-16f30f6b95cb-supported-slice-positive-cycle-input
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: First Chern class factors through determinant
-status: draft
+status: published
 research_item: prop-first-chern-determinant
 dependency_level: 23
 ---

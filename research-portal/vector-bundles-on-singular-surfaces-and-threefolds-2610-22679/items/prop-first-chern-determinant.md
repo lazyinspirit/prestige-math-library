@@ -2,7 +2,7 @@
 id: prop-first-chern-determinant
 kind: proposition
 title: First Chern class factors through determinant
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nonconnective-k-spectrum-interface

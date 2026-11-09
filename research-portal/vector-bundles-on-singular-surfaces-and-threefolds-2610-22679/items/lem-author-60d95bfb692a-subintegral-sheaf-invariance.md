@@ -2,7 +2,7 @@
 id: lem-author-60d95bfb692a-subintegral-sheaf-invariance
 kind: lemma
 title: Cdh sheaves invert finite subintegral maps
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

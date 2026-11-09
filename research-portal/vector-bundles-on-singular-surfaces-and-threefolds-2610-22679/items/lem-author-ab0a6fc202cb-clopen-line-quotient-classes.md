@@ -2,7 +2,7 @@
 id: lem-author-ab0a6fc202cb-clopen-line-quotient-classes
 kind: lemma
 title: Line-quotient classes across clopen rank strata
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-ab0a6fc202cb-finite-common-rank-strata

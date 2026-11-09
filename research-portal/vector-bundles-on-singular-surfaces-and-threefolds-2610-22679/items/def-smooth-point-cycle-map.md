@@ -2,7 +2,7 @@
 id: def-smooth-point-cycle-map
 kind: definition
 title: Smooth-point K theory class map
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-smooth-point-excision-purity

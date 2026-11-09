@@ -2,7 +2,7 @@
 id: lem-author-3cde9692a7e9-derived-chain-detection
 kind: lemma
 title: Local integral chains detect global natural maps into Chern targets
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-3cde9692a7e9-local-free-test

@@ -1,6 +1,6 @@
 ---
 title: Degree-zero Picard group as points of an abelian variety
-status: draft
+status: published
 research_item: thm-author-9ab3274efad8-jacobian-input
 dependency_level: 0
 ---

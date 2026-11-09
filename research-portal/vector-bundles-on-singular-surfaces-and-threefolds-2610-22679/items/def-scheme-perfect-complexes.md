@@ -2,7 +2,7 @@
 id: def-scheme-perfect-complexes
 kind: definition
 title: Perfect complexes on schemes and their support
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-4f716d60801a-derived-enhancement-input

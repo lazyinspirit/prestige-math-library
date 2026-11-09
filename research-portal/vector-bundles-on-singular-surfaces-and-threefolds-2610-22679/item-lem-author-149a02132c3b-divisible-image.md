@@ -1,6 +1,6 @@
 ---
 title: Divisibility survives the quotient and the support image
-status: draft
+status: published
 research_item: lem-author-149a02132c3b-divisible-image
 dependency_level: 18
 ---

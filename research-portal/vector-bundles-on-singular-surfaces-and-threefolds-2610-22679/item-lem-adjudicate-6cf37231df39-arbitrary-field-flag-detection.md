@@ -1,6 +1,6 @@
 ---
 title: Flag detection over an arbitrary field by prime-field restriction
-status: draft
+status: published
 research_item: lem-adjudicate-6cf37231df39-arbitrary-field-flag-detection
 dependency_level: 9
 ---

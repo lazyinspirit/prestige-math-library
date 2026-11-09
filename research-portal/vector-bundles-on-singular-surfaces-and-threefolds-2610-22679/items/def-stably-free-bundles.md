@@ -2,7 +2,7 @@
 id: def-stably-free-bundles
 kind: definition
 title: Stable triviality and stable bundle equivalence
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-locally-free-sheaf-finite-rank

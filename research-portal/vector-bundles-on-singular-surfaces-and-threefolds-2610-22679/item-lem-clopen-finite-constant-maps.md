@@ -1,6 +1,6 @@
 ---
 title: Maps to finite disjoint unions of the base
-status: draft
+status: published
 research_item: lem-clopen-finite-constant-maps
 dependency_level: 0
 ---

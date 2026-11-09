@@ -2,7 +2,7 @@
 id: lem-author-2ac325480ae8-chosen-root
 kind: lemma
 title: A chosen root trivializes the actual Tate coefficient on the slice
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-etale-tate-coefficients

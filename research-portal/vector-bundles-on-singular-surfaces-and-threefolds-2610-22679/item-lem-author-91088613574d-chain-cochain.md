@@ -1,6 +1,6 @@
 ---
 title: Reindexing a chain complex cohomologically
-status: draft
+status: published
 research_item: lem-author-91088613574d-chain-cochain
 dependency_level: 0
 ---

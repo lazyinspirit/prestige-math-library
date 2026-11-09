@@ -1,6 +1,6 @@
 ---
 title: Critical-rank cancellation used in the article
-status: draft
+status: published
 research_item: thm-critical-rank-cancellation
 dependency_level: 14
 ---

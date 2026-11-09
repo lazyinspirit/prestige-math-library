@@ -2,7 +2,7 @@
 id: lem-author-dcdf962edbda-cohomology
 kind: lemma
 title: Weight-zero sections and cohomology on the chosen general site
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -1,6 +1,6 @@
 ---
 title: Milnor K symbols and the Nisnevich sheaf
-status: draft
+status: published
 research_item: def-milnor-k-sheaf-interface
 dependency_level: 7
 ---

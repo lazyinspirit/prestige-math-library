@@ -1,6 +1,6 @@
 ---
 title: Scheme sites and sheafification
-status: draft
+status: published
 research_item: def-scheme-sites-and-sheafification
 dependency_level: 5
 ---

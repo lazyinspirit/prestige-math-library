@@ -1,6 +1,6 @@
 ---
 title: Singular sphere classes and ordered suspension
-status: draft
+status: published
 research_item: lem-adjudicate-1ef158934564-singular-sphere-comparison
 dependency_level: 1
 ---

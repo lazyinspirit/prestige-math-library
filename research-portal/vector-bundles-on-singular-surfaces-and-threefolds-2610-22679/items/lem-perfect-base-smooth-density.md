@@ -2,7 +2,7 @@
 id: lem-perfect-base-smooth-density
 kind: lemma
 title: Smooth density and normal codimension over a perfect field
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-smooth-locus-open

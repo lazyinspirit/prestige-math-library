@@ -2,7 +2,7 @@
 id: lem-author-59b1a831fe59-actual-support
 kind: lemma
 title: The actual smooth restriction arrow gives the point-supported cycle fiber
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-59b1a831fe59-neighborhood

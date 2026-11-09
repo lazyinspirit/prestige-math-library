@@ -2,7 +2,7 @@
 id: lem-author-4b6f215bcf3b-em-rational-comparison-cofiber
 kind: lemma
 title: Elmanto–Morrow rational comparison cofiber
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

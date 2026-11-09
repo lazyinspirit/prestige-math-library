@@ -1,6 +1,6 @@
 ---
 title: Homotopy exactness of a spectral fiber sequence
-status: draft
+status: published
 research_item: lem-fiber-sequence-homotopy-exactness
 dependency_level: 4
 ---

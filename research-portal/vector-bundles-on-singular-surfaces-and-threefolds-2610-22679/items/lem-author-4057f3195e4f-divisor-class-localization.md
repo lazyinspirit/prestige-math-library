@@ -2,7 +2,7 @@
 id: lem-author-4057f3195e4f-divisor-class-localization
 kind: lemma
 title: Localization of a presented divisor class group
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4057f3195e4f-free-boundary

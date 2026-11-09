@@ -2,7 +2,7 @@
 id: def-third-edge-map
 kind: definition
 title: Third edge homomorphism
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

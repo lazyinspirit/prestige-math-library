@@ -2,7 +2,7 @@
 id: thm-author-d026a7b99ace-universal-chern-space
 kind: theorem
 title: External formal universal Chern maps and supported construction
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-32887006bdff-em-p1-model

@@ -1,6 +1,6 @@
 ---
 title: Equality in affine K zero and stable isomorphism
-status: draft
+status: published
 research_item: lem-k-zero-stable-equivalence
 dependency_level: 2
 ---

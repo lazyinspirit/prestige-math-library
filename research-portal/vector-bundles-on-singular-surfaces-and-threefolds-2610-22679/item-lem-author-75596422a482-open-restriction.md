@@ -1,6 +1,6 @@
 ---
 title: Open restriction of admissible cycles
-status: draft
+status: published
 research_item: lem-author-75596422a482-open-restriction
 dependency_level: 4
 ---

@@ -2,7 +2,7 @@
 id: lem-author-394a5b71198d-exterior-dual-interface
 kind: lemma
 title: The actual exterior-dual class in affine perfect K zero
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

@@ -2,7 +2,7 @@
 id: thm-author-60d95bfb692a-huber-kelly-representable-input
 kind: theorem
 title: Huber–Kelly representable cdh sheafification input
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

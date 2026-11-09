@@ -1,6 +1,6 @@
 ---
 title: Cdh sheaves invert finite subintegral maps
-status: draft
+status: published
 research_item: lem-author-60d95bfb692a-subintegral-sheaf-invariance
 dependency_level: 11
 ---

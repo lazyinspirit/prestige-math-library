@@ -1,6 +1,6 @@
 ---
 title: Open excision for a descent theory
-status: draft
+status: published
 research_item: lem-open-excision-for-support-fibers
 dependency_level: 13
 ---

@@ -1,6 +1,6 @@
 ---
 title: Full affine K-space comparison and its sheafification
-status: draft
+status: published
 research_item: lem-adjudicate-10deda40f9da-affine-k-space-sheafification
 dependency_level: 11
 ---

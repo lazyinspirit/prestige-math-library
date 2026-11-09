@@ -2,7 +2,7 @@
 id: lem-author-9b282fc59773-unique-lifting-criterion
 kind: lemma
 title: Unique lifting from vanishing groups yields the Chern classification
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-9b282fc59773-chern-map-and-fibers

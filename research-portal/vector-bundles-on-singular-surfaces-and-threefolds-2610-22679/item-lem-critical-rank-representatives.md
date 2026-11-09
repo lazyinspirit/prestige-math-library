@@ -1,6 +1,6 @@
 ---
 title: Critical-rank representatives of rank-zero classes
-status: draft
+status: published
 research_item: lem-critical-rank-representatives
 dependency_level: 11
 ---

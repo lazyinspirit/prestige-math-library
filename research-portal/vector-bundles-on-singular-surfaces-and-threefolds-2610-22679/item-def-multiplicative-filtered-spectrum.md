@@ -1,6 +1,6 @@
 ---
 title: Multiplicative filtrations and graded products
-status: draft
+status: published
 research_item: def-multiplicative-filtered-spectrum
 dependency_level: 5
 ---

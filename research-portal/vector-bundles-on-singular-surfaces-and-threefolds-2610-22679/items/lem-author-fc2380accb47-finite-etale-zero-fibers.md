@@ -2,7 +2,7 @@
 id: lem-author-fc2380accb47-finite-etale-zero-fibers
 kind: lemma
 title: The selected zero fibers are finite etale schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-fc2380accb47-simultaneous-good-parameters

@@ -1,6 +1,6 @@
 ---
 title: Finite constant cdh sections
-status: draft
+status: published
 research_item: lem-finite-constant-cdh-sections
 dependency_level: 13
 ---

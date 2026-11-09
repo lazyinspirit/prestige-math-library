@@ -1,6 +1,6 @@
 ---
 title: Bounded finite-projective complexes and affine chain models
-status: draft
+status: published
 research_item: lem-author-4f716d60801a-finite-projective-model
 dependency_level: 1
 ---

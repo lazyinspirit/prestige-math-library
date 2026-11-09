@@ -2,7 +2,7 @@
 id: def-nisnevich-covering-interface
 kind: definition
 title: Nisnevich covers and distinguished squares
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

@@ -2,7 +2,7 @@
 id: lem-author-3cde9692a7e9-actual-total-cartan
 kind: lemma
 title: The actual perfect K-space operations satisfy total Cartan
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-3cde9692a7e9-local-free-test

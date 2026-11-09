@@ -1,6 +1,6 @@
 ---
 title: Purity twists and cohomological shifts with explicit premises
-status: draft
+status: published
 research_item: lem-author-9415fc97ee80-purity-shift-index
 dependency_level: 0
 ---

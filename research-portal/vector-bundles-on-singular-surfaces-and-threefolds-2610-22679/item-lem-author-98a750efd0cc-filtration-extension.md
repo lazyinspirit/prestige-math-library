@@ -1,6 +1,6 @@
 ---
 title: Extending a nonnegative filtration to integer indices
-status: draft
+status: published
 research_item: lem-author-98a750efd0cc-filtration-extension
 dependency_level: 6
 ---

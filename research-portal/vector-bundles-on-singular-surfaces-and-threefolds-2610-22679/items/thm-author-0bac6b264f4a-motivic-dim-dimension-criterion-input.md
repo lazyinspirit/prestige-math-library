@@ -2,7 +2,7 @@
 id: thm-author-0bac6b264f4a-motivic-dim-dimension-criterion-input
 kind: theorem
 title: External dimension criterion for a cdh-acyclic Nisnevich sheaf
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-derived-cohomology

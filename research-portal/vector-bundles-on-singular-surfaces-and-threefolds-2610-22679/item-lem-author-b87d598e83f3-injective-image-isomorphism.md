@@ -1,6 +1,6 @@
 ---
 title: An injection identifies its domain with its image
-status: draft
+status: published
 research_item: lem-author-b87d598e83f3-injective-image-isomorphism
 dependency_level: 0
 ---

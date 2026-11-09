@@ -1,6 +1,6 @@
 ---
 title: Bockstein obstruction to prime torsion
-status: draft
+status: published
 research_item: lem-author-c5b0693f4fc3-top-torsion-bockstein
 dependency_level: 5
 ---

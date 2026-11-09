@@ -2,7 +2,7 @@
 id: lem-affine-curve-picard-boundary
 kind: lemma
 title: Picard group of an affine curve through its boundary
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4057f3195e4f-divisor-class-localization

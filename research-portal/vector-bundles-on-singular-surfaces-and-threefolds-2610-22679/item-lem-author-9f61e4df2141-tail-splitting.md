@@ -1,6 +1,6 @@
 ---
 title: Graded pieces of a direct-sum tail tower
-status: draft
+status: published
 research_item: lem-author-9f61e4df2141-tail-splitting
 dependency_level: 5
 ---

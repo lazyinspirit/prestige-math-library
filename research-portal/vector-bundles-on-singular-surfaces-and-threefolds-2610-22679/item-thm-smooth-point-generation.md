@@ -1,6 +1,6 @@
 ---
 title: Smooth points generate the third motivic piece
-status: draft
+status: published
 research_item: thm-smooth-point-generation
 dependency_level: 32
 ---

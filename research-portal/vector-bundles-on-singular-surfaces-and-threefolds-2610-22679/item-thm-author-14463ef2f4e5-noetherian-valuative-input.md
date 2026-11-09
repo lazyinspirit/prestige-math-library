@@ -1,6 +1,6 @@
 ---
 title: Noetherian domains have equal Krull and valuative dimensions
-status: draft
+status: published
 research_item: thm-author-14463ef2f4e5-noetherian-valuative-input
 dependency_level: 6
 ---

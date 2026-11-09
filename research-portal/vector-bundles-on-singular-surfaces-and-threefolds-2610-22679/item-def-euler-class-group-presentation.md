@@ -1,6 +1,6 @@
 ---
 title: Euler class group presentation
-status: draft
+status: published
 research_item: def-euler-class-group-presentation
 dependency_level: 0
 ---

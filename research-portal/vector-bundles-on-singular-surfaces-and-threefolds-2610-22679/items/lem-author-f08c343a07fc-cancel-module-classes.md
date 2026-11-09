@@ -2,7 +2,7 @@
 id: lem-author-f08c343a07fc-cancel-module-classes
 kind: lemma
 title: Affine bundle classes are actual projective-module classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-bundle-module-interface

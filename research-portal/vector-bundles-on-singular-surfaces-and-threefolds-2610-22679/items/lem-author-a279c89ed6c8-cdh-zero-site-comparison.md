@@ -2,7 +2,7 @@
 id: lem-author-a279c89ed6c8-cdh-zero-site-comparison
 kind: lemma
 title: Constant cdh sections on the two article sites
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-dcdf962edbda-qcqs-site

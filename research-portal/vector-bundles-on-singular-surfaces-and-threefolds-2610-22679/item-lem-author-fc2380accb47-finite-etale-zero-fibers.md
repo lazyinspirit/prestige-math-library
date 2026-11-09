@@ -1,6 +1,6 @@
 ---
 title: The selected zero fibers are finite etale schemes
-status: draft
+status: published
 research_item: lem-author-fc2380accb47-finite-etale-zero-fibers
 dependency_level: 5
 ---

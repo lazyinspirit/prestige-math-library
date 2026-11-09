@@ -2,7 +2,7 @@
 id: prop-curve-complement-torsion-free
 kind: proposition
 title: Torsion freeness after removing a smooth-locus integral curve
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

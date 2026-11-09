@@ -1,6 +1,6 @@
 ---
 title: The hypercomplete derived-localization model on the actual general site
-status: draft
+status: published
 research_item: lem-author-7113c087ecba-general-localization
 dependency_level: 12
 ---

@@ -2,7 +2,7 @@
 id: lem-author-98a750efd0cc-filtration-products
 kind: lemma
 title: Products of filtration images
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-multiplicative-filtered-spectrum

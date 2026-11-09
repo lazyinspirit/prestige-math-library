@@ -2,7 +2,7 @@
 id: lem-point-correction-localization
 kind: lemma
 title: Removing isolated points from the support
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-bertini-support-reduction

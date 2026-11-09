@@ -1,6 +1,6 @@
 ---
 title: Elmanto–Morrow filtration input
-status: draft
+status: published
 research_item: thm-author-98a750efd0cc-motivic-filtration-input
 dependency_level: 10
 ---

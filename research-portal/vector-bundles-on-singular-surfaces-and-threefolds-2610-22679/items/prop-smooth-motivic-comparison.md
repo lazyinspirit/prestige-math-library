@@ -2,7 +2,7 @@
 id: prop-smooth-motivic-comparison
 kind: proposition
 title: Smooth motivic comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

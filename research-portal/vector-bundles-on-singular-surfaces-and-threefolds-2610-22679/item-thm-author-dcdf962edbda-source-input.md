@@ -1,6 +1,6 @@
 ---
 title: Exact source weight-zero and constant-sheaf input
-status: draft
+status: published
 research_item: thm-author-dcdf962edbda-source-input
 dependency_level: 0
 ---

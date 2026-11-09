@@ -2,7 +2,7 @@
 id: lem-author-98a750efd0cc-filtration-nesting
 kind: lemma
 title: Nesting of image filtration groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-decreasing-filtered-spectrum

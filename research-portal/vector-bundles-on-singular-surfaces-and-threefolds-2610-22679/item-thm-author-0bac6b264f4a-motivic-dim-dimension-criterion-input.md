@@ -1,6 +1,6 @@
 ---
 title: External dimension criterion for a cdh-acyclic Nisnevich sheaf
-status: draft
+status: published
 research_item: thm-author-0bac6b264f4a-motivic-dim-dimension-criterion-input
 dependency_level: 4
 ---

@@ -1,6 +1,6 @@
 ---
 title: Completely decomposed proper maps are abstract-blowup covers
-status: draft
+status: published
 research_item: lem-adjudicate-57a7caabd963-cdp-abstract-generation
 dependency_level: 8
 ---

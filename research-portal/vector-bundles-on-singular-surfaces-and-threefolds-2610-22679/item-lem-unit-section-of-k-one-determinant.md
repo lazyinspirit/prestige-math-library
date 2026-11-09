@@ -1,6 +1,6 @@
 ---
 title: Units split the K one determinant
-status: draft
+status: published
 research_item: lem-unit-section-of-k-one-determinant
 dependency_level: 11
 ---

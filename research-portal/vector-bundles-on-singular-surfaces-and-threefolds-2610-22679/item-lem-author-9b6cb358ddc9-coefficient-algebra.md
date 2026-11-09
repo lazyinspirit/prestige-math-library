@@ -1,6 +1,6 @@
 ---
 title: Degree-three coefficient algebra on the lower-Chern kernel
-status: draft
+status: published
 research_item: lem-author-9b6cb358ddc9-coefficient-algebra
 dependency_level: 26
 ---

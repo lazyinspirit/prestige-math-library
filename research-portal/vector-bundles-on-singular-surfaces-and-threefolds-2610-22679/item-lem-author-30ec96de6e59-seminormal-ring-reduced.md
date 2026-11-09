@@ -1,6 +1,6 @@
 ---
 title: The square-cube condition implies reducedness
-status: draft
+status: published
 research_item: lem-author-30ec96de6e59-seminormal-ring-reduced
 dependency_level: 0
 ---

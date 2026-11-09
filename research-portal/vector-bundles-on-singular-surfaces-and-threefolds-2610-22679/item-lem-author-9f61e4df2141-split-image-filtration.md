@@ -1,6 +1,6 @@
 ---
 title: Image filtration for a split tower
-status: draft
+status: published
 research_item: lem-author-9f61e4df2141-split-image-filtration
 dependency_level: 6
 ---

@@ -1,6 +1,6 @@
 ---
 title: Roots in a finite product of groups
-status: draft
+status: published
 research_item: lem-author-9ab3274efad8-finite-product-roots
 dependency_level: 0
 ---

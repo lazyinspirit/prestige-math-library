@@ -1,6 +1,6 @@
 ---
 title: The perfect image filtration has the stated second projection and kernel
-status: draft
+status: published
 research_item: lem-author-e216acade157-perfect-image-formula
 dependency_level: 25
 ---

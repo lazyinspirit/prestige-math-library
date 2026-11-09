@@ -2,7 +2,7 @@
 id: prop-bertini-curve-section
 kind: proposition
 title: Bertini curve functional with a prescribed avoidance locus
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-swan-bertini-point-section

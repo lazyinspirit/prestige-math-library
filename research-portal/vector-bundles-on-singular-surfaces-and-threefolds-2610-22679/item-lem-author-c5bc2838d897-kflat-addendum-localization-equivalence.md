@@ -1,6 +1,6 @@
 ---
 title: K-flat roofs give the full derived localization
-status: draft
+status: published
 research_item: lem-author-c5bc2838d897-kflat-addendum-localization-equivalence
 dependency_level: 1
 ---

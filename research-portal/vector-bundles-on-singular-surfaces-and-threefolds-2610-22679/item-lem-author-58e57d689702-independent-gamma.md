@@ -1,6 +1,6 @@
 ---
 title: An independent full equivalence into the truncated cdh localization
-status: draft
+status: published
 research_item: lem-author-58e57d689702-independent-gamma
 dependency_level: 10
 ---

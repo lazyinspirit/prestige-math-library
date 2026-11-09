@@ -2,7 +2,7 @@
 id: lem-author-149a02132c3b-geometry
 kind: lemma
 title: The actual smooth open pair and its choice scope
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

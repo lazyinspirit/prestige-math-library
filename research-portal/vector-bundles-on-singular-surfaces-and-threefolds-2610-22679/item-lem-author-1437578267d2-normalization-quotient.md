@@ -1,6 +1,6 @@
 ---
 title: Normalization and the curve divisor quotient
-status: draft
+status: published
 research_item: lem-author-1437578267d2-normalization-quotient
 dependency_level: 11
 ---

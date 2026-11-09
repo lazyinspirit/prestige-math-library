@@ -1,6 +1,6 @@
 ---
 title: Finite ideal-power filtrations and coherent sheaves on the closed subscheme
-status: draft
+status: published
 research_item: lem-author-7ef3227685d9-supported-k0-ideal-filtration
 dependency_level: 6
 ---

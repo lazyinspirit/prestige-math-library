@@ -1,6 +1,6 @@
 ---
 title: External inputs for flat descent of line bundles
-status: draft
+status: published
 research_item: lem-author-8e1c0251ef0d-fpqc-descent-input
 dependency_level: 0
 ---

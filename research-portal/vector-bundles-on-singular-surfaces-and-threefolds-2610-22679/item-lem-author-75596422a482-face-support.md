@@ -1,6 +1,6 @@
 ---
 title: Face boundaries preserve closed support
-status: draft
+status: published
 research_item: lem-author-75596422a482-face-support
 dependency_level: 4
 ---

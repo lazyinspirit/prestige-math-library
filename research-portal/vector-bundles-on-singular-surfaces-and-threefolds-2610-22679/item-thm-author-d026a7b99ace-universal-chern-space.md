@@ -1,6 +1,6 @@
 ---
 title: External formal universal Chern maps and supported construction
-status: draft
+status: published
 research_item: thm-author-d026a7b99ace-universal-chern-space
 dependency_level: 17
 ---

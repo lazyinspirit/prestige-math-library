@@ -1,6 +1,6 @@
 ---
 title: External actual EM graded algebra, Picard class and complex PBF
-status: draft
+status: published
 research_item: thm-author-32887006bdff-em-graded-input
 dependency_level: 14
 ---

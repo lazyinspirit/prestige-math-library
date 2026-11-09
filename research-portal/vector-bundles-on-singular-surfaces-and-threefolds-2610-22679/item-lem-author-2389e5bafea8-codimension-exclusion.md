@@ -1,6 +1,6 @@
 ---
 title: Excluding points of codimension zero and one
-status: draft
+status: published
 research_item: lem-author-2389e5bafea8-codimension-exclusion
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Nesting of image filtration groups
-status: draft
+status: published
 research_item: lem-author-98a750efd0cc-filtration-nesting
 dependency_level: 6
 ---

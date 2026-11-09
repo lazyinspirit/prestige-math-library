@@ -2,7 +2,7 @@
 id: lem-author-3a003d7b5208-affine-bundle-split-group
 kind: lemma
 title: Affine bundle K zero is the projective split group
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-bundle-module-interface

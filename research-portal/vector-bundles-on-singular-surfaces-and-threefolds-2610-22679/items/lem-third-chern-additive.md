@@ -2,7 +2,7 @@
 id: lem-third-chern-additive
 kind: lemma
 title: Third Chern additivity on the third piece
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9b6cb358ddc9-coefficient-algebra

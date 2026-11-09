@@ -1,6 +1,6 @@
 ---
 title: Actual cofiber triangles and source grading of the motivic tower
-status: draft
+status: published
 research_item: lem-author-74a9c17e63f1-graded-comparison
 dependency_level: 13
 ---

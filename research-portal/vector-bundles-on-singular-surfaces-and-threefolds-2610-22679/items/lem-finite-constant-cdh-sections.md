@@ -2,7 +2,7 @@
 id: lem-finite-constant-cdh-sections
 kind: lemma
 title: Finite constant cdh sections
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-cdh-representable-seminormalization

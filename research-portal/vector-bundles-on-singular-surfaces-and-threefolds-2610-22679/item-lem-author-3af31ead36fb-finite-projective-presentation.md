@@ -1,6 +1,6 @@
 ---
 title: Finite projective modules are finitely presented
-status: draft
+status: published
 research_item: lem-author-3af31ead36fb-finite-projective-presentation
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-author-d026a7b99ace-supported-chern-map
 kind: lemma
 title: Actual supported Chern operation and its smooth comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

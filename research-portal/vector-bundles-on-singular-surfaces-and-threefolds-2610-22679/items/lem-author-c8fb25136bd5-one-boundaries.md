@@ -2,7 +2,7 @@
 id: lem-author-c8fb25136bd5-one-boundaries
 kind: lemma
 title: Boundaries in degree zero
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

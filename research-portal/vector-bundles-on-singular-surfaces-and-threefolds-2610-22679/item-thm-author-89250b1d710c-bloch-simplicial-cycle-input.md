@@ -1,6 +1,6 @@
 ---
 title: External input for simplicial Bloch cycle groups
-status: draft
+status: published
 research_item: thm-author-89250b1d710c-bloch-simplicial-cycle-input
 dependency_level: 0
 ---

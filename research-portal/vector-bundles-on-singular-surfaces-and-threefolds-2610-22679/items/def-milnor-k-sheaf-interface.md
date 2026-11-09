@@ -2,7 +2,7 @@
 id: def-milnor-k-sheaf-interface
 kind: definition
 title: Milnor K symbols and the Nisnevich sheaf
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nisnevich-covering-interface

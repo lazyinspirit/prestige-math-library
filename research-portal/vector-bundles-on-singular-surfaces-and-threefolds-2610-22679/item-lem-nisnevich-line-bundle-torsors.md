@@ -1,6 +1,6 @@
 ---
 title: Units and Picard groups in Nisnevich degree zero and one
-status: draft
+status: published
 research_item: lem-nisnevich-line-bundle-torsors
 dependency_level: 13
 ---

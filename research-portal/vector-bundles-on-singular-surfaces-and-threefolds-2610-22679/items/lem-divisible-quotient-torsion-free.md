@@ -2,7 +2,7 @@
 id: lem-divisible-quotient-torsion-free
 kind: lemma
 title: Quotient by a divisible subgroup
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-divisible-module-over-an-integral-domain

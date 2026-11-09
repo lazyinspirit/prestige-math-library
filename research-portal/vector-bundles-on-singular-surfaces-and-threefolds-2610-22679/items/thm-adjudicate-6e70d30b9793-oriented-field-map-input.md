@@ -2,7 +2,7 @@
 id: thm-adjudicate-6e70d30b9793-oriented-field-map-input
 kind: theorem
 title: Exact primary unit, Picard and smooth-purity inputs for field compatibility
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

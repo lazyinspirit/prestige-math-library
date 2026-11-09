@@ -1,6 +1,6 @@
 ---
 title: Classical Chow relations and Bloch boundaries
-status: draft
+status: published
 research_item: lem-author-c8fb25136bd5-bloch-classical-comparison
 dependency_level: 6
 ---

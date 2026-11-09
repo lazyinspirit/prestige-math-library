@@ -2,7 +2,7 @@
 id: lem-author-5bfbe3ebf14f-finite-coproduct-sieve-refinement
 kind: lemma
 title: Finite coproducts and refinement inside a sieve
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-5bfbe3ebf14f-cdh-generators-pullback-composition

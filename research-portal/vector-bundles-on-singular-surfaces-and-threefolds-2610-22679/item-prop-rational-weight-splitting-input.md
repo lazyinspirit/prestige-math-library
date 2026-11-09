@@ -1,6 +1,6 @@
 ---
 title: Rational splitting of the motivic tower
-status: draft
+status: published
 research_item: prop-rational-weight-splitting-input
 dependency_level: 10
 ---

@@ -2,7 +2,7 @@
 id: lem-author-30ec96de6e59-square-cube-uniqueness
 kind: lemma
 title: Uniqueness from squares and cubes
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

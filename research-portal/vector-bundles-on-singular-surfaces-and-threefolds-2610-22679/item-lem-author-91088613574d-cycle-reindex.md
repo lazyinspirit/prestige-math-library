@@ -1,6 +1,6 @@
 ---
 title: Cycle-complex degree translation
-status: draft
+status: published
 research_item: lem-author-91088613574d-cycle-reindex
 dependency_level: 4
 ---

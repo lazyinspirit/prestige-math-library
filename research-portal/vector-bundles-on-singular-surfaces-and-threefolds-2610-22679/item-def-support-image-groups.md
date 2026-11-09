@@ -1,6 +1,6 @@
 ---
 title: Images of support groups in global groups
-status: draft
+status: published
 research_item: def-support-image-groups
 dependency_level: 14
 ---

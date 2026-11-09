@@ -2,7 +2,7 @@
 id: lem-adjudicate-6e70d30b9793-field-unit-zigzag
 kind: lemma
 title: A unit-induced integral field coefficient zigzag
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-6e70d30b9793-oriented-field-map-input

@@ -1,6 +1,6 @@
 ---
 title: Affine bundle classes are actual projective-module classes
-status: draft
+status: published
 research_item: lem-author-7dc5154c7a6f-module-classes
 dependency_level: 1
 ---

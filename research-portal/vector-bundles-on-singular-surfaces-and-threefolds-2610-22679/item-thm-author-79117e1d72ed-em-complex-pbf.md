@@ -1,6 +1,6 @@
 ---
 title: External EM projective bundle equivalence with its specified components
-status: draft
+status: published
 research_item: thm-author-79117e1d72ed-em-complex-pbf
 dependency_level: 10
 ---

@@ -3,7 +3,7 @@ id: cex-stably-trivial-fourfold-bundle
 kind: counterexample
 title: A nontrivial rank-two bundle with trivial Chern classes on a smooth
   complex affine fourfold
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-b02e51f9da03-mohan-kumar-existence-input

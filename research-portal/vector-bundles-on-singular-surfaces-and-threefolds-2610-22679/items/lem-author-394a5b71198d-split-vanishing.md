@@ -2,7 +2,7 @@
 id: lem-author-394a5b71198d-split-vanishing
 kind: lemma
 title: A split trivial line annihilates the exterior and top Chow classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-394a5b71198d-exterior-dual-interface

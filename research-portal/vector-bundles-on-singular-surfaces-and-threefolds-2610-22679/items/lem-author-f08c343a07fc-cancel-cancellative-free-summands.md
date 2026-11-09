@@ -2,7 +2,7 @@
 id: lem-author-f08c343a07fc-cancel-cancellative-free-summands
 kind: lemma
 title: Common projective complements and cancellation by free modules
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-finite-projective-complements

@@ -2,7 +2,7 @@
 id: thm-author-30ec96de6e59-seminormalization-input
 kind: theorem
 title: Seminormalization and the finite-type interface
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

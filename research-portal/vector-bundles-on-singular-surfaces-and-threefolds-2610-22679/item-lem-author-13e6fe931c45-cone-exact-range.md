@@ -1,6 +1,6 @@
 ---
 title: Exact range of a cofiber connectivity bound
-status: draft
+status: published
 research_item: lem-author-13e6fe931c45-cone-exact-range
 dependency_level: 5
 ---

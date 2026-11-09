@@ -1,6 +1,6 @@
 ---
 title: External actual supported Riemann–Roch in codimension three
-status: draft
+status: published
 research_item: thm-author-d026a7b99ace-supported-rr
 dependency_level: 22
 ---

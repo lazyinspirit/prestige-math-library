@@ -1,6 +1,6 @@
 ---
 title: Weight-one K-one projection is determinant
-status: draft
+status: published
 research_item: lem-k-one-projection-determinant
 dependency_level: 19
 ---

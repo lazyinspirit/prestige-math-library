@@ -1,6 +1,6 @@
 ---
 title: Completion, divisors and degree on smooth curves
-status: draft
+status: published
 research_item: lem-author-4057f3195e4f-curve-geometric-input
 dependency_level: 0
 ---

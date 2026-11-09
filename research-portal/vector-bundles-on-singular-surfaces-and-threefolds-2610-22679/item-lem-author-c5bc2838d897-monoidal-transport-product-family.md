@@ -1,6 +1,6 @@
 ---
 title: Strong monoidal transport from a product-base cocartesian family
-status: draft
+status: published
 research_item: lem-author-c5bc2838d897-monoidal-transport-product-family
 dependency_level: 1
 ---

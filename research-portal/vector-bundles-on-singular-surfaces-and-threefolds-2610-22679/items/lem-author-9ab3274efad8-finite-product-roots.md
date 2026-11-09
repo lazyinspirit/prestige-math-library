@@ -2,7 +2,7 @@
 id: lem-author-9ab3274efad8-finite-product-roots
 kind: lemma
 title: Roots in a finite product of groups
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

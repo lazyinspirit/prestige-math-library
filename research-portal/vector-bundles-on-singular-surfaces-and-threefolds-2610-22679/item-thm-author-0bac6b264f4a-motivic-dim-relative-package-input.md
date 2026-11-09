@@ -1,6 +1,6 @@
 ---
 title: External geometric properties of the actual motivic comparison fiber
-status: draft
+status: published
 research_item: thm-author-0bac6b264f4a-motivic-dim-relative-package-input
 dependency_level: 9
 ---

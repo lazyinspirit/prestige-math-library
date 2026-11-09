@@ -2,7 +2,7 @@
 id: lem-k-zero-stable-equivalence
 kind: lemma
 title: Equality in affine K zero and stable isomorphism
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

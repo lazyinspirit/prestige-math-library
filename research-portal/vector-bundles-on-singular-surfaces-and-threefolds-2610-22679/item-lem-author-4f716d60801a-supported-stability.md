@@ -1,6 +1,6 @@
 ---
 title: Stable supported perfect subcategories and retracts
-status: draft
+status: published
 research_item: lem-author-4f716d60801a-supported-stability
 dependency_level: 3
 ---

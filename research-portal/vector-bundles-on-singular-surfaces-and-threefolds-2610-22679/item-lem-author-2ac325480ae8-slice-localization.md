@@ -1,6 +1,6 @@
 ---
 title: Restriction to the slice commutes with big-site localization
-status: draft
+status: published
 research_item: lem-author-2ac325480ae8-slice-localization
 dependency_level: 8
 ---

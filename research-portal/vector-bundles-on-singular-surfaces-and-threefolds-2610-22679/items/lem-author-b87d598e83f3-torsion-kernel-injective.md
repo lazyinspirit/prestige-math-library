@@ -2,7 +2,7 @@
 id: lem-author-b87d598e83f3-torsion-kernel-injective
 kind: lemma
 title: A torsion kernel in a uniquely divisible group vanishes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b87d598e83f3-unique-roots-torsion

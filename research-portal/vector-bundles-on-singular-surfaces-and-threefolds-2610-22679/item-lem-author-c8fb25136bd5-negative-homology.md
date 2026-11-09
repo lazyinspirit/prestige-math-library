@@ -1,6 +1,6 @@
 ---
 title: Negative homology of the cycle complex
-status: draft
+status: published
 research_item: lem-author-c8fb25136bd5-negative-homology
 dependency_level: 4
 ---

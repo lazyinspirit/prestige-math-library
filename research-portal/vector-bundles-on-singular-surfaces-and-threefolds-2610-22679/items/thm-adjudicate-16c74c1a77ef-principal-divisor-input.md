@@ -2,7 +2,7 @@
 id: thm-adjudicate-16c74c1a77ef-principal-divisor-input
 kind: theorem
 title: Proper norm and graph formulas for principal divisors
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

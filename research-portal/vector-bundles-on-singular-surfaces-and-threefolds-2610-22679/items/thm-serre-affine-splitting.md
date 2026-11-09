@@ -2,7 +2,7 @@
 id: thm-serre-affine-splitting
 kind: theorem
 title: Serre splitting above the dimension
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

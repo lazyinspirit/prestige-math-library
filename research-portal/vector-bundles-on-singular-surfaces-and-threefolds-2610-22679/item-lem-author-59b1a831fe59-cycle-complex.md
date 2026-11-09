@@ -1,6 +1,6 @@
 ---
 title: Point-supported cycles give all-weight chain purity and low-weight zero
-status: draft
+status: published
 research_item: lem-author-59b1a831fe59-cycle-complex
 dependency_level: 16
 ---

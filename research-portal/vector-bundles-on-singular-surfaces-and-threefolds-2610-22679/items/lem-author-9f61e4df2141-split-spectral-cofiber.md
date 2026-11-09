@@ -2,7 +2,7 @@
 id: lem-author-9f61e4df2141-split-spectral-cofiber
 kind: lemma
 title: Cofiber of a direct-summand inclusion
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

@@ -2,7 +2,7 @@
 id: thm-normal-threefold-classification
 kind: theorem
 title: Motivic Chern classification on normal affine threefolds
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

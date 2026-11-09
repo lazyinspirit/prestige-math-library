@@ -2,7 +2,7 @@
 id: lem-author-da44cda020c0-units-k1-split-surjective-homomorphism
 kind: lemma
 title: A right inverse makes a homomorphism surjective
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

@@ -2,7 +2,7 @@
 id: thm-author-da44cda020c0-units-k1-enhanced-comparisons
 kind: theorem
 title: External connective, nonconnective and automorphism comparisons
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4f716d60801a-finite-projective-model

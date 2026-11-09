@@ -2,7 +2,7 @@
 id: prop-cdh-cover-refinement
 kind: proposition
 title: Finite refinement for integer cdh sections
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-5bfbe3ebf14f-finite-nisnevich-subfamily

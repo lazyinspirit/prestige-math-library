@@ -1,6 +1,6 @@
 ---
 title: Line-quotient classes across clopen rank strata
-status: draft
+status: published
 research_item: lem-author-ab0a6fc202cb-clopen-line-quotient-classes
 dependency_level: 3
 ---

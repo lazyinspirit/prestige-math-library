@@ -2,7 +2,7 @@
 id: lem-author-e216acade157-bundle-calculation
 kind: lemma
 title: The reduced universal bundle calculation identifies the second projection
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-e216acade157-split-determinant-fiber

@@ -1,6 +1,6 @@
 ---
 title: Chern classes of the alternating exterior class
-status: draft
+status: published
 research_item: lem-exterior-square-chern-calculation
 dependency_level: 28
 ---

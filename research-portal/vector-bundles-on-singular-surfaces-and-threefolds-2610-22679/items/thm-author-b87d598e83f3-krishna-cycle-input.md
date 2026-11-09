@@ -2,7 +2,7 @@
 id: thm-author-b87d598e83f3-krishna-cycle-input
 kind: theorem
 title: Krishna's affine zero-cycle divisibility and kernel input
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

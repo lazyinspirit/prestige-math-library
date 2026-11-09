@@ -1,6 +1,6 @@
 ---
 title: Smooth-point K theory class map
-status: draft
+status: published
 research_item: def-smooth-point-cycle-map
 dependency_level: 16
 ---

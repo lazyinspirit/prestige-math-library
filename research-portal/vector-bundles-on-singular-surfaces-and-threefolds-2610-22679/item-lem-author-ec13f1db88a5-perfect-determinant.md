@@ -1,6 +1,6 @@
 ---
 title: Determinant descends on the actual perfect K zero
-status: draft
+status: published
 research_item: lem-author-ec13f1db88a5-perfect-determinant
 dependency_level: 10
 ---

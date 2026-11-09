@@ -1,6 +1,6 @@
 ---
 title: External perfect-field Tate cancellation
-status: draft
+status: published
 research_item: thm-author-59b1a831fe59-perfect-cancellation
 dependency_level: 0
 ---

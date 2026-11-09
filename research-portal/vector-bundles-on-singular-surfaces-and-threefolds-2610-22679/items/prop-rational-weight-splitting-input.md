@@ -2,7 +2,7 @@
 id: prop-rational-weight-splitting-input
 kind: proposition
 title: Rational splitting of the motivic tower
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

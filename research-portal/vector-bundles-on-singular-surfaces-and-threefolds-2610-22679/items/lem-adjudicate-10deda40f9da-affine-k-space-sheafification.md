@@ -2,7 +2,7 @@
 id: lem-adjudicate-10deda40f9da-affine-k-space-sheafification
 kind: lemma
 title: Full affine K-space comparison and its sheafification
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-9ead0798f06a-projective-q-w-comparison

@@ -1,6 +1,6 @@
 ---
 title: Dimension decreases under quotients
-status: draft
+status: published
 research_item: lem-author-14463ef2f4e5-quotient-dimension
 dependency_level: 6
 ---

@@ -1,6 +1,6 @@
 ---
 title: Smooth motivic comparison
-status: draft
+status: published
 research_item: prop-smooth-motivic-comparison
 dependency_level: 13
 ---

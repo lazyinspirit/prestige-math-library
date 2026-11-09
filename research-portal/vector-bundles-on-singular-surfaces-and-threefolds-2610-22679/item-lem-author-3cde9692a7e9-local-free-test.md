@@ -1,6 +1,6 @@
 ---
 title: The stable free-class comparison is locally integrally acyclic
-status: draft
+status: published
 research_item: lem-author-3cde9692a7e9-local-free-test
 dependency_level: 19
 ---

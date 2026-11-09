@@ -2,7 +2,7 @@
 id: lem-author-a44f2061570d-matching-groups
 kind: lemma
 title: Matching families of abelian presheaves
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

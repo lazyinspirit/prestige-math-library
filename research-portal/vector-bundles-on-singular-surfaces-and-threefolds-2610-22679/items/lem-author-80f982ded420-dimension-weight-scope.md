@@ -2,7 +2,7 @@
 id: lem-author-80f982ded420-dimension-weight-scope
 kind: lemma
 title: Dimension-specific point images and a precise lower-component obstruction
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

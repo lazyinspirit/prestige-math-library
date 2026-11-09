@@ -2,7 +2,7 @@
 id: lem-author-75596422a482-kernel-homotopy-fiber
 kind: lemma
 title: Kernel models the homotopy fiber when the cokernel is acyclic
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

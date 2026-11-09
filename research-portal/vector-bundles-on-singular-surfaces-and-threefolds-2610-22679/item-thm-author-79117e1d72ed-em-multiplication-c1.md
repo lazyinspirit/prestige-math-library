@@ -1,6 +1,6 @@
 ---
 title: External EM multiplicative motivic complexes and actual Chern map
-status: draft
+status: published
 research_item: thm-author-79117e1d72ed-em-multiplication-c1
 dependency_level: 9
 ---

@@ -2,7 +2,7 @@
 id: lem-author-f08c343a07fc-cancel-spectral-kzero-stability
 kind: lemma
 title: Spectral K-zero equality gives an actual projective stabilization
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

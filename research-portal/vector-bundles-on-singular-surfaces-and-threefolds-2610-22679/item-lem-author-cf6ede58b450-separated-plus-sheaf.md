@@ -1,6 +1,6 @@
 ---
 title: The plus construction turns a separated presheaf into a sheaf
-status: draft
+status: published
 research_item: lem-author-cf6ede58b450-separated-plus-sheaf
 dependency_level: 4
 ---

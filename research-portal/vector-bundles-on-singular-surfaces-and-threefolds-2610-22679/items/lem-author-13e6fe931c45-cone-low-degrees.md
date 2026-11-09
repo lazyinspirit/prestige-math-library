@@ -2,7 +2,7 @@
 id: lem-author-13e6fe931c45-cone-low-degrees
 kind: lemma
 title: Cofiber bounds imply low-degree cohomology isomorphisms
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-derived-cohomology

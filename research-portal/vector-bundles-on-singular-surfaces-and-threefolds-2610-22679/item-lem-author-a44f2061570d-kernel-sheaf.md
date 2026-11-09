@@ -1,6 +1,6 @@
 ---
 title: Pointwise kernels of abelian sheaves
-status: draft
+status: published
 research_item: lem-author-a44f2061570d-kernel-sheaf
 dependency_level: 7
 ---

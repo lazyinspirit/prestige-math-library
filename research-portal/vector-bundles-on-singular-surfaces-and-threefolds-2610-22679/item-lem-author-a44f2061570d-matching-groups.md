@@ -1,6 +1,6 @@
 ---
 title: Matching families of abelian presheaves
-status: draft
+status: published
 research_item: lem-author-a44f2061570d-matching-groups
 dependency_level: 6
 ---

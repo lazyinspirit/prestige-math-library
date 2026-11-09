@@ -2,7 +2,7 @@
 id: lem-author-5bfbe3ebf14f-finite-nisnevich-subfamily
 kind: lemma
 title: Finite subfamilies of Nisnevich covers on the finite-type site
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nisnevich-covering-interface

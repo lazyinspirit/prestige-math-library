@@ -1,6 +1,6 @@
 ---
 title: The actual first EM stage is the rank-zero K space on all qcqs schemes
-status: draft
+status: published
 research_item: lem-author-ec13f1db88a5-rank-zero-stage
 dependency_level: 15
 ---

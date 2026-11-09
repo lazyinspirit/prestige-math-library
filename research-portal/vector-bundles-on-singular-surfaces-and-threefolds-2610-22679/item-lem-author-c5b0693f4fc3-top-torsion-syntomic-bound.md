@@ -1,6 +1,6 @@
 ---
 title: Affine characteristic-p syntomic amplitude without regularity
-status: draft
+status: published
 research_item: lem-author-c5b0693f4fc3-top-torsion-syntomic-bound
 dependency_level: 10
 ---

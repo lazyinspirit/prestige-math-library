@@ -1,6 +1,6 @@
 ---
 title: Third edge on a curve complement
-status: draft
+status: published
 research_item: rem-third-edge-curve-complement
 dependency_level: 23
 ---

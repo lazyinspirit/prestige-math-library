@@ -2,7 +2,7 @@
 id: lem-author-e216acade157-low-dimensional-quotient
 kind: lemma
 title: The low-dimensional quotient follows from the stage sequence
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-e216acade157-perfect-image-formula

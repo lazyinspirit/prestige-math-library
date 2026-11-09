@@ -1,6 +1,6 @@
 ---
 title: Constant-sheaf sections have finite local representatives
-status: draft
+status: published
 research_item: lem-author-5bfbe3ebf14f-constant-sheaf-finite-local-representatives
 dependency_level: 10
 ---

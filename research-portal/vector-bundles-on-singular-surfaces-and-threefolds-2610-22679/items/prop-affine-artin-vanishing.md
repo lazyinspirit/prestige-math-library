@@ -2,7 +2,7 @@
 id: prop-affine-artin-vanishing
 kind: proposition
 title: Affine étale vanishing and the actual localized evaluation
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

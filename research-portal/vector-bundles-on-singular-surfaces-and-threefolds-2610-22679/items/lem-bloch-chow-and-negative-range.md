@@ -2,7 +2,7 @@
 id: lem-bloch-chow-and-negative-range
 kind: lemma
 title: Degree zero and negative homology of the cycle complex
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

@@ -1,6 +1,6 @@
 ---
 title: Finite subfamilies of Nisnevich covers on the finite-type site
-status: draft
+status: published
 research_item: lem-author-5bfbe3ebf14f-finite-nisnevich-subfamily
 dependency_level: 8
 ---

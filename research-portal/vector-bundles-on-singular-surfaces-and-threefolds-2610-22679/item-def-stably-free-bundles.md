@@ -1,6 +1,6 @@
 ---
 title: Stable triviality and stable bundle equivalence
-status: draft
+status: published
 research_item: def-stably-free-bundles
 dependency_level: 0
 ---

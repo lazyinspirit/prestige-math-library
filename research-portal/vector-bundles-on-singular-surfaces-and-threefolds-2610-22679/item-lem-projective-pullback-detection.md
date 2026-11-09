@@ -1,6 +1,6 @@
 ---
 title: Projective bundle pullback detects cohomology classes
-status: draft
+status: published
 research_item: lem-projective-pullback-detection
 dependency_level: 1
 ---

@@ -2,7 +2,7 @@
 id: lem-adjudicate-5eb16844831b-empty-motivic-stages
 kind: lemma
 title: Every actual motivic stage on the empty scheme is zero
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

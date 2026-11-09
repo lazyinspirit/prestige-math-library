@@ -1,6 +1,6 @@
 ---
 title: External connective, nonconnective and automorphism comparisons
-status: draft
+status: published
 research_item: thm-author-da44cda020c0-units-k1-enhanced-comparisons
 dependency_level: 10
 ---

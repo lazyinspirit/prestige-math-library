@@ -1,6 +1,6 @@
 ---
 title: Dévissage of K zero with regular ambient support
-status: draft
+status: published
 research_item: prop-supported-k-zero-devissage
 dependency_level: 14
 ---

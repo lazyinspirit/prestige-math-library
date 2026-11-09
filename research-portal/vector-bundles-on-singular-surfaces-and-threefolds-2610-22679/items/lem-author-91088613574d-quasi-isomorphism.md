@@ -2,7 +2,7 @@
 id: lem-author-91088613574d-quasi-isomorphism
 kind: lemma
 title: Cohomology of equivalent derived complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-derived-cohomology

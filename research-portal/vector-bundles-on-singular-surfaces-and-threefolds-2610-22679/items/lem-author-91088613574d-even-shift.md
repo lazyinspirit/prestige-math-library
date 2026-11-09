@@ -2,7 +2,7 @@
 id: lem-author-91088613574d-even-shift
 kind: lemma
 title: Cohomology after an even cochain shift
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

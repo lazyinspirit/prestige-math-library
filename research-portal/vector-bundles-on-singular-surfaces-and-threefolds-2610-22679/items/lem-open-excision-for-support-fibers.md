@@ -2,7 +2,7 @@
 id: lem-open-excision-for-support-fibers
 kind: lemma
 title: Open excision for a descent theory
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-supported-complex-indexing

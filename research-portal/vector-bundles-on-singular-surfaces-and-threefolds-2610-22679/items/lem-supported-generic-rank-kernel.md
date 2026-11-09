@@ -2,7 +2,7 @@
 id: lem-supported-generic-rank-kernel
 kind: lemma
 title: Generic localization detects the point subgroup
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-curve-supported-second-stage

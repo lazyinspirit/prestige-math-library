@@ -1,6 +1,6 @@
 ---
 title: Derived global sections on a scheme site
-status: draft
+status: published
 research_item: def-derived-sections-on-sites
 dependency_level: 11
 ---

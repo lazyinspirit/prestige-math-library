@@ -2,7 +2,7 @@
 id: lem-author-3af31ead36fb-finite-projective-presentation
 kind: lemma
 title: Finite projective modules are finitely presented
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

@@ -2,7 +2,7 @@
 id: lem-author-89250b1d710c-alternating-face-boundary
 kind: lemma
 title: Alternating face boundaries square to zero
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-89250b1d710c-admissible-face-identities

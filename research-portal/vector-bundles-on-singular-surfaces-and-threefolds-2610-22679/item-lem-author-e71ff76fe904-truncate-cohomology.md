@@ -1,6 +1,6 @@
 ---
 title: Cofiber range gives natural truncation and cohomology comparison
-status: draft
+status: published
 research_item: lem-author-e71ff76fe904-truncate-cohomology
 dependency_level: 13
 ---

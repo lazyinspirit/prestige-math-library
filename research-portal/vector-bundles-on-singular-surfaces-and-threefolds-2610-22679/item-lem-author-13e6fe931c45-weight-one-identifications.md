@@ -1,6 +1,6 @@
 ---
 title: Low-degree consequences of a weight-one comparison
-status: draft
+status: published
 research_item: lem-author-13e6fe931c45-weight-one-identifications
 dependency_level: 15
 ---

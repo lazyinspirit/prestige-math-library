@@ -2,7 +2,7 @@
 id: lem-author-9b6cb358ddc9-local-chains
 kind: lemma
 title: Local free chains detect natural perfect operations on every qcqs base
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-3cde9692a7e9-plus-model-input

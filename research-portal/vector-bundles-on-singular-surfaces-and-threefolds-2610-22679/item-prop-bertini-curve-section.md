@@ -1,6 +1,6 @@
 ---
 title: Bertini curve functional with a prescribed avoidance locus
-status: draft
+status: published
 research_item: prop-bertini-curve-section
 dependency_level: 17
 ---

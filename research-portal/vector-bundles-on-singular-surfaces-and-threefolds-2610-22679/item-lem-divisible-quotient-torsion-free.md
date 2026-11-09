@@ -1,6 +1,6 @@
 ---
 title: Quotient by a divisible subgroup
-status: draft
+status: published
 research_item: lem-divisible-quotient-torsion-free
 dependency_level: 0
 ---

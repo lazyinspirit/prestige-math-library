@@ -1,6 +1,6 @@
 ---
 title: Stable spectra and exact triangles
-status: draft
+status: published
 research_item: def-stable-spectra-interface
 dependency_level: 3
 ---

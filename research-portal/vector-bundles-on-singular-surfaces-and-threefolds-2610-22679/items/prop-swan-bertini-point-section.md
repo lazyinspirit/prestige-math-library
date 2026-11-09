@@ -2,7 +2,7 @@
 id: prop-swan-bertini-point-section
 kind: proposition
 title: Bertini functional with finite smooth zero locus
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

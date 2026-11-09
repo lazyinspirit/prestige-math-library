@@ -2,7 +2,7 @@
 id: lem-author-74a9c17e63f1-graded-comparison
 kind: lemma
 title: Actual cofiber triangles and source grading of the motivic tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: lem-author-f08c343a07fc-local-chern-interface
 kind: lemma
 title: The ordinary Chow Chern map on isomorphism classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

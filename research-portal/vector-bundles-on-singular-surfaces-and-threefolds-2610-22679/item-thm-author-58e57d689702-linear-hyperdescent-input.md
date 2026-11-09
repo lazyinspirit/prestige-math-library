@@ -1,6 +1,6 @@
 ---
 title: Exact linear hyperdescent and derived-localization input
-status: draft
+status: published
 research_item: thm-author-58e57d689702-linear-hyperdescent-input
 dependency_level: 0
 ---

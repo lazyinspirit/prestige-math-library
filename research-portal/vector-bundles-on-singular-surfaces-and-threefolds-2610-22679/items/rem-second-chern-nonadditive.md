@@ -2,7 +2,7 @@
 id: rem-second-chern-nonadditive
 kind: remark
 title: Second Chern class need not be additive on the first piece
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

@@ -1,6 +1,6 @@
 ---
 title: Homotopy groups of integer spectral shifts
-status: draft
+status: published
 research_item: lem-author-80e2d7bee57f-spectral-integer-shift
 dependency_level: 4
 ---

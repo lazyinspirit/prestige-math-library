@@ -1,6 +1,6 @@
 ---
 title: Finite-coefficient motivic to cdh comparison
-status: draft
+status: published
 research_item: prop-finite-coefficient-cdh-comparison
 dependency_level: 10
 ---

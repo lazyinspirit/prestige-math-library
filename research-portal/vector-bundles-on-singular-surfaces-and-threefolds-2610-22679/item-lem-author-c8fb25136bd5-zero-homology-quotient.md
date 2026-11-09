@@ -1,6 +1,6 @@
 ---
 title: The degree-zero homology quotient
-status: draft
+status: published
 research_item: lem-author-c8fb25136bd5-zero-homology-quotient
 dependency_level: 6
 ---

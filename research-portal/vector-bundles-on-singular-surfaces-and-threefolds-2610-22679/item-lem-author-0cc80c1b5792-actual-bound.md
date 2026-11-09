@@ -1,6 +1,6 @@
 ---
 title: The precise source stage bound and its homotopy interpretation
-status: draft
+status: published
 research_item: lem-author-0cc80c1b5792-actual-bound
 dependency_level: 13
 ---

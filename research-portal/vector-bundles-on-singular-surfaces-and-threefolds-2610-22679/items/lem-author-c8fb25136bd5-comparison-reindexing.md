@@ -2,7 +2,7 @@
 id: lem-author-c8fb25136bd5-comparison-reindexing
 kind: lemma
 title: Reindexing a comparison with higher Chow groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

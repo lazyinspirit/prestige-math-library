@@ -1,7 +1,7 @@
 ---
 title: Actual exact-sequence Whitney and filtered-root formula on singular qcqs
   schemes
-status: draft
+status: published
 research_item: lem-author-32887006bdff-actual-whitney
 dependency_level: 18
 ---

@@ -1,6 +1,6 @@
 ---
 title: Explicit eventual-stage thresholds in every fixed homotopy degree
-status: draft
+status: published
 research_item: lem-author-0cc80c1b5792-threshold
 dependency_level: 14
 ---

@@ -2,7 +2,7 @@
 id: lem-author-7113c087ecba-cdh-hyperdescent
 kind: lemma
 title: Restriction of hyperdescent and arbitrary abstract blowup squares
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-7113c087ecba-generators-arc

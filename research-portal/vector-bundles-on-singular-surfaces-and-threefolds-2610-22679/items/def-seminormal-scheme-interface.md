@@ -2,7 +2,7 @@
 id: def-seminormal-scheme-interface
 kind: definition
 title: Seminormality and seminormalization
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-30ec96de6e59-square-cube-uniqueness

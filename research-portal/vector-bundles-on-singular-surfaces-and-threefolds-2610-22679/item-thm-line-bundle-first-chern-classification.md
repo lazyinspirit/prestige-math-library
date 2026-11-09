@@ -1,6 +1,6 @@
 ---
 title: Line bundles and first motivic Chern class
-status: draft
+status: published
 research_item: thm-line-bundle-first-chern-classification
 dependency_level: 24
 ---

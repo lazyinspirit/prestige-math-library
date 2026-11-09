@@ -2,7 +2,7 @@
 id: thm-adjudicate-57a7caabd963-birational-dense-open-input
 kind: theorem
 title: Dense-open isomorphism for proper birational maps
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

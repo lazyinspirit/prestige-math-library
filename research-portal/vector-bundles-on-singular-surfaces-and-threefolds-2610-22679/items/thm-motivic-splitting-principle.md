@@ -2,7 +2,7 @@
 id: thm-motivic-splitting-principle
 kind: theorem
 title: Motivic splitting principle
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-flag-tower-line-quotients

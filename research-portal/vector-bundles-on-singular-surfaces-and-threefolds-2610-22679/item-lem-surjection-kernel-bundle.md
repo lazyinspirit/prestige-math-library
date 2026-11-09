@@ -1,6 +1,6 @@
 ---
 title: Kernels of surjections of vector bundles
-status: draft
+status: published
 research_item: lem-surjection-kernel-bundle
 dependency_level: 0
 ---

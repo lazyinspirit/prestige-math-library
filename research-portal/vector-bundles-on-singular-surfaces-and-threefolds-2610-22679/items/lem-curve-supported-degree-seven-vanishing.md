@@ -2,7 +2,7 @@
 id: lem-curve-supported-degree-seven-vanishing
 kind: lemma
 title: Supported degree-seven vanishing
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-8a080e7d9445-geometry

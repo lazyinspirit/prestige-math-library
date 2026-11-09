@@ -2,7 +2,7 @@
 id: lem-high-filtration-vanishing
 kind: lemma
 title: High filtration vanishing
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

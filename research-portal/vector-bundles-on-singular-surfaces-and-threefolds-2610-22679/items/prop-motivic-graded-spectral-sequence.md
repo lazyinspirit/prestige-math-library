@@ -2,7 +2,7 @@
 id: prop-motivic-graded-spectral-sequence
 kind: proposition
 title: Motivic graded pieces and spectral sequence
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

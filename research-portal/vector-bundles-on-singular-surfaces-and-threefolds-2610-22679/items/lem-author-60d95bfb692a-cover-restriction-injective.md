@@ -2,7 +2,7 @@
 id: lem-author-60d95bfb692a-cover-restriction-injective
 kind: lemma
 title: A sheaf restricts injectively to a covering singleton
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

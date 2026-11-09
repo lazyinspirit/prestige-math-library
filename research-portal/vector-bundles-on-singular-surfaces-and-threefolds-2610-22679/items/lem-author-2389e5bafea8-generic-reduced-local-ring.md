@@ -2,7 +2,7 @@
 id: lem-author-2389e5bafea8-generic-reduced-local-ring
 kind: lemma
 title: Generic local rings of reduced schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-stalk-structure-sheaf-prime-localization

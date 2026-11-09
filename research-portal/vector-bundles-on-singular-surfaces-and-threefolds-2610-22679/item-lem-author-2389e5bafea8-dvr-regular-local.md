@@ -1,6 +1,6 @@
 ---
 title: Discrete valuation rings are regular local
-status: draft
+status: published
 research_item: lem-author-2389e5bafea8-dvr-regular-local
 dependency_level: 0
 ---

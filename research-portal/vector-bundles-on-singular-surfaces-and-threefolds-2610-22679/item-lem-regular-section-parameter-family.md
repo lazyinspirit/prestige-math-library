@@ -1,6 +1,6 @@
 ---
 title: Finite-dimensional families of generated bundle functionals
-status: draft
+status: published
 research_item: lem-regular-section-parameter-family
 dependency_level: 2
 ---

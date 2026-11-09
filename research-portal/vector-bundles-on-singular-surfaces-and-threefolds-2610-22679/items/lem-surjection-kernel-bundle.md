@@ -2,7 +2,7 @@
 id: lem-surjection-kernel-bundle
 kind: lemma
 title: Kernels of surjections of vector bundles
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-locally-free-sheaf-finite-rank

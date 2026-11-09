@@ -2,7 +2,7 @@
 id: lem-author-60d95bfb692a-finite-subintegral-cdh-cover
 kind: lemma
 title: Finite subintegral maps are cdh covers
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cdh-topology-interface

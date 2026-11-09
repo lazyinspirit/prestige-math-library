@@ -2,7 +2,7 @@
 id: rem-levine-weibel-cycle-image
 kind: remark
 title: Levine–Weibel cycle image with pure-dimensional and component conventions
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-smooth-point-filtration

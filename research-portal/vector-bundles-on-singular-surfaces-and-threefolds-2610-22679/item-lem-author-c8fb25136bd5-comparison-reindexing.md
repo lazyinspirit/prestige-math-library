@@ -1,6 +1,6 @@
 ---
 title: Reindexing a comparison with higher Chow groups
-status: draft
+status: published
 research_item: lem-author-c8fb25136bd5-comparison-reindexing
 dependency_level: 5
 ---

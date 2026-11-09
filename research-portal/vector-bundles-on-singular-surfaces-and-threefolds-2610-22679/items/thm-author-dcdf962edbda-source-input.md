@@ -2,7 +2,7 @@
 id: thm-author-dcdf962edbda-source-input
 kind: theorem
 title: Exact source weight-zero and constant-sheaf input
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

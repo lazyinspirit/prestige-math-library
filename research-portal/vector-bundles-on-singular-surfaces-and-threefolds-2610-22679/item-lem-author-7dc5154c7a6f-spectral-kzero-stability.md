@@ -1,6 +1,6 @@
 ---
 title: Spectral K-zero equality gives an actual projective stabilization
-status: draft
+status: published
 research_item: lem-author-7dc5154c7a6f-spectral-kzero-stability
 dependency_level: 12
 ---

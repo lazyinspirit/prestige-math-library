@@ -1,6 +1,6 @@
 ---
 title: First projection is first Chern class
-status: draft
+status: published
 research_item: lem-first-projection-chern
 dependency_level: 24
 ---

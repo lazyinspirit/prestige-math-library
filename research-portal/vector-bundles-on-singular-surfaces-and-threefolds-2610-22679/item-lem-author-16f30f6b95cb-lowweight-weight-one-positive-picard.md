@@ -1,6 +1,6 @@
 ---
 title: The EM weight-one Picard normalization is positive identity
-status: draft
+status: published
 research_item: lem-author-16f30f6b95cb-lowweight-weight-one-positive-picard
 dependency_level: 16
 ---

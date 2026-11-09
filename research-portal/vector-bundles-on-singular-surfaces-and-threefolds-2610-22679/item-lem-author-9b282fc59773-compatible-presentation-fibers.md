@@ -1,6 +1,6 @@
 ---
 title: Chern-compatible presentation transports the exact fibers
-status: draft
+status: published
 research_item: lem-author-9b282fc59773-compatible-presentation-fibers
 dependency_level: 14
 ---

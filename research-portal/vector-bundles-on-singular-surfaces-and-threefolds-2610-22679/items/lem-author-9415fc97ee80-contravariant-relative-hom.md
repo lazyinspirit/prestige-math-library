@@ -2,7 +2,7 @@
 id: lem-author-9415fc97ee80-contravariant-relative-hom
 kind: lemma
 title: Contravariant Hom reverses relative cofiber triangles
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-long-exact-hom-sequences-of-a-distinguished-triangle

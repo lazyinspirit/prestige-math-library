@@ -2,7 +2,7 @@
 id: lem-author-80f982ded420-quotient-image
 kind: lemma
 title: The quotient cycle map has exactly the smooth-point image
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-80f982ded420-normal-point-strata

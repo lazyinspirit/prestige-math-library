@@ -2,7 +2,7 @@
 id: lem-author-149a02132c3b-normalization-surjection
 kind: lemma
 title: The divisor presentation and actual Picard surjection
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-149a02132c3b-geometry

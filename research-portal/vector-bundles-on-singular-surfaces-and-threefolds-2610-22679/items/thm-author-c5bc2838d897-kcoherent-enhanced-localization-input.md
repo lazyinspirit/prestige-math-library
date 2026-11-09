@@ -2,7 +2,7 @@
 id: thm-author-c5bc2838d897-kcoherent-enhanced-localization-input
 kind: theorem
 title: External localization of one marked scheme and tensor family
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

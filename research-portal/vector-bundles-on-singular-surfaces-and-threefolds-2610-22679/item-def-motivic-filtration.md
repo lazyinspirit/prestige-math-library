@@ -1,6 +1,6 @@
 ---
 title: Motivic filtration and image groups
-status: draft
+status: published
 research_item: def-motivic-filtration
 dependency_level: 11
 ---

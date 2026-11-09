@@ -2,7 +2,7 @@
 id: lem-author-4f94f7982b0d-virtual-independence
 kind: lemma
 title: Clopen rank extension and genuine representative independence
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

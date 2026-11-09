@@ -2,7 +2,7 @@
 id: lem-adjudicate-2ec9cc32fdc8-qcqs-free-class-detection
 kind: lemma
 title: Free-class detection on qcqs perfect K-space models
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-3cde9692a7e9-plus-model-input

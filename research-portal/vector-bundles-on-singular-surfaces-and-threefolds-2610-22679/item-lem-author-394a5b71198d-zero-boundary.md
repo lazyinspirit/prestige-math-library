@@ -1,6 +1,6 @@
 ---
 title: The zero-dimensional critical-rank boundary
-status: draft
+status: published
 research_item: lem-author-394a5b71198d-zero-boundary
 dependency_level: 12
 ---

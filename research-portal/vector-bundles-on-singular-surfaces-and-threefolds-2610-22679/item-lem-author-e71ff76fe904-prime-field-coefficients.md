@@ -1,6 +1,6 @@
 ---
 title: Prime-field restriction and the intrinsic étale coefficient complex
-status: draft
+status: published
 research_item: lem-author-e71ff76fe904-prime-field-coefficients
 dependency_level: 12
 ---

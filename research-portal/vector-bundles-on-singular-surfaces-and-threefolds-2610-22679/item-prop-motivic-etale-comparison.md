@@ -1,6 +1,6 @@
 ---
 title: Prime-to-characteristic étale comparison
-status: draft
+status: published
 research_item: prop-motivic-etale-comparison
 dependency_level: 14
 ---

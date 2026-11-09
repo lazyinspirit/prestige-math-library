@@ -2,7 +2,7 @@
 id: lem-author-9b282fc59773-compatible-presentation-fibers
 kind: lemma
 title: Chern-compatible presentation transports the exact fibers
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-9b282fc59773-chern-map-and-fibers

@@ -2,7 +2,7 @@
 id: lem-author-27d786ff4d27-dual-global-controls
 kind: lemma
 title: Coherent dual extension supplies global Swan controlling sections
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-swan-bertini-point-section

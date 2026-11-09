@@ -2,7 +2,7 @@
 id: thm-adjudicate-9ead0798f06a-projective-q-w-comparison
 kind: theorem
 title: Full projective Quillen–Waldhausen comparison and the local free-class map
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

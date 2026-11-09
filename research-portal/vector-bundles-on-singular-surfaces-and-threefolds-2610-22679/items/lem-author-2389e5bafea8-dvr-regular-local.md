@@ -2,7 +2,7 @@
 id: lem-author-2389e5bafea8-dvr-regular-local
 kind: lemma
 title: Discrete valuation rings are regular local
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-equivalent-characterisations-of-a-dvr

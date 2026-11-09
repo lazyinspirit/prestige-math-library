@@ -1,6 +1,6 @@
 ---
 title: Picard group of an affine curve through its boundary
-status: draft
+status: published
 research_item: lem-affine-curve-picard-boundary
 dependency_level: 2
 ---

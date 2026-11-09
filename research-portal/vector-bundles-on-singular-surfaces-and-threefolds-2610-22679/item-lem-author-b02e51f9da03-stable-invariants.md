@@ -1,6 +1,6 @@
 ---
 title: Stable triviality fixes the K-zero class and determinant
-status: draft
+status: published
 research_item: lem-author-b02e51f9da03-stable-invariants
 dependency_level: 12
 ---

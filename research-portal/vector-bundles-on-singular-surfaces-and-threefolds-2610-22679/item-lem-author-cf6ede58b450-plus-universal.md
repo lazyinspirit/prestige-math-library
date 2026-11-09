@@ -1,6 +1,6 @@
 ---
 title: Universal mapping property of the plus construction
-status: draft
+status: published
 research_item: lem-author-cf6ede58b450-plus-universal
 dependency_level: 4
 ---

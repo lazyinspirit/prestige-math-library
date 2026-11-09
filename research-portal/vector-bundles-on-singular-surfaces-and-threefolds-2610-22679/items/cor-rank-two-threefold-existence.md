@@ -2,7 +2,7 @@
 id: cor-rank-two-threefold-existence
 kind: corollary
 title: Rank-two bundles with prescribed first two classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-normal-threefold-classification

@@ -1,6 +1,6 @@
 ---
 title: Gluing compatible local determinant homomorphisms
-status: draft
+status: published
 research_item: lem-author-da44cda020c0-units-k1-local-determinant-gluing
 dependency_level: 1
 ---

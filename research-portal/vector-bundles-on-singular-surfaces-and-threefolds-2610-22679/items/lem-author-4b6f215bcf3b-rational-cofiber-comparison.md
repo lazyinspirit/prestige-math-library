@@ -2,7 +2,7 @@
 id: lem-author-4b6f215bcf3b-rational-cofiber-comparison
 kind: lemma
 title: Rational cofiber implies finite-coefficient equivalence
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4b6f215bcf3b-rational-derived-quotient

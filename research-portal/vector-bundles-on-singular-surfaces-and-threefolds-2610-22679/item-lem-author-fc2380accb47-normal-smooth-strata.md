@@ -1,6 +1,6 @@
 ---
 title: Normal affine threefolds have controlled nonsmooth strata
-status: draft
+status: published
 research_item: lem-author-fc2380accb47-normal-smooth-strata
 dependency_level: 1
 ---

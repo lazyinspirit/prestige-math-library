@@ -1,6 +1,6 @@
 ---
 title: External maximal-minor height bound for the component-scope example
-status: draft
+status: published
 research_item: thm-author-27d786ff4d27-determinantal-height
 dependency_level: 0
 ---

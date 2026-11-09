@@ -1,6 +1,6 @@
 ---
 title: Residue fields and normalization point degrees
-status: draft
+status: published
 research_item: lem-algebraically-closed-residue-fields
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Componentwise curve construction and the scope of global irreducibility
-status: draft
+status: published
 research_item: lem-author-27d786ff4d27-clopen-scope
 dependency_level: 16
 ---

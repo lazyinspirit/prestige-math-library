@@ -1,6 +1,6 @@
 ---
 title: Enhanced affine perfect equivalence
-status: draft
+status: published
 research_item: lem-author-4f716d60801a-lifted-affine-equivalence
 dependency_level: 3
 ---

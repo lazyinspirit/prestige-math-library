@@ -1,6 +1,6 @@
 ---
 title: External normality and perfect-field smooth-locus inputs
-status: draft
+status: published
 research_item: thm-author-fc2380accb47-normal-geometric-input
 dependency_level: 0
 ---

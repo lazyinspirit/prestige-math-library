@@ -1,6 +1,6 @@
 ---
 title: A common-core zero curve exists on a nonempty parameter open
-status: draft
+status: published
 research_item: lem-author-27d786ff4d27-common-core-nonempty
 dependency_level: 14
 ---

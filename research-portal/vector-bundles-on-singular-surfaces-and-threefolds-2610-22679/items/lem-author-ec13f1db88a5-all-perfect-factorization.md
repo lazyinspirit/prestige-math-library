@@ -2,7 +2,7 @@
 id: lem-author-ec13f1db88a5-all-perfect-factorization
 kind: lemma
 title: Canonical first motivic class on every perfect K zero class
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-ec13f1db88a5-perfect-determinant

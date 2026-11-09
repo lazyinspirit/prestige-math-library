@@ -3,7 +3,7 @@ id: lem-author-9b6cb358ddc9-lower-vanishing
 kind: lemma
 title: The first two perfect Chern classes vanish on the third image piece in
   full scope
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9b6cb358ddc9-actual-second-fiber

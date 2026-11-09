@@ -1,6 +1,6 @@
 ---
 title: Supported RR and the actual support-to-global application
-status: draft
+status: published
 research_item: lem-author-d026a7b99ace-rr-and-global-square
 dependency_level: 24
 ---

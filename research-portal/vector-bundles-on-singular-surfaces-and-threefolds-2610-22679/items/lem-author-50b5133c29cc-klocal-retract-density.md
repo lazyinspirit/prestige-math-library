@@ -2,7 +2,7 @@
 id: lem-author-50b5133c29cc-klocal-retract-density
 kind: lemma
 title: Every open perfect complex is a retract of a restriction
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -1,6 +1,6 @@
 ---
 title: External prime-field cdh comparison and cdh dimension bound
-status: draft
+status: published
 research_item: thm-author-0bac6b264f4a-motivic-dim-cdh-interface-input
 dependency_level: 8
 ---

@@ -2,7 +2,7 @@
 id: thm-repair-72891dd58cd0-universal-chern-derived-limit-input
 kind: theorem
 title: Universal Chern cohomology and countable derived limits
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

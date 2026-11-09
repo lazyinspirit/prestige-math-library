@@ -2,7 +2,7 @@
 id: lem-nisnevich-line-bundle-torsors
 kind: lemma
 title: Units and Picard groups in Nisnevich degree zero and one
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: lem-k-one-projection-determinant
 kind: lemma
 title: Weight-one K-one projection is determinant
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

@@ -1,7 +1,7 @@
 ---
 title: Agreement with the existing projective-relation and virtual bundle first
   classes
-status: draft
+status: published
 research_item: lem-author-ec13f1db88a5-bundle-comparison
 dependency_level: 21
 ---

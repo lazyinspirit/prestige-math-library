@@ -2,7 +2,7 @@
 id: lem-author-9ab3274efad8-picard-disjoint-union
 kind: lemma
 title: Picard groups of finite disjoint unions
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-picard-group-scheme

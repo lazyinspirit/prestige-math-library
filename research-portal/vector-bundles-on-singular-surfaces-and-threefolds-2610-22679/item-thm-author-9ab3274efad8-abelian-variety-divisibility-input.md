@@ -1,6 +1,6 @@
 ---
 title: Divisibility of rational points of an abelian variety
-status: draft
+status: published
 research_item: thm-author-9ab3274efad8-abelian-variety-divisibility-input
 dependency_level: 0
 ---

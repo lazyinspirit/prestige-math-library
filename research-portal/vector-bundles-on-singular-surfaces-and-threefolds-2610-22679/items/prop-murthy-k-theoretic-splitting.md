@@ -2,7 +2,7 @@
 id: prop-murthy-k-theoretic-splitting
 kind: proposition
 title: Murthy splitting input in rank three
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-rank-three-euler-k-class

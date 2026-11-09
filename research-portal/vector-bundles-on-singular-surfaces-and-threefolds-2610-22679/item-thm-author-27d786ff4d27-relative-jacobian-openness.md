@@ -1,6 +1,6 @@
 ---
 title: External relative Jacobian criterion and openness of smooth maps
-status: draft
+status: published
 research_item: thm-author-27d786ff4d27-relative-jacobian-openness
 dependency_level: 0
 ---

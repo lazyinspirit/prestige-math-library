@@ -1,6 +1,6 @@
 ---
 title: External projective bundle input for the actual motivic complex
-status: draft
+status: published
 research_item: thm-author-ab0a6fc202cb-elmanto-morrow-projective-input
 dependency_level: 0
 ---

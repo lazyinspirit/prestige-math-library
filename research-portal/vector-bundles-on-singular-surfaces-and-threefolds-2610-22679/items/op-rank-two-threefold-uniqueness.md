@@ -2,7 +2,7 @@
 id: op-rank-two-threefold-uniqueness
 kind: open-problem
 title: Rank-two uniqueness on singular threefolds
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

@@ -2,7 +2,7 @@
 id: lem-author-f08c343a07fc-local-cylinder-geometry
 kind: lemma
 title: Cylinder and zero section of a smooth affine surface
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring

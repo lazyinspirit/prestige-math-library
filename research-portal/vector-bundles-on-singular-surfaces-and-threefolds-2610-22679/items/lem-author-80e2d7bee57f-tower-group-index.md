@@ -2,7 +2,7 @@
 id: lem-author-80e2d7bee57f-tower-group-index
 kind: lemma
 title: Reading spectrum homotopy from an Omega tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-e0b0bf18ed2b-omega-tower-shift

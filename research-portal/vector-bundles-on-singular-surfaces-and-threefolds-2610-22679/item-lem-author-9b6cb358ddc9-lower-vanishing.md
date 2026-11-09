@@ -1,7 +1,7 @@
 ---
 title: The first two perfect Chern classes vanish on the third image piece in
   full scope
-status: draft
+status: published
 research_item: lem-author-9b6cb358ddc9-lower-vanishing
 dependency_level: 25
 ---

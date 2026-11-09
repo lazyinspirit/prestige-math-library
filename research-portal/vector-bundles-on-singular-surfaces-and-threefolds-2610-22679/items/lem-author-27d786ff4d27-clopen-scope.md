@@ -2,7 +2,7 @@
 id: lem-author-27d786ff4d27-clopen-scope
 kind: lemma
 title: Componentwise curve construction and the scope of global irreducibility
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: lem-author-32887006bdff-virtual-independence
 kind: lemma
 title: Clopen rank extension and genuine representative independence
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-32887006bdff-actual-whitney

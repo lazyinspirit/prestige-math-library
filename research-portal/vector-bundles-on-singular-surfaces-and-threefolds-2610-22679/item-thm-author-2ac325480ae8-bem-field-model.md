@@ -1,6 +1,6 @@
 ---
 title: External canonical field restriction identifies the BEM and EM cdh models
-status: draft
+status: published
 research_item: thm-author-2ac325480ae8-bem-field-model
 dependency_level: 9
 ---

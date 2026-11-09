@@ -1,6 +1,6 @@
 ---
 title: Elmanto–Morrow motivic complex input
-status: draft
+status: published
 research_item: lem-author-b747b28c359f-elmanto-morrow-complexes
 dependency_level: 7
 ---

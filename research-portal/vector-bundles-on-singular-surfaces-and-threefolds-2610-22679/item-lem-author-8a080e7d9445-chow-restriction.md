@@ -1,6 +1,6 @@
 ---
 title: Actual Chow localization gives surjectivity of the motivic arrow
-status: draft
+status: published
 research_item: lem-author-8a080e7d9445-chow-restriction
 dependency_level: 12
 ---

@@ -1,6 +1,6 @@
 ---
 title: Seminormality and seminormalization
-status: draft
+status: published
 research_item: def-seminormal-scheme-interface
 dependency_level: 2
 ---

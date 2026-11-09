@@ -1,6 +1,6 @@
 ---
 title: Cofiber of a direct-summand inclusion
-status: draft
+status: published
 research_item: lem-author-9f61e4df2141-split-spectral-cofiber
 dependency_level: 4
 ---

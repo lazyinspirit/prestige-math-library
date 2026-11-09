@@ -2,7 +2,7 @@
 id: lem-author-2ac325480ae8-slice-localization
 kind: lemma
 title: Restriction to the slice commutes with big-site localization
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-2ac325480ae8-slice-site

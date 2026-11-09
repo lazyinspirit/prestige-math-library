@@ -2,7 +2,7 @@
 id: def-cohomology-with-support
 kind: definition
 title: Motivic and filtered K theory with support
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

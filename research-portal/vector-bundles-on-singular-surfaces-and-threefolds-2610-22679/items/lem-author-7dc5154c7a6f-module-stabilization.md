@@ -2,7 +2,7 @@
 id: lem-author-7dc5154c7a6f-module-stabilization
 kind: lemma
 title: Free stabilization passes through global sections
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-7dc5154c7a6f-module-classes

@@ -1,6 +1,6 @@
 ---
 title: Applying nonconnective K-theory to the enhanced interface
-status: draft
+status: published
 research_item: lem-author-c5bc2838d897-kcoherent-nonconnective-functor-products
 dependency_level: 8
 ---

@@ -1,6 +1,6 @@
 ---
 title: Distinguishing smooth-point and motivic filtration notation
-status: draft
+status: published
 research_item: rem-smooth-point-filtration-notation
 dependency_level: 21
 ---

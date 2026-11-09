@@ -2,7 +2,7 @@
 id: prop-filtration-product-projection
 kind: proposition
 title: Filtration projections and multiplication
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

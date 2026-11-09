@@ -1,6 +1,6 @@
 ---
 title: Projective bundle closure and naturality of the actual decomposition
-status: draft
+status: published
 research_item: lem-author-79117e1d72ed-base-change
 dependency_level: 12
 ---

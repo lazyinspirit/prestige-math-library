@@ -2,7 +2,7 @@
 id: thm-author-c5b0693f4fc3-top-torsion-topweight-comparison
 kind: theorem
 title: External canonical top-weight motivic-to-syntomic comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

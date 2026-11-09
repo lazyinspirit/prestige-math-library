@@ -1,6 +1,6 @@
 ---
 title: Complex shifts and spectral homotopy indices
-status: draft
+status: published
 research_item: lem-eilenberg-maclane-shift-index
 dependency_level: 5
 ---

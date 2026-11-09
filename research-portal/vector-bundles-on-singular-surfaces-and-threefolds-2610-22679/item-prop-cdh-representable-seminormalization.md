@@ -1,6 +1,6 @@
 ---
 title: Representable cdh sheaves and seminormalization
-status: draft
+status: published
 research_item: prop-cdh-representable-seminormalization
 dependency_level: 12
 ---

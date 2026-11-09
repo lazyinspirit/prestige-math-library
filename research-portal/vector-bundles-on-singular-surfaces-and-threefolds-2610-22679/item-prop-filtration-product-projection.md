@@ -1,6 +1,6 @@
 ---
 title: Filtration projections and multiplication
-status: draft
+status: published
 research_item: prop-filtration-product-projection
 dependency_level: 19
 ---

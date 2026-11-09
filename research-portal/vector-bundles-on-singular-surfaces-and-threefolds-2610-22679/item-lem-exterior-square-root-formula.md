@@ -1,6 +1,6 @@
 ---
 title: Exterior-square line factors on a flag space
-status: draft
+status: published
 research_item: lem-exterior-square-root-formula
 dependency_level: 2
 ---

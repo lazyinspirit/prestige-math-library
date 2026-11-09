@@ -2,7 +2,7 @@
 id: lem-adjudicate-6e70d30b9793-picard-map-detection
 kind: lemma
 title: The normalized class detects the actual Picard-space map on smooth schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-6e70d30b9793-oriented-field-map-input

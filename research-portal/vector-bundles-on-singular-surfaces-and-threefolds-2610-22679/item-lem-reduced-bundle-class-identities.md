@@ -1,6 +1,6 @@
 ---
 title: Reduced bundle class identities
-status: draft
+status: published
 research_item: lem-reduced-bundle-class-identities
 dependency_level: 24
 ---

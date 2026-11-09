@@ -3,7 +3,7 @@ title: Affine bundles and normal geometry
 description: Establish the scheme conventions, module–bundle correspondence,
   stable classes, determinants and normal-extension tools used by the article.
   Connect affine curves and residue fields to the later support arguments.
-status: draft
+status: published
 dependency_level: 0
 ---
 

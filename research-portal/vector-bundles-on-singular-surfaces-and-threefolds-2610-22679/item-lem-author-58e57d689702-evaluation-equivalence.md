@@ -1,6 +1,6 @@
 ---
 title: Cancellation at the required dimension-bounded evaluation objects
-status: draft
+status: published
 research_item: lem-author-58e57d689702-evaluation-equivalence
 dependency_level: 16
 ---

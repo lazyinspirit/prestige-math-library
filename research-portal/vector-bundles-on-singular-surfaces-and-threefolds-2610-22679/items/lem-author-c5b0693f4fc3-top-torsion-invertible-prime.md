@@ -2,7 +2,7 @@
 id: lem-author-c5b0693f4fc3-top-torsion-invertible-prime
 kind: lemma
 title: Top-weight degree-five vanishing away from the characteristic
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

@@ -2,7 +2,7 @@
 id: prop-etale-cdh-descent
 kind: proposition
 title: Étale derived cdh locality on the actual qcqs site
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

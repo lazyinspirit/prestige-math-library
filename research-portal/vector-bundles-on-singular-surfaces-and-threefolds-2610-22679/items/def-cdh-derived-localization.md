@@ -2,7 +2,7 @@
 id: def-cdh-derived-localization
 kind: definition
 title: Derived cdh localization
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

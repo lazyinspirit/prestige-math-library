@@ -1,6 +1,6 @@
 ---
 title: Murthy splitting input in rank three
-status: draft
+status: published
 research_item: prop-murthy-k-theoretic-splitting
 dependency_level: 25
 ---

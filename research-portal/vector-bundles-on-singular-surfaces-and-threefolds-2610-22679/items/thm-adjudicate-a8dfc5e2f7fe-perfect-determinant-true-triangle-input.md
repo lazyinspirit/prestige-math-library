@@ -2,7 +2,7 @@
 id: thm-adjudicate-a8dfc5e2f7fe-perfect-determinant-true-triangle-input
 kind: theorem
 title: "Perfect determinant with true-triangle additivity: precise external input"
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

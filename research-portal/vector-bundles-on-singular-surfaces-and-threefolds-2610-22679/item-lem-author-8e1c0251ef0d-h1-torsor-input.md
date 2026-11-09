@@ -1,6 +1,6 @@
 ---
 title: External classification of torsors by first cohomology
-status: draft
+status: published
 research_item: lem-author-8e1c0251ef0d-h1-torsor-input
 dependency_level: 12
 ---

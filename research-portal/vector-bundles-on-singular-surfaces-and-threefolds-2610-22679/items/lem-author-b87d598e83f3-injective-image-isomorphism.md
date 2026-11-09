@@ -2,7 +2,7 @@
 id: lem-author-b87d598e83f3-injective-image-isomorphism
 kind: lemma
 title: An injection identifies its domain with its image
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

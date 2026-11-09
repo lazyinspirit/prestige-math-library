@@ -2,7 +2,7 @@
 id: lem-author-e71ff76fe904-cdh-induced-map
 kind: lemma
 title: The exact cdh-local-to-objectwise étale map
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-e71ff76fe904-cdh-factorization-input

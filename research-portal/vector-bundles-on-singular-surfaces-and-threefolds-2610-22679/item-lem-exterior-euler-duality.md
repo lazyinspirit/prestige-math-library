@@ -1,6 +1,6 @@
 ---
 title: Dual conventions for the exterior Euler class
-status: draft
+status: published
 research_item: lem-exterior-euler-duality
 dependency_level: 1
 ---

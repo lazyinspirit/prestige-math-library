@@ -2,7 +2,7 @@
 id: lem-author-2389e5bafea8-field-regular-local
 kind: lemma
 title: Fields are regular local rings
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-embedding-dimension-and-regular-local-ring

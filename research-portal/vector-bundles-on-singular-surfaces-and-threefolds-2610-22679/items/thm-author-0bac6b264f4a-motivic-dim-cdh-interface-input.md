@@ -2,7 +2,7 @@
 id: thm-author-0bac6b264f4a-motivic-dim-cdh-interface-input
 kind: theorem
 title: External prime-field cdh comparison and cdh dimension bound
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-elmanto-morrow-complexes

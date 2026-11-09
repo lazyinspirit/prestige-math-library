@@ -1,6 +1,6 @@
 ---
 title: Rank-three alternating exterior class
-status: draft
+status: published
 research_item: def-rank-three-euler-k-class
 dependency_level: 12
 ---

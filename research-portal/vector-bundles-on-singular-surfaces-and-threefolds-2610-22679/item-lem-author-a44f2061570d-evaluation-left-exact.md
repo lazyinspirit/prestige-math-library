@@ -1,6 +1,6 @@
 ---
 title: Evaluation preserves kernels
-status: draft
+status: published
 research_item: lem-author-a44f2061570d-evaluation-left-exact
 dependency_level: 8
 ---

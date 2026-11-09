@@ -1,6 +1,6 @@
 ---
 title: Third edge homomorphism
-status: draft
+status: published
 research_item: def-third-edge-map
 dependency_level: 21
 ---

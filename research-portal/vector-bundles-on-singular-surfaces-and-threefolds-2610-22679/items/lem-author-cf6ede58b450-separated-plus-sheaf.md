@@ -2,7 +2,7 @@
 id: lem-author-cf6ede58b450-separated-plus-sheaf
 kind: lemma
 title: The plus construction turns a separated presheaf into a sheaf
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-cf6ede58b450-site-plus-data

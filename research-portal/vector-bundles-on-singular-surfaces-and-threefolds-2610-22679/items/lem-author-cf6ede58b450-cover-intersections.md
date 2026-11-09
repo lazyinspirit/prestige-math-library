@@ -2,7 +2,7 @@
 id: lem-author-cf6ede58b450-cover-intersections
 kind: lemma
 title: Covering sieves admit common refinements
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-cf6ede58b450-site-plus-data

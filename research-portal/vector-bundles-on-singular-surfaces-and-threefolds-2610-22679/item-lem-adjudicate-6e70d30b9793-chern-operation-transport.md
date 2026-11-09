@@ -1,6 +1,6 @@
 ---
 title: Projective relations transport the actual universal Chern operations
-status: draft
+status: published
 research_item: lem-adjudicate-6e70d30b9793-chern-operation-transport
 dependency_level: 19
 ---

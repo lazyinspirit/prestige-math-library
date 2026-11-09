@@ -2,7 +2,7 @@
 id: thm-author-9ab3274efad8-abelian-variety-divisibility-input
 kind: theorem
 title: Divisibility of rational points of an abelian variety
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

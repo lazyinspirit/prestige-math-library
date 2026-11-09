@@ -1,6 +1,6 @@
 ---
 title: Coherent derived tensor and pullback on perfect complexes
-status: draft
+status: published
 research_item: lem-author-c5bc2838d897-kcoherent-derived-tensor-pullback
 dependency_level: 6
 ---

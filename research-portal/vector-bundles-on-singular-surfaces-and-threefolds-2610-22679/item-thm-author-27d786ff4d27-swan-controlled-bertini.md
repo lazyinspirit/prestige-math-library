@@ -1,6 +1,6 @@
 ---
 title: External Swan finite controlling-family Bertini theorem
-status: draft
+status: published
 research_item: thm-author-27d786ff4d27-swan-controlled-bertini
 dependency_level: 0
 ---

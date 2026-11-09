@@ -1,6 +1,6 @@
 ---
 title: Torsion freeness of top threefold motivic cohomology
-status: draft
+status: published
 research_item: prop-top-motivic-torsion-free
 dependency_level: 12
 ---

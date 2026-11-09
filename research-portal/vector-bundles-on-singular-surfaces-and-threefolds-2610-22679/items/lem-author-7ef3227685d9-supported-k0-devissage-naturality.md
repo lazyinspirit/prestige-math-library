@@ -2,7 +2,7 @@
 id: lem-author-7ef3227685d9-supported-k0-devissage-naturality
 kind: lemma
 title: Ideal-power dévissage and compatibility with coherent pushforward
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-7ef3227685d9-supported-k0-ideal-filtration

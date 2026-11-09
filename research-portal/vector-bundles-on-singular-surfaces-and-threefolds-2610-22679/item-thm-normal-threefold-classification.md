@@ -1,6 +1,6 @@
 ---
 title: Motivic Chern classification on normal affine threefolds
-status: draft
+status: published
 research_item: thm-normal-threefold-classification
 dependency_level: 35
 ---

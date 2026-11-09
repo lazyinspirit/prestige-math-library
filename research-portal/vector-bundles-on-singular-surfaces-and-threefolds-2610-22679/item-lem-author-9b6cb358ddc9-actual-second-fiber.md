@@ -1,6 +1,6 @@
 ---
 title: Actual second-stage comparison on every qcqs field-scheme
-status: draft
+status: published
 research_item: lem-author-9b6cb358ddc9-actual-second-fiber
 dependency_level: 24
 ---

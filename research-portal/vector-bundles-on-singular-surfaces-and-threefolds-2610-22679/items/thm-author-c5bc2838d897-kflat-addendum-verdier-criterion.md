@@ -2,7 +2,7 @@
 id: thm-author-c5bc2838d897-kflat-addendum-verdier-criterion
 kind: theorem
 title: External full-subcategory localization criterion
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

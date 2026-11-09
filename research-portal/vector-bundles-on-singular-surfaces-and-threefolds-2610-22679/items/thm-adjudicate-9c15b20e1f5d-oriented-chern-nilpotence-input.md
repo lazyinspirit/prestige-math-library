@@ -2,7 +2,7 @@
 id: thm-adjudicate-9c15b20e1f5d-oriented-chern-nilpotence-input
 kind: theorem
 title: External nilpotence of oriented projective-relation Chern coefficients
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

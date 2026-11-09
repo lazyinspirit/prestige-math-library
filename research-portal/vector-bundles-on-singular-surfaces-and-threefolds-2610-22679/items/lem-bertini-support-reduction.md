@@ -2,7 +2,7 @@
 id: lem-bertini-support-reduction
 kind: lemma
 title: Curve-and-point support reduction
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-third-piece-representatives

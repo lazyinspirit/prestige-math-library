@@ -2,7 +2,7 @@
 id: lem-author-32887006bdff-relation-comparison
 kind: lemma
 title: The source Chern classes are the supplied projective-relation classes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-32887006bdff-em-p1-model

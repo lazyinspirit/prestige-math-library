@@ -2,7 +2,7 @@
 id: lem-author-9f61e4df2141-split-couple-degeneration
 kind: lemma
 title: Degeneration of the spectral sequence of a split tower
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9f61e4df2141-split-tower-boundaries

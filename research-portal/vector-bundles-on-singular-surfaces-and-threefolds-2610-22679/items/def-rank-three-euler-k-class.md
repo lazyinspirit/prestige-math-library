@@ -2,7 +2,7 @@
 id: def-rank-three-euler-k-class
 kind: definition
 title: Rank-three alternating exterior class
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-vector-bundle-classes

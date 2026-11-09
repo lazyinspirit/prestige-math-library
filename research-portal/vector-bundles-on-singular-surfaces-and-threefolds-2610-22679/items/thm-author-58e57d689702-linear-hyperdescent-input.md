@@ -2,7 +2,7 @@
 id: thm-author-58e57d689702-linear-hyperdescent-input
 kind: theorem
 title: Exact linear hyperdescent and derived-localization input
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

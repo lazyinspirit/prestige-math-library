@@ -2,7 +2,7 @@
 id: lem-author-c8fb25136bd5-negative-homology
 kind: lemma
 title: Negative homology of the cycle complex
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

@@ -3,7 +3,7 @@ id: lem-author-d026a7b99ace-actual-edge
 kind: lemma
 title: The actual supported third edge sends the positive point class to its
   residue object
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-d026a7b99ace-positive-coordinates

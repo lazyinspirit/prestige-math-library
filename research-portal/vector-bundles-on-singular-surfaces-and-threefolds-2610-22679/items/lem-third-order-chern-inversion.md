@@ -2,7 +2,7 @@
 id: lem-third-order-chern-inversion
 kind: lemma
 title: Formal Chern arithmetic through degree three
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-virtual-chern-extension-interface

@@ -1,6 +1,6 @@
 ---
 title: Functions extend across codimension two
-status: draft
+status: published
 research_item: lem-codimension-two-extension
 dependency_level: 2
 ---

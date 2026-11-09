@@ -1,6 +1,6 @@
 ---
 title: Boundaries in degree zero
-status: draft
+status: published
 research_item: lem-author-c8fb25136bd5-one-boundaries
 dependency_level: 5
 ---

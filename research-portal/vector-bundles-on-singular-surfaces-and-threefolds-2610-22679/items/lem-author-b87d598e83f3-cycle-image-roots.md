@@ -2,7 +2,7 @@
 id: lem-author-b87d598e83f3-cycle-image-roots
 kind: lemma
 title: Divisibility of an image with torsion kernel
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b87d598e83f3-torsion-kernel-injective

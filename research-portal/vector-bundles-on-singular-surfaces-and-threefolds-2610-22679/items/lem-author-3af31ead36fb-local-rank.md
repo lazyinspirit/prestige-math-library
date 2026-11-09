@@ -2,7 +2,7 @@
 id: lem-author-3af31ead36fb-local-rank
 kind: lemma
 title: Local ranks in the affine bundle correspondence
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-affine-bundle-module-interface

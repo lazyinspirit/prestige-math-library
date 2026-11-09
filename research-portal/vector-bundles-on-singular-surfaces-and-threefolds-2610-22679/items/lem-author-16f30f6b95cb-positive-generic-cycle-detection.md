@@ -2,7 +2,7 @@
 id: lem-author-16f30f6b95cb-positive-generic-cycle-detection
 kind: lemma
 title: Positive generic cycles determine the curve-supported homomorphism
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-16f30f6b95cb-curve-supported-bloch-bottom

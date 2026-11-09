@@ -2,7 +2,7 @@
 id: thm-smooth-point-generation
 kind: theorem
 title: Smooth points generate the third motivic piece
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-smooth-point-filtration

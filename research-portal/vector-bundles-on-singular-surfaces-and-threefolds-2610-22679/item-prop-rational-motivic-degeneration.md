@@ -1,6 +1,6 @@
 ---
 title: Rational third-edge comparison
-status: draft
+status: published
 research_item: prop-rational-motivic-degeneration
 dependency_level: 22
 ---

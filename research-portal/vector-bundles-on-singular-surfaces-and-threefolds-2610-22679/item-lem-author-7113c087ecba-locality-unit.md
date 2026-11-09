@@ -1,6 +1,6 @@
 ---
 title: The actual cdh-localization unit is an equivalence
-status: draft
+status: published
 research_item: lem-author-7113c087ecba-locality-unit
 dependency_level: 13
 ---

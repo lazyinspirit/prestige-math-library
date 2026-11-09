@@ -1,6 +1,6 @@
 ---
 title: Third-stage graded isomorphism
-status: draft
+status: published
 research_item: lem-third-graded-isomorphism
 dependency_level: 20
 ---

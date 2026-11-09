@@ -2,7 +2,7 @@
 id: thm-author-75596422a482-bloch-localization-input
 kind: theorem
 title: Higher-cycle localization including nonseparated schemes
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-bloch-higher-cycle-complex

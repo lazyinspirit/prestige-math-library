@@ -1,6 +1,6 @@
 ---
 title: Weight zero is the locally constant rank function
-status: draft
+status: published
 research_item: lem-author-16f30f6b95cb-lowweight-zero-projection-rank
 dependency_level: 13
 ---

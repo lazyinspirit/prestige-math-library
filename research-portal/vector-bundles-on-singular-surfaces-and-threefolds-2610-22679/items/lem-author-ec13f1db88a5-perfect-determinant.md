@@ -2,7 +2,7 @@
 id: lem-author-ec13f1db88a5-perfect-determinant
 kind: lemma
 title: Determinant descends on the actual perfect K zero
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-a8dfc5e2f7fe-perfect-determinant-true-triangle-input

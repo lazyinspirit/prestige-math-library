@@ -2,7 +2,7 @@
 id: lem-smooth-leading-cycle-normalization
 kind: lemma
 title: Smooth rank, first Chern, determinant and supported positive leading cycle
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-16f30f6b95cb-lowweight-zero-projection-rank

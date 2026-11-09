@@ -2,7 +2,7 @@
 id: thm-author-89250b1d710c-smooth-local-geometry-input
 kind: theorem
 title: External geometric inputs for affine reduction
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

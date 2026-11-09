@@ -1,6 +1,6 @@
 ---
 title: Roots descend through a surjective homomorphism
-status: draft
+status: published
 research_item: lem-author-9ab3274efad8-surjective-image-roots
 dependency_level: 0
 ---

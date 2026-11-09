@@ -2,7 +2,7 @@
 id: lem-author-89250b1d710c-admissible-face-identities
 kind: lemma
 title: Admissible face restrictions and their cycle identities
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-89250b1d710c-face-coordinate-geometry

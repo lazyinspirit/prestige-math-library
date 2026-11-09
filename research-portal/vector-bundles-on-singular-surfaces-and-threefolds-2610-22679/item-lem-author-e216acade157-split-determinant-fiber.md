@@ -1,6 +1,6 @@
 ---
 title: The actual determinant fiber is a natural retract of the rank-zero K-space
-status: draft
+status: published
 research_item: lem-author-e216acade157-split-determinant-fiber
 dependency_level: 18
 ---

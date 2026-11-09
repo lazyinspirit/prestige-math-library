@@ -2,7 +2,7 @@
 id: lem-author-b02e51f9da03-matrix-kernel
 kind: lemma
 title: Stable triviality as the kernel of a right-invertible matrix
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stably-free-bundles

@@ -1,6 +1,6 @@
 ---
 title: Euler-group comparison and the article's expectation
-status: draft
+status: published
 research_item: rem-adjudicate-d41ca2ed9e5e-euler-comparison-status
 dependency_level: 21
 ---

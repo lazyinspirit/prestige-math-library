@@ -2,7 +2,7 @@
 id: lem-author-394a5b71198d-zero-boundary
 kind: lemma
 title: The zero-dimensional critical-rank boundary
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-394a5b71198d-components

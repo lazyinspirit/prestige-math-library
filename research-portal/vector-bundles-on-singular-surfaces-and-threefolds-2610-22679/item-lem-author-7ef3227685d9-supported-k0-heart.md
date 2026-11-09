@@ -1,6 +1,6 @@
 ---
 title: Inherited bounded t structure on supported perfect complexes
-status: draft
+status: published
 research_item: lem-author-7ef3227685d9-supported-k0-heart
 dependency_level: 10
 ---

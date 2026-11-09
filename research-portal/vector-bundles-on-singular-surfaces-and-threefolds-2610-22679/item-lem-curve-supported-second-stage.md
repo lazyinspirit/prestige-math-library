@@ -1,6 +1,6 @@
 ---
 title: Second stage with integral curve support
-status: draft
+status: published
 research_item: lem-curve-supported-second-stage
 dependency_level: 19
 ---

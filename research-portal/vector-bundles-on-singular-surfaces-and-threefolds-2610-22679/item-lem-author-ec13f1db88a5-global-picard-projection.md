@@ -1,6 +1,6 @@
 ---
 title: The globally normalized first-layer Picard map is determinant
-status: draft
+status: published
 research_item: lem-author-ec13f1db88a5-global-picard-projection
 dependency_level: 17
 ---

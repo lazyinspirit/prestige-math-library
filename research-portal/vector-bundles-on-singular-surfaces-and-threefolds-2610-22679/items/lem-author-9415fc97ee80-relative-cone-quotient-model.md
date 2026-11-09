@@ -2,7 +2,7 @@
 id: lem-author-9415fc97ee80-relative-cone-quotient-model
 kind: lemma
 title: Relative cofibers and quotient complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-derived-category-of-an-abelian-category

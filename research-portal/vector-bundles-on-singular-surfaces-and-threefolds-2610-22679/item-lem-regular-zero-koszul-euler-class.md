@@ -1,6 +1,6 @@
 ---
 title: Euler class of a regular bundle functional
-status: draft
+status: published
 research_item: lem-regular-zero-koszul-euler-class
 dependency_level: 12
 ---

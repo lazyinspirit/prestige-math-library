@@ -1,6 +1,6 @@
 ---
 title: Seminormalization and the finite-type interface
-status: draft
+status: published
 research_item: thm-author-30ec96de6e59-seminormalization-input
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Separated raw-cycle Zariski descent input
-status: draft
+status: published
 research_item: thm-adjudicate-f6007757a8ac-separated-cycle-descent-input
 dependency_level: 4
 ---

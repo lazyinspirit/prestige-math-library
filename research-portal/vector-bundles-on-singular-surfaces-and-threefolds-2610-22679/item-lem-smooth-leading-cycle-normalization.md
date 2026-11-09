@@ -1,6 +1,6 @@
 ---
 title: Smooth rank, first Chern, determinant and supported positive leading cycle
-status: draft
+status: published
 research_item: lem-smooth-leading-cycle-normalization
 dependency_level: 18
 ---

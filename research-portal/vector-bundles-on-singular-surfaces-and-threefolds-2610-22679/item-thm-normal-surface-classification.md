@@ -1,6 +1,6 @@
 ---
 title: Motivic Chern classification on normal affine surfaces
-status: draft
+status: published
 research_item: thm-normal-surface-classification
 dependency_level: 30
 ---

@@ -1,6 +1,6 @@
 ---
 title: Compatible comparisons transport relative objects and support fibers
-status: draft
+status: published
 research_item: lem-author-9415fc97ee80-compatible-relative-transport
 dependency_level: 13
 ---

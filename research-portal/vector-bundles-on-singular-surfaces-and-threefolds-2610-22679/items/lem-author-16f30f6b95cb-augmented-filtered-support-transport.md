@@ -2,7 +2,7 @@
 id: lem-author-16f30f6b95cb-augmented-filtered-support-transport
 kind: lemma
 title: Augmented tower comparisons preserve supported graded projections
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-filtered-support-exactness

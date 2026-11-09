@@ -2,7 +2,7 @@
 id: cor-surface-determinant-prescription
 kind: corollary
 title: Independent determinant and second-Chern prescription
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-normal-surface-classification

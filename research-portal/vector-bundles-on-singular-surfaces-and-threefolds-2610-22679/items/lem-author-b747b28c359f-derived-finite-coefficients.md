@@ -2,7 +2,7 @@
 id: lem-author-b747b28c359f-derived-finite-coefficients
 kind: lemma
 title: Functorial finite coefficients for derived complexes
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-derived-coefficient-exact-sequence

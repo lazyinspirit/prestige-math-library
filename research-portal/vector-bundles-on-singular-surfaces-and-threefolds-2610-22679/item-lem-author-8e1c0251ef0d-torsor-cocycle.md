@@ -1,6 +1,6 @@
 ---
 title: Local sections of a torsor give a cocycle
-status: draft
+status: published
 research_item: lem-author-8e1c0251ef0d-torsor-cocycle
 dependency_level: 6
 ---

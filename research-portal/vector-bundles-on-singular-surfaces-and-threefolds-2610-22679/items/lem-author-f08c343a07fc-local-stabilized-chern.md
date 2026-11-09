@@ -2,7 +2,7 @@
 id: lem-author-f08c343a07fc-local-stabilized-chern
 kind: lemma
 title: Chern data survive addition of trivial bundles
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-f08c343a07fc-local-chern-interface

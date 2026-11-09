@@ -1,6 +1,6 @@
 ---
 title: Canonical first motivic class on every perfect K zero class
-status: draft
+status: published
 research_item: lem-author-ec13f1db88a5-all-perfect-factorization
 dependency_level: 22
 ---

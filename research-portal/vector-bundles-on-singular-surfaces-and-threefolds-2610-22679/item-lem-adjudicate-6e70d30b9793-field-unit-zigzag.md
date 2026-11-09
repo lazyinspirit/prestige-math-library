@@ -1,6 +1,6 @@
 ---
 title: A unit-induced integral field coefficient zigzag
-status: draft
+status: published
 research_item: lem-adjudicate-6e70d30b9793-field-unit-zigzag
 dependency_level: 1
 ---

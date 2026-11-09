@@ -2,7 +2,7 @@
 id: lem-zero-projection-rank
 kind: lemma
 title: Zeroth projection is rank
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-filtration-projections

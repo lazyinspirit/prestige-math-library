@@ -2,7 +2,7 @@
 id: prop-singular-beilinson-lichtenbaum
 kind: proposition
 title: Singular Beilinson–Lichtenbaum input
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: lem-author-8e1c0251ef0d-frame-transitions
 kind: lemma
 title: Frames and their transition units
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-8e1c0251ef0d-units-sheaf

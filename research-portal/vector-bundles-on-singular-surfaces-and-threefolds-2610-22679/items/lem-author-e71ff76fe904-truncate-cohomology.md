@@ -2,7 +2,7 @@
 id: lem-author-e71ff76fe904-truncate-cohomology
 kind: lemma
 title: Cofiber range gives natural truncation and cohomology comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

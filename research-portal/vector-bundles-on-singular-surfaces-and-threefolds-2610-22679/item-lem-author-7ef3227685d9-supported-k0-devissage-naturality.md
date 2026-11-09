@@ -1,6 +1,6 @@
 ---
 title: Ideal-power dévissage and compatibility with coherent pushforward
-status: draft
+status: published
 research_item: lem-author-7ef3227685d9-supported-k0-devissage-naturality
 dependency_level: 13
 ---

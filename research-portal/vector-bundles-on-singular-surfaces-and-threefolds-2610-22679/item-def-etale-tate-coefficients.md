@@ -1,6 +1,6 @@
 ---
 title: Roots of unity and étale Tate twists
-status: draft
+status: published
 research_item: def-etale-tate-coefficients
 dependency_level: 6
 ---

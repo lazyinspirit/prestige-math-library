@@ -2,7 +2,7 @@
 id: lem-second-piece-rank-determinant
 kind: lemma
 title: Rank and determinant on the second piece
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-filtration

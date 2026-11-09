@@ -2,7 +2,7 @@
 id: lem-second-chern-surjective-low-dimension
 kind: lemma
 title: Second Chern surjectivity in dimensions two and three
-status: draft
+status: published
 domain: mathematics
 deps:
   - prop-motivic-graded-spectral-sequence

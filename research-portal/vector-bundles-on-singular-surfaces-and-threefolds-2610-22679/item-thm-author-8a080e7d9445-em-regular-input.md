@@ -1,6 +1,6 @@
 ---
 title: Exact natural regular motivic-to-cdh comparison
-status: draft
+status: published
 research_item: thm-author-8a080e7d9445-em-regular-input
 dependency_level: 9
 ---

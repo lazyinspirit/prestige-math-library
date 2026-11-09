@@ -1,6 +1,6 @@
 ---
 title: Cohomology of equivalent derived complexes
-status: draft
+status: published
 research_item: lem-author-91088613574d-quasi-isomorphism
 dependency_level: 4
 ---

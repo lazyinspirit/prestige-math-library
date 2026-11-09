@@ -2,7 +2,7 @@
 id: lem-author-e0b0bf18ed2b-singular-sequential-comparison
 kind: lemma
 title: Singular complexes preserve the sequential group convention
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-e0b0bf18ed2b-spectra-tail-invariance

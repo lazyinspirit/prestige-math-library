@@ -2,7 +2,7 @@
 id: prop-smooth-pair-gysin-input
 kind: proposition
 title: Gysin purity for a smooth closed pair
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-9415fc97ee80-relative-cone-quotient-model

@@ -2,7 +2,7 @@
 id: thm-author-5bfbe3ebf14f-mvw-finite-type-cdh-two-stage-input
 kind: theorem
 title: External MVW proper-cover identification and two-stage refinement
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cdh-topology-interface

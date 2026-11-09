@@ -2,7 +2,7 @@
 id: lem-author-79117e1d72ed-bigraded-ring
 kind: lemma
 title: Natural unital bigraded motivic ring with negative zero extension
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

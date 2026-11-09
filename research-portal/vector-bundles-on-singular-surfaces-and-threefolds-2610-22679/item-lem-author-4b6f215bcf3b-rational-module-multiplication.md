@@ -1,6 +1,6 @@
 ---
 title: Integer multiplication on rational vector spaces
-status: draft
+status: published
 research_item: lem-author-4b6f215bcf3b-rational-module-multiplication
 dependency_level: 0
 ---

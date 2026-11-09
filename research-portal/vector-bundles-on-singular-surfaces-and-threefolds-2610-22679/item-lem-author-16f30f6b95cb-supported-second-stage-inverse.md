@@ -1,6 +1,6 @@
 ---
 title: The supported second stage has the actual augmentation inverse
-status: draft
+status: published
 research_item: lem-author-16f30f6b95cb-supported-second-stage-inverse
 dependency_level: 15
 ---

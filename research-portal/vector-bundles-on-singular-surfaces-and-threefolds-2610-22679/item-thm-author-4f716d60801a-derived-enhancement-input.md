@@ -1,6 +1,6 @@
 ---
 title: External input on derived enhancements
-status: draft
+status: published
 research_item: thm-author-4f716d60801a-derived-enhancement-input
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-author-ab0a6fc202cb-clopen-derived-descent
 kind: lemma
 title: Derived Nisnevich descent on a finite clopen partition
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nisnevich-covering-interface

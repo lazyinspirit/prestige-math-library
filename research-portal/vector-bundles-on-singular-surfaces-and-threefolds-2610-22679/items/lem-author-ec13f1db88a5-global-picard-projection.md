@@ -2,7 +2,7 @@
 id: lem-author-ec13f1db88a5-global-picard-projection
 kind: lemma
 title: The globally normalized first-layer Picard map is determinant
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

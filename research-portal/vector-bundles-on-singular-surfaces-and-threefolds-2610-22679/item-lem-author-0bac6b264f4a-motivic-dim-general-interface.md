@@ -1,6 +1,6 @@
 ---
 title: Prime-field evaluation and compatibility with the standing theory
-status: draft
+status: published
 research_item: lem-author-0bac6b264f4a-motivic-dim-general-interface
 dependency_level: 9
 ---

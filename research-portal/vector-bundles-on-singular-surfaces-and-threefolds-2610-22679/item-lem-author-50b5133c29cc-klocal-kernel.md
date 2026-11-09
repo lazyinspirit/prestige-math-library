@@ -1,6 +1,6 @@
 ---
 title: The exact restriction kernel and its denominators
-status: draft
+status: published
 research_item: lem-author-50b5133c29cc-klocal-kernel
 dependency_level: 10
 ---

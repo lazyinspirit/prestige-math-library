@@ -1,6 +1,6 @@
 ---
 title: Local ranks in the affine bundle correspondence
-status: draft
+status: published
 research_item: lem-author-3af31ead36fb-local-rank
 dependency_level: 1
 ---

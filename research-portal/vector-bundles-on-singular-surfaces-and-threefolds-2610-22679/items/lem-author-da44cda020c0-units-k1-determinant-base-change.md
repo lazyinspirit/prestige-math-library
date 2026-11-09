@@ -2,7 +2,7 @@
 id: lem-author-da44cda020c0-units-k1-determinant-base-change
 kind: lemma
 title: Stable determinant commutes with ring maps
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-da44cda020c0-units-k1-stable-matrix-determinant

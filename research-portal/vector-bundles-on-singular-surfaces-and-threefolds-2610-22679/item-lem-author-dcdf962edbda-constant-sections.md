@@ -1,6 +1,6 @@
 ---
 title: Constant integer coefficients and exact derived evaluation
-status: draft
+status: published
 research_item: lem-author-dcdf962edbda-constant-sections
 dependency_level: 12
 ---

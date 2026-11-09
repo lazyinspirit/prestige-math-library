@@ -1,6 +1,6 @@
 ---
 title: Full faithfulness of the perfect triangulated quotient
-status: draft
+status: published
 research_item: lem-author-50b5133c29cc-klocal-quotient-full-faithfulness
 dependency_level: 11
 ---

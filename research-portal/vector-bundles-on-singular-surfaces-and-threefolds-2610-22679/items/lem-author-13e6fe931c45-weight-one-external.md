@@ -2,7 +2,7 @@
 id: lem-author-13e6fe931c45-weight-one-external
 kind: lemma
 title: Elmanto–Morrow weight-one comparison input
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

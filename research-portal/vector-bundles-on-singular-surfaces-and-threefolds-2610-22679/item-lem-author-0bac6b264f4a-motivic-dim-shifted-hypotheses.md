@@ -1,6 +1,6 @@
 ---
 title: Normalizing the comparison fiber for the dimension criterion
-status: draft
+status: published
 research_item: lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses
 dependency_level: 10
 ---

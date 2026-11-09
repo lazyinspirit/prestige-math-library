@@ -1,6 +1,6 @@
 ---
 title: The root map through derived sections, truncation and localization
-status: draft
+status: published
 research_item: lem-author-2ac325480ae8-truncated-root-map
 dependency_level: 12
 ---

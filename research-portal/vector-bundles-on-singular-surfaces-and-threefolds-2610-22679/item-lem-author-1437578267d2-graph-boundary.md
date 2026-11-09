@@ -1,6 +1,6 @@
 ---
 title: Principal divisors are endpoint boundaries
-status: draft
+status: published
 research_item: lem-author-1437578267d2-graph-boundary
 dependency_level: 10
 ---

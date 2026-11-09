@@ -1,6 +1,6 @@
 ---
 title: Quotienting a compatible surjection
-status: draft
+status: published
 research_item: lem-author-4057f3195e4f-quotient-restriction
 dependency_level: 0
 ---

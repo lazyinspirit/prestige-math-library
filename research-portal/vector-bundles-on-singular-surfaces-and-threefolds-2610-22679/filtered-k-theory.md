@@ -4,7 +4,7 @@ description: Connect affine bundle classes to nonconnective perfect K theory,
   then develop tower exactness, products, coefficients and rational detection.
   Give the article's bundle-class, motivic-filtration and motivic-cohomology
   definitions their authoring homes after these suppliers.
-status: draft
+status: published
 dependency_level: 2
 ---
 

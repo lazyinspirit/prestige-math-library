@@ -2,7 +2,7 @@
 id: lem-author-59b1a831fe59-cancel-twists
 kind: lemma
 title: Perfect-field cancellation removes exactly d coefficient twists
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-59b1a831fe59-perfect-cancellation

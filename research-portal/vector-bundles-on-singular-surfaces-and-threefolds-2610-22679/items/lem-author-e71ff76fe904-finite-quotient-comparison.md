@@ -2,7 +2,7 @@
 id: lem-author-e71ff76fe904-finite-quotient-comparison
 kind: lemma
 title: The actual finite-quotient map to cdh-local motivic cohomology
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-motivic-cohomology

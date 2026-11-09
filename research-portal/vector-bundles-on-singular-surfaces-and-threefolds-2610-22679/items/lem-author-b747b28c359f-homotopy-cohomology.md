@@ -2,7 +2,7 @@
 id: lem-author-b747b28c359f-homotopy-cohomology
 kind: lemma
 title: Homotopic maps act equally on cohomology
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-b747b28c359f-cochain-maps

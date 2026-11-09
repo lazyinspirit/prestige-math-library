@@ -1,6 +1,6 @@
 ---
 title: External determinant and pointed one-type inputs
-status: draft
+status: published
 research_item: thm-author-16f30f6b95cb-lowweight-determinant-one-type-input
 dependency_level: 15
 ---

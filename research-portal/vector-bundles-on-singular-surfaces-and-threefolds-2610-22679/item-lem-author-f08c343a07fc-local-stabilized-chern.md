@@ -1,6 +1,6 @@
 ---
 title: Chern data survive addition of trivial bundles
-status: draft
+status: published
 research_item: lem-author-f08c343a07fc-local-stabilized-chern
 dependency_level: 13
 ---

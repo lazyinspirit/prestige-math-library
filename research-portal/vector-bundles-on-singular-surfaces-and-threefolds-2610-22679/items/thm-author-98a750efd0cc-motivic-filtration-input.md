@@ -2,7 +2,7 @@
 id: thm-author-98a750efd0cc-motivic-filtration-input
 kind: theorem
 title: Elmanto–Morrow filtration input
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

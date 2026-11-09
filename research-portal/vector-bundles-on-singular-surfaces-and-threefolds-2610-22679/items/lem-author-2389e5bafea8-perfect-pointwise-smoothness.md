@@ -2,7 +2,7 @@
 id: lem-author-2389e5bafea8-perfect-pointwise-smoothness
 kind: lemma
 title: Pointwise regularity and smoothness over a perfect field
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

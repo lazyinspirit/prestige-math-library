@@ -1,6 +1,6 @@
 ---
 title: High filtration vanishing
-status: draft
+status: published
 research_item: lem-high-filtration-vanishing
 dependency_level: 19
 ---

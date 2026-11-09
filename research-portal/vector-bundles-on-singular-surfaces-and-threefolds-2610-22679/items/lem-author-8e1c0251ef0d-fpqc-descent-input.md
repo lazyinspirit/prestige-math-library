@@ -2,7 +2,7 @@
 id: lem-author-8e1c0251ef0d-fpqc-descent-input
 kind: lemma
 title: External inputs for flat descent of line bundles
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps: []

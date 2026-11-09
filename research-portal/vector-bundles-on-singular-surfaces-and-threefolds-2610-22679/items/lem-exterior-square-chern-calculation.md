@@ -2,7 +2,7 @@
 id: lem-exterior-square-chern-calculation
 kind: lemma
 title: Chern classes of the alternating exterior class
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-rank-three-euler-k-class

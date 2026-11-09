@@ -1,6 +1,6 @@
 ---
 title: First-class matching and explicit perfect Chern arithmetic
-status: draft
+status: published
 research_item: lem-author-3cde9692a7e9-first-class-and-coefficients
 dependency_level: 24
 ---
