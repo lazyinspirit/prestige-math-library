@@ -1,5 +1,5 @@
 ---
-title: Potential defects
+title: Prerequisite omissions and potential defects
 description: Source-specific omissions, correctable errors and substantial proof gaps recorded for Fasel–Yakerson arXiv:2610.22679v1.
 status: published
 ---
