@@ -1,0 +1,66 @@
+---
+id: thm-author-27d786ff4d27-swan-controlled-bertini
+kind: theorem
+title: External Swan finite controlling-family Bertini theorem
+status: draft
+domain: mathematics
+deps: []
+dependency_roles: {}
+provenance:
+  statement: literature-derived
+  proof: literature-derived
+external_input: true
+sources:
+  references:
+    - title: Richard G. Swan, A cancellation theorem for projective modules in the
+        metastable range, Invent. Math.27 (1974),23–43
+      url: https://gdz.sub.uni-goettingen.de/id/PPN356556735_0027?tify=%7B%22pages%22:%5B32%5D%7D
+      locator: Printed p23 variety convention; Theorems1.3–1.4 p26, complete proof
+        pp26–28; Corollary1.6 p28. GDZ scans29–34. DOI10.1007/BF01389963; EuDML
+        https://eudml.org/doc/142306.
+      statement: "For a smooth affine variety over an infinite field and a rank-r
+        projective module, Theorem1.4 gives a finite controlling family whose
+        sufficiently general linear combinations, even after adding any finitely
+        many further module elements, satisfy Theorem1.3: the zero scheme has
+        dimension dim(V)−r when nonempty, is smooth, and is a variety in
+        positive dimension. Swan explicitly defines variety to mean
+        geometrically integral. Specialize (q,a)=(0,1), r=2 and dim(V)=3. The
+        proof constructs controlling elements as local frames and their
+        coordinate multiples."
+      hypotheses: Smooth affine geometrically integral variety over an infinite field,
+        projective module of constant rank, and unimodular (q,a). No
+        characteristic-zero or Q-algebra hypothesis. Here k is algebraically
+        closed, q=0,a=1, and each local chart is smooth affine integral. Empty
+        fibers are allowed by the imported local statement; nonemptiness is
+        proved independently in the local common-core lemma.
+      reading_limits: "Visually read actual GDZ scans29–34, printed pp23–28: standing
+        convention, Theorem1.1 statement and printed proof context, Lemma1.2,
+        complete Theorems1.3/1.4 and their full printed proof, and Corollary1.6
+        statement. Did not read or reconstruct all EGA/Seidenberg foundations
+        cited for classical Bertini. The rank-three previous proof and
+        Q-convention paper are not substituted for this source. The separate
+        dimension-symbol misprint in1.1(1) is recorded and not used. The module
+        statement1.3 uses the correct dimension dimV−rank. No full-paper reading
+        is claimed."
+dependency_level: 0
+---
+
+## Statement
+Import Swan Theorems1.3–1.4 in the following restricted form. On a smooth affine geometrically integral threefold over an infinite field, for a rank-two projective module there is a finite controlling family such that every finite family containing it has a nonempty open set of coefficients whose corresponding section has empty zero scheme or a smooth geometrically integral one-dimensional zero scheme. In the free case the controlling family can be taken to be a frame and its products by coordinates of an affine embedding, as constructed in the proof. The same remains true after repetitions or extra indexed vectors: coefficients of repetitions map surjectively onto the distinct-vector coefficient space, and the inverse image of its nonempty open is nonempty open.
+
+## Source qualifications
+The primary GDZ scans 29–34 (printed pp. 23–28) were inspected for the exact statement and printed proof. Theorem 1.1(1) prints an incorrect intersection dimension; its preceding definition makes the correct value $d+r-n$, whereas the module dimension in Theorem 1.3 is correctly $\dim V-\operatorname{rank}Q$. The identification of all closed coefficient points with rational points in the proof of Theorem 1.1 needs the rational-point qualification over a non-algebraically-closed field.
+
+At the end of the proof of Theorem 1.4, printed pp. 27–28, the fiber condition must be $\ne\varnothing$, not $=\varnothing$. Choose a point of the already nonempty coefficient open $\theta(O)$ and fix its first coordinate; the resulting fiber is nonempty and open. The two retained finding IDs for this sign describe the same error.
+
+The free-chart reduction also calls geometric integrality local, which is false on an arbitrary open cover. That printed inference is not imported as a lemma. The established theorem is used as an external input; its deep Bertini foundations are not reconstructed here. The current local application has separate common-core and gluing arguments, which are not replaced by that inference.
+
+## Source contract
+**Given:** Exactly the smooth affine, infinite-field, geometrically integral and constant-rank hypotheses above, using $(q,a)=(0,1)$ in the source.
+
+**Goal:** Import the substantial irreducible Bertini input, with actual source scope.
+
+[F1] Swan p23 defines variety as geometrically integral. Theorems1.3/1.4 and their proof pp26–28 give the finite controlling family and its generic coefficient-open property.
+
+## External input
+Import [F1], with its exact reading limits. The source is used only on the smooth affine charts. The extension to the actual quasi-affine $U$, common-core nonemptiness, simultaneous avoidance, and gluing of global irreducibility are separately proved in the five local items. No assertion that irreducibility is merely local on arbitrary covers is imported or used.

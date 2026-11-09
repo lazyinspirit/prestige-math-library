@@ -1,0 +1,10 @@
+---
+title: Vector bundles on singular surfaces and threefolds
+status: draft
+---
+
+- [Affine bundles and normal geometry](affine-foundations) — level 0
+- [Scheme sites and cycle theories](sites-and-cycles) — level 1
+- [Perfect K theory and motivic towers](filtered-k-theory) — level 2
+- [Chern constructions and support geometry](chern-and-support) — level 3
+- [Vector bundles on singular surfaces and threefolds](article) — level 4
