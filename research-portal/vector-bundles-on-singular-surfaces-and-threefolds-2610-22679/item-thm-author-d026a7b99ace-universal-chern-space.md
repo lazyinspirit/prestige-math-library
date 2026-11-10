@@ -18,7 +18,8 @@ PDF p. 17: Corollary6.9 supported factor calculation
 - [lem-adjudicate-a8be8a17c858-negative-model-coefficients](item-lem-adjudicate-a8be8a17c858-negative-model-coefficients)
 - [lem-author-b747b28c359f-elmanto-morrow-complexes](item-lem-author-b747b28c359f-elmanto-morrow-complexes)
 - [def-cohomology-with-support](item-def-cohomology-with-support)
-
+- [Asakura–Sato, Chern Class and Riemann–Roch Theorem for Cohomology Theory without Homotopy Invariance, J. Math. Sci. Univ. Tokyo26(2019) · §5 pp269–272: Steps1–3, Proposition5.3 and formula(5.3.1); §6 pp272–273, definition and Proposition6.1(1)](https://www.ms.u-tokyo.ac.jp/journal/26-3-1.pdf)
+- [Annala–Iwasa, Motivic spectra and universality of K-theory (14April2025 PDF) · Definition4.4.1 p30, for vector bundles on S-stacks; Lemma3.2.3 p23; Lemma4.4.3 pp30–31](https://ryomei.com/papers/MotSp.pdf)
 
 ## Statement
 Assume the Axiom of Choice and the fixed site and universe bounds. For every qcqs scheme $X$ over a field and every integer $i\geq1$, the specified natural stable pointed universal bundle maps $c_{i,n}:BGL_n\to K(D_i,2i)$ extend by the formal Gillet completion construction to pointed operations on the local perfect K-space model. Here $D_i$ denotes the weight-$i$ coefficient complex, and $K(D_i,2i)=\Omega^\infty(D_i[2i])$ is its derived Eilenberg target. The construction uses the local equivalence $\Omega BQ\mathcal P\simeq\underline{\mathbb Z}\times\mathbb Z_\infty BGL$, projection away from trivial rank, completion of the specified stable class, and $\mathbb Z_\infty K(D_i,2i)\simeq K(D_i,2i)$. It is natural in the coefficient maps and restrictions and retains the original universal bundle classes.

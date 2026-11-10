@@ -11,6 +11,8 @@ PDF p. 3: Nonconnective algebraic K theory: enhanced prerequisite interface
 
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Blumberg–Gepner–Tabuada, A universal characterization of higher algebraic K-theory · §2.2 (Cat_perf domain), §3.1 (tensor universal property); Definition 9.6 and Theorem 9.8, PDF pp. 58–59](https://arxiv.org/pdf/1001.2282v4)
+- [Blumberg–Gepner–Tabuada, Uniqueness of the multiplicative cyclotomic trace · Proposition 5.9 and Corollary 5.10, PDF p. 23; Theorem 1.13, PDF p. 5](https://arxiv.org/pdf/1103.3923v3)
 
 ## Statement
 Assume AC and fixed universes. Let Cat_perf be the infinity-category of small idempotent-complete stable infinity-categories and exact functors. It is symmetric monoidal with tensor characterized by exact functors in each variable. The nonconnective algebraic K-theory functor 𝕂:Cat_perf→Sp exists and is lax symmetric monoidal. It is the functor denoted IK, not connective K, in BGT: 𝕂(A)≃Map($U_{\mathrm{loc}}$(Sp^ω),$U_{\mathrm{loc}}$(A)). In particular it carries coherent commutative algebra categories to E∞ ring spectra, with the corresponding functorial algebra and module operations induced by its lax structure.

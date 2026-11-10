@@ -9,8 +9,11 @@ PDF p. 13: Proof of Proposition 6.1: ordinary CH3 identification and degree-seve
 
 ## Prerequisites
 
-None.
-
+- [Stacks Project, smooth schemes over fields · Lemma 33.25.3; live tag text inspected 2026-11-09](https://stacks.math.columbia.edu/tag/056S)
+- [Stacks Project, regular local rings · Lemma 10.106.2; live section text inspected 2026-11-09](https://stacks.math.columbia.edu/tag/00NN)
+- [Stacks Project, finite-type dimension formulas · Lemmas 10.116.1-10.116.3; live section text inspected 2026-11-09](https://stacks.math.columbia.edu/tag/07NB)
+- [Stacks Project, dimension formula for a proper dominant map · Lemma 29.53.4; live tag text inspected 2026-11-09](https://stacks.math.columbia.edu/tag/02JX)
+- [Stacks Project, dimensions of Cartier divisor components · Lemma 42.16.1; live tag text inspected 2026-11-09](https://stacks.math.columbia.edu/tag/02RK)
 
 ## Statement
 Let $k$ be a field. A smooth $k$-scheme is regular, and every regular local ring is a domain. If $T$ is an integral finite-type $k$-scheme and $D\subset T$ is integral and closed, then $\dim T=\operatorname{trdeg}_k k(T)$ and $\operatorname{codim}_T D=\dim T-\dim D$. Every nonempty open of $T$ has the same dimension as $T$. Every irreducible component of an effective Cartier divisor on $T$ has dimension $\dim T-1$.

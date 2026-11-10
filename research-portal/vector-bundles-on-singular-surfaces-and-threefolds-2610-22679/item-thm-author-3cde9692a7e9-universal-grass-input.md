@@ -13,7 +13,7 @@ PDF p. 11: Lemma5.3, second Chern additivity
 - [lem-author-32887006bdff-actual-orientation](item-lem-author-32887006bdff-actual-orientation)
 - [lem-adjudicate-a8be8a17c858-negative-model-coefficients](item-lem-adjudicate-a8be8a17c858-negative-model-coefficients)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Annala–Iwasa, Motivic spectra and universality of K-theory, author PDF14April2025 · Lemma4.4.4, Corollary4.4.5 and Theorem4.4.6 with proof pp31–32; Corollary4.4.7 and proof p32; Definition4.4.1/Lemma4.4.3 pp30–31; Lemma3.2.3 p23](https://ryomei.com/papers/MotSp.pdf)
 
 ## Statement
 For the source’s linearly oriented homotopy-commutative non-A¹ motivic ring spectrum with PBF, the actual map $\mathrm{Gr}_n\to\mathrm{Vect}_n$ induces the universal Chern-coordinate isomorphism

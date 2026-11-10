@@ -9,7 +9,7 @@ PDF p. 1: Serre splitting theorem
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, More on Algebra, Section 15.129: Splitting off a free module · Theorem 15.129.5 (tag 0GVC), statement and displayed proof](https://stacks.math.columbia.edu/tag/0GVC)
 
 ## Statement
 Let $A$ be a commutative unital ring whose maximal spectrum $\Omega$, with its subspace topology, is noetherian of finite dimension $e$. Let $M$ be a finitely presented $A$-module. Suppose that for every maximal ideal $\mathfrak m$, the localization $M_{\mathfrak m}$ has a free direct summand of rank greater than $e$. Then $M\cong A\oplus M'$ for some $A$-module $M'$. The dimension of a topological space is the supremum of the lengths of strict chains of irreducible closed subsets.

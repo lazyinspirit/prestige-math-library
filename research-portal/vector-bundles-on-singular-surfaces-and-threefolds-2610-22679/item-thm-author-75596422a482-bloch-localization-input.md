@@ -11,7 +11,7 @@ PDF p. 13: Supported Chow group; PDF p. 16: Curve-supported motivic groups
 
 - [def-bloch-higher-cycle-complex](item-def-bloch-higher-cycle-complex)
 - [lem-author-75596422a482-open-restriction](item-lem-author-75596422a482-open-restriction)
-
+- [Marc Levine, Techniques of localization in the theory of algebraic cycles · Primary 53-page preprint: §1.6–1.8 pp. 2–4; §2.2 p. 6; Theorem 6.12 and finite affine-cover reduction pp. 37–38; §7 pp. 43–44](https://citeseerx.ist.psu.edu/document?doi=9622ccdf2df87d21c760a444b7b04cd40b1662b0&repid=rep1&type=pdf)
 
 ## Statement
 Let $k$ be a field, $U$ a smooth finite-type $k$-scheme, $V\subseteq U$ open, and $r\geq0$. No separatedness of $U$ over $k$ is required. The cokernel complex of the unnormalized simplicial restriction $z^r(U,\bullet)\to z^r(V,\bullet)$ is acyclic.

@@ -9,8 +9,7 @@ PDF p. 3: Levine–Weibel image after TheoremC; PDF p. 14: Definition6.5 pure-di
 
 ## Prerequisites
 
-None.
-
+- [Amalendu Krishna, Murthy’s conjecture on 0-cycles, arXiv1511.04221v3,18March2019 · Section1.9 and opening Section2.1, printed/PDF p6; Cartier curves and quotient equation(2.1),p7; cycle map equation(2.2) and K-theory convention,p8. Intro p1 height-d regular maximal ideals and p2 §1.3 cycle-map/image statement.](https://arxiv.org/pdf/1511.04221v3)
 
 ## Statement
 For a normal affine scheme $X$ of finite type over a perfect field and of dimension $d\geq1$, use Krishna's Section2.1 dimension-$d$ convention: the free generators are smooth closed points on its dimension-$d$ components, the forbidden locus includes all lower-dimensional components, and the relations are divisors of semilocal units on the specified relative Cartier curves. There is an established quotient cycle map

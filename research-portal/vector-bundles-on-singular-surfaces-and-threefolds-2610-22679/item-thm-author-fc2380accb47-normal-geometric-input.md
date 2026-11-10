@@ -9,7 +9,8 @@ PDF p. 15: Theorem6.7: rank-three Bertini functional
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, normal components and Serre normality criterion · Lemma28.7.5 (0357), complete statement/proof; also Section28.12, Lemma28.12.5, https://stacks.math.columbia.edu/tag/033P](https://stacks.math.columbia.edu/tag/0357)
+- [The Stacks Project, regular and smooth loci over perfect fields · Lemma33.25.8 and its complete proof; Lemmas33.25.3–33.25.4 for smoothness/regularity context.](https://stacks.math.columbia.edu/tag/04QM)
 
 ## Statement
 Import the two source results recorded above: Noetherian normal schemes decompose into their finitely many clopen integral normal components and satisfy $(R_1)$; reduced finite-type schemes over a perfect field have identical regular and smooth loci, and that locus is open. Here codimension of an irreducible closed subset with generic point $x$ is $\dim\mathcal O_{X,x}$, as in the cited Serre-condition convention.

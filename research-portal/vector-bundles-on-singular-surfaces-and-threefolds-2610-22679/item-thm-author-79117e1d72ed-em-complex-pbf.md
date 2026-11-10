@@ -10,6 +10,7 @@ PDF p. 2: Motivic projective bundle property; PDF p. 8: Orientation for the spli
 ## Prerequisites
 
 - [thm-author-79117e1d72ed-em-multiplication-c1](item-thm-author-79117e1d72ed-em-multiplication-c1)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes (arXiv v1) · Theorem5.24(2), p.43, and its proof pp.43–44; preceding explicit component maps and line convention, p.43; Definition5.2 and negative-weight convention following(5.2), p.34](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Let $F$ be a prime field, $X$ a qcqs $F$-scheme, $V$ a finite locally free sheaf of constant rank $r>0$, and $j\geq0$. For the line projectivization $\pi:P_X^{\rm lin}(V)\to X$ of the preceding external input, the actual map

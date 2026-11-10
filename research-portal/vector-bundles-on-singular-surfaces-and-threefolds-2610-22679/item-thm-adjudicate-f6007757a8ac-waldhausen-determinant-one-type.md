@@ -10,8 +10,9 @@ PDF p. 9: Actual low-weight projections and determinant normalization
 ## Prerequisites
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
-
+- [Knudsen–Mumford, The projectivity of the moduli space of stable curves I: Preliminaries on det and Div · graded invertible sheaves pp20–21; alternating determinant p31; Definition2 p37 and remark p38; Definition4 pp40–42 including footnote p41; Theorem2 p42; warning and Proposition7 p44](https://journals.msp.org/mscand/article/download/2000/1999)
+- [Fernando Muro, Andrew Tonks and Malte Witte, On determinant functors and K-theory, Publicacions Matematiques59(2015),137–233 · Definition1.2.3 and axioms pp145–146; Example1.2.7 p147; Definition1.2.9 pp147–148; Theorem1.5.4 pp161–162; section1.6 Lemma1.6.1 p166 and Theorem1.6.3 p167; natural construction statement surrounding Theorem4.3.4 p212](https://fmuro.github.io/assets/files/papers/zbMATH06417698.pdf)
+- [Blumberg–Gepner–Tabuada, A universal characterization of higher algebraic K-theory · Lemma7.11 and Corollary7.12 pp48–49; Remark9.33 p64; compare completed enhanced-comparison supplier](https://arxiv.org/pdf/1001.2282v4)
 
 ## Statement
 Assume AC and fixed universe bounds. For a small Waldhausen category $\mathcal W$ a determinant functor to a Picard groupoid $\mathcal P$ consists of a functor on weak equivalences and additivity isomorphisms for actual cofibration sequences, satisfying weak-equivalence naturality, staircase associativity and commutativity. It factors essentially uniquely through the universal Picard groupoid $V(\mathcal W)$, which represents the 1-type of $K^W(\mathcal W)$. Hence it gives an actual map of connective K-space 1-types to the nerve of $\mathcal P$, natural in exact functors and compatible with object/automorphism classes. For bounded finite-projective complexes, the Knudsen–Mumford alternating graded determinant is such a functor. Its triangle coherence is for true/enhanced triangles. It is not a claim of natural additivity under every morphism of ordinary distinguished-triangle diagrams.

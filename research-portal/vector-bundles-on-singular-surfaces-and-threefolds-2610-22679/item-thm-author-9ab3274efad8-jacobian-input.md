@@ -9,7 +9,7 @@ PDF p. 13: Picard group of a smooth affine curve
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, Section 59.69: Picard groups of curves · Opening paragraphs, before Lemma 59.69.1](https://stacks.math.columbia.edu/tag/03RN)
 
 ## Statement
 For a smooth projective integral curve X over an algebraically closed field k, the group of degree-zero line-bundle classes Pic⁰(X) is isomorphic to J(k), where J is an abelian variety over k.

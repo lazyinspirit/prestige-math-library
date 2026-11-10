@@ -12,7 +12,10 @@ PDF p. 4: Derived Nisnevich and cdh sections
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [def-scheme-sites-and-sheafification](item-def-scheme-sites-and-sheafification)
 - [lem-author-a44f2061570d-evaluation-left-exact](item-lem-author-a44f2061570d-evaluation-left-exact)
-
+- [The Stacks Project, Section 18.3: Abelian sheaves · Lemma 18.3.1(1)-(4)](https://stacks.math.columbia.edu/tag/03CM)
+- [The Stacks Project, Section 21.19: Cohomology of unbounded complexes · Opening construction, additive-functor clause (2), and object-sections example (2), before Lemma 21.19.1](https://stacks.math.columbia.edu/tag/07A5)
+- [The Stacks Project, Section 21.2: Cohomology of sheaves · Opening paragraph and equation 21.2.0.1](https://stacks.math.columbia.edu/tag/01FT)
+- [The Stacks Project, Lemma 13.31.4: Bounded below injective complexes · Lemma 13.31.4, statement and one-line proof](https://stacks.math.columbia.edu/tag/070J)
 
 ## Statement
 Assume the Axiom of Choice and fixed size bounds, and let $\mathcal C$ be a small site with $U$ an object. The category of abelian sheaves on $\mathcal C$ is abelian. Evaluation at $U$ has a right derived functor on the unbounded derived category, computed by evaluating a K-injective resolution. For a sheaf $F$ placed in degree zero, this derived value may also be computed by an injective resolution concentrated in nonnegative degrees.

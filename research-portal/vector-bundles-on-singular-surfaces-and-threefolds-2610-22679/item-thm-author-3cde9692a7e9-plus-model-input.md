@@ -13,7 +13,7 @@ PDF p. 11: Lemma5.3, second Chern additivity
 - [thm-author-da44cda020c0-units-k1-classical-comparisons](item-thm-author-da44cda020c0-units-k1-classical-comparisons)
 - [thm-author-da44cda020c0-units-k1-enhanced-comparisons](item-thm-author-da44cda020c0-units-k1-enhanced-comparisons)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Charles Weibel, The K-book, Chapter IV · Definition1.1.1/Functoriality1.1.2 p3; Definitions1.4/1.4.1, Theorem1.5, Lemma1.6 pp4–5; Constructions1.9(ii) p6; §4 group-completion and plus comparisons4.9/4.11.1 pp38–45; Theorem IV.7.1, printed p61 (PDF page61), for group-completion/Q; Corollary IV.7.2, printed p62 (PDF page62), for the resulting plus/Q comparison](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.IV.pdf)
 
 ## Statement
 Assume the Axiom of Choice and the fixed compatible universe and site-size bounds of the supplied constructions.

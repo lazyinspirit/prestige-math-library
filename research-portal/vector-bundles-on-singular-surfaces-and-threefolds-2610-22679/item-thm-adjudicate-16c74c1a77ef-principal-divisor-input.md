@@ -9,8 +9,8 @@ PDF p. 13: Proof of Proposition 6.1: ordinary CH3 identification and degree-seve
 
 ## Prerequisites
 
-None.
-
+- [Stacks Project, Principal divisors and proper pushforward · Situation 42.7.1 (02QL); Lemma 42.18.1 (02RT) or Lemma 42.18.2 (02RQ), respectively; live online tag text retrieved and inspected 2026-11-09; no pinned commit asserted](https://stacks.math.columbia.edu/tag/02RT)
+- [Stacks Project, Graph formula for a principal divisor · Situation 42.7.1 (02QL); Lemma 42.18.1 (02RT) or Lemma 42.18.2 (02RQ), respectively; live online tag text retrieved and inspected 2026-11-09; no pinned commit asserted](https://stacks.math.columbia.edu/tag/02RQ)
 
 ## Statement
 Let $k$ be a field. For integral finite-type $k$-schemes $P,Q$, a proper dominant generically finite morphism $p:P\to Q$ and $h\in k(P)^\times$ satisfy

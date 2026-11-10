@@ -12,6 +12,7 @@ PDF p. 8: Actual Chern and Whitney identities; PDF p. 11: Total virtual Chern cl
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [prop-motivic-projective-bundle-formula](item-prop-motivic-projective-bundle-formula)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Elmanto–Morrow, Motivic cohomology of equicharacteristic schemes, arXiv v1 · §2.2 pp11–12; Definitions4.9/4.23; Lemma5.1/Definition5.2 pp33–34; actual map(5.2) and Theorem5.3; Theorem5.24 pp43–44](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice and the fixed compatible site and universe bounds of the supplied constructions. On qcqs schemes over a prime field, $A_n=\mathbb Z(n)_{\rm mot}[2n]$ forms a natural unital commutative graded algebra in spectra. Put $A_n=0$ for $n<0$. There is the actual natural complex map $R\Gamma_{\rm Nis}(\mathbb G_m)[-1]\to\mathbb Z(1)_{\rm mot}$ of Definition5.2; after shifting by2 and taking Ω∞ this is the pointed Picard class. Its restriction to $(\mathbb P^1,\infty)$ is $b=c_1(\mathcal O(1))$ with the trivial-line nullhomotopy at infinity. Multiplication by its powers and pullback give the actual complex equivalences

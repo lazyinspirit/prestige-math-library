@@ -9,7 +9,8 @@ PDF p. 6: Proposition 2.6 proof
 
 ## Prerequisites
 
-None.
+- [Bhargav Bhatt and Akhil Mathew, The arc-topology · Definition1.2/Remark1.4 p.3; Definition1.5 p.4; §5.1 pp.37–38; Notation5.8 p.41; Proposition5.11 pp.41–42; Theorem5.13 pp.42–43](https://arxiv.org/pdf/1807.04725v4)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · §3.3 p.14, paragraph defining qcqs cdh topology and following square criterion](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 For every finite commutative ring $\Lambda$, the functor $X\mapsto D^b_{\mathrm{cons}}(X_{\mathrm{et}},\Lambda)$ on all qcqs schemes, with derived pullback, is a hypercomplete arc sheaf. Here bounded constructible means a derived complex with bounded constructible cohomology sheaves. On the qcqs $F$-scheme cdh site, for a prime field $F$, an ordinary $D(\mathbb Z)$-valued cdh sheaf is precisely a presheaf which takes the empty scheme to $0$ and carries Nisnevich squares and the stated finitely presented abstract blowup squares to cartesian squares. Here ordinary means covering-family/Čech descent; this square criterion alone asserts no unrestricted hypercompletion comparison.

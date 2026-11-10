@@ -10,6 +10,7 @@ PDF p. 4: Property (2)
 ## Prerequisites
 
 - [lem-author-b747b28c359f-elmanto-morrow-complexes](item-lem-author-b747b28c359f-elmanto-morrow-complexes)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Theorem 1.1(6); Corollary 7.11 and its proof; comparison map (5.1)](https://arxiv.org/html/2309.08463v1)
 
 ## Statement
 Let $F$ be $\mathbb Q$ or $\mathbb F_p$ for a prime $p$, and let $X$ be a quasi-compact quasi-separated $F$-scheme. There is a natural comparison map

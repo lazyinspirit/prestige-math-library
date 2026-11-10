@@ -13,7 +13,7 @@ PDF p. 4: Motivic graded spectral sequence; PDF p. 9: Eventual filtration vanish
 - [thm-author-98a750efd0cc-motivic-filtration-input](item-thm-author-98a750efd0cc-motivic-filtration-input)
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-valuative-dimension-and-boundedness](item-def-valuative-dimension-and-boundedness)
-
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · §2.2 pp.11–12; Theorem4.12(1) p.22 and Theorem4.27(1) p.29; Theorem1.1(1) p.3](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice. For a qcqs scheme $X$ over a prime field $F=\mathbb Q$ or $\mathbb F_p$ with finite valuative dimension, there exists an integer $B(X)\geq0$ such that the actual EM filtration satisfies

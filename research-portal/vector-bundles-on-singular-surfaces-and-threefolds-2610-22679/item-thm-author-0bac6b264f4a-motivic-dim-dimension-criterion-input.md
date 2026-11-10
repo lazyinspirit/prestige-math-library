@@ -10,7 +10,7 @@ PDF p. 4: Motivic dimension vanishing
 ## Prerequisites
 
 - [lem-author-b747b28c359f-derived-cohomology](item-lem-author-b747b28c359f-derived-cohomology)
-
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Proposition8.10 pp.56–57, with its complete proof; Lemma8.9 p.56](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Let $R$ be a base ring and $W:(\mathrm{Sch}^{\mathrm{qcqs}}_R)^{op}\to D(\mathbb Z)$ a finitary Nisnevich sheaf. Assume:

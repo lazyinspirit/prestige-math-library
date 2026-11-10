@@ -9,7 +9,9 @@ PDF p. 15: Theorem6.7: rank-three Bertini functional
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, finite-type dimensions and image closures · Lemmas33.20.3(2),(4),(6),(10), 33.20.4(2) and33.20.5, full indicated proofs; also Lemma33.20.2 for zero-dimensional context.](https://stacks.math.columbia.edu/tag/06LF)
+- [The Stacks Project, closed points on finite-type field schemes · Lemma33.14.1, full statement/proof.](https://stacks.math.columbia.edu/tag/0478)
+- [The Stacks Project, etale finite-type algebras over fields · Definition10.143.1; Lemma10.143.3(7), proof paragraph(7); Lemma10.143.4, full statement/proof. Stable individual tags00U2 and00U3.](https://stacks.math.columbia.edu/tag/00U0)
 
 ## Statement
 Import the exact finite-type geometric facts in the source record: dimension/codimension and image-closure inequalities for finite-type field schemes; product dimensions; the Jacobson and closed-point residue-field facts; and the implication $\Omega_{B/L}=0\Rightarrow B$ finite étale for $B$ finite type over a field $L$. Consequently over algebraically closed $L$, $\operatorname{Spec}B$ is a finite disjoint union of reduced rational points. No characteristic-zero generic-smoothness theorem is part of this input.

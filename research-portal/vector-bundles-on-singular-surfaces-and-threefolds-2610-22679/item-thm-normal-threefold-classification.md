@@ -20,6 +20,7 @@ PDF p. 1: Abstract; PDF p. 2: Theorem B; PDF p. 17: Proof of Theorem B
 - [lem-threefold-chern-prescription](item-lem-threefold-chern-prescription)
 - [thm-critical-rank-cancellation](item-thm-critical-rank-cancellation)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 1, abstract; p. 2, Theorem B; p. 17, proof of Theorem B](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site and universe size bounds required by the cited motivic filtration and Chern-class constructions. Let $k$ be an algebraically closed field of arbitrary characteristic and let $X$ be a normal affine finite-type $k$-scheme of Krull dimension three. Then

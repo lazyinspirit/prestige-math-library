@@ -9,7 +9,7 @@ PDF p. 7: Lemma2.9: smooth-point supported purity
 
 ## Prerequisites
 
-None.
+- [Vladimir Voevodsky, Cancellation Theorem, Documenta Mathematica Extra Volume Suslin(2010),671–685 · Corollary4.10 and complete printed proof, p684/PDF14; adjacent Corollary4.9 and its proof; introduction p671/PDF1.](https://www.math.ias.edu/Voevodsky/files/files-original/Dropbox/Published%20versions/cancellation_published.pdf)
 
 ## Statement
 Let $k$ be perfect. For any $K,L\in DM^{\mathrm{eff}}_-(k)$, tensoring with $\mathbb Z(1)$ induces the natural bijection

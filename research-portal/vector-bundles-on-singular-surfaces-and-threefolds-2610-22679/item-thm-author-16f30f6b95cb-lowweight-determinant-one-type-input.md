@@ -14,7 +14,10 @@ PDF p. 9: Actual low-weight projections and determinant normalization
 - [lem-nisnevich-line-bundle-torsors](item-lem-nisnevich-line-bundle-torsors)
 - [lem-adjudicate-f6007757a8ac-actual-determinant-stack-map](item-lem-adjudicate-f6007757a8ac-actual-determinant-stack-map)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Finn Knudsen and David Mumford, The projectivity of the moduli space of stable curves I: Preliminaries on det and Div · Chapter I pp.20–21,31; Definition2 p.37 and remark p.38; Definition4 pp.40–42 including p.41 footnote; Theorem2 p.42; Corollary2 p.43 and warning p.44](https://journals.msp.org/mscand/article/download/2000/1999)
+- [Charles Weibel, The K-book · Example IV.4.4.2, p.39; together with Chapter II §2 (local K₀=Z) and Chapter III Lemma1.4 (commutative semilocal K₁=units)](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.IV.pdf)
+- [Charles Weibel, The K-book, Chapter V, contextual descent statement · §10 introduction and Example10.3, p.72; Nisnevich discussion and Theorem10.10, p.76; Example10.10.1, p.77](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.V.pdf)
+- [Jacob Lurie, Higher Topos Theory · Proposition 7.2.2.12(2) and displayed proof; Remark7.2.2.13 and Definition7.2.2.14](https://www.math.ias.edu/~lurie/papers/HTT.pdf)
 
 ## Statement
 Assume the Axiom of Choice and the fixed compatible universe and site-size bounds of the supplied constructions.

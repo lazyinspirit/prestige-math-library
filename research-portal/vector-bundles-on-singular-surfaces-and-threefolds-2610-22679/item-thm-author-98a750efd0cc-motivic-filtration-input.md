@@ -12,7 +12,7 @@ PDF p. 3: Section 2, Elmanto–Morrow filtration; PDF p. 4: After Definition 2.2
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface)
 - [def-multiplicative-filtered-spectrum](item-def-multiplicative-filtered-spectrum)
-
+- [Motivic cohomology of equicharacteristic schemes · Version 1 (15 September 2023; internal date 18 September 2023): Theorem 1.1(1) p.3; Definition 4.9 p.21; Definition 4.23 pp.27–28; initial assertions of Theorems 4.12 p.22 and 4.27 p.29; §2.2 pp.11–12](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice for the selected local perfect-complex $K$-theory realization. Let $\mathbb F$ be $\mathbb Q$ or $\mathbb F_p$ for a prime $p$. On the opposite of the category of quasi-compact quasi-separated $\mathbb F$-schemes, nonconnective algebraic $K$-theory has a functorial, multiplicative, $\mathbb N$-indexed decreasing motivic filtration whose zeroth stage is naturally equivalent to $K$. In the terminology of coherently multiplicative filtered spectra, the imported multiplicative filtration includes coherent products, unit and transition compatibility; its maps to $K$ are induced through its zeroth stage.

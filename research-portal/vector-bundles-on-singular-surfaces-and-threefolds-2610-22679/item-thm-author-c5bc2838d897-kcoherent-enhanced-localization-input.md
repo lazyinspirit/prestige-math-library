@@ -10,6 +10,11 @@ PDF p. 3: Nonconnective algebraic K theory: enhanced prerequisite interface
 ## Prerequisites
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Blumberg–Gepner–Tabuada, Uniqueness of the multiplicative cyclotomic trace · §3, Proposition 3.5, PDF p. 13](https://arxiv.org/pdf/1103.3923v3)
+- [Jacob Lurie, Higher Algebra · Proposition 1.3.4.5 (statement p. 109, proof pp. 114–115); Proposition 1.3.2.10 and §1.3.5](https://www.math.ias.edu/~lurie/papers/HA.pdf)
+- [Brad Drew, Verdier quotients of stable quasi-categories are localizations · Theorem 1.3, PDF pp. 6–7; Definition 1.1](https://arxiv.org/pdf/1511.08287v1)
+- [Vladimir Hinich, Dwyer–Kan localization revisited · §1.1.2–1.1.3; Definition 2.1.1, Proposition 2.1.4 and complete proof §2.1.5–2.2.6; Definition 3.2.1 and Proposition 3.2.2; PDF pp. 4–5, 16–22](https://arxiv.org/pdf/1311.4128v4)
+- [Jacob Lurie, Higher Topos Theory · Remark 2.4.2.2 and its dual; Proposition 3.2.5.21; Hinich §2.1.5–2.1.6](https://www.math.ias.edu/~lurie/papers/HTT.pdf)
 
 ## Statement
 Assume AC and suitable universes. Hinich's localization L:Cat_∞^+→Cat_∞ is a functor with a natural localization map. For a marked cocartesian fibration p:(E,V)→(B,W) satisfying Definition 2.1.1, its localization is a cocartesian fibration L(E,V)→L(B,W), with fibers the localized original fibers (Proposition 2.1.4). The four hypotheses are: p is cocartesian; cocartesian lifts of W are marked; all fiber transports preserve markings; and transports over W induce equivalences of localized fibers. Markings are saturated. For a symmetric monoidal cocartesian fibration over Fin_*, if every active transport preserves its componentwise marking, Proposition 3.2.2 gives a symmetric monoidal localization, with the full universal property for symmetric monoidal functors.

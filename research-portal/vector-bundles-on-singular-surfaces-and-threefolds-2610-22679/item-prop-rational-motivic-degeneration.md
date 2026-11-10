@@ -18,6 +18,7 @@ PDF p. 14: Proof of Proposition 6.2, rational degeneration; PDF p. 14: Remark 6.
 - [def-article-conventions](item-def-article-conventions)
 - [math:lem-dimension-nonempty-open-subset](https://alphabetamath.cc/item/lem-dimension-nonempty-open-subset)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 14, proof of Proposition 6.2 and Remark 6.3; p. 13, Proposition 6.1](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice. Let $X$ be a Noetherian scheme of Krull dimension $3$ over a field $k$. Let $F^q_{\mathrm{mot}}K(X)$ denote stage $q$ of the Elmanto–Morrow motivic filtration of nonconnective $K$-theory and put

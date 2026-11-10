@@ -9,7 +9,9 @@ PDF p. 3: Strong monoidal transports from the common product-base family
 
 ## Prerequisites
 
-None.
+- [Vladimir Hinich, Dwyer–Kan localization revisited · §2.1.5, equivalence (31); Lemma 2.1.6; Proposition 2.1.4 and proof §2.2.2–2.2.6; Definition 3.2.1 and Proposition 3.2.2](https://arxiv.org/pdf/1311.4128v4)
+- [Jacob Lurie, Higher Algebra · Definition 2.0.0.7; Remark 2.1.2.19–20; Definition 2.1.3.7 and its preceding discussion](https://www.math.ias.edu/~lurie/papers/HA.pdf)
+- [Jacob Lurie, Higher Topos Theory · Notation 1.2.7.2 and Proposition 1.2.7.3; see Hinich §2.1.5 for straightening](https://www.math.ias.edu/~lurie/papers/HTT.pdf)
 
 ## Statement
 For any infinity-category $D$, straightening gives an equivalence $\mathrm{Coc}(D)\simeq\mathrm{Fun}(D,\mathrm{Cat}_\infty)$, where $\mathrm{Coc}(D)$ has cocartesian fibrations as objects and functors over $D$ preserving cocartesian arrows as morphisms. Functor categories satisfy exponential currying $\mathrm{Fun}(B\times S,\mathrm{Cat}_\infty)\simeq\mathrm{Fun}(B,\mathrm{Fun}(S,\mathrm{Cat}_\infty))$.

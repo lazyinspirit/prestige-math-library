@@ -9,8 +9,13 @@ PDF p. 17: Corollary 6.9; integral Chern and support comparison
 
 ## Prerequisites
 
-None.
-
+- [Spitzweck, A commutative P¹-spectrum representing motivic cohomology over Dedekind domains, arXiv1207.4078v3 · Lemma6.6 and Theorem6.7 pp55–56; Theorem9.16/Lemma9.17 p77; Proposition11.1/Remark11.2 p79](https://arxiv.org/pdf/1207.4078v3)
+- [Elmanto–Morrow, Motivic cohomology of equicharacteristic schemes, arXiv2309.08463v1 · Theorem 3.5/Remark 3.6, printed pp.14–16; Constructions 4.34–4.36/Remark 4.37, pp.31–32; Lemma 5.1/Definition 5.2, pp.33–34; Lemmas 5.10/5.12 and Construction 5.11, p.36; Theorem 6.1(2), Remark 6.3/Corollary 6.4 and footnote 12, pp.44–45](https://arxiv.org/pdf/2309.08463v1)
+- [Bachmann–Elmanto–Morrow, A¹-invariant motivic cohomology of schemes, arXiv2508.09915v1 · Proposition 3.15/Definition 3.16; Remarks 3.21/3.23; Lemma 3.27 proof (3.28); §4.1.2; Definitions 4.15/4.17, Remarks 4.18/4.20–4.23, Theorem 4.25/Remark 4.28; Lemma 4.33 and Construction 4.35/(4.36); Theorem 4.39/Remark 4.45; Corollaries 1.11/6.26; Theorem 6.3 coefficient-comparison paragraphs and (6.4) qualification; Proposition 7.4, Theorem 7.5/Remarks 7.6–7.10; Theorem 7.12/(7.14); Corollary 9.7/(9.8)](https://arxiv.org/html/2508.09915v1)
+- [Navarro, On the higher Riemann–Roch without denominators · Navarro §§2.1–2.2 p4; §2.6 p6, final regular-pair paragraph; Theorem3.1 pp7–8; smooth homotopy purity as cited there](https://arxiv.org/pdf/1901.09337v1)
+- [Morel–Voevodsky, A¹-homotopy theory of schemes, Publications Mathématiques IHES90(1999) · §3.2 Theorem2.23, printedp115/PDFp72; canonical blowup/purity maps in its proof; Proposition2.24](https://www.numdam.org/item/PMIHES_1999__90__45_0.pdf)
+- [Tom Bachmann, The very effective covers of KO and KGL over Dedekind schemes, EMS online-first PDF, DOI 10.4171/JEMS/1458 · Online-first PDF p.2: Theorem 1.1(1), Remark 1.2 and Example 1.3; p.3: Lemma 2.1 with proof and proof of Theorem 1.1(1)](https://ems.press/content/serial-article-files/47441)
+- [Marc Hoyois, The localization theorem for framed motivic spaces, Compositio157(2021),1–11 · Theorem18 and §4 introduction PDFp7; Lemma20 and Theorem21 with full proof PDFpp8–9](https://hoyois.app.uni-regensburg.de/papers/framedgluing.pdf)
 
 ## Statement
 The following established inputs are used integrally, with the versions, hypotheses and reading limits in the source records.

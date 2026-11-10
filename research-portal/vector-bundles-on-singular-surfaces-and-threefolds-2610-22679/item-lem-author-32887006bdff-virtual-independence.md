@@ -18,7 +18,7 @@ PDF p. 8: Actual Chern and Whitney identities; PDF p. 11: Total virtual Chern cl
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [lem-third-order-chern-inversion](item-lem-third-order-chern-inversion)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Elmanto and Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 · Theorem 1.1 opening, printed p. 3; prime-field convention, p. 2; Section 2.1, p. 11](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice and the compatible universe and site-size bounds of the supplied motivic constructions. Let $k$ be a field and $X$ any qcqs $k$-scheme. For arbitrary finite locally free bundles on $X$, extend the supplied classes from constant-rank clopen strata by their unique finite-clopen gluing. The actual series are natural and satisfy Whitney for every exact sequence. Consequently they define a unique natural homomorphism $c_t:K^0_{\rm vb}(X)\to 1+\prod_{i\geq1}H^{2i,i}(X)t^i$ with multiplicative-series target, and $c_t([V]-[W])=c_t(V)c_t(W)^{-1}$ independently of the representative. No identification of $K^0_{\rm vb}$ with perfect $K_0$ on general schemes is asserted.

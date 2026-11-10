@@ -9,7 +9,7 @@ PDF p. 4: Weight zero
 
 ## Prerequisites
 
-None.
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Theorem1.1(5) p.3; §3.3 p.14; Example4.11 p.22; Example4.26 p.28](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 On the qcqs prime-field cdh site specified by EM §3.3, the canonical natural map $\mathbb Z(0)_{\mathrm{mot},F}\to\mathbb Z(0)_{\mathrm{cdh},F}$ comes from the source cartesian square and its right vertical arrow is an equivalence. Moreover there is the source natural identification $\mathbb Z(0)_{\mathrm{cdh},F}(X)\simeq R\Gamma_{\mathrm{cdh}}(X,\underline{\mathbb Z})$, where $\underline{\mathbb Z}$ is the ordinary sheafification of constant integers, in degree zero.

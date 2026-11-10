@@ -13,6 +13,7 @@ PDF p. 4: Property (4)
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-bloch-higher-cycle-complex](item-def-bloch-higher-cycle-complex)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Motivic cohomology of equicharacteristic schemes · Theorem 1.1(9), PDF page 4 of 74; §3.1, equation (3.1) and slice-filtration discussion, PDF pages 12–13 of 74](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Let $k$ be a field, $X$ a smooth finite-type $k$-scheme, and $j\geq0$. The Elmanto–Morrow complex $\mathbb Z(j)_{\mathrm{mot}}(X)$ is equivalent in the derived category of abelian groups to Bloch's cycle complex, regarded cohomologically and shifted by $-2j$. It consequently represents the classical Voevodsky weight-$j$ motivic cohomology of $X$.

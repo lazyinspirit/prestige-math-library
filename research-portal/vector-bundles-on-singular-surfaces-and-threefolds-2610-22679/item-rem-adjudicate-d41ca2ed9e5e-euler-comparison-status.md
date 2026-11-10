@@ -13,7 +13,8 @@ PDF p. 3: Opening paragraph, expected Euler class identification
 - [def-smooth-point-filtration](item-def-smooth-point-filtration)
 - [lem-affine-perfect-k-zero-bridge](item-lem-affine-perfect-k-zero-bridge)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Fasel–Yakerson, Vector bundles on singular surfaces and threefolds, arXiv:2610.22679v1 · PDF pp. 2–3, Theorem C and following Euler-group expectation](https://arxiv.org/abs/2610.22679v1)
+- [Krishna, Murthy’s conjecture on 0-cycles, arXiv:1511.04221v3, 18 March 2019 · Definition 7.1, pp. 31–32; Lemmas 7.3–7.4, pp. 32–33; Corollary 7.6 and Theorem 7.7, p. 34; Theorem 1.6, p. 3](https://arxiv.org/pdf/1511.04221v3)
 
 ## Remark
 Assume AC and the fixed universe conventions. The article's expectation of an appropriate Euler-group description and an interpretation of rank-three splitting is retained as historical mathematical context. Its concrete candidate, the oriented-ideal group $E(A)$, is already covered by Krishna's established comparison: for a reduced finite-type algebra $A$ of dimension $d\geq2$ over an algebraically closed field,

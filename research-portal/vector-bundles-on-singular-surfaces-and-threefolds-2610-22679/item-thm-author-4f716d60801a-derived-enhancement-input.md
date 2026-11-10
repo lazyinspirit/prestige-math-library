@@ -10,6 +10,9 @@ PDF p. 16: Perfect complexes with support
 ## Prerequisites
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [The Stacks Project, Injectives, Remark 19.13.3 · Remark 19.13.3](https://stacks.math.columbia.edu/tag/079Q)
+- [Jacob Lurie, Higher Algebra · Propositions 1.3.5.13–15 and 1.3.5.21; Lemma 1.2.4.6](https://www.math.ias.edu/~lurie/papers/HA.pdf)
+- [Jacob Lurie, Higher Topos Theory · Corollary 4.4.5.15, Proposition 4.4.5.17 and Remark 4.4.5.18](https://www.math.ias.edu/~lurie/papers/HTT.pdf)
 
 ## Statement
 Assume the Axiom of Choice and fix suitable universes. For a scheme $X$, let $\mathcal D(X)$ be the infinity-localization of cochain complexes of Zariski $\mathcal O_X$-modules at quasi-isomorphisms. For a ring $A$, define $\mathcal D(A)$ similarly using $A$-modules. These are stable presentable infinity-categories, with ordinary unbounded derived categories as their homotopy categories. Degreewise exact additive functors induce exact functors on these localizations. Mapping cones represent cofibers. Both the enhanced categories and their homotopy categories are idempotent complete.

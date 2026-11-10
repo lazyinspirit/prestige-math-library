@@ -15,7 +15,8 @@ PDF p. 4: Smooth raw cycle comparison; PDF p. 16: Supported generic localization
 - [thm-adjudicate-f6007757a8ac-separated-cycle-descent-input](item-thm-adjudicate-f6007757a8ac-separated-cycle-descent-input)
 - [lem-author-75596422a482-restriction-kernel](item-lem-author-75596422a482-restriction-kernel)
 - [lem-author-75596422a482-kernel-homotopy-fiber](item-lem-author-75596422a482-kernel-homotopy-fiber)
-
+- [Marc Levine, Techniques of localization in the theory of algebraic cycles · §2.2 p.6; Theorems1.9 and6.12; §6.11 pp.37–38; §7 pp.43–44, proving Theorem1.7](https://citeseerx.ist.psu.edu/document?doi=9622ccdf2df87d21c760a444b7b04cd40b1662b0&repid=rep1&type=pdf)
+- [Mazza, Voevodsky and Weibel, Lecture Notes on Motivic Cohomology (xprova author PDF) · Definition19.10, Theorem19.11, Proposition19.12 and proof, printedpp168–169/PDF179–180](https://sites.math.rutgers.edu/~weibel/MVWnotes/xprova.pdf)
 
 ## Statement
 Assume AC and fixed universes for derived categories. Let $X$ be a smooth finite-type scheme over any field, without a separatedness assumption, and $r\geq0$. Put $C(W)=z^r(W,\bullet)$ for every open W of X, regarding homological degree n as cohomological degree -n. Let $aC$ be its degreewise sheafification on the small Zariski site. The actual sheafification unit

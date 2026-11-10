@@ -15,6 +15,7 @@ PDF p. 14: Proposition 6.2
 - [prop-rational-motivic-degeneration](item-prop-rational-motivic-degeneration)
 - [lem-rational-injection-detection](item-lem-rational-injection-detection)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Proposition 6.2 and its proof, PDF p. 14](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice. Let $k$ be an algebraically closed field and $X$ a normal affine threefold over $k$, where threefold means a finite-type $k$-scheme of Krull dimension three. Then the third edge homomorphism

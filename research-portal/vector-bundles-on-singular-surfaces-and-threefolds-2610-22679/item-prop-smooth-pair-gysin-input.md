@@ -15,7 +15,8 @@ PDF p. 7: Motivic purity at a smooth closed point
 - [lem-author-9415fc97ee80-compatible-relative-transport](item-lem-author-9415fc97ee80-compatible-relative-transport)
 - [lem-author-9415fc97ee80-relative-empty-split-cases](item-lem-author-9415fc97ee80-relative-empty-split-cases)
 - [def-supported-complex-indexing](item-def-supported-complex-indexing)
-
+- [Carlo Mazza, Vladimir Voevodsky and Charles Weibel, Lecture notes on motivic cohomology (xprova PDF) · Theorem 15.15, printed p.130, PDF page 141. Corollary 15.13 and Exercise 15.14, printed pp.129–130, PDF pages 140–141. Sm/k convention: Lecture 1, printed p.5, PDF page 16.](https://sites.math.rutgers.edu/~weibel/MVWnotes/xprova.pdf)
+- [Mazza–Voevodsky–Weibel, motive and Tate-twist conventions · Definition 14.1, printed p.113/PDF p.124; Definition 14.2 and following tensor conventions pp.113–114; Lemma 14.4 and first Properties 14.5, p.114/PDF p.125.](https://sites.math.rutgers.edu/~weibel/MVWnotes/xprova.pdf)
 
 ## Statement
 Let $k$ be a perfect field and let $X$ be in $\mathrm{Sm}/k$, meaning a smooth separated scheme of finite type over $k$. Let $i:Z\hookrightarrow X$ be a smooth closed subscheme of pure codimension $c\geq0$, and put $U=X\setminus Z$. In the classical category $DM^{\mathrm{eff},-}_{\mathrm{Nis}}(k,\mathbb Z)$ there is the distinguished Gysin triangle

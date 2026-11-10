@@ -10,7 +10,8 @@ PDF p. 7: Lemma2.9: smooth-point supported purity
 
 ## Prerequisites
 
-None.
+- [Mazza–Voevodsky–Weibel, Lecture notes on motivic cohomology: derived coefficient evaluation · Theorem13.1 and Lemma13.4 with full printed proof pp101–102/PDF112–113; Exercise13.5 p102; Proposition13.10 and Example13.11 p103/PDF114; Definition14.6/equation14.6.1 pp115–116; Propositions14.8/14.9, Theorem14.11 and Remark14.12 pp116–117; Proposition14.16 p118/PDF129.](https://sites.math.rutgers.edu/~weibel/MVWnotes/xprova.pdf)
+- [MVW, Tate coefficients and negative-weight convention · Definition3.1 p23/PDF34; Example8.10 p60/PDF71; Definition14.2 p113/PDF124 and Lemma14.4 p114/PDF125; Sm/k convention p5/PDF16.](https://sites.math.rutgers.edu/~weibel/MVWnotes/xprova.pdf)
 
 ## Statement
 Over a perfect field, let $\mathcal A$ be the category of Nisnevich sheaves with transfers on smooth separated finite-type schemes, with integral coefficients. For $j\geq0$, the classical complex $\mathbb Z(j)$ is bounded above and A¹-local. Its actual restriction functor is naturally modeled by

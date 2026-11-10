@@ -16,7 +16,7 @@ PDF p. 12: Section 6 opening projection; PDF p. 13: Opening sentence
 - [lem-eilenberg-maclane-shift-index](item-lem-eilenberg-maclane-shift-index)
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-motivic-cohomology](item-def-motivic-cohomology)
-
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · pp. 12–13, opening of Section 6; p. 9, Lemma 4.2](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice. Let $X$ be a Noetherian scheme of Krull dimension $3$ over a field $k$. Then the actual third-stage projection followed by the graded comparison is an isomorphism

@@ -9,7 +9,7 @@ PDF p. 15: Theorem6.7 second Bertini application
 
 ## Prerequisites
 
-None.
+- [Richard G. Swan, A cancellation theorem for projective modules in the metastable range, Invent. Math.27 (1974),23–43 · Printed p23 variety convention; Theorems1.3–1.4 p26, complete proof pp26–28; Corollary1.6 p28. GDZ scans29–34. DOI10.1007/BF01389963; EuDML https://eudml.org/doc/142306.](https://gdz.sub.uni-goettingen.de/id/PPN356556735_0027?tify=%7B%22pages%22:%5B32%5D%7D)
 
 ## Statement
 Import Swan Theorems1.3–1.4 in the following restricted form. On a smooth affine geometrically integral threefold over an infinite field, for a rank-two projective module there is a finite controlling family such that every finite family containing it has a nonempty open set of coefficients whose corresponding section has empty zero scheme or a smooth geometrically integral one-dimensional zero scheme. In the free case the controlling family can be taken to be a frame and its products by coordinates of an affine embedding, as constructed in the proof. The same remains true after repetitions or extra indexed vectors: coefficients of repetitions map surjectively onto the distinct-vector coefficient space, and the inverse image of its nonempty open is nonempty open.

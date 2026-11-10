@@ -10,6 +10,7 @@ PDF p. 13: Proposition 6.1 support argument
 ## Prerequisites
 
 - [def-motivic-cohomology](item-def-motivic-cohomology)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Theorem1.1(9) p.4; Construction4.34 p.31; §6 equation(6.1) and Theorem6.1(2) p.44; Corollary6.4 and footnote12 p.45](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 For a prime field $F$ and $r\geq0$, the actual source comparison $\eta_r:\mathbb Z(r)_{\mathrm{mot},F}\to C_{r,F}=\mathbb Z(r)_{\mathrm{cdh},F}$ is a natural transformation on all qcqs $F$-schemes and is an equivalence on every regular Noetherian $F$-scheme. Therefore on smooth finite-type schemes over any perfect field $k\supset F$, it is an equivalence of diagrams for open restrictions, even when those schemes are not finite type over $F$.

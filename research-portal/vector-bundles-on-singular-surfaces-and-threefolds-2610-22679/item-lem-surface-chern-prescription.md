@@ -18,7 +18,7 @@ PDF p. 12: Theorem A surjectivity construction
 - [lem-author-3cde9692a7e9-actual-total-cartan](item-lem-author-3cde9692a7e9-actual-total-cartan)
 - [thm-author-d026a7b99ace-universal-chern-space](item-thm-author-d026a7b99ace-universal-chern-space)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 12, final paragraph of the proof of Theorem A](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site-size and universe bounds required by the cited motivic and perfect K-theory constructions. Let $k$ be an algebraically closed field and let $X$ be a normal affine finite-type $k$-scheme of Krull dimension two. For every pair $a_1$ in $H^{2,1}_{mot}(X, Z)$ and $a_2$ in $H^{4,2}_{mot}(X, Z)$, there is a rank-two vector bundle $W$ on $X$ with $c_1(W)=a_1$ and $c_2(W)=a_2$.

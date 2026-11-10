@@ -11,6 +11,7 @@ PDF p. 2: Motivic projective bundle property; PDF p. 8: Orientation for the spli
 
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [def-multiplicative-filtered-spectrum](item-def-multiplicative-filtered-spectrum)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes (arXiv v1) · §2.2, pp.11–12; Definitions4.9/4.23, pp.21/27–28; Theorems4.10(1)/4.24(1); Lemma5.1 and its proof and Definition5.2, pp.33–34; multiplication and (5.2), p.34; line convention immediately before Theorem5.24, p.43](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Let $F=\mathbb Q$ or $\mathbb F_p$. The supplied EM complexes $C_b(X)=\mathbb Z(b)_{\rm mot}(X)$ on qcqs $F$-schemes are the shifted graded pieces of the specified multiplicative filtration. In the terminology of EM §2.2, the graded spectra $G_b=C_b[2b]$ form a natural commutative algebra object for graded Day convolution: there are coherent associative symmetric unital products $G_b\wedge G_d\to G_{b+d}$ and unit $\mathbb S\to G_0$, and pullbacks preserve this data. Equivalently these induce the usual motivic cup products, with even weight shifts. The negative graded pieces vanish, so $C_b=0$ for $b<0$.

@@ -11,7 +11,7 @@ PDF p. 4: Motivic dimension vanishing
 
 - [lem-author-b747b28c359f-elmanto-morrow-complexes](item-lem-author-b747b28c359f-elmanto-morrow-complexes)
 - [lem-author-b747b28c359f-derived-cohomology](item-lem-author-b747b28c359f-derived-cohomology)
-
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · §1 introduction footnote1 p.2; Theorem1.1 p.3; comparison map(1.2) p.4 and Theorem1.3(1) p.5; §3.3 definition(3.5) and Theorem3.5(1) pp.14–15; paragraph after Remark8.8 p.56](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Fix a prime field $F$ and $j\geq0$. The actual EM functor $M_{j,F}=\mathbb Z(j)_{\mathrm{mot}}$ on qcqs $F$-schemes has a natural comparison $\alpha_{j,F}:M_{j,F}\to C_{j,F}$, where

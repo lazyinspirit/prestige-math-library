@@ -10,6 +10,11 @@ PDF p. 3: K-flat localization fiber comparison: focused authoring addendum
 ## Prerequisites
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [The Stacks Project, Localization of triangulated categories · Lemma 13.5.8, full statement and proof](https://stacks.math.columbia.edu/tag/0GSL)
+- [The Stacks Project, Derived categories · Lemma 13.11.2; Definition 13.11.3, tag 05RU](https://stacks.math.columbia.edu/tag/05RT)
+- [The Stacks Project, Categories, Localization · Remark 4.27.15; right calculus of fractions preceding Lemma 4.27.11 (04VH), and Lemmas 4.27.13–14 (04VI,04VJ)](https://stacks.math.columbia.edu/tag/05Q4)
+- [The Stacks Project, Flat resolutions · Lemma 20.26.12; Lemma 20.26.6, tag 079S](https://stacks.math.columbia.edu/tag/06YF)
+- [Jacob Lurie, Higher Topos Theory · Proposition 1.2.3.1, statement and displayed proof](https://www.math.ias.edu/~lurie/papers/HTT.pdf)
 
 ## Statement
 Assume AC and suitable universes. Let D be a pretriangulated category, D′⊆D a full pretriangulated subcategory, and S a saturated multiplicative system compatible with the triangulated structure. If every X∈D receives s:X′→X in S with X′∈D′, then S′=S∩Arrows(D′) is a saturated compatible multiplicative system and (S′)⁻¹D′→S⁻¹D is an exact equivalence. This conclusion includes full faithfulness, not merely essential surjectivity.

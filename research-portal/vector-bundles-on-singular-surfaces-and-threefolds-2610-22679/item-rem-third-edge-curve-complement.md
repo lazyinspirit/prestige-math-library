@@ -16,7 +16,7 @@ PDF p. 14: Remark 6.3
 - [def-third-edge-map](item-def-third-edge-map)
 - [def-cohomology-with-support](item-def-cohomology-with-support)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 14, Remark 6.3 and proof of Proposition 6.2; p. 13, Proposition 6.1](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the size conventions used for motivic cohomology with support. Let $X$ be an affine finite-type scheme of Krull dimension three over an algebraically closed field $k$, and let $T\subset X$ be a closed integral curve contained in the smooth locus of $X\to\operatorname{Spec}k$. Put $U=X\setminus T$. Then the third edge homomorphism

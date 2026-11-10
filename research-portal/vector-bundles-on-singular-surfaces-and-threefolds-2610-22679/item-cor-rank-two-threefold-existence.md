@@ -14,6 +14,7 @@ PDF p. 1: Abstract; PDF p. 3: Corollary D; PDF p. 17: Corollary 6.10
 - [prop-chern-whitney-identities](item-prop-chern-whitney-identities)
 - [def-motivic-chern-classes](item-def-motivic-chern-classes)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 1, abstract; p. 3, Corollary D; p. 17, Corollary 6.10 and its proof](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site and universe size bounds required by the cited motivic filtration, support and Chern-class constructions. Let $k$ be an algebraically closed field of arbitrary characteristic and let $X$ be a normal affine finite-type $k$-scheme of Krull dimension three. Then the map

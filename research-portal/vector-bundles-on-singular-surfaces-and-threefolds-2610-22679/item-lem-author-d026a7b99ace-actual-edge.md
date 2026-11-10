@@ -21,7 +21,9 @@ PDF p. 17: Corollary6.9 supported factor calculation
 - [prop-motivic-graded-spectral-sequence](item-prop-motivic-graded-spectral-sequence)
 - [lem-filtered-support-exactness](item-lem-filtered-support-exactness)
 - [def-cohomology-with-support](item-def-cohomology-with-support)
-
+- [Kahn and Levine, Motives of Azumaya algebras, published final, JIMJ 9 (2010), 481–599 · Notation p.487; Lemmas 2.3.1–2.3.2 pp.499–500; Definition 3.1.5 p.503; §5.9 pp.531–532 before Lemma 5.9.1; Lemma 6.2.1 p.535.](https://webusers.imj-prg.fr/~bruno.kahn/preprints/Azumaya-final.pdf)
+- [Levine, The homotopy coniveau tower, arXiv:math/0510334v1 (2005) · §8.3 pp.46–47 through (8.3.1); Theorem 9.0.3 and Remark 9.0.4 p.47.](https://arxiv.org/pdf/math/0510334v1)
+- [Elmanto and Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 · Remark 3.6; Construction 4.36; Theorem 6.1(2), Remark 6.3, Corollary 6.4 and footnote 12.](https://arxiv.org/html/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice and the fixed site and universe bounds of the motivic and support constructions. Let $k$ be algebraically closed of arbitrary characteristic, let $X$ be a finite-type $k$-scheme of pure dimension three, and let $x$ be a smooth closed point. Let $i:\operatorname{Spec}k(x)\hookrightarrow X$ be the closed immersion. Write $u_x=[i_*k(x)]\in K_{0,x}(X)$ and let $\delta_x\in H^{6,3}_x(X,\mathbb Z)$ be the positive fundamental point-cycle class. Put $F^3_xK(X)=\operatorname{fib}(F^3_{\mathrm{mot}}K(X)\to F^3_{\mathrm{mot}}K(X\setminus\{x\}))$, and define $K_x(X)$ by the analogous restriction fiber of $K$. For this pair, the actual stage augmentation $a_{3,x}:F^3_xK(X)\to K_x(X)$ is an equivalence and its stage-to-layer map induces an isomorphism $p_{3,x}:\pi_0F^3_xK(X)\to H^{6,3}_x(X,\mathbb Z)$. The supported edge $\epsilon_{3,x}=\pi_0a_{3,x}\circ p_{3,x}^{-1}$ satisfies $\epsilon_{3,x}(\delta_x)=u_x$. It is the inverse of the actual inverse-augmentation leading projection, not an independent group identification.

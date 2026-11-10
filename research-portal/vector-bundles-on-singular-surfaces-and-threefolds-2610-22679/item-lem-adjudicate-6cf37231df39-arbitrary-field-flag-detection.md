@@ -14,6 +14,7 @@ PDF p. 3: qcqs scheme conventions; PDF p. 11: Lemma 5.3 and Proposition 5.5: fla
 - [lem-flag-tower-line-quotients](item-lem-flag-tower-line-quotients)
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Elmanto–Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 · Theorem 1.1 opening, printed p. 3; Theorem 5.24(2), printed p. 43, preceding projectivization convention, and proof conclusion p. 44; negative-weight convention p. 34](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice and the fixed site-size and universe bounds of the actual motivic complexes. Let $k$ be any field and $X$ any qcqs $k$-scheme. For finitely many finite locally free sheaves on $X$, the simultaneous line-quotient flag tower $q:Y\to X$, constructed on the finite common clopen rank partition, detects integral motivic cohomology:

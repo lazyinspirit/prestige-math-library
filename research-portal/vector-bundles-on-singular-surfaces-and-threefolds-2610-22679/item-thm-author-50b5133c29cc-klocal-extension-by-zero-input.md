@@ -11,6 +11,8 @@ PDF p. 7: Zariski locality; PDF p. 15: Localization diagram
 
 - [thm-adjudicate-1ef158934564-ringed-derived-enhancement](item-thm-adjudicate-1ef158934564-ringed-derived-enhancement)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [The Stacks Project, Sheaves on Spaces · Definition 6.31.5(5)–(6); Lemma 6.31.8(2)–(4); Lemma 6.31.12](https://stacks.math.columbia.edu/tag/009Z)
+- [The Stacks Project, Cohomology of Sheaves · §20.32 opening paragraphs; Lemma 20.32.8](https://stacks.math.columbia.edu/tag/0D5U)
 
 ## Statement
 For an open subspace $v:V\hookrightarrow X$ of a ringed space, module extension by zero $v_!$ is an exact additive functor left adjoint to exact restriction $v^*$. Its stalk is the given module stalk at points of $V$ and zero outside $V$, and $v^*v_!=\mathrm{id}$. Assuming the Axiom of Choice and fixed suitable universes for the derived constructions, applying both functors degreewise to complexes preserves quasi-isomorphisms and mapping cones, so they induce actual exact functors on the sheaf-derived infinity-localizations for these arbitrary ringed spaces. Their ordinary natural unit/counit maps induce natural transformations there.

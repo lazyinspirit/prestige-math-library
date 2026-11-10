@@ -12,7 +12,8 @@ PDF p. 15: Supported degree-zero dévissage
 - [def-scheme-perfect-complexes](item-def-scheme-perfect-complexes)
 - [thm-author-4f716d60801a-derived-enhancement-input](item-thm-author-4f716d60801a-derived-enhancement-input)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [The Stacks Project, Derived Categories of Schemes · §36.11 introduction; Lemma 36.11.6(1); Lemma 36.11.8 and its proof](https://stacks.math.columbia.edu/tag/08E0)
+- [Jacob Lurie, Higher Algebra · Definition 1.3.5.16 and Proposition 1.3.5.18 p. 128; Remark 1.3.5.19 and Proposition 1.3.5.21(2) p. 129](https://www.math.ias.edu/~lurie/papers/HA.pdf)
 
 ## Statement
 For the enhanced perfect-category assertion, assume the Axiom of Choice and fix suitable universes. Let $U$ be a regular Noetherian finite-dimensional scheme. Inside the specified sheaf-derived infinity-category, the full subcategory of perfect objects is precisely the full subcategory of objects with bounded coherent cohomology. The standard cohomological truncation functors $\tau_{\leq n},\tau_{\geq n}$ and their truncation cofiber sequences are those of the ambient derived t-structure, whose heart is ordinary sheaves of modules.

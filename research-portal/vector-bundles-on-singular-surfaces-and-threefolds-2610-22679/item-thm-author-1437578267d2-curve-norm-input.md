@@ -9,7 +9,8 @@ PDF p. 13: Divisor presentation for supported degree six
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, Principal divisors and pushforward · Lemma 42.18.1; Situation 42.7.1, tag 02QL, specialized to the spectrum of a field with dimension function zero](https://stacks.math.columbia.edu/tag/02RT)
+- [The Stacks Project, Orders of vanishing · Lemma 10.121.8 and Definition 10.121.2, tag 02MD](https://stacks.math.columbia.edu/tag/02MJ)
 
 ## Statement
 Let $C,T$ be integral finite-type curves over a field and $p:C\to T$ proper and dominant. For $g\in k(C)^\times$, with $K=k(T)$ and $L=k(C)$,

@@ -8,6 +8,7 @@ dependency_level: 13
 ## Prerequisites
 
 - [def-author-9b282fc59773-chern-map-and-fibers](item-def-author-9b282fc59773-chern-map-and-fibers)
+- [Aravind Asok and Jean Fasel, A cohomological classification of vector bundles on smooth affine threefolds · Theorem 1, p. 2; §6, pp. 22–26](https://arxiv.org/pdf/1204.0770v5)
 
 ## Statement
 Let $k$ be algebraically closed of characteristic different from two, and $X$ a smooth affine $k$-scheme of finite type of pure dimension three. For the defined $V=\mathrm{Vect}_2(X)$ and $T=\operatorname{Pic}(X)\times\mathrm{CH}^2(X)$, there exist sets $M,N$, bijections $v:V\to M$, $b:N\to T$, and a surjection $t:M\to N$ with $b t v=C_X$. For every $n\in N$, there are abelian groups $A_n,H_n,D_n$ and homomorphisms exact at the middle group in $A_n\to H_n\to D_n$, with $A_n=D_n=0$, such that the nonempty fiber $t^{-1}(n)$ is a surjective image of the underlying set of $H_n$. Under the ordinary divisor-class identification $\operatorname{Pic}(X)\cong\mathrm{CH}^1(X)$, the first coordinate $[\det E]$ is the usual first Chern class $c_1(E)$; the second coordinate is the usual Chow-theoretic $c_2(E)$, with its standard projective-bundle sign convention.

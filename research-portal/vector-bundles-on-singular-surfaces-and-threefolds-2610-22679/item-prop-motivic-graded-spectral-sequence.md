@@ -21,7 +21,7 @@ PDF p. 4: Motivic graded spectral sequence; PDF p. 9: Eventual filtration vanish
 - [lem-author-74a9c17e63f1-bounded-convergence](item-lem-author-74a9c17e63f1-bounded-convergence)
 - [thm-author-74a9c17e63f1-source-multiplicative-input](item-thm-author-74a9c17e63f1-source-multiplicative-input)
 - [thm-author-74a9c17e63f1-stage-bound-input](item-thm-author-74a9c17e63f1-stage-bound-input)
-
+- [Elmanto–Morrow, Motivic cohomology of equicharacteristic schemes · v1, 15 September 2023 (title date 18 September): Theorem 1.1(1), p.3; section 2.2, pp.11–12; Definitions 4.9/4.23, pp.21 and 27–28; Theorems 4.10(1)/4.24(1), pp.21 and 28; Theorems 4.12(1)/4.27(1), pp.22–23 and 29.](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice and the fixed compatible size conventions of the supplied constructions. Let $k$ be any field. For a qcqs $k$-scheme $X$ and every $r\geq0$, the actual source graded comparison gives a natural exact triangle

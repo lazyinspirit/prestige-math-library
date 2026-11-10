@@ -21,6 +21,7 @@ PDF p. 17: Theorem B surjectivity construction
 - [lem-zero-projection-rank](item-lem-zero-projection-rank)
 - [lem-affine-perfect-k-zero-bridge](item-lem-affine-perfect-k-zero-bridge)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 17, proof of Theorem B, surjectivity](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site and universe size bounds required by the cited motivic filtration and Chern-class constructions. Let $k$ be an algebraically closed field and $X$ a normal affine finite-type $k$-scheme of Krull dimension three. Given classes $a_i\in H^{2i,i}_{\mathrm{mot}}(X,\mathbb Z)$ for $i=1,2,3$, there is a rank-three vector bundle $E$ with $c_i(E)=a_i$ for all three indices.

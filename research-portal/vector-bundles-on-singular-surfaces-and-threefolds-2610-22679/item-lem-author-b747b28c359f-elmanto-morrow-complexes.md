@@ -11,6 +11,7 @@ PDF p. 4: Definition 2.2, citing EM23 Theorem 1.1
 
 - [def-article-conventions](item-def-article-conventions)
 - [def-nisnevich-covering-interface](item-def-nisnevich-covering-interface)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Introduction, pp. 2–3, especially Theorem 1.1 and its opening statement; Section 4 for the construction](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Let $F$ be a prime field, namely $\mathbb Q$ or $\mathbb F_p$ for a prime $p$. For each integer $j\geq0$, Elmanto and Morrow construct a finitary Nisnevich sheaf $\mathbb Z(j)_{\mathrm{mot}}$ on the category of quasi-compact quasi-separated $F$-schemes, valued in the derived category $D(\mathbb Z)$ of complexes of abelian groups. Finitary means compatibility with the filtered inverse limits to which the cited theorem applies. The sheaf is understood in the derived, homotopy-coherent sense of the cited source.

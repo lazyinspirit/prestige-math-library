@@ -22,7 +22,7 @@ PDF p. 1: Introduction final paragraph, Kum85 claim before the page break; PDF p
 - [math:def-chern-classes-of-a-vector-bundle](https://alphabetamath.cc/item/def-chern-classes-of-a-vector-bundle)
 - [def-motivic-chern-classes](item-def-motivic-chern-classes)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Thomas Brazelton, Morgan Opie and Tariq Syed, On Algebraic Vector Bundles of Rank 2 over Smooth Affine Fourfolds · Example 6.6, printed/PDF pp. 33–34, opening existence assertion and p=2 geometric description; bibliography MK84/MK85, p. 36](https://tbrazel.github.io/assets/papers/fourfolds.pdf)
 
 ## Statement refuted
 Trivial Chern classes force every rank-two algebraic vector bundle on every smooth complex affine variety to be trivial. In particular, this proposed criterion would assert that a rank-two bundle with all positive integral Chow Chern classes zero on a smooth complex affine fourfold is isomorphic to the trivial rank-two bundle.

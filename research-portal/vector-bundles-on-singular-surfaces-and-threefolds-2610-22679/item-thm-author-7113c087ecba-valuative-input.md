@@ -9,7 +9,9 @@ PDF p. 6: Proposition 2.6 proof
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, Extensions of valuation rings · Lemma15.125.5 and its full statement/proof](https://stacks.math.columbia.edu/tag/0ASF)
+- [The Stacks Project, Valuative criterion for properness · Lemma29.43.1, statement and proof](https://stacks.math.columbia.edu/tag/0BX5)
+- [Bhargav Bhatt and Akhil Mathew, The arc-topology · Definition1.2 p.3; Proposition2.1 and proof p.9](https://arxiv.org/pdf/1807.04725v4)
 
 ## Statement
 For an étale algebra $B$ over a valuation ring $V$, localization at a point over its closed point is a valuation-ring extension with the same value group. A proper morphism admits the valuative lift over $V$ whenever its fraction-field lift is given. Arc covers are tested using such extensions with valuation rank at most one.

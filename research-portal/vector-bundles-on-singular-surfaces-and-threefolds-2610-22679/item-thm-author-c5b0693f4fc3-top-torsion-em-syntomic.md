@@ -10,6 +10,7 @@ PDF p. 5: Proposition 2.6: torsion freeness
 ## Prerequisites
 
 - [def-motivic-cohomology](item-def-motivic-cohomology)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Definition 4.14, Lemma 4.16 and proof, pp.24–25; Remark 4.30(2), Remark 4.31, Corollary 4.32 and proof, p.30](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 For every $\mathbb F_p$-algebra $A$ and $j\geq0$, the complex $\mathbb F_p(j)_{\rm syn}(A)$ has a finite filtration from zero to itself, with graded pieces, in order,

@@ -12,7 +12,7 @@ PDF p. 8: Proposition3.2, perfect determinant; precise KM true-triangle input
 - [def-scheme-perfect-complexes](item-def-scheme-perfect-complexes)
 - [def-exterior-determinant-bundles](item-def-exterior-determinant-bundles)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Knudsen–Mumford, The projectivity of the moduli space of stable curves I: Preliminaries on det and Div, Math. Scand. 39 (1976), 19–55 · Chapter I, pp.20–21 and31; Definition2 p.37 and remark p.38; perfect-complex definition and Proposition4 p.39; Definition4 pp.40–42; Theorem2 p.42; warning and Proposition7 p.44](https://journals.msp.org/mscand/article/download/2000/1999)
 
 ## Statement
 Under AC and fixed universes for the sheaf-derived model, let $X$ be a scheme and let its perfect complexes mean objects locally represented by bounded finite locally free complexes. There is a global graded determinant functor on their derived isomorphisms. Its value is a line with locally constant integer Euler rank. For every actual short-exact complex diagram $0\to P\to Q\to R\to0$ with perfect terms, its true-triangle additivity supplies an isomorphism $\det(P)\otimes\det(R)\cong\det(Q)$. The determinant of zero is the trivial graded line. On a bounded finite locally free representative its underlying line is $\bigotimes_i(\det P^i)^{(-1)^i}$. It commutes with derived pullback, with the source's composition compatibility.

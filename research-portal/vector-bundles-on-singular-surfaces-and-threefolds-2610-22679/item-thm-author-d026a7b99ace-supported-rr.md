@@ -12,7 +12,7 @@ PDF p. 17: Corollary6.9 supported factor calculation
 - [thm-author-d026a7b99ace-integral-field-model](item-thm-author-d026a7b99ace-integral-field-model)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [lem-adjudicate-6e70d30b9793-smooth-supported-gysin-transport](item-lem-adjudicate-6e70d30b9793-smooth-supported-gysin-transport)
-
+- [Alberto Navarro, On the higher Riemann–Roch without denominators · Example1.1 p3; §§2.1–2.2 p4; Definition2.4 p6; Theorem3.1 and proof pp7–8](https://arxiv.org/pdf/1901.09337v1)
 
 ## Statement
 For a regular closed immersion $i:Z\hookrightarrow V$ of codimension $d$ between finite-dimensional noetherian schemes, every integer $q>0$, every nonnegative integer $r$ and every class $a\in K_r(Z)$ in ordinary algebraic K-theory, the actual supported integral motivic Chern operation of Navarro §2.2 satisfies the following identity in $H^{2q-r}_{\mathrm M,Z}(V,\mathbb Z(q))$:

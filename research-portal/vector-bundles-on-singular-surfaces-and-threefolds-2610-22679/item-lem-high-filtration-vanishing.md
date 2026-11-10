@@ -16,6 +16,7 @@ PDF p. 9: Lemma 4.2
 - [lem-filtered-stage-exact-sequence](item-lem-filtered-stage-exact-sequence)
 - [lem-eilenberg-maclane-shift-index](item-lem-eilenberg-maclane-shift-index)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 9, Lemma 4.2 and proof](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice. Let $X$ be a Noetherian scheme of finite Krull dimension $d$ over a field $k$, and let $i$ and $j$ be integers. For the motivic filtration of [def-motivic-filtration](item-def-motivic-filtration),

@@ -9,7 +9,7 @@ PDF p. 6: Proposition 2.6 proof
 
 ## Prerequisites
 
-None.
+- [Utsav Choudhury and Martin Gallauer Alves de Souza, Homotopy theory of dg sheaves · §3 p.8 chain conventions; §5.1 Definitions5.1/5.3 pp.17–18; Theorem5.7 pp.18–19; Lemma5.10 p.19; Fact5.15 p.22](https://arxiv.org/pdf/1511.02828v1)
 
 ## Statement
 For a small Grothendieck site $\mathcal C$ and a commutative unital ring $\Lambda$, the localization of presheaves of unbounded complexes of $\Lambda$-modules at maps inducing isomorphisms on all associated cohomology sheaves has as its local objects exactly the objects satisfying descent for every hypercover. Its homotopy category is $D(\operatorname{Sh}(\mathcal C,\Lambda))$. Equivalently its reflector is $Ri\,a$, represented by evaluating a K-injective sheaf resolution after exact degreewise sheafification. Hypercover descent means that evaluation on an augmented hypercover is the derived product totalization of the cosimplicial evaluation diagram.

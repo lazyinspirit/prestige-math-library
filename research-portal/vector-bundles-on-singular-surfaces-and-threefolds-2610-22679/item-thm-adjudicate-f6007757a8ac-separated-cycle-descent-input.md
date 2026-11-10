@@ -10,8 +10,7 @@ PDF p. 4: Smooth raw cycle comparison; PDF p. 16: Supported generic localization
 ## Prerequisites
 
 - [def-bloch-higher-cycle-complex](item-def-bloch-higher-cycle-complex)
-
-
+- [Mazza, Voevodsky and Weibel, Lecture Notes on Motivic Cohomology, December 2005 author PDF · Standing convention printed p.5; Definition19.10, Theorem19.11, Proposition19.12 and proof, printed pp.168–169 (PDF pp.179–180)](https://sites.math.rutgers.edu/~weibel/MVWnotes/xprova.pdf)
 
 ## Statement
 Let $Y$ be a smooth quasi-projective finite-type scheme over a field, and $r\geq0$. Regard $C(W)=z^r(W,\bullet)$ in cohomological degrees $-n$, and let $aC$ be its degreewise sheafification on the small Zariski site of $Y$. The canonical unit

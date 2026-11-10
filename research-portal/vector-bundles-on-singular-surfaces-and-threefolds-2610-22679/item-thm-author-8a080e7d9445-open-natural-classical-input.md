@@ -11,7 +11,8 @@ PDF p. 13: Proposition 6.1 support argument
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [thm-author-2ac325480ae8-bem-field-model](item-thm-author-2ac325480ae8-bem-field-model)
-
+- [Bachmann–Elmanto–Morrow, A¹-invariant motivic cohomology of schemes, served v1 HTML · Theorem 7.5, Definition 7.8, Remark 7.9; comparison (1.9), Corollary 1.11; proof of Theorem 6.3, paragraphs preceding and following (6.4)](https://arxiv.org/html/2508.09915v1)
+- [Mazza–Voevodsky–Weibel, Lecture notes on motivic cohomology, Rutgers served PDF · Printed p.126, Theorem 16.7; printed pp.159–163, Lemma 19.4, Theorem 19.8, Proposition 19.12, Definition 19.13 and Example 19.14 (PDF pp.138–139 and 171–175)](https://sites.math.rutgers.edu/~weibel/MVWnotes/prova-hyperlink.pdf)
 
 ## Statement
 Assume the Axiom of Choice and fixed universe and site bounds. Let $k$ be perfect, let $F$ be its prime subfield, and let $r\in\mathbb Z_{\geq0}$. Let $C_{r,F}$ be the cdh-local left Kan extension of classical weight-$r$ motivic cohomology from smooth $F$-schemes to qcqs $F$-schemes. Fix a smooth separated finite-type $k$-scheme $S$. On the finite-type separated objects of the small étale site $S_{\mathrm{et}}$, there is an equivalence of presheaves with values in $\mathrm{D}(\mathbb Z)$

@@ -10,7 +10,7 @@ PDF p. 8: Actual Chern and Whitney identities; PDF p. 11: Total virtual Chern cl
 ## Prerequisites
 
 - [thm-author-4f94f7982b0d-p1-spectrum-input](item-thm-author-4f94f7982b0d-p1-spectrum-input)
-
+- [Annala–Iwasa, Motivic spectra and universality of K-theory (author PDF,14April2025) · Definition4.4.1 and Lemma4.4.3(ii)–(iii), full proof pp30–31; §2.1.5 quotient convention and Lemma3.2.3](https://ryomei.com/papers/MotSp.pdf)
 
 ## Statement
 Let $\mathcal E$ be a homotopy-commutative linearly oriented motivic ring spectrum over a qcqs derived scheme $S$, satisfying its actual class-power PBF. For a bundle $V$ of positive constant rank $r$ on $Y\in\mathrm{Sm}_S$, define $\widetilde c_i(V)$ by the quotient-projective relation

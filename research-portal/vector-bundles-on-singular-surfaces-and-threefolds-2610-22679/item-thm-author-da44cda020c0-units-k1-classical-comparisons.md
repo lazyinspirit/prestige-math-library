@@ -10,7 +10,9 @@ PDF p. 9: Surjectivity of the determinant on K1
 ## Prerequisites
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Charles Weibel, The K-book, Chapter III · Definition III.1.1 and Example III.1.1.1, PDF pp. 1–2](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.III.pdf)
+- [Charles Weibel, The K-book, Chapter IV · Definition IV.1.1; Theorem IV.4.9 and explicit maps η_n(g)=(g,1), pp. 42–43; Theorem IV.4.11/Corollary IV.4.11.1, pp. 44–45; Theorem IV.7.1/Corollary IV.7.2, pp. 61–64; Exercises IV.7.8–7.9, printed and PDF p. 65; IV.8.3.2, IV.8.5 and Exercises IV.8.5–8.7, pp. 68,74–75](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.IV.pdf)
+- [Charles Weibel, The K-book, Chapter V · Theorem V.2.2 (Gillet–Waldhausen) and proof, pp. 13–14; §V.2.7.2, p. 18](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.V.pdf)
 
 ## Statement
 Assume AC. For every commutative unital ring A, let P(A) be the exact category of finite projective modules and let C(A)=Chᵇ(P(A)) be bounded cochain complexes, with degreewise split monomorphisms as cofibrations and quasi-isomorphisms as weak equivalences. The canonical matrix-automorphism maps and degree-zero inclusion give natural isomorphisms

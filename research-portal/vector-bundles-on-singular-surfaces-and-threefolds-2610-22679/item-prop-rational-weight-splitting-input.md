@@ -16,7 +16,7 @@ dependency_level: 10
 - [lem-author-9f61e4df2141-split-tower-boundaries](item-lem-author-9f61e4df2141-split-tower-boundaries)
 - [lem-author-9f61e4df2141-split-couple-degeneration](item-lem-author-9f61e4df2141-split-couple-degeneration)
 - [lem-author-9f61e4df2141-split-image-filtration](item-lem-author-9f61e4df2141-split-image-filtration)
-
+- [Motivic cohomology of equicharacteristic schemes · September 2023 PDF v1, Theorems 4.12(1)–(3) and 4.27(1)–(3), printed pp. 22 and 29; Section 2.2, pp. 11–12; proof of Lemma 7.1, p. 49](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice and use the universes of the supplied perfect-complex $K$-theory interface. Let $X$ be a quasi-compact quasi-separated scheme over $\mathbb Q$ or over $\mathbb F_p$ for a prime $p$, of finite valuative dimension in the supplied convention. Let $F^\bullet_{\mathrm{mot}}K(X)$ be the Elmanto–Morrow motivic filtration on that nonconnective $K$-theory spectrum. Rationalization means smashing each stage with the rational sphere spectrum. There is a natural equivalence of augmented filtered spectra from this rationalized tower to the tail tower

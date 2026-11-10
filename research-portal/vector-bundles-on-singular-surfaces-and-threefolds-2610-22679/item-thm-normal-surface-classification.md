@@ -22,6 +22,7 @@ PDF p. 1: Abstract; PDF p. 2: Theorem A; PDF p. 12: Proof of Theorem A
 - [thm-critical-rank-cancellation](item-thm-critical-rank-cancellation)
 - [thm-line-bundle-first-chern-classification](item-thm-line-bundle-first-chern-classification)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Abstract; PDF p. 2, Theorem A and following paragraph; p. 12, proof of Theorem A](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site-size and universe bounds required for the specified motivic and perfect K-theory constructions. Let $k$ be an algebraically closed field and let $X$ be a normal affine finite-type $k$-scheme of Krull dimension two. The map

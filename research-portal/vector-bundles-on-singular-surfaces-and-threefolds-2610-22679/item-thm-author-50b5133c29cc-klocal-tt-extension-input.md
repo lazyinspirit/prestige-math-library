@@ -11,6 +11,8 @@ PDF p. 7: Zariski locality; PDF p. 15: Localization diagram
 
 - [def-scheme-perfect-complexes](item-def-scheme-perfect-complexes)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [R. W. Thomason and Thomas Trobaugh, Higher Algebraic K-Theory of Schemes and of Derived Categories · §5, hypotheses of Theorem 5.1 p. 337; Propositions 5.2.2–5.2.4 pp. 338–339; general-qcqs completion Lemma 5.6.2 and 5.6.3 pp. 348–350; Euler relations 1.5.6–1.5.7 p. 261. PDF pages 91–93, 102–104 and 15.](https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Thomason-Trobaugh.pdf)
+- [The Stacks Project, Derived Categories · Lemma 13.6.6 and Definition 13.6.7 (05RI)](https://stacks.math.columbia.edu/tag/05RA)
 
 ## Statement
 Let $X$ be qcqs and $j:U\hookrightarrow X$ a quasi-compact open. In the ordinary sheaf-derived perfect categories:

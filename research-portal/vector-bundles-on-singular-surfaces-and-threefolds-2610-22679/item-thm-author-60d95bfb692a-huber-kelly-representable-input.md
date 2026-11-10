@@ -11,7 +11,7 @@ PDF p. 5: HK18 Theorem 1.4
 
 - [def-cdh-topology-interface](item-def-cdh-topology-interface)
 - [def-seminormal-scheme-interface](item-def-seminormal-scheme-interface)
-
+- [Differential forms in positive characteristic, II: cdh-descent via functorial Riemann–Zariski spaces · Published 2018 version, Algebra & Number Theory 12(3), 649–692; Theorem 1.4 and comparisons (2)–(3), pp. 651–652; Section 2A, Definition 2.1 and Remark 2.2(1), pp. 653–654; Remark 2.7 and Proposition 2.8 statement, pp. 654–655](https://msp.org/ant/2018/12-3/ant-v12-n3-p05-p.pdf)
 
 ## Statement
 Let $S$ be noetherian and Nagata, and let $X,Y$ be separated finite-type $S$-schemes. The canonical map identifies the cdh sheafification of the presheaf $h_Y(Z)=\operatorname{Hom}_S(Z,Y)$, evaluated at $X$, with $\operatorname{Hom}_S(X^{\mathrm{sn}},Y)$, naturally in $X$ and $Y$. Here noetherian means admitting a finite affine cover by spectra of noetherian rings; Nagata means that the normalization of every finite-type $S$-scheme is finite over that scheme. The notation $X^{\mathrm{sn}}\to X$ denotes the seminormalization of the reduction, with its canonical map to $X$.

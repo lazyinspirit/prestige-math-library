@@ -17,7 +17,11 @@ PDF p. 17: Corollary 6.9: actual supported Chern operation; affine perfect K-spa
 - [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [def-scheme-sites-and-sheafification](item-def-scheme-sites-and-sheafification)
-
+- [Charles Weibel, The K-book, Chapters IV and V · V.2.2 and proof, pp. 13–14; V.2.7.2, p. 18; canonical S/Q comparison IV.8.5–8.7, pp. 74–75 in Kbook.IV.pdf](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.V.pdf)
+- [Charles Weibel, The K-book, author-hosted Chapter IV · IV.8.3.2 and IV.8.5, p. 68; Exercises IV.8.5–8.7, pp. 74–75](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.IV.pdf)
+- [Blumberg–Gepner–Tabuada, A universal characterization of higher algebraic K-theory, arXiv:1001.2282v4 · Lemma 7.11/Corollary 7.12, pp. 48–49; Proposition 9.32 and Remark 9.33, p. 64; Definition 9.6/Theorem 9.8, p. 58](https://arxiv.org/pdf/1001.2282v4)
+- [Asakura–Sato, Chern Class and Riemann–Roch Theorem for Cohomology Theory without Homotopy Invariance, 2019 · Definition 5.1 and §5 Steps 1–3, printed pp. 269–271](https://www.ms.u-tokyo.ac.jp/journal/26-3-1.pdf)
+- [Jacob Lurie, Higher Topos Theory, author-hosted PDF (accessed 9 November 2026) · Proposition 6.2.2.7, printed p. 579, proof pp. 582–583; paragraph following Proposition 6.5.2.8, printed p. 669 (PDF p. 687)](https://www.math.ias.edu/~lurie/papers/HTT.pdf)
 
 ## Statement
 Assume the Axiom of Choice and the fixed site and universe bounds. For any commutative unital ring $A$, let $\mathcal P(A)$ be its exact category of finite projective modules and let $\mathcal C(A)=\mathrm{Ch}^b(\mathcal P(A))$ have degreewise split cofibrations and quasi-isomorphisms. The canonical comparisons give natural equivalences of entire pointed spaces

@@ -26,7 +26,9 @@ PDF p. 11: Proposition 5.5; pp. 11–12
 - [lem-adjudicate-a8be8a17c858-negative-model-coefficients](item-lem-adjudicate-a8be8a17c858-negative-model-coefficients)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [thm-author-74a9c17e63f1-source-multiplicative-input](item-thm-author-74a9c17e63f1-source-multiplicative-input)
-
+- [Annala–Iwasa, Motivic spectra and universality of K-theory, author PDF dated 14 April 2025 · Section 2.1 and Notations 2.2.7–2.2.9 / coefficient adjunction 2.2.10, pp. 14–15; Definition 4.4.1 through Corollary 4.4.7, pp. 30–32](https://ryomei.com/papers/MotSp.pdf)
+- [Asakura–Sato, Chern Class and Riemann–Roch Theorem for Cohomology Theory without Homotopy Invariance, J. Math. Sci. Univ. Tokyo 26 (2019) · Definition 5.1, Steps 1–3, Proposition 5.3, formula (5.3.1), and naturality square (5.4.1), pp. 269–272](https://www.ms.u-tokyo.ac.jp/journal/26-3-1.pdf)
+- [Elmanto–Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 (15 September 2023 header; 18 September 2023 internal date) · Theorem 1.1 opening and part (1), printed p. 3](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice and the compatible site-size and universe bounds required by the supplied perfect K-theory, motivic and derived-section constructions. On the small Nisnevich site of every noetherian finite-dimensional field-scheme $X$, the actual natural maps from the second-stage space satisfy

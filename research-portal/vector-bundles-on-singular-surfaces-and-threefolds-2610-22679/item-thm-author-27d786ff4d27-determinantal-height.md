@@ -9,7 +9,7 @@ PDF p. 15: Theorem6.7 second Bertini application
 
 ## Prerequisites
 
-None.
+- [Winfried Bruns and Udo Vetter, Determinantal Rings, LNM1327, Springer1988 · Section2.A, Theorem(2.1), printed p10/PDF18, and proof; Lemma(2.3), printed p11/PDF19.](https://www.home.uni-osnabrueck.de/wbruns/brunsw/detrings.pdf)
 
 ## Statement
 For a matrix $M$ of size $m\times n$ over a Noetherian ring and proper ideal $I_t(M)$ of its $t$-minors,

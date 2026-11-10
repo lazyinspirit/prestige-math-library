@@ -12,6 +12,7 @@ PDF p. 7: Zariski locality; PDF p. 15: Localization diagram
 - [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface)
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Andrew J. Blumberg, David Gepner and Gonçalo Tabuada, A universal characterization of higher algebraic K-theory · Definition 5.12, Proposition 5.13 and Proposition 5.14 pp. 35–36; Proposition 5.15 p. 36; Theorem 8.7 p. 55; Definition 9.6 and Theorem 9.8 p. 58; localizing invariant convention p. 4.](https://arxiv.org/pdf/1001.2282v4)
 
 ## Statement
 Consider an actual sequence of exact functors $\mathcal A\to\mathcal B\to\mathcal C$ between small stable infinity-categories, with zero composite and fully faithful first arrow. It is exact precisely when the induced functor $h\mathcal B/h\mathcal A\to h\mathcal C$ is an equivalence after idempotent completion. Equivalently the actual enhanced quotient $\mathcal B/\mathcal A\to\mathcal C$ becomes an equivalence after idempotent completion. Here idempotent completion adjoins all retracts, and $h$ retains objects and homotopy classes of maps.

@@ -9,7 +9,8 @@ PDF p. 4: Smooth comparison with Bloch cycles
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, Schemes smooth over fields · Lemmas 33.25.3 and 33.25.4.](https://stacks.math.columbia.edu/tag/04QM)
+- [The Stacks Project, Normal schemes · Lemma 28.7.5.](https://stacks.math.columbia.edu/tag/0357)
 
 ## Statement
 A scheme smooth over a field is regular and normal. If it is also noetherian, its irreducible components are disjoint normal integral open-and-closed subschemes. Consequently a smooth finite-type scheme over a field admits a cover by integral smooth affine opens, each separated and equidimensional.

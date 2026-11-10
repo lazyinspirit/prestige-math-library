@@ -9,7 +9,7 @@ PDF p. 8: Computations after the splitting principle
 
 ## Prerequisites
 
-None.
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 PDF · Theorem 5.24(2), printed/PDF p.43; introductory projectivization convention immediately above; final proof paragraph p.44. Negative-weight zero convention in Section 5.1 immediately before Theorem 5.3, p.34.](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Let $\mathbb F=\mathbb Q$ or $\mathbb F_p$, let $X$ be a qcqs $\mathbb F$-scheme, and let $E$ be finite locally free of constant rank $r+1>0$. For $j\geq0$, the Elmanto-Morrow projective-bundle map

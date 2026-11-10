@@ -16,7 +16,8 @@ PDF p. 4: Motivic graded spectral sequence; PDF p. 9: Eventual filtration vanish
 - [lem-author-b747b28c359f-elmanto-morrow-complexes](item-lem-author-b747b28c359f-elmanto-morrow-complexes)
 - [prop-tower-exact-couple-interface](item-prop-tower-exact-couple-interface)
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
-
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Version 1 (15 September 2023): §2.2 pp.11–12; Definition4.9 and Theorem4.10(1)–(2) pp.21–22; Definition4.23 pp.27–28 and Theorem4.24 p.28; Theorem4.12 pp.22–23 and Theorem4.27 p.29; §3.1 p.13.](https://arxiv.org/pdf/2309.08463v1)
+- [Daniel Dugger, Multiplicative structures on homotopy spectral sequences I · §5 Proposition5.1 and Proposition5.3 p.11; §6 Theorem6.1 p.13, Theorem6.2 and Proposition6.4 p.14; proofs pp.16–17](https://arxiv.org/pdf/math/0305173v1)
 
 ## Statement
 Assume the Axiom of Choice and fix the compatible size conventions of the local filtration realization. On qcqs schemes over $\mathbb Q$ or $\mathbb F_p$ for a prime $p$, the EM filtration used by the completed local filtration definition is the actual pullback filtered $E_\infty$-algebra of EM Definition4.9 in characteristic zero and Definition4.23 in characteristic $p$. Its natural graded equivalence is

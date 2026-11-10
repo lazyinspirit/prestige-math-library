@@ -9,7 +9,10 @@ PDF p. 5: Seminormalization in Lemma 2.4
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, Absolute weak normalization and seminormalization · Lemma 29.48.7 (3)–(4) and its functoriality assertion](https://stacks.math.columbia.edu/tag/0EUS)
+- [The Stacks Project, Weak normalization · Lemmas 29.56.3 and 29.56.7, and the implication following Definition 29.56.9](https://stacks.math.columbia.edu/tag/0H3I)
+- [The Stacks Project, Normalization · Lemma 33.27.1(1)–(2)](https://stacks.math.columbia.edu/tag/0BXR)
+- [The Stacks Project, Absolute weak normalization and seminormalization · Lemma 29.48.9](https://stacks.math.columbia.edu/tag/0H3G)
 
 ## Statement
 For a scheme $X$, the category of universal homeomorphisms $Y\to X$ inducing isomorphisms on residue fields has an initial object $X^{\mathrm{sn}}\to X$, with seminormal source; its construction is functorial in $X$. A scheme is seminormal precisely when every such morphism with reduced source is an isomorphism. If $X$ is locally of finite type over a field, then $X^{\mathrm{sn}}\to X_{\mathrm{red}}$ is finite, and a normal $X$ is seminormal. Here seminormal means that every point has an affine neighbourhood whose ring has the unique square-cube root property stated in the interface definition.

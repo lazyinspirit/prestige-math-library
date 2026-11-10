@@ -11,7 +11,8 @@ PDF p. 5: Proposition 2.6: torsion freeness
 
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [thm-author-c5b0693f4fc3-top-torsion-em-syntomic](item-thm-author-c5b0693f4fc3-top-torsion-em-syntomic)
-
+- [Elden Elmanto, Zero cycles on singular varieties (joint work with Matthew Morrow), Algebraic K-theory, Oberwolfach Report 36/2025 · Theorem 4 and its proof, printed p.1995/PDF47; notation and comparison Theorem3, printed1994/PDF46; application printed1996/PDF48](https://ems.press/content/serial-article-files/52244)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 · Theorem 4.28 and proof, printed p.29; Definition 4.29, Remarks 4.30–4.31, map (4.7), Corollary 4.32 and proof, printed p.30](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Let $k$ be algebraically closed, $X$ a finite-type $k$-scheme, $j\geq\dim X$, and $\ell$ any prime. The canonical map of Elmanto–Morrow complexes

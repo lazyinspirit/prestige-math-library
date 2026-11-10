@@ -16,7 +16,7 @@ PDF p. 9: Lemma 4.2 proof: empty-scheme case of eventual stage vanishing
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-multiplicative-filtered-spectrum](item-def-multiplicative-filtered-spectrum)
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
-
+- [Kasprowski–Winges, Algebraic K-theory of stable infinity-categories via binary complexes · Section 2.1, formula (2.6), p.3; Section 2.2, paragraph immediately before Lemma 2.12, p.4](https://arxiv.org/pdf/1805.06175v2)
 
 ## Statement
 Assume the Axiom of Choice and the fixed universes of the selected perfect-complex realization. For the empty scheme over any field, every integer stage of the actual motivic filtration is a zero spectrum:

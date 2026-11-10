@@ -14,6 +14,7 @@ PDF p. 2: Sus77 reduction; PDF p. 12: Theorem A opening; PDF p. 17: Theorem B in
 - [lem-author-7dc5154c7a6f-cancellation-interface](item-lem-author-7dc5154c7a6f-cancellation-interface)
 - [thm-author-7dc5154c7a6f-suslin-module-input](item-thm-author-7dc5154c7a6f-suslin-module-input)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Manoj Kumar Keshari, Cancellation problem for projective modules over affine algebras · p. 1, Introduction: definition of cancellative and Theorem 1.1(i); p. 16, reference  20 ](https://arxiv.org/pdf/0708.2961v1)
 
 ## Statement
 Assume AC and the universes of the article\'s K-theory construction. Let $k$ be an algebraically closed field of arbitrary characteristic and $X=\operatorname{Spec}A$ a nonempty affine finite-type $k$-scheme of dimension $d$. For any two vector bundles $E,F$ of the same constant rank $r\geq d$, $E\cong F$ if and only if $[E]=[F]$ in the article\'s perfect spectral $K_0(X)$. In particular this applies to rank $d$ on every normal affine surface or threefold in the article. Here $[E]$ is the perfect-K-theory object class, and the affine comparison identifies it with the vector-bundle Grothendieck class; no coherent-sheaf G-zero identification is used.

@@ -9,7 +9,7 @@ PDF p. 5: Prime-to-characteristic comparison
 
 ## Prerequisites
 
-None.
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · §3.3 pp.14–15, definition(3.5) and Theorem3.5(3); Theorem4.10(4) p.21 and proof p.22; Theorem4.24(3) p.28 and proof; Example4.26 p.28; Theorem4.33(1) proof p.31](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 For $F=\mathbb Q$ or $\mathbb F_p$, $j\geq0$, $n\geq1$ invertible in $F$, use the derived cdh sheafification $L_{\mathrm{cdh}}$ on the source’s entire qcqs site of §3.3. It is the ordinary stable-valued sheafification of source §2.1, left adjoint to inclusion of derived cdh sheaves satisfying covering descent; no identification with unrestricted hypercompletion on the entire qcqs site is asserted. The source supplies: (i) the canonical $M_j\to\mathbb Z(j)_{\mathrm{cdh}}$, an equivalence modulo $n$ in characteristic zero and an equivalence after inverting $p$ in characteristic $p$; (ii) the natural equivalence $\theta_j:\mathbb Z(j)_{\mathrm{cdh}}/n\simeq L_{\mathrm{cdh}}\tau^{\leq j}B_j$; (iii) cdh descent of $B_j=R\Gamma_{\mathrm{et}}(-,\mu_n^{\otimes j})$. The last datum permits the induced map $\epsilon_j$ adjoint to the ordinary truncation map.

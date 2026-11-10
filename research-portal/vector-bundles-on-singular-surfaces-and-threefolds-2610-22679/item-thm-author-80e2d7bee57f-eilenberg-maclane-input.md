@@ -9,7 +9,7 @@ PDF p. 4: Shift [2j] in equation (2.1)
 
 ## Prerequisites
 
-None.
+- [Stable model categories are categories of modules · Appendix B.1, pp. 38–40, especially construction preceding equation (B.1.9) and Theorem B.1.11](https://homepages.math.uic.edu/~bshipley/classTopFinal.pdf)
 
 ## Statement
 For every unbounded chain complex $D$ of abelian groups, the cited Eilenberg–Mac Lane construction gives a functorial pointed simplicial Omega spectrum $HD$ and natural isomorphisms from its stable homotopy groups to $H_n(D)$ for all integers $n$. An Omega spectrum is a sequential spectrum whose adjoint structure maps are weak equivalences.

@@ -11,6 +11,7 @@ PDF p. 5: Finite refinements and integer sections
 
 - [def-cdh-topology-interface](item-def-cdh-topology-interface)
 - [def-nisnevich-covering-interface](item-def-nisnevich-covering-interface)
+- [Carlo Mazza, Vladimir Voevodsky and Charles Weibel, Lecture notes on motivic cohomology · Lecture1 convention, printed p.5; Lecture12 pp.91,96–98: Nisnevich lifting property, Definition12.23, Examples12.24–12.25, Lemma12.26, Proposition12.27 and Proposition12.28.](https://sites.math.rutgers.edu/~weibel/MVWnotes/xprova.pdf)
 
 ## Statement
 On separated finite-type schemes over a field, import MVW Lemma12.26 and Proposition12.28 with their exact conventions. A proper map is covering in the abstract-blowup-generated cdh topology if and only if it is completely decomposed. Every covering morphism in that topology has a refinement $V\xrightarrow{q}X'\xrightarrow{p}X$ together with its factorization through the original covering morphism, where $q$ is a Nisnevich covering morphism and $p$ is proper and cdh covering, hence completely decomposed by Lemma12.26.

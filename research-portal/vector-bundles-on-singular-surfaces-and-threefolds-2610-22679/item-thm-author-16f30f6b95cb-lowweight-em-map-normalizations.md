@@ -12,7 +12,7 @@ PDF p. 9: Actual low-weight motivic projections and their normalization
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Theorem3.5(8) in weight zero; Examples 4.11/4.26 and Construction4.36; Construction 5.5; Lemmas 5.10 and 5.12, especially (5.8); Lemma 5.1/Definition 5.2; Theorem 5.3; Corollary 7.11](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 For the filtration and $K$-space assertions in the selected local realization, assume the Axiom of Choice and its fixed compatible site and universe bounds.

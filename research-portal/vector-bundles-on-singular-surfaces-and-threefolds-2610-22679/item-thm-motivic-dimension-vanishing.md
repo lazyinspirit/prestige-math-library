@@ -17,6 +17,8 @@ PDF p. 4: Motivic dimension vanishing
 - [lem-author-0bac6b264f4a-motivic-dim-fiber-bound](item-lem-author-0bac6b264f4a-motivic-dim-fiber-bound)
 - [lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing](item-lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing)
 - [lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing](item-lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Theorem1.13 p.8 and Theorem8.1 p.53](https://arxiv.org/pdf/2309.08463v1)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p.4 property(3), referring to EM23 Theorem1.13](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Let $X$ be a Noetherian equicharacteristic scheme of finite dimension $d$, and let $j\geq0$. Then

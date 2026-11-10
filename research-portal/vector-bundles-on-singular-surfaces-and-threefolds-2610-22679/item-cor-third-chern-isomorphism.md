@@ -19,7 +19,7 @@ PDF p. 1: Abstract; PDF p. 17: Corollary 6.9
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [lem-author-80f982ded420-normal-point-strata](item-lem-author-80f982ded420-normal-point-strata)
 - [lem-author-80f982ded420-clopen-filtered-products](item-lem-author-80f982ded420-clopen-filtered-products)
-
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 1, abstract; p. 17, Corollary 6.9 and proof](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site and universe size bounds required by the cited motivic filtration and support constructions. Let $k$ be an algebraically closed field, of arbitrary characteristic, and let $X$ be a normal affine finite-type $k$-scheme of Krull dimension three. Then the composite

@@ -9,7 +9,7 @@ PDF p. 15: Theorem6.7 second Bertini application
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, standard smooth presentations and openness · Algebra Definition10.137.5 and Lemma10.137.6, complete proof; Morphisms Lemmas29.35.10–29.35.11 at https://stacks.math.columbia.edu/tag/01V4.](https://stacks.math.columbia.edu/tag/00T1)
 
 ## Statement
 Import the ordinary relative Jacobian criterion in standard smooth presentations and openness of smooth morphisms: adding $r$ equations whose differentials are independent in a smooth relative $d$-fold yields a smooth relative $(d-r)$-fold near that point. In particular its image contains an open neighbourhood of the parameter. The criterion is valid in every characteristic and survives base change.

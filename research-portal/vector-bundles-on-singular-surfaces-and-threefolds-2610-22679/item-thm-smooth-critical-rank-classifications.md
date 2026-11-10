@@ -18,6 +18,7 @@ PDF p. 1: Introduction, first paragraph
 - [thm-author-f08c343a07fc-cancel-suslin-module-input](item-thm-author-f08c343a07fc-cancel-suslin-module-input)
 - [thm-author-f08c343a07fc-local-kumar-murthy-chow-input](item-thm-author-f08c343a07fc-local-kumar-murthy-chow-input)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Aravind Asok and Jean Fasel, A cohomological classification of vector bundles on smooth affine threefolds · p. 2, Introduction, paragraph beginning For context, immediately after Theorem 1; compare v1 p. 2 opening paragraph](https://arxiv.org/pdf/1204.0770v5)
 
 ## Statement
 Assume AC and the article\'s universes. Over an algebraically closed field $k$ of arbitrary characteristic, the ordinary integral Chow Chern maps are bijections $C_2:\mathrm{Vect}_2(X)\xrightarrow{\sim}\mathrm{CH}^1(X)\times\mathrm{CH}^2(X)$ for every smooth affine surface $X$, and $C_3:\mathrm{Vect}_3(Y)\xrightarrow{\sim}\mathrm{CH}^1(Y)\times\mathrm{CH}^2(Y)\times\mathrm{CH}^3(Y)$ for every smooth affine threefold $Y$. In each case every tuple is realized, and its realizing bundle is unique up to isomorphism. These are the classical surface classification of Murthy–Swan and threefold classification of N. Mohan Kumar–M. P. Murthy. Here $\mathrm{Vect}_r$ denotes bundle isomorphism classes, and $c_i$ is the coefficient of the standard quotient-projective-bundle Chern relation, with $c_1(\mathcal O(D))=[D]$.

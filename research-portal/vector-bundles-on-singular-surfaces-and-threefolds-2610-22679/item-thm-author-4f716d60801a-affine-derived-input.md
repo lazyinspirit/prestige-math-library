@@ -11,6 +11,8 @@ PDF p. 16: Perfect complexes with support
 
 - [math:def-perfect-complex-over-a-ring](https://alphabetamath.cc/item/def-perfect-complex-over-a-ring)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [The Stacks Project, Derived Categories of Schemes · Lemma 36.3.5](https://stacks.math.columbia.edu/tag/06Z0)
+- [The Stacks Project, Derived Categories of Schemes · Lemma 36.10.7](https://stacks.math.columbia.edu/tag/08EB)
 
 ## Statement
 Assume the Axiom of Choice. Let $A$ be a commutative unital ring and $X=\operatorname{Spec}A$. Degreewise associated sheaf induces an equivalence $D(A)\to D_{\mathrm{qc}}(X)$, where the target is the full subcategory of $D(\mathcal O_X)$ whose cohomology sheaves are quasi-coherent. The associated object of an $A$-complex is locally perfect if and only if the complex is isomorphic in $D(A)$ to a bounded complex of finitely generated projective modules.

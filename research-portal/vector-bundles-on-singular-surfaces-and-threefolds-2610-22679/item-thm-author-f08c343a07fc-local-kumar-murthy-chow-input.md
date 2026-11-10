@@ -9,6 +9,7 @@ dependency_level: 13
 
 - [lem-author-f08c343a07fc-local-chern-interface](item-lem-author-f08c343a07fc-local-chern-interface)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Aravind Asok and Jean Fasel, A cohomological classification of vector bundles on smooth affine threefolds · p. 2, Introduction, paragraph beginning For context, immediately after Theorem 1; compare v1 p. 2 opening paragraph](https://arxiv.org/pdf/1204.0770v5)
 
 ## Statement
 Assume AC. Let $k$ be an algebraically closed field of arbitrary characteristic and $Y$ a smooth affine threefold over $k$. Then $C_3:\mathrm{Vect}_3(Y)\to\mathrm{CH}^1(Y)\times\mathrm{CH}^2(Y)\times\mathrm{CH}^3(Y)$, $[G]_{\mathrm{iso}}\mapsto(c_1(G),c_2(G),c_3(G))$, is bijective. The classes are the ordinary integral Chow Chern classes with the quotient-projective-bundle normalization. Thus every triple occurs, and two such bundles are isomorphic exactly when their triples agree.

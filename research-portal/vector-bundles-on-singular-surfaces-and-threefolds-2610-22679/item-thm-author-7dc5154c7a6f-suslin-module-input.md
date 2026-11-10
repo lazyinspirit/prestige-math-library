@@ -7,7 +7,7 @@ dependency_level: 0
 
 ## Prerequisites
 
-None.
+- [Manoj Kumar Keshari, Cancellation problem for projective modules over affine algebras · p. 1, Introduction: definition of cancellative and Theorem 1.1(i); p. 16, reference  20 ](https://arxiv.org/pdf/0708.2961v1)
 
 ## Statement
 Let $k$ be an algebraically closed field of arbitrary characteristic, let $A$ be a commutative unital finite-type $k$-algebra of Krull dimension $d$, and let $P$ be a finite projective $A$-module of constant rank $r\geq d$. Then $P$ is cancellative: for every finite projective $Q$ and every integer $N\geq0$, an isomorphism $P\oplus A^N\cong Q\oplus A^N$ implies $P\cong Q$.

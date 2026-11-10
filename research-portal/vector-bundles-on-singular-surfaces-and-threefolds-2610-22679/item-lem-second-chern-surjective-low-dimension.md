@@ -15,7 +15,7 @@ PDF p. 12: Surjectivity of p2; PDF p. 17: Surjectivity of c2
 - [prop-second-projection-chern](item-prop-second-projection-chern)
 - [lem-filtered-stage-exact-sequence](item-lem-filtered-stage-exact-sequence)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 12, proof of Theorem A; p. 17, proof of Theorem B](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the fixed site and universe size bounds required by the motivic filtration and its low-stage comparison. Let $k$ be an algebraically closed field and let $X$ be a normal finite-type $k$-scheme of Krull dimension $2$ or $3$. Then both homomorphisms

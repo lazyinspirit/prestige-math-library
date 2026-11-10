@@ -9,7 +9,7 @@ PDF p. 10: Dense smooth locus in Lemma 5.1; PDF p. 15: Codimension of the singul
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, Schemes smooth over fields · Lemma 33.25.8, tag 0B8X](https://stacks.math.columbia.edu/tag/0B8X)
 
 ## Statement
 Let $k$ be a perfect field and $X$ a reduced scheme locally of finite type over $k$. A point $x\in X$ is smooth over $k$ if and only if $\mathcal O_{X,x}$ is a regular local ring.

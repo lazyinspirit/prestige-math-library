@@ -7,8 +7,7 @@ dependency_level: 0
 
 ## Prerequisites
 
-None.
-
+- [Annala–Iwasa, Motivic spectra and universality of K-theory, author PDF dated 14 April 2025 (third version) · Section 2.1.1, p. 14; Lemma 3.1.8(i), p. 22; Definition 4.4.1 and Lemma 4.4.3(i), complete lemma proof, pp. 30–31](https://ryomei.com/papers/MotSp.pdf)
 
 ## Statement
 Let $S$ be a quasi-compact quasi-separated derived scheme, and let $\mathcal E$ be a homotopy-commutative linearly oriented motivic ring spectrum over $S$ satisfying the source projective bundle formula with powers of the actual tautological first Chern class. Let $Y$ be a smooth qcqs derived $S$-scheme and let $V$ be a vector bundle of constant rank $r\geq1$ on $Y$. For every $1\leq i\leq r$, the coefficient $c_i^{\mathcal E}(V)$ defined by the quotient-projective relation of Definition 4.4.1 is nilpotent in $\mathcal E^*(Y)$: some positive integer power is zero. No $\mathbb A^1$-invariance or absolute smoothness over a field is assumed.

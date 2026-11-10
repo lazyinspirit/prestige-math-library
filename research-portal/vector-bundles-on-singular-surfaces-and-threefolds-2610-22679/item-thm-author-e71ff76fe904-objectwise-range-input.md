@@ -10,6 +10,7 @@ PDF p. 5: Prime-to-characteristic comparison
 ## Prerequisites
 
 - [thm-author-e71ff76fe904-cdh-factorization-input](item-thm-author-e71ff76fe904-cdh-factorization-input)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Theorem4.33(1) and its complete proof, printed p.31; introductory equivalent truncation statement Theorem1.1(3), p.3](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Let $F=\mathbb Q$ or $\mathbb F_p$, let $j$ be a nonnegative integer and let $n\geq1$ be an integer invertible in $F$. With the preceding source data, the composite

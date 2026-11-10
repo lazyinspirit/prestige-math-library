@@ -8,6 +8,8 @@ dependency_level: 1
 ## Prerequisites
 
 - [thm-author-e0b0bf18ed2b-singular-realization-input](item-thm-author-e0b0bf18ed2b-singular-realization-input)
+- [Kerodon, simplicial homotopy groups · Construction 3.2.2.4, Notation 3.2.2.5, Example 3.2.2.7; Theorem 3.2.2.10](https://kerodon.net/tag/00VJ)
+- [Kerodon, exactness of realization · Corollary 3.6.2.2, full statement and displayed proof](https://kerodon.net/tag/013E)
 
 ## Statement
 Let $Z$ be a based space and put $K=\Delta^1/\partial\Delta^1$, with $|K|=S^1$ in a fixed orientation. For every $d\geq1$, adjunction identifies the simplicial group $\pi_d(\operatorname{Sing}Z)$ with $\pi_d(Z)$. On a finite pointed simplicial sphere $A$ a representative $a:A\to\operatorname{Sing}Z$ is sent to $\epsilon_Z|a|:|A|\to Z$. The comparison respects suspension with $K$ as the first smash factor and $S^1$ as the first topological factor.

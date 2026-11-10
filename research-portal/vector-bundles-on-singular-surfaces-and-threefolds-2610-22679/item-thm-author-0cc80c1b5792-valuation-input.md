@@ -11,6 +11,7 @@ PDF p. 4: Motivic graded spectral sequence; PDF p. 9: Eventual filtration vanish
 
 - [def-valuative-dimension-and-boundedness](item-def-valuative-dimension-and-boundedness)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Elden Elmanto, Marc Hoyois, Ryomei Iwasa and Shane Kelly, Cdh descent, cdarc descent, and Milnor excision · Math.Ann.379 (2021),1011–1045; §2.3 definitions and Lemma2.3.1 p.9; Proposition2.3.2(1),(8),(9) pp.9–10](https://eldenelmanto.com/wp-content/uploads/2020/04/excisev3-1.pdf)
 
 ## Statement
 The Jaffard valuative dimension of a domain is the supremum of the Krull dimensions of valuation overrings inside its fraction field. For an arbitrary ring it is the supremum of these dimensions over prime quotients; for a scheme take the supremum over affine opens. It is local on open covers. For every locally Noetherian scheme $X$ it equals its Krull dimension.

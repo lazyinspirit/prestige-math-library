@@ -10,6 +10,7 @@ PDF p. 16: Perfect complexes with support
 ## Prerequisites
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [The Stacks Project, Cohomology of Sheaves, Perfect complexes · Definition 20.49.1 and Lemmas 20.49.2, 20.49.3, 20.49.7 and 20.49.9](https://stacks.math.columbia.edu/tag/08CL)
 
 ## Statement
 Assume the Axiom of Choice. Perfection on a ringed space is invariant under isomorphism in the derived category and is local. When all stalk rings are local, it means local equivalence to a bounded complex of finite locally free modules. Perfect objects satisfy two-out-of-three in distinguished triangles and are closed under direct summands. Scheme stalk rings are local.

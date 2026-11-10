@@ -16,7 +16,10 @@ PDF p. 17: Corollary 6.9; stable universal Chern and support comparison prerequi
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 - [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Annala–Iwasa, Motivic spectra and universality of K-theory, author PDF dated April 14, 2025 · §2.1.1–2.1.4 p. 14; Lemma 3.2.3 p. 23; Definition 4.4.1 and Lemma 4.4.3 pp. 30–31; Corollaries 4.4.5 and 4.4.7 and Theorem 4.4.6 pp. 31–32](https://ryomei.com/papers/MotSp.pdf)
+- [Stacks Project, derived limits and the Milnor exact sequence · Lemma 15.88.5 (tag 0919), statement and proof; Definition 13.34.1 (tag 08TB); Lemma 15.88.1(2)–(3) (tag 07KW)](https://stacks.math.columbia.edu/tag/0919)
+- [Stacks Project, derived limits: product-difference triangle · Definition 13.34.1](https://stacks.math.columbia.edu/tag/08TB)
+- [Stacks Project, Rlim of abelian groups · Lemma 15.88.1(2)–(3), statement and proof](https://stacks.math.columbia.edu/tag/07KW)
 
 ## Statement
 Assume the Axiom of Choice and the fixed site and universe bounds. Let $k$ be a perfect field, let $B_n=BGL_{n,k}$ be pointed by the trivial bundle, and use the stabilization $E\mapsto E\oplus\mathcal O$. Let $B_\infty=\operatorname*{colim}_{n\geq1}B_n$ in pointed local sheaves on the smooth finite-type $k$-site. For $i\geq1$, let $Y_i=\Omega^\infty(\mathbb Z(i)_{\rm cl}[2i])$ be the derived target for classical integral motivic cohomology. Then restriction is injective:

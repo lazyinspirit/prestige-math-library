@@ -10,6 +10,7 @@ PDF p. 6: EM23 Theorem 4.10(4)
 ## Prerequisites
 
 - [def-motivic-cohomology](item-def-motivic-cohomology)
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Theorem 4.10(2)–(4), printed pp. 20–21, and proof of part (4)](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 For a quasi-compact quasi-separated Q-scheme X and integer j ≥ 0, Elmanto–Morrow supply a natural map in D(Z)

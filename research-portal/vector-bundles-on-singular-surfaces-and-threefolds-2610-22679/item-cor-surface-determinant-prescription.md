@@ -11,6 +11,7 @@ PDF p. 2: Paragraph following Theorem A
 
 - [thm-normal-surface-classification](item-thm-normal-surface-classification)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 2, paragraph following Theorem A](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site-size and universe bounds required for the motivic and perfect K-theory constructions in [thm-normal-surface-classification](item-thm-normal-surface-classification). Let $k$ be an algebraically closed field and $X$ a normal affine finite-type $k$-scheme of Krull dimension two. Then

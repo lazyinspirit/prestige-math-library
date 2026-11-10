@@ -12,6 +12,7 @@ dependency_level: 3
 - [lem-author-b02e51f9da03-matrix-completion](item-lem-author-b02e51f9da03-matrix-completion)
 - [def-stably-free-bundles](item-def-stably-free-bundles)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [Thomas Brazelton, Morgan Opie and Tariq Syed, On Algebraic Vector Bundles of Rank 2 over Smooth Affine Fourfolds · Example 6.6, printed/PDF pp. 33–34, opening existence assertion and p=2 geometric description; bibliography MK84/MK85, p. 36](https://tbrazel.github.io/assets/papers/fourfolds.pdf)
 
 ## Statement
 There exist a nonempty smooth affine complex algebraic variety $X$ of dimension four and a rank-two vector bundle $E$ with $E\not\cong\mathcal O_X^2$ but $E\oplus\mathcal O_X^N\cong\mathcal O_X^{2+N}$ for some integer $N\geq1$. The variety can be taken to be the complement of a union of three hypersurfaces in $\mathbb P^3_{\mathbb C}\times\mathbb A^1_{\mathbb C}$, as in Mohan Kumar\'s construction. No particular defining equations are selected in this input. On writing $X=\operatorname{Spec}A$, there is therefore a right-invertible matrix $q:A^{2+N}\to A^N$ whose associated kernel bundle is $E$ and which cannot be completed to an invertible $(2+N)\times(2+N)$ matrix.

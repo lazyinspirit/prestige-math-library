@@ -18,7 +18,7 @@ PDF p. 13: Ful98 Example 1.6.6
 - [thm-author-9ab3274efad8-jacobian-input](item-thm-author-9ab3274efad8-jacobian-input)
 - [thm-author-9ab3274efad8-abelian-variety-divisibility-input](item-thm-author-9ab3274efad8-abelian-variety-divisibility-input)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF page 13, paragraph citing Fulton Example 1.6.6](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice. The Picard group of a smooth affine curve over an algebraically closed field is divisible.

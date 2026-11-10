@@ -9,7 +9,7 @@ PDF p. 13: Picard group of a smooth affine curve
 
 ## Prerequisites
 
-None.
+- [The Stacks Project, Proposition 39.9.11: Abelian varieties · Proposition 39.9.11, parts (3)–(4), and opening proof of part (4)](https://stacks.math.columbia.edu/tag/03RP)
 
 ## Statement
 If A is an abelian variety over an algebraically closed field k, then for every positive integer n the multiplication map n: A(k) → A(k) is surjective, including when the characteristic divides n.

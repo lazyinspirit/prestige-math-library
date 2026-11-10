@@ -10,7 +10,7 @@ PDF p. 15: Supported degree-zero dévissage
 ## Prerequisites
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Charles A. Weibel, The K-book: An Introduction to Algebraic K-theory, Chapter II: The Grothendieck Group K_0 · §II.6, Dévissage Theorem 6.3, printed and PDF p. 50; proof on the same page](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf)
 
 ## Statement
 Assume the Axiom of Choice. Let $\mathcal B\subseteq\mathcal A$ be essentially small abelian categories, with $\mathcal B$ full, inclusion exact, and $\mathcal B$ closed under subobjects and quotients taken in $\mathcal A$. Assume every object of $\mathcal A$ has a finite filtration whose quotients belong to $\mathcal B$. The inclusion induces an isomorphism of Grothendieck groups

@@ -13,7 +13,8 @@ PDF p. 9: Surjectivity of the determinant on K1
 - [lem-author-4f716d60801a-lifted-affine-equivalence](item-lem-author-4f716d60801a-lifted-affine-equivalence)
 - [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Blumberg–Gepner–Tabuada, A universal characterization of higher algebraic K-theory (arXiv:1001.2282v4, 5 February 2013) · §7.1, Definition 7.1 and the one-skeleton map, pp. 44–45; Lemma 7.11/Corollary 7.12, pp. 48–49; Definition 9.6/Theorem 9.8, p. 58; Definition 9.30, p. 63; Proposition 9.32/Remark 9.33, p. 64](https://arxiv.org/pdf/1001.2282v4)
+- [Blumberg–Gepner–Tabuada, A universal characterization of higher algebraic K-theory (arXiv:1001.2282v4, 5 February 2013): Waldhausen presentations · §4.2, Definition 4.7/Propositions 4.8–4.10, pp. 26–27; Theorem 4.22, p. 30; Lemma 7.11, p. 48, and the unnumbered presentation paragraph immediately after the proof of Corollary 7.12, p. 49](https://arxiv.org/pdf/1001.2282v4)
 
 ## Statement
 Assume the Axiom of Choice. For a small stable infinity-category $D$, its $S_\infty$ construction gives a natural map $D^\simeq\to\Omega^\infty K^{\mathrm{cn}}(D)$ from the maximal subgroupoid. The induced loop at an object $E$ defines a homomorphism $\pi_0\operatorname{Aut}_D(E)\to\pi_1K^{\mathrm{cn}}(D)$; on $\pi_1$ one translates the component of $E$ to the zero component of the grouplike K-space. Composition of automorphisms maps to addition, and exact functors preserve these classes. The canonical natural map $j_D:K^{\mathrm{cn}}(D)\to\mathbb K(D)$ is an isomorphism on $\pi_i$ for $i>0$, in particular on $\pi_1$. The nonconnective functor here is the $U_{\mathrm{loc}}$ functor of the specified perfect-complex interface, identified with BGT's suspension-colimit $IK$ by Theorem 9.8.

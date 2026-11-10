@@ -10,7 +10,8 @@ PDF p. 14: Lemma6.4; scheme conventions p3
 ## Prerequisites
 
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Charles Weibel, The K-book, author-hosted standalone Chapter IV · IV.1.1.1–1.1.2 pp.3; IV.1.4–1.6 pp.4–5; IV.4.9–4.11.1 pp.42–45; IV.7.1–7.2 pp.61–62; IV.8.3.2–8.6 pp.68–70; Exercises 8.5–8.7 pp.74–75](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.IV.pdf)
+- [Charles Weibel, The K-book, author-hosted standalone Chapter V · Theorem V.2.2 and its displayed proof pp.13–14; V.2.7.2 p.18](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.V.pdf)
 
 ## Statement
 Assume AC and fixed universe bounds. For every commutative unital ring $A$, let $P(A)$ be finite projective modules with their split exact structure, and let $C(A)$ be bounded cochain complexes in $P(A)$, with degreewise split monomorphisms as cofibrations and quasi-isomorphisms as weak equivalences. The canonical exact-category S/Q comparison followed by degree-zero inclusion gives a natural equivalence of full K-spaces

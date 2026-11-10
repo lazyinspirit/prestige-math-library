@@ -9,7 +9,7 @@ PDF p. 3: Filtered S1 spectra: stable enhancement prerequisites
 
 ## Prerequisites
 
-None.
+- [Mark Hovey, Spectra and symmetric spectra in general model categories · §4, Definition 4.2, Lemma 4.3, Proposition 4.4, Corollary 4.8 and Theorem 4.9, PDF pp. 17–20](https://arxiv.org/pdf/math/0004051)
 
 ## Statement
 Let K=Δ¹/∂Δ¹ and let X be a sequential pointed simplicial prespectrum, meaning pointed simplicial sets $X_n$ and maps K∧$X_n$→$X_{n+1}$, with each $X_n$ a Kan complex. A Kan complex has fillers for all simplicial horns. Write ΩZ=Map_*(K,Z), let s denote the level tail, and put $R=s\Omega$. The adjoints of the structure maps form a natural map ι:X→RX. Define QX=colim_m $R^m X$ using the maps $R^m\iota$. Then QX is level Kan, its adjoint structure maps are weak equivalences, X→QX is a stable equivalence, and (QX)_n=colim_m Ω^mX_{n+m}. A stable equivalence here is a weak equivalence in Hovey's sequential stable model structure.

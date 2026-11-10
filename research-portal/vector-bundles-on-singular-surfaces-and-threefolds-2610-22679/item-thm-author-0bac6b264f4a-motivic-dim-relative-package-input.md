@@ -11,7 +11,7 @@ PDF p. 4: Motivic dimension vanishing
 
 - [thm-author-0bac6b264f4a-motivic-dim-cdh-interface-input](item-thm-author-0bac6b264f4a-motivic-dim-cdh-interface-input)
 - [lem-author-b747b28c359f-elmanto-morrow-complexes](item-lem-author-b747b28c359f-elmanto-morrow-complexes)
-
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Proposition8.12 p.57 and its proof p.58; Theorem8.2 p.54, footnote14, and its proof p.55; Theorem8.7 p.55 for identification of the intended fiber](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 For a prime field $F$ and $j\geq0$, define the actual comparison fiber

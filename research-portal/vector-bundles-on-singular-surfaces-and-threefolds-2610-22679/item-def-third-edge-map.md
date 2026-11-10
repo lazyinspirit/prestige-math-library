@@ -12,7 +12,7 @@ PDF p. 17: Corollary6.9 supported factor calculation
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [lem-third-graded-isomorphism](item-lem-third-graded-isomorphism)
 - [def-motivic-filtration](item-def-motivic-filtration)
-
+- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 13, immediately before Proposition 6.1](https://arxiv.org/abs/2610.22679v1)
 
 ## Definition
 Assume the Axiom of Choice. Let $k$ be a field and let $X$ be a Noetherian $k$-scheme of Krull dimension $3$. Write $F^3_{\mathrm{mot}}K(X)$ for the third stage of the decreasing motivic filtration of the nonconnective $K$-theory spectrum of perfect complexes, and $K_0(X)=\pi_0K(X)$. Its third **image-filtration group** is the subgroup

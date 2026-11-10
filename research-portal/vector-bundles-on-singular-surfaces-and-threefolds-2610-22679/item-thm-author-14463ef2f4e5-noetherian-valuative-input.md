@@ -10,6 +10,7 @@ PDF p. 4: Finite valuative dimension
 ## Prerequisites
 
 - [def-valuative-dimension-and-boundedness](item-def-valuative-dimension-and-boundedness)
+- [Parviz Sahandi, Semistar-Krull and Valuative Dimension of Integral Domains · arXiv:0809.1305v3, page 1, Section 1, introductory paragraph on classical valuative dimension](https://arxiv.org/pdf/0809.1305)
 
 ## Statement
 For a noetherian integral domain $D$, $\dim_v D=\dim D$, allowing infinity. Noetherian means that every ideal is finitely generated; the dimensions and valuation overrings are as defined in this development.

@@ -12,7 +12,7 @@ PDF p. 9: Actual low-weight motivic projections and their normalization
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-
+- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Construction4.34 (4.8)–(4.9); Construction4.36; Theorem6.1(2), Remark6.3 and Corollary6.4; Theorem3.5(1),(8) and Remark3.6, pp.14–16; footnote12 p.45](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement
 Assume the Axiom of Choice and the fixed compatible site and universe bounds for the selected perfect K-theory and motivic-filtration realizations. Let F be a prime field. Construction4.34 gives an actual natural morphism of augmented filtered spectra Fil_cla K(X)→Fil_mot K(X) on Sm_F, equal to identity K(X) on stage zero; Corollary6.4 makes it a filtered equivalence. Its graded comparison maps are exactly (4.9), so they commute with the stage-to-layer maps.
