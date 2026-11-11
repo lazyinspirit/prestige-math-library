@@ -8,3 +8,6 @@ status: published
 - [Perfect K theory and motivic towers](filtered-k-theory) — level 2
 - [Chern constructions and support geometry](chern-and-support) — level 3
 - [Vector bundles on singular surfaces and threefolds](article) — level 4
+
+- [Prerequisite omissions and potential defects](potential-defects)
+- [Open questions and potential solutions](open-questions-and-potential-solutions)

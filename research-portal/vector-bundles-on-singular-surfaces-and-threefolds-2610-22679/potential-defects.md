@@ -4,70 +4,355 @@ description: Source-specific omissions, correctable errors and substantial proof
 status: published
 ---
 
-This page summarizes findings about the original [Fasel–Yakerson article, arXiv:2610.22679v1](https://arxiv.org/abs/2610.22679v1), using the retained [defects report](https://github.com/lazyinspirit/prestige-math-library/blob/main/defects/vector-bundles-on-singular-surfaces-and-threefolds-2610-22679-defects.md). Findings below retain the report's dispositions; “confirmed” does not mean a theorem is false. Duplicate reports are consolidated. Generated research drafts, prerequisite-source errors and dismissed objections are excluded. The report documents no refutation of the main classification conclusions. Article locations were checked against the supplied PDF and extracted text; the historical external-source audits are attributed to the report.
+Draft article-only report: all 96 original claims, all 18 PDF pages and all 132 required leads compared. Retains source proof-scope/input gaps, notation corrections and dismissed concerns; no counterexample to Theorems A–C or Corollary D is established. One new real-surface research candidate has a conditional descent reduction, not a singular-case solution.
 
-## Prerequisite omissions (including terse proofs)
+## article-characteristic-p-input · confirmed
 
-### Deferred proof — positive-characteristic torsion-freeness
+**Tags:** prerequisite omission
 
-**Recorded status:** Confirmed, nonfatal missing prerequisite. **Finding:** `author-c5b0693f4fc3-characteristic-p-torsion`. **Location:** Proposition 2.6, [PDF pp. 5–6](https://arxiv.org/pdf/2610.22679v1#page=5).
+https://arxiv.org/abs/2610.22679v1; PDF p. 6, Proposition 2.6 proof, opening (PDF p. 6).
 
-The proposition asserts that the top motivic cohomology group $H^{6,3}_{\mathrm{mot}}(X,\mathbb Z)$ is torsion-free for an affine threefold over any algebraically closed field. Its proof explicitly treats characteristic zero and says the general case will appear in work of Elmanto–Morrow. Thus the positive-characteristic case is an acknowledged omitted proof, rather than a case established by the printed argument. The report records replacement suppliers for arbitrary singular and nonreduced affine threefolds, using a comparison from the cited report and Elmanto–Morrow v1, Lemma 4.16; their substantial foundations remain imported. No counterexample is documented. The appropriate qualification is that the article defers this part of the proof. Nothing in this finding establishes that torsion-freeness fails or warrants restricting the proposition's statement to characteristic zero.
+> The general case will appear in the work of Elmanto-Morrow.
 
-### Citation scope — full cdh descent
+Proposition 2.6 states all characteristics but proves only characteristic zero. The authors explicitly defer the positive-characteristic argument. Subsequent integral threefold comparisons use the unrestricted statement.
 
-**Recorded status:** Confirmed, nonfatal original citation-scope gap. **Finding:** `author-bddd9c2c7ac0-stacks-descent-scope`. **Location:** Proposition 2.6 proof, [PDF p. 6](https://arxiv.org/pdf/2610.22679v1#page=6).
+This qualification occurs in the authors’ own opening proof, rather than in a generated supplier.
 
-The proof says that $R\Gamma_{\mathrm{et}}(-,\mathbb Z/p)$ is already cdh-local, citing Stacks, Chapter 59, Lemma 59.105.1 ([Tag 0EW5](https://stacks.math.columbia.edu/tag/0EW5)). According to the report's inspection of that lemma's complete statement and proof, it supplies an ordinary-blowup triangle for bounded-below torsion complexes. The citation alone does not provide the full locality assertion on the article's qcqs site. A bridge from these particular descent squares to the required site-wide descent is therefore missing from the cited justification. The report records a separate five-helper route through finite-ring constructible-category hyperdescent and a linear descent criterion, with deeper inputs explicitly imported. No counterexample to the locality conclusion is documented. This finding concerns the article's citation and missing bridge, not an error in the Stacks lemma; it is distinct from the truncation inference discussed below.
+**Correction:** Give a precise established characteristic-p input or supply that argument.
 
-### Terse bridge — affine-curve Picard divisibility
+No counterexample to torsion-freeness is established.
 
-**Recorded status:** Confirmed missing prerequisite/citation-scope gap. **Finding:** `source-affine-picard-fulton-scope`. **Location:** Proposition 6.1 proof, [PDF p. 13](https://arxiv.org/pdf/2610.22679v1#page=13), citing Fulton, *Intersection Theory*, Example 1.6.6, p. 17.
+## article-cdh-truncation-input · confirmed
 
-The article uses divisibility of the Picard group of a smooth affine curve over an algebraically closed field. The report records that Fulton's cited example discusses degree-zero zero-cycles on complete schemes and their relation to Jacobians; it does not directly state the affine Picard assertion. The omitted bridge is to complete the curve smoothly and projectively, use divisibility of the projective curve's degree-zero Picard group, and use a degree-one point on the nonempty boundary to remove the degree of an extending line bundle. Boundary divisors restrict trivially, so the degree-zero group surjects onto the affine Picard group. This explains the needed additional argument, rather than disproving the assertion. No counterexample is documented. The report records this bridge separately and does not attribute a false claim to Fulton.
+**Tags:** prerequisite omission; missing proof steps
 
-## Easily fixable defects
+https://arxiv.org/abs/2610.22679v1; PDF p. 6, Proposition 2.6 proof, passage from Artin vanishing to cdh localization (PDF p. 6).
 
-### Missing shift — support cohomology display
+> The
+> associated cdh-sheaf also vanishes and therefore
 
-**Recorded status:** Confirmed, easily fixable notation/convention gap. **Finding:** `author-6542695536e1-support-indexing-notation`. **Location:** Definitions 2.2 and 2.7, [PDF p. 4](https://arxiv.org/pdf/2610.22679v1#page=4) and [p. 6](https://arxiv.org/pdf/2610.22679v1#page=6).
+The characteristic-zero proof omits the locality step needed to truncate before cdh localization. Artin vanishing on affine threefolds does not alone prove the displayed equivalence on the entire qcqs site, which has larger-dimensional objects.
 
-Definition 2.2 uses an unshifted cochain complex $M_j=\mathbb Z_{\mathrm{mot}}(j)(X/U)$, whereas Definition 2.7 labels $\pi_i(M_j)$ as supported $H^{2j-i,j}$. With ordinary cohomological realization, $\pi_i(M_j)=H^{-i}(M_j)$; the intended degree requires $M_j[2j]$, equivalently $\pi_{i-2j}(M_j)$, or an explicitly declared shifted realization. The report verifies a concrete test: take $X=Y=\operatorname{Spec}\mathbb C$, $U=\varnothing$ and $i=j=1$. The literal unshifted display gives zero, but the intended $H^{1,1}$ is $\mathbb C^\times$, containing the nonidentity unit $2$. This detects the omitted shift under the article's earlier convention. It does not reject alternative conventions when explicitly stipulated, nor refute the subsequent purity conclusions.
+The quoted sentence is the authors’ transition between affine vanishing and the cdh-localized comparison.
 
-### Undefined bundle index — Theorem B
+**Correction:** State and justify the needed dimension-bounded refinement/site comparison, or prove the equivalence only after evaluation on X.
 
-**Recorded status:** Confirmed, nonfatal notation error. **Findings:** `article-theorem-b-surjectivity-bundle-index`; duplicate `critical-rank-article-e1-typo`. **Location:** Proof of Theorem B, final paragraph, [PDF p. 17](https://arxiv.org/pdf/2610.22679v1#page=17).
+This identifies an omitted justification; it does not refute the evaluated comparison or Proposition 2.6.
 
-The surjectivity construction defines bundles $E_2$ and $E_3$ and begins with the class of $E_3\oplus E_2\oplus L$. After listing the vanishing lower Chern classes of $E_3$, the paragraph twice changes its name to $E_1$: once in the Whitney calculation and once in the expression to which Serre splitting is applied. No $E_1$ is defined in this construction. Both occurrences should read $E_3$. The report records these two finding IDs as the same underlying slip and confirms that the replacement construction consistently uses $E_3$. No mathematical counterexample is documented or needed for this editorial correction. The undefined index interrupts the literal notation of the printed proof, but the recorded correction preserves the intended calculation and does not refute Theorem B.
+## article-qcqs-smooth-locus · confirmed
 
-### Wrong identifier — BEM bibliography
+**Tags:** insufficient assumptions; missing proof steps
 
-**Recorded status:** Confirmed, nonfatal bibliography defect. **Finding:** `article-bem25-arxiv-identifier-typo`. **Location:** Bibliography entry [BEM25], [PDF p. 18](https://arxiv.org/pdf/2610.22679v1#page=18); application in Proposition 2.6, p. 6.
+https://arxiv.org/abs/2610.22679v1; PDF p. 10, Lemma 5.2 proof, Picard restriction square (PDF p. 10).
 
-The bibliography prints `arXiv:2508.0991` for Bachmann–Elmanto–Morrow's work on $\mathbb A^1$-invariant motivic cohomology. The report records that this identifier resolves to unrelated astrophysics rather than the intended source. The intended reference is [arXiv:2508.09915v1](https://arxiv.org/abs/2508.09915v1), whose Corollary 7.20 is cited in the characteristic-zero proof of Proposition 2.6. Adding the missing final digit repairs the bibliographic pointer and lets the reader locate the comparison actually invoked. This is an error in the original article, even though the retained report places its finding among other source-related records. No mathematical counterexample is documented. Correcting the identifier does not by itself discharge the separate truncation or cdh-descent proof obligations in that argument, and the identifier typo does not refute the cited comparison theorem.
+> Let U ⊂X be the smooth locus.
 
-### Excess scope — smooth-locus restriction
+The smooth-locus proofs of Lemmas 4.1, 5.1 and 5.2 exceed the stated qcqs scope. Normality alone does not ensure a dense k-smooth locus, global-function equality, or injective Picard restriction. The affine finite-type convention does not restrict all nonaffine qcqs schemes.
 
-**Recorded status:** Confirmed, nonfatal easily fixable original proof-scope defect. **Finding:** `article-qcqs-smooth-locus-proof-scope`. **Location:** Conventions, p. 3, and Lemmas 5.1–5.2 proofs, [PDF p. 10](https://arxiv.org/pdf/2610.22679v1#page=10).
+The source conventions on p. 3 and proofs on pp. 9–10 invoke these restrictions without local finite presentation.
 
-The rank and first-Chern projection proofs reduce to the smooth locus, asserting density or injectivity of restriction to it. The report verifies that these premises exceed the standing qcqs scope. Its applicable counterexample is the nonaffine normal scheme $X=\mathbb P^1_{k(t)}$, viewed over algebraically closed $k$. Its $k$-smooth locus is empty: a hypothetical smooth affine neighbourhood would be a nonzero finite-type $k$-algebra containing $k(t)$, and a maximal residue field would force an impossible $k$-algebra embedding $k(t)\to k$. Nevertheless $\operatorname{Pic}(X)=\mathbb Z$, so restriction to the empty locus is not injective. The report preserves alternate rank/Picard arguments and does not refute either lemma's conclusion. Its classification of this carrier as nonfatal/easily fixable is retained; the related Lemma 4.1 carrier has a different recorded severity below.
+**Correction:** Retain the qcqs conclusions using direct rank/determinant comparisons; use smooth-locus restriction only with suitable finite-type hypotheses.
 
-## Substantial defects
+The example refutes the proof premises, not the rank/determinant conclusions or affine classification theorems.
 
-### Unsupported global inference — cdh truncation
+**Counterexample:** Let $k$ be algebraically closed and $X=\mathbf P^1_{k(t)}$, viewed over $k$. This nonaffine scheme is normal and qcqs, with empty $k$-smooth locus, $\Gamma(X,\mathcal O)=k(t)$ and $\operatorname{Pic}(X)=\mathbb Z$.
 
-**Recorded status:** Confirmed original proof-step gap, fatal to the printed argument; categorized in the report as a missing prerequisite. **Finding:** `author-29a96d89220f-cdh-localization-site-gap`. **Location:** Proposition 2.6 proof, [PDF p. 6](https://arxiv.org/pdf/2610.22679v1#page=6).
+A nonempty $k$-smooth affine neighborhood would have a nonzero finitely generated $k$-algebra containing $k(t)$. A maximal residue field would give a $k$-algebra map $k(t)\to k$, impossible since $t-a$ is invertible for every $a\in k$. Hence $U=\varnothing$, $\Gamma(U,\mathcal O)=0$ and $\operatorname{Pic}(U)=0$. The nonaffine example respects the original affine finite-type convention.
 
-After applying affine Artin vanishing to the chosen threefold, the proof identifies $L_{\mathrm{cdh}}R\Gamma_{\mathrm{et}}(-,\mathbb Z/p)$ with its globally truncated counterpart. Vanishing on affine opens of this particular $X$ does not by itself establish an equivalence of presheaves after localization on the entire qcqs site, whose objects have no common dimension bound. The report therefore distinguishes the local vanishing input from the additional comparison needed to justify the displayed global equivalence and its evaluation. No concrete counterexample to the intended evaluation equivalence is documented; the objection is an unsupported implication, not proof that the comparison is false. The report records an alternate argument using independently supplied evaluation equivalences in dimension at most three, with explicit coefficient transport. This finding invalidates the printed inference without refuting Proposition 2.6 or the classification theorems.
+## article-perfect-first-chern-input · confirmed
 
-### False representation premise — perfect K-zero classes
+**Tags:** prerequisite omission; missing proof steps
 
-**Recorded status:** Confirmed substantial proof defects. **Findings:** `author-9f7895525f41-bundle-representation-scope`, `author-f83d9cbc480f-perfect-second-whitney-gap`, `author-e216acade157-perfect-second-projection-gap`; related `article-prop-first-chern-perfect-k-zero-proof-gap` is recorded as a missing prerequisite fatal to its printed argument. **Locations:** Conventions p. 3; Proposition 3.2, [p. 8](https://arxiv.org/pdf/2610.22679v1#page=8); Lemma 5.3 and Proposition 5.5, [pp. 11–12](https://arxiv.org/pdf/2610.22679v1#page=11).
+https://arxiv.org/abs/2610.22679v1; PDF p. 8, Proposition 3.2 proof (PDF p. 8).
 
-The proofs pass from bundle calculations to arbitrary perfect $K_0$ classes without the required global representation theorem. The report verifies a counterexample: glue two copies of $\mathbb A^2_k$ along their punctured planes. This smooth normal qcqs scheme has only trivial vector bundles: Quillen–Suslin trivializes each chart, and transition matrices and their inverses extend across the origin. Yet localization and Mayer–Vietoris inject a nonzero $\mathbb Z$ boundary into its perfect $K_0$; the origin Koszul class has supported length one and ambient Euler class $1-2+1=0$. The boundary has rank and determinant zero and lies in the second filtration, but cannot be a bundle difference. This refutes the representation reduction, not the Chern conclusions. The report records alternate perfect-class arguments without treating those repairs as independently accepted here.
+> Proof. This is true by definition if V is a line bundle.
 
-### False smooth-locus premise — low filtration
+Proposition 3.2’s proof checks bundles but states a factorization on perfect $K_0$. Splitting an actual bundle into line-bundle classes does not establish the asserted operation on every perfect class of an arbitrary qcqs scheme.
 
-**Recorded status:** Confirmed substantial original proof defect. **Finding:** `low-filtration-original-smooth-locus-gap`. **Location:** Conventions p. 3; Lemma 4.1 proof, [PDF pp. 8–9](https://arxiv.org/pdf/2610.22679v1#page=8).
+The authors’ proof starts with a bundle V; no extension to all perfect classes follows in the printed argument.
 
-The proof identifies the weight-one projection with determinant by restriction to the smooth locus $U$, asserting that normality gives $\mathcal O_X(X)=\mathcal O_U(U)$. The report's verified example within the article's scope is $X=\mathbb P^1_{k(t)}$ over algebraically closed $k$. Its $k$-smooth locus is empty, while its global functions are $k(t)$ and its Picard group is $\mathbb Z$. The hypothetical smooth-neighbourhood argument in the preceding entry explains the emptiness. Thus restriction cannot recover its functions or units, and normality alone does not justify the proof step. The report also mentions $\operatorname{Spec}k(t)$, but explicitly excludes it as an article-scope counterexample because the article separately assumes affine schemes finite type. Neither example refutes Lemma 4.1's conclusion. The recorded remedy uses the actual determinant/weight-one projection directly, preserving the normal qcqs statement rather than narrowing it.
+**Correction:** Supply the perfect-K Chern/determinant comparison and descent, retaining the qcqs statement.
+
+The doubled-plane obstruction below prevents silently identifying all perfect classes with bundle differences; it does not refute the factorization.
+
+## article-perfect-bundle-reduction · confirmed
+
+**Tags:** insufficient assumptions; missing proof steps
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 11, Lemma 5.3 proof, opening bundle-difference reduction (PDF p. 11).
+
+> we may write α = [V1] −[W1] for some vector bundles
+
+The proofs of Lemma 5.3 and Proposition 5.5 assume arbitrary perfect classes are bundle differences. Normal qcqs schemes need not have that property. Lemma 6.4 inherits the reduction.
+
+The reduction is explicitly printed on p. 11, repeated in Proposition 5.5, and inherited on p. 14.
+
+**Correction:** Use perfect-K Chern/Cartan operations and a compatible projection comparison; retain the qcqs conclusions.
+
+This defeats a proof reduction under the original nonseparated qcqs hypotheses; it is not a counterexample to additivity, $p_2$=−$c_2$, or either affine classification.
+
+**Counterexample:** Over algebraically closed $k$, glue two copies of $\mathbb A^2_k$ along $W=\mathbb A^2_k\setminus\{0\}$. The doubled plane $X$ is smooth, normal, finite type and qcqs. It has a nonzero rank-zero class in perfect $K_0$ that is not a bundle difference.
+
+Quillen–Suslin trivializes bundles on each chart. Since $\Gamma(W,\mathcal O)=k[x,y]$, transition matrices and their inverses extend across the origin; every bundle on $X$ is trivial. Localization gives $K_1(W)/\operatorname{im}K_1(\mathbb A^2_k)=\mathbb Z$: the origin Koszul generator has Euler length one and zero ambient $K_0$ class. Thomason–Trobaugh Mayer–Vietoris injects this quotient into $K_0(X)$, giving a nonzero class $\delta$ vanishing on both charts. The same extension of units gives $\operatorname{Pic}(X)=0$. Weight zero identifies the rank kernel $F^1$, and the exact weight-one triangle with $H^{2,1}=\operatorname{Pic}(X)=0$ places $\delta$ in $F^2$. A rank-zero bundle difference is zero here.
+
+## article-affine-picard-reduction · confirmed
+
+**Tags:** prerequisite omission
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 13, Proposition 6.1 proof, Picard divisibility and Ful98 citation (PDF p. 13).
+
+> The Picard group of a smooth affine curve over an algebraically closed
+
+The affine Picard-divisibility use omits the completion-and-boundary reduction. For a smooth affine curve C, choose a smooth projective completion Cbar and a boundary k-point b. Subtracting $\deg(L)b$ makes any extending line bundle degree zero without changing its restriction.
+
+The source moves directly from its Ful98 citation to affine Picard divisibility; the standard intervening reduction is not written.
+
+**Correction:** State that $\operatorname{Pic}^0(\overline C)(k)$ surjects onto $\operatorname{Pic}(C)$; it is divisible by Jacobian multiplication, in every characteristic.
+
+The claim is correct. This is not a defect audit of Fulton.
+
+## article-bundle-index-typo · confirmed
+
+**Tags:** typos
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 17, Theorem B proof, surjectivity, final two bundle expressions (PDF p. 17).
+
+> We can then compute the Chern classes
+
+Theorem B’s surjectivity proof twice writes $E_1$ where $E_3$ was defined. The preceding line defines $E_2$ and $E_3$ and forms $E_3$ direct-sum $E_2$ direct-sum L. $E_1$ is undefined in the subsequent two bundle expressions.
+
+Both mismatched subscripts are visible in the authors’ rendered page 17; the surrounding construction fixes the intended index.
+
+**Correction:** Replace both occurrences of $E_1$ by $E_3$.
+
+## article-bem-identifier · confirmed
+
+**Tags:** typos
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 18, References, [BEM25] (PDF p. 18).
+
+> arXiv:2508.0991, 2025
+
+Reference [BEM25] has the incomplete arXiv identifier 2508.0991. The cited authors and title identify Bachmann–Elmanto–Morrow, arXiv:2508.09915v1.
+
+The incorrect suffix is printed in the original bibliography, independently of generated source displays.
+
+**Correction:** Use arXiv:2508.09915, retaining Corollary 7.20.
+
+## article-support-indexing · confirmed
+
+**Tags:** typos
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 6, Definition 2.7, supported-cohomology indexing (PDF p. 6).
+
+> Definition 2.7. Let X be a qcqs scheme
+
+Definition 2.7’s homotopy formula omits the weight shift. Definition 2.2 uses cohomological grading. Thus $\pi_i$ of the unshifted motivic complex is $H^{-i,j}$, whereas $H^{2j-i,j}$ requires its $[2j]$ shift.
+
+The unshifted right-hand side is visible on p. 6; equation (2.1) on p. 4 displays the required $[2j]$ shift.
+
+**Correction:** Insert $[2j]$ on the right, or explicitly declare a shifted spectrum convention.
+
+**Clarify definitions:** Specify shifted versus unshifted spectrum realization.
+
+## article-product-normality · potential
+
+**Tags:** prerequisite omission; missing proof steps
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 10, Multiplication paragraph and equation (4.3) (PDF p. 10).
+
+> Taking π0(−) and using Lemma 4.1,
+
+Equation (4.3) suppresses the normality condition needed by its cited Lemma 4.1. The paragraph begins with any qcqs X, then invokes Lemma 4.1, whose image-to-stage identification is stated for normal X.
+
+The original paragraph’s scope and its explicit invocation of Lemma 4.1 do not match as written.
+
+**Correction:** State normality for this deduction, or supply a general degree-zero identification.
+
+No counterexample to the square is established; a stronger comparison can repair the deduction without narrowing its conclusion.
+
+## article-generic-support-input · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 16, Theorem 6.7 proof, final generic-rank kernel argument (PDF p. 16).
+
+> with the localization at the generic point
+
+No sign error is established in the final generic-rank map. On a smooth neighborhood of the integral support curve, devissage identifies the leading coefficient with alternating generic length. The residue sheaf has coefficient +1; localization kills its kernel by point-supported classes.
+
+The PDF explicitly describes this map as generic-point localization, consistent with the positive generator.
+
+Deep purity and comparison constructions remain cited inputs, not re-proved here.
+
+## article-classical-characteristic-scope · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 1, Introduction, classical classifications and splitting inputs (PDF p. 1).
+
+> The classification of algebraic vector bundles by characteristic classes is a classical prob-
+
+The classical critical-rank results are not given the rank-two threefold characteristic restriction. The introduction distinguishes the surface/rank-three classifications from the Asok–Fasel rank-two threefold theorem in characteristic different from two.
+
+Reading the authors’ own separate introductory attributions resolves this conflation.
+
+The original classical classification proofs were not reconstructed.
+
+## article-fixed-avoidance · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 15, Theorem 6.7 proof, condition (4) and following fixed-singular-locus application (PDF p. 15).
+
+> Y  is disjoint from any closed subset Z ⊂U of codimension ≥2.
+
+Condition (4) is not used with simultaneous universal avoidance. The following paragraph fixes Z as the singular locus. The required order is: fix Z, then choose the section. This avoids the impossible assertion that one nonempty curve misses every closed point.
+
+The adjacent original application supplies the fixed closed set and resolves the wording.
+
+**Correction:** Clarify the quantifier order if desired.
+
+This does not independently reconstruct the full Bertini input.
+
+## article-smooth-chow-localization · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 13, Proposition 6.1 proof, supported degree-seven vanishing (PDF p. 13).
+
+> by Zariski excision, we obtain
+
+The smooth restriction used in Proposition 6.1 is compatible with Chow localization. Restriction $\mathrm{CH}^3$(U)→$\mathrm{CH}^3$(U minus T) is surjective: close each codimension-three cycle in U. Smooth motivic comparison and degree-seven vanishing give the supported conclusion.
+
+This follows the original reduction to the smooth locus; the earlier generated naturality-interface gap does not contradict it.
+
+## article-point-purity-scope · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 14, Definition 6.5, pure-dimensional smooth-point subgroup (PDF p. 14).
+
+> Definition 6.5. Let X be a qcqs scheme over a perfect field k of (pure) dimension d.
+
+Lower-dimensional isolated-point counterexamples do not satisfy the printed support convention. Lemma 2.9 and Definition 6.5 explicitly use pure dimension d. Their smooth closed points have codimension d. A generated dimension-only extension cannot replace that hypothesis when attributing a defect.
+
+Purity is expressly in the original statement, and its codimension is used on p. 7.
+
+No claim is made that fixed-weight-three classes include points on lower-dimensional clopen components.
+
+## article-factor-and-exterior-sign · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 17, Corollary 6.10 proof, alternating exterior class (PDF p. 17).
+
+> Consider the class β
+
+The coefficients +2 for a positive point and −2 for the alternating exterior class are consistent. For rank-three Chern roots x,y,z, the exterior-square roots are x+y,x+z,y+z. Expanding the total class of 1−E+Lambda²E−det(E) gives $c_1$=$c_2$=0 and $c_3$=−2xyz.
+
+This checks the authors’ Corollary 6.10 computation integrally, alongside their positive-point normalization in Corollary 6.9.
+
+Characteristic two does not change integer motivic coefficients into characteristic-two coefficients.
+
+## article-affine-representatives · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 12, Theorem A proof, prescribed-class construction (PDF p. 12).
+
+> Using Serre’s splitting theorem
+
+The critical-rank representative step is valid in the article’s affine finite-type setting. An affine perfect class has a finite-projective representative after adding a complement. Pad its constant rank if necessary and use Serre splitting to reach critical rank. This does not require global bundle generation on arbitrary qcqs schemes.
+
+The source uses this step on affine surfaces or threefolds, unlike its broader Lemma 5.3 reduction.
+
+## article-complement-scope · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 14, Remark 6.3, curve-complement edge map (PDF p. 14).
+
+> Remark 6.3. Under the hypotheses of Proposition 6.1,
+
+Normality is not missing from the curve-complement edge argument. Proposition 6.1 provides torsion-freeness without normality. The complement has dimension three; its rational edge comparison and torsion-freeness give integral injectivity, while surjectivity is formal.
+
+Remark 6.3 explicitly uses Proposition 6.1’s hypotheses, rather than importing Proposition 6.2’s normality assumption.
+
+The underlying torsion-freeness and rational-degeneration inputs retain their cited-source qualifications.
+
+## article-second-chern-domain · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 11, Proposition 5.5 proof, opening (PDF p. 11).
+
+> Let α = [V ]−[W]
+
+The article does not assume second-Chern additivity on all $K_0$. Lemma 5.3 restricts additivity to $F^2$, and Remark 5.4 warns that it generally fails on $F^1$. Whitney cross terms vanish on $F^2$ because $c_1$ vanishes there.
+
+The original domain restrictions answer this concern; the bundle-representation proof gap is separately retained.
+
+## article-bertini-point-input · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 15, Theorem 6.7 proof, first Bertini application, KM82 §3 (PDF p. 15).
+
+> By Swan’s
+> version of Bertini theorem
+
+A generated helper gap does not establish a characteristic restriction in the source’s first section construction. The original explicitly cites Swan’s Bertini theorem via KM82 §3. No counterexample under its actual affine hypotheses was verified.
+
+The PDF attributes a substantial input rather than claiming the generated first-jet proof.
+
+KM82 §3 was not independently re-proved; this dismissal concerns the proposed attribution, not a new certification of that theorem.
+
+## article-point-correction · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 16, Theorem 6.7 proof, point correction in localization diagram (PDF p. 16).
+
+> There exists thus a
+
+The point correction needs no injectivity of support-to-global maps. Exactness gives a with g(a)=i(alpha). Commutativity gives i(alpha−f(a))=0. This works even if f and g have kernels.
+
+These are precisely the authors’ named maps and correction on p. 16.
+
+## article-supported-lift · dismissed
+
+**Tags:** prerequisite omission
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 16, Theorem 6.7 proof, third-stage support lift (PDF p. 16).
+
+> Using Proposition 6.2 and Remark 6.3,
+
+The support-lift step includes its needed complement injectivity premise. The PDF invokes Proposition 6.2 and Remark 6.3 before lifting. Their stage-to-$K_0$ injectivity transfers vanishing to the filtered stage. K descent and the first three graded triangles provide stagewise excision.
+
+The cited original sentence supplies the disputed premise; only standard descent details are compressed.
+
+**Correction:** The short descent induction may be written explicitly.
+
+## article-morrow-status · dismissed
+
+**Tags:** others
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 16, Remark 6.8, communicated work (PDF p. 16).
+
+> This argument will appear in his ongoing work with Elden Elmanto.
+
+Remark 6.8 reports communicated work, rather than supplying a proved general-dimensional comparison. The authors explicitly say the argument will appear later. Their subsequent geometric-method question is distinct from that reported alternative method.
+
+The original qualification is explicit and must survive any portal paraphrase.
+
+The communicated proof and its publication status are not independently established here.
+
+## Limits
+
+- This is Step 8 report work. Earlier scientific review remains historical evidence; no Step 7 rejudgment, worker launch, supplier audit, publication or acceptance stamp is claimed.
+- Source defects are restricted to Fasel–Yakerson v1. The 132 comparison records distinguish generated-only obligations and review limitations from claims actually printed by the authors; generated repair histories and prerequisite-source allegations are excluded from report findings.
+- The main theorems concern affine finite-type schemes over an algebraically closed field. Broad qcqs lemmas are assessed at their stated scope, without silently shrinking them to that main application setting. Counterexamples to proof premises do not refute their conclusions.
+- Imported purity, Bertini, rational degeneration, perfect Chern operations, cancellation and splitting remain substantial external inputs. Their complete foundational proofs were not reconstructed. Earlier incomplete-reading leads confer no new verification credit.
+- The new support-indexing observation is already accommodated by the frozen current def-cohomology-with-support shift convention. The new product-square scope observation is already accommodated by the frozen normality-qualified degree-zero statement. Neither requires changing current authored content.
+- Only report JSON, source/coverage anchors and word limits were checked locally. KaTeX was unavailable in the proposal workspace; the actual central renderer/proof-layout battery was not run. There are no item-proof or serving-file proposals in this response.
