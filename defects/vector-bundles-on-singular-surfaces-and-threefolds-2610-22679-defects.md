@@ -21,6 +21,36 @@ This qualification occurs in the authors’ own opening proof, rather than in a 
 
 No counterexample to torsion-freeness is established.
 
+## article-affine-picard-reduction · confirmed
+
+**Tags:** prerequisite omission
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 13, Proposition 6.1 proof, Picard divisibility and Ful98 citation (PDF p. 13).
+
+> The Picard group of a smooth affine curve over an algebraically closed
+
+The affine Picard-divisibility use omits the completion-and-boundary reduction. For a smooth affine curve C, choose a smooth projective completion Cbar and a boundary k-point b. Subtracting $\deg(L)b$ makes any extending line bundle degree zero without changing its restriction.
+
+The source moves directly from its Ful98 citation to affine Picard divisibility; the standard intervening reduction is not written.
+
+**Correction:** State that $\operatorname{Pic}^0(\overline C)(k)$ surjects onto $\operatorname{Pic}(C)$; it is divisible by Jacobian multiplication, in every characteristic.
+
+The claim is correct. This is not a defect audit of Fulton.
+
+## article-supported-lift · dismissed
+
+**Tags:** prerequisite omission
+
+https://arxiv.org/abs/2610.22679v1; PDF p. 16, Theorem 6.7 proof, third-stage support lift (PDF p. 16).
+
+> Using Proposition 6.2 and Remark 6.3,
+
+The support-lift step includes its needed complement injectivity premise. The PDF invokes Proposition 6.2 and Remark 6.3 before lifting. Their stage-to-$K_0$ injectivity transfers vanishing to the filtered stage. K descent and the first three graded triangles provide stagewise excision.
+
+The cited original sentence supplies the disputed premise; only standard descent details are compressed.
+
+**Correction:** The short descent induction may be written explicitly.
+
 ## article-cdh-truncation-input · confirmed
 
 **Tags:** prerequisite omission; missing proof steps
@@ -93,22 +123,6 @@ This defeats a proof reduction under the original nonseparated qcqs hypotheses; 
 **Counterexample:** Over algebraically closed $k$, glue two copies of $\mathbb A^2_k$ along $W=\mathbb A^2_k\setminus\{0\}$. The doubled plane $X$ is smooth, normal, finite type and qcqs. It has a nonzero rank-zero class in perfect $K_0$ that is not a bundle difference.
 
 Quillen–Suslin trivializes bundles on each chart. Since $\Gamma(W,\mathcal O)=k[x,y]$, transition matrices and their inverses extend across the origin; every bundle on $X$ is trivial. Localization gives $K_1(W)/\operatorname{im}K_1(\mathbb A^2_k)=\mathbb Z$: the origin Koszul generator has Euler length one and zero ambient $K_0$ class. Thomason–Trobaugh Mayer–Vietoris injects this quotient into $K_0(X)$, giving a nonzero class $\delta$ vanishing on both charts. The same extension of units gives $\operatorname{Pic}(X)=0$. Weight zero identifies the rank kernel $F^1$, and the exact weight-one triangle with $H^{2,1}=\operatorname{Pic}(X)=0$ places $\delta$ in $F^2$. A rank-zero bundle difference is zero here.
-
-## article-affine-picard-reduction · confirmed
-
-**Tags:** prerequisite omission
-
-https://arxiv.org/abs/2610.22679v1; PDF p. 13, Proposition 6.1 proof, Picard divisibility and Ful98 citation (PDF p. 13).
-
-> The Picard group of a smooth affine curve over an algebraically closed
-
-The affine Picard-divisibility use omits the completion-and-boundary reduction. For a smooth affine curve C, choose a smooth projective completion Cbar and a boundary k-point b. Subtracting $\deg(L)b$ makes any extending line bundle degree zero without changing its restriction.
-
-The source moves directly from its Ful98 citation to affine Picard divisibility; the standard intervening reduction is not written.
-
-**Correction:** State that $\operatorname{Pic}^0(\overline C)(k)$ surjects onto $\operatorname{Pic}(C)$; it is divisible by Jacobian multiplication, in every characteristic.
-
-The claim is correct. This is not a defect audit of Fulton.
 
 ## article-bundle-index-typo · confirmed
 
@@ -318,20 +332,6 @@ https://arxiv.org/abs/2610.22679v1; PDF p. 16, Theorem 6.7 proof, point correcti
 The point correction needs no injectivity of support-to-global maps. Exactness gives a with g(a)=i(alpha). Commutativity gives i(alpha−f(a))=0. This works even if f and g have kernels.
 
 These are precisely the authors’ named maps and correction on p. 16.
-
-## article-supported-lift · dismissed
-
-**Tags:** prerequisite omission
-
-https://arxiv.org/abs/2610.22679v1; PDF p. 16, Theorem 6.7 proof, third-stage support lift (PDF p. 16).
-
-> Using Proposition 6.2 and Remark 6.3,
-
-The support-lift step includes its needed complement injectivity premise. The PDF invokes Proposition 6.2 and Remark 6.3 before lifting. Their stage-to-$K_0$ injectivity transfers vanishing to the filtered stage. K descent and the first three graded triangles provide stagewise excision.
-
-The cited original sentence supplies the disputed premise; only standard descent details are compressed.
-
-**Correction:** The short descent induction may be written explicitly.
 
 ## article-morrow-status · dismissed
 
