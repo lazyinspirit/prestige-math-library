@@ -2,7 +2,7 @@
 title: Open questions and potential solutions
 description: Further questions arising from Vector bundles on singular surfaces
   and threefolds.
-status: draft
+status: published
 ---
 
 ## question-real-normal-surface-realization: For a geometrically integral normal affine surface $X$ over $\mathbb R$, is the map $E\mapsto(c_1(E),c_2(E),[E(\mathbb R)])$ injective on rank-two algebraic bundles, using motivic Chern classes and continuous real-bundle isomorphism on the possibly singular space $X(\mathbb R)$?
